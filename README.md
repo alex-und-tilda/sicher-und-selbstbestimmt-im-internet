@@ -89,3 +89,35 @@ Empfohlen:
 - 2 bis 4 Personen testen die Plattform.
 - Jede Person testet mindestens ein Thema.
 - Beobachtet wird: Start, Navigation, Verständnis, Quiz, Hilfe-Hinweise und Druckseiten.
+
+
+## Aktionskarten
+
+Die vier Funktionen pro Thema sind jetzt als unterschiedliche Aktionskarten gestaltet:
+
+```text
+Kurz lernen = Türkis
+Ausführlich lernen = Dunkelblau
+Quiz starten = Grün
+Merk-Karte = Gelb
+```
+
+Jede Aktionskarte enthält:
+
+```text
+Icon
+kurze Erklärung
+Leitfrage
+```
+
+Beispiele:
+
+```text
+Kurz lernen
+Die wichtigsten Seiten.
+Was muss ich mir merken?
+
+Quiz starten
+10 Fragen beantworten.
+Habe ich das verstanden?
+```

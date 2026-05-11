@@ -1534,3 +1534,124 @@ body {
     margin-bottom: 6px;
   }
 }
+
+
+/* Aktionskarten: unterschiedliche Funktion, Farbe, Icon und Leitfrage */
+.action-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.action-card {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  min-height: 118px;
+  border-radius: 18px;
+  padding: 14px;
+  text-align: left;
+  cursor: pointer;
+  border: 3px solid transparent;
+  box-shadow: 0 8px 18px rgba(0, 40, 90, 0.10);
+}
+
+.action-card .action-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #FFFFFF;
+  border: 2px solid currentColor;
+}
+
+.action-card .action-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.action-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.action-text strong {
+  font-size: 1.06rem;
+  line-height: 1.2;
+}
+
+.action-text small {
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.action-text em {
+  font-style: normal;
+  font-size: 0.92rem;
+  line-height: 1.25;
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(31, 31, 31, 0.22);
+}
+
+.action-short {
+  background: var(--blue-light);
+  color: var(--black);
+  border-color: var(--blue-mid);
+}
+
+.action-full {
+  background: var(--blue);
+  color: #FFFFFF;
+  border-color: var(--blue);
+}
+
+.action-quiz {
+  background: var(--success-light);
+  color: var(--black);
+  border-color: var(--success);
+}
+
+.action-memory {
+  background: var(--hint);
+  color: var(--black);
+  border-color: var(--hint-border);
+}
+
+.action-card:hover,
+.action-card:focus-visible {
+  outline: 4px solid rgba(0, 40, 90, 0.22);
+  transform: translateY(-1px);
+}
+
+.action-full .action-icon {
+  color: #FFFFFF;
+  background: rgba(255,255,255,0.14);
+  border-color: #FFFFFF;
+}
+
+.action-full .action-text em {
+  border-top-color: rgba(255,255,255,0.45);
+}
+
+@media (max-width: 720px) {
+  .action-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-card {
+    min-height: 104px;
+  }
+}
+
+@media print {
+  .action-card-grid {
+    display: none !important;
+  }
+}

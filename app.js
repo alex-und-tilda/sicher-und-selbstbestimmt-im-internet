@@ -379,10 +379,10 @@ function renderMenu() {
       Wenn du unsicher bist: Frage eine Person, der du vertraust.
       </div>
       <div class="start-choice-box">
-        <p><strong>1. Kurz lernen:</strong> die wichtigsten Seiten.</p>
-        <p><strong>2. Ausführlich lernen:</strong> alle Lernseiten.</p>
-        <p><strong>3. Quiz starten:</strong> Wissen testen.</p>
-        <p><strong>4. Merk-Karte:</strong> wichtige Regeln drucken.</p>
+        <p><strong>Kurz lernen:</strong> die wichtigsten Seiten.</p>
+        <p><strong>Ausführlich lernen:</strong> alle Seiten mit Beispielen.</p>
+        <p><strong>Quiz starten:</strong> 10 Fragen beantworten.</p>
+        <p><strong>Merk-Karte:</strong> 3 wichtige Regeln drucken.</p>
       </div>
       <div class="privacy-note">
         Es wird kein Name gespeichert.
@@ -398,11 +398,42 @@ function renderMenu() {
         <span>
           <span class="topic-title">${escapeHtml(topic.title)}</span>
           <span class="topic-desc">${escapeHtml(topic.desc)} · etwa 10–15 Minuten</span>
-          <span class="topic-actions">
-            <button class="topic-start-label" onclick="startTopicMode('${topic.id}', 'short')">Kurz lernen</button>
-            <button class="topic-start-label" onclick="startTopicMode('${topic.id}', 'full')">Ausführlich lernen</button>
-            <button class="topic-quiz-label" onclick="startTopicQuiz('${topic.id}')">Quiz starten</button>
-            <button class="topic-quiz-label" onclick="renderMemoryCard('${topic.id}')">Merk-Karte</button>
+          <span class="topic-actions action-card-grid">
+            <button class="action-card action-short" onclick="startTopicMode('${topic.id}', 'short')">
+              <span class="action-icon" aria-hidden="true">${getIconHtml("check")}</span>
+              <span class="action-text">
+                <strong>Kurz lernen</strong>
+                <small>Die wichtigsten Seiten.</small>
+                <em>Was muss ich mir merken?</em>
+              </span>
+            </button>
+
+            <button class="action-card action-full" onclick="startTopicMode('${topic.id}', 'full')">
+              <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
+              <span class="action-text">
+                <strong>Ausführlich lernen</strong>
+                <small>Alle Seiten mit Beispielen.</small>
+                <em>Was kann ich im Alltag tun?</em>
+              </span>
+            </button>
+
+            <button class="action-card action-quiz" onclick="startTopicQuiz('${topic.id}')">
+              <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
+              <span class="action-text">
+                <strong>Quiz starten</strong>
+                <small>10 Fragen beantworten.</small>
+                <em>Habe ich das verstanden?</em>
+              </span>
+            </button>
+
+            <button class="action-card action-memory" onclick="renderMemoryCard('${topic.id}')">
+              <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
+              <span class="action-text">
+                <strong>Merk-Karte</strong>
+                <small>3 wichtige Regeln drucken.</small>
+                <em>Was nehme ich mit?</em>
+              </span>
+            </button>
           </span>
           <span class="topic-help-title">Das kannst du eine Person fragen, der du vertraust:</span>
           <span class="topic-help-list">${(topic.helpQuestions || []).map(q => `• ${escapeHtml(q)}`).join("<br>")}</span>
