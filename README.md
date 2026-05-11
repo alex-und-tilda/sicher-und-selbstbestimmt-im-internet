@@ -310,3 +310,22 @@ Bedeutung:
 Der Button „Ich brauche Hilfe“ wurde größer und prominenter gestaltet.
 
 Er bleibt sichtbar, damit Lernende jederzeit Unterstützung finden können.
+
+
+## Fix: Übungen
+
+Die Übungen wurden korrigiert.
+
+Problem:
+```text
+In bestimmten Modi wurde beim Antworten auf die falsche interne Lernseite geschaut.
+Dadurch kam keine Rückmeldung.
+```
+
+Korrektur:
+```text
+Übungen nutzen jetzt die aktuell sichtbare Lernseite.
+Antwort-Buttons sind als echte Buttons gesetzt.
+Rückmeldung wird zuverlässig angezeigt.
+Navigation nutzt den aktiven Lernmodus.
+```

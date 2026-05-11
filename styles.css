@@ -2787,3 +2787,68 @@ body.view-menu .topic-grid {
     display: none !important;
   }
 }
+
+
+/* FIX: Übungs-Buttons deutlicher und zuverlässig bedienbar */
+.exercise {
+  margin-top: 18px;
+  background: var(--blue-light);
+  border: 3px solid var(--blue-mid);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.exercise-question {
+  font-weight: 900;
+  font-size: 1.08rem;
+  margin-bottom: 12px;
+}
+
+.choice-list {
+  display: grid;
+  gap: 10px;
+}
+
+.choice-button {
+  text-align: left;
+  background: #FFFFFF;
+  border: 2px solid var(--blue-mid);
+  border-radius: 14px;
+  padding: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--black);
+}
+
+.choice-button:hover,
+.choice-button:focus-visible {
+  background: #DDF3F2;
+  outline: 4px solid rgba(61, 184, 179, 0.35);
+  outline-offset: 2px;
+}
+
+.feedback[hidden] {
+  display: none !important;
+}
+
+.feedback {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.feedback.success {
+  background: var(--success-light);
+  border: 2px solid var(--success);
+}
+
+.feedback.warning {
+  background: var(--warning-light);
+  border: 2px solid var(--warning);
+}
+
+.feedback.info,
+.feedback.help {
+  background: var(--hint);
+  border: 2px solid var(--hint-border);
+}

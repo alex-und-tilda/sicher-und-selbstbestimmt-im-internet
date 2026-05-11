@@ -884,9 +884,9 @@ function buildExercise(exercise) {
     <div class="exercise">
       <div class="exercise-question">${escapeHtml(exercise.question)}</div>
       <div class="choice-list">
-        <button class="choice-button" onclick="showFeedback('${exercise.id}', 'safe')">Das wirkt sicher</button>
-        <button class="choice-button" onclick="showFeedback('${exercise.id}', 'unsafe')">Das wirkt unsicher</button>
-        <button class="choice-button" onclick="showFeedback('${exercise.id}', 'help')">Ich brauche Hilfe</button>
+        <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'safe')">Das wirkt sicher</button>
+        <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'unsafe')">Das wirkt unsicher</button>
+        <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'help')">Ich brauche Hilfe</button>
       </div>
       <div id="${exercise.id}-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden></div>
     </div>
@@ -897,8 +897,9 @@ function showFeedback(exerciseId, answer) {
   const topic = getCurrentTopic();
   if (!topic) return;
 
-  const lesson = topic.lessons[currentStep];
-  if (!lesson.exercise || lesson.exercise.id !== exerciseId) return;
+  const lessons = getActiveLessons(topic);
+  const lesson = lessons[currentStep];
+  if (!lesson || !lesson.exercise || lesson.exercise.id !== exerciseId) return;
 
   const feedbackData = lesson.exercise.feedback[answer];
   const feedback = document.getElementById(`${exerciseId}-feedback`);
@@ -917,8 +918,13 @@ function nextStep() {
     return;
   }
 
-  if (currentStep === topic.lessons.length - 1) {
-    renderMenu();
+  const lessons = getActiveLessons(topic);
+  if (currentStep >= lessons.length - 1) {
+    if (learningMode === "short" && typeof renderShortCompletion === "function") {
+      renderShortCompletion(topic);
+    } else {
+      renderMenu();
+    }
   } else {
     currentStep += 1;
     renderStep();
