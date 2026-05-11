@@ -3003,3 +3003,25 @@ body.view-menu .topic-grid {
     display: none !important;
   }
 }
+
+
+/* Vorlesen-Fix: langsamer und klarer sichtbar */
+.audio-button,
+.small-read-button {
+  font-size: 1rem;
+}
+
+.audio-button::before,
+.small-read-button::before {
+  content: "▶ ";
+}
+
+.audio-button.secondary::before {
+  content: "■ ";
+}
+
+.reading-note {
+  font-size: 0.92rem;
+  color: var(--black);
+  margin-top: 6px;
+}

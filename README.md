@@ -357,3 +357,23 @@ Warnsymbol = Achtung / Gefahr
 Merksymbol = Merksatz / Merk-Karte
 Übungssymbol = Aufgabe / Übung
 ```
+
+
+## Fix: Vorlesen langsamer
+
+Die Vorlesefunktion wurde angepasst.
+
+Geändert:
+
+```text
+langsamere Vorlese-Geschwindigkeit
+einheitliche Vorlese-Funktion
+deutsche Stimme wird bevorzugt, wenn verfügbar
+Buttons heißen jetzt „Langsam vorlesen“
+Stopp-Button bleibt erhalten
+```
+
+Hinweis:
+
+Die Vorlesestimme kommt vom Browser oder Betriebssystem.
+Die Qualität kann je nach Gerät unterschiedlich sein.

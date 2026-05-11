@@ -168,27 +168,7 @@ function getModuleProgressHtml(topic, stepIndex) {
   `;
 }
 
-function speakCurrentCard() {
-  if (!("speechSynthesis" in window)) {
-    liveRegion.textContent = "Vorlesen wird von diesem Browser nicht unterstützt.";
-    return;
-  }
-  window.speechSynthesis.cancel();
-  const text = content.innerText.trim();
-  if (!text) return;
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "de-DE";
-  utterance.rate = 0.9;
-  window.speechSynthesis.speak(utterance);
-  liveRegion.textContent = "Der Text wird vorgelesen.";
-}
 
-function stopReading() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-    liveRegion.textContent = "Vorlesen gestoppt.";
-  }
-}
 
 function renderEvaluation() {
   setViewMode("print");
@@ -810,25 +790,71 @@ function getLevelText(progress) {
 }
 
 
+
+
+
+function prepareSpeechText(text) {
+  return String(text || "")
+    .replace(/Vorlesen/g, "")
+    .replace(/Stopp/g, "")
+    .replace(/Ich habe diese Seite verstanden/g, "")
+    .replace(/Zurück/g, "")
+    .replace(/Weiter/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/\./g, ". ")
+    .replace(/\?/g, "? ")
+    .replace(/!/g, "! ")
+    .replace(/:/g, ": ")
+    .trim();
+}
+
 function speakText(text) {
   if (!("speechSynthesis" in window)) {
     liveRegion.textContent = "Vorlesen wird von diesem Browser nicht unterstützt.";
     return;
   }
+
   window.speechSynthesis.cancel();
-  const cleanText = String(text || "").replace(/\s+/g, " ").trim();
+
+  const cleanText = prepareSpeechText(text);
   if (!cleanText) return;
+
   const utterance = new SpeechSynthesisUtterance(cleanText);
   utterance.lang = "de-DE";
-  utterance.rate = 0.88;
+
+  // Langsamer für Menschen mit Lern- und Leseschwierigkeiten.
+  utterance.rate = 0.68;
+  utterance.pitch = 1.0;
+  utterance.volume = 1.0;
+
+  // Wenn eine deutsche Stimme verfügbar ist, wird sie bevorzugt.
+  const voices = window.speechSynthesis.getVoices();
+  const germanVoice = voices.find(voice => voice.lang && voice.lang.toLowerCase().startsWith("de"));
+  if (germanVoice) {
+    utterance.voice = germanVoice;
+  }
+
   window.speechSynthesis.speak(utterance);
-  liveRegion.textContent = "Der Text wird vorgelesen.";
+  liveRegion.textContent = "Der Text wird langsam vorgelesen.";
 }
 
 function speakElementById(id) {
   const element = document.getElementById(id);
   if (!element) return;
   speakText(element.innerText || element.textContent || "");
+}
+
+function speakCurrentCard() {
+  const mainCard = content.querySelector(".card") || content;
+  if (!mainCard) return;
+  speakText(mainCard.innerText || mainCard.textContent || "");
+}
+
+function stopReading() {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+    liveRegion.textContent = "Vorlesen gestoppt.";
+  }
 }
 
 function buildAccessibleBox(type, title, htmlContent, iconName, id) {
@@ -839,7 +865,7 @@ function buildAccessibleBox(type, title, htmlContent, iconName, id) {
       <div class="access-box-content">
         <h3>${escapeHtml(title)}</h3>
         <div class="access-box-text">${htmlContent}</div>
-        <button type="button" class="small-read-button" onclick="speakElementById('${safeId}')">Vorlesen</button>
+        <button type="button" class="small-read-button" onclick="speakElementById('${safeId}')">Langsam vorlesen</button>
       </div>
     </section>
   `;
@@ -850,7 +876,7 @@ function buildCard(lesson, topic) {
     <article class="card">
       <div class="module-tag">${escapeHtml(lesson.module)}</div>
       <div class="mode-note">${learningMode === "short" ? "Kurz lernen" : "Ausführlich lernen"}</div>
-      <div class="audio-actions"><button class="audio-button" onclick="speakCurrentCard()">Vorlesen</button><button class="audio-button secondary" onclick="stopReading()">Stopp</button></div>
+      <div class="audio-actions"><button class="audio-button" onclick="speakCurrentCard()">Langsam vorlesen</button><button class="audio-button secondary" onclick="stopReading()">Stopp</button></div>
       <div class="step-help-box">
         <strong>Du bist unsicher?</strong><br>
         Frage eine Person, der du vertraust:
@@ -918,7 +944,7 @@ function buildExercise(exercise) {
       <div class="access-box-content">
         <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div><div class="access-box-content"><h3>Übung</h3>
         <div class="exercise-question">${escapeHtml(exercise.question)}</div>
-        <button type="button" class="small-read-button" onclick="speakElementById('${exercise.id}-box')">Übung vorlesen</button>
+        <button type="button" class="small-read-button" onclick="speakElementById('${exercise.id}-box')">Übung langsam vorlesen</button>
         <div class="choice-list">
           <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'safe')">Das wirkt sicher</button>
           <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'unsafe')">Das wirkt unsicher</button>
@@ -1046,7 +1072,7 @@ function renderQuiz() {
         <div class="icon" aria-hidden="true">${getIconHtml("quiz")}</div>
         <h2>Frage ${quizIndex + 1}</h2>
       </div>
-      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakElementById('quiz-question-box')">Quizfrage vorlesen</button></div></section>
+      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakElementById('quiz-question-box')">Quizfrage langsam vorlesen</button></div></section>
       <div class="choice-list">
   `;
 
@@ -1267,3 +1293,8 @@ if (!handleHashRoute()) {
   renderMenu();
 }
 window.addEventListener("hashchange", handleHashRoute);
+
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
