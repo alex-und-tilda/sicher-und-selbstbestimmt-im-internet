@@ -3078,3 +3078,68 @@ body.view-menu .topic-grid {
     display: none !important;
   }
 }
+
+
+/* FINALER FIX: Übungen ausführbar mit Erklärung */
+.practice-box {
+  margin-top: 18px !important;
+  background: var(--blue-light) !important;
+  border: 3px solid var(--blue-mid) !important;
+  border-radius: 20px !important;
+  padding: 16px !important;
+}
+
+.practice-question {
+  font-size: 1.08rem !important;
+  margin-bottom: 10px !important;
+}
+
+.practice-answer-grid {
+  display: grid !important;
+  gap: 10px !important;
+  margin-top: 10px !important;
+}
+
+.practice-answer-grid button {
+  text-align: left !important;
+  background: #FFFFFF !important;
+  border: 3px solid var(--blue-mid) !important;
+  border-radius: 14px !important;
+  padding: 13px !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+  color: var(--black) !important;
+  min-height: 52px !important;
+}
+
+.practice-answer-grid button:hover,
+.practice-answer-grid button:focus-visible {
+  background: #DDF3F2 !important;
+  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+.practice-feedback {
+  margin-top: 14px !important;
+  padding: 14px !important;
+  border-radius: 14px !important;
+  min-height: 24px !important;
+  font-size: 1.05rem !important;
+  line-height: 1.4 !important;
+}
+
+.practice-feedback.success {
+  background: var(--success-light) !important;
+  border: 3px solid var(--success) !important;
+}
+
+.practice-feedback.warning {
+  background: var(--hint) !important;
+  border: 3px solid var(--hint-border) !important;
+}
+
+@media print {
+  .practice-box {
+    display: none !important;
+  }
+}

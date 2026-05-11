@@ -404,3 +404,28 @@ Normal
 ```
 
 Die Auswahl wird lokal im Browser gespeichert.
+
+
+## Finaler Fix: Übungen
+
+Die Übungen wurden fachlich und technisch ergänzt.
+
+Korrigiert:
+
+```text
+Übungen sind ausführbar.
+Antworten sind anklickbar.
+Nach jeder Antwort erscheint eine Erklärung.
+Übungen erscheinen auf Übungsseiten, Wiederholungsseiten und Quiz-Vorbereitungsseiten.
+Übungen funktionieren auch im Kurzmodus.
+```
+
+Jede Übung hat:
+
+```text
+Frage
+3 Antwortmöglichkeiten
+Rückmeldung
+Erklärung
+Vorlesen-Button
+```

@@ -142,7 +142,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Welche Information bleibt geheim?",
+          "answers": [
+            "PIN und Passwort",
+            "Wetter",
+            "Lieblingsfarbe"
+          ],
+          "correct": 0,
+          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -237,7 +247,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Fotos, Standort und Formulare"
+        "module": "Modul 3: Fotos, Standort und Formulare",
+        "practiceQuestion": {
+          "question": "Welche Information bleibt geheim?",
+          "answers": [
+            "PIN und Passwort",
+            "Wetter",
+            "Lieblingsfarbe"
+          ],
+          "correct": 0,
+          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -335,7 +355,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Links, Formulare und Betrug"
+        "module": "Modul 4: Links, Formulare und Betrug",
+        "practiceQuestion": {
+          "question": "Welche Information bleibt geheim?",
+          "answers": [
+            "PIN und Passwort",
+            "Wetter",
+            "Lieblingsfarbe"
+          ],
+          "correct": 0,
+          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -432,7 +462,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Daten im Internet"
+        "module": "Modul 5: Daten im Internet",
+        "practiceQuestion": {
+          "question": "Welche Information bleibt geheim?",
+          "answers": [
+            "PIN und Passwort",
+            "Wetter",
+            "Lieblingsfarbe"
+          ],
+          "correct": 0,
+          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -526,7 +566,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Welche Information bleibt geheim?",
+          "answers": [
+            "PIN und Passwort",
+            "Wetter",
+            "Lieblingsfarbe"
+          ],
+          "correct": 0,
+          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -543,7 +593,17 @@ const topics = [
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Welche Information bleibt geheim?",
+          "answers": [
+            "PIN und Passwort",
+            "Wetter",
+            "Lieblingsfarbe"
+          ],
+          "correct": 0,
+          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+        }
       }
     ],
     "illustration": "assets/illustrations/datenschutz.svg",
@@ -693,14 +753,14 @@ const topics = [
     "qrQuizLink": "index.html#datenschutz:quiz",
     "qrMemoryLink": "index.html#datenschutz:merk",
     "miniQuestion": {
-      "question": "Was bleibt geheim?",
+      "question": "Welche Information bleibt geheim?",
       "answers": [
         "PIN und Passwort",
         "Wetter",
         "Lieblingsfarbe"
       ],
       "correct": 0,
-      "explanation": "PIN und Passwort bleiben geheim."
+      "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
     }
   },
   {
@@ -843,7 +903,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "answers": [
+            "Ich klicke nicht sofort.",
+            "Ich klicke sofort.",
+            "Ich leite ihn an alle weiter."
+          ],
+          "correct": 0,
+          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -938,7 +1008,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Fotos und Stimme"
+        "module": "Modul 3: Fotos und Stimme",
+        "practiceQuestion": {
+          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "answers": [
+            "Ich klicke nicht sofort.",
+            "Ich klicke sofort.",
+            "Ich leite ihn an alle weiter."
+          ],
+          "correct": 0,
+          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -1036,7 +1116,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Links und Betrug"
+        "module": "Modul 4: Links und Betrug",
+        "practiceQuestion": {
+          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "answers": [
+            "Ich klicke nicht sofort.",
+            "Ich klicke sofort.",
+            "Ich leite ihn an alle weiter."
+          ],
+          "correct": 0,
+          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -1134,7 +1224,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Gruppen und gutes Verhalten"
+        "module": "Modul 5: Gruppen und gutes Verhalten",
+        "practiceQuestion": {
+          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "answers": [
+            "Ich klicke nicht sofort.",
+            "Ich klicke sofort.",
+            "Ich leite ihn an alle weiter."
+          ],
+          "correct": 0,
+          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -1228,7 +1328,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "answers": [
+            "Ich klicke nicht sofort.",
+            "Ich klicke sofort.",
+            "Ich leite ihn an alle weiter."
+          ],
+          "correct": 0,
+          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -1245,7 +1355,17 @@ const topics = [
         ],
         "remember": "Meine Daten gehören mir. Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "answers": [
+            "Ich klicke nicht sofort.",
+            "Ich klicke sofort.",
+            "Ich leite ihn an alle weiter."
+          ],
+          "correct": 0,
+          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+        }
       }
     ],
     "illustration": "assets/illustrations/whatsapp.svg",
@@ -1395,14 +1515,14 @@ const topics = [
     "qrQuizLink": "index.html#whatsapp:quiz",
     "qrMemoryLink": "index.html#whatsapp:merk",
     "miniQuestion": {
-      "question": "Was machst du bei einem komischen Link?",
+      "question": "Du bekommst einen komischen Link. Was machst du?",
       "answers": [
-        "Nicht sofort klicken",
-        "Sofort klicken",
-        "An alle weiterleiten"
+        "Ich klicke nicht sofort.",
+        "Ich klicke sofort.",
+        "Ich leite ihn an alle weiter."
       ],
       "correct": 0,
-      "explanation": "Komische Links werden erst geprüft."
+      "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
     }
   },
   {
@@ -1545,7 +1665,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "answers": [
+            "Wer den Beitrag sehen kann.",
+            "Ob der Beitrag lang ist.",
+            "Ob genug Emojis drin sind."
+          ],
+          "correct": 0,
+          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -1640,7 +1770,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Beiträge, Fotos und Kommentare"
+        "module": "Modul 3: Beiträge, Fotos und Kommentare",
+        "practiceQuestion": {
+          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "answers": [
+            "Wer den Beitrag sehen kann.",
+            "Ob der Beitrag lang ist.",
+            "Ob genug Emojis drin sind."
+          ],
+          "correct": 0,
+          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -1738,7 +1878,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Beiträge, Werbung und Betrug"
+        "module": "Modul 4: Beiträge, Werbung und Betrug",
+        "practiceQuestion": {
+          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "answers": [
+            "Wer den Beitrag sehen kann.",
+            "Ob der Beitrag lang ist.",
+            "Ob genug Emojis drin sind."
+          ],
+          "correct": 0,
+          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -1836,7 +1986,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Beiträge und Kommentare"
+        "module": "Modul 5: Beiträge und Kommentare",
+        "practiceQuestion": {
+          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "answers": [
+            "Wer den Beitrag sehen kann.",
+            "Ob der Beitrag lang ist.",
+            "Ob genug Emojis drin sind."
+          ],
+          "correct": 0,
+          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -1930,7 +2090,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "answers": [
+            "Wer den Beitrag sehen kann.",
+            "Ob der Beitrag lang ist.",
+            "Ob genug Emojis drin sind."
+          ],
+          "correct": 0,
+          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -1947,7 +2117,17 @@ const topics = [
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "answers": [
+            "Wer den Beitrag sehen kann.",
+            "Ob der Beitrag lang ist.",
+            "Ob genug Emojis drin sind."
+          ],
+          "correct": 0,
+          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+        }
       }
     ],
     "illustration": "assets/illustrations/facebook.svg",
@@ -2097,14 +2277,14 @@ const topics = [
     "qrQuizLink": "index.html#facebook:quiz",
     "qrMemoryLink": "index.html#facebook:merk",
     "miniQuestion": {
-      "question": "Was prüfst du vor einem Beitrag?",
+      "question": "Was prüfst du vor einem öffentlichen Beitrag?",
       "answers": [
-        "Wer ihn sehen kann",
-        "Ob er lang ist",
-        "Ob er laut ist"
+        "Wer den Beitrag sehen kann.",
+        "Ob der Beitrag lang ist.",
+        "Ob genug Emojis drin sind."
       ],
       "correct": 0,
-      "explanation": "Wichtig ist, wer den Beitrag sehen kann."
+      "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
     }
   },
   {
@@ -2247,7 +2427,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "answers": [
+            "Ich frage vorher.",
+            "Ich poste es sofort.",
+            "Ich markiere die Person einfach."
+          ],
+          "correct": 0,
+          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -2342,7 +2532,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Fotos, Stories und Reels"
+        "module": "Modul 3: Fotos, Stories und Reels",
+        "practiceQuestion": {
+          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "answers": [
+            "Ich frage vorher.",
+            "Ich poste es sofort.",
+            "Ich markiere die Person einfach."
+          ],
+          "correct": 0,
+          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -2440,7 +2640,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Stories, Werbung und Betrug"
+        "module": "Modul 4: Stories, Werbung und Betrug",
+        "practiceQuestion": {
+          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "answers": [
+            "Ich frage vorher.",
+            "Ich poste es sofort.",
+            "Ich markiere die Person einfach."
+          ],
+          "correct": 0,
+          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -2538,7 +2748,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Kommentare und Nachrichten"
+        "module": "Modul 5: Kommentare und Nachrichten",
+        "practiceQuestion": {
+          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "answers": [
+            "Ich frage vorher.",
+            "Ich poste es sofort.",
+            "Ich markiere die Person einfach."
+          ],
+          "correct": 0,
+          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -2632,7 +2852,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "answers": [
+            "Ich frage vorher.",
+            "Ich poste es sofort.",
+            "Ich markiere die Person einfach."
+          ],
+          "correct": 0,
+          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -2649,7 +2879,17 @@ const topics = [
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "answers": [
+            "Ich frage vorher.",
+            "Ich poste es sofort.",
+            "Ich markiere die Person einfach."
+          ],
+          "correct": 0,
+          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+        }
       }
     ],
     "illustration": "assets/illustrations/instagram.svg",
@@ -2799,14 +3039,14 @@ const topics = [
     "qrQuizLink": "index.html#instagram:quiz",
     "qrMemoryLink": "index.html#instagram:merk",
     "miniQuestion": {
-      "question": "Was machst du vor einem Foto von anderen?",
+      "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
       "answers": [
-        "Vorher fragen",
-        "Einfach posten",
-        "Standort zeigen"
+        "Ich frage vorher.",
+        "Ich poste es sofort.",
+        "Ich markiere die Person einfach."
       ],
       "correct": 0,
-      "explanation": "Andere Personen müssen einverstanden sein."
+      "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
     }
   },
   {
@@ -2949,7 +3189,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Was hilft beim Prüfen eines Videos?",
+          "answers": [
+            "Quelle und Inhalt ansehen.",
+            "Nur die Farbe ansehen.",
+            "Nur die Länge ansehen."
+          ],
+          "correct": 0,
+          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -3044,7 +3294,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Videos, Kommentare und Werbung"
+        "module": "Modul 3: Videos, Kommentare und Werbung",
+        "practiceQuestion": {
+          "question": "Was hilft beim Prüfen eines Videos?",
+          "answers": [
+            "Quelle und Inhalt ansehen.",
+            "Nur die Farbe ansehen.",
+            "Nur die Länge ansehen."
+          ],
+          "correct": 0,
+          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -3142,7 +3402,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Werbung, Fake News und Betrug"
+        "module": "Modul 4: Werbung, Fake News und Betrug",
+        "practiceQuestion": {
+          "question": "Was hilft beim Prüfen eines Videos?",
+          "answers": [
+            "Quelle und Inhalt ansehen.",
+            "Nur die Farbe ansehen.",
+            "Nur die Länge ansehen."
+          ],
+          "correct": 0,
+          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -3240,7 +3510,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Kommentare und Community"
+        "module": "Modul 5: Kommentare und Community",
+        "practiceQuestion": {
+          "question": "Was hilft beim Prüfen eines Videos?",
+          "answers": [
+            "Quelle und Inhalt ansehen.",
+            "Nur die Farbe ansehen.",
+            "Nur die Länge ansehen."
+          ],
+          "correct": 0,
+          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -3334,7 +3614,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was hilft beim Prüfen eines Videos?",
+          "answers": [
+            "Quelle und Inhalt ansehen.",
+            "Nur die Farbe ansehen.",
+            "Nur die Länge ansehen."
+          ],
+          "correct": 0,
+          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -3351,7 +3641,17 @@ const topics = [
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was hilft beim Prüfen eines Videos?",
+          "answers": [
+            "Quelle und Inhalt ansehen.",
+            "Nur die Farbe ansehen.",
+            "Nur die Länge ansehen."
+          ],
+          "correct": 0,
+          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+        }
       }
     ],
     "illustration": "assets/illustrations/youtube.svg",
@@ -3501,14 +3801,14 @@ const topics = [
     "qrQuizLink": "index.html#youtube:quiz",
     "qrMemoryLink": "index.html#youtube:merk",
     "miniQuestion": {
-      "question": "Was prüfst du bei einem Video?",
+      "question": "Was hilft beim Prüfen eines Videos?",
       "answers": [
-        "Quelle und Inhalt",
-        "Nur die Farbe",
-        "Nur die Länge"
+        "Quelle und Inhalt ansehen.",
+        "Nur die Farbe ansehen.",
+        "Nur die Länge ansehen."
       ],
       "correct": 0,
-      "explanation": "Quelle und Inhalt helfen beim Einschätzen."
+      "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
     }
   },
   {
@@ -3651,7 +3951,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Sind Snaps immer sicher weg?",
+          "answers": [
+            "Nein, sie können gespeichert werden.",
+            "Ja, immer.",
+            "Nur bei Freunden."
+          ],
+          "correct": 0,
+          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -3746,7 +4056,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Snaps, Fotos und Standort"
+        "module": "Modul 3: Snaps, Fotos und Standort",
+        "practiceQuestion": {
+          "question": "Sind Snaps immer sicher weg?",
+          "answers": [
+            "Nein, sie können gespeichert werden.",
+            "Ja, immer.",
+            "Nur bei Freunden."
+          ],
+          "correct": 0,
+          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -3844,7 +4164,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Screenshots, Druck und Betrug"
+        "module": "Modul 4: Screenshots, Druck und Betrug",
+        "practiceQuestion": {
+          "question": "Sind Snaps immer sicher weg?",
+          "answers": [
+            "Nein, sie können gespeichert werden.",
+            "Ja, immer.",
+            "Nur bei Freunden."
+          ],
+          "correct": 0,
+          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -3942,7 +4272,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Kontakte und Storys"
+        "module": "Modul 5: Kontakte und Storys",
+        "practiceQuestion": {
+          "question": "Sind Snaps immer sicher weg?",
+          "answers": [
+            "Nein, sie können gespeichert werden.",
+            "Ja, immer.",
+            "Nur bei Freunden."
+          ],
+          "correct": 0,
+          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -4036,7 +4376,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Sind Snaps immer sicher weg?",
+          "answers": [
+            "Nein, sie können gespeichert werden.",
+            "Ja, immer.",
+            "Nur bei Freunden."
+          ],
+          "correct": 0,
+          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -4053,7 +4403,17 @@ const topics = [
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Sind Snaps immer sicher weg?",
+          "answers": [
+            "Nein, sie können gespeichert werden.",
+            "Ja, immer.",
+            "Nur bei Freunden."
+          ],
+          "correct": 0,
+          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+        }
       }
     ],
     "illustration": "assets/illustrations/snapchat.svg",
@@ -4205,12 +4565,12 @@ const topics = [
     "miniQuestion": {
       "question": "Sind Snaps immer sicher weg?",
       "answers": [
-        "Nein",
-        "Ja",
-        "Nur bei Freunden"
+        "Nein, sie können gespeichert werden.",
+        "Ja, immer.",
+        "Nur bei Freunden."
       ],
       "correct": 0,
-      "explanation": "Snaps können gespeichert werden."
+      "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
     }
   },
   {
@@ -4353,7 +4713,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Was machst du bei gefährlichen Trends?",
+          "answers": [
+            "Nicht mitmachen.",
+            "Sofort mitmachen.",
+            "Andere dazu drängen."
+          ],
+          "correct": 0,
+          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -4448,7 +4818,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Videos, Trends und Kommentare"
+        "module": "Modul 3: Videos, Trends und Kommentare",
+        "practiceQuestion": {
+          "question": "Was machst du bei gefährlichen Trends?",
+          "answers": [
+            "Nicht mitmachen.",
+            "Sofort mitmachen.",
+            "Andere dazu drängen."
+          ],
+          "correct": 0,
+          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -4546,7 +4926,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Trends, Werbung und Betrug"
+        "module": "Modul 4: Trends, Werbung und Betrug",
+        "practiceQuestion": {
+          "question": "Was machst du bei gefährlichen Trends?",
+          "answers": [
+            "Nicht mitmachen.",
+            "Sofort mitmachen.",
+            "Andere dazu drängen."
+          ],
+          "correct": 0,
+          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -4644,7 +5034,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Kommentare und Trends"
+        "module": "Modul 5: Kommentare und Trends",
+        "practiceQuestion": {
+          "question": "Was machst du bei gefährlichen Trends?",
+          "answers": [
+            "Nicht mitmachen.",
+            "Sofort mitmachen.",
+            "Andere dazu drängen."
+          ],
+          "correct": 0,
+          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -4738,7 +5138,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was machst du bei gefährlichen Trends?",
+          "answers": [
+            "Nicht mitmachen.",
+            "Sofort mitmachen.",
+            "Andere dazu drängen."
+          ],
+          "correct": 0,
+          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -4755,7 +5165,17 @@ const topics = [
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was machst du bei gefährlichen Trends?",
+          "answers": [
+            "Nicht mitmachen.",
+            "Sofort mitmachen.",
+            "Andere dazu drängen."
+          ],
+          "correct": 0,
+          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+        }
       }
     ],
     "illustration": "assets/illustrations/tiktok.svg",
@@ -4907,12 +5327,12 @@ const topics = [
     "miniQuestion": {
       "question": "Was machst du bei gefährlichen Trends?",
       "answers": [
-        "Nicht mitmachen",
-        "Sofort mitmachen",
-        "Andere drängen"
+        "Nicht mitmachen.",
+        "Sofort mitmachen.",
+        "Andere dazu drängen."
       ],
       "correct": 0,
-      "explanation": "Gefährliche Trends machst du nicht mit."
+      "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
     }
   },
   {
@@ -5063,7 +5483,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 2: Private Daten"
+        "module": "Modul 2: Private Daten",
+        "practiceQuestion": {
+          "question": "Was machst du, wenn du unsicher bist?",
+          "answers": [
+            "Ich frage eine Person, der ich vertraue.",
+            "Ich löse alles allein.",
+            "Ich klicke sofort."
+          ],
+          "correct": 0,
+          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+        }
       },
       {
         "title": "Merksatz: Meine Daten gehören mir",
@@ -5158,7 +5588,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 3: Nachrichten, Fotos und Beweise"
+        "module": "Modul 3: Nachrichten, Fotos und Beweise",
+        "practiceQuestion": {
+          "question": "Was machst du, wenn du unsicher bist?",
+          "answers": [
+            "Ich frage eine Person, der ich vertraue.",
+            "Ich löse alles allein.",
+            "Ich klicke sofort."
+          ],
+          "correct": 0,
+          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+        }
       },
       {
         "title": "Merksatz: Ich entscheide",
@@ -5256,7 +5696,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 4: Druck, Drohung und Betrug"
+        "module": "Modul 4: Druck, Drohung und Betrug",
+        "practiceQuestion": {
+          "question": "Was machst du, wenn du unsicher bist?",
+          "answers": [
+            "Ich frage eine Person, der ich vertraue.",
+            "Ich löse alles allein.",
+            "Ich klicke sofort."
+          ],
+          "correct": 0,
+          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+        }
       },
       {
         "title": "Merksatz: Erst prüfen",
@@ -5354,7 +5804,17 @@ const topics = [
             }
           }
         },
-        "module": "Modul 5: Probleme und Hilfewege"
+        "module": "Modul 5: Probleme und Hilfewege",
+        "practiceQuestion": {
+          "question": "Was machst du, wenn du unsicher bist?",
+          "answers": [
+            "Ich frage eine Person, der ich vertraue.",
+            "Ich löse alles allein.",
+            "Ich klicke sofort."
+          ],
+          "correct": 0,
+          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+        }
       },
       {
         "title": "Stopp-Regel",
@@ -5448,7 +5908,17 @@ const topics = [
           "Hilfe holen"
         ],
         "remember": "Stopp. Prüfen. Hilfe holen.",
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was machst du, wenn du unsicher bist?",
+          "answers": [
+            "Ich frage eine Person, der ich vertraue.",
+            "Ich löse alles allein.",
+            "Ich klicke sofort."
+          ],
+          "correct": 0,
+          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+        }
       },
       {
         "title": "Quiz und Abschluss",
@@ -5465,7 +5935,17 @@ const topics = [
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
         "quiz": true,
-        "module": "Modul 6: Schutz und Hilfe"
+        "module": "Modul 6: Schutz und Hilfe",
+        "practiceQuestion": {
+          "question": "Was machst du, wenn du unsicher bist?",
+          "answers": [
+            "Ich frage eine Person, der ich vertraue.",
+            "Ich löse alles allein.",
+            "Ich klicke sofort."
+          ],
+          "correct": 0,
+          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+        }
       }
     ],
     "illustration": "assets/illustrations/hilfe.svg",
@@ -5614,14 +6094,14 @@ const topics = [
     "qrQuizLink": "index.html#hilfe:quiz",
     "qrMemoryLink": "index.html#hilfe:merk",
     "miniQuestion": {
-      "question": "Was machst du bei Unsicherheit?",
+      "question": "Was machst du, wenn du unsicher bist?",
       "answers": [
-        "Hilfe holen",
-        "Alles allein lösen",
-        "Sofort klicken"
+        "Ich frage eine Person, der ich vertraue.",
+        "Ich löse alles allein.",
+        "Ich klicke sofort."
       ],
       "correct": 0,
-      "explanation": "Hilfe holen ist richtig."
+      "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
     }
   }
 ];

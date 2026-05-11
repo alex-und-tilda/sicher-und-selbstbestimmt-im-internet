@@ -893,6 +893,96 @@ function buildAccessibleBox(type, title, htmlContent, iconName, id) {
   `;
 }
 
+
+function getCurrentLessonForPractice() {
+  const topic = getCurrentTopic();
+  if (!topic) return null;
+  const lessons = getActiveLessons(topic);
+  return lessons[currentStep] || null;
+}
+
+function getPracticeQuestion(topic, lesson) {
+  if (lesson && lesson.practiceQuestion) return lesson.practiceQuestion;
+  if (lesson && lesson.exercise) {
+    return {
+      question: lesson.exercise.question || "Was ist richtig?",
+      answers: ["Das wirkt sicher", "Das wirkt unsicher", "Ich brauche Hilfe"],
+      correct: lesson.exercise.correctIndex ?? 2,
+      explanation: "Lies die Rückmeldung. Wenn du unsicher bist, frage eine Person, der du vertraust.",
+      legacyExercise: lesson.exercise
+    };
+  }
+  return topic && topic.miniQuestion ? topic.miniQuestion : null;
+}
+
+function shouldShowPractice(topic, lesson, stepIndex) {
+  if (!topic || !lesson) return false;
+  const title = (lesson.title || "").toLowerCase();
+  const icon = (lesson.icon || "").toLowerCase();
+  if (lesson.practiceQuestion || lesson.exercise) return true;
+  if (title.includes("übung") || title.includes("wiederholung") || title.includes("quiz")) return true;
+  if (icon === "exercise" || icon === "quiz") return true;
+  return false;
+}
+
+function getPracticeHtml(topic, lesson, stepIndex) {
+  if (!shouldShowPractice(topic, lesson, stepIndex)) return "";
+  const q = getPracticeQuestion(topic, lesson);
+  if (!q || !Array.isArray(q.answers)) return "";
+
+  const boxId = `practice-${topic.id}-${stepIndex}`;
+  return `
+    <section class="practice-box access-box access-exercise" id="${boxId}">
+      <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div>
+      <div class="access-box-content">
+        <h3>Übung</h3>
+        <p class="practice-question"><strong>${escapeHtml(q.question)}</strong></p>
+        <button type="button" class="small-read-button" onclick="speakElementById('${boxId}')">Übung sehr langsam vorlesen</button>
+        <div class="practice-answer-grid">
+          ${q.answers.map((answer, index) => `
+            <button type="button" onclick="answerPractice(${index})">${escapeHtml(answer)}</button>
+          `).join("")}
+        </div>
+        <div class="practice-feedback" aria-live="polite"></div>
+      </div>
+    </section>
+  `;
+}
+
+function answerPractice(choice) {
+  const topic = getCurrentTopic();
+  const lesson = getCurrentLessonForPractice();
+  const q = getPracticeQuestion(topic, lesson);
+  const box = document.querySelector(".practice-feedback");
+
+  if (!q || !box) return;
+
+  const selected = Number(choice);
+  const correct = Number(q.correct);
+  const isCorrect = selected === correct;
+
+  let explanation = q.explanation || "Wenn du unsicher bist, frage eine Person, der du vertraust.";
+
+  // Legacy exercise feedback fallback.
+  if (q.legacyExercise && q.legacyExercise.feedback) {
+    const key = selected === 0 ? "safe" : selected === 1 ? "unsafe" : "help";
+    const fb = q.legacyExercise.feedback[key];
+    if (fb) {
+      explanation = `${fb.title || ""} ${fb.text || ""}`.trim();
+    }
+  }
+
+  box.innerHTML = isCorrect
+    ? `<strong>Richtig.</strong><br>${escapeHtml(explanation)}`
+    : `<strong>Noch einmal überlegen.</strong><br>${escapeHtml(explanation)}`;
+
+  box.className = `practice-feedback ${isCorrect ? "success" : "warning"}`;
+  box.removeAttribute("hidden");
+  box.focus?.();
+
+  liveRegion.textContent = isCorrect ? "Richtige Antwort. Erklärung wird angezeigt." : "Nicht ganz. Erklärung wird angezeigt.";
+}
+
 function buildCard(lesson, topic) {
   let html = `
     <article class="card">
@@ -945,12 +1035,7 @@ function buildCard(lesson, topic) {
   if (lesson.success) {
     html += buildAccessibleBox("success", "Geschafft", `<p>${escapeHtml(lesson.success)}</p>`, "check", `success-${currentTopicId}-${currentStep}`);
   }
-
-  if (lesson.exercise) {
-    html += buildExercise(lesson.exercise);
-  }
-
-  if (lesson.remember) {
+if (lesson.remember) {
     html += buildAccessibleBox("remember", "Merksatz", `<p>${escapeHtml(lesson.remember)}</p>`, "remember", `remember-${currentTopicId}-${currentStep}`);
   }
 
@@ -961,46 +1046,11 @@ function buildCard(lesson, topic) {
     `;
   }
 
+  html += `${getPracticeHtml(topic, lesson, currentStep)}`;
   html += "</article>";
   return html;
 }
 
-function buildExercise(exercise) {
-  return `
-    <section class="exercise access-box access-exercise" id="${exercise.id}-box">
-      <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div>
-      <div class="access-box-content">
-        <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div><div class="access-box-content"><h3>Übung</h3>
-        <div class="exercise-question">${escapeHtml(exercise.question)}</div>
-        <button type="button" class="small-read-button" onclick="speakElementById('${exercise.id}-box')">Übung sehr langsam vorlesen</button>
-        <div class="choice-list">
-          <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'safe')">Das wirkt sicher</button>
-          <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'unsafe')">Das wirkt unsicher</button>
-          <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'help')">Ich brauche Hilfe</button>
-        </div>
-        <div id="${exercise.id}-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden></div>
-      </div>
-    </section>
-  `;
-}
-
-function showFeedback(exerciseId, answer) {
-  const topic = getCurrentTopic();
-  if (!topic) return;
-
-  const lessons = getActiveLessons(topic);
-  const lesson = lessons[currentStep];
-  if (!lesson || !lesson.exercise || lesson.exercise.id !== exerciseId) return;
-
-  const feedbackData = lesson.exercise.feedback[answer];
-  const feedback = document.getElementById(`${exerciseId}-feedback`);
-  if (!feedback || !feedbackData) return;
-
-  feedback.hidden = false;
-  feedback.className = `feedback ${feedbackData.type}`;
-  feedback.innerHTML = `<strong>${escapeHtml(feedbackData.title)}</strong><br>${escapeHtml(feedbackData.text)}`;
-  feedback.focus();
-}
 
 function nextStep() {
   const topic = getCurrentTopic();
