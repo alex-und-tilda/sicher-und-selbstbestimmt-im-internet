@@ -155,3 +155,21 @@ Keine abgeschnittenen Karten.
 Keine waagerechte Verschiebung.
 Bessere Smartphone-Ansicht.
 ```
+
+
+## Menü-Navigation-Fix
+
+Die untere Navigation wird in der Themenübersicht ausgeblendet.
+
+Problem vorher:
+```text
+Die Buttons Zurück / Weiter lagen über den Themenkarten.
+Die Themenübersicht wirkte abgeschnitten.
+```
+
+Korrektur:
+```text
+In der Themenübersicht keine untere Navigation.
+Navigation nur auf Lernseiten, im Quiz, bei Urkunde und Druckseiten.
+Keine Überdeckung der Themenkarten.
+```

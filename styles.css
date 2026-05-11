@@ -1827,3 +1827,70 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* FINALER FIX: Navigation in der Themenübersicht ausblenden
+   Die untere Navigation hat die Themenkarten überdeckt.
+   Auf der Start-/Themenübersicht braucht man keine Zurück-/Weiter-Navigation.
+*/
+body.view-menu .nav,
+body.view-menu .bottom-nav {
+  display: none !important;
+}
+
+body.view-menu .content {
+  padding-bottom: 32px !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body.view-menu .menu-card,
+body.view-menu .card {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body.view-menu .app {
+  min-height: 100vh !important;
+}
+
+/* Navigation nur innerhalb von Lernseiten/Quiz/Druckseiten sichtbar. */
+body.view-learning .nav,
+body.view-quiz .nav,
+body.view-print .nav {
+  display: grid !important;
+}
+
+/* Die Navigation soll nicht über Inhalte gelegt werden. */
+.nav {
+  position: static !important;
+  margin-top: 18px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Auf Lernseiten genug Abstand unterhalb des Inhalts. */
+body.view-learning .content,
+body.view-quiz .content,
+body.view-print .content {
+  padding-bottom: 18px !important;
+}
+
+/* Die Themenübersicht darf keine inneren Scrollbalken erzeugen. */
+body.view-menu .topic-grid,
+body.view-menu .topic-card,
+body.view-menu .topic-button {
+  overflow: visible !important;
+}
+
+/* Kleine Logos unten dürfen nicht als schwebendes Element über Karten liegen. */
+body.view-menu .brand-footer,
+body.view-menu .logos,
+body.view-menu .app-footer {
+  position: static !important;
+}
+
+/* Auf Desktop zentriert und ruhig. */
+.app {
+  overflow: visible !important;
+}

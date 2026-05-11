@@ -67,6 +67,7 @@ function continueTopic(topicId, mode) {
 }
 
 function renderMemoryCard(topicId) {
+  setViewMode("print");
   const topic = topics.find(t => t.id === topicId);
   if (!topic) return;
 
@@ -190,6 +191,7 @@ function stopReading() {
 }
 
 function renderEvaluation() {
+  setViewMode("print");
   appTitle.textContent = "Rückmeldung";
   moduleLabel.textContent = "Zielgruppen-Test";
   stepLabel.textContent = "Druckseite";
@@ -354,7 +356,14 @@ function renderSavedProgressHint(topic) {
 }
 
 
+
+function setViewMode(mode) {
+  document.body.classList.remove("view-menu", "view-learning", "view-quiz", "view-print");
+  document.body.classList.add(`view-${mode}`);
+}
+
 function renderMenu() {
+  setViewMode("menu");
   currentTopicId = null;
   currentStep = 0;
 
@@ -467,6 +476,7 @@ function startTopicQuiz(topicId) {
 }
 
 function renderStep() {
+  setViewMode("learning");
   const topic = getCurrentTopic();
   if (!topic) {
     renderMenu();
@@ -668,6 +678,7 @@ function startQuiz() {
 }
 
 function renderQuiz() {
+  setViewMode("quiz");
   const topic = getCurrentTopic();
   if (!topic) {
     renderMenu();
@@ -741,6 +752,7 @@ function answerQuiz(answerIndex) {
 }
 
 function renderQuizFeedback(isCorrect, explanation) {
+  setViewMode("quiz");
   const topic = getCurrentTopic();
   const total = topic.quizQuestions.length;
 
@@ -781,6 +793,7 @@ function nextQuizQuestion() {
 }
 
 function renderQuizResult() {
+  setViewMode("print");
   const topic = getCurrentTopic();
   if (!topic) return;
 
