@@ -1,5 +1,9 @@
 # Sicher und selbstbestimmt im Internet
 
+**Version:** 1.0 Pilot
+
+**Stand:** 2026-05-11
+
 Barrierearmes Selbstlernangebot zu Datenschutz und sicheren digitalen Anwendungen.
 
 ## Themen
@@ -238,4 +242,30 @@ Beispiele:
 Ich gebe mein Passwort nicht weiter.
 Ich klicke nicht sofort auf komische Links.
 Ich frage nach, wenn ich unsicher bin.
+```
+
+
+## Pilot-Endfassung
+
+Diese Version ist als Pilot-Fassung gedacht.
+
+Überarbeitet wurden:
+
+```text
+Thema „Hilfe bei Problemen“ fachlich geschärft
+Hilfe-Button bleibt Orientierungshilfe für die Lernplattform
+Quizantworten realistischer formuliert
+Abschluss- und Urkunden-Texte vorsichtiger formuliert
+```
+
+Wichtiger fachlicher Hinweis:
+
+```text
+Ein bestandenes Quiz bedeutet nicht:
+Die Person ist jetzt vollständig sicher im Internet.
+
+Es bedeutet:
+Die Person hat wichtige Regeln geübt.
+Die Person hat sichere Entscheidungen ausprobiert.
+Die Person weiß: Bei Unsicherheit darf sie Unterstützung holen.
 ```

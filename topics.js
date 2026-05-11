@@ -529,7 +529,7 @@ const topics = [
         "answers": [
           "Ich gebe mein Passwort nicht weiter.",
           "Ich schicke es sofort.",
-          "Ich poste es öffentlich."
+          "Ich schicke es nur an eine Person weiter."
         ],
         "correct": 0
       },
@@ -609,7 +609,7 @@ const topics = [
         "question": "Was bedeutet Datenschutz im Alltag?",
         "answers": [
           "Ich teile alles mit allen.",
-          "Ich lösche jede Hilfe.",
+          "Ich versuche es erst einmal allein.",
           "Ich gehe vorsichtig mit meinen Daten um."
         ],
         "correct": 2
@@ -1250,7 +1250,7 @@ const topics = [
       {
         "question": "Du verstehst eine Nachricht nicht. Was darfst du tun?",
         "answers": [
-          "Alles löschen.",
+          "Ich klicke zurück und versuche es allein.",
           "Nachfragen oder Hilfe holen.",
           "Raten und senden."
         ],
@@ -1903,7 +1903,7 @@ const topics = [
         "answers": [
           "Ich schreibe alles öffentlich.",
           "Ich lasse private Daten lieber weg.",
-          "Ich teile meine Bankdaten."
+          "Ich gebe nur meine Kontonummer ein."
         ],
         "correct": 1
       },
@@ -2544,7 +2544,7 @@ const topics = [
         "question": "Du siehst Werbung für ein angeblich kostenloses Produkt. Was machst du?",
         "answers": [
           "Ich gebe sofort Daten ein.",
-          "Ich teile meine Bankdaten.",
+          "Ich gebe nur meine Kontonummer ein.",
           "Ich prüfe, ob Kosten entstehen."
         ],
         "correct": 2
@@ -3212,7 +3212,7 @@ const topics = [
       {
         "question": "Ein Video macht dir Angst. Was machst du?",
         "answers": [
-          "Ich teile es mit allen.",
+          "Ich teile es mit einer kleinen Gruppe.",
           "Ich schaue weiter, obwohl es mir schlecht geht.",
           "Ich stoppe das Video und spreche mit jemandem."
         ],
@@ -3838,7 +3838,7 @@ const topics = [
         "answers": [
           "Ich sende es, weil es verschwindet.",
           "Ich sende es nicht.",
-          "Ich sende noch mehr Bilder."
+          "Ich sende nur ein kleines Bild."
         ],
         "correct": 1
       },
@@ -4489,7 +4489,7 @@ const topics = [
         "answers": [
           "Ich mache nicht mit.",
           "Ich mache sofort mit.",
-          "Ich fordere andere dazu auf."
+          "Ich probiere es erst einmal kurz aus."
         ],
         "correct": 0
       },
@@ -4498,7 +4498,7 @@ const topics = [
         "answers": [
           "Ich gebe sofort Bankdaten ein.",
           "Ich prüfe und gebe keine Daten ein.",
-          "Ich klicke alles an."
+          "Ich klicke erst einmal und schaue, was passiert."
         ],
         "correct": 1
       },
@@ -4507,7 +4507,7 @@ const topics = [
         "answers": [
           "Ich sende mein Passwort.",
           "Ich schreibe keine privaten Daten.",
-          "Ich schreibe Adresse und Telefonnummer."
+          "Ich schreibe nur meine Telefonnummer."
         ],
         "correct": 1
       },
@@ -4560,7 +4560,7 @@ const topics = [
         "question": "Ein Video gibt einen Gesundheitstipp. Was machst du?",
         "answers": [
           "Ich prüfe den Tipp und frage bei Unsicherheit.",
-          "Ich stoppe Medikamente selbst.",
+          "Ich probiere den Tipp erst einmal aus.",
           "Ich mache alles sofort."
         ],
         "correct": 0
@@ -4569,7 +4569,7 @@ const topics = [
         "question": "TikTok zeigt immer neue Videos. Was darfst du tun?",
         "answers": [
           "Immer weiter schauen.",
-          "Nie Pause machen.",
+          "Ich schaue weiter, obwohl ich müde bin.",
           "Die App schließen und Pause machen."
         ],
         "correct": 2
@@ -4629,23 +4629,27 @@ const topics = [
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "title": "Start",
+        "title": "Start: Hilfe bei Problemen im Internet",
         "icon": "start",
         "text": [
-          "Diese Lernseite hilft dir bei Problemen im Internet.",
-          "Du lernst, was du tun kannst.",
-          "Du musst Probleme nicht allein lösen."
+          "Manchmal passiert im Internet etwas Komisches.",
+          "Eine Nachricht macht Druck.",
+          "Ein Link wirkt unsicher.",
+          "Eine Person fragt nach Daten.",
+          "Dann musst du nicht allein bleiben."
         ],
-        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
+        "remember": "Ich darf Unterstützung holen.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
-        "title": "Was ist ein digitales Problem?",
+        "title": "Was ist ein Problem im Internet?",
         "icon": "warning",
         "text": [
-          "Ein digitales Problem ist etwas, das dir im Internet Angst macht.",
-          "Oder etwas, das dich unter Druck setzt.",
-          "Oder etwas, das sich falsch anfühlt."
+          "Ein Problem im Internet kann verschieden aussehen.",
+          "Zum Beispiel: eine komische Nachricht.",
+          "Oder: ein Link, dem du nicht traust.",
+          "Oder: eine Person macht Druck.",
+          "Oder: jemand beleidigt dich."
         ],
         "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 1: Probleme erkennen",
@@ -4656,45 +4660,53 @@ const topics = [
         ]
       },
       {
-        "title": "Welche Hilfe gibt es?",
+        "title": "Erster Schritt: Stopp",
         "icon": "help",
         "text": [
-          "Es gibt verschiedene Menschen, die helfen können.",
-          "Du musst nicht allein entscheiden."
+          "Wenn etwas komisch ist, mache zuerst Stopp.",
+          "Klicke nicht weiter.",
+          "Gib keine Daten ein.",
+          "Sende kein Geld.",
+          "Sende keine privaten Bilder."
         ],
         "bullets": [
           "Person, der du vertraust",
           "vertraute Person",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+        "remember": "Ich klicke nicht weiter, wenn ich unsicher bin.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
-        "title": "Hilfe im Alltag",
+        "title": "Zweiter Schritt: Unterstützung holen",
         "icon": "home",
         "text": [
-          "Hilfe kann ganz praktisch sein.",
-          "Du kannst eine Nachricht zeigen.",
-          "Du kannst gemeinsam überlegen, was als Nächstes gut ist."
+          "Du kannst eine Person fragen.",
+          "Frage eine Person, die dich unterstützt.",
+          "Zum Beispiel im Wohnbereich.",
+          "Oder im Dienst.",
+          "Oder eine Digital-Begleiterin oder einen Digital-Begleiter."
         ],
         "bullets": [
           "nicht allein bleiben",
           "nicht sofort antworten",
           "gemeinsam prüfen"
         ],
-        "remember": "Ich frage eine Person, der ich vertraue.",
+        "remember": "Ich frage eine Person, die mich unterstützt.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
-        "title": "Gute Hilfe-Entscheidung erkennen",
+        "title": "Dritter Schritt: Zeigen, was passiert ist",
         "icon": "check",
         "text": [
-          "Eine gute Entscheidung schützt dich."
+          "Zeige die Nachricht oder die Seite.",
+          "Erkläre, was du angeklickt hast.",
+          "Erzähle, was dir Sorgen macht.",
+          "So kann die andere Person besser helfen."
         ],
         "quote": "Ich antworte nicht allein. Ich zeige die Nachricht einer Person, der du vertraust.",
         "success": "Das ist gut. Du holst dir Unterstützung.",
-        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
+        "remember": "Ich erkläre, was passiert ist.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
@@ -4731,7 +4743,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+        "remember": "Ich gebe keine Daten ein, wenn ich unsicher bin.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -4742,7 +4754,7 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Ich frage eine Person, der ich vertraue.",
+        "remember": "Ich spreche mit einer Person, die mich unterstützt.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -4750,14 +4762,14 @@ const topics = [
         "icon": "exercise",
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Du weißt auf einer Internetseite nicht weiter. Was machst du?",
+          "question": "Du bekommst eine Nachricht: „Du musst sofort Geld senden.“ Was machst du?",
           "answers": [
-            "Ich frage eine Person, der ich vertraue.",
-            "Ich klicke alles schnell an.",
-            "Ich gebe private Daten ein."
+            "Ich stoppe und spreche mit einer unterstützenden Person.",
+            "Ich sende erst einmal einen kleinen Betrag.",
+            "Ich klicke weiter, damit es schneller geht."
           ],
           "correct": 0,
-          "explanation": "Wenn ich nicht weiter weiß, darf ich stoppen und Unterstützung holen."
+          "explanation": "Geld-Druck ist ein Warnzeichen. Ich stoppe und hole Unterstützung."
         }
       },
       {
@@ -4768,7 +4780,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -4779,7 +4791,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -4790,7 +4802,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
+        "remember": "Ich gebe keine Daten ein, wenn ich unsicher bin.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -4804,7 +4816,7 @@ const topics = [
           "Drohungen",
           "private Fotos"
         ],
-        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+        "remember": "Ich spreche mit einer Person, die mich unterstützt.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -4815,7 +4827,7 @@ const topics = [
         ],
         "quote": "„Antworte sofort und erzähle niemandem davon.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich frage eine Person, der ich vertraue.",
+        "remember": "Ich nutze Hilfe im Wohnbereich, im Dienst oder bei einer Digital-Begleitung.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -4826,7 +4838,7 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -4834,14 +4846,14 @@ const topics = [
         "icon": "exercise",
         "module": "Modul 3: Nachrichten, Fotos und Beweise",
         "practiceQuestion": {
-          "question": "Du bekommst eine Nachricht, die dir Angst macht. Was machst du?",
+          "question": "Jemand schreibt: „Schick mir ein privates Bild.“ Du fühlst dich unwohl. Was machst du?",
           "answers": [
-            "Ich spreche mit einer unterstützenden Person.",
-            "Ich bleibe allein damit.",
-            "Ich sende Geld."
+            "Ich sende kein Bild und frage Unterstützung.",
+            "Ich sende ein Bild, damit Ruhe ist.",
+            "Ich entschuldige mich und mache trotzdem mit."
           ],
           "correct": 0,
-          "explanation": "Angst ist ein Zeichen: Ich muss das nicht allein klären."
+          "explanation": "Ich muss keine privaten Bilder senden. Wenn ich mich unwohl fühle, hole ich Hilfe."
         }
       },
       {
@@ -4852,7 +4864,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
+        "remember": "Ich gebe keine Daten ein, wenn ich unsicher bin.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -4863,7 +4875,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
+        "remember": "Ich spreche mit einer Person, die mich unterstützt.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -4874,7 +4886,7 @@ const topics = [
           "Jemand will Geheimhaltung.",
           "Jemand verlangt Daten oder Fotos."
         ],
-        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+        "remember": "Ich nutze Hilfe im Wohnbereich, im Dienst oder bei einer Digital-Begleitung.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -4885,7 +4897,7 @@ const topics = [
         ],
         "quote": "Sag niemandem davon. Sonst passiert etwas.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Ich frage eine Person, der ich vertraue.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -4899,7 +4911,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -4913,7 +4925,7 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
+        "remember": "Ich gebe keine Daten ein, wenn ich unsicher bin.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -4921,14 +4933,14 @@ const topics = [
         "icon": "exercise",
         "module": "Modul 4: Druck, Drohung und Betrug",
         "practiceQuestion": {
-          "question": "Jemand beleidigt dich online. Was kannst du tun?",
+          "question": "Jemand beleidigt dich in einer App. Was kannst du tun?",
           "answers": [
-            "Blockieren, melden oder Unterstützung holen.",
-            "Zurück beleidigen.",
-            "Alles ertragen."
+            "Ich blockiere, melde oder spreche mit Unterstützung.",
+            "Ich beleidige zurück.",
+            "Ich lösche alles und sage niemandem etwas."
           ],
           "correct": 0,
-          "explanation": "Ich darf mich schützen. Ich darf Unterstützung holen."
+          "explanation": "Beleidigungen muss ich nicht allein aushalten. Blockieren, Melden und Unterstützung holen sind gute Schritte."
         }
       },
       {
@@ -4939,7 +4951,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
+        "remember": "Ich nutze Hilfe im Wohnbereich, im Dienst oder bei einer Digital-Begleitung.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -4950,7 +4962,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -4961,7 +4973,7 @@ const topics = [
           "Wichtig ist: nicht allein bleiben.",
           "Eine vertraute Person kann mit dir schauen."
         ],
-        "remember": "Ich frage eine Person, der ich vertraue.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -4975,7 +4987,7 @@ const topics = [
           "nicht allein antworten",
           "Hilfe holen"
         ],
-        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
+        "remember": "Ich gebe keine Daten ein, wenn ich unsicher bin.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -4989,7 +5001,7 @@ const topics = [
           "Daten schicken",
           "Problem geheim halten"
         ],
-        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
+        "remember": "Ich spreche mit einer Person, die mich unterstützt.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -5000,7 +5012,7 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
+        "remember": "Ich nutze Hilfe im Wohnbereich, im Dienst oder bei einer Digital-Begleitung.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -5008,14 +5020,14 @@ const topics = [
         "icon": "exercise",
         "module": "Modul 5: Probleme und Hilfewege",
         "practiceQuestion": {
-          "question": "Du hast aus Versehen geklickt. Was machst du?",
+          "question": "Du hast aus Versehen auf einen komischen Link geklickt. Was ist sinnvoll?",
           "answers": [
-            "Ich sage es einer unterstützenden Person.",
-            "Ich verheimliche es immer.",
-            "Ich klicke weiter."
+            "Ich sage es einer Person, die mich unterstützt.",
+            "Ich klicke weitere Links an, um es zu testen.",
+            "Ich gebe danach meine Daten ein."
           ],
           "correct": 0,
-          "explanation": "Fehler können passieren. Wichtig ist, Hilfe zu holen."
+          "explanation": "Fehler können passieren. Wichtig ist: nicht weitermachen und Unterstützung holen."
         }
       },
       {
@@ -5029,7 +5041,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5040,7 +5052,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Ich frage eine Person, der ich vertraue.",
+        "remember": "Ich gebe keine Daten ein, wenn ich unsicher bin.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5054,7 +5066,7 @@ const topics = [
           "Person blockieren",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
+        "remember": "Ich spreche mit einer Person, die mich unterstützt.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5068,7 +5080,7 @@ const topics = [
           "Melden auswählen, wenn möglich",
           "Beweise mit Hilfe sichern"
         ],
-        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
+        "remember": "Ich nutze Hilfe im Wohnbereich, im Dienst oder bei einer Digital-Begleitung.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5084,7 +5096,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5095,7 +5107,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5109,17 +5121,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich frage eine Person, der ich vertraue.",
+        "remember": "Ich gebe keine Daten ein, wenn ich unsicher bin.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Du sollst schnell Geld senden. Was machst du?",
+          "question": "Ein fremdes Profil fragt nach deiner Adresse. Was machst du?",
           "answers": [
-            "Ich stoppe und frage Unterstützung.",
-            "Ich sende sofort Geld.",
-            "Ich gebe Bankdaten ein."
+            "Ich gebe meine Adresse nicht weiter.",
+            "Ich schreibe nur Straße und Hausnummer.",
+            "Ich frage die fremde Person nach ihrer Meinung."
           ],
           "correct": 0,
-          "explanation": "Druck und Geldforderungen sind Warnzeichen."
+          "explanation": "Meine Adresse ist privat. Ich gebe sie nicht an fremde Personen weiter."
         }
       },
       {
@@ -5135,110 +5147,110 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
+        "remember": "Ich spreche mit einer Person, die mich unterstützt.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Du möchtest Hilfe holen. Wen kannst du fragen?",
+          "question": "Du weißt nicht, ob eine Nachricht echt ist. Was machst du?",
           "answers": [
-            "Eine Person, die mich unterstützt.",
-            "Nur fremde Personen im Chat.",
-            "Niemanden."
+            "Ich prüfe nicht allein und frage Unterstützung.",
+            "Ich vertraue der Nachricht, weil sie dringend klingt.",
+            "Ich gebe vorsichtshalber meine Daten ein."
           ],
           "correct": 0,
-          "explanation": "Ich kann Menschen fragen, denen ich vertraue oder die mich unterstützen."
+          "explanation": "Dringende Nachrichten können Betrug sein. Ich darf stoppen und nachfragen."
         }
       }
     ],
     "illustration": "assets/illustrations/hilfe.svg",
     "quizQuestions": [
       {
-        "question": "Du weißt auf einer Internetseite nicht weiter. Was machst du?",
+        "question": "Eine Nachricht sagt: „Sende sofort Geld, sonst passiert etwas.“ Was machst du?",
         "answers": [
-          "Ich frage eine Person, der ich vertraue.",
-          "Ich klicke alles schnell an.",
-          "Ich gebe private Daten ein."
+          "Ich stoppe und hole Unterstützung.",
+          "Ich sende erst einmal Geld und frage später.",
+          "Ich klicke auf alle Links in der Nachricht."
         ],
         "correct": 0
       },
       {
-        "question": "Du bekommst eine Nachricht, die dir Angst macht. Was machst du?",
+        "question": "Ein fremdes Profil fragt nach deiner Adresse. Was machst du?",
         "answers": [
-          "Ich bleibe allein damit.",
-          "Ich spreche mit einer unterstützenden Person.",
-          "Ich sende Geld."
+          "Ich schreibe nur meine Straße.",
+          "Ich gebe meine Adresse nicht weiter.",
+          "Ich sende zusätzlich meine Telefonnummer."
         ],
         "correct": 1
       },
       {
-        "question": "Jemand beleidigt dich online. Was kannst du tun?",
+        "question": "Du hast auf einen komischen Link geklickt. Was ist der nächste gute Schritt?",
         "answers": [
-          "Alles ertragen.",
+          "Ich teste noch mehr Links.",
+          "Ich mache nicht weiter und frage Unterstützung.",
+          "Ich gebe schnell mein Passwort ein."
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Jemand beleidigt dich online. Was ist möglich?",
+        "answers": [
           "Blockieren, melden oder Unterstützung holen.",
+          "Alles allein aushalten.",
           "Zurück beleidigen."
         ],
-        "correct": 1
-      },
-      {
-        "question": "Du hast aus Versehen geklickt. Was machst du?",
-        "answers": [
-          "Ich sage es einer unterstützenden Person.",
-          "Ich klicke weiter.",
-          "Ich verheimliche es immer."
-        ],
         "correct": 0
       },
       {
-        "question": "Du sollst schnell Geld senden. Was machst du?",
+        "question": "Jemand fragt nach einem privaten Bild. Du möchtest das nicht. Was ist richtig?",
         "answers": [
-          "Ich sende sofort Geld.",
-          "Ich gebe Bankdaten ein.",
-          "Ich stoppe und frage Unterstützung."
+          "Ich muss es senden, wenn jemand fragt.",
+          "Ich sende es, damit die Person zufrieden ist.",
+          "Ich darf Nein sagen."
         ],
         "correct": 2
       },
       {
-        "question": "Du möchtest Hilfe holen. Wen kannst du fragen?",
+        "question": "Eine Nachricht wirkt dringend und macht Druck. Was ist ein Warnzeichen?",
         "answers": [
-          "Niemanden.",
+          "Die Nachricht hat ein Emoji.",
+          "Die Nachricht ist kurz.",
+          "Die Nachricht will, dass ich sofort reagiere."
+        ],
+        "correct": 2
+      },
+      {
+        "question": "Du brauchst Hilfe bei einem Problem im Internet. Wen kannst du fragen?",
+        "answers": [
           "Nur fremde Personen im Chat.",
-          "Eine Person, die mich unterstützt."
-        ],
-        "correct": 2
-      },
-      {
-        "question": "Du verstehst eine Aufgabe nicht. Was machst du?",
-        "answers": [
-          "Einfach raten und weitermachen.",
-          "Vorlesen nutzen oder Hilfe fragen.",
-          "Alles löschen."
+          "Eine Person, die mich unterstützt.",
+          "Niemanden, ich muss alles allein lösen."
         ],
         "correct": 1
       },
       {
-        "question": "Du fühlst dich überfordert. Was hilft?",
+        "question": "Was solltest du bei Unsicherheit nicht tun?",
         "answers": [
-          "Mehr Daten eingeben.",
-          "Pause machen.",
-          "Schneller klicken."
+          "Unterstützung fragen.",
+          "Private Daten eingeben.",
+          "Eine Pause machen."
         ],
         "correct": 1
       },
       {
-        "question": "Du brauchst Unterstützung. Was ist richtig?",
+        "question": "Was kann helfen, wenn du Unterstützung brauchst?",
         "answers": [
-          "Ich darf jemanden fragen.",
-          "Ich darf nie nachfragen.",
-          "Ich muss alles allein können."
+          "Die Nachricht zeigen und erklären, was passiert ist.",
+          "Weitere Daten senden.",
+          "Alles löschen und nichts sagen."
         ],
         "correct": 0
       },
       {
-        "question": "Wo passt ein Problem mit der Lernplattform hin?",
+        "question": "Was bedeutet: Ich muss das nicht allein klären?",
         "answers": [
-          "In einen fremden Chat.",
-          "Zu meinen Bankdaten.",
-          "Zum Hilfe-Button."
+          "Ich darf nie nachfragen.",
+          "Ich muss schneller klicken.",
+          "Ich darf Unterstützung holen."
         ],
         "correct": 2
       }
@@ -5249,16 +5261,17 @@ const topics = [
       "Unterstützung holen"
     ],
     "helpQuestions": [
-      "Ist das ein Notfall?",
-      "Wen kann ich jetzt fragen?",
-      "Soll ich die Nachricht zeigen und Hilfe holen?"
+      "Was ist passiert?",
+      "Welche Nachricht oder Seite ist gemeint?",
+      "Hast du schon etwas angeklickt?",
+      "Welche Person kann dich jetzt unterstützen?"
     ],
     "memoryRules": [
       "Ich muss Probleme im Internet nicht allein lösen.",
       "Ich stoppe, wenn mir etwas komisch vorkommt.",
-      "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
-      "Ich frage eine Person, der ich vertraue.",
-      "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck."
+      "Ich gebe keine Daten ein, wenn ich unsicher bin.",
+      "Ich spreche mit einer Person, die mich unterstützt.",
+      "Ich nutze Hilfe im Wohnbereich, im Dienst oder bei einer Digital-Begleitung."
     ],
     "shortLessonIndexes": [
       0,
@@ -5286,6 +5299,7 @@ const topics = [
       ],
       "correct": 0,
       "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
-    }
+    },
+    "description": "Was du tun kannst, wenn im Internet etwas komisch, unangenehm oder unsicher ist."
   }
 ];
