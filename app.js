@@ -1,4 +1,120 @@
 
+let learningMode = "full";
+let activeLessonIndexes = null;
+
+function getStorageKey(topicId) {
+  return `lernplattform_progress_${topicId}_${learningMode}`;
+}
+
+function saveProgress() {
+  if (!currentTopicId) return;
+  try {
+    localStorage.setItem(getStorageKey(currentTopicId), JSON.stringify({
+      topicId: currentTopicId,
+      mode: learningMode,
+      step: currentStep,
+      savedAt: new Date().toISOString()
+    }));
+  } catch (e) {
+    // Speichern ist freiwillig. Wenn der Browser es blockiert, läuft die Seite trotzdem.
+  }
+}
+
+function loadProgress(topicId, mode) {
+  try {
+    const raw = localStorage.getItem(`lernplattform_progress_${topicId}_${mode}`);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function getActiveLessons(topic) {
+  if (!topic) return [];
+  if (learningMode === "short") {
+    const indexes = topic.shortLessonIndexes || [];
+    return indexes.map(index => topic.lessons[index]).filter(Boolean);
+  }
+  return topic.lessons || [];
+}
+
+function getOriginalStepIndex(topic, activeStepIndex) {
+  if (!topic) return activeStepIndex;
+  if (learningMode === "short") {
+    const indexes = topic.shortLessonIndexes || [];
+    return indexes[activeStepIndex] ?? activeStepIndex;
+  }
+  return activeStepIndex;
+}
+
+function startTopicMode(topicId, mode) {
+  currentTopicId = topicId;
+  learningMode = mode;
+  activeLessonIndexes = null;
+  const saved = loadProgress(topicId, mode);
+  const topic = topics.find(t => t.id === topicId);
+  const lessons = getActiveLessons(topic);
+  currentStep = saved && Number.isInteger(saved.step) && saved.step < lessons.length ? saved.step : 0;
+  renderStep();
+}
+
+function continueTopic(topicId, mode) {
+  currentTopicId = topicId;
+  learningMode = mode;
+  const saved = loadProgress(topicId, mode);
+  currentStep = saved && Number.isInteger(saved.step) ? saved.step : 0;
+  renderStep();
+}
+
+function renderMemoryCard(topicId) {
+  const topic = topics.find(t => t.id === topicId);
+  if (!topic) return;
+
+  appTitle.textContent = "Merk-Karte";
+  moduleLabel.textContent = topic.title;
+  stepLabel.textContent = "Druckkarte";
+  levelLabel.textContent = "Merken";
+  progressFill.style.width = "100%";
+  progressTrack.setAttribute("aria-valuenow", "100");
+
+  backButton.disabled = false;
+  nextButton.disabled = false;
+  nextButton.textContent = "Themenübersicht";
+
+  const rules = (topic.memoryRules || []).map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
+  const questions = (topic.helpQuestions || []).map(question => `<li>${escapeHtml(question)}</li>`).join("");
+
+  content.innerHTML = `
+    <article class="card memory-card">
+      <div class="memory-frame">
+        <div class="module-tag">Merk-Karte</div>
+        <h2>${escapeHtml(topic.title)}</h2>
+        <p class="memory-subtitle">Meine 3 wichtigsten Regeln</p>
+
+        <div class="memory-section">
+          <h3>Das merke ich mir:</h3>
+          <ol>${rules}</ol>
+        </div>
+
+        <div class="memory-section">
+          <h3>Das kann ich fragen:</h3>
+          <ul>${questions}</ul>
+        </div>
+
+        <p class="memory-help">Ich muss Probleme nicht allein lösen.</p>
+        <p>Ich kann eine Person fragen, der ich vertraue.</p>
+
+        <div class="certificate-actions">
+          <button class="quiz-link quiz-button" onclick="window.print()">Merk-Karte drucken</button>
+          <button class="nav-button secondary" onclick="renderMenu()">Zurück</button>
+        </div>
+      </div>
+    </article>
+  `;
+  content.focus();
+}
+
+
 let currentTopicId = null;
 let currentStep = 0;
 
@@ -123,6 +239,21 @@ function renderEvaluation() {
   content.focus();
 }
 
+
+function renderSavedProgressHint(topic) {
+  const full = loadProgress(topic.id, "full");
+  const short = loadProgress(topic.id, "short");
+  const parts = [];
+  if (short) {
+    parts.push(`<button class="continue-button" onclick="continueTopic('${topic.id}', 'short')">Weiterlernen: Kurz · Seite ${short.step + 1}</button>`);
+  }
+  if (full) {
+    parts.push(`<button class="continue-button" onclick="continueTopic('${topic.id}', 'full')">Weiterlernen: Ausführlich · Seite ${full.step + 1}</button>`);
+  }
+  if (!parts.length) return "";
+  return `<span class="saved-progress">${parts.join("")}</span>`;
+}
+
 function renderMenu() {
   currentTopicId = null;
   currentStep = 0;
@@ -140,13 +271,22 @@ function renderMenu() {
 
   let html = `
     <section class="menu-card">
-      <h2>Wähle ein Thema</h2>
+      <h2>Was möchtest du tun?</h2>
       <div class="poster-hint">
         <strong>Du kommst vielleicht von einem Lernposter.</strong><br>
         Du kannst ein Thema auswählen.<br>
         Du kannst später wiederkommen.
       </div>
-      <p>Lerne Schritt für Schritt. Mit Beispielen, Übungen und Merksätzen.</p>
+      <div class="start-choice-box">
+        <p><strong>1. Kurz lernen:</strong> die wichtigsten Seiten.</p>
+        <p><strong>2. Ausführlich lernen:</strong> alle Lernseiten.</p>
+        <p><strong>3. Quiz starten:</strong> Wissen testen.</p>
+        <p><strong>4. Merk-Karte:</strong> wichtige Regeln drucken.</p>
+      </div>
+      <div class="privacy-note">
+        Es wird kein Name gespeichert.
+        Der Lernstand wird nur auf diesem Gerät gemerkt.
+      </div>
       <div class="topic-grid">
   `;
 
@@ -158,9 +298,14 @@ function renderMenu() {
           <span class="topic-title">${escapeHtml(topic.title)}</span>
           <span class="topic-desc">${escapeHtml(topic.desc)} · etwa 10–15 Minuten</span>
           <span class="topic-actions">
-            <button class="topic-start-label" onclick="startTopic('${topic.id}')">Thema starten</button>
-            <button class="topic-quiz-label" onclick="startTopicQuiz('${topic.id}')">Quiz direkt starten</button>
+            <button class="topic-start-label" onclick="startTopicMode('${topic.id}', 'short')">Kurz lernen</button>
+            <button class="topic-start-label" onclick="startTopicMode('${topic.id}', 'full')">Ausführlich lernen</button>
+            <button class="topic-quiz-label" onclick="startTopicQuiz('${topic.id}')">Quiz starten</button>
+            <button class="topic-quiz-label" onclick="renderMemoryCard('${topic.id}')">Merk-Karte</button>
           </span>
+          <span class="topic-help-title">Das kannst du eine Person fragen, der du vertraust:</span>
+          <span class="topic-help-list">${(topic.helpQuestions || []).map(q => `• ${escapeHtml(q)}`).join("<br>")}</span>
+          ${renderSavedProgressHint(topic)}
           <img src="${topic.illustration}" alt="" class="topic-preview">
         </span>
       </section>
@@ -178,14 +323,13 @@ function renderMenu() {
 }
 
 function startTopic(topicId) {
-  currentTopicId = topicId;
-  currentStep = 0;
-  renderStep();
+  startTopicMode(topicId, "full");
 }
 
 
 function startTopicQuiz(topicId) {
   currentTopicId = topicId;
+  learningMode = "full";
   currentStep = 0;
   startQuiz();
 }
@@ -197,24 +341,27 @@ function renderStep() {
     return;
   }
 
-  const lesson = topic.lessons[currentStep];
-  const progress = ((currentStep + 1) / topic.lessons.length) * 100;
+  const lessons = getActiveLessons(topic);
+  const lesson = lessons[currentStep];
+  const total = lessons.length;
+  const progress = ((currentStep + 1) / total) * 100;
+  saveProgress();
 
   appTitle.textContent = topic.title;
   moduleLabel.textContent = lesson.module;
-  stepLabel.textContent = `Seite ${currentStep + 1} von ${topic.lessons.length}`;
+  stepLabel.textContent = `${learningMode === "short" ? "Kurz" : "Ausführlich"} · Seite ${currentStep + 1} von ${total}`;
   levelLabel.textContent = getLevelText(progress);
   progressFill.style.width = `${progress}%`;
   progressTrack.setAttribute("aria-valuenow", Math.round(progress));
 
   backButton.disabled = false;
   nextButton.disabled = false;
-  nextButton.textContent = currentStep === topic.lessons.length - 1 ? "Themenübersicht" : "Weiter";
+  nextButton.textContent = currentStep === total - 1 ? "Themenübersicht" : "Weiter";
 
   content.innerHTML = buildCard(lesson, topic);
   content.focus();
 
-  liveRegion.textContent = `${topic.title}. ${lesson.title}. Seite ${currentStep + 1} von ${topic.lessons.length}.`;
+  liveRegion.textContent = `${topic.title}. ${lesson.title}. Seite ${currentStep + 1} von ${total}.`;
 }
 
 function getLevelText(progress) {
@@ -228,6 +375,13 @@ function buildCard(lesson, topic) {
   let html = `
     <article class="card">
       <div class="module-tag">${escapeHtml(lesson.module)}</div>
+      <div class="mode-note">${learningMode === "short" ? "Kurz lernen" : "Ausführlich lernen"}</div>
+      <div class="audio-actions"><button class="audio-button" onclick="speakCurrentCard()">Vorlesen</button><button class="audio-button secondary" onclick="stopReading()">Stopp</button></div>
+      <div class="step-help-box">
+        <strong>Du bist unsicher?</strong><br>
+        Frage eine Person, der du vertraust:
+        <ul>${(topic.helpQuestions || []).map(q => `<li>${escapeHtml(q)}</li>`).join("")}</ul>
+      </div>
       <div class="card-header">
         <div class="icon" aria-hidden="true">${getIconHtml(lesson.icon)}</div>
         <h2>${escapeHtml(lesson.title)}</h2>

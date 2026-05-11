@@ -663,6 +663,32 @@ const topics = [
       "private Daten erkennen",
       "Daten sparsam teilen",
       "bei Unsicherheit Hilfe holen"
+    ],
+    "helpQuestions": [
+      "Muss ich diese Daten wirklich eingeben?",
+      "Ist diese Internet-Seite sicher?",
+      "Was passiert mit meinen Daten?"
+    ],
+    "memoryRules": [
+      "Ich gebe nur Daten ein, die wirklich nötig sind.",
+      "Passwörter und PINs bleiben geheim.",
+      "Bei Unsicherheit frage ich eine Person, der ich vertraue."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   },
   {
@@ -1327,6 +1353,32 @@ const topics = [
       "private Daten schützen",
       "komische Links erkennen",
       "bei Druck Hilfe holen"
+    ],
+    "helpQuestions": [
+      "Ist dieser Link sicher?",
+      "Soll ich diese Person blockieren?",
+      "Darf ich dieses Foto verschicken?"
+    ],
+    "memoryRules": [
+      "Ich klicke nicht sofort auf komische Links.",
+      "Ich verschicke keine privaten Daten im Chat.",
+      "Bei Druck hole ich Hilfe."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   },
   {
@@ -1991,6 +2043,32 @@ const topics = [
       "Profil und Beiträge prüfen",
       "fremde Anfragen einschätzen",
       "blockieren oder melden"
+    ],
+    "helpQuestions": [
+      "Wer kann diesen Beitrag sehen?",
+      "Soll ich diese Anfrage annehmen?",
+      "Soll ich diesen Kommentar melden?"
+    ],
+    "memoryRules": [
+      "Ich prüfe, wer meinen Beitrag sehen kann.",
+      "Ich nehme fremde Anfragen nicht sofort an.",
+      "Bei Beleidigungen kann ich blockieren oder melden."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   },
   {
@@ -2655,6 +2733,32 @@ const topics = [
       "Fotos bewusst posten",
       "Stories und Standort prüfen",
       "Nachrichten sicher einschätzen"
+    ],
+    "helpQuestions": [
+      "Darf ich dieses Foto posten?",
+      "Soll ich meinen Standort zeigen?",
+      "Was mache ich bei einer komischen Nachricht?"
+    ],
+    "memoryRules": [
+      "Ich frage vorher, bevor ich Fotos von anderen poste.",
+      "Ich teile meinen Standort nicht ohne Grund.",
+      "Likes sagen nichts über meinen Wert."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   },
   {
@@ -3319,6 +3423,32 @@ const topics = [
       "Videos und Quellen prüfen",
       "Werbung erkennen",
       "Kommentare vorsichtig nutzen"
+    ],
+    "helpQuestions": [
+      "Ist dieses Video glaubwürdig?",
+      "Ist das Werbung?",
+      "Soll ich diesen Kommentar melden?"
+    ],
+    "memoryRules": [
+      "Ich prüfe, ob ein Video glaubwürdig ist.",
+      "Ich erkenne Werbung und große Versprechen.",
+      "Ich mache Pausen."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   },
   {
@@ -3983,6 +4113,32 @@ const topics = [
       "Snaps bewusst senden",
       "Standort schützen",
       "bei Druck Nein sagen"
+    ],
+    "helpQuestions": [
+      "Kann dieser Snap gespeichert werden?",
+      "Soll ich meinen Standort teilen?",
+      "Was mache ich bei Druck zu privaten Bildern?"
+    ],
+    "memoryRules": [
+      "Snaps können gespeichert werden.",
+      "Ich teile meinen Standort nicht ohne Grund.",
+      "Ich darf Nein sagen."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   },
   {
@@ -4647,6 +4803,32 @@ const topics = [
       "Trends kritisch prüfen",
       "Pausen machen",
       "Kommentare und Werbung einschätzen"
+    ],
+    "helpQuestions": [
+      "Ist dieser Trend sicher?",
+      "Ist das Werbung oder echt?",
+      "Soll ich eine Pause machen?"
+    ],
+    "memoryRules": [
+      "Ich mache gefährliche Trends nicht mit.",
+      "Ich prüfe Werbung und Links.",
+      "Ich mache Pausen."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   },
   {
@@ -5319,6 +5501,32 @@ const topics = [
       "Stopp-Regel anwenden",
       "Beweise mit Hilfe sichern",
       "Unterstützung holen"
+    ],
+    "helpQuestions": [
+      "Ist das ein Notfall?",
+      "Wen kann ich jetzt fragen?",
+      "Soll ich die Nachricht zeigen und Hilfe holen?"
+    ],
+    "memoryRules": [
+      "Ich muss Probleme nicht allein lösen.",
+      "Ich kann eine Person fragen, der ich vertraue.",
+      "Bei Gefahr hole ich sofort Hilfe."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      5,
+      6,
+      11,
+      12,
+      18,
+      19,
+      25,
+      26,
+      31,
+      32,
+      37,
+      38
     ]
   }
 ];

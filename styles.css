@@ -1031,3 +1031,142 @@ button, a {
     gap: 12px;
   }
 }
+
+
+/* Selbstlernangebot Plus: Lernstand, Modi, Hilfe-Fragen, Merk-Karten */
+.start-choice-box,
+.privacy-note {
+  background: #fff;
+  border: 2px solid var(--blue-light);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.start-choice-box p {
+  margin: 6px 0;
+}
+
+.privacy-note {
+  font-weight: 700;
+  background: var(--blue-very-light);
+}
+
+.topic-help-title {
+  display: block;
+  margin-top: 12px;
+  font-weight: 800;
+}
+
+.topic-help-list {
+  display: block;
+  background: white;
+  border: 2px solid var(--blue-light);
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.saved-progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.continue-button {
+  border: 2px solid var(--success-border);
+  background: white;
+  color: var(--black);
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.continue-button:hover,
+.continue-button:focus-visible {
+  background: var(--success-border);
+  color: white;
+}
+
+.step-help-box {
+  background: var(--blue-very-light);
+  border-left: 6px solid var(--blue);
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+
+.step-help-box ul {
+  margin: 8px 0 0 0;
+  padding-left: 1.3rem;
+}
+
+.memory-frame {
+  border: 5px solid var(--blue);
+  border-radius: 22px;
+  padding: 24px;
+  background: white;
+}
+
+.memory-subtitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: var(--blue-very-light);
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.memory-section {
+  margin: 16px 0;
+  padding: 14px;
+  background: var(--blue-very-light);
+  border-radius: 16px;
+}
+
+.memory-section li {
+  margin: 8px 0;
+  font-size: 1.08rem;
+}
+
+.memory-help {
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+@media print {
+  .memory-frame {
+    min-height: 255mm;
+    border: 5px solid #3e96be;
+  }
+
+  .step-help-box,
+  .privacy-note,
+  .start-choice-box,
+  .topic-help-title,
+  .topic-help-list,
+  .saved-progress {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@media (max-width: 520px) {
+  .saved-progress,
+  .topic-actions {
+    flex-direction: column;
+  }
+}
+
+
+.mode-note {
+  display: inline-block;
+  background: var(--blue-very-light);
+  border: 2px solid var(--blue-light);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin: 8px 0;
+  font-weight: 800;
+}

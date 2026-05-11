@@ -275,3 +275,32 @@ Diese Version enthält zusätzliche Qualitätsfunktionen:
 - Zielgruppen-Testbogen / Rückmeldebogen
 - Vorlesen-Button über Browser-Sprachausgabe
 - QR-Poster-Hinweis auf der Startseite
+
+
+## Selbstlernangebot Plus
+
+Diese Version ergänzt fünf Funktionen:
+
+1. Lernstand speichern
+   - letzter Stand wird lokal im Browser gespeichert
+   - es wird kein Name gespeichert
+   - die Speicherung bleibt auf dem jeweiligen Gerät
+
+2. Kurzmodus und ausführlicher Modus
+   - Kurz lernen: wichtigste Seiten
+   - Ausführlich lernen: alle Lernseiten
+
+3. Themenspezifische Hilfe-Fragen
+   - pro Thema werden passende Fragen angezeigt
+   - Formulierung: eine Person fragen, der du vertraust
+
+4. Klarere Startseite
+   - Kurz lernen
+   - Ausführlich lernen
+   - Quiz starten
+   - Merk-Karte
+
+5. Druckbare Merk-Karte pro Thema
+   - drei wichtigste Regeln
+   - passende Hilfe-Fragen
+   - Druckfunktion
