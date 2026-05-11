@@ -1894,3 +1894,292 @@ body.view-menu .app-footer {
 .app {
   overflow: visible !important;
 }
+
+
+/* FINALER FIX: einheitliche Themenkarten und größere Logos
+   Ziel:
+   - Karten wirken gleichmäßiger
+   - Bilder haben gleiche Höhe
+   - Inhalte laufen nicht zufällig unterschiedlich auseinander
+   - Logos unten sind besser sichtbar
+*/
+
+/* Hauptbereich etwas breiter und ruhiger */
+.app {
+  max-width: 1180px !important;
+  width: min(1180px, 100%) !important;
+}
+
+/* Themenraster: zwei saubere Spalten am Desktop */
+.topic-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 22px !important;
+  align-items: stretch !important;
+}
+
+/* Themenkarten einheitlicher aufbauen */
+.topic-card,
+.topic-button.topic-card {
+  display: grid !important;
+  grid-template-columns: 56px minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: 16px !important;
+  min-width: 0 !important;
+  min-height: 650px !important;
+  height: 100% !important;
+  padding: 24px !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Inhaltsspalte darf nicht überlaufen */
+.topic-card > span,
+.topic-button.topic-card > span {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+/* Titelbereich einheitlicher */
+.topic-title {
+  display: block !important;
+  font-size: 1.22rem !important;
+  line-height: 1.2 !important;
+  margin-bottom: 6px !important;
+}
+
+.topic-desc {
+  display: block !important;
+  min-height: 44px !important;
+  line-height: 1.28 !important;
+}
+
+/* Aktionskarten kompakt und gleichmäßig */
+.topic-actions.action-card-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+
+.topic-actions.action-card-grid .action-card {
+  min-height: 78px !important;
+  max-height: 96px !important;
+  overflow: hidden !important;
+  padding: 11px 12px !important;
+  grid-template-columns: 42px minmax(0, 1fr) !important;
+}
+
+.topic-actions.action-card-grid .action-text strong {
+  font-size: 1rem !important;
+}
+
+.topic-actions.action-card-grid .action-text small {
+  font-size: 0.9rem !important;
+}
+
+.topic-actions.action-card-grid .action-text em {
+  font-size: 0.84rem !important;
+}
+
+/* Hilfe-Fragen einheitlicher */
+.topic-help-title {
+  display: block !important;
+  margin-top: 14px !important;
+  min-height: 38px !important;
+  line-height: 1.25 !important;
+}
+
+.topic-help-list {
+  min-height: 98px !important;
+  max-height: 118px !important;
+  overflow: hidden !important;
+  line-height: 1.35 !important;
+}
+
+/* Weiterlernen-Anzeige kompakter, damit einzelne Karten nicht riesig werden */
+.saved-progress {
+  display: block !important;
+  margin-top: 12px !important;
+}
+
+.continue-card {
+  padding: 10px !important;
+  margin-top: 8px !important;
+  min-height: 78px !important;
+}
+
+.continue-card .continue-button {
+  padding: 6px 10px !important;
+  margin-top: 8px !important;
+  font-size: 0.9rem !important;
+}
+
+/* Illustrationen auf der Übersicht gleich groß */
+.topic-preview {
+  display: block !important;
+  width: 100% !important;
+  height: 132px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin-top: 14px !important;
+  border-radius: 16px !important;
+  background: var(--blue-light) !important;
+}
+
+/* Wenn der Inhalt länger ist, bleibt die Karte stabiler */
+.topic-card img.topic-preview,
+.topic-button.topic-card img.topic-preview {
+  align-self: end !important;
+}
+
+/* Logos unten größer und sichtbarer */
+.app-footer,
+.brand-footer,
+.logos {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 24px !important;
+  padding: 24px 16px 32px !important;
+  margin-top: 24px !important;
+  background: transparent !important;
+}
+
+.app-footer img,
+.brand-footer img,
+.logos img {
+  max-height: 72px !important;
+  max-width: 260px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Falls Logos in kleinen Einzelboxen liegen */
+.app-footer a,
+.brand-footer a,
+.logos a,
+.app-footer .logo,
+.brand-footer .logo,
+.logos .logo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 150px !important;
+  min-height: 78px !important;
+}
+
+/* Auf kleineren Bildschirmen: eine Spalte, keine übergroßen Karten */
+@media (max-width: 900px) {
+  .topic-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .topic-card,
+  .topic-button.topic-card {
+    min-height: auto !important;
+  }
+
+  .topic-help-list {
+    min-height: auto !important;
+    max-height: none !important;
+  }
+
+  .topic-preview {
+    height: 150px !important;
+  }
+}
+
+/* Auf sehr breiten Bildschirmen stabil bleiben */
+@media (min-width: 1200px) {
+  .topic-card,
+  .topic-button.topic-card {
+    min-height: 670px !important;
+  }
+}
+
+/* Druck: Logos nicht winzig */
+@media print {
+  .app-footer img,
+  .brand-footer img,
+  .logos img,
+  .certificate-logos img {
+    max-height: 54px !important;
+    max-width: 220px !important;
+  }
+}
+
+
+/* FINALER FIX: Hover und Fokus klarer sichtbar
+   Grau war zu schwach. Interaktive Elemente bekommen nun einen deutlichen,
+   aber ruhigen Farbwechsel passend zur Farblogik.
+*/
+
+/* Themenkarte: sichtbarer Fokus statt grauem Effekt */
+.topic-card:hover,
+.topic-card:focus-within,
+.topic-button.topic-card:hover,
+.topic-button.topic-card:focus-within {
+  border-left-color: #3DB8B3 !important;
+  box-shadow: 0 16px 34px rgba(0, 40, 90, 0.20) !important;
+  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+/* Aktionskarten: deutlicher Farbwechsel pro Funktion */
+.topic-actions.action-card-grid .action-short:hover,
+.topic-actions.action-card-grid .action-short:focus-visible {
+  background: #BFEDEA !important;
+  border-color: #008C89 !important;
+  outline: 4px solid rgba(61, 184, 179, 0.40) !important;
+  outline-offset: 2px !important;
+}
+
+.topic-actions.action-card-grid .action-full:hover,
+.topic-actions.action-card-grid .action-full:focus-visible {
+  background: #014A86 !important;
+  border-color: #014A86 !important;
+  outline: 4px solid rgba(0, 40, 90, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+.topic-actions.action-card-grid .action-quiz:hover,
+.topic-actions.action-card-grid .action-quiz:focus-visible {
+  background: #CFEAD2 !important;
+  border-color: #1B6E20 !important;
+  outline: 4px solid rgba(46, 125, 50, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+.topic-actions.action-card-grid .action-memory:hover,
+.topic-actions.action-card-grid .action-memory:focus-visible {
+  background: #FFE39A !important;
+  border-color: #B88700 !important;
+  outline: 4px solid rgba(214, 164, 0, 0.38) !important;
+  outline-offset: 2px !important;
+}
+
+/* Normale Buttons ebenfalls farblich klarer */
+.quiz-button:hover,
+.quiz-button:focus-visible,
+.nav-button:hover,
+.nav-button:focus-visible,
+.continue-button:hover,
+.continue-button:focus-visible,
+.audio-button:hover,
+.audio-button:focus-visible {
+  filter: none !important;
+  box-shadow: 0 0 0 4px rgba(61, 184, 179, 0.35) !important;
+}
+
+/* Fokus per Tastatur besonders deutlich */
+button:focus-visible,
+a:focus-visible {
+  outline: 4px solid #3DB8B3 !important;
+  outline-offset: 3px !important;
+}
+
+/* Kein Rot bei Hover: Rot bleibt Warnfarbe. */

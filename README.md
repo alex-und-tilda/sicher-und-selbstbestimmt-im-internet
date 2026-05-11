@@ -173,3 +173,35 @@ In der Themenübersicht keine untere Navigation.
 Navigation nur auf Lernseiten, im Quiz, bei Urkunde und Druckseiten.
 Keine Überdeckung der Themenkarten.
 ```
+
+
+## Karten- und Logo-Fix
+
+Die Themenkarten wurden optisch vereinheitlicht.
+
+Korrekturen:
+
+```text
+gleichmäßigeres Kartenraster
+einheitlichere Kartenhöhe
+feste Bildhöhe
+kompaktere Aktionskarten
+kompaktere Weiterlernen-Anzeige
+größere Logos unten
+```
+
+
+## Hover- und Fokus-Fix
+
+Der graue Hover-Effekt wurde ersetzt.
+
+Neue Logik:
+
+```text
+Kurz lernen = stärkeres Türkis
+Ausführlich lernen = stärkeres Blau
+Quiz starten = stärkeres Grün
+Merk-Karte = stärkeres Gelb
+```
+
+Rot wird weiterhin nicht für Hover genutzt, sondern bleibt für Warnungen reserviert.
