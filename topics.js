@@ -545,7 +545,114 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/datenschutz.svg"
+    "illustration": "assets/illustrations/datenschutz.svg",
+    "quizQuestions": [
+      {
+        "question": "Eine Internet-Seite fragt nach deiner Adresse. Was machst du?",
+        "answers": [
+          "Ich trage alles sofort ein.",
+          "Ich prüfe erst, ob die Angabe nötig ist.",
+          "Ich schicke zusätzlich mein Passwort."
+        ],
+        "correct": 1,
+        "explanation": "Richtig. Deine Adresse ist privat. Gib sie nur an, wenn es wirklich nötig ist."
+      },
+      {
+        "question": "Welche Information ist besonders privat?",
+        "answers": [
+          "Deine PIN",
+          "Deine Lieblingsfarbe",
+          "Das Wetter"
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Eine PIN schützt Geräte oder Konten. Sie bleibt geheim."
+      },
+      {
+        "question": "Du möchtest ein Foto von einer anderen Person posten. Was ist richtig?",
+        "answers": [
+          "Ich frage die Person vorher.",
+          "Ich poste es heimlich.",
+          "Ich schreibe keinen Namen dazu, dann ist es immer okay."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Andere Personen müssen einverstanden sein, bevor du ein Foto teilst."
+      },
+      {
+        "question": "Eine App möchte deinen Standort wissen. Was machst du?",
+        "answers": [
+          "Ich erlaube es immer.",
+          "Ich prüfe, ob die App den Standort wirklich braucht.",
+          "Ich sende den Standort zusätzlich an Freunde."
+        ],
+        "correct": 1,
+        "explanation": "Richtig. Der Standort zeigt, wo du bist. Er sollte nur geteilt werden, wenn es nötig ist."
+      },
+      {
+        "question": "Jemand schreibt: „Schick mir dein Passwort. Ich helfe dir.“ Was machst du?",
+        "answers": [
+          "Ich schicke das Passwort.",
+          "Ich antworte nicht und hole Hilfe.",
+          "Ich schicke nur die Hälfte."
+        ],
+        "correct": 1,
+        "explanation": "Richtig. Passwörter werden nie verschickt. Hole Hilfe, wenn du unsicher bist."
+      },
+      {
+        "question": "Was bedeutet Daten sparsam teilen?",
+        "answers": [
+          "Nur Daten teilen, die wirklich nötig sind.",
+          "Alle Felder ausfüllen.",
+          "Daten an möglichst viele Menschen schicken."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Je weniger Daten du teilst, desto besser sind deine Daten geschützt."
+      },
+      {
+        "question": "Du bist bei einem Formular unsicher. Was ist eine gute Entscheidung?",
+        "answers": [
+          "Eine Fachkraft oder vertraute Person fragen.",
+          "Alles schnell ausfüllen.",
+          "Das Passwort als Sicherheit eintragen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Bei Unsicherheit ist Nachfragen eine sichere Entscheidung."
+      },
+      {
+        "question": "Was kann mit privaten Daten passieren?",
+        "answers": [
+          "Sie können missbraucht werden.",
+          "Sie sind immer ungefährlich.",
+          "Sie verschwinden immer sofort."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Private Daten können missbraucht werden. Deshalb ist Schutz wichtig."
+      },
+      {
+        "question": "Im Quiz sollst du einen Namen eingeben. Was ist besser?",
+        "answers": [
+          "Einen Spitznamen nutzen.",
+          "Den vollen Namen und die Adresse nutzen.",
+          "Das Passwort als Namen nutzen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Ein Spitzname schützt deine Privatsphäre."
+      },
+      {
+        "question": "Was ist der wichtigste Merksatz zum Datenschutz?",
+        "answers": [
+          "Meine Daten gehören mir.",
+          "Alle Daten gehören ins Internet.",
+          "Passwörter darf jeder wissen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Deine Daten gehören dir. Du entscheidest mit, was du teilst."
+      }
+    ],
+    "certificateGoals": [
+      "private Daten erkennen",
+      "Daten sparsam teilen",
+      "bei Unsicherheit Hilfe holen"
+    ]
   },
   {
     "id": "whatsapp",
@@ -1091,7 +1198,114 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/whatsapp.svg"
+    "illustration": "assets/illustrations/whatsapp.svg",
+    "quizQuestions": [
+      {
+        "question": "Eine unbekannte Person fragt nach deiner Adresse. Was machst du?",
+        "answers": [
+          "Adresse schicken.",
+          "Nicht schicken und Hilfe holen.",
+          "In eine Gruppe weiterleiten."
+        ],
+        "correct": 1,
+        "explanation": "Richtig. Deine Adresse ist privat. Unbekannte Personen bekommen sie nicht."
+      },
+      {
+        "question": "Du bekommst einen Link: „Du hast gewonnen. Klicke sofort.“ Was machst du?",
+        "answers": [
+          "Sofort klicken.",
+          "Nicht klicken und prüfen.",
+          "An alle Freunde weiterleiten."
+        ],
+        "correct": 1,
+        "explanation": "Richtig. Gewinn-Links können Betrug sein. Erst prüfen, dann handeln."
+      },
+      {
+        "question": "Jemand fordert ein privates Foto und sagt: „Sag es niemandem.“ Was ist das?",
+        "answers": [
+          "Ein Warnzeichen.",
+          "Immer sicher.",
+          "Eine Pflicht."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Geheimhaltung und Druck sind Warnzeichen."
+      },
+      {
+        "question": "Was ist in WhatsApp-Gruppen wichtig?",
+        "answers": [
+          "Viele können mitlesen.",
+          "Niemand kann mitlesen.",
+          "Private Daten gehören immer in Gruppen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. In Gruppen lesen viele Menschen mit. Schreibe dort besonders vorsichtig."
+      },
+      {
+        "question": "Welche Nachricht wirkt eher sicher?",
+        "answers": [
+          "„Hallo. Ich komme heute um 16 Uhr.“",
+          "„Schick sofort dein Passwort.“",
+          "„Klicke sofort, sonst passiert etwas.“"
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Die Nachricht ist klar, freundlich und macht keinen Druck."
+      },
+      {
+        "question": "Was machst du, wenn dich jemand beleidigt oder bedrängt?",
+        "answers": [
+          "Blockieren, melden oder Hilfe holen.",
+          "Zurück beleidigen.",
+          "Alles geheim halten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du darfst dich schützen und Hilfe holen."
+      },
+      {
+        "question": "Eine Sprachnachricht enthält private Informationen. Was ist wichtig?",
+        "answers": [
+          "Sie kann weitergeleitet werden.",
+          "Sie ist immer privat.",
+          "Niemand kann sie speichern."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Auch Sprachnachrichten können weitergeleitet werden."
+      },
+      {
+        "question": "Was bedeutet Stopp-Regel?",
+        "answers": [
+          "Nicht sofort antworten, prüfen, Hilfe holen.",
+          "Sofort klicken.",
+          "Alles allein lösen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Die Stopp-Regel schützt dich bei Unsicherheit."
+      },
+      {
+        "question": "Jemand will deine PIN im Chat. Was machst du?",
+        "answers": [
+          "Nicht schicken.",
+          "Schicken, wenn die Person nett wirkt.",
+          "In eine Gruppe posten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Eine PIN bleibt geheim."
+      },
+      {
+        "question": "Wer kann helfen, wenn du unsicher bist?",
+        "answers": [
+          "Fachkraft oder vertraute Person.",
+          "Nur die fremde Person.",
+          "Niemand."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du musst Probleme nicht allein lösen."
+      }
+    ],
+    "certificateGoals": [
+      "private Daten schützen",
+      "komische Links erkennen",
+      "bei Druck Hilfe holen"
+    ]
   },
   {
     "id": "facebook",
@@ -1637,7 +1851,114 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/facebook.svg"
+    "illustration": "assets/illustrations/facebook.svg",
+    "quizQuestions": [
+      {
+        "question": "Du möchtest schreiben: „Ich bin die ganze Woche nicht zu Hause.“ Was prüfst du?",
+        "answers": [
+          "Wer den Beitrag sehen kann.",
+          "Ob der Beitrag lustig ist.",
+          "Ob genug Emojis drin sind."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Öffentliche Beiträge können von vielen gesehen werden."
+      },
+      {
+        "question": "Welche Information gehört nicht öffentlich ins Profil?",
+        "answers": [
+          "Adresse.",
+          "Vorname.",
+          "Lieblingsmusik."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Die Adresse ist privat."
+      },
+      {
+        "question": "Eine fremde Person sendet eine Freundschaftsanfrage. Was machst du?",
+        "answers": [
+          "Erst prüfen oder ablehnen.",
+          "Immer annehmen.",
+          "Passwort schicken."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Fremde Anfragen müssen nicht angenommen werden."
+      },
+      {
+        "question": "Was ist bei Kommentaren wichtig?",
+        "answers": [
+          "Respektvoll schreiben.",
+          "Beleidigen.",
+          "Gerüchte verbreiten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Kommentare sollen andere nicht verletzen."
+      },
+      {
+        "question": "Du siehst einen beleidigenden Kommentar. Was kannst du tun?",
+        "answers": [
+          "Nicht mitstreiten, melden oder Hilfe holen.",
+          "Zurück beleidigen.",
+          "Die eigene Adresse posten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Nicht mitstreiten ist sicherer."
+      },
+      {
+        "question": "Du willst ein Foto von einer anderen Person posten. Was ist richtig?",
+        "answers": [
+          "Vorher fragen.",
+          "Einfach posten.",
+          "Nur später löschen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Andere Personen entscheiden über ihre Bilder mit."
+      },
+      {
+        "question": "Was bedeutet öffentlich bei einem Beitrag?",
+        "answers": [
+          "Viele Menschen können ihn sehen.",
+          "Nur du kannst ihn sehen.",
+          "Er verschwindet sofort."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Öffentlich bedeutet: sehr viele können mitlesen."
+      },
+      {
+        "question": "Jemand macht Druck und will Geld. Was machst du?",
+        "answers": [
+          "Nicht zahlen und Hilfe holen.",
+          "Sofort zahlen.",
+          "Bankdaten schicken."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Druck und Geldforderungen sind Warnzeichen."
+      },
+      {
+        "question": "Was darfst du bei Belästigung tun?",
+        "answers": [
+          "Blockieren und melden.",
+          "Alles geheim halten.",
+          "Zurück drohen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Blockieren und Melden kann schützen."
+      },
+      {
+        "question": "Was ist ein guter Facebook-Merksatz?",
+        "answers": [
+          "Ich prüfe, bevor ich teile.",
+          "Ich teile alles sofort.",
+          "Fremde bekommen alle Daten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Prüfen vor dem Teilen schützt dich."
+      }
+    ],
+    "certificateGoals": [
+      "Profil und Beiträge prüfen",
+      "fremde Anfragen einschätzen",
+      "blockieren oder melden"
+    ]
   },
   {
     "id": "instagram",
@@ -2183,7 +2504,114 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/instagram.svg"
+    "illustration": "assets/illustrations/instagram.svg",
+    "quizQuestions": [
+      {
+        "question": "Du willst ein Foto posten, auf dem eine andere Person zu sehen ist. Was machst du?",
+        "answers": [
+          "Vorher fragen.",
+          "Einfach posten.",
+          "Person markieren, ohne zu fragen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Andere Personen müssen einverstanden sein."
+      },
+      {
+        "question": "Warum ist Standort in Stories sensibel?",
+        "answers": [
+          "Er zeigt, wo du bist.",
+          "Er macht dich automatisch sicher.",
+          "Er ist immer egal."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Der Standort kann verraten, wo du bist."
+      },
+      {
+        "question": "Was bedeutet ein privates Profil?",
+        "answers": [
+          "Nicht alle können alles sehen.",
+          "Alle sehen alles.",
+          "Niemand kann die App nutzen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Ein privates Profil kann besser schützen."
+      },
+      {
+        "question": "Jemand schreibt: „Schick mir ein privates Foto.“ Was machst du?",
+        "answers": [
+          "Nein sagen und Hilfe holen.",
+          "Foto schicken.",
+          "Geheim halten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du musst keine privaten Fotos schicken."
+      },
+      {
+        "question": "Was ist bei Likes wichtig?",
+        "answers": [
+          "Likes sagen nichts über deinen Wert.",
+          "Likes entscheiden alles.",
+          "Ohne Likes bist du falsch."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Dein Wert hängt nicht von Likes ab."
+      },
+      {
+        "question": "Eine Story verschwindet später. Ist sie deshalb immer sicher?",
+        "answers": [
+          "Nein, jemand kann sie speichern.",
+          "Ja, immer.",
+          "Nur bei Fremden."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Auch Stories können per Screenshot gespeichert werden."
+      },
+      {
+        "question": "Was machst du bei beleidigenden Kommentaren?",
+        "answers": [
+          "Nicht mitstreiten, blockieren oder melden.",
+          "Zurück beleidigen.",
+          "Private Daten posten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du darfst dich schützen."
+      },
+      {
+        "question": "Eine Nachricht macht Druck: „Klicke sofort auf den Link.“ Was machst du?",
+        "answers": [
+          "Nicht sofort klicken.",
+          "Sofort klicken.",
+          "An alle weiterleiten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Druck und Links sind Warnzeichen."
+      },
+      {
+        "question": "Was ist eine gute Instagram-Regel?",
+        "answers": [
+          "Vor dem Posten überlegen.",
+          "Alles sofort posten.",
+          "Standort immer zeigen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Vorher überlegen schützt dich und andere."
+      },
+      {
+        "question": "Wer kann helfen, wenn dich etwas belastet?",
+        "answers": [
+          "Fachkraft oder vertraute Person.",
+          "Nur fremde Follower.",
+          "Niemand."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Hilfe holen ist erlaubt."
+      }
+    ],
+    "certificateGoals": [
+      "Fotos bewusst posten",
+      "Stories und Standort prüfen",
+      "Nachrichten sicher einschätzen"
+    ]
   },
   {
     "id": "youtube",
@@ -2729,7 +3157,114 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/youtube.svg"
+    "illustration": "assets/illustrations/youtube.svg",
+    "quizQuestions": [
+      {
+        "question": "Was solltest du bei einem Video prüfen?",
+        "answers": [
+          "Quelle und Inhalt.",
+          "Nur die Lautstärke.",
+          "Nur die Farbe."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Quelle und Inhalt helfen beim Einschätzen."
+      },
+      {
+        "question": "Was will Werbung oft?",
+        "answers": [
+          "Etwas verkaufen.",
+          "Immer nur helfen.",
+          "Nie beeinflussen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Werbung will oft zum Kaufen bewegen."
+      },
+      {
+        "question": "Ein Video sagt: „Kaufe sofort, dann wirst du reich.“ Was ist das?",
+        "answers": [
+          "Ein Warnzeichen.",
+          "Immer richtig.",
+          "Eine sichere Hilfe."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Große Versprechen und Druck sind Warnzeichen."
+      },
+      {
+        "question": "Was machst du bei Hass-Kommentaren?",
+        "answers": [
+          "Nicht mitstreiten, melden oder Hilfe holen.",
+          "Zurück beleidigen.",
+          "Adresse posten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Nicht mitstreiten ist sicherer."
+      },
+      {
+        "question": "Warum sind Pausen wichtig?",
+        "answers": [
+          "Videos können lange fesseln.",
+          "Pausen sind verboten.",
+          "YouTube darf nie genutzt werden."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Pausen helfen beim bewussten Nutzen."
+      },
+      {
+        "question": "Was machst du bei falschen Informationen?",
+        "answers": [
+          "Prüfen und nachfragen.",
+          "Sofort glauben.",
+          "An alle schicken."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Nicht alles im Internet stimmt."
+      },
+      {
+        "question": "Was solltest du nicht in Kommentare schreiben?",
+        "answers": [
+          "Private Daten.",
+          "Danke.",
+          "Eine freundliche Frage."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Private Daten gehören nicht in Kommentare."
+      },
+      {
+        "question": "Ein Kanal fordert dein Passwort. Was machst du?",
+        "answers": [
+          "Nicht senden.",
+          "Senden.",
+          "In die Kommentare schreiben."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Passwörter bleiben geheim."
+      },
+      {
+        "question": "Was kannst du bei problematischen Videos tun?",
+        "answers": [
+          "Melden oder Hilfe holen.",
+          "Alles nachmachen.",
+          "Private Daten senden."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Melden und Hilfe holen sind Schutzmöglichkeiten."
+      },
+      {
+        "question": "Was ist ein guter YouTube-Merksatz?",
+        "answers": [
+          "Ich prüfe, bevor ich glaube.",
+          "Jedes Video ist wahr.",
+          "Werbung ist immer Rat."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Prüfen ist wichtig."
+      }
+    ],
+    "certificateGoals": [
+      "Videos und Quellen prüfen",
+      "Werbung erkennen",
+      "Kommentare vorsichtig nutzen"
+    ]
   },
   {
     "id": "snapchat",
@@ -3275,7 +3810,114 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/snapchat.svg"
+    "illustration": "assets/illustrations/snapchat.svg",
+    "quizQuestions": [
+      {
+        "question": "Verschwinden Snaps immer sicher?",
+        "answers": [
+          "Nein, sie können gespeichert werden.",
+          "Ja, immer.",
+          "Nur bei Freunden."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Screenshots oder andere Geräte können Inhalte speichern."
+      },
+      {
+        "question": "Warum ist der Standort sensibel?",
+        "answers": [
+          "Er zeigt, wo du bist.",
+          "Er ist immer unwichtig.",
+          "Er schützt automatisch."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Standortdaten sind privat."
+      },
+      {
+        "question": "Jemand fordert ein privates Foto. Was machst du?",
+        "answers": [
+          "Nein sagen und Hilfe holen.",
+          "Foto schicken.",
+          "Geheim halten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du musst keine privaten Fotos senden."
+      },
+      {
+        "question": "Was machst du bei fremden Kontakten?",
+        "answers": [
+          "Prüfen oder ablehnen.",
+          "Immer annehmen.",
+          "Adresse senden."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du darfst Kontakte ablehnen."
+      },
+      {
+        "question": "Was kann bei einem Screenshot passieren?",
+        "answers": [
+          "Ein Snap wird gespeichert.",
+          "Alles wird sicher gelöscht.",
+          "Niemand kann etwas sehen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Screenshots können Inhalte festhalten."
+      },
+      {
+        "question": "Was ist eine sichere Regel beim Senden?",
+        "answers": [
+          "Nur senden, womit ich mich wohl fühle.",
+          "Alles senden.",
+          "Standort immer teilen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du entscheidest, was du sendest."
+      },
+      {
+        "question": "Eine Person schreibt: „Sag es niemandem.“ Was ist das?",
+        "answers": [
+          "Ein Warnzeichen.",
+          "Immer sicher.",
+          "Eine Pflicht."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Geheimhaltung kann ein Warnzeichen sein."
+      },
+      {
+        "question": "Was kannst du bei Belästigung tun?",
+        "answers": [
+          "Blockieren, melden oder Hilfe holen.",
+          "Zurück drohen.",
+          "Alles verschweigen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du darfst dich schützen."
+      },
+      {
+        "question": "Was bedeutet Nein sagen?",
+        "answers": [
+          "Ich darf etwas ablehnen.",
+          "Ich muss alles machen.",
+          "Ich darf keine Hilfe holen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Nein sagen ist erlaubt."
+      },
+      {
+        "question": "Wer kann helfen?",
+        "answers": [
+          "Fachkraft oder vertraute Person.",
+          "Nur Fremde.",
+          "Niemand."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Vertraute Menschen können unterstützen."
+      }
+    ],
+    "certificateGoals": [
+      "Snaps bewusst senden",
+      "Standort schützen",
+      "bei Druck Nein sagen"
+    ]
   },
   {
     "id": "tiktok",
@@ -3821,7 +4463,114 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/tiktok.svg"
+    "illustration": "assets/illustrations/tiktok.svg",
+    "quizQuestions": [
+      {
+        "question": "Ein Trend fordert eine gefährliche Handlung. Was machst du?",
+        "answers": [
+          "Nicht mitmachen und Hilfe holen.",
+          "Sofort mitmachen.",
+          "Andere dazu drängen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Gefährliche Trends machst du nicht mit."
+      },
+      {
+        "question": "Warum sind Pausen wichtig?",
+        "answers": [
+          "TikTok kann lange fesseln.",
+          "Pausen sind verboten.",
+          "Videos sind immer falsch."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Pausen helfen beim bewussten Nutzen."
+      },
+      {
+        "question": "Was solltest du bei Werbung tun?",
+        "answers": [
+          "Prüfen und keine Daten eingeben.",
+          "Sofort kaufen.",
+          "Passwort senden."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Werbung und Links müssen geprüft werden."
+      },
+      {
+        "question": "Was machst du bei Hass-Kommentaren?",
+        "answers": [
+          "Blockieren oder melden.",
+          "Zurück beleidigen.",
+          "Private Daten posten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Blockieren oder Melden kann schützen."
+      },
+      {
+        "question": "Was macht der Algorithmus?",
+        "answers": [
+          "Er zeigt oft ähnliche Videos.",
+          "Er schützt immer vor Gefahr.",
+          "Er löscht alle schlechten Videos."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Der Algorithmus zeigt oft mehr von dem, was du anschaust."
+      },
+      {
+        "question": "Ein Video sagt: „Klicke sofort, sonst verpasst du alles.“ Was ist das?",
+        "answers": [
+          "Druck.",
+          "Immer sicher.",
+          "Eine Pflicht."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Druck ist ein Warnzeichen."
+      },
+      {
+        "question": "Was solltest du in Kommentaren nicht schreiben?",
+        "answers": [
+          "Private Daten.",
+          "Danke.",
+          "Eine freundliche Frage."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Private Daten gehören nicht in Kommentare."
+      },
+      {
+        "question": "Was ist bei Trends wichtig?",
+        "answers": [
+          "Vorher überlegen.",
+          "Immer mitmachen.",
+          "Nie Hilfe holen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Nicht jeder Trend ist gut."
+      },
+      {
+        "question": "Jemand will ein privates Video von dir. Was machst du?",
+        "answers": [
+          "Nein sagen und Hilfe holen.",
+          "Video schicken.",
+          "Geheim halten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du entscheidest über deine Videos."
+      },
+      {
+        "question": "Was ist ein guter TikTok-Merksatz?",
+        "answers": [
+          "Ich prüfe Trends und mache Pausen.",
+          "Ich mache alles nach.",
+          "Ich teile alle Daten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Prüfen und Pausen helfen."
+      }
+    ],
+    "certificateGoals": [
+      "Trends kritisch prüfen",
+      "Pausen machen",
+      "Kommentare und Werbung einschätzen"
+    ]
   },
   {
     "id": "hilfe",
@@ -4375,6 +5124,113 @@ const topics = [
         "module": "Modul 6: Schutz und Hilfe"
       }
     ],
-    "illustration": "assets/illustrations/hilfe.svg"
+    "illustration": "assets/illustrations/hilfe.svg",
+    "quizQuestions": [
+      {
+        "question": "Was ist die Stopp-Regel?",
+        "answers": [
+          "Nicht sofort antworten, prüfen, Hilfe holen.",
+          "Sofort klicken.",
+          "Alles allein lösen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Stopp, prüfen und Hilfe holen schützt dich."
+      },
+      {
+        "question": "Jemand schreibt: „Sag niemandem davon.“ Was ist das?",
+        "answers": [
+          "Ein Warnzeichen.",
+          "Immer sicher.",
+          "Eine Hilfe."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Geheimhaltung und Druck sind Warnzeichen."
+      },
+      {
+        "question": "Wer kann helfen?",
+        "answers": [
+          "Fachkraft oder vertraute Person.",
+          "Nur Fremde.",
+          "Niemand."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Vertraute Menschen können helfen."
+      },
+      {
+        "question": "Was machst du bei akuter Gefahr?",
+        "answers": [
+          "Sofort Hilfe holen oder 110.",
+          "Warten.",
+          "Alles löschen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Bei Gefahr zählt schnelle Hilfe."
+      },
+      {
+        "question": "Was ist wichtig bei Beweisen?",
+        "answers": [
+          "Nachricht zeigen und nicht allein handeln.",
+          "Alles sofort löschen.",
+          "Nie darüber sprechen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Nachrichten können helfen, ein Problem zu klären."
+      },
+      {
+        "question": "Was machst du bei Druck?",
+        "answers": [
+          "Nicht allein antworten.",
+          "Alles machen.",
+          "Passwort schicken."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Bei Druck nicht allein handeln."
+      },
+      {
+        "question": "Was darfst du bei Belästigung tun?",
+        "answers": [
+          "Blockieren, melden oder Hilfe holen.",
+          "Zurück beleidigen.",
+          "Alles geheim halten."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Schutz und Hilfe sind erlaubt."
+      },
+      {
+        "question": "Was bedeutet Hilfe holen?",
+        "answers": [
+          "Ich suche Unterstützung.",
+          "Ich bin schuld.",
+          "Ich darf nicht fragen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Hilfe holen ist eine gute Entscheidung."
+      },
+      {
+        "question": "Eine Nachricht macht dir Angst. Was ist gut?",
+        "answers": [
+          "Fachkraft oder vertraute Person fragen.",
+          "Sofort allein antworten.",
+          "Alles löschen und schweigen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du musst das nicht allein klären."
+      },
+      {
+        "question": "Was ist der wichtigste Merksatz?",
+        "answers": [
+          "Ich bin nicht allein.",
+          "Ich muss alles allein lösen.",
+          "Ich darf nie Hilfe holen."
+        ],
+        "correct": 0,
+        "explanation": "Richtig. Du bist nicht allein."
+      }
+    ],
+    "certificateGoals": [
+      "Stopp-Regel anwenden",
+      "Beweise mit Hilfe sichern",
+      "Unterstützung holen"
+    ]
   }
 ];

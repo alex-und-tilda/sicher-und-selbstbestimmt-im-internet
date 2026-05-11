@@ -195,3 +195,40 @@ assets/illustrations/hilfe.svg
 Die Bilder sind bewusst keine echten App-Screenshots.
 Sie sind neutrale Smartphone-Mockups.
 Das ist langlebiger, rechtlich unkritischer und didaktisch ruhiger.
+
+
+## Eigenes Quiz und Urkunde
+
+Diese Version nutzt kein Kahoot mehr als Hauptquiz.
+Jedes Thema enthält ein eigenes Quiz direkt in der Lernplattform.
+
+Pro Thema gibt es:
+
+- 5 Quizfragen
+- direkte Rückmeldung nach jeder Antwort
+- Ergebnisanzeige
+- druckbare Urkunde
+
+Die Urkunde wird über die Browser-Druckfunktion erstellt:
+
+```text
+Urkunde drucken
+```
+
+Dabei werden Header, Navigation und Footer ausgeblendet.
+
+
+## Professionelles Quiz – Version 2
+
+Das Quiz wurde fachlich erweitert:
+
+- 10 Fragen pro Thema
+- alltagsnahe Situationsfragen
+- 3 Antwortmöglichkeiten pro Frage
+- klare Rückmeldung mit Begründung
+- Bestehensgrenze: mindestens 60 Prozent
+- Urkunde nur bei bestandenem Quiz
+- bei nicht bestandenem Quiz: Wiederholen statt Urkunde
+
+Pro Thema sind 10 Fragen enthalten.
+Bei 8 Themen sind das insgesamt 80 Quizfragen.

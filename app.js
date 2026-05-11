@@ -159,7 +159,7 @@ function buildCard(lesson, topic) {
         <p>Du hast dieses Thema beendet.</p>
         <p>Du kannst die wichtigsten Regeln wiederholen oder das Quiz starten.</p>
       </div>
-      <a class="quiz-link" href="${topic.quiz}" target="_blank" rel="noopener noreferrer">Quiz starten</a>
+      <button class="quiz-link quiz-button" onclick="startQuiz()">Quiz starten</button>
     `;
   }
 
@@ -241,6 +241,218 @@ function getIconHtml(iconName) {
   const safeIconName = String(iconName).replace(/[^a-z0-9_-]/gi, "");
 
   return `<img src="assets/icons/${safeIconName}.svg" alt="" class="icon-svg" onerror="this.style.display='none'">`;
+}
+
+
+let quizMode = false;
+let quizIndex = 0;
+let quizScore = 0;
+let quizAnswers = [];
+
+function startQuiz() {
+  const topic = getCurrentTopic();
+  if (!topic || !topic.quizQuestions) return;
+
+  quizMode = true;
+  quizIndex = 0;
+  quizScore = 0;
+  quizAnswers = [];
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const topic = getCurrentTopic();
+  if (!topic) {
+    renderMenu();
+    return;
+  }
+
+  const total = topic.quizQuestions.length;
+  const progress = ((quizIndex + 1) / total) * 100;
+
+  appTitle.textContent = topic.title;
+  moduleLabel.textContent = "Quiz";
+  stepLabel.textContent = `Frage ${quizIndex + 1} von ${total}`;
+  levelLabel.textContent = "Quiz";
+  progressFill.style.width = `${progress}%`;
+  progressTrack.setAttribute("aria-valuenow", Math.round(progress));
+
+  backButton.disabled = true;
+  nextButton.disabled = true;
+  nextButton.textContent = "Weiter";
+
+  const q = topic.quizQuestions[quizIndex];
+
+  let html = `
+    <article class="card quiz-card">
+      <div class="module-tag">Quiz: ${escapeHtml(topic.title)}</div>
+      <div class="card-header">
+        <div class="icon" aria-hidden="true">${getIconHtml("quiz")}</div>
+        <h2>Frage ${quizIndex + 1}</h2>
+      </div>
+      <p class="quiz-question">${escapeHtml(q.question)}</p>
+      <div class="choice-list">
+  `;
+
+  q.answers.forEach((answer, index) => {
+    html += `
+      <button class="choice-button" onclick="answerQuiz(${index})">
+        ${escapeHtml(answer)}
+      </button>
+    `;
+  });
+
+  html += `
+      </div>
+    </article>
+  `;
+
+  content.innerHTML = html;
+  content.focus();
+  liveRegion.textContent = `Quiz. Frage ${quizIndex + 1} von ${total}.`;
+}
+
+function answerQuiz(answerIndex) {
+  const topic = getCurrentTopic();
+  if (!topic) return;
+
+  const q = topic.quizQuestions[quizIndex];
+  const isCorrect = answerIndex === q.correct;
+
+  if (isCorrect) quizScore += 1;
+
+  quizAnswers.push({
+    question: q.question,
+    answer: q.answers[answerIndex],
+    correctAnswer: q.answers[q.correct],
+    isCorrect,
+    explanation: q.explanation
+  });
+
+  renderQuizFeedback(isCorrect, q.explanation);
+}
+
+function renderQuizFeedback(isCorrect, explanation) {
+  const topic = getCurrentTopic();
+  const total = topic.quizQuestions.length;
+
+  const feedbackClass = isCorrect ? "success" : "warning";
+  const feedbackTitle = isCorrect ? "Richtig." : "Nicht ganz.";
+
+  content.innerHTML = `
+    <article class="card quiz-card">
+      <div class="module-tag">Quiz: ${escapeHtml(topic.title)}</div>
+      <div class="card-header">
+        <div class="icon" aria-hidden="true">${getIconHtml(isCorrect ? "check" : "warning")}</div>
+        <h2>${feedbackTitle}</h2>
+      </div>
+
+      <div class="feedback ${feedbackClass}">
+        ${escapeHtml(explanation)}
+      </div>
+
+      <button class="quiz-link quiz-button" onclick="nextQuizQuestion()">
+        ${quizIndex + 1 >= total ? "Ergebnis anzeigen" : "Nächste Frage"}
+      </button>
+    </article>
+  `;
+
+  content.focus();
+}
+
+function nextQuizQuestion() {
+  const topic = getCurrentTopic();
+  if (!topic) return;
+
+  if (quizIndex + 1 >= topic.quizQuestions.length) {
+    renderQuizResult();
+  } else {
+    quizIndex += 1;
+    renderQuiz();
+  }
+}
+
+function renderQuizResult() {
+  const topic = getCurrentTopic();
+  if (!topic) return;
+
+  const total = topic.quizQuestions.length;
+  const percent = Math.round((quizScore / total) * 100);
+  const needed = Math.ceil(total * 0.6);
+  const passed = quizScore >= needed;
+
+  appTitle.textContent = topic.title;
+  moduleLabel.textContent = "Quiz abgeschlossen";
+  stepLabel.textContent = `Ergebnis: ${quizScore} von ${total}`;
+  levelLabel.textContent = passed ? "Bestanden" : "Wiederholen";
+  progressFill.style.width = "100%";
+  progressTrack.setAttribute("aria-valuenow", "100");
+
+  backButton.disabled = false;
+  nextButton.disabled = false;
+  nextButton.textContent = "Themenübersicht";
+
+  const goals = (topic.certificateGoals || []).map(goal => `<li>✓ ${escapeHtml(goal)}</li>`).join("");
+
+  if (passed) {
+    content.innerHTML = `
+      <article class="card certificate-card" id="certificateArea">
+        <div class="module-tag">Urkunde</div>
+        <div class="card-header">
+          <div class="icon" aria-hidden="true">${getIconHtml("check")}</div>
+          <h2>Erfolgreich abgeschlossen.</h2>
+        </div>
+
+        <p>Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> erfolgreich abgeschlossen.</p>
+        <p>Dein Ergebnis: <strong>${quizScore} von ${total} richtig</strong> (${percent}%).</p>
+
+        <div class="completion-box">
+          <h3>Das hast du gelernt:</h3>
+          <ul>${goals}</ul>
+        </div>
+
+        <p class="certificate-note">Name eintragen:</p>
+        <div class="certificate-name-line"></div>
+
+        <p class="certificate-note">Datum:</p>
+        <p>${new Date().toLocaleDateString("de-DE")}</p>
+
+        <div class="certificate-actions">
+          <button class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
+          <button class="nav-button secondary" onclick="restartQuiz()">Quiz wiederholen</button>
+        </div>
+      </article>
+    `;
+  } else {
+    content.innerHTML = `
+      <article class="card quiz-card">
+        <div class="module-tag">Quiz-Ergebnis</div>
+        <div class="card-header">
+          <div class="icon" aria-hidden="true">${getIconHtml("remember")}</div>
+          <h2>Gut geübt.</h2>
+        </div>
+
+        <p>Du hast <strong>${quizScore} von ${total}</strong> Fragen richtig beantwortet.</p>
+        <p>Für die Urkunde brauchst du mindestens <strong>${needed} richtige Antworten</strong>.</p>
+
+        <div class="feedback info">
+          Wiederholen ist normal. Du kannst das Thema noch einmal anschauen oder das Quiz direkt wiederholen.
+        </div>
+
+        <div class="certificate-actions">
+          <button class="quiz-link quiz-button" onclick="restartQuiz()">Quiz wiederholen</button>
+          <button class="nav-button secondary" onclick="renderStep()">Zur Lernseite zurück</button>
+        </div>
+      </article>
+    `;
+  }
+
+  quizMode = false;
+  content.focus();
+}
+
+function restartQuiz() {
+  startQuiz();
 }
 
 function escapeHtml(value) {

@@ -693,3 +693,107 @@ button, a {
     max-height: 160px;
   }
 }
+
+
+/* Eigenes Quiz und druckbare Urkunde */
+.quiz-button {
+  border: 0;
+  cursor: pointer;
+}
+
+.quiz-question {
+  font-size: 1.32rem;
+  font-weight: 700;
+  background: var(--blue-very-light);
+  border-left: 6px solid var(--blue);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.certificate-card {
+  border-left-color: var(--success-border);
+}
+
+.certificate-name-line {
+  height: 42px;
+  border-bottom: 2px solid var(--black);
+  margin: 4px 0 14px 0;
+}
+
+.certificate-note {
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+.certificate-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .app-header,
+  .progress-area,
+  .nav,
+  .app-footer {
+    display: none !important;
+  }
+
+  .app {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  .content {
+    display: block;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 4px solid #3e96be;
+    max-height: none;
+    min-height: 260mm;
+    page-break-inside: avoid;
+  }
+
+  .certificate-actions {
+    display: none;
+  }
+
+  .certificate-card h2 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificate-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Professionelleres Quiz */
+.quiz-card .choice-button {
+  min-height: 58px;
+}
+
+.quiz-card .feedback,
+.certificate-card .completion-box {
+  font-size: 1.08rem;
+}
+
+.certificate-card {
+  border-left-color: var(--success-border);
+}
+
+@media print {
+  .certificate-card {
+    border: 4px solid #3e96be;
+  }
+}
