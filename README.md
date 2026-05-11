@@ -121,3 +121,37 @@ Quiz starten
 10 Fragen beantworten.
 Habe ich das verstanden?
 ```
+
+
+## Fix Aktionskarten-Farben
+
+Die Farben der vier Aktionskarten wurden final eindeutig gesetzt:
+
+```text
+Kurz lernen = helles Türkis
+Ausführlich lernen = Dunkelblau
+Quiz starten = helles Grün
+Merk-Karte = helles Gelb
+```
+
+Die alten allgemeinen Button-Regeln können diese Farben nicht mehr überlagern.
+
+
+## Layout-Fix für Aktionskarten
+
+Die Aktionskarten wurden kompakter gesetzt.
+
+Problem vorher:
+```text
+Die vier Karten waren zu breit.
+Die Themenkarte wurde gesprengt.
+Es entstand ein waagerechter Scrollbalken.
+```
+
+Korrektur:
+```text
+Aktionskarten stehen jetzt untereinander.
+Keine abgeschnittenen Karten.
+Keine waagerechte Verschiebung.
+Bessere Smartphone-Ansicht.
+```
