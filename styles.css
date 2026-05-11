@@ -2183,3 +2183,197 @@ a:focus-visible {
 }
 
 /* Kein Rot bei Hover: Rot bleibt Warnfarbe. */
+
+
+/* Zwei-Stufen-Menü: erst Thema, dann Aktion */
+.simplified-menu {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.simple-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.simple-topic-card {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  min-height: 104px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 3px solid var(--gray);
+  border-left: 8px solid var(--blue);
+  background: #FFFFFF;
+  color: var(--black);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0, 40, 90, 0.08);
+  box-sizing: border-box;
+}
+
+.simple-topic-card strong {
+  display: block;
+  font-size: 1.18rem;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.simple-topic-card small {
+  display: block;
+  font-size: 0.98rem;
+  line-height: 1.28;
+}
+
+.simple-topic-card:hover,
+.simple-topic-card:focus-visible {
+  border-color: var(--blue-mid);
+  border-left-color: var(--blue-mid);
+  background: var(--blue-light);
+  outline: 4px solid rgba(61, 184, 179, 0.35);
+  outline-offset: 2px;
+}
+
+.central-progress-box {
+  background: var(--success-light);
+  border: 3px solid var(--success);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 16px 0;
+  font-size: 1.02rem;
+}
+
+.central-progress-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.topic-choice-screen {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.plain-back-button {
+  border: 2px solid var(--gray);
+  background: #FFFFFF;
+  color: var(--black);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.plain-back-button:hover,
+.plain-back-button:focus-visible {
+  background: var(--blue-light);
+  border-color: var(--blue-mid);
+}
+
+.choice-header {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 18px;
+  align-items: center;
+  background: #FFFFFF;
+  border: 3px solid var(--blue-light);
+  border-left: 8px solid var(--blue);
+  border-radius: 22px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+
+.topic-icon.large {
+  width: 64px;
+  height: 64px;
+}
+
+.topic-choice-actions.action-card-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin-top: 14px !important;
+}
+
+.topic-choice-actions.action-card-grid .action-card {
+  min-height: 118px !important;
+}
+
+.topic-help-panel {
+  margin-top: 18px;
+  background: var(--hint);
+  border: 3px solid var(--hint-border);
+  border-radius: 18px;
+  padding: 16px 18px;
+}
+
+.topic-help-panel h3 {
+  margin-top: 0;
+}
+
+.topic-help-panel li {
+  margin: 8px 0;
+}
+
+.choice-illustration {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  background: var(--blue-light);
+  border-radius: 18px;
+  margin-top: 18px;
+}
+
+/* Alte Startseiten-Elemente aus dem Ein-Stufen-Menü sicher ausblenden, falls Browser-Cache mischt */
+body.view-menu .topic-grid {
+  display: none;
+}
+
+/* Mobile Prüfung: eine Spalte, große Tippflächen, keine Überladung */
+@media (max-width: 760px) {
+  .simple-topic-grid,
+  .topic-choice-actions.action-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .simple-topic-card {
+    min-height: 92px;
+    padding: 16px;
+  }
+
+  .choice-header {
+    grid-template-columns: 56px 1fr;
+    padding: 16px;
+  }
+
+  .topic-icon.large {
+    width: 52px;
+    height: 52px;
+  }
+
+  .choice-illustration {
+    max-height: 160px;
+  }
+
+  .central-progress-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media print {
+  .simple-topic-grid,
+  .central-progress-box,
+  .choice-illustration,
+  .plain-back-button {
+    display: none !important;
+  }
+}

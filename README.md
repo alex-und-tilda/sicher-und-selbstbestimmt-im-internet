@@ -205,3 +205,21 @@ Merk-Karte = stärkeres Gelb
 ```
 
 Rot wird weiterhin nicht für Hover genutzt, sondern bleibt für Warnungen reserviert.
+
+
+## Zwei-Stufen-Menü
+
+Die Startseite wurde vereinfacht.
+
+Neue Struktur:
+
+```text
+Schritt 1: Thema auswählen
+Schritt 2: Aktion auswählen
+```
+
+Auf der Startseite stehen nur noch die 8 Themenkarten.
+
+Die Aktionskarten, Hilfe-Fragen und Bilder erscheinen erst nach Auswahl eines Themas.
+
+Zusätzlich gibt es eine zentrale Weiterlernen-Box.

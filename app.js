@@ -305,7 +305,7 @@ function handleHashRoute() {
     return true;
   }
 
-  startTopicMode(topicId, "short");
+  renderTopicChoice(topicId);
   return true;
 }
 
@@ -362,11 +362,141 @@ function setViewMode(mode) {
   document.body.classList.add(`view-${mode}`);
 }
 
+
+function getAllSavedProgress() {
+  const entries = [];
+  topics.forEach(topic => {
+    const short = loadProgress(topic.id, "short");
+    const full = loadProgress(topic.id, "full");
+
+    if (short) {
+      entries.push({
+        topic,
+        mode: "short",
+        label: "Kurz lernen",
+        step: short.step,
+        total: topic.shortLessonIndexes ? topic.shortLessonIndexes.length : 0,
+        savedAt: short.savedAt || ""
+      });
+    }
+
+    if (full) {
+      entries.push({
+        topic,
+        mode: "full",
+        label: "Ausführlich lernen",
+        step: full.step,
+        total: topic.lessons ? topic.lessons.length : 0,
+        savedAt: full.savedAt || ""
+      });
+    }
+  });
+
+  return entries.sort((a, b) => String(b.savedAt).localeCompare(String(a.savedAt)));
+}
+
+function renderCentralProgressBox() {
+  const entries = getAllSavedProgress();
+  if (!entries.length) return "";
+
+  const item = entries[0];
+  return `
+    <section class="central-progress-box">
+      <strong>Du hast zuletzt gelernt:</strong><br>
+      ${escapeHtml(item.topic.title)} · ${escapeHtml(item.label)} · Seite ${item.step + 1} von ${item.total}
+      <div class="central-progress-actions">
+        <button class="continue-button" onclick="continueTopic('${item.topic.id}', '${item.mode}')">Weiterlernen</button>
+        <button class="continue-button secondary" onclick="startTopicMode('${item.topic.id}', '${item.mode}')">Von vorne starten</button>
+      </div>
+    </section>
+  `;
+}
+
+function renderTopicChoice(topicId) {
+  setViewMode("menu");
+  const topic = topics.find(t => t.id === topicId);
+  if (!topic) {
+    renderMenu();
+    return;
+  }
+
+  appTitle.textContent = "Sicher digital lernen";
+  moduleLabel.textContent = "Thema gewählt";
+  stepLabel.textContent = topic.title;
+  levelLabel.textContent = "Auswahl";
+  progressFill.style.width = "0%";
+  progressTrack.setAttribute("aria-valuenow", "0");
+
+  backButton.disabled = true;
+  nextButton.disabled = true;
+  nextButton.textContent = "Weiter";
+
+  const questions = (topic.helpQuestions || []).map(q => `<li>${escapeHtml(q)}</li>`).join("");
+
+  content.innerHTML = `
+    <section class="menu-card topic-choice-screen">
+      <button class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
+
+      <div class="choice-header">
+        <span class="topic-icon large" aria-hidden="true">${getIconHtml(topic.icon)}</span>
+        <div>
+          <h2>${escapeHtml(topic.title)}</h2>
+          <p>${escapeHtml(topic.desc)}</p>
+        </div>
+      </div>
+
+      <div class="topic-choice-actions action-card-grid">
+        <button class="action-card action-short" onclick="startTopicMode('${topic.id}', 'short')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("check")}</span>
+          <span class="action-text">
+            <strong>Kurz lernen</strong>
+            <small>Die wichtigsten Seiten.</small>
+            <em>Was muss ich mir merken?</em>
+          </span>
+        </button>
+
+        <button class="action-card action-full" onclick="startTopicMode('${topic.id}', 'full')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
+          <span class="action-text">
+            <strong>Ausführlich lernen</strong>
+            <small>Alle Seiten mit Beispielen.</small>
+            <em>Was kann ich im Alltag tun?</em>
+          </span>
+        </button>
+
+        <button class="action-card action-quiz" onclick="startTopicQuiz('${topic.id}')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
+          <span class="action-text">
+            <strong>Quiz starten</strong>
+            <small>10 Fragen beantworten.</small>
+            <em>Habe ich das verstanden?</em>
+          </span>
+        </button>
+
+        <button class="action-card action-memory" onclick="renderMemoryCard('${topic.id}')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
+          <span class="action-text">
+            <strong>Merk-Karte</strong>
+            <small>3 wichtige Regeln drucken.</small>
+            <em>Was nehme ich mit?</em>
+          </span>
+        </button>
+      </div>
+
+      <section class="topic-help-panel">
+        <h3>Das kannst du eine Person fragen, der du vertraust:</h3>
+        <ul>${questions}</ul>
+      </section>
+
+      <img src="${topic.illustration}" alt="" class="choice-illustration">
+    </section>
+  `;
+
+  content.focus();
+}
+
 function renderMenu() {
   setViewMode("menu");
-  currentTopicId = null;
-  currentStep = 0;
-
   appTitle.textContent = "Sicher digital lernen";
   moduleLabel.textContent = "Thema auswählen";
   stepLabel.textContent = "Themenübersicht";
@@ -379,88 +509,50 @@ function renderMenu() {
   nextButton.textContent = "Weiter";
 
   let html = `
-    <section class="menu-card">
-      <h2>Was möchtest du tun?</h2>
+    <section class="menu-card simplified-menu">
+      <h2>Was möchtest du lernen?</h2>
+
       <div class="poster-hint">
         <strong>Willkommen beim Selbstlernangebot.</strong><br>
-      Wähle ein Thema aus.<br>
-      Du kannst in deinem Tempo lernen.<br>
-      Wenn du unsicher bist: Frage eine Person, der du vertraust.
+        Wähle zuerst ein Thema aus.<br>
+        Danach kannst du entscheiden:
+        kurz lernen, ausführlich lernen, Quiz starten oder Merk-Karte drucken.
       </div>
-      <div class="start-choice-box">
-        <p><strong>Kurz lernen:</strong> die wichtigsten Seiten.</p>
-        <p><strong>Ausführlich lernen:</strong> alle Seiten mit Beispielen.</p>
-        <p><strong>Quiz starten:</strong> 10 Fragen beantworten.</p>
-        <p><strong>Merk-Karte:</strong> 3 wichtige Regeln drucken.</p>
-      </div>
+
+      ${renderCentralProgressBox()}
+
       <div class="privacy-note">
         Es wird kein Name gespeichert.
         Der Lernstand wird nur auf diesem Gerät gemerkt.
       </div>
-      <div class="topic-grid">
+
+      <div class="simple-topic-grid">
   `;
 
   topics.forEach(topic => {
     html += `
-      <section class="topic-button topic-card" aria-label="${escapeHtml(topic.title)}">
+      <button class="simple-topic-card" onclick="renderTopicChoice('${topic.id}')">
         <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon)}</span>
         <span>
-          <span class="topic-title">${escapeHtml(topic.title)}</span>
-          <span class="topic-desc">${escapeHtml(topic.desc)} · etwa 10–15 Minuten</span>
-          <span class="topic-actions action-card-grid">
-            <button class="action-card action-short" onclick="startTopicMode('${topic.id}', 'short')">
-              <span class="action-icon" aria-hidden="true">${getIconHtml("check")}</span>
-              <span class="action-text">
-                <strong>Kurz lernen</strong>
-                <small>Die wichtigsten Seiten.</small>
-                <em>Was muss ich mir merken?</em>
-              </span>
-            </button>
-
-            <button class="action-card action-full" onclick="startTopicMode('${topic.id}', 'full')">
-              <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
-              <span class="action-text">
-                <strong>Ausführlich lernen</strong>
-                <small>Alle Seiten mit Beispielen.</small>
-                <em>Was kann ich im Alltag tun?</em>
-              </span>
-            </button>
-
-            <button class="action-card action-quiz" onclick="startTopicQuiz('${topic.id}')">
-              <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
-              <span class="action-text">
-                <strong>Quiz starten</strong>
-                <small>10 Fragen beantworten.</small>
-                <em>Habe ich das verstanden?</em>
-              </span>
-            </button>
-
-            <button class="action-card action-memory" onclick="renderMemoryCard('${topic.id}')">
-              <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
-              <span class="action-text">
-                <strong>Merk-Karte</strong>
-                <small>3 wichtige Regeln drucken.</small>
-                <em>Was nehme ich mit?</em>
-              </span>
-            </button>
-          </span>
-          <span class="topic-help-title">Das kannst du eine Person fragen, der du vertraust:</span>
-          <span class="topic-help-list">${(topic.helpQuestions || []).map(q => `• ${escapeHtml(q)}`).join("<br>")}</span>
-          ${renderSavedProgressHint(topic)}
-          <img src="${topic.illustration}" alt="" class="topic-preview">
+          <strong>${escapeHtml(topic.title)}</strong>
+          <small>${escapeHtml(topic.desc)}</small>
         </span>
-      </section>
+      </button>
     `;
   });
 
   html += `
+      </div>
+
+      <div class="menu-extra-actions">
+        <button class="quiz-link quiz-button" onclick="renderEvaluation()">Rückmeldung / Testbogen</button>
       </div>
     </section>
   `;
 
   content.innerHTML = html;
   content.focus();
-  liveRegion.textContent = "Themenübersicht geöffnet.";
+  liveRegion.textContent = "Themenübersicht. Wähle ein Thema aus.";
 }
 
 function startTopic(topicId) {
