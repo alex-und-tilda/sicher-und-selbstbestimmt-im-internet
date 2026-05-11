@@ -232,3 +232,17 @@ Das Quiz wurde fachlich erweitert:
 
 Pro Thema sind 10 Fragen enthalten.
 Bei 8 Themen sind das insgesamt 80 Quizfragen.
+
+
+## Bedienung des Quiz
+
+Diese Version enthält eine klarere Quiz-Bedienung.
+
+In der Themenübersicht gibt es jetzt pro Thema zwei Buttons:
+
+```text
+Thema starten
+Quiz direkt starten
+```
+
+Das Quiz ist also nicht mehr nur über die letzte Lernseite erreichbar.

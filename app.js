@@ -42,15 +42,18 @@ function renderMenu() {
 
   topics.forEach(topic => {
     html += `
-      <button class="topic-button" onclick="startTopic('${topic.id}')">
+      <section class="topic-button topic-card" aria-label="${escapeHtml(topic.title)}">
         <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon)}</span>
         <span>
           <span class="topic-title">${escapeHtml(topic.title)}</span>
           <span class="topic-desc">${escapeHtml(topic.desc)} · etwa 10–15 Minuten</span>
-          <span class="topic-start-label">Thema starten</span>
+          <span class="topic-actions">
+            <button class="topic-start-label" onclick="startTopic('${topic.id}')">Thema starten</button>
+            <button class="topic-quiz-label" onclick="startTopicQuiz('${topic.id}')">Quiz direkt starten</button>
+          </span>
           <img src="${topic.illustration}" alt="" class="topic-preview">
         </span>
-      </button>
+      </section>
     `;
   });
 
@@ -68,6 +71,13 @@ function startTopic(topicId) {
   currentTopicId = topicId;
   currentStep = 0;
   renderStep();
+}
+
+
+function startTopicQuiz(topicId) {
+  currentTopicId = topicId;
+  currentStep = 0;
+  startQuiz();
 }
 
 function renderStep() {
