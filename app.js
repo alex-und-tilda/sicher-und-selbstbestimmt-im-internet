@@ -192,7 +192,7 @@ function stopReading() {
 function renderEvaluation() {
   appTitle.textContent = "Rückmeldung";
   moduleLabel.textContent = "Zielgruppen-Test";
-  stepLabel.textContent = "Kurzer Testbogen";
+  stepLabel.textContent = "Druckseite";
   levelLabel.textContent = "Feedback";
   progressFill.style.width = "100%";
   progressTrack.setAttribute("aria-valuenow", "100");
@@ -202,57 +202,157 @@ function renderEvaluation() {
   nextButton.textContent = "Themenübersicht";
 
   content.innerHTML = `
-    <article class="card evaluation-card">
-      <div class="module-tag">Rückmeldung</div>
-      <div class="card-header">
-        <div class="icon" aria-hidden="true">${getIconHtml("check")}</div>
-        <h2>War die Seite gut verständlich?</h2>
+    <article class="card evaluation-card print-sheet">
+      <div class="print-frame">
+        <div class="module-tag">Zielgruppen-Test</div>
+        <h2>Rückmeldung zum Selbstlernangebot</h2>
+        <p>Diese Seite kann ausgedruckt werden.</p>
+        <p>Die Fragen können angekreuzt oder gemeinsam besprochen werden.</p>
+
+        <section class="testbogen">
+          <h3>Teil 1: Fragen für Lernende</h3>
+          <p>Bitte ankreuzen oder erzählen.</p>
+          <ul class="checkbox-list">
+            <li>□ Ich habe den Start gefunden.</li>
+            <li>□ Ich habe die Buttons verstanden.</li>
+            <li>□ Die Sätze waren leicht.</li>
+            <li>□ Die Bilder und Farben haben geholfen.</li>
+            <li>□ Ich konnte das Quiz starten.</li>
+            <li>□ Ich weiß, wann ich Hilfe holen kann.</li>
+          </ul>
+          <p><strong>Das war leicht:</strong></p>
+          <div class="write-line"></div>
+          <p><strong>Das war schwer:</strong></p>
+          <div class="write-line"></div>
+          <p><strong>Das möchte ich nochmal üben:</strong></p>
+          <div class="write-line"></div>
+        </section>
+
+        <section class="testbogen">
+          <h3>Teil 2: Beobachtung für Unterstützerinnen und Unterstützer</h3>
+          <ul class="checkbox-list">
+            <li>□ Die Person konnte ein Thema auswählen.</li>
+            <li>□ Die Person konnte zwischen Kurz lernen, Ausführlich lernen, Quiz und Merk-Karte wählen.</li>
+            <li>□ Die Person konnte weiterblättern.</li>
+            <li>□ Die Person konnte sichere und unsichere Situationen unterscheiden.</li>
+            <li>□ Die Person konnte eine passende Hilfe-Person benennen.</li>
+            <li>□ Die Person brauchte zusätzliche Erklärung.</li>
+          </ul>
+          <p><strong>Beobachtung:</strong></p>
+          <div class="write-box"></div>
+          <p><strong>Anpassung für das nächste Mal:</strong></p>
+          <div class="write-box"></div>
+        </section>
+
+        <div class="certificate-actions">
+          <button class="quiz-link quiz-button" onclick="window.print()">Testbogen drucken</button>
+          <button class="nav-button secondary" onclick="renderMenu()">Zurück</button>
+        </div>
       </div>
-
-      <p>Diese Fragen können nach dem Lernen besprochen werden.</p>
-      <p>Du kannst die Antworten ankreuzen oder mit einer Person besprechen, der du vertraust.</p>
-
-      <div class="testbogen">
-        <h3>Fragen für Lernende</h3>
-        <ul>
-          <li>□ War die Seite leicht?</li>
-          <li>□ Was war schwer?</li>
-          <li>□ Was hast du gelernt?</li>
-          <li>□ Brauchst du Hilfe?</li>
-          <li>□ Möchtest du das Thema noch einmal üben?</li>
-        </ul>
-      </div>
-
-      <div class="testbogen">
-        <h3>Hinweis für Unterstützerinnen und Unterstützer</h3>
-        <ul>
-          <li>□ Konnte die Person die Seite selbst bedienen?</li>
-          <li>□ Wurden schwere Wörter verstanden?</li>
-          <li>□ Konnte die Person sichere und unsichere Situationen unterscheiden?</li>
-          <li>□ Wurde Hilfe passend benannt?</li>
-        </ul>
-      </div>
-
-      <button class="quiz-link quiz-button" onclick="window.print()">Testbogen drucken</button>
     </article>
   `;
   content.focus();
 }
 
 
+
+function updateHashForCurrentStep() {
+  if (!currentTopicId) return;
+  const mode = learningMode === "short" ? "kurz" : "ausfuehrlich";
+  const hash = `#${currentTopicId}:${mode}:${currentStep + 1}`;
+  if (window.location.hash !== hash) {
+    history.replaceState(null, "", hash);
+  }
+}
+
+function handleHashRoute() {
+  const raw = window.location.hash.replace("#", "").trim();
+  if (!raw) return false;
+
+  const [topicId, action, stepRaw] = raw.split(":");
+  const topic = topics.find(t => t.id === topicId);
+  if (!topic) return false;
+
+  if (action === "quiz") {
+    startTopicQuiz(topicId);
+    return true;
+  }
+
+  if (action === "merk") {
+    renderMemoryCard(topicId);
+    return true;
+  }
+
+  if (action === "kurz") {
+    learningMode = "short";
+    currentTopicId = topicId;
+    const lessons = getActiveLessons(topic);
+    const step = Math.max(0, Math.min((parseInt(stepRaw || "1", 10) || 1) - 1, lessons.length - 1));
+    currentStep = step;
+    renderStep();
+    return true;
+  }
+
+  if (action === "ausfuehrlich") {
+    learningMode = "full";
+    currentTopicId = topicId;
+    const lessons = getActiveLessons(topic);
+    const step = Math.max(0, Math.min((parseInt(stepRaw || "1", 10) || 1) - 1, lessons.length - 1));
+    currentStep = step;
+    renderStep();
+    return true;
+  }
+
+  startTopicMode(topicId, "short");
+  return true;
+}
+
+function renderQrLinks(topic) {
+  const base = window.location.href.split("#")[0];
+  return `
+    <span class="qr-links">
+      <strong>Direktlinks für QR-Codes:</strong>
+      <code>${base}#${topic.id}</code>
+      <code>${base}#${topic.id}:kurz</code>
+      <code>${base}#${topic.id}:quiz</code>
+      <code>${base}#${topic.id}:merk</code>
+    </span>
+  `;
+}
+
 function renderSavedProgressHint(topic) {
   const full = loadProgress(topic.id, "full");
   const short = loadProgress(topic.id, "short");
   const parts = [];
+
   if (short) {
-    parts.push(`<button class="continue-button" onclick="continueTopic('${topic.id}', 'short')">Weiterlernen: Kurz · Seite ${short.step + 1}</button>`);
+    const total = topic.shortLessonIndexes ? topic.shortLessonIndexes.length : 0;
+    parts.push(`
+      <div class="continue-card">
+        <strong>Du hast zuletzt gelernt:</strong><br>
+        ${escapeHtml(topic.title)} · Kurz lernen · Seite ${short.step + 1} von ${total}
+        <button class="continue-button" onclick="continueTopic('${topic.id}', 'short')">Weiterlernen</button>
+        <button class="continue-button secondary" onclick="startTopicMode('${topic.id}', 'short')">Von vorne starten</button>
+      </div>
+    `);
   }
+
   if (full) {
-    parts.push(`<button class="continue-button" onclick="continueTopic('${topic.id}', 'full')">Weiterlernen: Ausführlich · Seite ${full.step + 1}</button>`);
+    const total = topic.lessons ? topic.lessons.length : 0;
+    parts.push(`
+      <div class="continue-card">
+        <strong>Du hast zuletzt gelernt:</strong><br>
+        ${escapeHtml(topic.title)} · Ausführlich lernen · Seite ${full.step + 1} von ${total}
+        <button class="continue-button" onclick="continueTopic('${topic.id}', 'full')">Weiterlernen</button>
+        <button class="continue-button secondary" onclick="startTopicMode('${topic.id}', 'full')">Von vorne starten</button>
+      </div>
+    `);
   }
+
   if (!parts.length) return "";
   return `<span class="saved-progress">${parts.join("")}</span>`;
 }
+
 
 function renderMenu() {
   currentTopicId = null;
@@ -347,6 +447,7 @@ function renderStep() {
   const total = lessons.length;
   const progress = ((currentStep + 1) / total) * 100;
   saveProgress();
+  updateHashForCurrentStep();
 
   appTitle.textContent = topic.title;
   moduleLabel.textContent = lesson.module;
@@ -780,4 +881,7 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") backStep();
 });
 
-renderMenu();
+if (!handleHashRoute()) {
+  renderMenu();
+}
+window.addEventListener("hashchange", handleHashRoute);

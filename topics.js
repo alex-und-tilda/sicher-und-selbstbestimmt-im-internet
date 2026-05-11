@@ -679,17 +679,19 @@ const topics = [
       1,
       5,
       6,
+      7,
+      8,
+      9,
       11,
-      12,
-      18,
-      19,
-      25,
-      26,
       31,
-      32,
+      35,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#datenschutz",
+    "qrShortLink": "index.html#datenschutz:kurz",
+    "qrQuizLink": "index.html#datenschutz:quiz",
+    "qrMemoryLink": "index.html#datenschutz:merk"
   },
   {
     "id": "whatsapp",
@@ -1368,18 +1370,20 @@ const topics = [
       0,
       1,
       5,
-      6,
       11,
       12,
-      18,
       19,
-      25,
+      21,
       26,
       31,
-      32,
+      35,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#whatsapp",
+    "qrShortLink": "index.html#whatsapp:kurz",
+    "qrQuizLink": "index.html#whatsapp:quiz",
+    "qrMemoryLink": "index.html#whatsapp:merk"
   },
   {
     "id": "facebook",
@@ -2057,19 +2061,21 @@ const topics = [
     "shortLessonIndexes": [
       0,
       1,
+      2,
       5,
       6,
       11,
-      12,
+      15,
       18,
-      19,
-      25,
-      26,
-      31,
-      32,
+      33,
+      35,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#facebook",
+    "qrShortLink": "index.html#facebook:kurz",
+    "qrQuizLink": "index.html#facebook:quiz",
+    "qrMemoryLink": "index.html#facebook:merk"
   },
   {
     "id": "instagram",
@@ -2747,19 +2753,21 @@ const topics = [
     "shortLessonIndexes": [
       0,
       1,
+      2,
       5,
       6,
       11,
-      12,
+      15,
       18,
-      19,
-      25,
-      26,
-      31,
-      32,
+      33,
+      35,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#instagram",
+    "qrShortLink": "index.html#instagram:kurz",
+    "qrQuizLink": "index.html#instagram:quiz",
+    "qrMemoryLink": "index.html#instagram:merk"
   },
   {
     "id": "youtube",
@@ -3437,19 +3445,21 @@ const topics = [
     "shortLessonIndexes": [
       0,
       1,
+      2,
       5,
-      6,
       11,
       12,
+      15,
       18,
-      19,
       25,
-      26,
-      31,
-      32,
+      35,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#youtube",
+    "qrShortLink": "index.html#youtube:kurz",
+    "qrQuizLink": "index.html#youtube:quiz",
+    "qrMemoryLink": "index.html#youtube:merk"
   },
   {
     "id": "snapchat",
@@ -4127,19 +4137,21 @@ const topics = [
     "shortLessonIndexes": [
       0,
       1,
+      2,
       5,
-      6,
       11,
-      12,
+      14,
       18,
-      19,
       25,
-      26,
-      31,
-      32,
+      33,
+      35,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#snapchat",
+    "qrShortLink": "index.html#snapchat:kurz",
+    "qrQuizLink": "index.html#snapchat:quiz",
+    "qrMemoryLink": "index.html#snapchat:merk"
   },
   {
     "id": "tiktok",
@@ -4817,19 +4829,21 @@ const topics = [
     "shortLessonIndexes": [
       0,
       1,
+      2,
       5,
-      6,
       11,
       12,
+      15,
       18,
       19,
-      25,
-      26,
-      31,
-      32,
+      35,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#tiktok",
+    "qrShortLink": "index.html#tiktok:kurz",
+    "qrQuizLink": "index.html#tiktok:quiz",
+    "qrMemoryLink": "index.html#tiktok:merk"
   },
   {
     "id": "hilfe",
@@ -5516,17 +5530,18 @@ const topics = [
       0,
       1,
       5,
-      6,
       11,
-      12,
+      14,
       18,
-      19,
       25,
-      26,
       31,
-      32,
+      33,
       37,
       38
-    ]
+    ],
+    "qrLink": "index.html#hilfe",
+    "qrShortLink": "index.html#hilfe:kurz",
+    "qrQuizLink": "index.html#hilfe:quiz",
+    "qrMemoryLink": "index.html#hilfe:merk"
   }
 ];

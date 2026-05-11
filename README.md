@@ -358,3 +358,49 @@ Linien-Grau:        #D8D8D8
 
 Rot wird nur für echte Warnungen genutzt.
 Normales Lernen bleibt ruhig und freundlich.
+
+
+## Praxisfinale Erweiterungen
+
+Diese Version ergänzt:
+
+1. Direktlinks für QR-Codes pro Thema
+
+Beispiele:
+```text
+index.html#whatsapp
+index.html#whatsapp:kurz
+index.html#whatsapp:quiz
+index.html#whatsapp:merk
+```
+
+2. Fachlich festgelegter Kurzmodus
+
+Der Kurzmodus nutzt gezielt ausgewählte Kernseiten pro Thema.
+
+3. Verbesserte Weiterlernen-Anzeige
+
+Wenn ein Lernstand vorhanden ist, wird angezeigt:
+```text
+Du hast zuletzt gelernt:
+WhatsApp · Kurz lernen · Seite 4 von 12
+Weiterlernen
+Von vorne starten
+```
+
+4. Druckseiten optimiert
+
+Optimiert wurden:
+```text
+Urkunde
+Merk-Karte
+Zielgruppen-Testbogen
+```
+
+5. Zielgruppen-Testbogen als eigene Druckseite
+
+Der Testbogen ist getrennt in:
+```text
+Fragen für Lernende
+Beobachtung für Unterstützerinnen und Unterstützer
+```

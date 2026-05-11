@@ -1386,3 +1386,151 @@ body {
     -webkit-print-color-adjust: exact;
   }
 }
+
+
+/* Praxisfinal: QR-Direktlinks, Weiterlernen, Druckseiten */
+.qr-links {
+  display: block;
+  margin-top: 12px;
+  padding: 10px;
+  background: var(--gray-light);
+  border: 1px solid var(--gray);
+  border-radius: 12px;
+  font-size: 0.92rem;
+}
+
+.qr-links code {
+  display: block;
+  white-space: nowrap;
+  overflow-x: auto;
+  background: #FFFFFF;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  padding: 6px;
+  margin-top: 6px;
+}
+
+.continue-card {
+  display: block;
+  width: 100%;
+  background: var(--success-light);
+  border: 2px solid var(--success);
+  border-radius: 14px;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.continue-card .continue-button {
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.continue-button.secondary {
+  border-color: var(--gray);
+  background: #FFFFFF;
+}
+
+.print-frame {
+  border: 5px solid var(--blue);
+  border-radius: 22px;
+  padding: 24px;
+  background: #FFFFFF;
+}
+
+.write-line {
+  height: 34px;
+  border-bottom: 2px solid var(--black);
+  margin: 8px 0 16px 0;
+}
+
+.write-box {
+  min-height: 90px;
+  border: 2px solid var(--gray);
+  border-radius: 12px;
+  background: #FFFFFF;
+  margin: 8px 0 16px 0;
+}
+
+.checkbox-list li {
+  margin: 10px 0;
+  line-height: 1.35;
+}
+
+.memory-card .memory-frame,
+.certificate-card .certificate-frame,
+.print-sheet .print-frame {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media print {
+  .app-header,
+  .progress-area,
+  .nav,
+  .app-footer,
+  .certificate-actions,
+  .audio-actions,
+  .qr-links,
+  .saved-progress,
+  .topic-actions {
+    display: none !important;
+  }
+
+  body {
+    background: #FFFFFF !important;
+  }
+
+  .app {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .content {
+    padding: 0 !important;
+  }
+
+  .card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .certificate-frame,
+  .memory-frame,
+  .print-frame {
+    min-height: 255mm;
+    border: 5px solid #00285A !important;
+    box-shadow: none !important;
+    padding: 18mm !important;
+    page-break-inside: avoid;
+  }
+
+  .certificate-title {
+    font-size: 36pt !important;
+  }
+
+  .memory-section,
+  .testbogen,
+  .completion-box,
+  .certificate-topic {
+    break-inside: avoid;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .certificate-logos img {
+    max-height: 42px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .qr-links {
+    font-size: 0.85rem;
+  }
+
+  .continue-card .continue-button {
+    display: block;
+    width: fit-content;
+    margin-bottom: 6px;
+  }
+}
