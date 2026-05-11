@@ -1,24 +1,27 @@
 :root {
-  --red: #b5152b;
-  --black: #000000;
-  --grey: #c6c7c8;
-  --blue: #3e96be;
-  --blue-mid: #57a3c7;
-  --blue-light: #aad1e3;
-  --blue-very-light: #d8eaf2;
-  --bg: #d8eaf2;
-  --card: #ffffff;
-  --text: #000000;
-  --muted: #343a40;
-  --border: #c6c7c8;
-  --warning-bg: #fbeaec;
-  --warning-border: #b5152b;
-  --success-bg: #e9f4ea;
-  --success-border: #2e7d32;
-  --info-bg: #eef7fb;
-  --info-border: #3e96be;
-  --radius: 22px;
-  --shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+  --bg: #F7F4EF;
+  --card: #FFFFFF;
+  --black: #1F1F1F;
+
+  --blue: #00285A;
+  --blue-mid: #3DB8B3;
+  --blue-light: #DDF3F2;
+  --blue-very-light: #EEF8F7;
+
+  --hint: #FFF3CD;
+  --hint-border: #D6A400;
+
+  --warning: #B5152B;
+  --warning-light: #F8E4E8;
+
+  --success: #2E7D32;
+  --success-border: #2E7D32;
+  --success-light: #E7F3E8;
+
+  --gray: #D8D8D8;
+  --gray-light: #F1F1F1;
+
+  --shadow: 0 14px 34px rgba(0, 40, 90, 0.12);
 }
 
 * { box-sizing: border-box; }
@@ -1169,4 +1172,217 @@ button, a {
   padding: 6px 10px;
   margin: 8px 0;
   font-weight: 800;
+}
+
+
+/* Barrierearme Farblogik: Farben haben feste Bedeutung
+   Blau = Orientierung
+   Türkis = Lernen / Weiter
+   Gelb = Hinweis / Merken / Unterstützung
+   Grün = Erfolg / bestanden
+   Rot = Gefahr / Stopp / Betrug
+*/
+
+body {
+  background: var(--bg);
+  color: var(--black);
+}
+
+.app-header,
+.header,
+.topbar {
+  background: var(--blue);
+  color: #FFFFFF;
+}
+
+.card,
+.menu-card,
+.topic-card,
+.quiz-card,
+.evaluation-card,
+.memory-card,
+.certificate-card {
+  background: var(--card);
+  color: var(--black);
+  border: 1px solid var(--gray);
+  box-shadow: var(--shadow);
+}
+
+.topic-card,
+.topic-button {
+  border-left: 8px solid var(--blue);
+}
+
+.topic-card:focus-within,
+.topic-card:hover,
+.topic-button:focus-visible,
+.topic-button:hover {
+  border-left-color: var(--blue-mid);
+}
+
+.progress-fill,
+.progress-bar-fill {
+  background: var(--blue-mid);
+}
+
+.module-tag,
+.mode-note,
+.module-step.active {
+  background: var(--blue);
+  color: #FFFFFF;
+  border-color: var(--blue);
+}
+
+.module-orientation,
+.start-choice-box,
+.privacy-note,
+.poster-hint {
+  background: var(--blue-light);
+  border-color: var(--blue-mid);
+  color: var(--black);
+}
+
+.topic-start-label,
+.nav-button:not(.secondary),
+.quiz-button {
+  background: var(--blue-mid);
+  color: var(--black);
+  border: 2px solid var(--blue-mid);
+}
+
+.topic-start-label:hover,
+.topic-start-label:focus-visible,
+.nav-button:not(.secondary):hover,
+.nav-button:not(.secondary):focus-visible,
+.quiz-button:hover,
+.quiz-button:focus-visible {
+  background: var(--blue);
+  color: #FFFFFF;
+  border-color: var(--blue);
+}
+
+.topic-quiz-label,
+.audio-button,
+.continue-button {
+  background: #FFFFFF;
+  color: var(--blue);
+  border: 2px solid var(--blue-mid);
+}
+
+.topic-quiz-label:hover,
+.topic-quiz-label:focus-visible,
+.audio-button:hover,
+.audio-button:focus-visible,
+.continue-button:hover,
+.continue-button:focus-visible {
+  background: var(--blue-mid);
+  color: var(--black);
+}
+
+.nav-button.secondary,
+.audio-button.secondary {
+  background: #FFFFFF;
+  color: var(--black);
+  border: 2px solid var(--gray);
+}
+
+.step-help-box,
+.topic-help-list,
+.memory-section,
+.memory-subtitle,
+.testbogen,
+.hint,
+.remember,
+.merksatz {
+  background: var(--hint);
+  border-color: var(--hint-border);
+  color: var(--black);
+}
+
+.step-help-box {
+  border-left: 8px solid var(--hint-border);
+}
+
+.warning,
+.feedback.warning,
+.danger,
+.stop-box {
+  background: var(--warning-light);
+  border-color: var(--warning);
+  color: var(--black);
+}
+
+.warning strong,
+.danger strong,
+.stop-box strong {
+  color: var(--warning);
+}
+
+.feedback.success,
+.completion-box,
+.success,
+.correct {
+  background: var(--success-light);
+  border-color: var(--success);
+  color: var(--black);
+}
+
+.certificate-frame,
+.memory-frame {
+  border-color: var(--success);
+}
+
+.certificate-title,
+.certificate-subtitle {
+  color: var(--blue);
+}
+
+.certificate-topic {
+  background: var(--blue-light);
+}
+
+.choice-button {
+  background: #FFFFFF;
+  color: var(--black);
+  border: 2px solid var(--gray);
+}
+
+.choice-button:hover,
+.choice-button:focus-visible {
+  border-color: var(--blue-mid);
+  background: var(--blue-light);
+}
+
+.icon {
+  background: var(--blue-light);
+  border: 2px solid var(--blue-mid);
+}
+
+/* Rot wird bewusst nur für echte Gefahr genutzt. */
+.card .warning,
+.card .danger {
+  border-left: 8px solid var(--warning);
+}
+
+/* Druckansicht bleibt ruhig und kontrastreich. */
+@media print {
+  body {
+    background: #FFFFFF;
+  }
+
+  .certificate-frame,
+  .memory-frame {
+    border-color: #00285A;
+  }
+
+  .step-help-box,
+  .topic-help-list,
+  .memory-section,
+  .memory-subtitle,
+  .testbogen,
+  .completion-box,
+  .certificate-topic {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
 }

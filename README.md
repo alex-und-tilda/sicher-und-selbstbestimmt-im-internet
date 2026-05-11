@@ -324,3 +324,37 @@ Wähle ein Thema aus.
 Du kannst in deinem Tempo lernen.
 Wenn du unsicher bist: Frage eine Person, der du vertraust.
 ```
+
+
+## Barrierearme Farblogik
+
+Die Farbgebung wurde auf eine ruhigere Lernlogik angepasst.
+
+Farbbedeutung:
+
+```text
+Blau = Orientierung
+Türkis = Lernen / Weiter
+Gelb = Hinweis / Merken / Unterstützung
+Grün = Erfolg / bestanden / Urkunde
+Rot = Gefahr / Stopp / Betrug
+Grau = neutral
+```
+
+Farbpalette:
+
+```text
+Hintergrund:        #F7F4EF
+Karten:             #FFFFFF
+Text:               #1F1F1F
+Dunkelblau:         #00285A
+Türkis:             #3DB8B3
+Hell-Türkis:        #DDF3F2
+Hinweis-Gelb:       #FFF3CD
+Erfolg-Grün:        #2E7D32
+Warn-Rot:           #B5152B
+Linien-Grau:        #D8D8D8
+```
+
+Rot wird nur für echte Warnungen genutzt.
+Normales Lernen bleibt ruhig und freundlich.
