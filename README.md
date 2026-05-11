@@ -1,50 +1,125 @@
-# Sicher digital lernen – fachlich korrigierte Version
+# Icon-Paket für die Lernplattform
 
-Diese Version enthält 8 Themen mit je 39 kurzen Lernseiten.
+Ordnerstruktur:
 
-## Korrektur gegenüber der Vorversion
+assets/icons/
 
-Die Themen wurden nicht mehr technisch gleichgeschaltet, sondern fachlich angepasst.
+Enthaltene SVG-Piktogramme:
 
-Beispiele:
+1. start.svg
+2. understand.svg
+3. home.svg
+4. example.svg
+5. warning.svg
+6. exercise.svg
+7. remember.svg
+8. stop.svg
+9. help.svg
+10. lock.svg
+11. block.svg
+12. report.svg
+13. check.svg
+14. quiz.svg
+15. data.svg
+16. link.svg
+17. photo.svg
+18. message.svg
 
-- Datenschutz wird nicht mehr wie eine App behandelt.
-- Hilfe bei Problemen wird nicht mehr wie eine Plattform behandelt.
-- Jedes Thema hat passende Module, Beispiele, Übungen und Merksätze.
-- Schutzfunktionen werden allgemein beschrieben, weil App-Menüs sich ändern können.
+Nutzung in HTML:
 
-## Themen
+<img src="assets/icons/lock.svg" alt="" class="icon-svg">
 
-1. Datenschutz
-2. WhatsApp
-3. Facebook
-4. Instagram
-5. YouTube
-6. Snapchat
-7. TikTok
-8. Hilfe bei Problemen
+Oder als CSS-Maske / inline SVG.
 
-## Dateien
+Die SVGs nutzen `currentColor`.
+Die Farbe kann also über CSS gesteuert werden.
 
-- index.html
-- styles.css
-- topics.js
-- app.js
-- README.md
 
-## GitHub Pages
+## Icons / Piktogramme
 
-Alle Dateien in ein Repository hochladen und GitHub Pages aktivieren.
+Diese Version enthält bereits 18 SVG-Piktogramme im Ordner:
 
-## Kahoot-Links
-
-In topics.js jeweils diese Zeile ersetzen:
-
-```js
-"quiz": "https://kahoot.com"
+```text
+assets/icons/
 ```
 
-## Hinweis
+Die Lernplattform lädt die Icons automatisch aus `topics.js`.
 
-Die Inhalte sind als fachlich korrigierte Arbeitsfassung gedacht.
-Für offizielle Leichte Sprache muss ein Zielgruppen-Test erfolgen.
+Beispiel:
+
+```js
+"icon": "lock"
+```
+
+wird automatisch geladen als:
+
+```text
+assets/icons/lock.svg
+```
+
+Die wichtigsten Icon-Namen:
+
+```text
+start
+understand
+home
+example
+warning
+exercise
+remember
+stop
+help
+lock
+block
+report
+check
+quiz
+data
+link
+photo
+message
+```
+
+
+## Eingebaute Farbpalette
+
+Diese Version nutzt die gewünschte Farbpalette:
+
+```text
+#b5152b  Rot: Warnung, Stopp, Gefahr
+#000000  Schwarz: Haupttext
+#c6c7c8  Hellgrau: Linien und Rahmen
+#3e96be  Blau Mittel: Hauptstruktur, Navigation, Lernanker
+#57a3c7  Blau Hell-Mittel: Hover und Zwischenebenen
+#aad1e3  Blau Hell: Boxen und Hervorhebungen
+#d8eaf2  Blau Sehr Hell: Hintergrund und ruhige Lernflächen
+```
+
+Zusätzlich ist ein dezentes Grün für richtige Antworten enthalten:
+
+```text
+#2e7d32  Richtig / geschafft
+```
+
+Rot wird bewusst sparsam eingesetzt, damit die Lernplattform nicht dauerhaft wie eine Warnseite wirkt.
+
+
+## Eingebaute Logos
+
+Diese Version enthält zusätzlich die zwei bereitgestellten Bilddateien im Ordner:
+
+```text
+assets/brand/
+```
+
+Dateien:
+
+```text
+assets/brand/logo-tilbeck-alexianer.jpeg
+assets/brand/logo-sozialstiftung-nrw.jpeg
+```
+
+Die Logos werden im Kopfbereich der Lernplattform angezeigt.
+
+Hinweis:
+Die gelieferten Dateien sind JPEG-Dateien mit begrenzter Auflösung. Für eine endgültige öffentliche Version sind PNG- oder SVG-Dateien in besserer Qualität empfehlenswert.

@@ -1,20 +1,34 @@
 :root {
-  --blue: #00285A;
-  --teal: #3DB8B3;
-  --teal-soft: #E4F7F6;
-  --bg: #F7F7F4;
+  /* Farbpalette nach deiner Vorgabe */
+  --red: #b5152b;
+  --black: #000000;
+  --grey: #c6c7c8;
+  --blue: #3e96be;
+  --blue-mid: #57a3c7;
+  --blue-light: #aad1e3;
+  --blue-very-light: #d8eaf2;
+
+  /* Funktionsfarben */
+  --bg: #d8eaf2;
   --card: #FFFFFF;
-  --text: #18212F;
-  --muted: #5B6573;
-  --border: #D9E1E8;
-  --warning-bg: #FFF4E5;
-  --warning-border: #F59E0B;
-  --success-bg: #EAF8EF;
-  --success-border: #2E8B57;
-  --info-bg: #EAF2FF;
-  --info-border: #4F7EDB;
+  --text: #000000;
+  --muted: #3A3A3A;
+  --border: #c6c7c8;
+
+  --teal: #3e96be;
+  --teal-soft: #d8eaf2;
+
+  --warning-bg: #FBEAEC;
+  --warning-border: #b5152b;
+
+  --success-bg: #E9F4EA;
+  --success-border: #2e7d32;
+
+  --info-bg: #d8eaf2;
+  --info-border: #3e96be;
+
   --radius: 18px;
-  --shadow: 0 8px 24px rgba(0, 40, 90, 0.10);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 * { box-sizing: border-box; }
@@ -395,4 +409,157 @@ button, a { font-family: inherit; }
   .card h2, .menu-card h2 { font-size: 1.28rem; }
   .icon { width: 46px; height: 46px; font-size: 25px; }
   .nav-button { padding: 14px; }
+}
+
+
+.icon-svg {
+  width: 32px;
+  height: 32px;
+  color: var(--blue);
+}
+
+.icon {
+  color: var(--blue);
+}
+
+
+/* Ergänzende Farblogik:
+   Blau = Lernen / Struktur
+   Hellblau = Erklärung / Beispiel
+   Rot = Achtung / Stopp / Gefahr
+   Grün = richtig / geschafft
+*/
+
+.topic-icon,
+.icon {
+  background: var(--blue-very-light);
+  color: var(--blue);
+}
+
+.module-tag {
+  background: var(--blue-very-light);
+  color: var(--black);
+  border: 1px solid var(--blue-light);
+}
+
+.card {
+  border-left-color: var(--blue);
+}
+
+.card li {
+  background: var(--blue-very-light);
+  border: 1px solid var(--blue-light);
+}
+
+.quote {
+  background: var(--blue-very-light);
+  border-left-color: var(--blue);
+}
+
+.remember {
+  background: var(--blue);
+  color: white;
+}
+
+.nav-button.primary {
+  background: var(--blue);
+  color: white;
+}
+
+.nav-button.primary:hover,
+.quiz-link:hover {
+  background: var(--blue-mid);
+}
+
+.quiz-link {
+  background: var(--blue);
+  color: white;
+}
+
+.notice.warning {
+  background: var(--warning-bg);
+  border-left-color: var(--red);
+  color: var(--black);
+}
+
+.feedback.warning {
+  background: var(--warning-bg);
+  border-left-color: var(--red);
+  color: var(--black);
+}
+
+.feedback.success,
+.notice.success {
+  background: var(--success-bg);
+  border-left-color: var(--success-border);
+  color: var(--black);
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--blue), var(--blue-mid));
+}
+
+.home-button {
+  border-color: rgba(255,255,255,0.7);
+}
+
+.icon-svg {
+  color: var(--blue);
+}
+
+/* Warn-Icons in Warnkarten wirken rot über die Box, nicht permanent im ganzen Layout. */
+.notice.warning + .remember {
+  margin-top: 14px;
+}
+
+
+/* Träger- und Förderlogos */
+.brand-logos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  max-height: 36px;
+  max-width: 128px;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+  object-fit: contain;
+  border: 1px solid rgba(255,255,255,0.55);
+}
+
+.brand-logo-wide {
+  max-width: 150px;
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    align-items: flex-start;
+  }
+
+  .brand-logos {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .brand-logo {
+    max-height: 28px;
+    max-width: 98px;
+    padding: 3px;
+  }
+
+  .brand-logo-wide {
+    max-width: 112px;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-logos {
+    display: none;
+  }
 }

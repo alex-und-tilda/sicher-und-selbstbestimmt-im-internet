@@ -2,309 +2,301 @@ const topics = [
   {
     "id": "datenschutz",
     "title": "Datenschutz",
-    "icon": "🔒",
+    "icon": "lock",
     "desc": "Private Daten verstehen und schützen",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: Datenschutz verstehen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
-          "Hier lernst du Datenschutz.",
-          "Datenschutz hilft dir, deine Informationen zu schützen.",
-          "Du lernst mit einfachen Beispielen."
+          "Diese Lernseite hilft dir, Datenschutz sicherer zu nutzen.",
+          "Du lernst in kleinen Schritten.",
+          "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "module": "Modul 1: Datenschutz verstehen",
-        "title": "Was bedeutet Datenschutz?",
-        "icon": "🛡️",
+        "title": "Was ist Datenschutz?",
+        "icon": "lock",
         "text": [
-          "Datenschutz bedeutet: Informationen über dich werden geschützt.",
-          "Nicht jede Person darf alles über dich wissen.",
-          "Du darfst mitentscheiden."
+          "Datenschutz ist ein digitales Angebot.",
+          "Du kannst dort Inhalte sehen oder teilen.",
+          "Andere Menschen können mit dir Kontakt haben."
         ],
-        "remember": "Datenschutz schützt mich."
+        "remember": "Datenschutz ist ein Werkzeug für Kontakt und Inhalte.",
+        "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "module": "Modul 1: Datenschutz verstehen",
-        "title": "Warum sind Daten wichtig?",
-        "icon": "🔎",
+        "title": "Was kann ich mit Datenschutz machen?",
+        "icon": "lock",
         "text": [
-          "Daten erzählen etwas über dich.",
-          "Andere können Daten benutzen.",
-          "Darum müssen Daten geschützt werden."
+          "Mit Datenschutz kannst du viele Dinge tun."
         ],
         "bullets": [
-          "wo du wohnst",
-          "was du magst",
-          "welche Hilfe du brauchst"
+          "Daten erkennen",
+          "Daten schützen",
+          "bewusst entscheiden"
         ],
-        "remember": "Daten können viel über mich zeigen."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "module": "Modul 1: Datenschutz verstehen",
         "title": "Datenschutz im Alltag",
-        "icon": "📱",
+        "icon": "check",
         "text": [
-          "Datenschutz gibt es jeden Tag."
+          "Datenschutz kann im Alltag hilfreich sein."
         ],
         "bullets": [
-          "beim Handy",
-          "bei Formularen",
-          "bei Fotos und Apps"
+          "Informationen bekommen",
+          "Kontakt halten",
+          "Inhalte ansehen oder teilen"
         ],
-        "remember": "Ich achte auf meine Daten."
+        "remember": "Datenschutz kann praktisch sein.",
+        "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "module": "Modul 1: Datenschutz verstehen",
-        "title": "Gute Entscheidung erkennen",
-        "icon": "✅",
+        "title": "Guten Inhalt erkennen",
+        "icon": "check",
         "text": [
-          "Eine gute Entscheidung schützt deine Daten."
+          "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
-        "quote": "Ich gebe nur an, was wirklich nötig ist.",
-        "success": "Das ist gut. Du gibst nicht zu viele Daten weiter.",
-        "remember": "So wenig Daten wie möglich."
+        "quote": "„Ich brauche nur deine Telefonnummer für den Termin.“",
+        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
+        "remember": "Gute Inhalte sind respektvoll.",
+        "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
-          "Jetzt lernst du private Daten kennen.",
-          "Du lernst, was du nicht einfach teilen sollst.",
-          "Du lernst, wann du Hilfe holen sollst."
+          "Jetzt geht es um private Daten.",
+          "Du lernst, was du schützen sollst.",
+          "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten bleiben privat."
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Was sind private Daten?",
-        "icon": "🔐",
+        "icon": "lock",
         "text": [
-          "Private Daten sind Informationen über dich.",
-          "Manche Daten sind besonders geschützt."
+          "Private Daten gehören dir.",
+          "Du sollst sie nicht einfach veröffentlichen oder verschicken."
         ],
         "bullets": [
-          "Adresse",
+          "Name und Adresse",
           "Telefonnummer",
-          "Geburtsdatum"
+          "Passwörter und Gesundheitsdaten"
         ],
-        "remember": "Private Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Adresse",
-        "icon": "📍",
+        "icon": "data",
         "text": [
-          "Eine fremde Person fragt dich:"
+          "Eine unbekannte Person fragt dich:"
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat."
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Passwort",
-        "icon": "🔑",
+        "icon": "lock",
         "text": [
-          "Eine Nachricht macht Druck:"
+          "Eine Person schreibt dir:"
         ],
-        "quote": "Gib mir dein Passwort. Sonst passiert etwas.",
-        "warning": "Das ist nicht sicher. Ein Passwort bleibt geheim.",
-        "remember": "Mein Passwort bleibt geheim."
+        "quote": "Gib mir dein Passwort. Ich helfe dir.",
+        "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "dsPrivat",
-          "question": "Nachricht: „Schick mir deine Krankenversicherungs-Nummer.“",
+          "id": "datenschutzPrivate",
+          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das ist eine private Information. Gib sie nicht einfach weiter."
+              "title": "Achtung.",
+              "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
               "type": "success",
               "title": "Richtig.",
-              "text": "Das ist eine private Information. Gib sie nicht einfach weiter."
+              "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du darfst Nein sagen.",
-          "Du darfst nachfragen.",
+          "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Fotos, Standort und Formulare",
         "title": "Modulstart: Fotos, Standort und Formulare",
-        "icon": "🖼️",
+        "icon": "photo",
         "text": [
-          "Jetzt geht es um Daten im Alltag.",
-          "Fotos, Standort und Formulare können privat sein.",
+          "Jetzt geht es um fotos, standort und formulare.",
+          "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Auch Bilder und Orte sind Daten."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
-        "module": "Modul 3: Fotos, Standort und Formulare",
-        "title": "Fotos als Daten",
-        "icon": "🖼️",
+        "title": "Daten teilen",
+        "icon": "photo",
         "text": [
-          "Ein Foto kann viel zeigen.",
-          "Andere Menschen können dich erkennen.",
-          "Manchmal sieht man auch den Ort."
+          "Daten können weitergegeben oder gespeichert werden.",
+          "Dann sehen vielleicht andere Menschen diesen Inhalt.",
+          "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich prüfe Fotos vor dem Teilen."
+        "remember": "Ich denke nach, bevor ich teile.",
+        "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
-        "module": "Modul 3: Fotos, Standort und Formulare",
-        "title": "Standort schützen",
-        "icon": "📍",
+        "title": "Private Inhalte",
+        "icon": "block",
         "text": [
-          "Der Standort zeigt, wo du bist.",
-          "Das ist oft privat."
+          "Manche Inhalte sind sehr privat."
         ],
         "bullets": [
-          "Wohnort",
-          "Arbeitsort",
-          "aktueller Aufenthaltsort"
+          "Fotos von dir",
+          "Standort",
+          "Gesundheitsdaten"
         ],
-        "remember": "Mein Standort gehört mir."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
-        "module": "Modul 3: Fotos, Standort und Formulare",
-        "title": "Formulare prüfen",
-        "icon": "📝",
+        "title": "Beispiel: Druck",
+        "icon": "warning",
         "text": [
-          "Formulare fragen manchmal viele Daten ab.",
-          "Nicht jede Frage ist nötig."
+          "Eine Person schreibt:"
         ],
-        "quote": "Trage hier Adresse, Telefon, Geburtsdatum und Konto ein.",
-        "warning": "Das ist sehr viel. Frag nach, ob das nötig ist.",
-        "remember": "Ich gebe nicht alles sofort ein."
+        "quote": "„Schick mir deine Daten. Aber sag es niemandem.“",
+        "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
-        "module": "Modul 3: Fotos, Standort und Formulare",
-        "title": "Einwilligung",
-        "icon": "✋",
+        "title": "Nachrichten und Kommentare",
+        "icon": "message",
         "text": [
-          "Einwilligung bedeutet: Du sagst bewusst Ja.",
-          "Du darfst auch Nein sagen.",
-          "Du darfst eine Erklärung verlangen."
+          "Auch Worte können verletzen.",
+          "Nachrichten und Kommentare können gespeichert werden.",
+          "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ein Ja muss freiwillig sein."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
-        "module": "Modul 3: Fotos, Standort und Formulare",
-        "title": "Übung: Foto oder Daten",
-        "icon": "❓",
+        "title": "Übung: Inhalt prüfen",
+        "icon": "exercise",
         "exercise": {
-          "id": "dsFoto",
-          "question": "Jemand möchte ein Gruppenfoto posten. Du bist darauf gut erkennbar.",
+          "id": "datenschutzContent",
+          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Vor dem Teilen muss gefragt werden. Du darfst Nein sagen."
+              "title": "Achtung.",
+              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
             },
             "unsafe": {
               "type": "success",
               "title": "Richtig.",
-              "text": "Vor dem Teilen muss gefragt werden. Du darfst Nein sagen."
+              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
             },
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
-        "module": "Modul 3: Fotos, Standort und Formulare",
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
-          "Ich frage nach.",
-          "Ich sage Nein, wenn ich unsicher bin.",
-          "Ich hole Hilfe."
+          "Ich muss nichts posten.",
+          "Ich muss nichts verschicken.",
+          "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide mit."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
-        "module": "Modul 4: Datenmissbrauch und Betrug",
-        "title": "Modulstart: Datenmissbrauch und Betrug",
-        "icon": "⚠️",
+        "title": "Modulstart: Links, Formulare und Betrug",
+        "icon": "data",
         "text": [
-          "Jetzt geht es um Gefahren.",
-          "Daten können falsch benutzt werden.",
-          "Du lernst Warnzeichen."
+          "Jetzt geht es um links, formulare und betrug.",
+          "Manche Inhalte sehen echt aus.",
+          "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich Daten teile."
+        "remember": "Ich prüfe, bevor ich handle.",
+        "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
-        "module": "Modul 4: Datenmissbrauch und Betrug",
-        "title": "Was ist Datenmissbrauch?",
-        "icon": "⚠️",
+        "title": "Komische Formulare",
+        "icon": "data",
         "text": [
-          "Datenmissbrauch bedeutet: Jemand benutzt deine Daten falsch."
+          "Manche Formulare fragen zu viele Daten.",
+          "Manche Links führen zu falschen Seiten.",
+          "Dort wollen Betrüger Daten bekommen."
         ],
-        "bullets": [
-          "für Betrug",
-          "für Druck",
-          "für falsche Profile"
-        ],
-        "remember": "Falsche Nutzung ist nicht okay."
+        "remember": "Ich handle nicht sofort.",
+        "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
-        "module": "Modul 4: Datenmissbrauch und Betrug",
-        "title": "Beispiel: Gewinn",
-        "icon": "🎁",
+        "title": "Beispiel: Lock-Nachricht",
+        "icon": "warning",
         "text": [
-          "Du bekommst eine Nachricht:"
+          "Du bekommst diese Nachricht:"
         ],
-        "quote": "Du hast gewonnen. Trage sofort alle Daten ein.",
-        "warning": "Das kann Betrug sein. Nicht sofort ausfüllen.",
-        "remember": "Erst prüfen. Dann handeln."
+        "quote": "Du hast gewonnen. Trage sofort deine Daten ein.",
+        "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
-        "module": "Modul 4: Datenmissbrauch und Betrug",
         "title": "Betrug erkennen",
-        "icon": "🔎",
+        "icon": "warning",
         "text": [
           "Vorsicht, wenn jemand:"
         ],
         "bullets": [
-          "Druck macht",
-          "Geld verlangt",
-          "Passwörter will"
+          "dein Passwort will",
+          "Geld von dir verlangt",
+          "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
-        "module": "Modul 4: Datenmissbrauch und Betrug",
         "title": "Wenn jemand Druck macht",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Warnzeichen sind:"
         ],
@@ -313,192 +305,189 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
-        "module": "Modul 4: Datenmissbrauch und Betrug",
-        "title": "Übung: Daten prüfen",
-        "icon": "❓",
+        "title": "Übung: Risiko prüfen",
+        "icon": "exercise",
         "exercise": {
-          "id": "dsBetrug",
-          "question": "Nachricht: „Nur heute: Gib alle Daten ein und gewinne.“",
+          "id": "datenschutzRisk",
+          "question": "Nachricht: „Gib deine Daten ein. Nur noch 5 Minuten.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt unsicher. Gewinn und Zeitdruck sind Warnzeichen."
+              "title": "Achtung.",
+              "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "unsafe": {
               "type": "success",
               "title": "Richtig.",
-              "text": "Das wirkt unsicher. Gewinn und Zeitdruck sind Warnzeichen."
+              "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
-        "module": "Modul 4: Datenmissbrauch und Betrug",
         "title": "Merksatz: Erst prüfen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
-          "Ich gebe Daten nicht sofort ein.",
-          "Ich prüfe den Absender.",
-          "Ich frage nach."
+          "Ich reagiere nicht sofort.",
+          "Ich prüfe die Nachricht.",
+          "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann Daten teilen."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
-        "module": "Modul 5: Rechte und gutes Handeln",
-        "title": "Modulstart: Rechte und gutes Handeln",
-        "icon": "⚖️",
+        "title": "Modulstart: Daten im Internet",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um deine Rechte.",
-          "Du darfst Fragen stellen.",
-          "Du darfst Schutz verlangen."
+          "Jetzt geht es um daten im internet.",
+          "Viele Menschen können mitlesen.",
+          "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich habe Rechte."
+        "remember": "Ich schreibe vorsichtig.",
+        "module": "Modul 5: Daten im Internet"
       },
       {
-        "module": "Modul 5: Rechte und gutes Handeln",
-        "title": "Ich darf fragen",
-        "icon": "❓",
+        "title": "Daten im Internet",
+        "icon": "message",
         "text": [
-          "Du darfst fragen:"
+          "Viele Menschen können Inhalte sehen.",
+          "Inhalte können schnell weitergegeben werden.",
+          "Darum solltest du vorsichtig sein."
+        ],
+        "remember": "Viele können mitlesen.",
+        "module": "Modul 5: Daten im Internet"
+      },
+      {
+        "title": "Guter Beitrag",
+        "icon": "message",
+        "text": [
+          "Ein guter Beitrag ist:"
         ],
         "bullets": [
-          "Warum braucht ihr diese Daten?",
-          "Wer sieht meine Daten?",
-          "Wie lange werden sie gespeichert?"
+          "freundlich",
+          "kurz und verständlich",
+          "ohne private Daten"
         ],
-        "remember": "Fragen ist richtig."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Daten im Internet"
       },
       {
-        "module": "Modul 5: Rechte und gutes Handeln",
-        "title": "Gute Daten-Entscheidung",
-        "icon": "✅",
+        "title": "Schlechter Beitrag",
+        "icon": "block",
         "text": [
-          "Eine gute Entscheidung ist ruhig und freiwillig."
+          "Diese Dinge sind nicht gut:"
         ],
         "bullets": [
-          "ich verstehe es",
-          "ich willige bewusst ein",
-          "ich kann Nein sagen"
+          "Beleidigungen",
+          "Gerüchte",
+          "private Fotos oder Daten"
         ],
-        "remember": "Ich entscheide nicht unter Druck."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Daten im Internet"
       },
       {
-        "module": "Modul 5: Rechte und gutes Handeln",
-        "title": "Schlechte Daten-Entscheidung",
-        "icon": "🚫",
+        "title": "Streit oder Ärger",
+        "icon": "message",
         "text": [
-          "Schlecht ist:"
+          "Manchmal gibt es Streit."
         ],
-        "bullets": [
-          "unter Druck zustimmen",
-          "Passwort teilen",
-          "zu viele Daten eintragen"
-        ],
-        "remember": "Druck ist kein gutes Zeichen."
+        "quote": "Du willst etwas Gemeines zurückschreiben.",
+        "warning": "Besser: Pause machen. Nicht sofort antworten.",
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Daten im Internet"
       },
       {
-        "module": "Modul 5: Rechte und gutes Handeln",
-        "title": "Streit oder Unsicherheit",
-        "icon": "💬",
-        "text": [
-          "Wenn du unsicher bist, mache Pause."
-        ],
-        "quote": "Ich verstehe nicht, warum diese Daten gebraucht werden.",
-        "success": "Das ist ein guter Satz. Du darfst eine Erklärung verlangen.",
-        "remember": "Ich darf langsam entscheiden."
-      },
-      {
-        "module": "Modul 5: Rechte und gutes Handeln",
-        "title": "Übung: Gute Entscheidung",
-        "icon": "❓",
+        "title": "Übung: Gute Nachricht erkennen",
+        "icon": "exercise",
         "exercise": {
-          "id": "dsGut",
-          "question": "Satz: „Ich frage erst meine Fachkraft, bevor ich das Formular absende.“",
+          "id": "datenschutzGroup",
+          "question": "„Ich brauche nur deine Telefonnummer für den Termin.“",
           "feedback": {
             "safe": {
               "type": "success",
               "title": "Richtig.",
-              "text": "Das wirkt sicher. Du prüfst zuerst und holst Unterstützung."
+              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
             },
             "unsafe": {
               "type": "warning",
               "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Du prüfst zuerst und holst Unterstützung."
+              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
             },
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Daten im Internet"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
+          "Nachricht öffnen",
+          "Absender blockieren",
+          "bei Unsicherheit Fachkraft fragen"
         ],
-        "remember": "Blockieren ist erlaubt."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
+        "title": "So meldest du etwas",
+        "icon": "report",
         "text": [
-          "Du kannst problematische Inhalte melden."
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
         ],
         "bullets": [
-          "Inhalt oder Profil öffnen",
-          "Melden auswählen",
+          "Problem zeigen",
+          "Melden auswählen, wenn vorhanden",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -506,87 +495,87 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit meinen Daten?"
+          "Was mache ich bei einem Problem?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   },
   {
     "id": "whatsapp",
     "title": "WhatsApp",
-    "icon": "💬",
+    "icon": "message",
     "desc": "Nachrichten, Gruppen, Links und Hilfe",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: WhatsApp verstehen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
           "Diese Lernseite hilft dir, WhatsApp sicherer zu nutzen.",
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: WhatsApp verstehen"
       },
       {
-        "module": "Modul 1: WhatsApp verstehen",
         "title": "Was ist WhatsApp?",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "WhatsApp ist eine App.",
           "Du kannst mit anderen Menschen Kontakt halten.",
           "Du kannst Nachrichten, Fotos und Sprachnachrichten senden."
         ],
-        "remember": "WhatsApp ist ein Werkzeug für Kontakt."
+        "remember": "WhatsApp ist ein Werkzeug für Kontakt.",
+        "module": "Modul 1: WhatsApp verstehen"
       },
       {
-        "module": "Modul 1: WhatsApp verstehen",
         "title": "Was kann ich mit WhatsApp machen?",
-        "icon": "📱",
+        "icon": "message",
         "text": [
           "Mit WhatsApp kannst du viele Dinge tun."
         ],
@@ -595,12 +584,12 @@ const topics = [
           "Fotos oder Videos schicken",
           "Sprachnachrichten senden"
         ],
-        "remember": "Ich entscheide, was ich teile."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: WhatsApp verstehen"
       },
       {
-        "module": "Modul 1: WhatsApp verstehen",
         "title": "WhatsApp im Alltag",
-        "icon": "👍",
+        "icon": "check",
         "text": [
           "WhatsApp kann im Alltag helfen."
         ],
@@ -609,34 +598,34 @@ const topics = [
           "kurz Bescheid sagen",
           "in einer Gruppe mitlesen"
         ],
-        "remember": "WhatsApp kann praktisch sein."
+        "remember": "WhatsApp kann praktisch sein.",
+        "module": "Modul 1: WhatsApp verstehen"
       },
       {
-        "module": "Modul 1: WhatsApp verstehen",
         "title": "Gute Nachricht erkennen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Eine gute Nachricht ist freundlich und klar."
         ],
         "quote": "Hallo. Ich komme heute um 16 Uhr.",
         "success": "Das wirkt sicher. Die Nachricht macht keinen Druck.",
-        "remember": "Gute Nachrichten sind klar und respektvoll."
+        "remember": "Gute Nachrichten sind klar und respektvoll.",
+        "module": "Modul 1: WhatsApp verstehen"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
           "Jetzt geht es um private Daten.",
           "Du lernst, welche Daten du schützen sollst.",
           "Du lernst auch, wann du Nein sagen darfst."
         ],
-        "remember": "Private Daten gehören mir."
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Was sind private Daten?",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
           "Private Daten gehören dir.",
           "Du sollst sie nicht einfach verschicken."
@@ -646,41 +635,41 @@ const topics = [
           "Telefonnummer",
           "Passwörter und PIN-Nummern"
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Adresse",
-        "icon": "📍",
+        "icon": "data",
         "text": [
           "Du bekommst eine Nachricht von einer unbekannten Person."
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat."
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Passwort",
-        "icon": "🔑",
+        "icon": "lock",
         "text": [
           "Eine Person schreibt dir:"
         ],
         "quote": "Gib mir dein Passwort. Sonst wird dein Konto gelöscht.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim."
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
           "id": "waPrivate",
           "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
@@ -691,48 +680,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du darfst Nein sagen.",
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Fotos und Stimme",
         "title": "Modulstart: Fotos und Stimme",
-        "icon": "🖼️",
+        "icon": "photo",
         "text": [
           "Jetzt geht es um Fotos und Sprachnachrichten.",
           "Auch Bilder und Stimmen können privat sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich sende."
+        "remember": "Ich entscheide, was ich sende.",
+        "module": "Modul 3: Fotos und Stimme"
       },
       {
-        "module": "Modul 3: Fotos und Stimme",
         "title": "Fotos verschicken",
-        "icon": "📷",
+        "icon": "photo",
         "text": [
           "Fotos können weitergeleitet werden.",
           "Dann sehen vielleicht andere Menschen das Foto.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich ein Foto schicke."
+        "remember": "Ich denke nach, bevor ich ein Foto schicke.",
+        "module": "Modul 3: Fotos und Stimme"
       },
       {
-        "module": "Modul 3: Fotos und Stimme",
         "title": "Private Fotos",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Manche Fotos sind sehr privat."
         ],
@@ -741,41 +730,41 @@ const topics = [
           "peinliche Fotos",
           "Fotos, die du später bereust"
         ],
-        "remember": "Ich entscheide über meine Bilder."
+        "remember": "Ich entscheide über meine Bilder.",
+        "module": "Modul 3: Fotos und Stimme"
       },
       {
-        "module": "Modul 3: Fotos und Stimme",
         "title": "Beispiel: Foto mit Druck",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Eine Person schreibt:"
         ],
         "quote": "Schick mir ein Foto von dir. Aber sag es niemandem.",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen."
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Fotos und Stimme"
       },
       {
-        "module": "Modul 3: Fotos und Stimme",
         "title": "Sprachnachrichten",
-        "icon": "🎤",
+        "icon": "message",
         "text": [
           "Auch deine Stimme ist privat.",
           "Eine Sprachnachricht kann weitergeleitet werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Auch meine Stimme gehört mir."
+        "remember": "Auch meine Stimme gehört mir.",
+        "module": "Modul 3: Fotos und Stimme"
       },
       {
-        "module": "Modul 3: Fotos und Stimme",
         "title": "Übung: Foto oder Stimme",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
           "id": "waPhoto",
           "question": "Nachricht: „Schick mir ein peinliches Foto. Ich zeige es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Es wird Druck gemacht."
             },
             "unsafe": {
@@ -786,59 +775,59 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 3: Fotos und Stimme"
       },
       {
-        "module": "Modul 3: Fotos und Stimme",
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du musst kein Foto schicken.",
           "Du musst keine Sprachnachricht schicken.",
           "Du darfst Nein sagen."
         ],
-        "remember": "Ich entscheide über Bilder und Stimme."
+        "remember": "Ich entscheide über Bilder und Stimme.",
+        "module": "Modul 3: Fotos und Stimme"
       },
       {
-        "module": "Modul 4: Links und Betrug",
         "title": "Modulstart: Links und Betrug",
-        "icon": "🔗",
+        "icon": "link",
         "text": [
           "Jetzt geht es um Links und Betrug.",
           "Manche Nachrichten sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich klicke."
+        "remember": "Ich prüfe, bevor ich klicke.",
+        "module": "Modul 4: Links und Betrug"
       },
       {
-        "module": "Modul 4: Links und Betrug",
         "title": "Komische Links",
-        "icon": "🔗",
+        "icon": "link",
         "text": [
           "Manche Links sind gefährlich.",
           "Sie führen auf falsche Internet-Seiten.",
           "Dort wollen Betrüger Daten bekommen."
         ],
-        "remember": "Ich klicke nicht sofort."
+        "remember": "Ich klicke nicht sofort.",
+        "module": "Modul 4: Links und Betrug"
       },
       {
-        "module": "Modul 4: Links und Betrug",
         "title": "Beispiel: Gewinn-Link",
-        "icon": "🎁",
+        "icon": "warning",
         "text": [
           "Du bekommst diese Nachricht:"
         ],
         "quote": "Du hast gewonnen. Klicke sofort hier.",
         "warning": "Das kann Betrug sein. Klicke nicht einfach.",
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Links und Betrug"
       },
       {
-        "module": "Modul 4: Links und Betrug",
         "title": "Betrug erkennen",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Vorsicht, wenn jemand:"
         ],
@@ -847,12 +836,12 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Links und Betrug"
       },
       {
-        "module": "Modul 4: Links und Betrug",
         "title": "Wenn jemand Druck macht",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Warnzeichen sind:"
         ],
@@ -861,19 +850,19 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Links und Betrug"
       },
       {
-        "module": "Modul 4: Links und Betrug",
         "title": "Übung: Link prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
           "id": "waLink",
           "question": "Nachricht: „Klicke sofort. Nur noch 5 Minuten.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Zeitdruck ist ein Warnzeichen. Nicht klicken."
             },
             "unsafe": {
@@ -884,48 +873,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Links und Betrug"
       },
       {
-        "module": "Modul 4: Links und Betrug",
         "title": "Merksatz: Erst prüfen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich klicke nicht sofort.",
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Links und Betrug"
       },
       {
-        "module": "Modul 5: Gruppen und gutes Verhalten",
         "title": "Modulstart: Gruppen",
-        "icon": "👥",
+        "icon": "message",
         "text": [
           "Jetzt geht es um WhatsApp-Gruppen.",
           "In Gruppen lesen viele Menschen mit.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "In Gruppen schreibe ich vorsichtig."
+        "remember": "In Gruppen schreibe ich vorsichtig.",
+        "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
-        "module": "Modul 5: Gruppen und gutes Verhalten",
         "title": "WhatsApp-Gruppen",
-        "icon": "👥",
+        "icon": "message",
         "text": [
           "In Gruppen lesen viele Menschen mit.",
           "Nachrichten können schnell weitergegeben werden.",
           "Darum solltest du besonders vorsichtig schreiben."
         ],
-        "remember": "Gruppen haben viele Mitlesende."
+        "remember": "Gruppen haben viele Mitlesende.",
+        "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
-        "module": "Modul 5: Gruppen und gutes Verhalten",
         "title": "Gute Gruppennachricht",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Eine gute Gruppen-Nachricht ist:"
         ],
@@ -934,12 +923,12 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
-        "module": "Modul 5: Gruppen und gutes Verhalten",
         "title": "Schlechte Gruppennachricht",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Diese Dinge gehören nicht in Gruppen:"
         ],
@@ -948,23 +937,23 @@ const topics = [
           "Gerüchte",
           "private Fotos"
         ],
-        "remember": "Ich verletze andere nicht."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
-        "module": "Modul 5: Gruppen und gutes Verhalten",
         "title": "Streit in der Gruppe",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "In einer Gruppe streiten sich Menschen."
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden."
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
-        "module": "Modul 5: Gruppen und gutes Verhalten",
         "title": "Übung: Gute Nachricht erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
           "id": "waGroup",
           "question": "Nachricht: „Hallo. Ich komme heute um 16 Uhr.“",
@@ -982,68 +971,68 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst kein Foto schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
+          "Chat öffnen",
+          "auf den Namen tippen",
+          "Blockieren auswählen"
         ],
-        "remember": "Blockieren ist erlaubt."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
+        "title": "So meldest du eine Nachricht",
+        "icon": "report",
         "text": [
-          "Du kannst problematische Inhalte melden."
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
         ],
         "bullets": [
-          "Inhalt oder Profil öffnen",
+          "Nachricht lange drücken",
           "Melden auswählen",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -1051,181 +1040,181 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit WhatsApp?"
+          "Was mache ich bei einer komischen Nachricht?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nicht klicken",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "remember": "Meine Daten gehören mir. Ich hole Hilfe, wenn ich unsicher bin.",
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   },
   {
     "id": "facebook",
     "title": "Facebook",
-    "icon": "📘",
+    "icon": "message",
     "desc": "Profil, Beiträge, Kommentare und Privatsphäre",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: Facebook verstehen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
-          "Hier lernst du: Facebook sicherer nutzen.",
-          "Du lernst mit kurzen Seiten.",
+          "Diese Lernseite hilft dir, Facebook sicherer zu nutzen.",
+          "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: Facebook verstehen"
       },
       {
-        "module": "Modul 1: Facebook verstehen",
         "title": "Was ist Facebook?",
-        "icon": "📘",
+        "icon": "message",
         "text": [
-          "Facebook ist ein soziales Netzwerk.",
-          "Dort können Menschen Inhalte sehen oder teilen.",
+          "Facebook ist ein digitales Angebot.",
+          "Du kannst dort Inhalte sehen oder teilen.",
           "Andere Menschen können mit dir Kontakt haben."
         ],
-        "remember": "Facebook ist ein digitales Angebot."
+        "remember": "Facebook ist ein Werkzeug für Kontakt und Inhalte.",
+        "module": "Modul 1: Facebook verstehen"
       },
       {
-        "module": "Modul 1: Facebook verstehen",
-        "title": "Was kann ich bei Facebook machen?",
-        "icon": "📘",
+        "title": "Was kann ich mit Facebook machen?",
+        "icon": "message",
         "text": [
-          "Bei Facebook kannst du verschiedene Dinge tun."
+          "Mit Facebook kannst du viele Dinge tun."
         ],
         "bullets": [
           "Profil ansehen",
           "Beiträge schreiben",
           "Kommentare lesen"
         ],
-        "remember": "Ich entscheide, was ich nutze."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: Facebook verstehen"
       },
       {
-        "module": "Modul 1: Facebook verstehen",
         "title": "Facebook im Alltag",
-        "icon": "👍",
+        "icon": "check",
         "text": [
-          "Facebook kann im Alltag nützlich sein."
+          "Facebook kann im Alltag hilfreich sein."
         ],
         "bullets": [
-          "Kontakt halten",
           "Informationen bekommen",
-          "Veranstaltungen sehen"
+          "Kontakt halten",
+          "Inhalte ansehen oder teilen"
         ],
-        "remember": "Ich nutze es bewusst."
+        "remember": "Facebook kann praktisch sein.",
+        "module": "Modul 1: Facebook verstehen"
       },
       {
-        "module": "Modul 1: Facebook verstehen",
         "title": "Guten Inhalt erkennen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
-        "quote": "Danke für die Info. Ich komme später.",
+        "quote": "„Danke für die Info. Ich komme später.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll."
+        "remember": "Gute Inhalte sind respektvoll.",
+        "module": "Modul 1: Facebook verstehen"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
           "Jetzt geht es um private Daten.",
-          "Du lernst, was nicht öffentlich sein sollte.",
+          "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir."
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Was sind private Daten?",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
-          "Private Daten sind Informationen über dich.",
-          "Du sollst sie nicht einfach posten oder verschicken."
+          "Private Daten gehören dir.",
+          "Du sollst sie nicht einfach veröffentlichen oder verschicken."
         ],
         "bullets": [
-          "Adresse und Wohnort",
-          "Telefonnummer",
-          "Passwörter und PIN-Nummern"
+          "Profilfoto und Wohnort",
+          "Freundesliste",
+          "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Adresse",
-        "icon": "📍",
+        "icon": "data",
         "text": [
-          "Eine fremde Person fragt dich:"
+          "Eine unbekannte Person fragt dich:"
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat."
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Passwort",
-        "icon": "🔑",
+        "icon": "lock",
         "text": [
-          "Eine Nachricht macht Druck:"
+          "Eine Person schreibt dir:"
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
-        "warning": "Das ist nicht sicher. Dein Passwort bleibt geheim.",
-        "remember": "Mein Passwort bleibt geheim."
+        "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "facebookPrivat",
-          "question": "Nachricht: „Schick mir deine PIN über Facebook.“",
+          "id": "facebookPrivate",
+          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
@@ -1236,48 +1225,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du darfst Nein sagen.",
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Beiträge, Fotos und Kommentare",
-        "title": "Modulstart: Inhalte bewusst teilen",
-        "icon": "🖼️",
+        "title": "Modulstart: Beiträge, Fotos und Kommentare",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um Inhalte.",
+          "Jetzt geht es um beiträge, fotos und kommentare.",
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich teile bewusst."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
-        "module": "Modul 3: Beiträge, Fotos und Kommentare",
-        "title": "Inhalte teilen",
-        "icon": "📤",
+        "title": "Beiträge teilen",
+        "icon": "message",
         "text": [
-          "Inhalte können gespeichert werden.",
-          "Andere können sie weitergeben.",
+          "Beiträge können weitergegeben oder gespeichert werden.",
+          "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile."
+        "remember": "Ich denke nach, bevor ich teile.",
+        "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
-        "module": "Modul 3: Beiträge, Fotos und Kommentare",
         "title": "Private Inhalte",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Manche Inhalte sind sehr privat."
         ],
@@ -1286,41 +1275,41 @@ const topics = [
           "öffentliche Beiträge",
           "Kommentare über andere"
         ],
-        "remember": "Private Inhalte bleiben privat."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
-        "module": "Modul 3: Beiträge, Fotos und Kommentare",
         "title": "Beispiel: Druck",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Eine Person schreibt:"
         ],
-        "quote": "Poste das Foto von dir. Aber sag es niemandem.",
+        "quote": "„Poste das Foto von dir. Aber sag es niemandem.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen."
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
-        "module": "Modul 3: Beiträge, Fotos und Kommentare",
         "title": "Nachrichten und Kommentare",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Auch Worte können verletzen.",
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
-        "module": "Modul 3: Beiträge, Fotos und Kommentare",
         "title": "Übung: Inhalt prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "facebookInhalt",
+          "id": "facebookContent",
           "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
             },
             "unsafe": {
@@ -1331,59 +1320,59 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
-        "module": "Modul 3: Beiträge, Fotos und Kommentare",
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich muss nichts posten.",
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
-        "module": "Modul 4: Beiträge, Werbung und Betrug",
-        "title": "Modulstart: Risiken erkennen",
-        "icon": "⚠️",
+        "title": "Modulstart: Beiträge, Werbung und Betrug",
+        "icon": "warning",
         "text": [
-          "Jetzt geht es um Risiken.",
-          "Manche Inhalte sehen harmlos aus.",
+          "Jetzt geht es um beiträge, werbung und betrug.",
+          "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle."
+        "remember": "Ich prüfe, bevor ich handle.",
+        "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Beiträge, Werbung und Betrug",
-        "title": "Typische Risiken",
-        "icon": "🔎",
+        "title": "Komische Beiträge",
+        "icon": "warning",
         "text": [
           "Manche Beiträge stimmen nicht.",
           "Manche Werbung will Daten oder Geld.",
           "Manche Menschen machen Druck."
         ],
-        "remember": "Ich reagiere nicht sofort."
+        "remember": "Ich handle nicht sofort.",
+        "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Beiträge, Werbung und Betrug",
         "title": "Beispiel: Lock-Nachricht",
-        "icon": "🎁",
+        "icon": "warning",
         "text": [
-          "Du siehst oder bekommst diese Nachricht:"
+          "Du bekommst diese Nachricht:"
         ],
         "quote": "Du hast gewonnen. Klicke und teile den Beitrag.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Beiträge, Werbung und Betrug",
         "title": "Betrug erkennen",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Vorsicht, wenn jemand:"
         ],
@@ -1392,12 +1381,12 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Beiträge, Werbung und Betrug",
         "title": "Wenn jemand Druck macht",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Warnzeichen sind:"
         ],
@@ -1406,19 +1395,19 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Beiträge, Werbung und Betrug",
         "title": "Übung: Risiko prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "facebookRisiko",
+          "id": "facebookRisk",
           "question": "Beitrag: „Teile sofort. Sonst wird dein Konto gelöscht.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "unsafe": {
@@ -1429,48 +1418,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Beiträge, Werbung und Betrug",
         "title": "Merksatz: Erst prüfen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich reagiere nicht sofort.",
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
-        "module": "Modul 5: Beiträge und Kommentare",
-        "title": "Modulstart: Gutes Verhalten",
-        "icon": "👥",
+        "title": "Modulstart: Beiträge und Kommentare",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um Beiträge und Kommentare.",
+          "Jetzt geht es um beiträge und kommentare.",
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig."
+        "remember": "Ich schreibe vorsichtig.",
+        "module": "Modul 5: Beiträge und Kommentare"
       },
       {
-        "module": "Modul 5: Beiträge und Kommentare",
         "title": "Beiträge und Kommentare",
-        "icon": "👥",
+        "icon": "message",
         "text": [
           "Viele Menschen können Inhalte sehen.",
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen."
+        "remember": "Viele können mitlesen.",
+        "module": "Modul 5: Beiträge und Kommentare"
       },
       {
-        "module": "Modul 5: Beiträge und Kommentare",
         "title": "Guter Beitrag",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Ein guter Beitrag ist:"
         ],
@@ -1479,12 +1468,12 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Beiträge und Kommentare"
       },
       {
-        "module": "Modul 5: Beiträge und Kommentare",
         "title": "Schlechter Beitrag",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Diese Dinge sind nicht gut:"
         ],
@@ -1493,26 +1482,26 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Beiträge und Kommentare"
       },
       {
-        "module": "Modul 5: Beiträge und Kommentare",
         "title": "Streit oder Ärger",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Manchmal gibt es Streit."
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden."
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Beiträge und Kommentare"
       },
       {
-        "module": "Modul 5: Beiträge und Kommentare",
         "title": "Übung: Gute Nachricht erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "facebookGut",
-          "question": "Danke für die Info. Ich komme später.",
+          "id": "facebookGroup",
+          "question": "„Danke für die Info. Ich komme später.“",
           "feedback": {
             "safe": {
               "type": "success",
@@ -1527,68 +1516,68 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Beiträge und Kommentare"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
+          "Profil öffnen",
+          "auf die Person oder Seite gehen",
+          "Blockieren auswählen"
         ],
-        "remember": "Blockieren ist erlaubt."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
+        "title": "So meldest du etwas",
+        "icon": "report",
         "text": [
-          "Du kannst problematische Inhalte melden."
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
         ],
         "bullets": [
-          "Inhalt oder Profil öffnen",
+          "Beitrag oder Kommentar öffnen",
           "Melden auswählen",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -1596,181 +1585,181 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit Facebook?"
+          "Was mache ich bei einem Problem?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   },
   {
     "id": "instagram",
     "title": "Instagram",
-    "icon": "📸",
+    "icon": "photo",
     "desc": "Fotos, Stories, Reels und Nachrichten",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: Instagram verstehen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
-          "Hier lernst du: Instagram sicherer nutzen.",
-          "Du lernst mit kurzen Seiten.",
+          "Diese Lernseite hilft dir, Instagram sicherer zu nutzen.",
+          "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: Instagram verstehen"
       },
       {
-        "module": "Modul 1: Instagram verstehen",
         "title": "Was ist Instagram?",
-        "icon": "📸",
+        "icon": "photo",
         "text": [
-          "Instagram ist eine App für Fotos und kurze Videos.",
-          "Dort können Menschen Inhalte sehen oder teilen.",
+          "Instagram ist ein digitales Angebot.",
+          "Du kannst dort Inhalte sehen oder teilen.",
           "Andere Menschen können mit dir Kontakt haben."
         ],
-        "remember": "Instagram ist ein digitales Angebot."
+        "remember": "Instagram ist ein Werkzeug für Kontakt und Inhalte.",
+        "module": "Modul 1: Instagram verstehen"
       },
       {
-        "module": "Modul 1: Instagram verstehen",
-        "title": "Was kann ich bei Instagram machen?",
-        "icon": "📸",
+        "title": "Was kann ich mit Instagram machen?",
+        "icon": "photo",
         "text": [
-          "Bei Instagram kannst du verschiedene Dinge tun."
+          "Mit Instagram kannst du viele Dinge tun."
         ],
         "bullets": [
           "Fotos ansehen",
           "Stories posten",
           "Reels anschauen"
         ],
-        "remember": "Ich entscheide, was ich nutze."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: Instagram verstehen"
       },
       {
-        "module": "Modul 1: Instagram verstehen",
         "title": "Instagram im Alltag",
-        "icon": "👍",
+        "icon": "check",
         "text": [
-          "Instagram kann im Alltag nützlich sein."
+          "Instagram kann im Alltag hilfreich sein."
         ],
         "bullets": [
+          "Informationen bekommen",
           "Kontakt halten",
-          "kreative Ideen sehen",
-          "Informationen bekommen"
+          "Inhalte ansehen oder teilen"
         ],
-        "remember": "Ich nutze es bewusst."
+        "remember": "Instagram kann praktisch sein.",
+        "module": "Modul 1: Instagram verstehen"
       },
       {
-        "module": "Modul 1: Instagram verstehen",
         "title": "Guten Inhalt erkennen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
-        "quote": "Danke für deine Nachricht. Ich antworte später.",
+        "quote": "„Danke für deine Nachricht. Ich antworte später.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll."
+        "remember": "Gute Inhalte sind respektvoll.",
+        "module": "Modul 1: Instagram verstehen"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
           "Jetzt geht es um private Daten.",
-          "Du lernst, was nicht öffentlich sein sollte.",
+          "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir."
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Was sind private Daten?",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
-          "Private Daten sind Informationen über dich.",
-          "Du sollst sie nicht einfach posten oder verschicken."
+          "Private Daten gehören dir.",
+          "Du sollst sie nicht einfach veröffentlichen oder verschicken."
         ],
         "bullets": [
-          "Adresse und Wohnort",
-          "Telefonnummer",
-          "Passwörter und PIN-Nummern"
+          "Profilfoto und Wohnort",
+          "Standort",
+          "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Adresse",
-        "icon": "📍",
+        "icon": "data",
         "text": [
-          "Eine fremde Person fragt dich:"
+          "Eine unbekannte Person fragt dich:"
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat."
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Passwort",
-        "icon": "🔑",
+        "icon": "lock",
         "text": [
-          "Eine Nachricht macht Druck:"
+          "Eine Person schreibt dir:"
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
-        "warning": "Das ist nicht sicher. Dein Passwort bleibt geheim.",
-        "remember": "Mein Passwort bleibt geheim."
+        "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "instagramPrivat",
-          "question": "Nachricht: „Schick mir deine PIN über Instagram.“",
+          "id": "instagramPrivate",
+          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
@@ -1781,48 +1770,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du darfst Nein sagen.",
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Fotos, Stories und Reels",
-        "title": "Modulstart: Inhalte bewusst teilen",
-        "icon": "🖼️",
+        "title": "Modulstart: Fotos, Stories und Reels",
+        "icon": "photo",
         "text": [
-          "Jetzt geht es um Inhalte.",
+          "Jetzt geht es um fotos, stories und reels.",
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich teile bewusst."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
-        "module": "Modul 3: Fotos, Stories und Reels",
-        "title": "Inhalte teilen",
-        "icon": "📤",
+        "title": "Fotos teilen",
+        "icon": "photo",
         "text": [
-          "Inhalte können gespeichert werden.",
-          "Andere können sie weitergeben.",
+          "Fotos können weitergegeben oder gespeichert werden.",
+          "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile."
+        "remember": "Ich denke nach, bevor ich teile.",
+        "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
-        "module": "Modul 3: Fotos, Stories und Reels",
         "title": "Private Inhalte",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Manche Inhalte sind sehr privat."
         ],
@@ -1831,41 +1820,41 @@ const topics = [
           "Stories mit Standort",
           "Videos mit anderen Personen"
         ],
-        "remember": "Private Inhalte bleiben privat."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
-        "module": "Modul 3: Fotos, Stories und Reels",
         "title": "Beispiel: Druck",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Eine Person schreibt:"
         ],
-        "quote": "Schick mir ein privates Foto. Sag es niemandem.",
+        "quote": "„Schick mir ein privates Foto. Sag es niemandem.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen."
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
-        "module": "Modul 3: Fotos, Stories und Reels",
         "title": "Nachrichten und Kommentare",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Auch Worte können verletzen.",
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
-        "module": "Modul 3: Fotos, Stories und Reels",
         "title": "Übung: Inhalt prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "instagramInhalt",
+          "id": "instagramContent",
           "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
             },
             "unsafe": {
@@ -1876,59 +1865,59 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
-        "module": "Modul 3: Fotos, Stories und Reels",
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich muss nichts posten.",
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
-        "module": "Modul 4: Stories, Werbung und Betrug",
-        "title": "Modulstart: Risiken erkennen",
-        "icon": "⚠️",
+        "title": "Modulstart: Stories, Werbung und Betrug",
+        "icon": "warning",
         "text": [
-          "Jetzt geht es um Risiken.",
-          "Manche Inhalte sehen harmlos aus.",
+          "Jetzt geht es um stories, werbung und betrug.",
+          "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle."
+        "remember": "Ich prüfe, bevor ich handle.",
+        "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Stories, Werbung und Betrug",
-        "title": "Typische Risiken",
-        "icon": "🔎",
+        "title": "Komische Nachrichten",
+        "icon": "warning",
         "text": [
           "Manche Nachrichten machen Druck.",
           "Manche Werbung verspricht zu viel.",
           "Manche Links führen zu Betrug."
         ],
-        "remember": "Ich reagiere nicht sofort."
+        "remember": "Ich handle nicht sofort.",
+        "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Stories, Werbung und Betrug",
         "title": "Beispiel: Lock-Nachricht",
-        "icon": "🎁",
+        "icon": "warning",
         "text": [
-          "Du siehst oder bekommst diese Nachricht:"
+          "Du bekommst diese Nachricht:"
         ],
-        "quote": "Du hast gewonnen. Klicke sofort auf den Link in meiner Bio.",
+        "quote": "Du hast gewonnen. Klicke sofort in meiner Bio.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Stories, Werbung und Betrug",
         "title": "Betrug erkennen",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Vorsicht, wenn jemand:"
         ],
@@ -1937,12 +1926,12 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Stories, Werbung und Betrug",
         "title": "Wenn jemand Druck macht",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Warnzeichen sind:"
         ],
@@ -1951,19 +1940,19 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Stories, Werbung und Betrug",
         "title": "Übung: Risiko prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "instagramRisiko",
+          "id": "instagramRisk",
           "question": "Nachricht: „Klicke sofort auf den Link in der Bio.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "unsafe": {
@@ -1974,48 +1963,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Stories, Werbung und Betrug",
         "title": "Merksatz: Erst prüfen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich reagiere nicht sofort.",
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
-        "module": "Modul 5: Kommentare und Nachrichten",
-        "title": "Modulstart: Gutes Verhalten",
-        "icon": "👥",
+        "title": "Modulstart: Kommentare und Nachrichten",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um Kommentare und Nachrichten.",
+          "Jetzt geht es um kommentare und nachrichten.",
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig."
+        "remember": "Ich schreibe vorsichtig.",
+        "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
-        "module": "Modul 5: Kommentare und Nachrichten",
         "title": "Kommentare und Nachrichten",
-        "icon": "👥",
+        "icon": "message",
         "text": [
           "Viele Menschen können Inhalte sehen.",
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen."
+        "remember": "Viele können mitlesen.",
+        "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
-        "module": "Modul 5: Kommentare und Nachrichten",
         "title": "Guter Beitrag",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Ein guter Beitrag ist:"
         ],
@@ -2024,12 +2013,12 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
-        "module": "Modul 5: Kommentare und Nachrichten",
         "title": "Schlechter Beitrag",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Diese Dinge sind nicht gut:"
         ],
@@ -2038,26 +2027,26 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
-        "module": "Modul 5: Kommentare und Nachrichten",
         "title": "Streit oder Ärger",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Manchmal gibt es Streit."
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden."
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
-        "module": "Modul 5: Kommentare und Nachrichten",
         "title": "Übung: Gute Nachricht erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "instagramGut",
-          "question": "Danke für deine Nachricht. Ich antworte später.",
+          "id": "instagramGroup",
+          "question": "„Danke für deine Nachricht. Ich antworte später.“",
           "feedback": {
             "safe": {
               "type": "success",
@@ -2072,68 +2061,68 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
+          "Profil öffnen",
+          "auf die drei Punkte tippen",
+          "Blockieren auswählen"
         ],
-        "remember": "Blockieren ist erlaubt."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
+        "title": "So meldest du etwas",
+        "icon": "report",
         "text": [
-          "Du kannst problematische Inhalte melden."
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
         ],
         "bullets": [
-          "Inhalt oder Profil öffnen",
+          "Beitrag oder Nachricht öffnen",
           "Melden auswählen",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -2141,181 +2130,181 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit Instagram?"
+          "Was mache ich bei einem Problem?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   },
   {
     "id": "youtube",
     "title": "YouTube",
-    "icon": "▶️",
+    "icon": "understand",
     "desc": "Videos ansehen, Kommentare und Werbung prüfen",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: YouTube verstehen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
-          "Hier lernst du: YouTube sicherer nutzen.",
-          "Du lernst mit kurzen Seiten.",
+          "Diese Lernseite hilft dir, YouTube sicherer zu nutzen.",
+          "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: YouTube verstehen"
       },
       {
-        "module": "Modul 1: YouTube verstehen",
         "title": "Was ist YouTube?",
-        "icon": "▶️",
+        "icon": "understand",
         "text": [
-          "YouTube ist eine Plattform für Videos.",
-          "Dort können Menschen Inhalte sehen oder teilen.",
+          "YouTube ist ein digitales Angebot.",
+          "Du kannst dort Inhalte sehen oder teilen.",
           "Andere Menschen können mit dir Kontakt haben."
         ],
-        "remember": "YouTube ist ein digitales Angebot."
+        "remember": "YouTube ist ein Werkzeug für Kontakt und Inhalte.",
+        "module": "Modul 1: YouTube verstehen"
       },
       {
-        "module": "Modul 1: YouTube verstehen",
-        "title": "Was kann ich bei YouTube machen?",
-        "icon": "▶️",
+        "title": "Was kann ich mit YouTube machen?",
+        "icon": "understand",
         "text": [
-          "Bei YouTube kannst du verschiedene Dinge tun."
+          "Mit YouTube kannst du viele Dinge tun."
         ],
         "bullets": [
           "Videos ansehen",
           "Kanäle abonnieren",
           "Kommentare lesen"
         ],
-        "remember": "Ich entscheide, was ich nutze."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: YouTube verstehen"
       },
       {
-        "module": "Modul 1: YouTube verstehen",
         "title": "YouTube im Alltag",
-        "icon": "👍",
+        "icon": "check",
         "text": [
-          "YouTube kann im Alltag nützlich sein."
+          "YouTube kann im Alltag hilfreich sein."
         ],
         "bullets": [
-          "Lernen",
-          "Unterhaltung",
-          "Anleitungen finden"
+          "Informationen bekommen",
+          "Kontakt halten",
+          "Inhalte ansehen oder teilen"
         ],
-        "remember": "Ich nutze es bewusst."
+        "remember": "YouTube kann praktisch sein.",
+        "module": "Modul 1: YouTube verstehen"
       },
       {
-        "module": "Modul 1: YouTube verstehen",
         "title": "Guten Inhalt erkennen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
-        "quote": "Danke für das Video. Das hat mir geholfen.",
+        "quote": "„Danke für das Video. Das hat mir geholfen.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll."
+        "remember": "Gute Inhalte sind respektvoll.",
+        "module": "Modul 1: YouTube verstehen"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
           "Jetzt geht es um private Daten.",
-          "Du lernst, was nicht öffentlich sein sollte.",
+          "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir."
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Was sind private Daten?",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
-          "Private Daten sind Informationen über dich.",
-          "Du sollst sie nicht einfach posten oder verschicken."
+          "Private Daten gehören dir.",
+          "Du sollst sie nicht einfach veröffentlichen oder verschicken."
         ],
         "bullets": [
-          "Adresse und Wohnort",
-          "Telefonnummer",
-          "Passwörter und PIN-Nummern"
+          "Name im Kommentar",
+          "Interessen",
+          "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Adresse",
-        "icon": "📍",
+        "icon": "data",
         "text": [
-          "Eine fremde Person fragt dich:"
+          "Eine unbekannte Person fragt dich:"
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat."
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Passwort",
-        "icon": "🔑",
+        "icon": "lock",
         "text": [
-          "Eine Nachricht macht Druck:"
+          "Eine Person schreibt dir:"
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
-        "warning": "Das ist nicht sicher. Dein Passwort bleibt geheim.",
-        "remember": "Mein Passwort bleibt geheim."
+        "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "youtubePrivat",
-          "question": "Nachricht: „Schick mir deine PIN über YouTube.“",
+          "id": "youtubePrivate",
+          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
@@ -2326,48 +2315,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du darfst Nein sagen.",
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Videos, Kommentare und Werbung",
-        "title": "Modulstart: Inhalte bewusst teilen",
-        "icon": "🖼️",
+        "title": "Modulstart: Videos, Kommentare und Werbung",
+        "icon": "understand",
         "text": [
-          "Jetzt geht es um Inhalte.",
+          "Jetzt geht es um videos, kommentare und werbung.",
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich teile bewusst."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
-        "module": "Modul 3: Videos, Kommentare und Werbung",
-        "title": "Inhalte teilen",
-        "icon": "📤",
+        "title": "Videos teilen",
+        "icon": "understand",
         "text": [
-          "Inhalte können gespeichert werden.",
-          "Andere können sie weitergeben.",
+          "Videos können weitergegeben oder gespeichert werden.",
+          "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile."
+        "remember": "Ich denke nach, bevor ich teile.",
+        "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
-        "module": "Modul 3: Videos, Kommentare und Werbung",
         "title": "Private Inhalte",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Manche Inhalte sind sehr privat."
         ],
@@ -2376,41 +2365,41 @@ const topics = [
           "peinliche Videos",
           "Videos mit anderen Personen"
         ],
-        "remember": "Private Inhalte bleiben privat."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
-        "module": "Modul 3: Videos, Kommentare und Werbung",
         "title": "Beispiel: Druck",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Eine Person schreibt:"
         ],
-        "quote": "Schreib deine Telefonnummer in die Kommentare.",
+        "quote": "„Schreib deine Telefonnummer in die Kommentare.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen."
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
-        "module": "Modul 3: Videos, Kommentare und Werbung",
         "title": "Nachrichten und Kommentare",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Auch Worte können verletzen.",
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
-        "module": "Modul 3: Videos, Kommentare und Werbung",
         "title": "Übung: Inhalt prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "youtubeInhalt",
+          "id": "youtubeContent",
           "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
             },
             "unsafe": {
@@ -2421,59 +2410,59 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
-        "module": "Modul 3: Videos, Kommentare und Werbung",
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich muss nichts posten.",
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
-        "module": "Modul 4: Werbung, Fake News und Betrug",
-        "title": "Modulstart: Risiken erkennen",
-        "icon": "⚠️",
+        "title": "Modulstart: Werbung, Fake News und Betrug",
+        "icon": "warning",
         "text": [
-          "Jetzt geht es um Risiken.",
-          "Manche Inhalte sehen harmlos aus.",
+          "Jetzt geht es um werbung, fake news und betrug.",
+          "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle."
+        "remember": "Ich prüfe, bevor ich handle.",
+        "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
-        "module": "Modul 4: Werbung, Fake News und Betrug",
-        "title": "Typische Risiken",
-        "icon": "🔎",
+        "title": "Komische Videos",
+        "icon": "warning",
         "text": [
           "Manche Videos sind falsch.",
           "Manche Werbung will Geld.",
           "Manche Kommentare sind Betrug."
         ],
-        "remember": "Ich reagiere nicht sofort."
+        "remember": "Ich handle nicht sofort.",
+        "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
-        "module": "Modul 4: Werbung, Fake News und Betrug",
         "title": "Beispiel: Lock-Nachricht",
-        "icon": "🎁",
+        "icon": "warning",
         "text": [
-          "Du siehst oder bekommst diese Nachricht:"
+          "Du bekommst diese Nachricht:"
         ],
         "quote": "Kaufe sofort. Nur heute wirst du reich.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
-        "module": "Modul 4: Werbung, Fake News und Betrug",
         "title": "Betrug erkennen",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Vorsicht, wenn jemand:"
         ],
@@ -2482,12 +2471,12 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
-        "module": "Modul 4: Werbung, Fake News und Betrug",
         "title": "Wenn jemand Druck macht",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Warnzeichen sind:"
         ],
@@ -2496,19 +2485,19 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
-        "module": "Modul 4: Werbung, Fake News und Betrug",
         "title": "Übung: Risiko prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "youtubeRisiko",
+          "id": "youtubeRisk",
           "question": "Video: „Kaufe sofort. Nur heute wirst du reich.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "unsafe": {
@@ -2519,48 +2508,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
-        "module": "Modul 4: Werbung, Fake News und Betrug",
         "title": "Merksatz: Erst prüfen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich reagiere nicht sofort.",
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
-        "module": "Modul 5: Kommentare und Community",
-        "title": "Modulstart: Gutes Verhalten",
-        "icon": "👥",
+        "title": "Modulstart: Kommentare und Community",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um Kommentare und Community.",
+          "Jetzt geht es um kommentare und community.",
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig."
+        "remember": "Ich schreibe vorsichtig.",
+        "module": "Modul 5: Kommentare und Community"
       },
       {
-        "module": "Modul 5: Kommentare und Community",
         "title": "Kommentare und Community",
-        "icon": "👥",
+        "icon": "message",
         "text": [
           "Viele Menschen können Inhalte sehen.",
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen."
+        "remember": "Viele können mitlesen.",
+        "module": "Modul 5: Kommentare und Community"
       },
       {
-        "module": "Modul 5: Kommentare und Community",
         "title": "Guter Beitrag",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Ein guter Beitrag ist:"
         ],
@@ -2569,12 +2558,12 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Kommentare und Community"
       },
       {
-        "module": "Modul 5: Kommentare und Community",
         "title": "Schlechter Beitrag",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Diese Dinge sind nicht gut:"
         ],
@@ -2583,26 +2572,26 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Kommentare und Community"
       },
       {
-        "module": "Modul 5: Kommentare und Community",
         "title": "Streit oder Ärger",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Manchmal gibt es Streit."
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden."
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Kommentare und Community"
       },
       {
-        "module": "Modul 5: Kommentare und Community",
         "title": "Übung: Gute Nachricht erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "youtubeGut",
-          "question": "Danke für das Video. Das hat mir geholfen.",
+          "id": "youtubeGroup",
+          "question": "„Danke für das Video. Das hat mir geholfen.“",
           "feedback": {
             "safe": {
               "type": "success",
@@ -2617,68 +2606,68 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Kommentare und Community"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
+          "Kommentar oder Kanal öffnen",
+          "Nutzer blockieren, wenn möglich",
+          "Fachkraft fragen"
         ],
-        "remember": "Blockieren ist erlaubt."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
+        "title": "So meldest du etwas",
+        "icon": "report",
         "text": [
-          "Du kannst problematische Inhalte melden."
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
         ],
         "bullets": [
-          "Inhalt oder Profil öffnen",
+          "Video oder Kommentar öffnen",
           "Melden auswählen",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -2686,181 +2675,181 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit YouTube?"
+          "Was mache ich bei einem Problem?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   },
   {
     "id": "snapchat",
     "title": "Snapchat",
-    "icon": "👻",
+    "icon": "photo",
     "desc": "Snaps, Screenshots, Standort und Kontakte",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: Snapchat verstehen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
-          "Hier lernst du: Snapchat sicherer nutzen.",
-          "Du lernst mit kurzen Seiten.",
+          "Diese Lernseite hilft dir, Snapchat sicherer zu nutzen.",
+          "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: Snapchat verstehen"
       },
       {
-        "module": "Modul 1: Snapchat verstehen",
         "title": "Was ist Snapchat?",
-        "icon": "👻",
+        "icon": "photo",
         "text": [
-          "Snapchat ist eine App für Fotos, Videos und Nachrichten.",
-          "Dort können Menschen Inhalte sehen oder teilen.",
+          "Snapchat ist ein digitales Angebot.",
+          "Du kannst dort Inhalte sehen oder teilen.",
           "Andere Menschen können mit dir Kontakt haben."
         ],
-        "remember": "Snapchat ist ein digitales Angebot."
+        "remember": "Snapchat ist ein Werkzeug für Kontakt und Inhalte.",
+        "module": "Modul 1: Snapchat verstehen"
       },
       {
-        "module": "Modul 1: Snapchat verstehen",
-        "title": "Was kann ich bei Snapchat machen?",
-        "icon": "👻",
+        "title": "Was kann ich mit Snapchat machen?",
+        "icon": "photo",
         "text": [
-          "Bei Snapchat kannst du verschiedene Dinge tun."
+          "Mit Snapchat kannst du viele Dinge tun."
         ],
         "bullets": [
           "Snaps senden",
           "Chats schreiben",
           "Storys ansehen"
         ],
-        "remember": "Ich entscheide, was ich nutze."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: Snapchat verstehen"
       },
       {
-        "module": "Modul 1: Snapchat verstehen",
         "title": "Snapchat im Alltag",
-        "icon": "👍",
+        "icon": "check",
         "text": [
-          "Snapchat kann im Alltag nützlich sein."
+          "Snapchat kann im Alltag hilfreich sein."
         ],
         "bullets": [
+          "Informationen bekommen",
           "Kontakt halten",
-          "kurze Nachrichten senden",
-          "Bilder teilen"
+          "Inhalte ansehen oder teilen"
         ],
-        "remember": "Ich nutze es bewusst."
+        "remember": "Snapchat kann praktisch sein.",
+        "module": "Modul 1: Snapchat verstehen"
       },
       {
-        "module": "Modul 1: Snapchat verstehen",
         "title": "Guten Inhalt erkennen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
-        "quote": "Ich melde mich später. Danke.",
+        "quote": "„Ich melde mich später. Danke.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll."
+        "remember": "Gute Inhalte sind respektvoll.",
+        "module": "Modul 1: Snapchat verstehen"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
           "Jetzt geht es um private Daten.",
-          "Du lernst, was nicht öffentlich sein sollte.",
+          "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir."
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Was sind private Daten?",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
-          "Private Daten sind Informationen über dich.",
-          "Du sollst sie nicht einfach posten oder verschicken."
+          "Private Daten gehören dir.",
+          "Du sollst sie nicht einfach veröffentlichen oder verschicken."
         ],
         "bullets": [
-          "Adresse und Wohnort",
-          "Telefonnummer",
-          "Passwörter und PIN-Nummern"
+          "Standort",
+          "Fotos von dir",
+          "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Adresse",
-        "icon": "📍",
+        "icon": "data",
         "text": [
-          "Eine fremde Person fragt dich:"
+          "Eine unbekannte Person fragt dich:"
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat."
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Passwort",
-        "icon": "🔑",
+        "icon": "lock",
         "text": [
-          "Eine Nachricht macht Druck:"
+          "Eine Person schreibt dir:"
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
-        "warning": "Das ist nicht sicher. Dein Passwort bleibt geheim.",
-        "remember": "Mein Passwort bleibt geheim."
+        "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "snapchatPrivat",
-          "question": "Nachricht: „Schick mir deine PIN über Snapchat.“",
+          "id": "snapchatPrivate",
+          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
@@ -2871,48 +2860,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du darfst Nein sagen.",
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Snaps, Fotos und Standort",
-        "title": "Modulstart: Inhalte bewusst teilen",
-        "icon": "🖼️",
+        "title": "Modulstart: Snaps, Fotos und Standort",
+        "icon": "photo",
         "text": [
-          "Jetzt geht es um Inhalte.",
+          "Jetzt geht es um snaps, fotos und standort.",
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich teile bewusst."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
-        "module": "Modul 3: Snaps, Fotos und Standort",
-        "title": "Inhalte teilen",
-        "icon": "📤",
+        "title": "Snaps teilen",
+        "icon": "photo",
         "text": [
-          "Inhalte können gespeichert werden.",
-          "Andere können sie weitergeben.",
+          "Snaps können weitergegeben oder gespeichert werden.",
+          "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile."
+        "remember": "Ich denke nach, bevor ich teile.",
+        "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
-        "module": "Modul 3: Snaps, Fotos und Standort",
         "title": "Private Inhalte",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Manche Inhalte sind sehr privat."
         ],
@@ -2921,41 +2910,41 @@ const topics = [
           "Standort",
           "peinliche Snaps"
         ],
-        "remember": "Private Inhalte bleiben privat."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
-        "module": "Modul 3: Snaps, Fotos und Standort",
         "title": "Beispiel: Druck",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Eine Person schreibt:"
         ],
-        "quote": "Schick mir einen privaten Snap. Ich speichere ihn nicht.",
+        "quote": "„Schick mir einen privaten Snap. Ich speichere ihn nicht.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen."
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
-        "module": "Modul 3: Snaps, Fotos und Standort",
         "title": "Nachrichten und Kommentare",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Auch Worte können verletzen.",
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
-        "module": "Modul 3: Snaps, Fotos und Standort",
         "title": "Übung: Inhalt prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "snapchatInhalt",
+          "id": "snapchatContent",
           "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
             },
             "unsafe": {
@@ -2966,59 +2955,59 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
-        "module": "Modul 3: Snaps, Fotos und Standort",
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich muss nichts posten.",
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
-        "module": "Modul 4: Screenshots, Druck und Betrug",
-        "title": "Modulstart: Risiken erkennen",
-        "icon": "⚠️",
+        "title": "Modulstart: Screenshots, Druck und Betrug",
+        "icon": "photo",
         "text": [
-          "Jetzt geht es um Risiken.",
-          "Manche Inhalte sehen harmlos aus.",
+          "Jetzt geht es um screenshots, druck und betrug.",
+          "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle."
+        "remember": "Ich prüfe, bevor ich handle.",
+        "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
-        "module": "Modul 4: Screenshots, Druck und Betrug",
-        "title": "Typische Risiken",
-        "icon": "🔎",
+        "title": "Komische Snaps",
+        "icon": "photo",
         "text": [
           "Snaps können gespeichert werden.",
           "Standort kann privat sein.",
           "Fremde können Druck machen."
         ],
-        "remember": "Ich reagiere nicht sofort."
+        "remember": "Ich handle nicht sofort.",
+        "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
-        "module": "Modul 4: Screenshots, Druck und Betrug",
         "title": "Beispiel: Lock-Nachricht",
-        "icon": "🎁",
+        "icon": "warning",
         "text": [
-          "Du siehst oder bekommst diese Nachricht:"
+          "Du bekommst diese Nachricht:"
         ],
         "quote": "Schalte deinen Standort an. Ich will sehen, wo du bist.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
-        "module": "Modul 4: Screenshots, Druck und Betrug",
         "title": "Betrug erkennen",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Vorsicht, wenn jemand:"
         ],
@@ -3027,12 +3016,12 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
-        "module": "Modul 4: Screenshots, Druck und Betrug",
         "title": "Wenn jemand Druck macht",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Warnzeichen sind:"
         ],
@@ -3041,19 +3030,19 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
-        "module": "Modul 4: Screenshots, Druck und Betrug",
         "title": "Übung: Risiko prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "snapchatRisiko",
+          "id": "snapchatRisk",
           "question": "Nachricht: „Schick den Snap sofort. Sag es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "unsafe": {
@@ -3064,48 +3053,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
-        "module": "Modul 4: Screenshots, Druck und Betrug",
         "title": "Merksatz: Erst prüfen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich reagiere nicht sofort.",
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
-        "module": "Modul 5: Kontakte und Storys",
-        "title": "Modulstart: Gutes Verhalten",
-        "icon": "👥",
+        "title": "Modulstart: Kontakte und Storys",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um Kontakte und Storys.",
+          "Jetzt geht es um kontakte und storys.",
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig."
+        "remember": "Ich schreibe vorsichtig.",
+        "module": "Modul 5: Kontakte und Storys"
       },
       {
-        "module": "Modul 5: Kontakte und Storys",
         "title": "Kontakte und Storys",
-        "icon": "👥",
+        "icon": "message",
         "text": [
           "Viele Menschen können Inhalte sehen.",
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen."
+        "remember": "Viele können mitlesen.",
+        "module": "Modul 5: Kontakte und Storys"
       },
       {
-        "module": "Modul 5: Kontakte und Storys",
         "title": "Guter Beitrag",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Ein guter Beitrag ist:"
         ],
@@ -3114,12 +3103,12 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Kontakte und Storys"
       },
       {
-        "module": "Modul 5: Kontakte und Storys",
         "title": "Schlechter Beitrag",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Diese Dinge sind nicht gut:"
         ],
@@ -3128,26 +3117,26 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Kontakte und Storys"
       },
       {
-        "module": "Modul 5: Kontakte und Storys",
         "title": "Streit oder Ärger",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Manchmal gibt es Streit."
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden."
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Kontakte und Storys"
       },
       {
-        "module": "Modul 5: Kontakte und Storys",
         "title": "Übung: Gute Nachricht erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "snapchatGut",
-          "question": "Ich melde mich später. Danke.",
+          "id": "snapchatGroup",
+          "question": "„Ich melde mich später. Danke.“",
           "feedback": {
             "safe": {
               "type": "success",
@@ -3162,68 +3151,68 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Kontakte und Storys"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
+          "Chat oder Profil öffnen",
+          "auf Optionen tippen",
+          "Blockieren auswählen"
         ],
-        "remember": "Blockieren ist erlaubt."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
+        "title": "So meldest du etwas",
+        "icon": "report",
         "text": [
-          "Du kannst problematische Inhalte melden."
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
         ],
         "bullets": [
-          "Inhalt oder Profil öffnen",
+          "Snap oder Chat öffnen",
           "Melden auswählen",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -3231,181 +3220,181 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit Snapchat?"
+          "Was mache ich bei einem Problem?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   },
   {
     "id": "tiktok",
     "title": "TikTok",
-    "icon": "🎵",
+    "icon": "understand",
     "desc": "Videos, Trends, Kommentare und Algorithmus",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: TikTok verstehen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
-          "Hier lernst du: TikTok sicherer nutzen.",
-          "Du lernst mit kurzen Seiten.",
+          "Diese Lernseite hilft dir, TikTok sicherer zu nutzen.",
+          "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: TikTok verstehen"
       },
       {
-        "module": "Modul 1: TikTok verstehen",
         "title": "Was ist TikTok?",
-        "icon": "🎵",
+        "icon": "understand",
         "text": [
-          "TikTok ist eine App für kurze Videos.",
-          "Dort können Menschen Inhalte sehen oder teilen.",
+          "TikTok ist ein digitales Angebot.",
+          "Du kannst dort Inhalte sehen oder teilen.",
           "Andere Menschen können mit dir Kontakt haben."
         ],
-        "remember": "TikTok ist ein digitales Angebot."
+        "remember": "TikTok ist ein Werkzeug für Kontakt und Inhalte.",
+        "module": "Modul 1: TikTok verstehen"
       },
       {
-        "module": "Modul 1: TikTok verstehen",
-        "title": "Was kann ich bei TikTok machen?",
-        "icon": "🎵",
+        "title": "Was kann ich mit TikTok machen?",
+        "icon": "understand",
         "text": [
-          "Bei TikTok kannst du verschiedene Dinge tun."
+          "Mit TikTok kannst du viele Dinge tun."
         ],
         "bullets": [
           "Videos ansehen",
           "Videos posten",
           "Kommentare lesen"
         ],
-        "remember": "Ich entscheide, was ich nutze."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: TikTok verstehen"
       },
       {
-        "module": "Modul 1: TikTok verstehen",
         "title": "TikTok im Alltag",
-        "icon": "👍",
+        "icon": "check",
         "text": [
-          "TikTok kann im Alltag nützlich sein."
+          "TikTok kann im Alltag hilfreich sein."
         ],
         "bullets": [
-          "kreative Videos sehen",
-          "Themen entdecken",
-          "Spaß haben"
+          "Informationen bekommen",
+          "Kontakt halten",
+          "Inhalte ansehen oder teilen"
         ],
-        "remember": "Ich nutze es bewusst."
+        "remember": "TikTok kann praktisch sein.",
+        "module": "Modul 1: TikTok verstehen"
       },
       {
-        "module": "Modul 1: TikTok verstehen",
         "title": "Guten Inhalt erkennen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
-        "quote": "Das Video ist hilfreich. Danke.",
+        "quote": "„Das Video ist hilfreich. Danke.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll."
+        "remember": "Gute Inhalte sind respektvoll.",
+        "module": "Modul 1: TikTok verstehen"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
           "Jetzt geht es um private Daten.",
-          "Du lernst, was nicht öffentlich sein sollte.",
+          "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir."
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Was sind private Daten?",
-        "icon": "🔒",
+        "icon": "lock",
         "text": [
-          "Private Daten sind Informationen über dich.",
-          "Du sollst sie nicht einfach posten oder verschicken."
+          "Private Daten gehören dir.",
+          "Du sollst sie nicht einfach veröffentlichen oder verschicken."
         ],
         "bullets": [
-          "Adresse und Wohnort",
-          "Telefonnummer",
-          "Passwörter und PIN-Nummern"
+          "Profilname",
+          "Standort",
+          "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Adresse",
-        "icon": "📍",
+        "icon": "data",
         "text": [
-          "Eine fremde Person fragt dich:"
+          "Eine unbekannte Person fragt dich:"
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat."
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Beispiel: Passwort",
-        "icon": "🔑",
+        "icon": "lock",
         "text": [
-          "Eine Nachricht macht Druck:"
+          "Eine Person schreibt dir:"
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
-        "warning": "Das ist nicht sicher. Dein Passwort bleibt geheim.",
-        "remember": "Mein Passwort bleibt geheim."
+        "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "tiktokPrivat",
-          "question": "Nachricht: „Schick mir deine PIN über TikTok.“",
+          "id": "tiktokPrivate",
+          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
@@ -3416,48 +3405,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 2: Private Daten",
         "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Du darfst Nein sagen.",
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir."
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Videos, Trends und Kommentare",
-        "title": "Modulstart: Inhalte bewusst teilen",
-        "icon": "🖼️",
+        "title": "Modulstart: Videos, Trends und Kommentare",
+        "icon": "understand",
         "text": [
-          "Jetzt geht es um Inhalte.",
+          "Jetzt geht es um videos, trends und kommentare.",
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich teile bewusst."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
-        "module": "Modul 3: Videos, Trends und Kommentare",
-        "title": "Inhalte teilen",
-        "icon": "📤",
+        "title": "Videos teilen",
+        "icon": "understand",
         "text": [
-          "Inhalte können gespeichert werden.",
-          "Andere können sie weitergeben.",
+          "Videos können weitergegeben oder gespeichert werden.",
+          "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile."
+        "remember": "Ich denke nach, bevor ich teile.",
+        "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
-        "module": "Modul 3: Videos, Trends und Kommentare",
         "title": "Private Inhalte",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Manche Inhalte sind sehr privat."
         ],
@@ -3466,41 +3455,41 @@ const topics = [
           "gefährliche Trends",
           "Kommentare mit privaten Daten"
         ],
-        "remember": "Private Inhalte bleiben privat."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
-        "module": "Modul 3: Videos, Trends und Kommentare",
         "title": "Beispiel: Druck",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Eine Person schreibt:"
         ],
-        "quote": "Mach etwas Gefährliches und poste es.",
+        "quote": "„Mach etwas Gefährliches und poste es.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen."
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
-        "module": "Modul 3: Videos, Trends und Kommentare",
         "title": "Nachrichten und Kommentare",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Auch Worte können verletzen.",
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
-        "module": "Modul 3: Videos, Trends und Kommentare",
         "title": "Übung: Inhalt prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "tiktokInhalt",
+          "id": "tiktokContent",
           "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
             },
             "unsafe": {
@@ -3511,59 +3500,59 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
-        "module": "Modul 3: Videos, Trends und Kommentare",
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich muss nichts posten.",
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
-        "module": "Modul 4: Trends, Werbung und Betrug",
-        "title": "Modulstart: Risiken erkennen",
-        "icon": "⚠️",
+        "title": "Modulstart: Trends, Werbung und Betrug",
+        "icon": "warning",
         "text": [
-          "Jetzt geht es um Risiken.",
-          "Manche Inhalte sehen harmlos aus.",
+          "Jetzt geht es um trends, werbung und betrug.",
+          "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle."
+        "remember": "Ich prüfe, bevor ich handle.",
+        "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Trends, Werbung und Betrug",
-        "title": "Typische Risiken",
-        "icon": "🔎",
+        "title": "Komische Trends",
+        "icon": "warning",
         "text": [
           "Manche Trends sind gefährlich.",
           "Manche Werbung täuscht.",
           "Manche Videos machen Druck."
         ],
-        "remember": "Ich reagiere nicht sofort."
+        "remember": "Ich handle nicht sofort.",
+        "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Trends, Werbung und Betrug",
         "title": "Beispiel: Lock-Nachricht",
-        "icon": "🎁",
+        "icon": "warning",
         "text": [
-          "Du siehst oder bekommst diese Nachricht:"
+          "Du bekommst diese Nachricht:"
         ],
         "quote": "Mach diesen gefährlichen Trend. Poste es sofort.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Trends, Werbung und Betrug",
         "title": "Betrug erkennen",
-        "icon": "⚠️",
+        "icon": "warning",
         "text": [
           "Vorsicht, wenn jemand:"
         ],
@@ -3572,12 +3561,12 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Trends, Werbung und Betrug",
         "title": "Wenn jemand Druck macht",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Warnzeichen sind:"
         ],
@@ -3586,19 +3575,19 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Trends, Werbung und Betrug",
         "title": "Übung: Risiko prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "tiktokRisiko",
+          "id": "tiktokRisk",
           "question": "Video: „Mach sofort mit. Sonst bist du langweilig.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
+              "title": "Achtung.",
               "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "unsafe": {
@@ -3609,48 +3598,48 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
-        "module": "Modul 4: Trends, Werbung und Betrug",
         "title": "Merksatz: Erst prüfen",
-        "icon": "✅",
+        "icon": "check",
         "text": [
           "Ich reagiere nicht sofort.",
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
-        "module": "Modul 5: Kommentare und Trends",
-        "title": "Modulstart: Gutes Verhalten",
-        "icon": "👥",
+        "title": "Modulstart: Kommentare und Trends",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um Kommentare und Trends.",
+          "Jetzt geht es um kommentare und trends.",
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig."
+        "remember": "Ich schreibe vorsichtig.",
+        "module": "Modul 5: Kommentare und Trends"
       },
       {
-        "module": "Modul 5: Kommentare und Trends",
         "title": "Kommentare und Trends",
-        "icon": "👥",
+        "icon": "message",
         "text": [
           "Viele Menschen können Inhalte sehen.",
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen."
+        "remember": "Viele können mitlesen.",
+        "module": "Modul 5: Kommentare und Trends"
       },
       {
-        "module": "Modul 5: Kommentare und Trends",
         "title": "Guter Beitrag",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Ein guter Beitrag ist:"
         ],
@@ -3659,12 +3648,12 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Kommentare und Trends"
       },
       {
-        "module": "Modul 5: Kommentare und Trends",
         "title": "Schlechter Beitrag",
-        "icon": "🚫",
+        "icon": "block",
         "text": [
           "Diese Dinge sind nicht gut:"
         ],
@@ -3673,26 +3662,26 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Kommentare und Trends"
       },
       {
-        "module": "Modul 5: Kommentare und Trends",
         "title": "Streit oder Ärger",
-        "icon": "💬",
+        "icon": "message",
         "text": [
           "Manchmal gibt es Streit."
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden."
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Kommentare und Trends"
       },
       {
-        "module": "Modul 5: Kommentare und Trends",
         "title": "Übung: Gute Nachricht erkennen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
-          "id": "tiktokGut",
-          "question": "Das Video ist hilfreich. Danke.",
+          "id": "tiktokGroup",
+          "question": "„Das Video ist hilfreich. Danke.“",
           "feedback": {
             "safe": {
               "type": "success",
@@ -3707,68 +3696,68 @@ const topics = [
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Kommentare und Trends"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
+          "Profil öffnen",
+          "auf Teilen oder Optionen tippen",
+          "Blockieren auswählen"
         ],
-        "remember": "Blockieren ist erlaubt."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
+        "title": "So meldest du etwas",
+        "icon": "report",
         "text": [
-          "Du kannst problematische Inhalte melden."
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
         ],
         "bullets": [
-          "Inhalt oder Profil öffnen",
+          "Video oder Kommentar öffnen",
           "Melden auswählen",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -3776,540 +3765,544 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit TikTok?"
+          "Was mache ich bei einem Problem?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   },
   {
     "id": "hilfe",
     "title": "Hilfe bei Problemen",
-    "icon": "🙋",
+    "icon": "help",
     "desc": "Stopp-Regel, Beweise sichern, Hilfe holen",
     "quiz": "https://kahoot.com",
     "lessons": [
       {
-        "module": "Modul 1: Probleme erkennen",
         "title": "Start",
-        "icon": "👋",
+        "icon": "start",
         "text": [
-          "Hier lernst du, was du bei digitalen Problemen tun kannst.",
-          "Du musst Probleme nicht allein lösen.",
-          "Du lernst klare Schritte."
+          "Diese Lernseite hilft dir, Hilfe bei Problemen sicherer zu nutzen.",
+          "Du lernst in kleinen Schritten.",
+          "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Hilfe holen ist richtig."
+        "remember": "Du bestimmst dein Tempo.",
+        "module": "Modul 1: Hilfe bei Problemen verstehen"
       },
       {
-        "module": "Modul 1: Probleme erkennen",
-        "title": "Was ist ein digitales Problem?",
-        "icon": "⚠️",
+        "title": "Was ist Hilfe bei Problemen?",
+        "icon": "help",
         "text": [
-          "Ein digitales Problem ist etwas, das dir Angst macht oder dich belastet.",
-          "Es kann in Apps, Nachrichten oder Internet-Seiten passieren."
+          "Hilfe bei Problemen ist ein digitales Angebot.",
+          "Du kannst dort Inhalte sehen oder teilen.",
+          "Andere Menschen können mit dir Kontakt haben."
         ],
-        "remember": "Ich nehme mein Gefühl ernst."
+        "remember": "Hilfe bei Problemen ist ein Werkzeug für Kontakt und Inhalte.",
+        "module": "Modul 1: Hilfe bei Problemen verstehen"
       },
       {
-        "module": "Modul 1: Probleme erkennen",
-        "title": "Welche Probleme gibt es?",
-        "icon": "📱",
+        "title": "Was kann ich mit Hilfe bei Problemen machen?",
+        "icon": "help",
         "text": [
-          "Digitale Probleme können verschieden sein."
+          "Mit Hilfe bei Problemen kannst du viele Dinge tun."
         ],
         "bullets": [
-          "Beleidigung oder Druck",
-          "Betrug oder komische Links",
-          "private Fotos oder Daten"
-        ],
-        "remember": "Probleme darf man ernst nehmen."
-      },
-      {
-        "module": "Modul 1: Probleme erkennen",
-        "title": "Probleme im Alltag",
-        "icon": "🙋",
-        "text": [
-          "Ein Problem kann plötzlich entstehen.",
-          "Dann ist es wichtig, ruhig zu bleiben.",
-          "Du musst nicht sofort reagieren."
-        ],
-        "remember": "Langsam ist sicherer."
-      },
-      {
-        "module": "Modul 1: Probleme erkennen",
-        "title": "Gute Reaktion erkennen",
-        "icon": "✅",
-        "text": [
-          "Eine gute Reaktion schützt dich."
-        ],
-        "quote": "Ich antworte nicht sofort. Ich frage erst eine Fachkraft.",
-        "success": "Das ist eine sichere Entscheidung.",
-        "remember": "Erst Hilfe holen, dann entscheiden."
-      },
-      {
-        "module": "Modul 2: Private Daten und Sicherheit",
-        "title": "Modulstart: Private Daten schützen",
-        "icon": "🔒",
-        "text": [
-          "Bei Problemen sind private Daten besonders wichtig.",
-          "Du lernst, was du nicht weitergeben sollst."
-        ],
-        "remember": "Private Daten bleiben privat."
-      },
-      {
-        "module": "Modul 2: Private Daten und Sicherheit",
-        "title": "Was sind private Daten?",
-        "icon": "🔒",
-        "text": [
-          "Private Daten sind Informationen über dich."
-        ],
-        "bullets": [
-          "Adresse",
-          "Passwort",
-          "Fotos und Standort"
-        ],
-        "remember": "Meine Daten gehören mir."
-      },
-      {
-        "module": "Modul 2: Private Daten und Sicherheit",
-        "title": "Beispiel: Adresse",
-        "icon": "📍",
-        "text": [
-          "Jemand macht Druck:"
-        ],
-        "quote": "Sag mir, wo du wohnst. Sonst erzähle ich etwas über dich.",
-        "warning": "Das ist Druck. Gib deine Adresse nicht weiter.",
-        "remember": "Meine Adresse bleibt privat."
-      },
-      {
-        "module": "Modul 2: Private Daten und Sicherheit",
-        "title": "Beispiel: Passwort",
-        "icon": "🔑",
-        "text": [
-          "Jemand verlangt Zugang:"
-        ],
-        "quote": "Gib mir dein Passwort. Dann höre ich auf.",
-        "warning": "Das ist nicht sicher. Ein Passwort bleibt geheim.",
-        "remember": "Mein Passwort bleibt geheim."
-      },
-      {
-        "module": "Modul 2: Private Daten und Sicherheit",
-        "title": "Übung: Private Daten erkennen",
-        "icon": "❓",
-        "exercise": {
-          "id": "hilfePrivat",
-          "question": "Nachricht: „Schick mir dein Passwort, dann helfe ich dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Ein Passwort ist privat. Gib es nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Ein Passwort ist privat. Gib es nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
-            }
-          }
-        }
-      },
-      {
-        "module": "Modul 2: Private Daten und Sicherheit",
-        "title": "Merksatz: Meine Daten gehören mir",
-        "icon": "✅",
-        "text": [
-          "Ich gebe keine Passwörter weiter.",
-          "Ich gebe keine Adresse unter Druck weiter.",
-          "Ich hole Hilfe."
-        ],
-        "remember": "Meine Daten gehören mir."
-      },
-      {
-        "module": "Modul 3: Nachrichten, Fotos und Beweise",
-        "title": "Modulstart: Nachrichten und Beweise",
-        "icon": "📌",
-        "text": [
-          "Jetzt geht es um Nachrichten und Beweise.",
-          "Manchmal ist es wichtig, etwas zeigen zu können."
-        ],
-        "remember": "Ich sichere Hilfe, nicht heimlich."
-      },
-      {
-        "module": "Modul 3: Nachrichten, Fotos und Beweise",
-        "title": "Problem-Nachrichten",
-        "icon": "💬",
-        "text": [
-          "Problem-Nachrichten können Angst machen.",
-          "Du musst nicht sofort antworten."
-        ],
-        "remember": "Nicht sofort reagieren."
-      },
-      {
-        "module": "Modul 3: Nachrichten, Fotos und Beweise",
-        "title": "Private Fotos",
-        "icon": "🖼️",
-        "text": [
-          "Private Fotos können Druck erzeugen."
-        ],
-        "bullets": [
-          "keine intimen Fotos schicken",
-          "nicht unter Druck antworten",
+          "Problem erkennen",
+          "Stopp-Regel nutzen",
           "Hilfe holen"
         ],
-        "remember": "Private Fotos gehören mir."
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 1: Hilfe bei Problemen verstehen"
       },
       {
-        "module": "Modul 3: Nachrichten, Fotos und Beweise",
-        "title": "Beispiel: Foto mit Druck",
-        "icon": "⚠️",
+        "title": "Hilfe bei Problemen im Alltag",
+        "icon": "check",
         "text": [
-          "Jemand schreibt:"
-        ],
-        "quote": "Schick mir ein Foto. Sag es niemandem.",
-        "warning": "Das ist ein Warnzeichen. Hole Hilfe.",
-        "remember": "Ich darf Nein sagen."
-      },
-      {
-        "module": "Modul 3: Nachrichten, Fotos und Beweise",
-        "title": "Beweise sichern",
-        "icon": "📌",
-        "text": [
-          "Manchmal ist es wichtig, eine Nachricht zu zeigen."
+          "Hilfe bei Problemen kann im Alltag hilfreich sein."
         ],
         "bullets": [
-          "nicht vorschnell löschen",
-          "Screenshot nur mit Unterstützung",
-          "Fachkraft informieren"
+          "Informationen bekommen",
+          "Kontakt halten",
+          "Inhalte ansehen oder teilen"
         ],
-        "remember": "Ich sichere Beweise mit Hilfe."
+        "remember": "Hilfe bei Problemen kann praktisch sein.",
+        "module": "Modul 1: Hilfe bei Problemen verstehen"
       },
       {
-        "module": "Modul 3: Nachrichten, Fotos und Beweise",
-        "title": "Übung: Nachricht prüfen",
-        "icon": "❓",
+        "title": "Guten Inhalt erkennen",
+        "icon": "check",
+        "text": [
+          "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
+        ],
+        "quote": "„Ich brauche Hilfe. Kannst du bitte mit mir schauen?“",
+        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
+        "remember": "Gute Inhalte sind respektvoll.",
+        "module": "Modul 1: Hilfe bei Problemen verstehen"
+      },
+      {
+        "title": "Modulstart: Private Daten schützen",
+        "icon": "lock",
+        "text": [
+          "Jetzt geht es um private Daten.",
+          "Du lernst, was du schützen sollst.",
+          "Du lernst, wann du vorsichtig sein musst."
+        ],
+        "remember": "Private Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
+      },
+      {
+        "title": "Was sind private Daten?",
+        "icon": "lock",
+        "text": [
+          "Private Daten gehören dir.",
+          "Du sollst sie nicht einfach veröffentlichen oder verschicken."
+        ],
+        "bullets": [
+          "Name und Adresse",
+          "Fotos und Standort",
+          "Passwörter"
+        ],
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
+      },
+      {
+        "title": "Beispiel: Adresse",
+        "icon": "data",
+        "text": [
+          "Eine unbekannte Person fragt dich:"
+        ],
+        "quote": "Wo wohnst du? Schick mir deine Adresse.",
+        "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
+        "remember": "Meine Adresse bleibt privat.",
+        "module": "Modul 2: Private Daten"
+      },
+      {
+        "title": "Beispiel: Passwort",
+        "icon": "lock",
+        "text": [
+          "Eine Person schreibt dir:"
+        ],
+        "quote": "Gib mir dein Passwort. Ich helfe dir.",
+        "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
+        "remember": "Mein Passwort bleibt geheim.",
+        "module": "Modul 2: Private Daten"
+      },
+      {
+        "title": "Übung: Private Daten erkennen",
+        "icon": "exercise",
         "exercise": {
-          "id": "hilfeBeweis",
-          "question": "Nachricht: „Lösch alles und sag niemandem davon.“",
+          "id": "hilfePrivate",
+          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das ist ein Warnzeichen. Nicht allein löschen. Hilfe holen."
+              "title": "Achtung.",
+              "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "unsafe": {
               "type": "success",
               "title": "Richtig.",
-              "text": "Das ist ein Warnzeichen. Nicht allein löschen. Hilfe holen."
+              "text": "Eine PIN ist privat. Gib sie nicht weiter."
             },
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 2: Private Daten"
       },
       {
-        "module": "Modul 3: Nachrichten, Fotos und Beweise",
+        "title": "Merksatz: Meine Daten gehören mir",
+        "icon": "check",
+        "text": [
+          "Du darfst Nein sagen.",
+          "Du musst keine privaten Daten schicken.",
+          "Du darfst Hilfe holen."
+        ],
+        "remember": "Meine Daten gehören mir.",
+        "module": "Modul 2: Private Daten"
+      },
+      {
+        "title": "Modulstart: Nachrichten, Fotos und Beweise",
+        "icon": "data",
+        "text": [
+          "Jetzt geht es um nachrichten, fotos und beweise.",
+          "Inhalte können privat oder öffentlich sein.",
+          "Du lernst, worauf du achten musst."
+        ],
+        "remember": "Ich entscheide, was ich teile.",
+        "module": "Modul 3: Nachrichten, Fotos und Beweise"
+      },
+      {
+        "title": "Nachrichten teilen",
+        "icon": "data",
+        "text": [
+          "Nachrichten können weitergegeben oder gespeichert werden.",
+          "Dann sehen vielleicht andere Menschen diesen Inhalt.",
+          "Darum ist Vorsicht wichtig."
+        ],
+        "remember": "Ich denke nach, bevor ich teile.",
+        "module": "Modul 3: Nachrichten, Fotos und Beweise"
+      },
+      {
+        "title": "Private Inhalte",
+        "icon": "block",
+        "text": [
+          "Manche Inhalte sind sehr privat."
+        ],
+        "bullets": [
+          "beleidigende Nachrichten",
+          "Drohungen",
+          "private Fotos"
+        ],
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Nachrichten, Fotos und Beweise"
+      },
+      {
+        "title": "Beispiel: Druck",
+        "icon": "warning",
+        "text": [
+          "Eine Person schreibt:"
+        ],
+        "quote": "„Antworte sofort und erzähle niemandem davon.“",
+        "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
+        "remember": "Ich darf Nein sagen.",
+        "module": "Modul 3: Nachrichten, Fotos und Beweise"
+      },
+      {
+        "title": "Nachrichten und Kommentare",
+        "icon": "message",
+        "text": [
+          "Auch Worte können verletzen.",
+          "Nachrichten und Kommentare können gespeichert werden.",
+          "Darum solltest du vorher überlegen."
+        ],
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 3: Nachrichten, Fotos und Beweise"
+      },
+      {
+        "title": "Übung: Inhalt prüfen",
+        "icon": "exercise",
+        "exercise": {
+          "id": "hilfeContent",
+          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
+          "feedback": {
+            "safe": {
+              "type": "warning",
+              "title": "Achtung.",
+              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
+            },
+            "unsafe": {
+              "type": "success",
+              "title": "Richtig.",
+              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
+            },
+            "help": {
+              "type": "info",
+              "title": "Gute Entscheidung.",
+              "text": "Hilfe holen ist immer erlaubt."
+            }
+          }
+        },
+        "module": "Modul 3: Nachrichten, Fotos und Beweise"
+      },
+      {
         "title": "Merksatz: Ich entscheide",
-        "icon": "✅",
+        "icon": "check",
         "text": [
-          "Ich muss nicht antworten.",
-          "Ich darf Beweise zeigen.",
-          "Ich darf Hilfe holen."
+          "Ich muss nichts posten.",
+          "Ich muss nichts verschicken.",
+          "Ich darf Nein sagen."
         ],
-        "remember": "Ich bin nicht allein."
+        "remember": "Ich entscheide über meine Inhalte.",
+        "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
-        "module": "Modul 4: Druck, Drohung und Betrug",
-        "title": "Modulstart: Druck und Drohung",
-        "icon": "🚨",
+        "title": "Modulstart: Druck, Drohung und Betrug",
+        "icon": "warning",
         "text": [
-          "Jetzt geht es um starke Warnzeichen.",
-          "Druck und Drohung sind nicht okay."
+          "Jetzt geht es um druck, drohung und betrug.",
+          "Manche Inhalte sehen echt aus.",
+          "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Druck bedeutet: Hilfe holen."
+        "remember": "Ich prüfe, bevor ich handle.",
+        "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
-        "module": "Modul 4: Druck, Drohung und Betrug",
-        "title": "Druck erkennen",
-        "icon": "🛑",
+        "title": "Warnzeichen",
+        "icon": "warning",
         "text": [
-          "Druck klingt oft so:"
+          "Jemand macht Angst.",
+          "Jemand will Geheimhaltung.",
+          "Jemand verlangt Daten oder Fotos."
+        ],
+        "remember": "Ich handle nicht sofort.",
+        "module": "Modul 4: Druck, Drohung und Betrug"
+      },
+      {
+        "title": "Beispiel: Lock-Nachricht",
+        "icon": "warning",
+        "text": [
+          "Du bekommst diese Nachricht:"
+        ],
+        "quote": "Sag niemandem davon. Sonst passiert etwas.",
+        "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Druck, Drohung und Betrug"
+      },
+      {
+        "title": "Betrug erkennen",
+        "icon": "warning",
+        "text": [
+          "Vorsicht, wenn jemand:"
+        ],
+        "bullets": [
+          "dein Passwort will",
+          "Geld von dir verlangt",
+          "Druck macht"
+        ],
+        "remember": "Druck ist ein Warnzeichen.",
+        "module": "Modul 4: Druck, Drohung und Betrug"
+      },
+      {
+        "title": "Wenn jemand Druck macht",
+        "icon": "stop",
+        "text": [
+          "Warnzeichen sind:"
         ],
         "bullets": [
           "Mach sofort.",
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck ist ein Warnzeichen."
+        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
-        "module": "Modul 4: Druck, Drohung und Betrug",
-        "title": "Beispiel: Drohung",
-        "icon": "⚠️",
-        "text": [
-          "Du bekommst diese Nachricht:"
-        ],
-        "quote": "Wenn du nicht antwortest, passiert etwas Schlimmes.",
-        "warning": "Das ist eine Drohung. Hole sofort Hilfe.",
-        "remember": "Drohungen muss ich zeigen."
-      },
-      {
-        "module": "Modul 4: Druck, Drohung und Betrug",
-        "title": "Betrug erkennen",
-        "icon": "🔎",
-        "text": [
-          "Vorsicht, wenn jemand:"
-        ],
-        "bullets": [
-          "Geld verlangt",
-          "Passwörter will",
-          "Angst macht"
-        ],
-        "remember": "Angst machen ist ein Warnzeichen."
-      },
-      {
-        "module": "Modul 4: Druck, Drohung und Betrug",
-        "title": "Wenn jemand Geheimhaltung verlangt",
-        "icon": "🤫",
-        "text": [
-          "Ein Warnzeichen ist:"
-        ],
-        "bullets": [
-          "Sag es niemandem.",
-          "Das bleibt unser Geheimnis.",
-          "Du bekommst sonst Ärger."
-        ],
-        "remember": "Geheimhaltungs-Druck ist gefährlich."
-      },
-      {
-        "module": "Modul 4: Druck, Drohung und Betrug",
         "title": "Übung: Risiko prüfen",
-        "icon": "❓",
+        "icon": "exercise",
         "exercise": {
           "id": "hilfeRisk",
           "question": "Nachricht: „Sag niemandem davon. Sonst passiert etwas.“",
           "feedback": {
             "safe": {
               "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das ist Druck und eine Drohung. Hole Hilfe."
+              "title": "Achtung.",
+              "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "unsafe": {
               "type": "success",
               "title": "Richtig.",
-              "text": "Das ist Druck und eine Drohung. Hole Hilfe."
+              "text": "Das wirkt unsicher. Nicht sofort reagieren."
             },
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
-        "module": "Modul 4: Druck, Drohung und Betrug",
-        "title": "Merksatz: Erst Hilfe holen",
-        "icon": "✅",
+        "title": "Merksatz: Erst prüfen",
+        "icon": "check",
         "text": [
-          "Ich bleibe nicht allein.",
-          "Ich zeige die Nachricht.",
-          "Ich hole Unterstützung."
+          "Ich reagiere nicht sofort.",
+          "Ich prüfe die Nachricht.",
+          "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst Hilfe holen. Dann handeln."
+        "remember": "Erst prüfen. Dann handeln.",
+        "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
-        "module": "Modul 5: Hilfewege und gutes Verhalten",
-        "title": "Modulstart: Hilfewege",
-        "icon": "👥",
+        "title": "Modulstart: Probleme und Hilfewege",
+        "icon": "message",
         "text": [
-          "Jetzt geht es um Menschen, die helfen können.",
-          "Du darfst dir Unterstützung suchen."
+          "Jetzt geht es um probleme und hilfewege.",
+          "Viele Menschen können mitlesen.",
+          "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Hilfe ist erlaubt."
+        "remember": "Ich schreibe vorsichtig.",
+        "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "module": "Modul 5: Hilfewege und gutes Verhalten",
-        "title": "Wer kann helfen?",
-        "icon": "👥",
+        "title": "Probleme und Hilfewege",
+        "icon": "message",
         "text": [
-          "Du kannst verschiedene Menschen fragen."
+          "Viele Menschen können Inhalte sehen.",
+          "Inhalte können schnell weitergegeben werden.",
+          "Darum solltest du vorsichtig sein."
+        ],
+        "remember": "Viele können mitlesen.",
+        "module": "Modul 5: Probleme und Hilfewege"
+      },
+      {
+        "title": "Guter Beitrag",
+        "icon": "message",
+        "text": [
+          "Ein guter Beitrag ist:"
         ],
         "bullets": [
-          "Fachkraft",
-          "vertraute Person",
-          "Angehörige oder gesetzliche Betreuung"
+          "freundlich",
+          "kurz und verständlich",
+          "ohne private Daten"
         ],
-        "remember": "Ich suche mir Unterstützung."
+        "remember": "Ich schreibe respektvoll.",
+        "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "module": "Modul 5: Hilfewege und gutes Verhalten",
-        "title": "Gute Hilfe-Nachricht",
-        "icon": "💬",
+        "title": "Schlechter Beitrag",
+        "icon": "block",
         "text": [
-          "Eine gute Hilfe-Nachricht ist klar."
-        ],
-        "quote": "Ich brauche Hilfe. Kannst du bitte mit mir schauen?",
-        "success": "Das ist gut. Du sagst klar, dass du Hilfe brauchst.",
-        "remember": "Ich darf um Hilfe bitten."
-      },
-      {
-        "module": "Modul 5: Hilfewege und gutes Verhalten",
-        "title": "Was hilft nicht?",
-        "icon": "🚫",
-        "text": [
-          "Das hilft meistens nicht:"
+          "Diese Dinge sind nicht gut:"
         ],
         "bullets": [
-          "allein weiterstreiten",
-          "aus Angst zahlen",
-          "Beweise sofort löschen"
+          "Beleidigungen",
+          "Gerüchte",
+          "private Fotos oder Daten"
         ],
-        "remember": "Ich handle nicht aus Angst."
+        "remember": "Ich verletze andere nicht.",
+        "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "module": "Modul 5: Hilfewege und gutes Verhalten",
-        "title": "Wenn ich mich schäme",
-        "icon": "💬",
+        "title": "Streit oder Ärger",
+        "icon": "message",
         "text": [
-          "Scham ist verständlich.",
-          "Trotzdem darfst du Hilfe holen.",
-          "Fachkräfte sollen dich unterstützen."
+          "Manchmal gibt es Streit."
         ],
-        "remember": "Ich darf über Probleme sprechen."
+        "quote": "Du willst etwas Gemeines zurückschreiben.",
+        "warning": "Besser: Pause machen. Nicht sofort antworten.",
+        "remember": "Erst beruhigen. Dann entscheiden.",
+        "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "module": "Modul 5: Hilfewege und gutes Verhalten",
-        "title": "Übung: Gute Hilfe erkennen",
-        "icon": "❓",
+        "title": "Übung: Gute Nachricht erkennen",
+        "icon": "exercise",
         "exercise": {
-          "id": "hilfeGut",
-          "question": "Satz: „Ich brauche Hilfe. Ich zeige dir die Nachricht.“",
+          "id": "hilfeGroup",
+          "question": "„Ich brauche Hilfe. Kannst du bitte mit mir schauen?“",
           "feedback": {
             "safe": {
               "type": "success",
               "title": "Richtig.",
-              "text": "Das wirkt sicher. Du holst Unterstützung."
+              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
             },
             "unsafe": {
               "type": "warning",
               "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Du holst Unterstützung."
+              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
             },
             "help": {
               "type": "info",
               "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt. Du musst das nicht allein entscheiden."
+              "text": "Hilfe holen ist immer erlaubt."
             }
           }
-        }
+        },
+        "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Stopp-Regel",
-        "icon": "🛑",
+        "icon": "stop",
         "text": [
           "Wenn dir etwas komisch vorkommt:"
         ],
         "bullets": [
-          "nicht sofort antworten",
-          "nichts Privates schicken",
+          "Stopp: Nicht sofort antworten",
+          "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Ich darf Nein sagen",
-        "icon": "✋",
+        "icon": "stop",
         "text": [
           "Du musst nicht antworten.",
-          "Du musst nichts schicken.",
+          "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt."
+        "remember": "Nein sagen ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Blockieren",
-        "icon": "🚫",
+        "title": "So blockierst du jemanden",
+        "icon": "block",
         "text": [
-          "Du darfst dich schützen."
+          "So kannst du dich schützen:"
         ],
         "bullets": [
-          "Profil oder Chat öffnen",
-          "Blockieren auswählen",
-          "danach Hilfe holen, wenn du unsicher bist"
-        ],
-        "remember": "Blockieren ist erlaubt."
-      },
-      {
-        "module": "Modul 6: Schutz und Hilfe",
-        "title": "Melden",
-        "icon": "🚩",
-        "text": [
-          "Du kannst problematische Inhalte melden."
-        ],
-        "bullets": [
-          "Inhalt oder Profil öffnen",
-          "Melden auswählen",
+          "Chat oder Profil öffnen",
+          "Person blockieren",
           "Fachkraft informieren"
         ],
-        "remember": "Melden ist Schutz."
+        "remember": "Ich darf mich schützen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
+        "title": "So meldest du etwas",
+        "icon": "report",
+        "text": [
+          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+        ],
+        "bullets": [
+          "Nachricht zeigen",
+          "Melden auswählen, wenn möglich",
+          "Beweise mit Hilfe sichern"
+        ],
+        "remember": "Melden ist erlaubt.",
+        "module": "Modul 6: Schutz und Hilfe"
+      },
+      {
         "title": "Hilfe holen",
-        "icon": "🙋",
+        "icon": "help",
         "text": [
           "Du musst Probleme nicht allein lösen.",
           "Hilfe holen ist richtig."
@@ -4317,51 +4310,52 @@ const topics = [
         "bullets": [
           "Fachkraft fragen",
           "vertraute Person fragen",
-          "bei akuter Gefahr: Polizei 110"
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark."
+        "remember": "Hilfe holen ist stark.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Datenschutz-Hinweis",
-        "icon": "🛡️",
+        "icon": "lock",
         "text": [
           "Diese Lernseite fragt keine privaten Daten ab.",
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym."
+        "remember": "Ich bleibe anonym.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Wiederholung",
-        "icon": "🔁",
+        "icon": "example",
         "text": [
-          "Was mache ich bei einem Problem mit digitalen Problemen?"
+          "Was mache ich bei einem Problem?"
         ],
         "bullets": [
-          "nicht sofort reagieren",
-          "Beweise nicht vorschnell löschen",
+          "nicht sofort antworten",
+          "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Ich muss das nicht allein klären."
+        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "module": "Modul 6: Schutz und Hilfe"
       },
       {
-        "module": "Modul 6: Schutz und Hilfe",
         "title": "Quiz und Abschluss",
-        "icon": "🏁",
+        "icon": "quiz",
         "text": [
           "Gut gemacht.",
           "Du hast wichtige Regeln gelernt.",
           "Jetzt kannst du dein Wissen testen."
         ],
         "bullets": [
-          "keinen echten Namen nutzen",
-          "Spitznamen nehmen",
-          "Quiz zum Üben nutzen"
+          "Nutze keinen echten Namen.",
+          "Nimm einen Spitznamen.",
+          "Das Quiz ist zum Üben."
         ],
         "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
-        "quiz": true
+        "quiz": true,
+        "module": "Modul 6: Schutz und Hilfe"
       }
     ]
   }

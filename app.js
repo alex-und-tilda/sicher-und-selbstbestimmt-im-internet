@@ -107,7 +107,9 @@ function buildCard(lesson, topic) {
     <article class="card">
       <div class="module-tag">${escapeHtml(lesson.module)}</div>
       <div class="card-header">
-        <div class="icon" aria-hidden="true">${lesson.icon}</div>
+        <div class="icon" aria-hidden="true">
+          <img src="assets/icons/${lesson.icon}.svg" alt="" class="icon-svg">
+        </div>
         <h2>${escapeHtml(lesson.title)}</h2>
       </div>
   `;
