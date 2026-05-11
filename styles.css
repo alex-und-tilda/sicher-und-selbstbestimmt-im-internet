@@ -3154,3 +3154,109 @@ body.view-menu .topic-grid {
   white-space: normal;
   text-align: left;
 }
+
+/* QR-Poster-Links sind nicht Teil der Lernoberfläche. */
+.qr-links, .qr-overview { display:none !important; }
+
+
+/* FINAL: Hilfe-Button mobil kompakt, damit er Inhalte nicht überdeckt */
+.global-help-button {
+  max-width: min(360px, calc(100vw - 28px)) !important;
+}
+
+@media (max-width: 760px) {
+  .global-help-button {
+    left: auto !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    padding: 11px 14px !important;
+    font-size: 0.98rem !important;
+    border-width: 3px !important;
+    box-shadow: 0 8px 18px rgba(0, 40, 90, 0.24) !important;
+  }
+
+  .global-help-button::before {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 6px !important;
+    border-width: 2px !important;
+  }
+
+  body {
+    padding-bottom: 74px !important;
+  }
+}
+
+
+/* FINAL: Hilfe-Dialog pädagogisch klarer */
+.help-dialog {
+  max-width: 760px !important;
+  width: min(760px, calc(100vw - 28px)) !important;
+  max-height: calc(100vh - 36px) !important;
+  overflow-y: auto !important;
+  border-radius: 24px !important;
+  border: 4px solid #D6A400 !important;
+}
+
+.help-title-row {
+  margin-bottom: 14px !important;
+}
+
+.help-step-box,
+.help-decision-box {
+  margin: 12px 0 !important;
+  padding: 14px !important;
+  border-radius: 18px !important;
+  border: 3px solid var(--gray) !important;
+  background: #FFFFFF !important;
+}
+
+.help-step-box h3,
+.help-decision-box h3 {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.help-step-box p,
+.help-step-box li,
+.help-decision-box p {
+  font-size: 1.04rem !important;
+  line-height: 1.45 !important;
+}
+
+.help-step-calm {
+  background: var(--hint) !important;
+  border-color: var(--hint-border) !important;
+}
+
+.help-step-danger {
+  background: var(--warning-light) !important;
+  border-color: var(--warning) !important;
+}
+
+.help-decision-box {
+  background: var(--success-light) !important;
+  border-color: var(--success) !important;
+}
+
+.help-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+
+@media (max-width: 640px) {
+  .help-dialog {
+    width: calc(100vw - 20px) !important;
+    max-height: calc(100vh - 24px) !important;
+    padding: 14px !important;
+  }
+
+  .help-actions button {
+    width: 100% !important;
+  }
+}

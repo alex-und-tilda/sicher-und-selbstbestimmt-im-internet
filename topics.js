@@ -622,22 +622,22 @@ const topics = [
       {
         "question": "Welche Information ist besonders privat?",
         "answers": [
-          "Deine PIN",
           "Deine Lieblingsfarbe",
+          "Deine PIN",
           "Das Wetter"
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Eine PIN schützt Geräte oder Konten. Sie bleibt geheim.",
         "area": "PIN und Passwort"
       },
       {
         "question": "Du möchtest ein Foto von einer anderen Person posten. Was ist richtig?",
         "answers": [
+          "Ich schreibe keinen Namen dazu, dann ist es immer okay.",
           "Ich frage die Person vorher.",
-          "Ich poste es heimlich.",
-          "Ich schreibe keinen Namen dazu, dann ist es immer okay."
+          "Ich poste es heimlich."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Andere Personen müssen einverstanden sein, bevor du ein Foto teilst.",
         "area": "Fotos"
       },
@@ -645,54 +645,54 @@ const topics = [
         "question": "Eine App möchte deinen Standort wissen. Was machst du?",
         "answers": [
           "Ich erlaube es immer.",
-          "Ich prüfe, ob die App den Standort wirklich braucht.",
-          "Ich sende den Standort zusätzlich an Freunde."
+          "Ich sende den Standort zusätzlich an Freunde.",
+          "Ich prüfe, ob die App den Standort wirklich braucht."
         ],
-        "correct": 1,
+        "correct": 2,
         "explanation": "Richtig. Der Standort zeigt, wo du bist. Er sollte nur geteilt werden, wenn es nötig ist.",
         "area": "Standort"
       },
       {
         "question": "Jemand schreibt: „Schick mir dein Passwort. Ich helfe dir.“ Was machst du?",
         "answers": [
-          "Ich schicke das Passwort.",
           "Ich antworte nicht und hole Hilfe.",
-          "Ich schicke nur die Hälfte."
+          "Ich schicke nur die Hälfte.",
+          "Ich schicke das Passwort."
         ],
-        "correct": 1,
+        "correct": 0,
         "explanation": "Richtig. Passwörter werden nie verschickt. Hole Hilfe, wenn du unsicher bist.",
         "area": "Passwort"
       },
       {
         "question": "Was bedeutet Daten sparsam teilen?",
         "answers": [
-          "Nur Daten teilen, die wirklich nötig sind.",
+          "Daten an möglichst viele Menschen schicken.",
           "Alle Felder ausfüllen.",
-          "Daten an möglichst viele Menschen schicken."
+          "Nur Daten teilen, die wirklich nötig sind."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Je weniger Daten du teilst, desto besser sind deine Daten geschützt.",
         "area": "Daten sparsam teilen"
       },
       {
         "question": "Du bist bei einem Formular unsicher. Was ist eine gute Entscheidung?",
         "answers": [
-          "Eine eine Person, der du vertraust fragen.",
           "Alles schnell ausfüllen.",
+          "Eine eine Person, der du vertraust fragen.",
           "Das Passwort als Sicherheit eintragen."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Bei Unsicherheit ist Nachfragen eine sichere Entscheidung.",
         "area": "Hilfe holen"
       },
       {
         "question": "Was kann mit privaten Daten passieren?",
         "answers": [
+          "Sie verschwinden immer sofort.",
           "Sie können missbraucht werden.",
-          "Sie sind immer ungefährlich.",
-          "Sie verschwinden immer sofort."
+          "Sie sind immer ungefährlich."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Private Daten können missbraucht werden. Deshalb ist Schutz wichtig.",
         "area": "Risiken"
       },
@@ -700,8 +700,8 @@ const topics = [
         "question": "Im Quiz sollst du einen Namen eingeben. Was ist besser?",
         "answers": [
           "Einen Spitznamen nutzen.",
-          "Den vollen Namen und die Adresse nutzen.",
-          "Das Passwort als Namen nutzen."
+          "Das Passwort als Namen nutzen.",
+          "Den vollen Namen und die Adresse nutzen."
         ],
         "correct": 0,
         "explanation": "Richtig. Ein Spitzname schützt deine Privatsphäre.",
@@ -710,11 +710,11 @@ const topics = [
       {
         "question": "Was ist der wichtigste Merksatz zum Datenschutz?",
         "answers": [
-          "Meine Daten gehören mir.",
           "Alle Daten gehören ins Internet.",
-          "Passwörter darf jeder wissen."
+          "Passwörter darf jeder wissen.",
+          "Meine Daten gehören mir."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Deine Daten gehören dir. Du entscheidest mit, was du teilst.",
         "area": "Merksatz"
       }
@@ -1384,22 +1384,22 @@ const topics = [
       {
         "question": "Du bekommst einen Link: „Du hast gewonnen. Klicke sofort.“ Was machst du?",
         "answers": [
-          "Sofort klicken.",
           "Nicht klicken und prüfen.",
+          "Sofort klicken.",
           "An alle Freunde weiterleiten."
         ],
-        "correct": 1,
+        "correct": 0,
         "explanation": "Richtig. Gewinn-Links können Betrug sein. Erst prüfen, dann handeln.",
         "area": "Links und Betrug"
       },
       {
         "question": "Jemand fordert ein privates Foto und sagt: „Sag es niemandem.“ Was ist das?",
         "answers": [
+          "Eine Pflicht.",
           "Ein Warnzeichen.",
-          "Immer sicher.",
-          "Eine Pflicht."
+          "Immer sicher."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Geheimhaltung und Druck sind Warnzeichen.",
         "area": "Private Fotos"
       },
@@ -1407,8 +1407,8 @@ const topics = [
         "question": "Was ist in WhatsApp-Gruppen wichtig?",
         "answers": [
           "Viele können mitlesen.",
-          "Niemand kann mitlesen.",
-          "Private Daten gehören immer in Gruppen."
+          "Private Daten gehören immer in Gruppen.",
+          "Niemand kann mitlesen."
         ],
         "correct": 0,
         "explanation": "Richtig. In Gruppen lesen viele Menschen mit. Schreibe dort besonders vorsichtig.",
@@ -1417,44 +1417,44 @@ const topics = [
       {
         "question": "Welche Nachricht wirkt eher sicher?",
         "answers": [
-          "„Hallo. Ich komme heute um 16 Uhr.“",
           "„Schick sofort dein Passwort.“",
-          "„Klicke sofort, sonst passiert etwas.“"
+          "„Klicke sofort, sonst passiert etwas.“",
+          "„Hallo. Ich komme heute um 16 Uhr.“"
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Die Nachricht ist klar, freundlich und macht keinen Druck.",
         "area": "Nachrichten"
       },
       {
         "question": "Was machst du, wenn dich jemand beleidigt oder bedrängt?",
         "answers": [
-          "Blockieren, melden oder Hilfe holen.",
+          "Alles geheim halten.",
           "Zurück beleidigen.",
-          "Alles geheim halten."
+          "Blockieren, melden oder Hilfe holen."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Du darfst dich schützen und Hilfe holen.",
         "area": "Blockieren und Melden"
       },
       {
         "question": "Eine Sprachnachricht enthält private Informationen. Was ist wichtig?",
         "answers": [
-          "Sie kann weitergeleitet werden.",
           "Sie ist immer privat.",
+          "Sie kann weitergeleitet werden.",
           "Niemand kann sie speichern."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Auch Sprachnachrichten können weitergeleitet werden.",
         "area": "Sprachnachrichten"
       },
       {
         "question": "Was bedeutet Stopp-Regel?",
         "answers": [
+          "Alles allein lösen.",
           "Nicht sofort antworten, prüfen, Hilfe holen.",
-          "Sofort klicken.",
-          "Alles allein lösen."
+          "Sofort klicken."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Die Stopp-Regel schützt dich bei Unsicherheit.",
         "area": "Stopp-Regel"
       },
@@ -1462,8 +1462,8 @@ const topics = [
         "question": "Jemand will deine PIN im Chat. Was machst du?",
         "answers": [
           "Nicht schicken.",
-          "Schicken, wenn die Person nett wirkt.",
-          "In eine Gruppe posten."
+          "In eine Gruppe posten.",
+          "Schicken, wenn die Person nett wirkt."
         ],
         "correct": 0,
         "explanation": "Richtig. Eine PIN bleibt geheim.",
@@ -1472,11 +1472,11 @@ const topics = [
       {
         "question": "Wer kann helfen, wenn du unsicher bist?",
         "answers": [
-          "eine Person, der du vertraust.",
           "Nur die fremde Person.",
-          "Niemand."
+          "Niemand.",
+          "eine Person, der du vertraust."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Du musst Probleme nicht allein lösen.",
         "area": "Hilfe holen"
       }
@@ -2146,22 +2146,22 @@ const topics = [
       {
         "question": "Welche Information gehört nicht öffentlich ins Profil?",
         "answers": [
-          "Adresse.",
           "Vorname.",
+          "Adresse.",
           "Lieblingsmusik."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Die Adresse ist privat.",
         "area": "Private Daten"
       },
       {
         "question": "Eine fremde Person sendet eine Freundschaftsanfrage. Was machst du?",
         "answers": [
+          "Passwort schicken.",
           "Erst prüfen oder ablehnen.",
-          "Immer annehmen.",
-          "Passwort schicken."
+          "Immer annehmen."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Fremde Anfragen müssen nicht angenommen werden.",
         "area": "Fremde Anfragen"
       },
@@ -2169,8 +2169,8 @@ const topics = [
         "question": "Was ist bei Kommentaren wichtig?",
         "answers": [
           "Respektvoll schreiben.",
-          "Beleidigen.",
-          "Gerüchte verbreiten."
+          "Gerüchte verbreiten.",
+          "Beleidigen."
         ],
         "correct": 0,
         "explanation": "Richtig. Kommentare sollen andere nicht verletzen.",
@@ -2179,44 +2179,44 @@ const topics = [
       {
         "question": "Du siehst einen beleidigenden Kommentar. Was kannst du tun?",
         "answers": [
-          "Nicht mitstreiten, melden oder Hilfe holen.",
           "Zurück beleidigen.",
-          "Die eigene Adresse posten."
+          "Die eigene Adresse posten.",
+          "Nicht mitstreiten, melden oder Hilfe holen."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Nicht mitstreiten ist sicherer.",
         "area": "Melden"
       },
       {
         "question": "Du willst ein Foto von einer anderen Person posten. Was ist richtig?",
         "answers": [
-          "Vorher fragen.",
+          "Nur später löschen.",
           "Einfach posten.",
-          "Nur später löschen."
+          "Vorher fragen."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Andere Personen entscheiden über ihre Bilder mit.",
         "area": "Fotos"
       },
       {
         "question": "Was bedeutet öffentlich bei einem Beitrag?",
         "answers": [
-          "Viele Menschen können ihn sehen.",
           "Nur du kannst ihn sehen.",
+          "Viele Menschen können ihn sehen.",
           "Er verschwindet sofort."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Öffentlich bedeutet: sehr viele können mitlesen.",
         "area": "Sichtbarkeit"
       },
       {
         "question": "Jemand macht Druck und will Geld. Was machst du?",
         "answers": [
+          "Bankdaten schicken.",
           "Nicht zahlen und Hilfe holen.",
-          "Sofort zahlen.",
-          "Bankdaten schicken."
+          "Sofort zahlen."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Druck und Geldforderungen sind Warnzeichen.",
         "area": "Druck und Geld"
       },
@@ -2224,8 +2224,8 @@ const topics = [
         "question": "Was darfst du bei Belästigung tun?",
         "answers": [
           "Blockieren und melden.",
-          "Alles geheim halten.",
-          "Zurück drohen."
+          "Zurück drohen.",
+          "Alles geheim halten."
         ],
         "correct": 0,
         "explanation": "Richtig. Blockieren und Melden kann schützen.",
@@ -2234,11 +2234,11 @@ const topics = [
       {
         "question": "Was ist ein guter Facebook-Merksatz?",
         "answers": [
-          "Ich prüfe, bevor ich teile.",
           "Ich teile alles sofort.",
-          "Fremde bekommen alle Daten."
+          "Fremde bekommen alle Daten.",
+          "Ich prüfe, bevor ich teile."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Prüfen vor dem Teilen schützt dich.",
         "area": "Merksatz"
       }
@@ -2908,22 +2908,22 @@ const topics = [
       {
         "question": "Warum ist Standort in Stories sensibel?",
         "answers": [
-          "Er zeigt, wo du bist.",
           "Er macht dich automatisch sicher.",
+          "Er zeigt, wo du bist.",
           "Er ist immer egal."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Der Standort kann verraten, wo du bist.",
         "area": "Standort"
       },
       {
         "question": "Was bedeutet ein privates Profil?",
         "answers": [
+          "Niemand kann die App nutzen.",
           "Nicht alle können alles sehen.",
-          "Alle sehen alles.",
-          "Niemand kann die App nutzen."
+          "Alle sehen alles."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Ein privates Profil kann besser schützen.",
         "area": "Privates Profil"
       },
@@ -2931,8 +2931,8 @@ const topics = [
         "question": "Jemand schreibt: „Schick mir ein privates Foto.“ Was machst du?",
         "answers": [
           "Nein sagen und Hilfe holen.",
-          "Foto schicken.",
-          "Geheim halten."
+          "Geheim halten.",
+          "Foto schicken."
         ],
         "correct": 0,
         "explanation": "Richtig. Du musst keine privaten Fotos schicken.",
@@ -2941,44 +2941,44 @@ const topics = [
       {
         "question": "Was ist bei Likes wichtig?",
         "answers": [
-          "Likes sagen nichts über deinen Wert.",
           "Likes entscheiden alles.",
-          "Ohne Likes bist du falsch."
+          "Ohne Likes bist du falsch.",
+          "Likes sagen nichts über deinen Wert."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Dein Wert hängt nicht von Likes ab.",
         "area": "Likes und Druck"
       },
       {
         "question": "Eine Story verschwindet später. Ist sie deshalb immer sicher?",
         "answers": [
-          "Nein, jemand kann sie speichern.",
+          "Nur bei Fremden.",
           "Ja, immer.",
-          "Nur bei Fremden."
+          "Nein, jemand kann sie speichern."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Auch Stories können per Screenshot gespeichert werden.",
         "area": "Stories"
       },
       {
         "question": "Was machst du bei beleidigenden Kommentaren?",
         "answers": [
-          "Nicht mitstreiten, blockieren oder melden.",
           "Zurück beleidigen.",
+          "Nicht mitstreiten, blockieren oder melden.",
           "Private Daten posten."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Du darfst dich schützen.",
         "area": "Kommentare"
       },
       {
         "question": "Eine Nachricht macht Druck: „Klicke sofort auf den Link.“ Was machst du?",
         "answers": [
+          "An alle weiterleiten.",
           "Nicht sofort klicken.",
-          "Sofort klicken.",
-          "An alle weiterleiten."
+          "Sofort klicken."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Druck und Links sind Warnzeichen.",
         "area": "Links"
       },
@@ -2986,8 +2986,8 @@ const topics = [
         "question": "Was ist eine gute Instagram-Regel?",
         "answers": [
           "Vor dem Posten überlegen.",
-          "Alles sofort posten.",
-          "Standort immer zeigen."
+          "Standort immer zeigen.",
+          "Alles sofort posten."
         ],
         "correct": 0,
         "explanation": "Richtig. Vorher überlegen schützt dich und andere.",
@@ -2996,11 +2996,11 @@ const topics = [
       {
         "question": "Wer kann helfen, wenn dich etwas belastet?",
         "answers": [
-          "eine Person, der du vertraust.",
           "Nur fremde Follower.",
-          "Niemand."
+          "Niemand.",
+          "eine Person, der du vertraust."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Hilfe holen ist erlaubt.",
         "area": "Hilfe holen"
       }
@@ -3670,22 +3670,22 @@ const topics = [
       {
         "question": "Was will Werbung oft?",
         "answers": [
-          "Etwas verkaufen.",
           "Immer nur helfen.",
+          "Etwas verkaufen.",
           "Nie beeinflussen."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Werbung will oft zum Kaufen bewegen.",
         "area": "Werbung"
       },
       {
         "question": "Ein Video sagt: „Kaufe sofort, dann wirst du reich.“ Was ist das?",
         "answers": [
+          "Eine sichere Hilfe.",
           "Ein Warnzeichen.",
-          "Immer richtig.",
-          "Eine sichere Hilfe."
+          "Immer richtig."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Große Versprechen und Druck sind Warnzeichen.",
         "area": "Werbung und Druck"
       },
@@ -3693,8 +3693,8 @@ const topics = [
         "question": "Was machst du bei Hass-Kommentaren?",
         "answers": [
           "Nicht mitstreiten, melden oder Hilfe holen.",
-          "Zurück beleidigen.",
-          "Adresse posten."
+          "Adresse posten.",
+          "Zurück beleidigen."
         ],
         "correct": 0,
         "explanation": "Richtig. Nicht mitstreiten ist sicherer.",
@@ -3703,44 +3703,44 @@ const topics = [
       {
         "question": "Warum sind Pausen wichtig?",
         "answers": [
-          "Videos können lange fesseln.",
           "Pausen sind verboten.",
-          "YouTube darf nie genutzt werden."
+          "YouTube darf nie genutzt werden.",
+          "Videos können lange fesseln."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Pausen helfen beim bewussten Nutzen.",
         "area": "Pausen"
       },
       {
         "question": "Was machst du bei falschen Informationen?",
         "answers": [
-          "Prüfen und nachfragen.",
+          "An alle schicken.",
           "Sofort glauben.",
-          "An alle schicken."
+          "Prüfen und nachfragen."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Nicht alles im Internet stimmt.",
         "area": "Falsche Informationen"
       },
       {
         "question": "Was solltest du nicht in Kommentare schreiben?",
         "answers": [
-          "Private Daten.",
           "Danke.",
+          "Private Daten.",
           "Eine freundliche Frage."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Private Daten gehören nicht in Kommentare.",
         "area": "Private Daten"
       },
       {
         "question": "Ein Kanal fordert dein Passwort. Was machst du?",
         "answers": [
+          "In die Kommentare schreiben.",
           "Nicht senden.",
-          "Senden.",
-          "In die Kommentare schreiben."
+          "Senden."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Passwörter bleiben geheim.",
         "area": "Passwort"
       },
@@ -3748,8 +3748,8 @@ const topics = [
         "question": "Was kannst du bei problematischen Videos tun?",
         "answers": [
           "Melden oder Hilfe holen.",
-          "Alles nachmachen.",
-          "Private Daten senden."
+          "Private Daten senden.",
+          "Alles nachmachen."
         ],
         "correct": 0,
         "explanation": "Richtig. Melden und Hilfe holen sind Schutzmöglichkeiten.",
@@ -3758,11 +3758,11 @@ const topics = [
       {
         "question": "Was ist ein guter YouTube-Merksatz?",
         "answers": [
-          "Ich prüfe, bevor ich glaube.",
           "Jedes Video ist wahr.",
-          "Werbung ist immer Rat."
+          "Werbung ist immer Rat.",
+          "Ich prüfe, bevor ich glaube."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Prüfen ist wichtig.",
         "area": "Merksatz"
       }
@@ -4432,22 +4432,22 @@ const topics = [
       {
         "question": "Warum ist der Standort sensibel?",
         "answers": [
-          "Er zeigt, wo du bist.",
           "Er ist immer unwichtig.",
+          "Er zeigt, wo du bist.",
           "Er schützt automatisch."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Standortdaten sind privat.",
         "area": "Standort"
       },
       {
         "question": "Jemand fordert ein privates Foto. Was machst du?",
         "answers": [
+          "Geheim halten.",
           "Nein sagen und Hilfe holen.",
-          "Foto schicken.",
-          "Geheim halten."
+          "Foto schicken."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Du musst keine privaten Fotos senden.",
         "area": "Private Fotos"
       },
@@ -4455,8 +4455,8 @@ const topics = [
         "question": "Was machst du bei fremden Kontakten?",
         "answers": [
           "Prüfen oder ablehnen.",
-          "Immer annehmen.",
-          "Adresse senden."
+          "Adresse senden.",
+          "Immer annehmen."
         ],
         "correct": 0,
         "explanation": "Richtig. Du darfst Kontakte ablehnen.",
@@ -4465,44 +4465,44 @@ const topics = [
       {
         "question": "Was kann bei einem Screenshot passieren?",
         "answers": [
-          "Ein Snap wird gespeichert.",
           "Alles wird sicher gelöscht.",
-          "Niemand kann etwas sehen."
+          "Niemand kann etwas sehen.",
+          "Ein Snap wird gespeichert."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Screenshots können Inhalte festhalten.",
         "area": "Screenshot"
       },
       {
         "question": "Was ist eine sichere Regel beim Senden?",
         "answers": [
-          "Nur senden, womit ich mich wohl fühle.",
+          "Standort immer teilen.",
           "Alles senden.",
-          "Standort immer teilen."
+          "Nur senden, womit ich mich wohl fühle."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Du entscheidest, was du sendest.",
         "area": "Senden"
       },
       {
         "question": "Eine Person schreibt: „Sag es niemandem.“ Was ist das?",
         "answers": [
-          "Ein Warnzeichen.",
           "Immer sicher.",
+          "Ein Warnzeichen.",
           "Eine Pflicht."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Geheimhaltung kann ein Warnzeichen sein.",
         "area": "Druck"
       },
       {
         "question": "Was kannst du bei Belästigung tun?",
         "answers": [
+          "Alles verschweigen.",
           "Blockieren, melden oder Hilfe holen.",
-          "Zurück drohen.",
-          "Alles verschweigen."
+          "Zurück drohen."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Du darfst dich schützen.",
         "area": "Blockieren"
       },
@@ -4510,8 +4510,8 @@ const topics = [
         "question": "Was bedeutet Nein sagen?",
         "answers": [
           "Ich darf etwas ablehnen.",
-          "Ich muss alles machen.",
-          "Ich darf keine Hilfe holen."
+          "Ich darf keine Hilfe holen.",
+          "Ich muss alles machen."
         ],
         "correct": 0,
         "explanation": "Richtig. Nein sagen ist erlaubt.",
@@ -4520,11 +4520,11 @@ const topics = [
       {
         "question": "Wer kann helfen?",
         "answers": [
-          "eine Person, der du vertraust.",
           "Nur Fremde.",
-          "Niemand."
+          "Niemand.",
+          "eine Person, der du vertraust."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Eine Person, der du vertraust, kann unterstützen.",
         "area": "Hilfe holen"
       }
@@ -5194,22 +5194,22 @@ const topics = [
       {
         "question": "Warum sind Pausen wichtig?",
         "answers": [
-          "TikTok kann lange fesseln.",
           "Pausen sind verboten.",
+          "TikTok kann lange fesseln.",
           "Videos sind immer falsch."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Pausen helfen beim bewussten Nutzen.",
         "area": "Pausen"
       },
       {
         "question": "Was solltest du bei Werbung tun?",
         "answers": [
+          "Passwort senden.",
           "Prüfen und keine Daten eingeben.",
-          "Sofort kaufen.",
-          "Passwort senden."
+          "Sofort kaufen."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Werbung und Links müssen geprüft werden.",
         "area": "Werbung"
       },
@@ -5217,8 +5217,8 @@ const topics = [
         "question": "Was machst du bei Hass-Kommentaren?",
         "answers": [
           "Blockieren oder melden.",
-          "Zurück beleidigen.",
-          "Private Daten posten."
+          "Private Daten posten.",
+          "Zurück beleidigen."
         ],
         "correct": 0,
         "explanation": "Richtig. Blockieren oder Melden kann schützen.",
@@ -5227,44 +5227,44 @@ const topics = [
       {
         "question": "Was macht der Algorithmus?",
         "answers": [
-          "Er zeigt oft ähnliche Videos.",
           "Er schützt immer vor Gefahr.",
-          "Er löscht alle schlechten Videos."
+          "Er löscht alle schlechten Videos.",
+          "Er zeigt oft ähnliche Videos."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Der Algorithmus zeigt oft mehr von dem, was du anschaust.",
         "area": "Algorithmus"
       },
       {
         "question": "Ein Video sagt: „Klicke sofort, sonst verpasst du alles.“ Was ist das?",
         "answers": [
-          "Druck.",
+          "Eine Pflicht.",
           "Immer sicher.",
-          "Eine Pflicht."
+          "Druck."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Druck ist ein Warnzeichen.",
         "area": "Druck"
       },
       {
         "question": "Was solltest du in Kommentaren nicht schreiben?",
         "answers": [
-          "Private Daten.",
           "Danke.",
+          "Private Daten.",
           "Eine freundliche Frage."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Private Daten gehören nicht in Kommentare.",
         "area": "Private Daten"
       },
       {
         "question": "Was ist bei Trends wichtig?",
         "answers": [
+          "Nie Hilfe holen.",
           "Vorher überlegen.",
-          "Immer mitmachen.",
-          "Nie Hilfe holen."
+          "Immer mitmachen."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Nicht jeder Trend ist gut.",
         "area": "Trends prüfen"
       },
@@ -5272,8 +5272,8 @@ const topics = [
         "question": "Jemand will ein privates Video von dir. Was machst du?",
         "answers": [
           "Nein sagen und Hilfe holen.",
-          "Video schicken.",
-          "Geheim halten."
+          "Geheim halten.",
+          "Video schicken."
         ],
         "correct": 0,
         "explanation": "Richtig. Du entscheidest über deine Videos.",
@@ -5282,11 +5282,11 @@ const topics = [
       {
         "question": "Was ist ein guter TikTok-Merksatz?",
         "answers": [
-          "Ich prüfe Trends und mache Pausen.",
           "Ich mache alles nach.",
-          "Ich teile alle Daten."
+          "Ich teile alle Daten.",
+          "Ich prüfe Trends und mache Pausen."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Prüfen und Pausen helfen.",
         "area": "Merksatz"
       }
@@ -5964,22 +5964,22 @@ const topics = [
       {
         "question": "Jemand schreibt: „Sag niemandem davon.“ Was ist das?",
         "answers": [
-          "Ein Warnzeichen.",
           "Immer sicher.",
+          "Ein Warnzeichen.",
           "Eine Hilfe."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Geheimhaltung und Druck sind Warnzeichen.",
         "area": "Druck"
       },
       {
         "question": "Wer kann helfen?",
         "answers": [
+          "Niemand.",
           "eine Person, der du vertraust.",
-          "Nur Fremde.",
-          "Niemand."
+          "Nur Fremde."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Eine Person, der du vertraust, kann helfen.",
         "area": "Hilfe holen"
       },
@@ -5987,8 +5987,8 @@ const topics = [
         "question": "Was machst du bei akuter Gefahr?",
         "answers": [
           "Sofort Hilfe holen oder 110.",
-          "Warten.",
-          "Alles löschen."
+          "Alles löschen.",
+          "Warten."
         ],
         "correct": 0,
         "explanation": "Richtig. Bei Gefahr zählt schnelle Hilfe.",
@@ -5997,44 +5997,44 @@ const topics = [
       {
         "question": "Was ist wichtig bei Beweisen?",
         "answers": [
-          "Nachricht zeigen und nicht allein handeln.",
           "Alles sofort löschen.",
-          "Nie darüber sprechen."
+          "Nie darüber sprechen.",
+          "Nachricht zeigen und nicht allein handeln."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Nachrichten können helfen, ein Problem zu klären.",
         "area": "Beweise"
       },
       {
         "question": "Was machst du bei Druck?",
         "answers": [
-          "Nicht allein antworten.",
+          "Passwort schicken.",
           "Alles machen.",
-          "Passwort schicken."
+          "Nicht allein antworten."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Bei Druck nicht allein handeln.",
         "area": "Druck"
       },
       {
         "question": "Was darfst du bei Belästigung tun?",
         "answers": [
-          "Blockieren, melden oder Hilfe holen.",
           "Zurück beleidigen.",
+          "Blockieren, melden oder Hilfe holen.",
           "Alles geheim halten."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Schutz und Hilfe sind erlaubt.",
         "area": "Blockieren"
       },
       {
         "question": "Was bedeutet Hilfe holen?",
         "answers": [
+          "Ich darf nicht fragen.",
           "Ich suche Unterstützung.",
-          "Ich bin schuld.",
-          "Ich darf nicht fragen."
+          "Ich bin schuld."
         ],
-        "correct": 0,
+        "correct": 1,
         "explanation": "Richtig. Hilfe holen ist eine gute Entscheidung.",
         "area": "Unterstützung"
       },
@@ -6042,8 +6042,8 @@ const topics = [
         "question": "Eine Nachricht macht dir Angst. Was ist gut?",
         "answers": [
           "eine Person, der du vertraust fragen.",
-          "Sofort allein antworten.",
-          "Alles löschen und schweigen."
+          "Alles löschen und schweigen.",
+          "Sofort allein antworten."
         ],
         "correct": 0,
         "explanation": "Richtig. Du musst das nicht allein klären.",
@@ -6052,11 +6052,11 @@ const topics = [
       {
         "question": "Was ist der wichtigste Merksatz?",
         "answers": [
-          "Ich bin nicht allein.",
           "Ich muss alles allein lösen.",
-          "Ich darf nie Hilfe holen."
+          "Ich darf nie Hilfe holen.",
+          "Ich bin nicht allein."
         ],
-        "correct": 0,
+        "correct": 2,
         "explanation": "Richtig. Du bist nicht allein.",
         "area": "Merksatz"
       }

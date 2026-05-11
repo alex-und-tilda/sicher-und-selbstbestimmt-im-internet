@@ -364,6 +364,88 @@ function renderSavedProgressHint(topic) {
 
 
 
+
+function openHelpDialog() {
+  const overlay = document.createElement("div");
+  overlay.className = "help-overlay";
+  overlay.innerHTML = `
+    <div class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle">
+      <div class="help-title-row">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml("help")}</span>
+        <h2 id="helpDialogTitle">Ich brauche Hilfe</h2>
+      </div>
+
+      <div class="help-step-box help-step-calm">
+        <h3>1. Stopp.</h3>
+        <p>Du musst nicht sofort entscheiden.</p>
+        <p>Lege das Handy kurz weg.</p>
+      </div>
+
+      <div class="help-step-box help-step-check">
+        <h3>2. Was ist passiert?</h3>
+        <ul>
+          <li>Ich verstehe etwas nicht.</li>
+          <li>Ich bin unsicher.</li>
+          <li>Jemand macht Druck.</li>
+          <li>Ich habe Angst.</li>
+          <li>Ich habe aus Versehen geklickt.</li>
+        </ul>
+      </div>
+
+      <div class="help-step-box help-step-act">
+        <h3>3. Was kann ich jetzt tun?</h3>
+        <ul>
+          <li>Nicht weiterklicken.</li>
+          <li>Keine Daten eingeben.</li>
+          <li>Keine Fotos senden.</li>
+          <li>Die Nachricht nicht löschen, wenn sie wichtig sein kann.</li>
+          <li>Eine Person fragen, der ich vertraue.</li>
+        </ul>
+      </div>
+
+      <div class="help-step-box help-step-people">
+        <h3>4. Wen kann ich fragen?</h3>
+        <ul>
+          <li>eine Person, der ich vertraue</li>
+          <li>eine Unterstützerin oder einen Unterstützer</li>
+          <li>eine Digital-Begleiterin oder einen Digital-Begleiter</li>
+          <li>eine Person aus meinem Wohnbereich oder aus meiner Familie</li>
+        </ul>
+      </div>
+
+      <div class="help-step-box help-step-danger">
+        <h3>5. Wann ist es dringend?</h3>
+        <p>Es ist dringend, wenn jemand droht.</p>
+        <p>Es ist dringend, wenn jemand Geld will.</p>
+        <p>Es ist dringend, wenn jemand Nacktbilder will.</p>
+        <p>Bei Gefahr: sofort Hilfe holen.</p>
+        <p><strong>Bei akuter Gefahr: 110.</strong></p>
+      </div>
+
+      <div class="help-decision-box">
+        <h3>Meine Entscheidung</h3>
+        <p><strong>Ich bin sicher:</strong> Ich entscheide selbst.</p>
+        <p><strong>Ich bin unsicher:</strong> Ich frage eine Person, der ich vertraue.</p>
+        <p><strong>Es ist gefährlich:</strong> Ich hole sofort Hilfe.</p>
+      </div>
+
+      <div class="help-actions">
+        <button type="button" class="audio-button" onclick="speakElementById('helpDialogTitle')">Überschrift vorlesen</button>
+        <button type="button" class="audio-button" onclick="speakText('Stopp. Du musst nicht sofort entscheiden. Nicht weiterklicken. Keine Daten eingeben. Frage eine Person, der du vertraust. Bei akuter Gefahr rufe 110.')">Kurz-Hilfe vorlesen</button>
+        <button type="button" class="quiz-link quiz-button" onclick="closeHelpDialog()">Schließen</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  const dialog = overlay.querySelector(".help-dialog");
+  dialog?.focus?.();
+}
+
+function closeHelpDialog() {
+  const overlay = document.querySelector(".help-overlay");
+  if (overlay) overlay.remove();
+}
+
 function ensureGlobalHelpButton() {
   if (document.querySelector(".global-help-button")) return;
   const button = document.createElement("button");
@@ -671,7 +753,7 @@ function renderQrOverview() {
   content.innerHTML = `
     <article class="card qr-overview print-sheet">
       <div class="print-frame">
-        <div class="module-tag">QR-Links für Poster</div>
+        <div class="module-tag">Interne Direktlinks</div>
         <h2>QR-Code-Übersicht</h2>
         <p>Diese Links können für QR-Codes genutzt werden.</p>
         <div class="qr-table-wrap">

@@ -1,6 +1,6 @@
-# Selbstlernangebot: Sicher digital unterwegs
+# Sicher und selbstbestimmt im Internet
 
-Diese Lernplattform ist ein barrierearmes Selbstlernangebot für Menschen mit Lern- und Verständnisschwierigkeiten.
+Barrierearmes Selbstlernangebot zu Datenschutz und sicheren digitalen Anwendungen.
 
 ## Themen
 
@@ -13,274 +13,69 @@ Diese Lernplattform ist ein barrierearmes Selbstlernangebot für Menschen mit Le
 7. TikTok
 8. Hilfe bei Problemen
 
-## Funktionen
+## Bedienlogik
 
-- Kurz lernen
-- Ausführlich lernen
-- Quiz pro Thema
-- Urkunde bei bestandenem Quiz
-- Merk-Karte pro Thema
-- Vorlesen-Funktion
-- Lernstand lokal speichern
-- Zielgruppen-Testbogen
-- Direktlinks für QR-Codes
-
-## Datenschutz
-
-Es wird kein Name gespeichert.
-
-Der Lernstand wird nur im Browser auf dem jeweiligen Gerät gespeichert.
-
-Es werden keine Daten an einen Server gesendet.
-
-## Direktlinks für QR-Codes
-
-Beispiele:
+Die Lernplattform arbeitet in zwei Schritten:
 
 ```text
-index.html#whatsapp
-index.html#whatsapp:kurz
-index.html#whatsapp:quiz
-index.html#whatsapp:merk
+1. Thema wählen
+2. Aktion wählen
 ```
 
-Bedeutung:
-
-```text
-#whatsapp = Thema WhatsApp öffnen
-#whatsapp:kurz = WhatsApp im Kurzmodus öffnen
-#whatsapp:quiz = WhatsApp-Quiz direkt öffnen
-#whatsapp:merk = WhatsApp-Merk-Karte direkt öffnen
-```
-
-Diese Links können für QR-Codes auf Lernpostern genutzt werden.
-
-## Farblogik
-
-Die Farben haben eine feste Bedeutung:
-
-```text
-Blau = Orientierung
-Türkis = Lernen / Weiter
-Gelb = Hinweis / Merken / Unterstützung
-Grün = Erfolg / bestanden / Urkunde
-Rot = Gefahr / Stopp / Betrug
-Grau = neutral
-```
-
-Rot wird nur für echte Warnungen genutzt.
-
-## Druckseiten
-
-Es gibt druckbare Seiten für:
-
-- Urkunde
-- Merk-Karte
-- Zielgruppen-Testbogen
-
-Beim Drucken werden Navigation und Buttons ausgeblendet.
-
-## Zielgruppen-Test
-
-Für eine offizielle Veröffentlichung in Leichter Sprache sollte die Plattform mit Menschen aus der Zielgruppe getestet werden.
-
-Empfohlen:
-
-- 2 bis 4 Personen testen die Plattform.
-- Jede Person testet mindestens ein Thema.
-- Beobachtet wird: Start, Navigation, Verständnis, Quiz, Hilfe-Hinweise und Druckseiten.
-
-
-## Aktionskarten
-
-Die vier Funktionen pro Thema sind jetzt als unterschiedliche Aktionskarten gestaltet:
-
-```text
-Kurz lernen = Türkis
-Ausführlich lernen = Dunkelblau
-Quiz starten = Grün
-Merk-Karte = Gelb
-```
-
-Jede Aktionskarte enthält:
-
-```text
-Icon
-kurze Erklärung
-Leitfrage
-```
-
-Beispiele:
+Aktionen:
 
 ```text
 Kurz lernen
-Die wichtigsten Seiten.
-Was muss ich mir merken?
-
+Ausführlich lernen
 Quiz starten
-10 Fragen beantworten.
-Habe ich das verstanden?
+Merk-Karte öffnen
 ```
 
-
-## Fix Aktionskarten-Farben
-
-Die Farben der vier Aktionskarten wurden final eindeutig gesetzt:
+## Barrierearme Funktionen
 
 ```text
-Kurz lernen = helles Türkis
-Ausführlich lernen = Dunkelblau
-Quiz starten = helles Grün
-Merk-Karte = helles Gelb
+sehr langsames Vorlesen
+Vorlesen von Fragen und Antworten
+große Symbole
+große Buttons
+Hilfe-Button
+Kurzmodus
+Merk-Karten
+Urkunde nach bestandenem Quiz
 ```
 
-Die alten allgemeinen Button-Regeln können diese Farben nicht mehr überlagern.
+## Hilfe-Logik
 
-
-## Layout-Fix für Aktionskarten
-
-Die Aktionskarten wurden kompakter gesetzt.
-
-Problem vorher:
-```text
-Die vier Karten waren zu breit.
-Die Themenkarte wurde gesprengt.
-Es entstand ein waagerechter Scrollbalken.
-```
-
-Korrektur:
-```text
-Aktionskarten stehen jetzt untereinander.
-Keine abgeschnittenen Karten.
-Keine waagerechte Verschiebung.
-Bessere Smartphone-Ansicht.
-```
-
-
-## Menü-Navigation-Fix
-
-Die untere Navigation wird in der Themenübersicht ausgeblendet.
-
-Problem vorher:
-```text
-Die Buttons Zurück / Weiter lagen über den Themenkarten.
-Die Themenübersicht wirkte abgeschnitten.
-```
-
-Korrektur:
-```text
-In der Themenübersicht keine untere Navigation.
-Navigation nur auf Lernseiten, im Quiz, bei Urkunde und Druckseiten.
-Keine Überdeckung der Themenkarten.
-```
-
-
-## Karten- und Logo-Fix
-
-Die Themenkarten wurden optisch vereinheitlicht.
-
-Korrekturen:
+Der Hilfe-Button ist sichtbar und öffnet eine klare Schrittfolge:
 
 ```text
-gleichmäßigeres Kartenraster
-einheitlichere Kartenhöhe
-feste Bildhöhe
-kompaktere Aktionskarten
-kompaktere Weiterlernen-Anzeige
-größere Logos unten
+1. Stopp.
+2. Was ist passiert?
+3. Was kann ich jetzt tun?
+4. Wen kann ich fragen?
+5. Wann ist es dringend?
 ```
 
-
-## Hover- und Fokus-Fix
-
-Der graue Hover-Effekt wurde ersetzt.
-
-Neue Logik:
+Bei akuter Gefahr steht im Hilfe-Dialog:
 
 ```text
-Kurz lernen = stärkeres Türkis
-Ausführlich lernen = stärkeres Blau
-Quiz starten = stärkeres Grün
-Merk-Karte = stärkeres Gelb
+110
 ```
 
-Rot wird weiterhin nicht für Hover genutzt, sondern bleibt für Warnungen reserviert.
-
-
-## Zwei-Stufen-Menü
-
-Die Startseite wurde vereinfacht.
-
-Neue Struktur:
+## Datenschutz
 
 ```text
-Schritt 1: Thema auswählen
-Schritt 2: Aktion auswählen
+keine Anmeldung
+keine Namensabfrage
+keine personenbezogene Online-Speicherung
+Lernstand nur lokal im Browser
 ```
-
-Auf der Startseite stehen nur noch die 8 Themenkarten.
-
-Die Aktionskarten, Hilfe-Fragen und Bilder erscheinen erst nach Auswahl eines Themas.
-
-Zusätzlich gibt es eine zentrale Weiterlernen-Box.
-
-
-## Erweiterung: Punkte 1 bis 6
-
-Umgesetzt wurden:
-
-1. Immer sichtbarer Hilfe-Button
-2. Abschlussseite nach „Kurz lernen“
-3. „Ich habe diese Seite verstanden“-Button
-4. Kleine Wiederholungsfrage nach Modulwechsel
-5. Entscheidungslogik ohne Ampel
-6. QR-Code-Übersichtsseite
-
-Die QR-Übersicht ist auch über folgenden Link erreichbar:
-
-```text
-index.html#qr
-```
-
-
-## App-nahe Farborientierung
-
-Die Themenkarten nutzen nun app-nahe Farben zur Orientierung.
-
-Wichtig:
-
-```text
-Es werden keine Original-Logos verwendet.
-Es werden keine offiziellen App-Icons verwendet.
-Es werden keine App-Screenshots verwendet.
-```
-
-Die Plattform nutzt eigene neutrale Icons und eine farbliche Orientierung:
-
-```text
-WhatsApp = Grün
-Facebook = Blau
-Instagram = Pink/Lila
-YouTube = Rot als Themenkennung
-Snapchat = Gelb
-TikTok = Dunkel
-Datenschutz = Dunkelblau
-Hilfe = Grün
-```
-
-Zusätzlich wurde ein Hinweis ergänzt:
-
-```text
-Dies ist ein unabhängiges Bildungsangebot.
-Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
-```
-
 
 ## QR-Direktlinks für Poster
 
-Die QR-Links sind nicht mehr sichtbar auf der Lernseite.
+Die QR-Direktlinks sind nicht sichtbar auf der Lernseite.
 
-Sie bleiben technisch nutzbar und sind nur für die Poster-Vorbereitung gedacht.
+Sie können für Poster genutzt werden.
 
 Beispiele:
 
@@ -296,160 +91,32 @@ index.html#whatsapp:quiz
 index.html#whatsapp:merk
 ```
 
-Bedeutung:
+Schema:
 
 ```text
 #thema = Thema öffnen
 #thema:kurz = Kurz lernen öffnen
-#thema:quiz = Quiz direkt öffnen
+#thema:quiz = Quiz öffnen
 #thema:merk = Merk-Karte öffnen
 ```
 
-## Hilfe-Button
+## Veröffentlichung über GitHub Pages
 
-Der Button „Ich brauche Hilfe“ wurde größer und prominenter gestaltet.
-
-Er bleibt sichtbar, damit Lernende jederzeit Unterstützung finden können.
-
-
-## Fix: Übungen
-
-Die Übungen wurden korrigiert.
-
-Problem:
-```text
-In bestimmten Modi wurde beim Antworten auf die falsche interne Lernseite geschaut.
-Dadurch kam keine Rückmeldung.
-```
-
-Korrektur:
-```text
-Übungen nutzen jetzt die aktuell sichtbare Lernseite.
-Antwort-Buttons sind als echte Buttons gesetzt.
-Rückmeldung wird zuverlässig angezeigt.
-Navigation nutzt den aktiven Lernmodus.
-```
-
-
-## Symbole und Vorlesen
-
-Wichtige Bereiche wurden für Menschen mit Leseschwierigkeiten verbessert.
-
-Ergänzt wurden:
+Diese Dateien müssen in das GitHub-Repository hochgeladen werden:
 
 ```text
-Merksatz = Symbol + Vorlesen
-Übung = Symbol + Vorlesen
-Quizfrage = Symbol + Vorlesen
-Geschafft = Symbol
-Warnung = Symbol
-Hilfe = Symbol
-Merk-Karte = Symbol
-Urkunde = Symbol
+index.html
+styles.css
+topics.js
+app.js
+assets/
+README.md
 ```
 
-Die Symbole bleiben wiederkehrend gleich:
+Danach GitHub Pages aktivieren.
 
-```text
-Haken = geschafft / richtig
-Fragezeichen oder Hilfe-Symbol = Hilfe / Quiz
-Warnsymbol = Achtung / Gefahr
-Merksymbol = Merksatz / Merk-Karte
-Übungssymbol = Aufgabe / Übung
-```
+## Hinweis zur Leichten Sprache
 
+Die Texte sind einfach und barrierearm formuliert.
 
-## Fix: Vorlesen langsamer
-
-Die Vorlesefunktion wurde angepasst.
-
-Geändert:
-
-```text
-langsamere Vorlese-Geschwindigkeit
-einheitliche Vorlese-Funktion
-deutsche Stimme wird bevorzugt, wenn verfügbar
-Buttons heißen jetzt „Langsam vorlesen“
-Stopp-Button bleibt erhalten
-```
-
-Hinweis:
-
-Die Vorlesestimme kommt vom Browser oder Betriebssystem.
-Die Qualität kann je nach Gerät unterschiedlich sein.
-
-
-## Vorlesen: sehr langsam
-
-Die Vorlesefunktion wurde erneut angepasst.
-
-Standard ist jetzt:
-
-```text
-sehr langsam
-```
-
-Technisch:
-
-```text
-speechRate = 0.45
-```
-
-Zusätzlich gibt es eine Auswahl:
-
-```text
-Sehr langsam
-Langsam
-Normal
-```
-
-Die Auswahl wird lokal im Browser gespeichert.
-
-
-## Finaler Fix: Übungen
-
-Die Übungen wurden fachlich und technisch ergänzt.
-
-Korrigiert:
-
-```text
-Übungen sind ausführbar.
-Antworten sind anklickbar.
-Nach jeder Antwort erscheint eine Erklärung.
-Übungen erscheinen auf Übungsseiten, Wiederholungsseiten und Quiz-Vorbereitungsseiten.
-Übungen funktionieren auch im Kurzmodus.
-```
-
-Jede Übung hat:
-
-```text
-Frage
-3 Antwortmöglichkeiten
-Rückmeldung
-Erklärung
-Vorlesen-Button
-```
-
-
-## Vorlesen bei Übungen und Quiz
-
-Die Vorlesefunktion wurde angepasst.
-
-Bei Übungen und Quiz wird jetzt nur vorgelesen:
-
-```text
-Frage
-Antwort 1
-Antwort 2
-Antwort 3
-```
-
-Nicht vorgelesen werden:
-
-```text
-Überschriften
-Buttons
-Rückmeldungen
-Erklärungen
-Navigation
-```
+Für das offizielle Zeichen für Leichte Sprache ist zusätzlich eine Prüfung durch Menschen aus der Zielgruppe erforderlich.
