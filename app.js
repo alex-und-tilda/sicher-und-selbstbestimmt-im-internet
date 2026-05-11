@@ -423,14 +423,14 @@ function renderHelpOverlay() {
 
       <div class="help-small-safety-note">
         <h3>Wenn etwas im Internet Angst macht</h3>
-        <p>Dann nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.</p>
+        <p>Dann nutze eine Person, die dich unterstützt.</p>
         <p>Sprich mit einer Person, die dich unterstützt.</p>
         <p>Zum Beispiel: Wohnbereich, Dienst, Gruppenleitung, Digital-Begleiterin oder Digital-Begleiter.</p>
         <p>Du musst das nicht allein klären.</p>
       </div>
 
       <div class="help-actions">
-        <button type="button" class="btn btn-secondary" onclick="speakText('Du weißt gerade nicht, wie es weitergeht. Das ist okay. Du darfst dir Zeit nehmen. Wähle zuerst ein Thema. Danach wähle Kurz lernen, Ausführlich lernen, Quiz oder Merk-Karte. Wenn du den Text nicht verstehst, nutze Vorlesen oder frage eine Person, der du vertraust. Wenn dir im Internet etwas Angst macht, nutze die Unterstützungssysteme der Alexianer und der Stift Tilbeck.')">Hilfe langsam vorlesen</button>
+        <button type="button" class="btn btn-secondary" onclick="speakText('Du weißt gerade nicht, wie es weitergeht. Das ist okay. Du darfst dir Zeit nehmen. Wähle zuerst ein Thema. Danach wähle Kurz lernen, Ausführlich lernen, Quiz oder Merk-Karte. Wenn du den Text nicht verstehst, nutze Vorlesen oder frage eine Person, der du vertraust. Wenn dir im Internet etwas Angst macht, nutze die Unterstützung der Alexianer und der Stift Tilbeck.')">Hilfe langsam vorlesen</button>
         <button type="button" class="btn btn-secondary" onclick="goHome(); closeHelpOverlay();">Zur Startseite</button>
         <button type="button" class="btn btn-primary" onclick="closeHelpOverlay()">Schließen</button>
       </div>
@@ -1283,8 +1283,8 @@ function renderQuizResult() {
     content.innerHTML = `
       <article class="card certificate-card" id="certificateArea">
         <div class="certificate-frame">
-          <div class="module-tag">Teilnahme-Bestätigung</div>
-          <div class="symbol-heading certificate-symbol-heading"><span class="access-box-symbol" aria-hidden="true">${getIconHtml("check")}</span><h2 class="certificate-title">Teilnahme-Bestätigung</h2></div>
+          <div class="module-tag">Urkunde</div>
+          <div class="symbol-heading certificate-symbol-heading"><span class="access-box-symbol" aria-hidden="true">${getIconHtml("check")}</span><h2 class="certificate-title">Urkunde</h2></div>
           <p class="certificate-subtitle">erfolgreich abgeschlossen</p>
 
           <p class="certificate-topic">Thema: <strong>${escapeHtml(topic.title)}</strong></p>
@@ -1321,7 +1321,7 @@ function renderQuizResult() {
           </div>
 
           <div class="certificate-actions">
-            <button class="quiz-link quiz-button" onclick="window.print()">Teilnahme-Bestätigung drucken</button>
+            <button class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
             <button class="nav-button secondary" onclick="restartQuiz()">Quiz wiederholen</button>
           </div>
         </div>
@@ -1337,7 +1337,7 @@ function renderQuizResult() {
         </div>
 
         <p>Du hast <strong>${quizScore} von ${total}</strong> Fragen richtig beantwortet.</p>
-        <p>Für die Teilnahme-Bestätigung brauchst du mindestens <strong>${needed} richtige Antworten</strong>.</p>
+        <p>Für die Urkunde brauchst du mindestens <strong>${needed} richtige Antworten</strong>.</p>
 
         <div class="completion-box">
           <h3>Das kannst du nochmal üben:</h3>

@@ -454,7 +454,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -726,7 +726,7 @@ const topics = [
           "Eine gute Nachricht ist freundlich und klar."
         ],
         "quote": "Hallo. Ich komme heute um 16 Uhr.",
-        "success": "Das wirkt sicher. Die Nachricht macht keinen Druck.",
+        "success": "Das wirkt passend. Die Nachricht fordert dich nicht zu schnellem Handeln auf.",
         "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "module": "Modul 1: WhatsApp verstehen"
       },
@@ -1115,7 +1115,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -1387,7 +1387,7 @@ const topics = [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
         "quote": "„Danke für die Info. Ich komme später.“",
-        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
+        "success": "Das wirkt passend. Es gibt keinen direkten Druck.",
         "remember": "Ich kann blockieren und melden.",
         "module": "Modul 1: Facebook verstehen"
       },
@@ -1776,7 +1776,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -2048,7 +2048,7 @@ const topics = [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
         "quote": "„Danke für deine Nachricht. Ich antworte später.“",
-        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
+        "success": "Das wirkt passend. Es gibt keinen direkten Druck.",
         "remember": "Ich kann blockieren und melden.",
         "module": "Modul 1: Instagram verstehen"
       },
@@ -2437,7 +2437,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -2709,7 +2709,7 @@ const topics = [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
         "quote": "„Danke für das Video. Das hat mir geholfen.“",
-        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
+        "success": "Das wirkt passend. Es gibt keinen direkten Druck.",
         "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "module": "Modul 1: YouTube verstehen"
       },
@@ -3098,7 +3098,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -3370,7 +3370,7 @@ const topics = [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
         "quote": "„Ich melde mich später. Danke.“",
-        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
+        "success": "Das wirkt passend. Es gibt keinen direkten Druck.",
         "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "module": "Modul 1: Snapchat verstehen"
       },
@@ -3759,7 +3759,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -4031,7 +4031,7 @@ const topics = [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
         ],
         "quote": "„Das Video ist hilfreich. Danke.“",
-        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
+        "success": "Das wirkt passend. Es gibt keinen direkten Druck.",
         "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "module": "Modul 1: TikTok verstehen"
       },
@@ -4420,7 +4420,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -4679,7 +4679,7 @@ const topics = [
         "bullets": [
           "Person, der du vertraust",
           "vertraute Person",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich klicke nicht weiter, wenn ich unsicher bin.",
         "module": "Modul 1: Probleme erkennen"
@@ -5101,7 +5101,7 @@ const topics = [
           "eine Person, der du vertraust",
           "eine Unterstützerin oder einen Unterstützer",
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
-          "bei Gefahr: Polizei 110"
+          "bei Gefahr: Polizei"
         ],
         "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -5278,7 +5278,7 @@ const topics = [
       "Ich stoppe, wenn mir etwas komisch vorkommt.",
       "Ich gebe keine Daten ein, wenn ich unsicher bin.",
       "Ich spreche mit einer Person, die mich unterstützt.",
-      "Ich nutze Hilfe im Wohnbereich, im Dienst oder bei einer Digital-Begleitung."
+      "Ich darf im Wohnbereich, im Dienst oder bei einer Digital-Begleitung nachfragen."
     ],
     "shortLessonIndexes": [
       0,

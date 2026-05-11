@@ -2,8 +2,6 @@
 
 **Version:** 1.0 Pilot
 
-**Stand:** 2026-05-11
-
 Barrierearmes Selbstlernangebot zu Datenschutz und sicheren digitalen Anwendungen.
 
 ## Themen
@@ -17,22 +15,24 @@ Barrierearmes Selbstlernangebot zu Datenschutz und sicheren digitalen Anwendunge
 7. TikTok
 8. Hilfe bei Problemen
 
-## Bedienlogik
+## Klare Trennung der Hilfen
 
-Die Lernplattform arbeitet in zwei Schritten:
+```text
+Hilfe-Button:
+Hilfe bei der Bedienung der Lernplattform.
+
+Thema „Hilfe bei Problemen“:
+Hilfe bei echten Problemen im Internet.
+```
+
+Der Hilfe-Button ist keine Notruf-Funktion.
+
+## Bedienlogik
 
 ```text
 1. Thema wählen
 2. Aktion wählen
-```
-
-Aktionen:
-
-```text
-Kurz lernen
-Ausführlich lernen
-Quiz starten
-Merk-Karte öffnen
+3. Lernen, Üben, Quiz machen oder Merk-Karte lesen
 ```
 
 ## Barrierearme Funktionen
@@ -48,24 +48,6 @@ Merk-Karten
 Urkunde nach bestandenem Quiz
 ```
 
-## Hilfe-Logik
-
-Der Hilfe-Button ist sichtbar und öffnet eine klare Schrittfolge:
-
-```text
-1. Stopp.
-2. Was ist passiert?
-3. Was kann ich jetzt tun?
-4. Wen kann ich fragen?
-5. Wann ist es dringend?
-```
-
-Bei akuter Gefahr steht im Hilfe-Dialog:
-
-```text
-110
-```
-
 ## Datenschutz
 
 ```text
@@ -78,8 +60,6 @@ Lernstand nur lokal im Browser
 ## QR-Direktlinks für Poster
 
 Die QR-Direktlinks sind nicht sichtbar auf der Lernseite.
-
-Sie können für Poster genutzt werden.
 
 Beispiele:
 
@@ -95,208 +75,24 @@ index.html#whatsapp:quiz
 index.html#whatsapp:merk
 ```
 
-Schema:
+## Fachlicher Hinweis
 
-```text
-#thema = Thema öffnen
-#thema:kurz = Kurz lernen öffnen
-#thema:quiz = Quiz öffnen
-#thema:merk = Merk-Karte öffnen
-```
-
-## Veröffentlichung über GitHub Pages
-
-Diese Dateien müssen in das GitHub-Repository hochgeladen werden:
-
-```text
-index.html
-styles.css
-topics.js
-app.js
-assets/
-README.md
-```
-
-Danach GitHub Pages aktivieren.
-
-## Hinweis zur Leichten Sprache
-
-Die Texte sind einfach und barrierearm formuliert.
-
-Für das offizielle Zeichen für Leichte Sprache ist zusätzlich eine Prüfung durch Menschen aus der Zielgruppe erforderlich.
-
-
-## CSS-Bereinigung
-
-Die CSS-Datei wurde bereinigt.
-
-Geändert:
-
-```text
-alte doppelte Zusatzblöcke entfernt
-finale Regeln zusammengeführt
-unnötige !important-Überschreibungen reduziert
-Design und Funktionen beibehalten
-```
-
-
-## Code- und Design-Bereinigung
-
-Diese Version bereinigt den Arbeitsstand.
-
-Geändert:
-
-```text
-alte QR-Funktionen aus der App entfernt
-eine einheitliche Hilfe-Logik eingebaut
-alte Mini-Fragen-Logik entfernt
-Button-Farben fachlich vereinheitlicht
-Escape-Taste schließt Hilfe-Dialog
-```
-
-Button-Farblogik:
-
-```text
-Dunkelblau = Hauptaktion
-Türkis = Lernen / Vorlesen / Auswahl
-Grün = Quiz / Erfolg
-Gelb = Hilfe / Merken / Hinweis
-Orange-Rot = Warnung / Gefahr
-```
-
-
-## Hilfe-Button: Orientierung auf der Lernplattform
-
-Der Hilfe-Button ist jetzt keine Notfall-Beratung mehr.
-
-Er unterstützt vor allem, wenn jemand nicht weiß, wie er auf der Lernplattform weitermachen soll.
-
-Die Hilfe erklärt:
-
-```text
-Was kann ich als Nächstes tun?
-Was bedeutet Kurz lernen?
-Was bedeutet Ausführlich lernen?
-Was bedeutet Quiz?
-Was bedeutet Merk-Karte?
-Was mache ich, wenn ich den Text nicht verstehe?
-Was mache ich, wenn ich nicht weiß, was ich anklicken soll?
-Wen kann ich fragen?
-```
-
-Ein kurzer Sicherheitshinweis bleibt unten stehen.
-
-
-## Hilfe-Hinweis zu Unterstützungssystemen
-
-Der Hilfe-Button verweist nicht mehr auf 110.
-
-Stattdessen verweist er auf die Unterstützungssysteme der Alexianer / Stift Tilbeck.
-
-Formulierung:
-
-```text
-Wenn etwas im Internet Angst macht:
-Dann nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.
-
-Sprich mit einer Person, die dich unterstützt.
-Zum Beispiel:
-Wohnbereich
-Dienst
-Gruppenleitung
-Digital-Begleiterin oder Digital-Begleiter
-
-Du musst das nicht allein klären.
-```
-
-Der Hilfe-Button bleibt damit eine Orientierungs- und Lernhilfe.
-
-
-## Inhaltliche Endlogik
-
-Diese Version überarbeitet drei Inhaltsbereiche.
-
-### Übungen
-
-Übungen passen jetzt stärker zum jeweiligen Thema und zu typischen Situationen.
-
-Beispiele:
-
-```text
-WhatsApp: unbekannter Link, WhatsApp-Code, Gruppenstress, Fotos weiterleiten
-Instagram: Fotos posten, Standort, fremde Profile, Kommentare
-YouTube: Werbung, Quellen prüfen, Autoplay, Kommentare
-```
-
-### Quizfragen
-
-Quizfragen sind jetzt stärker als Alltagssituationen formuliert.
-
-### Merksätze
-
-Merksätze sind jetzt stärker als Ich-Sätze formuliert.
-
-Beispiele:
-
-```text
-Ich gebe mein Passwort nicht weiter.
-Ich klicke nicht sofort auf komische Links.
-Ich frage nach, wenn ich unsicher bin.
-```
-
-
-## Pilot-Endfassung
-
-Diese Version ist als Pilot-Fassung gedacht.
-
-Überarbeitet wurden:
-
-```text
-Thema „Hilfe bei Problemen“ fachlich geschärft
-Hilfe-Button bleibt Orientierungshilfe für die Lernplattform
-Quizantworten realistischer formuliert
-Abschluss- und Urkunden-Texte vorsichtiger formuliert
-```
-
-Wichtiger fachlicher Hinweis:
-
-```text
 Ein bestandenes Quiz bedeutet nicht:
+
+```text
 Die Person ist jetzt vollständig sicher im Internet.
+```
 
 Es bedeutet:
+
+```text
 Die Person hat wichtige Regeln geübt.
 Die Person hat sichere Entscheidungen ausprobiert.
 Die Person weiß: Bei Unsicherheit darf sie Unterstützung holen.
 ```
 
+## Hinweis zur Leichten Sprache
 
-## Korrektur: Hilfe-Kasten auf Lernseiten
+Die Texte sind einfach formuliert.
 
-Der alte Kasten auf den Lernseiten war unlogisch.
-
-Entfernt wurden dort Fragen wie:
-
-```text
-Ist das ein Notfall?
-Wen kann ich jetzt fragen?
-Soll ich die Nachricht zeigen und Hilfe holen?
-```
-
-Diese Fragen gehören nicht auf jede Lernseite.
-
-Neue Logik:
-
-```text
-Normale Lernseiten = Hilfe beim Lernen und bei der Bedienung
-Thema „Hilfe bei Problemen“ = Hilfe bei echten Problemen im Internet
-```
-
-Der neue Hinweis auf Lernseiten lautet sinngemäß:
-
-```text
-Du kannst den Text vorlesen lassen.
-Du kannst zurückgehen.
-Du kannst eine Pause machen.
-Du kannst eine Person fragen, der du vertraust.
-```
+Für ein offizielles Zeichen für Leichte Sprache ist eine Prüfung durch Menschen aus der Zielgruppe erforderlich.
