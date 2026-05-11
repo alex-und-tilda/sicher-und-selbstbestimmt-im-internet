@@ -3025,3 +3025,56 @@ body.view-menu .topic-grid {
   color: var(--black);
   margin-top: 6px;
 }
+
+
+/* Vorlesen: sehr langsam als Standard + Geschwindigkeitswahl */
+.speech-speed-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 14px 0;
+  padding: 10px;
+  background: var(--blue-light);
+  border: 2px solid var(--blue-mid);
+  border-radius: 14px;
+}
+
+.speech-speed-controls span {
+  font-weight: 900;
+}
+
+.speech-speed-controls button {
+  border: 2px solid var(--blue-mid);
+  background: #FFFFFF;
+  color: var(--black);
+  border-radius: 999px;
+  padding: 8px 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.speech-speed-controls button:hover,
+.speech-speed-controls button:focus-visible {
+  background: var(--blue-mid);
+  outline: 4px solid rgba(61, 184, 179, 0.35);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .speech-speed-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .speech-speed-controls button {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+@media print {
+  .speech-speed-controls {
+    display: none !important;
+  }
+}

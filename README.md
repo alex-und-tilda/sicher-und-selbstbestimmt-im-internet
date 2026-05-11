@@ -377,3 +377,30 @@ Hinweis:
 
 Die Vorlesestimme kommt vom Browser oder Betriebssystem.
 Die Qualität kann je nach Gerät unterschiedlich sein.
+
+
+## Vorlesen: sehr langsam
+
+Die Vorlesefunktion wurde erneut angepasst.
+
+Standard ist jetzt:
+
+```text
+sehr langsam
+```
+
+Technisch:
+
+```text
+speechRate = 0.45
+```
+
+Zusätzlich gibt es eine Auswahl:
+
+```text
+Sehr langsam
+Langsam
+Normal
+```
+
+Die Auswahl wird lokal im Browser gespeichert.

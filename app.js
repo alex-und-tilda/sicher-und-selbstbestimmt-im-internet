@@ -1,4 +1,26 @@
 
+let speechRate = 0.45;
+
+function setSpeechRate(rate, label) {
+  speechRate = rate;
+  try {
+    localStorage.setItem("lernplattform_speech_rate", String(rate));
+  } catch (e) {}
+  liveRegion.textContent = `Vorlese-Geschwindigkeit: ${label}.`;
+}
+
+function loadSpeechRate() {
+  try {
+    const saved = localStorage.getItem("lernplattform_speech_rate");
+    if (saved) {
+      const parsed = Number(saved);
+      if (!Number.isNaN(parsed)) speechRate = parsed;
+    }
+  } catch (e) {}
+}
+loadSpeechRate();
+
+
 let learningMode = "full";
 let activeLessonIndexes = null;
 
@@ -823,7 +845,7 @@ function speakText(text) {
   utterance.lang = "de-DE";
 
   // Langsamer für Menschen mit Lern- und Leseschwierigkeiten.
-  utterance.rate = 0.68;
+  utterance.rate = speechRate;
   utterance.pitch = 1.0;
   utterance.volume = 1.0;
 
@@ -835,7 +857,7 @@ function speakText(text) {
   }
 
   window.speechSynthesis.speak(utterance);
-  liveRegion.textContent = "Der Text wird langsam vorgelesen.";
+  liveRegion.textContent = "Der Text wird sehr langsam vorgelesen.";
 }
 
 function speakElementById(id) {
@@ -865,7 +887,7 @@ function buildAccessibleBox(type, title, htmlContent, iconName, id) {
       <div class="access-box-content">
         <h3>${escapeHtml(title)}</h3>
         <div class="access-box-text">${htmlContent}</div>
-        <button type="button" class="small-read-button" onclick="speakElementById('${safeId}')">Langsam vorlesen</button>
+        <button type="button" class="small-read-button" onclick="speakElementById('${safeId}')">Sehr langsam vorlesen</button>
       </div>
     </section>
   `;
@@ -876,7 +898,13 @@ function buildCard(lesson, topic) {
     <article class="card">
       <div class="module-tag">${escapeHtml(lesson.module)}</div>
       <div class="mode-note">${learningMode === "short" ? "Kurz lernen" : "Ausführlich lernen"}</div>
-      <div class="audio-actions"><button class="audio-button" onclick="speakCurrentCard()">Langsam vorlesen</button><button class="audio-button secondary" onclick="stopReading()">Stopp</button></div>
+      <div class="audio-actions"><button class="audio-button" onclick="speakCurrentCard()">Sehr langsam vorlesen</button><button class="audio-button secondary" onclick="stopReading()">Stopp</button></div>
+      <div class="speech-speed-controls" aria-label="Vorlese-Geschwindigkeit">
+        <span>Vorlesen:</span>
+        <button type="button" onclick="setSpeechRate(0.45, 'sehr langsam')">Sehr langsam</button>
+        <button type="button" onclick="setSpeechRate(0.60, 'langsam')">Langsam</button>
+        <button type="button" onclick="setSpeechRate(0.78, 'normal')">Normal</button>
+      </div>
       <div class="step-help-box">
         <strong>Du bist unsicher?</strong><br>
         Frage eine Person, der du vertraust:
@@ -944,7 +972,7 @@ function buildExercise(exercise) {
       <div class="access-box-content">
         <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div><div class="access-box-content"><h3>Übung</h3>
         <div class="exercise-question">${escapeHtml(exercise.question)}</div>
-        <button type="button" class="small-read-button" onclick="speakElementById('${exercise.id}-box')">Übung langsam vorlesen</button>
+        <button type="button" class="small-read-button" onclick="speakElementById('${exercise.id}-box')">Übung sehr langsam vorlesen</button>
         <div class="choice-list">
           <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'safe')">Das wirkt sicher</button>
           <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'unsafe')">Das wirkt unsicher</button>
@@ -1072,7 +1100,7 @@ function renderQuiz() {
         <div class="icon" aria-hidden="true">${getIconHtml("quiz")}</div>
         <h2>Frage ${quizIndex + 1}</h2>
       </div>
-      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakElementById('quiz-question-box')">Quizfrage langsam vorlesen</button></div></section>
+      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakElementById('quiz-question-box')">Quizfrage sehr langsam vorlesen</button></div></section>
       <div class="choice-list">
   `;
 
