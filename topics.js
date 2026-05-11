@@ -468,7 +468,7 @@ const topics = [
         "bullets": [
           "Nachricht öffnen",
           "Absender blockieren",
-          "bei Unsicherheit Fachkraft fragen"
+          "bei Unsicherheit eine Person fragen, der du vertraust"
         ],
         "remember": "Ich darf mich schützen.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -477,12 +477,12 @@ const topics = [
         "title": "So meldest du etwas",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Problem zeigen",
           "Melden auswählen, wenn vorhanden",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Melden ist erlaubt.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -495,11 +495,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -610,7 +611,7 @@ const topics = [
       {
         "question": "Du bist bei einem Formular unsicher. Was ist eine gute Entscheidung?",
         "answers": [
-          "Eine Fachkraft oder vertraute Person fragen.",
+          "Eine eine Person, der du vertraust fragen.",
           "Alles schnell ausfüllen.",
           "Das Passwort als Sicherheit eintragen."
         ],
@@ -1130,12 +1131,12 @@ const topics = [
         "title": "So meldest du eine Nachricht",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Nachricht lange drücken",
           "Melden auswählen",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Melden ist erlaubt.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -1148,11 +1149,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -1293,7 +1295,7 @@ const topics = [
       {
         "question": "Wer kann helfen, wenn du unsicher bist?",
         "answers": [
-          "Fachkraft oder vertraute Person.",
+          "eine Person, der du vertraust.",
           "Nur die fremde Person.",
           "Niemand."
         ],
@@ -1783,12 +1785,12 @@ const topics = [
         "title": "So meldest du etwas",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Beitrag oder Kommentar öffnen",
           "Melden auswählen",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Melden ist erlaubt.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -1801,11 +1803,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2436,12 +2439,12 @@ const topics = [
         "title": "So meldest du etwas",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Beitrag oder Nachricht öffnen",
           "Melden auswählen",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Melden ist erlaubt.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -2454,11 +2457,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2599,7 +2603,7 @@ const topics = [
       {
         "question": "Wer kann helfen, wenn dich etwas belastet?",
         "answers": [
-          "Fachkraft oder vertraute Person.",
+          "eine Person, der du vertraust.",
           "Nur fremde Follower.",
           "Niemand."
         ],
@@ -3080,7 +3084,7 @@ const topics = [
         "bullets": [
           "Kommentar oder Kanal öffnen",
           "Nutzer blockieren, wenn möglich",
-          "Fachkraft fragen"
+          "eine Person fragen, der du vertraust"
         ],
         "remember": "Ich darf mich schützen.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -3089,12 +3093,12 @@ const topics = [
         "title": "So meldest du etwas",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Video oder Kommentar öffnen",
           "Melden auswählen",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Melden ist erlaubt.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -3107,11 +3111,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3742,12 +3747,12 @@ const topics = [
         "title": "So meldest du etwas",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Snap oder Chat öffnen",
           "Melden auswählen",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Melden ist erlaubt.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -3760,11 +3765,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3905,12 +3911,12 @@ const topics = [
       {
         "question": "Wer kann helfen?",
         "answers": [
-          "Fachkraft oder vertraute Person.",
+          "eine Person, der du vertraust.",
           "Nur Fremde.",
           "Niemand."
         ],
         "correct": 0,
-        "explanation": "Richtig. Vertraute Menschen können unterstützen."
+        "explanation": "Richtig. Eine Person, der du vertraust, kann unterstützen."
       }
     ],
     "certificateGoals": [
@@ -4395,12 +4401,12 @@ const topics = [
         "title": "So meldest du etwas",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Video oder Kommentar öffnen",
           "Melden auswählen",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Melden ist erlaubt.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -4413,11 +4419,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -4614,7 +4621,7 @@ const topics = [
           "Du musst nicht allein entscheiden."
         ],
         "bullets": [
-          "Fachkraft",
+          "Person, der du vertraust",
           "vertraute Person",
           "bei Gefahr: Polizei 110"
         ],
@@ -4643,7 +4650,7 @@ const topics = [
         "text": [
           "Eine gute Entscheidung schützt dich."
         ],
-        "quote": "Ich antworte nicht allein. Ich zeige die Nachricht einer Fachkraft.",
+        "quote": "Ich antworte nicht allein. Ich zeige die Nachricht einer Person, der du vertraust.",
         "success": "Das ist gut. Du holst dir Unterstützung.",
         "remember": "Hilfe holen ist eine gute Entscheidung.",
         "module": "Modul 1: Probleme erkennen"
@@ -5047,7 +5054,7 @@ const topics = [
         "bullets": [
           "Chat oder Profil öffnen",
           "Person blockieren",
-          "Fachkraft informieren"
+          "eine Person informieren, der du vertraust"
         ],
         "remember": "Ich darf mich schützen.",
         "module": "Modul 6: Schutz und Hilfe"
@@ -5056,7 +5063,7 @@ const topics = [
         "title": "So meldest du etwas",
         "icon": "report",
         "text": [
-          "Wenn du unsicher bist, frag vorher eine Fachkraft."
+          "Wenn du unsicher bist, frage eine Person, der du vertraust."
         ],
         "bullets": [
           "Nachricht zeigen",
@@ -5074,11 +5081,12 @@ const topics = [
           "Hilfe holen ist richtig."
         ],
         "bullets": [
-          "Fachkraft fragen",
-          "vertraute Person fragen",
+          "eine Person, der du vertraust",
+          "eine Unterstützerin oder einen Unterstützer",
+          "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Hilfe holen ist stark.",
+        "remember": "Du darfst Unterstützung holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5149,12 +5157,12 @@ const topics = [
       {
         "question": "Wer kann helfen?",
         "answers": [
-          "Fachkraft oder vertraute Person.",
+          "eine Person, der du vertraust.",
           "Nur Fremde.",
           "Niemand."
         ],
         "correct": 0,
-        "explanation": "Richtig. Vertraute Menschen können helfen."
+        "explanation": "Richtig. Eine Person, der du vertraust, kann helfen."
       },
       {
         "question": "Was machst du bei akuter Gefahr?",
@@ -5209,7 +5217,7 @@ const topics = [
       {
         "question": "Eine Nachricht macht dir Angst. Was ist gut?",
         "answers": [
-          "Fachkraft oder vertraute Person fragen.",
+          "eine Person, der du vertraust fragen.",
           "Sofort allein antworten.",
           "Alles löschen und schweigen."
         ],

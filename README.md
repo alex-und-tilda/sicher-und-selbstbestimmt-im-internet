@@ -246,3 +246,18 @@ Quiz direkt starten
 ```
 
 Das Quiz ist also nicht mehr nur über die letzte Lernseite erreichbar.
+
+
+## Sprachliche Anpassung: Unterstützung
+
+Der Begriff „Fachkraft“ wurde in den Lerninhalten weitgehend ersetzt.
+
+Die Lernplattform nutzt jetzt bewusst alltagsnähere Formulierungen:
+
+```text
+eine Person, der du vertraust
+eine Unterstützerin oder einen Unterstützer
+eine Digital-Begleiterin oder einen Digital-Begleiter
+```
+
+Das passt besser zu einem Selbstlernangebot und wirkt weniger institutionell.
