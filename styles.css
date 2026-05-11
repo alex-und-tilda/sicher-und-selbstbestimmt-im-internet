@@ -3139,3 +3139,201 @@ body.view-menu .topic-grid {
     display: none;
   }
 }
+
+
+/* ============================================================
+   Finale Button-Farblogik
+   Ziel:
+   - normale Aktion: Dunkelblau
+   - Lernen/Weiter: Türkis
+   - Quiz/Erfolg: Grün
+   - Merk-Karte/Hinweis: Gelb
+   - Gefahr/Warnung: Orange-Rot
+   - Hilfe: Gelb als Sicherheitsanker
+   ============================================================ */
+
+:root {
+  --btn-primary-bg: #00285A;
+  --btn-primary-bg-hover: #00427F;
+  --btn-primary-text: #FFFFFF;
+
+  --btn-learning-bg: #3DB8B3;
+  --btn-learning-bg-hover: #2A9D98;
+  --btn-learning-text: #00285A;
+
+  --btn-success-bg: #2E7D32;
+  --btn-success-bg-hover: #256A29;
+  --btn-success-text: #FFFFFF;
+
+  --btn-warning-bg: #FFF3CD;
+  --btn-warning-bg-hover: #FFE39A;
+  --btn-warning-border: #D6A400;
+  --btn-warning-text: #1F1F1F;
+
+  --btn-danger-bg: #C9541C;
+  --btn-danger-bg-hover: #A94316;
+  --btn-danger-text: #FFFFFF;
+}
+
+.btn,
+button.quiz-link,
+.quiz-button,
+.audio-button,
+.small-read-button,
+.choice-button,
+.practice-answer-grid button,
+.nav-button,
+.action-card,
+.topic-card button {
+  transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.btn,
+.quiz-button,
+button.quiz-link,
+.nav-button {
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 3px solid var(--btn-primary-bg);
+  border-radius: 999px;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.btn:hover,
+.btn:focus-visible,
+.quiz-button:hover,
+.quiz-button:focus-visible,
+button.quiz-link:hover,
+button.quiz-link:focus-visible,
+.nav-button:hover,
+.nav-button:focus-visible {
+  background: var(--btn-primary-bg-hover);
+  border-color: var(--btn-primary-bg-hover);
+  outline: 4px solid rgba(0, 40, 90, 0.22);
+  outline-offset: 2px;
+  transform: translateY(-1px);
+}
+
+.btn-secondary,
+.audio-button,
+.small-read-button {
+  border-color: var(--btn-learning-bg);
+  background: #FFFFFF;
+  color: var(--btn-primary-bg);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible,
+.audio-button:hover,
+.audio-button:focus-visible,
+.small-read-button:hover,
+.small-read-button:focus-visible {
+  background: #DDF3F2;
+  border-color: var(--btn-learning-bg-hover);
+}
+
+.btn-success,
+.quiz-button,
+button[onclick="startQuiz()"] {
+  border-color: var(--btn-success-bg);
+  background: var(--btn-success-bg);
+  color: var(--btn-success-text);
+}
+
+.btn-success:hover,
+.btn-success:focus-visible,
+.quiz-button:hover,
+.quiz-button:focus-visible,
+button[onclick="startQuiz()"]:hover,
+button[onclick="startQuiz()"]:focus-visible {
+  background: var(--btn-success-bg-hover);
+  border-color: var(--btn-success-bg-hover);
+}
+
+.btn-warning,
+.global-help-button {
+  border-color: var(--btn-warning-border);
+  background: var(--btn-warning-bg);
+  color: var(--btn-warning-text);
+}
+
+.btn-warning:hover,
+.btn-warning:focus-visible,
+.global-help-button:hover,
+.global-help-button:focus-visible {
+  background: var(--btn-warning-bg-hover);
+  border-color: #B88700;
+}
+
+.choice-button,
+.practice-answer-grid button {
+  border-color: var(--btn-learning-bg);
+  background: #FFFFFF;
+  color: #1F1F1F;
+}
+
+.choice-button:hover,
+.choice-button:focus-visible,
+.practice-answer-grid button:hover,
+.practice-answer-grid button:focus-visible {
+  background: #DDF3F2;
+  border-color: var(--btn-learning-bg-hover);
+}
+
+/* Aktionskarten behalten ihre pädagogische Farblogik. */
+.action-card.short,
+button[data-action="short"] {
+  background: #DDF3F2;
+  border-color: #3DB8B3;
+  color: #00285A;
+}
+
+.action-card.full,
+button[data-action="full"] {
+  background: #00285A;
+  border-color: #00285A;
+  color: #FFFFFF;
+}
+
+.action-card.quiz,
+button[data-action="quiz"] {
+  background: #E7F3E8;
+  border-color: #2E7D32;
+  color: #1F1F1F;
+}
+
+.action-card.memory,
+button[data-action="memory"] {
+  background: #FFF3CD;
+  border-color: #D6A400;
+  color: #1F1F1F;
+}
+
+/* Buttons nicht allein über Farbe verständlich machen. */
+.action-card strong,
+.btn strong {
+  text-decoration-thickness: 2px;
+}
+
+/* Mobile Button-Größen */
+@media (max-width: 640px) {
+  .btn,
+  .quiz-button,
+  button.quiz-link,
+  .nav-button,
+  .audio-button,
+  .small-read-button,
+  .choice-button,
+  .practice-answer-grid button {
+    width: 100%;
+    text-align: left;
+  }
+
+  .global-help-button {
+    width: auto;
+    text-align: center;
+  }
+}

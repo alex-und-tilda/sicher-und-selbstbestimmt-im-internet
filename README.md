@@ -134,3 +134,28 @@ finale Regeln zusammengeführt
 unnötige !important-Überschreibungen reduziert
 Design und Funktionen beibehalten
 ```
+
+
+## Code- und Design-Bereinigung
+
+Diese Version bereinigt den Arbeitsstand.
+
+Geändert:
+
+```text
+alte QR-Funktionen aus der App entfernt
+eine einheitliche Hilfe-Logik eingebaut
+alte Mini-Fragen-Logik entfernt
+Button-Farben fachlich vereinheitlicht
+Escape-Taste schließt Hilfe-Dialog
+```
+
+Button-Farblogik:
+
+```text
+Dunkelblau = Hauptaktion
+Türkis = Lernen / Vorlesen / Auswahl
+Grün = Quiz / Erfolg
+Gelb = Hilfe / Merken / Hinweis
+Orange-Rot = Warnung / Gefahr
+```

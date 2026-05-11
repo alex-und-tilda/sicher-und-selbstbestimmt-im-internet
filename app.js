@@ -272,10 +272,6 @@ function updateHashForCurrentStep() {
 function handleHashRoute() {
   const raw = window.location.hash.replace("#", "").trim();
   if (!raw) return false;
-  if (raw === "qr") {
-    renderQrOverview();
-    return true;
-  }
 
   const [topicId, action, stepRaw] = raw.split(":");
   const topic = topics.find(t => t.id === topicId);
@@ -315,18 +311,6 @@ function handleHashRoute() {
   return true;
 }
 
-function renderQrLinks(topic) {
-  const base = window.location.href.split("#")[0];
-  return `
-    <span class="qr-links">
-      <strong>Direktlinks für QR-Codes:</strong>
-      <code>${base}#${topic.id}</code>
-      <code>${base}#${topic.id}:kurz</code>
-      <code>${base}#${topic.id}:quiz</code>
-      <code>${base}#${topic.id}:merk</code>
-    </span>
-  `;
-}
 
 function renderSavedProgressHint(topic) {
   const full = loadProgress(topic.id, "full");
@@ -365,11 +349,17 @@ function renderSavedProgressHint(topic) {
 
 
 
-function openHelpDialog() {
+
+
+
+function renderHelpOverlay() {
+  const existing = document.querySelector(".help-overlay");
+  if (existing) existing.remove();
+
   const overlay = document.createElement("div");
   overlay.className = "help-overlay";
   overlay.innerHTML = `
-    <div class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle">
+    <div class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle" tabindex="-1">
       <div class="help-title-row">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml("help")}</span>
         <h2 id="helpDialogTitle">Ich brauche Hilfe</h2>
@@ -377,11 +367,11 @@ function openHelpDialog() {
 
       <div class="help-step-box help-step-calm">
         <h3>1. Stopp.</h3>
-        <p>Du musst nicht sofort entscheiden.</p>
-        <p>Lege das Handy kurz weg.</p>
+        <p>Ich muss nicht sofort entscheiden.</p>
+        <p>Ich klicke nicht weiter.</p>
       </div>
 
-      <div class="help-step-box help-step-check">
+      <div class="help-step-box">
         <h3>2. Was ist passiert?</h3>
         <ul>
           <li>Ich verstehe etwas nicht.</li>
@@ -392,24 +382,23 @@ function openHelpDialog() {
         </ul>
       </div>
 
-      <div class="help-step-box help-step-act">
-        <h3>3. Was kann ich jetzt tun?</h3>
+      <div class="help-step-box">
+        <h3>3. Was mache ich jetzt?</h3>
         <ul>
-          <li>Nicht weiterklicken.</li>
-          <li>Keine Daten eingeben.</li>
-          <li>Keine Fotos senden.</li>
-          <li>Die Nachricht nicht löschen, wenn sie wichtig sein kann.</li>
-          <li>Eine Person fragen, der ich vertraue.</li>
+          <li>Ich gebe keine Daten ein.</li>
+          <li>Ich sende keine Fotos.</li>
+          <li>Ich sende kein Geld.</li>
+          <li>Ich frage eine Person, der ich vertraue.</li>
         </ul>
       </div>
 
-      <div class="help-step-box help-step-people">
+      <div class="help-step-box">
         <h3>4. Wen kann ich fragen?</h3>
         <ul>
           <li>eine Person, der ich vertraue</li>
           <li>eine Unterstützerin oder einen Unterstützer</li>
           <li>eine Digital-Begleiterin oder einen Digital-Begleiter</li>
-          <li>eine Person aus meinem Wohnbereich oder aus meiner Familie</li>
+          <li>eine Person aus meiner Familie oder meinem Wohnbereich</li>
         </ul>
       </div>
 
@@ -418,7 +407,6 @@ function openHelpDialog() {
         <p>Es ist dringend, wenn jemand droht.</p>
         <p>Es ist dringend, wenn jemand Geld will.</p>
         <p>Es ist dringend, wenn jemand Nacktbilder will.</p>
-        <p>Bei Gefahr: sofort Hilfe holen.</p>
         <p><strong>Bei akuter Gefahr: 110.</strong></p>
       </div>
 
@@ -430,20 +418,30 @@ function openHelpDialog() {
       </div>
 
       <div class="help-actions">
-        <button type="button" class="audio-button" onclick="speakElementById('helpDialogTitle')">Überschrift vorlesen</button>
-        <button type="button" class="audio-button" onclick="speakText('Stopp. Du musst nicht sofort entscheiden. Nicht weiterklicken. Keine Daten eingeben. Frage eine Person, der du vertraust. Bei akuter Gefahr rufe 110.')">Kurz-Hilfe vorlesen</button>
-        <button type="button" class="quiz-link quiz-button" onclick="closeHelpDialog()">Schließen</button>
+        <button type="button" class="btn btn-secondary" onclick="speakText('Stopp. Ich klicke nicht weiter. Ich gebe keine Daten ein. Ich frage eine Person, der ich vertraue. Bei akuter Gefahr rufe ich 110.')">Kurz-Hilfe vorlesen</button>
+        <button type="button" class="btn btn-primary" onclick="closeHelpOverlay()">Schließen</button>
       </div>
     </div>
   `;
+
   document.body.appendChild(overlay);
-  const dialog = overlay.querySelector(".help-dialog");
-  dialog?.focus?.();
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) closeHelpOverlay();
+  });
+  overlay.querySelector(".help-dialog")?.focus();
+}
+
+function closeHelpOverlay() {
+  const overlay = document.querySelector(".help-overlay");
+  if (overlay) overlay.remove();
+}
+
+function openHelpDialog() {
+  renderHelpOverlay();
 }
 
 function closeHelpDialog() {
-  const overlay = document.querySelector(".help-overlay");
-  if (overlay) overlay.remove();
+  closeHelpOverlay();
 }
 
 function ensureGlobalHelpButton() {
@@ -600,40 +598,7 @@ function renderTopicChoice(topicId) {
 }
 
 
-function renderHelpOverlay() {
-  const existing = document.querySelector(".help-overlay");
-  if (existing) existing.remove();
 
-  const overlay = document.createElement("div");
-  overlay.className = "help-overlay";
-  overlay.innerHTML = `
-    <div class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle">
-      <button class="help-close" onclick="closeHelpOverlay()">Schließen</button>
-      <div class="help-title-row"><span class="access-box-symbol" aria-hidden="true">${getIconHtml("help")}</span><h2 id="helpDialogTitle">Ich brauche Hilfe</h2></div>
-      <p>Du musst das nicht allein lösen.</p>
-      <p>Frage eine Person, der du vertraust.</p>
-      <ul>
-        <li>eine Unterstützerin oder einen Unterstützer</li>
-        <li>eine Digital-Begleiterin oder einen Digital-Begleiter</li>
-        <li>eine Person aus deinem Umfeld</li>
-      </ul>
-      <div class="decision-box">
-        <h3>Was passt?</h3>
-        <p><strong>Ich bin sicher:</strong> Ich entscheide selbst.</p>
-        <p><strong>Ich bin unsicher:</strong> Ich frage eine Person, der ich vertraue.</p>
-        <p><strong>Es ist gefährlich:</strong> Ich hole sofort Hilfe. Bei Gefahr: 110.</p>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-  const closeButton = overlay.querySelector(".help-close");
-  if (closeButton) closeButton.focus();
-}
-
-function closeHelpOverlay() {
-  const existing = document.querySelector(".help-overlay");
-  if (existing) existing.remove();
-}
 
 function markUnderstood() {
   const button = document.querySelector(".understood-button");
@@ -653,35 +618,7 @@ function shouldShowMiniQuestion(topic, stepIndex) {
   return lesson.module !== next.module;
 }
 
-function answerMiniQuestion(choice) {
-  const topic = getCurrentTopic();
-  if (!topic || !topic.miniQuestion) return;
-  const box = document.querySelector(".mini-question-feedback");
-  const isCorrect = choice === topic.miniQuestion.correct;
-  if (box) {
-    box.innerHTML = isCorrect
-      ? `<strong>Richtig.</strong> ${escapeHtml(topic.miniQuestion.explanation)}`
-      : `<strong>Nicht ganz.</strong> ${escapeHtml(topic.miniQuestion.explanation)}`;
-    box.className = `mini-question-feedback ${isCorrect ? "success" : "warning"}`;
-  }
-}
 
-function getMiniQuestionHtml(topic) {
-  if (!topic || !topic.miniQuestion) return "";
-  const q = topic.miniQuestion;
-  return `
-    <section class="mini-question">
-      <h3>Kleine Wiederholungsfrage</h3>
-      <p><strong>${escapeHtml(q.question)}</strong></p>
-      <div class="mini-answer-grid">
-        ${q.answers.map((answer, index) => `
-          <button onclick="answerMiniQuestion(${index})">${escapeHtml(answer)}</button>
-        `).join("")}
-      </div>
-      <div class="mini-question-feedback" aria-live="polite"></div>
-    </section>
-  `;
-}
 
 function renderShortCompletion(topic) {
   setViewMode("learning");
@@ -727,55 +664,6 @@ function renderShortCompletion(topic) {
   content.focus();
 }
 
-function renderQrOverview() {
-  setViewMode("print");
-  appTitle.textContent = "QR-Links";
-  moduleLabel.textContent = "Poster";
-  stepLabel.textContent = "Übersicht";
-  levelLabel.textContent = "Links";
-  progressFill.style.width = "100%";
-  progressTrack.setAttribute("aria-valuenow", "100");
-  backButton.disabled = false;
-  nextButton.disabled = false;
-  nextButton.textContent = "Themenübersicht";
-
-  const base = window.location.href.split("#")[0];
-  const rows = topics.map(topic => `
-    <tr>
-      <td><strong>${escapeHtml(topic.title)}</strong></td>
-      <td><code>${base}#${topic.id}</code></td>
-      <td><code>${base}#${topic.id}:kurz</code></td>
-      <td><code>${base}#${topic.id}:quiz</code></td>
-      <td><code>${base}#${topic.id}:merk</code></td>
-    </tr>
-  `).join("");
-
-  content.innerHTML = `
-    <article class="card qr-overview print-sheet">
-      <div class="print-frame">
-        <div class="module-tag">Interne Direktlinks</div>
-        <h2>QR-Code-Übersicht</h2>
-        <p>Diese Links können für QR-Codes genutzt werden.</p>
-        <div class="qr-table-wrap">
-          <table class="qr-table">
-            <thead>
-              <tr>
-                <th>Thema</th>
-                <th>Thema</th>
-                <th>Kurz</th>
-                <th>Quiz</th>
-                <th>Merk-Karte</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>
-        <button class="quiz-link quiz-button" onclick="window.print()">QR-Übersicht drucken</button>
-      </div>
-    </article>
-  `;
-  content.focus();
-}
 
 function renderMenu() {
   setViewMode("menu");
@@ -1488,3 +1376,9 @@ window.addEventListener("hashchange", handleHashRoute);
 if ("speechSynthesis" in window) {
   window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeHelpOverlay();
+  }
+});
