@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Sicher digital lernen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app">
+    <header class="app-header">
+      <button class="home-button" id="homeButton" aria-label="Zur Themenübersicht">⌂</button>
+      <div class="header-text">
+        <h1 id="appTitle">Sicher digital lernen</h1>
+        <p id="moduleLabel">Thema auswählen</p>
+      </div>
+    </header>
+
+    <section class="progress-area" aria-label="Lernfortschritt">
+      <div class="progress-meta">
+        <span id="stepLabel">Themenübersicht</span>
+        <span id="levelLabel">Start</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </section>
+
+    <main id="content" class="content" tabindex="-1"></main>
+
+    <nav class="nav" aria-label="Navigation">
+      <button class="nav-button secondary" id="backButton">Zurück</button>
+      <button class="nav-button primary" id="nextButton">Weiter</button>
+    </nav>
+  </div>
+
+  <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
