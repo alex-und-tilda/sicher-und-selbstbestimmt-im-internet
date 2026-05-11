@@ -261,3 +261,17 @@ eine Digital-Begleiterin oder einen Digital-Begleiter
 ```
 
 Das passt besser zu einem Selbstlernangebot und wirkt weniger institutionell.
+
+
+## Erweiterung: Orientierung, Auswertung, Urkunde, Audio und Rückmeldung
+
+Diese Version enthält zusätzliche Qualitätsfunktionen:
+
+- Modul-Fortschritt pro Lernseite
+- kleine Modul-Leiste
+- Quiz-Auswertung nach Lernbereichen
+- optisch verbesserte Urkunde
+- Name und Unterschrift handschriftlich
+- Zielgruppen-Testbogen / Rückmeldebogen
+- Vorlesen-Button über Browser-Sprachausgabe
+- QR-Poster-Hinweis auf der Startseite

@@ -852,3 +852,182 @@ button, a {
     width: fit-content;
   }
 }
+
+
+/* Orientierung, Audio, Testbogen, bessere Urkunde */
+.poster-hint {
+  background: var(--blue-very-light);
+  border-left: 6px solid var(--blue);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 1.08rem;
+}
+
+.menu-extra-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.module-orientation {
+  background: #fff;
+  border: 2px solid var(--blue-light);
+  border-radius: 16px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.module-current {
+  margin: 0 0 10px 0;
+  font-weight: 800;
+}
+
+.module-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.module-step {
+  border: 2px solid var(--gray);
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.module-step.done {
+  border-color: var(--success-border);
+}
+
+.module-step.active {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
+.audio-actions {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 14px 0;
+}
+
+.audio-button {
+  border: 2px solid var(--blue);
+  background: white;
+  color: var(--black);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.audio-button:hover,
+.audio-button:focus-visible {
+  background: var(--blue);
+  color: white;
+}
+
+.audio-button.secondary {
+  border-color: var(--gray);
+}
+
+.testbogen {
+  background: var(--blue-very-light);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.testbogen ul,
+.completion-box ul {
+  padding-left: 1.3rem;
+}
+
+.certificate-frame {
+  border: 6px solid var(--blue);
+  border-radius: 22px;
+  padding: 26px;
+  background: white;
+}
+
+.certificate-title {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.certificate-subtitle {
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+.certificate-topic {
+  font-size: 1.25rem;
+  background: var(--blue-very-light);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.signature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.certificate-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 2px solid var(--gray);
+}
+
+.certificate-logos img {
+  max-height: 54px;
+  max-width: 180px;
+  object-fit: contain;
+}
+
+@media print {
+  .poster-hint,
+  .audio-actions,
+  .module-orientation,
+  .menu-extra-actions {
+    display: none !important;
+  }
+
+  .certificate-frame {
+    min-height: 255mm;
+    border: 6px solid #3e96be;
+  }
+
+  .certificate-logos img {
+    max-height: 44px;
+  }
+
+  .testbogen {
+    break-inside: avoid;
+  }
+}
+
+@media (max-width: 600px) {
+  .signature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-title {
+    font-size: 2.2rem;
+  }
+
+  .certificate-logos {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -18,6 +18,111 @@ function getCurrentTopic() {
   return topics.find(topic => topic.id === currentTopicId);
 }
 
+
+const moduleNames = ["Verstehen", "Daten", "Inhalte", "Risiken", "Verhalten", "Hilfe"];
+
+function getModuleIndex(topic, stepIndex) {
+  if (!topic || !topic.lessons || !topic.lessons[stepIndex]) return 0;
+  const currentModule = topic.lessons[stepIndex].module;
+  const modules = [...new Set(topic.lessons.map(lesson => lesson.module))];
+  return Math.max(0, modules.indexOf(currentModule));
+}
+
+function getModuleCount(topic) {
+  if (!topic || !topic.lessons) return 6;
+  return [...new Set(topic.lessons.map(lesson => lesson.module))].length;
+}
+
+function getModuleProgressHtml(topic, stepIndex) {
+  const moduleIndex = getModuleIndex(topic, stepIndex);
+  const count = getModuleCount(topic);
+  const labels = moduleNames.slice(0, count);
+  return `
+    <div class="module-orientation" aria-label="Modul-Fortschritt">
+      <p class="module-current">Modul ${moduleIndex + 1} von ${count}: ${escapeHtml(labels[moduleIndex] || topic.lessons[stepIndex].module)}</p>
+      <div class="module-steps">
+        ${labels.map((label, index) => `
+          <span class="module-step ${index < moduleIndex ? "done" : ""} ${index === moduleIndex ? "active" : ""}">
+            ${escapeHtml(label)}
+          </span>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function speakCurrentCard() {
+  if (!("speechSynthesis" in window)) {
+    liveRegion.textContent = "Vorlesen wird von diesem Browser nicht unterstützt.";
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const text = content.innerText.trim();
+  if (!text) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "de-DE";
+  utterance.rate = 0.9;
+  window.speechSynthesis.speak(utterance);
+  liveRegion.textContent = "Der Text wird vorgelesen.";
+}
+
+function stopReading() {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+    liveRegion.textContent = "Vorlesen gestoppt.";
+  }
+}
+
+function renderEvaluation() {
+  appTitle.textContent = "Rückmeldung";
+  moduleLabel.textContent = "Zielgruppen-Test";
+  stepLabel.textContent = "Kurzer Testbogen";
+  levelLabel.textContent = "Feedback";
+  progressFill.style.width = "100%";
+  progressTrack.setAttribute("aria-valuenow", "100");
+
+  backButton.disabled = false;
+  nextButton.disabled = false;
+  nextButton.textContent = "Themenübersicht";
+
+  content.innerHTML = `
+    <article class="card evaluation-card">
+      <div class="module-tag">Rückmeldung</div>
+      <div class="card-header">
+        <div class="icon" aria-hidden="true">${getIconHtml("check")}</div>
+        <h2>War die Seite gut verständlich?</h2>
+      </div>
+
+      <p>Diese Fragen können nach dem Lernen besprochen werden.</p>
+      <p>Du kannst die Antworten ankreuzen oder mit einer Person besprechen, der du vertraust.</p>
+
+      <div class="testbogen">
+        <h3>Fragen für Lernende</h3>
+        <ul>
+          <li>□ War die Seite leicht?</li>
+          <li>□ Was war schwer?</li>
+          <li>□ Was hast du gelernt?</li>
+          <li>□ Brauchst du Hilfe?</li>
+          <li>□ Möchtest du das Thema noch einmal üben?</li>
+        </ul>
+      </div>
+
+      <div class="testbogen">
+        <h3>Hinweis für Unterstützerinnen und Unterstützer</h3>
+        <ul>
+          <li>□ Konnte die Person die Seite selbst bedienen?</li>
+          <li>□ Wurden schwere Wörter verstanden?</li>
+          <li>□ Konnte die Person sichere und unsichere Situationen unterscheiden?</li>
+          <li>□ Wurde Hilfe passend benannt?</li>
+        </ul>
+      </div>
+
+      <button class="quiz-link quiz-button" onclick="window.print()">Testbogen drucken</button>
+    </article>
+  `;
+  content.focus();
+}
+
 function renderMenu() {
   currentTopicId = null;
   currentStep = 0;
@@ -36,6 +141,11 @@ function renderMenu() {
   let html = `
     <section class="menu-card">
       <h2>Wähle ein Thema</h2>
+      <div class="poster-hint">
+        <strong>Du kommst vielleicht von einem Lernposter.</strong><br>
+        Du kannst ein Thema auswählen.<br>
+        Du kannst später wiederkommen.
+      </div>
       <p>Lerne Schritt für Schritt. Mit Beispielen, Übungen und Merksätzen.</p>
       <div class="topic-grid">
   `;
@@ -336,7 +446,8 @@ function answerQuiz(answerIndex) {
     answer: q.answers[answerIndex],
     correctAnswer: q.answers[q.correct],
     isCorrect,
-    explanation: q.explanation
+    explanation: q.explanation,
+    area: q.area
   });
 
   renderQuizFeedback(isCorrect, q.explanation);
@@ -402,34 +513,60 @@ function renderQuizResult() {
   nextButton.disabled = false;
   nextButton.textContent = "Themenübersicht";
 
+  const areaRows = quizAnswers.map(answer => {
+    const area = answer.area || "Lernbereich";
+    const status = answer.isCorrect ? "gut" : "nochmal üben";
+    const icon = answer.isCorrect ? "✓" : "↻";
+    return `<li><strong>${escapeHtml(area)}:</strong> ${icon} ${status}</li>`;
+  }).join("");
+
   const goals = (topic.certificateGoals || []).map(goal => `<li>✓ ${escapeHtml(goal)}</li>`).join("");
 
   if (passed) {
     content.innerHTML = `
       <article class="card certificate-card" id="certificateArea">
-        <div class="module-tag">Urkunde</div>
-        <div class="card-header">
-          <div class="icon" aria-hidden="true">${getIconHtml("check")}</div>
-          <h2>Erfolgreich abgeschlossen.</h2>
-        </div>
+        <div class="certificate-frame">
+          <div class="module-tag">Urkunde</div>
+          <h2 class="certificate-title">Urkunde</h2>
+          <p class="certificate-subtitle">erfolgreich abgeschlossen</p>
 
-        <p>Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> erfolgreich abgeschlossen.</p>
-        <p>Dein Ergebnis: <strong>${quizScore} von ${total} richtig</strong> (${percent}%).</p>
+          <p class="certificate-topic">Thema: <strong>${escapeHtml(topic.title)}</strong></p>
+          <p>Du hast das Quiz erfolgreich abgeschlossen.</p>
+          <p>Dein Ergebnis: <strong>${quizScore} von ${total} richtig</strong> (${percent}%).</p>
 
-        <div class="completion-box">
-          <h3>Das hast du gelernt:</h3>
-          <ul>${goals}</ul>
-        </div>
+          <div class="completion-box">
+            <h3>Das hast du gelernt:</h3>
+            <ul>${goals}</ul>
+          </div>
 
-        <p class="certificate-note">Name eintragen:</p>
-        <div class="certificate-name-line"></div>
+          <div class="completion-box">
+            <h3>Auswertung:</h3>
+            <ul>${areaRows}</ul>
+          </div>
 
-        <p class="certificate-note">Datum:</p>
-        <p>${new Date().toLocaleDateString("de-DE")}</p>
+          <p class="certificate-note">Name:</p>
+          <div class="certificate-name-line"></div>
 
-        <div class="certificate-actions">
-          <button class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
-          <button class="nav-button secondary" onclick="restartQuiz()">Quiz wiederholen</button>
+          <div class="signature-grid">
+            <div>
+              <p class="certificate-note">Datum:</p>
+              <p>${new Date().toLocaleDateString("de-DE")}</p>
+            </div>
+            <div>
+              <p class="certificate-note">Unterschrift:</p>
+              <div class="certificate-name-line"></div>
+            </div>
+          </div>
+
+          <div class="certificate-logos">
+            <img src="assets/brand/logo-tilbeck-alexianer.jpeg" alt="Logo Stift Tilbeck und Alexianer">
+            <img src="assets/brand/logo-sozialstiftung-nrw.jpeg" alt="Logo Sozialstiftung NRW">
+          </div>
+
+          <div class="certificate-actions">
+            <button class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
+            <button class="nav-button secondary" onclick="restartQuiz()">Quiz wiederholen</button>
+          </div>
         </div>
       </article>
     `;
@@ -444,6 +581,11 @@ function renderQuizResult() {
 
         <p>Du hast <strong>${quizScore} von ${total}</strong> Fragen richtig beantwortet.</p>
         <p>Für die Urkunde brauchst du mindestens <strong>${needed} richtige Antworten</strong>.</p>
+
+        <div class="completion-box">
+          <h3>Das kannst du nochmal üben:</h3>
+          <ul>${areaRows}</ul>
+        </div>
 
         <div class="feedback info">
           Wiederholen ist normal. Du kannst das Thema noch einmal anschauen oder das Quiz direkt wiederholen.
