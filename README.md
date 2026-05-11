@@ -159,3 +159,25 @@ Grün = Quiz / Erfolg
 Gelb = Hilfe / Merken / Hinweis
 Orange-Rot = Warnung / Gefahr
 ```
+
+
+## Hilfe-Button: Orientierung auf der Lernplattform
+
+Der Hilfe-Button ist jetzt keine Notfall-Beratung mehr.
+
+Er unterstützt vor allem, wenn jemand nicht weiß, wie er auf der Lernplattform weitermachen soll.
+
+Die Hilfe erklärt:
+
+```text
+Was kann ich als Nächstes tun?
+Was bedeutet Kurz lernen?
+Was bedeutet Ausführlich lernen?
+Was bedeutet Quiz?
+Was bedeutet Merk-Karte?
+Was mache ich, wenn ich den Text nicht verstehe?
+Was mache ich, wenn ich nicht weiß, was ich anklicken soll?
+Wen kann ich fragen?
+```
+
+Ein kurzer Sicherheitshinweis bleibt unten stehen.

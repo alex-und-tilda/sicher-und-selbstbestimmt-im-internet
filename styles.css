@@ -3337,3 +3337,40 @@ button[data-action="memory"] {
     text-align: center;
   }
 }
+
+
+/* Hilfe-Dialog: Orientierung auf der Lernplattform */
+.help-intro-box,
+.help-small-safety-note {
+  margin: 12px 0;
+  padding: 14px;
+  border-radius: 18px;
+  border: 3px solid var(--hint-border);
+  background: var(--hint);
+}
+
+.help-intro-box p,
+.help-small-safety-note p {
+  margin: 0.4rem 0;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.help-step-people {
+  background: var(--blue-light);
+  border-color: var(--blue-mid);
+}
+
+.help-small-safety-note {
+  border-color: var(--warning);
+  background: var(--warning-light);
+}
+
+.help-small-safety-note h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.help-actions .btn {
+  text-align: center;
+}

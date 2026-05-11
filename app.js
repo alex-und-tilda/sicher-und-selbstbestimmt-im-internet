@@ -365,60 +365,71 @@ function renderHelpOverlay() {
         <h2 id="helpDialogTitle">Ich brauche Hilfe</h2>
       </div>
 
+      <div class="help-intro-box">
+        <p><strong>Du weißt gerade nicht, wie es weitergeht?</strong></p>
+        <p>Das ist okay.</p>
+        <p>Diese Hilfe zeigt dir den nächsten Schritt.</p>
+      </div>
+
       <div class="help-step-box help-step-calm">
-        <h3>1. Stopp.</h3>
-        <p>Ich muss nicht sofort entscheiden.</p>
-        <p>Ich klicke nicht weiter.</p>
+        <h3>1. Ruhig bleiben.</h3>
+        <p>Du musst nicht schnell sein.</p>
+        <p>Du darfst dir Zeit nehmen.</p>
       </div>
 
       <div class="help-step-box">
-        <h3>2. Was ist passiert?</h3>
+        <h3>2. Was möchtest du machen?</h3>
         <ul>
-          <li>Ich verstehe etwas nicht.</li>
-          <li>Ich bin unsicher.</li>
-          <li>Jemand macht Druck.</li>
-          <li>Ich habe Angst.</li>
-          <li>Ich habe aus Versehen geklickt.</li>
+          <li><strong>Kurz lernen:</strong> Wenn du nur das Wichtigste wissen möchtest.</li>
+          <li><strong>Ausführlich lernen:</strong> Wenn du alles Schritt für Schritt lernen möchtest.</li>
+          <li><strong>Quiz starten:</strong> Wenn du prüfen möchtest, was du verstanden hast.</li>
+          <li><strong>Merk-Karte:</strong> Wenn du die wichtigsten Regeln noch einmal sehen möchtest.</li>
         </ul>
       </div>
 
       <div class="help-step-box">
-        <h3>3. Was mache ich jetzt?</h3>
+        <h3>3. Wenn du den Text nicht verstehst</h3>
         <ul>
-          <li>Ich gebe keine Daten ein.</li>
-          <li>Ich sende keine Fotos.</li>
-          <li>Ich sende kein Geld.</li>
-          <li>Ich frage eine Person, der ich vertraue.</li>
+          <li>Klicke auf <strong>Sehr langsam vorlesen</strong>.</li>
+          <li>Lies nur einen Satz auf einmal.</li>
+          <li>Gehe mit <strong>Zurück</strong> zur letzten Seite.</li>
+          <li>Mache eine kurze Pause.</li>
         </ul>
       </div>
 
       <div class="help-step-box">
-        <h3>4. Wen kann ich fragen?</h3>
+        <h3>4. Wenn du nicht weißt, was du anklicken sollst</h3>
         <ul>
-          <li>eine Person, der ich vertraue</li>
-          <li>eine Unterstützerin oder einen Unterstützer</li>
-          <li>eine Digital-Begleiterin oder einen Digital-Begleiter</li>
-          <li>eine Person aus meiner Familie oder meinem Wohnbereich</li>
+          <li>Klicke auf <strong>Startseite</strong>.</li>
+          <li>Wähle zuerst ein Thema.</li>
+          <li>Wähle danach: Kurz lernen, Ausführlich lernen, Quiz oder Merk-Karte.</li>
         </ul>
       </div>
 
-      <div class="help-step-box help-step-danger">
-        <h3>5. Wann ist es dringend?</h3>
-        <p>Es ist dringend, wenn jemand droht.</p>
-        <p>Es ist dringend, wenn jemand Geld will.</p>
-        <p>Es ist dringend, wenn jemand Nacktbilder will.</p>
-        <p><strong>Bei akuter Gefahr: 110.</strong></p>
+      <div class="help-step-box help-step-people">
+        <h3>5. Du kannst jemanden fragen</h3>
+        <p>Du musst das nicht allein schaffen.</p>
+        <p>Frage eine Person, der du vertraust.</p>
+        <p>Zum Beispiel eine Unterstützerin, einen Unterstützer oder eine Digital-Begleiterin.</p>
       </div>
 
       <div class="help-decision-box">
-        <h3>Meine Entscheidung</h3>
-        <p><strong>Ich bin sicher:</strong> Ich entscheide selbst.</p>
-        <p><strong>Ich bin unsicher:</strong> Ich frage eine Person, der ich vertraue.</p>
-        <p><strong>Es ist gefährlich:</strong> Ich hole sofort Hilfe.</p>
+        <h3>Was ist jetzt der nächste Schritt?</h3>
+        <p><strong>Ich will weiterlernen:</strong> Ich gehe zurück zur Lernseite.</p>
+        <p><strong>Ich verstehe den Text nicht:</strong> Ich nutze Vorlesen oder frage eine Person.</p>
+        <p><strong>Ich bin müde:</strong> Ich mache eine Pause.</p>
+        <p><strong>Ich bin ganz durcheinander:</strong> Ich gehe zur Startseite.</p>
+      </div>
+
+      <div class="help-small-safety-note">
+        <h3>Wichtig</h3>
+        <p>Wenn dir im Internet etwas Angst macht, sprich sofort mit einer Person, der du vertraust.</p>
+        <p>Bei akuter Gefahr: 110.</p>
       </div>
 
       <div class="help-actions">
-        <button type="button" class="btn btn-secondary" onclick="speakText('Stopp. Ich klicke nicht weiter. Ich gebe keine Daten ein. Ich frage eine Person, der ich vertraue. Bei akuter Gefahr rufe ich 110.')">Kurz-Hilfe vorlesen</button>
+        <button type="button" class="btn btn-secondary" onclick="speakText('Du weißt gerade nicht, wie es weitergeht. Das ist okay. Du darfst dir Zeit nehmen. Wähle zuerst ein Thema. Danach wähle Kurz lernen, Ausführlich lernen, Quiz oder Merk-Karte. Wenn du den Text nicht verstehst, nutze Vorlesen oder frage eine Person, der du vertraust.')">Hilfe langsam vorlesen</button>
+        <button type="button" class="btn btn-secondary" onclick="goHome(); closeHelpOverlay();">Zur Startseite</button>
         <button type="button" class="btn btn-primary" onclick="closeHelpOverlay()">Schließen</button>
       </div>
     </div>
