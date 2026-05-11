@@ -223,3 +223,21 @@ Auf der Startseite stehen nur noch die 8 Themenkarten.
 Die Aktionskarten, Hilfe-Fragen und Bilder erscheinen erst nach Auswahl eines Themas.
 
 Zusätzlich gibt es eine zentrale Weiterlernen-Box.
+
+
+## Erweiterung: Punkte 1 bis 6
+
+Umgesetzt wurden:
+
+1. Immer sichtbarer Hilfe-Button
+2. Abschlussseite nach „Kurz lernen“
+3. „Ich habe diese Seite verstanden“-Button
+4. Kleine Wiederholungsfrage nach Modulwechsel
+5. Entscheidungslogik ohne Ampel
+6. QR-Code-Übersichtsseite
+
+Die QR-Übersicht ist auch über folgenden Link erreichbar:
+
+```text
+index.html#qr
+```

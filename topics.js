@@ -691,7 +691,17 @@ const topics = [
     "qrLink": "index.html#datenschutz",
     "qrShortLink": "index.html#datenschutz:kurz",
     "qrQuizLink": "index.html#datenschutz:quiz",
-    "qrMemoryLink": "index.html#datenschutz:merk"
+    "qrMemoryLink": "index.html#datenschutz:merk",
+    "miniQuestion": {
+      "question": "Was bleibt geheim?",
+      "answers": [
+        "PIN und Passwort",
+        "Wetter",
+        "Lieblingsfarbe"
+      ],
+      "correct": 0,
+      "explanation": "PIN und Passwort bleiben geheim."
+    }
   },
   {
     "id": "whatsapp",
@@ -1383,7 +1393,17 @@ const topics = [
     "qrLink": "index.html#whatsapp",
     "qrShortLink": "index.html#whatsapp:kurz",
     "qrQuizLink": "index.html#whatsapp:quiz",
-    "qrMemoryLink": "index.html#whatsapp:merk"
+    "qrMemoryLink": "index.html#whatsapp:merk",
+    "miniQuestion": {
+      "question": "Was machst du bei einem komischen Link?",
+      "answers": [
+        "Nicht sofort klicken",
+        "Sofort klicken",
+        "An alle weiterleiten"
+      ],
+      "correct": 0,
+      "explanation": "Komische Links werden erst geprüft."
+    }
   },
   {
     "id": "facebook",
@@ -2075,7 +2095,17 @@ const topics = [
     "qrLink": "index.html#facebook",
     "qrShortLink": "index.html#facebook:kurz",
     "qrQuizLink": "index.html#facebook:quiz",
-    "qrMemoryLink": "index.html#facebook:merk"
+    "qrMemoryLink": "index.html#facebook:merk",
+    "miniQuestion": {
+      "question": "Was prüfst du vor einem Beitrag?",
+      "answers": [
+        "Wer ihn sehen kann",
+        "Ob er lang ist",
+        "Ob er laut ist"
+      ],
+      "correct": 0,
+      "explanation": "Wichtig ist, wer den Beitrag sehen kann."
+    }
   },
   {
     "id": "instagram",
@@ -2767,7 +2797,17 @@ const topics = [
     "qrLink": "index.html#instagram",
     "qrShortLink": "index.html#instagram:kurz",
     "qrQuizLink": "index.html#instagram:quiz",
-    "qrMemoryLink": "index.html#instagram:merk"
+    "qrMemoryLink": "index.html#instagram:merk",
+    "miniQuestion": {
+      "question": "Was machst du vor einem Foto von anderen?",
+      "answers": [
+        "Vorher fragen",
+        "Einfach posten",
+        "Standort zeigen"
+      ],
+      "correct": 0,
+      "explanation": "Andere Personen müssen einverstanden sein."
+    }
   },
   {
     "id": "youtube",
@@ -3459,7 +3499,17 @@ const topics = [
     "qrLink": "index.html#youtube",
     "qrShortLink": "index.html#youtube:kurz",
     "qrQuizLink": "index.html#youtube:quiz",
-    "qrMemoryLink": "index.html#youtube:merk"
+    "qrMemoryLink": "index.html#youtube:merk",
+    "miniQuestion": {
+      "question": "Was prüfst du bei einem Video?",
+      "answers": [
+        "Quelle und Inhalt",
+        "Nur die Farbe",
+        "Nur die Länge"
+      ],
+      "correct": 0,
+      "explanation": "Quelle und Inhalt helfen beim Einschätzen."
+    }
   },
   {
     "id": "snapchat",
@@ -4151,7 +4201,17 @@ const topics = [
     "qrLink": "index.html#snapchat",
     "qrShortLink": "index.html#snapchat:kurz",
     "qrQuizLink": "index.html#snapchat:quiz",
-    "qrMemoryLink": "index.html#snapchat:merk"
+    "qrMemoryLink": "index.html#snapchat:merk",
+    "miniQuestion": {
+      "question": "Sind Snaps immer sicher weg?",
+      "answers": [
+        "Nein",
+        "Ja",
+        "Nur bei Freunden"
+      ],
+      "correct": 0,
+      "explanation": "Snaps können gespeichert werden."
+    }
   },
   {
     "id": "tiktok",
@@ -4843,7 +4903,17 @@ const topics = [
     "qrLink": "index.html#tiktok",
     "qrShortLink": "index.html#tiktok:kurz",
     "qrQuizLink": "index.html#tiktok:quiz",
-    "qrMemoryLink": "index.html#tiktok:merk"
+    "qrMemoryLink": "index.html#tiktok:merk",
+    "miniQuestion": {
+      "question": "Was machst du bei gefährlichen Trends?",
+      "answers": [
+        "Nicht mitmachen",
+        "Sofort mitmachen",
+        "Andere drängen"
+      ],
+      "correct": 0,
+      "explanation": "Gefährliche Trends machst du nicht mit."
+    }
   },
   {
     "id": "hilfe",
@@ -5542,6 +5612,16 @@ const topics = [
     "qrLink": "index.html#hilfe",
     "qrShortLink": "index.html#hilfe:kurz",
     "qrQuizLink": "index.html#hilfe:quiz",
-    "qrMemoryLink": "index.html#hilfe:merk"
+    "qrMemoryLink": "index.html#hilfe:merk",
+    "miniQuestion": {
+      "question": "Was machst du bei Unsicherheit?",
+      "answers": [
+        "Hilfe holen",
+        "Alles allein lösen",
+        "Sofort klicken"
+      ],
+      "correct": 0,
+      "explanation": "Hilfe holen ist richtig."
+    }
   }
 ];

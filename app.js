@@ -270,6 +270,10 @@ function updateHashForCurrentStep() {
 function handleHashRoute() {
   const raw = window.location.hash.replace("#", "").trim();
   if (!raw) return false;
+  if (raw === "qr") {
+    renderQrOverview();
+    return true;
+  }
 
   const [topicId, action, stepRaw] = raw.split(":");
   const topic = topics.find(t => t.id === topicId);
@@ -357,9 +361,20 @@ function renderSavedProgressHint(topic) {
 
 
 
+
+function ensureGlobalHelpButton() {
+  if (document.querySelector(".global-help-button")) return;
+  const button = document.createElement("button");
+  button.className = "global-help-button";
+  button.textContent = "Ich brauche Hilfe";
+  button.onclick = renderHelpOverlay;
+  document.body.appendChild(button);
+}
+
 function setViewMode(mode) {
   document.body.classList.remove("view-menu", "view-learning", "view-quiz", "view-print");
   document.body.classList.add(`view-${mode}`);
+  ensureGlobalHelpButton();
 }
 
 
@@ -495,6 +510,184 @@ function renderTopicChoice(topicId) {
   content.focus();
 }
 
+
+function renderHelpOverlay() {
+  const existing = document.querySelector(".help-overlay");
+  if (existing) existing.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "help-overlay";
+  overlay.innerHTML = `
+    <div class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle">
+      <button class="help-close" onclick="closeHelpOverlay()">Schließen</button>
+      <h2 id="helpDialogTitle">Ich brauche Hilfe</h2>
+      <p>Du musst das nicht allein lösen.</p>
+      <p>Frage eine Person, der du vertraust.</p>
+      <ul>
+        <li>eine Unterstützerin oder einen Unterstützer</li>
+        <li>eine Digital-Begleiterin oder einen Digital-Begleiter</li>
+        <li>eine Person aus deinem Umfeld</li>
+      </ul>
+      <div class="decision-box">
+        <h3>Was passt?</h3>
+        <p><strong>Ich bin sicher:</strong> Ich entscheide selbst.</p>
+        <p><strong>Ich bin unsicher:</strong> Ich frage eine Person, der ich vertraue.</p>
+        <p><strong>Es ist gefährlich:</strong> Ich hole sofort Hilfe. Bei Gefahr: 110.</p>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  const closeButton = overlay.querySelector(".help-close");
+  if (closeButton) closeButton.focus();
+}
+
+function closeHelpOverlay() {
+  const existing = document.querySelector(".help-overlay");
+  if (existing) existing.remove();
+}
+
+function markUnderstood() {
+  const button = document.querySelector(".understood-button");
+  if (button) {
+    button.textContent = "Verstanden";
+    button.disabled = true;
+    button.classList.add("done");
+  }
+  liveRegion.textContent = "Diese Seite wurde als verstanden markiert.";
+}
+
+function shouldShowMiniQuestion(topic, stepIndex) {
+  if (!topic || !topic.lessons || learningMode !== "full") return false;
+  const lesson = topic.lessons[stepIndex];
+  const next = topic.lessons[stepIndex + 1];
+  if (!lesson || !next) return false;
+  return lesson.module !== next.module;
+}
+
+function answerMiniQuestion(choice) {
+  const topic = getCurrentTopic();
+  if (!topic || !topic.miniQuestion) return;
+  const box = document.querySelector(".mini-question-feedback");
+  const isCorrect = choice === topic.miniQuestion.correct;
+  if (box) {
+    box.innerHTML = isCorrect
+      ? `<strong>Richtig.</strong> ${escapeHtml(topic.miniQuestion.explanation)}`
+      : `<strong>Nicht ganz.</strong> ${escapeHtml(topic.miniQuestion.explanation)}`;
+    box.className = `mini-question-feedback ${isCorrect ? "success" : "warning"}`;
+  }
+}
+
+function getMiniQuestionHtml(topic) {
+  if (!topic || !topic.miniQuestion) return "";
+  const q = topic.miniQuestion;
+  return `
+    <section class="mini-question">
+      <h3>Kleine Wiederholungsfrage</h3>
+      <p><strong>${escapeHtml(q.question)}</strong></p>
+      <div class="mini-answer-grid">
+        ${q.answers.map((answer, index) => `
+          <button onclick="answerMiniQuestion(${index})">${escapeHtml(answer)}</button>
+        `).join("")}
+      </div>
+      <div class="mini-question-feedback" aria-live="polite"></div>
+    </section>
+  `;
+}
+
+function renderShortCompletion(topic) {
+  setViewMode("learning");
+  appTitle.textContent = topic.title;
+  moduleLabel.textContent = "Kurz lernen";
+  stepLabel.textContent = "Abschluss";
+  levelLabel.textContent = "Geschafft";
+  progressFill.style.width = "100%";
+  progressTrack.setAttribute("aria-valuenow", "100");
+  backButton.disabled = false;
+  nextButton.disabled = false;
+  nextButton.textContent = "Themenübersicht";
+
+  content.innerHTML = `
+    <article class="card short-completion-card">
+      <div class="module-tag">Kurz lernen abgeschlossen</div>
+      <div class="card-header">
+        <div class="icon" aria-hidden="true">${getIconHtml("check")}</div>
+        <h2>Du hast die wichtigsten Regeln gelernt.</h2>
+      </div>
+      <p>Du kannst jetzt entscheiden, was du als Nächstes machen möchtest.</p>
+
+      <div class="completion-action-grid">
+        <button class="action-card action-quiz" onclick="startTopicQuiz('${topic.id}')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
+          <span class="action-text"><strong>Quiz starten</strong><small>10 Fragen beantworten.</small><em>Habe ich das verstanden?</em></span>
+        </button>
+        <button class="action-card action-memory" onclick="renderMemoryCard('${topic.id}')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
+          <span class="action-text"><strong>Merk-Karte drucken</strong><small>3 wichtige Regeln.</small><em>Was nehme ich mit?</em></span>
+        </button>
+        <button class="action-card action-full" onclick="startTopicMode('${topic.id}', 'full')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
+          <span class="action-text"><strong>Ausführlich weiterlernen</strong><small>Alle Seiten mit Beispielen.</small><em>Was kann ich im Alltag tun?</em></span>
+        </button>
+        <button class="action-card action-short" onclick="renderMenu()">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("home")}</span>
+          <span class="action-text"><strong>Zur Themenübersicht</strong><small>Ein anderes Thema auswählen.</small><em>Was möchte ich noch lernen?</em></span>
+        </button>
+      </div>
+    </article>
+  `;
+  content.focus();
+}
+
+function renderQrOverview() {
+  setViewMode("print");
+  appTitle.textContent = "QR-Links";
+  moduleLabel.textContent = "Poster";
+  stepLabel.textContent = "Übersicht";
+  levelLabel.textContent = "Links";
+  progressFill.style.width = "100%";
+  progressTrack.setAttribute("aria-valuenow", "100");
+  backButton.disabled = false;
+  nextButton.disabled = false;
+  nextButton.textContent = "Themenübersicht";
+
+  const base = window.location.href.split("#")[0];
+  const rows = topics.map(topic => `
+    <tr>
+      <td><strong>${escapeHtml(topic.title)}</strong></td>
+      <td><code>${base}#${topic.id}</code></td>
+      <td><code>${base}#${topic.id}:kurz</code></td>
+      <td><code>${base}#${topic.id}:quiz</code></td>
+      <td><code>${base}#${topic.id}:merk</code></td>
+    </tr>
+  `).join("");
+
+  content.innerHTML = `
+    <article class="card qr-overview print-sheet">
+      <div class="print-frame">
+        <div class="module-tag">QR-Links für Poster</div>
+        <h2>QR-Code-Übersicht</h2>
+        <p>Diese Links können für QR-Codes genutzt werden.</p>
+        <div class="qr-table-wrap">
+          <table class="qr-table">
+            <thead>
+              <tr>
+                <th>Thema</th>
+                <th>Thema</th>
+                <th>Kurz</th>
+                <th>Quiz</th>
+                <th>Merk-Karte</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+        <button class="quiz-link quiz-button" onclick="window.print()">QR-Übersicht drucken</button>
+      </div>
+    </article>
+  `;
+  content.focus();
+}
+
 function renderMenu() {
   setViewMode("menu");
   appTitle.textContent = "Sicher digital lernen";
@@ -546,6 +739,7 @@ function renderMenu() {
 
       <div class="menu-extra-actions">
         <button class="quiz-link quiz-button" onclick="renderEvaluation()">Rückmeldung / Testbogen</button>
+        <button class="quiz-link quiz-button" onclick="renderQrOverview()">QR-Links für Poster</button>
       </div>
     </section>
   `;
