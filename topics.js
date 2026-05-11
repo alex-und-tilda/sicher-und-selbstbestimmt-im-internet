@@ -14,7 +14,7 @@ const topics = [
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
+        "remember": "Ich gebe mein Passwort nicht weiter.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
@@ -25,7 +25,7 @@ const topics = [
           "Nicht jede Person darf alles über dich wissen.",
           "Du darfst mitentscheiden, was du teilst."
         ],
-        "remember": "Datenschutz schützt deine Privatsphäre.",
+        "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
@@ -41,7 +41,7 @@ const topics = [
           "Telefonnummer",
           "Fotos und Standort"
         ],
-        "remember": "Daten können viel über mich verraten.",
+        "remember": "Ich frage nach, wenn ich unsicher bin.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
@@ -56,7 +56,7 @@ const topics = [
           "nicht alles posten",
           "bei Unsicherheit fragen"
         ],
-        "remember": "Ich prüfe, bevor ich Daten teile.",
+        "remember": "Ich teile keine privaten Fotos ohne Nachdenken.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
@@ -67,7 +67,7 @@ const topics = [
         ],
         "quote": "Ich gebe nur die Daten an, die wirklich nötig sind.",
         "success": "Das ist gut. Du teilst nicht mehr als nötig.",
-        "remember": "So wenig Daten wie möglich.",
+        "remember": "Ich darf Hilfe holen.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
@@ -78,7 +78,7 @@ const topics = [
           "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich gebe mein Passwort nicht weiter.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -93,7 +93,7 @@ const topics = [
           "Telefonnummer",
           "Passwörter und Gesundheitsdaten"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -104,7 +104,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich frage nach, wenn ich unsicher bin.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -115,43 +115,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich teile keine privaten Fotos ohne Nachdenken.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "datenschutzPrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Welche Information bleibt geheim?",
+          "question": "Jemand fragt dich nach deinem Passwort. Was machst du?",
           "answers": [
-            "PIN und Passwort",
-            "Wetter",
-            "Lieblingsfarbe"
+            "Ich gebe es nicht weiter.",
+            "Ich schreibe es in den Chat.",
+            "Ich sage es am Telefon."
           ],
           "correct": 0,
-          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+          "explanation": "Mein Passwort bleibt geheim. Auch freundliche Personen dürfen es nicht bekommen."
         }
       },
       {
@@ -162,7 +141,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich darf Hilfe holen.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -173,7 +152,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich gebe mein Passwort nicht weiter.",
         "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
@@ -184,7 +163,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile.",
+        "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
@@ -198,7 +177,7 @@ const topics = [
           "Standort",
           "Gesundheitsdaten"
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich frage nach, wenn ich unsicher bin.",
         "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
@@ -209,7 +188,7 @@ const topics = [
         ],
         "quote": "„Schick mir deine Daten. Aber sag es niemandem.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich teile keine privaten Fotos ohne Nachdenken.",
         "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
@@ -220,43 +199,22 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich darf Hilfe holen.",
         "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
         "title": "Übung: Inhalt prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "datenschutzContent",
-          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Fotos, Standort und Formulare",
         "practiceQuestion": {
-          "question": "Welche Information bleibt geheim?",
+          "question": "Eine Internetseite möchte deinen vollen Namen und deine Adresse. Was machst du?",
           "answers": [
-            "PIN und Passwort",
-            "Wetter",
-            "Lieblingsfarbe"
+            "Ich prüfe erst, ob das wirklich nötig ist.",
+            "Ich trage alles sofort ein.",
+            "Ich frage nicht nach."
           ],
           "correct": 0,
-          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+          "explanation": "Private Daten gebe ich nicht einfach ein. Ich prüfe erst und frage bei Unsicherheit eine vertraute Person."
         }
       },
       {
@@ -267,7 +225,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich gebe mein Passwort nicht weiter.",
         "module": "Modul 3: Fotos, Standort und Formulare"
       },
       {
@@ -278,7 +236,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle.",
+        "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
@@ -289,7 +247,7 @@ const topics = [
           "Manche Links führen zu falschen Seiten.",
           "Dort wollen Betrüger Daten bekommen."
         ],
-        "remember": "Ich handle nicht sofort.",
+        "remember": "Ich frage nach, wenn ich unsicher bin.",
         "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
@@ -300,7 +258,7 @@ const topics = [
         ],
         "quote": "Du hast gewonnen. Trage sofort deine Daten ein.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich teile keine privaten Fotos ohne Nachdenken.",
         "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
@@ -314,7 +272,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich darf Hilfe holen.",
         "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
@@ -328,43 +286,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich gebe mein Passwort nicht weiter.",
         "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
         "title": "Übung: Risiko prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "datenschutzRisk",
-          "question": "Nachricht: „Gib deine Daten ein. Nur noch 5 Minuten.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Links, Formulare und Betrug",
         "practiceQuestion": {
-          "question": "Welche Information bleibt geheim?",
+          "question": "Du willst ein Foto von dir teilen. Was ist wichtig?",
           "answers": [
-            "PIN und Passwort",
-            "Wetter",
-            "Lieblingsfarbe"
+            "Ich überlege, wer das Foto sehen kann.",
+            "Ich teile jedes Foto sofort.",
+            "Ich schreibe mein Passwort dazu."
           ],
           "correct": 0,
-          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+          "explanation": "Fotos können weitergeleitet werden. Ich überlege vorher, ob ich das wirklich möchte."
         }
       },
       {
@@ -375,7 +312,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 4: Links, Formulare und Betrug"
       },
       {
@@ -386,7 +323,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig.",
+        "remember": "Ich frage nach, wenn ich unsicher bin.",
         "module": "Modul 5: Daten im Internet"
       },
       {
@@ -396,7 +333,7 @@ const topics = [
           "Daten können im Internet schnell weitergegeben werden.",
           "Darum ist vorsichtiges Handeln wichtig."
         ],
-        "remember": "Viele können mitlesen.",
+        "remember": "Ich teile keine privaten Fotos ohne Nachdenken.",
         "module": "Modul 5: Daten im Internet"
       },
       {
@@ -410,7 +347,7 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich darf Hilfe holen.",
         "module": "Modul 5: Daten im Internet"
       },
       {
@@ -424,7 +361,7 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich gebe mein Passwort nicht weiter.",
         "module": "Modul 5: Daten im Internet"
       },
       {
@@ -435,43 +372,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 5: Daten im Internet"
       },
       {
         "title": "Übung: Gute Nachricht erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "datenschutzGroup",
-          "question": "„Ich brauche nur deine Telefonnummer für den Termin.“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Daten im Internet",
         "practiceQuestion": {
-          "question": "Welche Information bleibt geheim?",
+          "question": "Eine App fragt nach deinem Standort. Was machst du?",
           "answers": [
-            "PIN und Passwort",
-            "Wetter",
-            "Lieblingsfarbe"
+            "Ich prüfe, ob die App den Standort wirklich braucht.",
+            "Ich erlaube es immer.",
+            "Ich schicke meinen Standort an alle."
           ],
           "correct": 0,
-          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+          "explanation": "Mein Standort ist privat. Ich gebe ihn nur frei, wenn es wirklich sinnvoll ist."
         }
       },
       {
@@ -485,7 +401,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich frage nach, wenn ich unsicher bin.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -496,7 +412,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich teile keine privaten Fotos ohne Nachdenken.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -510,7 +426,7 @@ const topics = [
           "Absender blockieren",
           "bei Unsicherheit eine Person fragen, der du vertraust"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich darf Hilfe holen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -524,7 +440,7 @@ const topics = [
           "Melden auswählen, wenn vorhanden",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich gebe mein Passwort nicht weiter.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -540,7 +456,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -551,7 +467,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich frage nach, wenn ich unsicher bin.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -565,17 +481,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich teile keine privaten Fotos ohne Nachdenken.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Welche Information bleibt geheim?",
+          "question": "Du bist unsicher, ob du Daten eingeben sollst. Was machst du?",
           "answers": [
-            "PIN und Passwort",
-            "Wetter",
-            "Lieblingsfarbe"
+            "Ich frage eine Person, der ich vertraue.",
+            "Ich mache einfach weiter.",
+            "Ich gebe mehr Daten ein."
           ],
           "correct": 0,
-          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+          "explanation": "Bei Unsicherheit darf ich stoppen und Hilfe holen."
         }
       },
       {
@@ -591,132 +507,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich darf Hilfe holen.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Welche Information bleibt geheim?",
+          "question": "Du siehst ein Feld für Bankdaten. Was machst du?",
           "answers": [
-            "PIN und Passwort",
-            "Wetter",
-            "Lieblingsfarbe"
+            "Ich prüfe sehr genau und frage nach.",
+            "Ich trage alles sofort ein.",
+            "Ich sende ein Foto meiner Karte."
           ],
           "correct": 0,
-          "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+          "explanation": "Bankdaten sind sehr sensibel. Ich gebe sie nicht ohne sichere Prüfung ein."
         }
       }
     ],
     "illustration": "assets/illustrations/datenschutz.svg",
     "quizQuestions": [
       {
-        "question": "Eine Internet-Seite fragt nach deiner Adresse. Was machst du?",
+        "question": "Du bekommst eine Nachricht: „Schick mir dein Passwort, dann helfe ich dir.“ Was ist richtig?",
         "answers": [
-          "Ich trage alles sofort ein.",
-          "Ich prüfe erst, ob die Angabe nötig ist.",
-          "Ich schicke zusätzlich mein Passwort."
+          "Ich gebe mein Passwort nicht weiter.",
+          "Ich schicke es sofort.",
+          "Ich poste es öffentlich."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Deine Adresse ist privat. Gib sie nur an, wenn es wirklich nötig ist.",
-        "area": "Private Daten"
+        "correct": 0
       },
       {
-        "question": "Welche Information ist besonders privat?",
+        "question": "Eine App fragt nach deinem Standort. Was machst du zuerst?",
         "answers": [
-          "Deine Lieblingsfarbe",
-          "Deine PIN",
-          "Das Wetter"
+          "Ich erlaube alles immer.",
+          "Ich prüfe, ob das nötig ist.",
+          "Ich sende meinen Standort an Fremde."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Eine PIN schützt Geräte oder Konten. Sie bleibt geheim.",
-        "area": "PIN und Passwort"
+        "correct": 1
       },
       {
-        "question": "Du möchtest ein Foto von einer anderen Person posten. Was ist richtig?",
+        "question": "Du möchtest ein Foto von einer anderen Person teilen. Was machst du?",
         "answers": [
-          "Ich schreibe keinen Namen dazu, dann ist es immer okay.",
-          "Ich frage die Person vorher.",
-          "Ich poste es heimlich."
+          "Ich schreibe den Namen dazu.",
+          "Ich frage vorher.",
+          "Ich teile es heimlich."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Andere Personen müssen einverstanden sein, bevor du ein Foto teilst.",
-        "area": "Fotos"
+        "correct": 1
       },
       {
-        "question": "Eine App möchte deinen Standort wissen. Was machst du?",
+        "question": "Eine Webseite will viele private Daten. Du bist unsicher. Was machst du?",
         "answers": [
-          "Ich erlaube es immer.",
-          "Ich sende den Standort zusätzlich an Freunde.",
-          "Ich prüfe, ob die App den Standort wirklich braucht."
+          "Ich frage eine vertraute Person.",
+          "Ich klicke schneller weiter.",
+          "Ich gebe alles ein."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Der Standort zeigt, wo du bist. Er sollte nur geteilt werden, wenn es nötig ist.",
-        "area": "Standort"
+        "correct": 0
       },
       {
-        "question": "Jemand schreibt: „Schick mir dein Passwort. Ich helfe dir.“ Was machst du?",
+        "question": "Was ist ein gutes Passwort?",
         "answers": [
-          "Ich antworte nicht und hole Hilfe.",
-          "Ich schicke nur die Hälfte.",
-          "Ich schicke das Passwort."
+          "Mein Name.",
+          "123456.",
+          "Ein geheimes Passwort, das andere nicht kennen."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Passwörter werden nie verschickt. Hole Hilfe, wenn du unsicher bist.",
-        "area": "Passwort"
+        "correct": 2
       },
       {
-        "question": "Was bedeutet Daten sparsam teilen?",
+        "question": "Jemand fragt nach deiner Adresse in einem Chat. Was machst du?",
         "answers": [
-          "Daten an möglichst viele Menschen schicken.",
-          "Alle Felder ausfüllen.",
-          "Nur Daten teilen, die wirklich nötig sind."
+          "Ich schreibe sie in mein Profil.",
+          "Ich schicke sie sofort.",
+          "Ich gebe sie nicht einfach weiter."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Je weniger Daten du teilst, desto besser sind deine Daten geschützt.",
-        "area": "Daten sparsam teilen"
+        "correct": 2
       },
       {
-        "question": "Du bist bei einem Formular unsicher. Was ist eine gute Entscheidung?",
+        "question": "Du hast aus Versehen private Daten eingegeben. Was machst du?",
         "answers": [
-          "Alles schnell ausfüllen.",
-          "Eine eine Person, der du vertraust fragen.",
-          "Das Passwort als Sicherheit eintragen."
+          "Ich ignoriere es immer.",
+          "Ich hole Unterstützung.",
+          "Ich gebe noch mehr Daten ein."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Bei Unsicherheit ist Nachfragen eine sichere Entscheidung.",
-        "area": "Hilfe holen"
+        "correct": 1
       },
       {
-        "question": "Was kann mit privaten Daten passieren?",
+        "question": "Welche Daten sind besonders privat?",
         "answers": [
-          "Sie verschwinden immer sofort.",
-          "Sie können missbraucht werden.",
-          "Sie sind immer ungefährlich."
+          "Wetter.",
+          "Passwort und Bankdaten.",
+          "Lieblingsfarbe."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Private Daten können missbraucht werden. Deshalb ist Schutz wichtig.",
-        "area": "Risiken"
+        "correct": 1
       },
       {
-        "question": "Im Quiz sollst du einen Namen eingeben. Was ist besser?",
+        "question": "Du willst dich irgendwo anmelden. Was hilft?",
         "answers": [
-          "Einen Spitznamen nutzen.",
-          "Das Passwort als Namen nutzen.",
-          "Den vollen Namen und die Adresse nutzen."
+          "Ich prüfe, welche Daten gebraucht werden.",
+          "Ich gebe Daten ohne Lesen ein.",
+          "Ich benutze überall dasselbe Passwort."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Ein Spitzname schützt deine Privatsphäre.",
-        "area": "Name und Privatsphäre"
+        "correct": 0
       },
       {
-        "question": "Was ist der wichtigste Merksatz zum Datenschutz?",
+        "question": "Was bedeutet Datenschutz im Alltag?",
         "answers": [
-          "Alle Daten gehören ins Internet.",
-          "Passwörter darf jeder wissen.",
-          "Meine Daten gehören mir."
+          "Ich teile alles mit allen.",
+          "Ich lösche jede Hilfe.",
+          "Ich gehe vorsichtig mit meinen Daten um."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Deine Daten gehören dir. Du entscheidest mit, was du teilst.",
-        "area": "Merksatz"
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -730,9 +626,11 @@ const topics = [
       "Was passiert mit meinen Daten?"
     ],
     "memoryRules": [
-      "Ich gebe nur Daten ein, die wirklich nötig sind.",
-      "Passwörter und PINs bleiben geheim.",
-      "Bei Unsicherheit frage ich eine Person, der ich vertraue."
+      "Ich gebe mein Passwort nicht weiter.",
+      "Ich sage Nein, wenn jemand zu viele Daten wissen will.",
+      "Ich frage nach, wenn ich unsicher bin.",
+      "Ich teile keine privaten Fotos ohne Nachdenken.",
+      "Ich darf Hilfe holen."
     ],
     "shortLessonIndexes": [
       0,
@@ -778,7 +676,7 @@ const topics = [
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
+        "remember": "Ich klicke nicht sofort auf komische Links.",
         "module": "Modul 1: WhatsApp verstehen"
       },
       {
@@ -789,7 +687,7 @@ const topics = [
           "Du kannst mit anderen Menschen Kontakt halten.",
           "Du kannst Nachrichten, Fotos und Sprachnachrichten senden."
         ],
-        "remember": "WhatsApp ist ein Werkzeug für Kontakt.",
+        "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 1: WhatsApp verstehen"
       },
       {
@@ -803,7 +701,7 @@ const topics = [
           "Fotos oder Videos schicken",
           "Sprachnachrichten senden"
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich frage nach, wenn eine Nachricht komisch wirkt.",
         "module": "Modul 1: WhatsApp verstehen"
       },
       {
@@ -817,7 +715,7 @@ const topics = [
           "kurz Bescheid sagen",
           "in einer Gruppe mitlesen"
         ],
-        "remember": "WhatsApp kann praktisch sein.",
+        "remember": "Ich verlasse Gruppen, die mir nicht guttun.",
         "module": "Modul 1: WhatsApp verstehen"
       },
       {
@@ -828,7 +726,7 @@ const topics = [
         ],
         "quote": "Hallo. Ich komme heute um 16 Uhr.",
         "success": "Das wirkt sicher. Die Nachricht macht keinen Druck.",
-        "remember": "Gute Nachrichten sind klar und respektvoll.",
+        "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "module": "Modul 1: WhatsApp verstehen"
       },
       {
@@ -839,7 +737,7 @@ const topics = [
           "Du lernst, welche Daten du schützen sollst.",
           "Du lernst auch, wann du Nein sagen darfst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich klicke nicht sofort auf komische Links.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -854,7 +752,7 @@ const topics = [
           "Telefonnummer",
           "Passwörter und PIN-Nummern"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -865,7 +763,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich frage nach, wenn eine Nachricht komisch wirkt.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -876,43 +774,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Sonst wird dein Konto gelöscht.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich verlasse Gruppen, die mir nicht guttun.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "waPrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "question": "Du bekommst einen Link von einer unbekannten Nummer. Was machst du?",
           "answers": [
             "Ich klicke nicht sofort.",
             "Ich klicke sofort.",
-            "Ich leite ihn an alle weiter."
+            "Ich leite den Link weiter."
           ],
           "correct": 0,
-          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+          "explanation": "Unbekannte Links können gefährlich sein. Ich prüfe erst oder frage eine vertraute Person."
         }
       },
       {
@@ -923,7 +800,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -934,7 +811,7 @@ const topics = [
           "Auch Bilder und Stimmen können privat sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich sende.",
+        "remember": "Ich klicke nicht sofort auf komische Links.",
         "module": "Modul 3: Fotos und Stimme"
       },
       {
@@ -945,7 +822,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen das Foto.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich ein Foto schicke.",
+        "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 3: Fotos und Stimme"
       },
       {
@@ -959,7 +836,7 @@ const topics = [
           "peinliche Fotos",
           "Fotos, die du später bereust"
         ],
-        "remember": "Ich entscheide über meine Bilder.",
+        "remember": "Ich frage nach, wenn eine Nachricht komisch wirkt.",
         "module": "Modul 3: Fotos und Stimme"
       },
       {
@@ -970,7 +847,7 @@ const topics = [
         ],
         "quote": "Schick mir ein Foto von dir. Aber sag es niemandem.",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich verlasse Gruppen, die mir nicht guttun.",
         "module": "Modul 3: Fotos und Stimme"
       },
       {
@@ -981,43 +858,22 @@ const topics = [
           "Eine Sprachnachricht kann weitergeleitet werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Auch meine Stimme gehört mir.",
+        "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "module": "Modul 3: Fotos und Stimme"
       },
       {
         "title": "Übung: Foto oder Stimme",
         "icon": "exercise",
-        "exercise": {
-          "id": "waPhoto",
-          "question": "Nachricht: „Schick mir ein peinliches Foto. Ich zeige es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Es wird Druck gemacht."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Es wird Druck gemacht."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Fotos und Stimme",
         "practiceQuestion": {
-          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "question": "Jemand fragt nach einem WhatsApp-Code. Was machst du?",
           "answers": [
-            "Ich klicke nicht sofort.",
-            "Ich klicke sofort.",
-            "Ich leite ihn an alle weiter."
+            "Ich gebe den Code nicht weiter.",
+            "Ich schicke den Code.",
+            "Ich poste den Code in einer Gruppe."
           ],
           "correct": 0,
-          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+          "explanation": "WhatsApp-Codes sind privat. Damit kann jemand Zugang zu meinem Konto bekommen."
         }
       },
       {
@@ -1028,7 +884,7 @@ const topics = [
           "Du musst keine Sprachnachricht schicken.",
           "Du darfst Nein sagen."
         ],
-        "remember": "Ich entscheide über Bilder und Stimme.",
+        "remember": "Ich klicke nicht sofort auf komische Links.",
         "module": "Modul 3: Fotos und Stimme"
       },
       {
@@ -1039,7 +895,7 @@ const topics = [
           "Manche Nachrichten sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich klicke.",
+        "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 4: Links und Betrug"
       },
       {
@@ -1050,7 +906,7 @@ const topics = [
           "Sie führen auf falsche Internet-Seiten.",
           "Dort wollen Betrüger Daten bekommen."
         ],
-        "remember": "Ich klicke nicht sofort.",
+        "remember": "Ich frage nach, wenn eine Nachricht komisch wirkt.",
         "module": "Modul 4: Links und Betrug"
       },
       {
@@ -1061,7 +917,7 @@ const topics = [
         ],
         "quote": "Du hast gewonnen. Klicke sofort hier.",
         "warning": "Das kann Betrug sein. Klicke nicht einfach.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich verlasse Gruppen, die mir nicht guttun.",
         "module": "Modul 4: Links und Betrug"
       },
       {
@@ -1075,7 +931,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "module": "Modul 4: Links und Betrug"
       },
       {
@@ -1089,43 +945,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich klicke nicht sofort auf komische Links.",
         "module": "Modul 4: Links und Betrug"
       },
       {
         "title": "Übung: Link prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "waLink",
-          "question": "Nachricht: „Klicke sofort. Nur noch 5 Minuten.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Zeitdruck ist ein Warnzeichen. Nicht klicken."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Zeitdruck ist ein Warnzeichen. Nicht klicken."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Links und Betrug",
         "practiceQuestion": {
-          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "question": "Eine Gruppe stresst dich. Was kannst du tun?",
           "answers": [
-            "Ich klicke nicht sofort.",
-            "Ich klicke sofort.",
-            "Ich leite ihn an alle weiter."
+            "Ich stelle sie stumm oder verlasse sie.",
+            "Ich muss alles lesen.",
+            "Ich antworte wütend."
           ],
           "correct": 0,
-          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+          "explanation": "Ich darf Gruppen stumm schalten oder verlassen. Ich muss nicht alles mitmachen."
         }
       },
       {
@@ -1136,7 +971,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 4: Links und Betrug"
       },
       {
@@ -1147,7 +982,7 @@ const topics = [
           "In Gruppen lesen viele Menschen mit.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "In Gruppen schreibe ich vorsichtig.",
+        "remember": "Ich frage nach, wenn eine Nachricht komisch wirkt.",
         "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
@@ -1158,7 +993,7 @@ const topics = [
           "Nachrichten können schnell weitergegeben werden.",
           "Darum solltest du besonders vorsichtig schreiben."
         ],
-        "remember": "Gruppen haben viele Mitlesende.",
+        "remember": "Ich verlasse Gruppen, die mir nicht guttun.",
         "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
@@ -1172,7 +1007,7 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
@@ -1186,7 +1021,7 @@ const topics = [
           "Gerüchte",
           "private Fotos"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich klicke nicht sofort auf komische Links.",
         "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
@@ -1197,43 +1032,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 5: Gruppen und gutes Verhalten"
       },
       {
         "title": "Übung: Gute Nachricht erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "waGroup",
-          "question": "Nachricht: „Hallo. Ich komme heute um 16 Uhr.“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Die Nachricht ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Die Nachricht ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Gruppen und gutes Verhalten",
         "practiceQuestion": {
-          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "question": "Du willst ein Foto weiterleiten. Was prüfst du?",
           "answers": [
-            "Ich klicke nicht sofort.",
-            "Ich klicke sofort.",
-            "Ich leite ihn an alle weiter."
+            "Ob die Person einverstanden ist.",
+            "Ob es lustig ist.",
+            "Ob viele es sehen sollen."
           ],
           "correct": 0,
-          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+          "explanation": "Fotos von anderen leite ich nicht ohne Erlaubnis weiter."
         }
       },
       {
@@ -1247,7 +1061,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich frage nach, wenn eine Nachricht komisch wirkt.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -1258,7 +1072,7 @@ const topics = [
           "Du musst kein Foto schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich verlasse Gruppen, die mir nicht guttun.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -1272,7 +1086,7 @@ const topics = [
           "auf den Namen tippen",
           "Blockieren auswählen"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -1286,7 +1100,7 @@ const topics = [
           "Melden auswählen",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich klicke nicht sofort auf komische Links.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -1302,7 +1116,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich gebe keine Codes weiter.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -1313,7 +1127,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich frage nach, wenn eine Nachricht komisch wirkt.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -1327,17 +1141,17 @@ const topics = [
           "nicht klicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich verlasse Gruppen, die mir nicht guttun.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "question": "Eine Nachricht macht dir Druck. Was machst du?",
           "answers": [
-            "Ich klicke nicht sofort.",
-            "Ich klicke sofort.",
-            "Ich leite ihn an alle weiter."
+            "Ich stoppe und frage Unterstützung.",
+            "Ich reagiere sofort.",
+            "Ich sende Geld."
           ],
           "correct": 0,
-          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+          "explanation": "Druck ist ein Warnzeichen. Ich darf Hilfe holen."
         }
       },
       {
@@ -1353,132 +1167,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Meine Daten gehören mir. Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich blockiere Kontakte, wenn ich mich unwohl fühle.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Du bekommst einen komischen Link. Was machst du?",
+          "question": "Du bekommst eine Sprachnachricht und verstehst sie nicht. Was machst du?",
           "answers": [
-            "Ich klicke nicht sofort.",
-            "Ich klicke sofort.",
-            "Ich leite ihn an alle weiter."
+            "Ich höre sie noch einmal oder frage nach.",
+            "Ich antworte irgendwas.",
+            "Ich lösche alle Kontakte."
           ],
           "correct": 0,
-          "explanation": "Komische Links können Betrug sein. Klicke nicht sofort und frage bei Unsicherheit nach."
+          "explanation": "Ich darf nachfragen. Ich muss nicht sofort antworten."
         }
       }
     ],
     "illustration": "assets/illustrations/whatsapp.svg",
     "quizQuestions": [
       {
-        "question": "Eine unbekannte Person fragt nach deiner Adresse. Was machst du?",
+        "question": "Du bekommst einen unbekannten Link. Was machst du?",
         "answers": [
-          "Adresse schicken.",
-          "Nicht schicken und Hilfe holen.",
-          "In eine Gruppe weiterleiten."
+          "Ich klicke nicht sofort.",
+          "Ich leite ihn weiter.",
+          "Ich gebe meine Daten ein."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Deine Adresse ist privat. Unbekannte Personen bekommen sie nicht.",
-        "area": "Private Daten"
+        "correct": 0
       },
       {
-        "question": "Du bekommst einen Link: „Du hast gewonnen. Klicke sofort.“ Was machst du?",
+        "question": "Jemand fragt nach deinem WhatsApp-Code. Was machst du?",
         "answers": [
-          "Nicht klicken und prüfen.",
-          "Sofort klicken.",
-          "An alle Freunde weiterleiten."
+          "Ich schicke ihn sofort.",
+          "Ich gebe ihn nicht weiter.",
+          "Ich poste ihn."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Gewinn-Links können Betrug sein. Erst prüfen, dann handeln.",
-        "area": "Links und Betrug"
+        "correct": 1
       },
       {
-        "question": "Jemand fordert ein privates Foto und sagt: „Sag es niemandem.“ Was ist das?",
+        "question": "Eine Gruppe stresst dich. Was ist möglich?",
         "answers": [
-          "Eine Pflicht.",
-          "Ein Warnzeichen.",
-          "Immer sicher."
+          "Immer antworten müssen.",
+          "Stumm schalten oder verlassen.",
+          "Alles lesen müssen."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Geheimhaltung und Druck sind Warnzeichen.",
-        "area": "Private Fotos"
+        "correct": 1
       },
       {
-        "question": "Was ist in WhatsApp-Gruppen wichtig?",
+        "question": "Du willst ein Foto von jemandem weiterleiten. Was machst du zuerst?",
         "answers": [
-          "Viele können mitlesen.",
-          "Private Daten gehören immer in Gruppen.",
-          "Niemand kann mitlesen."
+          "Ich frage vorher.",
+          "Ich schreibe den Namen dazu.",
+          "Ich leite es direkt weiter."
         ],
-        "correct": 0,
-        "explanation": "Richtig. In Gruppen lesen viele Menschen mit. Schreibe dort besonders vorsichtig.",
-        "area": "Gruppen"
+        "correct": 0
       },
       {
-        "question": "Welche Nachricht wirkt eher sicher?",
+        "question": "Eine Nachricht macht dir Druck. Was ist ein guter Schritt?",
         "answers": [
-          "„Schick sofort dein Passwort.“",
-          "„Klicke sofort, sonst passiert etwas.“",
-          "„Hallo. Ich komme heute um 16 Uhr.“"
+          "Sofort Geld senden.",
+          "Schnell klicken.",
+          "Stoppen und Unterstützung fragen."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Die Nachricht ist klar, freundlich und macht keinen Druck.",
-        "area": "Nachrichten"
+        "correct": 2
       },
       {
-        "question": "Was machst du, wenn dich jemand beleidigt oder bedrängt?",
+        "question": "Eine fremde Nummer schreibt dir komisch. Was machst du?",
         "answers": [
+          "Ich sende ein Foto.",
+          "Ich gebe private Daten.",
+          "Ich prüfe und antworte nicht sofort."
+        ],
+        "correct": 2
+      },
+      {
+        "question": "Was schützt dein WhatsApp-Konto?",
+        "answers": [
+          "Codes weitergeben.",
+          "Codes geheim halten.",
+          "Passwort teilen."
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Du verstehst eine Nachricht nicht. Was darfst du tun?",
+        "answers": [
+          "Alles löschen.",
+          "Nachfragen oder Hilfe holen.",
+          "Raten und senden."
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Was machst du bei Beleidigungen?",
+        "answers": [
+          "Blockieren, melden oder Hilfe holen.",
           "Alles geheim halten.",
-          "Zurück beleidigen.",
-          "Blockieren, melden oder Hilfe holen."
+          "Zurück beleidigen."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Du darfst dich schützen und Hilfe holen.",
-        "area": "Blockieren und Melden"
+        "correct": 0
       },
       {
-        "question": "Eine Sprachnachricht enthält private Informationen. Was ist wichtig?",
+        "question": "Was ist bei WhatsApp wichtig?",
         "answers": [
-          "Sie ist immer privat.",
-          "Sie kann weitergeleitet werden.",
-          "Niemand kann sie speichern."
+          "Ich muss alles teilen.",
+          "Ich muss immer sofort antworten.",
+          "Ich entscheide, was ich teile."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Auch Sprachnachrichten können weitergeleitet werden.",
-        "area": "Sprachnachrichten"
-      },
-      {
-        "question": "Was bedeutet Stopp-Regel?",
-        "answers": [
-          "Alles allein lösen.",
-          "Nicht sofort antworten, prüfen, Hilfe holen.",
-          "Sofort klicken."
-        ],
-        "correct": 1,
-        "explanation": "Richtig. Die Stopp-Regel schützt dich bei Unsicherheit.",
-        "area": "Stopp-Regel"
-      },
-      {
-        "question": "Jemand will deine PIN im Chat. Was machst du?",
-        "answers": [
-          "Nicht schicken.",
-          "In eine Gruppe posten.",
-          "Schicken, wenn die Person nett wirkt."
-        ],
-        "correct": 0,
-        "explanation": "Richtig. Eine PIN bleibt geheim.",
-        "area": "PIN und Passwort"
-      },
-      {
-        "question": "Wer kann helfen, wenn du unsicher bist?",
-        "answers": [
-          "Nur die fremde Person.",
-          "Niemand.",
-          "eine Person, der du vertraust."
-        ],
-        "correct": 2,
-        "explanation": "Richtig. Du musst Probleme nicht allein lösen.",
-        "area": "Hilfe holen"
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -1493,8 +1287,10 @@ const topics = [
     ],
     "memoryRules": [
       "Ich klicke nicht sofort auf komische Links.",
-      "Ich verschicke keine privaten Daten im Chat.",
-      "Bei Druck hole ich Hilfe."
+      "Ich gebe keine Codes weiter.",
+      "Ich frage nach, wenn eine Nachricht komisch wirkt.",
+      "Ich verlasse Gruppen, die mir nicht guttun.",
+      "Ich blockiere Kontakte, wenn ich mich unwohl fühle."
     ],
     "shortLessonIndexes": [
       0,
@@ -1540,7 +1336,7 @@ const topics = [
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "module": "Modul 1: Facebook verstehen"
       },
       {
@@ -1551,7 +1347,7 @@ const topics = [
           "Menschen können dort Beiträge, Fotos und Kommentare sehen.",
           "Du kannst mit anderen Menschen Kontakt halten."
         ],
-        "remember": "Facebook ist ein Werkzeug für Kontakt und Inhalte.",
+        "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 1: Facebook verstehen"
       },
       {
@@ -1565,7 +1361,7 @@ const topics = [
           "Beiträge schreiben",
           "Kommentare lesen"
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich teile keine privaten Daten öffentlich.",
         "module": "Modul 1: Facebook verstehen"
       },
       {
@@ -1579,7 +1375,7 @@ const topics = [
           "Kontakt halten",
           "Inhalte ansehen oder teilen"
         ],
-        "remember": "Facebook kann praktisch sein.",
+        "remember": "Ich prüfe Nachrichten von fremden Personen.",
         "module": "Modul 1: Facebook verstehen"
       },
       {
@@ -1590,7 +1386,7 @@ const topics = [
         ],
         "quote": "„Danke für die Info. Ich komme später.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 1: Facebook verstehen"
       },
       {
@@ -1601,7 +1397,7 @@ const topics = [
           "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -1616,7 +1412,7 @@ const topics = [
           "Freundesliste",
           "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -1627,7 +1423,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich teile keine privaten Daten öffentlich.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -1638,43 +1434,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich prüfe Nachrichten von fremden Personen.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "facebookPrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "question": "Eine fremde Person schickt eine Freundschaftsanfrage. Was machst du?",
           "answers": [
-            "Wer den Beitrag sehen kann.",
-            "Ob der Beitrag lang ist.",
-            "Ob genug Emojis drin sind."
+            "Ich prüfe erst, ob ich die Person kenne.",
+            "Ich nehme immer an.",
+            "Ich schicke private Daten."
           ],
           "correct": 0,
-          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+          "explanation": "Ich muss nicht jede Anfrage annehmen. Ich prüfe erst."
         }
       },
       {
@@ -1685,7 +1460,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -1696,7 +1471,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
@@ -1707,7 +1482,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile.",
+        "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
@@ -1721,7 +1496,7 @@ const topics = [
           "öffentliche Beiträge",
           "Kommentare über andere"
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich teile keine privaten Daten öffentlich.",
         "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
@@ -1732,7 +1507,7 @@ const topics = [
         ],
         "quote": "„Poste das Foto von dir. Aber sag es niemandem.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich prüfe Nachrichten von fremden Personen.",
         "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
@@ -1743,43 +1518,22 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
         "title": "Übung: Inhalt prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "facebookContent",
-          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Beiträge, Fotos und Kommentare",
         "practiceQuestion": {
-          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "question": "Du willst einen Beitrag posten. Was prüfst du?",
           "answers": [
             "Wer den Beitrag sehen kann.",
-            "Ob der Beitrag lang ist.",
-            "Ob genug Emojis drin sind."
+            "Wie schnell ich poste.",
+            "Ob viele Emojis drin sind."
           ],
           "correct": 0,
-          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+          "explanation": "Bei Facebook ist wichtig, ob ein Beitrag öffentlich ist oder nur für bestimmte Personen sichtbar ist."
         }
       },
       {
@@ -1790,7 +1544,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "module": "Modul 3: Beiträge, Fotos und Kommentare"
       },
       {
@@ -1801,7 +1555,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle.",
+        "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
@@ -1812,7 +1566,7 @@ const topics = [
           "Manche Werbung will Daten oder Geld.",
           "Manche Menschen machen Druck."
         ],
-        "remember": "Ich handle nicht sofort.",
+        "remember": "Ich teile keine privaten Daten öffentlich.",
         "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
@@ -1823,7 +1577,7 @@ const topics = [
         ],
         "quote": "Du hast gewonnen. Klicke und teile den Beitrag.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich prüfe Nachrichten von fremden Personen.",
         "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
@@ -1837,7 +1591,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
@@ -1851,43 +1605,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
         "title": "Übung: Risiko prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "facebookRisk",
-          "question": "Beitrag: „Teile sofort. Sonst wird dein Konto gelöscht.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Beiträge, Werbung und Betrug",
         "practiceQuestion": {
-          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "question": "Eine Nachricht verspricht einen Gewinn. Was machst du?",
           "answers": [
-            "Wer den Beitrag sehen kann.",
-            "Ob der Beitrag lang ist.",
-            "Ob genug Emojis drin sind."
+            "Ich prüfe, ob es echt ist.",
+            "Ich gebe sofort Daten ein.",
+            "Ich teile es an alle."
           ],
           "correct": 0,
-          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+          "explanation": "Gewinn-Nachrichten können Betrug sein. Ich gebe keine Daten ein."
         }
       },
       {
@@ -1898,7 +1631,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 4: Beiträge, Werbung und Betrug"
       },
       {
@@ -1909,7 +1642,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig.",
+        "remember": "Ich teile keine privaten Daten öffentlich.",
         "module": "Modul 5: Beiträge und Kommentare"
       },
       {
@@ -1920,7 +1653,7 @@ const topics = [
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen.",
+        "remember": "Ich prüfe Nachrichten von fremden Personen.",
         "module": "Modul 5: Beiträge und Kommentare"
       },
       {
@@ -1934,7 +1667,7 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 5: Beiträge und Kommentare"
       },
       {
@@ -1948,7 +1681,7 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "module": "Modul 5: Beiträge und Kommentare"
       },
       {
@@ -1959,43 +1692,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 5: Beiträge und Kommentare"
       },
       {
         "title": "Übung: Gute Nachricht erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "facebookGroup",
-          "question": "„Danke für die Info. Ich komme später.“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Beiträge und Kommentare",
         "practiceQuestion": {
-          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "question": "Jemand schreibt unangenehme Kommentare. Was kannst du tun?",
           "answers": [
-            "Wer den Beitrag sehen kann.",
-            "Ob der Beitrag lang ist.",
-            "Ob genug Emojis drin sind."
+            "Blockieren, melden oder Unterstützung fragen.",
+            "Alles ertragen.",
+            "Zurück beleidigen."
           ],
           "correct": 0,
-          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+          "explanation": "Ich darf mich schützen. Blockieren und Melden sind erlaubt."
         }
       },
       {
@@ -2009,7 +1721,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich teile keine privaten Daten öffentlich.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2020,7 +1732,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich prüfe Nachrichten von fremden Personen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2034,7 +1746,7 @@ const topics = [
           "auf die Person oder Seite gehen",
           "Blockieren auswählen"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2048,7 +1760,7 @@ const topics = [
           "Melden auswählen",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2064,7 +1776,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich nehme nicht jede Freundschaftsanfrage an.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2075,7 +1787,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich teile keine privaten Daten öffentlich.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2089,17 +1801,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich prüfe Nachrichten von fremden Personen.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "question": "Du siehst eine traurige oder wütende Nachricht. Was hilft?",
           "answers": [
-            "Wer den Beitrag sehen kann.",
-            "Ob der Beitrag lang ist.",
-            "Ob genug Emojis drin sind."
+            "Erst prüfen, dann teilen.",
+            "Sofort teilen.",
+            "Private Daten dazuschreiben."
           ],
           "correct": 0,
-          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+          "explanation": "Nicht alles auf Facebook ist richtig. Ich prüfe Inhalte vor dem Teilen."
         }
       },
       {
@@ -2115,132 +1827,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich kann blockieren und melden.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was prüfst du vor einem öffentlichen Beitrag?",
+          "question": "Facebook fragt nach mehr Profil-Daten. Was machst du?",
           "answers": [
-            "Wer den Beitrag sehen kann.",
-            "Ob der Beitrag lang ist.",
-            "Ob genug Emojis drin sind."
+            "Ich überlege, ob das nötig ist.",
+            "Ich fülle alles aus.",
+            "Ich schreibe meine Adresse öffentlich."
           ],
           "correct": 0,
-          "explanation": "Wichtig ist, wer den Beitrag sehen kann. Öffentliche Beiträge können viele Menschen sehen."
+          "explanation": "Mein Profil muss nicht alles über mich zeigen."
         }
       }
     ],
     "illustration": "assets/illustrations/facebook.svg",
     "quizQuestions": [
       {
-        "question": "Du möchtest schreiben: „Ich bin die ganze Woche nicht zu Hause.“ Was prüfst du?",
+        "question": "Eine fremde Person schickt eine Freundschaftsanfrage. Was machst du?",
         "answers": [
+          "Ich prüfe erst, ob ich die Person kenne.",
+          "Ich nehme immer an.",
+          "Ich schicke private Daten."
+        ],
+        "correct": 0
+      },
+      {
+        "question": "Du willst einen Beitrag posten. Was prüfst du?",
+        "answers": [
+          "Wie schnell ich poste.",
           "Wer den Beitrag sehen kann.",
-          "Ob der Beitrag lustig ist.",
-          "Ob genug Emojis drin sind."
+          "Ob viele Emojis drin sind."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Öffentliche Beiträge können von vielen gesehen werden.",
-        "area": "Öffentliche Beiträge"
+        "correct": 1
       },
       {
-        "question": "Welche Information gehört nicht öffentlich ins Profil?",
+        "question": "Eine Nachricht verspricht einen Gewinn. Was machst du?",
         "answers": [
-          "Vorname.",
-          "Adresse.",
-          "Lieblingsmusik."
+          "Ich teile es an alle.",
+          "Ich prüfe, ob es echt ist.",
+          "Ich gebe sofort Daten ein."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Die Adresse ist privat.",
-        "area": "Private Daten"
+        "correct": 1
       },
       {
-        "question": "Eine fremde Person sendet eine Freundschaftsanfrage. Was machst du?",
+        "question": "Jemand schreibt unangenehme Kommentare. Was kannst du tun?",
         "answers": [
-          "Passwort schicken.",
-          "Erst prüfen oder ablehnen.",
-          "Immer annehmen."
-        ],
-        "correct": 1,
-        "explanation": "Richtig. Fremde Anfragen müssen nicht angenommen werden.",
-        "area": "Fremde Anfragen"
-      },
-      {
-        "question": "Was ist bei Kommentaren wichtig?",
-        "answers": [
-          "Respektvoll schreiben.",
-          "Gerüchte verbreiten.",
-          "Beleidigen."
-        ],
-        "correct": 0,
-        "explanation": "Richtig. Kommentare sollen andere nicht verletzen.",
-        "area": "Kommentare"
-      },
-      {
-        "question": "Du siehst einen beleidigenden Kommentar. Was kannst du tun?",
-        "answers": [
+          "Blockieren, melden oder Unterstützung fragen.",
           "Zurück beleidigen.",
-          "Die eigene Adresse posten.",
-          "Nicht mitstreiten, melden oder Hilfe holen."
+          "Alles ertragen."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Nicht mitstreiten ist sicherer.",
-        "area": "Melden"
+        "correct": 0
       },
       {
-        "question": "Du willst ein Foto von einer anderen Person posten. Was ist richtig?",
+        "question": "Du siehst eine traurige oder wütende Nachricht. Was hilft?",
         "answers": [
-          "Nur später löschen.",
-          "Einfach posten.",
-          "Vorher fragen."
+          "Sofort teilen.",
+          "Private Daten dazuschreiben.",
+          "Erst prüfen, dann teilen."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Andere Personen entscheiden über ihre Bilder mit.",
-        "area": "Fotos"
+        "correct": 2
       },
       {
-        "question": "Was bedeutet öffentlich bei einem Beitrag?",
+        "question": "Facebook fragt nach mehr Profil-Daten. Was machst du?",
         "answers": [
-          "Nur du kannst ihn sehen.",
-          "Viele Menschen können ihn sehen.",
-          "Er verschwindet sofort."
+          "Ich schreibe meine Adresse öffentlich.",
+          "Ich fülle alles aus.",
+          "Ich überlege, ob das nötig ist."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Öffentlich bedeutet: sehr viele können mitlesen.",
-        "area": "Sichtbarkeit"
+        "correct": 2
       },
       {
-        "question": "Jemand macht Druck und will Geld. Was machst du?",
+        "question": "Du willst deine Adresse in dein Profil schreiben. Was machst du?",
         "answers": [
-          "Bankdaten schicken.",
-          "Nicht zahlen und Hilfe holen.",
-          "Sofort zahlen."
+          "Ich schreibe alles öffentlich.",
+          "Ich lasse private Daten lieber weg.",
+          "Ich teile meine Bankdaten."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Druck und Geldforderungen sind Warnzeichen.",
-        "area": "Druck und Geld"
+        "correct": 1
       },
       {
-        "question": "Was darfst du bei Belästigung tun?",
+        "question": "Ein Beitrag macht dich sehr wütend. Was hilft?",
         "answers": [
-          "Blockieren und melden.",
-          "Zurück drohen.",
-          "Alles geheim halten."
+          "Private Daten posten.",
+          "Erst ruhig bleiben und prüfen.",
+          "Sofort beleidigen."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Blockieren und Melden kann schützen.",
-        "area": "Blockieren"
+        "correct": 1
       },
       {
-        "question": "Was ist ein guter Facebook-Merksatz?",
+        "question": "Du siehst einen fremden Link in Facebook. Was machst du?",
         "answers": [
-          "Ich teile alles sofort.",
-          "Fremde bekommen alle Daten.",
-          "Ich prüfe, bevor ich teile."
+          "Ich klicke nicht sofort.",
+          "Ich teile ihn sofort.",
+          "Ich gebe mein Passwort ein."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Prüfen vor dem Teilen schützt dich.",
-        "area": "Merksatz"
+        "correct": 0
+      },
+      {
+        "question": "Du möchtest deine Sichtbarkeit prüfen. Was suchst du?",
+        "answers": [
+          "Nur Emojis.",
+          "Nur die Farbe der App.",
+          "Privatsphäre-Einstellungen."
+        ],
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -2255,8 +1947,10 @@ const topics = [
     ],
     "memoryRules": [
       "Ich prüfe, wer meinen Beitrag sehen kann.",
-      "Ich nehme fremde Anfragen nicht sofort an.",
-      "Bei Beleidigungen kann ich blockieren oder melden."
+      "Ich nehme nicht jede Freundschaftsanfrage an.",
+      "Ich teile keine privaten Daten öffentlich.",
+      "Ich prüfe Nachrichten von fremden Personen.",
+      "Ich kann blockieren und melden."
     ],
     "shortLessonIndexes": [
       0,
@@ -2302,7 +1996,7 @@ const topics = [
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
+        "remember": "Ich frage, bevor ich Fotos von anderen poste.",
         "module": "Modul 1: Instagram verstehen"
       },
       {
@@ -2313,7 +2007,7 @@ const topics = [
           "Viele Inhalte sind sichtbar für andere.",
           "Darum ist Privatsphäre wichtig."
         ],
-        "remember": "Instagram ist ein Werkzeug für Kontakt und Inhalte.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 1: Instagram verstehen"
       },
       {
@@ -2327,7 +2021,7 @@ const topics = [
           "Stories posten",
           "Reels anschauen"
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich prüfe Nachrichten von fremden Profilen.",
         "module": "Modul 1: Instagram verstehen"
       },
       {
@@ -2341,7 +2035,7 @@ const topics = [
           "Kontakt halten",
           "Inhalte ansehen oder teilen"
         ],
-        "remember": "Instagram kann praktisch sein.",
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
         "module": "Modul 1: Instagram verstehen"
       },
       {
@@ -2352,7 +2046,7 @@ const topics = [
         ],
         "quote": "„Danke für deine Nachricht. Ich antworte später.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 1: Instagram verstehen"
       },
       {
@@ -2363,7 +2057,7 @@ const topics = [
           "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich frage, bevor ich Fotos von anderen poste.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -2378,7 +2072,7 @@ const topics = [
           "Standort",
           "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -2389,7 +2083,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich prüfe Nachrichten von fremden Profilen.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -2400,43 +2094,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "instagramPrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "question": "Du willst ein Foto mit einer anderen Person posten. Was machst du?",
           "answers": [
-            "Ich frage vorher.",
+            "Ich frage die Person vorher.",
             "Ich poste es sofort.",
-            "Ich markiere die Person einfach."
+            "Ich markiere sie heimlich."
           ],
           "correct": 0,
-          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+          "explanation": "Andere Menschen dürfen mitentscheiden, ob ein Foto von ihnen online ist."
         }
       },
       {
@@ -2447,7 +2120,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -2458,7 +2131,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich frage, bevor ich Fotos von anderen poste.",
         "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
@@ -2469,7 +2142,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
@@ -2483,7 +2156,7 @@ const topics = [
           "Stories mit Standort",
           "Videos mit anderen Personen"
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich prüfe Nachrichten von fremden Profilen.",
         "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
@@ -2494,7 +2167,7 @@ const topics = [
         ],
         "quote": "„Schick mir ein privates Foto. Sag es niemandem.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
         "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
@@ -2505,43 +2178,22 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
         "title": "Übung: Inhalt prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "instagramContent",
-          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Fotos, Stories und Reels",
         "practiceQuestion": {
-          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "question": "Instagram schlägt dir vor, den Standort zu teilen. Was machst du?",
           "answers": [
-            "Ich frage vorher.",
-            "Ich poste es sofort.",
-            "Ich markiere die Person einfach."
+            "Ich prüfe, ob ich das wirklich möchte.",
+            "Ich teile ihn immer.",
+            "Ich teile ihn mit Fremden."
           ],
           "correct": 0,
-          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+          "explanation": "Mein Standort ist privat. Ich muss ihn nicht teilen."
         }
       },
       {
@@ -2552,7 +2204,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich frage, bevor ich Fotos von anderen poste.",
         "module": "Modul 3: Fotos, Stories und Reels"
       },
       {
@@ -2563,7 +2215,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
@@ -2574,7 +2226,7 @@ const topics = [
           "Manche Werbung verspricht zu viel.",
           "Manche Links führen zu Betrug."
         ],
-        "remember": "Ich handle nicht sofort.",
+        "remember": "Ich prüfe Nachrichten von fremden Profilen.",
         "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
@@ -2585,7 +2237,7 @@ const topics = [
         ],
         "quote": "Du hast gewonnen. Klicke sofort in meiner Bio.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
         "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
@@ -2599,7 +2251,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
@@ -2613,43 +2265,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich frage, bevor ich Fotos von anderen poste.",
         "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
         "title": "Übung: Risiko prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "instagramRisk",
-          "question": "Nachricht: „Klicke sofort auf den Link in der Bio.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Stories, Werbung und Betrug",
         "practiceQuestion": {
-          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "question": "Ein fremdes Profil schreibt dir Komplimente und will private Bilder. Was machst du?",
           "answers": [
-            "Ich frage vorher.",
-            "Ich poste es sofort.",
-            "Ich markiere die Person einfach."
+            "Ich sende keine privaten Bilder.",
+            "Ich sende sofort Bilder.",
+            "Ich gebe meine Adresse."
           ],
           "correct": 0,
-          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+          "explanation": "Private Bilder bleiben privat. Bei Druck hole ich Hilfe."
         }
       },
       {
@@ -2660,7 +2291,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 4: Stories, Werbung und Betrug"
       },
       {
@@ -2671,7 +2302,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig.",
+        "remember": "Ich prüfe Nachrichten von fremden Profilen.",
         "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
@@ -2682,7 +2313,7 @@ const topics = [
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen.",
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
         "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
@@ -2696,7 +2327,7 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
@@ -2710,7 +2341,7 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich frage, bevor ich Fotos von anderen poste.",
         "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
@@ -2721,43 +2352,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 5: Kommentare und Nachrichten"
       },
       {
         "title": "Übung: Gute Nachricht erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "instagramGroup",
-          "question": "„Danke für deine Nachricht. Ich antworte später.“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Kommentare und Nachrichten",
         "practiceQuestion": {
-          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "question": "Ein Kommentar verletzt dich. Was kannst du tun?",
           "answers": [
-            "Ich frage vorher.",
-            "Ich poste es sofort.",
-            "Ich markiere die Person einfach."
+            "Blockieren, melden oder Hilfe holen.",
+            "Sofort zurückschreiben.",
+            "Alles aushalten."
           ],
           "correct": 0,
-          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+          "explanation": "Ich darf mich schützen. Ich muss verletzende Kommentare nicht allein lösen."
         }
       },
       {
@@ -2771,7 +2381,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich prüfe Nachrichten von fremden Profilen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2782,7 +2392,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2796,7 +2406,7 @@ const topics = [
           "auf die drei Punkte tippen",
           "Blockieren auswählen"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich kann blockieren und melden.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2810,7 +2420,7 @@ const topics = [
           "Melden auswählen",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich frage, bevor ich Fotos von anderen poste.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2826,7 +2436,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2837,7 +2447,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich prüfe Nachrichten von fremden Profilen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -2851,17 +2461,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "question": "Du siehst Werbung für ein angeblich kostenloses Produkt. Was machst du?",
           "answers": [
-            "Ich frage vorher.",
-            "Ich poste es sofort.",
-            "Ich markiere die Person einfach."
+            "Ich prüfe, ob Kosten entstehen.",
+            "Ich gebe sofort Daten ein.",
+            "Ich teile meine Bankdaten."
           ],
           "correct": 0,
-          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+          "explanation": "Werbung kann täuschen. Ich prüfe erst."
         }
       },
       {
@@ -2877,132 +2487,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich kann blockieren und melden.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
+          "question": "Du möchtest eine Story posten. Was prüfst du?",
           "answers": [
-            "Ich frage vorher.",
-            "Ich poste es sofort.",
-            "Ich markiere die Person einfach."
+            "Wer die Story sehen kann.",
+            "Ob alle sie sehen müssen.",
+            "Ob private Daten sichtbar sind egal."
           ],
           "correct": 0,
-          "explanation": "Du fragst vorher. Andere Personen entscheiden über ihre Bilder mit."
+          "explanation": "Stories können von anderen gesehen oder gespeichert werden. Ich prüfe vorher."
         }
       }
     ],
     "illustration": "assets/illustrations/instagram.svg",
     "quizQuestions": [
       {
-        "question": "Du willst ein Foto posten, auf dem eine andere Person zu sehen ist. Was machst du?",
+        "question": "Du willst ein Foto mit einer anderen Person posten. Was machst du?",
         "answers": [
-          "Vorher fragen.",
-          "Einfach posten.",
-          "Person markieren, ohne zu fragen."
+          "Ich frage die Person vorher.",
+          "Ich poste es sofort.",
+          "Ich markiere sie heimlich."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Andere Personen müssen einverstanden sein.",
-        "area": "Fotos"
+        "correct": 0
       },
       {
-        "question": "Warum ist Standort in Stories sensibel?",
+        "question": "Instagram schlägt dir vor, den Standort zu teilen. Was machst du?",
         "answers": [
-          "Er macht dich automatisch sicher.",
-          "Er zeigt, wo du bist.",
-          "Er ist immer egal."
+          "Ich teile ihn immer.",
+          "Ich prüfe, ob ich das wirklich möchte.",
+          "Ich teile ihn mit Fremden."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Der Standort kann verraten, wo du bist.",
-        "area": "Standort"
+        "correct": 1
       },
       {
-        "question": "Was bedeutet ein privates Profil?",
+        "question": "Ein fremdes Profil schreibt dir Komplimente und will private Bilder. Was machst du?",
         "answers": [
-          "Niemand kann die App nutzen.",
-          "Nicht alle können alles sehen.",
-          "Alle sehen alles."
+          "Ich gebe meine Adresse.",
+          "Ich sende keine privaten Bilder.",
+          "Ich sende sofort Bilder."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Ein privates Profil kann besser schützen.",
-        "area": "Privates Profil"
+        "correct": 1
       },
       {
-        "question": "Jemand schreibt: „Schick mir ein privates Foto.“ Was machst du?",
+        "question": "Ein Kommentar verletzt dich. Was kannst du tun?",
         "answers": [
-          "Nein sagen und Hilfe holen.",
-          "Geheim halten.",
-          "Foto schicken."
+          "Blockieren, melden oder Hilfe holen.",
+          "Alles aushalten.",
+          "Sofort zurückschreiben."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Du musst keine privaten Fotos schicken.",
-        "area": "Private Nachrichten"
+        "correct": 0
       },
       {
-        "question": "Was ist bei Likes wichtig?",
+        "question": "Du siehst Werbung für ein angeblich kostenloses Produkt. Was machst du?",
         "answers": [
-          "Likes entscheiden alles.",
-          "Ohne Likes bist du falsch.",
-          "Likes sagen nichts über deinen Wert."
+          "Ich gebe sofort Daten ein.",
+          "Ich teile meine Bankdaten.",
+          "Ich prüfe, ob Kosten entstehen."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Dein Wert hängt nicht von Likes ab.",
-        "area": "Likes und Druck"
+        "correct": 2
       },
       {
-        "question": "Eine Story verschwindet später. Ist sie deshalb immer sicher?",
+        "question": "Du möchtest eine Story posten. Was prüfst du?",
         "answers": [
-          "Nur bei Fremden.",
-          "Ja, immer.",
-          "Nein, jemand kann sie speichern."
+          "Ob private Daten sichtbar sind egal.",
+          "Ob alle sie sehen müssen.",
+          "Wer die Story sehen kann."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Auch Stories können per Screenshot gespeichert werden.",
-        "area": "Stories"
+        "correct": 2
       },
       {
-        "question": "Was machst du bei beleidigenden Kommentaren?",
+        "question": "Du bekommst eine Nachricht von einem fremden Profil. Was machst du?",
         "answers": [
-          "Zurück beleidigen.",
-          "Nicht mitstreiten, blockieren oder melden.",
-          "Private Daten posten."
+          "Ich sende meine Adresse.",
+          "Ich bin vorsichtig und gebe keine Daten.",
+          "Ich sende private Fotos."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Du darfst dich schützen.",
-        "area": "Kommentare"
+        "correct": 1
       },
       {
-        "question": "Eine Nachricht macht Druck: „Klicke sofort auf den Link.“ Was machst du?",
+        "question": "Du postest eine Story. Was prüfst du?",
         "answers": [
-          "An alle weiterleiten.",
-          "Nicht sofort klicken.",
-          "Sofort klicken."
+          "Ob mein Passwort sichtbar ist.",
+          "Wer sie sehen kann.",
+          "Ob alle sie sehen müssen."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Druck und Links sind Warnzeichen.",
-        "area": "Links"
+        "correct": 1
       },
       {
-        "question": "Was ist eine gute Instagram-Regel?",
+        "question": "Ein Gewinnspiel fragt nach Bankdaten. Was machst du?",
         "answers": [
-          "Vor dem Posten überlegen.",
-          "Standort immer zeigen.",
-          "Alles sofort posten."
+          "Ich gebe keine Bankdaten ein.",
+          "Ich teile es weiter.",
+          "Ich sende alles."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Vorher überlegen schützt dich und andere.",
-        "area": "Merksatz"
+        "correct": 0
       },
       {
-        "question": "Wer kann helfen, wenn dich etwas belastet?",
+        "question": "Was machst du bei einem unangenehmen Profil?",
         "answers": [
-          "Nur fremde Follower.",
-          "Niemand.",
-          "eine Person, der du vertraust."
+          "Immer antworten.",
+          "Private Daten schicken.",
+          "Blockieren oder melden."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Hilfe holen ist erlaubt.",
-        "area": "Hilfe holen"
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -3016,9 +2606,11 @@ const topics = [
       "Was mache ich bei einer komischen Nachricht?"
     ],
     "memoryRules": [
-      "Ich frage vorher, bevor ich Fotos von anderen poste.",
-      "Ich teile meinen Standort nicht ohne Grund.",
-      "Likes sagen nichts über meinen Wert."
+      "Ich frage, bevor ich Fotos von anderen poste.",
+      "Ich teile meinen Standort nicht automatisch.",
+      "Ich prüfe Nachrichten von fremden Profilen.",
+      "Ich muss nicht auf Kommentare reagieren.",
+      "Ich kann blockieren und melden."
     ],
     "shortLessonIndexes": [
       0,
@@ -3064,7 +2656,7 @@ const topics = [
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
+        "remember": "Ich glaube nicht jedes Video sofort.",
         "module": "Modul 1: YouTube verstehen"
       },
       {
@@ -3075,7 +2667,7 @@ const topics = [
           "Du kannst Videos ansehen und Kommentare lesen.",
           "Nicht jedes Video ist richtig oder sicher."
         ],
-        "remember": "YouTube ist ein Werkzeug für Kontakt und Inhalte.",
+        "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 1: YouTube verstehen"
       },
       {
@@ -3089,7 +2681,7 @@ const topics = [
           "Kanäle abonnieren",
           "Kommentare lesen"
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich achte auf Werbung.",
         "module": "Modul 1: YouTube verstehen"
       },
       {
@@ -3103,7 +2695,7 @@ const topics = [
           "Kontakt halten",
           "Inhalte ansehen oder teilen"
         ],
-        "remember": "YouTube kann praktisch sein.",
+        "remember": "Ich mache Pause, wenn Videos zu viel werden.",
         "module": "Modul 1: YouTube verstehen"
       },
       {
@@ -3114,7 +2706,7 @@ const topics = [
         ],
         "quote": "„Danke für das Video. Das hat mir geholfen.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll.",
+        "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "module": "Modul 1: YouTube verstehen"
       },
       {
@@ -3125,7 +2717,7 @@ const topics = [
           "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich glaube nicht jedes Video sofort.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3140,7 +2732,7 @@ const topics = [
           "Interessen",
           "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3151,7 +2743,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich achte auf Werbung.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3162,43 +2754,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich mache Pause, wenn Videos zu viel werden.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "youtubePrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Was hilft beim Prüfen eines Videos?",
+          "question": "Ein Video behauptet etwas sehr Erschreckendes. Was machst du?",
           "answers": [
-            "Quelle und Inhalt ansehen.",
-            "Nur die Farbe ansehen.",
-            "Nur die Länge ansehen."
+            "Ich prüfe die Quelle.",
+            "Ich glaube es sofort.",
+            "Ich teile es direkt."
           ],
           "correct": 0,
-          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+          "explanation": "Nicht jedes Video ist richtig. Ich prüfe, wer es gemacht hat."
         }
       },
       {
@@ -3209,7 +2780,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3220,7 +2791,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich glaube nicht jedes Video sofort.",
         "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
@@ -3231,7 +2802,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile.",
+        "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
@@ -3245,7 +2816,7 @@ const topics = [
           "peinliche Videos",
           "Videos mit anderen Personen"
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich achte auf Werbung.",
         "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
@@ -3256,7 +2827,7 @@ const topics = [
         ],
         "quote": "„Schreib deine Telefonnummer in die Kommentare.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich mache Pause, wenn Videos zu viel werden.",
         "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
@@ -3267,43 +2838,22 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
         "title": "Übung: Inhalt prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "youtubeContent",
-          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Videos, Kommentare und Werbung",
         "practiceQuestion": {
-          "question": "Was hilft beim Prüfen eines Videos?",
+          "question": "Ein Video ist Werbung, sieht aber wie ein Tipp aus. Was machst du?",
           "answers": [
-            "Quelle und Inhalt ansehen.",
-            "Nur die Farbe ansehen.",
-            "Nur die Länge ansehen."
+            "Ich achte auf Werbung und Kosten.",
+            "Ich kaufe sofort.",
+            "Ich gebe Daten ein."
           ],
           "correct": 0,
-          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+          "explanation": "Werbung will oft etwas verkaufen. Ich prüfe vorher."
         }
       },
       {
@@ -3314,7 +2864,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich glaube nicht jedes Video sofort.",
         "module": "Modul 3: Videos, Kommentare und Werbung"
       },
       {
@@ -3325,7 +2875,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle.",
+        "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
@@ -3336,7 +2886,7 @@ const topics = [
           "Manche Werbung will Geld.",
           "Manche Kommentare sind Betrug."
         ],
-        "remember": "Ich handle nicht sofort.",
+        "remember": "Ich achte auf Werbung.",
         "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
@@ -3347,7 +2897,7 @@ const topics = [
         ],
         "quote": "Kaufe sofort. Nur heute wirst du reich.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich mache Pause, wenn Videos zu viel werden.",
         "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
@@ -3361,7 +2911,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
@@ -3375,43 +2925,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich glaube nicht jedes Video sofort.",
         "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
         "title": "Übung: Risiko prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "youtubeRisk",
-          "question": "Video: „Kaufe sofort. Nur heute wirst du reich.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Werbung, Fake News und Betrug",
         "practiceQuestion": {
-          "question": "Was hilft beim Prüfen eines Videos?",
+          "question": "Autoplay zeigt immer weiter Videos. Was kannst du tun?",
           "answers": [
-            "Quelle und Inhalt ansehen.",
-            "Nur die Farbe ansehen.",
-            "Nur die Länge ansehen."
+            "Pause machen oder Autoplay stoppen.",
+            "Immer weiter schauen müssen.",
+            "Die ganze Nacht schauen."
           ],
           "correct": 0,
-          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+          "explanation": "Ich darf Pausen machen. Ich entscheide, wann Schluss ist."
         }
       },
       {
@@ -3422,7 +2951,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 4: Werbung, Fake News und Betrug"
       },
       {
@@ -3433,7 +2962,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig.",
+        "remember": "Ich achte auf Werbung.",
         "module": "Modul 5: Kommentare und Community"
       },
       {
@@ -3444,7 +2973,7 @@ const topics = [
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen.",
+        "remember": "Ich mache Pause, wenn Videos zu viel werden.",
         "module": "Modul 5: Kommentare und Community"
       },
       {
@@ -3458,7 +2987,7 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "module": "Modul 5: Kommentare und Community"
       },
       {
@@ -3472,7 +3001,7 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich glaube nicht jedes Video sofort.",
         "module": "Modul 5: Kommentare und Community"
       },
       {
@@ -3483,43 +3012,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 5: Kommentare und Community"
       },
       {
         "title": "Übung: Gute Nachricht erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "youtubeGroup",
-          "question": "„Danke für das Video. Das hat mir geholfen.“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Kommentare und Community",
         "practiceQuestion": {
-          "question": "Was hilft beim Prüfen eines Videos?",
+          "question": "In den Kommentaren beleidigt jemand andere. Was machst du?",
           "answers": [
-            "Quelle und Inhalt ansehen.",
-            "Nur die Farbe ansehen.",
-            "Nur die Länge ansehen."
+            "Nicht mitmachen und Hilfe holen, wenn nötig.",
+            "Mitbeleidigen.",
+            "Private Daten schreiben."
           ],
           "correct": 0,
-          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+          "explanation": "Beleidigungen sind nicht okay. Ich muss nicht mitmachen."
         }
       },
       {
@@ -3533,7 +3041,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich achte auf Werbung.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3544,7 +3052,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich mache Pause, wenn Videos zu viel werden.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3558,7 +3066,7 @@ const topics = [
           "Nutzer blockieren, wenn möglich",
           "eine Person fragen, der du vertraust"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3572,7 +3080,7 @@ const topics = [
           "Melden auswählen",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich glaube nicht jedes Video sofort.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3588,7 +3096,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich prüfe, wer das Video gemacht hat.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3599,7 +3107,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich achte auf Werbung.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -3613,17 +3121,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich mache Pause, wenn Videos zu viel werden.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was hilft beim Prüfen eines Videos?",
+          "question": "Ein YouTuber sagt: „Klick schnell auf den Link.“ Was machst du?",
           "answers": [
-            "Quelle und Inhalt ansehen.",
-            "Nur die Farbe ansehen.",
-            "Nur die Länge ansehen."
+            "Ich prüfe den Link erst.",
+            "Ich klicke sofort.",
+            "Ich gebe Passwort ein."
           ],
           "correct": 0,
-          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+          "explanation": "Links unter Videos können riskant sein. Ich prüfe erst."
         }
       },
       {
@@ -3639,132 +3147,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich frage nach, wenn mir ein Video Angst macht.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was hilft beim Prüfen eines Videos?",
+          "question": "Ein Video macht dir Angst. Was machst du?",
           "answers": [
-            "Quelle und Inhalt ansehen.",
-            "Nur die Farbe ansehen.",
-            "Nur die Länge ansehen."
+            "Ich stoppe das Video und spreche mit jemandem.",
+            "Ich schaue weiter, obwohl es mir schlecht geht.",
+            "Ich teile es mit allen."
           ],
           "correct": 0,
-          "explanation": "Quelle und Inhalt helfen dir. Nicht jedes Video ist richtig."
+          "explanation": "Ich darf Videos stoppen. Ich darf Unterstützung holen."
         }
       }
     ],
     "illustration": "assets/illustrations/youtube.svg",
     "quizQuestions": [
       {
-        "question": "Was solltest du bei einem Video prüfen?",
+        "question": "Ein Video behauptet etwas sehr Erschreckendes. Was machst du?",
         "answers": [
-          "Quelle und Inhalt.",
-          "Nur die Lautstärke.",
-          "Nur die Farbe."
+          "Ich prüfe die Quelle.",
+          "Ich glaube es sofort.",
+          "Ich teile es direkt."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Quelle und Inhalt helfen beim Einschätzen.",
-        "area": "Quellen prüfen"
+        "correct": 0
       },
       {
-        "question": "Was will Werbung oft?",
+        "question": "Ein Video ist Werbung, sieht aber wie ein Tipp aus. Was machst du?",
         "answers": [
-          "Immer nur helfen.",
-          "Etwas verkaufen.",
-          "Nie beeinflussen."
+          "Ich kaufe sofort.",
+          "Ich achte auf Werbung und Kosten.",
+          "Ich gebe Daten ein."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Werbung will oft zum Kaufen bewegen.",
-        "area": "Werbung"
+        "correct": 1
       },
       {
-        "question": "Ein Video sagt: „Kaufe sofort, dann wirst du reich.“ Was ist das?",
+        "question": "Autoplay zeigt immer weiter Videos. Was kannst du tun?",
         "answers": [
-          "Eine sichere Hilfe.",
-          "Ein Warnzeichen.",
-          "Immer richtig."
+          "Die ganze Nacht schauen.",
+          "Pause machen oder Autoplay stoppen.",
+          "Immer weiter schauen müssen."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Große Versprechen und Druck sind Warnzeichen.",
-        "area": "Werbung und Druck"
+        "correct": 1
       },
       {
-        "question": "Was machst du bei Hass-Kommentaren?",
+        "question": "In den Kommentaren beleidigt jemand andere. Was machst du?",
         "answers": [
-          "Nicht mitstreiten, melden oder Hilfe holen.",
-          "Adresse posten.",
-          "Zurück beleidigen."
+          "Nicht mitmachen und Hilfe holen, wenn nötig.",
+          "Private Daten schreiben.",
+          "Mitbeleidigen."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Nicht mitstreiten ist sicherer.",
-        "area": "Kommentare"
+        "correct": 0
       },
       {
-        "question": "Warum sind Pausen wichtig?",
+        "question": "Ein YouTuber sagt: „Klick schnell auf den Link.“ Was machst du?",
         "answers": [
-          "Pausen sind verboten.",
-          "YouTube darf nie genutzt werden.",
-          "Videos können lange fesseln."
+          "Ich klicke sofort.",
+          "Ich gebe Passwort ein.",
+          "Ich prüfe den Link erst."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Pausen helfen beim bewussten Nutzen.",
-        "area": "Pausen"
+        "correct": 2
       },
       {
-        "question": "Was machst du bei falschen Informationen?",
+        "question": "Ein Video macht dir Angst. Was machst du?",
         "answers": [
-          "An alle schicken.",
-          "Sofort glauben.",
-          "Prüfen und nachfragen."
+          "Ich teile es mit allen.",
+          "Ich schaue weiter, obwohl es mir schlecht geht.",
+          "Ich stoppe das Video und spreche mit jemandem."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Nicht alles im Internet stimmt.",
-        "area": "Falsche Informationen"
+        "correct": 2
       },
       {
-        "question": "Was solltest du nicht in Kommentare schreiben?",
+        "question": "Ein Video empfiehlt ein gefährliches Experiment. Was machst du?",
         "answers": [
-          "Danke.",
-          "Private Daten.",
-          "Eine freundliche Frage."
+          "Ich mache sofort mit.",
+          "Ich mache es nicht nach.",
+          "Ich fordere andere auf."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Private Daten gehören nicht in Kommentare.",
-        "area": "Private Daten"
+        "correct": 1
       },
       {
-        "question": "Ein Kanal fordert dein Passwort. Was machst du?",
+        "question": "Ein Video hat einen Kauf-Link. Was prüfst du?",
         "answers": [
-          "In die Kommentare schreiben.",
-          "Nicht senden.",
-          "Senden."
+          "Nur die Farbe.",
+          "Ob es Werbung oder Kosten sind.",
+          "Nur die Musik."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Passwörter bleiben geheim.",
-        "area": "Passwort"
+        "correct": 1
       },
       {
-        "question": "Was kannst du bei problematischen Videos tun?",
+        "question": "Du schaust schon sehr lange Videos. Was hilft?",
         "answers": [
-          "Melden oder Hilfe holen.",
-          "Private Daten senden.",
-          "Alles nachmachen."
+          "Pause machen.",
+          "Nicht schlafen.",
+          "Immer weiter schauen."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Melden und Hilfe holen sind Schutzmöglichkeiten.",
-        "area": "Melden"
+        "correct": 0
       },
       {
-        "question": "Was ist ein guter YouTube-Merksatz?",
+        "question": "Du willst wissen, ob ein Video stimmt. Was prüfst du?",
         "answers": [
-          "Jedes Video ist wahr.",
-          "Werbung ist immer Rat.",
-          "Ich prüfe, bevor ich glaube."
+          "Nur den Titel.",
+          "Nur das Bild.",
+          "Quelle und andere Informationen."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Prüfen ist wichtig.",
-        "area": "Merksatz"
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -3778,9 +3266,11 @@ const topics = [
       "Soll ich diesen Kommentar melden?"
     ],
     "memoryRules": [
-      "Ich prüfe, ob ein Video glaubwürdig ist.",
-      "Ich erkenne Werbung und große Versprechen.",
-      "Ich mache Pausen."
+      "Ich glaube nicht jedes Video sofort.",
+      "Ich prüfe, wer das Video gemacht hat.",
+      "Ich achte auf Werbung.",
+      "Ich mache Pause, wenn Videos zu viel werden.",
+      "Ich frage nach, wenn mir ein Video Angst macht."
     ],
     "shortLessonIndexes": [
       0,
@@ -3826,7 +3316,7 @@ const topics = [
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
+        "remember": "Ich denke daran: Snaps können gespeichert werden.",
         "module": "Modul 1: Snapchat verstehen"
       },
       {
@@ -3837,7 +3327,7 @@ const topics = [
           "Manche Inhalte verschwinden schnell.",
           "Trotzdem können sie gespeichert werden."
         ],
-        "remember": "Snapchat ist ein Werkzeug für Kontakt und Inhalte.",
+        "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 1: Snapchat verstehen"
       },
       {
@@ -3851,7 +3341,7 @@ const topics = [
           "Chats schreiben",
           "Storys ansehen"
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 1: Snapchat verstehen"
       },
       {
@@ -3865,7 +3355,7 @@ const topics = [
           "Kontakt halten",
           "Inhalte ansehen oder teilen"
         ],
-        "remember": "Snapchat kann praktisch sein.",
+        "remember": "Ich reagiere nicht auf Druck.",
         "module": "Modul 1: Snapchat verstehen"
       },
       {
@@ -3876,7 +3366,7 @@ const topics = [
         ],
         "quote": "„Ich melde mich später. Danke.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll.",
+        "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "module": "Modul 1: Snapchat verstehen"
       },
       {
@@ -3887,7 +3377,7 @@ const topics = [
           "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich denke daran: Snaps können gespeichert werden.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3902,7 +3392,7 @@ const topics = [
           "Fotos von dir",
           "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3913,7 +3403,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3924,43 +3414,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich reagiere nicht auf Druck.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "snapchatPrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Sind Snaps immer sicher weg?",
+          "question": "Jemand sagt: „Der Snap verschwindet ja wieder.“ Was ist richtig?",
           "answers": [
-            "Nein, sie können gespeichert werden.",
-            "Ja, immer.",
-            "Nur bei Freunden."
+            "Er kann trotzdem gespeichert werden.",
+            "Er ist immer sicher weg.",
+            "Niemand kann ihn sehen."
           ],
           "correct": 0,
-          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+          "explanation": "Snaps können per Screenshot oder anderem Gerät gespeichert werden."
         }
       },
       {
@@ -3971,7 +3440,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -3982,7 +3451,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich denke daran: Snaps können gespeichert werden.",
         "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
@@ -3993,7 +3462,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile.",
+        "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
@@ -4007,7 +3476,7 @@ const topics = [
           "Standort",
           "peinliche Snaps"
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
@@ -4018,7 +3487,7 @@ const topics = [
         ],
         "quote": "„Schick mir einen privaten Snap. Ich speichere ihn nicht.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich reagiere nicht auf Druck.",
         "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
@@ -4029,43 +3498,22 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
         "title": "Übung: Inhalt prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "snapchatContent",
-          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Snaps, Fotos und Standort",
         "practiceQuestion": {
-          "question": "Sind Snaps immer sicher weg?",
+          "question": "Jemand möchte ein peinliches Bild von dir. Was machst du?",
           "answers": [
-            "Nein, sie können gespeichert werden.",
-            "Ja, immer.",
-            "Nur bei Freunden."
+            "Ich sende es nicht.",
+            "Ich sende es, weil es verschwindet.",
+            "Ich sende noch mehr Bilder."
           ],
           "correct": 0,
-          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+          "explanation": "Ich entscheide über meine Bilder. Ich darf Nein sagen."
         }
       },
       {
@@ -4076,7 +3524,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich denke daran: Snaps können gespeichert werden.",
         "module": "Modul 3: Snaps, Fotos und Standort"
       },
       {
@@ -4087,7 +3535,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle.",
+        "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
@@ -4098,7 +3546,7 @@ const topics = [
           "Standort kann privat sein.",
           "Fremde können Druck machen."
         ],
-        "remember": "Ich handle nicht sofort.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
@@ -4109,7 +3557,7 @@ const topics = [
         ],
         "quote": "Schalte deinen Standort an. Ich will sehen, wo du bist.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich reagiere nicht auf Druck.",
         "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
@@ -4123,7 +3571,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
@@ -4137,43 +3585,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich denke daran: Snaps können gespeichert werden.",
         "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
         "title": "Übung: Risiko prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "snapchatRisk",
-          "question": "Nachricht: „Schick den Snap sofort. Sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Screenshots, Druck und Betrug",
         "practiceQuestion": {
-          "question": "Sind Snaps immer sicher weg?",
+          "question": "Snapchat möchte deinen Standort zeigen. Was machst du?",
           "answers": [
-            "Nein, sie können gespeichert werden.",
-            "Ja, immer.",
-            "Nur bei Freunden."
+            "Ich prüfe die Standort-Einstellung.",
+            "Ich zeige meinen Standort immer.",
+            "Ich zeige ihn Fremden."
           ],
           "correct": 0,
-          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+          "explanation": "Mein Standort ist privat. Ich muss ihn nicht zeigen."
         }
       },
       {
@@ -4184,7 +3611,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 4: Screenshots, Druck und Betrug"
       },
       {
@@ -4195,7 +3622,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 5: Kontakte und Storys"
       },
       {
@@ -4206,7 +3633,7 @@ const topics = [
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen.",
+        "remember": "Ich reagiere nicht auf Druck.",
         "module": "Modul 5: Kontakte und Storys"
       },
       {
@@ -4220,7 +3647,7 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "module": "Modul 5: Kontakte und Storys"
       },
       {
@@ -4234,7 +3661,7 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich denke daran: Snaps können gespeichert werden.",
         "module": "Modul 5: Kontakte und Storys"
       },
       {
@@ -4245,43 +3672,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 5: Kontakte und Storys"
       },
       {
         "title": "Übung: Gute Nachricht erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "snapchatGroup",
-          "question": "„Ich melde mich später. Danke.“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Kontakte und Storys",
         "practiceQuestion": {
-          "question": "Sind Snaps immer sicher weg?",
+          "question": "Ein Kontakt macht Druck. Was kannst du tun?",
           "answers": [
-            "Nein, sie können gespeichert werden.",
-            "Ja, immer.",
-            "Nur bei Freunden."
+            "Stoppen, blockieren oder Hilfe holen.",
+            "Nachgeben.",
+            "Private Daten senden."
           ],
           "correct": 0,
-          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+          "explanation": "Druck ist ein Warnzeichen. Ich darf Unterstützung holen."
         }
       },
       {
@@ -4295,7 +3701,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -4306,7 +3712,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich reagiere nicht auf Druck.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -4320,7 +3726,7 @@ const topics = [
           "auf Optionen tippen",
           "Blockieren auswählen"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -4334,7 +3740,7 @@ const topics = [
           "Melden auswählen",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich denke daran: Snaps können gespeichert werden.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -4350,7 +3756,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich sende keine Bilder, die mir unangenehm sind.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -4361,7 +3767,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich teile meinen Standort nicht automatisch.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -4375,17 +3781,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich reagiere nicht auf Druck.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Sind Snaps immer sicher weg?",
+          "question": "Du bekommst eine Nachricht von einer fremden Person. Was machst du?",
           "answers": [
-            "Nein, sie können gespeichert werden.",
-            "Ja, immer.",
-            "Nur bei Freunden."
+            "Ich prüfe und antworte nicht sofort.",
+            "Ich sende Bilder.",
+            "Ich sage meine Adresse."
           ],
           "correct": 0,
-          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+          "explanation": "Bei fremden Personen bin ich vorsichtig."
         }
       },
       {
@@ -4401,132 +3807,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich hole Hilfe, wenn mir etwas Angst macht.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Sind Snaps immer sicher weg?",
+          "question": "Du bereust einen Snap. Was machst du?",
           "answers": [
-            "Nein, sie können gespeichert werden.",
-            "Ja, immer.",
-            "Nur bei Freunden."
+            "Ich spreche mit einer vertrauten Person.",
+            "Ich schäme mich allein.",
+            "Ich sende noch mehr."
           ],
           "correct": 0,
-          "explanation": "Snaps können gespeichert werden, zum Beispiel durch Screenshots."
+          "explanation": "Ich muss schwierige Situationen nicht allein klären."
         }
       }
     ],
     "illustration": "assets/illustrations/snapchat.svg",
     "quizQuestions": [
       {
-        "question": "Verschwinden Snaps immer sicher?",
+        "question": "Jemand sagt: „Der Snap verschwindet ja wieder.“ Was ist richtig?",
         "answers": [
-          "Nein, sie können gespeichert werden.",
-          "Ja, immer.",
-          "Nur bei Freunden."
+          "Er kann trotzdem gespeichert werden.",
+          "Er ist immer sicher weg.",
+          "Niemand kann ihn sehen."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Screenshots oder andere Geräte können Inhalte speichern.",
-        "area": "Snaps speichern"
+        "correct": 0
       },
       {
-        "question": "Warum ist der Standort sensibel?",
+        "question": "Jemand möchte ein peinliches Bild von dir. Was machst du?",
         "answers": [
-          "Er ist immer unwichtig.",
-          "Er zeigt, wo du bist.",
-          "Er schützt automatisch."
+          "Ich sende es, weil es verschwindet.",
+          "Ich sende es nicht.",
+          "Ich sende noch mehr Bilder."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Standortdaten sind privat.",
-        "area": "Standort"
+        "correct": 1
       },
       {
-        "question": "Jemand fordert ein privates Foto. Was machst du?",
+        "question": "Snapchat möchte deinen Standort zeigen. Was machst du?",
         "answers": [
-          "Geheim halten.",
-          "Nein sagen und Hilfe holen.",
-          "Foto schicken."
+          "Ich zeige ihn Fremden.",
+          "Ich prüfe die Standort-Einstellung.",
+          "Ich zeige meinen Standort immer."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Du musst keine privaten Fotos senden.",
-        "area": "Private Fotos"
+        "correct": 1
       },
       {
-        "question": "Was machst du bei fremden Kontakten?",
+        "question": "Ein Kontakt macht Druck. Was kannst du tun?",
         "answers": [
-          "Prüfen oder ablehnen.",
-          "Adresse senden.",
-          "Immer annehmen."
+          "Stoppen, blockieren oder Hilfe holen.",
+          "Private Daten senden.",
+          "Nachgeben."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Du darfst Kontakte ablehnen.",
-        "area": "Fremde Kontakte"
+        "correct": 0
       },
       {
-        "question": "Was kann bei einem Screenshot passieren?",
+        "question": "Du bekommst eine Nachricht von einer fremden Person. Was machst du?",
         "answers": [
-          "Alles wird sicher gelöscht.",
-          "Niemand kann etwas sehen.",
-          "Ein Snap wird gespeichert."
+          "Ich sende Bilder.",
+          "Ich sage meine Adresse.",
+          "Ich prüfe und antworte nicht sofort."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Screenshots können Inhalte festhalten.",
-        "area": "Screenshot"
+        "correct": 2
       },
       {
-        "question": "Was ist eine sichere Regel beim Senden?",
+        "question": "Du bereust einen Snap. Was machst du?",
         "answers": [
-          "Standort immer teilen.",
-          "Alles senden.",
-          "Nur senden, womit ich mich wohl fühle."
+          "Ich sende noch mehr.",
+          "Ich schäme mich allein.",
+          "Ich spreche mit einer vertrauten Person."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Du entscheidest, was du sendest.",
-        "area": "Senden"
+        "correct": 2
       },
       {
-        "question": "Eine Person schreibt: „Sag es niemandem.“ Was ist das?",
+        "question": "Jemand macht einen Screenshot von deinem Snap. Was merkst du?",
         "answers": [
-          "Immer sicher.",
-          "Ein Warnzeichen.",
-          "Eine Pflicht."
+          "Alles ist egal.",
+          "Der Snap war nicht sicher weg.",
+          "Niemand kann speichern."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Geheimhaltung kann ein Warnzeichen sein.",
-        "area": "Druck"
+        "correct": 1
       },
       {
-        "question": "Was kannst du bei Belästigung tun?",
+        "question": "Du willst deinen Standort teilen. Was machst du?",
         "answers": [
-          "Alles verschweigen.",
-          "Blockieren, melden oder Hilfe holen.",
-          "Zurück drohen."
+          "Ich teile ihn mit Fremden.",
+          "Ich prüfe, ob ich das möchte.",
+          "Ich teile ihn immer."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Du darfst dich schützen.",
-        "area": "Blockieren"
+        "correct": 1
       },
       {
-        "question": "Was bedeutet Nein sagen?",
+        "question": "Ein Snap ist dir unangenehm. Was machst du?",
         "answers": [
-          "Ich darf etwas ablehnen.",
-          "Ich darf keine Hilfe holen.",
-          "Ich muss alles machen."
+          "Ich spreche mit einer vertrauten Person.",
+          "Ich ignoriere mein Gefühl.",
+          "Ich sende mehr."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Nein sagen ist erlaubt.",
-        "area": "Nein sagen"
+        "correct": 0
       },
       {
-        "question": "Wer kann helfen?",
+        "question": "Was ist bei Bildern wichtig?",
         "answers": [
-          "Nur Fremde.",
-          "Niemand.",
-          "eine Person, der du vertraust."
+          "Andere entscheiden für mich.",
+          "Ich muss alles senden.",
+          "Ich entscheide selbst, was ich sende."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Eine Person, der du vertraust, kann unterstützen.",
-        "area": "Hilfe holen"
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -4540,9 +3926,11 @@ const topics = [
       "Was mache ich bei Druck zu privaten Bildern?"
     ],
     "memoryRules": [
-      "Snaps können gespeichert werden.",
-      "Ich teile meinen Standort nicht ohne Grund.",
-      "Ich darf Nein sagen."
+      "Ich denke daran: Snaps können gespeichert werden.",
+      "Ich sende keine Bilder, die mir unangenehm sind.",
+      "Ich teile meinen Standort nicht automatisch.",
+      "Ich reagiere nicht auf Druck.",
+      "Ich hole Hilfe, wenn mir etwas Angst macht."
     ],
     "shortLessonIndexes": [
       0,
@@ -4588,7 +3976,7 @@ const topics = [
           "Du lernst in kleinen Schritten.",
           "Am Ende kannst du ein Quiz machen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
+        "remember": "Ich mache keine gefährlichen Trends mit.",
         "module": "Modul 1: TikTok verstehen"
       },
       {
@@ -4599,7 +3987,7 @@ const topics = [
           "Du kannst Videos ansehen oder selbst posten.",
           "Trends und Kommentare können Einfluss auf dich haben."
         ],
-        "remember": "TikTok ist ein Werkzeug für Kontakt und Inhalte.",
+        "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 1: TikTok verstehen"
       },
       {
@@ -4613,7 +4001,7 @@ const topics = [
           "Videos posten",
           "Kommentare lesen"
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich teile keine privaten Daten in Kommentaren.",
         "module": "Modul 1: TikTok verstehen"
       },
       {
@@ -4627,7 +4015,7 @@ const topics = [
           "Kontakt halten",
           "Inhalte ansehen oder teilen"
         ],
-        "remember": "TikTok kann praktisch sein.",
+        "remember": "Ich mache Pause, wenn TikTok zu viel wird.",
         "module": "Modul 1: TikTok verstehen"
       },
       {
@@ -4638,7 +4026,7 @@ const topics = [
         ],
         "quote": "„Das Video ist hilfreich. Danke.“",
         "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll.",
+        "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "module": "Modul 1: TikTok verstehen"
       },
       {
@@ -4649,7 +4037,7 @@ const topics = [
           "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich mache keine gefährlichen Trends mit.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -4664,7 +4052,7 @@ const topics = [
           "Standort",
           "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -4675,7 +4063,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich teile keine privaten Daten in Kommentaren.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -4686,43 +4074,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich mache Pause, wenn TikTok zu viel wird.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "tiktokPrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Was machst du bei gefährlichen Trends?",
+          "question": "Ein Trend sieht gefährlich aus. Was machst du?",
           "answers": [
-            "Nicht mitmachen.",
-            "Sofort mitmachen.",
-            "Andere dazu drängen."
+            "Ich mache nicht mit.",
+            "Ich mache sofort mit.",
+            "Ich fordere andere dazu auf."
           ],
           "correct": 0,
-          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+          "explanation": "Gefährliche Trends können verletzen. Ich darf Nein sagen."
         }
       },
       {
@@ -4733,7 +4100,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -4744,7 +4111,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich mache keine gefährlichen Trends mit.",
         "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
@@ -4755,7 +4122,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile.",
+        "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
@@ -4769,7 +4136,7 @@ const topics = [
           "gefährliche Trends",
           "Kommentare mit privaten Daten"
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich teile keine privaten Daten in Kommentaren.",
         "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
@@ -4780,7 +4147,7 @@ const topics = [
         ],
         "quote": "„Mach etwas Gefährliches und poste es.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich mache Pause, wenn TikTok zu viel wird.",
         "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
@@ -4791,43 +4158,22 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
         "title": "Übung: Inhalt prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "tiktokContent",
-          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Videos, Trends und Kommentare",
         "practiceQuestion": {
-          "question": "Was machst du bei gefährlichen Trends?",
+          "question": "Ein Video verspricht schnelles Geld. Was machst du?",
           "answers": [
-            "Nicht mitmachen.",
-            "Sofort mitmachen.",
-            "Andere dazu drängen."
+            "Ich prüfe und gebe keine Daten ein.",
+            "Ich gebe sofort Bankdaten ein.",
+            "Ich klicke alles an."
           ],
           "correct": 0,
-          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+          "explanation": "Versprechen von schnellem Geld können Betrug sein."
         }
       },
       {
@@ -4838,7 +4184,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich mache keine gefährlichen Trends mit.",
         "module": "Modul 3: Videos, Trends und Kommentare"
       },
       {
@@ -4849,7 +4195,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle.",
+        "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
@@ -4860,7 +4206,7 @@ const topics = [
           "Manche Werbung täuscht.",
           "Manche Videos machen Druck."
         ],
-        "remember": "Ich handle nicht sofort.",
+        "remember": "Ich teile keine privaten Daten in Kommentaren.",
         "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
@@ -4871,7 +4217,7 @@ const topics = [
         ],
         "quote": "Mach diesen gefährlichen Trend. Poste es sofort.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich mache Pause, wenn TikTok zu viel wird.",
         "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
@@ -4885,7 +4231,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
@@ -4899,43 +4245,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich mache keine gefährlichen Trends mit.",
         "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
         "title": "Übung: Risiko prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "tiktokRisk",
-          "question": "Video: „Mach sofort mit. Sonst bist du langweilig.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Trends, Werbung und Betrug",
         "practiceQuestion": {
-          "question": "Was machst du bei gefährlichen Trends?",
+          "question": "In Kommentaren fragt jemand nach privaten Daten. Was machst du?",
           "answers": [
-            "Nicht mitmachen.",
-            "Sofort mitmachen.",
-            "Andere dazu drängen."
+            "Ich schreibe keine privaten Daten.",
+            "Ich schreibe Adresse und Telefonnummer.",
+            "Ich sende mein Passwort."
           ],
           "correct": 0,
-          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+          "explanation": "Kommentare sind oft öffentlich. Private Daten gehören dort nicht hin."
         }
       },
       {
@@ -4946,7 +4271,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 4: Trends, Werbung und Betrug"
       },
       {
@@ -4957,7 +4282,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig.",
+        "remember": "Ich teile keine privaten Daten in Kommentaren.",
         "module": "Modul 5: Kommentare und Trends"
       },
       {
@@ -4968,7 +4293,7 @@ const topics = [
           "Inhalte können schnell weitergegeben werden.",
           "Darum solltest du vorsichtig sein."
         ],
-        "remember": "Viele können mitlesen.",
+        "remember": "Ich mache Pause, wenn TikTok zu viel wird.",
         "module": "Modul 5: Kommentare und Trends"
       },
       {
@@ -4982,7 +4307,7 @@ const topics = [
           "kurz und verständlich",
           "ohne private Daten"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "module": "Modul 5: Kommentare und Trends"
       },
       {
@@ -4996,7 +4321,7 @@ const topics = [
           "Gerüchte",
           "private Fotos oder Daten"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich mache keine gefährlichen Trends mit.",
         "module": "Modul 5: Kommentare und Trends"
       },
       {
@@ -5007,43 +4332,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 5: Kommentare und Trends"
       },
       {
         "title": "Übung: Gute Nachricht erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "tiktokGroup",
-          "question": "„Das Video ist hilfreich. Danke.“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Kommentare und Trends",
         "practiceQuestion": {
-          "question": "Was machst du bei gefährlichen Trends?",
+          "question": "Du merkst: TikTok tut dir gerade nicht gut. Was machst du?",
           "answers": [
-            "Nicht mitmachen.",
-            "Sofort mitmachen.",
-            "Andere dazu drängen."
+            "Ich mache Pause.",
+            "Ich schaue immer weiter.",
+            "Ich schlafe nicht."
           ],
           "correct": 0,
-          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+          "explanation": "Ich darf Pausen machen und die App schließen."
         }
       },
       {
@@ -5057,7 +4361,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich teile keine privaten Daten in Kommentaren.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5068,7 +4372,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich mache Pause, wenn TikTok zu viel wird.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5082,7 +4386,7 @@ const topics = [
           "auf Teilen oder Optionen tippen",
           "Blockieren auswählen"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5096,7 +4400,7 @@ const topics = [
           "Melden auswählen",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich mache keine gefährlichen Trends mit.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5112,7 +4416,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich prüfe, ob ein Tipp wirklich sicher ist.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5123,7 +4427,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich teile keine privaten Daten in Kommentaren.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5137,17 +4441,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich mache Pause, wenn TikTok zu viel wird.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was machst du bei gefährlichen Trends?",
+          "question": "Ein Video macht dir Angst. Was machst du?",
           "answers": [
-            "Nicht mitmachen.",
-            "Sofort mitmachen.",
-            "Andere dazu drängen."
+            "Ich stoppe und frage Unterstützung.",
+            "Ich schaue weiter.",
+            "Ich teile es an alle."
           ],
           "correct": 0,
-          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+          "explanation": "Ich darf stoppen. Ich darf Hilfe holen."
         }
       },
       {
@@ -5163,132 +4467,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich hole Hilfe, wenn mich etwas belastet.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was machst du bei gefährlichen Trends?",
+          "question": "Ein Profil möchte private Bilder. Was machst du?",
           "answers": [
-            "Nicht mitmachen.",
-            "Sofort mitmachen.",
-            "Andere dazu drängen."
+            "Ich sende keine privaten Bilder.",
+            "Ich sende sofort Bilder.",
+            "Ich gebe meine Adresse."
           ],
           "correct": 0,
-          "explanation": "Gefährliche Trends machst du nicht mit. Du darfst Hilfe holen."
+          "explanation": "Private Bilder bleiben privat. Bei Druck hole ich Hilfe."
         }
       }
     ],
     "illustration": "assets/illustrations/tiktok.svg",
     "quizQuestions": [
       {
-        "question": "Ein Trend fordert eine gefährliche Handlung. Was machst du?",
+        "question": "Ein Trend sieht gefährlich aus. Was machst du?",
         "answers": [
-          "Nicht mitmachen und Hilfe holen.",
-          "Sofort mitmachen.",
-          "Andere dazu drängen."
+          "Ich mache nicht mit.",
+          "Ich mache sofort mit.",
+          "Ich fordere andere dazu auf."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Gefährliche Trends machst du nicht mit.",
-        "area": "Gefährliche Trends"
+        "correct": 0
       },
       {
-        "question": "Warum sind Pausen wichtig?",
+        "question": "Ein Video verspricht schnelles Geld. Was machst du?",
         "answers": [
-          "Pausen sind verboten.",
-          "TikTok kann lange fesseln.",
-          "Videos sind immer falsch."
+          "Ich gebe sofort Bankdaten ein.",
+          "Ich prüfe und gebe keine Daten ein.",
+          "Ich klicke alles an."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Pausen helfen beim bewussten Nutzen.",
-        "area": "Pausen"
+        "correct": 1
       },
       {
-        "question": "Was solltest du bei Werbung tun?",
+        "question": "In Kommentaren fragt jemand nach privaten Daten. Was machst du?",
         "answers": [
-          "Passwort senden.",
-          "Prüfen und keine Daten eingeben.",
-          "Sofort kaufen."
+          "Ich sende mein Passwort.",
+          "Ich schreibe keine privaten Daten.",
+          "Ich schreibe Adresse und Telefonnummer."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Werbung und Links müssen geprüft werden.",
-        "area": "Werbung"
+        "correct": 1
       },
       {
-        "question": "Was machst du bei Hass-Kommentaren?",
+        "question": "Du merkst: TikTok tut dir gerade nicht gut. Was machst du?",
         "answers": [
-          "Blockieren oder melden.",
-          "Private Daten posten.",
-          "Zurück beleidigen."
+          "Ich mache Pause.",
+          "Ich schlafe nicht.",
+          "Ich schaue immer weiter."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Blockieren oder Melden kann schützen.",
-        "area": "Kommentare"
+        "correct": 0
       },
       {
-        "question": "Was macht der Algorithmus?",
+        "question": "Ein Video macht dir Angst. Was machst du?",
         "answers": [
-          "Er schützt immer vor Gefahr.",
-          "Er löscht alle schlechten Videos.",
-          "Er zeigt oft ähnliche Videos."
+          "Ich schaue weiter.",
+          "Ich teile es an alle.",
+          "Ich stoppe und frage Unterstützung."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Der Algorithmus zeigt oft mehr von dem, was du anschaust.",
-        "area": "Algorithmus"
+        "correct": 2
       },
       {
-        "question": "Ein Video sagt: „Klicke sofort, sonst verpasst du alles.“ Was ist das?",
+        "question": "Ein Profil möchte private Bilder. Was machst du?",
         "answers": [
-          "Eine Pflicht.",
-          "Immer sicher.",
-          "Druck."
+          "Ich gebe meine Adresse.",
+          "Ich sende sofort Bilder.",
+          "Ich sende keine privaten Bilder."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Druck ist ein Warnzeichen.",
-        "area": "Druck"
+        "correct": 2
       },
       {
-        "question": "Was solltest du in Kommentaren nicht schreiben?",
+        "question": "Ein Kommentar fragt nach deiner Telefonnummer. Was machst du?",
         "answers": [
-          "Danke.",
-          "Private Daten.",
-          "Eine freundliche Frage."
+          "Ich schreibe sie öffentlich.",
+          "Ich schreibe sie nicht.",
+          "Ich gebe auch meine Adresse."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Private Daten gehören nicht in Kommentare.",
-        "area": "Private Daten"
+        "correct": 1
       },
       {
-        "question": "Was ist bei Trends wichtig?",
+        "question": "Ein Trend setzt dich unter Druck. Was machst du?",
         "answers": [
-          "Nie Hilfe holen.",
-          "Vorher überlegen.",
-          "Immer mitmachen."
+          "Ich muss andere filmen.",
+          "Ich darf Nein sagen.",
+          "Ich muss mitmachen."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Nicht jeder Trend ist gut.",
-        "area": "Trends prüfen"
+        "correct": 1
       },
       {
-        "question": "Jemand will ein privates Video von dir. Was machst du?",
+        "question": "Ein Video gibt einen Gesundheitstipp. Was machst du?",
         "answers": [
-          "Nein sagen und Hilfe holen.",
-          "Geheim halten.",
-          "Video schicken."
+          "Ich prüfe den Tipp und frage bei Unsicherheit.",
+          "Ich stoppe Medikamente selbst.",
+          "Ich mache alles sofort."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Du entscheidest über deine Videos.",
-        "area": "Private Videos"
+        "correct": 0
       },
       {
-        "question": "Was ist ein guter TikTok-Merksatz?",
+        "question": "TikTok zeigt immer neue Videos. Was darfst du tun?",
         "answers": [
-          "Ich mache alles nach.",
-          "Ich teile alle Daten.",
-          "Ich prüfe Trends und mache Pausen."
+          "Immer weiter schauen.",
+          "Nie Pause machen.",
+          "Die App schließen und Pause machen."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Prüfen und Pausen helfen.",
-        "area": "Merksatz"
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -5302,9 +4586,11 @@ const topics = [
       "Soll ich eine Pause machen?"
     ],
     "memoryRules": [
-      "Ich mache gefährliche Trends nicht mit.",
-      "Ich prüfe Werbung und Links.",
-      "Ich mache Pausen."
+      "Ich mache keine gefährlichen Trends mit.",
+      "Ich prüfe, ob ein Tipp wirklich sicher ist.",
+      "Ich teile keine privaten Daten in Kommentaren.",
+      "Ich mache Pause, wenn TikTok zu viel wird.",
+      "Ich hole Hilfe, wenn mich etwas belastet."
     ],
     "shortLessonIndexes": [
       0,
@@ -5350,7 +4636,7 @@ const topics = [
           "Du lernst, was du tun kannst.",
           "Du musst Probleme nicht allein lösen."
         ],
-        "remember": "Hilfe holen ist richtig.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
@@ -5361,7 +4647,7 @@ const topics = [
           "Oder etwas, das dich unter Druck setzt.",
           "Oder etwas, das sich falsch anfühlt."
         ],
-        "remember": "Ich nehme mein Gefühl ernst.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 1: Probleme erkennen",
         "bullets": [
           "Beleidigung",
@@ -5381,7 +4667,7 @@ const topics = [
           "vertraute Person",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Ich darf Unterstützung bekommen.",
+        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
@@ -5397,7 +4683,7 @@ const topics = [
           "nicht sofort antworten",
           "gemeinsam prüfen"
         ],
-        "remember": "Gemeinsam ist es leichter.",
+        "remember": "Ich frage eine Person, der ich vertraue.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
@@ -5408,7 +4694,7 @@ const topics = [
         ],
         "quote": "Ich antworte nicht allein. Ich zeige die Nachricht einer Person, der du vertraust.",
         "success": "Das ist gut. Du holst dir Unterstützung.",
-        "remember": "Hilfe holen ist eine gute Entscheidung.",
+        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
         "module": "Modul 1: Probleme erkennen"
       },
       {
@@ -5419,7 +4705,7 @@ const topics = [
           "Du lernst, was du schützen sollst.",
           "Du lernst, wann du vorsichtig sein musst."
         ],
-        "remember": "Private Daten gehören mir.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -5434,7 +4720,7 @@ const topics = [
           "Fotos und Standort",
           "Passwörter"
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -5445,7 +4731,7 @@ const topics = [
         ],
         "quote": "Wo wohnst du? Schick mir deine Adresse.",
         "warning": "Das ist nicht sicher. Deine Adresse ist privat.",
-        "remember": "Meine Adresse bleibt privat.",
+        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -5456,43 +4742,22 @@ const topics = [
         ],
         "quote": "Gib mir dein Passwort. Ich helfe dir.",
         "warning": "Das ist Betrug. Niemand darf dein Passwort verlangen.",
-        "remember": "Mein Passwort bleibt geheim.",
+        "remember": "Ich frage eine Person, der ich vertraue.",
         "module": "Modul 2: Private Daten"
       },
       {
         "title": "Übung: Private Daten erkennen",
         "icon": "exercise",
-        "exercise": {
-          "id": "hilfePrivate",
-          "question": "Nachricht: „Schick mir deine PIN. Ich helfe dir.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Eine PIN ist privat. Gib sie nicht weiter."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 2: Private Daten",
         "practiceQuestion": {
-          "question": "Was machst du, wenn du unsicher bist?",
+          "question": "Du weißt auf einer Internetseite nicht weiter. Was machst du?",
           "answers": [
             "Ich frage eine Person, der ich vertraue.",
-            "Ich löse alles allein.",
-            "Ich klicke sofort."
+            "Ich klicke alles schnell an.",
+            "Ich gebe private Daten ein."
           ],
           "correct": 0,
-          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+          "explanation": "Wenn ich nicht weiter weiß, darf ich stoppen und Unterstützung holen."
         }
       },
       {
@@ -5503,7 +4768,7 @@ const topics = [
           "Du musst keine privaten Daten schicken.",
           "Du darfst Hilfe holen."
         ],
-        "remember": "Meine Daten gehören mir.",
+        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
         "module": "Modul 2: Private Daten"
       },
       {
@@ -5514,7 +4779,7 @@ const topics = [
           "Inhalte können privat oder öffentlich sein.",
           "Du lernst, worauf du achten musst."
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -5525,7 +4790,7 @@ const topics = [
           "Dann sehen vielleicht andere Menschen diesen Inhalt.",
           "Darum ist Vorsicht wichtig."
         ],
-        "remember": "Ich denke nach, bevor ich teile.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -5539,7 +4804,7 @@ const topics = [
           "Drohungen",
           "private Fotos"
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -5550,7 +4815,7 @@ const topics = [
         ],
         "quote": "„Antworte sofort und erzähle niemandem davon.“",
         "warning": "Das ist ein Warnzeichen. Niemand darf dich unter Druck setzen.",
-        "remember": "Ich darf Nein sagen.",
+        "remember": "Ich frage eine Person, der ich vertraue.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -5561,43 +4826,22 @@ const topics = [
           "Nachrichten und Kommentare können gespeichert werden.",
           "Darum solltest du vorher überlegen."
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
         "title": "Übung: Inhalt prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "hilfeContent",
-          "question": "Nachricht: „Poste das. Aber sag es niemandem.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Geheimhaltung und Druck sind Warnzeichen."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 3: Nachrichten, Fotos und Beweise",
         "practiceQuestion": {
-          "question": "Was machst du, wenn du unsicher bist?",
+          "question": "Du bekommst eine Nachricht, die dir Angst macht. Was machst du?",
           "answers": [
-            "Ich frage eine Person, der ich vertraue.",
-            "Ich löse alles allein.",
-            "Ich klicke sofort."
+            "Ich spreche mit einer unterstützenden Person.",
+            "Ich bleibe allein damit.",
+            "Ich sende Geld."
           ],
           "correct": 0,
-          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+          "explanation": "Angst ist ein Zeichen: Ich muss das nicht allein klären."
         }
       },
       {
@@ -5608,7 +4852,7 @@ const topics = [
           "Ich muss nichts verschicken.",
           "Ich darf Nein sagen."
         ],
-        "remember": "Ich entscheide über meine Inhalte.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 3: Nachrichten, Fotos und Beweise"
       },
       {
@@ -5619,7 +4863,7 @@ const topics = [
           "Manche Inhalte sehen echt aus.",
           "Trotzdem können sie gefährlich sein."
         ],
-        "remember": "Ich prüfe, bevor ich handle.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -5630,7 +4874,7 @@ const topics = [
           "Jemand will Geheimhaltung.",
           "Jemand verlangt Daten oder Fotos."
         ],
-        "remember": "Ich handle nicht sofort.",
+        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -5641,7 +4885,7 @@ const topics = [
         ],
         "quote": "Sag niemandem davon. Sonst passiert etwas.",
         "warning": "Das kann Betrug sein. Reagiere nicht sofort.",
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich frage eine Person, der ich vertraue.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -5655,7 +4899,7 @@ const topics = [
           "Geld von dir verlangt",
           "Druck macht"
         ],
-        "remember": "Druck ist ein Warnzeichen.",
+        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -5669,43 +4913,22 @@ const topics = [
           "Sag es niemandem.",
           "Sonst passiert etwas."
         ],
-        "remember": "Druck bedeutet: Stopp und Hilfe holen.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
         "title": "Übung: Risiko prüfen",
         "icon": "exercise",
-        "exercise": {
-          "id": "hilfeRisk",
-          "question": "Nachricht: „Sag niemandem davon. Sonst passiert etwas.“",
-          "feedback": {
-            "safe": {
-              "type": "warning",
-              "title": "Achtung.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "unsafe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt unsicher. Nicht sofort reagieren."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 4: Druck, Drohung und Betrug",
         "practiceQuestion": {
-          "question": "Was machst du, wenn du unsicher bist?",
+          "question": "Jemand beleidigt dich online. Was kannst du tun?",
           "answers": [
-            "Ich frage eine Person, der ich vertraue.",
-            "Ich löse alles allein.",
-            "Ich klicke sofort."
+            "Blockieren, melden oder Unterstützung holen.",
+            "Zurück beleidigen.",
+            "Alles ertragen."
           ],
           "correct": 0,
-          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+          "explanation": "Ich darf mich schützen. Ich darf Unterstützung holen."
         }
       },
       {
@@ -5716,7 +4939,7 @@ const topics = [
           "Ich prüfe die Nachricht.",
           "Ich frage nach, wenn ich unsicher bin."
         ],
-        "remember": "Erst prüfen. Dann handeln.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 4: Druck, Drohung und Betrug"
       },
       {
@@ -5727,7 +4950,7 @@ const topics = [
           "Viele Menschen können mitlesen.",
           "Darum ist gutes Verhalten wichtig."
         ],
-        "remember": "Ich schreibe vorsichtig.",
+        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -5738,7 +4961,7 @@ const topics = [
           "Wichtig ist: nicht allein bleiben.",
           "Eine vertraute Person kann mit dir schauen."
         ],
-        "remember": "Ich muss das nicht allein klären.",
+        "remember": "Ich frage eine Person, der ich vertraue.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -5752,7 +4975,7 @@ const topics = [
           "nicht allein antworten",
           "Hilfe holen"
         ],
-        "remember": "Ich reagiere nicht unter Druck.",
+        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -5766,7 +4989,7 @@ const topics = [
           "Daten schicken",
           "Problem geheim halten"
         ],
-        "remember": "Ich lasse mich nicht drängen.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
@@ -5777,43 +5000,22 @@ const topics = [
         ],
         "quote": "Du willst etwas Gemeines zurückschreiben.",
         "warning": "Besser: Pause machen. Nicht sofort antworten.",
-        "remember": "Erst beruhigen. Dann entscheiden.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
         "title": "Übung: Gute Hilfe-Entscheidung",
         "icon": "exercise",
-        "exercise": {
-          "id": "hilfeGroup",
-          "question": "„Ich brauche Hilfe. Kannst du bitte mit mir schauen?“",
-          "feedback": {
-            "safe": {
-              "type": "success",
-              "title": "Richtig.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "unsafe": {
-              "type": "warning",
-              "title": "Nicht ganz.",
-              "text": "Das wirkt sicher. Es ist freundlich und ohne Druck."
-            },
-            "help": {
-              "type": "info",
-              "title": "Gute Entscheidung.",
-              "text": "Hilfe holen ist immer erlaubt."
-            }
-          }
-        },
         "module": "Modul 5: Probleme und Hilfewege",
         "practiceQuestion": {
-          "question": "Was machst du, wenn du unsicher bist?",
+          "question": "Du hast aus Versehen geklickt. Was machst du?",
           "answers": [
-            "Ich frage eine Person, der ich vertraue.",
-            "Ich löse alles allein.",
-            "Ich klicke sofort."
+            "Ich sage es einer unterstützenden Person.",
+            "Ich verheimliche es immer.",
+            "Ich klicke weiter."
           ],
           "correct": 0,
-          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+          "explanation": "Fehler können passieren. Wichtig ist, Hilfe zu holen."
         }
       },
       {
@@ -5827,7 +5029,7 @@ const topics = [
           "Nicht klicken und nichts schicken",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5838,7 +5040,7 @@ const topics = [
           "Du musst nichts posten oder schicken.",
           "Du musst keinen Link anklicken."
         ],
-        "remember": "Nein sagen ist erlaubt.",
+        "remember": "Ich frage eine Person, der ich vertraue.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5852,7 +5054,7 @@ const topics = [
           "Person blockieren",
           "eine Person informieren, der du vertraust"
         ],
-        "remember": "Ich darf mich schützen.",
+        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5866,7 +5068,7 @@ const topics = [
           "Melden auswählen, wenn möglich",
           "Beweise mit Hilfe sichern"
         ],
-        "remember": "Melden ist erlaubt.",
+        "remember": "Ich muss Probleme im Internet nicht allein lösen.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5882,7 +5084,7 @@ const topics = [
           "eine Digital-Begleiterin oder einen Digital-Begleiter",
           "bei Gefahr: Polizei 110"
         ],
-        "remember": "Du darfst Unterstützung holen.",
+        "remember": "Ich stoppe, wenn mir etwas komisch vorkommt.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5893,7 +5095,7 @@ const topics = [
           "Du musst keinen Namen eingeben.",
           "Im Quiz nimmst du einen Spitznamen."
         ],
-        "remember": "Ich bleibe anonym.",
+        "remember": "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
         "module": "Modul 6: Schutz und Hilfe"
       },
       {
@@ -5907,17 +5109,17 @@ const topics = [
           "nichts Privates teilen",
           "Hilfe holen"
         ],
-        "remember": "Stopp. Prüfen. Hilfe holen.",
+        "remember": "Ich frage eine Person, der ich vertraue.",
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was machst du, wenn du unsicher bist?",
+          "question": "Du sollst schnell Geld senden. Was machst du?",
           "answers": [
-            "Ich frage eine Person, der ich vertraue.",
-            "Ich löse alles allein.",
-            "Ich klicke sofort."
+            "Ich stoppe und frage Unterstützung.",
+            "Ich sende sofort Geld.",
+            "Ich gebe Bankdaten ein."
           ],
           "correct": 0,
-          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+          "explanation": "Druck und Geldforderungen sind Warnzeichen."
         }
       },
       {
@@ -5933,132 +5135,112 @@ const topics = [
           "Nimm einen Spitznamen.",
           "Das Quiz ist zum Üben."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin.",
+        "remember": "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.",
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe",
         "practiceQuestion": {
-          "question": "Was machst du, wenn du unsicher bist?",
+          "question": "Du möchtest Hilfe holen. Wen kannst du fragen?",
           "answers": [
-            "Ich frage eine Person, der ich vertraue.",
-            "Ich löse alles allein.",
-            "Ich klicke sofort."
+            "Eine Person, die mich unterstützt.",
+            "Nur fremde Personen im Chat.",
+            "Niemanden."
           ],
           "correct": 0,
-          "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+          "explanation": "Ich kann Menschen fragen, denen ich vertraue oder die mich unterstützen."
         }
       }
     ],
     "illustration": "assets/illustrations/hilfe.svg",
     "quizQuestions": [
       {
-        "question": "Was ist die Stopp-Regel?",
+        "question": "Du weißt auf einer Internetseite nicht weiter. Was machst du?",
         "answers": [
-          "Nicht sofort antworten, prüfen, Hilfe holen.",
-          "Sofort klicken.",
-          "Alles allein lösen."
+          "Ich frage eine Person, der ich vertraue.",
+          "Ich klicke alles schnell an.",
+          "Ich gebe private Daten ein."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Stopp, prüfen und Hilfe holen schützt dich.",
-        "area": "Stopp-Regel"
+        "correct": 0
       },
       {
-        "question": "Jemand schreibt: „Sag niemandem davon.“ Was ist das?",
+        "question": "Du bekommst eine Nachricht, die dir Angst macht. Was machst du?",
         "answers": [
-          "Immer sicher.",
-          "Ein Warnzeichen.",
-          "Eine Hilfe."
+          "Ich bleibe allein damit.",
+          "Ich spreche mit einer unterstützenden Person.",
+          "Ich sende Geld."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Geheimhaltung und Druck sind Warnzeichen.",
-        "area": "Druck"
+        "correct": 1
       },
       {
-        "question": "Wer kann helfen?",
+        "question": "Jemand beleidigt dich online. Was kannst du tun?",
         "answers": [
-          "Niemand.",
-          "eine Person, der du vertraust.",
-          "Nur Fremde."
+          "Alles ertragen.",
+          "Blockieren, melden oder Unterstützung holen.",
+          "Zurück beleidigen."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Eine Person, der du vertraust, kann helfen.",
-        "area": "Hilfe holen"
+        "correct": 1
       },
       {
-        "question": "Was machst du bei akuter Gefahr?",
+        "question": "Du hast aus Versehen geklickt. Was machst du?",
         "answers": [
-          "Sofort Hilfe holen oder 110.",
-          "Alles löschen.",
-          "Warten."
+          "Ich sage es einer unterstützenden Person.",
+          "Ich klicke weiter.",
+          "Ich verheimliche es immer."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Bei Gefahr zählt schnelle Hilfe.",
-        "area": "Gefahr"
+        "correct": 0
       },
       {
-        "question": "Was ist wichtig bei Beweisen?",
+        "question": "Du sollst schnell Geld senden. Was machst du?",
         "answers": [
-          "Alles sofort löschen.",
-          "Nie darüber sprechen.",
-          "Nachricht zeigen und nicht allein handeln."
+          "Ich sende sofort Geld.",
+          "Ich gebe Bankdaten ein.",
+          "Ich stoppe und frage Unterstützung."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Nachrichten können helfen, ein Problem zu klären.",
-        "area": "Beweise"
+        "correct": 2
       },
       {
-        "question": "Was machst du bei Druck?",
+        "question": "Du möchtest Hilfe holen. Wen kannst du fragen?",
         "answers": [
-          "Passwort schicken.",
-          "Alles machen.",
-          "Nicht allein antworten."
+          "Niemanden.",
+          "Nur fremde Personen im Chat.",
+          "Eine Person, die mich unterstützt."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Bei Druck nicht allein handeln.",
-        "area": "Druck"
+        "correct": 2
       },
       {
-        "question": "Was darfst du bei Belästigung tun?",
+        "question": "Du verstehst eine Aufgabe nicht. Was machst du?",
         "answers": [
-          "Zurück beleidigen.",
-          "Blockieren, melden oder Hilfe holen.",
-          "Alles geheim halten."
+          "Einfach raten und weitermachen.",
+          "Vorlesen nutzen oder Hilfe fragen.",
+          "Alles löschen."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Schutz und Hilfe sind erlaubt.",
-        "area": "Blockieren"
+        "correct": 1
       },
       {
-        "question": "Was bedeutet Hilfe holen?",
+        "question": "Du fühlst dich überfordert. Was hilft?",
         "answers": [
-          "Ich darf nicht fragen.",
-          "Ich suche Unterstützung.",
-          "Ich bin schuld."
+          "Mehr Daten eingeben.",
+          "Pause machen.",
+          "Schneller klicken."
         ],
-        "correct": 1,
-        "explanation": "Richtig. Hilfe holen ist eine gute Entscheidung.",
-        "area": "Unterstützung"
+        "correct": 1
       },
       {
-        "question": "Eine Nachricht macht dir Angst. Was ist gut?",
+        "question": "Du brauchst Unterstützung. Was ist richtig?",
         "answers": [
-          "eine Person, der du vertraust fragen.",
-          "Alles löschen und schweigen.",
-          "Sofort allein antworten."
+          "Ich darf jemanden fragen.",
+          "Ich darf nie nachfragen.",
+          "Ich muss alles allein können."
         ],
-        "correct": 0,
-        "explanation": "Richtig. Du musst das nicht allein klären.",
-        "area": "Angst"
+        "correct": 0
       },
       {
-        "question": "Was ist der wichtigste Merksatz?",
+        "question": "Wo passt ein Problem mit der Lernplattform hin?",
         "answers": [
-          "Ich muss alles allein lösen.",
-          "Ich darf nie Hilfe holen.",
-          "Ich bin nicht allein."
+          "In einen fremden Chat.",
+          "Zu meinen Bankdaten.",
+          "Zum Hilfe-Button."
         ],
-        "correct": 2,
-        "explanation": "Richtig. Du bist nicht allein.",
-        "area": "Merksatz"
+        "correct": 2
       }
     ],
     "certificateGoals": [
@@ -6072,9 +5254,11 @@ const topics = [
       "Soll ich die Nachricht zeigen und Hilfe holen?"
     ],
     "memoryRules": [
-      "Ich muss Probleme nicht allein lösen.",
-      "Ich kann eine Person fragen, der ich vertraue.",
-      "Bei Gefahr hole ich sofort Hilfe."
+      "Ich muss Probleme im Internet nicht allein lösen.",
+      "Ich stoppe, wenn mir etwas komisch vorkommt.",
+      "Ich sichere wichtige Informationen, wenn ich Hilfe brauche.",
+      "Ich frage eine Person, der ich vertraue.",
+      "Ich nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck."
     ],
     "shortLessonIndexes": [
       0,

@@ -206,3 +206,36 @@ Du musst das nicht allein klären.
 ```
 
 Der Hilfe-Button bleibt damit eine Orientierungs- und Lernhilfe.
+
+
+## Inhaltliche Endlogik
+
+Diese Version überarbeitet drei Inhaltsbereiche.
+
+### Übungen
+
+Übungen passen jetzt stärker zum jeweiligen Thema und zu typischen Situationen.
+
+Beispiele:
+
+```text
+WhatsApp: unbekannter Link, WhatsApp-Code, Gruppenstress, Fotos weiterleiten
+Instagram: Fotos posten, Standort, fremde Profile, Kommentare
+YouTube: Werbung, Quellen prüfen, Autoplay, Kommentare
+```
+
+### Quizfragen
+
+Quizfragen sind jetzt stärker als Alltagssituationen formuliert.
+
+### Merksätze
+
+Merksätze sind jetzt stärker als Ich-Sätze formuliert.
+
+Beispiele:
+
+```text
+Ich gebe mein Passwort nicht weiter.
+Ich klicke nicht sofort auf komische Links.
+Ich frage nach, wenn ich unsicher bin.
+```
