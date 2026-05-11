@@ -120,3 +120,17 @@ Danach GitHub Pages aktivieren.
 Die Texte sind einfach und barrierearm formuliert.
 
 Für das offizielle Zeichen für Leichte Sprache ist zusätzlich eine Prüfung durch Menschen aus der Zielgruppe erforderlich.
+
+
+## CSS-Bereinigung
+
+Die CSS-Datei wurde bereinigt.
+
+Geändert:
+
+```text
+alte doppelte Zusatzblöcke entfernt
+finale Regeln zusammengeführt
+unnötige !important-Überschreibungen reduziert
+Design und Funktionen beibehalten
+```

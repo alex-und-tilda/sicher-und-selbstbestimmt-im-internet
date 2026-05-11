@@ -2714,147 +2714,64 @@ body.view-menu .topic-grid {
   }
 }
 
+/* ============================================================
+   Finale Zusatzregeln
+   Zweck:
+   - QR-Poster-Links nicht in der Lernoberfläche anzeigen
+   - Hilfe-Button sichtbar, aber mobil kompakt halten
+   - Übungen, Symbolboxen und Vorlesen einheitlich gestalten
+   - Hilfe-Dialog pädagogisch klar darstellen
+   ============================================================ */
 
-/* QR-Links sind interne Arbeitslinks für die Poster-Erstellung.
-   Sie werden für Lernende nicht sichtbar angezeigt.
-*/
-.qr-links {
-  display: none !important;
+/* QR-Links sind nur interne Arbeitslinks für Poster. */
+.qr-links,
+.qr-overview {
+  display: none;
 }
 
-/* Hilfe-Button prominenter machen */
+/* Globaler Hilfe-Button */
 .global-help-button {
-  position: fixed !important;
-  right: 22px !important;
-  bottom: 22px !important;
-  z-index: 1000 !important;
-  background: #FFF3CD !important;
-  color: #1F1F1F !important;
-  border: 4px solid #D6A400 !important;
-  border-radius: 999px !important;
-  padding: 16px 22px !important;
-  font-size: 1.12rem !important;
-  font-weight: 900 !important;
-  min-height: 58px !important;
-  min-width: 190px !important;
-  box-shadow: 0 14px 30px rgba(0, 40, 90, 0.28) !important;
-  cursor: pointer !important;
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1000;
+  max-width: min(360px, calc(100vw - 28px));
+  min-width: 190px;
+  min-height: 58px;
+  padding: 16px 22px;
+  border: 4px solid #D6A400;
+  border-radius: 999px;
+  background: #FFF3CD;
+  color: #1F1F1F;
+  box-shadow: 0 14px 30px rgba(0, 40, 90, 0.28);
+  cursor: pointer;
+  font-size: 1.12rem;
+  font-weight: 900;
 }
 
 .global-help-button::before {
-  content: "?" !important;
-  display: inline-grid !important;
-  place-items: center !important;
-  width: 28px !important;
-  height: 28px !important;
-  margin-right: 8px !important;
-  border-radius: 50% !important;
-  background: #FFFFFF !important;
-  border: 3px solid #D6A400 !important;
-  font-weight: 900 !important;
+  content: "?";
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border: 3px solid #D6A400;
+  border-radius: 50%;
+  background: #FFFFFF;
+  font-weight: 900;
 }
 
 .global-help-button:hover,
 .global-help-button:focus-visible {
-  background: #FFE39A !important;
-  border-color: #B88700 !important;
-  outline: 5px solid rgba(214, 164, 0, 0.42) !important;
-  outline-offset: 3px !important;
-  transform: translateY(-1px) !important;
+  background: #FFE39A;
+  border-color: #B88700;
+  outline: 5px solid rgba(214, 164, 0, 0.42);
+  outline-offset: 3px;
+  transform: translateY(-1px);
 }
 
-/* Auf dem Smartphone über die Breite, aber nicht zu hoch */
-@media (max-width: 760px) {
-  .global-help-button {
-    left: 14px !important;
-    right: 14px !important;
-    bottom: 14px !important;
-    width: auto !important;
-    min-width: 0 !important;
-    min-height: 60px !important;
-    padding: 16px 18px !important;
-    font-size: 1.08rem !important;
-  }
-
-  body {
-    padding-bottom: 86px !important;
-  }
-}
-
-@media print {
-  .global-help-button,
-  .qr-links {
-    display: none !important;
-  }
-}
-
-
-/* FIX: Übungs-Buttons deutlicher und zuverlässig bedienbar */
-.exercise {
-  margin-top: 18px;
-  background: var(--blue-light);
-  border: 3px solid var(--blue-mid);
-  border-radius: 18px;
-  padding: 16px;
-}
-
-.exercise-question {
-  font-weight: 900;
-  font-size: 1.08rem;
-  margin-bottom: 12px;
-}
-
-.choice-list {
-  display: grid;
-  gap: 10px;
-}
-
-.choice-button {
-  text-align: left;
-  background: #FFFFFF;
-  border: 2px solid var(--blue-mid);
-  border-radius: 14px;
-  padding: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  color: var(--black);
-}
-
-.choice-button:hover,
-.choice-button:focus-visible {
-  background: #DDF3F2;
-  outline: 4px solid rgba(61, 184, 179, 0.35);
-  outline-offset: 2px;
-}
-
-.feedback[hidden] {
-  display: none !important;
-}
-
-.feedback {
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 12px;
-}
-
-.feedback.success {
-  background: var(--success-light);
-  border: 2px solid var(--success);
-}
-
-.feedback.warning {
-  background: var(--warning-light);
-  border: 2px solid var(--warning);
-}
-
-.feedback.info,
-.feedback.help {
-  background: var(--hint);
-  border: 2px solid var(--hint-border);
-}
-
-
-/* Symbol- und Vorleselogik für wichtige Bereiche */
+/* Symbolboxen für wichtige Inhalte */
 .access-box {
   display: grid;
   grid-template-columns: 58px 1fr;
@@ -2862,20 +2779,20 @@ body.view-menu .topic-grid {
   align-items: start;
   margin-top: 18px;
   padding: 16px;
-  border-radius: 20px;
   border: 3px solid var(--gray);
+  border-radius: 20px;
   background: #FFFFFF;
 }
 
 .access-box-symbol {
-  width: 54px;
-  height: 54px;
   display: grid;
   place-items: center;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 auto;
+  border: 3px solid currentColor;
   border-radius: 16px;
   background: #FFFFFF;
-  border: 3px solid currentColor;
-  flex: 0 0 auto;
 }
 
 .access-box-symbol img {
@@ -2933,23 +2850,104 @@ body.view-menu .topic-grid {
   color: var(--blue);
 }
 
+/* Übungen */
+.practice-box {
+  margin-top: 18px;
+  padding: 16px;
+  border: 3px solid var(--blue-mid);
+  border-radius: 20px;
+  background: var(--blue-light);
+}
+
+.practice-question {
+  margin-bottom: 10px;
+  font-size: 1.08rem;
+}
+
+.practice-answer-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.practice-answer-grid button,
+.choice-button {
+  min-height: 52px;
+  padding: 13px;
+  border: 3px solid var(--blue-mid);
+  border-radius: 14px;
+  background: #FFFFFF;
+  color: var(--black);
+  cursor: pointer;
+  font-weight: 900;
+  text-align: left;
+}
+
+.practice-answer-grid button:hover,
+.practice-answer-grid button:focus-visible,
+.choice-button:hover,
+.choice-button:focus-visible {
+  background: #DDF3F2;
+  outline: 4px solid rgba(61, 184, 179, 0.35);
+  outline-offset: 2px;
+}
+
+.practice-feedback,
+.feedback {
+  min-height: 24px;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.practice-feedback.success,
+.feedback.success {
+  border: 3px solid var(--success);
+  background: var(--success-light);
+}
+
+.practice-feedback.warning,
+.feedback.warning {
+  border: 3px solid var(--hint-border);
+  background: var(--hint);
+}
+
+.feedback[hidden] {
+  display: none;
+}
+
+/* Vorlesen */
+.audio-button,
+.small-read-button {
+  font-size: 1rem;
+}
+
+.audio-button::before,
+.small-read-button::before {
+  content: "▶ ";
+}
+
+.audio-button.secondary::before {
+  content: "■ ";
+}
+
 .small-read-button {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  max-width: 100%;
   margin: 8px 0 12px 0;
   padding: 8px 12px;
-  border-radius: 999px;
   border: 2px solid var(--blue-mid);
+  border-radius: 999px;
   background: #FFFFFF;
   color: var(--black);
-  font-weight: 900;
   cursor: pointer;
-}
-
-.small-read-button::before {
-  content: "▶";
-  font-size: 0.85rem;
+  font-weight: 900;
+  gap: 6px;
+  text-align: left;
+  white-space: normal;
 }
 
 .small-read-button:hover,
@@ -2959,6 +2957,40 @@ body.view-menu .topic-grid {
   outline-offset: 2px;
 }
 
+.speech-speed-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 14px 0;
+  padding: 10px;
+  border: 2px solid var(--blue-mid);
+  border-radius: 14px;
+  background: var(--blue-light);
+}
+
+.speech-speed-controls span {
+  font-weight: 900;
+}
+
+.speech-speed-controls button {
+  padding: 8px 11px;
+  border: 2px solid var(--blue-mid);
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--black);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.speech-speed-controls button:hover,
+.speech-speed-controls button:focus-visible {
+  background: var(--blue-mid);
+  outline: 4px solid rgba(61, 184, 179, 0.35);
+  outline-offset: 2px;
+}
+
+/* Symbol-Überschriften */
 .symbol-heading,
 .help-title-row {
   display: flex;
@@ -2975,9 +3007,89 @@ body.view-menu .topic-grid {
   justify-content: center;
 }
 
-.quiz-link .icon-small,
-.quiz-link img {
-  vertical-align: middle;
+/* Hilfe-Dialog */
+.help-dialog {
+  width: min(760px, calc(100vw - 28px));
+  max-width: 760px;
+  max-height: calc(100vh - 36px);
+  overflow-y: auto;
+  border: 4px solid #D6A400;
+  border-radius: 24px;
+}
+
+.help-title-row {
+  margin-bottom: 14px;
+}
+
+.help-step-box,
+.help-decision-box {
+  margin: 12px 0;
+  padding: 14px;
+  border: 3px solid var(--gray);
+  border-radius: 18px;
+  background: #FFFFFF;
+}
+
+.help-step-box h3,
+.help-decision-box h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.help-step-box p,
+.help-step-box li,
+.help-decision-box p {
+  font-size: 1.04rem;
+  line-height: 1.45;
+}
+
+.help-step-calm {
+  background: var(--hint);
+  border-color: var(--hint-border);
+}
+
+.help-step-danger {
+  background: var(--warning-light);
+  border-color: var(--warning);
+}
+
+.help-decision-box {
+  background: var(--success-light);
+  border-color: var(--success);
+}
+
+.help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* Mobile Ansicht */
+@media (max-width: 760px) {
+  .global-help-button {
+    right: 12px;
+    bottom: 12px;
+    left: auto;
+    width: auto;
+    min-width: 0;
+    min-height: 48px;
+    padding: 11px 14px;
+    border-width: 3px;
+    box-shadow: 0 8px 18px rgba(0, 40, 90, 0.24);
+    font-size: 0.98rem;
+  }
+
+  .global-help-button::before {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    border-width: 2px;
+  }
+
+  body {
+    padding-bottom: 74px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -2996,267 +3108,34 @@ body.view-menu .topic-grid {
     width: 28px;
     height: 28px;
   }
-}
 
-@media print {
-  .small-read-button {
-    display: none !important;
-  }
-}
-
-
-/* Vorlesen-Fix: langsamer und klarer sichtbar */
-.audio-button,
-.small-read-button {
-  font-size: 1rem;
-}
-
-.audio-button::before,
-.small-read-button::before {
-  content: "▶ ";
-}
-
-.audio-button.secondary::before {
-  content: "■ ";
-}
-
-.reading-note {
-  font-size: 0.92rem;
-  color: var(--black);
-  margin-top: 6px;
-}
-
-
-/* Vorlesen: sehr langsam als Standard + Geschwindigkeitswahl */
-.speech-speed-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin: 8px 0 14px 0;
-  padding: 10px;
-  background: var(--blue-light);
-  border: 2px solid var(--blue-mid);
-  border-radius: 14px;
-}
-
-.speech-speed-controls span {
-  font-weight: 900;
-}
-
-.speech-speed-controls button {
-  border: 2px solid var(--blue-mid);
-  background: #FFFFFF;
-  color: var(--black);
-  border-radius: 999px;
-  padding: 8px 11px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.speech-speed-controls button:hover,
-.speech-speed-controls button:focus-visible {
-  background: var(--blue-mid);
-  outline: 4px solid rgba(61, 184, 179, 0.35);
-  outline-offset: 2px;
-}
-
-@media (max-width: 640px) {
   .speech-speed-controls {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .speech-speed-controls button {
+  .speech-speed-controls button,
+  .help-actions button {
     width: 100%;
     text-align: left;
   }
-}
 
-@media print {
-  .speech-speed-controls {
-    display: none !important;
-  }
-}
-
-
-/* FINALER FIX: Übungen ausführbar mit Erklärung */
-.practice-box {
-  margin-top: 18px !important;
-  background: var(--blue-light) !important;
-  border: 3px solid var(--blue-mid) !important;
-  border-radius: 20px !important;
-  padding: 16px !important;
-}
-
-.practice-question {
-  font-size: 1.08rem !important;
-  margin-bottom: 10px !important;
-}
-
-.practice-answer-grid {
-  display: grid !important;
-  gap: 10px !important;
-  margin-top: 10px !important;
-}
-
-.practice-answer-grid button {
-  text-align: left !important;
-  background: #FFFFFF !important;
-  border: 3px solid var(--blue-mid) !important;
-  border-radius: 14px !important;
-  padding: 13px !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-  color: var(--black) !important;
-  min-height: 52px !important;
-}
-
-.practice-answer-grid button:hover,
-.practice-answer-grid button:focus-visible {
-  background: #DDF3F2 !important;
-  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
-  outline-offset: 2px !important;
-}
-
-.practice-feedback {
-  margin-top: 14px !important;
-  padding: 14px !important;
-  border-radius: 14px !important;
-  min-height: 24px !important;
-  font-size: 1.05rem !important;
-  line-height: 1.4 !important;
-}
-
-.practice-feedback.success {
-  background: var(--success-light) !important;
-  border: 3px solid var(--success) !important;
-}
-
-.practice-feedback.warning {
-  background: var(--hint) !important;
-  border: 3px solid var(--hint-border) !important;
-}
-
-@media print {
-  .practice-box {
-    display: none !important;
-  }
-}
-
-
-/* Vorlesen bei Übungen und Quiz:
-   Es werden nur Frage und Antwortmöglichkeiten vorgelesen.
-   Erklärung und Rückmeldung werden nicht automatisch mitgelesen.
-*/
-.small-read-button {
-  max-width: 100%;
-  white-space: normal;
-  text-align: left;
-}
-
-/* QR-Poster-Links sind nicht Teil der Lernoberfläche. */
-.qr-links, .qr-overview { display:none !important; }
-
-
-/* FINAL: Hilfe-Button mobil kompakt, damit er Inhalte nicht überdeckt */
-.global-help-button {
-  max-width: min(360px, calc(100vw - 28px)) !important;
-}
-
-@media (max-width: 760px) {
-  .global-help-button {
-    left: auto !important;
-    right: 12px !important;
-    bottom: 12px !important;
-    width: auto !important;
-    min-width: 0 !important;
-    min-height: 48px !important;
-    padding: 11px 14px !important;
-    font-size: 0.98rem !important;
-    border-width: 3px !important;
-    box-shadow: 0 8px 18px rgba(0, 40, 90, 0.24) !important;
-  }
-
-  .global-help-button::before {
-    width: 24px !important;
-    height: 24px !important;
-    margin-right: 6px !important;
-    border-width: 2px !important;
-  }
-
-  body {
-    padding-bottom: 74px !important;
-  }
-}
-
-
-/* FINAL: Hilfe-Dialog pädagogisch klarer */
-.help-dialog {
-  max-width: 760px !important;
-  width: min(760px, calc(100vw - 28px)) !important;
-  max-height: calc(100vh - 36px) !important;
-  overflow-y: auto !important;
-  border-radius: 24px !important;
-  border: 4px solid #D6A400 !important;
-}
-
-.help-title-row {
-  margin-bottom: 14px !important;
-}
-
-.help-step-box,
-.help-decision-box {
-  margin: 12px 0 !important;
-  padding: 14px !important;
-  border-radius: 18px !important;
-  border: 3px solid var(--gray) !important;
-  background: #FFFFFF !important;
-}
-
-.help-step-box h3,
-.help-decision-box h3 {
-  margin-top: 0 !important;
-  margin-bottom: 8px !important;
-}
-
-.help-step-box p,
-.help-step-box li,
-.help-decision-box p {
-  font-size: 1.04rem !important;
-  line-height: 1.45 !important;
-}
-
-.help-step-calm {
-  background: var(--hint) !important;
-  border-color: var(--hint-border) !important;
-}
-
-.help-step-danger {
-  background: var(--warning-light) !important;
-  border-color: var(--warning) !important;
-}
-
-.help-decision-box {
-  background: var(--success-light) !important;
-  border-color: var(--success) !important;
-}
-
-.help-actions {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 10px !important;
-  margin-top: 14px !important;
-}
-
-@media (max-width: 640px) {
   .help-dialog {
-    width: calc(100vw - 20px) !important;
-    max-height: calc(100vh - 24px) !important;
-    padding: 14px !important;
+    width: calc(100vw - 20px);
+    max-height: calc(100vh - 24px);
+    padding: 14px;
   }
+}
 
-  .help-actions button {
-    width: 100% !important;
+/* Druck */
+@media print {
+  .global-help-button,
+  .qr-links,
+  .qr-overview,
+  .small-read-button,
+  .speech-speed-controls,
+  .practice-box,
+  .understood-area {
+    display: none;
   }
 }
