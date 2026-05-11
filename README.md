@@ -274,3 +274,39 @@ Zusätzlich wurde ein Hinweis ergänzt:
 Dies ist ein unabhängiges Bildungsangebot.
 Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
 ```
+
+
+## QR-Direktlinks für Poster
+
+Die QR-Links sind nicht mehr sichtbar auf der Lernseite.
+
+Sie bleiben technisch nutzbar und sind nur für die Poster-Vorbereitung gedacht.
+
+Beispiele:
+
+```text
+index.html#datenschutz
+index.html#datenschutz:kurz
+index.html#datenschutz:quiz
+index.html#datenschutz:merk
+
+index.html#whatsapp
+index.html#whatsapp:kurz
+index.html#whatsapp:quiz
+index.html#whatsapp:merk
+```
+
+Bedeutung:
+
+```text
+#thema = Thema öffnen
+#thema:kurz = Kurz lernen öffnen
+#thema:quiz = Quiz direkt öffnen
+#thema:merk = Merk-Karte öffnen
+```
+
+## Hilfe-Button
+
+Der Button „Ich brauche Hilfe“ wurde größer und prominenter gestaltet.
+
+Er bleibt sichtbar, damit Lernende jederzeit Unterstützung finden können.

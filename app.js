@@ -749,7 +749,6 @@ function renderMenu() {
 
       <div class="menu-extra-actions">
         <button class="quiz-link quiz-button" onclick="renderEvaluation()">Rückmeldung / Testbogen</button>
-        <button class="quiz-link quiz-button" onclick="renderQrOverview()">QR-Links für Poster</button>
       </div>
     </section>
   `;
