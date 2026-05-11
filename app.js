@@ -89,7 +89,7 @@ function renderMemoryCard(topicId) {
     <article class="card memory-card">
       <div class="memory-frame">
         <div class="module-tag">Merk-Karte</div>
-        <h2>${escapeHtml(topic.title)}</h2>
+        <div class="symbol-heading"><span class="access-box-symbol" aria-hidden="true">${getIconHtml("remember")}</span><h2>${escapeHtml(topic.title)}</h2></div>
         <p class="memory-subtitle">Meine 3 wichtigsten Regeln</p>
 
         <div class="memory-section">
@@ -525,7 +525,7 @@ function renderHelpOverlay() {
   overlay.innerHTML = `
     <div class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle">
       <button class="help-close" onclick="closeHelpOverlay()">Schließen</button>
-      <h2 id="helpDialogTitle">Ich brauche Hilfe</h2>
+      <div class="help-title-row"><span class="access-box-symbol" aria-hidden="true">${getIconHtml("help")}</span><h2 id="helpDialogTitle">Ich brauche Hilfe</h2></div>
       <p>Du musst das nicht allein lösen.</p>
       <p>Frage eine Person, der du vertraust.</p>
       <ul>
@@ -809,6 +809,42 @@ function getLevelText(progress) {
   return "Start";
 }
 
+
+function speakText(text) {
+  if (!("speechSynthesis" in window)) {
+    liveRegion.textContent = "Vorlesen wird von diesem Browser nicht unterstützt.";
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const cleanText = String(text || "").replace(/\s+/g, " ").trim();
+  if (!cleanText) return;
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.lang = "de-DE";
+  utterance.rate = 0.88;
+  window.speechSynthesis.speak(utterance);
+  liveRegion.textContent = "Der Text wird vorgelesen.";
+}
+
+function speakElementById(id) {
+  const element = document.getElementById(id);
+  if (!element) return;
+  speakText(element.innerText || element.textContent || "");
+}
+
+function buildAccessibleBox(type, title, htmlContent, iconName, id) {
+  const safeId = id || `box-${Math.random().toString(36).slice(2)}`;
+  return `
+    <section class="access-box access-${type}" id="${safeId}">
+      <div class="access-box-symbol" aria-hidden="true">${getIconHtml(iconName)}</div>
+      <div class="access-box-content">
+        <h3>${escapeHtml(title)}</h3>
+        <div class="access-box-text">${htmlContent}</div>
+        <button type="button" class="small-read-button" onclick="speakElementById('${safeId}')">Vorlesen</button>
+      </div>
+    </section>
+  `;
+}
+
 function buildCard(lesson, topic) {
   let html = `
     <article class="card">
@@ -849,11 +885,11 @@ function buildCard(lesson, topic) {
   }
 
   if (lesson.warning) {
-    html += `<div class="notice warning">${escapeHtml(lesson.warning)}</div>`;
+    html += buildAccessibleBox("warning", "Achtung", `<p>${escapeHtml(lesson.warning)}</p>`, "warning", `warning-${currentTopicId}-${currentStep}`);
   }
 
   if (lesson.success) {
-    html += `<div class="notice success">${escapeHtml(lesson.success)}</div>`;
+    html += buildAccessibleBox("success", "Geschafft", `<p>${escapeHtml(lesson.success)}</p>`, "check", `success-${currentTopicId}-${currentStep}`);
   }
 
   if (lesson.exercise) {
@@ -861,17 +897,13 @@ function buildCard(lesson, topic) {
   }
 
   if (lesson.remember) {
-    html += `<div class="remember">${escapeHtml(lesson.remember)}</div>`;
+    html += buildAccessibleBox("remember", "Merksatz", `<p>${escapeHtml(lesson.remember)}</p>`, "remember", `remember-${currentTopicId}-${currentStep}`);
   }
 
   if (lesson.quiz) {
     html += `
-      <div class="completion-box">
-        <h3>Geschafft.</h3>
-        <p>Du hast dieses Thema beendet.</p>
-        <p>Du kannst die wichtigsten Regeln wiederholen oder das Quiz starten.</p>
-      </div>
-      <button class="quiz-link quiz-button" onclick="startQuiz()">Quiz starten</button>
+      ${buildAccessibleBox("completion", "Geschafft", "<p>Du hast dieses Thema beendet.</p><p>Du kannst die wichtigsten Regeln wiederholen oder das Quiz starten.</p>", "check", `completion-${currentTopicId}-${currentStep}`)}
+      <button class="quiz-link quiz-button" onclick="startQuiz()">${getIconHtml("quiz")} Quiz starten</button>
     `;
   }
 
@@ -881,15 +913,20 @@ function buildCard(lesson, topic) {
 
 function buildExercise(exercise) {
   return `
-    <div class="exercise">
-      <div class="exercise-question">${escapeHtml(exercise.question)}</div>
-      <div class="choice-list">
-        <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'safe')">Das wirkt sicher</button>
-        <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'unsafe')">Das wirkt unsicher</button>
-        <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'help')">Ich brauche Hilfe</button>
+    <section class="exercise access-box access-exercise" id="${exercise.id}-box">
+      <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div>
+      <div class="access-box-content">
+        <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div><div class="access-box-content"><h3>Übung</h3>
+        <div class="exercise-question">${escapeHtml(exercise.question)}</div>
+        <button type="button" class="small-read-button" onclick="speakElementById('${exercise.id}-box')">Übung vorlesen</button>
+        <div class="choice-list">
+          <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'safe')">Das wirkt sicher</button>
+          <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'unsafe')">Das wirkt unsicher</button>
+          <button type="button" class="choice-button" onclick="showFeedback('${exercise.id}', 'help')">Ich brauche Hilfe</button>
+        </div>
+        <div id="${exercise.id}-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden></div>
       </div>
-      <div id="${exercise.id}-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden></div>
-    </div>
+    </section>
   `;
 }
 
@@ -1003,13 +1040,13 @@ function renderQuiz() {
   const q = topic.quizQuestions[quizIndex];
 
   let html = `
-    <article class="card quiz-card">
+    <article class="card quiz-card access-quiz-card">
       <div class="module-tag">Quiz: ${escapeHtml(topic.title)}</div>
       <div class="card-header">
         <div class="icon" aria-hidden="true">${getIconHtml("quiz")}</div>
         <h2>Frage ${quizIndex + 1}</h2>
       </div>
-      <p class="quiz-question">${escapeHtml(q.question)}</p>
+      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakElementById('quiz-question-box')">Quizfrage vorlesen</button></div></section>
       <div class="choice-list">
   `;
 
@@ -1061,7 +1098,7 @@ function renderQuizFeedback(isCorrect, explanation) {
   const feedbackTitle = isCorrect ? "Richtig." : "Nicht ganz.";
 
   content.innerHTML = `
-    <article class="card quiz-card">
+    <article class="card quiz-card access-quiz-card">
       <div class="module-tag">Quiz: ${escapeHtml(topic.title)}</div>
       <div class="card-header">
         <div class="icon" aria-hidden="true">${getIconHtml(isCorrect ? "check" : "warning")}</div>
@@ -1128,7 +1165,7 @@ function renderQuizResult() {
       <article class="card certificate-card" id="certificateArea">
         <div class="certificate-frame">
           <div class="module-tag">Urkunde</div>
-          <h2 class="certificate-title">Urkunde</h2>
+          <div class="symbol-heading certificate-symbol-heading"><span class="access-box-symbol" aria-hidden="true">${getIconHtml("check")}</span><h2 class="certificate-title">Urkunde</h2></div>
           <p class="certificate-subtitle">erfolgreich abgeschlossen</p>
 
           <p class="certificate-topic">Thema: <strong>${escapeHtml(topic.title)}</strong></p>
@@ -1173,7 +1210,7 @@ function renderQuizResult() {
     `;
   } else {
     content.innerHTML = `
-      <article class="card quiz-card">
+      <article class="card quiz-card access-quiz-card">
         <div class="module-tag">Quiz-Ergebnis</div>
         <div class="card-header">
           <div class="icon" aria-hidden="true">${getIconHtml("remember")}</div>

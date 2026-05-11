@@ -2852,3 +2852,154 @@ body.view-menu .topic-grid {
   background: var(--hint);
   border: 2px solid var(--hint-border);
 }
+
+
+/* Symbol- und Vorleselogik für wichtige Bereiche */
+.access-box {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 14px;
+  align-items: start;
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 3px solid var(--gray);
+  background: #FFFFFF;
+}
+
+.access-box-symbol {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #FFFFFF;
+  border: 3px solid currentColor;
+  flex: 0 0 auto;
+}
+
+.access-box-symbol img {
+  width: 34px;
+  height: 34px;
+}
+
+.access-box-content h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.access-box-content p {
+  margin-top: 0.35rem;
+}
+
+.access-warning {
+  background: var(--warning-light);
+  border-color: var(--warning);
+}
+
+.access-warning .access-box-symbol {
+  color: var(--warning);
+}
+
+.access-success,
+.access-completion {
+  background: var(--success-light);
+  border-color: var(--success);
+}
+
+.access-success .access-box-symbol,
+.access-completion .access-box-symbol {
+  color: var(--success);
+}
+
+.access-remember {
+  background: var(--hint);
+  border-color: var(--hint-border);
+}
+
+.access-remember .access-box-symbol {
+  color: var(--hint-border);
+}
+
+.access-exercise,
+.access-quiz {
+  background: var(--blue-light);
+  border-color: var(--blue-mid);
+}
+
+.access-exercise .access-box-symbol,
+.access-quiz .access-box-symbol {
+  color: var(--blue);
+}
+
+.small-read-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 12px 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--blue-mid);
+  background: #FFFFFF;
+  color: var(--black);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.small-read-button::before {
+  content: "▶";
+  font-size: 0.85rem;
+}
+
+.small-read-button:hover,
+.small-read-button:focus-visible {
+  background: var(--blue-light);
+  outline: 4px solid rgba(61, 184, 179, 0.35);
+  outline-offset: 2px;
+}
+
+.symbol-heading,
+.help-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.symbol-heading h2,
+.help-title-row h2 {
+  margin: 0;
+}
+
+.certificate-symbol-heading {
+  justify-content: center;
+}
+
+.quiz-link .icon-small,
+.quiz-link img {
+  vertical-align: middle;
+}
+
+@media (max-width: 640px) {
+  .access-box {
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .access-box-symbol {
+    width: 46px;
+    height: 46px;
+  }
+
+  .access-box-symbol img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media print {
+  .small-read-button {
+    display: none !important;
+  }
+}

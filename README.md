@@ -329,3 +329,31 @@ Antwort-Buttons sind als echte Buttons gesetzt.
 Rückmeldung wird zuverlässig angezeigt.
 Navigation nutzt den aktiven Lernmodus.
 ```
+
+
+## Symbole und Vorlesen
+
+Wichtige Bereiche wurden für Menschen mit Leseschwierigkeiten verbessert.
+
+Ergänzt wurden:
+
+```text
+Merksatz = Symbol + Vorlesen
+Übung = Symbol + Vorlesen
+Quizfrage = Symbol + Vorlesen
+Geschafft = Symbol
+Warnung = Symbol
+Hilfe = Symbol
+Merk-Karte = Symbol
+Urkunde = Symbol
+```
+
+Die Symbole bleiben wiederkehrend gleich:
+
+```text
+Haken = geschafft / richtig
+Fragezeichen oder Hilfe-Symbol = Hilfe / Quiz
+Warnsymbol = Achtung / Gefahr
+Merksymbol = Merksatz / Merk-Karte
+Übungssymbol = Aufgabe / Übung
+```
