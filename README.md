@@ -1,6 +1,8 @@
-# Sicher digital lernen – 8 Themen
+# Sicher digital lernen – 8 Themen mit je 39 Lernseiten
 
-Diese GitHub-Version enthält eine kleine barrierearme Lernplattform mit 8 Themen:
+Diese GitHub-Version enthält eine kleine barrierearme Lernplattform mit 8 Themen.
+
+## Themen
 
 1. Datenschutz
 2. WhatsApp
@@ -11,20 +13,36 @@ Diese GitHub-Version enthält eine kleine barrierearme Lernplattform mit 8 Theme
 7. TikTok
 8. Hilfe bei Problemen
 
+## Didaktische Struktur pro Thema
+
+Jedes Thema hat 39 kurze Lernseiten nach gleicher Lernlogik:
+
+1. Verstehen und Alltag
+2. Private Daten
+3. Inhalte / Fotos / Stimme / Beiträge
+4. Risiken / Links / Betrug / Druck
+5. Gutes Verhalten
+6. Schutz und Hilfe
+7. Datenschutz-Hinweis, Wiederholung, Quiz
+
 ## Dateien
 
 - `index.html` – Grundstruktur
 - `styles.css` – Gestaltung
-- `app.js` – Inhalte und Logik
+- `topics.js` – alle Inhalte
+- `app.js` – Lernlogik
+- `README.md` – Anleitung
 
-## Veröffentlichung mit GitHub Pages
+## GitHub Pages
 
-1. Neues GitHub-Repository erstellen.
-2. Diese Dateien hochladen:
+1. Neues Repository erstellen.
+2. Alle Dateien hochladen:
    - `index.html`
    - `styles.css`
+   - `topics.js`
    - `app.js`
-3. In GitHub öffnen:
+   - `README.md`
+3. GitHub öffnen:
    - Settings
    - Pages
 4. Einstellungen:
@@ -32,11 +50,11 @@ Diese GitHub-Version enthält eine kleine barrierearme Lernplattform mit 8 Theme
    - Branch: main
    - Folder: /root
 5. Speichern.
-6. Danach wird eine GitHub-Pages-Adresse angezeigt.
+6. Die GitHub-Pages-Adresse nutzen.
 
 ## Kahoot-Links ändern
 
-In `app.js` hat jedes Thema einen eigenen Quiz-Link.
+In `topics.js` hat jedes Thema einen eigenen Quiz-Link.
 
 Suche nach:
 
@@ -44,7 +62,7 @@ Suche nach:
 "quiz": "https://kahoot.com"
 ```
 
-Ersetze den Link durch den echten Kahoot-Link für das jeweilige Thema.
+Ersetze den Link beim jeweiligen Thema durch den echten Kahoot-Link.
 
 ## Datenschutz
 
