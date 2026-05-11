@@ -2562,3 +2562,154 @@ body.view-menu .topic-grid {
     display: none !important;
   }
 }
+
+
+/* App-nahe Farborientierung ohne Original-Logos
+   Die Themenkarten nutzen eigene neutrale Icons und app-nahe Farben.
+   Die Original-Logos der Plattformen werden nicht verwendet.
+*/
+.brand-disclaimer {
+  background: #FFFFFF;
+  border: 2px solid var(--gray);
+  border-left: 6px solid var(--blue);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin: 14px 0;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.topic-disclaimer {
+  margin-top: 16px;
+}
+
+/* Grundform der Themenkarte */
+.simple-topic-card {
+  border-left-width: 10px !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Datenschutz: seriöses Dunkelblau */
+.simple-topic-card.topic-datenschutz,
+.topic-choice-screen.topic-datenschutz .choice-header {
+  border-left-color: #00285A !important;
+}
+.simple-topic-card.topic-datenschutz:hover,
+.simple-topic-card.topic-datenschutz:focus-visible {
+  background: #E8EEF7 !important;
+  border-color: #00285A !important;
+}
+
+/* WhatsApp: app-nahe grüne Orientierung, aber eigenes Icon */
+.simple-topic-card.topic-whatsapp,
+.topic-choice-screen.topic-whatsapp .choice-header {
+  border-left-color: #25D366 !important;
+}
+.simple-topic-card.topic-whatsapp:hover,
+.simple-topic-card.topic-whatsapp:focus-visible {
+  background: #E6F7EC !important;
+  border-color: #25D366 !important;
+}
+
+/* Facebook: blau */
+.simple-topic-card.topic-facebook,
+.topic-choice-screen.topic-facebook .choice-header {
+  border-left-color: #1877F2 !important;
+}
+.simple-topic-card.topic-facebook:hover,
+.simple-topic-card.topic-facebook:focus-visible {
+  background: #E8F1FF !important;
+  border-color: #1877F2 !important;
+}
+
+/* Instagram: pink-lila Anmutung ohne Logo/Verlaufspflicht */
+.simple-topic-card.topic-instagram,
+.topic-choice-screen.topic-instagram .choice-header {
+  border-left-color: #C13584 !important;
+}
+.simple-topic-card.topic-instagram:hover,
+.simple-topic-card.topic-instagram:focus-visible {
+  background: #FBEAF4 !important;
+  border-color: #C13584 !important;
+}
+
+/* YouTube: rot nur als Themenkennung; Warn-Rot bleibt in Warnboxen semantisch erhalten */
+.simple-topic-card.topic-youtube,
+.topic-choice-screen.topic-youtube .choice-header {
+  border-left-color: #CC0000 !important;
+}
+.simple-topic-card.topic-youtube:hover,
+.simple-topic-card.topic-youtube:focus-visible {
+  background: #FCEAEA !important;
+  border-color: #CC0000 !important;
+}
+
+/* Snapchat: gelbe Orientierung */
+.simple-topic-card.topic-snapchat,
+.topic-choice-screen.topic-snapchat .choice-header {
+  border-left-color: #D6A400 !important;
+}
+.simple-topic-card.topic-snapchat:hover,
+.simple-topic-card.topic-snapchat:focus-visible {
+  background: #FFF3CD !important;
+  border-color: #D6A400 !important;
+}
+
+/* TikTok: dunkle Orientierung mit türkis/pinker Akzent-Anmutung ohne Logo */
+.simple-topic-card.topic-tiktok,
+.topic-choice-screen.topic-tiktok .choice-header {
+  border-left-color: #111111 !important;
+}
+.simple-topic-card.topic-tiktok:hover,
+.simple-topic-card.topic-tiktok:focus-visible {
+  background: #F0F0F0 !important;
+  border-color: #111111 !important;
+}
+
+/* Hilfe: unterstützendes Grün */
+.simple-topic-card.topic-hilfe,
+.topic-choice-screen.topic-hilfe .choice-header {
+  border-left-color: #2E7D32 !important;
+}
+.simple-topic-card.topic-hilfe:hover,
+.simple-topic-card.topic-hilfe:focus-visible {
+  background: #E7F3E8 !important;
+  border-color: #2E7D32 !important;
+}
+
+/* Icon-Felder nehmen die Themenfarbe als Rahmen auf */
+.simple-topic-card.topic-datenschutz .topic-icon { border-color: #00285A !important; }
+.simple-topic-card.topic-whatsapp .topic-icon { border-color: #25D366 !important; }
+.simple-topic-card.topic-facebook .topic-icon { border-color: #1877F2 !important; }
+.simple-topic-card.topic-instagram .topic-icon { border-color: #C13584 !important; }
+.simple-topic-card.topic-youtube .topic-icon { border-color: #CC0000 !important; }
+.simple-topic-card.topic-snapchat .topic-icon { border-color: #D6A400 !important; }
+.simple-topic-card.topic-tiktok .topic-icon { border-color: #111111 !important; }
+.simple-topic-card.topic-hilfe .topic-icon { border-color: #2E7D32 !important; }
+
+/* Aktionskarten behalten die Lernlogik-Farben */
+.topic-choice-actions .action-short {
+  background: #DDF3F2 !important;
+  border-color: #3DB8B3 !important;
+}
+.topic-choice-actions .action-full {
+  background: #00285A !important;
+  color: #FFFFFF !important;
+  border-color: #00285A !important;
+}
+.topic-choice-actions .action-quiz {
+  background: #E7F3E8 !important;
+  border-color: #2E7D32 !important;
+}
+.topic-choice-actions .action-memory {
+  background: #FFF3CD !important;
+  border-color: #D6A400 !important;
+}
+
+/* Smartphone: Disclaimer kompakt halten */
+@media (max-width: 760px) {
+  .brand-disclaimer {
+    font-size: 0.92rem;
+    padding: 10px 12px;
+  }
+}

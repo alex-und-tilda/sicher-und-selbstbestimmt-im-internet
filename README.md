@@ -241,3 +241,36 @@ Die QR-Übersicht ist auch über folgenden Link erreichbar:
 ```text
 index.html#qr
 ```
+
+
+## App-nahe Farborientierung
+
+Die Themenkarten nutzen nun app-nahe Farben zur Orientierung.
+
+Wichtig:
+
+```text
+Es werden keine Original-Logos verwendet.
+Es werden keine offiziellen App-Icons verwendet.
+Es werden keine App-Screenshots verwendet.
+```
+
+Die Plattform nutzt eigene neutrale Icons und eine farbliche Orientierung:
+
+```text
+WhatsApp = Grün
+Facebook = Blau
+Instagram = Pink/Lila
+YouTube = Rot als Themenkennung
+Snapchat = Gelb
+TikTok = Dunkel
+Datenschutz = Dunkelblau
+Hilfe = Grün
+```
+
+Zusätzlich wurde ein Hinweis ergänzt:
+
+```text
+Dies ist ein unabhängiges Bildungsangebot.
+Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
+```

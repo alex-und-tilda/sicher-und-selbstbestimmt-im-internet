@@ -449,7 +449,7 @@ function renderTopicChoice(topicId) {
   const questions = (topic.helpQuestions || []).map(q => `<li>${escapeHtml(q)}</li>`).join("");
 
   content.innerHTML = `
-    <section class="menu-card topic-choice-screen">
+    <section class="menu-card topic-choice-screen topic-${topic.id}">
       <button class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
 
       <div class="choice-header">
@@ -497,6 +497,11 @@ function renderTopicChoice(topicId) {
           </span>
         </button>
       </div>
+
+      <section class="brand-disclaimer topic-disclaimer">
+        Dies ist ein unabhängiges Bildungsangebot.
+        Es ist nicht mit der App-Plattform verbunden.
+      </section>
 
       <section class="topic-help-panel">
         <h3>Das kannst du eine Person fragen, der du vertraust:</h3>
@@ -714,6 +719,11 @@ function renderMenu() {
 
       ${renderCentralProgressBox()}
 
+      <div class="brand-disclaimer">
+        Dies ist ein unabhängiges Bildungsangebot.
+        Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
+      </div>
+
       <div class="privacy-note">
         Es wird kein Name gespeichert.
         Der Lernstand wird nur auf diesem Gerät gemerkt.
@@ -724,7 +734,7 @@ function renderMenu() {
 
   topics.forEach(topic => {
     html += `
-      <button class="simple-topic-card" onclick="renderTopicChoice('${topic.id}')">
+      <button class="simple-topic-card topic-${topic.id}" onclick="renderTopicChoice('${topic.id}')">
         <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon)}</span>
         <span>
           <strong>${escapeHtml(topic.title)}</strong>
