@@ -422,13 +422,15 @@ function renderHelpOverlay() {
       </div>
 
       <div class="help-small-safety-note">
-        <h3>Wichtig</h3>
-        <p>Wenn dir im Internet etwas Angst macht, sprich sofort mit einer Person, der du vertraust.</p>
-        <p>Bei akuter Gefahr: 110.</p>
+        <h3>Wenn etwas im Internet Angst macht</h3>
+        <p>Dann nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.</p>
+        <p>Sprich mit einer Person, die dich unterstützt.</p>
+        <p>Zum Beispiel: Wohnbereich, Dienst, Gruppenleitung, Digital-Begleiterin oder Digital-Begleiter.</p>
+        <p>Du musst das nicht allein klären.</p>
       </div>
 
       <div class="help-actions">
-        <button type="button" class="btn btn-secondary" onclick="speakText('Du weißt gerade nicht, wie es weitergeht. Das ist okay. Du darfst dir Zeit nehmen. Wähle zuerst ein Thema. Danach wähle Kurz lernen, Ausführlich lernen, Quiz oder Merk-Karte. Wenn du den Text nicht verstehst, nutze Vorlesen oder frage eine Person, der du vertraust.')">Hilfe langsam vorlesen</button>
+        <button type="button" class="btn btn-secondary" onclick="speakText('Du weißt gerade nicht, wie es weitergeht. Das ist okay. Du darfst dir Zeit nehmen. Wähle zuerst ein Thema. Danach wähle Kurz lernen, Ausführlich lernen, Quiz oder Merk-Karte. Wenn du den Text nicht verstehst, nutze Vorlesen oder frage eine Person, der du vertraust. Wenn dir im Internet etwas Angst macht, nutze die Unterstützungssysteme der Alexianer und der Stift Tilbeck.')">Hilfe langsam vorlesen</button>
         <button type="button" class="btn btn-secondary" onclick="goHome(); closeHelpOverlay();">Zur Startseite</button>
         <button type="button" class="btn btn-primary" onclick="closeHelpOverlay()">Schließen</button>
       </div>

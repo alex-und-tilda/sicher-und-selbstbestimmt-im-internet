@@ -181,3 +181,28 @@ Wen kann ich fragen?
 ```
 
 Ein kurzer Sicherheitshinweis bleibt unten stehen.
+
+
+## Hilfe-Hinweis zu Unterstützungssystemen
+
+Der Hilfe-Button verweist nicht mehr auf 110.
+
+Stattdessen verweist er auf die Unterstützungssysteme der Alexianer / Stift Tilbeck.
+
+Formulierung:
+
+```text
+Wenn etwas im Internet Angst macht:
+Dann nutze die Unterstützungssysteme der Alexianer / Stift Tilbeck.
+
+Sprich mit einer Person, die dich unterstützt.
+Zum Beispiel:
+Wohnbereich
+Dienst
+Gruppenleitung
+Digital-Begleiterin oder Digital-Begleiter
+
+Du musst das nicht allein klären.
+```
+
+Der Hilfe-Button bleibt damit eine Orientierungs- und Lernhilfe.

@@ -3374,3 +3374,12 @@ button[data-action="memory"] {
 .help-actions .btn {
   text-align: center;
 }
+
+
+/* Hinweis im Hilfe-Dialog:
+   keine Notrufberatung, sondern Verweis auf interne Unterstützungssysteme.
+*/
+.help-small-safety-note {
+  border-color: var(--blue-mid);
+  background: var(--blue-light);
+}
