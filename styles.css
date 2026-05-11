@@ -627,3 +627,69 @@ button, a {
     max-width: 124px;
   }
 }
+
+
+/* Abschlussprüfung: bessere Lesbarkeit auf Desktop */
+@media (min-width: 900px) {
+  .menu-card {
+    max-height: calc(100dvh - 245px);
+  }
+
+  .card {
+    max-height: calc(100dvh - 245px);
+  }
+}
+
+/* Leichter sichtbar: Startlabel in Themenkarten */
+.topic-start-label {
+  white-space: nowrap;
+}
+
+/* Footer bleibt dezent */
+.app-footer {
+  opacity: 0.95;
+}
+
+
+/* Illustrative Lernbilder */
+.topic-preview {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--blue-light);
+  background: var(--blue-very-light);
+  margin-top: 10px;
+}
+
+.lesson-illustration {
+  display: block;
+  width: 100%;
+  max-height: 210px;
+  object-fit: contain;
+  border-radius: 18px;
+  border: 1px solid var(--blue-light);
+  background: var(--blue-very-light);
+  margin: 0 0 18px 0;
+}
+
+@media (min-width: 761px) {
+  .topic-button {
+    grid-template-columns: auto 1fr;
+  }
+
+  .topic-preview {
+    max-height: 105px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topic-preview {
+    display: none;
+  }
+
+  .lesson-illustration {
+    max-height: 160px;
+  }
+}

@@ -162,3 +162,36 @@ Diese Version wurde wie eine kleine Lernplattform gestaltet:
 - Abschlusskarte vor dem Quiz
 - Logos im Footer statt im Header
 - ruhigere visuelle Hierarchie
+
+
+## Inhaltliche Prüfung
+
+Diese Version wurde nachträglich fachlich geprüft und korrigiert.
+
+Korrigiert wurden insbesondere:
+
+- Datenschutz wird nicht mehr wie eine App behandelt.
+- „Hilfe bei Problemen“ wird nicht mehr wie eine Plattform behandelt.
+- Unpassende Formulierungen wie „Was kann ich mit Datenschutz machen?“ wurden entfernt.
+- Die ersten Lernseiten wurden bei Datenschutz und Hilfe fachlich neu aufgebaut.
+- Plattform-Themen wurden sprachlich präzisiert.
+
+
+## Illustrative Lernbilder
+
+Diese Version enthält zusätzlich neutrale Lernbilder pro Thema:
+
+```text
+assets/illustrations/datenschutz.svg
+assets/illustrations/whatsapp.svg
+assets/illustrations/facebook.svg
+assets/illustrations/instagram.svg
+assets/illustrations/youtube.svg
+assets/illustrations/snapchat.svg
+assets/illustrations/tiktok.svg
+assets/illustrations/hilfe.svg
+```
+
+Die Bilder sind bewusst keine echten App-Screenshots.
+Sie sind neutrale Smartphone-Mockups.
+Das ist langlebiger, rechtlich unkritischer und didaktisch ruhiger.

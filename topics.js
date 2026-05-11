@@ -18,53 +18,56 @@ const topics = [
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "title": "Was ist Datenschutz?",
+        "title": "Was bedeutet Datenschutz?",
         "icon": "lock",
         "text": [
-          "Datenschutz ist ein digitales Angebot.",
-          "Du kannst dort Inhalte sehen oder teilen.",
-          "Andere Menschen können mit dir Kontakt haben."
+          "Datenschutz bedeutet: Deine persönlichen Informationen werden geschützt.",
+          "Nicht jede Person darf alles über dich wissen.",
+          "Du darfst mitentscheiden, was du teilst."
         ],
-        "remember": "Datenschutz ist ein Werkzeug für Kontakt und Inhalte.",
+        "remember": "Datenschutz schützt deine Privatsphäre.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "title": "Was kann ich mit Datenschutz machen?",
-        "icon": "lock",
+        "title": "Warum sind Daten wichtig?",
+        "icon": "data",
         "text": [
-          "Mit Datenschutz kannst du viele Dinge tun."
+          "Daten erzählen etwas über dich.",
+          "Zum Beispiel, wo du wohnst oder was du machst.",
+          "Darum sollen Daten nicht einfach weitergegeben werden."
         ],
         "bullets": [
-          "Daten erkennen",
-          "Daten schützen",
-          "bewusst entscheiden"
+          "Name und Adresse",
+          "Telefonnummer",
+          "Fotos und Standort"
         ],
-        "remember": "Ich entscheide, was ich teile.",
+        "remember": "Daten können viel über mich verraten.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
         "title": "Datenschutz im Alltag",
-        "icon": "check",
+        "icon": "home",
         "text": [
-          "Datenschutz kann im Alltag hilfreich sein."
+          "Datenschutz passiert im Alltag.",
+          "Zum Beispiel beim Handy, bei Apps oder bei Formularen."
         ],
         "bullets": [
-          "Informationen bekommen",
-          "Kontakt halten",
-          "Inhalte ansehen oder teilen"
+          "nicht alles eintragen",
+          "nicht alles posten",
+          "bei Unsicherheit fragen"
         ],
-        "remember": "Datenschutz kann praktisch sein.",
+        "remember": "Ich prüfe, bevor ich Daten teile.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
-        "title": "Guten Inhalt erkennen",
+        "title": "Gute Datenschutz-Entscheidung erkennen",
         "icon": "check",
         "text": [
-          "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
+          "Eine gute Entscheidung schützt deine Daten."
         ],
-        "quote": "„Ich brauche nur deine Telefonnummer für den Termin.“",
-        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll.",
+        "quote": "Ich gebe nur die Daten an, die wirklich nötig sind.",
+        "success": "Das ist gut. Du teilst nicht mehr als nötig.",
+        "remember": "So wenig Daten wie möglich.",
         "module": "Modul 1: Datenschutz verstehen"
       },
       {
@@ -360,9 +363,8 @@ const topics = [
         "title": "Daten im Internet",
         "icon": "message",
         "text": [
-          "Viele Menschen können Inhalte sehen.",
-          "Inhalte können schnell weitergegeben werden.",
-          "Darum solltest du vorsichtig sein."
+          "Daten können im Internet schnell weitergegeben werden.",
+          "Darum ist vorsichtiges Handeln wichtig."
         ],
         "remember": "Viele können mitlesen.",
         "module": "Modul 5: Daten im Internet"
@@ -542,7 +544,8 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/datenschutz.svg"
   },
   {
     "id": "whatsapp",
@@ -1087,7 +1090,8 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/whatsapp.svg"
   },
   {
     "id": "facebook",
@@ -1111,9 +1115,9 @@ const topics = [
         "title": "Was ist Facebook?",
         "icon": "message",
         "text": [
-          "Facebook ist ein digitales Angebot.",
-          "Du kannst dort Inhalte sehen oder teilen.",
-          "Andere Menschen können mit dir Kontakt haben."
+          "Facebook ist ein soziales Netzwerk.",
+          "Menschen können dort Beiträge, Fotos und Kommentare sehen.",
+          "Du kannst mit anderen Menschen Kontakt halten."
         ],
         "remember": "Facebook ist ein Werkzeug für Kontakt und Inhalte.",
         "module": "Modul 1: Facebook verstehen"
@@ -1147,7 +1151,7 @@ const topics = [
         "module": "Modul 1: Facebook verstehen"
       },
       {
-        "title": "Guten Inhalt erkennen",
+        "title": "Gute Inhalte erkennen",
         "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
@@ -1632,7 +1636,8 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/facebook.svg"
   },
   {
     "id": "instagram",
@@ -1656,9 +1661,9 @@ const topics = [
         "title": "Was ist Instagram?",
         "icon": "photo",
         "text": [
-          "Instagram ist ein digitales Angebot.",
-          "Du kannst dort Inhalte sehen oder teilen.",
-          "Andere Menschen können mit dir Kontakt haben."
+          "Instagram ist eine App für Fotos, Stories und Reels.",
+          "Viele Inhalte sind sichtbar für andere.",
+          "Darum ist Privatsphäre wichtig."
         ],
         "remember": "Instagram ist ein Werkzeug für Kontakt und Inhalte.",
         "module": "Modul 1: Instagram verstehen"
@@ -1692,7 +1697,7 @@ const topics = [
         "module": "Modul 1: Instagram verstehen"
       },
       {
-        "title": "Guten Inhalt erkennen",
+        "title": "Gute Inhalte erkennen",
         "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
@@ -2177,7 +2182,8 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/instagram.svg"
   },
   {
     "id": "youtube",
@@ -2201,9 +2207,9 @@ const topics = [
         "title": "Was ist YouTube?",
         "icon": "understand",
         "text": [
-          "YouTube ist ein digitales Angebot.",
-          "Du kannst dort Inhalte sehen oder teilen.",
-          "Andere Menschen können mit dir Kontakt haben."
+          "YouTube ist eine Plattform für Videos.",
+          "Du kannst Videos ansehen und Kommentare lesen.",
+          "Nicht jedes Video ist richtig oder sicher."
         ],
         "remember": "YouTube ist ein Werkzeug für Kontakt und Inhalte.",
         "module": "Modul 1: YouTube verstehen"
@@ -2237,7 +2243,7 @@ const topics = [
         "module": "Modul 1: YouTube verstehen"
       },
       {
-        "title": "Guten Inhalt erkennen",
+        "title": "Gute Inhalte erkennen",
         "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
@@ -2722,7 +2728,8 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/youtube.svg"
   },
   {
     "id": "snapchat",
@@ -2746,9 +2753,9 @@ const topics = [
         "title": "Was ist Snapchat?",
         "icon": "photo",
         "text": [
-          "Snapchat ist ein digitales Angebot.",
-          "Du kannst dort Inhalte sehen oder teilen.",
-          "Andere Menschen können mit dir Kontakt haben."
+          "Snapchat ist eine App für Snaps, Chats und Storys.",
+          "Manche Inhalte verschwinden schnell.",
+          "Trotzdem können sie gespeichert werden."
         ],
         "remember": "Snapchat ist ein Werkzeug für Kontakt und Inhalte.",
         "module": "Modul 1: Snapchat verstehen"
@@ -2782,7 +2789,7 @@ const topics = [
         "module": "Modul 1: Snapchat verstehen"
       },
       {
-        "title": "Guten Inhalt erkennen",
+        "title": "Gute Inhalte erkennen",
         "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
@@ -3267,7 +3274,8 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/snapchat.svg"
   },
   {
     "id": "tiktok",
@@ -3291,9 +3299,9 @@ const topics = [
         "title": "Was ist TikTok?",
         "icon": "understand",
         "text": [
-          "TikTok ist ein digitales Angebot.",
-          "Du kannst dort Inhalte sehen oder teilen.",
-          "Andere Menschen können mit dir Kontakt haben."
+          "TikTok ist eine App für kurze Videos.",
+          "Du kannst Videos ansehen oder selbst posten.",
+          "Trends und Kommentare können Einfluss auf dich haben."
         ],
         "remember": "TikTok ist ein Werkzeug für Kontakt und Inhalte.",
         "module": "Modul 1: TikTok verstehen"
@@ -3327,7 +3335,7 @@ const topics = [
         "module": "Modul 1: TikTok verstehen"
       },
       {
-        "title": "Guten Inhalt erkennen",
+        "title": "Gute Inhalte erkennen",
         "icon": "check",
         "text": [
           "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
@@ -3812,7 +3820,8 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/tiktok.svg"
   },
   {
     "id": "hilfe",
@@ -3825,65 +3834,73 @@ const topics = [
         "title": "Start",
         "icon": "start",
         "text": [
-          "Diese Lernseite hilft dir, Hilfe bei Problemen sicherer zu nutzen.",
-          "Du lernst in kleinen Schritten.",
-          "Am Ende kannst du ein Quiz machen."
+          "Diese Lernseite hilft dir bei Problemen im Internet.",
+          "Du lernst, was du tun kannst.",
+          "Du musst Probleme nicht allein lösen."
         ],
-        "remember": "Du bestimmst dein Tempo.",
-        "module": "Modul 1: Hilfe bei Problemen verstehen"
+        "remember": "Hilfe holen ist richtig.",
+        "module": "Modul 1: Probleme erkennen"
       },
       {
-        "title": "Was ist Hilfe bei Problemen?",
+        "title": "Was ist ein digitales Problem?",
+        "icon": "warning",
+        "text": [
+          "Ein digitales Problem ist etwas, das dir im Internet Angst macht.",
+          "Oder etwas, das dich unter Druck setzt.",
+          "Oder etwas, das sich falsch anfühlt."
+        ],
+        "remember": "Ich nehme mein Gefühl ernst.",
+        "module": "Modul 1: Probleme erkennen",
+        "bullets": [
+          "Beleidigung",
+          "Drohung",
+          "Betrug"
+        ]
+      },
+      {
+        "title": "Welche Hilfe gibt es?",
         "icon": "help",
         "text": [
-          "Hilfe bei Problemen ist ein digitales Angebot.",
-          "Du kannst dort Inhalte sehen oder teilen.",
-          "Andere Menschen können mit dir Kontakt haben."
-        ],
-        "remember": "Hilfe bei Problemen ist ein Werkzeug für Kontakt und Inhalte.",
-        "module": "Modul 1: Hilfe bei Problemen verstehen"
-      },
-      {
-        "title": "Was kann ich mit Hilfe bei Problemen machen?",
-        "icon": "help",
-        "text": [
-          "Mit Hilfe bei Problemen kannst du viele Dinge tun."
+          "Es gibt verschiedene Menschen, die helfen können.",
+          "Du musst nicht allein entscheiden."
         ],
         "bullets": [
-          "Problem erkennen",
-          "Stopp-Regel nutzen",
-          "Hilfe holen"
+          "Fachkraft",
+          "vertraute Person",
+          "bei Gefahr: Polizei 110"
         ],
-        "remember": "Ich entscheide, was ich teile.",
-        "module": "Modul 1: Hilfe bei Problemen verstehen"
+        "remember": "Ich darf Unterstützung bekommen.",
+        "module": "Modul 1: Probleme erkennen"
       },
       {
-        "title": "Hilfe bei Problemen im Alltag",
-        "icon": "check",
+        "title": "Hilfe im Alltag",
+        "icon": "home",
         "text": [
-          "Hilfe bei Problemen kann im Alltag hilfreich sein."
+          "Hilfe kann ganz praktisch sein.",
+          "Du kannst eine Nachricht zeigen.",
+          "Du kannst gemeinsam überlegen, was als Nächstes gut ist."
         ],
         "bullets": [
-          "Informationen bekommen",
-          "Kontakt halten",
-          "Inhalte ansehen oder teilen"
+          "nicht allein bleiben",
+          "nicht sofort antworten",
+          "gemeinsam prüfen"
         ],
-        "remember": "Hilfe bei Problemen kann praktisch sein.",
-        "module": "Modul 1: Hilfe bei Problemen verstehen"
+        "remember": "Gemeinsam ist es leichter.",
+        "module": "Modul 1: Probleme erkennen"
       },
       {
-        "title": "Guten Inhalt erkennen",
+        "title": "Gute Hilfe-Entscheidung erkennen",
         "icon": "check",
         "text": [
-          "Ein guter Inhalt ist freundlich, klar und macht keinen Druck."
+          "Eine gute Entscheidung schützt dich."
         ],
-        "quote": "„Ich brauche Hilfe. Kannst du bitte mit mir schauen?“",
-        "success": "Das wirkt sicher. Es ist freundlich und ohne Druck.",
-        "remember": "Gute Inhalte sind respektvoll.",
-        "module": "Modul 1: Hilfe bei Problemen verstehen"
+        "quote": "Ich antworte nicht allein. Ich zeige die Nachricht einer Fachkraft.",
+        "success": "Das ist gut. Du holst dir Unterstützung.",
+        "remember": "Hilfe holen ist eine gute Entscheidung.",
+        "module": "Modul 1: Probleme erkennen"
       },
       {
-        "title": "Modulstart: Private Daten schützen",
+        "title": "Modulstart: Sicherheit und private Daten",
         "icon": "lock",
         "text": [
           "Jetzt geht es um private Daten.",
@@ -3894,7 +3911,7 @@ const topics = [
         "module": "Modul 2: Private Daten"
       },
       {
-        "title": "Was sind private Daten?",
+        "title": "Welche Daten soll ich schützen?",
         "icon": "lock",
         "text": [
           "Private Daten gehören dir.",
@@ -4175,43 +4192,43 @@ const topics = [
         "title": "Probleme und Hilfewege",
         "icon": "message",
         "text": [
-          "Viele Menschen können Inhalte sehen.",
-          "Inhalte können schnell weitergegeben werden.",
-          "Darum solltest du vorsichtig sein."
+          "Bei Problemen gibt es Hilfewege.",
+          "Wichtig ist: nicht allein bleiben.",
+          "Eine vertraute Person kann mit dir schauen."
         ],
-        "remember": "Viele können mitlesen.",
+        "remember": "Ich muss das nicht allein klären.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "title": "Guter Beitrag",
+        "title": "Gute Reaktion",
         "icon": "message",
         "text": [
-          "Ein guter Beitrag ist:"
+          "Eine gute Reaktion ist:"
         ],
         "bullets": [
-          "freundlich",
-          "kurz und verständlich",
-          "ohne private Daten"
+          "ruhig bleiben",
+          "nicht allein antworten",
+          "Hilfe holen"
         ],
-        "remember": "Ich schreibe respektvoll.",
+        "remember": "Ich reagiere nicht unter Druck.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "title": "Schlechter Beitrag",
+        "title": "Ungute Reaktion",
         "icon": "block",
         "text": [
-          "Diese Dinge sind nicht gut:"
+          "Diese Reaktionen sind nicht gut:"
         ],
         "bullets": [
-          "Beleidigungen",
-          "Gerüchte",
-          "private Fotos oder Daten"
+          "sofort zurückschreiben",
+          "Daten schicken",
+          "Problem geheim halten"
         ],
-        "remember": "Ich verletze andere nicht.",
+        "remember": "Ich lasse mich nicht drängen.",
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "title": "Streit oder Ärger",
+        "title": "Angst oder Druck",
         "icon": "message",
         "text": [
           "Manchmal gibt es Streit."
@@ -4222,7 +4239,7 @@ const topics = [
         "module": "Modul 5: Probleme und Hilfewege"
       },
       {
-        "title": "Übung: Gute Nachricht erkennen",
+        "title": "Übung: Gute Hilfe-Entscheidung",
         "icon": "exercise",
         "exercise": {
           "id": "hilfeGroup",
@@ -4357,6 +4374,7 @@ const topics = [
         "quiz": true,
         "module": "Modul 6: Schutz und Hilfe"
       }
-    ]
+    ],
+    "illustration": "assets/illustrations/hilfe.svg"
   }
 ];

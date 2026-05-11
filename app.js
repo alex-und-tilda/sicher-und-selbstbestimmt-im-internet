@@ -48,6 +48,7 @@ function renderMenu() {
           <span class="topic-title">${escapeHtml(topic.title)}</span>
           <span class="topic-desc">${escapeHtml(topic.desc)} · etwa 10–15 Minuten</span>
           <span class="topic-start-label">Thema starten</span>
+          <img src="${topic.illustration}" alt="" class="topic-preview">
         </span>
       </button>
     `;
@@ -112,6 +113,10 @@ function buildCard(lesson, topic) {
         <h2>${escapeHtml(lesson.title)}</h2>
       </div>
   `;
+
+  if (currentStep === 0 && topic.illustration) {
+    html += `<img src="${topic.illustration}" alt="" class="lesson-illustration">`;
+  }
 
   if (lesson.text) {
     lesson.text.forEach(line => {
