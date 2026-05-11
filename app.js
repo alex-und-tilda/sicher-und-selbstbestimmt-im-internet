@@ -937,7 +937,7 @@ function getPracticeHtml(topic, lesson, stepIndex) {
       <div class="access-box-content">
         <h3>Übung</h3>
         <p class="practice-question"><strong>${escapeHtml(q.question)}</strong></p>
-        <button type="button" class="small-read-button" onclick="speakElementById('${boxId}')">Übung sehr langsam vorlesen</button>
+        <button type="button" class="small-read-button" onclick="speakPracticeQuestion()">Frage und Antworten vorlesen</button>
         <div class="practice-answer-grid">
           ${q.answers.map((answer, index) => `
             <button type="button" onclick="answerPractice(${index})">${escapeHtml(answer)}</button>
@@ -947,6 +947,21 @@ function getPracticeHtml(topic, lesson, stepIndex) {
       </div>
     </section>
   `;
+}
+
+
+function speakPracticeQuestion() {
+  const topic = getCurrentTopic();
+  const lesson = getCurrentLessonForPractice();
+  const q = getPracticeQuestion(topic, lesson);
+
+  if (!q || !Array.isArray(q.answers)) return;
+
+  const answerText = q.answers
+    .map((answer, index) => `Antwort ${index + 1}: ${answer}`)
+    .join(". ");
+
+  speakText(`${q.question}. ${answerText}`);
 }
 
 function answerPractice(choice) {
@@ -1119,6 +1134,21 @@ function startQuiz() {
   renderQuiz();
 }
 
+
+function speakQuizQuestionAndAnswers() {
+  const topic = getCurrentTopic();
+  if (!topic || !topic.quizQuestions) return;
+
+  const q = topic.quizQuestions[quizIndex];
+  if (!q || !Array.isArray(q.answers)) return;
+
+  const answerText = q.answers
+    .map((answer, index) => `Antwort ${index + 1}: ${answer}`)
+    .join(". ");
+
+  speakText(`${q.question}. ${answerText}`);
+}
+
 function renderQuiz() {
   setViewMode("quiz");
   const topic = getCurrentTopic();
@@ -1150,7 +1180,7 @@ function renderQuiz() {
         <div class="icon" aria-hidden="true">${getIconHtml("quiz")}</div>
         <h2>Frage ${quizIndex + 1}</h2>
       </div>
-      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakElementById('quiz-question-box')">Quizfrage sehr langsam vorlesen</button></div></section>
+      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakQuizQuestionAndAnswers()">Frage und Antworten vorlesen</button></div></section>
       <div class="choice-list">
   `;
 

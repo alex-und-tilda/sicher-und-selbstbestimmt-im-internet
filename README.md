@@ -429,3 +429,27 @@ Rückmeldung
 Erklärung
 Vorlesen-Button
 ```
+
+
+## Vorlesen bei Übungen und Quiz
+
+Die Vorlesefunktion wurde angepasst.
+
+Bei Übungen und Quiz wird jetzt nur vorgelesen:
+
+```text
+Frage
+Antwort 1
+Antwort 2
+Antwort 3
+```
+
+Nicht vorgelesen werden:
+
+```text
+Überschriften
+Buttons
+Rückmeldungen
+Erklärungen
+Navigation
+```

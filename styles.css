@@ -3143,3 +3143,14 @@ body.view-menu .topic-grid {
     display: none !important;
   }
 }
+
+
+/* Vorlesen bei Übungen und Quiz:
+   Es werden nur Frage und Antwortmöglichkeiten vorgelesen.
+   Erklärung und Rückmeldung werden nicht automatisch mitgelesen.
+*/
+.small-read-button {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+}
