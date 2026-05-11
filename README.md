@@ -304,3 +304,23 @@ Diese Version ergänzt fünf Funktionen:
    - drei wichtigste Regeln
    - passende Hilfe-Fragen
    - Druckfunktion
+
+
+## Korrektur Start-Hinweis
+
+Der Start-Hinweis wurde präziser formuliert.
+
+Vorher:
+```text
+Du kommst vielleicht von einem Lernposter.
+Du kannst ein Thema auswählen.
+Du kannst später wiederkommen.
+```
+
+Jetzt:
+```text
+Willkommen beim Selbstlernangebot.
+Wähle ein Thema aus.
+Du kannst in deinem Tempo lernen.
+Wenn du unsicher bist: Frage eine Person, der du vertraust.
+```

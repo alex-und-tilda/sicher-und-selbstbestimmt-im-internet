@@ -273,9 +273,10 @@ function renderMenu() {
     <section class="menu-card">
       <h2>Was möchtest du tun?</h2>
       <div class="poster-hint">
-        <strong>Du kommst vielleicht von einem Lernposter.</strong><br>
-        Du kannst ein Thema auswählen.<br>
-        Du kannst später wiederkommen.
+        <strong>Willkommen beim Selbstlernangebot.</strong><br>
+      Wähle ein Thema aus.<br>
+      Du kannst in deinem Tempo lernen.<br>
+      Wenn du unsicher bist: Frage eine Person, der du vertraust.
       </div>
       <div class="start-choice-box">
         <p><strong>1. Kurz lernen:</strong> die wichtigsten Seiten.</p>
