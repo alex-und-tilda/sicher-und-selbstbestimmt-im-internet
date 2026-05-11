@@ -1,6 +1,17 @@
-# Sicher digital lernen – 8 Themen mit je 39 Lernseiten
+# Sicher digital lernen – fachlich korrigierte Version
 
-Diese GitHub-Version enthält eine kleine barrierearme Lernplattform mit 8 Themen.
+Diese Version enthält 8 Themen mit je 39 kurzen Lernseiten.
+
+## Korrektur gegenüber der Vorversion
+
+Die Themen wurden nicht mehr technisch gleichgeschaltet, sondern fachlich angepasst.
+
+Beispiele:
+
+- Datenschutz wird nicht mehr wie eine App behandelt.
+- Hilfe bei Problemen wird nicht mehr wie eine Plattform behandelt.
+- Jedes Thema hat passende Module, Beispiele, Übungen und Merksätze.
+- Schutzfunktionen werden allgemein beschrieben, weil App-Menüs sich ändern können.
 
 ## Themen
 
@@ -13,59 +24,27 @@ Diese GitHub-Version enthält eine kleine barrierearme Lernplattform mit 8 Theme
 7. TikTok
 8. Hilfe bei Problemen
 
-## Didaktische Struktur pro Thema
-
-Jedes Thema hat 39 kurze Lernseiten nach gleicher Lernlogik:
-
-1. Verstehen und Alltag
-2. Private Daten
-3. Inhalte / Fotos / Stimme / Beiträge
-4. Risiken / Links / Betrug / Druck
-5. Gutes Verhalten
-6. Schutz und Hilfe
-7. Datenschutz-Hinweis, Wiederholung, Quiz
-
 ## Dateien
 
-- `index.html` – Grundstruktur
-- `styles.css` – Gestaltung
-- `topics.js` – alle Inhalte
-- `app.js` – Lernlogik
-- `README.md` – Anleitung
+- index.html
+- styles.css
+- topics.js
+- app.js
+- README.md
 
 ## GitHub Pages
 
-1. Neues Repository erstellen.
-2. Alle Dateien hochladen:
-   - `index.html`
-   - `styles.css`
-   - `topics.js`
-   - `app.js`
-   - `README.md`
-3. GitHub öffnen:
-   - Settings
-   - Pages
-4. Einstellungen:
-   - Source: Deploy from a branch
-   - Branch: main
-   - Folder: /root
-5. Speichern.
-6. Die GitHub-Pages-Adresse nutzen.
+Alle Dateien in ein Repository hochladen und GitHub Pages aktivieren.
 
-## Kahoot-Links ändern
+## Kahoot-Links
 
-In `topics.js` hat jedes Thema einen eigenen Quiz-Link.
-
-Suche nach:
+In topics.js jeweils diese Zeile ersetzen:
 
 ```js
 "quiz": "https://kahoot.com"
 ```
 
-Ersetze den Link beim jeweiligen Thema durch den echten Kahoot-Link.
+## Hinweis
 
-## Datenschutz
-
-Die Seite fragt keine privaten Daten ab.
-Die Seite speichert keine Namen.
-Die Übungen laufen nur im Browser.
+Die Inhalte sind als fachlich korrigierte Arbeitsfassung gedacht.
+Für offizielle Leichte Sprache muss ein Zielgruppen-Test erfolgen.
