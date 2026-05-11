@@ -621,9 +621,10 @@ const topics = [
       "bei Unsicherheit Hilfe holen"
     ],
     "helpQuestions": [
-      "Muss ich diese Daten wirklich eingeben?",
-      "Ist diese Internet-Seite sicher?",
-      "Was passiert mit meinen Daten?"
+      "Was verstehe ich gerade nicht?",
+      "Kann ich den Text vorlesen lassen?",
+      "Soll ich zurück zur letzten Seite gehen?",
+      "Soll ich eine Pause machen?"
     ],
     "memoryRules": [
       "Ich gebe mein Passwort nicht weiter.",
@@ -1281,9 +1282,10 @@ const topics = [
       "bei Druck Hilfe holen"
     ],
     "helpQuestions": [
-      "Ist dieser Link sicher?",
-      "Soll ich diese Person blockieren?",
-      "Darf ich dieses Foto verschicken?"
+      "Was verstehe ich gerade nicht?",
+      "Kann ich den Text vorlesen lassen?",
+      "Soll ich zurück zur letzten Seite gehen?",
+      "Soll ich eine Pause machen?"
     ],
     "memoryRules": [
       "Ich klicke nicht sofort auf komische Links.",
@@ -1941,9 +1943,10 @@ const topics = [
       "blockieren oder melden"
     ],
     "helpQuestions": [
-      "Wer kann diesen Beitrag sehen?",
-      "Soll ich diese Anfrage annehmen?",
-      "Soll ich diesen Kommentar melden?"
+      "Was verstehe ich gerade nicht?",
+      "Kann ich den Text vorlesen lassen?",
+      "Soll ich zurück zur letzten Seite gehen?",
+      "Soll ich eine Pause machen?"
     ],
     "memoryRules": [
       "Ich prüfe, wer meinen Beitrag sehen kann.",
@@ -2601,9 +2604,10 @@ const topics = [
       "Nachrichten sicher einschätzen"
     ],
     "helpQuestions": [
-      "Darf ich dieses Foto posten?",
-      "Soll ich meinen Standort zeigen?",
-      "Was mache ich bei einer komischen Nachricht?"
+      "Was verstehe ich gerade nicht?",
+      "Kann ich den Text vorlesen lassen?",
+      "Soll ich zurück zur letzten Seite gehen?",
+      "Soll ich eine Pause machen?"
     ],
     "memoryRules": [
       "Ich frage, bevor ich Fotos von anderen poste.",
@@ -3261,9 +3265,10 @@ const topics = [
       "Kommentare vorsichtig nutzen"
     ],
     "helpQuestions": [
-      "Ist dieses Video glaubwürdig?",
-      "Ist das Werbung?",
-      "Soll ich diesen Kommentar melden?"
+      "Was verstehe ich gerade nicht?",
+      "Kann ich den Text vorlesen lassen?",
+      "Soll ich zurück zur letzten Seite gehen?",
+      "Soll ich eine Pause machen?"
     ],
     "memoryRules": [
       "Ich glaube nicht jedes Video sofort.",
@@ -3921,9 +3926,10 @@ const topics = [
       "bei Druck Nein sagen"
     ],
     "helpQuestions": [
-      "Kann dieser Snap gespeichert werden?",
-      "Soll ich meinen Standort teilen?",
-      "Was mache ich bei Druck zu privaten Bildern?"
+      "Was verstehe ich gerade nicht?",
+      "Kann ich den Text vorlesen lassen?",
+      "Soll ich zurück zur letzten Seite gehen?",
+      "Soll ich eine Pause machen?"
     ],
     "memoryRules": [
       "Ich denke daran: Snaps können gespeichert werden.",
@@ -4581,8 +4587,9 @@ const topics = [
       "Kommentare und Werbung einschätzen"
     ],
     "helpQuestions": [
-      "Ist dieser Trend sicher?",
-      "Ist das Werbung oder echt?",
+      "Was verstehe ich gerade nicht?",
+      "Kann ich den Text vorlesen lassen?",
+      "Soll ich zurück zur letzten Seite gehen?",
       "Soll ich eine Pause machen?"
     ],
     "memoryRules": [

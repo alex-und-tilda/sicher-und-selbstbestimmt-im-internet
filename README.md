@@ -269,3 +269,34 @@ Die Person hat wichtige Regeln geübt.
 Die Person hat sichere Entscheidungen ausprobiert.
 Die Person weiß: Bei Unsicherheit darf sie Unterstützung holen.
 ```
+
+
+## Korrektur: Hilfe-Kasten auf Lernseiten
+
+Der alte Kasten auf den Lernseiten war unlogisch.
+
+Entfernt wurden dort Fragen wie:
+
+```text
+Ist das ein Notfall?
+Wen kann ich jetzt fragen?
+Soll ich die Nachricht zeigen und Hilfe holen?
+```
+
+Diese Fragen gehören nicht auf jede Lernseite.
+
+Neue Logik:
+
+```text
+Normale Lernseiten = Hilfe beim Lernen und bei der Bedienung
+Thema „Hilfe bei Problemen“ = Hilfe bei echten Problemen im Internet
+```
+
+Der neue Hinweis auf Lernseiten lautet sinngemäß:
+
+```text
+Du kannst den Text vorlesen lassen.
+Du kannst zurückgehen.
+Du kannst eine Pause machen.
+Du kannst eine Person fragen, der du vertraust.
+```

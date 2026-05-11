@@ -3383,3 +3383,23 @@ button[data-action="memory"] {
   border-color: var(--blue-mid);
   background: var(--blue-light);
 }
+
+
+/* Lernseiten-Hilfe:
+   Auf normalen Lernseiten geht es um Orientierung beim Lernen,
+   nicht um Notfall- oder Problemberatung.
+*/
+.step-learning-hint {
+  margin: 12px 0 16px 0;
+  padding: 12px 14px;
+  border: 2px solid var(--blue-mid);
+  border-radius: 16px;
+  background: var(--blue-light);
+  color: var(--black);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.step-help-box {
+  display: none;
+}

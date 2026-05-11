@@ -993,10 +993,12 @@ function buildCard(lesson, topic) {
         <button type="button" onclick="setSpeechRate(0.60, 'langsam')">Langsam</button>
         <button type="button" onclick="setSpeechRate(0.78, 'normal')">Normal</button>
       </div>
-      <div class="step-help-box">
-        <strong>Du bist unsicher?</strong><br>
-        Frage eine Person, der du vertraust:
-        <ul>${(topic.helpQuestions || []).map(q => `<li>${escapeHtml(q)}</li>`).join("")}</ul>
+      <div class="step-learning-hint">
+        <strong>Du brauchst Unterstützung beim Lernen?</strong><br>
+        Du kannst den Text vorlesen lassen.
+        Du kannst zurückgehen.
+        Du kannst eine Pause machen.
+        Du kannst eine Person fragen, der du vertraust.
       </div>
       <div class="card-header">
         <div class="icon" aria-hidden="true">${getIconHtml(lesson.icon)}</div>
