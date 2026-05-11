@@ -36,17 +36,18 @@ function renderMenu() {
   let html = `
     <section class="menu-card">
       <h2>Wähle ein Thema</h2>
-      <p>Jedes Thema hat dieselbe Lernstruktur: Verstehen, private Daten, Inhalte, Risiken, Verhalten, Schutz und Hilfe.</p>
+      <p>Lerne Schritt für Schritt. Mit Beispielen, Übungen und Merksätzen.</p>
       <div class="topic-grid">
   `;
 
   topics.forEach(topic => {
     html += `
       <button class="topic-button" onclick="startTopic('${topic.id}')">
-        <span class="topic-icon" aria-hidden="true">${topic.icon}</span>
+        <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon)}</span>
         <span>
           <span class="topic-title">${escapeHtml(topic.title)}</span>
-          <span class="topic-desc">${escapeHtml(topic.desc)} · 39 Seiten</span>
+          <span class="topic-desc">${escapeHtml(topic.desc)} · etwa 10–15 Minuten</span>
+          <span class="topic-start-label">Thema starten</span>
         </span>
       </button>
     `;
@@ -107,9 +108,7 @@ function buildCard(lesson, topic) {
     <article class="card">
       <div class="module-tag">${escapeHtml(lesson.module)}</div>
       <div class="card-header">
-        <div class="icon" aria-hidden="true">
-          <img src="assets/icons/${lesson.icon}.svg" alt="" class="icon-svg">
-        </div>
+        <div class="icon" aria-hidden="true">${getIconHtml(lesson.icon)}</div>
         <h2>${escapeHtml(lesson.title)}</h2>
       </div>
   `;
@@ -145,11 +144,18 @@ function buildCard(lesson, topic) {
   }
 
   if (lesson.remember) {
-    html += `<div class="remember">Merksatz: ${escapeHtml(lesson.remember)}</div>`;
+    html += `<div class="remember">${escapeHtml(lesson.remember)}</div>`;
   }
 
   if (lesson.quiz) {
-    html += `<a class="quiz-link" href="${topic.quiz}" target="_blank" rel="noopener noreferrer">Quiz starten</a>`;
+    html += `
+      <div class="completion-box">
+        <h3>Geschafft.</h3>
+        <p>Du hast dieses Thema beendet.</p>
+        <p>Du kannst die wichtigsten Regeln wiederholen oder das Quiz starten.</p>
+      </div>
+      <a class="quiz-link" href="${topic.quiz}" target="_blank" rel="noopener noreferrer">Quiz starten</a>
+    `;
   }
 
   html += "</article>";
@@ -219,6 +225,17 @@ function backStep() {
 
 function goHome() {
   renderMenu();
+}
+
+
+function getIconHtml(iconName) {
+  if (!iconName) {
+    return "";
+  }
+
+  const safeIconName = String(iconName).replace(/[^a-z0-9_-]/gi, "");
+
+  return `<img src="assets/icons/${safeIconName}.svg" alt="" class="icon-svg" onerror="this.style.display='none'">`;
 }
 
 function escapeHtml(value) {

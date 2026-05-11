@@ -123,3 +123,42 @@ Die Logos werden im Kopfbereich der Lernplattform angezeigt.
 
 Hinweis:
 Die gelieferten Dateien sind JPEG-Dateien mit begrenzter Auflösung. Für eine endgültige öffentliche Version sind PNG- oder SVG-Dateien in besserer Qualität empfehlenswert.
+
+
+## Fix: Icon-Anzeige
+
+Diese Version korrigiert die Icon-Anzeige.
+
+Vorher wurden Icon-Namen wie `lock`, `message` oder `photo` als Text angezeigt.
+Jetzt lädt `app.js` die passenden SVG-Dateien aus:
+
+```text
+assets/icons/
+```
+
+Beispiel:
+
+```js
+"icon": "lock"
+```
+
+wird angezeigt als:
+
+```text
+assets/icons/lock.svg
+```
+
+
+## Visuelle Verbesserungen in dieser Version
+
+Diese Version wurde wie eine kleine Lernplattform gestaltet:
+
+- Startseite als Lernportal
+- Themen als große Kacheln
+- zweispaltige Darstellung auf größeren Bildschirmen
+- größere Schrift
+- größere Buttons
+- klarere Warn-, Übungs- und Merksatzboxen
+- Abschlusskarte vor dem Quiz
+- Logos im Footer statt im Header
+- ruhigere visuelle Hierarchie
