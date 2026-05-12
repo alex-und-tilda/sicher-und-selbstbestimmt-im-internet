@@ -3652,50 +3652,103 @@ main {
 }
 
 
-/* Obere alte Hinweisboxen ausblenden, falls alte Templates noch Reste erzeugen */
-.disclaimer,
-.legal-note,
-.privacy-note,
-.continue-box,
-.resume-box,
-.last-progress,
-.progress-resume {
-  display: none !important;
+/* Kleiner Fußhinweis ganz unten */
+.small-footer-notice {
+  max-width: 1180px !important;
+  margin: 32px auto 90px auto !important;
+  padding: 12px 20px !important;
+  color: #4A4A4A !important;
+  font-size: 0.82rem !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+}
+
+/* Testbogen am Schluss */
+.module-testbogen {
+  max-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.testbogen-section {
+  margin: 18px 0 !important;
+  padding: 14px !important;
+  border: 2px solid #D8DEE8 !important;
+  border-radius: 16px !important;
+  background: #FFFFFF !important;
+}
+
+.testbogen-section h3 {
+  margin-top: 0 !important;
+}
+
+.testbogen-section label {
+  display: block !important;
+  margin: 10px 0 !important;
+  font-weight: 700 !important;
+}
+
+.testbogen-section input[type="checkbox"] {
+  width: 22px !important;
+  height: 22px !important;
+  margin-right: 8px !important;
+  vertical-align: middle !important;
+}
+
+.write-line {
+  min-height: 34px !important;
+  margin: 8px 0 !important;
+  border-bottom: 2px solid #1F1F1F !important;
+}
+
+.support-observation {
+  background: #EAF3FB !important;
+}
+
+.action-card.testbogen,
+button.action-card.testbogen {
+  background: #FFFFFF !important;
+  border: 4px solid #00285A !important;
+  color: #00285A !important;
 }
 
 @media print {
+  .small-footer-notice {
+    margin: 12pt 0 0 0 !important;
+    padding: 0 !important;
+    font-size: 8pt !important;
   }
 
+  .module-testbogen {
+    box-shadow: none !important;
+    border: none !important;
+  }
 
-/* ============================================================
-   SAUBERER FOOTER- UND RÜCKMELDUNGS-FIX
-   Kein kompletter CSS-Umbau.
-   ============================================================ */
+  .testbogen-section {
+    page-break-inside: avoid !important;
+    border: 1pt solid #000000 !important;
+  }
 
-/* Obere alte Hinweisboxen endgültig ausblenden */
-.disclaimer,
-.legal-note,
-.privacy-note,
-.continue-box,
-.resume-box,
-.last-progress,
-.progress-resume {
-  display: none !important;
+  .page-actions,
+  .global-help-button {
+    display: none !important;
+  }
 }
 
-/* Rückmeldung/Testbogen nicht in der Lernenden-Oberfläche anzeigen */
+
+/* Testbogen nicht in der normalen Themen-/Aktionsauswahl anzeigen.
+   Der Testbogen gehört an das Ende eines Lernmoduls oder in die Auswertung,
+   nicht als reguläre Lernaktion neben Kurz lernen, Ausführlich lernen, Quiz und Merk-Karte.
+*/
 .action-card.testbogen,
 button.action-card.testbogen,
 .topic-card .testbogen,
-.menu-card .testbogen,
-.module-testbogen,
-.feedback-form,
-.testbogen-link,
-.rueckmeldung-link {
+.menu-card .testbogen {
   display: none !important;
 }
 
-/* Echter Footer ganz unten */
+
+/* Kleiner Hinweis nur unten auf der Seite */
 .small-footer-notice {
   max-width: 1180px !important;
   margin: 44px auto 96px auto !important;
@@ -3707,49 +3760,11 @@ button.action-card.testbogen,
   opacity: 0.9 !important;
 }
 
-.small-footer-notice p {
-  margin: 0 0 4px 0 !important;
-}
-
-/* Startseitenlayout nur gezielt stabilisieren */
-.topic-grid,
-.topics-grid,
-.card-grid,
-.overview-grid,
-.menu-grid,
-.action-grid {
-  max-width: 1180px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.topic-card img,
-.topic-tile img,
-.menu-card img,
-.topic-illustration,
-.lesson-illustration,
-.illustration,
-.card-illustration {
-  max-height: 150px !important;
-  object-fit: contain !important;
-}
-
-@media (max-width: 760px) {
-  .small-footer-notice {
-    margin: 32px 14px 90px 14px !important;
-    padding: 8px 0 !important;
-    font-size: 0.75rem !important;
-  }
-
-  .topic-card img,
-  .topic-tile img,
-  .menu-card img,
-  .topic-illustration,
-  .lesson-illustration,
-  .illustration,
-  .card-illustration {
-    max-height: 120px !important;
-  }
+/* Alte obere Hinweisboxen ausblenden, falls sie aus älteren Templates noch entstehen */
+.disclaimer,
+.legal-note,
+.privacy-note {
+  display: none !important;
 }
 
 @media print {
@@ -3759,3 +3774,37 @@ button.action-card.testbogen,
     font-size: 8pt !important;
   }
 }
+
+
+/* REPARATUR: stabile Oberfläche */
+.brand-disclaimer,
+.privacy-note,
+.continue-box,
+.resume-box,
+.last-progress,
+.progress-resume,
+.menu-extra-actions,
+.module-testbogen,
+.action-card.testbogen,
+button.action-card.testbogen {
+  display: none !important;
+}
+
+/* Vorlesen vorerst ausblenden, ohne JavaScript zu verändern */
+.audio-actions,
+.speech-speed-controls,
+.small-read-button {
+  display: none !important;
+}
+
+.small-footer-notice {
+  max-width: 1180px !important;
+  margin: 44px auto 96px auto !important;
+  padding: 10px 20px !important;
+  color: #555555 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+  opacity: 0.9 !important;
+}
+.small-footer-notice p { margin: 0 0 4px 0 !important; }
