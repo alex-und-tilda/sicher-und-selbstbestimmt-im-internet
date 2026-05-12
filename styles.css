@@ -3403,3 +3403,238 @@ button[data-action="memory"] {
 .step-help-box {
   display: none;
 }
+
+
+/* ============================================================
+   FINALER STARTSEITEN-LAYOUT-FIX
+   Nur gezielte Korrektur für die sichtbare Startseite.
+   Inhalte und JavaScript bleiben unverändert.
+   ============================================================ */
+
+/* Grundbreite: Seite wieder als zentrierte Lernplattform statt Vollbreiten-Chaos */
+#app,
+.app,
+.app-shell,
+main {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Start-/Übersichtsbereich mit ruhigem Abstand */
+.hero,
+.header,
+.start-header,
+.intro,
+.intro-card {
+  max-width: 1180px;
+  margin: 0 auto 24px auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Startseite: Texte nicht über die ganze Breite ziehen */
+.hero p,
+.header p,
+.intro p,
+.start-header p {
+  max-width: 860px;
+}
+
+/* Themenraster erzwingen */
+.topic-grid,
+.topics-grid,
+.card-grid,
+.overview-grid,
+.menu-grid,
+.action-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  gap: 22px !important;
+  max-width: 1180px !important;
+  margin: 24px auto !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  align-items: stretch !important;
+}
+
+/* Themenkarten stabilisieren */
+.topic-card,
+.topic-tile,
+.menu-card,
+.card.topic-card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 360px !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  padding: 18px !important;
+  border-radius: 24px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 10px 24px rgba(0, 40, 90, 0.14) !important;
+}
+
+/* Wichtigster Fix: Bilder/Illustrationen nicht riesig anzeigen */
+.topic-card img,
+.topic-tile img,
+.menu-card img,
+.topic-card svg,
+.topic-tile svg,
+.menu-card svg,
+.topic-illustration,
+.lesson-illustration,
+.illustration,
+.card-illustration {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 150px !important;
+  max-height: 150px !important;
+  object-fit: contain !important;
+  margin: 0 auto 14px auto !important;
+  border-radius: 18px !important;
+}
+
+/* Falls Illustrationen als große Icon-Kreise gerendert werden */
+.topic-card .icon,
+.topic-tile .icon,
+.menu-card .icon {
+  width: 72px !important;
+  height: 72px !important;
+  min-width: 72px !important;
+  min-height: 72px !important;
+  max-width: 72px !important;
+  max-height: 72px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Text in Karten */
+.topic-card h2,
+.topic-card h3,
+.topic-tile h2,
+.topic-tile h3,
+.menu-card h2,
+.menu-card h3 {
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+  font-size: 1.35rem !important;
+  line-height: 1.2 !important;
+}
+
+.topic-card p,
+.topic-tile p,
+.menu-card p {
+  font-size: 1rem !important;
+  line-height: 1.45 !important;
+}
+
+/* Buttons in Karten nicht riesig, aber gut klickbar */
+.topic-card button,
+.topic-tile button,
+.menu-card button,
+.action-card button {
+  width: 100% !important;
+  min-height: 50px !important;
+  margin-top: auto !important;
+}
+
+/* Der Weiterlernen-Kasten soll nicht wie Fließtext oben kleben */
+.continue-box,
+.resume-box,
+.last-progress,
+.progress-resume {
+  max-width: 760px !important;
+  margin: 16px 20px 24px 20px !important;
+  padding: 16px !important;
+  border: 3px solid #00285A !important;
+  border-radius: 20px !important;
+  background: #FFFFFF !important;
+}
+
+/* Disclaimer kleiner und untergeordnet */
+.disclaimer,
+.legal-note,
+.privacy-note {
+  max-width: 980px !important;
+  margin: 16px auto !important;
+  padding: 0 20px !important;
+  font-size: 0.95rem !important;
+}
+
+/* Hilfe-Button: sichtbar, aber nicht störend */
+.global-help-button {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 20px !important;
+  z-index: 1000 !important;
+  max-width: 260px !important;
+  min-width: 0 !important;
+  min-height: 54px !important;
+  padding: 12px 18px !important;
+  border-radius: 999px !important;
+  box-shadow: 0 10px 22px rgba(0, 40, 90, 0.25) !important;
+}
+
+/* Smartphone */
+@media (max-width: 760px) {
+  #app,
+  .app,
+  .app-shell,
+  main {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .topic-grid,
+  .topics-grid,
+  .card-grid,
+  .overview-grid,
+  .menu-grid,
+  .action-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .topic-card,
+  .topic-tile,
+  .menu-card,
+  .card.topic-card {
+    min-height: auto !important;
+    padding: 16px !important;
+  }
+
+  .topic-card img,
+  .topic-tile img,
+  .menu-card img,
+  .topic-card svg,
+  .topic-tile svg,
+  .menu-card svg,
+  .topic-illustration,
+  .lesson-illustration,
+  .illustration,
+  .card-illustration {
+    height: 120px !important;
+    max-height: 120px !important;
+  }
+
+  .global-help-button {
+    right: 12px !important;
+    bottom: 12px !important;
+    max-width: calc(100vw - 24px) !important;
+    font-size: 0.98rem !important;
+  }
+}
+
+/* Sehr große Bildschirme */
+@media (min-width: 1300px) {
+  .topic-grid,
+  .topics-grid,
+  .card-grid,
+  .overview-grid,
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}

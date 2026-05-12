@@ -118,3 +118,23 @@ QR-Links nicht sichtbar in der Lernoberfläche
 Hinweis:
 
 Die CSS-Datei enthält wieder mehr Überschreibungen, ist aber visuell stabiler.
+
+
+## Startseiten-Layout-Fix
+
+Die Startseite wurde gezielt korrigiert.
+
+Behoben:
+
+```text
+Illustrationen/Bilder wurden viel zu groß angezeigt.
+Themenraster wurde nicht sauber begrenzt.
+Karten wirkten nicht als Karten.
+Abstände auf der Startseite waren unruhig.
+Hilfe-Button wurde kompakter gesetzt.
+```
+
+Hinweis:
+
+Die CSS-Datei wurde nicht komplett ersetzt.
+Es wurde nur ein gezielter Layout-Fix ergänzt.
