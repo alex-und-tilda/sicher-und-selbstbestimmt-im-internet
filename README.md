@@ -549,3 +549,46 @@ weniger unlogische Beispiele
 bessere Handlungssicherheit
 passender für Menschen mit Lern- und Verständnisschwierigkeiten
 ```
+
+
+## Merksatz-Didaktik-Fix
+
+Korrigiert:
+
+```text
+Merksatz-Boxen auf Startseiten entfernt.
+„Merksatz“ wird nicht mehr doppelt angezeigt.
+Merksätze bleiben dort, wo sie didaktisch sinnvoll sind:
+nach Inhaltsseiten, bei Regeln und in Merk-Karten.
+```
+
+Grund:
+
+```text
+Eine Modul-Startseite soll Orientierung geben.
+Ein Merksatz gehört erst nach einem Lerninhalt oder ans Ende eines Abschnitts.
+```
+
+
+## Lernlogik-Fix
+
+Viele Lernseiten wurden didaktisch neu aufgebaut.
+
+Neue Logik:
+
+```text
+Alltagssituation
+Problem verstehen
+sichere Entscheidung
+Merksatz
+kleine Übung
+```
+
+Ziel:
+
+```text
+mehr Lerneffekt
+mehr Alltagstransfer
+weniger reine Regelsammlung
+bessere Entscheidungsübung
+```

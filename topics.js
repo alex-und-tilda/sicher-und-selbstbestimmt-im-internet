@@ -125,8 +125,7 @@ const topics = [
           "In diesem Thema geht es um private Daten.",
           "Private Daten sagen etwas über dich.",
           "Du lernst, wann du vorsichtig sein musst."
-        ],
-        "remember": "Ich entscheide bewusst, welche Daten ich teile."
+        ]
       },
       {
         "title": "Was sind private Daten?",
@@ -164,27 +163,52 @@ const topics = [
         "module": "Modul 1: Datenschutz verstehen",
         "icon": "stop",
         "text": [
-          "Manche Apps und Webseiten fragen viele Dinge ab.",
-          "Du musst nicht immer alles ausfüllen.",
-          "Bei Unsicherheit fragst du nach."
+          "Stell dir vor: Du willst eine App benutzen.",
+          "Die App fragt nach deiner Adresse und Telefonnummer.",
+          "Jetzt musst du entscheiden: Muss ich das wirklich eintragen?",
+          "Wenn du unsicher bist, stoppst du kurz und fragst nach."
         ],
         "examples": [
-          "Eine App fragt nach deiner Adresse.",
-          "Ein Formular fragt nach deiner Telefonnummer.",
-          "Ein Gewinnspiel fragt nach deinem Geburtstag."
+          "Eine Spiele-App fragt nach deiner Adresse.",
+          "Ein Gewinnspiel fragt nach deinem Geburtstag.",
+          "Ein Formular fragt nach deiner Telefonnummer."
         ],
-        "remember": "Ich frage nach, bevor ich private Daten eintrage."
+        "remember": "Ich trage private Daten nicht einfach ein.",
+        "practice": {
+          "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist sicher?",
+          "answers": [
+            "Nicht eintragen und nachfragen.",
+            "Adresse sofort eintragen.",
+            "Zusätzlich mein Passwort eintragen."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Fotos und Daten",
         "module": "Modul 1: Datenschutz verstehen",
         "icon": "photo",
         "text": [
-          "Auf Fotos können private Dinge zu sehen sein.",
-          "Zum Beispiel dein Zimmer, dein Ausweis oder andere Menschen.",
-          "Vor dem Senden schaust du genau hin."
+          "Stell dir vor: Du willst ein Foto verschicken.",
+          "Auf dem Foto sieht man vielleicht dein Zimmer, einen Brief oder eine andere Person.",
+          "Das kann privat sein.",
+          "Darum schaust du vor dem Senden genau hin."
         ],
-        "remember": "Ich prüfe Fotos, bevor ich sie verschicke."
+        "remember": "Ich prüfe ein Foto, bevor ich es verschicke.",
+        "examples": [
+          "Auf dem Tisch liegt ein Brief mit Adresse.",
+          "Im Hintergrund ist eine andere Person zu sehen.",
+          "Auf dem Foto sieht man dein Zimmer."
+        ],
+        "practice": {
+          "question": "Auf einem Foto sieht man einen Brief mit deiner Adresse. Was ist sicher?",
+          "answers": [
+            "Foto nicht senden oder vorher unkenntlich machen.",
+            "Foto sofort senden.",
+            "Foto in eine Gruppe schicken."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Komische Nachrichten",
@@ -510,8 +534,7 @@ const topics = [
           "WhatsApp ist eine App für Nachrichten.",
           "Du kannst schreiben, sprechen, Bilder senden und Gruppen nutzen.",
           "Du lernst, worauf du achten musst."
-        ],
-        "remember": "Ich nutze WhatsApp langsam und bewusst."
+        ]
       },
       {
         "title": "Was ist WhatsApp?",
@@ -529,16 +552,26 @@ const topics = [
         "module": "Modul 1: WhatsApp verstehen",
         "icon": "warning",
         "text": [
-          "Nicht jede Nachricht ist sicher.",
-          "Manchmal schreibt eine fremde Nummer.",
-          "Manchmal macht eine Nachricht Druck."
+          "Stell dir vor: Eine fremde Nummer schreibt dir.",
+          "Die Person sagt: Ich kenne dich.",
+          "Du bist aber nicht sicher, wer das ist.",
+          "Dann antwortest du nicht sofort."
         ],
         "examples": [
-          "Hallo, ich bin es. Ich habe eine neue Nummer.",
-          "Du musst sofort bezahlen.",
-          "Schick mir deinen Code."
+          "Hallo, ich habe eine neue Nummer.",
+          "Schick mir schnell Geld.",
+          "Gib mir bitte deinen Code."
         ],
-        "remember": "Bei fremden Nachrichten antworte ich nicht sofort."
+        "remember": "Bei fremden Nachrichten mache ich langsam.",
+        "practice": {
+          "question": "Eine fremde Nummer schreibt: Ich bin es. Schick mir Geld. Was ist sicher?",
+          "answers": [
+            "Nicht antworten und eine vertraute Person fragen.",
+            "Geld schicken.",
+            "Code schicken."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Links in WhatsApp",
@@ -565,12 +598,22 @@ const topics = [
         "module": "Modul 1: WhatsApp verstehen",
         "icon": "lock",
         "text": [
-          "Manchmal bekommst du einen Code per SMS.",
-          "Dieser Code schützt dein Konto.",
-          "Du gibst diesen Code nicht weiter."
+          "Stell dir vor: Du bekommst einen Code per SMS.",
+          "Dann schreibt dir jemand: Schick mir den Code.",
+          "Mit dem Code kann jemand dein WhatsApp übernehmen.",
+          "Darum gibst du den Code nie weiter."
         ],
         "warning": "Auch wenn jemand sagt: Ich brauche den Code dringend.",
-        "remember": "Ich gebe keinen WhatsApp-Code weiter."
+        "remember": "Ich gebe meinen WhatsApp-Code nicht weiter.",
+        "practice": {
+          "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist sicher?",
+          "answers": [
+            "Code nicht schicken.",
+            "Code sofort schicken.",
+            "Code in eine Gruppe schreiben."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Gruppen",
@@ -883,8 +926,7 @@ const topics = [
           "Facebook ist eine Plattform im Internet.",
           "Du kannst Beiträge sehen und schreiben.",
           "Du lernst, was öffentlich sein kann."
-        ],
-        "remember": "Ich prüfe, wer meine Beiträge sehen kann."
+        ]
       },
       {
         "title": "Profil prüfen",
@@ -908,10 +950,21 @@ const topics = [
         "module": "Modul Facebook",
         "icon": "photo",
         "text": [
-          "Ein Beitrag kann von vielen Menschen gesehen werden.",
-          "Auch später kann ein Beitrag noch gefunden werden."
+          "Stell dir vor: Du willst etwas über deinen Tag schreiben.",
+          "Vielleicht können viele Menschen den Beitrag sehen.",
+          "Auch später kann der Beitrag noch auftauchen.",
+          "Darum prüfst du vorher, was du schreibst."
         ],
-        "remember": "Ich überlege vor dem Posten."
+        "remember": "Ich prüfe einen Beitrag vor dem Posten.",
+        "practice": {
+          "question": "Du willst schreiben, wo du wohnst. Was ist sicher?",
+          "answers": [
+            "Nicht öffentlich posten und nachfragen.",
+            "Adresse öffentlich posten.",
+            "Telefonnummer dazuschreiben."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Kommentare",
@@ -929,10 +982,12 @@ const topics = [
         "module": "Modul Facebook",
         "icon": "help",
         "text": [
-          "Nicht jede Anfrage kommt von einer echten bekannten Person.",
-          "Du musst nicht jede Anfrage annehmen."
+          "Stell dir vor: Eine unbekannte Person sendet dir eine Anfrage.",
+          "Du weißt nicht, wer das ist.",
+          "Nicht jede Anfrage ist sicher.",
+          "Du musst die Anfrage nicht annehmen."
         ],
-        "remember": "Ich nehme nur Anfragen an, bei denen ich sicher bin.",
+        "remember": "Ich nehme nicht jede Anfrage an.",
         "practice": {
           "question": "Eine unbekannte Person will dein Facebook-Freund sein. Was ist sicher?",
           "answers": [
@@ -1257,18 +1312,33 @@ const topics = [
           "Instagram ist eine App für Fotos, Videos und Nachrichten.",
           "Viele Inhalte sind sichtbar für andere.",
           "Du lernst, worauf du achten kannst."
-        ],
-        "remember": "Ich prüfe, bevor ich etwas teile."
+        ]
       },
       {
         "title": "Fotos posten",
         "module": "Modul Instagram",
         "icon": "photo",
         "text": [
-          "Fotos können viel über dich zeigen.",
-          "Zum Beispiel wo du bist oder mit wem du unterwegs bist."
+          "Stell dir vor: Du willst ein Foto auf Instagram posten.",
+          "Andere Menschen können das Foto sehen.",
+          "Manchmal sieht man auf Fotos mehr, als man denkt.",
+          "Darum prüfst du das Foto vorher."
         ],
-        "remember": "Ich prüfe Fotos vor dem Posten."
+        "remember": "Ich prüfe ein Foto, bevor ich es poste.",
+        "examples": [
+          "Man sieht deinen Wohnort.",
+          "Man sieht eine andere Person.",
+          "Man sieht private Dinge im Hintergrund."
+        ],
+        "practice": {
+          "question": "Du willst ein Foto posten. Im Hintergrund sieht man eine andere Person. Was ist sicher?",
+          "answers": [
+            "Erst fragen oder ein anderes Foto nehmen.",
+            "Einfach posten.",
+            "Die Person markieren."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Stories und Reels",
@@ -1296,10 +1366,12 @@ const topics = [
         "module": "Modul Instagram",
         "icon": "message",
         "text": [
-          "Auch fremde Personen können schreiben.",
-          "Manche Nachrichten sind nett. Andere sind komisch oder machen Druck."
+          "Stell dir vor: Eine fremde Person schreibt dir privat.",
+          "Die Person macht Komplimente.",
+          "Dann fragt sie nach privaten Fotos.",
+          "Das ist ein Warnzeichen."
         ],
-        "remember": "Ich antworte fremden Personen nicht sofort.",
+        "remember": "Ich schicke fremden Personen keine privaten Fotos.",
         "practice": {
           "question": "Eine fremde Person fragt nach privaten Fotos. Was ist sicher?",
           "answers": [
@@ -1624,8 +1696,7 @@ const topics = [
           "YouTube ist eine Plattform für Videos.",
           "Du kannst dort viel lernen und anschauen.",
           "Manche Inhalte sind Werbung oder falsch."
-        ],
-        "remember": "Ich prüfe Videos und Werbung."
+        ]
       },
       {
         "title": "Videos prüfen",
@@ -1643,10 +1714,26 @@ const topics = [
         "module": "Modul YouTube",
         "icon": "warning",
         "text": [
-          "Werbung will, dass du etwas kaufst oder anklickst.",
-          "Werbung sieht manchmal wie ein normales Video aus."
+          "Stell dir vor: In einem Video wird ein Produkt gezeigt.",
+          "Die Person sagt: Das musst du kaufen.",
+          "Vielleicht ist das Werbung.",
+          "Dann machst du langsam und kaufst nicht sofort."
         ],
-        "remember": "Ich erkenne Werbung und mache langsam."
+        "remember": "Ich kaufe nichts sofort aus einem Video.",
+        "examples": [
+          "Ein Video verspricht ein tolles Ergebnis.",
+          "Ein Link führt zu einem Kauf.",
+          "Jemand sagt: Nur heute billig."
+        ],
+        "practice": {
+          "question": "Ein Video sagt: Kauf das sofort. Was ist sicher?",
+          "answers": [
+            "Nicht sofort kaufen und nachfragen.",
+            "Sofort kaufen.",
+            "Kontodaten eingeben."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Kommentare",
@@ -1663,16 +1750,18 @@ const topics = [
         "module": "Modul YouTube",
         "icon": "stop",
         "text": [
-          "Autoplay startet automatisch das nächste Video.",
-          "Dann schaut man manchmal länger als geplant."
+          "Stell dir vor: Du willst nur ein Video schauen.",
+          "Dann startet automatisch das nächste Video.",
+          "Plötzlich schaust du viel länger als geplant.",
+          "Dann darfst du stoppen oder eine Pause machen."
         ],
-        "remember": "Ich darf Pausen machen.",
+        "remember": "Ich darf ein Video stoppen und Pause machen.",
         "practice": {
-          "question": "Du wolltest nur ein Video schauen. YouTube startet immer weiter. Was hilft?",
+          "question": "YouTube startet immer neue Videos. Du bist müde. Was ist sicher?",
           "answers": [
-            "Pause machen oder Autoplay stoppen.",
-            "Die ganze Nacht weiterschauen.",
-            "Sofort alles teilen."
+            "Stoppen und Pause machen.",
+            "Immer weiter schauen.",
+            "Alle Videos teilen."
           ],
           "correctIndex": 0
         }
@@ -1990,19 +2079,28 @@ const topics = [
           "Snapchat ist eine App für Fotos, Videos und Nachrichten.",
           "Viele denken: Das verschwindet sofort.",
           "Aber andere können Inhalte trotzdem sichern."
-        ],
-        "remember": "Ich sende nur, was sicher ist."
+        ]
       },
       {
         "title": "Snaps verschwinden nicht immer",
         "module": "Modul Snapchat",
         "icon": "photo",
         "text": [
-          "Ein Snap kann kurz sichtbar sein.",
-          "Trotzdem kann jemand einen Screenshot machen.",
-          "Oder ein anderes Handy nimmt den Bildschirm auf."
+          "Stell dir vor: Du sendest ein Bild über Snapchat.",
+          "Du denkst: Das Bild verschwindet gleich.",
+          "Aber jemand kann einen Screenshot machen.",
+          "Darum sendest du nur Bilder, die sicher sind."
         ],
-        "remember": "Ich sende nichts, was mir später peinlich oder gefährlich sein kann."
+        "remember": "Ich sende nur Bilder, die wirklich sicher sind.",
+        "practice": {
+          "question": "Du willst ein sehr privates Bild senden. Was ist sicher?",
+          "answers": [
+            "Nicht senden und Hilfe holen, wenn Druck da ist.",
+            "Senden, weil es verschwindet.",
+            "An mehrere Personen senden."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Screenshots",
@@ -2019,11 +2117,21 @@ const topics = [
         "module": "Modul Snapchat",
         "icon": "data",
         "text": [
-          "Snapchat kann den Standort zeigen.",
-          "Dann sehen andere, wo du bist.",
-          "Das kann unsicher sein."
+          "Stell dir vor: Eine App zeigt, wo du gerade bist.",
+          "Andere können dann deinen Ort sehen.",
+          "Das kann unsicher sein.",
+          "Darum teilst du deinen Standort nicht einfach."
         ],
-        "remember": "Ich teile meinen Standort nicht einfach."
+        "remember": "Ich teile meinen Standort nicht einfach.",
+        "practice": {
+          "question": "Eine fremde Person fragt: Wo bist du gerade? Was ist sicher?",
+          "answers": [
+            "Standort nicht schicken und nachfragen.",
+            "Standort schicken.",
+            "Adresse schicken."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Kontakte",
@@ -2359,30 +2467,54 @@ const topics = [
           "TikTok zeigt kurze Videos.",
           "Viele Videos kommen automatisch nacheinander.",
           "Du lernst, wie du sicher damit umgehen kannst."
-        ],
-        "remember": "Ich entscheide, was mir gut tut."
+        ]
       },
       {
         "title": "Trends",
         "module": "Modul TikTok",
         "icon": "youtube",
         "text": [
-          "Trends sind Dinge, die viele nachmachen.",
-          "Manche Trends sind lustig.",
-          "Manche Trends sind gefährlich."
+          "Stell dir vor: Viele machen bei einem Trend mit.",
+          "Der Trend sieht lustig aus.",
+          "Aber er kann gefährlich sein.",
+          "Du musst nicht mitmachen."
         ],
-        "remember": "Ich mache gefährliche Trends nicht nach."
+        "remember": "Ich mache gefährliche Trends nicht nach.",
+        "examples": [
+          "Eine Mutprobe mit Verletzungsgefahr.",
+          "Ein Trend mit gefährlichen Gegenständen.",
+          "Ein Video, das Druck macht: Mach auch mit."
+        ],
+        "practice": {
+          "question": "Ein Trend sieht gefährlich aus. Freunde sagen: Mach mit. Was ist sicher?",
+          "answers": [
+            "Nein sagen und Hilfe holen.",
+            "Mitmachen.",
+            "Andere überreden."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Algorithmus",
         "module": "Modul TikTok",
         "icon": "data",
         "text": [
-          "TikTok merkt, was du oft anschaust.",
-          "Dann zeigt TikTok ähnliche Videos.",
-          "Darum kann man schnell lange schauen."
+          "Stell dir vor: Du schaust viele traurige Videos.",
+          "TikTok zeigt dir dann noch mehr ähnliche Videos.",
+          "Das kann deine Stimmung verändern.",
+          "Darum ist eine Pause manchmal wichtig."
         ],
-        "remember": "Ich mache Pausen."
+        "remember": "Ich mache Pause, wenn mir Videos nicht gut tun.",
+        "practice": {
+          "question": "TikTok zeigt dir viele Videos, die dich traurig machen. Was hilft?",
+          "answers": [
+            "Pause machen und mit jemandem sprechen.",
+            "Immer weiter schauen.",
+            "Private Daten schicken."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Kommentare",
@@ -2727,30 +2859,49 @@ const topics = [
           "In diesem Thema geht es um Probleme im Internet.",
           "Zum Beispiel komische Nachrichten, Druck oder Beleidigungen.",
           "Du lernst, was du dann tun kannst."
-        ],
-        "remember": "Ich muss Probleme im Internet nicht allein lösen."
+        ]
       },
       {
         "title": "Stopp-Regel",
         "module": "Modul Hilfe",
         "icon": "stop",
         "text": [
-          "Wenn etwas komisch ist, machst du zuerst Stopp.",
-          "Du musst nicht sofort antworten.",
-          "Du darfst eine Pause machen."
+          "Stell dir vor: Eine Nachricht macht dir Stress.",
+          "Du willst sofort antworten.",
+          "Aber genau dann hilft die Stopp-Regel.",
+          "Du hältst kurz an und holst Unterstützung."
         ],
-        "remember": "Stopp. Nicht sofort reagieren."
+        "remember": "Stopp. Nicht sofort reagieren.",
+        "practice": {
+          "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
+          "answers": [
+            "Stopp machen und Hilfe holen.",
+            "Sofort antworten.",
+            "Alles allein klären."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Nicht löschen",
         "module": "Modul Hilfe",
         "icon": "check",
         "text": [
-          "Manchmal ist es wichtig, Nachrichten zu zeigen.",
-          "Darum löscht du nicht sofort alles.",
-          "Eine unterstützende Person kann mit dir schauen."
+          "Stell dir vor: Jemand beleidigt dich in einer Nachricht.",
+          "Du möchtest die Nachricht sofort löschen.",
+          "Aber die Nachricht kann wichtig sein, wenn du Hilfe holst.",
+          "Darum zeigst du sie erst einer vertrauten Person."
         ],
-        "remember": "Ich zeige die Nachricht, bevor ich etwas lösche."
+        "remember": "Ich zeige die Nachricht, bevor ich sie lösche.",
+        "practice": {
+          "question": "Du bekommst eine beleidigende Nachricht. Was ist sicher?",
+          "answers": [
+            "Nicht sofort löschen und Hilfe holen.",
+            "Sofort löschen und nichts sagen.",
+            "Zurück beleidigen."
+          ],
+          "correctIndex": 0
+        }
       },
       {
         "title": "Beweise sichern",

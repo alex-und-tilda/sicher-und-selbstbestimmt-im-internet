@@ -4779,3 +4779,108 @@ button.action-card.testbogen,
   font-size: 0.95rem !important;
   margin-bottom: 8px !important;
 }
+
+
+/* ============================================================
+   Merksatz-Didaktik-Fix
+   - Startseiten enthalten keine Merksatz-Box.
+   - Merksatz-Box zeigt nur einmal die Überschrift.
+   ============================================================ */
+
+.access-box.remember,
+.access-box.remember-box {
+  display: block !important;
+  width: 100% !important;
+  padding: 18px 20px !important;
+  border-radius: 18px !important;
+  box-sizing: border-box !important;
+}
+
+.access-box.remember h3,
+.access-box.remember-box h3 {
+  display: block !important;
+  margin: 0 0 10px 0 !important;
+  padding: 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  font-weight: 900 !important;
+  text-align: left !important;
+}
+
+.access-box.remember p,
+.access-box.remember-box p,
+.remember-text {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.45 !important;
+  font-weight: 900 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+/* Keine doppelte oder zentrierte Merksatz-Optik aus älteren CSS-Regeln */
+.access-box.remember p::before,
+.access-box.remember-box p::before,
+.remember-text::before {
+  content: none !important;
+}
+
+
+/* ============================================================
+   Lernlogik-Fix: Alltagssituation → Entscheidung → Übung
+   ============================================================ */
+
+.lesson-card p:first-of-type {
+  font-weight: 700 !important;
+}
+
+.lesson-card .example,
+.lesson-card .practice-box {
+  margin-top: 18px !important;
+}
+
+.lesson-card .example h3::after {
+  content: " aus dem Alltag" !important;
+}
+
+.practice-box {
+  border: 3px solid #3DB8B3 !important;
+  background: #F2FBFA !important;
+  border-radius: 18px !important;
+  padding: 18px 20px !important;
+}
+
+.practice-box h3 {
+  margin-top: 0 !important;
+}
+
+.practice-question {
+  font-size: 1.05rem !important;
+  line-height: 1.45 !important;
+}
+
+.answers {
+  display: grid !important;
+  gap: 10px !important;
+}
+
+.answer-option {
+  text-align: left !important;
+  min-height: 48px !important;
+  padding: 12px 14px !important;
+  border-radius: 14px !important;
+  border: 2px solid #D8DEE8 !important;
+  background: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+
+.answer-option:hover,
+.answer-option:focus-visible {
+  border-color: #3DB8B3 !important;
+  outline: 4px solid rgba(61, 184, 179, 0.25) !important;
+}
