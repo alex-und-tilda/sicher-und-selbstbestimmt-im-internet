@@ -35,6 +35,18 @@ const homeButton = document.getElementById("homeButton");
 const soundToggleButton = document.getElementById("soundToggleButton");
 const liveRegion = document.getElementById("liveRegion");
 
+
+function buildCreatorNotice() {
+  return `
+    <section class="creator-final-notice" aria-label="Information zum Ersteller">
+      <p>
+        Erstellt von <a href="ersteller.html">Frank Runge</a>
+        · Digitale Bildung · Digitale Teilhabe · barrierearme Lernangebote
+      </p>
+    </section>
+  `;
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -874,7 +886,7 @@ function renderQuizResult() {
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(currentTopicId)}')">Zurück zum Thema</button>
       </div>
     </article>
-  `;
+  ` + buildCreatorNotice();
   focusContent();
   renderLegalFooter();
 }
@@ -924,7 +936,7 @@ function renderMemoryCard(topicId) {
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
       </div>
     </article>
-  `;
+  ` + buildCreatorNotice();
   focusContent();
   renderLegalFooter();
 }

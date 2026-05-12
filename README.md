@@ -248,3 +248,26 @@ ressourcenorientierte Beratung
 digitale Teilhabe
 barrierearme Lernangebote
 ```
+
+
+## Dezente Profil-Einbindung
+
+Die Startseite zeigt nur einen kleinen Ersteller-Hinweis.
+Die ausführlichen Profil- und Projektseiten bleiben vorhanden,
+werden aber nicht dominant auf der Lernplattform präsentiert.
+
+Ziel:
+- Lernplattform bleibt ruhig und zielgruppenorientiert.
+- Ersteller bleibt transparent sichtbar.
+- Google kann die Profilseiten weiterhin über Sitemap und interne Links finden.
+
+
+## Profil auf Abschlussseiten
+
+Der Ersteller-Hinweis steht nicht mehr auf der Startseite.
+Er erscheint dezent auf Abschluss-/Merkseiten bzw. Ergebnisbereichen.
+
+Ziel:
+- Startseite bleibt vollständig auf das Lernen konzentriert.
+- Ersteller bleibt transparent.
+- Profilseiten bleiben über Links und Sitemap erreichbar.

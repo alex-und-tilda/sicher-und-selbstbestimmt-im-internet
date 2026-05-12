@@ -5572,3 +5572,50 @@ button.action-card.testbogen,
   margin-bottom: 0.45rem;
 }
 
+
+
+/* Dezenter Ersteller-Hinweis: soll die Lernplattform nicht dominieren */
+.creator-search-info--subtle {
+  max-width: 980px;
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 40, 90, 0.12);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #4b5563;
+}
+
+.creator-search-info--subtle p {
+  margin: 0;
+}
+
+.creator-search-info--subtle a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* Dezent platzierter Ersteller-Hinweis auf Abschluss-/Merkseiten */
+.creator-final-notice {
+  max-width: 760px;
+  margin: 1.25rem auto 0;
+  padding: 0.65rem 0.9rem;
+  border-top: 1px solid rgba(0, 40, 90, 0.14);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: #667085;
+  text-align: center;
+}
+
+.creator-final-notice p {
+  margin: 0;
+}
+
+.creator-final-notice a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
