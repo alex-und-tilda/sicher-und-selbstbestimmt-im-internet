@@ -615,3 +615,26 @@ Pause machen.
 Eine Person fragen, der man vertraut.
 Sagen: Bitte erkläre mir das einfacher.
 ```
+
+
+## Einfache Sprache
+
+Die Inhalte wurden konsequent in Einfacher Sprache überarbeitet.
+
+Umgesetzt:
+
+```text
+kurze Sätze
+keine Ironie
+keine lustigen Scherzantworten
+zwei klare Antwortmöglichkeiten
+einfachere Wörter
+konkrete Alltagssituationen
+Hilfe über den Button „Ich bin unsicher“
+```
+
+Hinweis:
+
+```text
+Für offizielle Leichte Sprache ist zusätzlich eine Prüfung durch Menschen aus der Zielgruppe nötig.
+```

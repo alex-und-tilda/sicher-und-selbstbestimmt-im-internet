@@ -3,371 +3,343 @@ const topics = [
     "id": "datenschutz",
     "title": "Datenschutz",
     "icon": "lock",
-    "desc": "Private Daten verstehen und schützen",
+    "desc": "Private Daten schützen",
     "quiz": [
       {
-        "question": "Was ist ein privates Datum?",
+        "question": "Was ist eine private Information?",
         "answers": [
-          "Deine Adresse.",
           "Das Wetter.",
-          "Der Name einer App."
+          "Meine Adresse."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine App fragt nach deinem Passwort. Was machst du?",
+        "question": "Was machst du mit deinem Passwort?",
         "answers": [
-          "Nicht weitergeben und nachfragen.",
-          "Passwort schicken.",
-          "Passwort in eine Gruppe schreiben."
+          "Ich gebe es weiter.",
+          "Ich behalte es für mich."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du bekommst einen Link zu einem Gewinnspiel. Was ist sicher?",
+        "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
         "answers": [
-          "Langsam machen und fragen.",
-          "Sofort alles eintragen.",
-          "Den Link an alle weiterleiten."
+          "Adresse eintragen.",
+          "Adresse nicht eintragen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was machst du vor dem Senden eines Fotos?",
+        "question": "Du willst ein Foto senden. Was machst du zuerst?",
         "answers": [
-          "Prüfen, was auf dem Foto zu sehen ist.",
-          "Immer sofort senden.",
-          "Nie darüber nachdenken."
+          "Foto prüfen.",
+          "Sofort senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du bist unsicher. Was ist gut?",
+        "question": "Eine Nachricht macht Druck. Was ist besser?",
         "answers": [
-          "Eine Person fragen, der du vertraust.",
-          "Trotzdem klicken.",
-          "Das Passwort ändern und sagen."
+          "Schnell klicken.",
+          "Langsam machen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was gehört nicht in eine öffentliche Nachricht?",
         "answers": [
-          "Adresse und Telefonnummer.",
-          "Ein allgemeiner Gruß.",
-          "Ein Emoji."
+          "Meine Telefonnummer.",
+          "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist ein Passwort wichtig?",
         "answers": [
-          "Es schützt dein Konto.",
-          "Es ist nur ein Wort.",
+          "Es schützt mein Konto.",
           "Es ist für alle da."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Webseite fragt sehr viele Daten ab. Was machst du?",
+        "question": "Du bist unsicher. Was hilft?",
         "answers": [
-          "Erst prüfen und nachfragen.",
-          "Alles ausfüllen.",
-          "Daten erfinden und weitermachen."
+          "Raten.",
+          "Hilfe-Button nutzen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer darf dein Passwort kennen?",
         "answers": [
-          "Nur du.",
-          "Alle aus der Gruppe.",
-          "Jede Person im Internet."
+          "Nur ich.",
+          "Alle in der Gruppe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
-          "Erst prüfen. Dann entscheiden.",
-          "Immer sofort klicken.",
-          "Private Daten sind egal."
+          "Erst prüfen.",
+          "Immer sofort klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
+        "module": "Start",
         "icon": "lock",
         "text": [
-          "In diesem Thema geht es um private Daten.",
-          "Private Daten sagen etwas über dich.",
-          "Du lernst, wann du vorsichtig sein musst."
+          "Hier lernst du: Was sind private Daten?",
+          "Du lernst: Welche Daten soll ich schützen?",
+          "Du lernst: Wann muss ich vorsichtig sein?"
         ]
       },
       {
-        "title": "Was sind private Daten?",
-        "module": "Modul 1: Datenschutz verstehen",
+        "title": "Private Daten",
+        "module": "Datenschutz",
         "icon": "data",
         "text": [
           "Private Daten gehören zu dir.",
-          "Andere Menschen sollen diese Daten nicht einfach bekommen."
+          "Andere Menschen sollen diese Daten nicht einfach bekommen.",
+          "Manche Daten sagen viel über dich."
         ],
+        "remember": "Private Daten gehören zu mir.",
         "bullets": [
-          "Name",
-          "Adresse",
-          "Telefonnummer",
-          "Geburtstag",
-          "Passwort",
-          "Fotos",
-          "Gesundheits-Daten"
-        ],
-        "remember": "Mein Name, meine Adresse und mein Passwort sind privat."
+          "dein Name",
+          "deine Adresse",
+          "deine Telefon-Nummer",
+          "dein Geburtstag",
+          "dein Passwort",
+          "deine Fotos"
+        ]
       },
       {
-        "title": "Passwörter schützen",
-        "module": "Modul 1: Datenschutz verstehen",
+        "title": "Passwort",
+        "module": "Datenschutz",
         "icon": "lock",
         "text": [
+          "Ein Passwort schützt dein Konto.",
           "Ein Passwort ist wie ein Schlüssel.",
-          "Mit dem Passwort kann jemand in dein Konto.",
-          "Darum gibst du dein Passwort nicht weiter."
+          "Andere Menschen dürfen dein Passwort nicht benutzen."
         ],
-        "warning": "Auch gute Freunde sollen dein Passwort nicht kennen.",
-        "remember": "Ich gebe mein Passwort nicht weiter."
+        "remember": "Mein Passwort bleibt geheim.",
+        "warning": "Gib dein Passwort nicht weiter."
       },
       {
-        "title": "Nicht alles eintragen",
-        "module": "Modul 1: Datenschutz verstehen",
-        "icon": "stop",
+        "title": "Adresse eingeben",
+        "module": "Datenschutz",
+        "icon": "data",
         "text": [
-          "Stell dir vor: Du willst eine App benutzen.",
-          "Die App fragt nach deiner Adresse und Telefonnummer.",
-          "Jetzt musst du entscheiden: Muss ich das wirklich eintragen?",
-          "Wenn du unsicher bist, stoppst du kurz und fragst nach."
-        ],
-        "examples": [
-          "Eine Spiele-App fragt nach deiner Adresse.",
-          "Ein Gewinnspiel fragt nach deinem Geburtstag.",
-          "Ein Formular fragt nach deiner Telefonnummer."
+          "Eine App fragt nach deiner Adresse.",
+          "Du weißt nicht warum.",
+          "Dann musst du nicht sofort etwas eintragen."
         ],
         "remember": "Ich trage private Daten nicht einfach ein.",
+        "examples": [
+          "Eine Spiele-App fragt nach deiner Adresse.",
+          "Ein Gewinnspiel fragt nach deinem Geburtstag."
+        ],
         "practice": {
-          "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist sicher?",
+          "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
           "answers": [
-            "Nicht eintragen.",
-            "Adresse sofort eintragen.",
-            "Zusätzlich mein Passwort eintragen."
+            "Ich trage die Adresse ein.",
+            "Ich trage die Adresse nicht ein."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Fotos und Daten",
-        "module": "Modul 1: Datenschutz verstehen",
+        "title": "Fotos prüfen",
+        "module": "Datenschutz",
         "icon": "photo",
         "text": [
-          "Stell dir vor: Du willst ein Foto verschicken.",
-          "Auf dem Foto sieht man vielleicht dein Zimmer, einen Brief oder eine andere Person.",
-          "Das kann privat sein.",
-          "Darum schaust du vor dem Senden genau hin."
+          "Du willst ein Foto verschicken.",
+          "Auf dem Foto sieht man vielleicht private Dinge.",
+          "Zum Beispiel: dein Zimmer oder einen Brief."
         ],
-        "remember": "Ich prüfe ein Foto, bevor ich es verschicke.",
+        "remember": "Ich prüfe Fotos vor dem Senden.",
         "examples": [
-          "Auf dem Tisch liegt ein Brief mit Adresse.",
-          "Im Hintergrund ist eine andere Person zu sehen.",
-          "Auf dem Foto sieht man dein Zimmer."
+          "Auf dem Foto liegt ein Brief.",
+          "Im Hintergrund sieht man eine andere Person."
         ],
         "practice": {
-          "question": "Auf einem Foto sieht man einen Brief mit deiner Adresse. Was ist sicher?",
+          "question": "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?",
           "answers": [
-            "Foto nicht senden oder unkenntlich machen.",
-            "Foto sofort senden.",
-            "Foto in eine Gruppe schicken."
+            "Ich schicke das Foto sofort.",
+            "Ich schicke das Foto nicht so weiter."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "Komische Nachrichten",
-        "module": "Modul 1: Datenschutz verstehen",
+        "module": "Datenschutz",
         "icon": "message",
         "text": [
-          "Manchmal wollen Nachrichten private Daten bekommen.",
-          "Zum Beispiel mit Druck oder einem falschen Gewinn.",
-          "Dann klickst du nicht sofort."
+          "Manche Nachrichten wollen private Daten bekommen.",
+          "Die Nachricht macht vielleicht Druck.",
+          "Dann ist Vorsicht wichtig."
         ],
-        "remember": "Bei komischen Nachrichten mache ich langsam.",
+        "remember": "Ich mache langsam, wenn eine Nachricht komisch ist.",
         "practice": {
-          "question": "Eine Nachricht sagt: Du hast gewonnen. Gib deine Adresse ein. Was ist sicher?",
+          "question": "Eine Nachricht sagt: Gib deine Adresse ein. Was ist besser?",
           "answers": [
-            "Nicht sofort eintragen.",
-            "Adresse sofort schicken.",
-            "Passwort mitschicken."
+            "Ich gebe die Adresse ein.",
+            "Ich gebe die Adresse nicht ein."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Wenn du unsicher bist",
-        "module": "Modul 1: Datenschutz verstehen",
+        "title": "Wenn ich unsicher bin",
+        "module": "Datenschutz",
         "icon": "help",
         "text": [
-          "Unsicherheit ist ein Warnsignal.",
-          "Du darfst nachfragen.",
-          "Du musst digitale Dinge nicht allein entscheiden."
+          "Du musst nicht raten.",
+          "Du kannst die Frage noch einmal lesen.",
+          "Du kannst den Hilfe-Button nutzen."
         ],
-        "remember": "Ich hole Hilfe, wenn ich unsicher bin."
+        "remember": "Ich darf mir Unterstützung holen."
       },
       {
-        "title": "Merksätze Datenschutz",
-        "module": "Modul 1: Datenschutz verstehen",
+        "title": "Das merke ich mir",
+        "module": "Datenschutz",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen dir im Alltag."
+          "Diese Regeln helfen dir."
         ],
         "bullets": [
-          "Ich gebe mein Passwort nicht weiter.",
-          "Ich trage nicht alles sofort ein.",
-          "Ich prüfe Fotos vor dem Senden.",
-          "Ich frage nach, wenn ich unsicher bin."
-        ],
-        "remember": "Ich schütze meine privaten Daten."
+          "Mein Passwort bleibt geheim.",
+          "Ich gebe private Daten nicht einfach ein.",
+          "Ich prüfe Fotos.",
+          "Ich mache langsam bei komischen Nachrichten."
+        ]
       }
     ],
     "illustration": "assets/illustrations/datenschutz.svg",
     "quizQuestions": [
       {
-        "question": "Was ist ein privates Datum?",
+        "question": "Was ist eine private Information?",
         "answers": [
-          "Deine Adresse.",
           "Das Wetter.",
-          "Der Name einer App."
+          "Meine Adresse."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine App fragt nach deinem Passwort. Was machst du?",
+        "question": "Was machst du mit deinem Passwort?",
         "answers": [
-          "Nicht weitergeben und nachfragen.",
-          "Passwort schicken.",
-          "Passwort in eine Gruppe schreiben."
+          "Ich gebe es weiter.",
+          "Ich behalte es für mich."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du bekommst einen Link zu einem Gewinnspiel. Was ist sicher?",
+        "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
         "answers": [
-          "Langsam machen und fragen.",
-          "Sofort alles eintragen.",
-          "Den Link an alle weiterleiten."
+          "Adresse eintragen.",
+          "Adresse nicht eintragen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was machst du vor dem Senden eines Fotos?",
+        "question": "Du willst ein Foto senden. Was machst du zuerst?",
         "answers": [
-          "Prüfen, was auf dem Foto zu sehen ist.",
-          "Immer sofort senden.",
-          "Nie darüber nachdenken."
+          "Foto prüfen.",
+          "Sofort senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du bist unsicher. Was ist gut?",
+        "question": "Eine Nachricht macht Druck. Was ist besser?",
         "answers": [
-          "Eine Person fragen, der du vertraust.",
-          "Trotzdem klicken.",
-          "Das Passwort ändern und sagen."
+          "Schnell klicken.",
+          "Langsam machen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was gehört nicht in eine öffentliche Nachricht?",
         "answers": [
-          "Adresse und Telefonnummer.",
-          "Ein allgemeiner Gruß.",
-          "Ein Emoji."
+          "Meine Telefonnummer.",
+          "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist ein Passwort wichtig?",
         "answers": [
-          "Es schützt dein Konto.",
-          "Es ist nur ein Wort.",
+          "Es schützt mein Konto.",
           "Es ist für alle da."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Webseite fragt sehr viele Daten ab. Was machst du?",
+        "question": "Du bist unsicher. Was hilft?",
         "answers": [
-          "Erst prüfen und nachfragen.",
-          "Alles ausfüllen.",
-          "Daten erfinden und weitermachen."
+          "Raten.",
+          "Hilfe-Button nutzen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer darf dein Passwort kennen?",
         "answers": [
-          "Nur du.",
-          "Alle aus der Gruppe.",
-          "Jede Person im Internet."
+          "Nur ich.",
+          "Alle in der Gruppe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
-          "Erst prüfen. Dann entscheiden.",
-          "Immer sofort klicken.",
-          "Private Daten sind egal."
+          "Erst prüfen.",
+          "Immer sofort klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -376,15 +348,15 @@ const topics = [
       "bei Unsicherheit Hilfe holen"
     ],
     "helpQuestions": [
-      "Muss ich diese Daten wirklich eingeben?",
-      "Wer kann diese Daten sehen?",
-      "Kann mir eine Person helfen?"
+      "Muss ich diese Daten eingeben?",
+      "Weiß ich, wer die Daten bekommt?",
+      "Brauche ich Hilfe bei der Entscheidung?"
     ],
     "memoryRules": [
-      "Ich gebe mein Passwort nicht weiter.",
-      "Ich trage private Daten nicht einfach ein.",
+      "Mein Passwort bleibt geheim.",
+      "Ich gebe private Daten nicht einfach ein.",
       "Ich prüfe Fotos vor dem Senden.",
-      "Ich frage nach, wenn ich unsicher bin."
+      "Ich mache langsam bei komischen Nachrichten."
     ],
     "shortLessonIndexes": [
       0,
@@ -412,354 +384,330 @@ const topics = [
     "id": "whatsapp",
     "title": "WhatsApp",
     "icon": "message",
-    "desc": "Nachrichten, Gruppen, Links und Hilfe",
+    "desc": "Nachrichten sicher nutzen",
     "quiz": [
       {
-        "question": "Eine fremde Nummer schreibt dir. Was machst du?",
+        "question": "Eine fremde Nummer schreibt dir. Was ist besser?",
         "answers": [
-          "Nicht sofort antworten.",
           "Sofort private Daten schicken.",
-          "Sofort Geld senden."
+          "Nicht sofort antworten."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Jemand fragt nach deinem WhatsApp-Code. Was machst du?",
+        "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
         "answers": [
-          "Code nicht weitergeben.",
           "Code schicken.",
-          "Code in die Gruppe schreiben."
+          "Code nicht schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Link kommt von einer unbekannten Nummer. Was ist sicher?",
+        "question": "Ein unbekannter Link kommt an. Was ist besser?",
         "answers": [
-          "Nicht öffnen.",
-          "Sofort öffnen.",
-          "Weiterleiten."
+          "Link öffnen.",
+          "Link nicht öffnen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist in einer Gruppe wichtig?",
+        "question": "Was ist bei Gruppen wichtig?",
         "answers": [
           "Viele können mitlesen.",
-          "Nur ich kann es sehen.",
-          "Alles ist privat."
+          "Nur ich kann es sehen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du willst ein Foto von jemandem senden. Was machst du?",
+        "question": "Du willst ein Foto von einer Person senden. Was ist besser?",
         "answers": [
           "Erst fragen.",
-          "Einfach senden.",
-          "In alle Gruppen schicken."
+          "Einfach senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Nachricht macht dir Angst. Was ist gut?",
+        "question": "Eine Nachricht macht dir Stress. Was ist besser?",
         "answers": [
           "Pause machen.",
-          "Allein weitermachen.",
           "Sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was darfst du mit einer stressigen Gruppe machen?",
+        "question": "Was kannst du mit einer stressigen Gruppe machen?",
         "answers": [
-          "Stumm schalten oder Hilfe fragen.",
-          "Immer sofort antworten.",
-          "Alle beschimpfen."
+          "Stumm schalten.",
+          "Immer sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein sicherer Umgang mit Sprachnachrichten?",
+        "question": "Was ist mit Sprachnachrichten wichtig?",
         "answers": [
-          "Vorher überlegen, was ich sage.",
-          "Private Dinge immer schicken.",
-          "Nie zuhören."
+          "Vorher überlegen.",
+          "Alles sagen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Nachricht sagt: sofort bezahlen. Was machst du?",
+        "question": "Eine Nachricht sagt: sofort bezahlen. Was ist besser?",
         "answers": [
           "Nicht sofort handeln.",
-          "Sofort bezahlen.",
-          "Passwort schicken."
+          "Sofort bezahlen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was hilft bei WhatsApp?",
         "answers": [
           "Langsam prüfen.",
-          "Sofort klicken.",
-          "Codes weitergeben."
+          "Schnell klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
+        "module": "Start",
         "icon": "message",
         "text": [
-          "WhatsApp ist eine App für Nachrichten.",
-          "Du kannst schreiben, sprechen, Bilder senden und Gruppen nutzen.",
-          "Du lernst, worauf du achten musst."
+          "Hier lernst du: Wie nutze ich WhatsApp sicher?",
+          "Du lernst etwas über fremde Nummern.",
+          "Du lernst etwas über Links und Codes."
         ]
       },
       {
-        "title": "Was ist WhatsApp?",
-        "module": "Modul 1: WhatsApp verstehen",
+        "title": "WhatsApp nutzen",
+        "module": "WhatsApp",
         "icon": "message",
         "text": [
-          "Mit WhatsApp kannst du Kontakt halten.",
-          "Du kannst Nachrichten, Fotos und Sprachnachrichten senden.",
-          "Andere Menschen können dir auch schreiben."
+          "Mit WhatsApp kannst du Nachrichten schreiben.",
+          "Du kannst Bilder senden.",
+          "Du kannst in Gruppen schreiben."
         ],
         "remember": "Ich entscheide, wem ich antworte."
       },
       {
-        "title": "Unbekannte Nachrichten",
-        "module": "Modul 1: WhatsApp verstehen",
+        "title": "Fremde Nummer",
+        "module": "WhatsApp",
         "icon": "warning",
         "text": [
-          "Stell dir vor: Eine fremde Nummer schreibt dir.",
-          "Die Person sagt: Ich kenne dich.",
-          "Du bist aber nicht sicher, wer das ist.",
+          "Eine fremde Nummer schreibt dir.",
+          "Du weißt nicht, wer das ist.",
           "Dann antwortest du nicht sofort."
         ],
+        "remember": "Bei fremden Nummern mache ich langsam.",
         "examples": [
-          "Hallo, ich habe eine neue Nummer.",
-          "Schick mir schnell Geld.",
-          "Gib mir bitte deinen Code."
+          "Hallo. Ich habe eine neue Nummer.",
+          "Schick mir bitte Geld."
         ],
-        "remember": "Bei fremden Nachrichten mache ich langsam.",
         "practice": {
-          "question": "Eine fremde Nummer schreibt: Ich bin es. Schick mir Geld. Was ist sicher?",
+          "question": "Eine fremde Nummer fragt nach Geld. Was ist besser?",
           "answers": [
-            "Nicht antworten.",
-            "Geld schicken.",
-            "Code schicken."
+            "Ich schicke Geld.",
+            "Ich schicke kein Geld."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Links in WhatsApp",
-        "module": "Modul 1: WhatsApp verstehen",
+        "title": "Links",
+        "module": "WhatsApp",
         "icon": "link",
         "text": [
-          "Links können zu Internetseiten führen.",
-          "Manche Links sind sicher. Andere Links sind gefährlich.",
+          "Ein Link führt zu einer Internet-Seite.",
+          "Manche Links sind gefährlich.",
           "Du klickst nicht sofort auf unbekannte Links."
         ],
         "remember": "Ich klicke nicht sofort auf unbekannte Links.",
         "practice": {
-          "question": "Eine fremde Nummer schickt einen Link. Was ist sicher?",
+          "question": "Eine fremde Nummer schickt einen Link. Was ist besser?",
           "answers": [
-            "Nicht öffnen.",
-            "Sofort öffnen.",
-            "In eine Gruppe weiterleiten."
+            "Ich öffne den Link.",
+            "Ich öffne den Link nicht."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "WhatsApp-Code",
-        "module": "Modul 1: WhatsApp verstehen",
+        "module": "WhatsApp",
         "icon": "lock",
         "text": [
-          "Stell dir vor: Du bekommst einen Code per SMS.",
-          "Dann schreibt dir jemand: Schick mir den Code.",
-          "Mit dem Code kann jemand dein WhatsApp übernehmen.",
-          "Darum gibst du den Code nie weiter."
+          "Du bekommst manchmal einen Code per SMS.",
+          "Der Code schützt dein WhatsApp.",
+          "Du gibst den Code nicht weiter."
         ],
-        "warning": "Auch wenn jemand sagt: Ich brauche den Code dringend.",
         "remember": "Ich gebe meinen WhatsApp-Code nicht weiter.",
         "practice": {
-          "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist sicher?",
+          "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
           "answers": [
-            "Code nicht schicken.",
-            "Code sofort schicken.",
-            "Code in eine Gruppe schreiben."
+            "Ich schicke den Code.",
+            "Ich schicke den Code nicht."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "Gruppen",
-        "module": "Modul 1: WhatsApp verstehen",
-        "icon": "help",
+        "module": "WhatsApp",
+        "icon": "message",
         "text": [
           "In Gruppen lesen viele Menschen mit.",
           "Nicht alles gehört in eine Gruppe.",
-          "Du darfst eine Gruppe stumm schalten oder verlassen."
+          "Private Dinge schreibst du nicht in eine Gruppe."
         ],
-        "remember": "Ich schreibe in Gruppen nur, was alle sehen dürfen."
+        "remember": "In Gruppen schreibe ich nur, was alle sehen dürfen."
       },
       {
-        "title": "Fotos und Sprachnachrichten",
-        "module": "Modul 1: WhatsApp verstehen",
+        "title": "Fotos senden",
+        "module": "WhatsApp",
         "icon": "photo",
         "text": [
-          "Fotos und Stimmen können privat sein.",
-          "Andere können sie weiterleiten.",
-          "Darum prüfst du vor dem Senden."
+          "Ein Foto kann weitergeschickt werden.",
+          "Ein Foto kann privat sein.",
+          "Frage vorher, wenn andere Menschen auf dem Foto sind."
         ],
-        "remember": "Ich frage, bevor ich Fotos von anderen sende."
+        "remember": "Ich prüfe Fotos vor dem Senden."
       },
       {
-        "title": "Hilfe holen",
-        "module": "Modul 1: WhatsApp verstehen",
-        "icon": "help",
+        "title": "Das merke ich mir",
+        "module": "WhatsApp",
+        "icon": "remember",
         "text": [
-          "Wenn dich eine Nachricht stresst, mach eine Pause.",
-          "Du kannst die Nachricht zeigen.",
-          "Du kannst eine Person fragen, der du vertraust."
+          "Diese Regeln helfen bei WhatsApp."
         ],
-        "remember": "Ich muss WhatsApp-Probleme nicht allein lösen."
+        "bullets": [
+          "Fremde Nummern prüfen.",
+          "Unbekannte Links nicht öffnen.",
+          "Codes nicht weitergeben.",
+          "Fotos prüfen."
+        ]
       }
     ],
     "illustration": "assets/illustrations/whatsapp.svg",
     "quizQuestions": [
       {
-        "question": "Eine fremde Nummer schreibt dir. Was machst du?",
+        "question": "Eine fremde Nummer schreibt dir. Was ist besser?",
         "answers": [
-          "Nicht sofort antworten.",
           "Sofort private Daten schicken.",
-          "Sofort Geld senden."
+          "Nicht sofort antworten."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Jemand fragt nach deinem WhatsApp-Code. Was machst du?",
+        "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
         "answers": [
-          "Code nicht weitergeben.",
           "Code schicken.",
-          "Code in die Gruppe schreiben."
+          "Code nicht schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Link kommt von einer unbekannten Nummer. Was ist sicher?",
+        "question": "Ein unbekannter Link kommt an. Was ist besser?",
         "answers": [
-          "Nicht öffnen.",
-          "Sofort öffnen.",
-          "Weiterleiten."
+          "Link öffnen.",
+          "Link nicht öffnen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist in einer Gruppe wichtig?",
+        "question": "Was ist bei Gruppen wichtig?",
         "answers": [
           "Viele können mitlesen.",
-          "Nur ich kann es sehen.",
-          "Alles ist privat."
+          "Nur ich kann es sehen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du willst ein Foto von jemandem senden. Was machst du?",
+        "question": "Du willst ein Foto von einer Person senden. Was ist besser?",
         "answers": [
           "Erst fragen.",
-          "Einfach senden.",
-          "In alle Gruppen schicken."
+          "Einfach senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Nachricht macht dir Angst. Was ist gut?",
+        "question": "Eine Nachricht macht dir Stress. Was ist besser?",
         "answers": [
           "Pause machen.",
-          "Allein weitermachen.",
           "Sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was darfst du mit einer stressigen Gruppe machen?",
+        "question": "Was kannst du mit einer stressigen Gruppe machen?",
         "answers": [
-          "Stumm schalten oder Hilfe fragen.",
-          "Immer sofort antworten.",
-          "Alle beschimpfen."
+          "Stumm schalten.",
+          "Immer sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein sicherer Umgang mit Sprachnachrichten?",
+        "question": "Was ist mit Sprachnachrichten wichtig?",
         "answers": [
-          "Vorher überlegen, was ich sage.",
-          "Private Dinge immer schicken.",
-          "Nie zuhören."
+          "Vorher überlegen.",
+          "Alles sagen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Nachricht sagt: sofort bezahlen. Was machst du?",
+        "question": "Eine Nachricht sagt: sofort bezahlen. Was ist besser?",
         "answers": [
           "Nicht sofort handeln.",
-          "Sofort bezahlen.",
-          "Passwort schicken."
+          "Sofort bezahlen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was hilft bei WhatsApp?",
         "answers": [
           "Langsam prüfen.",
-          "Sofort klicken.",
-          "Codes weitergeben."
+          "Schnell klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -770,19 +718,19 @@ const topics = [
     "helpQuestions": [
       "Kenne ich diese Nummer?",
       "Macht die Nachricht Druck?",
-      "Soll ich erst jemanden fragen?"
+      "Ist der Link sicher?"
     ],
     "memoryRules": [
-      "Ich klicke nicht sofort auf unbekannte Links.",
+      "Ich öffne unbekannte Links nicht sofort.",
       "Ich gebe keinen WhatsApp-Code weiter.",
-      "Ich schreibe in Gruppen nur, was alle sehen dürfen.",
-      "Ich frage nach, wenn mich eine Nachricht stresst."
+      "Ich prüfe fremde Nummern.",
+      "Ich prüfe Fotos vor dem Senden."
     ],
     "shortLessonIndexes": [
       0,
       2,
+      3,
       4,
-      6,
       7
     ],
     "qrLink": "index.html#whatsapp",
@@ -804,348 +752,324 @@ const topics = [
     "id": "facebook",
     "title": "Facebook",
     "icon": "message",
-    "desc": "Profil, Beiträge, Kommentare und Privatsphäre",
+    "desc": "Beiträge und Kontakte prüfen",
     "quiz": [
       {
-        "question": "Was solltest du vor einem Beitrag überlegen?",
+        "question": "Was prüfst du vor einem Beitrag?",
         "answers": [
           "Wer kann das sehen?",
-          "Wie schnell kann ich posten?",
-          "Wie viele Likes bekomme ich?"
+          "Wie schnell kann ich posten?"
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine unbekannte Person sendet eine Anfrage. Was ist sicher?",
+        "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
         "answers": [
-          "Erst prüfen.",
           "Sofort annehmen.",
-          "Adresse schicken."
+          "Erst prüfen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Kommentaren wichtig?",
         "answers": [
           "Respektvoll schreiben.",
-          "Andere beleidigen.",
-          "Immer streiten."
+          "Andere beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann privat sein?",
         "answers": [
-          "Wohnort und Telefonnummer.",
-          "Ein allgemeiner Gruß.",
-          "Ein App-Name."
+          "Telefon-Nummer.",
+          "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du wirst beleidigt. Was hilft?",
+        "question": "Du wirst beleidigt. Was ist besser?",
         "answers": [
-          "Nicht allein bleiben und Hilfe holen.",
           "Zurück beleidigen.",
-          "Alles löschen und niemandem sagen."
+          "Unterstützung holen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was bedeutet Privatsphäre?",
+        "question": "Was bedeutet: Wer darf etwas sehen?",
         "answers": [
-          "Ich entscheide, wer etwas sehen darf.",
-          "Alle sehen alles.",
-          "Niemand darf Facebook nutzen."
+          "Ich prüfe die Sichtbarkeit.",
+          "Alle sehen immer alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Foto zeigt andere Menschen. Was ist gut?",
+        "question": "Ein Foto zeigt andere Menschen. Was ist besser?",
         "answers": [
-          "Vor dem Posten fragen.",
-          "Einfach posten.",
-          "Alle markieren."
+          "Erst fragen.",
+          "Einfach posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind alte Beiträge wichtig?",
         "answers": [
           "Sie können später noch gesehen werden.",
-          "Sie verschwinden immer sofort.",
-          "Sie sind immer privat."
+          "Sie verschwinden immer."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist sicher bei Profilangaben?",
+        "question": "Was ist gut im Profil?",
         "answers": [
-          "Nur nötige Angaben zeigen.",
-          "Alles öffentlich machen.",
-          "Passwort ins Profil schreiben."
+          "Nur nötige Informationen.",
+          "Passwort öffentlich schreiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Erst prüfen. Dann posten.",
-          "Immer alles teilen.",
-          "Jede Anfrage annehmen."
+          "Immer alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
+        "module": "Start",
         "icon": "message",
         "text": [
-          "Facebook ist eine Plattform im Internet.",
-          "Du kannst Beiträge sehen und schreiben.",
-          "Du lernst, was öffentlich sein kann."
+          "Hier lernst du: Was kann man auf Facebook sehen?",
+          "Du lernst etwas über Beiträge.",
+          "Du lernst etwas über Freundschafts-Anfragen."
         ]
       },
       {
-        "title": "Profil prüfen",
-        "module": "Modul Facebook",
+        "title": "Profil",
+        "module": "Facebook",
         "icon": "data",
         "text": [
-          "In deinem Profil stehen Informationen über dich.",
-          "Manche Informationen müssen nicht öffentlich sein."
+          "Im Profil stehen Informationen über dich.",
+          "Nicht alles muss dort stehen.",
+          "Private Informationen sollen nicht öffentlich sein."
         ],
+        "remember": "Ich zeige nicht alles in meinem Profil.",
         "bullets": [
-          "Wohnort",
-          "Telefonnummer",
+          "Adresse",
+          "Telefon-Nummer",
           "Geburtstag",
-          "Arbeitsplatz",
           "Fotos"
-        ],
-        "remember": "Ich zeige nicht alles in meinem Profil."
+        ]
       },
       {
-        "title": "Beiträge posten",
-        "module": "Modul Facebook",
-        "icon": "photo",
+        "title": "Beitrag schreiben",
+        "module": "Facebook",
+        "icon": "message",
         "text": [
-          "Stell dir vor: Du willst etwas über deinen Tag schreiben.",
-          "Vielleicht können viele Menschen den Beitrag sehen.",
-          "Auch später kann der Beitrag noch auftauchen.",
+          "Du willst etwas schreiben.",
+          "Viele Menschen können den Beitrag sehen.",
           "Darum prüfst du vorher, was du schreibst."
         ],
         "remember": "Ich prüfe einen Beitrag vor dem Posten.",
         "practice": {
-          "question": "Du willst schreiben, wo du wohnst. Was ist sicher?",
+          "question": "Du willst deine Adresse posten. Was ist besser?",
           "answers": [
-            "Nicht öffentlich posten.",
-            "Adresse öffentlich posten.",
-            "Telefonnummer dazuschreiben."
+            "Ich poste die Adresse.",
+            "Ich poste die Adresse nicht."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "Kommentare",
-        "module": "Modul Facebook",
+        "module": "Facebook",
         "icon": "message",
         "text": [
-          "Kommentare können andere verletzen.",
-          "Auch Kommentare sind öffentlich oder halb-öffentlich.",
-          "Du kannst freundlich bleiben oder nichts schreiben."
+          "Kommentare können andere Menschen verletzen.",
+          "Du musst nicht auf alles antworten.",
+          "Freundlich bleiben ist wichtig."
         ],
         "remember": "Ich schreibe respektvoll."
       },
       {
-        "title": "Freundschaftsanfragen",
-        "module": "Modul Facebook",
+        "title": "Freundschafts-Anfrage",
+        "module": "Facebook",
         "icon": "help",
         "text": [
-          "Stell dir vor: Eine unbekannte Person sendet dir eine Anfrage.",
+          "Eine unbekannte Person sendet eine Anfrage.",
           "Du weißt nicht, wer das ist.",
-          "Nicht jede Anfrage ist sicher.",
           "Du musst die Anfrage nicht annehmen."
         ],
         "remember": "Ich nehme nicht jede Anfrage an.",
         "practice": {
-          "question": "Eine unbekannte Person will dein Facebook-Freund sein. Was ist sicher?",
+          "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
           "answers": [
-            "Erst prüfen.",
-            "Sofort annehmen.",
-            "Private Daten schicken."
+            "Ich nehme sie sofort an.",
+            "Ich prüfe die Anfrage."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Privatsphäre",
-        "module": "Modul Facebook",
+        "title": "Wer darf etwas sehen?",
+        "module": "Facebook",
         "icon": "lock",
         "text": [
-          "Privatsphäre bedeutet: Du entscheidest, wer etwas sehen darf.",
-          "Einstellungen können helfen."
+          "Du kannst einstellen, wer etwas sehen darf.",
+          "Das nennt man private Einstellungen.",
+          "Du kannst Hilfe bei den Einstellungen nutzen."
         ],
-        "remember": "Ich frage nach Hilfe bei den Privatsphäre-Einstellungen."
+        "remember": "Ich prüfe, wer meine Beiträge sehen darf."
       },
       {
-        "title": "Streit und Beleidigungen",
-        "module": "Modul Facebook",
+        "title": "Beleidigungen",
+        "module": "Facebook",
         "icon": "warning",
         "text": [
           "Im Internet kann es Streit geben.",
-          "Du musst nicht zurückschimpfen.",
-          "Du kannst Hilfe holen."
+          "Beleidigungen sind nicht in Ordnung.",
+          "Du musst nicht zurück beleidigen."
         ],
-        "remember": "Ich hole Hilfe, wenn mich etwas verletzt."
+        "remember": "Ich bleibe nicht allein, wenn mich etwas verletzt."
       },
       {
-        "title": "Merken",
-        "module": "Modul Facebook",
+        "title": "Das merke ich mir",
+        "module": "Facebook",
         "icon": "remember",
         "text": [
           "Diese Regeln helfen bei Facebook."
         ],
         "bullets": [
           "Nicht alles öffentlich machen.",
-          "Nicht jede Anfrage annehmen.",
+          "Anfragen prüfen.",
           "Respektvoll schreiben.",
-          "Hilfe holen bei Beleidigungen."
-        ],
-        "remember": "Erst prüfen. Dann posten."
+          "Bei Beleidigungen Hilfe holen."
+        ]
       }
     ],
     "illustration": "assets/illustrations/facebook.svg",
     "quizQuestions": [
       {
-        "question": "Was solltest du vor einem Beitrag überlegen?",
+        "question": "Was prüfst du vor einem Beitrag?",
         "answers": [
           "Wer kann das sehen?",
-          "Wie schnell kann ich posten?",
-          "Wie viele Likes bekomme ich?"
+          "Wie schnell kann ich posten?"
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine unbekannte Person sendet eine Anfrage. Was ist sicher?",
+        "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
         "answers": [
-          "Erst prüfen.",
           "Sofort annehmen.",
-          "Adresse schicken."
+          "Erst prüfen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Kommentaren wichtig?",
         "answers": [
           "Respektvoll schreiben.",
-          "Andere beleidigen.",
-          "Immer streiten."
+          "Andere beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann privat sein?",
         "answers": [
-          "Wohnort und Telefonnummer.",
-          "Ein allgemeiner Gruß.",
-          "Ein App-Name."
+          "Telefon-Nummer.",
+          "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du wirst beleidigt. Was hilft?",
+        "question": "Du wirst beleidigt. Was ist besser?",
         "answers": [
-          "Nicht allein bleiben und Hilfe holen.",
           "Zurück beleidigen.",
-          "Alles löschen und niemandem sagen."
+          "Unterstützung holen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was bedeutet Privatsphäre?",
+        "question": "Was bedeutet: Wer darf etwas sehen?",
         "answers": [
-          "Ich entscheide, wer etwas sehen darf.",
-          "Alle sehen alles.",
-          "Niemand darf Facebook nutzen."
+          "Ich prüfe die Sichtbarkeit.",
+          "Alle sehen immer alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Foto zeigt andere Menschen. Was ist gut?",
+        "question": "Ein Foto zeigt andere Menschen. Was ist besser?",
         "answers": [
-          "Vor dem Posten fragen.",
-          "Einfach posten.",
-          "Alle markieren."
+          "Erst fragen.",
+          "Einfach posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind alte Beiträge wichtig?",
         "answers": [
           "Sie können später noch gesehen werden.",
-          "Sie verschwinden immer sofort.",
-          "Sie sind immer privat."
+          "Sie verschwinden immer."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist sicher bei Profilangaben?",
+        "question": "Was ist gut im Profil?",
         "answers": [
-          "Nur nötige Angaben zeigen.",
-          "Alles öffentlich machen.",
-          "Passwort ins Profil schreiben."
+          "Nur nötige Informationen.",
+          "Passwort öffentlich schreiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Erst prüfen. Dann posten.",
-          "Immer alles teilen.",
-          "Jede Anfrage annehmen."
+          "Immer alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -1155,20 +1079,20 @@ const topics = [
     ],
     "helpQuestions": [
       "Wer kann das sehen?",
-      "Kenne ich diese Person wirklich?",
-      "Soll ich den Beitrag vorher zeigen?"
+      "Kenne ich diese Person?",
+      "Ist der Beitrag privat?"
     ],
     "memoryRules": [
       "Ich poste nicht alles öffentlich.",
-      "Ich nehme nicht jede Anfrage an.",
+      "Ich prüfe Freundschafts-Anfragen.",
       "Ich schreibe respektvoll.",
-      "Ich hole Hilfe bei Beleidigungen."
+      "Ich hole Unterstützung bei Beleidigungen."
     ],
     "shortLessonIndexes": [
       0,
       1,
       3,
-      5,
+      4,
       7
     ],
     "qrLink": "index.html#facebook",
@@ -1190,233 +1114,223 @@ const topics = [
     "id": "instagram",
     "title": "Instagram",
     "icon": "photo",
-    "desc": "Fotos, Stories, Reels und Nachrichten",
+    "desc": "Fotos und Nachrichten prüfen",
     "quiz": [
       {
         "question": "Was prüfst du vor dem Posten eines Fotos?",
         "answers": [
-          "Was auf dem Foto zu sehen ist.",
-          "Nur die Farbe.",
-          "Gar nichts."
+          "Was zu sehen ist.",
+          "Nur die Farbe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist der Standort wichtig?",
         "answers": [
           "Er zeigt, wo ich bin.",
-          "Er ist immer egal.",
-          "Er schützt mein Passwort."
+          "Er ist immer egal."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine fremde Person fragt nach privaten Fotos. Was machst du?",
+        "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
         "answers": [
-          "Nicht schicken.",
-          "Sofort schicken.",
-          "Noch mehr Fotos schicken."
+          "Fotos schicken.",
+          "Keine Fotos schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was können Menschen mit Stories machen?",
+        "question": "Was können Menschen bei kurzen Videos machen?",
         "answers": [
-          "Screenshot machen.",
-          "Nie speichern.",
-          "Nur du siehst es immer."
+          "Ein Bild vom Bildschirm machen.",
+          "Nichts speichern."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Kommentar verletzt dich. Was hilft?",
+        "question": "Ein Kommentar verletzt dich. Was ist besser?",
         "answers": [
-          "Hilfe holen.",
-          "Zurück beleidigen.",
-          "Allein bleiben."
+          "Unterstützung holen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind bearbeitete Bilder wichtig?",
         "answers": [
           "Nicht alles ist echt.",
-          "Alles ist immer echt.",
-          "Bilder dürfen nie schön sein."
+          "Alles ist immer echt."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein sicherer Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Erst prüfen. Dann teilen.",
-          "Immer sofort posten.",
-          "Standort immer zeigen."
+          "Immer sofort posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Wer darf deine privaten Fotos bekommen?",
+        "question": "Wer darf private Fotos bekommen?",
         "answers": [
-          "Nur wenn du es wirklich willst und es sicher ist.",
-          "Jede fremde Person.",
-          "Alle Gruppen."
+          "Nicht fremde Personen.",
+          "Alle fremden Personen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du bist unsicher bei einem Profil. Was machst du?",
+        "question": "Du bist unsicher bei einem Profil. Was hilft?",
         "answers": [
-          "Eine Person fragen.",
-          "Private Daten schicken.",
-          "Alles glauben."
+          "Hilfe-Button nutzen.",
+          "Private Daten schicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Instagram wichtig?",
         "answers": [
-          "Privatsphäre beachten.",
-          "Immer mehr Likes sammeln.",
-          "Nie nachdenken."
+          "Private Dinge schützen.",
+          "Alles öffentlich machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
+        "module": "Start",
         "icon": "photo",
         "text": [
-          "Instagram ist eine App für Fotos, Videos und Nachrichten.",
-          "Viele Inhalte sind sichtbar für andere.",
-          "Du lernst, worauf du achten kannst."
+          "Hier lernst du: Wie teile ich Fotos sicher?",
+          "Du lernst etwas über Nachrichten.",
+          "Du lernst etwas über deinen Standort."
         ]
       },
       {
-        "title": "Fotos posten",
-        "module": "Modul Instagram",
+        "title": "Foto posten",
+        "module": "Instagram",
         "icon": "photo",
         "text": [
-          "Stell dir vor: Du willst ein Foto auf Instagram posten.",
+          "Du willst ein Foto posten.",
           "Andere Menschen können das Foto sehen.",
-          "Manchmal sieht man auf Fotos mehr, als man denkt.",
-          "Darum prüfst du das Foto vorher."
+          "Manchmal sieht man mehr, als man denkt."
         ],
-        "remember": "Ich prüfe ein Foto, bevor ich es poste.",
-        "examples": [
-          "Man sieht deinen Wohnort.",
-          "Man sieht eine andere Person.",
-          "Man sieht private Dinge im Hintergrund."
-        ],
+        "remember": "Ich prüfe Fotos vor dem Posten.",
         "practice": {
-          "question": "Du willst ein Foto posten. Im Hintergrund sieht man eine andere Person. Was ist sicher?",
+          "question": "Im Hintergrund sieht man eine andere Person. Was ist besser?",
           "answers": [
-            "Erst fragen oder anderes Foto nehmen.",
-            "Einfach posten.",
-            "Die Person markieren."
+            "Ich poste das Foto einfach.",
+            "Ich frage erst oder nehme ein anderes Foto."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Stories und Reels",
-        "module": "Modul Instagram",
-        "icon": "youtube",
+        "title": "Kurze Videos",
+        "module": "Instagram",
+        "icon": "help",
         "text": [
-          "Stories und Reels sind kurze Inhalte.",
-          "Sie können schnell weitergesehen werden.",
-          "Trotzdem können Menschen Screenshots machen."
+          "Kurze Videos können viele Menschen sehen.",
+          "Andere können ein Bild vom Bildschirm machen.",
+          "Darum prüfst du auch kurze Videos."
         ],
-        "remember": "Auch kurze Inhalte können privat sein."
+        "remember": "Auch kurze Videos können privat sein."
       },
       {
         "title": "Standort",
-        "module": "Modul Instagram",
+        "module": "Instagram",
         "icon": "data",
         "text": [
           "Der Standort zeigt, wo du bist.",
-          "Nicht jeder muss wissen, wo du bist."
+          "Nicht jeder muss wissen, wo du bist.",
+          "Du teilst deinen Standort nicht einfach."
         ],
-        "remember": "Ich teile meinen Standort nicht einfach."
+        "remember": "Ich schütze meinen Standort.",
+        "practice": {
+          "question": "Eine App will deinen Standort zeigen. Was ist besser?",
+          "answers": [
+            "Ich teile den Standort immer.",
+            "Ich teile den Standort nicht einfach."
+          ],
+          "correctIndex": 1
+        }
       },
       {
         "title": "Private Nachrichten",
-        "module": "Modul Instagram",
+        "module": "Instagram",
         "icon": "message",
         "text": [
-          "Stell dir vor: Eine fremde Person schreibt dir privat.",
-          "Die Person macht Komplimente.",
-          "Dann fragt sie nach privaten Fotos.",
+          "Eine fremde Person schreibt dir privat.",
+          "Die Person fragt vielleicht nach privaten Fotos.",
           "Das ist ein Warnzeichen."
         ],
         "remember": "Ich schicke fremden Personen keine privaten Fotos.",
         "practice": {
-          "question": "Eine fremde Person fragt nach privaten Fotos. Was ist sicher?",
+          "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
           "answers": [
-            "Nicht schicken.",
-            "Foto schicken.",
-            "Adresse mitschicken."
+            "Ich schicke private Fotos.",
+            "Ich schicke keine privaten Fotos."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "Kommentare",
-        "module": "Modul Instagram",
+        "module": "Instagram",
         "icon": "message",
         "text": [
-          "Kommentare können nett oder verletzend sein.",
+          "Kommentare können nett sein.",
+          "Kommentare können auch verletzen.",
           "Du musst nicht auf alles antworten."
         ],
-        "remember": "Ich hole Hilfe bei verletzenden Kommentaren."
+        "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
       },
       {
         "title": "Vergleichen",
-        "module": "Modul Instagram",
+        "module": "Instagram",
         "icon": "help",
         "text": [
           "Auf Instagram sieht vieles perfekt aus.",
           "Bilder können bearbeitet sein.",
-          "Du musst dich nicht vergleichen."
+          "Nicht alles ist echt."
         ],
-        "remember": "Ich bin mehr als ein Bild."
+        "remember": "Ich muss mich nicht mit Bildern vergleichen."
       },
       {
-        "title": "Merken",
-        "module": "Modul Instagram",
+        "title": "Das merke ich mir",
+        "module": "Instagram",
         "icon": "remember",
         "text": [
           "Diese Regeln helfen bei Instagram."
         ],
         "bullets": [
-          "Foto prüfen.",
-          "Standort nicht einfach teilen.",
+          "Fotos prüfen.",
+          "Standort schützen.",
           "Fremden nicht sofort antworten.",
-          "Hilfe holen bei Druck."
-        ],
-        "remember": "Ich teile nur, was sich für mich sicher anfühlt."
+          "Keine privaten Fotos an Fremde schicken."
+        ]
       }
     ],
     "illustration": "assets/illustrations/instagram.svg",
@@ -1424,112 +1338,102 @@ const topics = [
       {
         "question": "Was prüfst du vor dem Posten eines Fotos?",
         "answers": [
-          "Was auf dem Foto zu sehen ist.",
-          "Nur die Farbe.",
-          "Gar nichts."
+          "Was zu sehen ist.",
+          "Nur die Farbe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist der Standort wichtig?",
         "answers": [
           "Er zeigt, wo ich bin.",
-          "Er ist immer egal.",
-          "Er schützt mein Passwort."
+          "Er ist immer egal."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine fremde Person fragt nach privaten Fotos. Was machst du?",
+        "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
         "answers": [
-          "Nicht schicken.",
-          "Sofort schicken.",
-          "Noch mehr Fotos schicken."
+          "Fotos schicken.",
+          "Keine Fotos schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was können Menschen mit Stories machen?",
+        "question": "Was können Menschen bei kurzen Videos machen?",
         "answers": [
-          "Screenshot machen.",
-          "Nie speichern.",
-          "Nur du siehst es immer."
+          "Ein Bild vom Bildschirm machen.",
+          "Nichts speichern."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Kommentar verletzt dich. Was hilft?",
+        "question": "Ein Kommentar verletzt dich. Was ist besser?",
         "answers": [
-          "Hilfe holen.",
-          "Zurück beleidigen.",
-          "Allein bleiben."
+          "Unterstützung holen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind bearbeitete Bilder wichtig?",
         "answers": [
           "Nicht alles ist echt.",
-          "Alles ist immer echt.",
-          "Bilder dürfen nie schön sein."
+          "Alles ist immer echt."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein sicherer Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Erst prüfen. Dann teilen.",
-          "Immer sofort posten.",
-          "Standort immer zeigen."
+          "Immer sofort posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Wer darf deine privaten Fotos bekommen?",
+        "question": "Wer darf private Fotos bekommen?",
         "answers": [
-          "Nur wenn du es wirklich willst und es sicher ist.",
-          "Jede fremde Person.",
-          "Alle Gruppen."
+          "Nicht fremde Personen.",
+          "Alle fremden Personen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du bist unsicher bei einem Profil. Was machst du?",
+        "question": "Du bist unsicher bei einem Profil. Was hilft?",
         "answers": [
-          "Eine Person fragen.",
-          "Private Daten schicken.",
-          "Alles glauben."
+          "Hilfe-Button nutzen.",
+          "Private Daten schicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Instagram wichtig?",
         "answers": [
-          "Privatsphäre beachten.",
-          "Immer mehr Likes sammeln.",
-          "Nie nachdenken."
+          "Private Dinge schützen.",
+          "Alles öffentlich machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -1544,15 +1448,15 @@ const topics = [
     ],
     "memoryRules": [
       "Ich prüfe Fotos vor dem Posten.",
-      "Ich teile meinen Standort nicht einfach.",
-      "Ich antworte fremden Personen nicht sofort.",
-      "Ich hole Hilfe bei Druck oder verletzenden Kommentaren."
+      "Ich schütze meinen Standort.",
+      "Ich schicke fremden Personen keine privaten Fotos.",
+      "Ich hole Unterstützung bei verletzenden Kommentaren."
     ],
     "shortLessonIndexes": [
       0,
       1,
       3,
-      5,
+      4,
       7
     ],
     "qrLink": "index.html#instagram",
@@ -1574,232 +1478,215 @@ const topics = [
     "id": "youtube",
     "title": "YouTube",
     "icon": "understand",
-    "desc": "Videos ansehen, Kommentare und Werbung prüfen",
+    "desc": "Videos und Werbung prüfen",
     "quiz": [
       {
         "question": "Was ist bei Videos wichtig?",
         "answers": [
           "Nicht alles sofort glauben.",
-          "Alles glauben.",
-          "Immer nachmachen."
+          "Alles glauben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was will Werbung oft?",
         "answers": [
-          "Dass ich etwas kaufe oder anklicke.",
-          "Dass ich Pause mache.",
-          "Dass ich mein Konto schütze."
+          "Dass ich etwas kaufe.",
+          "Dass ich Pause mache."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Autoplay startet immer weiter. Was hilft?",
+        "question": "YouTube startet immer weiter. Was ist besser?",
         "answers": [
-          "Pause machen oder stoppen.",
-          "Immer weiter schauen.",
-          "Nie schlafen."
+          "Pause machen.",
+          "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Challenge ist gefährlich. Was machst du?",
+        "question": "Eine Mutprobe ist gefährlich. Was ist besser?",
         "answers": [
           "Nicht nachmachen.",
-          "Sofort nachmachen.",
-          "Andere dazu drängen."
+          "Nachmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Kommentare verletzen dich. Was ist gut?",
+        "question": "Kommentare verletzen dich. Was ist besser?",
         "answers": [
-          "Nicht allein bleiben und Hilfe holen.",
-          "Zurück beleidigen.",
-          "Alles glauben."
+          "Unterstützung holen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was kann YouTube gut leisten?",
+        "question": "Wofür kann YouTube gut sein?",
         "answers": [
-          "Lernen, Musik, Hobbys.",
-          "Immer Wahrheit zeigen.",
-          "Passwörter schützen."
+          "Lernen und Hobbys.",
+          "Passwort teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Video macht Angst. Was kannst du tun?",
+        "question": "Ein Video macht Angst. Was ist besser?",
         "answers": [
-          "Stoppen und Hilfe holen.",
-          "Immer weiter schauen.",
-          "Allen schicken."
+          "Stoppen.",
+          "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein sicherer Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
-          "Prüfen, Pause machen, Hilfe holen.",
-          "Alles anklicken.",
-          "Nie fragen."
+          "Prüfen und Pause machen.",
+          "Alles anklicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was machst du bei Kauf-Versprechen?",
+        "question": "Ein Video will, dass du sofort kaufst. Was ist besser?",
         "answers": [
           "Erst prüfen.",
-          "Sofort kaufen.",
-          "Kontodaten schicken."
+          "Sofort kaufen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind Pausen wichtig?",
         "answers": [
           "Damit es mir gut geht.",
-          "Damit Videos schneller werden.",
-          "Damit Werbung gewinnt."
+          "Damit Videos schneller werden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
-        "icon": "youtube",
+        "module": "Start",
+        "icon": "help",
         "text": [
-          "YouTube ist eine Plattform für Videos.",
-          "Du kannst dort viel lernen und anschauen.",
-          "Manche Inhalte sind Werbung oder falsch."
+          "Hier lernst du: Wie prüfe ich Videos?",
+          "Du lernst etwas über Werbung.",
+          "Du lernst etwas über Pausen."
         ]
       },
       {
         "title": "Videos prüfen",
-        "module": "Modul YouTube",
-        "icon": "youtube",
+        "module": "YouTube",
+        "icon": "help",
         "text": [
           "Nicht jedes Video ist wahr.",
           "Manche Videos übertreiben.",
-          "Manche Videos wollen nur Klicks."
+          "Du glaubst nicht alles sofort."
         ],
         "remember": "Ich glaube nicht alles sofort."
       },
       {
-        "title": "Werbung erkennen",
-        "module": "Modul YouTube",
+        "title": "Werbung",
+        "module": "YouTube",
         "icon": "warning",
         "text": [
-          "Stell dir vor: In einem Video wird ein Produkt gezeigt.",
-          "Die Person sagt: Das musst du kaufen.",
-          "Vielleicht ist das Werbung.",
-          "Dann machst du langsam und kaufst nicht sofort."
+          "Werbung will, dass du etwas kaufst.",
+          "Manchmal sieht Werbung wie ein normales Video aus.",
+          "Du kaufst nicht sofort."
         ],
         "remember": "Ich kaufe nichts sofort aus einem Video.",
-        "examples": [
-          "Ein Video verspricht ein tolles Ergebnis.",
-          "Ein Link führt zu einem Kauf.",
-          "Jemand sagt: Nur heute billig."
-        ],
         "practice": {
-          "question": "Ein Video sagt: Kauf das sofort. Was ist sicher?",
+          "question": "Ein Video sagt: Kauf das sofort. Was ist besser?",
           "answers": [
-            "Nicht sofort kaufen.",
-            "Sofort kaufen.",
-            "Kontodaten eingeben."
+            "Ich kaufe sofort.",
+            "Ich kaufe nicht sofort."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "Kommentare",
-        "module": "Modul YouTube",
+        "module": "YouTube",
         "icon": "message",
         "text": [
-          "Kommentare können nett oder verletzend sein.",
-          "Du musst keine Kommentare lesen oder schreiben."
+          "Kommentare können nett sein.",
+          "Kommentare können auch verletzen.",
+          "Du musst Kommentare nicht lesen."
         ],
         "remember": "Ich muss nicht auf Kommentare antworten."
       },
       {
-        "title": "Autoplay",
-        "module": "Modul YouTube",
+        "title": "Automatisch weiter",
+        "module": "YouTube",
         "icon": "stop",
         "text": [
-          "Stell dir vor: Du willst nur ein Video schauen.",
-          "Dann startet automatisch das nächste Video.",
-          "Plötzlich schaust du viel länger als geplant.",
-          "Dann darfst du stoppen oder eine Pause machen."
+          "YouTube startet manchmal automatisch das nächste Video.",
+          "Dann schaut man oft länger.",
+          "Du darfst stoppen und Pause machen."
         ],
-        "remember": "Ich darf ein Video stoppen und Pause machen.",
+        "remember": "Ich darf Pause machen.",
         "practice": {
-          "question": "YouTube startet immer neue Videos. Du bist müde. Was ist sicher?",
+          "question": "YouTube startet immer weiter. Du bist müde. Was ist besser?",
           "answers": [
-            "Stoppen und Pause machen.",
-            "Immer weiter schauen.",
-            "Alle Videos teilen."
+            "Ich schaue immer weiter.",
+            "Ich stoppe und mache Pause."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Gefährliche Challenges",
-        "module": "Modul YouTube",
+        "title": "Gefährliche Mutproben",
+        "module": "YouTube",
         "icon": "warning",
         "text": [
           "Manche Videos zeigen gefährliche Mutproben.",
-          "Nicht alles soll nachgemacht werden."
+          "Du musst das nicht nachmachen.",
+          "Deine Sicherheit ist wichtiger."
         ],
         "remember": "Ich mache gefährliche Dinge nicht nach."
       },
       {
-        "title": "Gute Nutzung",
-        "module": "Modul YouTube",
+        "title": "Gute Videos",
+        "module": "YouTube",
         "icon": "check",
         "text": [
           "YouTube kann auch hilfreich sein.",
-          "Zum Beispiel für Musik, Rezepte, Lernen oder Hobbys."
+          "Zum Beispiel für Musik, Rezepte oder Hobbys.",
+          "Du entscheidest, was dir gut tut."
         ],
         "remember": "Ich nutze YouTube so, dass es mir gut tut."
       },
       {
-        "title": "Merken",
-        "module": "Modul YouTube",
+        "title": "Das merke ich mir",
+        "module": "YouTube",
         "icon": "remember",
         "text": [
           "Diese Regeln helfen bei YouTube."
         ],
         "bullets": [
-          "Nicht alles glauben.",
+          "Videos prüfen.",
           "Werbung erkennen.",
           "Pausen machen.",
           "Gefährliche Dinge nicht nachmachen."
-        ],
-        "remember": "Ich prüfe Videos, Werbung und Kommentare."
+        ]
       }
     ],
     "illustration": "assets/illustrations/youtube.svg",
@@ -1808,111 +1695,101 @@ const topics = [
         "question": "Was ist bei Videos wichtig?",
         "answers": [
           "Nicht alles sofort glauben.",
-          "Alles glauben.",
-          "Immer nachmachen."
+          "Alles glauben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was will Werbung oft?",
         "answers": [
-          "Dass ich etwas kaufe oder anklicke.",
-          "Dass ich Pause mache.",
-          "Dass ich mein Konto schütze."
+          "Dass ich etwas kaufe.",
+          "Dass ich Pause mache."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Autoplay startet immer weiter. Was hilft?",
+        "question": "YouTube startet immer weiter. Was ist besser?",
         "answers": [
-          "Pause machen oder stoppen.",
-          "Immer weiter schauen.",
-          "Nie schlafen."
+          "Pause machen.",
+          "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine Challenge ist gefährlich. Was machst du?",
+        "question": "Eine Mutprobe ist gefährlich. Was ist besser?",
         "answers": [
           "Nicht nachmachen.",
-          "Sofort nachmachen.",
-          "Andere dazu drängen."
+          "Nachmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Kommentare verletzen dich. Was ist gut?",
+        "question": "Kommentare verletzen dich. Was ist besser?",
         "answers": [
-          "Nicht allein bleiben und Hilfe holen.",
-          "Zurück beleidigen.",
-          "Alles glauben."
+          "Unterstützung holen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was kann YouTube gut leisten?",
+        "question": "Wofür kann YouTube gut sein?",
         "answers": [
-          "Lernen, Musik, Hobbys.",
-          "Immer Wahrheit zeigen.",
-          "Passwörter schützen."
+          "Lernen und Hobbys.",
+          "Passwort teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Video macht Angst. Was kannst du tun?",
+        "question": "Ein Video macht Angst. Was ist besser?",
         "answers": [
-          "Stoppen und Hilfe holen.",
-          "Immer weiter schauen.",
-          "Allen schicken."
+          "Stoppen.",
+          "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein sicherer Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
-          "Prüfen, Pause machen, Hilfe holen.",
-          "Alles anklicken.",
-          "Nie fragen."
+          "Prüfen und Pause machen.",
+          "Alles anklicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was machst du bei Kauf-Versprechen?",
+        "question": "Ein Video will, dass du sofort kaufst. Was ist besser?",
         "answers": [
           "Erst prüfen.",
-          "Sofort kaufen.",
-          "Kontodaten schicken."
+          "Sofort kaufen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind Pausen wichtig?",
         "answers": [
           "Damit es mir gut geht.",
-          "Damit Videos schneller werden.",
-          "Damit Werbung gewinnt."
+          "Damit Videos schneller werden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -1927,15 +1804,15 @@ const topics = [
     ],
     "memoryRules": [
       "Ich glaube nicht alles sofort.",
-      "Ich erkenne Werbung.",
+      "Ich kaufe nichts sofort aus Videos.",
       "Ich mache Pausen.",
       "Ich mache gefährliche Dinge nicht nach."
     ],
     "shortLessonIndexes": [
       0,
       1,
-      3,
-      5,
+      2,
+      4,
       7
     ],
     "qrLink": "index.html#youtube",
@@ -1957,350 +1834,318 @@ const topics = [
     "id": "snapchat",
     "title": "Snapchat",
     "icon": "photo",
-    "desc": "Snaps, Screenshots, Standort und Kontakte",
+    "desc": "Bilder und Standort schützen",
     "quiz": [
       {
-        "question": "Warum können Snaps trotzdem riskant sein?",
+        "question": "Warum können Bilder riskant sein?",
         "answers": [
           "Jemand kann sie speichern.",
-          "Sie sind immer sicher.",
-          "Niemand sieht sie."
+          "Sie sind immer sicher."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine fremde Person fragt nach deinem Standort. Was machst du?",
+        "question": "Eine fremde Person fragt nach deinem Standort. Was ist besser?",
         "answers": [
-          "Nicht schicken.",
-          "Sofort schicken.",
-          "Adresse senden."
+          "Standort schicken.",
+          "Standort nicht schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Jemand macht Druck wegen einem Bild. Was ist sicher?",
+        "question": "Jemand macht Druck wegen einem Bild. Was ist besser?",
         "answers": [
-          "Nein sagen.",
           "Bild schicken.",
-          "Noch mehr schicken."
+          "Nein sagen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist bei Screenshots wichtig?",
+        "question": "Was ist ein Bild vom Bildschirm?",
         "answers": [
-          "Sie können Inhalte speichern.",
-          "Sie löschen alles.",
-          "Sie schützen mein Konto."
+          "Ein gespeichertes Bild vom Handy.",
+          "Ein Passwort."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Wer sollte deinen Standort sehen?",
+        "question": "Wer soll deinen Standort sehen?",
         "answers": [
-          "Nur wenn du es wirklich willst und es sicher ist.",
-          "Alle Kontakte.",
-          "Fremde Personen."
+          "Nicht fremde Personen.",
+          "Alle fremden Personen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein Warnzeichen?",
         "answers": [
           "Druck.",
-          "Eine normale Frage.",
           "Ein freundlicher Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher bei einem Kontakt. Was hilft?",
         "answers": [
-          "Eine vertraute Person fragen.",
-          "Private Daten senden.",
-          "Alles glauben."
+          "Hilfe-Button nutzen.",
+          "Private Daten senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du sagen?",
         "answers": [
           "Nein.",
-          "Immer Ja.",
-          "Nie Hilfe."
+          "Immer Ja."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Erst denken. Dann senden.",
-          "Schnell schicken.",
-          "Standort immer zeigen."
+          "Schnell schicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du bei komischen Nachrichten?",
         "answers": [
-          "Nicht allein bleiben.",
-          "Sofort antworten.",
-          "Passwort schicken."
+          "Langsam machen.",
+          "Sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
+        "module": "Start",
         "icon": "photo",
         "text": [
-          "Snapchat ist eine App für Fotos, Videos und Nachrichten.",
-          "Viele denken: Das verschwindet sofort.",
-          "Aber andere können Inhalte trotzdem sichern."
+          "Hier lernst du: Was ist bei Snapchat wichtig?",
+          "Du lernst etwas über Bilder.",
+          "Du lernst etwas über deinen Standort."
         ]
       },
       {
-        "title": "Snaps verschwinden nicht immer",
-        "module": "Modul Snapchat",
+        "title": "Bilder verschwinden nicht immer",
+        "module": "Snapchat",
         "icon": "photo",
         "text": [
-          "Stell dir vor: Du sendest ein Bild über Snapchat.",
-          "Du denkst: Das Bild verschwindet gleich.",
-          "Aber jemand kann einen Screenshot machen.",
-          "Darum sendest du nur Bilder, die sicher sind."
+          "Du sendest ein Bild.",
+          "Du denkst vielleicht: Das verschwindet gleich.",
+          "Aber jemand kann das Bild speichern."
         ],
-        "remember": "Ich sende nur Bilder, die wirklich sicher sind.",
+        "remember": "Ich sende nur Bilder, die sicher sind.",
         "practice": {
-          "question": "Du willst ein sehr privates Bild senden. Was ist sicher?",
+          "question": "Du willst ein sehr privates Bild senden. Was ist besser?",
           "answers": [
-            "Nicht senden.",
-            "Senden, weil es verschwindet.",
-            "An mehrere Personen senden."
+            "Ich sende das Bild.",
+            "Ich sende das Bild nicht."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Screenshots",
-        "module": "Modul Snapchat",
+        "title": "Bild vom Bildschirm",
+        "module": "Snapchat",
         "icon": "warning",
         "text": [
-          "Screenshots können Inhalte speichern.",
-          "Danach kann ein Bild weitergeschickt werden."
+          "Jemand kann ein Bild vom Bildschirm machen.",
+          "Dann kann dein Bild gespeichert werden.",
+          "Dann kann es weitergeschickt werden."
         ],
         "remember": "Ich denke vor dem Senden nach."
       },
       {
         "title": "Standort",
-        "module": "Modul Snapchat",
+        "module": "Snapchat",
         "icon": "data",
         "text": [
-          "Stell dir vor: Eine App zeigt, wo du gerade bist.",
+          "Snapchat kann zeigen, wo du bist.",
           "Andere können dann deinen Ort sehen.",
-          "Das kann unsicher sein.",
-          "Darum teilst du deinen Standort nicht einfach."
+          "Das kann unsicher sein."
         ],
         "remember": "Ich teile meinen Standort nicht einfach.",
         "practice": {
-          "question": "Eine fremde Person fragt: Wo bist du gerade? Was ist sicher?",
+          "question": "Eine fremde Person fragt: Wo bist du? Was ist besser?",
           "answers": [
-            "Standort nicht schicken.",
-            "Standort schicken.",
-            "Adresse schicken."
+            "Ich schicke meinen Standort.",
+            "Ich schicke meinen Standort nicht."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "Kontakte",
-        "module": "Modul Snapchat",
+        "module": "Snapchat",
         "icon": "help",
         "text": [
-          "Nicht jeder Kontakt ist eine vertraute Person.",
-          "Fremde Personen können schreiben."
+          "Nicht jeder Kontakt ist vertraut.",
+          "Fremde Personen können schreiben.",
+          "Du prüfst Kontakte."
         ],
-        "remember": "Ich prüfe Kontakte.",
-        "practice": {
-          "question": "Eine fremde Person fragt, wo du bist. Was ist sicher?",
-          "answers": [
-            "Nicht sagen und Hilfe holen.",
-            "Standort schicken.",
-            "Adresse schicken."
-          ],
-          "correctIndex": 0
-        }
+        "remember": "Ich prüfe, wer mir schreibt."
       },
       {
         "title": "Private Bilder",
-        "module": "Modul Snapchat",
+        "module": "Snapchat",
         "icon": "lock",
         "text": [
-          "Private Bilder können weitergeleitet werden.",
-          "Du darfst Nein sagen.",
-          "Niemand darf dich unter Druck setzen."
+          "Private Bilder sind sehr persönlich.",
+          "Niemand darf dich unter Druck setzen.",
+          "Du darfst Nein sagen."
         ],
         "remember": "Ich schicke keine privaten Bilder unter Druck."
       },
       {
-        "title": "Druck und Mutproben",
-        "module": "Modul Snapchat",
+        "title": "Druck",
+        "module": "Snapchat",
         "icon": "warning",
         "text": [
-          "Manche Menschen machen Druck.",
-          "Zum Beispiel: Schick das, sonst bin ich sauer.",
-          "Das ist nicht in Ordnung."
+          "Jemand sagt: Schick das.",
+          "Jemand sagt: Sag es niemandem.",
+          "Das ist ein Warnzeichen."
         ],
         "remember": "Druck ist ein Warnzeichen."
       },
       {
-        "title": "Merken",
-        "module": "Modul Snapchat",
+        "title": "Das merke ich mir",
+        "module": "Snapchat",
         "icon": "remember",
         "text": [
           "Diese Regeln helfen bei Snapchat."
         ],
         "bullets": [
-          "Screenshots sind möglich.",
+          "Bilder können gespeichert werden.",
           "Standort schützen.",
-          "Fremde Kontakte prüfen.",
+          "Kontakte prüfen.",
           "Bei Druck Hilfe holen."
-        ],
-        "remember": "Ich sende nur, was wirklich sicher ist."
+        ]
       }
     ],
     "illustration": "assets/illustrations/snapchat.svg",
     "quizQuestions": [
       {
-        "question": "Warum können Snaps trotzdem riskant sein?",
+        "question": "Warum können Bilder riskant sein?",
         "answers": [
           "Jemand kann sie speichern.",
-          "Sie sind immer sicher.",
-          "Niemand sieht sie."
+          "Sie sind immer sicher."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine fremde Person fragt nach deinem Standort. Was machst du?",
+        "question": "Eine fremde Person fragt nach deinem Standort. Was ist besser?",
         "answers": [
-          "Nicht schicken.",
-          "Sofort schicken.",
-          "Adresse senden."
+          "Standort schicken.",
+          "Standort nicht schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Jemand macht Druck wegen einem Bild. Was ist sicher?",
+        "question": "Jemand macht Druck wegen einem Bild. Was ist besser?",
         "answers": [
-          "Nein sagen.",
           "Bild schicken.",
-          "Noch mehr schicken."
+          "Nein sagen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist bei Screenshots wichtig?",
+        "question": "Was ist ein Bild vom Bildschirm?",
         "answers": [
-          "Sie können Inhalte speichern.",
-          "Sie löschen alles.",
-          "Sie schützen mein Konto."
+          "Ein gespeichertes Bild vom Handy.",
+          "Ein Passwort."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Wer sollte deinen Standort sehen?",
+        "question": "Wer soll deinen Standort sehen?",
         "answers": [
-          "Nur wenn du es wirklich willst und es sicher ist.",
-          "Alle Kontakte.",
-          "Fremde Personen."
+          "Nicht fremde Personen.",
+          "Alle fremden Personen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein Warnzeichen?",
         "answers": [
           "Druck.",
-          "Eine normale Frage.",
           "Ein freundlicher Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher bei einem Kontakt. Was hilft?",
         "answers": [
-          "Eine vertraute Person fragen.",
-          "Private Daten senden.",
-          "Alles glauben."
+          "Hilfe-Button nutzen.",
+          "Private Daten senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du sagen?",
         "answers": [
           "Nein.",
-          "Immer Ja.",
-          "Nie Hilfe."
+          "Immer Ja."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Erst denken. Dann senden.",
-          "Schnell schicken.",
-          "Standort immer zeigen."
+          "Schnell schicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du bei komischen Nachrichten?",
         "answers": [
-          "Nicht allein bleiben.",
-          "Sofort antworten.",
-          "Passwort schicken."
+          "Langsam machen.",
+          "Sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -2314,10 +2159,10 @@ const topics = [
       "Macht jemand Druck?"
     ],
     "memoryRules": [
-      "Screenshots sind möglich.",
+      "Bilder können gespeichert werden.",
       "Ich schütze meinen Standort.",
       "Ich prüfe Kontakte.",
-      "Ich hole Hilfe bei Druck."
+      "Ich sage Nein bei Druck."
     ],
     "shortLessonIndexes": [
       0,
@@ -2345,230 +2190,213 @@ const topics = [
     "id": "tiktok",
     "title": "TikTok",
     "icon": "understand",
-    "desc": "Videos, Trends, Kommentare und Algorithmus",
+    "desc": "Videos, Trends und Pausen",
     "quiz": [
       {
         "question": "Was ist bei Trends wichtig?",
         "answers": [
           "Nicht alles nachmachen.",
-          "Alles sofort machen.",
-          "Nie überlegen."
+          "Alles sofort machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Warum zeigt TikTok ähnliche Videos?",
+        "question": "Warum kommen ähnliche Videos?",
         "answers": [
           "TikTok merkt, was ich anschaue.",
-          "TikTok kennt meine Gedanken.",
-          "Videos kommen zufällig immer richtig."
+          "TikTok liest meine Gedanken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Trend ist gefährlich. Was machst du?",
+        "question": "Ein Trend ist gefährlich. Was ist besser?",
         "answers": [
-          "Nicht nachmachen.",
-          "Sofort nachmachen.",
-          "Andere überreden."
+          "Nicht mitmachen.",
+          "Mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine fremde Person fragt nach deiner Adresse. Was ist sicher?",
+        "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
         "answers": [
-          "Nicht schicken.",
           "Adresse schicken.",
-          "In Kommentare schreiben."
+          "Adresse nicht schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du schaust länger als geplant. Was hilft?",
         "answers": [
           "Pause machen.",
-          "Immer weiterschauen.",
-          "Nie stoppen."
+          "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Kommentar verletzt dich. Was ist gut?",
+        "question": "Ein Kommentar verletzt dich. Was ist besser?",
         "answers": [
-          "Hilfe holen.",
-          "Zurück beleidigen.",
-          "Alles allein klären."
+          "Unterstützung holen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Vor dem Posten eines Videos prüfst du:",
         "answers": [
           "Was zu sehen ist.",
-          "Nur die Musik.",
           "Nichts."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Ich entscheide, was mir gut tut.",
-          "TikTok bestimmt alles.",
-          "Pausen sind schlecht."
+          "TikTok bestimmt alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du bei Druck machen?",
         "answers": [
           "Nein sagen.",
-          "Immer mitmachen.",
-          "Private Daten geben."
+          "Immer mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was schützt dich?",
         "answers": [
-          "Langsam machen und prüfen.",
-          "Sofort klicken.",
+          "Langsam machen.",
           "Alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
-        "icon": "youtube",
+        "module": "Start",
+        "icon": "help",
         "text": [
-          "TikTok zeigt kurze Videos.",
-          "Viele Videos kommen automatisch nacheinander.",
-          "Du lernst, wie du sicher damit umgehen kannst."
+          "Hier lernst du: Wie nutze ich TikTok sicher?",
+          "Du lernst etwas über Trends.",
+          "Du lernst etwas über Pausen."
         ]
       },
       {
         "title": "Trends",
-        "module": "Modul TikTok",
-        "icon": "youtube",
+        "module": "TikTok",
+        "icon": "help",
         "text": [
-          "Stell dir vor: Viele machen bei einem Trend mit.",
-          "Der Trend sieht lustig aus.",
-          "Aber er kann gefährlich sein.",
-          "Du musst nicht mitmachen."
+          "Viele Menschen machen bei einem Trend mit.",
+          "Manche Trends sind lustig.",
+          "Manche Trends sind gefährlich."
         ],
         "remember": "Ich mache gefährliche Trends nicht nach.",
-        "examples": [
-          "Eine Mutprobe mit Verletzungsgefahr.",
-          "Ein Trend mit gefährlichen Gegenständen.",
-          "Ein Video, das Druck macht: Mach auch mit."
-        ],
         "practice": {
-          "question": "Ein Trend sieht gefährlich aus. Freunde sagen: Mach mit. Was ist sicher?",
+          "question": "Ein Trend sieht gefährlich aus. Was ist besser?",
           "answers": [
-            "Nein sagen.",
-            "Mitmachen.",
-            "Andere überreden."
+            "Ich mache mit.",
+            "Ich mache nicht mit."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Algorithmus",
-        "module": "Modul TikTok",
+        "title": "Warum ähnliche Videos kommen",
+        "module": "TikTok",
         "icon": "data",
         "text": [
-          "Stell dir vor: Du schaust viele traurige Videos.",
-          "TikTok zeigt dir dann noch mehr ähnliche Videos.",
-          "Das kann deine Stimmung verändern.",
-          "Darum ist eine Pause manchmal wichtig."
+          "TikTok merkt, welche Videos du anschaust.",
+          "Dann zeigt TikTok oft ähnliche Videos.",
+          "Darum kann man schnell lange schauen."
         ],
         "remember": "Ich mache Pause, wenn mir Videos nicht gut tun.",
         "practice": {
-          "question": "TikTok zeigt dir viele Videos, die dich traurig machen. Was hilft?",
+          "question": "TikTok zeigt dir viele traurige Videos. Was ist besser?",
           "answers": [
-            "Pause machen.",
-            "Immer weiter schauen.",
-            "Private Daten schicken."
+            "Ich schaue immer weiter.",
+            "Ich mache Pause."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
         "title": "Kommentare",
-        "module": "Modul TikTok",
+        "module": "TikTok",
         "icon": "message",
         "text": [
-          "Kommentare können freundlich oder verletzend sein.",
+          "Kommentare können nett sein.",
+          "Kommentare können verletzen.",
           "Du musst nicht auf alles reagieren."
         ],
-        "remember": "Ich hole Hilfe bei verletzenden Kommentaren."
+        "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
       },
       {
         "title": "Private Nachrichten",
-        "module": "Modul TikTok",
+        "module": "TikTok",
         "icon": "message",
         "text": [
-          "Auch fremde Menschen können schreiben.",
-          "Manche wollen private Daten oder Bilder."
+          "Fremde Personen können schreiben.",
+          "Manche fragen nach privaten Daten.",
+          "Private Daten bleiben geschützt."
         ],
         "remember": "Ich gebe fremden Personen keine privaten Daten.",
         "practice": {
-          "question": "Eine fremde Person fragt nach deiner Adresse. Was ist sicher?",
+          "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
           "answers": [
-            "Nicht schicken.",
-            "Adresse schicken.",
-            "Passwort mitschicken."
+            "Ich schicke die Adresse.",
+            "Ich schicke die Adresse nicht."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Videos posten",
-        "module": "Modul TikTok",
+        "title": "Video posten",
+        "module": "TikTok",
         "icon": "photo",
         "text": [
-          "Wenn du ein Video postest, können es andere sehen.",
-          "Andere können es speichern oder teilen."
+          "Wenn du ein Video postest, können andere es sehen.",
+          "Andere können es speichern.",
+          "Darum prüfst du das Video vorher."
         ],
         "remember": "Ich prüfe Videos vor dem Posten."
       },
       {
         "title": "Gefühle",
-        "module": "Modul TikTok",
+        "module": "TikTok",
         "icon": "help",
         "text": [
-          "Manche Videos machen Druck.",
-          "Manche Videos machen traurig oder wütend.",
+          "Manche Videos machen traurig.",
+          "Manche Videos machen wütend.",
           "Dann ist eine Pause gut."
         ],
         "remember": "Ich darf TikTok weglegen."
       },
       {
-        "title": "Merken",
-        "module": "Modul TikTok",
+        "title": "Das merke ich mir",
+        "module": "TikTok",
         "icon": "remember",
         "text": [
           "Diese Regeln helfen bei TikTok."
@@ -2577,9 +2405,8 @@ const topics = [
           "Gefährliche Trends nicht nachmachen.",
           "Pausen machen.",
           "Private Daten schützen.",
-          "Hilfe holen bei Druck."
-        ],
-        "remember": "Ich nutze TikTok so, dass es mir gut tut."
+          "Videos vor dem Posten prüfen."
+        ]
       }
     ],
     "illustration": "assets/illustrations/tiktok.svg",
@@ -2588,111 +2415,101 @@ const topics = [
         "question": "Was ist bei Trends wichtig?",
         "answers": [
           "Nicht alles nachmachen.",
-          "Alles sofort machen.",
-          "Nie überlegen."
+          "Alles sofort machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Warum zeigt TikTok ähnliche Videos?",
+        "question": "Warum kommen ähnliche Videos?",
         "answers": [
           "TikTok merkt, was ich anschaue.",
-          "TikTok kennt meine Gedanken.",
-          "Videos kommen zufällig immer richtig."
+          "TikTok liest meine Gedanken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Trend ist gefährlich. Was machst du?",
+        "question": "Ein Trend ist gefährlich. Was ist besser?",
         "answers": [
-          "Nicht nachmachen.",
-          "Sofort nachmachen.",
-          "Andere überreden."
+          "Nicht mitmachen.",
+          "Mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Eine fremde Person fragt nach deiner Adresse. Was ist sicher?",
+        "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
         "answers": [
-          "Nicht schicken.",
           "Adresse schicken.",
-          "In Kommentare schreiben."
+          "Adresse nicht schicken."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du schaust länger als geplant. Was hilft?",
         "answers": [
           "Pause machen.",
-          "Immer weiterschauen.",
-          "Nie stoppen."
+          "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Ein Kommentar verletzt dich. Was ist gut?",
+        "question": "Ein Kommentar verletzt dich. Was ist besser?",
         "answers": [
-          "Hilfe holen.",
-          "Zurück beleidigen.",
-          "Alles allein klären."
+          "Unterstützung holen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Vor dem Posten eines Videos prüfst du:",
         "answers": [
           "Was zu sehen ist.",
-          "Nur die Musik.",
           "Nichts."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
           "Ich entscheide, was mir gut tut.",
-          "TikTok bestimmt alles.",
-          "Pausen sind schlecht."
+          "TikTok bestimmt alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du bei Druck machen?",
         "answers": [
           "Nein sagen.",
-          "Immer mitmachen.",
-          "Private Daten geben."
+          "Immer mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was schützt dich?",
         "answers": [
-          "Langsam machen und prüfen.",
-          "Sofort klicken.",
+          "Langsam machen.",
           "Alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -2708,14 +2525,14 @@ const topics = [
     "memoryRules": [
       "Ich mache gefährliche Trends nicht nach.",
       "Ich mache Pausen.",
-      "Ich gebe fremden Personen keine privaten Daten.",
+      "Ich schütze private Daten.",
       "Ich prüfe Videos vor dem Posten."
     ],
     "shortLessonIndexes": [
       0,
       1,
-      3,
-      5,
+      2,
+      4,
       7
     ],
     "qrLink": "index.html#tiktok",
@@ -2737,239 +2554,224 @@ const topics = [
     "id": "hilfe",
     "title": "Hilfe bei Problemen",
     "icon": "help",
-    "desc": "Stopp-Regel, Beweise sichern, Hilfe holen",
+    "desc": "Was tun bei Problemen?",
     "quiz": [
       {
         "question": "Was ist der erste Schritt bei einer komischen Nachricht?",
         "answers": [
-          "Stopp. Nicht sofort reagieren.",
           "Sofort antworten.",
-          "Alles allein klären."
+          "Stopp machen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum nicht sofort löschen?",
         "answers": [
-          "Damit man die Nachricht zeigen kann.",
-          "Weil Löschen verboten ist.",
-          "Weil Nachrichten immer gut sind."
+          "Dann kann man die Nachricht zeigen.",
+          "Löschen ist immer verboten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Jemand macht Druck. Was ist sicher?",
+        "question": "Jemand macht Druck. Was ist besser?",
         "answers": [
-          "Hilfe holen.",
-          "Tun, was die Person sagt.",
-          "Nichts sagen."
+          "Allein bleiben.",
+          "Unterstützung holen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer kann helfen?",
         "answers": [
-          "Eine Person, der ich vertraue.",
-          "Nur eine fremde Person im Internet.",
-          "Niemand."
+          "Eine vertraute Person.",
+          "Eine fremde Person im Internet."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was kann ein Screenshot sein?",
+        "question": "Was ist ein Bild vom Bildschirm?",
         "answers": [
-          "Ein Bild vom Bildschirm.",
-          "Ein Passwort.",
-          "Eine App."
+          "Ein Bild von der Nachricht.",
+          "Ein Passwort."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du hast Angst. Was machst du?",
+        "question": "Du hast Angst. Was ist besser?",
         "answers": [
-          "Sofort Hilfe holen.",
-          "Allein bleiben.",
-          "Weiter schreiben."
+          "Unterstützung holen.",
+          "Allein bleiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was bedeutet Stopp-Regel?",
         "answers": [
-          "Erst anhalten und nicht sofort reagieren.",
-          "Sofort alles senden.",
-          "Immer weitermachen."
+          "Nicht sofort reagieren.",
+          "Sofort alles senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du mit einer beleidigenden Nachricht?",
         "answers": [
-          "Zeigen und Hilfe holen.",
-          "Zurück beleidigen.",
-          "Passwort schicken."
+          "Zeigen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
-          "Stopp. Zeigen. Hilfe holen.",
-          "Allein bleiben.",
-          "Sofort klicken."
+          "Stopp. Zeigen. Unterstützung holen.",
+          "Allein bleiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du verstehst eine Nachricht nicht. Was hilft?",
         "answers": [
-          "Eine vertraute Person fragen.",
-          "Raten und klicken.",
-          "Private Daten schicken."
+          "Hilfe-Button nutzen.",
+          "Raten und klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
       {
         "title": "Start",
-        "module": "Modulstart",
+        "module": "Start",
         "icon": "help",
         "text": [
-          "In diesem Thema geht es um Probleme im Internet.",
-          "Zum Beispiel komische Nachrichten, Druck oder Beleidigungen.",
-          "Du lernst, was du dann tun kannst."
+          "Hier lernst du: Was tue ich bei Problemen im Internet?",
+          "Zum Beispiel bei Druck, Angst oder Beleidigungen.",
+          "Du lernst einfache Schritte."
         ]
       },
       {
         "title": "Stopp-Regel",
-        "module": "Modul Hilfe",
+        "module": "Hilfe",
         "icon": "stop",
         "text": [
-          "Stell dir vor: Eine Nachricht macht dir Stress.",
-          "Du willst sofort antworten.",
-          "Aber genau dann hilft die Stopp-Regel.",
-          "Du hältst kurz an und holst Unterstützung."
+          "Eine Nachricht macht dir Stress.",
+          "Du willst vielleicht sofort antworten.",
+          "Dann hilft die Stopp-Regel."
         ],
         "remember": "Stopp. Nicht sofort reagieren.",
         "practice": {
           "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
           "answers": [
-            "Stopp machen.",
-            "Sofort antworten.",
-            "Alles allein klären."
+            "Ich antworte sofort.",
+            "Ich mache Stopp."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Nicht löschen",
-        "module": "Modul Hilfe",
+        "title": "Nicht sofort löschen",
+        "module": "Hilfe",
         "icon": "check",
         "text": [
-          "Stell dir vor: Jemand beleidigt dich in einer Nachricht.",
-          "Du möchtest die Nachricht sofort löschen.",
-          "Aber die Nachricht kann wichtig sein, wenn du Hilfe holst.",
-          "Darum zeigst du sie erst einer vertrauten Person."
+          "Jemand beleidigt dich in einer Nachricht.",
+          "Du willst die Nachricht vielleicht löschen.",
+          "Aber die Nachricht kann wichtig sein."
         ],
-        "remember": "Ich zeige die Nachricht, bevor ich sie lösche.",
+        "remember": "Ich lösche nicht sofort.",
         "practice": {
-          "question": "Du bekommst eine beleidigende Nachricht. Was ist sicher?",
+          "question": "Du bekommst eine beleidigende Nachricht. Was ist besser?",
           "answers": [
-            "Nicht sofort löschen.",
-            "Sofort löschen und nichts sagen.",
-            "Zurück beleidigen."
+            "Sofort löschen.",
+            "Nicht sofort löschen."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Beweise sichern",
-        "module": "Modul Hilfe",
+        "title": "Bild vom Bildschirm",
+        "module": "Hilfe",
         "icon": "photo",
         "text": [
-          "Ein Screenshot kann helfen.",
-          "Zum Beispiel bei Beleidigungen oder Druck.",
-          "Bitte eine Person um Hilfe beim Screenshot."
+          "Ein Bild vom Bildschirm kann helfen.",
+          "So kann man eine Nachricht zeigen.",
+          "Bitte eine Person um Hilfe, wenn du es nicht allein kannst."
         ],
-        "remember": "Ich sichere Hilfe-Beweise mit Unterstützung."
+        "remember": "Ich kann eine Nachricht zeigen."
       },
       {
         "title": "Wen fragen?",
-        "module": "Modul Hilfe",
+        "module": "Hilfe",
         "icon": "help",
         "text": [
           "Du kannst eine Person fragen, der du vertraust.",
-          "Das kann im Wohnbereich, im Dienst oder in der Familie sein.",
-          "Auch Digital-Begleiterinnen und Digital-Begleiter können helfen."
+          "Zum Beispiel im Wohnbereich, im Dienst oder in der Familie.",
+          "Du musst das nicht allein lösen."
         ],
         "remember": "Ich frage eine vertraute Person."
       },
       {
-        "title": "Wenn jemand Druck macht",
-        "module": "Modul Hilfe",
+        "title": "Druck",
+        "module": "Hilfe",
         "icon": "warning",
         "text": [
-          "Druck ist nicht in Ordnung.",
-          "Zum Beispiel: Schick ein Bild. Sag es niemandem.",
-          "Dann holst du Hilfe."
+          "Jemand sagt: Sag es niemandem.",
+          "Jemand sagt: Mach das sofort.",
+          "Das ist Druck."
         ],
         "remember": "Druck ist ein Warnzeichen.",
         "practice": {
-          "question": "Jemand schreibt: Sag es niemandem. Was ist sicher?",
+          "question": "Jemand schreibt: Sag es niemandem. Was ist besser?",
           "answers": [
-            "Hilfe holen.",
-            "Allein bleiben.",
-            "Sofort tun, was die Person will."
+            "Ich bleibe allein damit.",
+            "Ich hole Unterstützung."
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       },
       {
-        "title": "Wenn du Angst hast",
-        "module": "Modul Hilfe",
+        "title": "Angst",
+        "module": "Hilfe",
         "icon": "help",
         "text": [
           "Angst ist ernst.",
-          "Du darfst sofort Hilfe holen.",
+          "Du darfst sofort Unterstützung holen.",
           "Du musst nichts allein beweisen."
         ],
-        "remember": "Ich hole Hilfe, wenn ich Angst habe."
+        "remember": "Ich hole Unterstützung, wenn ich Angst habe."
       },
       {
-        "title": "Merken",
-        "module": "Modul Hilfe",
+        "title": "Das merke ich mir",
+        "module": "Hilfe",
         "icon": "remember",
         "text": [
           "Diese Regeln helfen bei Problemen im Internet."
         ],
         "bullets": [
+          "Stopp machen.",
           "Nicht sofort antworten.",
           "Nicht sofort löschen.",
           "Nachricht zeigen.",
-          "Eine vertraute Person fragen."
-        ],
-        "remember": "Stopp. Zeigen. Hilfe holen."
+          "Unterstützung holen."
+        ]
       }
     ],
     "illustration": "assets/illustrations/hilfe.svg",
@@ -2977,112 +2779,102 @@ const topics = [
       {
         "question": "Was ist der erste Schritt bei einer komischen Nachricht?",
         "answers": [
-          "Stopp. Nicht sofort reagieren.",
           "Sofort antworten.",
-          "Alles allein klären."
+          "Stopp machen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum nicht sofort löschen?",
         "answers": [
-          "Damit man die Nachricht zeigen kann.",
-          "Weil Löschen verboten ist.",
-          "Weil Nachrichten immer gut sind."
+          "Dann kann man die Nachricht zeigen.",
+          "Löschen ist immer verboten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Jemand macht Druck. Was ist sicher?",
+        "question": "Jemand macht Druck. Was ist besser?",
         "answers": [
-          "Hilfe holen.",
-          "Tun, was die Person sagt.",
-          "Nichts sagen."
+          "Allein bleiben.",
+          "Unterstützung holen."
         ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer kann helfen?",
         "answers": [
-          "Eine Person, der ich vertraue.",
-          "Nur eine fremde Person im Internet.",
-          "Niemand."
+          "Eine vertraute Person.",
+          "Eine fremde Person im Internet."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was kann ein Screenshot sein?",
+        "question": "Was ist ein Bild vom Bildschirm?",
         "answers": [
-          "Ein Bild vom Bildschirm.",
-          "Ein Passwort.",
-          "Eine App."
+          "Ein Bild von der Nachricht.",
+          "Ein Passwort."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Du hast Angst. Was machst du?",
+        "question": "Du hast Angst. Was ist besser?",
         "answers": [
-          "Sofort Hilfe holen.",
-          "Allein bleiben.",
-          "Weiter schreiben."
+          "Unterstützung holen.",
+          "Allein bleiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was bedeutet Stopp-Regel?",
         "answers": [
-          "Erst anhalten und nicht sofort reagieren.",
-          "Sofort alles senden.",
-          "Immer weitermachen."
+          "Nicht sofort reagieren.",
+          "Sofort alles senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du mit einer beleidigenden Nachricht?",
         "answers": [
-          "Zeigen und Hilfe holen.",
-          "Zurück beleidigen.",
-          "Passwort schicken."
+          "Zeigen.",
+          "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
-        "question": "Was ist ein guter Merksatz?",
+        "question": "Was ist eine gute Regel?",
         "answers": [
-          "Stopp. Zeigen. Hilfe holen.",
-          "Allein bleiben.",
-          "Sofort klicken."
+          "Stopp. Zeigen. Unterstützung holen.",
+          "Allein bleiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du verstehst eine Nachricht nicht. Was hilft?",
         "answers": [
-          "Eine vertraute Person fragen.",
-          "Raten und klicken.",
-          "Private Daten schicken."
+          "Hilfe-Button nutzen.",
+          "Raten und klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist richtig. Das ist eine sichere Entscheidung.",
+        "feedbackWrong": "Das ist nicht sicher. Lies die Erklärung. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -3096,10 +2888,11 @@ const topics = [
       "Wem kann ich die Nachricht zeigen?"
     ],
     "memoryRules": [
-      "Stopp. Nicht sofort reagieren.",
+      "Stopp machen.",
+      "Nicht sofort antworten.",
       "Nicht sofort löschen.",
       "Nachricht zeigen.",
-      "Eine vertraute Person fragen."
+      "Unterstützung holen."
     ],
     "shortLessonIndexes": [
       0,
