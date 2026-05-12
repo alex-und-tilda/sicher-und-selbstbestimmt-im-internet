@@ -91,7 +91,7 @@ function renderModuleTestbogen(topic) {
 
   content.innerHTML = `
     <article class="card print-card module-testbogen">
-      <div class="module-tag">Testbogen am Schluss</div>
+      <div class="module-tag"></div>
       <h2>Testbogen: ${escapeHtml(currentTopic.title)}</h2>
 
       <p><strong>Dieser Testbogen ist für das Ende von diesem Lernmodul.</strong></p>
@@ -669,7 +669,6 @@ function renderTopicChoice(topicId) {
             <em>Was nehme ich mit?</em>
           </span>
         </button>
-<button type="button" class="action-card testbogen" onclick="renderModuleTestbogen(getCurrentTopic())">Testbogen am Schluss</button>
       </div>
 
       <section class="brand-disclaimer topic-disclaimer">
@@ -761,25 +760,19 @@ function renderShortCompletion(topic) {
 
 
 
+
+
+
 function ensureSmallFooterNotice() {
   const existing = document.querySelector(".small-footer-notice");
   if (existing) existing.remove();
 
   const footer = document.createElement("footer");
   footer.className = "small-footer-notice";
-  footer.innerHTML = `Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.<br>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.`;
+  footer.innerHTML = "Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.<br>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.";
 
   const target = document.querySelector("#app") || document.body;
   target.appendChild(footer);
-}
-
-function getSmallFooterNotice() {
-  return `
-    <footer class="small-footer-notice">
-      ${"Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok."}<br>
-      ${"Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert."}
-    </footer>
-  `;
 }
 
 function renderMenu() {
@@ -837,7 +830,7 @@ function renderMenu() {
       </div>
 
       <div class="menu-extra-actions">
-        <button class="quiz-link quiz-button" onclick="renderEvaluation()">Rückmeldung / Testbogen</button>
+        <button class="quiz-link quiz-button" onclick="renderEvaluation()">Rückmeldung</button>
       </div>
     </section>
   `;
@@ -1293,6 +1286,8 @@ function renderQuiz() {
   content.innerHTML = html;
   content.focus();
   liveRegion.textContent = `Quiz. Frage ${quizIndex + 1} von ${total}.`;
+
+  ensureSmallFooterNotice();
 }
 
 function answerQuiz(answerIndex) {

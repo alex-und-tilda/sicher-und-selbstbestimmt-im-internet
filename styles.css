@@ -3734,3 +3734,43 @@ button.action-card.testbogen {
     display: none !important;
   }
 }
+
+
+/* Testbogen nicht in der normalen Themen-/Aktionsauswahl anzeigen.
+   Der Testbogen gehört an das Ende eines Lernmoduls oder in die Auswertung,
+   nicht als reguläre Lernaktion neben Kurz lernen, Ausführlich lernen, Quiz und Merk-Karte.
+*/
+.action-card.testbogen,
+button.action-card.testbogen,
+.topic-card .testbogen,
+.menu-card .testbogen {
+  display: none !important;
+}
+
+
+/* Kleiner Hinweis nur unten auf der Seite */
+.small-footer-notice {
+  max-width: 1180px !important;
+  margin: 44px auto 96px auto !important;
+  padding: 10px 20px !important;
+  color: #555555 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+  opacity: 0.9 !important;
+}
+
+/* Alte obere Hinweisboxen ausblenden, falls sie aus älteren Templates noch entstehen */
+.disclaimer,
+.legal-note,
+.privacy-note {
+  display: none !important;
+}
+
+@media print {
+  .small-footer-notice {
+    margin: 10pt 0 0 0 !important;
+    padding: 0 !important;
+    font-size: 8pt !important;
+  }
+}

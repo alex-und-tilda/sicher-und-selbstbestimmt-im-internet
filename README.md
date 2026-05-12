@@ -190,3 +190,23 @@ Was nehme ich mit?
 Unterstützung
 Beobachtung für unterstützende Person
 ```
+
+
+## Korrektur: Testbogen und Fußhinweis
+
+Geändert:
+
+```text
+Der Button „Testbogen am Schluss“ wurde aus der normalen Themen-/Aktionsauswahl entfernt.
+Der Marken-/Datenschutz-Hinweis steht nur noch klein unten auf der Seite.
+Obere Hinweisboxen werden nicht mehr angezeigt.
+```
+
+Der Hinweis unten lautet:
+
+```text
+Dies ist ein unabhängiges Bildungsangebot.
+Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
+Es wird kein Name gespeichert.
+Es wird kein Lernstand gespeichert.
+```
