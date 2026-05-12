@@ -70,93 +70,6 @@ function continueTopic(topicId, mode) {
   renderStep();
 }
 
-
-
-function openModuleTestbogenById(topicId) {
-  const topic = topics.find(item => item.id === topicId);
-  if (!topic) {
-    renderMenu();
-    return;
-  }
-  currentTopicId = topic.id;
-  renderModuleTestbogen(topic);
-}
-
-function renderModuleTestbogen(topic) {
-  const currentTopic = topic || getCurrentTopic();
-  if (!currentTopic) {
-    renderMenu();
-    return;
-  }
-
-  content.innerHTML = `
-    <article class="card print-card module-testbogen">
-      <div class="module-tag"></div>
-      <h2>Testbogen: ${escapeHtml(currentTopic.title)}</h2>
-
-      <p><strong>Dieser Testbogen ist für das Ende von diesem Lernmodul.</strong></p>
-      <p>Du kannst ankreuzen, was für dich passt.</p>
-      <p>Du musst nicht alles allein ausfüllen.</p>
-
-      <section class="testbogen-section">
-        <h3>1. Das Thema</h3>
-        <label><input type="checkbox"> Ich weiß, worum es in diesem Thema geht.</label>
-        <label><input type="checkbox"> Ich kenne wichtige Regeln zu diesem Thema.</label>
-        <label><input type="checkbox"> Ich weiß, wann ich Unterstützung fragen kann.</label>
-      </section>
-
-      <section class="testbogen-section">
-        <h3>2. Lernen</h3>
-        <label><input type="checkbox"> Die Sätze waren gut zu verstehen.</label>
-        <label><input type="checkbox"> Die Bilder oder Symbole haben geholfen.</label>
-        <label><input type="checkbox"> Das Vorlesen hat geholfen.</label>
-        <label><input type="checkbox"> Ich brauchte Unterstützung beim Lernen.</label>
-      </section>
-
-      <section class="testbogen-section">
-        <h3>3. Übung und Quiz</h3>
-        <label><input type="checkbox"> Ich konnte die Übung machen.</label>
-        <label><input type="checkbox"> Ich konnte das Quiz machen.</label>
-        <label><input type="checkbox"> Die Erklärungen nach den Antworten haben geholfen.</label>
-      </section>
-
-      <section class="testbogen-section">
-        <h3>4. Was nehme ich mit?</h3>
-        <p>Eine wichtige Regel für mich:</p>
-        <div class="write-line"></div>
-        <div class="write-line"></div>
-
-        <p>Das möchte ich im Alltag ausprobieren:</p>
-        <div class="write-line"></div>
-        <div class="write-line"></div>
-      </section>
-
-      <section class="testbogen-section">
-        <h3>5. Unterstützung</h3>
-        <label><input type="checkbox"> Ich weiß, wen ich fragen kann.</label>
-        <label><input type="checkbox"> Ich möchte das Thema noch einmal üben.</label>
-        <label><input type="checkbox"> Ich möchte mit einer Person darüber sprechen.</label>
-      </section>
-
-      <section class="testbogen-section support-observation">
-        <h3>Für die unterstützende Person</h3>
-        <p>Was war leicht?</p>
-        <div class="write-line"></div>
-        <p>Was war schwer?</p>
-        <div class="write-line"></div>
-        <p>Welche Unterstützung war nötig?</p>
-        <div class="write-line"></div>
-      </section>
-
-      <div class="page-actions">
-        <button type="button" class="btn btn-secondary" onclick="window.print()">Testbogen drucken</button>
-        <button type="button" class="btn btn-primary" onclick="renderTopicChoice('${currentTopic.id}')">Zurück zum Thema</button>
-      </div>
-    </article>
-  `;
-  ensureSmallFooterNotice();
-}
-
 function renderMemoryCard(topicId) {
   setViewMode("print");
   const topic = topics.find(t => t.id === topicId);
@@ -204,8 +117,6 @@ function renderMemoryCard(topicId) {
     </article>
   `;
   content.focus();
-
-  ensureSmallFooterNotice();
 }
 
 
@@ -341,13 +252,6 @@ function updateHashForCurrentStep() {
 }
 
 function handleHashRoute() {
-
-  if (raw && raw.includes(":testbogen")) {
-    const topicId = raw.split(":")[0];
-    openModuleTestbogenById(topicId);
-    return true;
-  }
-
   const raw = window.location.hash.replace("#", "").trim();
   if (!raw) return false;
 
@@ -686,8 +590,6 @@ function renderTopicChoice(topicId) {
   `;
 
   content.focus();
-
-  ensureSmallFooterNotice();
 }
 
 
@@ -758,23 +660,6 @@ function renderShortCompletion(topic) {
 }
 
 
-
-
-
-
-
-function ensureSmallFooterNotice() {
-  const existing = document.querySelector(".small-footer-notice");
-  if (existing) existing.remove();
-
-  const footer = document.createElement("footer");
-  footer.className = "small-footer-notice";
-  footer.innerHTML = "Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.<br>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.";
-
-  const target = document.querySelector("#app") || document.body;
-  target.appendChild(footer);
-}
-
 function renderMenu() {
   setViewMode("menu");
   appTitle.textContent = "Sicher digital lernen";
@@ -838,8 +723,6 @@ function renderMenu() {
   content.innerHTML = html;
   content.focus();
   liveRegion.textContent = "Themenübersicht. Wähle ein Thema aus.";
-
-  ensureSmallFooterNotice();
 }
 
 function startTopic(topicId) {
@@ -884,8 +767,6 @@ function renderStep() {
   content.focus();
 
   liveRegion.textContent = `${topic.title}. ${lesson.title}. Seite ${currentStep + 1} von ${total}.`;
-
-  ensureSmallFooterNotice();
 }
 
 function getLevelText(progress) {
@@ -1286,8 +1167,6 @@ function renderQuiz() {
   content.innerHTML = html;
   content.focus();
   liveRegion.textContent = `Quiz. Frage ${quizIndex + 1} von ${total}.`;
-
-  ensureSmallFooterNotice();
 }
 
 function answerQuiz(answerIndex) {
@@ -1461,8 +1340,6 @@ function renderQuizResult() {
 
   quizMode = false;
   content.focus();
-
-  ensureSmallFooterNotice();
 }
 
 function restartQuiz() {

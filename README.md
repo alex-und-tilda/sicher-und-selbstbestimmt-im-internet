@@ -165,48 +165,19 @@ Hinweis:
 Die Plattform speichert weiterhin keinen Namen und fragt keine personenbezogenen Daten ab.
 
 
-## Kleiner Fußhinweis
+## Sicherer Footer-/Testbogen-Fix
 
-Der Hinweis zu Marken und Datenschutz steht jetzt als kleiner Fußhinweis ganz unten.
-
-Korrigierte Datenschutz-Formulierung:
-
-```text
-Es wird kein Name gespeichert.
-Es wird kein Lernstand gespeichert.
-```
-
-## Testbogen am Schluss
-
-Der Testbogen wurde als Modulabschluss angepasst.
-
-Er passt jetzt zu jedem Lernmodul und enthält:
-
-```text
-Thema verstanden
-Lernen
-Übung und Quiz
-Was nehme ich mit?
-Unterstützung
-Beobachtung für unterstützende Person
-```
-
-
-## Korrektur: Testbogen und Fußhinweis
+Diese Version verändert keine Renderfunktionen.
 
 Geändert:
 
 ```text
-Der Button „Testbogen am Schluss“ wurde aus der normalen Themen-/Aktionsauswahl entfernt.
-Der Marken-/Datenschutz-Hinweis steht nur noch klein unten auf der Seite.
-Obere Hinweisboxen werden nicht mehr angezeigt.
+oberer Marken-/Datenschutz-Hinweis entfernt
+Hinweis nur noch klein unten per CSS-Footer
+Testbogen-Button aus normaler Auswahl ausgeblendet
+Lernstand-Speicherung bleibt entfernt
 ```
 
-Der Hinweis unten lautet:
+Wichtig:
 
-```text
-Dies ist ein unabhängiges Bildungsangebot.
-Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
-Es wird kein Name gespeichert.
-Es wird kein Lernstand gespeichert.
-```
+Diese Version behebt den Fehler, bei dem Lernseiten leer angezeigt wurden.
