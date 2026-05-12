@@ -184,9 +184,7 @@ function renderMenu() {
     <section class="start-page">
       <div class="hero-card">
         <h2>Wähle ein Thema.</h2>
-        <p>Du kannst kurz lernen.</p>
-        <p>Du kannst ein Quiz machen.</p>
-        <p>Du kannst eine Merk-Karte.</p>
+        <p>Danach entscheidest du, wie du lernen möchtest.</p>
       </div>
 
       <div class="topic-grid">
@@ -215,8 +213,8 @@ function renderTopicChoice(topicId) {
   quizScore = 0;
   selectedAnswer = null;
 
-  setHeader("Sicher und selbstbestimmt im Internet", topic.title, "Auswahl", "Thema", 5);
-  showNav(true, false);
+  setHeader("Sicher und selbstbestimmt im Internet", topic.title, "Thema auswählen", "Lernweg wählen", 0);
+  showNav(false, false);
 
   content.innerHTML = `
     <section class="topic-choice">
@@ -230,6 +228,10 @@ function renderTopicChoice(topicId) {
         </div>
         <p>${escapeHtml(topic.desc || "")}</p>
       </article>
+
+      <div class="learning-path-heading">
+        <h3>Wie möchtest du lernen?</h3>
+      </div>
 
       <div class="learning-path-heading">
         <h3>Wie möchtest du lernen?</h3>
@@ -637,6 +639,9 @@ function renderMemoryCard(topicId) {
 
 
 
+
+
+
 function toggleSupportHelp() {
   const panel = document.getElementById("supportHelpPanel");
   const button = document.querySelector(".support-help-button");
@@ -660,6 +665,7 @@ function closeSupportHelp() {
   const panel = document.getElementById("supportHelpPanel");
   const button = document.querySelector(".support-help-button");
   const desc = document.querySelector(".support-help-desc");
+
   if (panel) panel.setAttribute("hidden", "");
   if (button) button.setAttribute("aria-expanded", "false");
   if (desc) desc.textContent = "Hilfe anzeigen.";

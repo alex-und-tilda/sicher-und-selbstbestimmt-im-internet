@@ -4424,3 +4424,239 @@ button.action-card.testbogen,
     margin: 0 auto !important;
   }
 }
+
+
+/* ============================================================
+   CODEAUDIT-BEREINIGUNG
+   Final-Overrides ohne kompletten CSS-Neuaufbau.
+   ============================================================ */
+
+/* Startseite und Themenauswahl: keine Fortschritts-/Navigationsleiste */
+.progress-area.is-hidden,
+.nav.is-hidden {
+  display: none !important;
+}
+
+/* Start-Intro ruhig und eindeutig */
+.start-page .hero-card {
+  max-width: 1180px !important;
+  margin: 26px auto 22px auto !important;
+  padding: 20px 24px !important;
+  border-radius: 18px !important;
+  background: #FFFFFF !important;
+  border-left: 8px solid #3DB8B3 !important;
+  box-shadow: 0 8px 20px rgba(0, 40, 90, 0.08) !important;
+}
+
+.start-page .hero-card h2 {
+  margin-top: 0 !important;
+}
+
+.start-page .hero-card p {
+  margin-bottom: 0 !important;
+  font-weight: 700 !important;
+}
+
+/* Themenauswahl: Thema kompakter und ruhiger */
+.topic-choice .topic-intro-card {
+  max-width: 1180px !important;
+  margin: 20px auto 22px auto !important;
+  padding: 24px !important;
+  display: grid !important;
+  grid-template-columns: 220px 1fr !important;
+  gap: 24px !important;
+  align-items: center !important;
+}
+
+.topic-choice .topic-intro-card .topic-illustration {
+  width: 220px !important;
+  height: 150px !important;
+  max-height: 150px !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+}
+
+/* Lernwege: Icons + Text stabil */
+.learning-path-heading {
+  max-width: 1180px !important;
+  margin: 24px auto 10px auto !important;
+}
+
+.learning-path-heading h3 {
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+}
+
+.learning-path-grid,
+.action-grid.learning-path-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  max-width: 1180px !important;
+  margin: 14px auto 20px auto !important;
+}
+
+.learning-path-grid .action-card {
+  min-height: 116px !important;
+  padding: 18px !important;
+  display: grid !important;
+  grid-template-columns: 54px 1fr !important;
+  align-items: center !important;
+  gap: 14px !important;
+  text-align: left !important;
+  border-width: 3px !important;
+  border-radius: 18px !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+.learning-path-grid .action-icon {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 2px solid rgba(0, 40, 90, 0.16) !important;
+}
+
+.learning-path-grid .action-icon img {
+  width: 32px !important;
+  height: 32px !important;
+  object-fit: contain !important;
+}
+
+.learning-path-grid .action-text {
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+.learning-path-grid .action-title {
+  display: block !important;
+  font-size: 1.08rem !important;
+  line-height: 1.15 !important;
+  font-weight: 900 !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+.learning-path-grid .action-desc {
+  display: block !important;
+  font-size: 0.96rem !important;
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+/* Lernweg-Farben */
+.learning-path-grid .action-short {
+  background: #E5F7F6 !important;
+  border-color: #3DB8B3 !important;
+  color: #00285A !important;
+}
+
+.learning-path-grid .action-full {
+  background: #00285A !important;
+  border-color: #00285A !important;
+  color: #FFFFFF !important;
+}
+
+.learning-path-grid .action-full .action-icon {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.learning-path-grid .action-quiz {
+  background: #EAF6EC !important;
+  border-color: #2A7F5C !important;
+  color: #1F1F1F !important;
+}
+
+.learning-path-grid .action-memory {
+  background: #FFF3C4 !important;
+  border-color: #C9A600 !important;
+  color: #1F1F1F !important;
+}
+
+.learning-path-grid .action-card:hover,
+.learning-path-grid .action-card:focus-visible {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.18) !important;
+  outline: 4px solid rgba(61, 184, 179, 0.28) !important;
+  outline-offset: 2px !important;
+}
+
+/* Unterstützung als Zusatzhilfe, nicht als fünfter Lernweg */
+.support-help-area {
+  max-width: 1180px !important;
+  margin: 20px auto 28px auto !important;
+}
+
+.support-help-button {
+  width: 100% !important;
+  min-height: 76px !important;
+  display: grid !important;
+  grid-template-columns: 56px 1fr !important;
+  gap: 14px !important;
+  align-items: center !important;
+  padding: 16px 18px !important;
+  border: 3px solid #3DB8B3 !important;
+  border-radius: 18px !important;
+  background: #E5F7F6 !important;
+  color: #00285A !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 14px rgba(0, 40, 90, 0.08) !important;
+}
+
+.support-help-button:hover,
+.support-help-button:focus-visible {
+  background: #DDF3F2 !important;
+  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.16) !important;
+  outline: 4px solid rgba(61, 184, 179, 0.32) !important;
+  outline-offset: 2px !important;
+}
+
+.support-help-close {
+  margin-top: 16px !important;
+  min-height: 42px !important;
+  padding: 8px 14px !important;
+  border-radius: 999px !important;
+  border: 2px solid #00285A !important;
+  background: #FFFFFF !important;
+  color: #00285A !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 1050px) {
+  .learning-path-grid,
+  .action-grid.learning-path-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .topic-choice .topic-intro-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .topic-choice .topic-intro-card .topic-illustration {
+    width: 100% !important;
+    max-width: 260px !important;
+    margin: 0 auto !important;
+  }
+
+  .learning-path-grid,
+  .action-grid.learning-path-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

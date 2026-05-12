@@ -466,3 +466,28 @@ keine Lernstand-Speicherung
 kein Testbogen
 kein E-Mail-Versand
 ```
+
+
+## Codeaudit-Bereinigung
+
+Diese Version wurde direkt am Code geprüft.
+
+Korrigiert:
+
+```text
+Startseiten-Text bereinigt
+fehlerhafter Satz „Du kannst eine Merk-Karte.“ entfernt
+Themenauswahl ohne Fortschrittslogik
+Themenauswahl ohne untere Zurück-/Weiter-Navigation
+Lernweg-Kacheln mit stabilen Icons und kurzen Texten
+Unterstützungsbutton mit Anzeigen/Ausblenden-Logik
+```
+
+Nicht eingebaut:
+
+```text
+keine Vorlesefunktion
+keine Lernstand-Speicherung
+kein Testbogen
+kein E-Mail-Versand
+```
