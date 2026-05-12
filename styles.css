@@ -5631,3 +5631,17 @@ button.action-card.testbogen,
 .footer a[href="ersteller.html"] {
   font-weight: 600;
 }
+
+
+/* Profilboxen werden auf der Lernplattform nicht angezeigt.
+   Die Erstellerseite bleibt als separate Seite über Sitemap/URL erreichbar. */
+.creator-search-info,
+.creator-search-info--subtle,
+.creator-final-notice {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
