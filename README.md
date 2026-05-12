@@ -442,3 +442,27 @@ Sie bleibt unter den Lernwegen.
 Sie gibt konkrete Handlungsschritte.
 Sie verwendet alltagsnahe Begriffe.
 ```
+
+
+## Pilot-Bereinigung
+
+Diese Version bereinigt die Orientierung.
+
+Geändert:
+
+```text
+Fortschrittsbalken nur im echten Lernmodus und Quiz.
+Keine untere Zurück-/Weiter-Navigation auf der Startseite.
+Keine untere Zurück-/Weiter-Navigation in der Themenauswahl.
+Unterstützungs-Hilfe mit Anzeigen/Ausblenden-Logik.
+Startseite mit ruhigerem Einführungstext.
+```
+
+Nicht geändert:
+
+```text
+keine Vorlese-Funktion
+keine Lernstand-Speicherung
+kein Testbogen
+kein E-Mail-Versand
+```

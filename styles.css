@@ -4311,3 +4311,116 @@ button.action-card.testbogen,
     height: 28px !important;
   }
 }
+
+
+/* ============================================================
+   Pilot-Bereinigung: Orientierung, Lernwege, Hilfe
+   ============================================================ */
+
+/* Startseite und Themenauswahl: kein Fortschrittsbalken, keine untere Navigation */
+.progress-area.is-hidden,
+.nav.is-hidden {
+  display: none !important;
+}
+
+/* Start-Intro ruhiger */
+.start-page .hero-card {
+  max-width: 1180px !important;
+  margin: 26px auto 22px auto !important;
+  padding: 20px 24px !important;
+  border-radius: 18px !important;
+  background: #FFFFFF !important;
+  border-left: 8px solid #3DB8B3 !important;
+  box-shadow: 0 8px 20px rgba(0, 40, 90, 0.08) !important;
+}
+
+.start-page .hero-card h2 {
+  margin-top: 0 !important;
+}
+
+.start-page .hero-card p {
+  margin-bottom: 0 !important;
+  font-weight: 700 !important;
+}
+
+/* Themenauswahl-Karte kompakter und ruhiger */
+.topic-choice .topic-intro-card {
+  display: grid !important;
+  grid-template-columns: 220px 1fr !important;
+  gap: 22px !important;
+  align-items: center !important;
+  padding: 24px !important;
+}
+
+.topic-choice .topic-intro-card .topic-illustration {
+  width: 220px !important;
+  height: 150px !important;
+  max-height: 150px !important;
+  margin: 0 !important;
+}
+
+.topic-choice .topic-intro-card .symbol-heading {
+  align-self: end !important;
+}
+
+/* Lernwege: keine hässlichen Umbrüche, bessere Textgewichtung */
+.learning-path-grid .action-card {
+  min-width: 0 !important;
+}
+
+.learning-path-grid .action-title,
+.learning-path-grid .action-desc {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+.learning-path-grid .action-title {
+  font-size: 1.08rem !important;
+}
+
+.learning-path-grid .action-desc {
+  font-size: 0.96rem !important;
+}
+
+/* Unterstützung nicht als Lernweg, sondern als klare Zusatzhilfe */
+.support-help-area {
+  margin-top: 18px !important;
+}
+
+.support-help-button {
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.support-help-close {
+  margin-top: 16px !important;
+  min-height: 42px !important;
+  padding: 8px 14px !important;
+  border-radius: 999px !important;
+  border: 2px solid #00285A !important;
+  background: #FFFFFF !important;
+  color: #00285A !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+.support-help-close:hover,
+.support-help-close:focus-visible {
+  background: #EAF1F8 !important;
+  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
+  outline-offset: 2px !important;
+}
+
+@media (max-width: 760px) {
+  .topic-choice .topic-intro-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .topic-choice .topic-intro-card .topic-illustration {
+    width: 100% !important;
+    max-width: 260px !important;
+    margin: 0 auto !important;
+  }
+}

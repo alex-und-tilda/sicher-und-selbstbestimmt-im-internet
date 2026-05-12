@@ -115,6 +115,9 @@ function getIllustrationHtml(topic) {
 
 
 
+
+
+
 function setProgressVisible(isVisible) {
   const progressArea = document.querySelector(".progress-area");
   if (!progressArea) return;
@@ -159,8 +162,6 @@ function renderLegalFooter() {
 function renderMenu() {
   setProgressVisible(false);
   setBottomNavVisible(false);
-  
-  setProgressVisible(false);
 
   currentTopicId = null;
   currentStep = 0;
@@ -199,10 +200,8 @@ function renderMenu() {
 }
 
 function renderTopicChoice(topicId) {
-  setProgressVisible(true);
-  setBottomNavVisible(true);
-  
-  setProgressVisible(true);
+  setProgressVisible(false);
+  setBottomNavVisible(false);
 
   const topic = topics.find(item => item.id === topicId);
   if (!topic) {
@@ -271,11 +270,11 @@ function renderTopicChoice(topicId) {
       </div>
 
       <div class="support-help-area">
-        <button type="button" class="support-help-button" onclick="toggleSupportHelp()">
+        <button type="button" class="support-help-button" onclick="toggleSupportHelp()" aria-expanded="false" aria-controls="supportHelpPanel">
           <span class="support-help-icon" aria-hidden="true">${getIconHtml("help")}</span>
           <span class="support-help-text">
             <span class="support-help-title">Du brauchst Unterstützung?</span>
-            <span class="support-help-desc">Hier steht, wen du fragen kannst.</span>
+            <span class="support-help-desc">Hilfe anzeigen.</span>
           </span>
         </button>
 
@@ -313,6 +312,8 @@ function renderTopicChoice(topicId) {
           </div>
 
           <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
+
+          <button type="button" class="support-help-close" onclick="closeSupportHelp()">Hilfe ausblenden</button>
         </div>
       </div>
     </section>
@@ -347,8 +348,6 @@ function startTopicMode(topicId, mode) {
 function renderLesson() {
   setProgressVisible(true);
   setBottomNavVisible(true);
-  
-  setProgressVisible(true);
 
   const topic = getCurrentTopic();
   if (!topic) {
@@ -478,8 +477,6 @@ function getQuizQuestions(topic) {
 function renderQuizQuestion() {
   setProgressVisible(true);
   setBottomNavVisible(true);
-  
-  setProgressVisible(true);
 
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
@@ -556,10 +553,8 @@ function checkQuizAnswer() {
 }
 
 function renderQuizResult() {
-  setProgressVisible(true);
-  setBottomNavVisible(true);
-  
-  setProgressVisible(true);
+  setProgressVisible(false);
+  setBottomNavVisible(false);
 
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
@@ -587,10 +582,8 @@ function renderQuizResult() {
 }
 
 function renderMemoryCard(topicId) {
-  setProgressVisible(true);
-  setBottomNavVisible(true);
-  
-  setProgressVisible(true);
+  setProgressVisible(false);
+  setBottomNavVisible(false);
 
   const topic = topics.find(item => item.id === topicId);
   if (!topic) {
@@ -642,23 +635,39 @@ function renderMemoryCard(topicId) {
 }
 
 
+
+
 function toggleSupportHelp() {
   const panel = document.getElementById("supportHelpPanel");
+  const button = document.querySelector(".support-help-button");
+  const desc = document.querySelector(".support-help-desc");
   if (!panel) return;
 
   const isHidden = panel.hasAttribute("hidden");
+
   if (isHidden) {
     panel.removeAttribute("hidden");
+    if (button) button.setAttribute("aria-expanded", "true");
+    if (desc) desc.textContent = "Hilfe wieder ausblenden.";
   } else {
     panel.setAttribute("hidden", "");
+    if (button) button.setAttribute("aria-expanded", "false");
+    if (desc) desc.textContent = "Hilfe anzeigen.";
   }
 }
 
+function closeSupportHelp() {
+  const panel = document.getElementById("supportHelpPanel");
+  const button = document.querySelector(".support-help-button");
+  const desc = document.querySelector(".support-help-desc");
+  if (panel) panel.setAttribute("hidden", "");
+  if (button) button.setAttribute("aria-expanded", "false");
+  if (desc) desc.textContent = "Hilfe anzeigen.";
+}
+
 function renderHelpOverlay() {
-  setProgressVisible(true);
-  setBottomNavVisible(true);
-  
-  setProgressVisible(true);
+  setProgressVisible(false);
+  setBottomNavVisible(false);
 
   setHeader("Hilfe", "Orientierung", "Hilfe", "Bedienung", 0);
   showNav(true, false);
