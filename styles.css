@@ -3652,24 +3652,6 @@ main {
 }
 
 
-/* Sicherer Footer-Hinweis:
-   Der Hinweis wird per CSS unten angezeigt.
-   Keine JavaScript-Renderfunktion wird verändert.
-*/
-body::after {
-  content: "Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.\A Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.";
-  white-space: pre-line;
-  display: block;
-  max-width: 1180px;
-  margin: 44px auto 96px auto;
-  padding: 10px 20px;
-  color: #555555;
-  font-size: 0.78rem;
-  line-height: 1.35;
-  text-align: left;
-  opacity: 0.9;
-}
-
 /* Obere alte Hinweisboxen ausblenden, falls alte Templates noch Reste erzeugen */
 .disclaimer,
 .legal-note,
@@ -3681,18 +3663,99 @@ body::after {
   display: none !important;
 }
 
-/* Testbogen nicht in der normalen Themen-/Aktionsauswahl anzeigen */
-.action-card.testbogen,
-button.action-card.testbogen,
-.topic-card .testbogen,
-.menu-card .testbogen {
+@media print {
+  }
+
+
+/* ============================================================
+   SAUBERER FOOTER- UND RÜCKMELDUNGS-FIX
+   Kein kompletter CSS-Umbau.
+   ============================================================ */
+
+/* Obere alte Hinweisboxen endgültig ausblenden */
+.disclaimer,
+.legal-note,
+.privacy-note,
+.continue-box,
+.resume-box,
+.last-progress,
+.progress-resume {
   display: none !important;
 }
 
+/* Rückmeldung/Testbogen nicht in der Lernenden-Oberfläche anzeigen */
+.action-card.testbogen,
+button.action-card.testbogen,
+.topic-card .testbogen,
+.menu-card .testbogen,
+.module-testbogen,
+.feedback-form,
+.testbogen-link,
+.rueckmeldung-link {
+  display: none !important;
+}
+
+/* Echter Footer ganz unten */
+.small-footer-notice {
+  max-width: 1180px !important;
+  margin: 44px auto 96px auto !important;
+  padding: 10px 20px !important;
+  color: #555555 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+  opacity: 0.9 !important;
+}
+
+.small-footer-notice p {
+  margin: 0 0 4px 0 !important;
+}
+
+/* Startseitenlayout nur gezielt stabilisieren */
+.topic-grid,
+.topics-grid,
+.card-grid,
+.overview-grid,
+.menu-grid,
+.action-grid {
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.topic-card img,
+.topic-tile img,
+.menu-card img,
+.topic-illustration,
+.lesson-illustration,
+.illustration,
+.card-illustration {
+  max-height: 150px !important;
+  object-fit: contain !important;
+}
+
+@media (max-width: 760px) {
+  .small-footer-notice {
+    margin: 32px 14px 90px 14px !important;
+    padding: 8px 0 !important;
+    font-size: 0.75rem !important;
+  }
+
+  .topic-card img,
+  .topic-tile img,
+  .menu-card img,
+  .topic-illustration,
+  .lesson-illustration,
+  .illustration,
+  .card-illustration {
+    max-height: 120px !important;
+  }
+}
+
 @media print {
-  body::after {
-    margin: 10pt 0 0 0;
-    padding: 0;
-    font-size: 8pt;
+  .small-footer-notice {
+    margin: 10pt 0 0 0 !important;
+    padding: 0 !important;
+    font-size: 8pt !important;
   }
 }

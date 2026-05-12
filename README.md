@@ -181,3 +181,24 @@ Lernstand-Speicherung bleibt entfernt
 Wichtig:
 
 Diese Version behebt den Fehler, bei dem Lernseiten leer angezeigt wurden.
+
+
+## Saubere Entscheidung: Footer und Rückmeldung
+
+Diese Version setzt vier Punkte um:
+
+```text
+1. Der obere Marken-/Datenschutz-Hinweis wurde aus der Startseitenlogik entfernt.
+2. Der Hinweis steht als echter HTML-Footer unten, nicht mehr als body::after.
+3. Testbogen/Rückmeldung ist nicht Teil der Lernenden-Oberfläche.
+4. CSS wurde nur gezielt korrigiert, nicht komplett neu gebaut.
+```
+
+Entscheidung zur Rückmeldung:
+
+```text
+Kein sichtbarer Rückmeldebogen in der Lernplattform.
+Kein automatischer Versand.
+Keine Speicherung.
+Rückmeldungen werden im Pilot separat organisiert.
+```

@@ -231,7 +231,6 @@ function renderEvaluation() {
         </section>
 
         <div class="certificate-actions">
-          <button class="quiz-link quiz-button" onclick="window.print()">Testbogen drucken</button>
           <button class="nav-button secondary" onclick="renderMenu()">Zurück</button>
         </div>
       </div>
@@ -526,379 +525,6 @@ function renderTopicChoice(topicId) {
   const questions = (topic.helpQuestions || []).map(q => `<li>${escapeHtml(q)}</li>`).join("");
 
   content.innerHTML = `
-    <section class="menu-card topic-choice-screen topic-${topic.id}">
-      <button class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
-
-      <div class="choice-header">
-        <span class="topic-icon large" aria-hidden="true">${getIconHtml(topic.icon)}</span>
-        <div>
-          <h2>${escapeHtml(topic.title)}</h2>
-          <p>${escapeHtml(topic.desc)}</p>
-        </div>
-      </div>
-
-      <div class="topic-choice-actions action-card-grid">
-        <button class="action-card action-short" onclick="startTopicMode('${topic.id}', 'short')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("check")}</span>
-          <span class="action-text">
-            <strong>Kurz lernen</strong>
-            <small>Die wichtigsten Seiten.</small>
-            <em>Was muss ich mir merken?</em>
-          </span>
-        </button>
-
-        <button class="action-card action-full" onclick="startTopicMode('${topic.id}', 'full')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
-          <span class="action-text">
-            <strong>Ausführlich lernen</strong>
-            <small>Alle Seiten mit Beispielen.</small>
-            <em>Was kann ich im Alltag tun?</em>
-          </span>
-        </button>
-
-        <button class="action-card action-quiz" onclick="startTopicQuiz('${topic.id}')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
-          <span class="action-text">
-            <strong>Quiz starten</strong>
-            <small>10 Fragen beantworten.</small>
-            <em>Habe ich das verstanden?</em>
-          </span>
-        </button>
-
-        <button class="action-card action-memory" onclick="renderMemoryCard('${topic.id}')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
-          <span class="action-text">
-            <strong>Merk-Karte</strong>
-            <small>3 wichtige Regeln drucken.</small>
-            <em>Was nehme ich mit?</em>
-          </span>
-        </button>
-      </div>
-
-      <section class="brand-disclaimer topic-disclaimer">
-        Dies ist ein unabhängiges Bildungsangebot.
-        Es ist nicht mit der App-Plattform verbunden.
-      </section>
-
-      <section class="topic-help-panel">
-        <h3>Das kannst du eine Person fragen, der du vertraust:</h3>
-        <ul>${questions}</ul>
-      </section>
-
-      <img src="${topic.illustration}" alt="" class="choice-illustration">
-    </section>
-  `;
-
-  content.focus();
-}
-
-
-
-
-function markUnderstood() {
-  const button = document.querySelector(".understood-button");
-  if (button) {
-    button.textContent = "Verstanden";
-    button.disabled = true;
-    button.classList.add("done");
-  }
-  liveRegion.textContent = "Diese Seite wurde als verstanden markiert.";
-}
-
-function shouldShowMiniQuestion(topic, stepIndex) {
-  if (!topic || !topic.lessons || learningMode !== "full") return false;
-  const lesson = topic.lessons[stepIndex];
-  const next = topic.lessons[stepIndex + 1];
-  if (!lesson || !next) return false;
-  return lesson.module !== next.module;
-}
-
-
-
-function renderShortCompletion(topic) {
-  setViewMode("learning");
-  appTitle.textContent = topic.title;
-  moduleLabel.textContent = "Kurz lernen";
-  stepLabel.textContent = "Abschluss";
-  levelLabel.textContent = "Geschafft";
-  progressFill.style.width = "100%";
-  progressTrack.setAttribute("aria-valuenow", "100");
-  backButton.disabled = false;
-  nextButton.disabled = false;
-  nextButton.textContent = "Themenübersicht";
-
-  content.innerHTML = `
-    <article class="card short-completion-card">
-      <div class="module-tag">Kurz lernen abgeschlossen</div>
-      <div class="card-header">
-        <div class="icon" aria-hidden="true">${getIconHtml("check")}</div>
-        <h2>Du hast die wichtigsten Regeln gelernt.</h2>
-      </div>
-      <p>Du kannst jetzt entscheiden, was du als Nächstes machen möchtest.</p>
-
-      <div class="completion-action-grid">
-        <button class="action-card action-quiz" onclick="startTopicQuiz('${topic.id}')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
-          <span class="action-text"><strong>Quiz starten</strong><small>10 Fragen beantworten.</small><em>Habe ich das verstanden?</em></span>
-        </button>
-        <button class="action-card action-memory" onclick="renderMemoryCard('${topic.id}')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
-          <span class="action-text"><strong>Merk-Karte drucken</strong><small>3 wichtige Regeln.</small><em>Was nehme ich mit?</em></span>
-        </button>
-        <button class="action-card action-full" onclick="startTopicMode('${topic.id}', 'full')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
-          <span class="action-text"><strong>Ausführlich weiterlernen</strong><small>Alle Seiten mit Beispielen.</small><em>Was kann ich im Alltag tun?</em></span>
-        </button>
-        <button class="action-card action-short" onclick="renderMenu()">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("home")}</span>
-          <span class="action-text"><strong>Zur Themenübersicht</strong><small>Ein anderes Thema auswählen.</small><em>Was möchte ich noch lernen?</em></span>
-        </button>
-      </div>
-    </article>
-  `;
-  content.focus();
-}
-
-
-function renderMenu() {
-  setViewMode("menu");
-  appTitle.textContent = "Sicher digital lernen";
-  moduleLabel.textContent = "Thema auswählen";
-  stepLabel.textContent = "Themenübersicht";
-  levelLabel.textContent = "Start";
-  progressFill.style.width = "0%";
-  progressTrack.setAttribute("aria-valuenow", "0");
-
-  backButton.disabled = true;
-  nextButton.disabled = true;
-  nextButton.textContent = "Weiter";
-
-  let html = `
-    <section class="menu-card simplified-menu">
-      <h2>Was möchtest du lernen?</h2>
-
-      <div class="poster-hint">
-        <strong>Willkommen beim Selbstlernangebot.</strong><br>
-        Wähle zuerst ein Thema aus.<br>
-        Danach kannst du entscheiden:
-        kurz lernen, ausführlich lernen, Quiz starten oder Merk-Karte drucken.
-      </div>
-
-      ${renderCentralProgressBox()}
-
-      <div class="brand-disclaimer">
-        Dies ist ein unabhängiges Bildungsangebot.
-        Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
-      </div>
-
-      <div class="privacy-note">
-        Es wird kein Name gespeichert.
-        Es wird kein Lernstand gespeichert.
-      </div>
-
-      <div class="simple-topic-grid">
-  `;
-
-  topics.forEach(topic => {
-    html += `
-      <button class="simple-topic-card topic-${topic.id}" onclick="renderTopicChoice('${topic.id}')">
-        <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon)}</span>
-        <span>
-          <strong>${escapeHtml(topic.title)}</strong>
-          <small>${escapeHtml(topic.desc)}</small>
-        </span>
-      </button>
-    `;
-  });
-
-  html += `
-      </div>
-
-      <div class="menu-extra-actions">
-        <button class="quiz-link quiz-button" onclick="renderEvaluation()">Rückmeldung</button>
-      </div>
-    </section>
-  `;
-
-  content.innerHTML = html;
-  content.focus();
-  liveRegion.textContent = "Themenübersicht. Wähle ein Thema aus.";
-}
-
-function startTopic(topicId) {
-  startTopicMode(topicId, "full");
-}
-
-
-function startTopicQuiz(topicId) {
-  currentTopicId = topicId;
-  learningMode = "full";
-  currentStep = 0;
-  startQuiz();
-}
-
-function renderStep() {
-  setViewMode("learning");
-  const topic = getCurrentTopic();
-  if (!topic) {
-    renderMenu();
-    return;
-  }
-
-  const lessons = getActiveLessons(topic);
-  const lesson = lessons[currentStep];
-  const total = lessons.length;
-  const progress = ((currentStep + 1) / total) * 100;
-  saveProgress();
-  updateHashForCurrentStep();
-
-  appTitle.textContent = topic.title;
-  moduleLabel.textContent = lesson.module;
-  stepLabel.textContent = `${learningMode === "short" ? "Kurz" : "Ausführlich"} · Seite ${currentStep + 1} von ${total}`;
-  levelLabel.textContent = getLevelText(progress);
-  progressFill.style.width = `${progress}%`;
-  progressTrack.setAttribute("aria-valuenow", Math.round(progress));
-
-  backButton.disabled = false;
-  nextButton.disabled = false;
-  nextButton.textContent = currentStep === total - 1 ? "Themenübersicht" : "Weiter";
-
-  content.innerHTML = buildCard(lesson, topic);
-  content.focus();
-
-  liveRegion.textContent = `${topic.title}. ${lesson.title}. Seite ${currentStep + 1} von ${total}.`;
-}
-
-function getLevelText(progress) {
-  if (progress >= 95) return "Abschluss";
-  if (progress >= 65) return "Fortgeschritten";
-  if (progress >= 35) return "Gut dabei";
-  return "Start";
-}
-
-
-
-
-
-function prepareSpeechText(text) {
-  return String(text || "")
-    .replace(/Vorlesen/g, "")
-    .replace(/Stopp/g, "")
-    .replace(/Ich habe diese Seite verstanden/g, "")
-    .replace(/Zurück/g, "")
-    .replace(/Weiter/g, "")
-    .replace(/\s+/g, " ")
-    .replace(/\./g, ". ")
-    .replace(/\?/g, "? ")
-    .replace(/!/g, "! ")
-    .replace(/:/g, ": ")
-    .trim();
-}
-
-function speakText(text) {
-  if (!("speechSynthesis" in window)) {
-    liveRegion.textContent = "Vorlesen wird von diesem Browser nicht unterstützt.";
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-
-  const cleanText = prepareSpeechText(text);
-  if (!cleanText) return;
-
-  const utterance = new SpeechSynthesisUtterance(cleanText);
-  utterance.lang = "de-DE";
-
-  // Langsamer für Menschen mit Lern- und Leseschwierigkeiten.
-  utterance.rate = speechRate;
-  utterance.pitch = 1.0;
-  utterance.volume = 1.0;
-
-  // Wenn eine deutsche Stimme verfügbar ist, wird sie bevorzugt.
-  const voices = window.speechSynthesis.getVoices();
-  const germanVoice = voices.find(voice => voice.lang && voice.lang.toLowerCase().startsWith("de"));
-  if (germanVoice) {
-    utterance.voice = germanVoice;
-  }
-
-  window.speechSynthesis.speak(utterance);
-  liveRegion.textContent = "Der Text wird sehr langsam vorgelesen.";
-}
-
-function speakElementById(id) {
-  const element = document.getElementById(id);
-  if (!element) return;
-  speakText(element.innerText || element.textContent || "");
-}
-
-function speakCurrentCard() {
-  const mainCard = content.querySelector(".card") || content;
-  if (!mainCard) return;
-  speakText(mainCard.innerText || mainCard.textContent || "");
-}
-
-function stopReading() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-    liveRegion.textContent = "Vorlesen gestoppt.";
-  }
-}
-
-function buildAccessibleBox(type, title, htmlContent, iconName, id) {
-  const safeId = id || `box-${Math.random().toString(36).slice(2)}`;
-  return `
-    <section class="access-box access-${type}" id="${safeId}">
-      <div class="access-box-symbol" aria-hidden="true">${getIconHtml(iconName)}</div>
-      <div class="access-box-content">
-        <h3>${escapeHtml(title)}</h3>
-        <div class="access-box-text">${htmlContent}</div>
-        <button type="button" class="small-read-button" onclick="speakElementById('${safeId}')">Sehr langsam vorlesen</button>
-      </div>
-    </section>
-  `;
-}
-
-
-function getCurrentLessonForPractice() {
-  const topic = getCurrentTopic();
-  if (!topic) return null;
-  const lessons = getActiveLessons(topic);
-  return lessons[currentStep] || null;
-}
-
-function getPracticeQuestion(topic, lesson) {
-  if (lesson && lesson.practiceQuestion) return lesson.practiceQuestion;
-  if (lesson && lesson.exercise) {
-    return {
-      question: lesson.exercise.question || "Was ist richtig?",
-      answers: ["Das wirkt sicher", "Das wirkt unsicher", "Ich brauche Hilfe"],
-      correct: lesson.exercise.correctIndex ?? 2,
-      explanation: "Lies die Rückmeldung. Wenn du unsicher bist, frage eine Person, der du vertraust.",
-      legacyExercise: lesson.exercise
-    };
-  }
-  return topic && topic.miniQuestion ? topic.miniQuestion : null;
-}
-
-function shouldShowPractice(topic, lesson, stepIndex) {
-  if (!topic || !lesson) return false;
-  const title = (lesson.title || "").toLowerCase();
-  const icon = (lesson.icon || "").toLowerCase();
-  if (lesson.practiceQuestion || lesson.exercise) return true;
-  if (title.includes("übung") || title.includes("wiederholung") || title.includes("quiz")) return true;
-  if (icon === "exercise" || icon === "quiz") return true;
-  return false;
-}
-
-function getPracticeHtml(topic, lesson, stepIndex) {
-  if (!shouldShowPractice(topic, lesson, stepIndex)) return "";
-  const q = getPracticeQuestion(topic, lesson);
-  if (!q || !Array.isArray(q.answers)) return "";
-
-  const boxId = `practice-${topic.id}-${stepIndex}`;
-  return `
-    <section class="practice-box access-box access-exercise" id="${boxId}">
-      <div class="access-box-symbol" aria-hidden="true">${getIconHtml("exercise")}</div>
       <div class="access-box-content">
         <h3>Übung</h3>
         <p class="practice-question"><strong>${escapeHtml(q.question)}</strong></p>
@@ -1377,5 +1003,57 @@ if ("speechSynthesis" in window) {
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") {
     closeHelpOverlay();
+  }
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  scheduleFooterNotice();
+  const appRoot = document.querySelector("#app");
+  if (appRoot && "MutationObserver" in window) {
+    const observer = new MutationObserver(() => {
+      if (!document.querySelector(".small-footer-notice")) {
+        scheduleFooterNotice();
+      }
+    });
+    observer.observe(appRoot, { childList: true });
+  }
+});
+
+
+function appendLegalFooterNotice() {
+  const oldFooter = document.querySelector(".small-footer-notice");
+  if (oldFooter) oldFooter.remove();
+
+  const footer = document.createElement("footer");
+  footer.className = "small-footer-notice";
+  footer.innerHTML = `
+    <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.</p>
+    <p>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.</p>
+  `;
+
+  const appRoot = document.querySelector("#app");
+  if (appRoot) {
+    appRoot.appendChild(footer);
+  } else {
+    document.body.appendChild(footer);
+  }
+}
+
+function scheduleLegalFooterNotice() {
+  window.setTimeout(appendLegalFooterNotice, 0);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  scheduleLegalFooterNotice();
+  const appRoot = document.querySelector("#app");
+  if (appRoot && "MutationObserver" in window) {
+    const observer = new MutationObserver(() => {
+      if (!document.querySelector(".small-footer-notice")) {
+        scheduleLegalFooterNotice();
+      }
+    });
+    observer.observe(appRoot, { childList: true });
   }
 });
