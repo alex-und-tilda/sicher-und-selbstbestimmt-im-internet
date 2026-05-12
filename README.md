@@ -74,3 +74,37 @@ technische Hinweise
 ```
 
 Beim Seitenwechsel stoppt das Vorlesen automatisch.
+
+
+## Datenschutz mit 12 Lektionen
+
+Das Thema Datenschutz wurde erweitert.
+
+Neue Logik:
+
+```text
+eine Seite = ein Lernziel
+mehr kleine Lernschritte
+weniger Überladung pro Seite
+Passwort und gutes Passwort getrennt
+Adresse und Telefon-Nummer getrennt
+Links und Druck getrennt
+Handlungsplan als eigene Seite
+```
+
+
+## Alle Themen fachlich überarbeitet
+
+Die sieben übrigen Themen wurden in die gleiche Endlogik übertragen:
+
+```text
+WhatsApp: 11 Lektionen
+Facebook: 9 Lektionen
+Instagram: 10 Lektionen
+YouTube: 9 Lektionen
+Snapchat: 9 Lektionen
+TikTok: 10 Lektionen
+Hilfe bei Problemen: 10 Lektionen
+```
+
+Datenschutz bleibt mit 12 Lektionen erhalten.
