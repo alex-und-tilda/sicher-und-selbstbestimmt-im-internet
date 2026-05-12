@@ -3837,3 +3837,137 @@ button.action-card.testbogen,
 .nav.is-hidden {
   display: none !important;
 }
+
+
+/* ============================================================
+   Stärkerer Hover-/Fokus-Effekt für Themen-Kacheln
+   Pädagogische Logik:
+   - Grundfläche bleibt ruhig.
+   - App-/Themenfarbe erscheint als deutlicher Akzent.
+   - Text bleibt lesbar.
+   - Tastatur-Fokus wird genauso sichtbar wie Maus-Hover.
+   ============================================================ */
+
+.topic-card {
+  position: relative !important;
+  overflow: hidden !important;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease !important;
+}
+
+.topic-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: var(--topic-hover-bg, rgba(61, 184, 179, 0.10)) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 160ms ease !important;
+}
+
+.topic-card:hover,
+.topic-card:focus-visible {
+  transform: translateY(-4px) !important;
+  border-color: var(--topic-color, #00285A) !important;
+  box-shadow:
+    0 14px 28px rgba(0, 40, 90, 0.18),
+    0 0 0 5px var(--topic-ring, rgba(61, 184, 179, 0.24)) !important;
+}
+
+.topic-card:hover::before,
+.topic-card:focus-visible::before {
+  opacity: 1 !important;
+}
+
+.topic-card > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.topic-card .topic-icon {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease !important;
+}
+
+.topic-card:hover .topic-icon,
+.topic-card:focus-visible .topic-icon {
+  background: var(--topic-icon-bg, #FFFFFF) !important;
+  border-color: var(--topic-color, #00285A) !important;
+  transform: scale(1.06) !important;
+}
+
+/* Themenfarben: bewusst als Akzent, nicht als volle Kachelfläche */
+.topic-datenschutz {
+  --topic-color: #00285A;
+  --topic-ring: rgba(0, 40, 90, 0.24);
+  --topic-hover-bg: rgba(0, 40, 90, 0.08);
+  --topic-icon-bg: #EAF1F8;
+}
+
+.topic-whatsapp {
+  --topic-color: #25D366;
+  --topic-ring: rgba(37, 211, 102, 0.28);
+  --topic-hover-bg: rgba(37, 211, 102, 0.10);
+  --topic-icon-bg: #E9FBEF;
+}
+
+.topic-facebook {
+  --topic-color: #1877F2;
+  --topic-ring: rgba(24, 119, 242, 0.26);
+  --topic-hover-bg: rgba(24, 119, 242, 0.09);
+  --topic-icon-bg: #EAF3FF;
+}
+
+.topic-instagram {
+  --topic-color: #C13584;
+  --topic-ring: rgba(193, 53, 132, 0.24);
+  --topic-hover-bg: rgba(193, 53, 132, 0.09);
+  --topic-icon-bg: #FBEAF4;
+}
+
+.topic-youtube {
+  --topic-color: #FF0000;
+  --topic-ring: rgba(255, 0, 0, 0.22);
+  --topic-hover-bg: rgba(255, 0, 0, 0.08);
+  --topic-icon-bg: #FFECEC;
+}
+
+.topic-snapchat {
+  --topic-color: #C9A600;
+  --topic-ring: rgba(255, 252, 0, 0.38);
+  --topic-hover-bg: rgba(255, 252, 0, 0.16);
+  --topic-icon-bg: #FFFBD1;
+}
+
+.topic-tiktok {
+  --topic-color: #111111;
+  --topic-ring: rgba(37, 244, 238, 0.28);
+  --topic-hover-bg: rgba(37, 244, 238, 0.10);
+  --topic-icon-bg: #E8FFFF;
+}
+
+.topic-hilfe {
+  --topic-color: #C9541C;
+  --topic-ring: rgba(201, 84, 28, 0.28);
+  --topic-hover-bg: rgba(201, 84, 28, 0.10);
+  --topic-icon-bg: #FFF0E8;
+}
+
+/* Menschen, die weniger Bewegung eingestellt haben, bekommen keine Bewegung */
+@media (prefers-reduced-motion: reduce) {
+  .topic-card,
+  .topic-card::before,
+  .topic-card .topic-icon {
+    transition: none !important;
+  }
+
+  .topic-card:hover,
+  .topic-card:focus-visible {
+    transform: none !important;
+  }
+}

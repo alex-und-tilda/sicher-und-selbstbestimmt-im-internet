@@ -296,3 +296,27 @@ Zurück / Weiter
 ```
 
 Sie erscheinen erst nach dem Öffnen eines Themas oder Lernmoduls.
+
+
+## Hover-/Fokus-Effekt der Themen-Kacheln
+
+Die Themen-Kacheln haben jetzt eine stärkere visuelle Rückmeldung.
+
+Umsetzung:
+
+```text
+ruhige Grundfläche
+deutlicher Rand
+deutlicher Schatten
+leichter Farbhintergrund
+Farbe passend zum Thema / zur App
+Tastatur-Fokus genauso sichtbar wie Maus-Hover
+```
+
+Pädagogische Entscheidung:
+
+```text
+Die Kacheln werden nicht komplett bunt eingefärbt.
+Die App-Farben werden nur als Akzent genutzt.
+So bleibt die Seite ruhiger und besser lesbar.
+```

@@ -107,7 +107,7 @@ function renderMenu() {
   showNav(false, false);
 
   const cards = topics.map(topic => `
-    <button type="button" class="topic-card" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
+    <button type="button" class="topic-card topic-${escapeHtml(topic.id)}" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
       ${getIllustrationHtml(topic)}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
