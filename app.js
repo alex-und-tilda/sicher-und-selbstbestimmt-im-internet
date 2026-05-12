@@ -3,20 +3,12 @@ let speechRate = 0.45;
 
 function setSpeechRate(rate, label) {
   speechRate = rate;
-  try {
-    localStorage.setItem("lernplattform_speech_rate", String(rate));
-  } catch (e) {}
   liveRegion.textContent = `Vorlese-Geschwindigkeit: ${label}.`;
 }
 
 function loadSpeechRate() {
-  try {
-    const saved = localStorage.getItem("lernplattform_speech_rate");
-    if (saved) {
-      const parsed = Number(saved);
-      if (!Number.isNaN(parsed)) speechRate = parsed;
-    }
-  } catch (e) {}
+  // Keine lokale Speicherung der Vorlese-Einstellung.
+  return;
 }
 loadSpeechRate();
 
@@ -29,26 +21,16 @@ function getStorageKey(topicId) {
 }
 
 function saveProgress() {
-  if (!currentTopicId) return;
-  try {
-    localStorage.setItem(getStorageKey(currentTopicId), JSON.stringify({
-      topicId: currentTopicId,
-      mode: learningMode,
-      step: currentStep,
-      savedAt: new Date().toISOString()
-    }));
-  } catch (e) {
-    // Speichern ist freiwillig. Wenn der Browser es blockiert, läuft die Seite trotzdem.
-  }
+  // Datenschutz-Fix:
+  // Der Lernstand wird nicht gespeichert.
+  // Das ist wichtig bei gemeinsam genutzten Geräten.
+  return;
 }
 
 function loadProgress(topicId, mode) {
-  try {
-    const raw = localStorage.getItem(`lernplattform_progress_${topicId}_${mode}`);
-    return raw ? JSON.parse(raw) : null;
-  } catch (e) {
-    return null;
-  }
+  // Datenschutz-Fix:
+  // Es wird kein gespeicherter Lernstand geladen.
+  return null;
 }
 
 function getActiveLessons(topic) {
@@ -321,7 +303,7 @@ function renderSavedProgressHint(topic) {
     const total = topic.shortLessonIndexes ? topic.shortLessonIndexes.length : 0;
     parts.push(`
       <div class="continue-card">
-        <strong>Du hast zuletzt gelernt:</strong><br>
+        <strong></strong><br>
         ${escapeHtml(topic.title)} · Kurz lernen · Seite ${short.step + 1} von ${total}
         <button class="continue-button" onclick="continueTopic('${topic.id}', 'short')">Weiterlernen</button>
         <button class="continue-button secondary" onclick="startTopicMode('${topic.id}', 'short')">Von vorne starten</button>
@@ -333,7 +315,7 @@ function renderSavedProgressHint(topic) {
     const total = topic.lessons ? topic.lessons.length : 0;
     parts.push(`
       <div class="continue-card">
-        <strong>Du hast zuletzt gelernt:</strong><br>
+        <strong></strong><br>
         ${escapeHtml(topic.title)} · Ausführlich lernen · Seite ${full.step + 1} von ${total}
         <button class="continue-button" onclick="continueTopic('${topic.id}', 'full')">Weiterlernen</button>
         <button class="continue-button secondary" onclick="startTopicMode('${topic.id}', 'full')">Von vorne starten</button>
@@ -512,7 +494,7 @@ function renderCentralProgressBox() {
   const item = entries[0];
   return `
     <section class="central-progress-box">
-      <strong>Du hast zuletzt gelernt:</strong><br>
+      <strong></strong><br>
       ${escapeHtml(item.topic.title)} · ${escapeHtml(item.label)} · Seite ${item.step + 1} von ${item.total}
       <div class="central-progress-actions">
         <button class="continue-button" onclick="continueTopic('${item.topic.id}', '${item.mode}')">Weiterlernen</button>
@@ -711,7 +693,7 @@ function renderMenu() {
 
       <div class="privacy-note">
         Es wird kein Name gespeichert.
-        Der Lernstand wird nur auf diesem Gerät gemerkt.
+        Es wird kein Lernstand gespeichert.
       </div>
 
       <div class="simple-topic-grid">

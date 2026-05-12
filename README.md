@@ -138,3 +138,28 @@ Hinweis:
 
 Die CSS-Datei wurde nicht komplett ersetzt.
 Es wurde nur ein gezielter Layout-Fix ergänzt.
+
+
+## Datenschutz-Fix: keine Lernstand-Speicherung
+
+Die lokale Lernstand-Speicherung wurde entfernt.
+
+Grund:
+
+```text
+Viele Personen können gemeinsam ein iPad nutzen.
+Dann soll keine Person den Lernstand einer anderen Person sehen.
+```
+
+Geändert:
+
+```text
+kein localStorage für Lernstand
+kein automatisches Weiterlernen
+keine Weiterlernen-Box
+keine Speicherung der Vorlese-Geschwindigkeit
+```
+
+Hinweis:
+
+Die Plattform speichert weiterhin keinen Namen und fragt keine personenbezogenen Daten ab.

@@ -3638,3 +3638,15 @@ main {
     grid-template-columns: repeat(4, 1fr) !important;
   }
 }
+
+
+/* Datenschutz-Fix:
+   Kein lokaler Lernstand auf gemeinsam genutzten Geräten.
+   Eventuelle alte Weiterlernen-Boxen werden ausgeblendet.
+*/
+.continue-box,
+.resume-box,
+.last-progress,
+.progress-resume {
+  display: none !important;
+}
