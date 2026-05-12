@@ -5477,3 +5477,48 @@ button.action-card.testbogen,
   }
 }
 
+
+/* ============================================================
+   Optionales Tonfeedback
+   Standard: Töne aus.
+   Der Schalter ist klein, sichtbar und per Tastatur bedienbar.
+   ============================================================ */
+
+.sound-toggle-button {
+  border: 2px solid rgba(0, 40, 90, 0.24);
+  background: #ffffff;
+  color: #00285A;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1;
+  min-height: 42px;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0, 40, 90, 0.08);
+}
+
+.sound-toggle-button[aria-pressed="true"] {
+  background: #EAF1F8;
+  border-color: #00285A;
+}
+
+.sound-toggle-button:focus-visible {
+  outline: 4px solid rgba(61, 184, 179, 0.55);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    gap: 0.55rem;
+  }
+
+  .sound-toggle-button {
+    font-size: 0.78rem;
+    min-height: 38px;
+    padding: 0.45rem 0.6rem;
+  }
+}
+

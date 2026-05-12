@@ -16,6 +16,12 @@ let currentQuizIndex = 0;
 let quizScore = 0;
 let quizAnsweredCorrect = new Set();
 
+// Akustisches Feedback ist standardmäßig aus.
+// So gibt es keine unerwarteten Geräusche.
+// Es wird nichts gespeichert.
+let soundEnabled = false;
+let audioContext = null;
+
 const content = document.getElementById("content");
 const appTitle = document.getElementById("appTitle");
 const moduleLabel = document.getElementById("moduleLabel");
@@ -26,6 +32,7 @@ const progressFill = document.getElementById("progressFill");
 const backButton = document.getElementById("backButton");
 const nextButton = document.getElementById("nextButton");
 const homeButton = document.getElementById("homeButton");
+const soundToggleButton = document.getElementById("soundToggleButton");
 const liveRegion = document.getElementById("liveRegion");
 
 function escapeHtml(value) {
@@ -95,6 +102,103 @@ function showNav(showBack, showNext, nextText = "Weiter") {
 function announce(text) {
   if (liveRegion) liveRegion.textContent = text || "";
 }
+
+
+function updateSoundButton() {
+  if (!soundToggleButton) return;
+
+  soundToggleButton.textContent = soundEnabled ? "Töne an" : "Töne aus";
+  soundToggleButton.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+  soundToggleButton.setAttribute(
+    "aria-label",
+    soundEnabled ? "Töne ausschalten" : "Töne einschalten"
+  );
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  updateSoundButton();
+
+  if (soundEnabled) {
+    playSound("toggle");
+    announce("Töne sind eingeschaltet.");
+  } else {
+    announce("Töne sind ausgeschaltet.");
+  }
+}
+
+function getAudioContext() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return null;
+
+  if (!audioContext) {
+    audioContext = new AudioContextClass();
+  }
+
+  if (audioContext.state === "suspended") {
+    audioContext.resume().catch(() => {});
+  }
+
+  return audioContext;
+}
+
+function playTone(frequency, duration, volume, type = "sine", delay = 0) {
+  if (!soundEnabled) return;
+
+  try {
+    const context = getAudioContext();
+    if (!context) return;
+
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+
+    const startTime = context.currentTime + delay;
+    const endTime = startTime + duration;
+
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(frequency, startTime);
+
+    gain.gain.setValueAtTime(0.0001, startTime);
+    gain.gain.exponentialRampToValueAtTime(Math.max(volume, 0.0001), startTime + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, endTime);
+
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+
+    oscillator.start(startTime);
+    oscillator.stop(endTime + 0.02);
+  } catch (error) {
+    // Audio ist Zusatz. Wenn Audio nicht funktioniert,
+    // läuft die Lernplattform ohne Ton weiter.
+  }
+}
+
+function playSound(type) {
+  if (!soundEnabled) return;
+
+  if (type === "correct") {
+    playTone(660, 0.10, 0.035, "sine", 0);
+    playTone(880, 0.12, 0.030, "sine", 0.08);
+    return;
+  }
+
+  if (type === "wrong") {
+    playTone(220, 0.13, 0.025, "triangle", 0);
+    return;
+  }
+
+  if (type === "success") {
+    playTone(523.25, 0.10, 0.030, "sine", 0);
+    playTone(659.25, 0.10, 0.030, "sine", 0.09);
+    playTone(783.99, 0.16, 0.028, "sine", 0.18);
+    return;
+  }
+
+  if (type === "toggle") {
+    playTone(600, 0.08, 0.020, "sine", 0);
+  }
+}
+
 
 function renderLegalFooter() {
   const old = document.querySelector(".small-footer-notice");
@@ -572,6 +676,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
   const selectedText = answers[index] || "";
   const isCorrect = index === Number(correctIndex);
+  playSound(isCorrect ? "correct" : "wrong");
   const explanation = isCorrect
     ? (practice.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
     : (practice.feedbackWrong || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
@@ -694,6 +799,7 @@ function renderQuizFeedbackPage(index) {
   const correctIndex = Number(q.correctIndex ?? q.correct ?? 0);
   const selectedText = answers[index] || "";
   const isCorrect = index === correctIndex;
+  playSound(isCorrect ? "correct" : "wrong");
 
   if (isCorrect && !quizAnsweredCorrect.has(currentQuizIndex)) {
     quizScore += 1;
@@ -749,6 +855,7 @@ function renderQuizResult() {
   const questions = getQuizQuestions(topic);
   const total = questions.length || 1;
   const percent = Math.round((quizScore / total) * 100);
+  playSound("success");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -872,5 +979,9 @@ function handleHash() {
 backButton.addEventListener("click", goBack);
 nextButton.addEventListener("click", goNext);
 homeButton.addEventListener("click", renderMenu);
+if (soundToggleButton) {
+  soundToggleButton.addEventListener("click", toggleSound);
+  updateSoundButton();
+}
 
 document.addEventListener("DOMContentLoaded", handleHash);
