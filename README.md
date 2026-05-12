@@ -521,3 +521,31 @@ Merksatz-Box volle Breite
 normaler Zeilenumbruch
 keine Wort-für-Wort-Darstellung
 ```
+
+
+## Inhaltsaudit – didaktische Überarbeitung
+
+Alle 8 Themen wurden inhaltlich überarbeitet.
+
+Geprüft und verbessert:
+
+```text
+Modulstarts
+Lernseiten
+Beispiele
+Merksätze
+Übungen
+Quizfragen
+Merk-Karten
+Hilfefragen
+```
+
+Ziel:
+
+```text
+alltagsnäher
+verständlicher
+weniger unlogische Beispiele
+bessere Handlungssicherheit
+passender für Menschen mit Lern- und Verständnisschwierigkeiten
+```

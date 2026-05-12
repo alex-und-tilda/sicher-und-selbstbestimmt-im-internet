@@ -4756,3 +4756,26 @@ button.action-card.testbogen,
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
+
+
+/* Inhaltsüberarbeitung: Lernkarten ruhiger */
+.lesson-card h2 {
+  line-height: 1.15 !important;
+}
+
+.lesson-card p {
+  line-height: 1.5 !important;
+}
+
+/* Merksatz klar als ein Satz */
+.remember-box .remember-text,
+.access-box.remember p {
+  font-size: 1.05rem !important;
+  font-weight: 900 !important;
+}
+
+/* Doppelte Merksatz-Wirkung optisch reduzieren */
+.access-box.remember h3 {
+  font-size: 0.95rem !important;
+  margin-bottom: 8px !important;
+}
