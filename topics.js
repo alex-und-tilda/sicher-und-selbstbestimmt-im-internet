@@ -14,7 +14,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine App fragt nach deinem Passwort. Was machst du?",
@@ -25,7 +25,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bekommst einen Link zu einem Gewinnspiel. Was ist sicher?",
@@ -36,7 +36,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du vor dem Senden eines Fotos?",
@@ -47,7 +47,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher. Was ist gut?",
@@ -58,7 +58,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was gehört nicht in eine öffentliche Nachricht?",
@@ -69,7 +69,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist ein Passwort wichtig?",
@@ -80,7 +80,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Webseite fragt sehr viele Daten ab. Was machst du?",
@@ -91,7 +91,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer darf dein Passwort kennen?",
@@ -102,7 +102,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -113,7 +113,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -177,7 +177,7 @@ const topics = [
         "practice": {
           "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist sicher?",
           "answers": [
-            "Nicht eintragen und nachfragen.",
+            "Nicht eintragen.",
             "Adresse sofort eintragen.",
             "Zusätzlich mein Passwort eintragen."
           ],
@@ -203,7 +203,7 @@ const topics = [
         "practice": {
           "question": "Auf einem Foto sieht man einen Brief mit deiner Adresse. Was ist sicher?",
           "answers": [
-            "Foto nicht senden oder vorher unkenntlich machen.",
+            "Foto nicht senden oder unkenntlich machen.",
             "Foto sofort senden.",
             "Foto in eine Gruppe schicken."
           ],
@@ -223,7 +223,7 @@ const topics = [
         "practice": {
           "question": "Eine Nachricht sagt: Du hast gewonnen. Gib deine Adresse ein. Was ist sicher?",
           "answers": [
-            "Nicht sofort eintragen und nachfragen.",
+            "Nicht sofort eintragen.",
             "Adresse sofort schicken.",
             "Passwort mitschicken."
           ],
@@ -268,7 +268,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine App fragt nach deinem Passwort. Was machst du?",
@@ -279,7 +279,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bekommst einen Link zu einem Gewinnspiel. Was ist sicher?",
@@ -290,7 +290,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du vor dem Senden eines Fotos?",
@@ -301,7 +301,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher. Was ist gut?",
@@ -312,7 +312,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was gehört nicht in eine öffentliche Nachricht?",
@@ -323,7 +323,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist ein Passwort wichtig?",
@@ -334,7 +334,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Webseite fragt sehr viele Daten ab. Was machst du?",
@@ -345,7 +345,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer darf dein Passwort kennen?",
@@ -356,7 +356,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -367,7 +367,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -417,13 +417,13 @@ const topics = [
       {
         "question": "Eine fremde Nummer schreibt dir. Was machst du?",
         "answers": [
-          "Nicht sofort antworten und nachfragen.",
+          "Nicht sofort antworten.",
           "Sofort private Daten schicken.",
           "Sofort Geld senden."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Jemand fragt nach deinem WhatsApp-Code. Was machst du?",
@@ -434,18 +434,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Link kommt von einer unbekannten Nummer. Was ist sicher?",
         "answers": [
-          "Nicht sofort öffnen.",
+          "Nicht öffnen.",
           "Sofort öffnen.",
           "Weiterleiten."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist in einer Gruppe wichtig?",
@@ -456,7 +456,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du willst ein Foto von jemandem senden. Was machst du?",
@@ -467,18 +467,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Nachricht macht dir Angst. Was ist gut?",
         "answers": [
-          "Pause machen und Hilfe holen.",
+          "Pause machen.",
           "Allein weitermachen.",
           "Sofort antworten."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du mit einer stressigen Gruppe machen?",
@@ -489,7 +489,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein sicherer Umgang mit Sprachnachrichten?",
@@ -500,18 +500,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Nachricht sagt: sofort bezahlen. Was machst du?",
         "answers": [
-          "Nicht sofort handeln und nachfragen.",
+          "Nicht sofort handeln.",
           "Sofort bezahlen.",
           "Passwort schicken."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was hilft bei WhatsApp?",
@@ -522,7 +522,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -566,7 +566,7 @@ const topics = [
         "practice": {
           "question": "Eine fremde Nummer schreibt: Ich bin es. Schick mir Geld. Was ist sicher?",
           "answers": [
-            "Nicht antworten und eine vertraute Person fragen.",
+            "Nicht antworten.",
             "Geld schicken.",
             "Code schicken."
           ],
@@ -586,7 +586,7 @@ const topics = [
         "practice": {
           "question": "Eine fremde Nummer schickt einen Link. Was ist sicher?",
           "answers": [
-            "Nicht öffnen und nachfragen.",
+            "Nicht öffnen.",
             "Sofort öffnen.",
             "In eine Gruppe weiterleiten."
           ],
@@ -654,13 +654,13 @@ const topics = [
       {
         "question": "Eine fremde Nummer schreibt dir. Was machst du?",
         "answers": [
-          "Nicht sofort antworten und nachfragen.",
+          "Nicht sofort antworten.",
           "Sofort private Daten schicken.",
           "Sofort Geld senden."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Jemand fragt nach deinem WhatsApp-Code. Was machst du?",
@@ -671,18 +671,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Link kommt von einer unbekannten Nummer. Was ist sicher?",
         "answers": [
-          "Nicht sofort öffnen.",
+          "Nicht öffnen.",
           "Sofort öffnen.",
           "Weiterleiten."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist in einer Gruppe wichtig?",
@@ -693,7 +693,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du willst ein Foto von jemandem senden. Was machst du?",
@@ -704,18 +704,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Nachricht macht dir Angst. Was ist gut?",
         "answers": [
-          "Pause machen und Hilfe holen.",
+          "Pause machen.",
           "Allein weitermachen.",
           "Sofort antworten."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du mit einer stressigen Gruppe machen?",
@@ -726,7 +726,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein sicherer Umgang mit Sprachnachrichten?",
@@ -737,18 +737,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Nachricht sagt: sofort bezahlen. Was machst du?",
         "answers": [
-          "Nicht sofort handeln und nachfragen.",
+          "Nicht sofort handeln.",
           "Sofort bezahlen.",
           "Passwort schicken."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was hilft bei WhatsApp?",
@@ -759,7 +759,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -815,7 +815,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine unbekannte Person sendet eine Anfrage. Was ist sicher?",
@@ -826,7 +826,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Kommentaren wichtig?",
@@ -837,7 +837,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann privat sein?",
@@ -848,7 +848,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du wirst beleidigt. Was hilft?",
@@ -859,7 +859,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was bedeutet Privatsphäre?",
@@ -870,7 +870,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Foto zeigt andere Menschen. Was ist gut?",
@@ -881,7 +881,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind alte Beiträge wichtig?",
@@ -892,7 +892,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist sicher bei Profilangaben?",
@@ -903,7 +903,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -914,7 +914,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -959,7 +959,7 @@ const topics = [
         "practice": {
           "question": "Du willst schreiben, wo du wohnst. Was ist sicher?",
           "answers": [
-            "Nicht öffentlich posten und nachfragen.",
+            "Nicht öffentlich posten.",
             "Adresse öffentlich posten.",
             "Telefonnummer dazuschreiben."
           ],
@@ -991,7 +991,7 @@ const topics = [
         "practice": {
           "question": "Eine unbekannte Person will dein Facebook-Freund sein. Was ist sicher?",
           "answers": [
-            "Erst prüfen oder fragen.",
+            "Erst prüfen.",
             "Sofort annehmen.",
             "Private Daten schicken."
           ],
@@ -1046,7 +1046,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine unbekannte Person sendet eine Anfrage. Was ist sicher?",
@@ -1057,7 +1057,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Kommentaren wichtig?",
@@ -1068,7 +1068,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann privat sein?",
@@ -1079,7 +1079,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du wirst beleidigt. Was hilft?",
@@ -1090,7 +1090,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was bedeutet Privatsphäre?",
@@ -1101,7 +1101,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Foto zeigt andere Menschen. Was ist gut?",
@@ -1112,7 +1112,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind alte Beiträge wichtig?",
@@ -1123,7 +1123,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist sicher bei Profilangaben?",
@@ -1134,7 +1134,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -1145,7 +1145,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -1201,7 +1201,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist der Standort wichtig?",
@@ -1212,18 +1212,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine fremde Person fragt nach privaten Fotos. Was machst du?",
         "answers": [
-          "Nicht schicken und Hilfe holen.",
+          "Nicht schicken.",
           "Sofort schicken.",
           "Noch mehr Fotos schicken."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was können Menschen mit Stories machen?",
@@ -1234,7 +1234,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was hilft?",
@@ -1245,7 +1245,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind bearbeitete Bilder wichtig?",
@@ -1256,7 +1256,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein sicherer Merksatz?",
@@ -1267,7 +1267,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer darf deine privaten Fotos bekommen?",
@@ -1278,7 +1278,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher bei einem Profil. Was machst du?",
@@ -1289,7 +1289,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Instagram wichtig?",
@@ -1300,7 +1300,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -1333,7 +1333,7 @@ const topics = [
         "practice": {
           "question": "Du willst ein Foto posten. Im Hintergrund sieht man eine andere Person. Was ist sicher?",
           "answers": [
-            "Erst fragen oder ein anderes Foto nehmen.",
+            "Erst fragen oder anderes Foto nehmen.",
             "Einfach posten.",
             "Die Person markieren."
           ],
@@ -1375,7 +1375,7 @@ const topics = [
         "practice": {
           "question": "Eine fremde Person fragt nach privaten Fotos. Was ist sicher?",
           "answers": [
-            "Nicht schicken und Hilfe holen.",
+            "Nicht schicken.",
             "Foto schicken.",
             "Adresse mitschicken."
           ],
@@ -1430,7 +1430,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum ist der Standort wichtig?",
@@ -1441,18 +1441,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine fremde Person fragt nach privaten Fotos. Was machst du?",
         "answers": [
-          "Nicht schicken und Hilfe holen.",
+          "Nicht schicken.",
           "Sofort schicken.",
           "Noch mehr Fotos schicken."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was können Menschen mit Stories machen?",
@@ -1463,7 +1463,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was hilft?",
@@ -1474,7 +1474,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind bearbeitete Bilder wichtig?",
@@ -1485,7 +1485,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein sicherer Merksatz?",
@@ -1496,7 +1496,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer darf deine privaten Fotos bekommen?",
@@ -1507,7 +1507,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher bei einem Profil. Was machst du?",
@@ -1518,7 +1518,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Instagram wichtig?",
@@ -1529,7 +1529,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -1585,7 +1585,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was will Werbung oft?",
@@ -1596,7 +1596,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Autoplay startet immer weiter. Was hilft?",
@@ -1607,7 +1607,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Challenge ist gefährlich. Was machst du?",
@@ -1618,7 +1618,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Kommentare verletzen dich. Was ist gut?",
@@ -1629,7 +1629,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann YouTube gut leisten?",
@@ -1640,7 +1640,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Video macht Angst. Was kannst du tun?",
@@ -1651,7 +1651,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein sicherer Merksatz?",
@@ -1662,7 +1662,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du bei Kauf-Versprechen?",
@@ -1673,7 +1673,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind Pausen wichtig?",
@@ -1684,7 +1684,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -1728,7 +1728,7 @@ const topics = [
         "practice": {
           "question": "Ein Video sagt: Kauf das sofort. Was ist sicher?",
           "answers": [
-            "Nicht sofort kaufen und nachfragen.",
+            "Nicht sofort kaufen.",
             "Sofort kaufen.",
             "Kontodaten eingeben."
           ],
@@ -1813,7 +1813,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was will Werbung oft?",
@@ -1824,7 +1824,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Autoplay startet immer weiter. Was hilft?",
@@ -1835,7 +1835,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine Challenge ist gefährlich. Was machst du?",
@@ -1846,7 +1846,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Kommentare verletzen dich. Was ist gut?",
@@ -1857,7 +1857,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann YouTube gut leisten?",
@@ -1868,7 +1868,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Video macht Angst. Was kannst du tun?",
@@ -1879,7 +1879,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein sicherer Merksatz?",
@@ -1890,7 +1890,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du bei Kauf-Versprechen?",
@@ -1901,7 +1901,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum sind Pausen wichtig?",
@@ -1912,7 +1912,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -1968,29 +1968,29 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine fremde Person fragt nach deinem Standort. Was machst du?",
         "answers": [
-          "Nicht schicken und Hilfe holen.",
+          "Nicht schicken.",
           "Sofort schicken.",
           "Adresse senden."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Jemand macht Druck wegen einem Bild. Was ist sicher?",
         "answers": [
-          "Nein sagen und Hilfe holen.",
+          "Nein sagen.",
           "Bild schicken.",
           "Noch mehr schicken."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Screenshots wichtig?",
@@ -2001,7 +2001,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer sollte deinen Standort sehen?",
@@ -2012,7 +2012,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein Warnzeichen?",
@@ -2023,7 +2023,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher bei einem Kontakt. Was hilft?",
@@ -2034,7 +2034,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du sagen?",
@@ -2045,7 +2045,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -2056,7 +2056,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du bei komischen Nachrichten?",
@@ -2067,7 +2067,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -2095,7 +2095,7 @@ const topics = [
         "practice": {
           "question": "Du willst ein sehr privates Bild senden. Was ist sicher?",
           "answers": [
-            "Nicht senden und Hilfe holen, wenn Druck da ist.",
+            "Nicht senden.",
             "Senden, weil es verschwindet.",
             "An mehrere Personen senden."
           ],
@@ -2126,7 +2126,7 @@ const topics = [
         "practice": {
           "question": "Eine fremde Person fragt: Wo bist du gerade? Was ist sicher?",
           "answers": [
-            "Standort nicht schicken und nachfragen.",
+            "Standort nicht schicken.",
             "Standort schicken.",
             "Adresse schicken."
           ],
@@ -2201,29 +2201,29 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine fremde Person fragt nach deinem Standort. Was machst du?",
         "answers": [
-          "Nicht schicken und Hilfe holen.",
+          "Nicht schicken.",
           "Sofort schicken.",
           "Adresse senden."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Jemand macht Druck wegen einem Bild. Was ist sicher?",
         "answers": [
-          "Nein sagen und Hilfe holen.",
+          "Nein sagen.",
           "Bild schicken.",
           "Noch mehr schicken."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist bei Screenshots wichtig?",
@@ -2234,7 +2234,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer sollte deinen Standort sehen?",
@@ -2245,7 +2245,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein Warnzeichen?",
@@ -2256,7 +2256,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du bist unsicher bei einem Kontakt. Was hilft?",
@@ -2267,7 +2267,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du sagen?",
@@ -2278,7 +2278,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -2289,7 +2289,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du bei komischen Nachrichten?",
@@ -2300,7 +2300,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -2356,7 +2356,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum zeigt TikTok ähnliche Videos?",
@@ -2367,7 +2367,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Trend ist gefährlich. Was machst du?",
@@ -2378,18 +2378,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine fremde Person fragt nach deiner Adresse. Was ist sicher?",
         "answers": [
-          "Nicht schicken und Hilfe holen.",
+          "Nicht schicken.",
           "Adresse schicken.",
           "In Kommentare schreiben."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du schaust länger als geplant. Was hilft?",
@@ -2400,7 +2400,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was ist gut?",
@@ -2411,7 +2411,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Vor dem Posten eines Videos prüfst du:",
@@ -2422,7 +2422,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -2433,18 +2433,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du bei Druck machen?",
         "answers": [
-          "Nein sagen und Hilfe holen.",
+          "Nein sagen.",
           "Immer mitmachen.",
           "Private Daten geben."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was schützt dich?",
@@ -2455,7 +2455,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -2488,7 +2488,7 @@ const topics = [
         "practice": {
           "question": "Ein Trend sieht gefährlich aus. Freunde sagen: Mach mit. Was ist sicher?",
           "answers": [
-            "Nein sagen und Hilfe holen.",
+            "Nein sagen.",
             "Mitmachen.",
             "Andere überreden."
           ],
@@ -2509,7 +2509,7 @@ const topics = [
         "practice": {
           "question": "TikTok zeigt dir viele Videos, die dich traurig machen. Was hilft?",
           "answers": [
-            "Pause machen und mit jemandem sprechen.",
+            "Pause machen.",
             "Immer weiter schauen.",
             "Private Daten schicken."
           ],
@@ -2538,7 +2538,7 @@ const topics = [
         "practice": {
           "question": "Eine fremde Person fragt nach deiner Adresse. Was ist sicher?",
           "answers": [
-            "Nicht schicken und Hilfe holen.",
+            "Nicht schicken.",
             "Adresse schicken.",
             "Passwort mitschicken."
           ],
@@ -2593,7 +2593,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum zeigt TikTok ähnliche Videos?",
@@ -2604,7 +2604,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Trend ist gefährlich. Was machst du?",
@@ -2615,18 +2615,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Eine fremde Person fragt nach deiner Adresse. Was ist sicher?",
         "answers": [
-          "Nicht schicken und Hilfe holen.",
+          "Nicht schicken.",
           "Adresse schicken.",
           "In Kommentare schreiben."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du schaust länger als geplant. Was hilft?",
@@ -2637,7 +2637,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was ist gut?",
@@ -2648,7 +2648,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Vor dem Posten eines Videos prüfst du:",
@@ -2659,7 +2659,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -2670,18 +2670,18 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was darfst du bei Druck machen?",
         "answers": [
-          "Nein sagen und Hilfe holen.",
+          "Nein sagen.",
           "Immer mitmachen.",
           "Private Daten geben."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was schützt dich?",
@@ -2692,7 +2692,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [
@@ -2748,7 +2748,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum nicht sofort löschen?",
@@ -2759,7 +2759,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Jemand macht Druck. Was ist sicher?",
@@ -2770,7 +2770,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer kann helfen?",
@@ -2781,7 +2781,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann ein Screenshot sein?",
@@ -2792,7 +2792,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du hast Angst. Was machst du?",
@@ -2803,7 +2803,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was bedeutet Stopp-Regel?",
@@ -2814,7 +2814,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du mit einer beleidigenden Nachricht?",
@@ -2825,7 +2825,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -2836,7 +2836,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du verstehst eine Nachricht nicht. Was hilft?",
@@ -2847,7 +2847,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "lessons": [
@@ -2875,7 +2875,7 @@ const topics = [
         "practice": {
           "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
           "answers": [
-            "Stopp machen und Hilfe holen.",
+            "Stopp machen.",
             "Sofort antworten.",
             "Alles allein klären."
           ],
@@ -2896,7 +2896,7 @@ const topics = [
         "practice": {
           "question": "Du bekommst eine beleidigende Nachricht. Was ist sicher?",
           "answers": [
-            "Nicht sofort löschen und Hilfe holen.",
+            "Nicht sofort löschen.",
             "Sofort löschen und nichts sagen.",
             "Zurück beleidigen."
           ],
@@ -2983,7 +2983,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Warum nicht sofort löschen?",
@@ -2994,7 +2994,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Jemand macht Druck. Was ist sicher?",
@@ -3005,7 +3005,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Wer kann helfen?",
@@ -3016,7 +3016,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was kann ein Screenshot sein?",
@@ -3027,7 +3027,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du hast Angst. Was machst du?",
@@ -3038,7 +3038,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was bedeutet Stopp-Regel?",
@@ -3049,7 +3049,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was machst du mit einer beleidigenden Nachricht?",
@@ -3060,7 +3060,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Was ist ein guter Merksatz?",
@@ -3071,7 +3071,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       },
       {
         "question": "Du verstehst eine Nachricht nicht. Was hilft?",
@@ -3082,7 +3082,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Richtig. Das ist eine sichere Entscheidung.",
-        "feedbackWrong": "Das ist nicht die sicherste Antwort. Frage eine Person, der du vertraust."
+        "feedbackWrong": "Das ist nicht die sicherste Antwort. Nutze den Hilfe-Button, wenn du unsicher bist."
       }
     ],
     "certificateGoals": [

@@ -4884,3 +4884,65 @@ button.action-card.testbogen,
   border-color: #3DB8B3 !important;
   outline: 4px solid rgba(61, 184, 179, 0.25) !important;
 }
+
+
+/* ============================================================
+   Unsicher-Button getrennt von Antwortmöglichkeiten
+   Didaktische Logik:
+   - Antworten gehören zur Aufgabe.
+   - Hilfe holen ist eine eigene Lernunterstützung.
+   ============================================================ */
+
+.task-help-area {
+  margin: 14px 0 8px 0 !important;
+}
+
+.task-help-button {
+  min-height: 42px !important;
+  padding: 8px 14px !important;
+  border-radius: 999px !important;
+  border: 2px solid #00285A !important;
+  background: #FFFFFF !important;
+  color: #00285A !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+.task-help-button:hover,
+.task-help-button:focus-visible {
+  background: #EAF1F8 !important;
+  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
+  outline-offset: 2px !important;
+}
+
+.task-help-panel {
+  margin-top: 12px !important;
+  padding: 16px 18px !important;
+  border: 3px solid #3DB8B3 !important;
+  border-radius: 18px !important;
+  background: #F2FBFA !important;
+}
+
+.task-help-panel[hidden] {
+  display: none !important;
+}
+
+.task-help-panel h3 {
+  margin: 0 0 8px 0 !important;
+  color: #00285A !important;
+}
+
+.task-help-panel p {
+  margin: 0 0 8px 0 !important;
+  font-weight: 800 !important;
+}
+
+.task-help-panel ul {
+  margin: 0 !important;
+  padding-left: 22px !important;
+}
+
+.task-help-panel li {
+  margin: 7px 0 !important;
+  line-height: 1.35 !important;
+}

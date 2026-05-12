@@ -592,3 +592,26 @@ mehr Alltagstransfer
 weniger reine Regelsammlung
 bessere Entscheidungsübung
 ```
+
+
+## Unsicher-Button getrennt von Antworten
+
+Die Hilfe-Logik wurde von den Antwortmöglichkeiten getrennt.
+
+Neue Logik:
+
+```text
+Antwortmöglichkeiten beantworten die Aufgabe.
+Der Button „Ich bin unsicher“ hilft, wenn man nicht weiterkommt.
+```
+
+Der Hilfe-Button erklärt:
+
+```text
+Frage noch einmal langsam lesen.
+Antworten vergleichen.
+Überlegen, welche Antwort besser schützt.
+Pause machen.
+Eine Person fragen, der man vertraut.
+Sagen: Bitte erkläre mir das einfacher.
+```

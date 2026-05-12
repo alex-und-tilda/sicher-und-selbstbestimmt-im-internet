@@ -416,6 +416,52 @@ function renderLesson() {
   renderLegalFooter();
 }
 
+
+function toggleTaskHelp() {
+  const panel = document.getElementById("taskHelpPanel");
+  const button = document.querySelector(".task-help-button");
+  if (!panel) return;
+
+  const isHidden = panel.hasAttribute("hidden");
+
+  if (isHidden) {
+    panel.removeAttribute("hidden");
+    if (button) {
+      button.setAttribute("aria-expanded", "true");
+      button.textContent = "Hilfe ausblenden";
+    }
+  } else {
+    panel.setAttribute("hidden", "");
+    if (button) {
+      button.setAttribute("aria-expanded", "false");
+      button.textContent = "Ich bin unsicher";
+    }
+  }
+}
+
+function buildTaskHelpBox() {
+  return `
+    <div class="task-help-area">
+      <button type="button" class="task-help-button" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
+        Ich bin unsicher
+      </button>
+
+      <div id="taskHelpPanel" class="task-help-panel" hidden>
+        <h3>Du bist unsicher?</h3>
+        <p>Du musst nicht raten.</p>
+        <ul>
+          <li>Lies die Frage noch einmal langsam.</li>
+          <li>Schau dir beide Antworten an.</li>
+          <li>Überlege: Welche Antwort schützt mich besser?</li>
+          <li>Du kannst eine Pause machen.</li>
+          <li>Du kannst eine Person fragen, der du vertraust.</li>
+          <li>Du kannst sagen: Bitte erkläre mir das einfacher.</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
 function buildPractice(practice) {
   const question = practice.question || practice.title || "";
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
@@ -433,6 +479,7 @@ function buildPractice(practice) {
       <h3>Übung</h3>
       <p class="practice-question"><strong>${escapeHtml(question)}</strong></p>
       <div class="answers">${answerHtml}</div>
+      ${buildTaskHelpBox()}
       <p id="practiceFeedback" class="feedback" aria-live="polite"></p>
     </div>
   `;
@@ -445,7 +492,7 @@ function showPracticeFeedback(index, correctIndex) {
     feedback.textContent = "Das ist eine gute Entscheidung.";
     feedback.className = "feedback is-correct";
   } else {
-    feedback.textContent = "Das ist unsicher. Frage eine Person, der du vertraust.";
+    feedback.textContent = "Das ist unsicher. Nutze den Hilfe-Button, wenn du nicht weiterkommst.";
     feedback.className = "feedback is-wrong";
   }
 }
@@ -506,6 +553,7 @@ function renderQuizQuestion() {
       <h2>Quiz</h2>
       <p class="quiz-question">${escapeHtml(q.question || "")}</p>
       <div class="answers">${answerHtml}</div>
+      ${buildTaskHelpBox()}
       <p id="quizFeedback" class="feedback" aria-live="polite"></p>
     </article>
   `;
