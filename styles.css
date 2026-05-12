@@ -4660,3 +4660,22 @@ button.action-card.testbogen,
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* Korrektur: Lernweg-Überschrift nur einmal */
+.learning-path-heading {
+  max-width: 1180px !important;
+  margin: 24px auto 12px auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.learning-path-heading h3 {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+  color: #1F1F1F !important;
+}

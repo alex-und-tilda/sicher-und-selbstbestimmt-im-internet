@@ -491,3 +491,20 @@ keine Lernstand-Speicherung
 kein Testbogen
 kein E-Mail-Versand
 ```
+
+
+## Korrektur: doppelte Lernweg-Überschrift
+
+Der Text
+
+```text
+Wie möchtest du lernen?
+```
+
+wurde in der Themenauswahl doppelt angezeigt.
+
+Korrektur:
+
+```text
+Die Überschrift wird nur noch einmal direkt über den vier Lernweg-Kacheln angezeigt.
+```

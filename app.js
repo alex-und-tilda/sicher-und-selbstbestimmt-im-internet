@@ -228,12 +228,7 @@ function renderTopicChoice(topicId) {
         </div>
         <p>${escapeHtml(topic.desc || "")}</p>
       </article>
-
-      <div class="learning-path-heading">
-        <h3>Wie möchtest du lernen?</h3>
-      </div>
-
-      <div class="learning-path-heading">
+<div class="learning-path-heading">
         <h3>Wie möchtest du lernen?</h3>
       </div>
 
