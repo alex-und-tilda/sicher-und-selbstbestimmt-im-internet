@@ -213,20 +213,14 @@ Sicher und selbstbestimmt im Internet
 ```
 
 
-## Sicherer Minimal-Fix Vorlesen
+## Rollback: stabil ohne neue Vorlese-Logik
 
-Diese Version ist ein Rollback auf die letzte stabile Fassung.
-
-Geändert:
+Diese Version entfernt den letzten Vorlesen-Umbau vollständig.
 
 ```text
-alte Vorlese-Buttons werden ausgeblendet
-ein kleiner zentraler Button „Anhören“ wird sicher eingefügt
-keine Render-Templates wurden verändert
-Vorlesen liest nur sichtbare Lerninhalte aus der aktuellen Ansicht
-Geschwindigkeit: 80 Prozent
+Keine neue Vorlese-Funktion.
+Keine neue Vorlesen-Schaltfläche.
+Keine Änderungen an Renderlogik, Lernkarten oder Quiz.
 ```
 
-Wichtig:
-
-Diese Version vermeidet die Fehler aus dem vorherigen Umbau.
+Bitte diese Version hochladen, wenn die Seite nach dem Vorlesen-Umbau nicht mehr funktioniert.
