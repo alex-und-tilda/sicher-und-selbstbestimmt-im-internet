@@ -668,3 +668,21 @@ Button: Nochmal versuchen
 ```
 
 Der Button „Ich bin unsicher“ bleibt als eigene Hilfe erhalten.
+
+
+## Profi-Logik-Audit
+
+Diese Version wurde tiefer geprüft und bereinigt.
+
+Korrigiert:
+
+```text
+keine Merksätze auf Startseiten
+keine zusätzliche Merksatz-Box auf Zusammenfassungsseiten
+keine doppelte Merksatz-Logik
+Übungen mit eigener Rückmeldeseite
+Quiz mit eigener Rückmeldeseite
+richtige Antwort: Erklärung + Weiter
+falsche Antwort: Erklärung + Nochmal versuchen
+Unsicher-Button bleibt getrennt
+```

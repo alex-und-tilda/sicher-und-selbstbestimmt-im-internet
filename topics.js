@@ -112,9 +112,9 @@ const topics = [
         "module": "Start",
         "icon": "lock",
         "text": [
-          "Hier lernst du: Was sind private Daten?",
-          "Du lernst: Welche Daten soll ich schützen?",
-          "Du lernst: Wann muss ich vorsichtig sein?"
+          "Hier lernst du etwas über Datenschutz.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -157,7 +157,7 @@ const topics = [
           "Du weißt nicht warum.",
           "Dann musst du nicht sofort etwas eintragen."
         ],
-        "remember": "Ich trage private Daten nicht einfach ein.",
+        "remember": "Ich gebe meine Adresse nicht einfach weiter.",
         "examples": [
           "Eine Spiele-App fragt nach deiner Adresse.",
           "Ein Gewinnspiel fragt nach deinem Geburtstag."
@@ -168,7 +168,9 @@ const topics = [
             "Ich trage die Adresse ein.",
             "Ich trage die Adresse nicht ein."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat. Du weißt nicht, wofür die App sie braucht.",
+          "feedbackCorrect": "Das ist sicher. Du schützt deine Adresse. Du gibst sie nicht einfach weiter."
         }
       },
       {
@@ -191,7 +193,9 @@ const topics = [
             "Ich schicke das Foto sofort.",
             "Ich schicke das Foto nicht so weiter."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Auf dem Foto ist eine private Adresse zu sehen.",
+          "feedbackCorrect": "Das ist sicher. Du schützt private Informationen auf dem Foto."
         }
       },
       {
@@ -203,14 +207,16 @@ const topics = [
           "Die Nachricht macht vielleicht Druck.",
           "Dann ist Vorsicht wichtig."
         ],
-        "remember": "Ich mache langsam, wenn eine Nachricht komisch ist.",
+        "remember": "Ich mache langsam, wenn eine Nachricht Druck macht.",
         "practice": {
           "question": "Eine Nachricht sagt: Gib deine Adresse ein. Was ist besser?",
           "answers": [
             "Ich gebe die Adresse ein.",
             "Ich gebe die Adresse nicht ein."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Schau dir die Situation noch einmal an.",
+          "feedbackCorrect": "Das ist sicher. Du hast gut entschieden."
         }
       },
       {
@@ -226,10 +232,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "Datenschutz",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen dir."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Mein Passwort bleibt geheim.",
@@ -493,9 +499,9 @@ const topics = [
         "module": "Start",
         "icon": "message",
         "text": [
-          "Hier lernst du: Wie nutze ich WhatsApp sicher?",
-          "Du lernst etwas über fremde Nummern.",
-          "Du lernst etwas über Links und Codes."
+          "Hier lernst du etwas über WhatsApp.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -518,7 +524,7 @@ const topics = [
           "Du weißt nicht, wer das ist.",
           "Dann antwortest du nicht sofort."
         ],
-        "remember": "Bei fremden Nummern mache ich langsam.",
+        "remember": "Ich antworte fremden Nummern nicht sofort.",
         "examples": [
           "Hallo. Ich habe eine neue Nummer.",
           "Schick mir bitte Geld."
@@ -529,7 +535,9 @@ const topics = [
             "Ich schicke Geld.",
             "Ich schicke kein Geld."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Fremde Nummern können täuschen. Es kann ein Betrug sein.",
+          "feedbackCorrect": "Das ist sicher. Du gibst kein Geld an eine fremde Nummer."
         }
       },
       {
@@ -541,14 +549,16 @@ const topics = [
           "Manche Links sind gefährlich.",
           "Du klickst nicht sofort auf unbekannte Links."
         ],
-        "remember": "Ich klicke nicht sofort auf unbekannte Links.",
+        "remember": "Ich öffne unbekannte Links nicht sofort.",
         "practice": {
           "question": "Eine fremde Nummer schickt einen Link. Was ist besser?",
           "answers": [
             "Ich öffne den Link.",
             "Ich öffne den Link nicht."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Ein unbekannter Link kann gefährlich sein.",
+          "feedbackCorrect": "Das ist sicher. Du öffnest den unbekannten Link nicht."
         }
       },
       {
@@ -560,14 +570,16 @@ const topics = [
           "Der Code schützt dein WhatsApp.",
           "Du gibst den Code nicht weiter."
         ],
-        "remember": "Ich gebe meinen WhatsApp-Code nicht weiter.",
+        "remember": "Mein WhatsApp-Code bleibt geheim.",
         "practice": {
           "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
           "answers": [
             "Ich schicke den Code.",
             "Ich schicke den Code nicht."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Mit dem Code kann jemand dein WhatsApp übernehmen.",
+          "feedbackCorrect": "Das ist sicher. Dein WhatsApp-Code bleibt geheim."
         }
       },
       {
@@ -594,10 +606,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "WhatsApp",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen bei WhatsApp."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Fremde Nummern prüfen.",
@@ -861,9 +873,9 @@ const topics = [
         "module": "Start",
         "icon": "message",
         "text": [
-          "Hier lernst du: Was kann man auf Facebook sehen?",
-          "Du lernst etwas über Beiträge.",
-          "Du lernst etwas über Freundschafts-Anfragen."
+          "Hier lernst du etwas über Facebook.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -892,14 +904,16 @@ const topics = [
           "Viele Menschen können den Beitrag sehen.",
           "Darum prüfst du vorher, was du schreibst."
         ],
-        "remember": "Ich prüfe einen Beitrag vor dem Posten.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "practice": {
           "question": "Du willst deine Adresse posten. Was ist besser?",
           "answers": [
             "Ich poste die Adresse.",
             "Ich poste die Adresse nicht."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat und soll nicht öffentlich sein.",
+          "feedbackCorrect": "Das ist sicher. Du postest deine Adresse nicht öffentlich."
         }
       },
       {
@@ -922,14 +936,16 @@ const topics = [
           "Du weißt nicht, wer das ist.",
           "Du musst die Anfrage nicht annehmen."
         ],
-        "remember": "Ich nehme nicht jede Anfrage an.",
+        "remember": "Ich nehme unbekannte Anfragen nicht sofort an.",
         "practice": {
           "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
           "answers": [
             "Ich nehme sie sofort an.",
             "Ich prüfe die Anfrage."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer die Person ist.",
+          "feedbackCorrect": "Das ist sicher. Du prüfst die Anfrage zuerst."
         }
       },
       {
@@ -956,10 +972,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "Facebook",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen bei Facebook."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Nicht alles öffentlich machen.",
@@ -1223,9 +1239,9 @@ const topics = [
         "module": "Start",
         "icon": "photo",
         "text": [
-          "Hier lernst du: Wie teile ich Fotos sicher?",
-          "Du lernst etwas über Nachrichten.",
-          "Du lernst etwas über deinen Standort."
+          "Hier lernst du etwas über Instagram.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -1237,14 +1253,16 @@ const topics = [
           "Andere Menschen können das Foto sehen.",
           "Manchmal sieht man mehr, als man denkt."
         ],
-        "remember": "Ich prüfe Fotos vor dem Posten.",
+        "remember": "Ich prüfe, was auf dem Foto zu sehen ist.",
         "practice": {
           "question": "Im Hintergrund sieht man eine andere Person. Was ist besser?",
           "answers": [
             "Ich poste das Foto einfach.",
             "Ich frage erst oder nehme ein anderes Foto."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen nicht einfach auf deinem Foto erscheinen.",
+          "feedbackCorrect": "Das ist sicher. Du achtest auf andere Personen auf dem Foto."
         }
       },
       {
@@ -1267,14 +1285,16 @@ const topics = [
           "Nicht jeder muss wissen, wo du bist.",
           "Du teilst deinen Standort nicht einfach."
         ],
-        "remember": "Ich schütze meinen Standort.",
+        "remember": "Ich teile meinen Standort nicht einfach.",
         "practice": {
           "question": "Eine App will deinen Standort zeigen. Was ist besser?",
           "answers": [
             "Ich teile den Standort immer.",
             "Ich teile den Standort nicht einfach."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Andere Menschen können sehen, wo du bist.",
+          "feedbackCorrect": "Das ist sicher. Du teilst deinen Standort nicht einfach."
         }
       },
       {
@@ -1293,7 +1313,9 @@ const topics = [
             "Ich schicke private Fotos.",
             "Ich schicke keine privaten Fotos."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Private Fotos gehören nicht an fremde Personen.",
+          "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Fotos."
         }
       },
       {
@@ -1320,10 +1342,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "Instagram",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen bei Instagram."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Fotos prüfen.",
@@ -1587,9 +1609,9 @@ const topics = [
         "module": "Start",
         "icon": "help",
         "text": [
-          "Hier lernst du: Wie prüfe ich Videos?",
-          "Du lernst etwas über Werbung.",
-          "Du lernst etwas über Pausen."
+          "Hier lernst du etwas über YouTube.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -1619,7 +1641,9 @@ const topics = [
             "Ich kaufe sofort.",
             "Ich kaufe nicht sofort."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Werbung kann Druck machen. Du musst nicht sofort kaufen.",
+          "feedbackCorrect": "Das ist sicher. Du kaufst nicht sofort aus einem Video."
         }
       },
       {
@@ -1642,14 +1666,16 @@ const topics = [
           "Dann schaut man oft länger.",
           "Du darfst stoppen und Pause machen."
         ],
-        "remember": "Ich darf Pause machen.",
+        "remember": "Ich darf Videos stoppen und Pause machen.",
         "practice": {
           "question": "YouTube startet immer weiter. Du bist müde. Was ist besser?",
           "answers": [
             "Ich schaue immer weiter.",
             "Ich stoppe und mache Pause."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht gut für dich. Wenn du müde bist, brauchst du eine Pause.",
+          "feedbackCorrect": "Das ist sicher. Du stoppst die Videos und machst Pause."
         }
       },
       {
@@ -1676,10 +1702,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "YouTube",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen bei YouTube."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Videos prüfen.",
@@ -1943,9 +1969,9 @@ const topics = [
         "module": "Start",
         "icon": "photo",
         "text": [
-          "Hier lernst du: Was ist bei Snapchat wichtig?",
-          "Du lernst etwas über Bilder.",
-          "Du lernst etwas über deinen Standort."
+          "Hier lernst du etwas über Snapchat.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -1964,7 +1990,9 @@ const topics = [
             "Ich sende das Bild.",
             "Ich sende das Bild nicht."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Ein Bild kann gespeichert werden.",
+          "feedbackCorrect": "Das ist sicher. Du sendest kein sehr privates Bild."
         }
       },
       {
@@ -1994,7 +2022,9 @@ const topics = [
             "Ich schicke meinen Standort.",
             "Ich schicke meinen Standort nicht."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Andere Menschen können sehen, wo du bist.",
+          "feedbackCorrect": "Das ist sicher. Du teilst deinen Standort nicht einfach."
         }
       },
       {
@@ -2032,10 +2062,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "Snapchat",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen bei Snapchat."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Bilder können gespeichert werden.",
@@ -2299,9 +2329,9 @@ const topics = [
         "module": "Start",
         "icon": "help",
         "text": [
-          "Hier lernst du: Wie nutze ich TikTok sicher?",
-          "Du lernst etwas über Trends.",
-          "Du lernst etwas über Pausen."
+          "Hier lernst du etwas über TikTok.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -2320,7 +2350,9 @@ const topics = [
             "Ich mache mit.",
             "Ich mache nicht mit."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Gefährliche Trends können dich verletzen.",
+          "feedbackCorrect": "Das ist sicher. Du machst bei gefährlichen Trends nicht mit."
         }
       },
       {
@@ -2339,7 +2371,9 @@ const topics = [
             "Ich schaue immer weiter.",
             "Ich mache Pause."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das tut dir vielleicht nicht gut. Viele traurige Videos können deine Stimmung schlechter machen.",
+          "feedbackCorrect": "Das ist sicher. Eine Pause kann dir helfen."
         }
       },
       {
@@ -2369,7 +2403,9 @@ const topics = [
             "Ich schicke die Adresse.",
             "Ich schicke die Adresse nicht."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Private Fotos gehören nicht an fremde Personen.",
+          "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Fotos."
         }
       },
       {
@@ -2396,10 +2432,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "TikTok",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen bei TikTok."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Gefährliche Trends nicht nachmachen.",
@@ -2663,9 +2699,9 @@ const topics = [
         "module": "Start",
         "icon": "help",
         "text": [
-          "Hier lernst du: Was tue ich bei Problemen im Internet?",
-          "Zum Beispiel bei Druck, Angst oder Beleidigungen.",
-          "Du lernst einfache Schritte."
+          "Hier lernst du etwas über Hilfe bei Problemen.",
+          "Du übst sichere Entscheidungen.",
+          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -2677,14 +2713,16 @@ const topics = [
           "Du willst vielleicht sofort antworten.",
           "Dann hilft die Stopp-Regel."
         ],
-        "remember": "Stopp. Nicht sofort reagieren.",
+        "remember": "Stopp. Ich reagiere nicht sofort.",
         "practice": {
           "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
           "answers": [
             "Ich antworte sofort.",
             "Ich mache Stopp."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Bei Angst oder Stress ist sofort antworten nicht gut.",
+          "feedbackCorrect": "Das ist sicher. Du machst erst Stopp."
         }
       },
       {
@@ -2696,14 +2734,16 @@ const topics = [
           "Du willst die Nachricht vielleicht löschen.",
           "Aber die Nachricht kann wichtig sein."
         ],
-        "remember": "Ich lösche nicht sofort.",
+        "remember": "Ich zeige die Nachricht, bevor ich sie lösche.",
         "practice": {
           "question": "Du bekommst eine beleidigende Nachricht. Was ist besser?",
           "answers": [
             "Sofort löschen.",
             "Nicht sofort löschen."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht gut. Die Nachricht kann wichtig sein, wenn du Unterstützung holst.",
+          "feedbackCorrect": "Das ist sicher. Du löschst nicht sofort."
         }
       },
       {
@@ -2744,7 +2784,9 @@ const topics = [
             "Ich bleibe allein damit.",
             "Ich hole Unterstützung."
           ],
-          "correctIndex": 1
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht gut. Bei Druck sollst du nicht allein bleiben.",
+          "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein mit dem Druck."
         }
       },
       {
@@ -2760,10 +2802,10 @@ const topics = [
       },
       {
         "title": "Das merke ich mir",
-        "module": "Hilfe",
+        "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Diese Regeln helfen bei Problemen im Internet."
+          "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
           "Stopp machen.",

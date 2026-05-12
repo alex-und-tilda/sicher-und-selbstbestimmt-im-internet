@@ -419,6 +419,42 @@ function renderLesson() {
 }
 
 
+
+
+
+function getPracticeFeedbackText(isCorrect) {
+  if (isCorrect) {
+    return {
+      title: "Das ist eine sichere Antwort.",
+      text: "Du hast gut entschieden. Diese Antwort schützt dich besser.",
+      kind: "correct"
+    };
+  }
+
+  return {
+    title: "Das ist noch nicht die sichere Antwort.",
+    text: "Das ist nicht schlimm. Du kannst es noch einmal versuchen. Schau dir die Situation noch einmal in Ruhe an.",
+    kind: "wrong"
+  };
+}
+
+function getQuizFeedbackText(question, isCorrect) {
+  if (isCorrect) {
+    return {
+      title: "Das ist richtig.",
+      text: question.feedbackCorrect || "Diese Antwort ist sicher. Du hast gut entschieden.",
+      kind: "correct"
+    };
+  }
+
+  return {
+    title: "Das ist noch nicht richtig.",
+    text: question.feedbackWrong || "Diese Antwort ist nicht sicher. Du kannst die Frage noch einmal versuchen.",
+    kind: "wrong"
+  };
+}
+
+
 function toggleTaskHelp() {
   const panel = document.getElementById("taskHelpPanel");
   const button = document.querySelector(".task-help-button");
@@ -464,39 +500,6 @@ function buildTaskHelpBox() {
   `;
 }
 
-
-function getPracticeFeedbackText(isCorrect) {
-  if (isCorrect) {
-    return {
-      title: "Das ist eine sichere Antwort.",
-      text: "Du hast gut entschieden. Diese Antwort schützt dich besser.",
-      kind: "correct"
-    };
-  }
-
-  return {
-    title: "Das ist noch nicht die sichere Antwort.",
-    text: "Das ist nicht schlimm. Du kannst es noch einmal versuchen. Schau dir die Situation noch einmal in Ruhe an.",
-    kind: "wrong"
-  };
-}
-
-function getQuizFeedbackText(question, isCorrect) {
-  if (isCorrect) {
-    return {
-      title: "Das ist richtig.",
-      text: question.feedbackCorrect || "Diese Antwort ist sicher. Du hast gut entschieden.",
-      kind: "correct"
-    };
-  }
-
-  return {
-    title: "Das ist noch nicht richtig.",
-    text: question.feedbackWrong || "Diese Antwort ist nicht sicher. Du kannst die Frage noch einmal versuchen.",
-    kind: "wrong"
-  };
-}
-
 function buildPractice(practice) {
   const question = practice.question || practice.title || "";
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
@@ -520,6 +523,30 @@ function buildPractice(practice) {
   `;
 }
 
+
+
+function startQuiz(topicId) {
+  const topic = topics.find(item => item.id === topicId);
+  if (!topic) {
+    renderMenu();
+    return;
+  }
+
+  currentTopicId = topic.id;
+  currentQuizIndex = 0;
+  quizScore = 0;
+  selectedAnswer = null;
+  renderQuizQuestion();
+}
+
+function getQuizQuestions(topic) {
+  if (!topic) return [];
+  if (Array.isArray(topic.quizQuestions) && topic.quizQuestions.length) return topic.quizQuestions;
+  if (Array.isArray(topic.quiz) && topic.quiz.length) return topic.quiz;
+  return [];
+}
+
+
 function renderPracticeFeedbackPage(index, correctIndex) {
   const topic = getCurrentTopic();
   const lessons = getLessonsForMode(topic, currentMode);
@@ -531,19 +558,20 @@ function renderPracticeFeedbackPage(index, correctIndex) {
     return;
   }
 
-  currentPractice = practice;
   const isCorrect = index === correctIndex;
-  const feedback = getPracticeFeedbackText(isCorrect);
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
   const selectedText = answers[index] || "";
+  const explanation = isCorrect
+    ? (practice.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
+    : (practice.feedbackWrong || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
 
-  setHeader(topic.title, "Übung", "Rückmeldung", feedback.kind === "correct" ? "Richtig" : "Nochmal üben", 100);
+  setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
   setProgressVisible(false);
   setBottomNavVisible(false);
 
   content.innerHTML = `
-    <article class="card feedback-page ${feedback.kind === "correct" ? "feedback-correct" : "feedback-wrong"}">
-      <h2>${escapeHtml(feedback.title)}</h2>
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}">
+      <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
@@ -552,7 +580,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
 
       <div class="feedback-explanation">
         <h3>Erklärung:</h3>
-        <p>${escapeHtml(feedback.text)}</p>
+        <p>${escapeHtml(explanation)}</p>
       </div>
 
       <div class="feedback-actions">
@@ -560,10 +588,9 @@ function renderPracticeFeedbackPage(index, correctIndex) {
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterPractice()">Weiter</button>`
           : `<button type="button" class="feedback-button secondary" onclick="renderLesson()">Nochmal versuchen</button>`
         }
-        <button type="button" class="feedback-button help" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">Ich bin unsicher</button>
       </div>
 
-      ${buildTaskHelpBox ? buildTaskHelpBox() : ""}
+      ${buildTaskHelpBox()}
     </article>
   `;
 
@@ -586,27 +613,6 @@ function continueAfterPractice() {
   } else {
     renderTopicChoice(topic.id);
   }
-}
-
-function startQuiz(topicId) {
-  const topic = topics.find(item => item.id === topicId);
-  if (!topic) {
-    renderMenu();
-    return;
-  }
-
-  currentTopicId = topic.id;
-  currentQuizIndex = 0;
-  quizScore = 0;
-  selectedAnswer = null;
-  renderQuizQuestion();
-}
-
-function getQuizQuestions(topic) {
-  if (!topic) return [];
-  if (Array.isArray(topic.quizQuestions) && topic.quizQuestions.length) return topic.quizQuestions;
-  if (Array.isArray(topic.quiz) && topic.quiz.length) return topic.quiz;
-  return [];
 }
 
 function renderQuizQuestion() {
@@ -659,6 +665,9 @@ function selectQuizAnswer(index, button) {
   if (button) button.classList.add("selected");
 }
 
+
+
+
 function renderQuizFeedbackPage(index) {
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
@@ -672,20 +681,20 @@ function renderQuizFeedbackPage(index) {
   const answers = Array.isArray(q.answers) ? q.answers : [];
   const correctIndex = Number(q.correctIndex ?? q.correct ?? 0);
   const isCorrect = index === correctIndex;
-  const feedback = getQuizFeedbackText(q, isCorrect);
   const selectedText = answers[index] || "";
+  const explanation = isCorrect
+    ? (q.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
+    : (q.feedbackWrong || "Das ist nicht sicher. Du kannst die Frage noch einmal versuchen.");
 
-  if (isCorrect) {
-    quizScore += 1;
-  }
+  if (isCorrect) quizScore += 1;
 
-  setHeader(topic.title, "Quiz", "Rückmeldung", feedback.kind === "correct" ? "Richtig" : "Nochmal üben", 100);
+  setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
   setProgressVisible(false);
   setBottomNavVisible(false);
 
   content.innerHTML = `
-    <article class="card feedback-page ${feedback.kind === "correct" ? "feedback-correct" : "feedback-wrong"}">
-      <h2>${escapeHtml(feedback.title)}</h2>
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}">
+      <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
@@ -694,7 +703,7 @@ function renderQuizFeedbackPage(index) {
 
       <div class="feedback-explanation">
         <h3>Erklärung:</h3>
-        <p>${escapeHtml(feedback.text)}</p>
+        <p>${escapeHtml(explanation)}</p>
       </div>
 
       <div class="feedback-actions">
@@ -702,10 +711,9 @@ function renderQuizFeedbackPage(index) {
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterQuizAnswer()">Weiter</button>`
           : `<button type="button" class="feedback-button secondary" onclick="renderQuizQuestion()">Nochmal versuchen</button>`
         }
-        <button type="button" class="feedback-button help" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">Ich bin unsicher</button>
       </div>
 
-      ${buildTaskHelpBox ? buildTaskHelpBox() : ""}
+      ${buildTaskHelpBox()}
     </article>
   `;
 
