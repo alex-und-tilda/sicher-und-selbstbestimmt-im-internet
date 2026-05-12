@@ -411,3 +411,34 @@ Die Kacheln zeigen vier einfache Lernwege.
 Sie sind nicht als technische Buttons gestaltet,
 sondern als verständliche Auswahlmöglichkeiten.
 ```
+
+
+## Unterstützungs-Hilfe als Button
+
+Die Unterstützungsbox wurde zu einem Button umgebaut.
+
+Der Button heißt:
+
+```text
+Du brauchst Unterstützung?
+Hier steht, wen du fragen kannst.
+```
+
+Beim Anklicken öffnet sich eine kurze Hilfe.
+
+Inhalt:
+
+```text
+Wenn du die Seite nicht bedienen kannst
+Wenn du eine Frage nicht verstehst
+Wen du fragen kannst
+```
+
+Pädagogische Logik:
+
+```text
+Die Hilfe ist nicht als fünfter Lernweg gestaltet.
+Sie bleibt unter den Lernwegen.
+Sie gibt konkrete Handlungsschritte.
+Sie verwendet alltagsnahe Begriffe.
+```

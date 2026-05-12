@@ -270,10 +270,51 @@ function renderTopicChoice(topicId) {
         </button>
       </div>
 
-      <article class="help-small-safety-note">
-        <h3>Du brauchst Unterstützung?</h3>
-        <p>Dann frage eine Person, der du vertraust.</p>
-      </article>
+      <div class="support-help-area">
+        <button type="button" class="support-help-button" onclick="toggleSupportHelp()">
+          <span class="support-help-icon" aria-hidden="true">${getIconHtml("help")}</span>
+          <span class="support-help-text">
+            <span class="support-help-title">Du brauchst Unterstützung?</span>
+            <span class="support-help-desc">Hier steht, wen du fragen kannst.</span>
+          </span>
+        </button>
+
+        <div id="supportHelpPanel" class="support-help-panel" hidden>
+          <h3>Du kannst Hilfe holen.</h3>
+
+          <div class="support-help-grid">
+            <div class="support-help-card">
+              <h4>Wenn du die Seite nicht bedienen kannst</h4>
+              <ul>
+                <li>Zeige auf die Stelle.</li>
+                <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
+                <li>Bitte um langsames Erklären.</li>
+              </ul>
+            </div>
+
+            <div class="support-help-card">
+              <h4>Wenn du eine Frage nicht verstehst</h4>
+              <ul>
+                <li>Lies die Frage noch einmal.</li>
+                <li>Bitte eine Person um Erklärung.</li>
+                <li>Sage: Bitte erkläre mir das einfacher.</li>
+              </ul>
+            </div>
+
+            <div class="support-help-card">
+              <h4>Wen kannst du fragen?</h4>
+              <ul>
+                <li>Eine Person, der du vertraust.</li>
+                <li>Eine Person, die dich unterstützt.</li>
+                <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
+                <li>Jemanden im Wohnbereich oder Dienst.</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
+        </div>
+      </div>
     </section>
   `;
 
@@ -598,6 +639,19 @@ function renderMemoryCard(topicId) {
 
   content.focus();
   renderLegalFooter();
+}
+
+
+function toggleSupportHelp() {
+  const panel = document.getElementById("supportHelpPanel");
+  if (!panel) return;
+
+  const isHidden = panel.hasAttribute("hidden");
+  if (isHidden) {
+    panel.removeAttribute("hidden");
+  } else {
+    panel.setAttribute("hidden", "");
+  }
 }
 
 function renderHelpOverlay() {

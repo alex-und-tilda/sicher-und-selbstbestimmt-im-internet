@@ -4157,3 +4157,157 @@ button.action-card.testbogen,
     height: 28px !important;
   }
 }
+
+
+/* ============================================================
+   Unterstützungs-Hilfe als Button
+   Pädagogische Logik:
+   - nicht als fünfter Lernweg
+   - klarer Hilfebutton unter den Lernwegen
+   - kurze konkrete Anleitung
+   ============================================================ */
+
+.support-help-area {
+  max-width: 1180px !important;
+  margin: 20px auto 26px auto !important;
+}
+
+.support-help-button {
+  width: 100% !important;
+  min-height: 76px !important;
+  display: grid !important;
+  grid-template-columns: 56px 1fr !important;
+  gap: 14px !important;
+  align-items: center !important;
+  padding: 16px 18px !important;
+  border: 3px solid #3DB8B3 !important;
+  border-radius: 18px !important;
+  background: #E5F7F6 !important;
+  color: #00285A !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 14px rgba(0, 40, 90, 0.08) !important;
+}
+
+.support-help-button:hover,
+.support-help-button:focus-visible {
+  background: #DDF3F2 !important;
+  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.16) !important;
+  outline: 4px solid rgba(61, 184, 179, 0.32) !important;
+  outline-offset: 2px !important;
+}
+
+.support-help-icon {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #FFFFFF !important;
+  border: 2px solid rgba(0, 40, 90, 0.16) !important;
+}
+
+.support-help-icon img {
+  width: 32px !important;
+  height: 32px !important;
+  object-fit: contain !important;
+}
+
+.support-help-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.support-help-title {
+  font-size: 1.15rem !important;
+  line-height: 1.15 !important;
+  font-weight: 900 !important;
+}
+
+.support-help-desc {
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+}
+
+.support-help-panel {
+  margin-top: 14px !important;
+  padding: 18px !important;
+  border: 3px solid #3DB8B3 !important;
+  border-radius: 18px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 8px 20px rgba(0, 40, 90, 0.10) !important;
+}
+
+.support-help-panel[hidden] {
+  display: none !important;
+}
+
+.support-help-panel h3 {
+  margin-top: 0 !important;
+  color: #00285A !important;
+  font-size: 1.25rem !important;
+}
+
+.support-help-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.support-help-card {
+  padding: 14px !important;
+  border-radius: 14px !important;
+  background: #F8F6F0 !important;
+  border: 2px solid #E0DDD3 !important;
+}
+
+.support-help-card h4 {
+  margin: 0 0 10px 0 !important;
+  font-size: 1rem !important;
+  color: #1F1F1F !important;
+}
+
+.support-help-card ul {
+  margin: 0 !important;
+  padding-left: 20px !important;
+}
+
+.support-help-card li {
+  margin: 8px 0 !important;
+  line-height: 1.35 !important;
+}
+
+.support-help-remember {
+  margin: 16px 0 0 0 !important;
+  padding: 12px !important;
+  border-radius: 14px !important;
+  background: #E5F7F6 !important;
+  font-weight: 900 !important;
+  color: #00285A !important;
+}
+
+@media (max-width: 900px) {
+  .support-help-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .support-help-button {
+    grid-template-columns: 48px 1fr !important;
+    min-height: 70px !important;
+  }
+
+  .support-help-icon {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .support-help-icon img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
