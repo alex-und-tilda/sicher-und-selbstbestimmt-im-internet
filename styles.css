@@ -5619,3 +5619,15 @@ button.action-card.testbogen,
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
+
+
+/* Professionelle, unaufdringliche Ersteller-Verlinkung */
+.creator-search-info,
+.creator-final-notice {
+  display: none !important;
+}
+
+.site-footer a[href="ersteller.html"],
+.footer a[href="ersteller.html"] {
+  font-weight: 600;
+}

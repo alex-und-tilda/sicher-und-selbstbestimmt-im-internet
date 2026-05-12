@@ -36,16 +36,6 @@ const soundToggleButton = document.getElementById("soundToggleButton");
 const liveRegion = document.getElementById("liveRegion");
 
 
-function buildCreatorNotice() {
-  return `
-    <section class="creator-final-notice" aria-label="Information zum Ersteller">
-      <p>
-        Erstellt von <a href="ersteller.html">Frank Runge</a>
-        · Digitale Bildung · Digitale Teilhabe · barrierearme Lernangebote
-      </p>
-    </section>
-  `;
-}
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -220,7 +210,7 @@ function renderLegalFooter() {
   footer.className = "small-footer-notice";
   footer.innerHTML = `
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.</p>
-    <p>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.<br />Erstellt von Frank Runge · Digitale Bildung · Digitale Teilhabe · <a href="ersteller.html">Ersteller-Informationen</a></p>
+    <p>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.<br /><a href="ersteller.html">Ersteller</a></p>
   `;
   const appRoot = document.querySelector(".app") || document.body;
   appRoot.appendChild(footer);
@@ -886,7 +876,7 @@ function renderQuizResult() {
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(currentTopicId)}')">Zurück zum Thema</button>
       </div>
     </article>
-  ` + buildCreatorNotice();
+  `;
   focusContent();
   renderLegalFooter();
 }
@@ -936,7 +926,7 @@ function renderMemoryCard(topicId) {
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
       </div>
     </article>
-  ` + buildCreatorNotice();
+  `;
   focusContent();
   renderLegalFooter();
 }
