@@ -213,34 +213,20 @@ Sicher und selbstbestimmt im Internet
 ```
 
 
-## Reduzierte Vorlesefunktion
+## Sicherer Minimal-Fix Vorlesen
 
-Die bisherigen vielen Vorlese-Buttons wurden entfernt.
+Diese Version ist ein Rollback auf die letzte stabile Fassung.
 
-Neu:
-
-```text
-kleiner Button „Anhören“
-nur an Kacheln und wichtigen Inhaltsboxen
-Sprechgeschwindigkeit ca. 80 Prozent
-es wird nur der notwendige Kerninhalt vorgelesen
-```
-
-Vorgelesen wird zum Beispiel:
+Geändert:
 
 ```text
-Thema und kurze Erklärung
-Was gelernt wird
-Übungsfrage und Antwortmöglichkeiten
-Quizfrage und Antwortmöglichkeiten
-Merksatz
+alte Vorlese-Buttons werden ausgeblendet
+ein kleiner zentraler Button „Anhören“ wird sicher eingefügt
+keine Render-Templates wurden verändert
+Vorlesen liest nur sichtbare Lerninhalte aus der aktuellen Ansicht
+Geschwindigkeit: 80 Prozent
 ```
 
-Nicht vorgelesen werden:
+Wichtig:
 
-```text
-Navigation
-Button-Nebentexte
-technische Hinweise
-Layout-Texte
-```
+Diese Version vermeidet die Fehler aus dem vorherigen Umbau.
