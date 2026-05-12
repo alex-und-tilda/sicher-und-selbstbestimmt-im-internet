@@ -30,7 +30,7 @@ Quiz machen
 Es wird kein Name gespeichert.
 Es wird kein Lernstand gespeichert.
 Es gibt keinen Login.
-Es gibt keine Vorlese-Funktion.
+Es gibt eine Vorlese-Funktion für den aktuellen Lerninhalt.
 ```
 
 ## Pädagogische Struktur
@@ -50,3 +50,27 @@ Merk-Karte: Wiederholung
 
 Die Inhalte sind in Einfacher Sprache formuliert.
 Für offizielle Leichte Sprache ist eine Prüfung durch Menschen aus der Zielgruppe nötig.
+
+
+## Vorlesen
+
+Die Lernplattform hat jetzt eine Vorlesefunktion.
+
+```text
+Vorlesen
+Langsam vorlesen
+Stopp
+```
+
+Die Funktion liest nur den aktuellen Lernbereich vor.
+
+Nicht vorgelesen werden:
+
+```text
+Footer
+Navigation
+Logos
+technische Hinweise
+```
+
+Beim Seitenwechsel stoppt das Vorlesen automatisch.

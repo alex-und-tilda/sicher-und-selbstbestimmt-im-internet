@@ -115,7 +115,129 @@ function focusContent() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+
+
+/* ============================================================
+   Vorlesefunktion
+   - liest nur den aktuellen Lernbereich vor
+   - liest keine Navigation und keinen Footer vor
+   - startet nur nach Klick
+   - stoppt bei Seitenwechsel
+   - keine Speicherung
+   ============================================================ */
+
+let speechRate = 0.85;
+let isSpeaking = false;
+
+function supportsSpeech() {
+  return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+}
+
+function stopReading() {
+  if (!supportsSpeech()) return;
+  window.speechSynthesis.cancel();
+  isSpeaking = false;
+  updateReadingStatus("Vorlesen gestoppt.");
+}
+
+function updateReadingStatus(text) {
+  const status = document.getElementById("readingStatus");
+  if (status) status.textContent = text || "";
+}
+
+function cleanSpeechText(text) {
+  return String(text || "")
+    .replace(/\s+/g, " ")
+    .replace(/←/g, "")
+    .replace(/%/g, " Prozent")
+    .trim();
+}
+
+function collectReadableText() {
+  const root = document.querySelector("[data-readable='true']") || content;
+  if (!root) return "";
+
+  const clone = root.cloneNode(true);
+  clone.querySelectorAll(
+    "button, footer, nav, .small-footer-notice, .nav, .progress-area, .reading-toolbar, .task-help-button, .support-help-button, .support-help-close, img, svg"
+  ).forEach(node => node.remove());
+
+  const parts = [];
+  clone.querySelectorAll("h1, h2, h3, p, li").forEach(node => {
+    const text = cleanSpeechText(node.textContent);
+    if (text) parts.push(text);
+  });
+
+  return parts.join(". ");
+}
+
+function readCurrentPage(rate) {
+  if (!supportsSpeech()) {
+    updateReadingStatus("Vorlesen geht auf diesem Gerät nicht.");
+    return;
+  }
+
+  const text = collectReadableText();
+  if (!text) {
+    updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "de-DE";
+  utterance.rate = rate || speechRate;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+
+  utterance.onstart = () => {
+    isSpeaking = true;
+    updateReadingStatus(rate && rate < 0.8 ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
+  };
+
+  utterance.onend = () => {
+    isSpeaking = false;
+    updateReadingStatus("Vorlesen fertig.");
+  };
+
+  utterance.onerror = () => {
+    isSpeaking = false;
+    updateReadingStatus("Vorlesen wurde beendet.");
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+function readNormal() {
+  readCurrentPage(0.85);
+}
+
+function readSlow() {
+  readCurrentPage(0.68);
+}
+
+function buildReadingToolbar() {
+  if (!supportsSpeech()) {
+    return `
+      <div class="reading-toolbar" aria-label="Vorlesen">
+        <p class="reading-unavailable">Vorlesen geht auf diesem Gerät vielleicht nicht.</p>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="reading-toolbar" aria-label="Vorlesen">
+      <button type="button" class="reading-button" onclick="readNormal()">Vorlesen</button>
+      <button type="button" class="reading-button" onclick="readSlow()">Langsam vorlesen</button>
+      <button type="button" class="reading-button reading-stop" onclick="stopReading()">Stopp</button>
+      <p id="readingStatus" class="reading-status" aria-live="polite"></p>
+    </div>
+  `;
+}
+
 function renderMenu() {
+  stopReading();
   currentTopicId = null;
   currentStep = 0;
   currentQuizIndex = 0;
@@ -150,6 +272,7 @@ function renderMenu() {
 }
 
 function renderTopicChoice(topicId) {
+  stopReading();
   const topic = topics.find(item => item.id === topicId);
   if (!topic) return renderMenu();
 
@@ -313,6 +436,7 @@ function startTopicMode(topicId, mode) {
 }
 
 function renderLesson() {
+  stopReading();
   const topic = getCurrentTopic();
   if (!topic) return renderMenu();
 
@@ -359,7 +483,8 @@ function renderLesson() {
   const practice = hasPractice ? buildPractice(lesson.practice) : "";
 
   content.innerHTML = `
-    <article class="card lesson-card">
+    ${buildReadingToolbar()}
+    <article class="card lesson-card" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
         <h2>${escapeHtml(lesson.title || topic.title)}</h2>
@@ -437,6 +562,7 @@ function toggleTaskHelp() {
 }
 
 function renderPracticeFeedbackPage(index, correctIndex) {
+  stopReading();
   const topic = getCurrentTopic();
   const lessons = getLessonsForMode(topic, currentMode);
   const lesson = lessons[currentStep];
@@ -455,7 +581,8 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
 
   content.innerHTML = `
-    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}">
+    ${buildReadingToolbar()}
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
       <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
 
       <div class="feedback-selected">
@@ -522,6 +649,7 @@ function getQuizQuestions(topic) {
 }
 
 function renderQuizQuestion() {
+  stopReading();
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
   if (!topic || !questions.length) return renderTopicChoice(currentTopicId);
@@ -543,7 +671,8 @@ function renderQuizQuestion() {
   `).join("");
 
   content.innerHTML = `
-    <article class="card quiz-card">
+    ${buildReadingToolbar()}
+    <article class="card quiz-card" data-readable="true">
       <h2>Quiz</h2>
       <p class="quiz-question">${escapeHtml(q.question || "")}</p>
       <div class="answers">${answerHtml}</div>
@@ -555,6 +684,7 @@ function renderQuizQuestion() {
 }
 
 function renderQuizFeedbackPage(index) {
+  stopReading();
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
   const q = questions[currentQuizIndex];
@@ -579,7 +709,8 @@ function renderQuizFeedbackPage(index) {
   setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
 
   content.innerHTML = `
-    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}">
+    ${buildReadingToolbar()}
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
       <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
 
       <div class="feedback-selected">
@@ -613,6 +744,7 @@ function continueAfterQuizAnswer() {
 }
 
 function renderQuizResult() {
+  stopReading();
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
   const total = questions.length || 1;
@@ -624,7 +756,8 @@ function renderQuizResult() {
   showNav(true, false);
 
   content.innerHTML = `
-    <article class="card quiz-result-card">
+    ${buildReadingToolbar()}
+    <article class="card quiz-result-card" data-readable="true">
       <h2>Quiz fertig</h2>
       <p>Du hast ${quizScore} von ${total} Fragen richtig beantwortet.</p>
       <p>Das sind ${percent} Prozent.</p>
@@ -640,6 +773,7 @@ function renderQuizResult() {
 }
 
 function renderMemoryCard(topicId) {
+  stopReading();
   const topic = topics.find(item => item.id === topicId);
   if (!topic) return renderMenu();
 
@@ -658,7 +792,8 @@ function renderMemoryCard(topicId) {
     : "";
 
   content.innerHTML = `
-    <article class="card memory-card">
+    ${buildReadingToolbar()}
+    <article class="card memory-card" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml("remember")}</span>
         <h2>${escapeHtml(topic.title)}</h2>

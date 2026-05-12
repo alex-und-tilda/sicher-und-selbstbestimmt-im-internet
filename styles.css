@@ -5346,3 +5346,57 @@ button.action-card.testbogen,
   line-height: 1.35 !important;
   opacity: 0.88 !important;
 }
+
+
+/* ============================================================
+   Vorlesefunktion
+   ============================================================ */
+
+.reading-toolbar {
+  max-width: 860px !important;
+  margin: 0 auto 14px auto !important;
+  padding: 12px 14px !important;
+  border: 2px solid #D8DEE8 !important;
+  border-radius: 20px !important;
+  background: #FFFFFF !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+.reading-button {
+  min-height: 44px !important;
+  padding: 9px 15px !important;
+  border-radius: 999px !important;
+  border: 3px solid #00285A !important;
+  background: #FFFFFF !important;
+  color: #00285A !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+.reading-button:hover,
+.reading-button:focus-visible {
+  background: #EAF1F8 !important;
+  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
+  outline-offset: 2px !important;
+}
+
+.reading-stop {
+  border-color: #C9541C !important;
+  color: #8F330F !important;
+}
+
+.reading-status {
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #1F1F1F !important;
+}
+
+.reading-unavailable {
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+}
