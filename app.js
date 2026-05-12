@@ -208,7 +208,7 @@ function renderLegalFooter() {
   footer.className = "small-footer-notice";
   footer.innerHTML = `
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.</p>
-    <p>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.</p>
+    <p>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.<br />Erstellt von Frank Runge · Digitale Bildung · Digitale Teilhabe · <a href="ersteller.html">Ersteller-Informationen</a></p>
   `;
   const appRoot = document.querySelector(".app") || document.body;
   appRoot.appendChild(footer);

@@ -1,0 +1,11 @@
+/* TEAM */
+Erstellt von: Frank Runge
+Schwerpunkt: Digitale Teilhabe, digitale Bildung und Medienkompetenz
+Projekt: Sicher und selbstbestimmt im Internet
+
+/* SITE */
+Sprache: Deutsch
+Ziel: Barrierearmes Selbstlernangebot in Einfacher Sprache
+Themen: Datenschutz, WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok, Hilfe bei Problemen
+Technik: HTML, CSS, JavaScript
+Speicherung: kein Login, keine Cookies, kein localStorage
