@@ -332,3 +332,43 @@ Grund:
 Vorher fiel der Effekt bei mehreren Kacheln auf Türkis zurück.
 Jetzt bekommt jede Themen-Kachel eigene CSS-Variablen.
 ```
+
+
+## Begriffe der Lernwege angepasst
+
+Die vier Auswahl-Kacheln wurden didaktisch vereinfacht.
+
+Vorher:
+
+```text
+Kurz lernen
+Ausführlich lernen
+Quiz starten
+Merk-Karte
+```
+
+Jetzt:
+
+```text
+Kurz lernen
+Schritt für Schritt lernen
+Quiz machen
+Merk-Karte ansehen
+```
+
+Erklärungssätze:
+
+```text
+Ich lese nur das Wichtigste.
+Ich bekomme mehr Beispiele.
+Ich prüfe mein Wissen.
+Ich sehe die wichtigsten Regeln.
+```
+
+Grund:
+
+```text
+Die Begriffe sind handlungsnäher.
+Sie sind leichter verständlich.
+Sie erklären klarer, was nach dem Klick passiert.
+```

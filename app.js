@@ -183,7 +183,7 @@ function renderMenu() {
     <section class="start-page">
       <div class="hero-card">
         <h2>Wähle ein Thema.</h2>
-        <p>Du kannst kurze Lernseiten lesen.</p>
+        <p>Du kannst kurz lernen.</p>
         <p>Du kannst ein Quiz machen.</p>
         <p>Du kannst eine Merk-Karte ansehen.</p>
       </div>
@@ -235,22 +235,22 @@ function renderTopicChoice(topicId) {
       <div class="action-grid">
         <button type="button" class="action-card action-short" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
           <span class="action-title">Kurz lernen</span>
-          <span class="action-desc">Nur das Wichtigste.</span>
+          <span class="action-desc">Ich lese nur das Wichtigste.</span>
         </button>
 
         <button type="button" class="action-card action-full" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
-          <span class="action-title">Ausführlich lernen</span>
-          <span class="action-desc">Schritt für Schritt.</span>
+          <span class="action-title">Schritt für Schritt lernen</span>
+          <span class="action-desc">Ich bekomme mehr Beispiele.</span>
         </button>
 
         <button type="button" class="action-card action-quiz" onclick="startQuiz('${escapeHtml(topic.id)}')">
-          <span class="action-title">Quiz starten</span>
-          <span class="action-desc">Fragen beantworten.</span>
+          <span class="action-title">Quiz machen</span>
+          <span class="action-desc">Ich prüfe mein Wissen.</span>
         </button>
 
         <button type="button" class="action-card action-memory" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">
-          <span class="action-title">Merk-Karte</span>
-          <span class="action-desc">Wichtige Regeln merken.</span>
+          <span class="action-title">Merk-Karte ansehen</span>
+          <span class="action-desc">Ich sehe die wichtigsten Regeln.</span>
         </button>
       </div>
 
@@ -310,7 +310,7 @@ function renderLesson() {
 
   const lesson = lessons[currentStep];
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
-  const modeLabel = currentMode === "short" ? "Kurz lernen" : "Ausführlich lernen";
+  const modeLabel = currentMode === "short" ? "Kurz lernen" : "Schritt für Schritt lernen";
 
   setHeader(topic.title, modeLabel, `Seite ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
