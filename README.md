@@ -163,3 +163,30 @@ keine Speicherung der Vorlese-Geschwindigkeit
 Hinweis:
 
 Die Plattform speichert weiterhin keinen Namen und fragt keine personenbezogenen Daten ab.
+
+
+## Kleiner Fußhinweis
+
+Der Hinweis zu Marken und Datenschutz steht jetzt als kleiner Fußhinweis ganz unten.
+
+Korrigierte Datenschutz-Formulierung:
+
+```text
+Es wird kein Name gespeichert.
+Es wird kein Lernstand gespeichert.
+```
+
+## Testbogen am Schluss
+
+Der Testbogen wurde als Modulabschluss angepasst.
+
+Er passt jetzt zu jedem Lernmodul und enthält:
+
+```text
+Thema verstanden
+Lernen
+Übung und Quiz
+Was nehme ich mit?
+Unterstützung
+Beobachtung für unterstützende Person
+```
