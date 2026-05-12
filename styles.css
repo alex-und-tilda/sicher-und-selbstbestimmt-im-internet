@@ -3991,3 +3991,169 @@ button.action-card.testbogen,
 .topic-card:focus-visible .topic-title {
   color: var(--topic-color, #00285A) !important;
 }
+
+
+/* ============================================================
+   Lernwege-Kacheln mit Symbolen
+   Pädagogische Logik:
+   - große Klickfläche
+   - Symbol + kurzer Titel + kurzer Erklärungssatz
+   - keine ungünstigen Wortumbrüche
+   - vier klare Lernwege
+   ============================================================ */
+
+.learning-path-heading {
+  max-width: 1180px !important;
+  margin: 26px auto 10px auto !important;
+}
+
+.learning-path-heading h3 {
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+  color: #1F1F1F !important;
+}
+
+.learning-path-grid,
+.action-grid.learning-path-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  max-width: 1180px !important;
+  margin: 14px auto 22px auto !important;
+}
+
+.learning-path-grid .action-card {
+  min-height: 118px !important;
+  padding: 18px !important;
+  display: grid !important;
+  grid-template-columns: 56px 1fr !important;
+  align-items: center !important;
+  gap: 14px !important;
+  text-align: left !important;
+  border-width: 3px !important;
+  border-radius: 18px !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+.learning-path-grid .action-icon {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 2px solid rgba(0, 40, 90, 0.16) !important;
+}
+
+.learning-path-grid .action-icon img {
+  width: 32px !important;
+  height: 32px !important;
+  object-fit: contain !important;
+}
+
+.learning-path-grid .action-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+}
+
+.learning-path-grid .action-title {
+  display: block !important;
+  font-size: 1.08rem !important;
+  line-height: 1.15 !important;
+  font-weight: 900 !important;
+  white-space: normal !important;
+}
+
+.learning-path-grid .action-desc {
+  display: block !important;
+  font-size: 0.98rem !important;
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+  white-space: normal !important;
+}
+
+/* Lernweg-Farben ruhig, aber erkennbar */
+.learning-path-grid .action-short {
+  background: #E5F7F6 !important;
+  border-color: #3DB8B3 !important;
+  color: #00285A !important;
+}
+
+.learning-path-grid .action-full {
+  background: #00285A !important;
+  border-color: #00285A !important;
+  color: #FFFFFF !important;
+}
+
+.learning-path-grid .action-full .action-icon {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.learning-path-grid .action-quiz {
+  background: #EAF6EC !important;
+  border-color: #2A7F5C !important;
+  color: #1F1F1F !important;
+}
+
+.learning-path-grid .action-memory {
+  background: #FFF3C4 !important;
+  border-color: #C9A600 !important;
+  color: #1F1F1F !important;
+}
+
+.learning-path-grid .action-card:hover,
+.learning-path-grid .action-card:focus-visible {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.18) !important;
+  outline: 4px solid rgba(61, 184, 179, 0.28) !important;
+  outline-offset: 2px !important;
+}
+
+.topic-intro-card {
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Unterstützungsbox stärker unterordnen, damit sie nicht wie ein fünfter Lernweg wirkt */
+.help-small-safety-note {
+  max-width: 1180px !important;
+  margin: 20px auto !important;
+}
+
+/* Responsive: auf kleineren Bildschirmen 2 Spalten, mobil 1 Spalte */
+@media (max-width: 1050px) {
+  .learning-path-grid,
+  .action-grid.learning-path-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .learning-path-grid,
+  .action-grid.learning-path-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .learning-path-grid .action-card {
+    min-height: 96px !important;
+    grid-template-columns: 48px 1fr !important;
+  }
+
+  .learning-path-grid .action-icon {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .learning-path-grid .action-icon img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}

@@ -372,3 +372,42 @@ Die Begriffe sind handlungsnäher.
 Sie sind leichter verständlich.
 Sie erklären klarer, was nach dem Klick passiert.
 ```
+
+
+## Lernwege-Kacheln mit Symbolen
+
+Die vier Lernwege im Themenmodul wurden überarbeitet.
+
+Jetzt haben sie:
+
+```text
+ein Symbol
+einen kurzen Titel
+einen kurzen Erklärungssatz
+größere Klickflächen
+weniger ungünstige Wortumbrüche
+```
+
+Sichtbare Lernwege:
+
+```text
+Kurz lernen
+Nur das Wichtigste.
+
+Mehr lernen
+Mit Beispielen.
+
+Quiz machen
+Fragen beantworten.
+
+Merk-Karte
+Regeln ansehen.
+```
+
+Pädagogische Logik:
+
+```text
+Die Kacheln zeigen vier einfache Lernwege.
+Sie sind nicht als technische Buttons gestaltet,
+sondern als verständliche Auswahlmöglichkeiten.
+```

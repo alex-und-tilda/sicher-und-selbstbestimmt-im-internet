@@ -185,7 +185,7 @@ function renderMenu() {
         <h2>Wähle ein Thema.</h2>
         <p>Du kannst kurz lernen.</p>
         <p>Du kannst ein Quiz machen.</p>
-        <p>Du kannst eine Merk-Karte ansehen.</p>
+        <p>Du kannst eine Merk-Karte.</p>
       </div>
 
       <div class="topic-grid">
@@ -232,25 +232,41 @@ function renderTopicChoice(topicId) {
         <p>${escapeHtml(topic.desc || "")}</p>
       </article>
 
-      <div class="action-grid">
+      <div class="learning-path-heading">
+        <h3>Wie möchtest du lernen?</h3>
+      </div>
+
+      <div class="action-grid learning-path-grid">
         <button type="button" class="action-card action-short" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
-          <span class="action-title">Kurz lernen</span>
-          <span class="action-desc">Ich lese nur das Wichtigste.</span>
+          <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
+          <span class="action-text">
+            <span class="action-title">Kurz lernen</span>
+            <span class="action-desc">Nur das Wichtigste.</span>
+          </span>
         </button>
 
         <button type="button" class="action-card action-full" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
-          <span class="action-title">Schritt für Schritt lernen</span>
-          <span class="action-desc">Ich bekomme mehr Beispiele.</span>
+          <span class="action-icon" aria-hidden="true">${getIconHtml("example")}</span>
+          <span class="action-text">
+            <span class="action-title">Mehr lernen</span>
+            <span class="action-desc">Mit Beispielen.</span>
+          </span>
         </button>
 
         <button type="button" class="action-card action-quiz" onclick="startQuiz('${escapeHtml(topic.id)}')">
-          <span class="action-title">Quiz machen</span>
-          <span class="action-desc">Ich prüfe mein Wissen.</span>
+          <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
+          <span class="action-text">
+            <span class="action-title">Quiz machen</span>
+            <span class="action-desc">Fragen beantworten.</span>
+          </span>
         </button>
 
         <button type="button" class="action-card action-memory" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">
-          <span class="action-title">Merk-Karte ansehen</span>
-          <span class="action-desc">Ich sehe die wichtigsten Regeln.</span>
+          <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
+          <span class="action-text">
+            <span class="action-title">Merk-Karte</span>
+            <span class="action-desc">Regeln ansehen.</span>
+          </span>
         </button>
       </div>
 
@@ -310,7 +326,7 @@ function renderLesson() {
 
   const lesson = lessons[currentStep];
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
-  const modeLabel = currentMode === "short" ? "Kurz lernen" : "Schritt für Schritt lernen";
+  const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
 
   setHeader(topic.title, modeLabel, `Seite ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
