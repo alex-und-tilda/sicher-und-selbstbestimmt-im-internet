@@ -3525,7 +3525,6 @@ const topics = [
       ],
       "correct": 0,
       "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
-    },
-    "description": "Was du tun kannst, wenn im Internet etwas komisch, unangenehm oder unsicher ist."
+    }
   }
 ];

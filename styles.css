@@ -5400,3 +5400,80 @@ button.action-card.testbogen,
   font-size: 0.95rem !important;
   font-weight: 800 !important;
 }
+
+
+/* ============================================================
+   GRAFIK-FIX NACH VOLLAUDIT
+   Problem:
+   Frühere CSS-Regeln wie `.topic-card img` trafen auch die kleinen
+   Icon-Bilder in `.topic-icon`. Dadurch konnten Icons in Themenkarten
+   zu groß oder abgeschnitten dargestellt werden.
+   Lösung:
+   Illustrationen und kleine Icons werden am Ende der CSS-Datei
+   eindeutig getrennt.
+   ============================================================ */
+
+.topic-card .topic-illustration,
+.topic-choice .topic-intro-card .topic-illustration {
+  display: block !important;
+  width: 100% !important;
+  max-width: 260px !important;
+  height: 150px !important;
+  max-height: 150px !important;
+  object-fit: contain !important;
+  margin: 0 auto 14px auto !important;
+  border-radius: 18px !important;
+}
+
+.topic-choice .topic-intro-card .topic-illustration {
+  width: 220px !important;
+  max-width: 220px !important;
+  margin: 0 !important;
+}
+
+.topic-card .topic-icon,
+.simple-topic-card .topic-icon {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  max-width: 58px !important;
+  max-height: 58px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+.topic-card .topic-icon img,
+.simple-topic-card .topic-icon img,
+.symbol-heading .access-box-symbol img,
+.action-card .action-icon img {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  max-width: 34px !important;
+  max-height: 34px !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+.action-card .action-icon img {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+}
+
+@media (max-width: 760px) {
+  .topic-card .topic-illustration {
+    max-width: 220px !important;
+    height: 120px !important;
+    max-height: 120px !important;
+  }
+}
+
