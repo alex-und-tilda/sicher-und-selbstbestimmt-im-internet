@@ -638,3 +638,33 @@ Hinweis:
 ```text
 Für offizielle Leichte Sprache ist zusätzlich eine Prüfung durch Menschen aus der Zielgruppe nötig.
 ```
+
+
+## Feedback-Seiten nach Antworten
+
+Die Übungen und Quizfragen haben jetzt eine bessere Rückmelde-Logik.
+
+Ablauf:
+
+```text
+Antwort anklicken
+Rückmelde-Seite
+Erklärung
+Weiter oder Nochmal versuchen
+```
+
+Bei richtiger Antwort:
+
+```text
+Erklärung, warum die Antwort sicher ist.
+Button: Weiter
+```
+
+Bei falscher Antwort:
+
+```text
+wertschätzende Erklärung, warum die Antwort nicht sicher ist.
+Button: Nochmal versuchen
+```
+
+Der Button „Ich bin unsicher“ bleibt als eigene Hilfe erhalten.

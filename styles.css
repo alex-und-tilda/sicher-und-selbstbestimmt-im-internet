@@ -4946,3 +4946,99 @@ button.action-card.testbogen,
   margin: 7px 0 !important;
   line-height: 1.35 !important;
 }
+
+
+/* ============================================================
+   Feedback-Seiten nach Antworten
+   Didaktische Logik:
+   - richtige Antwort: Erklärung + Weiter
+   - falsche Antwort: wertschätzende Erklärung + Nochmal versuchen
+   - Hilfe bleibt getrennt über „Ich bin unsicher“
+   ============================================================ */
+
+.feedback-page {
+  max-width: 820px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.feedback-page h2 {
+  margin-top: 0 !important;
+  font-size: 1.55rem !important;
+  line-height: 1.2 !important;
+}
+
+.feedback-correct {
+  border-left: 10px solid #2A7F5C !important;
+}
+
+.feedback-wrong {
+  border-left: 10px solid #C9541C !important;
+}
+
+.feedback-selected,
+.feedback-explanation {
+  margin: 18px 0 !important;
+  padding: 16px 18px !important;
+  border-radius: 18px !important;
+  background: #F8F6F0 !important;
+  border: 2px solid #E0DDD3 !important;
+}
+
+.feedback-selected h3,
+.feedback-explanation h3 {
+  margin: 0 0 8px 0 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.25 !important;
+}
+
+.feedback-selected p,
+.feedback-explanation p {
+  margin: 0 !important;
+  line-height: 1.45 !important;
+  font-weight: 800 !important;
+}
+
+.feedback-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-top: 20px !important;
+}
+
+.feedback-button {
+  min-height: 48px !important;
+  padding: 10px 18px !important;
+  border-radius: 999px !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+  border: 3px solid #00285A !important;
+}
+
+.feedback-button.primary {
+  background: #00285A !important;
+  color: #FFFFFF !important;
+}
+
+.feedback-button.secondary {
+  background: #FFFFFF !important;
+  color: #00285A !important;
+}
+
+.feedback-button.help {
+  background: #E5F7F6 !important;
+  color: #00285A !important;
+  border-color: #3DB8B3 !important;
+}
+
+.feedback-button:hover,
+.feedback-button:focus-visible {
+  outline: 4px solid rgba(61, 184, 179, 0.28) !important;
+  outline-offset: 2px !important;
+}
+
+/* Bei Aufgaben keine untere Weiter-Navigation erzwingen */
+.quiz-card .feedback,
+.practice-box .feedback {
+  display: none !important;
+}
