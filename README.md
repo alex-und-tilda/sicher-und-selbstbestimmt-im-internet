@@ -261,3 +261,26 @@ Grund:
 Auf der Startseite wurde noch nicht gelernt.
 Die Person soll zuerst ein Thema auswählen.
 ```
+
+
+## Fortschrittsbalken
+
+Der Fortschrittsbalken wird auf der Startseite nicht mehr angezeigt.
+
+Er erscheint erst, wenn ein Bereich geöffnet wird:
+
+```text
+Thema
+Kurz lernen
+Ausführlich lernen
+Quiz
+Merk-Karte
+Hilfe
+```
+
+Grund:
+
+```text
+Auf der Startseite wurde noch kein Lernmodul begonnen.
+Der Balken ist dort missverständlich.
+```

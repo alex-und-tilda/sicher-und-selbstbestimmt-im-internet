@@ -3824,3 +3824,9 @@ button.action-card.testbogen,
 .rueckmeldung-link {
   display: none !important;
 }
+
+
+/* Fortschrittsbalken nur im Lernbereich anzeigen */
+.progress-area.is-hidden {
+  display: none !important;
+}

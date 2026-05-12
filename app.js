@@ -48,6 +48,13 @@ function getIllustrationHtml(topic) {
   return `<img class="topic-illustration" src="${escapeHtml(topic.illustration)}" alt="" aria-hidden="true">`;
 }
 
+
+function setProgressVisible(isVisible) {
+  const progressArea = document.querySelector(".progress-area");
+  if (!progressArea) return;
+  progressArea.classList.toggle("is-hidden", !isVisible);
+}
+
 function setHeader(title, module, step, level, percent) {
   appTitle.textContent = title || "Sicher und selbstbestimmt im Internet";
   moduleLabel.textContent = module || "Thema auswählen";
@@ -78,6 +85,8 @@ function renderLegalFooter() {
 }
 
 function renderMenu() {
+  setProgressVisible(false);
+
   currentTopicId = null;
   currentStep = 0;
   currentQuizIndex = 0;
@@ -115,6 +124,8 @@ function renderMenu() {
 }
 
 function renderTopicChoice(topicId) {
+  setProgressVisible(true);
+
   const topic = topics.find(item => item.id === topicId);
   if (!topic) {
     renderMenu();
@@ -199,6 +210,8 @@ function startTopicMode(topicId, mode) {
 }
 
 function renderLesson() {
+  setProgressVisible(true);
+
   const topic = getCurrentTopic();
   if (!topic) {
     renderMenu();
@@ -325,6 +338,8 @@ function getQuizQuestions(topic) {
 }
 
 function renderQuizQuestion() {
+  setProgressVisible(true);
+
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
 
@@ -400,6 +415,8 @@ function checkQuizAnswer() {
 }
 
 function renderQuizResult() {
+  setProgressVisible(true);
+
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
   const total = questions.length || 1;
@@ -426,6 +443,8 @@ function renderQuizResult() {
 }
 
 function renderMemoryCard(topicId) {
+  setProgressVisible(true);
+
   const topic = topics.find(item => item.id === topicId);
   if (!topic) {
     renderMenu();
@@ -476,6 +495,8 @@ function renderMemoryCard(topicId) {
 }
 
 function renderHelpOverlay() {
+  setProgressVisible(true);
+
   setHeader("Hilfe", "Orientierung", "Hilfe", "Bedienung", 0);
   showNav(true, false);
 
