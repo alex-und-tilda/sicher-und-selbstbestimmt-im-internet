@@ -98,34 +98,23 @@ Die Texte sind einfach formuliert.
 Für ein offizielles Zeichen für Leichte Sprache ist eine Prüfung durch Menschen aus der Zielgruppe erforderlich.
 
 
-## CSS-Neuaufbau
+## Grafik wiederhergestellt
 
-Die CSS-Datei wurde vollständig neu aufgebaut.
+Die vollständig neu aufgebaute CSS-Version wurde verworfen.
 
-Ergebnis:
+Diese Version nutzt wieder die letzte stabile Gestaltung.
 
-```text
-Vorher: 276 !important-Regeln
-Nachher: 0 !important-Regeln
-```
-
-Die Datei ist jetzt klar gegliedert:
+Beibehalten:
 
 ```text
-Grundwerte
-Typografie
-Layout
-Karten
-Themenfarben
-Buttons
-Aktionskarten
-Lernkarten
-Symbolboxen
-Übungen
-Quiz
-Vorlesen
-Hilfe
-Merk-Karte und Urkunde
-Mobile Ansicht
-Druckansicht
+inhaltliche Vollprüfung
+keine sichtbare 110-Logik
+keine alte Notfall-Logik auf Lernseiten
+Urkunde als verständlicher Titel
+Hilfe-Button als Lernplattform-Orientierung
+QR-Links nicht sichtbar in der Lernoberfläche
 ```
+
+Hinweis:
+
+Die CSS-Datei enthält wieder mehr Überschreibungen, ist aber visuell stabiler.
