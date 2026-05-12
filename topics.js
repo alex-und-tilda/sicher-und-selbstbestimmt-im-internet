@@ -12,8 +12,8 @@ const topics = [
           "Meine Adresse."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Was machst du mit deinem Passwort?",
@@ -22,8 +22,8 @@ const topics = [
           "Ich behalte es für mich."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
@@ -32,8 +32,8 @@ const topics = [
           "Adresse nicht eintragen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Du willst ein Foto senden. Was machst du zuerst?",
@@ -42,8 +42,8 @@ const topics = [
           "Sofort senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Eine Nachricht macht Druck. Was ist besser?",
@@ -52,8 +52,8 @@ const topics = [
           "Langsam machen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Was gehört nicht in eine öffentliche Nachricht?",
@@ -62,8 +62,8 @@ const topics = [
           "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Warum ist ein Passwort wichtig?",
@@ -72,8 +72,8 @@ const topics = [
           "Es ist für alle da."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Du bist unsicher. Was hilft?",
@@ -82,8 +82,8 @@ const topics = [
           "Hilfe-Button nutzen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Wer darf dein Passwort kennen?",
@@ -92,8 +92,8 @@ const topics = [
           "Alle in der Gruppe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -102,8 +102,8 @@ const topics = [
           "Immer sofort klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       }
     ],
     "lessons": [
@@ -113,8 +113,9 @@ const topics = [
         "icon": "lock",
         "text": [
           "Hier lernst du etwas über Datenschutz.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -157,7 +158,6 @@ const topics = [
           "Du weißt nicht warum.",
           "Dann musst du nicht sofort etwas eintragen."
         ],
-        "remember": "Ich gebe meine Adresse nicht einfach weiter.",
         "examples": [
           "Eine Spiele-App fragt nach deiner Adresse.",
           "Ein Gewinnspiel fragt nach deinem Geburtstag."
@@ -169,8 +169,9 @@ const topics = [
             "Ich trage die Adresse nicht ein."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat. Du weißt nicht, wofür die App sie braucht.",
-          "feedbackCorrect": "Das ist sicher. Du schützt deine Adresse. Du gibst sie nicht einfach weiter."
+          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat. Du weißt nicht, warum die App sie haben will.",
+          "feedbackCorrect": "Das ist sicher. Du schützt deine Adresse. Du gibst sie nicht einfach weiter.",
+          "remember": "Ich gebe meine Adresse nicht einfach weiter."
         }
       },
       {
@@ -182,7 +183,6 @@ const topics = [
           "Auf dem Foto sieht man vielleicht private Dinge.",
           "Zum Beispiel: dein Zimmer oder einen Brief."
         ],
-        "remember": "Ich prüfe Fotos vor dem Senden.",
         "examples": [
           "Auf dem Foto liegt ein Brief.",
           "Im Hintergrund sieht man eine andere Person."
@@ -195,7 +195,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Auf dem Foto ist eine private Adresse zu sehen.",
-          "feedbackCorrect": "Das ist sicher. Du schützt private Informationen auf dem Foto."
+          "feedbackCorrect": "Das ist sicher. Du schützt private Informationen auf dem Foto.",
+          "remember": "Ich prüfe Fotos vor dem Senden."
         }
       },
       {
@@ -207,7 +208,6 @@ const topics = [
           "Die Nachricht macht vielleicht Druck.",
           "Dann ist Vorsicht wichtig."
         ],
-        "remember": "Ich mache langsam, wenn eine Nachricht Druck macht.",
         "practice": {
           "question": "Eine Nachricht sagt: Gib deine Adresse ein. Was ist besser?",
           "answers": [
@@ -215,8 +215,9 @@ const topics = [
             "Ich gebe die Adresse nicht ein."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Schau dir die Situation noch einmal an.",
-          "feedbackCorrect": "Das ist sicher. Du hast gut entschieden."
+          "feedbackWrong": "Das ist nicht sicher. Die Nachricht will private Daten bekommen.",
+          "feedbackCorrect": "Das ist sicher. Du gibst keine privaten Daten ein.",
+          "remember": "Ich mache langsam, wenn eine Nachricht Druck macht."
         }
       },
       {
@@ -240,7 +241,7 @@ const topics = [
         "bullets": [
           "Mein Passwort bleibt geheim.",
           "Ich gebe private Daten nicht einfach ein.",
-          "Ich prüfe Fotos.",
+          "Ich prüfe Fotos vor dem Senden.",
           "Ich mache langsam bei komischen Nachrichten."
         ]
       }
@@ -254,8 +255,8 @@ const topics = [
           "Meine Adresse."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Was machst du mit deinem Passwort?",
@@ -264,8 +265,8 @@ const topics = [
           "Ich behalte es für mich."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
@@ -274,8 +275,8 @@ const topics = [
           "Adresse nicht eintragen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Du willst ein Foto senden. Was machst du zuerst?",
@@ -284,8 +285,8 @@ const topics = [
           "Sofort senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Eine Nachricht macht Druck. Was ist besser?",
@@ -294,8 +295,8 @@ const topics = [
           "Langsam machen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Was gehört nicht in eine öffentliche Nachricht?",
@@ -304,8 +305,8 @@ const topics = [
           "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Warum ist ein Passwort wichtig?",
@@ -314,8 +315,8 @@ const topics = [
           "Es ist für alle da."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Du bist unsicher. Was hilft?",
@@ -324,8 +325,8 @@ const topics = [
           "Hilfe-Button nutzen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Wer darf dein Passwort kennen?",
@@ -334,8 +335,8 @@ const topics = [
           "Alle in der Gruppe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -344,8 +345,8 @@ const topics = [
           "Immer sofort klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Private Daten können von anderen benutzt werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt private Daten.",
+        "feedbackWrong": "Das ist nicht sicher. Private Daten gehören zu dir und sollen geschützt werden."
       }
     ],
     "certificateGoals": [
@@ -399,8 +400,8 @@ const topics = [
           "Nicht sofort antworten."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
@@ -409,8 +410,8 @@ const topics = [
           "Code nicht schicken."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Ein unbekannter Link kommt an. Was ist besser?",
@@ -419,8 +420,8 @@ const topics = [
           "Link nicht öffnen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was ist bei Gruppen wichtig?",
@@ -429,8 +430,8 @@ const topics = [
           "Nur ich kann es sehen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Du willst ein Foto von einer Person senden. Was ist besser?",
@@ -439,8 +440,8 @@ const topics = [
           "Einfach senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Eine Nachricht macht dir Stress. Was ist besser?",
@@ -449,8 +450,8 @@ const topics = [
           "Sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was kannst du mit einer stressigen Gruppe machen?",
@@ -459,8 +460,8 @@ const topics = [
           "Immer sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was ist mit Sprachnachrichten wichtig?",
@@ -469,8 +470,8 @@ const topics = [
           "Alles sagen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Eine Nachricht sagt: sofort bezahlen. Was ist besser?",
@@ -479,8 +480,8 @@ const topics = [
           "Sofort bezahlen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was hilft bei WhatsApp?",
@@ -489,8 +490,8 @@ const topics = [
           "Schnell klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       }
     ],
     "lessons": [
@@ -500,8 +501,9 @@ const topics = [
         "icon": "message",
         "text": [
           "Hier lernst du etwas über WhatsApp.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -524,7 +526,6 @@ const topics = [
           "Du weißt nicht, wer das ist.",
           "Dann antwortest du nicht sofort."
         ],
-        "remember": "Ich antworte fremden Nummern nicht sofort.",
         "examples": [
           "Hallo. Ich habe eine neue Nummer.",
           "Schick mir bitte Geld."
@@ -536,8 +537,9 @@ const topics = [
             "Ich schicke kein Geld."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Fremde Nummern können täuschen. Es kann ein Betrug sein.",
-          "feedbackCorrect": "Das ist sicher. Du gibst kein Geld an eine fremde Nummer."
+          "feedbackWrong": "Das ist nicht sicher. Fremde Nummern können täuschen. Es kann Betrug sein.",
+          "feedbackCorrect": "Das ist sicher. Du schickst kein Geld an eine fremde Nummer.",
+          "remember": "Ich antworte fremden Nummern nicht sofort."
         }
       },
       {
@@ -549,7 +551,6 @@ const topics = [
           "Manche Links sind gefährlich.",
           "Du klickst nicht sofort auf unbekannte Links."
         ],
-        "remember": "Ich öffne unbekannte Links nicht sofort.",
         "practice": {
           "question": "Eine fremde Nummer schickt einen Link. Was ist besser?",
           "answers": [
@@ -558,7 +559,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Ein unbekannter Link kann gefährlich sein.",
-          "feedbackCorrect": "Das ist sicher. Du öffnest den unbekannten Link nicht."
+          "feedbackCorrect": "Das ist sicher. Du öffnest den unbekannten Link nicht.",
+          "remember": "Ich öffne unbekannte Links nicht sofort."
         }
       },
       {
@@ -570,7 +572,6 @@ const topics = [
           "Der Code schützt dein WhatsApp.",
           "Du gibst den Code nicht weiter."
         ],
-        "remember": "Mein WhatsApp-Code bleibt geheim.",
         "practice": {
           "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
           "answers": [
@@ -579,7 +580,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Mit dem Code kann jemand dein WhatsApp übernehmen.",
-          "feedbackCorrect": "Das ist sicher. Dein WhatsApp-Code bleibt geheim."
+          "feedbackCorrect": "Das ist sicher. Dein WhatsApp-Code bleibt geheim.",
+          "remember": "Mein WhatsApp-Code bleibt geheim."
         }
       },
       {
@@ -612,10 +614,10 @@ const topics = [
           "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
-          "Fremde Nummern prüfen.",
-          "Unbekannte Links nicht öffnen.",
-          "Codes nicht weitergeben.",
-          "Fotos prüfen."
+          "Ich öffne unbekannte Links nicht sofort.",
+          "Ich gebe keinen WhatsApp-Code weiter.",
+          "Ich prüfe fremde Nummern.",
+          "Ich prüfe Fotos vor dem Senden."
         ]
       }
     ],
@@ -628,8 +630,8 @@ const topics = [
           "Nicht sofort antworten."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
@@ -638,8 +640,8 @@ const topics = [
           "Code nicht schicken."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Ein unbekannter Link kommt an. Was ist besser?",
@@ -648,8 +650,8 @@ const topics = [
           "Link nicht öffnen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was ist bei Gruppen wichtig?",
@@ -658,8 +660,8 @@ const topics = [
           "Nur ich kann es sehen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Du willst ein Foto von einer Person senden. Was ist besser?",
@@ -668,8 +670,8 @@ const topics = [
           "Einfach senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Eine Nachricht macht dir Stress. Was ist besser?",
@@ -678,8 +680,8 @@ const topics = [
           "Sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was kannst du mit einer stressigen Gruppe machen?",
@@ -688,8 +690,8 @@ const topics = [
           "Immer sofort antworten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was ist mit Sprachnachrichten wichtig?",
@@ -698,8 +700,8 @@ const topics = [
           "Alles sagen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Eine Nachricht sagt: sofort bezahlen. Was ist besser?",
@@ -708,8 +710,8 @@ const topics = [
           "Sofort bezahlen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       },
       {
         "question": "Was hilft bei WhatsApp?",
@@ -718,8 +720,8 @@ const topics = [
           "Schnell klicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dein WhatsApp und deine Daten.",
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten und Links können gefährlich sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du machst langsam und schützt dein WhatsApp.",
+        "feedbackWrong": "Das ist nicht sicher. Fremde Nachrichten, Links oder Codes können gefährlich sein."
       }
     ],
     "certificateGoals": [
@@ -773,8 +775,8 @@ const topics = [
           "Wie schnell kann ich posten?"
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
@@ -783,8 +785,8 @@ const topics = [
           "Erst prüfen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was ist bei Kommentaren wichtig?",
@@ -793,8 +795,8 @@ const topics = [
           "Andere beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was kann privat sein?",
@@ -803,8 +805,8 @@ const topics = [
           "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Du wirst beleidigt. Was ist besser?",
@@ -813,8 +815,8 @@ const topics = [
           "Unterstützung holen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was bedeutet: Wer darf etwas sehen?",
@@ -823,8 +825,8 @@ const topics = [
           "Alle sehen immer alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Ein Foto zeigt andere Menschen. Was ist besser?",
@@ -833,8 +835,8 @@ const topics = [
           "Einfach posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Warum sind alte Beiträge wichtig?",
@@ -843,8 +845,8 @@ const topics = [
           "Sie verschwinden immer."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was ist gut im Profil?",
@@ -853,8 +855,8 @@ const topics = [
           "Passwort öffentlich schreiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -863,8 +865,8 @@ const topics = [
           "Immer alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       }
     ],
     "lessons": [
@@ -874,8 +876,9 @@ const topics = [
         "icon": "message",
         "text": [
           "Hier lernst du etwas über Facebook.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -904,7 +907,6 @@ const topics = [
           "Viele Menschen können den Beitrag sehen.",
           "Darum prüfst du vorher, was du schreibst."
         ],
-        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "practice": {
           "question": "Du willst deine Adresse posten. Was ist besser?",
           "answers": [
@@ -912,8 +914,9 @@ const topics = [
             "Ich poste die Adresse nicht."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat und soll nicht öffentlich sein.",
-          "feedbackCorrect": "Das ist sicher. Du postest deine Adresse nicht öffentlich."
+          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat. Viele Menschen könnten sie sehen.",
+          "feedbackCorrect": "Das ist sicher. Du postest deine Adresse nicht öffentlich.",
+          "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
         }
       },
       {
@@ -936,7 +939,6 @@ const topics = [
           "Du weißt nicht, wer das ist.",
           "Du musst die Anfrage nicht annehmen."
         ],
-        "remember": "Ich nehme unbekannte Anfragen nicht sofort an.",
         "practice": {
           "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
           "answers": [
@@ -945,7 +947,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer die Person ist.",
-          "feedbackCorrect": "Das ist sicher. Du prüfst die Anfrage zuerst."
+          "feedbackCorrect": "Das ist sicher. Du prüfst die Anfrage zuerst.",
+          "remember": "Ich nehme unbekannte Anfragen nicht sofort an."
         }
       },
       {
@@ -978,10 +981,10 @@ const topics = [
           "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
-          "Nicht alles öffentlich machen.",
-          "Anfragen prüfen.",
-          "Respektvoll schreiben.",
-          "Bei Beleidigungen Hilfe holen."
+          "Ich poste nicht alles öffentlich.",
+          "Ich prüfe Freundschafts-Anfragen.",
+          "Ich schreibe respektvoll.",
+          "Ich hole Unterstützung bei Beleidigungen."
         ]
       }
     ],
@@ -994,8 +997,8 @@ const topics = [
           "Wie schnell kann ich posten?"
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
@@ -1004,8 +1007,8 @@ const topics = [
           "Erst prüfen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was ist bei Kommentaren wichtig?",
@@ -1014,8 +1017,8 @@ const topics = [
           "Andere beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was kann privat sein?",
@@ -1024,8 +1027,8 @@ const topics = [
           "Ein Gruß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Du wirst beleidigt. Was ist besser?",
@@ -1034,8 +1037,8 @@ const topics = [
           "Unterstützung holen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was bedeutet: Wer darf etwas sehen?",
@@ -1044,8 +1047,8 @@ const topics = [
           "Alle sehen immer alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Ein Foto zeigt andere Menschen. Was ist besser?",
@@ -1054,8 +1057,8 @@ const topics = [
           "Einfach posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Warum sind alte Beiträge wichtig?",
@@ -1064,8 +1067,8 @@ const topics = [
           "Sie verschwinden immer."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was ist gut im Profil?",
@@ -1074,8 +1077,8 @@ const topics = [
           "Passwort öffentlich schreiben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -1084,8 +1087,8 @@ const topics = [
           "Immer alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du prüfst, wer etwas sehen darf.",
-        "feedbackWrong": "Das ist nicht sicher. Andere Menschen können private Dinge sehen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst, was andere sehen können.",
+        "feedbackWrong": "Das ist nicht sicher. Private Dinge können sonst öffentlich werden."
       }
     ],
     "certificateGoals": [
@@ -1139,8 +1142,8 @@ const topics = [
           "Nur die Farbe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Warum ist der Standort wichtig?",
@@ -1149,8 +1152,8 @@ const topics = [
           "Er ist immer egal."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
@@ -1159,8 +1162,8 @@ const topics = [
           "Keine Fotos schicken."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Was können Menschen bei kurzen Videos machen?",
@@ -1169,8 +1172,8 @@ const topics = [
           "Nichts speichern."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was ist besser?",
@@ -1179,8 +1182,8 @@ const topics = [
           "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Warum sind bearbeitete Bilder wichtig?",
@@ -1189,8 +1192,8 @@ const topics = [
           "Alles ist immer echt."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -1199,8 +1202,8 @@ const topics = [
           "Immer sofort posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Wer darf private Fotos bekommen?",
@@ -1209,8 +1212,8 @@ const topics = [
           "Alle fremden Personen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Du bist unsicher bei einem Profil. Was hilft?",
@@ -1219,8 +1222,8 @@ const topics = [
           "Private Daten schicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Was ist bei Instagram wichtig?",
@@ -1229,8 +1232,8 @@ const topics = [
           "Alles öffentlich machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       }
     ],
     "lessons": [
@@ -1240,8 +1243,9 @@ const topics = [
         "icon": "photo",
         "text": [
           "Hier lernst du etwas über Instagram.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -1253,7 +1257,6 @@ const topics = [
           "Andere Menschen können das Foto sehen.",
           "Manchmal sieht man mehr, als man denkt."
         ],
-        "remember": "Ich prüfe, was auf dem Foto zu sehen ist.",
         "practice": {
           "question": "Im Hintergrund sieht man eine andere Person. Was ist besser?",
           "answers": [
@@ -1261,8 +1264,9 @@ const topics = [
             "Ich frage erst oder nehme ein anderes Foto."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen nicht einfach auf deinem Foto erscheinen.",
-          "feedbackCorrect": "Das ist sicher. Du achtest auf andere Personen auf dem Foto."
+          "feedbackWrong": "Das ist nicht sicher. Andere Menschen sollen nicht einfach auf einem Foto erscheinen.",
+          "feedbackCorrect": "Das ist sicher. Du fragst erst oder nimmst ein anderes Foto.",
+          "remember": "Ich prüfe, was auf dem Foto zu sehen ist."
         }
       },
       {
@@ -1285,7 +1289,6 @@ const topics = [
           "Nicht jeder muss wissen, wo du bist.",
           "Du teilst deinen Standort nicht einfach."
         ],
-        "remember": "Ich teile meinen Standort nicht einfach.",
         "practice": {
           "question": "Eine App will deinen Standort zeigen. Was ist besser?",
           "answers": [
@@ -1294,7 +1297,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Andere Menschen können sehen, wo du bist.",
-          "feedbackCorrect": "Das ist sicher. Du teilst deinen Standort nicht einfach."
+          "feedbackCorrect": "Das ist sicher. Du teilst deinen Standort nicht einfach.",
+          "remember": "Ich teile meinen Standort nicht einfach."
         }
       },
       {
@@ -1306,7 +1310,6 @@ const topics = [
           "Die Person fragt vielleicht nach privaten Fotos.",
           "Das ist ein Warnzeichen."
         ],
-        "remember": "Ich schicke fremden Personen keine privaten Fotos.",
         "practice": {
           "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
           "answers": [
@@ -1315,7 +1318,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Private Fotos gehören nicht an fremde Personen.",
-          "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Fotos."
+          "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Fotos.",
+          "remember": "Ich schicke fremden Personen keine privaten Fotos."
         }
       },
       {
@@ -1348,10 +1352,10 @@ const topics = [
           "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
-          "Fotos prüfen.",
-          "Standort schützen.",
-          "Fremden nicht sofort antworten.",
-          "Keine privaten Fotos an Fremde schicken."
+          "Ich prüfe Fotos vor dem Posten.",
+          "Ich schütze meinen Standort.",
+          "Ich schicke fremden Personen keine privaten Fotos.",
+          "Ich hole Unterstützung bei verletzenden Kommentaren."
         ]
       }
     ],
@@ -1364,8 +1368,8 @@ const topics = [
           "Nur die Farbe."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Warum ist der Standort wichtig?",
@@ -1374,8 +1378,8 @@ const topics = [
           "Er ist immer egal."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
@@ -1384,8 +1388,8 @@ const topics = [
           "Keine Fotos schicken."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Was können Menschen bei kurzen Videos machen?",
@@ -1394,8 +1398,8 @@ const topics = [
           "Nichts speichern."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was ist besser?",
@@ -1404,8 +1408,8 @@ const topics = [
           "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Warum sind bearbeitete Bilder wichtig?",
@@ -1414,8 +1418,8 @@ const topics = [
           "Alles ist immer echt."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -1424,8 +1428,8 @@ const topics = [
           "Immer sofort posten."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Wer darf private Fotos bekommen?",
@@ -1434,8 +1438,8 @@ const topics = [
           "Alle fremden Personen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Du bist unsicher bei einem Profil. Was hilft?",
@@ -1444,8 +1448,8 @@ const topics = [
           "Private Daten schicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       },
       {
         "question": "Was ist bei Instagram wichtig?",
@@ -1454,8 +1458,8 @@ const topics = [
           "Alles öffentlich machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt Fotos und private Informationen.",
-        "feedbackWrong": "Das ist nicht sicher. Fotos und Standort können privat sein. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du schützt Fotos, Standort und private Nachrichten.",
+        "feedbackWrong": "Das ist nicht sicher. Fotos, Standort und private Nachrichten können privat sein."
       }
     ],
     "certificateGoals": [
@@ -1509,8 +1513,8 @@ const topics = [
           "Alles glauben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Was will Werbung oft?",
@@ -1519,8 +1523,8 @@ const topics = [
           "Dass ich Pause mache."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "YouTube startet immer weiter. Was ist besser?",
@@ -1529,8 +1533,8 @@ const topics = [
           "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Eine Mutprobe ist gefährlich. Was ist besser?",
@@ -1539,8 +1543,8 @@ const topics = [
           "Nachmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Kommentare verletzen dich. Was ist besser?",
@@ -1549,8 +1553,8 @@ const topics = [
           "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Wofür kann YouTube gut sein?",
@@ -1559,8 +1563,8 @@ const topics = [
           "Passwort teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Ein Video macht Angst. Was ist besser?",
@@ -1569,8 +1573,8 @@ const topics = [
           "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -1579,8 +1583,8 @@ const topics = [
           "Alles anklicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Ein Video will, dass du sofort kaufst. Was ist besser?",
@@ -1589,8 +1593,8 @@ const topics = [
           "Sofort kaufen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Warum sind Pausen wichtig?",
@@ -1599,19 +1603,20 @@ const topics = [
           "Damit Videos schneller werden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       }
     ],
     "lessons": [
       {
         "title": "Start",
         "module": "Start",
-        "icon": "help",
+        "icon": "understand",
         "text": [
           "Hier lernst du etwas über YouTube.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -1634,7 +1639,6 @@ const topics = [
           "Manchmal sieht Werbung wie ein normales Video aus.",
           "Du kaufst nicht sofort."
         ],
-        "remember": "Ich kaufe nichts sofort aus einem Video.",
         "practice": {
           "question": "Ein Video sagt: Kauf das sofort. Was ist besser?",
           "answers": [
@@ -1642,8 +1646,9 @@ const topics = [
             "Ich kaufe nicht sofort."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Werbung kann Druck machen. Du musst nicht sofort kaufen.",
-          "feedbackCorrect": "Das ist sicher. Du kaufst nicht sofort aus einem Video."
+          "feedbackWrong": "Das ist nicht sicher. Werbung will oft, dass du schnell etwas kaufst.",
+          "feedbackCorrect": "Das ist sicher. Du kaufst nicht sofort.",
+          "remember": "Ich kaufe nichts sofort aus einem Video."
         }
       },
       {
@@ -1666,7 +1671,6 @@ const topics = [
           "Dann schaut man oft länger.",
           "Du darfst stoppen und Pause machen."
         ],
-        "remember": "Ich darf Videos stoppen und Pause machen.",
         "practice": {
           "question": "YouTube startet immer weiter. Du bist müde. Was ist besser?",
           "answers": [
@@ -1675,7 +1679,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht gut für dich. Wenn du müde bist, brauchst du eine Pause.",
-          "feedbackCorrect": "Das ist sicher. Du stoppst die Videos und machst Pause."
+          "feedbackCorrect": "Das ist sicher. Du stoppst die Videos und machst Pause.",
+          "remember": "Ich darf Videos stoppen und Pause machen."
         }
       },
       {
@@ -1708,10 +1713,10 @@ const topics = [
           "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
-          "Videos prüfen.",
-          "Werbung erkennen.",
-          "Pausen machen.",
-          "Gefährliche Dinge nicht nachmachen."
+          "Ich glaube nicht alles sofort.",
+          "Ich kaufe nichts sofort aus Videos.",
+          "Ich mache Pausen.",
+          "Ich mache gefährliche Dinge nicht nach."
         ]
       }
     ],
@@ -1724,8 +1729,8 @@ const topics = [
           "Alles glauben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Was will Werbung oft?",
@@ -1734,8 +1739,8 @@ const topics = [
           "Dass ich Pause mache."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "YouTube startet immer weiter. Was ist besser?",
@@ -1744,8 +1749,8 @@ const topics = [
           "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Eine Mutprobe ist gefährlich. Was ist besser?",
@@ -1754,8 +1759,8 @@ const topics = [
           "Nachmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Kommentare verletzen dich. Was ist besser?",
@@ -1764,8 +1769,8 @@ const topics = [
           "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Wofür kann YouTube gut sein?",
@@ -1774,8 +1779,8 @@ const topics = [
           "Passwort teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Ein Video macht Angst. Was ist besser?",
@@ -1784,8 +1789,8 @@ const topics = [
           "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -1794,8 +1799,8 @@ const topics = [
           "Alles anklicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Ein Video will, dass du sofort kaufst. Was ist besser?",
@@ -1804,8 +1809,8 @@ const topics = [
           "Sofort kaufen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       },
       {
         "question": "Warum sind Pausen wichtig?",
@@ -1814,8 +1819,8 @@ const topics = [
           "Damit Videos schneller werden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du machst langsam und prüfst.",
-        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du prüfst Videos, Werbung und Pausen.",
+        "feedbackWrong": "Das ist nicht sicher. Videos und Werbung können Druck machen."
       }
     ],
     "certificateGoals": [
@@ -1870,7 +1875,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Eine fremde Person fragt nach deinem Standort. Was ist besser?",
@@ -1880,7 +1885,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Jemand macht Druck wegen einem Bild. Was ist besser?",
@@ -1890,7 +1895,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was ist ein Bild vom Bildschirm?",
@@ -1900,7 +1905,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Wer soll deinen Standort sehen?",
@@ -1910,7 +1915,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was ist ein Warnzeichen?",
@@ -1920,7 +1925,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Du bist unsicher bei einem Kontakt. Was hilft?",
@@ -1930,7 +1935,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was darfst du sagen?",
@@ -1940,7 +1945,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -1950,7 +1955,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was machst du bei komischen Nachrichten?",
@@ -1960,7 +1965,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       }
     ],
     "lessons": [
@@ -1970,8 +1975,9 @@ const topics = [
         "icon": "photo",
         "text": [
           "Hier lernst du etwas über Snapchat.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -1983,7 +1989,6 @@ const topics = [
           "Du denkst vielleicht: Das verschwindet gleich.",
           "Aber jemand kann das Bild speichern."
         ],
-        "remember": "Ich sende nur Bilder, die sicher sind.",
         "practice": {
           "question": "Du willst ein sehr privates Bild senden. Was ist besser?",
           "answers": [
@@ -1992,7 +1997,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Ein Bild kann gespeichert werden.",
-          "feedbackCorrect": "Das ist sicher. Du sendest kein sehr privates Bild."
+          "feedbackCorrect": "Das ist sicher. Du sendest kein sehr privates Bild.",
+          "remember": "Ich sende nur Bilder, die sicher sind."
         }
       },
       {
@@ -2015,7 +2021,6 @@ const topics = [
           "Andere können dann deinen Ort sehen.",
           "Das kann unsicher sein."
         ],
-        "remember": "Ich teile meinen Standort nicht einfach.",
         "practice": {
           "question": "Eine fremde Person fragt: Wo bist du? Was ist besser?",
           "answers": [
@@ -2023,8 +2028,9 @@ const topics = [
             "Ich schicke meinen Standort nicht."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Andere Menschen können sehen, wo du bist.",
-          "feedbackCorrect": "Das ist sicher. Du teilst deinen Standort nicht einfach."
+          "feedbackWrong": "Das ist nicht sicher. Eine fremde Person soll deinen Standort nicht bekommen.",
+          "feedbackCorrect": "Das ist sicher. Du schickst deinen Standort nicht.",
+          "remember": "Ich teile meinen Standort nicht einfach."
         }
       },
       {
@@ -2069,9 +2075,9 @@ const topics = [
         ],
         "bullets": [
           "Bilder können gespeichert werden.",
-          "Standort schützen.",
-          "Kontakte prüfen.",
-          "Bei Druck Hilfe holen."
+          "Ich schütze meinen Standort.",
+          "Ich prüfe Kontakte.",
+          "Ich sage Nein bei Druck."
         ]
       }
     ],
@@ -2085,7 +2091,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Eine fremde Person fragt nach deinem Standort. Was ist besser?",
@@ -2095,7 +2101,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Jemand macht Druck wegen einem Bild. Was ist besser?",
@@ -2105,7 +2111,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was ist ein Bild vom Bildschirm?",
@@ -2115,7 +2121,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Wer soll deinen Standort sehen?",
@@ -2125,7 +2131,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was ist ein Warnzeichen?",
@@ -2135,7 +2141,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Du bist unsicher bei einem Kontakt. Was hilft?",
@@ -2145,7 +2151,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was darfst du sagen?",
@@ -2155,7 +2161,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -2165,7 +2171,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       },
       {
         "question": "Was machst du bei komischen Nachrichten?",
@@ -2175,7 +2181,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du schützt Bilder und Standort.",
-        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bilder und Standort können gespeichert oder weitergegeben werden."
       }
     ],
     "certificateGoals": [
@@ -2229,8 +2235,8 @@ const topics = [
           "Alles sofort machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Warum kommen ähnliche Videos?",
@@ -2239,8 +2245,8 @@ const topics = [
           "TikTok liest meine Gedanken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Ein Trend ist gefährlich. Was ist besser?",
@@ -2249,8 +2255,8 @@ const topics = [
           "Mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
@@ -2259,8 +2265,8 @@ const topics = [
           "Adresse nicht schicken."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Du schaust länger als geplant. Was hilft?",
@@ -2269,8 +2275,8 @@ const topics = [
           "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was ist besser?",
@@ -2279,8 +2285,8 @@ const topics = [
           "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Vor dem Posten eines Videos prüfst du:",
@@ -2289,8 +2295,8 @@ const topics = [
           "Nichts."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -2299,8 +2305,8 @@ const topics = [
           "TikTok bestimmt alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Was darfst du bei Druck machen?",
@@ -2309,8 +2315,8 @@ const topics = [
           "Immer mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Was schützt dich?",
@@ -2319,19 +2325,20 @@ const topics = [
           "Alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       }
     ],
     "lessons": [
       {
         "title": "Start",
         "module": "Start",
-        "icon": "help",
+        "icon": "understand",
         "text": [
           "Hier lernst du etwas über TikTok.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -2343,7 +2350,6 @@ const topics = [
           "Manche Trends sind lustig.",
           "Manche Trends sind gefährlich."
         ],
-        "remember": "Ich mache gefährliche Trends nicht nach.",
         "practice": {
           "question": "Ein Trend sieht gefährlich aus. Was ist besser?",
           "answers": [
@@ -2351,8 +2357,9 @@ const topics = [
             "Ich mache nicht mit."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Gefährliche Trends können dich verletzen.",
-          "feedbackCorrect": "Das ist sicher. Du machst bei gefährlichen Trends nicht mit."
+          "feedbackWrong": "Das ist nicht sicher. Ein gefährlicher Trend kann dich verletzen.",
+          "feedbackCorrect": "Das ist sicher. Du machst bei gefährlichen Trends nicht mit.",
+          "remember": "Ich mache gefährliche Trends nicht nach."
         }
       },
       {
@@ -2364,7 +2371,6 @@ const topics = [
           "Dann zeigt TikTok oft ähnliche Videos.",
           "Darum kann man schnell lange schauen."
         ],
-        "remember": "Ich mache Pause, wenn mir Videos nicht gut tun.",
         "practice": {
           "question": "TikTok zeigt dir viele traurige Videos. Was ist besser?",
           "answers": [
@@ -2373,7 +2379,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das tut dir vielleicht nicht gut. Viele traurige Videos können deine Stimmung schlechter machen.",
-          "feedbackCorrect": "Das ist sicher. Eine Pause kann dir helfen."
+          "feedbackCorrect": "Das ist sicher. Du machst Pause, wenn dir Videos nicht gut tun.",
+          "remember": "Ich mache Pause, wenn mir Videos nicht gut tun."
         }
       },
       {
@@ -2396,7 +2403,6 @@ const topics = [
           "Manche fragen nach privaten Daten.",
           "Private Daten bleiben geschützt."
         ],
-        "remember": "Ich gebe fremden Personen keine privaten Daten.",
         "practice": {
           "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
           "answers": [
@@ -2404,8 +2410,9 @@ const topics = [
             "Ich schicke die Adresse nicht."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Private Fotos gehören nicht an fremde Personen.",
-          "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Fotos."
+          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat.",
+          "feedbackCorrect": "Das ist sicher. Du gibst fremden Personen keine Adresse.",
+          "remember": "Ich gebe fremden Personen keine privaten Daten."
         }
       },
       {
@@ -2438,10 +2445,10 @@ const topics = [
           "Das sind die wichtigsten Regeln aus diesem Thema."
         ],
         "bullets": [
-          "Gefährliche Trends nicht nachmachen.",
-          "Pausen machen.",
-          "Private Daten schützen.",
-          "Videos vor dem Posten prüfen."
+          "Ich mache gefährliche Trends nicht nach.",
+          "Ich mache Pausen.",
+          "Ich schütze private Daten.",
+          "Ich prüfe Videos vor dem Posten."
         ]
       }
     ],
@@ -2454,8 +2461,8 @@ const topics = [
           "Alles sofort machen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Warum kommen ähnliche Videos?",
@@ -2464,8 +2471,8 @@ const topics = [
           "TikTok liest meine Gedanken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Ein Trend ist gefährlich. Was ist besser?",
@@ -2474,8 +2481,8 @@ const topics = [
           "Mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
@@ -2484,8 +2491,8 @@ const topics = [
           "Adresse nicht schicken."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Du schaust länger als geplant. Was hilft?",
@@ -2494,8 +2501,8 @@ const topics = [
           "Immer weiter schauen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Ein Kommentar verletzt dich. Was ist besser?",
@@ -2504,8 +2511,8 @@ const topics = [
           "Zurück beleidigen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Vor dem Posten eines Videos prüfst du:",
@@ -2514,8 +2521,8 @@ const topics = [
           "Nichts."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -2524,8 +2531,8 @@ const topics = [
           "TikTok bestimmt alles."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Was darfst du bei Druck machen?",
@@ -2534,8 +2541,8 @@ const topics = [
           "Immer mitmachen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       },
       {
         "question": "Was schützt dich?",
@@ -2544,8 +2551,8 @@ const topics = [
           "Alles teilen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist sicher. Du schützt dich und machst Pause, wenn etwas nicht gut tut.",
-        "feedbackWrong": "Das ist nicht sicher. Trends, Kommentare oder fremde Nachrichten können Druck machen. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackCorrect": "Das ist sicher. Du achtest auf Trends, Nachrichten und deine Gefühle.",
+        "feedbackWrong": "Das ist nicht sicher. Trends, fremde Nachrichten oder Videos können Druck machen."
       }
     ],
     "certificateGoals": [
@@ -2600,7 +2607,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Warum nicht sofort löschen?",
@@ -2610,7 +2617,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Jemand macht Druck. Was ist besser?",
@@ -2620,7 +2627,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Wer kann helfen?",
@@ -2630,7 +2637,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was ist ein Bild vom Bildschirm?",
@@ -2640,7 +2647,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Du hast Angst. Was ist besser?",
@@ -2650,7 +2657,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was bedeutet Stopp-Regel?",
@@ -2660,7 +2667,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was machst du mit einer beleidigenden Nachricht?",
@@ -2670,7 +2677,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -2680,7 +2687,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Du verstehst eine Nachricht nicht. Was hilft?",
@@ -2690,7 +2697,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       }
     ],
     "lessons": [
@@ -2700,8 +2707,9 @@ const topics = [
         "icon": "help",
         "text": [
           "Hier lernst du etwas über Hilfe bei Problemen.",
+          "Du bekommst Beispiele aus dem Alltag.",
           "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Du kannst Hilfe nutzen, wenn du unsicher bist."
         ]
       },
       {
@@ -2713,7 +2721,6 @@ const topics = [
           "Du willst vielleicht sofort antworten.",
           "Dann hilft die Stopp-Regel."
         ],
-        "remember": "Stopp. Ich reagiere nicht sofort.",
         "practice": {
           "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
           "answers": [
@@ -2722,7 +2729,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Bei Angst oder Stress ist sofort antworten nicht gut.",
-          "feedbackCorrect": "Das ist sicher. Du machst erst Stopp."
+          "feedbackCorrect": "Das ist sicher. Du machst erst Stopp.",
+          "remember": "Stopp. Ich reagiere nicht sofort."
         }
       },
       {
@@ -2734,7 +2742,6 @@ const topics = [
           "Du willst die Nachricht vielleicht löschen.",
           "Aber die Nachricht kann wichtig sein."
         ],
-        "remember": "Ich zeige die Nachricht, bevor ich sie lösche.",
         "practice": {
           "question": "Du bekommst eine beleidigende Nachricht. Was ist besser?",
           "answers": [
@@ -2743,7 +2750,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht gut. Die Nachricht kann wichtig sein, wenn du Unterstützung holst.",
-          "feedbackCorrect": "Das ist sicher. Du löschst nicht sofort."
+          "feedbackCorrect": "Das ist sicher. Du löschst nicht sofort.",
+          "remember": "Ich zeige die Nachricht, bevor ich sie lösche."
         }
       },
       {
@@ -2777,7 +2785,6 @@ const topics = [
           "Jemand sagt: Mach das sofort.",
           "Das ist Druck."
         ],
-        "remember": "Druck ist ein Warnzeichen.",
         "practice": {
           "question": "Jemand schreibt: Sag es niemandem. Was ist besser?",
           "answers": [
@@ -2786,7 +2793,8 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht gut. Bei Druck sollst du nicht allein bleiben.",
-          "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein mit dem Druck."
+          "feedbackCorrect": "Das ist sicher. Du holst Unterstützung.",
+          "remember": "Druck ist ein Warnzeichen."
         }
       },
       {
@@ -2826,7 +2834,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Warum nicht sofort löschen?",
@@ -2836,7 +2844,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Jemand macht Druck. Was ist besser?",
@@ -2846,7 +2854,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Wer kann helfen?",
@@ -2856,7 +2864,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was ist ein Bild vom Bildschirm?",
@@ -2866,7 +2874,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Du hast Angst. Was ist besser?",
@@ -2876,7 +2884,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was bedeutet Stopp-Regel?",
@@ -2886,7 +2894,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was machst du mit einer beleidigenden Nachricht?",
@@ -2896,7 +2904,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Was ist eine gute Regel?",
@@ -2906,7 +2914,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       },
       {
         "question": "Du verstehst eine Nachricht nicht. Was hilft?",
@@ -2916,7 +2924,7 @@ const topics = [
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist sicher. Du machst langsam und bleibst nicht allein.",
-        "feedbackWrong": "Das ist nicht sicher. Bei Druck, Angst oder Beleidigungen brauchst du Unterstützung. Nutze den Hilfe-Button, wenn du unsicher bist."
+        "feedbackWrong": "Das ist nicht sicher. Bei Angst, Druck oder Beleidigung brauchst du Unterstützung."
       }
     ],
     "certificateGoals": [

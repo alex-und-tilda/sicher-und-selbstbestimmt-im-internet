@@ -1,9 +1,12 @@
 
 /*
-  Stabile App-Version
-  Zweck:
-  - Keine Lernstand-Speicherung
-  - Einfache, robuste Navigation
+  Endversion Lernplattform
+  Ziel:
+  - klare Lernlogik
+  - Einfache Sprache
+  - keine Speicherung
+  - Übung: Antwort -> Rückmeldung -> Weiter / Nochmal versuchen
+  - Merksatz erst nach passender Entscheidung
 */
 
 let currentTopicId = null;
@@ -11,9 +14,7 @@ let currentMode = "full";
 let currentStep = 0;
 let currentQuizIndex = 0;
 let quizScore = 0;
-let selectedAnswer = null;
-let currentPractice = null;
-let currentPracticeFeedback = null;
+let quizAnsweredCorrect = new Set();
 
 const content = document.getElementById("content");
 const appTitle = document.getElementById("appTitle");
@@ -36,68 +37,19 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-
 function getTopicColorStyle(topicId) {
   const colors = {
-    datenschutz: {
-      color: "#00285A",
-      ring: "rgba(0, 40, 90, 0.24)",
-      bg: "rgba(0, 40, 90, 0.08)",
-      icon: "#EAF1F8"
-    },
-    whatsapp: {
-      color: "#25D366",
-      ring: "rgba(37, 211, 102, 0.30)",
-      bg: "rgba(37, 211, 102, 0.12)",
-      icon: "#E9FBEF"
-    },
-    facebook: {
-      color: "#1877F2",
-      ring: "rgba(24, 119, 242, 0.28)",
-      bg: "rgba(24, 119, 242, 0.10)",
-      icon: "#EAF3FF"
-    },
-    instagram: {
-      color: "#C13584",
-      ring: "rgba(193, 53, 132, 0.28)",
-      bg: "rgba(193, 53, 132, 0.10)",
-      icon: "#FBEAF4"
-    },
-    youtube: {
-      color: "#FF0000",
-      ring: "rgba(255, 0, 0, 0.24)",
-      bg: "rgba(255, 0, 0, 0.09)",
-      icon: "#FFECEC"
-    },
-    snapchat: {
-      color: "#C9A600",
-      ring: "rgba(255, 252, 0, 0.42)",
-      bg: "rgba(255, 252, 0, 0.18)",
-      icon: "#FFFBD1"
-    },
-    tiktok: {
-      color: "#111111",
-      ring: "rgba(37, 244, 238, 0.34)",
-      bg: "rgba(37, 244, 238, 0.12)",
-      icon: "#E8FFFF"
-    },
-    hilfe: {
-      color: "#C9541C",
-      ring: "rgba(201, 84, 28, 0.30)",
-      bg: "rgba(201, 84, 28, 0.12)",
-      icon: "#FFF0E8"
-    }
+    datenschutz: ["#00285A", "rgba(0, 40, 90, 0.24)", "rgba(0, 40, 90, 0.08)", "#EAF1F8"],
+    whatsapp: ["#25D366", "rgba(37, 211, 102, 0.30)", "rgba(37, 211, 102, 0.12)", "#E9FBEF"],
+    facebook: ["#1877F2", "rgba(24, 119, 242, 0.28)", "rgba(24, 119, 242, 0.10)", "#EAF3FF"],
+    instagram: ["#C13584", "rgba(193, 53, 132, 0.28)", "rgba(193, 53, 132, 0.10)", "#FBEAF4"],
+    youtube: ["#FF0000", "rgba(255, 0, 0, 0.24)", "rgba(255, 0, 0, 0.09)", "#FFECEC"],
+    snapchat: ["#C9A600", "rgba(255, 252, 0, 0.42)", "rgba(255, 252, 0, 0.18)", "#FFFBD1"],
+    tiktok: ["#111111", "rgba(37, 244, 238, 0.34)", "rgba(37, 244, 238, 0.12)", "#E8FFFF"],
+    hilfe: ["#C9541C", "rgba(201, 84, 28, 0.30)", "rgba(201, 84, 28, 0.12)", "#FFF0E8"]
   };
-
-  const key = String(topicId || "").toLowerCase();
-  const value = colors[key] || colors.datenschutz;
-
-  return [
-    `--topic-color: ${value.color}`,
-    `--topic-ring: ${value.ring}`,
-    `--topic-hover-bg: ${value.bg}`,
-    `--topic-icon-bg: ${value.icon}`
-  ].join("; ");
+  const [color, ring, bg, icon] = colors[topicId] || colors.datenschutz;
+  return `--topic-color:${color};--topic-ring:${ring};--topic-hover-bg:${bg};--topic-icon-bg:${icon}`;
 }
 
 function getCurrentTopic() {
@@ -114,22 +66,14 @@ function getIllustrationHtml(topic) {
   return `<img class="topic-illustration" src="${escapeHtml(topic.illustration)}" alt="" aria-hidden="true">`;
 }
 
-
-
-
-
-
-
 function setProgressVisible(isVisible) {
   const progressArea = document.querySelector(".progress-area");
-  if (!progressArea) return;
-  progressArea.classList.toggle("is-hidden", !isVisible);
+  if (progressArea) progressArea.classList.toggle("is-hidden", !isVisible);
 }
 
 function setBottomNavVisible(isVisible) {
   const nav = document.querySelector(".nav");
-  if (!nav) return;
-  nav.classList.toggle("is-hidden", !isVisible);
+  if (nav) nav.classList.toggle("is-hidden", !isVisible);
 }
 
 function setHeader(title, module, step, level, percent) {
@@ -137,14 +81,19 @@ function setHeader(title, module, step, level, percent) {
   moduleLabel.textContent = module || "Thema auswählen";
   stepLabel.textContent = step || "Themenübersicht";
   levelLabel.textContent = level || "Start";
-  progressFill.style.width = `${Math.max(0, Math.min(100, percent || 0))}%`;
-  progressTrack.setAttribute("aria-valuenow", String(Math.max(0, Math.min(100, percent || 0))));
+  const safePercent = Math.max(0, Math.min(100, percent || 0));
+  progressFill.style.width = `${safePercent}%`;
+  progressTrack.setAttribute("aria-valuenow", String(safePercent));
 }
 
 function showNav(showBack, showNext, nextText = "Weiter") {
   backButton.disabled = !showBack;
   nextButton.disabled = !showNext;
   nextButton.textContent = nextText;
+}
+
+function announce(text) {
+  if (liveRegion) liveRegion.textContent = text || "";
 }
 
 function renderLegalFooter() {
@@ -161,15 +110,20 @@ function renderLegalFooter() {
   appRoot.appendChild(footer);
 }
 
-function renderMenu() {
-  setProgressVisible(false);
-  setBottomNavVisible(false);
+function focusContent() {
+  content.focus();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
+function renderMenu() {
   currentTopicId = null;
   currentStep = 0;
   currentQuizIndex = 0;
-  selectedAnswer = null;
+  quizScore = 0;
+  quizAnsweredCorrect = new Set();
 
+  setProgressVisible(false);
+  setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Thema auswählen", "Themenübersicht", "Wähle ein Thema", 0);
   showNav(false, false);
 
@@ -188,33 +142,25 @@ function renderMenu() {
         <h2>Wähle ein Thema.</h2>
         <p>Danach entscheidest du, wie du lernen möchtest.</p>
       </div>
-
-      <div class="topic-grid">
-        ${cards}
-      </div>
+      <div class="topic-grid">${cards}</div>
     </section>
   `;
-
-  content.focus();
+  focusContent();
   renderLegalFooter();
 }
 
 function renderTopicChoice(topicId) {
-  setProgressVisible(false);
-  setBottomNavVisible(false);
-
   const topic = topics.find(item => item.id === topicId);
-  if (!topic) {
-    renderMenu();
-    return;
-  }
+  if (!topic) return renderMenu();
 
   currentTopicId = topic.id;
   currentStep = 0;
   currentQuizIndex = 0;
   quizScore = 0;
-  selectedAnswer = null;
+  quizAnsweredCorrect = new Set();
 
+  setProgressVisible(false);
+  setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", topic.title, "Thema auswählen", "Lernweg wählen", 0);
   showNav(false, false);
 
@@ -230,7 +176,8 @@ function renderTopicChoice(topicId) {
         </div>
         <p>${escapeHtml(topic.desc || "")}</p>
       </article>
-<div class="learning-path-heading">
+
+      <div class="learning-path-heading">
         <h3>Wie möchtest du lernen?</h3>
       </div>
 
@@ -268,76 +215,97 @@ function renderTopicChoice(topicId) {
         </button>
       </div>
 
-      <div class="support-help-area">
-        <button type="button" class="support-help-button" onclick="toggleSupportHelp()" aria-expanded="false" aria-controls="supportHelpPanel">
-          <span class="support-help-icon" aria-hidden="true">${getIconHtml("help")}</span>
-          <span class="support-help-text">
-            <span class="support-help-title">Du brauchst Unterstützung?</span>
-            <span class="support-help-desc">Hilfe anzeigen.</span>
-          </span>
-        </button>
-
-        <div id="supportHelpPanel" class="support-help-panel" hidden>
-          <h3>Du kannst Hilfe holen.</h3>
-
-          <div class="support-help-grid">
-            <div class="support-help-card">
-              <h4>Wenn du die Seite nicht bedienen kannst</h4>
-              <ul>
-                <li>Zeige auf die Stelle.</li>
-                <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
-                <li>Bitte um langsames Erklären.</li>
-              </ul>
-            </div>
-
-            <div class="support-help-card">
-              <h4>Wenn du eine Frage nicht verstehst</h4>
-              <ul>
-                <li>Lies die Frage noch einmal.</li>
-                <li>Bitte eine Person um Erklärung.</li>
-                <li>Sage: Bitte erkläre mir das einfacher.</li>
-              </ul>
-            </div>
-
-            <div class="support-help-card">
-              <h4>Wen kannst du fragen?</h4>
-              <ul>
-                <li>Eine Person, der du vertraust.</li>
-                <li>Eine Person, die dich unterstützt.</li>
-                <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
-                <li>Jemanden im Wohnbereich oder Dienst.</li>
-              </ul>
-            </div>
-          </div>
-
-          <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
-
-          <button type="button" class="support-help-close" onclick="closeSupportHelp()">Hilfe ausblenden</button>
-        </div>
-      </div>
+      ${buildSupportBox()}
     </section>
   `;
-
-  content.focus();
+  focusContent();
   renderLegalFooter();
+}
+
+function buildSupportBox() {
+  return `
+    <div class="support-help-area">
+      <button type="button" class="support-help-button" onclick="toggleSupportHelp()" aria-expanded="false" aria-controls="supportHelpPanel">
+        <span class="support-help-icon" aria-hidden="true">${getIconHtml("help")}</span>
+        <span class="support-help-text">
+          <span class="support-help-title">Du brauchst Unterstützung?</span>
+          <span class="support-help-desc">Hilfe anzeigen.</span>
+        </span>
+      </button>
+
+      <div id="supportHelpPanel" class="support-help-panel" hidden>
+        <h3>Du kannst Hilfe holen.</h3>
+        <div class="support-help-grid">
+          <div class="support-help-card">
+            <h4>Wenn du die Seite nicht bedienen kannst</h4>
+            <ul>
+              <li>Zeige auf die Stelle.</li>
+              <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
+              <li>Bitte um langsames Erklären.</li>
+            </ul>
+          </div>
+          <div class="support-help-card">
+            <h4>Wenn du eine Frage nicht verstehst</h4>
+            <ul>
+              <li>Lies die Frage noch einmal.</li>
+              <li>Bitte eine Person um Erklärung.</li>
+              <li>Sage: Bitte erkläre mir das einfacher.</li>
+            </ul>
+          </div>
+          <div class="support-help-card">
+            <h4>Wen kannst du fragen?</h4>
+            <ul>
+              <li>Eine Person, der du vertraust.</li>
+              <li>Eine Person, die dich unterstützt.</li>
+              <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
+              <li>Jemanden im Wohnbereich oder Dienst.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
+        <button type="button" class="support-help-close" onclick="closeSupportHelp()">Hilfe ausblenden</button>
+      </div>
+    </div>
+  `;
+}
+
+function toggleSupportHelp() {
+  const panel = document.getElementById("supportHelpPanel");
+  const button = document.querySelector(".support-help-button");
+  const desc = document.querySelector(".support-help-desc");
+  if (!panel) return;
+  const show = panel.hasAttribute("hidden");
+  if (show) {
+    panel.removeAttribute("hidden");
+    if (button) button.setAttribute("aria-expanded", "true");
+    if (desc) desc.textContent = "Hilfe wieder ausblenden.";
+  } else {
+    panel.setAttribute("hidden", "");
+    if (button) button.setAttribute("aria-expanded", "false");
+    if (desc) desc.textContent = "Hilfe anzeigen.";
+  }
+}
+
+function closeSupportHelp() {
+  const panel = document.getElementById("supportHelpPanel");
+  const button = document.querySelector(".support-help-button");
+  const desc = document.querySelector(".support-help-desc");
+  if (panel) panel.setAttribute("hidden", "");
+  if (button) button.setAttribute("aria-expanded", "false");
+  if (desc) desc.textContent = "Hilfe anzeigen.";
 }
 
 function getLessonsForMode(topic, mode) {
   if (!topic || !Array.isArray(topic.lessons)) return [];
   if (mode === "short" && Array.isArray(topic.shortLessonIndexes)) {
-    return topic.shortLessonIndexes
-      .map(index => topic.lessons[index])
-      .filter(Boolean);
+    return topic.shortLessonIndexes.map(index => topic.lessons[index]).filter(Boolean);
   }
   return topic.lessons;
 }
 
 function startTopicMode(topicId, mode) {
   const topic = topics.find(item => item.id === topicId);
-  if (!topic) {
-    renderMenu();
-    return;
-  }
+  if (!topic) return renderMenu();
   currentTopicId = topic.id;
   currentMode = mode === "short" ? "short" : "full";
   currentStep = 0;
@@ -345,20 +313,11 @@ function startTopicMode(topicId, mode) {
 }
 
 function renderLesson() {
-  setProgressVisible(true);
-  setBottomNavVisible(true);
-
   const topic = getCurrentTopic();
-  if (!topic) {
-    renderMenu();
-    return;
-  }
+  if (!topic) return renderMenu();
 
   const lessons = getLessonsForMode(topic, currentMode);
-  if (!lessons.length) {
-    renderTopicChoice(topic.id);
-    return;
-  }
+  if (!lessons.length) return renderTopicChoice(topic.id);
 
   if (currentStep < 0) currentStep = 0;
   if (currentStep >= lessons.length) currentStep = lessons.length - 1;
@@ -366,7 +325,10 @@ function renderLesson() {
   const lesson = lessons[currentStep];
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
   const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
+  const hasPractice = Boolean(lesson.practice);
 
+  setProgressVisible(true);
+  setBottomNavVisible(!hasPractice);
   setHeader(topic.title, modeLabel, `Seite ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
@@ -378,6 +340,10 @@ function renderLesson() {
     ? `<ul>${lesson.bullets.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
     : "";
 
+  const examples = Array.isArray(lesson.examples) && lesson.examples.length
+    ? `<div class="access-box example"><h3>Beispiele aus dem Alltag</h3><ul>${lesson.examples.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>`
+    : "";
+
   const warning = lesson.warning
     ? `<div class="access-box warning"><h3>Achtung</h3><p>${escapeHtml(lesson.warning)}</p></div>`
     : "";
@@ -387,16 +353,10 @@ function renderLesson() {
     : "";
 
   const remember = lesson.remember
-    ? `<div class="access-box remember remember-box"><h3>Merksatz</h3><p class="remember-text">${escapeHtml(lesson.remember)}</p></div>`
+    ? `<div class="access-box remember remember-box"><h3>Wichtig</h3><p class="remember-text">${escapeHtml(lesson.remember)}</p></div>`
     : "";
 
-  const examples = Array.isArray(lesson.examples) && lesson.examples.length
-    ? `<div class="access-box example"><h3>Beispiele</h3><ul>${lesson.examples.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>`
-    : "";
-
-  const practice = lesson.practice
-    ? buildPractice(lesson.practice)
-    : "";
+  const practice = hasPractice ? buildPractice(lesson.practice) : "";
 
   content.innerHTML = `
     <article class="card lesson-card">
@@ -414,67 +374,28 @@ function renderLesson() {
     </article>
   `;
 
-  content.focus();
+  focusContent();
   renderLegalFooter();
 }
 
+function buildPractice(practice) {
+  const question = practice.question || "";
+  const answers = Array.isArray(practice.answers) ? practice.answers : [];
+  const correctIndex = Number(practice.correctIndex ?? 0);
+  const answerHtml = answers.map((answer, index) => `
+    <button type="button" class="answer-option" onclick="renderPracticeFeedbackPage(${index}, ${correctIndex})">
+      ${escapeHtml(answer)}
+    </button>
+  `).join("");
 
-
-
-
-function getPracticeFeedbackText(isCorrect) {
-  if (isCorrect) {
-    return {
-      title: "Das ist eine sichere Antwort.",
-      text: "Du hast gut entschieden. Diese Antwort schützt dich besser.",
-      kind: "correct"
-    };
-  }
-
-  return {
-    title: "Das ist noch nicht die sichere Antwort.",
-    text: "Das ist nicht schlimm. Du kannst es noch einmal versuchen. Schau dir die Situation noch einmal in Ruhe an.",
-    kind: "wrong"
-  };
-}
-
-function getQuizFeedbackText(question, isCorrect) {
-  if (isCorrect) {
-    return {
-      title: "Das ist richtig.",
-      text: question.feedbackCorrect || "Diese Antwort ist sicher. Du hast gut entschieden.",
-      kind: "correct"
-    };
-  }
-
-  return {
-    title: "Das ist noch nicht richtig.",
-    text: question.feedbackWrong || "Diese Antwort ist nicht sicher. Du kannst die Frage noch einmal versuchen.",
-    kind: "wrong"
-  };
-}
-
-
-function toggleTaskHelp() {
-  const panel = document.getElementById("taskHelpPanel");
-  const button = document.querySelector(".task-help-button");
-  if (!panel) return;
-
-  const isHidden = panel.hasAttribute("hidden");
-
-  if (isHidden) {
-    panel.removeAttribute("hidden");
-    if (button) {
-      button.setAttribute("aria-expanded", "true");
-      button.textContent = "Hilfe ausblenden";
-    }
-  } else {
-    panel.setAttribute("hidden", "");
-    if (button) {
-      button.setAttribute("aria-expanded", "false");
-      button.textContent = "Ich bin unsicher";
-    }
-  }
+  return `
+    <div class="practice-box">
+      <h3>Übung</h3>
+      <p class="practice-question">${escapeHtml(question)}</p>
+      <div class="answers">${answerHtml}</div>
+      ${buildTaskHelpBox()}
+    </div>
+  `;
 }
 
 function buildTaskHelpBox() {
@@ -483,14 +404,13 @@ function buildTaskHelpBox() {
       <button type="button" class="task-help-button" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
         Ich bin unsicher
       </button>
-
       <div id="taskHelpPanel" class="task-help-panel" hidden>
         <h3>Du bist unsicher?</h3>
         <p>Du musst nicht raten.</p>
         <ul>
           <li>Lies die Frage noch einmal langsam.</li>
           <li>Schau dir beide Antworten an.</li>
-          <li>Überlege: Welche Antwort schützt mich besser?</li>
+          <li>Überlege: Welche Antwort schützt dich besser?</li>
           <li>Du kannst eine Pause machen.</li>
           <li>Du kannst eine Person fragen, der du vertraust.</li>
           <li>Du kannst sagen: Bitte erkläre mir das einfacher.</li>
@@ -500,74 +420,39 @@ function buildTaskHelpBox() {
   `;
 }
 
-function buildPractice(practice) {
-  const question = practice.question || practice.title || "";
-  const answers = Array.isArray(practice.answers) ? practice.answers : [];
-
-  if (!question && !answers.length) return "";
-
-  const answerHtml = answers.map((answer, index) => `
-    <button type="button" class="answer-option" onclick="renderPracticeFeedbackPage(${index}, ${Number(practice.correctIndex ?? 0)})">
-      ${escapeHtml(answer)}
-    </button>
-  `).join("");
-
-  return `
-    <div class="practice-box">
-      <h3>Übung</h3>
-      <p class="practice-question"><strong>${escapeHtml(question)}</strong></p>
-      <div class="answers">${answerHtml}</div>
-      ${buildTaskHelpBox()}
-      
-    </div>
-  `;
-}
-
-
-
-function startQuiz(topicId) {
-  const topic = topics.find(item => item.id === topicId);
-  if (!topic) {
-    renderMenu();
-    return;
+function toggleTaskHelp() {
+  const panel = document.getElementById("taskHelpPanel");
+  const button = document.querySelector(".task-help-button");
+  if (!panel || !button) return;
+  const show = panel.hasAttribute("hidden");
+  if (show) {
+    panel.removeAttribute("hidden");
+    button.setAttribute("aria-expanded", "true");
+    button.textContent = "Hilfe ausblenden";
+  } else {
+    panel.setAttribute("hidden", "");
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = "Ich bin unsicher";
   }
-
-  currentTopicId = topic.id;
-  currentQuizIndex = 0;
-  quizScore = 0;
-  selectedAnswer = null;
-  renderQuizQuestion();
 }
-
-function getQuizQuestions(topic) {
-  if (!topic) return [];
-  if (Array.isArray(topic.quizQuestions) && topic.quizQuestions.length) return topic.quizQuestions;
-  if (Array.isArray(topic.quiz) && topic.quiz.length) return topic.quiz;
-  return [];
-}
-
 
 function renderPracticeFeedbackPage(index, correctIndex) {
   const topic = getCurrentTopic();
   const lessons = getLessonsForMode(topic, currentMode);
   const lesson = lessons[currentStep];
   const practice = lesson && lesson.practice ? lesson.practice : null;
+  if (!topic || !lesson || !practice) return renderLesson();
 
-  if (!topic || !lesson || !practice) {
-    renderLesson();
-    return;
-  }
-
-  const isCorrect = index === correctIndex;
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
   const selectedText = answers[index] || "";
+  const isCorrect = index === Number(correctIndex);
   const explanation = isCorrect
     ? (practice.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
     : (practice.feedbackWrong || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
 
-  setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
   setProgressVisible(false);
   setBottomNavVisible(false);
+  setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
 
   content.innerHTML = `
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}">
@@ -583,6 +468,13 @@ function renderPracticeFeedbackPage(index, correctIndex) {
         <p>${escapeHtml(explanation)}</p>
       </div>
 
+      ${isCorrect && practice.remember ? `
+        <div class="access-box remember remember-box">
+          <h3>Wichtig</h3>
+          <p class="remember-text">${escapeHtml(practice.remember)}</p>
+        </div>
+      ` : ""}
+
       <div class="feedback-actions">
         ${isCorrect
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterPractice()">Weiter</button>`
@@ -590,22 +482,19 @@ function renderPracticeFeedbackPage(index, correctIndex) {
         }
       </div>
 
-      ${buildTaskHelpBox()}
+      ${!isCorrect ? buildTaskHelpBox() : ""}
     </article>
   `;
 
-  content.focus();
+  announce(isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig.");
+  focusContent();
   renderLegalFooter();
 }
 
 function continueAfterPractice() {
   const topic = getCurrentTopic();
   const lessons = getLessonsForMode(topic, currentMode);
-
-  if (!topic || !lessons.length) {
-    renderMenu();
-    return;
-  }
+  if (!topic || !lessons.length) return renderMenu();
 
   if (currentStep < lessons.length - 1) {
     currentStep += 1;
@@ -615,28 +504,36 @@ function continueAfterPractice() {
   }
 }
 
-function renderQuizQuestion() {
-  setProgressVisible(true);
-  setBottomNavVisible(true);
+function startQuiz(topicId) {
+  const topic = topics.find(item => item.id === topicId);
+  if (!topic) return renderMenu();
+  currentTopicId = topic.id;
+  currentQuizIndex = 0;
+  quizScore = 0;
+  quizAnsweredCorrect = new Set();
+  renderQuizQuestion();
+}
 
+function getQuizQuestions(topic) {
+  if (!topic) return [];
+  if (Array.isArray(topic.quizQuestions) && topic.quizQuestions.length) return topic.quizQuestions;
+  if (Array.isArray(topic.quiz) && topic.quiz.length) return topic.quiz;
+  return [];
+}
+
+function renderQuizQuestion() {
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
-
-  if (!topic || !questions.length) {
-    renderTopicChoice(currentTopicId);
-    return;
-  }
-
-  if (currentQuizIndex >= questions.length) {
-    renderQuizResult();
-    return;
-  }
+  if (!topic || !questions.length) return renderTopicChoice(currentTopicId);
+  if (currentQuizIndex >= questions.length) return renderQuizResult();
 
   const q = questions[currentQuizIndex];
   const answers = Array.isArray(q.answers) ? q.answers : [];
-  selectedAnswer = null;
+  const progress = Math.round((currentQuizIndex / questions.length) * 100);
 
-  setHeader(topic.title, "Quiz", `Frage ${currentQuizIndex + 1} von ${questions.length}`, "Quiz", Math.round((currentQuizIndex / questions.length) * 100));
+  setProgressVisible(true);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "Quiz", `Frage ${currentQuizIndex + 1} von ${questions.length}`, "Quiz", progress);
   showNav(false, false);
 
   const answerHtml = answers.map((answer, index) => `
@@ -651,46 +548,35 @@ function renderQuizQuestion() {
       <p class="quiz-question">${escapeHtml(q.question || "")}</p>
       <div class="answers">${answerHtml}</div>
       ${buildTaskHelpBox()}
-      
     </article>
   `;
-
-  content.focus();
+  focusContent();
   renderLegalFooter();
 }
-
-function selectQuizAnswer(index, button) {
-  selectedAnswer = index;
-  document.querySelectorAll(".answer-option").forEach(item => item.classList.remove("selected"));
-  if (button) button.classList.add("selected");
-}
-
-
-
 
 function renderQuizFeedbackPage(index) {
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
   const q = questions[currentQuizIndex];
-
-  if (!topic || !q) {
-    renderTopicChoice(currentTopicId);
-    return;
-  }
+  if (!topic || !q) return renderTopicChoice(currentTopicId);
 
   const answers = Array.isArray(q.answers) ? q.answers : [];
   const correctIndex = Number(q.correctIndex ?? q.correct ?? 0);
-  const isCorrect = index === correctIndex;
   const selectedText = answers[index] || "";
+  const isCorrect = index === correctIndex;
+
+  if (isCorrect && !quizAnsweredCorrect.has(currentQuizIndex)) {
+    quizScore += 1;
+    quizAnsweredCorrect.add(currentQuizIndex);
+  }
+
   const explanation = isCorrect
     ? (q.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
     : (q.feedbackWrong || "Das ist nicht sicher. Du kannst die Frage noch einmal versuchen.");
 
-  if (isCorrect) quizScore += 1;
-
-  setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
   setProgressVisible(false);
   setBottomNavVisible(false);
+  setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
 
   content.innerHTML = `
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}">
@@ -713,11 +599,11 @@ function renderQuizFeedbackPage(index) {
         }
       </div>
 
-      ${buildTaskHelpBox()}
+      ${!isCorrect ? buildTaskHelpBox() : ""}
     </article>
   `;
-
-  content.focus();
+  announce(isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig.");
+  focusContent();
   renderLegalFooter();
 }
 
@@ -727,14 +613,13 @@ function continueAfterQuizAnswer() {
 }
 
 function renderQuizResult() {
-  setProgressVisible(false);
-  setBottomNavVisible(false);
-
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
   const total = questions.length || 1;
   const percent = Math.round((quizScore / total) * 100);
 
+  setProgressVisible(false);
+  setBottomNavVisible(false);
   setHeader(topic ? topic.title : "Quiz", "Quiz", "Ergebnis", "Fertig", 100);
   showNav(true, false);
 
@@ -750,22 +635,17 @@ function renderQuizResult() {
       </div>
     </article>
   `;
-
-  content.focus();
+  focusContent();
   renderLegalFooter();
 }
 
 function renderMemoryCard(topicId) {
-  setProgressVisible(false);
-  setBottomNavVisible(false);
-
   const topic = topics.find(item => item.id === topicId);
-  if (!topic) {
-    renderMenu();
-    return;
-  }
+  if (!topic) return renderMenu();
 
   currentTopicId = topic.id;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
   setHeader("Merk-Karte", topic.title, "Merk-Karte", "Merken", 100);
   showNav(true, false);
 
@@ -803,86 +683,16 @@ function renderMemoryCard(topicId) {
       </div>
     </article>
   `;
-
-  content.focus();
-  renderLegalFooter();
-}
-
-
-
-
-
-
-
-function toggleSupportHelp() {
-  const panel = document.getElementById("supportHelpPanel");
-  const button = document.querySelector(".support-help-button");
-  const desc = document.querySelector(".support-help-desc");
-  if (!panel) return;
-
-  const isHidden = panel.hasAttribute("hidden");
-
-  if (isHidden) {
-    panel.removeAttribute("hidden");
-    if (button) button.setAttribute("aria-expanded", "true");
-    if (desc) desc.textContent = "Hilfe wieder ausblenden.";
-  } else {
-    panel.setAttribute("hidden", "");
-    if (button) button.setAttribute("aria-expanded", "false");
-    if (desc) desc.textContent = "Hilfe anzeigen.";
-  }
-}
-
-function closeSupportHelp() {
-  const panel = document.getElementById("supportHelpPanel");
-  const button = document.querySelector(".support-help-button");
-  const desc = document.querySelector(".support-help-desc");
-
-  if (panel) panel.setAttribute("hidden", "");
-  if (button) button.setAttribute("aria-expanded", "false");
-  if (desc) desc.textContent = "Hilfe anzeigen.";
-}
-
-function renderHelpOverlay() {
-  setProgressVisible(false);
-  setBottomNavVisible(false);
-
-  setHeader("Hilfe", "Orientierung", "Hilfe", "Bedienung", 0);
-  showNav(true, false);
-
-  content.innerHTML = `
-    <article class="card help-card">
-      <h2>Hilfe auf dieser Lernseite</h2>
-      <p>Du kannst zurück zur Startseite gehen.</p>
-      <p>Du kannst ein Thema neu auswählen.</p>
-      <p>Du kannst eine Pause machen.</p>
-      <p>Du kannst eine Person fragen, der du vertraust.</p>
-
-      <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zur Startseite</button>
-      </div>
-    </article>
-  `;
-
-  content.focus();
+  focusContent();
   renderLegalFooter();
 }
 
 function goBack() {
-  if (!currentTopicId) {
-    renderMenu();
-    return;
-  }
+  if (!currentTopicId) return renderMenu();
 
   const topic = getCurrentTopic();
-
-  if (currentQuizIndex > 0) {
-    currentQuizIndex = Math.max(0, currentQuizIndex - 1);
-    renderQuizQuestion();
-    return;
-  }
-
   const lessons = getLessonsForMode(topic, currentMode);
+
   if (lessons.length && currentStep > 0) {
     currentStep -= 1;
     renderLesson();
@@ -894,12 +704,9 @@ function goBack() {
 
 function goNext() {
   const topic = getCurrentTopic();
+  if (!topic) return renderMenu();
 
-  if (!topic) {
-    renderMenu();
-    return;
-  }
-const lessons = getLessonsForMode(topic, currentMode);
+  const lessons = getLessonsForMode(topic, currentMode);
   if (lessons.length) {
     if (currentStep < lessons.length - 1) {
       currentStep += 1;
@@ -915,36 +722,20 @@ const lessons = getLessonsForMode(topic, currentMode);
 
 function handleHash() {
   const hash = window.location.hash.replace("#", "").trim();
-  if (!hash) {
-    renderMenu();
-    return;
-  }
+  if (!hash) return renderMenu();
 
-  const parts = hash.split(":");
-  const topicId = parts[0];
-  const action = parts[1] || "";
-
+  const [topicId, action] = hash.split(":");
   const topic = topics.find(item => item.id === topicId);
-  if (!topic) {
-    renderMenu();
-    return;
-  }
+  if (!topic) return renderMenu();
 
-  if (action === "short") {
-    startTopicMode(topicId, "short");
-  } else if (action === "quiz") {
-    startQuiz(topicId);
-  } else if (action === "memory") {
-    renderMemoryCard(topicId);
-  } else {
-    renderTopicChoice(topicId);
-  }
+  if (action === "short") return startTopicMode(topicId, "short");
+  if (action === "quiz") return startQuiz(topicId);
+  if (action === "memory") return renderMemoryCard(topicId);
+  return renderTopicChoice(topicId);
 }
 
 backButton.addEventListener("click", goBack);
 nextButton.addEventListener("click", goNext);
 homeButton.addEventListener("click", renderMenu);
 
-document.addEventListener("DOMContentLoaded", () => {
-  handleHash();
-});
+document.addEventListener("DOMContentLoaded", handleHash);

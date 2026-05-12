@@ -5123,3 +5123,226 @@ button.action-card.testbogen,
 .remember-text::before {
   content: none !important;
 }
+
+
+/* ============================================================
+   ENDVERSION: klare Lernseite
+   ============================================================ */
+
+.nav.is-hidden,
+.progress-area.is-hidden {
+  display: none !important;
+}
+
+.lesson-card,
+.quiz-card,
+.feedback-page,
+.memory-card,
+.topic-intro-card {
+  max-width: 860px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.lesson-card p,
+.quiz-card p,
+.feedback-page p,
+.memory-card p {
+  font-size: 1.08rem !important;
+  line-height: 1.55 !important;
+}
+
+.practice-box {
+  margin-top: 22px !important;
+  padding: 22px !important;
+  border: 3px solid #3DB8B3 !important;
+  border-radius: 22px !important;
+  background: #F2FBFA !important;
+}
+
+.practice-box h3 {
+  margin-top: 0 !important;
+  color: #00285A !important;
+}
+
+.practice-question,
+.quiz-question {
+  font-size: 1.18rem !important;
+  line-height: 1.45 !important;
+  font-weight: 900 !important;
+}
+
+.answers {
+  display: grid !important;
+  gap: 12px !important;
+  margin-top: 16px !important;
+}
+
+.answer-option {
+  width: 100% !important;
+  text-align: left !important;
+  min-height: 56px !important;
+  padding: 16px 18px !important;
+  border-radius: 18px !important;
+  border: 3px solid #D8DEE8 !important;
+  background: #FFFFFF !important;
+  color: #1F1F1F !important;
+  font-size: 1.05rem !important;
+  line-height: 1.35 !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+.answer-option:hover,
+.answer-option:focus-visible {
+  border-color: #00285A !important;
+  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+.task-help-area {
+  margin-top: 16px !important;
+}
+
+.task-help-button {
+  min-height: 46px !important;
+  padding: 10px 16px !important;
+  border-radius: 999px !important;
+  border: 3px solid #00285A !important;
+  background: #FFFFFF !important;
+  color: #00285A !important;
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+.task-help-button:hover,
+.task-help-button:focus-visible {
+  background: #EAF1F8 !important;
+  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
+  outline-offset: 2px !important;
+}
+
+.task-help-panel {
+  margin-top: 12px !important;
+  padding: 18px 20px !important;
+  border: 3px solid #3DB8B3 !important;
+  border-radius: 20px !important;
+  background: #F2FBFA !important;
+}
+
+.task-help-panel[hidden] {
+  display: none !important;
+}
+
+.task-help-panel h3 {
+  margin-top: 0 !important;
+  color: #00285A !important;
+}
+
+.task-help-panel li {
+  margin: 8px 0 !important;
+  line-height: 1.4 !important;
+}
+
+.feedback-page {
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+}
+
+.feedback-correct {
+  border-left: 12px solid #2A7F5C !important;
+}
+
+.feedback-wrong {
+  border-left: 12px solid #C9541C !important;
+}
+
+.feedback-selected,
+.feedback-explanation {
+  margin: 18px 0 !important;
+  padding: 18px 20px !important;
+  border-radius: 20px !important;
+  background: #F8F6F0 !important;
+  border: 2px solid #E0DDD3 !important;
+}
+
+.feedback-selected h3,
+.feedback-explanation h3 {
+  margin: 0 0 8px 0 !important;
+  color: #00285A !important;
+}
+
+.feedback-selected p,
+.feedback-explanation p {
+  margin: 0 !important;
+  font-weight: 800 !important;
+}
+
+.feedback-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+  margin-top: 22px !important;
+}
+
+.feedback-button {
+  min-height: 52px !important;
+  padding: 12px 20px !important;
+  border-radius: 999px !important;
+  font-size: 1.05rem !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+  border: 3px solid #00285A !important;
+}
+
+.feedback-button.primary {
+  background: #00285A !important;
+  color: #FFFFFF !important;
+}
+
+.feedback-button.secondary {
+  background: #FFFFFF !important;
+  color: #00285A !important;
+}
+
+.feedback-button:hover,
+.feedback-button:focus-visible {
+  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+.access-box.remember,
+.access-box.remember-box {
+  border-left: 8px solid #3DB8B3 !important;
+  background: #F2FBFA !important;
+}
+
+.access-box.remember h3,
+.access-box.remember-box h3 {
+  margin: 0 0 8px 0 !important;
+  color: #00285A !important;
+}
+
+.access-box.remember p,
+.access-box.remember-box p,
+.remember-text {
+  margin: 0 !important;
+  font-weight: 900 !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+.access-box.remember p::before,
+.access-box.remember-box p::before,
+.remember-text::before {
+  content: none !important;
+}
+
+.small-footer-notice {
+  font-size: 0.82rem !important;
+  line-height: 1.35 !important;
+  opacity: 0.88 !important;
+}
