@@ -96,3 +96,36 @@ Die Person weiß: Bei Unsicherheit darf sie Unterstützung holen.
 Die Texte sind einfach formuliert.
 
 Für ein offizielles Zeichen für Leichte Sprache ist eine Prüfung durch Menschen aus der Zielgruppe erforderlich.
+
+
+## CSS-Neuaufbau
+
+Die CSS-Datei wurde vollständig neu aufgebaut.
+
+Ergebnis:
+
+```text
+Vorher: 276 !important-Regeln
+Nachher: 0 !important-Regeln
+```
+
+Die Datei ist jetzt klar gegliedert:
+
+```text
+Grundwerte
+Typografie
+Layout
+Karten
+Themenfarben
+Buttons
+Aktionskarten
+Lernkarten
+Symbolboxen
+Übungen
+Quiz
+Vorlesen
+Hilfe
+Merk-Karte und Urkunde
+Mobile Ansicht
+Druckansicht
+```
