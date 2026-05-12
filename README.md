@@ -165,62 +165,99 @@ Hinweis:
 Die Plattform speichert weiterhin keinen Namen und fragt keine personenbezogenen Daten ab.
 
 
-## Kleiner Fußhinweis
+## Sicherer Footer-/Testbogen-Fix
 
-Der Hinweis zu Marken und Datenschutz steht jetzt als kleiner Fußhinweis ganz unten.
-
-Korrigierte Datenschutz-Formulierung:
-
-```text
-Es wird kein Name gespeichert.
-Es wird kein Lernstand gespeichert.
-```
-
-## Testbogen am Schluss
-
-Der Testbogen wurde als Modulabschluss angepasst.
-
-Er passt jetzt zu jedem Lernmodul und enthält:
-
-```text
-Thema verstanden
-Lernen
-Übung und Quiz
-Was nehme ich mit?
-Unterstützung
-Beobachtung für unterstützende Person
-```
-
-
-## Korrektur: Testbogen und Fußhinweis
+Diese Version verändert keine Renderfunktionen.
 
 Geändert:
 
 ```text
-Der Button „Testbogen am Schluss“ wurde aus der normalen Themen-/Aktionsauswahl entfernt.
-Der Marken-/Datenschutz-Hinweis steht nur noch klein unten auf der Seite.
-Obere Hinweisboxen werden nicht mehr angezeigt.
+oberer Marken-/Datenschutz-Hinweis entfernt
+Hinweis nur noch klein unten per CSS-Footer
+Testbogen-Button aus normaler Auswahl ausgeblendet
+Lernstand-Speicherung bleibt entfernt
 ```
 
-Der Hinweis unten lautet:
+Wichtig:
+
+Diese Version behebt den Fehler, bei dem Lernseiten leer angezeigt wurden.
+
+
+## Saubere Entscheidung: Footer und Rückmeldung
+
+Diese Version setzt vier Punkte um:
 
 ```text
-Dies ist ein unabhängiges Bildungsangebot.
-Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.
-Es wird kein Name gespeichert.
-Es wird kein Lernstand gespeichert.
+1. Der obere Marken-/Datenschutz-Hinweis wurde aus der Startseitenlogik entfernt.
+2. Der Hinweis steht als echter HTML-Footer unten, nicht mehr als body::after.
+3. Testbogen/Rückmeldung ist nicht Teil der Lernenden-Oberfläche.
+4. CSS wurde nur gezielt korrigiert, nicht komplett neu gebaut.
+```
+
+Entscheidung zur Rückmeldung:
+
+```text
+Kein sichtbarer Rückmeldebogen in der Lernplattform.
+Kein automatischer Versand.
+Keine Speicherung.
+Rückmeldungen werden im Pilot separat organisiert.
 ```
 
 
-## Reparatur-Version
+## Startseiten-Überschrift
 
-Diese Version wurde aus der letzten funktionierenden App-Struktur neu aufgebaut.
+Die Überschrift lautet jetzt:
 
 ```text
-Starttitel korrigiert
-oberer Hinweis entfernt
-echter Footer unten
-Rückmeldung/Testbogen aus Lernenden-Oberfläche entfernt
-Vorlese-Buttons vorerst ausgeblendet
+Sicher und selbstbestimmt im Internet
+```
+
+
+## Stabile Neuaufbau-Version
+
+In dieser Version wurde `app.js` neu und bewusst einfacher aufgebaut.
+
+Enthalten:
+
+```text
+Startseite
+8 Themen
+Kurz lernen
+Ausführlich lernen
+Quiz
+Merk-Karte
+Hilfe
+echter Footer
 keine Lernstand-Speicherung
+kein localStorage
+kein Testbogen
+keine neue Vorlese-Funktion
+```
+
+Grund:
+
+Der alte Code war durch viele nachträgliche Patches beschädigt.
+
+
+## Änderung am Balken auf der Startseite
+
+Der rechte Text im Fortschrittsbereich wurde geändert.
+
+Vorher:
+
+```text
+Start
+```
+
+Jetzt:
+
+```text
+Wähle ein Thema
+```
+
+Grund:
+
+```text
+Auf der Startseite wurde noch nicht gelernt.
+Die Person soll zuerst ein Thema auswählen.
 ```
