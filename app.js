@@ -177,25 +177,25 @@ function playSound(type) {
   if (!soundEnabled) return;
 
   if (type === "correct") {
-    playTone(660, 0.10, 0.035, "sine", 0);
-    playTone(880, 0.12, 0.030, "sine", 0.08);
+    playTone(660, 0.12, 0.075, "sine", 0);
+    playTone(880, 0.14, 0.065, "sine", 0.10);
     return;
   }
 
   if (type === "wrong") {
-    playTone(220, 0.13, 0.025, "triangle", 0);
+    playTone(220, 0.18, 0.060, "triangle", 0);
     return;
   }
 
   if (type === "success") {
-    playTone(523.25, 0.10, 0.030, "sine", 0);
-    playTone(659.25, 0.10, 0.030, "sine", 0.09);
-    playTone(783.99, 0.16, 0.028, "sine", 0.18);
+    playTone(523.25, 0.12, 0.065, "sine", 0);
+    playTone(659.25, 0.12, 0.065, "sine", 0.11);
+    playTone(783.99, 0.18, 0.060, "sine", 0.22);
     return;
   }
 
   if (type === "toggle") {
-    playTone(600, 0.08, 0.020, "sine", 0);
+    playTone(600, 0.10, 0.050, "sine", 0);
   }
 }
 
