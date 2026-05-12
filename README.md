@@ -211,3 +211,36 @@ Die Überschrift lautet jetzt:
 ```text
 Sicher und selbstbestimmt im Internet
 ```
+
+
+## Reduzierte Vorlesefunktion
+
+Die bisherigen vielen Vorlese-Buttons wurden entfernt.
+
+Neu:
+
+```text
+kleiner Button „Anhören“
+nur an Kacheln und wichtigen Inhaltsboxen
+Sprechgeschwindigkeit ca. 80 Prozent
+es wird nur der notwendige Kerninhalt vorgelesen
+```
+
+Vorgelesen wird zum Beispiel:
+
+```text
+Thema und kurze Erklärung
+Was gelernt wird
+Übungsfrage und Antwortmöglichkeiten
+Quizfrage und Antwortmöglichkeiten
+Merksatz
+```
+
+Nicht vorgelesen werden:
+
+```text
+Navigation
+Button-Nebentexte
+technische Hinweise
+Layout-Texte
+```

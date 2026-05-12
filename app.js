@@ -1,15 +1,6 @@
 
-let speechRate = 0.45;
 
-function setSpeechRate(rate, label) {
-  speechRate = rate;
-  liveRegion.textContent = `Vorlese-Geschwindigkeit: ${label}.`;
-}
 
-function loadSpeechRate() {
-  // Keine lokale Speicherung der Vorlese-Einstellung.
-  return;
-}
 loadSpeechRate();
 
 
@@ -411,7 +402,6 @@ function renderHelpOverlay() {
       </div>
 
       <div class="help-actions">
-        <button type="button" class="btn btn-secondary" onclick="speakText('Du weißt gerade nicht, wie es weitergeht. Das ist okay. Du darfst dir Zeit nehmen. Wähle zuerst ein Thema. Danach wähle Kurz lernen, Ausführlich lernen, Quiz oder Merk-Karte. Wenn du den Text nicht verstehst, nutze Vorlesen oder frage eine Person, der du vertraust. Wenn dir im Internet etwas Angst macht, nutze die Unterstützung der Alexianer und der Stift Tilbeck.')">Hilfe langsam vorlesen</button>
         <button type="button" class="btn btn-secondary" onclick="goHome(); closeHelpOverlay();">Zur Startseite</button>
         <button type="button" class="btn btn-primary" onclick="closeHelpOverlay()">Schließen</button>
       </div>
@@ -527,8 +517,7 @@ function renderTopicChoice(topicId) {
   content.innerHTML = `
       <div class="access-box-content">
         <h3>Übung</h3>
-        <p class="practice-question"><strong>${escapeHtml(q.question)}</strong></p>
-        <button type="button" class="small-read-button" onclick="speakPracticeQuestion()">Frage und Antworten vorlesen</button>
+        <p class="practice-question"><strong>${escapeHtml(q.question)}</strong></p><div class="tile-read-row">${buildReadButton(getPracticeReadText(q))}</div>
         <div class="practice-answer-grid">
           ${q.answers.map((answer, index) => `
             <button type="button" onclick="answerPractice(${index})">${escapeHtml(answer)}</button>
@@ -541,19 +530,6 @@ function renderTopicChoice(topicId) {
 }
 
 
-function speakPracticeQuestion() {
-  const topic = getCurrentTopic();
-  const lesson = getCurrentLessonForPractice();
-  const q = getPracticeQuestion(topic, lesson);
-
-  if (!q || !Array.isArray(q.answers)) return;
-
-  const answerText = q.answers
-    .map((answer, index) => `Antwort ${index + 1}: ${answer}`)
-    .join(". ");
-
-  speakText(`${q.question}. ${answerText}`);
-}
 
 function answerPractice(choice) {
   const topic = getCurrentTopic();
@@ -589,18 +565,102 @@ function answerPractice(choice) {
   liveRegion.textContent = isCorrect ? "Richtige Antwort. Erklärung wird angezeigt." : "Nicht ganz. Erklärung wird angezeigt.";
 }
 
+
+function prepareTileSpeechText(text) {
+  return String(text || "")
+    .replace(/\s+/g, " ")
+    .replace(/Zurück/g, "")
+    .replace(/Weiter/g, "")
+    .replace(/Startseite/g, "")
+    .replace(/Schließen/g, "")
+    .trim();
+}
+
+function speakTileText(text) {
+  if (!("speechSynthesis" in window)) {
+    liveRegion.textContent = "Vorlesen wird von diesem Browser nicht unterstützt.";
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const cleanText = prepareTileSpeechText(text);
+  if (!cleanText) return;
+
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.lang = "de-DE";
+  utterance.rate = 0.8;
+  utterance.pitch = 1.0;
+  utterance.volume = 1.0;
+
+  const voices = window.speechSynthesis.getVoices();
+  const germanVoice = voices.find(voice => voice.lang && voice.lang.toLowerCase().startsWith("de"));
+  if (germanVoice) utterance.voice = germanVoice;
+
+  window.speechSynthesis.speak(utterance);
+  liveRegion.textContent = "Der wichtige Inhalt wird vorgelesen.";
+}
+
+function stopTileSpeech() {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+    liveRegion.textContent = "Vorlesen gestoppt.";
+  }
+}
+
+function buildReadButton(text, label = "Anhören") {
+  const encoded = encodeURIComponent(text || "");
+  return `<button type="button" class="tile-read-button" onclick="speakTileText(decodeURIComponent('${encoded}'))" aria-label="${escapeHtml(label)}">${escapeHtml(label)}</button>`;
+}
+
+function getTopicReadText(topic) {
+  return `${topic.title}. ${topic.description || ""}`;
+}
+
+function getActionReadText(action, topic) {
+  const title = topic ? topic.title : "dieses Thema";
+  const texts = {
+    short: `${title}. Kurz lernen. Du lernst nur das Wichtigste.`,
+    full: `${title}. Ausführlich lernen. Du lernst Schritt für Schritt mehr.`,
+    quiz: `${title}. Quiz starten. Du beantwortest Fragen und prüfst, was du verstanden hast.`,
+    memory: `${title}. Merk-Karte. Du liest die wichtigsten Regeln noch einmal.`
+  };
+  return texts[action] || title;
+}
+
+function getLessonReadText(topic, lesson) {
+  const parts = [];
+  if (topic && topic.title) parts.push(topic.title);
+  if (lesson && lesson.title) parts.push(lesson.title);
+  if (lesson && Array.isArray(lesson.text)) parts.push(lesson.text.join(" "));
+  if (lesson && Array.isArray(lesson.bullets)) parts.push(lesson.bullets.join(" "));
+  if (lesson && lesson.warning) parts.push(`Achtung. ${lesson.warning}`);
+  if (lesson && lesson.success) parts.push(lesson.success);
+  if (lesson && lesson.remember) parts.push(`Merksatz. ${lesson.remember}`);
+  return parts.join(". ");
+}
+
+function getPracticeReadText(question) {
+  if (!question) return "";
+  const answers = Array.isArray(question.answers)
+    ? question.answers.map((answer, index) => `Antwort ${index + 1}: ${answer}`).join(". ")
+    : "";
+  return `${question.question || ""}. ${answers}`;
+}
+
+function getQuizReadText(question) {
+  return getPracticeReadText(question);
+}
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+
 function buildCard(lesson, topic) {
   let html = `
     <article class="card">
       <div class="module-tag">${escapeHtml(lesson.module)}</div>
       <div class="mode-note">${learningMode === "short" ? "Kurz lernen" : "Ausführlich lernen"}</div>
-      <div class="audio-actions"><button class="audio-button" onclick="speakCurrentCard()">Sehr langsam vorlesen</button><button class="audio-button secondary" onclick="stopReading()">Stopp</button></div>
-      <div class="speech-speed-controls" aria-label="Vorlese-Geschwindigkeit">
-        <span>Vorlesen:</span>
-        <button type="button" onclick="setSpeechRate(0.45, 'sehr langsam')">Sehr langsam</button>
-        <button type="button" onclick="setSpeechRate(0.60, 'langsam')">Langsam</button>
-        <button type="button" onclick="setSpeechRate(0.78, 'normal')">Normal</button>
-      </div>
       <div class="step-learning-hint">
         <strong>Du brauchst Unterstützung beim Lernen?</strong><br>
         Du kannst den Text vorlesen lassen.
@@ -612,6 +672,7 @@ function buildCard(lesson, topic) {
         <div class="icon" aria-hidden="true">${getIconHtml(lesson.icon)}</div>
         <h2>${escapeHtml(lesson.title)}</h2>
       </div>
+      <div class="tile-read-row">${buildReadButton(getLessonReadText(topic, lesson))}</div>
   `;
 
   if (currentStep === 0 && topic.illustration) {
@@ -728,19 +789,6 @@ function startQuiz() {
 }
 
 
-function speakQuizQuestionAndAnswers() {
-  const topic = getCurrentTopic();
-  if (!topic || !topic.quizQuestions) return;
-
-  const q = topic.quizQuestions[quizIndex];
-  if (!q || !Array.isArray(q.answers)) return;
-
-  const answerText = q.answers
-    .map((answer, index) => `Antwort ${index + 1}: ${answer}`)
-    .join(". ");
-
-  speakText(`${q.question}. ${answerText}`);
-}
 
 function renderQuiz() {
   setViewMode("quiz");
@@ -773,7 +821,7 @@ function renderQuiz() {
         <div class="icon" aria-hidden="true">${getIconHtml("quiz")}</div>
         <h2>Frage ${quizIndex + 1}</h2>
       </div>
-      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><button type="button" class="small-read-button" onclick="speakQuizQuestionAndAnswers()">Frage und Antworten vorlesen</button></div></section>
+      <section class="access-box access-quiz" id="quiz-question-box"><div class="access-box-symbol" aria-hidden="true">${getIconHtml("quiz")}</div><div class="access-box-content"><h3>Quizfrage</h3><p class="quiz-question">${escapeHtml(q.question)}</p><div class="tile-read-row">${buildReadButton(getQuizReadText(q))}</div></div></section>
       <div class="choice-list">
   `;
 
