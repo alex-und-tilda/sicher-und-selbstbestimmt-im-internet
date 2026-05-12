@@ -4679,3 +4679,80 @@ button.action-card.testbogen,
   font-weight: 900 !important;
   color: #1F1F1F !important;
 }
+
+
+/* ============================================================
+   Korrektur: Merksätze normal umbrechen
+   Problem:
+   Merksätze wurden wortweise untereinander angezeigt.
+   Lösung:
+   Merksatz-Box und Text erhalten volle Breite und normalen Zeilenumbruch.
+   ============================================================ */
+
+.lesson-card .remember,
+.lesson-card .remember-box,
+.access-box.remember,
+.access-box.remember-box {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 18px 20px !important;
+}
+
+.lesson-card .remember h3,
+.lesson-card .remember-box h3,
+.access-box.remember h3,
+.access-box.remember-box h3 {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 10px 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+.lesson-card .remember p,
+.lesson-card .remember-box p,
+.lesson-card .remember-text,
+.access-box.remember p,
+.access-box.remember-box p,
+.access-box .remember-text {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+  line-height: 1.45 !important;
+}
+
+/* Falls alte Regeln einzelne Wörter oder starke Elemente im Merksatz blockartig machen */
+.lesson-card .remember p *,
+.lesson-card .remember-box p *,
+.access-box.remember p *,
+.access-box.remember-box p * {
+  display: inline !important;
+  white-space: normal !important;
+}
+
+/* Lernkarte selbst darf den Merksatz nicht in eine zu schmale Spalte zwingen */
+.lesson-card {
+  max-width: 900px !important;
+  width: calc(100% - 32px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Inhaltsboxen in Lernkarten behalten volle Breite */
+.lesson-card .access-box {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}

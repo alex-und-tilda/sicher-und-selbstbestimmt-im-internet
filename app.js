@@ -385,7 +385,7 @@ function renderLesson() {
     : "";
 
   const remember = lesson.remember
-    ? `<div class="access-box remember"><h3>Merksatz</h3><p>${escapeHtml(lesson.remember)}</p></div>`
+    ? `<div class="access-box remember remember-box"><h3>Merksatz</h3><p class="remember-text">${escapeHtml(lesson.remember)}</p></div>`
     : "";
 
   const examples = Array.isArray(lesson.examples) && lesson.examples.length

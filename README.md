@@ -508,3 +508,16 @@ Korrektur:
 ```text
 Die Überschrift wird nur noch einmal direkt über den vier Lernweg-Kacheln angezeigt.
 ```
+
+
+## Korrektur Merksatz-Layout
+
+Merksätze wurden teilweise wortweise untereinander angezeigt.
+
+Das wurde korrigiert:
+
+```text
+Merksatz-Box volle Breite
+normaler Zeilenumbruch
+keine Wort-für-Wort-Darstellung
+```
