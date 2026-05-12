@@ -34,6 +34,70 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+
+function getTopicColorStyle(topicId) {
+  const colors = {
+    datenschutz: {
+      color: "#00285A",
+      ring: "rgba(0, 40, 90, 0.24)",
+      bg: "rgba(0, 40, 90, 0.08)",
+      icon: "#EAF1F8"
+    },
+    whatsapp: {
+      color: "#25D366",
+      ring: "rgba(37, 211, 102, 0.30)",
+      bg: "rgba(37, 211, 102, 0.12)",
+      icon: "#E9FBEF"
+    },
+    facebook: {
+      color: "#1877F2",
+      ring: "rgba(24, 119, 242, 0.28)",
+      bg: "rgba(24, 119, 242, 0.10)",
+      icon: "#EAF3FF"
+    },
+    instagram: {
+      color: "#C13584",
+      ring: "rgba(193, 53, 132, 0.28)",
+      bg: "rgba(193, 53, 132, 0.10)",
+      icon: "#FBEAF4"
+    },
+    youtube: {
+      color: "#FF0000",
+      ring: "rgba(255, 0, 0, 0.24)",
+      bg: "rgba(255, 0, 0, 0.09)",
+      icon: "#FFECEC"
+    },
+    snapchat: {
+      color: "#C9A600",
+      ring: "rgba(255, 252, 0, 0.42)",
+      bg: "rgba(255, 252, 0, 0.18)",
+      icon: "#FFFBD1"
+    },
+    tiktok: {
+      color: "#111111",
+      ring: "rgba(37, 244, 238, 0.34)",
+      bg: "rgba(37, 244, 238, 0.12)",
+      icon: "#E8FFFF"
+    },
+    hilfe: {
+      color: "#C9541C",
+      ring: "rgba(201, 84, 28, 0.30)",
+      bg: "rgba(201, 84, 28, 0.12)",
+      icon: "#FFF0E8"
+    }
+  };
+
+  const key = String(topicId || "").toLowerCase();
+  const value = colors[key] || colors.datenschutz;
+
+  return [
+    `--topic-color: ${value.color}`,
+    `--topic-ring: ${value.ring}`,
+    `--topic-hover-bg: ${value.bg}`,
+    `--topic-icon-bg: ${value.icon}`
+  ].join("; ");
+}
+
 function getCurrentTopic() {
   return topics.find(topic => topic.id === currentTopicId) || null;
 }
@@ -107,7 +171,7 @@ function renderMenu() {
   showNav(false, false);
 
   const cards = topics.map(topic => `
-    <button type="button" class="topic-card topic-${escapeHtml(topic.id)}" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
+    <button type="button" class="topic-card topic-${escapeHtml(topic.id)}" style="${getTopicColorStyle(topic.id)}" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
       ${getIllustrationHtml(topic)}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>

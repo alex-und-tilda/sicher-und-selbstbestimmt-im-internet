@@ -320,3 +320,15 @@ Die Kacheln werden nicht komplett bunt eingefärbt.
 Die App-Farben werden nur als Akzent genutzt.
 So bleibt die Seite ruhiger und besser lesbar.
 ```
+
+
+## Korrektur Hover-Farben
+
+Die Hover-Farben werden jetzt direkt pro Kachel gesetzt.
+
+Grund:
+
+```text
+Vorher fiel der Effekt bei mehreren Kacheln auf Türkis zurück.
+Jetzt bekommt jede Themen-Kachel eigene CSS-Variablen.
+```

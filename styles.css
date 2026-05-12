@@ -3971,3 +3971,23 @@ button.action-card.testbogen,
     transform: none !important;
   }
 }
+
+
+/* Direkte Themenfarbe pro Kachel.
+   Die Farbe kommt jetzt direkt aus JavaScript als CSS-Variable.
+   Dadurch fällt nicht mehr alles auf Türkis zurück.
+*/
+.topic-card {
+  border-left: 8px solid var(--topic-color, #00285A) !important;
+}
+
+.topic-card:hover,
+.topic-card:focus-visible {
+  background-color: var(--topic-hover-bg, rgba(0, 40, 90, 0.08)) !important;
+  border-color: var(--topic-color, #00285A) !important;
+}
+
+.topic-card:hover .topic-title,
+.topic-card:focus-visible .topic-title {
+  color: var(--topic-color, #00285A) !important;
+}
