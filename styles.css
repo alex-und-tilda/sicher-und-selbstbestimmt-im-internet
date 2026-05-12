@@ -3830,3 +3830,10 @@ button.action-card.testbogen,
 .progress-area.is-hidden {
   display: none !important;
 }
+
+
+/* Startseite: kein Fortschrittsbalken und keine Zurück-/Weiter-Navigation */
+.progress-area.is-hidden,
+.nav.is-hidden {
+  display: none !important;
+}

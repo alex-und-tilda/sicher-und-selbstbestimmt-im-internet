@@ -284,3 +284,15 @@ Grund:
 Auf der Startseite wurde noch kein Lernmodul begonnen.
 Der Balken ist dort missverständlich.
 ```
+
+
+## Startseite ohne Fortschrittsbalken und Navigation
+
+Auf der Startseite werden jetzt ausgeblendet:
+
+```text
+Fortschrittsbalken
+Zurück / Weiter
+```
+
+Sie erscheinen erst nach dem Öffnen eines Themas oder Lernmoduls.

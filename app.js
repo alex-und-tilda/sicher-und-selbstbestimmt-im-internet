@@ -49,10 +49,18 @@ function getIllustrationHtml(topic) {
 }
 
 
+
+
 function setProgressVisible(isVisible) {
   const progressArea = document.querySelector(".progress-area");
   if (!progressArea) return;
   progressArea.classList.toggle("is-hidden", !isVisible);
+}
+
+function setBottomNavVisible(isVisible) {
+  const nav = document.querySelector(".nav");
+  if (!nav) return;
+  nav.classList.toggle("is-hidden", !isVisible);
 }
 
 function setHeader(title, module, step, level, percent) {
@@ -85,6 +93,9 @@ function renderLegalFooter() {
 }
 
 function renderMenu() {
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  
   setProgressVisible(false);
 
   currentTopicId = null;
@@ -124,6 +135,9 @@ function renderMenu() {
 }
 
 function renderTopicChoice(topicId) {
+  setProgressVisible(true);
+  setBottomNavVisible(true);
+  
   setProgressVisible(true);
 
   const topic = topics.find(item => item.id === topicId);
@@ -210,6 +224,9 @@ function startTopicMode(topicId, mode) {
 }
 
 function renderLesson() {
+  setProgressVisible(true);
+  setBottomNavVisible(true);
+  
   setProgressVisible(true);
 
   const topic = getCurrentTopic();
@@ -339,6 +356,9 @@ function getQuizQuestions(topic) {
 
 function renderQuizQuestion() {
   setProgressVisible(true);
+  setBottomNavVisible(true);
+  
+  setProgressVisible(true);
 
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
@@ -416,6 +436,9 @@ function checkQuizAnswer() {
 
 function renderQuizResult() {
   setProgressVisible(true);
+  setBottomNavVisible(true);
+  
+  setProgressVisible(true);
 
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
@@ -443,6 +466,9 @@ function renderQuizResult() {
 }
 
 function renderMemoryCard(topicId) {
+  setProgressVisible(true);
+  setBottomNavVisible(true);
+  
   setProgressVisible(true);
 
   const topic = topics.find(item => item.id === topicId);
@@ -495,6 +521,9 @@ function renderMemoryCard(topicId) {
 }
 
 function renderHelpOverlay() {
+  setProgressVisible(true);
+  setBottomNavVisible(true);
+  
   setProgressVisible(true);
 
   setHeader("Hilfe", "Orientierung", "Hilfe", "Bedienung", 0);
