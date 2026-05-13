@@ -379,8 +379,8 @@ function renderMenu() {
       ${getIllustrationHtml(topic)}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
-      <span class="card-read-button" role="button" tabindex="0" data-read-card-title="${escapeHtml(topic.title)}" aria-label="Nur das Wort ${escapeHtml(topic.title)} vorlesen">
-        🔊 Wort
+      <span class="card-read-button" role="button" tabindex="0" data-read-card-title="${escapeHtml(topic.title)}" aria-label="Thema ${escapeHtml(topic.title)} vorlesen">
+        🔊 Vorlesen
       </span>
       <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
     </button>
