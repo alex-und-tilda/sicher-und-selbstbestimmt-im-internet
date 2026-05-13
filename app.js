@@ -37,6 +37,25 @@ const liveRegion = document.getElementById("liveRegion");
 
 
 
+
+function readShortText(text) {
+  if (!("speechSynthesis" in window)) {
+    return;
+  }
+
+  const cleaned = String(text || "").trim();
+  if (!cleaned) {
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(cleaned);
+  utterance.lang = "de-DE";
+  utterance.rate = 0.82;
+  utterance.pitch = 1;
+  window.speechSynthesis.speak(utterance);
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -360,6 +379,9 @@ function renderMenu() {
       ${getIllustrationHtml(topic)}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
+      <span class="card-read-button" role="button" tabindex="0" data-read-card-title="${escapeHtml(topic.title)}" aria-label="Nur das Wort ${escapeHtml(topic.title)} vorlesen">
+        🔊 Wort
+      </span>
       <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
     </button>
   `).join("");
@@ -987,3 +1009,34 @@ if (soundToggleButton) {
 }
 
 document.addEventListener("DOMContentLoaded", handleHash);
+
+
+document.addEventListener("click", function (event) {
+  const button = event.target.closest("[data-read-card-title]");
+  if (!button) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  readShortText(button.getAttribute("data-read-card-title"));
+});
+
+
+document.addEventListener("keydown", function (event) {
+  const button = event.target.closest("[data-read-card-title]");
+  if (!button) {
+    return;
+  }
+
+  if (event.key !== "Enter" && event.key !== " ") {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  readShortText(button.getAttribute("data-read-card-title"));
+});
+

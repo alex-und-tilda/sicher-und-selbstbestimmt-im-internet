@@ -5645,3 +5645,34 @@ button.action-card.testbogen,
   padding: 0 !important;
   overflow: hidden !important;
 }
+
+
+/* Kleiner Vorlese-Button auf den Startkarten: liest nur den Themen-Namen */
+.card-read-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0.45rem auto 0;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(0, 40, 90, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #24364b;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.1;
+  cursor: pointer;
+}
+
+.card-read-button:hover,
+.card-read-button:focus-visible {
+  background: #ffffff;
+  outline: 3px solid rgba(0, 40, 90, 0.18);
+  outline-offset: 2px;
+}
+
+.card-read-button:active {
+  transform: translateY(1px);
+}
