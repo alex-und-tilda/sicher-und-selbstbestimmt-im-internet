@@ -438,6 +438,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Kurz lernen</span>
             <span class="action-desc">Nur das Wichtigste.</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Kurz lernen. Nur das Wichtigste." aria-label="Kurz lernen vorlesen">🔊 Vorlesen</span>
           </span>
         </button>
 
@@ -446,6 +447,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Mehr lernen</span>
             <span class="action-desc">Mit Beispielen.</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Mehr lernen. Mit Beispielen." aria-label="Mehr lernen vorlesen">🔊 Vorlesen</span>
           </span>
         </button>
 
@@ -454,6 +456,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Quiz machen</span>
             <span class="action-desc">Fragen beantworten.</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Quiz machen. Fragen beantworten." aria-label="Quiz machen vorlesen">🔊 Vorlesen</span>
           </span>
         </button>
 
@@ -462,6 +465,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Merk-Karte</span>
             <span class="action-desc">Regeln ansehen.</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Merk-Karte. Regeln ansehen." aria-label="Merk-Karte vorlesen">🔊 Vorlesen</span>
           </span>
         </button>
       </div>
@@ -481,6 +485,7 @@ function buildSupportBox() {
         <span class="support-help-text">
           <span class="support-help-title">Du brauchst Unterstützung?</span>
           <span class="support-help-desc">Hilfe anzeigen.</span>
+          <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Du brauchst Unterstützung? Hilfe anzeigen." aria-label="Unterstützung vorlesen">🔊 Vorlesen</span>
         </span>
       </button>
 
@@ -1038,5 +1043,29 @@ document.addEventListener("keydown", function (event) {
   event.stopPropagation();
 
   readShortText(button.getAttribute("data-read-card-title"));
+});
+
+
+document.addEventListener("click", function (event) {
+  const button = event.target.closest("[data-read-card-text]");
+  if (!button) {
+    return;
+  }
+  event.preventDefault();
+  event.stopPropagation();
+  readShortText(button.getAttribute("data-read-card-text"));
+});
+
+document.addEventListener("keydown", function (event) {
+  const button = event.target.closest("[data-read-card-text]");
+  if (!button) {
+    return;
+  }
+  if (event.key !== "Enter" && event.key !== " ") {
+    return;
+  }
+  event.preventDefault();
+  event.stopPropagation();
+  readShortText(button.getAttribute("data-read-card-text"));
 });
 

@@ -5676,3 +5676,21 @@ button.action-card.testbogen,
 .card-read-button:active {
   transform: translateY(1px);
 }
+
+
+/* Vorlese-Button auf Lernweg-Karten */
+.card-read-button--path {
+  margin-top: 0.55rem;
+  align-self: flex-start;
+  font-size: 0.78rem;
+  padding: 0.32rem 0.52rem;
+}
+
+.action-card .card-read-button--path,
+.support-help-button .card-read-button--path {
+  display: inline-flex;
+}
+
+.support-help-button .card-read-button--path {
+  margin-left: 0;
+}
