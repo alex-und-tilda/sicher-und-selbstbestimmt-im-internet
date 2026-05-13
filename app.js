@@ -339,7 +339,7 @@ function readNormal() {
 }
 
 function readSlow() {
-  readCurrentPage(0.68);
+  readCurrentPage(0.50);
 }
 
 function buildReadingToolbar() {
@@ -353,9 +353,9 @@ function buildReadingToolbar() {
 
   return `
     <div class="reading-toolbar" aria-label="Vorlesen">
-      <button type="button" class="reading-button" onclick="readNormal()">Vorlesen</button>
-      <button type="button" class="reading-button" onclick="readSlow()">Langsam vorlesen</button>
-      <button type="button" class="reading-button reading-stop" onclick="stopReading()">Stopp</button>
+      <button type="button" class="reading-button reading-button-normal" onclick="readNormal()">Vorlesen</button>
+      <button type="button" class="reading-button reading-button-slow" onclick="readSlow()">Langsam vorlesen</button>
+      <button type="button" class="reading-button reading-button-stop" onclick="stopReading()">Stopp</button>
       <p id="readingStatus" class="reading-status" aria-live="polite"></p>
     </div>
   `;

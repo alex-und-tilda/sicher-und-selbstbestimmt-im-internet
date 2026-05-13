@@ -5761,3 +5761,43 @@ button.action-card.testbogen,
     width: 100%;
   }
 }
+
+
+/* Vorlese-Buttons: klarere Unterscheidung und langsamer Modus */
+.reading-button,
+.reading-toolbar button {
+  font-weight: 800;
+}
+
+.reading-button-normal {
+  border: 2px solid #00285A !important;
+  background: #FFFFFF !important;
+  color: #00285A !important;
+}
+
+.reading-button-slow {
+  border: 2px solid #8A5A00 !important;
+  background: #FFF4CC !important;
+  color: #5C3B00 !important;
+}
+
+.reading-button-stop {
+  border: 2px solid #B42318 !important;
+  background: #FFF1F0 !important;
+  color: #B42318 !important;
+}
+
+.reading-button-normal:hover,
+.reading-button-normal:focus-visible {
+  background: #EAF2FF !important;
+}
+
+.reading-button-slow:hover,
+.reading-button-slow:focus-visible {
+  background: #FFE8A3 !important;
+}
+
+.reading-button-stop:hover,
+.reading-button-stop:focus-visible {
+  background: #FFDAD6 !important;
+}
