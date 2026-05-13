@@ -6052,3 +6052,180 @@ footer {
   outline: 3px solid rgba(2, 122, 72, 0.22);
   outline-offset: 2px;
 }
+
+
+/* ============================================================
+   Finale pädagogische Verbesserungen
+   ============================================================ */
+
+.utility-bar {
+  max-width: 760px;
+  margin: 0 auto 0.9rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.utility-button {
+  min-height: 2.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 40, 90, 0.18);
+  background: #ffffff;
+  color: #00285A;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.utility-button:hover,
+.utility-button:focus-visible {
+  background: #EAF7F7;
+  outline: 3px solid rgba(61, 184, 179, 0.28);
+  outline-offset: 2px;
+}
+
+.pause-button {
+  border-color: #8A5A00;
+  color: #5C3B00;
+  background: #FFF8E1;
+}
+
+.simple-mode-button[aria-pressed="true"] {
+  border-color: #027A48;
+  background: #ECFDF3;
+  color: #027A48;
+}
+
+.calm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0, 40, 90, 0.38);
+}
+
+.calm-box {
+  width: min(92vw, 520px);
+  padding: 1.4rem;
+  border-radius: 1.2rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 40, 90, 0.16);
+  box-shadow: 0 18px 40px rgba(0, 40, 90, 0.22);
+  text-align: center;
+}
+
+.calm-box h2 {
+  margin-top: 0;
+  color: #00285A;
+}
+
+.symbol-help-list {
+  text-align: left;
+  display: grid;
+  gap: 0.55rem;
+  padding-left: 1.2rem;
+}
+
+.completion-page {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.completion-card ul {
+  margin: 1rem 0;
+}
+
+.completion-actions,
+.memory-print-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.2rem;
+}
+
+.primary-action,
+.secondary-action {
+  min-height: 2.75rem;
+  padding: 0.65rem 0.95rem;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary-action {
+  border: 2px solid #00285A;
+  background: #00285A;
+  color: #ffffff;
+}
+
+.secondary-action {
+  border: 2px solid rgba(0, 40, 90, 0.25);
+  background: #ffffff;
+  color: #00285A;
+}
+
+.print-action {
+  border-color: #3DB8B3;
+}
+
+.simple-mode .topic-desc,
+.simple-mode .action-desc,
+.simple-mode .reading-status,
+.simple-mode .legal-footer {
+  display: none;
+}
+
+.simple-mode .card,
+.simple-mode .lesson-card,
+.simple-mode .topic-card,
+.simple-mode .action-card {
+  box-shadow: none;
+}
+
+.simple-mode p,
+.simple-mode li {
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .utility-bar {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    justify-content: stretch;
+  }
+
+  .utility-button,
+  .completion-actions button,
+  .memory-print-actions button {
+    width: 100%;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  .app-header,
+  .reading-toolbar,
+  .utility-bar,
+  .bottom-nav,
+  .legal-footer,
+  .site-footer,
+  footer,
+  .primary-action,
+  .secondary-action,
+  .card-read-button {
+    display: none !important;
+  }
+
+  .card,
+  .memory-card {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+  }
+}

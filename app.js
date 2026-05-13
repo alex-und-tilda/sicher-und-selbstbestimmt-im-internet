@@ -414,6 +414,157 @@ function buildReadingToolbar() {
   `;
 }
 
+
+/* ============================================================
+   Zusatzfunktionen: Pause, Symbol-Erklärung, Einfach-Modus,
+   Abschlussseite, Druckfunktion
+   ============================================================ */
+
+let simpleMode = false;
+
+function toggleSimpleMode() {
+  simpleMode = !simpleMode;
+  document.body.classList.toggle("simple-mode", simpleMode);
+  updateSimpleModeButton();
+}
+
+function updateSimpleModeButton() {
+  const button = document.getElementById("simpleModeButton");
+  if (!button) return;
+
+  if (simpleMode) {
+    button.textContent = "Einfach-Modus an";
+    button.setAttribute("aria-pressed", "true");
+  } else {
+    button.textContent = "Einfach-Modus aus";
+    button.setAttribute("aria-pressed", "false");
+  }
+}
+
+function showPauseOverlay() {
+  const existing = document.getElementById("pauseOverlay");
+  if (existing) existing.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = "pauseOverlay";
+  overlay.className = "calm-overlay";
+  overlay.innerHTML = `
+    <div class="calm-box" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+      <h2 id="pauseTitle">Pause machen</h2>
+      <p>Du kannst kurz Pause machen.</p>
+      <p>Atme ruhig.</p>
+      <p>Mach weiter, wenn du bereit bist.</p>
+      <button type="button" class="primary-action" onclick="closeCalmOverlay()">Weiter lernen</button>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  const button = overlay.querySelector("button");
+  if (button) button.focus();
+}
+
+function showSymbolHelp() {
+  const existing = document.getElementById("pauseOverlay");
+  if (existing) existing.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = "pauseOverlay";
+  overlay.className = "calm-overlay";
+  overlay.innerHTML = `
+    <div class="calm-box symbol-help-dialog" role="dialog" aria-modal="true" aria-labelledby="symbolTitle">
+      <h2 id="symbolTitle">Was bedeuten die Zeichen?</h2>
+      <ul class="symbol-help-list">
+        <li><strong>🔊</strong> bedeutet: Vorlesen.</li>
+        <li><strong>?</strong> bedeutet: Hilfe.</li>
+        <li><strong>✓</strong> bedeutet: richtig oder geschafft.</li>
+        <li><strong>!</strong> bedeutet: Achtung.</li>
+        <li><strong>Stopp</strong> bedeutet: Anhalten.</li>
+      </ul>
+      <button type="button" class="primary-action" onclick="closeCalmOverlay()">Schließen</button>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  const button = overlay.querySelector("button");
+  if (button) button.focus();
+}
+
+function closeCalmOverlay() {
+  const overlay = document.getElementById("pauseOverlay");
+  if (overlay) overlay.remove();
+}
+
+function buildUtilityBar() {
+  return `
+    <div class="utility-bar" aria-label="Zusätzliche Hilfe">
+      <button type="button" id="simpleModeButton" class="utility-button simple-mode-button" onclick="toggleSimpleMode()" aria-pressed="false">
+        Einfach-Modus aus
+      </button>
+      <button type="button" class="utility-button" onclick="showSymbolHelp()">
+        Zeichen erklären
+      </button>
+      <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">
+        Pause machen
+      </button>
+    </div>
+  `;
+}
+
+function getTopicByIdSafe(topicId) {
+  return topics.find(item => item.id === topicId) || null;
+}
+
+function renderCompletionPage(topicId, mode) {
+  stopReading();
+
+  const topic = getTopicByIdSafe(topicId);
+  if (!topic) {
+    renderMenu();
+    return;
+  }
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
+  showNav(false, false);
+
+  const rules = Array.isArray(topic.memoryRules) ? topic.memoryRules.slice(0, 5) : [];
+  const rulesHtml = rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
+
+  content.innerHTML = `
+    <section class="completion-page" data-readable="true">
+      <article class="card completion-card">
+        <div class="symbol-heading">
+          <span class="access-box-symbol" aria-hidden="true">${getIconHtml("check")}</span>
+          <h2>Du bist fertig.</h2>
+        </div>
+
+        <p>Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
+
+        <h3>Das hast du geübt:</h3>
+        <ul>
+          ${rulesHtml || "<li>Du hast wichtige Regeln wiederholt.</li>"}
+        </ul>
+
+        <div class="completion-actions">
+          <button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Lernweg</button>
+          <button type="button" class="secondary-action" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
+          <button type="button" class="secondary-action" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">Merk-Karte ansehen</button>
+          <button type="button" class="secondary-action" onclick="renderMenu()">Zur Themenübersicht</button>
+        </div>
+      </article>
+    </section>
+  `;
+
+  focusContent();
+  renderLegalFooter();
+}
+
+function printCurrentPage() {
+  window.print();
+}
+
+
 function renderMenu() {
   stopReading();
   currentTopicId = null;
@@ -484,6 +635,8 @@ function renderTopicChoice(topicId) {
       <div class="learning-path-heading">
         <h3>Wie möchtest du lernen?</h3>
       </div>
+
+      ${buildUtilityBar()}
 
       <div class="action-grid learning-path-grid">
         <button type="button" class="action-card action-short" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
@@ -669,7 +822,7 @@ function renderLesson() {
   const practice = hasPractice ? buildPractice(lesson.practice) : "";
 
   content.innerHTML = `
-    ${buildReadingToolbar()}
+    ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card lesson-card" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
@@ -768,7 +921,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
 
   content.innerHTML = `
-    ${buildReadingToolbar()}
+    ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
       <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
 
@@ -858,7 +1011,7 @@ function renderQuizQuestion() {
   `).join("");
 
   content.innerHTML = `
-    ${buildReadingToolbar()}
+    ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card quiz-card" data-readable="true">
       <h2>Quiz</h2>
       <p class="quiz-question">${escapeHtml(q.question || "")}</p>
@@ -897,7 +1050,7 @@ function renderQuizFeedbackPage(index) {
   setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
 
   content.innerHTML = `
-    ${buildReadingToolbar()}
+    ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
       <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
 
@@ -945,7 +1098,7 @@ function renderQuizResult() {
   showNav(true, false);
 
   content.innerHTML = `
-    ${buildReadingToolbar()}
+    ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card quiz-result-card" data-readable="true">
       <h2>Quiz fertig</h2>
       <p>Du hast ${quizScore} von ${total} Fragen richtig beantwortet.</p>
@@ -981,7 +1134,7 @@ function renderMemoryCard(topicId) {
     : "";
 
   content.innerHTML = `
-    ${buildReadingToolbar()}
+    ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card memory-card" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml("remember")}</span>
