@@ -1189,7 +1189,7 @@ function goNext() {
       currentStep += 1;
       renderLesson();
     } else {
-      renderTopicChoice(topic.id);
+      renderCompletionPage(topic.id, currentMode);
     }
     return;
   }
