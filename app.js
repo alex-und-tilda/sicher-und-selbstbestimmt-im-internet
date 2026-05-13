@@ -1017,20 +1017,27 @@ document.addEventListener("DOMContentLoaded", handleHash);
 
 
 document.addEventListener("click", function (event) {
-  const button = event.target.closest("[data-read-card-title]");
+  const titleButton = event.target.closest("[data-read-card-title]");
+  const textButton = event.target.closest("[data-read-card-text]");
+  const button = titleButton || textButton;
+
   if (!button) {
     return;
   }
 
   event.preventDefault();
   event.stopPropagation();
+  event.stopImmediatePropagation();
 
-  readShortText(button.getAttribute("data-read-card-title"));
-});
-
+  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
+  readShortText(text);
+}, true);
 
 document.addEventListener("keydown", function (event) {
-  const button = event.target.closest("[data-read-card-title]");
+  const titleButton = event.target.closest("[data-read-card-title]");
+  const textButton = event.target.closest("[data-read-card-text]");
+  const button = titleButton || textButton;
+
   if (!button) {
     return;
   }
@@ -1041,31 +1048,9 @@ document.addEventListener("keydown", function (event) {
 
   event.preventDefault();
   event.stopPropagation();
+  event.stopImmediatePropagation();
 
-  readShortText(button.getAttribute("data-read-card-title"));
-});
-
-
-document.addEventListener("click", function (event) {
-  const button = event.target.closest("[data-read-card-text]");
-  if (!button) {
-    return;
-  }
-  event.preventDefault();
-  event.stopPropagation();
-  readShortText(button.getAttribute("data-read-card-text"));
-});
-
-document.addEventListener("keydown", function (event) {
-  const button = event.target.closest("[data-read-card-text]");
-  if (!button) {
-    return;
-  }
-  if (event.key !== "Enter" && event.key !== " ") {
-    return;
-  }
-  event.preventDefault();
-  event.stopPropagation();
-  readShortText(button.getAttribute("data-read-card-text"));
-});
+  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
+  readShortText(text);
+}, true);
 
