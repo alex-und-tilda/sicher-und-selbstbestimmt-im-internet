@@ -5801,3 +5801,217 @@ button.action-card.testbogen,
 .reading-button-stop:focus-visible {
   background: #FFDAD6 !important;
 }
+
+
+/* ============================================================
+   PROFESSIONELLE ENDREGELN
+   Diese Regeln bündeln die finale Darstellung.
+   Sie halten die Lernplattform ruhig, lesbar und barrierearm.
+   ============================================================ */
+
+:root {
+  --tilbeck-blue: #00285A;
+  --tilbeck-turquoise: #3DB8B3;
+  --text-main: #1F2937;
+  --text-muted: #667085;
+  --surface-main: #FFFFFF;
+  --surface-soft: #F8F6F0;
+  --border-soft: rgba(0, 40, 90, 0.14);
+  --shadow-soft: 0 8px 22px rgba(0, 40, 90, 0.07);
+}
+
+/* Alte Profilboxen erscheinen nicht auf der Lernplattform. */
+.creator-search-info,
+.creator-search-info--subtle,
+.creator-final-notice {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Lesbarkeit */
+body {
+  color: var(--text-main);
+  background: var(--surface-soft);
+}
+
+p,
+li,
+button,
+input,
+select,
+textarea {
+  font-size: max(1rem, 16px);
+  line-height: 1.55;
+}
+
+/* Rechtliche Hinweise dürfen kleiner sein, aber gut lesbar bleiben. */
+.legal-footer,
+.site-footer,
+.footer,
+footer {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #4B5563;
+}
+
+/* Karten ruhiger und einheitlicher */
+.card,
+.lesson-card,
+.topic-intro-card,
+.quiz-card,
+.quiz-result-card,
+.memory-card,
+.feedback-page {
+  border: 1px solid var(--border-soft);
+  border-radius: 1rem;
+  background: var(--surface-main);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Startkarten: Vorlesen bleibt klein, aber lesbar */
+.card-read-button {
+  font-size: 0.95rem !important;
+  min-height: 2.35rem;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 40, 90, 0.18);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--tilbeck-blue);
+  font-weight: 800;
+}
+
+.card-read-button:hover,
+.card-read-button:focus-visible {
+  background: #EAF7F7;
+  outline: 3px solid rgba(61, 184, 179, 0.32);
+  outline-offset: 2px;
+}
+
+/* Lernweg-Karten: kleine Vorlesen-Schaltfläche innerhalb der Karte */
+.card-read-button--path {
+  margin-top: 0.55rem;
+  align-self: flex-start;
+  font-size: 0.95rem !important;
+}
+
+/* Vorlese-Leiste: kompakt über dem Lerninhalt */
+.reading-toolbar {
+  max-width: 760px;
+  margin: 0 auto 1rem auto;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 18px rgba(0, 40, 90, 0.06);
+}
+
+.reading-button,
+.reading-toolbar button {
+  width: auto;
+  min-width: 8.5rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.reading-button-normal {
+  border: 2px solid #00285A;
+  background: #FFFFFF;
+  color: #00285A;
+}
+
+.reading-button-slow {
+  border: 2px solid #8A5A00;
+  background: #FFF4CC;
+  color: #5C3B00;
+}
+
+.reading-button-stop {
+  border: 2px solid #B42318;
+  background: #FFF1F0;
+  color: #B42318;
+}
+
+.reading-button-normal:hover,
+.reading-button-normal:focus-visible {
+  background: #EAF2FF;
+}
+
+.reading-button-slow:hover,
+.reading-button-slow:focus-visible {
+  background: #FFE8A3;
+}
+
+.reading-button-stop:hover,
+.reading-button-stop:focus-visible {
+  background: #FFDAD6;
+}
+
+.reading-status,
+#readingStatus {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  min-height: 1.3rem;
+}
+
+/* Logo- und Footerbereich kompakter */
+.brand-logos,
+.logo-row,
+.logos {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.legal-footer,
+.site-footer,
+.footer,
+footer {
+  margin-top: 1rem;
+}
+
+/* Desktop: unnötigen Leerraum reduzieren */
+.content,
+.main-content,
+#content {
+  padding-bottom: 1.5rem;
+}
+
+/* Mobile: klare Bedienung ohne gequetschte Buttons */
+@media (max-width: 640px) {
+  .reading-toolbar {
+    margin: 0 1rem 0.85rem 1rem;
+    justify-content: stretch;
+  }
+
+  .reading-button,
+  .reading-toolbar button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .card-read-button,
+  .card-read-button--path {
+    width: auto;
+    min-width: 7.5rem;
+  }
+
+  .topic-card,
+  .action-card,
+  .support-help-button {
+    min-height: 4.25rem;
+  }
+}

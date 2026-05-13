@@ -1054,3 +1054,43 @@ document.addEventListener("keydown", function (event) {
   readShortText(text);
 }, true);
 
+
+/* Vorlesen in Karten: verhindert, dass die Karte zusätzlich geöffnet wird. */
+document.addEventListener("click", function (event) {
+  const titleButton = event.target.closest("[data-read-card-title]");
+  const textButton = event.target.closest("[data-read-card-text]");
+  const button = titleButton || textButton;
+
+  if (!button) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+
+  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
+  readShortText(text);
+}, true);
+
+document.addEventListener("keydown", function (event) {
+  const titleButton = event.target.closest("[data-read-card-title]");
+  const textButton = event.target.closest("[data-read-card-text]");
+  const button = titleButton || textButton;
+
+  if (!button) {
+    return;
+  }
+
+  if (event.key !== "Enter" && event.key !== " ") {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+
+  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
+  readShortText(text);
+}, true);
+
