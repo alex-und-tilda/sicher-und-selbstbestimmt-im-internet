@@ -195,6 +195,10 @@ function playTone(frequency, duration, volume, type = "sine", delay = 0) {
 }
 
 function playSound(type) {
+  if (type === "hover") {
+    playTone(520, 0.045, 0.045, "sine");
+    return;
+  }
   if (!soundEnabled) return;
 
   if (type === "correct") {
@@ -219,6 +223,46 @@ function playSound(type) {
     playTone(600, 0.10, 0.050, "sine", 0);
   }
 }
+
+
+/* Optionaler Orientierungston bei Hover/Fokus.
+   Wichtig: Der Ton läuft nur, wenn "Töne an" aktiv ist.
+   Dadurch bleibt die Plattform ruhig und reizarm. */
+let lastHoverSoundAt = 0;
+let lastHoverSoundTarget = null;
+
+function playHoverSound(event) {
+  if (!soundEnabled) {
+    return;
+  }
+
+  const target = event.target.closest(
+    ".topic-card, .action-card, .support-help-button, .answer-option, .card-read-button, .reading-button, .plain-back-button, .nav-button"
+  );
+
+  if (!target) {
+    return;
+  }
+
+  const now = Date.now();
+
+  if (target === lastHoverSoundTarget && now - lastHoverSoundAt < 1200) {
+    return;
+  }
+
+  if (now - lastHoverSoundAt < 350) {
+    return;
+  }
+
+  lastHoverSoundTarget = target;
+  lastHoverSoundAt = now;
+
+  playSound("hover");
+}
+
+document.addEventListener("mouseover", playHoverSound, true);
+document.addEventListener("focusin", playHoverSound, true);
+
 
 
 function renderLegalFooter() {
