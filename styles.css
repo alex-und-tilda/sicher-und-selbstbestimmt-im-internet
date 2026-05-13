@@ -6015,3 +6015,40 @@ footer {
     min-height: 4.25rem;
   }
 }
+
+
+/* Geräusche-Schalter: klare Farblogik */
+.sound-toggle {
+  min-height: 2.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  font-weight: 800;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.sound-toggle.sound-off {
+  background: #FFF1F0;
+  color: #B42318;
+  border-color: #B42318;
+}
+
+.sound-toggle.sound-on {
+  background: #ECFDF3;
+  color: #027A48;
+  border-color: #027A48;
+}
+
+.sound-toggle.sound-off:hover,
+.sound-toggle.sound-off:focus-visible {
+  background: #FFDAD6;
+  outline: 3px solid rgba(180, 35, 24, 0.22);
+  outline-offset: 2px;
+}
+
+.sound-toggle.sound-on:hover,
+.sound-toggle.sound-on:focus-visible {
+  background: #D1FADF;
+  outline: 3px solid rgba(2, 122, 72, 0.22);
+  outline-offset: 2px;
+}

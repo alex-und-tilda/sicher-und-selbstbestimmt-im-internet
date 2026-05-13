@@ -126,14 +126,23 @@ function announce(text) {
 
 
 function updateSoundButton() {
-  if (!soundToggleButton) return;
+  const button = document.getElementById("soundToggleButton");
+  if (!button) {
+    return;
+  }
 
-  soundToggleButton.textContent = soundEnabled ? "Töne an" : "Töne aus";
-  soundToggleButton.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
-  soundToggleButton.setAttribute(
-    "aria-label",
-    soundEnabled ? "Töne ausschalten" : "Töne einschalten"
-  );
+  button.classList.toggle("sound-on", soundEnabled);
+  button.classList.toggle("sound-off", !soundEnabled);
+
+  if (soundEnabled) {
+    button.textContent = "Geräusche an";
+    button.setAttribute("aria-label", "Geräusche sind an. Klicken zum Ausschalten.");
+    button.setAttribute("aria-pressed", "true");
+  } else {
+    button.textContent = "Geräusche aus";
+    button.setAttribute("aria-label", "Geräusche sind aus. Klicken zum Einschalten.");
+    button.setAttribute("aria-pressed", "false");
+  }
 }
 
 function toggleSound() {
