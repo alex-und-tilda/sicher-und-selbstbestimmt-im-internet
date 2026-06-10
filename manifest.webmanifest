@@ -1,0 +1,19 @@
+{
+  "name": "Sicher und selbstbestimmt im Internet",
+  "short_name": "Sicher im Netz",
+  "description": "Barrierearme Lernplattform in Einfacher Sprache: 12 Themen von Datenschutz bis KI.",
+  "lang": "de",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f1f5fa",
+  "theme_color": "#00528f",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

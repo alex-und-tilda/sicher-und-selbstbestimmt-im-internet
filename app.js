@@ -1,13 +1,20 @@
-
 /*
-  Endversion Lernplattform
-  Ziel:
-  - klare Lernlogik
+  Lernplattform "Sicher und selbstbestimmt im Internet"
+  Version 2026 – komplett neu aufgebaut
+
+  Grundsätze:
   - Einfache Sprache
-  - keine Speicherung
-  - Übung: Antwort -> Rückmeldung -> Weiter / Nochmal versuchen
-  - Merksatz erst nach passender Entscheidung
+  - klare Lernlogik: Lesen -> Übung -> Rückmeldung -> Merksatz
+  - keine Speicherung von Namen oder Lernstand
+  - Töne sind standardmäßig aus
+  - Vorlesen nur nach Klick
 */
+
+"use strict";
+
+/* ============================================================
+   Zustand
+   ============================================================ */
 
 let currentTopicId = null;
 let currentMode = "full";
@@ -15,12 +22,86 @@ let currentStep = 0;
 let currentQuizIndex = 0;
 let quizScore = 0;
 let quizAnsweredCorrect = new Set();
-
-// Akustisches Feedback ist standardmäßig aus.
-// So gibt es keine unerwarteten Geräusche.
-// Es wird nichts gespeichert.
 let soundEnabled = false;
+let simpleMode = false;
 let audioContext = null;
+let speechRate = 0.85;
+
+/* ============================================================
+   Lernstand – nur mit Einwilligung, jederzeit löschbar
+   Es wird kein Name gespeichert. Nichts verlässt das Gerät.
+   ============================================================ */
+
+const STORAGE_KEY = "lernstand";
+
+function loadProgress() {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveProgress(progress) {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  } catch (error) {
+    /* Wenn Speichern nicht geht, läuft alles ohne Lernstand weiter. */
+  }
+}
+
+function isProgressEnabled() {
+  const progress = loadProgress();
+  return Boolean(progress && progress.enabled);
+}
+
+function setProgressEnabled(enabled) {
+  if (enabled) {
+    const progress = loadProgress() || {};
+    progress.enabled = true;
+    progress.done = progress.done || {};
+    saveProgress(progress);
+  } else {
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch (error) { /* nichts zu tun */ }
+  }
+}
+
+function markTopicDone(topicId) {
+  if (!isProgressEnabled()) return;
+  const progress = loadProgress() || { enabled: true, done: {} };
+  progress.done = progress.done || {};
+  progress.done[topicId] = true;
+  saveProgress(progress);
+}
+
+function isTopicDone(topicId) {
+  const progress = loadProgress();
+  return Boolean(progress && progress.done && progress.done[topicId]);
+}
+
+function countDoneTopics() {
+  const progress = loadProgress();
+  if (!progress || !progress.done) return 0;
+  return topics.filter(topic => progress.done[topic.id]).length;
+}
+
+function toggleProgressSaving() {
+  if (isProgressEnabled()) {
+    setProgressEnabled(false);
+    announce("Der Lernstand wurde gelöscht. Es wird nichts mehr gespeichert.");
+  } else {
+    setProgressEnabled(true);
+    announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
+  }
+  renderMenu();
+}
+
+/* ============================================================
+   Elemente
+   ============================================================ */
 
 const content = document.getElementById("content");
 const appTitle = document.getElementById("appTitle");
@@ -35,26 +116,9 @@ const homeButton = document.getElementById("homeButton");
 const soundToggleButton = document.getElementById("soundToggleButton");
 const liveRegion = document.getElementById("liveRegion");
 
-
-
-
-function readShortText(text) {
-  if (!("speechSynthesis" in window)) {
-    return;
-  }
-
-  const cleaned = String(text || "").trim();
-  if (!cleaned) {
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(cleaned);
-  utterance.lang = "de-DE";
-  utterance.rate = 0.82;
-  utterance.pitch = 1;
-  window.speechSynthesis.speak(utterance);
-}
+/* ============================================================
+   Hilfsfunktionen
+   ============================================================ */
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -65,23 +129,32 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+const TOPIC_COLORS = {
+  datenschutz: ["#00285A", "rgba(0, 40, 90, 0.24)", "rgba(0, 40, 90, 0.08)", "#EAF1F8"],
+  whatsapp: ["#1DA855", "rgba(37, 211, 102, 0.30)", "rgba(37, 211, 102, 0.12)", "#E9FBEF"],
+  facebook: ["#1877F2", "rgba(24, 119, 242, 0.28)", "rgba(24, 119, 242, 0.10)", "#EAF3FF"],
+  instagram: ["#C13584", "rgba(193, 53, 132, 0.28)", "rgba(193, 53, 132, 0.10)", "#FBEAF4"],
+  youtube: ["#CC0000", "rgba(255, 0, 0, 0.24)", "rgba(255, 0, 0, 0.09)", "#FFECEC"],
+  snapchat: ["#A88A00", "rgba(255, 252, 0, 0.42)", "rgba(255, 252, 0, 0.18)", "#FFFBD1"],
+  tiktok: ["#111111", "rgba(37, 244, 238, 0.34)", "rgba(37, 244, 238, 0.12)", "#E8FFFF"],
+  hilfe: ["#C9541C", "rgba(201, 84, 28, 0.30)", "rgba(201, 84, 28, 0.12)", "#FFF0E8"],
+  ki: ["#6B3FA0", "rgba(107, 63, 160, 0.28)", "rgba(107, 63, 160, 0.10)", "#F1EAFA"],
+  fakes: ["#B45309", "rgba(180, 83, 9, 0.28)", "rgba(180, 83, 9, 0.10)", "#FDF1E0"],
+  betrug: ["#B91C1C", "rgba(185, 28, 28, 0.26)", "rgba(185, 28, 28, 0.10)", "#FDEAEA"],
+  einkaufen: ["#15803D", "rgba(21, 128, 61, 0.28)", "rgba(21, 128, 61, 0.10)", "#E8F8EE"]
+};
+
 function getTopicColorStyle(topicId) {
-  const colors = {
-    datenschutz: ["#00285A", "rgba(0, 40, 90, 0.24)", "rgba(0, 40, 90, 0.08)", "#EAF1F8"],
-    whatsapp: ["#25D366", "rgba(37, 211, 102, 0.30)", "rgba(37, 211, 102, 0.12)", "#E9FBEF"],
-    facebook: ["#1877F2", "rgba(24, 119, 242, 0.28)", "rgba(24, 119, 242, 0.10)", "#EAF3FF"],
-    instagram: ["#C13584", "rgba(193, 53, 132, 0.28)", "rgba(193, 53, 132, 0.10)", "#FBEAF4"],
-    youtube: ["#FF0000", "rgba(255, 0, 0, 0.24)", "rgba(255, 0, 0, 0.09)", "#FFECEC"],
-    snapchat: ["#C9A600", "rgba(255, 252, 0, 0.42)", "rgba(255, 252, 0, 0.18)", "#FFFBD1"],
-    tiktok: ["#111111", "rgba(37, 244, 238, 0.34)", "rgba(37, 244, 238, 0.12)", "#E8FFFF"],
-    hilfe: ["#C9541C", "rgba(201, 84, 28, 0.30)", "rgba(201, 84, 28, 0.12)", "#FFF0E8"]
-  };
-  const [color, ring, bg, icon] = colors[topicId] || colors.datenschutz;
+  const [color, ring, bg, icon] = TOPIC_COLORS[topicId] || TOPIC_COLORS.datenschutz;
   return `--topic-color:${color};--topic-ring:${ring};--topic-hover-bg:${bg};--topic-icon-bg:${icon}`;
 }
 
+function getTopicById(topicId) {
+  return topics.find(topic => topic.id === topicId) || null;
+}
+
 function getCurrentTopic() {
-  return topics.find(topic => topic.id === currentTopicId) || null;
+  return getTopicById(currentTopicId);
 }
 
 function getIconHtml(iconName) {
@@ -92,6 +165,19 @@ function getIconHtml(iconName) {
 function getIllustrationHtml(topic) {
   if (!topic || !topic.illustration) return "";
   return `<img class="topic-illustration" src="${escapeHtml(topic.illustration)}" alt="" aria-hidden="true">`;
+}
+
+/* ============================================================
+   Lern-Bilder in den Lektionen
+   - eigene Illustrationen aus assets/lessons/ (fest eingebunden,
+     keine fremden Server, keine Lizenz-Auflagen)
+   - jede Lektion bekommt automatisch das Bild zu ihrem Symbol
+   ============================================================ */
+
+function getLessonImageHtml(lesson, topic) {
+  const key = (lesson && lesson.icon) || (topic && topic.icon) || "";
+  if (!key) return "";
+  return `<img class="lesson-illustration" src="assets/lessons/${escapeHtml(key)}.svg" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">`;
 }
 
 function setProgressVisible(isVisible) {
@@ -124,31 +210,31 @@ function announce(text) {
   if (liveRegion) liveRegion.textContent = text || "";
 }
 
+function focusContent() {
+  content.focus();
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+}
+
+/* ============================================================
+   Töne (standardmäßig aus, keine Speicherung)
+   ============================================================ */
 
 function updateSoundButton() {
-  const button = document.getElementById("soundToggleButton");
-  if (!button) {
-    return;
-  }
-
-  button.classList.toggle("sound-on", soundEnabled);
-  button.classList.toggle("sound-off", !soundEnabled);
-
-  if (soundEnabled) {
-    button.textContent = "Geräusche an";
-    button.setAttribute("aria-label", "Geräusche sind an. Klicken zum Ausschalten.");
-    button.setAttribute("aria-pressed", "true");
-  } else {
-    button.textContent = "Geräusche aus";
-    button.setAttribute("aria-label", "Geräusche sind aus. Klicken zum Einschalten.");
-    button.setAttribute("aria-pressed", "false");
-  }
+  if (!soundToggleButton) return;
+  soundToggleButton.classList.toggle("sound-on", soundEnabled);
+  soundToggleButton.classList.toggle("sound-off", !soundEnabled);
+  soundToggleButton.textContent = soundEnabled ? "Töne an" : "Töne aus";
+  soundToggleButton.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+  soundToggleButton.setAttribute(
+    "aria-label",
+    soundEnabled ? "Töne sind an. Klicken zum Ausschalten." : "Töne sind aus. Klicken zum Einschalten."
+  );
 }
 
 function toggleSound() {
   soundEnabled = !soundEnabled;
   updateSoundButton();
-
   if (soundEnabled) {
     playSound("toggle");
     announce("Töne sind eingeschaltet.");
@@ -160,161 +246,98 @@ function toggleSound() {
 function getAudioContext() {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return null;
-
-  if (!audioContext) {
-    audioContext = new AudioContextClass();
-  }
-
-  if (audioContext.state === "suspended") {
-    audioContext.resume().catch(() => {});
-  }
-
+  if (!audioContext) audioContext = new AudioContextClass();
+  if (audioContext.state === "suspended") audioContext.resume().catch(() => {});
   return audioContext;
 }
 
 function playTone(frequency, duration, volume, type = "sine", delay = 0) {
   if (!soundEnabled) return;
-
   try {
     const context = getAudioContext();
     if (!context) return;
 
     const oscillator = context.createOscillator();
     const gain = context.createGain();
-
     const startTime = context.currentTime + delay;
     const endTime = startTime + duration;
 
     oscillator.type = type;
     oscillator.frequency.setValueAtTime(frequency, startTime);
-
     gain.gain.setValueAtTime(0.0001, startTime);
     gain.gain.exponentialRampToValueAtTime(Math.max(volume, 0.0001), startTime + 0.015);
     gain.gain.exponentialRampToValueAtTime(0.0001, endTime);
 
     oscillator.connect(gain);
     gain.connect(context.destination);
-
     oscillator.start(startTime);
     oscillator.stop(endTime + 0.02);
   } catch (error) {
-    // Audio ist Zusatz. Wenn Audio nicht funktioniert,
-    // läuft die Lernplattform ohne Ton weiter.
+    /* Ton ist Zusatz. Ohne Ton läuft alles weiter. */
   }
 }
 
 function playSound(type) {
+  if (!soundEnabled) return;
   if (type === "hover") {
     playTone(520, 0.045, 0.045, "sine");
-    return;
-  }
-  if (!soundEnabled) return;
-
-  if (type === "correct") {
+  } else if (type === "correct") {
     playTone(660, 0.12, 0.075, "sine", 0);
     playTone(880, 0.14, 0.065, "sine", 0.10);
-    return;
-  }
-
-  if (type === "wrong") {
+  } else if (type === "wrong") {
     playTone(220, 0.18, 0.060, "triangle", 0);
-    return;
-  }
-
-  if (type === "success") {
+  } else if (type === "success") {
     playTone(523.25, 0.12, 0.065, "sine", 0);
     playTone(659.25, 0.12, 0.065, "sine", 0.11);
     playTone(783.99, 0.18, 0.060, "sine", 0.22);
-    return;
-  }
-
-  if (type === "toggle") {
+  } else if (type === "toggle") {
     playTone(600, 0.10, 0.050, "sine", 0);
   }
 }
 
-
-/* Optionaler Orientierungston bei Hover/Fokus.
-   Wichtig: Der Ton läuft nur, wenn "Töne an" aktiv ist.
-   Dadurch bleibt die Plattform ruhig und reizarm. */
+/* Leiser Orientierungston bei Hover/Fokus – nur wenn Töne an sind. */
 let lastHoverSoundAt = 0;
 let lastHoverSoundTarget = null;
 
 function playHoverSound(event) {
-  if (!soundEnabled) {
-    return;
-  }
-
+  if (!soundEnabled) return;
   const target = event.target.closest(
     ".topic-card, .action-card, .support-help-button, .answer-option, .card-read-button, .reading-button, .plain-back-button, .nav-button"
   );
-
-  if (!target) {
-    return;
-  }
+  if (!target) return;
 
   const now = Date.now();
-
-  if (target === lastHoverSoundTarget && now - lastHoverSoundAt < 1200) {
-    return;
-  }
-
-  if (now - lastHoverSoundAt < 350) {
-    return;
-  }
+  if (target === lastHoverSoundTarget && now - lastHoverSoundAt < 1200) return;
+  if (now - lastHoverSoundAt < 350) return;
 
   lastHoverSoundTarget = target;
   lastHoverSoundAt = now;
-
   playSound("hover");
 }
 
-document.addEventListener("mouseover", playHoverSound, true);
-document.addEventListener("focusin", playHoverSound, true);
-
-
-
-function renderLegalFooter() {
-  const old = document.querySelector(".small-footer-notice");
-  if (old) old.remove();
-
-  const footer = document.createElement("footer");
-  footer.className = "small-footer-notice";
-  footer.innerHTML = `
-    <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat oder TikTok.</p>
-    <p>Es wird kein Name gespeichert. Es wird kein Lernstand gespeichert.<br /><a href="ersteller.html">Ersteller</a></p>
-  `;
-  const appRoot = document.querySelector(".app") || document.body;
-  appRoot.appendChild(footer);
-}
-
-function focusContent() {
-  content.focus();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-
-
 /* ============================================================
-   Vorlesefunktion
-   - liest nur den aktuellen Lernbereich vor
-   - liest keine Navigation und keinen Footer vor
-   - startet nur nach Klick
-   - stoppt bei Seitenwechsel
-   - keine Speicherung
+   Vorlesen (nur nach Klick, keine Speicherung)
    ============================================================ */
-
-let speechRate = 0.85;
-let isSpeaking = false;
 
 function supportsSpeech() {
   return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
 }
 
+function readShortText(text) {
+  if (!supportsSpeech()) return;
+  const cleaned = String(text || "").trim();
+  if (!cleaned) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(cleaned);
+  utterance.lang = "de-DE";
+  utterance.rate = 0.82;
+  utterance.pitch = 1;
+  window.speechSynthesis.speak(utterance);
+}
+
 function stopReading() {
   if (!supportsSpeech()) return;
   window.speechSynthesis.cancel();
-  isSpeaking = false;
   updateReadingStatus("Vorlesen gestoppt.");
 }
 
@@ -345,7 +368,6 @@ function collectReadableText() {
     const text = cleanSpeechText(node.textContent);
     if (text) parts.push(text);
   });
-
   return parts.join(". ");
 }
 
@@ -354,7 +376,6 @@ function readCurrentPage(rate) {
     updateReadingStatus("Vorlesen geht auf diesem Gerät nicht.");
     return;
   }
-
   const text = collectReadableText();
   if (!text) {
     updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
@@ -362,38 +383,19 @@ function readCurrentPage(rate) {
   }
 
   window.speechSynthesis.cancel();
-
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "de-DE";
   utterance.rate = rate || speechRate;
   utterance.pitch = 1;
   utterance.volume = 1;
-
-  utterance.onstart = () => {
-    isSpeaking = true;
-    updateReadingStatus(rate && rate < 0.8 ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
-  };
-
-  utterance.onend = () => {
-    isSpeaking = false;
-    updateReadingStatus("Vorlesen fertig.");
-  };
-
-  utterance.onerror = () => {
-    isSpeaking = false;
-    updateReadingStatus("Vorlesen wurde beendet.");
-  };
-
+  utterance.onstart = () => updateReadingStatus(rate && rate < 0.8 ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
+  utterance.onend = () => updateReadingStatus("Vorlesen fertig.");
+  utterance.onerror = () => updateReadingStatus("Vorlesen wurde beendet.");
   window.speechSynthesis.speak(utterance);
 }
 
-function readNormal() {
-  readCurrentPage(0.85);
-}
-
-function readSlow() {
-  readCurrentPage(0.50);
-}
+function readNormal() { readCurrentPage(0.85); }
+function readSlow() { readCurrentPage(0.50); }
 
 function buildReadingToolbar() {
   if (!supportsSpeech()) {
@@ -403,24 +405,19 @@ function buildReadingToolbar() {
       </div>
     `;
   }
-
   return `
     <div class="reading-toolbar" aria-label="Vorlesen">
-      <button type="button" class="reading-button reading-button-normal" onclick="readNormal()">Vorlesen</button>
-      <button type="button" class="reading-button reading-button-slow" onclick="readSlow()">Langsam vorlesen</button>
+      <button type="button" class="reading-button reading-button-normal" onclick="readNormal()">🔊 Vorlesen</button>
+      <button type="button" class="reading-button reading-button-slow" onclick="readSlow()">🐢 Langsam vorlesen</button>
       <button type="button" class="reading-button reading-button-stop" onclick="stopReading()">Stopp</button>
       <p id="readingStatus" class="reading-status" aria-live="polite"></p>
     </div>
   `;
 }
 
-
 /* ============================================================
-   Zusatzfunktionen: Pause, Symbol-Erklärung, Einfach-Modus,
-   Abschlussseite, Druckfunktion
+   Einfach-Modus, Pause, Symbol-Hilfe
    ============================================================ */
-
-let simpleMode = false;
 
 function toggleSimpleMode() {
   simpleMode = !simpleMode;
@@ -431,20 +428,12 @@ function toggleSimpleMode() {
 function updateSimpleModeButton() {
   const button = document.getElementById("simpleModeButton");
   if (!button) return;
-
-  if (simpleMode) {
-    button.textContent = "Einfach-Modus an";
-    button.setAttribute("aria-pressed", "true");
-  } else {
-    button.textContent = "Einfach-Modus aus";
-    button.setAttribute("aria-pressed", "false");
-  }
+  button.textContent = simpleMode ? "Einfach-Modus an" : "Einfach-Modus aus";
+  button.setAttribute("aria-pressed", simpleMode ? "true" : "false");
 }
 
 function showPauseOverlay() {
-  const existing = document.getElementById("pauseOverlay");
-  if (existing) existing.remove();
-
+  closeCalmOverlay();
   const overlay = document.createElement("div");
   overlay.id = "pauseOverlay";
   overlay.className = "calm-overlay";
@@ -457,16 +446,13 @@ function showPauseOverlay() {
       <button type="button" class="primary-action" onclick="closeCalmOverlay()">Weiter lernen</button>
     </div>
   `;
-
   document.body.appendChild(overlay);
   const button = overlay.querySelector("button");
   if (button) button.focus();
 }
 
 function showSymbolHelp() {
-  const existing = document.getElementById("pauseOverlay");
-  if (existing) existing.remove();
-
+  closeCalmOverlay();
   const overlay = document.createElement("div");
   overlay.id = "pauseOverlay";
   overlay.className = "calm-overlay";
@@ -483,7 +469,6 @@ function showSymbolHelp() {
       <button type="button" class="primary-action" onclick="closeCalmOverlay()">Schließen</button>
     </div>
   `;
-
   document.body.appendChild(overlay);
   const button = overlay.querySelector("button");
   if (button) button.focus();
@@ -497,73 +482,37 @@ function closeCalmOverlay() {
 function buildUtilityBar() {
   return `
     <div class="utility-bar" aria-label="Zusätzliche Hilfe">
-      <button type="button" id="simpleModeButton" class="utility-button simple-mode-button" onclick="toggleSimpleMode()" aria-pressed="false">
-        Einfach-Modus aus
+      <button type="button" id="simpleModeButton" class="utility-button simple-mode-button" onclick="toggleSimpleMode()" aria-pressed="${simpleMode ? "true" : "false"}">
+        ${simpleMode ? "Einfach-Modus an" : "Einfach-Modus aus"}
       </button>
-      <button type="button" class="utility-button" onclick="showSymbolHelp()">
-        Zeichen erklären
-      </button>
-      <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">
-        Pause machen
-      </button>
+      <button type="button" class="utility-button" onclick="showSymbolHelp()">Zeichen erklären</button>
+      <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
     </div>
   `;
 }
 
-function getTopicByIdSafe(topicId) {
-  return topics.find(item => item.id === topicId) || null;
-}
+/* ============================================================
+   Fußzeile
+   ============================================================ */
 
-function renderCompletionPage(topicId, mode) {
-  stopReading();
+function renderLegalFooter() {
+  const old = document.querySelector(".small-footer-notice");
+  if (old) old.remove();
 
-  const topic = getTopicByIdSafe(topicId);
-  if (!topic) {
-    renderMenu();
-    return;
-  }
-
-  setProgressVisible(false);
-  setBottomNavVisible(false);
-  setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
-  showNav(false, false);
-
-  const rules = Array.isArray(topic.memoryRules) ? topic.memoryRules.slice(0, 5) : [];
-  const rulesHtml = rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
-
-  content.innerHTML = `
-    <section class="completion-page" data-readable="true">
-      <article class="card completion-card">
-        <div class="symbol-heading">
-          <span class="access-box-symbol" aria-hidden="true">${getIconHtml("check")}</span>
-          <h2>Du bist fertig.</h2>
-        </div>
-
-        <p>Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
-
-        <h3>Das hast du geübt:</h3>
-        <ul>
-          ${rulesHtml || "<li>Du hast wichtige Regeln wiederholt.</li>"}
-        </ul>
-
-        <div class="completion-actions">
-          <button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Lernweg</button>
-          <button type="button" class="secondary-action" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
-          <button type="button" class="secondary-action" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">Merk-Karte ansehen</button>
-          <button type="button" class="secondary-action" onclick="renderMenu()">Zur Themenübersicht</button>
-        </div>
-      </article>
-    </section>
+  const footer = document.createElement("footer");
+  footer.className = "small-footer-notice";
+  footer.innerHTML = `
+    <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
+    <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
+    <a href="ersteller.html">Ersteller</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
   `;
-
-  focusContent();
-  renderLegalFooter();
+  const appRoot = document.querySelector(".app") || document.body;
+  appRoot.appendChild(footer);
 }
 
-function printCurrentPage() {
-  window.print();
-}
-
+/* ============================================================
+   Startseite: Themenübersicht
+   ============================================================ */
 
 function renderMenu() {
   stopReading();
@@ -583,12 +532,28 @@ function renderMenu() {
       ${getIllustrationHtml(topic)}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
-      <span class="card-read-button" role="button" tabindex="0" data-read-card-title="${escapeHtml(topic.title)}" aria-label="Thema ${escapeHtml(topic.title)} vorlesen">
+      ${isTopicDone(topic.id) ? `<span class="topic-done-badge">✓ Geschafft</span>` : ""}
+      <span class="card-read-button" role="button" tabindex="0" data-read-card-text="${escapeHtml(topic.title)}. ${escapeHtml(topic.desc || "")}" aria-label="Thema ${escapeHtml(topic.title)} vorlesen">
         🔊 Vorlesen
       </span>
       <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
     </button>
   `).join("");
+
+  const doneCount = countDoneTopics();
+  const progressConsent = isProgressEnabled()
+    ? `
+      <div class="progress-consent">
+        <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.</p>
+        <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
+        <button type="button" class="utility-button" onclick="toggleProgressSaving()">Lernstand löschen und nicht mehr merken</button>
+      </div>`
+    : `
+      <div class="progress-consent">
+        <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
+        <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
+        <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
+      </div>`;
 
   content.innerHTML = `
     <section class="start-page">
@@ -596,6 +561,7 @@ function renderMenu() {
         <h2>Wähle ein Thema.</h2>
         <p>Danach entscheidest du, wie du lernen möchtest.</p>
       </div>
+      ${progressConsent}
       <div class="topic-grid">${cards}</div>
     </section>
   `;
@@ -603,9 +569,13 @@ function renderMenu() {
   renderLegalFooter();
 }
 
+/* ============================================================
+   Themenseite: Lernweg wählen
+   ============================================================ */
+
 function renderTopicChoice(topicId) {
   stopReading();
-  const topic = topics.find(item => item.id === topicId);
+  const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
 
   currentTopicId = topic.id;
@@ -620,7 +590,7 @@ function renderTopicChoice(topicId) {
   showNav(false, false);
 
   content.innerHTML = `
-    <section class="topic-choice">
+    <section class="topic-choice" style="${getTopicColorStyle(topic.id)}">
       <button type="button" class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
 
       <article class="card topic-intro-card">
@@ -683,6 +653,10 @@ function renderTopicChoice(topicId) {
   renderLegalFooter();
 }
 
+/* ============================================================
+   Hilfe-Bereiche
+   ============================================================ */
+
 function buildSupportBox() {
   return `
     <div class="support-help-area">
@@ -691,7 +665,6 @@ function buildSupportBox() {
         <span class="support-help-text">
           <span class="support-help-title">Du brauchst Unterstützung?</span>
           <span class="support-help-desc">Hilfe anzeigen.</span>
-          <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Du brauchst Unterstützung? Hilfe anzeigen." aria-label="Unterstützung vorlesen">🔊 Vorlesen</span>
         </span>
       </button>
 
@@ -742,9 +715,7 @@ function toggleSupportHelp() {
     if (button) button.setAttribute("aria-expanded", "true");
     if (desc) desc.textContent = "Hilfe wieder ausblenden.";
   } else {
-    panel.setAttribute("hidden", "");
-    if (button) button.setAttribute("aria-expanded", "false");
-    if (desc) desc.textContent = "Hilfe anzeigen.";
+    closeSupportHelp();
   }
 }
 
@@ -757,6 +728,47 @@ function closeSupportHelp() {
   if (desc) desc.textContent = "Hilfe anzeigen.";
 }
 
+function buildTaskHelpBox() {
+  return `
+    <div class="task-help-area">
+      <button type="button" class="task-help-button" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
+        Ich bin unsicher
+      </button>
+      <div id="taskHelpPanel" class="task-help-panel" hidden>
+        <h3>Du bist unsicher?</h3>
+        <p>Du musst nicht raten.</p>
+        <ul>
+          <li>Lies die Frage noch einmal langsam.</li>
+          <li>Schau dir beide Antworten an.</li>
+          <li>Überlege: Welche Antwort schützt dich besser?</li>
+          <li>Du kannst eine Pause machen.</li>
+          <li>Du kannst eine Person fragen, der du vertraust.</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function toggleTaskHelp() {
+  const panel = document.getElementById("taskHelpPanel");
+  const button = document.querySelector(".task-help-button");
+  if (!panel || !button) return;
+  const show = panel.hasAttribute("hidden");
+  if (show) {
+    panel.removeAttribute("hidden");
+    button.setAttribute("aria-expanded", "true");
+    button.textContent = "Hilfe ausblenden";
+  } else {
+    panel.setAttribute("hidden", "");
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = "Ich bin unsicher";
+  }
+}
+
+/* ============================================================
+   Lektionen
+   ============================================================ */
+
 function getLessonsForMode(topic, mode) {
   if (!topic || !Array.isArray(topic.lessons)) return [];
   if (mode === "short" && Array.isArray(topic.shortLessonIndexes)) {
@@ -766,7 +778,7 @@ function getLessonsForMode(topic, mode) {
 }
 
 function startTopicMode(topicId, mode) {
-  const topic = topics.find(item => item.id === topicId);
+  const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
   currentTopicId = topic.id;
   currentMode = mode === "short" ? "short" : "full";
@@ -782,8 +794,7 @@ function renderLesson() {
   const lessons = getLessonsForMode(topic, currentMode);
   if (!lessons.length) return renderTopicChoice(topic.id);
 
-  if (currentStep < 0) currentStep = 0;
-  if (currentStep >= lessons.length) currentStep = lessons.length - 1;
+  currentStep = Math.max(0, Math.min(currentStep, lessons.length - 1));
 
   const lesson = lessons[currentStep];
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
@@ -823,11 +834,12 @@ function renderLesson() {
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
-    <article class="card lesson-card" data-readable="true">
+    <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
         <h2>${escapeHtml(lesson.title || topic.title)}</h2>
       </div>
+      ${getLessonImageHtml(lesson, topic)}
       ${text}
       ${bullets}
       ${examples}
@@ -837,7 +849,6 @@ function renderLesson() {
       ${practice}
     </article>
   `;
-
   focusContent();
   renderLegalFooter();
 }
@@ -860,44 +871,6 @@ function buildPractice(practice) {
       ${buildTaskHelpBox()}
     </div>
   `;
-}
-
-function buildTaskHelpBox() {
-  return `
-    <div class="task-help-area">
-      <button type="button" class="task-help-button" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
-        Ich bin unsicher
-      </button>
-      <div id="taskHelpPanel" class="task-help-panel" hidden>
-        <h3>Du bist unsicher?</h3>
-        <p>Du musst nicht raten.</p>
-        <ul>
-          <li>Lies die Frage noch einmal langsam.</li>
-          <li>Schau dir beide Antworten an.</li>
-          <li>Überlege: Welche Antwort schützt dich besser?</li>
-          <li>Du kannst eine Pause machen.</li>
-          <li>Du kannst eine Person fragen, der du vertraust.</li>
-          <li>Du kannst sagen: Bitte erkläre mir das einfacher.</li>
-        </ul>
-      </div>
-    </div>
-  `;
-}
-
-function toggleTaskHelp() {
-  const panel = document.getElementById("taskHelpPanel");
-  const button = document.querySelector(".task-help-button");
-  if (!panel || !button) return;
-  const show = panel.hasAttribute("hidden");
-  if (show) {
-    panel.removeAttribute("hidden");
-    button.setAttribute("aria-expanded", "true");
-    button.textContent = "Hilfe ausblenden";
-  } else {
-    panel.setAttribute("hidden", "");
-    button.setAttribute("aria-expanded", "false");
-    button.textContent = "Ich bin unsicher";
-  }
 }
 
 function renderPracticeFeedbackPage(index, correctIndex) {
@@ -952,7 +925,6 @@ function renderPracticeFeedbackPage(index, correctIndex) {
       ${!isCorrect ? buildTaskHelpBox() : ""}
     </article>
   `;
-
   announce(isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig.");
   focusContent();
   renderLegalFooter();
@@ -967,12 +939,64 @@ function continueAfterPractice() {
     currentStep += 1;
     renderLesson();
   } else {
-    renderTopicChoice(topic.id);
+    renderCompletionPage(topic.id);
   }
 }
 
+/* ============================================================
+   Abschlussseite
+   ============================================================ */
+
+function renderCompletionPage(topicId) {
+  stopReading();
+  const topic = getTopicById(topicId);
+  if (!topic) return renderMenu();
+
+  markTopicDone(topic.id);
+  playSound("success");
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
+  showNav(false, false);
+
+  const rules = Array.isArray(topic.memoryRules) ? topic.memoryRules.slice(0, 5) : [];
+  const rulesHtml = rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
+
+  content.innerHTML = `
+    <section class="completion-page" data-readable="true">
+      <article class="card completion-card" style="${getTopicColorStyle(topic.id)}">
+        <div class="symbol-heading">
+          <span class="access-box-symbol" aria-hidden="true">${getIconHtml("check")}</span>
+          <h2>Du bist fertig.</h2>
+        </div>
+
+        <p>Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
+
+        <h3>Das hast du geübt:</h3>
+        <ul>
+          ${rulesHtml || "<li>Du hast wichtige Regeln wiederholt.</li>"}
+        </ul>
+
+        <div class="completion-actions">
+          <button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Lernweg</button>
+          <button type="button" class="secondary-action" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
+          <button type="button" class="secondary-action" onclick="renderCertificate('${escapeHtml(topic.id)}')">Urkunde ansehen</button>
+          <button type="button" class="secondary-action" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">Merk-Karte ansehen</button>
+          <button type="button" class="secondary-action" onclick="renderMenu()">Zur Themenübersicht</button>
+        </div>
+      </article>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
+   Quiz
+   ============================================================ */
+
 function startQuiz(topicId) {
-  const topic = topics.find(item => item.id === topicId);
+  const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
   currentTopicId = topic.id;
   currentQuizIndex = 0;
@@ -1012,7 +1036,7 @@ function renderQuizQuestion() {
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
-    <article class="card quiz-card" data-readable="true">
+    <article class="card quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <h2>Quiz</h2>
       <p class="quiz-question">${escapeHtml(q.question || "")}</p>
       <div class="answers">${answerHtml}</div>
@@ -1090,12 +1114,13 @@ function renderQuizResult() {
   const questions = getQuizQuestions(topic);
   const total = questions.length || 1;
   const percent = Math.round((quizScore / total) * 100);
+  if (topic) markTopicDone(topic.id);
   playSound("success");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic ? topic.title : "Quiz", "Quiz", "Ergebnis", "Fertig", 100);
-  showNav(true, false);
+  showNav(false, false);
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
@@ -1105,7 +1130,8 @@ function renderQuizResult() {
       <p>Das sind ${percent} Prozent.</p>
       <p>Wichtig ist: Du hast geübt.</p>
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="startQuiz('${escapeHtml(currentTopicId)}')">Quiz wiederholen</button>
+        <button type="button" class="quiz-link quiz-button" onclick="renderCertificate('${escapeHtml(currentTopicId)}', ${quizScore}, ${total})">Urkunde ansehen</button>
+        <button type="button" class="nav-button secondary" onclick="startQuiz('${escapeHtml(currentTopicId)}')">Quiz wiederholen</button>
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(currentTopicId)}')">Zurück zum Thema</button>
       </div>
     </article>
@@ -1114,16 +1140,68 @@ function renderQuizResult() {
   renderLegalFooter();
 }
 
+/* ============================================================
+   Urkunde – zum Ausdrucken, Name wird von Hand geschrieben
+   ============================================================ */
+
+function renderCertificate(topicId, score, total) {
+  stopReading();
+  const topic = getTopicById(topicId);
+  if (!topic) return renderMenu();
+
+  currentTopicId = topic.id;
+  const today = new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
+  const hasResult = typeof score === "number" && typeof total === "number" && total > 0;
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "Urkunde", "Urkunde", "Geschafft", 100);
+  showNav(false, false);
+
+  content.innerHTML = `
+    <article class="card certificate-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <div class="certificate-frame">
+        <p class="certificate-kicker">Urkunde</p>
+        <h2>Sicher und selbstbestimmt im Internet</h2>
+
+        <p class="certificate-text">Diese Urkunde gehört:</p>
+        <p class="certificate-name-line" aria-hidden="true">&nbsp;</p>
+        <p class="certificate-name-hint">Hier kannst du deinen Namen schreiben.</p>
+
+        <p class="certificate-text">Du hast das Thema</p>
+        <p class="certificate-topic">${escapeHtml(topic.title)}</p>
+        <p class="certificate-text">erfolgreich geübt.</p>
+
+        ${hasResult ? `<p class="certificate-result">Quiz-Ergebnis: ${score} von ${total} Fragen richtig.</p>` : ""}
+
+        <p class="certificate-date">Datum: ${escapeHtml(today)}</p>
+      </div>
+
+      <div class="certificate-actions">
+        <button type="button" class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
+   Merk-Karte
+   ============================================================ */
+
 function renderMemoryCard(topicId) {
   stopReading();
-  const topic = topics.find(item => item.id === topicId);
+  const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
 
   currentTopicId = topic.id;
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Merk-Karte", topic.title, "Merk-Karte", "Merken", 100);
-  showNav(true, false);
+  showNav(false, false);
 
   const rules = Array.isArray(topic.memoryRules)
     ? topic.memoryRules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("")
@@ -1135,7 +1213,7 @@ function renderMemoryCard(topicId) {
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
-    <article class="card memory-card" data-readable="true">
+    <article class="card memory-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml("remember")}</span>
         <h2>${escapeHtml(topic.title)}</h2>
@@ -1164,6 +1242,10 @@ function renderMemoryCard(topicId) {
   renderLegalFooter();
 }
 
+/* ============================================================
+   Navigation
+   ============================================================ */
+
 function goBack() {
   if (!currentTopicId) return renderMenu();
 
@@ -1175,7 +1257,6 @@ function goBack() {
     renderLesson();
     return;
   }
-
   renderTopicChoice(currentTopicId);
 }
 
@@ -1189,114 +1270,70 @@ function goNext() {
       currentStep += 1;
       renderLesson();
     } else {
-      renderCompletionPage(topic.id, currentMode);
+      renderCompletionPage(topic.id);
     }
     return;
   }
-
   renderTopicChoice(topic.id);
 }
 
+/* Direkter Einstieg über Link, zum Beispiel:
+   index.html#datenschutz
+   index.html#datenschutz:kurz
+   index.html#datenschutz:quiz
+   index.html#datenschutz:merk */
 function handleHash() {
-  const hash = window.location.hash.replace("#", "").trim();
+  const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
   if (!hash) return renderMenu();
 
   const [topicId, action] = hash.split(":");
-  const topic = topics.find(item => item.id === topicId);
+  const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
 
-  if (action === "short") return startTopicMode(topicId, "short");
+  if (action === "kurz" || action === "short") return startTopicMode(topicId, "short");
   if (action === "quiz") return startQuiz(topicId);
-  if (action === "memory") return renderMemoryCard(topicId);
+  if (action === "merk" || action === "memory") return renderMemoryCard(topicId);
   return renderTopicChoice(topicId);
 }
+
+/* ============================================================
+   Ereignisse
+   ============================================================ */
 
 backButton.addEventListener("click", goBack);
 nextButton.addEventListener("click", goNext);
 homeButton.addEventListener("click", renderMenu);
+
 if (soundToggleButton) {
   soundToggleButton.addEventListener("click", toggleSound);
   updateSoundButton();
 }
 
+document.addEventListener("mouseover", playHoverSound, true);
+document.addEventListener("focusin", playHoverSound, true);
+
+/* Vorlese-Knöpfe in Karten: Karte darf sich dabei nicht öffnen. */
+function handleReadCardEvent(event) {
+  const button = event.target.closest("[data-read-card-text], [data-read-card-title]");
+  if (!button) return;
+
+  if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+
+  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
+  readShortText(text);
+}
+
+document.addEventListener("click", handleReadCardEvent, true);
+document.addEventListener("keydown", handleReadCardEvent, true);
+
+/* Escape schließt Overlays. */
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") closeCalmOverlay();
+});
+
 document.addEventListener("DOMContentLoaded", handleHash);
-
-
-document.addEventListener("click", function (event) {
-  const titleButton = event.target.closest("[data-read-card-title]");
-  const textButton = event.target.closest("[data-read-card-text]");
-  const button = titleButton || textButton;
-
-  if (!button) {
-    return;
-  }
-
-  event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-
-  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
-  readShortText(text);
-}, true);
-
-document.addEventListener("keydown", function (event) {
-  const titleButton = event.target.closest("[data-read-card-title]");
-  const textButton = event.target.closest("[data-read-card-text]");
-  const button = titleButton || textButton;
-
-  if (!button) {
-    return;
-  }
-
-  if (event.key !== "Enter" && event.key !== " ") {
-    return;
-  }
-
-  event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-
-  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
-  readShortText(text);
-}, true);
-
-
-/* Vorlesen in Karten: verhindert, dass die Karte zusätzlich geöffnet wird. */
-document.addEventListener("click", function (event) {
-  const titleButton = event.target.closest("[data-read-card-title]");
-  const textButton = event.target.closest("[data-read-card-text]");
-  const button = titleButton || textButton;
-
-  if (!button) {
-    return;
-  }
-
-  event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-
-  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
-  readShortText(text);
-}, true);
-
-document.addEventListener("keydown", function (event) {
-  const titleButton = event.target.closest("[data-read-card-title]");
-  const textButton = event.target.closest("[data-read-card-text]");
-  const button = titleButton || textButton;
-
-  if (!button) {
-    return;
-  }
-
-  if (event.key !== "Enter" && event.key !== " ") {
-    return;
-  }
-
-  event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-
-  const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
-  readShortText(text);
-}, true);
-
+window.addEventListener("hashchange", handleHash);

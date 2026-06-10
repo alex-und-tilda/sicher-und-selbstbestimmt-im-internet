@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" role="img" aria-hidden="true">
+  <rect width="480" height="220" rx="24" fill="#e8f8ee"/>
+  <circle cx="64" cy="50" r="34" fill="#aee3c3" opacity="0.6"/>
+  <circle cx="424" cy="178" r="44" fill="#aee3c3" opacity="0.45"/>
+  <ellipse cx="230" cy="198" rx="150" ry="12" fill="#16222e" opacity="0.07"/>
+  <g fill="none" stroke="#15803d" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M118 50h26l18 84h88l18-66H152"/>
+  </g>
+  <rect x="170" y="74" width="26" height="32" rx="6" fill="#ffb703"/>
+  <rect x="202" y="64" width="24" height="42" rx="6" fill="#e8615a"/>
+  <rect x="232" y="78" width="26" height="28" rx="6" fill="#0e7490"/>
+  <circle cx="178" cy="166" r="13" fill="#15803d"/>
+  <circle cx="178" cy="166" r="5" fill="#ffffff"/>
+  <circle cx="240" cy="166" r="13" fill="#15803d"/>
+  <circle cx="240" cy="166" r="5" fill="#ffffff"/>
+  <g transform="rotate(-6 350 120)">
+    <rect x="298" y="88" width="104" height="68" rx="12" fill="#ffffff" stroke="#15803d" stroke-width="5"/>
+    <rect x="298" y="104" width="104" height="15" fill="#15803d"/>
+    <rect x="312" y="130" width="46" height="10" rx="5" fill="#aee3c3"/>
+    <circle cx="382" cy="136" r="9" fill="#ffb703"/>
+  </g>
+  <circle cx="350" cy="56" r="20" fill="#15803d"/>
+  <path d="M340 56l7 7 13-14" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

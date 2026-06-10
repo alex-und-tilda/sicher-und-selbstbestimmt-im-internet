@@ -1,508 +1,1144 @@
+/* ============================================================
+   Sicher und selbstbestimmt im Internet
+   Stylesheet – Version 2026, komplett neu
+
+   Gestaltungs-Grundsätze:
+   - ruhig und reizarm
+   - große Schrift, große Knöpfe
+   - hoher Kontrast (WCAG AA)
+   - deutliche Fokus-Rahmen für Tastatur-Bedienung
+   - respektiert "weniger Bewegung" (prefers-reduced-motion)
+   ============================================================ */
+
 :root {
-  --bg: #F7F4EF;
-  --card: #FFFFFF;
-  --black: #1F1F1F;
-
-  --blue: #00285A;
-  --blue-mid: #3DB8B3;
-  --blue-light: #DDF3F2;
-  --blue-very-light: #EEF8F7;
-
-  --hint: #FFF3CD;
-  --hint-border: #D6A400;
-
-  --warning: #B5152B;
-  --warning-light: #F8E4E8;
-
-  --success: #2E7D32;
-  --success-border: #2E7D32;
-  --success-light: #E7F3E8;
-
-  --gray: #D8D8D8;
-  --gray-light: #F1F1F1;
-
-  --shadow: 0 14px 34px rgba(0, 40, 90, 0.12);
+  --bg: #f1f5fa;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --ink: #16222e;
+  --ink-soft: #46586a;
+  --line: #d7e0ea;
+  --accent: #00528f;
+  --accent-dark: #003a66;
+  --accent-soft: #e3eef7;
+  --good: #15803d;
+  --good-bg: #e8f6ee;
+  --warn: #b45309;
+  --warn-bg: #fdf1e0;
+  --bad: #b91c1c;
+  --bad-bg: #fdecec;
+  --remember: #00528f;
+  --remember-bg: #e6f0f9;
+  --focus: #b45309;
+  --radius-l: 24px;
+  --radius-m: 16px;
+  --radius-s: 12px;
+  --shadow: 0 2px 6px rgba(22, 34, 46, 0.06), 0 12px 28px rgba(22, 34, 46, 0.08);
+  --shadow-small: 0 1px 3px rgba(22, 34, 46, 0.10);
+  --topic-color: var(--accent);
+  --topic-ring: rgba(0, 82, 143, 0.25);
+  --topic-hover-bg: rgba(0, 82, 143, 0.08);
+  --topic-icon-bg: var(--accent-soft);
 }
 
-* { box-sizing: border-box; }
+/* ---------- Grundlagen ---------- */
 
-html, body {
-  min-height: 100%;
-  margin: 0;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
 }
 
 body {
-  font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+  margin: 0;
   background: var(--bg);
-  color: var(--text);
-  line-height: 1.62;
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
-button, a {
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.3;
+  margin: 0 0 0.6em;
+  overflow-wrap: break-word;
+}
+
+h1 { font-size: 1.45rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; }
+
+p, li {
+  font-size: 1.06rem;
+}
+
+ul, ol {
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: 0.45em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent-dark);
+}
+
+/* Deutlicher Fokus-Rahmen für Tastatur-Bedienung */
+:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+button {
   font-family: inherit;
 }
 
+/* Weniger Bewegung, wenn das Gerät das wünscht */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+/* ---------- Grund-Aufbau ---------- */
+
 .app {
-  min-height: 100dvh;
-  max-width: 960px;
+  max-width: 1060px;
   margin: 0 auto;
-  padding: 18px;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto auto;
-  gap: 14px;
+  padding: 16px 16px 48px;
 }
 
 .app-header {
-  background: var(--blue);
-  color: white;
-  border-radius: var(--radius);
-  padding: 18px 20px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: var(--shadow);
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-small);
 }
 
 .home-button {
-  width: 52px;
-  height: 52px;
-  border: 2px solid rgba(255,255,255,0.75);
-  background: transparent;
-  color: white;
-  border-radius: 16px;
-  font-size: 30px;
-  font-weight: 700;
+  flex: none;
+  width: 58px;
+  height: 58px;
+  font-size: 1.7rem;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
   cursor: pointer;
-  flex: 0 0 auto;
+  transition: background 0.15s ease;
+}
+
+.home-button:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.sound-toggle-button {
+  flex: none;
+  order: 3;
+  min-height: 58px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.sound-toggle-button.sound-on {
+  border-color: var(--good);
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .header-text h1 {
-  font-size: 1.55rem;
-  margin: 0 0 3px 0;
-  line-height: 1.15;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--ink);
 }
 
 .header-text p {
-  margin: 0;
+  margin: 2px 0 0;
   font-size: 1rem;
-  color: rgba(255,255,255,0.92);
-  font-weight: 700;
+  color: var(--ink-soft);
 }
 
+/* ---------- Fortschritt ---------- */
+
 .progress-area {
-  background: white;
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-top: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 12px 18px;
 }
 
 .progress-meta {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 1rem;
+  font-size: 0.98rem;
   font-weight: 700;
-  color: var(--muted);
-  margin-bottom: 10px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
 }
 
 .progress-track {
-  height: 12px;
-  background: #e8edf2;
+  height: 16px;
+  background: var(--accent-soft);
   border-radius: 999px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--blue), var(--blue-mid));
+  width: 0;
+  background: var(--accent);
   border-radius: 999px;
-  transition: width 0.25s ease;
+  transition: width 0.3s ease;
 }
+
+/* ---------- Inhalt ---------- */
 
 .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 0;
-}
-
-.menu-card {
-  width: 100%;
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 26px;
-  border-left: 8px solid var(--blue);
-  box-shadow: var(--shadow);
-  max-height: calc(100dvh - 255px);
-  overflow-y: auto;
-}
-
-.menu-card h2 {
-  margin: 0;
-  font-size: 2rem;
-  line-height: 1.18;
-  color: var(--black);
-}
-
-.menu-card p {
-  font-size: 1.16rem;
-  margin: 8px 0 20px 0;
-  color: var(--muted);
-}
-
-.topic-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.topic-button {
-  width: 100%;
-  text-align: left;
-  border: 2px solid var(--border);
-  background: white;
-  border-radius: 20px;
-  padding: 18px;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
-  align-items: start;
-  min-height: 126px;
-  transition: border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
-}
-
-.topic-button:hover,
-.topic-button:focus-visible {
-  border-color: var(--blue);
-  background: var(--info-bg);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.10);
-}
-
-.topic-icon {
-  width: 58px;
-  height: 58px;
-  min-width: 58px;
-  max-width: 58px;
-  border-radius: 18px;
-  background: var(--blue-very-light);
-  color: var(--blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.topic-icon img,
-.topic-icon .icon-svg {
-  width: 34px;
-  height: 34px;
-}
-
-.topic-title {
-  display: block;
-  font-weight: 700;
-  color: var(--black);
-  font-size: 1.18rem;
-  margin-bottom: 4px;
-}
-
-.topic-desc {
-  display: block;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.35;
-}
-
-.topic-start-label {
-  display: inline-block;
-  margin-top: 10px;
-  background: var(--blue);
-  color: white;
-  border-radius: 999px;
-  padding: 6px 12px;
-  font-size: 0.95rem;
-  font-weight: 700;
+  margin-top: 18px;
+  outline: none;
 }
 
 .card {
-  width: 100%;
-  max-width: 760px;
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 28px;
-  border-left: 8px solid var(--blue);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 26px 26px 30px;
   box-shadow: var(--shadow);
-  max-height: calc(100dvh - 255px);
-  overflow-y: auto;
 }
 
-.module-tag {
-  display: inline-block;
-  background: var(--blue-very-light);
-  color: var(--black);
-  border: 1px solid var(--blue-light);
-  font-size: 0.9rem;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 6px 12px;
-  margin-bottom: 16px;
+.hero-card {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #ffffff;
+  border-radius: var(--radius-l);
+  padding: 26px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
 }
 
-.card-header {
+.hero-card h2 {
+  color: #ffffff;
+  margin-bottom: 0.2em;
+}
+
+.hero-card p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #e8f1f9;
+}
+
+/* ---------- Themen-Karten ---------- */
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+.topic-card {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  padding: 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
-.icon {
-  width: 62px;
-  height: 62px;
-  min-width: 62px;
-  max-width: 62px;
-  border-radius: 20px;
-  background: var(--blue-very-light);
-  color: var(--blue);
-  display: flex;
+.topic-card:hover {
+  border-color: var(--topic-color);
+  background: var(--topic-hover-bg);
+  transform: translateY(-2px);
+}
+
+.topic-card:focus-visible {
+  border-color: var(--topic-color);
+}
+
+.topic-illustration {
+  width: 100%;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+}
+
+.topic-icon {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-m);
+  background: var(--topic-icon-bg);
+  color: var(--topic-color);
 }
 
-.icon-svg {
-  display: block;
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  color: var(--blue);
+.topic-icon img {
+  width: 32px;
+  height: 32px;
 }
 
-.card h2 {
-  margin: 0;
-  font-size: 1.85rem;
-  line-height: 1.18;
-  color: var(--black);
-}
-
-.card p {
-  font-size: 1.22rem;
-  margin: 0 0 12px 0;
-  color: var(--black);
-}
-
-.card ul {
-  margin: 16px 0 0 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 10px;
-}
-
-.card li {
-  background: var(--blue-very-light);
-  border: 1px solid var(--blue-light);
-  border-radius: 14px;
-  padding: 13px 14px;
-  font-size: 1.13rem;
+.topic-title {
+  font-size: 1.3rem;
   font-weight: 700;
+  color: var(--ink);
 }
 
-.quote {
-  background: var(--blue-very-light);
-  border-left: 6px solid var(--blue);
-  border-radius: 14px;
-  padding: 16px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  font-style: italic;
-  margin: 16px 0;
+.topic-desc {
+  font-size: 1rem;
+  color: var(--ink-soft);
 }
 
-.notice {
-  border-radius: 14px;
-  padding: 16px;
-  font-weight: 700;
-  margin-top: 16px;
-  font-size: 1.13rem;
-}
-
-.notice.warning {
-  background: var(--warning-bg);
-  border-left: 6px solid var(--red);
-  color: var(--black);
-}
-
-.notice.warning::before {
-  content: "Achtung: ";
-  font-weight: 700;
-}
-
-.notice.success {
-  background: var(--success-bg);
-  border-left: 6px solid var(--success-border);
-  color: var(--black);
-}
-
-.notice.success::before {
-  content: "Richtig: ";
-  font-weight: 700;
-}
-
-.remember {
-  background: var(--blue);
-  color: white;
-  border-radius: 14px;
-  padding: 16px;
-  font-weight: 700;
-  margin-top: 16px;
-  font-size: 1.13rem;
-}
-
-.remember::before {
-  content: "Merksatz: ";
-  font-weight: 700;
-}
-
-.exercise {
-  background: #f8fbfd;
-  border: 2px solid var(--blue-light);
-  border-radius: 18px;
-  padding: 18px;
-  margin-top: 18px;
-}
-
-.exercise::before {
-  content: "Übung";
-  display: inline-block;
-  background: var(--blue);
-  color: white;
-  border-radius: 999px;
-  padding: 5px 12px;
+/* Geschafft-Abzeichen auf Themen-Karten */
+.topic-done-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.95rem;
   font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--good-bg);
+  color: var(--good);
+  border: 2px solid var(--good);
+}
+
+/* Einwilligung: Lernstand merken */
+.progress-consent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  background: var(--surface);
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius-l);
+}
+
+.progress-consent-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.progress-consent-note {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+.progress-consent .utility-button {
+  margin-top: 6px;
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* Vorlese-Knopf in Karten */
+.card-read-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border: 1px solid var(--accent);
+  cursor: pointer;
+}
+
+.card-read-button:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* ---------- Lernweg-Auswahl ---------- */
+
+.plain-back-button {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 12px 20px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.plain-back-button:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.topic-intro-card {
+  border-top: 8px solid var(--topic-color);
+  margin-bottom: 20px;
+}
+
+.topic-intro-card .topic-illustration {
+  max-width: 360px;
+  margin-bottom: 14px;
+}
+
+.symbol-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   margin-bottom: 10px;
 }
 
-.exercise-question {
-  font-weight: 700;
-  margin-bottom: 14px;
-  font-size: 1.14rem;
+.symbol-heading h2 {
+  margin: 0;
 }
 
-.choice-list {
+.access-box-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-m);
+  background: var(--topic-icon-bg);
+  color: var(--topic-color);
+}
+
+.access-box-symbol img {
+  width: 30px;
+  height: 30px;
+}
+
+.learning-path-heading h3 {
+  margin: 18px 0 10px;
+}
+
+.action-grid {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
 }
 
-.choice-button {
-  width: 100%;
+.action-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   text-align: left;
-  background: white;
-  border: 2px solid var(--border);
-  border-radius: 14px;
-  padding: 16px;
-  font-size: 1.08rem;
+  padding: 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.action-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+}
+
+.action-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.action-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.action-title {
+  font-size: 1.15rem;
   font-weight: 700;
+}
+
+.action-desc {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Zusatz-Leiste ---------- */
+
+.utility-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.utility-button {
+  min-height: 48px;
+  padding: 10px 18px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
   cursor: pointer;
 }
 
-.choice-button:hover,
-.choice-button:focus-visible {
-  border-color: var(--blue);
-  background: var(--blue-very-light);
+.utility-button:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
 }
 
-.feedback {
-  margin-top: 14px;
-  border-radius: 14px;
-  padding: 14px;
+.utility-button[aria-pressed="true"] {
+  border-color: var(--good);
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+/* ---------- Vorlesen-Leiste ---------- */
+
+.reading-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+}
+
+.reading-button {
+  min-height: 48px;
+  padding: 10px 18px;
+  font-size: 0.98rem;
   font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  cursor: pointer;
+}
+
+.reading-button:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.reading-button-stop {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+.reading-button-stop:hover {
+  background: var(--bad);
+  color: #ffffff;
+}
+
+.reading-status {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.reading-unavailable {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* ---------- Lektion ---------- */
+
+.lesson-card {
+  border-top: 8px solid var(--topic-color);
+}
+
+/* Lern-Bild der Lektion */
+.lesson-illustration {
+  display: block;
+  margin: 6px 0 18px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius-m);
+}
+
+.lesson-card p {
+  max-width: 62ch;
+}
+
+.access-box {
+  border-radius: var(--radius-m);
+  padding: 16px 20px;
+  margin: 18px 0;
+  border: 2px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.access-box h3 {
+  margin-bottom: 0.4em;
+}
+
+.access-box.example {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.access-box.example h3 {
+  color: var(--accent-dark);
+}
+
+.access-box.warning {
+  border-color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.access-box.warning h3 {
+  color: var(--warn);
+}
+
+.access-box.success {
+  border-color: var(--good);
+  background: var(--good-bg);
+}
+
+.access-box.success h3 {
+  color: var(--good);
+}
+
+.access-box.remember {
+  border-color: var(--remember);
+  background: var(--remember-bg);
+}
+
+.access-box.remember h3 {
+  color: var(--remember);
+}
+
+.remember-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ---------- Übung und Quiz ---------- */
+
+.practice-box {
+  margin-top: 24px;
+  padding: 20px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+}
+
+.practice-question,
+.quiz-question {
+  font-size: 1.18rem;
+  font-weight: 700;
+  max-width: 62ch;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.answer-option {
+  min-height: 60px;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: left;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.answer-option:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ---------- Rückmeldung ---------- */
+
+.feedback-page.feedback-correct {
+  border-top: 8px solid var(--good);
+}
+
+.feedback-page.feedback-wrong {
+  border-top: 8px solid var(--warn);
+}
+
+.feedback-correct h2 {
+  color: var(--good);
+}
+
+.feedback-wrong h2 {
+  color: var(--warn);
+}
+
+.feedback-selected,
+.feedback-explanation {
+  padding: 14px 18px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  margin-bottom: 14px;
+}
+
+.feedback-selected h3,
+.feedback-explanation h3 {
+  margin-bottom: 0.3em;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+}
+
+.feedback-selected p,
+.feedback-explanation p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.feedback-actions {
+  margin-top: 18px;
+}
+
+.feedback-button,
+.primary-action,
+.secondary-action,
+.quiz-button {
+  min-height: 58px;
+  padding: 14px 26px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.feedback-button.primary,
+.primary-action {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.feedback-button.primary:hover,
+.primary-action:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.feedback-button.secondary,
+.secondary-action {
+  background: var(--surface);
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+
+.feedback-button.secondary:hover,
+.secondary-action:hover {
+  background: var(--accent-soft);
+}
+
+/* ---------- Hilfe-Bereiche ---------- */
+
+.task-help-area {
+  margin-top: 18px;
+}
+
+.task-help-button {
+  min-height: 52px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px dashed var(--warn);
+  background: var(--warn-bg);
+  color: var(--warn);
+  cursor: pointer;
+}
+
+.task-help-panel {
+  margin-top: 12px;
+  padding: 16px 20px;
+  border: 2px solid var(--warn);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.support-help-area {
+  margin-top: 8px;
+}
+
+.support-help-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+}
+
+.support-help-button:hover {
+  background: var(--accent-soft);
+}
+
+.support-help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+}
+
+.support-help-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.support-help-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.support-help-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.support-help-desc {
+  color: var(--ink-soft);
+}
+
+.support-help-panel {
+  margin-top: 14px;
+  padding: 20px;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-l);
+}
+
+.support-help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.support-help-card {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.support-help-remember {
+  margin-top: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.support-help-close {
+  min-height: 48px;
+  padding: 10px 20px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--accent-dark);
+  cursor: pointer;
+}
+
+.support-help-close:hover {
+  background: var(--accent-soft);
+}
+
+/* ---------- Pause / Symbole (Overlay) ---------- */
+
+.calm-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(22, 34, 46, 0.55);
+  z-index: 50;
+}
+
+.calm-box {
+  max-width: 480px;
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.calm-box p {
+  font-size: 1.12rem;
+}
+
+.symbol-help-dialog {
+  text-align: left;
+}
+
+.symbol-help-list {
+  list-style: none;
+  padding: 0;
+}
+
+.symbol-help-list li {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  margin-bottom: 8px;
+}
+
+/* ---------- Quiz-Ergebnis, Abschluss, Merk-Karte ---------- */
+
+.quiz-result-card h2,
+.completion-card h2 {
+  color: var(--good);
+}
+
+.completion-card {
+  border-top: 8px solid var(--good);
+}
+
+.completion-actions,
+.certificate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.quiz-link.quiz-button {
+  background: var(--accent);
+  color: #ffffff;
+  border: 2px solid var(--accent);
+}
+
+.quiz-link.quiz-button:hover {
+  background: var(--accent-dark);
+}
+
+.memory-card {
+  border-top: 8px solid var(--topic-color);
+}
+
+.memory-section {
+  margin-bottom: 18px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.memory-section ol li,
+.memory-section ul li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5em;
+}
+
+.memory-help {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+
+/* ---------- Urkunde ---------- */
+
+.certificate-card {
+  border-top: 8px solid var(--topic-color);
+}
+
+.certificate-frame {
+  border: 4px double var(--topic-color);
+  border-radius: var(--radius-m);
+  padding: 34px 28px;
+  text-align: center;
+  background: var(--surface-soft);
+}
+
+.certificate-kicker {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--topic-color);
+  margin: 0 0 6px;
+}
+
+.certificate-frame h2 {
+  margin-bottom: 22px;
+}
+
+.certificate-text {
+  margin: 8px 0;
   font-size: 1.08rem;
 }
 
-.feedback.success {
-  background: var(--success-bg);
-  border-left: 6px solid var(--success-border);
+.certificate-name-line {
+  max-width: 420px;
+  margin: 26px auto 4px;
+  border-bottom: 3px solid var(--ink);
 }
 
-.feedback.warning {
-  background: var(--warning-bg);
-  border-left: 6px solid var(--red);
+.certificate-name-hint {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
 }
 
-.feedback.info {
-  background: var(--info-bg);
-  border-left: 6px solid var(--info-border);
-}
-
-.quiz-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: var(--blue);
-  color: white;
-  text-decoration: none;
-  border-radius: 16px;
-  padding: 18px;
+.certificate-topic {
+  font-size: 1.5rem;
   font-weight: 700;
-  font-size: 1.22rem;
-  margin-top: 18px;
+  color: var(--topic-color);
+  margin: 10px 0;
 }
 
-.quiz-link:hover,
-.quiz-link:focus-visible {
-  background: var(--blue-mid);
+.certificate-result {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin: 16px 0 0;
 }
 
-.completion-box {
-  background: var(--success-bg);
-  border: 2px solid var(--success-border);
-  border-radius: 18px;
-  padding: 18px;
-  margin-top: 18px;
+.certificate-date {
+  margin-top: 24px;
+  font-size: 1rem;
+  color: var(--ink-soft);
 }
 
-.completion-box h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.35rem;
-}
+/* ---------- Untere Navigation ---------- */
 
 .nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  position: sticky;
+  bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow);
 }
 
 .nav-button {
-  border: 0;
-  border-radius: 16px;
-  padding: 18px;
-  font-size: 1.16rem;
+  flex: 1;
+  min-height: 62px;
+  font-size: 1.18rem;
   font-weight: 700;
+  border-radius: var(--radius-m);
   cursor: pointer;
+  border: 2px solid transparent;
 }
 
 .nav-button.primary {
-  background: var(--blue);
-  color: white;
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
 }
 
-.nav-button.primary:hover {
-  background: var(--blue-mid);
+.nav-button.primary:hover:not(:disabled) {
+  background: var(--accent-dark);
 }
 
 .nav-button.secondary {
-  background: white;
-  color: var(--black);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+
+.nav-button.secondary:hover:not(:disabled) {
+  background: var(--accent-soft);
 }
 
 .nav-button:disabled {
@@ -510,5700 +1146,97 @@ button, a {
   cursor: not-allowed;
 }
 
+/* ---------- Fußbereich ---------- */
+
 .app-footer {
-  display: flex;
-  justify-content: center;
-  padding: 2px 0 0;
+  margin-top: 26px;
 }
 
 .footer-logos {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  gap: 22px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
 }
 
 .footer-logo {
-  max-height: 38px;
-  max-width: 142px;
-  background: white;
-  border-radius: 10px;
-  padding: 5px;
-  object-fit: contain;
-  border: 1px solid rgba(0,0,0,0.10);
+  height: 64px;
+  width: auto;
+  border-radius: var(--radius-s);
 }
 
 .footer-logo-wide {
-  max-width: 170px;
+  height: 72px;
 }
 
-.sr-only {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-@media (max-width: 760px) {
-  .topic-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .app {
-    max-width: 720px;
-  }
-}
-
-@media (max-width: 480px) {
-  .app {
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .app-header {
-    padding: 14px;
-  }
-
-  .home-button {
-    width: 44px;
-    height: 44px;
-    font-size: 26px;
-  }
-
-  .header-text h1 {
-    font-size: 1.12rem;
-  }
-
-  .header-text p {
-    font-size: 0.92rem;
-  }
-
-  .progress-meta {
-    font-size: 0.92rem;
-  }
-
-  .menu-card,
-  .card {
-    padding: 20px;
-    max-height: calc(100dvh - 245px);
-  }
-
-  .menu-card h2,
-  .card h2 {
-    font-size: 1.42rem;
-  }
-
-  .card p {
-    font-size: 1.08rem;
-  }
-
-  .icon {
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    max-width: 52px;
-  }
-
-  .icon-svg {
-    width: 31px;
-    height: 31px;
-  }
-
-  .topic-button {
-    min-height: 110px;
-    padding: 15px;
-  }
-
-  .nav-button {
-    padding: 15px;
-    font-size: 1.02rem;
-  }
-
-  .footer-logo {
-    max-height: 28px;
-    max-width: 104px;
-  }
-
-  .footer-logo-wide {
-    max-width: 124px;
-  }
-}
-
-
-/* Abschlussprüfung: bessere Lesbarkeit auf Desktop */
-@media (min-width: 900px) {
-  .menu-card {
-    max-height: calc(100dvh - 245px);
-  }
-
-  .card {
-    max-height: calc(100dvh - 245px);
-  }
-}
-
-/* Leichter sichtbar: Startlabel in Themenkarten */
-.topic-start-label {
-  white-space: nowrap;
-}
-
-/* Footer bleibt dezent */
-.app-footer {
-  opacity: 0.95;
-}
-
-
-/* Illustrative Lernbilder */
-.topic-preview {
-  grid-column: 1 / -1;
-  width: 100%;
-  max-height: 120px;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 1px solid var(--blue-light);
-  background: var(--blue-very-light);
-  margin-top: 10px;
-}
-
-.lesson-illustration {
-  display: block;
-  width: 100%;
-  max-height: 210px;
-  object-fit: contain;
-  border-radius: 18px;
-  border: 1px solid var(--blue-light);
-  background: var(--blue-very-light);
-  margin: 0 0 18px 0;
-}
-
-@media (min-width: 761px) {
-  .topic-button {
-    grid-template-columns: auto 1fr;
-  }
-
-  .topic-preview {
-    max-height: 105px;
-  }
-}
-
-@media (max-width: 480px) {
-  .topic-preview {
-    display: none;
-  }
-
-  .lesson-illustration {
-    max-height: 160px;
-  }
-}
-
-
-/* Eigenes Quiz und druckbare Urkunde */
-.quiz-button {
-  border: 0;
-  cursor: pointer;
-}
-
-.quiz-question {
-  font-size: 1.32rem;
-  font-weight: 700;
-  background: var(--blue-very-light);
-  border-left: 6px solid var(--blue);
-  border-radius: 14px;
-  padding: 16px;
-}
-
-.certificate-card {
-  border-left-color: var(--success-border);
-}
-
-.certificate-name-line {
-  height: 42px;
-  border-bottom: 2px solid var(--black);
-  margin: 4px 0 14px 0;
-}
-
-.certificate-note {
-  font-weight: 700;
+.small-footer-notice {
   margin-top: 16px;
-}
-
-.certificate-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 18px;
-}
-
-@media print {
-  body {
-    background: white;
-  }
-
-  .app-header,
-  .progress-area,
-  .nav,
-  .app-footer {
-    display: none !important;
-  }
-
-  .app {
-    display: block;
-    max-width: none;
-    padding: 0;
-  }
-
-  .content {
-    display: block;
-  }
-
-  .card {
-    box-shadow: none;
-    border: 4px solid #3e96be;
-    max-height: none;
-    min-height: 260mm;
-    page-break-inside: avoid;
-  }
-
-  .certificate-actions {
-    display: none;
-  }
-
-  .certificate-card h2 {
-    font-size: 32px;
-  }
-}
-
-@media (max-width: 480px) {
-  .certificate-actions {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* Professionelleres Quiz */
-.quiz-card .choice-button {
-  min-height: 58px;
-}
-
-.quiz-card .feedback,
-.certificate-card .completion-box {
-  font-size: 1.08rem;
-}
-
-.certificate-card {
-  border-left-color: var(--success-border);
-}
-
-@media print {
-  .certificate-card {
-    border: 4px solid #3e96be;
-  }
-}
-
-
-/* Quiz-Bedienung: Thema starten und Quiz direkt starten */
-.topic-card {
-  cursor: default;
-}
-
-.topic-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.topic-start-label,
-.topic-quiz-label {
-  display: inline-block;
-  border: 0;
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.topic-start-label {
-  background: var(--blue);
-  color: white;
-}
-
-.topic-quiz-label {
-  background: white;
-  color: var(--black);
-  border: 2px solid var(--blue);
-}
-
-.topic-start-label:hover,
-.topic-quiz-label:hover,
-.topic-start-label:focus-visible,
-.topic-quiz-label:focus-visible {
-  background: var(--blue-mid);
-  color: white;
-}
-
-/* Direktes Quiz soll auf Handy nicht überladen wirken */
-@media (max-width: 480px) {
-  .topic-actions {
-    flex-direction: column;
-  }
-
-  .topic-start-label,
-  .topic-quiz-label {
-    width: fit-content;
-  }
-}
-
-
-/* Orientierung, Audio, Testbogen, bessere Urkunde */
-.poster-hint {
-  background: var(--blue-very-light);
-  border-left: 6px solid var(--blue);
-  border-radius: 16px;
-  padding: 14px 16px;
-  margin: 14px 0;
-  font-size: 1.08rem;
-}
-
-.menu-extra-actions {
-  margin-top: 18px;
-  display: flex;
-  justify-content: center;
-}
-
-.module-orientation {
-  background: #fff;
-  border: 2px solid var(--blue-light);
-  border-radius: 16px;
-  padding: 12px;
-  margin: 12px 0;
-}
-
-.module-current {
-  margin: 0 0 10px 0;
-  font-weight: 800;
-}
-
-.module-steps {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.module-step {
-  border: 2px solid var(--gray);
-  border-radius: 999px;
-  padding: 6px 10px;
-  background: white;
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.module-step.done {
-  border-color: var(--success-border);
-}
-
-.module-step.active {
-  background: var(--blue);
-  color: white;
-  border-color: var(--blue);
-}
-
-.audio-actions {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 14px 0;
-}
-
-.audio-button {
-  border: 2px solid var(--blue);
-  background: white;
-  color: var(--black);
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.audio-button:hover,
-.audio-button:focus-visible {
-  background: var(--blue);
-  color: white;
-}
-
-.audio-button.secondary {
-  border-color: var(--gray);
-}
-
-.testbogen {
-  background: var(--blue-very-light);
-  border-radius: 16px;
-  padding: 14px 16px;
-  margin: 14px 0;
-}
-
-.testbogen ul,
-.completion-box ul {
-  padding-left: 1.3rem;
-}
-
-.certificate-frame {
-  border: 6px solid var(--blue);
-  border-radius: 22px;
-  padding: 26px;
-  background: white;
-}
-
-.certificate-title {
-  font-size: 3rem;
   text-align: center;
-  margin-bottom: 0;
-}
-
-.certificate-subtitle {
-  text-align: center;
-  font-size: 1.35rem;
-  font-weight: 800;
-  margin-top: 4px;
-}
-
-.certificate-topic {
-  font-size: 1.25rem;
-  background: var(--blue-very-light);
-  border-radius: 14px;
-  padding: 12px;
-}
-
-.signature-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.certificate-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  margin-top: 20px;
-  padding-top: 14px;
-  border-top: 2px solid var(--gray);
-}
-
-.certificate-logos img {
-  max-height: 54px;
-  max-width: 180px;
-  object-fit: contain;
-}
-
-@media print {
-  .poster-hint,
-  .audio-actions,
-  .module-orientation,
-  .menu-extra-actions {
-    display: none !important;
-  }
-
-  .certificate-frame {
-    min-height: 255mm;
-    border: 6px solid #3e96be;
-  }
-
-  .certificate-logos img {
-    max-height: 44px;
-  }
-
-  .testbogen {
-    break-inside: avoid;
-  }
-}
-
-@media (max-width: 600px) {
-  .signature-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .certificate-title {
-    font-size: 2.2rem;
-  }
-
-  .certificate-logos {
-    flex-direction: column;
-    gap: 12px;
-  }
-}
-
-
-/* Selbstlernangebot Plus: Lernstand, Modi, Hilfe-Fragen, Merk-Karten */
-.start-choice-box,
-.privacy-note {
-  background: #fff;
-  border: 2px solid var(--blue-light);
-  border-radius: 16px;
-  padding: 14px 16px;
-  margin: 14px 0;
-}
-
-.start-choice-box p {
-  margin: 6px 0;
-}
-
-.privacy-note {
-  font-weight: 700;
-  background: var(--blue-very-light);
-}
-
-.topic-help-title {
-  display: block;
-  margin-top: 12px;
-  font-weight: 800;
-}
-
-.topic-help-list {
-  display: block;
-  background: white;
-  border: 2px solid var(--blue-light);
-  border-radius: 12px;
-  padding: 10px;
-  margin-top: 6px;
-  line-height: 1.45;
-}
-
-.saved-progress {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.continue-button {
-  border: 2px solid var(--success-border);
-  background: white;
-  color: var(--black);
-  border-radius: 999px;
-  padding: 7px 11px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.continue-button:hover,
-.continue-button:focus-visible {
-  background: var(--success-border);
-  color: white;
-}
-
-.step-help-box {
-  background: var(--blue-very-light);
-  border-left: 6px solid var(--blue);
-  border-radius: 16px;
-  padding: 12px 16px;
-  margin: 12px 0;
-}
-
-.step-help-box ul {
-  margin: 8px 0 0 0;
-  padding-left: 1.3rem;
-}
-
-.memory-frame {
-  border: 5px solid var(--blue);
-  border-radius: 22px;
-  padding: 24px;
-  background: white;
-}
-
-.memory-subtitle {
-  font-size: 1.25rem;
-  font-weight: 800;
-  background: var(--blue-very-light);
-  padding: 10px 12px;
-  border-radius: 12px;
-}
-
-.memory-section {
-  margin: 16px 0;
-  padding: 14px;
-  background: var(--blue-very-light);
-  border-radius: 16px;
-}
-
-.memory-section li {
-  margin: 8px 0;
-  font-size: 1.08rem;
-}
-
-.memory-help {
-  font-weight: 800;
-  font-size: 1.15rem;
-}
-
-@media print {
-  .memory-frame {
-    min-height: 255mm;
-    border: 5px solid #3e96be;
-  }
-
-  .step-help-box,
-  .privacy-note,
-  .start-choice-box,
-  .topic-help-title,
-  .topic-help-list,
-  .saved-progress {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-}
-
-@media (max-width: 520px) {
-  .saved-progress,
-  .topic-actions {
-    flex-direction: column;
-  }
-}
-
-
-.mode-note {
-  display: inline-block;
-  background: var(--blue-very-light);
-  border: 2px solid var(--blue-light);
-  border-radius: 999px;
-  padding: 6px 10px;
-  margin: 8px 0;
-  font-weight: 800;
-}
-
-
-/* Barrierearme Farblogik: Farben haben feste Bedeutung
-   Blau = Orientierung
-   Türkis = Lernen / Weiter
-   Gelb = Hinweis / Merken / Unterstützung
-   Grün = Erfolg / bestanden
-   Rot = Gefahr / Stopp / Betrug
-*/
-
-body {
-  background: var(--bg);
-  color: var(--black);
-}
-
-.app-header,
-.header,
-.topbar {
-  background: var(--blue);
-  color: #FFFFFF;
-}
-
-.card,
-.menu-card,
-.topic-card,
-.quiz-card,
-.evaluation-card,
-.memory-card,
-.certificate-card {
-  background: var(--card);
-  color: var(--black);
-  border: 1px solid var(--gray);
-  box-shadow: var(--shadow);
-}
-
-.topic-card,
-.topic-button {
-  border-left: 8px solid var(--blue);
-}
-
-.topic-card:focus-within,
-.topic-card:hover,
-.topic-button:focus-visible,
-.topic-button:hover {
-  border-left-color: var(--blue-mid);
-}
-
-.progress-fill,
-.progress-bar-fill {
-  background: var(--blue-mid);
-}
-
-.module-tag,
-.mode-note,
-.module-step.active {
-  background: var(--blue);
-  color: #FFFFFF;
-  border-color: var(--blue);
-}
-
-.module-orientation,
-.start-choice-box,
-.privacy-note,
-.poster-hint {
-  background: var(--blue-light);
-  border-color: var(--blue-mid);
-  color: var(--black);
-}
-
-.topic-start-label,
-.nav-button:not(.secondary),
-.quiz-button {
-  background: var(--blue-mid);
-  color: var(--black);
-  border: 2px solid var(--blue-mid);
-}
-
-.topic-start-label:hover,
-.topic-start-label:focus-visible,
-.nav-button:not(.secondary):hover,
-.nav-button:not(.secondary):focus-visible,
-.quiz-button:hover,
-.quiz-button:focus-visible {
-  background: var(--blue);
-  color: #FFFFFF;
-  border-color: var(--blue);
-}
-
-.topic-quiz-label,
-.audio-button,
-.continue-button {
-  background: #FFFFFF;
-  color: var(--blue);
-  border: 2px solid var(--blue-mid);
-}
-
-.topic-quiz-label:hover,
-.topic-quiz-label:focus-visible,
-.audio-button:hover,
-.audio-button:focus-visible,
-.continue-button:hover,
-.continue-button:focus-visible {
-  background: var(--blue-mid);
-  color: var(--black);
-}
-
-.nav-button.secondary,
-.audio-button.secondary {
-  background: #FFFFFF;
-  color: var(--black);
-  border: 2px solid var(--gray);
-}
-
-.step-help-box,
-.topic-help-list,
-.memory-section,
-.memory-subtitle,
-.testbogen,
-.hint,
-.remember,
-.merksatz {
-  background: var(--hint);
-  border-color: var(--hint-border);
-  color: var(--black);
-}
-
-.step-help-box {
-  border-left: 8px solid var(--hint-border);
-}
-
-.warning,
-.feedback.warning,
-.danger,
-.stop-box {
-  background: var(--warning-light);
-  border-color: var(--warning);
-  color: var(--black);
-}
-
-.warning strong,
-.danger strong,
-.stop-box strong {
-  color: var(--warning);
-}
-
-.feedback.success,
-.completion-box,
-.success,
-.correct {
-  background: var(--success-light);
-  border-color: var(--success);
-  color: var(--black);
-}
-
-.certificate-frame,
-.memory-frame {
-  border-color: var(--success);
-}
-
-.certificate-title,
-.certificate-subtitle {
-  color: var(--blue);
-}
-
-.certificate-topic {
-  background: var(--blue-light);
-}
-
-.choice-button {
-  background: #FFFFFF;
-  color: var(--black);
-  border: 2px solid var(--gray);
-}
-
-.choice-button:hover,
-.choice-button:focus-visible {
-  border-color: var(--blue-mid);
-  background: var(--blue-light);
-}
-
-.icon {
-  background: var(--blue-light);
-  border: 2px solid var(--blue-mid);
-}
-
-/* Rot wird bewusst nur für echte Gefahr genutzt. */
-.card .warning,
-.card .danger {
-  border-left: 8px solid var(--warning);
-}
-
-/* Druckansicht bleibt ruhig und kontrastreich. */
-@media print {
-  body {
-    background: #FFFFFF;
-  }
-
-  .certificate-frame,
-  .memory-frame {
-    border-color: #00285A;
-  }
-
-  .step-help-box,
-  .topic-help-list,
-  .memory-section,
-  .memory-subtitle,
-  .testbogen,
-  .completion-box,
-  .certificate-topic {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-}
-
-
-/* Praxisfinal: QR-Direktlinks, Weiterlernen, Druckseiten */
-.qr-links {
-  display: block;
-  margin-top: 12px;
-  padding: 10px;
-  background: var(--gray-light);
-  border: 1px solid var(--gray);
-  border-radius: 12px;
   font-size: 0.92rem;
+  color: var(--ink-soft);
 }
 
-.qr-links code {
-  display: block;
-  white-space: nowrap;
-  overflow-x: auto;
-  background: #FFFFFF;
-  border: 1px solid var(--gray);
-  border-radius: 8px;
-  padding: 6px;
-  margin-top: 6px;
-}
-
-.continue-card {
-  display: block;
-  width: 100%;
-  background: var(--success-light);
-  border: 2px solid var(--success);
-  border-radius: 14px;
-  padding: 10px;
-  margin-top: 8px;
-}
-
-.continue-card .continue-button {
-  margin-top: 8px;
-  margin-right: 8px;
-}
-
-.continue-button.secondary {
-  border-color: var(--gray);
-  background: #FFFFFF;
-}
-
-.print-frame {
-  border: 5px solid var(--blue);
-  border-radius: 22px;
-  padding: 24px;
-  background: #FFFFFF;
-}
-
-.write-line {
-  height: 34px;
-  border-bottom: 2px solid var(--black);
-  margin: 8px 0 16px 0;
-}
-
-.write-box {
-  min-height: 90px;
-  border: 2px solid var(--gray);
-  border-radius: 12px;
-  background: #FFFFFF;
-  margin: 8px 0 16px 0;
-}
-
-.checkbox-list li {
-  margin: 10px 0;
-  line-height: 1.35;
-}
-
-.memory-card .memory-frame,
-.certificate-card .certificate-frame,
-.print-sheet .print-frame {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-@media print {
-  .app-header,
-  .progress-area,
-  .nav,
-  .app-footer,
-  .certificate-actions,
-  .audio-actions,
-  .qr-links,
-  .saved-progress,
-  .topic-actions {
-    display: none !important;
-  }
-
-  body {
-    background: #FFFFFF !important;
-  }
-
-  .app {
-    max-width: none !important;
-    padding: 0 !important;
-  }
-
-  .content {
-    padding: 0 !important;
-  }
-
-  .card {
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-  }
-
-  .certificate-frame,
-  .memory-frame,
-  .print-frame {
-    min-height: 255mm;
-    border: 5px solid #00285A !important;
-    box-shadow: none !important;
-    padding: 18mm !important;
-    page-break-inside: avoid;
-  }
-
-  .certificate-title {
-    font-size: 36pt !important;
-  }
-
-  .memory-section,
-  .testbogen,
-  .completion-box,
-  .certificate-topic {
-    break-inside: avoid;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-
-  .certificate-logos img {
-    max-height: 42px !important;
-  }
-}
-
-@media (max-width: 650px) {
-  .qr-links {
-    font-size: 0.85rem;
-  }
-
-  .continue-card .continue-button {
-    display: block;
-    width: fit-content;
-    margin-bottom: 6px;
-  }
-}
-
-
-/* Aktionskarten: unterschiedliche Funktion, Farbe, Icon und Leitfrage */
-.action-card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(180px, 1fr));
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.action-card {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  align-items: start;
-  gap: 10px;
-  width: 100%;
-  min-height: 118px;
-  border-radius: 18px;
-  padding: 14px;
-  text-align: left;
-  cursor: pointer;
-  border: 3px solid transparent;
-  box-shadow: 0 8px 18px rgba(0, 40, 90, 0.10);
-}
-
-.action-card .action-icon {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  background: #FFFFFF;
-  border: 2px solid currentColor;
-}
-
-.action-card .action-icon img {
-  width: 28px;
-  height: 28px;
-}
-
-.action-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.action-text strong {
-  font-size: 1.06rem;
-  line-height: 1.2;
-}
-
-.action-text small {
-  font-size: 0.95rem;
-  line-height: 1.25;
-  font-weight: 700;
-}
-
-.action-text em {
-  font-style: normal;
+.small-footer-notice p {
   font-size: 0.92rem;
-  line-height: 1.25;
-  margin-top: 4px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(31, 31, 31, 0.22);
+  margin: 4px 0;
 }
 
-.action-short {
-  background: var(--blue-light);
-  color: var(--black);
-  border-color: var(--blue-mid);
-}
-
-.action-full {
-  background: var(--blue);
-  color: #FFFFFF;
-  border-color: var(--blue);
-}
-
-.action-quiz {
-  background: var(--success-light);
-  color: var(--black);
-  border-color: var(--success);
-}
-
-.action-memory {
-  background: var(--hint);
-  color: var(--black);
-  border-color: var(--hint-border);
-}
-
-.action-card:hover,
-.action-card:focus-visible {
-  outline: 4px solid rgba(0, 40, 90, 0.22);
-  transform: translateY(-1px);
-}
-
-.action-full .action-icon {
-  color: #FFFFFF;
-  background: rgba(255,255,255,0.14);
-  border-color: #FFFFFF;
-}
-
-.action-full .action-text em {
-  border-top-color: rgba(255,255,255,0.45);
-}
-
-@media (max-width: 720px) {
-  .action-card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .action-card {
-    min-height: 104px;
-  }
-}
-
-@media print {
-  .action-card-grid {
-    display: none !important;
-  }
-}
-
-
-
-
-/* FINALER LAYOUT-FIX:
-   Die Aktionskarten dürfen die Themenkarte nicht sprengen.
-   Darum werden sie innerhalb jeder Themenkarte kompakt als 1-Spalten-Liste angezeigt.
-*/
-.topic-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
-  gap: 18px !important;
-  align-items: start !important;
-  overflow: visible !important;
-}
-
-.topic-button.topic-card,
-.topic-card {
-  min-width: 0 !important;
-  overflow: visible !important;
-}
-
-.topic-button.topic-card > span,
-.topic-card > span {
-  min-width: 0 !important;
-  width: 100% !important;
-}
-
-.topic-actions.action-card-grid {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 10px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-top: 14px !important;
-  overflow: visible !important;
-}
-
-.topic-actions.action-card-grid .action-card {
-  all: unset;
-  box-sizing: border-box !important;
-  display: grid !important;
-  grid-template-columns: 42px 1fr !important;
-  align-items: start !important;
-  gap: 10px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  min-height: auto !important;
-  border-radius: 16px !important;
-  padding: 12px !important;
-  text-align: left !important;
-  cursor: pointer !important;
-  border: 3px solid transparent !important;
-  box-shadow: 0 6px 14px rgba(0, 40, 90, 0.10) !important;
-  font-family: inherit !important;
-}
-
-.topic-actions.action-card-grid .action-icon {
-  width: 40px !important;
-  height: 40px !important;
-  display: grid !important;
-  place-items: center !important;
-  border-radius: 12px !important;
-  background: #FFFFFF !important;
-  border: 2px solid currentColor !important;
-}
-
-.topic-actions.action-card-grid .action-icon img {
-  width: 24px !important;
-  height: 24px !important;
-}
-
-.topic-actions.action-card-grid .action-text {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 3px !important;
-  min-width: 0 !important;
-}
-
-.topic-actions.action-card-grid .action-text strong {
-  font-size: 1rem !important;
-  line-height: 1.15 !important;
-  font-weight: 900 !important;
-}
-
-.topic-actions.action-card-grid .action-text small {
-  font-size: 0.9rem !important;
-  line-height: 1.2 !important;
-  font-weight: 700 !important;
-}
-
-.topic-actions.action-card-grid .action-text em {
-  font-style: normal !important;
-  font-size: 0.86rem !important;
-  line-height: 1.2 !important;
-  margin-top: 4px !important;
-  padding-top: 5px !important;
-  border-top: 1px solid rgba(31, 31, 31, 0.22) !important;
-}
-
-.topic-actions.action-card-grid .action-short {
-  background: #DDF3F2 !important;
-  color: #1F1F1F !important;
-  border-color: #3DB8B3 !important;
-}
-
-.topic-actions.action-card-grid .action-full {
-  background: #00285A !important;
-  color: #FFFFFF !important;
-  border-color: #00285A !important;
-}
-
-.topic-actions.action-card-grid .action-quiz {
-  background: #E7F3E8 !important;
-  color: #1F1F1F !important;
-  border-color: #2E7D32 !important;
-}
-
-.topic-actions.action-card-grid .action-memory {
-  background: #FFF3CD !important;
-  color: #1F1F1F !important;
-  border-color: #D6A400 !important;
-}
-
-.topic-actions.action-card-grid .action-full .action-icon {
-  background: rgba(255,255,255,0.14) !important;
-  color: #FFFFFF !important;
-  border-color: #FFFFFF !important;
-}
-
-.topic-actions.action-card-grid .action-full .action-text em {
-  border-top-color: rgba(255,255,255,0.55) !important;
-}
-
-.topic-actions.action-card-grid .action-card:hover,
-.topic-actions.action-card-grid .action-card:focus-visible {
-  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
-  outline-offset: 2px !important;
-  transform: none !important;
-}
-
-/* Die Hilfe-Fragen bleiben unter den Aktionskarten und werden nicht abgeschnitten. */
-.topic-help-title,
-.topic-help-list,
-.qr-links,
-.saved-progress {
-  max-width: 100% !important;
-  overflow-wrap: anywhere !important;
-}
-
-/* Keine waagerechten Scrollbalken im Hauptbereich. */
-.content,
-.menu-card,
-.card {
-  overflow-x: hidden !important;
-}
-
-/* Auf sehr großen Bildschirmen bleiben die Themenkarten zweispaltig, 
-   aber die Aktionskarten bleiben bewusst einspaltig. */
-@media (min-width: 1100px) {
-  .topic-grid {
-    grid-template-columns: repeat(2, minmax(360px, 1fr)) !important;
-  }
-}
-
-/* Auf kleineren Bildschirmen immer eine Themenkarte pro Zeile. */
-@media (max-width: 820px) {
-  .topic-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-
-/* FINALER FIX: Navigation in der Themenübersicht ausblenden
-   Die untere Navigation hat die Themenkarten überdeckt.
-   Auf der Start-/Themenübersicht braucht man keine Zurück-/Weiter-Navigation.
-*/
-body.view-menu .nav,
-body.view-menu .bottom-nav {
-  display: none !important;
-}
-
-body.view-menu .content {
-  padding-bottom: 32px !important;
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-body.view-menu .menu-card,
-body.view-menu .card {
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-body.view-menu .app {
-  min-height: 100vh !important;
-}
-
-/* Navigation nur innerhalb von Lernseiten/Quiz/Druckseiten sichtbar. */
-body.view-learning .nav,
-body.view-quiz .nav,
-body.view-print .nav {
-  display: grid !important;
-}
-
-/* Die Navigation soll nicht über Inhalte gelegt werden. */
-.nav {
-  position: static !important;
-  margin-top: 18px !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* Auf Lernseiten genug Abstand unterhalb des Inhalts. */
-body.view-learning .content,
-body.view-quiz .content,
-body.view-print .content {
-  padding-bottom: 18px !important;
-}
-
-/* Die Themenübersicht darf keine inneren Scrollbalken erzeugen. */
-body.view-menu .topic-grid,
-body.view-menu .topic-card,
-body.view-menu .topic-button {
-  overflow: visible !important;
-}
-
-/* Kleine Logos unten dürfen nicht als schwebendes Element über Karten liegen. */
-body.view-menu .brand-footer,
-body.view-menu .logos,
-body.view-menu .app-footer {
-  position: static !important;
-}
-
-/* Auf Desktop zentriert und ruhig. */
-.app {
-  overflow: visible !important;
-}
-
-
-/* FINALER FIX: einheitliche Themenkarten und größere Logos
-   Ziel:
-   - Karten wirken gleichmäßiger
-   - Bilder haben gleiche Höhe
-   - Inhalte laufen nicht zufällig unterschiedlich auseinander
-   - Logos unten sind besser sichtbar
-*/
-
-/* Hauptbereich etwas breiter und ruhiger */
-.app {
-  max-width: 1180px !important;
-  width: min(1180px, 100%) !important;
-}
-
-/* Themenraster: zwei saubere Spalten am Desktop */
-.topic-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 22px !important;
-  align-items: stretch !important;
-}
-
-/* Themenkarten einheitlicher aufbauen */
-.topic-card,
-.topic-button.topic-card {
-  display: grid !important;
-  grid-template-columns: 56px minmax(0, 1fr) !important;
-  align-items: start !important;
-  gap: 16px !important;
-  min-width: 0 !important;
-  min-height: 650px !important;
-  height: 100% !important;
-  padding: 24px !important;
-  border-radius: 22px !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-}
-
-/* Inhaltsspalte darf nicht überlaufen */
-.topic-card > span,
-.topic-button.topic-card > span {
-  min-width: 0 !important;
-  width: 100% !important;
-}
-
-/* Titelbereich einheitlicher */
-.topic-title {
-  display: block !important;
-  font-size: 1.22rem !important;
-  line-height: 1.2 !important;
-  margin-bottom: 6px !important;
-}
-
-.topic-desc {
-  display: block !important;
-  min-height: 44px !important;
-  line-height: 1.28 !important;
-}
-
-/* Aktionskarten kompakt und gleichmäßig */
-.topic-actions.action-card-grid {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 10px !important;
-  margin-top: 14px !important;
-}
-
-.topic-actions.action-card-grid .action-card {
-  min-height: 78px !important;
-  max-height: 96px !important;
-  overflow: hidden !important;
-  padding: 11px 12px !important;
-  grid-template-columns: 42px minmax(0, 1fr) !important;
-}
-
-.topic-actions.action-card-grid .action-text strong {
-  font-size: 1rem !important;
-}
-
-.topic-actions.action-card-grid .action-text small {
-  font-size: 0.9rem !important;
-}
-
-.topic-actions.action-card-grid .action-text em {
-  font-size: 0.84rem !important;
-}
-
-/* Hilfe-Fragen einheitlicher */
-.topic-help-title {
-  display: block !important;
-  margin-top: 14px !important;
-  min-height: 38px !important;
-  line-height: 1.25 !important;
-}
-
-.topic-help-list {
-  min-height: 98px !important;
-  max-height: 118px !important;
-  overflow: hidden !important;
-  line-height: 1.35 !important;
-}
-
-/* Weiterlernen-Anzeige kompakter, damit einzelne Karten nicht riesig werden */
-.saved-progress {
-  display: block !important;
-  margin-top: 12px !important;
-}
-
-.continue-card {
-  padding: 10px !important;
-  margin-top: 8px !important;
-  min-height: 78px !important;
-}
-
-.continue-card .continue-button {
-  padding: 6px 10px !important;
-  margin-top: 8px !important;
-  font-size: 0.9rem !important;
-}
-
-/* Illustrationen auf der Übersicht gleich groß */
-.topic-preview {
-  display: block !important;
-  width: 100% !important;
-  height: 132px !important;
-  object-fit: contain !important;
-  object-position: center !important;
-  margin-top: 14px !important;
-  border-radius: 16px !important;
-  background: var(--blue-light) !important;
-}
-
-/* Wenn der Inhalt länger ist, bleibt die Karte stabiler */
-.topic-card img.topic-preview,
-.topic-button.topic-card img.topic-preview {
-  align-self: end !important;
-}
-
-/* Logos unten größer und sichtbarer */
-.app-footer,
-.brand-footer,
-.logos {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 24px !important;
-  padding: 24px 16px 32px !important;
-  margin-top: 24px !important;
-  background: transparent !important;
-}
-
-.app-footer img,
-.brand-footer img,
-.logos img {
-  max-height: 72px !important;
-  max-width: 260px !important;
-  width: auto !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
-  filter: none !important;
-}
-
-/* Falls Logos in kleinen Einzelboxen liegen */
-.app-footer a,
-.brand-footer a,
-.logos a,
-.app-footer .logo,
-.brand-footer .logo,
-.logos .logo {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-width: 150px !important;
-  min-height: 78px !important;
-}
-
-/* Auf kleineren Bildschirmen: eine Spalte, keine übergroßen Karten */
-@media (max-width: 900px) {
-  .topic-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .topic-card,
-  .topic-button.topic-card {
-    min-height: auto !important;
-  }
-
-  .topic-help-list {
-    min-height: auto !important;
-    max-height: none !important;
-  }
-
-  .topic-preview {
-    height: 150px !important;
-  }
-}
-
-/* Auf sehr breiten Bildschirmen stabil bleiben */
-@media (min-width: 1200px) {
-  .topic-card,
-  .topic-button.topic-card {
-    min-height: 670px !important;
-  }
-}
-
-/* Druck: Logos nicht winzig */
-@media print {
-  .app-footer img,
-  .brand-footer img,
-  .logos img,
-  .certificate-logos img {
-    max-height: 54px !important;
-    max-width: 220px !important;
-  }
-}
-
-
-/* FINALER FIX: Hover und Fokus klarer sichtbar
-   Grau war zu schwach. Interaktive Elemente bekommen nun einen deutlichen,
-   aber ruhigen Farbwechsel passend zur Farblogik.
-*/
-
-/* Themenkarte: sichtbarer Fokus statt grauem Effekt */
-.topic-card:hover,
-.topic-card:focus-within,
-.topic-button.topic-card:hover,
-.topic-button.topic-card:focus-within {
-  border-left-color: #3DB8B3 !important;
-  box-shadow: 0 16px 34px rgba(0, 40, 90, 0.20) !important;
-  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
-  outline-offset: 2px !important;
-}
-
-/* Aktionskarten: deutlicher Farbwechsel pro Funktion */
-.topic-actions.action-card-grid .action-short:hover,
-.topic-actions.action-card-grid .action-short:focus-visible {
-  background: #BFEDEA !important;
-  border-color: #008C89 !important;
-  outline: 4px solid rgba(61, 184, 179, 0.40) !important;
-  outline-offset: 2px !important;
-}
-
-.topic-actions.action-card-grid .action-full:hover,
-.topic-actions.action-card-grid .action-full:focus-visible {
-  background: #014A86 !important;
-  border-color: #014A86 !important;
-  outline: 4px solid rgba(0, 40, 90, 0.35) !important;
-  outline-offset: 2px !important;
-}
-
-.topic-actions.action-card-grid .action-quiz:hover,
-.topic-actions.action-card-grid .action-quiz:focus-visible {
-  background: #CFEAD2 !important;
-  border-color: #1B6E20 !important;
-  outline: 4px solid rgba(46, 125, 50, 0.35) !important;
-  outline-offset: 2px !important;
-}
-
-.topic-actions.action-card-grid .action-memory:hover,
-.topic-actions.action-card-grid .action-memory:focus-visible {
-  background: #FFE39A !important;
-  border-color: #B88700 !important;
-  outline: 4px solid rgba(214, 164, 0, 0.38) !important;
-  outline-offset: 2px !important;
-}
-
-/* Normale Buttons ebenfalls farblich klarer */
-.quiz-button:hover,
-.quiz-button:focus-visible,
-.nav-button:hover,
-.nav-button:focus-visible,
-.continue-button:hover,
-.continue-button:focus-visible,
-.audio-button:hover,
-.audio-button:focus-visible {
-  filter: none !important;
-  box-shadow: 0 0 0 4px rgba(61, 184, 179, 0.35) !important;
-}
-
-/* Fokus per Tastatur besonders deutlich */
-button:focus-visible,
-a:focus-visible {
-  outline: 4px solid #3DB8B3 !important;
-  outline-offset: 3px !important;
-}
-
-/* Kein Rot bei Hover: Rot bleibt Warnfarbe. */
-
-
-/* Zwei-Stufen-Menü: erst Thema, dann Aktion */
-.simplified-menu {
-  max-width: 980px;
-  margin: 0 auto;
-}
-
-.simple-topic-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 18px;
-}
+/* ---------- Einfach-Modus ---------- */
 
-.simple-topic-card {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 14px;
-  align-items: center;
-  width: 100%;
-  min-height: 104px;
-  padding: 18px;
-  border-radius: 20px;
-  border: 3px solid var(--gray);
-  border-left: 8px solid var(--blue);
-  background: #FFFFFF;
-  color: var(--black);
-  text-align: left;
-  cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0, 40, 90, 0.08);
-  box-sizing: border-box;
+body.simple-mode {
+  font-size: 1.12em;
 }
 
-.simple-topic-card strong {
-  display: block;
+body.simple-mode p,
+body.simple-mode li {
   font-size: 1.18rem;
-  line-height: 1.2;
-  margin-bottom: 5px;
+  line-height: 1.85;
 }
 
-.simple-topic-card small {
-  display: block;
-  font-size: 0.98rem;
-  line-height: 1.28;
-}
-
-.simple-topic-card:hover,
-.simple-topic-card:focus-visible {
-  border-color: var(--blue-mid);
-  border-left-color: var(--blue-mid);
-  background: var(--blue-light);
-  outline: 4px solid rgba(61, 184, 179, 0.35);
-  outline-offset: 2px;
-}
-
-.central-progress-box {
-  background: var(--success-light);
-  border: 3px solid var(--success);
-  border-radius: 18px;
-  padding: 16px;
-  margin: 16px 0;
-  font-size: 1.02rem;
-}
-
-.central-progress-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.topic-choice-screen {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.plain-back-button {
-  border: 2px solid var(--gray);
-  background: #FFFFFF;
-  color: var(--black);
-  border-radius: 999px;
-  padding: 9px 14px;
-  font-weight: 800;
-  cursor: pointer;
-  margin-bottom: 16px;
-}
-
-.plain-back-button:hover,
-.plain-back-button:focus-visible {
-  background: var(--blue-light);
-  border-color: var(--blue-mid);
-}
-
-.choice-header {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 18px;
-  align-items: center;
-  background: #FFFFFF;
-  border: 3px solid var(--blue-light);
-  border-left: 8px solid var(--blue);
-  border-radius: 22px;
-  padding: 20px;
-  margin-bottom: 18px;
-}
-
-.topic-icon.large {
-  width: 64px;
-  height: 64px;
-}
-
-.topic-choice-actions.action-card-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 14px !important;
-  margin-top: 14px !important;
-}
-
-.topic-choice-actions.action-card-grid .action-card {
-  min-height: 118px !important;
-}
-
-.topic-help-panel {
-  margin-top: 18px;
-  background: var(--hint);
-  border: 3px solid var(--hint-border);
-  border-radius: 18px;
-  padding: 16px 18px;
-}
-
-.topic-help-panel h3 {
-  margin-top: 0;
-}
-
-.topic-help-panel li {
-  margin: 8px 0;
-}
-
-.choice-illustration {
-  display: block;
-  width: 100%;
-  max-height: 220px;
-  object-fit: contain;
-  background: var(--blue-light);
-  border-radius: 18px;
-  margin-top: 18px;
-}
-
-/* Alte Startseiten-Elemente aus dem Ein-Stufen-Menü sicher ausblenden, falls Browser-Cache mischt */
-body.view-menu .topic-grid {
+body.simple-mode .topic-illustration,
+body.simple-mode .topic-desc,
+body.simple-mode .access-box.example {
   display: none;
 }
 
-/* Mobile Prüfung: eine Spalte, große Tippflächen, keine Überladung */
-@media (max-width: 760px) {
-  .simple-topic-grid,
-  .topic-choice-actions.action-card-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .simple-topic-card {
-    min-height: 92px;
-    padding: 16px;
-  }
-
-  .choice-header {
-    grid-template-columns: 56px 1fr;
-    padding: 16px;
-  }
-
-  .topic-icon.large {
-    width: 52px;
-    height: 52px;
-  }
-
-  .choice-illustration {
-    max-height: 160px;
-  }
-
-  .central-progress-actions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media print {
-  .simple-topic-grid,
-  .central-progress-box,
-  .choice-illustration,
-  .plain-back-button {
-    display: none !important;
-  }
-}
-
-
-/* Zusatzfunktionen: Hilfe-Button, Verstanden, Mini-Fragen, QR-Übersicht */
-.global-help-button {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 1000;
-  background: var(--hint);
-  color: var(--black);
-  border: 3px solid var(--hint-border);
-  border-radius: 999px;
-  padding: 12px 16px;
-  font-weight: 900;
-  box-shadow: 0 10px 24px rgba(0, 40, 90, 0.20);
-  cursor: pointer;
-}
-
-.global-help-button:hover,
-.global-help-button:focus-visible {
-  background: #FFE39A;
-  outline: 4px solid rgba(214, 164, 0, 0.38);
-  outline-offset: 2px;
-}
-
-.help-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 40, 90, 0.45);
-  display: grid;
-  place-items: center;
-  z-index: 2000;
-  padding: 20px;
-}
-
-.help-dialog {
-  max-width: 620px;
-  background: #FFFFFF;
-  color: var(--black);
-  border: 5px solid var(--hint-border);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-}
-
-.help-close {
-  float: right;
-  border: 2px solid var(--gray);
-  background: #FFFFFF;
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.decision-box {
-  background: var(--blue-light);
-  border-left: 8px solid var(--blue);
-  border-radius: 16px;
-  padding: 14px;
-  margin-top: 14px;
-}
-
-.understood-area {
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 2px solid var(--gray);
-}
-
-.understood-button {
-  background: var(--success-light);
-  border: 3px solid var(--success);
-  color: var(--black);
-  border-radius: 999px;
-  padding: 12px 16px;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.understood-button.done {
-  background: var(--success);
-  color: #FFFFFF;
-}
-
-.mini-question {
-  margin-top: 18px;
-  background: var(--blue-light);
-  border: 3px solid var(--blue-mid);
-  border-radius: 18px;
-  padding: 16px;
-}
-
-.mini-answer-grid {
-  display: grid;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.mini-answer-grid button {
-  text-align: left;
-  background: #FFFFFF;
-  border: 2px solid var(--blue-mid);
-  border-radius: 14px;
-  padding: 12px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.mini-answer-grid button:hover,
-.mini-answer-grid button:focus-visible {
-  background: #DDF3F2;
-  outline: 4px solid rgba(61, 184, 179, 0.35);
-}
-
-.mini-question-feedback {
-  margin-top: 12px;
-  padding: 10px;
-  border-radius: 12px;
-}
-
-.mini-question-feedback.success {
-  background: var(--success-light);
-  border: 2px solid var(--success);
-}
-
-.mini-question-feedback.warning {
-  background: var(--warning-light);
-  border: 2px solid var(--warning);
-}
-
-.completion-action-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 18px;
-}
-
-.qr-table-wrap {
-  overflow-x: auto;
-}
-
-.qr-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-.qr-table th,
-.qr-table td {
-  border: 1px solid var(--gray);
-  padding: 8px;
-  vertical-align: top;
-  text-align: left;
-}
-
-.qr-table code {
-  overflow-wrap: anywhere;
-  white-space: normal;
-}
-
-@media (max-width: 760px) {
-  .global-help-button {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    width: auto;
-  }
-
-  .completion-action-grid {
-    grid-template-columns: 1fr;
-  }
-
-  body {
-    padding-bottom: 70px;
-  }
-}
-
-@media print {
-  .global-help-button,
-  .help-overlay,
-  .understood-area,
-  .mini-question {
-    display: none !important;
-  }
-}
-
-
-/* App-nahe Farborientierung ohne Original-Logos
-   Die Themenkarten nutzen eigene neutrale Icons und app-nahe Farben.
-   Die Original-Logos der Plattformen werden nicht verwendet.
-*/
-.brand-disclaimer {
-  background: #FFFFFF;
-  border: 2px solid var(--gray);
-  border-left: 6px solid var(--blue);
-  border-radius: 16px;
-  padding: 12px 14px;
-  margin: 14px 0;
-  font-size: 0.98rem;
-  line-height: 1.35;
-}
-
-.topic-disclaimer {
-  margin-top: 16px;
-}
-
-/* Grundform der Themenkarte */
-.simple-topic-card {
-  border-left-width: 10px !important;
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-/* Datenschutz: seriöses Dunkelblau */
-.simple-topic-card.topic-datenschutz,
-.topic-choice-screen.topic-datenschutz .choice-header {
-  border-left-color: #00285A !important;
-}
-.simple-topic-card.topic-datenschutz:hover,
-.simple-topic-card.topic-datenschutz:focus-visible {
-  background: #E8EEF7 !important;
-  border-color: #00285A !important;
-}
-
-/* WhatsApp: app-nahe grüne Orientierung, aber eigenes Icon */
-.simple-topic-card.topic-whatsapp,
-.topic-choice-screen.topic-whatsapp .choice-header {
-  border-left-color: #25D366 !important;
-}
-.simple-topic-card.topic-whatsapp:hover,
-.simple-topic-card.topic-whatsapp:focus-visible {
-  background: #E6F7EC !important;
-  border-color: #25D366 !important;
-}
-
-/* Facebook: blau */
-.simple-topic-card.topic-facebook,
-.topic-choice-screen.topic-facebook .choice-header {
-  border-left-color: #1877F2 !important;
-}
-.simple-topic-card.topic-facebook:hover,
-.simple-topic-card.topic-facebook:focus-visible {
-  background: #E8F1FF !important;
-  border-color: #1877F2 !important;
-}
-
-/* Instagram: pink-lila Anmutung ohne Logo/Verlaufspflicht */
-.simple-topic-card.topic-instagram,
-.topic-choice-screen.topic-instagram .choice-header {
-  border-left-color: #C13584 !important;
-}
-.simple-topic-card.topic-instagram:hover,
-.simple-topic-card.topic-instagram:focus-visible {
-  background: #FBEAF4 !important;
-  border-color: #C13584 !important;
-}
-
-/* YouTube: rot nur als Themenkennung; Warn-Rot bleibt in Warnboxen semantisch erhalten */
-.simple-topic-card.topic-youtube,
-.topic-choice-screen.topic-youtube .choice-header {
-  border-left-color: #CC0000 !important;
-}
-.simple-topic-card.topic-youtube:hover,
-.simple-topic-card.topic-youtube:focus-visible {
-  background: #FCEAEA !important;
-  border-color: #CC0000 !important;
-}
-
-/* Snapchat: gelbe Orientierung */
-.simple-topic-card.topic-snapchat,
-.topic-choice-screen.topic-snapchat .choice-header {
-  border-left-color: #D6A400 !important;
-}
-.simple-topic-card.topic-snapchat:hover,
-.simple-topic-card.topic-snapchat:focus-visible {
-  background: #FFF3CD !important;
-  border-color: #D6A400 !important;
-}
-
-/* TikTok: dunkle Orientierung mit türkis/pinker Akzent-Anmutung ohne Logo */
-.simple-topic-card.topic-tiktok,
-.topic-choice-screen.topic-tiktok .choice-header {
-  border-left-color: #111111 !important;
-}
-.simple-topic-card.topic-tiktok:hover,
-.simple-topic-card.topic-tiktok:focus-visible {
-  background: #F0F0F0 !important;
-  border-color: #111111 !important;
-}
-
-/* Hilfe: unterstützendes Grün */
-.simple-topic-card.topic-hilfe,
-.topic-choice-screen.topic-hilfe .choice-header {
-  border-left-color: #2E7D32 !important;
-}
-.simple-topic-card.topic-hilfe:hover,
-.simple-topic-card.topic-hilfe:focus-visible {
-  background: #E7F3E8 !important;
-  border-color: #2E7D32 !important;
-}
-
-/* Icon-Felder nehmen die Themenfarbe als Rahmen auf */
-.simple-topic-card.topic-datenschutz .topic-icon { border-color: #00285A !important; }
-.simple-topic-card.topic-whatsapp .topic-icon { border-color: #25D366 !important; }
-.simple-topic-card.topic-facebook .topic-icon { border-color: #1877F2 !important; }
-.simple-topic-card.topic-instagram .topic-icon { border-color: #C13584 !important; }
-.simple-topic-card.topic-youtube .topic-icon { border-color: #CC0000 !important; }
-.simple-topic-card.topic-snapchat .topic-icon { border-color: #D6A400 !important; }
-.simple-topic-card.topic-tiktok .topic-icon { border-color: #111111 !important; }
-.simple-topic-card.topic-hilfe .topic-icon { border-color: #2E7D32 !important; }
-
-/* Aktionskarten behalten die Lernlogik-Farben */
-.topic-choice-actions .action-short {
-  background: #DDF3F2 !important;
-  border-color: #3DB8B3 !important;
-}
-.topic-choice-actions .action-full {
-  background: #00285A !important;
-  color: #FFFFFF !important;
-  border-color: #00285A !important;
-}
-.topic-choice-actions .action-quiz {
-  background: #E7F3E8 !important;
-  border-color: #2E7D32 !important;
-}
-.topic-choice-actions .action-memory {
-  background: #FFF3CD !important;
-  border-color: #D6A400 !important;
-}
-
-/* Smartphone: Disclaimer kompakt halten */
-@media (max-width: 760px) {
-  .brand-disclaimer {
-    font-size: 0.92rem;
-    padding: 10px 12px;
-  }
-}
-
-/* ============================================================
-   Finale Zusatzregeln
-   Zweck:
-   - QR-Poster-Links nicht in der Lernoberfläche anzeigen
-   - Hilfe-Button sichtbar, aber mobil kompakt halten
-   - Übungen, Symbolboxen und Vorlesen einheitlich gestalten
-   - Hilfe-Dialog pädagogisch klar darstellen
-   ============================================================ */
-
-/* QR-Links sind nur interne Arbeitslinks für Poster. */
-.qr-links,
-.qr-overview {
-  display: none;
-}
-
-/* Globaler Hilfe-Button */
-.global-help-button {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  z-index: 1000;
-  max-width: min(360px, calc(100vw - 28px));
-  min-width: 190px;
-  min-height: 58px;
-  padding: 16px 22px;
-  border: 4px solid #D6A400;
-  border-radius: 999px;
-  background: #FFF3CD;
-  color: #1F1F1F;
-  box-shadow: 0 14px 30px rgba(0, 40, 90, 0.28);
-  cursor: pointer;
-  font-size: 1.12rem;
-  font-weight: 900;
-}
-
-.global-help-button::before {
-  content: "?";
-  display: inline-grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  margin-right: 8px;
-  border: 3px solid #D6A400;
-  border-radius: 50%;
-  background: #FFFFFF;
-  font-weight: 900;
-}
-
-.global-help-button:hover,
-.global-help-button:focus-visible {
-  background: #FFE39A;
-  border-color: #B88700;
-  outline: 5px solid rgba(214, 164, 0, 0.42);
-  outline-offset: 3px;
-  transform: translateY(-1px);
-}
-
-/* Symbolboxen für wichtige Inhalte */
-.access-box {
-  display: grid;
-  grid-template-columns: 58px 1fr;
-  gap: 14px;
-  align-items: start;
-  margin-top: 18px;
-  padding: 16px;
-  border: 3px solid var(--gray);
-  border-radius: 20px;
-  background: #FFFFFF;
-}
-
-.access-box-symbol {
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
-  flex: 0 0 auto;
-  border: 3px solid currentColor;
-  border-radius: 16px;
-  background: #FFFFFF;
-}
-
-.access-box-symbol img {
-  width: 34px;
-  height: 34px;
-}
-
-.access-box-content h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 1.25rem;
-}
-
-.access-box-content p {
-  margin-top: 0.35rem;
-}
-
-.access-warning {
-  background: var(--warning-light);
-  border-color: var(--warning);
-}
-
-.access-warning .access-box-symbol {
-  color: var(--warning);
-}
-
-.access-success,
-.access-completion {
-  background: var(--success-light);
-  border-color: var(--success);
-}
-
-.access-success .access-box-symbol,
-.access-completion .access-box-symbol {
-  color: var(--success);
-}
-
-.access-remember {
-  background: var(--hint);
-  border-color: var(--hint-border);
-}
-
-.access-remember .access-box-symbol {
-  color: var(--hint-border);
-}
-
-.access-exercise,
-.access-quiz {
-  background: var(--blue-light);
-  border-color: var(--blue-mid);
-}
-
-.access-exercise .access-box-symbol,
-.access-quiz .access-box-symbol {
-  color: var(--blue);
-}
-
-/* Übungen */
-.practice-box {
-  margin-top: 18px;
-  padding: 16px;
-  border: 3px solid var(--blue-mid);
-  border-radius: 20px;
-  background: var(--blue-light);
-}
-
-.practice-question {
-  margin-bottom: 10px;
-  font-size: 1.08rem;
-}
-
-.practice-answer-grid {
-  display: grid;
-  gap: 10px;
-  margin-top: 10px;
+body.simple-mode .card,
+body.simple-mode .practice-box {
+  border-width: 3px;
 }
 
-.practice-answer-grid button,
-.choice-button {
-  min-height: 52px;
-  padding: 13px;
-  border: 3px solid var(--blue-mid);
-  border-radius: 14px;
-  background: #FFFFFF;
-  color: var(--black);
-  cursor: pointer;
-  font-weight: 900;
-  text-align: left;
-}
-
-.practice-answer-grid button:hover,
-.practice-answer-grid button:focus-visible,
-.choice-button:hover,
-.choice-button:focus-visible {
-  background: #DDF3F2;
-  outline: 4px solid rgba(61, 184, 179, 0.35);
-  outline-offset: 2px;
-}
-
-.practice-feedback,
-.feedback {
-  min-height: 24px;
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 14px;
-  font-size: 1.05rem;
-  line-height: 1.4;
-}
-
-.practice-feedback.success,
-.feedback.success {
-  border: 3px solid var(--success);
-  background: var(--success-light);
-}
-
-.practice-feedback.warning,
-.feedback.warning {
-  border: 3px solid var(--hint-border);
-  background: var(--hint);
-}
-
-.feedback[hidden] {
-  display: none;
-}
-
-/* Vorlesen */
-.audio-button,
-.small-read-button {
-  font-size: 1rem;
-}
-
-.audio-button::before,
-.small-read-button::before {
-  content: "▶ ";
-}
-
-.audio-button.secondary::before {
-  content: "■ ";
-}
-
-.small-read-button {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  margin: 8px 0 12px 0;
-  padding: 8px 12px;
-  border: 2px solid var(--blue-mid);
-  border-radius: 999px;
-  background: #FFFFFF;
-  color: var(--black);
-  cursor: pointer;
-  font-weight: 900;
-  gap: 6px;
-  text-align: left;
-  white-space: normal;
-}
-
-.small-read-button:hover,
-.small-read-button:focus-visible {
-  background: var(--blue-light);
-  outline: 4px solid rgba(61, 184, 179, 0.35);
-  outline-offset: 2px;
-}
-
-.speech-speed-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin: 8px 0 14px 0;
-  padding: 10px;
-  border: 2px solid var(--blue-mid);
-  border-radius: 14px;
-  background: var(--blue-light);
-}
-
-.speech-speed-controls span {
-  font-weight: 900;
-}
-
-.speech-speed-controls button {
-  padding: 8px 11px;
-  border: 2px solid var(--blue-mid);
-  border-radius: 999px;
-  background: #FFFFFF;
-  color: var(--black);
-  cursor: pointer;
-  font-weight: 800;
-}
-
-.speech-speed-controls button:hover,
-.speech-speed-controls button:focus-visible {
-  background: var(--blue-mid);
-  outline: 4px solid rgba(61, 184, 179, 0.35);
-  outline-offset: 2px;
-}
-
-/* Symbol-Überschriften */
-.symbol-heading,
-.help-title-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.symbol-heading h2,
-.help-title-row h2 {
-  margin: 0;
-}
-
-.certificate-symbol-heading {
-  justify-content: center;
-}
-
-/* Hilfe-Dialog */
-.help-dialog {
-  width: min(760px, calc(100vw - 28px));
-  max-width: 760px;
-  max-height: calc(100vh - 36px);
-  overflow-y: auto;
-  border: 4px solid #D6A400;
-  border-radius: 24px;
-}
-
-.help-title-row {
-  margin-bottom: 14px;
-}
-
-.help-step-box,
-.help-decision-box {
-  margin: 12px 0;
-  padding: 14px;
-  border: 3px solid var(--gray);
-  border-radius: 18px;
-  background: #FFFFFF;
-}
-
-.help-step-box h3,
-.help-decision-box h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-}
-
-.help-step-box p,
-.help-step-box li,
-.help-decision-box p {
-  font-size: 1.04rem;
-  line-height: 1.45;
-}
-
-.help-step-calm {
-  background: var(--hint);
-  border-color: var(--hint-border);
-}
-
-.help-step-danger {
-  background: var(--warning-light);
-  border-color: var(--warning);
-}
-
-.help-decision-box {
-  background: var(--success-light);
-  border-color: var(--success);
-}
-
-.help-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-/* Mobile Ansicht */
-@media (max-width: 760px) {
-  .global-help-button {
-    right: 12px;
-    bottom: 12px;
-    left: auto;
-    width: auto;
-    min-width: 0;
-    min-height: 48px;
-    padding: 11px 14px;
-    border-width: 3px;
-    box-shadow: 0 8px 18px rgba(0, 40, 90, 0.24);
-    font-size: 0.98rem;
-  }
-
-  .global-help-button::before {
-    width: 24px;
-    height: 24px;
-    margin-right: 6px;
-    border-width: 2px;
-  }
-
-  body {
-    padding-bottom: 74px;
-  }
-}
-
-@media (max-width: 640px) {
-  .access-box {
-    grid-template-columns: 48px 1fr;
-    gap: 12px;
-    padding: 14px;
-  }
-
-  .access-box-symbol {
-    width: 46px;
-    height: 46px;
-  }
-
-  .access-box-symbol img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .speech-speed-controls {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .speech-speed-controls button,
-  .help-actions button {
-    width: 100%;
-    text-align: left;
-  }
-
-  .help-dialog {
-    width: calc(100vw - 20px);
-    max-height: calc(100vh - 24px);
-    padding: 14px;
-  }
-}
-
-/* Druck */
-@media print {
-  .global-help-button,
-  .qr-links,
-  .qr-overview,
-  .small-read-button,
-  .speech-speed-controls,
-  .practice-box,
-  .understood-area {
-    display: none;
-  }
-}
-
-
-/* ============================================================
-   Finale Button-Farblogik
-   Ziel:
-   - normale Aktion: Dunkelblau
-   - Lernen/Weiter: Türkis
-   - Quiz/Erfolg: Grün
-   - Merk-Karte/Hinweis: Gelb
-   - Gefahr/Warnung: Orange-Rot
-   - Hilfe: Gelb als Sicherheitsanker
-   ============================================================ */
-
-:root {
-  --btn-primary-bg: #00285A;
-  --btn-primary-bg-hover: #00427F;
-  --btn-primary-text: #FFFFFF;
-
-  --btn-learning-bg: #3DB8B3;
-  --btn-learning-bg-hover: #2A9D98;
-  --btn-learning-text: #00285A;
-
-  --btn-success-bg: #2E7D32;
-  --btn-success-bg-hover: #256A29;
-  --btn-success-text: #FFFFFF;
-
-  --btn-warning-bg: #FFF3CD;
-  --btn-warning-bg-hover: #FFE39A;
-  --btn-warning-border: #D6A400;
-  --btn-warning-text: #1F1F1F;
-
-  --btn-danger-bg: #C9541C;
-  --btn-danger-bg-hover: #A94316;
-  --btn-danger-text: #FFFFFF;
-}
-
-.btn,
-button.quiz-link,
-.quiz-button,
-.audio-button,
-.small-read-button,
-.choice-button,
-.practice-answer-grid button,
-.nav-button,
-.action-card,
-.topic-card button {
-  transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
-}
-
-.btn,
-.quiz-button,
-button.quiz-link,
-.nav-button {
-  min-height: 48px;
-  padding: 12px 16px;
-  border: 3px solid var(--btn-primary-bg);
-  border-radius: 999px;
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  cursor: pointer;
-  font-weight: 900;
-}
-
-.btn:hover,
-.btn:focus-visible,
-.quiz-button:hover,
-.quiz-button:focus-visible,
-button.quiz-link:hover,
-button.quiz-link:focus-visible,
-.nav-button:hover,
-.nav-button:focus-visible {
-  background: var(--btn-primary-bg-hover);
-  border-color: var(--btn-primary-bg-hover);
-  outline: 4px solid rgba(0, 40, 90, 0.22);
-  outline-offset: 2px;
-  transform: translateY(-1px);
-}
-
-.btn-secondary,
-.audio-button,
-.small-read-button {
-  border-color: var(--btn-learning-bg);
-  background: #FFFFFF;
-  color: var(--btn-primary-bg);
-}
-
-.btn-secondary:hover,
-.btn-secondary:focus-visible,
-.audio-button:hover,
-.audio-button:focus-visible,
-.small-read-button:hover,
-.small-read-button:focus-visible {
-  background: #DDF3F2;
-  border-color: var(--btn-learning-bg-hover);
-}
-
-.btn-success,
-.quiz-button,
-button[onclick="startQuiz()"] {
-  border-color: var(--btn-success-bg);
-  background: var(--btn-success-bg);
-  color: var(--btn-success-text);
-}
-
-.btn-success:hover,
-.btn-success:focus-visible,
-.quiz-button:hover,
-.quiz-button:focus-visible,
-button[onclick="startQuiz()"]:hover,
-button[onclick="startQuiz()"]:focus-visible {
-  background: var(--btn-success-bg-hover);
-  border-color: var(--btn-success-bg-hover);
-}
-
-.btn-warning,
-.global-help-button {
-  border-color: var(--btn-warning-border);
-  background: var(--btn-warning-bg);
-  color: var(--btn-warning-text);
-}
-
-.btn-warning:hover,
-.btn-warning:focus-visible,
-.global-help-button:hover,
-.global-help-button:focus-visible {
-  background: var(--btn-warning-bg-hover);
-  border-color: #B88700;
-}
-
-.choice-button,
-.practice-answer-grid button {
-  border-color: var(--btn-learning-bg);
-  background: #FFFFFF;
-  color: #1F1F1F;
-}
-
-.choice-button:hover,
-.choice-button:focus-visible,
-.practice-answer-grid button:hover,
-.practice-answer-grid button:focus-visible {
-  background: #DDF3F2;
-  border-color: var(--btn-learning-bg-hover);
-}
-
-/* Aktionskarten behalten ihre pädagogische Farblogik. */
-.action-card.short,
-button[data-action="short"] {
-  background: #DDF3F2;
-  border-color: #3DB8B3;
-  color: #00285A;
-}
-
-.action-card.full,
-button[data-action="full"] {
-  background: #00285A;
-  border-color: #00285A;
-  color: #FFFFFF;
-}
-
-.action-card.quiz,
-button[data-action="quiz"] {
-  background: #E7F3E8;
-  border-color: #2E7D32;
-  color: #1F1F1F;
-}
-
-.action-card.memory,
-button[data-action="memory"] {
-  background: #FFF3CD;
-  border-color: #D6A400;
-  color: #1F1F1F;
-}
-
-/* Buttons nicht allein über Farbe verständlich machen. */
-.action-card strong,
-.btn strong {
-  text-decoration-thickness: 2px;
-}
-
-/* Mobile Button-Größen */
-@media (max-width: 640px) {
-  .btn,
-  .quiz-button,
-  button.quiz-link,
-  .nav-button,
-  .audio-button,
-  .small-read-button,
-  .choice-button,
-  .practice-answer-grid button {
-    width: 100%;
-    text-align: left;
-  }
-
-  .global-help-button {
-    width: auto;
-    text-align: center;
-  }
-}
-
-
-/* Hilfe-Dialog: Orientierung auf der Lernplattform */
-.help-intro-box,
-.help-small-safety-note {
-  margin: 12px 0;
-  padding: 14px;
-  border-radius: 18px;
-  border: 3px solid var(--hint-border);
-  background: var(--hint);
-}
-
-.help-intro-box p,
-.help-small-safety-note p {
-  margin: 0.4rem 0;
-  font-size: 1.05rem;
-  line-height: 1.45;
-}
-
-.help-step-people {
-  background: var(--blue-light);
-  border-color: var(--blue-mid);
-}
-
-.help-small-safety-note {
-  border-color: var(--warning);
-  background: var(--warning-light);
-}
-
-.help-small-safety-note h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-}
-
-.help-actions .btn {
-  text-align: center;
-}
-
-
-/* Hinweis im Hilfe-Dialog:
-   keine Notrufberatung, sondern Verweis auf interne Unterstützungssysteme.
-*/
-.help-small-safety-note {
-  border-color: var(--blue-mid);
-  background: var(--blue-light);
-}
-
-
-/* Lernseiten-Hilfe:
-   Auf normalen Lernseiten geht es um Orientierung beim Lernen,
-   nicht um Notfall- oder Problemberatung.
-*/
-.step-learning-hint {
-  margin: 12px 0 16px 0;
-  padding: 12px 14px;
-  border: 2px solid var(--blue-mid);
-  border-radius: 16px;
-  background: var(--blue-light);
-  color: var(--black);
-  font-size: 1rem;
-  line-height: 1.45;
-}
-
-.step-help-box {
-  display: none;
-}
-
-
-/* ============================================================
-   FINALER STARTSEITEN-LAYOUT-FIX
-   Nur gezielte Korrektur für die sichtbare Startseite.
-   Inhalte und JavaScript bleiben unverändert.
-   ============================================================ */
-
-/* Grundbreite: Seite wieder als zentrierte Lernplattform statt Vollbreiten-Chaos */
-#app,
-.app,
-.app-shell,
-main {
-  max-width: 1180px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Start-/Übersichtsbereich mit ruhigem Abstand */
-.hero,
-.header,
-.start-header,
-.intro,
-.intro-card {
-  max-width: 1180px;
-  margin: 0 auto 24px auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+/* ---------- Statische Seiten (Ersteller, Themenseiten) ---------- */
 
-/* Startseite: Texte nicht über die ganze Breite ziehen */
-.hero p,
-.header p,
-.intro p,
-.start-header p {
+.creator-page,
+.static-page {
   max-width: 860px;
-}
-
-/* Themenraster erzwingen */
-.topic-grid,
-.topics-grid,
-.card-grid,
-.overview-grid,
-.menu-grid,
-.action-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
-  gap: 22px !important;
-  max-width: 1180px !important;
-  margin: 24px auto !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-  align-items: stretch !important;
-}
-
-/* Themenkarten stabilisieren */
-.topic-card,
-.topic-tile,
-.menu-card,
-.card.topic-card {
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 360px !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-  padding: 18px !important;
-  border-radius: 24px !important;
-  background: #FFFFFF !important;
-  box-shadow: 0 10px 24px rgba(0, 40, 90, 0.14) !important;
-}
-
-/* Wichtigster Fix: Bilder/Illustrationen nicht riesig anzeigen */
-.topic-card img,
-.topic-tile img,
-.menu-card img,
-.topic-card svg,
-.topic-tile svg,
-.menu-card svg,
-.topic-illustration,
-.lesson-illustration,
-.illustration,
-.card-illustration {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 150px !important;
-  max-height: 150px !important;
-  object-fit: contain !important;
-  margin: 0 auto 14px auto !important;
-  border-radius: 18px !important;
-}
-
-/* Falls Illustrationen als große Icon-Kreise gerendert werden */
-.topic-card .icon,
-.topic-tile .icon,
-.menu-card .icon {
-  width: 72px !important;
-  height: 72px !important;
-  min-width: 72px !important;
-  min-height: 72px !important;
-  max-width: 72px !important;
-  max-height: 72px !important;
-  margin-bottom: 12px !important;
-}
-
-/* Text in Karten */
-.topic-card h2,
-.topic-card h3,
-.topic-tile h2,
-.topic-tile h3,
-.menu-card h2,
-.menu-card h3 {
-  margin-top: 0 !important;
-  margin-bottom: 10px !important;
-  font-size: 1.35rem !important;
-  line-height: 1.2 !important;
-}
-
-.topic-card p,
-.topic-tile p,
-.menu-card p {
-  font-size: 1rem !important;
-  line-height: 1.45 !important;
-}
-
-/* Buttons in Karten nicht riesig, aber gut klickbar */
-.topic-card button,
-.topic-tile button,
-.menu-card button,
-.action-card button {
-  width: 100% !important;
-  min-height: 50px !important;
-  margin-top: auto !important;
-}
-
-/* Der Weiterlernen-Kasten soll nicht wie Fließtext oben kleben */
-.continue-box,
-.resume-box,
-.last-progress,
-.progress-resume {
-  max-width: 760px !important;
-  margin: 16px 20px 24px 20px !important;
-  padding: 16px !important;
-  border: 3px solid #00285A !important;
-  border-radius: 20px !important;
-  background: #FFFFFF !important;
-}
-
-/* Disclaimer kleiner und untergeordnet */
-.disclaimer,
-.legal-note,
-.privacy-note {
-  max-width: 980px !important;
-  margin: 16px auto !important;
-  padding: 0 20px !important;
-  font-size: 0.95rem !important;
-}
-
-/* Hilfe-Button: sichtbar, aber nicht störend */
-.global-help-button {
-  position: fixed !important;
-  right: 20px !important;
-  bottom: 20px !important;
-  z-index: 1000 !important;
-  max-width: 260px !important;
-  min-width: 0 !important;
-  min-height: 54px !important;
-  padding: 12px 18px !important;
-  border-radius: 999px !important;
-  box-shadow: 0 10px 22px rgba(0, 40, 90, 0.25) !important;
-}
-
-/* Smartphone */
-@media (max-width: 760px) {
-  #app,
-  .app,
-  .app-shell,
-  main {
-    max-width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .topic-grid,
-  .topics-grid,
-  .card-grid,
-  .overview-grid,
-  .menu-grid,
-  .action-grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-  }
-
-  .topic-card,
-  .topic-tile,
-  .menu-card,
-  .card.topic-card {
-    min-height: auto !important;
-    padding: 16px !important;
-  }
-
-  .topic-card img,
-  .topic-tile img,
-  .menu-card img,
-  .topic-card svg,
-  .topic-tile svg,
-  .menu-card svg,
-  .topic-illustration,
-  .lesson-illustration,
-  .illustration,
-  .card-illustration {
-    height: 120px !important;
-    max-height: 120px !important;
-  }
-
-  .global-help-button {
-    right: 12px !important;
-    bottom: 12px !important;
-    max-width: calc(100vw - 24px) !important;
-    font-size: 0.98rem !important;
-  }
-}
-
-/* Sehr große Bildschirme */
-@media (min-width: 1300px) {
-  .topic-grid,
-  .topics-grid,
-  .card-grid,
-  .overview-grid,
-  .menu-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
-}
-
-
-/* Datenschutz-Fix:
-   Kein lokaler Lernstand auf gemeinsam genutzten Geräten.
-   Eventuelle alte Weiterlernen-Boxen werden ausgeblendet.
-*/
-.continue-box,
-.resume-box,
-.last-progress,
-.progress-resume {
-  display: none !important;
-}
-
-
-/* Obere alte Hinweisboxen ausblenden, falls alte Templates noch Reste erzeugen */
-.disclaimer,
-.legal-note,
-.privacy-note,
-.continue-box,
-.resume-box,
-.last-progress,
-.progress-resume {
-  display: none !important;
-}
-
-@media print {
-  }
-
-
-/* ============================================================
-   SAUBERER FOOTER- UND RÜCKMELDUNGS-FIX
-   Kein kompletter CSS-Umbau.
-   ============================================================ */
-
-/* Obere alte Hinweisboxen endgültig ausblenden */
-.disclaimer,
-.legal-note,
-.privacy-note,
-.continue-box,
-.resume-box,
-.last-progress,
-.progress-resume {
-  display: none !important;
-}
-
-/* Rückmeldung/Testbogen nicht in der Lernenden-Oberfläche anzeigen */
-.action-card.testbogen,
-button.action-card.testbogen,
-.topic-card .testbogen,
-.menu-card .testbogen,
-.module-testbogen,
-.feedback-form,
-.testbogen-link,
-.rueckmeldung-link {
-  display: none !important;
-}
-
-/* Echter Footer ganz unten */
-.small-footer-notice {
-  max-width: 1180px !important;
-  margin: 44px auto 96px auto !important;
-  padding: 10px 20px !important;
-  color: #555555 !important;
-  font-size: 0.78rem !important;
-  line-height: 1.35 !important;
-  text-align: left !important;
-  opacity: 0.9 !important;
-}
-
-.small-footer-notice p {
-  margin: 0 0 4px 0 !important;
-}
-
-/* Startseitenlayout nur gezielt stabilisieren */
-.topic-grid,
-.topics-grid,
-.card-grid,
-.overview-grid,
-.menu-grid,
-.action-grid {
-  max-width: 1180px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.topic-card img,
-.topic-tile img,
-.menu-card img,
-.topic-illustration,
-.lesson-illustration,
-.illustration,
-.card-illustration {
-  max-height: 150px !important;
-  object-fit: contain !important;
-}
-
-@media (max-width: 760px) {
-  .small-footer-notice {
-    margin: 32px 14px 90px 14px !important;
-    padding: 8px 0 !important;
-    font-size: 0.75rem !important;
-  }
-
-  .topic-card img,
-  .topic-tile img,
-  .menu-card img,
-  .topic-illustration,
-  .lesson-illustration,
-  .illustration,
-  .card-illustration {
-    max-height: 120px !important;
-  }
-}
-
-@media print {
-  .small-footer-notice {
-    margin: 10pt 0 0 0 !important;
-    padding: 0 !important;
-    font-size: 8pt !important;
-  }
-}
-
-
-/* ============================================================
-   STABILE MINIMAL-APP: gezielte Kompatibilitätsregeln
-   ============================================================ */
-
-.topic-card,
-.action-card {
-  cursor: pointer;
-}
-
-.topic-card .topic-title,
-.action-card .action-title {
-  display: block;
-  font-weight: 900;
-}
-
-.topic-card .topic-desc,
-.action-card .action-desc {
-  display: block;
-  margin-top: 6px;
-}
-
-.answer-option.selected {
-  outline: 4px solid rgba(61, 184, 179, 0.55) !important;
-  border-color: #00285A !important;
-}
-
-.feedback {
-  margin-top: 14px !important;
-  font-weight: 900 !important;
-}
-
-.feedback.is-correct {
-  color: #2A7F5C !important;
-}
-
-.feedback.is-wrong {
-  color: #C9541C !important;
-}
-
-.small-footer-notice {
-  max-width: 1180px !important;
-  margin: 44px auto 96px auto !important;
-  padding: 10px 20px !important;
-  color: #555555 !important;
-  font-size: 0.78rem !important;
-  line-height: 1.35 !important;
-  text-align: left !important;
-}
-
-.small-footer-notice p {
-  margin: 0 0 4px 0 !important;
-}
-
-.audio-actions,
-.speech-speed-controls,
-.small-read-button,
-.safe-listen-button,
-.module-testbogen,
-.feedback-form,
-.testbogen-link,
-.rueckmeldung-link {
-  display: none !important;
-}
-
-
-/* Fortschrittsbalken nur im Lernbereich anzeigen */
-.progress-area.is-hidden {
-  display: none !important;
-}
-
-
-/* Startseite: kein Fortschrittsbalken und keine Zurück-/Weiter-Navigation */
-.progress-area.is-hidden,
-.nav.is-hidden {
-  display: none !important;
-}
-
-
-/* ============================================================
-   Stärkerer Hover-/Fokus-Effekt für Themen-Kacheln
-   Pädagogische Logik:
-   - Grundfläche bleibt ruhig.
-   - App-/Themenfarbe erscheint als deutlicher Akzent.
-   - Text bleibt lesbar.
-   - Tastatur-Fokus wird genauso sichtbar wie Maus-Hover.
-   ============================================================ */
-
-.topic-card {
-  position: relative !important;
-  overflow: hidden !important;
-  transition:
-    transform 160ms ease,
-    box-shadow 160ms ease,
-    border-color 160ms ease,
-    background-color 160ms ease !important;
-}
-
-.topic-card::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  background: var(--topic-hover-bg, rgba(61, 184, 179, 0.10)) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transition: opacity 160ms ease !important;
-}
-
-.topic-card:hover,
-.topic-card:focus-visible {
-  transform: translateY(-4px) !important;
-  border-color: var(--topic-color, #00285A) !important;
-  box-shadow:
-    0 14px 28px rgba(0, 40, 90, 0.18),
-    0 0 0 5px var(--topic-ring, rgba(61, 184, 179, 0.24)) !important;
-}
-
-.topic-card:hover::before,
-.topic-card:focus-visible::before {
-  opacity: 1 !important;
-}
-
-.topic-card > * {
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-.topic-card .topic-icon {
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease !important;
-}
-
-.topic-card:hover .topic-icon,
-.topic-card:focus-visible .topic-icon {
-  background: var(--topic-icon-bg, #FFFFFF) !important;
-  border-color: var(--topic-color, #00285A) !important;
-  transform: scale(1.06) !important;
-}
-
-/* Themenfarben: bewusst als Akzent, nicht als volle Kachelfläche */
-.topic-datenschutz {
-  --topic-color: #00285A;
-  --topic-ring: rgba(0, 40, 90, 0.24);
-  --topic-hover-bg: rgba(0, 40, 90, 0.08);
-  --topic-icon-bg: #EAF1F8;
-}
-
-.topic-whatsapp {
-  --topic-color: #25D366;
-  --topic-ring: rgba(37, 211, 102, 0.28);
-  --topic-hover-bg: rgba(37, 211, 102, 0.10);
-  --topic-icon-bg: #E9FBEF;
-}
-
-.topic-facebook {
-  --topic-color: #1877F2;
-  --topic-ring: rgba(24, 119, 242, 0.26);
-  --topic-hover-bg: rgba(24, 119, 242, 0.09);
-  --topic-icon-bg: #EAF3FF;
-}
-
-.topic-instagram {
-  --topic-color: #C13584;
-  --topic-ring: rgba(193, 53, 132, 0.24);
-  --topic-hover-bg: rgba(193, 53, 132, 0.09);
-  --topic-icon-bg: #FBEAF4;
-}
-
-.topic-youtube {
-  --topic-color: #FF0000;
-  --topic-ring: rgba(255, 0, 0, 0.22);
-  --topic-hover-bg: rgba(255, 0, 0, 0.08);
-  --topic-icon-bg: #FFECEC;
-}
-
-.topic-snapchat {
-  --topic-color: #C9A600;
-  --topic-ring: rgba(255, 252, 0, 0.38);
-  --topic-hover-bg: rgba(255, 252, 0, 0.16);
-  --topic-icon-bg: #FFFBD1;
-}
-
-.topic-tiktok {
-  --topic-color: #111111;
-  --topic-ring: rgba(37, 244, 238, 0.28);
-  --topic-hover-bg: rgba(37, 244, 238, 0.10);
-  --topic-icon-bg: #E8FFFF;
-}
-
-.topic-hilfe {
-  --topic-color: #C9541C;
-  --topic-ring: rgba(201, 84, 28, 0.28);
-  --topic-hover-bg: rgba(201, 84, 28, 0.10);
-  --topic-icon-bg: #FFF0E8;
-}
-
-/* Menschen, die weniger Bewegung eingestellt haben, bekommen keine Bewegung */
-@media (prefers-reduced-motion: reduce) {
-  .topic-card,
-  .topic-card::before,
-  .topic-card .topic-icon {
-    transition: none !important;
-  }
-
-  .topic-card:hover,
-  .topic-card:focus-visible {
-    transform: none !important;
-  }
-}
-
-
-/* Direkte Themenfarbe pro Kachel.
-   Die Farbe kommt jetzt direkt aus JavaScript als CSS-Variable.
-   Dadurch fällt nicht mehr alles auf Türkis zurück.
-*/
-.topic-card {
-  border-left: 8px solid var(--topic-color, #00285A) !important;
-}
-
-.topic-card:hover,
-.topic-card:focus-visible {
-  background-color: var(--topic-hover-bg, rgba(0, 40, 90, 0.08)) !important;
-  border-color: var(--topic-color, #00285A) !important;
-}
-
-.topic-card:hover .topic-title,
-.topic-card:focus-visible .topic-title {
-  color: var(--topic-color, #00285A) !important;
-}
-
-
-/* ============================================================
-   Lernwege-Kacheln mit Symbolen
-   Pädagogische Logik:
-   - große Klickfläche
-   - Symbol + kurzer Titel + kurzer Erklärungssatz
-   - keine ungünstigen Wortumbrüche
-   - vier klare Lernwege
-   ============================================================ */
-
-.learning-path-heading {
-  max-width: 1180px !important;
-  margin: 26px auto 10px auto !important;
-}
-
-.learning-path-heading h3 {
-  margin: 0 !important;
-  font-size: 1.25rem !important;
-  font-weight: 900 !important;
-  color: #1F1F1F !important;
-}
-
-.learning-path-grid,
-.action-grid.learning-path-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 18px !important;
-  max-width: 1180px !important;
-  margin: 14px auto 22px auto !important;
-}
-
-.learning-path-grid .action-card {
-  min-height: 118px !important;
-  padding: 18px !important;
-  display: grid !important;
-  grid-template-columns: 56px 1fr !important;
-  align-items: center !important;
-  gap: 14px !important;
-  text-align: left !important;
-  border-width: 3px !important;
-  border-radius: 18px !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-.learning-path-grid .action-icon {
-  width: 52px !important;
-  height: 52px !important;
-  border-radius: 16px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: rgba(255, 255, 255, 0.72) !important;
-  border: 2px solid rgba(0, 40, 90, 0.16) !important;
-}
-
-.learning-path-grid .action-icon img {
-  width: 32px !important;
-  height: 32px !important;
-  object-fit: contain !important;
-}
-
-.learning-path-grid .action-text {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 6px !important;
-  min-width: 0 !important;
-}
-
-.learning-path-grid .action-title {
-  display: block !important;
-  font-size: 1.08rem !important;
-  line-height: 1.15 !important;
-  font-weight: 900 !important;
-  white-space: normal !important;
-}
-
-.learning-path-grid .action-desc {
-  display: block !important;
-  font-size: 0.98rem !important;
-  line-height: 1.25 !important;
-  font-weight: 700 !important;
-  white-space: normal !important;
-}
-
-/* Lernweg-Farben ruhig, aber erkennbar */
-.learning-path-grid .action-short {
-  background: #E5F7F6 !important;
-  border-color: #3DB8B3 !important;
-  color: #00285A !important;
-}
-
-.learning-path-grid .action-full {
-  background: #00285A !important;
-  border-color: #00285A !important;
-  color: #FFFFFF !important;
-}
-
-.learning-path-grid .action-full .action-icon {
-  background: rgba(255, 255, 255, 0.18) !important;
-  border-color: rgba(255, 255, 255, 0.35) !important;
-}
-
-.learning-path-grid .action-quiz {
-  background: #EAF6EC !important;
-  border-color: #2A7F5C !important;
-  color: #1F1F1F !important;
-}
-
-.learning-path-grid .action-memory {
-  background: #FFF3C4 !important;
-  border-color: #C9A600 !important;
-  color: #1F1F1F !important;
-}
-
-.learning-path-grid .action-card:hover,
-.learning-path-grid .action-card:focus-visible {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.18) !important;
-  outline: 4px solid rgba(61, 184, 179, 0.28) !important;
-  outline-offset: 2px !important;
-}
-
-.topic-intro-card {
-  max-width: 1180px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-/* Unterstützungsbox stärker unterordnen, damit sie nicht wie ein fünfter Lernweg wirkt */
-.help-small-safety-note {
-  max-width: 1180px !important;
-  margin: 20px auto !important;
-}
-
-/* Responsive: auf kleineren Bildschirmen 2 Spalten, mobil 1 Spalte */
-@media (max-width: 1050px) {
-  .learning-path-grid,
-  .action-grid.learning-path-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .learning-path-grid,
-  .action-grid.learning-path-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .learning-path-grid .action-card {
-    min-height: 96px !important;
-    grid-template-columns: 48px 1fr !important;
-  }
-
-  .learning-path-grid .action-icon {
-    width: 46px !important;
-    height: 46px !important;
-  }
-
-  .learning-path-grid .action-icon img {
-    width: 28px !important;
-    height: 28px !important;
-  }
-}
-
-
-/* ============================================================
-   Unterstützungs-Hilfe als Button
-   Pädagogische Logik:
-   - nicht als fünfter Lernweg
-   - klarer Hilfebutton unter den Lernwegen
-   - kurze konkrete Anleitung
-   ============================================================ */
-
-.support-help-area {
-  max-width: 1180px !important;
-  margin: 20px auto 26px auto !important;
-}
-
-.support-help-button {
-  width: 100% !important;
-  min-height: 76px !important;
-  display: grid !important;
-  grid-template-columns: 56px 1fr !important;
-  gap: 14px !important;
-  align-items: center !important;
-  padding: 16px 18px !important;
-  border: 3px solid #3DB8B3 !important;
-  border-radius: 18px !important;
-  background: #E5F7F6 !important;
-  color: #00285A !important;
-  text-align: left !important;
-  cursor: pointer !important;
-  box-shadow: 0 6px 14px rgba(0, 40, 90, 0.08) !important;
-}
-
-.support-help-button:hover,
-.support-help-button:focus-visible {
-  background: #DDF3F2 !important;
-  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.16) !important;
-  outline: 4px solid rgba(61, 184, 179, 0.32) !important;
-  outline-offset: 2px !important;
-}
-
-.support-help-icon {
-  width: 52px !important;
-  height: 52px !important;
-  border-radius: 16px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: #FFFFFF !important;
-  border: 2px solid rgba(0, 40, 90, 0.16) !important;
-}
-
-.support-help-icon img {
-  width: 32px !important;
-  height: 32px !important;
-  object-fit: contain !important;
-}
-
-.support-help-text {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 4px !important;
-}
-
-.support-help-title {
-  font-size: 1.15rem !important;
-  line-height: 1.15 !important;
-  font-weight: 900 !important;
-}
-
-.support-help-desc {
-  font-size: 1rem !important;
-  line-height: 1.25 !important;
-  font-weight: 700 !important;
-}
-
-.support-help-panel {
-  margin-top: 14px !important;
-  padding: 18px !important;
-  border: 3px solid #3DB8B3 !important;
-  border-radius: 18px !important;
-  background: #FFFFFF !important;
-  box-shadow: 0 8px 20px rgba(0, 40, 90, 0.10) !important;
-}
-
-.support-help-panel[hidden] {
-  display: none !important;
-}
-
-.support-help-panel h3 {
-  margin-top: 0 !important;
-  color: #00285A !important;
-  font-size: 1.25rem !important;
-}
-
-.support-help-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 14px !important;
-}
-
-.support-help-card {
-  padding: 14px !important;
-  border-radius: 14px !important;
-  background: #F8F6F0 !important;
-  border: 2px solid #E0DDD3 !important;
-}
-
-.support-help-card h4 {
-  margin: 0 0 10px 0 !important;
-  font-size: 1rem !important;
-  color: #1F1F1F !important;
-}
-
-.support-help-card ul {
-  margin: 0 !important;
-  padding-left: 20px !important;
-}
-
-.support-help-card li {
-  margin: 8px 0 !important;
-  line-height: 1.35 !important;
-}
-
-.support-help-remember {
-  margin: 16px 0 0 0 !important;
-  padding: 12px !important;
-  border-radius: 14px !important;
-  background: #E5F7F6 !important;
-  font-weight: 900 !important;
-  color: #00285A !important;
-}
-
-@media (max-width: 900px) {
-  .support-help-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .support-help-button {
-    grid-template-columns: 48px 1fr !important;
-    min-height: 70px !important;
-  }
-
-  .support-help-icon {
-    width: 46px !important;
-    height: 46px !important;
-  }
-
-  .support-help-icon img {
-    width: 28px !important;
-    height: 28px !important;
-  }
-}
-
-
-/* ============================================================
-   Pilot-Bereinigung: Orientierung, Lernwege, Hilfe
-   ============================================================ */
-
-/* Startseite und Themenauswahl: kein Fortschrittsbalken, keine untere Navigation */
-.progress-area.is-hidden,
-.nav.is-hidden {
-  display: none !important;
-}
-
-/* Start-Intro ruhiger */
-.start-page .hero-card {
-  max-width: 1180px !important;
-  margin: 26px auto 22px auto !important;
-  padding: 20px 24px !important;
-  border-radius: 18px !important;
-  background: #FFFFFF !important;
-  border-left: 8px solid #3DB8B3 !important;
-  box-shadow: 0 8px 20px rgba(0, 40, 90, 0.08) !important;
-}
-
-.start-page .hero-card h2 {
-  margin-top: 0 !important;
-}
-
-.start-page .hero-card p {
-  margin-bottom: 0 !important;
-  font-weight: 700 !important;
-}
-
-/* Themenauswahl-Karte kompakter und ruhiger */
-.topic-choice .topic-intro-card {
-  display: grid !important;
-  grid-template-columns: 220px 1fr !important;
-  gap: 22px !important;
-  align-items: center !important;
-  padding: 24px !important;
-}
-
-.topic-choice .topic-intro-card .topic-illustration {
-  width: 220px !important;
-  height: 150px !important;
-  max-height: 150px !important;
-  margin: 0 !important;
-}
-
-.topic-choice .topic-intro-card .symbol-heading {
-  align-self: end !important;
-}
-
-/* Lernwege: keine hässlichen Umbrüche, bessere Textgewichtung */
-.learning-path-grid .action-card {
-  min-width: 0 !important;
-}
-
-.learning-path-grid .action-title,
-.learning-path-grid .action-desc {
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-.learning-path-grid .action-title {
-  font-size: 1.08rem !important;
-}
-
-.learning-path-grid .action-desc {
-  font-size: 0.96rem !important;
-}
-
-/* Unterstützung nicht als Lernweg, sondern als klare Zusatzhilfe */
-.support-help-area {
-  margin-top: 18px !important;
-}
-
-.support-help-button {
-  max-width: 1180px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.support-help-close {
-  margin-top: 16px !important;
-  min-height: 42px !important;
-  padding: 8px 14px !important;
-  border-radius: 999px !important;
-  border: 2px solid #00285A !important;
-  background: #FFFFFF !important;
-  color: #00285A !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-}
-
-.support-help-close:hover,
-.support-help-close:focus-visible {
-  background: #EAF1F8 !important;
-  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
-  outline-offset: 2px !important;
-}
-
-@media (max-width: 760px) {
-  .topic-choice .topic-intro-card {
-    grid-template-columns: 1fr !important;
-  }
-
-  .topic-choice .topic-intro-card .topic-illustration {
-    width: 100% !important;
-    max-width: 260px !important;
-    margin: 0 auto !important;
-  }
-}
-
-
-/* ============================================================
-   CODEAUDIT-BEREINIGUNG
-   Final-Overrides ohne kompletten CSS-Neuaufbau.
-   ============================================================ */
-
-/* Startseite und Themenauswahl: keine Fortschritts-/Navigationsleiste */
-.progress-area.is-hidden,
-.nav.is-hidden {
-  display: none !important;
-}
-
-/* Start-Intro ruhig und eindeutig */
-.start-page .hero-card {
-  max-width: 1180px !important;
-  margin: 26px auto 22px auto !important;
-  padding: 20px 24px !important;
-  border-radius: 18px !important;
-  background: #FFFFFF !important;
-  border-left: 8px solid #3DB8B3 !important;
-  box-shadow: 0 8px 20px rgba(0, 40, 90, 0.08) !important;
-}
-
-.start-page .hero-card h2 {
-  margin-top: 0 !important;
-}
-
-.start-page .hero-card p {
-  margin-bottom: 0 !important;
-  font-weight: 700 !important;
-}
-
-/* Themenauswahl: Thema kompakter und ruhiger */
-.topic-choice .topic-intro-card {
-  max-width: 1180px !important;
-  margin: 20px auto 22px auto !important;
-  padding: 24px !important;
-  display: grid !important;
-  grid-template-columns: 220px 1fr !important;
-  gap: 24px !important;
-  align-items: center !important;
-}
-
-.topic-choice .topic-intro-card .topic-illustration {
-  width: 220px !important;
-  height: 150px !important;
-  max-height: 150px !important;
-  object-fit: contain !important;
-  margin: 0 !important;
-}
-
-/* Lernwege: Icons + Text stabil */
-.learning-path-heading {
-  max-width: 1180px !important;
-  margin: 24px auto 10px auto !important;
-}
-
-.learning-path-heading h3 {
-  margin: 0 !important;
-  font-size: 1.25rem !important;
-  font-weight: 900 !important;
-}
-
-.learning-path-grid,
-.action-grid.learning-path-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 18px !important;
-  max-width: 1180px !important;
-  margin: 14px auto 20px auto !important;
-}
-
-.learning-path-grid .action-card {
-  min-height: 116px !important;
-  padding: 18px !important;
-  display: grid !important;
-  grid-template-columns: 54px 1fr !important;
-  align-items: center !important;
-  gap: 14px !important;
-  text-align: left !important;
-  border-width: 3px !important;
-  border-radius: 18px !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-.learning-path-grid .action-icon {
-  width: 52px !important;
-  height: 52px !important;
-  border-radius: 16px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: rgba(255, 255, 255, 0.72) !important;
-  border: 2px solid rgba(0, 40, 90, 0.16) !important;
-}
-
-.learning-path-grid .action-icon img {
-  width: 32px !important;
-  height: 32px !important;
-  object-fit: contain !important;
-}
-
-.learning-path-grid .action-text {
-  min-width: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 6px !important;
-}
-
-.learning-path-grid .action-title {
-  display: block !important;
-  font-size: 1.08rem !important;
-  line-height: 1.15 !important;
-  font-weight: 900 !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-.learning-path-grid .action-desc {
-  display: block !important;
-  font-size: 0.96rem !important;
-  line-height: 1.25 !important;
-  font-weight: 700 !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-/* Lernweg-Farben */
-.learning-path-grid .action-short {
-  background: #E5F7F6 !important;
-  border-color: #3DB8B3 !important;
-  color: #00285A !important;
-}
-
-.learning-path-grid .action-full {
-  background: #00285A !important;
-  border-color: #00285A !important;
-  color: #FFFFFF !important;
-}
-
-.learning-path-grid .action-full .action-icon {
-  background: rgba(255, 255, 255, 0.18) !important;
-  border-color: rgba(255, 255, 255, 0.35) !important;
-}
-
-.learning-path-grid .action-quiz {
-  background: #EAF6EC !important;
-  border-color: #2A7F5C !important;
-  color: #1F1F1F !important;
-}
-
-.learning-path-grid .action-memory {
-  background: #FFF3C4 !important;
-  border-color: #C9A600 !important;
-  color: #1F1F1F !important;
-}
-
-.learning-path-grid .action-card:hover,
-.learning-path-grid .action-card:focus-visible {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.18) !important;
-  outline: 4px solid rgba(61, 184, 179, 0.28) !important;
-  outline-offset: 2px !important;
-}
-
-/* Unterstützung als Zusatzhilfe, nicht als fünfter Lernweg */
-.support-help-area {
-  max-width: 1180px !important;
-  margin: 20px auto 28px auto !important;
-}
-
-.support-help-button {
-  width: 100% !important;
-  min-height: 76px !important;
-  display: grid !important;
-  grid-template-columns: 56px 1fr !important;
-  gap: 14px !important;
-  align-items: center !important;
-  padding: 16px 18px !important;
-  border: 3px solid #3DB8B3 !important;
-  border-radius: 18px !important;
-  background: #E5F7F6 !important;
-  color: #00285A !important;
-  text-align: left !important;
-  cursor: pointer !important;
-  box-shadow: 0 6px 14px rgba(0, 40, 90, 0.08) !important;
-}
-
-.support-help-button:hover,
-.support-help-button:focus-visible {
-  background: #DDF3F2 !important;
-  box-shadow: 0 12px 24px rgba(0, 40, 90, 0.16) !important;
-  outline: 4px solid rgba(61, 184, 179, 0.32) !important;
-  outline-offset: 2px !important;
-}
-
-.support-help-close {
-  margin-top: 16px !important;
-  min-height: 42px !important;
-  padding: 8px 14px !important;
-  border-radius: 999px !important;
-  border: 2px solid #00285A !important;
-  background: #FFFFFF !important;
-  color: #00285A !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-}
-
-@media (max-width: 1050px) {
-  .learning-path-grid,
-  .action-grid.learning-path-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-}
-
-@media (max-width: 760px) {
-  .topic-choice .topic-intro-card {
-    grid-template-columns: 1fr !important;
-  }
-
-  .topic-choice .topic-intro-card .topic-illustration {
-    width: 100% !important;
-    max-width: 260px !important;
-    margin: 0 auto !important;
-  }
-
-  .learning-path-grid,
-  .action-grid.learning-path-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-
-/* Korrektur: Lernweg-Überschrift nur einmal */
-.learning-path-heading {
-  max-width: 1180px !important;
-  margin: 24px auto 12px auto !important;
-  padding: 0 !important;
-  background: transparent !important;
-}
-
-.learning-path-heading h3 {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  font-size: 1.25rem !important;
-  font-weight: 900 !important;
-  color: #1F1F1F !important;
-}
-
-
-/* ============================================================
-   Korrektur: Merksätze normal umbrechen
-   Problem:
-   Merksätze wurden wortweise untereinander angezeigt.
-   Lösung:
-   Merksatz-Box und Text erhalten volle Breite und normalen Zeilenumbruch.
-   ============================================================ */
-
-.lesson-card .remember,
-.lesson-card .remember-box,
-.access-box.remember,
-.access-box.remember-box {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  padding: 18px 20px !important;
-}
-
-.lesson-card .remember h3,
-.lesson-card .remember-box h3,
-.access-box.remember h3,
-.access-box.remember-box h3 {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 0 10px 0 !important;
-  padding: 0 !important;
-  text-align: left !important;
-  white-space: normal !important;
-}
-
-.lesson-card .remember p,
-.lesson-card .remember-box p,
-.lesson-card .remember-text,
-.access-box.remember p,
-.access-box.remember-box p,
-.access-box .remember-text {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: left !important;
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-  line-height: 1.45 !important;
-}
-
-/* Falls alte Regeln einzelne Wörter oder starke Elemente im Merksatz blockartig machen */
-.lesson-card .remember p *,
-.lesson-card .remember-box p *,
-.access-box.remember p *,
-.access-box.remember-box p * {
-  display: inline !important;
-  white-space: normal !important;
-}
-
-/* Lernkarte selbst darf den Merksatz nicht in eine zu schmale Spalte zwingen */
-.lesson-card {
-  max-width: 900px !important;
-  width: calc(100% - 32px) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  box-sizing: border-box !important;
-}
-
-/* Inhaltsboxen in Lernkarten behalten volle Breite */
-.lesson-card .access-box {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-
-/* Inhaltsüberarbeitung: Lernkarten ruhiger */
-.lesson-card h2 {
-  line-height: 1.15 !important;
-}
-
-.lesson-card p {
-  line-height: 1.5 !important;
-}
-
-/* Merksatz klar als ein Satz */
-.remember-box .remember-text,
-.access-box.remember p {
-  font-size: 1.05rem !important;
-  font-weight: 900 !important;
-}
-
-/* Doppelte Merksatz-Wirkung optisch reduzieren */
-.access-box.remember h3 {
-  font-size: 0.95rem !important;
-  margin-bottom: 8px !important;
-}
-
-
-/* ============================================================
-   Merksatz-Didaktik-Fix
-   - Startseiten enthalten keine Merksatz-Box.
-   - Merksatz-Box zeigt nur einmal die Überschrift.
-   ============================================================ */
-
-.access-box.remember,
-.access-box.remember-box {
-  display: block !important;
-  width: 100% !important;
-  padding: 18px 20px !important;
-  border-radius: 18px !important;
-  box-sizing: border-box !important;
-}
-
-.access-box.remember h3,
-.access-box.remember-box h3 {
-  display: block !important;
-  margin: 0 0 10px 0 !important;
-  padding: 0 !important;
-  font-size: 1rem !important;
-  line-height: 1.25 !important;
-  font-weight: 900 !important;
-  text-align: left !important;
-}
-
-.access-box.remember p,
-.access-box.remember-box p,
-.remember-text {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 1.05rem !important;
-  line-height: 1.45 !important;
-  font-weight: 900 !important;
-  text-align: left !important;
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-/* Keine doppelte oder zentrierte Merksatz-Optik aus älteren CSS-Regeln */
-.access-box.remember p::before,
-.access-box.remember-box p::before,
-
-
-
-/* ============================================================
-   Lernlogik-Fix: Alltagssituation → Entscheidung → Übung
-   ============================================================ */
-
-.lesson-card p:first-of-type {
-  font-weight: 700 !important;
-}
-
-.lesson-card .example,
-.lesson-card .practice-box {
-  margin-top: 18px !important;
-}
-
-.lesson-card .example h3::after {
-  content: " aus dem Alltag" !important;
-}
-
-.practice-box {
-  border: 3px solid #3DB8B3 !important;
-  background: #F2FBFA !important;
-  border-radius: 18px !important;
-  padding: 18px 20px !important;
-}
-
-.practice-box h3 {
-  margin-top: 0 !important;
-}
-
-.practice-question {
-  font-size: 1.05rem !important;
-  line-height: 1.45 !important;
-}
-
-.answers {
-  display: grid !important;
-  gap: 10px !important;
-}
-
-.answer-option {
-  text-align: left !important;
-  min-height: 48px !important;
-  padding: 12px 14px !important;
-  border-radius: 14px !important;
-  border: 2px solid #D8DEE8 !important;
-  background: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-
-.answer-option:hover,
-.answer-option:focus-visible {
-  border-color: #3DB8B3 !important;
-  outline: 4px solid rgba(61, 184, 179, 0.25) !important;
-}
-
-
-/* ============================================================
-   Unsicher-Button getrennt von Antwortmöglichkeiten
-   Didaktische Logik:
-   - Antworten gehören zur Aufgabe.
-   - Hilfe holen ist eine eigene Lernunterstützung.
-   ============================================================ */
-
-.task-help-area {
-  margin: 14px 0 8px 0 !important;
-}
-
-.task-help-button {
-  min-height: 42px !important;
-  padding: 8px 14px !important;
-  border-radius: 999px !important;
-  border: 2px solid #00285A !important;
-  background: #FFFFFF !important;
-  color: #00285A !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-}
-
-.task-help-button:hover,
-.task-help-button:focus-visible {
-  background: #EAF1F8 !important;
-  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
-  outline-offset: 2px !important;
-}
-
-.task-help-panel {
-  margin-top: 12px !important;
-  padding: 16px 18px !important;
-  border: 3px solid #3DB8B3 !important;
-  border-radius: 18px !important;
-  background: #F2FBFA !important;
-}
-
-.task-help-panel[hidden] {
-  display: none !important;
-}
-
-.task-help-panel h3 {
-  margin: 0 0 8px 0 !important;
-  color: #00285A !important;
-}
-
-.task-help-panel p {
-  margin: 0 0 8px 0 !important;
-  font-weight: 800 !important;
-}
-
-.task-help-panel ul {
-  margin: 0 !important;
-  padding-left: 22px !important;
-}
-
-.task-help-panel li {
-  margin: 7px 0 !important;
-  line-height: 1.35 !important;
-}
-
-
-/* ============================================================
-   Feedback-Seiten nach Antworten
-   Didaktische Logik:
-   - richtige Antwort: Erklärung + Weiter
-   - falsche Antwort: wertschätzende Erklärung + Nochmal versuchen
-   - Hilfe bleibt getrennt über „Ich bin unsicher“
-   ============================================================ */
-
-.feedback-page {
-  max-width: 820px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.feedback-page h2 {
-  margin-top: 0 !important;
-  font-size: 1.55rem !important;
-  line-height: 1.2 !important;
-}
-
-.feedback-correct {
-  border-left: 10px solid #2A7F5C !important;
-}
-
-.feedback-wrong {
-  border-left: 10px solid #C9541C !important;
-}
-
-.feedback-selected,
-.feedback-explanation {
-  margin: 18px 0 !important;
-  padding: 16px 18px !important;
-  border-radius: 18px !important;
-  background: #F8F6F0 !important;
-  border: 2px solid #E0DDD3 !important;
-}
-
-.feedback-selected h3,
-.feedback-explanation h3 {
-  margin: 0 0 8px 0 !important;
-  font-size: 1.05rem !important;
-  line-height: 1.25 !important;
-}
-
-.feedback-selected p,
-.feedback-explanation p {
-  margin: 0 !important;
-  line-height: 1.45 !important;
-  font-weight: 800 !important;
-}
-
-.feedback-actions {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 12px !important;
-  margin-top: 20px !important;
-}
-
-.feedback-button {
-  min-height: 48px !important;
-  padding: 10px 18px !important;
-  border-radius: 999px !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-  border: 3px solid #00285A !important;
-}
-
-.feedback-button.primary {
-  background: #00285A !important;
-  color: #FFFFFF !important;
-}
-
-.feedback-button.secondary {
-  background: #FFFFFF !important;
-  color: #00285A !important;
-}
-
-.feedback-button.help {
-  background: #E5F7F6 !important;
-  color: #00285A !important;
-  border-color: #3DB8B3 !important;
-}
-
-.feedback-button:hover,
-.feedback-button:focus-visible {
-  outline: 4px solid rgba(61, 184, 179, 0.28) !important;
-  outline-offset: 2px !important;
-}
-
-/* Bei Aufgaben keine untere Weiter-Navigation erzwingen */
-.quiz-card .feedback,
-.practice-box .feedback {
-  display: none !important;
-}
-
-
-/* ============================================================
-   Profi-Fix: Feedbackseiten und Merksatzlogik
-   ============================================================ */
-
-.feedback-page {
-  max-width: 820px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.feedback-page h2 {
-  margin-top: 0 !important;
-  line-height: 1.2 !important;
-}
-
-.feedback-correct {
-  border-left: 10px solid #2A7F5C !important;
-}
-
-.feedback-wrong {
-  border-left: 10px solid #C9541C !important;
-}
-
-.feedback-selected,
-.feedback-explanation {
-  margin: 18px 0 !important;
-  padding: 16px 18px !important;
-  border-radius: 18px !important;
-  background: #F8F6F0 !important;
-  border: 2px solid #E0DDD3 !important;
-}
-
-.feedback-selected h3,
-.feedback-explanation h3 {
-  margin: 0 0 8px 0 !important;
-}
-
-.feedback-selected p,
-.feedback-explanation p {
-  margin: 0 !important;
-  line-height: 1.45 !important;
-  font-weight: 800 !important;
-}
-
-.feedback-actions {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 12px !important;
-  margin-top: 20px !important;
-}
-
-.feedback-button {
-  min-height: 48px !important;
-  padding: 10px 18px !important;
-  border-radius: 999px !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-  border: 3px solid #00285A !important;
-}
-
-.feedback-button.primary {
-  background: #00285A !important;
-  color: #FFFFFF !important;
-}
-
-.feedback-button.secondary {
-  background: #FFFFFF !important;
-  color: #00285A !important;
-}
-
-/* Merksatz: nur eine Überschrift, normaler Satz */
-.access-box.remember h3,
-.access-box.remember-box h3 {
-  margin: 0 0 8px 0 !important;
-}
-
-.access-box.remember p::before,
-.access-box.remember-box p::before,
-.remember-text::before {
-  content: none !important;
-}
-
-
-/* ============================================================
-   ENDVERSION: klare Lernseite
-   ============================================================ */
-
-.nav.is-hidden,
-.progress-area.is-hidden {
-  display: none !important;
-}
-
-.lesson-card,
-.quiz-card,
-.feedback-page,
-.memory-card,
-.topic-intro-card {
-  max-width: 860px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.lesson-card p,
-.quiz-card p,
-.feedback-page p,
-.memory-card p {
-  font-size: 1.08rem !important;
-  line-height: 1.55 !important;
-}
-
-.practice-box {
-  margin-top: 22px !important;
-  padding: 22px !important;
-  border: 3px solid #3DB8B3 !important;
-  border-radius: 22px !important;
-  background: #F2FBFA !important;
-}
-
-.practice-box h3 {
-  margin-top: 0 !important;
-  color: #00285A !important;
-}
-
-.practice-question,
-.quiz-question {
-  font-size: 1.18rem !important;
-  line-height: 1.45 !important;
-  font-weight: 900 !important;
-}
-
-.answers {
-  display: grid !important;
-  gap: 12px !important;
-  margin-top: 16px !important;
-}
-
-.answer-option {
-  width: 100% !important;
-  text-align: left !important;
-  min-height: 56px !important;
-  padding: 16px 18px !important;
-  border-radius: 18px !important;
-  border: 3px solid #D8DEE8 !important;
-  background: #FFFFFF !important;
-  color: #1F1F1F !important;
-  font-size: 1.05rem !important;
-  line-height: 1.35 !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-}
-
-.answer-option:hover,
-.answer-option:focus-visible {
-  border-color: #00285A !important;
-  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
-  outline-offset: 2px !important;
-}
-
-.task-help-area {
-  margin-top: 16px !important;
-}
-
-.task-help-button {
-  min-height: 46px !important;
-  padding: 10px 16px !important;
-  border-radius: 999px !important;
-  border: 3px solid #00285A !important;
-  background: #FFFFFF !important;
-  color: #00285A !important;
-  font-size: 1rem !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-}
-
-.task-help-button:hover,
-.task-help-button:focus-visible {
-  background: #EAF1F8 !important;
-  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
-  outline-offset: 2px !important;
-}
-
-.task-help-panel {
-  margin-top: 12px !important;
-  padding: 18px 20px !important;
-  border: 3px solid #3DB8B3 !important;
-  border-radius: 20px !important;
-  background: #F2FBFA !important;
-}
-
-.task-help-panel[hidden] {
-  display: none !important;
-}
-
-.task-help-panel h3 {
-  margin-top: 0 !important;
-  color: #00285A !important;
-}
-
-.task-help-panel li {
-  margin: 8px 0 !important;
-  line-height: 1.4 !important;
-}
-
-.feedback-page {
-  padding-top: 28px !important;
-  padding-bottom: 28px !important;
-}
-
-.feedback-correct {
-  border-left: 12px solid #2A7F5C !important;
-}
-
-.feedback-wrong {
-  border-left: 12px solid #C9541C !important;
-}
-
-.feedback-selected,
-.feedback-explanation {
-  margin: 18px 0 !important;
-  padding: 18px 20px !important;
-  border-radius: 20px !important;
-  background: #F8F6F0 !important;
-  border: 2px solid #E0DDD3 !important;
-}
-
-.feedback-selected h3,
-.feedback-explanation h3 {
-  margin: 0 0 8px 0 !important;
-  color: #00285A !important;
-}
-
-.feedback-selected p,
-.feedback-explanation p {
-  margin: 0 !important;
-  font-weight: 800 !important;
-}
-
-.feedback-actions {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 14px !important;
-  margin-top: 22px !important;
-}
-
-.feedback-button {
-  min-height: 52px !important;
-  padding: 12px 20px !important;
-  border-radius: 999px !important;
-  font-size: 1.05rem !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-  border: 3px solid #00285A !important;
-}
-
-.feedback-button.primary {
-  background: #00285A !important;
-  color: #FFFFFF !important;
-}
-
-.feedback-button.secondary {
-  background: #FFFFFF !important;
-  color: #00285A !important;
-}
-
-.feedback-button:hover,
-.feedback-button:focus-visible {
-  outline: 4px solid rgba(61, 184, 179, 0.35) !important;
-  outline-offset: 2px !important;
-}
-
-.access-box.remember,
-.access-box.remember-box {
-  border-left: 8px solid #3DB8B3 !important;
-  background: #F2FBFA !important;
-}
-
-.access-box.remember h3,
-.access-box.remember-box h3 {
-  margin: 0 0 8px 0 !important;
-  color: #00285A !important;
-}
-
-.access-box.remember p,
-.access-box.remember-box p,
-.remember-text {
-  margin: 0 !important;
-  font-weight: 900 !important;
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-.access-box.remember p::before,
-.access-box.remember-box p::before,
-.remember-text::before {
-  content: none !important;
-}
-
-.small-footer-notice {
-  font-size: 0.82rem !important;
-  line-height: 1.35 !important;
-  opacity: 0.88 !important;
-}
-
-
-/* ============================================================
-   Vorlesefunktion
-   ============================================================ */
-
-.reading-toolbar {
-  max-width: 860px !important;
-  margin: 0 auto 14px auto !important;
-  padding: 12px 14px !important;
-  border: 2px solid #D8DEE8 !important;
-  border-radius: 20px !important;
-  background: #FFFFFF !important;
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 10px !important;
-  align-items: center !important;
-}
-
-.reading-button {
-  min-height: 44px !important;
-  padding: 9px 15px !important;
-  border-radius: 999px !important;
-  border: 3px solid #00285A !important;
-  background: #FFFFFF !important;
-  color: #00285A !important;
-  font-weight: 900 !important;
-  cursor: pointer !important;
-}
-
-.reading-button:hover,
-.reading-button:focus-visible {
-  background: #EAF1F8 !important;
-  outline: 4px solid rgba(0, 40, 90, 0.22) !important;
-  outline-offset: 2px !important;
-}
-
-.reading-stop {
-  border-color: #C9541C !important;
-  color: #8F330F !important;
-}
-
-.reading-status {
-  margin: 0 !important;
-  font-size: 0.95rem !important;
-  font-weight: 800 !important;
-  color: #1F1F1F !important;
-}
-
-.reading-unavailable {
-  margin: 0 !important;
-  font-size: 0.95rem !important;
-  font-weight: 800 !important;
-}
-
-
-/* ============================================================
-   GRAFIK-FIX NACH VOLLAUDIT
-   Problem:
-   Frühere CSS-Regeln wie `.topic-card img` trafen auch die kleinen
-   Icon-Bilder in `.topic-icon`. Dadurch konnten Icons in Themenkarten
-   zu groß oder abgeschnitten dargestellt werden.
-   Lösung:
-   Illustrationen und kleine Icons werden am Ende der CSS-Datei
-   eindeutig getrennt.
-   ============================================================ */
-
-.topic-card .topic-illustration,
-.topic-choice .topic-intro-card .topic-illustration {
-  display: block !important;
-  width: 100% !important;
-  max-width: 260px !important;
-  height: 150px !important;
-  max-height: 150px !important;
-  object-fit: contain !important;
-  margin: 0 auto 14px auto !important;
-  border-radius: 18px !important;
-}
-
-.topic-choice .topic-intro-card .topic-illustration {
-  width: 220px !important;
-  max-width: 220px !important;
-  margin: 0 !important;
-}
-
-.topic-card .topic-icon,
-.simple-topic-card .topic-icon {
-  width: 58px !important;
-  height: 58px !important;
-  min-width: 58px !important;
-  min-height: 58px !important;
-  max-width: 58px !important;
-  max-height: 58px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: hidden !important;
-}
-
-.topic-card .topic-icon img,
-.simple-topic-card .topic-icon img,
-.symbol-heading .access-box-symbol img,
-.action-card .action-icon img {
-  width: 34px !important;
-  height: 34px !important;
-  min-width: 34px !important;
-  min-height: 34px !important;
-  max-width: 34px !important;
-  max-height: 34px !important;
-  object-fit: contain !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-}
-
-.action-card .action-icon img {
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  min-height: 32px !important;
-  max-width: 32px !important;
-  max-height: 32px !important;
-}
-
-@media (max-width: 760px) {
-  .topic-card .topic-illustration {
-    max-width: 220px !important;
-    height: 120px !important;
-    max-height: 120px !important;
-  }
-}
-
-
-/* ============================================================
-   Optionales Tonfeedback
-   Standard: Töne aus.
-   Der Schalter ist klein, sichtbar und per Tastatur bedienbar.
-   ============================================================ */
-
-.sound-toggle-button {
-  border: 2px solid rgba(0, 40, 90, 0.24);
-  background: #ffffff;
-  color: #00285A;
-  font: inherit;
-  font-weight: 700;
-  font-size: 0.9rem;
-  line-height: 1;
-  min-height: 42px;
-  padding: 0.55rem 0.75rem;
-  border-radius: 999px;
-  cursor: pointer;
-  white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(0, 40, 90, 0.08);
-}
-
-.sound-toggle-button[aria-pressed="true"] {
-  background: #EAF1F8;
-  border-color: #00285A;
-}
-
-.sound-toggle-button:focus-visible {
-  outline: 4px solid rgba(61, 184, 179, 0.55);
-  outline-offset: 3px;
-}
-
-@media (max-width: 640px) {
-  .app-header {
-    gap: 0.55rem;
-  }
-
-  .sound-toggle-button {
-    font-size: 0.78rem;
-    min-height: 38px;
-    padding: 0.45rem 0.6rem;
-  }
-}
-
-
-/* ============================================================
-   Ersteller-Auffindbarkeit für Google
-   Sichtbare Informationen sind wichtiger als reine Meta-Tags.
-   ============================================================ */
-
-.creator-search-info {
-  max-width: 1100px;
-  margin: 0 auto 1.5rem auto;
-  padding: 0 1rem 1rem 1rem;
-  color: #4A5568;
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-.creator-search-info p {
-  margin: 0;
-  padding: 0.85rem 1rem;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(0, 40, 90, 0.10);
-  border-radius: 16px;
-}
-
-.creator-search-info a,
-.small-footer-notice a {
-  color: #00285A;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.creator-page {
-  max-width: 920px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 24px 16px 60px;
 }
 
-.creator-page .lead {
+.creator-page .card,
+.static-page .card {
+  margin-bottom: 20px;
+}
+
+.creator-page .lead,
+.static-page .lead {
   font-size: 1.15rem;
-  font-weight: 700;
+  color: var(--ink-soft);
 }
 
-.creator-page ul {
-  padding-left: 1.4rem;
-}
-
-.creator-page li {
-  margin-bottom: 0.45rem;
-}
-
-
-
-/* Dezenter Ersteller-Hinweis: soll die Lernplattform nicht dominieren */
-.creator-search-info--subtle {
-  max-width: 980px;
-  margin: 1.5rem auto 0;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(0, 40, 90, 0.12);
-  border-radius: 0.9rem;
-  background: rgba(255, 255, 255, 0.55);
-  font-size: 0.9rem;
-  line-height: 1.45;
-  color: #4b5563;
-}
-
-.creator-search-info--subtle p {
-  margin: 0;
-}
-
-.creator-search-info--subtle a {
-  font-weight: 600;
-  text-decoration: none;
-}
-
-
-/* Dezent platzierter Ersteller-Hinweis auf Abschluss-/Merkseiten */
-.creator-final-notice {
-  max-width: 760px;
-  margin: 1.25rem auto 0;
-  padding: 0.65rem 0.9rem;
-  border-top: 1px solid rgba(0, 40, 90, 0.14);
-  font-size: 0.86rem;
-  line-height: 1.45;
-  color: #667085;
+.static-page-footer {
   text-align: center;
-}
-
-.creator-final-notice p {
-  margin: 0;
-}
-
-.creator-final-notice a {
-  color: inherit;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-}
-
-
-/* Professionelle, unaufdringliche Ersteller-Verlinkung */
-.creator-search-info,
-.creator-final-notice {
-  display: none !important;
-}
-
-.site-footer a[href="ersteller.html"],
-.footer a[href="ersteller.html"] {
-  font-weight: 600;
-}
-
-
-/* Profilboxen werden auf der Lernplattform nicht angezeigt.
-   Die Erstellerseite bleibt als separate Seite über Sitemap/URL erreichbar. */
-.creator-search-info,
-.creator-search-info--subtle,
-.creator-final-notice {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-
-/* Kleiner Vorlese-Button auf den Startkarten: liest nur den Themen-Namen */
-.card-read-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  margin: 0.45rem auto 0;
-  padding: 0.35rem 0.55rem;
-  border: 1px solid rgba(0, 40, 90, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.86);
-  color: #24364b;
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 700;
-  line-height: 1.1;
-  cursor: pointer;
-}
-
-.card-read-button:hover,
-.card-read-button:focus-visible {
-  background: #ffffff;
-  outline: 3px solid rgba(0, 40, 90, 0.18);
-  outline-offset: 2px;
-}
-
-.card-read-button:active {
-  transform: translateY(1px);
-}
-
-
-/* Vorlese-Button auf Lernweg-Karten */
-.card-read-button--path {
-  margin-top: 0.55rem;
-  align-self: flex-start;
-  font-size: 0.78rem;
-  padding: 0.32rem 0.52rem;
-}
-
-.action-card .card-read-button--path,
-.support-help-button .card-read-button--path {
-  display: inline-flex;
-}
-
-.support-help-button .card-read-button--path {
-  margin-left: 0;
-}
-
-
-/* Vorlese-Leiste: bessere Anordnung direkt über dem Inhalt */
-.reading-toolbar {
-  max-width: 760px;
-  margin: 0 auto 0.9rem auto;
-  padding: 0.75rem 0.9rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  border: 1px solid rgba(0, 40, 90, 0.14);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 6px 18px rgba(0, 40, 90, 0.06);
-}
-
-.reading-toolbar button,
-.reading-toolbar .button,
-.reading-toolbar [role="button"] {
-  min-width: 0;
-  width: auto;
-  min-height: 2.5rem;
-  padding: 0.55rem 0.85rem;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.reading-toolbar .reading-status,
-.reading-toolbar-status,
-#readingStatus {
-  flex-basis: 100%;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #475467;
-  min-height: 1.2rem;
-}
-
-.lesson-card,
-.feedback-page,
-.quiz-card,
-.quiz-result-card,
-.memory-card {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 900px) {
-  .reading-toolbar {
-    max-width: 760px;
-  }
-}
-
-@media (max-width: 640px) {
-  .reading-toolbar {
-    margin: 0 1rem 0.75rem 1rem;
-    justify-content: stretch;
-  }
-
-  .reading-toolbar button,
-  .reading-toolbar .button,
-  .reading-toolbar [role="button"] {
-    flex: 1 1 100%;
-    width: 100%;
-  }
-}
-
-
-/* Vorlese-Buttons: klarere Unterscheidung und langsamer Modus */
-.reading-button,
-.reading-toolbar button {
-  font-weight: 800;
-}
-
-.reading-button-normal {
-  border: 2px solid #00285A !important;
-  background: #FFFFFF !important;
-  color: #00285A !important;
-}
-
-.reading-button-slow {
-  border: 2px solid #8A5A00 !important;
-  background: #FFF4CC !important;
-  color: #5C3B00 !important;
-}
-
-.reading-button-stop {
-  border: 2px solid #B42318 !important;
-  background: #FFF1F0 !important;
-  color: #B42318 !important;
-}
-
-.reading-button-normal:hover,
-.reading-button-normal:focus-visible {
-  background: #EAF2FF !important;
-}
-
-.reading-button-slow:hover,
-.reading-button-slow:focus-visible {
-  background: #FFE8A3 !important;
-}
-
-.reading-button-stop:hover,
-.reading-button-stop:focus-visible {
-  background: #FFDAD6 !important;
-}
-
-
-/* ============================================================
-   PROFESSIONELLE ENDREGELN
-   Diese Regeln bündeln die finale Darstellung.
-   Sie halten die Lernplattform ruhig, lesbar und barrierearm.
-   ============================================================ */
-
-:root {
-  --tilbeck-blue: #00285A;
-  --tilbeck-turquoise: #3DB8B3;
-  --text-main: #1F2937;
-  --text-muted: #667085;
-  --surface-main: #FFFFFF;
-  --surface-soft: #F8F6F0;
-  --border-soft: rgba(0, 40, 90, 0.14);
-  --shadow-soft: 0 8px 22px rgba(0, 40, 90, 0.07);
-}
-
-/* Alte Profilboxen erscheinen nicht auf der Lernplattform. */
-.creator-search-info,
-.creator-search-info--subtle,
-.creator-final-notice {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-/* Lesbarkeit */
-body {
-  color: var(--text-main);
-  background: var(--surface-soft);
-}
-
-p,
-li,
-button,
-input,
-select,
-textarea {
-  font-size: max(1rem, 16px);
-  line-height: 1.55;
-}
-
-/* Rechtliche Hinweise dürfen kleiner sein, aber gut lesbar bleiben. */
-.legal-footer,
-.site-footer,
-.footer,
-footer {
   font-size: 0.92rem;
-  line-height: 1.45;
-  color: #4B5563;
+  color: var(--ink-soft);
+  margin-top: 24px;
 }
 
-/* Karten ruhiger und einheitlicher */
-.card,
-.lesson-card,
-.topic-intro-card,
-.quiz-card,
-.quiz-result-card,
-.memory-card,
-.feedback-page {
-  border: 1px solid var(--border-soft);
-  border-radius: 1rem;
-  background: var(--surface-main);
-  box-shadow: var(--shadow-soft);
-}
-
-/* Startkarten: Vorlesen bleibt klein, aber lesbar */
-.card-read-button {
-  font-size: 0.95rem !important;
-  min-height: 2.35rem;
-  padding: 0.42rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 40, 90, 0.18);
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--tilbeck-blue);
-  font-weight: 800;
-}
-
-.card-read-button:hover,
-.card-read-button:focus-visible {
-  background: #EAF7F7;
-  outline: 3px solid rgba(61, 184, 179, 0.32);
-  outline-offset: 2px;
-}
-
-/* Lernweg-Karten: kleine Vorlesen-Schaltfläche innerhalb der Karte */
-.card-read-button--path {
-  margin-top: 0.55rem;
-  align-self: flex-start;
-  font-size: 0.95rem !important;
-}
-
-/* Vorlese-Leiste: kompakt über dem Lerninhalt */
-.reading-toolbar {
-  max-width: 760px;
-  margin: 0 auto 1rem auto;
-  padding: 0.75rem 0.9rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  border: 1px solid var(--border-soft);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 6px 18px rgba(0, 40, 90, 0.06);
-}
-
-.reading-button,
-.reading-toolbar button {
-  width: auto;
-  min-width: 8.5rem;
-  min-height: 2.75rem;
-  padding: 0.55rem 0.95rem;
-  border-radius: 999px;
-  font-weight: 800;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.reading-button-normal {
-  border: 2px solid #00285A;
-  background: #FFFFFF;
-  color: #00285A;
-}
-
-.reading-button-slow {
-  border: 2px solid #8A5A00;
-  background: #FFF4CC;
-  color: #5C3B00;
-}
-
-.reading-button-stop {
-  border: 2px solid #B42318;
-  background: #FFF1F0;
-  color: #B42318;
-}
-
-.reading-button-normal:hover,
-.reading-button-normal:focus-visible {
-  background: #EAF2FF;
-}
-
-.reading-button-slow:hover,
-.reading-button-slow:focus-visible {
-  background: #FFE8A3;
-}
-
-.reading-button-stop:hover,
-.reading-button-stop:focus-visible {
-  background: #FFDAD6;
-}
-
-.reading-status,
-#readingStatus {
-  flex-basis: 100%;
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  min-height: 1.3rem;
-}
-
-/* Logo- und Footerbereich kompakter */
-.brand-logos,
-.logo-row,
-.logos {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.legal-footer,
-.site-footer,
-.footer,
-footer {
-  margin-top: 1rem;
-}
-
-/* Desktop: unnötigen Leerraum reduzieren */
-.content,
-.main-content,
-#content {
-  padding-bottom: 1.5rem;
-}
-
-/* Mobile: klare Bedienung ohne gequetschte Buttons */
-@media (max-width: 640px) {
-  .reading-toolbar {
-    margin: 0 1rem 0.85rem 1rem;
-    justify-content: stretch;
-  }
-
-  .reading-button,
-  .reading-toolbar button {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .card-read-button,
-  .card-read-button--path {
-    width: auto;
-    min-width: 7.5rem;
-  }
-
-  .topic-card,
-  .action-card,
-  .support-help-button {
-    min-height: 4.25rem;
-  }
-}
-
-
-/* Geräusche-Schalter: klare Farblogik */
-.sound-toggle {
-  min-height: 2.5rem;
-  padding: 0.5rem 0.85rem;
-  border-radius: 999px;
-  font-weight: 800;
-  border: 2px solid transparent;
-  cursor: pointer;
-}
-
-.sound-toggle.sound-off {
-  background: #FFF1F0;
-  color: #B42318;
-  border-color: #B42318;
-}
-
-.sound-toggle.sound-on {
-  background: #ECFDF3;
-  color: #027A48;
-  border-color: #027A48;
-}
-
-.sound-toggle.sound-off:hover,
-.sound-toggle.sound-off:focus-visible {
-  background: #FFDAD6;
-  outline: 3px solid rgba(180, 35, 24, 0.22);
-  outline-offset: 2px;
-}
-
-.sound-toggle.sound-on:hover,
-.sound-toggle.sound-on:focus-visible {
-  background: #D1FADF;
-  outline: 3px solid rgba(2, 122, 72, 0.22);
-  outline-offset: 2px;
-}
-
-
-/* ============================================================
-   Finale pädagogische Verbesserungen
-   ============================================================ */
-
-.utility-bar {
-  max-width: 760px;
-  margin: 0 auto 0.9rem auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.55rem;
-}
-
-.utility-button {
-  min-height: 2.5rem;
-  padding: 0.5rem 0.85rem;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 40, 90, 0.18);
-  background: #ffffff;
-  color: #00285A;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.utility-button:hover,
-.utility-button:focus-visible {
-  background: #EAF7F7;
-  outline: 3px solid rgba(61, 184, 179, 0.28);
-  outline-offset: 2px;
-}
-
-.pause-button {
-  border-color: #8A5A00;
-  color: #5C3B00;
-  background: #FFF8E1;
-}
-
-.simple-mode-button[aria-pressed="true"] {
-  border-color: #027A48;
-  background: #ECFDF3;
-  color: #027A48;
-}
-
-.calm-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
-  background: rgba(0, 40, 90, 0.38);
-}
-
-.calm-box {
-  width: min(92vw, 520px);
-  padding: 1.4rem;
-  border-radius: 1.2rem;
-  background: #ffffff;
-  border: 1px solid rgba(0, 40, 90, 0.16);
-  box-shadow: 0 18px 40px rgba(0, 40, 90, 0.22);
-  text-align: center;
-}
-
-.calm-box h2 {
-  margin-top: 0;
-  color: #00285A;
-}
-
-.symbol-help-list {
-  text-align: left;
-  display: grid;
-  gap: 0.55rem;
-  padding-left: 1.2rem;
-}
-
-.completion-page {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.completion-card ul {
-  margin: 1rem 0;
-}
-
-.completion-actions,
-.memory-print-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.2rem;
-}
-
-.primary-action,
-.secondary-action {
-  min-height: 2.75rem;
-  padding: 0.65rem 0.95rem;
-  border-radius: 999px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.primary-action {
-  border: 2px solid #00285A;
-  background: #00285A;
-  color: #ffffff;
-}
-
-.secondary-action {
-  border: 2px solid rgba(0, 40, 90, 0.25);
-  background: #ffffff;
-  color: #00285A;
-}
-
-.print-action {
-  border-color: #3DB8B3;
-}
-
-.simple-mode .topic-desc,
-.simple-mode .action-desc,
-.simple-mode .reading-status,
-.simple-mode .legal-footer {
-  display: none;
-}
-
-.simple-mode .card,
-.simple-mode .lesson-card,
-.simple-mode .topic-card,
-.simple-mode .action-card {
-  box-shadow: none;
-}
-
-.simple-mode p,
-.simple-mode li {
-  font-size: 1.08rem;
-  line-height: 1.65;
-}
-
-@media (max-width: 640px) {
-  .utility-bar {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    justify-content: stretch;
-  }
-
-  .utility-button,
-  .completion-actions button,
-  .memory-print-actions button {
-    width: 100%;
-  }
-}
+/* ---------- Druck: nur die Merk-Karte ---------- */
 
 @media print {
   body {
@@ -6211,21 +1244,72 @@ footer {
   }
 
   .app-header,
-  .reading-toolbar,
+  .progress-area,
+  .nav,
+  .app-footer,
+  .small-footer-notice,
   .utility-bar,
-  .bottom-nav,
-  .legal-footer,
-  .site-footer,
-  footer,
-  .primary-action,
-  .secondary-action,
-  .card-read-button {
+  .reading-toolbar,
+  .certificate-actions,
+  .task-help-area,
+  .support-help-area,
+  .progress-consent {
     display: none !important;
   }
 
-  .card,
-  .memory-card {
-    box-shadow: none !important;
-    border: 1px solid #cccccc !important;
+  .certificate-frame {
+    border-color: #000000;
+  }
+
+  .certificate-kicker,
+  .certificate-topic {
+    color: #000000;
+  }
+
+  .card {
+    border: 1px solid #000000;
+    box-shadow: none;
+  }
+}
+
+/* ---------- Kleine Bildschirme ---------- */
+
+@media (max-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+
+  .app {
+    padding: 10px 10px 40px;
+  }
+
+  .app-header {
+    flex-wrap: wrap;
+  }
+
+  .header-text {
+    order: 2;
+    flex-basis: 100%;
+  }
+
+  .sound-toggle-button {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .card {
+    padding: 20px 16px 24px;
+  }
+
+  .topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    bottom: 8px;
   }
 }

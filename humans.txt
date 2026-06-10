@@ -6,6 +6,7 @@ Projekt: Sicher und selbstbestimmt im Internet
 /* SITE */
 Sprache: Deutsch
 Ziel: Barrierearmes Selbstlernangebot in Einfacher Sprache
-Themen: Datenschutz, WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok, Hilfe bei Problemen
+Themen: Datenschutz, WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok, Hilfe bei Problemen, KI und Chatbots, Fake News und KI-Fakes, Online-Betrug, Online-Einkaufen
+Stand: Juni 2026
 Technik: HTML, CSS, JavaScript
 Speicherung: kein Login, keine Cookies, kein localStorage

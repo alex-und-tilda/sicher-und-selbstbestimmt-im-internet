@@ -694,7 +694,13 @@ const topics = [
         "text": [
           "Manche Nachrichten fragen nach Geld.",
           "Fremde Nummern können sich als Bekannte ausgeben.",
+          "Ein bekannter Trick ist: Hallo Mama, ich habe eine neue Nummer. Ich brauche Geld.",
+          "Auch Sprachnachrichten können mit KI gefälscht sein.",
           "Du schickst kein Geld an fremde Nummern."
+        ],
+        "examples": [
+          "Hallo Papa, mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir Geld überweisen?",
+          "Eine Sprachnachricht klingt wie deine Schwester. Sie will Geld. Die Stimme kann gefälscht sein."
         ],
         "practice": {
           "question": "Eine fremde Nummer bittet um Geld. Was ist besser?",
@@ -814,6 +820,23 @@ const topics = [
         }
       },
       {
+        "title": "Die KI in WhatsApp",
+        "module": "KI",
+        "icon": "understand",
+        "text": [
+          "In WhatsApp gibt es jetzt eine KI. Sie heißt Meta AI.",
+          "Du erkennst sie an einem blauen Kreis.",
+          "Die KI ist kein Mensch. Sie ist ein Programm.",
+          "Du musst die KI nicht benutzen."
+        ],
+        "bullets": [
+          "Die KI kann Fragen beantworten.",
+          "Die KI kann Fehler machen.",
+          "Schreibe der KI keine privaten Dinge."
+        ],
+        "remember": "Die KI in WhatsApp ist kein Mensch."
+      },
+      {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
@@ -838,6 +861,7 @@ const topics = [
         ],
         "bullets": [
           "Fremde Nummern prüfen.",
+          "Kein Geld an fremde Nummern schicken.",
           "Unbekannte Links nicht öffnen.",
           "Codes nicht weitergeben.",
           "Fotos prüfen.",
@@ -963,6 +987,7 @@ const topics = [
       "Ich öffne unbekannte Links nicht sofort.",
       "Ich gebe keinen WhatsApp-Code weiter.",
       "Ich prüfe fremde Nummern.",
+      "Ich schicke kein Geld an fremde Nummern.",
       "Ich prüfe Fotos vor dem Senden.",
       "Ich mache Pause bei Stress."
     ],
@@ -973,8 +998,8 @@ const topics = [
       5,
       7,
       8,
-      9,
-      10
+      10,
+      11
     ],
     "qrLink": "index.html#whatsapp",
     "qrShortLink": "index.html#whatsapp:kurz",
@@ -2098,6 +2123,18 @@ const topics = [
         "remember": "Ich muss nicht auf Kommentare reagieren."
       },
       {
+        "title": "Nicht jedes Video ist echt",
+        "module": "KI",
+        "icon": "warning",
+        "text": [
+          "Manche Videos sind mit KI gemacht.",
+          "Sie sehen echt aus. Aber sie sind gefälscht.",
+          "Auch bekannte Menschen werden gefälscht.",
+          "Mehr dazu lernst du im Thema: Fake News und KI-Fakes."
+        ],
+        "remember": "Auch Videos können gefälscht sein."
+      },
+      {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
@@ -2123,6 +2160,7 @@ const topics = [
         "bullets": [
           "Videos prüfen.",
           "Werbung erkennen.",
+          "Nicht jedes Video ist echt.",
           "Pausen machen.",
           "Gefährliche Dinge nicht nachmachen."
         ]
@@ -2256,7 +2294,8 @@ const topics = [
       4,
       5,
       7,
-      8
+      8,
+      9
     ],
     "qrLink": "index.html#youtube",
     "qrShortLink": "index.html#youtube:kurz",
@@ -2928,6 +2967,18 @@ const topics = [
         "remember": "Ich darf TikTok weglegen."
       },
       {
+        "title": "Nicht jedes Video ist echt",
+        "module": "KI",
+        "icon": "warning",
+        "text": [
+          "Viele Videos auf TikTok sind mit KI gemacht.",
+          "Sie sehen echt aus. Aber sie sind gefälscht.",
+          "Auch Stimmen und Gesichter können gefälscht sein.",
+          "Mehr dazu lernst du im Thema: Fake News und KI-Fakes."
+        ],
+        "remember": "Auch Videos können gefälscht sein."
+      },
+      {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
@@ -3076,7 +3127,8 @@ const topics = [
       "Ich mache gefährliche Trends nicht nach.",
       "Ich mache Pausen.",
       "Ich schütze private Daten.",
-      "Ich prüfe Videos vor dem Posten."
+      "Ich prüfe Videos vor dem Posten.",
+      "Nicht jedes Video ist echt."
     ],
     "shortLessonIndexes": [
       0,
@@ -3086,7 +3138,8 @@ const topics = [
       5,
       7,
       8,
-      9
+      9,
+      10
     ],
     "qrLink": "index.html#tiktok",
     "qrShortLink": "index.html#tiktok:kurz",
@@ -3525,6 +3578,1356 @@ const topics = [
       ],
       "correct": 0,
       "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+    }
+  },
+  {
+    "id": "ki",
+    "title": "KI und Chatbots",
+    "icon": "ki",
+    "desc": "Künstliche Intelligenz verstehen und sicher nutzen",
+    "illustration": "assets/illustrations/ki.svg",
+    "lessons": [
+      {
+        "title": "Start",
+        "module": "Start",
+        "icon": "ki",
+        "text": [
+          "Hier lernst du etwas über KI.",
+          "KI bedeutet: Künstliche Intelligenz.",
+          "Du lernst: Was kann KI? Was kann KI nicht?",
+          "Du lernst, wie du KI sicher nutzt."
+        ]
+      },
+      {
+        "title": "Was ist KI?",
+        "module": "Grundwissen",
+        "icon": "understand",
+        "text": [
+          "KI ist ein Computer-Programm.",
+          "Das Programm hat sehr viele Texte und Bilder gelernt.",
+          "Darum kann KI Fragen beantworten.",
+          "KI kann auch Texte und Bilder machen."
+        ],
+        "bullets": [
+          "KI kann mit dir schreiben.",
+          "KI kann mit dir sprechen.",
+          "KI kann Bilder machen.",
+          "KI kann Texte schreiben."
+        ],
+        "remember": "KI ist ein Programm. KI ist kein Mensch."
+      },
+      {
+        "title": "Wo triffst du KI?",
+        "module": "Grundwissen",
+        "icon": "example",
+        "text": [
+          "KI ist heute in vielen Apps.",
+          "Manchmal siehst du KI nicht sofort.",
+          "Hier sind bekannte Beispiele."
+        ],
+        "bullets": [
+          "Chatbots, zum Beispiel ChatGPT",
+          "Sprach-Hilfen, zum Beispiel Alexa oder Siri",
+          "KI in WhatsApp und Instagram, zum Beispiel Meta AI",
+          "KI-Bilder und KI-Videos im Internet"
+        ],
+        "remember": "KI ist in vielen Apps. Auch wenn ich sie nicht sehe."
+      },
+      {
+        "title": "Ein Chatbot ist kein Mensch",
+        "module": "Grundwissen",
+        "icon": "message",
+        "text": [
+          "Ein Chatbot schreibt sehr freundlich.",
+          "Es kann sich wie ein Freund anfühlen.",
+          "Aber ein Chatbot ist ein Programm.",
+          "Ein Chatbot hat keine Gefühle."
+        ],
+        "warning": "Ein Chatbot ist kein echter Freund. Wichtige Sorgen besprichst du mit einem Menschen.",
+        "practice": {
+          "question": "Ein Chatbot schreibt: Ich bin dein Freund. Was stimmt?",
+          "answers": [
+            "Der Chatbot ist ein echter Freund.",
+            "Der Chatbot ist ein Programm."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot kann nur so tun. Er ist ein Programm ohne Gefühle.",
+          "feedbackCorrect": "Das ist richtig. Ein Chatbot ist ein Programm. Echte Freunde sind Menschen.",
+          "remember": "Ein Chatbot ist kein Mensch."
+        }
+      },
+      {
+        "title": "KI macht Fehler",
+        "module": "Sicher nutzen",
+        "icon": "warning",
+        "text": [
+          "KI klingt oft sehr sicher.",
+          "Aber KI kann Fehler machen.",
+          "Manchmal erfindet KI sogar Dinge.",
+          "Darum prüfst du wichtige Antworten."
+        ],
+        "examples": [
+          "Die KI nennt eine falsche Telefon-Nummer.",
+          "Die KI erzählt etwas, das nie passiert ist."
+        ],
+        "practice": {
+          "question": "Die KI gibt dir eine wichtige Antwort. Was ist besser?",
+          "answers": [
+            "Ich glaube alles sofort.",
+            "Ich prüfe die Antwort oder frage einen Menschen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist noch nicht richtig. KI kann Fehler machen. Auch wenn sie sicher klingt.",
+          "feedbackCorrect": "Das ist richtig. Wichtige Antworten prüfst du. Du kannst einen Menschen fragen.",
+          "remember": "KI kann Fehler machen. Ich prüfe wichtige Antworten."
+        }
+      },
+      {
+        "title": "Keine privaten Daten",
+        "module": "Sicher nutzen",
+        "icon": "lock",
+        "text": [
+          "Was du der KI schreibst, wird oft gespeichert.",
+          "Darum gibst du der KI keine privaten Daten."
+        ],
+        "bullets": [
+          "kein Passwort",
+          "keine Adresse",
+          "keine Bank-Daten",
+          "keine sehr privaten Geheimnisse"
+        ],
+        "practice": {
+          "question": "Ein Chatbot fragt nach deiner Adresse. Was ist besser?",
+          "answers": [
+            "Ich schreibe meine Adresse.",
+            "Ich schreibe meine Adresse nicht."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat. Auch bei einer KI.",
+          "feedbackCorrect": "Das ist sicher. Private Daten bleiben bei dir. Auch bei einer KI.",
+          "remember": "Ich gebe der KI keine privaten Daten."
+        }
+      },
+      {
+        "title": "Gesundheit und Geld",
+        "module": "Sicher nutzen",
+        "icon": "help",
+        "text": [
+          "Bei Gesundheit und Geld ist Vorsicht wichtig.",
+          "Die KI kennt dich nicht.",
+          "Die KI kann falsche Tipps geben.",
+          "Frag bei solchen Themen immer auch einen Menschen."
+        ],
+        "examples": [
+          "Du bist krank. Du fragst die KI. Besser: Du fragst auch eine Ärztin oder einen Arzt.",
+          "Du willst Geld ausgeben. Die KI rät dir etwas. Besser: Du fragst eine Person, der du vertraust."
+        ],
+        "practice": {
+          "question": "Du bist krank. Die KI gibt dir einen Tipp. Was ist besser?",
+          "answers": [
+            "Ich mache nur, was die KI sagt.",
+            "Ich frage auch eine Ärztin oder einen Arzt."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Die KI kennt dich nicht. Sie kann falsch liegen.",
+          "feedbackCorrect": "Das ist richtig. Bei Gesundheit fragst du Fachleute. Die KI ersetzt keinen Arzt.",
+          "remember": "Bei Gesundheit und Geld frage ich Menschen."
+        }
+      },
+      {
+        "title": "KI kann Bilder und Stimmen fälschen",
+        "module": "Achtung",
+        "icon": "photo",
+        "text": [
+          "KI kann Bilder machen, die echt aussehen.",
+          "KI kann Stimmen nachmachen.",
+          "Betrüger nutzen das manchmal.",
+          "Mehr dazu lernst du im Thema: Fake News und KI-Fakes."
+        ],
+        "warning": "Nicht alles, was echt aussieht, ist echt."
+      },
+      {
+        "title": "Was kann ich tun?",
+        "module": "Hilfe",
+        "icon": "check",
+        "text": [
+          "Du darfst KI benutzen.",
+          "KI kann dir helfen.",
+          "Diese Regeln schützen dich."
+        ],
+        "bullets": [
+          "Ich weiß: KI ist ein Programm.",
+          "Ich prüfe wichtige Antworten.",
+          "Ich gebe keine privaten Daten ein.",
+          "Bei Gesundheit und Geld frage ich Menschen.",
+          "Bei Unsicherheit hole ich Hilfe."
+        ]
+      },
+      {
+        "title": "Das merke ich mir",
+        "module": "Merken",
+        "icon": "remember",
+        "text": [
+          "Du hast viel über KI gelernt.",
+          "Diese Sätze kannst du dir merken."
+        ],
+        "bullets": [
+          "KI ist ein Programm. Kein Mensch.",
+          "KI kann Fehler machen.",
+          "Ich prüfe wichtige Antworten.",
+          "Private Daten bleiben bei mir.",
+          "Ich darf mir Unterstützung holen."
+        ],
+        "remember": "Ich nutze KI mit Verstand."
+      }
+    ],
+    "quizQuestions": [
+      {
+        "question": "Was ist KI?",
+        "answers": [
+          "Ein Mensch.",
+          "Ein Computer-Programm."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. KI ist ein Computer-Programm.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI ist ein Computer-Programm. Kein Mensch."
+      },
+      {
+        "question": "Hat ein Chatbot Gefühle?",
+        "answers": [
+          "Ja, wie ein Mensch.",
+          "Nein, er ist ein Programm."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Ein Chatbot hat keine Gefühle.",
+        "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot kann nur so tun. Er ist ein Programm."
+      },
+      {
+        "question": "Kann KI Fehler machen?",
+        "answers": [
+          "Ja, KI kann Fehler machen.",
+          "Nein, KI weiß alles."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. KI kann Fehler machen. Auch wenn sie sicher klingt.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI kann Fehler machen und Dinge erfinden."
+      },
+      {
+        "question": "Ein Chatbot fragt nach deinem Passwort. Was ist besser?",
+        "answers": [
+          "Passwort eingeben.",
+          "Passwort nicht eingeben."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Dein Passwort bleibt geheim. Auch bei einer KI.",
+        "feedbackWrong": "Das ist noch nicht richtig. Dein Passwort ist privat. Du gibst es nie weiter."
+      },
+      {
+        "question": "Du bist krank. Was ist besser?",
+        "answers": [
+          "Nur die KI fragen.",
+          "Auch eine Ärztin oder einen Arzt fragen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Bei Gesundheit fragst du Fachleute.",
+        "feedbackWrong": "Das ist noch nicht richtig. Die KI kennt dich nicht. Sie ersetzt keinen Arzt."
+      },
+      {
+        "question": "Die KI gibt eine wichtige Antwort. Was machst du?",
+        "answers": [
+          "Sofort alles glauben.",
+          "Die Antwort prüfen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Wichtige Antworten prüfst du.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI klingt sicher, kann aber falsch liegen."
+      },
+      {
+        "question": "Kann KI Bilder fälschen?",
+        "answers": [
+          "Ja, KI kann Bilder machen, die echt aussehen.",
+          "Nein, das geht nicht."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. KI-Bilder können sehr echt aussehen.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI kann Bilder und Stimmen fälschen."
+      },
+      {
+        "question": "Ein Chatbot schreibt sehr nett. Was stimmt?",
+        "answers": [
+          "Er ist ein echter Freund.",
+          "Er ist ein Programm."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Echte Freunde sind Menschen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot ist ein Programm. Kein Freund."
+      }
+    ],
+    "helpQuestions": [
+      "Spreche ich mit einem Menschen oder mit einer KI?",
+      "Ist diese Antwort wirklich richtig?",
+      "Will die KI private Daten von mir?",
+      "Geht es um Gesundheit oder Geld?",
+      "Brauche ich Unterstützung?"
+    ],
+    "memoryRules": [
+      "KI ist ein Programm. Kein Mensch.",
+      "KI kann Fehler machen.",
+      "Ich prüfe wichtige Antworten.",
+      "Ich gebe der KI keine privaten Daten.",
+      "Bei Gesundheit und Geld frage ich Menschen.",
+      "Ich darf mir Unterstützung holen."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      8,
+      9
+    ],
+    "miniQuestion": {
+      "question": "Was ist KI?",
+      "answers": [
+        "Ein Computer-Programm",
+        "Ein Mensch",
+        "Ein Tier"
+      ],
+      "correct": 0,
+      "explanation": "KI ist ein Computer-Programm. Es kann schreiben und sprechen. Aber es ist kein Mensch."
+    }
+  },
+  {
+    "id": "fakes",
+    "title": "Fake News und KI-Fakes",
+    "icon": "fake",
+    "desc": "Falsche Nachrichten, Bilder und Stimmen erkennen",
+    "illustration": "assets/illustrations/fakes.svg",
+    "lessons": [
+      {
+        "title": "Start",
+        "module": "Start",
+        "icon": "fake",
+        "text": [
+          "Hier lernst du etwas über Fakes.",
+          "Fake bedeutet: gefälscht oder nicht echt.",
+          "Du lernst: Wie erkenne ich falsche Nachrichten?",
+          "Du lernst: Wie erkenne ich falsche Bilder und Stimmen?"
+        ]
+      },
+      {
+        "title": "Was sind Fake News?",
+        "module": "Grundwissen",
+        "icon": "report",
+        "text": [
+          "Fake News sind falsche Nachrichten.",
+          "Jemand verbreitet sie mit Absicht.",
+          "Fake News sehen oft aus wie echte Nachrichten.",
+          "Darum sind sie schwer zu erkennen."
+        ],
+        "remember": "Nicht jede Nachricht im Internet ist wahr."
+      },
+      {
+        "title": "Warum gibt es Fake News?",
+        "module": "Grundwissen",
+        "icon": "understand",
+        "text": [
+          "Menschen machen Fake News aus verschiedenen Gründen."
+        ],
+        "bullets": [
+          "Sie wollen Geld verdienen mit vielen Klicks.",
+          "Sie wollen Menschen wütend machen.",
+          "Sie wollen Menschen täuschen.",
+          "Sie wollen eine Meinung verbreiten."
+        ],
+        "remember": "Fake News haben ein Ziel. Sie wollen mich beeinflussen."
+      },
+      {
+        "title": "KI-Bilder erkennen",
+        "module": "KI-Fakes",
+        "icon": "photo",
+        "text": [
+          "KI kann Bilder machen, die echt aussehen.",
+          "Manche Fehler kannst du sehen.",
+          "Aber Achtung: Viele KI-Bilder haben keine Fehler mehr."
+        ],
+        "bullets": [
+          "Schau auf Hände und Finger.",
+          "Schau auf Schrift im Bild.",
+          "Schau auf Licht und Schatten.",
+          "Wirkt das Bild zu perfekt?"
+        ],
+        "practice": {
+          "question": "Ein unglaubliches Foto im Internet. Was ist besser?",
+          "answers": [
+            "Ich glaube das Foto sofort.",
+            "Ich bleibe erst einmal skeptisch."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist noch nicht richtig. KI kann Fotos fälschen. Auch sehr echte Fotos.",
+          "feedbackCorrect": "Das ist richtig. Ein Foto ist kein Beweis mehr. KI kann Fotos fälschen.",
+          "remember": "Ein Foto kann gefälscht sein."
+        }
+      },
+      {
+        "title": "Gefälschte Videos: Deepfakes",
+        "module": "KI-Fakes",
+        "icon": "warning",
+        "text": [
+          "Ein Deepfake ist ein gefälschtes Video.",
+          "KI tauscht darin Gesicht oder Stimme aus.",
+          "Im Video sagt eine Person Dinge, die sie nie gesagt hat.",
+          "Oft werden bekannte Menschen gefälscht."
+        ],
+        "examples": [
+          "Ein Video zeigt einen Promi. Er macht Werbung für Geld-Anlagen. Das Video ist gefälscht.",
+          "Ein Video zeigt eine Politikerin. Sie sagt etwas Schlimmes. Das Video ist gefälscht."
+        ],
+        "practice": {
+          "question": "Ein Promi verspricht im Video schnelles Geld. Was ist besser?",
+          "answers": [
+            "Ich mache sofort mit.",
+            "Ich mache nicht mit. Das Video kann gefälscht sein."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Solche Videos sind fast immer Betrug mit Deepfakes.",
+          "feedbackCorrect": "Das ist richtig. Promi-Videos mit Geld-Versprechen sind fast immer gefälscht.",
+          "remember": "Auch Videos können gefälscht sein."
+        }
+      },
+      {
+        "title": "Geklonte Stimmen am Telefon",
+        "module": "KI-Fakes",
+        "icon": "message",
+        "text": [
+          "KI kann Stimmen nachmachen.",
+          "Betrüger rufen an. Die Stimme klingt wie deine Familie.",
+          "Die Stimme sagt: Ich brauche schnell Geld.",
+          "Das nennt man Schockanruf."
+        ],
+        "warning": "Lege auf. Ruf die Person selbst an. Nutze die Nummer, die du kennst.",
+        "practice": {
+          "question": "Ein Anruf: Die Stimme klingt wie dein Bruder. Er will sofort Geld. Was ist besser?",
+          "answers": [
+            "Ich zahle sofort.",
+            "Ich lege auf und rufe meinen Bruder selbst an."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Die Stimme kann mit KI gefälscht sein.",
+          "feedbackCorrect": "Das ist richtig. Du rufst selbst zurück. So merkst du den Betrug.",
+          "remember": "Bei Geld-Anrufen lege ich auf und rufe selbst zurück."
+        }
+      },
+      {
+        "title": "Nachrichten prüfen",
+        "module": "Prüfen",
+        "icon": "check",
+        "text": [
+          "Du kannst Nachrichten prüfen.",
+          "Diese Fragen helfen dir."
+        ],
+        "bullets": [
+          "Wer hat das geschrieben?",
+          "Steht das auch bei bekannten Nachrichten-Seiten?",
+          "Wie alt ist die Nachricht?",
+          "Gibt es eine Quelle?"
+        ],
+        "practice": {
+          "question": "Eine schlimme Nachricht steht nur auf einer unbekannten Seite. Was ist besser?",
+          "answers": [
+            "Die Nachricht stimmt bestimmt.",
+            "Ich prüfe: Steht das auch bei bekannten Nachrichten-Seiten?"
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist noch nicht richtig. Eine Quelle allein ist kein Beweis.",
+          "feedbackCorrect": "Das ist richtig. Wichtige Nachrichten stehen bei mehreren bekannten Seiten.",
+          "remember": "Ich prüfe Nachrichten bei bekannten Seiten."
+        }
+      },
+      {
+        "title": "Starke Gefühle sind ein Warnzeichen",
+        "module": "Prüfen",
+        "icon": "warning",
+        "text": [
+          "Fake News machen oft starke Gefühle.",
+          "Zum Beispiel Wut oder Angst.",
+          "Starke Gefühle sind ein Warnzeichen.",
+          "Dann lohnt sich das Prüfen besonders."
+        ],
+        "practice": {
+          "question": "Eine Nachricht macht dich sehr wütend. Was ist besser?",
+          "answers": [
+            "Sofort weiterleiten.",
+            "Erst einmal anhalten und prüfen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist noch nicht richtig. Wut ist ein Warnzeichen für Fake News.",
+          "feedbackCorrect": "Das ist richtig. Bei starken Gefühlen erst anhalten und prüfen.",
+          "remember": "Starke Gefühle? Erst prüfen."
+        }
+      },
+      {
+        "title": "Nicht einfach weiterleiten",
+        "module": "Prüfen",
+        "icon": "stop",
+        "text": [
+          "Wenn du Fakes weiterleitest, verbreiten sie sich.",
+          "Dann glauben noch mehr Menschen die Lüge.",
+          "Darum gilt: Erst prüfen. Dann teilen.",
+          "Im Zweifel: Nicht teilen."
+        ],
+        "practice": {
+          "question": "Du bist nicht sicher, ob eine Nachricht stimmt. Was ist besser?",
+          "answers": [
+            "Trotzdem weiterleiten.",
+            "Nicht weiterleiten."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist noch nicht richtig. So verbreiten sich Lügen weiter.",
+          "feedbackCorrect": "Das ist richtig. Im Zweifel teilst du die Nachricht nicht.",
+          "remember": "Im Zweifel teile ich nicht."
+        }
+      },
+      {
+        "title": "Was kann ich tun?",
+        "module": "Hilfe",
+        "icon": "help",
+        "text": [
+          "Du kannst dich schützen.",
+          "Diese Regeln helfen dir."
+        ],
+        "bullets": [
+          "Ich glaube nicht alles sofort.",
+          "Ich prüfe: Wer schreibt das? Steht das auch woanders?",
+          "Bei starken Gefühlen mache ich langsam.",
+          "Im Zweifel teile ich nicht.",
+          "Ich kann eine Person fragen, der ich vertraue."
+        ]
+      },
+      {
+        "title": "Das merke ich mir",
+        "module": "Merken",
+        "icon": "remember",
+        "text": [
+          "Du hast viel über Fakes gelernt.",
+          "Diese Sätze kannst du dir merken."
+        ],
+        "bullets": [
+          "Nicht alles im Internet ist wahr.",
+          "Bilder, Videos und Stimmen können gefälscht sein.",
+          "Starke Gefühle sind ein Warnzeichen.",
+          "Erst prüfen. Dann teilen.",
+          "Ich darf mir Unterstützung holen."
+        ],
+        "remember": "Erst prüfen. Dann glauben."
+      }
+    ],
+    "quizQuestions": [
+      {
+        "question": "Was sind Fake News?",
+        "answers": [
+          "Falsche Nachrichten.",
+          "Nachrichten aus dem Fernsehen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Fake News sind falsche Nachrichten mit Absicht.",
+        "feedbackWrong": "Das ist noch nicht richtig. Fake News sind falsche Nachrichten."
+      },
+      {
+        "question": "Kann KI Fotos fälschen?",
+        "answers": [
+          "Ja, sehr echt aussehende Fotos.",
+          "Nein, niemals."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. KI-Bilder können sehr echt aussehen.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI kann sehr echte Fotos fälschen."
+      },
+      {
+        "question": "Was ist ein Deepfake?",
+        "answers": [
+          "Ein gefälschtes Video.",
+          "Ein tiefes Loch."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Ein Deepfake ist ein gefälschtes Video mit KI.",
+        "feedbackWrong": "Das ist noch nicht richtig. Ein Deepfake ist ein gefälschtes Video."
+      },
+      {
+        "question": "Ein Anruf will sofort Geld. Die Stimme klingt bekannt. Was ist besser?",
+        "answers": [
+          "Sofort Geld senden.",
+          "Auflegen und selbst zurückrufen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Stimmen können gefälscht sein. Du rufst selbst zurück.",
+        "feedbackWrong": "Das ist noch nicht richtig. Die Stimme kann mit KI gefälscht sein."
+      },
+      {
+        "question": "Eine Nachricht macht dich sehr wütend. Was bedeutet das?",
+        "answers": [
+          "Die Nachricht stimmt bestimmt.",
+          "Das ist ein Warnzeichen. Ich prüfe die Nachricht."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Fake News wollen starke Gefühle machen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Starke Gefühle sind ein Warnzeichen."
+      },
+      {
+        "question": "Du bist unsicher, ob eine Nachricht stimmt. Was machst du?",
+        "answers": [
+          "Ich leite sie nicht weiter.",
+          "Ich leite sie an alle weiter."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Im Zweifel nicht teilen.",
+        "feedbackWrong": "Das ist noch nicht richtig. So verbreiten sich Lügen."
+      },
+      {
+        "question": "Wie kannst du eine Nachricht prüfen?",
+        "answers": [
+          "Schauen, ob bekannte Nachrichten-Seiten das auch melden.",
+          "Schauen, ob das Bild schön ist."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Wichtige Nachrichten stehen bei mehreren bekannten Seiten.",
+        "feedbackWrong": "Das ist noch nicht richtig. Du prüfst die Quelle, nicht das Aussehen."
+      },
+      {
+        "question": "Ein Promi verspricht im Video schnelles Geld. Was ist das oft?",
+        "answers": [
+          "Ein gefälschtes Video. Betrug.",
+          "Ein guter Tipp."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Solche Videos sind fast immer Deepfake-Betrug.",
+        "feedbackWrong": "Das ist noch nicht richtig. Solche Videos sind fast immer Betrug."
+      }
+    ],
+    "helpQuestions": [
+      "Wer hat diese Nachricht geschrieben?",
+      "Steht das auch bei bekannten Nachrichten-Seiten?",
+      "Macht die Nachricht starke Gefühle?",
+      "Kann das Bild oder Video gefälscht sein?",
+      "Brauche ich Unterstützung?"
+    ],
+    "memoryRules": [
+      "Nicht alles im Internet ist wahr.",
+      "Bilder und Videos können gefälscht sein.",
+      "Stimmen am Telefon können gefälscht sein.",
+      "Starke Gefühle sind ein Warnzeichen.",
+      "Erst prüfen. Dann teilen.",
+      "Bei Geld-Anrufen rufe ich selbst zurück.",
+      "Ich darf mir Unterstützung holen."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      3,
+      5,
+      7,
+      8,
+      10
+    ],
+    "miniQuestion": {
+      "question": "Was machst du bei einer unglaublichen Nachricht?",
+      "answers": [
+        "Erst prüfen, dann teilen",
+        "Sofort weiterleiten",
+        "Sofort glauben"
+      ],
+      "correct": 0,
+      "explanation": "Erst prüfen ist richtig. Nicht alles im Internet ist wahr."
+    }
+  },
+  {
+    "id": "betrug",
+    "title": "Online-Betrug und Abzocke",
+    "icon": "betrug",
+    "desc": "Betrug erkennen: Phishing, falsche Gewinne und Tricks",
+    "illustration": "assets/illustrations/betrug.svg",
+    "lessons": [
+      {
+        "title": "Start",
+        "module": "Start",
+        "icon": "betrug",
+        "text": [
+          "Hier lernst du etwas über Betrug im Internet.",
+          "Betrüger wollen dein Geld oder deine Daten.",
+          "Du lernst die bekannten Tricks.",
+          "Wer die Tricks kennt, ist besser geschützt."
+        ]
+      },
+      {
+        "title": "Was ist Phishing?",
+        "module": "Grundwissen",
+        "icon": "link",
+        "text": [
+          "Phishing ist ein Trick mit falschen Nachrichten.",
+          "Die Nachricht sieht aus wie von deiner Bank oder einer Firma.",
+          "In der Nachricht ist ein Link.",
+          "Der Link führt zu einer falschen Seite. Dort sollen deine Daten gestohlen werden."
+        ],
+        "examples": [
+          "Eine E-Mail sagt: Ihr Konto wird gesperrt. Klicken Sie hier.",
+          "Eine SMS sagt: Bestätigen Sie Ihre Bank-Daten."
+        ],
+        "practice": {
+          "question": "Eine E-Mail von der Bank will, dass du sofort auf einen Link klickst. Was ist besser?",
+          "answers": [
+            "Sofort klicken.",
+            "Nicht klicken. Bei der Bank selbst nachfragen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Banken fragen nie per E-Mail nach deinen Daten.",
+          "feedbackCorrect": "Das ist richtig. Du klickst nicht. Du fragst bei der Bank selbst nach.",
+          "remember": "Meine Bank fragt nie per E-Mail nach meinen Daten."
+        }
+      },
+      {
+        "title": "Falsche Nachrichten erkennen",
+        "module": "Grundwissen",
+        "icon": "warning",
+        "text": [
+          "Betrugs-Nachrichten haben oft die gleichen Zeichen.",
+          "Diese Warnzeichen kannst du lernen."
+        ],
+        "bullets": [
+          "Die Nachricht macht Druck: Sofort! Schnell! Letzte Chance!",
+          "Die Nachricht droht: Sonst wird Ihr Konto gesperrt.",
+          "Du sollst auf einen Link klicken.",
+          "Du sollst Daten eingeben oder Geld zahlen.",
+          "Die Nachricht kommt überraschend."
+        ],
+        "remember": "Druck und Drohung sind Warnzeichen."
+      },
+      {
+        "title": "Der Paket-Trick",
+        "module": "Tricks",
+        "icon": "report",
+        "text": [
+          "Eine SMS sagt: Ihr Paket wartet.",
+          "Sie sollen eine kleine Gebühr zahlen.",
+          "Oder Sie sollen auf einen Link klicken.",
+          "Das ist fast immer Betrug."
+        ],
+        "warning": "Echte Paket-Dienste fordern kein Geld per SMS.",
+        "practice": {
+          "question": "Eine SMS: Zahlen Sie 2 Euro Zoll für Ihr Paket. Was ist besser?",
+          "answers": [
+            "Schnell zahlen. Sind ja nur 2 Euro.",
+            "Nicht zahlen. Nicht klicken."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Die Betrüger wollen deine Bank-Daten. Es geht nicht um 2 Euro.",
+          "feedbackCorrect": "Das ist richtig. Solche SMS sind fast immer Betrug.",
+          "remember": "Paket-SMS mit Geld-Forderung sind Betrug."
+        }
+      },
+      {
+        "title": "Der Hallo-Mama-Trick",
+        "module": "Tricks",
+        "icon": "message",
+        "text": [
+          "Eine WhatsApp-Nachricht sagt: Hallo Mama, hallo Papa.",
+          "Ich habe eine neue Nummer.",
+          "Mein Handy ist kaputt. Ich brauche schnell Geld.",
+          "Das ist ein bekannter Betrug."
+        ],
+        "practice": {
+          "question": "Eine fremde Nummer schreibt: Ich bin dein Kind, brauche Geld. Was ist besser?",
+          "answers": [
+            "Sofort Geld senden.",
+            "Die alte, bekannte Nummer anrufen und nachfragen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Das ist ein bekannter Trick.",
+          "feedbackCorrect": "Das ist richtig. Du rufst die alte Nummer an. So merkst du den Betrug.",
+          "remember": "Bei Geld-Nachrichten rufe ich die bekannte Nummer an."
+        }
+      },
+      {
+        "title": "Schockanrufe",
+        "module": "Tricks",
+        "icon": "stop",
+        "text": [
+          "Ein Anruf macht dir große Angst.",
+          "Zum Beispiel: Ihr Kind hatte einen Unfall. Wir brauchen Geld.",
+          "Mit KI kann die Stimme sogar echt klingen.",
+          "Auch falsche Polizisten rufen an."
+        ],
+        "warning": "Die echte Polizei fordert nie Geld am Telefon.",
+        "practice": {
+          "question": "Ein Anrufer sagt: Ich bin Polizist. Geben Sie mir Ihr Geld. Was ist besser?",
+          "answers": [
+            "Geld geben.",
+            "Auflegen. Die Polizei fordert nie Geld."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Die echte Polizei fordert nie Geld am Telefon.",
+          "feedbackCorrect": "Das ist richtig. Du legst auf. Die echte Polizei fordert nie Geld.",
+          "remember": "Die echte Polizei fordert nie Geld."
+        }
+      },
+      {
+        "title": "Falsche Gewinne",
+        "module": "Tricks",
+        "icon": "example",
+        "text": [
+          "Eine Nachricht sagt: Sie haben gewonnen!",
+          "Aber du hast bei keinem Gewinnspiel mitgemacht.",
+          "Du sollst zuerst eine Gebühr zahlen.",
+          "Das ist Betrug. Echte Gewinne kosten kein Geld."
+        ],
+        "practice": {
+          "question": "Du hast angeblich gewonnen. Du sollst erst 50 Euro Gebühr zahlen. Was ist besser?",
+          "answers": [
+            "Gebühr zahlen.",
+            "Nicht zahlen. Das ist Betrug."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Echte Gewinne kosten kein Geld.",
+          "feedbackCorrect": "Das ist richtig. Echte Gewinne kosten nie Geld.",
+          "remember": "Echte Gewinne kosten kein Geld."
+        }
+      },
+      {
+        "title": "Abo-Fallen",
+        "module": "Tricks",
+        "icon": "warning",
+        "text": [
+          "Ein Angebot sagt: Kostenlos testen!",
+          "Aber im Kleingedruckten steht: Danach kostet es jeden Monat Geld.",
+          "Das nennt man Abo-Falle.",
+          "Lies genau, bevor du etwas bestellst."
+        ],
+        "bullets": [
+          "Steht da ein Preis pro Monat?",
+          "Wie lange läuft das Abo?",
+          "Frag eine Person, bevor du bestellst."
+        ],
+        "remember": "Kostenlos kann teuer werden. Ich lese genau."
+      },
+      {
+        "title": "Codes nie weitergeben",
+        "module": "Schutz",
+        "icon": "lock",
+        "text": [
+          "Manchmal bekommst du einen Code per SMS.",
+          "Zum Beispiel von der Bank oder von WhatsApp.",
+          "Dieser Code ist nur für dich.",
+          "Betrüger fragen nach diesem Code. Gib ihn nie weiter."
+        ],
+        "practice": {
+          "question": "Jemand ruft an und fragt nach dem SMS-Code von deiner Bank. Was ist besser?",
+          "answers": [
+            "Code vorlesen.",
+            "Code nicht weitergeben. Auflegen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Mit dem Code können Betrüger dein Konto leeren.",
+          "feedbackCorrect": "Das ist richtig. Codes sind nur für dich. Niemals weitergeben.",
+          "remember": "Ich gebe nie einen Code weiter."
+        }
+      },
+      {
+        "title": "Was tun nach einem Betrug?",
+        "module": "Hilfe",
+        "icon": "help",
+        "text": [
+          "Betrug kann jedem passieren.",
+          "Du musst dich nicht schämen.",
+          "Wichtig ist: Hol dir schnell Hilfe."
+        ],
+        "bullets": [
+          "Sag einer Person Bescheid, der du vertraust.",
+          "Bei Bank-Daten: Ruf sofort die Bank an. Lass die Karte sperren.",
+          "Der Sperr-Notruf ist die 116 116.",
+          "Du kannst Anzeige bei der Polizei machen.",
+          "Heb die Nachricht als Beweis auf."
+        ],
+        "remember": "Betrug ist nicht meine Schuld. Ich hole mir Hilfe."
+      },
+      {
+        "title": "Das merke ich mir",
+        "module": "Merken",
+        "icon": "remember",
+        "text": [
+          "Du kennst jetzt die wichtigsten Tricks.",
+          "Diese Sätze kannst du dir merken."
+        ],
+        "bullets": [
+          "Druck und Drohung sind Warnzeichen.",
+          "Ich klicke nicht auf fremde Links.",
+          "Ich gebe nie Codes oder Bank-Daten weiter.",
+          "Echte Gewinne kosten kein Geld.",
+          "Bei Geld-Forderungen rufe ich selbst zurück.",
+          "Nach einem Betrug hole ich mir sofort Hilfe."
+        ],
+        "remember": "Ich lasse mich nicht unter Druck setzen."
+      }
+    ],
+    "quizQuestions": [
+      {
+        "question": "Was ist Phishing?",
+        "answers": [
+          "Ein Trick mit falschen Nachrichten.",
+          "Ein Spiel."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Phishing sind falsche Nachrichten, die Daten stehlen wollen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Phishing ist ein Betrugs-Trick mit falschen Nachrichten."
+      },
+      {
+        "question": "Eine E-Mail macht Druck: Sofort klicken! Was bedeutet das?",
+        "answers": [
+          "Das ist ein Warnzeichen für Betrug.",
+          "Das ist normal."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Druck ist ein Warnzeichen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Druck und Drohung sind Warnzeichen."
+      },
+      {
+        "question": "Eine SMS: Zahlen Sie Gebühr für Ihr Paket. Was machst du?",
+        "answers": [
+          "Nicht zahlen, nicht klicken.",
+          "Schnell zahlen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Solche SMS sind fast immer Betrug.",
+        "feedbackWrong": "Das ist noch nicht richtig. Paket-SMS mit Geld-Forderung sind Betrug."
+      },
+      {
+        "question": "Hallo Mama, neue Nummer, brauche Geld. Was machst du?",
+        "answers": [
+          "Die alte, bekannte Nummer anrufen.",
+          "Sofort Geld senden."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Du prüfst über die bekannte Nummer.",
+        "feedbackWrong": "Das ist noch nicht richtig. Das ist ein bekannter Betrugs-Trick."
+      },
+      {
+        "question": "Fordert die echte Polizei Geld am Telefon?",
+        "answers": [
+          "Nein, niemals.",
+          "Ja, manchmal."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Die echte Polizei fordert nie Geld.",
+        "feedbackWrong": "Das ist noch nicht richtig. Die echte Polizei fordert nie Geld am Telefon."
+      },
+      {
+        "question": "Du sollst für einen Gewinn erst Geld zahlen. Was stimmt?",
+        "answers": [
+          "Das ist Betrug.",
+          "Das ist normal."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Echte Gewinne kosten kein Geld.",
+        "feedbackWrong": "Das ist noch nicht richtig. Echte Gewinne kosten nie Geld."
+      },
+      {
+        "question": "Jemand fragt nach deinem SMS-Code. Was machst du?",
+        "answers": [
+          "Code niemals weitergeben.",
+          "Code vorlesen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Codes sind nur für dich.",
+        "feedbackWrong": "Das ist noch nicht richtig. Mit dem Code können Betrüger dein Konto benutzen."
+      },
+      {
+        "question": "Du bist auf einen Betrug hereingefallen. Was ist richtig?",
+        "answers": [
+          "Ich hole mir sofort Hilfe.",
+          "Ich schäme mich und sage nichts."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Betrug kann jedem passieren. Hilfe holen ist stark.",
+        "feedbackWrong": "Das ist noch nicht richtig. Betrug ist nicht deine Schuld. Hol dir schnell Hilfe."
+      },
+      {
+        "question": "Welche Nummer sperrt deine Bank-Karte?",
+        "answers": [
+          "116 116",
+          "110 110"
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Der Sperr-Notruf ist die 116 116.",
+        "feedbackWrong": "Das ist noch nicht richtig. Der Sperr-Notruf ist die 116 116."
+      }
+    ],
+    "helpQuestions": [
+      "Macht die Nachricht Druck oder Angst?",
+      "Soll ich Geld zahlen oder Daten eingeben?",
+      "Kenne ich den Absender wirklich?",
+      "Kann ich die Person selbst zurückrufen?",
+      "Brauche ich Unterstützung?"
+    ],
+    "memoryRules": [
+      "Druck und Drohung sind Warnzeichen.",
+      "Ich klicke nicht auf fremde Links.",
+      "Ich gebe nie Codes oder Bank-Daten weiter.",
+      "Echte Gewinne kosten kein Geld.",
+      "Die echte Polizei fordert nie Geld.",
+      "Bei Geld-Forderungen rufe ich selbst zurück.",
+      "Betrug ist nicht meine Schuld. Ich hole mir Hilfe."
+    ],
+    "shortLessonIndexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      8,
+      9,
+      10
+    ],
+    "miniQuestion": {
+      "question": "Eine Nachricht macht Druck und will Geld. Was ist das oft?",
+      "answers": [
+        "Betrug",
+        "Ein Geschenk",
+        "Ein Gewinn"
+      ],
+      "correct": 0,
+      "explanation": "Druck und Geld-Forderungen sind Warnzeichen für Betrug."
+    }
+  },
+  {
+    "id": "einkaufen",
+    "title": "Online-Einkaufen und Bezahlen",
+    "icon": "einkaufen",
+    "desc": "Sicher einkaufen und bezahlen im Internet",
+    "illustration": "assets/illustrations/einkaufen.svg",
+    "lessons": [
+      {
+        "title": "Start",
+        "module": "Start",
+        "icon": "einkaufen",
+        "text": [
+          "Hier lernst du etwas über Einkaufen im Internet.",
+          "Du lernst: Wie erkenne ich gute Shops?",
+          "Du lernst: Wie bezahle ich sicher?",
+          "Du lernst: Was mache ich bei Problemen?"
+        ]
+      },
+      {
+        "title": "Gute Shops erkennen",
+        "module": "Einkaufen",
+        "icon": "check",
+        "text": [
+          "Es gibt viele gute Shops im Internet.",
+          "Daran erkennst du einen guten Shop."
+        ],
+        "bullets": [
+          "Der Shop ist bekannt.",
+          "Der Shop hat ein Impressum. Dort steht: Name und Adresse der Firma.",
+          "Es gibt echte Bewertungen von Kunden.",
+          "Die Preise sind normal. Nicht verdächtig billig."
+        ],
+        "remember": "Ich kaufe bei Shops, die ich kenne oder geprüft habe."
+      },
+      {
+        "title": "Fake-Shops erkennen",
+        "module": "Einkaufen",
+        "icon": "warning",
+        "text": [
+          "Ein Fake-Shop ist ein falscher Shop.",
+          "Du bezahlst. Aber die Ware kommt nie.",
+          "Fake-Shops sehen oft sehr echt aus.",
+          "Diese Warnzeichen helfen dir."
+        ],
+        "bullets": [
+          "Alles ist sehr, sehr billig.",
+          "Du kannst nur per Vorkasse zahlen.",
+          "Es gibt kein Impressum.",
+          "Der Name der Internet-Seite ist komisch."
+        ],
+        "practice": {
+          "question": "Ein Shop ist extrem billig. Du kannst nur per Vorkasse zahlen. Was ist besser?",
+          "answers": [
+            "Schnell kaufen. So billig!",
+            "Nicht kaufen. Das sind Warnzeichen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Extrem billig plus nur Vorkasse: Das ist oft ein Fake-Shop.",
+          "feedbackCorrect": "Das ist richtig. Extrem billige Preise und nur Vorkasse sind Warnzeichen.",
+          "remember": "Sehr billig und nur Vorkasse: Da kaufe ich nicht."
+        }
+      },
+      {
+        "title": "Sicher bezahlen",
+        "module": "Bezahlen",
+        "icon": "data",
+        "text": [
+          "Es gibt verschiedene Arten zu bezahlen.",
+          "Manche sind sicherer als andere."
+        ],
+        "bullets": [
+          "Kauf auf Rechnung ist sicher: Du zahlst erst, wenn die Ware da ist.",
+          "PayPal und ähnliche Dienste haben einen Käufer-Schutz.",
+          "Vorkasse an Fremde ist riskant: Das Geld ist oft weg.",
+          "Niemals Geld an Privat-Personen senden, die du nicht kennst."
+        ],
+        "practice": {
+          "question": "Welche Bezahl-Art ist sicherer?",
+          "answers": [
+            "Vorkasse an einen fremden Shop.",
+            "Kauf auf Rechnung."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Bei Vorkasse ist dein Geld zuerst weg.",
+          "feedbackCorrect": "Das ist richtig. Bei Rechnung zahlst du erst, wenn die Ware da ist.",
+          "remember": "Rechnung ist sicherer als Vorkasse."
+        }
+      },
+      {
+        "title": "Bank-Daten schützen",
+        "module": "Bezahlen",
+        "icon": "lock",
+        "text": [
+          "Deine Bank-Daten sind sehr wichtig.",
+          "PIN und TAN sind geheim.",
+          "Deine Bank fragt nie per E-Mail oder Telefon danach.",
+          "Wer danach fragt, ist ein Betrüger."
+        ],
+        "practice": {
+          "question": "Eine E-Mail fragt nach deiner PIN. Was ist besser?",
+          "answers": [
+            "PIN eingeben.",
+            "PIN niemals eingeben. Das ist Betrug."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist nicht sicher. Deine Bank fragt nie nach der PIN.",
+          "feedbackCorrect": "Das ist richtig. Die Bank fragt nie nach PIN oder TAN.",
+          "remember": "PIN und TAN bleiben geheim."
+        }
+      },
+      {
+        "title": "Versteckte Kosten in Apps und Spielen",
+        "module": "Achtung",
+        "icon": "report",
+        "text": [
+          "Viele Spiele sind erst kostenlos.",
+          "Im Spiel kannst du dann Dinge kaufen.",
+          "Das kostet echtes Geld.",
+          "Viele kleine Käufe werden schnell teuer."
+        ],
+        "examples": [
+          "Ein Spiel verkauft Extra-Leben für 2 Euro.",
+          "Eine App verkauft Münzen für 5 Euro."
+        ],
+        "remember": "Auch kleine Käufe kosten echtes Geld."
+      },
+      {
+        "title": "Kauf-Druck widerstehen",
+        "module": "Achtung",
+        "icon": "stop",
+        "text": [
+          "Shops machen oft Druck.",
+          "Zum Beispiel: Nur noch heute! Nur noch 2 Stück!",
+          "Das soll dich zum schnellen Kaufen bringen.",
+          "Du darfst dir Zeit nehmen."
+        ],
+        "practice": {
+          "question": "Ein Angebot sagt: Nur noch 10 Minuten! Was ist besser?",
+          "answers": [
+            "Schnell kaufen.",
+            "Ruhig bleiben und in Ruhe überlegen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Das ist noch nicht richtig. Zeit-Druck ist ein Verkaufs-Trick.",
+          "feedbackCorrect": "Das ist richtig. Du darfst dir Zeit nehmen. Gute Angebote gibt es wieder.",
+          "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
+        }
+      },
+      {
+        "title": "Vor dem Kaufen prüfen",
+        "module": "Einkaufen",
+        "icon": "understand",
+        "text": [
+          "Prüfe vor dem letzten Klick.",
+          "Diese Fragen helfen dir."
+        ],
+        "bullets": [
+          "Was kostet es wirklich? Mit Versand?",
+          "Ist es ein Abo oder ein einmaliger Kauf?",
+          "Brauche ich das wirklich?",
+          "Habe ich genug Geld dafür?"
+        ],
+        "remember": "Erst prüfen. Dann kaufen."
+      },
+      {
+        "title": "Falsch gekauft? Das kannst du tun",
+        "module": "Hilfe",
+        "icon": "help",
+        "text": [
+          "Ein Fehl-Kauf kann passieren.",
+          "Oft kannst du etwas tun."
+        ],
+        "bullets": [
+          "Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf.",
+          "Schreib dem Shop eine Nachricht.",
+          "Frag eine Person, der du vertraust, um Hilfe.",
+          "Bei Betrug: Ruf deine Bank an."
+        ],
+        "remember": "Online-Käufe kann ich oft 14 Tage zurückgeben."
+      },
+      {
+        "title": "Was kann ich tun?",
+        "module": "Hilfe",
+        "icon": "check",
+        "text": [
+          "Du kannst sicher im Internet einkaufen.",
+          "Diese Regeln helfen dir."
+        ],
+        "bullets": [
+          "Ich kaufe bei Shops, die ich kenne.",
+          "Ich prüfe Preis und Impressum.",
+          "Ich zahle möglichst auf Rechnung.",
+          "PIN und TAN bleiben geheim.",
+          "Ich lasse mich nicht hetzen.",
+          "Vor dem Kaufen kann ich eine Person fragen."
+        ]
+      },
+      {
+        "title": "Das merke ich mir",
+        "module": "Merken",
+        "icon": "remember",
+        "text": [
+          "Du hast viel über sicheres Einkaufen gelernt.",
+          "Diese Sätze kannst du dir merken."
+        ],
+        "bullets": [
+          "Sehr billig und nur Vorkasse: Warnzeichen.",
+          "Rechnung ist sicherer als Vorkasse.",
+          "PIN und TAN bleiben geheim.",
+          "Ich lasse mich nicht hetzen.",
+          "Ich darf mir Unterstützung holen."
+        ],
+        "remember": "Erst prüfen. Dann kaufen."
+      }
+    ],
+    "quizQuestions": [
+      {
+        "question": "Was ist ein Fake-Shop?",
+        "answers": [
+          "Ein falscher Shop. Die Ware kommt nie.",
+          "Ein Shop mit guten Angeboten."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Im Fake-Shop bezahlst du, bekommst aber nichts.",
+        "feedbackWrong": "Das ist noch nicht richtig. Ein Fake-Shop ist ein Betrugs-Shop."
+      },
+      {
+        "question": "Ein Shop ist extrem billig und will nur Vorkasse. Was ist das?",
+        "answers": [
+          "Ein Warnzeichen für einen Fake-Shop.",
+          "Ein super Angebot."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Das sind typische Warnzeichen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Extrem billig plus Vorkasse ist verdächtig."
+      },
+      {
+        "question": "Welche Bezahl-Art ist sicherer?",
+        "answers": [
+          "Kauf auf Rechnung.",
+          "Vorkasse an Fremde."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Bei Rechnung zahlst du erst, wenn die Ware da ist.",
+        "feedbackWrong": "Das ist noch nicht richtig. Bei Vorkasse ist dein Geld zuerst weg."
+      },
+      {
+        "question": "Deine Bank schreibt eine E-Mail und will deine PIN. Was stimmt?",
+        "answers": [
+          "Das ist Betrug. Die Bank fragt nie nach der PIN.",
+          "Das ist normal."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Banken fragen nie nach PIN oder TAN.",
+        "feedbackWrong": "Das ist noch nicht richtig. Die Bank fragt nie nach der PIN. Das ist Betrug."
+      },
+      {
+        "question": "Ein Angebot sagt: Nur noch heute! Was machst du?",
+        "answers": [
+          "Ruhig bleiben und überlegen.",
+          "Sofort kaufen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Zeit-Druck ist ein Verkaufs-Trick.",
+        "feedbackWrong": "Das ist noch nicht richtig. Du darfst dir Zeit nehmen."
+      },
+      {
+        "question": "Was prüfst du vor dem Kaufen?",
+        "answers": [
+          "Preis, Versand-Kosten und ob es ein Abo ist.",
+          "Nur das Bild."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Du prüfst die echten Kosten.",
+        "feedbackWrong": "Das ist noch nicht richtig. Wichtig sind Preis, Versand und Abo-Fragen."
+      },
+      {
+        "question": "Du hast etwas Falsches bestellt. Was kannst du oft tun?",
+        "answers": [
+          "14 Tage zurückgeben. Das heißt Widerruf.",
+          "Nichts. Pech gehabt."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Online-Käufe kannst du oft 14 Tage zurückgeben.",
+        "feedbackWrong": "Das ist noch nicht richtig. Du hast oft 14 Tage Widerrufs-Recht."
+      },
+      {
+        "question": "Kosten kleine Käufe in Spielen echtes Geld?",
+        "answers": [
+          "Ja, und viele kleine Käufe werden teuer.",
+          "Nein, das ist Spiel-Geld."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. In-App-Käufe kosten echtes Geld.",
+        "feedbackWrong": "Das ist noch nicht richtig. Käufe in Apps kosten echtes Geld."
+      }
+    ],
+    "helpQuestions": [
+      "Kenne ich diesen Shop?",
+      "Ist der Preis verdächtig billig?",
+      "Kann ich auf Rechnung zahlen?",
+      "Ist das ein Abo?",
+      "Brauche ich Unterstützung?"
+    ],
+    "memoryRules": [
+      "Ich kaufe bei Shops, die ich kenne.",
+      "Sehr billig und nur Vorkasse: Warnzeichen.",
+      "Rechnung ist sicherer als Vorkasse.",
+      "PIN und TAN bleiben geheim.",
+      "Ich lasse mich nicht hetzen.",
+      "Online-Käufe kann ich oft 14 Tage zurückgeben.",
+      "Ich darf mir Unterstützung holen."
+    ],
+    "shortLessonIndexes": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      9,
+      10
+    ],
+    "miniQuestion": {
+      "question": "Welche Bezahl-Art ist sicherer?",
+      "answers": [
+        "Kauf auf Rechnung",
+        "Vorkasse an Fremde",
+        "Bargeld per Post"
+      ],
+      "correct": 0,
+      "explanation": "Bei Rechnung zahlst du erst, wenn die Ware da ist. Das ist sicherer."
     }
   }
 ];

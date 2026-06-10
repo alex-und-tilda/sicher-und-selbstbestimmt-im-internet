@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" role="img" aria-hidden="true">
+  <rect width="480" height="220" rx="24" fill="#fdf1e0"/>
+  <circle cx="64" cy="50" r="34" fill="#f6cf8b" opacity="0.5"/>
+  <circle cx="424" cy="178" r="44" fill="#f6cf8b" opacity="0.4"/>
+  <ellipse cx="240" cy="198" rx="160" ry="12" fill="#16222e" opacity="0.07"/>
+  <g transform="rotate(-3 175 112)">
+    <rect x="106" y="44" width="138" height="136" rx="12" fill="#ffffff" stroke="#15803d" stroke-width="5"/>
+    <rect x="118" y="56" width="114" height="84" rx="8" fill="#d8f3e2"/>
+    <circle cx="146" cy="82" r="11" fill="#ffd54d"/>
+    <path d="M118 140l36-34c3-3 8-3 11 0l20 18 14-12c3-3 8-3 11 0l22 20v2a6 6 0 0 1-6 6H124a6 6 0 0 1-6-6z" fill="#15803d" opacity="0.75"/>
+    <circle cx="128" cy="166" r="13" fill="#15803d"/>
+    <path d="M121 166l5 5 9-10" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="150" y="160" width="70" height="11" rx="5.5" fill="#aee3c3"/>
+  </g>
+  <g transform="rotate(3 305 112)">
+    <rect x="236" y="44" width="138" height="136" rx="12" fill="#ffffff" stroke="#b45309" stroke-width="5" stroke-dasharray="14 9"/>
+    <rect x="248" y="56" width="114" height="84" rx="8" fill="#fdeccd"/>
+    <circle cx="276" cy="82" r="11" fill="#f6cf8b"/>
+    <path d="M248 140l36-34c3-3 8-3 11 0l20 18 14-12c3-3 8-3 11 0l22 20v2a6 6 0 0 1-6 6H254a6 6 0 0 1-6-6z" fill="#b45309" opacity="0.55"/>
+    <path d="M306 70l-26 50M332 64l-44 60M286 64l-12 20" stroke="#ffffff" stroke-width="4" opacity="0.7"/>
+    <circle cx="258" cy="166" r="13" fill="#b91c1c"/>
+    <path d="M252 160l12 12M264 160l-12 12" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+    <rect x="280" y="160" width="70" height="11" rx="5.5" fill="#f6cf8b"/>
+  </g>
+  <circle cx="240" cy="106" r="26" fill="#ffffff" stroke="#b45309" stroke-width="5"/>
+  <text x="240" y="118" font-size="32" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle" fill="#b45309">?</text>
+</svg>

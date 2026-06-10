@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="SICHER EINKAUFEN">
+  <rect width="480" height="360" rx="28" fill="#def7e7"/>
+  <circle cx="76" cy="72" r="42" fill="#aee3c3"/>
+  <circle cx="414" cy="292" r="52" fill="#aee3c3" opacity="0.65"/>
+
+  <g transform="translate(145 24)">
+    <rect x="0" y="0" width="190" height="312" rx="30" fill="#000000"/>
+    <rect x="12" y="18" width="166" height="276" rx="22" fill="#ffffff"/>
+    <rect x="64" y="8" width="62" height="7" rx="4" fill="#c6c7c8"/>
+
+    <rect x="28" y="42" width="134" height="42" rx="16" fill="#15803d"/>
+    <text x="95" y="69" font-size="14" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle" fill="#ffffff">SICHER EINKAUFEN</text>
+
+    <g transform="translate(48 98)" fill="none" stroke="#15803d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 6h14l10 48h48l10-38H18"/>
+      <circle cx="30" cy="68" r="7" fill="#15803d" stroke="none"/>
+      <circle cx="62" cy="68" r="7" fill="#15803d" stroke="none"/>
+    </g>
+
+    <rect x="30" y="200" width="130" height="12" rx="6" fill="#aee3c3"/>
+    <rect x="30" y="222" width="106" height="12" rx="6" fill="#def7e7"/>
+    <rect x="30" y="244" width="122" height="12" rx="6" fill="#def7e7"/>
+  </g>
+
+  <g opacity="0.98">
+    <g>
+      <rect x="92" y="210" width="296" height="42" rx="14" fill="#ffffff" stroke="#aee3c3" stroke-width="2"/>
+      <circle cx="116" cy="231" r="7" fill="#15803d"/>
+      <text x="136" y="237" font-size="18" font-family="Arial, sans-serif" font-weight="700" fill="#000000">Shop erst prüfen</text>
+    </g>
+    <g>
+      <rect x="92" y="266" width="296" height="42" rx="14" fill="#ffffff" stroke="#aee3c3" stroke-width="2"/>
+      <circle cx="116" cy="287" r="7" fill="#15803d"/>
+      <text x="136" y="293" font-size="18" font-family="Arial, sans-serif" font-weight="700" fill="#000000">Rechnung ist sicherer</text>
+    </g>
+    <g>
+      <rect x="92" y="322" width="296" height="42" rx="14" fill="#ffffff" stroke="#aee3c3" stroke-width="2"/>
+      <circle cx="116" cy="343" r="7" fill="#15803d"/>
+      <text x="136" y="349" font-size="18" font-family="Arial, sans-serif" font-weight="700" fill="#000000">PIN bleibt geheim</text>
+    </g>
+  </g>
+</svg>
