@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
+  <!-- Stern -->
+  <polygon points="50,5 61,35 93,35 68,55 78,87 50,67 22,87 32,55 7,35 39,35"
+           fill="#ffe066" stroke="#b58a00" stroke-width="3"/>
+  <!-- Häkchen im Stern -->
+  <polyline points="33,50 45,63 67,40" fill="none" stroke="#005f30" stroke-width="6"/>
+</svg>
