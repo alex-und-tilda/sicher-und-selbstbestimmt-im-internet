@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
+
+  <circle cx="38" cy="27" r="13" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
+  <path d="M10 80 Q10 52 38 52 Q52 52 57 58" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
+  <path d="M57 46 Q57 38 64 38 Q68 38 71 42 Q74 38 78 38 Q85 38 85 46 Q85 55 71 67 Q57 55 57 46 Z"
+        fill="#c45000" stroke="#c45000" stroke-width="3"/>
+</svg>

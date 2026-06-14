@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
+
+  <rect x="15" y="10" width="55" height="70" rx="5" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
+  <line x1="25" y1="30" x2="58" y2="30" stroke="#00528f" stroke-width="3"/>
+  <line x1="25" y1="42" x2="58" y2="42" stroke="#00528f" stroke-width="3"/>
+  <line x1="25" y1="54" x2="45" y2="54" stroke="#00528f" stroke-width="3"/>
+  <line x1="55" y1="50" x2="90" y2="85" stroke="#c45000" stroke-width="8" stroke-linecap="round"/>
+  <line x1="90" y1="50" x2="55" y2="85" stroke="#c45000" stroke-width="8" stroke-linecap="round"/>
+</svg>

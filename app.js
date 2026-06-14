@@ -810,9 +810,9 @@ function renderTopicChoice(topicId) {
         <button type="button" class="action-card action-short" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
           <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
           <span class="action-text">
-            <span class="action-title">Kurz lernen</span>
+            <span class="action-title">Einfach lernen</span>
             <span class="action-desc">Nur das Wichtigste.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Kurz lernen. Nur das Wichtigste." aria-label="Kurz lernen vorlesen">🔊 Vorlesen</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Einfach lernen. Nur das Wichtigste." aria-label="Einfach lernen vorlesen">🔊 Vorlesen</span>
           </span>
         </button>
 
@@ -969,8 +969,13 @@ function toggleTaskHelp() {
 
 function getLessonsForMode(topic, mode) {
   if (!topic || !Array.isArray(topic.lessons)) return [];
-  if (mode === "short" && Array.isArray(topic.shortLessonIndexes)) {
-    return topic.shortLessonIndexes.map(index => topic.lessons[index]).filter(Boolean);
+  if (mode === "short") {
+    if (Array.isArray(topic.einfachLessons) && topic.einfachLessons.length) {
+      return topic.einfachLessons;
+    }
+    if (Array.isArray(topic.shortLessonIndexes)) {
+      return topic.shortLessonIndexes.map(index => topic.lessons[index]).filter(Boolean);
+    }
   }
   return topic.lessons;
 }
@@ -1039,7 +1044,7 @@ function renderLesson() {
 
   const lesson = lessons[currentStep];
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
-  const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
+  const modeLabel = currentMode === "short" ? "Einfach lernen" : "Mehr lernen";
   const hasPractice = Boolean(lesson.practice);
 
   /* Modul-Cluster-Badge: zeigen wenn neues Modul beginnt (nicht bei Schritt 0/Start) */
@@ -1083,6 +1088,14 @@ function renderLesson() {
 
   const practice = hasPractice ? buildPractice(lesson.practice) : "";
 
+  /* Piktogramm — nur im Einfach-Modus und wenn Feld vorhanden */
+  const isEinfachLesson = lesson.module === "Einfach";
+  const pictogram = isEinfachLesson && lesson.pictogram
+    ? `<div class="einfach-pictogram" aria-hidden="true">
+         <img src="assets/pictograms/${escapeHtml(lesson.pictogram)}.svg" alt="" width="100" height="100" loading="eager">
+       </div>`
+    : "";
+
   /* Lernziele und Fehler-Normalisierung nur im Start-Screen */
   const isStartLesson = lesson.module === "Start";
 
@@ -1109,7 +1122,8 @@ function renderLesson() {
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
     ${moduleBadge}
-    <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+    <article class="card lesson-card${isEinfachLesson ? " lesson-card--einfach" : ""}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      ${pictogram}
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
         <h2>${escapeHtml(lesson.title || topic.title)}</h2>

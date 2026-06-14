@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
+
+  <rect x="10" y="25" width="80" height="55" rx="6" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
+  <polyline points="10,25 50,55 90,25" fill="none" stroke="#00528f" stroke-width="5"/>
+  <path d="M44 64 Q44 55 50 55 Q56 55 56 62 Q56 67 50 69" fill="none" stroke="#00528f" stroke-width="4"/>
+  <circle cx="50" cy="74" r="3" fill="#00528f"/>
+</svg>
