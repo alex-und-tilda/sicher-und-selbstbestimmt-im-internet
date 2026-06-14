@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-06d";
+const CACHE_VERSION = "v2026-06f";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
 /* Alle Dateien, die sofort beim Installieren gecacht werden */
@@ -92,6 +92,24 @@ const PRECACHE_URLS = [
   "./assets/icons/fake.svg",
   "./assets/icons/betrug.svg",
   "./assets/icons/einkaufen.svg",
+
+  /* Piktogramme Einfach-Modus */
+  "./assets/pictograms/pikto-data.svg",
+  "./assets/pictograms/pikto-lock.svg",
+  "./assets/pictograms/pikto-ask.svg",
+  "./assets/pictograms/pikto-message.svg",
+  "./assets/pictograms/pikto-link.svg",
+  "./assets/pictograms/pikto-photo.svg",
+  "./assets/pictograms/pikto-location.svg",
+  "./assets/pictograms/pikto-no.svg",
+  "./assets/pictograms/pikto-screen.svg",
+  "./assets/pictograms/pikto-pause.svg",
+  "./assets/pictograms/pikto-feel.svg",
+  "./assets/pictograms/pikto-help.svg",
+  "./assets/pictograms/pikto-ki.svg",
+  "./assets/pictograms/pikto-fake.svg",
+  "./assets/pictograms/pikto-fraud.svg",
+  "./assets/pictograms/pikto-shop.svg",
 
   /* Schriften — WOFF2 (primär) + TTF (Fallback, optional) */
   "./assets/fonts/atkinson-regular.woff2",

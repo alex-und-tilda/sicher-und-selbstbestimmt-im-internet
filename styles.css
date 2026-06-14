@@ -1499,6 +1499,34 @@ body.simple-mode .practice-box {
   letter-spacing: 0.01em;
 }
 
+/* ---------- Piktogramme (Einfach-Modus) ---------- */
+
+.einfach-pictogram {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 16px;
+}
+
+.einfach-pictogram img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  /* Leichter Hintergrund für besseren Kontrast auf farbigen Karten */
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+/* Einfach-Karte: etwas größere Schrift, mehr Zeilenabstand */
+.lesson-card--einfach p {
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.lesson-card--einfach .remember-box {
+  font-size: 1.05rem;
+}
+
 /* ---------- Einstiegsfrage (Self-Assessment) ---------- */
 
 .sa-card {

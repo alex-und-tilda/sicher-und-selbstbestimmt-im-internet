@@ -531,6 +531,50 @@ const topics = [
     "qrShortLink": "index.html#datenschutz:kurz",
     "qrQuizLink": "index.html#datenschutz:quiz",
     "qrMemoryLink": "index.html#datenschutz:merk",
+    "einfachLessons": [
+      {
+        "title": "Deine privaten Daten",
+        "module": "Einfach",
+        "pictogram": "pikto-data",
+        "icon": "lock",
+        "text": [
+          "Du hast private Daten.",
+          "Das ist dein Name.",
+          "Das ist deine Adresse.",
+          "Das ist dein Passwort.",
+          "Diese Daten gehören nur dir."
+        ],
+        "remember": "Private Daten sind nur für dich."
+      },
+      {
+        "title": "Dein Passwort",
+        "module": "Einfach",
+        "pictogram": "pikto-lock",
+        "icon": "lock",
+        "text": [
+          "Du hast ein Passwort.",
+          "Das Passwort ist geheim.",
+          "Du sagst es niemandem.",
+          "Auch nicht guten Freunden.",
+          "Dein Passwort ist lang und schwer zu erraten."
+        ],
+        "remember": "Dein Passwort bleibt geheim."
+      },
+      {
+        "title": "Jemand fragt nach deinen Daten",
+        "module": "Einfach",
+        "pictogram": "pikto-ask",
+        "icon": "warning",
+        "text": [
+          "Manchmal fragt jemand nach deinen Daten.",
+          "Das passiert in einer Nachricht.",
+          "Du gibst deine Daten nicht ein.",
+          "Du fragst zuerst eine vertraute Person.",
+          "Diese Person hilft dir."
+        ],
+        "remember": "Erst fragen. Dann entscheiden."
+      }
+    ],
     "miniQuestion": {
       "question": "Welche Information bleibt geheim?",
       "answers": [
@@ -1023,6 +1067,50 @@ const topics = [
     "qrShortLink": "index.html#whatsapp:kurz",
     "qrQuizLink": "index.html#whatsapp:quiz",
     "qrMemoryLink": "index.html#whatsapp:merk",
+    "einfachLessons": [
+      {
+        "title": "Unbekannte Nachrichten",
+        "module": "Einfach",
+        "pictogram": "pikto-message",
+        "icon": "message",
+        "text": [
+          "Du bekommst eine Nachricht.",
+          "Du kennst die Person nicht.",
+          "Du antwortest nicht sofort.",
+          "Du zeigst es einer vertrauten Person.",
+          "Die Person hilft dir."
+        ],
+        "remember": "Unbekannte Nachrichten: erst fragen."
+      },
+      {
+        "title": "Links in Nachrichten",
+        "module": "Einfach",
+        "pictogram": "pikto-link",
+        "icon": "link",
+        "text": [
+          "Du bekommst einen Link.",
+          "Ein Link ist eine blaue Adresse.",
+          "Du tippst nicht sofort drauf.",
+          "Fremde Links können gefährlich sein.",
+          "Du fragst eine vertraute Person."
+        ],
+        "remember": "Fremde Links nicht sofort anklicken."
+      },
+      {
+        "title": "Dein WhatsApp-Code",
+        "module": "Einfach",
+        "pictogram": "pikto-lock",
+        "icon": "warning",
+        "text": [
+          "WhatsApp schickt dir manchmal einen Code.",
+          "Der Code kommt als SMS.",
+          "Den Code gibst du niemandem.",
+          "Auch nicht an Freunde.",
+          "Wer den Code kennt, kann dein Konto stehlen."
+        ],
+        "remember": "Deinen WhatsApp-Code niemals weitergeben."
+      }
+    ],
     "miniQuestion": {
       "question": "Du bekommst einen komischen Link. Was machst du?",
       "answers": [
@@ -1458,6 +1546,50 @@ const topics = [
     "qrShortLink": "index.html#facebook:kurz",
     "qrQuizLink": "index.html#facebook:quiz",
     "qrMemoryLink": "index.html#facebook:merk",
+    "einfachLessons": [
+      {
+        "title": "Dein Facebook-Profil",
+        "module": "Einfach",
+        "pictogram": "pikto-data",
+        "icon": "message",
+        "text": [
+          "Du hast ein Profil auf Facebook.",
+          "Andere sehen dein Profil.",
+          "Du kannst einstellen, wer es sieht.",
+          "Am besten sehen es nur Freunde.",
+          "Eine vertraute Person hilft dir beim Einstellen."
+        ],
+        "remember": "Dein Profil: nur Freunde sehen es."
+      },
+      {
+        "title": "Unbekannte Personen",
+        "module": "Einfach",
+        "pictogram": "pikto-ask",
+        "icon": "warning",
+        "text": [
+          "Manchmal fragt eine unbekannte Person.",
+          "Sie will dein Freund sein.",
+          "Du kennst die Person nicht.",
+          "Du nimmst die Anfrage nicht an.",
+          "Du fragst eine vertraute Person."
+        ],
+        "remember": "Unbekannte Anfragen ablehnen."
+      },
+      {
+        "title": "Komische Nachrichten",
+        "module": "Einfach",
+        "pictogram": "pikto-message",
+        "icon": "stop",
+        "text": [
+          "Du bekommst eine komische Nachricht.",
+          "Jemand fragt nach Geld.",
+          "Jemand schickt einen Link.",
+          "Du klickst nicht drauf.",
+          "Du zeigst es einer vertrauten Person."
+        ],
+        "remember": "Komische Nachrichten zeigen, nicht klicken."
+      }
+    ],
     "miniQuestion": {
       "question": "Was prüfst du vor einem öffentlichen Beitrag?",
       "answers": [
@@ -1913,6 +2045,50 @@ const topics = [
     "qrShortLink": "index.html#instagram:kurz",
     "qrQuizLink": "index.html#instagram:quiz",
     "qrMemoryLink": "index.html#instagram:merk",
+    "einfachLessons": [
+      {
+        "title": "Deine Fotos auf Instagram",
+        "module": "Einfach",
+        "pictogram": "pikto-photo",
+        "icon": "photo",
+        "text": [
+          "Du postest Fotos auf Instagram.",
+          "Andere sehen deine Fotos.",
+          "Du kannst einstellen, wer sie sieht.",
+          "Am besten ist dein Konto privat.",
+          "Dann sehen nur Freunde deine Fotos."
+        ],
+        "remember": "Konto auf privat stellen."
+      },
+      {
+        "title": "Fotos von anderen Personen",
+        "module": "Einfach",
+        "pictogram": "pikto-ask",
+        "icon": "photo",
+        "text": [
+          "Du willst ein Foto posten.",
+          "Auf dem Foto ist eine andere Person.",
+          "Du fragst die Person zuerst.",
+          "Die Person muss ja sagen.",
+          "Sonst postest du das Foto nicht."
+        ],
+        "remember": "Fotos von anderen: erst fragen."
+      },
+      {
+        "title": "Nachrichten von Unbekannten",
+        "module": "Einfach",
+        "pictogram": "pikto-message",
+        "icon": "warning",
+        "text": [
+          "Jemand schreibt dir eine Nachricht.",
+          "Du kennst die Person nicht.",
+          "Du antwortest nicht.",
+          "Du zeigst es einer vertrauten Person.",
+          "Die Person hilft dir."
+        ],
+        "remember": "Unbekannte Nachrichten: vertraute Person fragen."
+      }
+    ],
     "miniQuestion": {
       "question": "Du willst ein Foto von einer anderen Person posten. Was machst du?",
       "answers": [
@@ -2346,6 +2522,50 @@ const topics = [
     "qrShortLink": "index.html#youtube:kurz",
     "qrQuizLink": "index.html#youtube:quiz",
     "qrMemoryLink": "index.html#youtube:merk",
+    "einfachLessons": [
+      {
+        "title": "Videos prüfen",
+        "module": "Einfach",
+        "pictogram": "pikto-screen",
+        "icon": "understand",
+        "text": [
+          "Du schaust Videos auf YouTube.",
+          "Manche Videos stimmen nicht.",
+          "Du fragst dich: Stimmt das wirklich?",
+          "Du schaust auf einen anderen Kanal.",
+          "Oder du fragst eine vertraute Person."
+        ],
+        "remember": "Prüfe, ob das Video stimmt."
+      },
+      {
+        "title": "Werbung erkennen",
+        "module": "Einfach",
+        "pictogram": "pikto-no",
+        "icon": "warning",
+        "text": [
+          "Manchmal kommt Werbung im Video.",
+          "Werbung will, dass du etwas kaufst.",
+          "Du musst nichts kaufen.",
+          "Du kannst Werbung überspringen.",
+          "Du klickst nicht auf Werbung."
+        ],
+        "remember": "Werbung nicht anklicken."
+      },
+      {
+        "title": "Pausen machen",
+        "module": "Einfach",
+        "pictogram": "pikto-pause",
+        "icon": "stop",
+        "text": [
+          "Du schaust lange Videos.",
+          "Das ist anstrengend.",
+          "Du machst nach einer Stunde Pause.",
+          "Du gehst raus oder bewegst dich.",
+          "Das ist gut für dich."
+        ],
+        "remember": "Nach einer Stunde Pause machen."
+      }
+    ],
     "miniQuestion": {
       "question": "Was hilft beim Prüfen eines Videos?",
       "answers": [
@@ -2764,6 +2984,52 @@ const topics = [
     "qrShortLink": "index.html#snapchat:kurz",
     "qrQuizLink": "index.html#snapchat:quiz",
     "qrMemoryLink": "index.html#snapchat:merk",
+    "einfachLessons": [
+      {
+        "title": "Bilder verschwinden nicht wirklich",
+        "module": "Einfach",
+        "pictogram": "pikto-photo",
+        "icon": "photo",
+        "text": [
+          "Du sendest ein Bild auf Snapchat.",
+          "Das Bild verschwindet nach kurzer Zeit.",
+          "Aber andere können es speichern.",
+          "Sie machen einen Screenshot.",
+          "Das Bild ist dann für immer da.",
+          "Schicke nur Bilder, die du zeigen kannst."
+        ],
+        "remember": "Bilder verschwinden nicht wirklich."
+      },
+      {
+        "title": "Dein Standort",
+        "module": "Einfach",
+        "pictogram": "pikto-location",
+        "icon": "warning",
+        "text": [
+          "Snapchat kann deinen Standort zeigen.",
+          "Andere sehen dann, wo du bist.",
+          "Das ist gefährlich.",
+          "Du schaltest den Standort aus.",
+          "Eine vertraute Person hilft dir dabei."
+        ],
+        "remember": "Standort ausschalten."
+      },
+      {
+        "title": "Niemand darf dich zwingen",
+        "module": "Einfach",
+        "pictogram": "pikto-no",
+        "icon": "stop",
+        "text": [
+          "Jemand macht Druck auf dich.",
+          "Er sagt: Schick mir ein Bild!",
+          "Du willst das nicht.",
+          "Du musst das nicht machen.",
+          "Du sagst nein.",
+          "Du sagst es einer vertrauten Person."
+        ],
+        "remember": "Du darfst nein sagen."
+      }
+    ],
     "miniQuestion": {
       "question": "Sind Snaps immer sicher weg?",
       "answers": [
@@ -3208,6 +3474,50 @@ const topics = [
     "qrShortLink": "index.html#tiktok:kurz",
     "qrQuizLink": "index.html#tiktok:quiz",
     "qrMemoryLink": "index.html#tiktok:merk",
+    "einfachLessons": [
+      {
+        "title": "Was du bei TikTok siehst",
+        "module": "Einfach",
+        "pictogram": "pikto-screen",
+        "icon": "understand",
+        "text": [
+          "TikTok zeigt dir viele Videos.",
+          "TikTok merkt, was dir gefällt.",
+          "Es zeigt dir immer mehr davon.",
+          "Das kann einseitig werden.",
+          "Schau auch andere Kanäle an."
+        ],
+        "remember": "TikTok zeigt dir nur bestimmte Videos."
+      },
+      {
+        "title": "Nachrichten auf TikTok",
+        "module": "Einfach",
+        "pictogram": "pikto-message",
+        "icon": "warning",
+        "text": [
+          "Jemand schreibt dir eine Nachricht.",
+          "Du kennst die Person nicht.",
+          "Du antwortest nicht.",
+          "Du zeigst es einer vertrauten Person.",
+          "Die Person hilft dir."
+        ],
+        "remember": "Nachrichten von Unbekannten: vertraute Person fragen."
+      },
+      {
+        "title": "Pause machen",
+        "module": "Einfach",
+        "pictogram": "pikto-pause",
+        "icon": "stop",
+        "text": [
+          "TikTok macht, dass du lange schaust.",
+          "Das ist anstrengend.",
+          "Du machst nach einer Stunde Pause.",
+          "Du stellst einen Timer.",
+          "Das hilft dir."
+        ],
+        "remember": "Timer stellen. Pause machen."
+      }
+    ],
     "miniQuestion": {
       "question": "Was machst du bei gefährlichen Trends?",
       "answers": [
@@ -3648,6 +3958,52 @@ const topics = [
     "qrShortLink": "index.html#hilfe:kurz",
     "qrQuizLink": "index.html#hilfe:quiz",
     "qrMemoryLink": "index.html#hilfe:merk",
+    "einfachLessons": [
+      {
+        "title": "Etwas fühlt sich falsch an",
+        "module": "Einfach",
+        "pictogram": "pikto-feel",
+        "icon": "help",
+        "text": [
+          "Manchmal passiert etwas im Internet.",
+          "Das fühlt sich falsch an.",
+          "Oder du bist unsicher.",
+          "Du machst Stopp.",
+          "Du gehst nicht weiter.",
+          "Das ist mutig und richtig."
+        ],
+        "remember": "Wenn etwas falsch fühlt: Stopp machen."
+      },
+      {
+        "title": "Wer hilft dir?",
+        "module": "Einfach",
+        "pictogram": "pikto-help",
+        "icon": "help",
+        "text": [
+          "Du hast ein Problem im Internet.",
+          "Du brauchst Hilfe.",
+          "Du gehst zu einer vertrauten Person.",
+          "Das kann dein Betreuer sein.",
+          "Das kann ein Freund sein.",
+          "Du zeigst ihr das Problem."
+        ],
+        "remember": "Vertraute Person um Hilfe bitten."
+      },
+      {
+        "title": "Du bist nicht allein",
+        "module": "Einfach",
+        "pictogram": "pikto-help",
+        "icon": "check",
+        "text": [
+          "Viele Menschen haben Probleme im Internet.",
+          "Das passiert auch anderen.",
+          "Du bist nicht allein.",
+          "Hilfe zu holen ist keine Schwäche.",
+          "Es ist mutig und richtig."
+        ],
+        "remember": "Du bist nicht allein. Hilfe holen ist mutig."
+      }
+    ],
     "miniQuestion": {
       "question": "Was machst du, wenn du unsicher bist?",
       "answers": [
@@ -3974,6 +4330,51 @@ const topics = [
       5,
       8,
       9
+    ],
+    "einfachLessons": [
+      {
+        "title": "Was ist KI?",
+        "module": "Einfach",
+        "pictogram": "pikto-ki",
+        "icon": "ki",
+        "text": [
+          "KI bedeutet Künstliche Intelligenz.",
+          "KI ist ein Computerprogramm.",
+          "Es kann Fragen beantworten.",
+          "Es kann Texte schreiben.",
+          "Es kann Bilder machen.",
+          "KI ist kein Mensch."
+        ],
+        "remember": "KI ist ein Programm. Kein Mensch."
+      },
+      {
+        "title": "Was kann KI?",
+        "module": "Einfach",
+        "pictogram": "pikto-ki",
+        "icon": "ki",
+        "text": [
+          "KI kann dir helfen.",
+          "Du kannst ihr Fragen stellen.",
+          "Sie gibt dir eine Antwort.",
+          "Die Antwort ist nicht immer richtig.",
+          "Du prüfst die Antwort."
+        ],
+        "remember": "KI-Antworten immer prüfen."
+      },
+      {
+        "title": "Wann musst du aufpassen?",
+        "module": "Einfach",
+        "pictogram": "pikto-no",
+        "icon": "warning",
+        "text": [
+          "KI kann auch Falsches sagen.",
+          "KI kann Bilder fälschen.",
+          "KI kann Stimmen nachmachen.",
+          "Du glaubst nicht alles.",
+          "Du fragst eine vertraute Person."
+        ],
+        "remember": "Nicht alles glauben. Erst prüfen."
+      }
     ],
     "miniQuestion": {
       "question": "Was ist KI?",
@@ -4326,6 +4727,50 @@ const topics = [
       7,
       8,
       10
+    ],
+    "einfachLessons": [
+      {
+        "title": "Was ist eine Fake-Nachricht?",
+        "module": "Einfach",
+        "pictogram": "pikto-fake",
+        "icon": "fake",
+        "text": [
+          "Eine Fake-Nachricht ist eine Lüge.",
+          "Sie sieht aus wie eine echte Nachricht.",
+          "Aber sie stimmt nicht.",
+          "Manchmal ist sie auch ein Bild.",
+          "Das Bild ist verändert worden."
+        ],
+        "remember": "Fake-Nachrichten sind Lügen."
+      },
+      {
+        "title": "Wie erkennst du Fakes?",
+        "module": "Einfach",
+        "pictogram": "pikto-fake",
+        "icon": "fake",
+        "text": [
+          "Du liest eine Nachricht.",
+          "Sie macht dich sehr aufgeregt.",
+          "Das kann ein Zeichen sein.",
+          "Du überlegst kurz.",
+          "Du prüfst auf einer anderen Seite.",
+          "Oder du fragst eine vertraute Person."
+        ],
+        "remember": "Erst prüfen. Dann teilen."
+      },
+      {
+        "title": "Was tust du bei Fakes?",
+        "module": "Einfach",
+        "pictogram": "pikto-no",
+        "icon": "stop",
+        "text": [
+          "Du erkennst eine Fake-Nachricht.",
+          "Du schickst sie nicht weiter.",
+          "Du löschst sie.",
+          "Du sagst es einer vertrauten Person."
+        ],
+        "remember": "Fakes nicht weiterleiten."
+      }
     ],
     "miniQuestion": {
       "question": "Was machst du bei einer unglaublichen Nachricht?",
@@ -4692,6 +5137,50 @@ const topics = [
       9,
       10
     ],
+    "einfachLessons": [
+      {
+        "title": "Was ist Betrug im Internet?",
+        "module": "Einfach",
+        "pictogram": "pikto-fraud",
+        "icon": "betrug",
+        "text": [
+          "Manche Menschen betrügen andere.",
+          "Sie tun so, als ob sie helfen.",
+          "Aber sie wollen dein Geld.",
+          "Oder deine Daten.",
+          "Das ist Betrug."
+        ],
+        "remember": "Nicht jeder im Internet ist ehrlich."
+      },
+      {
+        "title": "Wie erkennst du Betrug?",
+        "module": "Einfach",
+        "pictogram": "pikto-fraud",
+        "icon": "warning",
+        "text": [
+          "Du gewinnst plötzlich etwas.",
+          "Jemand braucht dringend Geld.",
+          "Jemand macht Druck auf dich.",
+          "Das sind Zeichen für Betrug.",
+          "Du machst Stopp.",
+          "Du fragst eine vertraute Person."
+        ],
+        "remember": "Druck und Gewinn: Stopp machen."
+      },
+      {
+        "title": "Was tust du bei Betrug?",
+        "module": "Einfach",
+        "pictogram": "pikto-no",
+        "icon": "stop",
+        "text": [
+          "Du zahlst kein Geld.",
+          "Du gibst keine Daten ein.",
+          "Du sagst es einer vertrauten Person.",
+          "Die Person hilft dir."
+        ],
+        "remember": "Kein Geld senden. Vertraute Person fragen."
+      }
+    ],
     "miniQuestion": {
       "question": "Eine Nachricht macht Druck und will Geld. Was ist das oft?",
       "answers": [
@@ -5033,6 +5522,50 @@ const topics = [
       6,
       9,
       10
+    ],
+    "einfachLessons": [
+      {
+        "title": "Einkaufen im Internet",
+        "module": "Einfach",
+        "pictogram": "pikto-shop",
+        "icon": "einkaufen",
+        "text": [
+          "Du kannst im Internet einkaufen.",
+          "Das heißt Online-Shopping.",
+          "Du suchst etwas aus.",
+          "Du bezahlst.",
+          "Die Ware kommt nach Hause."
+        ],
+        "remember": "Nur bei sicheren Shops einkaufen."
+      },
+      {
+        "title": "Gute Shops erkennen",
+        "module": "Einfach",
+        "pictogram": "pikto-shop",
+        "icon": "check",
+        "text": [
+          "Du siehst ein Schloss in der Adresszeile.",
+          "Die Adresse beginnt mit https.",
+          "Du findest eine Adresse des Shops.",
+          "Diese Zeichen sind gut.",
+          "Bei Unsicherheit fragst du eine vertraute Person."
+        ],
+        "remember": "Schloss und https: gute Zeichen."
+      },
+      {
+        "title": "Sicher bezahlen",
+        "module": "Einfach",
+        "pictogram": "pikto-shop",
+        "icon": "einkaufen",
+        "text": [
+          "Du bezahlst mit PayPal.",
+          "Oder du bezahlst auf Rechnung.",
+          "Das ist sicherer.",
+          "Du gibst deine Kreditkarte nicht überall ein.",
+          "Bei Problemen fragst du eine vertraute Person."
+        ],
+        "remember": "PayPal oder Rechnung ist sicherer."
+      }
     ],
     "miniQuestion": {
       "question": "Welche Bezahl-Art ist sicherer?",
