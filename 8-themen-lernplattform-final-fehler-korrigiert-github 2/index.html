@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Sicher und selbstbestimmt im Internet – Lernplattform in Einfacher Sprache</title>
+
+  <meta name="description" content="Barrierearme Lernplattform zur digitalen Bildung: Datenschutz, WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok, KI und Chatbots, Fake News, Online-Betrug, sicheres Einkaufen und Hilfe bei Problemen im Internet. In Einfacher Sprache." />
+  <meta name="author" content="Frank Runge" />
+  <meta name="creator" content="Frank Runge" />
+  <meta name="keywords" content="digitale Bildung, digitale Teilhabe, Medienkompetenz, Datenschutz, KI, Künstliche Intelligenz, Fake News, Deepfakes, Online-Betrug, Phishing, sicher einkaufen, Social Media, Internet Sicherheit, barrierearm lernen, Einfache Sprache, Menschen mit Lernschwierigkeiten, Eingliederungshilfe" />
+
+  <link rel="canonical" href="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="Sicher und selbstbestimmt im Internet" />
+  <meta property="og:description" content="Barrierearme Lernplattform zur digitalen Bildung in Einfacher Sprache: 12 Themen von Datenschutz bis KI. Erstellt von Frank Runge." />
+  <meta property="og:site_name" content="Sicher und selbstbestimmt im Internet" />
+  <meta property="og:url" content="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/" />
+  <meta property="og:image" content="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/assets/brand/logo-tilbeck-alexianer.jpeg" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sicher und selbstbestimmt im Internet" />
+  <meta name="twitter:description" content="Barrierearme Lernplattform zur digitalen Bildung in Einfacher Sprache: 12 Themen von Datenschutz bis KI." />
+  <meta name="twitter:image" content="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/assets/brand/logo-tilbeck-alexianer.jpeg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Sicher und selbstbestimmt im Internet",
+    "url": "https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/",
+    "description": "Barrierearme Lernplattform zur digitalen Bildung, Datenschutz, KI-Kompetenz und sicheren Nutzung von sozialen Medien in Einfacher Sprache.",
+    "inLanguage": "de",
+    "learningResourceType": "Selbstlernangebot",
+    "educationalUse": "Digitale Bildung und Medienkompetenz",
+    "dateModified": "2026-06-14",
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Menschen mit Lern- und Verständnisschwierigkeiten"
+    },
+    "about": [
+      "Digitale Bildung",
+      "Digitale Teilhabe",
+      "Datenschutz",
+      "Medienkompetenz",
+      "Künstliche Intelligenz",
+      "Fake News und Deepfakes",
+      "Online-Betrug",
+      "Sicheres Online-Einkaufen",
+      "Social Media Sicherheit",
+      "Internet Sicherheit"
+    ],
+    "creator": {
+      "@type": "Person",
+      "name": "Frank Runge"
+    },
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#00528f" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Zum Inhalt springen</a>
+  <div class="app">
+    <header class="app-header">
+      <button class="home-button" id="homeButton" aria-label="Zur Themenübersicht">⌂</button>
+      <button class="sound-toggle-button sound-toggle sound-off" id="soundToggleButton" type="button" aria-pressed="false" aria-label="Töne einschalten">Töne aus</button>
+      <div class="header-text">
+        <h1 id="appTitle">Sicher und selbstbestimmt im Internet</h1>
+        <p id="moduleLabel">Thema auswählen</p>
+      </div>
+    </header>
+
+    <section class="progress-area is-hidden" aria-label="Lernfortschritt">
+      <div class="progress-meta">
+        <span id="stepLabel">Themenübersicht</span>
+        <span id="levelLabel">Wähle ein Thema</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </section>
+
+    <main id="content" class="content" tabindex="-1">
+      <noscript>
+        <div class="card">
+          <h2>JavaScript ist ausgeschaltet</h2>
+          <p>Diese Lernplattform braucht JavaScript.</p>
+          <p>Bitte schalte JavaScript in deinem Browser ein.</p>
+        </div>
+      </noscript>
+    </main>
+
+    <nav class="nav is-hidden" aria-label="Navigation">
+      <button class="nav-button secondary" id="backButton">Zurück</button>
+      <button class="nav-button primary" id="nextButton">Weiter</button>
+    </nav>
+
+    <footer class="app-footer" aria-label="Träger und Förderer">
+      <div class="footer-logos">
+        <img src="assets/brand/logo-tilbeck-alexianer.jpeg" alt="Stift Tilbeck GmbH und Alexianer" class="footer-logo footer-logo-wide">
+        <img src="assets/brand/logo-sozialstiftung-nrw.jpeg" alt="Sozialstiftung NRW" class="footer-logo">
+      </div>
+    </footer>
+  </div>
+
+  <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="topics.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").then((reg) => {
+          /* Wenn ein neues SW wartet, Banner anzeigen */
+          reg.addEventListener("updatefound", () => {
+            const newWorker = reg.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                showUpdateBanner();
+              }
+            });
+          });
+        }).catch(() => {});
+
+        /* Seite benachrichtigt uns, dass SW aktiviert wurde */
+        navigator.serviceWorker.addEventListener("message", (e) => {
+          if (e.data && e.data.type === "SW_UPDATED") showUpdateBanner();
+        });
+      });
+    }
+
+    function showUpdateBanner() {
+      const existing = document.getElementById("updateBanner");
+      if (existing) return;
+      const banner = document.createElement("div");
+      banner.id = "updateBanner";
+      banner.className = "update-banner";
+      banner.setAttribute("role", "status");
+      banner.innerHTML = `
+        <span>✓ Die Lernplattform wurde aktualisiert.</span>
+        <button type="button" onclick="location.reload()">Neu laden</button>
+        <button type="button" class="update-banner-close" aria-label="Banner schließen" onclick="this.closest('.update-banner').remove()">✕</button>
+      `;
+      document.body.prepend(banner);
+    }
+  </script>
+</body>
+</html>

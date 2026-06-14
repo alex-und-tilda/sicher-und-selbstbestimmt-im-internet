@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/sitemap.xml
