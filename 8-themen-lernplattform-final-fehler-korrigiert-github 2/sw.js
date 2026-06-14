@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-06";
+const CACHE_VERSION = "v2026-06d";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
 /* Alle Dateien, die sofort beim Installieren gecacht werden */
@@ -93,9 +93,17 @@ const PRECACHE_URLS = [
   "./assets/icons/betrug.svg",
   "./assets/icons/einkaufen.svg",
 
-  /* Schriften (werden gecacht sobald sie vorhanden sind) */
+  /* Schriften — WOFF2 (primär) + TTF (Fallback, optional) */
+  "./assets/fonts/atkinson-regular.woff2",
+  "./assets/fonts/atkinson-regular-ext.woff2",
+  "./assets/fonts/atkinson-bold.woff2",
+  "./assets/fonts/atkinson-bold-ext.woff2",
   "./assets/fonts/atkinson-regular.ttf",
   "./assets/fonts/atkinson-bold.ttf",
+
+  /* Logos im Footer */
+  "./assets/brand/logo-tilbeck-alexianer.jpeg",
+  "./assets/brand/logo-sozialstiftung-nrw.jpeg",
 ];
 
 /* ---- Install ---- */

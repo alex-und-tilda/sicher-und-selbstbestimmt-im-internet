@@ -981,7 +981,50 @@ function startTopicMode(topicId, mode) {
   currentTopicId = topic.id;
   currentMode = mode === "short" ? "short" : "full";
   currentStep = 0;
-  renderLesson();
+  if (topic.selfAssessment) {
+    renderSelfAssessment();
+  } else {
+    renderLesson();
+  }
+}
+
+function renderSelfAssessment() {
+  stopReading();
+  const topic = getCurrentTopic();
+  if (!topic || !topic.selfAssessment) return renderLesson();
+
+  const sa = topic.selfAssessment;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "", "", "Start", 0);
+
+  const optionButtons = sa.options.map((opt, i) =>
+    `<button class="sa-option-btn" data-index="${i}" type="button">${escapeHtml(opt)}</button>`
+  ).join("");
+
+  content.innerHTML = `
+    <article class="card sa-card" style="${getTopicColorStyle(topic.id)}">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
+        <h2>${escapeHtml(topic.title)}</h2>
+      </div>
+      <p class="sa-intro">Bevor wir starten:</p>
+      <p class="sa-question">${escapeHtml(sa.question)}</p>
+      <div class="sa-options" role="group" aria-label="Einschätzung wählen">
+        ${optionButtons}
+      </div>
+      <p class="sa-hint">Es gibt keine falsche Antwort. Wähle einfach, was für dich stimmt.</p>
+    </article>
+  `;
+
+  content.querySelectorAll(".sa-option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      renderLesson();
+    });
+  });
+
+  focusContent();
+  renderLegalFooter();
 }
 
 function renderLesson() {
@@ -999,9 +1042,19 @@ function renderLesson() {
   const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
   const hasPractice = Boolean(lesson.practice);
 
+  /* Modul-Cluster-Badge: zeigen wenn neues Modul beginnt (nicht bei Schritt 0/Start) */
+  const prevLesson = currentStep > 0 ? lessons[currentStep - 1] : null;
+  const isNewModule = prevLesson && lesson.module && lesson.module !== "Start" && prevLesson.module !== lesson.module;
+  const moduleBadge = isNewModule
+    ? `<div class="module-cluster-badge" role="status" aria-live="polite">
+         <span class="module-cluster-label">Neues Thema:</span>
+         <span class="module-cluster-name">${escapeHtml(lesson.module)}</span>
+       </div>`
+    : "";
+
   setProgressVisible(true);
   setBottomNavVisible(!hasPractice);
-  setHeader(topic.title, modeLabel, `Seite ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
+  setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
   const text = Array.isArray(lesson.text)
@@ -1030,19 +1083,32 @@ function renderLesson() {
 
   const practice = hasPractice ? buildPractice(lesson.practice) : "";
 
-  /* Lernziele nur im Start-Screen anzeigen */
-  const learningGoals = lesson.module === "Start" && Array.isArray(topic.learningGoals) && topic.learningGoals.length
+  /* Lernziele und Fehler-Normalisierung nur im Start-Screen */
+  const isStartLesson = lesson.module === "Start";
+
+  const learningGoals = isStartLesson && Array.isArray(topic.learningGoals) && topic.learningGoals.length
     ? `<div class="learning-goals-box">
          <h3>Was du hier lernst:</h3>
          <ul class="learning-goals-list">
            ${topic.learningGoals.map(g => `<li>${escapeHtml(g)}</li>`).join("")}
          </ul>
-         <p class="learning-goals-hint">Wenn etwas nicht klappt: Das ist ok. Du kannst alles mehrmals machen.</p>
+       </div>`
+    : "";
+
+  const safeNotice = isStartLesson
+    ? `<div class="start-safe-notice" role="note">
+         <p class="start-safe-icon" aria-hidden="true">✓</p>
+         <div>
+           <p class="start-safe-main">Du darfst Fehler machen.</p>
+           <p class="start-safe-sub">Das ist beim Lernen ganz normal.</p>
+           <p class="start-safe-sub">Du kannst jeden Schritt so oft machen, wie du möchtest.</p>
+         </div>
        </div>`
     : "";
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
+    ${moduleBadge}
     <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
@@ -1051,6 +1117,7 @@ function renderLesson() {
       ${getLessonImageHtml(lesson, topic)}
       ${text}
       ${learningGoals}
+      ${safeNotice}
       ${bullets}
       ${examples}
       ${warning}
@@ -1634,7 +1701,13 @@ function goBack() {
     renderLesson();
     return;
   }
-  renderTopicChoice(currentTopicId);
+
+  /* Bei Schritt 0: zurück zur Einstiegsfrage (wenn vorhanden), sonst Themenauswahl */
+  if (topic && topic.selfAssessment) {
+    renderSelfAssessment();
+  } else {
+    renderTopicChoice(currentTopicId);
+  }
 }
 
 function goNext() {
