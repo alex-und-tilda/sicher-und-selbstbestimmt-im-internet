@@ -27,6 +27,34 @@ let simpleMode = false;
 let audioContext = null;
 let speechRate = 0.85;
 
+/* Schriftgröße: 3 Stufen */
+const FONT_SIZES    = [17, 20, 23]; /* px */
+const FONT_SIZE_KEY = "font-size-step";
+let fontSizeStep = 0;
+
+function applyFontSize() {
+  document.documentElement.style.fontSize = FONT_SIZES[fontSizeStep] + "px";
+}
+
+function loadFontSize() {
+  try {
+    const saved = parseInt(window.localStorage.getItem(FONT_SIZE_KEY), 10);
+    if (!isNaN(saved) && saved >= 0 && saved < FONT_SIZES.length) fontSizeStep = saved;
+  } catch (e) { /* nichts tun */ }
+  applyFontSize();
+}
+
+function changeFontSize(direction) {
+  const next = fontSizeStep + direction;
+  if (next < 0 || next >= FONT_SIZES.length) return;
+  fontSizeStep = next;
+  try { window.localStorage.setItem(FONT_SIZE_KEY, fontSizeStep); } catch (e) { /* nichts tun */ }
+  applyFontSize();
+  /* Buttons in allen sichtbaren Utility-Bars aktualisieren */
+  document.querySelectorAll(".font-btn-decrease").forEach(b => { b.disabled = fontSizeStep === 0; });
+  document.querySelectorAll(".font-btn-increase").forEach(b => { b.disabled = fontSizeStep === FONT_SIZES.length - 1; });
+}
+
 /* ============================================================
    Lernstand – nur mit Einwilligung, jederzeit löschbar
    Es wird kein Name gespeichert. Nichts verlässt das Gerät.
@@ -648,6 +676,10 @@ function buildUtilityBar() {
       </button>
       <button type="button" class="utility-button" onclick="showSymbolHelp()">Zeichen erklären</button>
       <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
+      <div class="font-size-group" role="group" aria-label="Schriftgröße ändern">
+        <button type="button" class="utility-button font-btn font-btn-decrease" onclick="changeFontSize(-1)" aria-label="Schrift kleiner" ${fontSizeStep === 0 ? "disabled" : ""}>A−</button>
+        <button type="button" class="utility-button font-btn font-btn-increase" onclick="changeFontSize(1)"  aria-label="Schrift größer" ${fontSizeStep === FONT_SIZES.length - 1 ? "disabled" : ""}>A+</button>
+      </div>
     </div>
   `;
 }
@@ -665,7 +697,7 @@ function renderLegalFooter() {
   footer.innerHTML = `
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
     <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
-    <a href="ersteller.html">Ersteller</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+    <a href="ersteller.html">Ersteller</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="barrierefreiheit.html">Barrierefreiheit</a></p>
   `;
   const appRoot = document.querySelector(".app") || document.body;
   appRoot.appendChild(footer);
@@ -688,18 +720,21 @@ function renderMenu() {
   setHeader("Sicher und selbstbestimmt im Internet", "Thema auswählen", "Themenübersicht", "Wähle ein Thema", 0);
   showNav(false, false);
 
-  const cards = topics.map(topic => `
-    <button type="button" class="topic-card topic-${escapeHtml(topic.id)}" style="${getTopicColorStyle(topic.id)}" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
+  const cards = topics.map(topic => {
+    const done = isTopicDone(topic.id);
+    return `
+    <button type="button" class="topic-card topic-${escapeHtml(topic.id)}${done ? " topic-card--done" : ""}" style="${getTopicColorStyle(topic.id)}" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
+      ${done ? `<span class="topic-done-corner" aria-label="Geschafft" title="Geschafft">✓</span>` : ""}
       ${getIllustrationHtml(topic)}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
-      ${isTopicDone(topic.id) ? `<span class="topic-done-badge">✓ Geschafft</span>` : ""}
+      ${done ? `<span class="topic-done-badge">✓ Geschafft</span>` : ""}
       <span class="card-read-button" role="button" tabindex="0" data-read-card-text="${escapeHtml(topic.title)}. ${escapeHtml(topic.desc || "")}" aria-label="Thema ${escapeHtml(topic.title)} vorlesen">
         🔊 Vorlesen
       </span>
       <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
     </button>
-  `).join("");
+  `;}).join("");
 
   const doneCount = countDoneTopics();
   const progressConsent = isProgressEnabled()
@@ -717,9 +752,12 @@ function renderMenu() {
       </div>`;
 
   const heroProgress = isProgressEnabled() && doneCount > 0
-    ? `<div class="hero-progress-row">
-         <span class="hero-progress-done">${doneCount} von ${topics.length} Themen geschafft</span>
-         <div class="hero-progress-track" role="presentation">
+    ? `<div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
+         <div class="hero-progress-numbers">
+           <span class="hero-progress-count" aria-live="polite">${doneCount}</span>
+           <span class="hero-progress-of">von ${topics.length} Themen geschafft</span>
+         </div>
+         <div class="hero-progress-track" role="progressbar" aria-valuenow="${doneCount}" aria-valuemin="0" aria-valuemax="${topics.length}" aria-label="${doneCount} von ${topics.length} Themen">
            <div class="hero-progress-fill" style="width:${Math.round((doneCount/topics.length)*100)}%"></div>
          </div>
        </div>`
@@ -1209,7 +1247,8 @@ function renderPracticeFeedbackPage(index, correctIndex) {
       <div class="feedback-actions">
         ${isCorrect
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterPractice()">Weiter</button>`
-          : `<button type="button" class="feedback-button secondary" onclick="renderLesson()">Nochmal versuchen</button>`
+          : `<button type="button" class="feedback-button secondary" onclick="renderLesson()">Lektion nochmal lesen</button>
+             <button type="button" class="feedback-button ghost" onclick="renderPracticePage()">Frage nochmal versuchen</button>`
         }
       </div>
 
@@ -1219,6 +1258,34 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   announce(isCorrect ? "Genau richtig!" : "Fast! Das war noch nicht ganz richtig.");
   focusContent();
   renderLegalFooter();
+}
+
+function renderPracticePage() {
+  /* Springt direkt zur Übungsfrage der aktuellen Lektion zurück */
+  const topic = getCurrentTopic();
+  const lessons = getLessonsForMode(topic, currentMode);
+  const lesson = lessons[currentStep];
+  if (lesson && lesson.practice) {
+    setProgressVisible(true);
+    setBottomNavVisible(false);
+    const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
+    const modeLabel = currentMode === "short" ? "Einfach lernen" : "Mehr lernen";
+    setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
+    content.innerHTML = `
+      ${buildUtilityBar()}${buildReadingToolbar()}
+      <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+        <div class="symbol-heading">
+          <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
+          <h2>${escapeHtml(lesson.title || topic.title)}</h2>
+        </div>
+        ${buildPractice(lesson.practice)}
+      </article>
+    `;
+    focusContent();
+    renderLegalFooter();
+  } else {
+    renderLesson();
+  }
 }
 
 function continueAfterPractice() {
@@ -1247,8 +1314,53 @@ function renderCompletionPage(topicId) {
   playSound("success");
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
   showNav(false, false);
+
+  /* ---- Einfach-Modus: eigene, wärmere Abschlussseite ---- */
+  if (currentMode === "short") {
+    setHeader(topic.title, "Einfach lernen", "Abschluss", "Du bist fertig", 100);
+    content.innerHTML = `
+      <section class="completion-page einfach-completion" data-readable="true">
+        <article class="card completion-card--einfach" style="${getTopicColorStyle(topic.id)}">
+
+          <div class="einfach-done-star" aria-hidden="true">
+            <img src="assets/pictograms/pikto-done.svg" alt="" width="120" height="120">
+          </div>
+
+          <h2 class="einfach-done-title">Super gemacht!</h2>
+
+          <p class="einfach-done-text">Du hast gelernt:</p>
+          <p class="einfach-done-topic"><strong>${escapeHtml(topic.title)}</strong></p>
+
+          <p class="einfach-done-praise">Das war toll.<br>Du hast gut aufgepasst.</p>
+
+          <div class="einfach-done-actions">
+            ${getQuizQuestions(topic).length
+              ? `<button type="button" class="primary-action einfach-done-btn" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
+                   Quiz machen
+                 </button>`
+              : ""}
+            <button type="button" class="secondary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
+              Nochmal von vorne
+            </button>
+            <button type="button" class="secondary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
+              Mehr lernen
+            </button>
+            <button type="button" class="ghost-action einfach-done-btn" onclick="renderMenu()">
+              Zur Themenübersicht
+            </button>
+          </div>
+
+        </article>
+      </section>
+    `;
+    focusContent();
+    renderLegalFooter();
+    return;
+  }
+
+  /* ---- Normaler Modus ---- */
+  setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
 
   const rules = Array.isArray(topic.memoryRules) ? topic.memoryRules.slice(0, 5) : [];
   const rulesHtml = rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
@@ -1294,6 +1406,153 @@ function startQuiz(topicId) {
   quizScore = 0;
   quizAnsweredCorrect = new Set();
   renderQuizQuestion();
+}
+
+/* ============================================================
+   Einfach-Quiz (2 Antwortoptionen, max. 3 Fragen)
+   ============================================================ */
+
+function startEinfachQuiz(topicId) {
+  const topic = getTopicById(topicId);
+  if (!topic) return renderMenu();
+  currentTopicId = topic.id;
+  currentQuizIndex = 0;
+  quizScore = 0;
+  quizAnsweredCorrect = new Set();
+  renderEinfachQuizQuestion();
+}
+
+function getEinfachQuizQuestions(topic) {
+  return getQuizQuestions(topic).slice(0, 3);
+}
+
+function renderEinfachQuizQuestion() {
+  stopReading();
+  const topic = getCurrentTopic();
+  const questions = getEinfachQuizQuestions(topic);
+  if (!topic || !questions.length) return renderCompletionPage(currentTopicId);
+  if (currentQuizIndex >= questions.length) return renderEinfachQuizResult();
+
+  const q = questions[currentQuizIndex];
+  const answers = Array.isArray(q.answers) ? q.answers : [];
+  const correctIndex = Number(q.correctIndex ?? 0);
+  const correctText = answers[correctIndex] || "";
+
+  /* Eine falsche Antwort zufällig wählen */
+  const wrongPool = answers.filter((_, i) => i !== correctIndex);
+  const wrongText = wrongPool[Math.floor(Math.random() * wrongPool.length)] || "Weiß ich nicht";
+
+  /* Reihenfolge zufällig variieren */
+  const correctFirst = Math.random() < 0.5;
+  const opts = correctFirst
+    ? [{ text: correctText, correct: true }, { text: wrongText, correct: false }]
+    : [{ text: wrongText, correct: false }, { text: correctText, correct: true }];
+
+  const percent = Math.round((currentQuizIndex / questions.length) * 100);
+  setProgressVisible(true);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "Einfach-Quiz", `Frage ${currentQuizIndex + 1} von ${questions.length}`, "Quiz", percent);
+  showNav(false, false);
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card einfach-quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <p class="einfach-quiz-number">Frage ${currentQuizIndex + 1} von ${questions.length}</p>
+      <p class="einfach-quiz-question">${escapeHtml(q.question || "")}</p>
+      <div class="einfach-quiz-options">
+        ${opts.map((opt, i) => `
+          <button type="button" class="einfach-quiz-btn" onclick="renderEinfachQuizFeedback(${i}, ${opt.correct ? "true" : "false"})">
+            ${escapeHtml(opt.text)}
+          </button>
+        `).join("")}
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function renderEinfachQuizFeedback(optionIndex, isCorrect) {
+  stopReading();
+  const topic = getCurrentTopic();
+  const questions = getEinfachQuizQuestions(topic);
+  const q = questions[currentQuizIndex];
+  if (!topic || !q) return renderMenu();
+
+  if (isCorrect) {
+    quizScore++;
+    quizAnsweredCorrect.add(currentQuizIndex);
+  }
+  playSound(isCorrect ? "correct" : "wrong");
+
+  const feedbackText = isCorrect
+    ? (q.feedbackCorrect || "Genau richtig!")
+    : (q.feedbackWrong || "Das war leider falsch. Beim nächsten Mal klappt es besser.");
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "Einfach-Quiz", "Antwort", isCorrect ? "Richtig!" : "Nochmal", 100);
+
+  content.innerHTML = `
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <h2 class="einfach-quiz-result-title">${isCorrect ? "✓ Richtig!" : "✗ Nicht ganz"}</h2>
+      <p class="einfach-quiz-feedback-text">${escapeHtml(feedbackText)}</p>
+      <div class="einfach-quiz-next-actions">
+        <button type="button" class="primary-action" onclick="einfachQuizNext()">
+          ${currentQuizIndex < questions.length - 1 ? "Weiter" : "Ergebnis ansehen"}
+        </button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function einfachQuizNext() {
+  currentQuizIndex++;
+  renderEinfachQuizQuestion();
+}
+
+function renderEinfachQuizResult() {
+  stopReading();
+  const topic = getCurrentTopic();
+  if (!topic) return renderMenu();
+  const total = getEinfachQuizQuestions(topic).length;
+
+  playSound("success");
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "Einfach-Quiz", "Ergebnis", "Quiz beendet", 100);
+  showNav(false, false);
+
+  const allCorrect = quizScore === total;
+  const emoji = allCorrect ? "🌟" : quizScore >= Math.ceil(total / 2) ? "👍" : "💪";
+  const praise = allCorrect
+    ? "Alle Fragen richtig. Das war super!"
+    : quizScore >= Math.ceil(total / 2)
+      ? "Das war schon sehr gut!"
+      : "Du lernst. Das ist toll!";
+
+  content.innerHTML = `
+    <article class="card completion-card--einfach" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <div class="einfach-quiz-result-emoji" aria-hidden="true">${emoji}</div>
+      <h2 class="einfach-done-title">${quizScore} von ${total} richtig</h2>
+      <p class="einfach-done-praise">${escapeHtml(praise)}</p>
+      <div class="einfach-done-actions">
+        <button type="button" class="primary-action einfach-done-btn" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
+          Quiz nochmal
+        </button>
+        <button type="button" class="secondary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
+          Lektionen nochmal
+        </button>
+        <button type="button" class="ghost-action einfach-done-btn" onclick="renderMenu()">
+          Zur Themenübersicht
+        </button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
 }
 
 function getQuizQuestions(topic) {
@@ -1382,7 +1641,8 @@ function renderQuizFeedbackPage(index) {
       <div class="feedback-actions">
         ${isCorrect
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterQuizAnswer()">Weiter</button>`
-          : `<button type="button" class="feedback-button secondary" onclick="renderQuizQuestion()">Nochmal versuchen</button>`
+          : `<button type="button" class="feedback-button secondary" onclick="renderQuizQuestion()">Nochmal versuchen</button>
+             <button type="button" class="feedback-button ghost" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">📖 Lektionen nachlesen</button>`
         }
       </div>
 
@@ -1854,6 +2114,38 @@ document.addEventListener("keydown", function (event) {
 /* Glossar initialisieren */
 initGlossar();
 initGlossarEvents();
+
+/* Schriftgröße vor dem ersten Rendern anwenden */
+loadFontSize();
+
+/* ============================================================
+   Offline-Banner
+   ============================================================ */
+
+function showOfflineBanner() {
+  if (document.getElementById("offline-banner")) return;
+  const banner = document.createElement("div");
+  banner.id = "offline-banner";
+  banner.setAttribute("role", "alert");
+  banner.setAttribute("aria-live", "assertive");
+  banner.innerHTML = `
+    <span class="offline-icon" aria-hidden="true">📵</span>
+    <span>Du bist gerade offline. Gespeicherte Seiten funktionieren noch.</span>
+    <button type="button" class="offline-close" onclick="hideOfflineBanner()" aria-label="Hinweis schließen">✕</button>
+  `;
+  document.body.prepend(banner);
+}
+
+function hideOfflineBanner() {
+  const banner = document.getElementById("offline-banner");
+  if (banner) banner.remove();
+}
+
+window.addEventListener("offline", showOfflineBanner);
+window.addEventListener("online",  hideOfflineBanner);
+
+/* Beim Start prüfen, ob bereits offline */
+if (!navigator.onLine) showOfflineBanner();
 
 document.addEventListener("DOMContentLoaded", handleHash);
 window.addEventListener("hashchange", handleHash);

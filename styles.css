@@ -371,30 +371,43 @@ button {
 }
 
 .hero-progress-row {
-  margin-top: 12px;
+  margin-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
-.hero-progress-done {
-  font-size: 0.9rem;
-  font-weight: 700;
+.hero-progress-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.hero-progress-count {
+  font-size: 2.2rem;
+  font-weight: 900;
   color: #fff;
+  line-height: 1;
+}
+
+.hero-progress-of {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
 }
 
 .hero-progress-track {
-  height: 8px;
+  height: 10px;
   background: rgba(255,255,255,0.25);
-  border-radius: 4px;
+  border-radius: 5px;
   overflow: hidden;
 }
 
 .hero-progress-fill {
   height: 100%;
-  background: rgba(255,255,255,0.85);
-  border-radius: 4px;
-  transition: width 0.4s ease;
+  background: rgba(255,255,255,0.9);
+  border-radius: 5px;
+  transition: width 0.5s ease;
 }
 
 /* ---------- Themen-Karten ---------- */
@@ -406,6 +419,7 @@ button {
 }
 
 .topic-card {
+  position: relative; /* für .topic-done-corner */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -464,6 +478,27 @@ button {
 }
 
 /* Geschafft-Abzeichen auf Themen-Karten */
+/* Häkchen-Ecke oben rechts auf fertigen Karten */
+.topic-done-corner {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  background: var(--good);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+  border: 2px solid #fff;
+  pointer-events: none; /* Klick geht an die Karte */
+  z-index: 2;
+}
+
 .topic-done-badge {
   display: inline-flex;
   align-items: center;
@@ -477,9 +512,10 @@ button {
   border: 2px solid var(--good);
 }
 
-/* Karte im geschafften Zustand: subtiler grüner linker Rand */
-.topic-card:has(.topic-done-badge) {
+/* Karte im geschafften Zustand */
+.topic-card--done {
   border-left: 4px solid var(--good);
+  position: relative;
 }
 
 /* Einwilligung: Lernstand merken */
@@ -684,6 +720,29 @@ button {
   border-color: var(--good);
   background: var(--good-bg);
   color: var(--good);
+}
+
+/* Schriftgröße-Gruppe in der Utility-Bar */
+.font-size-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-left: auto; /* ans rechte Ende drängen */
+}
+
+.font-btn {
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  min-width: 48px;
+}
+
+.font-btn-decrease { font-size: 0.85rem; }
+.font-btn-increase { font-size: 1.1rem;  }
+
+.font-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 /* ---------- Vorlesen-Leiste ---------- */
@@ -940,6 +999,7 @@ p.feedback-wrong {
 .feedback-button,
 .primary-action,
 .secondary-action,
+.ghost-action,
 .quiz-button {
   min-height: 58px;
   padding: 14px 26px;
@@ -973,6 +1033,133 @@ p.feedback-wrong {
 .feedback-button.secondary:hover,
 .secondary-action:hover {
   background: var(--accent-soft);
+}
+
+/* Ghost-Button: unauffällig, für tertiäre Aktionen */
+.ghost-action {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+
+.ghost-action:hover {
+  background: var(--surface-soft);
+  border-color: var(--ink-soft);
+}
+
+/* ---- Einfach-Quiz ---- */
+
+.einfach-quiz-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.einfach-quiz-number {
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0.65;
+  margin: 0;
+}
+
+.einfach-quiz-question {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.einfach-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.einfach-quiz-btn {
+  min-height: 64px;
+  padding: 16px 22px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.4;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.einfach-quiz-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.einfach-quiz-result-title {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.einfach-quiz-result-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.einfach-quiz-feedback-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 10px;
+}
+
+.einfach-quiz-next-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---- Offline-Banner ---- */
+
+#offline-banner {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: #1a3a5c;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.offline-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.offline-close {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.offline-close:hover {
+  background: rgba(255,255,255,0.15);
 }
 
 /* ---------- Hilfe-Bereiche ---------- */
@@ -1525,6 +1712,76 @@ body.simple-mode .practice-box {
 
 .lesson-card--einfach .remember-box {
   font-size: 1.05rem;
+}
+
+/* ---------- Einfach-Modus Abschlussseite ---------- */
+
+.completion-card--einfach {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 24px 40px;
+  border-radius: 16px;
+}
+
+.einfach-done-star {
+  margin: 0 0 8px;
+  animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bounceIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.einfach-done-star img {
+  width: 120px;
+  height: 120px;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+.einfach-done-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.einfach-done-text {
+  font-size: 1.15rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.einfach-done-topic {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.einfach-done-praise {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 4px 0 8px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.einfach-done-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 8px;
+}
+
+.einfach-done-btn {
+  width: 100%;
+  font-size: 1.05rem;
+  padding: 14px 20px;
 }
 
 /* ---------- Einstiegsfrage (Self-Assessment) ---------- */

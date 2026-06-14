@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-06f";
+const CACHE_VERSION = "v2026-06i";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
 /* Alle Dateien, die sofort beim Installieren gecacht werden */
@@ -20,6 +20,7 @@ const PRECACHE_URLS = [
   "./404.html",
 
   /* Statische Seiten */
+  "./barrierefreiheit.html",
   "./impressum.html",
   "./datenschutz.html",
   "./ersteller.html",
@@ -110,6 +111,7 @@ const PRECACHE_URLS = [
   "./assets/pictograms/pikto-fake.svg",
   "./assets/pictograms/pikto-fraud.svg",
   "./assets/pictograms/pikto-shop.svg",
+  "./assets/pictograms/pikto-done.svg",
 
   /* Schriften — WOFF2 (primär) + TTF (Fallback, optional) */
   "./assets/fonts/atkinson-regular.woff2",
@@ -123,6 +125,34 @@ const PRECACHE_URLS = [
   "./assets/brand/logo-tilbeck-alexianer.jpeg",
   "./assets/brand/logo-sozialstiftung-nrw.jpeg",
 ];
+
+/* Einfache Offline-Fallback-Seite (wenn Netz und Cache komplett fehlen) */
+function offlineFallback() {
+  const html = `<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Offline – Sicher im Internet</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; flex-direction: column;
+           align-items: center; justify-content: center; min-height: 100svh;
+           margin: 0; background: #f1f5fa; color: #16222e; text-align: center; padding: 24px; }
+    h1 { font-size: 1.5rem; }
+    p  { font-size: 1.1rem; line-height: 1.6; max-width: 360px; }
+    a  { color: #00528f; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <p style="font-size:3rem">📵</p>
+  <h1>Du bist gerade offline.</h1>
+  <p>Diese Seite konnte nicht geladen werden.<br>
+     Bitte verbinde dich mit dem Internet und lade die Seite neu.</p>
+  <p><a href="/">Nochmal versuchen</a></p>
+</body>
+</html>`;
+  return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+}
 
 /* ---- Install ---- */
 self.addEventListener("install", (event) => {
@@ -187,7 +217,7 @@ self.addEventListener("fetch", (event) => {
         })
         .catch(() =>
           caches.match(event.request).then(
-            (cached) => cached || caches.match("./404.html")
+            (cached) => cached || caches.match("./index.html") || caches.match("./404.html") || offlineFallback()
           )
         )
     );
