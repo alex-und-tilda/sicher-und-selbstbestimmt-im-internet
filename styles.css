@@ -1,4 +1,66 @@
 /* ============================================================
+   Lokale Schrift: Atkinson Hyperlegible
+   WOFF2 (modern, klein):  assets/fonts/atkinson-*.woff2
+   TTF   (Fallback):       assets/fonts/atkinson-*.ttf
+   ============================================================ */
+
+/* latin-ext (ä, ö, ü, ß und weitere) — Regular 400 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-regular-ext.woff2') format('woff2'),
+       url('assets/fonts/atkinson-regular.ttf') format('truetype');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+                 U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+                 U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+                 U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin — Regular 400 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-regular.woff2') format('woff2'),
+       url('assets/fonts/atkinson-regular.ttf') format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+                 U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+                 U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext — Bold 700 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-bold-ext.woff2') format('woff2'),
+       url('assets/fonts/atkinson-bold.ttf') format('truetype');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+                 U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+                 U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+                 U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin — Bold 700 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-bold.woff2') format('woff2'),
+       url('assets/fonts/atkinson-bold.ttf') format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+                 U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+                 U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============================================================
    Sicher und selbstbestimmt im Internet
    Stylesheet – Version 2026, komplett neu
 
@@ -15,7 +77,7 @@
   --surface: #ffffff;
   --surface-soft: #f8fafc;
   --ink: #16222e;
-  --ink-soft: #46586a;
+  --ink-soft: #3d506a;   /* WCAG AA: ~5.2:1 Kontrast auf --bg */
   --line: #d7e0ea;
   --accent: #00528f;
   --accent-dark: #003a66;
@@ -48,6 +110,7 @@
 
 html {
   font-size: 17px;
+  scroll-padding-top: 80px; /* Fokus nicht hinter sticky Header verdecken (WCAG 2.4.11) */
 }
 
 body {
@@ -262,18 +325,76 @@ button {
   border-radius: var(--radius-l);
   padding: 26px 28px;
   margin-bottom: 20px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 18px rgba(0,82,143,0.22);
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-icon {
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+  opacity: 0.85;
+}
+
+.hero-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .hero-card h2 {
   color: #ffffff;
   margin-bottom: 0.2em;
+  font-size: 1.55rem;
 }
 
 .hero-card p {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #e8f1f9;
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  color: #ddeeff;
+}
+
+.hero-meta {
+  font-size: 0.88rem !important;
+  color: rgba(255,255,255,0.7) !important;
+  margin-top: 6px !important;
+}
+
+.hero-progress-row {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hero-progress-done {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-progress-track {
+  height: 8px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hero-progress-fill {
+  height: 100%;
+  background: rgba(255,255,255,0.85);
+  border-radius: 4px;
+  transition: width 0.4s ease;
 }
 
 /* ---------- Themen-Karten ---------- */
@@ -347,13 +468,18 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 999px;
   background: var(--good-bg);
   color: var(--good);
   border: 2px solid var(--good);
+}
+
+/* Karte im geschafften Zustand: subtiler grüner linker Rand */
+.topic-card:has(.topic-done-badge) {
+  border-left: 4px solid var(--good);
 }
 
 /* Einwilligung: Lernstand merken */
@@ -729,6 +855,44 @@ button {
   background: var(--accent-soft);
 }
 
+/* Angezeigte Antworten nach der Auswahl (Großes Quiz) */
+.answer-option.answer-shown {
+  cursor: default;
+  pointer-events: none;
+}
+
+.answer-option.answer-correct {
+  border-color: var(--good);
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+.answer-option.answer-wrong {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+  color: var(--bad);
+  text-decoration: line-through;
+}
+
+/* Inline-Rückmeldungszeile (Großes Quiz) */
+p.feedback-correct {
+  padding: 10px 14px;
+  border-radius: var(--radius-s);
+  background: var(--good-bg);
+  color: var(--good);
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+p.feedback-wrong {
+  padding: 10px 14px;
+  border-radius: var(--radius-s);
+  background: var(--bad-bg);
+  color: var(--bad);
+  font-weight: 700;
+  margin-top: 12px;
+}
+
 /* ---------- Rückmeldung ---------- */
 
 .feedback-page.feedback-correct {
@@ -1046,6 +1210,12 @@ button {
   background: var(--surface-soft);
 }
 
+.certificate-medal {
+  margin: 0 auto 16px;
+  width: 72px;
+  height: 72px;
+}
+
 .certificate-kicker {
   font-size: 1.05rem;
   font-weight: 700;
@@ -1093,6 +1263,13 @@ button {
   margin-top: 24px;
   font-size: 1rem;
   color: var(--ink-soft);
+}
+
+.certificate-issuer {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 6px 0 0;
+  opacity: 0.7;
 }
 
 /* ---------- Untere Navigation ---------- */
@@ -1236,6 +1413,184 @@ body.simple-mode .practice-box {
   margin-top: 24px;
 }
 
+/* ---------- Lernziele (Start-Screen) ---------- */
+
+.learning-goals-box {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.learning-goals-box h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin: 0 0 10px;
+}
+
+.learning-goals-list {
+  margin: 0 0 12px;
+  padding-left: 1.4em;
+}
+
+.learning-goals-list li {
+  font-size: 1rem;
+  line-height: 1.55;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.learning-goals-hint {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ---------- Start-Screen: Fehler-Normalisierung ---------- */
+
+.start-safe-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--good-bg);
+  border-left: 4px solid var(--good);
+  border-radius: var(--radius-s);
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.start-safe-icon {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--good);
+  margin: 0;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+.start-safe-main {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--good);
+  margin: 0 0 4px;
+}
+
+.start-safe-sub {
+  font-size: 0.97rem;
+  color: var(--ink);
+  margin: 0 0 2px;
+  line-height: 1.55;
+}
+
+.start-safe-sub:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Urkunde: warmer Text ---------- */
+
+.certificate-warm {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--good);
+  margin: 8px 0 16px;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Einstiegsfrage (Self-Assessment) ---------- */
+
+.sa-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sa-intro {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin: 16px 0 4px;
+}
+
+.sa-question {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 20px;
+  line-height: 1.45;
+}
+
+.sa-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sa-option-btn {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-s);
+  color: var(--accent-dark);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 14px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  min-height: 48px;
+}
+
+.sa-option-btn:hover,
+.sa-option-btn:focus-visible {
+  background: var(--accent-soft);
+  border-color: var(--accent-dark);
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.sa-hint {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---------- Modul-Cluster-Badge ---------- */
+
+.module-cluster-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  padding: 10px 16px;
+  margin: 0 0 8px;
+  animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.module-cluster-label {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.module-cluster-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
 /* ---------- Druck: nur die Merk-Karte ---------- */
 
 @media print {
@@ -1312,4 +1667,371 @@ body.simple-mode .practice-box {
   .nav {
     bottom: 8px;
   }
+}
+
+/* ============================================================
+   Skip-Link (Barrierefreiheit – Tastatur-Nutzende)
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 0 0 var(--radius-s) var(--radius-s);
+  font-weight: 700;
+  z-index: 999;
+  transition: top 0.15s;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   SW-Update-Banner
+   ============================================================ */
+
+.update-banner {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--good);
+  color: #fff;
+  border-radius: var(--radius-m);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  z-index: 200;
+  max-width: calc(100vw - 32px);
+}
+
+.update-banner button {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius-s);
+  padding: 6px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.update-banner button:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.update-banner-close {
+  padding: 4px 8px !important;
+  opacity: 0.75;
+}
+
+/* ============================================================
+   Das große Quiz – Startseite und Karte
+   ============================================================ */
+
+/* Startseite: Aktions-Grid (Quiz + Merk-Karten) */
+.start-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+@media (max-width: 480px) {
+  .start-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.big-quiz-start-button,
+.start-action-secondary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-m);
+  padding: 16px 18px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, outline 0.15s;
+}
+
+.big-quiz-start-button {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,82,143,0.18);
+}
+
+.big-quiz-start-button:hover,
+.big-quiz-start-button:focus {
+  background: var(--accent-dark);
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.start-action-secondary {
+  background: var(--surface);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.start-action-secondary:hover,
+.start-action-secondary:focus {
+  background: var(--accent-soft);
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.big-quiz-start-button svg,
+.start-action-secondary svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.big-quiz-start-button svg {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.start-action-secondary svg {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.big-quiz-start-button strong,
+.start-action-secondary strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.big-quiz-start-button span span,
+.start-action-secondary span span {
+  display: block;
+  font-size: 0.86rem;
+  opacity: 0.82;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Alle Merk-Karten – Druck-Seite
+   ============================================================ */
+
+.all-memory-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+.all-memory-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.all-memory-heading {
+  font-size: 1.6rem;
+  margin: 0 0 6px;
+}
+
+.all-memory-intro {
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+
+.print-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.print-memory-card {
+  background: var(--surface);
+  border: 2px solid var(--topic-color, var(--line));
+  border-radius: var(--radius-l);
+  padding: 18px 20px;
+  break-inside: avoid;
+}
+
+.print-memory-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.print-memory-icon svg {
+  width: 36px;
+  height: 36px;
+  fill: var(--topic-color);
+  stroke: var(--topic-color);
+}
+
+.print-memory-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--topic-color);
+}
+
+.print-memory-rules,
+.print-memory-questions {
+  margin-bottom: 10px;
+}
+
+.print-memory-rules h3,
+.print-memory-questions h3 {
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin: 0 0 6px;
+}
+
+.print-memory-rules ol,
+.print-memory-questions ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.print-memory-rules li,
+.print-memory-questions li {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+/* Drucken: nur Karten sichtbar */
+@media print {
+  .no-print { display: none !important; }
+
+  .print-memory-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .print-memory-card {
+    border-width: 1px;
+    padding: 12px 14px;
+    page-break-inside: avoid;
+  }
+}
+
+.big-quiz-card .big-quiz-topic-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+  padding: 2px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+  color: var(--topic-color, var(--accent));
+}
+
+/* ============================================================
+   Wörter-Hilfe (Glossar)
+   ============================================================ */
+
+/* Hervorgehobenes Wort im Text */
+.glossar-term {
+  border-bottom: 2px dotted var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+  border-radius: 2px;
+  /* kein display:inline nötig – span ist schon inline */
+}
+
+.glossar-term:hover,
+.glossar-term:focus {
+  background: var(--accent-soft);
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Overlay (Hintergrund) */
+.glossar-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;      /* Panel kommt von unten auf Mobilgeräten */
+  justify-content: center;
+  padding: 20px;
+  background: rgba(22, 34, 46, 0.5);
+  z-index: 60;
+}
+
+@media (min-width: 500px) {
+  .glossar-overlay {
+    align-items: center;      /* Zentriert auf größeren Bildschirmen */
+  }
+}
+
+/* Panel mit der Erklärung */
+.glossar-panel {
+  max-width: 420px;
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: 24px 24px 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  position: relative;
+}
+
+.glossar-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 6px 12px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.glossar-close:hover {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+.glossar-word-label {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.glossar-word-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 12px;
+  padding-right: 48px;       /* Platz für Close-Button */
+}
+
+.glossar-word-def {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
 }

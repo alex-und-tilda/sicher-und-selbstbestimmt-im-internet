@@ -100,6 +100,162 @@ function toggleProgressSaving() {
 }
 
 /* ============================================================
+   Wörter-Hilfe (Glossar)
+   Schwierige Wörter werden hervorgehoben.
+   Antippen öffnet eine kurze Erklärung in Einfacher Sprache.
+   ============================================================ */
+
+const GLOSSAR = {
+  "internet":               "Das Internet ist ein riesiges Netz aus vielen Computern. So kann man Internetseiten besuchen und Nachrichten schicken.",
+  "app":                    "Eine App ist ein Programm auf dem Handy oder Tablet. Apps kann man im App Store oder Play Store herunterladen.",
+  "browser":                "Ein Browser ist ein Programm zum Öffnen von Internetseiten. Zum Beispiel Safari, Chrome oder Firefox.",
+  "passwort":               "Ein Passwort ist ein geheimes Wort oder eine geheime Zahlenfolge. Es schützt dein Konto.",
+  "pin":                    "Eine PIN ist eine geheime Zahl, die du eingibst. Sie schützt zum Beispiel dein Handy oder deine Bankkarte.",
+  "konto":                  "Ein Konto ist dein persönlicher Bereich bei einer App oder Webseite. Du loggst dich mit Benutzername und Passwort ein.",
+  "profil":                 "Ein Profil ist deine persönliche Seite bei einer App. Dort stehen oft dein Name und dein Foto.",
+  "wlan":                   "WLAN ist eine Verbindung zum Internet ohne Kabel. Das Handy verbindet sich per Funk mit dem Router.",
+  "daten":                  "Daten sind Informationen, die ein Computer speichert. Zum Beispiel dein Name, Fotos oder Nachrichten.",
+  "datenschutz":            "Datenschutz bedeutet: Deine Daten sollen sicher sein. Niemand darf sie ohne deine Erlaubnis weitergeben.",
+  "spam":                   "Spam sind unerwünschte Nachrichten oder E-Mails. Du hast sie nicht angefragt. Oft enthalten sie Werbung oder sind gefährlich.",
+  "phishing":               "Beim Phishing versucht jemand, dein Passwort oder deine Daten zu stehlen. Oft mit gefälschten E-Mails oder Webseiten.",
+  "link":                   "Ein Link ist ein anklickbares Wort oder Bild. Es führt dich zu einer anderen Seite oder Datei.",
+  "qr-code":                "Ein QR-Code ist ein schwarzweißes Quadrat mit Muster. Du scannst es mit der Kamera deines Handys.",
+  "update":                 "Ein Update ist eine neue Version eines Programms. Es repariert Fehler und macht das Gerät sicherer.",
+  "ki":                     "KI steht für Künstliche Intelligenz. Das ist ein Computerprogramm, das lernt und selbst Aufgaben löst. Zum Beispiel ChatGPT.",
+  "chatbot":                "Ein Chatbot ist ein Programm, das mit dir schreibt oder spricht. Es beantwortet Fragen automatisch.",
+  "deepfake":               "Ein Deepfake ist ein gefälschtes Bild oder Video. Es sieht echt aus, wurde aber vom Computer erstellt.",
+  "algorithmus":            "Ein Algorithmus ist eine Regel, nach der ein Computer entscheidet. Zum Beispiel, welche Videos oder Beiträge dir angezeigt werden.",
+  "cloud":                  "Die Cloud ist ein Speicherplatz im Internet. Fotos und Dateien werden dort gespeichert – nicht nur auf dem Gerät.",
+  "e-mail":                 "Eine E-Mail ist eine elektronische Nachricht. Du verschickst sie über das Internet an andere Personen.",
+  "impressum":              "Das Impressum steht auf Webseiten. Es gibt an, wer die Seite betreibt und wie man ihn erreichen kann.",
+  "abonnement":             "Bei einem Abonnement zahlst du regelmäßig, zum Beispiel jeden Monat. Zum Beispiel für Musik, Filme oder Apps.",
+  "benachrichtigung":       "Eine Benachrichtigung ist eine kurze Meldung auf dem Bildschirm. Sie zeigt dir: Etwas Neues ist passiert.",
+  "screenshot":             "Ein Screenshot ist ein Foto von dem, was gerade auf dem Bildschirm zu sehen ist.",
+  "verschlüsselung":        "Verschlüsselung bedeutet: Nachrichten werden beim Senden so verändert, dass nur der richtige Empfänger sie lesen kann.",
+  "einstellungen":          "Die Einstellungen sind ein Bereich in einer App oder auf dem Gerät. Dort kannst du viele Dinge anpassen.",
+  "datenschutzerklärung":   "Die Datenschutzerklärung erklärt, welche Daten eine App oder Webseite speichert und warum.",
+  "zwei-faktor":            "Zwei-Faktor-Schutz bedeutet: Du gibst erst dein Passwort ein, dann noch einen zweiten Code. So ist das Konto doppelt geschützt.",
+  "firewall":               "Eine Firewall ist ein Schutzprogramm. Es blockiert gefährliche Verbindungen aus dem Internet.",
+  "viren":                  "Viren sind schädliche Programme. Sie können Daten stehlen oder das Gerät beschädigen.",
+  "router":                 "Ein Router ist ein Gerät, das die Internetverbindung im Haus verteilt. Er gibt das WLAN-Signal aus.",
+};
+
+let glossarOverlay = null;
+let _glossarLastFocus = null;
+
+function initGlossar() {
+  if (glossarOverlay) return;
+
+  glossarOverlay = document.createElement("div");
+  glossarOverlay.className = "glossar-overlay is-hidden";
+  glossarOverlay.setAttribute("role", "dialog");
+  glossarOverlay.setAttribute("aria-modal", "true");
+  glossarOverlay.setAttribute("aria-label", "Wörter-Erklärung");
+  glossarOverlay.innerHTML = `
+    <div class="glossar-panel">
+      <button class="glossar-close" aria-label="Erklärung schließen" type="button">✕ Schließen</button>
+      <p class="glossar-word-label">Was bedeutet:</p>
+      <p class="glossar-word-title" id="glossarWordTitle"></p>
+      <p class="glossar-word-def" id="glossarWordDef"></p>
+    </div>`;
+  document.body.appendChild(glossarOverlay);
+
+  glossarOverlay.addEventListener("click", (e) => {
+    if (e.target === glossarOverlay || e.target.closest(".glossar-close")) {
+      hideGlossar();
+    }
+  });
+}
+
+function showGlossar(termKey) {
+  const def = GLOSSAR[termKey];
+  if (!def || !glossarOverlay) return;
+  _glossarLastFocus = document.activeElement;
+  const display = termKey.charAt(0).toUpperCase() + termKey.slice(1);
+  document.getElementById("glossarWordTitle").textContent = display;
+  document.getElementById("glossarWordDef").textContent = def;
+  glossarOverlay.classList.remove("is-hidden");
+  glossarOverlay.querySelector(".glossar-close").focus();
+}
+
+function hideGlossar() {
+  if (!glossarOverlay) return;
+  glossarOverlay.classList.add("is-hidden");
+  if (_glossarLastFocus) _glossarLastFocus.focus();
+}
+
+function initGlossarEvents() {
+  content.addEventListener("click", (e) => {
+    const term = e.target.closest(".glossar-term");
+    if (term) showGlossar(term.dataset.term);
+  });
+  content.addEventListener("keydown", (e) => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("glossar-term")) {
+      e.preventDefault();
+      showGlossar(e.target.dataset.term);
+    }
+  });
+}
+
+/* Hebt Glossar-Wörter im gerade gerenderten Inhalt hervor */
+function applyGlossar() {
+  if (!glossarOverlay) return;
+
+  const terms = Object.keys(GLOSSAR);
+  /* Längere Begriffe zuerst (z. B. "datenschutzerklärung" vor "datenschutz") */
+  const sorted = [...terms].sort((a, b) => b.length - a.length);
+  const escRe  = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  /* Wortgrenze für deutsche Zeichen: kein Buchstabe / Umlaut / Bindestrich davor oder danach */
+  const WB = "(?<![\\w\\u00C0-\\u017E-])";
+  const WA = "(?![\\w\\u00C0-\\u017E-])";
+  const pattern = new RegExp(WB + "(" + sorted.map(escRe).join("|") + ")" + WA, "gi");
+
+  const SKIP = new Set(["H1","H2","H3","H4","BUTTON","A","SCRIPT","STYLE","LABEL","NOSCRIPT"]);
+
+  const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      let el = node.parentElement;
+      while (el) {
+        if (SKIP.has(el.tagName)) return NodeFilter.FILTER_REJECT;
+        if (el.classList && el.classList.contains("glossar-term")) return NodeFilter.FILTER_REJECT;
+        el = el.parentElement;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const hits = [];
+  let node;
+  while ((node = walker.nextNode())) {
+    pattern.lastIndex = 0;
+    if (pattern.test(node.textContent)) hits.push(node);
+  }
+
+  hits.forEach((textNode) => {
+    const text = textNode.textContent;
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    let m;
+    pattern.lastIndex = 0;
+    while ((m = pattern.exec(text)) !== null) {
+      if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+      const span = document.createElement("span");
+      span.className = "glossar-term";
+      span.textContent = m[0];
+      span.dataset.term = m[0].toLowerCase();
+      span.setAttribute("tabindex", "0");
+      span.setAttribute("role", "button");
+      span.setAttribute("aria-label", `Erklärung: ${m[0]}`);
+      frag.appendChild(span);
+      last = m.index + m[0].length;
+    }
+    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    textNode.parentNode.replaceChild(frag, textNode);
+  });
+}
+
+/* ============================================================
    Elemente
    ============================================================ */
 
@@ -198,6 +354,7 @@ function setHeader(title, module, step, level, percent) {
   const safePercent = Math.max(0, Math.min(100, percent || 0));
   progressFill.style.width = `${safePercent}%`;
   progressTrack.setAttribute("aria-valuenow", String(safePercent));
+  progressTrack.setAttribute("aria-valuetext", `${safePercent} Prozent`);
 }
 
 function showNav(showBack, showNext, nextText = "Weiter") {
@@ -207,13 +364,17 @@ function showNav(showBack, showNext, nextText = "Weiter") {
 }
 
 function announce(text) {
-  if (liveRegion) liveRegion.textContent = text || "";
+  if (!liveRegion) return;
+  /* Kurz leeren, damit Screenreader dieselbe Meldung erneut vorliest */
+  liveRegion.textContent = "";
+  if (text) setTimeout(() => { liveRegion.textContent = text; }, 50);
 }
 
 function focusContent() {
   content.focus();
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  applyGlossar();
 }
 
 /* ============================================================
@@ -555,13 +716,50 @@ function renderMenu() {
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
       </div>`;
 
+  const heroProgress = isProgressEnabled() && doneCount > 0
+    ? `<div class="hero-progress-row">
+         <span class="hero-progress-done">${doneCount} von ${topics.length} Themen geschafft</span>
+         <div class="hero-progress-track" role="presentation">
+           <div class="hero-progress-fill" style="width:${Math.round((doneCount/topics.length)*100)}%"></div>
+         </div>
+       </div>`
+    : "";
+
   content.innerHTML = `
     <section class="start-page">
       <div class="hero-card">
-        <h2>Wähle ein Thema.</h2>
-        <p>Danach entscheidest du, wie du lernen möchtest.</p>
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h2>Willkommen!</h2>
+            <p>Hier kannst du alles über das sichere Internet lernen.</p>
+            <p class="hero-meta">12 Themen &nbsp;·&nbsp; Einfache Sprache &nbsp;·&nbsp; kostenlos</p>
+            ${heroProgress}
+          </div>
+          <div class="hero-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 4 L56 16 L56 36 C56 50 44 60 32 62 C20 60 8 50 8 36 L8 16 Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+              <path d="M24 32 L30 38 L40 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
       </div>
       ${progressConsent}
+      <div class="start-actions">
+        <button type="button" class="big-quiz-start-button" onclick="startBigQuiz()">
+          ${getIconHtml("quiz")}
+          <span>
+            <strong>Das große Quiz</strong>
+            <span>Alle 12 Themen gemischt</span>
+          </span>
+        </button>
+        <button type="button" class="start-action-secondary" onclick="renderAllMemoryCards()">
+          ${getIconHtml("remember")}
+          <span>
+            <strong>Alle Merk-Karten</strong>
+            <span>Übersicht &amp; Drucken</span>
+          </span>
+        </button>
+      </div>
       <div class="topic-grid">${cards}</div>
     </section>
   `;
@@ -783,7 +981,50 @@ function startTopicMode(topicId, mode) {
   currentTopicId = topic.id;
   currentMode = mode === "short" ? "short" : "full";
   currentStep = 0;
-  renderLesson();
+  if (topic.selfAssessment) {
+    renderSelfAssessment();
+  } else {
+    renderLesson();
+  }
+}
+
+function renderSelfAssessment() {
+  stopReading();
+  const topic = getCurrentTopic();
+  if (!topic || !topic.selfAssessment) return renderLesson();
+
+  const sa = topic.selfAssessment;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(topic.title, "", "", "Start", 0);
+
+  const optionButtons = sa.options.map((opt, i) =>
+    `<button class="sa-option-btn" data-index="${i}" type="button">${escapeHtml(opt)}</button>`
+  ).join("");
+
+  content.innerHTML = `
+    <article class="card sa-card" style="${getTopicColorStyle(topic.id)}">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
+        <h2>${escapeHtml(topic.title)}</h2>
+      </div>
+      <p class="sa-intro">Bevor wir starten:</p>
+      <p class="sa-question">${escapeHtml(sa.question)}</p>
+      <div class="sa-options" role="group" aria-label="Einschätzung wählen">
+        ${optionButtons}
+      </div>
+      <p class="sa-hint">Es gibt keine falsche Antwort. Wähle einfach, was für dich stimmt.</p>
+    </article>
+  `;
+
+  content.querySelectorAll(".sa-option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      renderLesson();
+    });
+  });
+
+  focusContent();
+  renderLegalFooter();
 }
 
 function renderLesson() {
@@ -801,9 +1042,19 @@ function renderLesson() {
   const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
   const hasPractice = Boolean(lesson.practice);
 
+  /* Modul-Cluster-Badge: zeigen wenn neues Modul beginnt (nicht bei Schritt 0/Start) */
+  const prevLesson = currentStep > 0 ? lessons[currentStep - 1] : null;
+  const isNewModule = prevLesson && lesson.module && lesson.module !== "Start" && prevLesson.module !== lesson.module;
+  const moduleBadge = isNewModule
+    ? `<div class="module-cluster-badge" role="status" aria-live="polite">
+         <span class="module-cluster-label">Neues Thema:</span>
+         <span class="module-cluster-name">${escapeHtml(lesson.module)}</span>
+       </div>`
+    : "";
+
   setProgressVisible(true);
   setBottomNavVisible(!hasPractice);
-  setHeader(topic.title, modeLabel, `Seite ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
+  setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
   const text = Array.isArray(lesson.text)
@@ -832,8 +1083,32 @@ function renderLesson() {
 
   const practice = hasPractice ? buildPractice(lesson.practice) : "";
 
+  /* Lernziele und Fehler-Normalisierung nur im Start-Screen */
+  const isStartLesson = lesson.module === "Start";
+
+  const learningGoals = isStartLesson && Array.isArray(topic.learningGoals) && topic.learningGoals.length
+    ? `<div class="learning-goals-box">
+         <h3>Was du hier lernst:</h3>
+         <ul class="learning-goals-list">
+           ${topic.learningGoals.map(g => `<li>${escapeHtml(g)}</li>`).join("")}
+         </ul>
+       </div>`
+    : "";
+
+  const safeNotice = isStartLesson
+    ? `<div class="start-safe-notice" role="note">
+         <p class="start-safe-icon" aria-hidden="true">✓</p>
+         <div>
+           <p class="start-safe-main">Du darfst Fehler machen.</p>
+           <p class="start-safe-sub">Das ist beim Lernen ganz normal.</p>
+           <p class="start-safe-sub">Du kannst jeden Schritt so oft machen, wie du möchtest.</p>
+         </div>
+       </div>`
+    : "";
+
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
+    ${moduleBadge}
     <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
@@ -841,6 +1116,8 @@ function renderLesson() {
       </div>
       ${getLessonImageHtml(lesson, topic)}
       ${text}
+      ${learningGoals}
+      ${safeNotice}
       ${bullets}
       ${examples}
       ${warning}
@@ -896,7 +1173,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
-      <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
+      <h2>${isCorrect ? "Genau richtig!" : "Fast!"}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
@@ -925,7 +1202,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
       ${!isCorrect ? buildTaskHelpBox() : ""}
     </article>
   `;
-  announce(isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig.");
+  announce(isCorrect ? "Genau richtig!" : "Fast! Das war noch nicht ganz richtig.");
   focusContent();
   renderLegalFooter();
 }
@@ -1076,7 +1353,7 @@ function renderQuizFeedbackPage(index) {
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
-      <h2>${isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig."}</h2>
+      <h2>${isCorrect ? "Genau richtig!" : "Fast!"}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
@@ -1098,7 +1375,7 @@ function renderQuizFeedbackPage(index) {
       ${!isCorrect ? buildTaskHelpBox() : ""}
     </article>
   `;
-  announce(isCorrect ? "Das ist richtig." : "Das ist noch nicht richtig.");
+  announce(isCorrect ? "Genau richtig!" : "Fast! Das war noch nicht ganz richtig.");
   focusContent();
   renderLegalFooter();
 }
@@ -1141,6 +1418,162 @@ function renderQuizResult() {
 }
 
 /* ============================================================
+   Das große Quiz – Fragen aus allen 12 Themen gemischt
+   Route: index.html#grosses-quiz
+   ============================================================ */
+
+const BIG_QUIZ_COUNT = 20;   /* So viele Fragen werden gezogen */
+let bigQuizQuestions = [];   /* Array mit {question, answers, correct, topicId, topicTitle} */
+let bigQuizIndex    = 0;
+let bigQuizScore    = 0;
+
+function buildBigQuizPool() {
+  const pool = [];
+  topics.forEach((topic) => {
+    const qs = getQuizQuestions(topic);
+    qs.forEach((q) => {
+      pool.push({
+        question:   q.question || "",
+        answers:    Array.isArray(q.answers) ? q.answers : [],
+        correct:    Number(q.correctIndex ?? q.correct ?? 0),
+        topicId:    topic.id,
+        topicTitle: topic.title,
+      });
+    });
+  });
+  /* Fisher-Yates-Shuffle */
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, BIG_QUIZ_COUNT);
+}
+
+function startBigQuiz() {
+  bigQuizQuestions = buildBigQuizPool();
+  bigQuizIndex  = 0;
+  bigQuizScore  = 0;
+  currentTopicId = null;
+  renderBigQuizQuestion();
+}
+
+function renderBigQuizQuestion() {
+  stopReading();
+  if (bigQuizIndex >= bigQuizQuestions.length) return renderBigQuizResult();
+
+  const q       = bigQuizQuestions[bigQuizIndex];
+  const total   = bigQuizQuestions.length;
+  const progress = Math.round((bigQuizIndex / total) * 100);
+
+  setProgressVisible(true);
+  setBottomNavVisible(false);
+  setHeader("Das große Quiz", `Frage ${bigQuizIndex + 1} von ${total}`, "Frage", "Großes Quiz", progress);
+  showNav(false, false);
+
+  const answerHtml = q.answers.map((answer, index) => `
+    <button type="button" class="answer-option" onclick="renderBigQuizFeedback(${index})">
+      ${escapeHtml(answer)}
+    </button>
+  `).join("");
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
+      <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
+      <h2>Großes Quiz</h2>
+      <p class="quiz-question">${escapeHtml(q.question)}</p>
+      <div class="answers">${answerHtml}</div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function renderBigQuizFeedback(selectedIndex) {
+  stopReading();
+  const q = bigQuizQuestions[bigQuizIndex];
+  if (!q) return renderBigQuizResult();
+
+  const isCorrect = selectedIndex === q.correct;
+  if (isCorrect) {
+    bigQuizScore += 1;
+    playSound("correct");
+  } else {
+    playSound("wrong");
+  }
+
+  const feedbackClass = isCorrect ? "feedback-correct" : "feedback-wrong";
+  const feedbackText  = isCorrect
+    ? "✓ Genau richtig!"
+    : `✗ Fast! Richtig wäre: „${escapeHtml(q.answers[q.correct] || "")}"`;
+
+  const isLast = bigQuizIndex >= bigQuizQuestions.length - 1;
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
+      <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
+      <h2>Großes Quiz</h2>
+      <p class="quiz-question">${escapeHtml(q.question)}</p>
+      <div class="answers">
+        ${q.answers.map((a, i) => `
+          <div class="answer-option answer-shown ${i === q.correct ? "answer-correct" : (i === selectedIndex ? "answer-wrong" : "")}">
+            ${i === q.correct ? "✓ " : (i === selectedIndex ? "✗ " : "")}${escapeHtml(a)}
+          </div>`).join("")}
+      </div>
+      <p class="${feedbackClass}">${feedbackText}</p>
+      <div class="certificate-actions">
+        ${isLast
+          ? `<button type="button" class="quiz-link quiz-button" onclick="renderBigQuizResult()">Ergebnis anzeigen</button>`
+          : `<button type="button" class="quiz-link quiz-button" onclick="nextBigQuizQuestion()">Weiter</button>`
+        }
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function nextBigQuizQuestion() {
+  bigQuizIndex += 1;
+  renderBigQuizQuestion();
+}
+
+function renderBigQuizResult() {
+  stopReading();
+  const total   = bigQuizQuestions.length || 1;
+  const percent = Math.round((bigQuizScore / total) * 100);
+  playSound("success");
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Das große Quiz", "Ergebnis", "Ergebnis", "Fertig", 100);
+  showNav(false, false);
+
+  const praise = percent >= 80
+    ? "Sehr gut gemacht! Du weißt schon viel über das sichere Internet."
+    : percent >= 50
+    ? "Gut versucht! Schau dir die Themen noch einmal an."
+    : "Kein Problem. Lerne weiter – jedes Mal wird es leichter.";
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card quiz-result-card" data-readable="true">
+      <h2>Großes Quiz – Fertig!</h2>
+      <p>Du hast ${bigQuizScore} von ${total} Fragen richtig beantwortet.</p>
+      <p>Das sind ${percent} Prozent.</p>
+      <p>${escapeHtml(praise)}</p>
+      <div class="certificate-actions">
+        <button type="button" class="quiz-link quiz-button" onclick="startBigQuiz()">Quiz wiederholen</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
    Urkunde – zum Ausdrucken, Name wird von Hand geschrieben
    ============================================================ */
 
@@ -1161,6 +1594,15 @@ function renderCertificate(topicId, score, total) {
   content.innerHTML = `
     <article class="card certificate-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <div class="certificate-frame">
+        <div class="certificate-medal" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+            <circle cx="32" cy="32" r="28" fill="var(--topic-color)" opacity="0.12"/>
+            <circle cx="32" cy="32" r="22" fill="var(--topic-color)" opacity="0.2"/>
+            <polygon points="32,12 36,24 49,24 39,32 43,44 32,37 21,44 25,32 15,24 28,24"
+              fill="var(--topic-color)" opacity="0.9"/>
+          </svg>
+        </div>
+
         <p class="certificate-kicker">Urkunde</p>
         <h2>Sicher und selbstbestimmt im Internet</h2>
 
@@ -1170,11 +1612,13 @@ function renderCertificate(topicId, score, total) {
 
         <p class="certificate-text">Du hast das Thema</p>
         <p class="certificate-topic">${escapeHtml(topic.title)}</p>
-        <p class="certificate-text">erfolgreich geübt.</p>
+        <p class="certificate-text">gelernt und geübt.</p>
+        <p class="certificate-warm">Du hast durchgehalten. Das ist wirklich toll!</p>
 
         ${hasResult ? `<p class="certificate-result">Quiz-Ergebnis: ${score} von ${total} Fragen richtig.</p>` : ""}
 
         <p class="certificate-date">Datum: ${escapeHtml(today)}</p>
+        <p class="certificate-issuer">Sicher und selbstbestimmt im Internet · Alexianer Stift Tilbeck GmbH</p>
       </div>
 
       <div class="certificate-actions">
@@ -1257,7 +1701,13 @@ function goBack() {
     renderLesson();
     return;
   }
-  renderTopicChoice(currentTopicId);
+
+  /* Bei Schritt 0: zurück zur Einstiegsfrage (wenn vorhanden), sonst Themenauswahl */
+  if (topic && topic.selfAssessment) {
+    renderSelfAssessment();
+  } else {
+    renderTopicChoice(currentTopicId);
+  }
 }
 
 function goNext() {
@@ -1277,6 +1727,51 @@ function goNext() {
   renderTopicChoice(topic.id);
 }
 
+/* ============================================================
+   Alle Merk-Karten – druckbare Übersicht aller 12 Themen
+   Route: index.html#merk-alle
+   ============================================================ */
+
+function renderAllMemoryCards() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Alle Merk-Karten", "Übersicht", "Alle Themen", "Drucken", 100);
+  showNav(false, false);
+
+  const allCards = topics.map(topic => {
+    const rules = Array.isArray(topic.memoryRules)
+      ? topic.memoryRules.map(r => `<li>${escapeHtml(r)}</li>`).join("")
+      : "";
+    const questions = Array.isArray(topic.helpQuestions)
+      ? topic.helpQuestions.map(q => `<li>${escapeHtml(q)}</li>`).join("")
+      : "";
+    return `
+      <div class="print-memory-card" style="${getTopicColorStyle(topic.id)}">
+        <div class="print-memory-header">
+          <span class="print-memory-icon" aria-hidden="true">${getIconHtml(topic.icon || "remember")}</span>
+          <h2>${escapeHtml(topic.title)}</h2>
+        </div>
+        ${rules ? `<div class="print-memory-rules"><h3>Das merke ich mir:</h3><ol>${rules}</ol></div>` : ""}
+        ${questions ? `<div class="print-memory-questions"><h3>Das kann ich fragen:</h3><ul>${questions}</ul></div>` : ""}
+      </div>`;
+  }).join("");
+
+  content.innerHTML = `
+    <section class="all-memory-page">
+      <div class="all-memory-toolbar no-print">
+        <button type="button" class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
+        <button type="button" class="quiz-link quiz-button" onclick="window.print()">Alle drucken</button>
+      </div>
+      <h2 class="all-memory-heading no-print">Alle Merk-Karten</h2>
+      <p class="all-memory-intro no-print">Alle 12 Themen auf einen Blick. Du kannst diese Seite ausdrucken.</p>
+      <div class="print-memory-grid">${allCards}</div>
+    </section>
+  `;
+  focusContent();
+}
+
 /* Direkter Einstieg über Link, zum Beispiel:
    index.html#datenschutz
    index.html#datenschutz:kurz
@@ -1285,6 +1780,10 @@ function goNext() {
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
   if (!hash) return renderMenu();
+
+  /* Sonderrouten */
+  if (hash === "grosses-quiz") return startBigQuiz();
+  if (hash === "merk-alle") return renderAllMemoryCards();
 
   const [topicId, action] = hash.split(":");
   const topic = getTopicById(topicId);
@@ -1332,8 +1831,15 @@ document.addEventListener("keydown", handleReadCardEvent, true);
 
 /* Escape schließt Overlays. */
 document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") closeCalmOverlay();
+  if (event.key === "Escape") {
+    closeCalmOverlay();
+    hideGlossar();
+  }
 });
+
+/* Glossar initialisieren */
+initGlossar();
+initGlossarEvents();
 
 document.addEventListener("DOMContentLoaded", handleHash);
 window.addEventListener("hashchange", handleHash);

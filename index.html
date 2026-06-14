@@ -36,7 +36,7 @@
     "inLanguage": "de",
     "learningResourceType": "Selbstlernangebot",
     "educationalUse": "Digitale Bildung und Medienkompetenz",
-    "dateModified": "2026-06-10",
+    "dateModified": "2026-06-14",
     "audience": {
       "@type": "Audience",
       "audienceType": "Menschen mit Lern- und Verständnisschwierigkeiten"
@@ -66,14 +66,11 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#00528f" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <a class="skip-link" href="#content">Zum Inhalt springen</a>
   <div class="app">
     <header class="app-header">
       <button class="home-button" id="homeButton" aria-label="Zur Themenübersicht">⌂</button>
@@ -121,5 +118,43 @@
 
   <script src="topics.js"></script>
   <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").then((reg) => {
+          /* Wenn ein neues SW wartet, Banner anzeigen */
+          reg.addEventListener("updatefound", () => {
+            const newWorker = reg.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                showUpdateBanner();
+              }
+            });
+          });
+        }).catch(() => {});
+
+        /* Seite benachrichtigt uns, dass SW aktiviert wurde */
+        navigator.serviceWorker.addEventListener("message", (e) => {
+          if (e.data && e.data.type === "SW_UPDATED") showUpdateBanner();
+        });
+      });
+    }
+
+    function showUpdateBanner() {
+      const existing = document.getElementById("updateBanner");
+      if (existing) return;
+      const banner = document.createElement("div");
+      banner.id = "updateBanner";
+      banner.className = "update-banner";
+      banner.setAttribute("role", "status");
+      banner.innerHTML = `
+        <span>✓ Die Lernplattform wurde aktualisiert.</span>
+        <button type="button" onclick="location.reload()">Neu laden</button>
+        <button type="button" class="update-banner-close" aria-label="Banner schließen" onclick="this.closest('.update-banner').remove()">✕</button>
+      `;
+      document.body.prepend(banner);
+    }
+  </script>
 </body>
 </html>

@@ -4,6 +4,15 @@ const topics = [
     "title": "Datenschutz",
     "icon": "lock",
     "desc": "Private Daten und Passwörter schützen",
+    "selfAssessment": {
+      "question": "Was weißt du schon über den Schutz deiner Daten?",
+      "options": ["Noch nicht so viel", "Ein bisschen", "Schon einiges"]
+    },
+    "learningGoals": [
+      "Was private Daten sind",
+      "Warum dein Passwort geheim bleibt",
+      "Was du tust, wenn jemand nach deinen Daten fragt"
+    ],
     "quiz": [
       {
         "question": "Was ist eine private Information?",
@@ -82,7 +91,7 @@ const topics = [
           "Langsam machen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Du lässt dich nicht hetzen.",
+        "feedbackCorrect": "Das ist richtig. Du machst es langsam. Du überlegst zuerst.",
         "feedbackWrong": "Das ist noch nicht richtig. Druck ist ein Warnzeichen."
       },
       {
@@ -331,7 +340,7 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Die Nachricht macht Druck. Druck ist ein Warnzeichen.",
-          "feedbackCorrect": "Das ist sicher. Du lässt dich nicht hetzen.",
+          "feedbackCorrect": "Das ist sicher. Du machst es langsam. Du überlegst zuerst.",
           "remember": "Ich mache langsam, wenn eine Nachricht Druck macht."
         }
       },
@@ -461,7 +470,7 @@ const topics = [
           "Langsam machen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Du lässt dich nicht hetzen.",
+        "feedbackCorrect": "Das ist richtig. Du machst es langsam. Du überlegst zuerst.",
         "feedbackWrong": "Das ist noch nicht richtig. Druck ist ein Warnzeichen."
       },
       {
@@ -538,6 +547,15 @@ const topics = [
     "title": "WhatsApp",
     "icon": "message",
     "desc": "Nachrichten, Links, Gruppen und Codes sicher nutzen",
+    "selfAssessment": {
+      "question": "Wie sicher fühlst du dich bei WhatsApp?",
+      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+    },
+    "learningGoals": [
+      "Was du bei fremden Nummern tust",
+      "Warum du keine Codes weitergibst",
+      "Was du bei Geld-Bitten machst"
+    ],
     "quiz": [
       {
         "question": "Eine fremde Nummer schreibt dir. Was ist besser?",
@@ -546,7 +564,7 @@ const topics = [
           "Nicht sofort antworten."
         ],
         "correctIndex": 1,
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nummern können täuschen.",
+        "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer das wirklich ist.",
         "feedbackCorrect": "Das ist sicher. Du gibst keine privaten Daten an fremde Nummern."
       },
       {
@@ -682,7 +700,7 @@ const topics = [
             "Ich antworte nicht sofort."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Fremde Nummern können täuschen.",
+          "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer das wirklich ist.",
           "feedbackCorrect": "Das ist sicher. Du gibst keine privaten Daten an eine fremde Nummer.",
           "remember": "Ich antworte fremden Nummern nicht sofort."
         }
@@ -693,7 +711,7 @@ const topics = [
         "icon": "warning",
         "text": [
           "Manche Nachrichten fragen nach Geld.",
-          "Fremde Nummern können sich als Bekannte ausgeben.",
+          "Fremde tun manchmal so, als ob sie Freunde oder Familie sind.",
           "Ein bekannter Trick ist: Hallo Mama, ich habe eine neue Nummer. Ich brauche Geld.",
           "Auch Sprachnachrichten können mit KI gefälscht sein.",
           "Du schickst kein Geld an fremde Nummern."
@@ -878,7 +896,7 @@ const topics = [
           "Nicht sofort antworten."
         ],
         "correctIndex": 1,
-        "feedbackWrong": "Das ist nicht sicher. Fremde Nummern können täuschen.",
+        "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer das wirklich ist.",
         "feedbackCorrect": "Das ist sicher. Du gibst keine privaten Daten an fremde Nummern."
       },
       {
@@ -1021,6 +1039,15 @@ const topics = [
     "title": "Facebook",
     "icon": "message",
     "desc": "Beiträge, Profile und Kontakte prüfen",
+    "selfAssessment": {
+      "question": "Wie sicher fühlst du dich auf Facebook?",
+      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+    },
+    "learningGoals": [
+      "Wie du dein Profil sicher einstellst",
+      "Was du bei unbekannten Kontakten tust",
+      "Welche Daten du nicht teilst"
+    ],
     "quiz": [
       {
         "question": "Was prüfst du vor einem Beitrag?",
@@ -1447,6 +1474,15 @@ const topics = [
     "title": "Instagram",
     "icon": "photo",
     "desc": "Fotos, Standort und Nachrichten prüfen",
+    "selfAssessment": {
+      "question": "Wie sicher fühlst du dich auf Instagram?",
+      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+    },
+    "learningGoals": [
+      "Was du bei Fotos beachtest",
+      "Warum du deinen Standort schützt",
+      "Was Fake-Profile sind und wie du sie erkennst"
+    ],
     "quiz": [
       {
         "question": "Was prüfst du vor dem Posten eines Fotos?",
@@ -1893,6 +1929,15 @@ const topics = [
     "title": "YouTube",
     "icon": "understand",
     "desc": "Videos, Werbung und Pausen prüfen",
+    "selfAssessment": {
+      "question": "Wie sicher fühlst du dich beim Schauen auf YouTube?",
+      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+    },
+    "learningGoals": [
+      "Woran du erkennst, ob ein Video stimmt",
+      "Was Werbung bei YouTube ist",
+      "Wie du Pausen machst und gesund bleibst"
+    ],
     "quiz": [
       {
         "question": "Ein Video verspricht: Dieses Mittel macht dich reich. Was ist besser?",
@@ -2317,6 +2362,15 @@ const topics = [
     "title": "Snapchat",
     "icon": "photo",
     "desc": "Bilder, Standort und Druck erkennen",
+    "selfAssessment": {
+      "question": "Was weißt du schon über Snapchat?",
+      "options": ["Noch nicht so viel", "Ein bisschen", "Schon einiges"]
+    },
+    "learningGoals": [
+      "Was mit Snaps passiert, nachdem du sie sendest",
+      "Warum du deinen Standort schützt",
+      "Was du tust, wenn jemand Druck macht"
+    ],
     "quiz": [
       {
         "question": "Du schickst ein Bild über Snapchat. Was ist wichtig?",
@@ -2726,6 +2780,15 @@ const topics = [
     "title": "TikTok",
     "icon": "understand",
     "desc": "Trends, Videos, Nachrichten und Pausen",
+    "selfAssessment": {
+      "question": "Wie sicher fühlst du dich bei TikTok?",
+      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+    },
+    "learningGoals": [
+      "Wie TikTok entscheidet, was du siehst",
+      "Was du bei Nachrichten und Kontakten beachtest",
+      "Wie du gesund mit TikTok umgehst"
+    ],
     "quiz": [
       {
         "question": "Ein Trend wirkt gefährlich. Was ist besser?",
@@ -3161,6 +3224,15 @@ const topics = [
     "title": "Hilfe bei Problemen",
     "icon": "help",
     "desc": "Stopp machen, zeigen und Unterstützung holen",
+    "selfAssessment": {
+      "question": "Weißt du, was du tun kannst, wenn etwas im Internet passiert?",
+      "options": ["Noch nicht so genau", "Ein bisschen", "Schon ziemlich gut"]
+    },
+    "learningGoals": [
+      "Was du tust, wenn etwas passiert",
+      "Wen du um Hilfe bittest",
+      "Wie du Schlechtes meldest oder zeigst"
+    ],
     "quiz": [
       {
         "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
@@ -3269,9 +3341,10 @@ const topics = [
         "module": "Start",
         "icon": "help",
         "text": [
-          "Hier lernst du etwas über Hilfe bei Problemen im Internet.",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
+          "Manchmal passiert etwas im Internet, das sich falsch oder komisch anfühlt.",
+          "Das ist kein schönes Gefühl.",
+          "Dieses Thema zeigt dir: Du bist nicht allein.",
+          "Es gibt immer jemanden, der dir helfen kann."
         ]
       },
       {
@@ -3364,10 +3437,12 @@ const topics = [
         "icon": "help",
         "text": [
           "Eine Nachricht macht dir Angst.",
-          "Oder du hast ein komisches Gefühl.",
-          "Das ist wichtig."
+          "Oder du hast ein komisches Gefühl im Bauch.",
+          "Das ist wichtig. Deine Gefühle sagen dir etwas.",
+          "Du musst nicht allein damit bleiben."
         ],
-        "remember": "Meine Gefühle sind wichtig."
+        "success": "Du darfst über deine Gefühle sprechen. Das ist mutig.",
+        "remember": "Meine Gefühle sind wichtig. Ich darf darüber sprechen."
       },
       {
         "title": "Vertraute Personen",
@@ -3376,7 +3451,8 @@ const topics = [
         "text": [
           "Du kannst eine vertraute Person fragen.",
           "Zum Beispiel eine Unterstützerin, einen Unterstützer, Angehörige oder Freunde.",
-          "Du musst Probleme im Internet nicht allein lösen."
+          "Du musst Probleme im Internet nicht allein lösen.",
+          "Hilfe zu holen ist keine Schwäche. Es ist klug."
         ],
         "practice": {
           "question": "Zu wem kannst du mit einer komischen Nachricht gehen?",
@@ -3385,9 +3461,9 @@ const topics = [
             "Zu niemandem."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Du musst das nicht allein schaffen.",
-          "feedbackCorrect": "Das ist sicher. Eine vertraute Person kann helfen.",
-          "remember": "Ich darf mir Unterstützung holen."
+          "feedbackWrong": "Du musst das nicht allein schaffen. Eine vertraute Person ist für dich da.",
+          "feedbackCorrect": "Du holst dir Hilfe. Das ist mutig und richtig.",
+          "remember": "Ich darf mir Unterstützung holen. Das ist klug."
         }
       },
       {
@@ -3415,9 +3491,10 @@ const topics = [
         "text": [
           "Es gibt Beratungsstellen und Hilfsangebote.",
           "Eine vertraute Person kann mit dir dort anrufen oder schreiben.",
-          "Du musst das nicht allein machen."
+          "Du musst das nicht allein machen.",
+          "Andere Menschen haben diese Probleme auch. Du bist nicht die einzige Person."
         ],
-        "remember": "Auch externe Hilfe ist möglich."
+        "remember": "Es gibt immer jemanden, der helfen kann."
       },
       {
         "title": "Das merke ich mir",
@@ -3544,17 +3621,19 @@ const topics = [
       "Unterstützung holen"
     ],
     "helpQuestions": [
-      "Macht mir die Nachricht Angst?",
+      "Macht mir die Nachricht Angst oder ein komisches Gefühl?",
       "Macht jemand Druck?",
       "Soll ich die Nachricht zeigen?",
-      "Wer ist eine vertraute Person?"
+      "Wer ist eine vertraute Person für mich?",
+      "Darf ich Hilfe holen? — Ja, immer."
     ],
     "memoryRules": [
       "Ich mache Stopp.",
       "Ich antworte nicht sofort.",
       "Ich lösche nicht sofort.",
       "Ich zeige die Nachricht.",
-      "Ich hole Unterstützung."
+      "Ich hole Unterstützung.",
+      "Ich bin nicht allein."
     ],
     "shortLessonIndexes": [
       0,
@@ -3585,6 +3664,15 @@ const topics = [
     "title": "KI und Chatbots",
     "icon": "ki",
     "desc": "Künstliche Intelligenz verstehen und sicher nutzen",
+    "selfAssessment": {
+      "question": "Was weißt du schon über Künstliche Intelligenz?",
+      "options": ["Noch nicht so viel", "Ein bisschen", "Schon einiges"]
+    },
+    "learningGoals": [
+      "Was Künstliche Intelligenz ist",
+      "Wie KI dir helfen kann",
+      "Wann du bei KI vorsichtig sein musst"
+    ],
     "illustration": "assets/illustrations/ki.svg",
     "lessons": [
       {
@@ -3903,6 +3991,15 @@ const topics = [
     "title": "Fake News und KI-Fakes",
     "icon": "fake",
     "desc": "Falsche Nachrichten, Bilder und Stimmen erkennen",
+    "selfAssessment": {
+      "question": "Weißt du, wie du eine Fake-Nachricht erkennst?",
+      "options": ["Noch nicht so genau", "Ein bisschen", "Schon ziemlich gut"]
+    },
+    "learningGoals": [
+      "Was Fake News sind",
+      "Wie du prüfst, ob etwas stimmt",
+      "Was du mit Fake-Nachrichten machst"
+    ],
     "illustration": "assets/illustrations/fakes.svg",
     "lessons": [
       {
@@ -3938,10 +4035,10 @@ const topics = [
         "bullets": [
           "Sie wollen Geld verdienen mit vielen Klicks.",
           "Sie wollen Menschen wütend machen.",
-          "Sie wollen Menschen täuschen.",
+          "Sie wollen, dass du etwas glaubst, das nicht stimmt.",
           "Sie wollen eine Meinung verbreiten."
         ],
-        "remember": "Fake News haben ein Ziel. Sie wollen mich beeinflussen."
+        "remember": "Fake News haben ein Ziel. Sie wollen mein Denken verändern."
       },
       {
         "title": "KI-Bilder erkennen",
@@ -4246,6 +4343,15 @@ const topics = [
     "title": "Online-Betrug und Abzocke",
     "icon": "betrug",
     "desc": "Betrug erkennen: Phishing, falsche Gewinne und Tricks",
+    "selfAssessment": {
+      "question": "Weißt du, wie Betrüger im Internet vorgehen?",
+      "options": ["Noch nicht so genau", "Ein bisschen", "Schon ziemlich gut"]
+    },
+    "learningGoals": [
+      "Wie Betrüger vorgehen",
+      "Welche Tricks du erkennst",
+      "Was du tust, wenn du betrogen wirst"
+    ],
     "illustration": "assets/illustrations/betrug.svg",
     "lessons": [
       {
@@ -4602,6 +4708,15 @@ const topics = [
     "title": "Online-Einkaufen und Bezahlen",
     "icon": "einkaufen",
     "desc": "Sicher einkaufen und bezahlen im Internet",
+    "selfAssessment": {
+      "question": "Wie sicher fühlst du dich beim Online-Einkaufen?",
+      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+    },
+    "learningGoals": [
+      "Woran du einen seriösen Shop erkennst",
+      "Welche Bezahl-Art sicherer ist",
+      "Was du tust, wenn ein Kauf schiefläuft"
+    ],
     "illustration": "assets/illustrations/einkaufen.svg",
     "lessons": [
       {
