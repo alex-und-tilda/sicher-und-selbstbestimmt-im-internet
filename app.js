@@ -101,13 +101,37 @@ function markTopicDone(topicId) {
   if (!isProgressEnabled()) return;
   const progress = loadProgress() || { enabled: true, done: {} };
   progress.done = progress.done || {};
-  progress.done[topicId] = true;
+  /* Zeitstempel speichern – für Wiederholungs-Erinnerung */
+  const existing = progress.done[topicId];
+  progress.done[topicId] = { ts: Date.now(), count: (existing && existing.count ? existing.count + 1 : 1) };
   saveProgress(progress);
 }
 
 function isTopicDone(topicId) {
   const progress = loadProgress();
-  return Boolean(progress && progress.done && progress.done[topicId]);
+  if (!progress || !progress.done) return false;
+  const val = progress.done[topicId];
+  /* Rückwärts-kompatibel: alter Wert war true (boolean) */
+  return Boolean(val);
+}
+
+function getTopicDoneTimestamp(topicId) {
+  const progress = loadProgress();
+  if (!progress || !progress.done) return null;
+  const val = progress.done[topicId];
+  if (!val) return null;
+  if (val === true) return null; /* alter Eintrag ohne Zeitstempel */
+  return val.ts || null;
+}
+
+function getTopicsDueForReview() {
+  if (!isProgressEnabled()) return [];
+  const REVIEW_AFTER_MS = 7 * 24 * 60 * 60 * 1000; /* 7 Tage */
+  const now = Date.now();
+  return topics.filter(topic => {
+    const ts = getTopicDoneTimestamp(topic.id);
+    return ts && (now - ts) >= REVIEW_AFTER_MS;
+  });
 }
 
 function countDoneTopics() {
@@ -313,23 +337,45 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+/* Helle Farben für Light-Mode */
 const TOPIC_COLORS = {
-  datenschutz: ["#00285A", "rgba(0, 40, 90, 0.24)", "rgba(0, 40, 90, 0.08)", "#EAF1F8"],
-  whatsapp: ["#1DA855", "rgba(37, 211, 102, 0.30)", "rgba(37, 211, 102, 0.12)", "#E9FBEF"],
-  facebook: ["#1877F2", "rgba(24, 119, 242, 0.28)", "rgba(24, 119, 242, 0.10)", "#EAF3FF"],
-  instagram: ["#C13584", "rgba(193, 53, 132, 0.28)", "rgba(193, 53, 132, 0.10)", "#FBEAF4"],
-  youtube: ["#CC0000", "rgba(255, 0, 0, 0.24)", "rgba(255, 0, 0, 0.09)", "#FFECEC"],
-  snapchat: ["#A88A00", "rgba(255, 252, 0, 0.42)", "rgba(255, 252, 0, 0.18)", "#FFFBD1"],
-  tiktok: ["#111111", "rgba(37, 244, 238, 0.34)", "rgba(37, 244, 238, 0.12)", "#E8FFFF"],
-  hilfe: ["#C9541C", "rgba(201, 84, 28, 0.30)", "rgba(201, 84, 28, 0.12)", "#FFF0E8"],
-  ki: ["#6B3FA0", "rgba(107, 63, 160, 0.28)", "rgba(107, 63, 160, 0.10)", "#F1EAFA"],
-  fakes: ["#B45309", "rgba(180, 83, 9, 0.28)", "rgba(180, 83, 9, 0.10)", "#FDF1E0"],
-  betrug: ["#B91C1C", "rgba(185, 28, 28, 0.26)", "rgba(185, 28, 28, 0.10)", "#FDEAEA"],
-  einkaufen: ["#15803D", "rgba(21, 128, 61, 0.28)", "rgba(21, 128, 61, 0.10)", "#E8F8EE"]
+  datenschutz: ["#00285A", "rgba(0, 40, 90, 0.24)",    "rgba(0, 40, 90, 0.08)",    "#EAF1F8"],
+  whatsapp:    ["#1DA855", "rgba(37, 211, 102, 0.30)",  "rgba(37, 211, 102, 0.12)", "#E9FBEF"],
+  facebook:    ["#1877F2", "rgba(24, 119, 242, 0.28)",  "rgba(24, 119, 242, 0.10)", "#EAF3FF"],
+  instagram:   ["#C13584", "rgba(193, 53, 132, 0.28)",  "rgba(193, 53, 132, 0.10)", "#FBEAF4"],
+  youtube:     ["#CC0000", "rgba(255, 0, 0, 0.24)",     "rgba(255, 0, 0, 0.09)",    "#FFECEC"],
+  snapchat:    ["#A88A00", "rgba(255, 252, 0, 0.42)",   "rgba(255, 252, 0, 0.18)",  "#FFFBD1"],
+  tiktok:      ["#111111", "rgba(37, 244, 238, 0.34)",  "rgba(37, 244, 238, 0.12)", "#E8FFFF"],
+  hilfe:       ["#C9541C", "rgba(201, 84, 28, 0.30)",   "rgba(201, 84, 28, 0.12)",  "#FFF0E8"],
+  ki:          ["#6B3FA0", "rgba(107, 63, 160, 0.28)",  "rgba(107, 63, 160, 0.10)", "#F1EAFA"],
+  fakes:       ["#B45309", "rgba(180, 83, 9, 0.28)",    "rgba(180, 83, 9, 0.10)",   "#FDF1E0"],
+  betrug:      ["#B91C1C", "rgba(185, 28, 28, 0.26)",   "rgba(185, 28, 28, 0.10)",  "#FDEAEA"],
+  einkaufen:   ["#15803D", "rgba(21, 128, 61, 0.28)",   "rgba(21, 128, 61, 0.10)",  "#E8F8EE"]
 };
 
+/* Hellere Farben für Dark-Mode (auf dunkelm Hintergrund besser lesbar) */
+const TOPIC_COLORS_DARK = {
+  datenschutz: ["#58a8e0", "rgba(88,168,224,0.30)",  "rgba(88,168,224,0.12)",  "rgba(88,168,224,0.15)"],
+  whatsapp:    ["#4ade80", "rgba(74,222,128,0.30)",  "rgba(74,222,128,0.12)",  "rgba(74,222,128,0.15)"],
+  facebook:    ["#60a5fa", "rgba(96,165,250,0.30)",  "rgba(96,165,250,0.12)",  "rgba(96,165,250,0.15)"],
+  instagram:   ["#f472b6", "rgba(244,114,182,0.30)", "rgba(244,114,182,0.12)", "rgba(244,114,182,0.15)"],
+  youtube:     ["#f87171", "rgba(248,113,113,0.30)", "rgba(248,113,113,0.12)", "rgba(248,113,113,0.15)"],
+  snapchat:    ["#fde047", "rgba(253,224,71,0.30)",  "rgba(253,224,71,0.12)",  "rgba(253,224,71,0.15)"],
+  tiktok:      ["#a5f3fc", "rgba(165,243,252,0.30)", "rgba(165,243,252,0.12)", "rgba(165,243,252,0.15)"],
+  hilfe:       ["#fb923c", "rgba(251,146,60,0.30)",  "rgba(251,146,60,0.12)",  "rgba(251,146,60,0.15)"],
+  ki:          ["#c084fc", "rgba(192,132,252,0.30)", "rgba(192,132,252,0.12)", "rgba(192,132,252,0.15)"],
+  fakes:       ["#fbbf24", "rgba(251,191,36,0.30)",  "rgba(251,191,36,0.12)",  "rgba(251,191,36,0.15)"],
+  betrug:      ["#f87171", "rgba(248,113,113,0.30)", "rgba(248,113,113,0.12)", "rgba(248,113,113,0.15)"],
+  einkaufen:   ["#4ade80", "rgba(74,222,128,0.30)",  "rgba(74,222,128,0.12)",  "rgba(74,222,128,0.15)"]
+};
+
+function isDarkMode() {
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
 function getTopicColorStyle(topicId) {
-  const [color, ring, bg, icon] = TOPIC_COLORS[topicId] || TOPIC_COLORS.datenschutz;
+  const palette = isDarkMode() ? TOPIC_COLORS_DARK : TOPIC_COLORS;
+  const [color, ring, bg, icon] = palette[topicId] || palette.datenschutz;
   return `--topic-color:${color};--topic-ring:${ring};--topic-hover-bg:${bg};--topic-icon-bg:${icon}`;
 }
 
@@ -725,14 +771,13 @@ function renderMenu() {
     return `
     <button type="button" class="topic-card topic-${escapeHtml(topic.id)}${done ? " topic-card--done" : ""}" style="${getTopicColorStyle(topic.id)}" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
       ${done ? `<span class="topic-done-corner" aria-label="Geschafft" title="Geschafft">✓</span>` : ""}
-      ${getIllustrationHtml(topic)}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
+      <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
       ${done ? `<span class="topic-done-badge">✓ Geschafft</span>` : ""}
       <span class="card-read-button" role="button" tabindex="0" data-read-card-text="${escapeHtml(topic.title)}. ${escapeHtml(topic.desc || "")}" aria-label="Thema ${escapeHtml(topic.title)} vorlesen">
         🔊 Vorlesen
       </span>
-      <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
     </button>
   `;}).join("");
 
@@ -763,6 +808,27 @@ function renderMenu() {
        </div>`
     : "";
 
+  /* Wiederholungs-Erinnerung */
+  const reviewTopics = getTopicsDueForReview();
+  const reviewSection = reviewTopics.length > 0
+    ? `<div class="review-section" role="region" aria-label="Wiederholung fällig">
+         <div class="review-header">
+           <span class="review-icon" aria-hidden="true">🔁</span>
+           <div>
+             <p class="review-title">Zeit zum Wiederholen!</p>
+             <p class="review-sub">Du hast ${reviewTopics.length === 1 ? "dieses Thema" : "diese Themen"} vor mehr als einer Woche gelernt.</p>
+           </div>
+         </div>
+         <div class="review-chips">
+           ${reviewTopics.map(t => `
+             <button type="button" class="review-chip" style="${getTopicColorStyle(t.id)}" onclick="startQuiz('${escapeHtml(t.id)}')">
+               <span aria-hidden="true">${getIconHtml(t.icon || "start")}</span>
+               <span>${escapeHtml(t.title)} – Quiz wiederholen</span>
+             </button>`).join("")}
+         </div>
+       </div>`
+    : "";
+
   content.innerHTML = `
     <section class="start-page">
       <div class="hero-card">
@@ -781,6 +847,7 @@ function renderMenu() {
           </div>
         </div>
       </div>
+      ${reviewSection}
       ${progressConsent}
       <div class="start-actions">
         <button type="button" class="big-quiz-start-button" onclick="startBigQuiz()">
@@ -2117,6 +2184,27 @@ initGlossarEvents();
 
 /* Schriftgröße vor dem ersten Rendern anwenden */
 loadFontSize();
+
+/* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,
+   damit die themenspezifischen Inline-Farben (getTopicColorStyle)
+   auf die Dark-Mode-Palette umschalten. */
+if (window.matchMedia) {
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    /* Aktuelle Ansicht neu laden – ohne Seitenwechsel */
+    if (currentTopicId) {
+      /* Inline-Styles auf sichtbaren Karten per querySelectorAll neu setzen */
+      const style = getTopicColorStyle(currentTopicId);
+      document.querySelectorAll("[style*='--topic-color']").forEach(el => {
+        el.setAttribute("style", style);
+      });
+    }
+    /* Topic-Karten auf der Startseite (falls gerade sichtbar) */
+    document.querySelectorAll(".topic-card[style]").forEach(el => {
+      const id = [...el.classList].find(c => c.startsWith("topic-") && c !== "topic-card" && !c.endsWith("--done"));
+      if (id) el.setAttribute("style", getTopicColorStyle(id.replace("topic-", "")));
+    });
+  });
+}
 
 /* ============================================================
    Offline-Banner
