@@ -1167,12 +1167,30 @@ function renderLesson() {
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
+  /* Text-Sätze — unterstützt Strings und {text, pictogram}-Objekte */
   const text = Array.isArray(lesson.text)
-    ? lesson.text.map(item => `<p>${escapeHtml(item)}</p>`).join("")
+    ? lesson.text.map(item => {
+        if (typeof item === "object" && item.text) {
+          const img = item.pictogram
+            ? `<img class="ls-sentence-pikto" src="assets/pictograms/${escapeHtml(item.pictogram)}.svg" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`
+            : "";
+          return `<div class="ls-text-row">${img}<p>${escapeHtml(item.text)}</p></div>`;
+        }
+        return `<p>${escapeHtml(item)}</p>`;
+      }).join("")
     : "";
 
+  /* Bullet-Punkte — unterstützt Strings und {text, pictogram}-Objekte */
   const bullets = Array.isArray(lesson.bullets) && lesson.bullets.length
-    ? `<ul>${lesson.bullets.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+    ? `<ul class="ls-bullet-list">${lesson.bullets.map(item => {
+        if (typeof item === "object" && item.text) {
+          const img = item.pictogram
+            ? `<img class="ls-bullet-pikto" src="assets/pictograms/${escapeHtml(item.pictogram)}.svg" alt="" width="40" height="40" aria-hidden="true" loading="lazy">`
+            : "";
+          return `<li class="ls-bullet-item">${img}<span>${escapeHtml(item.text)}</span></li>`;
+        }
+        return `<li>${escapeHtml(item)}</li>`;
+      }).join("")}</ul>`
     : "";
 
   const examples = Array.isArray(lesson.examples) && lesson.examples.length
@@ -1193,9 +1211,12 @@ function renderLesson() {
 
   const practice = hasPractice ? buildPractice(lesson.practice) : "";
 
-  /* Piktogramm — nur im Einfach-Modus und wenn Feld vorhanden */
-  const isEinfachLesson = lesson.module === "Einfach";
-  const pictogram = isEinfachLesson && lesson.pictogram
+  /* Großes Lektions-Piktogramm nur auf der Start-Lektion (Themeneinstieg).
+     Alle weiteren Lektionen haben Piktogramme direkt bei jedem Satz/Bullet —
+     ein zusätzliches Banner-Bild wäre dort Wiederholung. */
+  const isEinfachLesson = simpleMode;
+  const isStartLesson_pikto = lesson.module === "Start";
+  const pictogram = isStartLesson_pikto && lesson.pictogram
     ? `<div class="einfach-pictogram" aria-hidden="true">
          <img src="assets/pictograms/${escapeHtml(lesson.pictogram)}.svg" alt="" width="100" height="100" loading="eager">
        </div>`

@@ -1780,20 +1780,86 @@ body.simple-mode .practice-box {
 
 /* ---------- Piktogramme (Einfach-Modus) ---------- */
 
+/* Lektions-Piktogramm oben (eines pro Lektion) */
 .einfach-pictogram {
   display: flex;
   justify-content: center;
-  margin: 8px 0 16px;
+  margin: 8px 0 20px;
 }
 
 .einfach-pictogram img {
   width: 100px;
   height: 100px;
   display: block;
-  /* Leichter Hintergrund für besseren Kontrast auf farbigen Karten */
   background: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   padding: 8px;
+}
+
+/* Leichte-Sprache Textzeile: Piktogramm links, Satz rechts */
+.ls-text-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.ls-text-row p {
+  margin: 0;
+  flex: 1;
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.ls-sentence-pikto {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.65);
+  border-radius: 50%;
+  padding: 6px;
+}
+
+/* Bullet-Liste mit Piktogrammen */
+.ls-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ls-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.45);
+  border-radius: var(--radius-m);
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.ls-bullet-pikto {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+/* Dark mode Anpassungen */
+@media (prefers-color-scheme: dark) {
+  .ls-sentence-pikto,
+  .ls-bullet-pikto,
+  .einfach-pictogram img {
+    background: rgba(255,255,255,0.12);
+  }
+  .ls-bullet-item {
+    background: rgba(255,255,255,0.06);
+  }
 }
 
 /* Einfach-Karte: etwas größere Schrift, mehr Zeilenabstand */
@@ -2325,20 +2391,20 @@ body.simple-mode .practice-box {
 
     /* Text */
     --ink:          #e2ecf6;
-    --ink-soft:     #7a9fb8;
+    --ink-soft:     #a0c2d4;   /* APCA Lc 63 auf --surface ✓ (war #7a9fb8, Lc 45) */
 
     /* Rahmen */
     --line:         #233448;
 
-    /* Akzent – heller für dunkle Fläche (Kontrast ~5.5:1 auf --surface) */
-    --accent:       #58a8e0;
-    --accent-dark:  #7dbfe8;
+    /* Akzent – APCA Lc 66 als Text auf --surface, Lc 69 auf --bg ✓ */
+    --accent:       #8ecaee;   /* (war #58a8e0, Lc 48) */
+    --accent-dark:  #a0d2f2;
     --accent-soft:  #152840;
 
-    /* Feedback-Farben – heller */
+    /* Feedback-Farben */
     --good:         #4ade80;
     --good-bg:      #0a2018;
-    --warn:         #fb923c;
+    --warn:         #fca55a;   /* APCA Lc 61 auf --surface ✓ (war #fb923c, Lc 54) */
     --warn-bg:      #2a1400;
     --bad:          #f87171;
     --bad-bg:       #2a0d0d;
@@ -2360,6 +2426,13 @@ body.simple-mode .practice-box {
     background: var(--surface);
     color: var(--ink);
     border-color: var(--line);
+  }
+
+  /* Hero-Karte: eigener dunkler Gradient damit weißer Text APCA Lc 90 erreicht
+     (--accent im Dark Mode ist jetzt hell #8ecaee, taugt nicht als Hintergrund) */
+  .hero-card {
+    background: linear-gradient(135deg, #1a5080 0%, #0d3860 100%);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.5);
   }
 
   /* Bilder leicht abdunkeln (verhindert Blenden durch weiße SVGs) */

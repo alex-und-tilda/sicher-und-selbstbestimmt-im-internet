@@ -6,7 +6,11 @@ const topics = [
     "desc": "Private Daten und Passwörter schützen",
     "selfAssessment": {
       "question": "Was weißt du schon über den Schutz deiner Daten?",
-      "options": ["Noch nicht so viel", "Ein bisschen", "Schon einiges"]
+      "options": [
+        "Noch nicht so viel",
+        "Ein bisschen",
+        "Schon einiges"
+      ]
     },
     "learningGoals": [
       "Was private Daten sind",
@@ -121,58 +125,136 @@ const topics = [
         "module": "Start",
         "icon": "lock",
         "text": [
-          "Hier lernst du etwas über Datenschutz.",
-          "Du lernst: Welche Daten sind privat?",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
-        ]
+          {
+            "text": "Hier lernst du etwas über Datenschutz.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Du lernst: Welche Daten sind privat?",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Du übst sichere Entscheidungen.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Was sind private Daten?",
         "module": "Grundwissen",
         "icon": "data",
         "text": [
-          "Private Daten gehören zu dir.",
-          "Sie sagen etwas über dich.",
-          "Andere Menschen sollen diese Daten nicht einfach bekommen."
+          {
+            "text": "Private Daten gehören zu dir.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Sie sagen etwas über dich.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Andere Menschen sollen diese Daten nicht einfach bekommen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "bullets": [
-          "dein Name",
-          "deine Adresse",
-          "deine Telefon-Nummer",
-          "dein Geburtstag",
-          "deine Fotos",
-          "dein Passwort"
+          {
+            "text": "dein Name",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "deine Adresse",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "deine Telefon-Nummer",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "dein Geburtstag",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "deine Fotos",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "dein Passwort",
+            "pictogram": "pikto-lock"
+          }
         ],
-        "remember": "Private Daten gehören zu mir."
+        "remember": "Private Daten gehören zu mir.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "Besonders wichtige Daten",
         "module": "Grundwissen",
         "icon": "warning",
         "text": [
-          "Manche Daten sind besonders wichtig.",
-          "Mit diesen Daten können andere Menschen viel über dich erfahren.",
-          "Darum schützt du diese Daten besonders gut."
+          {
+            "text": "Manche Daten sind besonders wichtig.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Mit diesen Daten können andere Menschen viel über dich erfahren.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Darum schützt du diese Daten besonders gut.",
+            "pictogram": "pikto-data"
+          }
         ],
         "bullets": [
-          "Passwort",
-          "PIN",
-          "Adresse",
-          "Telefon-Nummer",
-          "Bank-Daten",
-          "Ausweis-Daten"
+          {
+            "text": "Passwort",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "PIN",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Adresse",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Telefon-Nummer",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Bank-Daten",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Ausweis-Daten",
+            "pictogram": "pikto-data"
+          }
         ],
-        "remember": "Besonders wichtige Daten gebe ich nicht einfach weiter."
+        "remember": "Besonders wichtige Daten gebe ich nicht einfach weiter.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "Passwort bleibt geheim",
         "module": "Passwort",
         "icon": "lock",
         "text": [
-          "Ein Passwort schützt dein Konto.",
-          "Ein Passwort ist wie ein Schlüssel.",
-          "Andere Menschen dürfen dein Passwort nicht benutzen."
+          {
+            "text": "Ein Passwort schützt dein Konto.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Ein Passwort ist wie ein Schlüssel.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Andere Menschen dürfen dein Passwort nicht benutzen.",
+            "pictogram": "pikto-lock"
+          }
         ],
         "warning": "Gib dein Passwort nicht weiter.",
         "practice": {
@@ -185,24 +267,52 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Mit deinem Passwort kann jemand dein Konto benutzen.",
           "feedbackCorrect": "Das ist sicher. Dein Passwort bleibt geheim.",
           "remember": "Mein Passwort bleibt geheim."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Gutes Passwort",
         "module": "Passwort",
         "icon": "check",
         "text": [
-          "Ein gutes Passwort ist lang.",
-          "Es ist nicht dein Name.",
-          "Es ist nicht dein Geburtstag.",
-          "Buchstaben und Zahlen sind gut."
+          {
+            "text": "Ein gutes Passwort ist lang.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Es ist nicht dein Name.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Es ist nicht dein Geburtstag.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Buchstaben und Zahlen sind gut.",
+            "pictogram": "pikto-shop"
+          }
         ],
         "bullets": [
-          "nicht dein Name",
-          "nicht dein Geburtstag",
-          "mindestens 10 Zeichen",
-          "Buchstaben und Zahlen",
-          "Sonderzeichen sind gut, zum Beispiel ! oder ?"
+          {
+            "text": "nicht dein Name",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "nicht dein Geburtstag",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "mindestens 10 Zeichen",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Buchstaben und Zahlen",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Sonderzeichen sind gut, zum Beispiel ! oder ?",
+            "pictogram": "pikto-lock"
+          }
         ],
         "practice": {
           "question": "Welches Passwort ist besser?",
@@ -214,16 +324,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht so sicher. Ein Name oder ein Geburtstag ist leichter zu erraten.",
           "feedbackCorrect": "Das ist sicherer. Das Passwort ist lang und schwerer zu erraten.",
           "remember": "Ich nehme ein langes Passwort."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Adresse eingeben",
         "module": "Private Daten",
         "icon": "data",
         "text": [
-          "Eine App fragt nach deiner Adresse.",
-          "Du weißt nicht warum.",
-          "Dann musst du nicht sofort etwas eintragen."
+          {
+            "text": "Eine App fragt nach deiner Adresse.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Du weißt nicht warum.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Dann musst du nicht sofort etwas eintragen.",
+            "pictogram": "pikto-location"
+          }
         ],
         "examples": [
           "Eine Spiele-App fragt nach deiner Adresse.",
@@ -239,16 +359,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wofür die App deine Adresse braucht.",
           "feedbackCorrect": "Das ist sicher. Deine Adresse ist privat. Du gibst sie nicht einfach weiter.",
           "remember": "Ich gebe meine Adresse nicht einfach weiter."
-        }
+        },
+        "pictogram": "pikto-data"
       },
       {
         "title": "Telefon-Nummer und Geburtstag",
         "module": "Private Daten",
         "icon": "help",
         "text": [
-          "Auch deine Telefon-Nummer ist privat.",
-          "Auch dein Geburtstag kann privat sein.",
-          "Diese Daten gibst du nicht überall ein."
+          {
+            "text": "Auch deine Telefon-Nummer ist privat.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Auch dein Geburtstag kann privat sein.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Diese Daten gibst du nicht überall ein.",
+            "pictogram": "pikto-no"
+          }
         ],
         "examples": [
           "Ein Formular fragt nach deiner Telefon-Nummer.",
@@ -264,16 +394,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Deine Telefon-Nummer ist privat.",
           "feedbackCorrect": "Das ist sicher. Du schützt deine Telefon-Nummer.",
           "remember": "Ich gebe meine Telefon-Nummer nicht einfach weiter."
-        }
+        },
+        "pictogram": "pikto-data"
       },
       {
         "title": "Fotos prüfen",
         "module": "Fotos",
         "icon": "photo",
         "text": [
-          "Du willst ein Foto verschicken.",
-          "Auf dem Foto sieht man vielleicht private Dinge.",
-          "Zum Beispiel: dein Zimmer oder einen Brief."
+          {
+            "text": "Du willst ein Foto verschicken.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Auf dem Foto sieht man vielleicht private Dinge.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Zum Beispiel: dein Zimmer oder einen Brief.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "examples": [
           "Auf dem Foto liegt ein Brief.",
@@ -290,16 +430,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Andere können die Adresse auf dem Foto lesen.",
           "feedbackCorrect": "Das ist sicher. Du schützt die Adresse auf dem Foto.",
           "remember": "Ich prüfe Fotos vor dem Senden."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Fremde Links und Nachrichten",
         "module": "Nachrichten",
         "icon": "link",
         "text": [
-          "Manche Nachrichten wollen private Daten bekommen.",
-          "Manche Nachrichten enthalten einen Link.",
-          "Ein fremder Link kann gefährlich sein."
+          {
+            "text": "Manche Nachrichten wollen private Daten bekommen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Manche Nachrichten enthalten einen Link.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Ein fremder Link kann gefährlich sein.",
+            "pictogram": "pikto-link"
+          }
         ],
         "examples": [
           "Klick schnell auf diesen Link.",
@@ -316,16 +466,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Ein fremder Link kann gefährlich sein.",
           "feedbackCorrect": "Das ist sicher. Du klickst nicht sofort auf einen fremden Link.",
           "remember": "Ich öffne fremde Links nicht sofort."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Druck erkennen",
         "module": "Nachrichten",
         "icon": "warning",
         "text": [
-          "Manche Nachrichten machen Druck.",
-          "Sie wollen, dass du schnell handelst.",
-          "Druck ist ein Warnzeichen."
+          {
+            "text": "Manche Nachrichten machen Druck.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Sie wollen, dass du schnell handelst.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Druck ist ein Warnzeichen.",
+            "pictogram": "pikto-feel"
+          }
         ],
         "examples": [
           "Klick sofort.",
@@ -342,23 +502,48 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Die Nachricht macht Druck. Druck ist ein Warnzeichen.",
           "feedbackCorrect": "Das ist sicher. Du machst es langsam. Du überlegst zuerst.",
           "remember": "Ich mache langsam, wenn eine Nachricht Druck macht."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
         "text": [
-          "Eine Nachricht ist komisch.",
-          "Oder eine Nachricht macht Druck.",
-          "Dann hilft ein Plan."
+          {
+            "text": "Eine Nachricht ist komisch.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Oder eine Nachricht macht Druck.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Dann hilft ein Plan.",
+            "pictogram": "pikto-help"
+          }
         ],
         "bullets": [
-          "Ich antworte nicht sofort.",
-          "Ich klicke nicht auf Links.",
-          "Ich gebe keine privaten Daten ein.",
-          "Ich mache eine Pause.",
-          "Ich frage eine Person, der ich vertraue."
+          {
+            "text": "Ich antworte nicht sofort.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Ich klicke nicht auf Links.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Ich gebe keine privaten Daten ein.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Ich mache eine Pause.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Ich frage eine Person, der ich vertraue.",
+            "pictogram": "pikto-ask"
+          }
         ],
         "practice": {
           "question": "Eine Nachricht macht dir Stress. Was ist besser?",
@@ -370,25 +555,54 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Bei Stress ist sofort reagieren oft keine gute Entscheidung.",
           "feedbackCorrect": "Das ist sicher. Du machst Stopp und entscheidest nicht unter Druck.",
           "remember": "Ich habe einen Plan, wenn etwas komisch ist."
-        }
+        },
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Private Daten gehören zu mir.",
-          "Mein Passwort bleibt geheim.",
-          "Ich nehme ein gutes, langes Passwort.",
-          "Ich gebe meine Adresse nicht einfach weiter.",
-          "Ich prüfe Fotos vor dem Senden.",
-          "Ich öffne fremde Links nicht sofort.",
-          "Ich mache langsam, wenn eine Nachricht Druck macht.",
-          "Ich darf mir Unterstützung holen."
-        ]
+          {
+            "text": "Private Daten gehören zu mir.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Mein Passwort bleibt geheim.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Ich nehme ein gutes, langes Passwort.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Ich gebe meine Adresse nicht einfach weiter.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Ich prüfe Fotos vor dem Senden.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Ich öffne fremde Links nicht sofort.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Ich mache langsam, wenn eine Nachricht Druck macht.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Ich darf mir Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/datenschutz.svg",
@@ -593,7 +807,11 @@ const topics = [
     "desc": "Nachrichten, Links, Gruppen und Codes sicher nutzen",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich bei WhatsApp?",
-      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+      "options": [
+        "Noch nicht so sicher",
+        "Ein bisschen sicher",
+        "Schon ziemlich sicher"
+      ]
     },
     "learningGoals": [
       "Was du bei fremden Nummern tust",
@@ -708,30 +926,59 @@ const topics = [
         "module": "Start",
         "icon": "message",
         "text": [
-          "Hier lernst du etwas über WhatsApp.",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
-        ]
+          {
+            "text": "Hier lernst du etwas über WhatsApp.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Du übst sichere Entscheidungen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-message"
       },
       {
         "title": "WhatsApp nutzen",
         "module": "Grundwissen",
         "icon": "message",
         "text": [
-          "Mit WhatsApp kannst du Nachrichten schreiben.",
-          "Du kannst Bilder und Sprachnachrichten senden.",
-          "Du kannst in Gruppen schreiben."
+          {
+            "text": "Mit WhatsApp kannst du Nachrichten schreiben.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du kannst Bilder und Sprachnachrichten senden.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du kannst in Gruppen schreiben.",
+            "pictogram": "pikto-message"
+          }
         ],
-        "remember": "Ich entscheide, wem ich antworte."
+        "remember": "Ich entscheide, wem ich antworte.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "Fremde Nummer",
         "module": "Nachrichten",
         "icon": "warning",
         "text": [
-          "Eine fremde Nummer schreibt dir.",
-          "Du weißt nicht, wer das ist.",
-          "Du antwortest nicht sofort."
+          {
+            "text": "Eine fremde Nummer schreibt dir.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du weißt nicht, wer das ist.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du antwortest nicht sofort.",
+            "pictogram": "pikto-location"
+          }
         ],
         "examples": [
           "Hallo, ich habe eine neue Nummer.",
@@ -747,18 +994,34 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer das wirklich ist.",
           "feedbackCorrect": "Das ist sicher. Du gibst keine privaten Daten an eine fremde Nummer.",
           "remember": "Ich antworte fremden Nummern nicht sofort."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Geld und Betrug",
         "module": "Nachrichten",
         "icon": "warning",
         "text": [
-          "Manche Nachrichten fragen nach Geld.",
-          "Fremde tun manchmal so, als ob sie Freunde oder Familie sind.",
-          "Ein bekannter Trick ist: Hallo Mama, ich habe eine neue Nummer. Ich brauche Geld.",
-          "Auch Sprachnachrichten können mit KI gefälscht sein.",
-          "Du schickst kein Geld an fremde Nummern."
+          {
+            "text": "Manche Nachrichten fragen nach Geld.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Fremde tun manchmal so, als ob sie Freunde oder Familie sind.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Ein bekannter Trick ist: Hallo Mama, ich habe eine neue Nummer. Ich brauche Geld.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Auch Sprachnachrichten können mit KI gefälscht sein.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du schickst kein Geld an fremde Nummern.",
+            "pictogram": "pikto-message"
+          }
         ],
         "examples": [
           "Hallo Papa, mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir Geld überweisen?",
@@ -774,16 +1037,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Es kann Betrug sein.",
           "feedbackCorrect": "Das ist sicher. Du schickst kein Geld an eine fremde Nummer.",
           "remember": "Ich schicke kein Geld an fremde Nummern."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Links in Nachrichten",
         "module": "Links",
         "icon": "link",
         "text": [
-          "Ein Link führt zu einer Internet-Seite.",
-          "Manche Links sind gefährlich.",
-          "Du klickst nicht sofort auf unbekannte Links."
+          {
+            "text": "Ein Link führt zu einer Internet-Seite.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Manche Links sind gefährlich.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Du klickst nicht sofort auf unbekannte Links.",
+            "pictogram": "pikto-location"
+          }
         ],
         "practice": {
           "question": "Ein unbekannter Link kommt an. Was ist besser?",
@@ -795,16 +1068,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Unbekannte Links können gefährlich sein.",
           "feedbackCorrect": "Das ist sicher. Du öffnest den unbekannten Link nicht.",
           "remember": "Ich öffne unbekannte Links nicht sofort."
-        }
+        },
+        "pictogram": "pikto-link"
       },
       {
         "title": "WhatsApp-Code",
         "module": "Code",
         "icon": "lock",
         "text": [
-          "Du bekommst manchmal einen Code per SMS.",
-          "Der Code schützt dein WhatsApp.",
-          "Du gibst den Code nicht weiter."
+          {
+            "text": "Du bekommst manchmal einen Code per SMS.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Der Code schützt dein WhatsApp.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Du gibst den Code nicht weiter.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
@@ -816,16 +1099,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Mit dem Code kann jemand dein WhatsApp übernehmen.",
           "feedbackCorrect": "Das ist sicher. Dein WhatsApp-Code bleibt geheim.",
           "remember": "Mein WhatsApp-Code bleibt geheim."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Gruppen",
         "module": "Gruppen",
         "icon": "message",
         "text": [
-          "In Gruppen lesen viele Menschen mit.",
-          "Nicht alles gehört in eine Gruppe.",
-          "Private Dinge schreibst du nicht in eine Gruppe."
+          {
+            "text": "In Gruppen lesen viele Menschen mit.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Nicht alles gehört in eine Gruppe.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Private Dinge schreibst du nicht in eine Gruppe.",
+            "pictogram": "pikto-message"
+          }
         ],
         "practice": {
           "question": "Was ist bei Gruppen wichtig?",
@@ -837,16 +1130,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. In Gruppen können viele Menschen mitlesen.",
           "feedbackCorrect": "Das ist richtig. In Gruppen können viele Menschen mitlesen.",
           "remember": "In Gruppen schreibe ich nur, was alle sehen dürfen."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Fotos senden",
         "module": "Fotos",
         "icon": "photo",
         "text": [
-          "Ein Foto kann weitergeschickt werden.",
-          "Ein Foto kann privat sein.",
-          "Du fragst, bevor du ein Foto von anderen sendest."
+          {
+            "text": "Ein Foto kann weitergeschickt werden.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Ein Foto kann privat sein.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du fragst, bevor du ein Foto von anderen sendest.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Du willst ein Foto von einer Person senden. Was ist besser?",
@@ -858,16 +1161,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen mitbestimmen.",
           "feedbackCorrect": "Das ist sicher. Du fragst vorher.",
           "remember": "Ich prüfe Fotos vor dem Senden."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Stress und Druck",
         "module": "Stress",
         "icon": "stop",
         "text": [
-          "Eine Nachricht macht dir Stress oder Angst.",
-          "Du musst nicht sofort antworten.",
-          "Du darfst eine Pause machen."
+          {
+            "text": "Eine Nachricht macht dir Stress oder Angst.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du musst nicht sofort antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Du darfst eine Pause machen.",
+            "pictogram": "pikto-pause"
+          }
         ],
         "practice": {
           "question": "Eine Nachricht macht dir Stress. Was ist besser?",
@@ -879,56 +1192,123 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Unter Stress machst du leichter Fehler.",
           "feedbackCorrect": "Das ist sicher. Du machst erst eine Pause.",
           "remember": "Ich mache Pause, wenn mich etwas stresst."
-        }
+        },
+        "pictogram": "pikto-feel"
       },
       {
         "title": "Die KI in WhatsApp",
         "module": "KI",
         "icon": "understand",
         "text": [
-          "In WhatsApp gibt es jetzt eine KI. Sie heißt Meta AI.",
-          "Du erkennst sie an einem blauen Kreis.",
-          "Die KI ist kein Mensch. Sie ist ein Programm.",
-          "Du musst die KI nicht benutzen."
+          {
+            "text": "In WhatsApp gibt es jetzt eine KI. Sie heißt Meta AI.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Du erkennst sie an einem blauen Kreis.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Die KI ist kein Mensch. Sie ist ein Programm.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Du musst die KI nicht benutzen.",
+            "pictogram": "pikto-ki"
+          }
         ],
         "bullets": [
-          "Die KI kann Fragen beantworten.",
-          "Die KI kann Fehler machen.",
-          "Schreibe der KI keine privaten Dinge."
+          {
+            "text": "Die KI kann Fragen beantworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Die KI kann Fehler machen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Schreibe der KI keine privaten Dinge.",
+            "pictogram": "pikto-message"
+          }
         ],
-        "remember": "Die KI in WhatsApp ist kein Mensch."
+        "remember": "Die KI in WhatsApp ist kein Mensch.",
+        "pictogram": "pikto-ki"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
         "text": [
-          "Etwas ist komisch oder macht dir Druck.",
-          "Du reagierst nicht sofort.",
-          "Du zeigst die Nachricht einer vertrauten Person."
+          {
+            "text": "Etwas ist komisch oder macht dir Druck.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Du reagierst nicht sofort.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Du zeigst die Nachricht einer vertrauten Person.",
+            "pictogram": "pikto-message"
+          }
         ],
         "bullets": [
-          "Stopp machen.",
-          "Nicht sofort antworten.",
-          "Link nicht öffnen.",
-          "Hilfe-Button nutzen."
-        ]
+          {
+            "text": "Stopp machen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Nicht sofort antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Link nicht öffnen.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Hilfe-Button nutzen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Fremde Nummern prüfen.",
-          "Kein Geld an fremde Nummern schicken.",
-          "Unbekannte Links nicht öffnen.",
-          "Codes nicht weitergeben.",
-          "Fotos prüfen.",
-          "Bei Stress Hilfe holen."
-        ]
+          {
+            "text": "Fremde Nummern prüfen.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Kein Geld an fremde Nummern schicken.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Unbekannte Links nicht öffnen.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Codes nicht weitergeben.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Fotos prüfen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Bei Stress Hilfe holen.",
+            "pictogram": "pikto-feel"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/whatsapp.svg",
@@ -1129,7 +1509,11 @@ const topics = [
     "desc": "Beiträge, Profile und Kontakte prüfen",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich auf Facebook?",
-      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+      "options": [
+        "Noch nicht so sicher",
+        "Ein bisschen sicher",
+        "Schon ziemlich sicher"
+      ]
     },
     "learningGoals": [
       "Wie du dein Profil sicher einstellst",
@@ -1244,19 +1628,38 @@ const topics = [
         "module": "Start",
         "icon": "message",
         "text": [
-          "Hier lernst du etwas über Facebook.",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
-        ]
+          {
+            "text": "Hier lernst du etwas über Facebook.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du übst sichere Entscheidungen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-message"
       },
       {
         "title": "Profil",
         "module": "Profil",
         "icon": "data",
         "text": [
-          "Im Profil stehen Informationen über dich.",
-          "Nicht alles muss dort stehen.",
-          "Private Informationen sollen nicht öffentlich sein."
+          {
+            "text": "Im Profil stehen Informationen über dich.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Nicht alles muss dort stehen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Private Informationen sollen nicht öffentlich sein.",
+            "pictogram": "pikto-no"
+          }
         ],
         "examples": [
           "Adresse",
@@ -1264,16 +1667,26 @@ const topics = [
           "Geburtstag",
           "private Fotos"
         ],
-        "remember": "Ich zeige nicht alles in meinem Profil."
+        "remember": "Ich zeige nicht alles in meinem Profil.",
+        "pictogram": "pikto-screen"
       },
       {
         "title": "Beitrag schreiben",
         "module": "Beiträge",
         "icon": "message",
         "text": [
-          "Du willst etwas schreiben.",
-          "Viele Menschen können den Beitrag sehen.",
-          "Darum prüfst du vorher, was du schreibst."
+          {
+            "text": "Du willst etwas schreiben.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Viele Menschen können den Beitrag sehen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Darum prüfst du vorher, was du schreibst.",
+            "pictogram": "pikto-message"
+          }
         ],
         "practice": {
           "question": "Was prüfst du vor einem Beitrag?",
@@ -1285,16 +1698,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Schnelligkeit ist nicht wichtig.",
           "feedbackCorrect": "Das ist sicher. Du prüfst, wer deinen Beitrag sehen kann.",
           "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Wer darf etwas sehen?",
         "module": "Einstellungen",
         "icon": "lock",
         "text": [
-          "Du kannst einstellen, wer einen Beitrag sehen darf.",
-          "Das nennt man private Einstellungen.",
-          "Du kannst dir bei den Einstellungen helfen lassen."
+          {
+            "text": "Du kannst einstellen, wer einen Beitrag sehen darf.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Das nennt man private Einstellungen.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Du kannst dir bei den Einstellungen helfen lassen.",
+            "pictogram": "pikto-lock"
+          }
         ],
         "practice": {
           "question": "Was bedeutet: Wer darf etwas sehen?",
@@ -1306,16 +1729,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Nicht alle müssen alles sehen.",
           "feedbackCorrect": "Das ist richtig. Du prüfst die Sichtbarkeit.",
           "remember": "Ich prüfe meine Einstellungen."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Freundschafts-Anfragen",
         "module": "Kontakte",
         "icon": "help",
         "text": [
-          "Eine unbekannte Person sendet eine Anfrage.",
-          "Du weißt nicht, wer das ist.",
-          "Du musst die Anfrage nicht annehmen."
+          {
+            "text": "Eine unbekannte Person sendet eine Anfrage.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du weißt nicht, wer das ist.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du musst die Anfrage nicht annehmen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
@@ -1327,16 +1760,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer die Person ist.",
           "feedbackCorrect": "Das ist sicher. Du prüfst die Anfrage zuerst.",
           "remember": "Ich nehme unbekannte Anfragen nicht sofort an."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Kommentare schreiben",
         "module": "Kommentare",
         "icon": "message",
         "text": [
-          "Kommentare können andere Menschen verletzen.",
-          "Du musst nicht auf alles antworten.",
-          "Freundlich bleiben ist wichtig."
+          {
+            "text": "Kommentare können andere Menschen verletzen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du musst nicht auf alles antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Freundlich bleiben ist wichtig.",
+            "pictogram": "pikto-message"
+          }
         ],
         "practice": {
           "question": "Was ist bei Kommentaren wichtig?",
@@ -1348,22 +1791,44 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Beleidigungen können verletzen.",
           "feedbackCorrect": "Das ist sicher. Du schreibst respektvoll.",
           "remember": "Ich schreibe respektvoll."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Beleidigungen",
         "module": "Probleme",
         "icon": "warning",
         "text": [
-          "Im Internet kann es Streit geben.",
-          "Beleidigungen sind nicht in Ordnung.",
-          "Du musst nicht zurück beleidigen."
+          {
+            "text": "Im Internet kann es Streit geben.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Beleidigungen sind nicht in Ordnung.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du musst nicht zurück beleidigen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "bullets": [
-          "Nachricht zeigen.",
-          "Blockieren.",
-          "Melden.",
-          "Unterstützung holen."
+          {
+            "text": "Nachricht zeigen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Blockieren.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Melden.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
         ],
         "practice": {
           "question": "Du wirst beleidigt. Was ist besser?",
@@ -1375,16 +1840,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Zurück beleidigen macht den Streit größer.",
           "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein.",
           "remember": "Ich hole Unterstützung bei Beleidigungen."
-        }
+        },
+        "pictogram": "pikto-help"
       },
       {
         "title": "Fotos mit anderen Personen",
         "module": "Fotos",
         "icon": "photo",
         "text": [
-          "Ein Foto zeigt andere Menschen.",
-          "Nicht jeder möchte im Internet sein.",
-          "Du fragst erst, bevor du ein Foto postest."
+          {
+            "text": "Ein Foto zeigt andere Menschen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Nicht jeder möchte im Internet sein.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Du fragst erst, bevor du ein Foto postest.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Ein Foto zeigt andere Menschen. Was ist besser?",
@@ -1396,21 +1871,38 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen mitentscheiden.",
           "feedbackCorrect": "Das ist sicher. Du fragst zuerst.",
           "remember": "Ich frage andere, bevor ich ihr Foto poste."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Nicht alles öffentlich machen.",
-          "Anfragen prüfen.",
-          "Respektvoll schreiben.",
-          "Bei Beleidigungen Hilfe holen."
-        ]
+          {
+            "text": "Nicht alles öffentlich machen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Anfragen prüfen.",
+            "pictogram": "pikto-ask"
+          },
+          {
+            "text": "Respektvoll schreiben.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Bei Beleidigungen Hilfe holen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/facebook.svg",
@@ -1608,7 +2100,11 @@ const topics = [
     "desc": "Fotos, Standort und Nachrichten prüfen",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich auf Instagram?",
-      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+      "options": [
+        "Noch nicht so sicher",
+        "Ein bisschen sicher",
+        "Schon ziemlich sicher"
+      ]
     },
     "learningGoals": [
       "Was du bei Fotos beachtest",
@@ -1723,19 +2219,38 @@ const topics = [
         "module": "Start",
         "icon": "photo",
         "text": [
-          "Hier lernst du etwas über Instagram.",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
-        ]
+          {
+            "text": "Hier lernst du etwas über Instagram.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du übst sichere Entscheidungen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Foto posten",
         "module": "Fotos",
         "icon": "photo",
         "text": [
-          "Du willst ein Foto posten.",
-          "Andere Menschen können das Foto sehen.",
-          "Manchmal sieht man mehr, als man denkt."
+          {
+            "text": "Du willst ein Foto posten.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Andere Menschen können das Foto sehen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Manchmal sieht man mehr, als man denkt.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Was prüfst du vor dem Posten eines Fotos?",
@@ -1747,16 +2262,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Wichtig ist, was auf dem Foto zu sehen ist.",
           "feedbackCorrect": "Das ist sicher. Du prüfst, was zu sehen ist.",
           "remember": "Ich prüfe, was auf dem Foto zu sehen ist."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Andere Personen auf Fotos",
         "module": "Fotos",
         "icon": "help",
         "text": [
-          "Auf dem Foto sind andere Personen.",
-          "Nicht alle wollen im Internet stehen.",
-          "Du fragst vorher oder nimmst ein anderes Foto."
+          {
+            "text": "Auf dem Foto sind andere Personen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Nicht alle wollen im Internet stehen.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Du fragst vorher oder nimmst ein anderes Foto.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Im Hintergrund sieht man eine andere Person. Was ist besser?",
@@ -1768,16 +2293,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen mitentscheiden.",
           "feedbackCorrect": "Das ist sicher. Du fragst oder nimmst ein anderes Foto.",
           "remember": "Ich frage andere, bevor ich ihr Bild poste."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Kurze Videos und Stories",
         "module": "Stories",
         "icon": "help",
         "text": [
-          "Kurze Videos können viele Menschen sehen.",
-          "Andere können ein Bild vom Bildschirm machen.",
-          "Auch kurze Videos können privat sein."
+          {
+            "text": "Kurze Videos können viele Menschen sehen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Andere können ein Bild vom Bildschirm machen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Auch kurze Videos können privat sein.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Was können Menschen bei kurzen Videos machen?",
@@ -1789,16 +2324,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Inhalte können gespeichert werden.",
           "feedbackCorrect": "Das ist richtig. Auch kurze Videos können gespeichert werden.",
           "remember": "Auch Stories prüfe ich vor dem Posten."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Standort",
         "module": "Standort",
         "icon": "data",
         "text": [
-          "Der Standort zeigt, wo du bist.",
-          "Nicht jeder muss wissen, wo du bist.",
-          "Du teilst deinen Standort nicht einfach."
+          {
+            "text": "Der Standort zeigt, wo du bist.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Nicht jeder muss wissen, wo du bist.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du teilst deinen Standort nicht einfach.",
+            "pictogram": "pikto-location"
+          }
         ],
         "practice": {
           "question": "Warum ist der Standort wichtig?",
@@ -1810,16 +2355,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Der Standort kann privat sein.",
           "feedbackCorrect": "Das ist richtig. Der Standort zeigt, wo du bist.",
           "remember": "Ich teile meinen Standort nicht einfach."
-        }
+        },
+        "pictogram": "pikto-location"
       },
       {
         "title": "Private Nachrichten",
         "module": "Nachrichten",
         "icon": "message",
         "text": [
-          "Eine fremde Person schreibt dir privat.",
-          "Die Person fragt vielleicht nach privaten Fotos oder Daten.",
-          "Das ist ein Warnzeichen."
+          {
+            "text": "Eine fremde Person schreibt dir privat.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Die Person fragt vielleicht nach privaten Fotos oder Daten.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Das ist ein Warnzeichen.",
+            "pictogram": "pikto-message"
+          }
         ],
         "practice": {
           "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
@@ -1831,22 +2386,44 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Private Fotos gehören nicht an fremde Personen.",
           "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Fotos.",
           "remember": "Ich schicke fremden Personen keine privaten Fotos."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Verletzende Kommentare",
         "module": "Kommentare",
         "icon": "warning",
         "text": [
-          "Kommentare können nett sein.",
-          "Kommentare können auch verletzen.",
-          "Du musst nicht auf alles antworten."
+          {
+            "text": "Kommentare können nett sein.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Kommentare können auch verletzen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du musst nicht auf alles antworten.",
+            "pictogram": "pikto-location"
+          }
         ],
         "bullets": [
-          "Nachricht zeigen.",
-          "Blockieren.",
-          "Melden.",
-          "Darüber sprechen."
+          {
+            "text": "Nachricht zeigen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Blockieren.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Melden.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Darüber sprechen.",
+            "pictogram": "pikto-message"
+          }
         ],
         "practice": {
           "question": "Ein Kommentar verletzt dich. Was ist besser?",
@@ -1858,16 +2435,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Zurück beleidigen hilft nicht.",
           "feedbackCorrect": "Das ist sicher. Du holst Unterstützung.",
           "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Bearbeitete Bilder",
         "module": "Medien prüfen",
         "icon": "check",
         "text": [
-          "Auf Instagram sieht vieles perfekt aus.",
-          "Bilder können bearbeitet sein.",
-          "Nicht alles ist echt."
+          {
+            "text": "Auf Instagram sieht vieles perfekt aus.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Bilder können bearbeitet sein.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Nicht alles ist echt.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Warum sind bearbeitete Bilder wichtig?",
@@ -1879,37 +2466,76 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Viele Bilder sind bearbeitet.",
           "feedbackCorrect": "Das ist richtig. Nicht alles ist echt.",
           "remember": "Ich muss mich nicht mit Bildern vergleichen."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
         "text": [
-          "Ein Profil oder eine Nachricht ist komisch.",
-          "Du machst Stopp und antwortest nicht sofort.",
-          "Du zeigst es einer vertrauten Person."
+          {
+            "text": "Ein Profil oder eine Nachricht ist komisch.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du machst Stopp und antwortest nicht sofort.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Du zeigst es einer vertrauten Person.",
+            "pictogram": "pikto-help"
+          }
         ],
         "bullets": [
-          "Stopp machen.",
-          "Nicht sofort antworten.",
-          "Profil oder Nachricht zeigen.",
-          "Hilfe-Button nutzen."
-        ]
+          {
+            "text": "Stopp machen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Nicht sofort antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Profil oder Nachricht zeigen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Hilfe-Button nutzen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Fotos prüfen.",
-          "Standort schützen.",
-          "Fremden nicht sofort antworten.",
-          "Keine privaten Fotos an Fremde schicken."
-        ]
+          {
+            "text": "Fotos prüfen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Standort schützen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Fremden nicht sofort antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Keine privaten Fotos an Fremde schicken.",
+            "pictogram": "pikto-photo"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/instagram.svg",
@@ -2107,7 +2733,11 @@ const topics = [
     "desc": "Videos, Werbung und Pausen prüfen",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich beim Schauen auf YouTube?",
-      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+      "options": [
+        "Noch nicht so sicher",
+        "Ein bisschen sicher",
+        "Schon ziemlich sicher"
+      ]
     },
     "learningGoals": [
       "Woran du erkennst, ob ein Video stimmt",
@@ -2222,19 +2852,38 @@ const topics = [
         "module": "Start",
         "icon": "help",
         "text": [
-          "Hier lernst du etwas über YouTube.",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
-        ]
+          {
+            "text": "Hier lernst du etwas über YouTube.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du übst sichere Entscheidungen.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Videos prüfen",
         "module": "Videos",
         "icon": "help",
         "text": [
-          "Nicht jedes Video ist wahr.",
-          "Manche Videos übertreiben oder lügen.",
-          "Du glaubst nicht alles sofort."
+          {
+            "text": "Nicht jedes Video ist wahr.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Manche Videos übertreiben oder lügen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du glaubst nicht alles sofort.",
+            "pictogram": "pikto-location"
+          }
         ],
         "practice": {
           "question": "Was ist eine gute Regel für YouTube?",
@@ -2246,16 +2895,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Viele Inhalte können falsch sein.",
           "feedbackCorrect": "Das ist sicher. Du glaubst nicht alles sofort.",
           "remember": "Ich glaube nicht alles sofort."
-        }
+        },
+        "pictogram": "pikto-screen"
       },
       {
         "title": "Werbung erkennen",
         "module": "Werbung",
         "icon": "warning",
         "text": [
-          "In vielen Videos gibt es Werbung.",
-          "Werbung will, dass du etwas kaufst.",
-          "Du kaufst nicht sofort."
+          {
+            "text": "In vielen Videos gibt es Werbung.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Werbung will, dass du etwas kaufst.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du kaufst nicht sofort.",
+            "pictogram": "pikto-location"
+          }
         ],
         "practice": {
           "question": "Woran erkennst du Werbung in Videos?",
@@ -2267,16 +2926,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Werbung kann wie ein normales Video aussehen.",
           "feedbackCorrect": "Das ist richtig. Werbung will oft etwas verkaufen.",
           "remember": "Ich kaufe nichts sofort aus einem Video."
-        }
+        },
+        "pictogram": "pikto-no"
       },
       {
         "title": "Autoplay und Zeit",
         "module": "Pausen",
         "icon": "stop",
         "text": [
-          "YouTube spielt oft automatisch das nächste Video ab.",
-          "Du merkst: Ich schaue schon lange.",
-          "Du darfst stoppen und Pause machen."
+          {
+            "text": "YouTube spielt oft automatisch das nächste Video ab.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du merkst: Ich schaue schon lange.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Du darfst stoppen und Pause machen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Autoplay startet immer neue Videos. Was ist wichtig?",
@@ -2288,16 +2957,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Du musst nicht immer weiter schauen.",
           "feedbackCorrect": "Das ist sicher. Du darfst stoppen.",
           "remember": "Ich darf Videos stoppen."
-        }
+        },
+        "pictogram": "pikto-pause"
       },
       {
         "title": "Gefährliche Mutproben",
         "module": "Gefahr",
         "icon": "warning",
         "text": [
-          "Manche Videos zeigen gefährliche Mutproben.",
-          "Du musst das nicht nachmachen.",
-          "Deine Gesundheit ist wichtiger."
+          {
+            "text": "Manche Videos zeigen gefährliche Mutproben.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du musst das nicht nachmachen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Deine Gesundheit ist wichtiger.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Ein Video zeigt eine gefährliche Mutprobe. Was ist besser?",
@@ -2309,16 +2988,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Gefährliche Mutproben können dir schaden.",
           "feedbackCorrect": "Das ist sicher. Du machst gefährliche Dinge nicht nach.",
           "remember": "Ich mache gefährliche Dinge nicht nach."
-        }
+        },
+        "pictogram": "pikto-no"
       },
       {
         "title": "Videos, die Angst machen",
         "module": "Gefühle",
         "icon": "help",
         "text": [
-          "Manche Videos machen Angst oder Stress.",
-          "Du darfst das Video stoppen.",
-          "Du kannst mit einer vertrauten Person darüber sprechen."
+          {
+            "text": "Manche Videos machen Angst oder Stress.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du darfst das Video stoppen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du kannst mit einer vertrauten Person darüber sprechen.",
+            "pictogram": "pikto-feel"
+          }
         ],
         "practice": {
           "question": "Ein Video macht dir Angst. Was ist besser?",
@@ -2330,61 +3019,126 @@ const topics = [
           "feedbackWrong": "Das ist nicht gut. Wenn dich ein Video belastet, darfst du stoppen.",
           "feedbackCorrect": "Das ist sicher. Du stoppst und bleibst nicht allein.",
           "remember": "Ich bin mit meiner Angst nicht allein."
-        }
+        },
+        "pictogram": "pikto-feel"
       },
       {
         "title": "Kommentare",
         "module": "Kommentare",
         "icon": "message",
         "text": [
-          "Kommentare können nett sein.",
-          "Kommentare können auch verletzen.",
-          "Du musst nicht lesen oder antworten."
+          {
+            "text": "Kommentare können nett sein.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Kommentare können auch verletzen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du musst nicht lesen oder antworten.",
+            "pictogram": "pikto-location"
+          }
         ],
-        "remember": "Ich muss nicht auf Kommentare reagieren."
+        "remember": "Ich muss nicht auf Kommentare reagieren.",
+        "pictogram": "pikto-message"
       },
       {
         "title": "Nicht jedes Video ist echt",
         "module": "KI",
         "icon": "warning",
         "text": [
-          "Manche Videos sind mit KI gemacht.",
-          "Sie sehen echt aus. Aber sie sind gefälscht.",
-          "Auch bekannte Menschen werden gefälscht.",
-          "Mehr dazu lernst du im Thema: Fake News und KI-Fakes."
+          {
+            "text": "Manche Videos sind mit KI gemacht.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Sie sehen echt aus. Aber sie sind gefälscht.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Auch bekannte Menschen werden gefälscht.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Mehr dazu lernst du im Thema: Fake News und KI-Fakes.",
+            "pictogram": "pikto-fake"
+          }
         ],
-        "remember": "Auch Videos können gefälscht sein."
+        "remember": "Auch Videos können gefälscht sein.",
+        "pictogram": "pikto-ki"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
         "text": [
-          "Ein Video macht dir Angst oder setzt dich unter Druck.",
-          "Du machst Stopp.",
-          "Du zeigst das Video einer vertrauten Person."
+          {
+            "text": "Ein Video macht dir Angst oder setzt dich unter Druck.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du machst Stopp.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du zeigst das Video einer vertrauten Person.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "bullets": [
-          "Video stoppen.",
-          "Nicht nachmachen.",
-          "Pause machen.",
-          "Unterstützung holen."
-        ]
+          {
+            "text": "Video stoppen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Nicht nachmachen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Pause machen.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Videos prüfen.",
-          "Werbung erkennen.",
-          "Nicht jedes Video ist echt.",
-          "Pausen machen.",
-          "Gefährliche Dinge nicht nachmachen."
-        ]
+          {
+            "text": "Videos prüfen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Werbung erkennen.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Nicht jedes Video ist echt.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Pausen machen.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Gefährliche Dinge nicht nachmachen.",
+            "pictogram": "pikto-no"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/youtube.svg",
@@ -2584,7 +3338,11 @@ const topics = [
     "desc": "Bilder, Standort und Druck erkennen",
     "selfAssessment": {
       "question": "Was weißt du schon über Snapchat?",
-      "options": ["Noch nicht so viel", "Ein bisschen", "Schon einiges"]
+      "options": [
+        "Noch nicht so viel",
+        "Ein bisschen",
+        "Schon einiges"
+      ]
     },
     "learningGoals": [
       "Was mit Snaps passiert, nachdem du sie sendest",
@@ -2699,19 +3457,38 @@ const topics = [
         "module": "Start",
         "icon": "photo",
         "text": [
-          "Hier lernst du etwas über Snapchat.",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
-        ]
+          {
+            "text": "Hier lernst du etwas über Snapchat.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du übst sichere Entscheidungen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Bilder verschwinden nicht immer",
         "module": "Bilder",
         "icon": "photo",
         "text": [
-          "Du sendest ein Bild.",
-          "Es ist nur kurz zu sehen.",
-          "Trotzdem kann jemand das Bild speichern."
+          {
+            "text": "Du sendest ein Bild.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Es ist nur kurz zu sehen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Trotzdem kann jemand das Bild speichern.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Du schickst ein Bild über Snapchat. Was ist wichtig?",
@@ -2723,27 +3500,47 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Auch Snaps können gespeichert werden.",
           "feedbackCorrect": "Das ist richtig. Jemand kann ein Bild vom Bildschirm machen.",
           "remember": "Ich sende nur Bilder, die sicher sind."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Bild vom Bildschirm",
         "module": "Bilder",
         "icon": "photo",
         "text": [
-          "Jemand kann ein Bild vom Bildschirm machen.",
-          "So kann dein Bild gespeichert werden.",
-          "So kann dein Bild weitergeschickt werden."
+          {
+            "text": "Jemand kann ein Bild vom Bildschirm machen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "So kann dein Bild gespeichert werden.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "So kann dein Bild weitergeschickt werden.",
+            "pictogram": "pikto-photo"
+          }
         ],
-        "remember": "Ich denke vor dem Senden nach."
+        "remember": "Ich denke vor dem Senden nach.",
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Sehr private Bilder",
         "module": "Private Bilder",
         "icon": "lock",
         "text": [
-          "Manche Bilder sind sehr privat.",
-          "Niemand darf dich zu solchen Bildern drängen.",
-          "Du darfst Nein sagen."
+          {
+            "text": "Manche Bilder sind sehr privat.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Niemand darf dich zu solchen Bildern drängen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du darfst Nein sagen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Jemand drängt dich, ein sehr privates Bild zu schicken. Was ist besser?",
@@ -2755,16 +3552,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Niemand darf dich drängen.",
           "feedbackCorrect": "Das ist sicher. Du darfst Nein sagen.",
           "remember": "Ich schicke keine privaten Bilder unter Druck."
-        }
+        },
+        "pictogram": "pikto-photo"
       },
       {
         "title": "Standort",
         "module": "Standort",
         "icon": "data",
         "text": [
-          "Snapchat kann zeigen, wo du bist.",
-          "Andere können deinen Ort sehen.",
-          "Das kann unsicher sein."
+          {
+            "text": "Snapchat kann zeigen, wo du bist.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Andere können deinen Ort sehen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Das kann unsicher sein.",
+            "pictogram": "pikto-ask"
+          }
         ],
         "practice": {
           "question": "Die Standort-Funktion zeigt, wo du bist. Was ist besser?",
@@ -2776,16 +3583,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Der Standort kann privat sein.",
           "feedbackCorrect": "Das ist sicher. Du teilst den Standort nicht einfach.",
           "remember": "Ich teile meinen Standort nicht einfach."
-        }
+        },
+        "pictogram": "pikto-location"
       },
       {
         "title": "Kontakte",
         "module": "Kontakte",
         "icon": "help",
         "text": [
-          "Nicht jeder Kontakt ist vertraut.",
-          "Fremde Personen können schreiben.",
-          "Du musst nicht antworten."
+          {
+            "text": "Nicht jeder Kontakt ist vertraut.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Fremde Personen können schreiben.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du musst nicht antworten.",
+            "pictogram": "pikto-location"
+          }
         ],
         "practice": {
           "question": "Eine neue Person will dich adden. Du kennst sie nicht. Was ist besser?",
@@ -2797,16 +3614,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer die Person ist.",
           "feedbackCorrect": "Das ist sicher. Du musst fremde Anfragen nicht annehmen.",
           "remember": "Ich prüfe, wer mir schreibt."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Druck erkennen",
         "module": "Druck",
         "icon": "warning",
         "text": [
-          "Jemand sagt: Schick das Bild, aber sag es niemandem.",
-          "Das ist Druck und ein Warnzeichen.",
-          "Du darfst Nein sagen und Hilfe holen."
+          {
+            "text": "Jemand sagt: Schick das Bild, aber sag es niemandem.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Das ist Druck und ein Warnzeichen.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Du darfst Nein sagen und Hilfe holen.",
+            "pictogram": "pikto-help"
+          }
         ],
         "practice": {
           "question": "Eine Nachricht macht Druck und fordert Geheimhaltung. Was ist das?",
@@ -2818,37 +3645,76 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Druck und Geheimhaltung sind Warnzeichen.",
           "feedbackCorrect": "Das ist richtig. Druck ist ein Warnzeichen.",
           "remember": "Druck ist ein Warnzeichen."
-        }
+        },
+        "pictogram": "pikto-feel"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
         "text": [
-          "Eine Nachricht macht dir Druck.",
-          "Du sendest kein Bild.",
-          "Du zeigst die Nachricht einer vertrauten Person."
+          {
+            "text": "Eine Nachricht macht dir Druck.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du sendest kein Bild.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du zeigst die Nachricht einer vertrauten Person.",
+            "pictogram": "pikto-message"
+          }
         ],
         "bullets": [
-          "Nein sagen.",
-          "Kein Bild senden.",
-          "Nachricht zeigen.",
-          "Unterstützung holen."
-        ]
+          {
+            "text": "Nein sagen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Kein Bild senden.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Nachricht zeigen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Bilder können gespeichert werden.",
-          "Standort schützen.",
-          "Kontakte prüfen.",
-          "Bei Druck Hilfe holen."
-        ]
+          {
+            "text": "Bilder können gespeichert werden.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Standort schützen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Kontakte prüfen.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Bei Druck Hilfe holen.",
+            "pictogram": "pikto-feel"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/snapchat.svg",
@@ -3048,7 +3914,11 @@ const topics = [
     "desc": "Trends, Videos, Nachrichten und Pausen",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich bei TikTok?",
-      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+      "options": [
+        "Noch nicht so sicher",
+        "Ein bisschen sicher",
+        "Schon ziemlich sicher"
+      ]
     },
     "learningGoals": [
       "Wie TikTok entscheidet, was du siehst",
@@ -3163,19 +4033,38 @@ const topics = [
         "module": "Start",
         "icon": "help",
         "text": [
-          "Hier lernst du etwas über TikTok.",
-          "Du übst sichere Entscheidungen.",
-          "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist."
-        ]
+          {
+            "text": "Hier lernst du etwas über TikTok.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du übst sichere Entscheidungen.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Trends",
         "module": "Trends",
         "icon": "help",
         "text": [
-          "Viele Menschen machen bei Trends mit.",
-          "Manche Trends sind lustig.",
-          "Manche Trends sind gefährlich."
+          {
+            "text": "Viele Menschen machen bei Trends mit.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Manche Trends sind lustig.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Manche Trends sind gefährlich.",
+            "pictogram": "pikto-screen"
+          }
         ],
         "practice": {
           "question": "Ein Trend wirkt gefährlich. Was ist besser?",
@@ -3187,16 +4076,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Gefährliche Trends können dir schaden.",
           "feedbackCorrect": "Das ist sicher. Deine Gesundheit ist wichtiger.",
           "remember": "Ich mache gefährliche Trends nicht nach."
-        }
+        },
+        "pictogram": "pikto-screen"
       },
       {
         "title": "Ähnliche Videos",
         "module": "Algorithmus",
         "icon": "data",
         "text": [
-          "TikTok merkt, was du anschaust.",
-          "Dann zeigt TikTok ähnliche Videos.",
-          "So kannst du schnell lange schauen."
+          {
+            "text": "TikTok merkt, was du anschaust.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Dann zeigt TikTok ähnliche Videos.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "So kannst du schnell lange schauen.",
+            "pictogram": "pikto-screen"
+          }
         ],
         "practice": {
           "question": "Du bemerkst, dass du sehr lange TikTok schaust. Was ist wichtig?",
@@ -3208,27 +4107,47 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Du musst nicht immer weiter schauen.",
           "feedbackCorrect": "Das ist richtig. Du darfst Pause machen.",
           "remember": "Ich mache Pause, wenn mir etwas nicht gut tut."
-        }
+        },
+        "pictogram": "pikto-screen"
       },
       {
         "title": "Gefährliche Trends erkennen",
         "module": "Trends",
         "icon": "warning",
         "text": [
-          "Ein Trend sieht gefährlich aus.",
-          "Oder ein Trend tut weh.",
-          "Du machst nicht mit."
+          {
+            "text": "Ein Trend sieht gefährlich aus.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Oder ein Trend tut weh.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Du machst nicht mit.",
+            "pictogram": "pikto-no"
+          }
         ],
-        "remember": "Ich muss nicht bei jedem Trend mitmachen."
+        "remember": "Ich muss nicht bei jedem Trend mitmachen.",
+        "pictogram": "pikto-screen"
       },
       {
         "title": "Private Nachrichten",
         "module": "Nachrichten",
         "icon": "message",
         "text": [
-          "Fremde Personen können dir schreiben.",
-          "Sie können nach Adresse, Fotos oder anderen Daten fragen.",
-          "Du gibst solche Daten nicht weiter."
+          {
+            "text": "Fremde Personen können dir schreiben.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Sie können nach Adresse, Fotos oder anderen Daten fragen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Du gibst solche Daten nicht weiter.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
@@ -3240,16 +4159,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat.",
           "feedbackCorrect": "Das ist sicher. Du gibst fremden Personen keine Adresse.",
           "remember": "Ich schütze meine privaten Daten."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Videos posten",
         "module": "Videos",
         "icon": "photo",
         "text": [
-          "Andere können dein Video sehen und speichern.",
-          "Du prüfst das Video vorher.",
-          "Du postest nichts, was dir später schadet."
+          {
+            "text": "Andere können dein Video sehen und speichern.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du prüfst das Video vorher.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du postest nichts, was dir später schadet.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Du willst ein Video posten. Was ist wichtig?",
@@ -3261,16 +4190,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Schnell posten kann private Dinge verraten.",
           "feedbackCorrect": "Das ist sicher. Du prüfst das Video vorher.",
           "remember": "Ich prüfe Videos vor dem Posten."
-        }
+        },
+        "pictogram": "pikto-screen"
       },
       {
         "title": "Kommentare",
         "module": "Kommentare",
         "icon": "message",
         "text": [
-          "Kommentare können nett sein.",
-          "Kommentare können verletzend sein.",
-          "Du musst nicht antworten."
+          {
+            "text": "Kommentare können nett sein.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Kommentare können verletzend sein.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du musst nicht antworten.",
+            "pictogram": "pikto-location"
+          }
         ],
         "practice": {
           "question": "Kommentare unter deinem Video sind verletzend. Was ist besser?",
@@ -3282,60 +4221,122 @@ const topics = [
           "feedbackWrong": "Das ist nicht gut. Du musst verletzende Kommentare nicht allein aushalten.",
           "feedbackCorrect": "Das ist sicher. Du holst Unterstützung.",
           "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
-        }
+        },
+        "pictogram": "pikto-message"
       },
       {
         "title": "Gefühle und Pausen",
         "module": "Gefühle",
         "icon": "help",
         "text": [
-          "Manche Videos machen traurig, wütend oder nervös.",
-          "Du darfst TikTok schließen.",
-          "Du kannst mit jemandem über deine Gefühle sprechen."
+          {
+            "text": "Manche Videos machen traurig, wütend oder nervös.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du darfst TikTok schließen.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Du kannst mit jemandem über deine Gefühle sprechen.",
+            "pictogram": "pikto-feel"
+          }
         ],
-        "remember": "Ich darf TikTok weglegen."
+        "remember": "Ich darf TikTok weglegen.",
+        "pictogram": "pikto-feel"
       },
       {
         "title": "Nicht jedes Video ist echt",
         "module": "KI",
         "icon": "warning",
         "text": [
-          "Viele Videos auf TikTok sind mit KI gemacht.",
-          "Sie sehen echt aus. Aber sie sind gefälscht.",
-          "Auch Stimmen und Gesichter können gefälscht sein.",
-          "Mehr dazu lernst du im Thema: Fake News und KI-Fakes."
+          {
+            "text": "Viele Videos auf TikTok sind mit KI gemacht.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Sie sehen echt aus. Aber sie sind gefälscht.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Auch Stimmen und Gesichter können gefälscht sein.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Mehr dazu lernst du im Thema: Fake News und KI-Fakes.",
+            "pictogram": "pikto-fake"
+          }
         ],
-        "remember": "Auch Videos können gefälscht sein."
+        "remember": "Auch Videos können gefälscht sein.",
+        "pictogram": "pikto-ki"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Handlungsplan",
         "icon": "help",
         "text": [
-          "Gefährlicher Trend, komischer Kommentar oder Druck?",
-          "Du machst Stopp.",
-          "Du zeigst die Nachricht oder das Video einer vertrauten Person."
+          {
+            "text": "Gefährlicher Trend, komischer Kommentar oder Druck?",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Du machst Stopp.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du zeigst die Nachricht oder das Video einer vertrauten Person.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "bullets": [
-          "Nicht nachmachen.",
-          "Keine privaten Daten senden.",
-          "Pause machen.",
-          "Unterstützung holen."
-        ]
+          {
+            "text": "Nicht nachmachen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Keine privaten Daten senden.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Pause machen.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Gefährliche Trends nicht nachmachen.",
-          "Pausen machen.",
-          "Private Daten schützen.",
-          "Videos vor dem Posten prüfen."
-        ]
+          {
+            "text": "Gefährliche Trends nicht nachmachen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Pausen machen.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Private Daten schützen.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Videos vor dem Posten prüfen.",
+            "pictogram": "pikto-photo"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/tiktok.svg",
@@ -3536,7 +4537,11 @@ const topics = [
     "desc": "Stopp machen, zeigen und Unterstützung holen",
     "selfAssessment": {
       "question": "Weißt du, was du tun kannst, wenn etwas im Internet passiert?",
-      "options": ["Noch nicht so genau", "Ein bisschen", "Schon ziemlich gut"]
+      "options": [
+        "Noch nicht so genau",
+        "Ein bisschen",
+        "Schon ziemlich gut"
+      ]
     },
     "learningGoals": [
       "Was du tust, wenn etwas passiert",
@@ -3651,20 +4656,42 @@ const topics = [
         "module": "Start",
         "icon": "help",
         "text": [
-          "Manchmal passiert etwas im Internet, das sich falsch oder komisch anfühlt.",
-          "Das ist kein schönes Gefühl.",
-          "Dieses Thema zeigt dir: Du bist nicht allein.",
-          "Es gibt immer jemanden, der dir helfen kann."
-        ]
+          {
+            "text": "Manchmal passiert etwas im Internet, das sich falsch oder komisch anfühlt.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Das ist kein schönes Gefühl.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Dieses Thema zeigt dir: Du bist nicht allein.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Es gibt immer jemanden, der dir helfen kann.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Stopp-Regel",
         "module": "Stopp",
         "icon": "stop",
         "text": [
-          "Eine Nachricht macht dir Stress oder Angst.",
-          "Du willst vielleicht sofort reagieren.",
-          "Die Stopp-Regel hilft: Erst stoppen, dann überlegen."
+          {
+            "text": "Eine Nachricht macht dir Stress oder Angst.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du willst vielleicht sofort reagieren.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Die Stopp-Regel hilft: Erst stoppen, dann überlegen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
@@ -3676,16 +4703,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Du musst nicht sofort antworten.",
           "feedbackCorrect": "Das ist sicher. Du machst zuerst Stopp.",
           "remember": "Stopp. Ich reagiere nicht sofort."
-        }
+        },
+        "pictogram": "pikto-no"
       },
       {
         "title": "Nicht sofort löschen",
         "module": "Beweise",
         "icon": "check",
         "text": [
-          "Eine Nachricht ist gemein oder komisch.",
-          "Du willst sie vielleicht löschen.",
-          "Manchmal ist es wichtig, die Nachricht erst zu zeigen."
+          {
+            "text": "Eine Nachricht ist gemein oder komisch.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du willst sie vielleicht löschen.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Manchmal ist es wichtig, die Nachricht erst zu zeigen.",
+            "pictogram": "pikto-message"
+          }
         ],
         "practice": {
           "question": "Jemand beleidigt dich im Chat. Was ist besser?",
@@ -3697,16 +4734,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Wenn alles gelöscht ist, kann Hilfe schwerer sein.",
           "feedbackCorrect": "Das ist sicher. Du zeigst die Nachricht.",
           "remember": "Ich zeige die Nachricht, bevor ich sie lösche."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Bild vom Bildschirm",
         "module": "Beweise",
         "icon": "photo",
         "text": [
-          "Ein Bild vom Bildschirm kann helfen.",
-          "So kannst du eine Nachricht später zeigen.",
-          "Du kannst jemanden um Hilfe beim Screenshot bitten."
+          {
+            "text": "Ein Bild vom Bildschirm kann helfen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "So kannst du eine Nachricht später zeigen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du kannst jemanden um Hilfe beim Screenshot bitten.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Warum ist nicht sofort löschen wichtig?",
@@ -3718,16 +4765,26 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Manchmal braucht man die Nachricht.",
           "feedbackCorrect": "Das ist richtig. Die Nachricht kann als Beweis helfen.",
           "remember": "Ich kann Beweise sichern."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Druck erkennen",
         "module": "Druck",
         "icon": "warning",
         "text": [
-          "Jemand sagt: Mach das sofort.",
-          "Oder: Erzähl es niemandem.",
-          "Das ist Druck und ein Warnzeichen."
+          {
+            "text": "Jemand sagt: Mach das sofort.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Oder: Erzähl es niemandem.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Das ist Druck und ein Warnzeichen.",
+            "pictogram": "pikto-feel"
+          }
         ],
         "practice": {
           "question": "Jemand sagt: Mach das sofort und sag es niemandem. Was ist das?",
@@ -3739,30 +4796,56 @@ const topics = [
           "feedbackWrong": "Das ist nicht richtig. Druck und Geheimhaltung sind Warnzeichen.",
           "feedbackCorrect": "Das ist richtig. Es ist ein Warnzeichen.",
           "remember": "Druck ist ein Warnzeichen."
-        }
+        },
+        "pictogram": "pikto-feel"
       },
       {
         "title": "Angst ernst nehmen",
         "module": "Gefühle",
         "icon": "help",
         "text": [
-          "Eine Nachricht macht dir Angst.",
-          "Oder du hast ein komisches Gefühl im Bauch.",
-          "Das ist wichtig. Deine Gefühle sagen dir etwas.",
-          "Du musst nicht allein damit bleiben."
+          {
+            "text": "Eine Nachricht macht dir Angst.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Oder du hast ein komisches Gefühl im Bauch.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Das ist wichtig. Deine Gefühle sagen dir etwas.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Du musst nicht allein damit bleiben.",
+            "pictogram": "pikto-no"
+          }
         ],
         "success": "Du darfst über deine Gefühle sprechen. Das ist mutig.",
-        "remember": "Meine Gefühle sind wichtig. Ich darf darüber sprechen."
+        "remember": "Meine Gefühle sind wichtig. Ich darf darüber sprechen.",
+        "pictogram": "pikto-feel"
       },
       {
         "title": "Vertraute Personen",
         "module": "Unterstützung",
         "icon": "help",
         "text": [
-          "Du kannst eine vertraute Person fragen.",
-          "Zum Beispiel eine Unterstützerin, einen Unterstützer, Angehörige oder Freunde.",
-          "Du musst Probleme im Internet nicht allein lösen.",
-          "Hilfe zu holen ist keine Schwäche. Es ist klug."
+          {
+            "text": "Du kannst eine vertraute Person fragen.",
+            "pictogram": "pikto-ask"
+          },
+          {
+            "text": "Zum Beispiel eine Unterstützerin, einen Unterstützer, Angehörige oder Freunde.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du musst Probleme im Internet nicht allein lösen.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Hilfe zu holen ist keine Schwäche. Es ist klug.",
+            "pictogram": "pikto-help"
+          }
         ],
         "practice": {
           "question": "Zu wem kannst du mit einer komischen Nachricht gehen?",
@@ -3774,52 +4857,113 @@ const topics = [
           "feedbackWrong": "Du musst das nicht allein schaffen. Eine vertraute Person ist für dich da.",
           "feedbackCorrect": "Du holst dir Hilfe. Das ist mutig und richtig.",
           "remember": "Ich darf mir Unterstützung holen. Das ist klug."
-        }
+        },
+        "pictogram": "pikto-help"
       },
       {
         "title": "Was kann ich konkret tun?",
         "module": "Handlungsplan",
         "icon": "help",
         "text": [
-          "Wenn etwas komisch ist, hilft ein Plan.",
-          "Du machst einen Schritt nach dem anderen.",
-          "Du musst nicht alles allein entscheiden."
+          {
+            "text": "Wenn etwas komisch ist, hilft ein Plan.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du machst einen Schritt nach dem anderen.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du musst nicht alles allein entscheiden.",
+            "pictogram": "pikto-no"
+          }
         ],
         "bullets": [
-          "Stopp machen.",
-          "Nicht sofort antworten.",
-          "Nicht sofort löschen.",
-          "Bild vom Bildschirm machen.",
-          "Nachricht zeigen.",
-          "Gemeinsam den nächsten Schritt planen."
-        ]
+          {
+            "text": "Stopp machen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Nicht sofort antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Nicht sofort löschen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Bild vom Bildschirm machen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Nachricht zeigen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Gemeinsam den nächsten Schritt planen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Externe Hilfe",
         "module": "Unterstützung",
         "icon": "help",
         "text": [
-          "Es gibt Beratungsstellen und Hilfsangebote.",
-          "Eine vertraute Person kann mit dir dort anrufen oder schreiben.",
-          "Du musst das nicht allein machen.",
-          "Andere Menschen haben diese Probleme auch. Du bist nicht die einzige Person."
+          {
+            "text": "Es gibt Beratungsstellen und Hilfsangebote.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Eine vertraute Person kann mit dir dort anrufen oder schreiben.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Du musst das nicht allein machen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Andere Menschen haben diese Probleme auch. Du bist nicht die einzige Person.",
+            "pictogram": "pikto-no"
+          }
         ],
-        "remember": "Es gibt immer jemanden, der helfen kann."
+        "remember": "Es gibt immer jemanden, der helfen kann.",
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
         "text": [
-          "Das sind die wichtigsten Regeln aus diesem Thema."
+          {
+            "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Stopp machen.",
-          "Nicht sofort antworten.",
-          "Nicht sofort löschen.",
-          "Nachricht zeigen.",
-          "Unterstützung holen."
-        ]
+          {
+            "text": "Stopp machen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Nicht sofort antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Nicht sofort löschen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Nachricht zeigen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-done"
       }
     ],
     "illustration": "assets/illustrations/hilfe.svg",
@@ -4022,7 +5166,11 @@ const topics = [
     "desc": "Künstliche Intelligenz verstehen und sicher nutzen",
     "selfAssessment": {
       "question": "Was weißt du schon über Künstliche Intelligenz?",
-      "options": ["Noch nicht so viel", "Ein bisschen", "Schon einiges"]
+      "options": [
+        "Noch nicht so viel",
+        "Ein bisschen",
+        "Schon einiges"
+      ]
     },
     "learningGoals": [
       "Was Künstliche Intelligenz ist",
@@ -4036,56 +5184,128 @@ const topics = [
         "module": "Start",
         "icon": "ki",
         "text": [
-          "Hier lernst du etwas über KI.",
-          "KI bedeutet: Künstliche Intelligenz.",
-          "Du lernst: Was kann KI? Was kann KI nicht?",
-          "Du lernst, wie du KI sicher nutzt."
-        ]
+          {
+            "text": "Hier lernst du etwas über KI.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "KI bedeutet: Künstliche Intelligenz.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Du lernst: Was kann KI? Was kann KI nicht?",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Du lernst, wie du KI sicher nutzt.",
+            "pictogram": "pikto-ki"
+          }
+        ],
+        "pictogram": "pikto-ki"
       },
       {
         "title": "Was ist KI?",
         "module": "Grundwissen",
         "icon": "understand",
         "text": [
-          "KI ist ein Computer-Programm.",
-          "Das Programm hat sehr viele Texte und Bilder gelernt.",
-          "Darum kann KI Fragen beantworten.",
-          "KI kann auch Texte und Bilder machen."
+          {
+            "text": "KI ist ein Computer-Programm.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Das Programm hat sehr viele Texte und Bilder gelernt.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Darum kann KI Fragen beantworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "KI kann auch Texte und Bilder machen.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "bullets": [
-          "KI kann mit dir schreiben.",
-          "KI kann mit dir sprechen.",
-          "KI kann Bilder machen.",
-          "KI kann Texte schreiben."
+          {
+            "text": "KI kann mit dir schreiben.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "KI kann mit dir sprechen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "KI kann Bilder machen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "KI kann Texte schreiben.",
+            "pictogram": "pikto-message"
+          }
         ],
-        "remember": "KI ist ein Programm. KI ist kein Mensch."
+        "remember": "KI ist ein Programm. KI ist kein Mensch.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "Wo triffst du KI?",
         "module": "Grundwissen",
         "icon": "example",
         "text": [
-          "KI ist heute in vielen Apps.",
-          "Manchmal siehst du KI nicht sofort.",
-          "Hier sind bekannte Beispiele."
+          {
+            "text": "KI ist heute in vielen Apps.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Manchmal siehst du KI nicht sofort.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Hier sind bekannte Beispiele.",
+            "pictogram": "pikto-data"
+          }
         ],
         "bullets": [
-          "Chatbots, zum Beispiel ChatGPT",
-          "Sprach-Hilfen, zum Beispiel Alexa oder Siri",
-          "KI in WhatsApp und Instagram, zum Beispiel Meta AI",
-          "KI-Bilder und KI-Videos im Internet"
+          {
+            "text": "Chatbots, zum Beispiel ChatGPT",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Sprach-Hilfen, zum Beispiel Alexa oder Siri",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "KI in WhatsApp und Instagram, zum Beispiel Meta AI",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "KI-Bilder und KI-Videos im Internet",
+            "pictogram": "pikto-photo"
+          }
         ],
-        "remember": "KI ist in vielen Apps. Auch wenn ich sie nicht sehe."
+        "remember": "KI ist in vielen Apps. Auch wenn ich sie nicht sehe.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "Ein Chatbot ist kein Mensch",
         "module": "Grundwissen",
         "icon": "message",
         "text": [
-          "Ein Chatbot schreibt sehr freundlich.",
-          "Es kann sich wie ein Freund anfühlen.",
-          "Aber ein Chatbot ist ein Programm.",
-          "Ein Chatbot hat keine Gefühle."
+          {
+            "text": "Ein Chatbot schreibt sehr freundlich.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Es kann sich wie ein Freund anfühlen.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Aber ein Chatbot ist ein Programm.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Ein Chatbot hat keine Gefühle.",
+            "pictogram": "pikto-message"
+          }
         ],
         "warning": "Ein Chatbot ist kein echter Freund. Wichtige Sorgen besprichst du mit einem Menschen.",
         "practice": {
@@ -4098,17 +5318,30 @@ const topics = [
           "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot kann nur so tun. Er ist ein Programm ohne Gefühle.",
           "feedbackCorrect": "Das ist richtig. Ein Chatbot ist ein Programm. Echte Freunde sind Menschen.",
           "remember": "Ein Chatbot ist kein Mensch."
-        }
+        },
+        "pictogram": "pikto-data"
       },
       {
         "title": "KI macht Fehler",
         "module": "Sicher nutzen",
         "icon": "warning",
         "text": [
-          "KI klingt oft sehr sicher.",
-          "Aber KI kann Fehler machen.",
-          "Manchmal erfindet KI sogar Dinge.",
-          "Darum prüfst du wichtige Antworten."
+          {
+            "text": "KI klingt oft sehr sicher.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Aber KI kann Fehler machen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Manchmal erfindet KI sogar Dinge.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Darum prüfst du wichtige Antworten.",
+            "pictogram": "pikto-location"
+          }
         ],
         "examples": [
           "Die KI nennt eine falsche Telefon-Nummer.",
@@ -4124,21 +5357,40 @@ const topics = [
           "feedbackWrong": "Das ist noch nicht richtig. KI kann Fehler machen. Auch wenn sie sicher klingt.",
           "feedbackCorrect": "Das ist richtig. Wichtige Antworten prüfst du. Du kannst einen Menschen fragen.",
           "remember": "KI kann Fehler machen. Ich prüfe wichtige Antworten."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Keine privaten Daten",
         "module": "Sicher nutzen",
         "icon": "lock",
         "text": [
-          "Was du der KI schreibst, wird oft gespeichert.",
-          "Darum gibst du der KI keine privaten Daten."
+          {
+            "text": "Was du der KI schreibst, wird oft gespeichert.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Darum gibst du der KI keine privaten Daten.",
+            "pictogram": "pikto-ki"
+          }
         ],
         "bullets": [
-          "kein Passwort",
-          "keine Adresse",
-          "keine Bank-Daten",
-          "keine sehr privaten Geheimnisse"
+          {
+            "text": "kein Passwort",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "keine Adresse",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "keine Bank-Daten",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "keine sehr privaten Geheimnisse",
+            "pictogram": "pikto-lock"
+          }
         ],
         "practice": {
           "question": "Ein Chatbot fragt nach deiner Adresse. Was ist besser?",
@@ -4150,17 +5402,30 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat. Auch bei einer KI.",
           "feedbackCorrect": "Das ist sicher. Private Daten bleiben bei dir. Auch bei einer KI.",
           "remember": "Ich gebe der KI keine privaten Daten."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Gesundheit und Geld",
         "module": "Sicher nutzen",
         "icon": "help",
         "text": [
-          "Bei Gesundheit und Geld ist Vorsicht wichtig.",
-          "Die KI kennt dich nicht.",
-          "Die KI kann falsche Tipps geben.",
-          "Frag bei solchen Themen immer auch einen Menschen."
+          {
+            "text": "Bei Gesundheit und Geld ist Vorsicht wichtig.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Die KI kennt dich nicht.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Die KI kann falsche Tipps geben.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Frag bei solchen Themen immer auch einen Menschen.",
+            "pictogram": "pikto-lock"
+          }
         ],
         "examples": [
           "Du bist krank. Du fragst die KI. Besser: Du fragst auch eine Ärztin oder einen Arzt.",
@@ -4176,53 +5441,114 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Die KI kennt dich nicht. Sie kann falsch liegen.",
           "feedbackCorrect": "Das ist richtig. Bei Gesundheit fragst du Fachleute. Die KI ersetzt keinen Arzt.",
           "remember": "Bei Gesundheit und Geld frage ich Menschen."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "KI kann Bilder und Stimmen fälschen",
         "module": "Achtung",
         "icon": "photo",
         "text": [
-          "KI kann Bilder machen, die echt aussehen.",
-          "KI kann Stimmen nachmachen.",
-          "Betrüger nutzen das manchmal.",
-          "Mehr dazu lernst du im Thema: Fake News und KI-Fakes."
+          {
+            "text": "KI kann Bilder machen, die echt aussehen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "KI kann Stimmen nachmachen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Betrüger nutzen das manchmal.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Mehr dazu lernst du im Thema: Fake News und KI-Fakes.",
+            "pictogram": "pikto-fake"
+          }
         ],
-        "warning": "Nicht alles, was echt aussieht, ist echt."
+        "warning": "Nicht alles, was echt aussieht, ist echt.",
+        "pictogram": "pikto-no"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Hilfe",
         "icon": "check",
         "text": [
-          "Du darfst KI benutzen.",
-          "KI kann dir helfen.",
-          "Diese Regeln schützen dich."
+          {
+            "text": "Du darfst KI benutzen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "KI kann dir helfen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Diese Regeln schützen dich.",
+            "pictogram": "pikto-help"
+          }
         ],
         "bullets": [
-          "Ich weiß: KI ist ein Programm.",
-          "Ich prüfe wichtige Antworten.",
-          "Ich gebe keine privaten Daten ein.",
-          "Bei Gesundheit und Geld frage ich Menschen.",
-          "Bei Unsicherheit hole ich Hilfe."
-        ]
+          {
+            "text": "Ich weiß: KI ist ein Programm.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Ich prüfe wichtige Antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Ich gebe keine privaten Daten ein.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Bei Gesundheit und Geld frage ich Menschen.",
+            "pictogram": "pikto-ask"
+          },
+          {
+            "text": "Bei Unsicherheit hole ich Hilfe.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Merken",
         "icon": "remember",
         "text": [
-          "Du hast viel über KI gelernt.",
-          "Diese Sätze kannst du dir merken."
+          {
+            "text": "Du hast viel über KI gelernt.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Diese Sätze kannst du dir merken.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "KI ist ein Programm. Kein Mensch.",
-          "KI kann Fehler machen.",
-          "Ich prüfe wichtige Antworten.",
-          "Private Daten bleiben bei mir.",
-          "Ich darf mir Unterstützung holen."
+          {
+            "text": "KI ist ein Programm. Kein Mensch.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "KI kann Fehler machen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Ich prüfe wichtige Antworten.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Private Daten bleiben bei mir.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Ich darf mir Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
         ],
-        "remember": "Ich nutze KI mit Verstand."
+        "remember": "Ich nutze KI mit Verstand.",
+        "pictogram": "pikto-done"
       }
     ],
     "quizQuestions": [
@@ -4394,7 +5720,11 @@ const topics = [
     "desc": "Falsche Nachrichten, Bilder und Stimmen erkennen",
     "selfAssessment": {
       "question": "Weißt du, wie du eine Fake-Nachricht erkennst?",
-      "options": ["Noch nicht so genau", "Ein bisschen", "Schon ziemlich gut"]
+      "options": [
+        "Noch nicht so genau",
+        "Ein bisschen",
+        "Schon ziemlich gut"
+      ]
     },
     "learningGoals": [
       "Was Fake News sind",
@@ -4408,53 +5738,116 @@ const topics = [
         "module": "Start",
         "icon": "fake",
         "text": [
-          "Hier lernst du etwas über Fakes.",
-          "Fake bedeutet: gefälscht oder nicht echt.",
-          "Du lernst: Wie erkenne ich falsche Nachrichten?",
-          "Du lernst: Wie erkenne ich falsche Bilder und Stimmen?"
-        ]
+          {
+            "text": "Hier lernst du etwas über Fakes.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Fake bedeutet: gefälscht oder nicht echt.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Du lernst: Wie erkenne ich falsche Nachrichten?",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du lernst: Wie erkenne ich falsche Bilder und Stimmen?",
+            "pictogram": "pikto-photo"
+          }
+        ],
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Was sind Fake News?",
         "module": "Grundwissen",
         "icon": "report",
         "text": [
-          "Fake News sind falsche Nachrichten.",
-          "Jemand verbreitet sie mit Absicht.",
-          "Fake News sehen oft aus wie echte Nachrichten.",
-          "Darum sind sie schwer zu erkennen."
+          {
+            "text": "Fake News sind falsche Nachrichten.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Jemand verbreitet sie mit Absicht.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Fake News sehen oft aus wie echte Nachrichten.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Darum sind sie schwer zu erkennen.",
+            "pictogram": "pikto-data"
+          }
         ],
-        "remember": "Nicht jede Nachricht im Internet ist wahr."
+        "remember": "Nicht jede Nachricht im Internet ist wahr.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "Warum gibt es Fake News?",
         "module": "Grundwissen",
         "icon": "understand",
         "text": [
-          "Menschen machen Fake News aus verschiedenen Gründen."
+          {
+            "text": "Menschen machen Fake News aus verschiedenen Gründen.",
+            "pictogram": "pikto-fake"
+          }
         ],
         "bullets": [
-          "Sie wollen Geld verdienen mit vielen Klicks.",
-          "Sie wollen Menschen wütend machen.",
-          "Sie wollen, dass du etwas glaubst, das nicht stimmt.",
-          "Sie wollen eine Meinung verbreiten."
+          {
+            "text": "Sie wollen Geld verdienen mit vielen Klicks.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Sie wollen Menschen wütend machen.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Sie wollen, dass du etwas glaubst, das nicht stimmt.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Sie wollen eine Meinung verbreiten.",
+            "pictogram": "pikto-data"
+          }
         ],
-        "remember": "Fake News haben ein Ziel. Sie wollen mein Denken verändern."
+        "remember": "Fake News haben ein Ziel. Sie wollen mein Denken verändern.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "KI-Bilder erkennen",
         "module": "KI-Fakes",
         "icon": "photo",
         "text": [
-          "KI kann Bilder machen, die echt aussehen.",
-          "Manche Fehler kannst du sehen.",
-          "Aber Achtung: Viele KI-Bilder haben keine Fehler mehr."
+          {
+            "text": "KI kann Bilder machen, die echt aussehen.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Manche Fehler kannst du sehen.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Aber Achtung: Viele KI-Bilder haben keine Fehler mehr.",
+            "pictogram": "pikto-photo"
+          }
         ],
         "bullets": [
-          "Schau auf Hände und Finger.",
-          "Schau auf Schrift im Bild.",
-          "Schau auf Licht und Schatten.",
-          "Wirkt das Bild zu perfekt?"
+          {
+            "text": "Schau auf Hände und Finger.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Schau auf Schrift im Bild.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Schau auf Licht und Schatten.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Wirkt das Bild zu perfekt?",
+            "pictogram": "pikto-photo"
+          }
         ],
         "practice": {
           "question": "Ein unglaubliches Foto im Internet. Was ist besser?",
@@ -4466,17 +5859,30 @@ const topics = [
           "feedbackWrong": "Das ist noch nicht richtig. KI kann Fotos fälschen. Auch sehr echte Fotos.",
           "feedbackCorrect": "Das ist richtig. Ein Foto ist kein Beweis mehr. KI kann Fotos fälschen.",
           "remember": "Ein Foto kann gefälscht sein."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Gefälschte Videos: Deepfakes",
         "module": "KI-Fakes",
         "icon": "warning",
         "text": [
-          "Ein Deepfake ist ein gefälschtes Video.",
-          "KI tauscht darin Gesicht oder Stimme aus.",
-          "Im Video sagt eine Person Dinge, die sie nie gesagt hat.",
-          "Oft werden bekannte Menschen gefälscht."
+          {
+            "text": "Ein Deepfake ist ein gefälschtes Video.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "KI tauscht darin Gesicht oder Stimme aus.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Im Video sagt eine Person Dinge, die sie nie gesagt hat.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Oft werden bekannte Menschen gefälscht.",
+            "pictogram": "pikto-fake"
+          }
         ],
         "examples": [
           "Ein Video zeigt einen Promi. Er macht Werbung für Geld-Anlagen. Das Video ist gefälscht.",
@@ -4492,17 +5898,30 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Solche Videos sind fast immer Betrug mit Deepfakes.",
           "feedbackCorrect": "Das ist richtig. Promi-Videos mit Geld-Versprechen sind fast immer gefälscht.",
           "remember": "Auch Videos können gefälscht sein."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Geklonte Stimmen am Telefon",
         "module": "KI-Fakes",
         "icon": "message",
         "text": [
-          "KI kann Stimmen nachmachen.",
-          "Betrüger rufen an. Die Stimme klingt wie deine Familie.",
-          "Die Stimme sagt: Ich brauche schnell Geld.",
-          "Das nennt man Schockanruf."
+          {
+            "text": "KI kann Stimmen nachmachen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Betrüger rufen an. Die Stimme klingt wie deine Familie.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Die Stimme sagt: Ich brauche schnell Geld.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Das nennt man Schockanruf.",
+            "pictogram": "pikto-fake"
+          }
         ],
         "warning": "Lege auf. Ruf die Person selbst an. Nutze die Nummer, die du kennst.",
         "practice": {
@@ -4515,21 +5934,40 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Die Stimme kann mit KI gefälscht sein.",
           "feedbackCorrect": "Das ist richtig. Du rufst selbst zurück. So merkst du den Betrug.",
           "remember": "Bei Geld-Anrufen lege ich auf und rufe selbst zurück."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Nachrichten prüfen",
         "module": "Prüfen",
         "icon": "check",
         "text": [
-          "Du kannst Nachrichten prüfen.",
-          "Diese Fragen helfen dir."
+          {
+            "text": "Du kannst Nachrichten prüfen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Diese Fragen helfen dir.",
+            "pictogram": "pikto-ask"
+          }
         ],
         "bullets": [
-          "Wer hat das geschrieben?",
-          "Steht das auch bei bekannten Nachrichten-Seiten?",
-          "Wie alt ist die Nachricht?",
-          "Gibt es eine Quelle?"
+          {
+            "text": "Wer hat das geschrieben?",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Steht das auch bei bekannten Nachrichten-Seiten?",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Wie alt ist die Nachricht?",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Gibt es eine Quelle?",
+            "pictogram": "pikto-fake"
+          }
         ],
         "practice": {
           "question": "Eine schlimme Nachricht steht nur auf einer unbekannten Seite. Was ist besser?",
@@ -4541,17 +5979,30 @@ const topics = [
           "feedbackWrong": "Das ist noch nicht richtig. Eine Quelle allein ist kein Beweis.",
           "feedbackCorrect": "Das ist richtig. Wichtige Nachrichten stehen bei mehreren bekannten Seiten.",
           "remember": "Ich prüfe Nachrichten bei bekannten Seiten."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Starke Gefühle sind ein Warnzeichen",
         "module": "Prüfen",
         "icon": "warning",
         "text": [
-          "Fake News machen oft starke Gefühle.",
-          "Zum Beispiel Wut oder Angst.",
-          "Starke Gefühle sind ein Warnzeichen.",
-          "Dann lohnt sich das Prüfen besonders."
+          {
+            "text": "Fake News machen oft starke Gefühle.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Zum Beispiel Wut oder Angst.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Starke Gefühle sind ein Warnzeichen.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Dann lohnt sich das Prüfen besonders.",
+            "pictogram": "pikto-fake"
+          }
         ],
         "practice": {
           "question": "Eine Nachricht macht dich sehr wütend. Was ist besser?",
@@ -4563,17 +6014,30 @@ const topics = [
           "feedbackWrong": "Das ist noch nicht richtig. Wut ist ein Warnzeichen für Fake News.",
           "feedbackCorrect": "Das ist richtig. Bei starken Gefühlen erst anhalten und prüfen.",
           "remember": "Starke Gefühle? Erst prüfen."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Nicht einfach weiterleiten",
         "module": "Prüfen",
         "icon": "stop",
         "text": [
-          "Wenn du Fakes weiterleitest, verbreiten sie sich.",
-          "Dann glauben noch mehr Menschen die Lüge.",
-          "Darum gilt: Erst prüfen. Dann teilen.",
-          "Im Zweifel: Nicht teilen."
+          {
+            "text": "Wenn du Fakes weiterleitest, verbreiten sie sich.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Dann glauben noch mehr Menschen die Lüge.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Darum gilt: Erst prüfen. Dann teilen.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Im Zweifel: Nicht teilen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Du bist nicht sicher, ob eine Nachricht stimmt. Was ist besser?",
@@ -4585,40 +6049,85 @@ const topics = [
           "feedbackWrong": "Das ist noch nicht richtig. So verbreiten sich Lügen weiter.",
           "feedbackCorrect": "Das ist richtig. Im Zweifel teilst du die Nachricht nicht.",
           "remember": "Im Zweifel teile ich nicht."
-        }
+        },
+        "pictogram": "pikto-fake"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Hilfe",
         "icon": "help",
         "text": [
-          "Du kannst dich schützen.",
-          "Diese Regeln helfen dir."
+          {
+            "text": "Du kannst dich schützen.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Diese Regeln helfen dir.",
+            "pictogram": "pikto-help"
+          }
         ],
         "bullets": [
-          "Ich glaube nicht alles sofort.",
-          "Ich prüfe: Wer schreibt das? Steht das auch woanders?",
-          "Bei starken Gefühlen mache ich langsam.",
-          "Im Zweifel teile ich nicht.",
-          "Ich kann eine Person fragen, der ich vertraue."
-        ]
+          {
+            "text": "Ich glaube nicht alles sofort.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Ich prüfe: Wer schreibt das? Steht das auch woanders?",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Bei starken Gefühlen mache ich langsam.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Im Zweifel teile ich nicht.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Ich kann eine Person fragen, der ich vertraue.",
+            "pictogram": "pikto-ask"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Merken",
         "icon": "remember",
         "text": [
-          "Du hast viel über Fakes gelernt.",
-          "Diese Sätze kannst du dir merken."
+          {
+            "text": "Du hast viel über Fakes gelernt.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Diese Sätze kannst du dir merken.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Nicht alles im Internet ist wahr.",
-          "Bilder, Videos und Stimmen können gefälscht sein.",
-          "Starke Gefühle sind ein Warnzeichen.",
-          "Erst prüfen. Dann teilen.",
-          "Ich darf mir Unterstützung holen."
+          {
+            "text": "Nicht alles im Internet ist wahr.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Bilder, Videos und Stimmen können gefälscht sein.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Starke Gefühle sind ein Warnzeichen.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Erst prüfen. Dann teilen.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Ich darf mir Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
         ],
-        "remember": "Erst prüfen. Dann glauben."
+        "remember": "Erst prüfen. Dann glauben.",
+        "pictogram": "pikto-done"
       }
     ],
     "quizQuestions": [
@@ -4790,7 +6299,11 @@ const topics = [
     "desc": "Betrug erkennen: Phishing, falsche Gewinne und Tricks",
     "selfAssessment": {
       "question": "Weißt du, wie Betrüger im Internet vorgehen?",
-      "options": ["Noch nicht so genau", "Ein bisschen", "Schon ziemlich gut"]
+      "options": [
+        "Noch nicht so genau",
+        "Ein bisschen",
+        "Schon ziemlich gut"
+      ]
     },
     "learningGoals": [
       "Wie Betrüger vorgehen",
@@ -4804,21 +6317,46 @@ const topics = [
         "module": "Start",
         "icon": "betrug",
         "text": [
-          "Hier lernst du etwas über Betrug im Internet.",
-          "Betrüger wollen dein Geld oder deine Daten.",
-          "Du lernst die bekannten Tricks.",
-          "Wer die Tricks kennt, ist besser geschützt."
-        ]
+          {
+            "text": "Hier lernst du etwas über Betrug im Internet.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Betrüger wollen dein Geld oder deine Daten.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Du lernst die bekannten Tricks.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Wer die Tricks kennt, ist besser geschützt.",
+            "pictogram": "pikto-fraud"
+          }
+        ],
+        "pictogram": "pikto-fraud"
       },
       {
         "title": "Was ist Phishing?",
         "module": "Grundwissen",
         "icon": "link",
         "text": [
-          "Phishing ist ein Trick mit falschen Nachrichten.",
-          "Die Nachricht sieht aus wie von deiner Bank oder einer Firma.",
-          "In der Nachricht ist ein Link.",
-          "Der Link führt zu einer falschen Seite. Dort sollen deine Daten gestohlen werden."
+          {
+            "text": "Phishing ist ein Trick mit falschen Nachrichten.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Die Nachricht sieht aus wie von deiner Bank oder einer Firma.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "In der Nachricht ist ein Link.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Der Link führt zu einer falschen Seite. Dort sollen deine Daten gestohlen werden.",
+            "pictogram": "pikto-location"
+          }
         ],
         "examples": [
           "Eine E-Mail sagt: Ihr Konto wird gesperrt. Klicken Sie hier.",
@@ -4834,34 +6372,69 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Banken fragen nie per E-Mail nach deinen Daten.",
           "feedbackCorrect": "Das ist richtig. Du klickst nicht. Du fragst bei der Bank selbst nach.",
           "remember": "Meine Bank fragt nie per E-Mail nach meinen Daten."
-        }
+        },
+        "pictogram": "pikto-data"
       },
       {
         "title": "Falsche Nachrichten erkennen",
         "module": "Grundwissen",
         "icon": "warning",
         "text": [
-          "Betrugs-Nachrichten haben oft die gleichen Zeichen.",
-          "Diese Warnzeichen kannst du lernen."
+          {
+            "text": "Betrugs-Nachrichten haben oft die gleichen Zeichen.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Diese Warnzeichen kannst du lernen.",
+            "pictogram": "pikto-data"
+          }
         ],
         "bullets": [
-          "Die Nachricht macht Druck: Sofort! Schnell! Letzte Chance!",
-          "Die Nachricht droht: Sonst wird Ihr Konto gesperrt.",
-          "Du sollst auf einen Link klicken.",
-          "Du sollst Daten eingeben oder Geld zahlen.",
-          "Die Nachricht kommt überraschend."
+          {
+            "text": "Die Nachricht macht Druck: Sofort! Schnell! Letzte Chance!",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Die Nachricht droht: Sonst wird Ihr Konto gesperrt.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Du sollst auf einen Link klicken.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Du sollst Daten eingeben oder Geld zahlen.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Die Nachricht kommt überraschend.",
+            "pictogram": "pikto-message"
+          }
         ],
-        "remember": "Druck und Drohung sind Warnzeichen."
+        "remember": "Druck und Drohung sind Warnzeichen.",
+        "pictogram": "pikto-data"
       },
       {
         "title": "Der Paket-Trick",
         "module": "Tricks",
         "icon": "report",
         "text": [
-          "Eine SMS sagt: Ihr Paket wartet.",
-          "Sie sollen eine kleine Gebühr zahlen.",
-          "Oder Sie sollen auf einen Link klicken.",
-          "Das ist fast immer Betrug."
+          {
+            "text": "Eine SMS sagt: Ihr Paket wartet.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Sie sollen eine kleine Gebühr zahlen.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Oder Sie sollen auf einen Link klicken.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Das ist fast immer Betrug.",
+            "pictogram": "pikto-fraud"
+          }
         ],
         "warning": "Echte Paket-Dienste fordern kein Geld per SMS.",
         "practice": {
@@ -4874,17 +6447,30 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Die Betrüger wollen deine Bank-Daten. Es geht nicht um 2 Euro.",
           "feedbackCorrect": "Das ist richtig. Solche SMS sind fast immer Betrug.",
           "remember": "Paket-SMS mit Geld-Forderung sind Betrug."
-        }
+        },
+        "pictogram": "pikto-fraud"
       },
       {
         "title": "Der Hallo-Mama-Trick",
         "module": "Tricks",
         "icon": "message",
         "text": [
-          "Eine WhatsApp-Nachricht sagt: Hallo Mama, hallo Papa.",
-          "Ich habe eine neue Nummer.",
-          "Mein Handy ist kaputt. Ich brauche schnell Geld.",
-          "Das ist ein bekannter Betrug."
+          {
+            "text": "Eine WhatsApp-Nachricht sagt: Hallo Mama, hallo Papa.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Ich habe eine neue Nummer.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Mein Handy ist kaputt. Ich brauche schnell Geld.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Das ist ein bekannter Betrug.",
+            "pictogram": "pikto-fraud"
+          }
         ],
         "practice": {
           "question": "Eine fremde Nummer schreibt: Ich bin dein Kind, brauche Geld. Was ist besser?",
@@ -4896,17 +6482,30 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Das ist ein bekannter Trick.",
           "feedbackCorrect": "Das ist richtig. Du rufst die alte Nummer an. So merkst du den Betrug.",
           "remember": "Bei Geld-Nachrichten rufe ich die bekannte Nummer an."
-        }
+        },
+        "pictogram": "pikto-fraud"
       },
       {
         "title": "Schockanrufe",
         "module": "Tricks",
         "icon": "stop",
         "text": [
-          "Ein Anruf macht dir große Angst.",
-          "Zum Beispiel: Ihr Kind hatte einen Unfall. Wir brauchen Geld.",
-          "Mit KI kann die Stimme sogar echt klingen.",
-          "Auch falsche Polizisten rufen an."
+          {
+            "text": "Ein Anruf macht dir große Angst.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Zum Beispiel: Ihr Kind hatte einen Unfall. Wir brauchen Geld.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Mit KI kann die Stimme sogar echt klingen.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Auch falsche Polizisten rufen an.",
+            "pictogram": "pikto-fake"
+          }
         ],
         "warning": "Die echte Polizei fordert nie Geld am Telefon.",
         "practice": {
@@ -4919,17 +6518,30 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Die echte Polizei fordert nie Geld am Telefon.",
           "feedbackCorrect": "Das ist richtig. Du legst auf. Die echte Polizei fordert nie Geld.",
           "remember": "Die echte Polizei fordert nie Geld."
-        }
+        },
+        "pictogram": "pikto-fraud"
       },
       {
         "title": "Falsche Gewinne",
         "module": "Tricks",
         "icon": "example",
         "text": [
-          "Eine Nachricht sagt: Sie haben gewonnen!",
-          "Aber du hast bei keinem Gewinnspiel mitgemacht.",
-          "Du sollst zuerst eine Gebühr zahlen.",
-          "Das ist Betrug. Echte Gewinne kosten kein Geld."
+          {
+            "text": "Eine Nachricht sagt: Sie haben gewonnen!",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Aber du hast bei keinem Gewinnspiel mitgemacht.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Du sollst zuerst eine Gebühr zahlen.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Das ist Betrug. Echte Gewinne kosten kein Geld.",
+            "pictogram": "pikto-fraud"
+          }
         ],
         "practice": {
           "question": "Du hast angeblich gewonnen. Du sollst erst 50 Euro Gebühr zahlen. Was ist besser?",
@@ -4941,34 +6553,69 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Echte Gewinne kosten kein Geld.",
           "feedbackCorrect": "Das ist richtig. Echte Gewinne kosten nie Geld.",
           "remember": "Echte Gewinne kosten kein Geld."
-        }
+        },
+        "pictogram": "pikto-fraud"
       },
       {
         "title": "Abo-Fallen",
         "module": "Tricks",
         "icon": "warning",
         "text": [
-          "Ein Angebot sagt: Kostenlos testen!",
-          "Aber im Kleingedruckten steht: Danach kostet es jeden Monat Geld.",
-          "Das nennt man Abo-Falle.",
-          "Lies genau, bevor du etwas bestellst."
+          {
+            "text": "Ein Angebot sagt: Kostenlos testen!",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Aber im Kleingedruckten steht: Danach kostet es jeden Monat Geld.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Das nennt man Abo-Falle.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Lies genau, bevor du etwas bestellst.",
+            "pictogram": "pikto-fraud"
+          }
         ],
         "bullets": [
-          "Steht da ein Preis pro Monat?",
-          "Wie lange läuft das Abo?",
-          "Frag eine Person, bevor du bestellst."
+          {
+            "text": "Steht da ein Preis pro Monat?",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Wie lange läuft das Abo?",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Frag eine Person, bevor du bestellst.",
+            "pictogram": "pikto-fraud"
+          }
         ],
-        "remember": "Kostenlos kann teuer werden. Ich lese genau."
+        "remember": "Kostenlos kann teuer werden. Ich lese genau.",
+        "pictogram": "pikto-fraud"
       },
       {
         "title": "Codes nie weitergeben",
         "module": "Schutz",
         "icon": "lock",
         "text": [
-          "Manchmal bekommst du einen Code per SMS.",
-          "Zum Beispiel von der Bank oder von WhatsApp.",
-          "Dieser Code ist nur für dich.",
-          "Betrüger fragen nach diesem Code. Gib ihn nie weiter."
+          {
+            "text": "Manchmal bekommst du einen Code per SMS.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Zum Beispiel von der Bank oder von WhatsApp.",
+            "pictogram": "pikto-screen"
+          },
+          {
+            "text": "Dieser Code ist nur für dich.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Betrüger fragen nach diesem Code. Gib ihn nie weiter.",
+            "pictogram": "pikto-fraud"
+          }
         ],
         "practice": {
           "question": "Jemand ruft an und fragt nach dem SMS-Code von deiner Bank. Was ist besser?",
@@ -4980,43 +6627,94 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Mit dem Code können Betrüger dein Konto leeren.",
           "feedbackCorrect": "Das ist richtig. Codes sind nur für dich. Niemals weitergeben.",
           "remember": "Ich gebe nie einen Code weiter."
-        }
+        },
+        "pictogram": "pikto-lock"
       },
       {
         "title": "Was tun nach einem Betrug?",
         "module": "Hilfe",
         "icon": "help",
         "text": [
-          "Betrug kann jedem passieren.",
-          "Du musst dich nicht schämen.",
-          "Wichtig ist: Hol dir schnell Hilfe."
+          {
+            "text": "Betrug kann jedem passieren.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Du musst dich nicht schämen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Wichtig ist: Hol dir schnell Hilfe.",
+            "pictogram": "pikto-help"
+          }
         ],
         "bullets": [
-          "Sag einer Person Bescheid, der du vertraust.",
-          "Bei Bank-Daten: Ruf sofort die Bank an. Lass die Karte sperren.",
-          "Der Sperr-Notruf ist die 116 116.",
-          "Du kannst Anzeige bei der Polizei machen.",
-          "Heb die Nachricht als Beweis auf."
+          {
+            "text": "Sag einer Person Bescheid, der du vertraust.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Bei Bank-Daten: Ruf sofort die Bank an. Lass die Karte sperren.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Der Sperr-Notruf ist die 116 116.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du kannst Anzeige bei der Polizei machen.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Heb die Nachricht als Beweis auf.",
+            "pictogram": "pikto-message"
+          }
         ],
-        "remember": "Betrug ist nicht meine Schuld. Ich hole mir Hilfe."
+        "remember": "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.",
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Merken",
         "icon": "remember",
         "text": [
-          "Du kennst jetzt die wichtigsten Tricks.",
-          "Diese Sätze kannst du dir merken."
+          {
+            "text": "Du kennst jetzt die wichtigsten Tricks.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Diese Sätze kannst du dir merken.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Druck und Drohung sind Warnzeichen.",
-          "Ich klicke nicht auf fremde Links.",
-          "Ich gebe nie Codes oder Bank-Daten weiter.",
-          "Echte Gewinne kosten kein Geld.",
-          "Bei Geld-Forderungen rufe ich selbst zurück.",
-          "Nach einem Betrug hole ich mir sofort Hilfe."
+          {
+            "text": "Druck und Drohung sind Warnzeichen.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Ich klicke nicht auf fremde Links.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Ich gebe nie Codes oder Bank-Daten weiter.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Echte Gewinne kosten kein Geld.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Bei Geld-Forderungen rufe ich selbst zurück.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Nach einem Betrug hole ich mir sofort Hilfe.",
+            "pictogram": "pikto-location"
+          }
         ],
-        "remember": "Ich lasse mich nicht unter Druck setzen."
+        "remember": "Ich lasse mich nicht unter Druck setzen.",
+        "pictogram": "pikto-done"
       }
     ],
     "quizQuestions": [
@@ -5199,7 +6897,11 @@ const topics = [
     "desc": "Sicher einkaufen und bezahlen im Internet",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich beim Online-Einkaufen?",
-      "options": ["Noch nicht so sicher", "Ein bisschen sicher", "Schon ziemlich sicher"]
+      "options": [
+        "Noch nicht so sicher",
+        "Ein bisschen sicher",
+        "Schon ziemlich sicher"
+      ]
     },
     "learningGoals": [
       "Woran du einen seriösen Shop erkennst",
@@ -5213,43 +6915,99 @@ const topics = [
         "module": "Start",
         "icon": "einkaufen",
         "text": [
-          "Hier lernst du etwas über Einkaufen im Internet.",
-          "Du lernst: Wie erkenne ich gute Shops?",
-          "Du lernst: Wie bezahle ich sicher?",
-          "Du lernst: Was mache ich bei Problemen?"
-        ]
+          {
+            "text": "Hier lernst du etwas über Einkaufen im Internet.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Du lernst: Wie erkenne ich gute Shops?",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Du lernst: Wie bezahle ich sicher?",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Du lernst: Was mache ich bei Problemen?",
+            "pictogram": "pikto-shop"
+          }
+        ],
+        "pictogram": "pikto-shop"
       },
       {
         "title": "Gute Shops erkennen",
         "module": "Einkaufen",
         "icon": "check",
         "text": [
-          "Es gibt viele gute Shops im Internet.",
-          "Daran erkennst du einen guten Shop."
+          {
+            "text": "Es gibt viele gute Shops im Internet.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Daran erkennst du einen guten Shop.",
+            "pictogram": "pikto-shop"
+          }
         ],
         "bullets": [
-          "Der Shop ist bekannt.",
-          "Der Shop hat ein Impressum. Dort steht: Name und Adresse der Firma.",
-          "Es gibt echte Bewertungen von Kunden.",
-          "Die Preise sind normal. Nicht verdächtig billig."
+          {
+            "text": "Der Shop ist bekannt.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Der Shop hat ein Impressum. Dort steht: Name und Adresse der Firma.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Es gibt echte Bewertungen von Kunden.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Die Preise sind normal. Nicht verdächtig billig.",
+            "pictogram": "pikto-shop"
+          }
         ],
-        "remember": "Ich kaufe bei Shops, die ich kenne oder geprüft habe."
+        "remember": "Ich kaufe bei Shops, die ich kenne oder geprüft habe.",
+        "pictogram": "pikto-shop"
       },
       {
         "title": "Fake-Shops erkennen",
         "module": "Einkaufen",
         "icon": "warning",
         "text": [
-          "Ein Fake-Shop ist ein falscher Shop.",
-          "Du bezahlst. Aber die Ware kommt nie.",
-          "Fake-Shops sehen oft sehr echt aus.",
-          "Diese Warnzeichen helfen dir."
+          {
+            "text": "Ein Fake-Shop ist ein falscher Shop.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Du bezahlst. Aber die Ware kommt nie.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Fake-Shops sehen oft sehr echt aus.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Diese Warnzeichen helfen dir.",
+            "pictogram": "pikto-shop"
+          }
         ],
         "bullets": [
-          "Alles ist sehr, sehr billig.",
-          "Du kannst nur per Vorkasse zahlen.",
-          "Es gibt kein Impressum.",
-          "Der Name der Internet-Seite ist komisch."
+          {
+            "text": "Alles ist sehr, sehr billig.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Du kannst nur per Vorkasse zahlen.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Es gibt kein Impressum.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Der Name der Internet-Seite ist komisch.",
+            "pictogram": "pikto-link"
+          }
         ],
         "practice": {
           "question": "Ein Shop ist extrem billig. Du kannst nur per Vorkasse zahlen. Was ist besser?",
@@ -5261,21 +7019,40 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Extrem billig plus nur Vorkasse: Das ist oft ein Fake-Shop.",
           "feedbackCorrect": "Das ist richtig. Extrem billige Preise und nur Vorkasse sind Warnzeichen.",
           "remember": "Sehr billig und nur Vorkasse: Da kaufe ich nicht."
-        }
+        },
+        "pictogram": "pikto-shop"
       },
       {
         "title": "Sicher bezahlen",
         "module": "Bezahlen",
         "icon": "data",
         "text": [
-          "Es gibt verschiedene Arten zu bezahlen.",
-          "Manche sind sicherer als andere."
+          {
+            "text": "Es gibt verschiedene Arten zu bezahlen.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Manche sind sicherer als andere.",
+            "pictogram": "pikto-shop"
+          }
         ],
         "bullets": [
-          "Kauf auf Rechnung ist sicher: Du zahlst erst, wenn die Ware da ist.",
-          "PayPal und ähnliche Dienste haben einen Käufer-Schutz.",
-          "Vorkasse an Fremde ist riskant: Das Geld ist oft weg.",
-          "Niemals Geld an Privat-Personen senden, die du nicht kennst."
+          {
+            "text": "Kauf auf Rechnung ist sicher: Du zahlst erst, wenn die Ware da ist.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "PayPal und ähnliche Dienste haben einen Käufer-Schutz.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Vorkasse an Fremde ist riskant: Das Geld ist oft weg.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Niemals Geld an Privat-Personen senden, die du nicht kennst.",
+            "pictogram": "pikto-message"
+          }
         ],
         "practice": {
           "question": "Welche Bezahl-Art ist sicherer?",
@@ -5287,17 +7064,30 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Bei Vorkasse ist dein Geld zuerst weg.",
           "feedbackCorrect": "Das ist richtig. Bei Rechnung zahlst du erst, wenn die Ware da ist.",
           "remember": "Rechnung ist sicherer als Vorkasse."
-        }
+        },
+        "pictogram": "pikto-shop"
       },
       {
         "title": "Bank-Daten schützen",
         "module": "Bezahlen",
         "icon": "lock",
         "text": [
-          "Deine Bank-Daten sind sehr wichtig.",
-          "PIN und TAN sind geheim.",
-          "Deine Bank fragt nie per E-Mail oder Telefon danach.",
-          "Wer danach fragt, ist ein Betrüger."
+          {
+            "text": "Deine Bank-Daten sind sehr wichtig.",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "PIN und TAN sind geheim.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Deine Bank fragt nie per E-Mail oder Telefon danach.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Wer danach fragt, ist ein Betrüger.",
+            "pictogram": "pikto-fraud"
+          }
         ],
         "practice": {
           "question": "Eine E-Mail fragt nach deiner PIN. Was ist besser?",
@@ -5309,33 +7099,59 @@ const topics = [
           "feedbackWrong": "Das ist nicht sicher. Deine Bank fragt nie nach der PIN.",
           "feedbackCorrect": "Das ist richtig. Die Bank fragt nie nach PIN oder TAN.",
           "remember": "PIN und TAN bleiben geheim."
-        }
+        },
+        "pictogram": "pikto-shop"
       },
       {
         "title": "Versteckte Kosten in Apps und Spielen",
         "module": "Achtung",
         "icon": "report",
         "text": [
-          "Viele Spiele sind erst kostenlos.",
-          "Im Spiel kannst du dann Dinge kaufen.",
-          "Das kostet echtes Geld.",
-          "Viele kleine Käufe werden schnell teuer."
+          {
+            "text": "Viele Spiele sind erst kostenlos.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Im Spiel kannst du dann Dinge kaufen.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Das kostet echtes Geld.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Viele kleine Käufe werden schnell teuer.",
+            "pictogram": "pikto-no"
+          }
         ],
         "examples": [
           "Ein Spiel verkauft Extra-Leben für 2 Euro.",
           "Eine App verkauft Münzen für 5 Euro."
         ],
-        "remember": "Auch kleine Käufe kosten echtes Geld."
+        "remember": "Auch kleine Käufe kosten echtes Geld.",
+        "pictogram": "pikto-no"
       },
       {
         "title": "Kauf-Druck widerstehen",
         "module": "Achtung",
         "icon": "stop",
         "text": [
-          "Shops machen oft Druck.",
-          "Zum Beispiel: Nur noch heute! Nur noch 2 Stück!",
-          "Das soll dich zum schnellen Kaufen bringen.",
-          "Du darfst dir Zeit nehmen."
+          {
+            "text": "Shops machen oft Druck.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Zum Beispiel: Nur noch heute! Nur noch 2 Stück!",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Das soll dich zum schnellen Kaufen bringen.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Du darfst dir Zeit nehmen.",
+            "pictogram": "pikto-no"
+          }
         ],
         "practice": {
           "question": "Ein Angebot sagt: Nur noch 10 Minuten! Was ist besser?",
@@ -5347,73 +7163,159 @@ const topics = [
           "feedbackWrong": "Das ist noch nicht richtig. Zeit-Druck ist ein Verkaufs-Trick.",
           "feedbackCorrect": "Das ist richtig. Du darfst dir Zeit nehmen. Gute Angebote gibt es wieder.",
           "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
-        }
+        },
+        "pictogram": "pikto-no"
       },
       {
         "title": "Vor dem Kaufen prüfen",
         "module": "Einkaufen",
         "icon": "understand",
         "text": [
-          "Prüfe vor dem letzten Klick.",
-          "Diese Fragen helfen dir."
+          {
+            "text": "Prüfe vor dem letzten Klick.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Diese Fragen helfen dir.",
+            "pictogram": "pikto-ask"
+          }
         ],
         "bullets": [
-          "Was kostet es wirklich? Mit Versand?",
-          "Ist es ein Abo oder ein einmaliger Kauf?",
-          "Brauche ich das wirklich?",
-          "Habe ich genug Geld dafür?"
+          {
+            "text": "Was kostet es wirklich? Mit Versand?",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Ist es ein Abo oder ein einmaliger Kauf?",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Brauche ich das wirklich?",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Habe ich genug Geld dafür?",
+            "pictogram": "pikto-shop"
+          }
         ],
-        "remember": "Erst prüfen. Dann kaufen."
+        "remember": "Erst prüfen. Dann kaufen.",
+        "pictogram": "pikto-shop"
       },
       {
         "title": "Falsch gekauft? Das kannst du tun",
         "module": "Hilfe",
         "icon": "help",
         "text": [
-          "Ein Fehl-Kauf kann passieren.",
-          "Oft kannst du etwas tun."
+          {
+            "text": "Ein Fehl-Kauf kann passieren.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Oft kannst du etwas tun.",
+            "pictogram": "pikto-help"
+          }
         ],
         "bullets": [
-          "Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf.",
-          "Schreib dem Shop eine Nachricht.",
-          "Frag eine Person, der du vertraust, um Hilfe.",
-          "Bei Betrug: Ruf deine Bank an."
+          {
+            "text": "Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Schreib dem Shop eine Nachricht.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Frag eine Person, der du vertraust, um Hilfe.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Bei Betrug: Ruf deine Bank an.",
+            "pictogram": "pikto-fraud"
+          }
         ],
-        "remember": "Online-Käufe kann ich oft 14 Tage zurückgeben."
+        "remember": "Online-Käufe kann ich oft 14 Tage zurückgeben.",
+        "pictogram": "pikto-help"
       },
       {
         "title": "Was kann ich tun?",
         "module": "Hilfe",
         "icon": "check",
         "text": [
-          "Du kannst sicher im Internet einkaufen.",
-          "Diese Regeln helfen dir."
+          {
+            "text": "Du kannst sicher im Internet einkaufen.",
+            "pictogram": "pikto-link"
+          },
+          {
+            "text": "Diese Regeln helfen dir.",
+            "pictogram": "pikto-help"
+          }
         ],
         "bullets": [
-          "Ich kaufe bei Shops, die ich kenne.",
-          "Ich prüfe Preis und Impressum.",
-          "Ich zahle möglichst auf Rechnung.",
-          "PIN und TAN bleiben geheim.",
-          "Ich lasse mich nicht hetzen.",
-          "Vor dem Kaufen kann ich eine Person fragen."
-        ]
+          {
+            "text": "Ich kaufe bei Shops, die ich kenne.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Ich prüfe Preis und Impressum.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Ich zahle möglichst auf Rechnung.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "PIN und TAN bleiben geheim.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Ich lasse mich nicht hetzen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Vor dem Kaufen kann ich eine Person fragen.",
+            "pictogram": "pikto-shop"
+          }
+        ],
+        "pictogram": "pikto-help"
       },
       {
         "title": "Das merke ich mir",
         "module": "Merken",
         "icon": "remember",
         "text": [
-          "Du hast viel über sicheres Einkaufen gelernt.",
-          "Diese Sätze kannst du dir merken."
+          {
+            "text": "Du hast viel über sicheres Einkaufen gelernt.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Diese Sätze kannst du dir merken.",
+            "pictogram": "pikto-done"
+          }
         ],
         "bullets": [
-          "Sehr billig und nur Vorkasse: Warnzeichen.",
-          "Rechnung ist sicherer als Vorkasse.",
-          "PIN und TAN bleiben geheim.",
-          "Ich lasse mich nicht hetzen.",
-          "Ich darf mir Unterstützung holen."
+          {
+            "text": "Sehr billig und nur Vorkasse: Warnzeichen.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Rechnung ist sicherer als Vorkasse.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "PIN und TAN bleiben geheim.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Ich lasse mich nicht hetzen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Ich darf mir Unterstützung holen.",
+            "pictogram": "pikto-help"
+          }
         ],
-        "remember": "Erst prüfen. Dann kaufen."
+        "remember": "Erst prüfen. Dann kaufen.",
+        "pictogram": "pikto-done"
       }
     ],
     "quizQuestions": [

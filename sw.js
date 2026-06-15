@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-06j";
+const CACHE_VERSION = "v2026-06n";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
 /* Alle Dateien, die sofort beim Installieren gecacht werden */
