@@ -423,6 +423,78 @@ button {
   transition: width 0.5s ease;
 }
 
+/* ---------- Sprachstufen-Auswahl (Start) ---------- */
+
+.language-choice {
+  padding: 6px 0 0;
+}
+
+.language-choice-title {
+  font-size: 1.6rem;
+  margin: 8px 0 6px;
+}
+
+.language-choice-intro {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin: 0 0 20px;
+  max-width: 52ch;
+}
+
+.language-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.language-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.language-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.language-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-m);
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+}
+
+.language-icon img {
+  width: 38px;
+  height: 38px;
+}
+
+.language-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.language-desc {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
 /* ---------- Themen-Karten ---------- */
 
 .topic-grid {

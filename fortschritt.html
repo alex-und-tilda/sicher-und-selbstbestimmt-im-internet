@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Fortschritt – Sicher und selbstbestimmt im Internet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#f4f8fc; --bg2:#e7eef7; --surface:#fff; --ink:#142231; --ink-soft:#46586f;
+    --line:#dbe4ef; --accent:#0a5c95; --accent-soft:#e6f0f9;
+    --good:#15803d; --good-bg:#e8f6ee; --open:#94a3b8; --open-bg:#eef2f7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg1:#0f1825; --bg2:#0b1119; --surface:#172536; --ink:#e4eef8; --ink-soft:#a4c4d8;
+      --line:#243549; --accent:#8ecaee; --accent-soft:#15273e; --good:#4ade80; --good-bg:#0c2018;
+      --open:#5b6b7d; --open-bg:#141f2c; }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;min-height:100vh;font-family:"Atkinson Hyperlegible",Arial,sans-serif;color:var(--ink);
+    line-height:1.6;background:linear-gradient(180deg,var(--bg1),var(--bg2));background-attachment:fixed;padding:20px;}
+  .wrap{max-width:920px;margin:0 auto;}
+  header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:0 8px 24px rgba(20,34,49,.07);}
+  h1{font-size:1.5rem;margin:0 0 4px;}
+  .sub{color:var(--ink-soft);margin:0;font-size:1rem;}
+  .updated{color:var(--ink-soft);font-size:.85rem;margin:8px 0 0;}
+  .reload{font:inherit;font-weight:700;cursor:pointer;border-radius:999px;border:2px solid var(--accent);
+    background:var(--accent);color:#fff;padding:10px 18px;}
+  .reload:hover{filter:brightness(1.08);}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;}
+  @media(max-width:560px){.kpis{grid-template-columns:1fr;}}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 2px 6px rgba(20,34,49,.05);}
+  .kpi .label{color:var(--ink-soft);font-size:.95rem;font-weight:700;}
+  .kpi .num{font-size:2.2rem;font-weight:700;line-height:1.1;margin-top:4px;}
+  .kpi .of{font-size:1rem;color:var(--ink-soft);font-weight:700;}
+  .kpi .bar{height:10px;background:var(--accent-soft);border-radius:999px;overflow:hidden;margin-top:10px;}
+  .kpi .fill{height:100%;background:var(--accent);border-radius:999px;}
+  section.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;
+    box-shadow:0 8px 24px rgba(20,34,49,.07);margin-bottom:18px;}
+  h2{font-size:1.2rem;margin:0 0 12px;}
+  table{width:100%;border-collapse:collapse;}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:.98rem;}
+  th{color:var(--ink-soft);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;}
+  td.topic{font-weight:700;}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:.85rem;font-weight:700;}
+  .pill.done{background:var(--good-bg);color:var(--good);}
+  .pill.part{background:var(--accent-soft);color:var(--accent);}
+  .pill.open{background:var(--open-bg);color:var(--open);}
+  .commits li{padding:10px 0;border-bottom:1px solid var(--line);list-style:none;}
+  .commits ul{margin:0;padding:0;}
+  .commits .msg{font-weight:700;}
+  .commits .meta{color:var(--ink-soft);font-size:.85rem;margin-top:2px;}
+  .note{color:var(--ink-soft);font-size:.9rem;}
+  .foot{color:var(--ink-soft);font-size:.82rem;text-align:center;margin-top:6px;}
+  a{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Fortschritt der Lernplattform</h1>
+      <p class="sub">Live-Stand der drei Sprachstufen &amp; letzte Änderungen</p>
+      <p class="updated" id="updated">Lädt …</p>
+    </div>
+    <button class="reload" onclick="location.reload()">↻ Aktualisieren</button>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section class="card">
+    <h2>Themen × Sprachstufen</h2>
+    <table>
+      <thead><tr><th>Thema</th><th>Lektionen</th><th>Leichte&nbsp;Sprache</th><th>Einfache&nbsp;Sprache</th><th>Alltagssprache</th></tr></thead>
+      <tbody id="matrix"></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Letzte Änderungen (GitHub)</h2>
+    <div class="commits" id="commits"><p class="note">Lädt Commits …</p></div>
+  </section>
+
+  <p class="foot">Quelle: deine Projektdateien (<code>topics.js</code>, <code>content-de.js</code>) und die öffentlichen GitHub-Commits. Aktualisiert sich bei jedem Öffnen.</p>
+</div>
+
+<script src="topics.js"></script>
+<script src="content-de.js"></script>
+<script>
+(function(){
+  var REPO = "alex-und-tilda/sicher-und-selbstbestimmt-im-internet";
+  var LEVELS = [["leicht","Leichte Sprache"],["einfach","Einfache Sprache"],["standard","Alltagssprache"]];
+
+  function lessonsOf(t){ return Array.isArray(t.lessons) ? t.lessons : []; }
+  function countLevel(t, level){
+    var L = lessonsOf(t);
+    if(level === "leicht") return { done: L.length, total: L.length }; /* Basistext = Leichte Sprache */
+    var n = L.filter(function(l){ return l.versions && l.versions[level]; }).length;
+    return { done: n, total: L.length };
+  }
+
+  var data = (typeof topics !== "undefined" && Array.isArray(topics)) ? topics : [];
+
+  /* KPIs: wie viele Themen sind je Stufe komplett */
+  var kpi = { leicht:0, einfach:0, standard:0 };
+  data.forEach(function(t){
+    LEVELS.forEach(function(lv){
+      var c = countLevel(t, lv[0]);
+      if(c.total > 0 && c.done === c.total) kpi[lv[0]]++;
+    });
+  });
+  var N = data.length || 12;
+  var kpiHtml = LEVELS.map(function(lv){
+    var v = kpi[lv[0]], pct = Math.round((v/N)*100);
+    return '<div class="kpi"><div class="label">'+lv[1]+'</div>'+
+      '<div class="num">'+v+' <span class="of">/ '+N+' Themen</span></div>'+
+      '<div class="bar"><div class="fill" style="width:'+pct+'%"></div></div></div>';
+  }).join("");
+  document.getElementById("kpis").innerHTML = kpiHtml;
+
+  /* Matrix */
+  function cell(c){
+    if(c.total === 0) return '<span class="pill open">–</span>';
+    if(c.done === c.total) return '<span class="pill done">✓ fertig</span>';
+    if(c.done === 0) return '<span class="pill open">offen</span>';
+    return '<span class="pill part">'+c.done+'/'+c.total+'</span>';
+  }
+  document.getElementById("matrix").innerHTML = data.map(function(t){
+    var L = lessonsOf(t);
+    return '<tr><td class="topic">'+esc(t.title)+'</td><td>'+L.length+'</td>'+
+      '<td>'+cell(countLevel(t,"leicht"))+'</td>'+
+      '<td>'+cell(countLevel(t,"einfach"))+'</td>'+
+      '<td>'+cell(countLevel(t,"standard"))+'</td></tr>';
+  }).join("");
+
+  document.getElementById("updated").textContent = "Stand: " + new Date().toLocaleString("de-DE");
+
+  /* Letzte Commits live von GitHub (öffentlich) */
+  function rel(d){
+    var s = Math.floor((Date.now() - new Date(d).getTime())/1000);
+    if(s<60) return "gerade eben";
+    if(s<3600) return Math.floor(s/60)+" Min. her";
+    if(s<86400) return Math.floor(s/3600)+" Std. her";
+    return Math.floor(s/86400)+" Tage her";
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"})[c];}); }
+
+  fetch("https://api.github.com/repos/"+REPO+"/commits?per_page=8")
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(list){
+      if(!Array.isArray(list) || !list.length){ throw new Error("leer"); }
+      var html = "<ul>" + list.map(function(it){
+        var c = it.commit || {};
+        var msg = (c.message || "").split("\n")[0];
+        var when = c.author && c.author.date ? c.author.date : "";
+        var who = (c.author && c.author.name) || "";
+        return '<li><div class="msg">'+esc(msg)+'</div>'+
+          '<div class="meta">'+esc(who)+' · '+(when?esc(rel(when)):"")+'</div></li>';
+      }).join("") + "</ul>";
+      document.getElementById("commits").innerHTML = html;
+    })
+    .catch(function(){
+      document.getElementById("commits").innerHTML =
+        '<p class="note">Die Commit-Liste lädt nur auf der Live-Seite (mit Internet). '+
+        'Öffne diese Seite unter <a href="https://'+REPO.split("/")[0]+'.github.io/'+REPO.split("/")[1]+'/fortschritt.html">deiner GitHub-Pages-Adresse</a>.</p>';
+    });
+})();
+</script>
+</body>
+</html>

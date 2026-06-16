@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Lokale Vorschau- und Hilfsdateien (nicht hochladen)
+_vorschau-neu.html
+_vorschau-piktogramme.html
+design-vorschau.html
+styles.css.bak

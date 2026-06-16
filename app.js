@@ -24,6 +24,52 @@ let quizScore = 0;
 let quizAnsweredCorrect = new Set();
 let soundEnabled = false;
 let simpleMode = false;
+
+/* Sprachstufe: 'leicht' (Leichte Sprache), 'einfach' (Einfache Sprache),
+   'standard' (Alltagssprache). Wird gemerkt. */
+let languageLevel = "leicht";
+let languageChosen = false;
+const LANGUAGE_KEY = "language-level";
+const LANGUAGE_LABEL = {
+  leicht: "Leichte Sprache",
+  einfach: "Einfache Sprache",
+  standard: "Alltagssprache"
+};
+
+function loadLanguageLevel() {
+  try {
+    const saved = window.localStorage.getItem(LANGUAGE_KEY);
+    if (saved === "leicht" || saved === "einfach" || saved === "standard") {
+      languageLevel = saved;
+      languageChosen = true;
+      return true;
+    }
+  } catch (e) { /* nichts tun */ }
+  return false;
+}
+
+function setLanguageLevel(level) {
+  if (level !== "leicht" && level !== "einfach" && level !== "standard") return;
+  languageLevel = level;
+  languageChosen = true;
+  try { window.localStorage.setItem(LANGUAGE_KEY, level); } catch (e) { /* nichts tun */ }
+}
+
+/* Inhalt einer Lektion für die gewählte Sprachstufe holen.
+   Fehlt die Stufe noch, wird sinnvoll zurückgefallen, damit die App
+   jederzeit funktioniert (Reihenfolge: gewählt → einfach → leicht → Basis). */
+function resolveLessonContent(lesson, level) {
+  if (!lesson || !lesson.versions) return lesson;
+  const v = lesson.versions;
+  /* Der Basistext der Lektion IST bereits Leichte Sprache.
+     Darum fällt "leicht" auf den Basistext zurück (nie auf "einfach"). */
+  let chosen = null;
+  if (level === "leicht") chosen = v.leicht || null;
+  else if (level === "einfach") chosen = v.einfach || v.leicht || null;
+  else chosen = v.standard || v.einfach || v.leicht || null;
+  return chosen ? Object.assign({}, lesson, chosen) : lesson;
+}
+
 let audioContext = null;
 let speechRate = 0.85;
 
@@ -379,6 +425,35 @@ function getTopicColorStyle(topicId) {
   return `--topic-color:${color};--topic-ring:${ring};--topic-hover-bg:${bg};--topic-icon-bg:${icon}`;
 }
 
+/* ============================================================
+   Piktogramme: ARASAAC (arasaac.org), Urheber Sergio Palao,
+   Regierung von Aragón, Lizenz CC BY-NC-SA.
+   Für bekannte Begriffe wird ein klares ARASAAC-Piktogramm geladen.
+   Unbekannte Begriffe nutzen weiter das lokale SVG (Rückfall).
+   ============================================================ */
+const ARASAAC_PICTO = {
+  "pikto-data": 30010,
+  "pikto-lock": 27691,
+  "pikto-no": 7196,
+  "pikto-help": 12252,
+  "pikto-photo": 7107,
+  "pikto-message": 37867,
+  "pikto-shop": 5948,
+  "pikto-fraud": 38478,
+  "pikto-ki": 6208,
+  "pikto-fake": 22198,
+  "pikto-done": 28429,
+  "pikto-screen": 2910,
+  "pikto-pause": 28649
+};
+
+function pictoSrc(key) {
+  const id = ARASAAC_PICTO[key];
+  return id
+    ? `https://static.arasaac.org/pictograms/${id}/${id}_300.png`
+    : `assets/pictograms/${key}.svg`;
+}
+
 function getTopicById(topicId) {
   return topics.find(topic => topic.id === topicId) || null;
 }
@@ -717,8 +792,8 @@ function closeCalmOverlay() {
 function buildUtilityBar() {
   return `
     <div class="utility-bar" aria-label="Zusätzliche Hilfe">
-      <button type="button" id="simpleModeButton" class="utility-button simple-mode-button" onclick="toggleSimpleMode()" aria-pressed="${simpleMode ? "true" : "false"}">
-        ${simpleMode ? "Einfach-Modus an" : "Einfach-Modus aus"}
+      <button type="button" class="utility-button language-switch-button" onclick="renderLanguageChoice()">
+        Sprache: ${LANGUAGE_LABEL[languageLevel]}
       </button>
       <button type="button" class="utility-button" onclick="showSymbolHelp()">Zeichen erklären</button>
       <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
@@ -752,6 +827,46 @@ function renderLegalFooter() {
 /* ============================================================
    Startseite: Themenübersicht
    ============================================================ */
+
+function chooseLanguage(level) {
+  setLanguageLevel(level);
+  renderMenu();
+}
+
+function renderLanguageChoice() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Sprache wählen", "Start", "Wie möchtest du lernen?", 0);
+  showNav(false, false);
+
+  content.innerHTML = `
+    <section class="language-choice">
+      <h2 class="language-choice-title">Wie möchtest du lernen?</h2>
+      <p class="language-choice-intro">Wähle deine Sprache. Du kannst sie später jederzeit ändern.</p>
+      <div class="language-grid">
+        <button type="button" class="language-card" onclick="chooseLanguage('leicht')">
+          <span class="language-icon" aria-hidden="true">${getIconHtml("understand")}</span>
+          <span class="language-name">Leichte Sprache</span>
+          <span class="language-desc">Kurze Sätze. Mit Bildern.</span>
+        </button>
+        <button type="button" class="language-card" onclick="chooseLanguage('einfach')">
+          <span class="language-icon" aria-hidden="true">${getIconHtml("example")}</span>
+          <span class="language-name">Einfache Sprache</span>
+          <span class="language-desc">Etwas mehr Text. Mit Beispielen.</span>
+        </button>
+        <button type="button" class="language-card" onclick="chooseLanguage('standard')">
+          <span class="language-icon" aria-hidden="true">${getIconHtml("report")}</span>
+          <span class="language-name">Alltagssprache</span>
+          <span class="language-desc">Normaler Text für alle.</span>
+        </button>
+      </div>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
 
 function renderMenu() {
   stopReading();
@@ -1147,7 +1262,7 @@ function renderLesson() {
 
   currentStep = Math.max(0, Math.min(currentStep, lessons.length - 1));
 
-  const lesson = lessons[currentStep];
+  const lesson = resolveLessonContent(lessons[currentStep], languageLevel);
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
   const modeLabel = currentMode === "short" ? "Einfach lernen" : "Mehr lernen";
   const hasPractice = Boolean(lesson.practice);
@@ -1172,7 +1287,7 @@ function renderLesson() {
     ? lesson.text.map(item => {
         if (typeof item === "object" && item.text) {
           const img = item.pictogram
-            ? `<img class="ls-sentence-pikto" src="assets/pictograms/${escapeHtml(item.pictogram)}.svg" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`
+            ? `<img class="ls-sentence-pikto" src="${pictoSrc(item.pictogram)}" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`
             : "";
           return `<div class="ls-text-row">${img}<p>${escapeHtml(item.text)}</p></div>`;
         }
@@ -1185,7 +1300,7 @@ function renderLesson() {
     ? `<ul class="ls-bullet-list">${lesson.bullets.map(item => {
         if (typeof item === "object" && item.text) {
           const img = item.pictogram
-            ? `<img class="ls-bullet-pikto" src="assets/pictograms/${escapeHtml(item.pictogram)}.svg" alt="" width="40" height="40" aria-hidden="true" loading="lazy">`
+            ? `<img class="ls-bullet-pikto" src="${pictoSrc(item.pictogram)}" alt="" width="40" height="40" aria-hidden="true" loading="lazy">`
             : "";
           return `<li class="ls-bullet-item">${img}<span>${escapeHtml(item.text)}</span></li>`;
         }
@@ -1216,9 +1331,9 @@ function renderLesson() {
      ein zusätzliches Banner-Bild wäre dort Wiederholung. */
   const isEinfachLesson = simpleMode;
   const isStartLesson_pikto = lesson.module === "Start";
-  const pictogram = isStartLesson_pikto && lesson.pictogram
+  const pictogram = isStartLesson_pikto && lesson.pictogram && languageLevel !== "standard"
     ? `<div class="einfach-pictogram" aria-hidden="true">
-         <img src="assets/pictograms/${escapeHtml(lesson.pictogram)}.svg" alt="" width="100" height="100" loading="eager">
+         <img src="${pictoSrc(lesson.pictogram)}" alt="" width="100" height="100" loading="eager">
        </div>`
     : "";
 
@@ -1412,7 +1527,7 @@ function renderCompletionPage(topicId) {
         <article class="card completion-card--einfach" style="${getTopicColorStyle(topic.id)}">
 
           <div class="einfach-done-star" aria-hidden="true">
-            <img src="assets/pictograms/pikto-done.svg" alt="" width="120" height="120">
+            <img src="${pictoSrc('pikto-done')}" alt="" width="120" height="120">
           </div>
 
           <h2 class="einfach-done-title">Super gemacht!</h2>
@@ -2141,7 +2256,7 @@ function renderAllMemoryCards() {
    index.html#datenschutz:merk */
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
-  if (!hash) return renderMenu();
+  if (!hash) return languageChosen ? renderMenu() : renderLanguageChoice();
 
   /* Sonderrouten */
   if (hash === "grosses-quiz") return startBigQuiz();
@@ -2205,6 +2320,9 @@ initGlossarEvents();
 
 /* Schriftgröße vor dem ersten Rendern anwenden */
 loadFontSize();
+
+/* Gemerkte Sprachstufe laden (falls vorhanden) */
+loadLanguageLevel();
 
 /* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,
    damit die themenspezifischen Inline-Farben (getTopicColorStyle)

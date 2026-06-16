@@ -4,7 +4,8 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-06n";
+const CACHE_VERSION = "v2026-06p";
+const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
 /* Alle Dateien, die sofort beim Installieren gecacht werden */
@@ -15,9 +16,11 @@ const PRECACHE_URLS = [
   "./styles.css",
   "./app.js",
   "./topics.js",
+  "./content-de.js",
   "./favicon.svg",
   "./manifest.webmanifest",
   "./404.html",
+  "./fortschritt.html",
 
   /* Statische Seiten */
   "./barrierefreiheit.html",
@@ -201,6 +204,23 @@ self.addEventListener("activate", (event) => {
 /* ---- Fetch-Strategie ---- */
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
+
+  /* ARASAAC-Piktogramme (fremde Domain): einmal laden, dann offline aus dem Cache.
+     Bilder sind unveränderlich (feste ID), darum dauerhaft cache-first. */
+  if (url.hostname === "static.arasaac.org") {
+    event.respondWith(
+      caches.open(ARASAAC_CACHE).then((cache) =>
+        cache.match(event.request).then((cached) =>
+          cached ||
+          fetch(event.request).then((response) => {
+            cache.put(event.request, response.clone());
+            return response;
+          }).catch(() => cached)
+        )
+      )
+    );
+    return;
+  }
 
   /* Nur eigene Anfragen abfangen (kein Cross-Origin) */
   if (url.origin !== location.origin) return;

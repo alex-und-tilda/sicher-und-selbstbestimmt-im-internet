@@ -1,0 +1,1636 @@
+/* ============================================================
+   Sprachfassungen (Einfache Sprache + Alltagssprache)
+   Der Basistext in topics.js ist bereits Leichte Sprache.
+   Hier kommen je Lektion die Fassungen "einfach" und "standard" dazu.
+   Verknüpfung am Ende der Datei: applyContentVersions().
+
+   Aufbau:  CONTENT_VERSIONS[themaId][lektionTitel] = { einfach:{...}, standard:{...} }
+   Felder pro Fassung (optional): text[], bullets[], examples[], warning, success, remember
+   - einfach: kurze, klare Sätze (etwa B1), Bilder optional
+   - standard: Fließtext, keine Piktogramme, keine Aufzählungen (bullets: [])
+   ============================================================ */
+
+const CONTENT_VERSIONS = {
+  datenschutz: {
+    "Start": {
+      einfach: {
+        text: [
+          { text: "In diesem Thema geht es um Datenschutz." },
+          { text: "Du lernst, welche Daten privat sind und wie du sie schützt." },
+          { text: "Wenn du unsicher bist, kannst du den Hilfe-Knopf nutzen." }
+        ]
+      },
+      standard: {
+        text: [
+          { text: "In diesem Kapitel geht es um Datenschutz im Alltag. Du erfährst, welche Informationen als privat gelten, warum sie schützenswert sind und wie du im Internet bewusst mit ihnen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+        ]
+      }
+    },
+
+    "Was sind private Daten?": {
+      einfach: {
+        text: [
+          { text: "Private Daten sind Informationen über dich. Sie gehören nur dir." },
+          { text: "Andere Menschen sollen diese Daten nicht ohne deine Erlaubnis bekommen." }
+        ],
+        bullets: ["dein Name", "deine Adresse", "deine Telefon-Nummer", "dein Geburtstag", "deine Fotos", "dein Passwort"],
+        remember: "Ich gebe meine privaten Daten nur an Menschen weiter, denen ich vertraue."
+      },
+      standard: {
+        text: [
+          { text: "Als private oder personenbezogene Daten gelten alle Informationen, die sich einer bestimmten Person zuordnen lassen: zum Beispiel Name, Adresse, Telefonnummer, Geburtsdatum, Fotos oder Passwörter. Weil sich daraus Rückschlüsse auf eine Person ziehen lassen, sind sie besonders schützenswert und sollten nur bewusst und sparsam weitergegeben werden." }
+        ],
+        bullets: [],
+        remember: "Personenbezogene Daten sollten bewusst und sparsam preisgegeben werden."
+      }
+    },
+
+    "Besonders wichtige Daten": {
+      einfach: {
+        text: [
+          { text: "Manche Daten sind besonders wichtig." },
+          { text: "Mit diesen Daten können Fremde viel über dich erfahren oder dir schaden." },
+          { text: "Solche Daten schützt du besonders gut." }
+        ],
+        bullets: ["Passwörter und PINs", "deine Adresse", "deine Telefon-Nummer", "deine Bank-Daten", "deine Ausweis-Daten"],
+        remember: "Besonders wichtige Daten gebe ich nicht weiter."
+      },
+      standard: {
+        text: [
+          { text: "Einige Daten sind besonders sensibel, weil Fremde damit großen Schaden anrichten können – etwa Passwörter, PINs, Bankverbindungen oder Ausweisdaten. Solche Informationen solltest du nur dort eingeben, wo es wirklich nötig ist und wo du dem Anbieter vertraust." }
+        ],
+        bullets: [],
+        remember: "Besonders sensible Daten gebe ich nur dort preis, wo es nötig ist und ich dem Anbieter vertraue."
+      }
+    },
+
+    "Passwort bleibt geheim": {
+      einfach: {
+        text: [
+          { text: "Ein Passwort schützt dein Konto." },
+          { text: "Es ist wie ein Schlüssel zu deinen Daten." },
+          { text: "Niemand sonst darf dein Passwort kennen oder benutzen." }
+        ],
+        warning: "Gib dein Passwort niemals an andere weiter – auch nicht an Freunde."
+      },
+      standard: {
+        text: [
+          { text: "Ein Passwort schützt dein Konto wie ein Schlüssel deine Wohnung. Es sorgt dafür, dass nur du Zugang hast. Deshalb solltest du es niemandem mitteilen." }
+        ],
+        warning: "Seriöse Firmen fragen niemals nach deinem Passwort. Wer danach fragt, will dich täuschen."
+      }
+    },
+
+    "Gutes Passwort": {
+      einfach: {
+        text: [
+          { text: "Ein gutes Passwort ist lang und schwer zu erraten." },
+          { text: "Es ist nicht dein Name und nicht dein Geburtstag." },
+          { text: "Am besten mischst du Buchstaben, Zahlen und Zeichen." }
+        ],
+        bullets: ["nicht dein Name", "nicht dein Geburtstag", "mindestens 10 Zeichen", "Buchstaben und Zahlen mischen", "Sonderzeichen wie ! oder ? nutzen"]
+      },
+      standard: {
+        text: [
+          { text: "Ein sicheres Passwort ist möglichst lang und lässt sich nicht leicht erraten. Vermeide naheliegende Angaben wie deinen Namen oder dein Geburtsdatum. Eine Kombination aus Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen macht es deutlich sicherer. Für jedes Konto solltest du ein eigenes Passwort verwenden." }
+        ],
+        bullets: []
+      }
+    },
+
+    "Adresse eingeben": {
+      einfach: {
+        text: [
+          { text: "Manchmal fragt eine App nach deiner Adresse." },
+          { text: "Wenn du nicht weißt, warum, musst du nichts eintragen." },
+          { text: "Frag im Zweifel eine Person, der du vertraust." }
+        ],
+        examples: ["Eine Spiele-App fragt nach deiner Adresse.", "Ein Gewinnspiel fragt nach deinem Geburtstag."]
+      },
+      standard: {
+        text: [
+          { text: "Nicht jede App oder Webseite braucht deine Adresse. Wenn der Grund für die Abfrage unklar ist, musst du nichts eintragen. Überlege, ob die Angabe für den Dienst wirklich notwendig ist – im Zweifel lässt du das Feld frei oder fragst jemanden, dem du vertraust." }
+        ],
+        examples: []
+      }
+    },
+
+    "Telefon-Nummer und Geburtstag": {
+      einfach: {
+        text: [
+          { text: "Auch deine Telefon-Nummer und dein Geburtstag sind privat." },
+          { text: "Du musst sie nicht überall angeben." },
+          { text: "Gib sie nur dort ein, wo es wirklich nötig ist." }
+        ],
+        examples: ["Ein Formular fragt nach deiner Telefon-Nummer.", "Ein Gewinnspiel fragt nach deinem Geburtstag."]
+      },
+      standard: {
+        text: [
+          { text: "Auch Telefonnummer und Geburtsdatum gehören zu deinen privaten Daten. Viele Formulare und Gewinnspiele fragen danach, obwohl sie diese Angaben gar nicht benötigen. Gib sie nur dann ein, wenn es einen nachvollziehbaren Grund gibt." }
+        ],
+        examples: []
+      }
+    },
+
+    "Fotos prüfen": {
+      einfach: {
+        text: [
+          { text: "Bevor du ein Foto verschickst, schau es dir genau an." },
+          { text: "Vielleicht sieht man darauf private Dinge." },
+          { text: "Zum Beispiel deine Wohnung, einen Brief oder andere Personen." }
+        ],
+        examples: ["Auf dem Foto liegt ein Brief.", "Im Hintergrund sieht man eine andere Person.", "Auf dem Foto sieht man deine Wohnung."]
+      },
+      standard: {
+        text: [
+          { text: "Bevor du ein Foto verschickst oder veröffentlichst, lohnt sich ein prüfender Blick. Oft sind im Hintergrund private Dinge zu sehen – ein Brief mit Adresse, dein Zuhause oder andere Personen, die nicht gefragt wurden. Im Zweifel schickst du das Bild lieber nicht." }
+        ],
+        examples: []
+      }
+    },
+
+    "Fremde Links und Nachrichten": {
+      einfach: {
+        text: [
+          { text: "Manche Nachrichten wollen an deine privaten Daten." },
+          { text: "Oft enthalten sie einen Link." },
+          { text: "Ein Link von Fremden kann gefährlich sein. Klick ihn nicht einfach an." }
+        ],
+        examples: ["„Klick schnell auf diesen Link.“", "„Gib deine Adresse ein.“", "„Du hast etwas gewonnen.“"]
+      },
+      standard: {
+        text: [
+          { text: "Manche Nachrichten zielen darauf ab, an deine Daten zu kommen. Häufig enthalten sie einen Link, der auf eine gefälschte Seite führt. Öffne Links von unbekannten Absendern nicht und gib dort keine persönlichen Daten ein. Im Zweifel löschst du die Nachricht." }
+        ],
+        examples: []
+      }
+    },
+
+    "Druck erkennen": {
+      einfach: {
+        text: [
+          { text: "Manche Nachrichten machen Druck." },
+          { text: "Sie wollen, dass du sofort handelst." },
+          { text: "Dieser Druck ist ein Warnzeichen für Betrug." }
+        ],
+        examples: ["„Klick sofort.“", "„Sonst ist dein Konto weg.“", "„Sag es niemandem.“"]
+      },
+      standard: {
+        text: [
+          { text: "Ein typisches Warnzeichen für Betrug ist Zeitdruck. Nachrichten, die sofortiges Handeln verlangen oder drohen, sollen verhindern, dass du in Ruhe nachdenkst. Lass dich davon nicht treiben: Seriöse Stellen setzen dich nicht so unter Druck." }
+        ],
+        examples: []
+      }
+    },
+
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Wenn eine Nachricht komisch wirkt oder Druck macht, hilft ein Plan." },
+          { text: "Geh die Schritte ruhig durch." },
+          { text: "So triffst du keine schnelle, falsche Entscheidung." }
+        ],
+        bullets: ["Ich antworte nicht sofort.", "Ich klicke nicht auf Links.", "Ich gebe keine privaten Daten ein.", "Ich mache eine Pause.", "Ich frage eine Person, der ich vertraue."]
+      },
+      standard: {
+        text: [
+          { text: "Wenn dir eine Nachricht merkwürdig vorkommt oder Druck aufbaut, hilft ein fester Plan: Reagiere nicht sofort, klicke auf keine Links und gib keine Daten ein. Mach eine Pause und hol dir bei Bedarf Rat von einer Person, der du vertraust. So vermeidest du übereilte Entscheidungen." }
+        ],
+        bullets: []
+      }
+    },
+
+    "Das merke ich mir": {
+      einfach: {
+        text: [
+          { text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }
+        ],
+        bullets: ["Private Daten gehören mir.", "Mein Passwort bleibt geheim.", "Ich nutze ein langes, gutes Passwort.", "Ich gebe meine Adresse nicht einfach weiter.", "Ich prüfe Fotos vor dem Senden.", "Ich öffne fremde Links nicht sofort.", "Bei Druck mache ich langsam.", "Ich darf mir Hilfe holen."]
+      },
+      standard: {
+        text: [
+          { text: "Zum Abschluss die wichtigsten Punkte dieses Themas im Überblick: Deine privaten Daten gehören dir. Halte dein Passwort geheim, wähle es lang und sicher und gib persönliche Angaben wie Adresse oder Telefonnummer nur dann preis, wenn es nötig ist. Prüfe Fotos vor dem Versenden, öffne unbekannte Links nicht vorschnell und lass dich von Druck nicht treiben. Und denk daran: Du darfst dir jederzeit Unterstützung holen." }
+        ],
+        bullets: []
+      }
+    }
+  },
+
+  whatsapp: {
+    "Start": {
+      einfach: {
+        text: [
+          { text: "In diesem Thema geht es um WhatsApp." },
+          { text: "Du lernst, wie du WhatsApp sicher nutzt." },
+          { text: "Wenn du unsicher bist, kannst du den Hilfe-Knopf nutzen." }
+        ]
+      },
+      standard: {
+        text: [
+          { text: "In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+        ]
+      }
+    },
+
+    "WhatsApp nutzen": {
+      einfach: {
+        text: [
+          { text: "Mit WhatsApp kannst du Nachrichten, Bilder und Sprachnachrichten senden." },
+          { text: "Du kannst auch in Gruppen schreiben." },
+          { text: "Du entscheidest selbst, wem du antwortest." }
+        ],
+        remember: "Ich entscheide selbst, wem ich antworte."
+      },
+      standard: {
+        text: [
+          { text: "Mit WhatsApp kannst du Textnachrichten, Fotos und Sprachnachrichten verschicken und in Gruppen schreiben. Du bestimmst dabei selbst, mit wem du Kontakt hast und wem du antwortest." }
+        ],
+        remember: "Ich entscheide selbst, mit wem ich schreibe und wem ich antworte."
+      }
+    },
+
+    "Fremde Nummer": {
+      einfach: {
+        text: [
+          { text: "Manchmal schreibt dir eine fremde Nummer." },
+          { text: "Du weißt dann nicht, wer dahintersteckt." },
+          { text: "Antworte nicht sofort und gib keine Daten preis." }
+        ],
+        examples: ["„Hallo, ich habe eine neue Nummer.“", "„Schick mir bitte Geld.“"]
+      },
+      standard: {
+        text: [
+          { text: "Wenn dir eine unbekannte Nummer schreibt, weißt du nicht, wer wirklich dahintersteckt. Antworte nicht vorschnell, gib keine persönlichen Daten weiter und überweise kein Geld. Im Zweifel ignorierst oder blockierst du den Kontakt." }
+        ],
+        examples: []
+      }
+    },
+
+    "Geld und Betrug": {
+      einfach: {
+        text: [
+          { text: "Manche Nachrichten fragen nach Geld." },
+          { text: "Betrüger tun oft so, als wären sie Familie oder Freunde." },
+          { text: "Ein bekannter Trick ist: „Hallo Mama, neue Nummer, ich brauche Geld.“" },
+          { text: "Auch Sprachnachrichten können mit KI gefälscht sein." },
+          { text: "Schick niemals Geld an eine fremde Nummer." }
+        ],
+        examples: ["„Hallo Papa, mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir Geld überweisen?“", "Eine Sprachnachricht klingt wie deine Schwester und will Geld. Die Stimme kann gefälscht sein."]
+      },
+      standard: {
+        text: [
+          { text: "Eine häufige Betrugsmasche sind Nachrichten, die nach Geld fragen. Betrüger geben sich als Angehörige aus – etwa mit der Nachricht „Hallo Mama, ich habe eine neue Nummer und brauche Geld.“ Inzwischen lassen sich sogar Stimmen in Sprachnachrichten mit künstlicher Intelligenz täuschend echt nachahmen. Überweise deshalb niemals Geld an eine unbekannte Nummer und ruf die Person im Zweifel unter ihrer bekannten Nummer zurück." }
+        ],
+        examples: []
+      }
+    },
+
+    "Links in Nachrichten": {
+      einfach: {
+        text: [
+          { text: "Ein Link führt zu einer Internet-Seite." },
+          { text: "Manche Links sind gefährlich." },
+          { text: "Klick nicht sofort auf unbekannte Links." }
+        ]
+      },
+      standard: {
+        text: [
+          { text: "Ein Link führt dich auf eine Internetseite. Manche Links stammen von Betrügern und führen zu gefälschten Seiten, die deine Daten abgreifen wollen. Öffne Links aus unbekannten Nachrichten nicht und gib dort keine Daten ein." }
+        ]
+      }
+    },
+
+    "WhatsApp-Code": {
+      einfach: {
+        text: [
+          { text: "Manchmal bekommst du einen Code per SMS." },
+          { text: "Dieser Code schützt dein WhatsApp." },
+          { text: "Gib den Code niemals an andere weiter." }
+        ]
+      },
+      standard: {
+        text: [
+          { text: "Gelegentlich erhältst du einen Bestätigungscode per SMS. Dieser Code schützt dein WhatsApp-Konto vor fremdem Zugriff. Gib ihn niemals weiter – wer dich danach fragt, will dein Konto übernehmen." }
+        ]
+      }
+    },
+
+    "Gruppen": {
+      einfach: {
+        text: [
+          { text: "In Gruppen lesen viele Menschen mit." },
+          { text: "Nicht alles gehört in eine Gruppe." },
+          { text: "Private Dinge schreibst du besser nicht in eine Gruppe." }
+        ]
+      },
+      standard: {
+        text: [
+          { text: "In Gruppen lesen oft viele Menschen mit, die du nicht alle kennst. Überlege deshalb, was du dort teilst. Private Informationen, Adressen oder Fotos gehören nicht in eine große Gruppe." }
+        ]
+      }
+    },
+
+    "Fotos senden": {
+      einfach: {
+        text: [
+          { text: "Ein Foto kann leicht weitergeschickt werden." },
+          { text: "Ein Foto kann private Dinge zeigen." },
+          { text: "Frag andere, bevor du ein Foto von ihnen sendest." }
+        ]
+      },
+      standard: {
+        text: [
+          { text: "Einmal verschickte Fotos lassen sich leicht weiterleiten und sind kaum zurückzuholen. Achte darauf, ob ein Bild private Dinge zeigt, und frage andere Personen um Erlaubnis, bevor du ein Foto von ihnen versendest." }
+        ]
+      }
+    },
+
+    "Stress und Druck": {
+      einfach: {
+        text: [
+          { text: "Manchmal macht dir eine Nachricht Stress oder Angst." },
+          { text: "Du musst nicht sofort antworten." },
+          { text: "Du darfst eine Pause machen." }
+        ]
+      },
+      standard: {
+        text: [
+          { text: "Manche Nachrichten erzeugen bewusst Stress oder Angst, damit du unüberlegt reagierst. Du musst nicht sofort antworten. Mach ruhig eine Pause und entscheide in Ruhe – oder hol dir Rat von einer vertrauten Person." }
+        ]
+      }
+    },
+
+    "Die KI in WhatsApp": {
+      einfach: {
+        text: [
+          { text: "In WhatsApp gibt es eine KI. Sie heißt Meta AI." },
+          { text: "Du erkennst sie an einem blauen Kreis." },
+          { text: "Die KI ist kein Mensch, sondern ein Programm." },
+          { text: "Du musst die KI nicht benutzen." }
+        ],
+        bullets: ["Die KI kann Fragen beantworten.", "Die KI kann sich irren.", "Schreib der KI keine privaten Dinge."],
+        remember: "Die KI in WhatsApp ist kein Mensch."
+      },
+      standard: {
+        text: [
+          { text: "In WhatsApp ist eine künstliche Intelligenz namens Meta AI eingebaut, erkennbar an einem blauen Kreis. Sie ist kein Mensch, sondern ein Computerprogramm: Sie kann Fragen beantworten, macht aber auch Fehler. Du musst sie nicht nutzen – und persönliche oder vertrauliche Dinge solltest du ihr nicht anvertrauen." }
+        ],
+        bullets: [],
+        remember: "Die KI in WhatsApp ist ein Programm, kein Mensch – ich teile ihr nichts Privates mit."
+      }
+    },
+
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Wenn etwas komisch wirkt oder Druck macht, bleib ruhig." },
+          { text: "Reagiere nicht sofort." },
+          { text: "Zeig die Nachricht einer Person, der du vertraust." }
+        ],
+        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Den Link nicht öffnen.", "Den Hilfe-Knopf nutzen."]
+      },
+      standard: {
+        text: [
+          { text: "Wenn dir etwas merkwürdig vorkommt oder Druck aufgebaut wird, halte kurz inne: Reagiere nicht sofort, öffne keine Links und zeige die Nachricht einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
+        ],
+        bullets: []
+      }
+    },
+
+    "Das merke ich mir": {
+      einfach: {
+        text: [
+          { text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }
+        ],
+        bullets: ["Fremde Nummern prüfen.", "Kein Geld an fremde Nummern schicken.", "Unbekannte Links nicht öffnen.", "Codes nicht weitergeben.", "Fotos prüfen.", "Bei Stress Hilfe holen."]
+      },
+      standard: {
+        text: [
+          { text: "Die wichtigsten Punkte dieses Themas im Überblick: Prüfe Nachrichten von unbekannten Nummern und schicke niemals Geld an Fremde. Öffne unbekannte Links nicht und gib Bestätigungscodes nie weiter. Überlege bei Fotos, was du teilst, und hol dir bei Stress oder Druck ruhig Unterstützung." }
+        ],
+        bullets: []
+      }
+    }
+  },
+
+  facebook: {
+    "Start": {
+      einfach: { text: [
+        { text: "In diesem Thema geht es um Facebook." },
+        { text: "Du lernst, wie du Facebook sicher nutzt." },
+        { text: "Wenn du unsicher bist, kannst du den Hilfe-Knopf nutzen." }
+      ] },
+      standard: { text: [
+        { text: "In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+      ] }
+    },
+    "Profil": {
+      einfach: {
+        text: [
+          { text: "In deinem Profil stehen Informationen über dich." },
+          { text: "Nicht alles muss dort stehen." },
+          { text: "Private Informationen sollten nicht öffentlich sein." }
+        ],
+        examples: ["Adresse", "Telefon-Nummer", "Geburtstag", "private Fotos"],
+        remember: "Ich zeige nicht alles in meinem Profil."
+      },
+      standard: {
+        text: [
+          { text: "In deinem Profil stehen Informationen über dich – aber nicht alles muss dort öffentlich sichtbar sein. Angaben wie Adresse, Telefonnummer, Geburtsdatum oder private Fotos solltest du entweder weglassen oder nur für ausgewählte Personen freigeben." }
+        ],
+        examples: [],
+        remember: "Ich überlege genau, welche Angaben in meinem Profil öffentlich sichtbar sind."
+      }
+    },
+    "Beitrag schreiben": {
+      einfach: { text: [
+        { text: "Du möchtest etwas posten." },
+        { text: "Viele Menschen können deinen Beitrag sehen." },
+        { text: "Prüfe vorher, was du schreibst." }
+      ] },
+      standard: { text: [
+        { text: "Bevor du einen Beitrag veröffentlichst, denk daran: Oft können sehr viele Menschen ihn lesen – manchmal auch über deinen Freundeskreis hinaus. Überlege deshalb vorher, ob der Inhalt wirklich für alle bestimmt ist." }
+      ] }
+    },
+    "Wer darf etwas sehen?": {
+      einfach: { text: [
+        { text: "Du kannst einstellen, wer einen Beitrag sehen darf." },
+        { text: "Das nennt man Privatsphäre-Einstellungen." },
+        { text: "Bei den Einstellungen darfst du dir helfen lassen." }
+      ] },
+      standard: { text: [
+        { text: "Facebook bietet Einstellungen, mit denen du festlegst, wer deine Beiträge sehen darf – zum Beispiel nur Freunde statt aller Nutzer. Diese Privatsphäre-Einstellungen lohnen sich. Wenn sie unübersichtlich sind, lass dir ruhig dabei helfen." }
+      ] }
+    },
+    "Freundschafts-Anfragen": {
+      einfach: { text: [
+        { text: "Manchmal schickt dir eine unbekannte Person eine Anfrage." },
+        { text: "Du weißt nicht, wer das ist." },
+        { text: "Du musst die Anfrage nicht annehmen." }
+      ] },
+      standard: { text: [
+        { text: "Nicht jede Freundschaftsanfrage stammt von jemandem, den du kennst. Hinter unbekannten Profilen können sich auch Betrüger verbergen. Du musst keine Anfrage annehmen – im Zweifel lehnst du sie ab oder ignorierst sie." }
+      ] }
+    },
+    "Kommentare schreiben": {
+      einfach: { text: [
+        { text: "Kommentare können andere Menschen verletzen." },
+        { text: "Du musst nicht auf alles antworten." },
+        { text: "Bleib freundlich." }
+      ] },
+      standard: { text: [
+        { text: "Was du kommentierst, können viele Menschen lesen, und Worte können verletzen. Du musst nicht auf jeden Beitrag reagieren. Wenn du kommentierst, bleib sachlich und respektvoll." }
+      ] }
+    },
+    "Beleidigungen": {
+      einfach: {
+        text: [
+          { text: "Im Internet kann es Streit geben." },
+          { text: "Beleidigungen sind nicht in Ordnung." },
+          { text: "Du musst nicht zurück beleidigen." }
+        ],
+        bullets: ["Die Nachricht zeigen.", "Die Person blockieren.", "Den Beitrag melden.", "Unterstützung holen."]
+      },
+      standard: {
+        text: [
+          { text: "Auch auf Facebook kommt es zu Streit und Beleidigungen. Du musst dich darauf nicht einlassen und nicht zurückbeleidigen. Stattdessen kannst du die Nachricht aufbewahren, die Person blockieren, den Beitrag melden und dir Unterstützung holen." }
+        ],
+        bullets: []
+      }
+    },
+    "Fotos mit anderen Personen": {
+      einfach: { text: [
+        { text: "Ein Foto zeigt manchmal andere Menschen." },
+        { text: "Nicht jeder möchte im Internet zu sehen sein." },
+        { text: "Frag erst, bevor du ein Foto postest." }
+      ] },
+      standard: { text: [
+        { text: "Wenn auf einem Foto andere Personen zu sehen sind, gilt: Nicht jeder möchte im Internet erscheinen. Frag die abgebildeten Personen um Erlaubnis, bevor du ein solches Bild veröffentlichst." }
+      ] }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }],
+        bullets: ["Nicht alles öffentlich machen.", "Anfragen prüfen.", "Respektvoll schreiben.", "Bei Beleidigungen Hilfe holen."]
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Mach nicht alles in deinem Profil öffentlich und nutze die Privatsphäre-Einstellungen. Prüfe Freundschaftsanfragen, bleib in Kommentaren respektvoll und hol dir bei Beleidigungen Unterstützung." }],
+        bullets: []
+      }
+    }
+  },
+
+  instagram: {
+    "Start": {
+      einfach: { text: [
+        { text: "In diesem Thema geht es um Instagram." },
+        { text: "Du lernst, wie du Instagram sicher nutzt." },
+        { text: "Wenn du unsicher bist, kannst du den Hilfe-Knopf nutzen." }
+      ] },
+      standard: { text: [
+        { text: "In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+      ] }
+    },
+    "Foto posten": {
+      einfach: { text: [
+        { text: "Du möchtest ein Foto posten." },
+        { text: "Andere Menschen können das Foto sehen." },
+        { text: "Manchmal sieht man darauf mehr, als du denkst." }
+      ] },
+      standard: { text: [
+        { text: "Wenn du ein Foto postest, können es viele Menschen sehen. Achte darauf, was im Bild zu erkennen ist – oft verraten Hintergrund oder Details mehr über dich, als dir bewusst ist." }
+      ] }
+    },
+    "Andere Personen auf Fotos": {
+      einfach: { text: [
+        { text: "Auf einem Foto sind manchmal andere Personen." },
+        { text: "Nicht alle wollen im Internet stehen." },
+        { text: "Frag vorher oder nimm ein anderes Foto." }
+      ] },
+      standard: { text: [
+        { text: "Sind auf einem Foto andere Personen zu sehen, solltest du sie vor dem Posten um Erlaubnis fragen. Wer das nicht möchte, hat ein Recht darauf – dann wählst du besser ein anderes Bild." }
+      ] }
+    },
+    "Kurze Videos und Stories": {
+      einfach: { text: [
+        { text: "Kurze Videos und Stories können viele Menschen sehen." },
+        { text: "Andere können ein Bild vom Bildschirm machen." },
+        { text: "Auch kurze Videos können privat sein." }
+      ] },
+      standard: { text: [
+        { text: "Stories und kurze Videos verschwinden zwar nach einer Weile, doch in dieser Zeit können viele Menschen sie sehen – und mit einem Bildschirmfoto dauerhaft speichern. Behandle sie deshalb so vorsichtig wie jeden anderen Beitrag." }
+      ] }
+    },
+    "Standort": {
+      einfach: { text: [
+        { text: "Der Standort zeigt, wo du gerade bist." },
+        { text: "Nicht jeder muss wissen, wo du bist." },
+        { text: "Teile deinen Standort nicht einfach." }
+      ] },
+      standard: { text: [
+        { text: "Wenn du deinen Standort teilst, sehen andere, wo du dich aufhältst. Das muss nicht jeder wissen und kann ausgenutzt werden. Gib deinen Standort nur bewusst und nur an Menschen weiter, denen du vertraust." }
+      ] }
+    },
+    "Private Nachrichten": {
+      einfach: { text: [
+        { text: "Manchmal schreibt dir eine fremde Person privat." },
+        { text: "Vielleicht fragt sie nach privaten Fotos oder Daten." },
+        { text: "Das ist ein Warnzeichen." }
+      ] },
+      standard: { text: [
+        { text: "Wenn dir eine fremde Person private Nachrichten schickt und nach Fotos oder persönlichen Daten fragt, ist das ein deutliches Warnzeichen. Geh darauf nicht ein, schick keine privaten Bilder und blockiere den Kontakt im Zweifel." }
+      ] }
+    },
+    "Verletzende Kommentare": {
+      einfach: {
+        text: [
+          { text: "Kommentare können nett sein." },
+          { text: "Kommentare können aber auch verletzen." },
+          { text: "Du musst nicht auf alles antworten." }
+        ],
+        bullets: ["Die Nachricht zeigen.", "Die Person blockieren.", "Den Kommentar melden.", "Mit jemandem darüber sprechen."]
+      },
+      standard: {
+        text: [
+          { text: "Kommentare können freundlich, aber auch verletzend sein. Du musst nicht auf jeden reagieren. Bei verletzenden Kommentaren kannst du die Nachricht aufbewahren, die Person blockieren, den Kommentar melden und mit jemandem darüber sprechen." }
+        ],
+        bullets: []
+      }
+    },
+    "Bearbeitete Bilder": {
+      einfach: { text: [
+        { text: "Auf Instagram sieht vieles perfekt aus." },
+        { text: "Viele Bilder sind bearbeitet." },
+        { text: "Nicht alles ist echt." }
+      ] },
+      standard: { text: [
+        { text: "Vieles auf Instagram wirkt makellos – doch zahlreiche Bilder sind nachbearbeitet oder mit Filtern verändert. Mach dir bewusst: Das Gezeigte entspricht oft nicht der Wirklichkeit, und du musst dich damit nicht vergleichen." }
+      ] }
+    },
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Ein Profil oder eine Nachricht wirkt komisch." },
+          { text: "Mach Stopp und antworte nicht sofort." },
+          { text: "Zeig es einer Person, der du vertraust." }
+        ],
+        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Das Profil oder die Nachricht zeigen.", "Den Hilfe-Knopf nutzen."]
+      },
+      standard: {
+        text: [
+          { text: "Wenn dir ein Profil oder eine Nachricht merkwürdig vorkommt, halte inne: Antworte nicht sofort und zeige es einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
+        ],
+        bullets: []
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }],
+        bullets: ["Fotos prüfen.", "Standort schützen.", "Fremden nicht sofort antworten.", "Keine privaten Fotos an Fremde schicken."]
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Prüfe deine Fotos und Videos vor dem Posten, schütze deinen Standort und antworte Fremden nicht vorschnell. Schick keine privaten Bilder an unbekannte Personen und hol dir bei Problemen Unterstützung." }],
+        bullets: []
+      }
+    }
+  },
+
+  youtube: {
+    "Start": {
+      einfach: { text: [
+        { text: "In diesem Thema geht es um YouTube." },
+        { text: "Du lernst, wie du YouTube sicher nutzt." },
+        { text: "Wenn du unsicher bist, kannst du den Hilfe-Knopf nutzen." }
+      ] },
+      standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+    },
+    "Videos prüfen": {
+      einfach: { text: [
+        { text: "Nicht jedes Video ist wahr." },
+        { text: "Manche Videos übertreiben oder lügen." },
+        { text: "Glaub nicht alles sofort." }
+      ] },
+      standard: { text: [{ text: "Nicht alles, was in Videos behauptet wird, stimmt. Manche Inhalte übertreiben oder sind bewusst falsch, um Aufmerksamkeit zu erzeugen. Prüfe wichtige Aussagen und glaub nicht alles sofort." }] }
+    },
+    "Werbung erkennen": {
+      einfach: { text: [
+        { text: "In vielen Videos gibt es Werbung." },
+        { text: "Werbung will, dass du etwas kaufst." },
+        { text: "Kauf nicht sofort." }
+      ] },
+      standard: { text: [{ text: "In vielen Videos steckt Werbung – manchmal offen, manchmal versteckt als Empfehlung. Ihr Ziel ist, dass du etwas kaufst. Lass dich nicht zu schnellen Käufen drängen und überlege in Ruhe." }] }
+    },
+    "Autoplay und Zeit": {
+      einfach: { text: [
+        { text: "YouTube spielt oft automatisch das nächste Video ab." },
+        { text: "Du merkst: Ich schaue schon lange." },
+        { text: "Du darfst stoppen und eine Pause machen." }
+      ] },
+      standard: { text: [{ text: "YouTube startet automatisch das nächste Video, sodass man schnell viel Zeit verliert. Achte darauf, wie lange du schon schaust, und mach bewusst Pausen. Du darfst jederzeit stoppen." }] }
+    },
+    "Gefährliche Mutproben": {
+      einfach: { text: [
+        { text: "Manche Videos zeigen gefährliche Mutproben." },
+        { text: "Du musst das nicht nachmachen." },
+        { text: "Deine Gesundheit ist wichtiger." }
+      ] },
+      standard: { text: [{ text: "Im Netz kursieren Videos mit gefährlichen Mutproben oder „Challenges“. Du musst bei so etwas nicht mitmachen – deine Gesundheit ist wichtiger als ein Trend oder die Anerkennung anderer." }] }
+    },
+    "Videos, die Angst machen": {
+      einfach: { text: [
+        { text: "Manche Videos machen Angst oder Stress." },
+        { text: "Du darfst das Video stoppen." },
+        { text: "Du kannst mit einer vertrauten Person darüber sprechen." }
+      ] },
+      standard: { text: [{ text: "Manche Videos lösen Angst oder Stress aus. Du musst sie nicht zu Ende sehen – stopp das Video und wende dich bei Bedarf an eine Person, der du vertraust." }] }
+    },
+    "Kommentare": {
+      einfach: {
+        text: [
+          { text: "Kommentare können nett sein." },
+          { text: "Kommentare können auch verletzen." },
+          { text: "Du musst sie nicht lesen oder beantworten." }
+        ],
+        remember: "Ich muss nicht auf Kommentare reagieren."
+      },
+      standard: {
+        text: [{ text: "Unter Videos finden sich freundliche, aber auch verletzende Kommentare. Du musst sie weder lesen noch beantworten. Lass dich von gemeinen Kommentaren nicht herunterziehen." }],
+        remember: "Ich muss Kommentare weder lesen noch beantworten."
+      }
+    },
+    "Nicht jedes Video ist echt": {
+      einfach: {
+        text: [
+          { text: "Manche Videos sind mit KI gemacht." },
+          { text: "Sie sehen echt aus, sind aber gefälscht." },
+          { text: "Auch bekannte Menschen werden gefälscht." },
+          { text: "Mehr dazu lernst du im Thema „Fake News und KI-Fakes“." }
+        ],
+        remember: "Auch Videos können gefälscht sein."
+      },
+      standard: {
+        text: [{ text: "Manche Videos werden mit künstlicher Intelligenz erzeugt. Sie wirken echt, sind aber gefälscht – mitunter werden sogar bekannte Personen täuschend echt nachgebildet. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“." }],
+        remember: "Auch echt wirkende Videos können gefälscht sein."
+      }
+    },
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Ein Video macht dir Angst oder setzt dich unter Druck." },
+          { text: "Mach Stopp." },
+          { text: "Zeig das Video einer vertrauten Person." }
+        ],
+        bullets: ["Das Video stoppen.", "Nichts nachmachen.", "Eine Pause machen.", "Unterstützung holen."]
+      },
+      standard: {
+        text: [{ text: "Wenn dir ein Video Angst macht oder Druck aufbaut, stopp es und mach nichts nach, was gefährlich ist. Zeig es bei Bedarf einer Person, der du vertraust, und mach eine Pause." }],
+        bullets: []
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }],
+        bullets: ["Videos prüfen.", "Werbung erkennen.", "Nicht jedes Video ist echt.", "Pausen machen.", "Gefährliche Dinge nicht nachmachen."]
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Prüfe Videos kritisch, erkenne Werbung und denk daran, dass nicht jedes Video echt ist. Mach bewusst Pausen und mach gefährliche Mutproben niemals nach." }],
+        bullets: []
+      }
+    }
+  },
+
+  snapchat: {
+    "Start": {
+      einfach: { text: [
+        { text: "In diesem Thema geht es um Snapchat." },
+        { text: "Du lernst, wie du Snapchat sicher nutzt." },
+        { text: "Wenn du unsicher bist, kannst du den Hilfe-Knopf nutzen." }
+      ] },
+      standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Druck erkennst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+    },
+    "Bilder verschwinden nicht immer": {
+      einfach: { text: [
+        { text: "Du sendest ein Bild." },
+        { text: "Es ist nur kurz zu sehen." },
+        { text: "Trotzdem kann jemand das Bild speichern." }
+      ] },
+      standard: { text: [{ text: "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich weg sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften." }] }
+    },
+    "Bild vom Bildschirm": {
+      einfach: {
+        text: [
+          { text: "Jemand kann ein Bild vom Bildschirm machen." },
+          { text: "So kann dein Bild gespeichert werden." },
+          { text: "So kann dein Bild weitergeschickt werden." }
+        ],
+        remember: "Ich denke vor dem Senden nach."
+      },
+      standard: {
+        text: [{ text: "Mit einem Bildschirmfoto kann der Empfänger dein Bild dauerhaft speichern und weiterleiten – auch ohne dass du es merkst. Überlege deshalb vor jedem Bild, ob es in fremden Händen ein Problem wäre." }],
+        remember: "Vor dem Senden überlege ich, ob das Bild gespeichert werden dürfte."
+      }
+    },
+    "Sehr private Bilder": {
+      einfach: { text: [
+        { text: "Manche Bilder sind sehr privat." },
+        { text: "Niemand darf dich zu solchen Bildern drängen." },
+        { text: "Du darfst Nein sagen." }
+      ] },
+      standard: { text: [{ text: "Sehr private oder intime Bilder solltest du besonders schützen. Niemand hat das Recht, dich zu solchen Aufnahmen zu drängen. Du darfst jederzeit Nein sagen und dir Hilfe holen." }] }
+    },
+    "Standort": {
+      einfach: { text: [
+        { text: "Snapchat kann zeigen, wo du bist." },
+        { text: "Andere können deinen Ort sehen." },
+        { text: "Das kann unsicher sein." }
+      ] },
+      standard: { text: [{ text: "Snapchat kann über die „Snap Map“ deinen Standort anzeigen. Dann sehen andere, wo du dich aufhältst – das kann unsicher sein. Schalte die Standortfreigabe aus oder nutze den „Geistmodus“, wenn du das nicht möchtest." }] }
+    },
+    "Kontakte": {
+      einfach: { text: [
+        { text: "Nicht jeder Kontakt ist vertraut." },
+        { text: "Auch fremde Personen können dir schreiben." },
+        { text: "Du musst nicht antworten." }
+      ] },
+      standard: { text: [{ text: "Nicht jeder, der dir schreibt, ist vertrauenswürdig. Auch Fremde können Kontakt aufnehmen. Du musst nicht antworten und kannst unbekannte Kontakte ablehnen oder blockieren." }] }
+    },
+    "Druck erkennen": {
+      einfach: { text: [
+        { text: "Jemand sagt: „Schick das Bild, aber sag es niemandem.“" },
+        { text: "Das ist Druck und ein Warnzeichen." },
+        { text: "Du darfst Nein sagen und Hilfe holen." }
+      ] },
+      standard: { text: [{ text: "Sätze wie „Schick mir das Bild, aber sag es niemandem“ sind ein klares Warnzeichen. Wer Geheimhaltung verlangt, setzt dich bewusst unter Druck. Du darfst Nein sagen und dir sofort Unterstützung holen." }] }
+    },
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Eine Nachricht macht dir Druck." },
+          { text: "Du sendest kein Bild." },
+          { text: "Du zeigst die Nachricht einer vertrauten Person." }
+        ],
+        bullets: ["Nein sagen.", "Kein Bild senden.", "Die Nachricht zeigen.", "Unterstützung holen."]
+      },
+      standard: {
+        text: [{ text: "Wenn dich eine Nachricht unter Druck setzt, sende kein Bild und reagiere nicht vorschnell. Zeig die Nachricht einer Person, der du vertraust, und hol dir Unterstützung." }],
+        bullets: []
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }],
+        bullets: ["Bilder können gespeichert werden.", "Standort schützen.", "Kontakte prüfen.", "Bei Druck Hilfe holen."]
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Bilder können trotz „Verschwinden“ gespeichert werden, also überlege vor dem Senden. Schütze deinen Standort, prüfe deine Kontakte und hol dir bei Druck Unterstützung." }],
+        bullets: []
+      }
+    }
+  },
+
+  tiktok: {
+    "Start": {
+      einfach: { text: [
+        { text: "In diesem Thema geht es um TikTok." },
+        { text: "Du lernst, wie du TikTok sicher nutzt." },
+        { text: "Wenn du unsicher bist, kannst du den Hilfe-Knopf nutzen." }
+      ] },
+      standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+    },
+    "Trends": {
+      einfach: { text: [
+        { text: "Viele Menschen machen bei Trends mit." },
+        { text: "Manche Trends sind lustig." },
+        { text: "Manche Trends sind gefährlich." }
+      ] },
+      standard: { text: [{ text: "Auf TikTok verbreiten sich Trends sehr schnell. Viele sind harmlos und lustig, manche aber gefährlich. Du entscheidest selbst, ob du mitmachst – und musst es nicht." }] }
+    },
+    "Ähnliche Videos": {
+      einfach: { text: [
+        { text: "TikTok merkt sich, was du anschaust." },
+        { text: "Dann zeigt TikTok dir ähnliche Videos." },
+        { text: "So schaust du schnell sehr lange." }
+      ] },
+      standard: { text: [{ text: "TikTok beobachtet, welche Videos du ansiehst, und zeigt dir immer mehr vom Gleichen. Dieser Sog führt dazu, dass man schnell sehr lange schaut. Mach dir das bewusst und leg bewusst Pausen ein." }] }
+    },
+    "Gefährliche Trends erkennen": {
+      einfach: {
+        text: [
+          { text: "Ein Trend sieht gefährlich aus." },
+          { text: "Oder ein Trend tut weh." },
+          { text: "Du machst nicht mit." }
+        ],
+        remember: "Ich muss nicht bei jedem Trend mitmachen."
+      },
+      standard: {
+        text: [{ text: "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun. Deine Sicherheit ist wichtiger als Likes." }],
+        remember: "Ich mache bei gefährlichen Trends nicht mit."
+      }
+    },
+    "Private Nachrichten": {
+      einfach: { text: [
+        { text: "Fremde Personen können dir schreiben." },
+        { text: "Sie fragen vielleicht nach Adresse, Fotos oder anderen Daten." },
+        { text: "Solche Daten gibst du nicht weiter." }
+      ] },
+      standard: { text: [{ text: "Auch auf TikTok können dir Fremde private Nachrichten schicken und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Informationen nicht weiter und blockiere den Kontakt im Zweifel." }] }
+    },
+    "Videos posten": {
+      einfach: { text: [
+        { text: "Andere können dein Video sehen und speichern." },
+        { text: "Prüf das Video vorher." },
+        { text: "Poste nichts, was dir später schadet." }
+      ] },
+      standard: { text: [{ text: "Ein gepostetes Video können viele Menschen sehen und speichern. Prüfe vorher, was darauf zu erkennen ist, und veröffentliche nichts, was dir später unangenehm sein oder schaden könnte." }] }
+    },
+    "Kommentare": {
+      einfach: { text: [
+        { text: "Kommentare können nett sein." },
+        { text: "Kommentare können verletzend sein." },
+        { text: "Du musst nicht antworten." }
+      ] },
+      standard: { text: [{ text: "Unter Videos gibt es freundliche, aber auch verletzende Kommentare. Du musst auf keinen reagieren. Bei gemeinen Kommentaren kannst du die Person blockieren oder den Kommentar melden." }] }
+    },
+    "Gefühle und Pausen": {
+      einfach: {
+        text: [
+          { text: "Manche Videos machen traurig, wütend oder nervös." },
+          { text: "Du darfst TikTok schließen." },
+          { text: "Du kannst mit jemandem über deine Gefühle sprechen." }
+        ],
+        remember: "Ich darf TikTok weglegen."
+      },
+      standard: {
+        text: [{ text: "Manche Videos lösen Traurigkeit, Wut oder Unruhe aus. Du darfst die App jederzeit schließen und eine Pause machen. Über belastende Gefühle kannst du mit einer vertrauten Person sprechen." }],
+        remember: "Ich darf TikTok jederzeit weglegen."
+      }
+    },
+    "Nicht jedes Video ist echt": {
+      einfach: {
+        text: [
+          { text: "Viele Videos auf TikTok sind mit KI gemacht." },
+          { text: "Sie sehen echt aus, sind aber gefälscht." },
+          { text: "Auch Stimmen und Gesichter können gefälscht sein." },
+          { text: "Mehr dazu lernst du im Thema „Fake News und KI-Fakes“." }
+        ],
+        remember: "Auch Videos können gefälscht sein."
+      },
+      standard: {
+        text: [{ text: "Viele TikTok-Videos werden mit künstlicher Intelligenz erstellt. Sie wirken echt, sind aber gefälscht – sogar Stimmen und Gesichter lassen sich täuschend echt nachbilden. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“." }],
+        remember: "Auch echt wirkende Videos können gefälscht sein."
+      }
+    },
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Gefährlicher Trend, komischer Kommentar oder Druck?" },
+          { text: "Mach Stopp." },
+          { text: "Zeig die Nachricht oder das Video einer vertrauten Person." }
+        ],
+        bullets: ["Nichts Gefährliches nachmachen.", "Keine privaten Daten senden.", "Eine Pause machen.", "Unterstützung holen."]
+      },
+      standard: {
+        text: [{ text: "Ob gefährlicher Trend, gemeiner Kommentar oder Druck – halte inne und mach nichts Gefährliches nach. Gib keine privaten Daten preis, mach eine Pause und zeig die Nachricht oder das Video einer Person, der du vertraust." }],
+        bullets: []
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }],
+        bullets: ["Gefährliche Trends nicht nachmachen.", "Pausen machen.", "Private Daten schützen.", "Videos vor dem Posten prüfen."]
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Mach gefährliche Trends nicht nach, leg bewusst Pausen ein und schütze deine privaten Daten. Prüfe Videos vor dem Posten und denk daran, dass nicht jedes Video echt ist." }],
+        bullets: []
+      }
+    }
+  },
+
+  hilfe: {
+    "Start": {
+      einfach: { text: [
+        { text: "Manchmal passiert im Internet etwas, das sich falsch oder komisch anfühlt." },
+        { text: "Das ist kein schönes Gefühl." },
+        { text: "Dieses Thema zeigt dir: Du bist nicht allein." },
+        { text: "Es gibt immer jemanden, der dir helfen kann." }
+      ] },
+      standard: { text: [{ text: "Manchmal passiert im Internet etwas, das sich falsch oder bedrohlich anfühlt. Das ist unangenehm – aber du musst damit nicht allein bleiben. Dieses Kapitel zeigt dir, wie du in solchen Situationen ruhig vorgehst und wo du Unterstützung findest." }] }
+    },
+    "Stopp-Regel": {
+      einfach: { text: [
+        { text: "Eine Nachricht macht dir Stress oder Angst." },
+        { text: "Du willst vielleicht sofort reagieren." },
+        { text: "Die Stopp-Regel hilft: erst stoppen, dann überlegen." }
+      ] },
+      standard: { text: [{ text: "Wenn dich eine Nachricht unter Stress setzt, ist der erste Impuls oft, sofort zu reagieren. Die Stopp-Regel hilft dir dabei, das zu vermeiden: Halte zuerst inne und überlege in Ruhe, bevor du etwas tust." }] }
+    },
+    "Nicht sofort löschen": {
+      einfach: { text: [
+        { text: "Eine Nachricht ist gemein oder komisch." },
+        { text: "Du willst sie vielleicht löschen." },
+        { text: "Manchmal ist es wichtig, die Nachricht erst zu zeigen." }
+      ] },
+      standard: { text: [{ text: "Gemeine oder verdächtige Nachrichten möchte man am liebsten sofort löschen. Manchmal ist es aber wichtig, sie zunächst aufzubewahren – als Beweis, um sie einer vertrauten Person oder einer Beratungsstelle zu zeigen." }] }
+    },
+    "Bild vom Bildschirm": {
+      einfach: { text: [
+        { text: "Ein Bild vom Bildschirm kann helfen." },
+        { text: "So kannst du eine Nachricht später zeigen." },
+        { text: "Du darfst dir beim Screenshot helfen lassen." }
+      ] },
+      standard: { text: [{ text: "Ein Bildschirmfoto (Screenshot) hält eine Nachricht fest, sodass du sie später zeigen kannst – auch wenn das Original verschwindet. Wenn du nicht weißt, wie das geht, darfst du dir dabei helfen lassen." }] }
+    },
+    "Druck erkennen": {
+      einfach: { text: [
+        { text: "Jemand sagt: „Mach das sofort.“" },
+        { text: "Oder: „Erzähl es niemandem.“" },
+        { text: "Das ist Druck und ein Warnzeichen." }
+      ] },
+      standard: { text: [{ text: "Aufforderungen wie „Mach das sofort“ oder „Erzähl es niemandem“ sind typische Druckmittel. Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor. Solche Sätze sind ein klares Warnzeichen." }] }
+    },
+    "Angst ernst nehmen": {
+      einfach: {
+        text: [
+          { text: "Eine Nachricht macht dir Angst." },
+          { text: "Oder du hast ein komisches Gefühl im Bauch." },
+          { text: "Das ist wichtig: Deine Gefühle sagen dir etwas." },
+          { text: "Du musst damit nicht allein bleiben." }
+        ],
+        remember: "Meine Gefühle sind wichtig. Ich darf darüber sprechen."
+      },
+      standard: {
+        text: [{ text: "Wenn dir etwas Angst macht oder du ein ungutes Bauchgefühl hast, nimm das ernst – Gefühle sind oft ein guter Warnhinweis. Du musst damit nicht allein bleiben, sondern darfst darüber sprechen." }],
+        remember: "Meine Gefühle sind ein wichtiger Hinweis – ich darf darüber sprechen."
+      }
+    },
+    "Vertraute Personen": {
+      einfach: { text: [
+        { text: "Du kannst eine vertraute Person fragen." },
+        { text: "Zum Beispiel eine Betreuerin, einen Betreuer, Angehörige oder Freunde." },
+        { text: "Probleme im Internet musst du nicht allein lösen." },
+        { text: "Hilfe zu holen ist keine Schwäche, sondern klug." }
+      ] },
+      standard: { text: [{ text: "Du kannst dich jederzeit an eine vertraute Person wenden – etwa Betreuende, Angehörige oder Freunde. Probleme im Internet musst du nicht allein lösen. Sich Hilfe zu holen ist kein Zeichen von Schwäche, sondern klug." }] }
+    },
+    "Was kann ich konkret tun?": {
+      einfach: {
+        text: [
+          { text: "Wenn etwas komisch ist, hilft ein Plan." },
+          { text: "Geh einen Schritt nach dem anderen." },
+          { text: "Du musst nicht alles allein entscheiden." }
+        ],
+        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Nicht sofort löschen.", "Ein Bild vom Bildschirm machen.", "Die Nachricht zeigen.", "Gemeinsam den nächsten Schritt planen."]
+      },
+      standard: {
+        text: [{ text: "Wenn etwas merkwürdig ist, hilft ein klarer Plan: Geh Schritt für Schritt vor und entscheide nichts überstürzt allein. Stopp machen, nicht sofort antworten oder löschen, die Nachricht sichern und zeigen – und gemeinsam den nächsten Schritt überlegen." }],
+        bullets: []
+      }
+    },
+    "Externe Hilfe": {
+      einfach: {
+        text: [
+          { text: "Es gibt Beratungsstellen und Hilfsangebote." },
+          { text: "Eine vertraute Person kann mit dir dort anrufen oder schreiben." },
+          { text: "Du musst das nicht allein machen." },
+          { text: "Andere Menschen haben diese Probleme auch. Du bist nicht allein." }
+        ],
+        remember: "Es gibt immer jemanden, der helfen kann."
+      },
+      standard: {
+        text: [{ text: "Neben Menschen in deinem Umfeld gibt es Beratungsstellen und Hilfsangebote, an die du dich wenden kannst. Eine vertraute Person kann dich dorthin begleiten oder gemeinsam mit dir Kontakt aufnehmen. Solche Probleme haben viele – du bist damit nicht allein." }],
+        remember: "Es gibt immer jemanden, der mir helfen kann."
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Hier sind die wichtigsten Regeln aus diesem Thema noch einmal." }],
+        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Nicht sofort löschen.", "Die Nachricht zeigen.", "Unterstützung holen."]
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Mach bei Problemen erst einmal Stopp, antworte nicht vorschnell und lösche verdächtige Nachrichten nicht sofort. Zeig sie einer vertrauten Person und hol dir Unterstützung." }],
+        bullets: []
+      }
+    }
+  },
+
+  ki: {
+    "Start": {
+      einfach: { text: [
+        { text: "Hier geht es um KI. KI bedeutet künstliche Intelligenz." },
+        { text: "Du lernst: Was kann KI? Was kann KI nicht?" },
+        { text: "Du lernst, wie du KI sicher nutzt." }
+      ] },
+      standard: { text: [{ text: "In diesem Kapitel geht es um künstliche Intelligenz, kurz KI. Du erfährst, was KI leisten kann und was nicht, wo du ihr begegnest und wie du sie sicher und kritisch nutzt." }] }
+    },
+    "Was ist KI?": {
+      einfach: {
+        text: [
+          { text: "KI ist ein Computer-Programm." },
+          { text: "Das Programm hat sehr viele Texte und Bilder gelernt." },
+          { text: "Darum kann KI Fragen beantworten und Texte oder Bilder erstellen." }
+        ],
+        bullets: ["KI kann mit dir schreiben.", "KI kann mit dir sprechen.", "KI kann Bilder erstellen.", "KI kann Texte schreiben."],
+        remember: "KI ist ein Programm. KI ist kein Mensch."
+      },
+      standard: {
+        text: [{ text: "KI ist ein Computerprogramm, das aus sehr großen Mengen an Texten und Bildern gelernt hat. Dadurch kann sie Fragen beantworten sowie selbst Texte und Bilder erzeugen. Sie versteht die Welt aber nicht wie ein Mensch, sondern berechnet wahrscheinliche Antworten." }],
+        bullets: [],
+        remember: "KI ist ein lernendes Programm – kein Mensch."
+      }
+    },
+    "Wo triffst du KI?": {
+      einfach: {
+        text: [
+          { text: "KI steckt heute in vielen Apps." },
+          { text: "Manchmal siehst du die KI nicht sofort." },
+          { text: "Hier sind bekannte Beispiele." }
+        ],
+        bullets: ["Chatbots wie ChatGPT", "Sprach-Hilfen wie Alexa oder Siri", "KI in WhatsApp und Instagram, zum Beispiel Meta AI", "KI-Bilder und KI-Videos im Internet"],
+        remember: "KI steckt in vielen Apps – auch wenn ich sie nicht sehe."
+      },
+      standard: {
+        text: [{ text: "Künstliche Intelligenz steckt heute in vielen Programmen und Apps, oft ohne dass man es sofort merkt – etwa in Chatbots wie ChatGPT, in Sprachassistenten wie Alexa oder Siri, in WhatsApp und Instagram sowie in KI-erzeugten Bildern und Videos." }],
+        bullets: [],
+        remember: "KI ist vielerorts im Einsatz – auch unsichtbar."
+      }
+    },
+    "Ein Chatbot ist kein Mensch": {
+      einfach: {
+        text: [
+          { text: "Ein Chatbot schreibt sehr freundlich." },
+          { text: "Es kann sich wie ein Freund anfühlen." },
+          { text: "Aber ein Chatbot ist ein Programm und hat keine Gefühle." }
+        ],
+        warning: "Ein Chatbot ist kein echter Freund. Wichtige Sorgen besprichst du mit einem Menschen."
+      },
+      standard: {
+        text: [{ text: "Chatbots antworten freundlich und persönlich, sodass sich ein Gespräch fast wie mit einem Freund anfühlen kann. Trotzdem ist ein Chatbot nur ein Programm ohne echte Gefühle. Wichtige Sorgen solltest du mit einem Menschen besprechen." }],
+        warning: "Ein Chatbot ersetzt keine echten Bezugspersonen. Bei ernsten Sorgen wende dich an einen Menschen."
+      }
+    },
+    "KI macht Fehler": {
+      einfach: {
+        text: [
+          { text: "KI klingt oft sehr sicher." },
+          { text: "Aber KI kann Fehler machen." },
+          { text: "Manchmal erfindet KI sogar Dinge." },
+          { text: "Darum prüfst du wichtige Antworten." }
+        ],
+        examples: ["Die KI nennt eine falsche Telefon-Nummer.", "Die KI erzählt etwas, das nie passiert ist."]
+      },
+      standard: {
+        text: [{ text: "Auch wenn KI sehr überzeugend klingt, kann sie sich irren – und erfindet manchmal sogar Fakten, Namen oder Quellen. Verlass dich bei wichtigen Dingen nicht blind auf sie, sondern prüfe die Antworten an einer zweiten Stelle." }],
+        examples: []
+      }
+    },
+    "Keine privaten Daten": {
+      einfach: {
+        text: [
+          { text: "Was du der KI schreibst, wird oft gespeichert." },
+          { text: "Darum gibst du der KI keine privaten Daten." }
+        ],
+        bullets: ["kein Passwort", "keine Adresse", "keine Bank-Daten", "keine sehr privaten Geheimnisse"]
+      },
+      standard: {
+        text: [{ text: "Eingaben an eine KI werden häufig gespeichert und weiterverarbeitet. Gib deshalb keine sensiblen Informationen ein – etwa Passwörter, deine Adresse, Bankdaten oder sehr private Geheimnisse." }],
+        bullets: []
+      }
+    },
+    "Gesundheit und Geld": {
+      einfach: {
+        text: [
+          { text: "Bei Gesundheit und Geld ist Vorsicht wichtig." },
+          { text: "Die KI kennt dich nicht und kann falsche Tipps geben." },
+          { text: "Frag bei solchen Themen immer auch einen Menschen." }
+        ],
+        examples: ["Du bist krank und fragst die KI. Besser: Du fragst auch eine Ärztin oder einen Arzt.", "Du willst Geld ausgeben und die KI rät dir etwas. Besser: Du fragst eine Person, der du vertraust."]
+      },
+      standard: {
+        text: [{ text: "Bei Gesundheit und Geld ist besondere Vorsicht geboten: Die KI kennt deine persönliche Situation nicht und kann falsche oder gefährliche Ratschläge geben. Hol dir bei solchen Themen immer zusätzlich den Rat eines Menschen – etwa einer Ärztin, eines Arztes oder einer Vertrauensperson." }],
+        examples: []
+      }
+    },
+    "KI kann Bilder und Stimmen fälschen": {
+      einfach: {
+        text: [
+          { text: "KI kann Bilder erstellen, die echt aussehen." },
+          { text: "KI kann Stimmen nachmachen." },
+          { text: "Betrüger nutzen das manchmal aus." },
+          { text: "Mehr dazu lernst du im Thema „Fake News und KI-Fakes“." }
+        ],
+        warning: "Nicht alles, was echt aussieht, ist echt."
+      },
+      standard: {
+        text: [{ text: "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“." }],
+        warning: "Echt wirkende Bilder und Stimmen können mit KI gefälscht sein."
+      }
+    },
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Du darfst KI benutzen, sie kann dir helfen." },
+          { text: "Diese Regeln schützen dich dabei." }
+        ],
+        bullets: ["Ich weiß: KI ist ein Programm.", "Ich prüfe wichtige Antworten.", "Ich gebe keine privaten Daten ein.", "Bei Gesundheit und Geld frage ich Menschen.", "Bei Unsicherheit hole ich Hilfe."]
+      },
+      standard: {
+        text: [{ text: "Du darfst KI ruhig nutzen – sie kann dir bei vielem helfen. Behalte dabei einige Regeln im Kopf: Denk daran, dass KI ein Programm ist, prüfe wichtige Antworten, gib keine privaten Daten ein, frag bei Gesundheit und Geld zusätzlich Menschen und hol dir bei Unsicherheit Unterstützung." }],
+        bullets: []
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Du hast viel über KI gelernt. Diese Sätze kannst du dir merken." }],
+        bullets: ["KI ist ein Programm, kein Mensch.", "KI kann Fehler machen.", "Ich prüfe wichtige Antworten.", "Private Daten bleiben bei mir.", "Ich darf mir Unterstützung holen."],
+        remember: "Ich nutze KI mit Verstand."
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: KI ist ein Programm, kein Mensch, und kann Fehler machen. Prüfe wichtige Antworten, behalte deine privaten Daten für dich und hol dir bei Bedarf Unterstützung." }],
+        bullets: [],
+        remember: "Ich nutze KI bewusst und mit Verstand."
+      }
+    }
+  },
+
+  fakes: {
+    "Start": {
+      einfach: { text: [
+        { text: "Hier geht es um Fakes. Fake bedeutet: gefälscht oder nicht echt." },
+        { text: "Du lernst, wie du falsche Nachrichten erkennst." },
+        { text: "Du lernst, wie du falsche Bilder und Stimmen erkennst." }
+      ] },
+      standard: { text: [{ text: "In diesem Kapitel geht es um Fakes – also um Gefälschtes im Internet. Du erfährst, wie du falsche Nachrichten erkennst und wie du gefälschte Bilder, Videos und Stimmen einordnest." }] }
+    },
+    "Was sind Fake News?": {
+      einfach: {
+        text: [
+          { text: "Fake News sind falsche Nachrichten." },
+          { text: "Jemand verbreitet sie mit Absicht." },
+          { text: "Sie sehen oft aus wie echte Nachrichten." },
+          { text: "Darum sind sie schwer zu erkennen." }
+        ],
+        remember: "Nicht jede Nachricht im Internet ist wahr."
+      },
+      standard: {
+        text: [{ text: "Fake News sind absichtlich verbreitete Falschmeldungen. Sie sind oft so aufgemacht wie echte Nachrichten und deshalb schwer zu erkennen. Genau das macht sie gefährlich." }],
+        remember: "Nicht jede Nachricht im Internet ist wahr."
+      }
+    },
+    "Warum gibt es Fake News?": {
+      einfach: {
+        text: [{ text: "Menschen machen Fake News aus verschiedenen Gründen." }],
+        bullets: ["Sie wollen mit vielen Klicks Geld verdienen.", "Sie wollen Menschen wütend machen.", "Sie wollen, dass du etwas Falsches glaubst.", "Sie wollen eine Meinung verbreiten."],
+        remember: "Fake News haben ein Ziel. Sie wollen mein Denken verändern."
+      },
+      standard: {
+        text: [{ text: "Hinter Fake News stecken meist klare Absichten: Manche wollen mit vielen Klicks Geld verdienen, andere Menschen verärgern, etwas Falsches glaubhaft machen oder eine bestimmte Meinung verbreiten." }],
+        bullets: [],
+        remember: "Fake News verfolgen ein Ziel – sie wollen mein Denken beeinflussen."
+      }
+    },
+    "KI-Bilder erkennen": {
+      einfach: {
+        text: [
+          { text: "KI kann Bilder erstellen, die echt aussehen." },
+          { text: "Manche Fehler kannst du erkennen." },
+          { text: "Aber Achtung: Viele KI-Bilder haben keine Fehler mehr." }
+        ],
+        bullets: ["Schau auf Hände und Finger.", "Schau auf Schrift im Bild.", "Schau auf Licht und Schatten.", "Wirkt das Bild zu perfekt?"]
+      },
+      standard: {
+        text: [{ text: "KI kann Bilder erzeugen, die täuschend echt wirken. Manchmal verraten kleine Fehler die Fälschung – etwa an Händen, Schrift oder Schatten. Verlass dich aber nicht darauf: Viele KI-Bilder sind inzwischen fehlerfrei." }],
+        bullets: []
+      }
+    },
+    "Gefälschte Videos: Deepfakes": {
+      einfach: {
+        text: [
+          { text: "Ein Deepfake ist ein gefälschtes Video." },
+          { text: "KI tauscht darin Gesicht oder Stimme aus." },
+          { text: "Im Video sagt eine Person Dinge, die sie nie gesagt hat." },
+          { text: "Oft werden bekannte Menschen gefälscht." }
+        ],
+        examples: ["Ein Video zeigt einen Promi, der Werbung für Geld-Anlagen macht. Das Video ist gefälscht.", "Ein Video zeigt eine Politikerin, die etwas Schlimmes sagt. Das Video ist gefälscht."]
+      },
+      standard: {
+        text: [{ text: "Ein Deepfake ist ein mit KI gefälschtes Video, in dem Gesicht oder Stimme ausgetauscht werden. So scheint eine Person etwas zu sagen, das sie nie gesagt hat – oft trifft es bekannte Persönlichkeiten. Bleib deshalb auch bei „Video-Beweisen“ kritisch." }],
+        examples: []
+      }
+    },
+    "Geklonte Stimmen am Telefon": {
+      einfach: {
+        text: [
+          { text: "KI kann Stimmen nachmachen." },
+          { text: "Betrüger rufen an. Die Stimme klingt wie deine Familie." },
+          { text: "Die Stimme sagt: „Ich brauche schnell Geld.“" },
+          { text: "Das nennt man Schockanruf." }
+        ],
+        warning: "Leg auf. Ruf die Person selbst an – mit der Nummer, die du kennst."
+      },
+      standard: {
+        text: [{ text: "KI kann Stimmen täuschend echt nachahmen. Betrüger nutzen das für sogenannte Schockanrufe: Eine vertraut klingende Stimme bittet dringend um Geld. Lass dich nicht unter Druck setzen, leg auf und ruf die Person über ihre dir bekannte Nummer selbst zurück." }],
+        warning: "Bei dringenden Geldforderungen am Telefon: auflegen und die Person über die bekannte Nummer selbst anrufen."
+      }
+    },
+    "Nachrichten prüfen": {
+      einfach: {
+        text: [
+          { text: "Du kannst Nachrichten prüfen." },
+          { text: "Diese Fragen helfen dir." }
+        ],
+        bullets: ["Wer hat das geschrieben?", "Steht das auch bei bekannten Nachrichten-Seiten?", "Wie alt ist die Nachricht?", "Gibt es eine Quelle?"]
+      },
+      standard: {
+        text: [{ text: "Du kannst Meldungen mit ein paar einfachen Fragen prüfen: Wer hat sie verfasst? Berichten auch bekannte, seriöse Nachrichtenseiten darüber? Wie aktuell ist die Meldung, und wird eine Quelle genannt?" }],
+        bullets: []
+      }
+    },
+    "Starke Gefühle sind ein Warnzeichen": {
+      einfach: { text: [
+        { text: "Fake News lösen oft starke Gefühle aus." },
+        { text: "Zum Beispiel Wut oder Angst." },
+        { text: "Starke Gefühle sind ein Warnzeichen." },
+        { text: "Dann lohnt sich das Prüfen besonders." }
+      ] },
+      standard: { text: [{ text: "Fake News sind oft so gemacht, dass sie starke Gefühle wie Wut oder Angst auslösen – denn wer aufgewühlt ist, prüft weniger. Genau deshalb gilt: Wenn dich eine Meldung stark emotional trifft, prüfe sie besonders gründlich." }] }
+    },
+    "Nicht einfach weiterleiten": {
+      einfach: { text: [
+        { text: "Wenn du Fakes weiterleitest, verbreiten sie sich." },
+        { text: "Dann glauben noch mehr Menschen die Lüge." },
+        { text: "Darum gilt: erst prüfen, dann teilen." },
+        { text: "Im Zweifel: nicht teilen." }
+      ] },
+      standard: { text: [{ text: "Jede Weiterleitung hilft einer Falschmeldung, sich zu verbreiten – und mehr Menschen glauben sie. Teile deshalb nur, was du geprüft hast. Im Zweifel gilt: lieber nicht weiterleiten." }] }
+    },
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Du kannst dich schützen." },
+          { text: "Diese Regeln helfen dir." }
+        ],
+        bullets: ["Ich glaube nicht alles sofort.", "Ich prüfe: Wer schreibt das? Steht das auch woanders?", "Bei starken Gefühlen mache ich langsam.", "Im Zweifel teile ich nicht.", "Ich kann eine Person fragen, der ich vertraue."]
+      },
+      standard: {
+        text: [{ text: "Du kannst dich gut schützen: Glaub nicht alles sofort, prüfe Absender und ob seriöse Quellen dasselbe berichten, und werde besonders aufmerksam, wenn eine Meldung starke Gefühle auslöst. Teile im Zweifel nicht und frag bei Unsicherheit eine Person, der du vertraust." }],
+        bullets: []
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Du hast viel über Fakes gelernt. Diese Sätze kannst du dir merken." }],
+        bullets: ["Nicht alles im Internet ist wahr.", "Bilder, Videos und Stimmen können gefälscht sein.", "Starke Gefühle sind ein Warnzeichen.", "Erst prüfen, dann teilen.", "Ich darf mir Unterstützung holen."],
+        remember: "Erst prüfen. Dann glauben."
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Nicht alles im Internet ist wahr, und auch Bilder, Videos und Stimmen lassen sich fälschen. Starke Gefühle sind ein Warnzeichen – prüfe erst und teile dann. Bei Unsicherheit darfst du dir Unterstützung holen." }],
+        bullets: [],
+        remember: "Erst prüfen, dann glauben."
+      }
+    }
+  },
+
+  betrug: {
+    "Start": {
+      einfach: { text: [
+        { text: "Hier geht es um Betrug im Internet." },
+        { text: "Betrüger wollen dein Geld oder deine Daten." },
+        { text: "Du lernst die bekannten Tricks." },
+        { text: "Wer die Tricks kennt, ist besser geschützt." }
+      ] },
+      standard: { text: [{ text: "In diesem Kapitel geht es um Betrug im Internet. Betrüger haben es auf dein Geld oder deine Daten abgesehen. Du lernst die häufigsten Maschen kennen – denn wer die Tricks kennt, fällt seltener darauf herein." }] }
+    },
+    "Was ist Phishing?": {
+      einfach: {
+        text: [
+          { text: "Phishing ist ein Trick mit falschen Nachrichten." },
+          { text: "Die Nachricht sieht aus wie von deiner Bank oder einer Firma." },
+          { text: "In der Nachricht ist ein Link." },
+          { text: "Der Link führt zu einer falschen Seite, die deine Daten stehlen will." }
+        ],
+        examples: ["Eine E-Mail sagt: „Ihr Konto wird gesperrt. Klicken Sie hier.“", "Eine SMS sagt: „Bestätigen Sie Ihre Bank-Daten.“"]
+      },
+      standard: {
+        text: [{ text: "Beim Phishing verschicken Betrüger Nachrichten, die täuschend echt aussehen – etwa angeblich von deiner Bank oder einem bekannten Unternehmen. Über einen Link wirst du auf eine gefälschte Seite gelockt, die deine Zugangsdaten abgreifen soll. Gib dort nichts ein." }],
+        examples: []
+      }
+    },
+    "Falsche Nachrichten erkennen": {
+      einfach: {
+        text: [
+          { text: "Betrugs-Nachrichten haben oft die gleichen Zeichen." },
+          { text: "Diese Warnzeichen kannst du lernen." }
+        ],
+        bullets: ["Die Nachricht macht Druck: „Sofort! Schnell! Letzte Chance!“", "Die Nachricht droht: „Sonst wird Ihr Konto gesperrt.“", "Du sollst auf einen Link klicken.", "Du sollst Daten eingeben oder Geld zahlen.", "Die Nachricht kommt überraschend."],
+        remember: "Druck und Drohung sind Warnzeichen."
+      },
+      standard: {
+        text: [{ text: "Betrugsnachrichten ähneln sich oft: Sie erzeugen Druck oder drohen mit Folgen, fordern dich zum Klicken auf einen Link auf, verlangen Daten oder Geld – und kommen meist überraschend. Wer diese Muster kennt, erkennt den Betrug leichter." }],
+        bullets: [],
+        remember: "Druck und Drohung sind typische Warnzeichen für Betrug."
+      }
+    },
+    "Der Paket-Trick": {
+      einfach: {
+        text: [
+          { text: "Eine SMS sagt: „Ihr Paket wartet.“" },
+          { text: "Du sollst eine kleine Gebühr zahlen." },
+          { text: "Oder du sollst auf einen Link klicken." },
+          { text: "Das ist fast immer Betrug." }
+        ],
+        warning: "Echte Paket-Dienste fordern kein Geld per SMS."
+      },
+      standard: {
+        text: [{ text: "Eine beliebte Masche ist die Paket-SMS: Angeblich wartet eine Sendung, du sollst eine kleine Gebühr zahlen oder einen Link anklicken. Dahinter steckt fast immer Betrug. Seriöse Paketdienste fordern kein Geld per SMS." }],
+        warning: "Echte Paketdienste verlangen niemals Gebühren per SMS-Link."
+      }
+    },
+    "Der Hallo-Mama-Trick": {
+      einfach: { text: [
+        { text: "Eine WhatsApp-Nachricht sagt: „Hallo Mama, hallo Papa.“" },
+        { text: "„Ich habe eine neue Nummer.“" },
+        { text: "„Mein Handy ist kaputt. Ich brauche schnell Geld.“" },
+        { text: "Das ist ein bekannter Betrug." }
+      ] },
+      standard: { text: [{ text: "Beim „Hallo-Mama-Trick“ geben sich Betrüger über WhatsApp als Sohn oder Tochter mit neuer Nummer aus und bitten dringend um Geld. Überweise nichts, sondern ruf die echte Person unter ihrer bekannten Nummer an." }] }
+    },
+    "Schockanrufe": {
+      einfach: {
+        text: [
+          { text: "Ein Anruf macht dir große Angst." },
+          { text: "Zum Beispiel: „Ihr Kind hatte einen Unfall. Wir brauchen Geld.“" },
+          { text: "Mit KI kann die Stimme sogar echt klingen." },
+          { text: "Auch falsche Polizisten rufen an." }
+        ],
+        warning: "Die echte Polizei fordert nie Geld am Telefon."
+      },
+      standard: {
+        text: [{ text: "Bei Schockanrufen erzeugen Betrüger gezielt Angst – etwa mit der Behauptung, ein Angehöriger hatte einen Unfall und brauche sofort Geld. Mit KI kann die Stimme sogar vertraut klingen, und manche geben sich als Polizei aus. Leg auf und ruf die echte Person oder Stelle selbst an." }],
+        warning: "Polizei und Behörden verlangen niemals Geld oder Wertsachen am Telefon."
+      }
+    },
+    "Falsche Gewinne": {
+      einfach: { text: [
+        { text: "Eine Nachricht sagt: „Sie haben gewonnen!“" },
+        { text: "Aber du hast bei keinem Gewinnspiel mitgemacht." },
+        { text: "Du sollst zuerst eine Gebühr zahlen." },
+        { text: "Das ist Betrug. Echte Gewinne kosten kein Geld." }
+      ] },
+      standard: { text: [{ text: "Nachrichten über angebliche Gewinne sind oft Betrug – vor allem, wenn du gar nicht an einem Gewinnspiel teilgenommen hast. Sobald du für den „Gewinn“ zuerst zahlen sollst, ist klar: Echte Gewinne kosten kein Geld." }] }
+    },
+    "Abo-Fallen": {
+      einfach: {
+        text: [
+          { text: "Ein Angebot sagt: „Kostenlos testen!“" },
+          { text: "Aber im Kleingedruckten steht: Danach kostet es jeden Monat Geld." },
+          { text: "Das nennt man Abo-Falle." },
+          { text: "Lies genau, bevor du etwas bestellst." }
+        ],
+        bullets: ["Steht da ein Preis pro Monat?", "Wie lange läuft das Abo?", "Frag eine Person, bevor du bestellst."],
+        remember: "Kostenlos kann teuer werden. Ich lese genau."
+      },
+      standard: {
+        text: [{ text: "Bei Abo-Fallen lockt ein „kostenloser Test“, doch im Kleingedruckten verbirgt sich eine monatliche Zahlung. Lies vor jeder Bestellung genau nach: Gibt es einen monatlichen Preis, wie lange läuft der Vertrag? Im Zweifel frag jemanden, bevor du bestellst." }],
+        bullets: [],
+        remember: "„Kostenlos“ kann teuer werden – ich lese das Kleingedruckte."
+      }
+    },
+    "Codes nie weitergeben": {
+      einfach: { text: [
+        { text: "Manchmal bekommst du einen Code per SMS." },
+        { text: "Zum Beispiel von der Bank oder von WhatsApp." },
+        { text: "Dieser Code ist nur für dich." },
+        { text: "Betrüger fragen nach diesem Code. Gib ihn nie weiter." }
+      ] },
+      standard: { text: [{ text: "Bestätigungscodes per SMS – etwa von der Bank oder von WhatsApp – sind nur für dich bestimmt. Betrüger versuchen, an sie zu gelangen, um dein Konto zu übernehmen. Gib einen solchen Code niemals weiter." }] }
+    },
+    "Was tun nach einem Betrug?": {
+      einfach: {
+        text: [
+          { text: "Betrug kann jedem passieren." },
+          { text: "Du musst dich nicht schämen." },
+          { text: "Wichtig ist: Hol dir schnell Hilfe." }
+        ],
+        bullets: ["Sag einer Person Bescheid, der du vertraust.", "Bei Bank-Daten: Ruf sofort die Bank an und lass die Karte sperren.", "Der Sperr-Notruf ist die 116 116.", "Du kannst Anzeige bei der Polizei machen.", "Heb die Nachricht als Beweis auf."],
+        remember: "Betrug ist nicht meine Schuld. Ich hole mir Hilfe."
+      },
+      standard: {
+        text: [{ text: "Betrug kann jedem passieren – dafür musst du dich nicht schämen. Wichtig ist schnelles Handeln: Informiere eine Vertrauensperson, lass bei betroffenen Bankdaten sofort die Karte sperren (Sperr-Notruf 116 116), erstatte gegebenenfalls Anzeige bei der Polizei und bewahre die Nachricht als Beweis auf." }],
+        bullets: [],
+        remember: "Betrug ist nicht meine Schuld – ich hole mir schnell Hilfe."
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Du kennst jetzt die wichtigsten Tricks. Diese Sätze kannst du dir merken." }],
+        bullets: ["Druck und Drohung sind Warnzeichen.", "Ich klicke nicht auf fremde Links.", "Ich gebe nie Codes oder Bank-Daten weiter.", "Echte Gewinne kosten kein Geld.", "Bei Geld-Forderungen rufe ich selbst zurück.", "Nach einem Betrug hole ich mir sofort Hilfe."],
+        remember: "Ich lasse mich nicht unter Druck setzen."
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Druck und Drohungen sind Warnzeichen. Klick nicht auf fremde Links und gib niemals Codes oder Bankdaten weiter. Echte Gewinne kosten nichts, bei Geldforderungen rufst du selbst zurück, und nach einem Betrug holst du dir sofort Hilfe." }],
+        bullets: [],
+        remember: "Ich lasse mich nicht unter Druck setzen."
+      }
+    }
+  },
+
+  einkaufen: {
+    "Start": {
+      einfach: { text: [
+        { text: "Hier geht es um Einkaufen im Internet." },
+        { text: "Du lernst, wie du gute Shops erkennst." },
+        { text: "Du lernst, wie du sicher bezahlst." },
+        { text: "Du lernst, was du bei Problemen tun kannst." }
+      ] },
+      standard: { text: [{ text: "In diesem Kapitel geht es um sicheres Einkaufen im Internet. Du erfährst, wie du seriöse Shops erkennst, sicher bezahlst und was du tun kannst, wenn beim Einkauf etwas schiefgeht." }] }
+    },
+    "Gute Shops erkennen": {
+      einfach: {
+        text: [
+          { text: "Es gibt viele gute Shops im Internet." },
+          { text: "Daran erkennst du einen guten Shop." }
+        ],
+        bullets: ["Der Shop ist bekannt.", "Der Shop hat ein Impressum mit Name und Adresse der Firma.", "Es gibt echte Bewertungen von Kunden.", "Die Preise sind normal, nicht verdächtig billig."],
+        remember: "Ich kaufe bei Shops, die ich kenne oder geprüft habe."
+      },
+      standard: {
+        text: [{ text: "Seriöse Online-Shops erkennst du an mehreren Merkmalen: Sie sind bekannt oder gut bewertet, haben ein vollständiges Impressum mit Firmenname und Adresse und verlangen keine verdächtig niedrigen Preise. Echte Kundenbewertungen geben zusätzliche Sicherheit." }],
+        bullets: [],
+        remember: "Ich kaufe bevorzugt bei Shops, die ich kenne oder vorher geprüft habe."
+      }
+    },
+    "Fake-Shops erkennen": {
+      einfach: {
+        text: [
+          { text: "Ein Fake-Shop ist ein falscher Shop." },
+          { text: "Du bezahlst, aber die Ware kommt nie." },
+          { text: "Fake-Shops sehen oft sehr echt aus." },
+          { text: "Diese Warnzeichen helfen dir." }
+        ],
+        bullets: ["Alles ist sehr, sehr billig.", "Du kannst nur per Vorkasse zahlen.", "Es gibt kein Impressum.", "Der Name der Internet-Seite ist komisch."]
+      },
+      standard: {
+        text: [{ text: "Fake-Shops sehen oft täuschend echt aus, doch nach der Zahlung kommt keine Ware. Stutzig machen sollten dich extrem niedrige Preise, fehlendes Impressum, eine merkwürdige Internetadresse und die Vorgabe, nur per Vorkasse zahlen zu können." }],
+        bullets: []
+      }
+    },
+    "Sicher bezahlen": {
+      einfach: {
+        text: [
+          { text: "Es gibt verschiedene Arten zu bezahlen." },
+          { text: "Manche sind sicherer als andere." }
+        ],
+        bullets: ["Kauf auf Rechnung ist sicher: Du zahlst erst, wenn die Ware da ist.", "PayPal und ähnliche Dienste haben einen Käufer-Schutz.", "Vorkasse an Fremde ist riskant: Das Geld ist oft weg.", "Sende nie Geld an Privat-Personen, die du nicht kennst."]
+      },
+      standard: {
+        text: [{ text: "Beim Bezahlen gibt es sicherere und riskantere Wege. Der Kauf auf Rechnung ist sicher, weil du erst nach Erhalt der Ware zahlst. Dienste wie PayPal bieten einen Käuferschutz. Vorkasse an Unbekannte ist dagegen riskant – das Geld ist im Betrugsfall meist verloren." }],
+        bullets: []
+      }
+    },
+    "Bank-Daten schützen": {
+      einfach: { text: [
+        { text: "Deine Bank-Daten sind sehr wichtig." },
+        { text: "PIN und TAN sind geheim." },
+        { text: "Deine Bank fragt nie per E-Mail oder Telefon danach." },
+        { text: "Wer danach fragt, ist ein Betrüger." }
+      ] },
+      standard: { text: [{ text: "Deine Bankdaten verdienen besonderen Schutz: PIN und TAN sind streng geheim. Deine Bank wird dich niemals per E-Mail oder Telefon danach fragen. Wer das doch tut, ist ein Betrüger." }] }
+    },
+    "Versteckte Kosten in Apps und Spielen": {
+      einfach: {
+        text: [
+          { text: "Viele Spiele sind erst kostenlos." },
+          { text: "Im Spiel kannst du dann Dinge kaufen." },
+          { text: "Das kostet echtes Geld." },
+          { text: "Viele kleine Käufe werden schnell teuer." }
+        ],
+        examples: ["Ein Spiel verkauft Extra-Leben für 2 Euro.", "Eine App verkauft Münzen für 5 Euro."],
+        remember: "Auch kleine Käufe kosten echtes Geld."
+      },
+      standard: {
+        text: [{ text: "Viele Apps und Spiele sind zunächst gratis, verkaufen dann aber Zusatzinhalte gegen echtes Geld. Solche In-App-Käufe wirken klein, summieren sich aber schnell. Behalte im Blick, was du tatsächlich ausgibst." }],
+        examples: [],
+        remember: "Auch kleine In-App-Käufe kosten echtes Geld und summieren sich."
+      }
+    },
+    "Kauf-Druck widerstehen": {
+      einfach: { text: [
+        { text: "Shops machen oft Druck." },
+        { text: "Zum Beispiel: „Nur noch heute! Nur noch 2 Stück!“" },
+        { text: "Das soll dich zum schnellen Kaufen bringen." },
+        { text: "Du darfst dir Zeit nehmen." }
+      ] },
+      standard: { text: [{ text: "Online-Shops erzeugen oft künstlichen Druck – etwa mit „Nur noch heute!“ oder „Nur noch 2 Stück!“. Das soll dich zu einem schnellen Kauf verleiten. Lass dich nicht hetzen: Du darfst dir Zeit nehmen und in Ruhe überlegen." }] }
+    },
+    "Vor dem Kaufen prüfen": {
+      einfach: {
+        text: [
+          { text: "Prüfe vor dem letzten Klick." },
+          { text: "Diese Fragen helfen dir." }
+        ],
+        bullets: ["Was kostet es wirklich? Mit Versand?", "Ist es ein Abo oder ein einmaliger Kauf?", "Brauche ich das wirklich?", "Habe ich genug Geld dafür?"],
+        remember: "Erst prüfen. Dann kaufen."
+      },
+      standard: {
+        text: [{ text: "Bevor du auf „Kaufen“ klickst, lohnt sich ein kurzer Check: Was kostet der Artikel wirklich, inklusive Versand? Handelt es sich um einen einmaligen Kauf oder ein Abo? Brauchst du das Produkt wirklich, und ist genug Geld da?" }],
+        bullets: [],
+        remember: "Erst prüfen, dann kaufen."
+      }
+    },
+    "Falsch gekauft? Das kannst du tun": {
+      einfach: {
+        text: [
+          { text: "Ein Fehl-Kauf kann passieren." },
+          { text: "Oft kannst du etwas tun." }
+        ],
+        bullets: ["Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf.", "Schreib dem Shop eine Nachricht.", "Frag eine Person, der du vertraust, um Hilfe.", "Bei Betrug: Ruf deine Bank an."],
+        remember: "Online-Käufe kann ich oft 14 Tage zurückgeben."
+      },
+      standard: {
+        text: [{ text: "Ein Fehlkauf lässt sich oft korrigieren: Bei vielen Online-Käufen hast du ein 14-tägiges Widerrufsrecht und kannst die Ware zurückgeben. Wende dich an den Shop, hol dir bei Bedarf Hilfe von einer Vertrauensperson und ruf bei Betrug sofort deine Bank an." }],
+        bullets: [],
+        remember: "Viele Online-Käufe kann ich innerhalb von 14 Tagen widerrufen."
+      }
+    },
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Du kannst sicher im Internet einkaufen." },
+          { text: "Diese Regeln helfen dir." }
+        ],
+        bullets: ["Ich kaufe bei Shops, die ich kenne.", "Ich prüfe Preis und Impressum.", "Ich zahle möglichst auf Rechnung.", "PIN und TAN bleiben geheim.", "Ich lasse mich nicht hetzen.", "Vor dem Kaufen kann ich eine Person fragen."]
+      },
+      standard: {
+        text: [{ text: "Sicheres Einkaufen gelingt mit einfachen Regeln: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim, lass dich nicht zu schnellen Käufen drängen und frag im Zweifel vor dem Kauf eine Vertrauensperson." }],
+        bullets: []
+      }
+    },
+    "Das merke ich mir": {
+      einfach: {
+        text: [{ text: "Du hast viel über sicheres Einkaufen gelernt. Diese Sätze kannst du dir merken." }],
+        bullets: ["Sehr billig und nur Vorkasse: Warnzeichen.", "Rechnung ist sicherer als Vorkasse.", "PIN und TAN bleiben geheim.", "Ich lasse mich nicht hetzen.", "Ich darf mir Unterstützung holen."],
+        remember: "Erst prüfen. Dann kaufen."
+      },
+      standard: {
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Sehr niedrige Preise und reine Vorkasse sind Warnzeichen. Der Kauf auf Rechnung ist sicherer als Vorkasse, PIN und TAN bleiben geheim, und du lässt dich nicht hetzen. Bei Unsicherheit darfst du dir Unterstützung holen." }],
+        bullets: [],
+        remember: "Erst prüfen, dann kaufen."
+      }
+    }
+  }
+};
+
+/* Fassungen mit den Lektionen in topics.js verknüpfen */
+function applyContentVersions() {
+  if (typeof topics === "undefined" || !Array.isArray(topics)) return;
+  topics.forEach((topic) => {
+    const themeVersions = CONTENT_VERSIONS[topic.id];
+    if (!themeVersions || !Array.isArray(topic.lessons)) return;
+    topic.lessons.forEach((lesson) => {
+      const lv = themeVersions[lesson.title];
+      if (lv) lesson.versions = Object.assign({}, lesson.versions, lv);
+    });
+  });
+}
+
+applyContentVersions();
