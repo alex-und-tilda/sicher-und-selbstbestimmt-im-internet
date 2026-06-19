@@ -495,6 +495,94 @@ button {
   line-height: 1.5;
 }
 
+/* ---------- Begleit-Panel (Für Begleitpersonen / Fachkräfte) ---------- */
+
+.companion-panel {
+  position: relative;
+  margin-top: 22px;
+  border: 1.5px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+  overflow: hidden;
+}
+
+.companion-panel > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 44px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.companion-panel > summary::-webkit-details-marker {
+  display: none;
+}
+
+.companion-panel > summary::after {
+  content: "\25be";
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  color: var(--ink-soft);
+}
+
+.companion-panel[open] > summary::after {
+  content: "\25b4";
+}
+
+.companion-panel > summary:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.companion-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.companion-hint {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.companion-body {
+  padding: 4px 18px 20px;
+}
+
+.companion-intro {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.companion-section {
+  margin-bottom: 14px;
+}
+
+.companion-section h4 {
+  font-size: 1.02rem;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.companion-section ul {
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+.companion-section li {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+
 /* ---------- Themen-Karten ---------- */
 
 .topic-grid {

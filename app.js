@@ -444,7 +444,11 @@ const ARASAAC_PICTO = {
   "pikto-fake": 22198,
   "pikto-done": 28429,
   "pikto-screen": 2910,
-  "pikto-pause": 28649
+  "pikto-pause": 28649,
+  "pikto-location": 24161,
+  "pikto-link": 16913,
+  "pikto-feel": 11476,
+  "pikto-ask": 7217
 };
 
 function pictoSrc(key) {
@@ -991,6 +995,41 @@ function renderMenu() {
    Themenseite: Lernweg wählen
    ============================================================ */
 
+/* Begleit-Panel „Für Begleitpersonen und Fachkräfte" (eigene Ebene,
+   keine Sprach-Stufe). Erscheint nur, wenn das Thema Begleit-Material hat. */
+function buildCompanionPanel(topic) {
+  const c = topic && topic.companion;
+  if (!c) return "";
+  const sections = [
+    ["Lernziele", c.lernziele],
+    ["Methodische Hinweise", c.methodik],
+    ["Gesprächsanlässe", c.gespraechsanlaesse],
+    ["Hinweise zur Begleitung", c.begleithinweise],
+    ["Rechts- und Fachbezüge", c.rechtsbezuege],
+    ["Alltagstransfer", c.transfer]
+  ];
+  const blocks = sections
+    .filter(([, items]) => Array.isArray(items) && items.length)
+    .map(([titel, items]) =>
+      `<div class="companion-section">
+         <h4>${escapeHtml(titel)}</h4>
+         <ul>${items.map(it => `<li>${escapeHtml(it)}</li>`).join("")}</ul>
+       </div>`)
+    .join("");
+  if (!blocks) return "";
+  return `
+    <details class="companion-panel">
+      <summary>
+        <span class="companion-badge">Für Begleitpersonen und Fachkräfte</span>
+        <span class="companion-hint">Lernziele, Methodik, Rechtsbezüge – zum Aufklappen</span>
+      </summary>
+      <div class="companion-body">
+        <p class="companion-intro">Diese Hinweise richten sich an Betreuende, Assistenz, Angehörige und Fachkräfte. Sie sind nicht Teil der Lern-Texte.</p>
+        ${blocks}
+      </div>
+    </details>`;
+}
+
 function renderTopicChoice(topicId) {
   stopReading();
   const topic = getTopicById(topicId);
@@ -1063,6 +1102,8 @@ function renderTopicChoice(topicId) {
           </span>
         </button>
       </div>
+
+      ${buildCompanionPanel(topic)}
 
       ${buildSupportBox()}
     </section>

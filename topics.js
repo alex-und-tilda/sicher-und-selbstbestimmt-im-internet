@@ -880,7 +880,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du darfst Gruppen stumm schalten."
       },
       {
-        "question": "Was ist bei Sprachnachrichten wichtig?",
+        "question": "Was ist bei Sprach-Nachrichten wichtig?",
         "answers": [
           "Vorher überlegen.",
           "Alles sagen."
@@ -951,7 +951,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du kannst Bilder und Sprachnachrichten senden.",
+            "text": "Du kannst Bilder und Sprach-Nachrichten senden.",
             "pictogram": "pikto-photo"
           },
           {
@@ -1015,7 +1015,7 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
-            "text": "Auch Sprachnachrichten können mit KI gefälscht sein.",
+            "text": "Auch Sprach-Nachrichten können mit KI gefälscht sein.",
             "pictogram": "pikto-message"
           },
           {
@@ -1025,7 +1025,7 @@ const topics = [
         ],
         "examples": [
           "Hallo Papa, mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir Geld überweisen?",
-          "Eine Sprachnachricht klingt wie deine Schwester. Sie will Geld. Die Stimme kann gefälscht sein."
+          "Eine Sprach-Nachricht klingt wie deine Schwester. Sie will Geld. Die Stimme kann gefälscht sein."
         ],
         "practice": {
           "question": "Eine fremde Nummer bittet um Geld. Was ist besser?",
@@ -1139,7 +1139,7 @@ const topics = [
         "icon": "photo",
         "text": [
           {
-            "text": "Ein Foto kann weitergeschickt werden.",
+            "text": "Ein Foto kann weiter-geschickt werden.",
             "pictogram": "pikto-photo"
           },
           {
@@ -1374,7 +1374,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du darfst Gruppen stumm schalten."
       },
       {
-        "question": "Was ist bei Sprachnachrichten wichtig?",
+        "question": "Was ist bei Sprach-Nachrichten wichtig?",
         "answers": [
           "Vorher überlegen.",
           "Alles sagen."
@@ -2113,7 +2113,7 @@ const topics = [
     ],
     "quiz": [
       {
-        "question": "Was prüfst du vor dem Posten eines Fotos?",
+        "question": "Was prüfst du, bevor du ein Foto postest?",
         "answers": [
           "Was zu sehen ist.",
           "Nur die Farbe."
@@ -2253,7 +2253,7 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Was prüfst du vor dem Posten eines Fotos?",
+          "question": "Was prüfst du, bevor du ein Foto postest?",
           "answers": [
             "Was zu sehen ist.",
             "Nur die Farbe."
@@ -2541,7 +2541,7 @@ const topics = [
     "illustration": "assets/illustrations/instagram.svg",
     "quizQuestions": [
       {
-        "question": "Was prüfst du vor dem Posten eines Fotos?",
+        "question": "Was prüfst du, bevor du ein Foto postest?",
         "answers": [
           "Was zu sehen ist.",
           "Nur die Farbe."
@@ -3517,7 +3517,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "So kann dein Bild weitergeschickt werden.",
+            "text": "So kann dein Bild weiter-geschickt werden.",
             "pictogram": "pikto-photo"
           }
         ],
@@ -4912,7 +4912,7 @@ const topics = [
         "icon": "help",
         "text": [
           {
-            "text": "Es gibt Beratungsstellen und Hilfsangebote.",
+            "text": "Es gibt Beratungs-Stellen und Hilfsangebote.",
             "pictogram": "pikto-help"
           },
           {

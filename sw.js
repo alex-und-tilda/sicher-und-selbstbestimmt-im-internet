@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-06p";
+const CACHE_VERSION = "v2026-06q";
 const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
@@ -17,6 +17,7 @@ const PRECACHE_URLS = [
   "./app.js",
   "./topics.js",
   "./content-de.js",
+  "./begleitung-de.js",
   "./favicon.svg",
   "./manifest.webmanifest",
   "./404.html",
