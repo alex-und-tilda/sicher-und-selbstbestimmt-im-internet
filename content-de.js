@@ -1553,3 +1553,30 @@ function applyContentVersions() {
 }
 
 applyContentVersions();
+
+/* ------------------------------------------------------------
+   Einstiegsfrage (Self-Assessment) je Sprachstufe – optional.
+   Fehlt eine Stufe, nutzt die App die Basis aus topics.js.
+   ------------------------------------------------------------ */
+const SELF_ASSESSMENT_VERSIONS = {
+  datenschutz: {
+    einfach: {
+      question: "Wie gut kennst du dich mit dem Schutz deiner Daten aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie schätzt du dein Wissen zum Schutz deiner persönlichen Daten ein?",
+      options: ["Eher gering", "Mittel", "Ziemlich gut"]
+    }
+  }
+};
+
+function applySelfAssessmentVersions() {
+  if (typeof topics === "undefined" || !Array.isArray(topics)) return;
+  topics.forEach((topic) => {
+    const v = SELF_ASSESSMENT_VERSIONS[topic.id];
+    if (v) topic.saVersions = v;
+  });
+}
+
+applySelfAssessmentVersions();

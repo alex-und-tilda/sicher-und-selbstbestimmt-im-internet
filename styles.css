@@ -583,6 +583,23 @@ button {
   color: var(--ink);
 }
 
+.companion-print {
+  margin-top: 8px;
+  min-height: 48px;
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--accent-dark);
+}
+
+.companion-print:hover {
+  background: var(--accent-soft);
+}
+
 /* ---------- Themen-Karten ---------- */
 
 .topic-grid {

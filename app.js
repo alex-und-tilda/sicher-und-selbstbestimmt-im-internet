@@ -58,6 +58,19 @@ function setLanguageLevel(level) {
 /* Inhalt einer Lektion für die gewählte Sprachstufe holen.
    Fehlt die Stufe noch, wird sinnvoll zurückgefallen, damit die App
    jederzeit funktioniert (Reihenfolge: gewählt → einfach → leicht → Basis). */
+/* Einstiegsfrage je Sprachstufe (Fallback: Basis aus topics.js). */
+function resolveSelfAssessment(topic, level) {
+  if (topic && topic.saVersions) {
+    const v = level === "standard"
+      ? (topic.saVersions.standard || topic.saVersions.einfach)
+      : level === "einfach"
+        ? topic.saVersions.einfach
+        : null;
+    if (v && Array.isArray(v.options) && v.options.length) return v;
+  }
+  return topic.selfAssessment;
+}
+
 function resolveLessonContent(lesson, level) {
   if (!lesson || !lesson.versions) return lesson;
   const v = lesson.versions;
@@ -955,7 +968,7 @@ function renderMenu() {
           <div class="hero-text">
             <h2>Willkommen!</h2>
             <p>Hier kannst du alles über das sichere Internet lernen.</p>
-            <p class="hero-meta">12 Themen &nbsp;·&nbsp; Einfache Sprache &nbsp;·&nbsp; kostenlos</p>
+            <p class="hero-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos</p>
             ${heroProgress}
           </div>
           <div class="hero-icon" aria-hidden="true">
@@ -995,6 +1008,42 @@ function renderMenu() {
    Themenseite: Lernweg wählen
    ============================================================ */
 
+/* Begleit-Material als saubere Druck-/PDF-Ansicht (Handout für Fachkräfte). */
+function printCompanion(topicId) {
+  const topic = getTopicById(topicId);
+  const c = topic && topic.companion;
+  if (!c) return;
+  const sections = [
+    ["Lernziele", c.lernziele],
+    ["Methodische Hinweise", c.methodik],
+    ["Gesprächsanlässe", c.gespraechsanlaesse],
+    ["Hinweise zur Begleitung", c.begleithinweise],
+    ["Rechts- und Fachbezüge", c.rechtsbezuege],
+    ["Alltagstransfer", c.transfer]
+  ];
+  const body = sections
+    .filter(([, it]) => Array.isArray(it) && it.length)
+    .map(([t, it]) => `<h2>${escapeHtml(t)}</h2><ul>${it.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>`)
+    .join("");
+  const html = `<!doctype html><html lang="de"><head><meta charset="utf-8">` +
+    `<title>Begleit-Material – ${escapeHtml(topic.title)}</title>` +
+    `<style>body{font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:24px auto;padding:0 16px;color:#142231;line-height:1.55;}` +
+    `h1{font-size:20px;margin:0 0 4px;}h2{font-size:15px;margin:18px 0 4px;border-bottom:1px solid #ccd;padding-bottom:4px;}` +
+    `ul{margin:6px 0;padding-left:20px;}li{margin-bottom:5px;}.meta{color:#555;font-size:12px;margin:0 0 12px;}` +
+    `.foot{margin-top:24px;border-top:1px solid #ccd;padding-top:8px;color:#555;font-size:11px;}</style></head><body>` +
+    `<h1>Für Begleitpersonen und Fachkräfte</h1>` +
+    `<p class="meta">Thema: ${escapeHtml(topic.title)} · Sicher und selbstbestimmt im Internet</p>` +
+    body +
+    `<p class="foot">Begleit-Material zur Lernplattform „Sicher und selbstbestimmt im Internet". ` +
+    `Diese Hinweise richten sich an Fachkräfte und sind nicht Teil der Lern-Texte.</p></body></html>`;
+  const w = window.open("", "_blank");
+  if (!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => { try { w.print(); } catch (e) { /* nichts tun */ } }, 300);
+}
+
 /* Begleit-Panel „Für Begleitpersonen und Fachkräfte" (eigene Ebene,
    keine Sprach-Stufe). Erscheint nur, wenn das Thema Begleit-Material hat. */
 function buildCompanionPanel(topic) {
@@ -1026,6 +1075,7 @@ function buildCompanionPanel(topic) {
       <div class="companion-body">
         <p class="companion-intro">Diese Hinweise richten sich an Betreuende, Assistenz, Angehörige und Fachkräfte. Sie sind nicht Teil der Lern-Texte.</p>
         ${blocks}
+        <button type="button" class="companion-print" onclick="printCompanion('${escapeHtml(topic.id)}')">🖨 Drucken / als PDF speichern</button>
       </div>
     </details>`;
 }
@@ -1069,9 +1119,9 @@ function renderTopicChoice(topicId) {
         <button type="button" class="action-card action-short" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
           <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
           <span class="action-text">
-            <span class="action-title">Einfach lernen</span>
+            <span class="action-title">Kurz lernen</span>
             <span class="action-desc">Nur das Wichtigste.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Einfach lernen. Nur das Wichtigste." aria-label="Einfach lernen vorlesen">🔊 Vorlesen</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Kurz lernen. Nur das Wichtigste." aria-label="Kurz lernen vorlesen">🔊 Vorlesen</span>
           </span>
         </button>
 
@@ -1259,7 +1309,7 @@ function renderSelfAssessment() {
   const topic = getCurrentTopic();
   if (!topic || !topic.selfAssessment) return renderLesson();
 
-  const sa = topic.selfAssessment;
+  const sa = resolveSelfAssessment(topic, languageLevel);
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "", "", "Start", 0);
@@ -1305,7 +1355,7 @@ function renderLesson() {
 
   const lesson = resolveLessonContent(lessons[currentStep], languageLevel);
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
-  const modeLabel = currentMode === "short" ? "Einfach lernen" : "Mehr lernen";
+  const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
   const hasPractice = Boolean(lesson.practice);
 
   /* Modul-Cluster-Badge: zeigen wenn neues Modul beginnt (nicht bei Schritt 0/Start) */
@@ -1513,7 +1563,7 @@ function renderPracticePage() {
     setProgressVisible(true);
     setBottomNavVisible(false);
     const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
-    const modeLabel = currentMode === "short" ? "Einfach lernen" : "Mehr lernen";
+    const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
     setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
     content.innerHTML = `
       ${buildUtilityBar()}${buildReadingToolbar()}
@@ -1562,7 +1612,7 @@ function renderCompletionPage(topicId) {
 
   /* ---- Einfach-Modus: eigene, wärmere Abschlussseite ---- */
   if (currentMode === "short") {
-    setHeader(topic.title, "Einfach lernen", "Abschluss", "Du bist fertig", 100);
+    setHeader(topic.title, "Kurz lernen", "Abschluss", "Du bist fertig", 100);
     content.innerHTML = `
       <section class="completion-page einfach-completion" data-readable="true">
         <article class="card completion-card--einfach" style="${getTopicColorStyle(topic.id)}">
