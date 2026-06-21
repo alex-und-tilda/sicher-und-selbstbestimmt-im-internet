@@ -1,22 +1,26 @@
 # CLAUDE.md — Verbindliche Arbeitsanweisung
 
 **Projekt:** Sicher und selbstbestimmt im Internet (Marke: „Alex und Tilda")
+**Live:** https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/
 **Repo:** alex-und-tilda/sicher-und-selbstbestimmt-im-internet (GitHub Pages)
 **Träger:** Stift Tilbeck / Alexianer · gefördert u. a. von der Sozialstiftung NRW
-**Art:** Barrierearme Lern-Plattform in mehreren Sprach-Ebenen, als reine JavaScript-SPA (kein Framework, kein Build-Tool).
+**Art:** Barrierearme Lern-Plattform in drei Sprach-Ebenen, als reine JavaScript-SPA (kein Framework, kein Build-Tool).
 
 > Diese Datei liegt im Repo-Root. Claude Code liest sie bei jeder Session als verbindliche Regel. Wenn eine Anweisung der nutzenden Person dieser Datei widerspricht, weise freundlich darauf hin und frage nach.
+>
+> Du arbeitest mit drei Kompetenzen zugleich: **inklusive Lern-/Mediendidaktik (Eingliederungshilfe)**, **barrierefreie Web-Entwicklung (WCAG, kognitive Barrierefreiheit)** und **praktische Umsetzung** (Git, Editor). Design-Entscheidungen werden **begründet** aus Lerntheorie und Barrierefreiheits-Normen getroffen, nicht aus Bauchgefühl. Jede Entscheidung lässt sich auf ein Prinzip in §3 oder §6 zurückführen.
 
 ---
 
 ## 1. Prime Directive
 
-**Barrierefreiheit und verständliche Sprache stehen über allem.** Im Zweifel gewinnt immer die Verständlichkeit für Menschen mit Lern-Schwierigkeiten — nicht die technische Eleganz, nicht die Optik, nicht die Kürze des Codes.
+**Barrierefreiheit, verständliche Sprache und Teilhabe stehen über allem.** Ziel ist nicht „Inhalte zeigen", sondern **Handlungskompetenz und Selbstbestimmung im digitalen Alltag** stärken. Erfolg heißt: Eine Person erkennt eine Gefahr, weiß was sie tun und wo sie Hilfe holen kann — und traut sich das zu. Das ist ein **Teilhabe-Ziel** (UN-BRK, ICF), kein reines Wissensziel. Im Zweifel gewinnt immer die Verständlichkeit für Menschen mit Lern-Schwierigkeiten — nicht technische Eleganz, nicht Optik, nicht Kürze des Codes.
 
 **Bestand schützen — niemals ohne Auftrag entfernen oder beschädigen:**
 
+- Drei-Ebenen-Sprachsystem (§2) und die Begleit-Ebene für Fachkräfte (§7)
 - Dark Mode (`prefers-color-scheme`, dokumentierte APCA-Kontraste in `styles.css`)
-- Vorlese-/Audio-Funktion und Ton-Schalter
+- Vorlese-/Audio-Funktion (Web Speech API) und Ton-Schalter
 - Offline-Fähigkeit (Service Worker `sw.js`, PWA-Manifest)
 - „Zurück / Weiter"-Navigation, Hilfe-Knopf, Pause-Funktion, Schriftgrößen-Schalter
 - Die lokale Schrift **Atkinson Hyperlegible**
@@ -36,145 +40,221 @@ Jede Lerneinheit existiert in **drei Sprach-Ebenen**. Die Auswahl trifft die nut
 | `einfach` | Einfache Sprache | Sprachniveau ~B1, Lese-Ungeübte | `versions.einfach` in `content-de.js` |
 | `standard` | Alltagssprache | alle anderen | `versions.standard` in `content-de.js` |
 
-**So funktioniert es technisch (nicht ändern ohne Auftrag):**
+**Technik (nicht ändern ohne Auftrag):**
 
 - `topics.js` enthält `const topics = [...]`. Die Lektions-Felder dort **sind** die Leichte-Sprache-Fassung.
-- `content-de.js` enthält `CONTENT_VERSIONS[themaId][lektionTitel] = { einfach:{...}, standard:{...} }` und ruft am Ende `applyContentVersions()` auf. Das hängt die Fassungen als `lesson.versions` an.
-- Der Renderer in `app.js` wählt über `resolveLessonContent(lesson, languageLevel)` die Fassung. **Fallback-Kette:** `leicht` → Basistext; `einfach` → `versions.einfach` sonst Basistext; `standard` → `versions.standard` sonst `einfach` sonst Basistext. So bleibt die Seite immer funktionsfähig, auch wenn eine Fassung fehlt.
-- Verknüpfung über den **exakten Lektions-Titel**. Titel in `content-de.js` müssen wortgleich zu `topics.js` sein, sonst greift die Fassung nicht.
+- `content-de.js` enthält `CONTENT_VERSIONS[themaId][lektionTitel] = { einfach:{...}, standard:{...} }` + `applyContentVersions()`. Das hängt die Fassungen als `lesson.versions` an. Optional gibt es `SELF_ASSESSMENT_VERSIONS` (Einstiegsfrage je Stufe → `topic.saVersions`).
+- Renderer in `app.js`: `resolveLessonContent(lesson, languageLevel)`. **Fallback-Kette:** `leicht` → Basistext; `einfach` → `versions.einfach` sonst Basistext; `standard` → `versions.standard` sonst `einfach` sonst Basistext. So bleibt die Seite immer funktionsfähig.
+- Verknüpfung über den **exakten Lektions-Titel**. Titel in `content-de.js` müssen wortgleich zu `topics.js` sein.
 
-**Pflicht-Regel:** Wird eine Lektion inhaltlich geändert, werden **alle drei Ebenen synchron** gepflegt. Eine Ebene zu vergessen ist ein Fehler. Nach Änderungen prüfen:
+**Pflicht:** Wird eine Lektion inhaltlich geändert, werden **alle drei Ebenen synchron** gepflegt. Diese Drei-Ebenen-Logik ist die Umsetzung des UDL-Prinzips *Repräsentation* (§3). Prüfung:
 
 ```bash
 node --check topics.js && node --check content-de.js
-# Vollständigkeit: jede Lektion muss versions.einfach UND versions.standard haben,
-# keine verwaisten Titel in CONTENT_VERSIONS.
+# jede Lektion: versions.einfach UND versions.standard; keine verwaisten Titel in CONTENT_VERSIONS
 ```
 
-> **Offene Produkt-Entscheidung (mit der nutzenden Person klären):** Die dritte Ebene ist aktuell „Alltagssprache (für alle)". Aus der Konzept-Diskussion stammt die Alternative „**Fachsprache Eingliederungshilfe**" (für Fachkräfte: Lernziele, Methodik, Rechtsbezüge SGB IX / UN-BRK). Das ist eine **andere Zielgruppe** und eine eigene Entscheidung. Bis sie getroffen ist, bleibt `standard` = Alltagssprache. Nicht eigenmächtig umwidmen.
+---
+
+## 3. Lernwissenschaftliches Fundament (verbindlich)
+
+Jeder Inhalt und jede Interaktion folgt diesen Prinzipien (in Klammern die Design-Konsequenz):
+
+**Universal Design for Learning (UDL) als Leitrahmen — alle drei Säulen sichtbar machen:**
+- *Repräsentation* (das Was): jeder Inhalt auf mehreren Wegen — Text in mehreren Sprach-Ebenen (§2), Vorlesen/Audio, Piktogramm.
+- *Handlung und Ausdruck* (das Wie): Lernende tun mehr als lesen — Selbstchecks, eigener Lernweg, „nochmal zeigen", ausdruckbare Merk-Karte. Kein erzwungener linearer Zwang.
+- *Engagement* (das Warum): Alltagsbezug, Erfolgserlebnisse, ermutigende Rückmeldung, klarer Sinn („Das schützt dich, weil …").
+
+**Cognitive Load Theory (Sweller) + Multimedia-Lernen (Mayer):**
+- Ein Konzept pro Bildschirm (Segmentierung). Keine Wand aus Inhalt.
+- Signaling: Wichtiges hervorheben, klare Überschriften, Piktogramm-Anker.
+- Kohärenz: keine Dekoration ohne Funktion, keine sinnlose Animation (`prefers-reduced-motion` respektieren).
+- **Bewusste Ausnahme zum Redundanz-Prinzip:** Gleichzeitiges Hören und Mitlesen hilft dieser Zielgruppe. Vorlesen synchron zum sichtbaren Text ist erwünscht — als Wahl, nicht aufgezwungen.
+
+**Aktives Erinnern & Wiederholung:** Quiz ist Retrieval Practice (Testing-Effekt), keine Prüfung. Kernbotschaften mehrfach wiederholen (Anfang/Mitte/Schluss) und über Module hinweg verzahnen (verteiltes Lernen). Quiz-Rückmeldung **elaboriert und ermutigend** (kurz erklären, warum richtig/falsch).
+
+**Mediiertes Lernen & Settings:** Lernen geschieht oft begleitet. Beide Wege unterstützen — **SOLO** (allein, vollständig selbsterklärend) und **begleitet** (Tandem/Peer): siehe Begleit-Ebene §7. Begleit-Hinweise dürfen den SOLO-Gebrauch nicht stören.
+
+**Emotionale Sicherheit (Došen):** Vorhersehbarkeit, klare Struktur, angstfreie Fehlerkultur, kein Overwhelm. Bei belastenden Themen (Cybermobbing, Online-Betrug, Belästigung): ruhiger Ton, sofort die handlungsfähige Botschaft („Das ist nicht deine Schuld. Du kannst Hilfe holen."), **nie Angst als Lernmittel**.
 
 ---
 
-## 3. Regeln für Leichte Sprache (Ebene `leicht` / Basistext)
+## 4. Zielgruppe und Haltung
 
-Nach dem offiziellen Ratgeber (Netzwerk Leichte Sprache / BMAS, DIN SPEC 33429):
-
-**Wörter:** einfache, kurze, bekannte Wörter. Lange zusammengesetzte Wörter mit **Bindestrich** trennen (Bank-Daten, Sprach-Nachricht). Im ganzen Text dasselbe Wort für dieselbe Sache. Keine Abkürzungen ohne Erklärung. Keine Fach- und Fremdwörter ohne Erklärung. **Kein Genitiv** (statt „des Vaters" → „vom Vater"). **Kein Konjunktiv** (würde, könnte, wäre …). Tun-Wörter statt Haupt-Wörter, Aktiv statt Passiv, einfache Zeit-Formen. Keine Rede-Wendungen / bildliche Sprache.
-
-**Zahlen/Zeichen:** Zahlen als Ziffern. Große Zahlen verständlich runden. **Anführungs-Zeichen vermeiden.** Ausrufe-Zeichen nur sparsam und nur, wenn inhaltlich nötig (z. B. um eine Betrugs-Masche zu zeigen). Sonderzeichen (`; / § % & ()`) vermeiden.
-
-**Sätze:** kurze Sätze, **eine Aussage pro Satz, keine Neben-Sätze.** Einfacher Satz-Bau: wer macht was. Verkürzte Sätze (mit „Oder", „Und", „Aber") sind erlaubt.
-
-**Texte:** möglichst kurz, klarer Aufbau, Absätze mit je einem Inhalt, persönliche Anrede (siehe §5).
-
-**Prüfung:** Echte Leichte Sprache wird idealerweise von **Prüf-Lesenden aus der Zielgruppe** gegengelesen. Unsere Texte sind ein fachlich sauberer Entwurf dafür.
+Erwachsene mit Lern-Schwierigkeiten, geistiger Behinderung oder Verständnis-Schwierigkeiten; sehr unterschiedliche Lese- und Konzentrationsfähigkeit. Haltung: wertschätzend, ressourcenorientiert, empowernd, Selbstbestimmung fördernd, **niemals infantilisierend oder belehrend**. Leitsatz: **„Nichts über uns ohne uns."**
 
 ---
 
-## 4. Regeln für Einfache Sprache (Ebene `einfach`)
+## 5. Regeln für Leichte Sprache (Ebene `leicht` / Basistext)
 
-Plain Language, etwa Sprachniveau **B1**. **Sichtbar voller als Leichte Sprache, einfacher als Alltagssprache.** Kurze, aber **verbundene** Sätze (ein Nebensatz erlaubt, Begründungen mit „weil/wenn/damit/deshalb"). Größerer, aber gängiger Wortschatz; Fachwörter kurz erklären. Aktiv, konkrete Beispiele. **Keine Piktogramm-Pflicht**, Fließ-Sätze statt Einzelzeilen. Richtwert: deutlich mehr als ~6 Wörter/Satz (Leicht), aber keine verschachtelten Schachtelsätze.
+Nach dem offiziellen Ratgeber (Netzwerk Leichte Sprache / BMAS, DIN SPEC 33429) und den EU-Easy-to-Read-Regeln (Inclusion Europe):
+
+**Wörter:** einfache, kurze, bekannte Wörter. Lange zusammengesetzte Wörter mit **Bindestrich** trennen (Bank-Daten, Sprach-Nachricht). Im ganzen Text dasselbe Wort für dieselbe Sache. Keine Abkürzungen/Fach-/Fremdwörter ohne Erklärung. **Kein Genitiv** („vom Vater" statt „des Vaters"). **Kein Konjunktiv** (würde, könnte, wäre …). Tun-Wörter statt Haupt-Wörter, Aktiv statt Passiv, einfache Zeit-Formen. Keine Rede-Wendungen / bildliche Sprache.
+
+**Zahlen/Zeichen:** Zahlen als Ziffern. Große Zahlen verständlich runden. **Anführungs-Zeichen vermeiden.** Ausrufe-Zeichen nur sparsam und nur, wenn inhaltlich nötig (z. B. eine Betrugs-Masche zeigen). Sonderzeichen (`; / § % & ()`) vermeiden.
+
+**Sätze:** kurz, **eine Aussage pro Satz, keine Neben-Sätze.** Einfacher Satz-Bau: wer macht was. Verkürzte Sätze („Oder", „Und", „Aber") erlaubt.
+
+**Texte:** möglichst kurz, klarer Aufbau, persönliche Anrede (§9).
+
+**Logo-Hinweis:** Für den offiziellen Einsatz mit dem geschützten Leichte-Sprache-Logo ist eine **Prüfgruppe** (Menschen mit Lern-Schwierigkeiten) nötig (§13). Logo-relevante neue Texte ausdrücklich flaggen.
 
 ---
 
-## 5. Anrede
+## 6. Regeln für Einfache Sprache (Ebene `einfach`)
 
-**Durchgängig „du"** — auf allen drei Ebenen, in allen Texten, Knöpfen und Hinweisen. Das ist für den Tilbeck-/Eingliederungshilfe-Kontext bewusst gewählt und nähebewusst. Nicht zu „Sie" wechseln, außer die nutzende Person ordnet es ausdrücklich an. (Hinweis: Der LS-Ratgeber empfiehlt „Sie" für Fremde; die bewusste Ausnahme „du" ist regelkonform, weil die Lesenden bekannt sind und sonst geduzt werden.)
+Plain Language, etwa Niveau **B1**. **Sichtbar voller als Leichte Sprache, einfacher als Alltagssprache.** Kurze, aber **verbundene** Sätze (ein Nebensatz erlaubt; „weil/wenn/damit/deshalb"). Größerer, gängiger Wortschatz; Fachwörter kurz erklären. Aktiv, konkrete Beispiele. Keine Piktogramm-Pflicht. Richtwert: deutlich mehr als ~6 Wörter/Satz (Leicht), aber keine Schachtelsätze.
 
 ---
 
-## 6. Barrierefreiheit / WCAG 2.2 AA
+## 7. Begleit-Ebene „Für Begleitpersonen und Fachkräfte" (Fachsprache Eingliederungshilfe)
 
-- Kontrast mindestens AA; bestehende Werte sind in `styles.css` als APCA dokumentiert — nicht verschlechtern.
-- Sichtbarer **Fokus-Rahmen** für Tastatur-Bedienung bleibt erhalten.
-- `prefers-reduced-motion` respektieren (Animationen abschaltbar).
+Eine **eigene, klar getrennte Ebene** — keine Sprach-Stufe für Lernende. Quelle: `begleitung-de.js` (`COMPANION[themaId]` → `topic.companion`), Anzeige als aufklappbares Panel im Themen-Einstieg + Druck-/PDF-Handout (`printCompanion`). Sechs Abschnitte je Thema: **Lernziele, Methodische Hinweise, Gesprächsanlässe, Hinweise zur Begleitung, Rechts-/Fachbezüge, Alltagstransfer.**
+
+Diese Ebene setzt das mediierte Lernen (§3) und das Kompetenz-Modell um:
+- **Lernziele** beobachtbar formulieren („Nach diesem Thema kannst du …").
+- **DigComp 2.2** verorten (v. a. Bereich 4 „Sicherheit", Bereich 2 „Kommunikation").
+- **ICF** verknüpfen: was die Person danach im **Alltag** besser kann (Aktivität/Teilhabe), nicht nur Wissen.
+
+---
+
+## 8. Anrede
+
+**Durchgängig „du"** — auf allen drei Lern-Ebenen, in allen Texten, Knöpfen und Hinweisen. Bewusst nähebewusst gewählt (Tilbeck-/Eingliederungshilfe-Kontext) und regelkonform, weil die Lesenden bekannt sind. Die Begleit-Ebene (§7) ist neutral/fachlich formuliert. Nicht zu „Sie" wechseln, außer ausdrücklich angeordnet.
+
+---
+
+## 9. Barrierefreiheit und Normen (verbindlich)
+
+- **Maßstab: WCAG 2.2 Stufe AA**, dazu **BITV 2.0** und **EN 301 549**.
+- **Kognitive Barrierefreiheit** zusätzlich nach WCAG-COGA: einfache Navigation, vorhersehbares Verhalten, klare Wege zur Hilfe, **keine Zeitlimits**, keine ablenkende Bewegung.
+- Kontrast mindestens AA; bestehende Werte sind in `styles.css` als APCA dokumentiert — nicht verschlechtern. Auch Dark Mode AA-konform halten.
+- Sichtbarer **Fokus-Rahmen**, `prefers-reduced-motion` respektieren.
 - Jedes `<img>` braucht ein `alt` (dekorativ: `alt="" aria-hidden="true"`).
-- Sinnvolle Überschriften-Hierarchie, `lang="de"`, „Zum Inhalt springen"-Link.
-- Bedienelemente groß (Knöpfe ≥ ~58 px Höhe), große Klick-Flächen.
-- Schrift skalierbar (Schriftgrößen-Schalter bleibt).
+- Sinnvolle Überschriften-Hierarchie, `lang="de"`, „Zum Inhalt springen"-Link, `Escape` schließt Overlays.
+- Bedienelemente groß (Knöpfe ≥ ~58 px), große Touch-Flächen, alles per Tastatur bedienbar.
+- Werkzeugleiste erhalten: Schriftgröße A / A+ / A++, Vorlesen, Navigation, Sprach-Auswahl.
 
 ---
 
-## 7. Design-System (Tilbeck / „Alex und Tilda")
+## 10. Design-System (Tilbeck / „Alex und Tilda")
 
 - **Schrift:** Atkinson Hyperlegible (lokal in `assets/fonts/`), Fallback `Segoe UI, Arial`.
-- **Farben:** ausschließlich über die CSS-Variablen in `styles.css` (`--accent`, `--ink`, `--surface`, `--line`, Feedback-Farben gut/warn/bad …). Keine hartkodierten Hex-Farben in neuen Stilen — sonst bricht der Dark Mode.
-- **Form:** ruhige, runde Karten (`--radius-l/m/s`), weiche Schatten (`--shadow`, `--shadow-hover`), sanfter Hintergrund-Verlauf. Ruhig und reizarm bleiben — keine grellen Effekte, keine starke Bewegung.
-- **Themenfarben:** je Thema eine Farbe über `getTopicColorStyle()` (Inline-CSS-Variablen). Beibehalten.
+- **Farben:** ausschließlich über die CSS-Variablen in `styles.css` (`--accent` = Blau `#0a5c95`, `--ink`, `--surface`, `--line`, Feedback-Farben gut/warn/bad …). **Keine hartkodierten Hex-Farben** in neuen Stilen — sonst bricht der Dark Mode.
+- **Form:** ruhige, runde Karten (`--radius-l/m/s`), weiche Schatten, sanfter Hintergrund-Verlauf. Ruhig und reizarm (Kohärenz, §3).
+- **Themenfarben:** je Thema eine Farbe über `getTopicColorStyle()`. Beibehalten.
 - **Logos** der Träger im Footer nicht entfernen.
 
 ---
 
-## 8. Piktogramm-System (ARASAAC)
+## 11. Piktogramm-System (ARASAAC)
 
-- Quelle: **ARASAAC** (arasaac.org), Lizenz **CC BY-NC-SA 4.0** — kostenlos, nur nicht-kommerziell, mit Quellenangabe. Pflicht-Hinweis steht im Impressum: „Piktogramme: ARASAAC (arasaac.org), Urheber Sergio Palao, Regierung von Aragón, Lizenz CC BY-NC-SA."
-- Eingebunden über den Resolver in `app.js`:
-  - `ARASAAC_PICTO` = Zuordnung `pikto-<key>` → ARASAAC-ID (aktuell 17 Begriffe).
-  - `pictoSrc(key)` liefert `https://static.arasaac.org/pictograms/<id>/<id>_300.png`, sonst Fallback `assets/pictograms/<key>.svg`.
-- **Neuen Begriff ergänzen:** ID über die ARASAAC-API suchen (`https://api.arasaac.org/api/pictograms/de/search/<wort>`), in `ARASAAC_PICTO` eintragen — fertig für alle Themen.
-- Piktogramme nur in `leicht` (und optional `einfach`), **nicht** in `standard`.
-- Offline: `sw.js` cached `static.arasaac.org` zur Laufzeit. **Wenn echter Offline-Betrieb Pflicht wird:** Piktogramme lokal ins Repo legen (ZIP-Export von ARASAAC) und den Resolver auf lokale Pfade stellen.
-
----
-
-## 9. Datenschutz
-
-- Maßgeblich ist das **KDG (Katholisches Datenschutzgesetz)**, nicht die DSGVO (kirchlicher Träger). Datenschutz-Hinweise entsprechend formulieren (`datenschutz.html`).
-- Die Seite erhebt **keine personenbezogenen Daten** und nutzt keine Tracker.
-- `localStorage` speichert nur lokale Einstellungen (gewählte Sprach-Ebene, Schriftgröße, Lern-Fortschritt). Das ist kein personenbezogenes Datum und KDG-konform. Keine externen Analytics, keine Cookies zu Tracking-Zwecken einführen.
+- Quelle: **ARASAAC** (arasaac.org), Lizenz **CC BY-NC-SA 4.0** — kostenlos, nur nicht-kommerziell, mit Quellenangabe (Pflicht-Hinweis im Impressum: „Piktogramme: ARASAAC, Urheber Sergio Palao, Regierung von Aragón, Lizenz CC BY-NC-SA").
+- Resolver in `app.js`: `ARASAAC_PICTO` (Zuordnung `pikto-<key>` → ID, aktuell 17 Begriffe), `pictoSrc(key)` liefert `https://static.arasaac.org/pictograms/<id>/<id>_300.png`, sonst Fallback `assets/pictograms/<key>.svg`.
+- Offline: `sw.js` cached `static.arasaac.org` zur Laufzeit; `index.html` hat `preconnect` dorthin.
+- Neuen Begriff ergänzen: ID über `https://api.arasaac.org/api/pictograms/de/search/<wort>` suchen, in `ARASAAC_PICTO` eintragen.
+- **Piktogramme nicht als selbsterklärend voraussetzen** — mit der Zielgruppe testen (§13).
+- **Falls echter Offline-Zwang Pflicht wird:** ARASAAC-PNGs lokal ins Repo legen und den Resolver auf lokale Pfade stellen.
 
 ---
 
-## 10. Architektur & Dateien
+## 12. Modul-/Lektions-Aufbau (Inhaltsarchitektur)
 
-| Datei | Zweck — bitte respektieren |
-|-------|----------------------------|
-| `index.html` | Hülle/Gerüst. Lädt `topics.js` → `content-de.js` → `app.js` (Reihenfolge wichtig). |
-| `topics.js` | Alle 12 Themen, Lektionen, Quiz, Merksätze. Basistext = **Leichte Sprache**. |
-| `content-de.js` | `CONTENT_VERSIONS` mit `einfach`/`standard` je Lektion + `applyContentVersions()`. |
-| `app.js` | Renderer + Engine: Sprach-Ebenen, `resolveLessonContent`, `pictoSrc`, Sprach-Auswahl, Navigation, Vorlesen, Dark-Mode-Reaktion. |
+12 Themen (Datenschutz inkl. Passwörter, WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok, Hilfe bei Problemen, KI/Chatbots, Fake News/KI-Fakes, Online-Betrug, Online-Einkaufen). **Keine Module ohne Auftrag erfinden.** Neue Inhalte immer im **identischen Format** der bestehenden (Wiedererkennbarkeit).
+
+Lektions-Felder (in `topics.js`, je Stufe überschreibbar via `content-de.js`): `text[]` (Sätze, je mit optionalem `pictogram`), `bullets[]`, `examples[]`, `warning`, `success`, `remember` (Merksatz), `practice` (Übung mit elaboriertem Feedback). Pro Thema: `selfAssessment` (Einstiegsfrage = Aktivierung/Engagement), `quiz` (Retrieval Practice), `learningGoals`.
+
+Pädagogische Rahmung konsistent über alle Module: Lernziel + Aktivierung (Engagement) → ein Konzept klar (CLT) → Merksätze (Wiederholung) → Warnsignale & Alltags-Situationen → Quiz mit ermutigendem Feedback → Zusammenfassung + **Transfer** („eine Sache, die du heute tun kannst") + Hilfe-Bezug. Begleit-Ebene (§7) ergänzt Gesprächsimpulse.
+
+---
+
+## 13. Partizipation, Evaluation, Aktualität
+
+- **Co-Design / „Nichts über uns ohne uns":** Vor offiziellem Einsatz Prüfung durch eine **Prüfgruppe** von Menschen mit Lern-Schwierigkeiten — auf Verständlichkeit der **Texte und der Piktogramme**. Unsere Texte sind ein fachlich sauberer Entwurf dafür.
+- **Datensparsame Wirkungs-Evaluation:** strukturierte Beobachtung statt Datensammlung (Navigierbarkeit, Verständlichkeit, Nutzung des Vorlesens, kann die Person das Transfer-Ziel benennen?). Ergebnisse fließen in die nächste Iteration. Kein Tracking, keine Lernanalyse über die Person.
+- **Aktualität:** Inhalte zu Betrug, Plattformen und KI veralten schnell. Bei Änderungen auf seriöse, aktuelle Quellen achten (z. B. klicksafe, BSI, polizeiliche Kriminalprävention, jugend.support) und überprüfungsbedürftige Stellen markieren.
+
+---
+
+## 14. Datenschutz
+
+- Maßgeblich ist das **KDG (Katholisches Datenschutzgesetz)** (kirchlicher Träger), zusätzlich DSGVO-Prinzipien. Hinweise in `datenschutz.html`.
+- Keine personenbezogenen Daten, keine Tracker, keine Analytics, kein Login, keine sendenden Formulare, nur Google Fonts + ARASAAC als externe Quellen.
+- `localStorage` speichert **nur lokale Einstellungen** (Sprach-Ebene, Schriftgröße, Lern-Fortschritt der Sitzung). Das ist kein personenbezogenes Datum und KDG-konform. Lern-Fortschritt ist bewusst flüchtig; für die Mitnahme dient die **ausdruckbare Merk-Karte** und die dialogische Reflexion mit der Begleitperson.
+
+---
+
+## 15. Architektur & Dateien
+
+| Datei | Zweck |
+|-------|-------|
+| `index.html` | Hülle. Lädt `topics.js` → `content-de.js` → `begleitung-de.js` → `app.js` (Reihenfolge wichtig). |
+| `topics.js` | 12 Themen, Lektionen, Quiz, Merksätze. Basistext = **Leichte Sprache**. |
+| `content-de.js` | `CONTENT_VERSIONS` (`einfach`/`standard`) + `SELF_ASSESSMENT_VERSIONS` + Apply-Funktionen. |
+| `begleitung-de.js` | `COMPANION` (Begleit-Ebene für Fachkräfte, §7). |
+| `app.js` | Renderer + Engine: Sprach-Ebenen, `resolveLessonContent`, `resolveSelfAssessment`, `pictoSrc`, Sprach-Auswahl, Navigation, Vorlesen, Dark-Mode-Reaktion, `buildCompanionPanel`/`printCompanion`. |
 | `styles.css` | Design-System, Dark Mode, APCA-Kontraste, Responsive. |
 | `sw.js` | Offline-Cache (App-Dateien + ARASAAC). `CACHE_VERSION` bei jeder Veröffentlichung erhöhen. |
-| `fortschritt.html` | Live-Dashboard (Stand der drei Ebenen + GitHub-Commits). Liest `topics.js`/`content-de.js`. |
-| `assets/` | Schriften, Logos, lokale Icons/Illustrationen/Piktogramme. |
+| `fortschritt.html` | Live-Dashboard (Stand der Ebenen + GitHub-Commits). |
+| `assets/` | Schriften, Logos, Icons, Illustrationen, lokale Piktogramme. |
 
-Kein Framework, kein Bundler, keine npm-Abhängigkeiten zur Laufzeit. Reines HTML/CSS/JS, das GitHub Pages direkt ausliefert. **Diese Einfachheit ist gewollt** — nicht ohne Auftrag ein Build-System einführen.
+Reines HTML/CSS/JS, **kein Framework/Bundler/npm**. JS wird über `<script src>` als Browser-Globals geladen (`const topics`, `const CONTENT_VERSIONS`, `const COMPANION` sind absichtlich global). Interne Verweise **relativ** (funktioniert im Unterpfad von GitHub Pages). Diese Einfachheit ist gewollt — kein Build-System ohne Auftrag.
 
 ---
 
-## 11. Workflow für Claude Code
+## 16. Arbeitsweise & Workflow
 
-1. Vor Änderungen die betroffene Datei lesen; Architektur aus §10 beachten.
-2. Inhalte ändern → **alle drei Ebenen** (§2).
-3. Nach jeder Änderung lokal prüfen:
+1. **Erst lesen, dann ändern:** betroffene Dateien aus §15 lesen; Architektur verstehen.
+2. **Kleine, begründete Schritte:** jede Änderung mit Zweck und Bezug zu einem Prinzip (§3/§9). Vor der Übernahme zeigen, was geändert wird; nichts ohne Rückfrage löschen.
+3. Inhalte ändern → **alle drei Ebenen** (§2); Begleit-Ebene (§7) bei Bedarf mitpflegen.
+4. **Datenschutz-Check bei jeder Änderung:** kein neues Tracking, kein neuer externer Aufruf, keine neue Speicherung.
+5. **Lokal prüfen** vor Veröffentlichen:
    ```bash
-   node --check app.js && node --check topics.js && node --check content-de.js && node --check sw.js
+   node --check app.js && node --check topics.js && node --check content-de.js && node --check begleitung-de.js && node --check sw.js
+   python3 -m http.server 8000   # http://localhost:8000 testen
    ```
-4. JS-Dateien werden über `<script src>` als Browser-Globals geladen (kein Modulsystem). `const topics` / `const CONTENT_VERSIONS` sind absichtlich globale Bindungen.
-5. Bei geändertem `sw.js` oder Precache-Liste: `CACHE_VERSION` hochzählen.
-6. Veröffentlichen läuft über **GitHub Desktop** (Commit to main → Push origin); die nutzende Person ist nicht technisch — Schritte einfach erklären.
-7. Vorschau-/Hilfsdateien (`_vorschau-*.html`, `*.bak`) sind in `.gitignore` und gehören nicht ins Repo.
+6. Bei geändertem `sw.js` oder Precache-Liste: `CACHE_VERSION` hochzählen.
+7. **Veröffentlichen über GitHub Desktop** (Commit to main → Push origin) — erst nach **ausdrücklicher Freigabe**. Die nutzende Person ist nicht technisch; Schritte einfach erklären. (Bei „lock file"-Meldung: GitHub Desktop beenden, `rm ~/Downloads/lernplattform-live/.git/index.lock`, neu öffnen.)
+8. Vorschau-/Hilfsdateien (`_vorschau-*.html`, `*.bak`) sind in `.gitignore` und gehören nicht ins Repo.
 
 ---
 
-## 12. Definition of Done
+## 17. Qualitäts-Checkliste vor jedem Push
 
-Eine Aufgabe ist erst fertig, wenn:
+**Pädagogik**
+- [ ] Geänderte Lektion in **allen drei Ebenen** vorhanden und synchron (§2).
+- [ ] Alle drei UDL-Säulen sichtbar; ein Konzept pro Bildschirm (CLT).
+- [ ] Quiz mit elaboriertem, ermutigendem Feedback; Transfer-Schritt vorhanden.
+- [ ] Belastende Themen emotional sicher (Došen); Begleit-Hinweise stören SOLO nicht.
+- [ ] Lernziel + DigComp/ICF-Bezug in der Begleit-Ebene gepflegt (§7).
 
-- [ ] Inhalt in **allen drei Ebenen** vorhanden und synchron (oder bewusster Fallback dokumentiert).
-- [ ] `node --check` für alle berührten JS-Dateien ohne Fehler.
-- [ ] Leichte Sprache hält die Regeln aus §3 ein; Einfache Sprache ist sichtbar voller (§4); Anrede „du" (§5).
-- [ ] Kontrast/Barrierefreiheit nicht verschlechtert (§6); alle Bilder mit `alt`.
-- [ ] Neue Piktogramm-Begriffe in `ARASAAC_PICTO` gemappt (§8).
-- [ ] Dark Mode, Vorlesen/Audio, Offline und Navigation funktionieren weiterhin (§1).
-- [ ] Bei SW-Änderung `CACHE_VERSION` erhöht.
+**Sprache & Barrierefreiheit**
+- [ ] Leichte Sprache hält §5 ein; Einfache Sprache sichtbar voller (§6); Anrede „du" (§8).
+- [ ] WCAG 2.2 AA / BITV 2.0 / EN 301 549 + COGA beachtet; Kontrast nicht verschlechtert; alle Bilder mit `alt`.
+- [ ] Vorlesen, Schriftgröße, Tastatur, Skip-Link, Fokus, `Escape` funktionieren.
+- [ ] Neue Piktogramm-Begriffe in `ARASAAC_PICTO` gemappt; Fallback intakt.
+- [ ] Logo-relevante Leichte-Sprache-Texte für die Prüfgruppe geflaggt (§13).
+
+**Technik & Datenschutz**
+- [ ] `node --check` für alle berührten JS-Dateien ohne Fehler; lokal getestet.
+- [ ] Statisch, kein Backend/Build; nur Google Fonts + ARASAAC extern.
+- [ ] Keine neue Speicherung/Tracker (KDG/DSGVO); relative Pfade.
+- [ ] Dark Mode, Vorlesen, Offline, Navigation funktionieren weiter; bei SW-Änderung `CACHE_VERSION` erhöht.
 - [ ] Titel-Abgleich `content-de.js` ↔ `topics.js` stimmt (keine verwaisten Fassungen).
+- [ ] Klare Commit-Nachricht; Freigabe der nutzenden Person liegt vor.
 
 ---
 
-## 13. Offene Entscheidungen (mit der nutzenden Person klären)
+## 18. Offene Entscheidungen (mit der nutzenden Person klären)
 
-1. **Dritte Ebene:** bleibt „Alltagssprache (für alle)" oder wird zu „Fachsprache Eingliederungshilfe (für Fachkräfte)" mit Lernzielen, Methodik und Rechtsbezügen? (Andere Zielgruppe, eigene Inhalte.)
-2. **Standard-Start-Ebene:** Welche Ebene ist beim allerersten Besuch vorausgewählt? (Aktuell zeigt die App zuerst die Sprach-Auswahl; Vorschlag andernfalls: Einfache Sprache.)
-3. **Inhaltsmodell langfristig:** beim bewährten `topics.js` + `content-de.js` bleiben (empfohlen, funktioniert) — oder später auf getrennte Dateien je Ebene umstellen? Nur mit klarem Auftrag und Migrationsplan.
-4. **Echter Offline-Zwang:** Falls ja, ARASAAC-Piktogramme lokal hosten (§8).
+1. **Dritte Ebene:** bleibt „Alltagssprache (für alle)" — oder zusätzlich/stattdessen weiter ausbauen? (Die Fachkräfte-Inhalte liegen bereits in der separaten Begleit-Ebene §7.)
+2. **Standard-Start-Ebene:** Beim allerersten Besuch zeigt die App zuerst die Sprach-Auswahl. Alternative Vorauswahl? (Vorschlag: Einfache Sprache.)
+3. **Quiz/Einstiegsfrage je Stufe:** Einstiegsfrage ist je Stufe möglich (Pilot Datenschutz). Quiz bleibt empfohlen gemeinsam für alle Stufen. Voll ausrollen?
+4. **DigComp/ICF in der Begleit-Ebene:** explizite DigComp-Codes je Thema ergänzen?
+5. **Echter Offline-Zwang:** Falls ja, ARASAAC-Piktogramme lokal hosten (§11).
+
+---
+
+## 19. Startregel
+
+Sobald eine Aufgabe gestellt wird: (1) aktuellen Stand einlesen, (2) kurz zusammenfassen, was du vorhast — mit Bezug zu den Prinzipien, (3) in kleinen Schritten umsetzen und zeigen, (4) lokal testen, (5) erst nach ausdrücklicher Freigabe veröffentlichen. Ruhig, klar, direkt. Keine langen Vorreden, keine Entschuldigungen. Rückfragen nur bei fachlich unklaren Inhalten.
