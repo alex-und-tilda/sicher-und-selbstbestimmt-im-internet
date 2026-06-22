@@ -5631,6 +5631,26 @@ const topics = [
         "correctIndex": 1,
         "feedbackCorrect": "Das ist richtig. Echte Freunde sind Menschen.",
         "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot ist ein Programm. Kein Freund."
+      },
+      {
+        "question": "Wo steckt überall KI drin?",
+        "answers": [
+          "Nur in Robotern.",
+          "In vielen Apps, zum Beispiel in Chatbots und Sprach-Hilfen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. KI steckt heute in vielen Apps.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI steckt in vielen Apps, nicht nur in Robotern."
+      },
+      {
+        "question": "Darfst du der KI deine Adresse oder ein Geheimnis schreiben?",
+        "answers": [
+          "Ja, das ist sicher.",
+          "Nein, ich gebe der KI keine privaten Daten."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Private Daten bleiben bei mir.",
+        "feedbackWrong": "Das ist noch nicht richtig. Was du der KI schreibst, wird oft gespeichert. Gib keine privaten Daten ein."
       }
     ],
     "helpQuestions": [
@@ -6210,6 +6230,26 @@ const topics = [
         "correctIndex": 0,
         "feedbackCorrect": "Das ist richtig. Solche Videos sind fast immer Deepfake-Betrug.",
         "feedbackWrong": "Das ist noch nicht richtig. Solche Videos sind fast immer Betrug."
+      },
+      {
+        "question": "Bevor du eine Nachricht teilst: Was machst du?",
+        "answers": [
+          "Erst teilen, dann prüfen.",
+          "Erst prüfen, dann teilen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Erst prüfen, dann teilen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Prüfe eine Nachricht erst. Dann teile sie."
+      },
+      {
+        "question": "Ist alles im Internet wahr?",
+        "answers": [
+          "Ja, alles ist wahr.",
+          "Nein, nicht alles ist wahr."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Nicht alles im Internet ist wahr.",
+        "feedbackWrong": "Das ist noch nicht richtig. Nicht alles im Internet ist wahr. Prüfe wichtige Nachrichten."
       }
     ],
     "helpQuestions": [
@@ -6807,6 +6847,16 @@ const topics = [
         "correctIndex": 0,
         "feedbackCorrect": "Das ist richtig. Der Sperr-Notruf ist die 116 116.",
         "feedbackWrong": "Das ist noch nicht richtig. Der Sperr-Notruf ist die 116 116."
+      },
+      {
+        "question": "Eine SMS hat einen Link von einer fremden Nummer. Was machst du?",
+        "answers": [
+          "Schnell auf den Link klicken.",
+          "Den Link nicht öffnen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Fremde Links öffne ich nicht.",
+        "feedbackWrong": "Das ist noch nicht richtig. Fremde Links können gefährlich sein. Öffne sie nicht."
       }
     ],
     "helpQuestions": [
@@ -7398,6 +7448,26 @@ const topics = [
         "correctIndex": 0,
         "feedbackCorrect": "Das ist richtig. In-App-Käufe kosten echtes Geld.",
         "feedbackWrong": "Das ist noch nicht richtig. Käufe in Apps kosten echtes Geld."
+      },
+      {
+        "question": "Woran erkennst du einen guten Shop?",
+        "answers": [
+          "Es gibt kein Impressum.",
+          "Der Shop hat ein Impressum mit Name und Adresse."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Ein guter Shop hat ein Impressum.",
+        "feedbackWrong": "Das ist noch nicht richtig. Ein guter Shop hat ein Impressum mit Name und Adresse."
+      },
+      {
+        "question": "Bleiben deine PIN und TAN geheim?",
+        "answers": [
+          "Nein, die darf ich weitergeben.",
+          "Ja, PIN und TAN bleiben geheim."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. PIN und TAN bleiben geheim.",
+        "feedbackWrong": "Das ist noch nicht richtig. PIN und TAN sind geheim. Gib sie nie weiter."
       }
     ],
     "helpQuestions": [
