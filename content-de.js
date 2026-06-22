@@ -1580,3 +1580,20 @@ function applySelfAssessmentVersions() {
 }
 
 applySelfAssessmentVersions();
+
+/* ------------------------------------------------------------
+   Quiz vereinheitlichen: Einige Themen (KI, Fake News, Betrug,
+   Einkaufen) haben ihre Fragen unter `quizQuestions` statt `quiz`.
+   Damit „Quiz machen" und das große Quiz sie finden, hier angleichen.
+   ------------------------------------------------------------ */
+function normalizeQuizzes() {
+  if (typeof topics === "undefined" || !Array.isArray(topics)) return;
+  topics.forEach((t) => {
+    if ((!Array.isArray(t.quiz) || !t.quiz.length) &&
+        Array.isArray(t.quizQuestions) && t.quizQuestions.length) {
+      t.quiz = t.quizQuestions;
+    }
+  });
+}
+
+normalizeQuizzes();
