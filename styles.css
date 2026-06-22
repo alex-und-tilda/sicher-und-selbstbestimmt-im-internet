@@ -423,6 +423,44 @@ button {
   transition: width 0.5s ease;
 }
 
+/* Sprach-Chip im Hero der Themen-Übersicht */
+.hero-lang-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.32);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.hero-lang-chip:hover {
+  background: rgba(255,255,255,0.26);
+}
+
+/* „Mehr"-Bereich (dezente Sekundär-Aktionen unter den Themen) */
+.more-section {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.more-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
 /* ---------- Sprachstufen-Auswahl (Start) ---------- */
 
 .language-choice {
@@ -493,6 +531,151 @@ button {
   font-size: 1rem;
   color: var(--ink-soft);
   line-height: 1.5;
+}
+
+.language-card.is-rec {
+  border-color: var(--good);
+}
+
+.language-rec {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--good);
+  background: var(--good-bg);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* ---------- Einstieg: erst fragen oder selbst wählen ---------- */
+
+.start-entry {
+  padding: 6px 0 0;
+}
+
+.start-entry-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.entry-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.entry-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.entry-icon {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-m);
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+}
+
+.entry-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.entry-text strong {
+  display: block;
+  font-size: 1.18rem;
+}
+
+.entry-text span {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+/* ---------- Sprach-Abfrage (Fragen) ---------- */
+
+.lang-quiz-card {
+  text-align: center;
+}
+
+.lq-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.lq-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.lq-dot.on {
+  background: var(--accent);
+}
+
+.lq-question {
+  font-size: 1.4rem;
+  margin: 0 0 18px;
+}
+
+.lang-quiz-card .answers {
+  text-align: left;
+}
+
+.lang-quiz-card .plain-back-button {
+  margin-top: 16px;
+}
+
+/* ---------- Sprach-Vorschlag (Ergebnis) ---------- */
+
+.lang-result-card {
+  text-align: center;
+}
+
+.lang-result-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--good);
+  background: var(--good-bg);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 10px;
+}
+
+.lang-result-name {
+  font-size: 1.8rem;
+  margin: 4px 0 6px;
+}
+
+.lang-result-desc {
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+}
+
+.lang-result-go {
+  width: 100%;
+  margin-bottom: 6px;
 }
 
 /* ---------- Begleit-Panel (Für Begleitpersonen / Fachkräfte) ---------- */

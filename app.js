@@ -35,6 +35,19 @@ const LANGUAGE_LABEL = {
   einfach: "Einfache Sprache",
   standard: "Alltagssprache"
 };
+const LANGUAGE_DESC = {
+  leicht: "Kurze Sätze. Mit Bildern.",
+  einfach: "Etwas mehr Text. Mit Beispielen.",
+  standard: "Normaler Text für alle."
+};
+
+/* Kleine, selbstbestimmte Sprach-Abfrage (Vorlieben, kein Test) */
+let langQuizAnswers = [];
+const LANG_QUIZ = [
+  { q: "Wie magst du Texte am liebsten?", a: [["Kurze Sätze mit Bildern", "leicht"], ["Etwas mehr Text mit Beispielen", "einfach"], ["Normale, längere Texte", "standard"]] },
+  { q: "Helfen dir Bilder beim Verstehen?", a: [["Ja, sehr", "leicht"], ["Manchmal", "einfach"], ["Eher nicht", "standard"]] },
+  { q: "Liest du gern längere Texte?", a: [["Lieber kurz", "leicht"], ["Geht so", "einfach"], ["Ja, gern", "standard"]] }
+];
 
 function loadLanguageLevel() {
   try {
@@ -850,34 +863,126 @@ function chooseLanguage(level) {
   renderMenu();
 }
 
-function renderLanguageChoice() {
+/* Einstieg: erst fragen oder gleich selbst wählen */
+function renderStart() {
   stopReading();
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", "Sprache wählen", "Start", "Wie möchtest du lernen?", 0);
+  setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Womit möchtest du starten?", 0);
   showNav(false, false);
 
   content.innerHTML = `
+    <section class="start-entry">
+      <h2 class="language-choice-title">Womit möchtest du starten?</h2>
+      <p class="language-choice-intro">Du kannst gleich selbst wählen. Oder du beantwortest 3 kurze Fragen und bekommst einen Vorschlag.</p>
+      <div class="start-entry-grid">
+        <button type="button" class="entry-card" onclick="startLanguageQuiz()">
+          <span class="entry-icon" aria-hidden="true">${getIconHtml("help")}</span>
+          <span class="entry-text">
+            <strong>Hilf mir, die passende Sprache zu finden</strong>
+            <span>3 kurze Fragen. Es gibt keine falsche Antwort.</span>
+          </span>
+        </button>
+        <button type="button" class="entry-card" onclick="renderLanguageChoice()">
+          <span class="entry-icon" aria-hidden="true">${getIconHtml("check")}</span>
+          <span class="entry-text">
+            <strong>Ich wähle selbst</strong>
+            <span>Direkt eine der drei Sprachen auswählen.</span>
+          </span>
+        </button>
+      </div>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function startLanguageQuiz() {
+  langQuizAnswers = [];
+  renderLanguageQuiz(0);
+}
+
+function renderLanguageQuiz(step) {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Sprache finden", "Frage " + (step + 1) + " von " + LANG_QUIZ.length, "Sprache finden", Math.round((step / LANG_QUIZ.length) * 100));
+  showNav(false, false);
+
+  const Q = LANG_QUIZ[step];
+  const dots = LANG_QUIZ.map((_, j) => `<span class="lq-dot${j <= step ? " on" : ""}"></span>`).join("");
+  const answers = Q.a.map((a) => `<button type="button" class="answer-option" onclick="answerLangQuiz(${step}, '${a[1]}')">${escapeHtml(a[0])}</button>`).join("");
+  const back = step > 0 ? `renderLanguageQuiz(${step - 1})` : `renderStart()`;
+
+  content.innerHTML = `
+    <article class="card lang-quiz-card">
+      <div class="lq-dots" aria-hidden="true">${dots}</div>
+      <h2 class="lq-question">${escapeHtml(Q.q)}</h2>
+      <div class="answers">${answers}</div>
+      <button type="button" class="plain-back-button" onclick="${back}">← Zurück</button>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function answerLangQuiz(step, level) {
+  langQuizAnswers[step] = level;
+  if (step + 1 < LANG_QUIZ.length) return renderLanguageQuiz(step + 1);
+  const t = { leicht: 0, einfach: 0, standard: 0 };
+  langQuizAnswers.forEach((a) => { if (t[a] !== undefined) t[a]++; });
+  let best = "einfach", max = -1;
+  ["leicht", "einfach", "standard"].forEach((k) => { if (t[k] > max) { max = t[k]; best = k; } });
+  const top = ["leicht", "einfach", "standard"].filter((k) => t[k] === max);
+  if (top.length > 1) best = top.indexOf("einfach") >= 0 ? "einfach" : top[0];
+  renderLanguageResult(best);
+}
+
+function renderLanguageResult(level) {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Vorschlag", "Start", "Dein Vorschlag", 100);
+  showNav(false, false);
+
+  content.innerHTML = `
+    <article class="card lang-result-card">
+      <span class="lang-result-badge">Unser Vorschlag für dich</span>
+      <h2 class="lang-result-name">${escapeHtml(LANGUAGE_LABEL[level])}</h2>
+      <p class="lang-result-desc">${escapeHtml(LANGUAGE_DESC[level])} Du kannst es jederzeit ändern.</p>
+      <button type="button" class="nav-button primary lang-result-go" onclick="chooseLanguage('${level}')">Los geht’s</button>
+      <button type="button" class="plain-back-button" onclick="renderLanguageChoice('${level}')">Andere Sprache wählen</button>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function renderLanguageChoice(recommended) {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Sprache wählen", "Start", "Wähle deine Sprache", 0);
+  showNav(false, false);
+
+  const card = (level, icon) => `
+    <button type="button" class="language-card${recommended === level ? " is-rec" : ""}" onclick="chooseLanguage('${level}')">
+      ${recommended === level ? `<span class="language-rec">Vorschlag</span>` : ""}
+      <span class="language-icon" aria-hidden="true">${getIconHtml(icon)}</span>
+      <span class="language-name">${escapeHtml(LANGUAGE_LABEL[level])}</span>
+      <span class="language-desc">${escapeHtml(LANGUAGE_DESC[level])}</span>
+    </button>`;
+
+  content.innerHTML = `
     <section class="language-choice">
-      <h2 class="language-choice-title">Wie möchtest du lernen?</h2>
-      <p class="language-choice-intro">Wähle deine Sprache. Du kannst sie später jederzeit ändern.</p>
+      <h2 class="language-choice-title">Wähle deine Sprache</h2>
+      <p class="language-choice-intro">Du kannst sie später jederzeit ändern.</p>
       <div class="language-grid">
-        <button type="button" class="language-card" onclick="chooseLanguage('leicht')">
-          <span class="language-icon" aria-hidden="true">${getIconHtml("understand")}</span>
-          <span class="language-name">Leichte Sprache</span>
-          <span class="language-desc">Kurze Sätze. Mit Bildern.</span>
-        </button>
-        <button type="button" class="language-card" onclick="chooseLanguage('einfach')">
-          <span class="language-icon" aria-hidden="true">${getIconHtml("example")}</span>
-          <span class="language-name">Einfache Sprache</span>
-          <span class="language-desc">Etwas mehr Text. Mit Beispielen.</span>
-        </button>
-        <button type="button" class="language-card" onclick="chooseLanguage('standard')">
-          <span class="language-icon" aria-hidden="true">${getIconHtml("report")}</span>
-          <span class="language-name">Alltagssprache</span>
-          <span class="language-desc">Normaler Text für alle.</span>
-        </button>
+        ${card("leicht", "understand")}
+        ${card("einfach", "example")}
+        ${card("standard", "report")}
       </div>
     </section>
   `;
@@ -966,9 +1071,10 @@ function renderMenu() {
       <div class="hero-card">
         <div class="hero-inner">
           <div class="hero-text">
-            <h2>Willkommen!</h2>
-            <p>Hier kannst du alles über das sichere Internet lernen.</p>
+            <h2>Wähle ein Thema</h2>
+            <p>Hier lernst du Schritt für Schritt, sicher und selbstbestimmt im Internet unterwegs zu sein.</p>
             <p class="hero-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos</p>
+            <button type="button" class="hero-lang-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, aktuell ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾</button>
             ${heroProgress}
           </div>
           <div class="hero-icon" aria-hidden="true">
@@ -981,23 +1087,26 @@ function renderMenu() {
       </div>
       ${reviewSection}
       ${progressConsent}
-      <div class="start-actions">
-        <button type="button" class="big-quiz-start-button" onclick="startBigQuiz()">
-          ${getIconHtml("quiz")}
-          <span>
-            <strong>Das große Quiz</strong>
-            <span>Alle 12 Themen gemischt</span>
-          </span>
-        </button>
-        <button type="button" class="start-action-secondary" onclick="renderAllMemoryCards()">
-          ${getIconHtml("remember")}
-          <span>
-            <strong>Alle Merk-Karten</strong>
-            <span>Übersicht &amp; Drucken</span>
-          </span>
-        </button>
-      </div>
       <div class="topic-grid">${cards}</div>
+      <div class="more-section" aria-label="Weitere Angebote">
+        <h3 class="more-title">Mehr</h3>
+        <div class="start-actions">
+          <button type="button" class="big-quiz-start-button" onclick="startBigQuiz()">
+            ${getIconHtml("quiz")}
+            <span>
+              <strong>Das große Quiz</strong>
+              <span>Alle 12 Themen gemischt</span>
+            </span>
+          </button>
+          <button type="button" class="start-action-secondary" onclick="renderAllMemoryCards()">
+            ${getIconHtml("remember")}
+            <span>
+              <strong>Alle Merk-Karten</strong>
+              <span>Übersicht &amp; Drucken</span>
+            </span>
+          </button>
+        </div>
+      </div>
     </section>
   `;
   focusContent();
@@ -2347,7 +2456,7 @@ function renderAllMemoryCards() {
    index.html#datenschutz:merk */
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
-  if (!hash) return languageChosen ? renderMenu() : renderLanguageChoice();
+  if (!hash) return languageChosen ? renderMenu() : renderStart();
 
   /* Sonderrouten */
   if (hash === "grosses-quiz") return startBigQuiz();
