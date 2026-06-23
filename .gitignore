@@ -5,3 +5,8 @@
 _vorschau-*.html
 design-vorschau.html
 styles.css.bak
+
+# Archive und alte Projekt-Ordner (gehören NICHT ins Repo)
+*.zip
+8-themen-lernplattform-final-fehler-korrigiert-github/
+Archiv/
