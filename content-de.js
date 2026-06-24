@@ -1568,6 +1568,116 @@ const SELF_ASSESSMENT_VERSIONS = {
       question: "Wie schätzt du dein Wissen zum Schutz deiner persönlichen Daten ein?",
       options: ["Eher gering", "Mittel", "Ziemlich gut"]
     }
+  },
+  whatsapp: {
+    einfach: {
+      question: "Wie gut kennst du dich mit den Sicherheits-Einstellungen bei WhatsApp aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher fühlst du dich im Umgang mit deinen Daten und Einstellungen bei WhatsApp?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
+  },
+  facebook: {
+    einfach: {
+      question: "Wie gut kennst du dich mit den Einstellungen bei Facebook aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher fühlst du dich im Umgang mit deiner Privatsphäre auf Facebook?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
+  },
+  instagram: {
+    einfach: {
+      question: "Wie gut kennst du dich mit den Einstellungen bei Instagram aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher fühlst du dich im Umgang mit deiner Privatsphäre auf Instagram?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
+  },
+  youtube: {
+    einfach: {
+      question: "Wie gut kennst du dich beim sicheren Schauen auf YouTube aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher fühlst du dich im Umgang mit Videos und Einstellungen auf YouTube?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
+  },
+  snapchat: {
+    einfach: {
+      question: "Wie gut kennst du dich mit Snapchat aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie schätzt du dein Wissen über die sichere Nutzung von Snapchat ein?",
+      options: ["Eher gering", "Mittel", "Ziemlich gut"]
+    }
+  },
+  tiktok: {
+    einfach: {
+      question: "Wie gut kennst du dich mit den Einstellungen bei TikTok aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher fühlst du dich im Umgang mit deiner Privatsphäre bei TikTok?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
+  },
+  hilfe: {
+    einfach: {
+      question: "Wie gut weißt du, was du tun kannst, wenn es im Internet Probleme gibt?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie gut weißt du, wo du Hilfe bekommst, wenn im Internet etwas schiefläuft?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich gut"]
+    }
+  },
+  ki: {
+    einfach: {
+      question: "Wie gut kennst du dich mit Künstlicher Intelligenz und Chatbots aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie schätzt du dein Wissen über Künstliche Intelligenz und Chatbots ein?",
+      options: ["Eher gering", "Mittel", "Ziemlich gut"]
+    }
+  },
+  fakes: {
+    einfach: {
+      question: "Wie gut kannst du Fake-Nachrichten und falsche Bilder erkennen?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher bist du darin, Falsch-Nachrichten und KI-Fälschungen zu erkennen?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
+  },
+  betrug: {
+    einfach: {
+      question: "Wie gut kennst du die Maschen von Betrügern im Internet?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher erkennst du Betrugs-Maschen und Abzocke im Internet?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
+  },
+  einkaufen: {
+    einfach: {
+      question: "Wie gut kennst du dich beim sicheren Einkaufen und Bezahlen im Internet aus?",
+      options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
+    },
+    standard: {
+      question: "Wie sicher fühlst du dich beim Einkaufen und Bezahlen im Internet?",
+      options: ["Eher unsicher", "Mittel", "Ziemlich sicher"]
+    }
   }
 };
 
