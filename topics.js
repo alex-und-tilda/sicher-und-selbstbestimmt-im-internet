@@ -249,7 +249,7 @@ const topics = [
           },
           {
             "text": "Ein Passwort ist wie ein Schlüssel.",
-            "pictogram": "pikto-lock"
+            "pictogram": "pikto-key"
           },
           {
             "text": "Andere Menschen dürfen dein Passwort nicht benutzen.",
@@ -289,7 +289,7 @@ const topics = [
           },
           {
             "text": "Buchstaben und Zahlen sind gut.",
-            "pictogram": "pikto-shop"
+            "pictogram": "pikto-key"
           }
         ],
         "bullets": [
@@ -369,11 +369,11 @@ const topics = [
         "text": [
           {
             "text": "Auch deine Telefon-Nummer ist privat.",
-            "pictogram": "pikto-data"
+            "pictogram": "pikto-phone"
           },
           {
             "text": "Auch dein Geburtstag kann privat sein.",
-            "pictogram": "pikto-data"
+            "pictogram": "pikto-birthday"
           },
           {
             "text": "Diese Daten gibst du nicht überall ein.",
@@ -484,7 +484,7 @@ const topics = [
           },
           {
             "text": "Druck ist ein Warnzeichen.",
-            "pictogram": "pikto-feel"
+            "pictogram": "pikto-warning"
           }
         ],
         "examples": [
@@ -520,7 +520,7 @@ const topics = [
           },
           {
             "text": "Dann hilft ein Plan.",
-            "pictogram": "pikto-help"
+            "pictogram": "pikto-plan"
           }
         ],
         "bullets": [

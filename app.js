@@ -474,7 +474,12 @@ const ARASAAC_PICTO = {
   "pikto-location": 24161,
   "pikto-link": 16913,
   "pikto-feel": 11476,
-  "pikto-ask": 7217
+  "pikto-ask": 7217,
+  "pikto-phone": 26479,
+  "pikto-key": 2451,
+  "pikto-birthday": 37363,
+  "pikto-warning": 25315,
+  "pikto-plan": 30207
 };
 
 function pictoSrc(key) {
