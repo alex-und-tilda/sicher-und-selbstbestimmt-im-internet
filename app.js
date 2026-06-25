@@ -392,6 +392,9 @@ function applyGlossar() {
       while (el) {
         if (SKIP.has(el.tagName)) return NodeFilter.FILTER_REJECT;
         if (el.classList && el.classList.contains("glossar-term")) return NodeFilter.FILTER_REJECT;
+        /* Begrüßungs-Feld (Hero) aussparen: dort wäre die Hervorhebung
+           auf dem dunklen Blau schlecht lesbar. */
+        if (el.classList && el.classList.contains("hero-card")) return NodeFilter.FILTER_REJECT;
         el = el.parentElement;
       }
       return NodeFilter.FILTER_ACCEPT;
