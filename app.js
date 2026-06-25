@@ -480,9 +480,22 @@ const ARASAAC_PICTO = {
 function pictoSrc(key) {
   const id = ARASAAC_PICTO[key];
   return id
-    ? `https://static.arasaac.org/pictograms/${id}/${id}_300.png`
+    ? `assets/pictograms/arasaac/${id}.png`
     : `assets/pictograms/${key}.svg`;
 }
+
+/* Lokale ARASAAC-Bilder zuerst (zuverlässig, auch offline).
+   Fehlt ein lokales Bild noch, wird es einmalig vom ARASAAC-Server nachgeladen,
+   damit nie eine Lücke entsteht. */
+document.addEventListener("error", function (e) {
+  const el = e.target;
+  if (!el || el.tagName !== "IMG") return;
+  const m = (el.getAttribute("src") || "").match(/assets\/pictograms\/arasaac\/(\d+)\.png$/);
+  if (m && !el.dataset.cdnTried) {
+    el.dataset.cdnTried = "1";
+    el.src = "https://static.arasaac.org/pictograms/" + m[1] + "/" + m[1] + "_300.png";
+  }
+}, true);
 
 function getTopicById(topicId) {
   return topics.find(topic => topic.id === topicId) || null;
