@@ -807,17 +807,17 @@ button {
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* dezenter Farb-Akzent unten (ersetzt den linken Streifen) */
+/* Farb-Rand oben: dauerhafte Orientierung je Thema */
 .topic-card::after {
   content: "";
   position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 0;
-  height: 3px;
-  border-radius: 3px 3px 0 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 6px;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
   background: var(--topic-color);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.15s ease;
 }
 
@@ -846,12 +846,12 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-m);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   background: var(--topic-icon-bg);
   color: var(--topic-color);
-  box-shadow: inset 0 0 0 1px var(--topic-ring);
+  box-shadow: inset 0 0 0 2px var(--topic-ring);
 }
 
 .topic-icon img {
@@ -908,6 +908,139 @@ button {
 /* Karte im geschafften Zustand: border-left leuchtet grün */
 .topic-card--done {
   border-left-color: var(--good);
+}
+
+/* ============================================================
+   Lernweg-Auswahl: allein / mit App-Hilfe / mit Begleitung
+   ============================================================ */
+.learn-mode-section {
+  margin-bottom: 22px;
+}
+
+.learn-mode-title {
+  font-size: 1.3rem;
+  margin: 0 0 2px;
+  color: var(--ink);
+}
+
+.learn-mode-sub {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.learn-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.learn-mode-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  padding: 18px 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.learn-mode-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.learn-mode-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.learn-mode-card.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.learn-mode-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.learn-mode-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.learn-mode-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.learn-mode-text strong {
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.learn-mode-text span {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.learn-mode-check {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.learn-mode-status {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-s);
+  background: var(--good-bg);
+  color: var(--good);
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.learn-mode-hint {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.topic-grid-title {
+  font-size: 1.3rem;
+  margin: 0 0 14px;
+  color: var(--ink);
 }
 
 /* Einwilligung: Lernstand merken */

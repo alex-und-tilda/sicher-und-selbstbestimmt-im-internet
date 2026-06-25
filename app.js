@@ -68,6 +68,55 @@ function setLanguageLevel(level) {
   try { window.localStorage.setItem(LANGUAGE_KEY, level); } catch (e) { /* nichts tun */ }
 }
 
+/* ============================================================
+   Lernweg: Wie möchte die Person lernen?
+   Selbstbestimmt – freiwillig, jederzeit änderbar, kein Pflicht-Schritt.
+     'allein'      – die App erklärt alles selbst
+     'app'         – bewusst mit Vorlesen, großer Schrift, Sprachwahl
+     'begleitung'  – gemeinsam mit einer Begleitperson (Begleit-Material an)
+   ============================================================ */
+let learnMode = null;
+const LEARN_MODE_KEY = "lern-weg";
+const LEARN_MODES = {
+  allein:     { title: "Ich lerne allein",      desc: "Die App erklärt dir alles. Mit Vorlesen.",        icon: "understand" },
+  app:        { title: "Mit Hilfe der App",     desc: "Vorlesen, große Schrift, leichte Sprache.",       icon: "message" },
+  begleitung: { title: "Mit einer Begleitung",  desc: "Ihr lernt zu zweit. Mit Tipps zum Reden.",        icon: "help" }
+};
+
+function loadLearnMode() {
+  try {
+    const saved = window.localStorage.getItem(LEARN_MODE_KEY);
+    if (saved === "allein" || saved === "app" || saved === "begleitung") {
+      learnMode = saved;
+    }
+  } catch (e) { /* nichts tun */ }
+}
+
+function chooseLearnMode(mode) {
+  if (!LEARN_MODES[mode]) return;
+  /* Gleiche Karte noch einmal antippen = wieder abwählen (selbstbestimmt). */
+  learnMode = (learnMode === mode) ? null : mode;
+  try {
+    if (learnMode) window.localStorage.setItem(LEARN_MODE_KEY, learnMode);
+    else window.localStorage.removeItem(LEARN_MODE_KEY);
+  } catch (e) { /* nichts tun */ }
+
+  if (learnMode === "app") {
+    announce("Gut. Du kannst dir alles vorlesen lassen und die Schrift größer machen. Die Knöpfe sind oben.");
+  } else if (learnMode === "begleitung") {
+    announce("Gut. Auf jeder Themen-Seite gibt es jetzt Tipps für das gemeinsame Lernen.");
+  } else if (learnMode === "allein") {
+    announce("Gut. Such dir ein Thema aus. Die App erklärt dir alles.");
+  } else {
+    announce("Auswahl entfernt. Du kannst auch einfach ein Thema wählen.");
+  }
+  renderMenu();
+}
+
+function isCompanionMode() {
+  return learnMode === "begleitung";
+}
+
 /* Inhalt einer Lektion für die gewählte Sprachstufe holen.
    Fehlt die Stufe noch, wird sinnvoll zurückgefallen, damit die App
    jederzeit funktioniert (Reihenfolge: gewählt → einfach → leicht → Basis). */
@@ -1063,6 +1112,34 @@ function renderMenu() {
        </div>`
     : "";
 
+  /* Lernweg-Auswahl: selbstbestimmt, freiwillig, jederzeit änderbar. */
+  const learnModeCards = Object.keys(LEARN_MODES).map(key => {
+    const m = LEARN_MODES[key];
+    const active = learnMode === key;
+    return `
+      <button type="button" class="learn-mode-card${active ? " is-active" : ""}" aria-pressed="${active ? "true" : "false"}" onclick="chooseLearnMode('${key}')">
+        <span class="learn-mode-icon" aria-hidden="true">${getIconHtml(m.icon)}</span>
+        <span class="learn-mode-text">
+          <strong>${escapeHtml(m.title)}</strong>
+          <span>${escapeHtml(m.desc)}</span>
+        </span>
+        ${active ? `<span class="learn-mode-check" aria-hidden="true">✓</span>` : ""}
+      </button>`;
+  }).join("");
+
+  const companionNote = learnMode === "begleitung"
+    ? `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr Hinweise für das gemeinsame Lernen.</p>`
+    : "";
+
+  const learnModeSection = `
+    <section class="learn-mode-section" aria-label="Wie möchtest du lernen?">
+      <h3 class="learn-mode-title">Wie möchtest du heute lernen?</h3>
+      <p class="learn-mode-sub">Such dir etwas aus. Du kannst es jederzeit ändern.</p>
+      <div class="learn-mode-grid">${learnModeCards}</div>
+      ${companionNote}
+      <p class="learn-mode-hint"><span aria-hidden="true">ℹ️</span> Du musst dich nicht festlegen. Du kannst auch einfach ein Thema wählen und loslegen.</p>
+    </section>`;
+
   /* Wiederholungs-Erinnerung */
   const reviewTopics = getTopicsDueForReview();
   const reviewSection = reviewTopics.length > 0
@@ -1089,9 +1166,9 @@ function renderMenu() {
       <div class="hero-card">
         <div class="hero-inner">
           <div class="hero-text">
-            <h2>Wähle ein Thema</h2>
-            <p>Hier lernst du Schritt für Schritt, sicher und selbstbestimmt im Internet unterwegs zu sein.</p>
-            <p class="hero-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos</p>
+            <h2>Willkommen!</h2>
+            <p>Hier lernst du, sicher im Internet zu sein. Du entscheidest selbst, wie du lernst.</p>
+            <p class="hero-meta">Lern-Plattform &nbsp;·&nbsp; 12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos</p>
             <button type="button" class="hero-lang-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, aktuell ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾</button>
             ${heroProgress}
           </div>
@@ -1103,8 +1180,10 @@ function renderMenu() {
           </div>
         </div>
       </div>
+      ${learnModeSection}
       ${reviewSection}
       ${progressConsent}
+      <h3 class="topic-grid-title">Wähle ein Thema</h3>
       <div class="topic-grid">${cards}</div>
       <div class="more-section" aria-label="Weitere Angebote">
         <h3 class="more-title">Mehr</h3>
@@ -1194,7 +1273,7 @@ function buildCompanionPanel(topic) {
     .join("");
   if (!blocks) return "";
   return `
-    <details class="companion-panel">
+    <details class="companion-panel"${isCompanionMode() ? " open" : ""}>
       <summary>
         <span class="companion-badge">Für Begleitpersonen und Fachkräfte</span>
         <span class="companion-hint">Lernziele, Methodik, Rechtsbezüge – zum Aufklappen</span>
@@ -2541,6 +2620,9 @@ loadFontSize();
 
 /* Gemerkte Sprachstufe laden (falls vorhanden) */
 loadLanguageLevel();
+
+/* Gemerkten Lernweg laden (allein / mit App-Hilfe / mit Begleitung) */
+loadLearnMode();
 
 /* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,
    damit die themenspezifischen Inline-Farben (getTopicColorStyle)
