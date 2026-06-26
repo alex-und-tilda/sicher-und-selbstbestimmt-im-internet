@@ -1098,6 +1098,53 @@ button {
   margin-bottom: 2px;
 }
 
+/* Sanfter Sprach-Finder: Beispiel-Texte zum Auswählen */
+.sample-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0 4px;
+}
+
+.sample-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  padding: 18px 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sample-option:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.sample-option:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sample-text {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.language-finder-link {
+  margin-top: 18px;
+  text-align: center;
+}
+
 /* Dezenter Link zur Erklärung der Sprachstufen */
 .language-more-link {
   margin-top: 18px;

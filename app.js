@@ -47,12 +47,22 @@ const LANGUAGE_EXAMPLE = {
   standard: "Achte auf deine persönlichen Daten und teile dein Passwort mit niemandem, damit dein Konto geschützt bleibt."
 };
 
-/* Kleine, selbstbestimmte Sprach-Abfrage (Vorlieben, kein Test) */
-let langQuizAnswers = [];
-const LANG_QUIZ = [
-  { q: "Wie magst du Texte am liebsten?", a: [["Kurze Sätze mit Bildern", "leicht"], ["Etwas mehr Text mit Beispielen", "einfach"], ["Normale, längere Texte", "standard"]] },
-  { q: "Helfen dir Bilder beim Verstehen?", a: [["Ja, sehr", "leicht"], ["Manchmal", "einfach"], ["Eher nicht", "standard"]] },
-  { q: "Liest du gern längere Texte?", a: [["Lieber kurz", "leicht"], ["Geht so", "einfach"], ["Ja, gern", "standard"]] }
+/* Sanfter Sprach-Finder: kein Test, kein „richtig/falsch".
+   Die Person liest denselben Inhalt in 3 Stufen und wählt, welcher Text
+   sich am angenehmsten anfühlt. So entscheidet das Gefühl, nicht eine
+   Selbsteinschätzung – würdevoll und selbstbestimmt (§4). */
+let sampleTally = { leicht: 0, einfach: 0, standard: 0 };
+const SAMPLE_ROUNDS = [
+  {
+    leicht: "Pass auf deine Daten auf. Sag nicht jedem dein Passwort.",
+    einfach: "Schütze deine Daten und gib dein Passwort nicht weiter, damit niemand in dein Konto kommt.",
+    standard: "Achte auf deine persönlichen Daten und teile dein Passwort mit niemandem, damit dein Konto geschützt bleibt."
+  },
+  {
+    leicht: "Ein Fremder schreibt dir. Antworte nicht. Erzähle es einer Person, der du vertraust.",
+    einfach: "Wenn dir ein Fremder schreibt, antworte besser nicht und erzähle es einer Person, der du vertraust.",
+    standard: "Wenn dich eine unbekannte Person anschreibt, reagierst du besser nicht darauf und sprichst mit jemandem, dem du vertraust."
+  }
 ];
 
 function loadLanguageLevel() {
@@ -1004,27 +1014,46 @@ function renderStart() {
 }
 
 function startLanguageQuiz() {
-  langQuizAnswers = [];
-  renderLanguageQuiz(0);
+  sampleTally = { leicht: 0, einfach: 0, standard: 0 };
+  renderSampleFinder(0);
 }
 
-function renderLanguageQuiz(step) {
+/* Einfaches Mischen (Fisher-Yates), damit die Reihenfolge der Text-Karten
+   wechselt und niemand immer dieselbe Stelle wählt. */
+function shuffleArray(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderSampleFinder(round) {
   stopReading();
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", "Sprache finden", "Frage " + (step + 1) + " von " + LANG_QUIZ.length, "Sprache finden", Math.round((step / LANG_QUIZ.length) * 100));
+  setHeader("Sicher und selbstbestimmt im Internet", "Sprache finden", "Beispiel " + (round + 1) + " von " + SAMPLE_ROUNDS.length, "Sprache finden", Math.round((round / SAMPLE_ROUNDS.length) * 100));
   showNav(false, false);
 
-  const Q = LANG_QUIZ[step];
-  const dots = LANG_QUIZ.map((_, j) => `<span class="lq-dot${j <= step ? " on" : ""}"></span>`).join("");
-  const answers = Q.a.map((a) => `<button type="button" class="answer-option" onclick="answerLangQuiz(${step}, '${a[1]}')">${escapeHtml(a[0])}</button>`).join("");
-  const back = step > 0 ? `renderLanguageQuiz(${step - 1})` : `renderStart()`;
+  const r = SAMPLE_ROUNDS[round];
+  const dots = SAMPLE_ROUNDS.map((_, j) => `<span class="lq-dot${j <= round ? " on" : ""}"></span>`).join("");
+  /* Stufen-Namen werden NICHT gezeigt – die Person wählt nach Gefühl,
+     nicht nach Etikett. Reihenfolge wird gemischt. */
+  const options = shuffleArray(["leicht", "einfach", "standard"]);
+  const cards = options.map(level => `
+    <button type="button" class="sample-option" onclick="pickSample(${round}, '${level}')">
+      <span class="sample-text">„${escapeHtml(r[level])}"</span>
+      <span class="card-read-button" role="button" tabindex="0" data-read-card-text="${escapeHtml(r[level])}" aria-label="Text vorlesen">🔊 Vorlesen</span>
+    </button>`).join("");
+  const back = round > 0 ? `renderSampleFinder(${round - 1})` : `renderStart()`;
 
   content.innerHTML = `
     <article class="card lang-quiz-card">
       <div class="lq-dots" aria-hidden="true">${dots}</div>
-      <h2 class="lq-question">${escapeHtml(Q.q)}</h2>
-      <div class="answers">${answers}</div>
+      <h2 class="lq-question">Welcher Text liest sich für dich am angenehmsten?</h2>
+      <p class="language-choice-intro">Wähle einfach den Text, der sich für dich gut anfühlt. Es gibt keine falsche Antwort.</p>
+      <div class="sample-options">${cards}</div>
       <button type="button" class="plain-back-button" onclick="${back}">← Zurück</button>
     </article>
   `;
@@ -1032,14 +1061,12 @@ function renderLanguageQuiz(step) {
   renderLegalFooter();
 }
 
-function answerLangQuiz(step, level) {
-  langQuizAnswers[step] = level;
-  if (step + 1 < LANG_QUIZ.length) return renderLanguageQuiz(step + 1);
-  const t = { leicht: 0, einfach: 0, standard: 0 };
-  langQuizAnswers.forEach((a) => { if (t[a] !== undefined) t[a]++; });
+function pickSample(round, level) {
+  if (sampleTally[level] !== undefined) sampleTally[level]++;
+  if (round + 1 < SAMPLE_ROUNDS.length) return renderSampleFinder(round + 1);
   let best = "einfach", max = -1;
-  ["leicht", "einfach", "standard"].forEach((k) => { if (t[k] > max) { max = t[k]; best = k; } });
-  const top = ["leicht", "einfach", "standard"].filter((k) => t[k] === max);
+  ["leicht", "einfach", "standard"].forEach((k) => { if (sampleTally[k] > max) { max = sampleTally[k]; best = k; } });
+  const top = ["leicht", "einfach", "standard"].filter((k) => sampleTally[k] === max);
   if (top.length > 1) best = top.indexOf("einfach") >= 0 ? "einfach" : top[0];
   renderLanguageResult(best);
 }
@@ -1090,6 +1117,9 @@ function renderLanguageChoice(recommended) {
         ${card("einfach", "example")}
         ${card("standard", "report")}
       </div>
+      <p class="language-finder-link">
+        <button type="button" class="utility-button" onclick="startLanguageQuiz()">Nicht sicher? Lass uns die passende Sprache finden</button>
+      </p>
       <p class="language-more-link">
         <a href="sprachstufen.html">Was ist der Unterschied? Hier wird es erklärt.</a>
       </p>
@@ -1187,8 +1217,8 @@ function renderMenu() {
      Sprache und Lernweg an einem vorhersehbaren Ort (COGA: gleiche Dinge,
      gleicher Platz). Klare Handlungs-Beschriftung „Sprache ändern: …". */
   const langChip = `
-    <button type="button" class="settings-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, aktuell ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
-      <span aria-hidden="true">🗣️</span> Sprache ändern: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾
+    <button type="button" class="settings-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, du liest gerade ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
+      <span aria-hidden="true">🗣️</span> Du liest: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾
     </button>`;
 
   /* Beim ersten Besuch die Lernweg-Frage groß zeigen; danach nur noch als
