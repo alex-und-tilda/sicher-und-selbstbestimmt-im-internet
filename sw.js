@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-07j";
+const CACHE_VERSION = "v2026-07k";
 const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
@@ -117,6 +117,11 @@ const PRECACHE_URLS = [
   "./assets/pictograms/pikto-fraud.svg",
   "./assets/pictograms/pikto-shop.svg",
   "./assets/pictograms/pikto-done.svg",
+  "./assets/pictograms/pikto-warning.svg",
+  "./assets/pictograms/pikto-key.svg",
+  "./assets/pictograms/pikto-phone.svg",
+  "./assets/pictograms/pikto-birthday.svg",
+  "./assets/pictograms/pikto-plan.svg",
 
   /* Schriften — WOFF2 (primär) + TTF (Fallback, optional) */
   "./assets/fonts/atkinson-regular.woff2",

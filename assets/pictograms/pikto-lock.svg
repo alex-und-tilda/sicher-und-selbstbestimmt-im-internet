@@ -1,8 +1,1 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
-
-  <path d="M31 47 L31 33 Q31 13 50 13 Q69 13 69 33 L69 47" fill="none" stroke="#00528f" stroke-width="6"/>
-  <rect x="16" y="46" width="68" height="44" rx="8" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
-  <circle cx="50" cy="63" r="7" fill="#00528f"/>
-  <rect x="46" y="66" width="8" height="11" rx="3" fill="#00528f"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Schloss / Schutz"><rect x="28" y="44" width="40" height="32" rx="6" fill="#D8EAF2" stroke="#00528f" stroke-width="3"/><path d="M36 44 v-8 a12 12 0 0 1 24 0 v8" fill="none" stroke="#00528f" stroke-width="3"/><circle cx="48" cy="58" r="5" fill="#00528f"/><line x1="48" y1="58" x2="48" y2="67" stroke="#00528f" stroke-width="4" stroke-linecap="round"/></svg>

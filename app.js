@@ -666,11 +666,10 @@ const ARASAAC_PICTO = {
   "pikto-plan": 30207
 };
 
+/* Eigene, flach gestaltete Icons (lizenzfrei) statt ARASAAC.
+   Die SVG-Dateien liegen unter assets/pictograms/<key>.svg. */
 function pictoSrc(key) {
-  const id = ARASAAC_PICTO[key];
-  return id
-    ? `assets/pictograms/arasaac/${id}.png`
-    : `assets/pictograms/${key}.svg`;
+  return `assets/pictograms/${key}.svg`;
 }
 
 /* Lokale ARASAAC-Bilder zuerst (zuverlässig, auch offline).

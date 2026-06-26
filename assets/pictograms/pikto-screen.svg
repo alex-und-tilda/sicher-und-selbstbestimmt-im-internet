@@ -1,9 +1,1 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
-
-  <rect x="8" y="15" width="84" height="56" rx="6" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
-  <line x1="35" y1="71" x2="65" y2="71" stroke="#00528f" stroke-width="5"/>
-  <line x1="50" y1="71" x2="50" y2="85" stroke="#00528f" stroke-width="5"/>
-  <circle cx="42" cy="42" r="12" fill="white" stroke="#00528f" stroke-width="4"/>
-  <line x1="51" y1="51" x2="63" y2="63" stroke="#00528f" stroke-width="5"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Bildschirm"><rect x="34" y="16" width="28" height="64" rx="8" fill="#D8EAF2" stroke="#00528f" stroke-width="3"/><line x1="34" y1="26" x2="62" y2="26" stroke="#00528f" stroke-width="2"/><line x1="34" y1="70" x2="62" y2="70" stroke="#00528f" stroke-width="2"/><circle cx="48" cy="75" r="2" fill="#00528f"/></svg>

@@ -1,8 +1,1 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
-
-  <circle cx="32" cy="28" r="13" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
-  <path d="M8 80 Q8 53 32 53 Q46 53 52 59" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
-  <path d="M66 18 Q82 18 82 32 Q82 43 70 47 L70 55" fill="none" stroke="#00528f" stroke-width="6"/>
-  <circle cx="70" cy="65" r="4" fill="#00528f"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Fragen"><rect x="16" y="20" width="64" height="42" rx="10" fill="#D8EAF2" stroke="#00528f" stroke-width="3"/><path d="M34 62 l0 12 l16 -12 z" fill="#D8EAF2" stroke="#00528f" stroke-width="3" stroke-linejoin="round"/><path d="M40 34 a8 8 0 1 1 11 7.5 q-3 1.5 -3 5" fill="none" stroke="#00528f" stroke-width="4" stroke-linecap="round"/><circle cx="48" cy="53" r="2.6" fill="#00528f"/></svg>

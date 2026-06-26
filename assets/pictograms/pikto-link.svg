@@ -1,8 +1,1 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
-
-  <path d="M20 50 Q20 25 40 25 L55 25 Q62 25 62 38 Q62 50 55 50 L45 50" fill="none" stroke="#00528f" stroke-width="6"/>
-  <path d="M55 50 Q55 75 75 75 L80 75 Q92 75 92 62 Q92 50 80 50 L65 50" fill="none" stroke="#00528f" stroke-width="6"/>
-  <line x1="15" y1="75" x2="40" y2="50" stroke="#c45000" stroke-width="6"/>
-  <line x1="40" y1="75" x2="15" y2="50" stroke="#c45000" stroke-width="6"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Link"><rect x="20" y="40" width="34" height="18" rx="9" fill="none" stroke="#00528f" stroke-width="4" transform="rotate(-28 37 49)"/><rect x="42" y="38" width="34" height="18" rx="9" fill="none" stroke="#3e96be" stroke-width="4" transform="rotate(-28 59 47)"/></svg>

@@ -1,10 +1,1 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-  <style>*{stroke-linecap:round;stroke-linejoin:round}</style>
-
-  <rect x="15" y="10" width="55" height="70" rx="5" fill="#cce8f7" stroke="#00528f" stroke-width="5"/>
-  <line x1="25" y1="30" x2="58" y2="30" stroke="#00528f" stroke-width="3"/>
-  <line x1="25" y1="42" x2="58" y2="42" stroke="#00528f" stroke-width="3"/>
-  <line x1="25" y1="54" x2="45" y2="54" stroke="#00528f" stroke-width="3"/>
-  <line x1="55" y1="50" x2="90" y2="85" stroke="#c45000" stroke-width="8" stroke-linecap="round"/>
-  <line x1="90" y1="50" x2="55" y2="85" stroke="#c45000" stroke-width="8" stroke-linecap="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Fälschung / Fake"><ellipse cx="48" cy="44" rx="22" ry="26" fill="#D8EAF2" stroke="#00528f" stroke-width="3"/><path d="M34 40 q6 -6 12 0" fill="none" stroke="#00528f" stroke-width="3" stroke-linecap="round"/><path d="M50 40 q6 -6 12 0" fill="none" stroke="#00528f" stroke-width="3" stroke-linecap="round"/><line x1="48" y1="70" x2="48" y2="86" stroke="#00528f" stroke-width="4" stroke-linecap="round"/></svg>
