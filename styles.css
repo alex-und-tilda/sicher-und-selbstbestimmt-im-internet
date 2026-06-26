@@ -1077,6 +1077,176 @@ button {
   outline-offset: 2px;
 }
 
+.settings-chip--profile span[aria-hidden="true"] {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* ============================================================
+   Profile: „Wer lernt gerade?", neues Bild, verwalten
+   ============================================================ */
+.profile-picker-title {
+  font-size: 1.6rem;
+  margin: 8px 0 6px;
+  color: var(--ink);
+}
+
+.profile-picker-intro {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+  max-width: 60ch;
+}
+
+.profile-grid,
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.avatar-grid--small {
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px;
+}
+
+.profile-card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 14px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profile-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.profile-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-card--new {
+  border-style: dashed;
+}
+
+.profile-avatar {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.profile-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.profile-active-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.profile-edit-link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.avatar-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 10px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.avatar-choice:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+}
+
+.avatar-choice:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.avatar-choice.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.avatar-choice.is-used {
+  opacity: 0.45;
+}
+
+.avatar-choice--small {
+  padding: 10px;
+}
+
+.avatar-choice-pic {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.avatar-choice-name {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.profile-manage-sub {
+  font-size: 1.2rem;
+  margin: 22px 0 6px;
+  color: var(--ink);
+}
+
+.profile-manage-note {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+  max-width: 60ch;
+}
+
+.danger-button {
+  border-color: var(--bad) !important;
+  color: var(--bad) !important;
+}
+
+.danger-button:hover {
+  background: var(--bad-bg) !important;
+}
+
 /* Beispiel-Satz in den Sprach-Auswahl-Karten */
 .language-example {
   display: block;

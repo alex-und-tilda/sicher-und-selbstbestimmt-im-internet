@@ -67,7 +67,7 @@ const SAMPLE_ROUNDS = [
 
 function loadLanguageLevel() {
   try {
-    const saved = window.localStorage.getItem(LANGUAGE_KEY);
+    const saved = pGet(LANGUAGE_KEY);
     if (saved === "leicht" || saved === "einfach" || saved === "standard") {
       languageLevel = saved;
       languageChosen = true;
@@ -81,7 +81,7 @@ function setLanguageLevel(level) {
   if (level !== "leicht" && level !== "einfach" && level !== "standard") return;
   languageLevel = level;
   languageChosen = true;
-  try { window.localStorage.setItem(LANGUAGE_KEY, level); } catch (e) { /* nichts tun */ }
+  pSet(LANGUAGE_KEY, level);
 }
 
 /* ============================================================
@@ -108,7 +108,7 @@ const LEARN_MODES = {
 
 function loadLearnMode() {
   try {
-    const saved = window.localStorage.getItem(LEARN_MODE_KEY);
+    const saved = pGet(LEARN_MODE_KEY);
     if (saved === "allein" || saved === "app" || saved === "begleitung") {
       learnMode = saved;
     }
@@ -119,17 +119,15 @@ function chooseLearnMode(mode) {
   if (!LEARN_MODES[mode]) return;
   /* Gleiche Karte noch einmal antippen = wieder abwählen (selbstbestimmt). */
   learnMode = (learnMode === mode) ? null : mode;
-  try {
-    if (learnMode) window.localStorage.setItem(LEARN_MODE_KEY, learnMode);
-    else window.localStorage.removeItem(LEARN_MODE_KEY);
-  } catch (e) { /* nichts tun */ }
+  if (learnMode) pSet(LEARN_MODE_KEY, learnMode);
+  else pRemove(LEARN_MODE_KEY);
 
   if (learnMode === "app") {
     /* App-Hilfe-Modus spürbar machen: Schrift mindestens eine Stufe größer.
        Nie automatisch verkleinern – die Person behält die Kontrolle. */
     if (fontSizeStep < 1) {
       fontSizeStep = 1;
-      try { window.localStorage.setItem(FONT_SIZE_KEY, fontSizeStep); } catch (e) { /* nichts tun */ }
+      pSet(FONT_SIZE_KEY, fontSizeStep);
       applyFontSize();
     }
     announce("Gut. Die Schrift ist jetzt größer. Jede Seite wird dir automatisch vorgelesen. Du kannst das Vorlesen jederzeit stoppen.");
@@ -148,12 +146,11 @@ function isCompanionMode() {
 }
 
 function learnModeWasSeen() {
-  try { return window.localStorage.getItem(LEARN_MODE_SEEN_KEY) === "1"; }
-  catch (e) { return false; }
+  return pGet(LEARN_MODE_SEEN_KEY) === "1";
 }
 
 function markLearnModeSeen() {
-  try { window.localStorage.setItem(LEARN_MODE_SEEN_KEY, "1"); } catch (e) { /* nichts tun */ }
+  pSet(LEARN_MODE_SEEN_KEY, "1");
 }
 
 /* Lernweg-Frage wieder groß aufklappen (Klick auf die kleine Zeile). */
@@ -204,7 +201,7 @@ function applyFontSize() {
 
 function loadFontSize() {
   try {
-    const saved = parseInt(window.localStorage.getItem(FONT_SIZE_KEY), 10);
+    const saved = parseInt(pGet(FONT_SIZE_KEY), 10);
     if (!isNaN(saved) && saved >= 0 && saved < FONT_SIZES.length) fontSizeStep = saved;
   } catch (e) { /* nichts tun */ }
   applyFontSize();
@@ -214,11 +211,100 @@ function changeFontSize(direction) {
   const next = fontSizeStep + direction;
   if (next < 0 || next >= FONT_SIZES.length) return;
   fontSizeStep = next;
-  try { window.localStorage.setItem(FONT_SIZE_KEY, fontSizeStep); } catch (e) { /* nichts tun */ }
+  pSet(FONT_SIZE_KEY, fontSizeStep);
   applyFontSize();
   /* Buttons in allen sichtbaren Utility-Bars aktualisieren */
   document.querySelectorAll(".font-btn-decrease").forEach(b => { b.disabled = fontSizeStep === 0; });
   document.querySelectorAll(".font-btn-increase").forEach(b => { b.disabled = fontSizeStep === FONT_SIZES.length - 1; });
+}
+
+/* ============================================================
+   Profile: mehrere Personen an einem Gerät – ohne Login, ohne Namen.
+   Jede Person wählt ein Bild (Avatar). Sprache, Schrift, Lernweg und
+   Lernstand werden PRO Profil getrennt gespeichert. Alles bleibt lokal
+   auf dem Gerät (KDG-konform §14): kein Name nötig, kein Konto, kein Server.
+   ============================================================ */
+const PROFILES_KEY = "profile-liste";
+const ACTIVE_PROFILE_KEY = "profil-aktiv";
+let profiles = [];          /* [{ id, avatar }] */
+let activeProfileId = null;
+
+const AVATARS = [
+  { e: "🦊", n: "Fuchs" }, { e: "🐰", n: "Hase" }, { e: "🦉", n: "Eule" },
+  { e: "🐢", n: "Schildkröte" }, { e: "🐬", n: "Delfin" }, { e: "🦋", n: "Schmetterling" },
+  { e: "🌻", n: "Blume" }, { e: "⚽", n: "Ball" }, { e: "🚲", n: "Fahrrad" },
+  { e: "🎸", n: "Gitarre" }, { e: "🐧", n: "Pinguin" }, { e: "🐱", n: "Katze" }
+];
+
+/* Alle Einstellungs-Schlüssel, die pro Profil getrennt gespeichert werden. */
+const PROFILE_BASE_KEYS = [LANGUAGE_KEY, FONT_SIZE_KEY, STORAGE_KEY, LEARN_MODE_KEY, LEARN_MODE_SEEN_KEY];
+
+/* Schlüssel für das aktive Profil. Ohne aktives Profil: alter Schlüssel
+   (Rückfall – so bricht nie etwas). */
+function pKey(base) {
+  return activeProfileId ? base + "::" + activeProfileId : base;
+}
+function pGet(base) { try { return window.localStorage.getItem(pKey(base)); } catch (e) { return null; } }
+function pSet(base, val) { try { window.localStorage.setItem(pKey(base), val); } catch (e) { /* nichts tun */ } }
+function pRemove(base) { try { window.localStorage.removeItem(pKey(base)); } catch (e) { /* nichts tun */ } }
+
+function genProfileId() {
+  return "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+function saveProfiles() {
+  try {
+    window.localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+    if (activeProfileId) window.localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
+  } catch (e) { /* nichts tun */ }
+}
+
+function loadProfiles() {
+  try {
+    const raw = window.localStorage.getItem(PROFILES_KEY);
+    profiles = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(profiles)) profiles = [];
+    const savedActive = window.localStorage.getItem(ACTIVE_PROFILE_KEY);
+    activeProfileId = (savedActive && profiles.some(p => p.id === savedActive))
+      ? savedActive
+      : (profiles[0] ? profiles[0].id : null);
+  } catch (e) { profiles = []; activeProfileId = null; }
+}
+
+function getActiveProfile() {
+  return profiles.find(p => p.id === activeProfileId) || null;
+}
+
+/* Beim ersten Start mit der neuen Version: vorhandene Einstellungen eines
+   einzelnen Nutzers in ein Standard-Profil übernehmen – nichts geht verloren. */
+function ensureProfiles() {
+  loadProfiles();
+  if (profiles.length > 0) return;
+  const p = { id: genProfileId(), avatar: "🦊" };
+  profiles = [p];
+  activeProfileId = p.id;
+  PROFILE_BASE_KEYS.forEach(base => {
+    try {
+      const old = window.localStorage.getItem(base);
+      if (old !== null) {
+        window.localStorage.setItem(base + "::" + p.id, old);
+        window.localStorage.removeItem(base);
+      }
+    } catch (e) { /* nichts tun */ }
+  });
+  saveProfiles();
+}
+
+/* Einstellungen des aktiven Profils frisch in den Speicher laden. */
+function loadActiveProfileSettings() {
+  languageChosen = false;
+  languageLevel = "leicht";
+  learnMode = null;
+  learnModeChooserOpen = false;
+  fontSizeStep = 0;
+  loadFontSize();       /* liest + wendet Schriftgröße an */
+  loadLanguageLevel();  /* setzt languageLevel + languageChosen, falls gemerkt */
+  loadLearnMode();
 }
 
 /* ============================================================
@@ -230,7 +316,7 @@ const STORAGE_KEY = "lernstand";
 
 function loadProgress() {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = pGet(STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch (error) {
     return null;
@@ -239,7 +325,7 @@ function loadProgress() {
 
 function saveProgress(progress) {
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    pSet(STORAGE_KEY, JSON.stringify(progress));
   } catch (error) {
     /* Wenn Speichern nicht geht, läuft alles ohne Lernstand weiter. */
   }
@@ -257,9 +343,7 @@ function setProgressEnabled(enabled) {
     progress.done = progress.done || {};
     saveProgress(progress);
   } else {
-    try {
-      window.localStorage.removeItem(STORAGE_KEY);
-    } catch (error) { /* nichts zu tun */ }
+    pRemove(STORAGE_KEY);
   }
 }
 
@@ -978,6 +1062,196 @@ function chooseLanguage(level) {
   renderMenu();
 }
 
+/* ============================================================
+   Profil-Bildschirme: „Wer lernt gerade?", neues Bild, verwalten
+   ============================================================ */
+
+function avatarLabel(av) {
+  const found = AVATARS.find(a => a.e === av);
+  return found ? found.n : "Bild";
+}
+
+function switchProfile(id) {
+  if (!profiles.some(p => p.id === id)) return;
+  activeProfileId = id;
+  saveProfiles();
+  loadActiveProfileSettings();
+  finishedTopicThisSession = false;
+  if (languageChosen) renderMenu();
+  else renderStart();
+}
+
+function renderProfilePicker() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Wer lernt?", "Start", "Wer lernt gerade?", 0);
+  showNav(false, false);
+
+  const cards = profiles.map(p => `
+    <div class="profile-card-wrap">
+      <button type="button" class="profile-card" onclick="switchProfile('${escapeHtml(p.id)}')" aria-label="Weiter als ${escapeHtml(avatarLabel(p.avatar))}">
+        <span class="profile-avatar" aria-hidden="true">${escapeHtml(p.avatar)}</span>
+        <span class="profile-name">${escapeHtml(avatarLabel(p.avatar))}</span>
+        ${p.id === activeProfileId ? `<span class="profile-active-badge">Das bist du</span>` : ""}
+      </button>
+      <button type="button" class="profile-edit-link" onclick="renderProfileManage('${escapeHtml(p.id)}')">Ändern</button>
+    </div>`).join("");
+
+  content.innerHTML = `
+    <section class="profile-picker">
+      <h2 class="profile-picker-title">Wer lernt gerade?</h2>
+      <p class="profile-picker-intro">Such dir dein Bild aus. Dann merkt sich die App deine Sprache und deinen Lernstand – nur auf diesem Gerät, ohne Namen.</p>
+      <div class="profile-grid">
+        ${cards}
+        <button type="button" class="profile-card profile-card--new" onclick="renderNewProfile()" aria-label="Neue Person hinzufügen">
+          <span class="profile-avatar" aria-hidden="true">＋</span>
+          <span class="profile-name">Neue Person</span>
+        </button>
+      </div>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function renderNewProfile() {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Neues Bild", "Start", "Such dir ein Bild aus", 0);
+  showNav(false, false);
+
+  const used = profiles.map(p => p.avatar);
+  const choices = AVATARS.map(a => `
+    <button type="button" class="avatar-choice${used.includes(a.e) ? " is-used" : ""}" onclick="createProfile('${a.e}')" aria-label="${escapeHtml(a.n)} wählen">
+      <span class="avatar-choice-pic" aria-hidden="true">${a.e}</span>
+      <span class="avatar-choice-name">${escapeHtml(a.n)}</span>
+    </button>`).join("");
+
+  content.innerHTML = `
+    <section class="profile-new">
+      <h2 class="profile-picker-title">Such dir ein Bild aus</h2>
+      <p class="profile-picker-intro">Dieses Bild ist dein Zeichen. Du brauchst keinen Namen.</p>
+      <div class="avatar-grid">${choices}</div>
+      <button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function createProfile(avatar) {
+  const p = { id: genProfileId(), avatar: avatar };
+  profiles.push(p);
+  activeProfileId = p.id;
+  saveProfiles();
+  languageChosen = false;
+  languageLevel = "leicht";
+  learnMode = null;
+  learnModeChooserOpen = false;
+  fontSizeStep = 0;
+  applyFontSize();
+  finishedTopicThisSession = false;
+  renderStart();
+}
+
+function changeAvatar(id, avatar) {
+  const p = profiles.find(x => x.id === id);
+  if (!p) return;
+  p.avatar = avatar;
+  saveProfiles();
+  renderProfileManage(id);
+}
+
+function renderProfileManage(id) {
+  const p = profiles.find(x => x.id === id);
+  if (!p) return renderProfilePicker();
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Profil", "Start", "Profil ändern", 0);
+  showNav(false, false);
+
+  const choices = AVATARS.map(a => `
+    <button type="button" class="avatar-choice avatar-choice--small${a.e === p.avatar ? " is-active" : ""}" onclick="changeAvatar('${escapeHtml(id)}','${a.e}')" aria-label="${escapeHtml(a.n)} wählen">
+      <span class="avatar-choice-pic" aria-hidden="true">${a.e}</span>
+    </button>`).join("");
+
+  content.innerHTML = `
+    <section class="profile-manage">
+      <h2 class="profile-picker-title"><span aria-hidden="true">${escapeHtml(p.avatar)}</span> Dein Profil</h2>
+
+      <h3 class="profile-manage-sub">Anderes Bild wählen</h3>
+      <div class="avatar-grid avatar-grid--small">${choices}</div>
+
+      <h3 class="profile-manage-sub">Neu anfangen</h3>
+      <p class="profile-manage-note">Das löscht für dieses Bild die gewählte Sprache und den Lernstand. Du fängst wieder von vorne an. Andere Personen bleiben.</p>
+      <button type="button" class="utility-button" onclick="resetProfile('${escapeHtml(id)}')">Neu anfangen</button>
+
+      <h3 class="profile-manage-sub">Profil löschen</h3>
+      <p class="profile-manage-note">Das löscht dieses Bild und seinen Lernstand ganz.</p>
+      <button type="button" class="utility-button danger-button" onclick="confirmDeleteProfile('${escapeHtml(id)}')">Dieses Profil löschen</button>
+
+      <button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function resetProfile(id) {
+  const wasActive = id === activeProfileId;
+  const prevActive = activeProfileId;
+  activeProfileId = id;
+  PROFILE_BASE_KEYS.forEach(base => pRemove(base));
+  activeProfileId = prevActive;
+  if (wasActive) {
+    loadActiveProfileSettings();
+    finishedTopicThisSession = false;
+    announce("Du fängst neu an.");
+    renderStart();
+  } else {
+    announce("Der Lernstand wurde gelöscht.");
+    renderProfilePicker();
+  }
+}
+
+function confirmDeleteProfile(id) {
+  const p = profiles.find(x => x.id === id);
+  if (!p) return;
+  stopReading();
+  setHeader("Sicher und selbstbestimmt im Internet", "Profil löschen", "Start", "Wirklich löschen?", 0);
+  content.innerHTML = `
+    <section class="profile-manage">
+      <article class="card">
+        <h2>Profil wirklich löschen?</h2>
+        <p>Das Bild <span aria-hidden="true">${escapeHtml(p.avatar)}</span> ${escapeHtml(avatarLabel(p.avatar))} und sein Lernstand werden gelöscht. Das kann man nicht rückgängig machen.</p>
+        <div class="feedback-actions">
+          <button type="button" class="feedback-button secondary danger-button" onclick="deleteProfile('${escapeHtml(id)}')">Ja, löschen</button>
+          <button type="button" class="feedback-button primary" onclick="renderProfileManage('${escapeHtml(id)}')">Nein, behalten</button>
+        </div>
+      </article>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function deleteProfile(id) {
+  const prevActive = activeProfileId;
+  activeProfileId = id;
+  PROFILE_BASE_KEYS.forEach(base => pRemove(base));
+  activeProfileId = prevActive;
+  profiles = profiles.filter(p => p.id !== id);
+  if (activeProfileId === id) activeProfileId = profiles[0] ? profiles[0].id : null;
+  saveProfiles();
+  if (profiles.length === 0) return renderNewProfile();
+  loadActiveProfileSettings();
+  renderProfilePicker();
+}
+
 /* Einstieg: erst fragen oder gleich selbst wählen */
 function renderStart() {
   stopReading();
@@ -1216,6 +1490,12 @@ function renderMenu() {
   /* Gemeinsame Einstell-Zeile direkt unter der Begrüßung:
      Sprache und Lernweg an einem vorhersehbaren Ort (COGA: gleiche Dinge,
      gleicher Platz). Klare Handlungs-Beschriftung „Sprache ändern: …". */
+  const activeProfile = getActiveProfile();
+  const profileChip = activeProfile ? `
+    <button type="button" class="settings-chip settings-chip--profile" onclick="renderProfilePicker()" aria-label="Person wechseln, du bist gerade ${escapeHtml(avatarLabel(activeProfile.avatar))}">
+      <span aria-hidden="true">${escapeHtml(activeProfile.avatar)}</span> Du: ${escapeHtml(avatarLabel(activeProfile.avatar))} ▾
+    </button>` : "";
+
   const langChip = `
     <button type="button" class="settings-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, du liest gerade ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
       <span aria-hidden="true">🗣️</span> Du liest: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾
@@ -1228,7 +1508,7 @@ function renderMenu() {
   let learnModeSection;
   if (showFullChooser) {
     markLearnModeSeen();
-    settingsRow = `<div class="settings-row">${langChip}</div>`;
+    settingsRow = `<div class="settings-row">${profileChip}${langChip}</div>`;
     learnModeSection = `
     <section class="learn-mode-section" aria-label="Wie möchtest du lernen?">
       <h3 class="learn-mode-title">Wie möchtest du heute lernen?</h3>
@@ -1243,7 +1523,7 @@ function renderMenu() {
       <button type="button" class="settings-chip" onclick="openLearnModeChooser()" aria-label="Lernweg ändern, aktuell ${escapeHtml(label)}">
         <span aria-hidden="true">🧭</span> Lernweg: ${escapeHtml(label)} ▾
       </button>`;
-    settingsRow = `<div class="settings-row">${langChip}${learnChip}</div>`;
+    settingsRow = `<div class="settings-row">${profileChip}${langChip}${learnChip}</div>`;
     learnModeSection = companionNote;
   }
 
@@ -2668,7 +2948,12 @@ function renderAllMemoryCards() {
    index.html#datenschutz:merk */
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
-  if (!hash) return languageChosen ? renderMenu() : renderStart();
+  if (!hash) {
+    /* Mehrere Personen am Gerät: zuerst fragen „Wer lernt gerade?".
+       Bei nur einer Person ohne Umweg weiter. */
+    if (profiles.length > 1) return renderProfilePicker();
+    return languageChosen ? renderMenu() : renderStart();
+  }
 
   /* Sonderrouten */
   if (hash === "grosses-quiz") return startBigQuiz();
@@ -2730,14 +3015,10 @@ document.addEventListener("keydown", function (event) {
 initGlossar();
 initGlossarEvents();
 
-/* Schriftgröße vor dem ersten Rendern anwenden */
-loadFontSize();
-
-/* Gemerkte Sprachstufe laden (falls vorhanden) */
-loadLanguageLevel();
-
-/* Gemerkten Lernweg laden (allein / mit App-Hilfe / mit Begleitung) */
-loadLearnMode();
+/* Profile laden (oder beim ersten Mal anlegen und vorhandene Einstellungen
+   übernehmen), dann die Einstellungen des aktiven Profils anwenden. */
+ensureProfiles();
+loadActiveProfileSettings();
 
 /* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,
    damit die themenspezifischen Inline-Farben (getTopicColorStyle)
