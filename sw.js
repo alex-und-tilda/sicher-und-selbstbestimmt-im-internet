@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-07k";
+const CACHE_VERSION = "v2026-07l";
 const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
@@ -122,6 +122,20 @@ const PRECACHE_URLS = [
   "./assets/pictograms/pikto-phone.svg",
   "./assets/pictograms/pikto-birthday.svg",
   "./assets/pictograms/pikto-plan.svg",
+  "./assets/pictograms/pikto-money.svg",
+  "./assets/pictograms/pikto-bank.svg",
+  "./assets/pictograms/pikto-card.svg",
+  "./assets/pictograms/pikto-person.svg",
+  "./assets/pictograms/pikto-people.svg",
+  "./assets/pictograms/pikto-stranger.svg",
+  "./assets/pictograms/pikto-video.svg",
+  "./assets/pictograms/pikto-house.svg",
+  "./assets/pictograms/pikto-search.svg",
+  "./assets/pictograms/pikto-code.svg",
+  "./assets/pictograms/pikto-globe.svg",
+  "./assets/pictograms/pikto-friend.svg",
+  "./assets/pictograms/pikto-clock.svg",
+  "./assets/pictograms/pikto-mail.svg",
 
   /* Schriften — WOFF2 (primär) + TTF (Fallback, optional) */
   "./assets/fonts/atkinson-regular.woff2",

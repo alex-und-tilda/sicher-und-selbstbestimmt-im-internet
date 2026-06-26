@@ -672,6 +672,31 @@ function pictoSrc(key) {
   return `assets/pictograms/${key}.svg`;
 }
 
+/* Bessere Bild-Zuordnung: sucht anhand des Satz-Textes ein passenderes Icon.
+   Nur klare Treffer überschreiben das hinterlegte Bild – sonst bleibt es.
+   Zentral und umkehrbar (topics.js wird nicht verändert). */
+const PICTO_RULES = [
+  [/\bbank\b|sparkasse/i, "pikto-bank"],
+  [/geld|euro|bezahl|gekauft|kostet|\bpreis\b|abzock/i, "pikto-money"],
+  [/kreditkarte|bezahl-?karte|bank-?karte/i, "pikto-card"],
+  [/\bpin\b|geheim-?zahl|\bcode\b|tan\b/i, "pikto-code"],
+  [/videos?\b/i, "pikto-video"],
+  [/adresse|wo du wohnst|deine wohnung|zuhause/i, "pikto-house"],
+  [/genau an|kontrollier|überprüf|prüfe nach/i, "pikto-search"],
+  [/fremde|fremder|unbekannte person|unbekannter/i, "pikto-stranger"],
+  [/freund/i, "pikto-friend"],
+  [/internet|webseite|online|im netz/i, "pikto-globe"],
+  [/e-?mail|brief\b/i, "pikto-mail"],
+  [/menschen|mensch\b|leute|andere personen|viele personen/i, "pikto-person"]
+];
+function refinePicto(key, text) {
+  if (!text) return key;
+  for (let i = 0; i < PICTO_RULES.length; i++) {
+    if (PICTO_RULES[i][0].test(text)) return PICTO_RULES[i][1];
+  }
+  return key;
+}
+
 /* Lokale ARASAAC-Bilder zuerst (zuverlässig, auch offline).
    Fehlt ein lokales Bild noch, wird es einmalig vom ARASAAC-Server nachgeladen,
    damit nie eine Lücke entsteht. */
@@ -1994,7 +2019,7 @@ function renderLesson() {
     ? lesson.text.map(item => {
         if (typeof item === "object" && item.text) {
           const img = item.pictogram
-            ? `<img class="ls-sentence-pikto" src="${pictoSrc(item.pictogram)}" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`
+            ? `<img class="ls-sentence-pikto" src="${pictoSrc(refinePicto(item.pictogram, item.text))}" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`
             : "";
           return `<div class="ls-text-row">${img}<p>${escapeHtml(item.text)}</p></div>`;
         }
@@ -2007,7 +2032,7 @@ function renderLesson() {
     ? `<ul class="ls-bullet-list">${lesson.bullets.map(item => {
         if (typeof item === "object" && item.text) {
           const img = item.pictogram
-            ? `<img class="ls-bullet-pikto" src="${pictoSrc(item.pictogram)}" alt="" width="40" height="40" aria-hidden="true" loading="lazy">`
+            ? `<img class="ls-bullet-pikto" src="${pictoSrc(refinePicto(item.pictogram, item.text))}" alt="" width="40" height="40" aria-hidden="true" loading="lazy">`
             : "";
           return `<li class="ls-bullet-item">${img}<span>${escapeHtml(item.text)}</span></li>`;
         }
