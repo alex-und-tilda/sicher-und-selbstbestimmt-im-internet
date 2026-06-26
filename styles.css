@@ -1098,6 +1098,37 @@ button {
   margin-bottom: 2px;
 }
 
+/* Vergleichstabelle auf der Seite „Die Sprachstufen" */
+.sprachstufen-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 8px;
+  font-size: 0.98rem;
+}
+
+.sprachstufen-table th,
+.sprachstufen-table td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.sprachstufen-table thead th {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+.sprachstufen-table tbody td:first-child {
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.sprachstufen-table tbody tr:nth-child(even) td {
+  background: var(--surface-soft);
+}
+
 /* Einwilligung: Lernstand merken */
 .progress-consent {
   display: flex;
