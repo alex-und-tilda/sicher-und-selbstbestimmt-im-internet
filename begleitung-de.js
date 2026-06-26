@@ -92,7 +92,8 @@ const COMPANION = {
     lernziele: [
       "Die Teilnehmenden gestalten ihr Profil so, dass private Angaben nicht öffentlich sind.",
       "Sie prüfen Freundschafts-Anfragen und nehmen nicht jede an.",
-      "Sie schreiben respektvoll und holen sich bei Beleidigungen Hilfe."
+      "Sie schreiben respektvoll und holen sich bei Beleidigungen Hilfe.",
+      "Sie kennen einen einfachen Handlungsplan bei Problemen: blockieren, melden, einer vertrauten Person erzählen, Hilfe holen."
     ],
     methodik: [
       "Lebensweltorientierung: am eigenen oder einem Beispiel-Profil zeigen.",

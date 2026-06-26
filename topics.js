@@ -1875,6 +1875,45 @@ const topics = [
         "pictogram": "pikto-photo"
       },
       {
+        "title": "Was kann ich tun?",
+        "module": "Handlungsplan",
+        "icon": "help",
+        "text": [
+          {
+            "text": "Etwas auf Facebook tut dir nicht gut.",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Zum Beispiel ist eine Person gemein zu dir.",
+            "pictogram": "pikto-warning"
+          },
+          {
+            "text": "Du musst das nicht alleine aushalten.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "bullets": [
+          {
+            "text": "Du kannst die Person blockieren.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Du kannst den Beitrag melden.",
+            "pictogram": "pikto-warning"
+          },
+          {
+            "text": "Du kannst es einer vertrauten Person sagen.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du kannst Hilfe holen.",
+            "pictogram": "pikto-ask"
+          }
+        ],
+        "success": "Hilfe holen ist gut. Es ist nicht deine Schuld.",
+        "pictogram": "pikto-help"
+      },
+      {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
