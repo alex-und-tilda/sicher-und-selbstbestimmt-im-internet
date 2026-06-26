@@ -102,7 +102,14 @@ function chooseLearnMode(mode) {
   } catch (e) { /* nichts tun */ }
 
   if (learnMode === "app") {
-    announce("Gut. Du kannst dir alles vorlesen lassen und die Schrift größer machen. Die Knöpfe sind oben.");
+    /* App-Hilfe-Modus spürbar machen: Schrift mindestens eine Stufe größer.
+       Nie automatisch verkleinern – die Person behält die Kontrolle. */
+    if (fontSizeStep < 1) {
+      fontSizeStep = 1;
+      try { window.localStorage.setItem(FONT_SIZE_KEY, fontSizeStep); } catch (e) { /* nichts tun */ }
+      applyFontSize();
+    }
+    announce("Gut. Die Schrift ist jetzt größer. Jede Seite wird dir automatisch vorgelesen. Du kannst das Vorlesen jederzeit stoppen.");
   } else if (learnMode === "begleitung") {
     announce("Gut. Auf jeder Themen-Seite gibt es jetzt Tipps für das gemeinsame Lernen.");
   } else if (learnMode === "allein") {
@@ -1130,9 +1137,12 @@ function renderMenu() {
       </button>`;
   }).join("");
 
-  const companionNote = learnMode === "begleitung"
-    ? `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr Hinweise für das gemeinsame Lernen.</p>`
-    : "";
+  let companionNote = "";
+  if (learnMode === "begleitung") {
+    companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr Hinweise für das gemeinsame Lernen.</p>`;
+  } else if (learnMode === "app") {
+    companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">🔊</span> App-Hilfe ist an. Die Schrift ist größer und jede Seite wird dir vorgelesen.</p>`;
+  }
 
   const learnModeSection = `
     <section class="learn-mode-section" aria-label="Wie möchtest du lernen?">
@@ -1683,6 +1693,13 @@ function renderLesson() {
   `;
   focusContent();
   renderLegalFooter();
+
+  /* App-Hilfe-Modus: jede Lektion automatisch vorlesen.
+     Sanft (kleine Verzögerung) und jederzeit über „Stopp" abbrechbar (§3:
+     Vorlesen als Angebot, nicht als Zwang). */
+  if (learnMode === "app" && supportsSpeech()) {
+    window.setTimeout(() => readCurrentPage(), 400);
+  }
 }
 
 function buildPractice(practice) {
