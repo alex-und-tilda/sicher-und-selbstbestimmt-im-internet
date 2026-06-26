@@ -636,38 +636,10 @@ function getTopicColorStyle(topicId) {
 }
 
 /* ============================================================
-   Piktogramme: ARASAAC (arasaac.org), Urheber Sergio Palao,
-   Regierung von Aragón, Lizenz CC BY-NC-SA.
-   Für bekannte Begriffe wird ein klares ARASAAC-Piktogramm geladen.
-   Unbekannte Begriffe nutzen weiter das lokale SVG (Rückfall).
+   Piktogramme: eigene, flach gestaltete Icons (lizenzfrei).
+   Die SVG-Dateien liegen unter assets/pictograms/<key>.svg.
+   (Früher ARASAAC – wurde durch eigene Icons ersetzt.)
    ============================================================ */
-const ARASAAC_PICTO = {
-  "pikto-data": 30010,
-  "pikto-lock": 27691,
-  "pikto-no": 7196,
-  "pikto-help": 12252,
-  "pikto-photo": 7107,
-  "pikto-message": 37867,
-  "pikto-shop": 5948,
-  "pikto-fraud": 38478,
-  "pikto-ki": 6208,
-  "pikto-fake": 22198,
-  "pikto-done": 28429,
-  "pikto-screen": 2910,
-  "pikto-pause": 28649,
-  "pikto-location": 24161,
-  "pikto-link": 16913,
-  "pikto-feel": 11476,
-  "pikto-ask": 7217,
-  "pikto-phone": 26479,
-  "pikto-key": 2451,
-  "pikto-birthday": 37363,
-  "pikto-warning": 25315,
-  "pikto-plan": 30207
-};
-
-/* Eigene, flach gestaltete Icons (lizenzfrei) statt ARASAAC.
-   Die SVG-Dateien liegen unter assets/pictograms/<key>.svg. */
 function pictoSrc(key) {
   return `assets/pictograms/${key}.svg`;
 }
@@ -696,19 +668,6 @@ function refinePicto(key, text) {
   }
   return key;
 }
-
-/* Lokale ARASAAC-Bilder zuerst (zuverlässig, auch offline).
-   Fehlt ein lokales Bild noch, wird es einmalig vom ARASAAC-Server nachgeladen,
-   damit nie eine Lücke entsteht. */
-document.addEventListener("error", function (e) {
-  const el = e.target;
-  if (!el || el.tagName !== "IMG") return;
-  const m = (el.getAttribute("src") || "").match(/assets\/pictograms\/arasaac\/(\d+)\.png$/);
-  if (m && !el.dataset.cdnTried) {
-    el.dataset.cdnTried = "1";
-    el.src = "https://static.arasaac.org/pictograms/" + m[1] + "/" + m[1] + "_300.png";
-  }
-}, true);
 
 function getTopicById(topicId) {
   return topics.find(topic => topic.id === topicId) || null;
