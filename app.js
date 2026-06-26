@@ -77,6 +77,13 @@ function setLanguageLevel(level) {
    ============================================================ */
 let learnMode = null;
 const LEARN_MODE_KEY = "lern-weg";
+const LEARN_MODE_SEEN_KEY = "lern-weg-gesehen";
+/* Beim ersten Besuch wird die Lernweg-Frage groß gezeigt, danach nur noch
+   als kleine umstellbare Zeile. Dieser Schalter öffnet sie wieder. */
+let learnModeChooserOpen = false;
+/* Wurde in dieser Sitzung mindestens ein Thema fertig gemacht?
+   (Steuert, wann die freiwillige Lernstand-Frage erscheint.) */
+let finishedTopicThisSession = false;
 const LEARN_MODES = {
   allein:     { title: "Ich lerne allein",      desc: "Die App erklärt dir alles. Mit Vorlesen.",        icon: "understand" },
   app:        { title: "Mit Hilfe der App",     desc: "Vorlesen, große Schrift, leichte Sprache.",       icon: "message" },
@@ -122,6 +129,21 @@ function chooseLearnMode(mode) {
 
 function isCompanionMode() {
   return learnMode === "begleitung";
+}
+
+function learnModeWasSeen() {
+  try { return window.localStorage.getItem(LEARN_MODE_SEEN_KEY) === "1"; }
+  catch (e) { return false; }
+}
+
+function markLearnModeSeen() {
+  try { window.localStorage.setItem(LEARN_MODE_SEEN_KEY, "1"); } catch (e) { /* nichts tun */ }
+}
+
+/* Lernweg-Frage wieder groß aufklappen (Klick auf die kleine Zeile). */
+function openLearnModeChooser() {
+  learnModeChooserOpen = true;
+  renderMenu();
 }
 
 /* Inhalt einer Lektion für die gewählte Sprachstufe holen.
@@ -1096,19 +1118,26 @@ function renderMenu() {
   `;}).join("");
 
   const doneCount = countDoneTopics();
-  const progressConsent = isProgressEnabled()
-    ? `
+  /* Lernstand-Frage entlastet den ersten Bildschirm:
+     - schon aktiv: kurze Info + Löschen
+     - noch nicht aktiv: erst anbieten, wenn in dieser Sitzung ein Thema
+       fertig wurde (vorher gibt es noch nichts zu merken). */
+  let progressConsent = "";
+  if (isProgressEnabled()) {
+    progressConsent = `
       <div class="progress-consent">
         <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.</p>
         <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Lernstand löschen und nicht mehr merken</button>
-      </div>`
-    : `
+      </div>`;
+  } else if (finishedTopicThisSession) {
+    progressConsent = `
       <div class="progress-consent">
         <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
         <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
       </div>`;
+  }
 
   const heroProgress = isProgressEnabled() && doneCount > 0
     ? `<div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
@@ -1144,7 +1173,13 @@ function renderMenu() {
     companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">🔊</span> App-Hilfe ist an. Die Schrift ist größer und jede Seite wird dir vorgelesen.</p>`;
   }
 
-  const learnModeSection = `
+  /* Beim ersten Besuch die Frage groß zeigen; danach nur noch als kleine
+     Zeile, damit der erste Bildschirm ruhig bleibt (CLT: ein Inhalt zuerst). */
+  const showFullChooser = learnModeChooserOpen || !learnModeWasSeen();
+  let learnModeSection;
+  if (showFullChooser) {
+    markLearnModeSeen();
+    learnModeSection = `
     <section class="learn-mode-section" aria-label="Wie möchtest du lernen?">
       <h3 class="learn-mode-title">Wie möchtest du heute lernen?</h3>
       <p class="learn-mode-sub">Such dir etwas aus. Du kannst es jederzeit ändern.</p>
@@ -1152,6 +1187,16 @@ function renderMenu() {
       ${companionNote}
       <p class="learn-mode-hint"><span aria-hidden="true">ℹ️</span> Du musst dich nicht festlegen. Du kannst auch einfach ein Thema wählen und loslegen.</p>
     </section>`;
+  } else {
+    const label = learnMode ? LEARN_MODES[learnMode].title : "Lernweg wählen";
+    learnModeSection = `
+    <div class="learn-mode-chip-row">
+      <button type="button" class="learn-mode-chip" onclick="openLearnModeChooser()" aria-label="Lernweg ändern, aktuell ${escapeHtml(label)}">
+        <span aria-hidden="true">🧭</span> Lernweg: ${escapeHtml(label)} ▾
+      </button>
+      ${companionNote}
+    </div>`;
+  }
 
   /* Wiederholungs-Erinnerung */
   const reviewTopics = getTopicsDueForReview();
@@ -1195,9 +1240,9 @@ function renderMenu() {
       </div>
       ${learnModeSection}
       ${reviewSection}
-      ${progressConsent}
       <h3 class="topic-grid-title">Wähle ein Thema</h3>
       <div class="topic-grid">${cards}</div>
+      ${progressConsent}
       <div class="more-section" aria-label="Weitere Angebote">
         <h3 class="more-title">Mehr</h3>
         <div class="start-actions">
@@ -1831,6 +1876,7 @@ function renderCompletionPage(topicId) {
   if (!topic) return renderMenu();
 
   markTopicDone(topic.id);
+  finishedTopicThisSession = true;
   playSound("success");
   setProgressVisible(false);
   setBottomNavVisible(false);
