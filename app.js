@@ -40,6 +40,12 @@ const LANGUAGE_DESC = {
   einfach: "Etwas mehr Text. Mit Beispielen.",
   standard: "Normaler Text für alle."
 };
+/* Beispiel-Satz je Stufe – damit man den Unterschied sieht, nicht nur liest. */
+const LANGUAGE_EXAMPLE = {
+  leicht: "Pass auf deine Daten auf. Sag nicht jedem dein Passwort.",
+  einfach: "Schütze deine Daten und gib dein Passwort nicht weiter, damit niemand in dein Konto kommt.",
+  standard: "Achte auf deine persönlichen Daten und teile dein Passwort mit niemandem, damit dein Konto geschützt bleibt."
+};
 
 /* Kleine, selbstbestimmte Sprach-Abfrage (Vorlieben, kein Test) */
 let langQuizAnswers = [];
@@ -1072,6 +1078,7 @@ function renderLanguageChoice(recommended) {
       <span class="language-icon" aria-hidden="true">${getIconHtml(icon)}</span>
       <span class="language-name">${escapeHtml(LANGUAGE_LABEL[level])}</span>
       <span class="language-desc">${escapeHtml(LANGUAGE_DESC[level])}</span>
+      <span class="language-example"><span class="language-example-label">So liest es sich:</span> „${escapeHtml(LANGUAGE_EXAMPLE[level])}"</span>
     </button>`;
 
   content.innerHTML = `
@@ -1173,12 +1180,22 @@ function renderMenu() {
     companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">🔊</span> App-Hilfe ist an. Die Schrift ist größer und jede Seite wird dir vorgelesen.</p>`;
   }
 
-  /* Beim ersten Besuch die Frage groß zeigen; danach nur noch als kleine
-     Zeile, damit der erste Bildschirm ruhig bleibt (CLT: ein Inhalt zuerst). */
+  /* Gemeinsame Einstell-Zeile direkt unter der Begrüßung:
+     Sprache und Lernweg an einem vorhersehbaren Ort (COGA: gleiche Dinge,
+     gleicher Platz). Klare Handlungs-Beschriftung „Sprache ändern: …". */
+  const langChip = `
+    <button type="button" class="settings-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, aktuell ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
+      <span aria-hidden="true">🗣️</span> Sprache ändern: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾
+    </button>`;
+
+  /* Beim ersten Besuch die Lernweg-Frage groß zeigen; danach nur noch als
+     kleinen Knopf in der Einstell-Zeile (CLT: ein Inhalt zuerst). */
   const showFullChooser = learnModeChooserOpen || !learnModeWasSeen();
+  let settingsRow;
   let learnModeSection;
   if (showFullChooser) {
     markLearnModeSeen();
+    settingsRow = `<div class="settings-row">${langChip}</div>`;
     learnModeSection = `
     <section class="learn-mode-section" aria-label="Wie möchtest du lernen?">
       <h3 class="learn-mode-title">Wie möchtest du heute lernen?</h3>
@@ -1189,13 +1206,12 @@ function renderMenu() {
     </section>`;
   } else {
     const label = learnMode ? LEARN_MODES[learnMode].title : "Lernweg wählen";
-    learnModeSection = `
-    <div class="learn-mode-chip-row">
-      <button type="button" class="learn-mode-chip" onclick="openLearnModeChooser()" aria-label="Lernweg ändern, aktuell ${escapeHtml(label)}">
+    const learnChip = `
+      <button type="button" class="settings-chip" onclick="openLearnModeChooser()" aria-label="Lernweg ändern, aktuell ${escapeHtml(label)}">
         <span aria-hidden="true">🧭</span> Lernweg: ${escapeHtml(label)} ▾
-      </button>
-      ${companionNote}
-    </div>`;
+      </button>`;
+    settingsRow = `<div class="settings-row">${langChip}${learnChip}</div>`;
+    learnModeSection = companionNote;
   }
 
   /* Wiederholungs-Erinnerung */
@@ -1227,7 +1243,6 @@ function renderMenu() {
             <h2>Willkommen!</h2>
             <p>Hier lernst du, sicher im Internet zu sein. Du entscheidest selbst, wie du lernst.</p>
             <p class="hero-meta">Lern-Plattform &nbsp;·&nbsp; 12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos</p>
-            <button type="button" class="hero-lang-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, aktuell ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾</button>
             ${heroProgress}
           </div>
           <div class="hero-icon" aria-hidden="true">
@@ -1238,6 +1253,7 @@ function renderMenu() {
           </div>
         </div>
       </div>
+      ${settingsRow}
       ${learnModeSection}
       ${reviewSection}
       <h3 class="topic-grid-title">Wähle ein Thema</h3>
