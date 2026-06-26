@@ -1098,6 +1098,17 @@ button {
   margin-bottom: 2px;
 }
 
+/* Dezenter Link zur Erklärung der Sprachstufen */
+.language-more-link {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.98rem;
+}
+
+.language-more-link a {
+  color: var(--accent);
+}
+
 /* Vergleichstabelle auf der Seite „Die Sprachstufen" */
 .sprachstufen-table {
   width: 100%;

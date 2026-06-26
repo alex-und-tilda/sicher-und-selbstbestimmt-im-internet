@@ -1090,6 +1090,9 @@ function renderLanguageChoice(recommended) {
         ${card("einfach", "example")}
         ${card("standard", "report")}
       </div>
+      <p class="language-more-link">
+        <a href="sprachstufen.html">Was ist der Unterschied? Hier wird es erklärt.</a>
+      </p>
     </section>
   `;
   focusContent();
