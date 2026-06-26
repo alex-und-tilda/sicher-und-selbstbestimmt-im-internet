@@ -1191,13 +1191,34 @@ function renderProfileManage(id) {
 
       <h3 class="profile-manage-sub">Neu anfangen</h3>
       <p class="profile-manage-note">Das löscht für dieses Bild die gewählte Sprache und den Lernstand. Du fängst wieder von vorne an. Andere Personen bleiben.</p>
-      <button type="button" class="utility-button" onclick="resetProfile('${escapeHtml(id)}')">Neu anfangen</button>
+      <button type="button" class="utility-button" onclick="confirmResetProfile('${escapeHtml(id)}')">Neu anfangen</button>
 
       <h3 class="profile-manage-sub">Profil löschen</h3>
       <p class="profile-manage-note">Das löscht dieses Bild und seinen Lernstand ganz.</p>
       <button type="button" class="utility-button danger-button" onclick="confirmDeleteProfile('${escapeHtml(id)}')">Dieses Profil löschen</button>
 
       <button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function confirmResetProfile(id) {
+  const p = profiles.find(x => x.id === id);
+  if (!p) return renderProfilePicker();
+  stopReading();
+  setHeader("Sicher und selbstbestimmt im Internet", "Neu anfangen", "Start", "Wirklich neu anfangen?", 0);
+  content.innerHTML = `
+    <section class="profile-manage">
+      <article class="card">
+        <h2>Wirklich neu anfangen?</h2>
+        <p>Für das Bild <span aria-hidden="true">${escapeHtml(p.avatar)}</span> ${escapeHtml(avatarLabel(p.avatar))} werden die gewählte Sprache und der Lernstand gelöscht. Du fängst wieder von vorne an. Das kann man nicht rückgängig machen.</p>
+        <div class="feedback-actions">
+          <button type="button" class="feedback-button secondary danger-button" onclick="resetProfile('${escapeHtml(id)}')">Ja, neu anfangen</button>
+          <button type="button" class="feedback-button primary" onclick="renderProfileManage('${escapeHtml(id)}')">Nein, behalten</button>
+        </div>
+      </article>
     </section>
   `;
   focusContent();
