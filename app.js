@@ -283,6 +283,15 @@ function getActiveProfile() {
 function ensureProfiles() {
   loadProfiles();
   if (profiles.length > 0) return;
+  /* Gibt es Alt-Daten eines früheren Einzel-Nutzers? Dann in ein
+     Standard-Profil übernehmen (nichts geht verloren).
+     Wenn es wirklich der erste Besuch ist (keine Alt-Daten): KEIN
+     Auto-Profil – das Onboarding lässt die Person zuerst ein Bild wählen. */
+  let hasLegacy = false;
+  PROFILE_BASE_KEYS.forEach(base => {
+    try { if (window.localStorage.getItem(base) !== null) hasLegacy = true; } catch (e) { /* egal */ }
+  });
+  if (!hasLegacy) return;
   const p = { id: genProfileId(), avatar: "🦊" };
   profiles = [p];
   activeProfileId = p.id;
@@ -1113,6 +1122,8 @@ function renderNewProfile() {
   setHeader("Sicher und selbstbestimmt im Internet", "Neues Bild", "Start", "Such dir ein Bild aus", 0);
   showNav(false, false);
 
+  /* Allererster Besuch: freundliche Begrüßung, kein „Zurück". */
+  const first = profiles.length === 0;
   const used = profiles.map(p => p.avatar);
   const choices = AVATARS.map(a => `
     <button type="button" class="avatar-choice${used.includes(a.e) ? " is-used" : ""}" onclick="createProfile('${a.e}')" aria-label="${escapeHtml(a.n)} wählen">
@@ -1122,10 +1133,12 @@ function renderNewProfile() {
 
   content.innerHTML = `
     <section class="profile-new">
-      <h2 class="profile-picker-title">Such dir ein Bild aus</h2>
-      <p class="profile-picker-intro">Dieses Bild ist dein Zeichen. Du brauchst keinen Namen.</p>
+      <h2 class="profile-picker-title">${first ? "Willkommen! Such dir ein Bild aus." : "Such dir ein Bild aus"}</h2>
+      <p class="profile-picker-intro">${first
+        ? "So fangen wir an: Tippe auf ein Bild. Damit merkt sich die App deine Sprache und deinen Lernstand – nur auf diesem Gerät, ganz ohne Namen."
+        : "Dieses Bild ist dein Zeichen. Du brauchst keinen Namen."}</p>
       <div class="avatar-grid">${choices}</div>
-      <button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück</button>
+      ${first ? "" : `<button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück</button>`}
     </section>
   `;
   focusContent();
@@ -2975,9 +2988,11 @@ function renderAllMemoryCards() {
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
   if (!hash) {
-    /* Beim Öffnen direkt zur Startseite (der zuletzt aktiven Person).
-       Den Lernweg/die Person wechselt man über den Knopf „Du: …".
-       So ist die Willkommens-Startseite immer sofort sichtbar. */
+    /* Erster Besuch (noch kein Profil): zuerst ein Bild aussuchen,
+       danach die Sprachstufe, dann die Themen. */
+    if (profiles.length === 0) return renderNewProfile();
+    /* Sonst direkt zur Startseite (der zuletzt aktiven Person).
+       Person/Lernweg wechselt man über den Knopf „Du: …". */
     return languageChosen ? renderMenu() : renderStart();
   }
 
