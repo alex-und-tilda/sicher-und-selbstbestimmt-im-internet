@@ -1039,8 +1039,46 @@ button {
 
 .topic-grid-title {
   font-size: 1.3rem;
-  margin: 0 0 14px;
+  margin: 0 0 4px;
   color: var(--ink);
+}
+
+.topic-grid-hint {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+}
+
+/* Klarer erster Schritt: „Los geht's" im Begrüßungs-Feld */
+.hero-start-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 6px;
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: #ffffff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-start-button span {
+  font-size: 1.25rem;
+}
+
+.hero-start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.24);
+}
+
+.hero-start-button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
 }
 
 /* Gemeinsame Einstell-Zeile (Sprache + Lernweg) unter der Begrüßung */

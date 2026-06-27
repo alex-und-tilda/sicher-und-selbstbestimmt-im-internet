@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-07p";
+const CACHE_VERSION = "v2026-07q";
 const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 

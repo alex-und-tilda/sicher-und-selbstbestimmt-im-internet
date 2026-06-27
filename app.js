@@ -1414,6 +1414,19 @@ function renderLanguageChoice(recommended) {
   renderLegalFooter();
 }
 
+/* „Los geht's": sanft zu den Themen scrollen und den Fokus dorthin setzen. */
+function scrollToTopics() {
+  const title = document.querySelector(".topic-grid-title");
+  const target = title || document.querySelector(".topic-grid");
+  if (!target || !target.scrollIntoView) return;
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  if (title) {
+    title.setAttribute("tabindex", "-1");
+    try { title.focus({ preventScroll: true }); } catch (e) { /* nichts tun */ }
+  }
+}
+
 function renderMenu() {
   stopReading();
   currentTopicId = null;
@@ -1565,7 +1578,8 @@ function renderMenu() {
         <div class="hero-inner">
           <div class="hero-text">
             <h2>Willkommen!</h2>
-            <p>Hier lernst du, sicher im Internet zu sein. Du entscheidest selbst, wie du lernst.</p>
+            <p>Hier lernst du, sicher im Internet zu sein.</p>
+            <button type="button" class="hero-start-button" onclick="scrollToTopics()">Los geht’s <span aria-hidden="true">↓</span></button>
             <p class="hero-meta">Lern-Plattform &nbsp;·&nbsp; 12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos</p>
             ${heroProgress}
           </div>
@@ -1581,6 +1595,7 @@ function renderMenu() {
       ${learnModeSection}
       ${reviewSection}
       <h3 class="topic-grid-title">Wähle ein Thema</h3>
+      <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
       <div class="topic-grid">${cards}</div>
       ${progressConsent}
       <div class="more-section" aria-label="Weitere Angebote">
