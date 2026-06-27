@@ -1086,7 +1086,7 @@ function renderProfilePicker() {
         <span class="profile-name">${escapeHtml(avatarLabel(p.avatar))}</span>
         ${p.id === activeProfileId ? `<span class="profile-active-badge">Das bist du</span>` : ""}
       </button>
-      <button type="button" class="profile-edit-link" onclick="renderProfileManage('${escapeHtml(p.id)}')">Ändern</button>
+      <button type="button" class="profile-edit-link" onclick="renderProfileManage('${escapeHtml(p.id)}')" aria-label="Profil ${escapeHtml(avatarLabel(p.avatar))} ändern">Ändern</button>
     </div>`).join("");
 
   content.innerHTML = `
