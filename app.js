@@ -229,12 +229,85 @@ const ACTIVE_PROFILE_KEY = "profil-aktiv";
 let profiles = [];          /* [{ id, avatar }] */
 let activeProfileId = null;
 
+/* Wird dieses Gerät geteilt? Steuert, ob beim Öffnen „Wer lernt?" kommt. */
+let deviceShared = false;
+const DEVICE_SHARED_KEY = "geraet-geteilt";
+function loadDeviceShared() {
+  try { deviceShared = window.localStorage.getItem(DEVICE_SHARED_KEY) === "1"; }
+  catch (e) { deviceShared = false; }
+}
+function setDeviceShared(shared) {
+  deviceShared = !!shared;
+  try { window.localStorage.setItem(DEVICE_SHARED_KEY, deviceShared ? "1" : "0"); } catch (e) { /* nichts tun */ }
+}
+/* Zwischenspeicher beim Zeichen-Bauen (Icon → Farbe → Zahl). */
+let signDraft = { icon: null, color: null, number: null };
+
 const AVATARS = [
   { e: "🦊", n: "Fuchs" }, { e: "🐰", n: "Hase" }, { e: "🦉", n: "Eule" },
   { e: "🐢", n: "Schildkröte" }, { e: "🐬", n: "Delfin" }, { e: "🦋", n: "Schmetterling" },
   { e: "🌻", n: "Blume" }, { e: "⚽", n: "Ball" }, { e: "🚲", n: "Fahrrad" },
   { e: "🎸", n: "Gitarre" }, { e: "🐧", n: "Pinguin" }, { e: "🐱", n: "Katze" }
 ];
+
+/* ============================================================
+   Eigenes Zeichen: Symbol (weiß) + Hintergrund-Farbe + Zahl 0–10.
+   Erwachsen, gut unterscheidbar, viele Kombinationen.
+   ============================================================ */
+const SIGN_ICONS = [
+  { key: "star",     name: "Stern",   svg: `<polygon points="50,16 61,39 86,42 67,59 72,84 50,72 28,84 33,59 14,42 39,39" fill="#fff"/>` },
+  { key: "heart",    name: "Herz",    svg: `<path d="M50 80 C20 58 24 32 44 36 C50 37 50 43 50 45 C50 43 50 37 56 36 C76 32 80 58 50 80 Z" fill="#fff"/>` },
+  { key: "moon",     name: "Mond",    svg: `<path d="M64 22 a30 30 0 1 0 14 53 a24 24 0 0 1 -14 -53 z" fill="#fff"/>` },
+  { key: "sun",      name: "Sonne",   svg: `<circle cx="50" cy="50" r="14" fill="#fff"/><g stroke="#fff" stroke-width="5" stroke-linecap="round"><line x1="50" y1="20" x2="50" y2="28"/><line x1="50" y1="72" x2="50" y2="80"/><line x1="20" y1="50" x2="28" y2="50"/><line x1="72" y1="50" x2="80" y2="50"/><line x1="29" y1="29" x2="35" y2="35"/><line x1="65" y1="65" x2="71" y2="71"/><line x1="71" y1="29" x2="65" y2="35"/><line x1="35" y1="65" x2="29" y2="71"/></g>` },
+  { key: "leaf",     name: "Blatt",   svg: `<path d="M28 72 C28 40 60 28 78 26 C76 50 56 74 28 72 Z" fill="#fff"/>` },
+  { key: "key",      name: "Schlüssel", svg: `<circle cx="38" cy="42" r="14" fill="none" stroke="#fff" stroke-width="7"/><line x1="47" y1="51" x2="78" y2="82" stroke="#fff" stroke-width="7" stroke-linecap="round"/><line x1="68" y1="72" x2="76" y2="64" stroke="#fff" stroke-width="7" stroke-linecap="round"/>` },
+  { key: "mountain", name: "Berg",    svg: `<path d="M16 78 L42 38 L58 60 L70 42 L88 78 Z" fill="#fff"/>` },
+  { key: "drop",     name: "Tropfen", svg: `<path d="M50 18 C66 44 72 56 72 66 a22 22 0 0 1 -44 0 C28 56 34 44 50 18 Z" fill="#fff"/>` },
+  { key: "music",    name: "Note",    svg: `<path d="M40 68 a9 9 0 1 0 9 9 V42 l24 -7 v20 a9 9 0 1 0 9 9 V24 l-42 12 z" fill="#fff"/>` },
+  { key: "anchor",   name: "Anker",   svg: `<circle cx="50" cy="24" r="7" fill="none" stroke="#fff" stroke-width="5"/><line x1="50" y1="31" x2="50" y2="78" stroke="#fff" stroke-width="6" stroke-linecap="round"/><line x1="34" y1="46" x2="66" y2="46" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M24 56 a26 26 0 0 0 52 0" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>` },
+  { key: "ball",     name: "Ball",    svg: `<circle cx="50" cy="50" r="24" fill="none" stroke="#fff" stroke-width="6"/><polygon points="50,40 60,47 56,59 44,59 40,47" fill="#fff"/>` },
+  { key: "cloud",    name: "Wolke",   svg: `<path d="M34 68 a15 15 0 0 1 1 -30 a19 19 0 0 1 36 5 a13 13 0 0 1 -3 25 z" fill="#fff"/>` }
+];
+const SIGN_COLORS = [
+  { name: "Blau",    hex: "#00528f" },
+  { name: "Hellblau", hex: "#3e96be" },
+  { name: "Türkis",  hex: "#0f6e56" },
+  { name: "Grün",    hex: "#2E7D4F" },
+  { name: "Lila",    hex: "#534ab7" },
+  { name: "Pink",    hex: "#993556" },
+  { name: "Rot",     hex: "#B5152B" },
+  { name: "Orange",  hex: "#b45309" }
+];
+
+/* Zeichen als HTML anzeigen. Neu = Symbol+Farbe+Zahl; alt = Emoji (Rückfall). */
+function signHtml(profile, cls) {
+  if (!profile) return "";
+  const extra = cls ? " " + cls : "";
+  if (profile.icon) {
+    const ic = SIGN_ICONS.find(s => s.key === profile.icon);
+    const color = profile.color || "#00528f";
+    const num = (profile.number !== undefined && profile.number !== null)
+      ? `<span class="profile-sign-num">${escapeHtml(String(profile.number))}</span>` : "";
+    return `<span class="profile-sign${extra}" style="background:${color}" aria-hidden="true"><svg viewBox="0 0 100 100">${ic ? ic.svg : ""}</svg>${num}</span>`;
+  }
+  return `<span class="profile-sign profile-sign--emoji${extra}" aria-hidden="true">${escapeHtml(profile.avatar || "🙂")}</span>`;
+}
+
+/* Zeichen als Text benennen (für Vorlese-/Screenreader-Beschriftung). */
+function signLabel(profile) {
+  if (!profile) return "Profil";
+  if (profile.icon) {
+    const ic = SIGN_ICONS.find(s => s.key === profile.icon);
+    const col = SIGN_COLORS.find(c => c.hex === profile.color);
+    const parts = [];
+    if (ic) parts.push(ic.name);
+    if (col) parts.push(col.name);
+    if (profile.number !== undefined && profile.number !== null) parts.push("Zahl " + profile.number);
+    return parts.join(", ") || "Zeichen";
+  }
+  const found = AVATARS.find(a => a.e === profile.avatar);
+  return found ? found.n : "Bild";
+}
 
 /* Alle Einstellungs-Schlüssel, die pro Profil getrennt gespeichert werden.
    Feste Namen (müssen zu LANGUAGE_KEY, FONT_SIZE_KEY, STORAGE_KEY,
@@ -1090,21 +1163,21 @@ function renderProfilePicker() {
 
   const cards = profiles.map(p => `
     <div class="profile-card-wrap">
-      <button type="button" class="profile-card" onclick="switchProfile('${escapeHtml(p.id)}')" aria-label="Weiter als ${escapeHtml(avatarLabel(p.avatar))}">
-        <span class="profile-avatar" aria-hidden="true">${escapeHtml(p.avatar)}</span>
-        <span class="profile-name">${escapeHtml(avatarLabel(p.avatar))}</span>
+      <button type="button" class="profile-card" onclick="switchProfile('${escapeHtml(p.id)}')" aria-label="Weiter als ${escapeHtml(signLabel(p))}">
+        ${signHtml(p)}
+        <span class="profile-name">${escapeHtml(signLabel(p))}</span>
         ${p.id === activeProfileId ? `<span class="profile-active-badge">Das bist du</span>` : ""}
       </button>
-      <button type="button" class="profile-edit-link" onclick="renderProfileManage('${escapeHtml(p.id)}')" aria-label="Profil ${escapeHtml(avatarLabel(p.avatar))} ändern">Ändern</button>
+      <button type="button" class="profile-edit-link" onclick="renderProfileManage('${escapeHtml(p.id)}')" aria-label="Profil ${escapeHtml(signLabel(p))} ändern">Ändern</button>
     </div>`).join("");
 
   content.innerHTML = `
     <section class="profile-picker">
       <h2 class="profile-picker-title">Wer lernt gerade?</h2>
-      <p class="profile-picker-intro">Such dir dein Bild aus. Dann merkt sich die App deine Sprache und deinen Lernstand – nur auf diesem Gerät, ohne Namen.</p>
+      <p class="profile-picker-intro">Tippe auf dein Zeichen. Dann merkt sich die App deine Sprache und deinen Lernstand – nur auf diesem Gerät, ohne Namen.</p>
       <div class="profile-grid">
         ${cards}
-        <button type="button" class="profile-card profile-card--new" onclick="renderNewProfile()" aria-label="Neue Person hinzufügen">
+        <button type="button" class="profile-card profile-card--new" onclick="renderBuildSign(0, null)" aria-label="Neue Person hinzufügen">
           <span class="profile-avatar" aria-hidden="true">＋</span>
           <span class="profile-name">Neue Person</span>
         </button>
@@ -1115,41 +1188,146 @@ function renderProfilePicker() {
   renderLegalFooter();
 }
 
-function renderNewProfile() {
+/* Erststart-Frage: eigenes oder geteiltes Gerät. */
+function renderDeviceQuestion() {
   stopReading();
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", "Neues Bild", "Start", "Such dir ein Bild aus", 0);
+  setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Wer benutzt dieses Gerät?", 0);
   showNav(false, false);
-
-  /* Allererster Besuch: freundliche Begrüßung, kein „Zurück". */
-  const first = profiles.length === 0;
-  const used = profiles.map(p => p.avatar);
-  const choices = AVATARS.map(a => `
-    <button type="button" class="avatar-choice${used.includes(a.e) ? " is-used" : ""}" onclick="createProfile('${a.e}')" aria-label="${escapeHtml(a.n)} wählen">
-      <span class="avatar-choice-pic" aria-hidden="true">${a.e}</span>
-      <span class="avatar-choice-name">${escapeHtml(a.n)}</span>
-    </button>`).join("");
-
   content.innerHTML = `
     <section class="profile-new">
-      <h2 class="profile-picker-title">${first ? "Willkommen! Such dir ein Bild aus." : "Such dir ein Bild aus"}</h2>
-      <p class="profile-picker-intro">${first
-        ? "So fangen wir an: Tippe auf ein Bild. Damit merkt sich die App deine Sprache und deinen Lernstand – nur auf diesem Gerät, ganz ohne Namen."
-        : "Dieses Bild ist dein Zeichen. Du brauchst keinen Namen."}</p>
-      <div class="avatar-grid">${choices}</div>
-      ${first ? "" : `<button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück</button>`}
+      <h2 class="profile-picker-title">Willkommen!</h2>
+      <p class="profile-picker-intro">Eine Frage zum Anfang: Benutzt du dieses Gerät allein? Oder benutzen es mehrere Personen?</p>
+      <div class="device-grid">
+        <button type="button" class="device-card" onclick="chooseDevice(false)">
+          <span class="device-icon" aria-hidden="true">📱</span>
+          <strong>Nur ich</strong>
+          <span>Mein eigenes Handy oder Tablet.</span>
+        </button>
+        <button type="button" class="device-card" onclick="chooseDevice(true)">
+          <span class="device-icon" aria-hidden="true">👥</span>
+          <strong>Mehrere Personen</strong>
+          <span>Ein Gerät, das wir uns teilen.</span>
+        </button>
+      </div>
     </section>
   `;
   focusContent();
   renderLegalFooter();
 }
 
-function createProfile(avatar) {
-  const p = { id: genProfileId(), avatar: avatar };
+function chooseDevice(shared) {
+  setDeviceShared(shared);
+  signDraft = { icon: null, color: null, number: null };
+  renderBuildSign(0, null);
+}
+
+/* Vorschau des Zeichens, das gerade gebaut wird. */
+function signPreviewHtml() {
+  const icon = signDraft.icon || "star";
+  const color = signDraft.color || "#c6c7c8";
+  const number = (signDraft.number !== null && signDraft.number !== undefined) ? signDraft.number : "";
+  return signHtml({ icon, color, number }, "profile-sign--big");
+}
+
+/* Zeichen bauen: Symbol → Farbe → Zahl. editId gesetzt = Profil ändern. */
+function renderBuildSign(step, editId) {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Dein Zeichen", "Start", "Bau dir dein Zeichen", 0);
+  showNav(false, false);
+
+  const ed = editId ? "'" + escapeHtml(editId) + "'" : "null";
+  const dots = [0, 1, 2].map(j => `<span class="lq-dot${j <= step ? " on" : ""}"></span>`).join("");
+
+  let title = "";
+  let body = "";
+  let back = "";
+
+  if (step === 0) {
+    title = "Such dir ein Symbol aus.";
+    body = `<div class="sign-icon-grid">${SIGN_ICONS.map(ic => `
+      <button type="button" class="sign-pick${signDraft.icon === ic.key ? " is-active" : ""}" onclick="pickSignIcon('${ic.key}', ${ed})" aria-label="${escapeHtml(ic.name)} wählen">
+        <span class="sign-pick-bubble"><svg viewBox="0 0 100 100" aria-hidden="true">${ic.svg.replace(/#fff/g, "#00528f")}</svg></span>
+        <span class="sign-pick-name">${escapeHtml(ic.name)}</span>
+      </button>`).join("")}</div>`;
+    back = editId ? `renderProfileManage(${ed})` : "renderDeviceQuestion()";
+  } else if (step === 1) {
+    title = "Such dir eine Farbe aus.";
+    body = `<div class="sign-color-grid">${SIGN_COLORS.map(c => `
+      <button type="button" class="sign-color${signDraft.color === c.hex ? " is-active" : ""}" style="background:${c.hex}" onclick="pickSignColor('${c.hex}', ${ed})" aria-label="${escapeHtml(c.name)} wählen"><span>${escapeHtml(c.name)}</span></button>`).join("")}</div>`;
+    back = `renderBuildSign(0, ${ed})`;
+  } else {
+    title = "Such dir eine Zahl aus.";
+    body = `<div class="sign-number-grid">${Array.from({ length: 11 }, (_, n) => `
+      <button type="button" class="sign-number${signDraft.number === n ? " is-active" : ""}" onclick="pickSignNumber(${n}, ${ed})" aria-label="Zahl ${n} wählen">${n}</button>`).join("")}</div>`;
+    back = `renderBuildSign(1, ${ed})`;
+  }
+
+  content.innerHTML = `
+    <section class="profile-new">
+      <div class="lq-dots" aria-hidden="true">${dots}</div>
+      <div class="sign-preview" role="img" aria-label="Dein Zeichen">${signPreviewHtml()}</div>
+      <h2 class="profile-picker-title">${title}</h2>
+      ${body}
+      <button type="button" class="plain-back-button" onclick="${back}">← Zurück</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function pickSignIcon(key, editId) { signDraft.icon = key; renderBuildSign(1, editId); }
+function pickSignColor(hex, editId) { signDraft.color = hex; renderBuildSign(2, editId); }
+function pickSignNumber(n, editId) { signDraft.number = n; finishSign(editId); }
+
+/* Ausdruckbare „Das bin ich"-Karte mit dem eigenen Zeichen. */
+function printSignCard(id) {
+  const p = profiles.find(x => x.id === id);
+  if (!p) return;
+  const color = p.icon ? (p.color || "#00528f") : "#D8EAF2";
+  const ic = p.icon ? SIGN_ICONS.find(s => s.key === p.icon) : null;
+  const inner = ic ? `<svg viewBox="0 0 100 100">${ic.svg}</svg>`
+    : `<span style="font-size:90px">${escapeHtml(p.avatar || "🙂")}</span>`;
+  const num = (p.number !== undefined && p.number !== null) ? p.number : "";
+  const label = signLabel(p);
+  const html = `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Karte</title>` +
+    `<style>body{font-family:Arial,Helvetica,sans-serif;color:#142231;text-align:center;margin:40px;}` +
+    `.card{border:3px solid #00528f;border-radius:24px;max-width:420px;margin:0 auto;padding:32px;}` +
+    `.sign{width:170px;height:170px;border-radius:42px;background:${color};display:flex;align-items:center;justify-content:center;margin:0 auto 22px;position:relative;}` +
+    `.sign svg{width:104px;height:104px;}` +
+    `.num{position:absolute;right:-12px;bottom:-12px;background:#fff;color:#142231;border:4px solid ${color};border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold;}` +
+    `h1{font-size:24px;margin:0 0 8px;}p{font-size:18px;line-height:1.55;}.parts{font-weight:bold;}` +
+    `.foot{margin-top:24px;color:#555;font-size:13px;}</style></head><body>` +
+    `<div class="card"><div class="sign">${inner}${num !== "" ? `<span class="num">${num}</span>` : ""}</div>` +
+    `<h1>Das ist mein Zeichen.</h1>` +
+    `<p>So finde ich mich wieder.<br>Ich tippe auf mein Zeichen.</p>` +
+    `<p class="parts">${escapeHtml(label)}</p>` +
+    `<p class="foot">Sicher und selbstbestimmt im Internet · Es wird kein Name gespeichert.</p></div></body></html>`;
+  const w = window.open("", "_blank");
+  if (!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => { try { w.print(); } catch (e) { /* nichts tun */ } }, 300);
+}
+
+function finishSign(editId) {
+  const sign = { icon: signDraft.icon, color: signDraft.color, number: signDraft.number };
+  if (editId) {
+    const p = profiles.find(x => x.id === editId);
+    if (p) { p.icon = sign.icon; p.color = sign.color; p.number = sign.number; delete p.avatar; saveProfiles(); }
+    signDraft = { icon: null, color: null, number: null };
+    renderProfileManage(editId);
+    return;
+  }
+  const p = Object.assign({ id: genProfileId() }, sign);
   profiles.push(p);
   activeProfileId = p.id;
   saveProfiles();
+  signDraft = { icon: null, color: null, number: null };
   languageChosen = false;
   languageLevel = "leicht";
   learnMode = null;
@@ -1158,14 +1336,6 @@ function createProfile(avatar) {
   applyFontSize();
   finishedTopicThisSession = false;
   renderStart();
-}
-
-function changeAvatar(id, avatar) {
-  const p = profiles.find(x => x.id === id);
-  if (!p) return;
-  p.avatar = avatar;
-  saveProfiles();
-  renderProfileManage(id);
 }
 
 function renderProfileManage(id) {
@@ -1177,17 +1347,17 @@ function renderProfileManage(id) {
   setHeader("Sicher und selbstbestimmt im Internet", "Profil", "Start", "Profil ändern", 0);
   showNav(false, false);
 
-  const choices = AVATARS.map(a => `
-    <button type="button" class="avatar-choice avatar-choice--small${a.e === p.avatar ? " is-active" : ""}" onclick="changeAvatar('${escapeHtml(id)}','${a.e}')" aria-label="${escapeHtml(a.n)} wählen">
-      <span class="avatar-choice-pic" aria-hidden="true">${a.e}</span>
-    </button>`).join("");
-
   content.innerHTML = `
     <section class="profile-manage">
-      <h2 class="profile-picker-title"><span aria-hidden="true">${escapeHtml(p.avatar)}</span> Dein Profil</h2>
+      <h2 class="profile-picker-title"><span class="profile-manage-sign">${signHtml(p)}</span> Dein Zeichen</h2>
 
-      <h3 class="profile-manage-sub">Anderes Bild wählen</h3>
-      <div class="avatar-grid avatar-grid--small">${choices}</div>
+      <h3 class="profile-manage-sub">Zeichen ändern</h3>
+      <p class="profile-manage-note">Bau dir ein neues Zeichen: Symbol, Farbe und Zahl.</p>
+      <button type="button" class="utility-button" onclick="renderBuildSign(0, '${escapeHtml(id)}')">Zeichen neu bauen</button>
+
+      <h3 class="profile-manage-sub">Meine Karte</h3>
+      <p class="profile-manage-note">Druck dir dein Zeichen aus, damit du es dir merken kannst.</p>
+      <button type="button" class="utility-button" onclick="printSignCard('${escapeHtml(id)}')">🖨 Meine Karte drucken</button>
 
       <h3 class="profile-manage-sub">Neu anfangen</h3>
       <p class="profile-manage-note">Das löscht für dieses Bild die gewählte Sprache und den Lernstand. Du fängst wieder von vorne an. Andere Personen bleiben.</p>
@@ -1213,7 +1383,7 @@ function confirmResetProfile(id) {
     <section class="profile-manage">
       <article class="card">
         <h2>Wirklich neu anfangen?</h2>
-        <p>Für das Bild <span aria-hidden="true">${escapeHtml(p.avatar)}</span> ${escapeHtml(avatarLabel(p.avatar))} werden die gewählte Sprache und der Lernstand gelöscht. Du fängst wieder von vorne an. Das kann man nicht rückgängig machen.</p>
+        <p>Für dein Zeichen ${signHtml(p)} (${escapeHtml(signLabel(p))}) werden die gewählte Sprache und der Lernstand gelöscht. Du fängst wieder von vorne an. Das kann man nicht rückgängig machen.</p>
         <div class="feedback-actions">
           <button type="button" class="feedback-button secondary danger-button" onclick="resetProfile('${escapeHtml(id)}')">Ja, neu anfangen</button>
           <button type="button" class="feedback-button primary" onclick="renderProfileManage('${escapeHtml(id)}')">Nein, behalten</button>
@@ -1251,7 +1421,7 @@ function confirmDeleteProfile(id) {
     <section class="profile-manage">
       <article class="card">
         <h2>Profil wirklich löschen?</h2>
-        <p>Das Bild <span aria-hidden="true">${escapeHtml(p.avatar)}</span> ${escapeHtml(avatarLabel(p.avatar))} und sein Lernstand werden gelöscht. Das kann man nicht rückgängig machen.</p>
+        <p>Dein Zeichen ${signHtml(p)} (${escapeHtml(signLabel(p))}) und sein Lernstand werden gelöscht. Das kann man nicht rückgängig machen.</p>
         <div class="feedback-actions">
           <button type="button" class="feedback-button secondary danger-button" onclick="deleteProfile('${escapeHtml(id)}')">Ja, löschen</button>
           <button type="button" class="feedback-button primary" onclick="renderProfileManage('${escapeHtml(id)}')">Nein, behalten</button>
@@ -1271,7 +1441,11 @@ function deleteProfile(id) {
   profiles = profiles.filter(p => p.id !== id);
   if (activeProfileId === id) activeProfileId = profiles[0] ? profiles[0].id : null;
   saveProfiles();
-  if (profiles.length === 0) return renderNewProfile();
+  if (profiles.length === 0) {
+    /* Keine Person mehr: neues Zeichen bauen. */
+    signDraft = { icon: null, color: null, number: null };
+    return renderBuildSign(0, null);
+  }
   loadActiveProfileSettings();
   renderProfilePicker();
 }
@@ -1529,8 +1703,8 @@ function renderMenu() {
      gleicher Platz). Klare Handlungs-Beschriftung „Sprache ändern: …". */
   const activeProfile = getActiveProfile();
   const profileChip = activeProfile ? `
-    <button type="button" class="settings-chip settings-chip--profile" onclick="renderProfilePicker()" aria-label="Person wechseln, du bist gerade ${escapeHtml(avatarLabel(activeProfile.avatar))}">
-      <span aria-hidden="true">${escapeHtml(activeProfile.avatar)}</span> Du: ${escapeHtml(avatarLabel(activeProfile.avatar))} ▾
+    <button type="button" class="settings-chip settings-chip--profile" onclick="renderProfilePicker()" aria-label="Person wechseln, du bist gerade ${escapeHtml(signLabel(activeProfile))}">
+      ${signHtml(activeProfile, "profile-sign--chip")} Du: ${escapeHtml(signLabel(activeProfile))} ▾
     </button>` : "";
 
   const langChip = `
@@ -2988,11 +3162,12 @@ function renderAllMemoryCards() {
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
   if (!hash) {
-    /* Erster Besuch (noch kein Profil): zuerst ein Bild aussuchen,
-       danach die Sprachstufe, dann die Themen. */
-    if (profiles.length === 0) return renderNewProfile();
-    /* Sonst direkt zur Startseite (der zuletzt aktiven Person).
-       Person/Lernweg wechselt man über den Knopf „Du: …". */
+    /* Erster Besuch (noch kein Profil): Geräte-Frage, dann Zeichen bauen,
+       dann Sprachstufe, dann Themen. */
+    if (profiles.length === 0) return renderDeviceQuestion();
+    /* Geteiltes Gerät mit mehreren Personen: zuerst „Wer lernt gerade?".
+       Sonst direkt zur Startseite (Person wechselt man über „Du: …"). */
+    if (deviceShared && profiles.length > 1) return renderProfilePicker();
     return languageChosen ? renderMenu() : renderStart();
   }
 
@@ -3059,6 +3234,7 @@ initGlossarEvents();
 /* Profile laden (oder beim ersten Mal anlegen und vorhandene Einstellungen
    übernehmen), dann die Einstellungen des aktiven Profils anwenden. */
 ensureProfiles();
+loadDeviceShared();
 loadActiveProfileSettings();
 
 /* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,

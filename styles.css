@@ -1191,6 +1191,158 @@ button {
   line-height: 1;
 }
 
+/* ============================================================
+   Eigenes Zeichen: Symbol + Farbe + Zahl
+   ============================================================ */
+.profile-sign {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  flex-shrink: 0;
+}
+.profile-sign svg { width: 60%; height: 60%; }
+.profile-sign--emoji { font-size: 3rem; background: none !important; }
+.profile-sign-num {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-sign--big { width: 110px; height: 110px; border-radius: 28px; }
+.profile-sign--big .profile-sign-num { width: 34px; height: 34px; font-size: 1.1rem; right: -8px; bottom: -8px; }
+.profile-sign--chip { width: 26px; height: 26px; border-radius: 8px; }
+.profile-sign--chip .profile-sign-num { width: 15px; height: 15px; font-size: 0.62rem; right: -4px; bottom: -4px; border-width: 1.5px; }
+.profile-sign--chip svg { width: 64%; height: 64%; }
+.profile-manage-sign .profile-sign { vertical-align: middle; }
+
+/* Geräte-Frage */
+.device-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.device-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 26px 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.device-card:hover { border-color: var(--accent); background: var(--surface-soft); transform: translateY(-2px); }
+.device-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.device-card strong { font-size: 1.2rem; color: var(--ink); }
+.device-card span:last-child { font-size: 0.98rem; color: var(--ink-soft); }
+.device-icon { font-size: 2.6rem; line-height: 1; }
+
+/* Zeichen-Bau: Vorschau */
+.sign-preview {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0 14px;
+}
+
+/* Schritt 1: Symbole */
+.sign-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.sign-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.sign-pick:hover { border-color: var(--accent); background: var(--surface-soft); transform: translateY(-2px); }
+.sign-pick:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sign-pick.is-active { border-color: var(--accent); background: var(--accent-soft); }
+.sign-pick-bubble {
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft);
+  border-radius: 50%;
+}
+.sign-pick-bubble svg { width: 60%; height: 60%; }
+.sign-pick-name { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* Schritt 2: Farben */
+.sign-color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.sign-color {
+  height: 72px;
+  border: 3px solid transparent;
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 10px;
+  transition: transform 0.15s ease;
+}
+.sign-color:hover { transform: translateY(-2px); }
+.sign-color:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.sign-color.is-active { border-color: var(--ink); }
+.sign-color span { background: rgba(0,0,0,0.28); padding: 2px 8px; border-radius: 999px; }
+
+/* Schritt 3: Zahlen */
+.sign-number-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.sign-number {
+  height: 64px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.sign-number:hover { border-color: var(--accent); background: var(--surface-soft); transform: translateY(-2px); }
+.sign-number:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sign-number.is-active { border-color: var(--accent); background: var(--accent-soft); }
+
 .profile-name {
   font-size: 1.1rem;
   font-weight: 700;
