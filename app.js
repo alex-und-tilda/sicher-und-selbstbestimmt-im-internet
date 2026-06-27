@@ -2960,9 +2960,9 @@ function renderAllMemoryCards() {
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
   if (!hash) {
-    /* Mehrere Personen am Gerät: zuerst fragen „Wer lernt gerade?".
-       Bei nur einer Person ohne Umweg weiter. */
-    if (profiles.length > 1) return renderProfilePicker();
+    /* Beim Öffnen direkt zur Startseite (der zuletzt aktiven Person).
+       Den Lernweg/die Person wechselt man über den Knopf „Du: …".
+       So ist die Willkommens-Startseite immer sofort sichtbar. */
     return languageChosen ? renderMenu() : renderStart();
   }
 
