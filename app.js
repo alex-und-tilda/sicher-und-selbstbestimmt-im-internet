@@ -659,6 +659,10 @@ const PICTO_RULES = [
   [/freund/i, "pikto-friend"],
   [/internet|webseite|online|im netz/i, "pikto-globe"],
   [/e-?mail|brief\b/i, "pikto-mail"],
+  [/warnzeichen|warn-?zeichen/i, "pikto-warning"],
+  [/blockier/i, "pikto-no"],
+  [/telefon-?nummer|handy-?nummer|deine nummer/i, "pikto-phone"],
+  [/schreib/i, "pikto-message"],
   [/menschen|mensch\b|leute|andere personen|viele personen/i, "pikto-person"]
 ];
 function refinePicto(key, text) {
