@@ -1257,6 +1257,20 @@ button {
 .device-card span:last-child { font-size: 0.98rem; color: var(--ink-soft); }
 .device-icon { font-size: 2.6rem; line-height: 1; }
 
+/* Empfohlene Menge (aus dem Vorwissen) */
+.action-card--rec { border-color: var(--accent) !important; position: relative; }
+.action-rec-badge {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
 /* Zeichen-Bau: Vorschau */
 .sign-preview {
   display: flex;

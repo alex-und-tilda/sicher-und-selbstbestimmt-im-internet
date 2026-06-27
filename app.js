@@ -242,6 +242,10 @@ function setDeviceShared(shared) {
 }
 /* Zwischenspeicher beim Zeichen-Bauen (Icon → Farbe → Zahl). */
 let signDraft = { icon: null, color: null, number: null };
+/* Läuft gerade der Erststart-Ablauf? (Zeichen → Sprache → Vorwissen → Themen) */
+let onboarding = false;
+/* Vorwissen je Profil: "neu" oder "erfahren". Steuert die Mengen-Empfehlung. */
+const VORWISSEN_KEY = "vorwissen";
 
 const AVATARS = [
   { e: "🦊", n: "Fuchs" }, { e: "🐰", n: "Hase" }, { e: "🦉", n: "Eule" },
@@ -313,7 +317,7 @@ function signLabel(profile) {
    Feste Namen (müssen zu LANGUAGE_KEY, FONT_SIZE_KEY, STORAGE_KEY,
    LEARN_MODE_KEY, LEARN_MODE_SEEN_KEY passen) – bewusst als Strings, damit
    die Deklarations-Reihenfolge im Modul keine Rolle spielt. */
-const PROFILE_BASE_KEYS = ["language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen"];
+const PROFILE_BASE_KEYS = ["language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen"];
 
 /* Schlüssel für das aktive Profil. Ohne aktives Profil: alter Schlüssel
    (Rückfall – so bricht nie etwas). */
@@ -1131,6 +1135,46 @@ function renderLegalFooter() {
 
 function chooseLanguage(level) {
   setLanguageLevel(level);
+  /* Im Erststart geht es nach der Sprache weiter zum Vorwissen,
+     sonst (späteres Ändern) direkt zur Startseite. */
+  if (onboarding) return renderVorwissen();
+  renderMenu();
+}
+
+/* Erststart-Schritt: Wie gut kennt sich die Person schon aus? (Vorwissen)
+   Steuert die Empfehlung „Kurz" oder „Mehr" beim Thema. */
+function renderVorwissen() {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Vorwissen", "Start", "Wie gut kennst du dich aus?", 0);
+  showNav(false, false);
+  content.innerHTML = `
+    <section class="profile-new">
+      <h2 class="profile-picker-title">Wie gut kennst du dich aus?</h2>
+      <p class="profile-picker-intro">Das hilft uns, dir die passende Menge vorzuschlagen. Du kannst es bei jedem Thema ändern.</p>
+      <div class="device-grid">
+        <button type="button" class="device-card" onclick="chooseVorwissen('neu')">
+          <span class="device-icon" aria-hidden="true">🌱</span>
+          <strong>Ich bin ganz neu</strong>
+          <span>Zeig mir alles in Ruhe. Ausführlich.</span>
+        </button>
+        <button type="button" class="device-card" onclick="chooseVorwissen('erfahren')">
+          <span class="device-icon" aria-hidden="true">⭐</span>
+          <strong>Ich kenne mich schon etwas aus</strong>
+          <span>Zeig mir nur das Wichtigste. Kurz.</span>
+        </button>
+      </div>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function chooseVorwissen(v) {
+  pSet(VORWISSEN_KEY, v === "erfahren" ? "erfahren" : "neu");
+  onboarding = false;
+  announce(v === "erfahren" ? "Gut. Wir schlagen dir die kurze Menge vor." : "Gut. Wir schlagen dir die ausführliche Menge vor.");
   renderMenu();
 }
 
@@ -1335,6 +1379,7 @@ function finishSign(editId) {
   fontSizeStep = 0;
   applyFontSize();
   finishedTopicThisSession = false;
+  onboarding = true;
   renderStart();
 }
 
@@ -1922,7 +1967,8 @@ function renderTopicChoice(topicId) {
       ${buildUtilityBar()}
 
       <div class="action-grid learning-path-grid">
-        <button type="button" class="action-card action-short" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
+        <button type="button" class="action-card action-short${pGet(VORWISSEN_KEY) === "erfahren" ? " action-card--rec" : ""}" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
+          ${pGet(VORWISSEN_KEY) === "erfahren" ? `<span class="action-rec-badge">Für dich empfohlen</span>` : ""}
           <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
           <span class="action-text">
             <span class="action-title">Kurz lernen</span>
@@ -1931,7 +1977,8 @@ function renderTopicChoice(topicId) {
           </span>
         </button>
 
-        <button type="button" class="action-card action-full" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
+        <button type="button" class="action-card action-full${pGet(VORWISSEN_KEY) === "neu" ? " action-card--rec" : ""}" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
+          ${pGet(VORWISSEN_KEY) === "neu" ? `<span class="action-rec-badge">Für dich empfohlen</span>` : ""}
           <span class="action-icon" aria-hidden="true">${getIconHtml("example")}</span>
           <span class="action-text">
             <span class="action-title">Mehr lernen</span>
