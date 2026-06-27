@@ -2196,6 +2196,31 @@ function renderSelfAssessment() {
   renderLegalFooter();
 }
 
+/* Sichtbarer Schritt-Pfad: zeigt geschaffte Schritte (Häkchen), den
+   aktuellen (hervorgehoben) und die kommenden. Klare visuelle Orientierung. */
+function buildStepPath(currentIndex, total) {
+  if (!total || total < 2) return "";
+  const small = total > 8 ? " step-path--small" : "";
+  let dots = "";
+  for (let i = 0; i < total; i++) {
+    if (i > 0) {
+      dots += `<span class="step-line${i <= currentIndex ? " is-done" : ""}"></span>`;
+    }
+    if (i < currentIndex) dots += `<span class="step-dot is-done" aria-hidden="true">✓</span>`;
+    else if (i === currentIndex) dots += `<span class="step-dot is-current" aria-hidden="true">${i + 1}</span>`;
+    else dots += `<span class="step-dot" aria-hidden="true">${i + 1}</span>`;
+  }
+  const remaining = total - currentIndex - 1;
+  const summary = remaining > 0
+    ? `<span class="step-done-count">${currentIndex} geschafft</span> · noch ${remaining} ${remaining === 1 ? "Schritt" : "Schritte"}`
+    : `<span class="step-done-count">${currentIndex} geschafft</span> · letzter Schritt`;
+  return `
+    <div class="step-path-wrap" role="group" aria-label="Schritt ${currentIndex + 1} von ${total}">
+      <div class="step-path${small}">${dots}</div>
+      <p class="step-path-summary">${summary}</p>
+    </div>`;
+}
+
 function renderLesson() {
   stopReading();
   const topic = getCurrentTopic();
@@ -2221,7 +2246,7 @@ function renderLesson() {
        </div>`
     : "";
 
-  setProgressVisible(true);
+  setProgressVisible(false);
   setBottomNavVisible(!hasPractice);
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
@@ -2306,6 +2331,7 @@ function renderLesson() {
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildStepPath(currentStep, lessons.length)}
     ${moduleBadge}
     <article class="card lesson-card${isEinfachLesson ? " lesson-card--einfach" : ""}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       ${pictogram}

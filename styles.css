@@ -1271,6 +1271,30 @@ button {
   border-radius: 999px;
 }
 
+/* Sichtbarer Schritt-Pfad in den Lektionen */
+.step-path-wrap { margin: 0 0 14px; }
+.step-path { display: flex; align-items: center; gap: 6px; }
+.step-dot {
+  flex: 0 0 auto;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.95rem;
+  background: #fff; border: 2px solid var(--line); color: var(--ink-soft);
+}
+.step-dot.is-done { background: var(--good); border-color: var(--good); color: #fff; }
+.step-dot.is-current {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+  width: 36px; height: 36px; font-size: 1.05rem;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.step-line { flex: 1 1 auto; min-width: 6px; height: 4px; border-radius: 2px; background: var(--line); }
+.step-line.is-done { background: var(--good); }
+.step-path--small .step-dot { width: 20px; height: 20px; font-size: 0.72rem; border-width: 2px; }
+.step-path--small .step-dot.is-current { width: 26px; height: 26px; font-size: 0.85rem; box-shadow: 0 0 0 3px var(--accent-soft); }
+.step-path-summary { margin: 8px 0 0; font-size: 1rem; color: var(--ink-soft); }
+.step-done-count { color: var(--good); font-weight: 700; }
+
 /* Zeichen-Bau: Vorschau */
 .sign-preview {
   display: flex;
