@@ -1695,6 +1695,30 @@ function renderIntro() {
           </div>
         </div>
       </div>
+
+      <div class="intro-words">
+        <div class="intro-word">
+          <span class="intro-word-label">Was heißt selbstbestimmt?</span>
+          <p>Selbstbestimmt heißt: Du entscheidest selbst. Du wählst, wie und was du lernst.</p>
+        </div>
+        <div class="intro-word">
+          <span class="intro-word-label">Was ist das Internet?</span>
+          <p>Das Internet verbindet viele Computer und Handys. Damit kannst du schreiben, suchen und Videos schauen.</p>
+        </div>
+      </div>
+
+      <div class="intro-offer">
+        <h3>Das kannst du hier machen:</h3>
+        <ul class="intro-offer-list">
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span>Du lernst über 12 Themen. Zum Beispiel: WhatsApp, Passwörter, Betrug und KI.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Du wählst deine Sprache. Es gibt 3 Stufen.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span>Du wählst, wie viel du lernst. Kurz oder mehr.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("photo")}</span><span>Du baust dein eigenes Zeichen. Mit Bild, Farbe und Zahl.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("message")}</span><span>Du kannst dir alles vorlesen lassen. Und die Schrift größer machen.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span>Du lernst allein. Oder mit einer Begleit-Person.</span></li>
+        </ul>
+      </div>
+
       <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
       <p class="intro-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos &nbsp;·&nbsp; kein Name nötig</p>
     </section>

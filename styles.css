@@ -1118,6 +1118,46 @@ button {
 .intro-start-button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .intro-meta { font-size: 0.95rem; color: var(--ink-soft); margin: 0; }
 
+/* Wort-Erklärungen auf der Startseite (Leichte Sprache) */
+.intro-words {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 22px 0 6px;
+  text-align: left;
+}
+.intro-word {
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+}
+.intro-word-label {
+  display: block;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.intro-word p { margin: 0; }
+
+/* Übersicht „Das kannst du hier machen" */
+.intro-offer {
+  margin: 18px 0 8px;
+  text-align: left;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 16px 18px;
+}
+.intro-offer h3 { margin: 0 0 12px; }
+.intro-offer-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.intro-offer-list li { display: flex; align-items: flex-start; gap: 12px; }
+.intro-offer-icon { flex-shrink: 0; width: 34px; height: 34px; display: inline-flex; }
+.intro-offer-icon svg { width: 100%; height: 100%; }
+@media (max-width: 620px) {
+  .intro-words { grid-template-columns: 1fr; }
+}
+
 /* Bestätigungs-Schritt für Wiederkehrende („Willkommen zurück") */
 .resume-page { max-width: 640px; margin: 0 auto; }
 .resume-head { display: flex; align-items: center; gap: 18px; margin-bottom: 8px; }
