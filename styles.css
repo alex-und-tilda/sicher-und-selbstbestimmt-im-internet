@@ -1844,16 +1844,18 @@ button {
    Bei „weniger Bewegung" (prefers-reduced-motion) automatisch aus –
    das deckt die globale Regel weiter oben ab. */
 @keyframes page-flip-forward {
-  from { opacity: 0; transform: translateX(64px) scale(0.985); }
+  from { opacity: 0; transform: translateX(110px) scale(0.965); }
   to   { opacity: 1; transform: translateX(0) scale(1); }
 }
 @keyframes page-flip-back {
-  from { opacity: 0; transform: translateX(-64px) scale(0.985); }
+  from { opacity: 0; transform: translateX(-110px) scale(0.965); }
   to   { opacity: 1; transform: translateX(0) scale(1); }
 }
 .page-flip { will-change: opacity, transform; }
-.page-flip--forward { animation: page-flip-forward 0.42s ease-out both; }
-.page-flip--back    { animation: page-flip-back 0.42s ease-out both; }
+/* Langsam und weich (ruhig), aber klar sichtbare Bewegung, damit der
+   Seitenwechsel gut nachvollziehbar ist. Sanftes Ausgleiten (kein Ruck). */
+.page-flip--forward { animation: page-flip-forward 0.62s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.page-flip--back    { animation: page-flip-back 0.62s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
 /* ---------- Lernweg-Auswahl ---------- */
 
