@@ -1699,8 +1699,11 @@ function renderIntro() {
 function introStart() {
   /* Noch kein Zeichen: volles Onboarding (Gerät → Zeichen → Sprache → Lernstand). */
   if (profiles.length === 0) return renderDeviceQuestion();
-  /* Geteiltes Gerät mit mehreren Zeichen: erst „Wer lernt gerade?". */
-  if (deviceShared && profiles.length > 1) return renderProfilePicker();
+  /* Geteiltes Gerät (z. B. iPad): IMMER zuerst „Wer lernt gerade?".
+     So wählt jede Person ihr eigenes Zeichen und macht mit ihrem eigenen
+     Lernstand weiter – auch wenn bisher nur ein Zeichen da ist, kann eine
+     weitere Person hier ein neues anlegen. Niemand kommt durcheinander. */
+  if (deviceShared) return renderProfilePicker();
   /* Onboarding noch nicht fertig (keine Sprache gewählt): weiter im Onboarding. */
   if (!languageChosen) return renderStart();
   /* Alles eingestellt: kurz bestätigen, dann zu den Themen. */
