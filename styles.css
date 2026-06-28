@@ -1854,8 +1854,8 @@ button {
 .page-flip { will-change: opacity, transform; }
 /* Langsam und weich (ruhig), aber klar sichtbare Bewegung, damit der
    Seitenwechsel gut nachvollziehbar ist. Sanftes Ausgleiten (kein Ruck). */
-.page-flip--forward { animation: page-flip-forward 1.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.page-flip--back    { animation: page-flip-back 1.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.page-flip--forward { animation: page-flip-forward 1.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.page-flip--back    { animation: page-flip-back 1.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
 /* Allgemeiner sanfter Übergang bei jedem Seitenwechsel (Startseite, Themen,
    Quiz …). Ruhig und gut nachvollziehbar. Bei „weniger Bewegung" automatisch aus. */
@@ -1867,8 +1867,8 @@ button {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-#content.view-enter { animation: view-enter 1.05s cubic-bezier(0.22, 1, 0.36, 1) both; }
-#content.view-enter-fade { animation: view-enter-fade 1.0s ease-out both; }
+#content.view-enter { animation: view-enter 1.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+#content.view-enter-fade { animation: view-enter-fade 1.5s ease-out both; }
 
 /* ---------- Lernweg-Auswahl ---------- */
 
