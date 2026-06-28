@@ -1963,10 +1963,13 @@ function renderMenu() {
         <span class="settings-caret" aria-hidden="true">${settingsOpen ? "▴" : "▾"}</span>
       </button>
       ${settingsOpen ? `
-        <div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>
-        <div class="settings-more">
-          <button type="button" class="settings-more-btn" onclick="startBigQuiz()">${getIconHtml("quiz")}<span>Das große Quiz</span></button>
-          <button type="button" class="settings-more-btn" onclick="renderAllMemoryCards()">${getIconHtml("remember")}<span>Alle Merk-Karten</span></button>
+        <div class="settings-panel" role="group" aria-label="Einstellungen">
+          <p class="settings-panel-title">Einstellungen</p>
+          <div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>
+          <div class="settings-more">
+            <button type="button" class="settings-more-btn" onclick="startBigQuiz()">${getIconHtml("quiz")}<span>Das große Quiz</span></button>
+            <button type="button" class="settings-more-btn" onclick="renderAllMemoryCards()">${getIconHtml("remember")}<span>Alle Merk-Karten</span></button>
+          </div>
         </div>` : ""}
     </div>`;
 

@@ -1240,7 +1240,25 @@ button {
 .settings-toggle:hover { border-color: var(--accent); }
 .settings-toggle:hover .settings-gear { background: var(--accent-dark); }
 .settings-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.settings-row--open { margin-top: 12px; }
+.settings-row--open { margin-top: 0; }
+
+/* Abgesetzter Einstellungs-Kasten: hebt die Einstellungen klar von den
+   übrigen Knöpfen ab (eigene Fläche, Rahmen, Überschrift). */
+.settings-panel {
+  margin-top: 10px;
+  padding: 14px 16px 16px;
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+}
+.settings-panel-title {
+  margin: 0 0 10px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
 
 /* Gemeinsame Einstell-Zeile (Sprache + Lernweg) unter der Begrüßung */
 .settings-row {
