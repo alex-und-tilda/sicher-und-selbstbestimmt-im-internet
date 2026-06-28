@@ -1225,7 +1225,7 @@ function renderProfilePicker() {
     ${buildReadingToolbar()}
     <section class="profile-picker" data-readable="true">
       <h2 class="profile-picker-title">Wer lernt gerade?</h2>
-      <p class="profile-picker-intro">Tippe auf dein Zeichen. Dann merkt sich die App deine Sprache und deinen Lernstand – nur auf diesem Gerät, ohne Namen.</p>
+      <p class="profile-picker-intro">Tippe auf dein Zeichen. Dann merkt sich die App, wie du liest, und deinen Lernstand – nur auf diesem Gerät, ohne Namen.</p>
       <div class="profile-grid">
         ${cards}
         <button type="button" class="profile-card profile-card--new" onclick="renderBuildSign(0, null)" aria-label="Neue Person hinzufügen">
@@ -1520,7 +1520,7 @@ function renderStart() {
         <button type="button" class="entry-card" onclick="startLanguageQuiz()">
           <span class="entry-icon" aria-hidden="true">${getIconHtml("help")}</span>
           <span class="entry-text">
-            <strong>Hilf mir, die passende Sprache zu finden</strong>
+            <strong>Hilf mir, die passende Stufe zu finden</strong>
             <span>3 kurze Fragen. Es gibt keine falsche Antwort.</span>
           </span>
         </button>
@@ -1528,7 +1528,7 @@ function renderStart() {
           <span class="entry-icon" aria-hidden="true">${getIconHtml("check")}</span>
           <span class="entry-text">
             <strong>Ich wähle selbst</strong>
-            <span>Direkt eine der drei Sprachen auswählen.</span>
+            <span>Direkt eine der drei Stufen auswählen.</span>
           </span>
         </button>
       </div>
@@ -1558,7 +1558,7 @@ function renderSampleFinder(round) {
   stopReading();
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", "Sprache finden", "Beispiel " + (round + 1) + " von " + SAMPLE_ROUNDS.length, "Sprache finden", Math.round((round / SAMPLE_ROUNDS.length) * 100));
+  setHeader("Sicher und selbstbestimmt im Internet", "Passende Stufe finden", "Beispiel " + (round + 1) + " von " + SAMPLE_ROUNDS.length, "Passende Stufe finden", Math.round((round / SAMPLE_ROUNDS.length) * 100));
   showNav(false, false);
 
   const r = SAMPLE_ROUNDS[round];
@@ -1609,7 +1609,7 @@ function renderLanguageResult(level) {
       <h2 class="lang-result-name">${escapeHtml(LANGUAGE_LABEL[level])}</h2>
       <p class="lang-result-desc">${escapeHtml(LANGUAGE_DESC[level])} Du kannst es jederzeit ändern.</p>
       <button type="button" class="nav-button primary lang-result-go" onclick="chooseLanguage('${level}')">Los geht’s</button>
-      <button type="button" class="plain-back-button" onclick="renderLanguageChoice('${level}')">Andere Sprache wählen</button>
+      <button type="button" class="plain-back-button" onclick="renderLanguageChoice('${level}')">Andere Stufe wählen</button>
     </article>
   `;
   focusContent();
@@ -1621,7 +1621,7 @@ function renderLanguageChoice(recommended) {
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", "Sprache wählen", "Start", "Wähle deine Sprache", 0);
+  setHeader("Sicher und selbstbestimmt im Internet", "Lesen wählen", "Start", "Wie möchtest du lesen?", 0);
   showNav(false, false);
 
   const card = (level, icon) => `
@@ -1636,15 +1636,15 @@ function renderLanguageChoice(recommended) {
   content.innerHTML = `
     ${buildReadingToolbar()}
     <section class="language-choice" data-readable="true">
-      <h2 class="language-choice-title">Wähle deine Sprache</h2>
-      <p class="language-choice-intro">Du kannst sie später jederzeit ändern.</p>
+      <h2 class="language-choice-title">Wie möchtest du lesen?</h2>
+      <p class="language-choice-intro">Wähle eine von 3 Stufen. Du kannst sie später jederzeit ändern.</p>
       <div class="language-grid">
         ${card("leicht", "understand")}
         ${card("einfach", "example")}
         ${card("standard", "report")}
       </div>
       <p class="language-finder-link">
-        <button type="button" class="utility-button" onclick="startLanguageQuiz()">Nicht sicher? Lass uns die passende Sprache finden</button>
+        <button type="button" class="utility-button" onclick="startLanguageQuiz()">Nicht sicher? Wir finden die passende Stufe für dich</button>
       </p>
       <p class="language-more-link">
         <a href="sprachstufen.html">Was ist der Unterschied? Hier wird es erklärt.</a>
@@ -1711,7 +1711,7 @@ function renderIntro() {
         <h3>Das kannst du hier machen:</h3>
         <ul class="intro-offer-list">
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span>Du lernst über 12 Themen. Zum Beispiel: WhatsApp, Passwörter, Betrug und KI.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Du wählst deine Sprache. Es gibt 3 Stufen.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Du wählst, wie du lesen möchtest. Es gibt 3 Stufen.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span>Du wählst, wie viel du lernst. Kurz oder mehr.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("photo")}</span><span>Du baust dein eigenes Zeichen. Mit Bild, Farbe und Zahl.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("message")}</span><span>Du kannst dir alles vorlesen lassen. Und die Schrift größer machen.</span></li>
@@ -1886,7 +1886,7 @@ function renderMenu() {
     </button>` : "";
 
   const langChip = `
-    <button type="button" class="settings-chip" onclick="renderLanguageChoice()" aria-label="Sprache ändern, du liest gerade ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
+    <button type="button" class="settings-chip" onclick="renderLanguageChoice()" aria-label="Lesen ändern, du liest gerade ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
       <span aria-hidden="true">🗣️</span> Du liest: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾
     </button>`;
 
