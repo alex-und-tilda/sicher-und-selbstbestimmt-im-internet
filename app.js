@@ -1697,9 +1697,62 @@ function renderIntro() {
 }
 
 function introStart() {
+  /* Noch kein Zeichen: volles Onboarding (Gerät → Zeichen → Sprache → Lernstand). */
   if (profiles.length === 0) return renderDeviceQuestion();
+  /* Geteiltes Gerät mit mehreren Zeichen: erst „Wer lernt gerade?". */
   if (deviceShared && profiles.length > 1) return renderProfilePicker();
-  renderMenu();
+  /* Onboarding noch nicht fertig (keine Sprache gewählt): weiter im Onboarding. */
+  if (!languageChosen) return renderStart();
+  /* Alles eingestellt: kurz bestätigen, dann zu den Themen. */
+  return renderResume();
+}
+
+/* Kurzer Bestätigungs-Schritt für Wiederkehrende.
+   Zeigt Zeichen, Sprache und Lernstand. Alles änderbar – oder gleich weiter.
+   So machen es Profis bei inklusiven Seiten: geführt, vorhersehbar, aber ohne
+   die Person jedes Mal alles neu einstellen zu lassen. */
+function renderResume() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Bereit?", "Start", "Willkommen zurück", 0);
+  showNav(false, false);
+
+  const prof = profiles.find(p => p.id === activeProfileId) || profiles[0];
+  const vw = pGet(VORWISSEN_KEY) === "erfahren" ? "erfahren" : "neu";
+  const vwLabel = vw === "erfahren" ? "Ich kenne mich schon etwas aus" : "Ich bin ganz neu";
+  const langLabel = LANGUAGE_LABEL[languageLevel] || "Leichte Sprache";
+
+  content.innerHTML = `
+    <section class="resume-page">
+      <div class="resume-head">
+        ${signHtml(prof, "profile-sign--big")}
+        <div class="resume-head-text">
+          <h2>Willkommen zurück!</h2>
+          <p>Das ist dein Zeichen: ${escapeHtml(signLabel(prof))}.</p>
+        </div>
+      </div>
+      <p class="resume-intro">So lernst du gerade. Du kannst alles ändern. Oder gleich weiter.</p>
+      <ul class="resume-list">
+        <li class="resume-row">
+          <span class="resume-row-label"><span class="resume-row-icon" aria-hidden="true">${getIconHtml("understand")}</span> Du liest: <strong>${escapeHtml(langLabel)}</strong></span>
+          <button type="button" class="resume-change" onclick="renderLanguageChoice('${languageLevel}')">ändern</button>
+        </li>
+        <li class="resume-row">
+          <span class="resume-row-label"><span class="resume-row-icon" aria-hidden="true">${getIconHtml("start")}</span> Dein Lernstand: <strong>${escapeHtml(vwLabel)}</strong></span>
+          <button type="button" class="resume-change" onclick="renderVorwissen()">ändern</button>
+        </li>
+        <li class="resume-row">
+          <span class="resume-row-label"><span class="resume-row-icon" aria-hidden="true">${getIconHtml("check")}</span> Dein Zeichen</span>
+          <button type="button" class="resume-change" onclick="renderProfileManage('${escapeHtml(prof.id)}')">ändern</button>
+        </li>
+      </ul>
+      <button type="button" class="intro-start-button" onclick="renderMenu()">Weiter zu den Themen</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
 }
 
 function renderMenu() {
