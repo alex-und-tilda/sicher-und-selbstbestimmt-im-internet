@@ -1853,7 +1853,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Nicht jeder möchte im Internet sein.",
+            "text": "Nicht alle wollen im Internet sein.",
             "pictogram": "pikto-link"
           },
           {
@@ -6645,7 +6645,7 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
-            "text": "Aber im Kleingedruckten steht: Danach kostet es jeden Monat Geld.",
+            "text": "Aber ganz unten steht in kleiner Schrift: Danach kostet es jeden Monat Geld.",
             "pictogram": "pikto-feel"
           },
           {
