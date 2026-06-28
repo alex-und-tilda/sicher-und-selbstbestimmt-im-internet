@@ -1837,7 +1837,9 @@ function renderMenu() {
 
   let companionNote = "";
   if (learnMode === "begleitung") {
-    companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr Hinweise für das gemeinsame Lernen.</p>`;
+    companionNote = languageLevel === "einfach"
+      ? `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr Hinweise für das gemeinsame Lernen.</p>`
+      : `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Die ausführlichen Hinweise für Begleitpersonen findet ihr in der Einfachen Sprache.</p>`;
   } else if (learnMode === "app") {
     companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">🔊</span> App-Hilfe ist an. Die Schrift ist größer und jede Seite wird dir vorgelesen.</p>`;
   }
@@ -1975,6 +1977,9 @@ function printCompanion(topicId) {
 /* Begleit-Panel „Für Begleitpersonen und Fachkräfte" (eigene Ebene,
    keine Sprach-Stufe). Erscheint nur, wenn das Thema Begleit-Material hat. */
 function buildCompanionPanel(topic) {
+  /* Begleit-Ebene nur in Einfacher Sprache zeigen (Vorgabe):
+     Leichte Sprache und Alltagssprache brauchen die Fachkraft-Hinweise nicht. */
+  if (languageLevel !== "einfach") return "";
   const c = topic && topic.companion;
   if (!c) return "";
   const sections = [
