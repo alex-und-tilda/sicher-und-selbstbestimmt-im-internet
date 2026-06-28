@@ -956,7 +956,16 @@ function readShortText(text) {
 function stopReading() {
   if (!supportsSpeech()) return;
   window.speechSynthesis.cancel();
+  setReadingActive(null);
   updateReadingStatus("Vorlesen gestoppt.");
+}
+
+/* Markiert den aktiven Vorlese-Knopf grün, damit man immer sieht, was läuft. */
+function setReadingActive(mode) {
+  const n = document.querySelector(".reading-button-normal");
+  const s = document.querySelector(".reading-button-slow");
+  if (n) { n.classList.toggle("is-active", mode === "normal"); n.setAttribute("aria-pressed", mode === "normal" ? "true" : "false"); }
+  if (s) { s.classList.toggle("is-active", mode === "slow"); s.setAttribute("aria-pressed", mode === "slow" ? "true" : "false"); }
 }
 
 function updateReadingStatus(text) {
@@ -1006,9 +1015,13 @@ function readCurrentPage(rate) {
   utterance.rate = rate || speechRate;
   utterance.pitch = 1;
   utterance.volume = 1;
-  utterance.onstart = () => updateReadingStatus(rate && rate < 0.8 ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
-  utterance.onend = () => updateReadingStatus("Vorlesen fertig.");
-  utterance.onerror = () => updateReadingStatus("Vorlesen wurde beendet.");
+  utterance.onstart = () => {
+    const slow = rate && rate < 0.8;
+    setReadingActive(slow ? "slow" : "normal");
+    updateReadingStatus(slow ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
+  };
+  utterance.onend = () => { setReadingActive(null); updateReadingStatus("Vorlesen fertig."); };
+  utterance.onerror = () => { setReadingActive(null); updateReadingStatus("Vorlesen wurde beendet."); };
   window.speechSynthesis.speak(utterance);
 }
 

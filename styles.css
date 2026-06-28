@@ -2101,8 +2101,15 @@ button {
 }
 
 .reading-button {
-  min-height: 48px;
-  padding: 10px 18px;
+  /* Alle drei Knöpfe gleich groß (gleiche Breite, gleiche Höhe). */
+  flex: 1 1 0;
+  min-width: 130px;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 16px;
   font-size: 0.98rem;
   font-weight: 700;
   border-radius: 999px;
@@ -2126,6 +2133,21 @@ button {
 .reading-button-stop:hover {
   background: var(--bad);
   color: #ffffff;
+}
+
+/* Aktiver Knopf leuchtet grün: man sieht immer, was gerade läuft. */
+.reading-button.is-active,
+.reading-button.is-active:hover {
+  background: var(--good);
+  color: #ffffff;
+  border-color: var(--good);
+}
+
+/* Status-Text in eine eigene Zeile unter die Knöpfe. */
+.reading-toolbar .reading-status {
+  flex-basis: 100%;
+  width: 100%;
+  margin: 2px 0 0;
 }
 
 .reading-status {
