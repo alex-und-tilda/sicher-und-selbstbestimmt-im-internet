@@ -19,6 +19,8 @@
 let currentTopicId = null;
 let currentMode = "full";
 let currentStep = 0;
+/* Richtung des Seitenwechsels für das sanfte Blättern (Weiter = vorwärts). */
+let pageDirection = "forward";
 let currentQuizIndex = 0;
 let quizScore = 0;
 let quizAnsweredCorrect = new Set();
@@ -2427,7 +2429,7 @@ function renderLesson() {
     ${buildUtilityBar()}${buildReadingToolbar()}
     ${buildStepPath(currentStep, lessons.length)}
     ${moduleBadge}
-    <article class="card lesson-card${isEinfachLesson ? " lesson-card--einfach" : ""}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+    <article class="card lesson-card page-flip page-flip--${pageDirection}${isEinfachLesson ? " lesson-card--einfach" : ""}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       ${pictogram}
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
@@ -2447,6 +2449,9 @@ function renderLesson() {
   `;
   focusContent();
   renderLegalFooter();
+
+  /* Richtung zurücksetzen: Standard ist vorwärts (z. B. beim Einstieg). */
+  pageDirection = "forward";
 
   /* App-Hilfe-Modus: jede Lektion automatisch vorlesen.
      Sanft (kleine Verzögerung) und jederzeit über „Stopp" abbrechbar (§3:
@@ -3247,6 +3252,7 @@ function goBack() {
 
   if (lessons.length && currentStep > 0) {
     currentStep -= 1;
+    pageDirection = "back";
     renderLesson();
     return;
   }
@@ -3267,6 +3273,7 @@ function goNext() {
   if (lessons.length) {
     if (currentStep < lessons.length - 1) {
       currentStep += 1;
+      pageDirection = "forward";
       renderLesson();
     } else {
       renderCompletionPage(topic.id);
