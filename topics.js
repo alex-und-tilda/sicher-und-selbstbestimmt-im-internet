@@ -6523,11 +6523,11 @@ const topics = [
             "pictogram": "pikto-pause"
           },
           {
-            "text": "Sie sollen eine kleine Gebühr zahlen.",
+            "text": "Du sollst eine kleine Gebühr zahlen.",
             "pictogram": "pikto-shop"
           },
           {
-            "text": "Oder Sie sollen auf einen Link klicken.",
+            "text": "Oder du sollst auf einen Link klicken.",
             "pictogram": "pikto-link"
           },
           {
