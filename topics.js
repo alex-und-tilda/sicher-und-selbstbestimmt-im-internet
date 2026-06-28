@@ -248,6 +248,10 @@ const topics = [
             "pictogram": "pikto-lock"
           },
           {
+            "text": "Ein Konto ist dein Bereich in einer App.",
+            "pictogram": "pikto-screen"
+          },
+          {
             "text": "Ein Passwort ist wie ein Schlüssel.",
             "pictogram": "pikto-key"
           },
@@ -443,7 +447,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Manche Nachrichten enthalten einen Link.",
+            "text": "In manchen Nachrichten ist ein Link.",
             "pictogram": "pikto-message"
           },
           {
