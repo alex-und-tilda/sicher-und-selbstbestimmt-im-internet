@@ -1667,6 +1667,10 @@ const topics = [
           {
             "text": "Private Informationen sollen nicht öffentlich sein.",
             "pictogram": "pikto-no"
+          },
+          {
+            "text": "Öffentlich heißt: alle können es sehen.",
+            "pictogram": "pikto-screen"
           }
         ],
         "examples": [
