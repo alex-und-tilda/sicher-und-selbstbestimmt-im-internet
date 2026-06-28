@@ -1957,8 +1957,10 @@ function renderMenu() {
      Einstell-Chips (Profil, Sprache, Lernweg) zeigt. */
   const settingsArea = `
     <div class="settings-area">
-      <button type="button" class="settings-toggle" onclick="toggleSettings()" aria-expanded="${settingsOpen ? "true" : "false"}">
-        <span aria-hidden="true">⚙</span> Einstellungen ${settingsOpen ? "▴" : "▾"}
+      <button type="button" class="settings-toggle" onclick="toggleSettings()" aria-expanded="${settingsOpen ? "true" : "false"}" aria-label="Einstellungen">
+        <span class="settings-gear" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.31.06-.62.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.3 7.3 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.24-1.12.56-1.62.94l-2.39-.96a.5.5 0 0 0-.6.22L2.74 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.62-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.38 1.04.7 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.24 1.12-.56 1.62-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg></span>
+        <span class="settings-toggle-label">Einstellungen</span>
+        <span class="settings-caret" aria-hidden="true">${settingsOpen ? "▴" : "▾"}</span>
       </button>
       ${settingsOpen ? `
         <div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>
