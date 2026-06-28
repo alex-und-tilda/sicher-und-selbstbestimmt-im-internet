@@ -941,21 +941,39 @@ function supportsSpeech() {
   return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
 }
 
-function readShortText(text) {
+/* Zustand für satzweises Vorlesen mit Mitlesen-Hervorhebung. */
+let _readQueue = [];
+let _readIndex = 0;
+let _readRate = 0.85;
+let _readGen = 0;   /* macht alte Vorlese-Abläufe ungültig */
+
+function clearReadingHighlight() {
+  document.querySelectorAll(".reading-highlight").forEach(e => e.classList.remove("reading-highlight"));
+}
+
+function readShortText(text, el) {
   if (!supportsSpeech()) return;
   const cleaned = String(text || "").trim();
   if (!cleaned) return;
+  _readGen++;
+  const gen = _readGen;
   window.speechSynthesis.cancel();
+  clearReadingHighlight();
+  if (el) el.classList.add("reading-highlight");
   const utterance = new SpeechSynthesisUtterance(cleaned);
   utterance.lang = "de-DE";
   utterance.rate = 0.82;
   utterance.pitch = 1;
+  utterance.onend = () => { if (gen === _readGen) clearReadingHighlight(); };
+  utterance.onerror = () => { if (gen === _readGen) clearReadingHighlight(); };
   window.speechSynthesis.speak(utterance);
 }
 
 function stopReading() {
   if (!supportsSpeech()) return;
+  _readGen++;                 /* laufenden Ablauf ungültig machen */
   window.speechSynthesis.cancel();
+  clearReadingHighlight();
   setReadingActive(null);
   updateReadingStatus("Vorlesen gestoppt.");
 }
@@ -998,31 +1016,70 @@ function collectReadableText() {
   return parts.join(". ");
 }
 
+/* Liest die Seite Satz für Satz vor und hebt den aktuellen Satz hervor
+   (Mitlesen, §3). Satzweise = zuverlässig auf allen Geräten. */
 function readCurrentPage(rate) {
   if (!supportsSpeech()) {
     updateReadingStatus("Vorlesen geht auf diesem Gerät nicht.");
     return;
   }
-  const text = collectReadableText();
-  if (!text) {
+  _readGen++;
+  const gen = _readGen;
+  window.speechSynthesis.cancel();
+  clearReadingHighlight();
+
+  const root = document.querySelector("[data-readable='true']") || content;
+  const els = root
+    ? Array.from(root.querySelectorAll("h2, h3, p, li")).filter(el => {
+        if (el.closest(".reading-toolbar, nav, footer, button")) return false;
+        return cleanSpeechText(el.textContent).length > 0;
+      })
+    : [];
+  if (!els.length) {
     updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
     return;
   }
+  _readQueue = els;
+  _readIndex = 0;
+  _readRate = rate || speechRate;
+  speakNextSentence(gen);
+}
 
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "de-DE";
-  utterance.rate = rate || speechRate;
-  utterance.pitch = 1;
-  utterance.volume = 1;
-  utterance.onstart = () => {
-    const slow = rate && rate < 0.8;
+function speakNextSentence(gen) {
+  if (gen !== _readGen) return;
+  clearReadingHighlight();
+  if (_readIndex >= _readQueue.length) {
+    setReadingActive(null);
+    updateReadingStatus("Vorlesen fertig.");
+    return;
+  }
+  const el = _readQueue[_readIndex];
+  const text = cleanSpeechText(el.textContent);
+  if (!text) { _readIndex++; return speakNextSentence(gen); }
+
+  el.classList.add("reading-highlight");
+  /* Den aktuellen Satz sichtbar halten – aber nur scrollen, wenn er aus dem
+     Bild läuft (kein ständiges Springen). */
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const r = el.getBoundingClientRect();
+  if (r.top < 90 || r.bottom > window.innerHeight - 90) {
+    try { el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); } catch (e) { /* nichts */ }
+  }
+
+  const slow = _readRate && _readRate < 0.8;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "de-DE";
+  u.rate = _readRate;
+  u.pitch = 1;
+  u.volume = 1;
+  u.onstart = () => {
+    if (gen !== _readGen) return;
     setReadingActive(slow ? "slow" : "normal");
     updateReadingStatus(slow ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
   };
-  utterance.onend = () => { setReadingActive(null); updateReadingStatus("Vorlesen fertig."); };
-  utterance.onerror = () => { setReadingActive(null); updateReadingStatus("Vorlesen wurde beendet."); };
-  window.speechSynthesis.speak(utterance);
+  u.onend = () => { if (gen !== _readGen) return; _readIndex++; speakNextSentence(gen); };
+  u.onerror = () => { if (gen !== _readGen) return; _readIndex++; speakNextSentence(gen); };
+  window.speechSynthesis.speak(u);
 }
 
 function readNormal() { readCurrentPage(0.85); }
@@ -3417,7 +3474,8 @@ function handleReadCardEvent(event) {
   event.stopImmediatePropagation();
 
   const text = button.getAttribute("data-read-card-text") || button.getAttribute("data-read-card-title");
-  readShortText(text);
+  const block = button.closest(".ls-text-block, .ls-bullet-block, .access-box, .action-card, .topic-card, .sample-option, .language-card");
+  readShortText(text, block);
 }
 
 document.addEventListener("click", handleReadCardEvent, true);

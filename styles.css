@@ -2150,6 +2150,15 @@ button {
   margin: 2px 0 0;
 }
 
+/* Mitlesen: der gerade vorgelesene Satz/Abschnitt wird hervorgehoben. */
+.reading-highlight {
+  background: var(--accent-soft);
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
 .reading-status {
   margin: 0;
   font-size: 0.95rem;
