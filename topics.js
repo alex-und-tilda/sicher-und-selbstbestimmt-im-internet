@@ -3104,6 +3104,10 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
+            "text": "KI ist ein Computer-Programm.",
+            "pictogram": "pikto-ki"
+          },
+          {
             "text": "Sie sehen echt aus. Aber sie sind gefälscht.",
             "pictogram": "pikto-fake"
           },
