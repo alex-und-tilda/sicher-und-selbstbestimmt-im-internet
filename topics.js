@@ -3568,11 +3568,11 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "So kann dein Bild gespeichert werden.",
+            "text": "So kann jemand dein Bild speichern.",
             "pictogram": "pikto-photo"
           },
           {
-            "text": "So kann dein Bild weiter-geschickt werden.",
+            "text": "So kann jemand dein Bild weiter-schicken.",
             "pictogram": "pikto-photo"
           }
         ],
