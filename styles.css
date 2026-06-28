@@ -2150,13 +2150,14 @@ button {
   margin: 2px 0 0;
 }
 
-/* Mitlesen: der gerade vorgelesene Satz/Abschnitt wird hervorgehoben. */
+/* Mitlesen: der gerade vorgelesene Satz/Abschnitt wird mit einem klaren
+   Rahmen markiert – KEIN Hintergrund, damit die Schrift voll lesbar bleibt
+   (auch auf farbigen oder dunklen Flächen). */
 .reading-highlight {
-  background: var(--accent-soft);
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 6px;
-  transition: background 0.15s ease;
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .reading-status {
