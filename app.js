@@ -1862,18 +1862,7 @@ function renderMenu() {
 
   content.innerHTML = `
     <section class="start-page">
-      <div class="hero-card hero-card--slim">
-        <div class="hero-slim-text">
-          <h2>Willkommen!</h2>
-          <p>Such dir unten ein Thema aus.</p>
-        </div>
-        <div class="hero-icon-slim" aria-hidden="true">
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M32 4 L56 16 L56 36 C56 50 44 60 32 62 C20 60 8 50 8 36 L8 16 Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M24 32 L30 38 L40 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </div>
+      <a class="plain-back-button" href="#" onclick="event.preventDefault(); renderIntro();">← Zur Startseite</a>
       ${settingsArea}
       ${learnModeSection}
       ${reviewSection}
@@ -1881,25 +1870,6 @@ function renderMenu() {
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
       <div class="topic-grid">${cards}</div>
       ${progressConsent}
-      <div class="more-section" aria-label="Weitere Angebote">
-        <h3 class="more-title">Mehr</h3>
-        <div class="start-actions">
-          <button type="button" class="big-quiz-start-button" onclick="startBigQuiz()">
-            ${getIconHtml("quiz")}
-            <span>
-              <strong>Das große Quiz</strong>
-              <span>Alle 12 Themen gemischt</span>
-            </span>
-          </button>
-          <button type="button" class="start-action-secondary" onclick="renderAllMemoryCards()">
-            ${getIconHtml("remember")}
-            <span>
-              <strong>Alle Merk-Karten</strong>
-              <span>Übersicht &amp; Drucken</span>
-            </span>
-          </button>
-        </div>
-      </div>
     </section>
   `;
   focusContent();
