@@ -97,6 +97,9 @@ const LEARN_MODE_SEEN_KEY = "lern-weg-gesehen";
 /* Beim ersten Besuch wird die Lernweg-Frage groß gezeigt, danach nur noch
    als kleine umstellbare Zeile. Dieser Schalter öffnet sie wieder. */
 let learnModeChooserOpen = false;
+/* Einstellungen auf der Startseite ein-/ausklappen (schlanker Einstieg). */
+let settingsOpen = false;
+function toggleSettings() { settingsOpen = !settingsOpen; renderMenu(); }
 /* Wurde in dieser Sitzung mindestens ein Thema fertig gemacht?
    (Steuert, wann die freiwillige Lernstand-Frage erscheint.) */
 let finishedTopicThisSession = false;
@@ -1757,14 +1760,28 @@ function renderMenu() {
       <span aria-hidden="true">🗣️</span> Du liest: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾
     </button>`;
 
-  /* Beim ersten Besuch die Lernweg-Frage groß zeigen; danach nur noch als
-     kleinen Knopf in der Einstell-Zeile (CLT: ein Inhalt zuerst). */
+  const learnLabel = learnMode ? LEARN_MODES[learnMode].title : "Lernweg wählen";
+  const learnChip = `
+    <button type="button" class="settings-chip" onclick="openLearnModeChooser()" aria-label="Lernweg ändern, aktuell ${escapeHtml(learnLabel)}">
+      <span aria-hidden="true">🧭</span> Lernweg: ${escapeHtml(learnLabel)} ▾
+    </button>`;
+
+  /* Einstellungen schlank: ein ruhiger Knopf, der bei Bedarf die drei
+     Einstell-Chips (Profil, Sprache, Lernweg) zeigt. */
+  const settingsArea = `
+    <div class="settings-area">
+      <button type="button" class="settings-toggle" onclick="toggleSettings()" aria-expanded="${settingsOpen ? "true" : "false"}">
+        <span aria-hidden="true">⚙</span> Einstellungen ${settingsOpen ? "▴" : "▾"}
+      </button>
+      ${settingsOpen ? `<div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>` : ""}
+    </div>`;
+
+  /* Beim ersten Besuch die Lernweg-Frage einmal groß zeigen; danach steckt
+     der Lernweg in den Einstellungen. */
   const showFullChooser = learnModeChooserOpen || !learnModeWasSeen();
-  let settingsRow;
   let learnModeSection;
   if (showFullChooser) {
     markLearnModeSeen();
-    settingsRow = `<div class="settings-row">${profileChip}${langChip}</div>`;
     learnModeSection = `
     <section class="learn-mode-section" aria-label="Wie möchtest du lernen?">
       <h3 class="learn-mode-title">Wie möchtest du heute lernen?</h3>
@@ -1774,12 +1791,6 @@ function renderMenu() {
       <p class="learn-mode-hint"><span aria-hidden="true">ℹ️</span> Du musst dich nicht festlegen. Du kannst auch einfach ein Thema wählen und loslegen.</p>
     </section>`;
   } else {
-    const label = learnMode ? LEARN_MODES[learnMode].title : "Lernweg wählen";
-    const learnChip = `
-      <button type="button" class="settings-chip" onclick="openLearnModeChooser()" aria-label="Lernweg ändern, aktuell ${escapeHtml(label)}">
-        <span aria-hidden="true">🧭</span> Lernweg: ${escapeHtml(label)} ▾
-      </button>`;
-    settingsRow = `<div class="settings-row">${profileChip}${langChip}${learnChip}</div>`;
     learnModeSection = companionNote;
   }
 
@@ -1806,24 +1817,19 @@ function renderMenu() {
 
   content.innerHTML = `
     <section class="start-page">
-      <div class="hero-card">
-        <div class="hero-inner">
-          <div class="hero-text">
-            <h2>Willkommen!</h2>
-            <p>Hier lernst du, sicher im Internet zu sein.</p>
-            <button type="button" class="hero-start-button" onclick="scrollToTopics()">Los geht’s <span aria-hidden="true">↓</span></button>
-            <p class="hero-meta">Lern-Plattform &nbsp;·&nbsp; 12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos</p>
-            ${heroProgress}
-          </div>
-          <div class="hero-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 4 L56 16 L56 36 C56 50 44 60 32 62 C20 60 8 50 8 36 L8 16 Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-              <path d="M24 32 L30 38 L40 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+      <div class="hero-card hero-card--slim">
+        <div class="hero-slim-text">
+          <h2>Willkommen!</h2>
+          <p>Such dir unten ein Thema aus.</p>
+        </div>
+        <div class="hero-icon-slim" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 4 L56 16 L56 36 C56 50 44 60 32 62 C20 60 8 50 8 36 L8 16 Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <path d="M24 32 L30 38 L40 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </div>
-      ${settingsRow}
+      ${settingsArea}
       ${learnModeSection}
       ${reviewSection}
       <h3 class="topic-grid-title">Wähle ein Thema</h3>
