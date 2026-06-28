@@ -1155,7 +1155,8 @@ function renderVorwissen() {
   setHeader("Sicher und selbstbestimmt im Internet", "Vorwissen", "Start", "Wie gut kennst du dich aus?", 0);
   showNav(false, false);
   content.innerHTML = `
-    <section class="profile-new">
+    ${buildReadingToolbar()}
+    <section class="profile-new" data-readable="true">
       <h2 class="profile-picker-title">Wie gut kennst du dich aus?</h2>
       <p class="profile-picker-intro">Das hilft uns, dir die passende Menge vorzuschlagen. Du kannst es bei jedem Thema ändern.</p>
       <div class="device-grid">
@@ -1221,7 +1222,8 @@ function renderProfilePicker() {
     </div>`).join("");
 
   content.innerHTML = `
-    <section class="profile-picker">
+    ${buildReadingToolbar()}
+    <section class="profile-picker" data-readable="true">
       <h2 class="profile-picker-title">Wer lernt gerade?</h2>
       <p class="profile-picker-intro">Tippe auf dein Zeichen. Dann merkt sich die App deine Sprache und deinen Lernstand – nur auf diesem Gerät, ohne Namen.</p>
       <div class="profile-grid">
@@ -1245,7 +1247,8 @@ function renderDeviceQuestion() {
   setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Wer benutzt dieses Gerät?", 0);
   showNav(false, false);
   content.innerHTML = `
-    <section class="profile-new">
+    ${buildReadingToolbar()}
+    <section class="profile-new" data-readable="true">
       <h2 class="profile-picker-title">Willkommen!</h2>
       <p class="profile-picker-intro">Eine Frage zum Anfang: Benutzt du dieses Gerät allein? Oder benutzen es mehrere Personen?</p>
       <div class="device-grid">
@@ -1631,7 +1634,8 @@ function renderLanguageChoice(recommended) {
     </button>`;
 
   content.innerHTML = `
-    <section class="language-choice">
+    ${buildReadingToolbar()}
+    <section class="language-choice" data-readable="true">
       <h2 class="language-choice-title">Wähle deine Sprache</h2>
       <p class="language-choice-intro">Du kannst sie später jederzeit ändern.</p>
       <div class="language-grid">
@@ -1674,7 +1678,8 @@ function renderIntro() {
   setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Willkommen", 0);
   showNav(false, false);
   content.innerHTML = `
-    <section class="intro-page">
+    ${buildReadingToolbar()}
+    <section class="intro-page" data-readable="true">
       <div class="hero-card">
         <div class="hero-inner">
           <div class="hero-text">
@@ -1730,7 +1735,8 @@ function renderResume() {
   const langLabel = LANGUAGE_LABEL[languageLevel] || "Leichte Sprache";
 
   content.innerHTML = `
-    <section class="resume-page">
+    ${buildReadingToolbar()}
+    <section class="resume-page" data-readable="true">
       <div class="resume-head">
         ${signHtml(prof, "profile-sign--big")}
         <div class="resume-head-text">
@@ -1923,6 +1929,7 @@ function renderMenu() {
   content.innerHTML = `
     <section class="start-page">
       <a class="plain-back-button" href="#" onclick="event.preventDefault(); renderIntro();">← Zur Startseite</a>
+      ${buildReadingToolbar()}
       ${settingsArea}
       ${learnModeSection}
       ${reviewSection}
@@ -2034,8 +2041,8 @@ function renderTopicChoice(topicId) {
   content.innerHTML = `
     <section class="topic-choice" style="${getTopicColorStyle(topic.id)}">
       <button type="button" class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
-
-      <article class="card topic-intro-card">
+      ${buildReadingToolbar()}
+      <article class="card topic-intro-card" data-readable="true">
         ${getIllustrationHtml(topic)}
         <div class="symbol-heading">
           <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
@@ -2256,7 +2263,8 @@ function renderSelfAssessment() {
   ).join("");
 
   content.innerHTML = `
-    <article class="card sa-card" style="${getTopicColorStyle(topic.id)}">
+    ${buildReadingToolbar()}
+    <article class="card sa-card" data-readable="true" style="${getTopicColorStyle(topic.id)}">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
         <h2>${escapeHtml(topic.title)}</h2>
@@ -2600,6 +2608,7 @@ function renderCompletionPage(topicId) {
   if (currentMode === "short") {
     setHeader(topic.title, "Kurz lernen", "Abschluss", "Du bist fertig", 100);
     content.innerHTML = `
+      ${buildReadingToolbar()}
       <section class="completion-page einfach-completion" data-readable="true">
         <article class="card completion-card--einfach" style="${getTopicColorStyle(topic.id)}">
 
@@ -2646,6 +2655,7 @@ function renderCompletionPage(topicId) {
   const rulesHtml = rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
 
   content.innerHTML = `
+    ${buildReadingToolbar()}
     <section class="completion-page" data-readable="true">
       <article class="card completion-card" style="${getTopicColorStyle(topic.id)}">
         <div class="symbol-heading">
