@@ -7186,6 +7186,10 @@ const topics = [
             "pictogram": "pikto-data"
           },
           {
+            "text": "PIN und TAN sind geheime Zahlen von deiner Bank.",
+            "pictogram": "pikto-lock"
+          },
+          {
             "text": "PIN und TAN sind geheim.",
             "pictogram": "pikto-lock"
           },
