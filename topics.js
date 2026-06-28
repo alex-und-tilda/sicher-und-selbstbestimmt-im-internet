@@ -4810,7 +4810,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du kannst jemanden um Hilfe beim Screenshot bitten.",
+            "text": "Jemand kann dir dabei helfen.",
             "pictogram": "pikto-photo"
           }
         ],
