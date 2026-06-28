@@ -3389,6 +3389,25 @@ function handleReadCardEvent(event) {
 document.addEventListener("click", handleReadCardEvent, true);
 document.addEventListener("keydown", handleReadCardEvent, true);
 
+/* Sanfter Übergang bei JEDEM Seitenwechsel (nicht nur beim Blättern in
+   Lektionen): Sobald der Inhalt ausgetauscht wird, blendet die neue Seite
+   weich ein. So ist auch der Wechsel von „Los geht's" zu den Themen, von
+   Thema zu Lektion usw. gut nachvollziehbar (§3 Vorhersehbarkeit, Orientierung).
+   Bei „weniger Bewegung" ist es über die globale CSS-Regel automatisch aus. */
+if (content && "MutationObserver" in window) {
+  const viewObserver = new MutationObserver(() => {
+    /* Lektionen blättern schon selbst seitlich – dort nur sanft überblenden,
+       sonst (Startseite, Themen, Quiz …) Einblenden mit kleiner Aufwärts-Bewegung. */
+    const isLesson = !!content.querySelector(".page-flip");
+    const cls = isLesson ? "view-enter-fade" : "view-enter";
+    content.classList.remove("view-enter", "view-enter-fade");
+    /* Reflow erzwingen, damit die Animation neu startet. */
+    void content.offsetWidth;
+    content.classList.add(cls);
+  });
+  viewObserver.observe(content, { childList: true });
+}
+
 /* Escape schließt Overlays. */
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
