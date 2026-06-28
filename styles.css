@@ -1813,6 +1813,32 @@ button {
   color: #ffffff;
 }
 
+/* Vorlese-Knopf je Block (Haupttext, Liste, Achtung, Merksatz …):
+   ruhig und etwas kleiner, rechtsbündig, damit es nicht überladen wirkt. */
+.card-read-button--block {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  background: transparent;
+}
+.ls-text-block,
+.ls-bullet-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ls-text-block > .card-read-button--block,
+.ls-bullet-block > .card-read-button--block {
+  align-self: flex-end;
+}
+.access-box .card-read-button--block {
+  align-self: flex-start;
+}
+.card-read-button--block:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* ---------- Lernweg-Auswahl ---------- */
 
 .plain-back-button {

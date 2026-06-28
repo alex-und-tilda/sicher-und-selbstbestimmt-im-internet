@@ -2333,8 +2333,17 @@ function renderLesson() {
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
+  /* Vorlese-Knopf je Block: Vorlesen als selbstbestimmtes Angebot an jeder
+     Kachel (§1 Selbstbestimmung, §3 Vorlesen als Wahl). Liest genau diesen Block. */
+  const blockRead = (t) => t
+    ? `<span class="card-read-button card-read-button--block" role="button" tabindex="0" data-read-card-text="${escapeHtml(t)}" aria-label="Diesen Teil vorlesen">🔊 Vorlesen</span>`
+    : "";
+  const plain = (arr) => Array.isArray(arr)
+    ? arr.map(i => (typeof i === "object" && i.text) ? i.text : i).join(" ")
+    : "";
+
   /* Text-Sätze — unterstützt Strings und {text, pictogram}-Objekte */
-  const text = Array.isArray(lesson.text)
+  const textRows = Array.isArray(lesson.text)
     ? lesson.text.map(item => {
         if (typeof item === "object" && item.text) {
           const img = item.pictogram
@@ -2345,10 +2354,13 @@ function renderLesson() {
         return `<p>${escapeHtml(item)}</p>`;
       }).join("")
     : "";
+  const text = textRows
+    ? `<div class="ls-text-block">${textRows}${blockRead(plain(lesson.text))}</div>`
+    : "";
 
   /* Bullet-Punkte — unterstützt Strings und {text, pictogram}-Objekte */
   const bullets = Array.isArray(lesson.bullets) && lesson.bullets.length
-    ? `<ul class="ls-bullet-list">${lesson.bullets.map(item => {
+    ? `<div class="ls-bullet-block"><ul class="ls-bullet-list">${lesson.bullets.map(item => {
         if (typeof item === "object" && item.text) {
           const img = item.pictogram
             ? `<img class="ls-bullet-pikto" src="${pictoSrc(refinePicto(item.pictogram, item.text))}" alt="" width="40" height="40" aria-hidden="true" loading="lazy">`
@@ -2356,23 +2368,23 @@ function renderLesson() {
           return `<li class="ls-bullet-item">${img}<span>${escapeHtml(item.text)}</span></li>`;
         }
         return `<li>${escapeHtml(item)}</li>`;
-      }).join("")}</ul>`
+      }).join("")}</ul>${blockRead(plain(lesson.bullets))}</div>`
     : "";
 
   const examples = Array.isArray(lesson.examples) && lesson.examples.length
-    ? `<div class="access-box example"><h3>Beispiele aus dem Alltag</h3><ul>${lesson.examples.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>`
+    ? `<div class="access-box example"><h3>Beispiele aus dem Alltag</h3><ul>${lesson.examples.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>${blockRead("Beispiele aus dem Alltag. " + plain(lesson.examples))}</div>`
     : "";
 
   const warning = lesson.warning
-    ? `<div class="access-box warning"><h3>Achtung</h3><p>${escapeHtml(lesson.warning)}</p></div>`
+    ? `<div class="access-box warning"><h3>Achtung</h3><p>${escapeHtml(lesson.warning)}</p>${blockRead("Achtung. " + lesson.warning)}</div>`
     : "";
 
   const success = lesson.success
-    ? `<div class="access-box success"><h3>Gut</h3><p>${escapeHtml(lesson.success)}</p></div>`
+    ? `<div class="access-box success"><h3>Gut</h3><p>${escapeHtml(lesson.success)}</p>${blockRead("Gut. " + lesson.success)}</div>`
     : "";
 
   const remember = lesson.remember
-    ? `<div class="access-box remember remember-box"><h3>Wichtig</h3><p class="remember-text">${escapeHtml(lesson.remember)}</p></div>`
+    ? `<div class="access-box remember remember-box"><h3>Wichtig</h3><p class="remember-text">${escapeHtml(lesson.remember)}</p>${blockRead("Wichtig. " + lesson.remember)}</div>`
     : "";
 
   const practice = hasPractice ? buildPractice(lesson.practice) : "";
