@@ -503,6 +503,7 @@ function toggleProgressSaving() {
 
 const GLOSSAR = {
   "internet":               "Das Internet ist ein riesiges Netz aus vielen Computern. So kann man Internetseiten besuchen und Nachrichten schicken.",
+  "selbstbestimmt":         "Selbstbestimmt heißt: Du entscheidest selbst. Du wählst, wie und was du lernst.",
   "app":                    "Eine App ist ein Programm auf dem Handy oder Tablet. Apps kann man im App Store oder Play Store herunterladen.",
   "browser":                "Ein Browser ist ein Programm zum Öffnen von Internetseiten. Zum Beispiel Safari, Chrome oder Firefox.",
   "passwort":               "Ein Passwort ist ein geheimes Wort oder eine geheime Zahlenfolge. Es schützt dein Konto.",
@@ -615,9 +616,6 @@ function applyGlossar() {
       while (el) {
         if (SKIP.has(el.tagName)) return NodeFilter.FILTER_REJECT;
         if (el.classList && el.classList.contains("glossar-term")) return NodeFilter.FILTER_REJECT;
-        /* Begrüßungs-Feld (Hero) aussparen: dort wäre die Hervorhebung
-           auf dem dunklen Blau schlecht lesbar. */
-        if (el.classList && el.classList.contains("hero-card")) return NodeFilter.FILTER_REJECT;
         el = el.parentElement;
       }
       return NodeFilter.FILTER_ACCEPT;
@@ -1693,17 +1691,6 @@ function renderIntro() {
               <path d="M24 32 L30 38 L40 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-        </div>
-      </div>
-
-      <div class="intro-words">
-        <div class="intro-word">
-          <span class="intro-word-label">Was heißt selbstbestimmt?</span>
-          <p>Selbstbestimmt heißt: Du entscheidest selbst. Du wählst, wie und was du lernst.</p>
-        </div>
-        <div class="intro-word">
-          <span class="intro-word-label">Was ist das Internet?</span>
-          <p>Das Internet verbindet viele Computer und Handys. Damit kannst du schreiben, suchen und Videos schauen.</p>
         </div>
       </div>
 

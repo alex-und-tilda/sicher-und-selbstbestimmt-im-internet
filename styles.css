@@ -3808,6 +3808,17 @@ body.simple-mode .practice-box {
   outline-offset: 1px;
 }
 
+/* Glossar-Wörter im dunklen Begrüßungs-Feld: weiß und gut sichtbar. */
+.hero-card .glossar-term {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.8);
+}
+.hero-card .glossar-term:hover,
+.hero-card .glossar-term:focus {
+  background: rgba(255, 255, 255, 0.18);
+  outline-color: #ffffff;
+}
+
 /* Overlay (Hintergrund) */
 .glossar-overlay {
   position: fixed;
