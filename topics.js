@@ -1019,7 +1019,7 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
-            "text": "Auch Sprach-Nachrichten können mit KI gefälscht sein.",
+            "text": "Fremde können eine Stimme mit dem Computer fälschen.",
             "pictogram": "pikto-message"
           },
           {
@@ -1143,7 +1143,7 @@ const topics = [
         "icon": "photo",
         "text": [
           {
-            "text": "Ein Foto kann weiter-geschickt werden.",
+            "text": "Andere können dein Foto weiter-schicken.",
             "pictogram": "pikto-photo"
           },
           {
@@ -1214,6 +1214,10 @@ const topics = [
           },
           {
             "text": "Die KI ist kein Mensch. Sie ist ein Programm.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "KI ist ein schlaues Computer-Programm.",
             "pictogram": "pikto-ki"
           },
           {
