@@ -3793,6 +3793,15 @@ body.simple-mode .practice-box {
    ============================================================ */
 
 /* Hervorgehobenes Wort im Text */
+/* Icons in den Vorlese-Knöpfen (Lautsprecher / Lautsprecher mit Uhr).
+   Erben die Textfarbe des Knopfes; ruhig und erwachsen statt Emoji. */
+.rb-ico {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.22em;
+  margin-right: 3px;
+}
+
 .glossar-term {
   border-bottom: 2px dotted var(--accent);
   color: var(--accent);
