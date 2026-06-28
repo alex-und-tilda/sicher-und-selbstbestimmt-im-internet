@@ -1662,6 +1662,46 @@ function scrollToTopics() {
   }
 }
 
+/* Startseite (Intro): kurz, worum es geht, plus ein Start-Knopf.
+   Die Lerneinheiten (Themen) liegen auf einer eigenen Seite. */
+function renderIntro() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Willkommen", 0);
+  showNav(false, false);
+  content.innerHTML = `
+    <section class="intro-page">
+      <div class="hero-card">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h2>Willkommen!</h2>
+            <p>Hier lernst du, sicher und selbstbestimmt im Internet zu sein.</p>
+            <p>In kurzen Schritten. Mit Bildern und zum Vorlesen.</p>
+          </div>
+          <div class="hero-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 4 L56 16 L56 36 C56 50 44 60 32 62 C20 60 8 50 8 36 L8 16 Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+              <path d="M24 32 L30 38 L40 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
+      <p class="intro-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos &nbsp;·&nbsp; kein Name nötig</p>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function introStart() {
+  if (profiles.length === 0) return renderDeviceQuestion();
+  if (deviceShared && profiles.length > 1) return renderProfilePicker();
+  renderMenu();
+}
+
 function renderMenu() {
   stopReading();
   currentTopicId = null;
@@ -1773,7 +1813,12 @@ function renderMenu() {
       <button type="button" class="settings-toggle" onclick="toggleSettings()" aria-expanded="${settingsOpen ? "true" : "false"}">
         <span aria-hidden="true">⚙</span> Einstellungen ${settingsOpen ? "▴" : "▾"}
       </button>
-      ${settingsOpen ? `<div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>` : ""}
+      ${settingsOpen ? `
+        <div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>
+        <div class="settings-more">
+          <button type="button" class="settings-more-btn" onclick="startBigQuiz()">${getIconHtml("quiz")}<span>Das große Quiz</span></button>
+          <button type="button" class="settings-more-btn" onclick="renderAllMemoryCards()">${getIconHtml("remember")}<span>Alle Merk-Karten</span></button>
+        </div>` : ""}
     </div>`;
 
   /* Beim ersten Besuch die Lernweg-Frage einmal groß zeigen; danach steckt
@@ -3241,13 +3286,9 @@ function renderAllMemoryCards() {
 function handleHash() {
   const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
   if (!hash) {
-    /* Erster Besuch (noch kein Profil): Geräte-Frage, dann Zeichen bauen,
-       dann Sprachstufe, dann Themen. */
-    if (profiles.length === 0) return renderDeviceQuestion();
-    /* Geteiltes Gerät mit mehreren Personen: zuerst „Wer lernt gerade?".
-       Sonst direkt zur Startseite (Person wechselt man über „Du: …"). */
-    if (deviceShared && profiles.length > 1) return renderProfilePicker();
-    return languageChosen ? renderMenu() : renderStart();
+    /* Beim Öffnen immer die kurze Intro-Startseite. „Los geht's" führt
+       ins Onboarding (erster Besuch) oder zu den Themen. */
+    return renderIntro();
   }
 
   /* Sonderrouten */
