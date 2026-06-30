@@ -787,18 +787,20 @@ button {
 
 .topic-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 14px;
 }
 
+/* App-Kacheln (Smartphone-Look): farbiges Icon-Feld oben, darunter Name
+   und kurze Beschreibung – zentriert. */
 .topic-card {
   position: relative; /* für .topic-done-corner */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  text-align: left;
-  padding: 22px 20px 20px;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 18px 14px 16px;
   background: var(--surface);
   border: 2px solid var(--line);
   border-radius: var(--radius-l);
@@ -807,19 +809,8 @@ button {
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Farb-Rand oben: dauerhafte Orientierung je Thema */
-.topic-card::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 6px;
-  border-radius: var(--radius-l) var(--radius-l) 0 0;
-  background: var(--topic-color);
-  opacity: 1;
-  transition: opacity 0.15s ease;
-}
+/* kein Farbbalken mehr – die Farbe trägt jetzt das App-Icon */
+.topic-card::after { content: none; }
 
 .topic-card:hover {
   background: var(--topic-hover-bg);
@@ -842,32 +833,37 @@ button {
   border: 1px solid var(--line);
 }
 
+/* App-Icon: farbiges, abgerundetes Quadrat mit weißem Symbol – wie am Handy. */
 .topic-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--topic-icon-bg);
-  color: var(--topic-color);
-  box-shadow: inset 0 0 0 2px var(--topic-ring);
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: var(--topic-color);
+  box-shadow: 0 4px 12px rgba(0, 40, 90, 0.18);
+  margin-top: 4px;
 }
 
 .topic-icon img {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
+  /* Symbol weiß einfärben, egal welche Farbe die Datei hat. */
+  filter: brightness(0) invert(1);
 }
 
 .topic-title {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--ink);
+  line-height: 1.25;
 }
 
 .topic-desc {
-  font-size: 1rem;
+  font-size: 0.92rem;
   color: var(--ink-soft);
+  line-height: 1.35;
 }
 
 /* Geschafft-Abzeichen auf Themen-Karten */
@@ -3462,7 +3458,9 @@ body.simple-mode .practice-box {
   }
 
   .topic-grid {
-    grid-template-columns: 1fr;
+    /* 2 Kacheln pro Reihe wie ein Handy-Homescreen */
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
   .action-grid {
