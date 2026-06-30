@@ -787,30 +787,57 @@ button {
 
 .topic-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
 }
 
 /* App-Kacheln (Smartphone-Look): farbiges Icon-Feld oben, darunter Name
    und kurze Beschreibung – zentriert. */
 .topic-card {
-  position: relative; /* für .topic-done-corner */
+  position: relative; /* für Notch, Home-Leiste, Häkchen */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-align: center;
-  padding: 18px 14px 16px;
+  /* oben Platz für die Kamera, unten für die Home-Leiste – wie ein Handy */
+  padding: 30px 16px 28px;
+  min-height: 272px;
   background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 22px;
+  border: 2px solid var(--line);
+  border-radius: 34px;   /* runde Telefon-Ecken */
   cursor: pointer;
   box-shadow: var(--shadow-small);
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* kein Farbbalken mehr – die Farbe trägt jetzt das App-Icon */
-.topic-card::after { content: none; }
+/* Kamera/Lautsprecher oben – wie an einem Smartphone */
+.topic-card::before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+  background: color-mix(in srgb, var(--ink) 22%, transparent);
+}
+
+/* Home-Leiste unten – wie an einem Smartphone */
+.topic-card::after {
+  content: "";
+  position: absolute;
+  bottom: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--line);
+  background: color-mix(in srgb, var(--ink) 22%, transparent);
+}
 
 /* Drüberfahren: deutliche, schöne farbige Hinterlegung in der Themenfarbe. */
 .topic-card:hover,
