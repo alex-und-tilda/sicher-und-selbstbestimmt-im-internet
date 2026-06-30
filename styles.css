@@ -802,8 +802,8 @@ button {
   text-align: center;
   padding: 18px 14px 16px;
   background: var(--surface);
-  border: 2px solid var(--line);
-  border-radius: var(--radius-l);
+  border: 1px solid var(--line);
+  border-radius: 22px;
   cursor: pointer;
   box-shadow: var(--shadow-small);
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
@@ -812,19 +812,22 @@ button {
 /* kein Farbbalken mehr – die Farbe trägt jetzt das App-Icon */
 .topic-card::after { content: none; }
 
-.topic-card:hover {
+/* Drüberfahren: deutliche, schöne farbige Hinterlegung in der Themenfarbe. */
+.topic-card:hover,
+.topic-card:focus-visible {
   background: var(--topic-hover-bg);
+  background: color-mix(in srgb, var(--topic-color) 14%, var(--surface));
   box-shadow: var(--shadow-hover);
   border-color: var(--topic-color);
   transform: translateY(-3px);
 }
-
-.topic-card:hover::after {
-  opacity: 1;
+.topic-card:hover .topic-icon,
+.topic-card:focus-visible .topic-icon {
+  transform: scale(1.06);
 }
-
-.topic-card:focus-visible {
-  border-color: var(--topic-color);
+/* Antippen: Kachel „drückt" sich kurz ein – wie eine App. */
+.topic-card:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .topic-illustration {
@@ -844,6 +847,7 @@ button {
   background: var(--topic-color);
   box-shadow: 0 4px 12px rgba(0, 40, 90, 0.18);
   margin-top: 4px;
+  transition: transform 0.15s ease;
 }
 
 .topic-icon img {
@@ -864,6 +868,14 @@ button {
   font-size: 0.92rem;
   color: var(--ink-soft);
   line-height: 1.35;
+}
+
+/* Vorlese-Knopf auf jeder Kachel gleich: volle Breite, unten bündig –
+   so sehen alle „Vorlesen"-Balken identisch aus und stehen auf einer Linie. */
+.topic-card .card-read-button {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;   /* nach unten andocken */
 }
 
 /* Geschafft-Abzeichen auf Themen-Karten */
