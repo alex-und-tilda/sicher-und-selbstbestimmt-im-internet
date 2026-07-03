@@ -2709,6 +2709,12 @@ function renderCompletionPage(topicId) {
 
           <p class="einfach-done-praise">Das war toll.<br>Du hast gut aufgepasst.</p>
 
+          ${topic.transfer ? `
+          <div class="access-box remember remember-box">
+            <h3>Eine Sache für heute</h3>
+            <p class="remember-text">${escapeHtml(topic.transfer)}</p>
+          </div>` : ""}
+
           <div class="einfach-done-actions">
             ${getQuizQuestions(topic).length
               ? `<button type="button" class="primary-action einfach-done-btn" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
@@ -2755,6 +2761,12 @@ function renderCompletionPage(topicId) {
         <ul>
           ${rulesHtml || "<li>Du hast wichtige Regeln wiederholt.</li>"}
         </ul>
+
+        ${topic.transfer ? `
+        <div class="access-box remember remember-box">
+          <h3>Eine Sache für heute</h3>
+          <p class="remember-text">${escapeHtml(topic.transfer)}</p>
+        </div>` : ""}
 
         <div class="completion-actions">
           <button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Lernweg</button>

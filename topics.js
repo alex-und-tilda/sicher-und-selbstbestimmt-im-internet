@@ -4,6 +4,7 @@ const topics = [
     "title": "Datenschutz",
     "icon": "lock",
     "desc": "Private Daten und Passwörter schützen",
+    "transfer": "Prüfe heute ein Passwort von dir. Ist es lang? Ist es geheim?",
     "selfAssessment": {
       "question": "Was weißt du schon über den Schutz deiner Daten?",
       "options": [
@@ -809,6 +810,7 @@ const topics = [
     "title": "WhatsApp",
     "icon": "message",
     "desc": "Nachrichten, Links, Gruppen und Codes sicher nutzen",
+    "transfer": "Schau heute in deine WhatsApp-Chats. Kennst du alle Personen wirklich?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich bei WhatsApp?",
       "options": [
@@ -1515,6 +1517,7 @@ const topics = [
     "title": "Facebook",
     "icon": "message",
     "desc": "Beiträge, Profile und Kontakte prüfen",
+    "transfer": "Prüfe heute bei einem Beitrag: Wer kann ihn sehen?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich auf Facebook?",
       "options": [
@@ -2149,6 +2152,7 @@ const topics = [
     "title": "Instagram",
     "icon": "photo",
     "desc": "Fotos, Standort und Nachrichten prüfen",
+    "transfer": "Schau heute in deine Einstellungen. Ist dein Konto privat?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich auf Instagram?",
       "options": [
@@ -2782,6 +2786,7 @@ const topics = [
     "title": "YouTube",
     "icon": "understand",
     "desc": "Videos, Werbung und Pausen prüfen",
+    "transfer": "Achte heute bei einem Video darauf: Ist das Werbung?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich beim Schauen auf YouTube?",
       "options": [
@@ -3391,6 +3396,7 @@ const topics = [
     "title": "Snapchat",
     "icon": "photo",
     "desc": "Bilder, Standort und Druck erkennen",
+    "transfer": "Prüfe heute in Snapchat: Wer kann deinen Standort sehen?",
     "selfAssessment": {
       "question": "Was weißt du schon über Snapchat?",
       "options": [
@@ -3967,6 +3973,7 @@ const topics = [
     "title": "TikTok",
     "icon": "understand",
     "desc": "Trends, Videos, Nachrichten und Pausen",
+    "transfer": "Achte heute auf die Zeit. Wie lange schaust du Videos? Mach dann eine Pause.",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich bei TikTok?",
       "options": [
@@ -4594,6 +4601,7 @@ const topics = [
     "title": "Hilfe bei Problemen",
     "icon": "help",
     "desc": "Stopp machen, zeigen und Unterstützung holen",
+    "transfer": "Überlege dir heute eine Person, der du vertraust. Diese Person fragst du, wenn etwas passiert.",
     "selfAssessment": {
       "question": "Weißt du, was du tun kannst, wenn etwas im Internet passiert?",
       "options": [
@@ -5223,6 +5231,7 @@ const topics = [
     "title": "KI und Chatbots",
     "icon": "ki",
     "desc": "Künstliche Intelligenz verstehen und sicher nutzen",
+    "transfer": "Nutzt du heute eine KI? Prüfe eine Antwort nach.",
     "selfAssessment": {
       "question": "Was weißt du schon über Künstliche Intelligenz?",
       "options": [
@@ -5899,6 +5908,7 @@ const topics = [
     "title": "Fake News und KI-Fakes",
     "icon": "fake",
     "desc": "Falsche Nachrichten, Bilder und Stimmen erkennen",
+    "transfer": "Siehst du heute eine überraschende Nachricht? Erst prüfen. Dann teilen.",
     "selfAssessment": {
       "question": "Weißt du, wie du eine Fake-Nachricht erkennst?",
       "options": [
@@ -6600,6 +6610,7 @@ const topics = [
     "title": "Online-Betrug und Abzocke",
     "icon": "betrug",
     "desc": "Betrug erkennen: Phishing, falsche Gewinne und Tricks",
+    "transfer": "Erzähle heute einer Person von einem Trick aus diesem Thema. So schützt ihr euch beide.",
     "selfAssessment": {
       "question": "Weißt du, wie Betrüger im Internet vorgehen?",
       "options": [
@@ -7310,6 +7321,7 @@ const topics = [
     "title": "Online-Einkaufen und Bezahlen",
     "icon": "einkaufen",
     "desc": "Sicher einkaufen und bezahlen im Internet",
+    "transfer": "Willst du heute etwas kaufen? Prüfe zuerst den Shop.",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich beim Online-Einkaufen?",
       "options": [
