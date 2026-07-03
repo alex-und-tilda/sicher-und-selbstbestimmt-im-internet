@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-09k";
+const CACHE_VERSION = "v2026-09l";
 const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
@@ -44,6 +44,7 @@ const PRECACHE_URLS = [
   "./datenschutz-social-media-lernangebot.html",
 
   /* Themen-Illustrationen */
+  "./assets/illustrations/alex-und-tilda.svg",
   "./assets/illustrations/datenschutz.svg",
   "./assets/illustrations/whatsapp.svg",
   "./assets/illustrations/facebook.svg",

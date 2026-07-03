@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 210" role="img" aria-label="Alex und Tilda winken dir zu">
+  <!-- Alex und Tilda – Begleitfiguren der Lernplattform.
+       Stil: ruhig, flach, erwachsen, freundlich. Farben aus dem Design-System. -->
+
+  <!-- Hintergrund-Kreis, ruhig -->
+  <circle cx="160" cy="112" r="92" fill="#d8eaf2" opacity="0.55"/>
+
+  <!-- ================= ALEX (links) ================= -->
+  <g>
+    <!-- winkender Arm (hinter dem Körper) -->
+    <path d="M78 108 C64 96 56 82 55 70" fill="none" stroke="#0a5c95" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="55" cy="66" r="9" fill="#c68863"/>
+
+    <!-- Körper -->
+    <path d="M75 200 L75 138 C75 116 91 104 110 104 C129 104 145 116 145 138 L145 200 Z" fill="#0a5c95"/>
+    <!-- Kragen -->
+    <path d="M96 106 L110 120 L124 106" fill="none" stroke="#d8eaf2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- ruhiger Arm -->
+    <path d="M141 130 C150 146 152 162 150 176" fill="none" stroke="#0a5c95" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="150" cy="180" r="8.5" fill="#c68863"/>
+
+    <!-- Hals + Kopf -->
+    <rect x="102" y="86" width="16" height="14" rx="7" fill="#c68863"/>
+    <circle cx="110" cy="64" r="26" fill="#c68863"/>
+    <!-- Haare: kurz -->
+    <path d="M84 60 C84 42 96 34 110 34 C124 34 136 42 136 60 C136 52 128 46 110 46 C92 46 84 52 84 60 Z" fill="#3b2f2a"/>
+    <!-- Gesicht -->
+    <circle cx="101" cy="64" r="3" fill="#16222e"/>
+    <circle cx="119" cy="64" r="3" fill="#16222e"/>
+    <path d="M102 75 C106 80 114 80 118 75" fill="none" stroke="#16222e" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= TILDA (rechts) ================= -->
+  <g>
+    <!-- winkender Arm -->
+    <path d="M242 108 C256 96 264 82 265 70" fill="none" stroke="#15803d" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="265" cy="66" r="9" fill="#8a5a3b"/>
+
+    <!-- Körper -->
+    <path d="M175 200 L175 138 C175 116 191 104 210 104 C229 104 245 116 245 138 L245 200 Z" fill="#15803d"/>
+    <!-- Kette/Detail -->
+    <circle cx="210" cy="122" r="4" fill="#e8f6ee"/>
+
+    <!-- ruhiger Arm -->
+    <path d="M179 130 C170 146 168 162 170 176" fill="none" stroke="#15803d" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="170" cy="180" r="8.5" fill="#8a5a3b"/>
+
+    <!-- Hals + Kopf -->
+    <rect x="202" y="86" width="16" height="14" rx="7" fill="#8a5a3b"/>
+    <circle cx="210" cy="64" r="26" fill="#8a5a3b"/>
+    <!-- Haare: Dutt + graue Strähnen -->
+    <path d="M184 62 C184 44 196 34 210 34 C224 34 236 44 236 62 C236 54 228 48 210 48 C192 48 184 54 184 62 Z" fill="#4a4a4a"/>
+    <circle cx="210" cy="30" r="10" fill="#4a4a4a"/>
+    <!-- Brille -->
+    <circle cx="201" cy="64" r="7.5" fill="none" stroke="#16222e" stroke-width="2.2"/>
+    <circle cx="219" cy="64" r="7.5" fill="none" stroke="#16222e" stroke-width="2.2"/>
+    <path d="M208.5 64 L211.5 64" stroke="#16222e" stroke-width="2.2"/>
+    <!-- Augen -->
+    <circle cx="201" cy="64" r="2.6" fill="#16222e"/>
+    <circle cx="219" cy="64" r="2.6" fill="#16222e"/>
+    <path d="M202 76 C206 81 214 81 218 76" fill="none" stroke="#16222e" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+</svg>

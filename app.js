@@ -1770,6 +1770,11 @@ function renderIntro() {
         </div>
       </div>
 
+      <div class="intro-figures">
+        <img src="assets/illustrations/alex-und-tilda.svg" alt="" aria-hidden="true">
+        <p class="intro-figures-text"><strong>Das sind Alex und Tilda.</strong><br>Sie begleiten dich beim Lernen.</p>
+      </div>
+
       <div class="intro-offer">
         <h3>Das kannst du hier machen:</h3>
         <ul class="intro-offer-list">

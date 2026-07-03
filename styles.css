@@ -4096,3 +4096,21 @@ body.simple-mode .practice-box {
   font-size: 1rem;
   margin: 16px 0 6px;
 }
+
+/* Alex und Tilda: Begleitfiguren auf der Startseite */
+.intro-figures {
+  text-align: center;
+  margin: 22px 0 4px;
+}
+
+.intro-figures img {
+  width: min(300px, 72%);
+  height: auto;
+}
+
+.intro-figures-text {
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 10px 0 0;
+  line-height: 1.55;
+}
