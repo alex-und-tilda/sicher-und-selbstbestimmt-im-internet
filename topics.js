@@ -5236,6 +5236,108 @@ const topics = [
       "Wie KI dir helfen kann",
       "Wann du bei KI vorsichtig sein musst"
     ],
+    "quiz": [
+      {
+        "question": "Was ist KI?",
+        "answers": [
+          "Ein Programm.",
+          "Ein Mensch."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. KI ist ein Programm. KI ist kein Mensch.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI ist ein Programm. Sie kann nur so tun wie ein Mensch."
+      },
+      {
+        "question": "Ein Chatbot schreibt sehr freundlich. Ist er dein echter Freund?",
+        "answers": [
+          "Nein. Ein Chatbot ist ein Programm.",
+          "Ja. Er ist ein echter Freund."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Ein Chatbot ist kein echter Freund.",
+        "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot ist ein Programm. Er hat keine echten Gefühle."
+      },
+      {
+        "question": "Kann KI Fehler machen?",
+        "answers": [
+          "Nein. KI weiß alles.",
+          "Ja. KI macht Fehler."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. KI macht Fehler. Auch wenn die Antwort sicher klingt.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI macht Fehler. Du prüfst wichtige Antworten."
+      },
+      {
+        "question": "Ein Chatbot fragt nach deiner Adresse. Was ist besser?",
+        "answers": [
+          "Adresse nicht schreiben.",
+          "Adresse schreiben."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Private Daten gehören nicht in einen Chat mit KI.",
+        "feedbackWrong": "Das ist noch nicht richtig. Deine Adresse ist privat. Die KI braucht sie nicht."
+      },
+      {
+        "question": "Du bist krank. Was ist besser?",
+        "answers": [
+          "Ich frage nur die KI.",
+          "Ich gehe zum Arzt."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Bei Gesundheit hilft dir ein Arzt. Nicht die KI.",
+        "feedbackWrong": "Das ist noch nicht richtig. Die KI kann sich irren. Ein Arzt kann dich richtig untersuchen."
+      },
+      {
+        "question": "Du hast große Sorgen. Mit wem sprichst du?",
+        "answers": [
+          "Mit einem Menschen, dem ich vertraue.",
+          "Nur mit dem Chatbot."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Wichtige Sorgen besprichst du mit einem Menschen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot kann dir nicht wirklich helfen. Ein Mensch kann das."
+      },
+      {
+        "question": "Ein Bild sieht echt aus. Ist es immer echt?",
+        "answers": [
+          "Ja. Immer.",
+          "Nein. KI kann Bilder fälschen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Nicht alles, was echt aussieht, ist echt.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI kann Bilder und Stimmen fälschen."
+      },
+      {
+        "question": "Die KI gibt dir eine wichtige Antwort. Was machst du?",
+        "answers": [
+          "Ich prüfe die Antwort.",
+          "Ich glaube sofort alles."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Wichtige Antworten prüfst du. Oder du fragst einen Menschen.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI macht Fehler. Du prüfst wichtige Antworten."
+      },
+      {
+        "question": "Wo triffst du KI?",
+        "answers": [
+          "Nur in Robotern.",
+          "In vielen Apps."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. KI ist in vielen Apps. Auch wenn du sie nicht siehst.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI steckt in vielen Apps. Zum Beispiel in Vorschlägen und Chatbots."
+      },
+      {
+        "question": "Es geht um viel Geld. Was ist besser?",
+        "answers": [
+          "Ich entscheide schnell mit der KI.",
+          "Ich frage zuerst einen Menschen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Bei Geld fragst du zuerst einen Menschen, dem du vertraust.",
+        "feedbackWrong": "Das ist noch nicht richtig. Bei Geld ist Vorsicht wichtig. Ein Mensch hilft dir besser."
+      }
+    ],
     "illustration": "assets/illustrations/ki.svg",
     "lessons": [
       {
@@ -5809,6 +5911,108 @@ const topics = [
       "Was Fake News sind",
       "Wie du prüfst, ob etwas stimmt",
       "Was du mit Fake-Nachrichten machst"
+    ],
+    "quiz": [
+      {
+        "question": "Ist jede Nachricht im Internet wahr?",
+        "answers": [
+          "Ja. Alles im Internet stimmt.",
+          "Nein. Manche Nachrichten sind falsch."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Nicht jede Nachricht im Internet ist wahr.",
+        "feedbackWrong": "Das ist noch nicht richtig. Im Internet gibt es auch falsche Nachrichten."
+      },
+      {
+        "question": "Was wollen Fake News?",
+        "answers": [
+          "Mein Denken verändern.",
+          "Mir immer helfen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Fake News haben ein Ziel. Sie wollen dein Denken verändern.",
+        "feedbackWrong": "Das ist noch nicht richtig. Fake News wollen dich täuschen. Sie helfen dir nicht."
+      },
+      {
+        "question": "Eine Nachricht macht dir große Angst. Was ist das?",
+        "answers": [
+          "Ein Warnzeichen.",
+          "Ein Beweis, dass sie wahr ist."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Starke Gefühle sind ein Warnzeichen. Du prüfst die Nachricht zuerst.",
+        "feedbackWrong": "Das ist noch nicht richtig. Fake News machen oft absichtlich Angst oder Wut."
+      },
+      {
+        "question": "Ein Video sieht echt aus. Kann es trotzdem falsch sein?",
+        "answers": [
+          "Nein. Videos sind immer echt.",
+          "Ja. Das nennt man Deepfake."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. KI kann Videos fälschen. Das nennt man Deepfake.",
+        "feedbackWrong": "Das ist noch nicht richtig. KI kann Videos fälschen. Auch echte Gesichter und Stimmen."
+      },
+      {
+        "question": "Am Telefon klingt eine Stimme wie deine Schwester. Sie will Geld. Was machst du?",
+        "answers": [
+          "Ich lege auf. Ich rufe sie selbst an.",
+          "Ich schicke sofort Geld."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Du rufst die Person auf der Nummer an, die du kennst.",
+        "feedbackWrong": "Das ist noch nicht richtig. Stimmen können gefälscht sein. Ruf die Person selbst an."
+      },
+      {
+        "question": "Wie prüfst du eine Nachricht?",
+        "answers": [
+          "Ich schaue bei anderen bekannten Nachrichten-Seiten nach.",
+          "Ich glaube der ersten Seite."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Steht es auch bei anderen bekannten Seiten? Dann ist es eher wahr.",
+        "feedbackWrong": "Das ist noch nicht richtig. Eine Seite allein ist kein Beweis. Du vergleichst mit anderen Seiten."
+      },
+      {
+        "question": "Woran erkennst du manchmal ein KI-Bild?",
+        "answers": [
+          "Hände oder Schrift sehen komisch aus.",
+          "KI-Bilder erkennt man nie."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Schau genau hin. Hände, Schrift und Schatten sehen oft komisch aus.",
+        "feedbackWrong": "Das ist noch nicht richtig. Es gibt Hinweise. Zum Beispiel komische Hände oder Schrift."
+      },
+      {
+        "question": "Du bist nicht sicher, ob eine Nachricht stimmt. Was machst du?",
+        "answers": [
+          "Ich leite sie trotzdem weiter.",
+          "Ich leite sie nicht weiter."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Du leitest nur weiter, was du geprüft hast.",
+        "feedbackWrong": "Das ist noch nicht richtig. Wer falsche Nachrichten weiterleitet, verbreitet sie."
+      },
+      {
+        "question": "Eine Nachricht macht dich sehr wütend. Was ist besser?",
+        "answers": [
+          "Sofort teilen.",
+          "Erst prüfen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Starke Gefühle sind ein Warnzeichen. Erst prüfen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Fake News wollen dich wütend machen. Prüfe zuerst."
+      },
+      {
+        "question": "Was machst du zuerst?",
+        "answers": [
+          "Erst glauben.",
+          "Erst prüfen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Erst prüfen. Dann glauben.",
+        "feedbackWrong": "Das ist noch nicht richtig. Der Merksatz heißt: Erst prüfen. Dann glauben."
+      }
     ],
     "illustration": "assets/illustrations/fakes.svg",
     "lessons": [
@@ -6408,6 +6612,108 @@ const topics = [
       "Wie Betrüger vorgehen",
       "Welche Tricks du erkennst",
       "Was du tust, wenn du betrogen wirst"
+    ],
+    "quiz": [
+      {
+        "question": "Was ist Phishing?",
+        "answers": [
+          "Betrüger wollen deine Daten haben.",
+          "Ein Spiel im Internet."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Beim Phishing wollen Betrüger deine Daten. Zum Beispiel Passwörter.",
+        "feedbackWrong": "Das ist noch nicht richtig. Phishing ist ein Trick. Betrüger wollen deine Daten."
+      },
+      {
+        "question": "Eine SMS sagt: Dein Paket wartet. Zahle 2 Euro. Was machst du?",
+        "answers": [
+          "Ich zahle schnell.",
+          "Ich zahle nicht."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Echte Paket-Dienste fordern kein Geld per SMS.",
+        "feedbackWrong": "Das ist noch nicht richtig. Das ist der Paket-Trick. Echte Paket-Dienste fordern kein Geld per SMS."
+      },
+      {
+        "question": "Eine Nachricht sagt: Hallo Mama, das ist meine neue Nummer. Ich brauche Geld. Was machst du?",
+        "answers": [
+          "Ich rufe mein Kind auf der alten Nummer an.",
+          "Ich überweise sofort Geld."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Du prüfst zuerst auf der Nummer, die du kennst.",
+        "feedbackWrong": "Das ist noch nicht richtig. Das ist ein bekannter Trick. Ruf die alte Nummer an."
+      },
+      {
+        "question": "Jemand ruft an. Er sagt: Ich bin die Polizei. Bring uns Geld. Was stimmt?",
+        "answers": [
+          "Die Polizei ruft oft wegen Geld an.",
+          "Die echte Polizei fordert nie Geld am Telefon."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Die echte Polizei fordert nie Geld am Telefon.",
+        "feedbackWrong": "Das ist noch nicht richtig. Das ist ein Schockanruf. Die echte Polizei fordert nie Geld."
+      },
+      {
+        "question": "Eine Nachricht sagt: Du hast gewonnen! Zahle erst eine Gebühr. Was ist das?",
+        "answers": [
+          "Ein echter Gewinn.",
+          "Ein Trick."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Bei einem echten Gewinn musst du nie zuerst zahlen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Bei einem echten Gewinn musst du nie zuerst zahlen."
+      },
+      {
+        "question": "Ein Angebot heißt kostenlos. Was machst du?",
+        "answers": [
+          "Ich klicke sofort auf Ja.",
+          "Ich lese genau."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Kostenlos kann teuer werden. Du liest genau.",
+        "feedbackWrong": "Das ist noch nicht richtig. Hinter kostenlos steckt oft eine Abo-Falle."
+      },
+      {
+        "question": "Jemand fragt nach einem Code aus einer SMS. Was machst du?",
+        "answers": [
+          "Ich gebe den Code nie weiter.",
+          "Ich sage den Code."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Codes sind nur für dich. Du gibst sie nie weiter.",
+        "feedbackWrong": "Das ist noch nicht richtig. Mit dem Code können Betrüger dein Konto übernehmen."
+      },
+      {
+        "question": "Eine Nachricht droht: Mach das sofort! Was ist Druck?",
+        "answers": [
+          "Druck ist normal.",
+          "Druck ist ein Warnzeichen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Druck und Drohung sind Warnzeichen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Betrüger machen Druck. Du lässt dir Zeit."
+      },
+      {
+        "question": "Du bist auf einen Betrug reingefallen. Wer hat Schuld?",
+        "answers": [
+          "Ich habe Schuld. Ich sage nichts.",
+          "Der Betrüger hat Schuld. Ich hole Hilfe."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Betrug ist nicht deine Schuld. Du holst dir Hilfe.",
+        "feedbackWrong": "Das ist noch nicht richtig. Der Betrüger hat Schuld. Hilfe holen ist stark."
+      },
+      {
+        "question": "Was machst du nach einem Betrug?",
+        "answers": [
+          "Ich erzähle es einer Person, der ich vertraue.",
+          "Ich schweige und schäme mich."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Du erzählst es einer vertrauten Person. Zusammen findet ihr eine Lösung.",
+        "feedbackWrong": "Das ist noch nicht richtig. Schweigen hilft dem Betrüger. Reden hilft dir."
+      }
     ],
     "illustration": "assets/illustrations/betrug.svg",
     "lessons": [
@@ -7016,6 +7322,108 @@ const topics = [
       "Woran du einen seriösen Shop erkennst",
       "Welche Bezahl-Art sicherer ist",
       "Was du tust, wenn ein Kauf schiefläuft"
+    ],
+    "quiz": [
+      {
+        "question": "Wo kaufst du am besten ein?",
+        "answers": [
+          "Bei Shops, die ich kenne oder geprüft habe.",
+          "Bei jedem Shop mit billigen Preisen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Du kaufst bei Shops, die du kennst oder geprüft hast.",
+        "feedbackWrong": "Das ist noch nicht richtig. Sehr billige Preise können ein Trick sein."
+      },
+      {
+        "question": "Ein unbekannter Shop ist extrem billig. Was kann das sein?",
+        "answers": [
+          "Immer ein gutes Angebot.",
+          "Vielleicht ein Fake-Shop."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Extrem billige Preise sind oft ein Zeichen für einen Fake-Shop.",
+        "feedbackWrong": "Das ist noch nicht richtig. Fake-Shops locken mit sehr billigen Preisen."
+      },
+      {
+        "question": "Wie bezahlst du sicherer?",
+        "answers": [
+          "Vorkasse an ein fremdes Konto.",
+          "Auf Rechnung."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Auf Rechnung zahlst du erst, wenn die Ware da ist.",
+        "feedbackWrong": "Das ist noch nicht richtig. Bei Vorkasse an Fremde ist dein Geld vielleicht weg."
+      },
+      {
+        "question": "Eine E-Mail fragt nach deinen Bank-Daten. Was machst du?",
+        "answers": [
+          "Ich gebe sie nicht weiter.",
+          "Ich schicke sie."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Deine Bank-Daten sind privat. Deine echte Bank fragt nicht per E-Mail.",
+        "feedbackWrong": "Das ist noch nicht richtig. Mit deinen Bank-Daten können Betrüger Geld abbuchen."
+      },
+      {
+        "question": "Ein Spiel bietet einen Kauf für 2 Euro an. Kostet das echtes Geld?",
+        "answers": [
+          "Ja. Das kostet echtes Geld.",
+          "Nein. Das ist nur Spiel-Geld."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Auch kleine Käufe in Apps kosten echtes Geld.",
+        "feedbackWrong": "Das ist noch nicht richtig. Käufe in Apps und Spielen kosten echtes Geld."
+      },
+      {
+        "question": "Ein Shop schreibt: Kauf sofort! Nur noch heute! Was ist das?",
+        "answers": [
+          "Ich muss wirklich sofort kaufen.",
+          "Das ist Kauf-Druck. Ich lasse mir Zeit."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Das ist Kauf-Druck. Du lässt dir Zeit.",
+        "feedbackWrong": "Das ist noch nicht richtig. Solche Sätze machen Druck. Gute Angebote gibt es auch morgen."
+      },
+      {
+        "question": "Was machst du vor dem Kaufen?",
+        "answers": [
+          "Erst prüfen.",
+          "Sofort bestellen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Erst prüfen. Dann kaufen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Der Merksatz heißt: Erst prüfen. Dann kaufen."
+      },
+      {
+        "question": "Du hast etwas falsch gekauft. Was gilt oft?",
+        "answers": [
+          "Ich kann den Kauf oft 14 Tage zurückgeben.",
+          "Ich kann nie etwas zurückgeben."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Online-Käufe kannst du oft 14 Tage zurückgeben.",
+        "feedbackWrong": "Das ist noch nicht richtig. Bei Online-Käufen gilt oft: 14 Tage Zeit zum Zurückgeben."
+      },
+      {
+        "question": "Woran erkennst du einen guten Shop?",
+        "answers": [
+          "Der Shop hat nur schöne Bilder.",
+          "Der Shop hat eine Adresse und echte Bewertungen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Ein guter Shop zeigt eine Adresse. Und er hat echte Bewertungen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Schöne Bilder kann jeder machen. Du prüfst Adresse und Bewertungen."
+      },
+      {
+        "question": "Was ist der wichtigste Merksatz beim Einkaufen?",
+        "answers": [
+          "Erst kaufen. Dann prüfen.",
+          "Erst prüfen. Dann kaufen."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Erst prüfen. Dann kaufen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Der Merksatz heißt: Erst prüfen. Dann kaufen."
+      }
     ],
     "illustration": "assets/illustrations/einkaufen.svg",
     "lessons": [
