@@ -1783,8 +1783,8 @@ function renderIntro() {
       </div>
 
       <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
-      <button type="button" class="intro-quickstart-button" onclick="introQuickStart()">Einfach loslegen – ohne Fragen</button>
-      <p class="intro-quickstart-hint">Du kannst alles später einstellen.</p>
+      <p class="intro-quickstart-hint">Keine Lust auf Fragen?</p>
+      <button type="button" class="intro-quickstart-button" onclick="introQuickStart()">Sofort ein Thema lernen</button>
       <p class="intro-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos &nbsp;·&nbsp; kein Name nötig</p>
     </section>
   `;
