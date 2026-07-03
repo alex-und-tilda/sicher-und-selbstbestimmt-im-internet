@@ -1968,6 +1968,8 @@ function renderMenu() {
           <div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>
           <div class="settings-more">
             <button type="button" class="settings-more-btn" onclick="startBigQuiz()">${getIconHtml("quiz")}<span>Das große Quiz</span></button>
+            <button type="button" class="settings-more-btn" onclick="startRepeatQuiz()">${getIconHtml("exercise")}<span>Wiederholen</span></button>
+            <button type="button" class="settings-more-btn" onclick="startTrainingInbox()">${getIconHtml("message")}<span>Trainings-Postfach</span></button>
             <button type="button" class="settings-more-btn" onclick="renderAllMemoryCards()">${getIconHtml("remember")}<span>Alle Merk-Karten</span></button>
           </div>
         </div>` : ""}
@@ -2172,6 +2174,16 @@ function renderTopicChoice(topicId) {
             <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Quiz machen. Fragen beantworten." aria-label="Quiz machen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
           </span>
         </button>
+
+        ${(topic.id === "betrug" || topic.id === "fakes") ? `
+        <button type="button" class="action-card action-quiz" onclick="startTrainingInbox()">
+          <span class="action-icon" aria-hidden="true">${getIconHtml("message")}</span>
+          <span class="action-text">
+            <span class="action-title">Trainings-Postfach</span>
+            <span class="action-desc">Trick oder echt? Gefahrlos üben.</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Trainings-Postfach. Trick oder echt? Gefahrlos üben." aria-label="Trainings-Postfach vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+          </span>
+        </button>` : ""}
 
         <button type="button" class="action-card action-memory" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">
           <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
@@ -3084,14 +3096,16 @@ function renderQuizResult() {
    Route: index.html#grosses-quiz
    ============================================================ */
 
-const BIG_QUIZ_COUNT = 20;   /* So viele Fragen werden gezogen */
+const BIG_QUIZ_COUNT = 20;      /* So viele Fragen werden gezogen */
+const REPEAT_QUIZ_COUNT = 5;    /* Kurze Wiederholung: wenige Fragen */
 let bigQuizQuestions = [];   /* Array mit {question, answers, correct, topicId, topicTitle} */
 let bigQuizIndex    = 0;
 let bigQuizScore    = 0;
+let bigQuizTitle    = "Das große Quiz";   /* Überschrift: großes Quiz oder Wiederholen */
 
-function buildBigQuizPool() {
+function buildBigQuizPool(fromTopics, count) {
   const pool = [];
-  topics.forEach((topic) => {
+  (fromTopics || topics).forEach((topic) => {
     const qs = getQuizQuestions(topic);
     qs.forEach((q) => {
       pool.push({
@@ -3108,11 +3122,46 @@ function buildBigQuizPool() {
     const j = Math.floor(Math.random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  return pool.slice(0, BIG_QUIZ_COUNT);
+  return pool.slice(0, count || BIG_QUIZ_COUNT);
 }
 
 function startBigQuiz() {
+  bigQuizTitle = "Das große Quiz";
   bigQuizQuestions = buildBigQuizPool();
+  bigQuizIndex  = 0;
+  bigQuizScore  = 0;
+  currentTopicId = null;
+  renderBigQuizQuestion();
+}
+
+/* Wiederhol-Modus: wenige Fragen aus Themen, die schon geschafft sind.
+   Lernprinzip: verteiltes Lernen – Wiederholen nach Abstand festigt Wissen. */
+function startRepeatQuiz() {
+  const doneTopics = topics.filter((t) => isTopicDone(t.id) && getQuizQuestions(t).length);
+  if (!doneTopics.length) {
+    stopReading();
+    setProgressVisible(false);
+    setBottomNavVisible(false);
+    setHeader("Wiederholen", "", "Wiederholen", "", 0);
+    showNav(false, false);
+    content.innerHTML = `
+      ${buildUtilityBar()}${buildReadingToolbar()}
+      <article class="card quiz-result-card" data-readable="true">
+        <h2>Wiederholen</h2>
+        <p>Hier kannst du Fragen aus deinen Themen wiederholen.</p>
+        <p>Du hast noch kein Thema fertig gemacht.</p>
+        <p>Mach zuerst ein Thema fertig. Dann kannst du hier üben.</p>
+        <div class="certificate-actions">
+          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zur Themenübersicht</button>
+        </div>
+      </article>
+    `;
+    focusContent();
+    renderLegalFooter();
+    return;
+  }
+  bigQuizTitle = "Wiederholen";
+  bigQuizQuestions = buildBigQuizPool(doneTopics, REPEAT_QUIZ_COUNT);
   bigQuizIndex  = 0;
   bigQuizScore  = 0;
   currentTopicId = null;
@@ -3129,7 +3178,7 @@ function renderBigQuizQuestion() {
 
   setProgressVisible(true);
   setBottomNavVisible(false);
-  setHeader("Das große Quiz", `Frage ${bigQuizIndex + 1} von ${total}`, "Frage", "Großes Quiz", progress);
+  setHeader(bigQuizTitle, `Frage ${bigQuizIndex + 1} von ${total}`, "Frage", bigQuizTitle, progress);
   showNav(false, false);
 
   const answerHtml = q.answers.map((answer, index) => `
@@ -3142,7 +3191,7 @@ function renderBigQuizQuestion() {
     ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
-      <h2>Großes Quiz</h2>
+      <h2>${escapeHtml(bigQuizTitle)}</h2>
       <p class="quiz-question">${escapeHtml(q.question)}</p>
       <div class="answers">${answerHtml}</div>
     </article>
@@ -3175,7 +3224,7 @@ function renderBigQuizFeedback(selectedIndex) {
     ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
-      <h2>Großes Quiz</h2>
+      <h2>${escapeHtml(bigQuizTitle)}</h2>
       <p class="quiz-question">${escapeHtml(q.question)}</p>
       <div class="answers">
         ${q.answers.map((a, i) => `
@@ -3209,7 +3258,7 @@ function renderBigQuizResult() {
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Das große Quiz", "Ergebnis", "Ergebnis", "Fertig", 100);
+  setHeader(bigQuizTitle, "Ergebnis", "Ergebnis", "Fertig", 100);
   showNav(false, false);
 
   const praise = percent >= 80
@@ -3221,12 +3270,173 @@ function renderBigQuizResult() {
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card quiz-result-card" data-readable="true">
-      <h2>Großes Quiz – Fertig!</h2>
+      <h2>${escapeHtml(bigQuizTitle)} – Fertig!</h2>
       <p>Du hast ${bigQuizScore} von ${total} Fragen richtig beantwortet.</p>
       <p>Das sind ${percent} Prozent.</p>
       <p>${escapeHtml(praise)}</p>
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="startBigQuiz()">Quiz wiederholen</button>
+        <button type="button" class="quiz-link quiz-button" onclick="${bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()"}">Noch einmal üben</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
+   Trainings-Postfach – Trick oder echt?
+   Gefahrloses Üben mit nachgebauten Nachrichten (UDL: Handlung).
+   Emotionale Sicherheit: alles ist erfunden, Fehler sind erlaubt.
+   Route: index.html#training
+   ============================================================ */
+
+let trainingMessages = [];
+let trainingIndex = 0;
+let trainingScore = 0;
+
+function startTrainingInbox() {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Trainings-Postfach", "", "Üben", "", 0);
+  showNav(false, false);
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card training-card" data-readable="true">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml("message")}</span>
+        <h2>Trainings-Postfach</h2>
+      </div>
+      <p>Hier kannst du üben.</p>
+      <p>Du siehst Nachrichten. So wie auf einem Handy.</p>
+      <p>Du entscheidest: Ist das ein Trick? Oder ist das echt?</p>
+      <div class="access-box remember remember-box">
+        <h3>Wichtig</h3>
+        <p class="remember-text">Alle Nachrichten hier sind erfunden. Sie sind nur zum Üben. Fehler sind erlaubt.</p>
+      </div>
+      <div class="certificate-actions">
+        <button type="button" class="quiz-link quiz-button" onclick="beginTraining()">Üben starten</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function beginTraining() {
+  trainingMessages = TRAINING_INBOX.slice();
+  for (let i = trainingMessages.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [trainingMessages[i], trainingMessages[j]] = [trainingMessages[j], trainingMessages[i]];
+  }
+  trainingIndex = 0;
+  trainingScore = 0;
+  renderTrainingMessage();
+}
+
+function renderTrainingMessage() {
+  stopReading();
+  if (trainingIndex >= trainingMessages.length) return renderTrainingResult();
+  const msg = trainingMessages[trainingIndex];
+  const total = trainingMessages.length;
+  const progress = Math.round((trainingIndex / total) * 100);
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Trainings-Postfach", `Nachricht ${trainingIndex + 1} von ${total}`, "Nachricht", "Üben", progress);
+  showNav(false, false);
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card training-card" data-readable="true">
+      <p class="training-count">Nachricht ${trainingIndex + 1} von ${total}</p>
+      <div class="training-msg">
+        <p class="training-msg-head"><strong>${escapeHtml(msg.channel)}</strong> von: ${escapeHtml(msg.from)}</p>
+        <p class="training-msg-text">${escapeHtml(msg.text)}</p>
+      </div>
+      <p class="quiz-question">Was denkst du: Ist das ein Trick?</p>
+      <div class="answers">
+        <button type="button" class="answer-option" onclick="answerTraining(true)">Das ist ein Trick.</button>
+        <button type="button" class="answer-option" onclick="answerTraining(false)">Das ist echt.</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function answerTraining(saysTrick) {
+  stopReading();
+  const msg = trainingMessages[trainingIndex];
+  const isCorrect = saysTrick === Boolean(msg.isTrick);
+  if (isCorrect) {
+    trainingScore += 1;
+    playSound("correct");
+  } else {
+    playSound("wrong");
+  }
+
+  const feedbackClass = isCorrect ? "feedback-correct" : "feedback-wrong";
+  const feedbackTitle = isCorrect
+    ? "✓ Richtig erkannt!"
+    : (msg.isTrick ? "✗ Das war ein Trick." : "✗ Das war eine echte Nachricht.");
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card training-card" data-readable="true">
+      <div class="training-msg">
+        <p class="training-msg-head"><strong>${escapeHtml(msg.channel)}</strong> von: ${escapeHtml(msg.from)}</p>
+        <p class="training-msg-text">${escapeHtml(msg.text)}</p>
+      </div>
+      <p class="${feedbackClass}">${feedbackTitle}</p>
+      <p>${escapeHtml(msg.explanation)}</p>
+      ${isCorrect ? "" : "<p>Gut, dass du hier übst. Beim Üben lernst du.</p>"}
+      <div class="certificate-actions">
+        <button type="button" class="quiz-link quiz-button" onclick="nextTrainingMessage()">Weiter</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function nextTrainingMessage() {
+  trainingIndex += 1;
+  renderTrainingMessage();
+}
+
+function renderTrainingResult() {
+  stopReading();
+  const total = trainingMessages.length || 1;
+  playSound("success");
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Trainings-Postfach", "Ergebnis", "Ergebnis", "Fertig", 100);
+  showNav(false, false);
+
+  const praise = trainingScore === total
+    ? "Alle richtig erkannt. Das war stark!"
+    : trainingScore >= Math.ceil(total / 2)
+      ? "Das war schon sehr gut. Jedes Üben macht dich sicherer."
+      : "Gut, dass du geübt hast. Tricks zu erkennen ist schwer. Übe einfach nochmal.";
+
+  content.innerHTML = `
+    ${buildUtilityBar()}${buildReadingToolbar()}
+    <article class="card quiz-result-card" data-readable="true">
+      <h2>Trainings-Postfach – Fertig!</h2>
+      <p>Du hast ${trainingScore} von ${total} Nachrichten richtig erkannt.</p>
+      <p>${escapeHtml(praise)}</p>
+      <div class="access-box remember remember-box">
+        <h3>Wichtig</h3>
+        <p class="remember-text">Bekommst du wirklich so eine Nachricht? Zeige sie einer Person, der du vertraust. Du musst nichts allein entscheiden.</p>
+      </div>
+      <div class="certificate-actions">
+        <button type="button" class="quiz-link quiz-button" onclick="beginTraining()">Noch einmal üben</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('betrug')">Zum Thema Betrug</button>
         <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
       </div>
     </article>
@@ -3451,6 +3661,8 @@ function handleHash() {
 
   /* Sonderrouten */
   if (hash === "grosses-quiz") return startBigQuiz();
+  if (hash === "wiederholen") return startRepeatQuiz();
+  if (hash === "training") return startTrainingInbox();
   if (hash === "merk-alle") return renderAllMemoryCards();
 
   const [topicId, action] = hash.split(":");

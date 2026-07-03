@@ -4000,3 +4000,37 @@ body.simple-mode .practice-box {
   color: var(--ink);
   margin: 0;
 }
+
+/* =============================================================
+   Trainings-Postfach – Trick oder echt?
+   Nutzt nur CSS-Variablen, damit der Dark Mode intakt bleibt.
+   ============================================================= */
+.training-card { max-width: 720px; margin: 0 auto; }
+
+.training-count {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+/* Nachricht im Handy-Stil: ruhige Sprechblase */
+.training-msg {
+  background: var(--surface-soft);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 18px 20px;
+  margin: 14px 0 20px;
+}
+
+.training-msg-head {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+
+.training-msg-text {
+  color: var(--ink);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin: 0;
+}

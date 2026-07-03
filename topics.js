@@ -8034,3 +8034,82 @@ const topics = [
     }
   }
 ];
+
+/* =============================================================
+   Trainings-Postfach – nachgebaute Nachrichten zum Üben.
+   Wichtig: Alle Nachrichten hier sind erfunden. Nur zum Üben.
+   isTrick: true = Betrugs-Trick, false = normale Nachricht.
+   explanation: kurze Begründung in Leichter Sprache.
+   ============================================================= */
+const TRAINING_INBOX = [
+  {
+    "channel": "SMS",
+    "from": "Unbekannte Nummer",
+    "text": "Ihr Paket wartet. Zahlen Sie 1,99 Euro Zoll-Gebühr. Klicken Sie hier: paket-info-24.xyz",
+    "isTrick": true,
+    "explanation": "Das ist der Paket-Trick. Echte Paket-Dienste fordern kein Geld per SMS. Der Link ist komisch."
+  },
+  {
+    "channel": "WhatsApp",
+    "from": "Unbekannte Nummer",
+    "text": "Hallo Mama. Mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir schnell 300 Euro schicken?",
+    "isTrick": true,
+    "explanation": "Das ist der Hallo-Mama-Trick. Betrüger tun so, als sind sie dein Kind. Ruf die alte Nummer an. Dann weißt du die Wahrheit."
+  },
+  {
+    "channel": "SMS",
+    "from": "Praxis Dr. Weber",
+    "text": "Erinnerung: Sie haben morgen um 10 Uhr einen Termin bei uns. Ihre Praxis Dr. Weber.",
+    "isTrick": false,
+    "explanation": "Diese Nachricht will nichts von dir. Kein Geld. Kein Link. Kein Druck. So sehen normale Erinnerungen aus. Bist du unsicher? Ruf die Praxis an."
+  },
+  {
+    "channel": "E-Mail",
+    "from": "service@bank-sicherheit24.xyz",
+    "text": "Ihr Konto wird heute gesperrt! Bestätigen Sie sofort Ihre Bank-Daten. Klicken Sie auf diesen Link.",
+    "isTrick": true,
+    "explanation": "Das ist Phishing. Deine echte Bank fragt nie per E-Mail nach deinen Daten. Druck und Drohung sind Warnzeichen."
+  },
+  {
+    "channel": "WhatsApp",
+    "from": "Anna",
+    "text": "Hallo! Kommst du am Samstag zum Kaffee? Ich freue mich. Liebe Grüße, Anna",
+    "isTrick": false,
+    "explanation": "Diese Nachricht kommt von einer Person, die du kennst. Sie will kein Geld. Sie macht keinen Druck. Das ist eine normale Nachricht."
+  },
+  {
+    "channel": "E-Mail",
+    "from": "gewinn@super-lotto-plus.xyz",
+    "text": "Herzlichen Glückwunsch! Sie haben 1.000 Euro gewonnen. Zahlen Sie nur 20 Euro Gebühr. Dann bekommen Sie das Geld.",
+    "isTrick": true,
+    "explanation": "Das ist ein falscher Gewinn. Bei einem echten Gewinn musst du nie zuerst zahlen."
+  },
+  {
+    "channel": "SMS",
+    "from": "Unbekannte Nummer",
+    "text": "Hallo! Ich habe dir aus Versehen einen Code geschickt. Bitte schick mir den Code schnell zurück.",
+    "isTrick": true,
+    "explanation": "Das ist der Code-Trick. Mit dem Code können Betrüger dein Konto übernehmen. Du gibst Codes nie weiter."
+  },
+  {
+    "channel": "E-Mail",
+    "from": "bestellung@musterschuhe.de",
+    "text": "Danke für deine Bestellung. Deine Schuhe kommen am Donnerstag. Du musst nichts weiter tun.",
+    "isTrick": false,
+    "explanation": "Du musst nichts tun. Kein Geld. Kein Druck. Wichtig: Hast du wirklich etwas bestellt? Wenn nicht, ist so eine Nachricht ein Warnzeichen."
+  },
+  {
+    "channel": "SMS",
+    "from": "Stream-Dienst",
+    "text": "Ihr Konto ist abgelaufen. Aktualisieren Sie sofort Ihre Bank-Daten: stream-zahlung-jetzt.xyz",
+    "isTrick": true,
+    "explanation": "Das ist Phishing. Der Link ist komisch. Und die Nachricht macht Druck. Öffne die echte App. Dort siehst du, ob etwas fehlt."
+  },
+  {
+    "channel": "WhatsApp",
+    "from": "Wohn-Gruppe",
+    "text": "Erinnerung an alle: Morgen um 15 Uhr ist unser Treffen im Gemeinschafts-Raum.",
+    "isTrick": false,
+    "explanation": "Diese Nachricht kommt aus deiner Gruppe. Sie will nichts von dir. Das ist eine normale Nachricht."
+  }
+];
