@@ -1783,11 +1783,22 @@ function renderIntro() {
       </div>
 
       <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
+      <button type="button" class="intro-quickstart-button" onclick="introQuickStart()">Einfach loslegen – ohne Fragen</button>
+      <p class="intro-quickstart-hint">Du kannst alles später einstellen.</p>
       <p class="intro-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos &nbsp;·&nbsp; kein Name nötig</p>
     </section>
   `;
   focusContent();
   renderLegalFooter();
+}
+
+/* Abkürzung: sofort lernen, ohne Fragen (COGA: geringe Einstiegs-Last).
+   Sinnvolle Standards: Leichte Sprache, ausführlicher Lernweg.
+   Alles bleibt später über die Einstellungen änderbar. */
+function introQuickStart() {
+  setLanguageLevel("leicht");
+  pSet(VORWISSEN_KEY, "neu");
+  renderMenu();
 }
 
 function introStart() {
@@ -2150,6 +2161,7 @@ function buildCompanionPanel(topic) {
         <p class="companion-intro">Diese Hinweise richten sich an Betreuende, Assistenz, Angehörige und Fachkräfte. Sie sind nicht Teil der Lern-Texte.</p>
         ${blocks}
         <button type="button" class="companion-print" onclick="printCompanion('${escapeHtml(topic.id)}')">🖨 Drucken / als PDF speichern</button>
+        <p class="companion-intro"><a href="beobachtungsbogen.html">Beobachtungsbogen für Prüfgruppen-Sitzungen</a> – strukturierte, datensparsame Beobachtung zum Ausdrucken.</p>
       </div>
     </details>`;
 }

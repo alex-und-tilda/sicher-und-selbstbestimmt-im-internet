@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beobachtungsbogen Prüfgruppe – Sicher und selbstbestimmt im Internet</title>
+  <meta name="description" content="Beobachtungsbogen für Prüfgruppen-Sitzungen: strukturierte, datensparsame Beobachtung der Verständlichkeit." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/beobachtungsbogen.html" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Nur für diesen Bogen – nutzt die Farb-Variablen aus styles.css */
+    .ob-table { width: 100%; border-collapse: collapse; margin: 10px 0 22px; }
+    .ob-table th, .ob-table td { border: 1.5px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; font-size: 0.98rem; }
+    .ob-table th { background: var(--surface-soft); }
+    .ob-table .ob-mark { width: 64px; text-align: center; white-space: nowrap; }
+    .ob-box { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--ink-soft); border-radius: 4px; vertical-align: middle; }
+    .ob-lines { border-bottom: 1.5px solid var(--line); height: 26px; }
+    .ob-field { border: 1.5px solid var(--line); border-radius: 8px; min-height: 72px; margin: 6px 0 20px; }
+    .ob-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin: 12px 0 20px; }
+    .ob-meta p { margin: 0; padding: 6px 0; border-bottom: 1.5px solid var(--line); }
+    .ob-print-button { display: inline-flex; padding: 12px 28px; font-size: 1.05rem; font-weight: 700; color: #fff; background: var(--accent); border: none; border-radius: 999px; cursor: pointer; margin: 4px 0 18px; }
+    @media print {
+      .plain-back-button, .ob-print-button { display: none !important; }
+      body { background: #fff; }
+      .card { box-shadow: none; border: none; }
+      .ob-table { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="static-page">
+    <a class="plain-back-button" href="index.html">← Zur Lernplattform</a>
+
+    <article class="card">
+      <h1>Beobachtungsbogen für die Prüfgruppe</h1>
+      <p class="lead">Sicher und selbstbestimmt im Internet · Strukturierte Beobachtung einer Prüf-Sitzung</p>
+
+      <button type="button" class="ob-print-button" onclick="window.print()">Bogen drucken</button>
+
+      <p><strong>Wichtig – datensparsam beobachten:</strong> Keine Namen notieren. Keine Fotos, keine Aufnahmen.
+      Es wird die <em>Plattform</em> geprüft, nicht die Person. Grundlage: „Nichts über uns ohne uns" –
+      die Rückmeldungen der Prüfgruppe entscheiden, was geändert wird.</p>
+
+      <h2>Rahmen der Sitzung</h2>
+      <div class="ob-meta">
+        <p>Datum: </p>
+        <p>Beobachtet von (Funktion, kein Name der lernenden Person): </p>
+        <p>Geprüftes Thema / geprüfte Seite: </p>
+        <p>Sprach-Stufe: ☐ Leichte Sprache &nbsp; ☐ Einfache Sprache &nbsp; ☐ Alltagssprache</p>
+        <p>Setting: ☐ allein (solo) &nbsp; ☐ mit Begleitung</p>
+        <p>Gerät: ☐ Smartphone &nbsp; ☐ Tablet &nbsp; ☐ Computer</p>
+      </div>
+
+      <h2>A · Orientierung und Navigation</h2>
+      <table class="ob-table">
+        <tr><th>Beobachtung</th><th class="ob-mark">ja</th><th class="ob-mark">teils</th><th class="ob-mark">nein</th><th>Notiz</th></tr>
+        <tr><td>Findet selbstständig ein Thema und startet es.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Nutzt „Weiter" und „Zurück" ohne Hilfe.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Weiß, wo sie/er gerade ist (Schritt-Anzeige verstanden).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Findet bei Bedarf Hilfe (Pause, Hilfe-Knopf, Begleitperson).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+
+      <h2>B · Texte verstehen</h2>
+      <table class="ob-table">
+        <tr><th>Beobachtung</th><th class="ob-mark">ja</th><th class="ob-mark">teils</th><th class="ob-mark">nein</th><th>Notiz</th></tr>
+        <tr><td>Liest die Sätze selbst oder hört zu und folgt dem Inhalt.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Kann den Inhalt einer Seite in eigenen Worten sagen.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Versteht den Merksatz („Wichtig") der Seite.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+      <p>Diese Wörter waren unklar (wörtlich notieren):</p>
+      <div class="ob-field"></div>
+
+      <h2>C · Bilder und Piktogramme</h2>
+      <table class="ob-table">
+        <tr><th>Beobachtung</th><th class="ob-mark">ja</th><th class="ob-mark">teils</th><th class="ob-mark">nein</th><th>Notiz</th></tr>
+        <tr><td>Erkennt, was die Bildzeichen bedeuten sollen.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Die Bilder helfen beim Verstehen (nicht nur Schmuck).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+      <p>So wurden Bildzeichen gedeutet (wenn anders als gemeint):</p>
+      <div class="ob-field"></div>
+
+      <h2>D · Vorlesen und Bedienung</h2>
+      <table class="ob-table">
+        <tr><th>Beobachtung</th><th class="ob-mark">ja</th><th class="ob-mark">teils</th><th class="ob-mark">nein</th><th>Notiz</th></tr>
+        <tr><td>Findet und nutzt die Vorlese-Funktion.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Das Vorlese-Tempo passt (ggf. „Langsam vorlesen" genutzt).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Knöpfe sind groß genug und werden sicher getroffen.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+
+      <h2>E · Übungen und Quiz</h2>
+      <table class="ob-table">
+        <tr><th>Beobachtung</th><th class="ob-mark">ja</th><th class="ob-mark">teils</th><th class="ob-mark">nein</th><th>Notiz</th></tr>
+        <tr><td>Traut sich zu antworten (auch „Ich bin unsicher" wird genutzt).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Versteht die Rückmeldung (warum richtig / noch nicht richtig).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Ein Fehler führt nicht zu Rückzug oder Frust.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+
+      <h2>F · Alltags-Transfer (das Teilhabe-Ziel)</h2>
+      <table class="ob-table">
+        <tr><th>Beobachtung</th><th class="ob-mark">ja</th><th class="ob-mark">teils</th><th class="ob-mark">nein</th><th>Notiz</th></tr>
+        <tr><td>Kann am Ende sagen: „Eine Sache, die ich heute mache, ist …"</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Kann sagen, wo sie/er bei einem Problem Hilfe holt.</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+
+      <h2>G · Emotionale Sicherheit</h2>
+      <table class="ob-table">
+        <tr><th>Beobachtung</th><th class="ob-mark">ja</th><th class="ob-mark">teils</th><th class="ob-mark">nein</th><th>Notiz</th></tr>
+        <tr><td>Wirkt während der Sitzung ruhig und sicher (kein Overwhelm).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Zeigt Freude oder Stolz (z. B. bei „Super gemacht!", Urkunde).</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+
+      <h2>Wörtliche Aussagen der prüfenden Person</h2>
+      <p>Originalton ist die wertvollste Rückmeldung – bitte wörtlich notieren:</p>
+      <div class="ob-field" style="min-height: 110px;"></div>
+
+      <h2>Fazit der Sitzung</h2>
+      <p>Das ändern wir als Nächstes (max. 3 Punkte, priorisiert):</p>
+      <div class="ob-lines"></div>
+      <div class="ob-lines"></div>
+      <div class="ob-lines"></div>
+
+      <hr />
+      <p style="font-size: 0.9rem;">
+        Datenschutz: Dieser Bogen enthält bewusst keine personenbezogenen Daten (KDG-konform).
+        Aufbewahrung nur zur Weiterentwicklung der Plattform. ·
+        Träger: Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW.
+      </p>
+    </article>
+  </main>
+</body>
+</html>

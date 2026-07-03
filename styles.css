@@ -4068,3 +4068,31 @@ body.simple-mode .practice-box {
 .practice-grid {
   margin-top: 6px;
 }
+
+/* Abkürzung auf der Startseite: sofort loslegen ohne Fragen */
+.intro-quickstart-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px auto 0;
+  padding: 14px 32px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.intro-quickstart-button:hover {
+  transform: translateY(-2px);
+  background: var(--surface-soft);
+}
+
+.intro-quickstart-hint {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  margin: 8px 0 0;
+}
