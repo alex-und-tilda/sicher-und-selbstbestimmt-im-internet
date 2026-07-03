@@ -484,6 +484,12 @@ function countDoneTopics() {
   return topics.filter(topic => progress.done[topic.id]).length;
 }
 
+/* Nächstes Thema vorschlagen: das erste Thema, das noch nicht geschafft ist.
+   Führung ohne Zwang – die freie Wahl bleibt immer erhalten. */
+function getNextTopicSuggestion() {
+  return topics.find((topic) => !isTopicDone(topic.id)) || null;
+}
+
 function toggleProgressSaving() {
   if (isProgressEnabled()) {
     setProgressEnabled(false);
@@ -1860,10 +1866,14 @@ function renderMenu() {
   setHeader("Sicher und selbstbestimmt im Internet", "Thema auswählen", "Themenübersicht", "Wähle ein Thema", 0);
   showNav(false, false);
 
+  const nextSuggestion = getNextTopicSuggestion();
+  const anyTopicDone = countDoneTopics() > 0;
   const cards = topics.map(topic => {
     const done = isTopicDone(topic.id);
+    const suggested = !done && nextSuggestion && topic.id === nextSuggestion.id;
     return `
     <button type="button" class="topic-card topic-${escapeHtml(topic.id)}${done ? " topic-card--done" : ""}" style="${getTopicColorStyle(topic.id)}" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">
+      ${suggested ? `<span class="topic-start-badge">${anyTopicDone ? "Dein nächstes Thema" : "Starte hier"}</span>` : ""}
       ${done ? `<span class="topic-done-corner" aria-label="Geschafft" title="Geschafft">✓</span>` : ""}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
@@ -1966,12 +1976,6 @@ function renderMenu() {
         <div class="settings-panel" role="group" aria-label="Einstellungen">
           <p class="settings-panel-title">Einstellungen</p>
           <div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>
-          <div class="settings-more">
-            <button type="button" class="settings-more-btn" onclick="startBigQuiz()">${getIconHtml("quiz")}<span>Das große Quiz</span></button>
-            <button type="button" class="settings-more-btn" onclick="startRepeatQuiz()">${getIconHtml("exercise")}<span>Wiederholen</span></button>
-            <button type="button" class="settings-more-btn" onclick="startTrainingInbox()">${getIconHtml("message")}<span>Trainings-Postfach</span></button>
-            <button type="button" class="settings-more-btn" onclick="renderAllMemoryCards()">${getIconHtml("remember")}<span>Alle Merk-Karten</span></button>
-          </div>
         </div>` : ""}
     </div>`;
 
@@ -2024,6 +2028,46 @@ function renderMenu() {
       <h3 class="topic-grid-title">Wähle ein Thema</h3>
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
       <div class="topic-grid">${cards}</div>
+
+      <section class="practice-section" aria-label="Üben und wiederholen">
+        <h3 class="topic-grid-title">Üben und wiederholen</h3>
+        <p class="topic-grid-hint">Hier kannst du üben. Ganz ohne Druck.</p>
+        <div class="action-grid practice-grid">
+          <button type="button" class="action-card" onclick="startBigQuiz()">
+            <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
+            <span class="action-text">
+              <span class="action-title">Das große Quiz</span>
+              <span class="action-desc">Fragen aus allen Themen.</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Das große Quiz. Fragen aus allen Themen." aria-label="Das große Quiz vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            </span>
+          </button>
+          <button type="button" class="action-card" onclick="startRepeatQuiz()">
+            <span class="action-icon" aria-hidden="true">${getIconHtml("exercise")}</span>
+            <span class="action-text">
+              <span class="action-title">Wiederholen</span>
+              <span class="action-desc">Fragen aus deinen Themen.</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Wiederholen. Fragen aus deinen Themen." aria-label="Wiederholen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            </span>
+          </button>
+          <button type="button" class="action-card" onclick="startTrainingInbox()">
+            <span class="action-icon" aria-hidden="true">${getIconHtml("message")}</span>
+            <span class="action-text">
+              <span class="action-title">Trainings-Postfach</span>
+              <span class="action-desc">Trick oder echt? Gefahrlos üben.</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Trainings-Postfach. Trick oder echt? Gefahrlos üben." aria-label="Trainings-Postfach vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            </span>
+          </button>
+          <button type="button" class="action-card" onclick="renderAllMemoryCards()">
+            <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
+            <span class="action-text">
+              <span class="action-title">Alle Merk-Karten</span>
+              <span class="action-desc">Alle Regeln ansehen.</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Alle Merk-Karten. Alle Regeln ansehen." aria-label="Alle Merk-Karten vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
       ${progressConsent}
     </section>
   `;
@@ -3495,6 +3539,7 @@ function renderCertificate(topicId, score, total) {
 
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
+        ${(() => { const next = getNextTopicSuggestion(); return next && next.id !== topic.id ? `<button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(next.id)}')">Nächstes Thema: ${escapeHtml(next.title)}</button>` : ""; })()}
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
         <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
       </div>

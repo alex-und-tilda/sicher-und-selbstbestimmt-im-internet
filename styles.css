@@ -2246,12 +2246,16 @@ button {
   border-top: 8px solid var(--topic-color);
 }
 
-/* Lern-Bild der Lektion */
+/* Lern-Bild der Lektion – kompakt, damit Bild und erster Satz
+   zusammen sichtbar sind (Kontiguitäts-Prinzip, Mayer) */
 .lesson-illustration {
   display: block;
-  margin: 6px 0 18px;
+  margin: 6px 0 14px;
   width: 100%;
-  max-width: 420px;
+  max-width: 300px;
+  max-height: 190px;
+  object-fit: contain;
+  object-position: left center;
   border-radius: var(--radius-m);
 }
 
@@ -4033,4 +4037,34 @@ body.simple-mode .practice-box {
   font-size: 1.25rem;
   line-height: 1.6;
   margin: 0;
+}
+
+
+/* =============================================================
+   Themenübersicht: Starte-hier-Hinweis und Üben-Sektion
+   ============================================================= */
+
+/* Badge auf genau einer Themen-Kachel: geführter Einstieg ohne Zwang */
+.topic-start-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* Üben-Sektion unter den Themen */
+.practice-section {
+  margin-top: 34px;
+}
+
+.practice-grid {
+  margin-top: 6px;
 }
