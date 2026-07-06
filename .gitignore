@@ -10,3 +10,7 @@ styles.css.bak
 *.zip
 8-themen-lernplattform-final-fehler-korrigiert-github/
 Archiv/
+
+# Schwere Quell-/Arbeitsdateien (Originale liegen im Workshop-Ordner, nicht ins Repo)
+assets/svg til/
+*.gif
