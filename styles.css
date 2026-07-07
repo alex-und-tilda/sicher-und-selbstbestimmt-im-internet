@@ -271,6 +271,41 @@ button {
   color: var(--good);
 }
 
+.motion-toggle-button {
+  flex: none;
+  order: 4;
+  min-height: 58px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+/* Aktiver Zustand nicht nur über Farbe: zusätzlich ein Symbol vor dem Text */
+.motion-toggle-button.motion-off {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.motion-toggle-button.motion-off::before {
+  content: "\23F8\FE0E";
+  margin-right: 6px;
+}
+
+/* Vom Nutzer gewählt: keine Bewegung (zusätzlich zur System-Einstellung) */
+html.no-motion *,
+html.no-motion *::before,
+html.no-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
 .header-text {
   flex: 1;
   min-width: 0;
@@ -874,6 +909,26 @@ button {
   width: 100%;
   border-radius: var(--radius-m);
   border: 1px solid var(--line);
+}
+
+/* Alex-&-Tilda-Rollen-Figuren (bedeutungstragend, mit Alt-Text) */
+.role-figure {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 6px auto 14px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+}
+
+.support-help-panel .role-figure {
+  max-width: 200px;
+  margin: 4px auto 16px;
+}
+
+.certificate-card .role-figure {
+  max-width: 260px;
+  margin: 4px auto 12px;
 }
 
 /* App-Icon: farbiges, abgerundetes Quadrat mit weißem Symbol – wie am Handy. */
@@ -3507,6 +3562,10 @@ body.simple-mode .practice-box {
   .sound-toggle-button {
     order: 1;
     margin-left: auto;
+  }
+
+  .motion-toggle-button {
+    order: 2;
   }
 
   .card {

@@ -25,6 +25,7 @@ let currentQuizIndex = 0;
 let quizScore = 0;
 let quizAnsweredCorrect = new Set();
 let soundEnabled = false;
+let motionEnabled = true;
 let simpleMode = false;
 
 /* Sprachstufe: 'leicht' (Leichte Sprache), 'einfach' (Einfache Sprache),
@@ -198,6 +199,7 @@ let speechRate = 0.85;
 /* Schriftgröße: 3 Stufen */
 const FONT_SIZES    = [17, 20, 23]; /* px */
 const FONT_SIZE_KEY = "font-size-step";
+const MOTION_KEY    = "motion";
 let fontSizeStep = 0;
 
 function applyFontSize() {
@@ -397,6 +399,7 @@ function loadActiveProfileSettings() {
   learnModeChooserOpen = false;
   fontSizeStep = 0;
   loadFontSize();       /* liest + wendet Schriftgröße an */
+  loadMotion();         /* liest + wendet Bewegungs-Einstellung an */
   loadLanguageLevel();  /* setzt languageLevel + languageChosen, falls gemerkt */
   loadLearnMode();
 }
@@ -673,6 +676,7 @@ const backButton = document.getElementById("backButton");
 const nextButton = document.getElementById("nextButton");
 const homeButton = document.getElementById("homeButton");
 const soundToggleButton = document.getElementById("soundToggleButton");
+const motionToggleButton = document.getElementById("motionToggleButton");
 const liveRegion = document.getElementById("liveRegion");
 
 /* ============================================================
@@ -787,6 +791,27 @@ function getIllustrationHtml(topic) {
 }
 
 /* ============================================================
+   Alex-&-Tilda-Rollen-Figuren
+   Feste Rollen mit beschreibenden Leichte-Sprache-Alt-Texten.
+   Diese Bilder tragen Bedeutung -> echtes alt (nicht aria-hidden).
+   ============================================================ */
+
+const ROLE_FIGURES = {
+  erklaeren:  { file: "alex-tilda-erklaeren.webp",  alt: "Tilda erklärt dir das Thema." },
+  achtung:    { file: "alex-tilda-achtung.webp",    alt: "Tilda hebt die Hand. Achtung: Hier ist Vorsicht wichtig." },
+  hilfe:      { file: "alex-tilda-hilfe.webp",      alt: "Alex zeigt dir, wo du Hilfe findest." },
+  erfolg:     { file: "alex-tilda-erfolg.webp",     alt: "Alex und Tilda freuen sich mit dir. Gut gemacht." },
+  nachdenken: { file: "alex-tilda-nachdenken.webp", alt: "Tilda überlegt. Was weißt du schon?" }
+};
+
+function roleFigure(role, extraClass = "") {
+  const f = ROLE_FIGURES[role];
+  if (!f) return "";
+  const cls = "role-figure" + (extraClass ? " " + extraClass : "");
+  return `<img class="${cls}" src="assets/figures/${f.file}" alt="${escapeHtml(f.alt)}" loading="lazy" onerror="this.remove()">`;
+}
+
+/* ============================================================
    Lern-Bilder in den Lektionen
    - eigene Illustrationen aus assets/lessons/ (fest eingebunden,
      keine fremden Server, keine Lizenz-Auflagen)
@@ -835,7 +860,7 @@ function announce(text) {
 
 function focusContent() {
   content.focus();
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion = !motionEnabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   applyGlossar();
 }
@@ -865,6 +890,43 @@ function toggleSound() {
   } else {
     announce("Töne sind ausgeschaltet.");
   }
+}
+
+/* ============================================================
+   Bewegung / Animationen (Schalter; Default = System-Einstellung)
+   ============================================================ */
+
+function applyMotion() {
+  document.documentElement.classList.toggle("no-motion", !motionEnabled);
+}
+
+function updateMotionButton() {
+  if (!motionToggleButton) return;
+  motionToggleButton.classList.toggle("motion-on", motionEnabled);
+  motionToggleButton.classList.toggle("motion-off", !motionEnabled);
+  motionToggleButton.textContent = motionEnabled ? "Bewegung an" : "Bewegung aus";
+  motionToggleButton.setAttribute("aria-pressed", motionEnabled ? "true" : "false");
+  motionToggleButton.setAttribute(
+    "aria-label",
+    motionEnabled ? "Bewegungen sind an. Klicken zum Ausschalten." : "Bewegungen sind aus. Klicken zum Einschalten."
+  );
+}
+
+function loadMotion() {
+  const saved = pGet(MOTION_KEY);
+  if (saved === "on") motionEnabled = true;
+  else if (saved === "off") motionEnabled = false;
+  else motionEnabled = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  applyMotion();
+  updateMotionButton();
+}
+
+function toggleMotion() {
+  motionEnabled = !motionEnabled;
+  pSet(MOTION_KEY, motionEnabled ? "on" : "off");
+  applyMotion();
+  updateMotionButton();
+  announce(motionEnabled ? "Bewegungen sind eingeschaltet." : "Bewegungen sind ausgeschaltet.");
 }
 
 function getAudioContext() {
@@ -2281,6 +2343,7 @@ function buildSupportBox() {
 
       <div id="supportHelpPanel" class="support-help-panel" hidden>
         <h3>Du kannst Hilfe holen.</h3>
+        ${roleFigure("hilfe")}
         <div class="support-help-grid">
           <div class="support-help-card">
             <h4>Wenn du die Seite nicht bedienen kannst</h4>
@@ -2429,6 +2492,7 @@ function renderSelfAssessment() {
       </div>
       <p class="sa-intro">Bevor wir starten:</p>
       <p class="sa-question">${escapeHtml(sa.question)}</p>
+      ${roleFigure("nachdenken")}
       <div class="sa-options" role="group" aria-label="Einschätzung wählen">
         ${optionButtons}
       </div>
@@ -3535,6 +3599,7 @@ function renderCertificate(topicId, score, total) {
           </svg>
         </div>
 
+        ${roleFigure("erfolg")}
         <p class="certificate-kicker">Urkunde</p>
         <h2>Sicher und selbstbestimmt im Internet</h2>
 
@@ -3747,6 +3812,10 @@ homeButton.addEventListener("click", renderMenu);
 if (soundToggleButton) {
   soundToggleButton.addEventListener("click", toggleSound);
   updateSoundButton();
+}
+
+if (motionToggleButton) {
+  motionToggleButton.addEventListener("click", toggleMotion);
 }
 
 document.addEventListener("mouseover", playHoverSound, true);
