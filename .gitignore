@@ -14,3 +14,8 @@ Archiv/
 # Schwere Quell-/Arbeitsdateien (Originale liegen im Workshop-Ordner, nicht ins Repo)
 assets/svg til/
 *.gif
+
+# Ungenutzte Doppel-Ordner im Root (Seite nutzt assets/... ) – nicht wieder aufnehmen
+/icons/
+/illustrations/
+/brand/
