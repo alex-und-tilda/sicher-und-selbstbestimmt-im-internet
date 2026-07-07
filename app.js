@@ -1749,7 +1749,7 @@ function renderIntro() {
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Willkommen", 0);
+  setHeader("Sicher und selbstbestimmt im Internet", "Willkommen", "Willkommen", "Los geht’s", 0);
   showNav(false, false);
   content.innerHTML = `
     ${buildReadingToolbar()}
@@ -2036,7 +2036,6 @@ function renderMenu() {
 
   content.innerHTML = `
     <section class="start-page">
-      <a class="plain-back-button" href="#" onclick="event.preventDefault(); renderIntro();">← Zur Startseite</a>
       ${buildReadingToolbar()}
       ${settingsArea}
       ${learnModeSection}

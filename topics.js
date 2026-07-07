@@ -713,11 +713,6 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Schnell klicken kann gefährlich sein."
       }
     ],
-    "certificateGoals": [
-      "private Daten erkennen",
-      "Daten sparsam teilen",
-      "bei Unsicherheit Hilfe holen"
-    ],
     "helpQuestions": [
       "Muss ich diese Daten eingeben?",
       "Weiß ich, wer die Daten bekommt?",
@@ -1424,11 +1419,6 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Erst prüfen ist besser."
       }
     ],
-    "certificateGoals": [
-      "private Daten schützen",
-      "komische Links erkennen",
-      "bei Druck Hilfe holen"
-    ],
     "helpQuestions": [
       "Kenne ich diese Nummer?",
       "Macht die Nachricht Druck?",
@@ -2062,11 +2052,6 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Erst prüfen, dann posten."
       }
     ],
-    "certificateGoals": [
-      "Profil und Beiträge prüfen",
-      "fremde Anfragen einschätzen",
-      "blockieren oder melden"
-    ],
     "helpQuestions": [
       "Wer kann das sehen?",
       "Kenne ich diese Person?",
@@ -2696,11 +2681,6 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du teilst den Standort nicht einfach."
       }
     ],
-    "certificateGoals": [
-      "Fotos bewusst posten",
-      "Stories und Standort prüfen",
-      "Nachrichten sicher einschätzen"
-    ],
     "helpQuestions": [
       "Was ist auf dem Foto zu sehen?",
       "Ist mein Standort sichtbar?",
@@ -3304,11 +3284,6 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Stoppen ist erlaubt."
       }
     ],
-    "certificateGoals": [
-      "Videos und Quellen prüfen",
-      "Werbung erkennen",
-      "Kommentare vorsichtig nutzen"
-    ],
     "helpQuestions": [
       "Ist das Werbung?",
       "Ist das wirklich wahr?",
@@ -3880,11 +3855,6 @@ const topics = [
         "feedbackWrong": "Das ist nicht sicher. Schnell schicken kann Probleme machen.",
         "feedbackCorrect": "Das ist sicher. Erst denken, dann senden."
       }
-    ],
-    "certificateGoals": [
-      "Snaps bewusst senden",
-      "Standort schützen",
-      "bei Druck Nein sagen"
     ],
     "helpQuestions": [
       "Kann jemand das speichern?",
@@ -4508,11 +4478,6 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Erst prüfen ist besser."
       }
     ],
-    "certificateGoals": [
-      "Trends kritisch prüfen",
-      "Pausen machen",
-      "Kommentare und Werbung einschätzen"
-    ],
     "helpQuestions": [
       "Ist der Trend sicher?",
       "Tut mir das Video gut?",
@@ -5135,11 +5100,6 @@ const topics = [
         "feedbackWrong": "Das ist nicht sicher. Du musst nicht allein bleiben.",
         "feedbackCorrect": "Das ist sicher. Diese Regel hilft."
       }
-    ],
-    "certificateGoals": [
-      "Stopp-Regel anwenden",
-      "Beweise mit Hilfe sichern",
-      "Unterstützung holen"
     ],
     "helpQuestions": [
       "Macht mir die Nachricht Angst oder ein komisches Gefühl?",

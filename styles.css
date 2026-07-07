@@ -222,15 +222,28 @@ button {
 
 .home-button {
   flex: none;
-  width: 58px;
-  height: 58px;
-  font-size: 1.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 58px;
+  min-height: 58px;
+  padding: 8px 16px;
+  font-weight: 700;
   border: 2px solid var(--accent);
   border-radius: var(--radius-m);
   background: var(--accent-soft);
   color: var(--accent-dark);
   cursor: pointer;
   transition: background 0.15s ease;
+}
+
+.home-button-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.home-button-label {
+  font-size: 1rem;
 }
 
 .home-button:hover {
