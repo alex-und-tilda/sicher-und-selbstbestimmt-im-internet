@@ -151,7 +151,7 @@ const CONTENT_VERSIONS = {
     },
 
     "Fremde Links und Nachrichten": {
-      einfach: {
+      einfach: { warning: "Klick nicht auf Links von Fremden oder aus komischen Nachrichten. Solche Links können gefährlich sein und deine Daten stehlen. Frag im Zweifel eine Person, der du vertraust.",
         text: [
           { text: "Manche Nachrichten wollen an deine privaten Daten kommen." },
           { text: "Oft enthalten sie einen Link, der zu einer gefälschten Seite führt." },
@@ -159,7 +159,7 @@ const CONTENT_VERSIONS = {
         ],
         examples: ["„Klick schnell auf diesen Link.“", "„Gib deine Adresse ein.“", "„Du hast etwas gewonnen.“"]
       },
-      standard: {
+      standard: { warning: "Öffne keine Links aus unerwarteten oder unbekannten Nachrichten – sie können zu gefälschten Seiten führen, die deine Daten abgreifen. Frag im Zweifel eine Person, der du vertraust.",
         text: [
           { text: "Manche Nachrichten zielen darauf ab, an deine Daten zu kommen. Häufig enthalten sie einen Link, der auf eine gefälschte Seite führt. Öffne Links von unbekannten Absendern nicht und gib dort keine persönlichen Daten ein. Im Zweifel löschst du die Nachricht." }
         ],
@@ -267,7 +267,7 @@ const CONTENT_VERSIONS = {
     },
 
     "Geld und Betrug": {
-      einfach: {
+      einfach: { warning: "Betrüger geben sich am Handy oft als Freunde oder Familie aus und bitten um Geld. Schick niemals Geld an eine fremde Nummer. Ruf die Person über die Nummer an, die du schon kennst.",
         text: [
           { text: "Manche Nachrichten fragen nach Geld, und die Betrüger tun oft so, als wären sie Familie oder Freunde." },
           { text: "Ein bekannter Trick lautet: „Hallo Mama, ich habe eine neue Nummer und brauche Geld.“" },
@@ -276,7 +276,7 @@ const CONTENT_VERSIONS = {
         ],
         examples: ["„Hallo Papa, mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir Geld überweisen?“", "Eine Sprachnachricht klingt wie deine Schwester und will Geld. Die Stimme kann gefälscht sein."]
       },
-      standard: {
+      standard: { warning: "Bei Geldforderungen per Nachricht ist Vorsicht wichtig: Betrüger geben sich als Angehörige mit neuer Nummer aus. Überweise kein Geld, sondern ruf die Person über ihre dir bekannte Nummer an.",
         text: [
           { text: "Eine häufige Betrugsmasche sind Nachrichten, die nach Geld fragen. Betrüger geben sich als Angehörige aus – etwa mit der Nachricht „Hallo Mama, ich habe eine neue Nummer und brauche Geld.“ Inzwischen lassen sich sogar Stimmen in Sprachnachrichten mit künstlicher Intelligenz täuschend echt nachahmen. Überweise deshalb niemals Geld an eine unbekannte Nummer und ruf die Person im Zweifel unter ihrer bekannten Nummer zurück." }
         ],
@@ -300,14 +300,14 @@ const CONTENT_VERSIONS = {
     },
 
     "WhatsApp-Code": {
-      einfach: {
+      einfach: { warning: "Der Code, den du per SMS bekommst, schützt dein WhatsApp. Gib diesen Code niemals weiter – auch nicht an Freunde oder angebliche Mitarbeiter. Wer danach fragt, will dein Konto übernehmen.",
         text: [
           { text: "Manchmal bekommst du einen Code per SMS, der dein WhatsApp schützt." },
           { text: "Dieser Code ist nur für dich bestimmt." },
           { text: "Gib ihn niemals an andere weiter, auch wenn jemand danach fragt." }
         ]
       },
-      standard: {
+      standard: { warning: "Der per SMS zugeschickte Bestätigungscode schützt dein Konto. Gib ihn niemals weiter; seriöse Stellen fragen nie danach. Wer den Code haben will, versucht dein WhatsApp zu übernehmen.",
         text: [
           { text: "Gelegentlich erhältst du einen Bestätigungscode per SMS. Dieser Code schützt dein WhatsApp-Konto vor fremdem Zugriff. Gib ihn niemals weiter – wer dich danach fragt, will dein Konto übernehmen." }
         ]
@@ -456,12 +456,12 @@ const CONTENT_VERSIONS = {
       ] }
     },
     "Freundschafts-Anfragen": {
-      einfach: { text: [
+      einfach: { warning: "Nimm Freundschaftsanfragen nur von Menschen an, die du wirklich kennst. Hinter fremden Profilen können sich Betrüger verstecken. Im Zweifel lehnst du die Anfrage ab.", text: [
         { text: "Nicht jede Freundschafts-Anfrage kommt von jemandem, den du kennst." },
         { text: "Hinter unbekannten Profilen können sich auch Betrüger verstecken." },
         { text: "Du musst keine Anfrage annehmen und kannst sie im Zweifel ablehnen." }
       ] },
-      standard: { text: [
+      standard: { warning: "Bestätige Freundschaftsanfragen nur von Personen, die du tatsächlich kennst. Fremde oder gefälschte Profile werden oft für Betrug genutzt. Im Zweifelsfall lehnst du die Anfrage ab.", text: [
         { text: "Nicht jede Freundschaftsanfrage stammt von jemandem, den du kennst. Hinter unbekannten Profilen können sich auch Betrüger verbergen. Du musst keine Anfrage annehmen – im Zweifel lehnst du sie ab oder ignorierst sie." }
       ] }
     },
@@ -476,7 +476,7 @@ const CONTENT_VERSIONS = {
       ] }
     },
     "Beleidigungen": {
-      einfach: {
+      einfach: { warning: "Beleidigungen sind nicht in Ordnung und nicht deine Schuld. Du musst nicht zurück beleidigen. Du kannst die Person melden, blockieren und dir Hilfe holen.",
         text: [
           { text: "Im Internet kommt es manchmal zu Streit und Beleidigungen." },
           { text: "Du musst dich darauf nicht einlassen und nicht zurück beleidigen." },
@@ -484,7 +484,7 @@ const CONTENT_VERSIONS = {
         ],
         bullets: ["Die Nachricht zeigen.", "Die Person blockieren.", "Den Beitrag melden.", "Unterstützung holen."]
       },
-      standard: {
+      standard: { warning: "Beleidigungen im Netz sind nicht in Ordnung – und nicht deine Schuld. Reagiere nicht mit Gegenbeleidigungen, sondern melde und blockiere die Person und hol dir bei Bedarf Unterstützung.",
         text: [
           { text: "Auch auf Facebook kommt es zu Streit und Beleidigungen. Du musst dich darauf nicht einlassen und nicht zurückbeleidigen. Stattdessen kannst du die Nachricht aufbewahren, die Person blockieren, den Beitrag melden und dir Unterstützung holen." }
         ],
@@ -577,17 +577,17 @@ const CONTENT_VERSIONS = {
       ] }
     },
     "Private Nachrichten": {
-      einfach: { text: [
+      einfach: { warning: "Wenn dir eine fremde Person schreibt und nach privaten Fotos oder Daten fragt, ist das ein Warnzeichen. Du musst nicht antworten und kannst die Person blockieren.", text: [
         { text: "Wenn dir eine fremde Person privat schreibt und nach Fotos oder Daten fragt, ist das ein Warnzeichen." },
         { text: "Geh darauf nicht ein und schick keine privaten Bilder." },
         { text: "Im Zweifel blockierst du den Kontakt." }
       ] },
-      standard: { text: [
+      standard: { warning: "Fordert dich eine unbekannte Person in privaten Nachrichten zu Fotos oder persönlichen Daten auf, ist das ein Warnsignal. Du musst nicht antworten und kannst die Person blockieren oder melden.", text: [
         { text: "Wenn dir eine fremde Person private Nachrichten schickt und nach Fotos oder persönlichen Daten fragt, ist das ein deutliches Warnzeichen. Geh darauf nicht ein, schick keine privaten Bilder und blockiere den Kontakt im Zweifel." }
       ] }
     },
     "Verletzende Kommentare": {
-      einfach: {
+      einfach: { warning: "Manche Kommentare sind gemein und verletzen. Das ist nicht deine Schuld. Du musst nicht antworten und kannst den Kommentar melden und die Person blockieren.",
         text: [
           { text: "Kommentare können nett sein, manche aber auch verletzend." },
           { text: "Du musst nicht auf jeden Kommentar antworten." },
@@ -595,7 +595,7 @@ const CONTENT_VERSIONS = {
         ],
         bullets: ["Die Nachricht zeigen.", "Die Person blockieren.", "Den Kommentar melden.", "Mit jemandem darüber sprechen."]
       },
-      standard: {
+      standard: { warning: "Verletzende Kommentare sagen mehr über die andere Person aus als über dich – die Schuld liegt nicht bei dir. Du musst nicht antworten und kannst den Kommentar melden und die Person blockieren.",
         text: [
           { text: "Kommentare können freundlich, aber auch verletzend sein. Du musst nicht auf jeden reagieren. Bei verletzenden Kommentaren kannst du die Nachricht aufbewahren, die Person blockieren, den Kommentar melden und mit jemandem darüber sprechen." }
         ],
@@ -670,18 +670,18 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "YouTube startet automatisch das nächste Video, sodass man schnell viel Zeit verliert. Achte darauf, wie lange du schon schaust, und mach bewusst Pausen. Du darfst jederzeit stoppen." }] }
     },
     "Gefährliche Mutproben": {
-      einfach: { text: [
+      einfach: { warning: "Manche Videos zeigen gefährliche Mutproben, die zu Verletzungen führen können. Mach so etwas nicht nach – deine Gesundheit ist wichtiger als ein Video.", text: [
         { text: "Manche Videos zeigen gefährliche Mutproben, die du nicht nachmachen musst." },
         { text: "Deine Gesundheit ist wichtiger als ein Trend oder die Anerkennung anderer." }
       ] },
-      standard: { text: [{ text: "Im Netz kursieren Videos mit gefährlichen Mutproben oder „Challenges“. Du musst bei so etwas nicht mitmachen – deine Gesundheit ist wichtiger als ein Trend oder die Anerkennung anderer." }] }
+      standard: { warning: "In manchen Videos werden gefährliche Mutproben gezeigt, die zu ernsten Verletzungen führen können. Ahme sie nicht nach; deine Gesundheit geht vor.", text: [{ text: "Im Netz kursieren Videos mit gefährlichen Mutproben oder „Challenges“. Du musst bei so etwas nicht mitmachen – deine Gesundheit ist wichtiger als ein Trend oder die Anerkennung anderer." }] }
     },
     "Videos, die Angst machen": {
-      einfach: { text: [
+      einfach: { warning: "Manche Videos machen Angst oder Stress. Du darfst ein solches Video jederzeit stoppen. Sprich danach mit einer Person, der du vertraust.", text: [
         { text: "Manche Videos machen Angst oder Stress, und du musst sie nicht zu Ende sehen." },
         { text: "Du darfst das Video stoppen und mit einer vertrauten Person darüber sprechen." }
       ] },
-      standard: { text: [{ text: "Manche Videos lösen Angst oder Stress aus. Du musst sie nicht zu Ende sehen – stopp das Video und wende dich bei Bedarf an eine Person, der du vertraust." }] }
+      standard: { warning: "Wenn dir ein Video Angst macht oder Stress auslöst, darfst du es jederzeit beenden. Rede anschließend mit einer Person, der du vertraust, darüber.", text: [{ text: "Manche Videos lösen Angst oder Stress aus. Du musst sie nicht zu Ende sehen – stopp das Video und wende dich bei Bedarf an eine Person, der du vertraust." }] }
     },
     "Kommentare": {
       einfach: {
@@ -750,8 +750,8 @@ const CONTENT_VERSIONS = {
         { text: "Bei Snapchat ist ein Bild oft nur kurz zu sehen." },
         { text: "Trotzdem kann der andere das Bild speichern oder abfotografieren." },
         { text: "Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften." }
-      ] },
-      standard: { text: [{ text: "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich weg sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften." }] }
+      ], warning: "Auch wenn ein Bild schnell verschwindet, kann es jemand vorher speichern. Sende deshalb nur Bilder, die andere sehen dürfen." },
+      standard: { text: [{ text: "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich weg sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften." }], warning: "Ein Snap verschwindet zwar nach kurzer Zeit, lässt sich aber vorher per Screenshot sichern. Verschicke deshalb nur Bilder, deren Weitergabe für dich in Ordnung ist." }
     },
     "Bild vom Bildschirm": {
       einfach: {
@@ -770,8 +770,8 @@ const CONTENT_VERSIONS = {
       einfach: { text: [
         { text: "Manche Bilder sind sehr privat, und niemand darf dich zu solchen Bildern drängen." },
         { text: "Du darfst jederzeit Nein sagen und dir Hilfe holen." }
-      ] },
-      standard: { text: [{ text: "Sehr private oder intime Bilder solltest du besonders schützen. Niemand hat das Recht, dich zu solchen Aufnahmen zu drängen. Du darfst jederzeit Nein sagen und dir Hilfe holen." }] }
+      ], warning: "Niemand darf dich zu sehr privaten Bildern drängen. Du darfst immer Nein sagen und dir Hilfe holen." },
+      standard: { text: [{ text: "Sehr private oder intime Bilder solltest du besonders schützen. Niemand hat das Recht, dich zu solchen Aufnahmen zu drängen. Du darfst jederzeit Nein sagen und dir Hilfe holen." }], warning: "Niemand hat das Recht, dich zu intimen Aufnahmen zu drängen. Du darfst jederzeit Nein sagen und dir Hilfe holen – zum Beispiel bei einer Person, der du vertraust." }
     },
     "Standort": {
       einfach: { text: [
@@ -847,24 +847,24 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "TikTok beobachtet, welche Videos du ansiehst, und zeigt dir immer mehr vom Gleichen. Dieser Sog führt dazu, dass man schnell sehr lange schaut. Mach dir das bewusst und leg bewusst Pausen ein." }] }
     },
     "Gefährliche Trends erkennen": {
-      einfach: {
+      einfach: { warning: "Manche Trends sehen lustig aus, können aber gefährlich sein und weh tun. Mach bei solchen Trends nicht mit – deine Gesundheit ist wichtiger.",
         text: [
           { text: "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun." },
           { text: "Deine Sicherheit ist wichtiger als Likes." }
         ],
         remember: "Ich muss nicht bei jedem Trend mitmachen."
       },
-      standard: {
+      standard: { warning: "Nicht jeder Trend ist harmlos: Manche können gefährlich sein und zu Verletzungen führen. Mach bei solchen Challenges nicht mit; deine Gesundheit geht vor.",
         text: [{ text: "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun. Deine Sicherheit ist wichtiger als Likes." }],
         remember: "Ich mache bei gefährlichen Trends nicht mit."
       }
     },
     "Private Nachrichten": {
-      einfach: { text: [
+      einfach: { warning: "Fremde Personen können dir bei TikTok schreiben und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel.", text: [
         { text: "Auch auf TikTok können dir Fremde schreiben und nach Adresse, Fotos oder anderen Daten fragen." },
         { text: "Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel." }
       ] },
-      standard: { text: [{ text: "Auch auf TikTok können dir Fremde private Nachrichten schicken und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Informationen nicht weiter und blockiere den Kontakt im Zweifel." }] }
+      standard: { warning: "Auch bei TikTok können dir Fremde schreiben und nach Adresse, Fotos oder persönlichen Daten fragen. Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel.", text: [{ text: "Auch auf TikTok können dir Fremde private Nachrichten schicken und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Informationen nicht weiter und blockiere den Kontakt im Zweifel." }] }
     },
     "Videos posten": {
       einfach: { text: [
@@ -952,11 +952,11 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "Wenn dich eine Nachricht unter Stress setzt, ist der erste Impuls oft, sofort zu reagieren. Die Stopp-Regel hilft dir dabei, das zu vermeiden: Halte zuerst inne und überlege in Ruhe, bevor du etwas tust." }] }
     },
     "Nicht sofort löschen": {
-      einfach: { text: [
+      einfach: { warning: "Lösche eine gemeine oder bedrohliche Nachricht nicht sofort. Mach vorher ein Bild vom Bildschirm (Screenshot). So kannst du sie später einer Person zeigen, die dir hilft.", text: [
         { text: "Eine gemeine oder komische Nachricht willst du vielleicht sofort löschen." },
         { text: "Manchmal ist es aber wichtig, sie erst aufzubewahren, damit du sie jemandem zeigen kannst." }
       ] },
-      standard: { text: [{ text: "Gemeine oder verdächtige Nachrichten möchte man am liebsten sofort löschen. Manchmal ist es aber wichtig, sie zunächst aufzubewahren – als Beweis, um sie einer vertrauten Person oder einer Beratungsstelle zu zeigen." }] }
+      standard: { warning: "Lösche belastende oder bedrohliche Nachrichten nicht vorschnell. Sichere sie vorher mit einem Screenshot – so bleibt ein Beleg, den du einer Vertrauensperson oder der Polizei zeigen kannst.", text: [{ text: "Gemeine oder verdächtige Nachrichten möchte man am liebsten sofort löschen. Manchmal ist es aber wichtig, sie zunächst aufzubewahren – als Beweis, um sie einer vertrauten Person oder einer Beratungsstelle zu zeigen." }] }
     },
     "Bild vom Bildschirm": {
       einfach: { text: [
@@ -966,11 +966,11 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "Ein Bildschirmfoto (Screenshot) hält eine Nachricht fest, sodass du sie später zeigen kannst – auch wenn das Original verschwindet. Wenn du nicht weißt, wie das geht, darfst du dir dabei helfen lassen." }] }
     },
     "Druck erkennen": {
-      einfach: { text: [
+      einfach: { warning: "Wenn dich jemand drängt – zum Beispiel „Mach das sofort“ oder „Sag es niemandem“ –, ist das ein Warnzeichen. Lass dich nicht unter Druck setzen und hol dir Hilfe bei einer Person, der du vertraust.", text: [
         { text: "Wenn jemand sagt: „Mach das sofort“ oder „Erzähl es niemandem“, ist das ein Warnzeichen." },
         { text: "Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor." }
       ] },
-      standard: { text: [{ text: "Aufforderungen wie „Mach das sofort“ oder „Erzähl es niemandem“ sind typische Druckmittel. Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor. Solche Sätze sind ein klares Warnzeichen." }] }
+      standard: { warning: "Druck ist ein deutliches Warnsignal: Wer verlangt, dass du sofort handelst oder etwas geheim hältst, will dich meist manipulieren. Lass dich nicht drängen und hol dir Unterstützung bei einer Person, der du vertraust.", text: [{ text: "Aufforderungen wie „Mach das sofort“ oder „Erzähl es niemandem“ sind typische Druckmittel. Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor. Solche Sätze sind ein klares Warnzeichen." }] }
     },
     "Angst ernst nehmen": {
       einfach: {
@@ -1250,11 +1250,11 @@ const CONTENT_VERSIONS = {
       }
     },
     "Starke Gefühle sind ein Warnzeichen": {
-      einfach: { text: [
+      einfach: { warning: "Fake News lösen mit Absicht starke Gefühle aus, zum Beispiel Wut oder Angst. Genau das ist ein Warnzeichen. Prüfe eine Nachricht erst, bevor du sie glaubst oder teilst.", text: [
         { text: "Fake News lösen oft starke Gefühle wie Wut oder Angst aus, denn wer aufgewühlt ist, prüft weniger." },
         { text: "Wenn dich eine Nachricht stark berührt, lohnt sich das Prüfen besonders." }
       ] },
-      standard: { text: [{ text: "Fake News sind oft so gemacht, dass sie starke Gefühle wie Wut oder Angst auslösen – denn wer aufgewühlt ist, prüft weniger. Genau deshalb gilt: Wenn dich eine Meldung stark emotional trifft, prüfe sie besonders gründlich." }] }
+      standard: { warning: "Starke Gefühle wie Wut oder Angst werden von Fake News gezielt ausgelöst – das ist ein Warnsignal. Prüfe eine solche Nachricht in Ruhe, bevor du sie glaubst oder weiterleitest.", text: [{ text: "Fake News sind oft so gemacht, dass sie starke Gefühle wie Wut oder Angst auslösen – denn wer aufgewühlt ist, prüft weniger. Genau deshalb gilt: Wenn dich eine Meldung stark emotional trifft, prüfe sie besonders gründlich." }] }
     },
     "Nicht einfach weiterleiten": {
       einfach: { text: [
@@ -1442,14 +1442,14 @@ const CONTENT_VERSIONS = {
       }
     },
     "Fake-Shops erkennen": {
-      einfach: {
+      einfach: { warning: "In einem Fake-Shop bezahlst du, bekommst die Ware aber nie. Solche Shops sehen oft echt aus. Prüfe einen Shop deshalb genau, bevor du dort bezahlst.",
         text: [
           { text: "Ein Fake-Shop ist ein falscher Shop: Du bezahlst, aber die Ware kommt nie." },
           { text: "Solche Shops sehen oft sehr echt aus, deshalb helfen dir die folgenden Warnzeichen." }
         ],
         bullets: ["Alles ist sehr, sehr billig.", "Du kannst nur per Vorkasse zahlen.", "Es gibt kein Impressum.", "Der Name der Internet-Seite ist komisch."]
       },
-      standard: {
+      standard: { warning: "Fake-Shops wirken oft täuschend echt: Du bezahlst, erhältst die Ware aber nie. Prüfe einen unbekannten Shop deshalb genau, bevor du dort bezahlst oder Daten eingibst.",
         text: [{ text: "Fake-Shops sehen oft täuschend echt aus, doch nach der Zahlung kommt keine Ware. Stutzig machen sollten dich extrem niedrige Preise, fehlendes Impressum, eine merkwürdige Internetadresse und die Vorgabe, nur per Vorkasse zahlen zu können." }],
         bullets: []
       }
@@ -1468,11 +1468,11 @@ const CONTENT_VERSIONS = {
       }
     },
     "Bank-Daten schützen": {
-      einfach: { text: [
+      einfach: { warning: "PIN und TAN sind geheime Zahlen von deiner Bank. Gib sie niemals weiter – deine Bank fragt nie per E-Mail oder Telefon danach. Wer danach fragt, ist ein Betrüger.", text: [
         { text: "Deine Bank-Daten sind sehr wichtig, und PIN und TAN bleiben immer geheim." },
         { text: "Deine Bank fragt nie per E-Mail oder Telefon danach – wer das tut, ist ein Betrüger." }
       ] },
-      standard: { text: [{ text: "Deine Bankdaten verdienen besonderen Schutz: PIN und TAN sind streng geheim. Deine Bank wird dich niemals per E-Mail oder Telefon danach fragen. Wer das doch tut, ist ein Betrüger." }] }
+      standard: { warning: "PIN und TAN sind geheim und schützen dein Konto. Gib sie niemals weiter; deine Bank fragt niemals per E-Mail, Anruf oder Nachricht danach. Wer das tut, ist ein Betrüger.", text: [{ text: "Deine Bankdaten verdienen besonderen Schutz: PIN und TAN sind streng geheim. Deine Bank wird dich niemals per E-Mail oder Telefon danach fragen. Wer das doch tut, ist ein Betrüger." }] }
     },
     "Versteckte Kosten in Apps und Spielen": {
       einfach: {

@@ -440,6 +440,7 @@ const topics = [
       },
       {
         "title": "Fremde Links und Nachrichten",
+        "warning": "Klick nicht auf fremde Links. Ein fremder Link kann gefährlich sein. Frag im Zweifel eine Person, der du vertraust.",
         "module": "Nachrichten",
         "icon": "link",
         "text": [
@@ -1000,6 +1001,7 @@ const topics = [
       },
       {
         "title": "Geld und Betrug",
+        "warning": "Fremde fragen manchmal nach Geld. Schick kein Geld an fremde Nummern. Ruf die Person mit der Nummer an, die du kennst.",
         "module": "Nachrichten",
         "icon": "warning",
         "text": [
@@ -1074,6 +1076,7 @@ const topics = [
       },
       {
         "title": "WhatsApp-Code",
+        "warning": "Der Code aus der SMS ist geheim. Gib den Code niemandem. Auch nicht Freunden.",
         "module": "Code",
         "icon": "lock",
         "text": [
@@ -1739,6 +1742,7 @@ const topics = [
       },
       {
         "title": "Freundschafts-Anfragen",
+        "warning": "Nimm nur Anfragen von Menschen an, die du kennst. Fremde Profile können falsch sein. Im Zweifel sagst du Nein.",
         "module": "Kontakte",
         "icon": "help",
         "text": [
@@ -1801,6 +1805,7 @@ const topics = [
       },
       {
         "title": "Beleidigungen",
+        "warning": "Beleidigungen sind nicht in Ordnung. Du bist nicht schuld. Du kannst die Person melden und blockieren.",
         "module": "Probleme",
         "icon": "warning",
         "text": [
@@ -2400,6 +2405,7 @@ const topics = [
       },
       {
         "title": "Private Nachrichten",
+        "warning": "Eine fremde Person schreibt dir. Sie fragt nach Fotos oder Daten. Das ist ein Warnzeichen. Antworte nicht und hol dir Hilfe.",
         "module": "Nachrichten",
         "icon": "message",
         "text": [
@@ -2431,6 +2437,7 @@ const topics = [
       },
       {
         "title": "Verletzende Kommentare",
+        "warning": "Manche Kommentare verletzen. Das ist nicht deine Schuld. Du kannst den Kommentar melden und die Person blockieren.",
         "module": "Kommentare",
         "icon": "warning",
         "text": [
@@ -2998,6 +3005,7 @@ const topics = [
       },
       {
         "title": "Gefährliche Mutproben",
+        "warning": "Manche Videos zeigen gefährliche Mutproben. Mach das nicht nach. Deine Gesundheit ist wichtiger.",
         "module": "Gefahr",
         "icon": "warning",
         "text": [
@@ -3029,6 +3037,7 @@ const topics = [
       },
       {
         "title": "Videos, die Angst machen",
+        "warning": "Manche Videos machen Angst. Du darfst das Video stoppen. Sprich mit einer Person, der du vertraust.",
         "module": "Gefühle",
         "icon": "help",
         "text": [
@@ -3526,6 +3535,7 @@ const topics = [
             "pictogram": "pikto-photo"
           }
         ],
+        "warning": "Jemand kann dein Bild speichern. Auch wenn es nur kurz zu sehen ist. Sende nur Bilder, die andere sehen dürfen.",
         "practice": {
           "question": "Du schickst ein Bild über Snapchat. Was ist wichtig?",
           "answers": [
@@ -3578,6 +3588,7 @@ const topics = [
             "pictogram": "pikto-no"
           }
         ],
+        "warning": "Niemand darf dich zu privaten Bildern drängen. Du darfst immer Nein sagen. Hol dir Hilfe, wenn dich jemand drängt.",
         "practice": {
           "question": "Jemand drängt dich, ein sehr privates Bild zu schicken. Was ist besser?",
           "answers": [
@@ -4144,6 +4155,7 @@ const topics = [
       },
       {
         "title": "Gefährliche Trends erkennen",
+        "warning": "Manche Trends sind gefährlich. Mach nicht mit, wenn ein Trend weh tun kann. Deine Gesundheit ist wichtiger.",
         "module": "Trends",
         "icon": "warning",
         "text": [
@@ -4165,6 +4177,7 @@ const topics = [
       },
       {
         "title": "Private Nachrichten",
+        "warning": "Fremde können dir schreiben. Sie fragen nach Adresse, Fotos oder Daten. Gib solche Daten nicht weiter.",
         "module": "Nachrichten",
         "icon": "message",
         "text": [
@@ -4740,6 +4753,7 @@ const topics = [
       },
       {
         "title": "Nicht sofort löschen",
+        "warning": "Lösche eine gemeine Nachricht nicht sofort. Mach erst ein Bild vom Bildschirm. So kannst du sie später zeigen.",
         "module": "Beweise",
         "icon": "check",
         "text": [
@@ -4802,6 +4816,7 @@ const topics = [
       },
       {
         "title": "Druck erkennen",
+        "warning": "Jemand macht Druck. Zum Beispiel: Mach das sofort. Oder: Sag es niemandem. Das ist ein Warnzeichen. Hol dir Hilfe.",
         "module": "Druck",
         "icon": "warning",
         "text": [
@@ -6237,6 +6252,7 @@ const topics = [
       },
       {
         "title": "Starke Gefühle sind ein Warnzeichen",
+        "warning": "Fake News machen oft starke Gefühle. Zum Beispiel Wut oder Angst. Bei starken Gefühlen prüfst du erst, bevor du glaubst.",
         "module": "Prüfen",
         "icon": "warning",
         "text": [
@@ -7460,6 +7476,7 @@ const topics = [
       },
       {
         "title": "Fake-Shops erkennen",
+        "warning": "Ein Fake-Shop ist ein falscher Shop. Du bezahlst, aber die Ware kommt nie. Prüfe einen Shop, bevor du bezahlst.",
         "module": "Einkaufen",
         "icon": "warning",
         "text": [
@@ -7558,6 +7575,7 @@ const topics = [
       },
       {
         "title": "Bank-Daten schützen",
+        "warning": "PIN und TAN sind geheim. Gib PIN und TAN niemandem. Deine Bank fragt nie danach.",
         "module": "Bezahlen",
         "icon": "lock",
         "text": [
