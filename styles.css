@@ -4108,6 +4108,26 @@ body.simple-mode .practice-box {
   height: auto;
 }
 
+/* ---------- Sanftes Einblenden der Illustrationen ----------
+   Dezent und einmalig beim Erscheinen (kein Dauer-Loop), damit die
+   Figuren „lebendig" wirken, ohne abzulenken (§3 Kohärenz, §9 COGA).
+   Bei „weniger Bewegung" automatisch aus – der globale
+   prefers-reduced-motion-Block (oben) schaltet alle Animationen ab.
+   Die Bilder sind rein dekorativ (aria-hidden). */
+@keyframes illu-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.topic-illustration,
+.intro-figures img {
+  /* Bewusst langsam und mit sanftem Beginn (ease-in-out) + kleiner
+     Verzoegerung: das Bild kuendigt sich an und baut sich ruhig auf,
+     damit genug Zeit bleibt, sich darauf einzustellen (Vorhersehbarkeit,
+     emotionale Sicherheit, §3). */
+  animation: illu-rise 2s ease-in-out 0.25s both;
+}
+
 .intro-figures-text {
   font-size: 1.2rem;
   color: var(--ink);
