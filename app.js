@@ -1363,10 +1363,20 @@ function renderLegalFooter() {
 function chooseLanguage(level) {
   setLanguageLevel(level);
   /* Im Erststart geht es nach der Sprache weiter zum Vorwissen.
-     Beim späteren Ändern zurück zur Seite, von der die Person kam. */
+     Beim späteren Ändern zurück dorthin, wo die Person herkam:
+     Einstellungen, das gerade offene Thema, sonst die Themenübersicht. */
   if (onboarding) return renderVorwissen();
   if (activeTab === "einstellungen") return renderSettingsPage();
+  if (currentTopicId && getTopicById(currentTopicId)) return renderTopicChoice(currentTopicId);
   renderMenu();
+}
+
+/* Rückweg von der Sprach-Wahl OHNE etwas ändern zu müssen (kein Wahl-Zwang) */
+function languageChoiceBack() {
+  if (activeTab === "einstellungen") return renderSettingsPage();
+  if (currentTopicId && getTopicById(currentTopicId)) return renderTopicChoice(currentTopicId);
+  if (languageChosen) return renderMenu();
+  renderStart();
 }
 
 /* Erststart-Schritt: Wie gut kennt sich die Person schon aus? (Vorwissen)
@@ -1844,10 +1854,12 @@ function renderLanguageResult(level) {
 
 function renderLanguageChoice(recommended) {
   stopReading();
-  currentTopicId = null;
+  /* currentTopicId bleibt erhalten: wer aus einem Thema kommt,
+     soll nach der Wahl (oder per Zurück) wieder dort landen. */
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Lesen wählen", "Start", "Wie möchtest du lesen?", 0);
+  setOrientation("Du bist auf der Seite: Lesen wählen.");
   showNav(false, false);
 
   const card = (level, icon) => `
@@ -1875,6 +1887,7 @@ function renderLanguageChoice(recommended) {
       <p class="language-more-link">
         <a href="sprachstufen.html">Was ist der Unterschied? Hier wird es erklärt.</a>
       </p>
+      <button type="button" class="plain-back-button" onclick="languageChoiceBack()">← Zurück, nichts ändern</button>
     </section>
   `;
   focusContent();
@@ -2766,6 +2779,7 @@ function renderSelfAssessment() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "", "", "Start", 0);
+  setOrientation(`Du startest das Thema: ${topic.title}. Zuerst eine Frage an dich.`);
 
   const optionButtons = sa.options.map((opt, i) =>
     `<button class="sa-option-btn" data-index="${i}" type="button">${escapeHtml(opt)}</button>`
@@ -3019,6 +3033,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
+  setOrientation(`Du übst: ${topic.title}.`);
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
@@ -3069,6 +3084,7 @@ function renderPracticePage() {
     const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
     const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
     setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
+    setOrientation(`Du übst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
     content.innerHTML = `
       ${buildUtilityBar()}${buildReadingToolbar()}
       <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
@@ -3142,6 +3158,7 @@ function renderCompletionPage(topicId) {
   /* ---- Einfach-Modus: eigene, wärmere Abschlussseite ---- */
   if (currentMode === "short") {
     setHeader(topic.title, "Kurz lernen", "Abschluss", "Du bist fertig", 100);
+  setOrientation(`Geschafft! Du bist fertig mit dem Thema: ${topic.title}.`);
     content.innerHTML = `
       ${buildReadingToolbar()}
       <section class="completion-page einfach-completion" data-readable="true">
@@ -3196,6 +3213,7 @@ function renderCompletionPage(topicId) {
 
   /* ---- Normaler Modus ---- */
   setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
+  setOrientation(`Geschafft! Du bist fertig mit dem Thema: ${topic.title}.`);
 
   const rules = Array.isArray(topic.memoryRules) ? topic.memoryRules.slice(0, 5) : [];
   const rulesHtml = rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
@@ -3337,6 +3355,7 @@ function renderEinfachQuizFeedback(optionIndex, isCorrect) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "Einfach-Quiz", "Antwort", isCorrect ? "Richtig!" : "Nochmal", 100);
+  setOrientation(`Du machst das Quiz: ${topic.title}.`);
 
   content.innerHTML = `
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
@@ -3368,6 +3387,7 @@ function renderEinfachQuizResult() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "Einfach-Quiz", "Ergebnis", "Quiz beendet", 100);
+  setOrientation(`Du bist fertig mit dem Quiz: ${topic.title}.`);
   showNav(false, false);
 
   const allCorrect = quizScore === total;
@@ -3468,6 +3488,7 @@ function renderQuizFeedbackPage(index) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
+  setOrientation(`Du machst das Quiz: ${topic.title}.`);
 
   content.innerHTML = `
     ${buildUtilityBar()}${buildReadingToolbar()}
@@ -3517,6 +3538,7 @@ function renderQuizResult() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic ? topic.title : "Quiz", "Quiz", "Ergebnis", "Fertig", 100);
+  setOrientation(topic ? `Du bist fertig mit dem Quiz: ${topic.title}.` : "Du bist fertig mit dem Quiz.");
   showNav(false, false);
 
   content.innerHTML = `
@@ -3708,6 +3730,7 @@ function renderBigQuizResult() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(bigQuizTitle, "Ergebnis", "Ergebnis", "Fertig", 100);
+  setOrientation(`Du bist fertig mit: ${bigQuizTitle}.`);
   showNav(false, false);
 
   const praise = percent >= 80
@@ -3749,6 +3772,7 @@ function startTrainingInbox() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Trainings-Postfach", "", "Üben", "", 0);
+  setOrientation("Du bist im Trainings-Postfach. Hier kannst du gefahrlos üben.");
   rememberRoute("training");
   showNav(false, false);
 
@@ -3797,6 +3821,7 @@ function renderTrainingMessage() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Trainings-Postfach", `Nachricht ${trainingIndex + 1} von ${total}`, "Nachricht", "Üben", progress);
+  setOrientation(`Du übst im Trainings-Postfach. Nachricht ${trainingIndex + 1} von ${total}.`);
   showNav(false, false);
 
   content.innerHTML = `
@@ -3866,6 +3891,7 @@ function renderTrainingResult() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Trainings-Postfach", "Ergebnis", "Ergebnis", "Fertig", 100);
+  setOrientation("Du bist fertig mit dem Üben im Trainings-Postfach.");
   showNav(false, false);
 
   const praise = trainingScore === total
@@ -3911,6 +3937,7 @@ function renderCertificate(topicId, score, total) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "Urkunde", "Urkunde", "Geschafft", 100);
+  setOrientation(`Das ist deine Urkunde für das Thema: ${topic.title}.`);
   showNav(false, false);
 
   content.innerHTML = `
@@ -3969,6 +3996,7 @@ function renderMemoryCard(topicId) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Merk-Karte", topic.title, "Merk-Karte", "Merken", 100);
+  setOrientation(`Das ist die Merk-Karte für das Thema: ${topic.title}.`);
   showNav(false, false);
 
   const rules = Array.isArray(topic.memoryRules)

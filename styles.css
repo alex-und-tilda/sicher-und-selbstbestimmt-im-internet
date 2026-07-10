@@ -106,7 +106,8 @@
   /* Hauptmenü (Tab-Leiste): aktive Unterlegung = Tilbeck-Hellblau #d8eaf2.
      Text darauf: --accent-dark #003a66 (Kontrast > 9:1, AA ✓). */
   --tab-active-bg: #d8eaf2;
-  --tabbar-h: 78px;
+  /* In rem, damit das Menü mitwächst, wenn die Schrift auf A+ / A++ steht */
+  --tabbar-h: 4.7rem;
 }
 
 /* ---------- Grundlagen ---------- */
@@ -3717,8 +3718,12 @@ body.simple-mode .practice-box {
   }
 
   .tab-item {
-    font-size: 0.72rem;
+    /* Nicht kleiner: Zielgruppe braucht gut lesbare Beschriftung.
+       Lange Wörter (Einstellungen) dürfen sich trennen. */
+    font-size: 0.78rem;
     padding: 4px 2px;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 
   .tab-item .tab-icon svg {
