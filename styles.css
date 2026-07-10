@@ -103,6 +103,10 @@
   --topic-ring: rgba(0, 82, 143, 0.25);
   --topic-hover-bg: rgba(0, 82, 143, 0.08);
   --topic-icon-bg: var(--accent-soft);
+  /* Hauptmenü (Tab-Leiste): aktive Unterlegung = Tilbeck-Hellblau #d8eaf2.
+     Text darauf: --accent-dark #003a66 (Kontrast > 9:1, AA ✓). */
+  --tab-active-bg: #d8eaf2;
+  --tabbar-h: 78px;
 }
 
 /* ---------- Grundlagen ---------- */
@@ -206,7 +210,8 @@ button {
 .app {
   max-width: 1060px;
   margin: 0 auto;
-  padding: 16px 16px 48px;
+  /* Unten Platz für das feste Hauptmenü lassen */
+  padding: 16px 16px calc(48px + var(--tabbar-h));
 }
 
 .app-header {
@@ -3002,7 +3007,8 @@ p.feedback-wrong {
 
 .nav {
   position: sticky;
-  bottom: 12px;
+  /* Bleibt über dem festen Hauptmenü sichtbar */
+  bottom: calc(var(--tabbar-h) + 10px);
   display: flex;
   justify-content: space-between;
   gap: 14px;
@@ -3050,6 +3056,155 @@ p.feedback-wrong {
 .nav-button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+/* ============================================================
+   Hauptmenü (feste Tab-Leiste unten)
+   - genau 5 Punkte, immer sichtbar, immer am gleichen Ort (COGA)
+   - aktiver Punkt: Unterlegung + Unterstreichung + fette Schrift
+     (nie Farbe allein als Merkmal, WCAG 1.4.1)
+   - Touch-Flächen ≥ 58 px
+   ============================================================ */
+
+.main-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  min-height: var(--tabbar-h);
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface);
+  border-top: 2px solid var(--line);
+  box-shadow: 0 -2px 12px rgba(20, 34, 49, 0.10);
+}
+
+.tab-item {
+  flex: 1 1 0;
+  max-width: 190px;
+  min-height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 4px;
+  border: none;
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab-item .tab-icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.tab-item .tab-label {
+  text-align: center;
+}
+
+.tab-item:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.tab-item.is-active {
+  background: var(--tab-active-bg);
+  color: var(--accent-dark);
+  font-weight: 800;
+}
+
+.tab-item.is-active .tab-label {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Orientierungssatz ---------- */
+
+.orient-line {
+  margin: 12px 4px 0;
+  padding: 10px 16px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--accent);
+  border-radius: var(--radius-s);
+  color: var(--ink);
+  font-size: 1.02rem;
+}
+
+/* ---------- Seite: Einstellungen ---------- */
+
+.settings-page-section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-small);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.settings-page-section > h3 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+}
+
+.settings-page-section .settings-explain {
+  margin: 0 0 12px;
+  color: var(--ink-soft);
+}
+
+.settings-toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.setting-big-button {
+  min-height: 58px;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--accent-dark);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.setting-big-button:hover {
+  background: var(--accent-soft);
+}
+
+.setting-big-button[aria-pressed="true"] {
+  background: var(--tab-active-bg);
+  border-width: 3px;
+}
+
+.setting-big-button[aria-pressed="true"]::before {
+  content: "✓ ";
+}
+
+/* ---------- Seite: Hilfe ---------- */
+
+.help-page-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 14px 0 20px;
 }
 
 /* ---------- Fußbereich ---------- */
@@ -3513,6 +3668,8 @@ body.simple-mode .practice-box {
   .app-header,
   .progress-area,
   .nav,
+  .main-tabbar,
+  .orient-line,
   .app-footer,
   .small-footer-notice,
   .utility-bar,
@@ -3547,7 +3704,7 @@ body.simple-mode .practice-box {
   }
 
   .app {
-    padding: 10px 10px 40px;
+    padding: 10px 10px calc(40px + var(--tabbar-h));
   }
 
   .app-header {
@@ -3559,13 +3716,14 @@ body.simple-mode .practice-box {
     flex-basis: 100%;
   }
 
-  .sound-toggle-button {
-    order: 1;
-    margin-left: auto;
+  .tab-item {
+    font-size: 0.72rem;
+    padding: 4px 2px;
   }
 
-  .motion-toggle-button {
-    order: 2;
+  .tab-item .tab-icon svg {
+    width: 24px;
+    height: 24px;
   }
 
   .card {
@@ -3592,7 +3750,7 @@ body.simple-mode .practice-box {
   }
 
   .nav {
-    bottom: 8px;
+    bottom: calc(var(--tabbar-h) + 6px);
   }
 }
 
@@ -3901,6 +4059,9 @@ body.simple-mode .practice-box {
 
     /* Fokus-Farbe */
     --focus:        #fb923c;
+
+    /* Hauptmenü: aktive Unterlegung im Dark Mode (Text --accent-dark hell, AA ✓) */
+    --tab-active-bg: #152840;
 
     /* Schatten stärker auf dunklem Grund */
     --shadow:       0 2px 8px rgba(0,0,0,0.5), 0 14px 32px rgba(0,0,0,0.55);

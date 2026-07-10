@@ -74,14 +74,14 @@
   <a class="skip-link" href="#content">Zum Inhalt springen</a>
   <div class="app">
     <header class="app-header">
-      <button class="home-button" id="homeButton" aria-label="Zur Startseite mit allen Themen"><span class="home-button-icon" aria-hidden="true">⌂</span><span class="home-button-label">Start</span></button>
-      <button class="sound-toggle-button sound-toggle sound-off" id="soundToggleButton" type="button" aria-pressed="false" aria-label="Töne einschalten">Töne aus</button>
-      <button class="motion-toggle-button motion-toggle motion-on" id="motionToggleButton" type="button" aria-pressed="true" aria-label="Bewegungen ausschalten">Bewegung an</button>
       <div class="header-text">
         <h1 id="appTitle">Sicher und selbstbestimmt im Internet</h1>
         <p id="moduleLabel">Thema auswählen</p>
       </div>
     </header>
+
+    <!-- Orientierungssatz: sagt auf jeder Seite, wo die Person ist (COGA) -->
+    <p id="orientLine" class="orient-line is-hidden" aria-live="polite"></p>
 
     <section class="progress-area is-hidden" aria-label="Lernfortschritt">
       <div class="progress-meta">
@@ -103,7 +103,7 @@
       </noscript>
     </main>
 
-    <nav class="nav is-hidden" aria-label="Navigation">
+    <nav class="nav is-hidden" aria-label="Schritt-Navigation">
       <button class="nav-button secondary" id="backButton">Zurück</button>
       <button class="nav-button primary" id="nextButton">Weiter</button>
     </nav>
@@ -115,6 +115,31 @@
       </div>
     </footer>
   </div>
+
+  <!-- Hauptmenü: fest, immer sichtbar, genau 5 Punkte.
+       Aktiver Punkt: Unterlegung + Unterstreichung + aria-current (nie Farbe allein). -->
+  <nav class="main-tabbar" aria-label="Hauptmenü">
+    <button type="button" class="tab-item" id="tabStart" data-tab="start">
+      <span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.2 3 10.5V21h6.5v-5.5h5V21H21V10.5L12 3.2z"/></svg></span>
+      <span class="tab-label">Start</span>
+    </button>
+    <button type="button" class="tab-item" id="tabThemen" data-tab="themen">
+      <span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z"/></svg></span>
+      <span class="tab-label">Themen</span>
+    </button>
+    <button type="button" class="tab-item" id="tabLernweg" data-tab="lernweg">
+      <span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 19V5m0 0h10l-2.5 3L15 11H5"/><circle cx="18" cy="18" r="2.6" fill="currentColor"/></svg></span>
+      <span class="tab-label">Mein Lernweg</span>
+    </button>
+    <button type="button" class="tab-item" id="tabHilfe" data-tab="hilfe">
+      <span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="2.2"/><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M9.6 9.4a2.6 2.6 0 1 1 3.6 2.4c-.9.4-1.2 1-1.2 1.9v.3"/><circle cx="12" cy="17.2" r="1.3" fill="currentColor"/></svg></span>
+      <span class="tab-label">Hilfe</span>
+    </button>
+    <button type="button" class="tab-item" id="tabEinstellungen" data-tab="einstellungen">
+      <span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.31.06-.62.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.3 7.3 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.24-1.12.56-1.62.94l-2.39-.96a.5.5 0 0 0-.6.22L2.74 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.62-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.38 1.04.7 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.24 1.12-.56 1.62-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg></span>
+      <span class="tab-label">Einstellungen</span>
+    </button>
+  </nav>
 
   <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 

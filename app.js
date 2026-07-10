@@ -100,9 +100,8 @@ const LEARN_MODE_SEEN_KEY = "lern-weg-gesehen";
 /* Beim ersten Besuch wird die Lernweg-Frage groß gezeigt, danach nur noch
    als kleine umstellbare Zeile. Dieser Schalter öffnet sie wieder. */
 let learnModeChooserOpen = false;
-/* Einstellungen auf der Startseite ein-/ausklappen (schlanker Einstieg). */
-let settingsOpen = false;
-function toggleSettings() { settingsOpen = !settingsOpen; renderMenu(); }
+/* Einstellungen liegen jetzt als eigene Seite im Hauptmenü. */
+function toggleSettings() { renderSettingsPage(); }
 /* Wurde in dieser Sitzung mindestens ein Thema fertig gemacht?
    (Steuert, wann die freiwillige Lernstand-Frage erscheint.) */
 let finishedTopicThisSession = false;
@@ -144,7 +143,9 @@ function chooseLearnMode(mode) {
   } else {
     announce("Auswahl entfernt. Du kannst auch einfach ein Thema wählen.");
   }
-  renderMenu();
+  /* Auf der Seite bleiben, auf der die Person gerade ist (Vorhersehbarkeit) */
+  if (activeTab === "einstellungen") renderSettingsPage();
+  else renderMenu();
 }
 
 function isCompanionMode() {
@@ -674,10 +675,10 @@ const progressTrack = document.getElementById("progressTrack");
 const progressFill = document.getElementById("progressFill");
 const backButton = document.getElementById("backButton");
 const nextButton = document.getElementById("nextButton");
-const homeButton = document.getElementById("homeButton");
 const soundToggleButton = document.getElementById("soundToggleButton");
 const motionToggleButton = document.getElementById("motionToggleButton");
 const liveRegion = document.getElementById("liveRegion");
+const orientLine = document.getElementById("orientLine");
 
 /* ============================================================
    Hilfsfunktionen
@@ -835,6 +836,8 @@ function setBottomNavVisible(isVisible) {
 }
 
 function setHeader(title, module, step, level, percent) {
+  /* Orientierungssatz zurücksetzen – Seiten setzen ihn danach passend neu */
+  setOrientation("");
   appTitle.textContent = title || "Sicher und selbstbestimmt im Internet";
   moduleLabel.textContent = module || "Thema auswählen";
   stepLabel.textContent = step || "Themenübersicht";
@@ -849,6 +852,58 @@ function showNav(showBack, showNext, nextText = "Weiter") {
   backButton.disabled = !showBack;
   nextButton.disabled = !showNext;
   nextButton.textContent = nextText;
+}
+
+/* ============================================================
+   Hauptmenü (Tab-Leiste), Orientierungssatz, Routen-Gedächtnis
+   ============================================================ */
+
+/* Merkt sich den aktiven Hauptmenü-Punkt. Lektionen und Quiz erben den
+   Punkt der Seite, von der sie gestartet wurden (Kontext bleibt sichtbar). */
+let activeTab = "start";
+
+function setActiveTab(name) {
+  activeTab = name;
+  document.querySelectorAll(".main-tabbar .tab-item").forEach((item) => {
+    const isActive = item.dataset.tab === name;
+    item.classList.toggle("is-active", isActive);
+    if (isActive) item.setAttribute("aria-current", "page");
+    else item.removeAttribute("aria-current");
+  });
+}
+
+/* Ein Satz sagt immer, wo die Person gerade ist (COGA: Orientierung).
+   setHeader() leert den Satz; Seiten setzen ihn danach neu. */
+function setOrientation(text) {
+  if (!orientLine) return;
+  orientLine.textContent = text || "";
+  orientLine.classList.toggle("is-hidden", !text);
+}
+
+/* Schreibt die aktuelle Seite in die Adresszeile, damit der
+   Zurück-Knopf des Browsers vorhersehbar funktioniert. */
+let handlingRoute = false;
+
+function rememberRoute(route) {
+  if (handlingRoute) return; /* Aufruf kam aus handleHash: Hash stimmt schon */
+  const target = "#" + route;
+  if (window.location.hash === target) return;
+  try {
+    /* Beim allerersten Aufruf (noch kein Hash) keinen zusätzlichen
+       Verlaufs-Eintrag anlegen, sonst führt „Zurück" ins Leere. */
+    if (!window.location.hash) history.replaceState(null, "", target);
+    else history.pushState(null, "", target);
+  } catch (e) { /* nichts tun */ }
+}
+
+/* Klick auf einen Hauptmenü-Punkt */
+function navigateTab(name) {
+  stopReading();
+  if (name === "start") return renderIntro();
+  if (name === "themen") return renderMenu();
+  if (name === "lernweg") return renderMyPath();
+  if (name === "hilfe") return renderHelpPage();
+  if (name === "einstellungen") return renderSettingsPage();
 }
 
 function announce(text) {
@@ -870,15 +925,17 @@ function focusContent() {
    ============================================================ */
 
 function updateSoundButton() {
-  if (!soundToggleButton) return;
-  soundToggleButton.classList.toggle("sound-on", soundEnabled);
-  soundToggleButton.classList.toggle("sound-off", !soundEnabled);
-  soundToggleButton.textContent = soundEnabled ? "Töne an" : "Töne aus";
-  soundToggleButton.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
-  soundToggleButton.setAttribute(
-    "aria-label",
-    soundEnabled ? "Töne sind an. Klicken zum Ausschalten." : "Töne sind aus. Klicken zum Einschalten."
-  );
+  /* Aktualisiert alle Ton-Schalter (z. B. auf der Einstellungen-Seite) */
+  document.querySelectorAll(".sound-toggle").forEach((button) => {
+    button.classList.toggle("sound-on", soundEnabled);
+    button.classList.toggle("sound-off", !soundEnabled);
+    button.textContent = soundEnabled ? "Töne an" : "Töne aus";
+    button.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+    button.setAttribute(
+      "aria-label",
+      soundEnabled ? "Töne sind an. Klicken zum Ausschalten." : "Töne sind aus. Klicken zum Einschalten."
+    );
+  });
 }
 
 function toggleSound() {
@@ -901,15 +958,17 @@ function applyMotion() {
 }
 
 function updateMotionButton() {
-  if (!motionToggleButton) return;
-  motionToggleButton.classList.toggle("motion-on", motionEnabled);
-  motionToggleButton.classList.toggle("motion-off", !motionEnabled);
-  motionToggleButton.textContent = motionEnabled ? "Bewegung an" : "Bewegung aus";
-  motionToggleButton.setAttribute("aria-pressed", motionEnabled ? "true" : "false");
-  motionToggleButton.setAttribute(
-    "aria-label",
-    motionEnabled ? "Bewegungen sind an. Klicken zum Ausschalten." : "Bewegungen sind aus. Klicken zum Einschalten."
-  );
+  /* Aktualisiert alle Bewegungs-Schalter (z. B. auf der Einstellungen-Seite) */
+  document.querySelectorAll(".motion-toggle").forEach((button) => {
+    button.classList.toggle("motion-on", motionEnabled);
+    button.classList.toggle("motion-off", !motionEnabled);
+    button.textContent = motionEnabled ? "Bewegung an" : "Bewegung aus";
+    button.setAttribute("aria-pressed", motionEnabled ? "true" : "false");
+    button.setAttribute(
+      "aria-label",
+      motionEnabled ? "Bewegungen sind an. Klicken zum Ausschalten." : "Bewegungen sind aus. Klicken zum Einschalten."
+    );
+  });
 }
 
 function loadMotion() {
@@ -1276,9 +1335,10 @@ function renderLegalFooter() {
 
 function chooseLanguage(level) {
   setLanguageLevel(level);
-  /* Im Erststart geht es nach der Sprache weiter zum Vorwissen,
-     sonst (späteres Ändern) direkt zur Startseite. */
+  /* Im Erststart geht es nach der Sprache weiter zum Vorwissen.
+     Beim späteren Ändern zurück zur Seite, von der die Person kam. */
   if (onboarding) return renderVorwissen();
+  if (activeTab === "einstellungen") return renderSettingsPage();
   renderMenu();
 }
 
@@ -1812,7 +1872,24 @@ function renderIntro() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Willkommen", "Willkommen", "Los geht’s", 0);
+  setActiveTab("start");
+  setOrientation("Du bist auf der Seite: Start.");
+  rememberRoute("start");
   showNav(false, false);
+
+  /* Wiederkehrende sehen zuerst den einen nächsten Schritt (CLT: eine
+     Hauptaufgabe), Neue sehen die volle Begrüßung. */
+  const nextTopic = languageChosen ? getNextTopicSuggestion() : null;
+  const resumeCard = nextTopic ? `
+      <div class="intro-offer" role="region" aria-label="Weiterlernen">
+        <h3>Hier kannst du weiterlernen:</h3>
+        <button type="button" class="topic-card" style="${getTopicColorStyle(nextTopic.id)}" onclick="renderTopicChoice('${escapeHtml(nextTopic.id)}')">
+          <span class="topic-icon" aria-hidden="true">${getIconHtml(nextTopic.icon || "start")}</span>
+          <span class="topic-title">${escapeHtml(nextTopic.title)}</span>
+          <span class="topic-desc">${escapeHtml(nextTopic.desc || "")}</span>
+        </button>
+      </div>` : "";
+
   content.innerHTML = `
     ${buildReadingToolbar()}
     <section class="intro-page" data-readable="true">
@@ -1848,6 +1925,8 @@ function renderIntro() {
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span>Du lernst allein. Oder mit einer Begleit-Person.</span></li>
         </ul>
       </div>
+
+      ${resumeCard}
 
       <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
       <p class="intro-quickstart-hint">Keine Lust auf Fragen?</p>
@@ -1942,6 +2021,9 @@ function renderMenu() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Thema auswählen", "Themenübersicht", "Wähle ein Thema", 0);
+  setActiveTab("themen");
+  setOrientation("Du bist auf der Seite: Themen. Wähle ein Thema aus.");
+  rememberRoute("themen");
   showNav(false, false);
 
   const nextSuggestion = getNextTopicSuggestion();
@@ -1962,40 +2044,6 @@ function renderMenu() {
       </span>
     </button>
   `;}).join("");
-
-  const doneCount = countDoneTopics();
-  /* Lernstand-Frage entlastet den ersten Bildschirm:
-     - schon aktiv: kurze Info + Löschen
-     - noch nicht aktiv: erst anbieten, wenn in dieser Sitzung ein Thema
-       fertig wurde (vorher gibt es noch nichts zu merken). */
-  let progressConsent = "";
-  if (isProgressEnabled()) {
-    progressConsent = `
-      <div class="progress-consent">
-        <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.</p>
-        <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
-        <button type="button" class="utility-button" onclick="toggleProgressSaving()">Lernstand löschen und nicht mehr merken</button>
-      </div>`;
-  } else if (finishedTopicThisSession) {
-    progressConsent = `
-      <div class="progress-consent">
-        <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
-        <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
-        <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
-      </div>`;
-  }
-
-  const heroProgress = isProgressEnabled() && doneCount > 0
-    ? `<div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
-         <div class="hero-progress-numbers">
-           <span class="hero-progress-count" aria-live="polite">${doneCount}</span>
-           <span class="hero-progress-of">von ${topics.length} Themen geschafft</span>
-         </div>
-         <div class="hero-progress-track" role="progressbar" aria-valuenow="${doneCount}" aria-valuemin="0" aria-valuemax="${topics.length}" aria-label="${doneCount} von ${topics.length} Themen">
-           <div class="hero-progress-fill" style="width:${Math.round((doneCount/topics.length)*100)}%"></div>
-         </div>
-       </div>`
-    : "";
 
   /* Lernweg-Auswahl: selbstbestimmt, freiwillig, jederzeit änderbar. */
   const learnModeCards = Object.keys(LEARN_MODES).map(key => {
@@ -2021,44 +2069,8 @@ function renderMenu() {
     companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> App-Hilfe ist an. Die Schrift ist größer und jede Seite wird dir vorgelesen.</p>`;
   }
 
-  /* Gemeinsame Einstell-Zeile direkt unter der Begrüßung:
-     Sprache und Lernweg an einem vorhersehbaren Ort (COGA: gleiche Dinge,
-     gleicher Platz). Klare Handlungs-Beschriftung „Sprache ändern: …". */
-  const activeProfile = getActiveProfile();
-  const profileChip = activeProfile ? `
-    <button type="button" class="settings-chip settings-chip--profile" onclick="renderProfilePicker()" aria-label="Person wechseln, du bist gerade ${escapeHtml(signLabel(activeProfile))}">
-      ${signHtml(activeProfile, "profile-sign--chip")} Du: ${escapeHtml(signLabel(activeProfile))} ▾
-    </button>` : "";
-
-  const langChip = `
-    <button type="button" class="settings-chip" onclick="renderLanguageChoice()" aria-label="Lesen ändern, du liest gerade ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
-      <span aria-hidden="true">🗣️</span> Du liest: ${escapeHtml(LANGUAGE_LABEL[languageLevel])} ▾
-    </button>`;
-
-  const learnLabel = learnMode ? LEARN_MODES[learnMode].title : "Lernweg wählen";
-  const learnChip = `
-    <button type="button" class="settings-chip" onclick="openLearnModeChooser()" aria-label="Lernweg ändern, aktuell ${escapeHtml(learnLabel)}">
-      <span aria-hidden="true">🧭</span> Lernweg: ${escapeHtml(learnLabel)} ▾
-    </button>`;
-
-  /* Einstellungen schlank: ein ruhiger Knopf, der bei Bedarf die drei
-     Einstell-Chips (Profil, Sprache, Lernweg) zeigt. */
-  const settingsArea = `
-    <div class="settings-area">
-      <button type="button" class="settings-toggle" onclick="toggleSettings()" aria-expanded="${settingsOpen ? "true" : "false"}" aria-label="Einstellungen">
-        <span class="settings-gear" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.31.06-.62.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.3 7.3 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.24-1.12.56-1.62.94l-2.39-.96a.5.5 0 0 0-.6.22L2.74 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.62-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.38 1.04.7 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.24 1.12-.56 1.62-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg></span>
-        <span class="settings-toggle-label">Einstellungen</span>
-        <span class="settings-caret" aria-hidden="true">${settingsOpen ? "▴" : "▾"}</span>
-      </button>
-      ${settingsOpen ? `
-        <div class="settings-panel" role="group" aria-label="Einstellungen">
-          <p class="settings-panel-title">Einstellungen</p>
-          <div class="settings-row settings-row--open">${profileChip}${langChip}${learnChip}</div>
-        </div>` : ""}
-    </div>`;
-
   /* Beim ersten Besuch die Lernweg-Frage einmal groß zeigen; danach steckt
-     der Lernweg in den Einstellungen. */
+     der Lernweg im Hauptmenü unter „Einstellungen". */
   const showFullChooser = learnModeChooserOpen || !learnModeWasSeen();
   let learnModeSection;
   if (showFullChooser) {
@@ -2075,7 +2087,65 @@ function renderMenu() {
     learnModeSection = companionNote;
   }
 
-  /* Wiederholungs-Erinnerung */
+  /* Themen-Seite bewusst schlank: eine Hauptaufgabe – Thema wählen (CLT).
+     Üben, Wiederholen und Lernstand liegen unter „Mein Lernweg". */
+  content.innerHTML = `
+    <section class="start-page">
+      ${buildReadingToolbar()}
+      ${learnModeSection}
+      <h3 class="topic-grid-title">Wähle ein Thema</h3>
+      <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
+      <div class="topic-grid">${cards}</div>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
+   Seite „Mein Lernweg": Lernstand, Wiederholen, Üben
+   ============================================================ */
+
+function renderMyPath() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Mein Lernweg", "Mein Lernweg", "Dein Lernstand", 0);
+  setActiveTab("lernweg");
+  setOrientation("Du bist auf der Seite: Mein Lernweg.");
+  rememberRoute("lernweg");
+  showNav(false, false);
+
+  const doneCount = countDoneTopics();
+
+  /* Lernstand-Anzeige (Bandura: sichtbare Erfolgserlebnisse) */
+  const heroProgress = isProgressEnabled() && doneCount > 0
+    ? `<div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
+         <div class="hero-progress-numbers">
+           <span class="hero-progress-count" aria-live="polite">${doneCount}</span>
+           <span class="hero-progress-of">von ${topics.length} Themen geschafft</span>
+         </div>
+         <div class="hero-progress-track" role="progressbar" aria-valuenow="${doneCount}" aria-valuemin="0" aria-valuemax="${topics.length}" aria-label="${doneCount} von ${topics.length} Themen">
+           <div class="hero-progress-fill" style="width:${Math.round((doneCount/topics.length)*100)}%"></div>
+         </div>
+       </div>`
+    : `<p class="topic-grid-hint">Hier siehst du, was du schon geschafft hast. Und hier kannst du üben.</p>`;
+
+  /* Geschaffte Themen als Liste (Erfolg sichtbar machen) */
+  const doneTopics = topics.filter(t => isTopicDone(t.id));
+  const doneSection = doneTopics.length > 0
+    ? `<h3 class="topic-grid-title">Das hast du geschafft</h3>
+       <div class="review-chips">
+         ${doneTopics.map(t => `
+           <button type="button" class="review-chip" style="${getTopicColorStyle(t.id)}" onclick="renderTopicChoice('${escapeHtml(t.id)}')">
+             <span aria-hidden="true">✓</span>
+             <span>${escapeHtml(t.title)}</span>
+           </button>`).join("")}
+       </div>`
+    : "";
+
+  /* Wiederholungs-Erinnerung (verteiltes Lernen) */
   const reviewTopics = getTopicsDueForReview();
   const reviewSection = reviewTopics.length > 0
     ? `<div class="review-section" role="region" aria-label="Wiederholung fällig">
@@ -2096,15 +2166,33 @@ function renderMenu() {
        </div>`
     : "";
 
+  /* Freiwillige Lernstand-Speicherung (KDG: nur lokal, ohne Namen) */
+  let progressConsent = "";
+  if (isProgressEnabled()) {
+    progressConsent = `
+      <div class="progress-consent">
+        <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.</p>
+        <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
+        <button type="button" class="utility-button" onclick="toggleProgressSaving()">Lernstand löschen und nicht mehr merken</button>
+      </div>`;
+  } else {
+    progressConsent = `
+      <div class="progress-consent">
+        <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
+        <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
+        <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
+      </div>`;
+  }
+
+  const readCardSvg = `<svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+
   content.innerHTML = `
     <section class="start-page">
       ${buildReadingToolbar()}
-      ${settingsArea}
-      ${learnModeSection}
+      <h2 class="topic-grid-title">Mein Lernweg</h2>
+      ${heroProgress}
       ${reviewSection}
-      <h3 class="topic-grid-title">Wähle ein Thema</h3>
-      <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
-      <div class="topic-grid">${cards}</div>
+      ${doneSection}
 
       <section class="practice-section" aria-label="Üben und wiederholen">
         <h3 class="topic-grid-title">Üben und wiederholen</h3>
@@ -2115,7 +2203,7 @@ function renderMenu() {
             <span class="action-text">
               <span class="action-title">Das große Quiz</span>
               <span class="action-desc">Fragen aus allen Themen.</span>
-              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Das große Quiz. Fragen aus allen Themen." aria-label="Das große Quiz vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Das große Quiz. Fragen aus allen Themen." aria-label="Das große Quiz vorlesen">${readCardSvg} Vorlesen</span>
             </span>
           </button>
           <button type="button" class="action-card" onclick="startRepeatQuiz()">
@@ -2123,7 +2211,7 @@ function renderMenu() {
             <span class="action-text">
               <span class="action-title">Wiederholen</span>
               <span class="action-desc">Fragen aus deinen Themen.</span>
-              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Wiederholen. Fragen aus deinen Themen." aria-label="Wiederholen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Wiederholen. Fragen aus deinen Themen." aria-label="Wiederholen vorlesen">${readCardSvg} Vorlesen</span>
             </span>
           </button>
           <button type="button" class="action-card" onclick="startTrainingInbox()">
@@ -2131,7 +2219,7 @@ function renderMenu() {
             <span class="action-text">
               <span class="action-title">Trainings-Postfach</span>
               <span class="action-desc">Trick oder echt? Gefahrlos üben.</span>
-              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Trainings-Postfach. Trick oder echt? Gefahrlos üben." aria-label="Trainings-Postfach vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Trainings-Postfach. Trick oder echt? Gefahrlos üben." aria-label="Trainings-Postfach vorlesen">${readCardSvg} Vorlesen</span>
             </span>
           </button>
           <button type="button" class="action-card" onclick="renderAllMemoryCards()">
@@ -2139,7 +2227,7 @@ function renderMenu() {
             <span class="action-text">
               <span class="action-title">Alle Merk-Karten</span>
               <span class="action-desc">Alle Regeln ansehen.</span>
-              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Alle Merk-Karten. Alle Regeln ansehen." aria-label="Alle Merk-Karten vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Alle Merk-Karten. Alle Regeln ansehen." aria-label="Alle Merk-Karten vorlesen">${readCardSvg} Vorlesen</span>
             </span>
           </button>
         </div>
@@ -2148,6 +2236,155 @@ function renderMenu() {
       ${progressConsent}
     </section>
   `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
+   Seite „Hilfe": jederzeit über das Hauptmenü erreichbar (COGA)
+   ============================================================ */
+
+function renderHelpPage() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Hilfe", "Hilfe", "Du kannst Hilfe holen", 0);
+  setActiveTab("hilfe");
+  setOrientation("Du bist auf der Seite: Hilfe.");
+  rememberRoute("hilfe");
+  showNav(false, false);
+
+  content.innerHTML = `
+    <section class="start-page" data-readable="true">
+      ${buildReadingToolbar()}
+      <h2 class="topic-grid-title">Hilfe</h2>
+      <p class="topic-grid-hint">Du musst das nicht allein schaffen.</p>
+      ${roleFigure("hilfe")}
+
+      <div class="help-page-actions">
+        <button type="button" class="setting-big-button" onclick="showSymbolHelp()">Zeichen erklären</button>
+        <button type="button" class="setting-big-button" onclick="showPauseOverlay()">Pause machen</button>
+      </div>
+
+      <div class="support-help-grid">
+        <div class="support-help-card">
+          <h4>Wenn du die Seite nicht bedienen kannst</h4>
+          <ul>
+            <li>Zeige auf die Stelle.</li>
+            <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
+            <li>Bitte um langsames Erklären.</li>
+          </ul>
+        </div>
+        <div class="support-help-card">
+          <h4>Wenn du etwas nicht verstehst</h4>
+          <ul>
+            <li>Lies den Text noch einmal.</li>
+            <li>Nutze den Knopf: Vorlesen.</li>
+            <li>Bitte eine Person um Erklärung.</li>
+            <li>Sage: Bitte erkläre mir das einfacher.</li>
+          </ul>
+        </div>
+        <div class="support-help-card">
+          <h4>Wen kannst du fragen?</h4>
+          <ul>
+            <li>Eine Person, der du vertraust.</li>
+            <li>Eine Person, die dich unterstützt.</li>
+            <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
+            <li>Jemanden im Wohnbereich oder Dienst.</li>
+          </ul>
+        </div>
+        <div class="support-help-card">
+          <h4>Wenn dir im Internet etwas Schlechtes passiert</h4>
+          <ul>
+            <li>Das ist nicht deine Schuld.</li>
+            <li>Sprich mit einer Person, der du vertraust.</li>
+            <li>Es gibt das Thema: Hilfe bei Problemen. Dort steht mehr.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
+   Seite „Einstellungen": alle Einstellungen an einem Ort
+   ============================================================ */
+
+function renderSettingsPage() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Einstellungen", "Einstellungen", "Stell dir alles passend ein", 0);
+  setActiveTab("einstellungen");
+  setOrientation("Du bist auf der Seite: Einstellungen.");
+  rememberRoute("einstellungen");
+  showNav(false, false);
+
+  const activeProfile = getActiveProfile();
+  const profileSection = activeProfile ? `
+    <section class="settings-page-section" aria-label="Dein Zeichen">
+      <h3>Dein Zeichen</h3>
+      <p class="settings-explain">Du bist gerade: ${escapeHtml(signLabel(activeProfile))}.</p>
+      <div class="settings-toggle-row">
+        <button type="button" class="setting-big-button" onclick="renderProfilePicker()">Person wechseln</button>
+        <button type="button" class="setting-big-button" onclick="renderProfileManage('${escapeHtml(activeProfile.id)}')">Zeichen ändern</button>
+      </div>
+    </section>` : "";
+
+  const learnModeButtons = Object.keys(LEARN_MODES).map(key => {
+    const m = LEARN_MODES[key];
+    const active = learnMode === key;
+    return `<button type="button" class="setting-big-button" aria-pressed="${active ? "true" : "false"}" onclick="chooseLearnMode('${key}')">${escapeHtml(m.title)}</button>`;
+  }).join("");
+
+  content.innerHTML = `
+    <section class="start-page" data-readable="true">
+      ${buildReadingToolbar()}
+      <h2 class="topic-grid-title">Einstellungen</h2>
+      <p class="topic-grid-hint">Hier stellst du alles so ein, wie es für dich gut ist.</p>
+
+      <section class="settings-page-section" aria-label="Schrift">
+        <h3>Schrift</h3>
+        <p class="settings-explain">Du kannst die Schrift größer oder kleiner machen.</p>
+        <div class="settings-toggle-row" role="group" aria-label="Schriftgröße ändern">
+          <button type="button" class="setting-big-button font-btn font-btn-decrease" onclick="changeFontSize(-1)" aria-label="Schrift kleiner" ${fontSizeStep === 0 ? "disabled" : ""}>A− kleiner</button>
+          <button type="button" class="setting-big-button font-btn font-btn-increase" onclick="changeFontSize(1)" aria-label="Schrift größer" ${fontSizeStep === FONT_SIZES.length - 1 ? "disabled" : ""}>A+ größer</button>
+        </div>
+      </section>
+
+      <section class="settings-page-section" aria-label="Töne und Bewegung">
+        <h3>Töne und Bewegung</h3>
+        <p class="settings-explain">Töne und Bewegungen kannst du an- und ausschalten.</p>
+        <div class="settings-toggle-row">
+          <button type="button" class="setting-big-button sound-toggle" onclick="toggleSound()">Töne</button>
+          <button type="button" class="setting-big-button motion-toggle" onclick="toggleMotion()">Bewegung</button>
+        </div>
+      </section>
+
+      <section class="settings-page-section" aria-label="Sprache">
+        <h3>Sprache</h3>
+        <p class="settings-explain">Du liest gerade: <strong>${escapeHtml(LANGUAGE_LABEL[languageLevel])}</strong>.</p>
+        <div class="settings-toggle-row">
+          <button type="button" class="setting-big-button" onclick="renderLanguageChoice('${escapeHtml(languageLevel)}')">Sprache wechseln</button>
+        </div>
+      </section>
+
+      <section class="settings-page-section" aria-label="Lernweg">
+        <h3>Wie möchtest du lernen?</h3>
+        <p class="settings-explain">Such dir etwas aus. Du kannst es jederzeit ändern.</p>
+        <div class="settings-toggle-row">${learnModeButtons}</div>
+      </section>
+
+      ${profileSection}
+    </section>
+  `;
+  updateSoundButton();
+  updateMotionButton();
   focusContent();
   renderLegalFooter();
 }
@@ -2246,6 +2483,9 @@ function renderTopicChoice(topicId) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", topic.title, "Thema auswählen", "Lernweg wählen", 0);
+  setActiveTab("themen");
+  setOrientation(`Du bist beim Thema: ${topic.title}.`);
+  rememberRoute(topic.id);
   showNav(false, false);
 
   content.innerHTML = `
@@ -2563,6 +2803,7 @@ function renderLesson() {
   setProgressVisible(false);
   setBottomNavVisible(!hasPractice);
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
+  setOrientation(`Du lernst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
   /* Vorlese-Knopf je Block: Vorlesen als selbstbestimmtes Angebot an jeder
@@ -2976,6 +3217,7 @@ function renderEinfachQuizQuestion() {
   setProgressVisible(true);
   setBottomNavVisible(false);
   setHeader(topic.title, "Einfach-Quiz", `Frage ${currentQuizIndex + 1} von ${questions.length}`, "Quiz", percent);
+  setOrientation(`Du machst das Quiz: ${topic.title}. Frage ${currentQuizIndex + 1} von ${questions.length}.`);
   showNav(false, false);
 
   content.innerHTML = `
@@ -3100,6 +3342,7 @@ function renderQuizQuestion() {
   setProgressVisible(true);
   setBottomNavVisible(false);
   setHeader(topic.title, "Quiz", `Frage ${currentQuizIndex + 1} von ${questions.length}`, "Quiz", progress);
+  setOrientation(`Du machst das Quiz: ${topic.title}. Frage ${currentQuizIndex + 1} von ${questions.length}.`);
   showNav(false, false);
 
   const answerHtml = answers.map((answer, index) => `
@@ -3255,6 +3498,7 @@ function startBigQuiz() {
   bigQuizIndex  = 0;
   bigQuizScore  = 0;
   currentTopicId = null;
+  rememberRoute("grosses-quiz");
   renderBigQuizQuestion();
 }
 
@@ -3289,6 +3533,7 @@ function startRepeatQuiz() {
   bigQuizIndex  = 0;
   bigQuizScore  = 0;
   currentTopicId = null;
+  rememberRoute("wiederholen");
   renderBigQuizQuestion();
 }
 
@@ -3303,6 +3548,7 @@ function renderBigQuizQuestion() {
   setProgressVisible(true);
   setBottomNavVisible(false);
   setHeader(bigQuizTitle, `Frage ${bigQuizIndex + 1} von ${total}`, "Frage", bigQuizTitle, progress);
+  setOrientation(`Du machst: ${bigQuizTitle}. Frage ${bigQuizIndex + 1} von ${total}.`);
   showNav(false, false);
 
   const answerHtml = q.answers.map((answer, index) => `
@@ -3424,6 +3670,7 @@ function startTrainingInbox() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Trainings-Postfach", "", "Üben", "", 0);
+  rememberRoute("training");
   showNav(false, false);
 
   content.innerHTML = `
@@ -3738,6 +3985,9 @@ function renderAllMemoryCards() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Alle Merk-Karten", "Übersicht", "Alle Themen", "Drucken", 100);
+  setActiveTab("lernweg");
+  setOrientation("Du bist auf der Seite: Alle Merk-Karten.");
+  rememberRoute("merk-alle");
   showNav(false, false);
 
   const allCards = topics.map(topic => {
@@ -3778,27 +4028,39 @@ function renderAllMemoryCards() {
    index.html#datenschutz:quiz
    index.html#datenschutz:merk */
 function handleHash() {
-  const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
-  if (!hash) {
-    /* Beim Öffnen immer die kurze Intro-Startseite. „Los geht's" führt
-       ins Onboarding (erster Besuch) oder zu den Themen. */
-    return renderIntro();
+  handlingRoute = true;
+  try {
+    const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
+    if (!hash) {
+      /* Beim Öffnen immer die kurze Intro-Startseite. „Los geht's" führt
+         ins Onboarding (erster Besuch) oder zu den Themen. */
+      return renderIntro();
+    }
+
+    /* Hauptmenü-Seiten */
+    if (hash === "start") return renderIntro();
+    if (hash === "themen") return renderMenu();
+    if (hash === "lernweg") return renderMyPath();
+    if (hash === "hilfe") return renderHelpPage();
+    if (hash === "einstellungen") return renderSettingsPage();
+
+    /* Sonderrouten */
+    if (hash === "grosses-quiz") return startBigQuiz();
+    if (hash === "wiederholen") return startRepeatQuiz();
+    if (hash === "training") return startTrainingInbox();
+    if (hash === "merk-alle") return renderAllMemoryCards();
+
+    const [topicId, action] = hash.split(":");
+    const topic = getTopicById(topicId);
+    if (!topic) return renderMenu();
+
+    if (action === "kurz" || action === "short") return startTopicMode(topicId, "short");
+    if (action === "quiz") return startQuiz(topicId);
+    if (action === "merk" || action === "memory") return renderMemoryCard(topicId);
+    return renderTopicChoice(topicId);
+  } finally {
+    handlingRoute = false;
   }
-
-  /* Sonderrouten */
-  if (hash === "grosses-quiz") return startBigQuiz();
-  if (hash === "wiederholen") return startRepeatQuiz();
-  if (hash === "training") return startTrainingInbox();
-  if (hash === "merk-alle") return renderAllMemoryCards();
-
-  const [topicId, action] = hash.split(":");
-  const topic = getTopicById(topicId);
-  if (!topic) return renderMenu();
-
-  if (action === "kurz" || action === "short") return startTopicMode(topicId, "short");
-  if (action === "quiz") return startQuiz(topicId);
-  if (action === "merk" || action === "memory") return renderMemoryCard(topicId);
-  return renderTopicChoice(topicId);
 }
 
 /* ============================================================
@@ -3807,7 +4069,21 @@ function handleHash() {
 
 backButton.addEventListener("click", goBack);
 nextButton.addEventListener("click", goNext);
-homeButton.addEventListener("click", renderMenu);
+
+/* Hauptmenü (Tab-Leiste) */
+document.querySelectorAll(".main-tabbar .tab-item").forEach((item) => {
+  item.addEventListener("click", () => navigateTab(item.dataset.tab));
+});
+
+/* Browser-Zurück/-Vor: gleiche Route-Logik wie beim direkten Einstieg.
+   Gebündelt, weil hashchange und popstate zusammen feuern können. */
+let hashHandleQueued = false;
+function scheduleHandleHash() {
+  if (hashHandleQueued) return;
+  hashHandleQueued = true;
+  setTimeout(() => { hashHandleQueued = false; handleHash(); }, 0);
+}
+window.addEventListener("popstate", scheduleHandleHash);
 
 if (soundToggleButton) {
   soundToggleButton.addEventListener("click", toggleSound);
@@ -3928,4 +4204,6 @@ window.addEventListener("online",  hideOfflineBanner);
 if (!navigator.onLine) showOfflineBanner();
 
 document.addEventListener("DOMContentLoaded", handleHash);
-window.addEventListener("hashchange", handleHash);
+/* hashchange und popstate können beim Browser-Zurück gleichzeitig feuern.
+   scheduleHandleHash bündelt beide zu genau einem Neuaufbau. */
+window.addEventListener("hashchange", scheduleHandleHash);
