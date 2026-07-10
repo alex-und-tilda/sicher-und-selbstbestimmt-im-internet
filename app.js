@@ -445,7 +445,13 @@ function setProgressEnabled(enabled) {
   }
 }
 
+/* Sitzungs-Gedächtnis für Erfolge: erkennt „geschafft" auch OHNE
+   gespeicherten Lernstand (Bandura: Erfolg muss sofort sichtbar sein).
+   Nur im Arbeitsspeicher – verschwindet beim Schließen (KDG-konform §14). */
+let sessionDoneTopics = new Set();
+
 function markTopicDone(topicId) {
+  sessionDoneTopics.add(topicId);
   if (!isProgressEnabled()) return;
   const progress = loadProgress() || { enabled: true, done: {} };
   progress.done = progress.done || {};
@@ -456,6 +462,7 @@ function markTopicDone(topicId) {
 }
 
 function isTopicDone(topicId) {
+  if (sessionDoneTopics.has(topicId)) return true;
   const progress = loadProgress();
   if (!progress || !progress.done) return false;
   const val = progress.done[topicId];
@@ -483,9 +490,8 @@ function getTopicsDueForReview() {
 }
 
 function countDoneTopics() {
-  const progress = loadProgress();
-  if (!progress || !progress.done) return 0;
-  return topics.filter(topic => progress.done[topic.id]).length;
+  /* Zählt gespeicherte UND nur in dieser Sitzung geschaffte Themen */
+  return topics.filter(topic => isTopicDone(topic.id)).length;
 }
 
 /* Nächstes Thema vorschlagen: das erste Thema, das noch nicht geschafft ist.
@@ -497,12 +503,28 @@ function getNextTopicSuggestion() {
 function toggleProgressSaving() {
   if (isProgressEnabled()) {
     setProgressEnabled(false);
+    sessionDoneTopics = new Set();
     announce("Der Lernstand wurde gelöscht. Es wird nichts mehr gespeichert.");
   } else {
     setProgressEnabled(true);
+    /* Erfolge aus dieser Sitzung mitnehmen – sonst wäre das gerade
+       geschaffte Thema verloren (Erfolgserlebnis sichern). */
+    sessionDoneTopics.forEach((id) => markTopicDone(id));
     announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
   }
-  renderMenu();
+  /* Auf der Seite bleiben, auf der die Person gerade ist */
+  if (activeTab === "lernweg") renderMyPath();
+  else renderMenu();
+}
+
+/* Lernstand direkt auf der Abschluss-Seite einschalten – ohne die Seite
+   neu zu bauen (kein Kontextverlust, kein Sprung). */
+function enableProgressInline(button) {
+  setProgressEnabled(true);
+  sessionDoneTopics.forEach((id) => markTopicDone(id));
+  announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
+  const box = button.closest(".progress-consent");
+  if (box) box.innerHTML = `<p class="progress-consent-title">✓ Ich merke mir deinen Lernstand. Nur auf diesem Gerät. Ohne Namen.</p>`;
 }
 
 /* ============================================================
@@ -899,6 +921,10 @@ function rememberRoute(route) {
 /* Klick auf einen Hauptmenü-Punkt */
 function navigateTab(name) {
   stopReading();
+  /* Wer während der Einweisung ins Menü wechselt, hat sich für den
+     freien Weg entschieden – die geführte Einweisung endet dann sauber
+     (Selbstbestimmung; verhindert spätere Überraschungs-Sprünge). */
+  onboarding = false;
   if (name === "start") return renderIntro();
   if (name === "themen") return renderMenu();
   if (name === "lernweg") return renderMyPath();
@@ -1280,6 +1306,7 @@ function showSymbolHelp() {
         <li><strong>✓</strong> bedeutet: richtig oder geschafft.</li>
         <li><strong>!</strong> bedeutet: Achtung.</li>
         <li><strong>Stopp</strong> bedeutet: Anhalten.</li>
+        <li><strong>Das Menü unten</strong> bringt dich zu: Start, Themen, Mein Lernweg, Hilfe und Einstellungen.</li>
       </ul>
       <button type="button" class="primary-action" onclick="closeCalmOverlay()">Schließen</button>
     </div>
@@ -1395,6 +1422,7 @@ function switchProfile(id) {
   saveProfiles();
   loadActiveProfileSettings();
   finishedTopicThisSession = false;
+  sessionDoneTopics = new Set();
   if (languageChosen) renderMenu();
   else renderStart();
 }
@@ -1583,6 +1611,7 @@ function finishSign(editId) {
   fontSizeStep = 0;
   applyFontSize();
   finishedTopicThisSession = false;
+  sessionDoneTopics = new Set();
   onboarding = true;
   renderStart();
 }
@@ -1653,6 +1682,7 @@ function resetProfile(id) {
   if (wasActive) {
     loadActiveProfileSettings();
     finishedTopicThisSession = false;
+  sessionDoneTopics = new Set();
     announce("Du fängst neu an.");
     renderStart();
   } else {
@@ -1878,8 +1908,9 @@ function renderIntro() {
   showNav(false, false);
 
   /* Wiederkehrende sehen zuerst den einen nächsten Schritt (CLT: eine
-     Hauptaufgabe), Neue sehen die volle Begrüßung. */
-  const nextTopic = languageChosen ? getNextTopicSuggestion() : null;
+     Hauptaufgabe), Neue sehen die volle Begrüßung. „Wiederkehrend" heißt:
+     Sprache gewählt ODER schon ein Thema geschafft. */
+  const nextTopic = (languageChosen || countDoneTopics() > 0) ? getNextTopicSuggestion() : null;
   const resumeCard = nextTopic ? `
       <div class="intro-offer" role="region" aria-label="Weiterlernen">
         <h3>Hier kannst du weiterlernen:</h3>
@@ -1923,6 +1954,17 @@ function renderIntro() {
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("photo")}</span><span>Du baust dein eigenes Zeichen. Mit Bild, Farbe und Zahl.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("message")}</span><span>Du kannst dir alles vorlesen lassen. Und die Schrift größer machen.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span>Du lernst allein. Oder mit einer Begleit-Person.</span></li>
+        </ul>
+      </div>
+
+      <div class="intro-offer" role="region" aria-label="So findest du dich zurecht">
+        <h3>Unten ist das Menü. Es ist immer da.</h3>
+        <ul class="intro-offer-list">
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span><strong>Start</strong> bringt dich hierher zurück.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span><strong>Themen</strong> zeigt dir alle 12 Themen.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("check")}</span><span><strong>Mein Lernweg</strong> zeigt dir: Das hast du geschafft. Hier kannst du üben.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span><strong>Hilfe</strong> ist immer für dich da.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span><strong>Einstellungen</strong>: Schrift, Töne und Sprache ändern.</span></li>
         </ul>
       </div>
 
@@ -2119,8 +2161,9 @@ function renderMyPath() {
 
   const doneCount = countDoneTopics();
 
-  /* Lernstand-Anzeige (Bandura: sichtbare Erfolgserlebnisse) */
-  const heroProgress = isProgressEnabled() && doneCount > 0
+  /* Lernstand-Anzeige (Bandura: sichtbare Erfolgserlebnisse) –
+     zeigt auch Erfolge aus dieser Sitzung, ohne dass etwas gespeichert wird */
+  const heroProgress = doneCount > 0
     ? `<div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
          <div class="hero-progress-numbers">
            <span class="hero-progress-count" aria-live="polite">${doneCount}</span>
@@ -2175,12 +2218,17 @@ function renderMyPath() {
         <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Lernstand löschen und nicht mehr merken</button>
       </div>`;
-  } else {
+  } else if (doneCount > 0) {
     progressConsent = `
       <div class="progress-consent">
         <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
         <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
+      </div>`;
+  } else {
+    progressConsent = `
+      <div class="progress-consent">
+        <p class="progress-consent-note">Dein Lernstand wird nur gespeichert, wenn du das möchtest. Wir fragen dich, wenn du dein erstes Thema geschafft hast.</p>
       </div>`;
   }
 
@@ -2482,7 +2530,7 @@ function renderTopicChoice(topicId) {
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", topic.title, "Thema auswählen", "Lernweg wählen", 0);
+  setHeader("Sicher und selbstbestimmt im Internet", topic.title, "Thema auswählen", "Wie möchtest du lernen?", 0);
   setActiveTab("themen");
   setOrientation(`Du bist beim Thema: ${topic.title}.`);
   rememberRoute(topic.id);
@@ -3055,6 +3103,30 @@ function continueAfterPractice() {
    Abschlussseite
    ============================================================ */
 
+/* Fortschritts-Rückmeldung direkt nach dem Erfolg (Bandura: unmittelbares
+   Erfolgserlebnis). Bietet – falls noch nicht aktiv – das freiwillige
+   Merken des Lernstands genau in dem Moment an, in dem es Sinn ergibt. */
+function buildCompletionProgress() {
+  const done = countDoneTopics();
+  const saveOffer = !isProgressEnabled() ? `
+    <div class="progress-consent">
+      <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
+      <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
+      <button type="button" class="utility-button" onclick="enableProgressInline(this)">Ja, Lernstand merken</button>
+    </div>` : "";
+  return `
+    <div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
+      <div class="hero-progress-numbers">
+        <span class="hero-progress-count">${done}</span>
+        <span class="hero-progress-of">von ${topics.length} Themen geschafft</span>
+      </div>
+      <div class="hero-progress-track" role="progressbar" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${topics.length}" aria-label="${done} von ${topics.length} Themen">
+        <div class="hero-progress-fill" style="width:${Math.round((done / topics.length) * 100)}%"></div>
+      </div>
+    </div>
+    ${saveOffer}`;
+}
+
 function renderCompletionPage(topicId) {
   stopReading();
   const topic = getTopicById(topicId);
@@ -3092,6 +3164,8 @@ function renderCompletionPage(topicId) {
             <p class="remember-text">${escapeHtml(topic.transfer)}</p>
           </div>` : ""}
 
+          ${buildCompletionProgress()}
+
           <div class="einfach-done-actions">
             ${getQuizQuestions(topic).length
               ? `<button type="button" class="primary-action einfach-done-btn" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
@@ -3103,6 +3177,9 @@ function renderCompletionPage(topicId) {
             </button>
             <button type="button" class="secondary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
               Mehr lernen
+            </button>
+            <button type="button" class="ghost-action einfach-done-btn" onclick="renderMyPath()">
+              Mein Lernweg ansehen
             </button>
             <button type="button" class="ghost-action einfach-done-btn" onclick="renderMenu()">
               Zur Themenübersicht
@@ -3145,11 +3222,13 @@ function renderCompletionPage(topicId) {
           <p class="remember-text">${escapeHtml(topic.transfer)}</p>
         </div>` : ""}
 
+        ${buildCompletionProgress()}
+
         <div class="completion-actions">
-          <button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Lernweg</button>
-          <button type="button" class="secondary-action" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
+          <button type="button" class="primary-action" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
           <button type="button" class="secondary-action" onclick="renderCertificate('${escapeHtml(topic.id)}')">Urkunde ansehen</button>
           <button type="button" class="secondary-action" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">Merk-Karte ansehen</button>
+          <button type="button" class="secondary-action" onclick="renderMyPath()">Mein Lernweg ansehen</button>
           <button type="button" class="secondary-action" onclick="renderMenu()">Zur Themenübersicht</button>
         </div>
       </article>
