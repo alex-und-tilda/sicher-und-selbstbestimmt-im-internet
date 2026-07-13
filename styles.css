@@ -839,6 +839,14 @@ html.no-motion *::after {
 
 /* ---------- Themen-Karten ---------- */
 
+.topic-group {
+  margin-top: 26px;
+}
+
+.topic-group .topic-grid-hint {
+  margin-top: 2px;
+}
+
 .topic-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

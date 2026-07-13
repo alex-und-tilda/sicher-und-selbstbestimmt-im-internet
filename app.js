@@ -1427,7 +1427,7 @@ function chooseVorwissen(v) {
   pSet(VORWISSEN_KEY, v === "erfahren" ? "erfahren" : "neu");
   onboarding = false;
   announce(v === "erfahren" ? "Gut. Wir schlagen dir die kurze Menge vor." : "Gut. Wir schlagen dir die ausführliche Menge vor.");
-  renderMenu();
+  renderMenuIntro();
 }
 
 /* ============================================================
@@ -1922,6 +1922,46 @@ function scrollToTopics() {
 
 /* Startseite (Intro): kurz, worum es geht, plus ein Start-Knopf.
    Die Lerneinheiten (Themen) liegen auf einer eigenen Seite. */
+/* Menü-Erklärung als wiederverwendbarer Baustein (Einweisung + Hilfe) */
+function buildMenuExplainList() {
+  return `
+      <ul class="intro-offer-list">
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span><strong>Start</strong> bringt dich zur ersten Seite zurück.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span><strong>Themen</strong> zeigt dir alle 12 Themen.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("check")}</span><span><strong>Mein Lernweg</strong> zeigt dir: Das hast du geschafft. Hier kannst du üben.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span><strong>Hilfe</strong> ist immer für dich da.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Bei <strong>Einstellungen</strong> änderst du Schrift, Töne und Sprache.</span></li>
+      </ul>`;
+}
+
+/* Eigener Einweisungs-Schritt: EIN Konzept (das Menü) auf EINEM Bildschirm.
+   Wird genau einmal gezeigt, danach steht die Erklärung dauerhaft in Hilfe. */
+const MENU_INTRO_KEY = "menue-gesehen";
+function menuIntroSeen() { return pGet(MENU_INTRO_KEY) === "1"; }
+function renderMenuIntro() {
+  if (menuIntroSeen()) return renderMenu();
+  pSet(MENU_INTRO_KEY, "1");
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Das Menü", "Einweisung", "So findest du dich zurecht", 0);
+  setActiveTab("start");
+  setOrientation("Du bist bei der Einweisung. Gleich geht es zu den Themen.");
+  showNav(false, false);
+  content.innerHTML = `
+    ${buildReadingToolbar()}
+    <section class="intro-page" data-readable="true">
+      <div class="intro-offer">
+        <h3>Unten ist das Menü. Es ist immer da.</h3>
+        ${buildMenuExplainList()}
+      </div>
+      <button type="button" class="intro-start-button" onclick="renderMenu()">Alles klar. Zu den Themen.</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
 function renderIntro() {
   stopReading();
   currentTopicId = null;
@@ -1936,7 +1976,8 @@ function renderIntro() {
   /* Wiederkehrende sehen zuerst den einen nächsten Schritt (CLT: eine
      Hauptaufgabe), Neue sehen die volle Begrüßung. „Wiederkehrend" heißt:
      Sprache gewählt ODER schon ein Thema geschafft. */
-  const nextTopic = (languageChosen || countDoneTopics() > 0) ? getNextTopicSuggestion() : null;
+  const isReturning = languageChosen || countDoneTopics() > 0;
+  const nextTopic = isReturning ? getNextTopicSuggestion() : null;
   const resumeCard = nextTopic ? `
       <div class="intro-offer" role="region" aria-label="Weiterlernen">
         <h3>Hier kannst du weiterlernen:</h3>
@@ -1971,35 +2012,26 @@ function renderIntro() {
         <p class="intro-figures-text"><strong>Das sind Alex und Tilda.</strong><br>Sie begleiten dich beim Lernen.</p>
       </div>
 
+      ${isReturning ? "" : `
       <div class="intro-offer">
         <h3>Das kannst du hier machen:</h3>
         <ul class="intro-offer-list">
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span>Du lernst über 12 Themen. Zum Beispiel: WhatsApp, Passwörter, Betrug und KI.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Du wählst, wie du lesen möchtest. Es gibt 3 Stufen.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span>Du wählst, wie viel du lernst. Kurz oder mehr.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("photo")}</span><span>Du baust dein eigenes Zeichen. Mit Bild, Farbe und Zahl.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("message")}</span><span>Du kannst dir alles vorlesen lassen. Und die Schrift größer machen.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span>Du lernst über 12 Themen. Zum Beispiel: WhatsApp, Betrug und KI.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("message")}</span><span>Du kannst dir alles vorlesen lassen.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span>Du lernst allein. Oder mit einer Begleit-Person.</span></li>
         </ul>
-      </div>
-
-      <div class="intro-offer" role="region" aria-label="So findest du dich zurecht">
-        <h3>Unten ist das Menü. Es ist immer da.</h3>
-        <ul class="intro-offer-list">
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span><strong>Start</strong> bringt dich hierher zurück.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span><strong>Themen</strong> zeigt dir alle 12 Themen.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("check")}</span><span><strong>Mein Lernweg</strong> zeigt dir: Das hast du geschafft. Hier kannst du üben.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span><strong>Hilfe</strong> ist immer für dich da.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Bei <strong>Einstellungen</strong> änderst du Schrift, Töne und Sprache.</span></li>
-        </ul>
-      </div>
+      </div>`}
 
       ${resumeCard}
 
+      ${isReturning ? `
+      <button type="button" class="intro-start-button" onclick="renderMenu()">Zu den Themen</button>
+      ` : `
       <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
       <p class="intro-quickstart-hint">Keine Lust auf Fragen?</p>
       <button type="button" class="intro-quickstart-button" onclick="introQuickStart()">Sofort ein Thema lernen</button>
       <p class="intro-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos &nbsp;·&nbsp; kein Name nötig</p>
+      `}
     </section>
   `;
   focusContent();
@@ -2012,7 +2044,7 @@ function renderIntro() {
 function introQuickStart() {
   setLanguageLevel("leicht");
   pSet(VORWISSEN_KEY, "neu");
-  renderMenu();
+  renderMenuIntro();
 }
 
 function introStart() {
@@ -2078,6 +2110,15 @@ function renderResume() {
   renderLegalFooter();
 }
 
+/* Themen in 3 benannte Gruppen (Chunking: kleine, benannte Pakete
+   statt 12 gleichzeitiger Wahlmöglichkeiten). Reine Anzeige-Gliederung,
+   keine inhaltliche Änderung der Themen. */
+const TOPIC_GROUPS = [
+  { title: "Wichtig für alle",   hint: "Das hilft dir überall im Internet.", ids: ["datenschutz", "ki", "einkaufen"] },
+  { title: "Apps",               hint: "So nutzt du diese Apps sicher.",     ids: ["whatsapp", "facebook", "instagram", "youtube", "snapchat", "tiktok"] },
+  { title: "Gefahren und Hilfe", hint: "So erkennst du Tricks. So holst du Hilfe.", ids: ["fakes", "betrug", "hilfe"] }
+];
+
 function renderMenu() {
   stopReading();
   currentTopicId = null;
@@ -2096,7 +2137,7 @@ function renderMenu() {
 
   const nextSuggestion = getNextTopicSuggestion();
   const anyTopicDone = countDoneTopics() > 0;
-  const cards = topics.map(topic => {
+  const cardFor = (topic) => {
     const done = isTopicDone(topic.id);
     const suggested = !done && nextSuggestion && topic.id === nextSuggestion.id;
     return `
@@ -2111,7 +2152,25 @@ function renderMenu() {
         <svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </span>
     </button>
-  `;}).join("");
+  `;};
+
+  /* Gruppen aufbauen; Themen ohne Gruppe landen sicherheitshalber am Ende */
+  const grouped = new Set(TOPIC_GROUPS.flatMap(g => g.ids));
+  const rest = topics.filter(t => !grouped.has(t.id));
+  const groupSections = TOPIC_GROUPS.map(g => {
+    const groupTopics = g.ids.map(id => topics.find(t => t.id === id)).filter(Boolean);
+    if (!groupTopics.length) return "";
+    return `
+      <section class="topic-group" aria-label="${escapeHtml(g.title)}">
+        <h3 class="topic-grid-title">${escapeHtml(g.title)}</h3>
+        <p class="topic-grid-hint">${escapeHtml(g.hint)}</p>
+        <div class="topic-grid">${groupTopics.map(cardFor).join("")}</div>
+      </section>`;
+  }).join("") + (rest.length ? `
+      <section class="topic-group" aria-label="Weitere Themen">
+        <h3 class="topic-grid-title">Weitere Themen</h3>
+        <div class="topic-grid">${rest.map(cardFor).join("")}</div>
+      </section>` : "");
 
   /* Lernweg-Auswahl: selbstbestimmt, freiwillig, jederzeit änderbar. */
   const learnModeCards = Object.keys(LEARN_MODES).map(key => {
@@ -2161,9 +2220,9 @@ function renderMenu() {
     <section class="start-page">
       ${buildReadingToolbar()}
       ${learnModeSection}
-      <h3 class="topic-grid-title">Wähle ein Thema</h3>
+      <h2 class="topic-grid-title">Wähle ein Thema</h2>
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
-      <div class="topic-grid">${cards}</div>
+      ${groupSections}
     </section>
   `;
   focusContent();
@@ -2378,6 +2437,11 @@ function renderHelpPage() {
         </div>
       </div>
       <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
+
+      <div class="intro-offer" role="region" aria-label="So findest du dich zurecht">
+        <h3>So findest du dich zurecht: das Menü unten</h3>
+        ${buildMenuExplainList()}
+      </div>
     </section>
   `;
   focusContent();
