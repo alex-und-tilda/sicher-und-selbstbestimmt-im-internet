@@ -3365,7 +3365,7 @@ const topics = [
       }
     ],
     "miniQuestion": {
-      "question": "Was hilft beim Prüfen eines Videos?",
+      "question": "Du prüfst ein Video. Was hilft dir?",
       "answers": [
         "Quelle und Inhalt ansehen.",
         "Nur die Farbe ansehen.",
@@ -5511,7 +5511,7 @@ const topics = [
         "icon": "lock",
         "text": [
           {
-            "text": "Was du der KI schreibst, wird oft gespeichert.",
+            "text": "Die KI speichert deine Nachrichten oft.",
             "pictogram": "pikto-message"
           },
           {
@@ -5795,7 +5795,7 @@ const topics = [
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist richtig. Private Daten bleiben bei mir.",
-        "feedbackWrong": "Das ist noch nicht richtig. Was du der KI schreibst, wird oft gespeichert. Gib keine privaten Daten ein."
+        "feedbackWrong": "Das ist noch nicht richtig. Die KI speichert deine Nachrichten oft. Gib keine privaten Daten ein."
       }
     ],
     "helpQuestions": [
@@ -5830,7 +5830,7 @@ const topics = [
         "icon": "ki",
         "text": [
           "KI bedeutet Künstliche Intelligenz.",
-          "KI ist ein Computerprogramm.",
+          "KI ist ein Computer-Programm.",
           "Es kann Fragen beantworten.",
           "Es kann Texte schreiben.",
           "Es kann Bilder machen.",
@@ -7979,7 +7979,7 @@ const topics = [
         "text": [
           "Du siehst ein Schloss in der Adresszeile.",
           "Die Adresse beginnt mit https.",
-          "Du findest eine Adresse des Shops.",
+          "Du findest eine Adresse vom Shop.",
           "Diese Zeichen sind gut.",
           "Bei Unsicherheit fragst du eine vertraute Person."
         ],

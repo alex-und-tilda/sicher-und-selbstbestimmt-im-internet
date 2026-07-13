@@ -1100,7 +1100,7 @@ const CONTENT_VERSIONS = {
     "Keine privaten Daten": {
       einfach: {
         text: [
-          { text: "Was du der KI schreibst, wird oft gespeichert." },
+          { text: "Die KI speichert oft, was du ihr schreibst." },
           { text: "Gib der KI deshalb keine privaten Daten." }
         ],
         bullets: ["kein Passwort", "keine Adresse", "keine Bank-Daten", "keine sehr privaten Geheimnisse"]

@@ -550,7 +550,7 @@ const GLOSSAR = {
   "link":                   "Ein Link ist ein anklickbares Wort oder Bild. Es führt dich zu einer anderen Seite oder Datei.",
   "qr-code":                "Ein QR-Code ist ein schwarzweißes Quadrat mit Muster. Du scannst es mit der Kamera deines Handys.",
   "update":                 "Ein Update ist eine neue Version eines Programms. Es repariert Fehler und macht das Gerät sicherer.",
-  "ki":                     "KI steht für Künstliche Intelligenz. Das ist ein Computerprogramm, das lernt und selbst Aufgaben löst. Zum Beispiel ChatGPT.",
+  "ki":                     "KI steht für Künstliche Intelligenz. Das ist ein Computer-Programm. Es lernt. Und es löst selbst Aufgaben. Zum Beispiel ChatGPT.",
   "chatbot":                "Ein Chatbot ist ein Programm, das mit dir schreibt oder spricht. Es beantwortet Fragen automatisch.",
   "deepfake":               "Ein Deepfake ist ein gefälschtes Bild oder Video. Es sieht echt aus, wurde aber vom Computer erstellt.",
   "algorithmus":            "Ein Algorithmus ist eine Regel, nach der ein Computer entscheidet. Zum Beispiel, welche Videos oder Beiträge dir angezeigt werden.",
