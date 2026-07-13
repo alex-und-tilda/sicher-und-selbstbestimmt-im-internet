@@ -3155,14 +3155,48 @@ p.feedback-wrong {
 /* ---------- Orientierungssatz ---------- */
 
 .orient-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 12px 4px 0;
-  padding: 10px 16px;
+  padding: 8px 12px;
   background: var(--surface-soft);
   border: 1px solid var(--line);
   border-left: 6px solid var(--accent);
   border-radius: var(--radius-s);
   color: var(--ink);
   font-size: 1.02rem;
+}
+
+.orient-icon {
+  flex: none;
+  display: inline-flex;
+}
+
+.orient-icon svg,
+.orient-icon img {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.orient-text {
+  flex: 1;
+}
+
+.card-read-button--orient {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.resume-lesson-wrap {
+  margin: 14px 0;
+}
+
+.resume-lesson-chip {
+  font-size: 1.05rem;
+  min-height: 58px;
 }
 
 /* ---------- Seite: Einstellungen ---------- */

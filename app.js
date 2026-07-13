@@ -927,16 +927,25 @@ function setActiveTab(name) {
    setHeader() leert den Satz; Seiten setzen ihn danach neu. */
 function setOrientation(text) {
   if (!orientLine) return;
-  orientLine.textContent = text || "";
   orientLine.classList.toggle("is-hidden", !text);
-  /* Farb-Faden: im Themen-Kontext trägt die Orientierung die Themen-Farbe.
-     Dieselbe Farbe begleitet von der Kachel bis zur Urkunde (Wiedererkennung). */
+  if (!text) {
+    orientLine.textContent = "";
+    orientLine.style.borderLeftColor = "";
+    return;
+  }
+  /* Dreifache Kodierung desselben Signals (UDL): Farbe (Rand), Bild
+     (Themen-Symbol) und Satz. Dazu ein Hör-Knopf für Nicht-Leser. */
   let color = "";
-  if (text && typeof currentTopicId !== "undefined" && currentTopicId) {
+  let iconHtml = "";
+  if (typeof currentTopicId !== "undefined" && currentTopicId) {
     const palette = isDarkMode() ? TOPIC_COLORS_DARK : TOPIC_COLORS;
     const p = palette[currentTopicId];
     if (p) color = p[0];
+    const topic = getTopicById(currentTopicId);
+    if (topic && topic.icon) iconHtml = `<span class="orient-icon" aria-hidden="true">${getIconHtml(topic.icon)}</span>`;
   }
+  orientLine.innerHTML = `${iconHtml}<span class="orient-text">${escapeHtml(text)}</span>` +
+    `<span class="card-read-button card-read-button--orient" role="button" tabindex="0" data-read-card-text="${escapeHtml(text)}" aria-label="Vorlesen, wo du gerade bist"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>`;
   orientLine.style.borderLeftColor = color;
 }
 
@@ -1226,6 +1235,11 @@ function readCurrentPage(rate) {
         return cleanSpeechText(el.textContent).length > 0;
       })
     : [];
+  /* Zuerst sagen, WO die Person ist – dann den Inhalt (Orientierung zum Hören) */
+  if (orientLine && !orientLine.classList.contains("is-hidden")) {
+    const orientSpan = orientLine.querySelector(".orient-text");
+    if (orientSpan) els.unshift(orientSpan);
+  }
   if (!els.length) {
     updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
     return;
@@ -1483,6 +1497,7 @@ function switchProfile(id) {
   loadActiveProfileSettings();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
+  lastLessonContext = null;
   if (languageChosen) renderMenu();
   else renderStart();
 }
@@ -1672,6 +1687,7 @@ function finishSign(editId) {
   applyFontSize();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
+  lastLessonContext = null;
   onboarding = true;
   renderStart();
 }
@@ -1743,6 +1759,7 @@ function resetProfile(id) {
     loadActiveProfileSettings();
     finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
+  lastLessonContext = null;
     announce("Du fängst neu an.");
     renderStart();
   } else {
@@ -1967,6 +1984,34 @@ function scrollToTopics() {
 
 let dailyQuestionCurrent = null;
 
+/* Rück-Anker: merkt die zuletzt offene Lektion (nur im Arbeitsspeicher).
+   Wer zur Hilfe oder zu den Einstellungen wechselt, findet mit einem
+   Tipp zurück (COGA: Unterbrechungen sicher machen). */
+let lastLessonContext = null;
+
+function buildResumeLessonChip() {
+  const ctx = lastLessonContext;
+  if (!ctx) return "";
+  const topic = getTopicById(ctx.topicId);
+  if (!topic) return "";
+  return `
+    <p class="resume-lesson-wrap">
+      <button type="button" class="review-chip resume-lesson-chip" style="${getTopicColorStyle(topic.id)}" onclick="resumeLastLesson()">
+        <span aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
+        <span>Weiter lernen: ${escapeHtml(topic.title)}, Schritt ${ctx.step + 1}</span>
+      </button>
+    </p>`;
+}
+
+function resumeLastLesson() {
+  const ctx = lastLessonContext;
+  if (!ctx || !getTopicById(ctx.topicId)) return renderMenu();
+  currentTopicId = ctx.topicId;
+  currentMode = ctx.mode;
+  currentStep = ctx.step;
+  renderLesson();
+}
+
 function getDailyQuestion() {
   const doneTopics = topics.filter(t => isTopicDone(t.id) && getQuizQuestions(t).length);
   if (!doneTopics.length) return null;
@@ -2068,7 +2113,8 @@ function renderIntro() {
   const isReturning = languageChosen || countDoneTopics() > 0;
   const nextTopic = isReturning ? getNextTopicSuggestion() : null;
   const dailyCard = isReturning ? buildDailyQuestionCard() : "";
-  const resumeCard = nextTopic ? `
+  const lessonChip = buildResumeLessonChip();
+  const resumeCard = (nextTopic && !lessonChip) ? `
       <div class="intro-offer" role="region" aria-label="Weiterlernen">
         <h3>Hier kannst du weiterlernen:</h3>
         <button type="button" class="topic-card" style="${getTopicColorStyle(nextTopic.id)}" onclick="renderTopicChoice('${escapeHtml(nextTopic.id)}')">
@@ -2111,6 +2157,8 @@ function renderIntro() {
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span>Du lernst allein. Oder mit einer Begleit-Person.</span></li>
         </ul>
       </div>`}
+
+      ${lessonChip}
 
       ${dailyCard}
 
@@ -2312,6 +2360,7 @@ function renderMenu() {
     <section class="start-page">
       ${buildReadingToolbar()}
       ${learnModeSection}
+      ${buildResumeLessonChip()}
       <h2 class="topic-grid-title">Wähle ein Thema</h2>
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
       ${groupSections}
@@ -2531,6 +2580,7 @@ function renderHelpPage() {
       ${buildReadingToolbar()}
       <h2 class="topic-grid-title">Hilfe</h2>
       <p class="topic-grid-hint">Du musst das nicht allein schaffen.</p>
+      ${buildResumeLessonChip()}
       ${roleFigure("hilfe")}
 
       <div class="help-page-actions">
@@ -2623,6 +2673,7 @@ function renderSettingsPage() {
       ${buildReadingToolbar()}
       <h2 class="topic-grid-title">Einstellungen</h2>
       <p class="topic-grid-hint">Hier kannst du vieles einstellen. So passt die Seite gut zu dir.</p>
+      ${buildResumeLessonChip()}
 
       <section class="settings-page-section" aria-label="Schrift">
         <h3>Schrift</h3>
@@ -3128,6 +3179,7 @@ function renderLesson() {
   setBottomNavVisible(!hasPractice);
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   setOrientation(`Du lernst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
+  lastLessonContext = { topicId: topic.id, step: currentStep, mode: currentMode };
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
   /* Vorlese-Knopf je Block: Vorlesen als selbstbestimmtes Angebot an jeder
@@ -3412,6 +3464,7 @@ function renderCompletionPage(topicId) {
 
   markTopicDone(topic.id);
   finishedTopicThisSession = true;
+  lastLessonContext = null; /* Lektion fertig – kein Rück-Anker mehr nötig */
   playSound("success");
   setProgressVisible(false);
   setBottomNavVisible(false);
