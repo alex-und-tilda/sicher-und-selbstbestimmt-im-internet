@@ -1887,7 +1887,7 @@ function renderLanguageChoice(recommended) {
       <p class="language-more-link">
         <a href="sprachstufen.html">Was ist der Unterschied? Hier wird es erklärt.</a>
       </p>
-      <button type="button" class="plain-back-button" onclick="languageChoiceBack()">← Zurück, nichts ändern</button>
+      <button type="button" class="plain-back-button" onclick="languageChoiceBack()">← Zurück. Nichts ändern.</button>
     </section>
   `;
   focusContent();
@@ -1977,7 +1977,7 @@ function renderIntro() {
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span><strong>Themen</strong> zeigt dir alle 12 Themen.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("check")}</span><span><strong>Mein Lernweg</strong> zeigt dir: Das hast du geschafft. Hier kannst du üben.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span><strong>Hilfe</strong> ist immer für dich da.</span></li>
-          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span><strong>Einstellungen</strong>: Schrift, Töne und Sprache ändern.</span></li>
+          <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Bei <strong>Einstellungen</strong> änderst du Schrift, Töne und Sprache.</span></li>
         </ul>
       </div>
 
@@ -2241,7 +2241,7 @@ function renderMyPath() {
   } else {
     progressConsent = `
       <div class="progress-consent">
-        <p class="progress-consent-note">Dein Lernstand wird nur gespeichert, wenn du das möchtest. Wir fragen dich, wenn du dein erstes Thema geschafft hast.</p>
+        <p class="progress-consent-note">Die Seite speichert deinen Lernstand nicht von allein. Du entscheidest das. Nach deinem ersten Thema fragen wir dich.</p>
       </div>`;
   }
 
@@ -2407,7 +2407,7 @@ function renderSettingsPage() {
     <section class="start-page" data-readable="true">
       ${buildReadingToolbar()}
       <h2 class="topic-grid-title">Einstellungen</h2>
-      <p class="topic-grid-hint">Hier stellst du alles so ein, wie es für dich gut ist.</p>
+      <p class="topic-grid-hint">Hier kannst du vieles einstellen. So passt die Seite gut zu dir.</p>
 
       <section class="settings-page-section" aria-label="Schrift">
         <h3>Schrift</h3>
@@ -2420,7 +2420,7 @@ function renderSettingsPage() {
 
       <section class="settings-page-section" aria-label="Töne und Bewegung">
         <h3>Töne und Bewegung</h3>
-        <p class="settings-explain">Töne und Bewegungen kannst du an- und ausschalten.</p>
+        <p class="settings-explain">Du kannst Töne anschalten oder ausschalten. Das Gleiche geht mit Bewegungen.</p>
         <div class="settings-toggle-row">
           <button type="button" class="setting-big-button sound-toggle" onclick="toggleSound()">Töne</button>
           <button type="button" class="setting-big-button motion-toggle" onclick="toggleMotion()">Bewegung</button>
@@ -2779,7 +2779,7 @@ function renderSelfAssessment() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "", "", "Start", 0);
-  setOrientation(`Du startest das Thema: ${topic.title}. Zuerst eine Frage an dich.`);
+  setOrientation(`Du startest das Thema: ${topic.title}. Zuerst kommt eine Frage an dich.`);
 
   const optionButtons = sa.options.map((opt, i) =>
     `<button class="sa-option-btn" data-index="${i}" type="button">${escapeHtml(opt)}</button>`
@@ -3730,7 +3730,7 @@ function renderBigQuizResult() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(bigQuizTitle, "Ergebnis", "Ergebnis", "Fertig", 100);
-  setOrientation(`Du bist fertig mit: ${bigQuizTitle}.`);
+  setOrientation("Geschafft! Du bist fertig mit dem Quiz.");
   showNav(false, false);
 
   const praise = percent >= 80
@@ -3891,7 +3891,7 @@ function renderTrainingResult() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Trainings-Postfach", "Ergebnis", "Ergebnis", "Fertig", 100);
-  setOrientation("Du bist fertig mit dem Üben im Trainings-Postfach.");
+  setOrientation("Geschafft! Du hast im Trainings-Postfach geübt.");
   showNav(false, false);
 
   const praise = trainingScore === total
