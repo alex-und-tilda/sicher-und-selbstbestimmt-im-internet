@@ -1981,18 +1981,26 @@ html.no-motion *::after {
 }
 
 /* Vorlese-Knopf in Karten */
+/* Vorlese-Chip: nur das Lautsprecher-Symbol (aria-label bleibt für
+   Screenreader). Ein Wort „Vorlesen" pro Seite reicht – es steht in der
+   Vorlese-Leiste oben. 13× dasselbe Wort war visueller Lärm (Kohärenz). */
 .card-read-button {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 8px 14px;
-  border-radius: 999px;
+  justify-content: center;
+  min-width: 46px;
+  min-height: 46px;
+  padding: 10px;
+  border-radius: 50%;
   background: var(--accent-soft);
   color: var(--accent-dark);
   border: 1px solid var(--accent);
   cursor: pointer;
+}
+
+.card-read-button .rb-ico {
+  width: 22px;
+  height: 22px;
 }
 
 .card-read-button:hover {
@@ -2004,8 +2012,6 @@ html.no-motion *::after {
    ruhig und etwas kleiner, rechtsbündig, damit es nicht überladen wirkt. */
 .card-read-button--block {
   margin-top: 10px;
-  font-size: 0.85rem;
-  padding: 6px 12px;
   background: transparent;
 }
 .ls-text-block,

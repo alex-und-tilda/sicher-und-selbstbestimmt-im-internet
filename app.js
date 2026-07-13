@@ -400,6 +400,7 @@ function loadActiveProfileSettings() {
   learnModeChooserOpen = false;
   fontSizeStep = 0;
   loadFontSize();       /* liest + wendet Schriftgröße an */
+  loadReadTempo();      /* Vorlese-Tempo (normal / langsam) */
   loadMotion();         /* liest + wendet Bewegungs-Einstellung an */
   loadLanguageLevel();  /* setzt languageLevel + languageChosen, falls gemerkt */
   loadLearnMode();
@@ -1238,6 +1239,24 @@ function speakNextSentence(gen) {
 function readNormal() { readCurrentPage(0.85); }
 function readSlow() { readCurrentPage(0.50); }
 
+/* Vorlese-Tempo ist eine EINSTELLUNG (einmal wählen), keine Entscheidung
+   bei jedem Vorlesen. Weniger Knöpfe am Ort der Handlung (Hick, CLT). */
+const READ_TEMPO_KEY = "vorlese-tempo";
+let readTempo = "normal";
+function loadReadTempo() {
+  const saved = pGet(READ_TEMPO_KEY);
+  readTempo = saved === "langsam" ? "langsam" : "normal";
+}
+function setReadTempo(t) {
+  readTempo = t === "langsam" ? "langsam" : "normal";
+  pSet(READ_TEMPO_KEY, readTempo);
+  announce(readTempo === "langsam" ? "Vorlesen ist jetzt langsam." : "Vorlesen ist jetzt normal schnell.");
+  renderSettingsPage();
+}
+function readStart() {
+  if (readTempo === "langsam") readSlow(); else readNormal();
+}
+
 function buildReadingToolbar() {
   if (!supportsSpeech()) {
     return `
@@ -1248,8 +1267,7 @@ function buildReadingToolbar() {
   }
   return `
     <div class="reading-toolbar" aria-label="Vorlesen">
-      <button type="button" class="reading-button reading-button-normal" onclick="readNormal()"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</button>
-      <button type="button" class="reading-button reading-button-slow" onclick="readSlow()"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l4.5 3.6V5.4L7 9H3z" fill="currentColor"/><circle cx="17.5" cy="14.5" r="5.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M17.5 11.5v3.2l2.1 1.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Langsam vorlesen</button>
+      <button type="button" class="reading-button reading-button-normal" onclick="readStart()"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</button>
       <button type="button" class="reading-button reading-button-stop" onclick="stopReading()">Stopp</button>
       <p id="readingStatus" class="reading-status" aria-live="polite"></p>
     </div>
@@ -1327,12 +1345,7 @@ function buildUtilityBar() {
       <button type="button" class="utility-button language-switch-button" onclick="renderLanguageChoice()">
         Sprache: ${LANGUAGE_LABEL[languageLevel]}
       </button>
-      <button type="button" class="utility-button" onclick="showSymbolHelp()">Zeichen erklären</button>
       <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
-      <div class="font-size-group" role="group" aria-label="Schriftgröße ändern">
-        <button type="button" class="utility-button font-btn font-btn-decrease" onclick="changeFontSize(-1)" aria-label="Schrift kleiner" ${fontSizeStep === 0 ? "disabled" : ""}>A−</button>
-        <button type="button" class="utility-button font-btn font-btn-increase" onclick="changeFontSize(1)"  aria-label="Schrift größer" ${fontSizeStep === FONT_SIZES.length - 1 ? "disabled" : ""}>A+</button>
-      </div>
     </div>
   `;
 }
@@ -1805,7 +1818,7 @@ function renderSampleFinder(round) {
   const cards = options.map(level => `
     <button type="button" class="sample-option" onclick="pickSample(${round}, '${level}')">
       <span class="sample-text">„${escapeHtml(r[level])}"</span>
-      <span class="card-read-button" role="button" tabindex="0" data-read-card-text="${escapeHtml(r[level])}" aria-label="Text vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+      <span class="card-read-button" role="button" tabindex="0" data-read-card-text="${escapeHtml(r[level])}" aria-label="Text vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
     </button>`).join("");
   const back = round > 0 ? `renderSampleFinder(${round - 1})` : `renderStart()`;
 
@@ -2095,7 +2108,7 @@ function renderMenu() {
       <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
       ${done ? `<span class="topic-done-badge">✓ Geschafft</span>` : ""}
       <span class="card-read-button" role="button" tabindex="0" data-read-card-text="${escapeHtml(topic.title)}. ${escapeHtml(topic.desc || "")}" aria-label="Thema ${escapeHtml(topic.title)} vorlesen">
-        <svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen
+        <svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </span>
     </button>
   `;}).join("");
@@ -2418,6 +2431,15 @@ function renderSettingsPage() {
         </div>
       </section>
 
+      <section class="settings-page-section" aria-label="Vorlesen">
+        <h3>Vorlesen</h3>
+        <p class="settings-explain">Wie schnell soll die Stimme lesen?</p>
+        <div class="settings-toggle-row" role="group" aria-label="Vorlese-Tempo">
+          <button type="button" class="setting-big-button" aria-pressed="${readTempo === "normal" ? "true" : "false"}" onclick="setReadTempo('normal')">Normal</button>
+          <button type="button" class="setting-big-button" aria-pressed="${readTempo === "langsam" ? "true" : "false"}" onclick="setReadTempo('langsam')">Langsam</button>
+        </div>
+      </section>
+
       <section class="settings-page-section" aria-label="Töne und Bewegung">
         <h3>Töne und Bewegung</h3>
         <p class="settings-explain">Du kannst Töne anschalten oder ausschalten. Das Gleiche geht mit Bewegungen.</p>
@@ -2575,7 +2597,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Kurz lernen</span>
             <span class="action-desc">Nur das Wichtigste.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Kurz lernen. Nur das Wichtigste." aria-label="Kurz lernen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Kurz lernen. Nur das Wichtigste." aria-label="Kurz lernen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
           </span>
         </button>
 
@@ -2585,7 +2607,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Mehr lernen</span>
             <span class="action-desc">Mit Beispielen.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Mehr lernen. Mit Beispielen." aria-label="Mehr lernen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Mehr lernen. Mit Beispielen." aria-label="Mehr lernen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
           </span>
         </button>
 
@@ -2594,7 +2616,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Quiz machen</span>
             <span class="action-desc">Fragen beantworten.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Quiz machen. Fragen beantworten." aria-label="Quiz machen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Quiz machen. Fragen beantworten." aria-label="Quiz machen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
           </span>
         </button>
 
@@ -2604,7 +2626,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Trainings-Postfach</span>
             <span class="action-desc">Trick oder echt? Gefahrlos üben.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Trainings-Postfach. Trick oder echt? Gefahrlos üben." aria-label="Trainings-Postfach vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Trainings-Postfach. Trick oder echt? Gefahrlos üben." aria-label="Trainings-Postfach vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
           </span>
         </button>` : ""}
 
@@ -2613,7 +2635,7 @@ function renderTopicChoice(topicId) {
           <span class="action-text">
             <span class="action-title">Merk-Karte</span>
             <span class="action-desc">Regeln ansehen.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Merk-Karte. Regeln ansehen." aria-label="Merk-Karte vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Merk-Karte. Regeln ansehen." aria-label="Merk-Karte vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
           </span>
         </button>
       </div>
@@ -2871,7 +2893,7 @@ function renderLesson() {
   /* Vorlese-Knopf je Block: Vorlesen als selbstbestimmtes Angebot an jeder
      Kachel (§1 Selbstbestimmung, §3 Vorlesen als Wahl). Liest genau diesen Block. */
   const blockRead = (t) => t
-    ? `<span class="card-read-button card-read-button--block" role="button" tabindex="0" data-read-card-text="${escapeHtml(t)}" aria-label="Diesen Teil vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</span>`
+    ? `<span class="card-read-button card-read-button--block" role="button" tabindex="0" data-read-card-text="${escapeHtml(t)}" aria-label="Diesen Teil vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>`
     : "";
   const plain = (arr) => Array.isArray(arr)
     ? arr.map(i => (typeof i === "object" && i.text) ? i.text : i).join(" ")
