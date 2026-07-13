@@ -842,6 +842,10 @@ html.no-motion *::after {
 .topic-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  /* Alle Kacheln exakt gleich groß – gleichförmiges Raster erleichtert
+     das Absuchen (COGA: konsistentes Layout; visuelle Suche) und gibt
+     motorisch gleiche, große Ziele (Fitts). Keine Kachel wächst allein. */
+  grid-auto-rows: 1fr;
   gap: 16px;
 }
 
@@ -2119,6 +2123,8 @@ html.no-motion *::after {
 .action-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  /* Auch Aktions-Karten (Lernweg, Üben) immer gleich groß */
+  grid-auto-rows: 1fr;
   gap: 16px;
   margin-bottom: 22px;
 }
