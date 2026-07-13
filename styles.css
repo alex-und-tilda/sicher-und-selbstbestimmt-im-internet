@@ -2973,7 +2973,7 @@ p.feedback-wrong {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--topic-color);
+  color: var(--topic-text, var(--topic-color));
   margin: 0 0 6px;
 }
 
@@ -3001,7 +3001,7 @@ p.feedback-wrong {
 .certificate-topic {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--topic-color);
+  color: var(--topic-text, var(--topic-color));
   margin: 10px 0;
 }
 
@@ -3998,7 +3998,7 @@ body.simple-mode .practice-box {
 .print-memory-header h2 {
   font-size: 1.1rem;
   margin: 0;
-  color: var(--topic-color);
+  color: var(--topic-text, var(--topic-color));
 }
 
 .print-memory-rules,

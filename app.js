@@ -752,10 +752,21 @@ function isDarkMode() {
   return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
+/* Dunklere Text-Varianten für Marken-Farben, die als SCHRIFT auf Weiß
+   zu hell sind (Urkunde, Druck-Merk-Karte). AA: mindestens 4,5:1.
+   Im Dark Mode sind alle Themen-Farben hell genug (>= 5,4:1). */
+const TOPIC_TEXT_LIGHT = {
+  whatsapp: "#178643",
+  facebook: "#166fe3",
+  snapchat: "#897100",
+  hilfe:    "#c0501a"
+};
+
 function getTopicColorStyle(topicId) {
   const palette = isDarkMode() ? TOPIC_COLORS_DARK : TOPIC_COLORS;
   const [color, ring, bg, icon] = palette[topicId] || palette.datenschutz;
-  return `--topic-color:${color};--topic-ring:${ring};--topic-hover-bg:${bg};--topic-icon-bg:${icon}`;
+  const textColor = isDarkMode() ? color : (TOPIC_TEXT_LIGHT[topicId] || color);
+  return `--topic-text: ${textColor}; --topic-color:${color};--topic-ring:${ring};--topic-hover-bg:${bg};--topic-icon-bg:${icon}`;
 }
 
 /* ============================================================
@@ -901,6 +912,15 @@ function setOrientation(text) {
   if (!orientLine) return;
   orientLine.textContent = text || "";
   orientLine.classList.toggle("is-hidden", !text);
+  /* Farb-Faden: im Themen-Kontext trägt die Orientierung die Themen-Farbe.
+     Dieselbe Farbe begleitet von der Kachel bis zur Urkunde (Wiedererkennung). */
+  let color = "";
+  if (text && typeof currentTopicId !== "undefined" && currentTopicId) {
+    const palette = isDarkMode() ? TOPIC_COLORS_DARK : TOPIC_COLORS;
+    const p = palette[currentTopicId];
+    if (p) color = p[0];
+  }
+  orientLine.style.borderLeftColor = color;
 }
 
 /* Schreibt die aktuelle Seite in die Adresszeile, damit der
