@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-10e";
+const CACHE_VERSION = "v2026-10f";
 const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
@@ -138,6 +138,21 @@ const PRECACHE_URLS = [
   "./assets/pictograms/pikto-friend.svg",
   "./assets/pictograms/pikto-clock.svg",
   "./assets/pictograms/pikto-mail.svg",
+
+  /* QR-Karten (Workshops und Begleitung) */
+  "./assets/qr/datenschutz.svg",
+  "./assets/qr/whatsapp.svg",
+  "./assets/qr/facebook.svg",
+  "./assets/qr/instagram.svg",
+  "./assets/qr/youtube.svg",
+  "./assets/qr/snapchat.svg",
+  "./assets/qr/tiktok.svg",
+  "./assets/qr/hilfe.svg",
+  "./assets/qr/ki.svg",
+  "./assets/qr/fakes.svg",
+  "./assets/qr/betrug.svg",
+  "./assets/qr/einkaufen.svg",
+  "./assets/qr/startseite.svg",
 
   /* Schriften — WOFF2 (primär) + TTF (Fallback, optional) */
   "./assets/fonts/atkinson-regular.woff2",

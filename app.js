@@ -568,6 +568,23 @@ const GLOSSAR = {
   "firewall":               "Eine Firewall ist ein Schutzprogramm. Es blockiert gefährliche Verbindungen aus dem Internet.",
   "viren":                  "Viren sind schädliche Programme. Sie können Daten stehlen oder das Gerät beschädigen.",
   "router":                 "Ein Router ist ein Gerät, das die Internetverbindung im Haus verteilt. Er gibt das WLAN-Signal aus.",
+  "abo":                    "Ein Abo ist ein Vertrag. Du bekommst etwas regelmäßig. Und du zahlst regelmäßig Geld.",
+  "abo-falle":              "Eine Abo-Falle ist ein Trick. Du klickst auf etwas. Und plötzlich hast du einen teuren Vertrag.",
+  "abzocke":                "Abzocke ist ein Trick mit Geld. Jemand will dir Geld wegnehmen. Mit falschen Versprechen.",
+  "fake news":              "Fake News sind falsche Nachrichten. Sie sehen echt aus. Aber sie stimmen nicht.",
+  "fake-profil":            "Ein Fake-Profil ist ein falsches Profil. Die Person gibt sich als jemand anderes aus.",
+  "standort":               "Der Standort ist der Ort, wo du gerade bist. Das Handy kann deinen Standort an Apps senden.",
+  "emoji":                  "Ein Emoji ist ein kleines Bild in einer Nachricht. Zum Beispiel ein lachendes Gesicht.",
+  "kommentar":              "Ein Kommentar ist eine Antwort unter einem Beitrag. Andere können deinen Kommentar lesen.",
+  "posten":                 "Posten heißt: etwas ins Internet stellen. Zum Beispiel ein Foto oder einen Text.",
+  "blockieren":             "Blockieren heißt: Du sperrst eine Person. Sie kann dir dann nicht mehr schreiben.",
+  "melden":                 "Melden heißt: Du sagst der App, dass etwas nicht in Ordnung ist. Die App prüft das dann.",
+  "sprach-nachricht":       "Eine Sprach-Nachricht ist eine gesprochene Nachricht. Du nimmst deine Stimme auf und schickst sie.",
+  "gewinnspiel":            "Bei einem Gewinnspiel kann man etwas gewinnen. Vorsicht: Viele Gewinnspiele im Internet sind ein Trick.",
+  "kauf auf rechnung":      "Kauf auf Rechnung heißt: Du bekommst die Ware zuerst. Du zahlst erst danach. Das ist sicher.",
+  "vorkasse":               "Vorkasse heißt: Du zahlst zuerst. Die Ware kommt erst danach. Bei fremden Shops ist das riskant.",
+  "online-shop":            "Ein Online-Shop ist ein Geschäft im Internet. Du bestellst dort Waren. Sie kommen mit der Post.",
+  "bewertung":              "Eine Bewertung ist die Meinung von Kunden. Zum Beispiel Sterne von 1 bis 5. Sie hilft beim Prüfen."
 };
 
 let glossarOverlay = null;
@@ -1942,6 +1959,58 @@ function scrollToTopics() {
 
 /* Startseite (Intro): kurz, worum es geht, plus ein Start-Knopf.
    Die Lerneinheiten (Themen) liegen auf einer eigenen Seite. */
+/* ============================================================
+   Frage des Tages: eine Wiederhol-Frage aus den geschafften Themen.
+   Verteiltes Wiederholen in kleinster Form (Spacing- + Testing-Effekt).
+   Deterministisch über das Datum – kein Tracking, keine Speicherung.
+   ============================================================ */
+
+let dailyQuestionCurrent = null;
+
+function getDailyQuestion() {
+  const doneTopics = topics.filter(t => isTopicDone(t.id) && getQuizQuestions(t).length);
+  if (!doneTopics.length) return null;
+  const pool = [];
+  doneTopics.forEach(t => getQuizQuestions(t).forEach(q => pool.push({ topic: t, q })));
+  if (!pool.length) return null;
+  const d = new Date();
+  const seed = d.getFullYear() * 372 + (d.getMonth() + 1) * 31 + d.getDate();
+  return pool[seed % pool.length];
+}
+
+function buildDailyQuestionCard() {
+  const daily = getDailyQuestion();
+  dailyQuestionCurrent = daily;
+  if (!daily) return "";
+  const answers = daily.q.answers.map((a, i) =>
+    `<button type="button" class="answer-option daily-answer" onclick="answerDailyQuestion(${i})">${escapeHtml(a)}</button>`
+  ).join("");
+  return `
+      <div class="intro-offer daily-question" id="dailyQuestion" style="${getTopicColorStyle(daily.topic.id)}" data-readable="true" role="region" aria-label="Frage des Tages">
+        <h3>Deine Frage für heute</h3>
+        <p class="daily-question-topic">Aus dem Thema: ${escapeHtml(daily.topic.title)}</p>
+        <p class="daily-question-text">${escapeHtml(daily.q.question)}</p>
+        <div class="daily-answers">${answers}</div>
+      </div>`;
+}
+
+function answerDailyQuestion(index) {
+  const daily = dailyQuestionCurrent;
+  const box = document.getElementById("dailyQuestion");
+  if (!daily || !box) return;
+  const isCorrect = index === daily.q.correctIndex;
+  const feedback = isCorrect
+    ? (daily.q.feedbackCorrect || "Das ist richtig.")
+    : (daily.q.feedbackWrong || "Das war nicht richtig. Das macht nichts.");
+  playSound(isCorrect ? "correct" : "wrong");
+  box.innerHTML = `
+        <h3>${isCorrect ? "✓ Richtig! Gut gemacht." : "Das macht nichts."}</h3>
+        <p class="daily-question-text">${escapeHtml(feedback)}</p>
+        ${isCorrect ? "" : `<button type="button" class="review-chip" style="${getTopicColorStyle(daily.topic.id)}" onclick="renderTopicChoice('${escapeHtml(daily.topic.id)}')"><span aria-hidden="true">${getIconHtml(daily.topic.icon || "start")}</span><span>${escapeHtml(daily.topic.title)} nochmal ansehen</span></button>`}
+      `;
+  announce(feedback);
+}
+
 /* Menü-Erklärung als wiederverwendbarer Baustein (Einweisung + Hilfe) */
 function buildMenuExplainList() {
   return `
@@ -1998,6 +2067,7 @@ function renderIntro() {
      Sprache gewählt ODER schon ein Thema geschafft. */
   const isReturning = languageChosen || countDoneTopics() > 0;
   const nextTopic = isReturning ? getNextTopicSuggestion() : null;
+  const dailyCard = isReturning ? buildDailyQuestionCard() : "";
   const resumeCard = nextTopic ? `
       <div class="intro-offer" role="region" aria-label="Weiterlernen">
         <h3>Hier kannst du weiterlernen:</h3>
@@ -2041,6 +2111,8 @@ function renderIntro() {
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span>Du lernst allein. Oder mit einer Begleit-Person.</span></li>
         </ul>
       </div>`}
+
+      ${dailyCard}
 
       ${resumeCard}
 
@@ -2290,7 +2362,10 @@ function renderMyPath() {
              <span aria-hidden="true">✓</span>
              <span>${escapeHtml(t.title)}</span>
            </button>`).join("")}
-       </div>`
+       </div>
+       <p class="topic-grid-hint" style="margin-top:12px;">
+         <button type="button" class="setting-big-button" onclick="printSuccessBook()">🖨 Mein Erfolgs-Heft drucken</button>
+       </p>`
     : "";
 
   /* Wiederholungs-Erinnerung (verteiltes Lernen) */
@@ -2391,6 +2466,49 @@ function renderMyPath() {
   `;
   focusContent();
   renderLegalFooter();
+}
+
+/* Mein Erfolgs-Heft: Urkunden-Seite + Merk-Regeln aller geschafften
+   Themen als druckbares Heft. Mitnahme-Artefakt (Bandura: sichtbarer
+   Erfolg), dialogische Grundlage mit der Begleitperson. Keine Speicherung. */
+function printSuccessBook() {
+  const doneTopics = topics.filter(t => isTopicDone(t.id));
+  if (!doneTopics.length) return;
+  const prof = getActiveProfile();
+  const wer = prof ? signLabel(prof) : "";
+  const datum = new Date().toLocaleDateString("de-DE");
+  const seiten = doneTopics.map(t => {
+    const rules = Array.isArray(t.memoryRules) ? t.memoryRules.slice(0, 5) : [];
+    return `<section class="heft-seite">
+      <h2>✓ ${escapeHtml(t.title)}</h2>
+      <p class="heft-geschafft">Das habe ich geschafft.</p>
+      ${rules.length ? `<h3>Das ist wichtig:</h3><ul>${rules.map(r => `<li>${escapeHtml(r)}</li>`).join("")}</ul>` : ""}
+    </section>`;
+  }).join("");
+  const html = `<!doctype html><html lang="de"><head><meta charset="utf-8">` +
+    `<title>Mein Erfolgs-Heft</title>` +
+    `<style>body{font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:24px auto;padding:0 16px;color:#16222e;line-height:1.6;}` +
+    `h1{font-size:26px;margin:0 0 4px;text-align:center;}` +
+    `.heft-titel{border:3px solid #00528f;border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:24px;}` +
+    `.heft-titel p{margin:6px 0;font-size:15px;}` +
+    `.heft-seite{border:2px solid #c6c7c8;border-radius:12px;padding:16px 20px;margin-bottom:16px;page-break-inside:avoid;}` +
+    `.heft-seite h2{font-size:19px;margin:0 0 2px;color:#00528f;}` +
+    `.heft-geschafft{margin:0 0 10px;color:#2E7D4F;font-weight:bold;}` +
+    `h3{font-size:15px;margin:10px 0 4px;}ul{margin:4px 0;padding-left:22px;}li{margin-bottom:5px;}` +
+    `.heft-fuss{margin-top:20px;color:#555;font-size:12px;text-align:center;}</style></head><body>` +
+    `<div class="heft-titel"><h1>Mein Erfolgs-Heft</h1>` +
+    (wer ? `<p>Von: ${escapeHtml(wer)}</p>` : "") +
+    `<p>${doneTopics.length} von ${topics.length} Themen geschafft · Stand: ${datum}</p>` +
+    `<p>Sicher und selbstbestimmt im Internet</p></div>` +
+    seiten +
+    `<p class="heft-fuss">Lernplattform der Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW</p>` +
+    `</body></html>`;
+  const w = window.open("", "_blank");
+  if (!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => { try { w.print(); } catch (e) { /* nichts tun */ } }, 300);
 }
 
 /* ============================================================
@@ -2596,6 +2714,39 @@ function printCompanion(topicId) {
   setTimeout(() => { try { w.print(); } catch (e) { /* nichts tun */ } }, 300);
 }
 
+/* QR-Karten drucken: eine Karte je Thema (Titel + QR + Adresse).
+   Für Workshops und Begleitung: scannen und dasselbe Thema am eigenen
+   Handy weiterlernen. QR-Codes liegen lokal in assets/qr/ (kein externer
+   Dienst, KDG-konform). */
+function printQrCards() {
+  const base = "https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/";
+  const cards = topics.map(t => `
+    <div class="qr-karte">
+      <h2>${escapeHtml(t.title)}</h2>
+      <img src="${new URL("assets/qr/" + escapeHtml(t.id) + ".svg", window.location.href).href}" alt="QR-Code für das Thema ${escapeHtml(t.title)}" width="180" height="180">
+      <p class="qr-anleitung">Mit der Handy-Kamera scannen.<br>Dann öffnet sich das Thema.</p>
+    </div>`).join("");
+  const html = `<!doctype html><html lang="de"><head><meta charset="utf-8">` +
+    `<title>QR-Karten – Sicher und selbstbestimmt im Internet</title>` +
+    `<style>body{font-family:Arial,Helvetica,sans-serif;margin:16px;color:#16222e;}` +
+    `h1{font-size:20px;text-align:center;}` +
+    `.qr-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}` +
+    `.qr-karte{border:2px solid #00285A;border-radius:12px;padding:14px;text-align:center;page-break-inside:avoid;}` +
+    `.qr-karte h2{font-size:17px;margin:0 0 8px;}` +
+    `.qr-anleitung{font-size:13px;margin:8px 0 0;line-height:1.5;}` +
+    `.qr-fuss{margin-top:14px;font-size:11px;color:#555;text-align:center;}</style></head><body>` +
+    `<h1>QR-Karten: Themen zum Scannen</h1>` +
+    `<div class="qr-grid">${cards}</div>` +
+    `<p class="qr-fuss">${escapeHtml(base)} · Alexianer Stift Tilbeck GmbH · Sozialstiftung NRW</p>` +
+    `</body></html>`;
+  const w = window.open("", "_blank");
+  if (!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => { try { w.print(); } catch (e) { /* nichts tun */ } }, 500);
+}
+
 /* Begleit-Panel „Für Begleitpersonen und Fachkräfte" (eigene Ebene,
    keine Sprach-Stufe). Erscheint nur, wenn das Thema Begleit-Material hat. */
 function buildCompanionPanel(topic) {
@@ -2630,7 +2781,12 @@ function buildCompanionPanel(topic) {
       <div class="companion-body">
         <p class="companion-intro">Diese Hinweise richten sich an Betreuende, Assistenz, Angehörige und Fachkräfte. Sie sind nicht Teil der Lern-Texte.</p>
         ${blocks}
+        <div class="companion-qr">
+          <img src="assets/qr/${escapeHtml(topic.id)}.svg" alt="QR-Code für das Thema ${escapeHtml(topic.title)}" width="132" height="132" loading="lazy">
+          <p>Zum Weiterlernen am eigenen Handy: QR-Code scannen – das Thema öffnet sich direkt.</p>
+        </div>
         <button type="button" class="companion-print" onclick="printCompanion('${escapeHtml(topic.id)}')">🖨 Drucken / als PDF speichern</button>
+        <button type="button" class="companion-print" onclick="printQrCards()">🖨 QR-Karten für alle Themen drucken</button>
         <p class="companion-intro"><a href="beobachtungsbogen.html">Beobachtungsbogen für Prüfgruppen-Sitzungen</a> – strukturierte, datensparsame Beobachtung zum Ausdrucken.</p>
       </div>
     </details>`;

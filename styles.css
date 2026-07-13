@@ -3219,6 +3219,72 @@ p.feedback-wrong {
   content: "✓ ";
 }
 
+/* ---------- QR im Begleit-Panel ---------- */
+
+.companion-qr {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 12px 0;
+  padding: 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+}
+
+.companion-qr img {
+  flex: none;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.companion-qr p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Frage des Tages (Start-Seite) ---------- */
+
+.daily-question {
+  border-left: 6px solid var(--topic-color, var(--accent));
+}
+
+.daily-question-topic {
+  margin: 0 0 6px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.daily-question-text {
+  font-size: 1.12rem;
+  margin: 0 0 12px;
+}
+
+.daily-answers {
+  display: grid;
+  gap: 10px;
+}
+
+.daily-answer {
+  min-height: 58px;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 12px 16px;
+  border: 2px solid var(--topic-color, var(--accent));
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.daily-answer:hover {
+  background: var(--topic-hover-bg, var(--accent-soft));
+}
+
 /* ---------- Seite: Hilfe ---------- */
 
 .help-page-actions {
