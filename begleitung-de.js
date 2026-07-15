@@ -20,6 +20,7 @@ const COMPANION = {
       "Sie kennen einen Handlungsschritt, wenn jemand unter Druck nach Daten fragt: Stopp – nicht sofort reagieren – Hilfe holen."
     ],
     methodik: [
+      "Zwei-Faktor-Anmeldung gemeinsam am eigenen Gerät einrichten und den Ablauf einmal komplett durchspielen (BSI-Empfehlung 2026).",
       "Lebensweltorientierung: Beispiele aus dem Alltag der Teilnehmenden aufgreifen (eigenes Handy, Lieblings-App, echte Nachrichten).",
       "Micro-Learning: pro Einheit nur ein Lernschritt; Pausen aktiv anbieten (die Pause-Funktion nutzen).",
       "Aktivierung statt Berieselung: vor der Lösung erst selbst einschätzen lassen (Quiz, Daumen hoch oder runter).",
@@ -367,13 +368,14 @@ const COMPANION = {
 
   betrug: {
     lernziele: [
-      "Die Teilnehmenden erkennen Phishing, Paket-Trick, Hallo-Mama-Trick, Schockanrufe, falsche Gewinne und Abo-Fallen.",
+      "Die Teilnehmenden erkennen Phishing, Paket-Trick, Hallo-Mama-Trick, Schockanrufe, falsche Gewinne, Abo-Fallen und gefälschte QR-Codes (Quishing).",
       "Sie geben keine Codes oder Bankdaten weiter und rufen bei Geldforderungen selbst zurück.",
       "Sie wissen, was nach einem Betrug zu tun ist (Karte sperren, Hilfe, Anzeige)."
     ],
     methodik: [
       "Aktivierung: Warnzeichen in Beispiel-Nachrichten suchen.",
       "Rollenspiel: einen Schockanruf sicher beenden.",
+      "QR-Codes gemeinsam prüfen: Woher kommt der Code? Aufkleber und Briefe als Warnsignal besprechen (aktuelle Quishing-Maschen laut BSI/Polizei).",
       "Notfall-Plan einüben; Merk-Karte sichern.",
       "Lebensweltorientierung an realen, aktuellen Maschen."
     ],

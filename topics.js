@@ -110,6 +110,16 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Dein Passwort ist nicht für die Gruppe."
       },
       {
+        "question": "Du sicherst dein Konto doppelt. Was brauchst du beim Anmelden?",
+        "answers": [
+          "Nur einen Klick.",
+          "Passwort und eine Zahl auf dem Handy."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Das ist richtig. Beides zusammen macht dein Konto doppelt sicher.",
+        "feedbackWrong": "Das ist noch nicht richtig. Doppelt sicher heißt: Passwort und eine Zahl auf deinem Handy."
+      },
+      {
         "question": "Was ist eine gute Regel?",
         "answers": [
           "Erst prüfen.",
@@ -565,6 +575,49 @@ const topics = [
         "pictogram": "pikto-help"
       },
       {
+        "title": "Doppelt sicher",
+        "module": "Passwort",
+        "icon": "lock",
+        "text": [
+          {
+            "text": "Manche Konten kann man doppelt sichern.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Das heißt: Zwei-Faktor.",
+            "pictogram": "pikto-key"
+          },
+          {
+            "text": "Du gibst dein Passwort ein.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Dann schickt die App eine Zahl auf dein Handy.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Du gibst die Zahl ein. Nur du hast dein Handy.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Eine vertraute Person kann dir beim Einrichten helfen.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "practice": {
+          "question": "Was macht dein Konto doppelt sicher?",
+          "answers": [
+            "Ein kurzes Passwort.",
+            "Passwort und eine Zahl auf deinem Handy."
+          ],
+          "correctIndex": 1,
+          "feedbackCorrect": "Das ist richtig. Passwort plus Zahl auf dem Handy: Das ist doppelt sicher.",
+          "feedbackWrong": "Das ist noch nicht richtig. Doppelt sicher heißt: Passwort und eine Zahl auf deinem Handy.",
+          "remember": "Doppelt sichern schützt mein Konto."
+        },
+        "remember": "Doppelt sichern schützt mein Konto."
+      },
+      {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
@@ -740,7 +793,8 @@ const topics = [
       7,
       9,
       10,
-      11
+      11,
+      12
     ],
     "qrLink": "index.html#datenschutz",
     "qrShortLink": "index.html#datenschutz:kurz",
@@ -5450,6 +5504,14 @@ const topics = [
           {
             "text": "Ein Chatbot hat keine Gefühle.",
             "pictogram": "pikto-message"
+          },
+          {
+            "text": "Bist du traurig oder einsam?",
+            "pictogram": "pikto-feel"
+          },
+          {
+            "text": "Dann sprich mit einem echten Menschen.",
+            "pictogram": "pikto-person"
           }
         ],
         "warning": "Ein Chatbot ist kein echter Freund. Wichtige Sorgen besprichst du mit einem Menschen.",
@@ -6692,6 +6754,16 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Der Betrüger hat Schuld. Hilfe holen ist stark."
       },
       {
+        "question": "Am Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
+        "answers": [
+          "Erst eine vertraute Person fragen.",
+          "Sofort scannen und bezahlen."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Das ist richtig. Erst fragen. Dann scannen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Betrüger kleben falsche Codes über echte. Erst fragen. Dann scannen."
+      },
+      {
         "question": "Was machst du nach einem Betrug?",
         "answers": [
           "Ich erzähle es einer Person, der ich vertraue.",
@@ -7023,6 +7095,45 @@ const topics = [
         "pictogram": "pikto-lock"
       },
       {
+        "title": "Vorsicht bei QR-Codes",
+        "module": "Schutz",
+        "icon": "warning",
+        "text": [
+          {
+            "text": "Ein QR-Code ist wie eine Tür.",
+            "pictogram": "pikto-code"
+          },
+          {
+            "text": "Du weißt vorher nicht: Wohin führt die Tür?",
+            "pictogram": "pikto-ask"
+          },
+          {
+            "text": "Betrüger kleben falsche QR-Codes über echte.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Zum Beispiel am Park-Automaten. Oder in Briefen.",
+            "pictogram": "pikto-warning"
+          },
+          {
+            "text": "Scanne nur Codes von vertrauten Menschen.",
+            "pictogram": "pikto-person"
+          }
+        ],
+        "practice": {
+          "question": "Am Park-Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
+          "answers": [
+            "Schnell scannen.",
+            "Erst eine vertraute Person fragen."
+          ],
+          "correctIndex": 1,
+          "feedbackCorrect": "Das ist richtig. Erst fragen. Dann scannen.",
+          "feedbackWrong": "Das ist riskant. Betrüger kleben falsche Codes über echte. Frag erst eine vertraute Person.",
+          "remember": "Erst fragen. Dann scannen."
+        },
+        "remember": "Erst fragen. Dann scannen."
+      },
+      {
         "title": "Was tun nach einem Betrug?",
         "module": "Hilfe",
         "icon": "help",
@@ -7225,7 +7336,8 @@ const topics = [
       "Echte Gewinne kosten kein Geld.",
       "Die echte Polizei fordert nie Geld.",
       "Bei Geld-Forderungen rufe ich selbst zurück.",
-      "Betrug ist nicht meine Schuld. Ich hole mir Hilfe."
+      "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.",
+      "Erst fragen. Dann scannen."
     ],
     "shortLessonIndexes": [
       0,
@@ -7235,7 +7347,8 @@ const topics = [
       6,
       8,
       9,
-      10
+      10,
+      11
     ],
     "einfachLessons": [
       {
@@ -7495,6 +7608,18 @@ const topics = [
           {
             "text": "Diese Warnzeichen helfen dir.",
             "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Es gibt eine Prüf-Seite: der Fakeshop-Finder.",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Du gibst die Adresse vom Shop ein. Die Seite prüft den Shop.",
+            "pictogram": "pikto-shop"
+          },
+          {
+            "text": "Prüfe am besten mit einer vertrauten Person.",
+            "pictogram": "pikto-help"
           }
         ],
         "bullets": [

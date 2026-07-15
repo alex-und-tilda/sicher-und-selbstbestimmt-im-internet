@@ -12,6 +12,20 @@
 
 const CONTENT_VERSIONS = {
   datenschutz: {
+    "Doppelt sicher": {
+      einfach: {
+        text: [
+          { text: "Viele Konten kannst du doppelt sichern. Das nennt man Zwei-Faktor-Anmeldung." },
+          { text: "Du gibst dein Passwort ein. Danach schickt die App eine Zahl auf dein Handy, die du auch eingibst." },
+          { text: "Weil nur du dein Handy hast, kommt niemand sonst in dein Konto. Eine vertraute Person kann dir beim Einrichten helfen." }
+        ],
+        success: "Passwort plus Handy-Zahl: So ist dein Konto doppelt geschützt."
+      },
+      standard: {
+        text: [{ text: "Die Zwei-Faktor-Anmeldung sichert dein Konto zusätzlich zum Passwort ab: Nach der Passwort-Eingabe bestätigst du die Anmeldung mit einem Code auf deinem Handy. Selbst wenn jemand dein Passwort kennt, kommt er ohne dein Handy nicht hinein. Moderne Konten bieten zusätzlich Passkeys an – eine Anmeldung ganz ohne Passwort, zum Beispiel per Fingerabdruck. Das BSI empfiehlt beides." }],
+        success: "Zwei-Faktor oder Passkey: mehr Schutz als jedes Passwort allein."
+      }
+    },
     "Start": {
       einfach: {
         text: [
@@ -1291,6 +1305,20 @@ const CONTENT_VERSIONS = {
   },
 
   betrug: {
+    "Vorsicht bei QR-Codes": {
+      einfach: {
+        text: [
+          { text: "Ein QR-Code ist wie eine Tür: Du siehst vorher nicht, wohin sie führt." },
+          { text: "Betrüger überkleben echte QR-Codes mit falschen. Zum Beispiel an Park-Automaten oder in Briefen." },
+          { text: "Scanne nur Codes aus einer Quelle, der du vertraust. Im Zweifel fragst du vorher eine vertraute Person." }
+        ],
+        warning: "Ein falscher QR-Code kann auf eine Betrugs-Seite führen. Erst prüfen, dann scannen."
+      },
+      standard: {
+        text: [{ text: "QR-Codes zeigen erst nach dem Scannen, wohin sie führen. Kriminelle nutzen das aus und überkleben echte Codes mit gefälschten – etwa an Parkautomaten, in Briefen oder auf falschen Paket-Benachrichtigungen (sogenanntes Quishing). Scanne nur Codes aus vertrauenswürdiger Quelle und prüfe die geöffnete Internet-Adresse, bevor du dort etwas eingibst." }],
+        warning: "Quishing nimmt stark zu. Prüfe die Ziel-Adresse eines QR-Codes, bevor du Daten eingibst."
+      }
+    },
     "Start": {
       einfach: { text: [
         { text: "Hier geht es um Betrug im Internet, denn Betrüger wollen dein Geld oder deine Daten." },
@@ -1447,10 +1475,11 @@ const CONTENT_VERSIONS = {
           { text: "Ein Fake-Shop ist ein falscher Shop: Du bezahlst, aber die Ware kommt nie." },
           { text: "Solche Shops sehen oft sehr echt aus, deshalb helfen dir die folgenden Warnzeichen." }
         ],
-        bullets: ["Alles ist sehr, sehr billig.", "Du kannst nur per Vorkasse zahlen.", "Es gibt kein Impressum.", "Der Name der Internet-Seite ist komisch."]
+        bullets: ["Alles ist sehr, sehr billig.", "Du kannst nur per Vorkasse zahlen.", "Es gibt kein Impressum.", "Der Name der Internet-Seite ist komisch."],
+        success: "Tipp: Mit dem Fakeshop-Finder der Verbraucher-Zentrale kannst du einen Shop kostenlos prüfen. Du gibst die Adresse ein und bekommst eine Einschätzung."
       },
       standard: { warning: "Fake-Shops wirken oft täuschend echt: Du bezahlst, erhältst die Ware aber nie. Prüfe einen unbekannten Shop deshalb genau, bevor du dort bezahlst oder Daten eingibst.",
-        text: [{ text: "Fake-Shops sehen oft täuschend echt aus, doch nach der Zahlung kommt keine Ware. Stutzig machen sollten dich extrem niedrige Preise, fehlendes Impressum, eine merkwürdige Internetadresse und die Vorgabe, nur per Vorkasse zahlen zu können." }],
+        text: [{ text: "Fake-Shops sehen oft täuschend echt aus, doch nach der Zahlung kommt keine Ware. Stutzig machen sollten dich extrem niedrige Preise, fehlendes Impressum, eine merkwürdige Internetadresse und die Vorgabe, nur per Vorkasse zahlen zu können. Ein schneller Check: der kostenlose Fakeshop-Finder der Verbraucherzentrale – Shop-Adresse eingeben und die Einschätzung lesen." }],
         bullets: []
       }
     },

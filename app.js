@@ -584,7 +584,11 @@ const GLOSSAR = {
   "kauf auf rechnung":      "Kauf auf Rechnung heißt: Du bekommst die Ware zuerst. Du zahlst erst danach. Das ist sicher.",
   "vorkasse":               "Vorkasse heißt: Du zahlst zuerst. Die Ware kommt erst danach. Bei fremden Shops ist das riskant.",
   "online-shop":            "Ein Online-Shop ist ein Geschäft im Internet. Du bestellst dort Waren. Sie kommen mit der Post.",
-  "bewertung":              "Eine Bewertung ist die Meinung von Kunden. Zum Beispiel Sterne von 1 bis 5. Sie hilft beim Prüfen."
+  "bewertung":              "Eine Bewertung ist die Meinung von Kunden. Zum Beispiel Sterne von 1 bis 5. Sie hilft beim Prüfen.",
+  "zwei-faktor-anmeldung":  "Zwei-Faktor heißt: doppelt sichern. Du gibst dein Passwort ein. Dann noch eine Zahl von deinem Handy. Das ist sehr sicher.",
+  "passkey":                "Ein Passkey ist eine Anmeldung ohne Passwort. Du bestätigst mit dem Finger oder mit deinem Gesicht. Das ist sehr sicher.",
+  "fakeshop-finder":        "Der Fakeshop-Finder ist eine Prüf-Seite von der Verbraucher-Zentrale. Du gibst die Adresse vom Shop ein. Die Seite sagt dir: sicher oder Vorsicht.",
+  "quishing":               "Quishing ist Betrug mit falschen QR-Codes. Betrüger kleben falsche Codes über echte. Scanne nur Codes von vertrauten Menschen."
 };
 
 let glossarOverlay = null;
