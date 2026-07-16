@@ -2892,6 +2892,7 @@ function buildCompanionPanel(topic) {
         <button type="button" class="companion-print" onclick="printCompanion('${escapeHtml(topic.id)}')">🖨 Drucken / als PDF speichern</button>
         <button type="button" class="companion-print" onclick="printQrCards()">🖨 QR-Karten für alle Themen drucken</button>
         <p class="companion-intro"><a href="beobachtungsbogen.html">Beobachtungsbogen für Prüfgruppen-Sitzungen</a> – strukturierte, datensparsame Beobachtung zum Ausdrucken.</p>
+        <p class="companion-intro"><a href="pruefheft.html">Prüf-Heft für Klientinnen und Klienten</a> – Aufgaben in Leichter Sprache mit Smiley-Antworten, zum Ausdrucken.</p>
       </div>
     </details>`;
 }

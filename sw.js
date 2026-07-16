@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-10l";
+const CACHE_VERSION = "v2026-10n";
 const ARASAAC_CACHE = "arasaac-pictograms-v1";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 
@@ -26,6 +26,7 @@ const PRECACHE_URLS = [
   /* Statische Seiten */
   "./barrierefreiheit.html",
   "./beobachtungsbogen.html",
+  "./pruefheft.html",
   "./sprachstufen.html",
   "./impressum.html",
   "./datenschutz.html",

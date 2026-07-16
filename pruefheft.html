@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prüf-Heft für die Prüfgruppe</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; max-width: 720px; margin: 24px auto;
+         padding: 0 18px; color: #16222e; font-size: 17px; line-height: 1.8; }
+  h1 { font-size: 26px; color: #00285A; }
+  h2 { font-size: 20px; color: #00285A; margin: 0 0 6px; }
+  .kopf { border: 3px solid #00285A; border-radius: 14px; padding: 18px 20px; margin-bottom: 24px; }
+  .kopf p { margin: 6px 0; }
+  .aufgabe { border: 2px solid #c6c7c8; border-radius: 14px; padding: 18px 20px;
+             margin-bottom: 22px; page-break-inside: avoid; }
+  .nummer { display: inline-block; background: #d8eaf2; color: #00285A; font-weight: bold;
+            border-radius: 999px; padding: 2px 14px; margin-bottom: 8px; }
+  .tu { background: #d8eaf2; border-radius: 10px; padding: 10px 14px; margin: 10px 0; font-weight: bold; }
+  .smileys { display: flex; gap: 30px; margin: 14px 0 6px; }
+  .smiley { text-align: center; cursor: pointer; }
+  .smiley .zeichen { font-size: 40px; display: block; }
+  .smiley input[type=radio] { width: 34px; height: 34px; margin-top: 6px; accent-color: #00528f; cursor: pointer; }
+  .zeile-label { margin: 14px 0 0; color: #555; font-size: 15px; }
+  .zeile-input { width: 100%; border: none; border-bottom: 2px solid #c6c7c8; font-family: inherit;
+                 font-size: 17px; padding: 6px 2px; background: transparent; }
+  .zeile-input:focus { outline: 3px solid #b45309; outline-offset: 2px; }
+  .fuss { margin-top: 26px; color: #555; font-size: 13px; border-top: 1px solid #c6c7c8; padding-top: 10px; }
+  .knopf { min-height: 52px; padding: 10px 24px; font-size: 17px; font-weight: bold;
+           background: #00528f; color: #fff; border: none; border-radius: 10px; cursor: pointer; margin: 4px 8px 4px 0; }
+  .knopf.zweit { background: #ffffff; color: #00528f; border: 2px solid #00528f; }
+  .digital { border: 2px solid #2E7D4F; border-radius: 14px; padding: 16px 20px; margin: 22px 0; }
+  .digital p { margin: 6px 0; }
+  #kopiert { color: #2E7D4F; font-weight: bold; }
+  @media print { .knopf, .digital { display: none; } body { font-size: 15px; } .smiley .zeichen { font-size: 34px; } }
+</style>
+</head>
+<body>
+
+<button type="button" class="knopf" onclick="window.print()">Dieses Heft drucken</button>
+
+<h1>Prüf-Heft: Hilf uns!</h1>
+
+<div class="kopf">
+  <p><strong>Du prüfst heute unsere Lern-Seite.</strong></p>
+  <p>Du bist die Fach-Person. Deine Meinung ist wichtig.</p>
+  <p>Es gibt kein richtig und kein falsch.</p>
+  <p>Etwas ist unklar? Das ist ein wichtiger Fund. Danke dafür!</p>
+  <p>Du kannst jederzeit Pause machen. Du kannst jederzeit aufhören.</p>
+  <p>Wir schreiben keinen Namen auf.</p>
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 1: Das Menü unten">
+  <span class="nummer">Aufgabe 1</span>
+  <h2>Das Menü unten</h2>
+  <div class="tu">Schau auf das Menü unten am Bildschirm. Tippe auf: Mein Lernweg.</div>
+  <p>Hast du verstanden: Was ist „Mein Lernweg"?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 1">
+    <label class="smiley"><span class="zeichen">🙂</span>Gut<br><input type="radio" name="a1" value="Gut"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Geht so<br><input type="radio" name="a1" value="Geht so"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Schwer<br><input type="radio" name="a1" value="Schwer"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu (die Begleitung schreibt auf):</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 1">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 2: Der Lautsprecher-Knopf">
+  <span class="nummer">Aufgabe 2</span>
+  <h2>Der Lautsprecher-Knopf</h2>
+  <div class="tu">Suche einen runden Knopf mit einem Lautsprecher. Tippe darauf.</div>
+  <p>Wusstest du vorher: Was macht dieser Knopf?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 2">
+    <label class="smiley"><span class="zeichen">🙂</span>Ja<br><input type="radio" name="a2" value="Ja"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Nicht sicher<br><input type="radio" name="a2" value="Nicht sicher"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Nein<br><input type="radio" name="a2" value="Nein"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu:</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 2">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 3: Hilfe finden">
+  <span class="nummer">Aufgabe 3</span>
+  <h2>Hilfe finden</h2>
+  <div class="tu">Öffne ein Thema. Lerne 2 Schritte. Jetzt suche die Hilfe.</div>
+  <p>Hast du die Hilfe gefunden?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 3">
+    <label class="smiley"><span class="zeichen">🙂</span>Sofort<br><input type="radio" name="a3" value="Sofort"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Nach Suchen<br><input type="radio" name="a3" value="Nach Suchen"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Nicht gefunden<br><input type="radio" name="a3" value="Nicht gefunden"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu:</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 3">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 4: Ein Thema anfangen">
+  <span class="nummer">Aufgabe 4</span>
+  <h2>Ein Thema anfangen</h2>
+  <div class="tu">Gehe zu den Themen. Tippe auf ein Thema. Welchen Knopf drückst du zuerst?</div>
+  <p>War sofort klar: Hier fange ich an?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 4">
+    <label class="smiley"><span class="zeichen">🙂</span>Ja<br><input type="radio" name="a4" value="Ja"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Geht so<br><input type="radio" name="a4" value="Geht so"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Nein<br><input type="radio" name="a4" value="Nein"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu:</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 4">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 5: Satz Hilfe-Button">
+  <span class="nummer">Aufgabe 5</span>
+  <h2>Ein Satz aus der Seite</h2>
+  <div class="tu">Lies diesen Satz. Oder lass ihn dir vorlesen:<br>„Du bist unsicher? Dann nutze den Hilfe-Button."</div>
+  <p>Verstehst du den Satz?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 5">
+    <label class="smiley"><span class="zeichen">🙂</span>Gut<br><input type="radio" name="a5" value="Gut"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Geht so<br><input type="radio" name="a5" value="Geht so"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Schwer<br><input type="radio" name="a5" value="Schwer"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu:</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 5">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 6: Satz vertraute Person">
+  <span class="nummer">Aufgabe 6</span>
+  <h2>Noch ein Satz</h2>
+  <div class="tu">Lies diesen Satz:<br>„Frag eine Person, der du vertraust."</div>
+  <p>Weißt du sofort: Wer ist so eine Person für dich?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 6">
+    <label class="smiley"><span class="zeichen">🙂</span>Ja<br><input type="radio" name="a6" value="Ja"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Nicht sicher<br><input type="radio" name="a6" value="Nicht sicher"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Nein<br><input type="radio" name="a6" value="Nein"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu:</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 6">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 7: Gruppen-Namen">
+  <span class="nummer">Aufgabe 7</span>
+  <h2>Die Gruppen-Namen</h2>
+  <div class="tu">Schau auf die Themen-Seite. Dort stehen 3 Gruppen:<br>„Wichtig für alle" · „Apps" · „Gefahren und Hilfe"</div>
+  <p>Passen die Namen zu den Themen darunter?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 7">
+    <label class="smiley"><span class="zeichen">🙂</span>Ja<br><input type="radio" name="a7" value="Ja"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Teils<br><input type="radio" name="a7" value="Teils"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Nein<br><input type="radio" name="a7" value="Nein"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu:</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 7">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 8: QR-Karte">
+  <span class="nummer">Aufgabe 8</span>
+  <h2>Die QR-Karte</h2>
+  <div class="tu">Nimm eine QR-Karte. Scanne den Code mit der Handy-Kamera. Die Begleitung hilft dir.</div>
+  <p>Hat das Scannen geklappt?</p>
+  <div class="smileys" role="radiogroup" aria-label="Antwort Aufgabe 8">
+    <label class="smiley"><span class="zeichen">🙂</span>Ja<br><input type="radio" name="a8" value="Ja"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Mit Hilfe<br><input type="radio" name="a8" value="Mit Hilfe"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Nein<br><input type="radio" name="a8" value="Nein"></label>
+  </div>
+  <p class="zeile-label">Das sage ich dazu:</p>
+  <input type="text" class="zeile-input" aria-label="Anmerkung zu Aufgabe 8">
+</div>
+
+<div class="aufgabe" data-titel="Aufgabe 9: Zum Schluss">
+  <span class="nummer">Aufgabe 9</span>
+  <h2>Zum Schluss</h2>
+  <p><strong>Was hat dir am besten gefallen?</strong></p>
+  <input type="text" class="zeile-input" aria-label="Was hat dir am besten gefallen?">
+  <p style="margin-top:18px;"><strong>Was war schwer oder komisch?</strong></p>
+  <input type="text" class="zeile-input" aria-label="Was war schwer oder komisch?">
+  <p style="margin-top:18px;"><strong>Kommst du wieder auf die Lern-Seite?</strong></p>
+  <div class="smileys" role="radiogroup" aria-label="Kommst du wieder?">
+    <label class="smiley"><span class="zeichen">🙂</span>Ja<br><input type="radio" name="a9" value="Ja"></label>
+    <label class="smiley"><span class="zeichen">😐</span>Vielleicht<br><input type="radio" name="a9" value="Vielleicht"></label>
+    <label class="smiley"><span class="zeichen">🙁</span>Nein<br><input type="radio" name="a9" value="Nein"></label>
+  </div>
+</div>
+
+<div class="aufgabe">
+  <span class="nummer">Fertig?</span>
+  <h2>So gibst du das Heft ab</h2>
+  <p>Auf Papier: Gib das Heft deiner Begleitung. Oder leg es in die Prüf-Mappe.</p>
+  <p>Dein Name muss nicht auf das Heft.</p>
+  <p class="zeile-label">Abgabe bei (trägt die Einrichtung ein):</p>
+  <input type="text" class="zeile-input" aria-label="Abgabe bei" data-kein-export="1">
+</div>
+
+<div class="digital">
+  <h2>Für Begleitpersonen: digital übermitteln</h2>
+  <p>Diese Seite speichert nichts und sendet nichts von selbst.</p>
+  <p>Ihr könnt die Antworten kopieren – oder als E-Mail-Entwurf öffnen und aus dem
+     <strong>dienstlichen Postfach</strong> senden. Der Entwurf geht an:
+     <strong>digitale-teilhabe@stift-tilbeck.de</strong></p>
+  <button type="button" class="knopf" onclick="antwortenMailen()">E-Mail-Entwurf öffnen</button>
+  <button type="button" class="knopf zweit" onclick="antwortenKopieren()">Antworten kopieren</button>
+  <span id="kopiert" role="status"></span>
+</div>
+
+<div class="kopf" style="border-color:#2E7D4F;">
+  <p><strong>Danke! Du hast uns sehr geholfen.</strong></p>
+  <p>Deine Antworten machen die Lern-Seite besser.</p>
+</div>
+
+<p class="fuss">Prüf-Heft zur Lernplattform „Sicher und selbstbestimmt im Internet" ·
+Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW ·
+Datensparsam: keine Namen, keine Fotos, keine Aufnahmen. Es wird die Seite geprüft, nicht die Person.<br>
+Für Begleitpersonen: Ausgefüllte Papier-Hefte gesammelt an die Projektleitung Digitale Teilhabe weitergeben —
+im Haus-Umschlag oder als Scan/Foto der Bögen (ohne Personen im Bild) an digitale-teilhabe@stift-tilbeck.de.</p>
+
+<script>
+/* Antworten einsammeln – nur aus dem Bildschirm, nichts wird gespeichert */
+function antwortenText() {
+  var teile = ["Prüf-Heft Rückmeldung – Lernplattform Sicher und selbstbestimmt im Internet",
+               "Datum: " + new Date().toLocaleDateString("de-DE"), ""];
+  document.querySelectorAll(".aufgabe[data-titel]").forEach(function (box) {
+    teile.push(box.getAttribute("data-titel"));
+    var gewaehlt = box.querySelector("input[type=radio]:checked");
+    teile.push("  Antwort: " + (gewaehlt ? gewaehlt.value : "(nicht beantwortet)"));
+    box.querySelectorAll(".zeile-input").forEach(function (feld) {
+      if (feld.dataset.keinExport) return;
+      if (feld.value.trim()) teile.push("  Anmerkung: " + feld.value.trim());
+    });
+    teile.push("");
+  });
+  teile.push("Hinweis: anonym erhoben, keine Namen. Geprüft wurde die Seite, nicht die Person.");
+  return teile.join("\n");
+}
+
+function antwortenMailen() {
+  var betreff = encodeURIComponent("Prüf-Heft Rückmeldung – Lernplattform");
+  var text = encodeURIComponent(antwortenText());
+  /* Funktions-Postfach Digitale Teilhabe (kein persönliches Postfach) */
+  window.location.href = "mailto:digitale-teilhabe@stift-tilbeck.de?subject=" + betreff + "&body=" + text;
+}
+
+function antwortenKopieren() {
+  var text = antwortenText();
+  var melden = function () {
+    var s = document.getElementById("kopiert");
+    s.textContent = "✓ Kopiert. Jetzt in die dienstliche E-Mail einfügen.";
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(melden);
+  } else {
+    var ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); melden(); } catch (e) { /* nichts tun */ }
+    ta.remove();
+  }
+}
+</script>
+
+</body>
+</html>
