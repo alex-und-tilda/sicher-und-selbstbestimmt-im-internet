@@ -3434,6 +3434,31 @@ p.feedback-wrong {
   background: var(--topic-hover-bg, var(--accent-soft));
 }
 
+/* ---------- Gesamt-Abschluss (alle Themen geschafft) ---------- */
+
+.grand-finish {
+  background: var(--good-bg);
+  border: 3px solid var(--good);
+  border-radius: var(--radius-m);
+  padding: 20px 22px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.grand-finish h3 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  color: var(--good);
+}
+
+.grand-finish p {
+  margin: 4px 0;
+}
+
+.grand-finish .setting-big-button {
+  margin-top: 12px;
+}
+
 /* ---------- Seite: Hilfe ---------- */
 
 .help-page-actions {

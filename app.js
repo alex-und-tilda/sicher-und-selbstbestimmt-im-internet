@@ -2471,6 +2471,7 @@ function renderMyPath() {
     <section class="start-page">
       ${buildReadingToolbar()}
       <h2 class="topic-grid-title">Mein Lernweg</h2>
+      ${buildGrandFinish()}
       ${heroProgress}
       ${reviewSection}
       ${doneSection}
@@ -2562,6 +2563,54 @@ function printSuccessBook() {
   w.document.close();
   w.focus();
   setTimeout(() => { try { w.print(); } catch (e) { /* nichts tun */ } }, 300);
+}
+
+/* Gesamt-Urkunde: der größte Erfolgsmoment der Plattform.
+   Erscheint erst, wenn ALLE Themen geschafft sind. Druckbar, ohne
+   Speicherung – Empowerment-Sprache, nicht kindisch. */
+function printGrandCertificate() {
+  if (countDoneTopics() < topics.length) return;
+  const prof = getActiveProfile();
+  const wer = prof ? signLabel(prof) : "";
+  const datum = new Date().toLocaleDateString("de-DE");
+  const html = `<!doctype html><html lang="de"><head><meta charset="utf-8">` +
+    `<title>Urkunde – Alle Themen geschafft</title>` +
+    `<style>body{font-family:Arial,Helvetica,sans-serif;max-width:680px;margin:40px auto;padding:0 16px;color:#16222e;text-align:center;line-height:1.7;}` +
+    `.rahmen{border:5px double #00285A;border-radius:20px;padding:44px 30px;}` +
+    `h1{font-size:34px;letter-spacing:0.12em;margin:0 0 18px;color:#00285A;}` +
+    `.wer{font-size:24px;font-weight:bold;margin:14px 0;}` +
+    `.was{font-size:19px;margin:12px 0;}` +
+    `.gross{font-size:21px;font-weight:bold;color:#2E7D4F;margin:16px 0;}` +
+    `.datum{margin-top:26px;font-size:15px;color:#555;}` +
+    `.fuss{margin-top:18px;font-size:12px;color:#555;}</style></head><body>` +
+    `<div class="rahmen">` +
+    `<h1>URKUNDE</h1>` +
+    (wer ? `<p class="wer">${escapeHtml(wer)}</p>` : "") +
+    `<p class="was">hat alle ${topics.length} Themen geschafft:</p>` +
+    `<p class="was"><strong>Sicher und selbstbestimmt im Internet</strong></p>` +
+    `<p class="gross">Du kennst dich jetzt gut aus.<br>Du kannst dich sicher im Internet bewegen.</p>` +
+    `<p class="datum">Geschafft am ${datum}</p>` +
+    `<p class="fuss">Lernplattform der Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW</p>` +
+    `</div></body></html>`;
+  const w = window.open("", "_blank");
+  if (!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => { try { w.print(); } catch (e) { /* nichts tun */ } }, 300);
+}
+
+/* Feier-Baustein: erscheint auf Abschluss-Seite und in „Mein Lernweg",
+   sobald alle Themen geschafft sind. */
+function buildGrandFinish() {
+  if (countDoneTopics() < topics.length) return "";
+  return `
+    <div class="grand-finish" role="region" aria-label="Alle Themen geschafft">
+      <h3>🎉 Du hast alle ${topics.length} Themen geschafft!</h3>
+      <p>Das ist eine große Leistung.</p>
+      <p>Du kennst dich jetzt gut aus. Du kannst dich sicher im Internet bewegen.</p>
+      <button type="button" class="setting-big-button" onclick="printGrandCertificate()">🖨 Deine große Urkunde drucken</button>
+    </div>`;
 }
 
 /* ============================================================
@@ -3463,6 +3512,7 @@ function buildCompletionProgress() {
       <button type="button" class="utility-button" onclick="enableProgressInline(this)">Ja, Lernstand merken</button>
     </div>` : "";
   return `
+    ${buildGrandFinish()}
     <div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
       <div class="hero-progress-numbers">
         <span class="hero-progress-count">${done}</span>
