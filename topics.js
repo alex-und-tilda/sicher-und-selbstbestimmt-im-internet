@@ -1249,7 +1249,7 @@ const topics = [
           "correctIndex": 0,
           "feedbackWrong": "Das ist nicht sicher. Unter Stress machst du leichter Fehler.",
           "feedbackCorrect": "Das ist sicher. Du machst erst eine Pause.",
-          "remember": "Ich mache Pause, wenn mich etwas stresst."
+          "remember": "Etwas stresst mich? Dann mache ich Pause."
         },
         "pictogram": "pikto-feel"
       },
@@ -3005,7 +3005,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Werbung will, dass du etwas kaufst.",
+            "text": "Werbung will: Du sollst etwas kaufen.",
             "pictogram": "pikto-no"
           },
           {
@@ -3387,7 +3387,7 @@ const topics = [
           "Du schaust auf einen anderen Kanal.",
           "Oder du fragst eine vertraute Person."
         ],
-        "remember": "Prüfe, ob das Video stimmt."
+        "remember": "Prüfe das Video: Stimmt es?"
       },
       {
         "title": "Werbung erkennen",
@@ -3396,7 +3396,7 @@ const topics = [
         "icon": "warning",
         "text": [
           "Manchmal kommt Werbung im Video.",
-          "Werbung will, dass du etwas kaufst.",
+          "Werbung will: Du sollst etwas kaufen.",
           "Du musst nichts kaufen.",
           "Du kannst Werbung überspringen.",
           "Du klickst nicht auf Werbung."
@@ -3642,7 +3642,7 @@ const topics = [
             "pictogram": "pikto-no"
           }
         ],
-        "warning": "Niemand darf dich zu privaten Bildern drängen. Du darfst immer Nein sagen. Hol dir Hilfe, wenn dich jemand drängt.",
+        "warning": "Niemand darf dich zu privaten Bildern drängen. Du darfst immer Nein sagen. Jemand drängt dich? Dann hol dir Hilfe.",
         "practice": {
           "question": "Jemand drängt dich, ein sehr privates Bild zu schicken. Was ist besser?",
           "answers": [
@@ -4034,7 +4034,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du machst nicht mit."
       },
       {
-        "question": "Du bemerkst, dass du sehr lange TikTok schaust. Was ist wichtig?",
+        "question": "Du schaust schon sehr lange TikTok. Was ist wichtig?",
         "answers": [
           "Ich darf Pause machen.",
           "Ich muss immer weiter schauen."
@@ -4195,7 +4195,7 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du bemerkst, dass du sehr lange TikTok schaust. Was ist wichtig?",
+          "question": "Du schaust schon sehr lange TikTok. Was ist wichtig?",
           "answers": [
             "Ich darf Pause machen.",
             "Ich muss immer weiter schauen."
@@ -4203,13 +4203,13 @@ const topics = [
           "correctIndex": 0,
           "feedbackWrong": "Das ist nicht richtig. Du musst nicht immer weiter schauen.",
           "feedbackCorrect": "Das ist richtig. Du darfst Pause machen.",
-          "remember": "Ich mache Pause, wenn mir etwas nicht gut tut."
+          "remember": "Etwas tut mir nicht gut? Dann mache ich Pause."
         },
         "pictogram": "pikto-screen"
       },
       {
         "title": "Gefährliche Trends erkennen",
-        "warning": "Manche Trends sind gefährlich. Mach nicht mit, wenn ein Trend weh tun kann. Deine Gesundheit ist wichtiger.",
+        "warning": "Manche Trends sind gefährlich. Ein Trend kann weh tun? Dann mach nicht mit. Deine Gesundheit ist wichtiger.",
         "module": "Trends",
         "icon": "warning",
         "text": [
@@ -4455,7 +4455,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du machst nicht mit."
       },
       {
-        "question": "Du bemerkst, dass du sehr lange TikTok schaust. Was ist wichtig?",
+        "question": "Du schaust schon sehr lange TikTok. Was ist wichtig?",
         "answers": [
           "Ich darf Pause machen.",
           "Ich muss immer weiter schauen."
@@ -4633,9 +4633,9 @@ const topics = [
     "title": "Hilfe bei Problemen",
     "icon": "help",
     "desc": "Stopp machen, zeigen und Unterstützung holen",
-    "transfer": "Überlege dir heute eine Person, der du vertraust. Diese Person fragst du, wenn etwas passiert.",
+    "transfer": "Überlege dir heute eine Person, der du vertraust. Etwas passiert? Dann fragst du diese Person.",
     "selfAssessment": {
-      "question": "Weißt du, was du tun kannst, wenn etwas im Internet passiert?",
+      "question": "Etwas passiert im Internet. Hast du einen Plan?",
       "options": [
         "Noch nicht so genau",
         "Ein bisschen",
@@ -5245,7 +5245,7 @@ const topics = [
       }
     ],
     "miniQuestion": {
-      "question": "Was machst du, wenn du unsicher bist?",
+      "question": "Du bist unsicher. Was machst du?",
       "answers": [
         "Ich frage eine Person, der ich vertraue.",
         "Ich löse alles allein.",
@@ -6031,7 +6031,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Es gibt Hinweise. Zum Beispiel komische Hände oder Schrift."
       },
       {
-        "question": "Du bist nicht sicher, ob eine Nachricht stimmt. Was machst du?",
+        "question": "Stimmt eine Nachricht? Du bist nicht sicher. Was machst du?",
         "answers": [
           "Ich leite sie trotzdem weiter.",
           "Ich leite sie nicht weiter."
@@ -6132,7 +6132,7 @@ const topics = [
             "pictogram": "pikto-data"
           },
           {
-            "text": "Sie wollen, dass du etwas glaubst, das nicht stimmt.",
+            "text": "Sie wollen: Du sollst etwas Falsches glauben.",
             "pictogram": "pikto-no"
           },
           {
@@ -6371,7 +6371,7 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du bist nicht sicher, ob eine Nachricht stimmt. Was ist besser?",
+          "question": "Stimmt eine Nachricht? Du bist nicht sicher. Was ist besser?",
           "answers": [
             "Trotzdem weiterleiten.",
             "Nicht weiterleiten."
@@ -6513,7 +6513,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Starke Gefühle sind ein Warnzeichen."
       },
       {
-        "question": "Du bist unsicher, ob eine Nachricht stimmt. Was machst du?",
+        "question": "Stimmt eine Nachricht? Du bist unsicher. Was machst du?",
         "answers": [
           "Ich leite sie nicht weiter.",
           "Ich leite sie an alle weiter."
@@ -6827,7 +6827,7 @@ const topics = [
           "Eine SMS sagt: Bestätigen Sie Ihre Bank-Daten."
         ],
         "practice": {
-          "question": "Eine E-Mail von der Bank will, dass du sofort auf einen Link klickst. Was ist besser?",
+          "question": "Eine E-Mail von der Bank sagt: Klick sofort auf den Link. Was ist besser?",
           "answers": [
             "Sofort klicken.",
             "Nicht klicken. Bei der Bank selbst nachfragen."
@@ -7452,7 +7452,7 @@ const topics = [
           "Auf Rechnung."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Auf Rechnung zahlst du erst, wenn die Ware da ist.",
+        "feedbackCorrect": "Das ist richtig. Erst kommt die Ware. Dann zahlst du.",
         "feedbackWrong": "Das ist noch nicht richtig. Bei Vorkasse an Fremde ist dein Geld vielleicht weg."
       },
       {
@@ -7669,7 +7669,7 @@ const topics = [
         ],
         "bullets": [
           {
-            "text": "Kauf auf Rechnung ist sicher: Du zahlst erst, wenn die Ware da ist.",
+            "text": "Kauf auf Rechnung ist sicher: Erst kommt die Ware. Dann zahlst du.",
             "pictogram": "pikto-shop"
           },
           {
@@ -7693,7 +7693,7 @@ const topics = [
           ],
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Bei Vorkasse ist dein Geld zuerst weg.",
-          "feedbackCorrect": "Das ist richtig. Bei Rechnung zahlst du erst, wenn die Ware da ist.",
+          "feedbackCorrect": "Das ist richtig. Erst kommt die Ware. Dann zahlst du.",
           "remember": "Rechnung ist sicherer als Vorkasse."
         },
         "pictogram": "pikto-shop"
@@ -7982,7 +7982,7 @@ const topics = [
           "Vorkasse an Fremde."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Bei Rechnung zahlst du erst, wenn die Ware da ist.",
+        "feedbackCorrect": "Das ist richtig. Erst kommt die Ware. Dann zahlst du.",
         "feedbackWrong": "Das ist noch nicht richtig. Bei Vorkasse ist dein Geld zuerst weg."
       },
       {
