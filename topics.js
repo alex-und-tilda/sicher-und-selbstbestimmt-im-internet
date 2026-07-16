@@ -16,7 +16,7 @@ const topics = [
     "learningGoals": [
       "Was private Daten sind",
       "Warum dein Passwort geheim bleibt",
-      "Was du tust, wenn jemand nach deinen Daten fragt"
+      "Jemand fragt nach deinen Daten? Du hast eine Antwort."
     ],
     "quiz": [
       {
@@ -76,7 +76,7 @@ const topics = [
           "Sofort senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Du prüfst, ob private Dinge zu sehen sind.",
+        "feedbackCorrect": "Das ist richtig. Du prüfst: Sind private Dinge zu sehen?",
         "feedbackWrong": "Das ist noch nicht richtig. Auf einem Foto können private Dinge zu sehen sein."
       },
       {
@@ -149,7 +149,7 @@ const topics = [
             "pictogram": "pikto-lock"
           },
           {
-            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
             "pictogram": "pikto-help"
           }
         ],
@@ -495,7 +495,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Sie wollen, dass du schnell handelst.",
+            "text": "Sie wollen: Du sollst schnell handeln.",
             "pictogram": "pikto-message"
           },
           {
@@ -517,7 +517,7 @@ const topics = [
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Die Nachricht macht Druck. Druck ist ein Warnzeichen.",
           "feedbackCorrect": "Das ist sicher. Du machst es langsam. Du überlegst zuerst.",
-          "remember": "Ich mache langsam, wenn eine Nachricht Druck macht."
+          "remember": "Eine Nachricht macht Druck? Dann mache ich langsam."
         },
         "pictogram": "pikto-message"
       },
@@ -570,7 +570,7 @@ const topics = [
           "correctIndex": 1,
           "feedbackWrong": "Das ist nicht sicher. Bei Stress ist sofort reagieren oft keine gute Entscheidung.",
           "feedbackCorrect": "Das ist sicher. Du machst Stopp und entscheidest nicht unter Druck.",
-          "remember": "Ich habe einen Plan, wenn etwas komisch ist."
+          "remember": "Etwas ist komisch? Dann habe ich einen Plan."
         },
         "pictogram": "pikto-help"
       },
@@ -653,7 +653,7 @@ const topics = [
             "pictogram": "pikto-location"
           },
           {
-            "text": "Ich mache langsam, wenn eine Nachricht Druck macht.",
+            "text": "Eine Nachricht macht Druck? Dann mache ich langsam.",
             "pictogram": "pikto-message"
           },
           {
@@ -723,7 +723,7 @@ const topics = [
           "Sofort senden."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Du prüfst, ob private Dinge zu sehen sind.",
+        "feedbackCorrect": "Das ist richtig. Du prüfst: Sind private Dinge zu sehen?",
         "feedbackWrong": "Das ist noch nicht richtig. Auf einem Foto können private Dinge zu sehen sein."
       },
       {
@@ -991,7 +991,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
             "pictogram": "pikto-help"
           }
         ],
@@ -1695,7 +1695,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
             "pictogram": "pikto-help"
           }
         ],
@@ -2327,7 +2327,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
             "pictogram": "pikto-help"
           }
         ],
@@ -2958,7 +2958,7 @@ const topics = [
             "pictogram": "pikto-help"
           },
           {
-            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
             "pictogram": "pikto-help"
           }
         ],
@@ -3565,7 +3565,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
             "pictogram": "pikto-help"
           }
         ],
@@ -4139,7 +4139,7 @@ const topics = [
             "pictogram": "pikto-help"
           },
           {
-            "text": "Du kannst den Hilfe-Button nutzen, wenn du unsicher bist.",
+            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
             "pictogram": "pikto-help"
           }
         ],
