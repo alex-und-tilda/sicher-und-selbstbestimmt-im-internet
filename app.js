@@ -2746,6 +2746,14 @@ function renderHelpPage() {
       </div>
       <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
 
+      <div class="intro-offer" role="region" aria-label="Deine Meinung ist wichtig">
+        <h3>Deine Meinung ist wichtig ${sectionReadChip("Deine Meinung ist wichtig")}</h3>
+        <p>Du kannst diese Lern-Seite prüfen.</p>
+        <p>Sag uns: Was ist gut? Was ist schwer?</p>
+        <p>Dafür gibt es das Prüf-Heft. Ohne Namen. Es gibt kein richtig und kein falsch.</p>
+        <p><a class="setting-big-button pruefheft-link" href="pruefheft.html">Zum Prüf-Heft</a></p>
+      </div>
+
       <div class="intro-offer" role="region" aria-label="So findest du dich zurecht">
         <h3>So findest du dich zurecht: das Menü unten</h3>
         ${buildMenuExplainList()}

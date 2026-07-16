@@ -3524,6 +3524,12 @@ p.feedback-wrong {
 
 /* ---------- Seite: Hilfe ---------- */
 
+.pruefheft-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .help-page-actions {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
