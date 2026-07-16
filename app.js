@@ -2847,6 +2847,20 @@ function buildCompanionPanel(topic) {
     </details>`;
 }
 
+/* Mengen-Wahl (Kurz/Mehr) je Thema – nur für die Sitzung gemerkt.
+   Standard kommt aus der Vorwissens-Frage: erfahren -> Kurz, sonst Mehr. */
+let topicAmountSel = { topicId: null, amount: null };
+
+function getTopicAmount(topicId) {
+  if (topicAmountSel.topicId === topicId && topicAmountSel.amount) return topicAmountSel.amount;
+  return pGet(VORWISSEN_KEY) === "erfahren" ? "short" : "full";
+}
+
+function setTopicAmount(topicId, amount) {
+  topicAmountSel = { topicId, amount: amount === "short" ? "short" : "full" };
+  renderTopicChoice(topicId);
+}
+
 function renderTopicChoice(topicId) {
   stopReading();
   const topic = getTopicById(topicId);
@@ -2879,61 +2893,61 @@ function renderTopicChoice(topicId) {
         <p>${escapeHtml(topic.desc || "")}</p>
       </article>
 
-      <div class="learning-path-heading">
-        <h3>Wie möchtest du lernen?</h3>
-      </div>
+      ${(() => {
+        /* Adaptive Hauptaktion (Program Control mit Opt-out):
+           1) Offene Lektion hier -> Weiter lernen
+           2) Thema geschafft     -> Quiz wiederholen (Retrieval Practice)
+           3) Neu                 -> Lernen starten + Mengen-Wahl */
+        const done = isTopicDone(topic.id);
+        const resume = (lastLessonContext && lastLessonContext.topicId === topic.id) ? lastLessonContext : null;
+        const amount = getTopicAmount(topic.id);
+        const hasQuiz = getQuizQuestions(topic).length > 0;
+        const laterChip = (label, click) => `<button type="button" class="later-chip" onclick="${click}">${label}</button>`;
+        const training = (topic.id === "betrug" || topic.id === "fakes")
+          ? laterChip("Trainings-Postfach", "startTrainingInbox()") : "";
+        const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`);
+
+        const amountToggle = `
+          <div class="amount-box" role="group" aria-label="Wie viel möchtest du lernen?">
+            <p class="amount-title">Wie viel möchtest du?</p>
+            <div class="amount-row">
+              <button type="button" class="amount-choice${amount === "short" ? " is-active" : ""}" aria-pressed="${amount === "short" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'short')"><strong>${amount === "short" ? "✓ " : ""}Kurz</strong><span>Nur das Wichtigste.</span></button>
+              <button type="button" class="amount-choice${amount === "full" ? " is-active" : ""}" aria-pressed="${amount === "full" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'full')"><strong>${amount === "full" ? "✓ " : ""}Mehr</strong><span>Mit Beispielen.</span></button>
+            </div>
+            <p class="amount-hint">Für dich vorausgewählt. Du kannst es ändern.</p>
+          </div>`;
+
+        if (resume) {
+          return `
+            <button type="button" class="topic-start-button" onclick="resumeLastLesson()">Weiter lernen: Schritt ${resume.step + 1}</button>
+            <p class="later-title">Oder:</p>
+            <div class="later-row">
+              ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
+              ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
+              ${merkChip}${training}
+            </div>`;
+        }
+        if (done) {
+          return `
+            <p class="done-note">✓ Du hast dieses Thema geschafft. Wiederholen festigt dein Wissen.</p>
+            ${hasQuiz ? `<button type="button" class="topic-start-button" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz wiederholen</button>` : ""}
+            <p class="later-title">Oder:</p>
+            <div class="later-row">
+              ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
+              ${merkChip}${training}
+            </div>`;
+        }
+        return `
+          <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', '${amount}')">Lernen starten</button>
+          ${amountToggle}
+          <p class="later-title">Für später:</p>
+          <div class="later-row">
+            ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
+            ${merkChip}${training}
+          </div>`;
+      })()}
 
       ${buildUtilityBar()}
-
-      <div class="action-grid learning-path-grid">
-        <button type="button" class="action-card action-short${pGet(VORWISSEN_KEY) === "erfahren" ? " action-card--rec" : ""}" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
-          ${pGet(VORWISSEN_KEY) === "erfahren" ? `<span class="action-rec-badge">Für dich empfohlen</span>` : ""}
-          <span class="action-icon" aria-hidden="true">${getIconHtml("understand")}</span>
-          <span class="action-text">
-            <span class="action-title">Kurz lernen</span>
-            <span class="action-desc">Nur das Wichtigste.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Kurz lernen. Nur das Wichtigste." aria-label="Kurz lernen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </span>
-        </button>
-
-        <button type="button" class="action-card action-full${pGet(VORWISSEN_KEY) === "neu" ? " action-card--rec" : ""}" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
-          ${pGet(VORWISSEN_KEY) === "neu" ? `<span class="action-rec-badge">Für dich empfohlen</span>` : ""}
-          <span class="action-icon" aria-hidden="true">${getIconHtml("example")}</span>
-          <span class="action-text">
-            <span class="action-title">Mehr lernen</span>
-            <span class="action-desc">Mit Beispielen.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Mehr lernen. Mit Beispielen." aria-label="Mehr lernen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </span>
-        </button>
-
-        <button type="button" class="action-card action-quiz" onclick="startQuiz('${escapeHtml(topic.id)}')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
-          <span class="action-text">
-            <span class="action-title">Quiz machen</span>
-            <span class="action-desc">Fragen beantworten.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Quiz machen. Fragen beantworten." aria-label="Quiz machen vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </span>
-        </button>
-
-        ${(topic.id === "betrug" || topic.id === "fakes") ? `
-        <button type="button" class="action-card action-quiz" onclick="startTrainingInbox()">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("message")}</span>
-          <span class="action-text">
-            <span class="action-title">Trainings-Postfach</span>
-            <span class="action-desc">Trick oder echt? Gefahrlos üben.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Trainings-Postfach. Trick oder echt? Gefahrlos üben." aria-label="Trainings-Postfach vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </span>
-        </button>` : ""}
-
-        <button type="button" class="action-card action-memory" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">
-          <span class="action-icon" aria-hidden="true">${getIconHtml("remember")}</span>
-          <span class="action-text">
-            <span class="action-title">Merk-Karte</span>
-            <span class="action-desc">Regeln ansehen.</span>
-            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Merk-Karte. Regeln ansehen." aria-label="Merk-Karte vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </span>
-        </button>
-      </div>
 
       ${buildCompanionPanel(topic)}
 

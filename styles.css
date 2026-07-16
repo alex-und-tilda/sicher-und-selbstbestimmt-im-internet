@@ -3253,6 +3253,121 @@ p.feedback-wrong {
   content: "✓ ";
 }
 
+/* ---------- Themen-Seite: gefuehrte Hauptaktion ---------- */
+
+.topic-start-button {
+  display: block;
+  width: 100%;
+  min-height: 64px;
+  margin: 16px 0 14px;
+  border: none;
+  border-radius: var(--radius-m);
+  /* Textsichere dunkle Themen-Farbe als Grund, weisse Schrift (>= 4.6:1) */
+  background: var(--topic-text, var(--topic-color));
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+}
+
+.topic-start-button:hover {
+  filter: brightness(1.1);
+}
+
+.amount-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.amount-title {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+  color: var(--ink);
+}
+
+.amount-row {
+  display: flex;
+  gap: 10px;
+}
+
+.amount-choice {
+  flex: 1;
+  min-height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 10px 8px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.amount-choice span {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.amount-choice.is-active {
+  border-color: var(--topic-text, var(--topic-color));
+  border-width: 3px;
+  background: var(--topic-hover-bg, var(--accent-soft));
+}
+
+.amount-hint {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.later-title {
+  margin: 14px 0 6px;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.later-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.later-chip {
+  min-height: 52px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.later-chip:hover {
+  background: var(--topic-hover-bg, var(--accent-soft));
+}
+
+.done-note {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  background: var(--good-bg);
+  color: var(--good);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+}
+
 /* ---------- QR im Begleit-Panel ---------- */
 
 .companion-qr {
@@ -4192,6 +4307,11 @@ body.simple-mode .practice-box {
     --shadow:       0 2px 8px rgba(0,0,0,0.5), 0 14px 32px rgba(0,0,0,0.55);
     --shadow-small: 0 1px 4px rgba(0,0,0,0.55);
     --shadow-hover: 0 4px 12px rgba(0,0,0,0.55), 0 20px 44px rgba(0,0,0,0.6);
+  }
+
+  /* Start-Knopf: im Dark Mode ist die Themen-Farbe hell -> dunkle Schrift */
+  .topic-start-button {
+    color: #0b1119;
   }
 
   /* Input / Textarea */
