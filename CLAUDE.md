@@ -20,9 +20,17 @@
 
 - Drei-Ebenen-Sprachsystem (§2) und die Begleit-Ebene für Fachkräfte (§7)
 - Dark Mode (`prefers-color-scheme`, dokumentierte APCA-Kontraste in `styles.css`)
-- Vorlese-/Audio-Funktion (Web Speech API) und Ton-Schalter
+- Vorlese-/Audio-Funktion (Web Speech API), Ton-Schalter und Vorlese-Tempo-Einstellung
 - Offline-Fähigkeit (Service Worker `sw.js`, PWA-Manifest)
-- „Zurück / Weiter"-Navigation, Hilfe-Knopf, Pause-Funktion, Schriftgrößen-Schalter
+- **Feste 5-Punkte-Tab-Navigation** unten (Start · Themen · Mein Lernweg · Hilfe · Einstellungen, `main-tabbar` in `index.html`) inkl. Hash-Routing/Browser-Zurück (`rememberRoute`, `handleHash`)
+- **Orientierungssystem:** Orientierungszeile (`#orientLine`) mit Farb-Faden in Themen-Farbe, Bild-Anker (Themen-Symbol), Hör-Knopf; Vorlesen beginnt mit dem Orientierungssatz; **Rück-Anker** (`lastLessonContext`, „Weiter lernen: …, Schritt X")
+- **Fortschritts-Erkennung ohne Speicherzwang:** Sitzungs-Gedächtnis `sessionDoneTopics` (nur RAM, KDG-konform), Fortschritts-Rückmeldung + Lernstand-Einwilligung auf der Abschluss-Seite
+- **Adaptive Themen-Seite** (`renderTopicChoice`): EINE Hauptaktion je Zustand (neu → Lernen starten + Mengen-Wahl; unterbrochen → Weiter lernen; geschafft → Quiz wiederholen); Quiz/Merk-Karte als „Für später"-Chips
+- **Themen-Gruppen** auf der Themen-Seite (`TOPIC_GROUPS`: Wichtig für alle · Apps · Gefahren und Hilfe) und exakt gleich große Kacheln (`grid-auto-rows: 1fr`)
+- **Frage des Tages** (Start-Seite, deterministisch übers Datum, kein Tracking), **Erfolgs-Heft** (`printSuccessBook`) und **QR-Karten** (`assets/qr/`, `printQrCards`, QR im Begleit-Panel — lokal erzeugt, kein externer Dienst)
+- **Einweisungs-Schritt** fürs Menü (`renderMenuIntro`, einmalig) und Menü-Erklärung in der Hilfe
+- Wörter-Hilfe (Glossar, 50+ Einträge) mit antippbaren Begriffen
+- „Zurück / Weiter"-Navigation, Hilfe-Knopf, Pause-Funktion, Schriftgrößen-Schalter (in Einstellungen)
 - Die lokale Schrift **Atkinson Hyperlegible**
 - Die Logos der Träger im Footer
 
@@ -81,7 +89,7 @@ Jeder Inhalt und jede Interaktion folgt diesen Prinzipien (in Klammern die Desig
 
 ## 4. Zielgruppe und Haltung
 
-Erwachsene mit Lern-Schwierigkeiten, geistiger Behinderung oder Verständnis-Schwierigkeiten; sehr unterschiedliche Lese- und Konzentrationsfähigkeit. Haltung: wertschätzend, ressourcenorientiert, empowernd, Selbstbestimmung fördernd, **niemals infantilisierend oder belehrend**. Leitsatz: **„Nichts über uns ohne uns."**
+Erwachsene mit Lern-Schwierigkeiten, geistiger Behinderung oder Verständnis-Schwierigkeiten; sehr unterschiedliche Lese- und Konzentrationsfähigkeit. Haltung: wertschätzend, ressourcenorientiert, empowernd, Selbstbestimmung fördernd, **niemals infantilisierend oder belehrend**.
 
 ---
 
@@ -170,7 +178,7 @@ Pädagogische Rahmung konsistent über alle Module: Lernziel + Aktivierung (Enga
 
 ## 13. Partizipation, Evaluation, Aktualität
 
-- **Co-Design / „Nichts über uns ohne uns":** Vor offiziellem Einsatz Prüfung durch eine **Prüfgruppe** von Menschen mit Lern-Schwierigkeiten — auf Verständlichkeit der **Texte und der Piktogramme**. Unsere Texte sind ein fachlich sauberer Entwurf dafür.
+- **Co-Design:** Vor offiziellem Einsatz Prüfung durch eine **Prüfgruppe** von Menschen mit Lern-Schwierigkeiten — auf Verständlichkeit der **Texte und der Piktogramme**. Unsere Texte sind ein fachlich sauberer Entwurf dafür.
 - **Datensparsame Wirkungs-Evaluation:** strukturierte Beobachtung statt Datensammlung (Navigierbarkeit, Verständlichkeit, Nutzung des Vorlesens, kann die Person das Transfer-Ziel benennen?). Ergebnisse fließen in die nächste Iteration. Kein Tracking, keine Lernanalyse über die Person.
 - **Aktualität:** Inhalte zu Betrug, Plattformen und KI veralten schnell. Bei Änderungen auf seriöse, aktuelle Quellen achten (z. B. klicksafe, BSI, polizeiliche Kriminalprävention, jugend.support) und überprüfungsbedürftige Stellen markieren.
 
@@ -189,14 +197,16 @@ Pädagogische Rahmung konsistent über alle Module: Lernziel + Aktivierung (Enga
 | Datei | Zweck |
 |-------|-------|
 | `index.html` | Hülle. Lädt `topics.js` → `content-de.js` → `begleitung-de.js` → `app.js` (Reihenfolge wichtig). |
-| `topics.js` | 12 Themen, Lektionen, Quiz, Merksätze. Basistext = **Leichte Sprache**. |
+| `topics.js` | 12 Themen, 129 Lektionen, Quiz, Merksätze. Basistext = **Leichte Sprache** (DIN-SPEC-33429-konform: keine Nebensätze, kein Konjunktiv, kein Passiv außer gewollten Betrugs-Zitaten). |
 | `content-de.js` | `CONTENT_VERSIONS` (`einfach`/`standard`) + `SELF_ASSESSMENT_VERSIONS` + Apply-Funktionen. |
 | `begleitung-de.js` | `COMPANION` (Begleit-Ebene für Fachkräfte, §7). |
-| `app.js` | Renderer + Engine: Sprach-Ebenen, `resolveLessonContent`, `resolveSelfAssessment`, `pictoSrc`, Sprach-Auswahl, Navigation, Vorlesen, Dark-Mode-Reaktion, `buildCompanionPanel`/`printCompanion`. |
-| `styles.css` | Design-System, Dark Mode, APCA-Kontraste, Responsive. |
-| `sw.js` | Offline-Cache (App-Dateien + ARASAAC). `CACHE_VERSION` bei jeder Veröffentlichung erhöhen. |
+| `app.js` | Renderer + Engine: Sprach-Ebenen, `resolveLessonContent`, `resolveSelfAssessment`, `pictoSrc`, Tab-Navigation (`navigateTab`, `setActiveTab`), Hash-Routing (`handleHash`, `rememberRoute`), Orientierung (`setOrientation`, `lastLessonContext`), Sitzungs-Fortschritt (`sessionDoneTopics`), Frage des Tages, `printSuccessBook`, `printQrCards`, Glossar (`GLOSSAR`), Vorlesen, Dark-Mode-Reaktion, `buildCompanionPanel`/`printCompanion`. |
+| `styles.css` | Design-System, Dark Mode, APCA-Kontraste, Responsive, Tab-Leiste (`main-tabbar`), textsichere Themen-Farben (`--topic-text`). |
+| `sw.js` | Offline-Cache (App-Dateien + ARASAAC + QR-Karten). `CACHE_VERSION` bei jeder Veröffentlichung erhöhen. |
 | `fortschritt.html` | Live-Dashboard (Stand der Ebenen + GitHub-Commits). |
 | `assets/` | Schriften, Logos, Icons, Illustrationen, lokale Piktogramme. |
+| `assets/qr/` | Lokal vorerzeugte QR-Codes je Thema + Startseite (13 SVGs, kein externer Dienst). Bei neuen Themen neu erzeugen. |
+| `_vorschau-*.html` | Lokale Berichte (DIN-Prüfung, Aktualität, Wegzeichen-Konzept) — in `.gitignore`, nie ins Repo. |
 
 Reines HTML/CSS/JS, **kein Framework/Bundler/npm**. JS wird über `<script src>` als Browser-Globals geladen (`const topics`, `const CONTENT_VERSIONS`, `const COMPANION` sind absichtlich global). Interne Verweise **relativ** (funktioniert im Unterpfad von GitHub Pages). Diese Einfachheit ist gewollt — kein Build-System ohne Auftrag.
 
@@ -252,6 +262,9 @@ Reines HTML/CSS/JS, **kein Framework/Bundler/npm**. JS wird über `<script src>`
 3. **Quiz/Einstiegsfrage je Stufe:** Einstiegsfrage ist je Stufe möglich (Pilot Datenschutz). Quiz bleibt empfohlen gemeinsam für alle Stufen. Voll ausrollen?
 4. **DigComp/ICF in der Begleit-Ebene:** explizite DigComp-Codes je Thema ergänzen?
 5. **Echter Offline-Zwang:** Falls ja, ARASAAC-Piktogramme lokal hosten (§11).
+6. **QR-Betrugs-Lektion auch im Kurz-Modus?** „Vorsicht bei QR-Codes" (Betrug) liegt nur im „Mehr lernen"-Weg; der Kurz-Modus behält bewusst 3 Kern-Lektionen je Thema.
+7. **Wegzeichen (Alex und Tilda an festen Orten):** Konzept liegt vor (`_vorschau-wegzeichen-konzept.html`). Erst Prüfgruppe, dann 7 Illustrations-Varianten, dann Einbau.
+8. **Prüfgruppen-Katalog (offen):** Menü-Wörter („Mein Lernweg"), Lautsprecher-Symbol ohne Wort, Formel „eine Person, der du vertraust", Themen-Gruppen-Namen, Frage des Tages, KI-Einsamkeits-Satz, Frage-Muster-Sätze, QR-Karten, „Lernen starten"-Knopf.
 
 ---
 
