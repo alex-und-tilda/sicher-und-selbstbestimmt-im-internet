@@ -3447,6 +3447,56 @@ p.feedback-wrong {
   background: var(--topic-hover-bg, var(--accent-soft));
 }
 
+/* ---------- Nummern-Anker + Piktogramme an Fragen/Antworten ----------
+   Die sichtbare Nummer entspricht der gesprochenen („Antwort 1"):
+   Auge und Ohr zeigen auf dasselbe (crossmodale Verankerung). */
+
+.answer-option,
+.sa-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.answer-num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border: 2px solid var(--accent);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.answer-pikto {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.answer-text {
+  flex: 1;
+}
+
+.question-pikto {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 4px;
+}
+
 /* ---------- Gesamt-Abschluss (alle Themen geschafft) ---------- */
 
 .grand-finish {

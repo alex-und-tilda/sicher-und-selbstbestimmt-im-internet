@@ -1294,7 +1294,17 @@ function speakNextSentence(gen) {
   const el = _readQueue[_readIndex];
   const istPseudo = !!(el && el.pseudoText);
   const prefix = (!istPseudo && el.getAttribute && el.getAttribute("data-read-prefix")) ? el.getAttribute("data-read-prefix") + " " : "";
-  const text = istPseudo ? cleanSpeechText(el.pseudoText) : cleanSpeechText(prefix + el.textContent);
+  let roherText;
+  if (istPseudo) {
+    roherText = el.pseudoText;
+  } else if (el.querySelector && el.querySelector(".answer-num")) {
+    const kopie = el.cloneNode(true);
+    kopie.querySelectorAll(".answer-num, .card-read-button").forEach(n => n.remove());
+    roherText = prefix + kopie.textContent;
+  } else {
+    roherText = prefix + el.textContent;
+  }
+  const text = cleanSpeechText(roherText);
   if (!text) { _readIndex++; return speakNextSentence(gen); }
 
   if (!istPseudo) el.classList.add("reading-highlight");
@@ -2089,13 +2099,13 @@ function buildDailyQuestionCard() {
   dailyQuestionCurrent = daily;
   if (!daily) return "";
   const answers = daily.q.answers.map((a, i) =>
-    `<button type="button" class="answer-option daily-answer" onclick="answerDailyQuestion(${i})">${escapeHtml(a)}</button>`
+    `<button type="button" class="answer-option daily-answer" onclick="answerDailyQuestion(${i})">${answerNumBadge(i)}${answerPikto(a)}<span class="answer-text">${escapeHtml(answerText(a))}</span></button>`
   ).join("");
   return `
       <div class="intro-offer daily-question" id="dailyQuestion" style="${getTopicColorStyle(daily.topic.id)}" data-readable="true" role="region" aria-label="Frage des Tages">
         <h3>Deine Frage für heute</h3>
         <p class="daily-question-topic">Aus dem Thema: ${escapeHtml(daily.topic.title)}</p>
-        <p class="daily-question-text">${escapeHtml(daily.q.question)}</p>
+        ${questionPikto(daily.q)}<p class="daily-question-text">${escapeHtml(daily.q.question)}</p>
         <div class="daily-answers">${answers}</div>
       </div>`;
 }
@@ -3220,7 +3230,7 @@ function renderSelfAssessment() {
   setOrientation(`Du startest das Thema: ${topic.title}. Zuerst kommt eine Frage an dich.`);
 
   const optionButtons = sa.options.map((opt, i) =>
-    `<button class="sa-option-btn" data-index="${i}" type="button">${escapeHtml(opt)}</button>`
+    `<button class="sa-option-btn" data-index="${i}" type="button">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
   ).join("");
 
   content.innerHTML = `
@@ -3428,20 +3438,43 @@ function renderLesson() {
   /* Auto-Vorlesen im Hör-Modus übernimmt zentral focusContent(). */
 }
 
+/* Antworten dürfen Strings sein ODER Objekte { text, pictogram }.
+   Das Piktogramm ist opt-in (Anzeige nur wo redaktionell gepflegt);
+   es zeigt die Bedeutung der Antwort – nie ihre Richtigkeit. */
+function answerText(a) {
+  return (a && typeof a === "object") ? String(a.text || "") : String(a ?? "");
+}
+
+function answerPikto(a) {
+  if (!a || typeof a !== "object" || !a.pictogram) return "";
+  return `<img class="answer-pikto" src="${pictoSrc(a.pictogram)}" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">`;
+}
+
+/* Nummern-Anker: dieselbe Zahl, die die Stimme spricht („Antwort 1") */
+function answerNumBadge(i) {
+  return `<span class="answer-num" aria-hidden="true">${i + 1}</span>`;
+}
+
+/* Frage-Piktogramm (opt-in): Kontext-Anker, verrät keine Lösung */
+function questionPikto(q) {
+  if (!q || !q.pictogram) return "";
+  return `<img class="question-pikto" src="${pictoSrc(q.pictogram)}" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">`;
+}
+
 function buildPractice(practice) {
   const question = practice.question || "";
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
   const correctIndex = Number(practice.correctIndex ?? 0);
   const answerHtml = answers.map((answer, index) => `
     <button type="button" class="answer-option" onclick="renderPracticeFeedbackPage(${index}, ${correctIndex})">
-      ${escapeHtml(answer)}
+      ${answerNumBadge(index)}${answerPikto(answer)}<span class="answer-text">${escapeHtml(answerText(answer))}</span>
     </button>
   `).join("");
 
   return `
     <div class="practice-box">
       <h3>Übung</h3>
-      <p class="practice-question">${escapeHtml(question)}</p>
+      ${questionPikto(practice)}<p class="practice-question">${escapeHtml(question)}</p>
       <div class="answers">${answerHtml}</div>
       ${buildTaskHelpBox()}
     </div>
@@ -3457,7 +3490,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   if (!topic || !lesson || !practice) return renderLesson();
 
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
-  const selectedText = answers[index] || "";
+  const selectedText = answerText(answers[index]);
   const isCorrect = index === Number(correctIndex);
   playSound(isCorrect ? "correct" : "wrong");
   const explanation = isCorrect
@@ -3734,7 +3767,7 @@ function renderEinfachQuizQuestion() {
   const q = questions[currentQuizIndex];
   const answers = Array.isArray(q.answers) ? q.answers : [];
   const correctIndex = Number(q.correctIndex ?? 0);
-  const correctText = answers[correctIndex] || "";
+  const correctText = answerText(answers[correctIndex]);
 
   /* Eine falsche Antwort zufällig wählen */
   const wrongPool = answers.filter((_, i) => i !== correctIndex);
@@ -3757,7 +3790,7 @@ function renderEinfachQuizQuestion() {
     ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card einfach-quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <p class="einfach-quiz-number">Frage ${currentQuizIndex + 1} von ${questions.length}</p>
-      <p class="einfach-quiz-question">${escapeHtml(q.question || "")}</p>
+      ${questionPikto(q)}<p class="einfach-quiz-question">${escapeHtml(q.question || "")}</p>
       <div class="einfach-quiz-options">
         ${opts.map((opt, i) => `
           <button type="button" class="einfach-quiz-btn" onclick="renderEinfachQuizFeedback(${i}, ${opt.correct ? "true" : "false"})">
@@ -3882,7 +3915,7 @@ function renderQuizQuestion() {
 
   const answerHtml = answers.map((answer, index) => `
     <button type="button" class="answer-option" onclick="renderQuizFeedbackPage(${index})">
-      ${escapeHtml(answer)}
+      ${answerNumBadge(index)}${answerPikto(answer)}<span class="answer-text">${escapeHtml(answerText(answer))}</span>
     </button>
   `).join("");
 
@@ -3890,7 +3923,7 @@ function renderQuizQuestion() {
     ${buildUtilityBar()}${buildReadingToolbar()}
     <article class="card quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <h2>Quiz</h2>
-      <p class="quiz-question">${escapeHtml(q.question || "")}</p>
+      ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question || "")}</p>
       <div class="answers">${answerHtml}</div>
       ${buildTaskHelpBox()}
     </article>
@@ -3908,7 +3941,7 @@ function renderQuizFeedbackPage(index) {
 
   const answers = Array.isArray(q.answers) ? q.answers : [];
   const correctIndex = Number(q.correctIndex ?? q.correct ?? 0);
-  const selectedText = answers[index] || "";
+  const selectedText = answerText(answers[index]);
   const isCorrect = index === correctIndex;
   playSound(isCorrect ? "correct" : "wrong");
 
@@ -4090,7 +4123,7 @@ function renderBigQuizQuestion() {
 
   const answerHtml = q.answers.map((answer, index) => `
     <button type="button" class="answer-option" onclick="renderBigQuizFeedback(${index})">
-      ${escapeHtml(answer)}
+      ${answerNumBadge(index)}${answerPikto(answer)}<span class="answer-text">${escapeHtml(answerText(answer))}</span>
     </button>
   `).join("");
 
@@ -4099,7 +4132,7 @@ function renderBigQuizQuestion() {
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
       <h2>${escapeHtml(bigQuizTitle)}</h2>
-      <p class="quiz-question">${escapeHtml(q.question)}</p>
+      ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question)}</p>
       <div class="answers">${answerHtml}</div>
     </article>
   `;
@@ -4132,7 +4165,7 @@ function renderBigQuizFeedback(selectedIndex) {
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
       <h2>${escapeHtml(bigQuizTitle)}</h2>
-      <p class="quiz-question">${escapeHtml(q.question)}</p>
+      ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question)}</p>
       <div class="answers">
         ${q.answers.map((a, i) => `
           <div class="answer-option answer-shown ${i === q.correct ? "answer-correct" : (i === selectedIndex ? "answer-wrong" : "")}">
@@ -4270,8 +4303,8 @@ function renderTrainingMessage() {
       </div>
       <p class="quiz-question">Was denkst du: Ist das ein Trick?</p>
       <div class="answers">
-        <button type="button" class="answer-option" onclick="answerTraining(true)">Das ist ein Trick.</button>
-        <button type="button" class="answer-option" onclick="answerTraining(false)">Das ist echt.</button>
+        <button type="button" class="answer-option" onclick="answerTraining(true)">${answerNumBadge(0)}<span class="answer-text">Das ist ein Trick.</span></button>
+        <button type="button" class="answer-option" onclick="answerTraining(false)">${answerNumBadge(1)}<span class="answer-text">Das ist echt.</span></button>
       </div>
     </article>
   `;
