@@ -107,7 +107,7 @@ function toggleSettings() { renderSettingsPage(); }
 let finishedTopicThisSession = false;
 const LEARN_MODES = {
   allein:     { title: "Ich lerne allein",      desc: "Die App erklärt dir alles. Mit Vorlesen.",        icon: "understand" },
-  app:        { title: "Mit Hilfe der App",     desc: "Vorlesen, große Schrift, leichte Sprache.",       icon: "message" },
+  app:        { title: "Mit Hilfe der App",     desc: "Jede Seite wird dir vorgelesen. Große Schrift.",  icon: "message" },
   begleitung: { title: "Mit einer Begleitung",  desc: "Ihr lernt zu zweit. Mit Tipps zum Reden.",        icon: "help" }
 };
 
@@ -992,6 +992,11 @@ function announce(text) {
 
 function focusContent() {
   content.focus();
+  /* Hör-Modus („Mit Hilfe der App"): jede Seite liest sich selbst vor –
+     sanft verzögert, jederzeit mit Stopp abbrechbar (Angebot, kein Zwang). */
+  if (typeof learnMode !== "undefined" && learnMode === "app" && supportsSpeech()) {
+    window.setTimeout(() => { if (learnMode === "app") readStart(); }, 450);
+  }
   const reduceMotion = !motionEnabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   applyGlossar();
@@ -1255,6 +1260,19 @@ function readCurrentPage(rate) {
     const orientSpan = orientLine.querySelector(".orient-text");
     if (orientSpan) els.unshift(orientSpan);
   }
+  /* Handlungsansage am Ende: Nicht-Leser erfahren sonst nie, welche
+     Knöpfe es gibt. Kurz, immer gleiches Muster (Vorhersehbarkeit). */
+  const hatOptionen = root && root.querySelector(OPTION);
+  if (hatOptionen) {
+    els.push({ pseudoText: "Tippe jetzt deine Antwort." });
+  } else if (nextButton && !nextButton.disabled) {
+    els.push({ pseudoText: backButton && !backButton.disabled
+      ? "Du kannst jetzt Weiter drücken. Oder Zurück."
+      : "Du kannst jetzt Weiter drücken." });
+  } else {
+    const start = root ? root.querySelector(".topic-start-button, .intro-start-button, .primary-action") : null;
+    if (start) els.push({ pseudoText: "Drücke den großen Knopf: " + cleanSpeechText(start.textContent) + "." });
+  }
   if (!els.length) {
     updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
     return;
@@ -1274,17 +1292,20 @@ function speakNextSentence(gen) {
     return;
   }
   const el = _readQueue[_readIndex];
-  const prefix = el.getAttribute && el.getAttribute("data-read-prefix") ? el.getAttribute("data-read-prefix") + " " : "";
-  const text = cleanSpeechText(prefix + el.textContent);
+  const istPseudo = !!(el && el.pseudoText);
+  const prefix = (!istPseudo && el.getAttribute && el.getAttribute("data-read-prefix")) ? el.getAttribute("data-read-prefix") + " " : "";
+  const text = istPseudo ? cleanSpeechText(el.pseudoText) : cleanSpeechText(prefix + el.textContent);
   if (!text) { _readIndex++; return speakNextSentence(gen); }
 
-  el.classList.add("reading-highlight");
+  if (!istPseudo) el.classList.add("reading-highlight");
   /* Den aktuellen Satz sichtbar halten – aber nur scrollen, wenn er aus dem
      Bild läuft (kein ständiges Springen). */
-  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const r = el.getBoundingClientRect();
-  if (r.top < 90 || r.bottom > window.innerHeight - 90) {
-    try { el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); } catch (e) { /* nichts */ }
+  if (!istPseudo) {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const r = el.getBoundingClientRect();
+    if (r.top < 90 || r.bottom > window.innerHeight - 90) {
+      try { el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); } catch (e) { /* nichts */ }
+    }
   }
 
   const slow = _readRate && _readRate < 0.8;
@@ -3404,12 +3425,7 @@ function renderLesson() {
   /* Richtung zurücksetzen: Standard ist vorwärts (z. B. beim Einstieg). */
   pageDirection = "forward";
 
-  /* App-Hilfe-Modus: jede Lektion automatisch vorlesen.
-     Sanft (kleine Verzögerung) und jederzeit über „Stopp" abbrechbar (§3:
-     Vorlesen als Angebot, nicht als Zwang). */
-  if (learnMode === "app" && supportsSpeech()) {
-    window.setTimeout(() => readCurrentPage(), 400);
-  }
+  /* Auto-Vorlesen im Hör-Modus übernimmt zentral focusContent(). */
 }
 
 function buildPractice(practice) {
