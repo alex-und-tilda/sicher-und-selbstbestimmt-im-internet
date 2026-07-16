@@ -2018,6 +2018,19 @@ html.no-motion *::after {
 
 /* Vorlese-Knopf je Block (Haupttext, Liste, Achtung, Merksatz …):
    ruhig und etwas kleiner, rechtsbündig, damit es nicht überladen wirkt. */
+.card-read-button--section {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 7px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.card-read-button--section .rb-ico {
+  width: 18px;
+  height: 18px;
+}
+
 .card-read-button--block {
   margin-top: 10px;
   background: transparent;

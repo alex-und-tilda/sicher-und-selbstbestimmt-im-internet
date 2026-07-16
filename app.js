@@ -1233,12 +1233,23 @@ function readCurrentPage(rate) {
   clearReadingHighlight();
 
   const root = document.querySelector("[data-readable='true']") || content;
+  /* Antwort-Optionen werden MIT vorgelesen (nummeriert) – sonst hört eine
+     nicht lesende Person die Frage, aber nie die Antworten. */
+  const OPTION = ".answer-option, .sa-option-btn, .sample-option";
   const els = root
-    ? Array.from(root.querySelectorAll("h2, h3, p, li")).filter(el => {
-        if (el.closest(".reading-toolbar, nav, footer, button")) return false;
+    ? Array.from(root.querySelectorAll("h2, h3, p, li, " + OPTION)).filter(el => {
+        const isOption = el.matches(OPTION);
+        if (!isOption && el.closest(".reading-toolbar, nav, footer, button")) return false;
         return cleanSpeechText(el.textContent).length > 0;
       })
     : [];
+  /* Optionen nummerieren: „Antwort 1: …" */
+  els.forEach(el => {
+    if (!el.matches || !el.matches(OPTION) || !el.parentElement) return;
+    const geschwister = Array.from(el.parentElement.children).filter(c => c.matches && c.matches(OPTION));
+    const n = geschwister.indexOf(el) + 1;
+    if (n > 0) el.setAttribute("data-read-prefix", "Antwort " + n + ":");
+  });
   /* Zuerst sagen, WO die Person ist – dann den Inhalt (Orientierung zum Hören) */
   if (orientLine && !orientLine.classList.contains("is-hidden")) {
     const orientSpan = orientLine.querySelector(".orient-text");
@@ -1263,7 +1274,8 @@ function speakNextSentence(gen) {
     return;
   }
   const el = _readQueue[_readIndex];
-  const text = cleanSpeechText(el.textContent);
+  const prefix = el.getAttribute && el.getAttribute("data-read-prefix") ? el.getAttribute("data-read-prefix") + " " : "";
+  const text = cleanSpeechText(prefix + el.textContent);
   if (!text) { _readIndex++; return speakNextSentence(gen); }
 
   el.classList.add("reading-highlight");
@@ -1289,6 +1301,30 @@ function speakNextSentence(gen) {
   u.onend = () => { if (gen !== _readGen) return; _readIndex++; speakNextSentence(gen); };
   u.onerror = () => { if (gen !== _readGen) return; _readIndex++; speakNextSentence(gen); };
   window.speechSynthesis.speak(u);
+}
+
+/* Liest nur EINEN Abschnitt vor (statt der ganzen Seite) – für lange
+   Seiten wie Hilfe und Einstellungen. Gleiches Hervorheben wie sonst. */
+function readSectionFrom(button) {
+  if (!supportsSpeech()) { updateReadingStatus("Vorlesen geht auf diesem Gerät nicht."); return; }
+  const section = button.closest(".settings-page-section, .support-help-card, .intro-offer");
+  if (!section) return;
+  _readGen++;
+  const gen = _readGen;
+  window.speechSynthesis.cancel();
+  clearReadingHighlight();
+  const els = Array.from(section.querySelectorAll("h3, h4, p, li")).filter(el =>
+    !el.closest("button") && cleanSpeechText(el.textContent).length > 0);
+  if (!els.length) return;
+  _readQueue = els;
+  _readIndex = 0;
+  _readRate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.85;
+  speakNextSentence(gen);
+}
+
+/* Kleiner Lautsprecher-Chip für einen Abschnitt */
+function sectionReadChip(label) {
+  return `<span class="card-read-button card-read-button--section" role="button" tabindex="0" onclick="readSectionFrom(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();readSectionFrom(this);}" aria-label="Abschnitt ${escapeHtml(label)} vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>`;
 }
 
 function readNormal() { readCurrentPage(0.85); }
@@ -2643,7 +2679,7 @@ function renderHelpPage() {
 
       <div class="support-help-grid">
         <div class="support-help-card">
-          <h4>Wenn du die Seite nicht bedienen kannst</h4>
+          <h4>Wenn du die Seite nicht bedienen kannst ${sectionReadChip("Wenn du die Seite nicht bedienen kannst")}</h4>
           <ul>
             <li>Zeige auf die Stelle.</li>
             <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
@@ -2651,7 +2687,7 @@ function renderHelpPage() {
           </ul>
         </div>
         <div class="support-help-card">
-          <h4>Wenn du etwas nicht verstehst</h4>
+          <h4>Wenn du etwas nicht verstehst ${sectionReadChip("Wenn du etwas nicht verstehst")}</h4>
           <ul>
             <li>Lies den Text noch einmal.</li>
             <li>Nutze den Knopf: Vorlesen.</li>
@@ -2660,7 +2696,7 @@ function renderHelpPage() {
           </ul>
         </div>
         <div class="support-help-card">
-          <h4>Wen kannst du fragen?</h4>
+          <h4>Wen kannst du fragen? ${sectionReadChip("Wen kannst du fragen?")}</h4>
           <ul>
             <li>Eine Person, der du vertraust.</li>
             <li>Eine Person, die dich unterstützt.</li>
@@ -2669,7 +2705,7 @@ function renderHelpPage() {
           </ul>
         </div>
         <div class="support-help-card">
-          <h4>Wenn dir im Internet etwas Schlechtes passiert</h4>
+          <h4>Wenn dir im Internet etwas Schlechtes passiert ${sectionReadChip("Wenn dir im Internet etwas Schlechtes passiert")}</h4>
           <ul>
             <li>Das ist nicht deine Schuld.</li>
             <li>Sprich mit einer Person, der du vertraust.</li>
@@ -2729,7 +2765,7 @@ function renderSettingsPage() {
       ${buildResumeLessonChip()}
 
       <section class="settings-page-section" aria-label="Schrift">
-        <h3>Schrift</h3>
+        <h3>Schrift ${sectionReadChip("Schrift")}</h3>
         <p class="settings-explain">Du kannst die Schrift größer oder kleiner machen.</p>
         <div class="settings-toggle-row" role="group" aria-label="Schriftgröße ändern">
           <button type="button" class="setting-big-button font-btn font-btn-decrease" onclick="changeFontSize(-1)" aria-label="Schrift kleiner" ${fontSizeStep === 0 ? "disabled" : ""}>A− kleiner</button>
@@ -2738,7 +2774,7 @@ function renderSettingsPage() {
       </section>
 
       <section class="settings-page-section" aria-label="Vorlesen">
-        <h3>Vorlesen</h3>
+        <h3>Vorlesen ${sectionReadChip("Vorlesen")}</h3>
         <p class="settings-explain">Wie schnell soll die Stimme lesen?</p>
         <div class="settings-toggle-row" role="group" aria-label="Vorlese-Tempo">
           <button type="button" class="setting-big-button" aria-pressed="${readTempo === "normal" ? "true" : "false"}" onclick="setReadTempo('normal')">Normal</button>
@@ -2747,7 +2783,7 @@ function renderSettingsPage() {
       </section>
 
       <section class="settings-page-section" aria-label="Töne und Bewegung">
-        <h3>Töne und Bewegung</h3>
+        <h3>Töne und Bewegung ${sectionReadChip("Töne und Bewegung")}</h3>
         <p class="settings-explain">Du kannst Töne anschalten oder ausschalten. Das Gleiche geht mit Bewegungen.</p>
         <div class="settings-toggle-row">
           <button type="button" class="setting-big-button sound-toggle" onclick="toggleSound()">Töne</button>
@@ -2756,7 +2792,7 @@ function renderSettingsPage() {
       </section>
 
       <section class="settings-page-section" aria-label="Sprache">
-        <h3>Sprache</h3>
+        <h3>Sprache ${sectionReadChip("Sprache")}</h3>
         <p class="settings-explain">Du liest gerade: <strong>${escapeHtml(LANGUAGE_LABEL[languageLevel])}</strong>.</p>
         <div class="settings-toggle-row">
           <button type="button" class="setting-big-button" onclick="renderLanguageChoice('${escapeHtml(languageLevel)}')">Sprache wechseln</button>
@@ -2764,7 +2800,7 @@ function renderSettingsPage() {
       </section>
 
       <section class="settings-page-section" aria-label="Lernweg">
-        <h3>Wie möchtest du lernen?</h3>
+        <h3>Wie möchtest du lernen? ${sectionReadChip("Wie möchtest du lernen?")}</h3>
         <p class="settings-explain">Such dir etwas aus. Du kannst es jederzeit ändern.</p>
         <div class="settings-toggle-row">${learnModeButtons}</div>
       </section>
@@ -3028,7 +3064,7 @@ function buildSupportBox() {
         ${roleFigure("hilfe")}
         <div class="support-help-grid">
           <div class="support-help-card">
-            <h4>Wenn du die Seite nicht bedienen kannst</h4>
+            <h4>Wenn du die Seite nicht bedienen kannst ${sectionReadChip("Wenn du die Seite nicht bedienen kannst")}</h4>
             <ul>
               <li>Zeige auf die Stelle.</li>
               <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
@@ -3036,7 +3072,7 @@ function buildSupportBox() {
             </ul>
           </div>
           <div class="support-help-card">
-            <h4>Wenn du eine Frage nicht verstehst</h4>
+            <h4>Wenn du eine Frage nicht verstehst ${sectionReadChip("Wenn du eine Frage nicht verstehst")}</h4>
             <ul>
               <li>Lies die Frage noch einmal.</li>
               <li>Bitte eine Person um Erklärung.</li>
@@ -3044,7 +3080,7 @@ function buildSupportBox() {
             </ul>
           </div>
           <div class="support-help-card">
-            <h4>Wen kannst du fragen?</h4>
+            <h4>Wen kannst du fragen? ${sectionReadChip("Wen kannst du fragen?")}</h4>
             <ul>
               <li>Eine Person, der du vertraust.</li>
               <li>Eine Person, die dich unterstützt.</li>
