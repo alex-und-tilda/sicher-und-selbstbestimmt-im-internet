@@ -7,6 +7,7 @@ const topics = [
     "transfer": "Prüfe heute ein Passwort von dir. Ist es lang? Ist es geheim?",
     "selfAssessment": {
       "question": "Was weißt du schon über den Schutz deiner Daten?",
+      "pictogram": "pikto-lock",
       "options": [
         "Noch nicht so viel",
         "Ein bisschen",
@@ -162,6 +163,7 @@ const topics = [
         "warning": "Gib dein Passwort nicht weiter.",
         "practice": {
           "question": "Jemand fragt nach deinem Passwort. Was ist besser?",
+          "pictogram": "pikto-key",
           "answers": [
             "Ich gebe das Passwort weiter.",
             "Ich behalte das Passwort für mich."
@@ -219,6 +221,7 @@ const topics = [
         ],
         "practice": {
           "question": "Welches Passwort ist besser?",
+          "pictogram": "pikto-key",
           "answers": [
             "Frank1980",
             "Blume!Tisch7Wasser"
@@ -254,6 +257,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
+          "pictogram": "pikto-house",
           "answers": [
             "Ich trage die Adresse ein.",
             "Ich trage die Adresse nicht ein."
@@ -289,6 +293,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Gewinnspiel fragt nach deiner Telefon-Nummer. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Ich trage die Telefon-Nummer ein.",
             "Ich trage die Telefon-Nummer nicht ein."
@@ -325,6 +330,7 @@ const topics = [
         ],
         "practice": {
           "question": "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?",
+          "pictogram": "pikto-house",
           "answers": [
             "Ich schicke das Foto sofort.",
             "Ich schicke das Foto nicht so weiter."
@@ -362,6 +368,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine fremde Nachricht schickt dir einen Link. Was ist besser?",
+          "pictogram": "pikto-stranger",
           "answers": [
             "Ich öffne den Link sofort.",
             "Ich öffne den Link nicht sofort."
@@ -398,6 +405,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine Nachricht sagt: Klick sofort. Was ist besser?",
+          "pictogram": "pikto-link",
           "answers": [
             "Ich klicke sofort.",
             "Ich mache langsam."
@@ -451,6 +459,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine Nachricht macht dir Stress. Was ist besser?",
+          "pictogram": "pikto-message",
           "answers": [
             "Ich reagiere sofort.",
             "Ich mache Stopp."
@@ -464,6 +473,7 @@ const topics = [
       },
       {
         "title": "Doppelt sicher",
+        "pictogram": "pikto-key",
         "module": "Passwort",
         "icon": "lock",
         "text": [
@@ -494,6 +504,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was macht dein Konto doppelt sicher?",
+          "pictogram": "pikto-lock",
           "answers": [
             "Ein kurzes Passwort.",
             "Passwort und eine Zahl auf deinem Handy."
@@ -772,6 +783,7 @@ const topics = [
     "transfer": "Schau heute in deine WhatsApp-Chats. Kennst du alle Personen wirklich?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich bei WhatsApp?",
+      "pictogram": "pikto-message",
       "options": [
         "Noch nicht so sicher",
         "Ein bisschen sicher",
@@ -849,6 +861,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine fremde Nummer schreibt dir. Was ist besser?",
+          "pictogram": "pikto-stranger",
           "answers": [
             "Ich schicke private Daten.",
             "Ich antworte nicht sofort."
@@ -893,6 +906,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine fremde Nummer bittet um Geld. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Ich schicke Geld.",
             "Ich schicke kein Geld."
@@ -924,6 +938,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein unbekannter Link kommt an. Was ist besser?",
+          "pictogram": "pikto-stranger",
           "answers": [
             "Ich öffne den Link.",
             "Ich öffne den Link nicht."
@@ -956,6 +971,7 @@ const topics = [
         ],
         "practice": {
           "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
+          "pictogram": "pikto-code",
           "answers": [
             "Ich schicke den Code.",
             "Ich schicke den Code nicht."
@@ -987,6 +1003,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was ist bei Gruppen wichtig?",
+          "pictogram": "pikto-message",
           "answers": [
             "Alle können mitlesen.",
             "Nur ich kann es sehen."
@@ -1018,6 +1035,7 @@ const topics = [
         ],
         "practice": {
           "question": "Du willst ein Foto von einer Person senden. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Erst fragen.",
             "Einfach senden."
@@ -1049,6 +1067,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine Nachricht macht dir Stress. Was ist besser?",
+          "pictogram": "pikto-message",
           "answers": [
             "Pause machen.",
             "Sofort antworten."
@@ -1384,6 +1403,7 @@ const topics = [
     "transfer": "Prüfe heute bei einem Beitrag: Wer kann ihn sehen?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich auf Facebook?",
+      "pictogram": "pikto-people",
       "options": [
         "Noch nicht so sicher",
         "Ein bisschen sicher",
@@ -1467,6 +1487,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was prüfst du vor einem Beitrag?",
+          "pictogram": "pikto-search",
           "answers": [
             "Wer kann das sehen?",
             "Wie schnell kann ich posten?"
@@ -1498,6 +1519,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was bedeutet: Wer darf etwas sehen?",
+          "pictogram": "pikto-people",
           "answers": [
             "Ich prüfe die Sichtbarkeit.",
             "Alle sehen immer alles."
@@ -1530,6 +1552,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
+          "pictogram": "pikto-stranger",
           "answers": [
             "Sofort annehmen.",
             "Erst prüfen."
@@ -1561,6 +1584,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was ist bei Kommentaren wichtig?",
+          "pictogram": "pikto-people",
           "answers": [
             "Respektvoll schreiben.",
             "Andere beleidigen."
@@ -1611,6 +1635,7 @@ const topics = [
         ],
         "practice": {
           "question": "Du wirst beleidigt. Was ist besser?",
+          "pictogram": "pikto-people",
           "answers": [
             "Zurück beleidigen.",
             "Unterstützung holen."
@@ -1642,6 +1667,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Foto zeigt andere Menschen. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Erst fragen.",
             "Einfach posten."
@@ -1924,6 +1950,7 @@ const topics = [
     "transfer": "Schau heute in deine Einstellungen. Ist dein Konto privat?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich auf Instagram?",
+      "pictogram": "pikto-photo",
       "options": [
         "Noch nicht so sicher",
         "Ein bisschen sicher",
@@ -1976,6 +2003,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was prüfst du, bevor du ein Foto postest?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Was zu sehen ist.",
             "Nur die Farbe."
@@ -2007,6 +2035,7 @@ const topics = [
         ],
         "practice": {
           "question": "Im Hintergrund sieht man eine andere Person. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Ich poste das Foto einfach.",
             "Ich frage erst oder nehme ein anderes Foto."
@@ -2038,6 +2067,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was können Menschen bei kurzen Videos machen?",
+          "pictogram": "pikto-video",
           "answers": [
             "Ein Bild vom Bildschirm machen.",
             "Nichts speichern."
@@ -2069,6 +2099,7 @@ const topics = [
         ],
         "practice": {
           "question": "Warum ist der Standort wichtig?",
+          "pictogram": "pikto-location",
           "answers": [
             "Er zeigt, wo ich bin.",
             "Er ist immer egal."
@@ -2101,6 +2132,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Fotos schicken.",
             "Keine Fotos schicken."
@@ -2151,6 +2183,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Kommentar verletzt dich. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Unterstützung holen.",
             "Zurück beleidigen."
@@ -2182,6 +2215,7 @@ const topics = [
         ],
         "practice": {
           "question": "Warum sind bearbeitete Bilder wichtig?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Nicht alles ist echt.",
             "Alles ist immer echt."
@@ -2463,6 +2497,7 @@ const topics = [
     "transfer": "Achte heute bei einem Video darauf: Ist das Werbung?",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich beim Schauen auf YouTube?",
+      "pictogram": "pikto-video",
       "options": [
         "Noch nicht so sicher",
         "Ein bisschen sicher",
@@ -2515,6 +2550,7 @@ const topics = [
         ],
         "practice": {
           "question": "Was ist eine gute Regel für YouTube?",
+          "pictogram": "pikto-video",
           "answers": [
             "Ich glaube nicht alles sofort.",
             "Alles im Internet ist immer wahr."
@@ -2546,6 +2582,7 @@ const topics = [
         ],
         "practice": {
           "question": "Woran erkennst du Werbung in Videos?",
+          "pictogram": "pikto-video",
           "answers": [
             "Es wird etwas verkauft.",
             "Es geht nie ums Kaufen."
@@ -2577,6 +2614,7 @@ const topics = [
         ],
         "practice": {
           "question": "Autoplay startet immer neue Videos. Was ist wichtig?",
+          "pictogram": "pikto-video",
           "answers": [
             "Ich darf das Video stoppen.",
             "Ich muss immer weiter schauen."
@@ -2609,6 +2647,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Video zeigt eine gefährliche Mutprobe. Was ist besser?",
+          "pictogram": "pikto-video",
           "answers": [
             "Ich mache das nach.",
             "Ich mache das nicht nach."
@@ -2641,6 +2680,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Video macht dir Angst. Was ist besser?",
+          "pictogram": "pikto-video",
           "answers": [
             "Weiter schauen.",
             "Stoppen und mit jemandem sprechen."
@@ -2978,6 +3018,7 @@ const topics = [
     "transfer": "Prüfe heute in Snapchat: Wer kann deinen Standort sehen?",
     "selfAssessment": {
       "question": "Was weißt du schon über Snapchat?",
+      "pictogram": "pikto-photo",
       "options": [
         "Noch nicht so viel",
         "Ein bisschen",
@@ -3031,6 +3072,7 @@ const topics = [
         "warning": "Jemand kann dein Bild speichern. Auch wenn es nur kurz zu sehen ist. Sende nur Bilder, die andere sehen dürfen.",
         "practice": {
           "question": "Du schickst ein Bild über Snapchat. Was ist wichtig?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Niemand kann das Bild speichern.",
             "Jemand kann ein Bild vom Bildschirm machen."
@@ -3084,6 +3126,7 @@ const topics = [
         "warning": "Niemand darf dich zu privaten Bildern drängen. Du darfst immer Nein sagen. Jemand drängt dich? Dann hol dir Hilfe.",
         "practice": {
           "question": "Jemand drängt dich, ein sehr privates Bild zu schicken. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Bild schicken.",
             "Nein sagen und Hilfe holen."
@@ -3115,6 +3158,7 @@ const topics = [
         ],
         "practice": {
           "question": "Die Standort-Funktion zeigt, wo du bist. Was ist besser?",
+          "pictogram": "pikto-location",
           "answers": [
             "Standort immer teilen.",
             "Standort nicht einfach teilen."
@@ -3146,6 +3190,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine neue Person will dich adden. Du kennst sie nicht. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Sofort annehmen.",
             "Erst prüfen oder ablehnen."
@@ -3177,6 +3222,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine Nachricht macht Druck und fordert Geheimhaltung. Was ist das?",
+          "pictogram": "pikto-key",
           "answers": [
             "Warnzeichen.",
             "Kein Problem."
@@ -3460,6 +3506,7 @@ const topics = [
     "transfer": "Achte heute auf die Zeit. Wie lange schaust du Videos? Mach dann eine Pause.",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich bei TikTok?",
+      "pictogram": "pikto-video",
       "options": [
         "Noch nicht so sicher",
         "Ein bisschen sicher",
@@ -3512,6 +3559,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Trend wirkt gefährlich. Was ist besser?",
+          "pictogram": "pikto-video",
           "answers": [
             "Ich mache mit.",
             "Ich mache nicht mit."
@@ -3543,6 +3591,7 @@ const topics = [
         ],
         "practice": {
           "question": "Du schaust schon sehr lange TikTok. Was ist wichtig?",
+          "pictogram": "pikto-clock",
           "answers": [
             "Ich darf Pause machen.",
             "Ich muss immer weiter schauen."
@@ -3597,6 +3646,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
+          "pictogram": "pikto-house",
           "answers": [
             "Adresse schicken.",
             "Adresse nicht schicken."
@@ -3628,6 +3678,7 @@ const topics = [
         ],
         "practice": {
           "question": "Du willst ein Video posten. Was ist wichtig?",
+          "pictogram": "pikto-video",
           "answers": [
             "Ich prüfe, was man sieht.",
             "Ich poste sofort."
@@ -3659,6 +3710,7 @@ const topics = [
         ],
         "practice": {
           "question": "Kommentare unter deinem Video sind verletzend. Was ist besser?",
+          "pictogram": "pikto-video",
           "answers": [
             "Unterstützung holen.",
             "Beschimpfen lassen und schweigen."
@@ -3993,6 +4045,7 @@ const topics = [
     "transfer": "Überlege dir heute eine Person, der du vertraust. Etwas passiert? Dann fragst du diese Person.",
     "selfAssessment": {
       "question": "Etwas passiert im Internet. Hast du einen Plan?",
+      "pictogram": "pikto-help",
       "options": [
         "Noch nicht so genau",
         "Ein bisschen",
@@ -4049,6 +4102,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
+          "pictogram": "pikto-message",
           "answers": [
             "Stopp machen.",
             "Sofort antworten."
@@ -4081,6 +4135,7 @@ const topics = [
         ],
         "practice": {
           "question": "Jemand beleidigt dich im Chat. Was ist besser?",
+          "pictogram": "pikto-help",
           "answers": [
             "Nachricht löschen und niemandem zeigen.",
             "Nachricht zeigen und Hilfe holen."
@@ -4112,6 +4167,7 @@ const topics = [
         ],
         "practice": {
           "question": "Warum ist nicht sofort löschen wichtig?",
+          "pictogram": "pikto-warning",
           "answers": [
             "Die Nachricht kann als Beweis helfen.",
             "Die Nachricht ist immer unwichtig."
@@ -4144,6 +4200,7 @@ const topics = [
         ],
         "practice": {
           "question": "Jemand sagt: Mach das sofort und sag es niemandem. Was ist das?",
+          "pictogram": "pikto-warning",
           "answers": [
             "Ein Warnzeichen.",
             "Ganz normal."
@@ -4205,6 +4262,7 @@ const topics = [
         ],
         "practice": {
           "question": "Zu wem kannst du mit einer komischen Nachricht gehen?",
+          "pictogram": "pikto-message",
           "answers": [
             "Zu einer vertrauten Person.",
             "Zu niemandem."
@@ -4528,6 +4586,7 @@ const topics = [
     "transfer": "Nutzt du heute eine KI? Prüfe eine Antwort nach.",
     "selfAssessment": {
       "question": "Was weißt du schon über Künstliche Intelligenz?",
+      "pictogram": "pikto-ki",
       "options": [
         "Noch nicht so viel",
         "Ein bisschen",
@@ -4680,6 +4739,7 @@ const topics = [
         "warning": "Ein Chatbot ist kein echter Freund. Wichtige Sorgen besprichst du mit einem Menschen.",
         "practice": {
           "question": "Ein Chatbot schreibt: Ich bin dein Freund. Was stimmt?",
+          "pictogram": "pikto-friend",
           "answers": [
             "Der Chatbot ist ein echter Freund.",
             "Der Chatbot ist ein Programm."
@@ -4719,6 +4779,7 @@ const topics = [
         ],
         "practice": {
           "question": "Die KI gibt dir eine wichtige Antwort. Was ist besser?",
+          "pictogram": "pikto-ki",
           "answers": [
             "Ich glaube alles sofort.",
             "Ich prüfe die Antwort oder frage einen Menschen."
@@ -4764,6 +4825,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Chatbot fragt nach deiner Adresse. Was ist besser?",
+          "pictogram": "pikto-house",
           "answers": [
             "Ich schreibe meine Adresse.",
             "Ich schreibe meine Adresse nicht."
@@ -4803,6 +4865,7 @@ const topics = [
         ],
         "practice": {
           "question": "Du bist krank. Die KI gibt dir einen Tipp. Was ist besser?",
+          "pictogram": "pikto-ki",
           "answers": [
             "Ich mache nur, was die KI sagt.",
             "Ich frage auch eine Ärztin oder einen Arzt."
@@ -5121,6 +5184,7 @@ const topics = [
     "transfer": "Siehst du heute eine überraschende Nachricht? Erst prüfen. Dann teilen.",
     "selfAssessment": {
       "question": "Weißt du, wie du eine Fake-Nachricht erkennst?",
+      "pictogram": "pikto-fake",
       "options": [
         "Noch nicht so genau",
         "Ein bisschen",
@@ -5252,6 +5316,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein unglaubliches Foto im Internet. Was ist besser?",
+          "pictogram": "pikto-photo",
           "answers": [
             "Ich glaube das Foto sofort.",
             "Ich bleibe erst einmal skeptisch."
@@ -5291,6 +5356,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Promi verspricht im Video schnelles Geld. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Ich mache sofort mit.",
             "Ich mache nicht mit. Das Video kann gefälscht sein."
@@ -5327,6 +5393,7 @@ const topics = [
         "warning": "Lege auf. Ruf die Person selbst an. Nutze die Nummer, die du kennst.",
         "practice": {
           "question": "Ein Anruf: Die Stimme klingt wie dein Bruder. Er will sofort Geld. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Ich zahle sofort.",
             "Ich lege auf und rufe meinen Bruder selbst an."
@@ -5372,6 +5439,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine schlimme Nachricht steht nur auf einer unbekannten Seite. Was ist besser?",
+          "pictogram": "pikto-stranger",
           "answers": [
             "Die Nachricht stimmt bestimmt.",
             "Ich prüfe: Steht das auch bei bekannten Nachrichten-Seiten?"
@@ -5408,6 +5476,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine Nachricht macht dich sehr wütend. Was ist besser?",
+          "pictogram": "pikto-message",
           "answers": [
             "Sofort weiterleiten.",
             "Erst einmal anhalten und prüfen."
@@ -5443,6 +5512,7 @@ const topics = [
         ],
         "practice": {
           "question": "Stimmt eine Nachricht? Du bist nicht sicher. Was ist besser?",
+          "pictogram": "pikto-message",
           "answers": [
             "Trotzdem weiterleiten.",
             "Nicht weiterleiten."
@@ -5732,6 +5802,7 @@ const topics = [
     "transfer": "Erzähle heute einer Person von einem Trick aus diesem Thema. So schützt ihr euch beide.",
     "selfAssessment": {
       "question": "Weißt du, wie Betrüger im Internet vorgehen?",
+      "pictogram": "pikto-fraud",
       "options": [
         "Noch nicht so genau",
         "Ein bisschen",
@@ -5797,6 +5868,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine E-Mail von der Bank sagt: Klick sofort auf den Link. Was ist besser?",
+          "pictogram": "pikto-bank",
           "answers": [
             "Sofort klicken.",
             "Nicht klicken. Bei der Bank selbst nachfragen."
@@ -5872,6 +5944,7 @@ const topics = [
         "warning": "Echte Paket-Dienste fordern kein Geld per SMS.",
         "practice": {
           "question": "Eine SMS: Zahlen Sie 2 Euro Zoll für Ihr Paket. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Schnell zahlen. Sind ja nur 2 Euro.",
             "Nicht zahlen. Nicht klicken."
@@ -5907,6 +5980,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine fremde Nummer schreibt: Ich bin dein Kind, brauche Geld. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Sofort Geld senden.",
             "Die alte, bekannte Nummer anrufen und nachfragen."
@@ -5943,6 +6017,7 @@ const topics = [
         "warning": "Die echte Polizei fordert nie Geld am Telefon.",
         "practice": {
           "question": "Ein Anrufer sagt: Ich bin Polizist. Geben Sie mir Ihr Geld. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Geld geben.",
             "Auflegen. Die Polizei fordert nie Geld."
@@ -5978,6 +6053,7 @@ const topics = [
         ],
         "practice": {
           "question": "Du hast angeblich gewonnen. Du sollst erst 50 Euro Gebühr zahlen. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Gebühr zahlen.",
             "Nicht zahlen. Das ist Betrug."
@@ -6052,6 +6128,7 @@ const topics = [
         ],
         "practice": {
           "question": "Jemand ruft an und fragt nach dem SMS-Code von deiner Bank. Was ist besser?",
+          "pictogram": "pikto-code",
           "answers": [
             "Code vorlesen.",
             "Code nicht weitergeben. Auflegen."
@@ -6065,6 +6142,7 @@ const topics = [
       },
       {
         "title": "Vorsicht bei QR-Codes",
+        "pictogram": "pikto-code",
         "module": "Schutz",
         "icon": "warning",
         "text": [
@@ -6091,6 +6169,7 @@ const topics = [
         ],
         "practice": {
           "question": "Am Park-Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
+          "pictogram": "pikto-code",
           "answers": [
             "Schnell scannen.",
             "Erst eine vertraute Person fragen."
@@ -6403,6 +6482,7 @@ const topics = [
     "transfer": "Willst du heute etwas kaufen? Prüfe zuerst den Shop.",
     "selfAssessment": {
       "question": "Wie sicher fühlst du dich beim Online-Einkaufen?",
+      "pictogram": "pikto-shop",
       "options": [
         "Noch nicht so sicher",
         "Ein bisschen sicher",
@@ -6530,6 +6610,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Shop ist extrem billig. Du kannst nur per Vorkasse zahlen. Was ist besser?",
+          "pictogram": "pikto-money",
           "answers": [
             "Schnell kaufen. So billig!",
             "Nicht kaufen. Das sind Warnzeichen."
@@ -6575,6 +6656,7 @@ const topics = [
         ],
         "practice": {
           "question": "Welche Bezahl-Art ist sicherer?",
+          "pictogram": "pikto-money",
           "answers": [
             "Vorkasse an einen fremden Shop.",
             "Kauf auf Rechnung."
@@ -6615,6 +6697,7 @@ const topics = [
         ],
         "practice": {
           "question": "Eine E-Mail fragt nach deiner PIN. Was ist besser?",
+          "pictogram": "pikto-mail",
           "answers": [
             "PIN eingeben.",
             "PIN niemals eingeben. Das ist Betrug."
@@ -6679,6 +6762,7 @@ const topics = [
         ],
         "practice": {
           "question": "Ein Angebot sagt: Nur noch 10 Minuten! Was ist besser?",
+          "pictogram": "pikto-shop",
           "answers": [
             "Schnell kaufen.",
             "Ruhig bleiben und in Ruhe überlegen."

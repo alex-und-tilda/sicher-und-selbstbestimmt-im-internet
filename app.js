@@ -3249,7 +3249,7 @@ function renderSelfAssessment() {
         <h2>${escapeHtml(topic.title)}</h2>
       </div>
       <p class="sa-intro">Bevor wir starten:</p>
-      <p class="sa-question">${escapeHtml(sa.question)}</p>
+      ${questionPikto(sa)}<p class="sa-question">${escapeHtml(sa.question)}</p>
       ${roleFigure("nachdenken")}
       <div class="sa-options" role="group" aria-label="Einschätzung wählen">
         ${optionButtons}
