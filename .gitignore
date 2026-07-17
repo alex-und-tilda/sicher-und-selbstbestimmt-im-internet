@@ -3,6 +3,7 @@
 
 # Lokale Vorschau- und Hilfsdateien (nicht hochladen)
 _vorschau-*.html
+_vorschau-*.json
 design-vorschau.html
 styles.css.bak
 

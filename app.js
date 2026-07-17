@@ -4055,6 +4055,7 @@ function buildBigQuizPool(fromTopics, count) {
     qs.forEach((q) => {
       pool.push({
         question:   q.question || "",
+        pictogram:  q.pictogram || "",
         answers:    Array.isArray(q.answers) ? q.answers : [],
         correct:    Number(q.correctIndex ?? q.correct ?? 0),
         topicId:    topic.id,
