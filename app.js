@@ -107,7 +107,7 @@ function toggleSettings() { renderSettingsPage(); }
 let finishedTopicThisSession = false;
 const LEARN_MODES = {
   allein:     { title: "Ich lerne allein",      desc: "Die App erklärt dir alles. Mit Vorlesen.",        icon: "understand" },
-  app:        { title: "Mit Hilfe der App",     desc: "Jede Seite wird dir vorgelesen. Große Schrift.",  icon: "message" },
+  app:        { title: "Mit Hilfe der App",     desc: "Große Schrift. Vorlesen, wenn du es möchtest.",   icon: "message" },
   begleitung: { title: "Mit einer Begleitung",  desc: "Ihr lernt zu zweit. Mit Tipps zum Reden.",        icon: "help" }
 };
 
@@ -135,7 +135,7 @@ function chooseLearnMode(mode) {
       pSet(FONT_SIZE_KEY, fontSizeStep);
       applyFontSize();
     }
-    announce("Gut. Die Schrift ist jetzt größer. Jede Seite wird dir automatisch vorgelesen. Du kannst das Vorlesen jederzeit stoppen.");
+    announce("Gut. Die Schrift ist jetzt größer. Automatisches Vorlesen kannst du in den Einstellungen anschalten.");
   } else if (learnMode === "begleitung") {
     announce("Gut. Auf jeder Themen-Seite gibt es jetzt Tipps für das gemeinsame Lernen.");
   } else if (learnMode === "allein") {
@@ -401,6 +401,7 @@ function loadActiveProfileSettings() {
   fontSizeStep = 0;
   loadFontSize();       /* liest + wendet Schriftgröße an */
   loadReadTempo();      /* Vorlese-Tempo (normal / langsam) */
+  loadAutoRead();       /* Automatisches Vorlesen (Wahl, Standard: aus) */
   loadMotion();         /* liest + wendet Bewegungs-Einstellung an */
   loadLanguageLevel();  /* setzt languageLevel + languageChosen, falls gemerkt */
   loadLearnMode();
@@ -994,8 +995,8 @@ function focusContent() {
   content.focus();
   /* Hör-Modus („Mit Hilfe der App"): jede Seite liest sich selbst vor –
      sanft verzögert, jederzeit mit Stopp abbrechbar (Angebot, kein Zwang). */
-  if (typeof learnMode !== "undefined" && learnMode === "app" && supportsSpeech()) {
-    window.setTimeout(() => { if (learnMode === "app") readStart(); }, 450);
+  if (typeof autoRead !== "undefined" && autoRead && supportsSpeech()) {
+    window.setTimeout(() => { if (autoRead) readStart(); }, 450);
   }
   const reduceMotion = !motionEnabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
@@ -1363,6 +1364,27 @@ function readSlow() { readCurrentPage(0.50); }
 
 /* Vorlese-Tempo ist eine EINSTELLUNG (einmal wählen), keine Entscheidung
    bei jedem Vorlesen. Weniger Knöpfe am Ort der Handlung (Hick, CLT). */
+/* Automatisches Vorlesen ist eine WAHL (Standard: aus). Die Person wird
+   im Einstieg einmal gefragt und kann es jederzeit in den Einstellungen
+   ändern (§3: Vorlesen als Angebot, nie als Zwang). */
+const AUTO_READ_KEY = "vorlesen-automatisch";
+const AUTO_READ_GEFRAGT_KEY = "vorlesen-gefragt";
+let autoRead = false;
+
+function loadAutoRead() {
+  autoRead = pGet(AUTO_READ_KEY) === "an";
+}
+
+function setAutoRead(an, still) {
+  autoRead = !!an;
+  pSet(AUTO_READ_KEY, autoRead ? "an" : "aus");
+  if (!still) {
+    announce(autoRead
+      ? "Gut. Ich lese dir jede Seite automatisch vor. Mit Stopp kannst du das Vorlesen immer anhalten."
+      : "In Ordnung. Ich lese nur vor, wenn du auf Vorlesen drückst.");
+  }
+}
+
 const READ_TEMPO_KEY = "vorlese-tempo";
 let readTempo = "normal";
 function loadReadTempo() {
@@ -1549,6 +1571,46 @@ function chooseVorwissen(v) {
   pSet(VORWISSEN_KEY, v === "erfahren" ? "erfahren" : "neu");
   onboarding = false;
   announce(v === "erfahren" ? "Gut. Wir schlagen dir die kurze Menge vor." : "Gut. Wir schlagen dir die ausführliche Menge vor.");
+  renderVorleseFrage();
+}
+
+/* Einmalige Frage: Soll ich dir vorlesen? EIN Konzept, EIN Bildschirm,
+   zwei klare Wege. Jederzeit in den Einstellungen änderbar. */
+function renderVorleseFrage() {
+  if (pGet(AUTO_READ_GEFRAGT_KEY) === "1" || !supportsSpeech()) return renderMenuIntro();
+  pSet(AUTO_READ_GEFRAGT_KEY, "1");
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Vorlesen", "Einweisung", "Soll ich dir vorlesen?", 0);
+  setActiveTab("start");
+  setOrientation("Du bist bei der Einweisung. Es geht um das Vorlesen.");
+  showNav(false, false);
+  content.innerHTML = `
+    ${buildReadingToolbar()}
+    <section class="profile-new" data-readable="true">
+      <h2 class="language-choice-title">Soll ich dir die Seiten vorlesen?</h2>
+      <p class="language-choice-intro">Du kannst das jederzeit in den Einstellungen ändern.</p>
+      <div class="device-grid">
+        <button type="button" class="device-card" onclick="chooseAutoRead(true)">
+          <span class="device-icon" aria-hidden="true">🔊</span>
+          <strong>Ja, immer vorlesen</strong>
+          <span>Jede Seite wird dir automatisch vorgelesen.</span>
+        </button>
+        <button type="button" class="device-card" onclick="chooseAutoRead(false)">
+          <span class="device-icon" aria-hidden="true">🤫</span>
+          <strong>Nein, ich drücke selbst</strong>
+          <span>Vorgelesen wird nur, wenn du auf Vorlesen drückst.</span>
+        </button>
+      </div>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function chooseAutoRead(an) {
+  setAutoRead(an);
   renderMenuIntro();
 }
 
@@ -2814,7 +2876,12 @@ function renderSettingsPage() {
 
       <section class="settings-page-section" aria-label="Vorlesen">
         <h3>Vorlesen ${sectionReadChip("Vorlesen")}</h3>
-        <p class="settings-explain">Wie schnell soll die Stimme lesen?</p>
+        <p class="settings-explain">Soll jede Seite automatisch vorgelesen werden?</p>
+        <div class="settings-toggle-row" role="group" aria-label="Automatisch vorlesen">
+          <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "true" : "false"}" onclick="setAutoRead(true); renderSettingsPage();">Ja, immer vorlesen</button>
+          <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "false" : "true"}" onclick="setAutoRead(false); renderSettingsPage();">Nein, ich drücke selbst</button>
+        </div>
+        <p class="settings-explain" style="margin-top:14px;">Wie schnell soll die Stimme lesen?</p>
         <div class="settings-toggle-row" role="group" aria-label="Vorlese-Tempo">
           <button type="button" class="setting-big-button" aria-pressed="${readTempo === "normal" ? "true" : "false"}" onclick="setReadTempo('normal')">Normal</button>
           <button type="button" class="setting-big-button" aria-pressed="${readTempo === "langsam" ? "true" : "false"}" onclick="setReadTempo('langsam')">Langsam</button>
