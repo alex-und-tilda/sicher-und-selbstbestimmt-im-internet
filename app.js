@@ -2924,6 +2924,31 @@ function renderSettingsPage() {
    Themenseite: Lernweg wählen
    ============================================================ */
 
+/* Kompetenz-Einordnung (DigComp 2.2 + ICF) als Block.
+   Reine Fachkräfte-Information: zeigt, was die Person danach im ALLTAG
+   kann (Aktivität und Teilhabe), nicht nur, was sie weiß. */
+function buildCompetenceBlock(c) {
+  const k = c && c.kompetenzen;
+  if (!k) return "";
+  const liste = (items, mitStufe) => {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `<ul class="komp-liste">` + items.map(e =>
+      `<li><span class="komp-code">${escapeHtml(e.code)}</span>` +
+      `<span class="komp-titel">${escapeHtml(e.titel)}</span>` +
+      (mitStufe && e.stufe ? `<span class="komp-stufe">${escapeHtml(e.stufe)}</span>` : "") +
+      `<span class="komp-bezug">${escapeHtml(e.bezug)}</span></li>`).join("") + `</ul>`;
+  };
+  const dc = liste(k.digcomp, true);
+  const icf = liste(k.icf, false);
+  if (!dc && !icf) return "";
+  return `<div class="companion-section companion-kompetenz">
+      <h4>Kompetenz-Einordnung</h4>
+      ${dc ? `<h5>DigComp 2.2 – Europäischer Referenzrahmen für digitale Kompetenzen</h5>${dc}` : ""}
+      ${icf ? `<h5>ICF – Aktivität, Teilhabe und Umweltfaktoren</h5>${icf}` : ""}
+      <p class="komp-fuss">Die Stufen 1–2 stehen für grundlegende Kompetenz: mit Anleitung bis selbstständig bei einfachen Aufgaben. Die ICF-Bezüge benennen den Alltags-Nutzen, nicht ein Defizit.</p>
+    </div>`;
+}
+
 /* Begleit-Material als saubere Druck-/PDF-Ansicht (Handout für Fachkräfte). */
 function printCompanion(topicId) {
   const topic = getTopicById(topicId);
@@ -2937,14 +2962,32 @@ function printCompanion(topicId) {
     ["Rechts- und Fachbezüge", c.rechtsbezuege],
     ["Alltagstransfer", c.transfer]
   ];
+  /* Kompetenz-Einordnung fürs Handout (steht direkt hinter den Lernzielen). */
+  const k = c.kompetenzen;
+  const kompListe = (items, mitStufe) => (Array.isArray(items) && items.length)
+    ? `<ul>${items.map(e => `<li><b>${escapeHtml(e.code)}</b> ${escapeHtml(e.titel)}` +
+        (mitStufe && e.stufe ? ` <span class="stufe">${escapeHtml(e.stufe)}</span>` : "") +
+        `<br>${escapeHtml(e.bezug)}</li>`).join("")}</ul>`
+    : "";
+  const kompPrint = k
+    ? `<h2>Kompetenz-Einordnung</h2>` +
+      (kompListe(k.digcomp, true) ? `<h3>DigComp 2.2 – Europäischer Referenzrahmen für digitale Kompetenzen</h3>${kompListe(k.digcomp, true)}` : "") +
+      (kompListe(k.icf, false) ? `<h3>ICF – Aktivität, Teilhabe und Umweltfaktoren</h3>${kompListe(k.icf, false)}` : "") +
+      `<p class="meta">Stufe 1–2 = grundlegende Kompetenz: mit Anleitung bis selbstständig bei einfachen Aufgaben. Die ICF-Bezüge benennen den Alltags-Nutzen, kein Defizit.</p>`
+    : "";
   const body = sections
     .filter(([, it]) => Array.isArray(it) && it.length)
-    .map(([t, it]) => `<h2>${escapeHtml(t)}</h2><ul>${it.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>`)
+    .map(([t, it]) => {
+      const block = `<h2>${escapeHtml(t)}</h2><ul>${it.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>`;
+      return t === "Lernziele" ? block + kompPrint : block;
+    })
     .join("");
   const html = `<!doctype html><html lang="de"><head><meta charset="utf-8">` +
     `<title>Begleit-Material – ${escapeHtml(topic.title)}</title>` +
     `<style>body{font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:24px auto;padding:0 16px;color:#142231;line-height:1.55;}` +
     `h1{font-size:20px;margin:0 0 4px;}h2{font-size:15px;margin:18px 0 4px;border-bottom:1px solid #ccd;padding-bottom:4px;}` +
+    `h3{font-size:13px;margin:12px 0 2px;color:#334;}` +
+    `.stufe{color:#555;font-size:11px;white-space:nowrap;}b{font-family:"Courier New",monospace;}` +
     `ul{margin:6px 0;padding-left:20px;}li{margin-bottom:5px;}.meta{color:#555;font-size:12px;margin:0 0 12px;}` +
     `.foot{margin-top:24px;border-top:1px solid #ccd;padding-top:8px;color:#555;font-size:11px;}</style></head><body>` +
     `<h1>Für Begleitpersonen und Fachkräfte</h1>` +
@@ -3026,6 +3069,7 @@ function buildCompanionPanel(topic) {
       </summary>
       <div class="companion-body">
         <p class="companion-intro">Diese Hinweise richten sich an Betreuende, Assistenz, Angehörige und Fachkräfte. Sie sind nicht Teil der Lern-Texte.</p>
+        ${buildCompetenceBlock(c)}
         ${blocks}
         <div class="companion-qr">
           <img src="assets/qr/${escapeHtml(topic.id)}.svg" alt="QR-Code für das Thema ${escapeHtml(topic.title)}" width="132" height="132" loading="lazy">

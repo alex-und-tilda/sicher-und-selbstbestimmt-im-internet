@@ -117,12 +117,27 @@ Plain Language, etwa Niveau **B1**. **Sichtbar voller als Leichte Sprache, einfa
 
 ## 7. Begleit-Ebene „Für Begleitpersonen und Fachkräfte" (Fachsprache Eingliederungshilfe)
 
-Eine **eigene, klar getrennte Ebene** — keine Sprach-Stufe für Lernende. Quelle: `begleitung-de.js` (`COMPANION[themaId]` → `topic.companion`), Anzeige als aufklappbares Panel im Themen-Einstieg + Druck-/PDF-Handout (`printCompanion`). Sechs Abschnitte je Thema: **Lernziele, Methodische Hinweise, Gesprächsanlässe, Hinweise zur Begleitung, Rechts-/Fachbezüge, Alltagstransfer.**
+Eine **eigene, klar getrennte Ebene** — keine Sprach-Stufe für Lernende. Quelle: `begleitung-de.js` (`COMPANION[themaId]` → `topic.companion`), Anzeige als aufklappbares Panel im Themen-Einstieg + Druck-/PDF-Handout (`printCompanion`). Sieben Abschnitte je Thema: **Kompetenz-Einordnung, Lernziele, Methodische Hinweise, Gesprächsanlässe, Hinweise zur Begleitung, Rechts-/Fachbezüge, Alltagstransfer.**
 
 Diese Ebene setzt das mediierte Lernen (§3) und das Kompetenz-Modell um:
 - **Lernziele** beobachtbar formulieren („Nach diesem Thema kannst du …").
 - **DigComp 2.2** verorten (v. a. Bereich 4 „Sicherheit", Bereich 2 „Kommunikation").
 - **ICF** verknüpfen: was die Person danach im **Alltag** besser kann (Aktivität/Teilhabe), nicht nur Wissen.
+
+**Kompetenz-Einordnung (`kompetenzen`), Stand August 2026 für alle 12 Themen gepflegt:**
+
+```js
+kompetenzen: {
+  digcomp: [ { code: "4.2", titel: "…", stufe: "Stufe 1–2 · grundlegend", bezug: "…" } ],
+  icf:     [ { code: "d177", titel: "Entscheidungen treffen", bezug: "…" } ]
+}
+```
+
+- `code` DigComp: `<Bereich>.<Kompetenz>` nach DigComp 2.2 (EU-Fassung, 5 Bereiche / 21 Kompetenzen). Schwerpunkt der Plattform: Bereich 4 (Sicherheit) und Bereich 2 (Kommunikation).
+- `stufe`: für diese Zielgruppe durchgehend Stufe 1–2 (grundlegend: mit Anleitung bis selbstständig bei einfachen Aufgaben). Höhere Stufen nicht behaupten.
+- `code` ICF: `d…` Aktivitäten und Teilhabe, `e…` Umweltfaktoren (z. B. `e310` Vertrauensperson, `e5750` Beratungsstellen). **Keine `b`-Codes (Körperfunktionen)** — die Ebene beschreibt Teilhabe, kein Defizit.
+- `bezug` beschreibt beobachtbares Alltags-Handeln, ressourcenorientiert formuliert (§4).
+- Gerendert von `buildCompetenceBlock()` in `app.js`; im Handout steht der Block direkt hinter den Lernzielen.
 
 ---
 
@@ -260,7 +275,7 @@ Reines HTML/CSS/JS, **kein Framework/Bundler/npm**. JS wird über `<script src>`
 1. **Dritte Ebene:** bleibt „Alltagssprache (für alle)" — oder zusätzlich/stattdessen weiter ausbauen? (Die Fachkräfte-Inhalte liegen bereits in der separaten Begleit-Ebene §7.)
 2. **Standard-Start-Ebene:** Beim allerersten Besuch zeigt die App zuerst die Sprach-Auswahl. Alternative Vorauswahl? (Vorschlag: Einfache Sprache.)
 3. **Quiz/Einstiegsfrage je Stufe:** Einstiegsfrage ist je Stufe möglich (Pilot Datenschutz). Quiz bleibt empfohlen gemeinsam für alle Stufen. Voll ausrollen?
-4. **DigComp/ICF in der Begleit-Ebene:** explizite DigComp-Codes je Thema ergänzen?
+4. ~~**DigComp/ICF in der Begleit-Ebene:** explizite DigComp-Codes je Thema ergänzen?~~ **Erledigt (August 2026):** alle 12 Themen haben `kompetenzen` mit DigComp-2.2- und ICF-Codes (§7). Offen bleibt nur: sollen die Codes auch im Beobachtungsbogen und im Erfolgs-Heft auftauchen?
 5. **Echter Offline-Zwang:** Falls ja, ARASAAC-Piktogramme lokal hosten (§11).
 6. **QR-Betrugs-Lektion auch im Kurz-Modus?** „Vorsicht bei QR-Codes" (Betrug) liegt nur im „Mehr lernen"-Weg; der Kurz-Modus behält bewusst 3 Kern-Lektionen je Thema.
 7. **Wegzeichen (Alex und Tilda an festen Orten):** Konzept liegt vor (`_vorschau-wegzeichen-konzept.html`). Erst Prüfgruppe, dann 7 Illustrations-Varianten, dann Einbau.

@@ -6,13 +6,37 @@
    Sie erscheint als aufklappbares Panel im Themen-Einstieg und
    richtet sich an Betreuende, Assistenz, Angehörige und Fachkräfte.
 
-   Aufbau:  COMPANION[themaId] = { lernziele[], methodik[],
-            gespraechsanlaesse[], begleithinweise[], rechtsbezuege[], transfer[] }
+   Aufbau:  COMPANION[themaId] = { kompetenzen{digcomp[], icf[]}, lernziele[],
+            methodik[], gespraechsanlaesse[], begleithinweise[],
+            rechtsbezuege[], transfer[] }
+
+   kompetenzen: Verortung im Europäischen Referenzrahmen DigComp 2.2
+   (Code, Kompetenz, Stufe) und in der ICF (Aktivität und Teilhabe bzw.
+   Umweltfaktoren). Macht sichtbar, was die Person danach im ALLTAG kann –
+   nicht nur, was sie weiß. Reine Fachkräfte-Information.
    Verknüpfung am Ende: applyCompanion() hängt es als topic.companion an.
    ============================================================ */
 
 const COMPANION = {
   datenschutz: {
+    kompetenzen: {
+      digcomp: [
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Erkennt einfache personenbezogene Daten und weiß, dass Privatsphäre-Einstellungen veränderbar sind." },
+        { code: "4.1", titel: "Schutz von Geräten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Sichert das eigene Gerät mit PIN, Passwort und Zwei-Faktor-Anmeldung – bei Bedarf mit Anleitung." },
+        { code: "2.6", titel: "Verwaltung der digitalen Identität", stufe: "Stufe 1 · grundlegend, mit Anleitung",
+          bezug: "Entscheidet mit Unterstützung, welche Angaben im Profil sichtbar sein sollen." }
+      ],
+      icf: [
+        { code: "d177", titel: "Entscheidungen treffen",
+          bezug: "Wählt im Alltag selbst aus, welche Daten sie weitergibt und welche nicht." },
+        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
+          bezug: "Bleibt bei drängenden Anfragen ruhig und reagiert nicht sofort." },
+        { code: "e125", titel: "Produkte und Technologien zur Kommunikation (Umweltfaktor)",
+          bezug: "Das eigene Gerät wird durch Schutz-Einstellungen zum unterstützenden Faktor statt zur Barriere." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden erkennen, welche Informationen als private bzw. personenbezogene Daten gelten.",
       "Sie wissen, warum Passwort, PIN und Zugangsdaten geheim bleiben.",
@@ -53,6 +77,24 @@ const COMPANION = {
   },
 
   whatsapp: {
+    kompetenzen: {
+      digcomp: [
+        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Nutzt Nachrichten, Sprach-Nachrichten und Gruppen und wählt selbst, wem sie antwortet." },
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Prüft eine Nachricht von einer unbekannten Nummer auf Warnzeichen (Hallo-Mama-Trick) und erkennt Meta AI als Programm." },
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Stellt Profilbild, Zuletzt-online und Gruppen-Einladungen ein und gibt keine Bestätigungs-Codes weiter." }
+      ],
+      icf: [
+        { code: "d360", titel: "Kommunikationsgeräte und -techniken benutzen",
+          bezug: "Schreibt, telefoniert und verschickt Sprach-Nachrichten selbstständig." },
+        { code: "d720", titel: "Komplexe interpersonelle Interaktionen",
+          bezug: "Setzt Grenzen: antwortet nicht, blockiert, beendet ein Gespräch." },
+        { code: "d760", titel: "Familienbeziehungen",
+          bezug: "Ruft bei angeblichen Nachrichten von Angehörigen über die bekannte Nummer zurück." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden nutzen WhatsApp für Nachrichten, Fotos und Gruppen und entscheiden selbst, wem sie antworten.",
       "Sie erkennen Betrugsmaschen wie den „Hallo-Mama-Trick“ und reagieren nicht vorschnell.",
@@ -90,6 +132,26 @@ const COMPANION = {
   },
 
   facebook: {
+    kompetenzen: {
+      digcomp: [
+        { code: "2.6", titel: "Verwaltung der digitalen Identität", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Gestaltet das Profil so, dass private Angaben nicht öffentlich sind." },
+        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Prüft Freundschafts-Anfragen und nimmt nicht jede an." },
+        { code: "2.5", titel: "Netiquette", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Schreibt respektvoll und erkennt Beleidigungen als nicht hinnehmbar." },
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Stellt die Sichtbarkeit von Beiträgen auf Freunde." }
+      ],
+      icf: [
+        { code: "d750", titel: "Informelle soziale Beziehungen",
+          bezug: "Pflegt Kontakte zu Bekannten und unterscheidet sie von Fremden." },
+        { code: "d730", titel: "Umgang mit fremden Personen",
+          bezug: "Reagiert zurückhaltend auf Anfragen unbekannter Profile." },
+        { code: "d175", titel: "Probleme lösen",
+          bezug: "Wendet bei Beleidigungen einen festen Plan an: blockieren, melden, erzählen, Hilfe holen." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden gestalten ihr Profil so, dass private Angaben nicht öffentlich sind.",
       "Sie prüfen Freundschafts-Anfragen und nehmen nicht jede an.",
@@ -126,6 +188,26 @@ const COMPANION = {
   },
 
   instagram: {
+    kompetenzen: {
+      digcomp: [
+        { code: "2.2", titel: "Teilen durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Prüft Fotos und Videos vor dem Posten, auch den Hintergrund." },
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Schaltet die Standort-Freigabe aus und stellt das Konto auf privat." },
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Erkennt, dass viele Bilder bearbeitet und gefiltert sind." },
+        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Ordnet den Vergleichs-Druck ein und schützt das eigene Wohlbefinden." }
+      ],
+      icf: [
+        { code: "d177", titel: "Entscheidungen treffen",
+          bezug: "Entscheidet vor dem Posten selbst, was privat bleibt." },
+        { code: "d720", titel: "Komplexe interpersonelle Interaktionen",
+          bezug: "Antwortet Fremden nicht vorschnell und blockiert bei Bedarf." },
+        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
+          bezug: "Hält dem Vergleich mit bearbeiteten Bildern stand." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden prüfen Fotos und Videos vor dem Posten und achten auf den Hintergrund.",
       "Sie schützen ihren Standort und antworten Fremden nicht vorschnell.",
@@ -161,6 +243,24 @@ const COMPANION = {
   },
 
   youtube: {
+    kompetenzen: {
+      digcomp: [
+        { code: "1.1", titel: "Browsen, Suchen und Filtern von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Sucht Videos gezielt und schaltet Autoplay aus." },
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Prüft Aussagen in Videos und erkennt Werbung als Werbung." },
+        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Macht bewusst Pausen und macht gefährliche Mutproben nicht nach." }
+      ],
+      icf: [
+        { code: "d163", titel: "Denken",
+          bezug: "Hinterfragt eine Aussage, bevor sie sie übernimmt." },
+        { code: "d570", titel: "Auf die eigene Gesundheit achten",
+          bezug: "Vereinbart eine Pausen-Regel und hält sie ein." },
+        { code: "d920", titel: "Erholung und Freizeit",
+          bezug: "Nutzt Videos als Freizeit, ohne die Kontrolle über die Zeit zu verlieren." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden prüfen Video-Aussagen kritisch und glauben nicht alles sofort.",
       "Sie erkennen Werbung und lassen sich nicht zu Käufen drängen.",
@@ -195,6 +295,24 @@ const COMPANION = {
   },
 
   snapchat: {
+    kompetenzen: {
+      digcomp: [
+        { code: "2.2", titel: "Teilen durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Weiß, dass verschwindende Bilder per Screenshot gespeichert werden können." },
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Stellt die Snap Map auf den Geistmodus." },
+        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Erkennt Geheimhaltungs-Druck als Warnzeichen und holt Hilfe." }
+      ],
+      icf: [
+        { code: "d730", titel: "Umgang mit fremden Personen",
+          bezug: "Hält Abstand zu unbekannten Kontakten." },
+        { code: "d720", titel: "Komplexe interpersonelle Interaktionen",
+          bezug: "Sagt Nein und beendet den Kontakt bei Druck." },
+        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
+          bezug: "Holt bei Druck Hilfe, statt allein damit zu bleiben." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden wissen, dass „verschwindende“ Bilder gespeichert werden können.",
       "Sie schützen ihren Standort und lassen sich nicht zu privaten Bildern drängen.",
@@ -230,6 +348,24 @@ const COMPANION = {
   },
 
   tiktok: {
+    kompetenzen: {
+      digcomp: [
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Erkennt gefährliche Trends und mit KI gefälschte Videos." },
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Stellt das Konto auf privat und gibt keine privaten Daten preis." },
+        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Stellt eine Bildschirmzeit-Grenze ein und erkennt den Sog des Algorithmus." }
+      ],
+      icf: [
+        { code: "d177", titel: "Entscheidungen treffen",
+          bezug: "Entscheidet selbst, einen Trend nicht nachzumachen." },
+        { code: "d570", titel: "Auf die eigene Gesundheit achten",
+          bezug: "Beendet das Schauen nach der vereinbarten Zeit." },
+        { code: "d920", titel: "Erholung und Freizeit",
+          bezug: "Gestaltet Medien-Freizeit bewusst und begrenzt." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden erkennen gefährliche Trends und machen sie nicht nach.",
       "Sie schützen private Daten und antworten Fremden nicht vorschnell.",
@@ -264,6 +400,28 @@ const COMPANION = {
   },
 
   hilfe: {
+    kompetenzen: {
+      digcomp: [
+        { code: "5.1", titel: "Lösen technischer Probleme", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Erkennt ein Problem am Gerät oder in einer App und sucht eine Lösung." },
+        { code: "5.4", titel: "Erkennen von Lücken in der digitalen Kompetenz", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Merkt, wann sie etwas nicht allein lösen kann, und holt Hilfe." },
+        { code: "1.3", titel: "Verwalten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Sichert einen Beweis als Screenshot und löscht ihn nicht vorschnell." },
+        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Nutzt den Hilfe- und Melde-Knopf einer Plattform." }
+      ],
+      icf: [
+        { code: "d175", titel: "Probleme lösen",
+          bezug: "Wendet die Stopp-Regel an: erst stoppen, dann überlegen, dann handeln." },
+        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
+          bezug: "Bleibt in einer belastenden Lage handlungsfähig." },
+        { code: "e310", titel: "Engster Familien- und Freundeskreis (Umweltfaktor)",
+          bezug: "Eine Vertrauensperson ist benannt und erreichbar." },
+        { code: "e5750", titel: "Allgemeine soziale Unterstützungsdienste (Umweltfaktor)",
+          bezug: "Beratungsstellen und Notrufe sind bekannt und notiert." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden wenden die Stopp-Regel an: erst stoppen, dann überlegen.",
       "Sie löschen verdächtige Nachrichten nicht sofort, sondern sichern und zeigen sie.",
@@ -298,6 +456,26 @@ const COMPANION = {
   },
 
   ki: {
+    kompetenzen: {
+      digcomp: [
+        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1 · grundlegend, mit Anleitung",
+          bezug: "Erkennt beim Schreiben mit einem Chatbot, dass kein Mensch antwortet." },
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Prüft wichtige KI-Antworten an einer zweiten Quelle." },
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Gibt keine privaten Daten in einen Chatbot ein." },
+        { code: "5.4", titel: "Erkennen von Lücken in der digitalen Kompetenz", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Holt bei Gesundheit und Geld zusätzlich menschlichen Rat." }
+      ],
+      icf: [
+        { code: "d163", titel: "Denken",
+          bezug: "Unterscheidet zwischen einem Programm und einem Menschen." },
+        { code: "d177", titel: "Entscheidungen treffen",
+          bezug: "Entscheidet bewusst, was sie einer KI erzählt und was nicht." },
+        { code: "d360", titel: "Kommunikationsgeräte und -techniken benutzen",
+          bezug: "Nutzt Chatbots als Werkzeug, ohne sie für eine Person zu halten." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden wissen, dass KI ein Programm ist, kein Mensch.",
       "Sie prüfen wichtige KI-Antworten und geben keine privaten Daten ein.",
@@ -333,6 +511,24 @@ const COMPANION = {
   },
 
   fakes: {
+    kompetenzen: {
+      digcomp: [
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Prüft Meldungen mit einem festen Fragen-Check." },
+        { code: "1.1", titel: "Browsen, Suchen und Filtern von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Sucht eine zweite, seriöse Quelle." },
+        { code: "2.2", titel: "Teilen durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Teilt erst nach dem Prüfen." }
+      ],
+      icf: [
+        { code: "d163", titel: "Denken",
+          bezug: "Erkennt, dass ein Bild, ein Video oder eine Stimme gefälscht sein kann." },
+        { code: "d175", titel: "Probleme lösen",
+          bezug: "Wendet den Fragen-Check auf eine echte Meldung an." },
+        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
+          bezug: "Behandelt starke Gefühle als Warnzeichen, nicht als Beweis." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden wissen, dass nicht alles im Internet wahr ist.",
       "Sie erkennen, dass Bilder, Videos und Stimmen gefälscht sein können.",
@@ -367,6 +563,28 @@ const COMPANION = {
   },
 
   betrug: {
+    kompetenzen: {
+      digcomp: [
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Gibt keine Codes, PINs oder Bankdaten weiter." },
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Erkennt Phishing, Paket-Trick, Schockanruf, falsche Gewinne, Abo-Fallen und gefälschte QR-Codes." },
+        { code: "4.1", titel: "Schutz von Geräten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Klickt verdächtige Links nicht an und scannt fremde QR-Codes nicht." },
+        { code: "5.1", titel: "Lösen technischer Probleme", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Weiß, was nach einem Betrug zu tun ist: Karte sperren, Hilfe holen, Anzeige erstatten." }
+      ],
+      icf: [
+        { code: "d860", titel: "Einfache wirtschaftliche Transaktionen",
+          bezug: "Schützt das eigene Geld bei Zahlungen und Überweisungen." },
+        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
+          bezug: "Reagiert bei Druck und Schock nicht sofort, sondern ruft selbst zurück." },
+        { code: "d175", titel: "Probleme lösen",
+          bezug: "Handelt nach einem Betrug in einer festen Reihenfolge." },
+        { code: "e5750", titel: "Allgemeine soziale Unterstützungsdienste (Umweltfaktor)",
+          bezug: "Sperr-Notruf 116 116, Polizei 110 und Beratungsstellen sind notiert." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden erkennen Phishing, Paket-Trick, Hallo-Mama-Trick, Schockanrufe, falsche Gewinne, Abo-Fallen und gefälschte QR-Codes (Quishing).",
       "Sie geben keine Codes oder Bankdaten weiter und rufen bei Geldforderungen selbst zurück.",
@@ -402,6 +620,24 @@ const COMPANION = {
   },
 
   einkaufen: {
+    kompetenzen: {
+      digcomp: [
+        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Prüft Shop, Impressum und Bewertungen vor dem Kauf." },
+        { code: "1.1", titel: "Browsen, Suchen und Filtern von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Nutzt den Fakeshop-Finder der Verbraucher-Zentrale zum Prüfen." },
+        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
+          bezug: "Schützt PIN und TAN und gibt Zahlungsdaten nur in geprüften Shops ein." }
+      ],
+      icf: [
+        { code: "d620", titel: "Beschaffung von Waren und Dienstleistungen",
+          bezug: "Kauft online ein und wählt eine sichere Zahlungsart." },
+        { code: "d860", titel: "Einfache wirtschaftliche Transaktionen",
+          bezug: "Bezahlt möglichst auf Rechnung und behält die Kosten im Blick." },
+        { code: "d177", titel: "Entscheidungen treffen",
+          bezug: "Erkennt Kauf-Druck und entscheidet trotzdem selbst." }
+      ]
+    },
     lernziele: [
       "Die Teilnehmenden erkennen seriöse Shops und Fake-Shops.",
       "Sie zahlen möglichst auf Rechnung und schützen PIN und TAN.",
