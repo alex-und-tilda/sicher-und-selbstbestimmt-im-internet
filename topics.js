@@ -4895,11 +4895,15 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
+            "text": "Bist du unsicher? Dann frag eine vertraute Person.",
+            "pictogram": "pikto-help"
+          },
+          {
             "text": "Mehr dazu lernst du im Thema: Fake News und KI-Fakes.",
             "pictogram": "pikto-fake"
           }
         ],
-        "warning": "Nicht alles, was echt aussieht, ist echt.",
+        "warning": "Nicht alles, was echt aussieht, ist echt. Du kannst nachfragen. Das ist klug.",
         "pictogram": "pikto-no"
       },
       {
@@ -5218,6 +5222,10 @@ const topics = [
           {
             "text": "Du lernst: Wie erkenne ich falsche Bilder und Stimmen?",
             "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du kannst jederzeit Pause machen.",
+            "pictogram": "pikto-pause"
           }
         ],
         "pictogram": "pikto-fake"
@@ -5452,8 +5460,8 @@ const topics = [
         "pictogram": "pikto-fake"
       },
       {
-        "title": "Starke Gefühle sind ein Warnzeichen",
-        "warning": "Fake News machen oft starke Gefühle. Zum Beispiel Wut oder Angst. Bei starken Gefühlen prüfst du erst, bevor du glaubst.",
+        "title": "Die Nachricht will dich aufregen",
+        "warning": "Deine Gefühle sind richtig. Aber die Nachricht will dich aufregen. Das ist der Trick. Prüfe zuerst.",
         "module": "Prüfen",
         "icon": "warning",
         "text": [
@@ -5466,12 +5474,16 @@ const topics = [
             "pictogram": "pikto-feel"
           },
           {
-            "text": "Starke Gefühle sind ein Warnzeichen.",
+            "text": "Deine Gefühle sind richtig.",
             "pictogram": "pikto-feel"
           },
           {
-            "text": "Dann lohnt sich das Prüfen besonders.",
+            "text": "Aber die Nachricht will dich aufregen. Das ist der Trick.",
             "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Bei Aufregung prüfst du erst.",
+            "pictogram": "pikto-search"
           }
         ],
         "practice": {
@@ -5482,9 +5494,9 @@ const topics = [
             "Erst einmal anhalten und prüfen."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. Wut ist ein Warnzeichen für Fake News.",
-          "feedbackCorrect": "Das ist richtig. Bei starken Gefühlen erst anhalten und prüfen.",
-          "remember": "Starke Gefühle? Erst prüfen."
+          "feedbackWrong": "Das ist noch nicht richtig. Die Nachricht will dich wütend machen. Das ist der Trick.",
+          "feedbackCorrect": "Das ist richtig. Bei Aufregung erst anhalten und prüfen.",
+          "remember": "Bei Aufregung prüfe ich erst."
         },
         "pictogram": "pikto-fake"
       },
@@ -5586,7 +5598,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Starke Gefühle sind ein Warnzeichen.",
+            "text": "Aufregende Nachrichten prüfe ich erst.",
             "pictogram": "pikto-feel"
           },
           {
@@ -5655,8 +5667,8 @@ const topics = [
           "Das ist ein Warnzeichen. Ich prüfe die Nachricht."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Fake News wollen starke Gefühle machen.",
-        "feedbackWrong": "Das ist noch nicht richtig. Starke Gefühle sind ein Warnzeichen."
+        "feedbackCorrect": "Das ist richtig. Fake News wollen dich aufregen.",
+        "feedbackWrong": "Das ist noch nicht richtig. Die Nachricht will dich aufregen. Dann prüfe ich zuerst."
       },
       {
         "question": "Stimmt eine Nachricht? Du bist unsicher. Was machst du?",
@@ -5725,7 +5737,7 @@ const topics = [
       "Nicht alles im Internet ist wahr.",
       "Bilder und Videos können gefälscht sein.",
       "Stimmen am Telefon können gefälscht sein.",
-      "Starke Gefühle sind ein Warnzeichen.",
+      "Aufregende Nachrichten prüfe ich erst.",
       "Erst prüfen. Dann teilen.",
       "Bei Geld-Anrufen rufe ich selbst zurück.",
       "Ich darf mir Unterstützung holen."
@@ -5826,6 +5838,14 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
+            "text": "Betrug kann jedem Menschen passieren.",
+            "pictogram": "pikto-people"
+          },
+          {
+            "text": "Betrug ist nie deine Schuld.",
+            "pictogram": "pikto-feel"
+          },
+          {
             "text": "Betrüger wollen dein Geld oder deine Daten.",
             "pictogram": "pikto-fraud"
           },
@@ -5836,6 +5856,10 @@ const topics = [
           {
             "text": "Wer die Tricks kennt, ist besser geschützt.",
             "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Du kannst jederzeit Pause machen.",
+            "pictogram": "pikto-pause"
           }
         ],
         "pictogram": "pikto-fraud"
@@ -6012,9 +6036,18 @@ const topics = [
           {
             "text": "Auch falsche Polizisten rufen an.",
             "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Das ist ein Trick. Der Anruf ist nicht echt.",
+            "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Sprich danach mit einer vertrauten Person.",
+            "pictogram": "pikto-help"
           }
         ],
-        "warning": "Die echte Polizei fordert nie Geld am Telefon.",
+        "warning": "Leg auf. Ruf die Person selbst an. Nutze die bekannte Nummer. Die echte Polizei fordert nie Geld am Telefon.",
+        "remember": "Bei Angst-Anrufen lege ich auf. Ich rufe selbst zurück.",
         "practice": {
           "question": "Ein Anrufer sagt: Ich bin Polizist. Geben Sie mir Ihr Geld. Was ist besser?",
           "pictogram": "pikto-money",

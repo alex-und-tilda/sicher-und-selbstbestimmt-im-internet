@@ -1142,13 +1142,14 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "KI kann Bilder erstellen, die echt aussehen, und sogar Stimmen nachmachen." },
           { text: "Betrüger nutzen das manchmal aus." },
+          { text: "Wenn du unsicher bist, frag eine Person, der du vertraust." },
           { text: "Mehr dazu lernst du im Thema „Fake News und KI-Fakes“." }
         ],
-        warning: "Nicht alles, was echt aussieht, ist echt."
+        warning: "Nicht alles, was echt aussieht, ist echt. Nachfragen ist erlaubt und klug."
       },
       standard: {
-        text: [{ text: "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“." }],
-        warning: "Echt wirkende Bilder und Stimmen können mit KI gefälscht sein."
+        text: [{ text: "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Du musst das nicht allein einschätzen – bei Unsicherheit lohnt sich die Rückfrage bei einer Person, der du vertraust. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“." }],
+        warning: "Echt wirkende Bilder und Stimmen können mit KI gefälscht sein. Nachfragen ist erlaubt und klug."
       }
     },
     "Was kann ich tun?": {
@@ -1182,9 +1183,10 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: { text: [
         { text: "Hier geht es um Fakes – Fake bedeutet gefälscht oder nicht echt." },
-        { text: "Du lernst, wie du falsche Nachrichten und auch falsche Bilder oder Stimmen erkennst." }
+        { text: "Du lernst, wie du falsche Nachrichten und auch falsche Bilder oder Stimmen erkennst." },
+        { text: "Wenn dich ein Beispiel belastet, kannst du jederzeit eine Pause machen." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um Fakes – also um Gefälschtes im Internet. Du erfährst, wie du falsche Nachrichten erkennst und wie du gefälschte Bilder, Videos und Stimmen einordnest." }] }
+      standard: { text: [{ text: "In diesem Kapitel geht es um Fakes – also um Gefälschtes im Internet. Du erfährst, wie du falsche Nachrichten erkennst und wie du gefälschte Bilder, Videos und Stimmen einordnest. Wenn dich ein Beispiel belastet, mach ruhig eine Pause." }] }
     },
     "Was sind Fake News?": {
       einfach: {
@@ -1263,12 +1265,13 @@ const CONTENT_VERSIONS = {
         bullets: []
       }
     },
-    "Starke Gefühle sind ein Warnzeichen": {
-      einfach: { warning: "Fake News lösen mit Absicht starke Gefühle aus, zum Beispiel Wut oder Angst. Genau das ist ein Warnzeichen. Prüfe eine Nachricht erst, bevor du sie glaubst oder teilst.", text: [
+    "Die Nachricht will dich aufregen": {
+      einfach: { warning: "Deine Gefühle sind richtig. Aber Fake News lösen mit Absicht Wut oder Angst aus – genau das ist der Trick. Prüfe eine Nachricht erst, bevor du sie glaubst oder teilst.", text: [
         { text: "Fake News lösen oft starke Gefühle wie Wut oder Angst aus, denn wer aufgewühlt ist, prüft weniger." },
-        { text: "Wenn dich eine Nachricht stark berührt, lohnt sich das Prüfen besonders." }
+        { text: "Deine Gefühle sind dabei richtig – aufregen soll dich die Nachricht, und genau das ist die Absicht." },
+        { text: "Wenn dich eine Nachricht stark aufregt, lohnt sich das Prüfen besonders." }
       ] },
-      standard: { warning: "Starke Gefühle wie Wut oder Angst werden von Fake News gezielt ausgelöst – das ist ein Warnsignal. Prüfe eine solche Nachricht in Ruhe, bevor du sie glaubst oder weiterleitest.", text: [{ text: "Fake News sind oft so gemacht, dass sie starke Gefühle wie Wut oder Angst auslösen – denn wer aufgewühlt ist, prüft weniger. Genau deshalb gilt: Wenn dich eine Meldung stark emotional trifft, prüfe sie besonders gründlich." }] }
+      standard: { warning: "Deine Gefühle sind eine richtige Reaktion – aber Fake News lösen Wut oder Angst gezielt aus. Genau darin liegt die Absicht. Prüfe eine solche Nachricht in Ruhe, bevor du sie glaubst oder weiterleitest.", text: [{ text: "Fake News sind oft so gemacht, dass sie starke Gefühle wie Wut oder Angst auslösen – denn wer aufgewühlt ist, prüft weniger. Deine Reaktion ist dabei nicht das Problem: Die Meldung ist bewusst darauf angelegt. Genau deshalb gilt: Wenn dich etwas stark aufregt, prüfe es besonders gründlich." }] }
     },
     "Nicht einfach weiterleiten": {
       einfach: { text: [
@@ -1293,11 +1296,11 @@ const CONTENT_VERSIONS = {
     "Das merke ich mir": {
       einfach: {
         text: [{ text: "Du hast viel über Fakes gelernt – diese Sätze kannst du dir gut merken." }],
-        bullets: ["Nicht alles im Internet ist wahr.", "Bilder, Videos und Stimmen können gefälscht sein.", "Starke Gefühle sind ein Warnzeichen.", "Erst prüfen, dann teilen.", "Ich darf mir Unterstützung holen."],
+        bullets: ["Nicht alles im Internet ist wahr.", "Bilder, Videos und Stimmen können gefälscht sein.", "Aufregende Nachrichten prüfe ich erst.", "Erst prüfen, dann teilen.", "Ich darf mir Unterstützung holen."],
         remember: "Erst prüfen. Dann glauben."
       },
       standard: {
-        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Nicht alles im Internet ist wahr, und auch Bilder, Videos und Stimmen lassen sich fälschen. Starke Gefühle sind ein Warnzeichen – prüfe erst und teile dann. Bei Unsicherheit darfst du dir Unterstützung holen." }],
+        text: [{ text: "Die wichtigsten Punkte dieses Themas im Überblick: Nicht alles im Internet ist wahr, und auch Bilder, Videos und Stimmen lassen sich fälschen. Was dich stark aufregt, prüfst du zuerst – erst prüfen, dann teilen. Bei Unsicherheit darfst du dir Unterstützung holen." }],
         bullets: [],
         remember: "Erst prüfen, dann glauben."
       }
@@ -1322,9 +1325,11 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: { text: [
         { text: "Hier geht es um Betrug im Internet, denn Betrüger wollen dein Geld oder deine Daten." },
-        { text: "Du lernst die bekannten Tricks, denn wer sie kennt, ist besser geschützt." }
+        { text: "Betrug kann jedem Menschen passieren und ist nie deine Schuld." },
+        { text: "Du lernst die bekannten Tricks, denn wer sie kennt, ist besser geschützt." },
+        { text: "Wenn dich ein Beispiel belastet, kannst du jederzeit eine Pause machen." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um Betrug im Internet. Betrüger haben es auf dein Geld oder deine Daten abgesehen. Du lernst die häufigsten Maschen kennen – denn wer die Tricks kennt, fällt seltener darauf herein." }] }
+      standard: { text: [{ text: "In diesem Kapitel geht es um Betrug im Internet. Vorweg das Wichtigste: Betrug kann jedem passieren und ist nie die Schuld der betroffenen Person. Betrüger haben es auf dein Geld oder deine Daten abgesehen. Du lernst die häufigsten Maschen kennen – denn wer die Tricks kennt, fällt seltener darauf herein. Wenn dich ein Beispiel belastet, mach ruhig eine Pause." }] }
     },
     "Was ist Phishing?": {
       einfach: {
@@ -1378,12 +1383,16 @@ const CONTENT_VERSIONS = {
       einfach: {
         text: [
           { text: "Bei einem Schockanruf macht dir jemand große Angst, zum Beispiel mit den Worten: „Ihr Kind hatte einen Unfall, wir brauchen Geld.“" },
-          { text: "Mit KI kann die Stimme sogar echt klingen, und manche geben sich als Polizei aus." }
+          { text: "Mit KI kann die Stimme sogar echt klingen, und manche geben sich als Polizei aus." },
+          { text: "Solche Anrufe sind ein Trick – der Notfall ist erfunden." },
+          { text: "Sprich danach mit einer vertrauten Person darüber." }
         ],
-        warning: "Die echte Polizei fordert nie Geld am Telefon."
+        remember: "Bei Angst-Anrufen lege ich auf und rufe selbst zurück.",
+        warning: "Leg auf und ruf die Person selbst an, unter der Nummer, die du kennst. Die echte Polizei fordert nie Geld am Telefon."
       },
       standard: {
-        text: [{ text: "Bei Schockanrufen erzeugen Betrüger gezielt Angst – etwa mit der Behauptung, ein Angehöriger hatte einen Unfall und brauche sofort Geld. Mit KI kann die Stimme sogar vertraut klingen, und manche geben sich als Polizei aus. Leg auf und ruf die echte Person oder Stelle selbst an." }],
+        text: [{ text: "Bei Schockanrufen erzeugen Betrüger gezielt Angst – etwa mit der Behauptung, ein Angehöriger hatte einen Unfall und brauche sofort Geld. Mit KI kann die Stimme sogar vertraut klingen, und manche geben sich als Polizei aus. Der Notfall ist erfunden: Leg auf und ruf die echte Person oder Stelle selbst an, unter der Nummer, die du kennst. Sprich danach mit jemandem darüber – solche Anrufe wirken nach." }],
+        remember: "Bei Angst-Anrufen lege ich auf und rufe selbst zurück.",
         warning: "Polizei und Behörden verlangen niemals Geld oder Wertsachen am Telefon."
       }
     },
