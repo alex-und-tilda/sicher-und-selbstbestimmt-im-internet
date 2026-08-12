@@ -344,7 +344,7 @@ const topics = [
       },
       {
         "title": "Fremde Links und Nachrichten",
-        "warning": "Klick nicht auf fremde Links. Ein fremder Link kann gefährlich sein. Frag im Zweifel eine Person, der du vertraust.",
+        "warning": "Klick nicht auf fremde Links. Ein fremder Link kann gefährlich sein. Frag im Zweifel eine vertraute Person.",
         "module": "Nachrichten",
         "icon": "link",
         "text": [
@@ -453,7 +453,7 @@ const topics = [
             "pictogram": "pikto-pause"
           },
           {
-            "text": "Ich frage eine Person, der ich vertraue.",
+            "text": "Ich frage eine vertraute Person.",
             "pictogram": "pikto-ask"
           }
         ],
@@ -2661,7 +2661,7 @@ const topics = [
       },
       {
         "title": "Videos, die Angst machen",
-        "warning": "Manche Videos machen Angst. Du darfst das Video stoppen. Sprich mit einer Person, der du vertraust.",
+        "warning": "Manche Videos machen Angst. Du darfst das Video stoppen. Sprich mit einer vertrauten Person.",
         "module": "Gefühle",
         "icon": "help",
         "text": [
@@ -4042,7 +4042,7 @@ const topics = [
     "title": "Hilfe bei Problemen",
     "icon": "help",
     "desc": "Stopp machen, zeigen und Unterstützung holen",
-    "transfer": "Überlege dir heute eine Person, der du vertraust. Etwas passiert? Dann fragst du diese Person.",
+    "transfer": "Überlege dir heute eine vertraute Person. Etwas passiert? Dann fragst du diese Person.",
     "selfAssessment": {
       "question": "Etwas passiert im Internet. Hast du einen Plan?",
       "pictogram": "pikto-help",
@@ -4570,7 +4570,7 @@ const topics = [
     "miniQuestion": {
       "question": "Du bist unsicher. Was machst du?",
       "answers": [
-        "Ich frage eine Person, der ich vertraue.",
+        "Ich frage eine vertraute Person.",
         "Ich löse alles allein.",
         "Ich klicke sofort."
       ],
@@ -4861,7 +4861,7 @@ const topics = [
         ],
         "examples": [
           "Du bist krank. Du fragst die KI. Besser: Du fragst auch eine Ärztin oder einen Arzt.",
-          "Du willst Geld ausgeben. Die KI rät dir etwas. Besser: Du fragst eine Person, der du vertraust."
+          "Du willst Geld ausgeben. Die KI rät dir etwas. Besser: Du fragst eine vertraute Person."
         ],
         "practice": {
           "question": "Du bist krank. Die KI gibt dir einen Tipp. Was ist besser?",
@@ -6866,7 +6866,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Frag eine Person, der du vertraust, um Hilfe.",
+            "text": "Frag eine vertraute Person um Hilfe.",
             "pictogram": "pikto-help"
           },
           {

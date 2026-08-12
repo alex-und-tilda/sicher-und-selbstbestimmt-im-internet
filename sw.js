@@ -4,9 +4,12 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-10y";
-const ARASAAC_CACHE = "arasaac-pictograms-v1";
+const CACHE_VERSION = "v2026-10z";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
+/* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
+   Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
+   wird beim Aktivieren einmalig gelöscht (siehe activate). */
+const ALTER_ARASAAC_CACHE = "arasaac-pictograms-v1";
 
 /* Alle Dateien, die sofort beim Installieren gecacht werden */
 const PRECACHE_URLS = [
@@ -227,7 +230,9 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => key.startsWith("sicher-im-netz-") && key !== CACHE_NAME)
+          .filter((key) =>
+            (key.startsWith("sicher-im-netz-") && key !== CACHE_NAME) ||
+            key === ALTER_ARASAAC_CACHE)
           .map((key) => caches.delete(key))
       )
     ).then(() => {
@@ -244,22 +249,6 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  /* ARASAAC-Piktogramme (fremde Domain): einmal laden, dann offline aus dem Cache.
-     Bilder sind unveränderlich (feste ID), darum dauerhaft cache-first. */
-  if (url.hostname === "static.arasaac.org") {
-    event.respondWith(
-      caches.open(ARASAAC_CACHE).then((cache) =>
-        cache.match(event.request).then((cached) =>
-          cached ||
-          fetch(event.request).then((response) => {
-            cache.put(event.request, response.clone());
-            return response;
-          }).catch(() => cached)
-        )
-      )
-    );
-    return;
-  }
 
   /* Nur eigene Anfragen abfangen (kein Cross-Origin) */
   if (url.origin !== location.origin) return;

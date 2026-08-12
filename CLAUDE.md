@@ -170,14 +170,17 @@ kompetenzen: {
 
 ---
 
-## 11. Piktogramm-System (ARASAAC)
+## 11. Piktogramm-System (eigene Icons)
 
-- Quelle: **ARASAAC** (arasaac.org), Lizenz **CC BY-NC-SA 4.0** — kostenlos, nur nicht-kommerziell, mit Quellenangabe (Pflicht-Hinweis im Impressum: „Piktogramme: ARASAAC, Urheber Sergio Palao, Regierung von Aragón, Lizenz CC BY-NC-SA").
-- Resolver in `app.js`: `ARASAAC_PICTO` (Zuordnung `pikto-<key>` → ID, aktuell 17 Begriffe), `pictoSrc(key)` liefert `https://static.arasaac.org/pictograms/<id>/<id>_300.png`, sonst Fallback `assets/pictograms/<key>.svg`.
-- Offline: `sw.js` cached `static.arasaac.org` zur Laufzeit; `index.html` hat `preconnect` dorthin.
-- Neuen Begriff ergänzen: ID über `https://api.arasaac.org/api/pictograms/de/search/<wort>` suchen, in `ARASAAC_PICTO` eintragen.
+**Stand August 2026: Die Lern-Plattform nutzt ausschließlich eigene, neu gezeichnete SVG-Icons.** ARASAAC wurde abgelöst — es gibt keinen externen Bild-Aufruf mehr.
+
+- Quelle: eigene SVGs in `assets/pictograms/<key>.svg`, im Marken-Blau gezeichnet. Neu erstellt, **nicht** von ARASAAC abgeleitet → keine CC-BY-NC-SA-Pflichten, keine Quellenangabe nötig.
+- Resolver in `app.js`: `pictoSrc(key)` liefert schlicht `assets/pictograms/<key>.svg`. Zusätzlich verfeinert `refinePicto(key, text)` die Zuordnung anhand des Satz-Textes über `PICTO_RULES` (zentral und umkehrbar — `topics.js` bleibt unverändert).
+- Offline: alle Piktogramme stehen im Precache von `sw.js`. **Echte Offline-Fähigkeit ist damit erreicht** (früher offener Punkt §18.5).
+- Neues Piktogramm: SVG in `assets/pictograms/` anlegen (viewBox `0 0 96 96`, `role="img"`, `aria-label`, Farben aus dem Marken-Blau) und in die Precache-Liste in `sw.js` eintragen.
 - **Piktogramme nicht als selbsterklärend voraussetzen** — mit der Zielgruppe testen (§13).
-- **Falls echter Offline-Zwang Pflicht wird:** ARASAAC-PNGs lokal ins Repo legen und den Resolver auf lokale Pfade stellen.
+
+**Ausnahme Workshop-Seiten:** Die Praxis-Seiten unter `praxis/` stammen aus der Workshop-Pipeline und enthalten weiterhin **eingebettete ARASAAC-Bilder** (base64, kein externer Aufruf). Ihre Quellenangabe im Fuß („Bildzeichen: ARASAAC – Autor Sergio Palao (Gobierno de Aragón), Lizenz CC BY-NC-SA") ist Pflicht und **bleibt stehen**.
 
 ---
 
@@ -202,7 +205,7 @@ Pädagogische Rahmung konsistent über alle Module: Lernziel + Aktivierung (Enga
 ## 14. Datenschutz
 
 - Maßgeblich ist das **KDG (Katholisches Datenschutzgesetz)** (kirchlicher Träger), zusätzlich DSGVO-Prinzipien. Hinweise in `datenschutz.html`.
-- Keine personenbezogenen Daten, keine Tracker, keine Analytics, kein Login, keine sendenden Formulare, nur Google Fonts + ARASAAC als externe Quellen.
+- Keine personenbezogenen Daten, keine Tracker, keine Analytics, kein Login, keine sendenden Formulare. **Stand August 2026 gar keine externen Quellen mehr:** Schrift liegt lokal in `assets/fonts/`, Piktogramme sind eigene lokale SVGs (§11).
 - `localStorage` speichert **nur lokale Einstellungen** (Sprach-Ebene, Schriftgröße, Lern-Fortschritt der Sitzung). Das ist kein personenbezogenes Datum und KDG-konform. Lern-Fortschritt ist bewusst flüchtig; für die Mitnahme dient die **ausdruckbare Merk-Karte** und die dialogische Reflexion mit der Begleitperson.
 
 ---
@@ -276,7 +279,7 @@ Reines HTML/CSS/JS, **kein Framework/Bundler/npm**. JS wird über `<script src>`
 2. **Standard-Start-Ebene:** Beim allerersten Besuch zeigt die App zuerst die Sprach-Auswahl. Alternative Vorauswahl? (Vorschlag: Einfache Sprache.)
 3. **Quiz/Einstiegsfrage je Stufe:** Einstiegsfrage ist je Stufe möglich (Pilot Datenschutz). Quiz bleibt empfohlen gemeinsam für alle Stufen. Voll ausrollen?
 4. ~~**DigComp/ICF in der Begleit-Ebene:** explizite DigComp-Codes je Thema ergänzen?~~ **Erledigt (August 2026):** alle 12 Themen haben `kompetenzen` mit DigComp-2.2- und ICF-Codes (§7). Offen bleibt nur: sollen die Codes auch im Beobachtungsbogen und im Erfolgs-Heft auftauchen?
-5. **Echter Offline-Zwang:** Falls ja, ARASAAC-Piktogramme lokal hosten (§11).
+5. ~~**Echter Offline-Zwang:** Falls ja, ARASAAC-Piktogramme lokal hosten (§11).~~ **Erledigt (August 2026):** eigene SVG-Icons liegen lokal im Precache, kein externer Bild-Aufruf mehr.
 6. **QR-Betrugs-Lektion auch im Kurz-Modus?** „Vorsicht bei QR-Codes" (Betrug) liegt nur im „Mehr lernen"-Weg; der Kurz-Modus behält bewusst 3 Kern-Lektionen je Thema.
 7. **Wegzeichen (Alex und Tilda an festen Orten):** Konzept liegt vor (`_vorschau-wegzeichen-konzept.html`). Erst Prüfgruppe, dann 7 Illustrations-Varianten, dann Einbau.
 8. **Prüfgruppen-Katalog (offen):** Menü-Wörter („Mein Lernweg"), Lautsprecher-Symbol ohne Wort, Formel „eine Person, der du vertraust", Themen-Gruppen-Namen, Frage des Tages, KI-Einsamkeits-Satz, Frage-Muster-Sätze, QR-Karten, „Lernen starten"-Knopf.
