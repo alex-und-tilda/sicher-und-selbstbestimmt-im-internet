@@ -900,6 +900,8 @@ function setBottomNavVisible(isVisible) {
 function setHeader(title, module, step, level, percent) {
   /* Orientierungssatz zurücksetzen – Seiten setzen ihn danach passend neu */
   setOrientation("");
+  /* Kompakter Kopf gilt nur auf Lernschritten; renderLesson setzt ihn neu. */
+  document.body.classList.remove("lesson-view");
   appTitle.textContent = title || "Sicher und selbstbestimmt im Internet";
   moduleLabel.textContent = module || "Thema auswählen";
   stepLabel.textContent = step || "Themenübersicht";
@@ -3493,6 +3495,12 @@ function renderLesson() {
   setBottomNavVisible(!hasPractice);
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   setOrientation(`Du lernst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
+  /* Auf Lernschritten sitzen Titelkarte und Orientierungssatz direkt
+     aufeinander (siehe body.lesson-view in styles.css). Beide bleiben
+     vollständig erhalten – sie werden nur zu einem Block zusammengezogen
+     statt zwei Karten mit Abstand dazwischen. setHeader() nimmt die Klasse
+     auf jeder anderen Seite wieder weg. */
+  document.body.classList.add("lesson-view");
   lastLessonContext = { topicId: topic.id, step: currentStep, mode: currentMode };
   showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 

@@ -2308,15 +2308,6 @@ html.no-motion *::after {
   margin-bottom: 0;
 }
 
-/* Innerhalb der Zeile braucht das Vorlese-Feld keine eigene Karte mehr. */
-.tool-row .reading-toolbar {
-  padding: 0;
-  background: none;
-  border: 0;
-  border-radius: 0;
-  gap: 10px;
-}
-
 .tool-row .reading-button {
   flex: 0 0 auto;
   min-width: 0;
@@ -2441,23 +2432,22 @@ html.no-motion *::after {
 
 /* ---------- Vorlesen-Leiste ---------- */
 
+/* Der Vorlese-Knopf braucht keine eigene Karte um sich herum. Als Karte kostete
+   er auf jedem Bildschirm 90 px, als Knopf-Zeile 52 px – bei gleicher Funktion
+   und gleicher Knopfgröße (§3 Kohärenz: keine Dekoration ohne Funktion). */
 .reading-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   margin-bottom: 14px;
-  padding: 12px 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-m);
 }
 
 .reading-button {
   /* Alle drei Knöpfe gleich groß (gleiche Breite, gleiche Höhe). */
   flex: 1 1 0;
   min-width: 130px;
-  min-height: 52px;
+  min-height: 58px;   /* §9: gleiche Hoehe wie alle anderen Bedienelemente */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2928,7 +2918,7 @@ p.feedback-wrong {
 }
 
 .task-help-button {
-  min-height: 52px;
+  min-height: 58px;   /* §9: gleiche Hoehe wie alle anderen Bedienelemente */
   padding: 12px 20px;
   font-size: 1rem;
   font-weight: 700;
@@ -3362,6 +3352,32 @@ p.feedback-wrong {
   font-size: 1.02rem;
 }
 
+/* Kompakter Kopf auf Lernschritten (body.lesson-view, gesetzt in renderLesson).
+   Titelkarte und Orientierungssatz sagen dort fast dasselbe. Nichts wird
+   entfernt – Überschrift, Modus-Zeile, Farb-Faden, Bild-Anker und Hör-Knopf
+   bleiben. Die zwei Karten werden nur zu einem Block ohne Lücke. */
+body.lesson-view .app-header {
+  padding: 10px 18px;
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+body.lesson-view .header-text h1 {
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+
+body.lesson-view .header-text p {
+  font-size: 0.94rem;
+}
+
+body.lesson-view .orient-line {
+  margin: 0 0 14px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 .orient-icon {
   flex: none;
   display: inline-flex;
@@ -3537,7 +3553,7 @@ p.feedback-wrong {
 }
 
 .later-chip {
-  min-height: 52px;
+  min-height: 58px;   /* §9: gleiche Hoehe wie alle anderen Bedienelemente */
   padding: 10px 18px;
   border: 1px solid var(--line);
   border-radius: 999px;
