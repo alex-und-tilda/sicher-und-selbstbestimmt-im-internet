@@ -1654,7 +1654,28 @@ html.no-motion *::after {
 .step-line.is-done { background: var(--good); }
 .step-path--small .step-dot { width: 20px; height: 20px; font-size: 0.72rem; border-width: 2px; }
 .step-path--small .step-dot.is-current { width: 26px; height: 26px; font-size: 0.85rem; box-shadow: 0 0 0 3px var(--accent-soft); }
-.step-path-summary { margin: 8px 0 0; font-size: 1rem; color: var(--ink-soft); }
+/* Schlanker Fortschrittsbalken statt bis zu 13 nummerierter Kreise. */
+.step-bar-wrap { margin: 0 0 14px; }
+
+.step-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.step-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--topic-color, var(--accent));
+  transition: width 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-bar-fill { transition: none; }
+}
+
+.step-path-summary { margin: 6px 0 0; font-size: 1rem; color: var(--ink-soft); }
 .step-done-count { color: var(--good); font-weight: 700; }
 
 /* Zeichen-Bau: Vorschau */
@@ -2271,11 +2292,105 @@ html.no-motion *::after {
 
 /* ---------- Zusatz-Leiste ---------- */
 
+/* Eine Bedien-Zeile statt zweier gestapelter Karten: Vorlesen links,
+   "Sprache und Pause" daneben. Spart auf jedem Bildschirm rund 90 px
+   ueber dem Inhalt (§3 Cognitive Load: keine Wand vor dem Lernstoff). */
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.tool-row .reading-toolbar,
+.tool-row .utility-bar {
+  margin-bottom: 0;
+}
+
+/* Innerhalb der Zeile braucht das Vorlese-Feld keine eigene Karte mehr. */
+.tool-row .reading-toolbar {
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  gap: 10px;
+}
+
+.tool-row .reading-button {
+  flex: 0 0 auto;
+  min-width: 0;
+  min-height: 58px;   /* gleiche Hoehe wie der Umschalter daneben, §9 */
+}
+
+.tool-row .reading-status:empty {
+  display: none;
+}
+
+.tool-row .reading-status {
+  flex-basis: 100%;
+  margin: 0;
+}
+
 .utility-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 14px;
+}
+
+/* Aufklapp-Knopf für Sprache und Pause.
+   Ersetzt zwei dauerhaft sichtbare Blöcke durch eine Zeile. Der Inhalt bleibt
+   auf jedem Schritt in zwei Tipps erreichbar (§1 Pause, §2 Sprache). */
+.utility-toggle {
+  min-height: 58px;            /* §9: Bedienelemente >= ~58 px */
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.utility-toggle:hover,
+.utility-toggle.is-open {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.utility-toggle:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.utility-caret {
+  display: inline-block;
+  font-size: 0.9em;
+  transition: transform 0.15s ease;
+}
+
+.utility-toggle.is-open .utility-caret {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .utility-caret { transition: none; }
+}
+
+.utility-panel {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.utility-panel.is-hidden {
+  display: none;
 }
 
 .utility-button {
@@ -2362,13 +2477,17 @@ html.no-motion *::after {
   color: var(--on-accent);
 }
 
-.reading-button-stop {
+/* Wird nicht mehr als eigener Knopf gerendert – die Regel bleibt, weil der
+   Vorlese-Umschalter im aktiven Zustand genau dieses Aussehen übernimmt. */
+.reading-button-stop,
+.reading-button-normal.is-active {
   border-color: var(--bad);
   background: var(--bad-bg);
   color: var(--bad);
 }
 
-.reading-button-stop:hover {
+.reading-button-stop:hover,
+.reading-button-normal.is-active:hover {
   background: var(--bad);
   color: #ffffff;
 }

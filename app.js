@@ -1198,7 +1198,14 @@ function stopReading() {
 function setReadingActive(mode) {
   const n = document.querySelector(".reading-button-normal");
   const s = document.querySelector(".reading-button-slow");
-  if (n) { n.classList.toggle("is-active", mode === "normal"); n.setAttribute("aria-pressed", mode === "normal" ? "true" : "false"); }
+  if (n) {
+    const on = mode === "normal" || mode === "slow";
+    n.classList.toggle("is-active", on);
+    n.setAttribute("aria-pressed", on ? "true" : "false");
+    /* Beschriftung mitschalten, damit der Knopf sagt, was er als Nächstes tut. */
+    const label = n.querySelector(".rb-label");
+    if (label) label.textContent = on ? "Stopp" : "Vorlesen";
+  }
   if (s) { s.classList.toggle("is-active", mode === "slow"); s.setAttribute("aria-pressed", mode === "slow" ? "true" : "false"); }
 }
 
@@ -1415,13 +1422,23 @@ function buildReadingToolbar() {
       </div>
     `;
   }
+  /* EIN Umschalter statt zwei Knöpfen: "Vorlesen" wird zu "Stopp", solange
+     vorgelesen wird. Vorher stand "Stopp" dauerhaft in Warn-Rot da, obwohl
+     nichts lief – das widerspricht §10 ("Rot nur sparsam für Warnungen") und
+     kostet auf jedem Schritt eine halbe Zeile. Funktion bleibt vollständig. */
   return `
     <div class="reading-toolbar" aria-label="Vorlesen">
-      <button type="button" class="reading-button reading-button-normal" onclick="readStart()"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Vorlesen</button>
-      <button type="button" class="reading-button reading-button-stop" onclick="stopReading()">Stopp</button>
+      <button type="button" class="reading-button reading-button-normal" aria-pressed="false" onclick="toggleReading()"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> <span class="rb-label">Vorlesen</span></button>
       <p id="readingStatus" class="reading-status" aria-live="polite"></p>
     </div>
   `;
+}
+
+/* Umschalter: läuft gerade etwas -> anhalten, sonst starten. */
+function toggleReading() {
+  const button = document.querySelector(".reading-button-normal");
+  if (button && button.classList.contains("is-active")) stopReading();
+  else readStart();
 }
 
 /* ============================================================
@@ -1489,15 +1506,51 @@ function closeCalmOverlay() {
   if (overlay) overlay.remove();
 }
 
+/* Sprache und Pause lagen als zwei dauerhafte Blöcke über jedem Lernschritt.
+   Beide bleiben auf jedem Schritt erreichbar (§1 Pause-Funktion, §2 "Sprache
+   jederzeit umstellbar"), stehen aber jetzt hinter EINEM Knopf – der Kopf
+   verliert damit rund 100 px vor dem ersten Lehrsatz (§3 Cognitive Load).
+   Die Beschriftung nennt ihren Inhalt statt eines abstrakten "Mehr" (§5).
+   PRÜFGRUPPE: Wort "Sprache und Pause" mit der Zielgruppe testen (§13). */
 function buildUtilityBar() {
   return `
-    <div class="utility-bar" aria-label="Zusätzliche Hilfe">
-      <button type="button" class="utility-button language-switch-button" onclick="renderLanguageChoice()">
-        Sprache: ${LANGUAGE_LABEL[languageLevel]}
+    <div class="utility-bar" aria-label="Sprache und Pause">
+      <button type="button" class="utility-toggle" id="utilityToggle"
+              aria-expanded="false" aria-controls="utilityPanel" onclick="toggleUtilityPanel()">
+        Sprache und Pause <span class="utility-caret" aria-hidden="true">▾</span>
       </button>
-      <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
+      <div class="utility-panel is-hidden" id="utilityPanel">
+        <button type="button" class="utility-button language-switch-button" onclick="renderLanguageChoice()">
+          Sprache: ${LANGUAGE_LABEL[languageLevel]}
+        </button>
+        <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
+      </div>
     </div>
   `;
+}
+
+/* Vorlese-Knopf und "Sprache und Pause" standen als zwei getrennte Karten
+   untereinander (90 px + 58 px). Sie gehoeren beide zur Bedienung, nicht zum
+   Inhalt – deshalb jetzt EINE Zeile. Auf allen Seiten gleich, damit die
+   Bedienung vorhersehbar bleibt (§3 Emotionale Sicherheit). */
+function buildToolRow() {
+  return `<div class="tool-row">${buildReadingToolbar()}${buildUtilityBar()}</div>`;
+}
+
+function toggleUtilityPanel(forceClose) {
+  const button = document.getElementById("utilityToggle");
+  const panel = document.getElementById("utilityPanel");
+  if (!button || !panel) return;
+  const open = forceClose === true ? false : panel.classList.contains("is-hidden");
+  panel.classList.toggle("is-hidden", !open);
+  button.setAttribute("aria-expanded", open ? "true" : "false");
+  button.classList.toggle("is-open", open);
+  if (open) {
+    const first = panel.querySelector("button");
+    if (first) first.focus();
+  } else if (forceClose === true) {
+    button.focus();
+  }
 }
 
 /* ============================================================
@@ -3385,27 +3438,25 @@ function renderSelfAssessment() {
   renderLegalFooter();
 }
 
-/* Sichtbarer Schritt-Pfad: zeigt geschaffte Schritte (Häkchen), den
-   aktuellen (hervorgehoben) und die kommenden. Klare visuelle Orientierung. */
+/* Fortschritt als schlanker Balken plus Erfolgs-Satz.
+   Früher standen hier bis zu 13 nummerierte Kreise nebeneinander (20–26 px,
+   sahen antippbar aus, waren es nicht) und haben den Kopf optisch zerhackt.
+   Der Satz "X geschafft · noch Y Schritte" bleibt: er trägt die Erfolgs-
+   Rückmeldung (§3 Engagement) und wird – anders als die Kreise – vorgelesen.
+   "Schritt X von Y" steht bereits im Orientierungssatz darüber. */
 function buildStepPath(currentIndex, total) {
   if (!total || total < 2) return "";
-  const small = total > 8 ? " step-path--small" : "";
-  let dots = "";
-  for (let i = 0; i < total; i++) {
-    if (i > 0) {
-      dots += `<span class="step-line${i <= currentIndex ? " is-done" : ""}"></span>`;
-    }
-    if (i < currentIndex) dots += `<span class="step-dot is-done" aria-hidden="true">✓</span>`;
-    else if (i === currentIndex) dots += `<span class="step-dot is-current" aria-hidden="true">${i + 1}</span>`;
-    else dots += `<span class="step-dot" aria-hidden="true">${i + 1}</span>`;
-  }
   const remaining = total - currentIndex - 1;
+  const percent = Math.round(((currentIndex + 1) / total) * 100);
   const summary = remaining > 0
     ? `<span class="step-done-count">${currentIndex} geschafft</span> · noch ${remaining} ${remaining === 1 ? "Schritt" : "Schritte"}`
     : `<span class="step-done-count">${currentIndex} geschafft</span> · letzter Schritt`;
   return `
-    <div class="step-path-wrap" role="group" aria-label="Schritt ${currentIndex + 1} von ${total}">
-      <div class="step-path${small}">${dots}</div>
+    <div class="step-bar-wrap">
+      <div class="step-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+           aria-valuenow="${percent}" aria-valuetext="Schritt ${currentIndex + 1} von ${total}">
+        <div class="step-bar-fill" style="width:${percent}%"></div>
+      </div>
       <p class="step-path-summary">${summary}</p>
     </div>`;
 }
@@ -3435,6 +3486,9 @@ function renderLesson() {
        </div>`
     : "";
 
+  /* Die .progress-area bleibt aus: sie ist eine eigene Karte mit Meta-Zeile und
+     kostet 77 px – mehr als die Punkte-Reihe, die sie ersetzen sollte. Der
+     schlanke Balken steckt stattdessen in buildStepPath (rund 44 px). */
   setProgressVisible(false);
   setBottomNavVisible(!hasPractice);
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
@@ -3533,7 +3587,7 @@ function renderLesson() {
     : "";
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     ${buildStepPath(currentStep, lessons.length)}
     ${moduleBadge}
     <article class="card lesson-card page-flip page-flip--${pageDirection}${isEinfachLesson ? " lesson-card--einfach" : ""}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
@@ -3628,7 +3682,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   setOrientation(`Du übst: ${topic.title}.`);
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
       <h2>${isCorrect ? "Genau richtig!" : "Fast!"}</h2>
 
@@ -3678,7 +3732,7 @@ function renderPracticePage() {
     setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
     setOrientation(`Du übst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
     content.innerHTML = `
-      ${buildUtilityBar()}${buildReadingToolbar()}
+      ${buildToolRow()}
       <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
         <div class="symbol-heading">
           <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
@@ -3912,7 +3966,7 @@ function renderEinfachQuizQuestion() {
   showNav(false, false);
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card einfach-quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <p class="einfach-quiz-number">Frage ${currentQuizIndex + 1} von ${questions.length}</p>
       ${questionPikto(q)}<p class="einfach-quiz-question">${escapeHtml(q.question || "")}</p>
@@ -4045,7 +4099,7 @@ function renderQuizQuestion() {
   `).join("");
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <h2>Quiz</h2>
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question || "")}</p>
@@ -4085,7 +4139,7 @@ function renderQuizFeedbackPage(index) {
   setOrientation(`Du machst das Quiz: ${topic.title}.`);
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
       <h2>${isCorrect ? "Genau richtig!" : "Fast!"}</h2>
 
@@ -4136,7 +4190,7 @@ function renderQuizResult() {
   showNav(false, false);
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card quiz-result-card" data-readable="true">
       <h2>Quiz fertig</h2>
       <p>Du hast ${quizScore} von ${total} Fragen richtig beantwortet.</p>
@@ -4209,7 +4263,7 @@ function startRepeatQuiz() {
     setHeader("Wiederholen", "", "Wiederholen", "", 0);
     showNav(false, false);
     content.innerHTML = `
-      ${buildUtilityBar()}${buildReadingToolbar()}
+      ${buildToolRow()}
       <article class="card quiz-result-card" data-readable="true">
         <h2>Wiederholen</h2>
         <p>Hier kannst du Fragen aus deinen Themen wiederholen.</p>
@@ -4254,7 +4308,7 @@ function renderBigQuizQuestion() {
   `).join("");
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
       <h2>${escapeHtml(bigQuizTitle)}</h2>
@@ -4287,7 +4341,7 @@ function renderBigQuizFeedback(selectedIndex) {
   const isLast = bigQuizIndex >= bigQuizQuestions.length - 1;
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
       <h2>${escapeHtml(bigQuizTitle)}</h2>
@@ -4335,7 +4389,7 @@ function renderBigQuizResult() {
     : "Kein Problem. Lerne weiter – jedes Mal wird es leichter.";
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card quiz-result-card" data-readable="true">
       <h2>${escapeHtml(bigQuizTitle)} – Fertig!</h2>
       <p>Du hast ${bigQuizScore} von ${total} Fragen richtig beantwortet.</p>
@@ -4372,7 +4426,7 @@ function startTrainingInbox() {
   showNav(false, false);
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card training-card" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml("message")}</span>
@@ -4420,7 +4474,7 @@ function renderTrainingMessage() {
   showNav(false, false);
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card training-card" data-readable="true">
       <p class="training-count">Nachricht ${trainingIndex + 1} von ${total}</p>
       <div class="training-msg">
@@ -4455,7 +4509,7 @@ function answerTraining(saysTrick) {
     : (msg.isTrick ? "✗ Das war ein Trick." : "✗ Das war eine echte Nachricht.");
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card training-card" data-readable="true">
       <div class="training-msg">
         <p class="training-msg-head"><strong>${escapeHtml(msg.channel)}</strong> von: ${escapeHtml(msg.from)}</p>
@@ -4496,7 +4550,7 @@ function renderTrainingResult() {
       : "Gut, dass du geübt hast. Tricks zu erkennen ist schwer. Übe einfach nochmal.";
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card quiz-result-card" data-readable="true">
       <h2>Trainings-Postfach – Fertig!</h2>
       <p>Du hast ${trainingScore} von ${total} Nachrichten richtig erkannt.</p>
@@ -4603,7 +4657,7 @@ function renderMemoryCard(topicId) {
     : "";
 
   content.innerHTML = `
-    ${buildUtilityBar()}${buildReadingToolbar()}
+    ${buildToolRow()}
     <article class="card memory-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <div class="symbol-heading">
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml("remember")}</span>
@@ -4842,6 +4896,7 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     closeCalmOverlay();
     hideGlossar();
+    toggleUtilityPanel(true);
   }
 });
 
