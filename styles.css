@@ -84,6 +84,9 @@
   --accent: #00528f;
   --accent-dark: #003a66;
   --accent-soft: #e3eef7;
+  /* Schrift auf einer Flaeche in --accent. Hell-Modus: Akzent ist dunkel -> weiss.
+     Dark Mode ueberschreibt das auf dunkel (siehe unten). */
+  --on-accent: #ffffff;
   --good: #15803d;
   --good-bg: #e8f6ee;
   --warn: #b45309;
@@ -254,7 +257,7 @@ button {
 
 .home-button:hover {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
 }
 
 .sound-toggle-button {
@@ -1189,7 +1192,7 @@ html.no-motion *::after {
   height: 28px;
   border-radius: 50%;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1286,7 +1289,7 @@ html.no-motion *::after {
   padding: 18px 44px;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--on-accent);
   background: var(--accent);
   border: none;
   border-radius: 999px;
@@ -1358,7 +1361,7 @@ html.no-motion *::after {
   color: var(--accent); background: transparent; border: 2px solid var(--accent);
   border-radius: 999px; cursor: pointer;
 }
-.resume-change:hover { background: var(--accent); color: #fff; }
+.resume-change:hover { background: var(--accent); color: var(--on-accent); }
 .resume-change:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .resume-page .intro-start-button { display: flex; width: 100%; max-width: 420px; }
 
@@ -1410,7 +1413,7 @@ html.no-motion *::after {
   height: 44px;
   border-radius: 50%;
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1623,7 +1626,7 @@ html.no-motion *::after {
   top: -10px;
   left: 16px;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   font-size: 0.8rem;
   font-weight: 700;
   padding: 3px 10px;
@@ -1643,7 +1646,7 @@ html.no-motion *::after {
 }
 .step-dot.is-done { background: var(--good); border-color: var(--good); color: #fff; }
 .step-dot.is-current {
-  background: var(--accent); border-color: var(--accent); color: #fff;
+  background: var(--accent); border-color: var(--accent); color: var(--on-accent);
   width: 36px; height: 36px; font-size: 1.05rem;
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
@@ -2072,7 +2075,7 @@ html.no-motion *::after {
 
 .card-read-button:hover {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
 }
 
 /* Vorlese-Knopf je Block (Haupttext, Liste, Achtung, Merksatz …):
@@ -2161,7 +2164,7 @@ html.no-motion *::after {
 
 .plain-back-button:hover {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
 }
 
 .topic-intro-card {
@@ -2356,7 +2359,7 @@ html.no-motion *::after {
 
 .reading-button:hover {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
 }
 
 .reading-button-stop {
@@ -2650,7 +2653,7 @@ p.feedback-wrong {
 .feedback-button.primary,
 .primary-action {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
   border-color: var(--accent);
 }
 
@@ -2987,7 +2990,7 @@ p.feedback-wrong {
 
 .quiz-link.quiz-button {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
   border: 2px solid var(--accent);
 }
 
@@ -3126,7 +3129,7 @@ p.feedback-wrong {
 
 .nav-button.primary {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
   border-color: var(--accent);
 }
 
@@ -4156,7 +4159,7 @@ body.simple-mode .practice-box {
   top: -100px;
   left: 16px;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   padding: 10px 18px;
   border-radius: 0 0 var(--radius-s) var(--radius-s);
   font-weight: 700;
@@ -4251,7 +4254,7 @@ body.simple-mode .practice-box {
 
 .big-quiz-start-button {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   box-shadow: 0 2px 8px rgba(0,82,143,0.18);
 }
 
@@ -4437,6 +4440,9 @@ body.simple-mode .practice-box {
     --accent:       #8ecaee;   /* (war #58a8e0, Lc 48) */
     --accent-dark:  #a0d2f2;
     --accent-soft:  #152840;
+    /* Akzent ist hier hell -> Schrift darauf muss dunkel sein.
+       Weiss auf #8ecaee waere 1,77:1 und faellt unter AA (4,5:1). Jetzt ca. 11:1. */
+    --on-accent:    #0b1119;
 
     /* Feedback-Farben */
     --good:         #4ade80;
@@ -4682,7 +4688,7 @@ body.simple-mode .practice-box {
   left: 50%;
   transform: translateX(-50%);
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   font-size: 0.85rem;
   font-weight: 700;
   padding: 4px 12px;

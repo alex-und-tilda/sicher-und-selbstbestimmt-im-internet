@@ -750,8 +750,12 @@ const TOPIC_COLORS = {
   hilfe:       ["#C9541C", "rgba(201, 84, 28, 0.30)",   "rgba(201, 84, 28, 0.12)",  "#FFF0E8"],
   ki:          ["#6B3FA0", "rgba(107, 63, 160, 0.28)",  "rgba(107, 63, 160, 0.10)", "#F1EAFA"],
   fakes:       ["#B45309", "rgba(180, 83, 9, 0.28)",    "rgba(180, 83, 9, 0.10)",   "#FDF1E0"],
-  betrug:      ["#B91C1C", "rgba(185, 28, 28, 0.26)",   "rgba(185, 28, 28, 0.10)",  "#FDEAEA"],
-  einkaufen:   ["#15803D", "rgba(21, 128, 61, 0.28)",   "rgba(21, 128, 61, 0.10)",  "#E8F8EE"]
+  /* Betrug war #B91C1C – derselbe Farbton wie YouTube #CC0000 (beide Hue 0), im Dark
+     Mode sogar derselbe Wert. Jetzt Rose (Hue 342), 8,0:1 auf Weiss. */
+  betrug:      ["#9F1239", "rgba(159, 18, 57, 0.26)",   "rgba(159, 18, 57, 0.10)",  "#FBE9EE"],
+  /* Einkaufen war #15803D – im Dark Mode exakt WhatsApp-Gruen. Jetzt Limette (Hue 86),
+     5,0:1 auf Weiss. Damit hat das Thema in hell und dunkel dieselbe Identitaet. */
+  einkaufen:   ["#4D7C0F", "rgba(77, 124, 15, 0.28)",   "rgba(77, 124, 15, 0.10)",  "#F0F6E4"]
 };
 
 /* Hellere Farben für Dark-Mode (auf dunkelm Hintergrund besser lesbar) */
@@ -766,8 +770,10 @@ const TOPIC_COLORS_DARK = {
   hilfe:       ["#fb923c", "rgba(251,146,60,0.30)",  "rgba(251,146,60,0.12)",  "rgba(251,146,60,0.15)"],
   ki:          ["#c084fc", "rgba(192,132,252,0.30)", "rgba(192,132,252,0.12)", "rgba(192,132,252,0.15)"],
   fakes:       ["#fbbf24", "rgba(251,191,36,0.30)",  "rgba(251,191,36,0.12)",  "rgba(251,191,36,0.15)"],
-  betrug:      ["#f87171", "rgba(248,113,113,0.30)", "rgba(248,113,113,0.12)", "rgba(248,113,113,0.15)"],
-  einkaufen:   ["#4ade80", "rgba(74,222,128,0.30)",  "rgba(74,222,128,0.12)",  "rgba(74,222,128,0.15)"]
+  /* war #f87171 = exakt YouTube. Jetzt Rose, 8,0:1 auf --surface. */
+  betrug:      ["#fda4af", "rgba(253,164,175,0.30)", "rgba(253,164,175,0.12)", "rgba(253,164,175,0.15)"],
+  /* war #4ade80 = exakt WhatsApp. Jetzt Limette, 10,0:1 auf --surface. */
+  einkaufen:   ["#a3e635", "rgba(163,230,53,0.30)",  "rgba(163,230,53,0.12)",  "rgba(163,230,53,0.15)"]
 };
 
 function isDarkMode() {

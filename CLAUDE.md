@@ -276,11 +276,11 @@ Reines HTML/CSS/JS, **kein Framework/Bundler/npm**. JS wird über `<script src>`
 ## 18. Offene Entscheidungen (mit der nutzenden Person klären)
 
 1. **Dritte Ebene:** bleibt „Alltagssprache (für alle)" — oder zusätzlich/stattdessen weiter ausbauen? (Die Fachkräfte-Inhalte liegen bereits in der separaten Begleit-Ebene §7.)
-2. **Standard-Start-Ebene:** Beim allerersten Besuch zeigt die App zuerst die Sprach-Auswahl. Alternative Vorauswahl? (Vorschlag: Einfache Sprache.)
-3. **Quiz/Einstiegsfrage je Stufe:** Einstiegsfrage ist je Stufe möglich (Pilot Datenschutz). Quiz bleibt empfohlen gemeinsam für alle Stufen. Voll ausrollen?
+2. ~~**Standard-Start-Ebene:** Beim allerersten Besuch zeigt die App zuerst die Sprach-Auswahl. Alternative Vorauswahl?~~ **Erledigt:** Es gibt den **Sprach-Finder** (`renderSampleFinder`, `SAMPLE_ROUNDS`) — zwei Beispiel-Runden mit demselben Inhalt in drei Stufen; die Person wählt nach Gefühl, daraus wird eine Stufe empfohlen. Bewusst kein Test und keine Selbsteinschätzung (§4).
+3. ~~**Quiz/Einstiegsfrage je Stufe:** Einstiegsfrage ist je Stufe möglich (Pilot Datenschutz). Voll ausrollen?~~ **Erledigt (August 2026):** alle 12 Themen haben `saVersions`. Quiz bleibt bewusst gemeinsam für alle Stufen.
 4. ~~**DigComp/ICF in der Begleit-Ebene:** explizite DigComp-Codes je Thema ergänzen?~~ **Erledigt (August 2026):** alle 12 Themen haben `kompetenzen` mit DigComp-2.2- und ICF-Codes (§7). Offen bleibt nur: sollen die Codes auch im Beobachtungsbogen und im Erfolgs-Heft auftauchen?
 5. ~~**Echter Offline-Zwang:** Falls ja, ARASAAC-Piktogramme lokal hosten (§11).~~ **Erledigt (August 2026):** eigene SVG-Icons liegen lokal im Precache, kein externer Bild-Aufruf mehr.
-6. **QR-Betrugs-Lektion auch im Kurz-Modus?** „Vorsicht bei QR-Codes" (Betrug) liegt nur im „Mehr lernen"-Weg; der Kurz-Modus behält bewusst 3 Kern-Lektionen je Thema.
+6. ~~**QR-Betrugs-Lektion auch im Kurz-Modus?**~~ **Erledigt:** „Vorsicht bei QR-Codes" liegt im Kurz-Modus. **Neu offen dafür:** Der Kurz-Modus hält sein Versprechen nicht — er liefert 94 von 129 Lektionen (73 %), die Beschriftung sagt aber „Kurz — Nur das Wichtigste". Ziel laut ursprünglicher Absicht: wenige Kern-Lektionen je Thema. Kürzung auf Start + 3 Kern-Lektionen + Merksätze ist beschlossen (August 2026), `shortLessonIndexes` in `topics.js` entsprechend setzen.
 7. **Wegzeichen (Alex und Tilda an festen Orten):** Konzept liegt vor (`_vorschau-wegzeichen-konzept.html`). Erst Prüfgruppe, dann 7 Illustrations-Varianten, dann Einbau.
 8. **Prüfgruppen-Katalog (offen):** Menü-Wörter („Mein Lernweg"), Lautsprecher-Symbol ohne Wort, Formel „eine Person, der du vertraust", Themen-Gruppen-Namen, Frage des Tages, KI-Einsamkeits-Satz, Frage-Muster-Sätze, QR-Karten, „Lernen starten"-Knopf.
 
