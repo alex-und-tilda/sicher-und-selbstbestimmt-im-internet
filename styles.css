@@ -909,63 +909,48 @@ html.no-motion *::after {
   margin-top: 2px;
 }
 
+/* Liste statt Raster (August 2026).
+   Im Raster musste man die Lesereihenfolge selbst erschliessen (rechts, dann
+   runter) und es waren nur 3 von 12 Themen gleichzeitig sichtbar. Eine Liste
+   hat genau eine Richtung – von oben nach unten – und zeigt 8 Themen auf
+   einmal. Am Desktop bleiben zwei Spalten, damit die Zeilen nicht ausufern. */
 .topic-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  /* Alle Kacheln exakt gleich groß – gleichförmiges Raster erleichtert
-     das Absuchen (COGA: konsistentes Layout; visuelle Suche) und gibt
-     motorisch gleiche, große Ziele (Fitts). Keine Kachel wächst allein. */
-  grid-auto-rows: 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 860px) {
+  .topic-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 
 /* App-Kacheln (Smartphone-Look): farbiges Icon-Feld oben, darunter Name
    und kurze Beschreibung – zentriert. */
 .topic-card {
-  position: relative; /* für Notch, Home-Leiste, Häkchen */
-  display: flex;
-  flex-direction: column;
+  position: relative; /* für Abzeichen und Häkchen */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "icon badge read"
+    "icon title read"
+    "icon desc  read"
+    "icon done  read";
   align-items: center;
-  gap: 10px;
-  text-align: center;
-  /* oben Platz für die Kamera, unten für die Home-Leiste – wie ein Handy */
-  padding: 30px 16px 28px;
-  min-height: 272px;
+  column-gap: 13px;
+  row-gap: 1px;
+  text-align: left;
+  padding: 11px 13px;
+  min-height: 66px;
   background: var(--surface);
   border: 2px solid var(--line);
-  border-radius: 34px;   /* runde Telefon-Ecken */
+  border-radius: 16px;
   cursor: pointer;
   box-shadow: var(--shadow-small);
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Kamera/Lautsprecher oben – wie an einem Smartphone */
-.topic-card::before {
-  content: "";
-  position: absolute;
-  top: 13px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 42px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--line);
-  background: color-mix(in srgb, var(--ink) 22%, transparent);
-}
-
-/* Home-Leiste unten – wie an einem Smartphone */
-.topic-card::after {
-  content: "";
-  position: absolute;
-  bottom: 11px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 52px;
-  height: 5px;
-  border-radius: 999px;
-  background: var(--line);
-  background: color-mix(in srgb, var(--ink) 22%, transparent);
-}
+/* Kamera-Schlitz und Home-Leiste (Smartphone-Deko) sind mit der Liste
+   entfallen – in einer Zeile ergibt der Telefon-Nachbau keinen Sinn mehr. */
 
 /* Drüberfahren: deutliche, schöne farbige Hinterlegung in der Themenfarbe. */
 .topic-card:hover,
@@ -2444,8 +2429,11 @@ html.no-motion *::after {
 }
 
 .reading-button {
-  /* Alle drei Knöpfe gleich groß (gleiche Breite, gleiche Höhe). */
-  flex: 1 1 0;
+  /* Seit der Umstellung auf EINEN Umschalter darf der Knopf nicht mehr die
+     ganze Zeile fuellen: sonst ist er auf den Tab-Seiten 370 px breit und in
+     der Bedien-Zeile einer Lektion 131 px – derselbe Knopf in zwei Formen.
+     Gleiche Funktion, gleiches Aussehen auf jeder Seite (§3 Vorhersehbarkeit). */
+  flex: 0 0 auto;
   min-width: 130px;
   min-height: 58px;   /* §9: gleiche Hoehe wie alle anderen Bedienelemente */
   display: inline-flex;
@@ -4262,9 +4250,9 @@ body.simple-mode .practice-box {
   }
 
   .topic-grid {
-    /* 2 Kacheln pro Reihe wie ein Handy-Homescreen */
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    /* Liste: eine Zeile je Thema, eindeutige Lesereihenfolge von oben nach unten */
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .action-grid {
@@ -4905,4 +4893,50 @@ body.simple-mode .practice-box {
   color: var(--ink);
   margin: 10px 0 0;
   line-height: 1.55;
+}
+
+
+/* ---------- Themen-Liste: Zuordnung der Bereiche ---------- */
+.topic-card .topic-icon  { grid-area: icon; }
+.topic-card .topic-title { grid-area: title; align-self: end;  font-size: 1.05rem; line-height: 1.25; }
+.topic-card .topic-desc  { grid-area: desc;  align-self: start; font-size: 0.87rem; line-height: 1.3; }
+.topic-card .topic-done-badge { grid-area: done; justify-self: start; margin-top: 3px; }
+.topic-card .card-read-button { grid-area: read; }
+
+/* Symbol-Feld in der Zeile: fest, quadratisch, nicht mitwachsend */
+.topic-card .topic-icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+}
+.topic-card .topic-icon svg,
+.topic-card .topic-icon img { width: 25px; height: 25px; }
+
+/* "Starte hier" steht in der Zeile ueber dem Namen – als eigene Rasterzeile,
+   nicht mehr freischwebend. Frei positioniert hat es den Titel um 37 px
+   ueberdeckt. Ohne Abzeichen faellt die Zeile auf 0 zusammen. */
+.topic-card .topic-start-badge {
+  grid-area: badge;
+  position: static;
+  justify-self: start;
+  transform: none;
+  margin: 0 0 2px;
+}
+
+/* Der Vorlese-Knopf bleibt pro Thema erhalten (§1) – er passt in der Zeile
+   neben den Text und kostet keine zusaetzliche Hoehe mehr.
+   Wichtig: collectReadableText() ueberspringt alles in <button>, und die
+   Zeile IST ein Button. Ohne diesen Knopf waeren die Themennamen nicht
+   vorlesbar. */
+.topic-card .card-read-button {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  min-width: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
 }
