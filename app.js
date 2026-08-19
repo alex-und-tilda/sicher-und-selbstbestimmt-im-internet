@@ -1216,10 +1216,17 @@ function updateReadingStatus(text) {
   if (status) status.textContent = text || "";
 }
 
+/* Auswahl-Karten, die selbst <button> sind. Ihr Text muss trotzdem vorgelesen
+   werden – siehe readCurrentPage(). An EINER Stelle definiert, damit die drei
+   Nutzungen (Auswahl, Satztrennung, collectReadableText) nicht auseinanderlaufen. */
+const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
+
 function cleanSpeechText(text) {
   return String(text || "")
     .replace(/\s+/g, " ")
     .replace(/←/g, "")
+    .replace(/[✓✕✔]/g, "")     /* Haken/Kreuze werden sonst als Zeichen gesprochen */
+    .replace(/ℹ️|👋|📵/g, "")
     .replace(/%/g, " Prozent")
     .trim();
 }
@@ -1228,13 +1235,18 @@ function collectReadableText() {
   const root = document.querySelector("[data-readable='true']") || content;
   if (!root) return "";
 
+  /* Hinweis: Diese Funktion wird derzeit nirgends aufgerufen – gelesen wird
+     ueber readCurrentPage(). Sie bleibt mit derselben Karten-Regel gepflegt,
+     damit sie bei spaeterer Nutzung nicht wieder Karten verschluckt. */
+  const KARTE = KARTEN_SELEKTOR;
   const clone = root.cloneNode(true);
   clone.querySelectorAll(
-    "button, footer, nav, .small-footer-notice, .nav, .progress-area, .reading-toolbar, .task-help-button, .support-help-button, .support-help-close, img, svg"
+    "button:not(.topic-card):not(.action-card):not(.learn-mode-card), footer, nav, .small-footer-notice, .nav, .progress-area, .reading-toolbar, .task-help-button, .support-help-button, .support-help-close, .card-read-button, img, svg"
   ).forEach(node => node.remove());
 
   const parts = [];
-  clone.querySelectorAll("h1, h2, h3, p, li").forEach(node => {
+  clone.querySelectorAll("h1, h2, h3, p, li, " + KARTE).forEach(node => {
+    if (!node.matches(KARTE) && node.closest(KARTE)) return;
     const text = cleanSpeechText(node.textContent);
     if (text) parts.push(text);
   });
@@ -1257,10 +1269,20 @@ function readCurrentPage(rate) {
   /* Antwort-Optionen werden MIT vorgelesen (nummeriert) – sonst hört eine
      nicht lesende Person die Frage, aber nie die Antworten. */
   const OPTION = ".answer-option, .sa-option-btn, .sample-option";
+  /* Auswahl-Karten sind selbst <button>. Ohne diese Ausnahme ueberspringt der
+     Filter unten ihren gesamten Text – auf der Themen-Seite hiess das: der
+     grosse Vorlesen-Knopf sagte "Wähle ein Thema" und nannte dann KEINES der
+     12 Themen. Fuer eine nicht lesende Person war die Seite damit nutzlos.
+     Die Karten kommen als Ganzes in die Warteschlange, werden also auch
+     hervorgehoben und ins Bild gescrollt (Mitlesen, §3). */
+  const KARTE = KARTEN_SELEKTOR;
   const els = root
-    ? Array.from(root.querySelectorAll("h2, h3, p, li, " + OPTION)).filter(el => {
+    ? Array.from(root.querySelectorAll("h2, h3, p, li, " + OPTION + ", " + KARTE)).filter(el => {
         const isOption = el.matches(OPTION);
-        if (!isOption && el.closest(".reading-toolbar, nav, footer, button")) return false;
+        const isKarte = el.matches(KARTE);
+        if (!isOption && !isKarte && el.closest(".reading-toolbar, nav, footer, button")) return false;
+        /* Text INNERHALB einer Karte nicht zusaetzlich einzeln lesen */
+        if (!isKarte && el.closest(KARTE)) return false;
         return cleanSpeechText(el.textContent).length > 0;
       })
     : [];
@@ -1299,6 +1321,23 @@ function readCurrentPage(rate) {
   speakNextSentence(gen);
 }
 
+/* Text einer Auswahl-Karte fuer die Sprachausgabe zusammensetzen.
+   Ohne Trennung liefe alles in einem Atemzug durch:
+   "Starte hier Datenschutz Private Daten und Passwörter schützen".
+   Jede Zeile der Karte wird deshalb ein eigener Satz. */
+function kartenText(el) {
+  const kopie = el.cloneNode(true);
+  kopie.querySelectorAll(".answer-num, .card-read-button").forEach(n => n.remove());
+  const teile = [];
+  kopie.querySelectorAll("*").forEach(n => {
+    if (n.children.length === 0) {
+      const t = n.textContent.trim();
+      if (t) teile.push(t.replace(/[.\s]+$/, ""));
+    }
+  });
+  return teile.length ? teile.join(". ") + "." : kopie.textContent;
+}
+
 function speakNextSentence(gen) {
   if (gen !== _readGen) return;
   clearReadingHighlight();
@@ -1313,10 +1352,12 @@ function speakNextSentence(gen) {
   let roherText;
   if (istPseudo) {
     roherText = el.pseudoText;
-  } else if (el.querySelector && el.querySelector(".answer-num")) {
-    const kopie = el.cloneNode(true);
-    kopie.querySelectorAll(".answer-num, .card-read-button").forEach(n => n.remove());
-    roherText = prefix + kopie.textContent;
+  } else if (el.matches && el.matches(KARTEN_SELEKTOR)) {
+    roherText = prefix + kartenText(el);
+  } else if (el.querySelector && el.querySelector(".answer-num, .card-read-button")) {
+    /* Auch bei Karten: der eingebaute Vorlese-Knopf darf nicht mitgesprochen
+       werden (sonst hoert man "… Vorlesen" hinter jedem Kartentext). */
+    roherText = prefix + kartenText(el);
   } else {
     roherText = prefix + el.textContent;
   }
