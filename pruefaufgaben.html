@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prüf-Aufgaben für die Prüfgruppe – Sicher und selbstbestimmt im Internet</title>
+  <meta name="description" content="Aufgaben-Protokoll für Prüfgruppen-Sitzungen: konkrete Aufgaben, Erfolgskriterien und Wort-Test für die Änderungen vom August 2026." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/pruefaufgaben.html" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Nur für diesen Bogen – nutzt die Farb-Variablen aus styles.css */
+    .ob-table { width: 100%; border-collapse: collapse; margin: 10px 0 22px; }
+    .ob-table th, .ob-table td { border: 1.5px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; font-size: 0.98rem; }
+    .ob-table th { background: var(--surface-soft); }
+    .ob-table .ob-mark { width: 58px; text-align: center; white-space: nowrap; }
+    .ob-box { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--ink-soft); border-radius: 4px; vertical-align: middle; }
+    .ob-field { border: 1.5px solid var(--line); border-radius: 8px; min-height: 72px; margin: 6px 0 20px; }
+    .ob-lines { border-bottom: 1.5px solid var(--line); height: 26px; }
+    .ob-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin: 12px 0 20px; }
+    .ob-meta p { margin: 0; padding: 6px 0; border-bottom: 1.5px solid var(--line); }
+    .ob-print-button { display: inline-flex; padding: 12px 28px; font-size: 1.05rem; font-weight: 700; color: var(--on-accent); background: var(--accent); border: none; border-radius: 999px; cursor: pointer; margin: 4px 0 18px; }
+
+    /* Aufgaben-Block: Auftrag, Erfolgskriterium, Beobachtung */
+    .pa-task { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px 4px; margin: 0 0 16px; }
+    .pa-task h3 { margin: 0 0 6px; font-size: 1.02rem; }
+    .pa-say { margin: 0 0 8px; padding: 8px 12px; border-left: 5px solid var(--accent); background: var(--surface-soft); border-radius: 0 8px 8px 0; }
+    .pa-goal { margin: 0 0 8px; font-size: 0.94rem; color: var(--ink-soft); }
+    .pa-watch { margin: 0 0 10px; font-size: 0.94rem; }
+    .pa-rate { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0 0 8px; font-size: 0.94rem; }
+    .pa-note { border-bottom: 1.5px solid var(--line); height: 26px; margin-bottom: 10px; }
+    .pa-tests { font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 8px; }
+    .pa-hint-box { border: 2px solid var(--warn); border-radius: 12px; padding: 12px 16px; margin: 0 0 22px; }
+
+    /* Auf dem Handy sonst 486 px breit: schmalere Ankreuz-Spalten, engere
+       Zellen, Umbruch auch in langen Wortgruppen. Der Druck bleibt unberuehrt. */
+    @media (max-width: 700px) {
+      .ob-table { font-size: 0.9rem; }
+      .ob-table th, .ob-table td { padding: 6px 6px; overflow-wrap: anywhere; }
+      .ob-table .ob-mark { width: 34px; }
+      .ob-meta { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .plain-back-button, .ob-print-button { display: none !important; }
+      body { background: #fff; }
+      .card { box-shadow: none; border: none; }
+      .ob-table, .pa-task, .pa-hint-box { page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="static-page">
+    <a class="plain-back-button" href="index.html">← Zur Lernplattform</a>
+
+    <article class="card">
+      <h1>Prüf-Aufgaben für die Prüfgruppe</h1>
+      <p class="lead">Sicher und selbstbestimmt im Internet · Aufgaben-Protokoll · Stand August 2026</p>
+
+      <button type="button" class="ob-print-button" onclick="window.print()">Bogen drucken</button>
+
+      <p><strong>Wozu dieser Bogen?</strong> Er prüft <em>konkrete Aufgaben</em> an den Stellen, die im
+      August 2026 neu oder anders sind: Findet die Person die Bedienelemente allein? Versteht sie die neuen Wörter?</p>
+
+      <div class="pa-hint-box">
+        <p style="margin-top:0"><strong>Es gibt drei Unterlagen. Sie gehören zusammen:</strong></p>
+        <ul style="margin-bottom:6px">
+          <li><a href="pruefheft.html">Prüf-Heft</a> – <strong>für die prüfende Person selbst.</strong>
+              In Leichter Sprache, mit Smileys zum Ankreuzen. 9 Aufgaben zur Grund-Bedienung.</li>
+          <li><strong>Dieser Bogen</strong> – <strong>für die begleitende Person.</strong>
+              Aufgaben mit Erfolgskriterium und Zeitmessung, gezielt auf die Änderungen von August 2026.</li>
+          <li><a href="beobachtungsbogen.html">Beobachtungsbogen</a> – <strong>für die begleitende Person.</strong>
+              Hält fest, wie die Sitzung insgesamt gelaufen ist, plus Kompetenz-Einordnung.</li>
+        </ul>
+        <p style="margin-bottom:0">Drei Aufgaben stehen ähnlich schon im Prüf-Heft; sie sind hier mit
+        <strong>[auch im Prüf-Heft]</strong> markiert. Wenn das Prüf-Heft in derselben Sitzung benutzt wird,
+        diese Aufgaben nur <em>einmal</em> stellen und das Ergebnis in beide Bögen übertragen.</p>
+      </div>
+
+      <p><strong>Wichtig – datensparsam beobachten:</strong> Keine Namen notieren. Keine Fotos, keine Aufnahmen.
+      Es wird die <em>Plattform</em> geprüft, nicht die Person. Wenn eine Aufgabe nicht klappt, ist das ein
+      Befund über die Plattform – nie über die Person. Das bitte auch so sagen.</p>
+
+      <h2>So läuft die Sitzung</h2>
+      <div class="pa-hint-box">
+        <p style="margin-top:0"><strong>Vier Regeln für die begleitende Person:</strong></p>
+        <ol>
+          <li><strong>Auftrag wörtlich vorlesen.</strong> Der Text im Kasten mit dem blauen Balken links wird genau so gesagt.
+              Nicht erklären, nicht ergänzen, nicht auf den Bildschirm zeigen.</li>
+          <li><strong>Nicht helfen, solange es geht.</strong> Stille aushalten. Erst nach <strong>60 Sekunden</strong>
+              einen Hinweis geben („Schau mal oben auf der Seite.“) und die Aufgabe als <em>mit Hinweis</em> werten.</li>
+          <li><strong>Nach 2 Minuten abbrechen.</strong> Freundlich weitergehen: „Das war schwer gemacht von uns.
+              Wir ändern das.“ Als <em>nicht geschafft</em> werten. Kein Druck, keine zweite Runde.</li>
+          <li><strong>Laut denken lassen.</strong> „Sag ruhig, was du gerade denkst.“ Wörtliche Sätze sind die
+              wertvollste Rückmeldung – bitte im Notiz-Feld mitschreiben, auch halbe Sätze.</li>
+        </ol>
+        <p style="margin-bottom:0">Dauer: etwa 30 bis 40 Minuten. Pausen jederzeit, so oft die Person möchte.
+        Die Aufgaben A bis E bauen aufeinander auf und werden am besten in dieser Reihenfolge gemacht.</p>
+      </div>
+
+      <h2>Rahmen der Sitzung</h2>
+      <div class="ob-meta">
+        <p>Datum: </p>
+        <p>Beobachtet von (Funktion, kein Name der lernenden Person): </p>
+        <p>Sprach-Stufe: ☐ Leichte Sprache &nbsp; ☐ Einfache Sprache &nbsp; ☐ Alltagssprache</p>
+        <p>Lernweg: ☐ allein &nbsp; ☐ mit Hilfe der App &nbsp; ☐ mit Begleitung</p>
+        <p>Gerät: ☐ Smartphone &nbsp; ☐ Tablet &nbsp; ☐ Computer</p>
+        <p>Erste Nutzung der Plattform? ☐ ja &nbsp; ☐ nein</p>
+      </div>
+
+      <h2>A · Ankommen und ein Thema finden</h2>
+
+      <div class="pa-task">
+        <h3>A1 · Erster Eindruck</h3>
+        <p class="pa-say">„Das ist eine Lern-Seite im Internet. Schau sie dir kurz an.
+        Was kann man hier machen, glaubst du?“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> die Person von sich aus sagt, dass man hier etwas
+        lernen kann – egal mit welchen Worten.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Wohin schaut sie zuerst? Nennt sie die Zeichnung von
+        Alex und Tilda? Nennt sie den großen blauen Knopf „Los geht’s“?</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Zeit bis zur ersten Berührung: ______ Sek.</span>
+        </div>
+        <div class="pa-note"></div>
+        <p class="pa-tests">Prüft: neue Startseite (Begrüßungszeile statt großer Karte, Startknopf weiter oben).</p>
+      </div>
+
+      <div class="pa-task">
+        <h3>A2 · Ein bestimmtes Thema finden <span style="font-weight:400;font-size:0.88rem">[auch im Prüf-Heft, Aufgabe 4]</span></h3>
+        <p class="pa-say">„Finde das Thema <strong>Online-Betrug und Abzocke</strong>. Und öffne es.“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> die Seite mit der Überschrift
+        „Online-Betrug und Abzocke“ offen ist.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Welchen Weg nimmt sie – unten „Themen“, oder
+        „Lieber gleich ein Thema wählen“? Muss sie scrollen? Wie weit? Hilft die Gruppe
+        „Gefahren und Hilfe“ beim Suchen, oder liest sie alle 12 Zeilen von oben durch?</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Dauer: ______ Sek.</span>
+        </div>
+        <div class="pa-note"></div>
+        <p class="pa-tests">Prüft: Themen als <strong>Liste</strong> statt als Kachel-Raster (neu),
+        und ob die drei Gruppen-Überschriften tragen.</p>
+      </div>
+
+      <div class="pa-task">
+        <h3>A3 · Losgehen</h3>
+        <p class="pa-say">„Jetzt möchtest du mit dem Lernen anfangen. Zeig mir, wie.“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> sie „Lernen starten“ antippt.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Auf dieser Seite stehen 18 Knöpfe, darunter
+        „Drucken / als PDF speichern“ und „QR-Karten für alle Themen drucken“ (beide mit Drucker-Symbol) – die sind für
+        Fachkräfte gedacht. Tippt die Person versehentlich darauf? Fragt sie danach?</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Falsch getippt auf: __________________</span>
+        </div>
+        <div class="pa-note"></div>
+        <p class="pa-tests">Prüft: offene Frage, ob die Fachkräfte-Werkzeuge auf die Begleit-Ebene gehören.</p>
+      </div>
+
+      <h2>B · Die Werkzeuge finden</h2>
+      <p>Ab hier ist die Person auf einem Lernschritt. Über dem Text stehen drei Knöpfe:
+      <strong>Vorlesen</strong>, <strong>Pause machen</strong>, <strong>Sprache: …</strong>
+      Diese Zeile ist im August 2026 neu gebaut worden – sie ist der Kern dieser Prüfung.</p>
+
+      <div class="pa-task">
+        <h3>B1 · Vorlesen starten <span style="font-weight:400;font-size:0.88rem">[auch im Prüf-Heft, Aufgabe 2]</span></h3>
+        <p class="pa-say">„Du möchtest dir diese Seite vorlesen lassen. Zeig mir, wie das geht.“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> das Vorlesen läuft.</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Dauer: ______ Sek.</span>
+        </div>
+        <div class="pa-note"></div>
+      </div>
+
+      <div class="pa-task">
+        <h3>B2 · Vorlesen wieder ausmachen <span style="font-weight:400">(wichtigste Einzelfrage)</span></h3>
+        <p class="pa-say">„Und jetzt möchtest du, dass es aufhört.“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> sie denselben Knopf noch einmal antippt –
+        er heißt jetzt „Stopp“.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Sucht sie einen <em>zweiten</em> Knopf?
+        Früher standen „Vorlesen“ und „Stopp“ nebeneinander; jetzt ist es ein Knopf, der seinen Namen wechselt.
+        Genau das kann verwirren. Wenn sie zögert: wie lange, und wohin schaut sie?</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span><span class="ob-box"></span> hat einen zweiten Knopf gesucht</span>
+        </div>
+        <div class="pa-note"></div>
+        <p class="pa-tests">Prüft: den Umschalter „Vorlesen ⇄ Stopp“ (neu). Wenn das hier mehrfach hakt,
+        gehen wir auf zwei getrennte Knöpfe zurück.</p>
+      </div>
+
+      <div class="pa-task">
+        <h3>B3 · Pause machen</h3>
+        <p class="pa-say">„Du bist müde und möchtest eine Pause machen. Zeig mir, wie.“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> die Pause-Seite offen ist.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Der Knopf steht sichtbar da. Wird er trotzdem
+        übersehen, weil drei Knöpfe nebeneinander stehen? Verwechselt sie ihn mit „Stopp“?</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Dauer: ______ Sek.</span>
+        </div>
+        <div class="pa-note"></div>
+        <p class="pa-tests">Prüft: „Pause machen“ steht wieder offen sichtbar (war zwischendurch eingeklappt).</p>
+      </div>
+
+      <div class="pa-task">
+        <h3>B4 · Schrift größer machen</h3>
+        <p class="pa-say">„Die Schrift ist dir zu klein. Mach sie größer.“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> die Schrift sichtbar größer ist
+        (über „Einstellungen“ → „A+ größer“).</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Findet sie „Einstellungen“ unten?
+        Sucht sie die Schriftgröße oben bei den anderen Knöpfen?</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Dauer: ______ Sek.</span>
+        </div>
+        <div class="pa-note"></div>
+      </div>
+
+      <h2>C · Wissen, wo man ist</h2>
+
+      <div class="pa-task">
+        <h3>C1 · Fortschritt verstehen <span style="font-weight:400">(zweitwichtigste Einzelfrage)</span></h3>
+        <p class="pa-say">„Schau mal auf diese Seite. Wie viel hast du schon geschafft?
+        Und wie viel kommt noch?“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> sie den Balken oder den Satz
+        „<em>X</em> geschafft · noch <em>Y</em> Schritte“ richtig deutet – auch mit eigenen Worten
+        („noch ein bisschen“, „fast fertig“).</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Nennt sie den Balken oder den Satz?
+        Vorher gab es eine Reihe nummerierter Kreise zum Abhaken. Fehlt der Person das Abhaken?
+        Fragen Sie nach: „Woran siehst du das?“</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Woran erkannt: ☐ Balken ☐ Satz ☐ gar nicht</span>
+        </div>
+        <div class="pa-note"></div>
+        <p class="pa-tests">Prüft: Fortschritts-Balken statt Punkte-Reihe (neu, §13).</p>
+      </div>
+
+      <div class="pa-task">
+        <h3>C2 · Zurück zu den Themen</h3>
+        <p class="pa-say">„Du möchtest ein anderes Thema anschauen. Zeig mir, wie du dorthin kommst.“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> die Themen-Liste offen ist.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Nutzt sie „Zurück“ mehrfach oder direkt
+        „Themen“ unten? Geht dabei etwas verloren?</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> allein</span>
+          <span><span class="ob-box"></span> mit Hinweis</span>
+          <span><span class="ob-box"></span> nicht geschafft</span>
+          <span>Weg: ☐ „Zurück“ ☐ „Themen“ ☐ anders</span>
+        </div>
+        <div class="pa-note"></div>
+      </div>
+
+      <h2>D · Die neuen Lern-Bausteine</h2>
+      <p>Diese beiden Bausteine gibt es seit August 2026. Sie kommen am Ende eines Themas.
+      Dafür ein Thema ganz durchgehen – am kürzesten mit der Einstellung „Kurz · Nur das Wichtigste.“</p>
+
+      <div class="pa-task">
+        <h3>D1 · Die kurze Frage am Ende</h3>
+        <p class="pa-say">Nichts sagen. Nur zuschauen, wenn die Seite „Eine kurze Frage“ kommt.</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> die Person antwortet, ohne dass jemand
+        sie dazu auffordert.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Unter der Frage steht
+        „Das ist kein Test. Du darfst raten.“ Beruhigt dieser Satz, oder macht das Wort <em>Test</em>
+        erst nervös? Wirkt die Person angespannt? Fragt sie „ist das jetzt eine Prüfung?“</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> antwortet von selbst</span>
+          <span><span class="ob-box"></span> zögert, antwortet dann</span>
+          <span><span class="ob-box"></span> antwortet nicht</span>
+          <span><span class="ob-box"></span> wirkt angespannt</span>
+        </div>
+        <div class="pa-note"></div>
+      </div>
+
+      <div class="pa-task">
+        <h3>D2 · „Das war das Thema. Wie ist es jetzt?“</h3>
+        <p class="pa-say">Nichts sagen. Nach der Antwort fragen:
+        „Was steht da jetzt? Was heißt das für dich?“</p>
+        <p class="pa-goal"><strong>Geschafft, wenn:</strong> die Person versteht, dass die Plattform
+        ihre Antwort von <em>vorher</em> mit ihrer Antwort von <em>jetzt</em> vergleicht.</p>
+        <p class="pa-watch"><strong>Beobachten:</strong> Freut sie sich über „Du hast dazugelernt“?
+        Kommt bei gleicher Antwort („Das ist in Ordnung.“) Enttäuschung auf?
+        Wörtliche Reaktion notieren.</p>
+        <div class="pa-rate">
+          <span><span class="ob-box"></span> versteht den Vergleich</span>
+          <span><span class="ob-box"></span> teilweise</span>
+          <span><span class="ob-box"></span> versteht ihn nicht</span>
+          <span>Reaktion: ☐ Freude ☐ neutral ☐ Enttäuschung</span>
+        </div>
+        <div class="pa-note"></div>
+      </div>
+
+      <h2>E · Wort-Test</h2>
+      <p>Auf jedes Wort zeigen und fragen: <strong>„Was heißt das?“</strong> – Antwort <em>wörtlich</em> notieren,
+      auch wenn sie falsch ist. Gerade die falschen Deutungen sind der Befund.
+      Ein Wort ist erst dann in Ordnung, wenn die Person es <em>ohne Nachfrage</em> richtig erklärt.</p>
+      <table class="ob-table">
+        <tr>
+          <th>Wort auf dem Bildschirm</th>
+          <th class="ob-mark">klar</th>
+          <th class="ob-mark">teils</th>
+          <th class="ob-mark">unklar</th>
+          <th>Wörtliche Antwort der Person</th>
+        </tr>
+        <tr><td>„Vorlesen“ / „Stopp“ <em>(derselbe Knopf)</em></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Pause machen“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Sprache: Leichte Sprache“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„<em>X</em> geschafft · noch <em>Y</em> Schritte“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Starte hier“ <em>(Abzeichen am ersten Thema)</em></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Dein nächstes Thema“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Kurz · Nur das Wichtigste.“ / „Mehr · Mit Beispielen.“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Los geht’s“ / „Lieber gleich ein Thema wählen“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Das ist kein Test. Du darfst raten.“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Das war das Thema. Wie ist es jetzt?“</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>Gruppen: „Wichtig für alle“ · „Apps“ · „Gefahren und Hilfe“ <em>[auch im Prüf-Heft, Aufgabe 7]</em></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+        <tr><td>„Wie möchtest du heute lernen?“ <em>(allein / mit Hilfe der App / mit Begleitung)</em></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td></td></tr>
+      </table>
+
+      <h2>F · Nur beobachten, nicht fragen</h2>
+      <p>Zu diesen Punkten steht eine Entscheidung an. Bitte nicht danach fragen – nur notieren, was von selbst passiert.</p>
+      <table class="ob-table">
+        <tr><th>Frage an die Sitzung</th><th>Was dabei aufgefallen ist</th></tr>
+        <tr><td>Jedes Thema hat eine eigene Farbe (12 Farben). Spricht die Person die Farben an? Nutzt sie sie zum Wiederfinden – oder sind sie nur Schmuck?</td><td></td></tr>
+        <tr><td>Auf dem Handy sind in der Themen-Liste rund 7 von 12 Themen ohne Scrollen sichtbar. Scrollt die Person von selbst? Merkt sie, dass es unten weitergeht?</td><td></td></tr>
+        <tr><td>Wird die Zeichnung von Alex und Tilda als Person wahrgenommen, oder als Bild ohne Bedeutung?</td><td></td></tr>
+        <tr><td>Sagt die Person an irgendeiner Stelle „zu viel“ oder „unübersichtlich“? Wo genau?</td><td></td></tr>
+      </table>
+
+      <h2>Wörtliche Aussagen</h2>
+      <p>Originalton ist die wertvollste Rückmeldung – bitte wörtlich notieren, auch abgebrochene Sätze:</p>
+      <div class="ob-field" style="min-height: 110px;"></div>
+
+      <h2>Auswertung direkt nach der Sitzung</h2>
+      <p>Bitte gleich ausfüllen, solange die Sitzung frisch ist.</p>
+      <table class="ob-table">
+        <tr><th>Aufgabe</th><th class="ob-mark">allein</th><th class="ob-mark">Hinweis</th><th class="ob-mark">nein</th><th>Was wir ändern, wenn es nicht klappt</th></tr>
+        <tr><td>A1 Erster Eindruck</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>Begrüßungstext deutlicher machen</td></tr>
+        <tr><td>A2 Thema finden <em>[Prüf-Heft 4]</em></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>Gruppen-Überschriften umbenennen oder Suchfeld ergänzen</td></tr>
+        <tr><td>A3 Lernen starten</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>Drucken und QR-Karten in die Begleit-Ebene verschieben</td></tr>
+        <tr><td>B1 Vorlesen starten <em>[Prüf-Heft 2]</em></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>Knopf größer oder Symbol deutlicher</td></tr>
+        <tr><td><strong>B2 Vorlesen stoppen</strong></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td><strong>zurück auf zwei getrennte Knöpfe</strong></td></tr>
+        <tr><td>B3 Pause machen</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>Pause aus der Dreier-Zeile herauslösen</td></tr>
+        <tr><td>B4 Schrift größer</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>A+ / A++ zurück in die obere Zeile</td></tr>
+        <tr><td><strong>C1 Fortschritt verstehen</strong></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td><strong>Punkte-Reihe zum Abhaken zurückholen</strong></td></tr>
+        <tr><td>C2 Zurück zu den Themen</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>„Zur Themenübersicht“ auf jedem Schritt anbieten</td></tr>
+        <tr><td>D1 Kurze Frage</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>Satz ohne das Wort „Test“ formulieren</td></tr>
+        <tr><td>D2 Selbst-Einschätzung</td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td class="ob-mark"><span class="ob-box"></span></td><td>Vergleich mit Bildern statt mit Text zeigen</td></tr>
+      </table>
+
+      <p><strong>Das ändern wir als Nächstes</strong> (höchstens 3 Punkte, wichtigster zuerst):</p>
+      <div class="ob-lines"></div>
+      <div class="ob-lines"></div>
+      <div class="ob-lines"></div>
+
+      <p><strong>Das lassen wir ausdrücklich so</strong> (weil es gut funktioniert hat):</p>
+      <div class="ob-lines"></div>
+      <div class="ob-lines"></div>
+
+      <hr />
+      <p style="font-size: 0.9rem;">
+        Eine Sitzung reicht nicht. Ein Befund gilt erst als belastbar, wenn er bei
+        <strong>mindestens zwei von drei</strong> Personen auftritt. Bis dahin wird nichts umgebaut.
+      </p>
+      <p style="font-size: 0.9rem;">
+        Datenschutz: Dieser Bogen enthält bewusst keine personenbezogenen Daten (KDG-konform).
+        Aufbewahrung nur zur Weiterentwicklung der Plattform. ·
+        Ergänzend: <a href="beobachtungsbogen.html">Beobachtungsbogen</a> ·
+        Träger: Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW.
+      </p>
+    </article>
+  </main>
+</body>
+</html>

@@ -2337,9 +2337,12 @@ html.no-motion *::after {
   margin-bottom: 14px;
 }
 
+/* Beide Teilleisten loesen sich in der gemeinsamen Zeile auf, damit ihre
+   Knoepfe als EIN Satz umbrechen. Sonst bliebe "Pause machen" an den breiten
+   Sprach-Knopf gekettet und die Leiste braeuchte drei Zeilen statt zwei. */
 .tool-row .reading-toolbar,
 .tool-row .utility-bar {
-  margin-bottom: 0;
+  display: contents;
 }
 
 .tool-row .reading-button {
@@ -2364,62 +2367,8 @@ html.no-motion *::after {
   margin-bottom: 14px;
 }
 
-/* Aufklapp-Knopf für Sprache und Pause.
-   Ersetzt zwei dauerhaft sichtbare Blöcke durch eine Zeile. Der Inhalt bleibt
-   auf jedem Schritt in zwei Tipps erreichbar (§1 Pause, §2 Sprache). */
-.utility-toggle {
-  min-height: 58px;            /* §9: Bedienelemente >= ~58 px */
-  padding: 10px 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 999px;
-  border: 2px solid var(--line);
-  background: var(--surface);
-  color: var(--ink-soft);
-  cursor: pointer;
-}
-
-.utility-toggle:hover,
-.utility-toggle.is-open {
-  border-color: var(--accent);
-  color: var(--accent-dark);
-}
-
-.utility-toggle:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-.utility-caret {
-  display: inline-block;
-  font-size: 0.9em;
-  transition: transform 0.15s ease;
-}
-
-.utility-toggle.is-open .utility-caret {
-  transform: rotate(180deg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .utility-caret { transition: none; }
-}
-
-.utility-panel {
-  flex-basis: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.utility-panel.is-hidden {
-  display: none;
-}
-
 .utility-button {
-  min-height: 48px;
+  min-height: 58px;            /* §9: Bedienelemente >= ~58 px */
   padding: 10px 18px;
   font-size: 0.98rem;
   font-weight: 700;

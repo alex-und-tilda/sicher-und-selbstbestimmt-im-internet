@@ -1554,25 +1554,22 @@ function closeCalmOverlay() {
   if (overlay) overlay.remove();
 }
 
-/* Sprache und Pause lagen als zwei dauerhafte Blöcke über jedem Lernschritt.
-   Beide bleiben auf jedem Schritt erreichbar (§1 Pause-Funktion, §2 "Sprache
-   jederzeit umstellbar"), stehen aber jetzt hinter EINEM Knopf – der Kopf
-   verliert damit rund 100 px vor dem ersten Lehrsatz (§3 Cognitive Load).
-   Die Beschriftung nennt ihren Inhalt statt eines abstrakten "Mehr" (§5).
-   PRÜFGRUPPE: Wort "Sprache und Pause" mit der Zielgruppe testen (§13). */
+/* Sprache und Pause bleiben sichtbar.
+   Zwischenzeitlich lagen beide hinter einem Aufklapper ("Sprache und Pause").
+   Das spart Platz, widerspricht aber §3/§9: Wer eine Pause braucht, soll den
+   Knopf sehen und nicht erst suchen. Der Platz kommt stattdessen aus der
+   gemeinsamen Zeile mit dem Vorlese-Knopf (buildToolRow).
+   Reihenfolge Pause vor Sprache: "Vorlesen" und "Pause machen" passen zusammen
+   in die erste Zeile (131 + 153 px), der breitere Sprach-Knopf rutscht in die
+   zweite. Das spart eine ganze Zeile, ohne etwas zu verstecken.
+   §1 Pause-Funktion, §2 "Sprache jederzeit umstellbar". */
 function buildUtilityBar() {
   return `
-    <div class="utility-bar" aria-label="Sprache und Pause">
-      <button type="button" class="utility-toggle" id="utilityToggle"
-              aria-expanded="false" aria-controls="utilityPanel" onclick="toggleUtilityPanel()">
-        Sprache und Pause <span class="utility-caret" aria-hidden="true">▾</span>
+    <div class="utility-bar" aria-label="Pause und Sprache">
+      <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
+      <button type="button" class="utility-button language-switch-button" onclick="renderLanguageChoice()">
+        Sprache: ${LANGUAGE_LABEL[languageLevel]}
       </button>
-      <div class="utility-panel is-hidden" id="utilityPanel">
-        <button type="button" class="utility-button language-switch-button" onclick="renderLanguageChoice()">
-          Sprache: ${LANGUAGE_LABEL[languageLevel]}
-        </button>
-        <button type="button" class="utility-button pause-button" onclick="showPauseOverlay()">Pause machen</button>
-      </div>
     </div>
   `;
 }
@@ -1583,22 +1580,6 @@ function buildUtilityBar() {
    Bedienung vorhersehbar bleibt (§3 Emotionale Sicherheit). */
 function buildToolRow() {
   return `<div class="tool-row">${buildReadingToolbar()}${buildUtilityBar()}</div>`;
-}
-
-function toggleUtilityPanel(forceClose) {
-  const button = document.getElementById("utilityToggle");
-  const panel = document.getElementById("utilityPanel");
-  if (!button || !panel) return;
-  const open = forceClose === true ? false : panel.classList.contains("is-hidden");
-  panel.classList.toggle("is-hidden", !open);
-  button.setAttribute("aria-expanded", open ? "true" : "false");
-  button.classList.toggle("is-open", open);
-  if (open) {
-    const first = panel.querySelector("button");
-    if (first) first.focus();
-  } else if (forceClose === true) {
-    button.focus();
-  }
 }
 
 /* ============================================================
@@ -5078,7 +5059,6 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     closeCalmOverlay();
     hideGlossar();
-    toggleUtilityPanel(true);
   }
 });
 
