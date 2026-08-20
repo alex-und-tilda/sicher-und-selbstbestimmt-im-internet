@@ -451,6 +451,11 @@ function setProgressEnabled(enabled) {
    gespeicherten Lernstand (Bandura: Erfolg muss sofort sichtbar sein).
    Nur im Arbeitsspeicher – verschwindet beim Schließen (KDG-konform §14). */
 let sessionDoneTopics = new Set();
+/* Selbstcheck und Kurz-Frage: nur im Arbeitsspeicher, nichts gespeichert (§14).
+   Der Vergleich "vorher/nachher" passt in dieselbe Sitzung – dafuer braucht es
+   keine Einwilligung und keine neue Datenkategorie. */
+let selfAssessmentStart = {};
+let miniCheckDone = {};
 
 function markTopicDone(topicId) {
   sessionDoneTopics.add(topicId);
@@ -2362,26 +2367,33 @@ function renderIntro() {
   content.innerHTML = `
     ${buildReadingToolbar()}
     <section class="intro-page" data-readable="true">
-      <div class="hero-card">
-        <div class="hero-inner">
-          <div class="hero-text">
-            <h2>Willkommen!</h2>
-            <p>Hier lernst du, sicher und selbstbestimmt im Internet zu sein.</p>
-            <p>In kurzen Schritten. Mit Bildern und zum Vorlesen.</p>
-          </div>
-          <div class="hero-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 4 L56 16 L56 36 C56 50 44 60 32 62 C20 60 8 50 8 36 L8 16 Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-              <path d="M24 32 L30 38 L40 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+      <!-- Begruessung und Figuren in EINER Zeile (August 2026).
+           Vorher zwei Karten uebereinander (dunkle Hero-Karte 329 px +
+           Figuren-Karte 232 px). Zusammen mit der Angebots-Liste stand der
+           Hauptknopf dadurch erst bei y = 1208 px – 1,4 Bildschirme unter der
+           Falz. Wer die Seite oeffnete, sah keinen Startknopf.
+           Der Satz "In kurzen Schritten. Mit Bildern und zum Vorlesen."
+           entfaellt: er steht inhaltlich in der Liste weiter unten. -->
+      <div class="intro-welcome">
+        <img class="intro-welcome-figure" src="assets/illustrations/alex-und-tilda.svg" alt="" aria-hidden="true">
+        <div class="intro-welcome-text">
+          <h2>Willkommen!</h2>
+          <p>Alex und Tilda begleiten dich. Du lernst, sicher und selbstbestimmt im Internet zu sein.</p>
         </div>
       </div>
 
-      <div class="intro-figures">
-        <img src="assets/illustrations/alex-und-tilda.svg" alt="" aria-hidden="true">
-        <p class="intro-figures-text"><strong>Das sind Alex und Tilda.</strong><br>Sie begleiten dich beim Lernen.</p>
-      </div>
+      ${isReturning ? `
+      <button type="button" class="intro-start-button" onclick="renderMenu()">Zu den Themen</button>
+      ` : `
+      <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
+      <button type="button" class="intro-quickstart-link" onclick="introQuickStart()">Lieber gleich ein Thema wählen</button>
+      `}
+
+      ${lessonChip}
+
+      ${dailyCard}
+
+      ${resumeCard}
 
       ${isReturning ? "" : `
       <div class="intro-offer">
@@ -2391,20 +2403,7 @@ function renderIntro() {
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("message")}</span><span>Du kannst dir alles vorlesen lassen.</span></li>
           <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span>Du lernst allein. Oder mit einer Begleit-Person.</span></li>
         </ul>
-      </div>`}
-
-      ${lessonChip}
-
-      ${dailyCard}
-
-      ${resumeCard}
-
-      ${isReturning ? `
-      <button type="button" class="intro-start-button" onclick="renderMenu()">Zu den Themen</button>
-      ` : `
-      <button type="button" class="intro-start-button" onclick="introStart()">Los geht’s</button>
-      <p class="intro-quickstart-hint">Keine Lust auf Fragen?</p>
-      <button type="button" class="intro-quickstart-button" onclick="introQuickStart()">Sofort ein Thema lernen</button>
+      </div>
       <p class="intro-meta">12 Themen &nbsp;·&nbsp; 3 Sprachstufen &nbsp;·&nbsp; kostenlos &nbsp;·&nbsp; kein Name nötig</p>
       `}
     </section>
@@ -3473,6 +3472,9 @@ function renderSelfAssessment() {
 
   content.querySelectorAll(".sa-option-btn").forEach(btn => {
     btn.addEventListener("click", () => {
+      /* Antwort merken – die Abschluss-Seite zeigt damit den eigenen Zuwachs.
+         Vorher wurde die Wahl verworfen. */
+      selfAssessmentStart[topic.id] = Number(btn.dataset.index);
       renderLesson();
     });
   });
@@ -3806,7 +3808,7 @@ function continueAfterPractice() {
     currentStep += 1;
     renderLesson();
   } else {
-    renderCompletionPage(topic.id);
+    renderMiniCheck(topic.id);
   }
 }
 
@@ -3837,6 +3839,131 @@ function buildCompletionProgress() {
       </div>
     </div>
     ${saveOffer}`;
+}
+
+/* ------------------------------------------------------------
+   Kurze Frage nach den Lektionen (vor der Abschluss-Seite)
+
+   Nutzt topic.miniQuestion. Diese 12 Fragen waren in topics.js sauber
+   ausformuliert (Frage, Antworten, correct, explanation), wurden aber
+   nirgends angezeigt – reines totes Datenfeld bis August 2026.
+
+   Warum hier: Abrufen direkt nach dem Lernen ist der staerkste Behaltens-
+   Hebel (§3, Testing-Effekt). Eine einzelne leichte Frage gibt ausserdem
+   ein Erfolgserlebnis, bevor die groessere Quiz-Runde angeboten wird.
+   Ein Konzept pro Bildschirm (§3, CLT) – deshalb eine eigene Seite statt
+   noch ein Block auf der ohnehin langen Abschluss-Seite.
+   ------------------------------------------------------------ */
+function renderMiniCheck(topicId) {
+  const topic = getTopicById(topicId);
+  if (!topic) return renderMenu();
+  const mq = topic.miniQuestion;
+  /* Kein Zwang: ohne Frage oder wenn schon beantwortet, direkt weiter. */
+  if (!mq || !Array.isArray(mq.answers) || !mq.answers.length || miniCheckDone[topic.id]) {
+    return renderCompletionPage(topic.id);
+  }
+
+  stopReading();
+  currentTopicId = topic.id;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  showNav(false, false);
+  setHeader(topic.title, "Kurze Frage", "Kurze Frage", "Fast fertig", 95);
+  setOrientation(`Du bist fast fertig mit dem Thema: ${topic.title}. Jetzt kommt eine kurze Frage.`);
+
+  const optionen = mq.answers.map((a, i) =>
+    `<button type="button" class="answer-option mini-answer" data-index="${i}">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(a))}</span></button>`
+  ).join("");
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    <article class="card sa-card" data-readable="true" style="${getTopicColorStyle(topic.id)}">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
+        <h2>Eine kurze Frage</h2>
+      </div>
+      ${questionPikto(mq)}<p class="sa-question">${escapeHtml(mq.question)}</p>
+      <div class="sa-options" role="group" aria-label="Antwort wählen">${optionen}</div>
+      <p class="sa-hint">Das ist kein Test. Du darfst raten.</p>
+      <div id="miniFeedback" class="mini-feedback is-hidden" role="status" aria-live="polite"></div>
+    </article>
+  `;
+
+  content.querySelectorAll(".mini-answer").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (miniCheckDone[topic.id]) return;
+      const gewaehlt = Number(btn.dataset.index);
+      const richtig = gewaehlt === mq.correct;
+      miniCheckDone[topic.id] = true;
+      content.querySelectorAll(".mini-answer").forEach(b => {
+        b.disabled = true;
+        const i = Number(b.dataset.index);
+        if (i === mq.correct) b.classList.add("answer-correct");
+        else if (i === gewaehlt) b.classList.add("answer-wrong");
+      });
+      /* Nur bei richtig ein Ton – kein negatives Signal (§3, Došen). */
+      if (richtig) playSound("correct");
+      const box = document.getElementById("miniFeedback");
+      if (box) {
+        box.classList.remove("is-hidden");
+        box.innerHTML = `
+          <p class="mini-feedback-text"><strong>${richtig ? "Richtig." : "Schau mal:"}</strong> ${escapeHtml(mq.explanation || "")}</p>
+          <button type="button" class="primary-action" onclick="renderCompletionPage('${escapeHtml(topic.id)}')">Weiter</button>`;
+      }
+    });
+  });
+
+  focusContent();
+  renderLegalFooter();
+}
+
+/* Abschluss-Selbstcheck: dieselbe Skala wie die Einstiegsfrage.
+   Vorher gab es 12 Fragen am Anfang und keine einzige am Ende – die
+   lernende Person hat ihren eigenen Zuwachs nie gesehen. Der Vergleich
+   bleibt in der Sitzung, es wird nichts gespeichert (§14).
+   PRUEFGRUPPE: Wortlaut "Das war das Thema. Wie ist es jetzt?" testen (§13). */
+function buildClosingSelfCheck(topic) {
+  const sa = resolveSelfAssessment(topic, languageLevel);
+  if (!sa || !Array.isArray(sa.options) || !sa.options.length) return "";
+  const optionen = sa.options.map((opt, i) =>
+    `<button type="button" class="sa-option-btn closing-sa" data-index="${i}">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
+  ).join("");
+  return `
+    <div class="access-box closing-sa-box">
+      <h3>Das war das Thema. Wie ist es jetzt?</h3>
+      <div class="sa-options" role="group" aria-label="Einschätzung wählen">${optionen}</div>
+      <p id="closingSaResult" class="closing-sa-result is-hidden" role="status" aria-live="polite"></p>
+    </div>`;
+}
+
+function bindClosingSelfCheck(topic) {
+  const sa = resolveSelfAssessment(topic, languageLevel);
+  const knoepfe = content.querySelectorAll(".closing-sa");
+  if (!knoepfe.length || !sa) return;
+  knoepfe.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const jetzt = Number(btn.dataset.index);
+      knoepfe.forEach(b => { b.disabled = true; b.classList.remove("is-active"); });
+      btn.classList.add("is-active");
+      const vorher = selfAssessmentStart[topic.id];
+      const feld = document.getElementById("closingSaResult");
+      if (!feld) return;
+      let text;
+      if (typeof vorher !== "number") {
+        text = "Danke. Du kannst das Thema jederzeit wiederholen.";
+      } else if (jetzt > vorher) {
+        text = `Am Anfang: ${answerText(sa.options[vorher])}. Jetzt: ${answerText(sa.options[jetzt])}. Du hast dazugelernt.`;
+      } else if (jetzt === vorher) {
+        text = `Am Anfang und jetzt: ${answerText(sa.options[jetzt])}. Das ist in Ordnung. Du kannst das Thema noch einmal machen.`;
+      } else {
+        /* Kein Tadel. Ehrlichkeit anerkennen und einen Weg anbieten (§3, §4). */
+        text = "Danke, dass du ehrlich bist. Beim Lernen merkt man oft erst, wie viel es gibt. Du kannst das Thema noch einmal machen.";
+      }
+      feld.textContent = text;
+      feld.classList.remove("is-hidden");
+      playSound("success");
+    });
+  });
 }
 
 function renderCompletionPage(topicId) {
@@ -3878,6 +4005,8 @@ function renderCompletionPage(topicId) {
             <p class="remember-text">${escapeHtml(topic.transfer)}</p>
           </div>` : ""}
 
+          ${buildClosingSelfCheck(topic)}
+
           ${buildCompletionProgress()}
 
           <div class="einfach-done-actions">
@@ -3903,6 +4032,7 @@ function renderCompletionPage(topicId) {
         </article>
       </section>
     `;
+    bindClosingSelfCheck(topic);
     focusContent();
     renderLegalFooter();
     return;
@@ -3937,6 +4067,8 @@ function renderCompletionPage(topicId) {
           <p class="remember-text">${escapeHtml(topic.transfer)}</p>
         </div>` : ""}
 
+        ${buildClosingSelfCheck(topic)}
+
         ${buildCompletionProgress()}
 
         <div class="completion-actions">
@@ -3949,6 +4081,7 @@ function renderCompletionPage(topicId) {
       </article>
     </section>
   `;
+  bindClosingSelfCheck(topic);
   focusContent();
   renderLegalFooter();
 }
@@ -4772,7 +4905,7 @@ function goNext() {
       pageDirection = "forward";
       renderLesson();
     } else {
-      renderCompletionPage(topic.id);
+      renderMiniCheck(topic.id);
     }
     return;
   }

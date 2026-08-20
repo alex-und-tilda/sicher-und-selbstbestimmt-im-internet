@@ -1284,7 +1284,56 @@ html.no-motion *::after {
 }
 .intro-start-button:hover { transform: translateY(-2px); background: var(--accent-dark); }
 .intro-start-button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.intro-meta { font-size: 0.95rem; color: var(--ink-soft); margin: 0; }
+.intro-meta { font-size: 0.95rem; color: var(--ink-soft); margin: 14px 0 0; }
+
+/* ---------- Begrüßung: Bild und Text in einer Zeile ----------
+   Ersetzt die dunkle Hero-Karte (329 px) und die Figuren-Karte (232 px).
+   Beide sagten dasselbe und schoben den Startknopf unter die Falz. */
+.intro-welcome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+  margin-bottom: 4px;
+}
+
+.intro-welcome-figure {
+  flex: none;
+  /* Nicht kleiner: die Illustration hat viel Innenabstand, unter ~120 px
+     sind Alex und Tilda kaum noch zu erkennen. Sie sind der Wiedererkennungs-
+     Anker der Marke. */
+  width: 122px;
+  height: auto;
+  border-radius: var(--radius-s);
+}
+
+.intro-welcome-text h2 { margin: 0 0 4px; font-size: 1.25rem; }
+.intro-welcome-text p  { margin: 0; font-size: 1rem; color: var(--ink-soft); }
+
+/* Zweiter Weg: bleibt erreichbar, konkurriert aber nicht mehr optisch mit
+   dem Hauptknopf. Grosse Tippflaeche (§9), ruhiges Aussehen. */
+.intro-quickstart-link {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  margin: 0 auto 4px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 0;
+  color: var(--accent-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.intro-quickstart-link:hover { color: var(--accent); }
+.intro-quickstart-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
 /* Wort-Erklärungen auf der Startseite (Leichte Sprache) */
 .intro-words {
@@ -4617,6 +4666,26 @@ body.simple-mode .practice-box {
     filter: brightness(0.88);
   }
 
+  /* Symbole hell einfärben.
+     Die 22 Dateien in assets/icons/ zeichnen mit stroke="currentColor".
+     Als <img> eingebunden hat currentColor keinen CSS-Kontext und fällt auf
+     Schwarz zurück – im Dark Mode standen dadurch schwarze Symbole auf
+     dunklen Karten (gemessen: 4760 von 4760 Symbol-Pixeln dunkel, also
+     praktisch unsichtbar). Betraf jede Stelle, die getIconHtml() nutzt.
+     .topic-icon img hatte diesen Filter schon – hier gilt er für alle. */
+  img[src^="assets/icons/"] {
+    filter: brightness(0) invert(1);
+  }
+
+  /* Ausnahme: die Themen-Felder sind im Dark Mode HELL (z. B. Limette
+     #a3e635, Gemessene Luminanz bis 221). Ein weißes Symbol darauf war
+     schon vorher kaum zu sehen. Hier also umgekehrt: dunkles Symbol auf
+     heller Fläche – dieselbe Logik wie --on-accent bei der Schrift.
+     Muss NACH der Regel darüber stehen (gleiche Spezifität). */
+  .topic-icon img {
+    filter: brightness(0);
+  }
+
   /* Lesson-Bilder und Piktogramme: sanfter Hintergrund statt weiß */
   .einfach-pictogram img,
   .topic-illustration,
@@ -4940,3 +5009,50 @@ body.simple-mode .practice-box {
   display: grid;
   place-items: center;
 }
+
+/* ============================================================
+   Kurze Frage nach den Lektionen + Abschluss-Selbstcheck
+   (August 2026, siehe renderMiniCheck / buildClosingSelfCheck)
+   ============================================================ */
+
+/* Rückmeldung zur kurzen Frage */
+.mini-feedback {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--surface-soft);
+  border: 2px solid var(--line);
+  border-left: 6px solid var(--good);
+  border-radius: var(--radius-s);
+}
+
+.mini-feedback.is-hidden { display: none; }
+
+.mini-feedback-text { margin: 0 0 12px; font-size: 1.02rem; }
+
+.mini-feedback .primary-action { width: 100%; }
+
+/* Die Antwort-Knöpfe der kurzen Frage bleiben nach der Wahl lesbar,
+   auch wenn sie deaktiviert sind – sonst verschwindet die Lösung. */
+.mini-answer[disabled] { opacity: 1; cursor: default; }
+
+/* Abschluss-Selbstcheck auf der Abschluss-Seite */
+.closing-sa-box { margin-top: 18px; }
+.closing-sa-box h3 { margin: 0 0 12px; }
+.closing-sa-box .sa-options { margin-bottom: 0; }
+
+.closing-sa[disabled] { opacity: 1; cursor: default; }
+
+.closing-sa.is-active {
+  background: var(--good-bg);
+  border-color: var(--good);
+  color: var(--good);
+}
+
+.closing-sa-result {
+  margin: 14px 0 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--good);
+}
+
+.closing-sa-result.is-hidden { display: none; }
