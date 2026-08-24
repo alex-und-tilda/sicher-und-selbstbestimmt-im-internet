@@ -5005,3 +5005,244 @@ body.simple-mode .practice-box {
 }
 
 .closing-sa-result.is-hidden { display: none; }
+
+/* ============================================================
+   Übungs-Handy (Szenarien)
+   Auf dem Handy KEIN Rahmen: dort ist die App schon das Gerät,
+   ein zweites Gerät drumherum kostet nur Platz und macht die
+   Knöpfe kleiner als die 58 px aus §9. Erst ab Tablet-Breite
+   wird ein Rahmen gezeichnet – da hilft er (auch am Beamer).
+   Alle Farben über Tokens, damit der Dark Mode mitkommt (§10).
+   ============================================================ */
+
+/* Das Band steht IMMER über dem Bildschirm, nicht nur am Anfang.
+   Wer mitten im Verlauf einsteigt, muss es auch sehen (§3). */
+.sz-fake-band {
+  margin: 0 0 10px;
+  padding: 10px 16px;
+  border: 2px dashed var(--warn);
+  border-radius: var(--radius-s);
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.sz-count {
+  margin: 0 0 10px;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.phone {
+  margin: 0 0 18px;
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+  border: 2px solid var(--line);
+  overflow: hidden;
+}
+
+.phone-bar {
+  margin: 0;
+  padding: 8px 16px;
+  background: var(--line);
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.phone-screen {
+  padding: 14px 14px 4px;
+}
+
+/* Ab Tablet: erkennbares Gerät, mittig, mit Griffleiste unten. */
+@media (min-width: 700px) {
+  .phone {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 10px;
+    border-radius: 34px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+    padding-bottom: 14px;
+    position: relative;
+  }
+  .phone::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+  }
+}
+
+/* ---- Sprechblasen ---- */
+.sz-bubble {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-s);
+  border: 2px solid var(--line);
+  background: var(--surface);
+  max-width: 92%;
+}
+
+.sz-in  { margin-right: auto; }
+.sz-out {
+  margin-left: auto;
+  background: var(--accent-soft, var(--surface-soft));
+  border-color: var(--accent);
+}
+
+.sz-von {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.sz-text {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* ---- Nachrichten-Liste (Posteingang) ---- */
+.sz-listeneintrag {
+  padding: 12px 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+/* ---- Einstellungs-Zeile ---- */
+.sz-schalter {
+  padding: 12px 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+.sz-schalter-name  { margin: 0 0 4px; font-size: 1.05rem; font-weight: 700; }
+.sz-schalter-wert  { margin: 0; font-size: 1rem; color: var(--ink-soft); }
+.sz-schalter-hinweis { margin: 6px 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+
+/* ---- Anruf ---- */
+.sz-anruf {
+  padding: 20px 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  text-align: center;
+}
+
+.sz-anruf-symbol { display: block; margin: 0 auto 8px; width: 44px; height: 44px; }
+.sz-anruf-symbol img,
+.sz-anruf-symbol svg { width: 44px; height: 44px; }
+.sz-anruf-von  { margin: 0 0 4px; font-size: 1rem; color: var(--ink-soft); }
+.sz-anruf-name { margin: 0 0 4px; font-size: 1.15rem; font-weight: 700; }
+.sz-anruf-nr  { margin: 0; font-size: 1rem; color: var(--ink-soft); }
+
+/* ---- Shop ---- */
+.sz-shop {
+  padding: 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+.sz-shop-titel { margin: 0 0 4px; font-size: 1.1rem; font-weight: 700; }
+.sz-shop-preis { margin: 0 0 8px; font-size: 1.4rem; font-weight: 700; color: var(--accent-dark); }
+.sz-shop-liste { margin: 0; padding-left: 22px; }
+.sz-shop-liste li { font-size: 1rem; line-height: 1.5; margin-bottom: 4px; }
+
+/* ---- Video ---- */
+.sz-video {
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.sz-video-bild {
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--line);
+  font-size: 2rem;
+  color: var(--ink-soft);
+}
+
+.sz-video-titel   { margin: 10px 14px 4px; font-size: 1.08rem; font-weight: 700; }
+.sz-video-meta    { margin: 0 14px 4px; font-size: 0.95rem; color: var(--ink-soft); }
+.sz-video-hinweis { margin: 0 14px 12px; font-size: 0.95rem; color: var(--ink-soft); }
+
+.sz-hinweis {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-left: 5px solid var(--accent);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  background: var(--surface);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* ---- Frage und Rückmeldung ---- */
+.sz-frage { margin: 0 0 14px; }
+
+.sz-frage-text {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.sz-answer.is-correct {
+  border-color: var(--good);
+  background: var(--good-bg);
+}
+
+.sz-answer.is-wrong {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+}
+
+.sz-answer:disabled { cursor: default; opacity: 1; }
+
+.sz-feedback {
+  margin: 0 0 14px;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.sz-feedback.is-correct { border-color: var(--good); background: var(--good-bg); }
+.sz-feedback.is-wrong   { border-color: var(--warn); background: var(--warn-bg); }
+.sz-feedback.is-hidden  { display: none; }
+
+.sz-feedback-kopf { margin: 0 0 6px; font-size: 1.1rem; font-weight: 700; }
+.sz-feedback.is-correct .sz-feedback-kopf { color: var(--good); }
+.sz-feedback.is-wrong   .sz-feedback-kopf { color: var(--warn); }
+.sz-feedback-text { margin: 0 0 8px; font-size: 1.05rem; line-height: 1.5; }
+.sz-feedback-merk { margin: 0; font-size: 1.05rem; font-weight: 700; }
+
+.sz-merkliste { margin: 0; padding-left: 22px; }
+.sz-merkliste li { font-size: 1.05rem; line-height: 1.55; margin-bottom: 6px; }
+
+.sz-exit { margin-top: 6px; }
+
+@media print {
+  .phone { break-inside: avoid; }
+}

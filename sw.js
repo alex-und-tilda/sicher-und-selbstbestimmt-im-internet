@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-11j";
+const CACHE_VERSION = "v2026-11k";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -21,6 +21,7 @@ const PRECACHE_URLS = [
   "./topics.js",
   "./content-de.js",
   "./begleitung-de.js",
+  "./szenarien-de.js",
   "./favicon.svg",
   "./manifest.webmanifest",
   "./404.html",

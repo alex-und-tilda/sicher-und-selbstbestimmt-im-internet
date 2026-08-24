@@ -1226,6 +1226,11 @@ function updateReadingStatus(text) {
    Nutzungen (Auswahl, Satztrennung, collectReadableText) nicht auseinanderlaufen. */
 const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
 
+/* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
+   frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
+   warf damit "readCardSvg is not defined". */
+const READ_CARD_SVG = `<svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+
 function cleanSpeechText(text) {
   return String(text || "")
     .replace(/\s+/g, " ")
@@ -2676,7 +2681,7 @@ function renderMyPath() {
       </div>`;
   }
 
-  const readCardSvg = `<svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+  const readCardSvg = READ_CARD_SVG;
 
   content.innerHTML = `
     <section class="start-page">
@@ -2705,6 +2710,14 @@ function renderMyPath() {
               <span class="action-title">Wiederholen</span>
               <span class="action-desc">Fragen aus deinen Themen.</span>
               <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Wiederholen. Fragen aus deinen Themen." aria-label="Wiederholen vorlesen">${readCardSvg} Vorlesen</span>
+            </span>
+          </button>
+          <button type="button" class="action-card" onclick="renderScenarioChooser()">
+            <span class="action-icon" aria-hidden="true">${getIconHtml("start")}</span>
+            <span class="action-text">
+              <span class="action-title">Übungs-Handy</span>
+              <span class="action-desc">Üben wie auf dem Handy.</span>
+              <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="Übungs-Handy. Üben wie auf dem Handy." aria-label="Übungs-Handy vorlesen">${readCardSvg} Vorlesen</span>
             </span>
           </button>
           <button type="button" class="action-card" onclick="startTrainingInbox()">
@@ -3223,6 +3236,9 @@ function renderTopicChoice(topicId) {
         const laterChip = (label, click) => `<button type="button" class="later-chip" onclick="${click}">${label}</button>`;
         const training = (topic.id === "betrug" || topic.id === "fakes")
           ? laterChip("Trainings-Postfach", "startTrainingInbox()") : "";
+        /* Uebungs-Handy: jedes Thema hat ein eigenes Szenario (szenarien-de.js). */
+        const uebung = hasScenario(topic.id)
+          ? laterChip("Übungs-Handy", `startScenario('${escapeHtml(topic.id)}')`) : "";
         const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`);
 
         const amountToggle = `
@@ -3242,7 +3258,7 @@ function renderTopicChoice(topicId) {
             <div class="later-row">
               ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
               ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
-              ${merkChip}${training}
+              ${merkChip}${uebung}${training}
             </div>`;
         }
         if (done) {
@@ -3252,7 +3268,7 @@ function renderTopicChoice(topicId) {
             <p class="later-title">Oder:</p>
             <div class="later-row">
               ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
-              ${merkChip}${training}
+              ${merkChip}${uebung}${training}
             </div>`;
         }
         return `
@@ -3261,7 +3277,7 @@ function renderTopicChoice(topicId) {
           <p class="later-title">Für später:</p>
           <div class="later-row">
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
-            ${merkChip}${training}
+            ${merkChip}${uebung}${training}
           </div>`;
       })()}
 
@@ -4734,6 +4750,363 @@ function renderTrainingResult() {
 }
 
 /* ============================================================
+   Übungs-Handy – Szenarien zu den Themen
+   Ein nachgebauter Handy-Bildschirm, in dem man gefahrlos
+   handelt statt nur wiederzuerkennen (§3 UDL: Handlung).
+   Daten: szenarien-de.js (SCENARIOS[themaId]).
+
+   Regeln, die hier verbindlich sind:
+   - Das Band "Das ist nicht echt" steht IMMER da, nicht nur am Anfang.
+   - Keine Zeitlimits, kein Countdown (§9 COGA). Der Text darf von
+     Druck erzaehlen, die Oberflaeche uebt keinen aus.
+   - Nur Tippen, kein Wischen: Wischgesten sind mit Tastatur nicht
+     bedienbar.
+   - Ein falscher Tipp verliert nichts. Er erklaert und laesst
+     weitermachen (§4 ressourcenorientiert).
+   - Genau EIN data-readable-Container pro Seite, sonst liest der
+     Vorlese-Knopf nur den ersten.
+   ============================================================ */
+
+let scenarioTopicId = null;
+let scenarioIndex   = 0;
+let scenarioRight   = 0;
+let scenarioAnswered = false;
+
+function getScenario(topicId) {
+  return (typeof SCENARIOS !== "undefined" && SCENARIOS && SCENARIOS[topicId]) ? SCENARIOS[topicId] : null;
+}
+
+function hasScenario(topicId) {
+  const s = getScenario(topicId);
+  return !!(s && Array.isArray(s.szenen) && s.szenen.length);
+}
+
+/* ---- Bausteine des Bildschirms ---- */
+
+function scenarioElementHtml(el) {
+  if (!el || !el.typ) return "";
+  switch (el.typ) {
+    case "nachricht":
+      return `
+        <div class="sz-bubble sz-in">
+          <p class="sz-von">Von: ${escapeHtml(el.von || "Unbekannt")}${el.zeit ? " · " + escapeHtml(el.zeit) : ""}</p>
+          <p class="sz-text">${escapeHtml(el.text || "")}</p>
+        </div>`;
+    case "eigene":
+      return `
+        <div class="sz-bubble sz-out">
+          <p class="sz-von">Deine Antwort</p>
+          <p class="sz-text">${escapeHtml(el.text || "")}</p>
+        </div>`;
+    case "liste":
+      return `
+        <div class="sz-liste">
+          ${(el.eintraege || []).map(e => `
+            <div class="sz-listeneintrag">
+              <p class="sz-von">${escapeHtml(e.von || "")}${e.zeit ? " · " + escapeHtml(e.zeit) : ""}</p>
+              <p class="sz-text">${escapeHtml(e.vorschau || "")}</p>
+            </div>`).join("")}
+        </div>`;
+    case "schalter":
+      return `
+        <div class="sz-schalter">
+          <p class="sz-schalter-name">${escapeHtml(el.label || "")}</p>
+          <p class="sz-schalter-wert">Jetzt eingestellt: ${escapeHtml(el.wert || "")}</p>
+          ${el.hinweis ? `<p class="sz-schalter-hinweis">${escapeHtml(el.hinweis)}</p>` : ""}
+        </div>`;
+    case "anruf":
+      return `
+        <div class="sz-anruf">
+          <span class="sz-anruf-symbol" aria-hidden="true">${getIconHtml("message")}</span>
+          <p class="sz-anruf-von">Eingehender Anruf</p>
+          <p class="sz-anruf-name">${escapeHtml(el.von || "Unbekannt")}</p>
+          <p class="sz-anruf-nr">${escapeHtml(el.nummer || "")}</p>
+        </div>`;
+    case "shop":
+      return `
+        <div class="sz-shop">
+          <p class="sz-shop-titel">${escapeHtml(el.titel || "")}</p>
+          <p class="sz-shop-preis">${escapeHtml(el.preis || "")}</p>
+          ${(el.zeilen && el.zeilen.length) ? `<ul class="sz-shop-liste">${el.zeilen.map(z => `<li>${escapeHtml(z)}</li>`).join("")}</ul>` : ""}
+        </div>`;
+    case "video":
+      return `
+        <div class="sz-video">
+          <div class="sz-video-bild" aria-hidden="true"><span>&#9654;</span></div>
+          <p class="sz-video-titel">${escapeHtml(el.titel || "")}</p>
+          <p class="sz-video-meta">${escapeHtml(el.kanal || "")}${el.dauer ? " · " + escapeHtml(el.dauer) : ""}</p>
+          ${el.hinweis ? `<p class="sz-video-hinweis">${escapeHtml(el.hinweis)}</p>` : ""}
+        </div>`;
+    case "hinweis":
+      return `<p class="sz-hinweis">${escapeHtml(el.text || "")}</p>`;
+    default:
+      return "";
+  }
+}
+
+/* Chat sammelt den Verlauf an, alle anderen Typen ersetzen den Bildschirm. */
+function scenarioElements(scn, bis) {
+  const out = [];
+  if (scn.typ === "chat") {
+    for (let i = 0; i <= bis && i < scn.szenen.length; i++) out.push(...(scn.szenen[i].inhalt || []));
+  } else {
+    out.push(...((scn.szenen[bis] || {}).inhalt || []));
+  }
+  return out;
+}
+
+function buildScenarioScreen(scn, bis) {
+  const inhalt = scenarioElements(scn, bis).map(scenarioElementHtml).join("");
+  return `
+    <p class="sz-fake-band">Das ist nicht echt. Das ist nur zum Üben.</p>
+    <div class="phone">
+      <p class="phone-bar">${escapeHtml(scn.kanal || "Übung")}</p>
+      <div class="phone-screen">${inhalt}</div>
+    </div>`;
+}
+
+/* ---- Seiten ---- */
+
+/* Auswahlseite: welches Uebungs-Handy? Karten statt Liste, damit der
+   Vorlese-Knopf sie als Ganzes vorliest (KARTEN_SELEKTOR). */
+function renderScenarioChooser() {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  showNav(false, false);
+  setHeader("Übungs-Handy", "", "Üben", "", 0);
+  setOrientation("Du bist im Übungs-Handy. Wähle ein Thema zum Üben.");
+  rememberRoute("uebung");
+
+  const karten = topics
+    .filter(t => hasScenario(t.id))
+    .map(t => {
+      const scn = getScenario(t.id);
+      const text = `${t.title}. ${scn.titel}.`;
+      return `
+        <button type="button" class="action-card" style="${getTopicColorStyle(t.id)}" onclick="startScenario('${escapeHtml(t.id)}')">
+          <span class="action-icon" aria-hidden="true">${getIconHtml(t.icon || "start")}</span>
+          <span class="action-text">
+            <span class="action-title">${escapeHtml(t.title)}</span>
+            <span class="action-desc">${escapeHtml(scn.titel)}</span>
+            <span class="card-read-button card-read-button--path" role="button" tabindex="0" data-read-card-text="${escapeHtml(text)}" aria-label="${escapeHtml(t.title)} vorlesen">${READ_CARD_SVG} Vorlesen</span>
+          </span>
+        </button>`;
+    }).join("");
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    <article class="card" data-readable="true">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml("start")}</span>
+        <h2>Übungs-Handy</h2>
+      </div>
+      <p>Hier übst du wie auf einem Handy.</p>
+      <p>Du siehst Nachrichten, Einstellungen oder einen Shop.</p>
+      <p>Du entscheidest. Nichts davon ist echt.</p>
+      <h3>Wähle ein Thema</h3>
+      <div class="action-grid">${karten}</div>
+      <div class="certificate-actions">
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function startScenario(topicId) {
+  stopReading();
+  const topic = getTopicById(topicId);
+  const scn = getScenario(topicId);
+  if (!topic || !scn) return renderMenu();
+
+  currentTopicId = topic.id;
+  scenarioTopicId = topic.id;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  showNav(false, false);
+  setHeader(topic.title, "Übungs-Handy", "Üben", "", 0);
+  setOrientation(`Du bist im Übungs-Handy zum Thema: ${topic.title}.`);
+  rememberRoute(topic.id + ":uebung");
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    <article class="card scenario-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
+        <h2>Übungs-Handy: ${escapeHtml(scn.titel || topic.title)}</h2>
+      </div>
+      ${(scn.einstieg || []).map(s => `<p>${escapeHtml(s)}</p>`).join("")}
+      <div class="access-box remember remember-box">
+        <h3>Wichtig</h3>
+        <p class="remember-text">Alles hier ist erfunden. Es gibt keine Zeit-Grenze. Fehler sind erlaubt. Du kannst jederzeit aufhören.</p>
+      </div>
+      <div class="certificate-actions">
+        <button type="button" class="quiz-link quiz-button" onclick="beginScenario()">Üben starten</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function beginScenario() {
+  scenarioIndex = 0;
+  scenarioRight = 0;
+  renderScenarioScene();
+}
+
+function renderScenarioScene() {
+  stopReading();
+  const topic = getTopicById(scenarioTopicId);
+  const scn = getScenario(scenarioTopicId);
+  if (!topic || !scn) return renderMenu();
+  if (scenarioIndex >= scn.szenen.length) return renderScenarioResult();
+
+  const szene = scn.szenen[scenarioIndex];
+  const total = scn.szenen.length;
+  const frage = szene.frage || null;
+  scenarioAnswered = false;
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  showNav(false, false);
+  setHeader(topic.title, "Übungs-Handy", `Schritt ${scenarioIndex + 1} von ${total}`, "Üben",
+            Math.round((scenarioIndex / total) * 100));
+  setOrientation(`Übungs-Handy: ${topic.title}. Schritt ${scenarioIndex + 1} von ${total}.`);
+
+  const antworten = frage
+    ? (frage.answers || []).map((a, i) => `
+        <button type="button" class="answer-option sz-answer" data-index="${i}">
+          ${answerNumBadge(i)}${answerPikto(a)}<span class="answer-text">${escapeHtml(answerText(a))}</span>
+        </button>`).join("")
+    : "";
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    <article class="card scenario-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <p class="sz-count">Schritt ${scenarioIndex + 1} von ${total}</p>
+      ${buildScenarioScreen(scn, scenarioIndex)}
+      ${frage ? `
+        <div class="sz-frage">
+          ${questionPikto(frage)}<p class="sz-frage-text">${escapeHtml(frage.question || "")}</p>
+          <div class="answers">${antworten}</div>
+        </div>
+        <div id="szFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
+      ` : `
+        <div class="certificate-actions">
+          <button type="button" class="nav-button primary" onclick="nextScenarioScene()">Weiter</button>
+        </div>`}
+      <div class="certificate-actions sz-exit">
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Üben beenden</button>
+      </div>
+    </article>
+  `;
+
+  content.querySelectorAll(".sz-answer").forEach(btn => {
+    btn.addEventListener("click", () => answerScenario(Number(btn.dataset.index)));
+  });
+
+  focusContent();
+  renderLegalFooter();
+}
+
+function answerScenario(index) {
+  if (scenarioAnswered) return;
+  const scn = getScenario(scenarioTopicId);
+  if (!scn) return;
+  const frage = (scn.szenen[scenarioIndex] || {}).frage;
+  if (!frage) return;
+
+  scenarioAnswered = true;
+  const richtig = index === Number(frage.correctIndex ?? 0);
+  if (richtig) scenarioRight += 1;
+  playSound(richtig ? "correct" : "wrong");
+
+  content.querySelectorAll(".sz-answer").forEach((b, i) => {
+    b.disabled = true;
+    if (i === index) b.classList.add(richtig ? "is-correct" : "is-wrong");
+    if (!richtig && i === Number(frage.correctIndex ?? 0)) b.classList.add("is-correct");
+  });
+
+  const text = richtig
+    ? (frage.feedbackCorrect || "Das war sicher. Gut gemacht.")
+    : (frage.feedbackWrong || "Das ist nicht sicher. Schau noch einmal.");
+  const letzte = scenarioIndex >= scn.szenen.length - 1;
+
+  const feld = document.getElementById("szFeedback");
+  if (!feld) return;
+  feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
+  feld.innerHTML = `
+    <p class="sz-feedback-kopf">${richtig ? "Richtig." : "Noch nicht sicher."}</p>
+    <p class="sz-feedback-text">${escapeHtml(text)}</p>
+    ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
+    <div class="certificate-actions">
+      <button type="button" class="nav-button primary" onclick="nextScenarioScene()">${letzte ? "Zum Ergebnis" : "Weiter"}</button>
+    </div>`;
+  const weiter = feld.querySelector("button");
+  if (weiter) weiter.focus();
+}
+
+function nextScenarioScene() {
+  scenarioIndex += 1;
+  renderScenarioScene();
+}
+
+function renderScenarioResult() {
+  stopReading();
+  const topic = getTopicById(scenarioTopicId);
+  const scn = getScenario(scenarioTopicId);
+  if (!topic || !scn) return renderMenu();
+  const total = scn.szenen.filter(s => s.frage).length || 1;
+  playSound("success");
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  showNav(false, false);
+  setHeader(topic.title, "Übungs-Handy", "Ergebnis", "Fertig", 100);
+  setOrientation(`Geschafft! Du hast im Übungs-Handy geübt: ${topic.title}.`);
+
+  const lob = scenarioRight === total
+    ? "Alle Entscheidungen sicher getroffen. Das war stark!"
+    : scenarioRight >= Math.ceil(total / 2)
+      ? "Das war schon sehr gut. Jedes Üben macht dich sicherer."
+      : "Gut, dass du geübt hast. Das ist schwer. Du kannst es gleich noch einmal machen.";
+
+  const merksaetze = scn.szenen
+    .filter(s => s.frage && s.frage.remember)
+    .map(s => `<li>${escapeHtml(s.frage.remember)}</li>`).join("");
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    <article class="card quiz-result-card scenario-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <h2>Übungs-Handy – fertig!</h2>
+      <p>Du hast ${scenarioRight} von ${total} Entscheidungen sicher getroffen.</p>
+      <p>${escapeHtml(lob)}</p>
+      ${scn.abschluss ? `<p>${escapeHtml(scn.abschluss)}</p>` : ""}
+      ${merksaetze ? `
+      <div class="access-box remember remember-box">
+        <h3>Das nimmst du mit</h3>
+        <ul class="sz-merkliste">${merksaetze}</ul>
+      </div>` : ""}
+      <div class="access-box remember remember-box">
+        <h3>Wichtig</h3>
+        <p class="remember-text">Passiert dir so etwas wirklich? Zeige es einer Person, der du vertraust. Du musst nichts allein entscheiden.</p>
+      </div>
+      <div class="certificate-actions">
+        <button type="button" class="quiz-link quiz-button" onclick="beginScenario()">Noch einmal üben</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
    Urkunde – zum Ausdrucken, Name wird von Hand geschrieben
    ============================================================ */
 
@@ -4968,6 +5341,7 @@ function handleHash() {
     if (hash === "wiederholen") return startRepeatQuiz();
     if (hash === "training") return startTrainingInbox();
     if (hash === "merk-alle") return renderAllMemoryCards();
+    if (hash === "uebung") return renderScenarioChooser();
 
     const [topicId, action] = hash.split(":");
     const topic = getTopicById(topicId);
@@ -4976,6 +5350,7 @@ function handleHash() {
     if (action === "kurz" || action === "short") return startTopicMode(topicId, "short");
     if (action === "quiz") return startQuiz(topicId);
     if (action === "merk" || action === "memory") return renderMemoryCard(topicId);
+    if (action === "uebung") return startScenario(topicId);
     return renderTopicChoice(topicId);
   } finally {
     handlingRoute = false;
