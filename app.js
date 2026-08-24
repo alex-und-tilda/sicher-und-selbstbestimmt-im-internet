@@ -752,9 +752,14 @@ const TOPIC_COLORS = {
   youtube:     ["#CC0000", "rgba(255, 0, 0, 0.24)",     "rgba(255, 0, 0, 0.09)",    "#FFECEC"],
   snapchat:    ["#A88A00", "rgba(255, 252, 0, 0.42)",   "rgba(255, 252, 0, 0.18)",  "#FFFBD1"],
   tiktok:      ["#111111", "rgba(37, 244, 238, 0.34)",  "rgba(37, 244, 238, 0.12)", "#E8FFFF"],
-  hilfe:       ["#C9541C", "rgba(201, 84, 28, 0.30)",   "rgba(201, 84, 28, 0.12)",  "#FFF0E8"],
+  /* Hilfe war #C9541C – nur ΔE 9 von der Warnfarbe --warn entfernt. Ausgerechnet
+     das Hilfe-Thema sah damit nach Warnung aus. Jetzt ruhiges Petrol
+     (ΔE 40 zum naechsten Ton), 5,4:1 auf Weiss. */
+  hilfe:       ["#0E7490", "rgba(14, 116, 144, 0.30)",  "rgba(14, 116, 144, 0.12)", "#E7F3F7"],
   ki:          ["#6B3FA0", "rgba(107, 63, 160, 0.28)",  "rgba(107, 63, 160, 0.10)", "#F1EAFA"],
-  fakes:       ["#B45309", "rgba(180, 83, 9, 0.28)",    "rgba(180, 83, 9, 0.10)",   "#FDF1E0"],
+  /* Fakes war #B45309 – exakt die Warnfarbe --warn. Ein Thema sah damit aus
+     wie ein Warnhinweis. Jetzt warmes Braun (ΔE 29 zu --warn), 5,9:1 auf Weiss. */
+  fakes:       ["#8A5A2B", "rgba(138, 90, 43, 0.28)",   "rgba(138, 90, 43, 0.10)",  "#F6EFE7"],
   /* Betrug war #B91C1C – derselbe Farbton wie YouTube #CC0000 (beide Hue 0), im Dark
      Mode sogar derselbe Wert. Jetzt Rose (Hue 342), 8,0:1 auf Weiss. */
   betrug:      ["#9F1239", "rgba(159, 18, 57, 0.26)",   "rgba(159, 18, 57, 0.10)",  "#FBE9EE"],
@@ -766,13 +771,21 @@ const TOPIC_COLORS = {
 /* Hellere Farben für Dark-Mode (auf dunkelm Hintergrund besser lesbar) */
 const TOPIC_COLORS_DARK = {
   datenschutz: ["#58a8e0", "rgba(88,168,224,0.30)",  "rgba(88,168,224,0.12)",  "rgba(88,168,224,0.15)"],
-  whatsapp:    ["#4ade80", "rgba(74,222,128,0.30)",  "rgba(74,222,128,0.12)",  "rgba(74,222,128,0.15)"],
+  /* war #4ade80 = exakt --good. Ein gruenes WhatsApp-Thema sah aus wie eine
+     Richtig-Rueckmeldung. Jetzt Teal-Gruen (ΔE 32 zu --good), 7,1:1 auf
+     --surface – und naeher an WhatsApps heutiger Markenfarbe #00A884. */
+  whatsapp:    ["#00c9a7", "rgba(0,201,167,0.30)",   "rgba(0,201,167,0.12)",   "rgba(0,201,167,0.15)"],
   facebook:    ["#60a5fa", "rgba(96,165,250,0.30)",  "rgba(96,165,250,0.12)",  "rgba(96,165,250,0.15)"],
   instagram:   ["#f472b6", "rgba(244,114,182,0.30)", "rgba(244,114,182,0.12)", "rgba(244,114,182,0.15)"],
-  youtube:     ["#f87171", "rgba(248,113,113,0.30)", "rgba(248,113,113,0.12)", "rgba(248,113,113,0.15)"],
+  /* war #f87171 = exakt --bad. Jetzt Koralle (ΔE 22 zu --bad), 7,5:1 auf
+     --surface. Weiter auseinander geht im Dark Mode nicht, ohne unter AA zu
+     fallen oder mit hilfe/betrug zu kollidieren – siehe Notiz im Memory. */
+  youtube:     ["#ff9e80", "rgba(255,158,128,0.30)", "rgba(255,158,128,0.12)", "rgba(255,158,128,0.15)"],
   snapchat:    ["#fde047", "rgba(253,224,71,0.30)",  "rgba(253,224,71,0.12)",  "rgba(253,224,71,0.15)"],
   tiktok:      ["#a5f3fc", "rgba(165,243,252,0.30)", "rgba(165,243,252,0.12)", "rgba(165,243,252,0.15)"],
-  hilfe:       ["#fb923c", "rgba(251,146,60,0.30)",  "rgba(251,146,60,0.12)",  "rgba(251,146,60,0.15)"],
+  /* war #fb923c – ΔE 13 zu --warn. Jetzt Petrol wie in hell, damit das Thema
+     in beiden Modi dieselbe Identitaet hat. 6,2:1 auf --surface. */
+  hilfe:       ["#06b6d4", "rgba(6,182,212,0.30)",   "rgba(6,182,212,0.12)",   "rgba(6,182,212,0.15)"],
   ki:          ["#c084fc", "rgba(192,132,252,0.30)", "rgba(192,132,252,0.12)", "rgba(192,132,252,0.15)"],
   fakes:       ["#fbbf24", "rgba(251,191,36,0.30)",  "rgba(251,191,36,0.12)",  "rgba(251,191,36,0.15)"],
   /* war #f87171 = exakt YouTube. Jetzt Rose, 8,0:1 auf --surface. */
@@ -1225,6 +1238,10 @@ function updateReadingStatus(text) {
    werden – siehe readCurrentPage(). An EINER Stelle definiert, damit die drei
    Nutzungen (Auswahl, Satztrennung, collectReadableText) nicht auseinanderlaufen. */
 const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
+/* Handlungs-Knoepfe, die mitgelesen werden. Sie bestehen aus mehreren
+   Teilen (<strong>Kurz</strong><span>Nur das Wichtigste.</span>) und muessen
+   wie Karten zerlegt werden – sonst spricht die Stimme "KurzNur". */
+const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -1286,13 +1303,26 @@ function readCurrentPage(rate) {
      Die Karten kommen als Ganzes in die Warteschlange, werden also auch
      hervorgehoben und ins Bild gescrollt (Mitlesen, §3). */
   const KARTE = KARTEN_SELEKTOR;
+  /* Handlungs-Knoepfe auf dem Themen-Einstieg. Ohne sie hoerte eine nicht
+     lesende Person den Themen-Text, aber nie "Lernen starten", "Kurz/Mehr"
+     oder "Quiz machen" – die Seite blieb fuer sie eine Sackgasse. */
+  const AKTION = AKTION_SELEKTOR;
   const els = root
-    ? Array.from(root.querySelectorAll("h2, h3, p, li, " + OPTION + ", " + KARTE)).filter(el => {
+    ? Array.from(root.querySelectorAll("h2, h3, p, li, " + OPTION + ", " + KARTE + ", " + AKTION)).filter(el => {
         const isOption = el.matches(OPTION);
         const isKarte = el.matches(KARTE);
-        if (!isOption && !isKarte && el.closest(".reading-toolbar, nav, footer, button")) return false;
+        const isAktion = el.matches(AKTION);
+        /* Nichts vorlesen, was gerade zugeklappt ist: der Begleit-Bereich
+           enthaelt Fachtexte (DigComp, ICF) und ist fast 4000 px hoch. Sein
+           Kasten hat overflow:hidden – die Kinder behalten dadurch eine
+           Groesse, obwohl sie niemand sieht. Nur auf <details open> pruefen. */
+        if (el.closest(".companion-panel")) return false;
+        if (el.closest("details:not([open])")) return false;
+        if (el.closest(".is-hidden, [hidden]")) return false;
+        if (!isOption && !isKarte && !isAktion && el.closest(".reading-toolbar, nav, footer, button")) return false;
         /* Text INNERHALB einer Karte nicht zusaetzlich einzeln lesen */
         if (!isKarte && el.closest(KARTE)) return false;
+        if (!isAktion && el.closest(AKTION)) return false;
         return cleanSpeechText(el.textContent).length > 0;
       })
     : [];
@@ -1362,7 +1392,7 @@ function speakNextSentence(gen) {
   let roherText;
   if (istPseudo) {
     roherText = el.pseudoText;
-  } else if (el.matches && el.matches(KARTEN_SELEKTOR)) {
+  } else if (el.matches && (el.matches(KARTEN_SELEKTOR) || el.matches(AKTION_SELEKTOR))) {
     roherText = prefix + kartenText(el);
   } else if (el.querySelector && el.querySelector(".answer-num, .card-read-button")) {
     /* Auch bei Karten: der eingebaute Vorlese-Knopf darf nicht mitgesprochen
@@ -3173,6 +3203,7 @@ function buildCompanionPanel(topic) {
         <button type="button" class="companion-print" onclick="printCompanion('${escapeHtml(topic.id)}')">🖨 Drucken / als PDF speichern</button>
         <button type="button" class="companion-print" onclick="printQrCards()">🖨 QR-Karten für alle Themen drucken</button>
         <p class="companion-intro"><a href="beobachtungsbogen.html">Beobachtungsbogen für Prüfgruppen-Sitzungen</a> – strukturierte, datensparsame Beobachtung zum Ausdrucken.</p>
+        <p class="companion-intro"><a href="pruefaufgaben.html">Prüf-Aufgaben für die Begleitung</a> – konkrete Aufgaben mit Erfolgskriterium und Wort-Test, zum Ausdrucken.</p>
         <p class="companion-intro"><a href="pruefheft.html">Prüf-Heft für Klientinnen und Klienten</a> – Aufgaben in Leichter Sprache mit Smiley-Antworten, zum Ausdrucken.</p>
       </div>
     </details>`;
@@ -3212,10 +3243,10 @@ function renderTopicChoice(topicId) {
   showNav(false, false);
 
   content.innerHTML = `
-    <section class="topic-choice" style="${getTopicColorStyle(topic.id)}">
+    <section class="topic-choice" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <button type="button" class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
       ${buildReadingToolbar()}
-      <article class="card topic-intro-card" data-readable="true">
+      <article class="card topic-intro-card">
         ${getIllustrationHtml(topic)}
         <div class="symbol-heading">
           <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
@@ -3415,6 +3446,10 @@ function getLessonsForMode(topic, mode) {
     if (Array.isArray(topic.einfachLessons) && topic.einfachLessons.length) {
       return topic.einfachLessons;
     }
+    /* Rueckfallebene fuer Themen OHNE einfachLessons. Aktuell haben alle 12
+       welche, das Feld shortLessonIndexes wurde deshalb aus topics.js
+       entfernt. Der Zweig bleibt, damit ein spaeteres Thema ohne eigene
+       Kurzfassung nicht ins Leere laeuft. */
     if (Array.isArray(topic.shortLessonIndexes)) {
       return topic.shortLessonIndexes.map(index => topic.lessons[index]).filter(Boolean);
     }

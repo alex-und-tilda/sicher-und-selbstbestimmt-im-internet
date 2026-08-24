@@ -704,18 +704,6 @@ const topics = [
       "Ich mache langsam bei komischen Nachrichten.",
       "Ich darf mir Unterstützung holen."
     ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      3,
-      4,
-      5,
-      7,
-      9,
-      10,
-      11,
-      12
-    ],
     "qrLink": "index.html#datenschutz",
     "qrShortLink": "index.html#datenschutz:kurz",
     "qrQuizLink": "index.html#datenschutz:quiz",
@@ -1326,16 +1314,6 @@ const topics = [
       "Ich prüfe Fotos vor dem Senden.",
       "Ich mache Pause bei Stress."
     ],
-    "shortLessonIndexes": [
-      0,
-      2,
-      4,
-      5,
-      7,
-      8,
-      10,
-      11
-    ],
     "qrLink": "index.html#whatsapp",
     "qrShortLink": "index.html#whatsapp:kurz",
     "qrQuizLink": "index.html#whatsapp:quiz",
@@ -1873,15 +1851,6 @@ const topics = [
       "Ich prüfe Freundschafts-Anfragen.",
       "Ich schreibe respektvoll.",
       "Ich hole Unterstützung bei Beleidigungen."
-    ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      2,
-      4,
-      6,
-      7,
-      8
     ],
     "qrLink": "index.html#facebook",
     "qrShortLink": "index.html#facebook:kurz",
@@ -2421,15 +2390,6 @@ const topics = [
       "Ich schicke fremden Personen keine privaten Fotos.",
       "Ich hole Unterstützung bei verletzenden Kommentaren."
     ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      4,
-      5,
-      6,
-      8,
-      9
-    ],
     "qrLink": "index.html#instagram",
     "qrShortLink": "index.html#instagram:kurz",
     "qrQuizLink": "index.html#instagram:quiz",
@@ -2940,17 +2900,6 @@ const topics = [
       "Ich mache gefährliche Dinge nicht nach.",
       "Ich darf Videos stoppen."
     ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      7,
-      8,
-      9
-    ],
     "qrLink": "index.html#youtube",
     "qrShortLink": "index.html#youtube:kurz",
     "qrQuizLink": "index.html#youtube:quiz",
@@ -3427,15 +3376,6 @@ const topics = [
       "Ich schütze meinen Standort.",
       "Ich prüfe Kontakte.",
       "Ich sage Nein bei Druck."
-    ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      3,
-      4,
-      6,
-      7,
-      8
     ],
     "qrLink": "index.html#snapchat",
     "qrShortLink": "index.html#snapchat:kurz",
@@ -3967,17 +3907,6 @@ const topics = [
       "Ich prüfe Videos vor dem Posten.",
       "Nicht jedes Video ist echt."
     ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      2,
-      4,
-      5,
-      7,
-      8,
-      9,
-      10
-    ],
     "qrLink": "index.html#tiktok",
     "qrShortLink": "index.html#tiktok:kurz",
     "qrQuizLink": "index.html#tiktok:quiz",
@@ -4507,15 +4436,6 @@ const topics = [
       "Ich zeige die Nachricht.",
       "Ich hole Unterstützung.",
       "Ich bin nicht allein."
-    ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      2,
-      4,
-      6,
-      7,
-      9
     ],
     "qrLink": "index.html#hilfe",
     "qrShortLink": "index.html#hilfe:kurz",
@@ -5114,15 +5034,6 @@ const topics = [
       "Ich gebe der KI keine privaten Daten.",
       "Bei Gesundheit und Geld frage ich Menschen.",
       "Ich darf mir Unterstützung holen."
-    ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      3,
-      4,
-      5,
-      8,
-      9
     ],
     "einfachLessons": [
       {
@@ -5741,15 +5652,6 @@ const topics = [
       "Erst prüfen. Dann teilen.",
       "Bei Geld-Anrufen rufe ich selbst zurück.",
       "Ich darf mir Unterstützung holen."
-    ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      3,
-      5,
-      7,
-      8,
-      10
     ],
     "einfachLessons": [
       {
@@ -6441,17 +6343,6 @@ const topics = [
       "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.",
       "Erst fragen. Dann scannen."
     ],
-    "shortLessonIndexes": [
-      0,
-      1,
-      2,
-      4,
-      6,
-      8,
-      9,
-      10,
-      11
-    ],
     "einfachLessons": [
       {
         "title": "Was ist Betrug im Internet?",
@@ -7086,15 +6977,6 @@ const topics = [
       "Ich lasse mich nicht hetzen.",
       "Online-Käufe kann ich oft 14 Tage zurückgeben.",
       "Ich darf mir Unterstützung holen."
-    ],
-    "shortLessonIndexes": [
-      0,
-      2,
-      3,
-      4,
-      6,
-      9,
-      10
     ],
     "einfachLessons": [
       {
