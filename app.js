@@ -5437,7 +5437,37 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+/* ============================================================
+   Nachgelieferte Übungen einhängen (uebungen-de.js)
+   Ergaenzt lesson.practice dort, wo noch keine Uebung steht.
+   Eine vorhandene Uebung wird NIE ueberschrieben – topics.js
+   bleibt die Quelle der Wahrheit, das hier ist nur ein Nachtrag.
+   Laeuft einmal beim Start, vor dem ersten Rendern.
+   ============================================================ */
+function applyExtraPractice() {
+  if (typeof EXTRA_PRACTICE === "undefined" || !EXTRA_PRACTICE) return 0;
+  if (typeof topics === "undefined" || !Array.isArray(topics)) return 0;
+  let gesetzt = 0;
+  topics.forEach(topic => {
+    const gruppe = EXTRA_PRACTICE[topic.id];
+    if (!gruppe) return;
+    const einhaengen = (liste, quelle) => {
+      if (!Array.isArray(liste) || !quelle) return;
+      liste.forEach(lesson => {
+        if (!lesson || lesson.practice) return;
+        const p = quelle[lesson.title];
+        if (p) { lesson.practice = p; gesetzt++; }
+      });
+    };
+    einhaengen(topic.lessons, gruppe.lessons);
+    einhaengen(topic.einfachLessons, gruppe.kurz);
+  });
+  return gesetzt;
+}
+
 /* Glossar initialisieren */
+applyExtraPractice();
+
 initGlossar();
 initGlossarEvents();
 
