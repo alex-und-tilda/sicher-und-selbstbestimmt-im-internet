@@ -2105,6 +2105,75 @@ html.no-motion *::after {
   stroke: var(--topic-color);
 }
 
+/* ---------- „Mein Lernweg": drei benannte Blöcke (Prüfbericht B6) ----------
+   Vorher war die Seite ein Regal aus fünf gleichrangigen Übungsangeboten. Der
+   Name verspricht einen Weg, also steht jetzt zuerst die eigene Position. */
+.path-block {
+  margin: 0 0 26px;
+}
+
+.path-block > .topic-grid-title {
+  margin-bottom: 8px;
+}
+
+/* Offene Themen: gleiche Bauform wie die geschafften, aber ohne Haken und mit
+   ruhigerem Rahmen – geschafft und offen bleiben unterscheidbar. */
+.review-chip--open {
+  border-style: dashed;
+  font-weight: 500;
+}
+
+/* Hauptaktion des Blocks „Da bist du gerade", wenn keine Lektion offen ist. */
+.path-next-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 72px;
+  padding: 14px 18px;
+  margin-top: 4px;
+  background: var(--surface);
+  border: 3px solid var(--topic-color);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  color: var(--ink);
+}
+
+.path-next-button:hover {
+  background: var(--topic-hover-bg);
+}
+
+.path-next-icon svg {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--topic-color);
+  fill: var(--topic-color);
+  stroke: var(--topic-color);
+}
+
+.path-next-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.path-next-label {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--topic-text, var(--accent-dark));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.path-next-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
 /* Vorlese-Knopf in Karten */
 /* Vorlese-Chip: nur das Lautsprecher-Symbol (aria-label bleibt für
    Screenreader). Ein Wort „Vorlesen" pro Seite reicht – es steht in der
@@ -2230,6 +2299,66 @@ html.no-motion *::after {
 .topic-intro-card .topic-illustration {
   max-width: 360px;
   margin-bottom: 14px;
+}
+
+/* ---------- Themen-Einstieg: kompakte Titelzeile (Prüfbericht B1) ----------
+   Ersetzt die 384 px hohe Einleitungs-Karte. Titel, Symbol, Kurztext und Bild
+   stehen in EINER Zeile, damit „Lernen starten" oberhalb der Menüleiste liegt.
+   Der Farb-Faden des Themas bleibt als linker Balken erhalten. */
+.topic-intro-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 0 16px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 8px solid var(--topic-color);
+  border-radius: var(--radius-m);
+}
+
+.topic-intro-line .topic-illustration {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 76px;
+  object-fit: contain;
+  margin: 0;
+  background: var(--surface-soft);
+}
+
+.topic-intro-line-text {
+  min-width: 0;
+}
+
+.topic-intro-line .symbol-heading {
+  margin-bottom: 2px;
+}
+
+.topic-intro-line h2 {
+  font-size: 1.35rem;
+}
+
+.topic-intro-line p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+/* Der Zurück-Knopf steht jetzt am Seitenende. Die feste Menüleiste unten
+   leistet dasselbe dauerhaft; oben kostete er nur Höhe vor der Hauptaktion. */
+.plain-back-button--end {
+  margin: 22px 0 0;
+}
+
+@media (max-width: 420px) {
+  .topic-intro-line .topic-illustration {
+    flex-basis: 72px;
+    width: 72px;
+    height: 60px;
+  }
+  .topic-intro-line h2 {
+    font-size: 1.2rem;
+  }
 }
 
 .symbol-heading {
@@ -2771,15 +2900,50 @@ p.feedback-wrong {
 }
 
 /* Ghost-Button: unauffällig, für tertiäre Aktionen */
-.ghost-action {
+.ghost-action,
+.feedback-button.ghost {
   background: transparent;
   color: var(--ink-soft);
   border-color: var(--line);
 }
 
-.ghost-action:hover {
+.ghost-action:hover,
+.feedback-button.ghost:hover {
   background: var(--surface-soft);
   border-color: var(--ink-soft);
+}
+
+/* Ausweg-Knopf auf der Falsch-Rückmeldung (Prüfbericht B3): sichtbar, aber
+   ruhiger als „nochmal versuchen" – niemand soll steckenbleiben, und niemand
+   soll zum Überspringen gedrängt werden. */
+.feedback-button.quiet {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: transparent;
+  border-bottom-color: var(--line);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+
+.feedback-button.quiet:hover {
+  background: var(--surface-soft);
+  border-bottom-color: var(--ink-soft);
+}
+
+/* Hinweis unter den Antworten: sagt, wo es danach weitergeht (B2). */
+.practice-nav-hint {
+  margin: 12px 0 0;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+/* Abschluss-Seite: trennt die Hauptaktion von den Zusatz-Angeboten (B7). */
+.completion-more-title {
+  margin: 18px 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-soft);
 }
 
 /* ---- Einfach-Quiz ---- */

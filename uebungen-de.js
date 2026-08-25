@@ -374,14 +374,18 @@ const EXTRA_PRACTICE = {
         feedbackCorrect: "Richtig. Dein Gefühl ist ein guter Hinweis.",
         remember: "Meine Gefühle sind wichtig."
       },
+      /* Diese Frage hatte genau dieselben Antworten wie die Übung in
+         „Stopp-Regel" und wie Quizfrage 1 desselben Themas – dieselbe
+         Antwort-Kombination dreimal (Prüfbericht B23). Sie fragt jetzt nach
+         dem NÄCHSTEN Schritt im Plan, nicht wieder nach dem ersten. */
       "Was kann ich konkret tun?": {
-        question: "Was ist der erste Schritt in deinem Plan?",
+        question: "Du hast Stopp gemacht. Was ist der nächste Schritt?",
         pictogram: "pikto-plan",
-        answers: ["Stopp machen.", "Sofort antworten."],
+        answers: ["Ich zeige die Nachricht einer vertrauten Person.", "Ich lösche alles und sage nichts."],
         correctIndex: 0,
-        feedbackWrong: "Sofort antworten macht es meistens größer. Erst Stopp.",
-        feedbackCorrect: "Genau. Zuerst Stopp. Dann alles andere.",
-        remember: "Zuerst mache ich Stopp."
+        feedbackWrong: "Dann bist du allein damit. Zeig die Nachricht lieber jemandem.",
+        feedbackCorrect: "Genau. Zeigen und Hilfe holen ist der nächste Schritt.",
+        remember: "Ich zeige die Nachricht. Ich hole Hilfe."
       },
       "Externe Hilfe": {
         question: "Musst du bei einer Beratungs-Stelle allein anrufen?",

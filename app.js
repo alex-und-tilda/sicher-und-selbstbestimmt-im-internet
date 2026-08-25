@@ -503,8 +503,24 @@ function countDoneTopics() {
 
 /* Nächstes Thema vorschlagen: das erste Thema, das noch nicht geschafft ist.
    Führung ohne Zwang – die freie Wahl bleibt immer erhalten. */
+/* Vorschlag „Dein nächstes Thema" (Prüfbericht B17).
+   Früher lief die Suche über die Reihenfolge in topics.js. Die Themenseite
+   zeigt die Themen aber in der Reihenfolge der TOPIC_GROUPS – der Vorschlag
+   sprang dadurch an offenen Themen der Gruppe „Wichtig für alle" vorbei.
+   Jetzt folgt der Vorschlag genau der sichtbaren Reihenfolge. */
+function getTopicsInDisplayOrder() {
+  if (typeof TOPIC_GROUPS === "undefined" || !Array.isArray(TOPIC_GROUPS)) return topics.slice();
+  const geordnet = TOPIC_GROUPS
+    .flatMap(g => g.ids)
+    .map(id => topics.find(t => t.id === id))
+    .filter(Boolean);
+  const gesehen = new Set(geordnet.map(t => t.id));
+  /* Themen ohne Gruppe hängen hinten an – so wie sie die Seite auch zeigt. */
+  return geordnet.concat(topics.filter(t => !gesehen.has(t.id)));
+}
+
 function getNextTopicSuggestion() {
-  return topics.find((topic) => !isTopicDone(topic.id)) || null;
+  return getTopicsInDisplayOrder().find((topic) => !isTopicDone(topic.id)) || null;
 }
 
 function toggleProgressSaving() {
@@ -1642,10 +1658,13 @@ function renderLegalFooter() {
 
 function chooseLanguage(level) {
   setLanguageLevel(level);
-  /* Im Erststart geht es nach der Sprache weiter zum Vorwissen.
+  /* Im Erststart geht es nach der Sprache direkt zur Menue-Einweisung.
+     Vorwissen und Vorlesen werden nicht mehr vorab gefragt, sondern erst
+     hinter dem ersten Thema (Pruefbericht B10) - dann kann die Person die
+     Frage aus Erfahrung beantworten statt ins Blaue.
      Beim späteren Ändern zurück dorthin, wo die Person herkam:
      Einstellungen, das gerade offene Thema, sonst die Themenübersicht. */
-  if (onboarding) return renderVorwissen();
+  if (onboarding) { onboarding = false; return renderMenuIntro(); }
   if (activeTab === "einstellungen") return renderSettingsPage();
   if (currentTopicId && getTopicById(currentTopicId)) return renderTopicChoice(currentTopicId);
   renderMenu();
@@ -1671,6 +1690,7 @@ function renderVorwissen() {
     ${buildReadingToolbar()}
     <section class="profile-new" data-readable="true">
       <h2 class="profile-picker-title">Wie gut kennst du dich aus?</h2>
+      ${setupWeiterZu ? `<p class="profile-picker-intro"><strong>Du hast dein erstes Thema geschafft.</strong> Jetzt noch 2 kurze Fragen. Danach geht es weiter.</p>` : ""}
       <p class="profile-picker-intro">Das hilft uns, dir die passende Menge vorzuschlagen. Du kannst es bei jedem Thema ändern.</p>
       <div class="device-grid">
         <button type="button" class="device-card" onclick="chooseVorwissen('neu')">
@@ -1700,7 +1720,10 @@ function chooseVorwissen(v) {
 /* Einmalige Frage: Soll ich dir vorlesen? EIN Konzept, EIN Bildschirm,
    zwei klare Wege. Jederzeit in den Einstellungen änderbar. */
 function renderVorleseFrage() {
-  if (pGet(AUTO_READ_GEFRAGT_KEY) === "1" || !supportsSpeech()) return renderMenuIntro();
+  if (pGet(AUTO_READ_GEFRAGT_KEY) === "1" || !supportsSpeech()) {
+    if (setupWeiterZu) { const weiter = setupWeiterZu; setupWeiterZu = null; return weiter(); }
+    return renderMenuIntro();
+  }
   pSet(AUTO_READ_GEFRAGT_KEY, "1");
   stopReading();
   setProgressVisible(false);
@@ -1734,7 +1757,30 @@ function renderVorleseFrage() {
 
 function chooseAutoRead(an) {
   setAutoRead(an);
+  if (setupWeiterZu) { const weiter = setupWeiterZu; setupWeiterZu = null; return weiter(); }
   renderMenuIntro();
+}
+
+/* ---- Zwei Restfragen hinter dem ersten Thema (Pruefbericht B10) ----
+   Vorwissen und Vorlesen standen frueher im Onboarding, also bevor die
+   Person wusste, worauf sie sich einlaesst. Sie kommen jetzt einmalig
+   nach dem ersten geschafften Thema und fuehren danach genau dorthin
+   weiter, wo die Person hin wollte. */
+const SETUP_REST_KEY = "einrichtung-rest";
+let setupWeiterZu = null;
+
+function restfragenOffen() {
+  return pGet(SETUP_REST_KEY) !== "1";
+}
+
+function weiterNachThema(topicId) {
+  const ziel = (topicId && getTopicById(topicId))
+    ? () => renderTopicChoice(topicId)
+    : () => renderMyPath();
+  if (!restfragenOffen()) return ziel();
+  pSet(SETUP_REST_KEY, "1");
+  setupWeiterZu = ziel;
+  return renderVorwissen();
 }
 
 /* ============================================================
@@ -1753,7 +1799,9 @@ function switchProfile(id) {
   loadActiveProfileSettings();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
-  lastLessonContext = null;
+  /* Person gewechselt: den Rück-Anker DIESER Person laden, nicht den der
+     vorherigen (der Speicher ist ohnehin je Profil getrennt). */
+  loadLastLesson();
   if (languageChosen) renderMenu();
   else renderStart();
 }
@@ -1827,7 +1875,19 @@ function renderDeviceQuestion() {
 function chooseDevice(shared) {
   setDeviceShared(shared);
   signDraft = { icon: null, color: null, number: null };
-  renderBuildSign(0, null);
+  if (shared) return renderBuildSign(0, null);
+  /* Eigenes Geraet: Das Zeichen dient nur dazu, mehrere Personen auf einem
+     geteilten Geraet auseinanderzuhalten. Wer gerade „Nur ich" geantwortet
+     hat, brauchte trotzdem drei Bildschirme mit zusammen 34 Auswahlfeldern
+     (Pruefbericht B10). Jetzt vergibt die App das Zeichen selbst; unter
+     Einstellungen laesst es sich jederzeit aendern. */
+  const n = profiles.length;
+  signDraft = {
+    icon: SIGN_ICONS[n % SIGN_ICONS.length].key,
+    color: SIGN_COLORS[n % SIGN_COLORS.length].hex,
+    number: n % 11
+  };
+  finishSign(null);
 }
 
 /* Vorschau des Zeichens, das gerade gebaut wird. */
@@ -1943,7 +2003,7 @@ function finishSign(editId) {
   applyFontSize();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
-  lastLessonContext = null;
+  clearLastLesson();
   onboarding = true;
   renderStart();
 }
@@ -2015,7 +2075,7 @@ function resetProfile(id) {
     loadActiveProfileSettings();
     finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
-  lastLessonContext = null;
+  clearLastLesson();
     announce("Du fängst neu an.");
     renderStart();
   } else {
@@ -2240,10 +2300,48 @@ function scrollToTopics() {
 
 let dailyQuestionCurrent = null;
 
-/* Rück-Anker: merkt die zuletzt offene Lektion (nur im Arbeitsspeicher).
+/* Rück-Anker: merkt die zuletzt offene Lektion.
    Wer zur Hilfe oder zu den Einstellungen wechselt, findet mit einem
-   Tipp zurück (COGA: Unterbrechungen sicher machen). */
+   Tipp zurück (COGA: Unterbrechungen sicher machen).
+
+   Seit Prüfbericht B5 überlebt der Anker auch das Schließen der App: vorher
+   war er eine reine Variable im Arbeitsspeicher, und ausgerechnet der Fall,
+   für den er gebaut wurde – Unterbrechung über Tage – ging verloren. Die App
+   bot dann „Hier kannst du weiterlernen" an und begann das Thema bei null.
+   Gespeichert wird nur {Thema, Schritt, Menge} im localStorage des Profils –
+   eine lokale Einstellung wie Schriftgröße und Sprachstufe, kein
+   personenbezogenes Datum (§14, KDG). */
 let lastLessonContext = null;
+const LAST_LESSON_KEY = "letzte-lektion";
+
+function saveLastLesson() {
+  if (!lastLessonContext) { pRemove(LAST_LESSON_KEY); return; }
+  try { pSet(LAST_LESSON_KEY, JSON.stringify(lastLessonContext)); } catch (e) { /* nichts tun */ }
+}
+
+function loadLastLesson() {
+  lastLessonContext = null;
+  try {
+    const raw = pGet(LAST_LESSON_KEY);
+    if (!raw) return;
+    const ctx = JSON.parse(raw);
+    if (!ctx || typeof ctx.topicId !== "string") return;
+    const topic = getTopicById(ctx.topicId);
+    if (!topic) return;
+    const mode = ctx.mode === "short" ? "short" : "full";
+    const anzahl = getLessonsForMode(topic, mode).length;
+    const step = Number(ctx.step);
+    /* Nur übernehmen, wenn der Schritt heute noch existiert – sonst käme die
+       Person nach einer Inhaltsänderung auf einer leeren Seite an. */
+    if (!Number.isInteger(step) || step < 0 || step >= anzahl) return;
+    lastLessonContext = { topicId: topic.id, step, mode };
+  } catch (e) { /* nichts tun */ }
+}
+
+function clearLastLesson() {
+  lastLessonContext = null;
+  pRemove(LAST_LESSON_KEY);
+}
 
 function buildResumeLessonChip() {
   const ctx = lastLessonContext;
@@ -2370,9 +2468,14 @@ function renderIntro() {
   const nextTopic = isReturning ? getNextTopicSuggestion() : null;
   const dailyCard = isReturning ? buildDailyQuestionCard() : "";
   const lessonChip = buildResumeLessonChip();
+  /* Ehrliche Beschriftung (Prüfbericht B5): Diese Kachel führt zu einem NEUEN
+     Thema, nicht zurück in eine offene Lektion. Sie hieß trotzdem „Hier kannst
+     du weiterlernen" und landete auf der Themen-Einstiegsseite. Der echte
+     Rück-Anker steht jetzt als lessonChip darüber und überlebt das Schließen
+     der App; diese Kachel erscheint nur noch, wenn nichts offen ist. */
   const resumeCard = (nextTopic && !lessonChip) ? `
-      <div class="intro-offer" role="region" aria-label="Weiterlernen">
-        <h3>Hier kannst du weiterlernen:</h3>
+      <div class="intro-offer" role="region" aria-label="Nächstes Thema">
+        <h3>${countDoneTopics() > 0 ? "Dein nächstes Thema:" : "Hier kannst du anfangen:"}</h3>
         <button type="button" class="topic-card" style="${getTopicColorStyle(nextTopic.id)}" onclick="renderTopicChoice('${escapeHtml(nextTopic.id)}')">
           <span class="topic-icon" aria-hidden="true">${getIconHtml(nextTopic.icon || "start")}</span>
           <span class="topic-title">${escapeHtml(nextTopic.title)}</span>
@@ -2503,10 +2606,14 @@ function renderResume() {
 /* Themen in 3 benannte Gruppen (Chunking: kleine, benannte Pakete
    statt 12 gleichzeitiger Wahlmöglichkeiten). Reine Anzeige-Gliederung,
    keine inhaltliche Änderung der Themen. */
+/* „Hilfe bei Problemen" steht in der ersten Gruppe (Prüfbericht B18):
+   Fast jedes andere Thema endet mit „hole dir Hilfe" oder „frag eine Person,
+   der du vertraust". Als letzte Kachel der letzten Gruppe wurde genau das
+   zuletzt gelehrt, worauf sich alle anderen Themen stützen. */
 const TOPIC_GROUPS = [
-  { title: "Wichtig für alle",   hint: "Das hilft dir überall im Internet.", ids: ["datenschutz", "ki", "einkaufen"] },
+  { title: "Wichtig für alle",   hint: "Das hilft dir überall im Internet.", ids: ["datenschutz", "hilfe", "ki", "einkaufen"] },
   { title: "Apps",               hint: "So nutzt du diese Apps sicher.",     ids: ["whatsapp", "facebook", "instagram", "youtube", "snapchat", "tiktok"] },
-  { title: "Gefahren und Hilfe", hint: "So erkennst du Tricks. So holst du Hilfe.", ids: ["fakes", "betrug", "hilfe"] }
+  { title: "Gefahren und Hilfe", hint: "So erkennst du Tricks. So holst du Hilfe.", ids: ["fakes", "betrug"] }
 ];
 
 function renderMenu() {
@@ -2588,7 +2695,11 @@ function renderMenu() {
 
   /* Beim ersten Besuch die Lernweg-Frage einmal groß zeigen; danach steckt
      der Lernweg im Hauptmenü unter „Einstellungen". */
-  const showFullChooser = learnModeChooserOpen || !learnModeWasSeen();
+  /* Die Lernweg-Frage steht NICHT mehr automatisch über der Themenliste
+     (Prüfbericht B19): sie schob die erste Themenkachel auf y=1033 und stand
+     ein zweites Mal in den Einstellungen. Sie erscheint jetzt nur noch, wenn
+     die Person sie ausdrücklich aufklappt (openLearnModeChooser). */
+  const showFullChooser = learnModeChooserOpen;
   let learnModeSection;
   if (showFullChooser) {
     markLearnModeSeen();
@@ -2649,13 +2760,12 @@ function renderMyPath() {
            <div class="hero-progress-fill" style="width:${Math.round((doneCount/topics.length)*100)}%"></div>
          </div>
        </div>`
-    : `<p class="topic-grid-hint">Hier siehst du, was du schon geschafft hast. Und hier kannst du üben.</p>`;
+    : "";
 
   /* Geschaffte Themen als Liste (Erfolg sichtbar machen) */
   const doneTopics = topics.filter(t => isTopicDone(t.id));
   const doneSection = doneTopics.length > 0
-    ? `<h3 class="topic-grid-title">Das hast du geschafft</h3>
-       <div class="review-chips">
+    ? `<div class="review-chips">
          ${doneTopics.map(t => `
            <button type="button" class="review-chip" style="${getTopicColorStyle(t.id)}" onclick="renderTopicChoice('${escapeHtml(t.id)}')">
              <span aria-hidden="true">✓</span>
@@ -2665,7 +2775,7 @@ function renderMyPath() {
        <p class="topic-grid-hint" style="margin-top:12px;">
          <button type="button" class="setting-big-button" onclick="printSuccessBook()">🖨 Mein Erfolgs-Heft drucken</button>
        </p>`
-    : "";
+    : `<p class="topic-grid-hint">Noch nichts. Das ist in Ordnung. Fang mit einem Thema an.</p>`;
 
   /* Wiederholungs-Erinnerung (verteiltes Lernen) */
   const reviewTopics = getTopicsDueForReview();
@@ -2713,17 +2823,63 @@ function renderMyPath() {
 
   const readCardSvg = READ_CARD_SVG;
 
+  /* Drei benannte Blöcke statt eines Regals (Prüfbericht B6): Der Name der
+     Seite verspricht einen Weg – also muss sie zuerst sagen, wo die Person
+     gerade steht, dann was geschafft ist, dann was noch aussteht. Die
+     Übungsangebote sind danach klar nachgeordnet. */
+  const resumeChip = buildResumeLessonChip();
+  const vorschlag = getNextTopicSuggestion();
+  const hierBistDu = resumeChip
+    ? `<section class="path-block" aria-label="Da bist du gerade">
+         <h3 class="topic-grid-title">Da bist du gerade</h3>
+         ${resumeChip}
+       </section>`
+    : (vorschlag
+        ? `<section class="path-block" aria-label="Da bist du gerade">
+             <h3 class="topic-grid-title">Da bist du gerade</h3>
+             <p class="topic-grid-hint">${doneCount > 0 ? "Du hast gerade kein Thema offen." : "Du hast noch nicht angefangen."}</p>
+             <button type="button" class="path-next-button" style="${getTopicColorStyle(vorschlag.id)}" onclick="renderTopicChoice('${escapeHtml(vorschlag.id)}')">
+               <span class="path-next-icon" aria-hidden="true">${getIconHtml(vorschlag.icon || "start")}</span>
+               <span class="path-next-text">
+                 <span class="path-next-label">${doneCount > 0 ? "Dein nächstes Thema" : "Starte hier"}</span>
+                 <span class="path-next-title">${escapeHtml(vorschlag.title)}</span>
+               </span>
+             </button>
+           </section>`
+        : "");
+
+  /* Was noch offen ist – in der Reihenfolge, in der die Themenseite es zeigt. */
+  const offeneTopics = getTopicsInDisplayOrder().filter(t => !isTopicDone(t.id));
+  const offenSection = offeneTopics.length > 0
+    ? `<section class="path-block" aria-label="Das ist noch offen">
+         <h3 class="topic-grid-title">Das ist noch offen</h3>
+         <p class="topic-grid-hint">${offeneTopics.length === 1 ? "Noch 1 Thema. Fast geschafft." : "Noch " + offeneTopics.length + " Themen. Du musst nicht alle machen."}</p>
+         <div class="review-chips">
+           ${offeneTopics.map(t => `
+             <button type="button" class="review-chip review-chip--open" style="${getTopicColorStyle(t.id)}" onclick="renderTopicChoice('${escapeHtml(t.id)}')">
+               <span aria-hidden="true">${getIconHtml(t.icon || "start")}</span>
+               <span>${escapeHtml(t.title)}</span>
+             </button>`).join("")}
+         </div>
+       </section>`
+    : "";
+
   content.innerHTML = `
     <section class="start-page">
       ${buildReadingToolbar()}
       <h2 class="topic-grid-title">Mein Lernweg</h2>
+      ${hierBistDu}
       ${buildGrandFinish()}
-      ${heroProgress}
-      ${reviewSection}
-      ${doneSection}
+      <section class="path-block" aria-label="Das hast du geschafft">
+        <h3 class="topic-grid-title">Das hast du geschafft</h3>
+        ${heroProgress}
+        ${reviewSection}
+        ${doneSection}
+      </section>
+      ${offenSection}
 
-      <section class="practice-section" aria-label="Üben und wiederholen">
-        <h3 class="topic-grid-title">Üben und wiederholen</h3>
+      <section class="practice-section path-block" aria-label="Zusätzlich üben">
+        <h3 class="topic-grid-title">Zusätzlich üben</h3>
         <p class="topic-grid-hint">Hier kannst du üben. Ganz ohne Druck.</p>
         <div class="action-grid practice-grid">
           <button type="button" class="action-card" onclick="startBigQuiz()">
@@ -3164,9 +3320,13 @@ function printQrCards() {
 /* Begleit-Panel „Für Begleitpersonen und Fachkräfte" (eigene Ebene,
    keine Sprach-Stufe). Erscheint nur, wenn das Thema Begleit-Material hat. */
 function buildCompanionPanel(topic) {
-  /* Begleit-Ebene nur in Leichter Sprache zeigen (Vorgabe):
-     Einfache Sprache und Alltagssprache brauchen die Fachkraft-Hinweise nicht. */
-  if (languageLevel !== "leicht") return "";
+  /* Die Begleit-Ebene ist nach §7 KEINE Sprach-Stufe für Lernende, sondern
+     eine eigene Ebene für Fachkräfte. Sie war trotzdem an die Leichte Sprache
+     gebunden und fehlte in Einfacher Sprache und Alltagssprache vollständig
+     (Prüfbericht B21) – eine Fachkraft, die jemanden auf B1-Niveau begleitet,
+     sah weder Lernziele noch Methodik noch Rechtsbezüge. Das Panel ist
+     zugeklappt und trägt eine eindeutige Überschrift; es stört den
+     SOLO-Gebrauch also auch in den anderen Stufen nicht. */
   const c = topic && topic.companion;
   if (!c) return "";
   const sections = [
@@ -3239,21 +3399,28 @@ function renderTopicChoice(topicId) {
   setHeader("Sicher und selbstbestimmt im Internet", topic.title, "Thema auswählen", "Wie möchtest du lernen?", 0);
   setActiveTab("themen");
   setOrientation(`Du bist beim Thema: ${topic.title}.`);
-  rememberRoute(topic.id);
+  rememberRoute(topicRoute(topic.id));
   showNav(false, false);
 
+  /* Reihenfolge dieser Seite folgt Prüfbericht B1: erst die Hauptaktion, dann
+     alles Weitere. Vorher lagen Zurück-Knopf, Vorlese-Leiste und eine 384 px
+     hohe Karte davor – „Lernen starten" saß dadurch bei y=793 und damit unter
+     der festen Menüleiste (y=764), war also beim Öffnen unsichtbar. Die Karte
+     ist jetzt eine Zeile; der Zurück-Knopf steht am Seitenende (die Menüleiste
+     leistet dasselbe dauerhaft). */
   content.innerHTML = `
     <section class="topic-choice" style="${getTopicColorStyle(topic.id)}" data-readable="true">
-      <button type="button" class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
       ${buildReadingToolbar()}
-      <article class="card topic-intro-card">
+      <div class="topic-intro-line">
         ${getIllustrationHtml(topic)}
-        <div class="symbol-heading">
-          <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
-          <h2>${escapeHtml(topic.title)}</h2>
+        <div class="topic-intro-line-text">
+          <div class="symbol-heading">
+            <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
+            <h2>${escapeHtml(topic.title)}</h2>
+          </div>
+          <p>${escapeHtml(topic.desc || "")}</p>
         </div>
-        <p>${escapeHtml(topic.desc || "")}</p>
-      </article>
+      </div>
 
       ${(() => {
         /* Adaptive Hauptaktion (Program Control mit Opt-out):
@@ -3272,12 +3439,19 @@ function renderTopicChoice(topicId) {
           ? laterChip("Übungs-Handy", `startScenario('${escapeHtml(topic.id)}')`) : "";
         const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`);
 
+        /* Mengen-Wahl beziffern (Prüfbericht B8): „Kurz" und „Mehr" allein
+           sagen nicht, worauf man sich einlässt – Kurz ist rund ein Viertel
+           des Themas. Die Zahlen kommen aus dem echten Bestand, nicht fest
+           eingetragen. */
+        const stepWord = (n) => n === 1 ? "1 Schritt" : `${n} Schritte`;
+        const shortSteps = stepWord(getLessonsForMode(topic, "short").length);
+        const fullSteps  = stepWord(getLessonsForMode(topic, "full").length);
         const amountToggle = `
           <div class="amount-box" role="group" aria-label="Wie viel möchtest du lernen?">
             <p class="amount-title">Wie viel möchtest du?</p>
             <div class="amount-row">
-              <button type="button" class="amount-choice${amount === "short" ? " is-active" : ""}" aria-pressed="${amount === "short" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'short')"><strong>${amount === "short" ? "✓ " : ""}Kurz</strong><span>Nur das Wichtigste.</span></button>
-              <button type="button" class="amount-choice${amount === "full" ? " is-active" : ""}" aria-pressed="${amount === "full" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'full')"><strong>${amount === "full" ? "✓ " : ""}Mehr</strong><span>Mit Beispielen.</span></button>
+              <button type="button" class="amount-choice${amount === "short" ? " is-active" : ""}" aria-pressed="${amount === "short" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'short')"><strong>${amount === "short" ? "✓ " : ""}Kurz — ${shortSteps}</strong><span>Nur das Wichtigste.</span></button>
+              <button type="button" class="amount-choice${amount === "full" ? " is-active" : ""}" aria-pressed="${amount === "full" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'full')"><strong>${amount === "full" ? "✓ " : ""}Mehr — ${fullSteps}</strong><span>Mit Beispielen.</span></button>
             </div>
             <p class="amount-hint">Für dich vorausgewählt. Du kannst es ändern.</p>
           </div>`;
@@ -3312,11 +3486,17 @@ function renderTopicChoice(topicId) {
           </div>`;
       })()}
 
-      ${buildUtilityBar()}
-
+      ${/* Begleit-Panel direkt hinter die Hauptaktion (B21): vorher lag es bei
+            y=1364 unter allem anderen, eine Fachkraft musste dreimal scrollen.
+            ÜBER die Hauptaktion darf es nicht – §7: Begleit-Hinweise dürfen den
+            SOLO-Gebrauch nicht stören. */""}
       ${buildCompanionPanel(topic)}
 
+      ${buildUtilityBar()}
+
       ${buildSupportBox()}
+
+      <button type="button" class="plain-back-button plain-back-button--end" onclick="renderMenu()">← Zur Themenübersicht</button>
     </section>
   `;
   focusContent();
@@ -3444,7 +3624,21 @@ function getLessonsForMode(topic, mode) {
   if (!topic || !Array.isArray(topic.lessons)) return [];
   if (mode === "short") {
     if (Array.isArray(topic.einfachLessons) && topic.einfachLessons.length) {
-      return topic.einfachLessons;
+      /* Der Kurz-Modus bekommt denselben Rahmen wie der lange Weg
+         (Prüfbericht B8): vorne die Start-Seite mit den Lernzielen, hinten die
+         Zusammenfassung „Das merke ich mir". Vorher fing er ohne Ankündigung
+         an und endete ohne Regel-Liste – ausgerechnet der Weg für Personen mit
+         kürzerer Aufmerksamkeitsspanne verzichtete auf die zwei Stützen, die
+         kurze Wege am nötigsten brauchen.
+         Es entsteht KEIN neuer Inhalt: beide Seiten liegen schon in
+         topic.lessons und werden hier nur wiederverwendet. */
+      const start = topic.lessons[0];
+      const ende  = topic.lessons[topic.lessons.length - 1];
+      const rahmen = [];
+      if (start && start.module === "Start") rahmen.push(start);
+      rahmen.push(...topic.einfachLessons);
+      if (ende && ende !== start && /merke ich mir/i.test(ende.title || "")) rahmen.push(ende);
+      return rahmen;
     }
     /* Rueckfallebene fuer Themen OHNE einfachLessons. Aktuell haben alle 12
        welche, das Feld shortLessonIndexes wurde deshalb aus topics.js
@@ -3555,10 +3749,13 @@ function renderLesson() {
 
   /* Modul-Cluster-Badge: zeigen wenn neues Modul beginnt (nicht bei Schritt 0/Start) */
   const prevLesson = currentStep > 0 ? lessons[currentStep - 1] : null;
-  const isNewModule = prevLesson && lesson.module && lesson.module !== "Start" && prevLesson.module !== lesson.module;
+  /* Im Kurz-Modus kein Modul-Abzeichen: dort gibt es nur einen Inhaltsblock,
+     das Abzeichen würde bei jedem Rahmen-Wechsel sinnlos aufblitzen. */
+  const isNewModule = currentMode !== "short" && prevLesson && lesson.module
+    && lesson.module !== "Start" && prevLesson.module !== lesson.module;
   const moduleBadge = isNewModule
     ? `<div class="module-cluster-badge" role="status" aria-live="polite">
-         <span class="module-cluster-label">Neues Thema:</span>
+         <span class="module-cluster-label">Jetzt geht es um:</span>
          <span class="module-cluster-name">${escapeHtml(lesson.module)}</span>
        </div>`
     : "";
@@ -3567,7 +3764,12 @@ function renderLesson() {
      kostet 77 px – mehr als die Punkte-Reihe, die sie ersetzen sollte. Der
      schlanke Balken steckt stattdessen in buildStepPath (rund 44 px). */
   setProgressVisible(false);
-  setBottomNavVisible(!hasPractice);
+  /* Die untere Leiste bleibt auf JEDEM Lernschritt stehen (Prüfbericht B2).
+     Vorher wurde sie bei Lektionen mit Übung ausgeblendet – damit war sie auf
+     11 von 13 Schritten weg und Zurückblättern unmöglich. Jetzt bleibt die
+     Position der Knöpfe konstant; „Weiter" ist bei offener Übung nur
+     deaktiviert (COGA: vorhersehbare Bedienung, WCAG 3.2.3). */
+  setBottomNavVisible(true);
   setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
   setOrientation(`Du lernst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
   /* Auf Lernschritten sitzen Titelkarte und Orientierungssatz direkt
@@ -3577,7 +3779,8 @@ function renderLesson() {
      auf jeder anderen Seite wieder weg. */
   document.body.classList.add("lesson-view");
   lastLessonContext = { topicId: topic.id, step: currentStep, mode: currentMode };
-  showNav(true, true, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
+  saveLastLesson();
+  showNav(true, !hasPractice, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
 
   /* Vorlese-Knopf je Block: Vorlesen als selbstbestimmtes Angebot an jeder
      Kachel (§1 Selbstbestimmung, §3 Vorlesen als Wahl). Liest genau diesen Block. */
@@ -3738,6 +3941,7 @@ function buildPractice(practice) {
       <h3>Übung</h3>
       ${questionPikto(practice)}<p class="practice-question">${escapeHtml(question)}</p>
       <div class="answers">${answerHtml}</div>
+      <p class="practice-nav-hint">Tippe auf eine Antwort. Danach kannst du unten auf Weiter tippen.</p>
       ${buildTaskHelpBox()}
     </div>
   `;
@@ -3789,8 +3993,9 @@ function renderPracticeFeedbackPage(index, correctIndex) {
       <div class="feedback-actions">
         ${isCorrect
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterPractice()">Weiter</button>`
-          : `<button type="button" class="feedback-button secondary" onclick="renderLesson()">Lektion nochmal lesen</button>
-             <button type="button" class="feedback-button ghost" onclick="renderPracticePage()">Frage nochmal versuchen</button>`
+          : `<button type="button" class="feedback-button secondary" onclick="renderPracticePage()">Frage nochmal versuchen</button>
+             <button type="button" class="feedback-button ghost" onclick="renderLesson()">Lektion nochmal lesen</button>
+             <button type="button" class="feedback-button quiet" onclick="continueAfterPractice()">Weiter — ich schaue es mir später nochmal an</button>`
         }
       </div>
 
@@ -3808,12 +4013,14 @@ function renderPracticePage() {
   const lessons = getLessonsForMode(topic, currentMode);
   const lesson = lessons[currentStep];
   if (lesson && lesson.practice) {
-    setProgressVisible(true);
-    setBottomNavVisible(false);
+    setProgressVisible(false);
+    /* Gleiche Leiste wie auf dem Lernschritt (B2): sichtbar, „Weiter" aus. */
+    setBottomNavVisible(true);
     const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
     const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
     setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
     setOrientation(`Du übst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
+    showNav(true, false, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
     content.innerHTML = `
       ${buildToolRow()}
       <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
@@ -4005,8 +4212,17 @@ function renderCompletionPage(topicId) {
 
   markTopicDone(topic.id);
   finishedTopicThisSession = true;
-  lastLessonContext = null; /* Lektion fertig – kein Rück-Anker mehr nötig */
+  clearLastLesson(); /* Lektion fertig – kein Rück-Anker mehr nötig */
   playSound("success");
+
+  /* Hauptaktion der Abschluss-Seite ist der nächste Schritt, nicht das Quiz
+     (Prüfbericht B7). markTopicDone() lief schon, der Vorschlag überspringt
+     dieses Thema also von selbst. Sind alle Themen geschafft, tritt der
+     Lernweg an die Stelle des Vorschlags. */
+  const nextTopic = getNextTopicSuggestion();
+  const nextActionHtml = (extraClass = "") => nextTopic
+    ? `<button type="button" class="primary-action${extraClass ? " " + extraClass : ""}" onclick="weiterNachThema('${escapeHtml(nextTopic.id)}')">Nächstes Thema: ${escapeHtml(nextTopic.title)}</button>`
+    : `<button type="button" class="primary-action${extraClass ? " " + extraClass : ""}" onclick="weiterNachThema('')">Alle Themen geschafft — zu Mein Lernweg</button>`;
   setProgressVisible(false);
   setBottomNavVisible(false);
   showNav(false, false);
@@ -4042,16 +4258,21 @@ function renderCompletionPage(topicId) {
           ${buildCompletionProgress()}
 
           <div class="einfach-done-actions">
+            ${/* Hauptaktion des KURZEN Wegs ist der lange Weg zum selben Thema
+                  (Prüfbericht B8). Der kurze Weg ist ein Einstieg, kein Ersatz –
+                  und wer ihn gerade geschafft hat, ist genau jetzt bereit für
+                  mehr. Das nächste Thema steht direkt darunter. */""}
+            <button type="button" class="primary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
+              Mehr lernen: ${escapeHtml(topic.title)}
+            </button>
+            ${nextActionHtml("einfach-done-btn").replace("primary-action", "secondary-action")}
             ${getQuizQuestions(topic).length
-              ? `<button type="button" class="primary-action einfach-done-btn" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
+              ? `<button type="button" class="secondary-action einfach-done-btn" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
                    Quiz machen
                  </button>`
               : ""}
-            <button type="button" class="secondary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
+            <button type="button" class="ghost-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
               Nochmal von vorne
-            </button>
-            <button type="button" class="secondary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
-              Mehr lernen
             </button>
             <button type="button" class="ghost-action einfach-done-btn" onclick="renderMyPath()">
               Mein Lernweg ansehen
@@ -4104,11 +4325,13 @@ function renderCompletionPage(topicId) {
         ${buildCompletionProgress()}
 
         <div class="completion-actions">
-          <button type="button" class="primary-action" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
-          <button type="button" class="secondary-action" onclick="renderCertificate('${escapeHtml(topic.id)}')">Urkunde ansehen</button>
+          ${nextActionHtml()}
+          <p class="completion-more-title">Zu diesem Thema gibt es außerdem:</p>
+          <button type="button" class="secondary-action" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
           <button type="button" class="secondary-action" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">Merk-Karte ansehen</button>
-          <button type="button" class="secondary-action" onclick="renderMyPath()">Mein Lernweg ansehen</button>
-          <button type="button" class="secondary-action" onclick="renderMenu()">Zur Themenübersicht</button>
+          <button type="button" class="ghost-action" onclick="renderCertificate('${escapeHtml(topic.id)}')">Urkunde ansehen</button>
+          <button type="button" class="ghost-action" onclick="renderMyPath()">Mein Lernweg ansehen</button>
+          <button type="button" class="ghost-action" onclick="renderMenu()">Zur Themenübersicht</button>
         </div>
       </article>
     </section>
@@ -4456,7 +4679,45 @@ function buildBigQuizPool(fromTopics, count) {
   return pool.slice(0, count || BIG_QUIZ_COUNT);
 }
 
+/* Ab so vielen geschafften Themen ist das große Quiz sinnvoll. */
+const BIG_QUIZ_MIN_TOPICS = 3;
+
 function startBigQuiz() {
+  /* Schutzabfrage wie beim Nachbar-Knopf „Wiederholen" (Prüfbericht B20).
+     Vorher startete das große Quiz auch aus dem Nullzustand mit 20 Fragen aus
+     Themen, die noch niemand gelernt hatte – zwei optisch gleiche Karten
+     verhielten sich unterschiedlich. */
+  const geschafft = countDoneTopics();
+  if (geschafft < BIG_QUIZ_MIN_TOPICS) {
+    stopReading();
+    currentTopicId = null;
+    setProgressVisible(false);
+    setBottomNavVisible(false);
+    setHeader("Das große Quiz", "Üben", "Das große Quiz", "Später", 0);
+    setOrientation("Du bist beim großen Quiz.");
+    showNav(false, false);
+    const vorschlag = getNextTopicSuggestion();
+    const fehlen = BIG_QUIZ_MIN_TOPICS - geschafft;
+    content.innerHTML = `
+      ${buildToolRow()}
+      <article class="card quiz-result-card" data-readable="true">
+        <h2>Das große Quiz</h2>
+        <p>Hier kommen Fragen aus allen 12 Themen.</p>
+        <p>Du hast bis jetzt ${geschafft === 0 ? "noch kein Thema" : (geschafft === 1 ? "1 Thema" : geschafft + " Themen")} geschafft.</p>
+        <p>Mach zuerst ${fehlen === 1 ? "noch 1 Thema" : "noch " + fehlen + " Themen"} fertig. Dann kannst du hier üben.</p>
+        <div class="certificate-actions">
+          ${vorschlag
+            ? `<button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(vorschlag.id)}')">Thema starten: ${escapeHtml(vorschlag.title)}</button>`
+            : ""}
+          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zur Themenübersicht</button>
+        </div>
+      </article>
+    `;
+    focusContent();
+    renderLegalFooter();
+    return;
+  }
+
   bigQuizTitle = "Das große Quiz";
   bigQuizQuestions = buildBigQuizPool();
   bigQuizIndex  = 0;
@@ -4511,7 +4772,9 @@ function renderBigQuizQuestion() {
 
   setProgressVisible(true);
   setBottomNavVisible(false);
-  setHeader(bigQuizTitle, `Frage ${bigQuizIndex + 1} von ${total}`, "Frage", bigQuizTitle, progress);
+  /* Gleiche Aufteilung wie überall sonst: Art der Seite ins Modul-Feld, Zähler
+     ins Schritt-Feld. Vorher waren beide vertauscht (Prüfbericht B25). */
+  setHeader(bigQuizTitle, "Quiz", `Frage ${bigQuizIndex + 1} von ${total}`, bigQuizTitle, progress);
   setOrientation(`Du machst: ${bigQuizTitle}. Frage ${bigQuizIndex + 1} von ${total}.`);
   showNav(false, false);
 
@@ -4963,7 +5226,7 @@ function startScenario(topicId) {
   showNav(false, false);
   setHeader(topic.title, "Übungs-Handy", "Üben", "", 0);
   setOrientation(`Du bist im Übungs-Handy zum Thema: ${topic.title}.`);
-  rememberRoute(topic.id + ":uebung");
+  rememberRoute(topicRoute(topic.id, "uebung"));
 
   content.innerHTML = `
     ${buildToolRow()}
@@ -5350,10 +5613,24 @@ function renderAllMemoryCards() {
 }
 
 /* Direkter Einstieg über Link, zum Beispiel:
-   index.html#datenschutz
-   index.html#datenschutz:kurz
-   index.html#datenschutz:quiz
-   index.html#datenschutz:merk */
+   index.html#thema-datenschutz
+   index.html#thema-datenschutz:kurz
+   index.html#thema-datenschutz:quiz
+   index.html#thema-datenschutz:merk
+   Die alte Form ohne „thema-" wird weiter angenommen. */
+const TOPIC_ROUTE_PREFIX = "thema-";
+function topicRoute(topicId, action) {
+  return TOPIC_ROUTE_PREFIX + topicId + (action ? ":" + action : "");
+}
+
+function openTopicRoute(topicId, action) {
+  if (action === "kurz" || action === "short") return startTopicMode(topicId, "short");
+  if (action === "quiz") return startQuiz(topicId);
+  if (action === "merk" || action === "memory") return renderMemoryCard(topicId);
+  if (action === "uebung") return startScenario(topicId);
+  return renderTopicChoice(topicId);
+}
+
 function handleHash() {
   handlingRoute = true;
   try {
@@ -5371,6 +5648,19 @@ function handleHash() {
     if (hash === "hilfe") return renderHelpPage();
     if (hash === "einstellungen") return renderSettingsPage();
 
+    /* Themen-Routen tragen seit Prüfbericht B11 das Präfix „thema-".
+       Vorher hießen Thema und Menüpunkt beide „hilfe": Wer das Thema
+       „Hilfe bei Problemen" öffnete, bekam beim Neuladen, über ein
+       Lesezeichen oder über die gedruckte QR-Karte die Hilfe-SEITE.
+       Die alte Form ohne Präfix wird weiter angenommen (unten), damit
+       schon gedruckte Karten der übrigen Themen gültig bleiben. */
+    if (hash.startsWith(TOPIC_ROUTE_PREFIX)) {
+      const rest = hash.slice(TOPIC_ROUTE_PREFIX.length);
+      const [tid, act] = rest.split(":");
+      if (getTopicById(tid)) return openTopicRoute(tid, act);
+      return renderMenu();
+    }
+
     /* Sonderrouten */
     if (hash === "grosses-quiz") return startBigQuiz();
     if (hash === "wiederholen") return startRepeatQuiz();
@@ -5378,15 +5668,10 @@ function handleHash() {
     if (hash === "merk-alle") return renderAllMemoryCards();
     if (hash === "uebung") return renderScenarioChooser();
 
+    /* Alte Form ohne Präfix – bleibt für schon gedruckte QR-Karten gültig. */
     const [topicId, action] = hash.split(":");
-    const topic = getTopicById(topicId);
-    if (!topic) return renderMenu();
-
-    if (action === "kurz" || action === "short") return startTopicMode(topicId, "short");
-    if (action === "quiz") return startQuiz(topicId);
-    if (action === "merk" || action === "memory") return renderMemoryCard(topicId);
-    if (action === "uebung") return startScenario(topicId);
-    return renderTopicChoice(topicId);
+    if (!getTopicById(topicId)) return renderMenu();
+    return openTopicRoute(topicId, action);
   } finally {
     handlingRoute = false;
   }
@@ -5511,6 +5796,9 @@ initGlossarEvents();
 ensureProfiles();
 loadDeviceShared();
 loadActiveProfileSettings();
+/* Zuletzt offene Lektion zurückholen (B5) – erst hier, weil dafür sowohl die
+   Themen als auch das aktive Profil stehen müssen. */
+loadLastLesson();
 
 /* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,
    damit die themenspezifischen Inline-Farben (getTopicColorStyle)
