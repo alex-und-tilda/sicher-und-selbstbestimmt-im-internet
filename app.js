@@ -3368,8 +3368,23 @@ function buildCompanionPanel(topic) {
         <p class="companion-intro"><a href="beobachtungsbogen.html">Beobachtungsbogen für Prüfgruppen-Sitzungen</a> – strukturierte, datensparsame Beobachtung zum Ausdrucken.</p>
         <p class="companion-intro"><a href="pruefaufgaben.html">Prüf-Aufgaben für die Begleitung</a> – konkrete Aufgaben mit Erfolgskriterium und Wort-Test, zum Ausdrucken.</p>
         <p class="companion-intro"><a href="pruefheft.html">Prüf-Heft für Klientinnen und Klienten</a> – Aufgaben in Leichter Sprache mit Smiley-Antworten, zum Ausdrucken.</p>
+        ${buildPraxisLinks(topic)}
       </div>
     </details>`;
+}
+
+/* Workshop-Material erreichbar machen (Prüfbericht B22).
+   Die sieben Klick-Anleitungen in praxis/ und die Workshop-Dateien in
+   material/ lagen im veröffentlichten Stand, waren aber aus der App über
+   keinen einzigen Link zu erreichen – weder für Lernende noch für
+   Fachkräfte. Sie hängen jetzt an der Begleit-Ebene, wo sie hingehören. */
+const PRAXIS_SEITEN = ["whatsapp", "facebook", "instagram", "youtube", "snapchat", "tiktok"];
+
+function buildPraxisLinks(topic) {
+  const eigene = topic && PRAXIS_SEITEN.includes(topic.id)
+    ? `<p class="companion-intro"><a href="praxis/${escapeHtml(topic.id)}.html">Klick-Anleitung ${escapeHtml(topic.title)}</a> – Schritt für Schritt durch die Einstellungen: Konto privat stellen, blockieren, melden.</p>`
+    : "";
+  return eigene + `<p class="companion-intro"><a href="praxis/index.html">Alle Klick-Anleitungen und Workshop-Material</a> – Anleitungen für 6 Apps, dazu Folien, Methodik-Blätter und Quiz-Vorlagen zum Herunterladen.</p>`;
 }
 
 /* Mengen-Wahl (Kurz/Mehr) je Thema – nur für die Sitzung gemerkt.

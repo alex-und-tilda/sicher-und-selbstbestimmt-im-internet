@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Facebook sicher und selbstbestimmt nutzen – Praxis</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#00285A; --red:#B5152B; --blue:#3E96BE; --blue2:#57A3C7;
@@ -52,6 +50,25 @@
   footer .note{background:#fff;border-radius:14px;padding:16px;border-left:6px solid var(--red);display:flex;gap:10px;align-items:flex-start}
   footer .attr{margin-top:14px; color:#5a6a75; font-size:13px}
   .skip{position:absolute;left:-999px} .skip:focus{left:8px;top:8px;position:fixed;background:#fff;padding:8px;border-radius:8px;z-index:9}
+</style>
+<style>
+/* Schrift lokal einbinden statt von Google (Prüfbericht B22).
+   Die Datenschutz-Seite sagt zu: keine fremden Server außer GitHub Pages.
+   Der Google-Fonts-Aufruf hier hat diese Zusage gebrochen — beim Öffnen
+   ging die IP-Adresse der lesenden Person an Google. Die Schrift liegt
+   seit August 2026 lokal in assets/fonts/. */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url('../assets/fonts/atkinson-regular.woff2') format('woff2'),
+       url('../assets/fonts/atkinson-regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url('../assets/fonts/atkinson-bold.woff2') format('woff2'),
+       url('../assets/fonts/atkinson-bold.ttf') format('truetype');
+}
 </style>
 </head>
 <body>
