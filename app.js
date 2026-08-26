@@ -3411,15 +3411,14 @@ function renderTopicChoice(topicId) {
   content.innerHTML = `
     <section class="topic-choice" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       ${buildReadingToolbar()}
+      ${/* Nur Bild und Titel. Das Symbol stand hier ein zweites Mal neben dem
+            Bild, und die Beschreibung ein drittes Mal: sie steht schon auf der
+            Kachel, die gerade angetippt wurde, und die Orientierungszeile
+            darüber nennt das Thema beim Namen. Die drei Wiederholungen kosteten
+            zusammen 60 px und schoben die Hauptaktion nach unten. */""}
       <div class="topic-intro-line">
-        ${getIllustrationHtml(topic)}
-        <div class="topic-intro-line-text">
-          <div class="symbol-heading">
-            <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
-            <h2>${escapeHtml(topic.title)}</h2>
-          </div>
-          <p>${escapeHtml(topic.desc || "")}</p>
-        </div>
+        <span class="topic-intro-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
+        <h2>${escapeHtml(topic.title)}</h2>
       </div>
 
       ${(() => {

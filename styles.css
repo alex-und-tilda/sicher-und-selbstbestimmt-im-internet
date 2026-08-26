@@ -2309,39 +2309,44 @@ html.no-motion *::after {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 4px 0 16px;
-  padding: 12px 14px;
+  margin: 2px 0 12px;
+  padding: 10px 12px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-left: 8px solid var(--topic-color);
   border-radius: var(--radius-m);
 }
 
-.topic-intro-line .topic-illustration {
-  flex: 0 0 96px;
-  width: 96px;
-  height: 76px;
-  object-fit: contain;
-  margin: 0;
-  background: var(--surface-soft);
+/* Dasselbe Symbol wie auf der Kachel, die gerade angetippt wurde – es trägt
+   das Wiedererkennen. Die große Themen-Illustration stand hier vorher in
+   60 × 48 px und war bei der Größe nur noch ein Fleck. */
+.topic-intro-line .topic-intro-symbol {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
 }
 
-.topic-intro-line-text {
-  min-width: 0;
+.topic-intro-line .topic-intro-symbol svg {
+  width: 44px;
+  height: 44px;
+  color: var(--topic-text, var(--topic-color));
+  fill: var(--topic-text, var(--topic-color));
+  stroke: var(--topic-text, var(--topic-color));
 }
 
-.topic-intro-line .symbol-heading {
-  margin-bottom: 2px;
+.topic-intro-line .topic-intro-symbol img {
+  width: 44px;
+  height: 44px;
 }
 
 .topic-intro-line h2 {
-  font-size: 1.35rem;
-}
-
-.topic-intro-line p {
   margin: 0;
-  font-size: 1rem;
-  color: var(--ink-soft);
+  min-width: 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
 }
 
 /* Der Zurück-Knopf steht jetzt am Seitenende. Die feste Menüleiste unten
@@ -2351,11 +2356,6 @@ html.no-motion *::after {
 }
 
 @media (max-width: 420px) {
-  .topic-intro-line .topic-illustration {
-    flex-basis: 72px;
-    width: 72px;
-    height: 60px;
-  }
   .topic-intro-line h2 {
     font-size: 1.2rem;
   }
