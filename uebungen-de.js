@@ -196,7 +196,7 @@ const EXTRA_PRACTICE = {
         remember: "Fotos von anderen: erst fragen."
       },
       "Nachrichten von Unbekannten": {
-        question: "Eine unbekannte Person schreibt dir. Was tust du?",
+        question: "In deinem Postfach ist eine Nachricht von einem fremden Profil. Was tust du?",
         pictogram: "pikto-stranger",
         answers: ["Ich schreibe zurück.", "Ich antworte nicht und zeige es."],
         correctIndex: 1,
@@ -343,7 +343,7 @@ const EXTRA_PRACTICE = {
         remember: "TikTok zeigt mir nur bestimmte Videos."
       },
       "Nachrichten auf TikTok": {
-        question: "Eine unbekannte Person schreibt dir. Was tust du?",
+        question: "Jemand aus den Kommentaren schreibt dir privat. Du kennst die Person nicht. Was tust du?",
         pictogram: "pikto-stranger",
         answers: ["Ich antworte kurz.", "Ich antworte nicht und zeige es."],
         correctIndex: 1,
@@ -661,9 +661,9 @@ const EXTRA_PRACTICE = {
         remember: "Schloss und https: gute Zeichen."
       },
       "Sicher bezahlen": {
-        question: "Welche Bezahl-Art ist sicherer?",
+        question: "Du kaufst zum ersten Mal in einem Shop. Wie bezahlst du?",
         pictogram: "pikto-bank",
-        answers: ["Vorkasse per Überweisung.", "Auf Rechnung."],
+        answers: ["Ich überweise das Geld vorher.", "Auf Rechnung."],
         correctIndex: 1,
         feedbackWrong: "Bei Vorkasse ist dein Geld weg, bevor die Ware da ist.",
         feedbackCorrect: "Richtig. Auf Rechnung zahlst du erst, wenn die Ware da ist.",

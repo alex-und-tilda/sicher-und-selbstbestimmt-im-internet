@@ -1799,9 +1799,10 @@ function switchProfile(id) {
   loadActiveProfileSettings();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
-  /* Person gewechselt: den Rück-Anker DIESER Person laden, nicht den der
-     vorherigen (der Speicher ist ohnehin je Profil getrennt). */
+  /* Person gewechselt: Rück-Anker und Mengen-Wahl DIESER Person laden, nicht
+     die der vorherigen (der Speicher ist ohnehin je Profil getrennt). */
   loadLastLesson();
+  loadTopicAmounts();
   if (languageChosen) renderMenu();
   else renderStart();
 }
@@ -2004,6 +2005,7 @@ function finishSign(editId) {
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   clearLastLesson();
+  clearTopicAmounts();
   onboarding = true;
   renderStart();
 }
@@ -2076,6 +2078,7 @@ function resetProfile(id) {
     finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   clearLastLesson();
+  clearTopicAmounts();
     announce("Du fängst neu an.");
     renderStart();
   } else {
@@ -3371,16 +3374,79 @@ function buildCompanionPanel(topic) {
 
 /* Mengen-Wahl (Kurz/Mehr) je Thema – nur für die Sitzung gemerkt.
    Standard kommt aus der Vorwissens-Frage: erfahren -> Kurz, sonst Mehr. */
-let topicAmountSel = { topicId: null, amount: null };
+/* Mengen-Wahl je Thema (Prüfbericht B9).
+   Vorher hielt eine einzige Variable genau EIN Thema fest: Wer bei
+   Datenschutz auf „Mehr" stellte und danach WhatsApp öffnete, stand wieder
+   bei „Kurz" – und musste die Wahl bei jedem der 12 Themen neu treffen.
+   Jetzt merkt sich die App die Wahl je Thema und trägt die zuletzt
+   getroffene Wahl auf noch unbesuchte Themen weiter. Die Vorwissens-Antwort
+   ist damit nur noch der Vorschlag für das allererste Thema.
+   Gespeichert wird eine Zuordnung {themaId: "short"|"full"} im localStorage
+   des Profils – eine lokale Einstellung wie Schriftgröße (§14, KDG). */
+const TOPIC_AMOUNT_KEY = "mengen-wahl";
+const LAST_AMOUNT_KEY  = "mengen-zuletzt";
+let topicAmounts = {};
+let lastAmountChoice = null;
+
+function loadTopicAmounts() {
+  topicAmounts = {};
+  lastAmountChoice = null;
+  try {
+    const raw = pGet(TOPIC_AMOUNT_KEY);
+    const daten = raw ? JSON.parse(raw) : null;
+    if (daten && typeof daten === "object") {
+      Object.keys(daten).forEach(id => {
+        if (getTopicById(id) && (daten[id] === "short" || daten[id] === "full")) {
+          topicAmounts[id] = daten[id];
+        }
+      });
+    }
+  } catch (e) { /* nichts tun */ }
+  const zuletzt = pGet(LAST_AMOUNT_KEY);
+  if (zuletzt === "short" || zuletzt === "full") lastAmountChoice = zuletzt;
+}
+
+function saveTopicAmounts() {
+  try { pSet(TOPIC_AMOUNT_KEY, JSON.stringify(topicAmounts)); } catch (e) { /* nichts tun */ }
+  if (lastAmountChoice) pSet(LAST_AMOUNT_KEY, lastAmountChoice);
+}
+
+function clearTopicAmounts() {
+  topicAmounts = {};
+  lastAmountChoice = null;
+  pRemove(TOPIC_AMOUNT_KEY);
+  pRemove(LAST_AMOUNT_KEY);
+}
+
+/* Hat die Person für DIESES Thema schon selbst gewählt? Steuert den
+   Hinweistext unter der Wahl – „vorausgewählt" wäre dann eine Unwahrheit. */
+function hasOwnTopicAmount(topicId) {
+  return Boolean(topicAmounts[topicId]);
+}
 
 function getTopicAmount(topicId) {
-  if (topicAmountSel.topicId === topicId && topicAmountSel.amount) return topicAmountSel.amount;
+  if (topicAmounts[topicId]) return topicAmounts[topicId];
+  if (lastAmountChoice) return lastAmountChoice;
   return pGet(VORWISSEN_KEY) === "erfahren" ? "short" : "full";
 }
 
 function setTopicAmount(topicId, amount) {
-  topicAmountSel = { topicId, amount: amount === "short" ? "short" : "full" };
+  const wahl = amount === "short" ? "short" : "full";
+  if (getTopicById(topicId)) topicAmounts[topicId] = wahl;
+  lastAmountChoice = wahl;
+  saveTopicAmounts();
   renderTopicChoice(topicId);
+}
+
+/* Auch der Weg über „Mehr lernen" oder „Nochmal von vorne" ist eine Wahl –
+   sonst stünde beim nächsten Öffnen des Themas wieder die alte Menge da. */
+function rememberTopicAmount(topicId, mode) {
+  const wahl = mode === "short" ? "short" : "full";
+  if (!getTopicById(topicId)) return;
+  if (topicAmounts[topicId] === wahl && lastAmountChoice === wahl) return;
+  topicAmounts[topicId] = wahl;
+  lastAmountChoice = wahl;
+  saveTopicAmounts();
 }
 
 function renderTopicChoice(topicId) {
@@ -3452,7 +3518,9 @@ function renderTopicChoice(topicId) {
               <button type="button" class="amount-choice${amount === "short" ? " is-active" : ""}" aria-pressed="${amount === "short" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'short')"><strong>${amount === "short" ? "✓ " : ""}Kurz — ${shortSteps}</strong><span>Nur das Wichtigste.</span></button>
               <button type="button" class="amount-choice${amount === "full" ? " is-active" : ""}" aria-pressed="${amount === "full" ? "true" : "false"}" onclick="setTopicAmount('${escapeHtml(topic.id)}', 'full')"><strong>${amount === "full" ? "✓ " : ""}Mehr — ${fullSteps}</strong><span>Mit Beispielen.</span></button>
             </div>
-            <p class="amount-hint">Für dich vorausgewählt. Du kannst es ändern.</p>
+            <p class="amount-hint">${hasOwnTopicAmount(topic.id)
+              ? "Das hast du dir so ausgesucht. Du kannst es ändern."
+              : "Für dich vorausgewählt. Du kannst es ändern."}</p>
           </div>`;
 
         if (resume) {
@@ -3653,6 +3721,7 @@ function getLessonsForMode(topic, mode) {
 function startTopicMode(topicId, mode) {
   const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
+  rememberTopicAmount(topic.id, mode);
   currentTopicId = topic.id;
   currentMode = mode === "short" ? "short" : "full";
   currentStep = 0;
@@ -5795,9 +5864,10 @@ initGlossarEvents();
 ensureProfiles();
 loadDeviceShared();
 loadActiveProfileSettings();
-/* Zuletzt offene Lektion zurückholen (B5) – erst hier, weil dafür sowohl die
-   Themen als auch das aktive Profil stehen müssen. */
+/* Zuletzt offene Lektion und Mengen-Wahl zurückholen (B5, B9) – erst hier,
+   weil dafür sowohl die Themen als auch das aktive Profil stehen müssen. */
 loadLastLesson();
+loadTopicAmounts();
 
 /* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,
    damit die themenspezifischen Inline-Farben (getTopicColorStyle)
