@@ -2403,7 +2403,7 @@ function answerDailyQuestion(index) {
   const isCorrect = index === daily.q.correctIndex;
   const feedback = isCorrect
     ? (daily.q.feedbackCorrect || "Das ist richtig.")
-    : (daily.q.feedbackWrong || "Das war nicht richtig. Das macht nichts.");
+    : (falschFeedback(daily.q, index) || "Das war nicht richtig. Das macht nichts.");
   playSound(isCorrect ? "correct" : "wrong");
   box.innerHTML = `
         <h3>${isCorrect ? "✓ Richtig! Gut gemacht." : "Das macht nichts."}</h3>
@@ -3663,6 +3663,24 @@ function closeSupportHelp() {
   if (desc) desc.textContent = "Hilfe anzeigen.";
 }
 
+/* Rückmeldung zur GEWÄHLTEN falschen Antwort (Prüfbericht B4).
+   Solange es nur zwei Antworten gab, reichte ein einziger Falsch-Text: es gab
+   ja nur einen Weg, danebenzuliegen. Mit einer dritten Möglichkeit gibt es
+   zwei verschiedene Denkfehler – und der eine wird anders erklärt als der
+   andere. `feedbackWrong` darf deshalb jetzt auch eine Liste sein, mit einem
+   Eintrag je Antwort-Position (null an der Stelle der richtigen Antwort).
+   Ein einzelner Text funktioniert unverändert weiter. */
+function falschFeedback(frage, index) {
+  const f = frage && frage.feedbackWrong;
+  if (Array.isArray(f)) {
+    const eigen = f[index];
+    if (typeof eigen === "string" && eigen.trim()) return eigen.trim();
+    const ersatz = f.find(x => typeof x === "string" && x.trim());
+    return ersatz ? ersatz.trim() : "";
+  }
+  return (typeof f === "string" && f.trim()) ? f.trim() : "";
+}
+
 /* Hilfe zur Aufgabe in zwei Stufen (Prüfbericht B14).
    Vorher bekamen alle Fragen der Plattform denselben Text: fünf allgemeine
    Ratschläge. Beim dritten Mal ist das Rauschen, und wer inhaltlich nicht
@@ -4067,7 +4085,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   playSound(isCorrect ? "correct" : "wrong");
   const explanation = isCorrect
     ? (practice.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
-    : (practice.feedbackWrong || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
+    : (falschFeedback(practice, index) || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -4564,7 +4582,7 @@ function renderEinfachQuizFeedback(optionIndex, isCorrect) {
 
   const feedbackText = isCorrect
     ? (q.feedbackCorrect || "Genau richtig!")
-    : (q.feedbackWrong || "Das war leider falsch. Beim nächsten Mal klappt es besser.");
+    : (falschFeedback(q, optionIndex) || "Das war leider falsch. Beim nächsten Mal klappt es besser.");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -4697,7 +4715,7 @@ function renderQuizFeedbackPage(index) {
 
   const explanation = isCorrect
     ? (q.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
-    : (q.feedbackWrong || "Das ist nicht sicher. Du kannst die Frage noch einmal versuchen.");
+    : (falschFeedback(q, index) || "Das ist nicht sicher. Du kannst die Frage noch einmal versuchen.");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -5460,7 +5478,7 @@ function answerScenario(index) {
 
   const text = richtig
     ? (frage.feedbackCorrect || "Das war sicher. Gut gemacht.")
-    : (frage.feedbackWrong || "Das ist nicht sicher. Schau noch einmal.");
+    : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
   const letzte = scenarioIndex >= scn.szenen.length - 1;
 
   const feld = document.getElementById("szFeedback");

@@ -166,10 +166,15 @@ const topics = [
           "pictogram": "pikto-key",
           "answers": [
             "Ich gebe das Passwort weiter.",
-            "Ich behalte das Passwort für mich."
+            "Ich behalte das Passwort für mich.",
+            "Ich gebe es weiter, wenn die Person nett fragt."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Mit deinem Passwort kann jemand dein Konto benutzen.",
+          "feedbackWrong": [
+            "Dann kann jemand dein Konto benutzen.",
+            null,
+            "Nett fragen ändert nichts. Das Passwort bleibt bei dir."
+          ],
           "feedbackCorrect": "Das ist sicher. Dein Passwort bleibt geheim.",
           "remember": "Mein Passwort bleibt geheim."
         },
@@ -224,10 +229,15 @@ const topics = [
           "pictogram": "pikto-key",
           "answers": [
             "Frank1980",
-            "Blume!Tisch7Wasser"
+            "Blume!Tisch7Wasser",
+            "123456"
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht so sicher. Ein Name oder ein Geburtstag ist leichter zu erraten.",
+          "feedbackWrong": [
+            "Ein Name und ein Geburtstag sind leicht zu erraten.",
+            null,
+            "Diese Zahlen sind das häufigste Passwort. Sie sind sofort geraten."
+          ],
           "feedbackCorrect": "Das ist sicherer. Das Passwort ist lang und schwerer zu erraten.",
           "remember": "Ich nehme ein langes Passwort."
         },
@@ -268,12 +278,17 @@ const topics = [
           "question": "Was macht dein Konto doppelt sicher?",
           "pictogram": "pikto-lock",
           "answers": [
+            "Passwort und eine Zahl auf deinem Handy.",
             "Ein kurzes Passwort.",
-            "Passwort und eine Zahl auf deinem Handy."
+            "Ein sehr langes Passwort."
           ],
-          "correctIndex": 1,
+          "correctIndex": 0,
           "feedbackCorrect": "Das ist richtig. Passwort plus Zahl auf dem Handy: Das ist doppelt sicher.",
-          "feedbackWrong": "Das ist noch nicht richtig. Doppelt sicher heißt: Passwort und eine Zahl auf deinem Handy.",
+          "feedbackWrong": [
+            null,
+            "Ein kurzes Passwort ist schnell erraten.",
+            "Ein langes Passwort ist gut. Doppelt sicher ist es aber erst mit der Zahl auf dem Handy."
+          ],
           "remember": "Doppelt sichern schützt mein Konto."
         },
         "remember": "Doppelt sichern schützt mein Konto."
@@ -305,10 +320,15 @@ const topics = [
           "pictogram": "pikto-house",
           "answers": [
             "Ich trage die Adresse ein.",
+            "Ich trage nur die Stadt ein.",
             "Ich trage die Adresse nicht ein."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wofür die App deine Adresse braucht.",
+          "correctIndex": 2,
+          "feedbackWrong": [
+            "Du weißt nicht, wofür die App deine Adresse braucht.",
+            "Auch die Stadt ist eine private Angabe. Trag lieber nichts ein.",
+            null
+          ],
           "feedbackCorrect": "Das ist sicher. Deine Adresse ist privat. Du gibst sie nicht einfach weiter.",
           "remember": "Ich gebe meine Adresse nicht einfach weiter."
         },
@@ -340,11 +360,16 @@ const topics = [
           "question": "Ein Gewinnspiel fragt nach deiner Telefon-Nummer. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
+            "Ich trage die Telefon-Nummer nicht ein.",
             "Ich trage die Telefon-Nummer ein.",
-            "Ich trage die Telefon-Nummer nicht ein."
+            "Ich trage sie ein und lösche sie später wieder."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Deine Telefon-Nummer ist privat.",
+          "correctIndex": 0,
+          "feedbackWrong": [
+            null,
+            "Deine Telefon-Nummer ist privat.",
+            "Löschen geht nicht mehr. Die Nummer ist dann schon weg."
+          ],
           "feedbackCorrect": "Das ist sicher. Du schützt deine Telefon-Nummer.",
           "remember": "Ich gebe meine Telefon-Nummer nicht einfach weiter."
         },
@@ -378,10 +403,15 @@ const topics = [
           "pictogram": "pikto-house",
           "answers": [
             "Ich schicke das Foto sofort.",
-            "Ich schicke das Foto nicht so weiter."
+            "Ich schicke das Foto nicht so weiter.",
+            "Ich schicke es nur an eine Person."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Andere können die Adresse auf dem Foto lesen.",
+          "feedbackWrong": [
+            "Andere können die Adresse auf dem Foto lesen.",
+            null,
+            "Auch eine Person kann das Foto weiterschicken. Mach die Adresse lieber unkenntlich."
+          ],
           "feedbackCorrect": "Das ist sicher. Du schützt die Adresse auf dem Foto.",
           "remember": "Ich prüfe Fotos vor dem Senden."
         },
@@ -415,11 +445,16 @@ const topics = [
           "question": "Eine fremde Nachricht schickt dir einen Link. Was ist besser?",
           "pictogram": "pikto-stranger",
           "answers": [
+            "Ich öffne den Link nicht sofort.",
             "Ich öffne den Link sofort.",
-            "Ich öffne den Link nicht sofort."
+            "Ich öffne den Link. Ich klicke aber nichts an."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Ein fremder Link kann gefährlich sein.",
+          "correctIndex": 0,
+          "feedbackWrong": [
+            null,
+            "Ein fremder Link kann gefährlich sein.",
+            "Schon das Öffnen kann reichen. Öffne den Link lieber gar nicht."
+          ],
           "feedbackCorrect": "Das ist sicher. Du klickst nicht sofort auf einen fremden Link.",
           "remember": "Ich öffne fremde Links nicht sofort."
         },
@@ -453,10 +488,15 @@ const topics = [
           "pictogram": "pikto-link",
           "answers": [
             "Ich klicke sofort.",
-            "Ich mache langsam."
+            "Ich mache langsam.",
+            "Ich klicke, weil es wichtig klingt."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Die Nachricht macht Druck. Druck ist ein Warnzeichen.",
+          "feedbackWrong": [
+            "Die Nachricht macht Druck. Druck ist ein Warnzeichen.",
+            null,
+            "Wichtig klingen ist genau der Trick. Mach lieber langsam."
+          ],
           "feedbackCorrect": "Das ist sicher. Du machst es langsam. Du überlegst zuerst.",
           "remember": "Eine Nachricht macht Druck? Dann mache ich langsam."
         },
@@ -507,10 +547,15 @@ const topics = [
           "pictogram": "pikto-message",
           "answers": [
             "Ich gebe die Daten ein.",
+            "Ich schreibe zurück und frage, wer das ist.",
             "Ich mache Stopp und frage nach."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist zu schnell. Erst Stopp. Dann fragen.",
+          "correctIndex": 2,
+          "feedbackWrong": [
+            "Das ist zu schnell. Erst Stopp.",
+            "Eine Antwort zeigt: Hier liest jemand. Frag lieber eine vertraute Person.",
+            null
+          ],
           "feedbackCorrect": "Richtig. Erst Stopp. Dann fragen.",
           "remember": "Etwas ist komisch? Dann habe ich einen Plan."
         },
@@ -570,133 +615,177 @@ const topics = [
         "question": "Was ist eine private Information?",
         "pictogram": "pikto-data",
         "answers": [
+          "Das Wetter.",
           "Meine Adresse.",
-          "Das Wetter."
+          "Der Name von meiner Stadt."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "feedbackCorrect": "Das ist richtig. Deine Adresse ist eine private Information.",
-        "feedbackWrong": "Das ist noch nicht richtig. Private Informationen sind Dinge über dich. Zum Beispiel deine Adresse."
-      },
+        "feedbackWrong": [
+          "Das Wetter weiß jeder. Es sagt nichts über dich.",
+          null,
+          "Fast. In einer Stadt wohnen viele Menschen. Deine Adresse zeigt genau, wo du wohnst."
+        ]},
       {
         "hinweis": "Überlege: Wie viele Menschen sollten dein Passwort kennen?",
         "question": "Was machst du mit deinem Passwort?",
         "pictogram": "pikto-key",
         "answers": [
           "Ich gebe es weiter.",
-          "Ich behalte es für mich."
+          "Ich behalte es für mich.",
+          "Ich sage es nur meiner besten Freundin."
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist richtig. Dein Passwort bleibt geheim.",
-        "feedbackWrong": "Das ist noch nicht richtig. Wenn andere dein Passwort kennen, können sie dein Konto benutzen."
-      },
+        "feedbackWrong": [
+          "Dann kann jemand dein Konto benutzen.",
+          null,
+          "Auch bei Menschen, die du magst, bleibt das Passwort geheim."
+        ]},
       {
         "hinweis": "Ein Passwort soll schwer zu raten sein. Was macht es schwer?",
         "question": "Was ist ein gutes Passwort?",
         "pictogram": "pikto-key",
         "answers": [
           "Kurz und leicht.",
+          "Mein Geburtstag.",
           "Lang und schwer zu erraten."
         ],
-        "correctIndex": 1,
+        "correctIndex": 2,
         "feedbackCorrect": "Das ist richtig. Ein langes Passwort ist sicherer.",
-        "feedbackWrong": "Das ist noch nicht richtig. Ein kurzes Passwort ist leichter zu erraten."
-      },
+        "feedbackWrong": [
+          "Ein kurzes Passwort ist schnell erraten.",
+          "Deinen Geburtstag kennen viele Menschen. Das ist zu leicht.",
+          null
+        ]},
       {
         "hinweis": "Doppelt sicher heißt: 2 Dinge. Welche 2 Dinge sind das?",
         "question": "Du sicherst dein Konto doppelt. Was brauchst du beim Anmelden?",
         "pictogram": "pikto-help",
         "answers": [
+          "Passwort und eine Zahl auf dem Handy.",
           "Nur einen Klick.",
-          "Passwort und eine Zahl auf dem Handy."
+          "Zwei Passwörter."
         ],
-        "correctIndex": 1,
+        "correctIndex": 0,
         "feedbackCorrect": "Das ist richtig. Beides zusammen macht dein Konto doppelt sicher.",
-        "feedbackWrong": "Das ist noch nicht richtig. Doppelt sicher heißt: Passwort und eine Zahl auf deinem Handy."
-      },
+        "feedbackWrong": [
+          null,
+          "Ein Klick reicht nicht. Doppelt sicher braucht 2 Dinge.",
+          "Nicht 2 Passwörter. Ein Passwort und eine Zahl auf deinem Handy."
+        ]},
       {
         "hinweis": "Frag dich: Braucht die Seite deine Adresse wirklich für ein Video?",
         "question": "Eine Internet-Seite will deine Adresse. Erst dann zeigt sie dir ein Video. Was machst du?",
         "pictogram": "pikto-house",
         "answers": [
-          "Ich gebe die Adresse nicht ein.",
-          "Ich gebe die Adresse ein."
+          "Ich gebe die Adresse ein.",
+          "Ich gebe eine falsche Adresse ein.",
+          "Ich gebe die Adresse nicht ein."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "feedbackCorrect": "Richtig. Für ein Video braucht niemand deine Adresse.",
-        "feedbackWrong": "Das ist nicht sicher. Für ein Video braucht niemand deine Adresse."
-      },
+        "feedbackWrong": [
+          "Für ein Video braucht niemand deine Adresse.",
+          "Besser gar nichts eingeben. Dann bist du sicher.",
+          null
+        ]},
       {
         "hinweis": "Frag dich: Wofür braucht eine App deine Telefon-Nummer?",
         "question": "Eine kostenlose App fragt beim Anmelden nach deiner Telefon-Nummer. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
+          "Ich frage zuerst eine vertraute Person.",
           "Ich gebe die Telefon-Nummer ein.",
-          "Ich frage zuerst eine vertraute Person."
+          "Ich gebe die Nummer von jemand anderem ein."
         ],
-        "correctIndex": 1,
+        "correctIndex": 0,
         "feedbackCorrect": "Richtig. Deine Telefon-Nummer ist privat. Frag lieber nach.",
-        "feedbackWrong": "Das ist nicht sicher. Deine Telefon-Nummer kann an Fremde gehen."
-      },
+        "feedbackWrong": [
+          null,
+          "Deine Telefon-Nummer kann dann an Fremde gehen.",
+          "Die Nummer von anderen Menschen gehört dir nicht. Frag lieber nach."
+        ]},
       {
         "hinweis": "Überlege: Was ist auf dem Foto zu sehen? Und wer bekommt es?",
         "question": "Du willst ein Foto senden. Was machst du zuerst?",
         "pictogram": "pikto-photo",
         "answers": [
+          "Sofort senden.",
           "Foto prüfen.",
-          "Sofort senden."
+          "Das Foto kleiner machen."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "feedbackCorrect": "Das ist richtig. Du prüfst: Sind private Dinge zu sehen?",
-        "feedbackWrong": "Das ist noch nicht richtig. Auf einem Foto können private Dinge zu sehen sein."
-      },
+        "feedbackWrong": [
+          "Auf einem Foto können private Dinge zu sehen sein.",
+          null,
+          "Die Größe ändert nichts. Wichtig ist, was zu sehen ist."
+        ]},
       {
         "hinweis": "Frag dich: Weißt du, wohin der Link führt?",
         "question": "Eine fremde Nachricht schickt einen Link. Was ist besser?",
         "pictogram": "pikto-stranger",
         "answers": [
           "Link sofort öffnen.",
+          "Erst die Person fragen, die den Link geschickt hat.",
           "Link nicht sofort öffnen."
         ],
-        "correctIndex": 1,
+        "correctIndex": 2,
         "feedbackCorrect": "Das ist richtig. Ein fremder Link kann gefährlich sein.",
-        "feedbackWrong": "Das ist noch nicht richtig. Ein fremder Link kann gefährlich sein."
-      },
+        "feedbackWrong": [
+          "Ein fremder Link kann gefährlich sein.",
+          "Die Person kennst du nicht. Ihre Antwort hilft dir nicht weiter.",
+          null
+        ]},
       {
         "hinweis": "Druck ist ein Warnzeichen. Was hilft dir bei Druck?",
         "question": "Eine Nachricht macht Druck. Was ist besser?",
         "pictogram": "pikto-message",
         "answers": [
           "Schnell klicken.",
-          "Langsam machen."
+          "Langsam machen.",
+          "Zurückschreiben und nach mehr Zeit fragen."
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist richtig. Du machst es langsam. Du überlegst zuerst.",
-        "feedbackWrong": "Das ist noch nicht richtig. Druck ist ein Warnzeichen."
-      },
+        "feedbackWrong": [
+          "Druck ist ein Warnzeichen. Schnell klicken ist gefährlich.",
+          null,
+          "Du musst gar nicht antworten. Mach erst langsam."
+        ]},
       {
         "hinweis": "Ein Passwort ist wie ein Schlüssel. Wem gibst du deinen Schlüssel?",
         "question": "Wer darf dein Passwort kennen?",
         "pictogram": "pikto-key",
         "answers": [
           "Nur ich.",
-          "Alle in der Gruppe."
+          "Alle in der Gruppe.",
+          "Ich und die Firma von der App."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist richtig. Nur du darfst dein Passwort kennen.",
-        "feedbackWrong": "Das ist noch nicht richtig. Dein Passwort ist nicht für die Gruppe."
-      },
+        "feedbackWrong": [
+          null,
+          "Dein Passwort ist nicht für die Gruppe.",
+          "Auch die Firma fragt nie nach deinem Passwort. Wer fragt, will dich austricksen."
+        ]},
       {
         "hinweis": "Denk an deinen Plan aus diesem Thema. Womit fängt er an?",
         "question": "Was ist eine gute Regel für deine Daten?",
         "pictogram": "pikto-lock",
         "answers": [
-          "Erst prüfen. Dann eingeben.",
-          "Immer sofort eingeben."
+          "Immer sofort eingeben.",
+          "Nie etwas eingeben.",
+          "Erst prüfen. Dann eingeben."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "feedbackCorrect": "Richtig. Erst prüfen. Dann eingeben.",
-        "feedbackWrong": "Das ist nicht sicher. Prüfe erst, wer die Daten haben will."
-      }
+        "feedbackWrong": [
+          "Prüfe erst, wer die Daten haben will.",
+          "Manchmal ist es in Ordnung. Wichtig ist: erst prüfen.",
+          null
+        ]}
     ],
     "helpQuestions": [
       "Muss ich diese Daten eingeben?",

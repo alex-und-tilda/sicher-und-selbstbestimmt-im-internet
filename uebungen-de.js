@@ -32,18 +32,18 @@ const EXTRA_PRACTICE = {
       "Was sind private Daten?": {
         question: "Was davon ist eine private Angabe?",
         pictogram: "pikto-data",
-        answers: ["Deine Telefon-Nummer.", "Das Wetter von heute."],
+        answers: ["Deine Telefon-Nummer.", "Das Wetter von heute.", "Die Uhrzeit."],
         correctIndex: 0,
-        feedbackWrong: "Das Wetter weiß jeder. Deine Telefon-Nummer gehört nur dir.",
+        feedbackWrong: [null, "Das Wetter weiß jeder.", "Die Uhrzeit ist für alle gleich. Sie sagt nichts über dich."],
         feedbackCorrect: "Richtig. Deine Telefon-Nummer gehört zu dir.",
         remember: "Private Daten gehören zu mir."
       },
       "Besonders wichtige Daten": {
         question: "Welche Angabe schützt du am besten?",
         pictogram: "pikto-key",
-        answers: ["Deine Lieblings-Farbe.", "Deine Bank-Daten."],
-        correctIndex: 1,
-        feedbackWrong: "Die Lieblings-Farbe schadet niemandem. Mit Bank-Daten kann man dir Geld nehmen.",
+        answers: ["Deine Lieblings-Farbe.", "Dein Vorname.", "Deine Bank-Daten."],
+        correctIndex: 2,
+        feedbackWrong: ["Die Lieblings-Farbe schadet niemandem.", "Deinen Vornamen kennen viele. Mit Bank-Daten kann man dir Geld nehmen.", null],
         feedbackCorrect: "Genau. Mit Bank-Daten kann jemand großen Schaden machen.",
         remember: "Besonders wichtige Daten gebe ich nicht weiter."
       }
@@ -52,27 +52,27 @@ const EXTRA_PRACTICE = {
       "Deine privaten Daten": {
         question: "Wem gehören deine privaten Daten?",
         pictogram: "pikto-person",
-        answers: ["Nur mir.", "Allen im Internet."],
+        answers: ["Nur mir.", "Allen im Internet.", "Der Firma von der App."],
         correctIndex: 0,
-        feedbackWrong: "Nein. Deine Daten gehören dir. Du entscheidest.",
+        feedbackWrong: [null, "Nein. Deine Daten gehören dir.", "Die Firma darf sie nur benutzen. Dir gehören sie."],
         feedbackCorrect: "Genau. Du entscheidest über deine Daten.",
         remember: "Private Daten sind nur für mich."
       },
       "Dein Passwort": {
         question: "Deine beste Freundin fragt nach deinem Passwort. Was machst du?",
         pictogram: "pikto-lock",
-        answers: ["Ich sage es ihr.", "Ich sage es auch ihr nicht."],
+        answers: ["Ich sage es ihr.", "Ich sage es auch ihr nicht.", "Ich sage es ihr und ändere es danach."],
         correctIndex: 1,
-        feedbackWrong: "Ein Passwort bleibt geheim. Auch bei Menschen, die du magst.",
+        feedbackWrong: ["Ein Passwort bleibt geheim. Auch bei Menschen, die du magst.", null, "Umständlich und unsicher. Sag es lieber gar nicht."],
         feedbackCorrect: "Richtig. Ein Passwort bleibt geheim. Immer.",
         remember: "Mein Passwort bleibt geheim."
       },
       "Jemand fragt nach deinen Daten": {
         question: "Eine Nachricht fragt nach deinen Daten. Was tust du zuerst?",
         pictogram: "pikto-ask",
-        answers: ["Ich frage eine vertraute Person.", "Ich gebe die Daten ein."],
-        correctIndex: 0,
-        feedbackWrong: "Erst eingeben und dann fragen ist zu spät. Frag vorher.",
+        answers: ["Ich gebe die Daten ein.", "Ich schaue, ob die Nachricht echt aussieht.", "Ich frage eine vertraute Person."],
+        correctIndex: 2,
+        feedbackWrong: ["Erst eingeben und dann fragen ist zu spät.", "Betrug sieht oft echt aus. Frag lieber eine vertraute Person.", null],
         feedbackCorrect: "Sehr gut. Erst fragen. Dann entscheiden.",
         remember: "Erst fragen. Dann entscheiden."
       }
