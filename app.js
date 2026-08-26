@@ -4229,6 +4229,25 @@ function renderMiniCheck(topicId) {
    lernende Person hat ihren eigenen Zuwachs nie gesehen. Der Vergleich
    bleibt in der Sitzung, es wird nichts gespeichert (§14).
    PRUEFGRUPPE: Wortlaut "Das war das Thema. Wie ist es jetzt?" testen (§13). */
+/* Lernziele am Ende einlösen (Prüfbericht B13).
+   Schritt 1 kündigt unter „Was du hier lernst:" drei Ziele an. Danach kamen
+   sie nie wieder vor: die Abschluss-Seite zeigte nur die Merkregeln, in
+   anderer Grammatik. Bei TikTok, Betrug, Hilfe und KI war am Ende kein
+   einziges der angekündigten Ziele wiederzufinden.
+   Hier steht dieselbe Liste noch einmal – Wort für Wort, mit Haken. Der Kreis
+   „Das lernst du → Das hast du gelernt" schließt sich damit sichtbar. */
+function buildGoalsDone(topic) {
+  const ziele = Array.isArray(topic && topic.learningGoals) ? topic.learningGoals : [];
+  if (!ziele.length) return "";
+  return `
+    <div class="learning-goals-box learning-goals-box--done">
+      <h3>Das hast du gelernt:</h3>
+      <ul class="learning-goals-list goals-done-list">
+        ${ziele.map(z => `<li><span class="goal-check" aria-hidden="true">✓</span>${escapeHtml(z)}</li>`).join("")}
+      </ul>
+    </div>`;
+}
+
 function buildClosingSelfCheck(topic) {
   const sa = resolveSelfAssessment(topic, languageLevel);
   if (!sa || !Array.isArray(sa.options) || !sa.options.length) return "";
@@ -4315,6 +4334,8 @@ function renderCompletionPage(topicId) {
 
           <p class="einfach-done-praise">Das war toll.<br>Du hast gut aufgepasst.</p>
 
+          ${buildGoalsDone(topic)}
+
           ${topic.transfer ? `
           <div class="access-box remember remember-box">
             <h3>Eine Sache für heute</h3>
@@ -4376,6 +4397,8 @@ function renderCompletionPage(topicId) {
         </div>
 
         <p>Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
+
+        ${buildGoalsDone(topic)}
 
         <h3>Das hast du geübt:</h3>
         <ul>

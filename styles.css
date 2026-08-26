@@ -4029,6 +4029,38 @@ body.simple-mode .practice-box {
   font-style: italic;
 }
 
+/* Dieselbe Liste am Ende, eingelöst (Prüfbericht B13). Gleiche Bauform wie
+   auf Schritt 1, damit die Person sie wiedererkennt – nur in der Erfolgs-
+   Farbe und mit Haken statt Aufzählungs-Punkt. */
+.learning-goals-box--done {
+  background: var(--good-soft, rgba(21, 128, 61, 0.10));
+  border-left-color: var(--good);
+}
+
+.learning-goals-box--done h3 {
+  color: var(--good);
+}
+
+.goals-done-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.goals-done-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.goal-check {
+  flex: 0 0 auto;
+  color: var(--good);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
 /* ---------- Start-Screen: Fehler-Normalisierung ---------- */
 
 .start-safe-notice {
