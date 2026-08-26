@@ -2931,6 +2931,24 @@ p.feedback-wrong {
   border-bottom-color: var(--ink-soft);
 }
 
+/* Erste Stufe der Aufgaben-Hilfe: inhaltlicher Tipp, deutlich abgesetzt von
+   der allgemeinen Liste darunter (Prüfbericht B14). */
+.task-help-tip {
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  padding: 12px 14px;
+  margin: 0 0 14px;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.task-help-tip-label {
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-right: 6px;
+}
+
 /* Hinweis unter den Antworten: sagt, wo es danach weitergeht (B2). */
 .practice-nav-hint {
   margin: 12px 0 0;

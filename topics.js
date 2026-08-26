@@ -566,6 +566,7 @@ const topics = [
     "illustration": "assets/illustrations/datenschutz.svg",
     "quizQuestions": [
       {
+        "hinweis": "Überlege: Was sagt etwas über dich? Und was weiß sowieso jeder?",
         "question": "Was ist eine private Information?",
         "pictogram": "pikto-data",
         "answers": [
@@ -577,6 +578,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Private Informationen sind Dinge über dich. Zum Beispiel deine Adresse."
       },
       {
+        "hinweis": "Überlege: Wie viele Menschen sollten dein Passwort kennen?",
         "question": "Was machst du mit deinem Passwort?",
         "pictogram": "pikto-key",
         "answers": [
@@ -588,6 +590,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Wenn andere dein Passwort kennen, können sie dein Konto benutzen."
       },
       {
+        "hinweis": "Ein Passwort soll schwer zu raten sein. Was macht es schwer?",
         "question": "Was ist ein gutes Passwort?",
         "pictogram": "pikto-key",
         "answers": [
@@ -599,6 +602,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Ein kurzes Passwort ist leichter zu erraten."
       },
       {
+        "hinweis": "Doppelt sicher heißt: 2 Dinge. Welche 2 Dinge sind das?",
         "question": "Du sicherst dein Konto doppelt. Was brauchst du beim Anmelden?",
         "pictogram": "pikto-help",
         "answers": [
@@ -610,6 +614,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Doppelt sicher heißt: Passwort und eine Zahl auf deinem Handy."
       },
       {
+        "hinweis": "Frag dich: Braucht die Seite deine Adresse wirklich für ein Video?",
         "question": "Eine Internet-Seite will deine Adresse. Erst dann zeigt sie dir ein Video. Was machst du?",
         "pictogram": "pikto-house",
         "answers": [
@@ -621,6 +626,7 @@ const topics = [
         "feedbackWrong": "Das ist nicht sicher. Für ein Video braucht niemand deine Adresse."
       },
       {
+        "hinweis": "Frag dich: Wofür braucht eine App deine Telefon-Nummer?",
         "question": "Eine kostenlose App fragt beim Anmelden nach deiner Telefon-Nummer. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
@@ -632,6 +638,7 @@ const topics = [
         "feedbackWrong": "Das ist nicht sicher. Deine Telefon-Nummer kann an Fremde gehen."
       },
       {
+        "hinweis": "Überlege: Was ist auf dem Foto zu sehen? Und wer bekommt es?",
         "question": "Du willst ein Foto senden. Was machst du zuerst?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -643,6 +650,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Auf einem Foto können private Dinge zu sehen sein."
       },
       {
+        "hinweis": "Frag dich: Weißt du, wohin der Link führt?",
         "question": "Eine fremde Nachricht schickt einen Link. Was ist besser?",
         "pictogram": "pikto-stranger",
         "answers": [
@@ -654,6 +662,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Ein fremder Link kann gefährlich sein."
       },
       {
+        "hinweis": "Druck ist ein Warnzeichen. Was hilft dir bei Druck?",
         "question": "Eine Nachricht macht Druck. Was ist besser?",
         "pictogram": "pikto-message",
         "answers": [
@@ -665,6 +674,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Druck ist ein Warnzeichen."
       },
       {
+        "hinweis": "Ein Passwort ist wie ein Schlüssel. Wem gibst du deinen Schlüssel?",
         "question": "Wer darf dein Passwort kennen?",
         "pictogram": "pikto-key",
         "answers": [
@@ -676,6 +686,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Dein Passwort ist nicht für die Gruppe."
       },
       {
+        "hinweis": "Denk an deinen Plan aus diesem Thema. Womit fängt er an?",
         "question": "Was ist eine gute Regel für deine Daten?",
         "pictogram": "pikto-lock",
         "answers": [
@@ -1190,6 +1201,7 @@ const topics = [
     "illustration": "assets/illustrations/whatsapp.svg",
     "quizQuestions": [
       {
+        "hinweis": "Du weißt nicht, wer die Nummer hat. Was heißt das für deine Antwort?",
         "question": "Eine unbekannte Nummer schickt dir ein Foto. Was machst du?",
         "pictogram": "pikto-stranger",
         "answers": [
@@ -1201,6 +1213,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Bei unbekannten Nummern antwortest du nicht sofort."
       },
       {
+        "hinweis": "Frag dich: Woher weißt du, dass wirklich deine Freundin schreibt?",
         "question": "Eine Freundin schreibt: Ich habe dir aus Versehen einen Code geschickt. Schick ihn zurück. Was machst du?",
         "pictogram": "pikto-code",
         "answers": [
@@ -1212,6 +1225,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Der Code bleibt bei dir. Ruf lieber an."
       },
       {
+        "hinweis": "Überlege: Warum schickt jemand einen Gutschein an eine ganze Gruppe?",
         "question": "In einer Gruppe steht ein Link. Es soll einen Gutschein geben. Was machst du?",
         "pictogram": "pikto-stranger",
         "answers": [
@@ -1223,6 +1237,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Gutschein-Links sind oft ein Trick."
       },
       {
+        "hinweis": "Auf dem Foto sind andere Menschen. Dürfen die mitbestimmen?",
         "question": "Auf einem Foto von einer Feier sind mehrere Personen. Du willst es senden. Was machst du?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -1234,6 +1249,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Die anderen dürfen mitbestimmen."
       },
       {
+        "hinweis": "Überlege: Wer bestimmt, wann du antwortest?",
         "question": "Jemand schreibt dir 10 Nachrichten hintereinander. Du sollst sofort antworten. Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
@@ -1245,6 +1261,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Du bestimmst, wann du antwortest."
       },
       {
+        "hinweis": "Du musst die Gruppe nicht verlassen. Es gibt noch etwas dazwischen.",
         "question": "Was kannst du mit einer stressigen Gruppe machen?",
         "pictogram": "pikto-message",
         "answers": [
@@ -1256,6 +1273,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du darfst Gruppen stumm schalten."
       },
       {
+        "hinweis": "Eine Sprach-Nachricht kann man weiterschicken. Was heißt das für dich?",
         "question": "Was ist bei Sprach-Nachrichten wichtig?",
         "pictogram": "pikto-message",
         "answers": [
@@ -1267,6 +1285,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du überlegst vorher."
       },
       {
+        "hinweis": "Druck und Eile sind ein Warnzeichen. Was hilft dagegen?",
         "question": "Eine Nachricht sagt: sofort bezahlen. Was ist besser?",
         "pictogram": "pikto-money",
         "answers": [
@@ -1278,6 +1297,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du bezahlst nicht sofort."
       },
       {
+        "hinweis": "Überlege: Wie viele Menschen lesen in einer Gruppe mit?",
         "question": "Was gehört nicht in eine Gruppe?",
         "pictogram": "pikto-message",
         "answers": [
@@ -1289,6 +1309,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Private Daten bleiben geschützt."
       },
       {
+        "hinweis": "Denk an die Regel aus diesem Thema. Was kommt vor dem Klicken?",
         "question": "Was ist eine gute WhatsApp-Regel?",
         "pictogram": "pikto-message",
         "answers": [
@@ -1730,6 +1751,7 @@ const topics = [
     "illustration": "assets/illustrations/facebook.svg",
     "quizQuestions": [
       {
+        "hinweis": "Überlege: Wer soll dein Zuhause sehen?",
         "question": "Du willst ein Foto von deiner neuen Wohnung posten. Woran denkst du zuerst?",
         "pictogram": "pikto-search",
         "answers": [
@@ -1741,6 +1763,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Prüfe zuerst, wer es sehen kann."
       },
       {
+        "hinweis": "Frag dich: Was weißt du über dieses Profil?",
         "question": "Eine Anfrage kommt von einem Profil ohne Foto. Was machst du?",
         "pictogram": "pikto-stranger",
         "answers": [
@@ -1752,6 +1775,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Schau dir das Profil erst an."
       },
       {
+        "hinweis": "Überlege: Was möchtest du selbst gern lesen?",
         "question": "Jemand schreibt etwas, das du dumm findest. Wie antwortest du?",
         "pictogram": "pikto-people",
         "answers": [
@@ -1763,6 +1787,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Freundlich bleiben hilft immer."
       },
       {
+        "hinweis": "Frag dich: Was gehört nur dir?",
         "question": "Was kann privat sein?",
         "pictogram": "pikto-data",
         "answers": [
@@ -1774,6 +1799,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Deine Telefon-Nummer ist privat."
       },
       {
+        "hinweis": "Du musst das nicht aushalten. Was kannst du mit der Person machen?",
         "question": "Eine Person beleidigt dich immer wieder unter deinen Beiträgen. Was machst du?",
         "pictogram": "pikto-people",
         "answers": [
@@ -1785,6 +1811,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Blockieren und Hilfe holen ist stark."
       },
       {
+        "hinweis": "Öffentlich ist ein großes Wort. Wie groß ist es?",
         "question": "Bei einem Beitrag steht: öffentlich. Was heißt das?",
         "pictogram": "pikto-people",
         "answers": [
@@ -1796,6 +1823,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Öffentlich heißt: alle können es sehen."
       },
       {
+        "hinweis": "Auf dem Foto ist eine andere Person. Darf sie mitbestimmen?",
         "question": "Du hast ein Foto von einer Kollegin. Du willst es posten. Was machst du?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -1807,6 +1835,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Frag die Person vorher."
       },
       {
+        "hinweis": "Überlege: Ist ein alter Beitrag wirklich weg?",
         "question": "Warum sind alte Beiträge wichtig?",
         "pictogram": "pikto-people",
         "answers": [
@@ -1818,6 +1847,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Alte Beiträge können sichtbar bleiben."
       },
       {
+        "hinweis": "Frag dich: Was muss wirklich im Profil stehen?",
         "question": "Was ist gut im Profil?",
         "pictogram": "pikto-person",
         "answers": [
@@ -1829,6 +1859,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du zeigst nur nötige Informationen."
       },
       {
+        "hinweis": "Denk an die Regel aus diesem Thema. Was kommt vor dem Posten?",
         "question": "Was ist eine gute Regel für Facebook?",
         "pictogram": "pikto-people",
         "answers": [
@@ -2268,6 +2299,7 @@ const topics = [
     "illustration": "assets/illustrations/instagram.svg",
     "quizQuestions": [
       {
+        "hinweis": "Auf einem Selfie ist mehr zu sehen als dein Gesicht. Was noch?",
         "question": "Du machst ein Selfie in deiner Wohnung. Worauf achtest du?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -2279,6 +2311,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Im Hintergrund steht oft mehr, als du denkst."
       },
       {
+        "hinweis": "Überlege: Wer kann eine Story alles sehen?",
         "question": "Du markierst in einer Story den Ort. Wer sieht den Ort?",
         "pictogram": "pikto-location",
         "answers": [
@@ -2290,6 +2323,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Alle sehen dann, wo du bist."
       },
       {
+        "hinweis": "Geld für ein privates Foto ist ein Warnzeichen. Was machst du bei Warnzeichen?",
         "question": "Eine fremde Person bietet dir Geld für ein privates Foto. Was machst du?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -2301,6 +2335,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Sag nein und hol dir Hilfe."
       },
       {
+        "hinweis": "Andere haben die Story 24 Stunden lang gesehen. Was konnten sie in der Zeit tun?",
         "question": "Deine Story ist nach 24 Stunden weg. Ist sie dann wirklich weg?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2312,6 +2347,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Andere können ein Bild vom Bildschirm machen."
       },
       {
+        "hinweis": "Du musst das nicht allein aushalten. Wer kann dir helfen?",
         "question": "Mehrere Personen schreiben Gemeines unter dein Foto. Was machst du?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -2323,6 +2359,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Du musst das nicht allein aushalten."
       },
       {
+        "hinweis": "Überlege: Kann man Fotos am Computer verändern?",
         "question": "Auf einem Foto sieht eine Person perfekt aus. Was kann sein?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -2334,6 +2371,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Sehr viele Fotos sind bearbeitet."
       },
       {
+        "hinweis": "Denk an die Regel aus diesem Thema. Was kommt vor dem Teilen?",
         "question": "Was ist eine gute Regel für Instagram?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -2345,6 +2383,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Erst prüfen. Dann teilen."
       },
       {
+        "hinweis": "Frag dich: Wem vertraust du wirklich?",
         "question": "Wer darf private Fotos bekommen?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -2356,6 +2395,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Private Fotos gehen nicht an Fremde."
       },
       {
+        "hinweis": "Bei komischen Nachrichten hilft immer der gleiche erste Schritt.",
         "question": "Was hilft bei komischen Nachrichten?",
         "pictogram": "pikto-message",
         "answers": [
@@ -2367,6 +2407,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du machst Stopp."
       },
       {
+        "hinweis": "Überlege: Woher weiß Instagram, wo du bist?",
         "question": "Wie schützt du bei Instagram deinen Standort?",
         "pictogram": "pikto-location",
         "answers": [
@@ -2778,6 +2819,7 @@ const topics = [
     "illustration": "assets/illustrations/youtube.svg",
     "quizQuestions": [
       {
+        "hinweis": "Reich werden mit einem Mittel. Klingt das echt?",
         "question": "Ein Video verspricht: Dieses Mittel macht dich reich. Was ist besser?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2789,6 +2831,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du prüfst erst."
       },
       {
+        "hinweis": "Frag dich: Was soll der Link bewirken?",
         "question": "Eine YouTuberin lobt ein Produkt. Darunter steht ein Link zum Kaufen. Was ist das?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2800,6 +2843,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Ein Kauf-Link ist ein Zeichen für Werbung."
       },
       {
+        "hinweis": "Überlege: Wer hat den Schaden, wenn etwas passiert?",
         "question": "Freunde sagen: Alle machen diese Mutprobe. Was machst du?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2811,6 +2855,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Du entscheidest selbst."
       },
       {
+        "hinweis": "Frag dich: Wolltest du wirklich so lange schauen?",
         "question": "Du wolltest 1 Video sehen. Jetzt ist 1 Stunde vorbei. Was machst du?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2822,6 +2867,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Pausen tun dir gut."
       },
       {
+        "hinweis": "Angst wird kleiner, wenn man sie teilt. Mit wem?",
         "question": "Nach einem Video kannst du nicht einschlafen. Was hilft dir?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2833,6 +2879,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Reden hilft."
       },
       {
+        "hinweis": "Überraschend heißt nicht immer wahr. Was hilft dir?",
         "question": "Ein Video sagt etwas Überraschendes. Was machst du?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2844,6 +2891,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Prüfe wichtige Sachen an einer zweiten Stelle."
       },
       {
+        "hinweis": "Überlege: Warum bezahlt jemand für Werbung?",
         "question": "Was macht Werbung oft?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2855,6 +2903,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Werbung will oft verkaufen."
       },
       {
+        "hinweis": "Frag dich: Wie fühlt sich dein Kopf nach 3 Stunden Videos an?",
         "question": "Warum sind Pausen wichtig?",
         "pictogram": "pikto-clock",
         "answers": [
@@ -2866,6 +2915,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Pausen helfen dir."
       },
       {
+        "hinweis": "Du musst das nicht allein aushalten.",
         "question": "Was machst du bei verletzenden Kommentaren?",
         "pictogram": "pikto-video",
         "answers": [
@@ -2877,6 +2927,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein."
       },
       {
+        "hinweis": "Denk an die Regel aus diesem Thema. Wer bestimmt, wann Schluss ist?",
         "question": "Was ist eine gute YouTube-Regel?",
         "pictogram": "pikto-video",
         "answers": [
@@ -3255,6 +3306,7 @@ const topics = [
     "illustration": "assets/illustrations/snapchat.svg",
     "quizQuestions": [
       {
+        "hinweis": "Andere sehen den Snap 10 Sekunden lang. Was können sie in der Zeit tun?",
         "question": "Dein Snap ist nach 10 Sekunden weg. Ist er aus der Welt?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -3266,6 +3318,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Ein Snap kann gespeichert sein."
       },
       {
+        "hinweis": "Auf der Karte ist dein Zuhause zu sehen. Wer soll das wissen?",
         "question": "Auf der Karte sehen alle Freunde dein Zuhause. Was machst du?",
         "pictogram": "pikto-location",
         "answers": [
@@ -3277,6 +3330,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Dein Zuhause geht niemanden etwas an."
       },
       {
+        "hinweis": "Überlege: Muss man etwas beweisen, damit jemand einen mag?",
         "question": "Jemand sagt: Wenn du mich magst, schick mir das Bild. Was machst du?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -3288,6 +3342,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Liebe zwingt niemanden."
       },
       {
+        "hinweis": "Du kennst die Person nicht. Was darfst du dann tun?",
         "question": "Eine Person schickt dir viele Snaps. Du kennst sie nicht. Was machst du?",
         "pictogram": "pikto-person",
         "answers": [
@@ -3299,6 +3354,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Bei Fremden darfst du blockieren."
       },
       {
+        "hinweis": "Sag es niemandem. Das ist ein bekanntes Muster. Welches?",
         "question": "Eine Nachricht sagt: Schick ein Bild, aber sag es niemandem. Was ist das?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -3310,6 +3366,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Es ist ein Warnzeichen."
       },
       {
+        "hinweis": "Frag dich: Woher weiß die Karte, wo du bist?",
         "question": "Snapchat zeigt auf einer Karte, wo du bist. Was ist sicherer?",
         "pictogram": "pikto-location",
         "answers": [
@@ -3321,6 +3378,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Ohne Karte weiß niemand, wo du bist."
       },
       {
+        "hinweis": "Bei Druck hast du immer ein Wort. Welches Wort ist das?",
         "question": "Was darfst du bei Druck sagen?",
         "pictogram": "pikto-warning",
         "answers": [
@@ -3332,6 +3390,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Du darfst Nein sagen."
       },
       {
+        "hinweis": "Überlege: Was passiert, wenn du ein Bild vom Bildschirm machst?",
         "question": "Du machst ein Bild vom Bildschirm. Was hast du dann?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -3343,6 +3402,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Du hast ein Foto vom Bildschirm."
       },
       {
+        "hinweis": "Bei Unbekannten hilft immer der gleiche erste Schritt.",
         "question": "Was machst du bei komischen Kontakten?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -3354,6 +3414,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du prüfst Kontakte."
       },
       {
+        "hinweis": "Denk an die Regel aus diesem Thema. Was kommt vor dem Senden?",
         "question": "Was ist eine gute Snapchat-Regel?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -3784,6 +3845,7 @@ const topics = [
     "illustration": "assets/illustrations/tiktok.svg",
     "quizQuestions": [
       {
+        "hinweis": "Luft anhalten kann gefährlich werden. Was heißt das für dich?",
         "question": "Bei einer Challenge sollst du die Luft anhalten. Was machst du?",
         "pictogram": "pikto-video",
         "answers": [
@@ -3795,6 +3857,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Solche Challenges können sehr gefährlich sein."
       },
       {
+        "hinweis": "Frag dich: Wer bestimmt, wann du aufhörst?",
         "question": "Es ist spät. Das nächste Video startet von allein. Was machst du?",
         "pictogram": "pikto-clock",
         "answers": [
@@ -3806,6 +3869,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Du bestimmst, wann Schluss ist."
       },
       {
+        "hinweis": "Ein Geschenk klingt nett. Aber wofür braucht die Person deine Adresse?",
         "question": "Jemand will dir ein Geschenk schicken. Die Person fragt, wo du wohnst. Was machst du?",
         "pictogram": "pikto-house",
         "answers": [
@@ -3817,6 +3881,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Geschenke sind oft nur ein Trick."
       },
       {
+        "hinweis": "Auf dem Schild steht dein Straßen-Name. Wer soll den lesen?",
         "question": "In deinem Video sieht man das Straßen-Schild. Was machst du?",
         "pictogram": "pikto-video",
         "answers": [
@@ -3828,6 +3893,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Das Schild verrät, wo du wohnst."
       },
       {
+        "hinweis": "Du musst Gemeines nicht stehen lassen. Was bietet TikTok dafür an?",
         "question": "Unter deinem Video macht sich jemand über dich lustig. Was tust du?",
         "pictogram": "pikto-video",
         "answers": [
@@ -3839,6 +3905,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Melden ist erlaubt und hilft."
       },
       {
+        "hinweis": "Überlege: Warum zeigt TikTok dir immer ähnliche Videos?",
         "question": "Was macht TikTok mit ähnlichen Videos?",
         "pictogram": "pikto-video",
         "answers": [
@@ -3850,6 +3917,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. TikTok zeigt oft mehr davon."
       },
       {
+        "hinweis": "Bei Trends hilft der gleiche Schritt wie überall.",
         "question": "Was schützt dich bei Trends?",
         "pictogram": "pikto-video",
         "answers": [
@@ -3861,6 +3929,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du prüfst vorher."
       },
       {
+        "hinweis": "Frag dich: Wem gehören deine Daten?",
         "question": "Was schützt private Daten?",
         "pictogram": "pikto-data",
         "answers": [
@@ -3872,6 +3941,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du sendest sie nicht an Fremde."
       },
       {
+        "hinweis": "Du bestimmst, wann Schluss ist. Was kannst du dafür tun?",
         "question": "Was darfst du bei TikTok machen?",
         "pictogram": "pikto-video",
         "answers": [
@@ -3883,6 +3953,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Du darfst TikTok schließen."
       },
       {
+        "hinweis": "Denk an die Regel aus diesem Thema. Was kommt vor dem Mitmachen?",
         "question": "Was ist eine gute TikTok-Regel?",
         "pictogram": "pikto-video",
         "answers": [
@@ -4312,6 +4383,7 @@ const topics = [
     "illustration": "assets/illustrations/hilfe.svg",
     "quizQuestions": [
       {
+        "hinweis": "Die Nachricht macht Eile. Was hilft gegen Eile?",
         "question": "Eine Nachricht sagt: Dein Konto wird gleich gelöscht. Was machst du zuerst?",
         "pictogram": "pikto-message",
         "answers": [
@@ -4323,6 +4395,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Erst Stopp. Dann in Ruhe überlegen."
       },
       {
+        "hinweis": "Überlege: Brauchst du die Nachricht vielleicht noch?",
         "question": "Du hast eine böse Nachricht bekommen. Du willst sie löschen. Was ist besser?",
         "pictogram": "pikto-help",
         "answers": [
@@ -4334,6 +4407,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Die Nachricht kann als Beweis helfen."
       },
       {
+        "hinweis": "Frag dich: Wie zeigst du jemandem, was passiert ist?",
         "question": "Warum ist nicht sofort löschen wichtig?",
         "pictogram": "pikto-warning",
         "answers": [
@@ -4345,6 +4419,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Die Nachricht kann als Beweis helfen."
       },
       {
+        "hinweis": "Geheimnis und Druck kommen oft zusammen. Was heißt das?",
         "question": "Jemand sagt: Das ist unser Geheimnis. Was ist das?",
         "pictogram": "pikto-warning",
         "answers": [
@@ -4356,6 +4431,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Geheimnisse mit Druck sind ein Warnzeichen."
       },
       {
+        "hinweis": "Überlege: Gibt es nur eine Person, der du vertraust?",
         "question": "Es ist Wochenende. Deine Unterstützerin ist nicht da. Wen kannst du fragen?",
         "pictogram": "pikto-message",
         "answers": [
@@ -4367,6 +4443,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Es gibt immer mehr als eine Person."
       },
       {
+        "hinweis": "Angst wird kleiner, wenn man sie teilt.",
         "question": "Was hilft bei Angst?",
         "pictogram": "pikto-warning",
         "answers": [
@@ -4378,6 +4455,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein."
       },
       {
+        "hinweis": "Überlege: Macht ein Foto etwas weg? Oder hält es etwas fest?",
         "question": "Warum machst du ein Bild vom Bildschirm?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -4389,6 +4467,7 @@ const topics = [
         "feedbackCorrect": "Richtig. Mit dem Bild kannst du die Nachricht zeigen."
       },
       {
+        "hinweis": "Druck will Eile. Was ist das Gegenteil von Eile?",
         "question": "Was ist bei Druck wichtig?",
         "pictogram": "pikto-warning",
         "answers": [
@@ -4400,6 +4479,7 @@ const topics = [
         "feedbackCorrect": "Das ist sicher. Du handelst nicht sofort."
       },
       {
+        "hinweis": "Es gibt ein kurzes Wort, das immer erlaubt ist.",
         "question": "Was darfst du sagen?",
         "pictogram": "pikto-help",
         "answers": [
@@ -4411,6 +4491,7 @@ const topics = [
         "feedbackCorrect": "Das ist richtig. Du darfst Nein sagen."
       },
       {
+        "hinweis": "Denk an die 3 Schritte aus diesem Thema.",
         "question": "Was ist eine gute Hilfe-Regel?",
         "pictogram": "pikto-help",
         "answers": [
@@ -4910,6 +4991,7 @@ const topics = [
     ],
     "quizQuestions": [
       {
+        "hinweis": "Überlege: Ist KI ein Mensch oder etwas anderes?",
         "question": "Was ist KI?",
         "pictogram": "pikto-ki",
         "answers": [
@@ -4921,6 +5003,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. KI ist ein Computer-Programm. Kein Mensch."
       },
       {
+        "hinweis": "Ein Chatbot schreibt freundlich. Heißt das, er fühlt etwas?",
         "question": "Hat ein Chatbot Gefühle?",
         "pictogram": "pikto-ki",
         "answers": [
@@ -4932,6 +5015,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot kann nur so tun. Er ist ein Programm."
       },
       {
+        "hinweis": "Frag dich: Kann ein Programm sich irren?",
         "question": "Kann KI Fehler machen?",
         "pictogram": "pikto-ki",
         "answers": [
@@ -4943,6 +5027,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. KI kann Fehler machen und Dinge erfinden."
       },
       {
+        "hinweis": "Ein Passwort ist ein Schlüssel. Gibst du ihn an ein Programm?",
         "question": "Ein Chatbot fragt nach deinem Passwort. Was ist besser?",
         "pictogram": "pikto-key",
         "answers": [
@@ -4954,6 +5039,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Dein Passwort ist privat. Du gibst es nie weiter."
       },
       {
+        "hinweis": "Die KI kennt dich nicht. Wer kennt dich?",
         "question": "Du bist krank. Was ist besser?",
         "pictogram": "pikto-feel",
         "answers": [
@@ -4965,6 +5051,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Die KI kennt dich nicht. Sie ersetzt keinen Arzt."
       },
       {
+        "hinweis": "Wichtig heißt: Ein Fehler ist schlimm. Was hilft dann?",
         "question": "Die KI gibt eine wichtige Antwort. Was machst du?",
         "pictogram": "pikto-ki",
         "answers": [
@@ -4976,6 +5063,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. KI klingt sicher, kann aber falsch liegen."
       },
       {
+        "hinweis": "Überlege: KI macht Texte und Bilder. Sind die immer echt?",
         "question": "Kann KI Bilder fälschen?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -4987,6 +5075,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. KI kann Bilder und Stimmen fälschen."
       },
       {
+        "hinweis": "Nett schreiben kann ein Programm lernen. Was ist es trotzdem?",
         "question": "Ein Chatbot schreibt sehr nett. Was stimmt?",
         "pictogram": "pikto-message",
         "answers": [
@@ -4998,6 +5087,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot ist ein Programm. Kein Freund."
       },
       {
+        "hinweis": "Frag dich: Wo hast du schon mit einem Programm geschrieben?",
         "question": "Wo steckt überall KI drin?",
         "pictogram": "pikto-ki",
         "answers": [
@@ -5009,6 +5099,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. KI steckt in vielen Apps, nicht nur in Robotern."
       },
       {
+        "hinweis": "Die KI speichert, was du schreibst. Was heißt das für private Sachen?",
         "question": "Darfst du der KI deine Adresse oder ein Geheimnis schreiben?",
         "pictogram": "pikto-key",
         "answers": [
@@ -5527,6 +5618,7 @@ const topics = [
     ],
     "quizQuestions": [
       {
+        "hinweis": "Unglaublich und falsch. Dafür gibt es ein Wort in diesem Thema.",
         "question": "Eine Nachricht klingt unglaublich. Sie stimmt nicht. Wie nennt man das?",
         "pictogram": "pikto-fake",
         "answers": [
@@ -5538,6 +5630,7 @@ const topics = [
         "feedbackWrong": "Das ist etwas anderes. Falsche Nachrichten heißen Fake News."
       },
       {
+        "hinweis": "Überlege: KI macht Bilder. Wie gut sehen die aus?",
         "question": "Kann KI Fotos fälschen?",
         "pictogram": "pikto-photo",
         "answers": [
@@ -5549,6 +5642,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. KI kann sehr echte Fotos fälschen."
       },
       {
+        "hinweis": "Fake und Video. Was ergibt das zusammen?",
         "question": "Was ist ein Deepfake?",
         "pictogram": "pikto-video",
         "answers": [
@@ -5560,6 +5654,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Ein Deepfake ist ein gefälschtes Video."
       },
       {
+        "hinweis": "Eine Stimme kann man nachmachen. Wie prüfst du, wer da anruft?",
         "question": "Ein Anruf will sofort Geld. Die Stimme klingt bekannt. Was ist besser?",
         "pictogram": "pikto-money",
         "answers": [
@@ -5571,6 +5666,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Die Stimme kann mit KI gefälscht sein."
       },
       {
+        "hinweis": "Starke Gefühle sind oft gewollt. Was heißt das für dich?",
         "question": "Eine Nachricht macht dich sehr wütend. Was bedeutet das?",
         "pictogram": "pikto-message",
         "answers": [
@@ -5582,6 +5678,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Die Nachricht will dich aufregen. Dann prüfe ich zuerst."
       },
       {
+        "hinweis": "Frag dich: Was passiert, wenn du etwas Falsches weiterschickst?",
         "question": "Stimmt eine Nachricht? Du bist unsicher. Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
@@ -5593,6 +5690,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. So verbreiten sich Lügen."
       },
       {
+        "hinweis": "Überlege: Wo stehen Nachrichten, denen man trauen kann?",
         "question": "Wie kannst du eine Nachricht prüfen?",
         "pictogram": "pikto-message",
         "answers": [
@@ -5604,6 +5702,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Du prüfst die Quelle, nicht das Aussehen."
       },
       {
+        "hinweis": "Schnelles Geld und ein bekanntes Gesicht. Passt das zusammen?",
         "question": "Ein Promi verspricht im Video schnelles Geld. Was ist das oft?",
         "pictogram": "pikto-money",
         "answers": [
@@ -5615,6 +5714,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Solche Videos sind fast immer Betrug."
       },
       {
+        "hinweis": "Denk an die Regel aus diesem Thema. Was machst du, bevor du weiterschickst?",
         "question": "Bevor du eine Nachricht teilst: Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
@@ -5626,6 +5726,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Prüfe eine Nachricht erst. Dann teile sie."
       },
       {
+        "hinweis": "Überlege: Kann jeder Mensch alles ins Internet schreiben?",
         "question": "Ist alles im Internet wahr?",
         "pictogram": "pikto-search",
         "answers": [
@@ -6205,6 +6306,7 @@ const topics = [
     ],
     "quizQuestions": [
       {
+        "hinweis": "Phishing kommt von Angeln. Was wollen Betrüger damit fangen?",
         "question": "Was ist Phishing?",
         "pictogram": "pikto-fraud",
         "answers": [
@@ -6216,6 +6318,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Phishing ist ein Betrugs-Trick mit falschen Nachrichten."
       },
       {
+        "hinweis": "Eile ist bei Betrug fast immer dabei. Was heißt das?",
         "question": "Eine E-Mail macht Druck: Sofort klicken! Was bedeutet das?",
         "pictogram": "pikto-mail",
         "answers": [
@@ -6227,6 +6330,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Druck und Drohung sind Warnzeichen."
       },
       {
+        "hinweis": "Frag dich: Hast du überhaupt ein Paket bestellt?",
         "question": "Eine SMS: Zahlen Sie Gebühr für Ihr Paket. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
@@ -6238,6 +6342,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Paket-SMS mit Geld-Forderung sind Betrug."
       },
       {
+        "hinweis": "Die Nummer ist neu. Woher weißt du, wer schreibt?",
         "question": "Hallo Mama, neue Nummer, brauche Geld. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
@@ -6249,6 +6354,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Das ist ein bekannter Betrugs-Trick."
       },
       {
+        "hinweis": "Überlege: Wie arbeitet die echte Polizei?",
         "question": "Fordert die echte Polizei Geld am Telefon?",
         "pictogram": "pikto-money",
         "answers": [
@@ -6260,6 +6366,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Die echte Polizei fordert nie Geld am Telefon."
       },
       {
+        "hinweis": "Ein Gewinn ist ein Geschenk. Kostet ein Geschenk Geld?",
         "question": "Du sollst für einen Gewinn erst Geld zahlen. Was stimmt?",
         "pictogram": "pikto-money",
         "answers": [
@@ -6271,6 +6378,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Echte Gewinne kosten nie Geld."
       },
       {
+        "hinweis": "Ein Code ist ein Schlüssel. Gibst du deinen Schlüssel weg?",
         "question": "Jemand fragt nach deinem SMS-Code. Was machst du?",
         "pictogram": "pikto-code",
         "answers": [
@@ -6282,6 +6390,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Mit dem Code können Betrüger dein Konto benutzen."
       },
       {
+        "hinweis": "Einen Aufkleber kann man überall aufkleben. Auch über einen echten Code.",
         "question": "Am Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
         "pictogram": "pikto-code",
         "answers": [
@@ -6293,6 +6402,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Betrüger kleben falsche Codes über echte. Erst fragen. Dann scannen."
       },
       {
+        "hinweis": "Es ist passiert. Was ist jetzt das Wichtigste?",
         "question": "Du bist auf einen Betrug hereingefallen. Was ist richtig?",
         "pictogram": "pikto-fraud",
         "answers": [
@@ -6304,6 +6414,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Betrug ist nicht deine Schuld. Hol dir schnell Hilfe."
       },
       {
+        "hinweis": "Diese Nummer gilt in ganz Deutschland. Sie steht in diesem Thema.",
         "question": "Welche Nummer sperrt deine Bank-Karte?",
         "pictogram": "pikto-bank",
         "answers": [
@@ -6315,6 +6426,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Der Sperr-Notruf ist die 116 116."
       },
       {
+        "hinweis": "Du kennst die Nummer nicht. Was heißt das für den Link?",
         "question": "Eine SMS hat einen Link von einer fremden Nummer. Was machst du?",
         "pictogram": "pikto-stranger",
         "answers": [
@@ -6852,6 +6964,7 @@ const topics = [
     ],
     "quizQuestions": [
       {
+        "hinweis": "Fake heißt falsch. Was ist an so einem Shop falsch?",
         "question": "Was ist ein Fake-Shop?",
         "pictogram": "pikto-shop",
         "answers": [
@@ -6863,6 +6976,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Ein Fake-Shop ist ein Betrugs-Shop."
       },
       {
+        "hinweis": "Sehr billig und Geld vorher. Passt das zusammen?",
         "question": "Ein Shop ist extrem billig und will nur Vorkasse. Was ist das?",
         "pictogram": "pikto-money",
         "answers": [
@@ -6874,6 +6988,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Extrem billig plus Vorkasse ist verdächtig."
       },
       {
+        "hinweis": "Du kennst den Shop nicht. Was heißt das für dein Geld?",
         "question": "Ein Shop will das Geld vorher. Du kennst den Shop nicht. Was ist besser?",
         "pictogram": "pikto-money",
         "answers": [
@@ -6885,6 +7000,7 @@ const topics = [
         "feedbackWrong": "Das ist nicht sicher. Dann ist dein Geld vielleicht weg."
       },
       {
+        "hinweis": "Überlege: Kennt deine Bank deine PIN nicht schon?",
         "question": "Deine Bank schreibt eine E-Mail und will deine PIN. Was stimmt?",
         "pictogram": "pikto-bank",
         "answers": [
@@ -6896,6 +7012,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Die Bank fragt nie nach der PIN. Das ist Betrug."
       },
       {
+        "hinweis": "Nur noch heute macht Eile. Was hilft gegen Eile?",
         "question": "Ein Angebot sagt: Nur noch heute! Was machst du?",
         "pictogram": "pikto-shop",
         "answers": [
@@ -6907,6 +7024,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Du darfst dir Zeit nehmen."
       },
       {
+        "hinweis": "Der Preis ist nicht alles. Was kommt oft dazu?",
         "question": "Was prüfst du vor dem Kaufen?",
         "pictogram": "pikto-search",
         "answers": [
@@ -6918,6 +7036,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Wichtig sind Preis, Versand und Abo-Fragen."
       },
       {
+        "hinweis": "Nach dem Kauf gibt es eine Frist. Wie lang ist sie?",
         "question": "Du hast etwas Falsches bestellt. Was kannst du oft tun?",
         "pictogram": "pikto-shop",
         "answers": [
@@ -6929,6 +7048,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Du hast oft 14 Tage Widerrufs-Recht."
       },
       {
+        "hinweis": "Kostenlos ist nur der Anfang. Was kommt im Spiel dazu?",
         "question": "Kosten kleine Käufe in Spielen echtes Geld?",
         "pictogram": "pikto-money",
         "answers": [
@@ -6940,6 +7060,7 @@ const topics = [
         "feedbackWrong": "Das ist noch nicht richtig. Käufe in Apps kosten echtes Geld."
       },
       {
+        "hinweis": "Ein guter Shop sagt, wer er ist. Was fehlt hier?",
         "question": "Ein Shop hat keine Adresse und keine Telefon-Nummer. Was heißt das?",
         "pictogram": "pikto-search",
         "answers": [
@@ -6951,6 +7072,7 @@ const topics = [
         "feedbackWrong": "Sei vorsichtig. Ein guter Shop sagt, wer er ist."
       },
       {
+        "hinweis": "PIN und TAN sind wie ein Schlüssel.",
         "question": "Bleiben deine PIN und TAN geheim?",
         "pictogram": "pikto-key",
         "answers": [

@@ -3646,7 +3646,28 @@ function closeSupportHelp() {
   if (desc) desc.textContent = "Hilfe anzeigen.";
 }
 
-function buildTaskHelpBox() {
+/* Hilfe zur Aufgabe in zwei Stufen (Prüfbericht B14).
+   Vorher bekamen alle Fragen der Plattform denselben Text: fünf allgemeine
+   Ratschläge. Beim dritten Mal ist das Rauschen, und wer inhaltlich nicht
+   weiterkommt, bekommt eine Strategie statt einer Erklärung.
+
+   Stufe 1 ist jetzt inhaltlich und führt zum Nachdenken, ohne die Antwort zu
+   nennen – aus dem Feld `hinweis` der Frage, sonst je nach Ort ein Zeiger auf
+   die Stelle, an der die Antwort steht.
+   Stufe 2 bleibt die allgemeine Liste. Der Satz „Überlege: Welche Antwort
+   schützt dich besser?" ist raus: Bei zwei Antworten verrät er fast immer
+   die Lösung. */
+function taskHint(frage, ort) {
+  if (frage && typeof frage.hinweis === "string" && frage.hinweis.trim()) return frage.hinweis.trim();
+  if (ort === "lektion") return "Die Antwort steht oben in diesem Schritt. Lies den Text noch einmal.";
+  if (ort === "rueckmeldung") return "Du kannst die Lektion noch einmal lesen. Der Knopf dafür steht oben.";
+  return "";
+}
+
+function buildTaskHelpBox(hinweis) {
+  const stufe1 = (typeof hinweis === "string" && hinweis.trim())
+    ? `<p class="task-help-tip"><span class="task-help-tip-label">Tipp:</span> ${escapeHtml(hinweis.trim())}</p>`
+    : "";
   return `
     <div class="task-help-area">
       <button type="button" class="task-help-button" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
@@ -3655,10 +3676,10 @@ function buildTaskHelpBox() {
       <div id="taskHelpPanel" class="task-help-panel" hidden>
         <h3>Du bist unsicher?</h3>
         <p>Du musst nicht raten.</p>
+        ${stufe1}
         <ul>
           <li>Lies die Frage noch einmal langsam.</li>
           <li>Schau dir beide Antworten an.</li>
-          <li>Überlege: Welche Antwort schützt dich besser?</li>
           <li>Du kannst eine Pause machen.</li>
           <li>Du kannst eine Person fragen, der du vertraust.</li>
         </ul>
@@ -4010,7 +4031,7 @@ function buildPractice(practice) {
       ${questionPikto(practice)}<p class="practice-question">${escapeHtml(question)}</p>
       <div class="answers">${answerHtml}</div>
       <p class="practice-nav-hint">Tippe auf eine Antwort. Danach kannst du unten auf Weiter tippen.</p>
-      ${buildTaskHelpBox()}
+      ${buildTaskHelpBox(taskHint(practice, "lektion"))}
     </div>
   `;
 }
@@ -4067,7 +4088,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
         }
       </div>
 
-      ${!isCorrect ? buildTaskHelpBox() : ""}
+      ${!isCorrect ? buildTaskHelpBox(taskHint(practice, "rueckmeldung")) : ""}
     </article>
   `;
   announce(isCorrect ? "Genau richtig!" : "Fast! Das war noch nicht ganz richtig.");
@@ -4632,7 +4653,7 @@ function renderQuizQuestion() {
       <h2>Quiz</h2>
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question || "")}</p>
       <div class="answers">${answerHtml}</div>
-      ${buildTaskHelpBox()}
+      ${buildTaskHelpBox(taskHint(q, "quiz"))}
     </article>
   `;
   focusContent();
@@ -4689,7 +4710,7 @@ function renderQuizFeedbackPage(index) {
         }
       </div>
 
-      ${!isCorrect ? buildTaskHelpBox() : ""}
+      ${!isCorrect ? buildTaskHelpBox(taskHint(q, "quiz")) : ""}
     </article>
   `;
   announce(isCorrect ? "Genau richtig!" : "Fast! Das war noch nicht ganz richtig.");
