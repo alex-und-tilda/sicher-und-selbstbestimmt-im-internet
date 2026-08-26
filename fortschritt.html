@@ -97,18 +97,24 @@
   </section>
 
   <section class="card">
-    <h2>Letzte Änderungen (GitHub)</h2>
-    <div class="commits" id="commits"><p class="note">Lädt Commits …</p></div>
+    <h2>Letzte Änderungen</h2>
+    <!-- Diese Liste wurde früher automatisch von api.github.com geholt.
+         Das war der letzte automatische Aufruf an einen fremden Server im
+         veröffentlichten Stand und stand im Widerspruch zur Zusage in
+         datenschutz.html. Jetzt steht hier ein Link: Ein Link geht erst
+         raus, wenn eine Person ihn anklickt. -->
+    <p class="note">Die letzten Änderungen stehen bei GitHub.
+      <a href="https://github.com/alex-und-tilda/sicher-und-selbstbestimmt-im-internet/commits/main" rel="noopener" target="_blank">Commit-Liste öffnen</a>
+      – der Link führt zu GitHub. Erst beim Anklicken wird GitHub kontaktiert.</p>
   </section>
 
-  <p class="foot">Quelle: deine Projektdateien (<code>topics.js</code>, <code>content-de.js</code>) und die öffentlichen GitHub-Commits. Aktualisiert sich bei jedem Öffnen.</p>
+  <p class="foot">Quelle: die Projektdateien <code>topics.js</code> und <code>content-de.js</code> auf diesem Gerät. Aktualisiert sich bei jedem Öffnen. Es wird kein fremder Server aufgerufen.</p>
 </div>
 
 <script src="topics.js"></script>
 <script src="content-de.js"></script>
 <script>
 (function(){
-  var REPO = "alex-und-tilda/sicher-und-selbstbestimmt-im-internet";
   var LEVELS = [["leicht","Leichte Sprache"],["einfach","Einfache Sprache"],["standard","Alltagssprache"]];
 
   function lessonsOf(t){ return Array.isArray(t.lessons) ? t.lessons : []; }
@@ -139,6 +145,7 @@
   document.getElementById("kpis").innerHTML = kpiHtml;
 
   /* Matrix */
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"})[c];}); }
   function cell(c){
     if(c.total === 0) return '<span class="pill open">–</span>';
     if(c.done === c.total) return '<span class="pill done">✓ fertig</span>';
@@ -156,34 +163,7 @@
   document.getElementById("updated").textContent = "Stand: " + new Date().toLocaleString("de-DE");
 
   /* Letzte Commits live von GitHub (öffentlich) */
-  function rel(d){
-    var s = Math.floor((Date.now() - new Date(d).getTime())/1000);
-    if(s<60) return "gerade eben";
-    if(s<3600) return Math.floor(s/60)+" Min. her";
-    if(s<86400) return Math.floor(s/3600)+" Std. her";
-    return Math.floor(s/86400)+" Tage her";
-  }
-  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"})[c];}); }
 
-  fetch("https://api.github.com/repos/"+REPO+"/commits?per_page=8")
-    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(list){
-      if(!Array.isArray(list) || !list.length){ throw new Error("leer"); }
-      var html = "<ul>" + list.map(function(it){
-        var c = it.commit || {};
-        var msg = (c.message || "").split("\n")[0];
-        var when = c.author && c.author.date ? c.author.date : "";
-        var who = (c.author && c.author.name) || "";
-        return '<li><div class="msg">'+esc(msg)+'</div>'+
-          '<div class="meta">'+esc(who)+' · '+(when?esc(rel(when)):"")+'</div></li>';
-      }).join("") + "</ul>";
-      document.getElementById("commits").innerHTML = html;
-    })
-    .catch(function(){
-      document.getElementById("commits").innerHTML =
-        '<p class="note">Die Commit-Liste lädt nur auf der Live-Seite (mit Internet). '+
-        'Öffne diese Seite unter <a href="https://'+REPO.split("/")[0]+'.github.io/'+REPO.split("/")[1]+'/fortschritt.html">deiner GitHub-Pages-Adresse</a>.</p>';
-    });
 })();
 </script>
 </body>

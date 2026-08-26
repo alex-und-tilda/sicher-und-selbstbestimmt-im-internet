@@ -3384,7 +3384,9 @@ function buildPraxisLinks(topic) {
   const eigene = topic && PRAXIS_SEITEN.includes(topic.id)
     ? `<p class="companion-intro"><a href="praxis/${escapeHtml(topic.id)}.html">Klick-Anleitung ${escapeHtml(topic.title)}</a> – Schritt für Schritt durch die Einstellungen: Konto privat stellen, blockieren, melden.</p>`
     : "";
-  return eigene + `<p class="companion-intro"><a href="praxis/index.html">Alle Klick-Anleitungen und Workshop-Material</a> – Anleitungen für 6 Apps, dazu Folien, Methodik-Blätter und Quiz-Vorlagen zum Herunterladen.</p>`;
+  return eigene
+    + `<p class="companion-intro"><a href="praxis/index.html">Alle Klick-Anleitungen und Workshop-Material</a> – Anleitungen für 6 Apps, dazu Folien, Methodik-Blätter und Quiz-Vorlagen zum Herunterladen.</p>`
+    + `<p class="companion-intro"><a href="fortschritt.html">Abdeckung der drei Sprachstufen</a> – zeigt für jedes Thema, welche Stufen schon vorliegen. Rechnet lokal, ohne fremden Server.</p>`;
 }
 
 /* Mengen-Wahl (Kurz/Mehr) je Thema – nur für die Sitzung gemerkt.
