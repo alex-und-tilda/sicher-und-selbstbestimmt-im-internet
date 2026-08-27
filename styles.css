@@ -342,14 +342,21 @@ html.no-motion *::after {
   padding: 12px 18px;
 }
 
+/* Die Meta-Zeile sagte woertlich dasselbe wie der Orientierungssatz direkt
+   darueber ("Frage 1 von 11" plus den Abschnittsnamen, der auch im Kopf
+   steht). Auf dem Handy kostete diese Doppelung Platz, den die Antworten
+   brauchen. Der Text bleibt fuer Screenreader erhalten – nur gemalt wird
+   er nicht mehr. Ohne die Elemente wuerde setHeader() ins Leere greifen. */
 .progress-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: var(--ink-soft);
-  margin-bottom: 8px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .progress-track {
