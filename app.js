@@ -1257,7 +1257,12 @@ const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
 /* Handlungs-Knoepfe, die mitgelesen werden. Sie bestehen aus mehreren
    Teilen (<strong>Kurz</strong><span>Nur das Wichtigste.</span>) und muessen
    wie Karten zerlegt werden – sonst spricht die Stimme "KurzNur". */
-const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip";
+/* `.support-help-button` traegt das Unterstuetzungs-Angebot auf dem
+   Themen-Einstieg ("Du brauchst Unterstuetzung? Hilfe anzeigen.").
+   Ohne diesen Eintrag war es fuer hoerende Nutzung unsichtbar –
+   ausgerechnet das Angebot, das sich an die Menschen richtet, die
+   aufs Vorlesen angewiesen sind. */
+const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -1269,7 +1274,7 @@ function cleanSpeechText(text) {
     .replace(/\s+/g, " ")
     .replace(/←/g, "")
     .replace(/[✓✕✔]/g, "")     /* Haken/Kreuze werden sonst als Zeichen gesprochen */
-    .replace(/ℹ️|👋|📵/g, "")
+    .replace(/ℹ️|👋|📵|📖|🎉/g, "")   /* Bild-Zeichen in Knopf- und Titeltexten */
     .replace(/%/g, " Prozent")
     .trim();
 }
@@ -1357,15 +1362,38 @@ function readCurrentPage(rate) {
   /* Handlungsansage am Ende: Nicht-Leser erfahren sonst nie, welche
      Knöpfe es gibt. Kurz, immer gleiches Muster (Vorhersehbarkeit). */
   const hatOptionen = root && root.querySelector(OPTION);
+  /* Rückmeldeseiten (nach einer Antwort, und die Sicherheitsfragen im
+     Profil): ihre Knöpfe heißen `feedback-button` und fielen durch jedes
+     Raster. Das Vorlesen endete dort nach der Erklärung – wer die App
+     hörend bedient, saß nach JEDER Frage vor einer Sackgasse.
+     Die Ansage wird aus den Knöpfen gebaut, die wirklich dastehen, damit
+     Text und Bildschirm nicht auseinanderlaufen können. */
+  const rueckmeldeKnoepfe = root
+    ? Array.from(root.querySelectorAll(".feedback-actions .feedback-button"))
+        .filter(b => !b.disabled && b.offsetParent !== null)
+        .map(b => cleanSpeechText(b.textContent))
+        .filter(Boolean)
+    : [];
   if (hatOptionen) {
     els.push({ pseudoText: "Tippe jetzt deine Antwort." });
+  } else if (rueckmeldeKnoepfe.length) {
+    els.push({ pseudoText: "Du kannst jetzt auf " + rueckmeldeKnoepfe[0] + " tippen."
+      + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("") });
   } else if (nextButton && !nextButton.disabled) {
     els.push({ pseudoText: backButton && !backButton.disabled
       ? "Du kannst jetzt Weiter drücken. Oder Zurück."
       : "Du kannst jetzt Weiter drücken." });
   } else {
     const start = root ? root.querySelector(".topic-start-button, .intro-start-button, .primary-action") : null;
-    if (start) els.push({ pseudoText: "Drücke den großen Knopf: " + cleanSpeechText(start.textContent) + "." });
+    if (start) {
+      let ansage = "Drücke den großen Knopf: " + cleanSpeechText(start.textContent) + ".";
+      /* Zweiter Weg in die App auf der Startseite. Ohne diesen Zusatz
+         kennt die Abkürzung nur, wer liest. Kommt NACH dem großen Knopf,
+         damit die Hauptsache zuerst genannt wird. */
+      const zweiterWeg = root.querySelector(".intro-quickstart-link");
+      if (zweiterWeg) ansage += " Oder tippe auf: " + cleanSpeechText(zweiterWeg.textContent) + ".";
+      els.push({ pseudoText: ansage });
+    }
   }
   if (!els.length) {
     updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
@@ -1391,7 +1419,10 @@ function kartenText(el) {
       if (t) teile.push(t.replace(/[.\s]+$/, ""));
     }
   });
-  return teile.length ? teile.join(". ") + "." : kopie.textContent;
+  if (!teile.length) return kopie.textContent;
+  /* Punkt nur setzen, wo noch keines steht. Sonst entsteht bei einer Zeile
+     wie "Du brauchst Unterstützung?" das gesprochene "Unterstützung?." */
+  return teile.map(t => /[.!?]$/.test(t) ? t : t + ".").join(" ");
 }
 
 function speakNextSentence(gen) {
