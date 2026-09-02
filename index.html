@@ -150,6 +150,16 @@
   <script src="uebungen-de.js"></script>
   <script src="app.js"></script>
   <script>
+    /* War beim Laden dieser Seite schon ein Service Worker aktiv?
+       GANZ FRÜH merken, denn sobald ein neu installierter Worker die Seite
+       übernimmt (clients.claim), steht hier ein Controller – und man könnte
+       eine Erstinstallation nicht mehr von einem Update unterscheiden.
+       Ohne diese Zeile bekam JEDE Person beim allerersten Besuch das Banner
+       „Die Lernplattform wurde aktualisiert" zu sehen. Aktualisiert wurde
+       da aber nichts: die App wurde zum ersten Mal geladen. */
+    var gabEsSchonEinenServiceWorker =
+      "serviceWorker" in navigator && !!navigator.serviceWorker.controller;
+
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("./sw.js").then((reg) => {
@@ -165,26 +175,45 @@
           });
         }).catch(() => {});
 
-        /* Seite benachrichtigt uns, dass SW aktiviert wurde */
+        /* Seite benachrichtigt uns, dass SW aktiviert wurde.
+           Nur melden, wenn es wirklich ein Update war. */
         navigator.serviceWorker.addEventListener("message", (e) => {
-          if (e.data && e.data.type === "SW_UPDATED") showUpdateBanner();
+          if (e.data && e.data.type === "SW_UPDATED" && gabEsSchonEinenServiceWorker) {
+            showUpdateBanner();
+          }
         });
       });
     }
 
+    /* Nach dieser Zeit schliesst sich der Hinweis von allein. Er ist ein
+       Angebot, keine Aufgabe – niemand muss ihn wegklicken. 15 Sekunden,
+       damit auch langsame Leserinnen ihn zu Ende lesen koennen. */
+    var BANNER_ZEIT_MS = 15000;
+
     function showUpdateBanner() {
-      const existing = document.getElementById("updateBanner");
-      if (existing) return;
+      if (document.getElementById("updateBanner")) return;
       const banner = document.createElement("div");
       banner.id = "updateBanner";
       banner.className = "update-banner";
       banner.setAttribute("role", "status");
       banner.innerHTML = `
-        <span>✓ Die Lernplattform wurde aktualisiert.</span>
-        <button type="button" onclick="location.reload()">Neu laden</button>
-        <button type="button" class="update-banner-close" aria-label="Banner schließen" onclick="this.closest('.update-banner').remove()">✕</button>
+        <span class="update-banner-text">Es gibt etwas Neues.</span>
+        <button type="button" class="update-banner-reload">Neu laden</button>
+        <button type="button" class="update-banner-close"><span aria-hidden="true">✕</span> Schließen</button>
       `;
-      document.body.prepend(banner);
+
+      const zumachen = () => { banner.remove(); };
+      banner.querySelector(".update-banner-reload").addEventListener("click", () => location.reload());
+      banner.querySelector(".update-banner-close").addEventListener("click", zumachen);
+
+      /* Selbstschliesser – aber nicht mitten in einer Bedienung.
+         Wer den Hinweis anfasst oder mit der Tastatur erreicht, behaelt ihn. */
+      let uhr = window.setTimeout(zumachen, BANNER_ZEIT_MS);
+      const uhrStoppen = () => { window.clearTimeout(uhr); uhr = 0; };
+      banner.addEventListener("pointerdown", uhrStoppen);
+      banner.addEventListener("focusin", uhrStoppen);
+
+      document.body.appendChild(banner);
     }
   </script>
 </body>

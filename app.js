@@ -972,12 +972,28 @@ function setActiveTab(name) {
 
 /* Ein Satz sagt immer, wo die Person gerade ist (COGA: Orientierung).
    setHeader() leert den Satz; Seiten setzen ihn danach neu. */
+/* Legt die Themenfarbe auf die GANZE Seite, nicht nur auf die Karte.
+   Kopfzeile und Fortschritts-Balken liegen ausserhalb von #content und
+   konnten die Farbe deshalb nie sehen – sie waren in jedem Thema gleich.
+   Genau das war die Rueckmeldung: „nicht so einfach zu sehen, wo man ist".
+   Ohne Thema wird die Eigenschaft entfernt, dann greift der Wert aus
+   :root (--accent) und alles sieht aus wie vorher. */
+function setPageTopicColor(topicId) {
+  const app = document.querySelector(".app");
+  if (!app) return;
+  const palette = isDarkMode() ? TOPIC_COLORS_DARK : TOPIC_COLORS;
+  const p = topicId ? palette[topicId] : null;
+  if (!p) { app.style.removeProperty("--topic-color"); return; }
+  app.style.setProperty("--topic-color", p[0]);
+}
+
 function setOrientation(text) {
   if (!orientLine) return;
   orientLine.classList.toggle("is-hidden", !text);
   if (!text) {
     orientLine.textContent = "";
     orientLine.style.borderLeftColor = "";
+    setPageTopicColor(null);
     return;
   }
   /* Dreifache Kodierung desselben Signals (UDL): Farbe (Rand), Bild
@@ -994,6 +1010,8 @@ function setOrientation(text) {
   orientLine.innerHTML = `${iconHtml}<span class="orient-text">${escapeHtml(text)}</span>` +
     `<span class="card-read-button card-read-button--orient" role="button" tabindex="0" data-read-card-text="${escapeHtml(text)}" aria-label="Vorlesen, wo du gerade bist"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>`;
   orientLine.style.borderLeftColor = color;
+  /* Dieselbe Farbe an Kopfzeile und Fortschritts-Balken. */
+  setPageTopicColor(color ? currentTopicId : null);
 }
 
 /* Schreibt die aktuelle Seite in die Adresszeile, damit der
@@ -1374,11 +1392,19 @@ function readCurrentPage(rate) {
         .map(b => cleanSpeechText(b.textContent))
         .filter(Boolean)
     : [];
+  /* Der Hilfe-Knopf steckt in einem <button> und fiel deshalb durch jedes
+     Raster – wer nicht liest, erfuhr nie, dass es ihn gibt (V-5). Der Satz
+     wird aus dem Knopf gebaut, der wirklich dasteht. */
+  const hilfeKnopf = root ? root.querySelector(".task-help-button") : null;
+  const hilfeSatz = hilfeKnopf
+    ? " Wenn du unsicher bist, tippe auf: " + cleanSpeechText(hilfeKnopf.textContent) + "."
+    : "";
   if (hatOptionen) {
-    els.push({ pseudoText: "Tippe jetzt deine Antwort." });
+    els.push({ pseudoText: "Tippe jetzt deine Antwort." + hilfeSatz });
   } else if (rueckmeldeKnoepfe.length) {
     els.push({ pseudoText: "Du kannst jetzt auf " + rueckmeldeKnoepfe[0] + " tippen."
-      + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("") });
+      + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("")
+      + hilfeSatz });
   } else if (nextButton && !nextButton.disabled) {
     els.push({ pseudoText: backButton && !backButton.disabled
       ? "Du kannst jetzt Weiter drücken. Oder Zurück."
@@ -3730,12 +3756,16 @@ function taskHint(frage, ort) {
   return "";
 }
 
-function buildTaskHelpBox(hinweis) {
+/* `vorneDran` = der Kasten steht VOR den Antworten (V-5). Hilfe gehoert vor
+   die Entscheidung, nicht dahinter – wer unsicher ist, musste den Knopf
+   vorher unter allen Antworten suchen. Die Klasse nimmt nur den oberen
+   Abstand weg, damit die Antworten nicht zusaetzlich nach unten rutschen. */
+function buildTaskHelpBox(hinweis, vorneDran) {
   const stufe1 = (typeof hinweis === "string" && hinweis.trim())
     ? `<p class="task-help-tip"><span class="task-help-tip-label">Tipp:</span> ${escapeHtml(hinweis.trim())}</p>`
     : "";
   return `
-    <div class="task-help-area">
+    <div class="task-help-area${vorneDran ? " task-help-area--vorne" : ""}">
       <button type="button" class="task-help-button" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
         Ich bin unsicher
       </button>
@@ -3745,7 +3775,7 @@ function buildTaskHelpBox(hinweis) {
         ${stufe1}
         <ul>
           <li>Lies die Frage noch einmal langsam.</li>
-          <li>Schau dir beide Antworten an.</li>
+          <li>Schau dir alle Antworten an.</li>
           <li>Du kannst eine Pause machen.</li>
           <li>Du kannst eine Person fragen, der du vertraust.</li>
         </ul>
@@ -4095,9 +4125,9 @@ function buildPractice(practice) {
     <div class="practice-box">
       <h3>Übung</h3>
       ${questionPikto(practice)}<p class="practice-question">${escapeHtml(question)}</p>
+      ${buildTaskHelpBox(taskHint(practice, "lektion"), true)}
       <div class="answers">${answerHtml}</div>
       <p class="practice-nav-hint">Tippe auf eine Antwort. Danach kannst du unten auf Weiter tippen.</p>
-      ${buildTaskHelpBox(taskHint(practice, "lektion"))}
     </div>
   `;
 }
@@ -4716,10 +4746,13 @@ function renderQuizQuestion() {
   content.innerHTML = `
     ${buildToolRow()}
     <article class="card quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
-      <h2>Quiz</h2>
+      <!-- V-2: "Quiz" stand dreimal auf dem Schirm (Kopfzeile, Orientierungs-
+           Satz, hier). Die Ueberschrift bleibt fuer Screenreader und die
+           Gliederung erhalten, kostet aber keinen Platz mehr. -->
+      <h2 class="sr-only">Quiz</h2>
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question || "")}</p>
+      ${buildTaskHelpBox(taskHint(q, "quiz"), true)}
       <div class="answers">${answerHtml}</div>
-      ${buildTaskHelpBox(taskHint(q, "quiz"))}
     </article>
   `;
   focusContent();
@@ -4966,7 +4999,8 @@ function renderBigQuizQuestion() {
     ${buildToolRow()}
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
-      <h2>${escapeHtml(bigQuizTitle)}</h2>
+      <!-- V-2: derselbe Titel steht schon in der Kopfzeile. -->
+      <h2 class="sr-only">${escapeHtml(bigQuizTitle)}</h2>
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question)}</p>
       <div class="answers">${answerHtml}</div>
     </article>
@@ -4999,7 +5033,8 @@ function renderBigQuizFeedback(selectedIndex) {
     ${buildToolRow()}
     <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
-      <h2>${escapeHtml(bigQuizTitle)}</h2>
+      <!-- V-2: derselbe Titel steht schon in der Kopfzeile. -->
+      <h2 class="sr-only">${escapeHtml(bigQuizTitle)}</h2>
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question)}</p>
       <div class="answers">
         ${q.answers.map((a, i) => `

@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-12a";
+const CACHE_VERSION = "v2026-12c";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -230,16 +230,24 @@ self.addEventListener("install", (event) => {
 /* ---- Activate: alte Caches löschen, Seite benachrichtigen ---- */
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
+    caches.keys().then((keys) => {
+      /* Gab es schon einen eigenen Cache? Dann ist das ein Update.
+         Wenn nicht, wird die App gerade zum ERSTEN MAL installiert – dann
+         darf keine Meldung „wurde aktualisiert" an die Seite gehen.
+         (Die Seite prüft das zusätzlich selbst, siehe index.html.) */
+      const warUpdate = keys.some(
+        (key) => key.startsWith("sicher-im-netz-") && key !== CACHE_NAME
+      );
+      return Promise.all(
         keys
           .filter((key) =>
             (key.startsWith("sicher-im-netz-") && key !== CACHE_NAME) ||
             key === ALTER_ARASAAC_CACHE)
           .map((key) => caches.delete(key))
-      )
-    ).then(() => {
+      ).then(() => warUpdate);
+    }).then((warUpdate) => {
       self.clients.claim();
+      if (!warUpdate) return;
       /* Alle offenen Tabs informieren: neues Update ist aktiv */
       self.clients.matchAll({ type: "window" }).then((clients) => {
         clients.forEach((client) => client.postMessage({ type: "SW_UPDATED" }));

@@ -224,6 +224,11 @@ button {
   gap: 14px;
   background: var(--surface);
   border: 1px solid var(--line);
+  /* Farbband in der Themenfarbe – dieselbe Sprache wie beim
+     Orientierungs-Satz und der Themen-Zeile: „Farbe steht links".
+     Ausserhalb eines Themas faellt --topic-color auf --accent zurueck,
+     dann sieht der Kopf aus wie bisher. Kostet keine Hoehe. */
+  border-left: 6px solid var(--topic-color);
   border-radius: var(--radius-l);
   padding: 14px 18px;
   box-shadow: var(--shadow-small);
@@ -369,7 +374,9 @@ html.no-motion *::after {
 .progress-fill {
   height: 100%;
   width: 0;
-  background: var(--accent);
+  /* Der Balken liegt genau dort, wo man beim Orientieren hinschaut.
+     Deshalb traegt er die Themenfarbe statt immer dasselbe Grundblau. */
+  background: var(--topic-color);
   border-radius: 999px;
   transition: width 0.3s ease;
 }
@@ -3092,6 +3099,13 @@ p.feedback-wrong {
   margin-top: 18px;
 }
 
+/* Steht der Kasten VOR den Antworten (V-5), traegt die Frage darueber schon
+   ihren Abstand und `.answers` darunter seinen eigenen. Ein weiterer oberer
+   Abstand wuerde die Antworten nur unnoetig nach unten schieben. */
+.task-help-area--vorne {
+  margin-top: 0;
+}
+
 .task-help-button {
   min-height: 58px;   /* §9: gleiche Hoehe wie alle anderen Bedienelemente */
   padding: 12px 20px;
@@ -4520,44 +4534,62 @@ body.simple-mode .practice-box {
    SW-Update-Banner
    ============================================================ */
 
+/* Hinweis auf eine neue Fassung.
+   Er lag frueher bei `bottom: 16px` UEBER dem Hauptmenue und hat drei der
+   fuenf Menuepunkte unantippbar gemacht. Jetzt sitzt er DARUEBER – dieselbe
+   Rechnung wie bei `.nav`, damit die Navigation immer erreichbar bleibt.
+   Er schliesst sich ausserdem von allein (siehe index.html). */
 .update-banner {
   position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: calc(var(--tabbar-h) + 12px + env(safe-area-inset-bottom, 0px));
+  left: 12px;
+  right: 12px;
+  margin: 0 auto;
+  max-width: 420px;
   background: var(--good);
   color: #fff;
   border-radius: var(--radius-m);
-  padding: 12px 16px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 0.95rem;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  font-size: 1rem;
   font-weight: 600;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-  z-index: 200;
-  max-width: calc(100vw - 32px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+  z-index: 70;   /* ueber dem Inhalt, aber nicht ueber dem Hauptmenue (60) */
+}
+
+.update-banner-text {
+  flex: 1 1 100%;
 }
 
 .update-banner button {
-  background: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.22);
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.4);
+  border: 2px solid rgba(255,255,255,0.55);
   border-radius: var(--radius-s);
-  padding: 6px 14px;
+  /* Beide Knoepfe gleich gross und bequem zu treffen. Der Schliessen-Knopf
+     war vorher 31 x 29 px – der kleinste Knopf der ganzen App. */
+  min-height: 44px;
+  padding: 8px 16px;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
 }
 
 .update-banner button:hover {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.38);
+}
+
+.update-banner button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
 }
 
 .update-banner-close {
-  padding: 4px 8px !important;
-  opacity: 0.75;
+  background: transparent !important;
 }
 
 /* ============================================================
