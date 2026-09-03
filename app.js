@@ -614,7 +614,80 @@ const GLOSSAR = {
 };
 
 let glossarOverlay = null;
-let _glossarLastFocus = null;
+
+/* ============================================================
+   Fokus-Falle und Fokus-Rueckgabe fuer die drei Dialoge
+   (Woerter-Erklaerung, Pause machen, Was bedeuten die Zeichen)
+
+   Vorher konnte der Tastatur-Fokus jeden dieser Dialoge schon beim
+   ERSTEN Tab verlassen und lief dann durch die Seite dahinter weiter -
+   sichtbar war aber nur der Dialog. Wer mit der Tastatur bedient, hat
+   den Fokus damit verloren.
+
+   Bewusst von Hand geloest und nicht ueber das inert-Attribut: inert
+   wird von aelteren Geraeten stillschweigend ignoriert, und dann gaebe
+   es gar keine Falle. Diese Fassung funktioniert ueberall gleich.
+
+   EINE Stelle fuer alle drei Dialoge - vorher hatte die
+   Woerter-Erklaerung ihre eigene Loesung fuer die Rueckgabe und die
+   beiden anderen gar keine.
+   ============================================================ */
+let _dialogAktiv = null;   /* der gerade offene Dialog */
+let _dialogFokus = null;   /* was vorher den Fokus hatte */
+
+const DIALOG_FOKUSSIERBAR =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]),' +
+  ' textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function dialogFokusListe() {
+  if (!_dialogAktiv) return [];
+  return Array.from(_dialogAktiv.querySelectorAll(DIALOG_FOKUSSIERBAR))
+    .filter(el => el.offsetParent !== null || el === document.activeElement);
+}
+
+function dialogTabFalle(event) {
+  if (!_dialogAktiv || event.key !== "Tab") return;
+  const liste = dialogFokusListe();
+  if (!liste.length) { event.preventDefault(); return; }
+  const erster = liste[0];
+  const letzter = liste[liste.length - 1];
+  /* Fokus schon draussen? Zurueckholen. */
+  if (!_dialogAktiv.contains(document.activeElement)) {
+    event.preventDefault();
+    (event.shiftKey ? letzter : erster).focus();
+    return;
+  }
+  if (event.shiftKey && document.activeElement === erster) {
+    event.preventDefault();
+    letzter.focus();
+  } else if (!event.shiftKey && document.activeElement === letzter) {
+    event.preventDefault();
+    erster.focus();
+  }
+}
+
+function dialogOeffnen(dialog) {
+  if (!dialog) return;
+  /* Nur merken, wenn nicht schon ein Dialog offen war - sonst ginge der
+     urspruengliche Ausgangspunkt verloren. */
+  if (!_dialogAktiv) _dialogFokus = document.activeElement;
+  _dialogAktiv = dialog;
+  document.addEventListener("keydown", dialogTabFalle, true);
+}
+
+function dialogSchliessen(dialog) {
+  /* Nur schliessen, wenn wirklich DIESER Dialog offen ist. Escape ruft
+     beide Schliess-Wege auf; ohne diese Pruefung wuerde der eine dem
+     anderen den Fokus wegnehmen. */
+  if (!_dialogAktiv || (dialog && dialog !== _dialogAktiv)) return;
+  document.removeEventListener("keydown", dialogTabFalle, true);
+  _dialogAktiv = null;
+  const zurueck = _dialogFokus;
+  _dialogFokus = null;
+  if (zurueck && document.contains(zurueck) && typeof zurueck.focus === "function") {
+    zurueck.focus();
+  }
+}
 
 function initGlossar() {
   if (glossarOverlay) return;
@@ -643,7 +716,7 @@ function initGlossar() {
 function showGlossar(termKey) {
   const def = GLOSSAR[termKey];
   if (!def || !glossarOverlay) return;
-  _glossarLastFocus = document.activeElement;
+  dialogOeffnen(glossarOverlay);
   const display = termKey.charAt(0).toUpperCase() + termKey.slice(1);
   document.getElementById("glossarWordTitle").textContent = display;
   document.getElementById("glossarWordDef").textContent = def;
@@ -654,7 +727,7 @@ function showGlossar(termKey) {
 function hideGlossar() {
   if (!glossarOverlay) return;
   glossarOverlay.classList.add("is-hidden");
-  if (_glossarLastFocus) _glossarLastFocus.focus();
+  dialogSchliessen(glossarOverlay);
 }
 
 function initGlossarEvents() {
@@ -1637,6 +1710,7 @@ function showPauseOverlay() {
     </div>
   `;
   document.body.appendChild(overlay);
+  dialogOeffnen(overlay);
   const button = overlay.querySelector("button");
   if (button) button.focus();
 }
@@ -1661,13 +1735,18 @@ function showSymbolHelp() {
     </div>
   `;
   document.body.appendChild(overlay);
+  dialogOeffnen(overlay);
   const button = overlay.querySelector("button");
   if (button) button.focus();
 }
 
 function closeCalmOverlay() {
   const overlay = document.getElementById("pauseOverlay");
-  if (overlay) overlay.remove();
+  if (!overlay) return;
+  overlay.remove();
+  /* Erst entfernen, dann den Fokus zurueckgeben - sonst landet er kurz
+     auf einem Element, das gleich verschwindet. */
+  dialogSchliessen(overlay);
 }
 
 /* Sprache und Pause bleiben sichtbar.
