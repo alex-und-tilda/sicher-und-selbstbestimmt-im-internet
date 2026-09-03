@@ -1525,7 +1525,15 @@ function readSectionFrom(button) {
 
 /* Kleiner Lautsprecher-Chip für einen Abschnitt */
 function sectionReadChip(label) {
-  return `<span class="card-read-button card-read-button--section" role="button" tabindex="0" onclick="readSectionFrom(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();readSectionFrom(this);}" aria-label="Abschnitt ${escapeHtml(label)} vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>`;
+  /* H-01: echter Knopf statt span mit role="button".
+     Das war die EINZIGE Stelle, an der die Tastatur-Bedienung von Hand
+     nachgebaut war (onkeydown fuer Enter und Leertaste). Ein nativer
+     button kann das von sich aus, der Handler faellt ersatzlos weg.
+     Hier gefahrlos moeglich, weil dieser Chip in einer Ueberschrift
+     steht und nicht - wie der auf der Themenkarte - in einem button.
+     Ausserdem traegt er kein data-read-card-text, der zentrale
+     Listener greift also nicht und kann nicht doppelt ausloesen. */
+  return `<button type="button" class="card-read-button card-read-button--section" onclick="readSectionFrom(this)" aria-label="Abschnitt ${escapeHtml(label)} vorlesen"><svg class="rb-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L9 9H4z" fill="currentColor"/><path d="M16 8.6a4 4 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.6 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>`;
 }
 
 function readNormal() { readCurrentPage(0.85); }
