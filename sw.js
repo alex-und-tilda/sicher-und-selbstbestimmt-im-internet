@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-12c";
+const CACHE_VERSION = "v2026-12d";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -50,20 +50,14 @@ const PRECACHE_URLS = [
   "./barrierearme-lernplattform-einfache-sprache.html",
   "./datenschutz-social-media-lernangebot.html",
 
-  /* Themen-Illustrationen */
+  /* Illustrationen.
+     NUR alex-und-tilda.svg wird angezeigt (Begruessung auf der Startseite).
+     Die 12 Themen-Illustrationen zeigt die App seit dem Umbau der
+     Themenseite nirgends mehr an – getIllustrationHtml() in app.js wird
+     nicht mehr aufgerufen. Sie lagen trotzdem im Precache: rund 530 KB,
+     die jede Person beim ersten Besuch mitgeladen hat, ohne sie je zu
+     sehen. Die Dateien bleiben im Repo, falls sie wieder eingebaut werden. */
   "./assets/illustrations/alex-und-tilda.svg",
-  "./assets/illustrations/datenschutz.svg",
-  "./assets/illustrations/whatsapp.svg",
-  "./assets/illustrations/facebook.svg",
-  "./assets/illustrations/instagram.svg",
-  "./assets/illustrations/youtube.svg",
-  "./assets/illustrations/snapchat.svg",
-  "./assets/illustrations/tiktok.svg",
-  "./assets/illustrations/hilfe.svg",
-  "./assets/illustrations/ki.svg",
-  "./assets/illustrations/fakes.svg",
-  "./assets/illustrations/betrug.svg",
-  "./assets/illustrations/einkaufen.svg",
 
   /* Lektions-Bilder */
   "./assets/lessons/lock.svg",
@@ -107,6 +101,16 @@ const PRECACHE_URLS = [
   "./assets/icons/fake.svg",
   "./assets/icons/betrug.svg",
   "./assets/icons/einkaufen.svg",
+
+  /* Eigene Zeichen fuer die sechs App-Themen (F2). Vorher teilten sich je
+     zwei Themen dasselbe Symbol: WhatsApp/Facebook, Instagram/Snapchat und
+     YouTube/TikTok waren nur an der Hintergrundfarbe zu unterscheiden. */
+  "./assets/icons/whatsapp.svg",
+  "./assets/icons/facebook.svg",
+  "./assets/icons/instagram.svg",
+  "./assets/icons/youtube.svg",
+  "./assets/icons/snapchat.svg",
+  "./assets/icons/tiktok.svg",
 
   /* Piktogramme Einfach-Modus */
   "./assets/pictograms/pikto-data.svg",

@@ -821,7 +821,7 @@ const topics = [
   {
     "id": "whatsapp",
     "title": "WhatsApp",
-    "icon": "message",
+    "icon": "whatsapp",
     "desc": "Nachrichten, Links, Gruppen und Codes sicher nutzen",
     "transfer": "Schau heute in deine WhatsApp-Chats. Kennst du alle Personen wirklich?",
     "selfAssessment": {
@@ -1491,7 +1491,7 @@ const topics = [
   {
     "id": "facebook",
     "title": "Facebook",
-    "icon": "message",
+    "icon": "facebook",
     "desc": "Beiträge, Profile und Kontakte prüfen",
     "transfer": "Prüfe heute bei einem Beitrag: Wer kann ihn sehen?",
     "selfAssessment": {
@@ -2089,7 +2089,7 @@ const topics = [
   {
     "id": "instagram",
     "title": "Instagram",
-    "icon": "photo",
+    "icon": "instagram",
     "desc": "Fotos, Standort und Nachrichten prüfen",
     "transfer": "Schau heute in deine Einstellungen. Ist dein Konto privat?",
     "selfAssessment": {
@@ -2687,7 +2687,7 @@ const topics = [
   {
     "id": "youtube",
     "title": "YouTube",
-    "icon": "understand",
+    "icon": "youtube",
     "desc": "Videos, Werbung und Pausen prüfen",
     "transfer": "Achte heute bei einem Video darauf: Ist das Werbung?",
     "selfAssessment": {
@@ -3257,7 +3257,7 @@ const topics = [
   {
     "id": "snapchat",
     "title": "Snapchat",
-    "icon": "photo",
+    "icon": "snapchat",
     "desc": "Bilder, Standort und Druck erkennen",
     "transfer": "Prüfe heute in Snapchat: Wer kann deinen Standort sehen?",
     "selfAssessment": {
@@ -3796,7 +3796,7 @@ const topics = [
   {
     "id": "tiktok",
     "title": "TikTok",
-    "icon": "understand",
+    "icon": "tiktok",
     "desc": "Trends, Videos, Nachrichten und Pausen",
     "transfer": "Achte heute auf die Zeit. Wie lange schaust du Videos? Mach dann eine Pause.",
     "selfAssessment": {

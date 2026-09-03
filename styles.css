@@ -2192,6 +2192,14 @@ html.no-motion *::after {
 /* Vorlese-Chip: nur das Lautsprecher-Symbol (aria-label bleibt für
    Screenreader). Ein Wort „Vorlesen" pro Seite reicht – es steht in der
    Vorlese-Leiste oben. 13× dasselbe Wort war visueller Lärm (Kohärenz). */
+/* Vorlese-Chip an einer Karte (F3).
+   Er sah aus wie eine gleichrangige Wahl: gefuellt in Akzent-Blau, mit
+   blauem Rand, so gross wie ein kleiner Knopf. Auf der Themen-Uebersicht
+   sind 13 davon – mehr als ein Drittel aller antippbaren Dinge.
+   Jetzt tritt er zurueck: neutrale Flaeche statt Akzentfarbe, kein Rand,
+   graues Symbol. Die TREFFERFLAECHE bleibt bei 46 x 46 px – zurueckhaltend
+   heisst nicht schwerer zu treffen. Beim Beruehren und mit der Tastatur
+   kommt die Akzentfarbe zurueck, damit klar ist: das ist ein Knopf. */
 .card-read-button {
   display: inline-flex;
   align-items: center;
@@ -2200,20 +2208,23 @@ html.no-motion *::after {
   min-height: 46px;
   padding: 10px;
   border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent-dark);
-  border: 1px solid var(--accent);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  /* durchsichtiger Rand: haelt die Groesse, damit beim Beruehren nichts springt */
+  border: 1px solid transparent;
   cursor: pointer;
 }
 
 .card-read-button .rb-ico {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 
-.card-read-button:hover {
-  background: var(--accent);
-  color: var(--on-accent);
+.card-read-button:hover,
+.card-read-button:focus-visible {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-color: var(--accent);
 }
 
 /* Vorlese-Knopf je Block (Haupttext, Liste, Achtung, Merksatz …):

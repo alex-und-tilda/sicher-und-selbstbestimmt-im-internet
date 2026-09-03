@@ -2114,8 +2114,12 @@ function confirmResetProfile(id) {
         <h2>Wirklich neu anfangen?</h2>
         <p>Für dein Zeichen ${signHtml(p)} (${escapeHtml(signLabel(p))}) werden die gewählte Sprache und der Lernstand gelöscht. Du fängst wieder von vorne an. Das kann man nicht rückgängig machen.</p>
         <div class="feedback-actions">
-          <button type="button" class="feedback-button secondary danger-button" onclick="resetProfile('${escapeHtml(id)}')">Ja, neu anfangen</button>
+        <!-- Die sichere Antwort steht zuerst. Sie ist ohnehin als primary
+             gestaltet; im Quelltext stand sie aber hinten, und genau in
+             dieser Reihenfolge liest die Sprachausgabe vor - die
+             loeschende Antwort kam also als erste Ansage. -->
           <button type="button" class="feedback-button primary" onclick="renderProfileManage('${escapeHtml(id)}')">Nein, behalten</button>
+          <button type="button" class="feedback-button secondary danger-button" onclick="resetProfile('${escapeHtml(id)}')">Ja, neu anfangen</button>
         </div>
       </article>
     </section>
@@ -2155,8 +2159,12 @@ function confirmDeleteProfile(id) {
         <h2>Profil wirklich löschen?</h2>
         <p>Dein Zeichen ${signHtml(p)} (${escapeHtml(signLabel(p))}) und sein Lernstand werden gelöscht. Das kann man nicht rückgängig machen.</p>
         <div class="feedback-actions">
-          <button type="button" class="feedback-button secondary danger-button" onclick="deleteProfile('${escapeHtml(id)}')">Ja, löschen</button>
+        <!-- Die sichere Antwort steht zuerst. Sie ist ohnehin als primary
+             gestaltet; im Quelltext stand sie aber hinten, und genau in
+             dieser Reihenfolge liest die Sprachausgabe vor - die
+             loeschende Antwort kam also als erste Ansage. -->
           <button type="button" class="feedback-button primary" onclick="renderProfileManage('${escapeHtml(id)}')">Nein, behalten</button>
+          <button type="button" class="feedback-button secondary danger-button" onclick="deleteProfile('${escapeHtml(id)}')">Ja, löschen</button>
         </div>
       </article>
     </section>
