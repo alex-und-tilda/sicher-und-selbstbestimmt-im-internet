@@ -451,6 +451,9 @@ function setProgressEnabled(enabled) {
    gespeicherten Lernstand (Bandura: Erfolg muss sofort sichtbar sein).
    Nur im Arbeitsspeicher – verschwindet beim Schließen (KDG-konform §14). */
 let sessionDoneTopics = new Set();
+/* Erreichte Runde je Thema im Uebungs-Handy. Nur Arbeitsspeicher,
+   genau wie sessionDoneTopics – ohne Einwilligung wird nichts gespeichert. */
+let sessionScenarioStufe = {};
 /* Selbstcheck und Kurz-Frage: nur im Arbeitsspeicher, nichts gespeichert (§14).
    Der Vergleich "vorher/nachher" passt in dieselbe Sitzung – dafuer braucht es
    keine Einwilligung und keine neue Datenkategorie. */
@@ -527,6 +530,7 @@ function toggleProgressSaving() {
   if (isProgressEnabled()) {
     setProgressEnabled(false);
     sessionDoneTopics = new Set();
+  sessionScenarioStufe = {};
     announce("Der Lernstand wurde gelöscht. Es wird nichts mehr gespeichert.");
   } else {
     setProgressEnabled(true);
@@ -1943,6 +1947,7 @@ function switchProfile(id) {
   loadActiveProfileSettings();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
+  sessionScenarioStufe = {};
   /* Person gewechselt: Rück-Anker und Mengen-Wahl DIESER Person laden, nicht
      die der vorherigen (der Speicher ist ohnehin je Profil getrennt). */
   loadLastLesson();
@@ -2148,6 +2153,7 @@ function finishSign(editId) {
   applyFontSize();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
+  sessionScenarioStufe = {};
   clearLastLesson();
   clearTopicAmounts();
   onboarding = true;
@@ -2225,6 +2231,7 @@ function resetProfile(id) {
     loadActiveProfileSettings();
     finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
+  sessionScenarioStufe = {};
   clearLastLesson();
   clearTopicAmounts();
     announce("Du fängst neu an.");
@@ -5377,6 +5384,55 @@ let scenarioTopicId = null;
 let scenarioIndex   = 0;
 let scenarioRight   = 0;
 let scenarioAnswered = false;
+/* Runden im Uebungs-Handy (Sept 2026): Runde = Stufe 1, 2 oder 3.
+   scenarioStufe = die gerade laufende Runde.
+   Freigeschaltet wird nur nach oben. Eine falsche Antwort nimmt nichts weg
+   (Konzept: keine Bestrafung). Ohne Lernstand-Einwilligung lebt der Stand
+   nur in dieser Sitzung – siehe sessionScenarioStufe oben. */
+let scenarioStufe = 1;
+
+/* Welche Stufen kommen in einem Szenario vor? Ohne stufe-Feld: nur [1].
+   Dadurch laufen alle Szenarien ohne Runden unveraendert weiter. */
+function scenarioStufen(scn) {
+  const s = new Set((scn && scn.szenen ? scn.szenen : []).map(z => Number(z.stufe) || 1));
+  return Array.from(s).sort((a, b) => a - b);
+}
+
+/* Ein Szenario-Abbild, das nur die Szenen EINER Runde enthaelt.
+   So bleiben scenarioElements() und buildScenarioScreen() unveraendert. */
+function scenarioRunde(scn, stufe) {
+  const szenen = (scn && scn.szenen ? scn.szenen : []).filter(z => (Number(z.stufe) || 1) === stufe);
+  return Object.assign({}, scn, { szenen });
+}
+
+/* Hoechste freigeschaltete Runde. Sitzung und – falls eingewilligt – Lernstand. */
+function getStufeFrei(topicId) {
+  let frei = sessionScenarioStufe[topicId] || 1;
+  if (isProgressEnabled()) {
+    const p = loadProgress();
+    const gespeichert = (p && p.stufen && p.stufen[topicId]) || 1;
+    if (gespeichert > frei) frei = gespeichert;
+  }
+  return frei;
+}
+
+function setStufeFrei(topicId, stufe) {
+  const wert = Number(stufe) || 1;
+  if (wert > (sessionScenarioStufe[topicId] || 1)) sessionScenarioStufe[topicId] = wert;
+  if (!isProgressEnabled()) return;
+  const p = loadProgress() || { enabled: true, done: {} };
+  p.stufen = p.stufen || {};
+  if (wert > (p.stufen[topicId] || 1)) {
+    p.stufen[topicId] = wert;
+    saveProgress(p);
+  }
+}
+
+function stufenName(stufe) {
+  if (stufe === 2) return "Runde 2";
+  if (stufe === 3) return "Runde 3";
+  return "Runde 1";
+}
 
 function getScenario(topicId) {
   return (typeof SCENARIOS !== "undefined" && SCENARIOS && SCENARIOS[topicId]) ? SCENARIOS[topicId] : null;
@@ -5445,6 +5501,19 @@ function scenarioElementHtml(el) {
         </div>`;
     case "hinweis":
       return `<p class="sz-hinweis">${escapeHtml(el.text || "")}</p>`;
+    /* Nachgebaute Betrugs-Seite fuer das Fallen-Bild (Sept 2026).
+       Bewusst KEINE echten Eingabefelder und kein <button>: Es ist ein
+       Bild, kein Formular. Niemand soll hier etwas eintippen koennen. */
+    case "webseite":
+      return `
+        <div class="sz-webseite">
+          ${el.adresse ? `<p class="sz-web-adresse">${escapeHtml(el.adresse)}</p>` : ""}
+          <div class="sz-web-inhalt">
+            <p class="sz-web-titel">${escapeHtml(el.titel || "")}</p>
+            ${(el.felder || []).map(f => `<p class="sz-web-feld">${escapeHtml(f)}</p>`).join("")}
+            ${el.knopf ? `<p class="sz-web-knopf">${escapeHtml(el.knopf)}</p>` : ""}
+          </div>
+        </div>`;
     default:
       return "";
   }
@@ -5536,6 +5605,32 @@ function startScenario(topicId) {
   setOrientation(`Du bist im Übungs-Handy zum Thema: ${topic.title}.`);
   rememberRoute(topicRoute(topic.id, "uebung"));
 
+  /* Runden-Auswahl (Sept 2026). Gibt es nur eine Runde, bleibt alles wie
+     bisher. Noch nicht freie Runden werden gezeigt, aber nicht als Verbot,
+     sondern als Ziel – niemand wird ausgesperrt oder abgewertet. */
+  const stufen = scenarioStufen(scn);
+  const frei = getStufeFrei(topic.id);
+  const rundenWahl = stufen.length < 2 ? "" : `
+      <h3>Wähle deine Runde</h3>
+      <div class="sz-runden">
+        ${stufen.map(st => {
+          const zahl = (scn.szenen || []).filter(z => (Number(z.stufe) || 1) === st).length;
+          const offen = st <= frei;
+          const untertitel = st === 1 ? "Zum Anfangen"
+                           : st === 2 ? "Die Tricks sind besser gemacht"
+                           : "Jetzt zählt, was du tust";
+          return offen
+            ? `<button type="button" class="sz-runde" onclick="beginScenario(${st})">
+                 <span class="sz-runde-titel">${escapeHtml(stufenName(st))}</span>
+                 <span class="sz-runde-sub">${escapeHtml(untertitel)} · ${zahl} Nachrichten</span>
+               </button>`
+            : `<p class="sz-runde sz-runde-zu">
+                 <span class="sz-runde-titel">${escapeHtml(stufenName(st))}</span>
+                 <span class="sz-runde-sub">Schaffe zuerst ${escapeHtml(stufenName(st - 1))}. Dann geht es hier weiter.</span>
+               </p>`;
+        }).join("")}
+      </div>`;
+
   content.innerHTML = `
     ${buildToolRow()}
     <article class="card scenario-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
@@ -5548,8 +5643,9 @@ function startScenario(topicId) {
         <h3>Wichtig</h3>
         <p class="remember-text">Alles hier ist erfunden. Es gibt keine Zeit-Grenze. Fehler sind erlaubt. Du kannst jederzeit aufhören.</p>
       </div>
+      ${rundenWahl}
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="beginScenario()">Üben starten</button>
+        ${rundenWahl ? "" : `<button type="button" class="quiz-link quiz-button" onclick="beginScenario()">Üben starten</button>`}
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
       </div>
     </article>
@@ -5558,7 +5654,15 @@ function startScenario(topicId) {
   renderLegalFooter();
 }
 
-function beginScenario() {
+function beginScenario(stufe) {
+  const scn = getScenario(scenarioTopicId);
+  const stufen = scn ? scenarioStufen(scn) : [1];
+  let gewuenscht = Number(stufe) || scenarioStufe || 1;
+  /* Nie in eine gesperrte Runde springen, und nie in eine, die es nicht gibt. */
+  if (stufen.indexOf(gewuenscht) === -1) gewuenscht = stufen[0] || 1;
+  const frei = getStufeFrei(scenarioTopicId);
+  if (gewuenscht > frei) gewuenscht = frei;
+  scenarioStufe = gewuenscht;
   scenarioIndex = 0;
   scenarioRight = 0;
   renderScenarioScene();
@@ -5569,19 +5673,24 @@ function renderScenarioScene() {
   const topic = getTopicById(scenarioTopicId);
   const scn = getScenario(scenarioTopicId);
   if (!topic || !scn) return renderMenu();
-  if (scenarioIndex >= scn.szenen.length) return renderScenarioResult();
+  /* Nur die Szenen der laufenden Runde (Sept 2026). Szenarien ohne
+     stufe-Feld haben genau eine Runde – fuer sie aendert sich nichts. */
+  const runde = scenarioRunde(scn, scenarioStufe);
+  if (scenarioIndex >= runde.szenen.length) return renderScenarioResult();
 
-  const szene = scn.szenen[scenarioIndex];
-  const total = scn.szenen.length;
+  const szene = runde.szenen[scenarioIndex];
+  const total = runde.szenen.length;
   const frage = szene.frage || null;
   scenarioAnswered = false;
+  const mehrereRunden = scenarioStufen(scn).length > 1;
+  const rundeText = mehrereRunden ? stufenName(scenarioStufe) + ", " : "";
 
   setProgressVisible(false);
   setBottomNavVisible(false);
   showNav(false, false);
-  setHeader(topic.title, "Übungs-Handy", `Schritt ${scenarioIndex + 1} von ${total}`, "Üben",
+  setHeader(topic.title, "Übungs-Handy", `${rundeText}Schritt ${scenarioIndex + 1} von ${total}`, "Üben",
             Math.round((scenarioIndex / total) * 100));
-  setOrientation(`Übungs-Handy: ${topic.title}. Schritt ${scenarioIndex + 1} von ${total}.`);
+  setOrientation(`Übungs-Handy: ${topic.title}. ${rundeText}Schritt ${scenarioIndex + 1} von ${total}.`);
 
   const antworten = frage
     ? (frage.answers || []).map((a, i) => `
@@ -5593,8 +5702,8 @@ function renderScenarioScene() {
   content.innerHTML = `
     ${buildToolRow()}
     <article class="card scenario-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
-      <p class="sz-count">Schritt ${scenarioIndex + 1} von ${total}</p>
-      ${buildScenarioScreen(scn, scenarioIndex)}
+      <p class="sz-count">${escapeHtml(rundeText)}Schritt ${scenarioIndex + 1} von ${total}</p>
+      ${buildScenarioScreen(runde, scenarioIndex)}
       ${frage ? `
         <div class="sz-frage">
           ${questionPikto(frage)}<p class="sz-frage-text">${escapeHtml(frage.question || "")}</p>
@@ -5623,7 +5732,9 @@ function answerScenario(index) {
   if (scenarioAnswered) return;
   const scn = getScenario(scenarioTopicId);
   if (!scn) return;
-  const frage = (scn.szenen[scenarioIndex] || {}).frage;
+  const runde = scenarioRunde(scn, scenarioStufe);
+  const szene = runde.szenen[scenarioIndex] || {};
+  const frage = szene.frage;
   if (!frage) return;
 
   scenarioAnswered = true;
@@ -5640,13 +5751,36 @@ function answerScenario(index) {
   const text = richtig
     ? (frage.feedbackCorrect || "Das war sicher. Gut gemacht.")
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
-  const letzte = scenarioIndex >= scn.szenen.length - 1;
+  const letzte = scenarioIndex >= runde.szenen.length - 1;
+
+  /* "Die war schwer" – Einordnung statt Lob. Nimmt Erwachsene ernst und
+     macht den Erfolg groesser, ohne dass eine Zahl steigt. */
+  const schwerHtml = szene.schwer
+    ? `<p class="sz-schwer">Die war schwer. Da fallen viele darauf herein.</p>`
+    : "";
+
+  /* Fallen-Bild: zeigt, was die Nachricht wollte. Wird IMMER gezeigt,
+     bei richtiger wie bei falscher Antwort – es ist kein Strafbild,
+     sondern der Inhalt. Ruhiger Ton, kein Erschrecken (§3, Došen). */
+  const falle = szene.falle;
+  const falleHtml = falle
+    ? `<div class="sz-falle">
+         <p class="sz-falle-band">Das ist nur ein Bild. Hier passiert nichts.</p>
+         <div class="phone phone--falle">
+           <p class="phone-bar">Diese Seite geht auf</p>
+           <div class="phone-screen">${(falle.inhalt || []).map(scenarioElementHtml).join("")}</div>
+         </div>
+         <p class="sz-falle-text">${escapeHtml(richtig ? (falle.text || "") : (falle.textFalsch || falle.text || ""))}</p>
+       </div>`
+    : "";
 
   const feld = document.getElementById("szFeedback");
   if (!feld) return;
   feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
   feld.innerHTML = `
     <p class="sz-feedback-kopf">${richtig ? "Richtig." : "Noch nicht sicher."}</p>
+    ${schwerHtml}
+    ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
     ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
     <div class="certificate-actions">
@@ -5666,13 +5800,23 @@ function renderScenarioResult() {
   const topic = getTopicById(scenarioTopicId);
   const scn = getScenario(scenarioTopicId);
   if (!topic || !scn) return renderMenu();
-  const total = scn.szenen.filter(s => s.frage).length || 1;
+  const runde = scenarioRunde(scn, scenarioStufe);
+  const total = runde.szenen.filter(s => s.frage).length || 1;
   playSound("success");
+
+  /* Naechste Runde freischalten (Sept 2026). Schwelle: drei Viertel richtig –
+     ueber dem Zufall, aber erreichbar. Wer sie nicht schafft, verliert nichts
+     und darf die Runde einfach noch einmal machen (keine Bestrafung). */
+  const stufen = scenarioStufen(scn);
+  const bestanden = scenarioRight >= Math.ceil(total * 0.75);
+  const naechste = stufen.filter(st => st > scenarioStufe)[0] || null;
+  if (bestanden && naechste) setStufeFrei(scenarioTopicId, naechste);
+  const mehrereRunden = stufen.length > 1;
 
   setProgressVisible(false);
   setBottomNavVisible(false);
   showNav(false, false);
-  setHeader(topic.title, "Übungs-Handy", "Ergebnis", "Fertig", 100);
+  setHeader(topic.title, "Übungs-Handy", mehrereRunden ? stufenName(scenarioStufe) + " – Ergebnis" : "Ergebnis", "Fertig", 100);
   setOrientation(`Geschafft! Du hast im Übungs-Handy geübt: ${topic.title}.`);
 
   const lob = scenarioRight === total
@@ -5681,7 +5825,26 @@ function renderScenarioResult() {
       ? "Das war schon sehr gut. Jedes Üben macht dich sicherer."
       : "Gut, dass du geübt hast. Das ist schwer. Du kannst es gleich noch einmal machen.";
 
-  const merksaetze = scn.szenen
+  /* Hinweis auf die naechste Runde – als Angebot, nie als Druck. */
+  const naechsteText = !mehrereRunden ? ""
+    : naechste && bestanden
+      ? `<div class="access-box remember remember-box">
+           <h3>${escapeHtml(stufenName(naechste))} ist jetzt offen</h3>
+           <p class="remember-text">${naechste === 3
+             ? "In Runde 3 kannst du die Tricks nicht mehr sehen. Auch geübte Menschen nicht. Dort zählt, was du tust."
+             : "In Runde 2 sind die Tricks besser gemacht. Kein Fehler im Text. Du musst genau hinschauen."}</p>
+         </div>`
+      : naechste
+        ? `<div class="access-box remember remember-box">
+             <h3>Noch eine Runde?</h3>
+             <p class="remember-text">Mach ${escapeHtml(stufenName(scenarioStufe))} noch einmal. Dann geht ${escapeHtml(stufenName(naechste))} auf. Du verlierst nichts dabei.</p>
+           </div>`
+        : `<div class="access-box remember remember-box">
+             <h3>Du hast alle Runden gemacht</h3>
+             <p class="remember-text">Das war die schwerste. Du kannst jede Runde jederzeit wiederholen.</p>
+           </div>`;
+
+  const merksaetze = runde.szenen
     .filter(s => s.frage && s.frage.remember)
     .map(s => `<li>${escapeHtml(s.frage.remember)}</li>`).join("");
 
@@ -5692,6 +5855,7 @@ function renderScenarioResult() {
       <p>Du hast ${scenarioRight} von ${total} Entscheidungen sicher getroffen.</p>
       <p>${escapeHtml(lob)}</p>
       ${scn.abschluss ? `<p>${escapeHtml(scn.abschluss)}</p>` : ""}
+      ${naechsteText}
       ${merksaetze ? `
       <div class="access-box remember remember-box">
         <h3>Das nimmst du mit</h3>
@@ -5702,7 +5866,11 @@ function renderScenarioResult() {
         <p class="remember-text">Passiert dir so etwas wirklich? Zeige es einer Person, der du vertraust. Du musst nichts allein entscheiden.</p>
       </div>
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="beginScenario()">Noch einmal üben</button>
+        ${(naechste && bestanden)
+          ? `<button type="button" class="quiz-link quiz-button" onclick="beginScenario(${naechste})">${escapeHtml(stufenName(naechste))} starten</button>`
+          : ""}
+        <button type="button" class="${(naechste && bestanden) ? "nav-button secondary" : "quiz-link quiz-button"}" onclick="beginScenario(${scenarioStufe})">${mehrereRunden ? escapeHtml(stufenName(scenarioStufe)) + " noch einmal" : "Noch einmal üben"}</button>
+        ${mehrereRunden ? `<button type="button" class="nav-button secondary" onclick="startScenario('${escapeHtml(topic.id)}')">Andere Runde wählen</button>` : ""}
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
         <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
       </div>

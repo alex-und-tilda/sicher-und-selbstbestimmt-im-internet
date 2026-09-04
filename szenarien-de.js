@@ -796,3 +796,239 @@ const SCENARIOS = {
     abschluss: "Du hast den Shop geprüft und abgebrochen. Nichts gekauft ist manchmal die beste Entscheidung."
   }
 };
+
+/* =============================================================
+   ÜBUNGS-HANDY: RUNDEN 2 UND 3 — Versuch, nur Thema "Betrug"
+   -------------------------------------------------------------
+   Stand 04.09.2026. Abgetrennter Block, damit der Versuch in
+   einem Stück wieder entfernt werden kann. Die vier Szenen von
+   Runde 1 oben bleiben unverändert; hier bekommen sie nur ihr
+   Fallen-Bild dazu.
+
+   NEUE FELDER (alle freiwillig — Szenarien ohne sie laufen
+   unverändert weiter):
+     stufe   1, 2 oder 3. Fehlt das Feld, gilt 1.
+     falle   { inhalt:[...], text, textFalsch }
+             Wird nach der Antwort gezeigt: was die Nachricht will.
+             inhalt nutzt dieselben Bausteine wie der Bildschirm,
+             dazu neu: { typ:"webseite", adresse, titel, felder[], knopf }
+     schwer  true -> Rückmeldung sagt "Die war schwer."
+
+   DIDAKTIK: Runde 1 und 2 fragen "Trick oder echt?" (Erkennen).
+   Runde 3 fragt "Was machst du?" (Handeln). Das ist Absicht:
+   auf Runde 3 sind die Nachrichten nicht mehr sicher zu erkennen.
+   Sicherheit kommt dort aus der Handlung, nicht aus dem Blick.
+   (§3 CLAUDE.md, UDL Handlung und Ausdruck.)
+
+   Alles erfunden. Keine echten Marken, keine echten Nummern,
+   keine echten Adressen.
+   ============================================================= */
+
+(function erweitereBetrug() {
+  if (typeof SCENARIOS === "undefined" || !SCENARIOS.betrug) return;
+  const b = SCENARIOS.betrug;
+
+  /* ---- Texte je Runde ---- */
+  b.stufen = {
+    1: { einstieg: ["Vier Nachrichten sind da.", "Du entscheidest bei jeder: Trick oder echt?"] },
+    2: { einstieg: ["Runde 2. Die Tricks sind besser gemacht.", "Keine Fehler mehr im Text. Schau genau hin."] },
+    3: { einstieg: ["Runde 3. Jetzt kannst du es nicht mehr sehen.", "Auch geübte Menschen nicht.", "Deshalb fragen wir jetzt: Was machst du?"] }
+  };
+
+  /* ---- Runde 1: Fallen-Bilder ergänzen ---- */
+  const fallen1 = {
+    0: {
+      inhalt: [{ typ: "webseite", adresse: "paket-info-24.xyz", titel: "Paket-Service",
+                 felder: ["Ihre Karten-Nummer", "Gültig bis"], knopf: "Jetzt 1,99 € zahlen" }],
+      text: "Schau: Das passiert, wenn du auf den Link tippst. Die Seite will deine Karten-Nummer. Das Paket gibt es nicht.",
+      textFalsch: "So sieht die Falle von innen aus. Die Seite will deine Karten-Nummer. Jetzt kennst du sie."
+    },
+    2: {
+      inhalt: [{ typ: "webseite", adresse: "bank-sicherheit24.xyz", titel: "Konto bestätigen",
+                 felder: ["Kontonummer", "PIN"], knopf: "Konto freischalten" }],
+      text: "Schau: Die Seite will deine Kontonummer und deine PIN. Deine Bank fragt so etwas nie.",
+      textFalsch: "So sieht die Falle aus. Sie will deine Kontonummer und deine PIN. Deine Bank fragt so etwas nie."
+    },
+    3: {
+      inhalt: [{ typ: "webseite", adresse: "super-lotto-plus.xyz", titel: "Gewinn abholen",
+                 felder: ["Ihr Name", "Konto für die Gebühr"], knopf: "20 € zahlen und Gewinn holen" }],
+      text: "Schau: Du sollst erst 20 Euro zahlen. Den Gewinn gibt es nicht.",
+      textFalsch: "So sieht die Falle aus. Du sollst erst zahlen. Den Gewinn gibt es nicht."
+    }
+  };
+  Object.keys(fallen1).forEach(i => {
+    const szene = b.szenen[Number(i)];
+    if (szene && !szene.falle) szene.falle = fallen1[i];
+  });
+
+  /* ---- Runde 2: gut gemachte Tricks ---- */
+  b.szenen.push(
+    {
+      stufe: 2, schwer: true,
+      inhalt: [{ typ: "liste", eintraege: [
+        { von: "SMS · DHL Paket-Info", vorschau: "Ihre Sendung 4471 kommt heute zwischen 12 und 14 Uhr. Adresse ändern: dhl-liefertermin.de/4471", zeit: "08:14" }
+      ] }],
+      frage: {
+        question: "Trick oder echt?",
+        pictogram: "pikto-fraud",
+        answers: ["Das ist ein Trick.", "Das ist echt."],
+        correctIndex: 0,
+        feedbackCorrect: "Richtig. Die Adresse ist fast richtig. Die echte Seite heißt dhl.de. Diese heißt dhl-liefertermin.de.",
+        feedbackWrong: "Die Adresse ist fast richtig. Aber nur fast. Die echte Seite heißt dhl.de. Diese heißt anders.",
+        remember: "Ich tippe nicht auf Links in Nachrichten. Ich öffne die App selbst."
+      },
+      falle: {
+        inhalt: [{ typ: "webseite", adresse: "dhl-liefertermin.de/4471", titel: "Bitte anmelden",
+                   felder: ["Ihr Name", "Ihr Passwort"], knopf: "Weiter" }],
+        text: "Schau: Die Seite sieht aus wie die echte Seite. Sie will deinen Namen und dein Passwort.",
+        textFalsch: "So sieht die Falle aus. Die Seite sieht echt aus. Sie will deinen Namen und dein Passwort."
+      }
+    },
+    {
+      stufe: 2,
+      inhalt: [{ typ: "liste", eintraege: [
+        { von: "E-Mail · bestellung@amazon-service.net", vorschau: "Ihre Bestellung über 89,90 Euro wurde storniert. Bei Fragen antworten Sie auf diese Mail.", zeit: "10:30" }
+      ] }],
+      frage: {
+        question: "Trick oder echt?",
+        pictogram: "pikto-mail",
+        answers: ["Das ist ein Trick.", "Das ist echt."],
+        correctIndex: 0,
+        feedbackCorrect: "Richtig. Du hast gar nichts bestellt. Das ist das wichtigste Zeichen.",
+        feedbackWrong: "Frag dich immer zuerst: Habe ich das wirklich bestellt? Wenn nein, ist es ein Trick.",
+        remember: "Ich frage mich: Habe ich das wirklich bestellt?"
+      },
+      falle: {
+        inhalt: [{ typ: "hinweis", text: "Du antwortest. Kurz danach ruft jemand an. Er sagt: Ich hole Ihr Geld zurück. Bitte öffnen Sie Ihr Online-Banking." }],
+        text: "Schau: Die Mail will nur, dass du antwortest. Danach kommt der Anruf. Das ist die Falle.",
+        textFalsch: "So geht die Falle weiter. Wer antwortet, bekommt einen Anruf. Der Anruf ist der Betrug."
+      }
+    },
+    {
+      stufe: 2,
+      inhalt: [{ typ: "liste", eintraege: [
+        { von: "SMS · Mein Handy-Anbieter", vorschau: "Ihre Rechnung für September ist fertig. Sie sehen sie in Ihrer App.", zeit: "07:00" }
+      ] }],
+      frage: {
+        question: "Trick oder echt?",
+        pictogram: "pikto-done",
+        answers: ["Das ist ein Trick.", "Das ist echt."],
+        correctIndex: 1,
+        feedbackCorrect: "Genau. Kein Link. Kein Druck. Die Nachricht schickt dich in deine eigene App. Das ist gut.",
+        feedbackWrong: "Schau noch einmal: kein Link, kein Geld, kein Druck. Sie schickt dich in deine eigene App.",
+        remember: "Kein Link und kein Druck: das ist ein gutes Zeichen."
+      }
+    },
+    {
+      stufe: 2, schwer: true,
+      inhalt: [{ typ: "liste", eintraege: [
+        { von: "SMS · Sicherheits-Info", vorschau: "Ihr Konto wurde von einem neuen Gerät geöffnet. Waren Sie das nicht? Hier stoppen: konto-schutz.de/stop", zeit: "23:47" }
+      ] }],
+      frage: {
+        question: "Trick oder echt?",
+        pictogram: "pikto-warning",
+        answers: ["Das ist ein Trick.", "Das ist echt."],
+        correctIndex: 0,
+        feedbackCorrect: "Richtig. Die Nachricht macht Angst. Und sie gibt dir einen Link. Beides zusammen ist ein Warnzeichen.",
+        feedbackWrong: "Die Nachricht macht Angst. Genau das will sie. Angst und ein Link zusammen sind ein Warnzeichen.",
+        remember: "Angst und ein Link zusammen: ich mache nichts."
+      },
+      falle: {
+        inhalt: [{ typ: "webseite", adresse: "konto-schutz.de/stop", titel: "Zugriff stoppen",
+                   felder: ["Benutzername", "Passwort"], knopf: "Jetzt stoppen" }],
+        text: "Schau: Die Seite will deinen Namen und dein Passwort. Damit kommen die Betrüger erst in dein Konto.",
+        textFalsch: "So sieht die Falle aus. Sie will deinen Namen und dein Passwort. Damit kommen die Betrüger in dein Konto."
+      }
+    }
+  );
+
+  /* ---- Runde 3: nicht mehr erkennbar — es zählt die Handlung ---- */
+  b.szenen.push(
+    {
+      stufe: 3, schwer: true,
+      inhalt: [{ typ: "liste", eintraege: [
+        { von: "SMS · Deine Bank", vorschau: "Wir haben eine Zahlung über 340 Euro gestoppt. War das nicht Sie? Rufen Sie uns an: 0251 598 0", zeit: "19:30" }
+      ] }],
+      frage: {
+        question: "Was machst du?",
+        pictogram: "pikto-phone",
+        answers: ["Ich rufe die Nummer aus der Nachricht an.", "Ich nehme die Nummer von meiner Bank-Karte."],
+        correctIndex: 1,
+        feedbackCorrect: "Sehr gut. Diese Nachricht ist echt. Aber das kannst du nicht sicher sehen. Betrüger schreiben genau so. Mit deiner eigenen Nummer bist du immer sicher.",
+        feedbackWrong: "Diese Nachricht ist echt. Trotzdem ist die eigene Nummer besser. Denn Betrüger schreiben genau solche Nachrichten. Man sieht den Unterschied nicht.",
+        remember: "Ich rufe nur Nummern an, die ich schon habe."
+      },
+      falle: {
+        inhalt: [{ typ: "anruf", von: "Angeblich deine Bank", nummer: "Nummer aus der Nachricht" }],
+        text: "Diese Nachricht war echt. Aber schau, was bei einer falschen passiert: Am Telefon sitzt ein Betrüger. Er klingt freundlich. Er sagt: Ich bin von Ihrer Bank.",
+        textFalsch: "Schau, was bei einer falschen Nachricht passiert: Am Telefon sitzt ein Betrüger. Er klingt freundlich. Er sagt: Ich bin von Ihrer Bank."
+      }
+    },
+    {
+      stufe: 3, schwer: true,
+      inhalt: [{ typ: "liste", eintraege: [
+        { von: "SMS · Deine Bank", vorschau: "Ihre neue TAN-App ist bereit. Bitte bestätigen Sie einmalig Ihre Anmeldung: bank-tan-start.de", zeit: "19:41" }
+      ] }],
+      frage: {
+        question: "Was machst du?",
+        pictogram: "pikto-bank",
+        answers: ["Ich tippe auf den Link.", "Ich öffne meine Bank-App selbst."],
+        correctIndex: 1,
+        feedbackCorrect: "Sehr gut. Das war ein Trick. Die Seite ist sehr gut nachgemacht. Auch geübte Menschen erkennen sie nicht. Du musst sie nicht erkennen. Du öffnest die App selbst. Dann bist du sicher.",
+        feedbackWrong: "Das war ein Trick. Die Seite ist sehr gut nachgemacht. Auch geübte Menschen erkennen sie nicht. Deshalb hilft nur eins: die App selbst öffnen.",
+        remember: "Ich muss den Trick nicht erkennen. Ich öffne die App selbst."
+      },
+      falle: {
+        inhalt: [{ typ: "webseite", adresse: "bank-tan-start.de", titel: "Anmeldung bestätigen",
+                   felder: ["Anmeldename", "PIN", "TAN"], knopf: "Bestätigen" }],
+        text: "Schau: Die Seite sieht genau aus wie deine Bank. Sie will deine PIN und deine TAN. Damit holen die Betrüger dein Geld.",
+        textFalsch: "So sieht die Falle aus. Die Seite sieht genau aus wie deine Bank. Sie will deine PIN und deine TAN."
+      }
+    },
+    {
+      stufe: 3, schwer: true,
+      inhalt: [{ typ: "liste", eintraege: [
+        { von: "WhatsApp · Unbekannte Nummer", vorschau: "Hallo, ich bin es. Mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir kurz helfen?", zeit: "17:12" }
+      ] }],
+      frage: {
+        question: "Was machst du?",
+        pictogram: "pikto-message",
+        answers: ["Ich schreibe zurück und helfe.", "Ich rufe die alte Nummer an."],
+        correctIndex: 1,
+        feedbackCorrect: "Sehr gut. Ruf die alte Nummer an. Geht die Person dort ran, war die Nachricht ein Trick.",
+        feedbackWrong: "Betrüger schreiben oft so. Erst sind sie nett. Dann bitten sie um Geld. Ruf immer zuerst die alte Nummer an.",
+        remember: "Neue Nummer? Ich rufe zuerst die alte an."
+      },
+      falle: {
+        inhalt: [{ typ: "nachricht", von: "Unbekannte Nummer", text: "Danke! Ich komme gerade nicht an mein Konto. Kannst du eine Rechnung für mich zahlen? Es sind 890 Euro. Ich gebe es dir morgen wieder.", zeit: "17:20" }],
+        text: "Schau, wie es weitergeht. Erst ist es nett. Dann kommt die Bitte um Geld.",
+        textFalsch: "So geht die Falle weiter. Erst ist es nett. Dann kommt die Bitte um Geld."
+      }
+    },
+    {
+      stufe: 3, schwer: true,
+      inhalt: [
+        { typ: "liste", eintraege: [
+          { von: "SMS · Sicherheits-Code", vorschau: "Ihr Code lautet 449812. Geben Sie ihn niemandem weiter.", zeit: "20:05" }
+        ] },
+        { typ: "hinweis", text: "Kurz danach klingelt das Telefon. Jemand sagt: Ich bin von Ihrer Bank. Bitte nennen Sie mir den Code." }
+      ],
+      frage: {
+        question: "Was machst du?",
+        pictogram: "pikto-lock",
+        answers: ["Ich sage den Code.", "Ich sage den Code nicht."],
+        correctIndex: 1,
+        feedbackCorrect: "Sehr gut. Die SMS ist echt. Der Anruf ist der Betrug. Niemand darf diesen Code haben. Auch nicht deine Bank. Auch nicht die Polizei.",
+        feedbackWrong: "Die SMS ist echt. Aber der Anruf ist der Betrug. Mit dem Code kommt der Anrufer in dein Konto. Niemand darf ihn haben.",
+        remember: "Meinen Code sage ich niemandem. Auch nicht am Telefon."
+      },
+      falle: {
+        inhalt: [{ typ: "hinweis", text: "Der Anrufer hat den Code. Er meldet sich in deinem Konto an. Das Geld ist weg." }],
+        text: "Schau: Die SMS war echt. Der Anruf danach ist der Trick. Der Code ist der Schlüssel zu deinem Konto.",
+        textFalsch: "So endet die Falle. Der Code ist der Schlüssel zu deinem Konto. Wer ihn hat, kommt hinein."
+      }
+    }
+  );
+
+  b.abschluss = "Du hast geprüft und entschieden. Genau so kannst du es bei echten Nachrichten machen.";
+})();

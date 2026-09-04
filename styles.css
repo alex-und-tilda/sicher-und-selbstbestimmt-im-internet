@@ -5462,6 +5462,132 @@ body.simple-mode .practice-box {
   line-height: 1.5;
 }
 
+/* ---- Nachgebaute Betrugs-Seite im Fallen-Bild (Sept 2026) ----
+   Sieht aus wie eine Webseite, ist aber nur ein Bild: keine Eingabe-
+   felder, kein <button>. Alle Farben ueber Variablen, damit der
+   Dark Mode traegt. */
+.sz-webseite {
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.sz-web-adresse {
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--surface-soft);
+  border-bottom: 2px solid var(--line);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  word-break: break-all;
+}
+
+.sz-web-inhalt { padding: 14px; }
+
+.sz-web-titel {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.sz-web-feld {
+  margin: 0 0 8px;
+  padding: 12px 10px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+/* Bewusst NICHT in der Marken-Farbe --accent: sonst sieht der Knopf der
+   Betrugs-Seite genauso aus wie der echte "Weiter"-Knopf direkt darunter,
+   und Lernende tippen darauf. Der Warn-Ton der Falle: sieht nach Knopf aus,
+   ist aber in HELL wie DUNKEL klar von den blauen App-Knoepfen zu
+   unterscheiden. (Grau-Blau ging nicht: im Dark Mode wird --ink-soft
+   hellblau und damit fast identisch mit --accent.) */
+.sz-web-knopf {
+  margin: 12px 0 0;
+  padding: 12px 10px;
+  border-radius: var(--radius-s);
+  background: var(--warn);
+  color: var(--surface);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---- Das Fallen-Bild als Ganzes ---- */
+.sz-falle {
+  margin: 14px 0;
+  padding: 12px;
+  border: 2px dashed var(--warn);
+  border-radius: var(--radius-m);
+  background: var(--warn-bg);
+}
+
+.sz-falle-band {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--warn);
+  text-align: center;
+}
+
+.sz-falle-text {
+  margin: 10px 0 0;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.phone--falle { margin: 0 auto; }
+
+/* ---- "Die war schwer" – Einordnung statt Lob ---- */
+.sz-schwer {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* ---- Runden-Auswahl ---- */
+.sz-runden {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 16px;
+}
+
+.sz-runde {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  min-height: 64px;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.sz-runde:hover,
+button.sz-runde:focus-visible { border-color: var(--accent); }
+
+.sz-runde-zu {
+  cursor: default;
+  background: var(--surface-soft);
+  border-style: dashed;
+}
+
+.sz-runde-titel { font-size: 1.15rem; font-weight: 700; }
+.sz-runde-sub   { font-size: 1rem; color: var(--ink-soft); line-height: 1.45; }
+
 /* ---- Frage und Rückmeldung ---- */
 .sz-frage { margin: 0 0 14px; }
 
