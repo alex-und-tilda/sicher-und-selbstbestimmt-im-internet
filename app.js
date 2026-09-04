@@ -531,6 +531,7 @@ function toggleProgressSaving() {
     setProgressEnabled(false);
     sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
+  sessionRegeln = {};
     announce("Der Lernstand wurde gelöscht. Es wird nichts mehr gespeichert.");
   } else {
     setProgressEnabled(true);
@@ -1948,6 +1949,7 @@ function switchProfile(id) {
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
+  sessionRegeln = {};
   /* Person gewechselt: Rück-Anker und Mengen-Wahl DIESER Person laden, nicht
      die der vorherigen (der Speicher ist ohnehin je Profil getrennt). */
   loadLastLesson();
@@ -2154,6 +2156,7 @@ function finishSign(editId) {
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
+  sessionRegeln = {};
   clearLastLesson();
   clearTopicAmounts();
   onboarding = true;
@@ -2232,6 +2235,7 @@ function resetProfile(id) {
     finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
+  sessionRegeln = {};
   clearLastLesson();
   clearTopicAmounts();
     announce("Du fängst neu an.");
@@ -3010,6 +3014,30 @@ function renderMyPath() {
            </section>`
         : "");
 
+  /* Deine Karte: der Sammelstand. Steht bewusst oben beim Fortschritt und
+     nicht als weitere Kachel unter "Zusätzlich üben" – dort stehen schon
+     fünf gleichrangige Angebote, und keines sagt, wann es dran ist. */
+  const kz = (typeof regelZaehlung === "function") ? regelZaehlung() : null;
+  const karteBlock = !kz ? "" : `
+    <button type="button" class="karte-block" onclick="renderRegelKarte()">
+      <span class="karte-block-kopf">
+        <span class="karte-block-titel">Deine Karte</span>
+        <span class="karte-block-zahl">${kz.gefunden} <span>von ${kz.gesamt}</span></span>
+      </span>
+      <span class="karte-block-balken" aria-hidden="true">
+        <span class="karte-block-fuell" style="width:${Math.round((kz.gefunden / kz.gesamt) * 100)}%"></span>
+      </span>
+      <span class="karte-block-sub">${
+        kz.gefunden === 0
+          ? "Beim Üben sammelst du deine eigenen Regeln."
+          : (kz.gefunden < kz.gesamt
+              ? "Dir fehlen noch " + (kz.gesamt - kz.gefunden) + " " + (kz.gesamt - kz.gefunden === 1 ? "Regel" : "Regeln") + ". " + (kz.sitzt === 1 ? "Davon sitzt 1." : "Davon sitzen " + kz.sitzt + ".")
+              : (kz.sitzt < kz.gesamt
+                  ? (kz.sitzt === 1 ? "Alle Regeln gefunden. Eine davon sitzt schon." : "Alle Regeln gefunden. " + kz.sitzt + " davon sitzen schon.")
+                  : "Alle Regeln sitzen. Deine Karte ist voll."))
+      }</span>
+    </button>`;
+
   /* Was noch offen ist – in der Reihenfolge, in der die Themenseite es zeigt. */
   const offeneTopics = getTopicsInDisplayOrder().filter(t => !isTopicDone(t.id));
   const offenSection = offeneTopics.length > 0
@@ -3035,6 +3063,7 @@ function renderMyPath() {
       <section class="path-block" aria-label="Das hast du geschafft">
         <h3 class="topic-grid-title">Das hast du geschafft</h3>
         ${heroProgress}
+        ${karteBlock}
         ${reviewSection}
         ${doneSection}
       </section>
@@ -4249,6 +4278,8 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   const explanation = isCorrect
     ? (practice.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
     : (falschFeedback(practice, index) || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
+  /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
+  const regelHinweis = isCorrect ? regelHinweisHtml(practice.remember, topic.id) : "";
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -4276,6 +4307,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
           <p class="remember-text">${escapeHtml(practice.remember)}</p>
         </div>
       ` : ""}
+      ${regelHinweis}
 
       <div class="feedback-actions">
         ${isCorrect
@@ -4882,6 +4914,8 @@ function renderQuizFeedbackPage(index) {
   const explanation = isCorrect
     ? (q.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
     : (falschFeedback(q, index) || "Das ist nicht sicher. Du kannst die Frage noch einmal versuchen.");
+  /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
+  const regelHinweis = isCorrect ? regelHinweisHtml(q.remember, topic.id) : "";
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -4902,6 +4936,8 @@ function renderQuizFeedbackPage(index) {
         <h3>Erklärung:</h3>
         <p>${escapeHtml(explanation)}</p>
       </div>
+
+      ${regelHinweis}
 
       <div class="feedback-actions">
         ${isCorrect
@@ -5751,6 +5787,8 @@ function answerScenario(index) {
   const text = richtig
     ? (frage.feedbackCorrect || "Das war sicher. Gut gemacht.")
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
+  /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
+  const regelHinweis = richtig ? regelHinweisHtml(frage.remember, scenarioTopicId) : "";
   const letzte = scenarioIndex >= runde.szenen.length - 1;
 
   /* "Die war schwer" – Einordnung statt Lob. Nimmt Erwachsene ernst und
@@ -5783,6 +5821,7 @@ function answerScenario(index) {
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
     ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
+    ${regelHinweis}
     <div class="certificate-actions">
       <button type="button" class="nav-button primary" onclick="nextScenarioScene()">${letzte ? "Zum Ergebnis" : "Weiter"}</button>
     </div>`;
@@ -6140,6 +6179,7 @@ function handleHash() {
     /* Sonderrouten */
     if (hash === "grosses-quiz") return startBigQuiz();
     if (hash === "wiederholen") return startRepeatQuiz();
+    if (hash === "meine-karte") return renderRegelKarte();
     if (hash === "training") return startTrainingInbox();
     if (hash === "merk-alle") return renderAllMemoryCards();
     if (hash === "uebung") return renderScenarioChooser();
@@ -6331,3 +6371,259 @@ document.addEventListener("DOMContentLoaded", handleHash);
 /* hashchange und popstate können beim Browser-Zurück gleichzeitig feuern.
    scheduleHandleHash bündelt beide zu genau einem Neuaufbau. */
 window.addEventListener("hashchange", scheduleHandleHash);
+
+/* =============================================================
+   DEINE KARTE – die 13 Regeln sammeln
+   -------------------------------------------------------------
+   Stand 04.09.2026. Abgetrennter Block, in einem Stueck entfernbar.
+   Daten: regeln-de.js (REGELN, regelZuSatz, regelById).
+
+   Zwei Stufen je Regel:
+     GEFUNDEN  in 1 Thema richtig angewendet
+     SITZT     in einem ZWEITEN Thema wiedergefunden -> Transfer
+
+   Gezaehlt wird nur, was die Person TUT (richtige Antwort in
+   Uebung, Quiz oder Uebungs-Handy), nicht was sie liest.
+   Speicherung wie sessionDoneTopics: Arbeitsspeicher, und nur
+   mit Einwilligung zusaetzlich im Lernstand (KDG, §14).
+   ============================================================= */
+
+/* { regelId: { themaId: true } } – nur Arbeitsspeicher. */
+let sessionRegeln = {};
+
+function ladeRegelStand() {
+  const stand = {};
+  Object.keys(sessionRegeln).forEach(function (rid) {
+    stand[rid] = Object.assign({}, sessionRegeln[rid]);
+  });
+  if (isProgressEnabled()) {
+    const p = loadProgress();
+    const gespeichert = (p && p.regeln) || {};
+    Object.keys(gespeichert).forEach(function (rid) {
+      stand[rid] = stand[rid] || {};
+      (gespeichert[rid] || []).forEach(function (t) { stand[rid][t] = true; });
+    });
+  }
+  return stand;
+}
+
+function regelThemen(regelId) {
+  const stand = ladeRegelStand();
+  return Object.keys(stand[regelId] || {});
+}
+
+/* 0 = noch nicht gefunden, 1 = gefunden, 2 = sitzt */
+function regelStufe(regelId) {
+  const n = regelThemen(regelId).length;
+  return n === 0 ? 0 : (n === 1 ? 1 : 2);
+}
+
+function regelZaehlung() {
+  let gefunden = 0, sitzt = 0;
+  REGELN.forEach(function (r) {
+    const s = regelStufe(r.id);
+    if (s >= 1) gefunden++;
+    if (s === 2) sitzt++;
+  });
+  return { gefunden: gefunden, sitzt: sitzt, gesamt: REGELN.length };
+}
+
+/* Traegt eine angewendete Regel ein. Gibt zurueck, was sich geaendert hat:
+   null | { regel, neu: true } | { regel, jetztSicher: true } */
+function regelAnwenden(satz, themaId) {
+  if (typeof regelZuSatz !== "function" || !themaId) return null;
+  const rid = regelZuSatz(satz);
+  if (!rid) return null;
+  const vorher = regelStufe(rid);
+
+  sessionRegeln[rid] = sessionRegeln[rid] || {};
+  sessionRegeln[rid][themaId] = true;
+
+  if (isProgressEnabled()) {
+    const p = loadProgress() || { enabled: true, done: {} };
+    p.regeln = p.regeln || {};
+    const liste = p.regeln[rid] || [];
+    if (liste.indexOf(themaId) === -1) {
+      liste.push(themaId);
+      p.regeln[rid] = liste;
+      saveProgress(p);
+    }
+  }
+
+  const nachher = regelStufe(rid);
+  if (nachher === vorher) return null;
+  const regel = regelById(rid);
+  if (!regel) return null;
+  return nachher === 1 ? { regel: regel, neu: true } : { regel: regel, jetztSicher: true };
+}
+
+/* Rueckmeldung im Feedback – der Belohnungsmoment. Traegt gleichzeitig ein.
+   Nur bei richtiger Antwort aufrufen. */
+function regelHinweisHtml(satz, themaId) {
+  const erg = regelAnwenden(satz, themaId);
+  if (!erg) return "";
+  const bild = getPictogramHtml ? getPictogramHtml(erg.regel.pikto) : "";
+  const z = regelZaehlung();
+  if (erg.neu) {
+    return `
+      <div class="regel-treffer" role="status">
+        <p class="regel-treffer-kopf">Neue Regel für deine Karte</p>
+        <div class="regel-treffer-zeile">
+          ${bild}
+          <p class="regel-treffer-satz">${escapeHtml(erg.regel.kurz)}</p>
+        </div>
+        <p class="regel-treffer-stand">Du hast ${z.gefunden} von ${z.gesamt} Regeln.</p>
+      </div>`;
+  }
+  return `
+    <div class="regel-treffer regel-treffer--sicher" role="status">
+      <p class="regel-treffer-kopf">Diese Regel sitzt jetzt</p>
+      <div class="regel-treffer-zeile">
+        ${bild}
+        <p class="regel-treffer-satz">${escapeHtml(erg.regel.kurz)}</p>
+      </div>
+      <p class="regel-treffer-stand">Du hast sie in zwei Themen wiedererkannt. ${z.sitzt === 1 ? "1 von " + z.gesamt + " Regeln sitzt." : z.sitzt + " von " + z.gesamt + " Regeln sitzen."}</p>
+    </div>`;
+}
+
+/* Piktogramm einer Regel als Bild. Nutzt den vorhandenen Resolver. */
+function getPictogramHtml(key) {
+  if (!key || typeof pictoSrc !== "function") return "";
+  return `<img class="regel-pikto" src="${pictoSrc(key)}" alt="" aria-hidden="true" />`;
+}
+
+/* ---- Die Sammlung ansehen ---- */
+
+function renderRegelKarte() {
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  showNav(false, false);
+  const z = regelZaehlung();
+  setHeader("Deine Karte", "Deine Regeln", "Deine Karte", `${z.sitzt} von ${z.gesamt} sitzen`, Math.round((z.sitzt / z.gesamt) * 100));
+  setOrientation(`Du bist auf der Seite: Deine Karte. Du hast ${z.gefunden} von ${z.gesamt} Regeln gefunden.`);
+  rememberRoute("meine-karte");
+
+  /* Gesammelte zuerst, offene als kompakter Block darunter: Die Person
+     sieht ihre Sammlung am Stueck und die Luecke als eine Aussage –
+     nicht sechs Mal denselben Platzhalter-Satz. */
+  const gefundeneRegeln = REGELN.filter(function (r) { return regelStufe(r.id) >= 1; });
+  const offeneRegeln    = REGELN.filter(function (r) { return regelStufe(r.id) === 0; });
+
+  const plaetze = gefundeneRegeln.map(function (r) {
+    const stufe = regelStufe(r.id);
+    const themen = regelThemen(r.id)
+      .map(function (t) { const x = getTopicById(t); return x ? x.title : null; })
+      .filter(Boolean);
+    return `
+      <li class="regel-platz ${stufe === 2 ? "regel-platz--sitzt" : "regel-platz--gefunden"}">
+        ${getPictogramHtml(r.pikto)}
+        <span class="regel-platz-text">
+          <span class="regel-platz-satz">${escapeHtml(r.kurz)}</span>
+          <span class="regel-platz-sub">${escapeHtml(r.was)}</span>
+          <span class="regel-platz-stand">${stufe === 2
+            ? "Sitzt. Wiedererkannt in: " + escapeHtml(themen.join(", "))
+            : "Gefunden in: " + escapeHtml(themen.join(", ")) + ". Finde sie in einem zweiten Thema wieder, dann sitzt sie."}</span>
+        </span>
+      </li>`;
+  }).join("");
+
+  const offeneHtml = offeneRegeln.length === 0 ? "" : `
+    <section class="regel-offen" aria-label="Noch offen">
+      <h3>Noch offen: ${offeneRegeln.length} ${offeneRegeln.length === 1 ? "Regel" : "Regeln"}</h3>
+      <p class="regel-offen-text">Diese Plätze füllst du beim Üben. Du bekommst die Regeln nicht gesagt – du findest sie.</p>
+      <ul class="regel-offen-reihe">
+        ${offeneRegeln.map(function () {
+          return `<li class="regel-offen-platz" aria-hidden="true">?</li>`;
+        }).join("")}
+      </ul>
+    </section>`;
+
+  const offen = z.gesamt - z.gefunden;
+  const einleitung = z.gefunden === 0
+    ? "Hier sammelst du deine Regeln. Du bekommst sie nicht geschenkt. Du findest sie beim Üben."
+    : (offen > 0
+        ? `Dir fehlen noch ${offen} ${offen === 1 ? "Regel" : "Regeln"}.`
+        : (z.sitzt < z.gesamt
+            ? "Du hast alle Regeln gefunden. Jetzt erkenne sie in einem zweiten Thema wieder."
+            : "Alle Regeln sitzen. Das ist deine Karte."));
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    <article class="card" data-readable="true">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml("remember")}</span>
+        <h2>Deine Karte</h2>
+      </div>
+      <p>${escapeHtml(einleitung)}</p>
+
+      <div class="regel-stand" role="region" aria-label="Dein Stand">
+        <div class="regel-stand-zahlen">
+          <span class="regel-stand-zahl" aria-live="polite">${z.gefunden}</span>
+          <span class="regel-stand-von">von ${z.gesamt} Regeln gefunden</span>
+        </div>
+        <div class="regel-stand-balken" role="progressbar" aria-valuenow="${z.gefunden}" aria-valuemin="0" aria-valuemax="${z.gesamt}" aria-label="${z.gefunden} von ${z.gesamt} Regeln gefunden">
+          <div class="regel-stand-fuell" style="width:${Math.round((z.gefunden / z.gesamt) * 100)}%"></div>
+        </div>
+        <p class="regel-stand-sitzt">${z.sitzt === 1 ? "Davon sitzt 1." : "Davon sitzen " + z.sitzt + "."} Eine Regel sitzt, wenn du sie in zwei Themen wiedererkannt hast.</p>
+      </div>
+
+      ${plaetze ? `<h3 class="regel-abschnitt">Das hast du gesammelt</h3>
+      <ol class="regel-liste">${plaetze}</ol>` : ""}
+      ${offeneHtml}
+
+      <div class="certificate-actions">
+        ${z.gefunden > 0 ? `<button type="button" class="quiz-link quiz-button" onclick="druckeRegelKarte()">🖨 Deine Karte drucken</button>` : ""}
+        <button type="button" class="nav-button secondary" onclick="renderScenarioChooser()">Üben und Regeln finden</button>
+        <button type="button" class="nav-button secondary" onclick="renderMyPath()">Zurück zu Mein Lernweg</button>
+      </div>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ---- Die Karte drucken: klein genug fuer die Brieftasche ---- */
+
+function druckeRegelKarte() {
+  const z = regelZaehlung();
+  const gefundene = REGELN.filter(function (r) { return regelStufe(r.id) >= 1; });
+  if (!gefundene.length) return;
+
+  const zeilen = gefundene.map(function (r) {
+    return `<li class="${regelStufe(r.id) === 2 ? "sitzt" : ""}"><strong>${escapeHtml(r.kurz)}</strong><br /><span>${escapeHtml(r.was)}</span></li>`;
+  }).join("");
+
+  const heute = new Date().toLocaleDateString("de-DE", { year: "numeric", month: "long", day: "numeric" });
+  const fenster = window.open("", "_blank");
+  if (!fenster) return;
+  fenster.document.write(
+    `<!DOCTYPE html><html lang="de"><head><meta charset="utf-8" />` +
+    `<title>Deine Karte – meine Regeln im Internet</title>` +
+    `<style>
+       @page { size: A5; margin: 12mm; }
+       body { font-family: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif; color: #16222e; line-height: 1.5; }
+       h1 { font-size: 20pt; margin: 0 0 2mm; }
+       .unter { font-size: 11pt; color: #3d506a; margin: 0 0 6mm; }
+       ol { padding-left: 6mm; margin: 0; }
+       li { margin-bottom: 4mm; font-size: 11pt; break-inside: avoid; }
+       li strong { font-size: 12pt; }
+       li span { color: #3d506a; }
+       li.sitzt strong::after { content: " ✓"; }
+       .fuss { margin-top: 8mm; border-top: 1pt solid #d7e0ea; padding-top: 3mm; font-size: 9pt; color: #3d506a; }
+       .name { margin: 6mm 0; font-size: 11pt; }
+       .name span { display: inline-block; border-bottom: 1pt solid #16222e; width: 60mm; }
+     </style></head><body>` +
+    `<h1>Meine Regeln im Internet</h1>` +
+    `<p class="unter">${z.gefunden} von ${z.gesamt} Regeln gefunden. ${z.sitzt === 1 ? "Davon sitzt 1." : "Davon sitzen " + z.sitzt + "."} Ein Haken bedeutet: in zwei Themen wiedererkannt.</p>` +
+    `<p class="name">Diese Karte gehört: <span></span></p>` +
+    `<ol>${zeilen}</ol>` +
+    `<p class="fuss">Stand: ${escapeHtml(heute)} · Alex und Tilda – Sicher und selbstbestimmt im Internet<br />` +
+    `Du bist unsicher? Zeig diese Karte einer Person, der du vertraust.</p>` +
+    `</body></html>`
+  );
+  fenster.document.close();
+  fenster.focus();
+  setTimeout(function () { fenster.print(); }, 300);
+}

@@ -5636,3 +5636,256 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 @media print {
   .phone { break-inside: avoid; }
 }
+
+/* =============================================================
+   DEINE KARTE – Sammelstand und die 13 Regeln (Sept 2026)
+   Alle Farben ueber Variablen, damit der Dark Mode traegt.
+   ============================================================= */
+
+/* ---- Der Sammelstand auf "Mein Lernweg" ---- */
+.karte-block {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  margin: 14px 0 0;
+  padding: 16px 18px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.karte-block:hover,
+.karte-block:focus-visible { background: var(--surface-soft); }
+
+.karte-block-kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.karte-block-titel { font-size: 1.2rem; font-weight: 700; }
+.karte-block-zahl  { font-size: 1.6rem; font-weight: 700; color: var(--accent-dark); white-space: nowrap; }
+.karte-block-zahl span { font-size: 1rem; font-weight: 400; color: var(--ink-soft); }
+
+.karte-block-balken {
+  display: block;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.karte-block-fuell {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.karte-block-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* ---- Rueckmeldung beim Finden einer Regel ---- */
+.regel-treffer {
+  margin: 14px 0;
+  padding: 14px 16px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.regel-treffer--sicher { border-color: var(--good); }
+
+.regel-treffer-kopf {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.regel-treffer--sicher .regel-treffer-kopf { color: var(--good); }
+
+.regel-treffer-zeile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.regel-treffer-satz {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.regel-treffer-stand {
+  margin: 10px 0 0;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+.regel-pikto {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+}
+
+/* ---- Die Sammel-Seite ---- */
+.regel-stand {
+  margin: 16px 0 20px;
+  padding: 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.regel-stand-zahlen {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.regel-stand-zahl { font-size: 2.2rem; font-weight: 700; color: var(--accent-dark); }
+.regel-stand-von  { font-size: 1.05rem; color: var(--ink-soft); }
+
+.regel-stand-balken {
+  height: 16px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.regel-stand-fuell { height: 100%; border-radius: 999px; background: var(--accent); }
+
+.regel-stand-sitzt {
+  margin: 10px 0 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.regel-liste {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  counter-reset: regel;
+}
+
+.regel-platz {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.regel-platz--sitzt { border-color: var(--good); }
+
+.regel-platz--leer {
+  border-style: dashed;
+  background: var(--surface-soft);
+}
+
+.regel-platz-nr {
+  flex: 0 0 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--line);
+  color: var(--ink-soft);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.regel-platz-text { display: block; }
+
+.regel-platz-satz {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.regel-platz--sitzt .regel-platz-satz::after {
+  content: " ✓";
+  color: var(--good);
+}
+
+.regel-platz-sub {
+  display: block;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.regel-platz-stand {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+@media print {
+  .karte-block, .regel-treffer { break-inside: avoid; }
+}
+
+.regel-abschnitt { margin: 22px 0 12px; font-size: 1.15rem; }
+
+.regel-offen {
+  margin: 20px 0;
+  padding: 16px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.regel-offen h3 { margin: 0 0 8px; font-size: 1.15rem; }
+
+.regel-offen-text {
+  margin: 0 0 12px;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.regel-offen-reihe {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.regel-offen-platz {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
