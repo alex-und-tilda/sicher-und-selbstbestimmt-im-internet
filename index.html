@@ -78,6 +78,10 @@
         <h1 id="appTitle">Sicher und selbstbestimmt im Internet</h1>
         <p id="moduleLabel">Thema auswählen</p>
       </div>
+      <!-- Zeichen der lernenden Person. Nur auf geteilten Geräten sichtbar
+           (updateHeaderSign in app.js). Sagt auf jeder Seite, wer gerade
+           lernt, und führt mit einem Tipp zur Personen-Liste. -->
+      <button type="button" id="headerSign" class="header-sign" hidden onclick="renderProfilePicker()"></button>
     </header>
 
     <!-- Orientierungssatz: sagt auf jeder Seite, wo die Person ist (COGA) -->

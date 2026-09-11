@@ -321,6 +321,106 @@ function signLabel(profile) {
   return found ? found.n : "Bild";
 }
 
+/* ============================================================
+   Bild-Code: ein freiwilliges Schloss vor dem eigenen Lernstand.
+   Drei Symbole in einer Reihenfolge – Wiedererkennen statt
+   Auswendigwissen (§3, Cognitive Load). Braucht weder Lesen noch
+   Zahlen und benutzt die Bildsprache, die die Person beim Zeichen
+   schon gelernt hat.
+
+   Ehrliche Einordnung: Der Code liegt im localStorage des Geräts
+   und ist dort lesbar. Er schützt zuverlässig vor Verwechslung –
+   nicht vor Absicht. Genau dafür ist er gedacht.
+
+   Feste Regeln (§3 Došen, §9 COGA):
+   - freiwillig, standardmäßig aus
+   - niemand wird ausgesperrt, Versuche werden nie gezählt
+   - ein falscher Code rührt den Lernstand nicht an
+   ============================================================ */
+const CODE_LENGTH = 3;
+let codeEntry = [];       /* laufende Eingabe beim Anmelden */
+let codeDraft = [];       /* laufende Eingabe beim Vergeben */
+let codeTargetId = null;  /* für welches Profil */
+let codeError = false;
+
+function hasCode(profile) {
+  return !!profile && Array.isArray(profile.code) && profile.code.length === CODE_LENGTH;
+}
+function codeMatches(profile, entry) {
+  return hasCode(profile) && entry.length === CODE_LENGTH
+    && profile.code.every((k, i) => k === entry[i]);
+}
+/* Symbol-Knöpfe – gleiche Optik wie die Zeichen-Auswahl (Wiedererkennbarkeit §12). */
+function codeIconGrid(handler) {
+  return SIGN_ICONS.map(ic => `
+    <button type="button" class="sign-pick" onclick="${handler}('${ic.key}')" aria-label="${escapeHtml(ic.name)}">
+      <span class="sign-pick-bubble"><svg viewBox="0 0 100 100" aria-hidden="true">${ic.svg.replace(/#fff/g, "currentColor")}</svg></span>
+      <span class="sign-pick-name">${escapeHtml(ic.name)}</span>
+    </button>`).join("");
+}
+/* Zeigt, wie viele Bilder schon angetippt sind. */
+function codeDots(list) {
+  let out = "";
+  for (let i = 0; i < CODE_LENGTH; i++) {
+    const ic = list[i] ? SIGN_ICONS.find(s => s.key === list[i]) : null;
+    out += ic
+      ? `<span class="code-dot code-dot--filled"><svg viewBox="0 0 100 100">${ic.svg.replace(/#fff/g, "currentColor")}</svg></span>`
+      : `<span class="code-dot"></span>`;
+  }
+  return `<div class="code-dots" role="img" aria-label="${list.length} von ${CODE_LENGTH} Bildern angetippt">${out}</div>`;
+}
+
+/* ============================================================
+   Rückkehr-Prüfung: Ein Tablet wird nicht geschlossen, sondern
+   schlafen gelegt. Ohne diese Prüfung wacht die App mit der
+   vorigen Person wieder auf – genau daraus entsteht auf einem
+   geteilten Gerät das Durcheinander.
+
+   WICHTIG: Die Uhr läuft NUR, solange die App im Hintergrund ist,
+   niemals während des Lesens. §9 (COGA) verbietet Zeitlimits, und
+   diese Zielgruppe liest langsam. Wer nachdenkt, wird nie
+   unterbrochen. Verloren geht auch nichts: Der Lernstand hängt am
+   Zeichen, nicht an der Sitzung.
+   ============================================================ */
+const AWAY_KEY = "weg-seit";              /* geräteweit, nicht pro Profil */
+const AWAY_LIMIT_MS = 3 * 60 * 1000;      /* 3 Minuten – eine Zahl, leicht änderbar */
+
+function markAway() {
+  try { window.localStorage.setItem(AWAY_KEY, String(Date.now())); } catch (e) { /* nichts tun */ }
+}
+function checkReturn() {
+  let since = null;
+  try {
+    since = window.localStorage.getItem(AWAY_KEY);
+    window.localStorage.removeItem(AWAY_KEY);
+  } catch (e) { return; }
+  if (!since) return;
+  if (!deviceShared || profiles.length === 0) return;
+  if (Date.now() - Number(since) < AWAY_LIMIT_MS) return;
+  stopReading();
+  renderProfilePicker();
+}
+
+/* ============================================================
+   Zeichen in der Kopfzeile: sagt auf JEDER Seite, wer man gerade
+   ist – auch mitten in einer Lektion. Ein Tipp darauf öffnet die
+   Personen-Liste. Nur auf geteilten Geräten sichtbar; auf einem
+   eigenen Gerät wäre es Dekoration ohne Funktion (§3 Kohärenz).
+   ============================================================ */
+function updateHeaderSign() {
+  const el = document.getElementById("headerSign");
+  if (!el) return;
+  const p = getActiveProfile();
+  if (!p || !deviceShared || onboarding) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = signHtml(p) + `<span class="header-sign-word">Das bist du</span>`;
+  el.setAttribute("aria-label", "Du bist " + signLabel(p) + ". Hier kannst du die Person wechseln.");
+}
+function hideHeaderSign() {
+  const el = document.getElementById("headerSign");
+  if (el) el.hidden = true;
+}
+
 /* Alle Schlüssel, die pro Profil getrennt gespeichert werden.
    Vollständige Liste – Profil-Löschung (resetProfile/deleteProfile) und
    Auto-Migration (ensureProfiles) laufen darüber. Bewusst als Strings
@@ -1024,6 +1124,7 @@ function setHeader(title, module, step, level, percent) {
   progressFill.style.width = `${safePercent}%`;
   progressTrack.setAttribute("aria-valuenow", String(safePercent));
   progressTrack.setAttribute("aria-valuetext", `${safePercent} Prozent`);
+  updateHeaderSign();
 }
 
 function showNav(showBack, showNext, nextText = "Weiter") {
@@ -1962,19 +2063,180 @@ function switchProfile(id) {
   else renderStart();
 }
 
+/* Aus der Personen-Liste gewählt. Mit Bild-Code wird zuerst gefragt,
+   ohne Code geht es direkt weiter. */
+function pickProfile(id) {
+  const p = profiles.find(x => x.id === id);
+  if (!p) return;
+  if (!hasCode(p)) return switchProfile(id);
+  codeTargetId = id;
+  codeEntry = [];
+  codeError = false;
+  renderCodeAsk();
+}
+
+/* Anmelden mit Bild-Code. */
+function renderCodeAsk() {
+  const p = profiles.find(x => x.id === codeTargetId);
+  if (!p) return renderProfilePicker();
+  stopReading();
+  currentTopicId = null;
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Dein Code", "Start", "Dein Bild-Code", 0);
+  hideHeaderSign();
+  showNav(false, false);
+
+  content.innerHTML = `
+    ${buildReadingToolbar()}
+    <section class="profile-code" data-readable="true">
+      <h2 class="profile-picker-title"><span class="profile-manage-sign">${signHtml(p)}</span> Dein Bild-Code</h2>
+      <p class="profile-picker-intro">Tippe deine 3 Bilder an. Immer in der gleichen Reihenfolge.</p>
+      ${codeDots(codeEntry)}
+      ${codeError ? `<p class="code-error" role="status">Das war nicht dein Code. Versuch es nochmal. Es ist nichts passiert.</p>` : ""}
+      <div class="sign-icon-grid">${codeIconGrid("codeTap")}</div>
+      <button type="button" class="plain-back-button" onclick="codeForgot()">Ich weiß meinen Code nicht mehr</button>
+      <button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück zur Liste</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function codeTap(key) {
+  codeError = false;
+  codeEntry.push(key);
+  if (codeEntry.length < CODE_LENGTH) return renderCodeAsk();
+  const p = profiles.find(x => x.id === codeTargetId);
+  if (codeMatches(p, codeEntry)) {
+    const id = codeTargetId;
+    codeEntry = [];
+    codeTargetId = null;
+    return switchProfile(id);
+  }
+  /* Falsch: ruhig, ohne Zählen, ohne Sperre, ohne Wartezeit (§3 Došen, §9 COGA).
+     Der Lernstand bleibt selbstverständlich unberührt. */
+  codeEntry = [];
+  codeError = true;
+  announce("Das war nicht dein Code. Versuch es nochmal.");
+  renderCodeAsk();
+}
+
+/* Code vergessen. Niemand wird ausgesperrt – das ist die Bedingung dafür,
+   dass es diesen Code überhaupt geben darf (§1 Teilhabe). Der Preis ist
+   ehrlich: Wer den Code wegnimmt, kommt hinein. Das Schloss schützt vor
+   Verwechslung, nicht vor Absicht. */
+function codeForgot() {
+  const p = profiles.find(x => x.id === codeTargetId);
+  if (!p) return renderProfilePicker();
+  stopReading();
+  setHeader("Sicher und selbstbestimmt im Internet", "Dein Code", "Start", "Code vergessen", 0);
+  hideHeaderSign();
+  showNav(false, false);
+  content.innerHTML = `
+    ${buildReadingToolbar()}
+    <section class="profile-code" data-readable="true">
+      <h2 class="profile-picker-title">Du weißt deinen Code nicht mehr</h2>
+      <p>Das ist nicht schlimm. Dein Lernstand ist noch da. Es geht nichts verloren.</p>
+      <p>Du kannst den Code jetzt wegnehmen. Dann kommst du wieder zu deinem Zeichen.</p>
+      <p>Einen neuen Code kannst du dir später aussuchen. Am besten zusammen mit einer Person, der du vertraust.</p>
+      <div class="feedback-actions">
+        <button type="button" class="utility-button" onclick="renderCodeAsk()">Nochmal versuchen</button>
+        <button type="button" class="utility-button danger-button" onclick="dropCodeAndEnter()">Code wegnehmen</button>
+      </div>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function dropCodeAndEnter() {
+  const id = codeTargetId;
+  const p = profiles.find(x => x.id === id);
+  if (!p) return renderProfilePicker();
+  delete p.code;
+  saveProfiles();
+  codeTargetId = null; codeEntry = []; codeError = false;
+  announce("Der Code ist weg. Du kannst dir später einen neuen aussuchen.");
+  switchProfile(id);
+}
+
+/* Code aussuchen oder ändern (aus der Profil-Verwaltung). */
+function startCodeSet(id) {
+  codeTargetId = id;
+  codeDraft = [];
+  renderCodeSet();
+}
+
+function renderCodeSet() {
+  const p = profiles.find(x => x.id === codeTargetId);
+  if (!p) return renderProfilePicker();
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Sicher und selbstbestimmt im Internet", "Dein Code", "Start", "Bild-Code aussuchen", 0);
+  hideHeaderSign();
+  showNav(false, false);
+  const fertig = codeDraft.length === CODE_LENGTH;
+
+  content.innerHTML = `
+    ${buildReadingToolbar()}
+    <section class="profile-code" data-readable="true">
+      <h2 class="profile-picker-title"><span class="profile-manage-sign">${signHtml(p)}</span> Bild-Code aussuchen</h2>
+      <p class="profile-picker-intro">Such dir 3 Bilder aus. Merk dir die Reihenfolge. Beim Anmelden tippst du sie wieder an.</p>
+      <p class="profile-manage-note">Ein Code ist freiwillig. Du kannst ihn jederzeit wieder wegnehmen. Dein Lernstand geht dabei nie verloren.</p>
+      ${codeDots(codeDraft)}
+      <div class="sign-icon-grid">${codeIconGrid("codeDraftTap")}</div>
+      <div class="feedback-actions">
+        <button type="button" class="utility-button" onclick="codeDraftClear()">Nochmal von vorn</button>
+        <button type="button" class="utility-button" onclick="codeDraftSave()"${fertig ? "" : " disabled"}>Diesen Code merken</button>
+      </div>
+      <button type="button" class="plain-back-button" onclick="renderProfileManage('${escapeHtml(p.id)}')">← Zurück</button>
+    </section>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function codeDraftTap(key) {
+  if (codeDraft.length >= CODE_LENGTH) return;
+  codeDraft.push(key);
+  renderCodeSet();
+}
+function codeDraftClear() { codeDraft = []; renderCodeSet(); }
+function codeDraftSave() {
+  const p = profiles.find(x => x.id === codeTargetId);
+  if (!p || codeDraft.length !== CODE_LENGTH) return;
+  p.code = codeDraft.slice();
+  saveProfiles();
+  codeDraft = [];
+  announce("Dein Bild-Code ist gemerkt.");
+  renderProfileManage(p.id);
+}
+function removeCode(id) {
+  const p = profiles.find(x => x.id === id);
+  if (!p) return;
+  delete p.code;
+  saveProfiles();
+  announce("Der Bild-Code ist weg.");
+  renderProfileManage(id);
+}
+
 function renderProfilePicker() {
   stopReading();
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Wer lernt?", "Start", "Wer lernt gerade?", 0);
+  hideHeaderSign();
   showNav(false, false);
 
   const cards = profiles.map(p => `
     <div class="profile-card-wrap">
-      <button type="button" class="profile-card" onclick="switchProfile('${escapeHtml(p.id)}')" aria-label="Weiter als ${escapeHtml(signLabel(p))}">
+      <button type="button" class="profile-card" onclick="pickProfile('${escapeHtml(p.id)}')" aria-label="Weiter als ${escapeHtml(signLabel(p))}${hasCode(p) ? ", mit Bild-Code" : ""}">
         ${signHtml(p)}
         <span class="profile-name">${escapeHtml(signLabel(p))}</span>
+        ${hasCode(p) ? `<span class="profile-code-badge">mit Bild-Code</span>` : ""}
         ${p.id === activeProfileId ? `<span class="profile-active-badge">Das bist du</span>` : ""}
       </button>
       <button type="button" class="profile-edit-link" onclick="renderProfileManage('${escapeHtml(p.id)}')" aria-label="Profil ${escapeHtml(signLabel(p))} ändern">Ändern</button>
@@ -2012,7 +2274,7 @@ function renderDeviceQuestion(showSharedChoice = false) {
         <div class="sign-icon-grid">
           ${SIGN_ICONS.map(ic => `
             <button type="button" class="sign-pick${signDraft.icon === ic.key ? " is-active" : ""}" onclick="pickDeviceSignIcon('${ic.key}')" aria-label="${escapeHtml(ic.name)} wählen">
-              <span class="sign-pick-bubble"><svg viewBox="0 0 100 100" aria-hidden="true">${ic.svg.replace(/#fff/g, "#00528f")}</svg></span>
+              <span class="sign-pick-bubble"><svg viewBox="0 0 100 100" aria-hidden="true">${ic.svg.replace(/#fff/g, "currentColor")}</svg></span>
               <span class="sign-pick-name">${escapeHtml(ic.name)}</span>
             </button>`).join("")}
         </div>
@@ -2208,6 +2470,7 @@ function renderProfileManage(id) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Profil", "Start", "Profil ändern", 0);
+  hideHeaderSign();
   showNav(false, false);
 
   content.innerHTML = `
@@ -2217,6 +2480,15 @@ function renderProfileManage(id) {
       <h3 class="profile-manage-sub">Zeichen ändern</h3>
       <p class="profile-manage-note">Bau dir ein neues Zeichen: Symbol, Farbe und Zahl.</p>
       <button type="button" class="utility-button" onclick="renderBuildSign(0, '${escapeHtml(id)}')">Zeichen neu bauen</button>
+
+      <h3 class="profile-manage-sub">Dein Bild-Code</h3>
+      <p class="profile-manage-note">${hasCode(p)
+        ? "Du hast einen Bild-Code. Vor dem Lernen tippst du deine 3 Bilder an."
+        : "Du kannst dein Zeichen mit 3 Bildern schützen. Dann kommt niemand aus Versehen in deinen Lernstand. Das ist freiwillig."}</p>
+      <div class="settings-toggle-row">
+        <button type="button" class="utility-button" onclick="startCodeSet('${escapeHtml(id)}')">${hasCode(p) ? "Code ändern" : "Bild-Code aussuchen"}</button>
+        ${hasCode(p) ? `<button type="button" class="utility-button" onclick="removeCode('${escapeHtml(id)}')">Code wegnehmen</button>` : ""}
+      </div>
 
       <h3 class="profile-manage-sub">Meine Karte</h3>
       <p class="profile-manage-note">Druck dir dein Zeichen aus, damit du es dir merken kannst.</p>
@@ -3344,6 +3616,17 @@ function renderHelpPage() {
    Seite „Einstellungen": alle Einstellungen an einem Ort
    ============================================================ */
 
+/* Geteiltes Gerät nachträglich an- oder abschalten. Bisher ging das nur
+   beim allerersten Einrichten – wer damals "nur ich" gewählt hatte, kam
+   nicht mehr an die Personen-Auswahl heran. */
+function setSharedFromSettings(shared) {
+  setDeviceShared(shared);
+  announce(shared
+    ? "Mehrere Personen teilen sich dieses Gerät. Beim Start fragt die App, wer lernt."
+    : "Nur du benutzt dieses Gerät.");
+  renderSettingsPage();
+}
+
 function renderSettingsPage() {
   stopReading();
   currentTopicId = null;
@@ -3362,7 +3645,15 @@ function renderSettingsPage() {
       <p class="settings-explain">Du bist gerade: ${escapeHtml(signLabel(activeProfile))}.</p>
       <div class="settings-toggle-row">
         <button type="button" class="setting-big-button" onclick="renderProfilePicker()">Person wechseln</button>
-        <button type="button" class="setting-big-button" onclick="renderProfileManage('${escapeHtml(activeProfile.id)}')">Zeichen ändern</button>
+        <button type="button" class="setting-big-button" onclick="renderProfileManage('${escapeHtml(activeProfile.id)}')">Zeichen und Code ändern</button>
+      </div>
+    </section>
+    <section class="settings-page-section" aria-label="Dieses Gerät">
+      <h3>Dieses Gerät</h3>
+      <p class="settings-explain">Benutzt du dieses Gerät allein? Oder benutzen es mehrere Personen? Bei mehreren Personen fragt die App beim Start immer: Wer lernt gerade?</p>
+      <div class="settings-toggle-row" role="group" aria-label="Wer benutzt dieses Gerät">
+        <button type="button" class="setting-big-button" aria-pressed="${deviceShared ? "false" : "true"}" onclick="setSharedFromSettings(false)">Nur ich</button>
+        <button type="button" class="setting-big-button" aria-pressed="${deviceShared ? "true" : "false"}" onclick="setSharedFromSettings(true)">Mehrere Personen</button>
       </div>
     </section>` : "";
 
@@ -6465,10 +6756,22 @@ function openTopicRoute(topicId, action) {
   return renderTopicChoice(topicId);
 }
 
+/* Erster Routen-Aufruf nach dem Laden? Nur dann greift die Personen-Frage. */
+let bootRouteDone = false;
+
 function handleHash() {
   handlingRoute = true;
   try {
     const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
+
+    /* Geteiltes Gerät, echter Neustart: ZUERST fragen, wer lernt.
+       Ohne das landet die nächste Person in der gemerkten Adresse der
+       vorigen – also mitten in deren Thema, mit deren Schriftgröße.
+       Nach der Wahl lädt switchProfile den Rück-Anker DIESER Person. */
+    if (!bootRouteDone) {
+      bootRouteDone = true;
+      if (deviceShared && profiles.length > 0) return renderProfilePicker();
+    }
     if (!hash) {
       /* Beim Öffnen immer die kurze Intro-Startseite. „Los geht's" führt
          ins Onboarding (erster Besuch) oder zu den Themen. */
@@ -6637,6 +6940,13 @@ initGlossarEvents();
    übernehmen), dann die Einstellungen des aktiven Profils anwenden. */
 ensureProfiles();
 loadDeviceShared();
+/* Geteiltes Gerät: merken, wann die App weggelegt wurde, und beim
+   Zurückkommen ggf. wieder nach der Person fragen (siehe checkReturn). */
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") markAway();
+  else checkReturn();
+});
+window.addEventListener("pagehide", markAway);
 loadActiveProfileSettings();
 /* Zuletzt offene Lektion und Mengen-Wahl zurückholen (B5, B9) – erst hier,
    weil dafür sowohl die Themen als auch das aktive Profil stehen müssen. */

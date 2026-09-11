@@ -1931,6 +1931,9 @@ html.no-motion *::after {
 .sign-pick:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .sign-pick.is-active { border-color: var(--accent); background: var(--accent-soft); }
 .sign-pick-bubble {
+  /* Symbol erbt diese Farbe (currentColor). Fest eingebautes #00528f
+     verschwand im Dunkelmodus auf dem dunklen --accent-soft (§10). */
+  color: var(--accent-dark);
   width: 56px; height: 56px;
   display: flex; align-items: center; justify-content: center;
   background: var(--accent-soft);
@@ -6242,6 +6245,95 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
    abgegrenzt. Nur Token-Werte plus ein paar Rahmen - dadurch traegt
    es automatisch durch die ganze Oberflaeche.
    ============================================================ */
+/* ============================================================
+   Zeichen in der Kopfzeile (geteiltes Gerät)
+   Sagt auf jeder Seite, wer gerade lernt. Ein Tipp öffnet die
+   Personen-Liste. Eigener Rahmen, damit die Fläche als Knopf
+   erkennbar ist (WCAG 2.2 SC 1.4.11, Nicht-Text-Kontrast 3:1).
+   ============================================================ */
+.header-sign {
+  margin-left: auto;
+  flex: 0 0 auto;
+  min-height: 58px;               /* §9: Bedienelemente >= ~58 px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 12px;
+  /* --line erreicht gegen den Kopf-Hintergrund nur 1,34:1. Bedienelemente
+     brauchen 3:1 (WCAG 2.2 SC 1.4.11), deshalb hier der Akzent. */
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  cursor: pointer;
+}
+.header-sign:hover { background: var(--accent-soft); }
+/* display:flex würde sonst das hidden-Attribut überstimmen. */
+.header-sign[hidden] { display: none; }
+.header-sign .profile-sign { width: 34px; height: 34px; font-size: 0.9rem; }
+.header-sign-word {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+/* Auf schmalen Geräten nur das Zeichen – der Kopf soll nicht umbrechen. */
+@media (max-width: 430px) {
+  .header-sign { padding: 6px 8px; }
+  .header-sign-word { display: none; }
+}
+
+/* ============================================================
+   Bild-Code: Eingabe und Vergabe
+   ============================================================ */
+.profile-code { text-align: center; }
+.profile-code .feedback-actions { justify-content: center; }
+
+.code-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 20px 0 8px;
+}
+.code-dot {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px dashed var(--ink-soft);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+}
+.code-dot--filled {
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  /* --accent ist im Dunkelmodus HELL. Weiß darauf wäre unlesbar. */
+  color: var(--on-accent);
+}
+.code-dot--filled svg { width: 62%; height: 62%; }
+
+/* Ruhige Rückmeldung – kein Zählen, keine Sperre, keine Mahnung
+   (§3 Došen: angstfreie Fehlerkultur; §9 COGA: keine Zeitlimits). */
+.code-error {
+  margin: 12px auto 0;
+  max-width: 34rem;
+  padding: 12px 16px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--warn);
+  background: var(--warn-bg);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Hinweis auf der Personen-Karte, dass dort ein Code liegt. */
+.profile-code-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+}
+
 @media (prefers-contrast: more) {
   :root {
     --ink-soft: #22334a;   /* statt #3d506a: ~8,9:1 auf --bg */
