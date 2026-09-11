@@ -279,6 +279,63 @@ const topics = [
         "remember": "Doppelt sichern schützt mein Konto."
       },
       {
+        "title": "Ohne Passwort anmelden",
+        "pictogram": "pikto-key",
+        "module": "Passwort",
+        "icon": "lock",
+        "text": [
+          {
+            "text": "Manche Konten brauchen kein Passwort mehr.",
+            "pictogram": "pikto-key"
+          },
+          {
+            "text": "Das heißt: Passkey.",
+            "pictogram": "pikto-key"
+          },
+          {
+            "text": "Du legst den Finger auf dein Handy.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Oder du zeigst dein Gesicht.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Dann bist du angemeldet.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Du musst dir nichts merken.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Niemand kann dein Passwort erraten. Du hast keins.",
+            "pictogram": "pikto-lock"
+          },
+          {
+            "text": "Eine vertraute Person hilft dir beim Einrichten.",
+            "pictogram": "pikto-help"
+          }
+        ],
+        "examples": [
+          "Du öffnest deine Bank-App mit dem Finger.",
+          "Du meldest dich beim Shop mit deinem Gesicht an."
+        ],
+        "practice": {
+          "question": "Was brauchst du bei einem Passkey?",
+          "pictogram": "pikto-key",
+          "answers": [
+            "Ein langes Passwort.",
+            "Deinen Finger oder dein Gesicht."
+          ],
+          "correctIndex": 1,
+          "feedbackCorrect": "Das ist richtig. Bei einem Passkey zeigst du deinen Finger oder dein Gesicht.",
+          "feedbackWrong": "Das ist noch nicht richtig. Bei einem Passkey brauchst du kein Passwort.",
+          "remember": "Mit Passkey brauche ich kein Passwort."
+        },
+        "remember": "Mit Passkey brauche ich kein Passwort."
+      },
+      {
         "title": "Adresse eingeben",
         "module": "Private Daten",
         "icon": "data",
@@ -5185,6 +5242,54 @@ const topics = [
           "remember": "KI kann Fehler machen. Ich prüfe wichtige Antworten."
         },
         "pictogram": "pikto-lock"
+      },
+      {
+        "title": "So prüfst du eine Antwort",
+        "module": "Sicher nutzen",
+        "icon": "check",
+        "text": [
+          {
+            "text": "Die KI gibt dir eine Antwort.",
+            "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Du kannst die Antwort prüfen.",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Stell dir 3 Fragen.",
+            "pictogram": "pikto-ask"
+          }
+        ],
+        "bullets": [
+          {
+            "text": "Woher weiß die KI das?",
+            "pictogram": "pikto-ask"
+          },
+          {
+            "text": "Steht das auch woanders?",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Wen kann ich fragen?",
+            "pictogram": "pikto-people"
+          }
+        ],
+        "warning": "Bei Geld und Gesundheit fragst du immer einen Menschen.",
+        "practice": {
+          "question": "Die KI sagt dir eine Telefon-Nummer. Was machst du?",
+          "pictogram": "pikto-phone",
+          "answers": [
+            "Ich rufe sofort an.",
+            "Ich schaue nach, ob die Nummer auch woanders steht."
+          ],
+          "correctIndex": 1,
+          "feedbackCorrect": "Das ist richtig. Du prüfst die Nummer. So findest du Fehler.",
+          "feedbackWrong": "Das ist noch nicht richtig. KI erfindet manchmal Nummern. Schau erst nach.",
+          "remember": "Ich stelle 3 Fragen. Dann weiß ich mehr."
+        },
+        "remember": "Ich stelle 3 Fragen. Dann weiß ich mehr.",
+        "pictogram": "pikto-search"
       },
       {
         "title": "Keine privaten Daten",

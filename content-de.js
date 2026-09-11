@@ -26,6 +26,20 @@ const CONTENT_VERSIONS = {
         success: "Zwei-Faktor oder Passkey: mehr Schutz als jedes Passwort allein."
       }
     },
+    "Ohne Passwort anmelden": {
+      einfach: {
+        text: [
+          { text: "Bei manchen Konten brauchst du kein Passwort mehr. Diese Anmeldung heißt Passkey." },
+          { text: "Du legst den Finger auf dein Handy oder du zeigst dein Gesicht. Damit bist du angemeldet." },
+          { text: "Ein Passkey ist besonders sicher, weil es kein Passwort gibt, das jemand erraten oder dir abfragen kann. Eine vertraute Person kann dir beim Einrichten helfen." }
+        ],
+        success: "Ohne Passwort anmelden: Das ist bequem und sicher zugleich."
+      },
+      standard: {
+        text: [{ text: "Passkeys ersetzen das Passwort durch die Entsperrung deines Geräts – per Fingerabdruck, Gesichtserkennung oder Geräte-PIN. Der geheime Schlüssel verlässt dabei nie dein Gerät, deshalb lässt er sich weder abfragen noch auf einer gefälschten Seite eingeben. Genau das macht Passkeys gegen Phishing praktisch immun. Apple, Google und Microsoft unterstützen sie, das BSI empfiehlt sie ausdrücklich." }],
+        success: "Passkeys sind gegen Phishing praktisch immun – es gibt kein Geheimnis, das man dir entlocken könnte."
+      }
+    },
     "Start": {
       einfach: {
         text: [
@@ -1047,6 +1061,23 @@ const CONTENT_VERSIONS = {
   },
 
   ki: {
+    "So prüfst du eine Antwort": {
+      einfach: {
+        text: [
+          { text: "Du kannst eine Antwort von der KI selbst prüfen. Dabei helfen dir 3 Fragen." }
+        ],
+        bullets: [
+          { text: "Woher weiß die KI das?" },
+          { text: "Steht das auch woanders?" },
+          { text: "Wen kann ich fragen?" }
+        ],
+        warning: "Bei Geld und Gesundheit fragst du immer einen Menschen, weil ein Fehler dort teuer oder gefährlich wird."
+      },
+      standard: {
+        text: [{ text: "Ob eine KI-Antwort belastbar ist, lässt sich mit drei Fragen klären: Worauf stützt sich die Aussage? Findet sie sich in einer unabhängigen Quelle wieder? Und wen kann ich fragen, wenn ich unsicher bleibe? Sprachmodelle erzeugen flüssigen Text, keine geprüften Fakten – sie können Namen, Zahlen und Quellen erfinden, ohne dass man es dem Text ansieht." }],
+        warning: "Bei Geld, Gesundheit und Rechtsfragen ersetzt keine KI die Auskunft eines Menschen."
+      }
+    },
     "Start": {
       einfach: { text: [
         { text: "Hier geht es um KI, das bedeutet künstliche Intelligenz." },
