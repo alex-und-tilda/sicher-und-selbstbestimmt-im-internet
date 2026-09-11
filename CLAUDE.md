@@ -227,6 +227,7 @@ Pädagogische Rahmung konsistent über alle Module: Lernziel + Aktivierung (Enga
 | `assets/` | Schriften, Logos, Icons, Illustrationen, lokale Piktogramme. |
 | `assets/qr/` | Lokal vorerzeugte QR-Codes je Thema + Startseite (13 SVGs, kein externer Dienst). Bei neuen Themen neu erzeugen. |
 | `_vorschau-*.html` | Lokale Berichte (DIN-Prüfung, Aktualität, Wegzeichen-Konzept) — in `.gitignore`, nie ins Repo. |
+| `docs/` | **Nicht mehr auf `main`.** Die internen Arbeits-Dokumente (Prüfberichte, Gutachten, Konzepte, `inhalte.sha256`) liegen seit 11.09.2026 auf dem Branch **`interne-doku`**. Grund: GitHub Pages liefert alles aus, was auf `main` liegt — die 68 Dateien waren über die Live-Adresse öffentlich abrufbar. Wer sie braucht, wechselt auf den Branch. Kommentar-Verweise in `app.js` (`docs/lerndesign-vorschlag.md`, `docs/gesamtlernprinzip-stationen.md`) zeigen weiterhin dorthin. |
 
 Reines HTML/CSS/JS, **kein Framework/Bundler/npm**. JS wird über `<script src>` als Browser-Globals geladen (`const topics`, `const CONTENT_VERSIONS`, `const COMPANION` sind absichtlich global). Interne Verweise **relativ** (funktioniert im Unterpfad von GitHub Pages). Diese Einfachheit ist gewollt — kein Build-System ohne Auftrag.
 
