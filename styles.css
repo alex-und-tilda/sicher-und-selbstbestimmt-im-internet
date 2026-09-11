@@ -6334,6 +6334,102 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
   color: var(--ink-soft);
 }
 
+/* ============================================================
+   Handlungs-Ketten (ketten-de.js)
+   Ein Schritt pro Bildschirm, fehlerfrei: Es gibt keinen falschen
+   Knopf. Deshalb ist der Handlungs-Knopf gross und allein, und die
+   Hilfen daneben sind leise Text-Links.
+   ============================================================ */
+.kette-card { border-left: 6px solid var(--accent); }
+.kette-card h3 { margin-top: 8px; }
+.kette-meta { font-size: 0.92rem; color: var(--ink-soft); }
+
+.kette-step { text-align: center; }
+.kette-zaehler {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.kette-pikto { width: 96px; height: 96px; margin: 4px auto 8px; display: block; }
+.kette-tun {
+  font-size: 1.45rem;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.kette-warum {
+  max-width: 34rem;
+  margin: 0 auto 12px;
+  color: var(--ink-soft);
+}
+.kette-hilfe {
+  max-width: 34rem;
+  margin: 10px auto 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+/* Der einzige grosse Knopf auf dem Bildschirm: die Handlung selbst. */
+.kette-done {
+  min-height: 58px;              /* §9: Bedienelemente >= ~58 px */
+  margin: 8px auto 4px;
+  display: block;
+  width: min(22rem, 100%);
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);       /* im Dunkelmodus ist --accent HELL */
+  cursor: pointer;
+}
+.kette-done:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+.kette-fuss {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.kette-kurz-liste, .kette-ende-liste {
+  list-style: none;
+  margin: 16px auto;
+  padding: 0;
+  max-width: 30rem;
+  text-align: left;
+}
+.kette-kurz-item, .kette-ende-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+.kette-kurz-num {
+  flex: 0 0 auto;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+.kette-haken {
+  flex: 0 0 auto;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--good);
+}
+
 @media (prefers-contrast: more) {
   :root {
     --ink-soft: #22334a;   /* statt #3d506a: ~8,9:1 auf --bg */

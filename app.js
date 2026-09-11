@@ -427,7 +427,7 @@ function hideHeaderSign() {
    (Reihenfolge egal), damit die Deklarations-Reihenfolge der KEY-Konstanten
    im Modul keine Rolle spielt. Global bleiben nur profile-liste,
    profil-aktiv und geraet-geteilt – sie stehen hier NICHT drin. */
-const PROFILE_BASE_KEYS = ["language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt"];
+const PROFILE_BASE_KEYS = ["language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf"];
 
 /* Schlüssel für das aktive Profil. Ohne aktives Profil: alter Schlüssel
    (Rückfall – so bricht nie etwas). */
@@ -4658,6 +4658,7 @@ function renderLesson() {
       ${learningGoals}
       ${safeNotice}
       ${bullets}
+      ${lesson.kette ? buildKetteCard(lesson.kette) : ""}
       ${examples}
       ${warning}
       ${success}
@@ -4673,6 +4674,256 @@ function renderLesson() {
   pageDirection = "forward";
 
   /* Auto-Vorlesen im Hör-Modus übernimmt zentral focusContent(). */
+}
+
+/* ============================================================
+   HANDLUNGS-KETTEN (Inhalt in ketten-de.js)
+   ------------------------------------------------------------
+   Ein Ablauf statt einer Frage: Die Person geht eine Handlung
+   Schritt für Schritt durch. Es gibt KEINE falsche Antwort –
+   errorless (§3 Došen: angstfreie Fehlerkultur). Ein Schritt pro
+   Bildschirm (§3 Segmentierung).
+
+   Prompt-Fading über die Zahl der Durchgänge:
+     Stufe 1  alles sichtbar
+     Stufe 2  Warum erst auf Antippen
+     Stufe 3  alle Sätze auf einem Bildschirm
+
+   Keine Zeitmessung, keine Bewertung, kein Abbruch von außen
+   (§9 COGA: keine Zeitlimits).
+   ============================================================ */
+const KETTEN_KEY = "ketten-lauf";
+let ketteId = null;
+let ketteIndex = 0;
+let ketteWarumOffen = false;
+let ketteHilfeOffen = false;
+
+function ketteDaten(id) {
+  return (typeof KETTEN !== "undefined" && KETTEN) ? (KETTEN[id] || null) : null;
+}
+
+/* Wie oft hat DIESE Person die Kette schon gemacht? Eine Zahl je Thema
+   im Profil-Speicher – lokale Einstellung, kein personenbezogenes Datum,
+   kein Versand (§14). */
+function ketteLaeufe(id) {
+  try { return Number(JSON.parse(pGet(KETTEN_KEY) || "{}")[id]) || 0; }
+  catch (e) { return 0; }
+}
+function ketteLaufPlus(id) {
+  try {
+    const r = JSON.parse(pGet(KETTEN_KEY) || "{}");
+    r[id] = (Number(r[id]) || 0) + 1;
+    pSet(KETTEN_KEY, JSON.stringify(r));
+  } catch (e) { /* nichts tun */ }
+}
+function ketteStufe(id) {
+  const n = ketteLaeufe(id);
+  return n <= 0 ? 1 : (n === 1 ? 2 : 3);
+}
+
+/* Text je Sprach-Ebene. Fallback-Kette genau wie resolveLessonContent (§2):
+   standard -> einfach -> leicht. So bleibt die Seite immer funktionsfähig. */
+function ketteText(feld) {
+  if (!feld) return "";
+  if (typeof feld === "string") return feld;
+  if (languageLevel === "standard") return feld.standard || feld.einfach || feld.leicht || "";
+  if (languageLevel === "einfach")  return feld.einfach  || feld.leicht  || "";
+  return feld.leicht || feld.einfach || "";
+}
+
+/* Einladungs-Karte in der Lektion. Kein eigener Themen-Schritt – sonst
+   wuechse jedes Thema um einen Schritt und der Kurz-Modus (5 Schritte)
+   müsste neu austariert werden. */
+function buildKetteCard(id) {
+  const k = ketteDaten(id);
+  if (!k) return "";
+  const stufe = ketteStufe(id);
+  const knopf = stufe >= 3 ? "Plan durchgehen" : "Plan üben";
+  const einstieg = ketteText(k.einstieg);
+  return `
+    <div class="access-box kette-card">
+      ${stationBadge("handeln")}
+      <h3>${escapeHtml(k.titel)}</h3>
+      <p>${escapeHtml(einstieg)}</p>
+      <p class="kette-meta">${k.liste.length} Schritte. Du kannst nichts falsch machen.</p>
+      <button type="button" class="utility-button" onclick="ketteStart('${escapeHtml(id)}')">${knopf}</button>
+      ${blockRead(k.titel + ". " + einstieg)}
+    </div>`;
+}
+
+function ketteStart(id) {
+  if (!ketteDaten(id)) return;
+  ketteId = id;
+  ketteIndex = 0;
+  ketteWarumOffen = false;
+  ketteHilfeOffen = false;
+  if (ketteStufe(id) >= 3) return renderKetteKurz();
+  renderKetteSchritt();
+}
+
+function ketteKopf(k, unterzeile) {
+  stopReading();
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(k.titel, "Handeln", "Plan", unterzeile, 0);
+  hideHeaderSign();
+  showNav(false, false);
+}
+
+/* Ein Schritt pro Bildschirm. */
+function renderKetteSchritt() {
+  const k = ketteDaten(ketteId);
+  if (!k) return renderMenu();
+  const gesamt = k.liste.length;
+  ketteIndex = Math.max(0, Math.min(ketteIndex, gesamt - 1));
+  const schritt = k.liste[ketteIndex];
+  const stufe = ketteStufe(ketteId);
+  const letzter = ketteIndex === gesamt - 1;
+
+  ketteKopf(k, `Schritt ${ketteIndex + 1} von ${gesamt}`);
+
+  const pikto = schritt.pictogram
+    ? `<img class="kette-pikto" src="${pictoSrc(schritt.pictogram)}" alt="" width="96" height="96" aria-hidden="true" onerror="this.remove()">`
+    : "";
+
+  const warumText = ketteText(schritt.warum);
+  /* Stufe 1: Begründung steht da. Stufe 2: erst auf Antippen. */
+  const warum = !warumText ? "" : (stufe === 1 || ketteWarumOffen)
+    ? `<p class="kette-warum">${escapeHtml(warumText)}</p>`
+    : `<button type="button" class="plain-back-button" onclick="ketteWarumZeigen()">Warum?</button>`;
+
+  const hilfeText = ketteText(schritt.hilfe);
+  const hilfe = !hilfeText ? "" : ketteHilfeOffen
+    ? `<p class="kette-hilfe" role="status">${escapeHtml(hilfeText)}</p>`
+    : `<button type="button" class="plain-back-button" onclick="ketteHilfeZeigen()">Ich brauche Hilfe</button>`;
+
+  const vorlese = [schritt.tun, warumText].filter(Boolean).join(" ");
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    ${/* Der Wegweiser traegt den Fortschrittsbalken, die Schritt-Zahl steht
+         gross in der Karte. Beides nebeneinander waere dieselbe Auskunft
+         zweimal auf 100 px (§3 Kohaerenz). */""}
+    ${buildWegweiser(k.titel + ".", { index: ketteIndex, total: gesamt })}
+    <article class="card kette-step" data-readable="true">
+      <p class="kette-zaehler">Schritt ${ketteIndex + 1} von ${gesamt}</p>
+      ${pikto}
+      <h2 class="kette-tun">${escapeHtml(schritt.tun)}</h2>
+      ${warum}
+      ${blockRead(vorlese)}
+      <button type="button" class="kette-done" onclick="ketteWeiter()">${letzter ? "Gemacht – fertig" : "Gemacht"}</button>
+      ${hilfe}
+    </article>
+    <div class="kette-fuss">
+      ${ketteIndex > 0 ? `<button type="button" class="plain-back-button" onclick="ketteZurueck()">← Ein Schritt zurück</button>` : ""}
+      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">Zurück zur Lektion</button>
+    </div>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function ketteWarumZeigen() { ketteWarumOffen = true; renderKetteSchritt(); }
+function ketteHilfeZeigen() { ketteHilfeOffen = true; renderKetteSchritt(); }
+
+function ketteWeiter() {
+  const k = ketteDaten(ketteId);
+  if (!k) return renderMenu();
+  ketteWarumOffen = false;
+  ketteHilfeOffen = false;
+  if (ketteIndex >= k.liste.length - 1) return renderKetteEnde();
+  ketteIndex++;
+  announce(`Schritt ${ketteIndex + 1} von ${k.liste.length}.`);
+  renderKetteSchritt();
+}
+
+function ketteZurueck() {
+  ketteWarumOffen = false;
+  ketteHilfeOffen = false;
+  if (ketteIndex > 0) ketteIndex--;
+  renderKetteSchritt();
+}
+
+/* Abbrechen zählt NICHT als Durchgang – sonst würde die Hilfe kleiner,
+   ohne dass die Person den Plan je zu Ende gegangen ist. */
+function ketteAbbrechen() {
+  ketteId = null;
+  renderLesson();
+}
+
+/* Stufe 3: alles auf einem Bildschirm zum Selbst-Durchgehen. */
+function renderKetteKurz() {
+  const k = ketteDaten(ketteId);
+  if (!k) return renderMenu();
+  ketteKopf(k, "Dein Plan");
+  const zeilen = k.liste.map((s, i) => `
+    <li class="kette-kurz-item">
+      <span class="kette-kurz-num" aria-hidden="true">${i + 1}</span>
+      <span>${escapeHtml(s.tun)}</span>
+    </li>`).join("");
+  const vorlese = k.liste.map(s => s.tun).join(" ");
+  content.innerHTML = `
+    ${buildToolRow()}
+    ${buildWegweiser(`${k.titel}. Dein Plan auf einen Blick.`)}
+    <article class="card kette-step" data-readable="true">
+      <h2>${escapeHtml(k.titel)}</h2>
+      <p>Du kennst den Plan schon. Geh ihn einmal für dich durch.</p>
+      <ol class="kette-kurz-liste">${zeilen}</ol>
+      ${blockRead(k.titel + ". " + vorlese)}
+      <button type="button" class="kette-done" onclick="ketteWeiterKurz()">Gemacht</button>
+    </article>
+    <div class="kette-fuss">
+      <button type="button" class="plain-back-button" onclick="ketteSchritteZeigen()">Lieber einzeln durchgehen</button>
+      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">Zurück zur Lektion</button>
+    </div>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function ketteWeiterKurz() { renderKetteEnde(); }
+
+/* Rückweg zur ausführlichen Fassung – die Hilfe bleibt immer erreichbar
+   (§9 COGA: klare Wege zur Hilfe; UDL: Wahl statt Zwang). */
+function ketteSchritteZeigen() {
+  ketteIndex = 0;
+  ketteWarumOffen = true;
+  ketteHilfeOffen = false;
+  renderKetteSchritt();
+}
+
+function renderKetteEnde() {
+  const k = ketteDaten(ketteId);
+  if (!k) return renderMenu();
+  ketteLaufPlus(ketteId);
+  const laeufe = ketteLaeufe(ketteId);
+  ketteKopf(k, "Geschafft");
+
+  const zeilen = k.liste.map(s => `
+    <li class="kette-ende-item"><span class="kette-haken" aria-hidden="true">✓</span><span>${escapeHtml(s.tun)}</span></li>`).join("");
+  const abschluss = ketteText(k.abschluss);
+  /* Beim ersten Abschluss ankündigen, dass es beim nächsten Mal kürzer wird.
+     Vorhersehbarkeit statt Überraschung (§3 Došen). */
+  const ausblick = laeufe === 1
+    ? `<p class="kette-meta">Beim nächsten Mal zeigt dir die App weniger. Du kannst dann mehr allein.</p>`
+    : "";
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    ${buildWegweiser(`${k.titel}. Du hast alle Schritte gemacht.`)}
+    <article class="card kette-step" data-readable="true">
+      <h2>Geschafft</h2>
+      <ul class="kette-ende-liste">${zeilen}</ul>
+      <p>${escapeHtml(abschluss)}</p>
+      ${ausblick}
+      ${buildRememberBox("Wichtig", k.merksatz)}
+      ${blockRead("Geschafft. " + abschluss + " " + k.merksatz)}
+      <button type="button" class="kette-done" onclick="ketteAbbrechen()">Weiter lernen</button>
+    </article>
+  `;
+  focusContent();
+  renderLegalFooter();
+  announce("Geschafft. Du hast alle Schritte gemacht.");
 }
 
 /* Antworten dürfen Strings sein ODER Objekte { text, pictogram }.
@@ -6932,6 +7183,8 @@ function applyExtraPractice() {
 
 /* Glossar initialisieren */
 applyExtraPractice();
+/* Handlungs-Ketten anhängen (ketten-de.js). Überschreibt nie etwas. */
+if (typeof applyChains === "function") applyChains();
 
 initGlossar();
 initGlossarEvents();
