@@ -4788,7 +4788,7 @@ function ketteFilm(id) {
 /* Die Bühne. Alle Formen tragen Klassen; gefärbt wird in styles.css. */
 function filmSvg(beschreibung) {
   return `
-  <svg class="film-buehne" viewBox="0 0 240 170" role="img" aria-label="${escapeHtml(beschreibung || "")}">
+  <svg class="film-buehne" viewBox="0 0 200 170" role="img" aria-label="${escapeHtml(beschreibung || "")}">
     <!-- Ruhe-Welle: kommt erst im letzten Takt -->
     <circle class="f-welle" cx="64" cy="85" r="30" aria-hidden="true"/>
 
@@ -4810,36 +4810,31 @@ function filmSvg(beschreibung) {
       <circle class="f-punkt" cx="86" cy="36" r="7"/>
     </g>
 
-    <!-- Hand: kommt von unten, zoegert, beruehrt nicht -->
-    <g class="f-hand" aria-hidden="true">
-      <!-- Reihenfolge zaehlt: Finger zuerst, die Handflaeche zuletzt -
-           sie deckt die unteren Enden ab. Sonst sieht man Kanten. -->
-      <g transform="rotate(-14)">
-        <rect class="f-finger" x="-6" y="-38" width="13" height="44" rx="6.5"/>
-        <rect class="f-finger" x="9"  y="-13" width="12" height="19" rx="6"/>
-        <rect class="f-finger" x="18" y="-6"  width="11" height="16" rx="5.5"/>
-        <rect class="f-flaeche" x="-12" y="-2" width="40" height="28" rx="13"/>
-      </g>
-    </g>
-
     <!-- Person. Kopf und Koerper wie pikto-person, dazu ein
          reduziertes Gesicht: zwei Augen, zwei Brauen, ein Mund. -->
     <g class="f-figur" aria-hidden="true">
-      <path class="f-koerper" d="M174 147 a26 22 0 0 1 52 0 z"/>
-      <circle class="f-kopf" cx="200" cy="88" r="22"/>
-      <circle class="f-auge" cx="192" cy="85" r="3"/>
-      <circle class="f-auge" cx="208" cy="85" r="3"/>
-      <path class="f-braue f-braue--ruhig" d="M187 76 h9"/>
-      <path class="f-braue f-braue--ruhig" d="M204 76 h9"/>
-      <!-- Besorgt, nicht boese: die INNEREN Enden gehen nach oben.
-           Nach innen-unten gezogene Brauen lesen sich als Wut - bei
-           einem Betrugs-Thema waere das fatal (die Person koennte es
-           auf sich beziehen, §3 angstfreie Fehlerkultur, §4). -->
-      <path class="f-braue f-braue--eng" d="M187 79 l9 -5"/>
-      <path class="f-braue f-braue--eng" d="M213 79 l-9 -5"/>
-      <path class="f-mund f-mund--ruhig" d="M192 98 h16"/>
-      <path class="f-mund f-mund--eng" d="M194 99 h12"/>
-      <path class="f-mund f-mund--froh" d="M191 96 q9 8 18 0"/>
+      <path class="f-koerper" d="M128 147 a26 22 0 0 1 52 0 z"/>
+      <g class="f-kopf-gruppe">
+        <circle class="f-kopf" cx="154" cy="88" r="22"/>
+        <!-- Das GESICHT wandert, der Kopf bleibt rund. Eine reine
+             Drehung des ganzen Kopfes liest sich als Neigung
+             (Neugier). Verschobene Zuege lesen sich als Abwenden. -->
+        <g class="f-gesicht">
+          <circle class="f-auge" cx="146" cy="85" r="3"/>
+          <circle class="f-auge" cx="162" cy="85" r="3"/>
+          <path class="f-braue f-braue--ruhig" d="M141 76 h9"/>
+          <path class="f-braue f-braue--ruhig" d="M158 76 h9"/>
+          <!-- Besorgt, nicht boese: die INNEREN Enden gehen nach oben.
+               Nach innen-unten gezogene Brauen lesen sich als Wut - bei
+               einem Betrugs-Thema waere das fatal, weil die Person es
+               auf sich beziehen kann (§3 Došen, §4). -->
+          <path class="f-braue f-braue--eng" d="M141 79 l9 -5"/>
+          <path class="f-braue f-braue--eng" d="M167 79 l-9 -5"/>
+          <path class="f-mund f-mund--ruhig" d="M146 98 h16"/>
+          <path class="f-mund f-mund--eng" d="M148 99 h12"/>
+          <path class="f-mund f-mund--froh" d="M145 96 q9 8 18 0"/>
+        </g>
+      </g>
     </g>
   </svg>`;
 }

@@ -6482,8 +6482,18 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 .f-zeile        { fill: var(--accent); opacity: .4; }
 .f-punkt        { fill: var(--accent); }
 
-/* ---- Hand: keine Hautfarbe, nur Kontur wie bei den Piktogrammen ---- */
-.f-finger, .f-flaeche { fill: var(--surface); stroke: var(--accent); stroke-width: 3; }
+/* ---- Kopf dreht sich weg ----------------------------------
+   So wird das Zoegern sichtbar, ohne eine Hand zu zeichnen.
+   Drei Anlaeufe mit einer Hand endeten als Topfhandschuh, und ein
+   einzelner ausgestreckter Finger war sogar als obszoene Geste
+   missverstaendlich. Eine abgewandte Kopfhaltung ist konkretes
+   menschliches Verhalten statt abstrakter Metaphorik - genau das,
+   wofuer Bewegung bei dieser Zielgruppe taugt. */
+.f-gesicht {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .8s cubic-bezier(.3,0,.2,1);
+}
 
 /* ---- Person ---- */
 .f-kopf, .f-koerper { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; }
@@ -6507,7 +6517,6 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 /* Grundstellung */
 .f-blase  { opacity: 0; transform: translateX(-34px); transition: transform .7s cubic-bezier(.2,.8,.2,1), opacity .45s ease-in; }
 .f-punkt  { opacity: 0; transition: opacity .4s ease-in; transform-box: fill-box; transform-origin: center; }
-.f-hand   { opacity: 0; transform: translate(150px, 168px); transition: transform 1.1s cubic-bezier(.3,0,.2,1), opacity .4s ease-in; }
 .f-vorne  { opacity: 1; transition: opacity .35s ease-in-out; }
 .f-hinten { opacity: 0; transition: opacity .35s ease-in-out; }
 .f-handy  { transform-box: fill-box; transform-origin: center; }
@@ -6528,9 +6537,13 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 [data-takt="entscheidung"] .f-mund--eng { opacity: 1; }
 
 /* 3 Entscheidung – Hand kommt, zoegert, beruehrt NICHT */
-[data-takt="entscheidung"] .f-hand { opacity: 1; transform: translate(128px, 100px); }
-[data-takt="entscheidung"] .f-hand { animation: f-zoegern 2.6s cubic-bezier(.3,0,.2,1) both; }
 [data-takt="entscheidung"] .f-punkt { animation: f-pochen 1.8s ease-in-out infinite; }
+
+/* Kopf wendet sich vom Handy ab. Das Handy steht links, also
+   dreht der Kopf nach rechts - weg von der Nachricht. */
+/* NUR die Zuege wandern, der Kopf bleibt stehen. Eine zusaetzliche
+   Drehung der ganzen Gruppe schob Braue und Auge aus dem Kopf heraus. */
+[data-takt="entscheidung"] .f-gesicht { transform: translateX(5px); }
 
 /* 4 Aufloesung – Handy umgedreht, Ruhe kehrt ein */
 [data-takt="aufloesung"] .f-vorne  { opacity: 0; }
@@ -6545,12 +6558,7 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
   0%, 100% { transform: scale(1);    opacity: 1;  }
   50%      { transform: scale(1.28); opacity: .55; }
 }
-@keyframes f-zoegern {
-  0%   { transform: translate(150px, 168px); }
-  45%  { transform: translate(124px,  92px); }   /* kommt an */
-  60%  { transform: translate(124px,  92px); }   /* haelt inne */
-  78%  { transform: translate(136px, 114px); }   /* zuckt zurueck */
-  100% { transform: translate(128px, 100px); }   /* bleibt stehen, beruehrt nicht */
+  /* bleibt stehen, beruehrt nicht */
 }
 @keyframes f-umdrehen {
   0%   { transform: scaleX(1);   }
@@ -6575,7 +6583,7 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 /* Weniger Bewegung: Zustaende bleiben, Uebergaenge fallen weg.
    Man blaettert dann vier Standbilder durch (§10.1). */
 @media (prefers-reduced-motion: reduce) {
-  .f-blase, .f-punkt, .f-hand, .f-vorne, .f-hinten, .f-handy, .f-welle {
+  .f-blase, .f-punkt, .f-vorne, .f-hinten, .f-handy, .f-welle, .f-gesicht {
     transition: none !important;
     animation: none !important;
   }

@@ -87,7 +87,7 @@ const KETTEN = {
     film: {
       titel: "So entsteht Druck",
       /* Was das Bild zeigt, für Menschen die es nicht sehen (§9). */
-      bildbeschreibung: "Ein Handy liegt da. Eine Nachricht kommt an. Ein Punkt blinkt. Eine Hand will tippen und hält an. Das Handy wird umgedreht. Die Person wird ruhig.",
+      bildbeschreibung: "Ein Handy liegt da. Eine Nachricht kommt an. Ein Punkt blinkt. Die Person dreht den Kopf weg und wartet. Dann wird das Handy umgedreht. Die Person wird ruhig.",
       takte: [
         {
           name: "ruhe",
@@ -108,9 +108,9 @@ const KETTEN = {
         {
           name: "entscheidung",
           text: {
-            leicht:   "Deine Hand will schnell tippen. Du wartest.",
-            einfach:  "Deine Hand will sofort tippen. Aber du hältst kurz inne.",
-            standard: "Der Reflex ist, sofort zu tippen. Du unterbrichst ihn und hältst inne."
+            leicht:   "Du willst schnell antworten. Du wartest.",
+            einfach:  "Du willst sofort antworten. Aber du hältst kurz inne.",
+            standard: "Der Reflex ist, sofort zu antworten. Du unterbrichst ihn und hältst inne."
           }
         },
         {
