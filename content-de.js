@@ -1339,6 +1339,35 @@ const CONTENT_VERSIONS = {
   },
 
   betrug: {
+    "Was kann ich tun?": {
+      einfach: {
+        text: [
+          { text: "Betrug kommt fast immer überraschend – als Nachricht, die Druck macht, oder als Anruf, der Angst macht." },
+          { text: "Ein fester Plan hilft dir, ruhig zu bleiben. Denn wer ruhig bleibt, macht keinen Fehler." }
+        ],
+        bullets: [
+          { text: "Bei Druck mache ich Stopp." },
+          { text: "Ich zahle niemals sofort." },
+          { text: "Ich rufe selbst an – mit der Nummer, die ich schon habe." },
+          { text: "Ich lese genau nach, was etwas kostet." },
+          { text: "Ich frage eine Person, der ich vertraue." }
+        ],
+        warning: "Keine echte Bank und keine echte Behörde fragt am Telefon nach deinem Passwort oder verlangt, dass du sofort zahlst.",
+        success: "Mit einem festen Plan bleibst du ruhig – und genau das schützt dich."
+      },
+      standard: {
+        text: [{ text: "Betrugsmaschen funktionieren über Zeitdruck: Wer sofort handeln soll, denkt nicht nach. Ein eingeübter Ablauf nimmt dem Druck seine Wirkung, weil er die Entscheidung aus dem Moment herausnimmt. Er wirkt auch dann, wenn die Masche neu ist und du sie noch nie gehört hast." }],
+        bullets: [
+          { text: "Bei Druck grundsätzlich anhalten – Eile ist das Warnzeichen, nicht der Inhalt." },
+          { text: "Niemals sofort zahlen, überweisen oder Gutscheincodes durchgeben." },
+          { text: "Selbst zurückrufen, und zwar über die Nummer, die du schon kennst – nie über die aus der Nachricht." },
+          { text: "Bei Angeboten das Kleingedruckte lesen: Was kostet es, ab wann, und wie kündigt man?" },
+          { text: "Eine zweite Meinung einholen. Maschen funktionieren fast nur, solange niemand sonst davon weiß." }
+        ],
+        warning: "Weder Banken noch Behörden fordern am Telefon Passwörter, TANs oder sofortige Zahlungen. Jede solche Forderung ist ein Betrugsversuch – ausnahmslos.",
+        success: "Ein eingeübter Ablauf schützt besser als Misstrauen im Einzelfall: Er greift auch bei Maschen, die du noch nicht kennst."
+      }
+    },
     "Vorsicht bei QR-Codes": {
       einfach: {
         text: [

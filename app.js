@@ -3558,7 +3558,7 @@ function renderHelpPage() {
 
       <div class="support-help-grid">
         <div class="support-help-card">
-          <h4>Wenn du die Seite nicht bedienen kannst ${sectionReadChip("Wenn du die Seite nicht bedienen kannst")}</h4>
+          <h3>Wenn du die Seite nicht bedienen kannst ${sectionReadChip("Wenn du die Seite nicht bedienen kannst")}</h3>
           <ul>
             <li>Zeige auf die Stelle.</li>
             <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
@@ -3566,7 +3566,7 @@ function renderHelpPage() {
           </ul>
         </div>
         <div class="support-help-card">
-          <h4>Wenn du etwas nicht verstehst ${sectionReadChip("Wenn du etwas nicht verstehst")}</h4>
+          <h3>Wenn du etwas nicht verstehst ${sectionReadChip("Wenn du etwas nicht verstehst")}</h3>
           <ul>
             <li>Lies den Text noch einmal.</li>
             <li>Nutze den Knopf: Vorlesen.</li>
@@ -3575,7 +3575,7 @@ function renderHelpPage() {
           </ul>
         </div>
         <div class="support-help-card">
-          <h4>Wen kannst du fragen? ${sectionReadChip("Wen kannst du fragen?")}</h4>
+          <h3>Wen kannst du fragen? ${sectionReadChip("Wen kannst du fragen?")}</h3>
           <ul>
             <li>Eine Person, der du vertraust.</li>
             <li>Eine Person, die dich unterstützt.</li>
@@ -3584,7 +3584,7 @@ function renderHelpPage() {
           </ul>
         </div>
         <div class="support-help-card">
-          <h4>Wenn dir im Internet etwas Schlechtes passiert ${sectionReadChip("Wenn dir im Internet etwas Schlechtes passiert")}</h4>
+          <h3>Wenn dir im Internet etwas Schlechtes passiert ${sectionReadChip("Wenn dir im Internet etwas Schlechtes passiert")}</h3>
           <ul>
             <li>Das ist nicht deine Schuld.</li>
             <li>Sprich mit einer Person, der du vertraust.</li>
