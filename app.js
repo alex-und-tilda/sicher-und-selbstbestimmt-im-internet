@@ -4746,10 +4746,151 @@ function buildKetteCard(id) {
       <h3>${escapeHtml(k.titel)}</h3>
       <p>${escapeHtml(einstieg)}</p>
       <p class="kette-meta">${k.liste.length} Schritte. Du kannst nichts falsch machen.</p>
-      <button type="button" class="utility-button" onclick="ketteStart('${escapeHtml(id)}')">${knopf}</button>
+      <button type="button" class="utility-button" onclick="${ketteFilm(id) && stufe === 1 ? `ketteFilmStart('${escapeHtml(id)}')` : `ketteStart('${escapeHtml(id)}')`}">${knopf}</button>
       ${blockRead(k.titel + ". " + einstieg)}
     </div>`;
 }
+
+/* ============================================================
+   FILM – der Einstieg in eine Kette (Inhalt in ketten-de.js)
+   ------------------------------------------------------------
+   Vier Takte: Ruhe → Störung → Entscheidung → Auflösung.
+
+   Regeln aus §10.1, die hier konkret werden:
+   - Inline-SVG mit CSS-Keyframes. Kein JS-Animation, keine
+     externe Datei, kein Netzaufruf.
+   - Farben ausschliesslich über CSS-Klassen und Token. Kein
+     fill="#..."-Attribut, damit der Dunkelmodus nicht bricht.
+   - KEINE Hautflächen. Die Plattform zeichnet Menschen seit jeher
+     ohne Hautton (siehe pikto-person: Kopf als Kreis in
+     --accent-soft mit Kontur in --accent). Der Film hält sich
+     daran. Entschieden am 13.09.2026.
+   - Ein Gesicht gibt es trotzdem: zwei Augen, zwei Brauen, ein
+     Mund-Strich, drei Zustände. Innere Zustände (Anspannung,
+     Erleichterung) sind ohne Gesicht kaum ikonisch darstellbar –
+     die Forschung nennt den Verzicht darauf ausdrücklich
+     didaktisch fragwürdig. Die Piktogramme bleiben unverändert
+     gesichtslos: Ein Piktogramm ist ein stehendes Etikett, der
+     Film zeigt einen Verlauf. Zwei Aufgaben, zwei Lösungen.
+   - Kein Autoplay. Jeder Takt wird angetippt, damit WCAG 2.2.2
+     gar nicht erst greift und die Person das Tempo bestimmt.
+   - prefers-reduced-motion: Die Zustände werden trotzdem gesetzt,
+     nur die Übergänge fallen weg. Man blättert dann vier
+     Standbilder durch – der Inhalt geht nicht verloren.
+   ============================================================ */
+let filmTakt = 0;
+
+function ketteFilm(id) {
+  const k = ketteDaten(id);
+  return (k && k.film && Array.isArray(k.film.takte) && k.film.takte.length) ? k.film : null;
+}
+
+/* Die Bühne. Alle Formen tragen Klassen; gefärbt wird in styles.css. */
+function filmSvg(beschreibung) {
+  return `
+  <svg class="film-buehne" viewBox="0 0 240 170" role="img" aria-label="${escapeHtml(beschreibung || "")}">
+    <!-- Ruhe-Welle: kommt erst im letzten Takt -->
+    <circle class="f-welle" cx="64" cy="85" r="30" aria-hidden="true"/>
+
+    <!-- Handy -->
+    <g class="f-handy" aria-hidden="true">
+      <rect class="f-handy-rahmen" x="24" y="18" width="80" height="134" rx="13"/>
+      <g class="f-vorne">
+        <rect class="f-schirm" x="31" y="26" width="66" height="118" rx="7"/>
+        <g class="f-blase">
+          <rect class="f-blase-form" x="37" y="40" width="54" height="34" rx="9"/>
+          <rect class="f-zeile" x="44" y="50" width="40" height="5" rx="2.5"/>
+          <rect class="f-zeile" x="44" y="60" width="24" height="5" rx="2.5"/>
+        </g>
+      </g>
+      <g class="f-hinten">
+        <rect class="f-rueck" x="31" y="26" width="66" height="118" rx="7"/>
+        <circle class="f-linse" cx="64" cy="46" r="6"/>
+      </g>
+      <circle class="f-punkt" cx="86" cy="36" r="7"/>
+    </g>
+
+    <!-- Hand: kommt von unten, zoegert, beruehrt nicht -->
+    <g class="f-hand" aria-hidden="true">
+      <!-- Reihenfolge zaehlt: Finger zuerst, die Handflaeche zuletzt -
+           sie deckt die unteren Enden ab. Sonst sieht man Kanten. -->
+      <g transform="rotate(-14)">
+        <rect class="f-finger" x="-6" y="-38" width="13" height="44" rx="6.5"/>
+        <rect class="f-finger" x="9"  y="-13" width="12" height="19" rx="6"/>
+        <rect class="f-finger" x="18" y="-6"  width="11" height="16" rx="5.5"/>
+        <rect class="f-flaeche" x="-12" y="-2" width="40" height="28" rx="13"/>
+      </g>
+    </g>
+
+    <!-- Person. Kopf und Koerper wie pikto-person, dazu ein
+         reduziertes Gesicht: zwei Augen, zwei Brauen, ein Mund. -->
+    <g class="f-figur" aria-hidden="true">
+      <path class="f-koerper" d="M174 147 a26 22 0 0 1 52 0 z"/>
+      <circle class="f-kopf" cx="200" cy="88" r="22"/>
+      <circle class="f-auge" cx="192" cy="85" r="3"/>
+      <circle class="f-auge" cx="208" cy="85" r="3"/>
+      <path class="f-braue f-braue--ruhig" d="M187 76 h9"/>
+      <path class="f-braue f-braue--ruhig" d="M204 76 h9"/>
+      <!-- Besorgt, nicht boese: die INNEREN Enden gehen nach oben.
+           Nach innen-unten gezogene Brauen lesen sich als Wut - bei
+           einem Betrugs-Thema waere das fatal (die Person koennte es
+           auf sich beziehen, §3 angstfreie Fehlerkultur, §4). -->
+      <path class="f-braue f-braue--eng" d="M187 79 l9 -5"/>
+      <path class="f-braue f-braue--eng" d="M213 79 l-9 -5"/>
+      <path class="f-mund f-mund--ruhig" d="M192 98 h16"/>
+      <path class="f-mund f-mund--eng" d="M194 99 h12"/>
+      <path class="f-mund f-mund--froh" d="M191 96 q9 8 18 0"/>
+    </g>
+  </svg>`;
+}
+
+function ketteFilmStart(id) {
+  if (!ketteFilm(id)) return ketteStart(id);
+  ketteId = id;
+  filmTakt = 0;
+  renderKetteFilm();
+}
+
+function renderKetteFilm() {
+  const k = ketteDaten(ketteId);
+  const f = ketteFilm(ketteId);
+  if (!f) return renderMenu();
+  const gesamt = f.takte.length;
+  filmTakt = Math.max(0, Math.min(filmTakt, gesamt - 1));
+  const takt = f.takte[filmTakt];
+  const letzter = filmTakt === gesamt - 1;
+  const satz = ketteText(takt.text);
+
+  ketteKopf(k, `Bild ${filmTakt + 1} von ${gesamt}`);
+
+  content.innerHTML = `
+    ${buildToolRow()}
+    ${buildWegweiser(f.titel + ".", { index: filmTakt, total: gesamt })}
+    <article class="card kette-step film-karte" data-takt="${escapeHtml(takt.name)}" data-readable="true">
+      <p class="kette-zaehler">Bild ${filmTakt + 1} von ${gesamt}</p>
+      ${filmSvg(f.bildbeschreibung)}
+      <p class="film-satz" role="status">${escapeHtml(satz)}</p>
+      ${blockRead(satz)}
+      <button type="button" class="kette-done" onclick="filmWeiter()">${letzter ? "Und jetzt dein Plan" : "Weiter"}</button>
+    </article>
+    <div class="kette-fuss">
+      ${filmTakt > 0 ? `<button type="button" class="plain-back-button" onclick="filmZurueck()">← Ein Bild zurück</button>` : ""}
+      <button type="button" class="plain-back-button" onclick="ketteStart('${escapeHtml(ketteId)}')">Film überspringen</button>
+      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">Zurück zur Lektion</button>
+    </div>
+  `;
+  focusContent();
+  renderLegalFooter();
+}
+
+function filmWeiter() {
+  const f = ketteFilm(ketteId);
+  if (!f) return renderMenu();
+  if (filmTakt >= f.takte.length - 1) return ketteStart(ketteId);
+  filmTakt++;
+  renderKetteFilm();
+}
+function filmZurueck() { if (filmTakt > 0) filmTakt--; renderKetteFilm(); }
 
 function ketteStart(id) {
   if (!ketteDaten(id)) return;

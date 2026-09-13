@@ -65,6 +65,65 @@ const KETTEN = {
     lektion: "Was kann ich tun?",
     merksatz: "Bei Druck mache ich Stopp. Dann frage ich nach.",
 
+    /* ---------------------------------------------------------
+       FILM – der Einstieg in die Kette.
+       Vier Takte: Ruhe → Störung → Entscheidung → Auflösung.
+       Er zeigt, WIE Druck entsteht und wie man aussteigt. Danach
+       übernimmt die Kette mit den fünf Schritten.
+
+       Wichtig: Der Film läuft NICHT von allein. Jeder Takt wird
+       angetippt. Damit greift WCAG 2.2.2 (Pause/Stopp bei
+       Auto-Bewegung über 5 Sekunden) gar nicht erst – und die
+       Forschung empfiehlt genau das: „systemseitig segmentierte
+       Häppchen mit Weiter-Knopf" statt einer durchlaufenden
+       Animation, weil Bewegung flüchtige Information erzeugt
+       (Transient-Information-Effekt).
+
+       Der Text ist kein Beiwerk. Eine wortlose Animation allein
+       wäre riskant: Abstrakte Bildsprache hat für diese Zielgruppe
+       geringe Ikonizität. Deshalb steht zu jedem Takt ein Satz –
+       in allen drei Ebenen.
+       --------------------------------------------------------- */
+    film: {
+      titel: "So entsteht Druck",
+      /* Was das Bild zeigt, für Menschen die es nicht sehen (§9). */
+      bildbeschreibung: "Ein Handy liegt da. Eine Nachricht kommt an. Ein Punkt blinkt. Eine Hand will tippen und hält an. Das Handy wird umgedreht. Die Person wird ruhig.",
+      takte: [
+        {
+          name: "ruhe",
+          text: {
+            leicht:   "Dein Handy liegt da. Alles ist ruhig.",
+            einfach:  "Dein Handy liegt neben dir. Es ist nichts los.",
+            standard: "Das Handy liegt ruhig da. Nichts verlangt gerade deine Aufmerksamkeit."
+          }
+        },
+        {
+          name: "stoerung",
+          text: {
+            leicht:   "Eine Nachricht kommt. Sie macht Druck.",
+            einfach:  "Eine Nachricht kommt an. Sie drängt dich zu einer schnellen Antwort.",
+            standard: "Eine Nachricht trifft ein und drängt auf eine sofortige Reaktion. Genau das ist die Masche."
+          }
+        },
+        {
+          name: "entscheidung",
+          text: {
+            leicht:   "Deine Hand will schnell tippen. Du wartest.",
+            einfach:  "Deine Hand will sofort tippen. Aber du hältst kurz inne.",
+            standard: "Der Reflex ist, sofort zu tippen. Du unterbrichst ihn und hältst inne."
+          }
+        },
+        {
+          name: "aufloesung",
+          text: {
+            leicht:   "Du legst das Handy weg. Jetzt bist du ruhig.",
+            einfach:  "Du legst das Handy zur Seite. Der Druck lässt nach.",
+            standard: "Du legst das Gerät aus der Hand. Damit ist der Druck weg – und dein Plan beginnt."
+          }
+        }
+      ]
+    },
+
     einstieg: {
       leicht:   "Eine Nachricht macht Druck. Dann hilft dir dein Plan. Wir gehen ihn zusammen durch. Schritt für Schritt.",
       einfach:  "Wenn eine Nachricht Druck macht, hilft dir ein fester Plan. Wir gehen ihn jetzt zusammen durch, Schritt für Schritt.",
