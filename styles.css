@@ -129,7 +129,33 @@
 
 html {
   font-size: 17px;
-  scroll-padding-top: 80px; /* Fokus nicht hinter sticky Header verdecken (WCAG 2.4.11) */
+  /* ============================================================
+     WCAG 2.2 SC 2.4.11 – Fokus nicht verdeckt
+     ------------------------------------------------------------
+     Oben klebt der Kopf, UNTEN stehen zwei feste Leisten
+     uebereinander: das Hauptmenue (.main-tabbar, 4.7rem) und auf
+     Lernschritten darueber die Zurueck/Weiter-Leiste (.nav).
+
+     Bis 13.09.2026 gab es nur scroll-padding-top. Beim Durchtabben
+     landeten Bedienelemente deshalb VOLLSTAENDIG unter der
+     Menueleiste – gemessen 10 Ueberlappungen in einer einzigen
+     Lektion, 4 davon ganz verdeckt (u. a. der Knopf "Plan ueben").
+     Das ist ein AA-Verstoss, kein Schoenheitsfehler: Wer die Seite
+     mit der Tastatur bedient, verliert die Stelle, an der er ist.
+
+     In rem, nicht in px: Die Schriftgroessen-Schalter (A / A+ / A++)
+     vergroessern die Leisten mit – ein fester px-Wert wuerde bei
+     grosser Schrift wieder zu klein. */
+  scroll-padding-top: 80px;
+  scroll-padding-bottom: calc(var(--tabbar-h) + 1rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Lernschritte: Zurueck/Weiter-Leiste steht zusaetzlich ueber dem
+   Hauptmenue. Faellt :has() aus (sehr alter Browser), bleibt die
+   Regel oben stehen – dann ist der Abstand kleiner, aber nicht
+   falsch. Kein Bruch, nur weniger Luft. */
+html:has(.nav:not(.is-hidden)) {
+  scroll-padding-bottom: calc(var(--tabbar-h) + 6.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 body {
