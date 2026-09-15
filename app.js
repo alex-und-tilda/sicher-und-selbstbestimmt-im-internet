@@ -1465,7 +1465,7 @@ const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
    Ohne diesen Eintrag war es fuer hoerende Nutzung unsichtbar –
    ausgerechnet das Angebot, das sich an die Menschen richtet, die
    aufs Vorlesen angewiesen sind. */
-const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button";
+const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -1519,7 +1519,10 @@ function readCurrentPage(rate) {
            Kasten hat overflow:hidden – die Kinder behalten dadurch eine
            Groesse, obwohl sie niemand sieht. Nur auf <details open> pruefen. */
         if (el.closest(".companion-panel")) return false;
-        if (el.closest("details:not([open])")) return false;
+        /* Die Überschrift (summary) eines zugeklappten Hilfe-Blocks bleibt
+           lesbar – sonst erfährt niemand, dass es dort Hilfe gibt. */
+        const closedDetails = el.closest("details:not([open])");
+        if (closedDetails && !(el.tagName === "SUMMARY" && el.parentElement === closedDetails)) return false;
         if (el.closest(".is-hidden, [hidden]")) return false;
         if (!isOption && !isKarte && !isAktion && el.closest(".reading-toolbar, nav, footer, button")) return false;
         /* Text INNERHALB einer Karte nicht zusaetzlich einzeln lesen */
@@ -1568,6 +1571,10 @@ function readCurrentPage(rate) {
     els.push({ pseudoText: "Du kannst jetzt auf " + rueckmeldeKnoepfe[0] + " tippen."
       + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("")
       + hilfeSatz });
+  } else if (root && root.classList.contains("alltag-page")) {
+    const next = root.querySelector(".nav-button.primary");
+    if (next) els.push({ pseudoText: "Du kannst jetzt auf " + cleanSpeechText(next.textContent) + " tippen." });
+    else if (root.querySelector(".alltag-choice")) els.push({ pseudoText: "Wähle eine Antwort. Du kannst dir auch Hilfe anzeigen lassen." });
   } else if (nextButton && !nextButton.disabled) {
     els.push({ pseudoText: backButton && !backButton.disabled
       ? "Du kannst jetzt Weiter drücken. Oder Zurück."
@@ -1912,6 +1919,8 @@ function renderLegalFooter() {
 
 function chooseLanguage(level) {
   setLanguageLevel(level);
+  /* Sprachwechsel mitten in einer Alltags-Übung: im selben Schritt bleiben. */
+  if (window.location.hash.startsWith("#alltag:")) return renderAlltag(window.location.hash.slice(1));
   /* Im Erststart geht es nach der Sprache direkt zu den Themen (F3).
      Vorwissen und Vorlesen werden nicht mehr vorab gefragt, sondern erst
      hinter dem ersten Thema (Pruefbericht B10) - dann kann die Person die
@@ -1926,6 +1935,7 @@ function chooseLanguage(level) {
 
 /* Rückweg von der Sprach-Wahl OHNE etwas ändern zu müssen (kein Wahl-Zwang) */
 function languageChoiceBack() {
+  if (window.location.hash.startsWith("#alltag:")) return renderAlltag(window.location.hash.slice(1));
   if (activeTab === "einstellungen") return renderSettingsPage();
   if (currentTopicId && getTopicById(currentTopicId)) return renderTopicChoice(currentTopicId);
   if (languageChosen) return renderMenu();
@@ -4042,6 +4052,13 @@ function renderTopicChoice(topicId) {
         const uebung = hasScenario(topic.id)
           ? laterChip("Übungs-Handy", `startScenario('${escapeHtml(topic.id)}')`) : "";
         const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`);
+        /* Alltags-Übung (alltag-de.js), nur für Themen mit eigener Übung. */
+        const alltagScene = (typeof ALLTAG_SCENES !== "undefined")
+          ? Object.entries(ALLTAG_SCENES).find(([, scene]) => scene && scene.topic === topic.id)
+          : null;
+        const alltagUebung = alltagScene
+          ? laterChip("Im Alltag üben", `alltagGo('${escapeHtml(alltagScene[0])}')`)
+          : "";
 
         /* Mengen-Wahl beziffern (Prüfbericht B8): „Kurz" und „Mehr" allein
            sagen nicht, worauf man sich einlässt – Kurz ist rund ein Viertel
@@ -4069,7 +4086,7 @@ function renderTopicChoice(topicId) {
             <div class="later-row">
               ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
               ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
-              ${merkChip}${uebung}${training}
+              ${merkChip}${alltagUebung}${uebung}${training}
             </div>`;
         }
         if (done) {
@@ -4079,7 +4096,7 @@ function renderTopicChoice(topicId) {
             <p class="later-title">Oder:</p>
             <div class="later-row">
               ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
-              ${merkChip}${uebung}${training}
+              ${merkChip}${alltagUebung}${uebung}${training}
             </div>`;
         }
         return `
@@ -4088,7 +4105,7 @@ function renderTopicChoice(topicId) {
           <p class="later-title">Für später:</p>
           <div class="later-row">
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
-            ${merkChip}${uebung}${training}
+            ${merkChip}${alltagUebung}${uebung}${training}
           </div>`;
       })()}
 
@@ -6582,6 +6599,8 @@ function buildScenarioScreen(scn, bis) {
    Vorlese-Knopf sie als Ganzes vorliest (KARTEN_SELEKTOR). */
 function renderScenarioChooser() {
   stopReading();
+  currentTopicId = null;
+  setActiveTab("lernweg");
   setProgressVisible(false);
   setBottomNavVisible(false);
   showNav(false, false);
@@ -6617,6 +6636,7 @@ function renderScenarioChooser() {
       <p>Hier übst du wie auf einem Handy.</p>
       <p>Du siehst Nachrichten, Einstellungen oder einen Shop.</p>
       <p>Du entscheidest. Nichts davon ist echt.</p>
+      ${typeof buildAlltagChoices === "function" ? buildAlltagChoices() : ""}
       <h3>Wähle ein Thema</h3>
       <div class="action-grid">${karten}</div>
       <div class="certificate-actions">
@@ -7192,6 +7212,7 @@ function handleHash() {
     if (hash === "training") return startTrainingInbox();
     if (hash === "merk-alle") return renderAllMemoryCards();
     if (hash === "uebung") return renderScenarioChooser();
+    if (hash.startsWith("alltag:")) return renderAlltag(hash);
 
     /* Alte Form ohne Präfix – bleibt für schon gedruckte QR-Karten gültig. */
     const [topicId, action] = hash.split(":");
