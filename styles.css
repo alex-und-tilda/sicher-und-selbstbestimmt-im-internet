@@ -6456,6 +6456,141 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
   color: var(--good);
 }
 
+/* ============================================================
+   FILM – Einstieg in eine Handlungs-Kette (§10.1)
+   Vier Takte, angetippt statt automatisch. Farben ausschliesslich
+   ueber Token: kein einziger Hex-Wert, sonst bricht der
+   Dunkelmodus. Keine Hautflaechen – die Person ist gezeichnet wie
+   pikto-person, nur mit einem reduzierten Gesicht.
+   ============================================================ */
+.film-karte { padding-top: 14px; }
+
+.film-buehne {
+  display: block;
+  width: min(340px, 100%);
+  margin: 4px auto 10px;
+  background: var(--surface-soft);
+  border-radius: var(--radius-m);
+}
+
+/* ---- Handy ---- */
+.f-handy-rahmen { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; }
+.f-schirm       { fill: var(--surface); }
+.f-rueck        { fill: var(--accent); }
+.f-linse        { fill: var(--accent-soft); opacity: .55; }
+.f-blase-form   { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.f-zeile        { fill: var(--accent); opacity: .4; }
+.f-punkt        { fill: var(--accent); }
+
+/* ---- Kopf dreht sich weg ----------------------------------
+   So wird das Zoegern sichtbar, ohne eine Hand zu zeichnen.
+   Drei Anlaeufe mit einer Hand endeten als Topfhandschuh, und ein
+   einzelner ausgestreckter Finger war sogar als obszoene Geste
+   missverstaendlich. Eine abgewandte Kopfhaltung ist konkretes
+   menschliches Verhalten statt abstrakter Metaphorik - genau das,
+   wofuer Bewegung bei dieser Zielgruppe taugt. */
+.f-gesicht {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .8s cubic-bezier(.3,0,.2,1);
+}
+
+/* ---- Person ---- */
+.f-kopf, .f-koerper { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; }
+.f-auge  { fill: var(--accent); }
+.f-braue, .f-mund {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;                 /* je Takt wird genau einer sichtbar */
+}
+.f-welle { fill: none; stroke: var(--accent); stroke-width: 4; opacity: 0; }
+
+/* ============================================================
+   Die vier Takte
+   Jeder Zustand steht als NORMALE Regel da, nicht nur als
+   Animations-Endbild. Nur so bleibt das Bild richtig, wenn jemand
+   Bewegung reduziert hat und alle Animationen ausfallen.
+   ============================================================ */
+
+/* Grundstellung */
+.f-blase  { opacity: 0; transform: translateX(-34px); transition: transform .7s cubic-bezier(.2,.8,.2,1), opacity .45s ease-in; }
+.f-punkt  { opacity: 0; transition: opacity .4s ease-in; transform-box: fill-box; transform-origin: center; }
+.f-vorne  { opacity: 1; transition: opacity .35s ease-in-out; }
+.f-hinten { opacity: 0; transition: opacity .35s ease-in-out; }
+.f-handy  { transform-box: fill-box; transform-origin: center; }
+
+/* 1 Ruhe – Handy liegt da, Person ruhig */
+[data-takt="ruhe"] .f-braue--ruhig,
+[data-takt="ruhe"] .f-mund--ruhig { opacity: 1; }
+
+/* 2 Stoerung – Nachricht kommt, Punkt pocht, Person angespannt */
+[data-takt="stoerung"] .f-blase,
+[data-takt="entscheidung"] .f-blase { opacity: 1; transform: translateX(0); }
+[data-takt="stoerung"] .f-punkt,
+[data-takt="entscheidung"] .f-punkt { opacity: 1; }
+[data-takt="stoerung"] .f-punkt { animation: f-pochen 1.8s ease-in-out infinite; }
+[data-takt="stoerung"] .f-braue--eng,
+[data-takt="stoerung"] .f-mund--eng,
+[data-takt="entscheidung"] .f-braue--eng,
+[data-takt="entscheidung"] .f-mund--eng { opacity: 1; }
+
+/* 3 Entscheidung – Hand kommt, zoegert, beruehrt NICHT */
+[data-takt="entscheidung"] .f-punkt { animation: f-pochen 1.8s ease-in-out infinite; }
+
+/* Kopf wendet sich vom Handy ab. Das Handy steht links, also
+   dreht der Kopf nach rechts - weg von der Nachricht. */
+/* NUR die Zuege wandern, der Kopf bleibt stehen. Eine zusaetzliche
+   Drehung der ganzen Gruppe schob Braue und Auge aus dem Kopf heraus. */
+[data-takt="entscheidung"] .f-gesicht { transform: translateX(5px); }
+
+/* 4 Aufloesung – Handy umgedreht, Ruhe kehrt ein */
+[data-takt="aufloesung"] .f-vorne  { opacity: 0; }
+[data-takt="aufloesung"] .f-hinten { opacity: 1; }
+[data-takt="aufloesung"] .f-handy  { animation: f-umdrehen 1.1s ease-in-out both; }
+[data-takt="aufloesung"] .f-welle  { animation: f-welle 1.6s ease-out both; }
+[data-takt="aufloesung"] .f-braue--ruhig,
+[data-takt="aufloesung"] .f-mund--froh { opacity: 1; }
+
+/* Pulsschlag deutlich unter 3 Hz (WCAG 2.3.1): rund 0,55 Hz. */
+@keyframes f-pochen {
+  0%, 100% { transform: scale(1);    opacity: 1;  }
+  50%      { transform: scale(1.28); opacity: .55; }
+}
+  /* bleibt stehen, beruehrt nicht */
+}
+@keyframes f-umdrehen {
+  0%   { transform: scaleX(1);   }
+  50%  { transform: scaleX(.08); }
+  100% { transform: scaleX(1);   }
+}
+@keyframes f-welle {
+  from { transform: scale(.35); opacity: .65; }
+  to   { transform: scale(2.2); opacity: 0;   }
+}
+.f-welle { transform-box: fill-box; transform-origin: center; }
+
+.film-satz {
+  max-width: 30rem;
+  margin: 6px auto 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+/* Weniger Bewegung: Zustaende bleiben, Uebergaenge fallen weg.
+   Man blaettert dann vier Standbilder durch (§10.1). */
+@media (prefers-reduced-motion: reduce) {
+  .f-blase, .f-punkt, .f-vorne, .f-hinten, .f-handy, .f-welle, .f-gesicht {
+    transition: none !important;
+    animation: none !important;
+  }
+  /* Ohne Animation muss die Welle im letzten Takt trotzdem zu sehen sein. */
+  [data-takt="aufloesung"] .f-welle { opacity: .5; }
+}
+
 @media (prefers-contrast: more) {
   :root {
     --ink-soft: #22334a;   /* statt #3d506a: ~8,9:1 auf --bg */

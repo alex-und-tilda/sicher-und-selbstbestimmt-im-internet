@@ -6817,6 +6817,63 @@ const topics = [
         "remember": "Erst fragen. Dann scannen."
       },
       {
+        "title": "Was kann ich tun?",
+        "module": "Handlungsplan",
+        "icon": "help",
+        "pictogram": "pikto-plan",
+        "text": [
+          {
+            "text": "Eine Nachricht macht Druck.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Oder ein Anruf macht Angst.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Dann hilft dir dein Plan.",
+            "pictogram": "pikto-plan"
+          }
+        ],
+        "bullets": [
+          {
+            "text": "Ich mache Stopp bei Druck.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Ich zahle nichts sofort.",
+            "pictogram": "pikto-money"
+          },
+          {
+            "text": "Ich rufe selbst an. Ich nehme meine bekannte Nummer.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Ich lese genau. Was kostet das?",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Ich frage eine vertraute Person.",
+            "pictogram": "pikto-ask"
+          }
+        ],
+        "warning": "Eine echte Bank fragt nie nach deinem Passwort. Auch nicht am Telefon.",
+        "success": "Mit deinem Plan bleibst du ruhig. Dann machst du keinen Fehler.",
+        "practice": {
+          "question": "Ein Anruf sagt: Du musst sofort zahlen. Was machst du?",
+          "pictogram": "pikto-phone",
+          "answers": [
+            "Ich lege auf. Ich rufe selbst meine bekannte Nummer an.",
+            "Ich zahle schnell. Dann ist Ruhe."
+          ],
+          "correctIndex": 0,
+          "feedbackCorrect": "Richtig. Selbst anrufen ist am sichersten. Nimm deine bekannte Nummer.",
+          "feedbackWrong": "Genau darauf setzen Betrüger. Das Geld ist dann meistens weg. Leg lieber auf. Und ruf selbst an.",
+          "remember": "Ich lege auf. Ich rufe selbst an."
+        },
+        "remember": "Ich zahle nie sofort. Ich frage erst."
+      },
+      {
         "title": "Was tun nach einem Betrug?",
         "module": "Hilfe",
         "icon": "help",
