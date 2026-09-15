@@ -411,13 +411,17 @@ const CONTENT_VERSIONS = {
           { text: "Wenn etwas komisch wirkt oder Druck macht, bleib ruhig und reagiere nicht sofort." },
           { text: "Zeig die Nachricht am besten einer Person, der du vertraust." }
         ],
-        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Den Link nicht öffnen.", "Den Hilfe-Knopf nutzen."]
+        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Den Link nicht öffnen.", "Den Hilfe-Knopf nutzen."],
+        warning: "Auch wenn eine Nachricht von einem bekannten Namen kommt, kann sie gefälscht sein. Ruf die Person lieber selbst über die Nummer an, die du schon kennst, bevor du reagierst.",
+        success: "Wenn du deinem Plan folgst, lässt du dich nicht überrumpeln und bleibst sicher."
       },
       standard: {
         text: [
           { text: "Wenn dir etwas merkwürdig vorkommt oder Druck aufgebaut wird, halte kurz inne: Reagiere nicht sofort, öffne keine Links und zeige die Nachricht einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
         ],
-        bullets: []
+        bullets: [],
+        warning: "Ein bekannter Name allein ist kein Beweis für die Identität des Absenders – Betrüger nutzen häufig genau dieses Vertrauen aus. Ruf die Person deshalb über eine dir bereits bekannte Nummer zurück, bevor du auf eine ungewöhnliche Bitte reagierst.",
+        success: "Wer sich an einen festen Ablauf hält, lässt sich nicht überrumpeln – das schützt zuverlässig, auch bei neuen Maschen."
       }
     },
 
@@ -534,13 +538,17 @@ const CONTENT_VERSIONS = {
           { text: "Wenn dich auf Facebook etwas stört oder jemand gemein zu dir ist, musst du das nicht alleine aushalten." },
           { text: "Du kannst die Person blockieren und den Beitrag melden. Und du kannst es einer Person sagen, der du vertraust." }
         ],
-        bullets: ["Die Person blockieren.", "Den Beitrag oder Kommentar melden.", "Einer vertrauten Person davon erzählen.", "Hilfe holen."]
+        bullets: ["Die Person blockieren.", "Den Beitrag oder Kommentar melden.", "Einer vertrauten Person davon erzählen.", "Hilfe holen."],
+        warning: "Manche Personen geben sich als Freund aus, wollen aber schnell Geld oder private Daten von dir. Das ist dann meistens kein echter Freund.",
+        success: "Hilfe zu holen ist immer richtig. Was passiert ist, ist nicht deine Schuld."
       },
       standard: {
         text: [
           { text: "Wenn dich auf Facebook etwas belastet oder jemand verletzend ist, musst du das nicht alleine tragen. Du kannst die Person blockieren, den Beitrag oder Kommentar melden und dir Unterstützung holen – sprich am besten mit jemandem, dem du vertraust. Wichtig: Es ist nicht deine Schuld." }
         ],
-        bullets: []
+        bullets: [],
+        warning: "Nicht jede Person, die sich freundlich gibt, meint es auch gut – besonders wenn schnell um Geld oder private Daten gebeten wird, ist Vorsicht angebracht.",
+        success: "Sich Unterstützung zu holen ist der richtige Schritt – und was dir widerfahren ist, ist nicht deine Schuld."
       }
     },
     "Das merke ich mir": {
@@ -645,13 +653,17 @@ const CONTENT_VERSIONS = {
           { text: "Wenn ein Profil oder eine Nachricht komisch wirkt, mach Stopp und antworte nicht sofort." },
           { text: "Zeig es am besten einer Person, der du vertraust." }
         ],
-        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Das Profil oder die Nachricht zeigen.", "Den Hilfe-Knopf nutzen."]
+        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Das Profil oder die Nachricht zeigen.", "Den Hilfe-Knopf nutzen."],
+        warning: "Ein fremdes Profil kann eine falsche Person sein, auch wenn die Bilder echt aussehen. Ein schönes Bild ist kein Beweis für die wahre Identität.",
+        success: "Wenn du deinem Plan folgst, lässt du dich nicht drängen und entscheidest in Ruhe."
       },
       standard: {
         text: [
           { text: "Wenn dir ein Profil oder eine Nachricht merkwürdig vorkommt, halte inne: Antworte nicht sofort und zeige es einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
         ],
-        bullets: []
+        bullets: [],
+        warning: "Profile lassen sich leicht fälschen – ansprechende Bilder sagen nichts darüber aus, wer wirklich dahintersteckt. Skepsis gegenüber unbekannten Profilen ist deshalb immer angebracht.",
+        success: "Ein fester Ablauf schützt davor, sich unter Druck zu einer schnellen Entscheidung drängen zu lassen."
       }
     },
     "Das merke ich mir": {
@@ -745,11 +757,15 @@ const CONTENT_VERSIONS = {
           { text: "Wenn ein Video dir Angst macht oder Druck aufbaut, mach Stopp und mach nichts Gefährliches nach." },
           { text: "Zeig das Video bei Bedarf einer vertrauten Person und mach eine Pause." }
         ],
-        bullets: ["Das Video stoppen.", "Nichts nachmachen.", "Eine Pause machen.", "Unterstützung holen."]
+        bullets: ["Das Video stoppen.", "Nichts nachmachen.", "Eine Pause machen.", "Unterstützung holen."],
+        warning: "Manche Videos zeigen gefährliche Mutproben. Wenn du das nachmachst, kannst du dir wehtun.",
+        success: "Wenn du das Video stoppst und eine Pause machst, schützt du dich vor Gefahr."
       },
       standard: {
         text: [{ text: "Wenn dir ein Video Angst macht oder Druck aufbaut, stopp es und mach nichts nach, was gefährlich ist. Zeig es bei Bedarf einer Person, der du vertraust, und mach eine Pause." }],
-        bullets: []
+        bullets: [],
+        warning: "Videos mit gefährlichen Mutproben verbreiten sich schnell, weil sie viele Klicks bekommen – das sagt aber nichts über ihre Sicherheit aus. Nachahmung kann ernsthafte Folgen haben.",
+        success: "Ein Video zu stoppen und innezuhalten ist der sicherste Weg, sich vor riskanten Nachahmungen zu schützen."
       }
     },
     "Das merke ich mir": {
@@ -830,11 +846,15 @@ const CONTENT_VERSIONS = {
           { text: "Wenn dich eine Nachricht unter Druck setzt, sende kein Bild und reagiere nicht vorschnell." },
           { text: "Zeig die Nachricht einer Person, der du vertraust, und hol dir Unterstützung." }
         ],
-        bullets: ["Nein sagen.", "Kein Bild senden.", "Die Nachricht zeigen.", "Unterstützung holen."]
+        bullets: ["Nein sagen.", "Kein Bild senden.", "Die Nachricht zeigen.", "Unterstützung holen."],
+        warning: "Ein Bild, das du einmal gesendet hast, kannst du nicht mehr zurückholen – auch wenn es danach gelöscht wird.",
+        success: "Nein zu sagen ist immer richtig, auch wenn jemand Druck macht."
       },
       standard: {
         text: [{ text: "Wenn dich eine Nachricht unter Druck setzt, sende kein Bild und reagiere nicht vorschnell. Zeig die Nachricht einer Person, der du vertraust, und hol dir Unterstützung." }],
-        bullets: []
+        bullets: [],
+        warning: "Ein einmal versendetes Bild lässt sich nicht mehr zurückholen, selbst wenn es scheinbar nach kurzer Zeit verschwindet – es kann vorher gespeichert worden sein.",
+        success: "Nein zu sagen ist immer eine legitime Antwort – auch und gerade dann, wenn Druck aufgebaut wird."
       }
     },
     "Das merke ich mir": {
@@ -944,11 +964,15 @@ const CONTENT_VERSIONS = {
           { text: "Ob gefährlicher Trend, gemeiner Kommentar oder Druck – halte inne und mach nichts Gefährliches nach." },
           { text: "Gib keine privaten Daten preis und zeig die Nachricht oder das Video einer vertrauten Person." }
         ],
-        bullets: ["Nichts Gefährliches nachmachen.", "Keine privaten Daten senden.", "Eine Pause machen.", "Unterstützung holen."]
+        bullets: ["Nichts Gefährliches nachmachen.", "Keine privaten Daten senden.", "Eine Pause machen.", "Unterstützung holen."],
+        warning: "Ein Trend kann gefährlich sein, auch wenn ihn schon viele andere mitgemacht haben.",
+        success: "Wenn du eine Pause machst und nichts Gefährliches nachmachst, schützt du dich."
       },
       standard: {
         text: [{ text: "Ob gefährlicher Trend, gemeiner Kommentar oder Druck – halte inne und mach nichts Gefährliches nach. Gib keine privaten Daten preis, mach eine Pause und zeig die Nachricht oder das Video einer Person, der du vertraust." }],
-        bullets: []
+        bullets: [],
+        warning: "Die Verbreitung eines Trends sagt nichts über seine Sicherheit aus – viele Mitmachende bedeuten nicht, dass etwas ungefährlich ist.",
+        success: "Innezuhalten und riskante Trends nicht nachzumachen ist der zuverlässigste Schutz."
       }
     },
     "Das merke ich mir": {
@@ -1189,11 +1213,15 @@ const CONTENT_VERSIONS = {
           { text: "Du darfst KI ruhig benutzen, denn sie kann dir bei vielem helfen." },
           { text: "Damit du dabei sicher bist, helfen dir die folgenden Regeln." }
         ],
-        bullets: ["Ich weiß: KI ist ein Programm.", "Ich prüfe wichtige Antworten.", "Ich gebe keine privaten Daten ein.", "Bei Gesundheit und Geld frage ich Menschen.", "Bei Unsicherheit hole ich Hilfe."]
+        bullets: ["Ich weiß: KI ist ein Programm.", "Ich prüfe wichtige Antworten.", "Ich gebe keine privaten Daten ein.", "Bei Gesundheit und Geld frage ich Menschen.", "Bei Unsicherheit hole ich Hilfe."],
+        warning: "Eine KI kann sich irren, auch wenn die Antwort sehr sicher klingt.",
+        success: "Wenn du wichtige Antworten prüfst, schützt du dich vor Fehlern."
       },
       standard: {
         text: [{ text: "Du darfst KI ruhig nutzen – sie kann dir bei vielem helfen. Behalte dabei einige Regeln im Kopf: Denk daran, dass KI ein Programm ist, prüfe wichtige Antworten, gib keine privaten Daten ein, frag bei Gesundheit und Geld zusätzlich Menschen und hol dir bei Unsicherheit Unterstützung." }],
-        bullets: []
+        bullets: [],
+        warning: "KI-Antworten können überzeugend klingen und trotzdem falsch sein – der sichere Tonfall ist kein Beleg für Richtigkeit.",
+        success: "Wichtige KI-Antworten zusätzlich zu prüfen bewahrt dich vor folgenschweren Fehlern."
       }
     },
     "Das merke ich mir": {
@@ -1317,11 +1345,15 @@ const CONTENT_VERSIONS = {
           { text: "Du kannst dich gut vor Fakes schützen." },
           { text: "Die folgenden Regeln helfen dir dabei." }
         ],
-        bullets: ["Ich glaube nicht alles sofort.", "Ich prüfe: Wer schreibt das? Steht das auch woanders?", "Bei starken Gefühlen mache ich langsam.", "Im Zweifel teile ich nicht.", "Ich kann eine Person fragen, der ich vertraue."]
+        bullets: ["Ich glaube nicht alles sofort.", "Ich prüfe: Wer schreibt das? Steht das auch woanders?", "Bei starken Gefühlen mache ich langsam.", "Im Zweifel teile ich nicht.", "Ich kann eine Person fragen, der ich vertraue."],
+        warning: "Wenn eine Nachricht starke Gefühle wie Angst oder Wut in dir auslöst, willst du sie oft schnell teilen. Genau dann ist besondere Vorsicht wichtig.",
+        success: "Wenn du im Zweifel nicht teilst, schützt du dich und andere Menschen."
       },
       standard: {
         text: [{ text: "Du kannst dich gut schützen: Glaub nicht alles sofort, prüfe Absender und ob seriöse Quellen dasselbe berichten, und werde besonders aufmerksam, wenn eine Meldung starke Gefühle auslöst. Teile im Zweifel nicht und frag bei Unsicherheit eine Person, der du vertraust." }],
-        bullets: []
+        bullets: [],
+        warning: "Nachrichten, die starke Gefühle wie Angst oder Empörung auslösen, verleiten dazu, sie ungeprüft weiterzuleiten – genau das machen sich Falschmeldungen gezielt zunutze.",
+        success: "Im Zweifel nicht zu teilen schützt nicht nur dich, sondern verhindert auch, dass sich Falschmeldungen weiter verbreiten."
       }
     },
     "Das merke ich mir": {
@@ -1630,11 +1662,15 @@ const CONTENT_VERSIONS = {
           { text: "Mit ein paar einfachen Regeln kannst du sicher im Internet einkaufen." },
           { text: "Die folgenden Punkte helfen dir dabei." }
         ],
-        bullets: ["Ich kaufe bei Shops, die ich kenne.", "Ich prüfe Preis und Impressum.", "Ich zahle möglichst auf Rechnung.", "PIN und TAN bleiben geheim.", "Ich lasse mich nicht hetzen.", "Vor dem Kaufen kann ich eine Person fragen."]
+        bullets: ["Ich kaufe bei Shops, die ich kenne.", "Ich prüfe Preis und Impressum.", "Ich zahle möglichst auf Rechnung.", "PIN und TAN bleiben geheim.", "Ich lasse mich nicht hetzen.", "Vor dem Kaufen kann ich eine Person fragen."],
+        warning: "Ein sehr niedriger Preis oder ein Countdown soll dich zur Eile treiben, damit du nicht mehr nachdenkst.",
+        success: "Wenn du dich nicht hetzen lässt, kaufst du sicherer ein."
       },
       standard: {
         text: [{ text: "Sicheres Einkaufen gelingt mit einfachen Regeln: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim, lass dich nicht zu schnellen Käufen drängen und frag im Zweifel vor dem Kauf eine Vertrauensperson." }],
-        bullets: []
+        bullets: [],
+        warning: "Ungewöhnlich niedrige Preise oder ein Countdown sollen Zeitdruck erzeugen, damit weniger genau geprüft wird – ein typisches Warnzeichen unseriöser Shops.",
+        success: "Sich nicht unter Zeitdruck setzen zu lassen ist einer der wirksamsten Schutzmechanismen beim Online-Einkauf."
       }
     },
     "Das merke ich mir": {
