@@ -295,10 +295,14 @@ function alltagReflect(kind) {
   if (output) output.textContent = kind === 'together' ? t.togetherHint : t.realHint;
 }
 function renderAlltag(route) {
-  const [, id, requestedStep, guide] = route.split(':');
-  if (!Object.prototype.hasOwnProperty.call(ALLTAG_SCENES, id)) return renderScenarioChooser();
+  const [, requestedId, requestedStep, guide] = route.split(':');
+  /* Die Route kommt aus der Adresszeile. Weiter verwendet werden nur die
+     Schlüssel aus den festen Listen, nie der eingetippte Wert selbst –
+     id und stepId stehen unten ungeschützt in onclick-Attributen. */
+  const id = Object.keys(ALLTAG_SCENES).find(key => key === requestedId);
+  if (!id) return renderScenarioChooser();
   const scene = ALLTAG_SCENES[id];
-  const stepId = requestedStep === 'karte' || Object.prototype.hasOwnProperty.call(scene.steps, requestedStep) ? requestedStep : 'start';
+  const stepId = ['karte', ...Object.keys(scene.steps)].find(key => key === requestedStep) || 'start';
   const isCard = stepId === 'karte';
   const step = isCard ? scene.steps.done : scene.steps[stepId];
   const demo = guide === 'zeigen' && !isCard;
