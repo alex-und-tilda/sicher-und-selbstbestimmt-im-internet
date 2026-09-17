@@ -1072,7 +1072,7 @@ const ROLE_FIGURES = {
   erklaeren:  { file: "alex-tilda-erklaeren.webp",  alt: "Tilda erklärt dir das Thema." },
   achtung:    { file: "alex-tilda-achtung.webp",    alt: "Tilda hebt die Hand. Achtung: Hier ist Vorsicht wichtig." },
   hilfe:      { file: "alex-tilda-hilfe.webp",      alt: "Alex zeigt dir, wo du Hilfe findest." },
-  erfolg:     { file: "alex-tilda-erfolg.webp",     alt: "Alex und Tilda freuen sich mit dir. Gut gemacht." },
+  erfolg:     { file: "alex-tilda-erfolg.webp",     alt: "Alex und Tilda freuen sich mit dir." },
   nachdenken: { file: "alex-tilda-nachdenken.webp", alt: "Tilda überlegt. Was weißt du schon?" },
   winken:         { file: "alex-tilda-winken.png",         alt: "Alex und Tilda lernen zusammen. Hier beginnt alles." },
   themen:         { file: "alex-tilda-themen.png",         alt: "Tilda zeigt auf die Themen. Such dir etwas aus." },
@@ -1465,7 +1465,7 @@ const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
    Ohne diesen Eintrag war es fuer hoerende Nutzung unsichtbar –
    ausgerechnet das Angebot, das sich an die Menschen richtet, die
    aufs Vorlesen angewiesen sind. */
-const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button";
+const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -1519,7 +1519,10 @@ function readCurrentPage(rate) {
            Kasten hat overflow:hidden – die Kinder behalten dadurch eine
            Groesse, obwohl sie niemand sieht. Nur auf <details open> pruefen. */
         if (el.closest(".companion-panel")) return false;
-        if (el.closest("details:not([open])")) return false;
+        /* Die Überschrift (summary) eines zugeklappten Hilfe-Blocks bleibt
+           lesbar – sonst erfährt niemand, dass es dort Hilfe gibt. */
+        const closedDetails = el.closest("details:not([open])");
+        if (closedDetails && !(el.tagName === "SUMMARY" && el.parentElement === closedDetails)) return false;
         if (el.closest(".is-hidden, [hidden]")) return false;
         if (!isOption && !isKarte && !isAktion && el.closest(".reading-toolbar, nav, footer, button")) return false;
         /* Text INNERHALB einer Karte nicht zusaetzlich einzeln lesen */
@@ -1568,6 +1571,10 @@ function readCurrentPage(rate) {
     els.push({ pseudoText: "Du kannst jetzt auf " + rueckmeldeKnoepfe[0] + " tippen."
       + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("")
       + hilfeSatz });
+  } else if (root && root.classList.contains("alltag-page")) {
+    const next = root.querySelector(".nav-button.primary");
+    if (next) els.push({ pseudoText: "Du kannst jetzt auf " + cleanSpeechText(next.textContent) + " tippen." });
+    else if (root.querySelector(".alltag-choice")) els.push({ pseudoText: "Wähle eine Antwort. Du kannst dir auch Hilfe anzeigen lassen." });
   } else if (nextButton && !nextButton.disabled) {
     els.push({ pseudoText: backButton && !backButton.disabled
       ? "Du kannst jetzt Weiter drücken. Oder Zurück."
@@ -1912,6 +1919,8 @@ function renderLegalFooter() {
 
 function chooseLanguage(level) {
   setLanguageLevel(level);
+  /* Sprachwechsel mitten in einer Alltags-Übung: im selben Schritt bleiben. */
+  if (window.location.hash.startsWith("#alltag:")) return renderAlltag(window.location.hash.slice(1));
   /* Im Erststart geht es nach der Sprache direkt zu den Themen (F3).
      Vorwissen und Vorlesen werden nicht mehr vorab gefragt, sondern erst
      hinter dem ersten Thema (Pruefbericht B10) - dann kann die Person die
@@ -1926,6 +1935,7 @@ function chooseLanguage(level) {
 
 /* Rückweg von der Sprach-Wahl OHNE etwas ändern zu müssen (kein Wahl-Zwang) */
 function languageChoiceBack() {
+  if (window.location.hash.startsWith("#alltag:")) return renderAlltag(window.location.hash.slice(1));
   if (activeTab === "einstellungen") return renderSettingsPage();
   if (currentTopicId && getTopicById(currentTopicId)) return renderTopicChoice(currentTopicId);
   if (languageChosen) return renderMenu();
@@ -2881,7 +2891,7 @@ function answerDailyQuestion(index) {
     : (falschFeedback(daily.q, index) || "Das war nicht richtig. Das macht nichts.");
   playSound(isCorrect ? "correct" : "wrong");
   box.innerHTML = `
-        <h3>${isCorrect ? "✓ Richtig! Gut gemacht." : "Das macht nichts."}</h3>
+        <h3>${isCorrect ? "✓ " + RUECKMELDUNG.passtAnsage : "Das macht nichts."}</h3>
         <p class="daily-question-text">${escapeHtml(feedback)}</p>
         ${isCorrect ? "" : `<button type="button" class="review-chip" style="${getTopicColorStyle(daily.topic.id)}" onclick="renderTopicChoice('${escapeHtml(daily.topic.id)}')"><span aria-hidden="true">${getIconHtml(daily.topic.icon || "start")}</span><span>${escapeHtml(daily.topic.title)} nochmal ansehen</span></button>`}
       `;
@@ -4042,6 +4052,13 @@ function renderTopicChoice(topicId) {
         const uebung = hasScenario(topic.id)
           ? laterChip("Übungs-Handy", `startScenario('${escapeHtml(topic.id)}')`) : "";
         const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`);
+        /* Alltags-Übung (alltag-de.js), nur für Themen mit eigener Übung. */
+        const alltagScene = (typeof ALLTAG_SCENES !== "undefined")
+          ? Object.entries(ALLTAG_SCENES).find(([, scene]) => scene && scene.topic === topic.id)
+          : null;
+        const alltagUebung = alltagScene
+          ? laterChip("Im Alltag üben", `alltagGo('${escapeHtml(alltagScene[0])}')`)
+          : "";
 
         /* Mengen-Wahl beziffern (Prüfbericht B8): „Kurz" und „Mehr" allein
            sagen nicht, worauf man sich einlässt – Kurz ist rund ein Viertel
@@ -4069,7 +4086,7 @@ function renderTopicChoice(topicId) {
             <div class="later-row">
               ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
               ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
-              ${merkChip}${uebung}${training}
+              ${merkChip}${alltagUebung}${uebung}${training}
             </div>`;
         }
         if (done) {
@@ -4079,7 +4096,7 @@ function renderTopicChoice(topicId) {
             <p class="later-title">Oder:</p>
             <div class="later-row">
               ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
-              ${merkChip}${uebung}${training}
+              ${merkChip}${alltagUebung}${uebung}${training}
             </div>`;
         }
         return `
@@ -4088,7 +4105,7 @@ function renderTopicChoice(topicId) {
           <p class="later-title">Für später:</p>
           <div class="later-row">
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
-            ${merkChip}${uebung}${training}
+            ${merkChip}${alltagUebung}${uebung}${training}
           </div>`;
       })()}
 
@@ -4497,6 +4514,31 @@ function buildRememberBox(titel, text, opts) {
    docs/gesamtlernprinzip-stationen.md §1). Bewusst klein: ein Wort und ein
    Bild-Zeichen, kein Satz, keine Erklärung. Nur Etikett — die Erklärung
    steht auf der Startseite („So lernst du."). §18.8: prüfen lassen. */
+/* Rückmeldungs-Wörter zentral (15.09.2026, §13: leicht änderbare Etiketten).
+   Ermutigend, aber erwachsen (§4): Die Rückmeldung sagt, WAS gepasst hat,
+   statt pauschal zu loben („Super gemacht!", „Das war toll."). Eine falsche
+   Antwort heißt nicht mehr „Fast!" – das stimmte oft nicht und lenkte von der
+   Erklärung ab. Kein Konjunktiv mehr („Richtig wäre", §5).
+   Alle Wörter stehen auf der Prüfliste für die Prüfgruppe (§18.8). */
+const RUECKMELDUNG = {
+  passtTitel:      "Diese Antwort passt",
+  nochNichtTitel:  "Schau dir die Erklärung an",
+  passtAnsage:     "Diese Antwort passt.",
+  nochNichtAnsage: "Diese Antwort passt noch nicht. Schau dir die Erklärung an.",
+  entscheidungGut: "Diese Entscheidung schützt dich.",
+  passendeAntwort: "Die passende Antwort ist:",
+  gelernt:         "Das hast du gelernt:",
+  themaGeschafft:  "Thema geschafft",
+  deinThema:       "Dein Thema:",
+  themaText:       "Du hast alle Schritte gemacht. Du kannst sie jederzeit wiederholen.",
+  eineSache:       "Eine Sache für heute",
+  quizAlle:        "Du hast alle Fragen richtig beantwortet.",
+  quizNochmal:     "Du kannst die Fragen noch einmal üben. Die Erklärungen helfen dir dabei.",
+  uebenViel:       "Du hast schon viel sicher erkannt. Jedes Üben macht dich sicherer.",
+  uebenSchwer:     "Gut, dass du geübt hast. Das ist schwer. Du kannst es gleich noch einmal machen.",
+  urkunde:         "Du hast durchgehalten."
+};
+
 function stationBadge(key) {
   const map = {
     merken:  { icon: "🧠", wort: "Merken" },
@@ -5132,7 +5174,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   content.innerHTML = `
     ${buildToolRow()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
-      <h2>${isCorrect ? "Genau richtig!" : "Fast!"}</h2>
+      <h2>${isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
@@ -5166,7 +5208,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
       ${!isCorrect ? buildTaskHelpBox(taskHint(practice, "rueckmeldung")) : ""}
     </article>
   `;
-  announce(isCorrect ? "Genau richtig!" : "Fast! Das war noch nicht ganz richtig.");
+  announce(isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtAnsage);
   focusContent();
   renderLegalFooter();
 }
@@ -5312,7 +5354,7 @@ function buildGoalsDone(topic) {
   if (!ziele.length) return "";
   return `
     <div class="learning-goals-box learning-goals-box--done">
-      <h3>Das hast du gelernt:</h3>
+      <h3>${RUECKMELDUNG.gelernt}</h3>
       <ul class="learning-goals-list goals-done-list">
         ${ziele.map(z => `<li><span class="goal-check" aria-hidden="true">✓</span>${escapeHtml(z)}</li>`).join("")}
       </ul>
@@ -5416,20 +5458,20 @@ function renderCompletionPage(topicId) {
             <img src="${pictoSrc('pikto-done')}" alt="" width="120" height="120">
           </div>
 
-          <h2 class="einfach-done-title">Super gemacht!</h2>
+          <h2 class="einfach-done-title">${RUECKMELDUNG.themaGeschafft}</h2>
           ${roleFigure("erfolg")}
 
-          <p class="einfach-done-text">Du hast gelernt:</p>
+          <p class="einfach-done-text">${RUECKMELDUNG.deinThema}</p>
           <p class="einfach-done-topic"><strong>${escapeHtml(topic.title)}</strong></p>
 
-          <p class="einfach-done-praise">Das war toll.<br>Du hast gut aufgepasst.</p>
+          <p class="einfach-done-praise">${RUECKMELDUNG.themaText}</p>
 
           ${buildGoalsDone(topic)}
 
           ${topic.transfer ? `
           ${stationBadge("handeln")}
           <div class="access-box remember remember-box">
-            <h3>DEINE eine Sache für heute</h3>
+            <h3>${RUECKMELDUNG.eineSache}</h3>
             <p class="remember-text">${escapeHtml(topic.transfer)}</p>
           </div>` : ""}
 
@@ -5502,7 +5544,7 @@ function renderCompletionPage(topicId) {
         ${topic.transfer ? `
         ${stationBadge("handeln")}
         <div class="access-box remember remember-box">
-          <h3>DEINE eine Sache für heute</h3>
+          <h3>${RUECKMELDUNG.eineSache}</h3>
           <p class="remember-text">${escapeHtml(topic.transfer)}</p>
         </div>` : ""}
 
@@ -5625,7 +5667,7 @@ function renderEinfachQuizFeedback(optionIndex, isCorrect) {
   playSound(isCorrect ? "correct" : "wrong");
 
   const feedbackText = isCorrect
-    ? (q.feedbackCorrect || "Genau richtig!")
+    ? (q.feedbackCorrect || RUECKMELDUNG.passtAnsage)
     : (falschFeedback(q, optionIndex) || "Das war leider falsch. Beim nächsten Mal klappt es besser.");
 
   setProgressVisible(false);
@@ -5667,16 +5709,10 @@ function renderEinfachQuizResult() {
   showNav(false, false);
 
   const allCorrect = quizScore === total;
-  const emoji = allCorrect ? "🌟" : quizScore >= Math.ceil(total / 2) ? "👍" : "💪";
-  const praise = allCorrect
-    ? "Alle Fragen richtig. Das war super!"
-    : quizScore >= Math.ceil(total / 2)
-      ? "Das war schon sehr gut!"
-      : "Du lernst. Das ist toll!";
+  const praise = allCorrect ? RUECKMELDUNG.quizAlle : RUECKMELDUNG.quizNochmal;
 
   content.innerHTML = `
     <article class="card completion-card--einfach" style="${getTopicColorStyle(topic.id)}" data-readable="true">
-      <div class="einfach-quiz-result-emoji" aria-hidden="true">${emoji}</div>
       <h2 class="einfach-done-title">${quizScore} von ${total} richtig</h2>
       <p class="einfach-done-praise">${escapeHtml(praise)}</p>
       <div class="einfach-done-actions">
@@ -5784,7 +5820,7 @@ function renderQuizFeedbackPage(index) {
   content.innerHTML = `
     ${buildToolRow()}
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
-      <h2>${isCorrect ? "Genau richtig!" : "Fast!"}</h2>
+      <h2>${isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
@@ -5810,7 +5846,7 @@ function renderQuizFeedbackPage(index) {
       ${!isCorrect ? buildTaskHelpBox(taskHint(q, "quiz")) : ""}
     </article>
   `;
-  announce(isCorrect ? "Genau richtig!" : "Fast! Das war noch nicht ganz richtig.");
+  announce(isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtAnsage);
   focusContent();
   renderLegalFooter();
 }
@@ -6030,8 +6066,8 @@ function renderBigQuizFeedback(selectedIndex) {
 
   const feedbackClass = isCorrect ? "feedback-correct" : "feedback-wrong";
   const feedbackText  = isCorrect
-    ? "✓ Genau richtig!"
-    : `✗ Fast! Richtig wäre: „${escapeHtml(q.answers[q.correct] || "")}"`;
+    ? "✓ " + RUECKMELDUNG.passtAnsage
+    : `${RUECKMELDUNG.passendeAntwort} ${escapeHtml(q.answers[q.correct] || "")}`;
 
   const isLast = bigQuizIndex >= bigQuizQuestions.length - 1;
 
@@ -6301,7 +6337,7 @@ function answerTraining(index) {
   });
 
   const text = richtig
-    ? (frage.feedbackCorrect || "Das war sicher. Gut gemacht.")
+    ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
 
   /* Deine Karte: das Postfach zahlt jetzt genauso ein wie das Übungs-Handy.
@@ -6359,10 +6395,10 @@ function renderTrainingResult() {
   setOrientation("Geschafft! Du hast im Trainings-Postfach geübt.");
 
   const lob = postfachRichtig === total
-    ? "Alle richtig erkannt. Das war stark!"
+    ? "Du hast alles sicher erkannt."
     : postfachRichtig >= Math.ceil(total / 2)
-      ? "Das war schon sehr gut. Jedes Üben macht dich sicherer."
-      : "Gut, dass du geübt hast. Das ist schwer. Du kannst es gleich noch einmal machen.";
+      ? RUECKMELDUNG.uebenViel
+      : RUECKMELDUNG.uebenSchwer;
 
   const themen = [];
   postfachListe.forEach(function (e) { if (themen.indexOf(e.titel) === -1) themen.push(e.titel); });
@@ -6582,6 +6618,8 @@ function buildScenarioScreen(scn, bis) {
    Vorlese-Knopf sie als Ganzes vorliest (KARTEN_SELEKTOR). */
 function renderScenarioChooser() {
   stopReading();
+  currentTopicId = null;
+  setActiveTab("lernweg");
   setProgressVisible(false);
   setBottomNavVisible(false);
   showNav(false, false);
@@ -6617,6 +6655,7 @@ function renderScenarioChooser() {
       <p>Hier übst du wie auf einem Handy.</p>
       <p>Du siehst Nachrichten, Einstellungen oder einen Shop.</p>
       <p>Du entscheidest. Nichts davon ist echt.</p>
+      ${typeof buildAlltagChoices === "function" ? buildAlltagChoices() : ""}
       <h3>Wähle ein Thema</h3>
       <div class="action-grid">${karten}</div>
       <div class="certificate-actions">
@@ -6785,7 +6824,7 @@ function answerScenario(index) {
   });
 
   const text = richtig
-    ? (frage.feedbackCorrect || "Das war sicher. Gut gemacht.")
+    ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
   const regelHinweis = richtig ? regelHinweisHtml(frage.remember, scenarioTopicId) : "";
@@ -6859,10 +6898,10 @@ function renderScenarioResult() {
   setOrientation(`Geschafft! Du hast im Übungs-Handy geübt: ${topic.title}.`);
 
   const lob = scenarioRight === total
-    ? "Alle Entscheidungen sicher getroffen. Das war stark!"
+    ? "Du hast alle Entscheidungen sicher getroffen."
     : scenarioRight >= Math.ceil(total / 2)
-      ? "Das war schon sehr gut. Jedes Üben macht dich sicherer."
-      : "Gut, dass du geübt hast. Das ist schwer. Du kannst es gleich noch einmal machen.";
+      ? RUECKMELDUNG.uebenViel
+      : RUECKMELDUNG.uebenSchwer;
 
   /* Hinweis auf die naechste Runde – als Angebot, nie als Druck. */
   const naechsteText = !mehrereRunden ? ""
@@ -6958,7 +6997,7 @@ function renderCertificate(topicId, score, total) {
         <p class="certificate-text">Du hast das Thema</p>
         <p class="certificate-topic">${escapeHtml(topic.title)}</p>
         <p class="certificate-text">gelernt und geübt.</p>
-        <p class="certificate-warm">Du hast durchgehalten. Das ist wirklich toll!</p>
+        <p class="certificate-warm">${RUECKMELDUNG.urkunde}</p>
 
         ${hasResult ? `<p class="certificate-result">Quiz-Ergebnis: ${score} von ${total} Fragen richtig.</p>` : ""}
 
@@ -7192,6 +7231,7 @@ function handleHash() {
     if (hash === "training") return startTrainingInbox();
     if (hash === "merk-alle") return renderAllMemoryCards();
     if (hash === "uebung") return renderScenarioChooser();
+    if (hash.startsWith("alltag:")) return renderAlltag(hash);
 
     /* Alte Form ohne Präfix – bleibt für schon gedruckte QR-Karten gültig. */
     const [topicId, action] = hash.split(":");

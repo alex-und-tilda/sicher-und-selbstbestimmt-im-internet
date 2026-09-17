@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-13l";
+const CACHE_VERSION = "v2026-15d";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -25,6 +25,7 @@ const PRECACHE_URLS = [
   "./regeln-de.js",
   "./uebungen-de.js",
   "./ketten-de.js",
+  "./alltag-de.js",
   "./favicon.svg",
   "./manifest.webmanifest",
   "./404.html",
@@ -228,11 +229,16 @@ self.addEventListener("install", (event) => {
         (u) => u.includes("assets/fonts/")
       );
 
-      return cache.addAll(required).then(() => {
+      /* cache: "reload" holt jede Datei frisch vom Server. Ohne das nimmt
+         addAll Kopien aus dem HTTP-Zwischenspeicher des Browsers (GitHub
+         Pages: bis zu 10 Minuten) – dann liegen im neuen Cache alte Dateien,
+         und das Update kommt nie an (§16.6). */
+      const frisch = (u) => new Request(u, { cache: "reload" });
+      return cache.addAll(required.map(frisch)).then(() => {
         /* Schriften einzeln cachen, Fehler ignorieren */
         return Promise.allSettled(
           optional.map((url) =>
-            cache.add(url).catch(() => { /* Datei fehlt noch – ok */ })
+            cache.add(frisch(url)).catch(() => { /* Datei fehlt noch – ok */ })
           )
         );
       });
