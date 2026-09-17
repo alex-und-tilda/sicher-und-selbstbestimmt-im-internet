@@ -318,7 +318,7 @@ Die Arbeitsordner sind Git-Worktrees neben dem bisherigen Projektordner. Jeder h
 
 ---
 
-9. **Handlungs-Ketten ausrollen?** (offen seit 11.09.2026) Der Pilot liegt in einem Thema. 10 weitere Themen haben eine „Was kann ich tun?"-Lektion mit 4–6 `bullets`, die sich genauso umbauen ließe; `betrug` hat gar keine und bräuchte zuerst eine. Entschieden wird nach der Prüfgruppe (§18.8) — nicht vorher. Offen ist außerdem, ob später **Geräte-Abläufe** dazukommen („so blockierst du jemanden"). Wenn ja, dann **nicht** mit echten Marken-Bildschirmen (veraltet binnen Monaten und widerspricht dem Grundsatz aus `szenarien-de.js`: „Alles hier ist erfunden"), sondern im erfundenen Bildschirm des Übungs-Handys.
+9. **Handlungs-Ketten ausrollen?** (offen seit 11.09.2026) Der Pilot liegt in einem Thema. 10 weitere Themen haben eine „Was kann ich tun?"-Lektion mit 4–6 `bullets`, die sich genauso umbauen ließe; `betrug` seit 15.09.2026 eingeschlossen, seit die Lektion dort nachgerüstet wurde. Entschieden wird nach der Prüfgruppe (§18.8) — nicht vorher. Offen ist außerdem, ob später **Geräte-Abläufe** dazukommen („so blockierst du jemanden"). Wenn ja, dann **nicht** mit echten Marken-Bildschirmen (veraltet binnen Monaten und widerspricht dem Grundsatz aus `szenarien-de.js`: „Alles hier ist erfunden"), sondern im erfundenen Bildschirm des Übungs-Handys.
 
 ---
 
