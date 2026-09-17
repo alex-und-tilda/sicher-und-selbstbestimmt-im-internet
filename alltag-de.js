@@ -20,6 +20,10 @@ const ALLTAG_TEXT = {
     togetherHint: 'Bitte eine Person um Hilfe. Du entscheidest weiter selbst. Die Person kann dir die Schritte zeigen.',
     cardIntro: 'Das habe ich hier geübt. Auf meinem Handy kann ich weiter üben.',
     start: 'Übung starten', all: 'Alle Übungen', topic: 'Mehr zum Thema',
+    /* Vergleichs-Entwürfe A/B (16.09.2026) – Etiketten für die Prüfgruppe (§13, §18.8) */
+    taskChoice: 'Wähle eine Antwort', taskAction: 'Das ist deine Aufgabe', yourAnswer: 'Deine Antwort',
+    support: 'Hilfe zur Übung', ways: 'Zurück und andere Seiten', nextScene: 'Nächste Übung',
+    situation: 'Die Situation', toTask: 'Zur Aufgabe', changeAnswer: 'Andere Antwort wählen', phone: 'Übungs-Handy',
   },
   einfach: {
     title: 'Im Alltag üben', intro: 'Probiere Entscheidungen aus deinem Alltag aus. Du kannst jeden Schritt wiederholen.',
@@ -36,6 +40,9 @@ const ALLTAG_TEXT = {
     togetherHint: 'Bitte eine Person, dir die Schritte zu zeigen. Du entscheidest, was auf deinem Handy geändert wird.',
     cardIntro: 'Diese Handlung habe ich hier geübt. Die Merkkarte hilft mir beim Ausprobieren auf meinem Handy.',
     start: 'Übung starten', all: 'Alle Übungen', topic: 'Mehr zum Thema',
+    taskChoice: 'Wähle eine Antwort', taskAction: 'Das ist deine Aufgabe', yourAnswer: 'Deine Antwort',
+    support: 'Hilfe zur Übung', ways: 'Zurück und andere Seiten', nextScene: 'Nächste Übung',
+    situation: 'Die Situation', toTask: 'Zur Aufgabe', changeAnswer: 'Andere Antwort wählen', phone: 'Übungs-Handy',
   },
   standard: {
     title: 'Im Alltag üben', intro: 'Erprobe Entscheidungen aus deinem digitalen Alltag. Alle Schritte lassen sich wiederholen.',
@@ -52,8 +59,24 @@ const ALLTAG_TEXT = {
     togetherHint: 'Bitte eine Person, dir die Schritte zu zeigen. Die Entscheidung über Änderungen an deinem Handy bleibt bei dir.',
     cardIntro: 'Diesen Ablauf habe ich in der Simulation erprobt. Die Karte unterstützt mich beim Übertragen auf mein eigenes Handy.',
     start: 'Übung starten', all: 'Alle Übungen', topic: 'Mehr zum Thema',
+    taskChoice: 'Wähle eine Antwort', taskAction: 'Das ist deine Aufgabe', yourAnswer: 'Deine Antwort',
+    support: 'Hilfe zur Übung', ways: 'Zurück und andere Seiten', nextScene: 'Nächste Übung',
+    situation: 'Die Situation', toTask: 'Zur Aufgabe', changeAnswer: 'Andere Antwort wählen', phone: 'Übungs-Handy',
   }
 };
+
+/* Vergleichs-Vorschau 16.09.2026 (nur lokal, für Beobachtung mit Testpersonen):
+   Die bisherige Fassung bleibt Standard. Nur mit ?variante=a oder ?variante=b
+   in der Adresse und nur für diese Übungen erscheint ein Entwurf.
+   A = klarere Gruppierung, B = zusätzlich Lernphasen nacheinander.
+   Nichts wird gespeichert; nach der Entscheidung wieder entfernen. */
+const ALLTAG_VARIANT_SCENES = ['kontakt'];
+function alltagVariant(id) {
+  if (!ALLTAG_VARIANT_SCENES.includes(id)) return '';
+  let value = '';
+  try { value = new URLSearchParams(window.location.search).get('variante') || ''; } catch (e) { /* nichts tun */ }
+  return value === 'a' || value === 'b' ? value : '';
+}
 
 /* Jeder Knoten hat eine eigene Adresse: Zurück/Vorwärts und Sprachwechsel
    erhalten den Schritt. Die optionale Anleitung nutzt dieselben Handlungen. */
@@ -335,6 +358,15 @@ function renderAlltag(route) {
     <h3>${escapeHtml(t.transfer)}</h3><p>${escapeHtml(id === 'daten' ? privacyText('taskText') : t.note)}</p>
     <p>Alex und Tilda · Sicher und selbstbestimmt im Internet</p></section>`;
 
+  const variant = alltagVariant(id);
+  if (variant && !isCard) {
+    content.innerHTML = buildAlltagVariantPage({ variant, id, scene, stepId, step, demo, t, offeredActions });
+    focusContent();
+    renderLegalFooter();
+    if (alltagPhase.moved) { alltagPhase.moved = false; window.setTimeout(alltagRevealPhase, 0); }
+    return;
+  }
+
   content.innerHTML = `${buildToolRow()}<article class="card alltag-page${isCard ? ' alltag-card-for-print' : ''}" data-readable="true">
     ${isCard ? memory : `
       <p class="alltag-simulation">${escapeHtml(t.simulation)}</p>
@@ -384,6 +416,210 @@ function renderAlltag(route) {
   renderLegalFooter();
 }
 
+
+/* Vergleichs-Entwürfe A und B einer Übungsseite (§3 CLT: Segmentierung, Signaling;
+   §9 COGA: vorhersehbare Positionen). Räumliche Ordnung auf jeder Seite gleich:
+     oben   – Werkzeuge der Plattform: Vorlesen/Pause/Sprache (tool-row, unverändert)
+              und direkt darunter die Hilfe zur Übung
+     Mitte  – die Übung; das Übungs-Handy hat einen eigenen Rahmen, nur simulierte
+              Handlungen stehen darin
+     unten  – Andere Wege, danach das feste Hauptmenü
+   B zeigt zusätzlich Situation, Aufgabe und Rückmeldung nacheinander – auf
+   DERSELBEN Seite, ohne neue Adresse. Der Zustand liegt nur im Arbeitsspeicher.
+   id und stepId sind hier schon gegen die festen Listen aufgelöst (renderAlltag). */
+let alltagPhase = { key: '', phase: '', chosen: -1, moved: false };
+let alltagCurrentRoute = '';
+
+function alltagSetPhase(phase, chosen) {
+  alltagPhase.phase = phase;
+  alltagPhase.chosen = typeof chosen === 'number' ? chosen : -1;
+  alltagPhase.moved = true;
+  if (alltagCurrentRoute) renderAlltag(alltagCurrentRoute);
+}
+/* B: Nach einem Phasenwechsel Fokus auf die neue Phase und so scrollen,
+   dass sie samt nächstem Schritt über der festen Menü-Leiste steht – ohne
+   ihren Anfang nach oben aus dem Bild zu schieben. Sofort, ohne Animation. */
+function alltagRevealPhase() {
+  const target = document.getElementById('alltag-phase-focus');
+  if (!target) return;
+  target.focus({ preventScroll: true });
+  const bar = document.querySelector('.main-tabbar');
+  const barRect = bar ? bar.getBoundingClientRect() : null;
+  const barTop = barRect && barRect.height > 0 && barRect.top < window.innerHeight ? barRect.top : window.innerHeight;
+  const next = (target.closest('.alltag-v-card') && target.closest('.alltag-v-card').querySelector('.alltag-v-next')) || target;
+  /* offsetTop statt getBoundingClientRect: die Karte blendet sanft ein
+     (transform), das würde die Messung mitten in der Bewegung verfälschen. */
+  const docTop = (el) => { let y = 0; for (let n = el; n; n = n.offsetParent) y += n.offsetTop; return y; };
+  const top = docTop(target);
+  const bottom = Math.max(docTop(next) + next.offsetHeight, top + target.offsetHeight);
+  const wanted = Math.min(bottom - barTop + 28, top - 16);
+  window.scrollTo({ top: Math.max(0, wanted), behavior: 'auto' });
+}
+function alltagToggleHelp() {
+  const panel = document.getElementById('alltagHelpPanel');
+  const button = document.querySelector('.alltag-v-help-button');
+  if (!panel || !button) return;
+  const show = panel.hasAttribute('hidden');
+  if (show) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
+  button.setAttribute('aria-expanded', String(show));
+}
+
+function buildAlltagVariantPage({ variant, id, scene, stepId, step, demo, t, offeredActions }) {
+  alltagCurrentRoute = alltagRoute(id, stepId, demo);
+  const key = variant + ':' + alltagCurrentRoute;
+  const actions = step.actions || [];
+  const isFeedback = Object.prototype.hasOwnProperty.call(scene.branchFrom, stepId) || /hint$/i.test(stepId);
+  const isChoice = !step.end && !isFeedback && offeredActions.length > 1;
+  const opensSituation = (stepId === 'start' || stepId === 'transfer') && !demo;
+
+  /* B: Phase je Seite. Beim Wechsel auf eine andere Seite neu beginnen;
+     auf derselben Seite (Drehen, Sprachwechsel, Vorlesen) bleibt sie stehen. */
+  if (alltagPhase.key !== key) {
+    alltagPhase = { key, phase: opensSituation ? 'situation' : 'task', chosen: -1, moved: false };
+  }
+  const phase = variant === 'b' ? alltagPhase.phase : 'task';
+  const chosenAction = phase === 'feedback' ? offeredActions[alltagPhase.chosen] : null;
+
+  const go = (target, extraDemo = demo) => `alltagGo('${id}', '${target}', ${extraDemo})`;
+  const focusMark = variant === 'b' && alltagPhase.moved ? ' id="alltag-phase-focus" tabindex="-1"' : '';
+
+  /* Welche Antwort führte hierher? (Rückmeldung als eigene Seite, Variante A
+     und direkte Adressen) – nur bei Auswahl-Schritten mit mehreren Antworten. */
+  const cameFrom = Object.values(scene.steps)
+    .filter(s => (s.actions || []).length > 1)
+    .flatMap(s => s.actions)
+    .find(a => a[1] === stepId);
+
+  const answerButtons = () => {
+    if (isChoice) {
+      const onclickFor = (a, i) => variant === 'b' ? `alltagSetPhase('feedback', ${i})` : go(a[1]);
+      return `<div class="answers alltag-v-answers" role="group" aria-labelledby="alltag-task-label">${
+        offeredActions.map((a, i) => `<button type="button" class="answer-option" onclick="${onclickFor(a, i)}">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(a[0])}</span></button>`).join('')}</div>`;
+    }
+    if (offeredActions.length === 1) {
+      return `<div class="alltag-v-answers"><button type="button" class="nav-button primary" onclick="${go(offeredActions[0][1])}">${escapeHtml(offeredActions[0][0])}</button></div>`;
+    }
+    return '';
+  };
+
+  /* Das Übungs-Handy: eigener Rahmen mit Beschriftung. `inner` sind die
+     simulierten Handlungen – sie stehen nur hier. */
+  const phone = (inner) => step.screen ? `<div class="alltag-phone" role="group" aria-label="${escapeHtml(t.phone)}: ${escapeHtml(step.screen)}">
+      <p class="alltag-phone-caption">${escapeHtml(t.phone)}</p>
+      <h3>${escapeHtml(step.screen)}</h3>
+      ${step.message ? `<p class="alltag-message">${escapeHtml(alltagVersion(step.message))}</p>` : ''}
+      ${inner}
+    </div>` : inner;
+
+  const label = (text, withId) => `<p class="alltag-v-label"${withId ? ' id="alltag-task-label"' : ''}>${escapeHtml(text)}</p>`;
+  const goal = stepId === 'start' ? `<p class="alltag-goal"><strong>${escapeHtml(t.goal)}:</strong> ${escapeHtml(alltagVersion(scene.goal))}</p>` : '';
+  const guidance = demo && !step.end ? `<div class="alltag-guidance"><strong>${escapeHtml(t.demo)}</strong><p>${escapeHtml(t.guide)}</p>${step.hint ? `<p>${escapeHtml(alltagVersion(step.hint))}</p>` : ''}</div>` : '';
+  const heading = `<h2>${escapeHtml(alltagVersion(step.title))}</h2>`;
+  const text = `<p>${escapeHtml(alltagVersion(step.text))}</p>`;
+  const taskLabel = isChoice && !demo ? t.taskChoice : t.taskAction;
+
+  let body;
+  if (step.end) {
+    body = `${cameFrom ? `<p class="alltag-v-chosen">${escapeHtml(t.yourAnswer)}: <strong>${escapeHtml(cameFrom[0])}</strong></p>` : ''}
+      ${heading}${text}
+      <div class="alltag-v-next">
+        <div class="alltag-v-answers">
+          <button type="button" class="nav-button primary" onclick="alltagGo('${id}', '${demo ? (step.transfer ? 'transfer' : 'start') : step.transfer ? 'karte' : 'transfer'}')">${escapeHtml(demo ? t.own : step.transfer ? t.card : t.apply)}</button>
+          ${!demo && !step.transfer ? `<button type="button" class="nav-button secondary" onclick="alltagGo('${id}', 'karte')">${escapeHtml(t.card)}</button>` : ''}
+        </div>
+      </div>
+      <details class="alltag-help"><summary>${escapeHtml(t.transfer)}</summary><p>${escapeHtml(t.note)}</p></details>
+      <details class="alltag-help"><summary>${escapeHtml(t.reflection)}</summary><div class="alltag-actions">
+        <button type="button" class="nav-button secondary" onclick="alltagReflect('real')">${escapeHtml(t.tryReal)}</button>
+        <button type="button" class="nav-button secondary" onclick="alltagGo('${id}')">${escapeHtml(t.practice)}</button>
+        <button type="button" class="nav-button secondary" onclick="alltagReflect('together')">${escapeHtml(t.together)}</button>
+      </div><p id="alltag-reflection" role="status" aria-live="polite"></p></details>`;
+  } else if (isFeedback) {
+    body = `${cameFrom ? `<p class="alltag-v-chosen">${escapeHtml(t.yourAnswer)}: <strong>${escapeHtml(cameFrom[0])}</strong></p>` : ''}
+      ${heading}${text}
+      <div class="alltag-v-next">${answerButtons()}</div>`;
+  } else if (phase === 'situation') {
+    /* B, Phase 1: nur die Situation. Das Handy zeigt die Nachricht, aber noch
+       keine Handlung; weiter geht es bewusst über die Plattform (außen). */
+    body = `<div${focusMark}>${label(t.situation, true)}</div>${heading}${goal}${text}
+      ${phone('')}
+      <div class="alltag-v-next"><div class="alltag-v-answers"><button type="button" class="nav-button primary" onclick="alltagSetPhase('task')">${escapeHtml(t.toTask)}</button></div></div>`;
+  } else if (phase === 'feedback' && chosenAction) {
+    /* B, Phase 3: Frage bleibt sichtbar, eigene Auswahl steht im Handy,
+       die Rückmeldung darunter, weiter geht es erst nach einem Tipp. */
+    const target = scene.steps[chosenAction[1]] || {};
+    const targetIsFeedback = Object.prototype.hasOwnProperty.call(scene.branchFrom, chosenAction[1]) || /hint$/i.test(chosenAction[1]);
+    const feedbackTitle = targetIsFeedback ? alltagVersion(target.title) : '';
+    const feedbackText = targetIsFeedback ? alltagVersion(target.text) : alltagVersion(step.hint || scene.steps.start.hint);
+    const chosenLine = `<p class="alltag-v-chosen">${escapeHtml(t.yourAnswer)}: <strong>${escapeHtml(chosenAction[0])}</strong></p>`;
+    body = `${opensSituation ? label(t.situation) : ''}${heading}${text}
+      <div class="alltag-v-task">${label(taskLabel, true)}${step.screen ? phone(chosenLine) : chosenLine}</div>
+      <div class="alltag-v-feedback"${focusMark}>
+        ${feedbackTitle ? `<h3>${escapeHtml(feedbackTitle)}</h3>` : ''}
+        <p>${escapeHtml(feedbackText)}</p>
+      </div>
+      <div class="alltag-v-next">
+        <div class="alltag-v-answers">
+          ${targetIsFeedback
+            ? `<button type="button" class="nav-button primary" onclick="alltagSetPhase('task')">${escapeHtml(t.changeAnswer)}</button>`
+            : `<button type="button" class="nav-button primary" onclick="${go(chosenAction[1])}">${escapeHtml(t.next)}</button>
+               <button type="button" class="nav-button secondary" onclick="alltagSetPhase('task')">${escapeHtml(t.changeAnswer)}</button>`}
+        </div>
+      </div>`;
+  } else {
+    /* A, und B Phase 2: Aufgabe. In B steht die Situation als Überschrift
+       darüber, damit nichts aus dem Gedächtnis kommen muss. */
+    const situationLabel = variant === 'b' && opensSituation ? label(t.situation) : '';
+    body = `${cameFrom ? `<p class="alltag-v-chosen">${escapeHtml(t.yourAnswer)}: <strong>${escapeHtml(cameFrom[0])}</strong></p>` : ''}
+      ${situationLabel}${heading}${goal}${text}${guidance}
+      <div class="alltag-v-task"${focusMark}>${label(taskLabel, true)}
+        ${phone(answerButtons())}
+      </div>`;
+  }
+
+  const hint = step.hint || (step.transfer ? scene.steps.transfer.hint : scene.steps.start.hint);
+  /* Werkzeug-Zeile in der Breite der Übungsspalte. Links nur ZWEI Hilfen in
+     derselben Pillen-Form (Vorlesen, Ich bin unsicher), rechts wie überall
+     Pause und Sprache. „Zeig es mir“ liegt im Hilfe-Feld – eine Aufforderung
+     weniger über der Aufgabe, aber mit einem Tipp erreichbar. Nur im
+     Zeig-es-mir-Modus steht „Selbst ausprobieren“ sichtbar daneben, damit der
+     Weg zurück nicht versteckt ist. */
+  const support = `<div class="tool-row alltag-v-toolrow no-print">
+      ${buildReadingToolbar()}
+      <div class="alltag-v-support-row" role="group" aria-label="${escapeHtml(t.support)}">
+        <button type="button" class="alltag-v-tool alltag-v-help-button" onclick="alltagToggleHelp()" aria-expanded="false" aria-controls="alltagHelpPanel">${escapeHtml(t.help)}</button>
+        ${demo && !step.end ? `<button type="button" class="alltag-v-tool" onclick="${go(step.transfer ? 'transfer' : 'start', false)}">${escapeHtml(t.own)}</button>` : ''}
+      </div>
+      ${buildUtilityBar()}
+    </div>`;
+  /* Das Hilfe-Feld liegt im Vorlese-Bereich: aufgeklappt wird es mitgelesen. */
+  const helpPanel = `<div id="alltagHelpPanel" class="alltag-v-help-panel" role="region" aria-label="${escapeHtml(t.help)}" hidden>
+      ${step.end ? '' : `<p>${escapeHtml(alltagVersion(hint))}</p>`}
+      <p>${escapeHtml(t.togetherHint)}</p>
+      ${step.end || demo ? '' : `<button type="button" class="nav-button secondary alltag-v-demo" onclick="${go(stepId, true)}">${escapeHtml(t.demo)}</button>`}
+    </div>`;
+
+  const next = ALLTAG_SCENES[scene.nextScene];
+  const way = (onclick, text) => `<button type="button" class="nav-button alltag-v-way" onclick="${onclick}">${escapeHtml(text)}</button>`;
+  /* Kein sichtbares Sammel-Etikett: Die Links sagen selbst, wohin sie führen. */
+  const ways = `<nav class="alltag-v-ways no-print" aria-label="${escapeHtml(t.ways)}">
+      <div class="alltag-v-way-list">
+        ${step.back && !step.end ? way(go(step.back), t.back) : ''}
+        ${step.end && step.transfer && !demo ? way(`alltagGo('${scene.nextScene}')`, t.nextScene + ': ' + alltagVersion(next.title)) : ''}
+        ${way('renderScenarioChooser()', t.choose)}
+        ${way(`renderTopicChoice('${scene.topic}')`, t.topic)}
+      </div>
+    </nav>`;
+
+  return `${support}<div class="alltag-variant alltag-variant-${variant}" data-readable="true" data-variante="${variant}">
+    ${helpPanel}
+    <article class="card alltag-page alltag-v-card">
+      <p class="alltag-v-simulation">${escapeHtml(t.simulation)}</p>
+      ${body}
+    </article>
+    ${ways}
+  </div>`;
+}
 
 /* Datenschutz-Muster: zentrale Entwurfstexte in allen drei Sprachstufen.
    Segmentierung, aktives Anwenden, freiwillige Reflexion. Nur Sitzungszustand. */

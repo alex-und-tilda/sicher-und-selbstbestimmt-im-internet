@@ -1465,7 +1465,7 @@ const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
    Ohne diesen Eintrag war es fuer hoerende Nutzung unsichtbar –
    ausgerechnet das Angebot, das sich an die Menschen richtet, die
    aufs Vorlesen angewiesen sind. */
-const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary";
+const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary, .alltag-variant .alltag-v-way";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -1545,7 +1545,10 @@ function readCurrentPage(rate) {
   }
   /* Handlungsansage am Ende: Nicht-Leser erfahren sonst nie, welche
      Knöpfe es gibt. Kurz, immer gleiches Muster (Vorhersehbarkeit). */
-  const hatOptionen = root && root.querySelector(OPTION);
+  /* Nur sichtbare, bedienbare Antworten zählen – sonst sagt die Stimme
+     „Tippe jetzt deine Antwort“, obwohl gerade keine angeboten wird. */
+  const hatOptionen = root && Array.from(root.querySelectorAll(OPTION))
+    .some(o => o.offsetParent !== null && !o.disabled && !o.closest("[hidden], details:not([open])"));
   /* Rückmeldeseiten (nach einer Antwort, und die Sicherheitsfragen im
      Profil): ihre Knöpfe heißen `feedback-button` und fielen durch jedes
      Raster. Das Vorlesen endete dort nach der Erklärung – wer die App
@@ -1561,9 +1564,9 @@ function readCurrentPage(rate) {
   /* Der Hilfe-Knopf steckt in einem <button> und fiel deshalb durch jedes
      Raster – wer nicht liest, erfuhr nie, dass es ihn gibt (V-5). Der Satz
      wird aus dem Knopf gebaut, der wirklich dasteht. */
-  const hilfeKnopf = root ? root.querySelector(".task-help-button") : null;
+  const hilfeKnopf = root ? (root.querySelector(".task-help-button") || (root.classList.contains("alltag-variant") ? document.querySelector(".alltag-v-help-button") : null)) : null;
   const hilfeSatz = hilfeKnopf
-    ? " Wenn du unsicher bist, tippe auf: " + cleanSpeechText(hilfeKnopf.textContent) + "."
+    ? " Wenn du unsicher bist, tippe auf: " + cleanSpeechText(hilfeKnopf.textContent).replace(/\.$/, "") + "."
     : "";
   if (hatOptionen) {
     els.push({ pseudoText: (frageNeu()
@@ -1574,9 +1577,13 @@ function readCurrentPage(rate) {
     els.push({ pseudoText: "Du kannst jetzt auf " + rueckmeldeKnoepfe[0] + " tippen."
       + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("")
       + hilfeSatz });
-  } else if (root && root.classList.contains("alltag-page")) {
+  } else if (root && (root.classList.contains("alltag-page") || root.classList.contains("alltag-variant"))) {
     const next = root.querySelector(".nav-button.primary");
-    if (next) els.push({ pseudoText: "Du kannst jetzt auf " + cleanSpeechText(next.textContent) + " tippen." });
+    /* Entwurfsseiten: Steht neben dem Hauptknopf ein zweiter Weg (z. B.
+       „Andere Antwort wählen“), wird er mitgenannt – wie beim Sehen. */
+    const zweiterWeg = root.querySelector(".alltag-v-next .nav-button.secondary");
+    if (next) els.push({ pseudoText: "Du kannst jetzt auf " + cleanSpeechText(next.textContent) + " tippen."
+      + (zweiterWeg ? " Oder auf " + cleanSpeechText(zweiterWeg.textContent) + "." : "") });
     else if (root.querySelector(".alltag-choice")) els.push({ pseudoText: "Wähle eine Antwort. Du kannst dir auch Hilfe anzeigen lassen." });
   } else if (nextButton && !nextButton.disabled) {
     els.push({ pseudoText: backButton && !backButton.disabled
