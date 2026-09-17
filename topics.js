@@ -1258,6 +1258,21 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
+        "warning": "Auch ein bekannter Name kann falsch sein. Erst selbst anrufen, dann reagieren.",
+        "success": "Mit deinem Plan lässt du dich nicht überrumpeln.",
+        "practice": {
+          "question": "Eine Nachricht von einem bekannten Namen bittet dich plötzlich um Geld. Was machst du zuerst?",
+          "pictogram": "pikto-phone",
+          "answers": [
+            "Ich rufe die Person selbst an.",
+            "Ich überweise das Geld schnell."
+          ],
+          "correctIndex": 0,
+          "feedbackWrong": "Das ist zu schnell. Ruf die Person zuerst selbst an. Nimm die Nummer, die du schon kennst.",
+          "feedbackCorrect": "Richtig. So merkst du, ob die Nachricht wirklich von dieser Person ist.",
+          "remember": "Bei Geld-Bitten rufe ich selbst an."
+        },
+        "remember": "Ich mache Stopp. Dann prüfe ich.",
         "pictogram": "pikto-help"
       },
       {
@@ -1865,7 +1880,21 @@ const topics = [
             "pictogram": "pikto-ask"
           }
         ],
+        "warning": "Wer sich als Freund ausgibt und schnell Geld oder private Daten will, ist oft kein Freund.",
         "success": "Hilfe holen ist gut. Es ist nicht deine Schuld.",
+        "practice": {
+          "question": "Eine fremde Person schreibt dir gemeine Dinge. Was ist der erste Schritt in deinem Plan?",
+          "pictogram": "pikto-no",
+          "answers": [
+            "Ich schreibe genauso gemein zurück.",
+            "Ich blockiere die Person."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Zurückschreiben macht es oft schlimmer. Blockiere die Person zuerst.",
+          "feedbackCorrect": "Richtig. Blockieren stoppt die Nachrichten sofort.",
+          "remember": "Ich blockiere. Ich melde. Ich hole Hilfe."
+        },
+        "remember": "Gemeinheit ist nicht meine Schuld. Ich hole Hilfe.",
         "pictogram": "pikto-help"
       },
       {
@@ -2464,6 +2493,21 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
+        "warning": "Ein fremdes Profil kann eine falsche Person sein. Auch ein schönes Bild ist kein Beweis.",
+        "success": "Mit deinem Plan lässt du dich nicht drängen.",
+        "practice": {
+          "question": "Ein fremdes Profil schreibt dir und will schnell etwas von dir. Was machst du?",
+          "pictogram": "pikto-message",
+          "answers": [
+            "Ich mache Stopp und zeige es einer vertrauten Person.",
+            "Ich antworte sofort, damit die Person nicht böse wird."
+          ],
+          "correctIndex": 0,
+          "feedbackWrong": "Schnell antworten setzt dich unter Druck. Mach zuerst Stopp.",
+          "feedbackCorrect": "Richtig. Stopp und zeigen schützt dich.",
+          "remember": "Bei Druck zeige ich es einer Person, der ich vertraue."
+        },
+        "remember": "Ich mache Stopp. Ich zeige es jemandem.",
         "pictogram": "pikto-help"
       },
       {
@@ -3030,6 +3074,21 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
+        "warning": "Manche Videos zeigen gefährliche Mutproben. Nachmachen kann dir schaden.",
+        "success": "Video stoppen und Pause machen schützt dich vor Gefahr.",
+        "practice": {
+          "question": "Ein Video zeigt eine gefährliche Mutprobe. Was machst du?",
+          "pictogram": "pikto-photo",
+          "answers": [
+            "Ich probiere es aus, weil viele es tun.",
+            "Ich stoppe das Video und mache es nicht nach."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Viele Klicks heißen nicht, dass etwas sicher ist. Stoppe das Video lieber.",
+          "feedbackCorrect": "Richtig. Viele Klicks heißen nicht: sicher.",
+          "remember": "Ich mache gefährliche Videos nicht nach."
+        },
+        "remember": "Bei Angst stoppe ich das Video. Ich hole Hilfe.",
         "pictogram": "pikto-help"
       },
       {
@@ -3571,6 +3630,21 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
+        "warning": "Ein Bild, das du einmal sendest, kannst du nicht mehr zurückholen.",
+        "success": "Nein sagen ist immer richtig. Auch bei Druck.",
+        "practice": {
+          "question": "Eine Person will unbedingt ein Bild von dir. Was machst du?",
+          "pictogram": "pikto-photo",
+          "answers": [
+            "Ich sende das Bild, damit endlich Ruhe ist.",
+            "Ich sage Nein und zeige die Nachricht einer vertrauten Person."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Ein gesendetes Bild bekommst du nicht zurück. Sag lieber Nein.",
+          "feedbackCorrect": "Richtig. Nein sagen ist dein gutes Recht.",
+          "remember": "Ich sage Nein. Ich zeige es jemandem."
+        },
+        "remember": "Kein Bild unter Druck. Ich sage Nein.",
         "pictogram": "pikto-help"
       },
       {
@@ -4160,6 +4234,21 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
+        "warning": "Ein Trend kann gefährlich sein, auch wenn viele mitmachen.",
+        "success": "Pause machen und nicht nachmachen schützt dich.",
+        "practice": {
+          "question": "Ein Kommentar macht dir Druck, private Daten zu senden. Was machst du?",
+          "pictogram": "pikto-data",
+          "answers": [
+            "Ich sende keine privaten Daten und mache Pause.",
+            "Ich sende die Daten schnell, damit Ruhe ist."
+          ],
+          "correctIndex": 0,
+          "feedbackWrong": "Bei Druck ist Vorsicht besonders wichtig. Sende keine privaten Daten.",
+          "feedbackCorrect": "Richtig. Private Daten bleiben privat, auch bei Druck.",
+          "remember": "Private Daten sende ich nie unter Druck."
+        },
+        "remember": "Ich mache Pause. Ich hole Unterstützung.",
         "pictogram": "pikto-help"
       },
       {
@@ -5446,6 +5535,21 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
+        "warning": "Eine KI kann sich irren und trotzdem sicher klingen.",
+        "success": "Wichtige Antworten prüfen schützt dich vor Fehlern.",
+        "practice": {
+          "question": "Die KI gibt dir einen Rat zu deiner Gesundheit. Was machst du?",
+          "pictogram": "pikto-ki",
+          "answers": [
+            "Ich mache genau das, was die KI sagt.",
+            "Ich frage zusätzlich einen Menschen."
+          ],
+          "correctIndex": 1,
+          "feedbackWrong": "Eine KI kann sich irren. Frag bei Gesundheit immer auch einen Menschen.",
+          "feedbackCorrect": "Richtig. Bei Gesundheit und Geld entscheiden Menschen mit.",
+          "remember": "Bei Gesundheit und Geld frage ich einen Menschen."
+        },
+        "remember": "Ich prüfe. Ich frage einen Menschen.",
         "pictogram": "pikto-help"
       },
       {
@@ -6123,6 +6227,21 @@ const topics = [
             "pictogram": "pikto-ask"
           }
         ],
+        "warning": "Starke Gefühle wie Angst oder Wut wollen, dass du schnell teilst. Genau dann ist Vorsicht wichtig.",
+        "success": "Nicht teilen im Zweifel schützt dich und andere.",
+        "practice": {
+          "question": "Eine Nachricht macht dich wütend und will, dass du sie sofort teilst. Was machst du?",
+          "pictogram": "pikto-feel",
+          "answers": [
+            "Ich prüfe zuerst und teile im Zweifel nicht.",
+            "Ich teile sie sofort, weil sie wichtig wirkt."
+          ],
+          "correctIndex": 0,
+          "feedbackWrong": "Starke Gefühle wollen schnelles Teilen. Prüfe lieber zuerst.",
+          "feedbackCorrect": "Richtig. Starke Gefühle sind ein Warnzeichen, kein Grund zur Eile.",
+          "remember": "Bei starken Gefühlen prüfe ich zuerst."
+        },
+        "remember": "Ich glaube nicht alles sofort. Ich prüfe.",
         "pictogram": "pikto-help"
       },
       {
@@ -7631,6 +7750,21 @@ const topics = [
             "pictogram": "pikto-shop"
           }
         ],
+        "warning": "Ein sehr niedriger Preis oder ein Countdown will dich zur Eile treiben.",
+        "success": "Wer sich nicht hetzen lässt, kauft sicherer ein.",
+        "practice": {
+          "question": "Ein Shop zeigt: Nur noch 2 Minuten! Was machst du?",
+          "pictogram": "pikto-shop",
+          "answers": [
+            "Ich lasse mich nicht hetzen und prüfe den Shop in Ruhe.",
+            "Ich kaufe schnell, bevor das Angebot weg ist."
+          ],
+          "correctIndex": 0,
+          "feedbackWrong": "Ein Countdown ist ein Trick. Lass dich nicht hetzen.",
+          "feedbackCorrect": "Richtig. Ein Countdown will dich nur unter Druck setzen.",
+          "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
+        },
+        "remember": "Ich prüfe in Ruhe. Ich lasse mich nicht hetzen.",
         "pictogram": "pikto-help"
       },
       {
