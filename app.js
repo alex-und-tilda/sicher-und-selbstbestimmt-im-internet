@@ -1566,7 +1566,10 @@ function readCurrentPage(rate) {
     ? " Wenn du unsicher bist, tippe auf: " + cleanSpeechText(hilfeKnopf.textContent) + "."
     : "";
   if (hatOptionen) {
-    els.push({ pseudoText: "Tippe jetzt deine Antwort." + hilfeSatz });
+    els.push({ pseudoText: (frageNeu()
+      ? (root && root.querySelector(".frage--meinung") && !root.querySelector(".frage:not(.frage--meinung)")
+          ? FRAGE_TEXT.meinungAufforderung : FRAGE_TEXT.aufforderung)
+      : "Tippe jetzt deine Antwort.") + hilfeSatz });
   } else if (rueckmeldeKnoepfe.length) {
     els.push({ pseudoText: "Du kannst jetzt auf " + rueckmeldeKnoepfe[0] + " tippen."
       + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("")
@@ -2876,8 +2879,9 @@ function buildDailyQuestionCard() {
       <div class="intro-offer daily-question" id="dailyQuestion" style="${getTopicColorStyle(daily.topic.id)}" data-readable="true" role="region" aria-label="Frage des Tages">
         <h3>Deine Frage für heute</h3>
         <p class="daily-question-topic">Aus dem Thema: ${escapeHtml(daily.topic.title)}</p>
+        ${frageNeu() ? buildFrage({ frage: daily.q.question || "", pikto: questionPikto(daily.q), antworten: answers, hilfe: buildTaskHelpBox(taskHint(daily.q, "quiz"), true) }) : `
         ${questionPikto(daily.q)}<p class="daily-question-text">${escapeHtml(daily.q.question)}</p>
-        <div class="daily-answers">${answers}</div>
+        <div class="daily-answers">${answers}</div>`}
       </div>`;
 }
 
@@ -4343,7 +4347,7 @@ function renderSelfAssessment() {
   setOrientation(`Du startest das Thema: ${topic.title}. Zuerst kommt eine Frage an dich.`);
 
   const optionButtons = sa.options.map((opt, i) =>
-    `<button class="sa-option-btn" data-index="${i}" type="button">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
+    `<button class="sa-option-btn" data-index="${i}" type="button">${frageNeu() ? "" : answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
   ).join("");
 
   content.innerHTML = `
@@ -4354,12 +4358,13 @@ function renderSelfAssessment() {
         <h2>${escapeHtml(topic.title)}</h2>
       </div>
       <p class="sa-intro">Bevor wir starten:</p>
+      ${frageNeu() ? `${roleFigure("nachdenken")}${buildMeinung({ frage: sa.question, pikto: questionPikto(sa), optionen: optionButtons })}` : `
       ${questionPikto(sa)}<p class="sa-question">${escapeHtml(sa.question)}</p>
       ${roleFigure("nachdenken")}
       <div class="sa-options" role="group" aria-label="Einschätzung wählen">
         ${optionButtons}
       </div>
-      <p class="sa-hint">Es gibt keine falsche Antwort. Wähle einfach, was für dich stimmt.</p>
+      <p class="sa-hint">Es gibt keine falsche Antwort. Wähle einfach, was für dich stimmt.</p>`}
     </article>
   `;
 
@@ -4538,6 +4543,64 @@ const RUECKMELDUNG = {
   uebenSchwer:     "Gut, dass du geübt hast. Das ist schwer. Du kannst es gleich noch einmal machen.",
   urkunde:         "Du hast durchgehalten."
 };
+
+/* Frage-Muster, Entwurf B (18.09.2026) – nur zum Vergleich für die Prüfgruppe.
+   Ohne Zusatz in der Adresse bleibt alles wie bisher. Mit ?frage=neu sehen
+   alle Fragen mit richtiger Antwort gleich aus: Kopfzeile (✅ Prüfen, Zähler,
+   leiser Hilfe-Knopf) – Frage – Aufforderung – Antworten. Ein Muster statt
+   vier: einmal gelernt, überall wiedererkannt (§3 CLT, Vorhersehbarkeit).
+   Die Aufforderung steht jetzt auch auf dem Schirm, nicht nur beim Vorlesen
+   (UDL: dasselbe Signal in Bild und Ton).
+   Die Hilfe bleibt VOR den Antworten (Prüfbefund V-5: wer unsicher ist, soll
+   sie vor der Entscheidung finden) – als kompakter, neutraler Knopf direkt
+   unter der Frage. Sie gehört damit sichtbar zur Frage und ist nicht mehr
+   das lauteste Element der Seite.
+   Wörter zentral (§13) und auf der Prüfliste (§18.8). */
+const FRAGE_TEXT = {
+  aufforderung:        "Tippe deine Antwort an.",
+  /* Einschätzungen (Einstieg und Abschluss) haben kein Richtig und kein
+     Falsch. Sie bekommen deshalb ein eigenes Etikett statt ✅ Prüfen und den
+     beruhigenden Satz VOR den Antworten – vorher stand er darunter und wurde
+     erst nach der Wahl gelesen (§3 Došen: keine Prüfungsangst). */
+  meinungEtikett:      "Deine Meinung",
+  keinFalsch:          "Hier gibt es kein Richtig und kein Falsch.",
+  meinungAufforderung: "Tippe an, was für dich stimmt."
+};
+function frageNeu() {
+  try { return new URLSearchParams(window.location.search).get("frage") === "neu"; }
+  catch (e) { return false; }
+}
+function buildFrage({ frage, pikto = "", antworten, zaehler = "", hilfe = "" }) {
+  return `
+    <section class="frage">
+      <div class="frage-kopf">
+        ${stationBadge("pruefen")}
+        ${zaehler ? `<span class="frage-zaehler">${escapeHtml(zaehler)}</span>` : ""}
+      </div>
+      ${pikto}<p class="frage-text">${escapeHtml(frage)}</p>
+      ${hilfe ? `<div class="frage-hilfe">${hilfe}</div>` : ""}
+      <div class="frage-antwortbereich">
+        <p class="frage-aufforderung">${escapeHtml(FRAGE_TEXT.aufforderung)}</p>
+        <div class="answers" role="group" aria-label="Antworten">${antworten}</div>
+      </div>
+    </section>`;
+}
+/* Einschätzung: gleicher Aufbau wie eine Frage, aber erkennbar KEINE Prüfung –
+   anderes Etikett, keine Nummern, Beruhigung vor den Antworten. */
+function buildMeinung({ frage, pikto = "", optionen }) {
+  return `
+    <section class="frage frage--meinung">
+      <div class="frage-kopf">
+        <span class="station-badge"><span aria-hidden="true">💬</span>${escapeHtml(FRAGE_TEXT.meinungEtikett)}</span>
+      </div>
+      ${pikto}<p class="frage-text">${escapeHtml(frage)}</p>
+      <p class="frage-beruhigung">${escapeHtml(FRAGE_TEXT.keinFalsch)}</p>
+      <div class="frage-antwortbereich">
+        <p class="frage-aufforderung">${escapeHtml(FRAGE_TEXT.meinungAufforderung)}</p>
+        <div class="sa-options" role="group" aria-label="Einschätzung wählen">${optionen}</div>
+      </div>
+    </section>`;
+}
 
 function stationBadge(key) {
   const map = {
@@ -5137,6 +5200,13 @@ function buildPractice(practice) {
     </button>
   `).join("");
 
+  if (frageNeu()) return `
+    <div class="practice-box practice-box--frage">
+      <h3 class="sr-only">Übung</h3>
+      ${buildFrage({ frage: question, pikto: questionPikto(practice), antworten: answerHtml, hilfe: buildTaskHelpBox(taskHint(practice, "lektion"), true) })}
+    </div>
+  `;
+
   return `
     <div class="practice-box">
       <h3>Übung</h3>
@@ -5302,8 +5372,9 @@ function renderMiniCheck(topicId) {
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
         <h2>Eine kurze Frage</h2>
       </div>
+      ${frageNeu() ? buildFrage({ frage: mq.question || "", pikto: questionPikto(mq), antworten: optionen, hilfe: buildTaskHelpBox(taskHint(mq, "quiz"), true) }) : `
       ${questionPikto(mq)}<p class="sa-question">${escapeHtml(mq.question)}</p>
-      <div class="sa-options" role="group" aria-label="Antwort wählen">${optionen}</div>
+      <div class="sa-options" role="group" aria-label="Antwort wählen">${optionen}</div>`}
       <p class="sa-hint">Das ist kein Test. Du darfst raten.</p>
       <div id="miniFeedback" class="mini-feedback is-hidden" role="status" aria-live="polite"></div>
     </article>
@@ -5365,12 +5436,13 @@ function buildClosingSelfCheck(topic) {
   const sa = resolveSelfAssessment(topic, languageLevel);
   if (!sa || !Array.isArray(sa.options) || !sa.options.length) return "";
   const optionen = sa.options.map((opt, i) =>
-    `<button type="button" class="sa-option-btn closing-sa" data-index="${i}">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
+    `<button type="button" class="sa-option-btn closing-sa" data-index="${i}">${frageNeu() ? "" : answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
   ).join("");
   return `
     <div class="access-box closing-sa-box">
+      ${frageNeu() ? `<h3 class="sr-only">Wie ist es jetzt?</h3>${buildMeinung({ frage: "Das war das Thema. Wie ist es jetzt?", optionen })}` : `
       <h3>Das war das Thema. Wie ist es jetzt?</h3>
-      <div class="sa-options" role="group" aria-label="Einschätzung wählen">${optionen}</div>
+      <div class="sa-options" role="group" aria-label="Einschätzung wählen">${optionen}</div>`}
       <p id="closingSaResult" class="closing-sa-result is-hidden" role="status" aria-live="polite"></p>
     </div>`;
 }
@@ -5771,10 +5843,11 @@ function renderQuizQuestion() {
            Satz, hier). Die Ueberschrift bleibt fuer Screenreader und die
            Gliederung erhalten, kostet aber keinen Platz mehr. -->
       <h2 class="sr-only">Quiz</h2>
+      ${frageNeu() ? buildFrage({ frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${currentQuizIndex + 1} von ${questions.length}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) }) : `
       ${stationBadge("pruefen")}
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question || "")}</p>
       ${buildTaskHelpBox(taskHint(q, "quiz"), true)}
-      <div class="answers">${answerHtml}</div>
+      <div class="answers">${answerHtml}</div>`}
     </article>
   `;
   focusContent();
@@ -6043,8 +6116,9 @@ function renderBigQuizQuestion() {
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
       <!-- V-2: derselbe Titel steht schon in der Kopfzeile. -->
       <h2 class="sr-only">${escapeHtml(bigQuizTitle)}</h2>
+      ${frageNeu() ? buildFrage({ frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${bigQuizIndex + 1} von ${total}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) }) : `
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question)}</p>
-      <div class="answers">${answerHtml}</div>
+      <div class="answers">${answerHtml}</div>`}
     </article>
   `;
   focusContent();
@@ -6299,10 +6373,11 @@ function renderTrainingMessage() {
     <article class="card scenario-card" style="${getTopicColorStyle(eintrag.thema)}" data-readable="true">
       <p class="sz-count">Nachricht ${postfachIndex + 1} von ${total}</p>
       ${postfachScreen(eintrag)}
+      ${frageNeu() ? buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) }) : `
       <div class="sz-frage">
         ${questionPikto(frage)}<p class="sz-frage-text">${escapeHtml(frage.question || "")}</p>
         <div class="answers">${antworten}</div>
-      </div>
+      </div>`}
       <div id="szFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
       <div class="certificate-actions sz-exit">
         <button type="button" class="nav-button secondary" onclick="startTrainingInbox()">Üben beenden</button>
@@ -6780,10 +6855,11 @@ function renderScenarioScene() {
       <p class="sz-count">${escapeHtml(rundeText)}Schritt ${scenarioIndex + 1} von ${total}</p>
       ${buildScenarioScreen(runde, scenarioIndex)}
       ${frage ? `
+        ${frageNeu() ? buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) }) : `
         <div class="sz-frage">
           ${questionPikto(frage)}<p class="sz-frage-text">${escapeHtml(frage.question || "")}</p>
           <div class="answers">${antworten}</div>
-        </div>
+        </div>`}
         <div id="szFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
       ` : `
         <div class="certificate-actions">
