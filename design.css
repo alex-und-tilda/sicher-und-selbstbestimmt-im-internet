@@ -139,3 +139,11 @@ body {
   top: 0;
   line-height: inherit;
 }
+
+/* ---------- 10. Kante der Antwort-Knöpfe (WCAG 1.4.11) ----------
+   Der Rand der Antworten lag bei 1,33:1 (hell) und 1,19:1 (dunkel) – die
+   Kante eines Bedienelements braucht mindestens 3:1. Gleiche Mischung wie
+   beim Hilfe-Knopf: hell ~3,8:1, dunkel ~4,7:1, auch auf getönten Flächen
+   über 3:1. Überfahren, Fokus und richtig/falsch behalten ihre eigenen Farben
+   (die Regeln dafür sind spezifischer und gewinnen). */
+.answer-option { border-color: color-mix(in srgb, var(--ink-soft) 70%, var(--surface)); }

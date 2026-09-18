@@ -1566,7 +1566,10 @@ function readCurrentPage(rate) {
     ? " Wenn du unsicher bist, tippe auf: " + cleanSpeechText(hilfeKnopf.textContent) + "."
     : "";
   if (hatOptionen) {
-    els.push({ pseudoText: (frageNeu() ? FRAGE_TEXT.aufforderung : "Tippe jetzt deine Antwort.") + hilfeSatz });
+    els.push({ pseudoText: (frageNeu()
+      ? (root && root.querySelector(".frage--meinung") && !root.querySelector(".frage:not(.frage--meinung)")
+          ? FRAGE_TEXT.meinungAufforderung : FRAGE_TEXT.aufforderung)
+      : "Tippe jetzt deine Antwort.") + hilfeSatz });
   } else if (rueckmeldeKnoepfe.length) {
     els.push({ pseudoText: "Du kannst jetzt auf " + rueckmeldeKnoepfe[0] + " tippen."
       + rueckmeldeKnoepfe.slice(1).map(n => " Oder auf " + n + ".").join("")
@@ -4344,7 +4347,7 @@ function renderSelfAssessment() {
   setOrientation(`Du startest das Thema: ${topic.title}. Zuerst kommt eine Frage an dich.`);
 
   const optionButtons = sa.options.map((opt, i) =>
-    `<button class="sa-option-btn" data-index="${i}" type="button">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
+    `<button class="sa-option-btn" data-index="${i}" type="button">${frageNeu() ? "" : answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
   ).join("");
 
   content.innerHTML = `
@@ -4355,12 +4358,13 @@ function renderSelfAssessment() {
         <h2>${escapeHtml(topic.title)}</h2>
       </div>
       <p class="sa-intro">Bevor wir starten:</p>
+      ${frageNeu() ? `${roleFigure("nachdenken")}${buildMeinung({ frage: sa.question, pikto: questionPikto(sa), optionen: optionButtons })}` : `
       ${questionPikto(sa)}<p class="sa-question">${escapeHtml(sa.question)}</p>
       ${roleFigure("nachdenken")}
       <div class="sa-options" role="group" aria-label="Einschätzung wählen">
         ${optionButtons}
       </div>
-      <p class="sa-hint">Es gibt keine falsche Antwort. Wähle einfach, was für dich stimmt.</p>
+      <p class="sa-hint">Es gibt keine falsche Antwort. Wähle einfach, was für dich stimmt.</p>`}
     </article>
   `;
 
@@ -4553,7 +4557,14 @@ const RUECKMELDUNG = {
    das lauteste Element der Seite.
    Wörter zentral (§13) und auf der Prüfliste (§18.8). */
 const FRAGE_TEXT = {
-  aufforderung: "Tippe deine Antwort an."
+  aufforderung:        "Tippe deine Antwort an.",
+  /* Einschätzungen (Einstieg und Abschluss) haben kein Richtig und kein
+     Falsch. Sie bekommen deshalb ein eigenes Etikett statt ✅ Prüfen und den
+     beruhigenden Satz VOR den Antworten – vorher stand er darunter und wurde
+     erst nach der Wahl gelesen (§3 Došen: keine Prüfungsangst). */
+  meinungEtikett:      "Deine Meinung",
+  keinFalsch:          "Hier gibt es kein Richtig und kein Falsch.",
+  meinungAufforderung: "Tippe an, was für dich stimmt."
 };
 function frageNeu() {
   try { return new URLSearchParams(window.location.search).get("frage") === "neu"; }
@@ -4568,8 +4579,26 @@ function buildFrage({ frage, pikto = "", antworten, zaehler = "", hilfe = "" }) 
       </div>
       ${pikto}<p class="frage-text">${escapeHtml(frage)}</p>
       ${hilfe ? `<div class="frage-hilfe">${hilfe}</div>` : ""}
-      <p class="frage-aufforderung">${escapeHtml(FRAGE_TEXT.aufforderung)}</p>
-      <div class="answers" role="group" aria-label="Antworten">${antworten}</div>
+      <div class="frage-antwortbereich">
+        <p class="frage-aufforderung">${escapeHtml(FRAGE_TEXT.aufforderung)}</p>
+        <div class="answers" role="group" aria-label="Antworten">${antworten}</div>
+      </div>
+    </section>`;
+}
+/* Einschätzung: gleicher Aufbau wie eine Frage, aber erkennbar KEINE Prüfung –
+   anderes Etikett, keine Nummern, Beruhigung vor den Antworten. */
+function buildMeinung({ frage, pikto = "", optionen }) {
+  return `
+    <section class="frage frage--meinung">
+      <div class="frage-kopf">
+        <span class="station-badge"><span aria-hidden="true">💬</span>${escapeHtml(FRAGE_TEXT.meinungEtikett)}</span>
+      </div>
+      ${pikto}<p class="frage-text">${escapeHtml(frage)}</p>
+      <p class="frage-beruhigung">${escapeHtml(FRAGE_TEXT.keinFalsch)}</p>
+      <div class="frage-antwortbereich">
+        <p class="frage-aufforderung">${escapeHtml(FRAGE_TEXT.meinungAufforderung)}</p>
+        <div class="sa-options" role="group" aria-label="Einschätzung wählen">${optionen}</div>
+      </div>
     </section>`;
 }
 
@@ -5407,12 +5436,13 @@ function buildClosingSelfCheck(topic) {
   const sa = resolveSelfAssessment(topic, languageLevel);
   if (!sa || !Array.isArray(sa.options) || !sa.options.length) return "";
   const optionen = sa.options.map((opt, i) =>
-    `<button type="button" class="sa-option-btn closing-sa" data-index="${i}">${answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
+    `<button type="button" class="sa-option-btn closing-sa" data-index="${i}">${frageNeu() ? "" : answerNumBadge(i)}<span class="answer-text">${escapeHtml(answerText(opt))}</span></button>`
   ).join("");
   return `
     <div class="access-box closing-sa-box">
+      ${frageNeu() ? `<h3 class="sr-only">Wie ist es jetzt?</h3>${buildMeinung({ frage: "Das war das Thema. Wie ist es jetzt?", optionen })}` : `
       <h3>Das war das Thema. Wie ist es jetzt?</h3>
-      <div class="sa-options" role="group" aria-label="Einschätzung wählen">${optionen}</div>
+      <div class="sa-options" role="group" aria-label="Einschätzung wählen">${optionen}</div>`}
       <p id="closingSaResult" class="closing-sa-result is-hidden" role="status" aria-live="polite"></p>
     </div>`;
 }

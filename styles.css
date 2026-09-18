@@ -6800,12 +6800,43 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
   font-weight: 700;
   line-height: 1.45;
 }
+/* Antwort-Bereich als eigene, leicht getönte Fläche: oben wird gefragt,
+   unten – in diesem Feld – wird geantwortet. Räumlich statt nur sprachlich. */
+.frage-antwortbereich {
+  margin-top: 16px;
+  padding: 14px clamp(12px, 2.5vw, 18px) 16px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+}
 .frage-aufforderung {
-  margin: 18px 0 0;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+  margin: 0 0 10px;
   font-size: 1rem;
   font-weight: 600;
   color: var(--ink-soft);
 }
-.frage .answers { margin-top: 10px; }
+.frage .answers,
+.frage .sa-options { margin-top: 0; }
+/* Einschätzung: Beruhigung vor den Antworten, gut lesbar (nicht kursiv). */
+.frage-beruhigung {
+  margin: 10px 0 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+/* Die Frage bleibt beim Scrollen oben stehen (schmale Schirme): man muss sie
+   sich nicht merken, während man die Antworten liest. Endet mit dem
+   Frage-Block. Nicht auf der Start-Seite und im Abschluss-Kasten – dort ist
+   der Block kurz und hat einen eigenen Hintergrund. */
+@media (max-width: 600px) {
+  .frage-text {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--surface);
+    padding-block: 8px;
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .practice-box .frage-text { background: var(--accent-soft); }
+  .daily-question .frage-text,
+  .closing-sa-box .frage-text { position: static; box-shadow: none; }
+}
