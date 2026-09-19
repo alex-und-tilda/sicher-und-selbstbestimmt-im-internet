@@ -27,7 +27,7 @@ const CONTENT_VERSIONS = {
       }
     },
     "Ohne Passwort anmelden": {
-      einfach: {
+      einfach: { examples: ["Du öffnest deine Bank-App mit deinem Fingerabdruck.", "Du meldest dich beim Online-Shop mit deinem Gesicht an."],
         text: [
           { text: "Bei manchen Konten brauchst du kein Passwort mehr. Diese Anmeldung heißt Passkey." },
           { text: "Du legst den Finger auf dein Handy oder du zeigst dein Gesicht. Damit bist du angemeldet." },
@@ -35,7 +35,7 @@ const CONTENT_VERSIONS = {
         ],
         success: "Ohne Passwort anmelden: Das ist bequem und sicher zugleich."
       },
-      standard: {
+      standard: { examples: ["Du entsperrst deine Banking-App per Fingerabdruck.", "Du meldest dich im Onlineshop per Gesichtserkennung an."],
         text: [{ text: "Passkeys ersetzen das Passwort durch die Entsperrung deines Geräts – per Fingerabdruck, Gesichtserkennung oder Geräte-PIN. Der geheime Schlüssel verlässt dabei nie dein Gerät, deshalb lässt er sich weder abfragen noch auf einer gefälschten Seite eingeben. Genau das macht Passkeys gegen Phishing praktisch immun. Apple, Google und Microsoft unterstützen sie, das BSI empfiehlt sie ausdrücklich." }],
         success: "Passkeys sind gegen Phishing praktisch immun – es gibt kein Geheimnis, das man dir entlocken könnte."
       }
@@ -140,7 +140,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "Nicht jede App oder Webseite braucht deine Adresse. Wenn der Grund für die Abfrage unklar ist, musst du nichts eintragen. Überlege, ob die Angabe für den Dienst wirklich notwendig ist – im Zweifel lässt du das Feld frei oder fragst jemanden, dem du vertraust." }
         ],
-        examples: []
+        examples: ["Eine Spiele-App verlangt vor dem ersten Start deine vollständige Adresse.", "Ein Gewinnspiel fragt nach deinem Geburtsdatum, obwohl es für die Teilnahme gar nicht nötig ist."]
       }
     },
 
@@ -157,7 +157,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "Auch Telefonnummer und Geburtsdatum gehören zu deinen privaten Daten. Viele Formulare und Gewinnspiele fragen danach, obwohl sie diese Angaben gar nicht benötigen. Gib sie nur dann ein, wenn es einen nachvollziehbaren Grund gibt." }
         ],
-        examples: []
+        examples: ["Ein Online-Formular macht die Telefonnummer zum Pflichtfeld, obwohl du nur einen Newsletter bestellen willst.", "Ein Gewinnspiel will dein Geburtsdatum wissen – angeblich nur, um dir zu gratulieren."]
       }
     },
 
@@ -174,7 +174,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "Bevor du ein Foto verschickst oder veröffentlichst, lohnt sich ein prüfender Blick. Oft sind im Hintergrund private Dinge zu sehen – ein Brief mit Adresse, dein Zuhause oder andere Personen, die nicht gefragt wurden. Im Zweifel schickst du das Bild lieber nicht." }
         ],
-        examples: []
+        examples: ["Auf dem Tisch im Bild liegt ein Brief, auf dem dein Name und deine Adresse lesbar sind.", "Im Hintergrund ist eine andere Person zu sehen, die nicht gefragt wurde.", "Das Foto zeigt deine Wohnung so deutlich, dass Fremde sie wiedererkennen könnten."]
       }
     },
 
@@ -191,7 +191,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "Manche Nachrichten zielen darauf ab, an deine Daten zu kommen. Häufig enthalten sie einen Link, der auf eine gefälschte Seite führt. Öffne Links von unbekannten Absendern nicht und gib dort keine persönlichen Daten ein. Im Zweifel löschst du die Nachricht." }
         ],
-        examples: []
+        examples: ["„Schnell auf diesen Link klicken – das Angebot gilt nur noch heute!“", "„Bitte gib zur Bestätigung deine Adresse ein.“", "„Herzlichen Glückwunsch, du hast gewonnen!“"]
       }
     },
 
@@ -208,7 +208,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "Ein typisches Warnzeichen für Betrug ist Zeitdruck. Nachrichten, die sofortiges Handeln verlangen oder drohen, sollen verhindern, dass du in Ruhe nachdenkst. Lass dich davon nicht treiben: Seriöse Stellen setzen dich nicht so unter Druck." }
         ],
-        examples: []
+        examples: ["„Klick sofort, sonst verfällt dein Zugang.“", "„Wenn du nicht reagierst, wird dein Konto gelöscht.“", "„Erzähl niemandem davon.“"]
       }
     },
 
@@ -290,7 +290,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "Wenn dir eine unbekannte Nummer schreibt, weißt du nicht, wer wirklich dahintersteckt. Antworte nicht vorschnell, gib keine persönlichen Daten weiter und überweise kein Geld. Im Zweifel ignorierst oder blockierst du den Kontakt." }
         ],
-        examples: []
+        examples: ["„Hallo, ich habe eine neue Nummer. Speicher sie dir ab!“", "„Kannst du mir schnell Geld schicken? Ich erklär’s dir später.“"]
       }
     },
 
@@ -308,7 +308,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "Eine häufige Betrugsmasche sind Nachrichten, die nach Geld fragen. Betrüger geben sich als Angehörige aus – etwa mit der Nachricht „Hallo Mama, ich habe eine neue Nummer und brauche Geld.“ Inzwischen lassen sich sogar Stimmen in Sprachnachrichten mit künstlicher Intelligenz täuschend echt nachahmen. Überweise deshalb niemals Geld an eine unbekannte Nummer und ruf die Person im Zweifel unter ihrer bekannten Nummer zurück." }
         ],
-        examples: []
+        examples: ["„Hallo Papa, mein Handy ist kaputt, das ist meine neue Nummer. Kannst du mir heute noch Geld überweisen?“", "Eine Sprachnachricht klingt genau wie deine Schwester und bittet dringend um Geld – solche Stimmen lassen sich mit KI fälschen."]
       }
     },
 
@@ -465,7 +465,7 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "In deinem Profil stehen Informationen über dich – aber nicht alles muss dort öffentlich sichtbar sein. Angaben wie Adresse, Telefonnummer, Geburtsdatum oder private Fotos solltest du entweder weglassen oder nur für ausgewählte Personen freigeben." }
         ],
-        examples: [],
+        examples: ["Wohnadresse", "Telefonnummer", "Geburtsdatum", "private Fotos"],
         remember: "Ich überlege genau, welche Angaben in meinem Profil öffentlich sichtbar sind."
       }
     },
@@ -1163,7 +1163,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [{ text: "Auch wenn KI sehr überzeugend klingt, kann sie sich irren – und erfindet manchmal sogar Fakten, Namen oder Quellen. Verlass dich bei wichtigen Dingen nicht blind auf sie, sondern prüfe die Antworten an einer zweiten Stelle." }],
-        examples: []
+        examples: ["Die KI nennt dir eine Telefonnummer, die es gar nicht gibt.", "Die KI beschreibt ein Ereignis, das nie stattgefunden hat – und klingt dabei völlig überzeugend."]
       }
     },
     "Keine privaten Daten": {
@@ -1189,7 +1189,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [{ text: "Bei Gesundheit und Geld ist besondere Vorsicht geboten: Die KI kennt deine persönliche Situation nicht und kann falsche oder gefährliche Ratschläge geben. Hol dir bei solchen Themen immer zusätzlich den Rat eines Menschen – etwa einer Ärztin, eines Arztes oder einer Vertrauensperson." }],
-        examples: []
+        examples: ["Du fühlst dich krank und fragst eine KI. Ihre Antwort ersetzt keine Ärztin und keinen Arzt.", "Eine KI empfiehlt dir eine Geldanlage. Bevor du etwas bezahlst oder unterschreibst, sprich mit einer Person, der du vertraust."]
       }
     },
     "KI kann Bilder und Stimmen fälschen": {
@@ -1295,7 +1295,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [{ text: "Ein Deepfake ist ein mit KI gefälschtes Video, in dem Gesicht oder Stimme ausgetauscht werden. So scheint eine Person etwas zu sagen, das sie nie gesagt hat – oft trifft es bekannte Persönlichkeiten. Bleib deshalb auch bei „Video-Beweisen“ kritisch." }],
-        examples: []
+        examples: ["Ein Video zeigt einen bekannten Moderator, der für eine Geldanlage wirbt – das Video ist mit KI gefälscht.", "Ein Video zeigt eine Politikerin, die etwas Schockierendes sagt – auch dieses Video ist gefälscht."]
       }
     },
     "Geklonte Stimmen am Telefon": {
@@ -1433,7 +1433,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [{ text: "Beim Phishing verschicken Betrüger Nachrichten, die täuschend echt aussehen – etwa angeblich von deiner Bank oder einem bekannten Unternehmen. Über einen Link wirst du auf eine gefälschte Seite gelockt, die deine Zugangsdaten abgreifen soll. Gib dort nichts ein." }],
-        examples: []
+        examples: ["Eine E-Mail warnt: „Ihr Konto wird gesperrt. Klicken Sie hier, um es zu entsperren.“", "Eine SMS fordert dich auf, deine Bankdaten zu bestätigen: „Bitte bestätigen Sie jetzt Ihre Daten.“"]
       }
     },
     "Falsche Nachrichten erkennen": {
@@ -1615,7 +1615,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [{ text: "Viele Apps und Spiele sind zunächst gratis, verkaufen dann aber Zusatzinhalte gegen echtes Geld. Solche In-App-Käufe wirken klein, summieren sich aber schnell. Behalte im Blick, was du tatsächlich ausgibst." }],
-        examples: [],
+        examples: ["Ein kostenloses Spiel verkauft Extra-Leben für 2 Euro das Stück.", "In einer App kosten 500 Münzen 5 Euro – wie viel eine einzelne Münze wert ist, siehst du nicht sofort."],
         remember: "Auch kleine In-App-Käufe kosten echtes Geld und summieren sich."
       }
     },
