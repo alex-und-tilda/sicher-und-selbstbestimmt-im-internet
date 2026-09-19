@@ -3214,7 +3214,6 @@ function renderMenu() {
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
       ${roleFigure("themen")}
       ${groupSections}
-      ${ersterBesuch ? `<div class="menu-hint-chip">Das Menü unten ist immer da.</div>` : ""}
     </section>
   `;
   focusContent();
