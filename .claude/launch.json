@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "claude-vorschau",
+      "runtimeExecutable": "/usr/local/bin/python3",
+      "runtimeArgs": ["-m", "http.server", "8001", "--bind", "127.0.0.1", "--directory", "/Users/job/Downloads/lernplattform-claude"],
+      "port": 8001
+    },
+    {
+      "name": "hauptfassung-vorschau",
+      "runtimeExecutable": "/usr/local/bin/python3",
+      "runtimeArgs": ["-m", "http.server", "8000", "--bind", "127.0.0.1", "--directory", "/Users/job/Downloads/lernplattform-live"],
+      "port": 8000
+    }
+  ]
+}

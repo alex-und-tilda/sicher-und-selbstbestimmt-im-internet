@@ -6270,6 +6270,101 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 .alltag-next { margin-block: 24px; padding: 16px; border-left: 4px solid var(--accent); border-radius: var(--radius-s); background: var(--surface-soft); }
 .alltag-next h3 { margin-top: 0; }
 .alltag-next .nav-button { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+
+/* Vergleichs-Entwürfe A/B (alltag-de.js, ?variante=a|b) – nur lokale Vorschau.
+   Ordnung: oben Hilfe zur Übung, Mitte Übung mit Übungs-Handy, unten Andere Wege.
+   Unterschieden durch Reihenfolge, Abstand, Rahmen und Beschriftung – nicht
+   allein durch Farbe (WCAG 1.4.1). Eine Spalte (48rem), Touch-Flächen ≥ 58 px. */
+.alltag-variant { max-width: 48rem; margin-inline: auto; }
+.alltag-v-support-row { display: flex; flex-wrap: wrap; gap: 10px; margin-inline-end: auto; }
+/* Werkzeug-Zeile nur so breit wie die Übung: keine Knöpfe am Bildschirmrand,
+   zusätzliche Breite bleibt leer. */
+.alltag-v-toolrow { max-width: 48rem; margin: 0 auto 10px; }
+/* Hilfe in derselben Pillen-Form wie Vorlesen (Füllung --accent-soft, Schrift
+   --accent-dark, 58 px): Unterstützung ist eine Familie – anders als die
+   weißen, eckigen, nummerierten Antworten im Übungs-Handy. */
+.alltag-v-tool {
+  min-height: 58px;
+  padding: 8px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border: 2px solid transparent;
+  border-radius: 99px;
+  cursor: pointer;
+  text-align: left;
+}
+.alltag-v-tool:hover { border-color: var(--accent); }
+.alltag-v-tool[aria-expanded="true"] { border-color: var(--accent); }
+.alltag-v-help-panel .alltag-v-demo { flex: 0 1 auto; min-height: 58px; margin-top: 4px; padding-inline: 28px; }
+.alltag-v-help-panel { max-width: 48rem; margin: 0 auto 10px; padding: 14px 18px; border: 2px solid var(--line); border-radius: var(--radius-m); background: var(--surface); }
+.alltag-v-help-panel p { margin-block: 0 8px; }
+.alltag-v-help-panel p:last-child { margin-bottom: 0; }
+/* Engere, aber gleichmäßige Abstände nur auf den Entwurfsseiten – damit die
+   Aufgabe auf dem iPad quer nicht unter die Menü-Leiste rutscht. Kein Inhalt
+   entfällt, keine Schrift und keine Touch-Fläche wird kleiner. */
+.app:has(.alltag-variant) .app-header { padding-block: 8px; }
+.app:has(.alltag-variant) .content { margin-top: 10px; }
+.app:has(.alltag-variant) .orient-line { padding-block: 6px; }
+.alltag-v-card { margin-inline: 0; max-width: none; padding: 14px 24px 22px; }
+.alltag-v-simulation { margin: 0 0 8px; font-size: 1rem; color: var(--ink-soft); }
+.alltag-v-label { margin: 0 0 4px; font-size: 1rem; font-weight: 700; color: var(--ink); }
+.alltag-v-card h2 { margin-block: 0 8px; }
+.alltag-v-card > p, .alltag-v-card > div > p { margin-block: 0 10px; }
+.alltag-v-chosen { margin: 0 0 12px; padding: 10px 14px; border: 2px solid var(--line); border-radius: var(--radius-s); color: var(--ink); background: var(--surface); }
+.alltag-v-task, .alltag-v-next, .alltag-v-feedback { margin-top: 14px; }
+.alltag-v-feedback h3 { margin-block: 0 8px; }
+.alltag-v-answers { display: flex; flex-direction: column; gap: 12px; }
+.alltag-v-answers > button { flex: 0 0 auto; width: 100%; min-height: 62px; white-space: normal; overflow-wrap: anywhere; }
+.alltag-variant .answer-option { padding-block: 10px; }
+.alltag-v-card .alltag-goal { margin-block: 0 10px; padding-block: 8px; }
+.alltag-v-card .alltag-guidance { margin-block: 0 10px; }
+.alltag-v-card .alltag-help { margin-block: 12px 0; }
+.alltag-v-card #alltag-reflection:empty { display: none; }
+/* Übungs-Handy: eigener, deutlich anderer Rahmen (dicke Kontur, Beschriftung
+   oben). Nur simulierte Handlungen stehen darin. */
+.alltag-phone {
+  margin-block: 2px 0;
+  padding: 0 clamp(14px, 3vw, 20px) clamp(12px, 2vw, 16px);
+  border: 3px solid var(--ink-soft);
+  border-radius: var(--radius-l);
+  background: var(--surface-soft);
+  overflow-wrap: anywhere;
+}
+.alltag-phone-caption {
+  margin: 0 0 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-align: center;
+}
+.alltag-phone h3 { margin: 0 0 8px; }
+.alltag-phone .alltag-message { margin-block: 0 12px; padding: 12px 14px; }
+.alltag-phone > :last-child { margin-bottom: 0; }
+.alltag-phone .alltag-v-chosen { margin-bottom: 0; }
+.alltag-v-ways { margin-top: 16px; padding-top: 8px; border-top: 2px solid var(--line); }
+.alltag-v-way-list { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+.alltag-variant .nav-button.alltag-v-way {
+  flex: 0 1 auto;
+  min-height: 58px;
+  padding: 8px 4px;
+  background: none;
+  border: 0;
+  border-radius: var(--radius-s);
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.alltag-variant .nav-button.alltag-v-way:hover { text-decoration-thickness: 3px; }
+.alltag-variant button:focus-visible, .alltag-variant summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+#alltag-phase-focus:focus { outline: none; }
+#alltag-phase-focus:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
 /* Datenschutz-Übung: Hinweise von Alex/Tilda und freiwillige Einschätzung am Ende. */
 .privacy-guide, .privacy-closing { margin-block: 1.25rem; padding: 1.1rem; border: 1px solid var(--line); border-radius: var(--radius-s); background: var(--surface); color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
 .privacy-guide { border-inline-start: 4px solid var(--accent); }
@@ -6284,6 +6379,8 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 @media (max-width: 560px) {
   .alltag-actions, .alltag-footer { flex-direction: column; }
   .alltag-actions > *, .alltag-footer > * { width: 100%; }
+  .alltag-v-way-list { flex-direction: column; gap: 0; }
+  .alltag-v-tool { flex: 1 1 100%; }
   .privacy-guide, .privacy-closing { padding: .8rem; }
 }
 @media print {
