@@ -20,3 +20,9 @@ assets/svg til/
 /icons/
 /illustrations/
 /brand/
+
+# Werkzeug-Ordner der KI-Assistenten (Skills, lokale Vorschau-Einstellung).
+# Bleiben lokal: GitHub Pages liefert wegen .nojekyll sonst alles öffentlich
+# aus – dieselbe Überlegung wie beim Umzug von docs/ auf `interne-doku` (§15).
+.agents/
+.claude/
