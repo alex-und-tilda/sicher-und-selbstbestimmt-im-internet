@@ -575,11 +575,11 @@ const CONTENT_VERSIONS = {
       ] }
     },
     "Foto posten": {
-      einfach: { text: [
+      einfach: { examples: ["Auf dem Foto ist das Straßenschild vor deinem Haus zu sehen. So wissen andere, wo du wohnst.", "Auf dem Tisch liegt ein Brief, auf dem man deinen Namen und deine Adresse lesen kann."], text: [
         { text: "Wenn du ein Foto postest, können viele Menschen es sehen." },
         { text: "Achte darauf, was im Bild zu erkennen ist, denn oft verraten Hintergrund oder Details mehr über dich, als du denkst." }
       ] },
-      standard: { text: [
+      standard: { examples: ["Im Hintergrund ist das Straßenschild vor deiner Wohnung zu erkennen – daraus lässt sich ablesen, wo du wohnst.", "Auf dem Tisch liegt ein Brief, auf dem Name und Adresse gut lesbar sind."], text: [
         { text: "Wenn du ein Foto postest, können es viele Menschen sehen. Achte darauf, was im Bild zu erkennen ist – oft verraten Hintergrund oder Details mehr über dich, als dir bewusst ist." }
       ] }
     },
@@ -613,12 +613,12 @@ const CONTENT_VERSIONS = {
       ] }
     },
     "Private Nachrichten": {
-      einfach: { warning: "Wenn dir eine fremde Person schreibt und nach privaten Fotos oder Daten fragt, ist das ein Warnzeichen. Du musst nicht antworten und kannst die Person blockieren.", text: [
+      einfach: { examples: ["„Du bist so schön. Schick mir doch noch mehr Fotos von dir.“", "Eine fremde Person fragt, wo du wohnst und ob du gerade allein zu Hause bist."], warning: "Wenn dir eine fremde Person schreibt und nach privaten Fotos oder Daten fragt, ist das ein Warnzeichen. Du musst nicht antworten und kannst die Person blockieren.", text: [
         { text: "Wenn dir eine fremde Person privat schreibt und nach Fotos oder Daten fragt, ist das ein Warnzeichen." },
         { text: "Geh darauf nicht ein und schick keine privaten Bilder." },
         { text: "Im Zweifel blockierst du den Kontakt." }
       ] },
-      standard: { warning: "Fordert dich eine unbekannte Person in privaten Nachrichten zu Fotos oder persönlichen Daten auf, ist das ein Warnsignal. Du musst nicht antworten und kannst die Person blockieren oder melden.", text: [
+      standard: { examples: ["„Du siehst toll aus. Schick mir doch noch ein paar Fotos – nur für mich.“", "Eine unbekannte Person fragt nach deiner Adresse und ob du gerade allein zu Hause bist."], warning: "Fordert dich eine unbekannte Person in privaten Nachrichten zu Fotos oder persönlichen Daten auf, ist das ein Warnsignal. Du musst nicht antworten und kannst die Person blockieren oder melden.", text: [
         { text: "Wenn dir eine fremde Person private Nachrichten schickt und nach Fotos oder persönlichen Daten fragt, ist das ein deutliches Warnzeichen. Geh darauf nicht ein, schick keine privaten Bilder und blockiere den Kontakt im Zweifel." }
       ] }
     },
@@ -688,18 +688,18 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
     },
     "Videos prüfen": {
-      einfach: { text: [
+      einfach: { examples: ["Ein Video verspricht: „Mit diesem Trick bist du in einer Woche reich.“", "Ein Video sagt, dass ein bestimmtes Wasser jede Krankheit heilt."], text: [
         { text: "Nicht alles, was in Videos gesagt wird, ist wahr, denn manche Videos übertreiben oder lügen." },
         { text: "Glaub deshalb nicht alles sofort und prüfe wichtige Aussagen." }
       ] },
-      standard: { text: [{ text: "Nicht alles, was in Videos behauptet wird, stimmt. Manche Inhalte übertreiben oder sind bewusst falsch, um Aufmerksamkeit zu erzeugen. Prüfe wichtige Aussagen und glaub nicht alles sofort." }] }
+      standard: { examples: ["Ein Video verspricht, dass man mit einem einfachen Trick in einer Woche reich wird.", "Ein Video behauptet, ein bestimmtes Wasser heile jede Krankheit – ohne Quellen oder Belege."], text: [{ text: "Nicht alles, was in Videos behauptet wird, stimmt. Manche Inhalte übertreiben oder sind bewusst falsch, um Aufmerksamkeit zu erzeugen. Prüfe wichtige Aussagen und glaub nicht alles sofort." }] }
     },
     "Werbung erkennen": {
-      einfach: { text: [
+      einfach: { examples: ["Eine Frau stellt im Video eine Creme vor, und unter dem Video steht „Werbung“.", "„Kauf das jetzt! Nur heute ist es billiger.“"], text: [
         { text: "In vielen Videos steckt Werbung, die dich zum Kaufen bringen will." },
         { text: "Lass dich nicht zu schnellen Käufen drängen und überlege in Ruhe." }
       ] },
-      standard: { text: [{ text: "In vielen Videos steckt Werbung – manchmal offen, manchmal versteckt als Empfehlung. Ihr Ziel ist, dass du etwas kaufst. Lass dich nicht zu schnellen Käufen drängen und überlege in Ruhe." }] }
+      standard: { examples: ["In einem Video wird eine Creme vorgestellt; darunter steht klein „Werbung“ oder „Anzeige“.", "„Nur heute zum halben Preis – jetzt über meinen Link kaufen!“"], text: [{ text: "In vielen Videos steckt Werbung – manchmal offen, manchmal versteckt als Empfehlung. Ihr Ziel ist, dass du etwas kaufst. Lass dich nicht zu schnellen Käufen drängen und überlege in Ruhe." }] }
     },
     "Autoplay und Zeit": {
       einfach: { text: [
@@ -790,12 +790,12 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Druck erkennst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
     },
     "Bilder verschwinden nicht immer": {
-      einfach: { text: [
+      einfach: { examples: ["Du schickst ein lustiges Bild, das nach 10 Sekunden verschwindet. Aber dein Freund hat es vorher gespeichert.", "Ein Bild, das du nur einer Person geschickt hast, taucht später in einer Gruppe auf."], text: [
         { text: "Bei Snapchat ist ein Bild oft nur kurz zu sehen." },
         { text: "Trotzdem kann der andere das Bild speichern oder abfotografieren." },
         { text: "Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften." }
       ], warning: "Auch wenn ein Bild schnell verschwindet, kann es jemand vorher speichern. Sende deshalb nur Bilder, die andere sehen dürfen." },
-      standard: { text: [{ text: "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich weg sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften." }], warning: "Ein Snap verschwindet zwar nach kurzer Zeit, lässt sich aber vorher per Screenshot sichern. Verschicke deshalb nur Bilder, deren Weitergabe für dich in Ordnung ist." }
+      standard: { examples: ["Ein Bild verschwindet nach zehn Sekunden – der Empfänger hat es vorher per Bildschirmfoto gespeichert.", "Ein Bild, das nur für eine Person gedacht war, taucht Wochen später in einem Gruppenchat auf."], text: [{ text: "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich weg sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften." }], warning: "Ein Snap verschwindet zwar nach kurzer Zeit, lässt sich aber vorher per Screenshot sichern. Verschicke deshalb nur Bilder, deren Weitergabe für dich in Ordnung ist." }
     },
     "Bild vom Bildschirm": {
       einfach: {
@@ -833,12 +833,12 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "Nicht jeder, der dir schreibt, ist vertrauenswürdig. Auch Fremde können Kontakt aufnehmen. Du musst nicht antworten und kannst unbekannte Kontakte ablehnen oder blockieren." }] }
     },
     "Druck erkennen": {
-      einfach: { text: [
+      einfach: { examples: ["„Schick mir ein Bild. Aber sag es niemandem.“", "„Wenn du mir kein Bild schickst, bin ich nicht mehr dein Freund.“"], text: [
         { text: "Wenn jemand sagt: „Schick das Bild, aber sag es niemandem“, ist das ein Warnzeichen." },
         { text: "Wer Geheimhaltung verlangt, setzt dich bewusst unter Druck." },
         { text: "Du darfst Nein sagen und dir Hilfe holen." }
       ] },
-      standard: { text: [{ text: "Sätze wie „Schick mir das Bild, aber sag es niemandem“ sind ein klares Warnzeichen. Wer Geheimhaltung verlangt, setzt dich bewusst unter Druck. Du darfst Nein sagen und dir sofort Unterstützung holen." }] }
+      standard: { examples: ["„Schick mir ein Bild – aber das bleibt unser Geheimnis.“", "„Wenn du mir kein Bild schickst, ist unsere Freundschaft vorbei.“"], text: [{ text: "Sätze wie „Schick mir das Bild, aber sag es niemandem“ sind ein klares Warnzeichen. Wer Geheimhaltung verlangt, setzt dich bewusst unter Druck. Du darfst Nein sagen und dir sofort Unterstützung holen." }] }
     },
     "Was kann ich tun?": {
       einfach: {
@@ -895,24 +895,24 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "TikTok beobachtet, welche Videos du ansiehst, und zeigt dir immer mehr vom Gleichen. Dieser Sog führt dazu, dass man schnell sehr lange schaut. Mach dir das bewusst und leg bewusst Pausen ein." }] }
     },
     "Gefährliche Trends erkennen": {
-      einfach: { warning: "Manche Trends sehen lustig aus, können aber gefährlich sein und weh tun. Mach bei solchen Trends nicht mit – deine Gesundheit ist wichtiger.",
+      einfach: { examples: ["Bei einem Trend sollen alle so lange wie möglich die Luft anhalten. Das ist gefährlich für deine Gesundheit.", "Bei einem Trend essen alle sehr scharfe Chips. Das kann weh tun und dich krank machen."], warning: "Manche Trends sehen lustig aus, können aber gefährlich sein und weh tun. Mach bei solchen Trends nicht mit – deine Gesundheit ist wichtiger.",
         text: [
           { text: "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun." },
           { text: "Deine Sicherheit ist wichtiger als Likes." }
         ],
         remember: "Ich muss nicht bei jedem Trend mitmachen."
       },
-      standard: { warning: "Nicht jeder Trend ist harmlos: Manche können gefährlich sein und zu Verletzungen führen. Mach bei solchen Challenges nicht mit; deine Gesundheit geht vor.",
+      standard: { examples: ["Ein Trend fordert dazu auf, möglichst lange die Luft anzuhalten – das kann ernsthaft gefährlich werden.", "Bei einer „Challenge“ essen alle extrem scharfe Chips – das kann Schmerzen und Kreislaufprobleme auslösen."], warning: "Nicht jeder Trend ist harmlos: Manche können gefährlich sein und zu Verletzungen führen. Mach bei solchen Challenges nicht mit; deine Gesundheit geht vor.",
         text: [{ text: "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun. Deine Sicherheit ist wichtiger als Likes." }],
         remember: "Ich mache bei gefährlichen Trends nicht mit."
       }
     },
     "Private Nachrichten": {
-      einfach: { warning: "Fremde Personen können dir bei TikTok schreiben und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel.", text: [
+      einfach: { examples: ["„Ich mag deine Videos. Gib mir deine Telefon-Nummer, dann schreiben wir privat.“", "„Ich schicke dir Geld, wenn du mir ein Foto von dir schickst.“"], warning: "Fremde Personen können dir bei TikTok schreiben und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel.", text: [
         { text: "Auch auf TikTok können dir Fremde schreiben und nach Adresse, Fotos oder anderen Daten fragen." },
         { text: "Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel." }
       ] },
-      standard: { warning: "Auch bei TikTok können dir Fremde schreiben und nach Adresse, Fotos oder persönlichen Daten fragen. Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel.", text: [{ text: "Auch auf TikTok können dir Fremde private Nachrichten schicken und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Informationen nicht weiter und blockiere den Kontakt im Zweifel." }] }
+      standard: { examples: ["„Deine Videos sind toll! Gib mir deine Telefonnummer, dann können wir privat schreiben.“", "„Ich schicke dir 50 Euro, wenn du mir ein Foto von dir schickst.“"], warning: "Auch bei TikTok können dir Fremde schreiben und nach Adresse, Fotos oder persönlichen Daten fragen. Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel.", text: [{ text: "Auch auf TikTok können dir Fremde private Nachrichten schicken und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Informationen nicht weiter und blockiere den Kontakt im Zweifel." }] }
     },
     "Videos posten": {
       einfach: { text: [
@@ -1004,11 +1004,11 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "Wenn dich eine Nachricht unter Stress setzt, ist der erste Impuls oft, sofort zu reagieren. Die Stopp-Regel hilft dir dabei, das zu vermeiden: Halte zuerst inne und überlege in Ruhe, bevor du etwas tust." }] }
     },
     "Nicht sofort löschen": {
-      einfach: { warning: "Lösche eine gemeine oder bedrohliche Nachricht nicht sofort. Mach vorher ein Bild vom Bildschirm (Screenshot). So kannst du sie später einer Person zeigen, die dir hilft.", text: [
+      einfach: { examples: ["Jemand beleidigt dich in einer Nachricht. Du machst zuerst ein Bild vom Bildschirm und zeigst es einer Person, der du vertraust.", "Jemand droht dir. Du löschst die Nachricht nicht sofort, sondern zeigst sie zuerst jemandem, der dir helfen kann."], warning: "Lösche eine gemeine oder bedrohliche Nachricht nicht sofort. Mach vorher ein Bild vom Bildschirm (Screenshot). So kannst du sie später einer Person zeigen, die dir hilft.", text: [
         { text: "Eine gemeine oder komische Nachricht willst du vielleicht sofort löschen." },
         { text: "Manchmal ist es aber wichtig, sie erst aufzubewahren, damit du sie jemandem zeigen kannst." }
       ] },
-      standard: { warning: "Lösche belastende oder bedrohliche Nachrichten nicht vorschnell. Sichere sie vorher mit einem Screenshot – so bleibt ein Beleg, den du einer Vertrauensperson oder der Polizei zeigen kannst.", text: [{ text: "Gemeine oder verdächtige Nachrichten möchte man am liebsten sofort löschen. Manchmal ist es aber wichtig, sie zunächst aufzubewahren – als Beweis, um sie einer vertrauten Person oder einer Beratungsstelle zu zeigen." }] }
+      standard: { examples: ["Jemand beleidigt dich per Nachricht. Du sicherst sie zuerst mit einem Bildschirmfoto und zeigst sie dann einer Vertrauensperson.", "Du bekommst eine Drohung. Statt sie sofort zu löschen, hebst du sie auf – etwa für eine Beratungsstelle oder die Polizei."], warning: "Lösche belastende oder bedrohliche Nachrichten nicht vorschnell. Sichere sie vorher mit einem Screenshot – so bleibt ein Beleg, den du einer Vertrauensperson oder der Polizei zeigen kannst.", text: [{ text: "Gemeine oder verdächtige Nachrichten möchte man am liebsten sofort löschen. Manchmal ist es aber wichtig, sie zunächst aufzubewahren – als Beweis, um sie einer vertrauten Person oder einer Beratungsstelle zu zeigen." }] }
     },
     "Bild vom Bildschirm": {
       einfach: { text: [
@@ -1018,11 +1018,11 @@ const CONTENT_VERSIONS = {
       standard: { text: [{ text: "Ein Bildschirmfoto (Screenshot) hält eine Nachricht fest, sodass du sie später zeigen kannst – auch wenn das Original verschwindet. Wenn du nicht weißt, wie das geht, darfst du dir dabei helfen lassen." }] }
     },
     "Druck erkennen": {
-      einfach: { warning: "Wenn dich jemand drängt – zum Beispiel „Mach das sofort“ oder „Sag es niemandem“ –, ist das ein Warnzeichen. Lass dich nicht unter Druck setzen und hol dir Hilfe bei einer Person, der du vertraust.", text: [
+      einfach: { examples: ["„Antworte sofort, sonst passiert etwas!“", "„Erzähl das niemandem. Das bleibt unser Geheimnis.“"], warning: "Wenn dich jemand drängt – zum Beispiel „Mach das sofort“ oder „Sag es niemandem“ –, ist das ein Warnzeichen. Lass dich nicht unter Druck setzen und hol dir Hilfe bei einer Person, der du vertraust.", text: [
         { text: "Wenn jemand sagt: „Mach das sofort“ oder „Erzähl es niemandem“, ist das ein Warnzeichen." },
         { text: "Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor." }
       ] },
-      standard: { warning: "Druck ist ein deutliches Warnsignal: Wer verlangt, dass du sofort handelst oder etwas geheim hältst, will dich meist manipulieren. Lass dich nicht drängen und hol dir Unterstützung bei einer Person, der du vertraust.", text: [{ text: "Aufforderungen wie „Mach das sofort“ oder „Erzähl es niemandem“ sind typische Druckmittel. Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor. Solche Sätze sind ein klares Warnzeichen." }] }
+      standard: { examples: ["„Wenn du nicht in einer Stunde antwortest, hat das Folgen.“", "„Sag niemandem etwas davon – das bleibt unter uns.“"], warning: "Druck ist ein deutliches Warnsignal: Wer verlangt, dass du sofort handelst oder etwas geheim hältst, will dich meist manipulieren. Lass dich nicht drängen und hol dir Unterstützung bei einer Person, der du vertraust.", text: [{ text: "Aufforderungen wie „Mach das sofort“ oder „Erzähl es niemandem“ sind typische Druckmittel. Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor. Solche Sätze sind ein klares Warnzeichen." }] }
     },
     "Angst ernst nehmen": {
       einfach: {

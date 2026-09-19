@@ -2215,6 +2215,7 @@ const topics = [
       },
       {
         "title": "Foto posten",
+        "examples": ["Auf dem Foto sieht man das Straßen-Schild vor deinem Haus.", "Auf dem Tisch liegt ein Brief. Man kann deinen Namen lesen."],
         "module": "Fotos",
         "icon": "photo",
         "text": [
@@ -2343,6 +2344,7 @@ const topics = [
       },
       {
         "title": "Private Nachrichten",
+        "examples": ["Eine fremde Person schreibt: Du bist so schön. Schick mir mehr Fotos von dir.", "Eine fremde Person fragt: Wo wohnst du? Bist du allein zu Hause?"],
         "warning": "Eine fremde Person schreibt dir. Sie fragt nach Fotos oder Daten. Das ist ein Warnzeichen. Antworte nicht und hol dir Hilfe.",
         "module": "Nachrichten",
         "icon": "message",
@@ -2828,6 +2830,7 @@ const topics = [
       },
       {
         "title": "Videos prüfen",
+        "examples": ["Ein Video sagt: Mit diesem Trick bist du schnell reich.", "Ein Video sagt: Dieses Wasser macht jede Krankheit gesund."],
         "module": "Videos",
         "icon": "help",
         "text": [
@@ -2860,6 +2863,7 @@ const topics = [
       },
       {
         "title": "Werbung erkennen",
+        "examples": ["Eine Frau zeigt im Video eine Creme. Unter dem Video steht: Werbung.", "Ein Mann sagt im Video: Kauf das jetzt. Nur heute ist es billiger."],
         "module": "Werbung",
         "icon": "warning",
         "text": [
@@ -3413,6 +3417,7 @@ const topics = [
       },
       {
         "title": "Bilder verschwinden nicht immer",
+        "examples": ["Du schickst ein lustiges Bild. Es verschwindet nach 10 Sekunden. Dein Freund hat es vorher gespeichert.", "Du schickst ein Bild an eine Person. Später ist das Bild in einer Gruppe."],
         "module": "Bilder",
         "icon": "photo",
         "text": [
@@ -3564,6 +3569,7 @@ const topics = [
       },
       {
         "title": "Druck erkennen",
+        "examples": ["Jemand schreibt: Schick mir ein Bild. Sag es niemandem.", "Jemand schreibt: Schick mir ein Bild. Sonst bin ich nicht mehr dein Freund."],
         "module": "Druck",
         "icon": "warning",
         "text": [
@@ -3999,6 +4005,7 @@ const topics = [
       },
       {
         "title": "Gefährliche Trends erkennen",
+        "examples": ["Ein Trend sagt: Halte die Luft lange an. Das ist gefährlich.", "Ein Trend sagt: Iss ganz scharfe Chips. Das kann weh tun."],
         "warning": "Manche Trends sind gefährlich. Ein Trend kann weh tun? Dann mach nicht mit. Deine Gesundheit ist wichtiger.",
         "module": "Trends",
         "icon": "warning",
@@ -4053,6 +4060,7 @@ const topics = [
       },
       {
         "title": "Private Nachrichten",
+        "examples": ["Eine fremde Person schreibt: Ich mag deine Videos. Gib mir deine Telefon-Nummer.", "Eine fremde Person schreibt: Ich schicke dir Geld. Du schickst mir ein Foto."],
         "warning": "Fremde können dir schreiben. Sie fragen nach Adresse, Fotos oder Daten. Gib solche Daten nicht weiter.",
         "module": "Nachrichten",
         "icon": "message",
@@ -4606,6 +4614,7 @@ const topics = [
       },
       {
         "title": "Nicht sofort löschen",
+        "examples": ["Jemand beleidigt dich. Du machst ein Bild vom Bildschirm. Dann zeigst du es einer vertrauten Person.", "Jemand droht dir. Du löschst die Nachricht nicht sofort. Du zeigst sie zuerst."],
         "warning": "Lösche eine gemeine Nachricht nicht sofort. Mach erst ein Bild vom Bildschirm. So kannst du sie später zeigen.",
         "module": "Beweise",
         "icon": "check",
@@ -4671,6 +4680,7 @@ const topics = [
       },
       {
         "title": "Druck erkennen",
+        "examples": ["Jemand schreibt: Antworte sofort. Sonst passiert etwas.", "Jemand schreibt: Erzähl das niemandem. Das ist unser Geheimnis."],
         "warning": "Jemand macht Druck. Zum Beispiel: Mach das sofort. Oder: Sag es niemandem. Das ist ein Warnzeichen. Hol dir Hilfe.",
         "module": "Druck",
         "icon": "warning",
