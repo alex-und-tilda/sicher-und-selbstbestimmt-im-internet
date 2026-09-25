@@ -1,0 +1,7265 @@
+/* ============================================================
+   Lokale Schrift: Atkinson Hyperlegible
+   WOFF2 (modern, klein):  assets/fonts/atkinson-*.woff2
+   TTF   (Fallback):       assets/fonts/atkinson-*.ttf
+   ============================================================ */
+
+/* latin-ext (ä, ö, ü, ß und weitere) — Regular 400 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-regular-ext.woff2') format('woff2'),
+       url('assets/fonts/atkinson-regular.ttf') format('truetype');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+                 U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+                 U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+                 U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin — Regular 400 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-regular.woff2') format('woff2'),
+       url('assets/fonts/atkinson-regular.ttf') format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+                 U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+                 U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext — Bold 700 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-bold-ext.woff2') format('woff2'),
+       url('assets/fonts/atkinson-bold.ttf') format('truetype');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+                 U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+                 U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+                 U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin — Bold 700 */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/atkinson-bold.woff2') format('woff2'),
+       url('assets/fonts/atkinson-bold.ttf') format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+                 U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+                 U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============================================================
+   Sicher und selbstbestimmt im Internet
+   Stylesheet – Version 2026, komplett neu
+
+   Gestaltungs-Grundsätze:
+   - ruhig und reizarm
+   - große Schrift, große Knöpfe
+   - hoher Kontrast (WCAG AA)
+   - deutliche Fokus-Rahmen für Tastatur-Bedienung
+   - respektiert "weniger Bewegung" (prefers-reduced-motion)
+   ============================================================ */
+
+:root {
+  --scene-backdrop: rgba(10, 92, 149, 0.08);
+  --bg: #eef3f9;
+  --bg-grad-1: #f4f8fc;
+  --bg-grad-2: #e7eef7;
+  --surface: #ffffff;
+  --surface-soft: #f6faff;
+  --ink: #16222e;
+  --ink-soft: #3d506a;   /* WCAG AA: ~5.2:1 Kontrast auf --bg */
+  --line: #d7e0ea;
+  --accent: #00528f;
+  --accent-dark: #003a66;
+  --accent-soft: #e3eef7;
+  /* Schrift auf einer Flaeche in --accent. Hell-Modus: Akzent ist dunkel -> weiss.
+     Dark Mode ueberschreibt das auf dunkel (siehe unten). */
+  --on-accent: #ffffff;
+  --good: #15803d;
+  --good-bg: #e8f6ee;
+  --warn: #b45309;
+  --warn-bg: #fdf1e0;
+  --bad: #b91c1c;
+  --bad-bg: #fdecec;
+  --remember: #00528f;
+  --remember-bg: #e6f0f9;
+  --focus: #b45309;
+  --radius-l: 26px;
+  --radius-m: 18px;
+  --radius-s: 12px;
+  --shadow: 0 1px 2px rgba(20, 34, 49, 0.04), 0 8px 24px rgba(20, 34, 49, 0.07);
+  --shadow-small: 0 1px 3px rgba(20, 34, 49, 0.08);
+  --shadow-hover: 0 4px 10px rgba(20, 34, 49, 0.08), 0 18px 40px rgba(20, 34, 49, 0.12);
+  --topic-color: var(--accent);
+  --topic-ring: rgba(0, 82, 143, 0.25);
+  --topic-hover-bg: rgba(0, 82, 143, 0.08);
+  --topic-icon-bg: var(--accent-soft);
+  /* Hauptmenü (Tab-Leiste): aktive Unterlegung = Tilbeck-Hellblau #d8eaf2.
+     Text darauf: --accent-dark #003a66 (Kontrast > 9:1, AA ✓). */
+  --tab-active-bg: #d8eaf2;
+  /* Fortschrittsbalken (WCAG 2.2, 1.4.11 Nicht-Text-Kontrast).
+     Die Rinne bleibt weiss, weil die Themenfarben unveraendert bleiben:
+     nur gegen Weiss erreicht jede Fuellung 3:1 (engster Fall WhatsApp
+     #1DA855 = 3,10:1, Snapchat #A88A00 = 3,33:1). Die Form des Balkens
+     traegt deshalb die Kontur: #5b7186 auf --surface = 5,06:1
+     (vorher: Rinne #e3eef7 auf weisser Karte = 1,18:1, also unsichtbar). */
+  --track-bg: #ffffff;
+  --track-line: #5b7186;
+  /* In rem, damit das Menü mitwächst, wenn die Schrift auf A+ / A++ steht */
+  --tabbar-h: 4.7rem;
+}
+
+/* ---------- Grundlagen ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+  /* ============================================================
+     WCAG 2.2 SC 2.4.11 – Fokus nicht verdeckt
+     ------------------------------------------------------------
+     Oben klebt der Kopf, UNTEN stehen zwei feste Leisten
+     uebereinander: das Hauptmenue (.main-tabbar, 4.7rem) und auf
+     Lernschritten darueber die Zurueck/Weiter-Leiste (.nav).
+
+     Bis 13.09.2026 gab es nur scroll-padding-top. Beim Durchtabben
+     landeten Bedienelemente deshalb VOLLSTAENDIG unter der
+     Menueleiste – gemessen 10 Ueberlappungen in einer einzigen
+     Lektion, 4 davon ganz verdeckt (u. a. der Knopf "Plan ueben").
+     Das ist ein AA-Verstoss, kein Schoenheitsfehler: Wer die Seite
+     mit der Tastatur bedient, verliert die Stelle, an der er ist.
+
+     In rem, nicht in px: Die Schriftgroessen-Schalter (A / A+ / A++)
+     vergroessern die Leisten mit – ein fester px-Wert wuerde bei
+     grosser Schrift wieder zu klein. */
+  scroll-padding-top: 80px;
+  scroll-padding-bottom: calc(var(--tabbar-h) + 1rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Lernschritte: Zurueck/Weiter-Leiste steht zusaetzlich ueber dem
+   Hauptmenue. Faellt :has() aus (sehr alter Browser), bleibt die
+   Regel oben stehen – dann ist der Abstand kleiner, aber nicht
+   falsch. Kein Bruch, nur weniger Luft. */
+html:has(.nav:not(.is-hidden)) {
+  scroll-padding-bottom: calc(var(--tabbar-h) + 6.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  background: linear-gradient(180deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.3;
+  margin: 0 0 0.6em;
+  overflow-wrap: break-word;
+  /* Umbruch auf gleich lange Zeilen verteilen, statt ein einzelnes Wort
+     allein in die letzte Zeile zu schicken. Fuer unsere langen deutschen
+     Ueberschriften ("Sicher und selbstbestimmt im Internet") ein spuerbar
+     ruhigeres Bild - reine Darstellung, ohne Folgen fuers Layout. */
+  text-wrap: balance;
+}
+
+/* h1 war mit 1.45rem KLEINER als h2 mit 1.5rem - die Rangfolge stimmte
+   nicht (§9: sinnvolle Ueberschriften-Hierarchie). Knapp darueber gesetzt
+   statt deutlich: der Seitentitel steht in der Kopfzeile und soll dort
+   nicht auf eine dritte Zeile wachsen. */
+h1 { font-size: 1.55rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; }
+
+p, li {
+  /* Verhindert Schusterjungen: kein einzelnes Wort mehr allein in der
+     letzten Zeile eines Absatzes. */
+  text-wrap: pretty;
+  font-size: 1.06rem;
+}
+
+ul, ol {
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: 0.45em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent-dark);
+}
+
+/* Deutlicher Fokus-Rahmen für Tastatur-Bedienung */
+:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Weniger Bewegung, wenn das Gerät das wünscht */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+/* ---------- Grund-Aufbau ---------- */
+
+.app {
+  max-width: 1060px;
+  margin: 0 auto;
+  /* Unten Platz für das feste Hauptmenü lassen */
+  padding: 16px 16px calc(48px + var(--tabbar-h));
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  /* Farbband in der Themenfarbe – dieselbe Sprache wie beim
+     Orientierungs-Satz und der Themen-Zeile: „Farbe steht links".
+     Ausserhalb eines Themas faellt --topic-color auf --accent zurueck,
+     dann sieht der Kopf aus wie bisher. Kostet keine Hoehe. */
+  border-left: 6px solid var(--topic-color);
+  border-radius: var(--radius-l);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-small);
+}
+
+.home-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 58px;
+  min-height: 58px;
+  padding: 8px 16px;
+  font-weight: 700;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.home-button-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.home-button-label {
+  font-size: 1rem;
+}
+
+.home-button:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.sound-toggle-button {
+  flex: none;
+  order: 3;
+  min-height: 58px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.sound-toggle-button.sound-on {
+  border-color: var(--good);
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+.motion-toggle-button {
+  flex: none;
+  order: 4;
+  min-height: 58px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+/* Aktiver Zustand nicht nur über Farbe: zusätzlich ein Symbol vor dem Text */
+.motion-toggle-button.motion-off {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.motion-toggle-button.motion-off::before {
+  content: "\23F8\FE0E";
+  margin-right: 6px;
+}
+
+/* ============================================================
+   Markierter Text in Marken-Farbe statt Browser-Blau.
+   ============================================================ */
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Vom Nutzer gewählt: keine Bewegung (zusätzlich zur System-Einstellung) */
+html.no-motion *,
+html.no-motion *::before,
+html.no-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+
+.header-text p {
+  margin: 2px 0 0;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Fortschritt ---------- */
+
+.progress-area {
+  margin-top: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 12px 18px;
+}
+
+/* Die Meta-Zeile sagte woertlich dasselbe wie der Orientierungssatz direkt
+   darueber ("Frage 1 von 11" plus den Abschnittsnamen, der auch im Kopf
+   steht). Auf dem Handy kostete diese Doppelung Platz, den die Antworten
+   brauchen. Der Text bleibt fuer Screenreader erhalten – nur gemalt wird
+   er nicht mehr. Ohne die Elemente wuerde setHeader() ins Leere greifen. */
+.progress-meta {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.progress-track {
+  height: 16px;
+  background: var(--track-bg);
+  /* box-sizing: border-box gilt global -> die Hoehe bleibt bei 16 px. */
+  border: 1px solid var(--track-line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  /* Der Balken liegt genau dort, wo man beim Orientieren hinschaut.
+     Deshalb traegt er die Themenfarbe statt immer dasselbe Grundblau. */
+  background: var(--topic-color);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* ---------- Inhalt ---------- */
+
+.content {
+  margin-top: 18px;
+  outline: none;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 26px 26px 30px;
+  box-shadow: var(--shadow);
+}
+
+.hero-card {
+  position: relative;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(64,196,255,0.32) 0%, rgba(64,196,255,0) 55%),
+    linear-gradient(135deg, #0a5c95 0%, #0b3f72 60%, #123a82 100%);
+  color: #ffffff;
+  border-radius: var(--radius-l);
+  padding: 30px 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 30px rgba(10,82,143,0.28);
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-icon {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  opacity: 0.92;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25));
+}
+
+.hero-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-card h2 {
+  color: #ffffff;
+  margin-bottom: 0.15em;
+  font-size: 1.7rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-card p {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  color: #ddeeff;
+}
+
+.hero-meta {
+  font-size: 0.88rem !important;
+  color: rgba(255,255,255,0.7) !important;
+  margin-top: 6px !important;
+}
+
+.hero-progress-row {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-progress-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+/* Farben aus den Token statt hartkodiertem Weiss (21.09.2026).
+   Diese Zeile stammt aus einer Zeit, in der sie auf einer dunklen
+   Hero-Flaeche lag. Auf „Mein Lernweg" steht sie auf dem hellen
+   Seiten-Hintergrund – die Zahl war dort weiss auf hell und damit
+   unlesbar (§9 Kontrast AA, §10 keine festen Hex-Farben). Der Fehler
+   bestand auch in der veroeffentlichten Fassung; die Umstellung auf
+   zugeklappte Bloecke hat ihn nur nach oben geholt. */
+.hero-progress-count {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hero-progress-of {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.hero-progress-track {
+  height: 12px;
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hero-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+/* Sprach-Chip im Hero der Themen-Übersicht */
+.hero-lang-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.32);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.hero-lang-chip:hover {
+  background: rgba(255,255,255,0.26);
+}
+
+/* „Mehr"-Bereich (dezente Sekundär-Aktionen unter den Themen) */
+.more-section {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.more-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
+/* ---------- Sprachstufen-Auswahl (Start) ---------- */
+
+.language-choice {
+  padding: 6px 0 0;
+}
+
+.language-choice-title {
+  font-size: 1.6rem;
+  margin: 8px 0 6px;
+}
+
+.language-choice-intro {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin: 0 0 20px;
+  max-width: 52ch;
+}
+
+.language-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.language-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.language-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.language-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-m);
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+}
+
+.language-icon img {
+  width: 38px;
+  height: 38px;
+}
+
+.language-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.language-desc {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.language-card.is-rec {
+  border-color: var(--good);
+}
+
+.language-rec {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--good);
+  background: var(--good-bg);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* ---------- Einstieg: erst fragen oder selbst wählen ---------- */
+
+.start-entry {
+  padding: 6px 0 0;
+}
+
+.start-entry-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.entry-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.entry-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.entry-icon {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-m);
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+}
+
+.entry-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.entry-text strong {
+  display: block;
+  font-size: 1.18rem;
+}
+
+.entry-text span {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+/* ---------- Sprach-Abfrage (Fragen) ---------- */
+
+.lang-quiz-card {
+  text-align: center;
+}
+
+.lq-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.lq-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.lq-dot.on {
+  background: var(--accent);
+}
+
+.lq-question {
+  font-size: 1.4rem;
+  margin: 0 0 18px;
+}
+
+.lang-quiz-card .answers {
+  text-align: left;
+}
+
+.lang-quiz-card .plain-back-button {
+  margin-top: 16px;
+}
+
+/* ---------- Sprach-Vorschlag (Ergebnis) ---------- */
+
+.lang-result-card {
+  text-align: center;
+}
+
+.lang-result-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--good);
+  background: var(--good-bg);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 10px;
+}
+
+.lang-result-name {
+  font-size: 1.8rem;
+  margin: 4px 0 6px;
+}
+
+.lang-result-desc {
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+}
+
+.lang-result-go {
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+/* ---------- Begleit-Panel (Für Begleitpersonen / Fachkräfte) ---------- */
+
+.companion-panel {
+  position: relative;
+  margin-top: 22px;
+  border: 1.5px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+  overflow: hidden;
+}
+
+.companion-panel > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 44px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.companion-panel > summary::-webkit-details-marker {
+  display: none;
+}
+
+.companion-panel > summary::after {
+  content: "\25be";
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  color: var(--ink-soft);
+}
+
+.companion-panel[open] > summary::after {
+  content: "\25b4";
+}
+
+.companion-panel > summary:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.companion-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.companion-hint {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.companion-body {
+  padding: 4px 18px 20px;
+}
+
+.companion-intro {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.companion-section {
+  margin-bottom: 14px;
+}
+
+.companion-section h4 {
+  font-size: 1.02rem;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.companion-section ul {
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+.companion-section li {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+
+/* Kompetenz-Einordnung: DigComp 2.2 + ICF (nur Begleit-Ebene) */
+.companion-kompetenz h5 {
+  font-size: 0.92rem;
+  margin: 12px 0 4px;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+
+.companion-kompetenz .komp-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.companion-kompetenz .komp-liste li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+
+.komp-code {
+  grid-row: span 3;
+  align-self: start;
+  font-weight: 700;
+  font-size: 0.86rem;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border-radius: var(--radius-s);
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+.komp-titel {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.komp-stufe {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.komp-bezug {
+  font-size: 0.94rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.komp-fuss {
+  font-size: 0.86rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 10px 0 0;
+}
+
+.companion-print {
+  margin-top: 8px;
+  min-height: 48px;
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--accent-dark);
+}
+
+.companion-print:hover {
+  background: var(--accent-soft);
+}
+
+/* ---------- Themen-Karten ---------- */
+
+.topic-group {
+  margin-top: 26px;
+}
+
+.topic-group .topic-grid-hint {
+  margin-top: 2px;
+}
+
+/* Liste statt Raster (August 2026).
+   Im Raster musste man die Lesereihenfolge selbst erschliessen (rechts, dann
+   runter) und es waren nur 3 von 12 Themen gleichzeitig sichtbar. Eine Liste
+   hat genau eine Richtung – von oben nach unten – und zeigt 8 Themen auf
+   einmal. Am Desktop bleiben zwei Spalten, damit die Zeilen nicht ausufern. */
+.topic-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 860px) {
+  .topic-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+
+/* App-Kacheln (Smartphone-Look): farbiges Icon-Feld oben, darunter Name
+   und kurze Beschreibung – zentriert. */
+.topic-card {
+  position: relative; /* für Abzeichen und Häkchen */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "icon badge"
+    "icon title"
+    "icon desc"
+    "icon done";
+  align-items: center;
+  column-gap: 13px;
+  row-gap: 1px;
+  text-align: left;
+  /* rechts bleibt der Platz fuer den Vorlese-Knopf frei: 13 + 46 + 13 px.
+     Der Knopf liegt jetzt NEBEN der Karte (Geschwister), nicht mehr darin. */
+  padding: 11px 72px 11px 13px;
+  min-height: 66px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Kamera-Schlitz und Home-Leiste (Smartphone-Deko) sind mit der Liste
+   entfallen – in einer Zeile ergibt der Telefon-Nachbau keinen Sinn mehr. */
+
+/* Drüberfahren: deutliche, schöne farbige Hinterlegung in der Themenfarbe. */
+.topic-card:hover,
+.topic-card:focus-visible {
+  background: var(--topic-hover-bg);
+  background: color-mix(in srgb, var(--topic-color) 14%, var(--surface));
+  box-shadow: var(--shadow-hover);
+  border-color: var(--topic-color);
+  transform: translateY(-3px);
+}
+.topic-card:hover .topic-icon,
+.topic-card:focus-visible .topic-icon {
+  transform: scale(1.06);
+}
+/* Antippen: Kachel „drückt" sich kurz ein – wie eine App. */
+.topic-card:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.topic-illustration {
+  width: 100%;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+}
+
+/* Alex-&-Tilda-Rollen-Figuren (bedeutungstragend, mit Alt-Text) */
+.role-figure {
+  display: block;
+  /* Breite UND Hoehe deckeln, Seitenverhaeltnis bleibt erhalten.
+     Grund: Die Wegzeichen-Figuren von Paket W sind Hochformat (bis 1:2,3),
+     die aelteren Rollen-Bilder Querformat (640x357). Nur mit einem
+     Breiten-Deckel wurde die Themen-Seite auf dem Handy 499 px hoch
+     zugebaut - kein einziges Thema war noch sichtbar (§3: ein Konzept
+     pro Bildschirm). Der Hoehen-Deckel macht aus jeder Figur wieder ein
+     Wegzeichen statt eines Bildschirm-Fuellers.
+     width/height auto ist noetig, damit der Browser beide Deckel
+     gemeinsam aufloest; min(...) haelt schmale Geraete frei von
+     seitlichem Ueberlauf. Querformat-Bilder bleiben unveraendert, sie
+     sind bei 300 px Breite nur 168 px hoch und stossen nie an. */
+  width: auto;
+  height: auto;
+  max-width: min(300px, 100%);
+  max-height: 240px;
+  margin: 6px auto 14px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+}
+
+.support-help-panel .role-figure {
+  max-width: min(200px, 100%);
+  margin: 4px auto 16px;
+}
+
+.certificate-card .role-figure {
+  max-width: min(260px, 100%);
+  margin: 4px auto 12px;
+}
+
+/* App-Icon: farbiges, abgerundetes Quadrat mit weißem Symbol – wie am Handy. */
+.topic-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: var(--topic-color);
+  box-shadow: 0 4px 12px rgba(0, 40, 90, 0.18);
+  margin-top: 4px;
+  transition: transform 0.15s ease;
+}
+
+.topic-icon img {
+  width: 38px;
+  height: 38px;
+  /* Symbol weiß einfärben, egal welche Farbe die Datei hat. */
+  filter: brightness(0) invert(1);
+}
+
+.topic-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.topic-desc {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+/* ---------- Karte und Vorlese-Knopf als getrennte Geschwister ----------
+   Frueher steckte der Vorlese-Knopf ALS <span role="button"> IN der Karte,
+   die selbst ein <button> ist. Ein Knopf im Knopf ist ungueltiges HTML:
+   Tastatur und Screenreader behandeln das je nach Programm anders, und ein
+   Klick auf Vorlesen konnte die Karte mit oeffnen. Jetzt sind es zwei echte
+   Knoepfe nebeneinander; das Paar-Element haelt nur die Position, damit die
+   Optik gleich bleibt (WCAG 2.2: 4.1.2 Name/Rolle/Wert, 2.1.1 Tastatur). */
+.card-read-pair {
+  position: relative;
+  display: grid;   /* Karte fuellt die Zelle -> gleich hohe Kacheln bleiben */
+}
+
+.card-read-pair--topic .card-read-button {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  transform: translateY(-50%);
+}
+
+/* Beim Zeigen/Fokus hebt sich die Karte um 3 px – der Knopf geht mit,
+   damit beide zusammen bleiben. Ohne :has()-Unterstuetzung bleibt er
+   einfach stehen; die Bedienung aendert sich dadurch nicht. */
+.card-read-pair--topic:has(.topic-card:hover) .card-read-button,
+.card-read-pair--topic:has(.topic-card:focus-visible) .card-read-button {
+  transform: translateY(-50%) translateY(-3px);
+}
+
+/* Aktions-Karten (Mein Lernweg, Übungs-Handy): Knopf unten, in einer Linie
+   mit dem Text – 18 px Rand + 52 px Symbol + 14 px Abstand. */
+.card-read-pair--action .action-card { padding-bottom: 74px; }
+.card-read-pair--action .card-read-button {
+  position: absolute;
+  left: 84px;
+  bottom: 18px;
+}
+
+/* Sprach-Finder: Knopf bleibt unten links unter dem Beispiel-Text. */
+.card-read-pair--sample .sample-option { padding-bottom: 74px; }
+.card-read-pair--sample .card-read-button {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+}
+
+/* Geschafft-Abzeichen auf Themen-Karten */
+/* Häkchen-Ecke oben rechts auf fertigen Karten */
+.topic-done-corner {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  background: var(--good);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+  border: 2px solid #fff;
+  pointer-events: none; /* Klick geht an die Karte */
+  z-index: 2;
+}
+
+.topic-done-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--good-bg);
+  color: var(--good);
+  border: 2px solid var(--good);
+}
+
+/* Karte im geschafften Zustand: border-left leuchtet grün */
+.topic-card--done {
+  border-left-color: var(--good);
+}
+
+/* ============================================================
+   Lernweg-Auswahl: allein / mit App-Hilfe / mit Begleitung
+   ============================================================ */
+.learn-mode-section {
+  margin-bottom: 22px;
+}
+
+.learn-mode-title {
+  font-size: 1.3rem;
+  margin: 0 0 2px;
+  color: var(--ink);
+}
+
+.learn-mode-sub {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.learn-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.learn-mode-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  padding: 18px 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.learn-mode-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.learn-mode-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.learn-mode-card.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.learn-mode-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.learn-mode-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.learn-mode-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.learn-mode-text strong {
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.learn-mode-text span {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.learn-mode-check {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.learn-mode-status {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-s);
+  background: var(--good-bg);
+  color: var(--good);
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.learn-mode-hint {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.topic-grid-title {
+  font-size: 1.3rem;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.topic-grid-hint {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+}
+
+/* Klarer erster Schritt: „Los geht's" im Begrüßungs-Feld */
+.hero-start-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 6px;
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: #ffffff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-start-button span {
+  font-size: 1.25rem;
+}
+
+.hero-start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.24);
+}
+
+.hero-start-button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Schlanker Hero (kompakte Begrüßung) */
+.hero-card--slim {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 22px;
+  margin-bottom: 12px;
+}
+.hero-card--slim .hero-slim-text h2 { color: #fff; font-size: 1.4rem; margin: 0 0 2px; }
+.hero-card--slim .hero-slim-text p { color: #dbeafc; font-size: 1.05rem; margin: 0; }
+.hero-icon-slim { flex-shrink: 0; width: 48px; height: 48px; opacity: 0.9; }
+.hero-icon-slim svg { width: 100%; height: 100%; }
+
+/* Intro-Startseite */
+.intro-page { text-align: center; }
+.intro-page .hero-card { text-align: left; }
+.intro-start-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 10px;
+  padding: 18px 44px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--on-accent);
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(10,82,143,0.28);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.intro-start-button:hover { transform: translateY(-2px); background: var(--accent-dark); }
+.intro-start-button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Rück-Anker als Hauptaktion der Start-Seite (Befund 1, 21.09.2026).
+   Erbt den lauten Knopf, darf aber umbrechen: Der Themen-Titel macht den
+   Text lang („Weiter lernen: Online-Betrug und Abzocke, Schritt 12"), und
+   auf dem Handy darf nichts aus dem Bild laufen (§9). */
+.intro-resume-button {
+  display: flex;
+  width: 100%;
+  max-width: 420px;
+  padding: 16px 28px;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  text-align: center;
+}
+.intro-meta { font-size: 0.95rem; color: var(--ink-soft); margin: 14px 0 0; }
+
+/* ---------- Begrüßung: Bild und Text in einer Zeile ----------
+   Ersetzt die dunkle Hero-Karte (329 px) und die Figuren-Karte (232 px).
+   Beide sagten dasselbe und schoben den Startknopf unter die Falz. */
+.intro-welcome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+  margin-bottom: 4px;
+}
+
+.intro-welcome-figure {
+  flex: none;
+  /* Nicht kleiner: die Illustration hat viel Innenabstand, unter ~120 px
+     sind Alex und Tilda kaum noch zu erkennen. Sie sind der Wiedererkennungs-
+     Anker der Marke. */
+  width: 122px;
+  height: auto;
+  border-radius: var(--radius-s);
+}
+
+.intro-welcome-text h2 { margin: 0 0 4px; font-size: 1.25rem; }
+.intro-welcome-text p  { margin: 0; font-size: 1rem; color: var(--ink-soft); }
+
+/* Zweiter Weg: bleibt erreichbar, konkurriert aber nicht mehr optisch mit
+   dem Hauptknopf. Grosse Tippflaeche (§9), ruhiges Aussehen. */
+.intro-quickstart-link {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  margin: 0 auto 4px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 0;
+  color: var(--accent-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.intro-quickstart-link:hover { color: var(--accent); }
+.intro-quickstart-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* Wort-Erklärungen auf der Startseite (Leichte Sprache) */
+.intro-words {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 22px 0 6px;
+  text-align: left;
+}
+.intro-word {
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+}
+.intro-word-label {
+  display: block;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.intro-word p { margin: 0; }
+
+/* Station 0 – Lern-Leitsatz „So lernst du." direkt unter der Begrüßung
+   (docs/gesamtlernprinzip-stationen.md §0.1). Schlichte Zeile ohne Kasten (F1). */
+.intro-principle-plain {
+  margin: 12px 0 10px;
+  text-align: left;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* Einklappbare Angebots-Details (F1) */
+.intro-more {
+  margin: 16px 0 0;
+  text-align: left;
+}
+.intro-more summary {
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 8px 4px;
+}
+.intro-more summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-s);
+}
+.intro-more[open] summary {
+  margin-bottom: 8px;
+}
+
+/* Stations-Etikett (Faden Merken → Prüfen → Handeln), siehe app.js stationBadge() */
+.station-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 4px 10px;
+  margin: 10px 0 6px;
+}
+
+/* Selbst-Prüffragen (helpQuestions) im Quiz-Ergebnis — Station 4 */
+.selfcheck-box { margin: 14px 0; text-align: left; }
+.selfcheck-box h3 { margin: 0 0 8px; }
+.selfcheck-list { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+
+/* Übersicht „Das kannst du hier machen" */
+.intro-offer {
+  margin: 18px 0 8px;
+  text-align: left;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 16px 18px;
+}
+.intro-offer h3 { margin: 0 0 12px; }
+.intro-offer-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.intro-offer-list li { display: flex; align-items: flex-start; gap: 12px; }
+.intro-offer-icon { flex-shrink: 0; width: 34px; height: 34px; display: inline-flex; }
+.intro-offer-icon svg { width: 100%; height: 100%; }
+@media (max-width: 620px) {
+  .intro-words { grid-template-columns: 1fr; }
+}
+
+/* Bestätigungs-Schritt für Wiederkehrende („Willkommen zurück") */
+.resume-page { max-width: 640px; margin: 0 auto; }
+.resume-head { display: flex; align-items: center; gap: 18px; margin-bottom: 8px; }
+.resume-head-text h2 { margin: 0 0 4px; }
+.resume-head-text p { margin: 0; color: var(--ink-soft); }
+.resume-intro { color: var(--ink-soft); margin: 0 0 16px; }
+.resume-list { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.resume-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 18px; background: var(--surface); border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+}
+.resume-row-label { display: flex; align-items: center; gap: 12px; font-size: 1.05rem; }
+.resume-row-icon { flex-shrink: 0; width: 30px; height: 30px; display: inline-flex; }
+.resume-row-icon svg { width: 100%; height: 100%; }
+.resume-change {
+  flex-shrink: 0; padding: 10px 18px; min-height: 44px; font-weight: 700;
+  color: var(--accent); background: transparent; border: 2px solid var(--accent);
+  border-radius: 999px; cursor: pointer;
+}
+.resume-change:hover { background: var(--accent); color: var(--on-accent); }
+.resume-change:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.resume-page .intro-start-button { display: flex; width: 100%; max-width: 420px; }
+
+/* „Mehr" in den Einstellungen */
+.settings-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.settings-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+}
+.settings-more-btn:hover { background: var(--surface); }
+.settings-more-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.settings-more-btn img { width: 22px; height: 22px; }
+
+/* Einstellungen einklappbar */
+.settings-area { margin-bottom: 16px; }
+.settings-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  /* Links nur das Zahnrad-Polster, damit der runde Knopf bündig sitzt. */
+  padding: 6px 18px 6px 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+/* Großes Zahnrad in einem runden Knopf – wie am Smartphone, klar abgesetzt. */
+.settings-gear {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.settings-gear svg { width: 28px; height: 28px; display: block; }
+.settings-caret { color: var(--ink-soft); }
+.settings-toggle:hover { border-color: var(--accent); }
+.settings-toggle:hover .settings-gear { background: var(--accent-dark); }
+.settings-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.settings-row--open { margin-top: 0; }
+
+/* Abgesetzter Einstellungs-Kasten: hebt die Einstellungen klar von den
+   übrigen Knöpfen ab (eigene Fläche, Rahmen, Überschrift). */
+.settings-panel {
+  margin-top: 10px;
+  padding: 14px 16px 16px;
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+}
+.settings-panel-title {
+  margin: 0 0 10px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Gemeinsame Einstell-Zeile (Sprache + Lernweg) unter der Begrüßung */
+.settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.settings-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.settings-chip:hover {
+  background: var(--surface);
+  transform: translateY(-1px);
+}
+
+.settings-chip:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.settings-chip--profile span[aria-hidden="true"] {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* ============================================================
+   Profile: „Wer lernt gerade?", neues Bild, verwalten
+   ============================================================ */
+.profile-picker-title {
+  font-size: 1.6rem;
+  margin: 8px 0 6px;
+  color: var(--ink);
+}
+
+.profile-picker-intro {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+  max-width: 60ch;
+}
+
+.profile-grid,
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.avatar-grid--small {
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px;
+}
+
+.profile-card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 14px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profile-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.profile-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-card--new {
+  border-style: dashed;
+}
+
+.profile-avatar {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+/* ============================================================
+   Eigenes Zeichen: Symbol + Farbe + Zahl
+   ============================================================ */
+.profile-sign {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  flex-shrink: 0;
+}
+.profile-sign svg { width: 60%; height: 60%; }
+.profile-sign--emoji { font-size: 3rem; background: none !important; }
+.profile-sign-num {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-sign--big { width: 110px; height: 110px; border-radius: 28px; }
+.profile-sign--big .profile-sign-num { width: 34px; height: 34px; font-size: 1.1rem; right: -8px; bottom: -8px; }
+.profile-sign--chip { width: 26px; height: 26px; border-radius: 8px; }
+.profile-sign--chip .profile-sign-num { width: 15px; height: 15px; font-size: 0.62rem; right: -4px; bottom: -4px; border-width: 1.5px; }
+.profile-sign--chip svg { width: 64%; height: 64%; }
+.profile-manage-sign .profile-sign { vertical-align: middle; }
+
+/* Geräte-Frage */
+.device-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.device-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 26px 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.device-card:hover { border-color: var(--accent); background: var(--surface-soft); transform: translateY(-2px); }
+.device-card.is-active { border-color: var(--accent); background: var(--surface-soft); box-shadow: var(--shadow); }
+.device-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.device-card strong { font-size: 1.2rem; color: var(--ink); }
+.device-card span:last-child { font-size: 0.98rem; color: var(--ink-soft); }
+.device-icon { font-size: 2.6rem; line-height: 1; }
+
+/* Empfohlene Menge (aus dem Vorwissen) */
+.action-card--rec { border-color: var(--accent) !important; position: relative; }
+.action-rec-badge {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* Sichtbarer Schritt-Pfad in den Lektionen */
+.step-path-wrap { margin: 0 0 14px; }
+.step-path { display: flex; align-items: center; gap: 6px; }
+.step-dot {
+  flex: 0 0 auto;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.95rem;
+  background: #fff; border: 2px solid var(--line); color: var(--ink-soft);
+}
+.step-dot.is-done { background: var(--good); border-color: var(--good); color: #fff; }
+.step-dot.is-current {
+  background: var(--accent); border-color: var(--accent); color: var(--on-accent);
+  width: 36px; height: 36px; font-size: 1.05rem;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.step-line { flex: 1 1 auto; min-width: 6px; height: 4px; border-radius: 2px; background: var(--line); }
+.step-line.is-done { background: var(--good); }
+.step-path--small .step-dot { width: 20px; height: 20px; font-size: 0.72rem; border-width: 2px; }
+.step-path--small .step-dot.is-current { width: 26px; height: 26px; font-size: 0.85rem; box-shadow: 0 0 0 3px var(--accent-soft); }
+/* Schlanker Fortschrittsbalken statt bis zu 13 nummerierter Kreise. */
+/* Wegweiser-Karte (Paket V, §2.2): Ort-Satz und Fortschritt in einem
+   Block. Nur Design-Tokens – keine festen Farbwerte, damit Hell- und
+   Dunkelmodus aus demselben Code kommen. Der Farbfaden links erbt
+   --topic-color von .app (gesetzt in setPageTopicColor). */
+.wegweiser {
+  margin: 0 0 14px;
+  padding: 8px 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--topic-color, var(--accent));
+  border-radius: var(--radius-s);
+}
+
+.wegweiser-ort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 1.02rem;
+}
+
+.wegweiser .step-bar-wrap { margin: 0; }
+
+/* Solange eine Seite den Wegweiser zeigt, tritt #orientLine visuell
+   zurück – der Ort-Satz steht dann sichtbar IN der Karte. Die Zeile
+   bleibt im DOM, bleibt Live-Region und bleibt das erste Vorlese-
+   Element; sie wird nur unsichtbar (sr-only-Muster, bewusst KEINE
+   .is-hidden-Klasse, damit das Vorlesen sie weiter findet). */
+.app:has(#content .wegweiser) #orientLine {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.step-bar-wrap { margin: 0 0 14px; }
+
+.step-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--track-bg);
+  /* Gleiche Kontur wie .progress-track, damit beide Balken gleich lesbar sind. */
+  border: 1px solid var(--track-line);
+  overflow: hidden;
+}
+
+.step-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--topic-color, var(--accent));
+  transition: width 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-bar-fill { transition: none; }
+}
+
+.step-path-summary { margin: 6px 0 0; font-size: 1rem; color: var(--ink-soft); }
+.step-done-count { color: var(--good); font-weight: 700; }
+
+/* Zeichen-Bau: Vorschau */
+.sign-preview {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0 14px;
+}
+
+/* Schritt 1: Symbole */
+.sign-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.sign-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.sign-pick:hover { border-color: var(--accent); background: var(--surface-soft); transform: translateY(-2px); }
+.sign-pick:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sign-pick.is-active { border-color: var(--accent); background: var(--accent-soft); }
+.sign-pick-bubble {
+  /* Symbol erbt diese Farbe (currentColor). Fest eingebautes #00528f
+     verschwand im Dunkelmodus auf dem dunklen --accent-soft (§10). */
+  color: var(--accent-dark);
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft);
+  border-radius: 50%;
+}
+.sign-pick-bubble svg { width: 60%; height: 60%; }
+.sign-pick-name { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* Schritt 2: Farben */
+.sign-color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.sign-color {
+  height: 72px;
+  border: 3px solid transparent;
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 10px;
+  transition: transform 0.15s ease;
+}
+.sign-color:hover { transform: translateY(-2px); }
+.sign-color:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.sign-color.is-active { border-color: var(--ink); }
+.sign-color span { background: rgba(0,0,0,0.28); padding: 2px 8px; border-radius: 999px; }
+
+/* Schritt 3: Zahlen */
+.sign-number-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.sign-number {
+  height: 64px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.sign-number:hover { border-color: var(--accent); background: var(--surface-soft); transform: translateY(-2px); }
+.sign-number:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sign-number.is-active { border-color: var(--accent); background: var(--accent-soft); }
+
+.profile-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.profile-active-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.profile-edit-link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.avatar-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 10px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.avatar-choice:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+}
+
+.avatar-choice:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.avatar-choice.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.avatar-choice.is-used {
+  opacity: 0.45;
+}
+
+.avatar-choice--small {
+  padding: 10px;
+}
+
+.avatar-choice-pic {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.avatar-choice-name {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.profile-manage-sub {
+  font-size: 1.2rem;
+  margin: 22px 0 6px;
+  color: var(--ink);
+}
+
+.profile-manage-note {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+  max-width: 60ch;
+}
+
+.danger-button {
+  border-color: var(--bad) !important;
+  color: var(--bad) !important;
+}
+
+.danger-button:hover {
+  background: var(--bad-bg) !important;
+}
+
+/* Beispiel-Satz in den Sprach-Auswahl-Karten */
+.language-example {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  color: var(--ink);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.language-example-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+
+/* Sanfter Sprach-Finder: Beispiel-Texte zum Auswählen */
+.sample-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0 4px;
+}
+
+.sample-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  padding: 18px 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sample-option:hover {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.sample-option:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sample-text {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.language-finder-link {
+  margin-top: 18px;
+  text-align: center;
+}
+
+/* Dezenter Link zur Erklärung der Sprachstufen */
+.language-more-link {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.98rem;
+}
+
+.language-more-link a {
+  color: var(--accent);
+}
+
+/* Vergleichstabelle auf der Seite „Die Sprachstufen" */
+.sprachstufen-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 8px;
+  font-size: 0.98rem;
+}
+
+.sprachstufen-table th,
+.sprachstufen-table td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.sprachstufen-table thead th {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+.sprachstufen-table tbody td:first-child {
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.sprachstufen-table tbody tr:nth-child(even) td {
+  background: var(--surface-soft);
+}
+
+/* Einwilligung: Lernstand merken */
+.progress-consent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  background: var(--surface);
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius-l);
+}
+
+.progress-consent-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.progress-consent-note {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+.progress-consent .utility-button {
+  margin-top: 6px;
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* ---- Wiederholungs-Erinnerung ---- */
+.review-section {
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  background: var(--warn-bg);
+  border: 2px solid var(--warn);
+  border-radius: var(--radius-l);
+}
+
+.review-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.review-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.review-title {
+  margin: 0 0 2px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.review-sub {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+}
+
+.review-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 2px solid var(--topic-color);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.review-chip:hover {
+  background: var(--topic-hover-bg);
+  transform: translateX(3px);
+}
+
+.review-chip svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--topic-color);
+  fill: var(--topic-color);
+  stroke: var(--topic-color);
+}
+
+/* ---------- „Mein Lernweg": drei benannte Blöcke (Prüfbericht B6) ----------
+   Vorher war die Seite ein Regal aus fünf gleichrangigen Übungsangeboten. Der
+   Name verspricht einen Weg, also steht jetzt zuerst die eigene Position. */
+.path-block {
+  margin: 0 0 26px;
+}
+
+.path-block > .topic-grid-title {
+  margin-bottom: 8px;
+}
+
+/* Zugeklappte Blöcke auf „Mein Lernweg" (Befund 3, 21.09.2026).
+   Die Zusammenfassungs-Zeile hat das Gewicht der bisherigen Überschrift,
+   ist aber das Bedienelement – deshalb 58 px hoch (§9) und in der
+   Akzentfarbe, damit sie als antippbar gelesen wird. */
+.path-details > .path-details-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  min-height: 58px;
+  padding: 8px 4px;
+  color: var(--accent-dark);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.path-details > .path-details-summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-s);
+}
+
+/* Die Zahl bleibt auch im zugeklappten Zustand lesbar – sie ist der
+   eigentliche Lernstand und darf nicht hinter einem Klick verschwinden. */
+.path-details-zahl {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.path-details[open] > .path-details-summary {
+  margin-bottom: 8px;
+}
+
+/* Offene Themen: gleiche Bauform wie die geschafften, aber ohne Haken und mit
+   ruhigerem Rahmen – geschafft und offen bleiben unterscheidbar. */
+.review-chip--open {
+  border-style: dashed;
+  font-weight: 500;
+}
+
+/* Hauptaktion des Blocks „Da bist du gerade", wenn keine Lektion offen ist. */
+.path-next-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 72px;
+  padding: 14px 18px;
+  margin-top: 4px;
+  background: var(--surface);
+  border: 3px solid var(--topic-color);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  color: var(--ink);
+}
+
+.path-next-button:hover {
+  background: var(--topic-hover-bg);
+}
+
+.path-next-icon svg {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--topic-color);
+  fill: var(--topic-color);
+  stroke: var(--topic-color);
+}
+
+.path-next-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.path-next-label {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--topic-text, var(--accent-dark));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.path-next-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* Vorlese-Knopf in Karten */
+/* Vorlese-Chip: nur das Lautsprecher-Symbol (aria-label bleibt für
+   Screenreader). Ein Wort „Vorlesen" pro Seite reicht – es steht in der
+   Vorlese-Leiste oben. 13× dasselbe Wort war visueller Lärm (Kohärenz). */
+/* Vorlese-Chip an einer Karte (F3).
+   Er sah aus wie eine gleichrangige Wahl: gefuellt in Akzent-Blau, mit
+   blauem Rand, so gross wie ein kleiner Knopf. Auf der Themen-Uebersicht
+   sind 13 davon – mehr als ein Drittel aller antippbaren Dinge.
+   Jetzt tritt er zurueck: neutrale Flaeche statt Akzentfarbe, kein Rand,
+   graues Symbol. Die TREFFERFLAECHE bleibt bei 46 x 46 px – zurueckhaltend
+   heisst nicht schwerer zu treffen. Beim Beruehren und mit der Tastatur
+   kommt die Akzentfarbe zurueck, damit klar ist: das ist ein Knopf. */
+.card-read-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  min-height: 46px;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  /* durchsichtiger Rand: haelt die Groesse, damit beim Beruehren nichts springt */
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.card-read-button .rb-ico {
+  width: 20px;
+  height: 20px;
+}
+
+.card-read-button:hover,
+.card-read-button:focus-visible {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+
+/* Vorlese-Knopf je Block (Haupttext, Liste, Achtung, Merksatz …):
+   ruhig und etwas kleiner, rechtsbündig, damit es nicht überladen wirkt. */
+.card-read-button--section {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 7px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.card-read-button--section .rb-ico {
+  width: 18px;
+  height: 18px;
+}
+
+/* Block-Vorlese-Knöpfe: leise Feinwerkzeuge (Paket H). Trefffläche und
+   Größe bleiben unverändert (§9), nur die Optik tritt zurück. Mit Maus
+   erscheinen sie erst beim Überstreichen des Blocks, mit Tastatur
+   sofort voll sichtbar, auf Touch-Geräten dauerhaft sichtbar-leise. */
+.card-read-button--block {
+  margin-top: 10px;
+  background: transparent;
+  /* Gemessen: bei .55 kommt das Symbol im Hellmodus auf 2,61:1 gegen die
+     Karte und reisst damit die 3:1, die WCAG 2.2 SC 1.4.11 fuer
+     Bedienelemente verlangt. Bei .7 sind es 3,69:1 hell und 5,10:1
+     dunkel - beide sicher darueber. */
+  opacity: .7;
+  transition: opacity .18s;
+}
+@media (hover: hover) {
+  .card-read-button--block { opacity: 0; }
+  .ls-text-block:hover .card-read-button--block,
+  .ls-bullet-block:hover .card-read-button--block,
+  .access-box:hover .card-read-button--block { opacity: 1; }
+}
+.ls-text-block,
+.ls-bullet-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ls-text-block > .card-read-button--block,
+.ls-bullet-block > .card-read-button--block {
+  align-self: flex-end;
+}
+.access-box .card-read-button--block {
+  align-self: flex-start;
+}
+.card-read-button--block:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+/* Sanftes „Blättern" beim Seitenwechsel: weiches Überblenden + kleine
+   Bewegung in Navigations-Richtung. Kurz und reizarm (§3 Kohärenz).
+   Bei „weniger Bewegung" (prefers-reduced-motion) automatisch aus –
+   das deckt die globale Regel weiter oben ab. */
+@keyframes page-flip-forward {
+  from { opacity: 0; transform: translateX(110px) scale(0.965); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes page-flip-back {
+  from { opacity: 0; transform: translateX(-110px) scale(0.965); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+.page-flip { will-change: opacity, transform; }
+/* Langsam und weich (ruhig), aber klar sichtbare Bewegung, damit der
+   Seitenwechsel gut nachvollziehbar ist. Sanftes Ausgleiten (kein Ruck). */
+.page-flip--forward { animation: page-flip-forward 2s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.page-flip--back    { animation: page-flip-back 2s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Allgemeiner sanfter Übergang bei jedem Seitenwechsel (Startseite, Themen,
+   Quiz …). Ruhig und gut nachvollziehbar. Bei „weniger Bewegung" automatisch aus. */
+@keyframes view-enter {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes view-enter-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#content.view-enter { animation: view-enter 2s cubic-bezier(0.22, 1, 0.36, 1) both; }
+#content.view-enter-fade { animation: view-enter-fade 2s ease-out both; }
+
+/* ---------- Lernweg-Auswahl ---------- */
+
+.plain-back-button {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 12px 20px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.plain-back-button:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.topic-intro-card {
+  border-top: 8px solid var(--topic-color);
+  margin-bottom: 20px;
+}
+
+.topic-intro-card .topic-illustration {
+  max-width: 360px;
+  margin-bottom: 14px;
+}
+
+/* ---------- Themen-Einstieg: kompakte Titelzeile (Prüfbericht B1) ----------
+   Ersetzt die 384 px hohe Einleitungs-Karte. Titel, Symbol, Kurztext und Bild
+   stehen in EINER Zeile, damit „Lernen starten" oberhalb der Menüleiste liegt.
+   Der Farb-Faden des Themas bleibt als linker Balken erhalten. */
+.topic-intro-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 2px 0 12px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 8px solid var(--topic-color);
+  border-radius: var(--radius-m);
+}
+
+/* Dasselbe Symbol wie auf der Kachel, die gerade angetippt wurde – es trägt
+   das Wiedererkennen. Die große Themen-Illustration stand hier vorher in
+   60 × 48 px und war bei der Größe nur noch ein Fleck. */
+.topic-intro-line .topic-intro-symbol {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.topic-intro-line .topic-intro-symbol svg {
+  width: 44px;
+  height: 44px;
+  color: var(--topic-text, var(--topic-color));
+  fill: var(--topic-text, var(--topic-color));
+  stroke: var(--topic-text, var(--topic-color));
+}
+
+.topic-intro-line .topic-intro-symbol img {
+  width: 44px;
+  height: 44px;
+}
+
+.topic-intro-line h2 {
+  margin: 0;
+  min-width: 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+/* Der Zurück-Knopf steht jetzt am Seitenende. Die feste Menüleiste unten
+   leistet dasselbe dauerhaft; oben kostete er nur Höhe vor der Hauptaktion. */
+.plain-back-button--end {
+  margin: 22px 0 0;
+}
+
+@media (max-width: 420px) {
+  .topic-intro-line h2 {
+    font-size: 1.2rem;
+  }
+}
+
+.symbol-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.symbol-heading h2 {
+  margin: 0;
+}
+
+.access-box-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-m);
+  background: var(--topic-icon-bg);
+  color: var(--topic-color);
+}
+
+.access-box-symbol img {
+  width: 30px;
+  height: 30px;
+}
+
+.learning-path-heading h3 {
+  margin: 18px 0 10px;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  /* Auch Aktions-Karten (Lernweg, Üben) immer gleich groß */
+  grid-auto-rows: 1fr;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.action-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  padding: 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.action-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+}
+
+.action-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.action-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.action-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.action-desc {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Zusatz-Leiste ---------- */
+
+/* Eine Bedien-Zeile statt zweier gestapelter Karten: Vorlesen links,
+   "Sprache und Pause" daneben. Spart auf jedem Bildschirm rund 90 px
+   ueber dem Inhalt (§3 Cognitive Load: keine Wand vor dem Lernstoff). */
+/* ============================================================
+   Bedien-Zeile (Paket G): EINE Hierarchie auf jedem Screen.
+   Primaer = Vorlese-Pille (laut), Sekundaer = Chip-Gruppe (leise).
+   Design-System-Regel ab jetzt: Primaeraktionen als Pille mit
+   Icon-Muenze, Sekundaeraktionen als Chips in einer Kapsel.
+   WICHTIG: Die Optik haengt an den Bausteinen (.reading-button,
+   .utility-chip), NICHT an .tool-row. Grund: buildReadingToolbar()
+   wird 15x direkt aufgerufen, ohne Zeilen-Wrapper – haenge man das
+   Aussehen an .tool-row, staenden diese 15 Pillen unformatiert da.
+   .tool-row regelt nur noch die Anordnung der beiden Gruppen.
+   So sieht die Bedienung ueberall gleich aus (§3 Vorhersehbarkeit).
+   ============================================================ */
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* Die Vorlese-Leiste loest sich auf, damit die Pille selbst zum
+   Flex-Kind der Zeile wird. Die Chip-Leiste bleibt ein eigener
+   Container: nur so stossen ihre Chips zur Kapsel aneinander –
+   mit display:contents wuerde space-between sie auseinanderziehen. */
+.tool-row .reading-toolbar { display: contents; }
+
+.tool-row .utility-bar { margin: 0; }
+
+/* — Vorlese-Pille — */
+.reading-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  min-width: 0;
+  min-height: 58px;                 /* §9 Zielgroesse */
+  padding: 7px 18px 7px 7px;
+  border: 2px solid transparent;
+  border-radius: 99px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);        /* hoechster Kontrast auf --accent-soft, hell wie dunkel */
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+
+.reading-button:hover { border-color: var(--accent); }
+
+.rb-coin {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);          /* NICHT #fff: im Dark Mode ist --accent hell */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rb-ico,
+.reading-button .rb-eq { width: 20px; height: 20px; }
+
+.reading-button .rb-eq { display: none; align-items: flex-end; gap: 2.5px; }
+
+/* Ruhehoehen bewusst ungleich: faellt die Animation weg (html.no-motion,
+   prefers-reduced-motion), steht trotzdem ein erkennbarer Equalizer da
+   und keine flache Linie. */
+.reading-button .rb-eq i { width: 3px; border-radius: 2px; background: currentColor; height: 7px; }
+.reading-button .rb-eq i:nth-child(2) { height: 14px; }
+.reading-button .rb-eq i:nth-child(3) { height: 9px; }
+.reading-button .rb-eq i:nth-child(4) { height: 16px; }
+
+.rb-stop { display: none; width: 11px; height: 11px; border-radius: 2px; background: currentColor; margin-left: 2px; }
+
+/* Aktiv: Pille gefuellt, Equalizer laeuft, Stopp-Quadrat sagt, was ein Druck tut. */
+.reading-button.is-active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+.reading-button.is-active .rb-ico-speak { display: none; }
+.reading-button.is-active .rb-eq { display: inline-flex; }
+.reading-button.is-active .rb-stop { display: inline-block; }
+.reading-button.is-active .rb-coin {
+  background: transparent;                                          /* Rueckfall, falls color-mix fehlt */
+  background: color-mix(in srgb, var(--on-accent) 20%, transparent); /* tokenbasiert, in beiden Modi richtig */
+  color: var(--on-accent);
+}
+.reading-button.is-active .rb-eq i { animation: rb-eqbar 1s ease-in-out infinite; }
+.reading-button.is-active .rb-eq i:nth-child(2) { animation-delay: .18s; }
+.reading-button.is-active .rb-eq i:nth-child(3) { animation-delay: .36s; }
+.reading-button.is-active .rb-eq i:nth-child(4) { animation-delay: .1s; }
+
+@keyframes rb-eqbar { 0%, 100% { height: 5px } 50% { height: 15px } }
+/* html.no-motion killt die Animation global (animation: none !important);
+   die ungleichen Ruhehoehen oben bleiben sichtbar. */
+
+/* — Chip-Gruppe (Pause, Sprache) — */
+.utility-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 46px;
+  padding: 0 14px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  cursor: pointer;
+}
+.utility-chip + .utility-chip { border-left: none; border-radius: 0; margin-left: -1.5px; }
+.utility-chip:first-child { border-radius: 99px 0 0 99px; }
+.utility-chip:last-child { border-radius: 0 99px 99px 0; }
+.utility-chip:only-child { border-radius: 99px; }
+.utility-chip svg { width: 17px; height: 17px; flex: none; }
+.utility-chip:hover { color: var(--ink); background: var(--accent-soft); }
+
+/* Fokus kommt aus der globalen :focus-visible-Regel (4 px --focus, §9) –
+   hier bewusst KEIN eigener Rahmen, sonst haette dieselbe Tastatur-
+   Bedienung auf dieser Zeile eine andere Farbe als auf jeder anderen. */
+
+/* Status-Text: verlaesst das Layout, bleibt fuer Screenreader da.
+   Die sichtbare Information steckt jetzt im Zustand der Pille. */
+.reading-status {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Chip-Kapsel (Paket G) – gilt auch fuer den einen Aufruf ausserhalb
+   einer .tool-row, damit die Gruppe nirgends auseinanderfaellt. */
+.utility-bar {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin-bottom: 14px;
+}
+
+.utility-button {
+  min-height: 58px;            /* §9: Bedienelemente >= ~58 px */
+  padding: 10px 18px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.utility-button:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.utility-button[aria-pressed="true"] {
+  border-color: var(--good);
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+/* Schriftgröße-Gruppe in der Utility-Bar */
+.font-size-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-left: auto; /* ans rechte Ende drängen */
+}
+
+.font-btn {
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  min-width: 48px;
+}
+
+.font-btn-decrease { font-size: 0.85rem; }
+.font-btn-increase { font-size: 1.1rem;  }
+
+.font-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ---------- Vorlesen-Leiste ---------- */
+
+/* Der Vorlese-Knopf braucht keine eigene Karte um sich herum. Als Karte kostete
+   er auf jedem Bildschirm 90 px, als Knopf-Zeile 52 px – bei gleicher Funktion
+   und gleicher Knopfgröße (§3 Kohärenz: keine Dekoration ohne Funktion). */
+.reading-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* Die alte .reading-button-Basis (Pillen-Umriss, Warn-Rot fuer "Stopp",
+   Gruen fuer aktiv) ist mit Paket G entfallen: Aussehen und Zustand
+   liegen jetzt vollstaendig in den .tool-row-Regeln oben, und der Knopf
+   kommt nur dort vor. Die Regeln standen hier verwaist herum und haetten
+   dem neuen Aktiv-Zustand ihre Farben untergeschoben. */
+
+/* Mitlesen: der gerade vorgelesene Satz/Abschnitt wird mit einem klaren
+   Rahmen markiert – KEIN Hintergrund, damit die Schrift voll lesbar bleibt
+   (auch auf farbigen oder dunklen Flächen). */
+.reading-highlight {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* .reading-status wird oben (Paket G) global auf sr-only gesetzt. */
+
+.reading-unavailable {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* ---------- Lektion ---------- */
+
+.lesson-card {
+  border-top: 8px solid var(--topic-color);
+}
+
+/* Lern-Bild der Lektion – kompakt, damit Bild und erster Satz
+   zusammen sichtbar sind (Kontiguitäts-Prinzip, Mayer) */
+.lesson-illustration {
+  display: block;
+  margin: 6px 0 14px;
+  width: 100%;
+  max-width: 300px;
+  max-height: 190px;
+  object-fit: contain;
+  object-position: left center;
+  border-radius: var(--radius-m);
+}
+
+.lesson-card p {
+  max-width: 62ch;
+}
+
+.access-box {
+  border-radius: var(--radius-m);
+  padding: 16px 20px;
+  margin: 18px 0;
+  border: 2px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.access-box h3 {
+  margin-bottom: 0.4em;
+}
+
+.access-box.example {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.access-box.example h3 {
+  color: var(--accent-dark);
+}
+
+.access-box.warning {
+  border-color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.access-box.warning h3 {
+  color: var(--warn);
+}
+
+.access-box.success {
+  border-color: var(--good);
+  background: var(--good-bg);
+}
+
+.access-box.success h3 {
+  color: var(--good);
+}
+
+.access-box.remember {
+  border-color: var(--remember);
+  background: var(--remember-bg);
+}
+
+.access-box.remember h3 {
+  color: var(--remember);
+}
+
+/* Farbiges Symbol vor der Box-Überschrift (Farbe = currentColor der Überschrift) */
+.access-box h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.access-box.example h3::before,
+.access-box.warning h3::before,
+.access-box.success h3::before,
+.access-box.remember h3::before {
+  content: "";
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  -webkit-mask: var(--ab-icon) center / contain no-repeat;
+          mask: var(--ab-icon) center / contain no-repeat;
+}
+
+.access-box.example  { --ab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22%2F%3E%3Cpath%20d%3D%22M12%208h.01M11%2012h1v4h1%22%2F%3E%3C%2Fsvg%3E"); }
+.access-box.warning  { --ab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203%202%2020h20z%22%2F%3E%3Cpath%20d%3D%22M12%2010v4M12%2017h.01%22%2F%3E%3C%2Fsvg%3E"); }
+.access-box.success  { --ab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22%2F%3E%3Cpath%20d%3D%22m8%2012%203%203%205-6%22%2F%3E%3C%2Fsvg%3E"); }
+.access-box.remember { --ab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2018h6M10%2021h4M12%203a6%206%200%200%200-4%2010c.7.7%201%201.3%201%202h6c0-.7.3-1.3%201-2a6%206%200%200%200-4-10z%22%2F%3E%3C%2Fsvg%3E"); }
+
+.remember-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ---------- Übung und Quiz ---------- */
+
+.practice-box {
+  margin-top: 24px;
+  padding: 20px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+}
+
+.practice-question,
+.quiz-question {
+  font-size: 1.18rem;
+  font-weight: 700;
+  max-width: 62ch;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.answer-option {
+  min-height: 60px;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: left;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.answer-option:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Angezeigte Antworten nach der Auswahl (Großes Quiz) */
+.answer-option.answer-shown {
+  cursor: default;
+  pointer-events: none;
+}
+
+.answer-option.answer-correct {
+  border-color: var(--good);
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+.answer-option.answer-wrong {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+  color: var(--bad);
+  text-decoration: line-through;
+}
+
+/* Inline-Rückmeldungszeile (Großes Quiz) */
+p.feedback-correct {
+  padding: 10px 14px;
+  border-radius: var(--radius-s);
+  background: var(--good-bg);
+  color: var(--good);
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+p.feedback-wrong {
+  padding: 10px 14px;
+  border-radius: var(--radius-s);
+  background: var(--bad-bg);
+  color: var(--bad);
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* ---------- Rückmeldung ---------- */
+
+.feedback-page.feedback-correct {
+  border-top: 8px solid var(--good);
+}
+
+.feedback-page.feedback-wrong {
+  border-top: 8px solid var(--warn);
+}
+
+.feedback-correct h2 {
+  color: var(--good);
+}
+
+.feedback-wrong h2 {
+  color: var(--warn);
+}
+
+.feedback-selected,
+.feedback-explanation {
+  padding: 14px 18px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  margin-bottom: 14px;
+}
+
+.feedback-selected h3,
+.feedback-explanation h3 {
+  margin-bottom: 0.3em;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+}
+
+.feedback-selected p,
+.feedback-explanation p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.feedback-actions {
+  margin-top: 18px;
+}
+
+.feedback-button,
+.primary-action,
+.secondary-action,
+.ghost-action,
+.quiz-button {
+  min-height: 58px;
+  padding: 14px 26px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.feedback-button.primary,
+.primary-action {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
+.feedback-button.primary:hover,
+.primary-action:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.feedback-button.secondary,
+.secondary-action {
+  background: var(--surface);
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+
+.feedback-button.secondary:hover,
+.secondary-action:hover {
+  background: var(--accent-soft);
+}
+
+/* Ghost-Button: unauffällig, für tertiäre Aktionen */
+.ghost-action,
+.feedback-button.ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+
+.ghost-action:hover,
+.feedback-button.ghost:hover {
+  background: var(--surface-soft);
+  border-color: var(--ink-soft);
+}
+
+/* Ausweg-Knopf auf der Falsch-Rückmeldung (Prüfbericht B3): sichtbar, aber
+   ruhiger als „nochmal versuchen" – niemand soll steckenbleiben, und niemand
+   soll zum Überspringen gedrängt werden. */
+.feedback-button.quiet {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: transparent;
+  border-bottom-color: var(--line);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+
+.feedback-button.quiet:hover {
+  background: var(--surface-soft);
+  border-bottom-color: var(--ink-soft);
+}
+
+/* Erste Stufe der Aufgaben-Hilfe: inhaltlicher Tipp, deutlich abgesetzt von
+   der allgemeinen Liste darunter (Prüfbericht B14). */
+.task-help-tip {
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  padding: 12px 14px;
+  margin: 0 0 14px;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.task-help-tip-label {
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-right: 6px;
+}
+
+/* Hinweis unter den Antworten: sagt, wo es danach weitergeht (B2). */
+.practice-nav-hint {
+  margin: 12px 0 0;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+/* Abschluss-Seite: trennt die Hauptaktion von den Zusatz-Angeboten (B7). */
+.completion-more-title {
+  margin: 18px 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* Paket H: Zusatz-Angebote als Chip-Reihe, Navigation als Text-Links.
+   Wortlaute und onclick bleiben unverändert; die Links bleiben echte
+   Buttons (Tastatur/Fokus wie Standard), nur die Optik ist Link. */
+.action-chip-row {
+  flex: 0 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.action-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 16px;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: color .2s, background .2s, border-color .2s;
+}
+.action-chip:hover {
+  color: var(--ink);
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.completion-links {
+  flex: 0 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+  margin-top: 6px;
+}
+
+.link-action {
+  background: none;
+  border: none;
+  padding: 8px 2px;
+  min-height: 44px;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.link-action:hover {
+  color: var(--ink);
+}
+
+/* Einfach-Weg: einzelner Chip in der schmalen Spalte linksbündig */
+.einfach-done-actions .action-chip {
+  align-self: flex-start;
+}
+
+/* ---- Einfach-Quiz ---- */
+
+.einfach-quiz-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.einfach-quiz-number {
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0.65;
+  margin: 0;
+}
+
+.einfach-quiz-question {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.einfach-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.einfach-quiz-btn {
+  min-height: 64px;
+  padding: 16px 22px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.4;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.einfach-quiz-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.einfach-quiz-result-title {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.einfach-quiz-result-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.einfach-quiz-feedback-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 10px;
+}
+
+.einfach-quiz-next-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---- Offline-Banner ---- */
+
+#offline-banner {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: #1a3a5c;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.offline-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.offline-close {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.offline-close:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ---------- Hilfe-Bereiche ---------- */
+
+.task-help-area {
+  margin-top: 18px;
+}
+
+/* Steht der Kasten VOR den Antworten (V-5), traegt die Frage darueber schon
+   ihren Abstand und `.answers` darunter seinen eigenen. Ein weiterer oberer
+   Abstand wuerde die Antworten nur unnoetig nach unten schieben. */
+.task-help-area--vorne {
+  margin-top: 0;
+}
+
+.task-help-button {
+  min-height: 58px;   /* §9: gleiche Hoehe wie alle anderen Bedienelemente */
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px dashed var(--warn);
+  background: var(--warn-bg);
+  color: var(--warn);
+  cursor: pointer;
+}
+
+.task-help-panel {
+  margin-top: 12px;
+  padding: 16px 20px;
+  border: 2px solid var(--warn);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.support-help-area {
+  margin-top: 8px;
+}
+
+.support-help-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+}
+
+.support-help-button:hover {
+  background: var(--accent-soft);
+}
+
+.support-help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+}
+
+.support-help-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.support-help-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.support-help-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.support-help-desc {
+  color: var(--ink-soft);
+}
+
+.support-help-panel {
+  margin-top: 14px;
+  padding: 20px;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-l);
+}
+
+.support-help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.support-help-card {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.support-help-remember {
+  margin-top: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.support-help-close {
+  min-height: 48px;
+  padding: 10px 20px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--accent-dark);
+  cursor: pointer;
+}
+
+.support-help-close:hover {
+  background: var(--accent-soft);
+}
+
+/* ---------- Pause / Symbole (Overlay) ---------- */
+
+.calm-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(22, 34, 46, 0.55);
+  z-index: 50;
+}
+
+.calm-box {
+  max-width: 480px;
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.calm-box p {
+  font-size: 1.12rem;
+}
+
+.symbol-help-dialog {
+  text-align: left;
+}
+
+.symbol-help-list {
+  list-style: none;
+  padding: 0;
+}
+
+.symbol-help-list li {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  margin-bottom: 8px;
+}
+
+/* ---------- Quiz-Ergebnis, Abschluss, Merk-Karte ---------- */
+
+.quiz-result-card h2,
+.completion-card h2 {
+  color: var(--good);
+}
+
+.completion-card {
+  border-top: 8px solid var(--good);
+}
+
+.completion-actions,
+.certificate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.quiz-link.quiz-button {
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 2px solid var(--accent);
+}
+
+.quiz-link.quiz-button:hover {
+  background: var(--accent-dark);
+}
+
+.memory-card {
+  border-top: 8px solid var(--topic-color);
+}
+
+.memory-section {
+  margin-bottom: 18px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.memory-section ol li,
+.memory-section ul li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5em;
+}
+
+.memory-help {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+
+/* ---------- Urkunde ---------- */
+
+.certificate-card {
+  border-top: 8px solid var(--topic-color);
+}
+
+.certificate-frame {
+  border: 4px double var(--topic-color);
+  border-radius: var(--radius-m);
+  padding: 34px 28px;
+  text-align: center;
+  background: var(--surface-soft);
+}
+
+.certificate-medal {
+  margin: 0 auto 16px;
+  width: 72px;
+  height: 72px;
+}
+
+.certificate-kicker {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--topic-text, var(--topic-color));
+  margin: 0 0 6px;
+}
+
+.certificate-frame h2 {
+  margin-bottom: 22px;
+}
+
+.certificate-text {
+  margin: 8px 0;
+  font-size: 1.08rem;
+}
+
+.certificate-name-line {
+  max-width: 420px;
+  margin: 26px auto 4px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.certificate-name-hint {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.certificate-topic {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--topic-text, var(--topic-color));
+  margin: 10px 0;
+}
+
+.certificate-result {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin: 16px 0 0;
+}
+
+.certificate-date {
+  margin-top: 24px;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+.certificate-issuer {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 6px 0 0;
+  opacity: 0.7;
+}
+
+/* ---------- Untere Navigation ---------- */
+
+.nav {
+  position: sticky;
+  /* Bleibt über dem festen Hauptmenü sichtbar */
+  bottom: calc(var(--tabbar-h) + 10px);
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow);
+}
+
+.nav-button {
+  flex: 1;
+  min-height: 62px;
+  font-size: 1.18rem;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.nav-button.primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
+.nav-button.primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.nav-button.secondary {
+  background: var(--surface);
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+
+.nav-button.secondary:hover:not(:disabled) {
+  background: var(--accent-soft);
+}
+
+.nav-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   Hauptmenü (feste Tab-Leiste unten)
+   - genau 5 Punkte, immer sichtbar, immer am gleichen Ort (COGA)
+   - aktiver Punkt: Unterlegung + Unterstreichung + fette Schrift
+     (nie Farbe allein als Merkmal, WCAG 1.4.1)
+   - Touch-Flächen ≥ 58 px
+   ============================================================ */
+
+.main-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  min-height: var(--tabbar-h);
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface);
+  border-top: 2px solid var(--line);
+  box-shadow: 0 -2px 12px rgba(20, 34, 49, 0.10);
+}
+
+.tab-item {
+  flex: 1 1 0;
+  max-width: 190px;
+  min-height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 4px;
+  border: none;
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab-item .tab-icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.tab-item .tab-label {
+  text-align: center;
+}
+
+.tab-item:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.tab-item.is-active {
+  background: var(--tab-active-bg);
+  color: var(--accent-dark);
+  font-weight: 800;
+}
+
+.tab-item.is-active .tab-label {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Orientierungssatz ---------- */
+
+.orient-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 4px 0;
+  padding: 8px 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--accent);
+  border-radius: var(--radius-s);
+  color: var(--ink);
+  font-size: 1.02rem;
+}
+
+/* Kompakter Kopf auf Lernschritten (body.lesson-view, gesetzt in renderLesson).
+   Titelkarte und Orientierungssatz sagen dort fast dasselbe. Nichts wird
+   entfernt – Überschrift, Modus-Zeile, Farb-Faden, Bild-Anker und Hör-Knopf
+   bleiben. Die zwei Karten werden nur zu einem Block ohne Lücke. */
+body.lesson-view .app-header {
+  padding: 10px 18px;
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+body.lesson-view .header-text h1 {
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+
+body.lesson-view .header-text p {
+  font-size: 0.94rem;
+}
+
+body.lesson-view .orient-line {
+  margin: 0 0 14px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.orient-icon {
+  flex: none;
+  display: inline-flex;
+}
+
+.orient-icon svg,
+.orient-icon img {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.orient-text {
+  flex: 1;
+}
+
+.resume-lesson-wrap {
+  margin: 14px 0;
+}
+
+.resume-lesson-chip {
+  font-size: 1.05rem;
+  min-height: 58px;
+}
+
+/* ---------- Seite: Einstellungen ---------- */
+
+.settings-page-section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-small);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.settings-page-section > h3 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+}
+
+.settings-page-section .settings-explain {
+  margin: 0 0 12px;
+  color: var(--ink-soft);
+}
+
+.settings-toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.setting-big-button {
+  min-height: 58px;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--accent-dark);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.setting-big-button:hover {
+  background: var(--accent-soft);
+}
+
+.setting-big-button[aria-pressed="true"] {
+  background: var(--tab-active-bg);
+  border-width: 3px;
+}
+
+.setting-big-button[aria-pressed="true"]::before {
+  content: "✓ ";
+}
+
+/* ---------- Themen-Seite: gefuehrte Hauptaktion ---------- */
+
+.topic-start-button {
+  display: block;
+  width: 100%;
+  min-height: 64px;
+  margin: 16px 0 14px;
+  border: none;
+  border-radius: var(--radius-m);
+  /* Textsichere dunkle Themen-Farbe als Grund, weisse Schrift (>= 4.6:1) */
+  background: var(--topic-text, var(--topic-color));
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+}
+
+.topic-start-button:hover {
+  filter: brightness(1.1);
+}
+
+.amount-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.amount-title {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+  color: var(--ink);
+}
+
+.amount-row {
+  display: flex;
+  gap: 10px;
+}
+
+.amount-choice {
+  flex: 1;
+  min-height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 10px 8px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.amount-choice span {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.amount-choice.is-active {
+  border-color: var(--topic-text, var(--topic-color));
+  border-width: 3px;
+  background: var(--topic-hover-bg, var(--accent-soft));
+}
+
+.amount-hint {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.later-title {
+  margin: 14px 0 6px;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* Zugeklappte Alternativen auf der Themen-Seite (Befund 2, 21.09.2026).
+   Die Zusammenfassungs-Zeile ist das Bedienelement und hält deshalb die
+   58-px-Trefferflaeche aus §9 ein. Farbe wie bei .intro-more, damit man
+   sie als antippbar erkennt (ein Muster statt zwei, §3). */
+.later-details {
+  margin: 14px 0 0;
+}
+
+.later-details > summary.later-title {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  margin: 0;
+  padding: 8px 4px;
+  color: var(--accent-dark);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.later-details > summary.later-title:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-s);
+}
+
+.later-details[open] > summary.later-title {
+  margin-bottom: 8px;
+}
+
+.later-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.later-chip {
+  min-height: 58px;   /* §9: gleiche Hoehe wie alle anderen Bedienelemente */
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.later-chip:hover {
+  background: var(--topic-hover-bg, var(--accent-soft));
+}
+
+.done-note {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  background: var(--good-bg);
+  color: var(--good);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+}
+
+/* ---------- QR im Begleit-Panel ---------- */
+
+.companion-qr {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 12px 0;
+  padding: 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+}
+
+.companion-qr img {
+  flex: none;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.companion-qr p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Frage des Tages (Start-Seite) ---------- */
+
+.daily-question {
+  border-left: 6px solid var(--topic-color, var(--accent));
+}
+
+.daily-question-topic {
+  margin: 0 0 6px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.daily-question-text {
+  font-size: 1.12rem;
+  margin: 0 0 12px;
+}
+
+.daily-answers {
+  display: grid;
+  gap: 10px;
+}
+
+.daily-answer {
+  min-height: 58px;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 12px 16px;
+  border: 2px solid var(--topic-color, var(--accent));
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.daily-answer:hover {
+  background: var(--topic-hover-bg, var(--accent-soft));
+}
+
+/* ---------- Nummern-Anker + Piktogramme an Fragen/Antworten ----------
+   Die sichtbare Nummer entspricht der gesprochenen („Antwort 1"):
+   Auge und Ohr zeigen auf dasselbe (crossmodale Verankerung). */
+
+.answer-option,
+.sa-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.answer-num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border: 2px solid var(--accent);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.answer-pikto {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.answer-text {
+  flex: 1;
+}
+
+.question-pikto {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+/* ---------- Gesamt-Abschluss (alle Themen geschafft) ---------- */
+
+.grand-finish {
+  background: var(--good-bg);
+  border: 3px solid var(--good);
+  border-radius: var(--radius-m);
+  padding: 20px 22px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.grand-finish h3 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  color: var(--good);
+}
+
+.grand-finish p {
+  margin: 4px 0;
+}
+
+.grand-finish .setting-big-button {
+  margin-top: 12px;
+}
+
+/* ---------- Seite: Hilfe ---------- */
+
+/* Kurze Rückmeldung auf der Hilfe-Seite */
+.feedback-felder { display: grid; gap: 4px; margin: 12px 0 10px; }
+.feedback-felder label { font-weight: 700; margin-top: 8px; }
+.feedback-felder textarea {
+  width: 100%;
+  min-height: 58px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid color-mix(in srgb, var(--ink-soft) 70%, var(--surface));
+  border-radius: var(--radius-s);
+}
+.feedback-hinweis { font-size: 0.98rem; color: var(--ink-soft); }
+.feedback-senden { flex: none; max-width: 100%; white-space: normal; }
+
+.help-page-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 14px 0 20px;
+}
+
+/* ---------- Fußbereich ---------- */
+
+.app-footer {
+  margin-top: 26px;
+}
+
+.footer-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+}
+
+.footer-logo {
+  height: 64px;
+  width: auto;
+  border-radius: var(--radius-s);
+}
+
+.footer-logo-wide {
+  height: 72px;
+}
+
+.small-footer-notice {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.small-footer-notice p {
+  font-size: 0.92rem;
+  margin: 4px 0;
+}
+
+/* ---------- Einfach-Modus ---------- */
+
+body.simple-mode {
+  font-size: 1.12em;
+}
+
+body.simple-mode p,
+body.simple-mode li {
+  font-size: 1.18rem;
+  line-height: 1.85;
+}
+
+body.simple-mode .topic-illustration,
+body.simple-mode .topic-desc,
+body.simple-mode .access-box.example {
+  display: none;
+}
+
+body.simple-mode .card,
+body.simple-mode .practice-box {
+  border-width: 3px;
+}
+
+/* ---------- Statische Seiten (Ersteller, Themenseiten) ---------- */
+
+.creator-page,
+.static-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+.creator-page .card,
+.static-page .card {
+  margin-bottom: 20px;
+}
+
+.creator-page .lead,
+.static-page .lead {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+}
+
+.static-page-footer {
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin-top: 24px;
+}
+
+/* Footer auf statischen Seiten (Impressum, Datenschutz etc.) */
+.static-footer {
+  margin-top: 32px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.static-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.static-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Lernziele (Start-Screen) ---------- */
+
+.learning-goals-box {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.learning-goals-box h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin: 0 0 10px;
+}
+
+.learning-goals-list {
+  margin: 0 0 12px;
+  padding-left: 1.4em;
+}
+
+.learning-goals-list li {
+  font-size: 1rem;
+  line-height: 1.55;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.learning-goals-hint {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Dieselbe Liste am Ende, eingelöst (Prüfbericht B13). Gleiche Bauform wie
+   auf Schritt 1, damit die Person sie wiedererkennt – nur in der Erfolgs-
+   Farbe und mit Haken statt Aufzählungs-Punkt. */
+.learning-goals-box--done {
+  background: var(--good-soft, rgba(21, 128, 61, 0.10));
+  border-left-color: var(--good);
+}
+
+/* T07 (21.09.2026): Diese Überschrift war grün wie eine Erfolgsmeldung.
+   Sie sagt jetzt nur noch, worum es im Thema ging – dafür ist die
+   Erfolgsfarbe falsch. Gemessen kam dazu: --good auf dem getönten Grund
+   dieser Box ergibt 4,39:1, bei 17 px fett verlangt WCAG 2.2 AA aber
+   4,5:1 (großer Text wäre erst ab 18,66 px fett). --ink liegt bei
+   14,1:1 und ist hier auch inhaltlich das richtige Zeichen (§9, §10). */
+.learning-goals-box--done h3 {
+  color: var(--ink);
+}
+
+.goals-done-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.goals-done-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.goal-check {
+  flex: 0 0 auto;
+  color: var(--good);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+/* T07 (21.09.2026): ruhiger Listenpunkt statt Erfolgs-Haken. Der Haken
+   behauptete ein erreichtes Lernziel, das nirgends gemessen wird. Der Punkt
+   gliedert nur. Farbe aus dem Token, sonst bricht der Dunkelmodus (§10). */
+.goal-dot {
+  /* display ausdruecklich setzen: Die Zeile ist hier NICHT flex (anders als
+     bei .goals-done-list li), ein inline-Element haette Breite 0. */
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  margin-right: 10px;
+  vertical-align: 0.1em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.goals-done-note {
+  margin: 12px 0 0;
+  color: var(--ink-soft, var(--ink));
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ---------- Start-Screen: Fehler-Normalisierung ---------- */
+
+.start-safe-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--good-bg);
+  border-left: 4px solid var(--good);
+  border-radius: var(--radius-s);
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.start-safe-icon {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--good);
+  margin: 0;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+.start-safe-main {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--good);
+  margin: 0 0 4px;
+}
+
+.start-safe-sub {
+  font-size: 0.97rem;
+  color: var(--ink);
+  margin: 0 0 2px;
+  line-height: 1.55;
+}
+
+.start-safe-sub:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Urkunde: warmer Text ---------- */
+
+.certificate-warm {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--good);
+  margin: 8px 0 16px;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Piktogramme (Einfach-Modus) ---------- */
+
+/* Lektions-Piktogramm oben (eines pro Lektion) */
+.einfach-pictogram {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 20px;
+}
+
+.einfach-pictogram img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+/* Leichte-Sprache Textzeile: Piktogramm links, Satz rechts */
+.ls-text-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.ls-text-row p {
+  margin: 0;
+  flex: 1;
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.ls-sentence-pikto {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.65);
+  border-radius: 50%;
+  padding: 6px;
+}
+
+/* Bullet-Liste mit Piktogrammen */
+.ls-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ls-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.45);
+  border-radius: var(--radius-m);
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.ls-bullet-pikto {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+/* Dark mode Anpassungen */
+@media (prefers-color-scheme: dark) {
+  .ls-sentence-pikto,
+  .ls-bullet-pikto,
+  .einfach-pictogram img {
+    background: rgba(255,255,255,0.12);
+  }
+  .ls-bullet-item {
+    background: rgba(255,255,255,0.06);
+  }
+}
+
+/* Einfach-Karte: etwas größere Schrift, mehr Zeilenabstand */
+.lesson-card--einfach p {
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.lesson-card--einfach .remember-box {
+  font-size: 1.05rem;
+}
+
+/* ---------- Einfach-Modus Abschlussseite ---------- */
+
+.completion-card--einfach {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 24px 40px;
+  border-radius: 16px;
+}
+
+.einfach-done-star {
+  margin: 0 0 8px;
+  animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bounceIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.einfach-done-star img {
+  width: 120px;
+  height: 120px;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+.einfach-done-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.einfach-done-text {
+  font-size: 1.15rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.einfach-done-topic {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.einfach-done-praise {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 4px 0 8px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.einfach-done-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 8px;
+}
+
+.einfach-done-btn {
+  width: 100%;
+  font-size: 1.05rem;
+  padding: 14px 20px;
+}
+
+/* ---------- Einstiegsfrage (Self-Assessment) ---------- */
+
+.sa-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sa-intro {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin: 16px 0 4px;
+}
+
+.sa-question {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 20px;
+  line-height: 1.45;
+}
+
+.sa-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sa-option-btn {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-s);
+  color: var(--accent-dark);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 14px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  min-height: 48px;
+}
+
+.sa-option-btn:hover,
+.sa-option-btn:focus-visible {
+  background: var(--accent-soft);
+  border-color: var(--accent-dark);
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.sa-hint {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---------- Modul-Cluster-Badge ---------- */
+
+.module-cluster-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  padding: 10px 16px;
+  margin: 0 0 8px;
+  animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.module-cluster-label {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.module-cluster-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+/* ---------- Druck: nur die Merk-Karte ---------- */
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  .app-header,
+  .progress-area,
+  .nav,
+  .main-tabbar,
+  .orient-line,
+  .app-footer,
+  .small-footer-notice,
+  .utility-bar,
+  .reading-toolbar,
+  .certificate-actions,
+  .task-help-area,
+  .support-help-area,
+  .progress-consent {
+    display: none !important;
+  }
+
+  .certificate-frame {
+    border-color: #000000;
+  }
+
+  .certificate-kicker,
+  .certificate-topic {
+    color: #000000;
+  }
+
+  .card {
+    border: 1px solid #000000;
+    box-shadow: none;
+  }
+}
+
+/* ---------- Kleine Bildschirme ---------- */
+
+@media (max-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+
+  .app {
+    padding: 10px 10px calc(40px + var(--tabbar-h));
+  }
+
+  .app-header {
+    flex-wrap: wrap;
+  }
+
+  .header-text {
+    order: 2;
+    flex-basis: 100%;
+  }
+
+  .tab-item {
+    /* Nicht kleiner: Zielgruppe braucht gut lesbare Beschriftung.
+       Lange Wörter (Einstellungen) dürfen sich trennen. */
+    font-size: 0.78rem;
+    padding: 4px 2px;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .tab-item .tab-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card {
+    padding: 20px 16px 24px;
+  }
+
+  .topic-grid {
+    /* Liste: eine Zeile je Thema, eindeutige Lesereihenfolge von oben nach unten */
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .nav {
+    bottom: calc(var(--tabbar-h) + 6px);
+  }
+}
+
+/* ============================================================
+   Skip-Link (Barrierefreiheit – Tastatur-Nutzende)
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 10px 18px;
+  border-radius: 0 0 var(--radius-s) var(--radius-s);
+  font-weight: 700;
+  z-index: 999;
+  transition: top 0.15s;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   SW-Update-Banner
+   ============================================================ */
+
+/* Hinweis auf eine neue Fassung.
+   Er lag frueher bei `bottom: 16px` UEBER dem Hauptmenue und hat drei der
+   fuenf Menuepunkte unantippbar gemacht. Jetzt sitzt er DARUEBER – dieselbe
+   Rechnung wie bei `.nav`, damit die Navigation immer erreichbar bleibt.
+   Er schliesst sich ausserdem von allein (siehe index.html). */
+.update-banner {
+  position: fixed;
+  bottom: calc(var(--tabbar-h) + 12px + env(safe-area-inset-bottom, 0px));
+  left: 12px;
+  right: 12px;
+  margin: 0 auto;
+  max-width: 420px;
+  background: var(--good);
+  color: #fff;
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+  z-index: 70;   /* ueber dem Inhalt, aber nicht ueber dem Hauptmenue (60) */
+}
+
+.update-banner-text {
+  flex: 1 1 100%;
+}
+
+.update-banner button {
+  background: rgba(255,255,255,0.22);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.55);
+  border-radius: var(--radius-s);
+  /* Beide Knoepfe gleich gross und bequem zu treffen. Der Schliessen-Knopf
+     war vorher 31 x 29 px – der kleinste Knopf der ganzen App. */
+  min-height: 44px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.update-banner button:hover {
+  background: rgba(255,255,255,0.38);
+}
+
+.update-banner button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.update-banner-close {
+  background: transparent !important;
+}
+
+/* ============================================================
+   Das große Quiz – Startseite und Karte
+   ============================================================ */
+
+/* Startseite: Aktions-Grid (Quiz + Merk-Karten) */
+.start-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+@media (max-width: 480px) {
+  .start-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.big-quiz-start-button,
+.start-action-secondary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-m);
+  padding: 16px 18px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, outline 0.15s;
+}
+
+.big-quiz-start-button {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 2px 8px rgba(0,82,143,0.18);
+}
+
+.big-quiz-start-button:hover,
+.big-quiz-start-button:focus {
+  background: var(--accent-dark);
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.start-action-secondary {
+  background: var(--surface);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.start-action-secondary:hover,
+.start-action-secondary:focus {
+  background: var(--accent-soft);
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.big-quiz-start-button svg,
+.start-action-secondary svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.big-quiz-start-button svg {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.start-action-secondary svg {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.big-quiz-start-button strong,
+.start-action-secondary strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.big-quiz-start-button span span,
+.start-action-secondary span span {
+  display: block;
+  font-size: 0.86rem;
+  opacity: 0.82;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Alle Merk-Karten – Druck-Seite
+   ============================================================ */
+
+.all-memory-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+.all-memory-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.all-memory-heading {
+  font-size: 1.6rem;
+  margin: 0 0 6px;
+}
+
+.all-memory-intro {
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+
+.print-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.print-memory-card {
+  background: var(--surface);
+  border: 2px solid var(--topic-color, var(--line));
+  border-radius: var(--radius-l);
+  padding: 18px 20px;
+  break-inside: avoid;
+}
+
+.print-memory-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.print-memory-icon svg {
+  width: 36px;
+  height: 36px;
+  fill: var(--topic-color);
+  stroke: var(--topic-color);
+}
+
+.print-memory-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--topic-text, var(--topic-color));
+}
+
+.print-memory-rules,
+.print-memory-questions {
+  margin-bottom: 10px;
+}
+
+.print-memory-rules h3,
+.print-memory-questions h3 {
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin: 0 0 6px;
+}
+
+.print-memory-rules ol,
+.print-memory-questions ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.print-memory-rules li,
+.print-memory-questions li {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+/* Drucken: nur Karten sichtbar */
+@media print {
+  .no-print { display: none !important; }
+
+  .print-memory-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .print-memory-card {
+    border-width: 1px;
+    padding: 12px 14px;
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================================
+   Dark Mode – greift automatisch wenn System auf Dunkel steht
+   WCAG 1.4.3 / 1.4.6: alle Kontraste ≥ 4.5:1 auf --bg
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    /* Hintergründe */
+    --bg:           #0e1820;
+    --bg-grad-1:    #0f1825;
+    --bg-grad-2:    #0b1119;
+    --surface:      #18273a;
+    --surface-soft: #111d2c;
+
+    /* Text */
+    --ink:          #e2ecf6;
+    --scene-backdrop: rgba(226, 236, 246, 0.88);
+    --ink-soft:     #a0c2d4;   /* APCA Lc 63 auf --surface ✓ (war #7a9fb8, Lc 45) */
+
+    /* Rahmen */
+    --line:         #233448;
+
+    /* Akzent – APCA Lc 66 als Text auf --surface, Lc 69 auf --bg ✓ */
+    --accent:       #8ecaee;   /* (war #58a8e0, Lc 48) */
+    --accent-dark:  #a0d2f2;
+    --accent-soft:  #152840;
+    /* Akzent ist hier hell -> Schrift darauf muss dunkel sein.
+       Weiss auf #8ecaee waere 1,77:1 und faellt unter AA (4,5:1). Jetzt ca. 11:1. */
+    --on-accent:    #0b1119;
+
+    /* Feedback-Farben */
+    --good:         #4ade80;
+    --good-bg:      #0a2018;
+    --warn:         #fca55a;   /* APCA Lc 61 auf --surface ✓ (war #fb923c, Lc 54) */
+    --warn-bg:      #2a1400;
+    --bad:          #f87171;
+    --bad-bg:       #2a0d0d;
+
+    /* Merk-Boxen */
+    --remember:     #58a8e0;
+    --remember-bg:  #152840;
+
+    /* Fokus-Farbe */
+    --focus:        #fb923c;
+
+    /* Hauptmenü: aktive Unterlegung im Dark Mode (Text --accent-dark hell, AA ✓) */
+    --tab-active-bg: #152840;
+
+    /* Fortschrittsbalken dunkel: tiefe Rinne, helle Kontur.
+       Schwaechste Fuellung (Instagram #f472b6) gegen Rinne = 6,63:1;
+       Kontur #8aa0b8 gegen --surface = 5,61:1
+       (vorher: Rinne #233448 auf --surface = 1,19:1). */
+    --track-bg:     #0f1a26;
+    --track-line:   #8aa0b8;
+
+    /* Schatten stärker auf dunklem Grund */
+    --shadow:       0 2px 8px rgba(0,0,0,0.5), 0 14px 32px rgba(0,0,0,0.55);
+    --shadow-small: 0 1px 4px rgba(0,0,0,0.55);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.55), 0 20px 44px rgba(0,0,0,0.6);
+  }
+
+  /* Start-Knopf: im Dark Mode ist die Themen-Farbe hell -> dunkle Schrift */
+  .topic-start-button {
+    color: #0b1119;
+  }
+
+  /* Input / Textarea */
+  input, textarea, select {
+    background: var(--surface);
+    color: var(--ink);
+    border-color: var(--line);
+  }
+
+  /* Hero-Karte: eigener dunkler Gradient damit weißer Text APCA Lc 90 erreicht
+     (--accent im Dark Mode ist jetzt hell #8ecaee, taugt nicht als Hintergrund) */
+  .hero-card {
+    background:
+      radial-gradient(120% 140% at 100% 0%, rgba(90,168,224,0.26) 0%, rgba(90,168,224,0) 55%),
+      linear-gradient(135deg, #16466f 0%, #0c2c4c 100%);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  }
+
+  /* Bilder leicht abdunkeln (verhindert Blenden durch weiße SVGs) */
+  img:not([src$=".svg"]) {
+    filter: brightness(0.88);
+  }
+
+  /* Symbole hell einfärben.
+     Die 22 Dateien in assets/icons/ zeichnen mit stroke="currentColor".
+     Als <img> eingebunden hat currentColor keinen CSS-Kontext und fällt auf
+     Schwarz zurück – im Dark Mode standen dadurch schwarze Symbole auf
+     dunklen Karten (gemessen: 4760 von 4760 Symbol-Pixeln dunkel, also
+     praktisch unsichtbar). Betraf jede Stelle, die getIconHtml() nutzt.
+     .topic-icon img hatte diesen Filter schon – hier gilt er für alle. */
+  img[src^="assets/icons/"] {
+    filter: brightness(0) invert(1);
+  }
+
+  /* Ausnahme: die Themen-Felder sind im Dark Mode HELL (z. B. Limette
+     #a3e635, Gemessene Luminanz bis 221). Ein weißes Symbol darauf war
+     schon vorher kaum zu sehen. Hier also umgekehrt: dunkles Symbol auf
+     heller Fläche – dieselbe Logik wie --on-accent bei der Schrift.
+     Muss NACH der Regel darüber stehen (gleiche Spezifität). */
+  .topic-icon img {
+    filter: brightness(0);
+  }
+
+  /* Lesson-Bilder und Piktogramme: sanfter Hintergrund statt weiß */
+  .einfach-pictogram img,
+  .topic-illustration,
+  .lesson-illustration {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    filter: none;
+  }
+
+  /* Druckseiten-Urkunde: dunkler Hintergrund */
+  .certificate-card {
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+
+  /* Offline-Banner bereits dunkel — leicht aufhellen */
+  #offline-banner {
+    background: #1e3a58;
+  }
+
+  /* Scrollbalken (Webkit) */
+  ::-webkit-scrollbar { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+}
+
+.big-quiz-card .big-quiz-topic-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+  padding: 2px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+  color: var(--topic-color, var(--accent));
+}
+
+/* ============================================================
+   Wörter-Hilfe (Glossar)
+   ============================================================ */
+
+/* Hervorgehobenes Wort im Text */
+/* Icons in den Vorlese-Knöpfen (Lautsprecher / Lautsprecher mit Uhr).
+   Erben die Textfarbe des Knopfes; ruhig und erwachsen statt Emoji. */
+.rb-ico {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.22em;
+  margin-right: 3px;
+}
+
+.glossar-term {
+  border-bottom: 2px dotted var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+  border-radius: 2px;
+  /* kein display:inline nötig – span ist schon inline */
+}
+
+.glossar-term:hover,
+.glossar-term:focus {
+  background: var(--accent-soft);
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Glossar-Wörter im dunklen Begrüßungs-Feld: weiß und gut sichtbar. */
+.hero-card .glossar-term {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.8);
+}
+.hero-card .glossar-term:hover,
+.hero-card .glossar-term:focus {
+  background: rgba(255, 255, 255, 0.18);
+  outline-color: #ffffff;
+}
+
+/* Overlay (Hintergrund) */
+.glossar-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;      /* Panel kommt von unten auf Mobilgeräten */
+  justify-content: center;
+  padding: 20px;
+  background: rgba(22, 34, 46, 0.5);
+  z-index: 60;
+}
+
+@media (min-width: 500px) {
+  .glossar-overlay {
+    align-items: center;      /* Zentriert auf größeren Bildschirmen */
+  }
+}
+
+/* Panel mit der Erklärung */
+.glossar-panel {
+  max-width: 420px;
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: 24px 24px 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  position: relative;
+}
+
+.glossar-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 6px 12px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.glossar-close:hover {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+.glossar-word-label {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.glossar-word-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 12px;
+  padding-right: 48px;       /* Platz für Close-Button */
+}
+
+.glossar-word-def {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* =============================================================
+   Trainings-Postfach – Trick oder echt?
+   Nutzt nur CSS-Variablen, damit der Dark Mode intakt bleibt.
+   ============================================================= */
+.training-card { max-width: 720px; margin: 0 auto; }
+
+.training-count {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+/* Nachricht im Handy-Stil: ruhige Sprechblase */
+.training-msg {
+  background: var(--surface-soft);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 18px 20px;
+  margin: 14px 0 20px;
+}
+
+.training-msg-head {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+
+.training-msg-text {
+  color: var(--ink);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+/* =============================================================
+   Themenübersicht: Starte-hier-Hinweis und Üben-Sektion
+   ============================================================= */
+
+/* Badge auf genau einer Themen-Kachel: geführter Einstieg ohne Zwang */
+.topic-start-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 2;
+}
+.topic-start-badge--first,
+.topic-card .topic-start-badge--first {
+  background: var(--good);
+  color: var(--on-accent);
+}
+
+/* Üben-Sektion unter den Themen */
+.practice-section {
+  margin-top: 34px;
+}
+
+.practice-grid {
+  margin-top: 6px;
+}
+
+/* Abkürzung auf der Startseite: leiser Zweitweg unter dem Haupt-Knopf */
+.intro-quickstart-button {
+  display: block;
+  margin: 2px auto 0;
+  padding: 12px 24px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: transparent;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.intro-quickstart-button:hover { border-color: var(--accent); background: var(--surface-soft); }
+
+.intro-quickstart-button:hover {
+  transform: translateY(-2px);
+  background: var(--surface-soft);
+}
+
+.intro-quickstart-hint {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  margin: 16px 0 6px;
+}
+
+/* Alex und Tilda: Begleitfiguren auf der Startseite */
+.intro-figures {
+  text-align: center;
+  margin: 22px 0 4px;
+}
+
+.intro-figures img {
+  width: min(300px, 72%);
+  height: auto;
+}
+
+/* ---------- Sanftes Einblenden der Illustrationen ----------
+   Dezent und einmalig beim Erscheinen (kein Dauer-Loop), damit die
+   Figuren „lebendig" wirken, ohne abzulenken (§3 Kohärenz, §9 COGA).
+   Bei „weniger Bewegung" automatisch aus – der globale
+   prefers-reduced-motion-Block (oben) schaltet alle Animationen ab.
+   Die Bilder sind rein dekorativ (aria-hidden). */
+@keyframes illu-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.topic-illustration,
+.intro-figures img {
+  /* Bewusst langsam und mit sanftem Beginn (ease-in-out) + kleiner
+     Verzoegerung: das Bild kuendigt sich an und baut sich ruhig auf,
+     damit genug Zeit bleibt, sich darauf einzustellen (Vorhersehbarkeit,
+     emotionale Sicherheit, §3). */
+  animation: illu-rise 2s ease-in-out 0.25s both;
+}
+
+.intro-figures-text {
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 10px 0 0;
+  line-height: 1.55;
+}
+
+
+/* ---------- Themen-Liste: Zuordnung der Bereiche ---------- */
+.topic-card .topic-icon  { grid-area: icon; }
+.topic-card .topic-title { grid-area: title; align-self: end;  font-size: 1.05rem; line-height: 1.25; }
+.topic-card .topic-desc  { grid-area: desc;  align-self: start; font-size: 0.87rem; line-height: 1.3; }
+.topic-card .topic-done-badge { grid-area: done; justify-self: start; margin-top: 3px; }
+
+
+/* Symbol-Feld in der Zeile: fest, quadratisch, nicht mitwachsend */
+.topic-card .topic-icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+}
+.topic-card .topic-icon svg,
+.topic-card .topic-icon img { width: 25px; height: 25px; }
+
+/* "Starte hier" steht in der Zeile ueber dem Namen – als eigene Rasterzeile,
+   nicht mehr freischwebend. Frei positioniert hat es den Titel um 37 px
+   ueberdeckt. Ohne Abzeichen faellt die Zeile auf 0 zusammen. */
+.topic-card .topic-start-badge {
+  grid-area: badge;
+  position: static;
+  justify-self: start;
+  transform: none;
+  margin: 0 0 2px;
+}
+
+/* Der Vorlese-Knopf bleibt pro Thema erhalten (§1) – er steht rechts neben
+   dem Text und kostet keine zusaetzliche Hoehe.
+   Wichtig: collectReadableText() ueberspringt alles in <button>, und die
+   Zeile IST ein Button. Ohne diesen Knopf waeren die Themennamen nicht
+   vorlesbar. */
+.card-read-pair--topic .card-read-button {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  min-width: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+}
+
+/* ============================================================
+   Kurze Frage nach den Lektionen + Abschluss-Selbstcheck
+   (August 2026, siehe renderMiniCheck / buildClosingSelfCheck)
+   ============================================================ */
+
+/* Rückmeldung zur kurzen Frage */
+.mini-feedback {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--surface-soft);
+  border: 2px solid var(--line);
+  border-left: 6px solid var(--good);
+  border-radius: var(--radius-s);
+}
+
+.mini-feedback.is-hidden { display: none; }
+
+.mini-feedback-text { margin: 0 0 12px; font-size: 1.02rem; }
+
+.mini-feedback .primary-action { width: 100%; }
+
+/* Die Antwort-Knöpfe der kurzen Frage bleiben nach der Wahl lesbar,
+   auch wenn sie deaktiviert sind – sonst verschwindet die Lösung. */
+.mini-answer[disabled] { opacity: 1; cursor: default; }
+
+/* Abschluss-Selbstcheck auf der Abschluss-Seite */
+.closing-sa-box { margin-top: 18px; }
+.closing-sa-box h3 { margin: 0 0 12px; }
+.closing-sa-box .sa-options { margin-bottom: 0; }
+
+.closing-sa[disabled] { opacity: 1; cursor: default; }
+
+.closing-sa.is-active {
+  background: var(--good-bg);
+  border-color: var(--good);
+  color: var(--good);
+}
+
+.closing-sa-result {
+  margin: 14px 0 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--good);
+}
+
+.closing-sa-result.is-hidden { display: none; }
+
+/* ============================================================
+   Übungs-Handy (Szenarien)
+   Auf dem Handy KEIN Rahmen: dort ist die App schon das Gerät,
+   ein zweites Gerät drumherum kostet nur Platz und macht die
+   Knöpfe kleiner als die 58 px aus §9. Erst ab Tablet-Breite
+   wird ein Rahmen gezeichnet – da hilft er (auch am Beamer).
+   Alle Farben über Tokens, damit der Dark Mode mitkommt (§10).
+   ============================================================ */
+
+/* Das Band steht IMMER über dem Bildschirm, nicht nur am Anfang.
+   Wer mitten im Verlauf einsteigt, muss es auch sehen (§3). */
+.sz-fake-band {
+  margin: 0 0 10px;
+  padding: 10px 16px;
+  border: 2px dashed var(--warn);
+  border-radius: var(--radius-s);
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.sz-count {
+  margin: 0 0 10px;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.phone {
+  margin: 0 0 18px;
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+  border: 2px solid var(--line);
+  overflow: hidden;
+}
+
+.phone-bar {
+  margin: 0;
+  padding: 8px 16px;
+  background: var(--line);
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.phone-screen {
+  padding: 14px 14px 4px;
+}
+
+/* Ab Tablet: erkennbares Gerät, mittig, mit Griffleiste unten. */
+@media (min-width: 700px) {
+  .phone {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 10px;
+    border-radius: 34px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+    padding-bottom: 14px;
+    position: relative;
+  }
+  .phone::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+  }
+}
+
+/* ---- Sprechblasen ---- */
+.sz-bubble {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-s);
+  border: 2px solid var(--line);
+  background: var(--surface);
+  max-width: 92%;
+}
+
+.sz-in  { margin-right: auto; }
+.sz-out {
+  margin-left: auto;
+  background: var(--accent-soft, var(--surface-soft));
+  border-color: var(--accent);
+}
+
+.sz-von {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.sz-text {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* ---- Nachrichten-Liste (Posteingang) ---- */
+.sz-listeneintrag {
+  padding: 12px 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+/* ---- Einstellungs-Zeile ---- */
+.sz-schalter {
+  padding: 12px 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+.sz-schalter-name  { margin: 0 0 4px; font-size: 1.05rem; font-weight: 700; }
+.sz-schalter-wert  { margin: 0; font-size: 1rem; color: var(--ink-soft); }
+.sz-schalter-hinweis { margin: 6px 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+
+/* ---- Anruf ---- */
+.sz-anruf {
+  padding: 20px 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  text-align: center;
+}
+
+.sz-anruf-symbol { display: block; margin: 0 auto 8px; width: 44px; height: 44px; }
+.sz-anruf-symbol img,
+.sz-anruf-symbol svg { width: 44px; height: 44px; }
+.sz-anruf-von  { margin: 0 0 4px; font-size: 1rem; color: var(--ink-soft); }
+.sz-anruf-name { margin: 0 0 4px; font-size: 1.15rem; font-weight: 700; }
+.sz-anruf-nr  { margin: 0; font-size: 1rem; color: var(--ink-soft); }
+
+/* ---- Shop ---- */
+.sz-shop {
+  padding: 14px;
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+.sz-shop-titel { margin: 0 0 4px; font-size: 1.1rem; font-weight: 700; }
+.sz-shop-preis { margin: 0 0 8px; font-size: 1.4rem; font-weight: 700; color: var(--accent-dark); }
+.sz-shop-liste { margin: 0; padding-left: 22px; }
+.sz-shop-liste li { font-size: 1rem; line-height: 1.5; margin-bottom: 4px; }
+
+/* ---- Video ---- */
+.sz-video {
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.sz-video-bild {
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--line);
+  font-size: 2rem;
+  color: var(--ink-soft);
+}
+
+.sz-video-titel   { margin: 10px 14px 4px; font-size: 1.08rem; font-weight: 700; }
+.sz-video-meta    { margin: 0 14px 4px; font-size: 0.95rem; color: var(--ink-soft); }
+.sz-video-hinweis { margin: 0 14px 12px; font-size: 0.95rem; color: var(--ink-soft); }
+
+.sz-hinweis {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-left: 5px solid var(--accent);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  background: var(--surface);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* ---- Nachgebaute Betrugs-Seite im Fallen-Bild (Sept 2026) ----
+   Sieht aus wie eine Webseite, ist aber nur ein Bild: keine Eingabe-
+   felder, kein <button>. Alle Farben ueber Variablen, damit der
+   Dark Mode traegt. */
+.sz-webseite {
+  margin: 0 0 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.sz-web-adresse {
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--surface-soft);
+  border-bottom: 2px solid var(--line);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  word-break: break-all;
+}
+
+.sz-web-inhalt { padding: 14px; }
+
+.sz-web-titel {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.sz-web-feld {
+  margin: 0 0 8px;
+  padding: 12px 10px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+/* Bewusst NICHT in der Marken-Farbe --accent: sonst sieht der Knopf der
+   Betrugs-Seite genauso aus wie der echte "Weiter"-Knopf direkt darunter,
+   und Lernende tippen darauf. Der Warn-Ton der Falle: sieht nach Knopf aus,
+   ist aber in HELL wie DUNKEL klar von den blauen App-Knoepfen zu
+   unterscheiden. (Grau-Blau ging nicht: im Dark Mode wird --ink-soft
+   hellblau und damit fast identisch mit --accent.) */
+.sz-web-knopf {
+  margin: 12px 0 0;
+  padding: 12px 10px;
+  border-radius: var(--radius-s);
+  background: var(--warn);
+  color: var(--surface);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---- Das Fallen-Bild als Ganzes ---- */
+.sz-falle {
+  margin: 14px 0;
+  padding: 12px;
+  border: 2px dashed var(--warn);
+  border-radius: var(--radius-m);
+  background: var(--warn-bg);
+}
+
+.sz-falle-band {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--warn);
+  text-align: center;
+}
+
+.sz-falle-text {
+  margin: 10px 0 0;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.phone--falle { margin: 0 auto; }
+
+/* ---- "Die war schwer" – Einordnung statt Lob ---- */
+.sz-schwer {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* ---- Runden-Auswahl ---- */
+.sz-runden {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 16px;
+}
+
+.sz-runde {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  min-height: 64px;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.sz-runde:hover,
+button.sz-runde:focus-visible { border-color: var(--accent); }
+
+.sz-runde-zu {
+  cursor: default;
+  background: var(--surface-soft);
+  border-style: dashed;
+}
+
+.sz-runde-titel { font-size: 1.15rem; font-weight: 700; }
+.sz-runde-sub   { font-size: 1rem; color: var(--ink-soft); line-height: 1.45; }
+
+/* ---- Frage und Rückmeldung ---- */
+.sz-frage { margin: 0 0 14px; }
+
+.sz-frage-text {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.sz-answer.is-correct {
+  border-color: var(--good);
+  background: var(--good-bg);
+}
+
+.sz-answer.is-wrong {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+}
+
+.sz-answer:disabled { cursor: default; opacity: 1; }
+
+.sz-feedback {
+  margin: 0 0 14px;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.sz-feedback.is-correct { border-color: var(--good); background: var(--good-bg); }
+.sz-feedback.is-wrong   { border-color: var(--warn); background: var(--warn-bg); }
+.sz-feedback.is-hidden  { display: none; }
+
+.sz-feedback-kopf { margin: 0 0 6px; font-size: 1.1rem; font-weight: 700; }
+.sz-feedback.is-correct .sz-feedback-kopf { color: var(--good); }
+.sz-feedback.is-wrong   .sz-feedback-kopf { color: var(--warn); }
+.sz-feedback-text { margin: 0 0 8px; font-size: 1.05rem; line-height: 1.5; }
+.sz-feedback-merk { margin: 0; font-size: 1.05rem; font-weight: 700; }
+
+.sz-merkliste { margin: 0; padding-left: 22px; }
+.sz-merkliste li { font-size: 1.05rem; line-height: 1.55; margin-bottom: 6px; }
+
+.sz-exit { margin-top: 6px; }
+
+@media print {
+  .phone { break-inside: avoid; }
+}
+
+/* =============================================================
+   DEINE KARTE – Sammelstand und die 13 Regeln (Sept 2026)
+   Alle Farben ueber Variablen, damit der Dark Mode traegt.
+   ============================================================= */
+
+/* ---- Der Sammelstand auf "Mein Lernweg" ---- */
+.karte-block {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  margin: 14px 0 0;
+  padding: 16px 18px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.karte-block:hover,
+.karte-block:focus-visible { background: var(--surface-soft); }
+
+.karte-block-kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.karte-block-titel { font-size: 1.2rem; font-weight: 700; }
+.karte-block-zahl  { font-size: 1.6rem; font-weight: 700; color: var(--accent-dark); white-space: nowrap; }
+.karte-block-zahl span { font-size: 1rem; font-weight: 400; color: var(--ink-soft); }
+
+.karte-block-balken {
+  display: block;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.karte-block-fuell {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.karte-block-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* ---- Rueckmeldung beim Finden einer Regel ---- */
+.regel-treffer {
+  margin: 14px 0;
+  padding: 14px 16px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.regel-treffer--sicher { border-color: var(--good); }
+
+.regel-treffer-kopf {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.regel-treffer--sicher .regel-treffer-kopf { color: var(--good); }
+
+.regel-treffer-zeile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.regel-treffer-satz {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.regel-treffer-stand {
+  margin: 10px 0 0;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+.regel-pikto {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+}
+
+/* ---- Die Sammel-Seite ---- */
+.regel-stand {
+  margin: 16px 0 20px;
+  padding: 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.regel-stand-zahlen {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.regel-stand-zahl { font-size: 2.2rem; font-weight: 700; color: var(--accent-dark); }
+.regel-stand-von  { font-size: 1.05rem; color: var(--ink-soft); }
+
+.regel-stand-balken {
+  height: 16px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.regel-stand-fuell { height: 100%; border-radius: 999px; background: var(--accent); }
+
+.regel-stand-sitzt {
+  margin: 10px 0 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.regel-liste {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  counter-reset: regel;
+}
+
+.regel-platz {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.regel-platz--sitzt { border-color: var(--good); }
+
+.regel-platz--leer {
+  border-style: dashed;
+  background: var(--surface-soft);
+}
+
+.regel-platz-nr {
+  flex: 0 0 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--line);
+  color: var(--ink-soft);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.regel-platz-text { display: block; }
+
+.regel-platz-satz {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.regel-platz--sitzt .regel-platz-satz::after {
+  content: " ✓";
+  color: var(--good);
+}
+
+.regel-platz-sub {
+  display: block;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.regel-platz-stand {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+@media print {
+  .karte-block, .regel-treffer { break-inside: avoid; }
+}
+
+.regel-abschnitt { margin: 22px 0 12px; font-size: 1.15rem; }
+
+.regel-offen {
+  margin: 20px 0;
+  padding: 16px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-soft);
+}
+
+.regel-offen h3 { margin: 0 0 8px; font-size: 1.15rem; }
+
+/* Alltags-Übungen (alltag-de.js): vertraute Bedienung, ruhige Rückmeldung,
+   keine Zeitvorgabe. Nur Farb-Token – Dunkelmodus erbt automatisch (§10). */
+.alltag-actions, .alltag-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block: 16px;
+}
+.alltag-actions > *, .alltag-footer > * {
+  min-height: 58px;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.alltag-page { max-width: 48rem; margin-inline: auto; border-top: 4px solid var(--accent); }
+.alltag-page p, .alltag-page li { line-height: 1.6; }
+.alltag-page h2 { font-size: 1.6rem; }
+.alltag-page h3, .alltag-choices h3 { font-size: 1.2rem; }
+.alltag-kicker { color: var(--ink-soft); margin-block: 16px 4px; font-size: 1rem; }
+.alltag-simulation {
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  background: var(--accent-soft);
+  color: var(--ink);
+  padding: 12px 16px;
+  margin-top: 0;
+  font-size: 1rem;
+}
+.alltag-screen {
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: clamp(14px, 3vw, 24px);
+  margin-block: 20px;
+  background: var(--surface-soft);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.alltag-screen h3 { margin-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.alltag-screen .alltag-actions { flex-direction: column; }
+.alltag-message { background: var(--surface); padding: 16px; border-radius: var(--radius-s); border: 1px solid var(--line); }
+.alltag-guidance { padding: 16px; background: var(--accent-soft); border-radius: var(--radius-s); }
+.alltag-help { margin-block: 20px; border-top: 1px solid var(--line); }
+.alltag-help summary { min-height: 58px; padding: 16px 4px; cursor: pointer; font-weight: 700; }
+.alltag-transfer { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 16px; }
+.alltag-footer { border-top: 1px solid var(--line); padding-top: 16px; }
+.alltag-memory li { margin-block: 12px; padding-left: 4px; }
+.alltag-choices { margin-block: 24px; }
+.alltag-choices .action-card { height: 100%; }
+.alltag-length { display: block; margin-top: 10px; font-size: 1rem; color: var(--ink-soft); }
+.alltag-goal { padding: 12px 16px; background: var(--accent-soft); border-radius: var(--radius-s); }
+.alltag-step { display: inline-block; font-size: 1rem; color: var(--ink-soft); font-weight: 700; border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; margin-block: 4px 14px; }
+.alltag-next { margin-block: 24px; padding: 16px; border-left: 4px solid var(--accent); border-radius: var(--radius-s); background: var(--surface-soft); }
+.alltag-next h3 { margin-top: 0; }
+.alltag-next .nav-button { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+
+/* Vergleichs-Entwürfe A/B (alltag-de.js, ?variante=a|b) – nur lokale Vorschau.
+   Ordnung: oben Hilfe zur Übung, Mitte Übung mit Übungs-Handy, unten Andere Wege.
+   Unterschieden durch Reihenfolge, Abstand, Rahmen und Beschriftung – nicht
+   allein durch Farbe (WCAG 1.4.1). Eine Spalte (48rem), Touch-Flächen ≥ 58 px. */
+.alltag-variant { max-width: 48rem; margin-inline: auto; }
+.alltag-v-support-row { display: flex; flex-wrap: wrap; gap: 10px; margin-inline-end: auto; }
+/* Werkzeug-Zeile nur so breit wie die Übung: keine Knöpfe am Bildschirmrand,
+   zusätzliche Breite bleibt leer. */
+.alltag-v-toolrow { max-width: 48rem; margin: 0 auto 10px; }
+/* Hilfe in derselben Pillen-Form wie Vorlesen (Füllung --accent-soft, Schrift
+   --accent-dark, 58 px): Unterstützung ist eine Familie – anders als die
+   weißen, eckigen, nummerierten Antworten im Übungs-Handy. */
+.alltag-v-tool {
+  min-height: 58px;
+  padding: 8px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border: 2px solid transparent;
+  border-radius: 99px;
+  cursor: pointer;
+  text-align: left;
+}
+.alltag-v-tool:hover { border-color: var(--accent); }
+.alltag-v-tool[aria-expanded="true"] { border-color: var(--accent); }
+.alltag-v-help-panel .alltag-v-demo { flex: 0 1 auto; min-height: 58px; margin-top: 4px; padding-inline: 28px; }
+.alltag-v-help-panel { max-width: 48rem; margin: 0 auto 10px; padding: 14px 18px; border: 2px solid var(--line); border-radius: var(--radius-m); background: var(--surface); }
+.alltag-v-help-panel p { margin-block: 0 8px; }
+.alltag-v-help-panel p:last-child { margin-bottom: 0; }
+/* Engere, aber gleichmäßige Abstände nur auf den Entwurfsseiten – damit die
+   Aufgabe auf dem iPad quer nicht unter die Menü-Leiste rutscht. Kein Inhalt
+   entfällt, keine Schrift und keine Touch-Fläche wird kleiner. */
+.app:has(.alltag-variant) .app-header { padding-block: 8px; }
+.app:has(.alltag-variant) .content { margin-top: 10px; }
+.app:has(.alltag-variant) .orient-line { padding-block: 6px; }
+.alltag-v-card { margin-inline: 0; max-width: none; padding: 14px 24px 22px; }
+.alltag-v-simulation { margin: 0 0 8px; font-size: 1rem; color: var(--ink-soft); }
+.alltag-v-label { margin: 0 0 4px; font-size: 1rem; font-weight: 700; color: var(--ink); }
+.alltag-v-card h2 { margin-block: 0 8px; }
+.alltag-v-card > p, .alltag-v-card > div > p { margin-block: 0 10px; }
+.alltag-v-chosen { margin: 0 0 12px; padding: 10px 14px; border: 2px solid var(--line); border-radius: var(--radius-s); color: var(--ink); background: var(--surface); }
+.alltag-v-task, .alltag-v-next, .alltag-v-feedback { margin-top: 14px; }
+.alltag-v-feedback h3 { margin-block: 0 8px; }
+.alltag-v-answers { display: flex; flex-direction: column; gap: 12px; }
+.alltag-v-answers > button { flex: 0 0 auto; width: 100%; min-height: 62px; white-space: normal; overflow-wrap: anywhere; }
+.alltag-variant .answer-option { padding-block: 10px; }
+.alltag-v-card .alltag-goal { margin-block: 0 10px; padding-block: 8px; }
+.alltag-v-card .alltag-guidance { margin-block: 0 10px; }
+.alltag-v-card .alltag-help { margin-block: 12px 0; }
+.alltag-v-card #alltag-reflection:empty { display: none; }
+/* Übungs-Handy: eigener, deutlich anderer Rahmen (dicke Kontur, Beschriftung
+   oben). Nur simulierte Handlungen stehen darin. */
+.alltag-phone {
+  margin-block: 2px 0;
+  padding: 0 clamp(14px, 3vw, 20px) clamp(12px, 2vw, 16px);
+  border: 3px solid var(--ink-soft);
+  border-radius: var(--radius-l);
+  background: var(--surface-soft);
+  overflow-wrap: anywhere;
+}
+.alltag-phone-caption {
+  margin: 0 0 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-align: center;
+}
+.alltag-phone h3 { margin: 0 0 8px; }
+.alltag-phone .alltag-message { margin-block: 0 12px; padding: 12px 14px; }
+.alltag-phone > :last-child { margin-bottom: 0; }
+.alltag-phone .alltag-v-chosen { margin-bottom: 0; }
+.alltag-v-ways { margin-top: 16px; padding-top: 8px; border-top: 2px solid var(--line); }
+.alltag-v-way-list { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+.alltag-variant .nav-button.alltag-v-way {
+  flex: 0 1 auto;
+  min-height: 58px;
+  padding: 8px 4px;
+  background: none;
+  border: 0;
+  border-radius: var(--radius-s);
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.alltag-variant .nav-button.alltag-v-way:hover { text-decoration-thickness: 3px; }
+.alltag-variant button:focus-visible, .alltag-variant summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+#alltag-phase-focus:focus { outline: none; }
+#alltag-phase-focus:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+/* Datenschutz-Übung: Hinweise von Alex/Tilda und freiwillige Einschätzung am Ende. */
+.privacy-guide, .privacy-closing { margin-block: 1.25rem; padding: 1.1rem; border: 1px solid var(--line); border-radius: var(--radius-s); background: var(--surface); color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+.privacy-guide { border-inline-start: 4px solid var(--accent); }
+.privacy-guide p { margin: 0; }
+.privacy-closing h3 { margin-block: 1rem .5rem; }
+.privacy-closing .alltag-actions { flex-direction: column; align-items: stretch; }
+.privacy-closing button { min-height: 58px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+/* Gewählte Antwort und Tastatur-Fokus getrennt erkennbar (§9). */
+.privacy-closing [aria-pressed="true"] { outline: 3px solid var(--accent); outline-offset: 2px; }
+.alltag-page button:focus-visible,
+.alltag-help summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 6px; }
+@media (max-width: 560px) {
+  .alltag-actions, .alltag-footer { flex-direction: column; }
+  .alltag-actions > *, .alltag-footer > * { width: 100%; }
+  .alltag-v-way-list { flex-direction: column; gap: 0; }
+  .alltag-v-tool { flex: 1 1 100%; }
+  .privacy-guide, .privacy-closing { padding: .8rem; }
+}
+@media print {
+  .alltag-card-for-print {
+    color-scheme: light;
+    --ink: CanvasText;
+    --surface: Canvas;
+    max-width: none;
+    break-inside: avoid;
+    color: var(--ink);
+    background: var(--surface);
+  }
+  .alltag-memory { color: var(--ink); background: var(--surface); padding: 0; }
+}
+
+.regel-offen-text {
+  margin: 0 0 12px;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.regel-offen-reihe {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.regel-offen-platz {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Woher kam diese Nachricht? Macht im gemischten Postfach den Bezug
+   zum Thema sichtbar – sonst wirkt es wie ein loser Fragenhaufen. */
+.sz-feedback-herkunft {
+  margin: 10px 0 0;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+
+/* ============================================================
+   NUTZER-EINSTELLUNGEN — bewusst ganz am Ende der Datei.
+   Diese Bloecke ueberschreiben Token- und Rahmen-Werte, die weiter
+   oben gesetzt werden (u. a. der Dark-Mode-:root-Block und die
+   Bedien-Zeile). Stuenden sie frueher, gaeben sie im Kaskaden-
+   Vergleich nach und blieben wirkungslos - genau das war beim
+   ersten Versuch der Fall.
+   ============================================================ */
+
+/* ============================================================
+   System-Einstellung "Hoher Kontrast"
+   Wer das eingestellt hat, sieht Feinheiten schlecht. Also: Text
+   dunkler bzw. heller, Raender kraeftiger, Bedienelemente klarer
+   abgegrenzt. Nur Token-Werte plus ein paar Rahmen - dadurch traegt
+   es automatisch durch die ganze Oberflaeche.
+   ============================================================ */
+/* ============================================================
+   Zeichen in der Kopfzeile (geteiltes Gerät)
+   Sagt auf jeder Seite, wer gerade lernt. Ein Tipp öffnet die
+   Personen-Liste. Eigener Rahmen, damit die Fläche als Knopf
+   erkennbar ist (WCAG 2.2 SC 1.4.11, Nicht-Text-Kontrast 3:1).
+   ============================================================ */
+.header-sign {
+  margin-left: auto;
+  flex: 0 0 auto;
+  min-height: 58px;               /* §9: Bedienelemente >= ~58 px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 12px;
+  /* --line erreicht gegen den Kopf-Hintergrund nur 1,34:1. Bedienelemente
+     brauchen 3:1 (WCAG 2.2 SC 1.4.11), deshalb hier der Akzent. */
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  cursor: pointer;
+}
+.header-sign:hover { background: var(--accent-soft); }
+/* display:flex würde sonst das hidden-Attribut überstimmen. */
+.header-sign[hidden] { display: none; }
+.header-sign .profile-sign { width: 34px; height: 34px; font-size: 0.9rem; }
+.header-sign-word {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+/* Auf schmalen Geräten nur das Zeichen – der Kopf soll nicht umbrechen. */
+@media (max-width: 430px) {
+  .header-sign { padding: 6px 8px; }
+  .header-sign-word { display: none; }
+}
+
+/* ============================================================
+   Bild-Code: Eingabe und Vergabe
+   ============================================================ */
+.profile-code { text-align: center; }
+.profile-code .feedback-actions { justify-content: center; }
+
+.code-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 20px 0 8px;
+}
+.code-dot {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px dashed var(--ink-soft);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+}
+.code-dot--filled {
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  /* --accent ist im Dunkelmodus HELL. Weiß darauf wäre unlesbar. */
+  color: var(--on-accent);
+}
+.code-dot--filled svg { width: 62%; height: 62%; }
+
+/* Ruhige Rückmeldung – kein Zählen, keine Sperre, keine Mahnung
+   (§3 Došen: angstfreie Fehlerkultur; §9 COGA: keine Zeitlimits). */
+.code-error {
+  margin: 12px auto 0;
+  max-width: 34rem;
+  padding: 12px 16px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--warn);
+  background: var(--warn-bg);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Hinweis auf der Personen-Karte, dass dort ein Code liegt. */
+.profile-code-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   Handlungs-Ketten (ketten-de.js)
+   Ein Schritt pro Bildschirm, fehlerfrei: Es gibt keinen falschen
+   Knopf. Deshalb ist der Handlungs-Knopf gross und allein, und die
+   Hilfen daneben sind leise Text-Links.
+   ============================================================ */
+.kette-card { border-left: 6px solid var(--accent); }
+.kette-card h3 { margin-top: 8px; }
+.kette-meta { font-size: 0.92rem; color: var(--ink-soft); }
+
+.kette-step { text-align: center; }
+.kette-zaehler {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.kette-pikto { width: 96px; height: 96px; margin: 4px auto 8px; display: block; }
+.kette-tun {
+  font-size: 1.45rem;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.kette-warum {
+  max-width: 34rem;
+  margin: 0 auto 12px;
+  color: var(--ink-soft);
+}
+.kette-hilfe {
+  max-width: 34rem;
+  margin: 10px auto 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+/* Der einzige grosse Knopf auf dem Bildschirm: die Handlung selbst. */
+.kette-done {
+  min-height: 58px;              /* §9: Bedienelemente >= ~58 px */
+  margin: 8px auto 4px;
+  display: block;
+  width: min(22rem, 100%);
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);       /* im Dunkelmodus ist --accent HELL */
+  cursor: pointer;
+}
+.kette-done:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+.kette-fuss {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.kette-kurz-liste, .kette-ende-liste {
+  list-style: none;
+  margin: 16px auto;
+  padding: 0;
+  max-width: 30rem;
+  text-align: left;
+}
+.kette-kurz-item, .kette-ende-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+.kette-kurz-num {
+  flex: 0 0 auto;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+.kette-haken {
+  flex: 0 0 auto;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--good);
+}
+
+/* ============================================================
+   FILM – Einstieg in eine Handlungs-Kette (§10.1)
+   Vier Takte, angetippt statt automatisch. Farben ausschliesslich
+   ueber Token: kein einziger Hex-Wert, sonst bricht der
+   Dunkelmodus. Keine Hautflaechen – die Person ist gezeichnet wie
+   pikto-person, nur mit einem reduzierten Gesicht.
+   ============================================================ */
+.film-karte { padding-top: 14px; }
+
+.film-buehne {
+  display: block;
+  width: min(340px, 100%);
+  margin: 4px auto 10px;
+  background: var(--surface-soft);
+  border-radius: var(--radius-m);
+}
+
+/* ---- Handy ---- */
+.f-handy-rahmen { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; }
+.f-schirm       { fill: var(--surface); }
+.f-rueck        { fill: var(--accent); }
+.f-linse        { fill: var(--accent-soft); opacity: .55; }
+.f-blase-form   { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.f-zeile        { fill: var(--accent); opacity: .4; }
+.f-punkt        { fill: var(--accent); }
+
+/* ---- Kopf dreht sich weg ----------------------------------
+   So wird das Zoegern sichtbar, ohne eine Hand zu zeichnen.
+   Drei Anlaeufe mit einer Hand endeten als Topfhandschuh, und ein
+   einzelner ausgestreckter Finger war sogar als obszoene Geste
+   missverstaendlich. Eine abgewandte Kopfhaltung ist konkretes
+   menschliches Verhalten statt abstrakter Metaphorik - genau das,
+   wofuer Bewegung bei dieser Zielgruppe taugt. */
+.f-gesicht {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .8s cubic-bezier(.3,0,.2,1);
+}
+
+/* ---- Person ---- */
+.f-kopf, .f-koerper { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; }
+.f-auge  { fill: var(--accent); }
+.f-braue, .f-mund {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;                 /* je Takt wird genau einer sichtbar */
+}
+.f-welle { fill: none; stroke: var(--accent); stroke-width: 4; opacity: 0; }
+
+/* ============================================================
+   Die vier Takte
+   Jeder Zustand steht als NORMALE Regel da, nicht nur als
+   Animations-Endbild. Nur so bleibt das Bild richtig, wenn jemand
+   Bewegung reduziert hat und alle Animationen ausfallen.
+   ============================================================ */
+
+/* Grundstellung */
+.f-blase  { opacity: 0; transform: translateX(-34px); transition: transform .7s cubic-bezier(.2,.8,.2,1), opacity .45s ease-in; }
+.f-punkt  { opacity: 0; transition: opacity .4s ease-in; transform-box: fill-box; transform-origin: center; }
+.f-vorne  { opacity: 1; transition: opacity .35s ease-in-out; }
+.f-hinten { opacity: 0; transition: opacity .35s ease-in-out; }
+.f-handy  { transform-box: fill-box; transform-origin: center; }
+
+/* 1 Ruhe – Handy liegt da, Person ruhig */
+[data-takt="ruhe"] .f-braue--ruhig,
+[data-takt="ruhe"] .f-mund--ruhig { opacity: 1; }
+
+/* 2 Stoerung – Nachricht kommt, Punkt pocht, Person angespannt */
+[data-takt="stoerung"] .f-blase,
+[data-takt="entscheidung"] .f-blase { opacity: 1; transform: translateX(0); }
+[data-takt="stoerung"] .f-punkt,
+[data-takt="entscheidung"] .f-punkt { opacity: 1; }
+[data-takt="stoerung"] .f-punkt { animation: f-pochen 1.8s ease-in-out infinite; }
+[data-takt="stoerung"] .f-braue--eng,
+[data-takt="stoerung"] .f-mund--eng,
+[data-takt="entscheidung"] .f-braue--eng,
+[data-takt="entscheidung"] .f-mund--eng { opacity: 1; }
+
+/* 3 Entscheidung – Hand kommt, zoegert, beruehrt NICHT */
+[data-takt="entscheidung"] .f-punkt { animation: f-pochen 1.8s ease-in-out infinite; }
+
+/* Kopf wendet sich vom Handy ab. Das Handy steht links, also
+   dreht der Kopf nach rechts - weg von der Nachricht. */
+/* NUR die Zuege wandern, der Kopf bleibt stehen. Eine zusaetzliche
+   Drehung der ganzen Gruppe schob Braue und Auge aus dem Kopf heraus. */
+[data-takt="entscheidung"] .f-gesicht { transform: translateX(5px); }
+
+/* 4 Aufloesung – Handy umgedreht, Ruhe kehrt ein */
+[data-takt="aufloesung"] .f-vorne  { opacity: 0; }
+[data-takt="aufloesung"] .f-hinten { opacity: 1; }
+[data-takt="aufloesung"] .f-handy  { animation: f-umdrehen 1.1s ease-in-out both; }
+[data-takt="aufloesung"] .f-welle  { animation: f-welle 1.6s ease-out both; }
+[data-takt="aufloesung"] .f-braue--ruhig,
+[data-takt="aufloesung"] .f-mund--froh { opacity: 1; }
+
+/* Pulsschlag deutlich unter 3 Hz (WCAG 2.3.1): rund 0,55 Hz. */
+@keyframes f-pochen {
+  0%, 100% { transform: scale(1);    opacity: 1;  }
+  50%      { transform: scale(1.28); opacity: .55; }
+}
+  /* bleibt stehen, beruehrt nicht */
+}
+@keyframes f-umdrehen {
+  0%   { transform: scaleX(1);   }
+  50%  { transform: scaleX(.08); }
+  100% { transform: scaleX(1);   }
+}
+@keyframes f-welle {
+  from { transform: scale(.35); opacity: .65; }
+  to   { transform: scale(2.2); opacity: 0;   }
+}
+.f-welle { transform-box: fill-box; transform-origin: center; }
+
+.film-satz {
+  max-width: 30rem;
+  margin: 6px auto 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+/* Weniger Bewegung: Zustaende bleiben, Uebergaenge fallen weg.
+   Man blaettert dann vier Standbilder durch (§10.1). */
+@media (prefers-reduced-motion: reduce) {
+  .f-blase, .f-punkt, .f-vorne, .f-hinten, .f-handy, .f-welle, .f-gesicht {
+    transition: none !important;
+    animation: none !important;
+  }
+  /* Ohne Animation muss die Welle im letzten Takt trotzdem zu sehen sein. */
+  [data-takt="aufloesung"] .f-welle { opacity: .5; }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --ink-soft: #22334a;   /* statt #3d506a: ~8,9:1 auf --bg */
+    --line:     #5b7186;   /* Raender sichtbar statt angedeutet */
+    --accent:      #003f6e;
+    --accent-dark: #002845;
+  }
+
+  /* Bedienelemente bekommen eine klare Kante. */
+  .reading-button,
+  .utility-chip,
+  .action-chip,
+  .card-read-button,
+  .utility-button,
+  .nav-button {
+    border-color: var(--accent-dark);
+  }
+  .card-read-button { border-width: 2px; }
+
+  /* Leise Elemente duerfen hier nicht mehr leise sein. */
+  .card-read-button--block { opacity: 1; }
+  .link-action { text-decoration-thickness: 2px; }
+}
+
+@media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+  :root {
+    --ink-soft: #d3e6f2;
+    --line:     #6d8399;
+    --accent:      #a9d8f5;
+    --accent-dark: #c3e4fa;
+  }
+}
+
+/* ============================================================
+   Windows-Kontrastdesigns (forced-colors)
+   Das Betriebssystem streicht dort alle Hintergrund- und
+   Rahmenfarben und setzt eigene ein. Ohne Gegenmassnahme verlieren
+   Vorlese-Pille, Chips und Muenze ihre Form und verschwimmen mit
+   der Seite. Systemfarben (ButtonBorder, ButtonText, Highlight)
+   passen sich dem gewaehlten Design an - deshalb genau die.
+   ============================================================ */
+@media (forced-colors: active) {
+  .reading-button,
+  .utility-chip,
+  .action-chip,
+  .utility-button,
+  .card-read-button,
+  .nav-button,
+  .topic-card,
+  .primary-action,
+  .secondary-action {
+    /* 2px, weil die Vorlese-Pille selbst einen 2px-Rahmen fuehrt und
+       ein schmalerer hier nichts aendern wuerde. */
+    border: 2px solid ButtonBorder;
+  }
+
+  /* Die Icon-Muenze lebt nur von ihrer Flaeche - die faellt hier weg. */
+  .rb-coin {
+    border: 1px solid ButtonBorder;
+    border-radius: 50%;
+  }
+
+  /* Der aktive Vorlese-Zustand wird sonst nicht mehr unterscheidbar. */
+  .reading-button.is-active {
+    border-color: Highlight;
+    border-width: 2px;
+  }
+
+  /* Leise Knoepfe waeren hier unsichtbar oder unbemerkbar. */
+  .card-read-button--block { opacity: 1; }
+
+  /* Fokus muss auch hier eindeutig bleiben. */
+  :focus-visible { outline-color: Highlight; }
+}
+
+/* ============================================================
+   Frage-Muster, Entwurf B (nur mit ?frage=neu, 18.09.2026)
+   Reihenfolge überall gleich: Kopfzeile – Frage – Aufforderung – Antworten.
+   Die Aufforderung trennt mit einer feinen Linie den Frage- vom
+   Antwort-Bereich: oben wird gefragt, unten wird geantwortet.
+   Der Hilfe-Knopf bleibt vorne (V-5), aber neutral statt orange-gestrichelt:
+   Er ist auffindbar, ohne die Aufgabe zu übertönen. Warnfarbe erst im
+   geöffneten Hilfe-Feld. Nur Farb-Token – Dunkelmodus erbt automatisch.
+   ============================================================ */
+.frage-kopf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+}
+.frage-kopf .station-badge { margin: 0; }
+.frage-zaehler {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+/* Hilfe: kompakt und rechtsbündig unter der Frage, noch vor der Linie.
+   Neutral statt orange-gestrichelt; die Warnfarbe erst beim Überfahren und
+   im geöffneten Hilfe-Feld. Höhe bleibt 58 px (§9, Touch-Fläche). */
+.frage-hilfe {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+.frage-hilfe .task-help-area { margin: 0; width: 100%; display: flex; flex-direction: column; align-items: flex-end; }
+.frage-hilfe .task-help-button {
+  /* Kante mind. 3:1 (WCAG 1.4.11): hell ~3,9:1, dunkel ~4,5:1 gegen --surface.
+     --line allein wäre mit ~1,3:1 kaum sichtbar. */
+  border: 2px solid color-mix(in srgb, var(--ink-soft) 70%, var(--surface));
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.95rem;
+  padding: 10px 18px;
+}
+.frage-hilfe .task-help-button:hover,
+.frage-hilfe .task-help-button[aria-expanded="true"] { border-color: var(--warn); }
+.frage-hilfe .task-help-panel { align-self: stretch; }
+.frage-text {
+  margin: 4px 0 0;
+  max-width: 62ch;
+  font-size: 1.18rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+/* Antwort-Bereich als eigene, leicht getönte Fläche: oben wird gefragt,
+   unten – in diesem Feld – wird geantwortet. Räumlich statt nur sprachlich. */
+.frage-antwortbereich {
+  margin-top: 16px;
+  padding: 14px clamp(12px, 2.5vw, 18px) 16px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+}
+.frage-aufforderung {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.frage .answers,
+.frage .sa-options { margin-top: 0; }
+/* Einschätzung: Beruhigung vor den Antworten, gut lesbar (nicht kursiv). */
+.frage-beruhigung {
+  margin: 10px 0 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+/* Die Frage bleibt beim Scrollen oben stehen (schmale Schirme): man muss sie
+   sich nicht merken, während man die Antworten liest. Endet mit dem
+   Frage-Block. Nicht auf der Start-Seite und im Abschluss-Kasten – dort ist
+   der Block kurz und hat einen eigenen Hintergrund. */
+@media (max-width: 600px) {
+  .frage-text {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--surface);
+    padding-block: 8px;
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .practice-box .frage-text { background: var(--accent-soft); }
+  .daily-question .frage-text,
+  .closing-sa-box .frage-text { position: static; box-shadow: none; }
+}
+
+
+/* ---------- Stehende Situation in der Handlungs-Kette (21.09.2026) ----------
+   Der Plan braucht einen Gegenstand: Wer „Ich zahle nichts sofort." liest,
+   soll die Nachricht sehen, um die es geht. Der Block ist bewusst
+   ZURÜCKGENOMMEN und flach – kein Handy-Rahmen, kein Knopf. Die Hauptaktion
+   bleibt der Handlungssatz in der Karte darunter, und der muss ohne Scrollen
+   erreichbar bleiben (§3 CLT: eine Hauptaufgabe je Bildschirm).
+   Farben ausschließlich über Token, sonst bricht der Dunkelmodus (§10). */
+.kette-situation {
+  max-width: 34rem;
+  margin: 0 auto 12px;
+}
+
+.kette-situation-kopf {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+/* Die Ehrlichkeits-Angabe bleibt Pflicht (§13), braucht aber keine eigene
+   Bannerzeile: Sie steht als leise Beschriftung über der Nachricht. */
+.kette-situation-band {
+  margin: 0;
+  flex: 1 1 auto;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink-soft, var(--ink));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kette-situation-kopf .card-read-button--block {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.kette-situation-screen {
+  padding: 4px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.kette-situation-screen .sz-listeneintrag {
+  padding: 10px 12px;
+}
+
+/* Szenenbild oben in der Lektion (Fassung B, 24.09.2026).
+   Die helle Fläche dahinter ist Absicht: Im Dunkelmodus verschwanden
+   die dunklen Hosen der Figuren sonst auf der dunklen Karte. */
+.lesson-scene {
+  background: var(--scene-backdrop);
+  border-radius: var(--radius-l, 20px);
+  padding: 8px;
+  margin: 0 0 14px;
+  text-align: center;
+}
+.lesson-scene img {
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+/* ---------- Kopf und Startseite ruhig und einheitlich (24.09.2026, §10a) ----------
+   Kopf (alle Seiten): schlanke App-Leiste ohne Karte – kleine Figur,
+   Marke, Titel, darunter eine feine Linie. Die Themenfarbe bleibt als
+   Linie unten. Startseite: Figuren groß und mittig, ein Hauptknopf. */
+.app-header {
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid var(--topic-color);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 6px 2px 12px;
+  gap: 12px;
+}
+.header-avatar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--scene-backdrop);
+  object-fit: cover;
+}
+.brand-name { font-size: 0.85rem; }
+.header-text h1 { font-size: 1.12rem; line-height: 1.25; }
+.header-text p { font-size: 0.92rem; }
+body.lesson-view .app-header { padding: 4px 2px 10px; border-bottom: 3px solid var(--topic-color); }
+@media (max-width: 640px) {
+  .app-header { flex-wrap: nowrap; }
+  .header-text { order: 0; flex-basis: auto; }
+}
+.orient-line {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0 2px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+body.lesson-view .orient-line { margin: 8px 0 12px; }
+/* „Willkommen" steht gleich darunter als Überschrift – im Kopf doppelt. */
+.app:has(.intro-page) .app-header h1 + p { display: none; }
+.intro-welcome {
+  flex-direction: column;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  padding: 8px 0 0;
+  gap: 4px;
+}
+.intro-welcome .intro-welcome-figure {
+  width: 150px;
+  max-height: none;
+  padding: 8px;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: none;
+  background: var(--scene-backdrop);
+}
+.intro-welcome-text h2 { font-size: 1.5rem; margin-bottom: 4px; }
+.intro-welcome-text p  { font-size: 1.1rem; max-width: 30ch; margin: 0 auto 18px; }
+.intro-page .intro-start-button { margin-top: 0; }
+.footer-logos { border: 0; }
+
+/* ---------- Seitengerüst einheitlich (24.09.2026, §10a) ----------
+   Jede Seite hat dasselbe Gerüst: Kopf – Orientierungssatz – EINE
+   Werkzeugzeile (Vorlesen · Pause · Sprache) – Inhalt. Kästen nur noch
+   um Antippbares; reiner Text und Bilder stehen frei. Figuren überall
+   gleich: rund, auf der hellen Szenen-Fläche. */
+
+/* Werkzeugzeile: eine Zeile, drei Knöpfe, auf allen Seiten gleich */
+.tool-row {
+  /* Der Sprach-Knopf zeigt den Stufennamen (freigegeben 20.09.2026, Paket G).
+     Passt die Zeile nicht, rutscht die Kapsel Pause · Sprache in die
+     zweite Zeile – wie vorher freigegeben. */
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 10px 0 16px;
+}
+.tool-row .reading-button {
+  padding: 5px 14px 5px 5px;
+  gap: 8px;
+  font-size: .95rem;
+}
+.tool-row .rb-coin { width: 40px; height: 40px; }
+.tool-row .utility-bar { flex: 0 1 auto; min-width: 0; }
+.utility-chip { min-height: 50px; padding: 0 12px; font-size: .9rem; }
+
+/* Doppelte Themen-Zeile (Titel steht schon im Kopf) nur für Vorlese-Programme */
+.topic-intro-line.is-duplicate {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
+}
+.header-text p:empty { display: none; }
+
+/* Figuren: überall rund auf heller Fläche, keine Rahmen-Kästen */
+.role-figure {
+  width: 150px;
+  height: 150px;
+  max-height: none;
+  object-fit: contain;
+  padding: 8px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--scene-backdrop);
+  box-shadow: none;
+}
+
+/* Lernseite: Fortschritt und Bereich als ruhige Zeilen statt Kästen */
+.wegweiser {
+  padding: 0 2px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.module-cluster-badge {
+  background: transparent;
+  border: 0;
+  padding: 0 2px;
+  margin: 4px 0 10px;
+}
+.card,
+.lesson-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.lesson-card::before { display: none; }
+
+/* Das getönte Antwort-Feld des Frage-Musters bleibt, wie am 20.09.2026
+   freigegeben (§1, §10a Ausnahme). */
+
+/* Reine Info-Blöcke (Hilfe, Mein Lernweg, Angebot) ohne Kachel-Optik */
+.support-help-card,
+.intro-offer,
+.progress-consent,
+.learning-goals-box {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 22px 0;
+}
+/* Szenenbild kleiner, damit der erste Satz ohne Scrollen sichtbar ist */
+.lesson-scene img { max-width: 230px; }

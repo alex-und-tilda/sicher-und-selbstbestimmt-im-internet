@@ -1,0 +1,149 @@
+/* ============================================================
+   design.css — Feinschliff der Oberfläche
+   Wird NACH styles.css geladen und ändert nur Gestaltung, nie Inhalt
+   oder Verhalten. Grundsatz: ruhiger, nicht lauter (§3 Kohärenz, §10).
+   Es kommt keine neue Farbe dazu: alles über die vorhandenen Token,
+   damit Dunkelmodus, hoher Kontrast und Windows-Kontrastdesigns
+   unverändert weitergelten. Keine neue Bewegung: der bestehende
+   prefers-reduced-motion-Block schaltet alles Vorhandene bereits ab.
+   ============================================================ */
+
+/* ---------- 1. Ruhigere Tiefe ----------
+   Die Oberfläche arbeitete mit drei kräftigen Schatten. Beim Überfahren
+   sprang eine Kachel dadurch stark hervor. Wir behalten die Rangfolge
+   (Karte < angehobene Karte), nehmen aber Stärke heraus. Reizarm (§10). */
+:root {
+  --shadow-hover: 0 2px 6px color-mix(in srgb, var(--ink) 10%, transparent),
+                  0 10px 24px color-mix(in srgb, var(--ink) 12%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --shadow-hover: 0 2px 8px color-mix(in srgb, black 55%, transparent),
+                    0 14px 30px color-mix(in srgb, black 55%, transparent);
+  }
+}
+
+/* ---------- 2. Kopfbereich ----------
+   Der Kopf trägt jetzt drei Zeilen: Marke, Titel, Ort. Damit er trotzdem
+   ruhig bleibt, bekommen die drei Zeilen klar verschiedene Gewichte —
+   die Marke klein und zurückgenommen, der Titel als einziger laut.
+   Das Farbband links bleibt das Themen-Signal (unverändert). */
+.app-header {
+  gap: clamp(12px, 2.4vw, 18px);
+  padding: clamp(12px, 2.2vw, 16px) clamp(14px, 2.6vw, 22px);
+}
+.app-header .header-text { min-width: 0; }
+.brand-name {
+  margin: 0 0 1px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+.app-header h1 {
+  margin: 0;
+  line-height: 1.22;
+}
+.app-header #moduleLabel {
+  margin: 3px 0 0;
+  color: var(--ink-soft);
+}
+
+/* ---------- 3. Schrift-Feinschliff ----------
+   Atkinson Hyperlegible ist bewusst breit gezeichnet. In großen Graden
+   wirkt sie dadurch locker gesetzt; ein Hauch negativer Laufweite stellt
+   das Wortbild wieder her. Nur Überschriften, nie Fließtext — dort bleibt
+   jede Lesehilfe der Schrift unangetastet.
+   Tabellenziffern halten Zähler wie „Schritt 3 von 12" ruhig: die Ziffern
+   springen beim Weiterblättern nicht mehr in der Breite. */
+h1, h2 {
+  letter-spacing: -0.006em;
+  line-height: 1.25;
+}
+body {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 4. Rhythmus in den Karten ----------
+   Abstände folgen jetzt einer Regel statt festen Werten: außen mehr Luft
+   auf großen Schirmen, weniger auf dem Handy. Zwischenüberschriften
+   bekommen oben deutlich mehr Abstand als unten — so gehört jede
+   Überschrift sichtbar zu dem, was unter ihr steht (Gesetz der Nähe). */
+.card {
+  padding: clamp(18px, 3vw, 28px) clamp(18px, 3vw, 28px) clamp(22px, 3.4vw, 32px);
+}
+.card > h2 { margin-block: 0 0.55rem; }
+.card > h3 { margin-block: 1.6rem 0.4rem; }
+.card > h3:first-child { margin-top: 0; }
+
+/* ---------- 5. Themen-Kacheln ----------
+   Alle Rundungen der Kachel folgen jetzt einem Maß (--radius-m) statt
+   drei verschiedenen. Das Symbol-Feld verliert seinen harten Schlagschatten
+   und sitzt ruhiger in der Zeile. Die Anhebung beim Überfahren ist kleiner:
+   sichtbar genug als Rückmeldung, ohne zu hüpfen. */
+.topic-card { border-radius: var(--radius-m); }
+.topic-card:hover,
+.topic-card:focus-visible { transform: translateY(-2px); }
+.topic-icon {
+  border-radius: var(--radius-m);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--ink) 16%, transparent);
+}
+.topic-card:hover .topic-icon,
+.topic-card:focus-visible .topic-icon { transform: scale(1.04); }
+.topic-title { letter-spacing: -0.004em; }
+.topic-desc { line-height: 1.4; }
+
+/* ---------- 6. Aktions-Karten und Wegweiser ----------
+   Gleiche Rundung wie die Themen-Kacheln, damit die Seite eine Formsprache
+   spricht statt zweier. */
+.action-card:hover { transform: translateY(-2px); }
+.wegweiser { border-radius: var(--radius-m); }
+
+/* ---------- 7. Bedienelemente ----------
+   Die Hauptaktion bekommt eine Andeutung von Tiefe, damit sie sich vom
+   ruhigen Grund löst — der Unterschied zwischen „Haupt-" und „Nebenaktion"
+   wird dadurch auf einen Blick sichtbar, ohne zweite Farbe (§3 Signaling).
+   Die Chips bleiben leise, zeigen beim Überfahren aber die Akzentkante. */
+.nav-button { letter-spacing: 0.01em; }
+.nav-button.primary { box-shadow: var(--shadow-small); }
+.nav-button.primary:hover:not(:disabled) { box-shadow: var(--shadow-hover); }
+.later-chip:hover { border-color: var(--accent); }
+
+/* ---------- 8. Hauptmenü ----------
+   Die Leiste liegt über dem Inhalt und trug dafür einen recht harten
+   Schatten. Jetzt genügt eine feine Kante plus ein weicher Schleier.
+   Der aktive Punkt bekommt zusätzlich zur Unterlegung eine zarte Kontur:
+   Er bleibt damit auch dann erkennbar, wenn Flächen schwer zu
+   unterscheiden sind (WCAG 1.4.11, Nicht-Text-Kontrast). */
+.main-tabbar {
+  box-shadow: 0 -1px 10px color-mix(in srgb, var(--ink) 10%, transparent);
+}
+.tab-item.is-active {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+/* ---------- 9. Lernziel-Liste: Text bleibt Text ----------
+   Die Häkchen-Liste war als Flex-Zeile gesetzt. Sobald die Wörter-Hilfe
+   einzelne Begriffe verlinkt, wird jeder Teil des Satzes zu einem eigenen
+   Flex-Element: Der Satz zerfiel in Spalten mit Lücken und brach an
+   falschen Stellen um. Das Häkchen steht jetzt in der hängenden Einrückung,
+   der Satz läuft wieder als durchgehender Text. */
+.goals-done-list li {
+  display: block;
+  position: relative;
+  padding-left: 1.9em;
+}
+.goals-done-list .goal-check {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: inherit;
+}
+
+/* ---------- 10. Kante der Antwort-Knöpfe (WCAG 1.4.11) ----------
+   Der Rand der Antworten lag bei 1,33:1 (hell) und 1,19:1 (dunkel) – die
+   Kante eines Bedienelements braucht mindestens 3:1. Gleiche Mischung wie
+   beim Hilfe-Knopf: hell ~3,8:1, dunkel ~4,7:1, auch auf getönten Flächen
+   über 3:1. Überfahren, Fokus und richtig/falsch behalten ihre eigenen Farben
+   (die Regeln dafür sind spezifischer und gewinnen). */
+.answer-option { border-color: color-mix(in srgb, var(--ink-soft) 70%, var(--surface)); }
