@@ -108,7 +108,8 @@ const REGELN = [
     muster: /hilfe|hilft|unterstützung|vertrau|jemand|melde|blockier|allein|erzähl|zeige die nachricht|gefühle|sprechen|plan|helfen/i }
 ];
 
-/* Feste Zuordnung Merksatz -> Regel (Stand 25.09.2026, 244 Sätze).
+/* Feste Zuordnung Merksatz -> Regel (Stand 25.09.2026, 244 Sätze; gleichartige
+   Sätze über Themen hinweg bei derselben Regel – Gesamtprüfung Z3).
    Hinter jedem Satz steht, in welchem Thema er vorkommt. `keine` heißt:
    bewusst ohne Regel, weil der Satz Wissen ist und kein Verhalten. */
 const REGEL_SAETZE = {
@@ -176,7 +177,6 @@ const REGEL_SAETZE = {
     "Ich kaufe bei sicheren Shops.", // einkaufen
     "PayPal oder Rechnung ist sicherer.", // einkaufen
     "Bank-Daten gebe ich nicht für ein Gewinnspiel.", // datenschutz
-    "Stress und Geld sind ein Warnzeichen.", // whatsapp
     "Ich frage mich: Habe ich das wirklich bestellt?", // betrug, einkaufen
     "Sehr billig und kein Impressum: Warnzeichen." // einkaufen
   ],
@@ -200,7 +200,10 @@ const REGEL_SAETZE = {
     "Ich lasse mich nicht hetzen.", // einkaufen
     "Ich lasse mich beim Einkaufen nicht hetzen.", // einkaufen
     "Ich prüfe in Ruhe. Ich lasse mich nicht hetzen.", // einkaufen
-    "Stress und die Frage nach Bank-Daten: immer ein Trick." // betrug
+    "Stress und die Frage nach Bank-Daten: immer ein Trick.", // betrug
+    "Stress und Geld sind ein Warnzeichen.", // whatsapp
+    "Ich mache Stopp.", // hilfe
+    "Ich mache Stopp. Ich zeige es jemandem." // instagram
   ],
   bilder: [
     "Ich prüfe Fotos vor dem Senden.", // datenschutz, whatsapp
@@ -250,7 +253,6 @@ const REGEL_SAETZE = {
     "Ich prüfe fremde Nummern.", // whatsapp
     "Ich entscheide, wem ich antworte.", // whatsapp
     "Ich antworte fremden Nummern nicht sofort.", // whatsapp
-    "Unbekannte Nachrichten: erst fragen.", // whatsapp
     "Ich prüfe Freundschafts-Anfragen.", // facebook
     "Ich nehme unbekannte Anfragen nicht sofort an.", // facebook
     "Unbekannte Anfragen ablehnen.", // facebook
@@ -321,7 +323,6 @@ const REGEL_SAETZE = {
     "Ich muss bei keinem Trend mitmachen." // tiktok
   ],
   aufhoeren: [
-    "Ich mache Stopp. Ich zeige es jemandem.", // instagram
     "Ich darf Videos stoppen.", // youtube
     "Nach einer Stunde Pause machen.", // youtube
     "Nach einer Stunde mache ich Pause.", // youtube
@@ -331,7 +332,6 @@ const REGEL_SAETZE = {
     "Ich mache Pause. Ich hole Unterstützung.", // tiktok
     "Timer stellen. Pause machen.", // tiktok
     "Ich stelle einen Timer.", // tiktok
-    "Ich mache Stopp.", // hilfe
     "Wenn etwas falsch fühlt: Stopp machen.", // hilfe
     "Wenn es sich falsch anfühlt: Stopp.", // hilfe
     "Ich darf jederzeit aufhören.", // whatsapp
@@ -369,7 +369,8 @@ const REGEL_SAETZE = {
     "Hilfe holen ist mutig.", // hilfe
     "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.", // betrug
     "Betrug ist nicht meine Schuld. Ich hole Hilfe.", // betrug
-    "Bei Beleidigungen hole ich Unterstützung." // facebook
+    "Bei Beleidigungen hole ich Unterstützung.", // facebook
+    "Unbekannte Nachrichten: erst fragen." // whatsapp
   ],
   keine: [
     "Ich nehme ein gutes, langes Passwort.", // datenschutz

@@ -7263,3 +7263,35 @@ body.lesson-view .orient-line { margin: 8px 0 12px; }
 }
 /* Szenenbild kleiner, damit der erste Satz ohne Scrollen sichtbar ist */
 .lesson-scene img { max-width: 230px; }
+
+/* ---------- Gesamtprüfung 25.09.2026, Paket A ---------- */
+/* B1: „Erst die Übung ↓" – der Knopf wartet, er ist kein Los-Knopf.
+   Umriss statt Vollfläche, damit er nicht nach „weiter geht's" aussieht. */
+.nav-button.is-waiting,
+.nav-button.primary.is-waiting {
+  background: var(--surface);
+  color: var(--accent-dark);
+  border: 2px solid var(--accent);
+  font-size: 1.05rem;
+}
+
+/* Z5: einmaliges Angebot, jede Seite von selbst vorzulesen */
+.hoer-angebot {
+  margin: 0 0 16px;
+  padding: 0 2px;
+}
+.hoer-angebot-frage {
+  margin: 0 0 10px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.hoer-angebot-knoepfe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hoer-angebot-knoepfe .nav-button {
+  flex: 1 1 140px;
+  min-height: 56px;
+  font-size: 1rem;
+}

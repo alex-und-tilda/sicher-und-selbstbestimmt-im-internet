@@ -1179,6 +1179,30 @@ function showNav(showBack, showNext, nextText = "Weiter") {
   backButton.disabled = !showBack;
   nextButton.disabled = !showNext;
   nextButton.textContent = nextText;
+  delete nextButton.dataset.warten;
+  nextButton.classList.remove("is-waiting");
+}
+
+/* Kein grauer Knopf ohne Wort (Gesamtprüfung 25.09.2026, B1).
+   Hat ein Lernschritt eine Übung, war „Weiter" grau – ohne Erklärung, und
+   die Übung lag unter dem sichtbaren Bereich. Jetzt sagt der Knopf, was
+   vorher kommt („Zur Übung ↓"), und bringt die Person beim Antippen dorthin. */
+function setNextWaitsForPractice() {
+  if (!nextButton) return;
+  nextButton.disabled = false;
+  nextButton.dataset.warten = "1";
+  nextButton.classList.add("is-waiting");
+  nextButton.textContent = "Zur Übung\u00a0↓";
+}
+
+function zeigeUebung() {
+  const box = content.querySelector(".practice-box") || content.querySelector(".frage-antwortbereich");
+  if (!box) return;
+  const reduce = !motionEnabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  box.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  const erste = box.querySelector("button.answer-option, .answer-option");
+  if (erste) erste.focus({ preventScroll: true });
+  announce("Hier ist die Übung. Tippe eine Antwort an.");
 }
 
 /* ============================================================
@@ -1665,6 +1689,14 @@ function readCurrentPage(rate) {
       els.push({ pseudoText: ansage });
     }
   }
+  /* Einmaliges Angebot, jede Seite von selbst vorzulesen (Gesamtprüfung
+     25.09.2026, Z5). Es wird mitgesprochen – wer nicht liest, könnte den
+     Kasten sonst nicht nutzen. Vorher kam die Frage erst nach dem ersten
+     Thema, für Menschen, die nicht lesen, zu spät. */
+  if (els.length && hoerAngebotOffen()) {
+    hoerAngebotZeigen();
+    els.push({ pseudoText: "Soll ich ab jetzt jede Seite von selbst vorlesen? Dann tippe auf: Ja, jede Seite." });
+  }
   if (!els.length) {
     updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
     return;
@@ -1855,6 +1887,31 @@ function buildReadingToolbar() {
 }
 
 /* Umschalter: läuft gerade etwas -> anhalten, sonst starten. */
+function hoerAngebotOffen() {
+  return supportsSpeech() && !autoRead && pGet(AUTO_READ_GEFRAGT_KEY) !== "1";
+}
+
+function hoerAngebotZeigen() {
+  if (document.getElementById("hoerAngebot")) return;
+  const anker = content.querySelector(".tool-row") || content.querySelector(".reading-toolbar");
+  if (!anker) return;
+  anker.insertAdjacentHTML("afterend", `
+    <div id="hoerAngebot" class="hoer-angebot" role="group" aria-label="Vorlesen">
+      <p class="hoer-angebot-frage">Soll ich ab jetzt jede Seite von selbst vorlesen?</p>
+      <div class="hoer-angebot-knoepfe">
+        <button type="button" class="nav-button primary" onclick="hoerAngebotAntwort(true)">Ja, jede Seite</button>
+        <button type="button" class="nav-button secondary" onclick="hoerAngebotAntwort(false)">Nein, nur wenn ich tippe</button>
+      </div>
+    </div>`);
+}
+
+function hoerAngebotAntwort(an) {
+  pSet(AUTO_READ_GEFRAGT_KEY, "1");
+  setAutoRead(an);
+  const box = document.getElementById("hoerAngebot");
+  if (box) box.remove();
+}
+
 function toggleReading() {
   const button = document.querySelector(".reading-button-normal");
   if (button && button.classList.contains("is-active")) stopReading();
@@ -1952,7 +2009,7 @@ function buildUtilityBar() {
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor"/></svg>
         <span>Pause</span>
       </button>
-      <button type="button" class="utility-chip language-switch-button" onclick="renderLanguageChoice()" aria-label="Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
+      <button type="button" class="utility-chip language-switch-button" onclick="openLanguageFromTools()" aria-label="Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])}">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.5 3 14 0 18M12 3c-3 3.5-3 14 0 18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
         <span>${escapeHtml(LANGUAGE_LABEL[languageLevel])}</span>
       </button>
@@ -1995,6 +2052,7 @@ function chooseLanguage(level) {
   setLanguageLevel(level);
   /* Sprachwechsel mitten in einer Alltags-Übung: im selben Schritt bleiben. */
   if (window.location.hash.startsWith("#alltag:")) return renderAlltag(window.location.hash.slice(1));
+  if (zurueckAnDieStelle()) return;
   /* Im Erststart geht es nach der Sprache direkt zu den Themen (F3).
      Vorwissen und Vorlesen werden nicht mehr vorab gefragt, sondern erst
      hinter dem ersten Thema (Pruefbericht B10) - dann kann die Person die
@@ -2008,8 +2066,41 @@ function chooseLanguage(level) {
 }
 
 /* Rückweg von der Sprach-Wahl OHNE etwas ändern zu müssen (kein Wahl-Zwang) */
+/* Zurück an die Stelle, von der aus die Sprache gewechselt wurde
+   (Gesamtprüfung 25.09.2026, Z2). Vorher landete die Person nach der Wahl
+   auf der Themenseite und musste „Weiter lernen" selbst suchen. Gemerkt
+   wird nur beim Antippen des Sprach-Knopfs in der Werkzeugzeile. */
+let languageReturn = null;
+
+function openLanguageFromTools() {
+  languageReturn = merkeStelle();
+  renderLanguageChoice();
+}
+
+function merkeStelle() {
+  const topicId = currentTopicId, mode = currentMode, step = currentStep;
+  if (!topicId || !getTopicById(topicId)) return null;
+  const ort = (moduleLabel && moduleLabel.textContent) || "";
+  /* Lernschritt, Übungsseite oder Rückmeldung zur Übung: derselbe Schritt. */
+  if (document.body.classList.contains("lesson-view") || content.querySelector(".practice-box") || ort === "Übung") {
+    return () => { currentTopicId = topicId; currentMode = mode; currentStep = step; renderLesson(); };
+  }
+  if (ort === "Kurze Frage") return () => renderMiniCheck(topicId);
+  if (content.querySelector(".completion-page")) return () => renderCompletionPage(topicId);
+  return null;
+}
+
+function zurueckAnDieStelle() {
+  const ziel = languageReturn;
+  languageReturn = null;
+  if (typeof ziel !== "function") return false;
+  ziel();
+  return true;
+}
+
 function languageChoiceBack() {
   if (window.location.hash.startsWith("#alltag:")) return renderAlltag(window.location.hash.slice(1));
+  if (zurueckAnDieStelle()) return;
   if (activeTab === "einstellungen") return renderSettingsPage();
   if (currentTopicId && getTopicById(currentTopicId)) return renderTopicChoice(currentTopicId);
   if (languageChosen) return renderMenu();
@@ -2023,6 +2114,7 @@ function renderVorwissen() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Vorwissen", "Start", "Wie gut kennst du dich aus?", 0);
+  setOrientation("Eine kurze Frage an dich. Dann geht es weiter.");
   showNav(false, false);
   content.innerHTML = `
     ${buildReadingToolbar()}
@@ -2168,6 +2260,7 @@ function renderCodeAsk() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Dein Code", "Start", "Dein Bild-Code", 0);
+  setOrientation("Du bist bei deinem Bild-Code.");
   hideHeaderSign();
   showNav(false, false);
 
@@ -2259,6 +2352,7 @@ function renderCodeSet() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Dein Code", "Start", "Bild-Code aussuchen", 0);
+  setOrientation("Du bist bei deinem Bild-Code.");
   hideHeaderSign();
   showNav(false, false);
   const fertig = codeDraft.length === CODE_LENGTH;
@@ -2312,6 +2406,7 @@ function renderProfilePicker() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Wer lernt?", "Start", "Wer lernt gerade?", 0);
+  setOrientation("Du bist am Anfang. Hier wählst du, wer lernt.");
   hideHeaderSign();
   showNav(false, false);
 
@@ -2350,6 +2445,7 @@ function renderDeviceQuestion(showSharedChoice = false) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Wer lernt heute?", 0);
+  setOrientation("Du bist am Anfang. Hier sagst du, wer lernt.");
   showNav(false, false);
 
   const sharedBlock = showSharedChoice ? `
@@ -2440,6 +2536,7 @@ function renderBuildSign(step, editId) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Dein Zeichen", "Start", "Bau dir dein Zeichen", 0);
+  setOrientation("Du baust dein Zeichen.");
   showNav(false, false);
 
   const ed = editId ? "'" + escapeHtml(editId) + "'" : "null";
@@ -2470,6 +2567,7 @@ function renderBuildSign(step, editId) {
   }
 
   content.innerHTML = `
+    ${buildReadingToolbar()}
     <section class="profile-new">
       <div class="lq-dots" aria-hidden="true">${dots}</div>
       <div class="sign-preview" role="img" aria-label="Dein Zeichen">${signPreviewHtml()}</div>
@@ -2554,10 +2652,12 @@ function renderProfileManage(id) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Profil", "Start", "Profil ändern", 0);
+  setOrientation("Du bist bei deinem Profil.");
   hideHeaderSign();
   showNav(false, false);
 
   content.innerHTML = `
+    ${buildReadingToolbar()}
     <section class="profile-manage">
       <h2 class="profile-picker-title"><span class="profile-manage-sign">${signHtml(p)}</span> Dein Zeichen</h2>
 
@@ -2689,9 +2789,11 @@ function renderStart() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Start", "Start", "Womit möchtest du starten?", 0);
+  setOrientation("Du bist am Anfang. Jetzt geht es um die Sprache.");
   showNav(false, false);
 
   content.innerHTML = `
+    ${buildReadingToolbar()}
     <section class="start-entry">
       <h2 class="language-choice-title">Womit möchtest du starten?</h2>
       <p class="language-choice-intro">Du kannst gleich selbst wählen. Oder du beantwortest 2 kurze Fragen und bekommst einen Vorschlag.</p>
@@ -2738,6 +2840,7 @@ function renderSampleFinder(round) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Passende Stufe finden", "Beispiel " + (round + 1) + " von " + SAMPLE_ROUNDS.length, "Passende Stufe finden", Math.round((round / SAMPLE_ROUNDS.length) * 100));
+  setOrientation("Du bist am Anfang. Wir finden die passende Sprache für dich.");
   showNav(false, false);
 
   const r = SAMPLE_ROUNDS[round];
@@ -2755,6 +2858,7 @@ function renderSampleFinder(round) {
   const back = round > 0 ? `renderSampleFinder(${round - 1})` : `renderStart()`;
 
   content.innerHTML = `
+    ${buildReadingToolbar()}
     <article class="card lang-quiz-card">
       <div class="lq-dots" aria-hidden="true">${dots}</div>
       <h2 class="lq-question">Welcher Text liest sich für dich am angenehmsten?</h2>
@@ -2782,9 +2886,11 @@ function renderLanguageResult(level) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Vorschlag", "Start", "Dein Vorschlag", 100);
+  setOrientation("Du bist am Anfang. Hier ist unser Vorschlag für die Sprache.");
   showNav(false, false);
 
   content.innerHTML = `
+    ${buildReadingToolbar()}
     <article class="card lang-result-card">
       <span class="lang-result-badge">Unser Vorschlag für dich</span>
       <h2 class="lang-result-name">${escapeHtml(LANGUAGE_LABEL[level])}</h2>
@@ -3191,6 +3297,7 @@ function renderResume() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Bereit?", "Start", "Willkommen zurück", 0);
+  setOrientation("Du bist wieder da. Hier siehst du deine Einstellungen.");
   showNav(false, false);
 
   const prof = profiles.find(p => p.id === activeProfileId) || profiles[0];
@@ -4450,7 +4557,7 @@ function taskHint(frage, ort) {
    die Entscheidung, nicht dahinter – wer unsicher ist, musste den Knopf
    vorher unter allen Antworten suchen. Die Klasse nimmt nur den oberen
    Abstand weg, damit die Antworten nicht zusaetzlich nach unten rutschen. */
-function buildTaskHelpBox(hinweis, vorneDran) {
+function buildTaskHelpBox(hinweis, vorneDran, aufRueckmeldung) {
   const stufe1 = (typeof hinweis === "string" && hinweis.trim())
     ? `<p class="task-help-tip"><span class="task-help-tip-label">Tipp:</span> ${escapeHtml(hinweis.trim())}</p>`
     : "";
@@ -4463,9 +4570,14 @@ function buildTaskHelpBox(hinweis, vorneDran) {
         <h3>Du bist unsicher?</h3>
         <p>Du musst nicht raten.</p>
         ${stufe1}
+        ${/* Auf der Rückmeldeseite stehen weder Frage noch Antworten –
+              dort passt nur, was man dort auch tun kann (Gesamtprüfung Z6). */""}
         <ul>
-          <li>Lies die Frage noch einmal langsam.</li>
-          <li>Schau dir alle Antworten an.</li>
+          ${aufRueckmeldung
+            ? `<li>Lies die Erklärung noch einmal langsam.</li>
+          <li>Fehler sind in Ordnung. So lernst du.</li>`
+            : `<li>Lies die Frage noch einmal langsam.</li>
+          <li>Schau dir alle Antworten an.</li>`}
           <li>Du kannst eine Pause machen.</li>
           <li>Du kannst eine Person fragen, der du vertraust.</li>
         </ul>
@@ -5056,7 +5168,8 @@ function renderLesson() {
   document.body.classList.add("lesson-view");
   lastLessonContext = { topicId: topic.id, step: currentStep, mode: currentMode };
   saveLastLesson();
-  showNav(true, !hasPractice, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
+  showNav(true, !hasPractice, currentStep === lessons.length - 1 ? weiterTextAmEnde(topic) : "Weiter");
+  if (hasPractice) setNextWaitsForPractice();
 
   const plain = (arr) => Array.isArray(arr)
     ? arr.map(i => (typeof i === "object" && i.text) ? i.text : i).join(" ")
@@ -5779,7 +5892,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
         }
       </div>
 
-      ${!isCorrect ? buildTaskHelpBox(taskHint(practice, "rueckmeldung")) : ""}
+      ${!isCorrect ? buildTaskHelpBox(taskHint(practice, "rueckmeldung"), false, true) : ""}
     </article>
   `;
   announce(isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtAnsage);
@@ -5800,7 +5913,8 @@ function renderPracticePage() {
     const modeLabel = currentMode === "short" ? "Kurz lernen" : "Mehr lernen";
     setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
     setOrientation(`Du übst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
-    showNav(true, false, currentStep === lessons.length - 1 ? "Fertig" : "Weiter");
+    showNav(true, false, currentStep === lessons.length - 1 ? weiterTextAmEnde(topic) : "Weiter");
+    setNextWaitsForPractice();
     content.innerHTML = `
       ${buildToolRow()}
       <article class="card lesson-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
@@ -5848,6 +5962,14 @@ function continueAfterPractice() {
    Ein Konzept pro Bildschirm (§3, CLT) – deshalb eine eigene Seite statt
    noch ein Block auf der ohnehin langen Abschluss-Seite.
    ------------------------------------------------------------ */
+/* „Fertig" nur, wenn wirklich nichts mehr kommt (Gesamtprüfung B3).
+   Folgt noch die kurze Frage, heißt der letzte Knopf „Weiter". */
+function weiterTextAmEnde(topic) {
+  const mq = topic && topic.miniQuestion;
+  const frageFolgt = mq && Array.isArray(mq.answers) && mq.answers.length && !miniCheckDone[topic.id];
+  return frageFolgt ? "Weiter" : "Fertig";
+}
+
 function renderMiniCheck(topicId) {
   const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
@@ -6446,7 +6568,7 @@ function renderQuizFeedbackPage(index) {
         }
       </div>
 
-      ${!isCorrect ? buildTaskHelpBox(taskHint(q, "quiz")) : ""}
+      ${!isCorrect ? buildTaskHelpBox(taskHint(q, "quiz"), false, true) : ""}
     </article>
   `;
   announce(isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtAnsage);
@@ -7694,6 +7816,7 @@ function goBack() {
 }
 
 function goNext() {
+  if (nextButton && nextButton.dataset.warten === "1") return zeigeUebung();
   const topic = getCurrentTopic();
   if (!topic) return renderMenu();
 
