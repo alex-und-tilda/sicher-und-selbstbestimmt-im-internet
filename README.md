@@ -6,3 +6,5 @@ Barrierearme Lernplattform in drei Sprachstufen – für Menschen mit Lern- und 
 
 Dieses Projekt enthält nur die veröffentlichte Webseite (Ordner `docs/`).
 Erstellt von Frank Runge · Stift Tilbeck GmbH (Alexianer) · Gefördert durch die Sozialstiftung NRW
+
+_Veröffentlicht am 25.09.2026._
