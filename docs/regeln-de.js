@@ -262,7 +262,8 @@ const REGEL_SAETZE = {
     "Nicht jeder im Internet ist ehrlich.", // betrug
     "Kein Geld und kein Stress von einer Person, die ich kenne: das ist normal.", // whatsapp
     "Kein Geld, kein Link, kein Stress: meistens echt.", // betrug
-    "Kein Link und kein Stress: das ist ein gutes Zeichen." // betrug
+    "Kein Link und kein Stress: das ist ein gutes Zeichen.", // betrug
+    "Ein guter Shop zeigt Name und Adresse." // einkaufen
   ],
   wahr: [
     "Die KI in WhatsApp ist kein Mensch.", // whatsapp
@@ -380,8 +381,7 @@ const REGEL_SAETZE = {
     "Erst fragen. Dann entscheiden.", // datenschutz
     "KI ist in vielen Apps. Auch wenn ich sie nicht sehe.", // ki
     "KI ist in vielen Apps.", // ki
-    "Online-Käufe kann ich oft 14 Tage zurückgeben.", // einkaufen
-    "Schloss und https: gute Zeichen." // einkaufen
+    "Online-Käufe kann ich oft 14 Tage zurückgeben." // einkaufen
   ]
 };
 

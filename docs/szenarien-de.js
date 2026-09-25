@@ -787,7 +787,7 @@ const SCENARIOS = {
           pictogram: "pikto-clock",
           answers: ["Ich breche ab.", "Schnell kaufen, bevor es weg ist."],
           correctIndex: 0,
-          feedbackWrong: "Der Eile ist gemacht. Er soll das Nachdenken verhindern.",
+          feedbackWrong: "Die Eile ist ein Trick. Du sollst schnell kaufen und nicht nachdenken.",
           feedbackCorrect: "Sehr gut. Abbrechen darfst du immer. Auch kurz vor dem Kauf.",
           remember: "Ich darf jeden Kauf abbrechen."
         }

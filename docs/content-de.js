@@ -23,7 +23,7 @@ const CONTENT_VERSIONS = {
         success: "Passwort plus Handy-Zahl: So ist dein Konto doppelt geschützt."
       },
       standard: {
-        text: [{ text: "Die Zwei-Faktor-Anmeldung sichert dein Konto zusätzlich zum Passwort ab: Nach der Passwort-Eingabe bestätigst du die Anmeldung mit einem Code auf deinem Handy. Wer nur dein Passwort erbeutet hat, scheitert damit am zweiten Schritt. Einen vollständigen Schutz bedeutet das aber nicht: Betrüger rufen an und fragen genau diesen Code ab, oft unter Eile. Kein seriöser Anbieter tut das – gib den Code deshalb nie weiter. Moderne Konten bieten zusätzlich Passkeys an – eine Anmeldung ganz ohne Passwort, zum Beispiel per Fingerabdruck. Das BSI empfiehlt beides." }],
+        text: [{ text: "Die Zwei-Faktor-Anmeldung sichert dein Konto zusätzlich zum Passwort ab: Nach der Passwort-Eingabe bestätigst du die Anmeldung mit einem Code auf deinem Handy. Wer nur dein Passwort erbeutet hat, scheitert damit am zweiten Schritt. Einen vollständigen Schutz bedeutet das aber nicht: Betrüger rufen an und fragen genau diesen Code ab und drängen dich dabei zur Eile. Kein seriöser Anbieter tut das – gib den Code deshalb nie weiter. Moderne Konten bieten zusätzlich Passkeys an – eine Anmeldung ganz ohne Passwort, zum Beispiel per Fingerabdruck. Das BSI empfiehlt beides." }],
         success: "Zwei-Faktor oder Passkey: deutlich mehr Schutz als ein Passwort allein."
       }
     },
@@ -1738,7 +1738,7 @@ const CONTENT_VERSIONS = {
         text: [{ text: "Sicheres Einkaufen gelingt mit einfachen Regeln: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim, lass dich nicht zu schnellen Käufen drängen und frag im Zweifel vor dem Kauf eine Vertrauensperson." }],
         bullets: [],
         warning: "Ungewöhnlich niedrige Preise oder ein Countdown sollen Eile erzeugen, damit weniger genau geprüft wird – ein typisches Warnzeichen unseriöser Shops.",
-        success: "Sich nicht unter Eile setzen zu lassen ist einer der wirksamsten Schutzmechanismen beim Online-Einkauf."
+        success: "Sich nicht hetzen zu lassen, ist einer der wirksamsten Schutzmechanismen beim Online-Einkauf."
       }
     },
     "Das merke ich mir": {

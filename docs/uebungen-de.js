@@ -106,7 +106,7 @@ const EXTRA_PRACTICE = {
         pictogram: "pikto-stranger",
         answers: ["Ich antworte sofort.", "Ich zeige es einer vertrauten Person."],
         correctIndex: 1,
-        feedbackWrong: "Sofort antworten zeigt: Diese Nummer wird gelesen. Warte lieber.",
+        feedbackWrong: "Eine Antwort zeigt: Hier liest jemand. Zeig die Nachricht lieber einer vertrauten Person.",
         feedbackCorrect: "Gut. Erst zeigen. Dann entscheiden.",
         remember: "Unbekannte Nachrichten: erst fragen."
       },
@@ -653,12 +653,12 @@ const EXTRA_PRACTICE = {
       },
       "Gute Shops erkennen": {
         question: "Welches Zeichen ist gut?",
-        pictogram: "pikto-lock",
-        answers: ["Ein Schloss und https in der Adresse.", "Viele blinkende Angebote."],
+        pictogram: "pikto-location",
+        answers: ["Name und Adresse vom Shop stehen auf der Seite.", "Viele blinkende Angebote."],
         correctIndex: 0,
-        feedbackWrong: "Blinkende Angebote machen nur Stress. Das Schloss ist das Zeichen.",
-        feedbackCorrect: "Gut erkannt. Schloss und https gehören dazu.",
-        remember: "Schloss und https: gute Zeichen."
+        feedbackWrong: "Blinkende Angebote machen nur Stress. Gut ist: Der Shop zeigt Name und Adresse.",
+        feedbackCorrect: "Gut erkannt. Ein guter Shop hat ein Impressum mit Name und Adresse.",
+        remember: "Ein guter Shop zeigt Name und Adresse."
       },
       "Sicher bezahlen": {
         question: "Du kaufst zum ersten Mal in einem Shop. Wie bezahlst du?",

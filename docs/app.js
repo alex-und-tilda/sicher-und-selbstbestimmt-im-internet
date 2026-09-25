@@ -5879,8 +5879,11 @@ function renderPracticeFeedbackPage(index, correctIndex) {
             Das ist keine reine Umstellung, sondern eine kleine Verbesserung — die
             Frage "gibt es überhaupt einen Merksatz?" gehört in den Baustein, nicht
             an jede Aufrufstelle. */""}
-      ${stationBadge("merken")}
-      ${isCorrect ? buildRememberBox("Wichtig", practice.remember) : ""}
+      ${!isCorrect ? passendeAntwortHtml(answers[Number(correctIndex)]) : ""}
+      ${/* Merksatz auch nach einer falschen Antwort (Gesamtprüfung V1): vorher
+            stand dort nur die leere Überschrift „Merken". */""}
+      ${practice.remember ? stationBadge("merken") : ""}
+      ${buildRememberBox("Wichtig", practice.remember)}
       ${regelHinweis}
 
       <div class="feedback-actions">
@@ -5930,6 +5933,20 @@ function renderPracticePage() {
   } else {
     renderLesson();
   }
+}
+
+/* Nach einer falschen Antwort steht die passende Antwort immer da
+   (Gesamtprüfung 25.09.2026, V1). Vorher sah man sie nur, wenn man es noch
+   einmal versuchte – und manche Erklärungen empfahlen sogar etwas anderes.
+   Dasselbe Wort wie im großen Quiz (RUECKMELDUNG.passendeAntwort). */
+function passendeAntwortHtml(antwort) {
+  const t = answerText(antwort);
+  if (!t) return "";
+  return `
+      <div class="feedback-passend">
+        <h3>${escapeHtml(RUECKMELDUNG.passendeAntwort)}</h3>
+        <p>${escapeHtml(t)}</p>
+      </div>`;
 }
 
 function continueAfterPractice() {
@@ -6556,6 +6573,7 @@ function renderQuizFeedbackPage(index) {
         <h3>Erklärung:</h3>
         <p>${escapeHtml(explanation)}</p>
       </div>
+      ${!isCorrect ? passendeAntwortHtml(q.answers[correctIndex]) : ""}
       ${!isCorrect ? roleFigure("ruhig") : ""}
 
       ${regelHinweis}
@@ -7089,6 +7107,7 @@ function answerTraining(index) {
     ${schwerHtml}
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
+    ${!richtig && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : ""}
     ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
     ${regelHinweis}
     <p class="sz-feedback-herkunft">Diese Nachricht kommt aus dem Thema: ${escapeHtml(eintrag.titel)}.</p>
@@ -7577,6 +7596,7 @@ function answerScenario(index) {
     ${schwerHtml}
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
+    ${!richtig && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : ""}
     ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
     ${regelHinweis}
     <div class="certificate-actions">

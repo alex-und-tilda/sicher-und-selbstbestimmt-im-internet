@@ -3818,7 +3818,7 @@ const topics = [
         "feedbackWrong": [
           "Du musst nicht immer Ja sagen.",
           null,
-          "Schweigen hilft nicht. Du darfst Nein sagen."
+          "Du darfst auch schweigen. Aber du darfst auch klar Nein sagen."
         ],
         "feedbackCorrect": "Das ist richtig. Du darfst Nein sagen."
       },
@@ -8155,13 +8155,14 @@ const topics = [
         "pictogram": "pikto-shop",
         "icon": "check",
         "text": [
-          "Du siehst ein Schloss in der Adresszeile.",
-          "Die Adresse beginnt mit https.",
-          "Du findest eine Adresse vom Shop.",
-          "Diese Zeichen sind gut.",
-          "Bei Unsicherheit fragst du eine vertraute Person."
+          "Ein guter Shop zeigt seinen Namen und seine Adresse.",
+          "Das steht im Impressum.",
+          "Die Preise sind normal. Nicht sehr billig.",
+          "Auch falsche Shops haben ein Schloss in der Adress-Zeile.",
+          "Das Schloss allein ist also kein gutes Zeichen.",
+          "Bist du unsicher? Dann fragst du eine vertraute Person."
         ],
-        "remember": "Schloss und https: gute Zeichen."
+        "remember": "Ein guter Shop zeigt Name und Adresse."
       },
       {
         "title": "Sicher bezahlen",
