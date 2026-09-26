@@ -275,14 +275,14 @@ const EXTRA_PRACTICE = {
       "Bilder verschwinden nicht wirklich": {
         question: "Welche Bilder schickst du?",
         pictogram: "pikto-photo",
-        answers: ["Nur Bilder, die auch andere sehen dürfen.", "Alle Bilder. Sie verschwinden ja."],
+        answers: ["Dürfen alle das Bild sehen? Nur dann schicke ich es.", "Alle Bilder. Sie verschwinden ja."],
         correctIndex: 0,
         feedbackWrong: "Sie verschwinden nur auf deinem Bildschirm. Gespeichert bleiben sie.",
         feedbackCorrect: "Genau richtig gedacht.",
         remember: "Bilder verschwinden nicht wirklich."
       },
       "Dein Standort": {
-        question: "Snapchat zeigt, wo du bist. Was machst du?",
+        question: "Snapchat zeigt deinen Ort. Was machst du?",
         pictogram: "pikto-location",
         answers: ["Ich lasse es an.", "Ich schalte den Standort aus."],
         correctIndex: 1,
@@ -336,7 +336,7 @@ const EXTRA_PRACTICE = {
       "Was du bei TikTok siehst": {
         question: "Warum siehst du immer ähnliche Videos?",
         pictogram: "pikto-video",
-        answers: ["Weil die App merkt, was mir gefällt.", "Weil es nur diese Videos gibt."],
+        answers: ["Die App merkt sich: Das gefällt mir.", "Es gibt nur diese Videos."],
         correctIndex: 0,
         feedbackWrong: "Es gibt viel mehr. Die App zeigt dir nur eine Auswahl.",
         feedbackCorrect: "Genau. Die App wählt für dich aus.",
@@ -410,7 +410,7 @@ const EXTRA_PRACTICE = {
       "Wer hilft dir?": {
         question: "Wen fragst du bei einem Problem im Internet?",
         pictogram: "pikto-help",
-        answers: ["Eine vertraute Person.", "Die unbekannte Person, die geschrieben hat."],
+        answers: ["Eine vertraute Person.", "Die unbekannte Person aus der Nachricht."],
         correctIndex: 0,
         feedbackWrong: "Wer das Problem gemacht hat, hilft nicht dabei.",
         feedbackCorrect: "Eine vertraute Person hilft dir.",
@@ -433,7 +433,7 @@ const EXTRA_PRACTICE = {
       "Was ist KI?": {
         question: "Was ist eine KI?",
         pictogram: "pikto-ki",
-        answers: ["Ein Computer-Programm.", "Ein Mensch, der schnell tippt."],
+        answers: ["Ein Computer-Programm.", "Ein Mensch. Er tippt sehr schnell."],
         correctIndex: 0,
         feedbackWrong: "Da sitzt kein Mensch. Es ist ein Programm.",
         feedbackCorrect: "KI ist ein Programm.",
@@ -494,7 +494,7 @@ const EXTRA_PRACTICE = {
       "Was sind Fake News?": {
         question: "Was sind Fake News?",
         pictogram: "pikto-fake",
-        answers: ["Ein Irrtum, der zufällig passiert.", "Falsche Nachrichten, die jemand mit Absicht verbreitet."],
+        answers: ["Ein Fehler aus Versehen.", "Falsche Nachrichten. Jemand verbreitet sie mit Absicht."],
         correctIndex: 1,
         feedbackWrong: "Ein Irrtum passiert. Fake News werden gemacht. Das ist der Unterschied.",
         feedbackCorrect: "Jemand macht Fake News mit Absicht.",
@@ -514,7 +514,7 @@ const EXTRA_PRACTICE = {
       "Was ist eine Fake-Nachricht?": {
         question: "Was ist eine Fake-Nachricht?",
         pictogram: "pikto-fake",
-        answers: ["Eine lustige Nachricht.", "Eine Nachricht, die nicht stimmt."],
+        answers: ["Eine lustige Nachricht.", "Eine falsche Nachricht."],
         correctIndex: 1,
         feedbackWrong: "Lustig kann sie auch sein. Wichtig ist: sie stimmt nicht.",
         feedbackCorrect: "Eine Fake-Nachricht sieht echt aus. Aber sie stimmt nicht.",
@@ -645,7 +645,7 @@ const EXTRA_PRACTICE = {
       "Einkaufen im Internet": {
         question: "Wo kaufst du am besten ein?",
         pictogram: "pikto-shop",
-        answers: ["Bei irgendeinem billigen Shop.", "Bei einem Shop, den ich kenne."],
+        answers: ["Bei irgendeinem billigen Shop.", "Bei einem bekannten Shop."],
         correctIndex: 1,
         feedbackWrong: "Sehr billig und unbekannt ist eine schlechte Mischung.",
         feedbackCorrect: "Bekannte Shops sind sicherer.",

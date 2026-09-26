@@ -131,10 +131,10 @@ const REGEL_SAETZE = {
   links: [
     "Ich öffne fremde Links nicht sofort.", // datenschutz
     "Ich öffne unbekannte Links nicht sofort.", // whatsapp
-    "Fremde Links nicht sofort anklicken.", // whatsapp
+    "Fremde Links nicht sofort antippen.", // whatsapp
     "Fremde Links tippe ich nicht an.", // whatsapp
     "Komische Nachrichten zeigen, nicht antippen.", // facebook
-    "Werbung nicht anklicken.", // youtube
+    "Werbung nicht antippen.", // youtube
     "Ich tippe nicht auf fremde Links.", // betrug
     "Erst fragen. Dann scannen.", // betrug
     "Ich tippe nicht auf Links in Nachrichten. Ich öffne die App selbst.", // betrug
@@ -333,7 +333,7 @@ const REGEL_SAETZE = {
     "Ich mache Pause. Ich hole Unterstützung.", // tiktok
     "Timer stellen. Pause machen.", // tiktok
     "Ich stelle einen Timer.", // tiktok
-    "Wenn etwas falsch fühlt: Stopp machen.", // hilfe
+    "Fühlt sich etwas falsch an? Stopp machen.", // hilfe
     "Wenn es sich falsch anfühlt: Stopp.", // hilfe
     "Ich darf jederzeit aufhören.", // whatsapp
     "Ich darf jeden Kauf abbrechen." // einkaufen
@@ -425,7 +425,7 @@ function regelZuSatz(satz) {
    Gefunden beim Abgleich am 25.09.2026. */
 const REGEL_QUIZ = {
   /* „jemand“ + „hilft“ ergaben Hilfe holen – gemeint ist freundlich schreiben. */
-  "Jemand schreibt etwas, das du dumm findest. Wie antwortest du?": "bilder"
+  "Jemand schreibt etwas. Du findest es dumm. Wie antwortest du?": "bilder"
 };
 
 function regelAusQuizfrage(q) {

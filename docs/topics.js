@@ -1549,7 +1549,7 @@ const topics = [
           "Fremde Links können gefährlich sein.",
           "Du fragst eine vertraute Person."
         ],
-        "remember": "Fremde Links nicht sofort anklicken."
+        "remember": "Fremde Links nicht sofort antippen."
       },
       {
         "title": "Dein WhatsApp-Code",
@@ -1561,7 +1561,7 @@ const topics = [
           "Der Code kommt als SMS.",
           "Den Code gibst du niemandem.",
           "Auch nicht an Freunde.",
-          "Wer den Code kennt, kann dein Konto stehlen."
+          "Mit dem Code kann jemand dein Konto stehlen."
         ],
         "remember": "Deinen WhatsApp-Code niemals weitergeben."
       }
@@ -1954,7 +1954,7 @@ const topics = [
         "answers": [
           "An die schönste Farbe.",
           "An die Zahl der Likes.",
-          "Daran, wer das Foto sehen kann."
+          "An die Frage: Wer sieht das Foto?"
         ],
         "correctIndex": 2,
         "feedbackWrong": [
@@ -1983,7 +1983,7 @@ const topics = [
       },
       {
         "hinweis": "Überlege: Was möchtest du selbst gern lesen?",
-        "question": "Jemand schreibt etwas, das du dumm findest. Wie antwortest du?",
+        "question": "Jemand schreibt etwas. Du findest es dumm. Wie antwortest du?",
         "pictogram": "pikto-people",
         "answers": [
           "Ich bleibe freundlich.",
@@ -2143,7 +2143,7 @@ const topics = [
         "text": [
           "Du hast ein Profil auf Facebook.",
           "Andere sehen dein Profil.",
-          "Du kannst einstellen, wer es sieht.",
+          "Du kannst einstellen: Wer sieht dein Profil?",
           "Am besten sehen es nur Freunde.",
           "Eine vertraute Person hilft dir beim Einstellen."
         ],
@@ -2250,10 +2250,10 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Was prüfst du, bevor du ein Foto postest?",
+          "question": "Du willst ein Foto posten. Was prüfst du vorher?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Was zu sehen ist.",
+            "Alles auf dem Foto.",
             "Nur die Farbe."
           ],
           "correctIndex": 0,
@@ -2349,7 +2349,7 @@ const topics = [
           "question": "Warum ist der Standort wichtig?",
           "pictogram": "pikto-location",
           "answers": [
-            "Er zeigt, wo ich bin.",
+            "Er zeigt meinen Ort.",
             "Er ist immer egal."
           ],
           "correctIndex": 0,
@@ -2519,7 +2519,7 @@ const topics = [
           "pictogram": "pikto-message",
           "answers": [
             "Ich mache Stopp und zeige es einer vertrauten Person.",
-            "Ich antworte sofort, damit die Person nicht böse wird."
+            "Ich antworte sofort. Die Person soll nicht böse werden."
           ],
           "correctIndex": 0,
           "feedbackWrong": "Schnell antworten drängt dich. Mach zuerst Stopp.",
@@ -2586,7 +2586,7 @@ const topics = [
         "answers": [
           "Nur ich.",
           "Nur meine Freunde.",
-          "Alle, die die Story sehen."
+          "Alle Zuschauer von der Story."
         ],
         "correctIndex": 2,
         "feedbackWrong": [
@@ -2620,7 +2620,7 @@ const topics = [
         "answers": [
           "Nein. Andere können sie vorher speichern.",
           "Ja, immer.",
-          "Ja, wenn ich sie lösche."
+          "Ja, nach dem Löschen."
         ],
         "correctIndex": 0,
         "feedbackWrong": [
@@ -2688,7 +2688,7 @@ const topics = [
         "answers": [
           "Nicht fremde Personen.",
           "Alle fremden Personen.",
-          "Jeder, der nett schreibt."
+          "Alle Personen mit netten Nachrichten."
         ],
         "correctIndex": 0,
         "feedbackWrong": [
@@ -2758,7 +2758,7 @@ const topics = [
         "text": [
           "Du postest Fotos auf Instagram.",
           "Andere sehen deine Fotos.",
-          "Du kannst einstellen, wer sie sieht.",
+          "Du kannst einstellen: Wer sieht deine Fotos?",
           "Am besten ist dein Konto privat.",
           "Dann sehen nur Freunde deine Fotos."
         ],
@@ -3101,7 +3101,7 @@ const topics = [
           "question": "Ein Video zeigt eine gefährliche Mutprobe. Was machst du?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Ich probiere es aus, weil viele es tun.",
+            "Viele tun es. Also probiere ich es aus.",
             "Ich stoppe das Video und mache es nicht nach."
           ],
           "correctIndex": 1,
@@ -3257,7 +3257,7 @@ const topics = [
         "pictogram": "pikto-video",
         "answers": [
           "Sie schützt mein Passwort.",
-          "Sie will, dass ich etwas kaufe.",
+          "Sie will: Ich soll etwas kaufen.",
           "Sie sagt immer die Wahrheit."
         ],
         "correctIndex": 1,
@@ -3363,7 +3363,7 @@ const topics = [
           "Du kannst Werbung überspringen.",
           "Du tippst nicht auf Werbung."
         ],
-        "remember": "Werbung nicht anklicken."
+        "remember": "Werbung nicht antippen."
       },
       {
         "title": "Pausen machen",
@@ -3539,7 +3539,7 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Die Standort-Funktion zeigt, wo du bist. Was ist besser?",
+          "question": "Die Standort-Funktion zeigt deinen Ort. Was ist besser?",
           "pictogram": "pikto-location",
           "answers": [
             "Standort immer teilen.",
@@ -3659,7 +3659,7 @@ const topics = [
           "question": "Eine Person will unbedingt ein Bild von dir. Was machst du?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Ich sende das Bild, damit endlich Ruhe ist.",
+            "Ich sende das Bild. Dann ist endlich Ruhe.",
             "Ich sage Nein und zeige die Nachricht einer vertrauten Person."
           ],
           "correctIndex": 1,
@@ -3790,7 +3790,7 @@ const topics = [
       },
       {
         "hinweis": "Frag dich: Woher weiß die Karte, wo du bist?",
-        "question": "Snapchat zeigt auf einer Karte, wo du bist. Was ist sicherer?",
+        "question": "Snapchat zeigt deinen Ort auf einer Karte. Was ist sicherer?",
         "pictogram": "pikto-location",
         "answers": [
           "Die Karte für alle anlassen.",
@@ -3829,7 +3829,7 @@ const topics = [
         "answers": [
           "Ein neues Passwort.",
           "Eine gelöschte Nachricht.",
-          "Ein Foto von dem, was auf dem Bildschirm war."
+          "Ein Bild von allem auf dem Bildschirm."
         ],
         "correctIndex": 2,
         "feedbackWrong": [
@@ -3900,9 +3900,9 @@ const topics = [
           "Du sendest ein Bild auf Snapchat.",
           "Das Bild verschwindet nach kurzer Zeit.",
           "Aber andere können es speichern.",
-          "Sie machen einen Screenshot.",
+          "Sie machen ein Bildschirm-Foto.",
           "Das Bild ist dann für immer da.",
-          "Schicke nur Bilder, die du zeigen kannst."
+          "Dürfen alle das Bild sehen? Nur dann schickst du es."
         ],
         "remember": "Bilder verschwinden nicht wirklich."
       },
@@ -3926,8 +3926,8 @@ const topics = [
         "pictogram": "pikto-no",
         "icon": "stop",
         "text": [
-          "Jemand macht dir Stress auf dich.",
-          "Er sagt: Schick mir ein Bild!",
+          "Jemand macht dir Stress.",
+          "Die Person sagt: Schick mir ein Bild!",
           "Du willst das nicht.",
           "Du musst das nicht machen.",
           "Du sagst nein.",
@@ -4131,7 +4131,7 @@ const topics = [
           "question": "Du willst ein Video posten. Was ist wichtig?",
           "pictogram": "pikto-video",
           "answers": [
-            "Ich prüfe, was man sieht.",
+            "Ich prüfe: Was sieht man im Video?",
             "Ich poste sofort."
           ],
           "correctIndex": 0,
@@ -4266,7 +4266,7 @@ const topics = [
           "pictogram": "pikto-data",
           "answers": [
             "Ich sende keine privaten Daten und mache Pause.",
-            "Ich sende die Daten schnell, damit Ruhe ist."
+            "Ich sende die Daten schnell. Dann ist Ruhe."
           ],
           "correctIndex": 0,
           "feedbackWrong": "Bei Stress ist Vorsicht besonders wichtig. Sende keine privaten Daten.",
@@ -4345,7 +4345,7 @@ const topics = [
       },
       {
         "hinweis": "Ein Geschenk klingt nett. Aber wofür braucht die Person deine Adresse?",
-        "question": "Jemand will dir ein Geschenk schicken. Die Person fragt, wo du wohnst. Was machst du?",
+        "question": "Jemand will dir ein Geschenk schicken. Die Person fragt nach deiner Adresse. Was machst du?",
         "pictogram": "pikto-house",
         "answers": [
           "Ich schreibe die Adresse nicht.",
@@ -4417,7 +4417,7 @@ const topics = [
         "pictogram": "pikto-video",
         "answers": [
           "Immer mitmachen.",
-          "Mitmachen, wenn Freunde zuschauen.",
+          "Mitmachen. Freunde schauen ja zu.",
           "Vorher prüfen."
         ],
         "correctIndex": 2,
@@ -4505,9 +4505,9 @@ const topics = [
         "icon": "understand",
         "text": [
           "TikTok zeigt dir viele Videos.",
-          "TikTok merkt, was dir gefällt.",
+          "TikTok merkt sich: Das gefällt dir.",
           "Es zeigt dir immer mehr davon.",
-          "Das kann einseitig werden.",
+          "Dann siehst du oft das Gleiche.",
           "Schau auch andere Kanäle an."
         ],
         "remember": "TikTok zeigt dir nur bestimmte Videos."
@@ -4532,7 +4532,7 @@ const topics = [
         "pictogram": "pikto-pause",
         "icon": "stop",
         "text": [
-          "TikTok macht, dass du lange schaust.",
+          "TikTok will: Du sollst lange schauen.",
           "Das ist anstrengend.",
           "Du machst nach einer Stunde Pause.",
           "Du stellst einen Timer.",
@@ -4773,7 +4773,7 @@ const topics = [
             "pictogram": "pikto-link"
           },
           {
-            "text": "Hilfe zu holen ist keine Schwäche. Es ist klug.",
+            "text": "Hilfe holen ist keine Schwäche. Es ist klug.",
             "pictogram": "pikto-help"
           }
         ],
@@ -5023,7 +5023,7 @@ const topics = [
         "question": "Was ist bei Stress wichtig?",
         "pictogram": "pikto-warning",
         "answers": [
-          "Sofort tun, was jemand sagt.",
+          "Sofort alles machen. Ohne Nachdenken.",
           "Nicht sofort handeln.",
           "Sofort alles löschen."
         ],
@@ -5041,7 +5041,7 @@ const topics = [
         "pictogram": "pikto-help",
         "answers": [
           "Immer Ja.",
-          "Nur, wenn ich einen Grund habe.",
+          "Nein. Aber nur mit einem Grund.",
           "Nein."
         ],
         "correctIndex": 2,
@@ -5103,7 +5103,7 @@ const topics = [
           "Du gehst nicht weiter.",
           "Das ist mutig und richtig."
         ],
-        "remember": "Wenn etwas falsch fühlt: Stopp machen."
+        "remember": "Fühlt sich etwas falsch an? Stopp machen."
       },
       {
         "title": "Wer hilft dir?",
@@ -5129,7 +5129,7 @@ const topics = [
           "Viele Menschen haben Probleme im Internet.",
           "Das passiert auch anderen.",
           "Du bist nicht allein.",
-          "Hilfe zu holen ist keine Schwäche.",
+          "Hilfe holen ist keine Schwäche.",
           "Es ist mutig und richtig."
         ],
         "remember": "Du bist nicht allein. Hilfe holen ist mutig."
@@ -5397,7 +5397,7 @@ const topics = [
           "pictogram": "pikto-phone",
           "answers": [
             "Ich rufe sofort an.",
-            "Ich schaue nach, ob die Nummer auch woanders steht."
+            "Ich prüfe die Nummer. Steht sie auch auf einer anderen Seite?"
           ],
           "correctIndex": 1,
           "feedbackCorrect": "Das ist richtig. Du prüfst die Nummer. So findest du Fehler.",
@@ -5483,7 +5483,7 @@ const topics = [
           "question": "Du bist krank. Die KI gibt dir einen Tipp. Was ist besser?",
           "pictogram": "pikto-ki",
           "answers": [
-            "Ich mache nur, was die KI sagt.",
+            "Ich mache nur den Tipp von der KI.",
             "Ich frage auch eine Ärztin oder einen Arzt."
           ],
           "correctIndex": 1,
@@ -5568,7 +5568,7 @@ const topics = [
           "question": "Die KI gibt dir einen Rat zu deiner Gesundheit. Was machst du?",
           "pictogram": "pikto-ki",
           "answers": [
-            "Ich mache genau das, was die KI sagt.",
+            "Ich folge genau dem Rat von der KI.",
             "Ich frage zusätzlich einen Menschen."
           ],
           "correctIndex": 1,
@@ -5728,7 +5728,7 @@ const topics = [
         "pictogram": "pikto-photo",
         "answers": [
           "Nein, das geht nicht.",
-          "Ja, KI kann Bilder machen, die echt aussehen.",
+          "Ja. KI kann Bilder machen. Sie sehen echt aus.",
           "Nur bei Zeichnungen."
         ],
         "correctIndex": 1,
@@ -5779,7 +5779,7 @@ const topics = [
         "pictogram": "pikto-key",
         "answers": [
           "Ja, das ist sicher.",
-          "Ja, wenn ich es danach lösche.",
+          "Ja. Danach lösche ich es.",
           "Nein, ich gebe der KI keine privaten Daten."
         ],
         "correctIndex": 2,
@@ -6257,11 +6257,11 @@ const topics = [
         "warning": "Starke Gefühle wie Angst oder Wut wollen, dass du schnell teilst. Genau dann ist Vorsicht wichtig.",
         "success": "Nicht teilen im Zweifel schützt dich und andere.",
         "practice": {
-          "question": "Eine Nachricht macht dich wütend und will, dass du sie sofort teilst. Was machst du?",
+          "question": "Eine Nachricht macht dich wütend. Du sollst sie sofort teilen. Was machst du?",
           "pictogram": "pikto-feel",
           "answers": [
             "Ich prüfe zuerst und teile im Zweifel nicht.",
-            "Ich teile sie sofort, weil sie wichtig wirkt."
+            "Sie wirkt wichtig. Also teile ich sie sofort."
           ],
           "correctIndex": 0,
           "feedbackWrong": "Starke Gefühle wollen schnelles Teilen. Prüfe lieber zuerst.",
@@ -6419,9 +6419,9 @@ const topics = [
         "question": "Wie kannst du eine Nachricht prüfen?",
         "pictogram": "pikto-message",
         "answers": [
-          "Schauen, ob bekannte Nachrichten-Seiten das auch melden.",
-          "Schauen, ob das Bild schön ist.",
-          "Schauen, wie oft sie geteilt wurde."
+          "Auf bekannten Nachrichten-Seiten nachschauen: Steht das dort auch?",
+          "Auf das Bild schauen: Ist es schön?",
+          "Zählen: Wie oft haben andere sie geteilt?"
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Das ist richtig. Wichtige Nachrichten stehen bei mehreren bekannten Seiten.",
@@ -6472,7 +6472,7 @@ const topics = [
         "answers": [
           "Ja, alles ist wahr.",
           "Nein, nicht alles ist wahr.",
-          "Ja, wenn ein Foto dabei ist."
+          "Ja. Mit einem Foto ist es wahr."
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Das ist richtig. Nicht alles im Internet ist wahr.",
@@ -6510,7 +6510,7 @@ const topics = [
           "Sie sieht aus wie eine echte Nachricht.",
           "Aber sie stimmt nicht.",
           "Manchmal ist sie auch ein Bild.",
-          "Das Bild ist verändert worden."
+          "Jemand hat das Bild verändert."
         ],
         "remember": "Fake-Nachrichten sind Lügen."
       },
@@ -6522,7 +6522,7 @@ const topics = [
         "text": [
           "Du liest eine Nachricht.",
           "Sie macht dich sehr aufgeregt.",
-          "Das kann ein Zeichen sein.",
+          "Das kann ein Zeichen für einen Fake sein.",
           "Du überlegst kurz.",
           "Du prüfst auf einer anderen Seite.",
           "Oder du fragst eine vertraute Person."
@@ -7424,7 +7424,7 @@ const topics = [
         "icon": "betrug",
         "text": [
           "Manche Menschen betrügen andere.",
-          "Sie tun so, als ob sie helfen.",
+          "Sie sagen: Ich helfe dir.",
           "Aber sie wollen dein Geld.",
           "Oder deine Daten.",
           "Das ist Betrug."
@@ -7896,7 +7896,7 @@ const topics = [
           "pictogram": "pikto-shop",
           "answers": [
             "Ich lasse mich nicht hetzen und prüfe den Shop in Ruhe.",
-            "Ich kaufe schnell, bevor das Angebot weg ist."
+            "Ich kaufe schnell. Sonst ist das Angebot weg."
           ],
           "correctIndex": 0,
           "feedbackWrong": "Ein Countdown ist ein Trick. Lass dich nicht hetzen.",

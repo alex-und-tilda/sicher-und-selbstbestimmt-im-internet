@@ -270,7 +270,7 @@ const SCENARIOS = {
         frage: {
           question: "Was ist hier das Problem?",
           pictogram: "pikto-location",
-          answers: ["Fremde sehen, wo du wohnst.", "Das Foto ist zu dunkel."],
+          answers: ["Fremde sehen: Hier wohnst du.", "Das Foto ist zu dunkel."],
           correctIndex: 0,
           feedbackWrong: "Es geht nicht um die Helligkeit. Das Schild und der Standort zeigen deine Adresse.",
           feedbackCorrect: "Genau. Schild und Standort verraten zusammen deine Adresse.",
@@ -387,7 +387,7 @@ const SCENARIOS = {
         frage: {
           question: "Das ist Stress. Was machst du?",
           pictogram: "pikto-no",
-          answers: ["Ich bleibe bei Nein.", "Ich gebe nach, damit Ruhe ist."],
+          answers: ["Ich bleibe bei Nein.", "Ich gebe nach. Dann ist Ruhe."],
           correctIndex: 0,
           feedbackWrong: "Wer dich mag, macht dir keinen Stress. Nachgeben hört meistens nicht auf.",
           feedbackCorrect: "Stark. Dein Nein gilt. Auch beim zweiten Mal.",
@@ -785,7 +785,7 @@ const SCENARIOS = {
         frage: {
           question: "Was machst du?",
           pictogram: "pikto-clock",
-          answers: ["Ich breche ab.", "Schnell kaufen, bevor es weg ist."],
+          answers: ["Ich breche ab.", "Schnell kaufen. Sonst ist es weg."],
           correctIndex: 0,
           feedbackWrong: "Die Eile ist ein Trick. Du sollst schnell kaufen und nicht nachdenken.",
           feedbackCorrect: "Sehr gut. Abbrechen darfst du immer. Auch kurz vor dem Kauf.",
