@@ -53,7 +53,7 @@ const REGELN = [
     muster: /code|pin\b|passwort|tan\b|geheim|doppelt sicher|bank fragt nie|anmeldung/i },
 
   { id: "links",     pikto: "pikto-link",
-    kurz: "Ich klicke nicht auf fremde Links.",
+    kurz: "Ich tippe nicht auf fremde Links.",
     was:  "Links in fremden Nachrichten tippe ich nicht an. QR-Bilder scanne ich nicht einfach.",
     muster: /link|klick|antipp|scann|qr/i },
 
@@ -132,10 +132,10 @@ const REGEL_SAETZE = {
     "Ich öffne fremde Links nicht sofort.", // datenschutz
     "Ich öffne unbekannte Links nicht sofort.", // whatsapp
     "Fremde Links nicht sofort anklicken.", // whatsapp
-    "Fremde Links klicke ich nicht an.", // whatsapp
-    "Komische Nachrichten zeigen, nicht klicken.", // facebook
+    "Fremde Links tippe ich nicht an.", // whatsapp
+    "Komische Nachrichten zeigen, nicht antippen.", // facebook
     "Werbung nicht anklicken.", // youtube
-    "Ich klicke nicht auf fremde Links.", // betrug
+    "Ich tippe nicht auf fremde Links.", // betrug
     "Erst fragen. Dann scannen.", // betrug
     "Ich tippe nicht auf Links in Nachrichten. Ich öffne die App selbst.", // betrug
     "Angst und ein Link zusammen: ich mache nichts." // betrug

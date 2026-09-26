@@ -35,7 +35,7 @@ const EXTRA_PRACTICE = {
         answers: ["Deine Telefon-Nummer.", "Das Wetter von heute."],
         correctIndex: 0,
         feedbackWrong: "Das Wetter weiß jeder. Deine Telefon-Nummer gehört nur dir.",
-        feedbackCorrect: "Richtig. Deine Telefon-Nummer gehört zu dir.",
+        feedbackCorrect: "Deine Telefon-Nummer gehört zu dir.",
         remember: "Private Daten gehören zu mir."
       },
       "Besonders wichtige Daten": {
@@ -64,7 +64,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich sage es ihr.", "Ich sage es auch ihr nicht."],
         correctIndex: 1,
         feedbackWrong: "Ein Passwort bleibt geheim. Auch bei Menschen, die du magst.",
-        feedbackCorrect: "Richtig. Ein Passwort bleibt geheim. Immer.",
+        feedbackCorrect: "Ein Passwort bleibt geheim. Immer.",
         remember: "Mein Passwort bleibt geheim."
       },
       "Jemand fragt nach deinen Daten": {
@@ -96,7 +96,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich schreibe sie nicht hin.", "Ich schreibe sie hin. Es ist ja nur ein Programm."],
         correctIndex: 0,
         feedbackWrong: "Gerade weil es ein Programm ist: Alles wird gespeichert. Private Dinge gehören da nicht hinein.",
-        feedbackCorrect: "Richtig. Der KI schreibst du keine privaten Dinge.",
+        feedbackCorrect: "Der KI schreibst du keine privaten Dinge.",
         remember: "Der KI schreibe ich nichts Privates."
       }
     },
@@ -116,8 +116,8 @@ const EXTRA_PRACTICE = {
         answers: ["Ich tippe nicht drauf.", "Ich tippe drauf und schaue nach."],
         correctIndex: 0,
         feedbackWrong: "Ein Link kann dich auf eine falsche Seite bringen. Nachschauen ist zu spät.",
-        feedbackCorrect: "Richtig. Fremde Links lässt du zu.",
-        remember: "Fremde Links klicke ich nicht an."
+        feedbackCorrect: "Auf fremde Links tippst du nicht.",
+        remember: "Fremde Links tippe ich nicht an."
       },
       "Dein WhatsApp-Code": {
         question: "Ein Freund bittet dich um deinen WhatsApp-Code. Was tust du?",
@@ -139,7 +139,7 @@ const EXTRA_PRACTICE = {
         answers: ["Nur meine Freunde sehen es.", "Alle können es sehen."],
         correctIndex: 1,
         feedbackWrong: "Öffentlich heißt wirklich alle. Auch fremde Menschen.",
-        feedbackCorrect: "Richtig. Öffentlich heißt: jeder Mensch kann es sehen.",
+        feedbackCorrect: "Öffentlich heißt: jeder Mensch kann es sehen.",
         remember: "Ich zeige nicht alles in meinem Profil."
       }
     },
@@ -159,16 +159,16 @@ const EXTRA_PRACTICE = {
         answers: ["Ich nehme die Anfrage an.", "Ich lehne ab und frage eine vertraute Person."],
         correctIndex: 1,
         feedbackWrong: "Wer dich nicht kennt, will oft an deine Daten.",
-        feedbackCorrect: "Richtig. Unbekannte Anfragen lehnst du ab.",
+        feedbackCorrect: "Unbekannte Anfragen lehnst du ab.",
         remember: "Unbekannte Anfragen lehne ich ab."
       },
       "Komische Nachrichten": {
         question: "Jemand schickt dir einen Link und fragt nach Geld. Was tust du?",
         pictogram: "pikto-warning",
-        answers: ["Ich zeige es einer vertrauten Person.", "Ich klicke auf den Link."],
+        answers: ["Ich zeige es einer vertrauten Person.", "Ich tippe auf den Link."],
         correctIndex: 0,
-        feedbackWrong: "Klicken kann Schaden machen. Zeigen kostet nichts.",
-        feedbackCorrect: "Sehr gut. Zeigen statt klicken.",
+        feedbackWrong: "Antippen kann Schaden machen. Zeigen kostet nichts.",
+        feedbackCorrect: "Du zeigst es jemandem. Das schützt dich.",
         remember: "Komische Nachrichten zeige ich."
       }
     }
@@ -192,7 +192,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich frage sie.", "Ich poste es einfach."],
         correctIndex: 0,
         feedbackWrong: "Auch andere entscheiden über ihre Bilder. Fragen gehört dazu.",
-        feedbackCorrect: "Richtig. Erst fragen, dann posten.",
+        feedbackCorrect: "Erst fragen, dann posten.",
         remember: "Fotos von anderen: erst fragen."
       },
       "Nachrichten von Unbekannten": {
@@ -224,7 +224,7 @@ const EXTRA_PRACTICE = {
         answers: ["Er hat es sicher gesagt. Man sieht ihn ja.", "Das Video kann mit KI gemacht sein."],
         correctIndex: 1,
         feedbackWrong: "Sehen ist kein Beweis mehr. KI kann Gesichter und Stimmen nachmachen.",
-        feedbackCorrect: "Richtig. Auch Gesichter kann man heute fälschen.",
+        feedbackCorrect: "Auch Gesichter kann man heute fälschen.",
         remember: "Auch Videos können gefälscht sein."
       }
     },
@@ -267,7 +267,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ja, danach kann es niemand mehr sehen.", "Nein. Man kann ein Bild vom Bildschirm machen."],
         correctIndex: 1,
         feedbackWrong: "Ein Bildschirm-Foto dauert eine Sekunde. Danach ist dein Bild gespeichert.",
-        feedbackCorrect: "Richtig. Ein Bildschirm-Foto geht immer.",
+        feedbackCorrect: "Ein Bildschirm-Foto geht immer.",
         remember: "Ich denke vor dem Senden nach."
       }
     },
@@ -310,7 +310,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich mache mit. Alle machen es.", "Ich mache nicht mit."],
         correctIndex: 1,
         feedbackWrong: "Der Trend ist bald vorbei. Eine Verletzung bleibt länger.",
-        feedbackCorrect: "Richtig. Du musst bei keinem Trend mitmachen.",
+        feedbackCorrect: "Du musst bei keinem Trend mitmachen.",
         remember: "Ich muss bei keinem Trend mitmachen."
       },
       "Gefühle und Pausen": {
@@ -328,7 +328,7 @@ const EXTRA_PRACTICE = {
         answers: ["Stimmen kann man nicht fälschen.", "Die Stimme kann mit KI gemacht sein."],
         correctIndex: 1,
         feedbackWrong: "Doch. KI kann Stimmen sehr echt nachmachen.",
-        feedbackCorrect: "Richtig. Auch Stimmen kann man fälschen.",
+        feedbackCorrect: "Auch Stimmen kann man fälschen.",
         remember: "Auch Videos und Stimmen können gefälscht sein."
       }
     },
@@ -371,7 +371,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich stelle mich an.", "Mein Gefühl sagt mir etwas."],
         correctIndex: 1,
         feedbackWrong: "Du stellst dich nicht an. Dieses Gefühl ist eine Warnung.",
-        feedbackCorrect: "Richtig. Dein Gefühl ist ein guter Hinweis.",
+        feedbackCorrect: "Dein Gefühl ist ein guter Hinweis.",
         remember: "Meine Gefühle sind wichtig."
       },
       /* Diese Frage hatte genau dieselben Antworten wie die Übung in
@@ -393,7 +393,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ja, das muss ich allein machen.", "Nein. Eine vertraute Person kann mitkommen."],
         correctIndex: 1,
         feedbackWrong: "Du darfst jemanden mitnehmen. Das ist ausdrücklich erlaubt.",
-        feedbackCorrect: "Richtig. Du musst das nicht allein machen.",
+        feedbackCorrect: "Du musst das nicht allein machen.",
         remember: "Es gibt immer jemanden, der hilft."
       }
     },
@@ -413,13 +413,13 @@ const EXTRA_PRACTICE = {
         answers: ["Eine vertraute Person.", "Die unbekannte Person, die geschrieben hat."],
         correctIndex: 0,
         feedbackWrong: "Wer das Problem gemacht hat, hilft nicht dabei.",
-        feedbackCorrect: "Richtig. Eine vertraute Person hilft dir.",
+        feedbackCorrect: "Eine vertraute Person hilft dir.",
         remember: "Ich frage eine vertraute Person."
       },
       "Du bist nicht allein": {
         question: "Ist Hilfe holen eine Schwäche?",
         pictogram: "pikto-people",
-        answers: ["Ja, das sollte ich allein schaffen.", "Nein. Es ist mutig."],
+        answers: ["Ja. Ich muss das allein schaffen.", "Nein. Es ist mutig."],
         correctIndex: 1,
         feedbackWrong: "Niemand schafft alles allein. Hilfe holen ist stark.",
         feedbackCorrect: "Genau. Hilfe holen ist mutig.",
@@ -436,7 +436,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ein Computer-Programm.", "Ein Mensch, der schnell tippt."],
         correctIndex: 0,
         feedbackWrong: "Da sitzt kein Mensch. Es ist ein Programm.",
-        feedbackCorrect: "Richtig. KI ist ein Programm.",
+        feedbackCorrect: "KI ist ein Programm.",
         remember: "KI ist ein Programm. Kein Mensch."
       },
       "Wo triffst du KI?": {
@@ -474,7 +474,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ja, sie weiß alles.", "Nein. Ich prüfe wichtige Antworten."],
         correctIndex: 1,
         feedbackWrong: "KI klingt sicher, auch wenn sie sich irrt. Prüfen hilft.",
-        feedbackCorrect: "Richtig. Wichtige Antworten prüfst du nach.",
+        feedbackCorrect: "Wichtige Antworten prüfst du nach.",
         remember: "KI-Antworten prüfe ich."
       },
       "Wann musst du aufpassen?": {
@@ -497,13 +497,13 @@ const EXTRA_PRACTICE = {
         answers: ["Ein Irrtum, der zufällig passiert.", "Falsche Nachrichten, die jemand mit Absicht verbreitet."],
         correctIndex: 1,
         feedbackWrong: "Ein Irrtum passiert. Fake News werden gemacht. Das ist der Unterschied.",
-        feedbackCorrect: "Richtig. Dahinter steckt eine Absicht.",
+        feedbackCorrect: "Jemand macht Fake News mit Absicht.",
         remember: "Nicht jede Nachricht im Internet ist wahr."
       },
       "Warum gibt es Fake News?": {
         question: "Warum machen Menschen Fake News?",
         pictogram: "pikto-money",
-        answers: ["Zum Beispiel für Geld durch viele Klicks.", "Aus Versehen."],
+        answers: ["Zum Beispiel für Geld durch viele Aufrufe.", "Aus Versehen."],
         correctIndex: 0,
         feedbackWrong: "Aus Versehen passiert das nicht. Es steckt ein Ziel dahinter.",
         feedbackCorrect: "Genau. Geld, Wut oder eine Meinung sind häufige Ziele.",
@@ -517,7 +517,7 @@ const EXTRA_PRACTICE = {
         answers: ["Eine lustige Nachricht.", "Eine Nachricht, die nicht stimmt."],
         correctIndex: 1,
         feedbackWrong: "Lustig kann sie auch sein. Wichtig ist: sie stimmt nicht.",
-        feedbackCorrect: "Richtig. Sie sieht echt aus, ist aber falsch.",
+        feedbackCorrect: "Eine Fake-Nachricht sieht echt aus. Aber sie stimmt nicht.",
         remember: "Fake-Nachrichten sind Lügen."
       },
       "Wie erkennst du Fakes?": {
@@ -535,7 +535,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich schicke sie weiter und warne alle.", "Ich schicke sie nicht weiter."],
         correctIndex: 1,
         feedbackWrong: "Auch als Warnung verbreitest du sie damit. Lieber nur der vertrauten Person zeigen.",
-        feedbackCorrect: "Richtig. Nicht weiterleiten.",
+        feedbackCorrect: "Nicht weiterleiten.",
         remember: "Fakes leite ich nicht weiter."
       }
     }
@@ -558,7 +558,7 @@ const EXTRA_PRACTICE = {
         answers: ["Auf das Bild vom Produkt.", "Auf die kleine Schrift unten."],
         correctIndex: 1,
         feedbackWrong: "Das Bild sagt nichts über die Kosten. Unten steht der Preis pro Monat.",
-        feedbackCorrect: "Richtig. In der kleinen Schrift steht der Haken.",
+        feedbackCorrect: "In der kleinen Schrift steht der Haken.",
         remember: "Kostenlos kann teuer werden. Ich lese genau."
       },
       "Was tun nach einem Betrug?": {
@@ -578,7 +578,7 @@ const EXTRA_PRACTICE = {
         answers: ["Dein Geld oder deine Daten.", "Nur mit dir reden."],
         correctIndex: 0,
         feedbackWrong: "Das Reden ist nur der Anfang. Am Ende geht es um Geld oder Daten.",
-        feedbackCorrect: "Richtig. Darum geht es fast immer.",
+        feedbackCorrect: "Betrüger wollen fast immer dein Geld oder deine Daten.",
         remember: "Nicht jeder im Internet ist ehrlich."
       },
       "Wie erkennst du Betrug?": {
@@ -596,7 +596,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich zahle nichts und sage es jemandem.", "Ich zahle einen kleinen Betrag."],
         correctIndex: 0,
         feedbackWrong: "Auch kleine Beträge sind weg. Und danach kommt die nächste Forderung.",
-        feedbackCorrect: "Richtig. Kein Geld senden und Bescheid sagen.",
+        feedbackCorrect: "Kein Geld senden und Bescheid sagen.",
         remember: "Kein Geld senden. Vertraute Person fragen."
       }
     }
@@ -610,7 +610,7 @@ const EXTRA_PRACTICE = {
         answers: ["An sehr niedrigen Preisen.", "An einem Impressum mit Name und Adresse."],
         correctIndex: 1,
         feedbackWrong: "Sehr niedrige Preise sind eher ein Warnzeichen als ein gutes Zeichen.",
-        feedbackCorrect: "Richtig. Im Impressum steht, wer dahintersteckt.",
+        feedbackCorrect: "Im Impressum stehen Name und Adresse vom Shop.",
         remember: "Ich kaufe bei Shops, die ich geprüft habe."
       },
       "Versteckte Kosten in Apps und Spielen": {
@@ -623,12 +623,12 @@ const EXTRA_PRACTICE = {
         remember: "Auch kleine Käufe kosten echtes Geld."
       },
       "Vor dem Kaufen prüfen": {
-        question: "Welche Frage stellst du dir vor dem letzten Klick?",
+        question: "Welche Frage stellst du dir vor dem Kaufen?",
         pictogram: "pikto-ask",
         answers: ["Sieht die Seite schön aus?", "Was kostet es wirklich, mit Versand?"],
         correctIndex: 1,
         feedbackWrong: "Wie die Seite aussieht, sagt nichts über den Preis.",
-        feedbackCorrect: "Richtig. Der Endpreis zählt, nicht der erste Preis.",
+        feedbackCorrect: "Der Endpreis zählt, nicht der erste Preis.",
         remember: "Erst prüfen. Dann kaufen."
       },
       "Falsch gekauft? Das kannst du tun": {
@@ -648,7 +648,7 @@ const EXTRA_PRACTICE = {
         answers: ["Bei irgendeinem billigen Shop.", "Bei einem Shop, den ich kenne."],
         correctIndex: 1,
         feedbackWrong: "Sehr billig und unbekannt ist eine schlechte Mischung.",
-        feedbackCorrect: "Richtig. Bekannte Shops sind sicherer.",
+        feedbackCorrect: "Bekannte Shops sind sicherer.",
         remember: "Ich kaufe bei sicheren Shops."
       },
       "Gute Shops erkennen": {
@@ -666,7 +666,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich überweise das Geld vorher.", "Auf Rechnung."],
         correctIndex: 1,
         feedbackWrong: "Bei Vorkasse ist dein Geld weg, bevor die Ware da ist.",
-        feedbackCorrect: "Richtig. Auf Rechnung zahlst du erst, wenn die Ware da ist.",
+        feedbackCorrect: "Bei Rechnung bekommst du zuerst die Ware. Dann zahlst du.",
         remember: "Rechnung ist sicherer als Vorkasse."
       }
     }

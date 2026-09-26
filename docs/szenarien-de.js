@@ -94,7 +94,7 @@ const SCENARIOS = {
           answers: ["Ich gebe die Bank-Daten ein.", "Ich mache nicht mit."],
           correctIndex: 1,
           feedbackWrong: "Ein Gewinnspiel braucht nie deine Bank-Daten. Hier holt sich jemand deine Daten.",
-          feedbackCorrect: "Richtig. Für ein Gewinnspiel braucht niemand deine Bank-Daten.",
+          feedbackCorrect: "Für ein Gewinnspiel braucht niemand deine Bank-Daten.",
           remember: "Bank-Daten gebe ich nicht für ein Gewinnspiel."
         }
       }
@@ -154,7 +154,7 @@ const SCENARIOS = {
           answers: ["Nein. Codes gebe ich nie weiter.", "Ja, das ist ja nur eine Zahl."],
           correctIndex: 0,
           feedbackWrong: "Mit diesem Code kann jemand dein WhatsApp übernehmen. Der Code ist wie ein Schlüssel.",
-          feedbackCorrect: "Richtig. Ein Code ist wie ein Schlüssel zu deiner Wohnung.",
+          feedbackCorrect: "Ein Code ist wie ein Schlüssel zu deiner Wohnung.",
           remember: "Ich gebe keinen Code weiter."
         }
       },
@@ -214,7 +214,7 @@ const SCENARIOS = {
           answers: ["Ja, mehr Freunde sind schön.", "Nein. Ich kenne die Person nicht."],
           correctIndex: 1,
           feedbackWrong: "Ein neues Profil ohne gemeinsame Freunde ist oft falsch. Solche Profile wollen an deine Daten.",
-          feedbackCorrect: "Richtig. Neues Profil, keine gemeinsamen Freunde: das prüfe ich lieber.",
+          feedbackCorrect: "Neues Profil, keine gemeinsamen Freunde: das prüfe ich lieber.",
           remember: "Ich prüfe Freundschafts-Anfragen."
         }
       },
@@ -286,7 +286,7 @@ const SCENARIOS = {
           pictogram: "pikto-no",
           answers: ["Ich schicke das Foto.", "Ich schicke nichts und erzähle es jemandem."],
           correctIndex: 1,
-          feedbackWrong: "Keine echte Agentur fragt so etwas. Das Foto wäre für immer aus deiner Hand.",
+          feedbackWrong: "Keine echte Agentur fragt so etwas. Du schickst ein Foto. Dann kannst du es nicht mehr zurückholen.",
           feedbackCorrect: "Genau richtig. Und darüber reden ist stark, nicht peinlich.",
           remember: "Ich schicke fremden Personen keine privaten Fotos."
         }
@@ -317,7 +317,7 @@ const SCENARIOS = {
           answers: ["Werbung.", "Ein ehrlicher Tipp."],
           correctIndex: 0,
           feedbackWrong: "Schau auf das kleine Wort Anzeige. Dann wird das Video für Geld gemacht.",
-          feedbackCorrect: "Richtig. Anzeige heißt: Da wird etwas verkauft.",
+          feedbackCorrect: "Anzeige heißt: Da wird etwas verkauft.",
           remember: "Ich achte auf das Wort Anzeige."
         }
       },
@@ -375,7 +375,7 @@ const SCENARIOS = {
           answers: ["Ja, danach ist es weg.", "Nein. Man kann es abfotografieren."],
           correctIndex: 1,
           feedbackWrong: "Ein Bildschirm-Foto geht immer. Dann ist dein Bild gespeichert.",
-          feedbackCorrect: "Richtig. Ein Bildschirm-Foto ist schnell gemacht.",
+          feedbackCorrect: "Ein Bildschirm-Foto ist schnell gemacht.",
           remember: "Bilder können gespeichert werden."
         }
       },
@@ -449,7 +449,7 @@ const SCENARIOS = {
           answers: ["Ich sage mein Alter und meinen Ort.", "Ich antworte nicht."],
           correctIndex: 1,
           feedbackWrong: "Alter und Wohnort sind private Daten. Fremde brauchen sie nicht.",
-          feedbackCorrect: "Richtig. Private Daten bleiben bei dir.",
+          feedbackCorrect: "Private Daten bleiben bei dir.",
           remember: "Ich schütze private Daten."
         }
       },
@@ -493,7 +493,7 @@ const SCENARIOS = {
           answers: ["Sofort zurückschreiben.", "Stopp machen. Nicht antworten."],
           correctIndex: 1,
           feedbackWrong: "Antworten macht oft weiter. Erst einmal nichts tun ist stark.",
-          feedbackCorrect: "Richtig. Erst Stopp. Dann in Ruhe überlegen.",
+          feedbackCorrect: "Erst Stopp. Dann in Ruhe überlegen.",
           remember: "Ich mache Stopp."
         }
       },
@@ -567,7 +567,7 @@ const SCENARIOS = {
           answers: ["Ja, es ist ja nur ein Programm.", "Nein. Das geht das Programm nichts an."],
           correctIndex: 1,
           feedbackWrong: "Alles, was du einer KI schreibst, wird gespeichert. Du weißt nicht, wer es später liest.",
-          feedbackCorrect: "Richtig. Was du dort eingibst, bekommst du nicht zurück.",
+          feedbackCorrect: "Was du dort eingibst, bekommst du nicht zurück.",
           remember: "Ich gebe der KI keine privaten Daten."
         }
       },
@@ -675,8 +675,8 @@ const SCENARIOS = {
           answers: ["Das ist ein Trick.", "Das ist echt."],
           correctIndex: 0,
           feedbackWrong: "Echte Paket-Dienste wollen kein Geld per SMS. Und die Adresse ist erfunden.",
-          feedbackCorrect: "Richtig. Kleine Gebühr plus komische Adresse: der Paket-Trick.",
-          remember: "Ich klicke nicht auf fremde Links."
+          feedbackCorrect: "Kleine Gebühr plus komische Adresse: der Paket-Trick.",
+          remember: "Ich tippe nicht auf fremde Links."
         }
       },
       {
@@ -707,7 +707,7 @@ const SCENARIOS = {
           answers: ["Das ist ein Trick.", "Das ist echt."],
           correctIndex: 0,
           feedbackWrong: "Deine Bank fragt nie per E-Mail nach deinen Daten. Drohung und Eile sind Warnzeichen.",
-          feedbackCorrect: "Richtig. Das ist Phishing. Deine Bank schreibt so nicht.",
+          feedbackCorrect: "Das ist Phishing. Deine Bank schreibt so nicht.",
           remember: "Stress und Drohung sind Warnzeichen."
         }
       },
@@ -774,7 +774,7 @@ const SCENARIOS = {
           answers: ["Das ist normal.", "Ich zahle zuerst und bekomme vielleicht nichts."],
           correctIndex: 1,
           feedbackWrong: "Bei Vorkasse ist dein Geld weg, bevor die Ware da ist. Zurückholen ist schwer.",
-          feedbackCorrect: "Genau. Auf Rechnung wärst du sicherer.",
+          feedbackCorrect: "Genau. Bei Rechnung bekommst du zuerst die Ware. Dann zahlst du.",
           remember: "Rechnung ist sicherer als Vorkasse."
         }
       },
@@ -873,7 +873,7 @@ const SCENARIOS = {
         pictogram: "pikto-fraud",
         answers: ["Das ist ein Trick.", "Das ist echt."],
         correctIndex: 0,
-        feedbackCorrect: "Richtig. Die Adresse ist fast richtig. Die echte Seite heißt dhl.de. Diese heißt dhl-liefertermin.de.",
+        feedbackCorrect: "Die Adresse ist fast richtig. Die echte Seite heißt dhl.de. Diese heißt dhl-liefertermin.de.",
         feedbackWrong: "Die Adresse ist fast richtig. Aber nur fast. Die echte Seite heißt dhl.de. Diese heißt anders.",
         remember: "Ich tippe nicht auf Links in Nachrichten. Ich öffne die App selbst."
       },
@@ -894,7 +894,7 @@ const SCENARIOS = {
         pictogram: "pikto-mail",
         answers: ["Das ist ein Trick.", "Das ist echt."],
         correctIndex: 0,
-        feedbackCorrect: "Richtig. Du hast gar nichts bestellt. Das ist das wichtigste Zeichen.",
+        feedbackCorrect: "Du hast gar nichts bestellt. Das ist das wichtigste Zeichen.",
         feedbackWrong: "Frag dich immer zuerst: Habe ich das wirklich bestellt? Wenn nein, ist es ein Trick.",
         remember: "Ich frage mich: Habe ich das wirklich bestellt?"
       },
@@ -929,7 +929,7 @@ const SCENARIOS = {
         pictogram: "pikto-warning",
         answers: ["Das ist ein Trick.", "Das ist echt."],
         correctIndex: 0,
-        feedbackCorrect: "Richtig. Die Nachricht macht Angst. Und sie gibt dir einen Link. Beides zusammen ist ein Warnzeichen.",
+        feedbackCorrect: "Die Nachricht macht Angst. Und sie gibt dir einen Link. Beides zusammen ist ein Warnzeichen.",
         feedbackWrong: "Die Nachricht macht Angst. Genau das will sie. Angst und ein Link zusammen sind ein Warnzeichen.",
         remember: "Angst und ein Link zusammen: ich mache nichts."
       },
@@ -1078,7 +1078,7 @@ const SCENARIOS = {
           pictogram: "pikto-people",
           answers: ["Das ist ein Trick.", "Das ist echt."],
           correctIndex: 1,
-          feedbackCorrect: "Richtig. Eine Erinnerung aus deiner Gruppe. Kein Link, kein Geld, keine Eile.",
+          feedbackCorrect: "Eine Erinnerung aus deiner Gruppe. Kein Link, kein Geld, keine Eile.",
           feedbackWrong: "Diese Nachricht kommt aus deiner Gruppe. Sie will nichts von dir. Sie ist echt.",
           remember: "Ich prüfe: Will die Nachricht etwas von mir?"
         }
@@ -1117,7 +1117,7 @@ const SCENARIOS = {
           pictogram: "pikto-code",
           answers: ["Das ist ein Trick.", "Das ist echt."],
           correctIndex: 0,
-          feedbackCorrect: "Richtig. Niemand schickt aus Versehen einen Code. Wer danach fragt, will in dein Konto.",
+          feedbackCorrect: "Niemand schickt aus Versehen einen Code. Die Person will in dein Konto.",
           feedbackWrong: "Ein Code kommt nie aus Versehen bei dir an. Der Absender will damit in dein Konto.",
           remember: "Meine Codes sage ich niemandem. Auch nicht am Telefon."
         },
@@ -1137,7 +1137,7 @@ const SCENARIOS = {
           pictogram: "pikto-warning",
           answers: ["Das ist ein Trick.", "Das ist echt."],
           correctIndex: 0,
-          feedbackCorrect: "Richtig. Sofort und sonst: das ist Stress. Und niemand fragt per SMS nach Bank-Daten.",
+          feedbackCorrect: "Sofort und sonst: das ist Stress. Und niemand fragt per SMS nach Bank-Daten.",
           feedbackWrong: "Achte auf das Wort sofort und auf die Drohung. Und: Bank-Daten gibt man nie per SMS.",
           remember: "Stress und die Frage nach Bank-Daten: immer ein Trick."
         },

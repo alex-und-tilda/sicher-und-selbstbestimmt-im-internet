@@ -714,7 +714,7 @@ const GLOSSAR = {
   "datenschutz":            "Datenschutz bedeutet: Deine Daten sollen sicher sein. Niemand darf sie ohne deine Erlaubnis weitergeben.",
   "spam":                   "Spam sind unerwünschte Nachrichten oder E-Mails. Du hast sie nicht angefragt. Oft enthalten sie Werbung oder sind gefährlich.",
   "phishing":               "Beim Phishing versucht jemand, dein Passwort oder deine Daten zu stehlen. Oft mit gefälschten E-Mails oder Webseiten.",
-  "link":                   "Ein Link ist ein anklickbares Wort oder Bild. Es führt dich zu einer anderen Seite oder Datei.",
+  "link":                   "Ein Link ist ein Wort oder Bild zum Antippen. Es führt dich zu einer anderen Seite oder Datei.",
   "qr-code":                "Ein QR-Code ist ein schwarzweißes Quadrat mit Muster. Du scannst es mit der Kamera deines Handys.",
   "update":                 "Ein Update ist eine neue Version eines Programms. Es repariert Fehler und macht das Gerät sicherer.",
   "ki":                     "KI steht für Künstliche Intelligenz. Das ist ein Computer-Programm. Es lernt. Und es löst selbst Aufgaben. Zum Beispiel ChatGPT.",
@@ -735,7 +735,7 @@ const GLOSSAR = {
   "viren":                  "Viren sind schädliche Programme. Sie können Daten stehlen oder das Gerät beschädigen.",
   "router":                 "Ein Router ist ein Gerät, das die Internetverbindung im Haus verteilt. Er gibt das WLAN-Signal aus.",
   "abo":                    "Ein Abo ist ein Vertrag. Du bekommst etwas regelmäßig. Und du zahlst regelmäßig Geld.",
-  "abo-falle":              "Eine Abo-Falle ist ein Trick. Du klickst auf etwas. Und plötzlich hast du einen teuren Vertrag.",
+  "abo-falle":              "Eine Abo-Falle ist ein Trick. Du tippst auf etwas. Und plötzlich hast du einen teuren Vertrag.",
   "abzocke":                "Abzocke ist ein Trick mit Geld. Jemand will dir Geld wegnehmen. Mit falschen Versprechen.",
   "fake news":              "Fake News sind falsche Nachrichten. Sie sehen echt aus. Aber sie stimmen nicht.",
   "fake-profil":            "Ein Fake-Profil ist ein falsches Profil. Die Person gibt sich als jemand anderes aus.",
@@ -1339,7 +1339,7 @@ function updateSoundButton() {
     button.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
     button.setAttribute(
       "aria-label",
-      soundEnabled ? "Töne sind an. Klicken zum Ausschalten." : "Töne sind aus. Klicken zum Einschalten."
+      soundEnabled ? "Töne sind an. Tippen zum Ausschalten." : "Töne sind aus. Tippen zum Einschalten."
     );
   });
 }
@@ -1372,7 +1372,7 @@ function updateMotionButton() {
     button.setAttribute("aria-pressed", motionEnabled ? "true" : "false");
     button.setAttribute(
       "aria-label",
-      motionEnabled ? "Bewegungen sind an. Klicken zum Ausschalten." : "Bewegungen sind aus. Klicken zum Einschalten."
+      motionEnabled ? "Bewegungen sind an. Tippen zum Ausschalten." : "Bewegungen sind aus. Tippen zum Einschalten."
     );
   });
 }
@@ -2273,7 +2273,7 @@ function renderCodeAsk() {
       ${codeError ? `<p class="code-error" role="status">Das war nicht dein Code. Versuch es nochmal. Es ist nichts passiert.</p>` : ""}
       <div class="sign-icon-grid">${codeIconGrid("codeTap")}</div>
       <button type="button" class="plain-back-button" onclick="codeForgot()">Ich weiß meinen Code nicht mehr</button>
-      <button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zurück zur Liste</button>
+      <button type="button" class="plain-back-button" onclick="renderProfilePicker()">← Zur Liste</button>
     </section>
   `;
   focusContent();
@@ -3109,11 +3109,11 @@ function answerDailyQuestion(index) {
   if (!daily || !box) return;
   const isCorrect = index === daily.q.correctIndex;
   const feedback = isCorrect
-    ? (daily.q.feedbackCorrect || "Das ist richtig.")
-    : (falschFeedback(daily.q, index) || "Das war nicht richtig. Das macht nichts.");
+    ? (daily.q.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
+    : (falschFeedback(daily.q, index) || RUECKMELDUNG.fehlerOk);
   playSound(isCorrect ? "correct" : "wrong");
   box.innerHTML = `
-        <h3>${isCorrect ? "✓ " + RUECKMELDUNG.passtAnsage : "Das macht nichts."}</h3>
+        <h3>${isCorrect ? "✓ " + RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</h3>
         <p class="daily-question-text">${escapeHtml(feedback)}</p>
         ${isCorrect ? "" : `<button type="button" class="review-chip" style="${getTopicColorStyle(daily.topic.id)}" onclick="renderTopicChoice('${escapeHtml(daily.topic.id)}')"><span aria-hidden="true">${getIconHtml(daily.topic.icon || "start")}</span><span>${escapeHtml(daily.topic.title)} nochmal ansehen</span></button>`}
       `;
@@ -4434,7 +4434,7 @@ function renderTopicChoice(topicId) {
 
       ${buildSupportBox()}
 
-      <button type="button" class="plain-back-button plain-back-button--end" onclick="renderMenu()">← Zur Themenübersicht</button>
+      <button type="button" class="plain-back-button plain-back-button--end" onclick="renderMenu()">← Zu den Themen</button>
     </section>
   `;
   focusContent();
@@ -4575,7 +4575,7 @@ function buildTaskHelpBox(hinweis, vorneDran, aufRueckmeldung) {
         <ul>
           ${aufRueckmeldung
             ? `<li>Lies die Erklärung noch einmal langsam.</li>
-          <li>Fehler sind in Ordnung. So lernst du.</li>`
+          <li>${escapeHtml(RUECKMELDUNG.fehlerOk)}</li>`
             : `<li>Lies die Frage noch einmal langsam.</li>
           <li>Schau dir alle Antworten an.</li>`}
           <li>Du kannst eine Pause machen.</li>
@@ -4856,6 +4856,13 @@ const RUECKMELDUNG = {
   nochNichtAnsage: "Diese Antwort passt noch nicht. Schau dir die Erklärung an.",
   entscheidungGut: "Diese Entscheidung schützt dich.",
   passendeAntwort: "Die passende Antwort ist:",
+  /* Kurzform für Rückmeldungen auf derselben Seite (Übungs-Handy, Postfach,
+     kurze Frage, Frage des Tages) – vorher stand dort „Richtig." / „Noch
+     nicht sicher." / „Schau mal:" (Gesamtprüfung V4, 25.09.2026). */
+  nochNichtKurz:   "Diese Antwort passt noch nicht.",
+  /* Ersatz, wenn eine Frage keine eigene Erklärung für falsch hat – vorher
+     „Das war leider falsch. Beim nächsten Mal klappt es besser." */
+  fehlerOk:        "Fehler sind in Ordnung. So lernst du.",
   /* `gelernt` ist seit dem 21.09.2026 NICHT mehr in Gebrauch (T07): Die
      Abschluss-Seite behauptete damit ein Lernergebnis, das nirgends gemessen
      wird. Der Wortlaut bleibt hier stehen, weil ihn die Prüfgruppe am
@@ -5534,7 +5541,7 @@ function renderKetteFilm() {
     <div class="kette-fuss">
       ${filmTakt > 0 ? `<button type="button" class="plain-back-button" onclick="filmZurueck()">← Ein Bild zurück</button>` : ""}
       <button type="button" class="plain-back-button" onclick="ketteStart('${escapeHtml(ketteId)}')">Film überspringen</button>
-      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">Zurück zur Lektion</button>
+      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">← Zur Lektion</button>
     </div>
   `;
   focusContent();
@@ -5678,7 +5685,7 @@ function renderKetteSchritt() {
       ${ketteIndex > 0 ? `<button type="button" class="plain-back-button" onclick="ketteZurueck()">← Ein Schritt zurück</button>` : ""}
       ${(ketteWillAusfuehrlich(ketteId) || ketteLaeufe(ketteId) >= 2)
         ? `<button type="button" class="plain-back-button" onclick="ketteKurzWaehlen()">Kurzen Plan zeigen</button>` : ""}
-      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">Zurück zur Lektion</button>
+      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">← Zur Lektion</button>
     </div>
   `;
   focusContent();
@@ -5737,7 +5744,7 @@ function renderKetteKurz() {
     </article>
     <div class="kette-fuss">
       <button type="button" class="plain-back-button" onclick="ketteAusfuehrlichWaehlen()">Lieber einzeln durchgehen</button>
-      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">Zurück zur Lektion</button>
+      <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">← Zur Lektion</button>
     </div>
   `;
   focusContent();
@@ -5848,7 +5855,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
   const isCorrect = index === Number(correctIndex);
   playSound(isCorrect ? "correct" : "wrong");
   const explanation = isCorrect
-    ? (practice.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
+    ? (practice.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
     : (falschFeedback(practice, index) || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
   const regelHinweis = isCorrect ? regelHinweisHtml(practice.remember, topic.id) : "";
@@ -6039,7 +6046,7 @@ function renderMiniCheck(topicId) {
       if (box) {
         box.classList.remove("is-hidden");
         box.innerHTML = `
-          <p class="mini-feedback-text"><strong>${richtig ? "Richtig." : "Schau mal:"}</strong> ${escapeHtml(mq.explanation || "")}</p>
+          <p class="mini-feedback-text"><strong>${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</strong> ${escapeHtml(mq.explanation || "")}</p>
           <button type="button" class="primary-action" onclick="renderCompletionPage('${escapeHtml(topic.id)}')">Weiter</button>`;
       }
     });
@@ -6224,7 +6231,7 @@ function renderCompletionPage(topicId) {
                 Mein Lernweg ansehen
               </button>
               <button type="button" class="link-action" onclick="renderMenu()">
-                Zur Themenübersicht
+                Zu den Themen
               </button>
             </div>
           </div>
@@ -6286,7 +6293,7 @@ function renderCompletionPage(topicId) {
           <div class="completion-links">
             <button type="button" class="link-action" onclick="renderCertificate('${escapeHtml(topic.id)}')">Urkunde ansehen</button>
             <button type="button" class="link-action" onclick="renderMyPath()">Mein Lernweg ansehen</button>
-            <button type="button" class="link-action" onclick="renderMenu()">Zur Themenübersicht</button>
+            <button type="button" class="link-action" onclick="renderMenu()">Zu den Themen</button>
           </div>
         </div>
       </article>
@@ -6413,16 +6420,16 @@ function renderEinfachQuizFeedback(optionIndex, isCorrect) {
 
   const feedbackText = isCorrect
     ? (q.feedbackCorrect || RUECKMELDUNG.passtAnsage)
-    : (falschFeedback(q, optionIndex) || "Das war leider falsch. Beim nächsten Mal klappt es besser.");
+    : (falschFeedback(q, optionIndex) || RUECKMELDUNG.fehlerOk);
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(topic.title, "Einfach-Quiz", "Antwort", isCorrect ? "Richtig!" : "Nochmal", 100);
+  setHeader(topic.title, "Einfach-Quiz", "Antwort", isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz, 100);
   setOrientation(`Du machst das Quiz: ${topic.title}.`);
 
   content.innerHTML = `
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
-      <h2 class="einfach-quiz-result-title">${isCorrect ? "✓ Richtig!" : "✗ Nicht ganz"}</h2>
+      <h2 class="einfach-quiz-result-title">${isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel}</h2>
       <p class="einfach-quiz-feedback-text">${escapeHtml(feedbackText)}</p>
       <div class="einfach-quiz-next-actions">
         <button type="button" class="primary-action" onclick="einfachQuizNext()">
@@ -6469,7 +6476,7 @@ function renderEinfachQuizResult() {
             Lektionen nochmal
           </button>
           <button type="button" class="link-action" onclick="renderMenu()">
-            Zur Themenübersicht
+            Zu den Themen
           </button>
         </div>
       </div>
@@ -6542,7 +6549,7 @@ function renderQuizFeedbackPage(index) {
   }
 
   const explanation = isCorrect
-    ? (q.feedbackCorrect || "Das ist sicher. Du hast gut entschieden.")
+    ? (q.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
     : (falschFeedback(q, index) || "Das ist nicht sicher. Du kannst die Frage noch einmal versuchen.");
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
   /* Deine Karte: Quizfragen haben KEIN remember-Feld (122 Fragen, keine
@@ -6632,7 +6639,7 @@ function renderQuizResult() {
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="renderCertificate('${escapeHtml(currentTopicId)}', ${quizScore}, ${total})">Urkunde ansehen</button>
         <button type="button" class="nav-button secondary" onclick="startQuiz('${escapeHtml(currentTopicId)}')">Quiz wiederholen</button>
-        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(currentTopicId)}')">Zurück zum Thema</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(currentTopicId)}')">← Zum Thema</button>
       </div>
     </article>
   `;
@@ -6705,7 +6712,7 @@ function startBigQuiz() {
           ${vorschlag
             ? `<button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(vorschlag.id)}')">Thema starten: ${escapeHtml(vorschlag.title)}</button>`
             : ""}
-          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zur Themenübersicht</button>
+          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zu den Themen</button>
         </div>
       </article>
     `;
@@ -6741,7 +6748,7 @@ function startRepeatQuiz() {
         <p>Du hast noch kein Thema fertig gemacht.</p>
         <p>Mach zuerst ein Thema fertig. Dann kannst du hier üben.</p>
         <div class="certificate-actions">
-          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zur Themenübersicht</button>
+          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zu den Themen</button>
         </div>
       </article>
     `;
@@ -6871,7 +6878,7 @@ function renderBigQuizResult() {
       <p>${escapeHtml(praise)}</p>
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="${bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()"}">Noch einmal üben</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
       </div>
     </article>
   `;
@@ -6984,7 +6991,7 @@ function startTrainingInbox() {
         ${buildRememberBox("Wichtig", "Alle Nachrichten hier sind erfunden. Es gibt keine Zeit-Grenze. Fehler sind erlaubt. Du kannst jederzeit aufhören.")}
         <div class="certificate-actions">
           <button type="button" class="quiz-link quiz-button" onclick="beginTraining()">${anzahl} Nachrichten prüfen</button>
-          <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+          <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
         </div>
       `}
     </article>
@@ -7103,7 +7110,7 @@ function answerTraining(index) {
   if (!feld) return;
   feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
   feld.innerHTML = `
-    <p class="sz-feedback-kopf">${richtig ? "Richtig." : "Noch nicht sicher."}</p>
+    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</p>
     ${schwerHtml}
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
@@ -7166,7 +7173,7 @@ function renderTrainingResult() {
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="beginTraining()">Noch einmal üben</button>
         <button type="button" class="nav-button secondary" onclick="renderRegelKarte()">Deine Karte ansehen</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
       </div>
     </article>
   `;
@@ -7399,7 +7406,7 @@ function renderScenarioChooser() {
       <h3>Wähle ein Thema</h3>
       <div class="action-grid">${karten}</div>
       <div class="certificate-actions">
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
       </div>
     </article>
   `;
@@ -7461,7 +7468,7 @@ function startScenario(topicId) {
       ${rundenWahl}
       <div class="certificate-actions">
         ${rundenWahl ? "" : `<button type="button" class="quiz-link quiz-button" onclick="beginScenario()">Üben starten</button>`}
-        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">← Zum Thema</button>
       </div>
     </article>
   `;
@@ -7592,7 +7599,7 @@ function answerScenario(index) {
   if (!feld) return;
   feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
   feld.innerHTML = `
-    <p class="sz-feedback-kopf">${richtig ? "Richtig." : "Noch nicht sicher."}</p>
+    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</p>
     ${schwerHtml}
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
@@ -7684,8 +7691,8 @@ function renderScenarioResult() {
           : ""}
         <button type="button" class="${(naechste && bestanden) ? "nav-button secondary" : "quiz-link quiz-button"}" onclick="beginScenario(${scenarioStufe})">${mehrereRunden ? escapeHtml(stufenName(scenarioStufe)) + " noch einmal" : "Noch einmal üben"}</button>
         ${mehrereRunden ? `<button type="button" class="nav-button secondary" onclick="startScenario('${escapeHtml(topic.id)}')">Andere Runde wählen</button>` : ""}
-        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">← Zum Thema</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
       </div>
     </article>
   `;
@@ -7746,8 +7753,8 @@ function renderCertificate(topicId, score, total) {
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
         ${(() => { const next = getNextTopicSuggestion(); return next && next.id !== topic.id ? `<button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(next.id)}')">Nächstes Thema: ${escapeHtml(next.title)}</button>` : ""; })()}
-        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zur Themenübersicht</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">← Zum Thema</button>
+        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
       </div>
     </article>
   `;
@@ -7802,7 +7809,7 @@ function renderMemoryCard(topicId) {
 
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="window.print()">Merk-Karte drucken</button>
-        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">Zurück zum Thema</button>
+        <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">← Zum Thema</button>
       </div>
     </article>
   `;
@@ -7891,7 +7898,7 @@ function renderAllMemoryCards() {
   content.innerHTML = `
     <section class="all-memory-page">
       <div class="all-memory-toolbar no-print">
-        <button type="button" class="plain-back-button" onclick="renderMenu()">← Zur Themenübersicht</button>
+        <button type="button" class="plain-back-button" onclick="renderMenu()">← Zu den Themen</button>
         <button type="button" class="quiz-link quiz-button" onclick="window.print()">Alle drucken</button>
       </div>
       <h2 class="all-memory-heading no-print">Alle Merk-Karten</h2>
@@ -8393,7 +8400,7 @@ function renderRegelKarte() {
       <div class="certificate-actions">
         ${z.gefunden > 0 ? `<button type="button" class="quiz-link quiz-button" onclick="druckeRegelKarte()">🖨 Deine Karte drucken</button>` : ""}
         <button type="button" class="nav-button secondary" onclick="renderScenarioChooser()">Üben und Regeln finden</button>
-        <button type="button" class="nav-button secondary" onclick="renderMyPath()">Zurück zu Mein Lernweg</button>
+        <button type="button" class="nav-button secondary" onclick="renderMyPath()">← Zu Mein Lernweg</button>
       </div>
     </article>
   `;

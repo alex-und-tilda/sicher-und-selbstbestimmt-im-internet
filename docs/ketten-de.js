@@ -49,7 +49,7 @@
    Beim Durchspielen der Seite fiel auf: Der Film baut eine Situation auf
    – ein Handy, eine eintreffende Nachricht – und genau in dem Moment, in
    dem der Plan beginnt, ist sie wieder weg. Auf dem Schritt steht dann
-   „Ich klicke nicht auf Links.", aber es liegt kein Link da. Der Knopf
+   „Ich tippe nicht auf Links.", aber es liegt kein Link da. Der Knopf
    „Gemacht" bezieht sich auf nichts.
 
    `situation` lässt die Nachricht während der ganzen Kette stehen. Sie
@@ -71,7 +71,7 @@
    DREI EBENEN – bewusste Abweichung von §2
    `tun` steht NUR EINMAL da und ist auf allen drei Ebenen gleich.
    Grund: Der Handlungssatz ist ein Merksatz, den die Person
-   wiedererkennen soll – „Ich klicke nicht auf Links." heißt auf
+   wiedererkennen soll – „Ich tippe nicht auf Links." heißt auf
    jeder Ebene dasselbe. Wer ihn je Ebene umformuliert, zerstört
    genau die Wiedererkennbarkeit, die ihn wirksam macht.
    Gestuft werden nur `warum` und `hilfe`, also die Begründung.
@@ -176,7 +176,7 @@ const KETTEN = {
         }
       },
       {
-        tun: "Ich klicke nicht auf Links.",
+        tun: "Ich tippe nicht auf Links.",
         pictogram: "pikto-link",
         warum: {
           leicht:   "Ein Link kann falsch sein. Dann landest du auf einer falschen Seite.",
