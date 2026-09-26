@@ -46,65 +46,120 @@
    passen. Prüfen mit: pruefeRegelZuordnung() in der Konsole.
    ============================================================= */
 
+/* Paket C (26.09.2026, Entscheidung B): Jede Regel hat einen eigenen
+   Merksatz und eine eigene Erklärung je Sprachstufe. kurz/was = Leichte
+   Sprache (Basis), einfach/standard daneben. Vorher gab es nur die
+   Leicht-Fassung, auch für Einfach und Alltag. Grundlage: Codex-Entwurf
+   „Paket 1“ (25.09.2026), angepasst und freigegeben von der nutzenden
+   Person (Regel-Namen_Vergleich_2026-09-26.md, außerhalb des Repos).
+   Gespeichert wird weiter nur die id – gesammelte Regeln bleiben. */
 const REGELN = [
   { id: "codes",     pikto: "pikto-key",
-    kurz: "Meine Codes sage ich niemandem.",
-    was:  "Passwort, PIN, TAN und Codes bleiben bei mir. Auch am Telefon. Auch bei der Bank.",
+    kurz: "Ich gebe keine Passwörter oder geheimen Codes weiter.",
+    was:  "Mit einem Passwort oder Code kommt jemand in dein Konto. Oder an dein Geld. Sag es niemandem. Schreib es auch nicht in eine Nachricht.",
+    einfach:  { kurz: "Passwörter und geheime Codes gebe ich niemandem – auch nicht am Telefon.",
+                was:  "Mit Passwörtern und Codes kommt man in dein Konto oder an dein Geld. Gib sie keiner anderen Person, auch wenn sie sagt: Ich bin von der Bank." },
+    standard: { kurz: "Passwörter und Sicherheitscodes gebe ich nie weiter – egal, wer fragt.",
+                was:  "Halte Anmelde- und Freigabecodes geheim. Teile sie weder in Nachrichten noch am Telefon – auch wenn die Anfrage scheinbar von einer vertrauten Person oder deiner Bank kommt." },
     muster: /code|pin\b|passwort|tan\b|geheim|doppelt sicher|bank fragt nie|anmeldung/i },
 
   { id: "links",     pikto: "pikto-link",
     kurz: "Ich tippe nicht auf fremde Links.",
-    was:  "Links in fremden Nachrichten tippe ich nicht an. QR-Bilder scanne ich nicht einfach.",
+    was:  "Ein Link führt zu einer Internet-Seite. Manche Links sind gefährlich. Auch Freunde können so einen Link schicken. Du bist unsicher? Dann tippe nicht drauf. Das gilt auch für QR-Codes.",
+    einfach:  { kurz: "Auf Links in fremden Nachrichten tippe ich nicht.",
+                was:  "Ein Link in einer fremden Nachricht kann auf eine gefälschte Seite führen. Auch Nachrichten von Freunden können so einen Link enthalten. Wenn du unsicher bist, tippe nicht darauf und frag lieber nach." },
+    standard: { kurz: "Links in fremden oder verdächtigen Nachrichten tippe ich nicht an.",
+                was:  "Ein vertrauter Absender macht einen Link nicht automatisch sicher. Prüfe eine unerwartete Aufforderung lieber über die App oder Seite, die du selbst aufrufst – oder hol dir Unterstützung. Das gilt auch für QR-Codes." },
     muster: /link|klick|antipp|scann|qr/i },
 
   { id: "selbst",    pikto: "pikto-phone",
-    kurz: "Ich gehe selbst hin.",
-    was:  "Ich öffne die App selbst. Ich rufe die Nummer an, die ich schon habe. Nicht die aus der Nachricht.",
+    kurz: "Ich öffne die App selbst. Oder ich rufe eine bekannte Nummer an.",
+    was:  "Eine Nachricht will etwas von dir. Öffne die App über das Zeichen auf deinem Handy. Oder nimm eine Nummer aus deinen eigenen Kontakten. Nimm keine Nummer aus der Nachricht.",
+    einfach:  { kurz: "Ich öffne die App selbst oder rufe eine schon bekannte Nummer an.",
+                was:  "Prüfe eine unerwartete Nachricht über einen Weg, den du selbst auswählst. Öffne zum Beispiel deine Bank-App oder ruf die Nummer auf deiner Bankkarte an." },
+    standard: { kurz: "Ich öffne die App selbst oder rufe eine Nummer an, die ich schon kenne – nicht die aus der Nachricht.",
+                was:  "Nutze weder den Link noch die Rückrufnummer aus der fraglichen Nachricht. Öffne die bereits eingerichtete App oder wähle eine Nummer, die du kennst oder selbst nachgeschlagen hast." },
     muster: /selbst öffn|eigene nummer|nummer.*(schon|karte)|app selbst|alte nummer|selbst zurück|lege ich auf|lege auf|rufe[^.]*selbst|bekannte nummer|neue nummer/i },
 
   { id: "geld",      pikto: "pikto-money",
-    kurz: "Bei Geld werde ich langsam.",
-    was:  "Für einen Gewinn zahle ich nie vorher. Sehr billig ist ein Warnzeichen. Abbrechen darf ich immer.",
+    kurz: "Erst prüfen. Dann bezahlen.",
+    was:  "Wofür sollst du bezahlen? Wer bekommt das Geld? Wie viel kostet alles zusammen? Kläre das zuerst. Für einen Gewinn zahlst du nie. Du kannst dir helfen lassen.",
+    einfach:  { kurz: "Ich prüfe zuerst, wofür ich bezahle.",
+                was:  "Kläre vor einer Zahlung den Grund, den Empfänger und alle Kosten. Für einen echten Gewinn musst du nichts bezahlen. Wenn etwas unklar ist, zahle noch nicht und hol dir Unterstützung." },
+    standard: { kurz: "Bevor ich bezahle, prüfe ich: wofür, an wen und wie viel.",
+                was:  "Prüfe, ob die Zahlung zu deinem Vorhaben passt und welche einmaligen oder laufenden Kosten entstehen. Echte Gewinne kosten nichts. Ist etwas unklar, gib die Zahlung noch nicht frei." },
     muster: /geld|zahl|gewinn|gebühr|bezahl|kauf|euro|vorkasse|rechnung|bestellt|kostenlos|impressum|zurückgeben|abo/i },
 
   { id: "druck",     pikto: "pikto-clock",
     kurz: "Stress heißt: Stopp.",
-    was:  "Sofort, schnell, nur heute: Das soll mein Nachdenken verhindern. Dann mache ich langsam.",
+    was:  "Eine Nachricht macht Druck. Zum Beispiel: Nur heute. Dann machst du Stopp. Du antwortest nicht sofort. Du zahlst nicht sofort. Du darfst dir Zeit nehmen.",
+    einfach:  { kurz: "Wenn mich jemand unter Druck setzt, mache ich erst einmal Stopp.",
+                was:  "Eine dringende Nachricht oder ein Countdown soll dich zu einer schnellen Entscheidung bringen. Du darfst unterbrechen und erst prüfen, bevor du antwortest, zahlst oder etwas sendest." },
+    standard: { kurz: "Bei Druck und Eile halte ich an und prüfe in Ruhe.",
+                was:  "Lass dich durch Drängen nicht zu einer unüberlegten Antwort, Zahlung oder Freigabe bewegen. Nimm dir Zeit für die Prüfung und nutze bei Bedarf Unterstützung." },
     muster: /stress|druck|draeng|dräng|\beile\b|sofort|hetzen|zeit-druck|zeitdruck|langsam|nachdenk|denke.*nach|komisch/i },
 
   { id: "bilder",    pikto: "pikto-photo",
-    kurz: "Ich denke nach, bevor ich sende.",
-    was:  "Ein Bild ist schnell verschickt und schwer zurückzuholen. Das gilt auch für das, was ich schreibe.",
+    kurz: "Ich prüfe mein Foto oder meine Nachricht vor dem Senden.",
+    was:  "Was ist zu sehen? Wer bekommt das? Ist eine andere Person auf dem Foto? Dann frag diese Person zuerst. Sie sagt Nein? Dann sende das Foto nicht.",
+    einfach:  { kurz: "Vor dem Senden prüfe ich den Inhalt und die Empfänger.",
+                was:  "Schau nach, was dein Foto oder deine Nachricht zeigt und wer sie bekommt. Frag andere Personen auf einem Foto, ob du es teilen darfst, und halte dich an ihre Antwort." },
+    standard: { kurz: "Vor dem Teilen prüfe ich Inhalt und Empfänger – und frage alle, die zu sehen sind.",
+                was:  "Achte auf private Angaben und darauf, wer den Inhalt bekommt. Teile Fotos anderer nur mit deren Zustimmung – ein Nein gilt auch in einer kleinen Gruppe. Was verschickt ist, lässt sich kaum zurückholen." },
     muster: /foto|bild(er)?\b|stor(y|ies)|senden|posten|poste\b|respektvoll/i },
 
   { id: "wersieht",  pikto: "pikto-lock",
-    kurz: "Ich bestimme, wer was von mir sieht.",
-    was:  "Meine Daten, mein Profil, meine Beiträge – und auch, wo ich gerade bin.",
+    kurz: "Ich wähle aus: Wer sieht meine Daten?",
+    was:  "Deine Daten sind zum Beispiel deine Adresse, deine Fotos und dein Standort. Der Standort ist dein Ort gerade jetzt. Prüfe: Wer sieht diese Daten? Das kannst du oft einstellen.",
+    einfach:  { kurz: "Ich entscheide selbst, wer meine Daten, Fotos und meinen Standort sieht.",
+                was:  "Prüfe, welche Personen oder Apps deine Angaben, Fotos und deinen Standort sehen. Stell die Freigabe so ein, dass sie zu dem passt, was du willst." },
+    standard: { kurz: "Wer meine Daten, Beiträge und meinen Standort sieht, lege ich selbst fest.",
+                was:  "Prüfe, wer Profil, Beiträge und Standort sehen kann, und begrenze Sichtbarkeit und App-Berechtigungen auf das, was du wirklich teilen willst. Ganz kontrollieren lässt sich die Weitergabe trotzdem nicht." },
     muster: /privat|wer sieht|wer.*sehen|öffentlich|profil|einstellung|gruppe|daten (gebe|weiter)|adresse|telefon-nummer|zeige nicht alles|standort/i },
 
   { id: "echt",      pikto: "pikto-stranger",
-    kurz: "Ich prüfe, wer da schreibt.",
-    was:  "Ist das wirklich die Person? Kenne ich sie? Bei einer neuen Nummer frage ich anders nach.",
+    kurz: "Ich prüfe: Wer schreibt mir?",
+    was:  "Eine Nachricht nennt einen bekannten Namen. Trotzdem kann sie von jemand anderem sein. Frag die Person selbst. Nutze dafür eine schon bekannte Nummer.",
+    einfach:  { kurz: "Ich prüfe, ob die Nachricht wirklich von dieser Person kommt.",
+                was:  "Ein bekannter Name oder ein Foto beweist noch nicht, wer dir schreibt. Frag bei einer unerwarteten Bitte über einen Kontakt nach, den du schon kennst." },
+    standard: { kurz: "Ein bekannter Name reicht mir nicht: Ich prüfe, wer wirklich schreibt.",
+                was:  "Verlass dich bei unerwarteten Anfragen nicht allein auf Namen, Profilfoto oder Stimme. Klär über einen dir bekannten Weg, ob wirklich diese Person Kontakt aufnimmt." },
     muster: /wirklich|echte? person|person.*echt|kenne ich|fremde|unbekannt|anfrage|kontakt|wer mir schreibt|antworte\b/i },
 
   { id: "wahr",      pikto: "pikto-search",
-    kurz: "Nicht alles ist wahr. Auch KI irrt sich.",
-    was:  "Bilder, Videos und Stimmen können gemacht sein. Ein Chatbot klingt sicher und liegt trotzdem falsch. Bei Aufregung prüfe ich erst.",
+    kurz: "Stimmt das? Ich prüfe es nach.",
+    was:  "Nicht alles im Internet ist wahr. Bilder, Videos und Stimmen können gefälscht sein. Auch KI macht Fehler. Prüfe es an einer anderen Stelle. Du kannst dir helfen lassen.",
+    einfach:  { kurz: "Wichtige Nachrichten prüfe ich an einer anderen Stelle nach – auch Antworten von KI.",
+                was:  "Schau nach, woher eine Aussage kommt und ob sie noch aktuell ist. Auch Bilder, Videos und eine überzeugende Antwort von einer KI können falsch sein." },
+    standard: { kurz: "Wichtige Aussagen prüfe ich an einer verlässlichen Quelle nach – auch Bilder, Videos und KI-Antworten.",
+                was:  "Prüfe Herkunft, Aktualität und Zusammenhang einer Information, möglichst bei der ursprünglichen Stelle. Mehrere Kopien derselben Behauptung sind keine unabhängige Bestätigung." },
     muster: /wahr|gefälscht|fake|stimmt|quelle|prüfe|nicht alles|aufregung|aufregend|glauben|video|stimme|anzeige|werbung|\bki\b|chatbot|künstlich/i },
 
   { id: "mitmachen", pikto: "pikto-no",
     kurz: "Ich muss nicht mitmachen.",
-    was:  "Gefährliche Trends mache ich nicht nach. Ich muss nicht auf alles antworten. Ich vergleiche mich nicht.",
+    was:  "Andere machen etwas vor. Du darfst Nein sagen. Du musst nichts Gefährliches nachmachen. Du musst auch kein privates Foto schicken.",
+    einfach:  { kurz: "Ich entscheide selbst, ob ich mitmache.",
+                was:  "Du darfst eine Aktion ablehnen, auch wenn andere mitmachen. Du musst weder eine gefährliche Mutprobe nachmachen noch ein privates Bild schicken." },
+    standard: { kurz: "Ob ich mitmache, entscheide ich selbst – auch wenn alle anderen mitmachen.",
+                was:  "Gruppendruck verpflichtet dich zu nichts. Du darfst Trends, Mutproben oder Aufforderungen zu privaten Bildern ablehnen und bei weiterem Druck Unterstützung holen." },
     muster: /nachmach|nicht nach|trend|gefährlich|mutprobe|reagieren|vergleich/i },
 
   { id: "aufhoeren", pikto: "pikto-pause",
-    kurz: "Ich darf aufhören. Immer.",
-    was:  "Pause machen, weglegen, abbrechen. Auch mitten im Kauf. Auch mitten im Gespräch.",
+    kurz: "Ich darf eine Pause machen. Ich darf aufhören.",
+    was:  "Du kannst ein Video stoppen. Du kannst einen Chat beenden. Du kannst das Handy weglegen. Auch mittendrin darfst du aufhören.",
+    einfach:  { kurz: "Ich darf jederzeit eine Pause machen oder aufhören.",
+                was:  "Du kannst beim Videoschauen, in einem Chat oder bei einem Kauf eine Pause machen oder aufhören – auch wenn du schon angefangen hast." },
+    standard: { kurz: "Ich darf jederzeit pausieren oder aufhören – auch mittendrin.",
+                was:  "Du bestimmst, ob du ein Video, ein Gespräch oder einen Kauf fortsetzt. Unterbrechen oder abbrechen ist jederzeit möglich." },
     muster: /pause|aufhör|weglegen|stopp|abbrech|zeit für|genug|darf.*stopp/i },
 
   { id: "hilfe",     pikto: "pikto-help",
-    kurz: "Ich hole Hilfe. Das ist stark.",
-    was:  "Ich zeige die Nachricht einer Person, der ich vertraue. Vorher lösche ich nichts. Ich bin nicht allein.",
+    kurz: "Ich hole mir Hilfe.",
+    was:  "Sprich mit einer vertrauten Person. Erzähle: Das ist passiert. Die Person hilft dir nicht? Dann frag eine andere Person. Du bist nicht allein.",
+    einfach:  { kurz: "Ich hole mir Unterstützung, wenn ich sie brauche.",
+                was:  "Sprich mit einer Person, der du vertraust, oder mit einer Beratungsstelle. Wenn die erste Person nicht helfen kann, darfst du jemand anderen fragen." },
+    standard: { kurz: "Ich hole mir Unterstützung – bei einer vertrauten Person oder einer Beratungsstelle.",
+                was:  "Wende dich bei Unsicherheit oder Problemen an eine vertraute Person oder eine Beratungsstelle. Hilfe ist auch dann möglich, wenn du schon reagiert hast." },
     muster: /hilfe|hilft|unterstützung|vertrau|jemand|melde|blockier|allein|erzähl|zeige die nachricht|gefühle|sprechen|plan|helfen/i }
 ];
 
@@ -197,6 +252,7 @@ const REGEL_SAETZE = {
     "Stress und Drohung sind Warnzeichen.", // betrug
     "Ich lasse mich nicht drängen.", // betrug
     "Stress und Gewinn: Stopp machen.", // betrug
+    "Aufregung ist ein Warnzeichen. Ich mache Stopp.", // fakes (Kurz, Paket C)
     "Ich lasse mich nicht hetzen.", // einkaufen
     "Ich lasse mich beim Einkaufen nicht hetzen.", // einkaufen
     "Ich prüfe in Ruhe. Ich lasse mich nicht hetzen.", // einkaufen
@@ -274,7 +330,6 @@ const REGEL_SAETZE = {
     "Nicht jedes Video ist echt.", // tiktok
     "Auch Videos und Stimmen können gefälscht sein.", // tiktok
     "TikTok zeigt dir nur bestimmte Videos.", // tiktok
-    "TikTok zeigt mir nur bestimmte Videos.", // tiktok
     "KI ist ein Programm. Kein Mensch.", // ki
     "KI kann Fehler machen.", // ki
     "Ich prüfe wichtige Antworten.", // ki
@@ -343,7 +398,6 @@ const REGEL_SAETZE = {
     "Ich hole Unterstützung bei Beleidigungen.", // facebook
     "Gemeinheit ist nicht meine Schuld. Ich hole Hilfe.", // facebook
     "Ich blockiere. Ich melde. Ich hole Hilfe.", // facebook
-    "Komische Nachrichten zeige ich.", // facebook
     "Ich hole Unterstützung bei verletzenden Kommentaren.", // instagram, tiktok
     "Bei Stress zeige ich es einer Person, der ich vertraue.", // instagram
     "Unbekannte Nachrichten: vertraute Person fragen.", // instagram
@@ -371,14 +425,14 @@ const REGEL_SAETZE = {
     "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.", // betrug
     "Betrug ist nicht meine Schuld. Ich hole Hilfe.", // betrug
     "Bei Beleidigungen hole ich Unterstützung.", // facebook
-    "Unbekannte Nachrichten: erst fragen." // whatsapp
+    "Unbekannte Nachrichten: erst fragen.", // whatsapp
+    "Erst fragen. Dann entscheiden." // datenschutz – vorher „keine“, inhaltlich Hilfe holen (Paket C, Prüfgruppen-Test C-3)
   ],
   keine: [
     "Ich nehme ein gutes, langes Passwort.", // datenschutz
     "Ich nehme ein langes Passwort.", // datenschutz
     "Doppelt sichern schützt mein Konto.", // datenschutz
     "Mit Passkey brauche ich kein Passwort.", // datenschutz
-    "Erst fragen. Dann entscheiden.", // datenschutz
     "KI ist in vielen Apps. Auch wenn ich sie nicht sehe.", // ki
     "KI ist in vielen Apps.", // ki
     "Online-Käufe kann ich oft 14 Tage zurückgeben." // einkaufen
@@ -500,4 +554,13 @@ function pruefeRegelZuordnung() {
       return r.id + ": " + proRegel[r.id].saetze + " Sätze, " + Object.keys(proRegel[r.id].themen).length + " Themen";
     })
   };
+}
+
+/* Merksatz und Erklärung einer Regel in der gewählten Sprachstufe.
+   Fehlt eine Stufe, gilt die nächst einfachere (wie resolveLessonContent). */
+function regelText(r, stufe) {
+  if (!r) return { kurz: "", was: "" };
+  const lvl = stufe || (typeof languageLevel !== "undefined" ? languageLevel : "leicht");
+  const v = lvl === "standard" ? (r.standard || r.einfach) : (lvl === "einfach" ? r.einfach : null);
+  return { kurz: (v && v.kurz) || r.kurz, was: (v && v.was) || r.was };
 }

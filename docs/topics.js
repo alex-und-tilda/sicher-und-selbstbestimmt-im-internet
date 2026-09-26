@@ -26,16 +26,18 @@ const topics = [
         "icon": "lock",
         "text": [
           {
-            "text": "Hier lernst du etwas über Datenschutz.",
+            "text": "Stell dir vor: Eine App will deine Adresse wissen.",
             "pictogram": "pikto-data"
+          },
+          {
+            "text": "Und dein Geburts-Datum."
+          },
+          {
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Du lernst: Welche Daten sind privat?",
             "pictogram": "pikto-data"
-          },
-          {
-            "text": "Du übst sichere Entscheidungen.",
-            "pictogram": "pikto-lock"
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -919,12 +921,14 @@ const topics = [
         "icon": "message",
         "text": [
           {
-            "text": "Hier lernst du etwas über WhatsApp.",
+            "text": "Stell dir vor: Eine fremde Nummer schreibt dir.",
             "pictogram": "pikto-screen"
           },
           {
-            "text": "Du übst sichere Entscheidungen.",
-            "pictogram": "pikto-message"
+            "text": "In der Nachricht ist ein Link."
+          },
+          {
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -1604,12 +1608,11 @@ const topics = [
         "icon": "message",
         "text": [
           {
-            "text": "Hier lernst du etwas über Facebook.",
+            "text": "Stell dir vor: Eine fremde Person will bei Facebook dein Freund sein.",
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du übst sichere Entscheidungen.",
-            "pictogram": "pikto-message"
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -2216,12 +2219,14 @@ const topics = [
         "icon": "photo",
         "text": [
           {
-            "text": "Hier lernst du etwas über Instagram.",
+            "text": "Stell dir vor: Du willst ein Foto bei Instagram posten.",
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Du übst sichere Entscheidungen.",
-            "pictogram": "pikto-photo"
+            "text": "Deine Freundin ist auch auf dem Foto."
+          },
+          {
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -2831,12 +2836,11 @@ const topics = [
         "icon": "help",
         "text": [
           {
-            "text": "Hier lernst du etwas über YouTube.",
+            "text": "Stell dir vor: Ein Video bei YouTube erzählt etwas sehr Überraschendes.",
             "pictogram": "pikto-help"
           },
           {
-            "text": "Du übst sichere Entscheidungen.",
-            "pictogram": "pikto-help"
+            "text": "Stimmt das? Das lernst du hier."
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -3418,12 +3422,14 @@ const topics = [
         "icon": "photo",
         "text": [
           {
-            "text": "Hier lernst du etwas über Snapchat.",
+            "text": "Stell dir vor: Jemand bei Snapchat will ein Foto von dir.",
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du übst sichere Entscheidungen.",
-            "pictogram": "pikto-photo"
+            "text": "Du willst das nicht."
+          },
+          {
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -3974,12 +3980,11 @@ const topics = [
         "icon": "help",
         "text": [
           {
-            "text": "Hier lernst du etwas über TikTok.",
+            "text": "Stell dir vor: Bei TikTok machen viele einen gefährlichen Trend nach.",
             "pictogram": "pikto-help"
           },
           {
-            "text": "Du übst sichere Entscheidungen.",
-            "pictogram": "pikto-help"
+            "text": "Musst du mitmachen? Das lernst du hier."
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -4508,7 +4513,9 @@ const topics = [
           "TikTok merkt sich: Das gefällt dir.",
           "Es zeigt dir immer mehr davon.",
           "Dann siehst du oft das Gleiche.",
-          "Schau auch andere Kanäle an."
+          "Schau auch andere Kanäle an.",
+          "Manche Videos zeigen gefährliche Trends.",
+          "Du musst nicht mitmachen."
         ],
         "remember": "TikTok zeigt dir nur bestimmte Videos."
       },
@@ -5174,8 +5181,14 @@ const topics = [
         "icon": "ki",
         "text": [
           {
-            "text": "Hier lernst du etwas über KI.",
+            "text": "Stell dir vor: Du stellst einer KI eine Frage.",
             "pictogram": "pikto-ki"
+          },
+          {
+            "text": "Sie antwortet sofort."
+          },
+          {
+            "text": "Stimmt die Antwort? Das lernst du hier."
           },
           {
             "text": "KI bedeutet: Künstliche Intelligenz.",
@@ -5845,6 +5858,8 @@ const topics = [
           "KI kann auch Falsches sagen.",
           "KI kann Bilder fälschen.",
           "KI kann Stimmen nachmachen.",
+          "Eine bekannte Stimme will Geld? Dann legst du auf.",
+          "Du rufst die Person selbst an.",
           "Du glaubst nicht alles.",
           "Du fragst eine vertraute Person."
         ],
@@ -5890,8 +5905,14 @@ const topics = [
         "icon": "fake",
         "text": [
           {
-            "text": "Hier lernst du etwas über Fakes.",
+            "text": "Stell dir vor: Eine Nachricht macht dich sehr wütend.",
             "pictogram": "pikto-fake"
+          },
+          {
+            "text": "Du willst sie sofort teilen."
+          },
+          {
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Fake bedeutet: gefälscht oder nicht echt.",
@@ -6582,8 +6603,14 @@ const topics = [
         "icon": "betrug",
         "text": [
           {
-            "text": "Hier lernst du etwas über Betrug im Internet.",
+            "text": "Stell dir vor: Eine SMS sagt: Du hast gewonnen.",
             "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Du sollst nur schnell etwas bezahlen."
+          },
+          {
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Betrug kann jedem Menschen passieren.",
@@ -7454,6 +7481,8 @@ const topics = [
         "text": [
           "Du zahlst kein Geld.",
           "Du gibst keine Daten ein.",
+          "Eine Nachricht sagt: Mit deinem Bank-Konto stimmt etwas nicht.",
+          "Dann öffnest du die Bank-App selbst.",
           "Du sagst es einer vertrauten Person.",
           "Die Person hilft dir."
         ],
@@ -7499,8 +7528,14 @@ const topics = [
         "icon": "einkaufen",
         "text": [
           {
-            "text": "Hier lernst du etwas über Einkaufen im Internet.",
+            "text": "Stell dir vor: Ein Shop im Internet ist sehr billig.",
             "pictogram": "pikto-link"
+          },
+          {
+            "text": "Du sollst vorher bezahlen."
+          },
+          {
+            "text": "Was machst du? Das lernst du hier."
           },
           {
             "text": "Du lernst: Wie erkenne ich gute Shops?",

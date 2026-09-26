@@ -18,6 +18,9 @@
 
 let currentTopicId = null;
 let currentMode = "full";
+/* Einmal-Schalter: Die nächste Seite wird ohne automatisches Vorlesen
+   aufgebaut (siehe setTopicAmount). */
+let stillerNeuaufbau = false;
 let currentStep = 0;
 /* Richtung des Seitenwechsels für das sanfte Blättern (Weiter = vorwärts). */
 let pageDirection = "forward";
@@ -1317,8 +1320,11 @@ function focusContent() {
   }
   content.focus();
   /* Hör-Modus („Mit Hilfe der App"): jede Seite liest sich selbst vor –
-     sanft verzögert, jederzeit mit Stopp abbrechbar (Angebot, kein Zwang). */
-  if (typeof autoRead !== "undefined" && autoRead && supportsSpeech()) {
+     sanft verzögert, jederzeit mit Stopp abbrechbar (Angebot, kein Zwang).
+     Ausnahme: ein stiller Neuaufbau nach einer kleinen Wahl. */
+  const leise = stillerNeuaufbau;
+  stillerNeuaufbau = false;
+  if (!leise && typeof autoRead !== "undefined" && autoRead && supportsSpeech()) {
     window.setTimeout(() => { if (autoRead) readStart(); }, 450);
   }
   const reduceMotion = !motionEnabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -2247,8 +2253,15 @@ function weiterNachThema(topicId) {
     : () => renderMyPath();
   if (!restfragenOffen()) return ziel();
   pSet(SETUP_REST_KEY, "1");
+  /* Paket C (26.09.2026): Die Vorwissen-Frage steuert nur die Vorauswahl von
+     Kurz/Mehr. Wer schon selbst gewählt hat, dem folgt die Vorauswahl ohnehin
+     (lastAmountChoice) – die Frage hielt nur auf dem Weg zum nächsten Thema
+     auf (Prüfgruppen-Test B-e). Die Vorlese-Frage kommt nur, wenn sie noch
+     offen ist. */
+  const vorwissenNoetig = !lastAmountChoice;
+  if (!vorwissenNoetig && !vorleseFrageOffen()) return ziel();
   setupWeiterZu = ziel;
-  return renderVorwissen();
+  return vorwissenNoetig ? renderVorwissen() : renderVorleseFrage();
 }
 
 /* ============================================================
@@ -2892,7 +2905,10 @@ function renderSampleFinder(round) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Passende Stufe finden", "Beispiel " + (round + 1) + " von " + SAMPLE_ROUNDS.length, "Passende Stufe finden", Math.round((round / SAMPLE_ROUNDS.length) * 100));
-  setOrientation("Du bist am Anfang. Wir finden die passende Sprache für dich.");
+  /* Paket C (26.09.2026): „Frage 1 von 2" hörbar und sichtbar – vorher sahen
+     beide Runden gleich aus, die Person konnte denken, ihr Tippen hat nicht
+     geklappt (Prüfgruppen-Test B-a). */
+  setOrientation(`Du bist am Anfang. Wir finden die passende Sprache für dich. Frage ${round + 1} von ${SAMPLE_ROUNDS.length}.`);
   showNav(false, false);
 
   const r = SAMPLE_ROUNDS[round];
@@ -3680,10 +3696,10 @@ function renderMyPath() {
         kz.gefunden === 0
           ? "Beim Üben sammelst du deine eigenen Regeln."
           : (kz.gefunden < kz.gesamt
-              ? "Dir fehlen noch " + (kz.gesamt - kz.gefunden) + " " + (kz.gesamt - kz.gefunden === 1 ? "Regel" : "Regeln") + ". " + (kz.sitzt === 1 ? "Davon sitzt 1." : "Davon sitzen " + kz.sitzt + ".")
+              ? "Dir fehlen noch " + (kz.gesamt - kz.gefunden) + " " + (kz.gesamt - kz.gefunden === 1 ? "Regel" : "Regeln") + ". " + (kz.sitzt > 0 ? kz.sitzt + " davon hast du in 2 Themen erkannt." : "")
               : (kz.sitzt < kz.gesamt
-                  ? (kz.sitzt === 1 ? "Alle Regeln gefunden. Eine davon sitzt schon." : "Alle Regeln gefunden. " + kz.sitzt + " davon sitzen schon.")
-                  : "Alle Regeln sitzen. Deine Karte ist voll."))
+                  ? "Alle Regeln gefunden. " + kz.sitzt + " davon hast du schon in 2 Themen erkannt."
+                  : "Alle Regeln hast du in 2 Themen erkannt. Deine Karte ist voll."))
       }</span>
     </button>`;
 
@@ -4343,7 +4359,12 @@ function setTopicAmount(topicId, amount) {
   if (getTopicById(topicId)) topicAmounts[topicId] = wahl;
   lastAmountChoice = wahl;
   saveTopicAmounts();
+  /* Hör-Modus: Nach einer kleinen Wahl nicht die ganze Seite noch einmal
+     vorlesen (vorher 10 Ansagen), sondern nur bestätigen, was gewählt ist
+     und was jetzt kommt (Prüfgruppen-Test B-c, 26.09.2026). */
+  stillerNeuaufbau = true;
   renderTopicChoice(topicId);
+  if (autoRead) readShortText((wahl === "short" ? "Kurz" : "Mehr") + " ist ausgewählt. Tippe auf: Lernen starten.");
 }
 
 /* Auch der Weg über „Mehr lernen" oder „Nochmal von vorne" ist eine Wahl –
@@ -4471,9 +4492,12 @@ function renderTopicChoice(topicId) {
               ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', '${amount}')`)}
               ${merkChip}${alltagUebung}${uebung}${training}`)}`;
         }
+        /* Paket C (26.09.2026): „Lernen starten" steht UNTER der Mengen-Wahl.
+           Vorher stand der große Knopf darüber – wer ihn tippte, bevor er die
+           Wahl sah, bekam die Vorauswahl (Prüfgruppen-Test B-c). */
         return `
-          <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', '${amount}')">Lernen starten</button>
           ${amountToggle}
+          <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', '${amount}')">Lernen starten</button>
           ${spaeterBlock(FUEHRUNG_TEXT.spaeterAuf, `
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
             ${merkChip}${alltagUebung}${uebung}${training}`)}`;
@@ -4676,7 +4700,7 @@ function getLessonsForMode(topic, mode) {
       const rahmen = [];
       if (start && start.module === "Start") rahmen.push(start);
       rahmen.push(...topic.einfachLessons);
-      if (ende && ende !== start && /merke ich mir/i.test(ende.title || "")) rahmen.push(kurzZusammenfassung(topic, ende));
+      if (ende && ende !== start && /merke ich mir/i.test(ende.title || "")) rahmen.push(zusammenfassungFuerWeg(topic, topic.einfachLessons, ende, "_schlussKurz"));
       return rahmen;
     }
     /* Rueckfallebene fuer Themen OHNE einfachLessons. Aktuell haben alle 12
@@ -4687,37 +4711,68 @@ function getLessonsForMode(topic, mode) {
       return topic.shortLessonIndexes.map(index => topic.lessons[index]).filter(Boolean);
     }
   }
+  const letzte = topic.lessons[topic.lessons.length - 1];
+  if (letzte && /merke ich mir/i.test(letzte.title || "")) {
+    return topic.lessons.slice(0, -1).concat(zusammenfassungFuerWeg(topic, topic.lessons, letzte, "_schlussLang"));
+  }
   return topic.lessons;
 }
 
-/* Kurz-Weg: „Das merke ich mir" nennt nur, was der Kurz-Weg gezeigt hat –
-   die Merksätze seiner eigenen Lektionen, in jeder Sprachstufe. Vorher lieh
-   er sich die Liste des langen Wegs und nannte Regeln, die gar nicht
-   vorkamen, z. B. „Fotos prüfen" bei WhatsApp (Prüfgruppen-Test F5,
-   26.09.2026). Einmal je Thema gebaut, damit Fortschritt und Rück-Anker
-   immer dasselbe Objekt sehen. */
-function kurzZusammenfassung(topic, ende) {
-  if (topic._kurzSchluss) return topic._kurzSchluss;
-  const merk = stufe => topic.einfachLessons
-    .map(l => ({ text: (resolveLessonContent(l, stufe) || l).remember, pictogram: l.pictogram }))
+/* „Das merke ich mir" – für beide Wege (Paket C, 26.09.2026).
+   Die Seite nennt die REGELN, die dieser Weg geübt hat, mit genau dem Satz
+   der Regel-Karte in der gewählten Stufe (eine Regel, ein Satz). Danach die
+   Merksätze, die zu keiner Regel gehören (reines Wissen, z. B. „KI ist in
+   vielen Apps."). Vorher stand hier eine eigene Liste mit anderen
+   Formulierungen; der Kurz-Weg nannte sogar Regeln, die er nicht zeigte
+   (Prüfgruppen-Test C-1, F5). Einmal je Thema und Weg gebaut, damit
+   Fortschritt und Rück-Anker immer dasselbe Objekt sehen. */
+function regelZuordnungTabelle(satz) {
+  const k = String(satz || "").trim();
+  const tabelle = !!k && (typeof REGEL_ZUORDNUNG !== "undefined") && Object.prototype.hasOwnProperty.call(REGEL_ZUORDNUNG, k);
+  return { tabelle: tabelle, rid: tabelle ? REGEL_ZUORDNUNG[k] : null };
+}
+
+/* Regeln, die die Übungen eines Wegs üben – in der Reihenfolge der Schritte. */
+function regelIdsAusUebungen(lektionen) {
+  const ids = [];
+  (lektionen || []).forEach(l => {
+    const z = regelZuordnungTabelle(l && l.practice && l.practice.remember);
+    if (z.rid && ids.indexOf(z.rid) === -1) ids.push(z.rid);
+  });
+  return ids;
+}
+
+function zusammenfassungFuerWeg(topic, lektionen, ende, schluessel) {
+  if (topic[schluessel]) return topic[schluessel];
+  const regelIds = regelIdsAusUebungen(lektionen.filter(l => l && l !== ende && l.module !== "Start")), wissen = [];
+  /* Regeln nur aus den Übungen – genau das zählt auch die Regel-Karte.
+     Dazu Merksätze der Lektionen, die reines Wissen sind (keine Regel). */
+  lektionen.forEach(l => {
+    if (!l || l === ende || l.module === "Start") return;
+    const lek = regelZuordnungTabelle(l.remember);
+    if (lek.tabelle && !lek.rid) wissen.push({ lektion: l });
+  });
+  const regeln = regelIds.map(id => regelById(id)).filter(Boolean);
+  const liste = stufe => regeln.map(r => ({ text: regelText(r, stufe).kurz, pictogram: r.pikto }))
+    .concat(wissen.map(w => ({ text: (resolveLessonContent(w.lektion, stufe) || w.lektion).remember, pictogram: w.lektion.pictogram })))
     .filter(x => x.text);
   const ev = (ende.versions && ende.versions.einfach) || {};
   const sv = (ende.versions && ende.versions.standard) || {};
-  topic._kurzSchluss = Object.assign({}, ende, {
-    text: [{ text: "Das merkst du dir aus diesem Thema:", pictogram: "pikto-done" }],
-    bullets: merk("leicht"),
+  topic[schluessel] = Object.assign({}, ende, {
+    text: [{ text: "Das sind deine Regeln aus diesem Thema:", pictogram: "pikto-done" }],
+    bullets: liste("leicht"),
     versions: Object.assign({}, ende.versions, {
       einfach: Object.assign({}, ev, {
-        text: [{ text: "Diese Sätze aus dem Thema kannst du dir gut merken:" }],
-        bullets: merk("einfach").map(x => x.text)
+        text: [{ text: "Diese Regeln aus dem Thema kannst du dir gut merken:" }],
+        bullets: liste("einfach").map(x => x.text)
       }),
       standard: Object.assign({}, sv, {
-        text: [{ text: "Das Wichtigste im Überblick: " + merk("standard").map(x => x.text).join(" ") }],
+        text: [{ text: "Die Regeln aus diesem Thema im Überblick: " + liste("standard").map(x => x.text).join(" ") }],
         bullets: []
       })
     })
   });
-  return topic._kurzSchluss;
+  return topic[schluessel];
 }
 
 /* Kurz-Weg: Die Ziele sind die Titel seiner Lektionen. Die Lernziele des
@@ -4956,6 +5011,13 @@ const RUECKMELDUNG = {
   /* Ersatz, wenn eine Frage keine eigene Erklärung für falsch hat – vorher
      „Das war leider falsch. Beim nächsten Mal klappt es besser." */
   fehlerOk:        "Fehler sind in Ordnung. So lernst du.",
+  /* Abschluss-Seite (Paket C, 26.09.2026) – neu, freigabepflichtig (§13). */
+  regelnGeuebt:    "Diese Regeln hast du geübt:",
+  regelnThema:     "Diese Regeln gehören zu diesem Thema:",
+  kennstDuAus:     "Kennst du auch aus:",
+  mehrZumThema:    "Mehr zu diesem Thema",
+  wieIstEsJetzt:   "Wie ist es jetzt für dich?",
+  kennstDuFrage:   "Kennst du das schon?",
   /* `gelernt` ist seit dem 21.09.2026 NICHT mehr in Gebrauch (T07): Die
      Abschluss-Seite behauptete damit ein Lernergebnis, das nirgends gemessen
      wird. Der Wortlaut bleibt hier stehen, weil ihn die Prüfgruppe am
@@ -4966,11 +5028,11 @@ const RUECKMELDUNG = {
   /* T07 (21.09.2026): getrennte Wörter für „darum ging es" und „das kannst
      du schon". Die App weiß nur das Erste. Das Zweite sagt die Person selbst.
      Freigabepflichtig – für die Prüfgruppe geflaggt (§13). */
-  zieleThema:      "Darum ging es in diesem Thema:",
-  zieleHinweis:    "Du hast alle Schritte gemacht. Was davon schon sicher sitzt, weißt du selbst am besten.",
+  zieleThema:      "Darum ging es in diesem Thema:",  /* seit 26.09.2026 nicht mehr in Gebrauch (Abschluss Paket C) */
+  zieleHinweis:    "Du hast alle Schritte gemacht. Kannst du es schon sicher? Das weißt du selbst am besten.",  /* seit 26.09.2026 nicht mehr in Gebrauch (Abschluss Paket C) */
   themaGeschafft:  "Thema geschafft",
-  deinThema:       "Dein Thema:",
-  themaText:       "Du hast alle Schritte gemacht. Du kannst sie jederzeit wiederholen.",
+  deinThema:       "Dein Thema:",  /* seit 26.09.2026 nicht mehr in Gebrauch (Abschluss Paket C) */
+  themaText:       "Du hast alle Schritte gemacht. Du kannst sie jederzeit wiederholen.",  /* seit 26.09.2026 nicht mehr in Gebrauch (Abschluss Paket C) */
   eineSache:       "Eine Sache für heute",
   quizAlle:        "Du hast alle Fragen richtig beantwortet.",
   quizNochmal:     "Du kannst die Fragen noch einmal üben. Die Erklärungen helfen dir dabei.",
@@ -5917,8 +5979,25 @@ function questionPikto(q) {
   return `<img class="question-pikto" src="${pictoSrc(q.pictogram)}" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">`;
 }
 
+/* Paket C Schritt 5 (26.09.2026): „Kennst du das schon?" VOR der Frage –
+   aber nur das Thema, nicht die Regel. Sonst wäre die Antwort verraten und
+   der Übungs-Effekt weg (§3; Codex-Entwurf: vorher höchstens als Hilfe).
+   Der Satz ist ein Anstoß zum Erinnern und erscheint nur, wenn die Regel
+   in einem ANDEREN Thema schon richtig angewendet wurde (Prüfgruppen-Test
+   C-3: die Wiedererkennung kam bisher erst nach der Antwort). */
+function kennstDuHinweisHtml(satz, themaId) {
+  const z = regelZuordnungTabelle(satz);
+  if (!z.rid || !themaId) return "";
+  const andere = regelThemen(z.rid).filter(t => t !== themaId)
+    .map(t => { const x = getTopicById(t); return x ? x.title : null; }).filter(Boolean);
+  if (!andere.length) return "";
+  const liste = andere.length > 1 ? andere.slice(0, -1).join(", ") + " und " + andere[andere.length - 1] : andere[0];
+  return `<p class="kennst-du-hinweis"><strong>${RUECKMELDUNG.kennstDuFrage}</strong> Das kam schon bei ${escapeHtml(liste)} vor.</p>`;
+}
+
 function buildPractice(practice) {
   const question = practice.question || "";
+  const aktuell = (typeof getCurrentTopic === "function") ? getCurrentTopic() : null;
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
   const correctIndex = Number(practice.correctIndex ?? 0);
   const answerHtml = answers.map((answer, index) => `
@@ -5930,6 +6009,7 @@ function buildPractice(practice) {
   return `
     <div class="practice-box practice-box--frage">
       <h3 class="sr-only">Übung</h3>
+      ${aktuell ? kennstDuHinweisHtml(practice.remember, aktuell.id) : ""}
       ${buildFrage({ frage: question, pikto: questionPikto(practice), antworten: answerHtml, hilfe: buildTaskHelpBox(taskHint(practice, "lektion"), true) })}
     </div>
   `;
@@ -5952,11 +6032,11 @@ function renderPracticeFeedbackPage(index, correctIndex) {
     ? (practice.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
     : (falschFeedback(practice, index) || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
-  const regelHinweis = isCorrect ? regelHinweisHtml(practice.remember, topic.id) : "";
+  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(practice.remember) : null, topic.id, isCorrect);
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
+  setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel, 100);
   setOrientation(`Du übst: ${topic.title}.`);
 
   content.innerHTML = `
@@ -6156,36 +6236,10 @@ function renderMiniCheck(topicId) {
    lernende Person hat ihren eigenen Zuwachs nie gesehen. Der Vergleich
    bleibt in der Sitzung, es wird nichts gespeichert (§14).
    PRUEFGRUPPE: Wortlaut "Das war das Thema. Wie ist es jetzt?" testen (§13). */
-/* Lernziele am Ende einlösen (Prüfbericht B13).
-   Schritt 1 kündigt unter „Was du hier lernst:" drei Ziele an. Danach kamen
-   sie nie wieder vor: die Abschluss-Seite zeigte nur die Merkregeln, in
-   anderer Grammatik. Bei TikTok, Betrug, Hilfe und KI war am Ende kein
-   einziges der angekündigten Ziele wiederzufinden.
-   Hier steht dieselbe Liste noch einmal – Wort für Wort. Der Kreis
-   „Das lernst du → Darum ging es" schließt sich damit sichtbar.
-   (Die Haken vor den Zielen sind am 21.09.2026 entfallen, siehe direkt
-   darunter.) */
-/* Befund T07 (21.09.2026): Hier stand vor jedem Lernziel ein Haken ✓ unter
-   der Überschrift „Das hast du gelernt:". Gemessen wird dafür nichts – der
-   Haken erschien allein dadurch, dass die Person die Seiten durchgeblättert
-   hat. Damit sah Teilnahme aus wie erreichtes Können, und zwar Ziel für Ziel.
-   Anerkannt wird weiterhin, was wirklich passiert ist: Die Person hat das
-   Thema bearbeitet. Was sie davon schon sicher kann, sagt ihr niemand von
-   außen – dafür steht direkt darunter die Selbsteinschätzung
-   (buildClosingSelfCheck) und im Quiz die Zahl der richtigen Antworten.
-   Keine Sperre, keine Bestehensgrenze, kein Tadel (§3, §4). */
-function buildGoalsDone(topic) {
-  const ziele = topic ? zieleFuerWeg(topic, currentMode) : [];
-  if (!ziele.length) return "";
-  return `
-    <div class="learning-goals-box learning-goals-box--done">
-      <h3>${RUECKMELDUNG.zieleThema}</h3>
-      <ul class="learning-goals-list goals-done-list">
-        ${ziele.map(z => `<li><span class="goal-dot" aria-hidden="true"></span>${escapeHtml(z)}</li>`).join("")}
-      </ul>
-      <p class="goals-done-note">${RUECKMELDUNG.zieleHinweis}</p>
-    </div>`;
-}
+/* buildGoalsDone („Darum ging es in diesem Thema", Prüfbericht B13) ist am
+   26.09.2026 entfallen: Die neue Abschluss-Seite (Paket C) schließt den Kreis
+   über die geübten REGELN statt über die Lernziele – kürzer, und genau das,
+   was die Karte zählt. Die Ziele stehen weiter auf der Start-Seite. */
 
 function buildClosingSelfCheck(topic) {
   const sa = resolveSelfAssessment(topic, languageLevel);
@@ -6252,6 +6306,42 @@ function openTopicHelpLesson(topicId) {
   renderLesson();
 }
 
+/* Abschluss: Der Regel-Faden endet nicht mehr vor der letzten Seite
+   (Gesamtprüfung Z4, Prüfgruppen-Test C-2). Gezeigt werden die Regeln, die
+   in DIESEM Thema gutgeschrieben sind, im Aussehen der Karte, mit dem Satz
+   der gewählten Stufe und – wenn es sie gibt – den anderen Themen, in denen
+   die Person sie schon angewendet hat. Ohne Gutschrift (nur falsche
+   Antworten) die Regeln des Wegs, ehrlich anders überschrieben. */
+function buildRegelnAbschluss(topic) {
+  let ids = REGELN.filter(r => regelThemen(r.id).indexOf(topic.id) !== -1).map(r => r.id);
+  let kopf = RUECKMELDUNG.regelnGeuebt;
+  if (!ids.length) {
+    ids = regelIdsAusUebungen(getLessonsForMode(topic, currentMode));
+    kopf = RUECKMELDUNG.regelnThema;
+  }
+  if (!ids.length) return "";
+  const zeilen = ids.map(id => {
+    const r = regelById(id);
+    if (!r) return "";
+    const andere = regelThemen(id).filter(t => t !== topic.id)
+      .map(t => { const x = getTopicById(t); return x ? x.title : null; }).filter(Boolean);
+    return `
+      <li class="regel-platz ${andere.length ? "regel-platz--sitzt" : "regel-platz--gefunden"}">
+        ${getPictogramHtml(r.pikto)}
+        <span class="regel-platz-text">
+          <span class="regel-platz-satz">${escapeHtml(regelText(r).kurz)}</span>
+          ${andere.length ? `<span class="regel-platz-stand">${RUECKMELDUNG.kennstDuAus} ${escapeHtml(andere.join(", "))}</span>` : ""}
+        </span>
+      </li>`;
+  }).join("");
+  return `
+    ${stationBadge("merken")}
+    <div class="abschluss-regeln">
+      <h3>${kopf}</h3>
+      <ol class="regel-liste">${zeilen}</ol>
+    </div>`;
+}
+
 function renderCompletionPage(topicId) {
   stopReading();
   const topic = getTopicById(topicId);
@@ -6274,101 +6364,43 @@ function renderCompletionPage(topicId) {
   setBottomNavVisible(false);
   showNav(false, false);
 
-  /* ---- Einfach-Modus: eigene, wärmere Abschlussseite ---- */
-  if (currentMode === "short") {
-    setHeader(topic.title, "Kurz lernen", "Abschluss", "Du bist fertig", 100);
+  /* Paket C Schritt 3 (26.09.2026): EINE kurze Abschluss-Seite für beide
+     Wege. Vorher: 161 Wörter, 10 Dinge zum Antippen, 22 Ansagen beim
+     Vorlesen (Prüfgruppen-Test B4/C-2). Jetzt: Geschafft – geübte Regeln –
+     Eine Sache für heute – zwei Knöpfe. Alles Weitere zugeklappt.
+     Der Kurz-Weg behält „Mehr lernen" als zweiten Knopf (Prüfbericht B8:
+     er ist ein Einstieg). Die drei sensiblen Themen behalten „Hilfe nochmal
+     lesen" sichtbar (Station 5, §3). */
+  const istKurz = currentMode === "short";
+  const id = escapeHtml(topic.id);
+  setHeader(topic.title, istKurz ? "Kurz lernen" : "Fertig", "Abschluss", "Du bist fertig", 100);
   setOrientation(`Geschafft! Du bist fertig mit dem Thema: ${topic.title}.`);
-    content.innerHTML = `
-      ${buildToolRow()}
-      <section class="completion-page einfach-completion" data-readable="true">
-        <article class="card completion-card--einfach" style="${getTopicColorStyle(topic.id)}">
-
-          <div class="einfach-done-star" aria-hidden="true">
-            <img src="${pictoSrc('pikto-done')}" alt="" width="120" height="120">
-          </div>
-
-          <h2 class="einfach-done-title">${RUECKMELDUNG.themaGeschafft}</h2>
-          ${roleFigure("erfolg")}
-
-          <p class="einfach-done-text">${RUECKMELDUNG.deinThema}</p>
-          <p class="einfach-done-topic"><strong>${escapeHtml(topic.title)}</strong></p>
-
-          <p class="einfach-done-praise">${RUECKMELDUNG.themaText}</p>
-
-          ${buildGoalsDone(topic)}
-
-          ${topic.transfer ? `
-          ${stationBadge("handeln")}
-          <div class="access-box remember remember-box">
-            <h3>${RUECKMELDUNG.eineSache}</h3>
-            <p class="remember-text">${escapeHtml(topic.transfer)}</p>
-          </div>` : ""}
-
-          ${buildClosingSelfCheck(topic)}
-
-          ${buildProgress(countDoneTopics(), topics.length, { complete: true })}
-
-          <div class="einfach-done-actions">
-            ${/* Hauptaktion des KURZEN Wegs ist der lange Weg zum selben Thema
-                  (Prüfbericht B8). Der kurze Weg ist ein Einstieg, kein Ersatz –
-                  und wer ihn gerade geschafft hat, ist genau jetzt bereit für
-                  mehr. Das nächste Thema steht direkt darunter. */""}
-            <button type="button" class="primary-action einfach-done-btn" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">
-              Mehr lernen: ${escapeHtml(topic.title)}
-            </button>
-            ${nextActionHtml("einfach-done-btn").replace("primary-action", "secondary-action")}
-            ${getQuizQuestions(topic).length
-              ? `<button type="button" class="action-chip" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
-                   Quiz machen
-                 </button>`
-              : ""}
-            <div class="completion-links">
-              <button type="button" class="link-action" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
-                Nochmal von vorne
-              </button>
-              <button type="button" class="link-action" onclick="renderMyPath()">
-                Mein Lernweg ansehen
-              </button>
-              <button type="button" class="link-action" onclick="renderMenu()">
-                Zu den Themen
-              </button>
-            </div>
-          </div>
-
-        </article>
-      </section>
-    `;
-    bindClosingSelfCheck(topic);
-    focusContent();
-    renderLegalFooter();
-    return;
-  }
-
-  /* ---- Normaler Modus ---- */
-  setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
-  setOrientation(`Geschafft! Du bist fertig mit dem Thema: ${topic.title}.`);
-
-  const rules = Array.isArray(topic.memoryRules) ? topic.memoryRules.slice(0, 5) : [];
-  const rulesHtml = rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("");
+  const chip = (label, click) => `<button type="button" class="later-chip" onclick="${click}">${label}</button>`;
+  const hatQuiz = getQuizQuestions(topic).length > 0;
+  const mehrChips = [
+    hatQuiz ? chip("Quiz machen", istKurz ? `startEinfachQuiz('${id}')` : `startQuiz('${id}')`) : "",
+    !istKurz ? chip("Merk-Karte ansehen", `renderMemoryCard('${id}')`) : "",
+    chip("Nochmal von vorne", `startTopicMode('${id}', '${istKurz ? "short" : "full"}')`),
+    !istKurz ? chip("Urkunde ansehen", `renderCertificate('${id}')`) : "",
+    chip("Mein Lernweg ansehen", "renderMyPath()"),
+    istKurz ? chip(FUEHRUNG_TEXT.zuDenThemen, "renderMenu()") : ""
+  ].join("");
+  const zweiterKnopf = istKurz
+    ? `<button type="button" class="secondary-action" onclick="startTopicMode('${id}', 'full')">Mehr lernen: ${escapeHtml(topic.title)}</button>`
+    : `<button type="button" class="secondary-action" onclick="renderMenu()">${FUEHRUNG_TEXT.zuDenThemen}</button>`;
+  const hilfeLink = ["hilfe", "betrug", "ki"].includes(topic.id)
+    ? `<button type="button" class="link-action" onclick="openTopicHelpLesson('${id}')">Hilfe nochmal lesen</button>` : "";
+  const selbstCheck = buildClosingSelfCheck(topic);
 
   content.innerHTML = `
     ${buildToolRow()}
-    <section class="completion-page" data-readable="true">
-      <article class="card completion-card" style="${getTopicColorStyle(topic.id)}">
-        <div class="symbol-heading">
-          <span class="access-box-symbol" aria-hidden="true">${getIconHtml("check")}</span>
-          <h2>Du bist fertig.</h2>
-        </div>
-
-        <p>Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
+    <section class="completion-page${istKurz ? " einfach-completion" : ""}" data-readable="true">
+      <article class="card ${istKurz ? "completion-card--einfach" : "completion-card"}" style="${getTopicColorStyle(topic.id)}">
+        <h2 class="einfach-done-title">${RUECKMELDUNG.themaGeschafft}</h2>
         ${roleFigure("erfolg")}
+        <p class="einfach-done-praise">Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
 
-        ${buildGoalsDone(topic)}
-
-        <h3>Das hast du geübt:</h3>
-        <ul>
-          ${rulesHtml || "<li>Du hast wichtige Regeln wiederholt.</li>"}
-        </ul>
+        ${buildRegelnAbschluss(topic)}
 
         ${topic.transfer ? `
         ${stationBadge("handeln")}
@@ -6377,24 +6409,23 @@ function renderCompletionPage(topicId) {
           <p class="remember-text">${escapeHtml(topic.transfer)}</p>
         </div>` : ""}
 
-        ${buildClosingSelfCheck(topic)}
+        <div class="completion-actions">
+          ${nextActionHtml()}
+          ${zweiterKnopf}
+          ${hilfeLink}
+        </div>
 
         ${buildProgress(countDoneTopics(), topics.length, { complete: true })}
 
-        <div class="completion-actions">
-          ${nextActionHtml()}
-          <p class="completion-more-title">Zu diesem Thema gibt es außerdem:</p>
-          <div class="action-chip-row">
-            <button type="button" class="action-chip" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz machen</button>
-            <button type="button" class="action-chip" onclick="renderMemoryCard('${escapeHtml(topic.id)}')">Merk-Karte ansehen</button>
-            ${["hilfe", "betrug", "ki"].includes(topic.id) ? `<button type="button" class="action-chip" onclick="openTopicHelpLesson('${escapeHtml(topic.id)}')">Hilfe nochmal lesen</button>` : ""}
-          </div>
-          <div class="completion-links">
-            <button type="button" class="link-action" onclick="renderCertificate('${escapeHtml(topic.id)}')">Urkunde ansehen</button>
-            <button type="button" class="link-action" onclick="renderMyPath()">Mein Lernweg ansehen</button>
-            <button type="button" class="link-action" onclick="renderMenu()">Zu den Themen</button>
-          </div>
-        </div>
+        <details class="later-details">
+          <summary class="later-title">${RUECKMELDUNG.mehrZumThema}</summary>
+          <div class="later-row">${mehrChips}</div>
+        </details>
+        ${selbstCheck ? `
+        <details class="later-details">
+          <summary class="later-title">${RUECKMELDUNG.wieIstEsJetzt}</summary>
+          ${selbstCheck}
+        </details>` : ""}
       </article>
     </section>
   `;
@@ -6658,11 +6689,11 @@ function renderQuizFeedbackPage(index) {
      gehen war messbar schlechter: "Am Automaten klebt ein QR-Code" landete
      bei den Codes statt bei den Links. Bekommt eine Frage spaeter ein
      remember, gewinnt das. */
-  const regelHinweis = isCorrect ? regelHinweisHtmlId(regelAusQuizfrage(q), topic.id) : "";
+  const regelHinweis = regelKastenHtml(regelAusQuizfrage(q), topic.id, isCorrect);
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? "Richtig" : "Nochmal üben", 100);
+  setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel, 100);
   setOrientation(`Du machst das Quiz: ${topic.title}.`);
 
   content.innerHTML = `
@@ -7187,7 +7218,7 @@ function answerTraining(index) {
 
   /* Deine Karte: das Postfach zahlt jetzt genauso ein wie das Übungs-Handy.
      Das Herkunfts-Thema zaehlt – so entsteht der Transfer ueber Themen. */
-  const regelHinweis = richtig ? regelHinweisHtml(frage.remember, eintrag.thema) : "";
+  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, eintrag.thema, richtig);
 
   const schwerHtml = szene.schwer
     ? `<p class="sz-schwer">Die war schwer. Da fallen viele darauf herein.</p>` : "";
@@ -7671,7 +7702,7 @@ function answerScenario(index) {
     ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
-  const regelHinweis = richtig ? regelHinweisHtml(frage.remember, scenarioTopicId) : "";
+  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, scenarioTopicId, richtig);
   const letzte = scenarioIndex >= runde.szenen.length - 1;
 
   /* "Die war schwer" – Einordnung statt Lob. Nimmt Erwachsene ernst und
@@ -8375,9 +8406,30 @@ function regelAnwendenId(rid, themaId) {
 }
 
 /* Rueckmeldung im Feedback – der Belohnungsmoment. Traegt gleichzeitig ein.
-   Nur bei richtiger Antwort aufrufen. */
-function regelHinweisHtml(satz, themaId) {
-  return regelHinweisHtmlId((typeof regelZuSatz === "function") ? regelZuSatz(satz) : null, themaId);
+   Nur bei richtiger Antwort aufrufen (über regelKastenHtml). */
+
+/* Paket C (26.09.2026): Eine Regel erscheint immer gleich – Bild, Etikett,
+   EIN Satz in der gewählten Stufe. Vorher kam der Kasten nur, wenn sich auf
+   der Karte etwas änderte; sonst sah man die Regel nur in anderer
+   Formulierung (bis zu 5 Namen, Prüfgruppen-Test C-1). Bei richtiger Antwort
+   wird gutgeschrieben (Stand-Zeile wie bisher), bei falscher nur gezeigt –
+   die Regel bleibt auch nach einem Fehler zugänglich. */
+function regelKastenHtml(rid, themaId, richtig) {
+  if (!rid) return "";
+  if (richtig) {
+    const hinweis = regelHinweisHtmlId(rid, themaId);
+    if (hinweis) return hinweis;
+  }
+  const r = regelById(rid);
+  if (!r) return "";
+  return `
+    <div class="regel-treffer regel-treffer--bekannt">
+      <p class="regel-treffer-kopf">Deine Regel</p>
+      <div class="regel-treffer-zeile">
+        ${getPictogramHtml(r.pikto)}
+        <p class="regel-treffer-satz">${escapeHtml(regelText(r).kurz)}</p>
+      </div>
+    </div>`;
 }
 
 function regelHinweisHtmlId(rid, themaId) {
@@ -8391,7 +8443,7 @@ function regelHinweisHtmlId(rid, themaId) {
         <p class="regel-treffer-kopf">Neue Regel für deine Karte</p>
         <div class="regel-treffer-zeile">
           ${bild}
-          <p class="regel-treffer-satz">${escapeHtml(erg.regel.kurz)}</p>
+          <p class="regel-treffer-satz">${escapeHtml(regelText(erg.regel).kurz)}</p>
         </div>
         <p class="regel-treffer-stand">Du hast ${z.gefunden} von ${z.gesamt} Regeln.</p>
       </div>`;
@@ -8402,12 +8454,12 @@ function regelHinweisHtmlId(rid, themaId) {
             nur, dass die Person die Regel in zwei Themen richtig angewendet
             hat – genau das sagt die Zeile jetzt. Die Zählung darunter bleibt
             unverändert. */""}
-      <p class="regel-treffer-kopf">Diese Regel hast du in zwei Themen benutzt</p>
+      <p class="regel-treffer-kopf">Diese Regel hast du in 2 Themen benutzt</p>
       <div class="regel-treffer-zeile">
         ${bild}
-        <p class="regel-treffer-satz">${escapeHtml(erg.regel.kurz)}</p>
+        <p class="regel-treffer-satz">${escapeHtml(regelText(erg.regel).kurz)}</p>
       </div>
-      <p class="regel-treffer-stand">Du hast sie in zwei Themen wiedererkannt. ${z.sitzt === 1 ? "1 von " + z.gesamt + " Regeln sitzt." : z.sitzt + " von " + z.gesamt + " Regeln sitzen."}</p>
+      <p class="regel-treffer-stand">In 2 Themen erkannt: ${z.sitzt} von ${z.gesamt} Regeln.</p>
     </div>`;
 }
 
@@ -8426,7 +8478,7 @@ function renderRegelKarte() {
   setBottomNavVisible(false);
   showNav(false, false);
   const z = regelZaehlung();
-  setHeader("Deine Karte", "Deine Regeln", "Deine Karte", `${z.sitzt} von ${z.gesamt} sitzen`, Math.round((z.sitzt / z.gesamt) * 100));
+  setHeader("Deine Karte", "Deine Regeln", "Deine Karte", `${z.sitzt} von ${z.gesamt} in 2 Themen erkannt`, Math.round((z.sitzt / z.gesamt) * 100));
   setOrientation(`Du bist auf der Seite: Deine Karte. Du hast ${z.gefunden} von ${z.gesamt} Regeln gefunden.`);
   rememberRoute("meine-karte");
 
@@ -8445,11 +8497,11 @@ function renderRegelKarte() {
       <li class="regel-platz ${stufe === 2 ? "regel-platz--sitzt" : "regel-platz--gefunden"}">
         ${getPictogramHtml(r.pikto)}
         <span class="regel-platz-text">
-          <span class="regel-platz-satz">${escapeHtml(r.kurz)}</span>
-          <span class="regel-platz-sub">${escapeHtml(r.was)}</span>
+          <span class="regel-platz-satz">${escapeHtml(regelText(r).kurz)}</span>
+          <span class="regel-platz-sub">${escapeHtml(regelText(r).was)}</span>
           <span class="regel-platz-stand">${stufe === 2
-            ? "Sitzt. Wiedererkannt in: " + escapeHtml(themen.join(", "))
-            : "Gefunden in: " + escapeHtml(themen.join(", ")) + ". Finde sie in einem zweiten Thema wieder, dann sitzt sie."}</span>
+            ? "In 2 Themen erkannt: " + escapeHtml(themen.join(", "))
+            : "Gefunden in: " + escapeHtml(themen.join(", ")) + ". Erkenne sie in einem zweiten Thema wieder."}</span>
         </span>
       </li>`;
   }).join("");
@@ -8472,7 +8524,7 @@ function renderRegelKarte() {
         ? `Dir fehlen noch ${offen} ${offen === 1 ? "Regel" : "Regeln"}.`
         : (z.sitzt < z.gesamt
             ? "Du hast alle Regeln gefunden. Jetzt erkenne sie in einem zweiten Thema wieder."
-            : "Alle Regeln sitzen. Das ist deine Karte."));
+            : "Alle Regeln hast du in 2 Themen erkannt. Das ist deine Karte."));
 
   content.innerHTML = `
     ${buildToolRow()}
@@ -8491,7 +8543,7 @@ function renderRegelKarte() {
         <div class="regel-stand-balken" role="progressbar" aria-valuenow="${z.gefunden}" aria-valuemin="0" aria-valuemax="${z.gesamt}" aria-label="${z.gefunden} von ${z.gesamt} Regeln gefunden">
           <div class="regel-stand-fuell" style="width:${Math.round((z.gefunden / z.gesamt) * 100)}%"></div>
         </div>
-        <p class="regel-stand-sitzt">${z.sitzt === 1 ? "Davon sitzt 1." : "Davon sitzen " + z.sitzt + "."} Eine Regel sitzt, wenn du sie in zwei Themen wiedererkannt hast.</p>
+        ${z.gefunden > 0 ? `<p class="regel-stand-sitzt">${z.sitzt > 0 ? z.sitzt + " davon hast du in 2 Themen erkannt." : "Erkenne eine Regel in einem zweiten Thema wieder."}</p>` : ""}
       </div>
 
       ${plaetze ? `<h3 class="regel-abschnitt">Das hast du gesammelt</h3>
@@ -8517,7 +8569,7 @@ function druckeRegelKarte() {
   if (!gefundene.length) return;
 
   const zeilen = gefundene.map(function (r) {
-    return `<li class="${regelStufe(r.id) === 2 ? "sitzt" : ""}"><strong>${escapeHtml(r.kurz)}</strong><br /><span>${escapeHtml(r.was)}</span></li>`;
+    return `<li class="${regelStufe(r.id) === 2 ? "sitzt" : ""}"><strong>${escapeHtml(regelText(r).kurz)}</strong><br /><span>${escapeHtml(regelText(r).was)}</span></li>`;
   }).join("");
 
   const heute = new Date().toLocaleDateString("de-DE", { year: "numeric", month: "long", day: "numeric" });
@@ -8541,7 +8593,7 @@ function druckeRegelKarte() {
        .name span { display: inline-block; border-bottom: 1pt solid #16222e; width: 60mm; }
      </style></head><body>` +
     `<h1>Meine Regeln im Internet</h1>` +
-    `<p class="unter">${z.gefunden} von ${z.gesamt} Regeln gefunden. ${z.sitzt === 1 ? "Davon sitzt 1." : "Davon sitzen " + z.sitzt + "."} Ein Haken bedeutet: in zwei Themen wiedererkannt.</p>` +
+    `<p class="unter">${z.gefunden} von ${z.gesamt} Regeln gefunden. ${z.sitzt > 0 ? z.sitzt + " davon in 2 Themen erkannt. " : ""}Ein Haken bedeutet: in 2 Themen erkannt.</p>` +
     `<p class="name">Diese Karte gehört: <span></span></p>` +
     `<ol>${zeilen}</ol>` +
     `<p class="fuss">Stand: ${escapeHtml(heute)} · Alex und Tilda – Sicher und selbstbestimmt im Internet<br />` +

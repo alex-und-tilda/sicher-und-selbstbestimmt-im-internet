@@ -165,11 +165,11 @@ const EXTRA_PRACTICE = {
       "Komische Nachrichten": {
         question: "Jemand schickt dir einen Link und fragt nach Geld. Was tust du?",
         pictogram: "pikto-warning",
-        answers: ["Ich zeige es einer vertrauten Person.", "Ich tippe auf den Link."],
+        answers: ["Ich tippe nicht drauf. Ich zeige es einer vertrauten Person.", "Ich tippe auf den Link."],
         correctIndex: 0,
         feedbackWrong: "Antippen kann Schaden machen. Zeigen kostet nichts.",
-        feedbackCorrect: "Du zeigst es jemandem. Das schützt dich.",
-        remember: "Komische Nachrichten zeige ich."
+        feedbackCorrect: "Du tippst nicht drauf. Und du zeigst es jemandem. Das schützt dich.",
+        remember: "Fremde Links tippe ich nicht an."
       }
     }
   },
@@ -334,13 +334,13 @@ const EXTRA_PRACTICE = {
     },
     kurz: {
       "Was du bei TikTok siehst": {
-        question: "Warum siehst du immer ähnliche Videos?",
-        pictogram: "pikto-video",
-        answers: ["Die App merkt sich: Das gefällt mir.", "Es gibt nur diese Videos."],
+        question: "Viele machen einen gefährlichen Trend nach. Was tust du?",
+        pictogram: "pikto-no",
+        answers: ["Ich mache nicht mit.", "Ich mache mit. Alle machen es ja."],
         correctIndex: 0,
-        feedbackWrong: "Es gibt viel mehr. Die App zeigt dir nur eine Auswahl.",
-        feedbackCorrect: "Genau. Die App wählt für dich aus.",
-        remember: "TikTok zeigt mir nur bestimmte Videos."
+        feedbackWrong: "Gefährliche Trends können dich verletzen. Du musst nicht mitmachen.",
+        feedbackCorrect: "Genau. Du entscheidest selbst.",
+        remember: "Ich muss bei keinem Trend mitmachen."
       },
       "Nachrichten auf TikTok": {
         question: "Jemand aus den Kommentaren schreibt dir privat. Du kennst die Person nicht. Was tust du?",
@@ -478,13 +478,13 @@ const EXTRA_PRACTICE = {
         remember: "KI-Antworten prüfe ich."
       },
       "Wann musst du aufpassen?": {
-        question: "Ein Bild sieht echt aus. Ist es deshalb echt?",
-        pictogram: "pikto-fake",
-        answers: ["Nein. KI kann Bilder fälschen.", "Ja. Man sieht es ja."],
-        correctIndex: 0,
-        feedbackWrong: "Sehen reicht heute nicht mehr. KI macht sehr echte Bilder.",
-        feedbackCorrect: "Genau. Erst prüfen, dann glauben.",
-        remember: "Nicht alles glauben. Erst prüfen."
+        question: "Am Telefon klingt eine Stimme wie deine Schwester. Sie will sofort Geld. Was tust du?",
+        pictogram: "pikto-phone",
+        answers: ["Ich schicke das Geld schnell.", "Ich lege auf. Ich rufe meine Schwester selbst an."],
+        correctIndex: 1,
+        feedbackWrong: "KI kann Stimmen nachmachen. Die Stimme allein beweist nichts.",
+        feedbackCorrect: "Genau. Du rufst die bekannte Nummer selbst an. So kannst du nachfragen.",
+        remember: "Ich lege auf. Ich rufe selbst an."
       }
     }
   },
@@ -523,11 +523,11 @@ const EXTRA_PRACTICE = {
       "Wie erkennst du Fakes?": {
         question: "Eine Nachricht macht dich sehr aufgeregt. Was heißt das?",
         pictogram: "pikto-feel",
-        answers: ["Das kann ein Warnzeichen sein.", "Dann ist sie besonders wichtig."],
+        answers: ["Das kann ein Warnzeichen sein. Ich mache Stopp.", "Dann ist sie besonders wichtig."],
         correctIndex: 0,
         feedbackWrong: "Aufregung ist oft Absicht. Sie soll das Nachdenken verhindern.",
-        feedbackCorrect: "Genau. Große Aufregung ist ein Warnzeichen.",
-        remember: "Erst prüfen. Dann teilen."
+        feedbackCorrect: "Genau. Große Aufregung ist ein Warnzeichen. Dann machst du Stopp.",
+        remember: "Aufregung ist ein Warnzeichen. Ich mache Stopp."
       },
       "Was tust du bei Fakes?": {
         question: "Du erkennst eine Fake-Nachricht. Was tust du?",
@@ -591,13 +591,13 @@ const EXTRA_PRACTICE = {
         remember: "Stress und Gewinn: Stopp machen."
       },
       "Was tust du bei Betrug?": {
-        question: "Eine Nachricht will Geld von dir. Was tust du?",
-        pictogram: "pikto-no",
-        answers: ["Ich zahle nichts und sage es jemandem.", "Ich zahle einen kleinen Betrag."],
-        correctIndex: 0,
-        feedbackWrong: "Auch kleine Beträge sind weg. Und danach kommt die nächste Forderung.",
-        feedbackCorrect: "Kein Geld senden und Bescheid sagen.",
-        remember: "Kein Geld senden. Vertraute Person fragen."
+        question: "Eine SMS sagt: Ihr Bank-Konto ist gesperrt. Tippen Sie hier. Was tust du?",
+        pictogram: "pikto-phone",
+        answers: ["Ich tippe auf den Link.", "Ich öffne meine Bank-App selbst."],
+        correctIndex: 1,
+        feedbackWrong: "Der Link kann auf eine falsche Seite führen. Deine Bank-App öffnest du selbst.",
+        feedbackCorrect: "Genau. Du tippst nicht auf den Link aus der SMS. Du öffnest die App selbst.",
+        remember: "Ich muss den Trick nicht erkennen. Ich öffne die App selbst."
       }
     }
   },

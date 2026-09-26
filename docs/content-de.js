@@ -45,7 +45,7 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: {
         text: [
-          { text: "In diesem Thema geht es um Datenschutz im Internet." },
+          { text: "Stell dir vor: Eine App will deine Adresse und dein Geburts-Datum wissen. Was machst du? Darum geht es in diesem Thema." },
           { text: "Du lernst, welche Daten privat sind und warum du sie schützen solltest." },
           { text: "Außerdem erfährst du, was du tun kannst, wenn jemand nach deinen Daten fragt." },
           { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
@@ -53,7 +53,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [
-          { text: "In diesem Kapitel geht es um Datenschutz im Alltag. Du erfährst, welche Informationen als privat gelten, warum sie schützenswert sind und wie du im Internet bewusst mit ihnen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+          { text: "Stell dir vor: Eine App fragt nach deiner Adresse und deinem Geburtsdatum. Gibst du beides einfach ein? In diesem Kapitel geht es um Datenschutz im Alltag. Du erfährst, welche Informationen als privat gelten, warum sie schützenswert sind und wie du im Internet bewusst mit ihnen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
         ]
       }
     },
@@ -251,14 +251,14 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: {
         text: [
-          { text: "In diesem Thema geht es um WhatsApp." },
+          { text: "Stell dir vor: Eine fremde Nummer schreibt dir bei WhatsApp, und in der Nachricht ist ein Link. Was machst du? Darum geht es in diesem Thema." },
           { text: "Du lernst, wie du Nachrichten sicher nutzt und Betrug erkennst." },
           { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
         ]
       },
       standard: {
         text: [
-          { text: "In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+          { text: "Stell dir vor: Eine unbekannte Nummer schreibt dir bei WhatsApp und schickt einen Link. Wie reagierst du? In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
         ]
       }
     },
@@ -446,12 +446,12 @@ const CONTENT_VERSIONS = {
   facebook: {
     "Start": {
       einfach: { text: [
-        { text: "In diesem Thema geht es um Facebook." },
+        { text: "Stell dir vor: Eine Person, die du nicht kennst, schickt dir bei Facebook eine Freundschafts-Anfrage. Was machst du? Darum geht es in diesem Thema." },
         { text: "Du lernst, wie du dein Profil schützt und dich vor unbekannten Kontakten in Acht nimmst." },
         { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
       ] },
       standard: { text: [
-        { text: "In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+        { text: "Stell dir vor: Jemand, den du nicht kennst, schickt dir bei Facebook eine Freundschaftsanfrage. Nimmst du sie an? In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
       ] }
     },
     "Profil": {
@@ -568,12 +568,12 @@ const CONTENT_VERSIONS = {
   instagram: {
     "Start": {
       einfach: { text: [
-        { text: "In diesem Thema geht es um Instagram." },
+        { text: "Stell dir vor: Du willst ein Foto bei Instagram posten, auf dem auch deine Freundin zu sehen ist. Was machst du? Darum geht es in diesem Thema." },
         { text: "Du lernst, worauf du beim Posten von Fotos und Videos achtest und wie du deinen Standort schützt." },
         { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
       ] },
       standard: { text: [
-        { text: "In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+        { text: "Stell dir vor: Du möchtest ein Foto auf Instagram posten – deine Freundin ist mit drauf. Was tust du vorher? In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
       ] }
     },
     "Foto posten": {
@@ -683,11 +683,11 @@ const CONTENT_VERSIONS = {
   youtube: {
     "Start": {
       einfach: { text: [
-        { text: "In diesem Thema geht es um YouTube." },
+        { text: "Stell dir vor: Ein Video bei YouTube erzählt etwas sehr Überraschendes. Stimmt das wirklich? Darum geht es in diesem Thema." },
         { text: "Du lernst, wie du Videos und Werbung einschätzt und gut auf Pausen achtest." },
         { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+      standard: { text: [{ text: "Stell dir vor: Ein YouTube-Video behauptet etwas sehr Überraschendes. Wie findest du heraus, ob es stimmt? In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
     },
     "Videos prüfen": {
       einfach: { examples: ["Ein Video verspricht: „Mit diesem Trick bist du in einer Woche reich.“", "Ein Video sagt, dass ein bestimmtes Wasser jede Krankheit heilt."], text: [
@@ -785,11 +785,11 @@ const CONTENT_VERSIONS = {
   snapchat: {
     "Start": {
       einfach: { text: [
-        { text: "In diesem Thema geht es um Snapchat." },
+        { text: "Stell dir vor: Jemand bei Snapchat will unbedingt ein Foto von dir, aber du willst das nicht. Was machst du? Darum geht es in diesem Thema." },
         { text: "Du lernst, warum Bilder nicht wirklich verschwinden und wie du Stress erkennst." },
         { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Stress erkennst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+      standard: { text: [{ text: "Stell dir vor: Jemand drängt dich bei Snapchat, ein Foto von dir zu schicken – du willst das aber nicht. Was machst du? In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Stress erkennst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
     },
     "Bilder verschwinden nicht immer": {
       einfach: { examples: ["Du schickst ein lustiges Bild, das nach 10 Sekunden verschwindet. Aber dein Freund hat es vorher gespeichert.", "Ein Bild, das du nur einer Person geschickt hast, taucht später in einer Gruppe auf."], text: [
@@ -874,11 +874,11 @@ const CONTENT_VERSIONS = {
   tiktok: {
     "Start": {
       einfach: { text: [
-        { text: "In diesem Thema geht es um TikTok." },
+        { text: "Stell dir vor: Bei TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? Darum geht es in diesem Thema." },
         { text: "Du lernst, wie du gefährliche Trends erkennst, deine Daten schützt und Pausen machst." },
         { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+      standard: { text: [{ text: "Stell dir vor: Auf TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
     },
     "Trends": {
       einfach: { text: [
@@ -1106,10 +1106,11 @@ const CONTENT_VERSIONS = {
     },
     "Start": {
       einfach: { text: [
-        { text: "Hier geht es um KI, das bedeutet künstliche Intelligenz." },
+        { text: "Stell dir vor: Du stellst einer KI eine Frage, und sie antwortet sofort. Stimmt die Antwort? Darum geht es in diesem Thema." },
+          { text: "KI bedeutet künstliche Intelligenz." },
         { text: "Du lernst, was KI kann und was nicht und wie du sie sicher nutzt." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um künstliche Intelligenz, kurz KI. Du erfährst, was KI leisten kann und was nicht, wo du ihr begegnest und wie du sie sicher und kritisch nutzt." }] }
+      standard: { text: [{ text: "Stell dir vor: Du stellst einem Chatbot eine Frage und bekommst sofort eine überzeugende Antwort. Kannst du dich darauf verlassen? In diesem Kapitel geht es um künstliche Intelligenz, kurz KI. Du erfährst, was KI leisten kann und was nicht, wo du ihr begegnest und wie du sie sicher und kritisch nutzt." }] }
     },
     "Was ist KI?": {
       einfach: {
@@ -1243,11 +1244,12 @@ const CONTENT_VERSIONS = {
   fakes: {
     "Start": {
       einfach: { text: [
-        { text: "Hier geht es um Fakes – Fake bedeutet gefälscht oder nicht echt." },
+        { text: "Stell dir vor: Eine Nachricht macht dich sehr wütend, und du willst sie sofort teilen. Was machst du? Darum geht es in diesem Thema." },
+          { text: "Fake bedeutet gefälscht oder nicht echt." },
         { text: "Du lernst, wie du falsche Nachrichten und auch falsche Bilder oder Stimmen erkennst." },
         { text: "Wenn dich ein Beispiel belastet, kannst du jederzeit eine Pause machen." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um Fakes – also um Gefälschtes im Internet. Du erfährst, wie du falsche Nachrichten erkennst und wie du gefälschte Bilder, Videos und Stimmen einordnest. Wenn dich ein Beispiel belastet, mach ruhig eine Pause." }] }
+      standard: { text: [{ text: "Stell dir vor: Eine Nachricht macht dich wütend, und du möchtest sie sofort weiterleiten. Was tust du? In diesem Kapitel geht es um Fakes – also um Gefälschtes im Internet. Du erfährst, wie du falsche Nachrichten erkennst und wie du gefälschte Bilder, Videos und Stimmen einordnest. Wenn dich ein Beispiel belastet, mach ruhig eine Pause." }] }
     },
     "Was sind Fake News?": {
       einfach: {
@@ -1418,12 +1420,13 @@ const CONTENT_VERSIONS = {
     },
     "Start": {
       einfach: { text: [
-        { text: "Hier geht es um Betrug im Internet, denn Betrüger wollen dein Geld oder deine Daten." },
+        { text: "Stell dir vor: Eine SMS sagt, dass du gewonnen hast. Du sollst nur schnell eine kleine Gebühr bezahlen. Was machst du? Darum geht es in diesem Thema." },
+          { text: "Betrüger wollen dein Geld oder deine Daten." },
         { text: "Betrug kann jedem Menschen passieren und ist nie deine Schuld." },
         { text: "Du lernst die bekannten Tricks, denn wer sie kennt, ist besser geschützt." },
         { text: "Wenn dich ein Beispiel belastet, kannst du jederzeit eine Pause machen." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um Betrug im Internet. Vorweg das Wichtigste: Betrug kann jedem passieren und ist nie die Schuld der betroffenen Person. Betrüger haben es auf dein Geld oder deine Daten abgesehen. Du lernst die häufigsten Maschen kennen – denn wer die Tricks kennt, fällt seltener darauf herein. Wenn dich ein Beispiel belastet, mach ruhig eine Pause." }] }
+      standard: { text: [{ text: "Stell dir vor: Eine SMS meldet einen Gewinn – du sollst nur schnell eine kleine Gebühr zahlen. Was tust du? In diesem Kapitel geht es um Betrug im Internet. Vorweg das Wichtigste: Betrug kann jedem passieren und ist nie die Schuld der betroffenen Person. Betrüger haben es auf dein Geld oder deine Daten abgesehen. Du lernst die häufigsten Maschen kennen – denn wer die Tricks kennt, fällt seltener darauf herein. Wenn dich ein Beispiel belastet, mach ruhig eine Pause." }] }
     },
     "Was ist Phishing?": {
       einfach: {
@@ -1618,10 +1621,10 @@ const CONTENT_VERSIONS = {
   einkaufen: {
     "Start": {
       einfach: { text: [
-        { text: "Hier geht es um Einkaufen im Internet." },
+        { text: "Stell dir vor: Ein Shop im Internet ist sehr billig, und du sollst vorher bezahlen. Was machst du? Darum geht es in diesem Thema." },
         { text: "Du lernst, wie du gute Shops erkennst, sicher bezahlst und was du bei Problemen tun kannst." }
       ] },
-      standard: { text: [{ text: "In diesem Kapitel geht es um sicheres Einkaufen im Internet. Du erfährst, wie du seriöse Shops erkennst, sicher bezahlst und was du tun kannst, wenn beim Einkauf etwas schiefgeht." }] }
+      standard: { text: [{ text: "Stell dir vor: Ein Onlineshop ist auffällig billig und verlangt Vorkasse. Bestellst du? In diesem Kapitel geht es um sicheres Einkaufen im Internet. Du erfährst, wie du seriöse Shops erkennst, sicher bezahlst und was du tun kannst, wenn beim Einkauf etwas schiefgeht." }] }
     },
     "Gute Shops erkennen": {
       einfach: {
@@ -2037,12 +2040,13 @@ const KURZ_VERSIONS = {
         text: [
           { text: "TikTok zeigt dir sehr viele Videos. Dabei merkt sich die App, was dir gefällt." },
           { text: "Deshalb zeigt sie dir immer mehr Videos von derselben Art." },
-          { text: "So siehst du oft das Gleiche. Schau darum auch andere Kanäle an." }
+          { text: "So siehst du oft das Gleiche. Schau darum auch andere Kanäle an." },
+          { text: "Manche Videos zeigen gefährliche Trends oder Mutproben. Da musst du nicht mitmachen, auch wenn viele andere es tun." }
         ],
         remember: "TikTok zeigt dir nur einen Teil der Videos."
       },
       standard: {
-        text: [{ text: "TikTok merkt sich, welche Videos dir gefallen, und zeigt dir immer mehr davon. So entsteht schnell ein einseitiges Bild. Schau deshalb bewusst auch andere Kanäle und Meinungen an." }],
+        text: [{ text: "TikTok merkt sich, welche Videos dir gefallen, und zeigt dir immer mehr davon. So entsteht schnell ein einseitiges Bild. Schau deshalb bewusst auch andere Kanäle und Meinungen an. Manche Videos zeigen gefährliche Trends oder Mutproben – mitmachen musst du nicht, auch wenn es alle tun." }],
         remember: "TikTok zeigt dir eine Auswahl – nicht alles."
       }
     },
@@ -2153,12 +2157,13 @@ const KURZ_VERSIONS = {
         text: [
           { text: "KI kann auch falsche Dinge sagen." },
           { text: "Mit KI kann man außerdem Bilder fälschen und Stimmen nachmachen." },
+          { text: "Will eine bekannte Stimme am Telefon Geld, legst du auf und rufst die Person unter ihrer bekannten Nummer selbst an." },
           { text: "Glaub deshalb nicht alles. Frag im Zweifel eine Person, der du vertraust." }
         ],
         remember: "Du glaubst nicht alles. Du prüfst es zuerst."
       },
       standard: {
-        text: [{ text: "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Glaub deshalb nicht alles, was du siehst oder hörst, und frag im Zweifel eine Person, der du vertraust." }],
+        text: [{ text: "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst, und frag im Zweifel eine Person, der du vertraust." }],
         remember: "Nicht alles glauben – erst prüfen."
       }
     }
@@ -2238,12 +2243,13 @@ const KURZ_VERSIONS = {
       einfach: {
         text: [
           { text: "Wenn du Betrug vermutest, zahlst du kein Geld und gibst keine Daten ein." },
+          { text: "Sagt eine Nachricht, mit deinem Bank-Konto stimmt etwas nicht, tippst du nicht auf den Link. Du öffnest deine Bank-App selbst." },
           { text: "Erzähl es eine Person, der du vertraust. Sie hilft dir weiter." }
         ],
         remember: "Kein Geld senden. Frag eine Person, der du vertraust."
       },
       standard: {
-        text: [{ text: "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Erzähl einer Person, der du vertraust, davon – gemeinsam findet ihr den nächsten Schritt." }],
+        text: [{ text: "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Meldet eine Nachricht ein Problem mit deinem Konto, öffne die Bank-App selbst, statt dem Link zu folgen. Erzähl einer Person, der du vertraust, davon – gemeinsam findet ihr den nächsten Schritt." }],
         remember: "Kein Geld, keine Daten – Hilfe holen."
       }
     }
