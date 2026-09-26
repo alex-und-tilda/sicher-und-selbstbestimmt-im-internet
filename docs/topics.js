@@ -38,7 +38,7 @@ const topics = [
             "pictogram": "pikto-lock"
           },
           {
-            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
+            "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
             "pictogram": "pikto-help"
           }
         ],
@@ -927,7 +927,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
+            "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
             "pictogram": "pikto-help"
           }
         ],
@@ -1271,7 +1271,7 @@ const topics = [
             "pictogram": "pikto-link"
           },
           {
-            "text": "Hilfe-Button nutzen.",
+            "text": "Hilfe holen.",
             "pictogram": "pikto-help"
           }
         ],
@@ -1545,11 +1545,11 @@ const topics = [
         "text": [
           "Du bekommst einen Link.",
           "Ein Link ist eine blaue Adresse.",
-          "Du tippst nicht sofort drauf.",
+          "Du tippst nicht drauf.",
           "Fremde Links können gefährlich sein.",
           "Du fragst eine vertraute Person."
         ],
-        "remember": "Fremde Links nicht sofort antippen."
+        "remember": "Fremde Links nicht antippen."
       },
       {
         "title": "Dein WhatsApp-Code",
@@ -1612,7 +1612,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
+            "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
             "pictogram": "pikto-help"
           }
         ],
@@ -2224,7 +2224,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
+            "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
             "pictogram": "pikto-help"
           }
         ],
@@ -2508,7 +2508,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Hilfe-Button nutzen.",
+            "text": "Hilfe holen.",
             "pictogram": "pikto-help"
           }
         ],
@@ -2839,7 +2839,7 @@ const topics = [
             "pictogram": "pikto-help"
           },
           {
-            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
+            "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
             "pictogram": "pikto-help"
           }
         ],
@@ -3426,7 +3426,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
+            "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
             "pictogram": "pikto-help"
           }
         ],
@@ -3982,7 +3982,7 @@ const topics = [
             "pictogram": "pikto-help"
           },
           {
-            "text": "Du bist unsicher? Dann nutze den Hilfe-Button.",
+            "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
             "pictogram": "pikto-help"
           }
         ],

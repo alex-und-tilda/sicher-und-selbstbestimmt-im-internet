@@ -1831,13 +1831,13 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Ein Link ist eine Adresse zu einer Internet-Seite. Meistens ist er blau." },
           { text: "Fremde Links können gefährlich sein, weil sie auf falsche Seiten führen." },
-          { text: "Tippe deshalb nicht sofort darauf. Frag zuerst eine Person, der du vertraust." }
+          { text: "Tippe deshalb nicht darauf. Frag lieber eine Person, der du vertraust." }
         ],
-        remember: "Auf fremde Links tippst du nicht sofort."
+        remember: "Auf fremde Links tippst du nicht."
       },
       standard: {
-        text: [{ text: "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht sofort an, sondern frag zuerst eine Person, der du vertraust." }],
-        remember: "Fremde Links nicht vorschnell antippen."
+        text: [{ text: "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht an, sondern frag eine Person, der du vertraust." }],
+        remember: "Fremde Links nicht antippen."
       }
     },
     "Dein WhatsApp-Code": {

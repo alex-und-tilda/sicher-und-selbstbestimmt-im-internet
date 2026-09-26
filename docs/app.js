@@ -1495,11 +1495,39 @@ function readShortText(text, el) {
   if (el) el.classList.add("reading-highlight");
   const utterance = new SpeechSynthesisUtterance(cleaned);
   utterance.lang = "de-DE";
-  utterance.rate = 0.82;
+  utterance.rate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.82;
   utterance.pitch = 1;
   utterance.onend = () => { if (gen === _readGen) clearReadingHighlight(); };
   utterance.onerror = () => { if (gen === _readGen) clearReadingHighlight(); };
   window.speechSynthesis.speak(utterance);
+}
+
+/* Hör-Modus: Rückmeldungen, die nur IN die Seite eingefügt werden (kein
+   neuer Seitenaufbau), wurden nie vorgelesen – wer nicht liest, erfuhr so
+   nicht, ob die Antwort gepasst hat (Prüfgruppen-Test F2, 26.09.2026).
+   Liest den Kasten ohne seine Knöpfe und nennt danach den ersten Knopf,
+   wie die Handlungsansage auf ganzen Seiten. */
+function sprichEingefuegteRueckmeldung(kasten) {
+  if (!kasten || typeof autoRead === "undefined" || !autoRead || !supportsSpeech()) return;
+  const kopie = kasten.cloneNode(true);
+  kopie.querySelectorAll("button, [role='button'], .sr-only, [aria-hidden='true']").forEach(e => e.remove());
+  /* Absatz-Grenzen hörbar machen: Überschrift und Satz liefen sonst
+     ineinander („Neue Regel für deine Karte Bei Geld …"). */
+  const BLOCK = "p, li, h1, h2, h3, h4, div, section, article";
+  let text = "", letzterBlock = null;
+  const gang = document.createTreeWalker(kopie, NodeFilter.SHOW_TEXT);
+  while (gang.nextNode()) {
+    const stueck = gang.currentNode.nodeValue.replace(/\s+/g, " ");
+    if (!stueck.trim()) continue;
+    const block = gang.currentNode.parentElement ? gang.currentNode.parentElement.closest(BLOCK) : null;
+    if (block !== letzterBlock && text.trim()) text = (/[.!?:]\s*$/.test(text) ? text.trimEnd() : text.trimEnd() + ".") + " ";
+    letzterBlock = block;
+    text += stueck;
+  }
+  text = cleanSpeechText(text);
+  const knopf = kasten.querySelector("button");
+  if (knopf && cleanSpeechText(knopf.textContent)) text += ` Tippe auf: ${cleanSpeechText(knopf.textContent)}.`;
+  readShortText(text, kasten);
 }
 
 function stopReading() {
@@ -1622,7 +1650,13 @@ function readCurrentPage(rate) {
   /* Optionen nummerieren: „Antwort 1: …" */
   els.forEach(el => {
     if (!el.matches || !el.matches(OPTION) || !el.parentElement) return;
-    const geschwister = Array.from(el.parentElement.children).filter(c => c.matches && c.matches(OPTION));
+    /* Gezählt wird in der nächsten Gruppe mit mehr als einer Antwort.
+       Direkte Geschwister reichen nicht: Im Stufen-Finder steckt jede
+       Antwort mit ihrem Knopf „Text vorlesen" in einem eigenen Kasten –
+       dann hieß jede „Antwort 1" (Prüfgruppen-Test F1, 26.09.2026). */
+    let gruppe = el.parentElement;
+    while (gruppe && gruppe !== root && gruppe.querySelectorAll(OPTION).length < 2) gruppe = gruppe.parentElement;
+    const geschwister = gruppe ? Array.from(gruppe.querySelectorAll(OPTION)) : [el];
     const n = geschwister.indexOf(el) + 1;
     if (n > 0) el.setAttribute("data-read-prefix", "Antwort " + n + ":");
   });
@@ -1675,12 +1709,12 @@ function readCurrentPage(rate) {
     else if (root.querySelector(".alltag-choice")) els.push({ pseudoText: "Wähle eine Antwort. Du kannst dir auch Hilfe anzeigen lassen." });
   } else if (nextButton && !nextButton.disabled) {
     els.push({ pseudoText: backButton && !backButton.disabled
-      ? "Du kannst jetzt Weiter drücken. Oder Zurück."
-      : "Du kannst jetzt Weiter drücken." });
+      ? "Du kannst jetzt auf Weiter tippen. Oder auf Zurück."
+      : "Du kannst jetzt auf Weiter tippen." });
   } else {
     const start = root ? root.querySelector(".topic-start-button, .intro-start-button, .primary-action") : null;
     if (start) {
-      let ansage = "Drücke den großen Knopf: " + cleanSpeechText(start.textContent) + ".";
+      let ansage = "Tippe auf den großen Knopf: " + cleanSpeechText(start.textContent) + ".";
       /* Zweiter Weg in die App auf der Startseite. Ohne diesen Zusatz
          kennt die Abkürzung nur, wer liest. Kommt NACH dem großen Knopf,
          damit die Hauptsache zuerst genannt wird. */
@@ -1834,7 +1868,7 @@ function setAutoRead(an, still) {
   if (!still) {
     announce(autoRead
       ? "Gut. Ich lese dir jede Seite automatisch vor. Mit Stopp kannst du das Vorlesen immer anhalten."
-      : "In Ordnung. Ich lese nur vor, wenn du auf Vorlesen drückst.");
+      : "In Ordnung. Du tippst auf Vorlesen. Dann lese ich vor.");
   }
 }
 
@@ -2120,7 +2154,7 @@ function renderVorwissen() {
     ${buildReadingToolbar()}
     <section class="profile-new" data-readable="true">
       <h2 class="profile-picker-title">Wie gut kennst du dich aus?</h2>
-      ${setupWeiterZu ? `<p class="profile-picker-intro"><strong>Du hast dein erstes Thema geschafft.</strong> Jetzt noch 2 kurze Fragen. Danach geht es weiter.</p>` : ""}
+      ${setupWeiterZu ? `<p class="profile-picker-intro"><strong>Du hast dein erstes Thema geschafft.</strong> ${vorleseFrageOffen() ? "Jetzt noch 2 kurze Fragen." : "Jetzt noch 1 kurze Frage."} Danach geht es weiter.</p>` : ""}
       <p class="profile-picker-intro">Das hilft uns, dir die passende Menge vorzuschlagen. Du kannst es bei jedem Thema ändern.</p>
       <div class="device-grid">
         <button type="button" class="device-card" onclick="chooseVorwissen('neu')">
@@ -2149,8 +2183,12 @@ function chooseVorwissen(v) {
 
 /* Einmalige Frage: Soll ich dir vorlesen? EIN Konzept, EIN Bildschirm,
    zwei klare Wege. Jederzeit in den Einstellungen änderbar. */
+function vorleseFrageOffen() {
+  return pGet(AUTO_READ_GEFRAGT_KEY) !== "1" && supportsSpeech();
+}
+
 function renderVorleseFrage() {
-  if (pGet(AUTO_READ_GEFRAGT_KEY) === "1" || !supportsSpeech()) {
+  if (!vorleseFrageOffen()) {
     if (setupWeiterZu) { const weiter = setupWeiterZu; setupWeiterZu = null; return weiter(); }
     return renderMenu();
   }
@@ -2158,9 +2196,9 @@ function renderVorleseFrage() {
   stopReading();
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader("Sicher und selbstbestimmt im Internet", "Vorlesen", "Einweisung", "Soll ich dir vorlesen?", 0);
+  setHeader("Sicher und selbstbestimmt im Internet", "Vorlesen", "Start", "Soll ich dir vorlesen?", 0);
   setActiveTab("start");
-  setOrientation("Du bist bei der Einweisung. Es geht um das Vorlesen.");
+  setOrientation("Noch eine kurze Frage. Es geht um das Vorlesen.");
   showNav(false, false);
   content.innerHTML = `
     ${buildReadingToolbar()}
@@ -2171,12 +2209,12 @@ function renderVorleseFrage() {
         <button type="button" class="device-card" onclick="chooseAutoRead(true)">
           <span class="device-icon" aria-hidden="true">🔊</span>
           <strong>Ja, immer vorlesen</strong>
-          <span>Jede Seite wird dir automatisch vorgelesen.</span>
+          <span>Die App liest dir jede Seite vor.</span>
         </button>
         <button type="button" class="device-card" onclick="chooseAutoRead(false)">
           <span class="device-icon" aria-hidden="true">🤫</span>
-          <strong>Nein, ich drücke selbst</strong>
-          <span>Vorgelesen wird nur, wenn du auf Vorlesen drückst.</span>
+          <strong>Nein, ich tippe selbst</strong>
+          <span>Du tippst auf Vorlesen. Dann liest die App vor.</span>
         </button>
       </div>
     </section>
@@ -2624,9 +2662,23 @@ function finishSign(editId) {
     renderProfileManage(editId);
     return;
   }
+  const ersterStart = !activeProfileId;
   const p = Object.assign({ id: genProfileId() }, sign);
   profiles.push(p);
   activeProfileId = p.id;
+  /* Erstes Profil auf dem Gerät: Was die Person VOR dem Anlegen gewählt hat
+     (Vorlese-Angebot auf der Startseite), gehört ihr. Vorher blieb es ohne
+     Profil liegen – die App fragte nach dem ersten Thema noch einmal, und
+     nach einem Neustart war das Vorlesen wieder aus (Prüfgruppen-Test F3,
+     26.09.2026). */
+  if (ersterStart) {
+    [AUTO_READ_KEY, AUTO_READ_GEFRAGT_KEY, READ_TEMPO_KEY].forEach(base => {
+      try {
+        const alt = window.localStorage.getItem(base);
+        if (alt !== null) { pSet(base, alt); window.localStorage.removeItem(base); }
+      } catch (e) { /* nichts tun */ }
+    });
+  }
   saveProfiles();
   signDraft = { icon: null, color: null, number: null };
   languageChosen = false;
@@ -3118,6 +3170,7 @@ function answerDailyQuestion(index) {
         ${isCorrect ? "" : `<button type="button" class="review-chip" style="${getTopicColorStyle(daily.topic.id)}" onclick="renderTopicChoice('${escapeHtml(daily.topic.id)}')"><span aria-hidden="true">${getIconHtml(daily.topic.icon || "start")}</span><span>${escapeHtml(daily.topic.title)} nochmal ansehen</span></button>`}
       `;
   announce(feedback);
+  sprichEingefuegteRueckmeldung(box);
 }
 
 /* Menü-Erklärung als wiederverwendbarer Baustein (dauerhaft in Hilfe) */
@@ -4004,7 +4057,7 @@ function renderSettingsPage() {
         <p class="settings-explain">Soll jede Seite automatisch vorgelesen werden?</p>
         <div class="settings-toggle-row" role="group" aria-label="Automatisch vorlesen">
           <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "true" : "false"}" onclick="setAutoRead(true); renderSettingsPage();">Ja, immer vorlesen</button>
-          <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "false" : "true"}" onclick="setAutoRead(false); renderSettingsPage();">Nein, ich drücke selbst</button>
+          <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "false" : "true"}" onclick="setAutoRead(false); renderSettingsPage();">Nein, ich tippe selbst</button>
         </div>
         <p class="settings-explain" style="margin-top:14px;">Wie schnell soll die Stimme lesen?</p>
         <div class="settings-toggle-row" role="group" aria-label="Vorlese-Tempo">
@@ -4623,7 +4676,7 @@ function getLessonsForMode(topic, mode) {
       const rahmen = [];
       if (start && start.module === "Start") rahmen.push(start);
       rahmen.push(...topic.einfachLessons);
-      if (ende && ende !== start && /merke ich mir/i.test(ende.title || "")) rahmen.push(ende);
+      if (ende && ende !== start && /merke ich mir/i.test(ende.title || "")) rahmen.push(kurzZusammenfassung(topic, ende));
       return rahmen;
     }
     /* Rueckfallebene fuer Themen OHNE einfachLessons. Aktuell haben alle 12
@@ -4635,6 +4688,46 @@ function getLessonsForMode(topic, mode) {
     }
   }
   return topic.lessons;
+}
+
+/* Kurz-Weg: „Das merke ich mir" nennt nur, was der Kurz-Weg gezeigt hat –
+   die Merksätze seiner eigenen Lektionen, in jeder Sprachstufe. Vorher lieh
+   er sich die Liste des langen Wegs und nannte Regeln, die gar nicht
+   vorkamen, z. B. „Fotos prüfen" bei WhatsApp (Prüfgruppen-Test F5,
+   26.09.2026). Einmal je Thema gebaut, damit Fortschritt und Rück-Anker
+   immer dasselbe Objekt sehen. */
+function kurzZusammenfassung(topic, ende) {
+  if (topic._kurzSchluss) return topic._kurzSchluss;
+  const merk = stufe => topic.einfachLessons
+    .map(l => ({ text: (resolveLessonContent(l, stufe) || l).remember, pictogram: l.pictogram }))
+    .filter(x => x.text);
+  const ev = (ende.versions && ende.versions.einfach) || {};
+  const sv = (ende.versions && ende.versions.standard) || {};
+  topic._kurzSchluss = Object.assign({}, ende, {
+    text: [{ text: "Das merkst du dir aus diesem Thema:", pictogram: "pikto-done" }],
+    bullets: merk("leicht"),
+    versions: Object.assign({}, ende.versions, {
+      einfach: Object.assign({}, ev, {
+        text: [{ text: "Diese Sätze aus dem Thema kannst du dir gut merken:" }],
+        bullets: merk("einfach").map(x => x.text)
+      }),
+      standard: Object.assign({}, sv, {
+        text: [{ text: "Das Wichtigste im Überblick: " + merk("standard").map(x => x.text).join(" ") }],
+        bullets: []
+      })
+    })
+  });
+  return topic._kurzSchluss;
+}
+
+/* Kurz-Weg: Die Ziele sind die Titel seiner Lektionen. Die Lernziele des
+   langen Wegs kündigten Dinge an, die im Kurz-Weg nicht vorkamen
+   (Prüfgruppen-Test F5, 26.09.2026). */
+function zieleFuerWeg(topic, mode) {
+  if (mode === "short" && Array.isArray(topic.einfachLessons) && topic.einfachLessons.length) {
+    return topic.einfachLessons.map(l => l.title);
+  }
+  return Array.isArray(topic.learningGoals) ? topic.learningGoals : [];
 }
 
 function startTopicMode(topicId, mode) {
@@ -5244,11 +5337,12 @@ function renderLesson() {
   /* Lernziele und Fehler-Normalisierung nur im Start-Screen */
   const isStartLesson = lesson.module === "Start";
 
-  const learningGoals = isStartLesson && Array.isArray(topic.learningGoals) && topic.learningGoals.length
+  const wegZiele = zieleFuerWeg(topic, currentMode);
+  const learningGoals = isStartLesson && wegZiele.length
     ? `<div class="learning-goals-box">
          <h3>Was du hier lernst:</h3>
          <ul class="learning-goals-list">
-           ${topic.learningGoals.map(g => `<li>${escapeHtml(g)}</li>`).join("")}
+           ${wegZiele.map(g => `<li>${escapeHtml(g)}</li>`).join("")}
          </ul>
        </div>`
     : "";
@@ -6048,6 +6142,7 @@ function renderMiniCheck(topicId) {
         box.innerHTML = `
           <p class="mini-feedback-text"><strong>${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</strong> ${escapeHtml(mq.explanation || "")}</p>
           <button type="button" class="primary-action" onclick="renderCompletionPage('${escapeHtml(topic.id)}')">Weiter</button>`;
+        sprichEingefuegteRueckmeldung(box);
       }
     });
   });
@@ -6080,7 +6175,7 @@ function renderMiniCheck(topicId) {
    (buildClosingSelfCheck) und im Quiz die Zahl der richtigen Antworten.
    Keine Sperre, keine Bestehensgrenze, kein Tadel (§3, §4). */
 function buildGoalsDone(topic) {
-  const ziele = Array.isArray(topic && topic.learningGoals) ? topic.learningGoals : [];
+  const ziele = topic ? zieleFuerWeg(topic, currentMode) : [];
   if (!ziele.length) return "";
   return `
     <div class="learning-goals-box learning-goals-box--done">
@@ -6121,7 +6216,10 @@ function bindClosingSelfCheck(topic) {
       if (typeof vorher !== "number") {
         text = "Danke. Du kannst das Thema jederzeit wiederholen.";
       } else if (jetzt > vorher) {
-        text = `Am Anfang: ${answerText(sa.options[vorher])}. Jetzt: ${answerText(sa.options[jetzt])}. Du hast dazugelernt.`;
+        /* Kein „Du hast dazugelernt" mehr: Das behauptete einen Lernerfolg,
+           der nur auf dem eigenen Gefühl beruht (T07; Prüfgruppen-Test F6,
+           26.09.2026). Der Vergleich spricht für sich. */
+        text = `Am Anfang: ${answerText(sa.options[vorher])}. Jetzt: ${answerText(sa.options[jetzt])}.`;
       } else if (jetzt === vorher) {
         text = `Am Anfang und jetzt: ${answerText(sa.options[jetzt])}. Das ist in Ordnung. Du kannst das Thema noch einmal machen.`;
       } else {
@@ -6131,6 +6229,7 @@ function bindClosingSelfCheck(topic) {
       feld.textContent = text;
       feld.classList.remove("is-hidden");
       playSound("success");
+      sprichEingefuegteRueckmeldung(feld);
     });
   });
 }
@@ -7123,6 +7222,7 @@ function answerTraining(index) {
     </div>`;
   const weiter = feld.querySelector("button");
   if (weiter) weiter.focus();
+  sprichEingefuegteRueckmeldung(feld);
 }
 
 function nextTrainingMessage() {
@@ -7611,6 +7711,7 @@ function answerScenario(index) {
     </div>`;
   const weiter = feld.querySelector("button");
   if (weiter) weiter.focus();
+  sprichEingefuegteRueckmeldung(feld);
 }
 
 function nextScenarioScene() {

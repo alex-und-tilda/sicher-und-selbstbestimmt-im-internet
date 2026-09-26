@@ -131,7 +131,7 @@ const REGEL_SAETZE = {
   links: [
     "Ich öffne fremde Links nicht sofort.", // datenschutz
     "Ich öffne unbekannte Links nicht sofort.", // whatsapp
-    "Fremde Links nicht sofort antippen.", // whatsapp
+    "Fremde Links nicht antippen.", // whatsapp
     "Fremde Links tippe ich nicht an.", // whatsapp
     "Komische Nachrichten zeigen, nicht antippen.", // facebook
     "Werbung nicht antippen.", // youtube
