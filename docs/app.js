@@ -2081,6 +2081,7 @@ function renderLegalFooter() {
   const footer = document.createElement("footer");
   footer.className = "small-footer-notice";
   footer.innerHTML = `
+    <p class="test-hinweis"><strong>Testphase:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.</p>
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
     <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
     <a href="ersteller.html">Ersteller</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="barrierefreiheit.html">Barrierefreiheit</a> · <a href="sprachstufen.html">Die Sprachstufen</a></p>
@@ -4382,6 +4383,10 @@ function setTopicAmount(topicId, amount) {
      und was jetzt kommt (Prüfgruppen-Test B-c, 26.09.2026). */
   stillerNeuaufbau = true;
   renderTopicChoice(topicId);
+  /* Tastatur (E9, 27.09.2026): Fokus bleibt auf der gewählten Menge,
+     statt an den Seitenanfang zu springen. */
+  const aktiv = content.querySelector(".amount-choice.is-active");
+  if (aktiv) aktiv.focus();
   if (autoRead) readShortText((wahl === "short" ? "Kurz" : "Mehr") + " ist ausgewählt. Tippe auf: Lernen starten.");
 }
 
@@ -5062,6 +5067,7 @@ const RUECKMELDUNG = {
   deinThema:       "Dein Thema:",  /* seit 26.09.2026 nicht mehr in Gebrauch (Abschluss Paket C) */
   themaText:       "Du hast alle Schritte gemacht. Du kannst sie jederzeit wiederholen.",  /* seit 26.09.2026 nicht mehr in Gebrauch (Abschluss Paket C) */
   eineSache:       "Eine Sache für heute",
+  regelDazu:       "Die Regel dazu:",  /* neu 27.09.2026 (E5) – freigabepflichtig */
   quizAlle:        "Du hast alle Fragen richtig beantwortet.",
   quizNochmal:     "Du kannst die Fragen noch einmal üben. Die Erklärungen helfen dir dabei.",
   uebenViel:       "Du hast schon viel sicher erkannt. Jedes Üben macht dich sicherer.",
@@ -6639,6 +6645,23 @@ function buildRegelnAbschluss(topic) {
     </div>`;
 }
 
+/* „Eine Sache für heute“ an eine Regel hängen (Lernweg E5, 27.09.2026).
+   Zeigt die Regel mit Piktogramm unter dem Handlungs-Schritt. Grüner Rand
+   wie in der Regel-Liste, wenn die Regel schon in zwei Themen sitzt. */
+function transferRegelHtml(topic) {
+  const rid = (typeof TRANSFER_REGEL !== "undefined") && TRANSFER_REGEL[topic.id];
+  const r = rid && regelById(rid);
+  if (!r) return "";
+  return `
+    <div class="regel-platz transfer-regel ${regelStufe(rid) === 2 ? "regel-platz--sitzt" : ""}">
+      ${getPictogramHtml(r.pikto)}
+      <span class="regel-platz-text">
+        <span class="regel-platz-stand">${RUECKMELDUNG.regelDazu}</span>
+        <span class="regel-platz-satz">${escapeHtml(regelText(r).kurz)}</span>
+      </span>
+    </div>`;
+}
+
 function renderCompletionPage(topicId) {
   stopReading();
   const topic = getTopicById(topicId);
@@ -6712,6 +6735,7 @@ function renderCompletionPage(topicId) {
         <div class="access-box remember remember-box">
           <h3>${RUECKMELDUNG.eineSache}</h3>
           <p class="remember-text">${escapeHtml(topic.transfer)}</p>
+          ${transferRegelHtml(topic)}
         </div>` : ""}
         ${planLink}
 

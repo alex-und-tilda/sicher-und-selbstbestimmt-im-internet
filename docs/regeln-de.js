@@ -496,6 +496,25 @@ function regelById(id) {
   return REGELN.filter(function (r) { return r.id === id; })[0] || null;
 }
 
+/* „Eine Sache für heute“ (topic.transfer) → die Regel, zu der der
+   Handlungs-Schritt gehört (Lernweg E5, Test-Befund C-2, 27.09.2026).
+   Jede Regel hier wird im langen Weg des Themas auch geübt (geprüft).
+   Betrug fehlt bewusst: „Erzähle einer Person von einem Trick“ passt
+   zu keiner der 12 Regeln. Dort bleibt der Kasten ohne Regel. */
+const TRANSFER_REGEL = {
+  datenschutz: "codes",
+  whatsapp:    "echt",
+  facebook:    "wersieht",
+  instagram:   "wersieht",
+  youtube:     "wahr",
+  snapchat:    "wersieht",
+  tiktok:      "aufhoeren",
+  hilfe:       "hilfe",
+  ki:          "wahr",
+  fakes:       "wahr",
+  einkaufen:   "geld"
+};
+
 /* Selbstprüfung für die Entwicklung: in der Browser-Konsole aufrufen.
    Meldet Merksätze ohne Regel und Regeln, die in weniger als zwei
    Themen vorkommen (die könnten nie "sitzen"). */

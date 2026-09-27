@@ -4829,7 +4829,7 @@ body.simple-mode .practice-box {
 .sa-option-btn:focus-visible {
   background: var(--accent-soft);
   border-color: var(--accent-dark);
-  outline: 3px solid var(--focus-color);
+  outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -7345,3 +7345,29 @@ body.lesson-view .orient-line { margin: 8px 0 12px; }
 .vorbild-details { margin: 12px 0; }
 @media (max-width: 380px) { .vorbild-box { flex-direction: column; } }
 .feedback-spaeter { margin: 6px 0 0; color: var(--ink-soft); font-size: 0.95rem; text-align: center; }
+
+/* „Eine Sache für heute“ – Regel darunter (Lernweg E5, 27.09.2026) */
+.transfer-regel { margin-top: 12px; text-align: left; }
+.transfer-regel .regel-platz-stand { display: block; margin-top: 0; }
+
+/* Testphase-Hinweis (27.09.2026). Bewusst nicht rot: Rot heißt Gefahr. */
+.test-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+.small-footer-notice .test-hinweis {
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-s);
+  background: var(--accent-soft);
+  color: var(--ink);
+  padding: 8px 12px;
+}
