@@ -7371,3 +7371,11 @@ body.lesson-view .orient-line { margin: 8px 0 12px; }
   color: var(--ink);
   padding: 8px 12px;
 }
+
+/* Nur noch ein Logo (27.09.2026): schmaler Kasten statt ganzer Breite */
+.footer-logos {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+.small-footer-notice .test-meinung { margin-top: 4px; font-size: 1rem; }

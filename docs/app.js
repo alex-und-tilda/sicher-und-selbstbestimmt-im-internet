@@ -2081,7 +2081,8 @@ function renderLegalFooter() {
   const footer = document.createElement("footer");
   footer.className = "small-footer-notice";
   footer.innerHTML = `
-    <p class="test-hinweis"><strong>Testphase:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.</p>
+    <p class="test-hinweis"><strong>Testphase:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.<br />
+    <button type="button" class="link-action test-meinung" onclick="zurMeinung()">Sag uns deine Meinung</button></p>
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
     <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
     <a href="ersteller.html">Ersteller</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="barrierefreiheit.html">Barrierefreiheit</a> · <a href="sprachstufen.html">Die Sprachstufen</a></p>
@@ -3928,6 +3929,15 @@ function buildGrandFinish() {
    Seite „Hilfe": jederzeit über das Hauptmenü erreichbar (COGA)
    ============================================================ */
 
+/* Testphase-Hinweis → Formular „Deine Meinung ist wichtig“ auf der
+   Hilfe-Seite (27.09.2026). Fokus auf den Bereich, damit Tastatur und
+   Vorlesen dort weitermachen. */
+function zurMeinung() {
+  renderHelpPage();
+  const ziel = document.getElementById("meinung");
+  if (ziel) { ziel.scrollIntoView({ block: "start" }); ziel.focus({ preventScroll: true }); }
+}
+
 function renderHelpPage() {
   stopReading();
   currentTopicId = null;
@@ -3990,7 +4000,7 @@ function renderHelpPage() {
       </div>
       <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
 
-      <div class="intro-offer" role="region" aria-label="Deine Meinung ist wichtig">
+      <div class="intro-offer" id="meinung" tabindex="-1" role="region" aria-label="Deine Meinung ist wichtig">
         <h3>Deine Meinung ist wichtig ${sectionReadChip("Deine Meinung ist wichtig")}</h3>
         <p>Du kannst diese Lern-Seite prüfen.</p>
         <p>Sag uns: Was ist gut? Was ist schwer?</p>
