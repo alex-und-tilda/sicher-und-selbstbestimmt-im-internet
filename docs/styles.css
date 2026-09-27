@@ -7326,3 +7326,22 @@ body.lesson-view .orient-line { margin: 8px 0 12px; }
    ruhiger Anstoß zum Erinnern, kein Kasten (§10a: Kästen nur um Antippbares). */
 .kennst-du-hinweis { margin: 0 0 10px; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.5; }
 .kennst-du-hinweis strong { color: var(--good); }
+
+/* Lernweg (26.09.2026): Anwenden, Erinnern, Erklärung beim Wiederholen.
+   Ruhig und ohne neue Kästen (§10a) – vorhandene Bausteine tragen. */
+.transfer-intro { margin: 0 0 12px; color: var(--ink-soft); }
+.erinnern-frage { margin: 4px 0 12px; font-weight: 600; line-height: 1.5; }
+.erinnern-details { margin: 0 0 12px; }
+.erinnern-details .erinnern-inhalt { padding-top: 8px; }
+.big-quiz-erklaerung { margin: 8px 0 0; line-height: 1.5; }
+
+/* Lernweg (26.09.2026): „So macht es Tilda/Alex" – Vorbild vor der Übung.
+   Ruhig, mit kleiner Figur links; auf schmalen Bildschirmen untereinander. */
+.vorbild-box { display: flex; gap: 12px; align-items: flex-start; margin: 14px 0; padding: 12px 14px;
+  background: var(--surface-soft); border-left: 4px solid var(--accent); border-radius: var(--radius-s); text-align: left; }
+.vorbild-box .role-figure--vorbild { width: 72px; height: 72px; flex: 0 0 72px; border-radius: 50%; object-fit: cover; margin: 0; }
+.vorbild-text h3 { margin: 0 0 6px; font-size: 1rem; }
+.vorbild-text p { margin: 0 0 4px; line-height: 1.5; }
+.vorbild-details { margin: 12px 0; }
+@media (max-width: 380px) { .vorbild-box { flex-direction: column; } }
+.feedback-spaeter { margin: 6px 0 0; color: var(--ink-soft); font-size: 0.95rem; text-align: center; }

@@ -1778,11 +1778,13 @@ const KURZ_VERSIONS = {
           { text: "Dazu gehören zum Beispiel dein Name, deine Adresse und dein Passwort." },
           { text: "Diese Daten gibst du nicht einfach weiter, weil andere sie ausnutzen können." }
         ],
-        remember: "Deine privaten Daten gehören dir. Du entscheidest, wer sie bekommt."
+        remember: "Deine privaten Daten gehören dir. Du entscheidest, wer sie bekommt.",
+        vorbild: ["Ein Gewinn-Spiel im Internet will die Adresse und die Telefon-Nummer von Alex haben.", "Alex überlegt kurz: Das sind private Daten, die nur ihm gehören.", "Deshalb gibt er sie nicht ein."]
       },
       standard: {
         text: [{ text: "Private Daten sind Angaben, die zu dir als Person gehören – etwa dein Name, deine Adresse oder dein Passwort. Sie gehören nur dir, und du entscheidest selbst, wer sie bekommt." }],
-        remember: "Private Daten gehören dir – du entscheidest, wer sie bekommt."
+        remember: "Private Daten gehören dir – du entscheidest, wer sie bekommt.",
+        vorbild: ["Ein Gewinnspiel fragt Alex nach Adresse und Telefonnummer. Alex erkennt: Das sind private Daten – und gibt sie nicht ein."]
       }
     },
     "Dein Passwort": {
@@ -1792,11 +1794,13 @@ const KURZ_VERSIONS = {
           { text: "Du sagst es niemandem weiter, auch nicht guten Freunden." },
           { text: "Ein gutes Passwort ist lang und schwer zu erraten." }
         ],
-        remember: "Dein Passwort bleibt geheim, auch vor Freunden."
+        remember: "Dein Passwort bleibt geheim, auch vor Freunden.",
+        vorbild: ["Ein Kollege fragt Tilda nach ihrem Passwort, weil er nur kurz etwas nachsehen will.", "Tilda bleibt freundlich, aber klar: Nein, mein Passwort bleibt geheim."]
       },
       standard: {
         text: [{ text: "Dein Passwort schützt dein Konto und ist deshalb geheim. Du gibst es an niemanden weiter, auch nicht an gute Freunde. Ein gutes Passwort ist lang und für andere schwer zu erraten." }],
-        remember: "Dein Passwort bleibt geheim – ohne Ausnahme."
+        remember: "Dein Passwort bleibt geheim – ohne Ausnahme.",
+        vorbild: ["Ein Kollege möchte kurz Tildas Passwort, um etwas nachzusehen. Tilda lehnt freundlich, aber klar ab: Ihr Passwort bleibt geheim."]
       }
     },
     "Jemand fragt nach deinen Daten": {
@@ -1806,11 +1810,13 @@ const KURZ_VERSIONS = {
           { text: "Dann gibst du deine Daten nicht sofort ein." },
           { text: "Frag zuerst eine Person, der du vertraust. Sie hilft dir bei der Entscheidung." }
         ],
-        remember: "Frag erst eine Person, der du vertraust. Dann entscheidest du."
+        remember: "Frag erst eine Person, der du vertraust. Dann entscheidest du.",
+        vorbild: ["Alex bekommt eine E-Mail, in der er sein Geburts-Datum eingeben soll.", "Er gibt nichts ein und zeigt die E-Mail zuerst seiner Betreuerin."]
       },
       standard: {
         text: [{ text: "Manchmal fragt dich jemand per Nachricht nach deinen Daten. Gib sie nicht vorschnell ein, sondern sprich zuerst mit einer Person, der du vertraust. Gemeinsam könnt ihr in Ruhe entscheiden, ob die Anfrage echt ist." }],
-        remember: "Erst Rat holen, dann entscheiden."
+        remember: "Erst Rat holen, dann entscheiden.",
+        vorbild: ["Eine E-Mail fordert Alex auf, sein Geburtsdatum einzugeben. Er gibt nichts ein und bespricht die Nachricht zuerst mit seiner Betreuerin."]
       }
     }
   },
@@ -1822,11 +1828,13 @@ const KURZ_VERSIONS = {
           { text: "Antworte nicht sofort, auch wenn die Nachricht freundlich klingt." },
           { text: "Zeig sie zuerst einer Person, der du vertraust. Sie hilft dir weiter." }
         ],
-        remember: "Bei unbekannten Nachrichten fragst du zuerst eine Person, der du vertraust."
+        remember: "Bei unbekannten Nachrichten fragst du zuerst eine Person, der du vertraust.",
+        vorbild: ["Eine fremde Nummer schreibt Tilda: Hallo, wie geht es dir?", "Tilda antwortet nicht sofort, sondern zeigt die Nachricht zuerst Alex."]
       },
       standard: {
         text: [{ text: "Bekommst du eine Nachricht von jemandem, den du nicht kennst, antwortest du nicht sofort – auch wenn sie freundlich klingt. Zeig sie zuerst einer Person, der du vertraust. Gemeinsam entscheidet ihr, wie es weitergeht." }],
-        remember: "Unbekannte Nachrichten: erst Rat holen, dann antworten."
+        remember: "Unbekannte Nachrichten: erst Rat holen, dann antworten.",
+        vorbild: ["Eine unbekannte Nummer schreibt Tilda freundlich an. Tilda antwortet nicht sofort, sondern zeigt die Nachricht zuerst Alex."]
       }
     },
     "Links in Nachrichten": {
@@ -1836,11 +1844,13 @@ const KURZ_VERSIONS = {
           { text: "Fremde Links können gefährlich sein, weil sie auf falsche Seiten führen." },
           { text: "Tippe deshalb nicht darauf. Frag lieber eine Person, der du vertraust." }
         ],
-        remember: "Auf fremde Links tippst du nicht."
+        remember: "Auf fremde Links tippst du nicht.",
+        vorbild: ["Alex bekommt von einer Nummer, die er nicht kennt, eine Nachricht mit einem Link.", "Er tippt nicht auf den Link und fragt zuerst Tilda."]
       },
       standard: {
         text: [{ text: "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht an, sondern frag eine Person, der du vertraust." }],
-        remember: "Fremde Links nicht antippen."
+        remember: "Fremde Links nicht antippen.",
+        vorbild: ["Von einer unbekannten Nummer kommt eine Nachricht mit Link. Alex tippt ihn nicht an und fragt zuerst Tilda."]
       }
     },
     "Dein WhatsApp-Code": {
@@ -1850,11 +1860,13 @@ const KURZ_VERSIONS = {
           { text: "Diesen Code gibst du niemandem weiter, auch nicht deinen Freunden." },
           { text: "Wer den Code bekommt, kann damit dein Konto stehlen." }
         ],
-        remember: "Den WhatsApp-Code gibst du nie weiter."
+        remember: "Den WhatsApp-Code gibst du nie weiter.",
+        vorbild: ["Tilda bekommt eine SMS mit einem Code.", "Kurz danach bittet jemand in einer Nachricht um genau diesen Code.", "Tilda schickt ihn nicht, denn der Code gehört nur ihr."]
       },
       standard: {
         text: [{ text: "WhatsApp schickt dir manchmal einen Bestätigungscode per SMS. Diesen Code gibst du niemals weiter – auch nicht an Freunde. Wer ihn hat, kann damit dein Konto übernehmen." }],
-        remember: "Den WhatsApp-Code gibst du niemals weiter."
+        remember: "Den WhatsApp-Code gibst du niemals weiter.",
+        vorbild: ["Tilda erhält einen Code per SMS, kurz darauf fragt jemand genau danach. Tilda gibt ihn nicht weiter – der Code gehört nur ihr."]
       }
     }
   },
@@ -1866,11 +1878,13 @@ const KURZ_VERSIONS = {
           { text: "In den Einstellungen legst du fest, wer dein Profil sieht." },
           { text: "Am besten sehen es nur deine Freunde. Eine Person, der du vertraust, kann dir beim Einstellen helfen." }
         ],
-        remember: "Dein Profil sehen nur deine Freunde."
+        remember: "Dein Profil sehen nur deine Freunde.",
+        vorbild: ["Alex öffnet bei Facebook die Einstellungen.", "Dort stellt er ein, dass nur seine Freunde sein Profil sehen.", "Tilda hilft ihm dabei."]
       },
       standard: {
         text: [{ text: "Dein Facebook-Profil ist für andere sichtbar. In den Einstellungen legst du fest, wer es sehen darf – am besten nur deine Freunde. Eine Person, der du vertraust, kann dir beim Einstellen helfen." }],
-        remember: "Dein Profil ist nur für Freunde sichtbar."
+        remember: "Dein Profil ist nur für Freunde sichtbar.",
+        vorbild: ["Alex öffnet die Facebook-Einstellungen und macht sein Profil nur für Freunde sichtbar. Tilda hilft ihm dabei."]
       }
     },
     "Unbekannte Personen": {
@@ -1880,11 +1894,13 @@ const KURZ_VERSIONS = {
           { text: "Wenn du die Person nicht kennst, nimmst du die Anfrage nicht an." },
           { text: "Bist du unsicher, fragst du eine Person, der du vertraust." }
         ],
-        remember: "Anfragen von Unbekannten lehnst du ab."
+        remember: "Anfragen von Unbekannten lehnst du ab.",
+        vorbild: ["Eine Person, die Tilda nicht kennt, schickt ihr eine Freundschafts-Anfrage.", "Tilda lehnt die Anfrage ab."]
       },
       standard: {
         text: [{ text: "Manchmal schickt dir jemand eine Freundschaftsanfrage, den du nicht kennst. Solche Anfragen nimmst du nicht an. Bist du unsicher, fragst du eine Person, der du vertraust." }],
-        remember: "Anfragen von Unbekannten ablehnen."
+        remember: "Anfragen von Unbekannten ablehnen.",
+        vorbild: ["Eine unbekannte Person schickt Tilda eine Freundschaftsanfrage. Tilda lehnt sie ab."]
       }
     },
     "Komische Nachrichten": {
@@ -1894,11 +1910,13 @@ const KURZ_VERSIONS = {
           { text: "Tippe nicht auf den Link und schick kein Geld." },
           { text: "Zeig die Nachricht lieber einer Person, der du vertraust." }
         ],
-        remember: "Komische Nachrichten zeigst du jemandem. Du tippst nichts an."
+        remember: "Komische Nachrichten zeigst du jemandem. Du tippst nichts an.",
+        vorbild: ["Jemand schreibt Alex, dass er schnell Geld braucht, und schickt einen Link.", "Alex tippt nicht auf den Link und zeigt die Nachricht Tilda."]
       },
       standard: {
         text: [{ text: "Seltsame Nachrichten, in denen jemand nach Geld fragt oder einen Link schickt, sind oft Betrug. Tippe nichts an und zeig die Nachricht einer Person, der du vertraust." }],
-        remember: "Seltsame Nachrichten zeigen statt antippen."
+        remember: "Seltsame Nachrichten zeigen statt antippen.",
+        vorbild: ["Jemand bittet Alex per Nachricht dringend um Geld und schickt einen Link. Alex tippt ihn nicht an und zeigt Tilda die Nachricht."]
       }
     }
   },
@@ -1910,11 +1928,13 @@ const KURZ_VERSIONS = {
           { text: "Du kannst einstellen, wer deine Fotos sieht." },
           { text: "Am besten stellst du dein Konto auf privat. Dann sehen nur deine Freunde deine Fotos." }
         ],
-        remember: "Stell dein Konto auf privat."
+        remember: "Stell dein Konto auf privat.",
+        vorbild: ["Tilda stellt ihr Instagram-Konto auf privat.", "Jetzt sehen nur noch ihre Freunde ihre Fotos."]
       },
       standard: {
         text: [{ text: "Fotos, die du auf Instagram postest, sind für andere sichtbar. Stellst du dein Konto auf privat, sehen nur noch die Menschen deine Fotos, die du selbst bestätigt hast." }],
-        remember: "Stell dein Konto auf privat."
+        remember: "Stell dein Konto auf privat.",
+        vorbild: ["Tilda stellt ihr Instagram-Konto auf privat – jetzt sehen nur noch bestätigte Freunde ihre Fotos."]
       }
     },
     "Fotos von anderen Personen": {
@@ -1924,11 +1944,13 @@ const KURZ_VERSIONS = {
           { text: "Dann fragst du diese Person zuerst." },
           { text: "Nur wenn sie Ja sagt, postest du das Foto." }
         ],
-        remember: "Fotos von anderen postest du nur, wenn sie Ja sagen."
+        remember: "Fotos von anderen postest du nur, wenn sie Ja sagen.",
+        vorbild: ["Alex möchte ein Foto posten, auf dem auch Tilda zu sehen ist.", "Deshalb fragt er sie zuerst.", "Erst als Tilda Ja sagt, postet er das Foto."]
       },
       standard: {
         text: [{ text: "Ist auf einem Foto eine andere Person zu sehen, fragst du sie vor dem Posten um Erlaubnis. Nur wenn sie zustimmt, stellst du das Foto online – jeder Mensch hat ein Recht am eigenen Bild." }],
-        remember: "Fotos von anderen: erst fragen, dann posten."
+        remember: "Fotos von anderen: erst fragen, dann posten.",
+        vorbild: ["Alex möchte ein Foto mit Tilda posten. Er fragt sie vorher – und postet es erst, als sie zustimmt."]
       }
     },
     "Nachrichten von Unbekannten": {
@@ -1938,11 +1960,13 @@ const KURZ_VERSIONS = {
           { text: "Dann antwortest du ihr nicht." },
           { text: "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter." }
         ],
-        remember: "Bei Nachrichten von Unbekannten fragst du eine Person, der du vertraust."
+        remember: "Bei Nachrichten von Unbekannten fragst du eine Person, der du vertraust.",
+        vorbild: ["Ein Profil, das Tilda nicht kennt, schreibt ihr eine Nachricht.", "Tilda antwortet nicht und zeigt die Nachricht Alex."]
       },
       standard: {
         text: [{ text: "Schreibt dir jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht stattdessen einer Person, der du vertraust – sie hilft dir, die Nachricht richtig einzuschätzen." }],
-        remember: "Nachrichten von Unbekannten: nicht antworten, Rat holen."
+        remember: "Nachrichten von Unbekannten: nicht antworten, Rat holen.",
+        vorbild: ["Ein fremdes Profil schreibt Tilda an. Sie antwortet nicht und zeigt Alex die Nachricht."]
       }
     }
   },
@@ -1954,11 +1978,13 @@ const KURZ_VERSIONS = {
           { text: "Frag dich deshalb beim Schauen: Stimmt das wirklich?" },
           { text: "Schau nach, was ein anderer Kanal dazu sagt, oder frag eine Person, der du vertraust." }
         ],
-        remember: "Du prüfst, ob ein Video stimmt."
+        remember: "Du prüfst, ob ein Video stimmt.",
+        vorbild: ["Ein Video behauptet, dass es morgen kein Wasser gibt.", "Alex glaubt das nicht sofort und schaut auf einer anderen Seite nach."]
       },
       standard: {
         text: [{ text: "Nicht jedes Video auf YouTube erzählt die Wahrheit. Frag dich deshalb, ob stimmt, was du siehst: Vergleiche mit anderen Kanälen oder sprich mit einer Person, der du vertraust." }],
-        remember: "Videos prüfen, bevor du ihnen glaubst."
+        remember: "Videos prüfen, bevor du ihnen glaubst.",
+        vorbild: ["Ein Video behauptet, morgen gebe es kein Wasser. Alex glaubt das nicht vorschnell und prüft es auf einer anderen Seite."]
       }
     },
     "Werbung erkennen": {
@@ -1968,11 +1994,13 @@ const KURZ_VERSIONS = {
           { text: "Du musst aber nichts kaufen." },
           { text: "Oft kannst du die Werbung überspringen. Auf die Werbung tippst du nicht." }
         ],
-        remember: "Auf Werbung tippst du nicht."
+        remember: "Auf Werbung tippst du nicht.",
+        vorbild: ["Mitten im Video kommt Werbung für Schuhe.", "Tilda weiß: Sie muss nichts kaufen.", "Sie überspringt die Werbung."]
       },
       standard: {
         text: [{ text: "In vielen Videos läuft Werbung, die dich zum Kaufen bringen soll. Du musst nichts kaufen: Überspring die Werbung, wenn das geht, und tippe sie nicht an." }],
-        remember: "Werbung überspringen, nicht antippen."
+        remember: "Werbung überspringen, nicht antippen.",
+        vorbild: ["Mitten im Video läuft Werbung für Schuhe. Tilda weiß, dass sie nichts kaufen muss, und überspringt sie."]
       }
     },
     "Pausen machen": {
@@ -1982,11 +2010,13 @@ const KURZ_VERSIONS = {
           { text: "Mach deshalb nach einer Stunde eine Pause." },
           { text: "Geh zum Beispiel raus oder beweg dich ein bisschen. Das tut dir gut." }
         ],
-        remember: "Nach einer Stunde machst du Pause."
+        remember: "Nach einer Stunde machst du Pause.",
+        vorbild: ["Alex schaut schon seit einer Stunde Videos.", "Er macht eine Pause und geht kurz nach draußen."]
       },
       standard: {
         text: [{ text: "Lange Videos am Stück sind anstrengend. Mach spätestens nach einer Stunde eine Pause – geh an die frische Luft oder beweg dich. Das tut Körper und Kopf gut." }],
-        remember: "Nach einer Stunde eine Pause einlegen."
+        remember: "Nach einer Stunde eine Pause einlegen.",
+        vorbild: ["Nach einer Stunde Videos macht Alex bewusst Pause und geht kurz an die frische Luft."]
       }
     }
   },
@@ -1998,11 +2028,13 @@ const KURZ_VERSIONS = {
           { text: "Andere können es aber vorher speichern, zum Beispiel mit einem Bildschirm-Foto. Dann ist das Bild für immer da." },
           { text: "Schick deshalb nur Bilder, die alle sehen dürfen." }
         ],
-        remember: "Auch Bilder auf Snapchat können für immer bleiben."
+        remember: "Auch Bilder auf Snapchat können für immer bleiben.",
+        vorbild: ["Bevor Tilda ein Bild bei Snapchat schickt, fragt sie sich: Dürfen alle das Bild sehen?", "Erst als die Antwort Ja ist, schickt sie es."]
       },
       standard: {
         text: [{ text: "Auf Snapchat verschwinden Bilder nach kurzer Zeit – aber nur scheinbar. Andere können sie vorher mit einem Screenshot speichern, und dann bleiben sie dauerhaft erhalten. Schick deshalb nur Bilder, die jeder sehen darf." }],
-        remember: "Was du schickst, kann für immer bleiben."
+        remember: "Was du schickst, kann für immer bleiben.",
+        vorbild: ["Bevor Tilda ein Bild verschickt, fragt sie sich, ob es jeder sehen dürfte – erst dann schickt sie es."]
       }
     },
     "Dein Standort": {
@@ -2012,11 +2044,13 @@ const KURZ_VERSIONS = {
           { text: "Das ist gefährlich, weil dich so auch Fremde finden können." },
           { text: "Schalte deinen Standort deshalb aus. Eine Person, der du vertraust, hilft dir dabei." }
         ],
-        remember: "Du schaltest deinen Standort aus."
+        remember: "Du schaltest deinen Standort aus.",
+        vorbild: ["Alex sieht, dass Snapchat seinen Ort auf einer Karte zeigt.", "Er schaltet den Standort aus, und Tilda hilft ihm dabei."]
       },
       standard: {
         text: [{ text: "Snapchat kann deinen Standort auf einer Karte anzeigen – dann sehen andere, wo du gerade bist. Das kann gefährlich werden. Schalte die Standort-Freigabe deshalb aus; eine Person, der du vertraust, kann dir dabei helfen." }],
-        remember: "Standort-Freigabe ausschalten."
+        remember: "Standort-Freigabe ausschalten.",
+        vorbild: ["Alex merkt, dass Snapchat seinen Standort auf einer Karte zeigt. Mit Tildas Hilfe schaltet er die Freigabe aus."]
       }
     },
     "Niemand darf dich zwingen": {
@@ -2026,11 +2060,13 @@ const KURZ_VERSIONS = {
           { text: "Wenn du das nicht willst, musst du es auch nicht tun. Du darfst Nein sagen." },
           { text: "Erzähl es danach eine Person, der du vertraust." }
         ],
-        remember: "Du darfst immer Nein sagen."
+        remember: "Du darfst immer Nein sagen.",
+        vorbild: ["Jemand drängt Tilda, ein Bild von sich zu schicken.", "Tilda will das nicht und sagt Nein.", "Danach erzählt sie Alex davon."]
       },
       standard: {
         text: [{ text: "Setzt dich jemand unter Druck, ein Bild von dir zu schicken, musst du das nicht tun. Du darfst jederzeit Nein sagen. Erzähl einer Person, der du vertraust, davon – du bist damit nicht allein." }],
-        remember: "Du darfst Nein sagen – immer."
+        remember: "Du darfst Nein sagen – immer.",
+        vorbild: ["Jemand drängt Tilda, ein Bild von sich zu schicken. Sie sagt Nein und erzählt Alex davon."]
       }
     }
   },
@@ -2043,11 +2079,13 @@ const KURZ_VERSIONS = {
           { text: "So siehst du oft das Gleiche. Schau darum auch andere Kanäle an." },
           { text: "Manche Videos zeigen gefährliche Trends oder Mutproben. Da musst du nicht mitmachen, auch wenn viele andere es tun." }
         ],
-        remember: "TikTok zeigt dir nur einen Teil der Videos."
+        remember: "TikTok zeigt dir nur einen Teil der Videos.",
+        vorbild: ["Bei TikTok springen gerade viele von einer hohen Mauer.", "Alex weiß, dass das gefährlich ist, und macht es nicht nach."]
       },
       standard: {
         text: [{ text: "TikTok merkt sich, welche Videos dir gefallen, und zeigt dir immer mehr davon. So entsteht schnell ein einseitiges Bild. Schau deshalb bewusst auch andere Kanäle und Meinungen an. Manche Videos zeigen gefährliche Trends oder Mutproben – mitmachen musst du nicht, auch wenn es alle tun." }],
-        remember: "TikTok zeigt dir eine Auswahl – nicht alles."
+        remember: "TikTok zeigt dir eine Auswahl – nicht alles.",
+        vorbild: ["Auf TikTok springen gerade viele von einer hohen Mauer. Alex macht den gefährlichen Trend nicht mit."]
       }
     },
     "Nachrichten auf TikTok": {
@@ -2057,11 +2095,13 @@ const KURZ_VERSIONS = {
           { text: "Dann antwortest du ihr nicht." },
           { text: "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter." }
         ],
-        remember: "Bei Nachrichten von Unbekannten fragst du eine Person, der du vertraust."
+        remember: "Bei Nachrichten von Unbekannten fragst du eine Person, der du vertraust.",
+        vorbild: ["Eine fremde Person schreibt Tilda bei TikTok eine private Nachricht.", "Tilda antwortet nicht und zeigt die Nachricht Alex."]
       },
       standard: {
         text: [{ text: "Schreibt dir auf TikTok jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht einer Person, der du vertraust – gemeinsam entscheidet ihr, was zu tun ist." }],
-        remember: "Nachrichten von Unbekannten: nicht antworten, Rat holen."
+        remember: "Nachrichten von Unbekannten: nicht antworten, Rat holen.",
+        vorbild: ["Eine fremde Person schreibt Tilda privat an. Sie antwortet nicht und zeigt Alex die Nachricht."]
       }
     },
     "Pause machen": {
@@ -2071,11 +2111,13 @@ const KURZ_VERSIONS = {
           { text: "Stell dir deshalb einen Timer, zum Beispiel auf eine Stunde." },
           { text: "Wenn der Timer klingelt, machst du Pause." }
         ],
-        remember: "Du stellst einen Timer und machst Pause."
+        remember: "Du stellst einen Timer und machst Pause.",
+        vorbild: ["Alex stellt sich einen Timer auf eine Stunde.", "Als der Timer klingelt, legt er das Handy weg."]
       },
       standard: {
         text: [{ text: "TikTok ist darauf ausgelegt, dich möglichst lange in der App zu halten. Stell dir deshalb einen Timer, etwa auf eine Stunde, und mach eine Pause, sobald er klingelt." }],
-        remember: "Timer stellen, Pause machen."
+        remember: "Timer stellen, Pause machen.",
+        vorbild: ["Alex stellt sich einen Timer auf eine Stunde – und legt das Handy weg, als er klingelt."]
       }
     }
   },
@@ -2087,11 +2129,13 @@ const KURZ_VERSIONS = {
           { text: "Dann machst du Stopp und gehst nicht weiter." },
           { text: "Das ist mutig und richtig." }
         ],
-        remember: "Wenn sich etwas falsch anfühlt, machst du Stopp."
+        remember: "Wenn sich etwas falsch anfühlt, machst du Stopp.",
+        vorbild: ["Tilda liest eine Nachricht, die ihr Angst macht.", "Sie macht Stopp und antwortet nicht."]
       },
       standard: {
         text: [{ text: "Fühlt sich im Internet etwas falsch an oder bist du unsicher, hörst du auf dein Gefühl: Mach Stopp und geh nicht weiter. Das ist kein Zeichen von Schwäche, sondern mutig und richtig." }],
-        remember: "Fühlt sich etwas falsch an: Stopp."
+        remember: "Fühlt sich etwas falsch an: Stopp.",
+        vorbild: ["Eine Nachricht macht Tilda Angst. Sie hält inne und antwortet nicht."]
       }
     },
     "Wer hilft dir?": {
@@ -2101,11 +2145,13 @@ const KURZ_VERSIONS = {
           { text: "Geh zu einer Person, der du vertraust. Das kann zum Beispiel deine Betreuerin, dein Betreuer oder ein Freund sein." },
           { text: "Zeig dieser Person das Problem. Dann könnt ihr es zusammen lösen." }
         ],
-        remember: "Du bittest eine Person um Hilfe, der du vertraust."
+        remember: "Du bittest eine Person um Hilfe, der du vertraust.",
+        vorbild: ["Alex hat ein Problem mit seinem Handy.", "Er geht zu seiner Betreuerin und zeigt ihr, was passiert ist."]
       },
       standard: {
         text: [{ text: "Hast du im Internet ein Problem, musst du es nicht allein lösen. Wende dich an eine Person, der du vertraust – etwa an deine Betreuerin, deinen Betreuer oder einen Freund – und zeig ihr, was passiert ist." }],
-        remember: "Hol dir Hilfe bei einer Person, der du vertraust."
+        remember: "Hol dir Hilfe bei einer Person, der du vertraust.",
+        vorbild: ["Alex hat ein Problem mit seinem Handy. Er geht zu seiner Betreuerin und zeigt ihr, was passiert ist."]
       }
     },
     "Du bist nicht allein": {
@@ -2115,11 +2161,13 @@ const KURZ_VERSIONS = {
           { text: "Du bist also nicht allein damit." },
           { text: "Hilfe zu holen ist keine Schwäche. Es ist mutig und richtig." }
         ],
-        remember: "Du bist nicht allein. Hilfe holen ist mutig."
+        remember: "Du bist nicht allein. Hilfe holen ist mutig.",
+        vorbild: ["Tilda schämt sich ein bisschen für ihr Problem.", "Trotzdem erzählt sie Alex davon, und Alex sagt: Danke, das war mutig."]
       },
       standard: {
         text: [{ text: "Probleme im Internet haben sehr viele Menschen – du bist damit nicht allein. Sich Hilfe zu holen, ist keine Schwäche, sondern mutig und richtig." }],
-        remember: "Hilfe holen ist mutig, nicht schwach."
+        remember: "Hilfe holen ist mutig, nicht schwach.",
+        vorbild: ["Tilda schämt sich etwas, erzählt Alex aber trotzdem von ihrem Problem. Alex sagt: Danke, das war mutig."]
       }
     }
   },
@@ -2131,11 +2179,13 @@ const KURZ_VERSIONS = {
           { text: "KI ist ein Computer-Programm, das Fragen beantworten, Texte schreiben und Bilder machen kann." },
           { text: "Auch wenn KI manchmal wie ein Mensch schreibt, ist sie kein Mensch." }
         ],
-        remember: "KI ist ein Programm. KI ist kein Mensch."
+        remember: "KI ist ein Programm. KI ist kein Mensch.",
+        vorbild: ["Alex schreibt mit einem Chatbot, der sehr freundlich antwortet.", "Alex weiß trotzdem: Das ist ein Programm und kein Mensch."]
       },
       standard: {
         text: [{ text: "KI steht für Künstliche Intelligenz. Gemeint sind Computerprogramme, die Fragen beantworten, Texte schreiben oder Bilder erzeugen können. Auch wenn sie dabei menschlich wirken: Eine KI ist kein Mensch, sondern ein Programm." }],
-        remember: "KI ist ein Programm – kein Mensch."
+        remember: "KI ist ein Programm – kein Mensch.",
+        vorbild: ["Alex schreibt mit einem sehr freundlichen Chatbot – und weiß trotzdem: Das ist ein Programm, kein Mensch."]
       }
     },
     "Was kann KI?": {
@@ -2145,11 +2195,13 @@ const KURZ_VERSIONS = {
           { text: "Sie gibt dir schnell eine Antwort. Aber diese Antwort ist nicht immer richtig." },
           { text: "Deshalb prüfst du die Antwort, bevor du ihr glaubst." }
         ],
-        remember: "Antworten von KI prüfst du immer."
+        remember: "Antworten von KI prüfst du immer.",
+        vorbild: ["Tilda fragt eine KI, wann ihr Bus fährt.", "Die KI antwortet sofort, aber Tilda prüft die Zeit trotzdem auf dem Fahrplan."]
       },
       standard: {
         text: [{ text: "KI kann dir helfen: Du stellst eine Frage und bekommst schnell eine Antwort. Diese Antworten klingen oft sicher, sind aber nicht immer richtig. Prüf deshalb wichtige Antworten, bevor du dich darauf verlässt." }],
-        remember: "KI-Antworten immer prüfen."
+        remember: "KI-Antworten immer prüfen.",
+        vorbild: ["Tilda fragt eine KI nach ihrem Bus. Die Antwort kommt sofort – Tilda prüft sie trotzdem im Fahrplan."]
       }
     },
     "Wann musst du aufpassen?": {
@@ -2160,11 +2212,13 @@ const KURZ_VERSIONS = {
           { text: "Will eine bekannte Stimme am Telefon Geld, legst du auf und rufst die Person unter ihrer bekannten Nummer selbst an." },
           { text: "Glaub deshalb nicht alles. Frag im Zweifel eine Person, der du vertraust." }
         ],
-        remember: "Du glaubst nicht alles. Du prüfst es zuerst."
+        remember: "Du glaubst nicht alles. Du prüfst es zuerst.",
+        vorbild: ["Am Telefon klingt eine Stimme wie der Bruder von Alex und will sofort Geld.", "Alex legt auf und ruft seinen Bruder unter der bekannten Nummer selbst an."]
       },
       standard: {
         text: [{ text: "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst, und frag im Zweifel eine Person, der du vertraust." }],
-        remember: "Nicht alles glauben – erst prüfen."
+        remember: "Nicht alles glauben – erst prüfen.",
+        vorbild: ["Am Telefon klingt eine Stimme wie Alex' Bruder und verlangt sofort Geld. Alex legt auf und ruft seinen Bruder unter der bekannten Nummer an."]
       }
     }
   },
@@ -2175,11 +2229,13 @@ const KURZ_VERSIONS = {
           { text: "Eine Fake-Nachricht ist eine Lüge, die wie eine echte Nachricht aussieht." },
           { text: "Manchmal ist die Fake-Nachricht auch ein Bild, das jemand verändert hat." }
         ],
-        remember: "Fake-Nachrichten sind Lügen, die echt aussehen."
+        remember: "Fake-Nachrichten sind Lügen, die echt aussehen.",
+        vorbild: ["Tilda liest, dass ein bekannter Sänger gestorben sein soll.", "Die Nachricht steht aber nur auf einer einzigen Seite.", "Tilda merkt: Das kann eine Lüge sein."]
       },
       standard: {
         text: [{ text: "Eine Fake-Nachricht ist eine Falschmeldung, die wie eine echte Nachricht aussieht. Manchmal ist es auch ein Bild, das jemand bearbeitet hat, damit es etwas Falsches zeigt." }],
-        remember: "Fake-Nachrichten sind Lügen, die echt aussehen."
+        remember: "Fake-Nachrichten sind Lügen, die echt aussehen.",
+        vorbild: ["Tilda liest, ein bekannter Sänger sei gestorben – aber nur auf einer einzigen Seite. Sie erkennt: Das kann eine Falschmeldung sein."]
       }
     },
     "Wie erkennst du Fakes?": {
@@ -2189,11 +2245,13 @@ const KURZ_VERSIONS = {
           { text: "Überleg dann kurz, bevor du etwas tust." },
           { text: "Prüf die Nachricht auf einer anderen Seite oder frag eine Person, der du vertraust." }
         ],
-        remember: "Erst prüfen, dann teilen."
+        remember: "Erst prüfen, dann teilen.",
+        vorbild: ["Eine Nachricht macht Alex sehr wütend.", "Er macht Stopp und prüft die Nachricht zuerst, bevor er etwas tut."]
       },
       standard: {
         text: [{ text: "Macht dich eine Nachricht sehr aufgeregt oder wütend, ist Vorsicht angebracht – genau darauf zielen viele Fakes ab. Halte kurz inne und prüf die Meldung auf einer anderen, verlässlichen Seite oder frag eine Person, der du vertraust." }],
-        remember: "Erst prüfen, dann teilen."
+        remember: "Erst prüfen, dann teilen.",
+        vorbild: ["Eine Nachricht macht Alex wütend. Er hält inne und prüft sie, bevor er reagiert."]
       }
     },
     "Was tust du bei Fakes?": {
@@ -2202,11 +2260,13 @@ const KURZ_VERSIONS = {
           { text: "Wenn du eine Fake-Nachricht erkennst, schickst du sie nicht weiter." },
           { text: "Du löschst sie und erzählst eine Person, der du vertraust davon." }
         ],
-        remember: "Fake-Nachrichten leitest du nicht weiter."
+        remember: "Fake-Nachrichten leitest du nicht weiter.",
+        vorbild: ["Tilda erkennt, dass eine Nachricht ein Fake ist.", "Sie schickt sie nicht weiter und löscht sie."]
       },
       standard: {
         text: [{ text: "Hast du eine Fake-Nachricht erkannt, leitest du sie nicht weiter – so stoppst du ihre Verbreitung. Lösch sie und erzähl einer Person, der du vertraust, davon." }],
-        remember: "Fakes nicht weiterleiten."
+        remember: "Fakes nicht weiterleiten.",
+        vorbild: ["Tilda erkennt eine Falschmeldung. Sie leitet sie nicht weiter und löscht sie."]
       }
     }
   },
@@ -2218,11 +2278,13 @@ const KURZ_VERSIONS = {
           { text: "Sie sagen zum Beispiel, dass sie dir helfen wollen." },
           { text: "In Wirklichkeit wollen sie aber dein Geld oder deine Daten. Das ist Betrug." }
         ],
-        remember: "Nicht jeder im Internet ist ehrlich."
+        remember: "Nicht jeder im Internet ist ehrlich.",
+        vorbild: ["Jemand bietet Alex Hilfe an, will dafür aber seine Bank-Daten.", "Alex merkt: Die Person will nur seine Daten, und gibt nichts ein."]
       },
       standard: {
         text: [{ text: "Im Internet geben sich manche Menschen hilfsbereit oder freundlich, wollen aber in Wahrheit an dein Geld oder deine Daten. Genau das ist Betrug." }],
-        remember: "Nicht jeder im Internet meint es ehrlich."
+        remember: "Nicht jeder im Internet meint es ehrlich.",
+        vorbild: ["Jemand bietet Alex Hilfe an – gegen seine Bankdaten. Alex durchschaut das und gibt nichts ein."]
       }
     },
     "Wie erkennst du Betrug?": {
@@ -2232,11 +2294,13 @@ const KURZ_VERSIONS = {
           { text: "Wenn du so ein Zeichen siehst, machst du Stopp." },
           { text: "Dann fragst du eine Person, der du vertraust." }
         ],
-        remember: "Bei Stress oder Gewinn machst du Stopp."
+        remember: "Bei Stress oder Gewinn machst du Stopp.",
+        vorbild: ["Eine Nachricht sagt, dass Tilda ein Handy gewonnen hat.", "Sie soll nur schnell 2 Euro bezahlen.", "Tilda macht Stopp und fragt Alex."]
       },
       standard: {
         text: [{ text: "Typische Warnzeichen für Betrug sind überraschende Gewinne, dringende Bitten um Geld und Zeitdruck. Siehst du so ein Zeichen, machst du Stopp und fragst eine Person, der du vertraust." }],
-        remember: "Zeitdruck oder Gewinn: erst Stopp machen."
+        remember: "Zeitdruck oder Gewinn: erst Stopp machen.",
+        vorbild: ["Eine Nachricht meldet Tilda einen Handy-Gewinn – sie soll nur schnell 2 Euro zahlen. Tilda hält inne und fragt Alex."]
       }
     },
     "Was tust du bei Betrug?": {
@@ -2246,11 +2310,13 @@ const KURZ_VERSIONS = {
           { text: "Sagt eine Nachricht, mit deinem Bank-Konto stimmt etwas nicht, tippst du nicht auf den Link. Du öffnest deine Bank-App selbst." },
           { text: "Erzähl es eine Person, der du vertraust. Sie hilft dir weiter." }
         ],
-        remember: "Kein Geld senden. Frag eine Person, der du vertraust."
+        remember: "Kein Geld senden. Frag eine Person, der du vertraust.",
+        vorbild: ["Eine SMS sagt Alex, dass sein Konto gesperrt ist, und schickt einen Link.", "Alex tippt nicht auf den Link, sondern öffnet seine Bank-App selbst."]
       },
       standard: {
         text: [{ text: "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Meldet eine Nachricht ein Problem mit deinem Konto, öffne die Bank-App selbst, statt dem Link zu folgen. Erzähl einer Person, der du vertraust, davon – gemeinsam findet ihr den nächsten Schritt." }],
-        remember: "Kein Geld, keine Daten – Hilfe holen."
+        remember: "Kein Geld, keine Daten – Hilfe holen.",
+        vorbild: ["Eine SMS meldet Alex ein gesperrtes Konto und schickt einen Link. Er öffnet stattdessen seine Bank-App selbst."]
       }
     }
   },
@@ -2261,11 +2327,13 @@ const KURZ_VERSIONS = {
           { text: "Im Internet kannst du einkaufen. Das nennt man Online-Shopping." },
           { text: "Du suchst dir etwas aus und bezahlst es. Dann bringt ein Paket-Dienst die Ware zu dir nach Hause." }
         ],
-        remember: "Du kaufst nur in sicheren Shops ein."
+        remember: "Du kaufst nur in sicheren Shops ein.",
+        vorbild: ["Tilda will im Internet eine Hose kaufen.", "Sie kauft bei einem Shop, den sie schon lange kennt."]
       },
       standard: {
         text: [{ text: "Online-Shopping heißt: Du suchst im Internet etwas aus, bezahlst es und bekommst die Ware nach Hause geliefert. Das ist bequem – wichtig ist aber, dass du nur in sicheren Shops einkaufst." }],
-        remember: "Nur in sicheren Shops einkaufen."
+        remember: "Nur in sicheren Shops einkaufen.",
+        vorbild: ["Tilda kauft eine Hose online – bei einem Shop, den sie schon lange kennt."]
       }
     },
     "Gute Shops erkennen": {
@@ -2276,11 +2344,13 @@ const KURZ_VERSIONS = {
           { text: "Das Schloss in der Adress-Zeile allein ist kein gutes Zeichen, weil auch falsche Shops es haben." },
           { text: "Wenn du unsicher bist, fragst du eine Person, der du vertraust." }
         ],
-        remember: "Ein guter Shop zeigt Name und Adresse im Impressum."
+        remember: "Ein guter Shop zeigt Name und Adresse im Impressum.",
+        vorbild: ["Alex findet einen neuen Shop und schaut zuerst ins Impressum.", "Dort stehen Name und Adresse, und das ist ein gutes Zeichen."]
       },
       standard: {
         text: [{ text: "Seriöse Shops nennen im Impressum ihren Namen und ihre Anschrift, und ihre Preise sind realistisch statt verdächtig niedrig. Das Schloss-Symbol in der Adresszeile reicht allein nicht: Es zeigt nur eine verschlüsselte Verbindung, und auch Fake-Shops haben es. Bist du unsicher, frag eine Person, der du vertraust." }],
-        remember: "Ein seriöser Shop nennt Name und Anschrift."
+        remember: "Ein seriöser Shop nennt Name und Anschrift.",
+        vorbild: ["Bei einem neuen Shop schaut Alex zuerst ins Impressum. Name und Anschrift stehen dort – ein gutes Zeichen."]
       }
     },
     "Sicher bezahlen": {
@@ -2290,12 +2360,169 @@ const KURZ_VERSIONS = {
           { text: "Deine Kreditkarte gibst du nicht auf jeder Seite ein." },
           { text: "Wenn es Probleme gibt, fragst du eine Person, der du vertraust." }
         ],
-        remember: "PayPal oder Rechnung ist sicherer."
+        remember: "PayPal oder Rechnung ist sicherer.",
+        vorbild: ["Tilda kauft zum ersten Mal in einem Shop.", "Sie bezahlt auf Rechnung, damit sie zuerst die Ware bekommt."]
       },
       standard: {
         text: [{ text: "Sicherer bezahlst du auf Rechnung – dann zahlst du erst, wenn die Ware da ist – oder über PayPal mit Käuferschutz. Deine Kreditkartendaten gibst du nicht auf jeder Seite ein. Gibt es Probleme, frag eine Person, der du vertraust." }],
-        remember: "Rechnung oder PayPal sind sicherer."
+        remember: "Rechnung oder PayPal sind sicherer.",
+        vorbild: ["Beim ersten Einkauf in einem Shop zahlt Tilda auf Rechnung – so bekommt sie zuerst die Ware."]
       }
+    }
+  }
+};
+
+
+/* ------------------------------------------------------------
+   Lernziele „Danach kannst du …" (Lernweg, 26.09.2026): je Thema für den
+   Kurz-Weg (passend zu seinen 3 Lektionen) und den langen Weg, in drei
+   Stufen. Vorher standen die Ziele als Wissen da („Was du bei fremden
+   Nummern tust"), im Kurz-Weg nur die Titel der Lektionen. Die alten
+   learningGoals in topics.js bleiben als Rückfall stehen.
+   ------------------------------------------------------------ */
+const LERNZIELE = {
+  datenschutz: {
+    kurz: {
+      leicht:   ["Private Daten erkennen.", "Dein Passwort geheim halten.", "Bei Fragen nach Daten erst eine vertraute Person fragen."],
+      einfach:  ["Erkennen, welche Daten privat sind.", "Dein Passwort so schützen, dass niemand es erfährt.", "Richtig reagieren, wenn jemand nach deinen Daten fragt."],
+      standard: ["Private Daten erkennen und schützen.", "Dein Passwort konsequent geheim halten.", "Auf Anfragen nach deinen Daten besonnen reagieren."]
+    },
+    lang: {
+      leicht:   ["Private Daten erkennen.", "Dein Passwort geheim halten.", "Auf Fragen nach Daten richtig antworten."],
+      einfach:  ["Erkennen, welche Daten privat sind.", "Dein Passwort und deine Konten gut schützen.", "Richtig reagieren, wenn jemand nach deinen Daten fragt."],
+      standard: ["Private Daten erkennen und bewusst damit umgehen.", "Passwörter und Konten wirksam schützen.", "Auf Anfragen nach deinen Daten besonnen reagieren."]
+    }
+  },
+  whatsapp: {
+    kurz: {
+      leicht:   ["Bei fremden Nachrichten richtig handeln.", "Fremde Links erkennen.", "Deinen WhatsApp-Code schützen."],
+      einfach:  ["Richtig reagieren, wenn dir eine fremde Nummer schreibt.", "Gefährliche Links in Nachrichten erkennen.", "Deinen WhatsApp-Code schützen, auch vor Freunden."],
+      standard: ["Nachrichten von Unbekannten sicher einschätzen.", "Verdächtige Links erkennen und nicht antippen.", "Deinen Bestätigungscode vor Missbrauch schützen."]
+    },
+    lang: {
+      leicht:   ["Bei fremden Nummern richtig handeln.", "Codes schützen.", "Bei Geld-Bitten richtig handeln."],
+      einfach:  ["Richtig reagieren, wenn dir eine fremde Nummer schreibt.", "Codes nie weitergeben.", "Bei Geld-Bitten erst nachprüfen."],
+      standard: ["Nachrichten fremder Nummern sicher einschätzen.", "Bestätigungscodes konsequent schützen.", "Geldforderungen über einen bekannten Weg überprüfen."]
+    }
+  },
+  facebook: {
+    kurz: {
+      leicht:   ["Dein Profil nur für Freunde einstellen.", "Fremde Anfragen ablehnen.", "Komische Nachrichten erkennen."],
+      einfach:  ["Dein Profil so einstellen, dass nur Freunde es sehen.", "Freundschafts-Anfragen von Fremden ablehnen.", "Komische Nachrichten erkennen und jemandem zeigen."],
+      standard: ["Die Sichtbarkeit deines Profils einschränken.", "Anfragen von Unbekannten einschätzen und ablehnen.", "Verdächtige Nachrichten erkennen, ohne Links anzutippen."]
+    },
+    lang: {
+      leicht:   ["Dein Profil sicher einstellen.", "Bei fremden Kontakten richtig handeln.", "Private Daten schützen."],
+      einfach:  ["Dein Profil sicher einstellen.", "Richtig reagieren, wenn dich Fremde kontaktieren.", "Entscheiden, welche Daten du nicht teilst."],
+      standard: ["Dein Profil datensparsam einstellen.", "Kontaktanfragen von Unbekannten einschätzen.", "Bewusst entscheiden, welche Daten du teilst."]
+    }
+  },
+  instagram: {
+    kurz: {
+      leicht:   ["Dein Konto auf privat stellen.", "Vor dem Posten andere fragen.", "Bei fremden Nachrichten richtig handeln."],
+      einfach:  ["Dein Konto so einstellen, dass nur Freunde deine Fotos sehen.", "Andere fragen, bevor du ein Foto mit ihnen postest.", "Richtig reagieren, wenn dir ein fremdes Profil schreibt."],
+      standard: ["Dein Konto auf privat stellen.", "Vor dem Posten die Zustimmung anderer einholen.", "Nachrichten fremder Profile sicher einschätzen."]
+    },
+    lang: {
+      leicht:   ["Fotos sicher posten.", "Deinen Standort schützen.", "Fake-Profile erkennen."],
+      einfach:  ["Fotos so posten, dass sie niemandem schaden.", "Deinen Standort schützen.", "Fake-Profile erkennen."],
+      standard: ["Fotos verantwortungsvoll teilen.", "Deinen Standort vor Fremden schützen.", "Gefälschte Profile erkennen."]
+    }
+  },
+  youtube: {
+    kurz: {
+      leicht:   ["Videos prüfen: Stimmt das?", "Werbung erkennen.", "Pausen machen."],
+      einfach:  ["Prüfen, ob ein Video wirklich stimmt.", "Werbung in Videos erkennen.", "Rechtzeitig eine Pause machen."],
+      standard: ["Den Wahrheitsgehalt von Videos überprüfen.", "Werbung und Kaufanreize erkennen.", "Deine Bildschirmzeit bewusst begrenzen."]
+    },
+    lang: {
+      leicht:   ["Videos prüfen: Stimmt das?", "Werbung erkennen.", "Pausen machen und gesund bleiben."],
+      einfach:  ["Prüfen, ob ein Video stimmt.", "Werbung bei YouTube erkennen.", "Pausen machen und auf dich achten."],
+      standard: ["Den Wahrheitsgehalt von Videos überprüfen.", "Werbung und Produktplatzierungen erkennen.", "Gesund mit deiner Bildschirmzeit umgehen."]
+    }
+  },
+  snapchat: {
+    kurz: {
+      leicht:   ["Sichere Bilder auswählen.", "Deinen Standort ausschalten.", "Nein sagen."],
+      einfach:  ["Nur Bilder schicken, die alle sehen dürfen.", "Deinen Standort bei Snapchat ausschalten.", "Nein sagen, wenn dich jemand unter Druck setzt."],
+      standard: ["Bewusst auswählen, welche Bilder du verschickst.", "Deine Standort-Freigabe ausschalten.", "Dich gegen Druck abgrenzen und Hilfe holen."]
+    },
+    lang: {
+      leicht:   ["Wissen: Snaps bleiben oft gespeichert.", "Deinen Standort schützen.", "Bei Stress richtig handeln."],
+      einfach:  ["Verstehen, dass Snaps gespeichert werden können.", "Deinen Standort schützen.", "Richtig reagieren, wenn dir jemand Stress macht."],
+      standard: ["Einschätzen, was mit verschickten Snaps passieren kann.", "Deinen Standort vor Fremden schützen.", "Auf Druck und Belästigung richtig reagieren."]
+    }
+  },
+  tiktok: {
+    kurz: {
+      leicht:   ["Bei gefährlichen Trends nicht mitmachen.", "Bei fremden Nachrichten richtig handeln.", "Mit einem Timer Pause machen."],
+      einfach:  ["Bei gefährlichen Trends Nein sagen.", "Richtig reagieren, wenn dir Fremde schreiben.", "Mit einem Timer rechtzeitig aufhören."],
+      standard: ["Gefährliche Trends erkennen und nicht mitmachen.", "Private Nachrichten von Fremden sicher einschätzen.", "Deine Nutzungszeit mit einem Timer begrenzen."]
+    },
+    lang: {
+      leicht:   ["Verstehen: So wählt TikTok Videos aus.", "Bei Nachrichten und Kontakten aufpassen.", "Gesund mit TikTok umgehen."],
+      einfach:  ["Verstehen, wie TikTok Videos für dich auswählt.", "Bei Nachrichten und Kontakten aufpassen.", "Gesund mit TikTok umgehen."],
+      standard: ["Nachvollziehen, wie TikTok Inhalte auswählt.", "Kontakte und Nachrichten sicher einschätzen.", "Bewusst und gesund mit TikTok umgehen."]
+    }
+  },
+  hilfe: {
+    kurz: {
+      leicht:   ["Stopp machen.", "Eine vertraute Person um Hilfe bitten.", "Wissen: Hilfe holen ist mutig."],
+      einfach:  ["Stopp machen, wenn sich etwas falsch anfühlt.", "Eine Person um Hilfe bitten, der du vertraust.", "Hilfe holen, ohne dich zu schämen."],
+      standard: ["Bei einem schlechten Gefühl innehalten.", "Gezielt Unterstützung bei einer Vertrauensperson holen.", "Hilfe annehmen, ohne dich zu schämen."]
+    },
+    lang: {
+      leicht:   ["Bei Problemen richtig handeln.", "Um Hilfe bitten.", "Schlimme Dinge melden."],
+      einfach:  ["Richtig handeln, wenn etwas passiert.", "Die richtige Person um Hilfe bitten.", "Schlimme Dinge melden oder zeigen."],
+      standard: ["Bei Problemen besonnen handeln.", "Passende Unterstützung finden.", "Verletzende Inhalte melden oder sichern."]
+    }
+  },
+  ki: {
+    kurz: {
+      leicht:   ["Wissen: KI ist kein Mensch.", "KI-Antworten prüfen.", "Bei falschen Stimmen selbst anrufen."],
+      einfach:  ["Verstehen, dass KI ein Programm ist.", "Antworten von KI überprüfen.", "Bei einer verdächtigen Stimme selbst zurückrufen."],
+      standard: ["KI als Programm einordnen.", "KI-Antworten kritisch überprüfen.", "Auf gefälschte Stimmen richtig reagieren."]
+    },
+    lang: {
+      leicht:   ["Wissen: Was ist KI?", "KI sinnvoll nutzen.", "Bei KI vorsichtig sein."],
+      einfach:  ["Verstehen, was KI ist.", "KI so nutzen, dass sie dir hilft.", "Erkennen, wann du bei KI vorsichtig sein musst."],
+      standard: ["Verstehen, was KI ist und was nicht.", "KI sinnvoll und kritisch nutzen.", "Risiken bei KI erkennen."]
+    }
+  },
+  fakes: {
+    kurz: {
+      leicht:   ["Fake-Nachrichten erkennen.", "Bei Aufregung Stopp machen.", "Fakes nicht weiterleiten."],
+      einfach:  ["Erkennen, was eine Fake-Nachricht ist.", "Stopp machen, wenn dich eine Nachricht sehr aufregt.", "Fake-Nachrichten nicht weiterleiten."],
+      standard: ["Falschmeldungen erkennen.", "Bei starken Gefühlen innehalten und prüfen.", "Die Verbreitung von Fakes stoppen."]
+    },
+    lang: {
+      leicht:   ["Fake News erkennen.", "Nachrichten prüfen.", "Fakes nicht weiterleiten."],
+      einfach:  ["Erkennen, was Fake News sind.", "Prüfen, ob eine Nachricht stimmt.", "Richtig mit Fake-Nachrichten umgehen."],
+      standard: ["Falschmeldungen erkennen.", "Quellen und Aussagen überprüfen.", "Verantwortungsvoll mit Fakes umgehen."]
+    }
+  },
+  betrug: {
+    kurz: {
+      leicht:   ["Betrug erkennen.", "Bei Stress und Gewinnen Stopp machen.", "Die Bank-App selbst öffnen."],
+      einfach:  ["Erkennen, was Betrüger wollen.", "Stopp machen bei Zeitdruck oder einem Gewinn.", "Deine Bank-App selbst öffnen, statt auf einen Link zu tippen."],
+      standard: ["Die Absichten von Betrügern erkennen.", "Bei Zeitdruck oder Gewinnversprechen innehalten.", "Anfragen deiner Bank über die eigene App prüfen."]
+    },
+    lang: {
+      leicht:   ["Tricks von Betrügern erkennen.", "Bei Betrug richtig handeln.", "Dir Hilfe holen."],
+      einfach:  ["Erkennen, wie Betrüger vorgehen.", "Richtig handeln, wenn du betrogen wirst.", "Dir ohne Scham Hilfe holen."],
+      standard: ["Die gängigen Maschen erkennen.", "Im Betrugsfall richtig handeln.", "Dir rechtzeitig Unterstützung holen."]
+    }
+  },
+  einkaufen: {
+    kurz: {
+      leicht:   ["Bei sicheren Shops einkaufen.", "Gute Shops erkennen.", "Sicher bezahlen."],
+      einfach:  ["In sicheren Shops einkaufen.", "Einen guten Shop am Impressum erkennen.", "Sicher bezahlen, zum Beispiel auf Rechnung."],
+      standard: ["Seriöse Shops auswählen.", "Ein vollständiges Impressum prüfen.", "Eine sichere Zahlungsart wählen."]
+    },
+    lang: {
+      leicht:   ["Gute Shops erkennen.", "Sicher bezahlen.", "Bei Problemen richtig handeln."],
+      einfach:  ["Einen seriösen Shop erkennen.", "Eine sichere Bezahl-Art wählen.", "Richtig handeln, wenn ein Kauf schiefläuft."],
+      standard: ["Seriöse Shops erkennen.", "Sichere Zahlungsarten wählen.", "Bei Problemen mit einem Kauf richtig vorgehen."]
     }
   }
 };

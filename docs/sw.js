@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-19k";
+const CACHE_VERSION = "v2026-19t";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -58,7 +58,6 @@ const PRECACHE_URLS = [
      nicht mehr aufgerufen. Sie lagen trotzdem im Precache: rund 530 KB,
      die jede Person beim ersten Besuch mitgeladen hat, ohne sie je zu
      sehen. Die Dateien bleiben im Repo, falls sie wieder eingebaut werden. */
-  "./assets/illustrations/alex-und-tilda.svg",
 
   /* Wegzeichen-Figuren (Paket W, statisch, transparent) */
   "./assets/figures/alex-tilda-winken.webp",
@@ -70,31 +69,12 @@ const PRECACHE_URLS = [
   "./assets/figures/alex-tilda-hilfe.webp",
   "./assets/figures/alex-tilda-erfolg.webp",
   "./assets/figures/alex-tilda-nachdenken.webp",
-  "./assets/figures/alex-tilda-erklaeren.webp",
-  "./assets/figures/alex-tilda-achtung.webp",
   "./assets/scenes/hilfe-beweise.webp",
   "./assets/scenes/hilfe-stress.webp",
   "./assets/scenes/hilfe-unterstuetzung.webp",
   "./assets/scenes/hilfe-handlungsplan.webp",
 
   /* Lektions-Bilder */
-  "./assets/lessons/lock.svg",
-  "./assets/lessons/data.svg",
-  "./assets/lessons/warning.svg",
-  "./assets/lessons/check.svg",
-  "./assets/lessons/help.svg",
-  "./assets/lessons/message.svg",
-  "./assets/lessons/link.svg",
-  "./assets/lessons/photo.svg",
-  "./assets/lessons/stop.svg",
-  "./assets/lessons/remember.svg",
-  "./assets/lessons/understand.svg",
-  "./assets/lessons/example.svg",
-  "./assets/lessons/report.svg",
-  "./assets/lessons/ki.svg",
-  "./assets/lessons/fake.svg",
-  "./assets/lessons/betrug.svg",
-  "./assets/lessons/einkaufen.svg",
 
   /* Icons */
   "./assets/icons/home.svg",

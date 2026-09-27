@@ -124,8 +124,8 @@ const SCENARIOS = {
           pictogram: "pikto-stranger",
           answers: ["Ich rufe die alte Nummer an.", "Ich speichere die neue Nummer."],
           correctIndex: 0,
-          feedbackWrong: "Noch weißt du nicht, wer das ist. Die alte Nummer sagt dir die Wahrheit.",
-          feedbackCorrect: "Sehr gut. Ein Anruf bei der alten Nummer klärt alles.",
+          feedbackWrong: "Noch weißt du nicht, wer das ist. Ruf zuerst die alte Nummer an. Dann kannst du nachfragen.",
+          feedbackCorrect: "Genau. Du rufst die alte Nummer an. So kannst du nachfragen.",
           remember: "Ich rufe die alte Nummer an."
         }
       },
@@ -405,7 +405,7 @@ const SCENARIOS = {
           answers: ["Alle Freunde dürfen mich sehen.", "Niemand sieht meinen Standort."],
           correctIndex: 1,
           feedbackWrong: "In der Freundes-Liste stehen oft auch Menschen, die du kaum kennst.",
-          feedbackCorrect: "Gut. Deinen Standort brauchst nur du.",
+          feedbackCorrect: "Gut. Jetzt sieht niemand deinen Ort. Du entscheidest selbst: Wer darf ihn sehen?",
           remember: "Ich schütze meinen Standort."
         }
       }
@@ -507,7 +507,7 @@ const SCENARIOS = {
           answers: ["Nein. Ich mache erst ein Bildschirm-Foto.", "Ja, dann ist sie weg."],
           correctIndex: 0,
           feedbackWrong: "Gelöscht ist weg. Dann kann niemand mehr sehen, was passiert ist.",
-          feedbackCorrect: "Sehr gut. Das Bild ist dein Beweis.",
+          feedbackCorrect: "Genau. Mit dem Bild kannst du es später zeigen.",
           remember: "Ich lösche nicht sofort."
         }
       },
@@ -521,7 +521,7 @@ const SCENARIOS = {
           answers: ["Ich behalte es für mich.", "Ich zeige es einer vertrauten Person."],
           correctIndex: 1,
           feedbackWrong: "Genau das wollen solche Nachrichten. Allein bleibst du mit der Angst.",
-          feedbackCorrect: "Genau richtig. Wer so schreibt, hat Angst vor Erwachsenen.",
+          feedbackCorrect: "Genau richtig. Du darfst es trotzdem erzählen. Hilfe holen ist immer erlaubt.",
           remember: "Ich zeige die Nachricht."
         }
       }
@@ -643,7 +643,7 @@ const SCENARIOS = {
           answers: ["Ich schicke das Geld sofort.", "Ich lege auf und rufe die bekannte Nummer an."],
           correctIndex: 1,
           feedbackWrong: "Eine Stimme kann heute nachgemacht werden. Nur ein Rückruf gibt Sicherheit.",
-          feedbackCorrect: "Sehr gut. Auflegen und selbst zurückrufen ist der sichere Weg.",
+          feedbackCorrect: "Genau. Du legst auf und rufst selbst zurück. So kannst du nachfragen.",
           remember: "Stimmen können gefälscht sein."
         }
       }
@@ -674,7 +674,7 @@ const SCENARIOS = {
           pictogram: "pikto-fraud",
           answers: ["Das ist ein Trick.", "Das ist echt."],
           correctIndex: 0,
-          feedbackWrong: "Echte Paket-Dienste wollen kein Geld per SMS. Und die Adresse ist erfunden.",
+          feedbackWrong: "Das ist ein Trick. Die Adresse ist erfunden. Prüfe dein Paket lieber in der App vom Paket-Dienst.",
           feedbackCorrect: "Kleine Gebühr plus komische Adresse: der Paket-Trick.",
           remember: "Ich tippe nicht auf fremde Links."
         }
@@ -788,7 +788,7 @@ const SCENARIOS = {
           answers: ["Ich breche ab.", "Schnell kaufen. Sonst ist es weg."],
           correctIndex: 0,
           feedbackWrong: "Die Eile ist ein Trick. Du sollst schnell kaufen und nicht nachdenken.",
-          feedbackCorrect: "Sehr gut. Abbrechen darfst du immer. Auch kurz vor dem Kauf.",
+          feedbackCorrect: "Genau. Abbrechen darfst du immer. Auch kurz vor dem Kauf.",
           remember: "Ich darf jeden Kauf abbrechen."
         }
       }
@@ -954,7 +954,7 @@ const SCENARIOS = {
         pictogram: "pikto-phone",
         answers: ["Ich rufe die Nummer aus der Nachricht an.", "Ich nehme die Nummer von meiner Bank-Karte."],
         correctIndex: 1,
-        feedbackCorrect: "Sehr gut. Diese Nachricht ist echt. Aber das kannst du nicht sicher sehen. Betrüger schreiben genau so. Mit deiner eigenen Nummer bist du immer sicher.",
+        feedbackCorrect: "Diese Nachricht ist echt. Aber das kannst du nicht sicher sehen. Betrüger schreiben genau so. Die Nummer auf deiner Bank-Karte hast du selbst. Damit kannst du nachfragen.",
         feedbackWrong: "Diese Nachricht ist echt. Trotzdem ist die eigene Nummer besser. Denn Betrüger schreiben genau solche Nachrichten. Man sieht den Unterschied nicht.",
         remember: "Ich rufe nur Nummern an, die ich schon habe."
       },
@@ -974,8 +974,8 @@ const SCENARIOS = {
         pictogram: "pikto-bank",
         answers: ["Ich tippe auf den Link.", "Ich öffne meine Bank-App selbst."],
         correctIndex: 1,
-        feedbackCorrect: "Sehr gut. Das war ein Trick. Die Seite ist sehr gut nachgemacht. Auch geübte Menschen erkennen sie nicht. Du musst sie nicht erkennen. Du öffnest die App selbst. Dann bist du sicher.",
-        feedbackWrong: "Das war ein Trick. Die Seite ist sehr gut nachgemacht. Auch geübte Menschen erkennen sie nicht. Deshalb hilft nur eins: die App selbst öffnen.",
+        feedbackCorrect: "Genau. Das war ein Trick. Die Seite ist sehr gut nachgemacht. Auch geübte Menschen erkennen sie nicht. Du musst sie nicht erkennen. Du öffnest die App selbst. Den Link brauchst du dann nicht.",
+        feedbackWrong: "Das war ein Trick. Die Seite ist sehr gut nachgemacht. Auch geübte Menschen erkennen sie nicht. Deshalb ist es besser: Du öffnest die App selbst.",
         remember: "Ich muss den Trick nicht erkennen. Ich öffne die App selbst."
       },
       falle: {
@@ -995,7 +995,7 @@ const SCENARIOS = {
         pictogram: "pikto-message",
         answers: ["Ich schreibe zurück und helfe.", "Ich rufe die alte Nummer an."],
         correctIndex: 1,
-        feedbackCorrect: "Sehr gut. Ruf die alte Nummer an. Geht die Person dort ran, war die Nachricht ein Trick.",
+        feedbackCorrect: "Genau. Ruf die alte Nummer an. Dann kannst du nachfragen: Hast du wirklich eine neue Nummer?",
         feedbackWrong: "Betrüger schreiben oft so. Erst sind sie nett. Dann bitten sie um Geld. Ruf immer zuerst die alte Nummer an.",
         remember: "Neue Nummer? Ich rufe zuerst die alte an."
       },
@@ -1018,7 +1018,7 @@ const SCENARIOS = {
         pictogram: "pikto-lock",
         answers: ["Ich sage den Code.", "Ich sage den Code nicht."],
         correctIndex: 1,
-        feedbackCorrect: "Sehr gut. Die SMS ist echt. Der Anruf ist der Betrug. Niemand darf diesen Code haben. Auch nicht deine Bank. Auch nicht die Polizei.",
+        feedbackCorrect: "Genau. Die SMS ist echt. Der Anruf ist der Betrug. Niemand darf diesen Code haben. Auch nicht deine Bank. Auch nicht die Polizei.",
         feedbackWrong: "Die SMS ist echt. Aber der Anruf ist der Betrug. Mit dem Code kommt der Anrufer in dein Konto. Niemand darf ihn haben.",
         remember: "Meinen Code sage ich niemandem. Auch nicht am Telefon."
       },

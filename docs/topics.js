@@ -638,7 +638,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/datenschutz.svg",
     "quizQuestions": [
       {
         "hinweis": "Überlege: Was kann jemand mit der Antwort anfangen?",
@@ -852,7 +851,14 @@ const topics = [
           "Das ist dein Passwort.",
           "Diese Daten gehören nur dir."
         ],
-        "remember": "Private Daten sind nur für dich."
+        "remember": "Private Daten sind nur für dich.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Ein Gewinn-Spiel will die Adresse von Alex.",
+          "Und seine Telefon-Nummer.",
+          "Alex denkt: Das sind private Daten.",
+          "Er gibt sie nicht ein."
+        ]
       },
       {
         "title": "Dein Passwort",
@@ -866,7 +872,14 @@ const topics = [
           "Auch nicht guten Freunden.",
           "Dein Passwort ist lang und schwer zu erraten."
         ],
-        "remember": "Dein Passwort bleibt geheim."
+        "remember": "Dein Passwort bleibt geheim.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Ein Kollege fragt Tilda nach ihrem Passwort.",
+          "Er will nur kurz etwas nachsehen.",
+          "Tilda sagt: Nein.",
+          "Mein Passwort bleibt geheim."
+        ]
       },
       {
         "title": "Jemand fragt nach deinen Daten",
@@ -880,7 +893,14 @@ const topics = [
           "Du fragst zuerst eine vertraute Person.",
           "Diese Person hilft dir."
         ],
-        "remember": "Erst fragen. Dann entscheiden."
+        "remember": "Erst fragen. Dann entscheiden.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex bekommt eine E-Mail.",
+          "Er soll sein Geburts-Datum eingeben.",
+          "Alex gibt nichts ein.",
+          "Er zeigt die E-Mail zuerst seiner Betreuerin."
+        ]
       }
     ],
     "miniQuestion": {
@@ -1335,7 +1355,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/whatsapp.svg",
     "quizQuestions": [
       {
         "hinweis": "Du weißt nicht, wer die Nummer hat. Was heißt das für deine Antwort?",
@@ -1539,7 +1558,14 @@ const topics = [
           "Du zeigst es einer vertrauten Person.",
           "Die Person hilft dir."
         ],
-        "remember": "Unbekannte Nachrichten: erst fragen."
+        "remember": "Unbekannte Nachrichten: erst fragen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Eine fremde Nummer schreibt Tilda.",
+          "Hallo, wie geht es dir?",
+          "Tilda antwortet nicht sofort.",
+          "Sie zeigt die Nachricht Alex."
+        ]
       },
       {
         "title": "Links in Nachrichten",
@@ -1553,7 +1579,14 @@ const topics = [
           "Fremde Links können gefährlich sein.",
           "Du fragst eine vertraute Person."
         ],
-        "remember": "Fremde Links nicht antippen."
+        "remember": "Fremde Links nicht antippen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex bekommt eine Nachricht mit einem Link.",
+          "Die Nummer kennt er nicht.",
+          "Alex tippt nicht auf den Link.",
+          "Er fragt Tilda."
+        ]
       },
       {
         "title": "Dein WhatsApp-Code",
@@ -1567,7 +1600,14 @@ const topics = [
           "Auch nicht an Freunde.",
           "Mit dem Code kann jemand dein Konto stehlen."
         ],
-        "remember": "Deinen WhatsApp-Code niemals weitergeben."
+        "remember": "Deinen WhatsApp-Code niemals weitergeben.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda bekommt eine SMS mit einem Code.",
+          "Kurz danach schreibt jemand:",
+          "Schick mir bitte den Code.",
+          "Tilda schickt den Code nicht."
+        ]
       }
     ],
     "miniQuestion": {
@@ -1948,7 +1988,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/facebook.svg",
     "quizQuestions": [
       {
         "hinweis": "Ein Foto von zu Hause zeigt mehr als ein schönes Zimmer.",
@@ -2150,7 +2189,13 @@ const topics = [
           "Am besten sehen es nur Freunde.",
           "Eine vertraute Person hilft dir beim Einstellen."
         ],
-        "remember": "Dein Profil: nur Freunde sehen es."
+        "remember": "Dein Profil: nur Freunde sehen es.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex öffnet die Einstellungen bei Facebook.",
+          "Er stellt ein: Nur Freunde sehen mein Profil.",
+          "Tilda hilft ihm dabei."
+        ]
       },
       {
         "title": "Unbekannte Personen",
@@ -2164,7 +2209,13 @@ const topics = [
           "Du nimmst die Anfrage nicht an.",
           "Du fragst eine vertraute Person."
         ],
-        "remember": "Unbekannte Anfragen ablehnen."
+        "remember": "Unbekannte Anfragen ablehnen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Eine fremde Person will mit Tilda befreundet sein.",
+          "Tilda kennt die Person nicht.",
+          "Sie lehnt die Anfrage ab."
+        ]
       },
       {
         "title": "Komische Nachrichten",
@@ -2178,7 +2229,14 @@ const topics = [
           "Du tippst nicht drauf.",
           "Du zeigst es einer vertrauten Person."
         ],
-        "remember": "Komische Nachrichten zeigen, nicht antippen."
+        "remember": "Komische Nachrichten zeigen, nicht antippen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Jemand schreibt Alex: Ich brauche schnell Geld.",
+          "Tipp hier.",
+          "Alex tippt nicht auf den Link.",
+          "Er zeigt die Nachricht Tilda."
+        ]
       }
     ],
     "miniQuestion": {
@@ -2565,7 +2623,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/instagram.svg",
     "quizQuestions": [
       {
         "hinweis": "Auf einem Selfie ist mehr zu sehen als dein Gesicht. Was noch?",
@@ -2767,7 +2824,12 @@ const topics = [
           "Am besten ist dein Konto privat.",
           "Dann sehen nur Freunde deine Fotos."
         ],
-        "remember": "Konto auf privat stellen."
+        "remember": "Konto auf privat stellen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda stellt ihr Konto auf privat.",
+          "Jetzt sehen nur ihre Freunde ihre Fotos."
+        ]
       },
       {
         "title": "Fotos von anderen Personen",
@@ -2781,7 +2843,15 @@ const topics = [
           "Die Person muss ja sagen.",
           "Sonst postest du das Foto nicht."
         ],
-        "remember": "Fotos von anderen: erst fragen."
+        "remember": "Fotos von anderen: erst fragen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex hat ein Foto mit Tilda gemacht.",
+          "Er will es posten.",
+          "Zuerst fragt er Tilda: Darf ich das Foto posten?",
+          "Tilda sagt Ja.",
+          "Dann postet er es."
+        ]
       },
       {
         "title": "Nachrichten von Unbekannten",
@@ -2795,7 +2865,13 @@ const topics = [
           "Du zeigst es einer vertrauten Person.",
           "Die Person hilft dir."
         ],
-        "remember": "Unbekannte Nachrichten: vertraute Person fragen."
+        "remember": "Unbekannte Nachrichten: vertraute Person fragen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Ein fremdes Profil schreibt Tilda.",
+          "Tilda antwortet nicht.",
+          "Sie zeigt die Nachricht Alex."
+        ]
       }
     ],
     "miniQuestion": {
@@ -3151,7 +3227,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/youtube.svg",
     "quizQuestions": [
       {
         "hinweis": "Reich werden mit einem Mittel. Klingt das echt?",
@@ -3353,7 +3428,13 @@ const topics = [
           "Du schaust auf einen anderen Kanal.",
           "Oder du fragst eine vertraute Person."
         ],
-        "remember": "Prüfe das Video: Stimmt es?"
+        "remember": "Prüfe das Video: Stimmt es?",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Ein Video sagt: Morgen gibt es kein Wasser.",
+          "Alex glaubt das nicht sofort.",
+          "Er schaut auf einer anderen Seite nach."
+        ]
       },
       {
         "title": "Werbung erkennen",
@@ -3367,7 +3448,13 @@ const topics = [
           "Du kannst Werbung überspringen.",
           "Du tippst nicht auf Werbung."
         ],
-        "remember": "Werbung nicht antippen."
+        "remember": "Werbung nicht antippen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Im Video kommt Werbung für Schuhe.",
+          "Tilda muss nichts kaufen.",
+          "Sie überspringt die Werbung."
+        ]
       },
       {
         "title": "Pausen machen",
@@ -3381,7 +3468,13 @@ const topics = [
           "Du gehst raus oder bewegst dich.",
           "Das ist gut für dich."
         ],
-        "remember": "Nach einer Stunde Pause machen."
+        "remember": "Nach einer Stunde Pause machen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex schaut schon eine Stunde Videos.",
+          "Er macht Pause.",
+          "Er geht kurz raus."
+        ]
       }
     ],
     "miniQuestion": {
@@ -3707,7 +3800,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/snapchat.svg",
     "quizQuestions": [
       {
         "hinweis": "Andere sehen den Snap 10 Sekunden lang. Was können sie in der Zeit tun?",
@@ -3910,7 +4002,14 @@ const topics = [
           "Das Bild ist dann für immer da.",
           "Dürfen alle das Bild sehen? Nur dann schickst du es."
         ],
-        "remember": "Bilder verschwinden nicht wirklich."
+        "remember": "Bilder verschwinden nicht wirklich.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda will ein Bild schicken.",
+          "Sie fragt sich: Dürfen alle das Bild sehen?",
+          "Ja.",
+          "Dann schickt sie es."
+        ]
       },
       {
         "title": "Dein Standort",
@@ -3924,7 +4023,13 @@ const topics = [
           "Du schaltest den Standort aus.",
           "Eine vertraute Person hilft dir dabei."
         ],
-        "remember": "Standort ausschalten."
+        "remember": "Standort ausschalten.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Snapchat zeigt den Ort von Alex auf einer Karte.",
+          "Alex schaltet den Standort aus.",
+          "Tilda hilft ihm dabei."
+        ]
       },
       {
         "title": "Niemand darf dich zwingen",
@@ -3939,7 +4044,14 @@ const topics = [
           "Du sagst nein.",
           "Du sagst es einer vertrauten Person."
         ],
-        "remember": "Du darfst nein sagen."
+        "remember": "Du darfst nein sagen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Jemand schreibt Tilda: Schick mir ein Bild von dir.",
+          "Tilda will das nicht.",
+          "Sie sagt Nein.",
+          "Sie erzählt es Alex."
+        ]
       }
     ],
     "miniQuestion": {
@@ -4312,7 +4424,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/tiktok.svg",
     "quizQuestions": [
       {
         "hinweis": "Luft anhalten kann gefährlich werden. Was heißt das für dich?",
@@ -4517,7 +4628,14 @@ const topics = [
           "Manche Videos zeigen gefährliche Trends.",
           "Du musst nicht mitmachen."
         ],
-        "remember": "TikTok zeigt dir nur bestimmte Videos."
+        "remember": "TikTok zeigt dir nur bestimmte Videos.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Bei TikTok springen viele von einer Mauer.",
+          "Das ist gefährlich.",
+          "Alex macht das nicht nach.",
+          "Er schaut ein anderes Video."
+        ]
       },
       {
         "title": "Nachrichten auf TikTok",
@@ -4531,7 +4649,13 @@ const topics = [
           "Du zeigst es einer vertrauten Person.",
           "Die Person hilft dir."
         ],
-        "remember": "Nachrichten von Unbekannten: vertraute Person fragen."
+        "remember": "Nachrichten von Unbekannten: vertraute Person fragen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Eine fremde Person schreibt Tilda privat.",
+          "Tilda antwortet nicht.",
+          "Sie zeigt die Nachricht Alex."
+        ]
       },
       {
         "title": "Pause machen",
@@ -4545,7 +4669,13 @@ const topics = [
           "Du stellst einen Timer.",
           "Das hilft dir."
         ],
-        "remember": "Timer stellen. Pause machen."
+        "remember": "Timer stellen. Pause machen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex stellt einen Timer auf eine Stunde.",
+          "Der Timer klingelt.",
+          "Alex legt das Handy weg."
+        ]
       }
     ],
     "miniQuestion": {
@@ -4904,7 +5034,6 @@ const topics = [
         "pictogram": "pikto-done"
       }
     ],
-    "illustration": "assets/illustrations/hilfe.svg",
     "quizQuestions": [
       {
         "hinweis": "Die Nachricht macht Eile. Was hilft gegen Eile?",
@@ -5110,7 +5239,14 @@ const topics = [
           "Du gehst nicht weiter.",
           "Das ist mutig und richtig."
         ],
-        "remember": "Fühlt sich etwas falsch an? Stopp machen."
+        "remember": "Fühlt sich etwas falsch an? Stopp machen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda liest eine Nachricht.",
+          "Die Nachricht macht ihr Angst.",
+          "Tilda macht Stopp.",
+          "Sie antwortet nicht."
+        ]
       },
       {
         "title": "Wer hilft dir?",
@@ -5125,7 +5261,13 @@ const topics = [
           "Das kann ein Freund sein.",
           "Du zeigst ihr das Problem."
         ],
-        "remember": "Vertraute Person um Hilfe bitten."
+        "remember": "Vertraute Person um Hilfe bitten.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex hat ein Problem mit seinem Handy.",
+          "Er geht zu seiner Betreuerin.",
+          "Er zeigt ihr das Problem."
+        ]
       },
       {
         "title": "Du bist nicht allein",
@@ -5139,7 +5281,13 @@ const topics = [
           "Hilfe holen ist keine Schwäche.",
           "Es ist mutig und richtig."
         ],
-        "remember": "Du bist nicht allein. Hilfe holen ist mutig."
+        "remember": "Du bist nicht allein. Hilfe holen ist mutig.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda schämt sich ein bisschen.",
+          "Trotzdem erzählt sie Alex von ihrem Problem.",
+          "Alex sagt: Danke. Das war mutig."
+        ]
       }
     ],
     "miniQuestion": {
@@ -5173,7 +5321,6 @@ const topics = [
       "Wie KI dir helfen kann",
       "Wann du bei KI vorsichtig sein musst"
     ],
-    "illustration": "assets/illustrations/ki.svg",
     "lessons": [
       {
         "title": "Start",
@@ -5833,7 +5980,14 @@ const topics = [
           "Es kann Bilder machen.",
           "KI ist kein Mensch."
         ],
-        "remember": "KI ist ein Programm. Kein Mensch."
+        "remember": "KI ist ein Programm. Kein Mensch.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex schreibt mit einem Chatbot.",
+          "Der Chatbot ist sehr freundlich.",
+          "Alex weiß: Das ist ein Programm.",
+          "Kein Mensch."
+        ]
       },
       {
         "title": "Was kann KI?",
@@ -5847,7 +6001,13 @@ const topics = [
           "Die Antwort ist nicht immer richtig.",
           "Du prüfst die Antwort."
         ],
-        "remember": "KI-Antworten immer prüfen."
+        "remember": "KI-Antworten immer prüfen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda fragt eine KI: Wann fährt mein Bus?",
+          "Die KI antwortet.",
+          "Tilda prüft die Zeit auf dem Fahrplan."
+        ]
       },
       {
         "title": "Wann musst du aufpassen?",
@@ -5863,7 +6023,14 @@ const topics = [
           "Du glaubst nicht alles.",
           "Du fragst eine vertraute Person."
         ],
-        "remember": "Nicht alles glauben. Erst prüfen."
+        "remember": "Nicht alles glauben. Erst prüfen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Eine Stimme am Telefon klingt wie der Bruder von Alex.",
+          "Sie will sofort Geld.",
+          "Alex legt auf.",
+          "Er ruft seinen Bruder selbst an."
+        ]
       }
     ],
     "miniQuestion": {
@@ -5897,7 +6064,6 @@ const topics = [
       "Wie du prüfst, ob etwas stimmt",
       "Was du mit Fake-Nachrichten machst"
     ],
-    "illustration": "assets/illustrations/fakes.svg",
     "lessons": [
       {
         "title": "Start",
@@ -6533,7 +6699,13 @@ const topics = [
           "Manchmal ist sie auch ein Bild.",
           "Jemand hat das Bild verändert."
         ],
-        "remember": "Fake-Nachrichten sind Lügen."
+        "remember": "Fake-Nachrichten sind Lügen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda liest: Ein bekannter Sänger ist gestorben.",
+          "Die Nachricht steht nur auf einer Seite.",
+          "Tilda merkt: Das kann eine Lüge sein."
+        ]
       },
       {
         "title": "Wie erkennst du Fakes?",
@@ -6548,7 +6720,13 @@ const topics = [
           "Du prüfst auf einer anderen Seite.",
           "Oder du fragst eine vertraute Person."
         ],
-        "remember": "Erst prüfen. Dann teilen."
+        "remember": "Erst prüfen. Dann teilen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Eine Nachricht macht Alex sehr wütend.",
+          "Alex macht Stopp.",
+          "Er prüft die Nachricht zuerst."
+        ]
       },
       {
         "title": "Was tust du bei Fakes?",
@@ -6561,7 +6739,13 @@ const topics = [
           "Du löschst sie.",
           "Du sagst es einer vertrauten Person."
         ],
-        "remember": "Fakes nicht weiterleiten."
+        "remember": "Fakes nicht weiterleiten.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda erkennt eine Fake-Nachricht.",
+          "Sie schickt sie nicht weiter.",
+          "Sie löscht die Nachricht."
+        ]
       }
     ],
     "miniQuestion": {
@@ -6595,7 +6779,6 @@ const topics = [
       "Welche Tricks du erkennst",
       "Was du tust, wenn du betrogen wirst"
     ],
-    "illustration": "assets/illustrations/betrug.svg",
     "lessons": [
       {
         "title": "Start",
@@ -7456,7 +7639,14 @@ const topics = [
           "Oder deine Daten.",
           "Das ist Betrug."
         ],
-        "remember": "Nicht jeder im Internet ist ehrlich."
+        "remember": "Nicht jeder im Internet ist ehrlich.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Jemand schreibt Alex: Ich helfe dir.",
+          "Gib mir nur deine Bank-Daten.",
+          "Alex merkt: Die Person will meine Daten.",
+          "Er gibt nichts ein."
+        ]
       },
       {
         "title": "Wie erkennst du Betrug?",
@@ -7471,7 +7661,14 @@ const topics = [
           "Du machst Stopp.",
           "Du fragst eine vertraute Person."
         ],
-        "remember": "Stress und Gewinn: Stopp machen."
+        "remember": "Stress und Gewinn: Stopp machen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Eine Nachricht sagt: Du hast ein Handy gewonnen.",
+          "Zahl nur schnell 2 Euro.",
+          "Tilda macht Stopp.",
+          "Sie fragt Alex."
+        ]
       },
       {
         "title": "Was tust du bei Betrug?",
@@ -7486,7 +7683,14 @@ const topics = [
           "Du sagst es einer vertrauten Person.",
           "Die Person hilft dir."
         ],
-        "remember": "Kein Geld senden. Vertraute Person fragen."
+        "remember": "Kein Geld senden. Vertraute Person fragen.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Eine SMS sagt: Dein Konto ist gesperrt.",
+          "Tipp hier.",
+          "Alex tippt nicht auf den Link.",
+          "Er öffnet seine Bank-App selbst."
+        ]
       }
     ],
     "miniQuestion": {
@@ -7520,7 +7724,6 @@ const topics = [
       "Welche Bezahl-Art sicherer ist",
       "Was du tust, wenn ein Kauf schiefläuft"
     ],
-    "illustration": "assets/illustrations/einkaufen.svg",
     "lessons": [
       {
         "title": "Start",
@@ -8182,7 +8385,13 @@ const topics = [
           "Du bezahlst.",
           "Die Ware kommt nach Hause."
         ],
-        "remember": "Nur bei sicheren Shops einkaufen."
+        "remember": "Nur bei sicheren Shops einkaufen.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda will eine Hose kaufen.",
+          "Sie kauft bei einem bekannten Shop.",
+          "Den Shop kennt sie schon lange."
+        ]
       },
       {
         "title": "Gute Shops erkennen",
@@ -8197,7 +8406,14 @@ const topics = [
           "Das Schloss allein ist also kein gutes Zeichen.",
           "Bist du unsicher? Dann fragst du eine vertraute Person."
         ],
-        "remember": "Ein guter Shop zeigt Name und Adresse."
+        "remember": "Ein guter Shop zeigt Name und Adresse.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex findet einen neuen Shop.",
+          "Er schaut ins Impressum.",
+          "Dort stehen Name und Adresse.",
+          "Das ist ein gutes Zeichen."
+        ]
       },
       {
         "title": "Sicher bezahlen",
@@ -8211,7 +8427,13 @@ const topics = [
           "Du gibst deine Kreditkarte nicht überall ein.",
           "Bei Problemen fragst du eine vertraute Person."
         ],
-        "remember": "PayPal oder Rechnung ist sicherer."
+        "remember": "PayPal oder Rechnung ist sicherer.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda kauft zum ersten Mal in einem Shop.",
+          "Sie bezahlt auf Rechnung.",
+          "So bekommt sie zuerst die Ware."
+        ]
       }
     ],
     "miniQuestion": {
