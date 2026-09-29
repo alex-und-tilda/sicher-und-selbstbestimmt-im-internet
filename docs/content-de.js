@@ -12,237 +12,551 @@
 
 const CONTENT_VERSIONS = {
   datenschutz: {
-    "Doppelt sicher": {
-      einfach: {
-        text: [
-          { text: "Viele Konten kannst du doppelt sichern. Das nennt man Zwei-Faktor-Anmeldung." },
-          { text: "Du gibst dein Passwort ein. Danach schickt die App eine Zahl auf dein Handy, die du auch eingibst." },
-          { text: "Wer nur dein Passwort kennt, kommt damit allein nicht hinein. Ihm fehlt die Zahl von deinem Handy." },
-          { text: "Deshalb ist diese Zahl geheim. Gib sie niemandem weiter, auch nicht am Telefon. Kein echter Anbieter fragt dich danach. Eine vertraute Person kann dir beim Einrichten helfen." }
-        ],
-        success: "Passwort plus Handy-Zahl: So ist dein Konto doppelt geschützt."
-      },
-      standard: {
-        text: [{ text: "Die Zwei-Faktor-Anmeldung sichert dein Konto zusätzlich zum Passwort ab: Nach der Passwort-Eingabe bestätigst du die Anmeldung mit einem Code auf deinem Handy. Wer nur dein Passwort erbeutet hat, scheitert damit am zweiten Schritt. Einen vollständigen Schutz bedeutet das aber nicht: Betrüger rufen an und fragen genau diesen Code ab und drängen dich dabei zur Eile. Kein seriöser Anbieter tut das – gib den Code deshalb nie weiter. Moderne Konten bieten zusätzlich Passkeys an – eine Anmeldung ganz ohne Passwort, zum Beispiel per Fingerabdruck. Das BSI empfiehlt beides." }],
-        success: "Zwei-Faktor oder Passkey: deutlich mehr Schutz als ein Passwort allein."
-      }
-    },
-    "Ohne Passwort anmelden": {
-      einfach: { examples: ["Du meldest dich bei deinem Konto mit deinem Fingerabdruck an.", "Du meldest dich beim Online-Shop mit deinem Gesicht an."],
-        text: [
-          { text: "Bei manchen Konten brauchst du kein Passwort mehr. Diese Anmeldung heißt Passkey." },
-          { text: "Du legst den Finger auf dein Handy oder du zeigst dein Gesicht. Damit bist du angemeldet." },
-          { text: "Dein Finger öffnet dabei nur dein Handy. Dein Fingerabdruck wird nicht an die Internet-Seite geschickt." },
-          { text: "Ein Passkey ist besonders sicher, weil es kein Passwort gibt, das jemand erraten oder dir abfragen kann. Jeder Passkey gehört außerdem zu genau einem Konto. Eine vertraute Person kann dir beim Einrichten helfen." }
-        ],
-        success: "Ohne Passwort anmelden: Das ist bequem und sicher zugleich."
-      },
-      standard: { examples: ["Du meldest dich bei deinem Konto per Fingerabdruck an.", "Du meldest dich im Onlineshop per Gesichtserkennung an."],
-        text: [{ text: "Ein Passkey ist ein Schlüsselpaar: Die Internet-Seite bekommt den öffentlichen Teil, der geheime Teil bleibt geschützt bei dir. Fingerabdruck, Gesichtserkennung oder Geräte-PIN geben diesen geheimen Teil nur frei – übertragen wird er nicht, und deine biometrischen Daten verlassen das Gerät ohnehin nie. Das ist etwas anderes als das bloße Entsperren einer App: Ein Passkey gehört immer zu genau einem Konto bei genau einer Seite. Gegen Phishing schützt das gut, weil ein Passkey auf einer gefälschten Seite schlicht nicht funktioniert und es kein Geheimnis gibt, das man dir abfragen könnte. Viele Anbieter sichern Passkeys zusätzlich verschlüsselt in deinem Konto, damit sie auch auf deinen anderen Geräten verfügbar sind; Apple beschreibt diese Synchronisierung ausdrücklich. Apple, Google und Microsoft unterstützen Passkeys, das BSI empfiehlt sie." }],
-        success: "Ein Passkey funktioniert nur auf der echten Seite. Eine gefälschte Seite geht leer aus."
-      }
-    },
+    /* Datenschutz-Musterthema: Lektionen neu seit Paket 2 (Leicht in topics.js =
+       Referenz), Einfach und Alltag seit Paket 5 (28.09.2026). Gleiche Aussage,
+       gleiche A/B/C-Fälle, gleicher Lernweg – nur Sprache und Verdichtung anders.
+       Die Plan-Schritte (bullets) sind in allen Stufen wortgleich: Es sind die
+       Handlungssätze der Kette (§2, Ausnahme für tun). */
     "Start": {
-      einfach: {
-        text: [
-          { text: "Stell dir vor: Eine App will deine Adresse und dein Geburts-Datum wissen. Was machst du? Darum geht es in diesem Thema." },
-          { text: "Du lernst, welche Daten privat sind und warum du sie schützen solltest." },
-          { text: "Außerdem erfährst du, was du tun kannst, wenn jemand nach deinen Daten fragt." },
-          { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
+      "einfach": {
+        "text": [
+          {
+            "text": "Oft will eine App oder ein Formular im Internet Daten von dir haben."
+          },
+          {
+            "text": "Manchmal willst du auch selbst etwas teilen, zum Beispiel ein Foto."
+          },
+          {
+            "text": "Manche Daten sind dafür nötig, andere Daten sind es nicht."
+          },
+          {
+            "text": "Du lernst hier einen Plan mit 5 Schritten. Mit diesem Plan prüfst du genau, und dann entscheidest du selbst."
+          },
+          {
+            "text": "Wenn du unsicher bist, tippst du unten auf Hilfe."
+          }
         ]
       },
-      standard: {
-        text: [
-          { text: "Stell dir vor: Eine App fragt nach deiner Adresse und deinem Geburtsdatum. Gibst du beides einfach ein? In diesem Kapitel geht es um Datenschutz im Alltag. Du erfährst, welche Informationen als privat gelten, warum sie schützenswert sind und wie du im Internet bewusst mit ihnen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+      "standard": {
+        "text": [
+          {
+            "text": "Apps und Online-Formulare fragen oft nach deinen Daten – und manchmal willst du selbst etwas teilen, etwa ein Foto. Manche dieser Daten sind für den Zweck nötig, andere nicht. In diesem Kapitel lernst du einen Plan mit fünf Schritten: Damit prüfst du solche Situationen und entscheidest selbst. Wenn du unsicher bist, tippe unten auf Hilfe."
+          }
         ]
       }
     },
 
-    "Was sind private Daten?": {
-      einfach: {
-        text: [
-          { text: "Private Daten sind Informationen, die nur dich etwas angehen – zum Beispiel dein Name, deine Adresse oder dein Passwort." },
-          { text: "Solche Daten solltest du nicht an Fremde weitergeben, weil sie sonst missbraucht werden können." }
+    "Deine Daten": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Deine Daten sind alle Angaben, die etwas über dich verraten."
+          },
+          {
+            "text": "Dazu gehören zum Beispiel dein Name, deine Adresse und deine Telefonnummer."
+          },
+          {
+            "text": "Auch dein Geburtsdatum, deine Fotos und deine Kontakte sind Daten von dir."
+          },
+          {
+            "text": "Dein Standort gehört ebenfalls dazu, denn er zeigt, wo du gerade bist."
+          },
+          {
+            "text": "Dein Passwort und deine PIN sind geheim."
+          }
         ],
-        bullets: ["dein Name", "deine Adresse", "deine Telefon-Nummer", "dein Geburtstag", "deine Fotos", "dein Passwort"],
-        remember: "Ich gebe meine privaten Daten nur an Menschen weiter, denen ich vertraue."
+        "warning": "Manche Daten sind besonders wichtig, zum Beispiel Angaben zu deiner Gesundheit, deine Bankdaten und dein Ausweis. Mit diesen Daten kann dir jemand sehr schaden. Deshalb prüfst du hier besonders genau.",
+        "examples": [
+          {
+            "art": "B",
+            "text": "Deine Ärztin fragt dich, was dir wehtut. Du sagst es ihr, weil sie das für die Behandlung braucht."
+          },
+          {
+            "art": "A",
+            "text": "Ein Quiz im Internet fragt nach deinen Krankheiten. Für ein Quiz braucht es diese Angaben nicht."
+          }
+        ],
+        "remember": "Meine privaten Daten gehören mir."
       },
-      standard: {
-        text: [
-          { text: "Als private oder personenbezogene Daten gelten alle Informationen, die sich einer bestimmten Person zuordnen lassen: zum Beispiel Name, Adresse, Telefonnummer, Geburtsdatum, Fotos oder Passwörter. Weil sich daraus Rückschlüsse auf eine Person ziehen lassen, sind sie besonders schützenswert und sollten nur bewusst und sparsam weitergegeben werden." }
+      "standard": {
+        "text": [
+          {
+            "text": "Zu deinen persönlichen Daten gehört alles, was etwas über dich aussagt: dein Name, deine Adresse und Telefonnummer, dein Geburtsdatum, deine Fotos und Kontakte – und auch dein Standort, also der Ort, an dem du gerade bist. Passwort und PIN sind geheim."
+          }
         ],
-        bullets: [],
-        remember: "Personenbezogene Daten sollten bewusst und sparsam preisgegeben werden."
+        "warning": "Besonders schützenswert sind Gesundheitsdaten, Bankdaten und dein Ausweis. Wer an diese Daten kommt, kann dir ernsthaft schaden – hier prüfst du deshalb besonders genau.",
+        "examples": [
+          {
+            "art": "B",
+            "text": "Deine Ärztin fragt, was dir wehtut. Du sagst es ihr – für die Behandlung braucht sie diese Information."
+          },
+          {
+            "art": "A",
+            "text": "Ein Online-Quiz fragt nach deinen Krankheiten. Für ein Quiz sind solche Angaben nicht erforderlich."
+          }
+        ],
+        "remember": "Meine persönlichen Daten gehören mir."
       }
     },
 
-    "Besonders wichtige Daten": {
-      einfach: {
-        text: [
-          { text: "Einige deiner Daten sind besonders wichtig und schützenswert." },
-          { text: "Mit ihnen können Fremde dir schaden oder in deinem Namen handeln, deshalb sind sie heikel." },
-          { text: "Solche Daten gibst du nur weiter, wenn es wirklich nötig ist und du dem Empfänger vertraust." }
+    "Wer will deine Daten?": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Viele Firmen und Menschen wollen deine Daten haben. Aber warum eigentlich?"
+          },
+          {
+            "text": "Manche brauchen deine Daten, zum Beispiel, um dir ein Paket zu liefern."
+          },
+          {
+            "text": "Andere verdienen mit deinen Daten Geld, zum Beispiel mit Werbung."
+          },
+          {
+            "text": "Und manche Menschen wollen dich damit betrügen."
+          },
+          {
+            "text": "Deshalb prüfst du: Wer bekommt meine Daten, und kenne ich diese Person oder Firma?"
+          }
         ],
-        bullets: ["Passwörter und PINs", "deine Adresse", "deine Telefon-Nummer", "deine Bank-Daten", "deine Ausweis-Daten"],
-        remember: "Besonders wichtige Daten gebe ich nicht weiter."
+        "examples": [
+          {
+            "art": "B",
+            "text": "Du meldest dich in einem Sportverein an. Der Verein braucht dafür deinen Namen und deine Adresse."
+          },
+          {
+            "art": "A",
+            "text": "Eine fremde SMS will deine Adresse und schreibt: Dein Paket wartet. Du hast aber gar nichts bestellt."
+          }
+        ],
+        "remember": "Ich prüfe, wer meine Daten bekommt.",
+        "vorbild": [
+          "Ein Gewinnspiel im Internet will die Adresse und die Telefonnummer von Alex.",
+          "Alex prüft zuerst: Wer will das, und wofür?",
+          "Er kennt die Seite nicht, und für ein Spiel braucht sie seine Daten nicht.",
+          "Deshalb gibt er nichts ein."
+        ]
       },
-      standard: {
-        text: [
-          { text: "Einige Daten sind besonders sensibel, weil Fremde damit großen Schaden anrichten können – etwa Passwörter, PINs, Bankverbindungen oder Ausweisdaten. Solche Informationen solltest du nur dort eingeben, wo es wirklich nötig ist und wo du dem Anbieter vertraust." }
+      "standard": {
+        "text": [
+          {
+            "text": "Viele wollen deine Daten – aber aus ganz unterschiedlichen Gründen. Manche brauchen sie, etwa um dir ein Paket zu liefern. Andere verdienen damit Geld, zum Beispiel über Werbung. Und manche wollen dich betrügen. Deshalb prüfst du: Wer bekommt meine Daten – und kenne ich diese Stelle?"
+          }
         ],
-        bullets: [],
-        remember: "Besonders sensible Daten gebe ich nur dort preis, wo es nötig ist und ich dem Anbieter vertraue."
+        "examples": [
+          {
+            "art": "B",
+            "text": "Du meldest dich im Sportverein an. Der Verein braucht dafür deinen Namen und deine Adresse."
+          },
+          {
+            "art": "A",
+            "text": "Eine unbekannte SMS verlangt deine Adresse, weil angeblich ein Paket auf dich wartet – dabei hast du nichts bestellt."
+          }
+        ],
+        "remember": "Ich prüfe, wer meine Daten bekommt.",
+        "vorbild": [
+          "Ein Gewinnspiel im Internet fragt nach der Adresse und Telefonnummer von Alex. Er prüft, wer das will und wofür: Die Seite kennt er nicht, und für ein Spiel sind seine Daten nicht nötig. Also gibt er sie nicht ein."
+        ]
       }
     },
 
-    "Passwort bleibt geheim": {
-      einfach: {
-        text: [
-          { text: "Dein Passwort schützt dein Konto, ähnlich wie ein Schlüssel deine Wohnung schützt." },
-          { text: "Nur du solltest dein Passwort kennen." },
-          { text: "Gib es deshalb niemals an andere weiter, auch nicht an Freunde oder Bekannte." }
+    "Nötig oder freiwillig?": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Im Internet füllst du oft ein Formular aus, zum Beispiel wenn du dich irgendwo anmeldest."
+          },
+          {
+            "text": "Manche Felder sind Pflicht. Ohne diese Angaben geht das Formular nicht weiter."
+          },
+          {
+            "text": "Andere Felder sind freiwillig, und diese Felder darfst du leer lassen."
+          },
+          {
+            "text": "Du prüfst bei jeder Angabe: Wofür brauchen die das eigentlich?"
+          },
+          {
+            "text": "Wenn ein Pflichtfeld gar nicht zum Zweck passt, musst du dich dort nicht anmelden."
+          }
         ],
-        warning: "Gib dein Passwort niemals an andere weiter – auch nicht an Freunde."
+        "examples": [
+          {
+            "art": "B",
+            "text": "Du bestellst in einem Shop, den du kennst. Der Shop braucht deine Adresse, damit das Paket ankommt."
+          },
+          {
+            "art": "A",
+            "text": "Beim Bestellen fragt der Shop nach deinem Geburtsdatum. Das Feld ist freiwillig, deshalb lässt du es leer."
+          },
+          {
+            "art": "C",
+            "text": "Der Shop fragt, ob du Werbung per E-Mail bekommen willst. Das entscheidest du selbst."
+          }
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind.",
+        "vorbild": [
+          "Tilda meldet sich im Internet bei der Bücherei an.",
+          "Das Formular fragt nach ihrem Namen und ihrer Adresse. Diese Felder sind Pflicht.",
+          "Tilda prüft, wofür die Bücherei das braucht: für den Büchereiausweis. Die Angaben sind also nötig.",
+          "Die Telefonnummer ist freiwillig, deshalb lässt Tilda das Feld leer."
+        ]
       },
-      standard: {
-        text: [
-          { text: "Ein Passwort schützt dein Konto wie ein Schlüssel deine Wohnung. Es sorgt dafür, dass nur du Zugang hast. Deshalb solltest du es niemandem mitteilen." }
+      "standard": {
+        "text": [
+          {
+            "text": "Bei vielen Anmeldungen im Internet füllst du ein Formular aus. Ohne die Pflichtfelder geht es nicht weiter, freiwillige Felder darfst du leer lassen. Prüfe bei jeder Angabe, wofür sie gebraucht wird. Passt ein Pflichtfeld überhaupt nicht zum Zweck, musst du dich dort nicht anmelden."
+          }
         ],
-        warning: "Seriöse Firmen fragen niemals nach deinem Passwort. Wer danach fragt, will dich täuschen."
+        "examples": [
+          {
+            "art": "B",
+            "text": "Du bestellst in einem Shop, den du kennst. Für die Lieferung braucht er deine Adresse."
+          },
+          {
+            "art": "A",
+            "text": "Beim Bestellen fragt der Shop nach deinem Geburtsdatum – das Feld ist freiwillig, also lässt du es leer."
+          },
+          {
+            "art": "C",
+            "text": "Der Shop fragt, ob du Werbung per E-Mail möchtest. Das entscheidest du selbst."
+          }
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind.",
+        "vorbild": [
+          "Tilda meldet sich online bei der Bücherei an. Name und Adresse sind Pflichtfelder. Sie prüft den Zweck: Für den Büchereiausweis sind die Angaben nötig. Die Telefonnummer ist freiwillig, also lässt Tilda das Feld leer."
+        ]
       }
     },
 
-    "Gutes Passwort": {
-      einfach: {
-        text: [
-          { text: "Ein gutes Passwort ist lang und lässt sich nicht leicht erraten." },
-          { text: "Verwende nicht deinen Namen oder dein Geburtsdatum, weil Fremde das schnell herausfinden können." },
-          { text: "Am sichersten ist eine Mischung aus Buchstaben, Zahlen und Sonderzeichen." }
+    "Eine App will etwas sehen": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Apps fragen oft, ob sie etwas auf deinem Handy sehen dürfen."
+          },
+          {
+            "text": "Sie wollen zum Beispiel deine Fotos, deine Kontakte oder deinen Standort sehen."
+          },
+          {
+            "text": "Du prüfst dann: Was macht die App, und braucht sie das dafür?"
+          },
+          {
+            "text": "Manchmal braucht die App nur einen Teil davon, zum Beispiel den Standort nur, während du sie benutzt."
+          },
+          {
+            "text": "Eine Erlaubnis kannst du oft später in den Einstellungen wieder ändern."
+          }
         ],
-        bullets: ["nicht dein Name", "nicht dein Geburtstag", "mindestens 10 Zeichen", "Buchstaben und Zahlen mischen", "Sonderzeichen wie ! oder ? nutzen"]
+        "examples": [
+          {
+            "art": "A",
+            "text": "Eine Taschenlampen-App will deine Kontakte sehen. Für Licht braucht sie deine Kontakte nicht."
+          },
+          {
+            "art": "B",
+            "text": "Eine Karten-App zeigt dir den Weg, und dafür braucht sie deinen Standort."
+          },
+          {
+            "art": "C",
+            "text": "Eine Wetter-App will deinen Standort. Wenn du unterwegs Warnungen bekommen willst, braucht sie ihn. Wenn du nur das Wetter in deiner Stadt sehen willst, tippst du die Stadt selbst ein."
+          }
+        ],
+        "remember": "Ich erlaube einer App nur das, was sie braucht."
       },
-      standard: {
-        text: [
-          { text: "Ein sicheres Passwort ist möglichst lang und lässt sich nicht leicht erraten. Vermeide naheliegende Angaben wie deinen Namen oder dein Geburtsdatum. Eine Kombination aus Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen macht es deutlich sicherer. Für jedes Konto solltest du ein eigenes Passwort verwenden." }
+      "standard": {
+        "text": [
+          {
+            "text": "Viele Apps bitten um Zugriff auf deine Fotos, deine Kontakte oder deinen Standort – solche Berechtigungen fragt dein Handy ab. Prüfe dabei, was die App macht und ob sie den Zugriff dafür braucht. Manchmal reicht ein Teil davon, zum Beispiel der Standort nur während der Nutzung. Eine Berechtigung kannst du oft später in den Einstellungen ändern."
+          }
         ],
-        bullets: []
+        "examples": [
+          {
+            "art": "A",
+            "text": "Eine Taschenlampen-App will auf deine Kontakte zugreifen. Für Licht ist das nicht erforderlich."
+          },
+          {
+            "art": "B",
+            "text": "Eine Karten-App zeigt dir den Weg – dafür braucht sie deinen Standort."
+          },
+          {
+            "art": "C",
+            "text": "Eine Wetter-App möchte deinen Standort. Für Warnungen unterwegs braucht sie ihn; für das Wetter in deiner Stadt gibst du den Ort selbst ein."
+          }
+        ],
+        "remember": "Ich erlaube einer App nur, was sie für ihre Funktion braucht."
       }
     },
 
-    "Adresse eingeben": {
-      einfach: {
-        text: [
-          { text: "Manchmal fragt eine App oder Webseite nach deiner Adresse." },
-          { text: "Wenn du nicht weißt, wofür sie gebraucht wird, musst du sie nicht eintragen." },
-          { text: "Im Zweifel fragst du eine Person, der du vertraust, bevor du etwas angibst." }
+    "Wer sieht dein Profil?": {
+      "einfach": {
+        "text": [
+          {
+            "text": "In vielen Apps hast du ein eigenes Profil."
+          },
+          {
+            "text": "Im Profil stehen Angaben über dich, zum Beispiel dein Name, dein Foto oder dein Wohnort."
+          },
+          {
+            "text": "Du prüfst: Wer kann das alles sehen – alle im Internet, nur deine Freunde oder nur du?"
+          },
+          {
+            "text": "Das kannst du oft selbst einstellen und später auch wieder ändern."
+          }
         ],
-        examples: ["Eine Spiele-App fragt nach deiner Adresse.", "Ein Gewinnspiel fragt nach deinem Geburtstag."]
+        "examples": [
+          {
+            "art": "B",
+            "text": "Dein Name steht in deinem Profil. So können dich deine Freunde finden."
+          },
+          {
+            "art": "C",
+            "text": "Bei deinem Wohnort entscheidest du selbst: Sollen ihn Fremde sehen, nur deine Freunde oder niemand?"
+          }
+        ],
+        "remember": "Ich wähle selbst aus, wer meine Daten sieht."
       },
-      standard: {
-        text: [
-          { text: "Nicht jede App oder Webseite braucht deine Adresse. Wenn der Grund für die Abfrage unklar ist, musst du nichts eintragen. Überlege, ob die Angabe für den Dienst wirklich notwendig ist – im Zweifel lässt du das Feld frei oder fragst jemanden, dem du vertraust." }
+      "standard": {
+        "text": [
+          {
+            "text": "In vielen Apps hast du ein Profil mit Angaben über dich – etwa deinem Namen, einem Foto oder deinem Wohnort. Prüfe, wer das sehen kann: alle im Internet, nur deine Freunde oder nur du. Das lässt sich oft einstellen und später wieder ändern."
+          }
         ],
-        examples: ["Eine Spiele-App verlangt vor dem ersten Start deine vollständige Adresse.", "Ein Gewinnspiel fragt nach deinem Geburtsdatum, obwohl es für die Teilnahme gar nicht nötig ist."]
-      }
-    },
-
-    "Telefon-Nummer und Geburtstag": {
-      einfach: {
-        text: [
-          { text: "Auch deine Telefon-Nummer und dein Geburtstag gehören zu deinen privaten Daten." },
-          { text: "Viele Formulare fragen danach, obwohl sie diese Angaben gar nicht brauchen." },
-          { text: "Gib sie deshalb nur dann ein, wenn es einen guten Grund dafür gibt." }
+        "examples": [
+          {
+            "art": "B",
+            "text": "Dein Name steht im Profil, damit deine Freunde dich finden."
+          },
+          {
+            "art": "C",
+            "text": "Beim Wohnort entscheidest du: für Fremde sichtbar, nur für Freunde oder für niemanden."
+          }
         ],
-        examples: ["Ein Formular fragt nach deiner Telefon-Nummer.", "Ein Gewinnspiel fragt nach deinem Geburtstag."]
-      },
-      standard: {
-        text: [
-          { text: "Auch Telefonnummer und Geburtsdatum gehören zu deinen privaten Daten. Viele Formulare und Gewinnspiele fragen danach, obwohl sie diese Angaben gar nicht benötigen. Gib sie nur dann ein, wenn es einen nachvollziehbaren Grund gibt." }
-        ],
-        examples: ["Ein Online-Formular macht die Telefonnummer zum Pflichtfeld, obwohl du nur einen Newsletter bestellen willst.", "Ein Gewinnspiel will dein Geburtsdatum wissen – angeblich nur, um dir zu gratulieren."]
+        "remember": "Ich lege selbst fest, wer meine Daten sieht."
       }
     },
 
     "Fotos prüfen": {
-      einfach: {
-        text: [
-          { text: "Bevor du ein Foto verschickst, schau es dir genau an." },
-          { text: "Manchmal sieht man im Hintergrund private Dinge, zum Beispiel deine Wohnung oder einen Brief mit deiner Adresse." },
-          { text: "Wenn dir etwas unsicher vorkommt, schickst du das Foto lieber nicht." }
+      "einfach": {
+        "text": [
+          {
+            "text": "Du willst ein Foto verschicken oder anderen zeigen."
+          },
+          {
+            "text": "Prüfe vorher genau: Was ist auf dem Foto zu sehen, und wer bekommt es?"
+          },
+          {
+            "text": "Wenn eine andere Person auf dem Foto ist, fragst du sie vorher."
+          },
+          {
+            "text": "Wenn ein Foto einmal verschickt ist, kannst du es oft nicht mehr zurückholen."
+          },
+          {
+            "text": "Deshalb prüfst du vorher, was du verschickst."
+          }
         ],
-        examples: ["Auf dem Foto liegt ein Brief.", "Im Hintergrund sieht man eine andere Person.", "Auf dem Foto sieht man deine Wohnung."]
+        "examples": [
+          {
+            "art": "C",
+            "text": "Du willst ein Foto von deinem Kollegen in eine Gruppe schicken. Frag ihn vorher, denn er entscheidet mit."
+          },
+          {
+            "art": "A",
+            "text": "Im Hintergrund vom Foto sieht man deine Hausnummer. Die muss niemand sehen."
+          }
+        ],
+        "remember": "Ich prüfe Fotos, bevor ich sie verschicke."
       },
-      standard: {
-        text: [
-          { text: "Bevor du ein Foto verschickst oder veröffentlichst, lohnt sich ein prüfender Blick. Oft sind im Hintergrund private Dinge zu sehen – ein Brief mit Adresse, dein Zuhause oder andere Personen, die nicht gefragt wurden. Im Zweifel schickst du das Bild lieber nicht." }
+      "standard": {
+        "text": [
+          {
+            "text": "Bevor du ein Foto verschickst oder zeigst, prüfe: Was ist darauf zu sehen, und wer bekommt es? Sind andere Menschen darauf, fragst du sie vorher. Ein verschicktes Foto lässt sich oft nicht mehr zurückholen – deshalb prüfst du vorher."
+          }
         ],
-        examples: ["Auf dem Tisch im Bild liegt ein Brief, auf dem dein Name und deine Adresse lesbar sind.", "Im Hintergrund ist eine andere Person zu sehen, die nicht gefragt wurde.", "Das Foto zeigt deine Wohnung so deutlich, dass Fremde sie wiedererkennen könnten."]
+        "examples": [
+          {
+            "art": "C",
+            "text": "Du möchtest ein Foto deines Kollegen in die Gruppe schicken. Frag ihn vorher – er entscheidet mit."
+          },
+          {
+            "art": "A",
+            "text": "Im Hintergrund ist deine Hausnummer zu sehen. Die muss niemand sehen."
+          }
+        ],
+        "remember": "Fotos prüfe ich, bevor ich sie verschicke."
       }
     },
 
-    "Fremde Links und Nachrichten": {
-      einfach: { warning: "Tippe nicht auf Links von Fremden oder aus komischen Nachrichten. Solche Links können gefährlich sein und deine Daten stehlen. Frag im Zweifel eine Person, der du vertraust.",
-        text: [
-          { text: "Manche Nachrichten wollen an deine privaten Daten kommen." },
-          { text: "Oft enthalten sie einen Link, der zu einer gefälschten Seite führt." },
-          { text: "Tippe solche Links nicht an und gib dort keine Daten ein, besonders wenn du den Absender nicht kennst." }
+    "Standort teilen": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Du kannst deinen Standort mit anderen teilen. Dann sehen sie, wo du gerade bist."
+          },
+          {
+            "text": "Prüfe vorher: Wer sieht meinen Standort, und wie lange sieht er ihn?"
+          },
+          {
+            "text": "Oft kannst du wählen, ob du ihn nur kurz oder für immer teilst."
+          },
+          {
+            "text": "Du kannst das Teilen später auch wieder ausschalten."
+          }
         ],
-        examples: ["„Klick schnell auf diesen Link.“", "„Gib deine Adresse ein.“", "„Du hast etwas gewonnen.“"]
+        "examples": [
+          {
+            "art": "B",
+            "text": "Du fährst allein zu einem neuen Ort. Deine Betreuerin will wissen, ob du gut angekommen bist. Deshalb teilst du deinen Standort mit ihr, bis du da bist."
+          },
+          {
+            "art": "A",
+            "text": "Ein Spiel zeigt deinen Standort allen anderen Spielern. Das braucht das Spiel nicht."
+          }
+        ],
+        "remember": "Ich teile meinen Standort nicht einfach so."
       },
-      standard: { warning: "Öffne keine Links aus unerwarteten oder unbekannten Nachrichten – sie können zu gefälschten Seiten führen, die deine Daten abgreifen. Frag im Zweifel eine Person, der du vertraust.",
-        text: [
-          { text: "Manche Nachrichten zielen darauf ab, an deine Daten zu kommen. Häufig enthalten sie einen Link, der auf eine gefälschte Seite führt. Öffne Links von unbekannten Absendern nicht und gib dort keine persönlichen Daten ein. Im Zweifel löschst du die Nachricht." }
+      "standard": {
+        "text": [
+          {
+            "text": "Wenn du deinen Standort teilst, sehen andere, wo du gerade bist. Prüfe dabei, wer ihn sieht und wie lange. Oft kannst du wählen, ob du ihn nur kurz oder dauerhaft teilst – und du kannst das Teilen später wieder beenden."
+          }
         ],
-        examples: ["„Schnell auf diesen Link klicken – das Angebot gilt nur noch heute!“", "„Bitte gib zur Bestätigung deine Adresse ein.“", "„Herzlichen Glückwunsch, du hast gewonnen!“"]
+        "examples": [
+          {
+            "art": "B",
+            "text": "Du fährst allein an einen neuen Ort. Deine Betreuerin möchte wissen, ob du gut ankommst – also teilst du deinen Standort mit ihr, bis du da bist."
+          },
+          {
+            "art": "A",
+            "text": "Ein Spiel zeigt deinen Standort allen Mitspielern. Für das Spiel ist das nicht nötig."
+          }
+        ],
+        "remember": "Meinen Standort teile ich nicht einfach so."
       }
     },
 
-    "Stress erkennen": {
-      einfach: {
-        text: [
-          { text: "Manche Nachrichten drängen dich absichtlich." },
-          { text: "Sie wollen, dass du sofort handelst, damit du nicht in Ruhe nachdenken kannst." },
-          { text: "Genau dieser Stress ist ein Warnzeichen für Betrug." }
+    "Eine Nachricht will deine Daten": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Manchmal bekommst du eine Nachricht oder eine E-Mail, in der jemand Daten von dir will."
+          },
+          {
+            "text": "Wenn du so eine Nachricht nicht erwartet hast, machst du zuerst Stopp."
+          },
+          {
+            "text": "Dann prüfst du genauso wie sonst: Wer will das, und wofür?"
+          },
+          {
+            "text": "Wenn du unsicher bist, gibst du noch nichts ein und holst dir Unterstützung."
+          },
+          {
+            "text": "Mehr dazu lernst du im Thema Betrug."
+          }
         ],
-        examples: ["„Klick sofort.“", "„Sonst ist dein Konto weg.“", "„Sag es niemandem.“"]
+        "examples": [
+          {
+            "art": "C",
+            "text": "Deine Freundin schreibt dir und fragt nach deiner neuen Adresse. Du kennst sie, und du entscheidest selbst."
+          },
+          {
+            "art": "A",
+            "text": "Eine fremde E-Mail schreibt: Bestätige deine Daten, sonst sperren wir dein Konto. Du kennst den Absender nicht."
+          }
+        ],
+        "remember": "Wenn ich unsicher bin, gebe ich noch nichts frei.",
+        "vorbild": [
+          "Alex bekommt eine E-Mail, in der er seine Adresse bestätigen soll.",
+          "Alex macht zuerst Stopp und prüft, wer ihm schreibt. Den Absender kennt er nicht.",
+          "Deshalb gibt er nichts ein.",
+          "Weil er noch unsicher ist, zeigt er die E-Mail seiner Betreuerin."
+        ]
       },
-      standard: {
-        text: [
-          { text: "Ein typisches Warnzeichen für Betrug ist Eile. Nachrichten, die sofortiges Handeln verlangen oder drohen, sollen verhindern, dass du in Ruhe nachdenkst. Lass dich davon nicht treiben: Seriöse Stellen setzen dich nicht so unter Stress." }
+      "standard": {
+        "text": [
+          {
+            "text": "Manchmal verlangt eine Nachricht oder E-Mail Daten von dir. Hast du das nicht erwartet, mach zuerst Stopp und prüfe genauso wie sonst: Wer will das, und wofür? Bist du unsicher, gib noch nichts ein und hol dir Unterstützung. Mehr dazu lernst du im Thema Betrug."
+          }
         ],
-        examples: ["„Klick sofort, sonst verfällt dein Zugang.“", "„Wenn du nicht reagierst, wird dein Konto gelöscht.“", "„Erzähl niemandem davon.“"]
+        "examples": [
+          {
+            "art": "C",
+            "text": "Deine Freundin fragt nach deiner neuen Adresse. Du kennst sie – was du antwortest, entscheidest du selbst."
+          },
+          {
+            "art": "A",
+            "text": "Eine unbekannte E-Mail fordert: Bestätige deine Daten, sonst sperren wir dein Konto. Du kennst den Absender nicht."
+          }
+        ],
+        "remember": "Bin ich unsicher, gebe ich noch nichts frei.",
+        "vorbild": [
+          "Alex bekommt eine E-Mail, in der er seine Adresse bestätigen soll. Er macht Stopp und prüft den Absender – den kennt er nicht. Also gibt er nichts ein und zeigt die E-Mail seiner Betreuerin, weil er noch unsicher ist."
+        ]
       }
     },
 
-    "Was kann ich tun?": {
-      einfach: {
-        text: [
-          { text: "Wenn dir eine Nachricht komisch vorkommt oder Stress macht, hilft dir ein fester Plan." },
-          { text: "Du gehst dann ruhig einen Schritt nach dem anderen durch." },
-          { text: "So triffst du keine schnelle Entscheidung, die du später bereust." }
+    "Dein Plan für deine Daten": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Das ist dein Plan für deine Daten, Schritt für Schritt:"
+          }
         ],
-        bullets: ["Ich antworte nicht sofort.", "Ich tippe nicht auf Links.", "Ich gebe keine privaten Daten ein.", "Ich mache eine Pause.", "Ich frage eine Person, der ich vertraue."]
+        "bullets": [
+          {
+            "text": "Stopp. Ich prüfe zuerst.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Wer bekommt es? Wer kann es sehen?",
+            "pictogram": "pikto-person"
+          },
+          {
+            "text": "Was genau soll ich geben?",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Wofür? Wie viel davon ist nötig?",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Ich entscheide.",
+            "pictogram": "pikto-done"
+          }
+        ],
+        "remember": "Erst prüfen, dann entscheide ich."
       },
-      standard: {
-        text: [
-          { text: "Wenn dir eine Nachricht merkwürdig vorkommt oder dir Stress macht, hilft ein fester Plan: Reagiere nicht sofort, tippe auf keine Links und gib keine Daten ein. Mach eine Pause und hol dir bei Bedarf Rat von einer Person, der du vertraust. So vermeidest du übereilte Entscheidungen." }
+      "standard": {
+        "text": [
+          {
+            "text": "Hier ist dein Plan für deine Daten im Überblick – Schritt für Schritt:"
+          }
         ],
-        bullets: []
+        "bullets": [
+          "Stopp. Ich prüfe zuerst.",
+          "Wer bekommt es? Wer kann es sehen?",
+          "Was genau soll ich geben?",
+          "Wofür? Wie viel davon ist nötig?",
+          "Ich entscheide."
+        ],
+        "remember": "Erst prüfen, dann entscheiden."
       }
     },
 
     "Das merke ich mir": {
-      einfach: {
-        text: [
-          { text: "Zum Schluss findest du hier die wichtigsten Regeln aus diesem Thema noch einmal zusammengefasst." }
+      "einfach": {
+        "text": [
+          {
+            "text": "Das sind die wichtigsten Regeln, die du in diesem Thema gelernt hast."
+          }
         ],
-        bullets: ["Private Daten gehören mir.", "Mein Passwort bleibt geheim.", "Ich nutze ein langes, gutes Passwort.", "Ich gebe meine Adresse nicht einfach weiter.", "Ich prüfe Fotos vor dem Senden.", "Ich öffne fremde Links nicht sofort.", "Bei Stress mache ich langsam.", "Ich darf mir Hilfe holen."]
+        "bullets": []
       },
-      standard: {
-        text: [
-          { text: "Zum Abschluss die wichtigsten Punkte dieses Themas im Überblick: Deine privaten Daten gehören dir. Halte dein Passwort geheim, wähle es lang und sicher und gib persönliche Angaben wie Adresse oder Telefonnummer nur dann preis, wenn es nötig ist. Prüfe Fotos vor dem Versenden, öffne unbekannte Links nicht vorschnell und lass dich von Stress nicht treiben. Und denk daran: Du darfst dir jederzeit Unterstützung holen." }
+      "standard": {
+        "text": [
+          {
+            "text": "Die wichtigsten Regeln aus diesem Kapitel im Überblick, zum Nachlesen und Merken."
+          }
         ],
-        bullets: []
+        "bullets": []
       }
     }
   },
@@ -1771,52 +2085,180 @@ const CONTENT_VERSIONS = {
    ------------------------------------------------------------ */
 const KURZ_VERSIONS = {
   datenschutz: {
-    "Deine privaten Daten": {
-      einfach: {
-        text: [
-          { text: "Private Daten sind Angaben, die nur zu dir gehören." },
-          { text: "Dazu gehören zum Beispiel dein Name, deine Adresse und dein Passwort." },
-          { text: "Diese Daten gibst du nicht einfach weiter, weil andere sie ausnutzen können." }
+    /* Kurz-Einheiten neu seit Paket 2, Einfach und Alltag seit Paket 5. */
+    "Deine Daten": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Deine Daten sind Angaben, die etwas über dich verraten."
+          },
+          {
+            "text": "Dazu gehören zum Beispiel dein Name, deine Adresse, deine Fotos und dein Standort."
+          },
+          {
+            "text": "Manche Daten sind besonders wichtig, zum Beispiel Angaben zu deiner Gesundheit und deine Bankdaten."
+          },
+          {
+            "text": "Dein Passwort ist geheim."
+          },
+          {
+            "text": "Du entscheidest selbst, wer deine Daten bekommt."
+          }
         ],
-        remember: "Deine privaten Daten gehören dir. Du entscheidest, wer sie bekommt.",
-        vorbild: ["Ein Gewinn-Spiel im Internet will die Adresse und die Telefon-Nummer von Alex haben.", "Alex überlegt kurz: Das sind private Daten, die nur ihm gehören.", "Deshalb gibt er sie nicht ein."]
+        "examples": [
+          {
+            "art": "B",
+            "text": "Deine Ärztin fragt dich, was dir wehtut. Du sagst es ihr, weil sie das für die Behandlung braucht."
+          },
+          {
+            "art": "A",
+            "text": "Ein Quiz im Internet fragt nach deinen Krankheiten. Für ein Quiz braucht es diese Angaben nicht."
+          }
+        ],
+        "remember": "Meine privaten Daten gehören mir.",
+        "vorbild": [
+          "Alex möchte ein Bankkonto eröffnen. Die Bank fragt dafür nach seinem Ausweis.",
+          "Alex denkt: Das sind besonders wichtige Daten.",
+          "Er prüft, wofür die Bank den Ausweis haben will: Sie prüft damit, ob er wirklich Alex ist.",
+          "Das passt zum Bankkonto, und Alex entscheidet: Er zeigt den Ausweis."
+        ]
       },
-      standard: {
-        text: [{ text: "Private Daten sind Angaben, die zu dir als Person gehören – etwa dein Name, deine Adresse oder dein Passwort. Sie gehören nur dir, und du entscheidest selbst, wer sie bekommt." }],
-        remember: "Private Daten gehören dir – du entscheidest, wer sie bekommt.",
-        vorbild: ["Ein Gewinnspiel fragt Alex nach Adresse und Telefonnummer. Alex erkennt: Das sind private Daten – und gibt sie nicht ein."]
+      "standard": {
+        "text": [
+          {
+            "text": "Zu deinen Daten gehört alles, was etwas über dich aussagt – etwa dein Name, deine Adresse, deine Fotos und dein Standort. Besonders schützenswert sind Gesundheits- und Bankdaten. Dein Passwort ist geheim. Wer deine Daten bekommt, entscheidest du selbst."
+          }
+        ],
+        "examples": [
+          {
+            "art": "B",
+            "text": "Deine Ärztin fragt, was dir wehtut. Du sagst es ihr – für die Behandlung braucht sie diese Information."
+          },
+          {
+            "art": "A",
+            "text": "Ein Online-Quiz fragt nach deinen Krankheiten. Für ein Quiz sind solche Angaben nicht erforderlich."
+          }
+        ],
+        "remember": "Meine persönlichen Daten gehören mir.",
+        "vorbild": [
+          "Alex möchte ein Bankkonto eröffnen, und die Bank fragt nach seinem Ausweis. Das sind besonders wichtige Daten – also prüft er, wofür die Bank ihn will: Sie stellt damit fest, ob er wirklich Alex ist. Das passt zum Konto, und Alex entscheidet sich, den Ausweis zu zeigen."
+        ]
       }
     },
-    "Dein Passwort": {
-      einfach: {
-        text: [
-          { text: "Dein Passwort schützt dein Konto, deshalb ist es geheim." },
-          { text: "Du sagst es niemandem weiter, auch nicht guten Freunden." },
-          { text: "Ein gutes Passwort ist lang und schwer zu erraten." }
+
+    "Nötig oder nicht?": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Eine App oder ein Formular will Daten von dir haben."
+          },
+          {
+            "text": "Du prüfst, wofür die Daten gebraucht werden und welche Angaben dazu passen."
+          },
+          {
+            "text": "In Formularen gibt es außerdem Pflichtfelder und freiwillige Felder. Freiwillige Felder darfst du leer lassen."
+          },
+          {
+            "text": "Wenn du unsicher bist, gibst du noch nichts ein und holst dir Unterstützung."
+          }
         ],
-        remember: "Dein Passwort bleibt geheim, auch vor Freunden.",
-        vorbild: ["Ein Kollege fragt Tilda nach ihrem Passwort, weil er nur kurz etwas nachsehen will.", "Tilda bleibt freundlich, aber klar: Nein, mein Passwort bleibt geheim."]
+        "examples": [
+          {
+            "art": "B",
+            "text": "Ein Shop braucht deine Adresse, damit das Paket ankommt."
+          },
+          {
+            "art": "A",
+            "text": "Eine Taschenlampen-App will deine Kontakte sehen."
+          },
+          {
+            "art": "C",
+            "text": "Eine Wetter-App will deinen Standort. Du kannst deine Stadt aber auch selbst eintippen."
+          }
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind.",
+        "vorbild": [
+          "Tilda meldet sich im Internet bei der Bücherei an.",
+          "Das Formular fragt nach ihrem Namen und ihrer Adresse. Diese Felder sind Pflicht.",
+          "Tilda prüft, wofür die Bücherei das braucht: für den Büchereiausweis. Die Angaben sind also nötig.",
+          "Die Telefonnummer ist freiwillig, deshalb lässt Tilda das Feld leer."
+        ]
       },
-      standard: {
-        text: [{ text: "Dein Passwort schützt dein Konto und ist deshalb geheim. Du gibst es an niemanden weiter, auch nicht an gute Freunde. Ein gutes Passwort ist lang und für andere schwer zu erraten." }],
-        remember: "Dein Passwort bleibt geheim – ohne Ausnahme.",
-        vorbild: ["Ein Kollege möchte kurz Tildas Passwort, um etwas nachzusehen. Tilda lehnt freundlich, aber klar ab: Ihr Passwort bleibt geheim."]
+      "standard": {
+        "text": [
+          {
+            "text": "Will eine App oder ein Formular Daten von dir, prüfst du: Wofür werden sie gebraucht, und ist das nötig? Außerdem gibt es Pflichtfelder und freiwillige Felder – freiwillige darfst du leer lassen. Bist du unsicher, gib noch nichts ein und hol dir Unterstützung."
+          }
+        ],
+        "examples": [
+          {
+            "art": "B",
+            "text": "Ein Shop braucht deine Adresse für die Lieferung."
+          },
+          {
+            "art": "A",
+            "text": "Eine Taschenlampen-App will auf deine Kontakte zugreifen."
+          },
+          {
+            "art": "C",
+            "text": "Eine Wetter-App möchte deinen Standort – du kannst deine Stadt aber auch selbst eingeben."
+          }
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind.",
+        "vorbild": [
+          "Tilda meldet sich online bei der Bücherei an. Name und Adresse sind Pflichtfelder. Sie prüft den Zweck: Für den Büchereiausweis sind die Angaben nötig. Die Telefonnummer ist freiwillig, also lässt Tilda das Feld leer."
+        ]
       }
     },
-    "Jemand fragt nach deinen Daten": {
-      einfach: {
-        text: [
-          { text: "Manchmal fragt dich jemand in einer Nachricht nach deinen Daten." },
-          { text: "Dann gibst du deine Daten nicht sofort ein." },
-          { text: "Frag zuerst eine Person, der du vertraust. Sie hilft dir bei der Entscheidung." }
+
+    "Wer sieht es?": {
+      "einfach": {
+        "text": [
+          {
+            "text": "Du teilst etwas mit anderen, zum Beispiel ein Foto oder dein Profil."
+          },
+          {
+            "text": "Du prüfst: Wer kann das sehen – alle oder nur deine Freunde?"
+          },
+          {
+            "text": "Das kannst du oft selbst einstellen und später auch wieder ändern."
+          },
+          {
+            "text": "Wenn ein Foto einmal verschickt ist, kannst du es oft nicht zurückholen. Deshalb prüfst du vorher."
+          },
+          {
+            "text": "Wenn andere Personen auf dem Foto sind, fragst du sie vorher."
+          }
         ],
-        remember: "Frag erst eine Person, der du vertraust. Dann entscheidest du.",
-        vorbild: ["Alex bekommt eine E-Mail, in der er sein Geburts-Datum eingeben soll.", "Er gibt nichts ein und zeigt die E-Mail zuerst seiner Betreuerin."]
+        "examples": [
+          {
+            "art": "C",
+            "text": "Bei deinem Wohnort im Profil entscheidest du selbst: Sollen ihn alle sehen, nur deine Freunde oder niemand?"
+          }
+        ],
+        "remember": "Ich wähle selbst aus, wer meine Daten sieht.",
+        "vorbild": [
+          "Tilda stellt ein neues Foto in ihr Profil.",
+          "Sie prüft, wer das Foto sehen kann: Im Moment sind es alle im Internet.",
+          "Das will Tilda nicht. Deshalb stellt sie ein: Nur Freunde."
+        ]
       },
-      standard: {
-        text: [{ text: "Manchmal fragt dich jemand per Nachricht nach deinen Daten. Gib sie nicht vorschnell ein, sondern sprich zuerst mit einer Person, der du vertraust. Gemeinsam könnt ihr in Ruhe entscheiden, ob die Anfrage echt ist." }],
-        remember: "Erst Rat holen, dann entscheiden.",
-        vorbild: ["Eine E-Mail fordert Alex auf, sein Geburtsdatum einzugeben. Er gibt nichts ein und bespricht die Nachricht zuerst mit seiner Betreuerin."]
+      "standard": {
+        "text": [
+          {
+            "text": "Wenn du etwas teilst, etwa ein Foto oder dein Profil, prüfe, wer es sehen kann: alle oder nur deine Freunde? Das lässt sich oft einstellen und später ändern. Ein verschicktes Foto kannst du aber oft nicht zurückholen – deshalb prüfst du vorher. Sind andere Menschen auf dem Foto, fragst du sie vorher."
+          }
+        ],
+        "examples": [
+          {
+            "art": "C",
+            "text": "Beim Wohnort im Profil entscheidest du: sichtbar für alle, nur für Freunde oder für niemanden."
+          }
+        ],
+        "remember": "Ich lege selbst fest, wer meine Daten sieht.",
+        "vorbild": [
+          "Tilda stellt ein neues Profilfoto ein und prüft, wer es sehen kann: alle im Internet. Das will sie nicht – deshalb stellt sie es auf Nur Freunde um."
+        ]
       }
     }
   },
@@ -2383,14 +2825,14 @@ const KURZ_VERSIONS = {
 const LERNZIELE = {
   datenschutz: {
     kurz: {
-      leicht:   ["Private Daten erkennen.", "Dein Passwort geheim halten.", "Bei Fragen nach Daten erst eine vertraute Person fragen."],
-      einfach:  ["Erkennen, welche Daten privat sind.", "Dein Passwort so schützen, dass niemand es erfährt.", "Richtig reagieren, wenn jemand nach deinen Daten fragt."],
-      standard: ["Private Daten erkennen und schützen.", "Dein Passwort konsequent geheim halten.", "Auf Anfragen nach deinen Daten besonnen reagieren."]
+      leicht:   ["Private Daten erkennen.", "Prüfen: Welche Daten sind nötig?", "Selbst entscheiden: Was gebe ich weiter?", "Bei Unsicherheit: noch nichts freigeben."],
+      einfach:  ["Erkennen, welche Daten privat sind.","Prüfen, welche Daten für einen Zweck nötig sind.","Selbst entscheiden, was du weitergibst.","Wenn du unsicher bist, noch nichts freigeben."],
+      standard: ["Persönliche Daten erkennen.","Prüfen, welche Daten für einen Zweck nötig sind.","Selbst entscheiden, was du weitergibst.","Bei Unsicherheit zunächst nichts freigeben."]
     },
     lang: {
-      leicht:   ["Private Daten erkennen.", "Dein Passwort geheim halten.", "Auf Fragen nach Daten richtig antworten."],
-      einfach:  ["Erkennen, welche Daten privat sind.", "Dein Passwort und deine Konten gut schützen.", "Richtig reagieren, wenn jemand nach deinen Daten fragt."],
-      standard: ["Private Daten erkennen und bewusst damit umgehen.", "Passwörter und Konten wirksam schützen.", "Auf Anfragen nach deinen Daten besonnen reagieren."]
+      leicht:   ["Private Daten erkennen.", "Prüfen: Welche Daten sind nötig?", "Selbst entscheiden: Was gebe ich weiter?", "Bei Unsicherheit: noch nichts freigeben."],
+      einfach:  ["Erkennen, welche Daten privat sind.","Prüfen, welche Daten für einen Zweck nötig sind.","Selbst entscheiden, was du weitergibst.","Wenn du unsicher bist, noch nichts freigeben."],
+      standard: ["Persönliche Daten erkennen.","Prüfen, welche Daten für einen Zweck nötig sind.","Selbst entscheiden, was du weitergibst.","Bei Unsicherheit zunächst nichts freigeben."]
     }
   },
   whatsapp: {
@@ -2527,6 +2969,966 @@ const LERNZIELE = {
   }
 };
 
+/* ------------------------------------------------------------
+   Aufgaben je Sprachstufe (Datenschutz-Musterthema, Paket 5, 28.09.2026)
+   Die Aufgabe in topics.js ist die Leichte Sprache und bleibt die Referenz.
+   Schlüssel = die Frage in Leichter Sprache, wortgleich zu topics.js. Steht
+   dieselbe Frage an mehreren Stellen (lange und kurze Einheit), bekommt sie
+   überall dieselben Fassungen.
+   Felder je Fassung: question, situation, hinweis, answers[] (gleiche
+   Reihenfolge und Anzahl), feedbackCorrect, feedbackWrong[] (null an derselben
+   Stelle), remember (nur Anzeige – die Regel liest weiter den Leicht-Satz),
+   formular.titel, felder[] (name, wofuer, zustand, rueckmeldung), ausweg,
+   auswegRueckmeldung. Eingesetzt in app.js (sprachstufeAnwenden).
+   Themen ohne Einträge zeigen ihre Aufgaben wie bisher.
+   ------------------------------------------------------------ */
+const AUFGABEN_VERSIONS = {
+  datenschutz: {
+    "Du fängst eine neue Arbeit an. Die Firma will deine Konto-Nummer. Sie will dir deinen Lohn überweisen. Was machst du?": {
+      "einfach": {
+        "question": "Du fängst eine neue Arbeit an. Die Firma will deine Kontonummer, damit sie dir deinen Lohn überweisen kann. Was machst du?",
+        "hinweis": "Überlege: Wer will die Nummer haben, und wofür?",
+        "answers": [
+          "Ich gebe die Kontonummer, weil die Firma sie für meinen Lohn braucht.",
+          "Ich gebe die Kontonummer nicht, weil Bankdaten besonders wichtig sind.",
+          "Ich gebe die Kontonummer und dazu ein Foto von meiner Bankkarte, damit es schneller geht."
+        ],
+        "feedbackCorrect": "Genau. Die Kontonummer ist wichtig, aber die Firma braucht sie für deinen Lohn. Du kennst die Firma, deshalb gibst du sie.",
+        "feedbackWrong": [
+          null,
+          "Bankdaten sind wichtig. Hier gibt es aber einen klaren Zweck: deinen Lohn. Ohne Kontonummer bekommst du kein Geld. Private Daten bedeutet nicht, dass du immer Nein sagst.",
+          "Die Firma braucht nur die Kontonummer, aber kein Foto von deiner Bankkarte. Mit so einem Foto kann jemand mit deiner Karte bezahlen."
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind."
+      },
+      "standard": {
+        "question": "Du beginnst eine neue Stelle. Die Firma möchte deine Kontonummer, um dir den Lohn zu überweisen. Was tust du?",
+        "hinweis": "Überlege: Wer will die Nummer – und wofür?",
+        "answers": [
+          "Ich gebe die Kontonummer an – die Firma braucht sie für meinen Lohn.",
+          "Ich gebe die Kontonummer nicht an – Bankdaten sind besonders schützenswert.",
+          "Ich gebe die Kontonummer an und schicke ein Foto meiner Bankkarte mit, damit es schneller geht."
+        ],
+        "feedbackCorrect": "Genau. Die Kontonummer ist sensibel, aber die Firma braucht sie für deinen Lohn. Du kennst die Firma – also gibst du sie an.",
+        "feedbackWrong": [
+          null,
+          "Bankdaten sind sensibel, doch hier gibt es einen klaren Zweck: deinen Lohn. Ohne Kontonummer bekommst du kein Geld. Privat heißt nicht automatisch Nein.",
+          "Die Firma braucht nur die Kontonummer, kein Foto deiner Bankkarte. Mit einem solchen Foto kann jemand mit deiner Karte bezahlen."
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind."
+      }
+    },
+
+    "Wer darf dein Geburts-Datum bekommen?": {
+      "einfach": {
+        "question": "Wer darf dein Geburtsdatum bekommen?",
+        "hinweis": "Überlege: Wen kennst du, und wer braucht es wirklich?",
+        "answers": [
+          "Eine fremde Person im Chat, die dir zum Geburtstag gratulieren will.",
+          "Deine Krankenkasse, bei der du selbst angerufen hast.",
+          "Eine Seite im Internet, die dir ein Geschenk verspricht."
+        ],
+        "feedbackCorrect": "Genau. Deine Krankenkasse kennst du, und du hast selbst dort angerufen. Sie braucht dein Geburtsdatum, damit sie dich erkennt. Die anderen kennst du nicht.",
+        "feedbackWrong": [
+          "Diese Person kennst du nicht, und du weißt nicht, wer das wirklich ist. Für einen Gruß braucht sie dein Geburtsdatum nicht.",
+          null,
+          "Diese Seite kennst du nicht. Für ein Geschenk braucht sie dein Geburtsdatum nicht. Manche wollen so an deine Daten kommen."
+        ],
+        "remember": "Ich prüfe, wer meine Daten bekommt."
+      },
+      "standard": {
+        "question": "Wer darf dein Geburtsdatum bekommen?",
+        "hinweis": "Überlege: Wen kennst du – und wer braucht es wirklich?",
+        "answers": [
+          "Eine unbekannte Person im Chat, die dir zum Geburtstag gratulieren möchte.",
+          "Deine Krankenkasse, bei der du selbst angerufen hast.",
+          "Eine Website, die dir ein Geschenk verspricht."
+        ],
+        "feedbackCorrect": "Genau. Deine Krankenkasse kennst du, und du hast selbst angerufen. Sie braucht dein Geburtsdatum, um dich zu erkennen. Die anderen kennst du nicht.",
+        "feedbackWrong": [
+          "Diese Person kennst du nicht – du weißt nicht, wer wirklich dahintersteckt. Für einen Gruß braucht sie dein Geburtsdatum nicht.",
+          null,
+          "Diese Seite kennst du nicht. Für ein Geschenk braucht sie dein Geburtsdatum nicht – manche versuchen so, an Daten zu kommen."
+        ],
+        "remember": "Ich prüfe, wer meine Daten bekommt."
+      }
+    },
+
+    "Was gibst du bei der Fitness-App an?": {
+      "einfach": {
+        "question": "Was gibst du bei der Fitness-App an?",
+        "situation": "Du willst eine Fitness-App nutzen. Die App zählt deine Schritte und zeigt dir, wie viele Kalorien du verbraucht hast. Genau das willst du sehen. Für die App brauchst du ein Konto.",
+        "hinweis": "Überlege: Was willst du mit der App machen, und welche Angaben passen dazu? Welche Felder sind freiwillig? Du kannst auch zuerst prüfen.",
+        "formular": {
+          "titel": "Fitness-App: Konto anlegen"
+        },
+        "felder": [
+          {
+            "name": "E-Mail",
+            "wofuer": "Für dein Konto: Mit der E-Mail meldest du dich an.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur, dass es ohne E-Mail nicht weitergeht. Hier passt die E-Mail aber auch zum Zweck, denn mit ihr meldest du dich in deinem Konto an.",
+              "leer": "Pflicht heißt, dass es ohne E-Mail nicht weitergeht. Die E-Mail passt hier zum Zweck. Wenn du die App nutzen willst, gibst du sie an. Sonst nutzt du die App nicht."
+            }
+          },
+          {
+            "name": "Gewicht",
+            "wofuer": "Mit deinem Gewicht berechnen wir deine Kalorien.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Du willst deine Kalorien sehen, und dafür braucht die App dein Gewicht. Das passt zu deinem Ziel.",
+              "leer": "Das Feld ist freiwillig. Du kannst Nein sagen, dann bekommt die App dein Gewicht nicht. Deine Kalorien kann sie dann vielleicht nicht berechnen, aber deine Schritte zählt sie trotzdem. Du entscheidest."
+            }
+          },
+          {
+            "name": "Telefonnummer",
+            "wofuer": "Für Angebote per SMS.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Die Nummer ist nur für Werbung. Für deine Schritte und Kalorien braucht die App sie nicht.",
+              "leer": "Das Feld ist freiwillig. Die Nummer ist nur für Werbung, und für dein Ziel braucht die App sie nicht."
+            }
+          },
+          {
+            "name": "Geburtsdatum",
+            "wofuer": "Wir gratulieren dir zum Geburtstag.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Ein Gruß zum Geburtstag gehört nicht zu deinem Ziel. Für deine Schritte und Kalorien braucht die App das nicht.",
+              "leer": "Das Feld ist freiwillig. Ein Gruß zum Geburtstag gehört nicht zu deinem Ziel."
+            }
+          }
+        ],
+        "ausweg": {
+          "nichtNutzen": "Ich lege kein Konto an."
+        },
+        "auswegRueckmeldung": {
+          "nichtNutzen": "Das ist deine Entscheidung, und sie ist in Ordnung. Dann nutzt du die App nicht."
+        },
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind."
+      },
+      "standard": {
+        "question": "Welche Angaben machst du bei der Fitness-App?",
+        "situation": "Du möchtest eine Fitness-App nutzen, die deine Schritte zählt und anzeigt, wie viele Kalorien du verbraucht hast – genau das willst du sehen. Dafür brauchst du ein Konto.",
+        "hinweis": "Überlege: Was willst du mit der App, und welche Angaben passen dazu? Welche Felder sind freiwillig? Du kannst auch erst prüfen.",
+        "formular": {
+          "titel": "Fitness-App: Konto erstellen"
+        },
+        "felder": [
+          {
+            "name": "E-Mail",
+            "wofuer": "Für dein Konto – damit meldest du dich an.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur: Ohne E-Mail geht es nicht weiter. Hier passt sie zugleich zum Zweck – du meldest dich damit in deinem Konto an.",
+              "leer": "Pflicht heißt: Ohne E-Mail geht es nicht weiter. Die E-Mail passt hier zum Zweck. Willst du die App nutzen, gibst du sie an – sonst nutzt du die App nicht."
+            }
+          },
+          {
+            "name": "Gewicht",
+            "wofuer": "Mit deinem Gewicht berechnen wir deinen Kalorienverbrauch.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Du willst deinen Kalorienverbrauch sehen, und dafür braucht die App dein Gewicht – das passt zu deinem Ziel.",
+              "leer": "Das Feld ist freiwillig. Du kannst Nein sagen – dann bekommt die App dein Gewicht nicht und kann deinen Kalorienverbrauch vielleicht nicht berechnen. Deine Schritte zählt sie trotzdem. Du entscheidest."
+            }
+          },
+          {
+            "name": "Telefonnummer",
+            "wofuer": "Für Angebote per SMS.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Die Nummer dient nur der Werbung – für Schritte und Kalorien braucht die App sie nicht.",
+              "leer": "Das Feld ist freiwillig. Die Nummer dient nur der Werbung; für dein Ziel braucht die App sie nicht."
+            }
+          },
+          {
+            "name": "Geburtsdatum",
+            "wofuer": "Wir gratulieren dir zum Geburtstag.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Ein Geburtstagsgruß gehört nicht zu deinem Ziel – für Schritte und Kalorien braucht die App das nicht.",
+              "leer": "Das Feld ist freiwillig. Ein Geburtstagsgruß gehört nicht zu deinem Ziel."
+            }
+          }
+        ],
+        "ausweg": {
+          "nichtNutzen": "Ich erstelle kein Konto."
+        },
+        "auswegRueckmeldung": {
+          "nichtNutzen": "Das ist deine Entscheidung und in Ordnung. Dann nutzt du die App nicht."
+        },
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind."
+      }
+    },
+
+    "Eine App macht aus einem Foto eine Post-Karte. Du willst ein Foto verschicken. Auf dem Handy erscheint: Soll die App deine Fotos sehen? Was machst du?": {
+      "einfach": {
+        "question": "Eine App macht aus einem Foto eine Postkarte. Du willst ein Foto als Karte verschicken. Auf dem Handy erscheint die Frage: Soll die App deine Fotos sehen? Was machst du?",
+        "hinweis": "Überlege: Wie viele Fotos braucht die App für deine Karte?",
+        "answers": [
+          "Ich erlaube nur ausgewählte Fotos und wähle das eine Foto aus.",
+          "Ich erlaube alle Fotos, damit ich nicht lange suchen muss.",
+          "Ich erlaube keine Fotos, weil Fotos privat sind."
+        ],
+        "feedbackCorrect": "Genau. Die App braucht nur dieses eine Foto. Viele Handys bieten dafür die Einstellung: Ausgewählte Fotos. Dann sieht die App deine anderen Fotos nicht.",
+        "feedbackWrong": [
+          null,
+          "Dann sieht die App alle deine Fotos, obwohl sie für die Karte nur eins braucht. Das ist mehr als nötig.",
+          "Dann kann die App keine Karte machen, denn dafür braucht sie ein Foto. Gib ihr nur das eine Foto."
+        ],
+        "remember": "Ich erlaube einer App nur das, was sie braucht."
+      },
+      "standard": {
+        "question": "Eine App gestaltet aus einem Foto eine Postkarte. Du willst ein Foto verschicken, und dein Handy fragt: Darf die App auf deine Fotos zugreifen? Was tust du?",
+        "hinweis": "Überlege: Wie viele Fotos braucht die App für deine Karte?",
+        "answers": [
+          "Nur ausgewählte Fotos freigeben und das eine Foto auswählen.",
+          "Alle Fotos freigeben – dann muss ich nicht lange suchen.",
+          "Keinen Zugriff erlauben – Fotos sind privat."
+        ],
+        "feedbackCorrect": "Genau. Die App braucht nur dieses eine Foto. Viele Handys bieten dafür die Option Ausgewählte Fotos – dann sieht die App deine übrigen Fotos nicht.",
+        "feedbackWrong": [
+          null,
+          "Dann sieht die App alle deine Fotos, obwohl sie für die Karte nur eins braucht. Das ist mehr als nötig.",
+          "Dann kann die App keine Karte erstellen – dafür braucht sie ein Foto. Gib ihr nur das eine."
+        ],
+        "remember": "Ich erlaube einer App nur, was sie für ihre Funktion braucht."
+      }
+    },
+
+    "In einer App hast du ein Profil. Dort steht deine Telefon-Nummer. Deine Freunde aus der App sollen dich anrufen können. Wer soll die Nummer sehen?": {
+      "einfach": {
+        "question": "In einer App hast du ein Profil, in dem deine Telefonnummer steht. Deine Freunde aus der App sollen dich anrufen können. Wer soll die Nummer sehen?",
+        "hinweis": "Überlege: Wer soll dich anrufen können?",
+        "answers": [
+          "Alle Menschen, die die App benutzen.",
+          "Nur meine Freunde.",
+          "Niemand, weil die Nummer privat ist."
+        ],
+        "feedbackCorrect": "Genau. Deine Freunde sollen dich anrufen können, und dafür reicht die Einstellung: Nur Freunde. Fremde brauchen deine Nummer nicht.",
+        "feedbackWrong": [
+          "Dann sehen auch Fremde deine Nummer. Das ist mehr als nötig, denn für deine Freunde reicht: Nur Freunde.",
+          null,
+          "Das darfst du so einstellen. Aber dann können dich deine Freunde nicht anrufen, und das wolltest du ja. Dafür reicht: Nur Freunde."
+        ],
+        "remember": "Ich wähle selbst aus, wer meine Daten sieht."
+      },
+      "standard": {
+        "question": "In deinem Profil in einer App steht deine Telefonnummer. Deine Freunde aus der App sollen dich anrufen können. Wer soll die Nummer sehen?",
+        "hinweis": "Überlege: Wer soll dich anrufen können?",
+        "answers": [
+          "Alle Nutzerinnen und Nutzer der App.",
+          "Nur meine Freunde.",
+          "Niemand – die Nummer ist privat."
+        ],
+        "feedbackCorrect": "Genau. Deine Freunde sollen dich anrufen können – dafür reicht Nur Freunde. Fremde brauchen deine Nummer nicht.",
+        "feedbackWrong": [
+          "Dann sehen auch Fremde deine Nummer. Das ist mehr als nötig; für deine Freunde reicht Nur Freunde.",
+          null,
+          "Das darfst du so einstellen. Dann können dich deine Freunde aber nicht anrufen – und das wolltest du ja. Dafür reicht Nur Freunde."
+        ],
+        "remember": "Ich lege selbst fest, wer meine Daten sieht."
+      }
+    },
+
+    "Du hast auf einer Feier ein Foto gemacht. Darauf sind 3 Freunde. Du willst es in deinen Status stellen. Was machst du?": {
+      "einfach": {
+        "question": "Du hast auf einer Feier ein Foto gemacht, auf dem 3 Freunde zu sehen sind. Du willst es in deinen Status stellen. Was machst du?",
+        "hinweis": "Überlege: Wer ist noch auf dem Foto, und wer entscheidet mit?",
+        "answers": [
+          "Ich stelle es gleich rein, weil ich das Foto ja gemacht habe.",
+          "Ich stelle es nur für 24 Stunden rein, danach ist es wieder weg.",
+          "Ich frage die 3 vorher. Nur wenn alle Ja sagen, stelle ich es rein."
+        ],
+        "feedbackCorrect": "Genau. Auf dem Foto sind auch deine Freunde, deshalb entscheiden sie mit. Wenn einer Nein sagt, stellst du es nicht rein.",
+        "feedbackWrong": [
+          "Das Foto zeigt auch deine Freunde, deshalb entscheiden sie mit. Frag sie vorher.",
+          "Auch in 24 Stunden kann jemand das Foto speichern. Dann ist es nicht weg. Frag deine Freunde vorher.",
+          null
+        ],
+        "remember": "Bevor ich Fotos von anderen teile, frage ich sie."
+      },
+      "standard": {
+        "question": "Auf einer Feier hast du ein Foto gemacht, auf dem drei Freunde zu sehen sind. Du willst es in deinen Status stellen. Was tust du?",
+        "hinweis": "Überlege: Wer ist noch auf dem Foto – und wer entscheidet mit?",
+        "answers": [
+          "Ich stelle es gleich ein – schließlich habe ich das Foto gemacht.",
+          "Ich stelle es nur für 24 Stunden ein, danach verschwindet es.",
+          "Ich frage die drei vorher und stelle es nur ein, wenn alle zustimmen."
+        ],
+        "feedbackCorrect": "Genau. Auf dem Foto sind auch deine Freunde, also entscheiden sie mit. Sagt jemand Nein, stellst du es nicht ein.",
+        "feedbackWrong": [
+          "Das Foto zeigt auch deine Freunde – sie entscheiden mit. Frag sie vorher.",
+          "Auch in 24 Stunden kann jemand das Foto speichern; dann ist es nicht weg. Frag deine Freunde vorher.",
+          null
+        ],
+        "remember": "Fotos von anderen teile ich erst, wenn sie zugestimmt haben."
+      }
+    },
+
+    "Du gehst mit 3 Freunden auf ein Konzert. Ihr wollt euch vor dem Eingang treffen. In eurer Chat-Gruppe sind aber 30 Leute. Wie teilst du deinen Standort?": {
+      "einfach": {
+        "question": "Du gehst mit 3 Freunden auf ein Konzert, und ihr wollt euch vor dem Eingang treffen. In eurer Chatgruppe sind aber 30 Leute. Wie teilst du deinen Standort?",
+        "hinweis": "Überlege: Wer braucht deinen Standort, und wie lange?",
+        "answers": [
+          "Mit allen 30 Leuten, und zwar für immer.",
+          "Nur mit den 3 Freunden, aber für immer.",
+          "Nur mit den 3 Freunden, bis zum Treffen."
+        ],
+        "feedbackCorrect": "Genau. Nur die 3 brauchen deinen Standort, und zwar nur bis zum Treffen. Du darfst auch Nein sagen. Dann schreibt ihr euch einfach, wo ihr seid.",
+        "feedbackWrong": [
+          "Dann sehen 30 Leute immer deinen Standort, obwohl ihn für das Treffen nur 3 brauchen, und das nur kurz.",
+          "Das sind die richtigen Leute. Aber für immer ist mehr als nötig, denn für das Treffen reicht eine kurze Zeit.",
+          null
+        ],
+        "remember": "Ich teile meinen Standort nur so lange, wie es nötig ist."
+      },
+      "standard": {
+        "question": "Du gehst mit drei Freunden auf ein Konzert, ihr wollt euch vor dem Eingang treffen. In eurer Chatgruppe sind aber 30 Leute. Wie teilst du deinen Standort?",
+        "hinweis": "Überlege: Wer braucht deinen Standort – und wie lange?",
+        "answers": [
+          "Mit allen 30 Leuten, dauerhaft.",
+          "Nur mit den drei Freunden, dauerhaft.",
+          "Nur mit den drei Freunden, bis zum Treffen."
+        ],
+        "feedbackCorrect": "Genau. Nur die drei brauchen deinen Standort, und nur bis zum Treffen. Du darfst auch Nein sagen – dann schreibt ihr euch, wo ihr seid.",
+        "feedbackWrong": [
+          "Dann sehen 30 Leute dauerhaft deinen Standort, obwohl ihn nur drei brauchen – und das nur kurz.",
+          "Das sind die richtigen Leute, aber dauerhaft ist mehr als nötig. Für das Treffen reicht eine kurze Zeit.",
+          null
+        ],
+        "remember": "Meinen Standort teile ich nur so lange wie nötig."
+      }
+    },
+
+    "Du bekommst eine SMS: Hier ist deine Bank. Bitte bestätige dein Geburts-Datum. Tippe dafür auf den Link. Was machst du?": {
+      "einfach": {
+        "question": "Du bekommst eine SMS: Hier ist deine Bank. Bitte bestätige dein Geburtsdatum und tippe dafür auf den Link. Was machst du?",
+        "hinweis": "Überlege: Weißt du sicher, wer dir schreibt?",
+        "answers": [
+          "Ich tippe auf den Link, weil ich meine Bank ja kenne.",
+          "Ich schreibe mein Geburtsdatum zurück, weil es ja nicht geheim ist.",
+          "Ich gebe nichts ein und rufe die Nummer auf meiner Bankkarte an."
+        ],
+        "feedbackCorrect": "Genau. Du weißt nicht, ob wirklich deine Bank schreibt. Das prüfst du selbst, und zwar mit einer Nummer, die du kennst.",
+        "feedbackWrong": [
+          "Jeder kann schreiben: Hier ist deine Bank. Der Link kann zu einer falschen Seite führen. Ruf lieber selbst bei deiner Bank an.",
+          "Auch das Geburtsdatum nutzen Betrüger. Du weißt nicht, wer dir wirklich schreibt. Prüfe das zuerst selbst.",
+          null
+        ],
+        "remember": "Ich prüfe zuerst, wer meine Daten will."
+      },
+      "standard": {
+        "question": "Du bekommst eine SMS: Hier ist deine Bank, bitte bestätige dein Geburtsdatum über den Link. Was tust du?",
+        "hinweis": "Überlege: Weißt du sicher, wer schreibt?",
+        "answers": [
+          "Ich tippe auf den Link – meine Bank kenne ich ja.",
+          "Ich antworte mit meinem Geburtsdatum – das ist ja nicht geheim.",
+          "Ich gebe nichts ein und rufe die Nummer auf meiner Bankkarte an."
+        ],
+        "feedbackCorrect": "Genau. Ob wirklich deine Bank schreibt, weißt du nicht. Das prüfst du selbst – über eine Nummer, die du kennst.",
+        "feedbackWrong": [
+          "Jeder kann behaupten, die Bank zu sein, und der Link kann auf eine gefälschte Seite führen. Ruf lieber selbst an.",
+          "Auch das Geburtsdatum nutzen Betrüger. Du weißt nicht, wer wirklich schreibt – prüfe das zuerst selbst.",
+          null
+        ],
+        "remember": "Ich prüfe zuerst, wer meine Daten will."
+      }
+    },
+
+    "Du meldest dich für einen Koch-Kurs an. Die Kurs-Leitung will deine Telefon-Nummer. Fällt der Kurs aus? Dann ruft sie dich an. Was machst du?": {
+      "einfach": {
+        "question": "Du meldest dich für einen Kochkurs an. Die Kursleitung will deine Telefonnummer, damit sie dich anrufen kann, wenn der Kurs ausfällt. Was machst du?",
+        "hinweis": "Überlege: Wofür will die Kursleitung die Nummer haben?",
+        "answers": [
+          "Ich gebe keine Nummer, weil Telefonnummern privat sind.",
+          "Ich gebe meine Telefonnummer, damit ich Bescheid bekomme.",
+          "Ich gebe meine Nummer und meine Adresse, damit sie mich sicher erreichen."
+        ],
+        "feedbackCorrect": "Genau. Die Kursleitung braucht die Nummer für einen klaren Zweck, und du kennst sie. Dann ist das in Ordnung.",
+        "feedbackWrong": [
+          "Private Daten bedeutet nicht, dass du immer Nein sagst. Hier gibt es einen klaren Zweck: Ohne Nummer bekommst du keinen Bescheid.",
+          null,
+          "Die Adresse braucht die Kursleitung dafür nicht. Gib nur das an, was für den Zweck nötig ist."
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind."
+      },
+      "standard": {
+        "question": "Du meldest dich für einen Kochkurs an. Die Kursleitung möchte deine Telefonnummer, um dich bei einem Ausfall anzurufen. Was tust du?",
+        "hinweis": "Überlege: Wofür will die Kursleitung die Nummer?",
+        "answers": [
+          "Ich gebe keine Nummer an – Telefonnummern sind privat.",
+          "Ich gebe meine Telefonnummer an, damit ich Bescheid bekomme.",
+          "Ich gebe Nummer und Adresse an, damit man mich sicher erreicht."
+        ],
+        "feedbackCorrect": "Genau. Die Kursleitung braucht die Nummer für einen klaren Zweck, und du kennst sie. Dann ist das in Ordnung.",
+        "feedbackWrong": [
+          "Privat heißt nicht automatisch Nein. Hier gibt es einen klaren Zweck – ohne Nummer bekommst du keinen Bescheid.",
+          null,
+          "Die Adresse braucht die Kursleitung dafür nicht. Gib nur an, was für den Zweck nötig ist."
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind."
+      }
+    },
+
+    "Eine Internet-Seite will deine Adresse. Erst dann zeigt sie dir ein Video. Was machst du?": {
+      "einfach": {
+        "question": "Eine Internetseite will deine Adresse haben. Erst dann zeigt sie dir ein Video. Was machst du?",
+        "hinweis": "Frag dich: Braucht die Seite deine Adresse wirklich für ein Video?",
+        "answers": [
+          "Ich gebe meine Adresse ein.",
+          "Ich gebe meine E-Mail-Adresse ein.",
+          "Ich gebe die Adresse nicht ein."
+        ],
+        "feedbackCorrect": "Genau. Für ein Video braucht niemand deine Adresse. Das passt nicht zum Zweck.",
+        "feedbackWrong": [
+          "Für ein Video braucht niemand deine Adresse, das passt nicht zum Zweck.",
+          "Auch deine E-Mail-Adresse braucht die Seite für ein Video nicht. Das passt nicht zum Zweck.",
+          null
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind."
+      },
+      "standard": {
+        "question": "Eine Website zeigt dir ein Video erst, wenn du deine Adresse angibst. Was tust du?",
+        "hinweis": "Frag dich: Braucht die Seite deine Adresse wirklich für ein Video?",
+        "answers": [
+          "Ich gebe meine Adresse ein.",
+          "Ich gebe meine E-Mail-Adresse ein.",
+          "Ich gebe die Adresse nicht ein."
+        ],
+        "feedbackCorrect": "Genau. Für ein Video braucht niemand deine Adresse – das passt nicht zum Zweck.",
+        "feedbackWrong": [
+          "Für ein Video braucht niemand deine Adresse – das passt nicht zum Zweck.",
+          "Auch deine E-Mail-Adresse braucht die Seite für ein Video nicht. Das passt nicht zum Zweck.",
+          null
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind."
+      }
+    },
+
+    "Eine kostenlose App fragt beim Anmelden nach deiner Telefon-Nummer. Was machst du?": {
+      "einfach": {
+        "question": "Eine kostenlose App fragt beim Anmelden nach deiner Telefonnummer. Was machst du?",
+        "hinweis": "Frag dich: Wofür braucht eine App deine Telefonnummer?",
+        "answers": [
+          "Ich prüfe, ob die App das braucht. Wenn nicht, lasse ich das Feld leer.",
+          "Ich gebe meine Telefonnummer ein, sonst funktioniert die App nicht.",
+          "Ich gebe die Nummer von einer anderen Person ein, damit meine geheim bleibt."
+        ],
+        "feedbackCorrect": "Genau. Du prüfst zuerst, wofür die App die Nummer braucht. Wenn sie nicht nötig ist, lässt du das Feld leer.",
+        "feedbackWrong": [
+          null,
+          "Prüfe zuerst, ob die App deine Nummer wirklich braucht. Sonst kann die Nummer an Fremde gehen.",
+          "Die Telefonnummer von anderen Menschen gehört dir nicht."
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind."
+      },
+      "standard": {
+        "question": "Eine kostenlose App fragt bei der Anmeldung nach deiner Telefonnummer. Was tust du?",
+        "hinweis": "Frag dich: Wofür braucht eine App deine Telefonnummer?",
+        "answers": [
+          "Ich prüfe, ob die App sie braucht – wenn nicht, lasse ich das Feld leer.",
+          "Ich gebe meine Telefonnummer ein – sonst funktioniert die App nicht.",
+          "Ich gebe die Nummer einer anderen Person ein – so bleibt meine geheim."
+        ],
+        "feedbackCorrect": "Genau. Du prüfst zuerst, wofür die App die Nummer braucht. Ist sie nicht nötig, lässt du das Feld leer.",
+        "feedbackWrong": [
+          null,
+          "Prüfe zuerst, ob die App deine Nummer wirklich braucht – sonst kann sie an Fremde gelangen.",
+          "Die Nummer anderer Menschen gehört dir nicht."
+        ],
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind."
+      }
+    },
+
+    "Du lädst eine Wecker-App. Sie fragt: Darf ich deine Kontakte sehen? Was machst du?": {
+      "einfach": {
+        "question": "Du lädst eine Wecker-App herunter. Sie fragt: Darf ich deine Kontakte sehen? Was machst du?",
+        "hinweis": "Überlege: Was macht ein Wecker, und braucht er dafür Kontakte?",
+        "answers": [
+          "Ich erlaube es, weil der Wecker sonst vielleicht nicht klingelt.",
+          "Ich erlaube es, weil ich das später ja wieder ändern kann.",
+          "Ich erlaube es nicht, weil der Wecker auch ohne Kontakte klingelt."
+        ],
+        "feedbackCorrect": "Genau. Für einen Wecker braucht die App keine Kontakte. Das passt nicht zum Zweck.",
+        "feedbackWrong": [
+          "Ein Wecker braucht keine Kontakte, um zu klingeln. Das passt nicht zum Zweck.",
+          "Du kannst die Erlaubnis zwar später ändern. Aber dann hat die App deine Kontakte schon gesehen. Deshalb prüfst du vorher.",
+          null
+        ],
+        "remember": "Ich erlaube einer App nur das, was sie braucht."
+      },
+      "standard": {
+        "question": "Du installierst eine Wecker-App. Sie fragt: Darf ich auf deine Kontakte zugreifen? Was tust du?",
+        "hinweis": "Überlege: Was macht ein Wecker – und braucht er dafür Kontakte?",
+        "answers": [
+          "Ich erlaube es – sonst klingelt der Wecker vielleicht nicht.",
+          "Ich erlaube es – ich kann das ja später wieder ändern.",
+          "Ich erlaube es nicht – der Wecker klingelt auch ohne Kontakte."
+        ],
+        "feedbackCorrect": "Genau. Für einen Wecker braucht die App keine Kontakte – das passt nicht zum Zweck.",
+        "feedbackWrong": [
+          "Zum Klingeln braucht ein Wecker keine Kontakte. Das passt nicht zum Zweck.",
+          "Die Berechtigung kannst du später ändern – aber dann hat die App deine Kontakte schon gesehen. Deshalb prüfst du vorher.",
+          null
+        ],
+        "remember": "Ich erlaube einer App nur, was sie für ihre Funktion braucht."
+      }
+    },
+
+    "Dein Handy hat eine Funktion: Handy finden. Ist dein Handy weg? Dann zeigt sie dir den Ort von deinem Handy. Die Funktion fragt nach deinem Standort. Was passt?": {
+      "einfach": {
+        "question": "Dein Handy hat eine Funktion: Handy finden. Wenn dein Handy weg ist, zeigt dir die Funktion, wo es gerade ist. Dafür fragt sie nach deinem Standort. Was passt?",
+        "hinweis": "Überlege: Wann brauchst du die Funktion, und benutzt du dein Handy in diesem Moment?",
+        "answers": [
+          "Nur erlauben, während ich das Handy benutze.",
+          "Gar nicht erlauben.",
+          "Immer erlauben."
+        ],
+        "feedbackCorrect": "Genau. Wenn dein Handy weg ist, benutzt du es nicht. Die Funktion muss es aber trotzdem finden. Deshalb braucht sie den Standort immer.",
+        "feedbackWrong": [
+          "Wenn dein Handy weg ist, benutzt du es nicht. Dann findet die Funktion es auch nicht. Hier braucht sie den Standort immer.",
+          "Das darfst du so wählen. Aber dann hilft dir die Funktion nicht: Wenn dein Handy weg ist, findest du es nicht.",
+          null
+        ],
+        "remember": "Ich erlaube einer App nur das, was sie braucht."
+      },
+      "standard": {
+        "question": "Dein Handy hat die Funktion Handy finden: Ist es weg, zeigt sie dir, wo es sich befindet. Dafür fragt sie nach deinem Standort. Was passt?",
+        "hinweis": "Überlege: Wann brauchst du die Funktion – und nutzt du das Handy in diesem Moment?",
+        "answers": [
+          "Nur während der Nutzung erlauben.",
+          "Nicht erlauben.",
+          "Immer erlauben."
+        ],
+        "feedbackCorrect": "Genau. Ist dein Handy weg, nutzt du es nicht – die Funktion muss es trotzdem finden. Dafür braucht sie den Standort immer.",
+        "feedbackWrong": [
+          "Ist dein Handy weg, nutzt du es nicht – dann findet die Funktion es auch nicht. Hier braucht sie den Standort immer.",
+          "Das darfst du so wählen. Dann hilft dir die Funktion aber nicht: Ist dein Handy weg, findest du es nicht.",
+          null
+        ],
+        "remember": "Ich erlaube einer App nur, was sie für ihre Funktion braucht."
+      }
+    },
+
+    "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?": {
+      "einfach": {
+        "question": "Auf einem Foto, das du verschicken willst, sieht man einen Brief mit deiner Adresse. Was ist besser?",
+        "hinweis": "Überlege: Welcher Teil vom Foto ist privat?",
+        "answers": [
+          "Ich schicke ein Foto ohne den Brief.",
+          "Ich schicke das Foto so, wie es ist.",
+          "Ich schicke überhaupt keine Fotos mehr."
+        ],
+        "feedbackCorrect": "Genau. Nur der Brief ist privat. Du schneidest ihn weg oder machst ein neues Foto ohne den Brief.",
+        "feedbackWrong": [
+          null,
+          "Dann können andere deine Adresse lesen, und die muss niemand sehen.",
+          "Das ist nicht nötig, denn nur der Brief ist das Problem. Ohne den Brief kannst du das Foto verschicken."
+        ],
+        "remember": "Ich prüfe Fotos, bevor ich sie verschicke."
+      },
+      "standard": {
+        "question": "Auf einem Foto, das du verschicken willst, ist ein Brief mit deiner Adresse zu sehen. Was ist besser?",
+        "hinweis": "Überlege: Welcher Teil des Fotos ist privat?",
+        "answers": [
+          "Ich schicke ein Foto ohne den Brief.",
+          "Ich schicke das Foto so, wie es ist.",
+          "Ich verschicke gar keine Fotos mehr."
+        ],
+        "feedbackCorrect": "Genau. Privat ist nur der Brief – du schneidest ihn weg oder machst ein neues Foto ohne ihn.",
+        "feedbackWrong": [
+          null,
+          "Dann können andere deine Adresse lesen. Die muss niemand sehen.",
+          "Das ist nicht nötig – nur der Brief ist das Problem. Ohne ihn kannst du das Foto verschicken."
+        ],
+        "remember": "Fotos prüfe ich, bevor ich sie verschicke."
+      }
+    },
+
+    "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?": {
+      "einfach": {
+        "question": "Eine App fragt nach deiner Adresse, und du weißt nicht, warum. Was ist besser?",
+        "hinweis": "Überlege: Weißt du, wofür die App deine Adresse haben will?",
+        "answers": [
+          "Ich trage die Adresse ein, die App wird sie schon brauchen.",
+          "Ich trage noch nichts ein. Ich prüfe erst, wofür, oder ich hole mir Unterstützung.",
+          "Ich trage eine falsche Adresse ein, das merkt die App nicht."
+        ],
+        "feedbackCorrect": "Genau. Wenn du unsicher bist, gibst du noch nichts frei. Du prüfst erst oder holst dir Unterstützung.",
+        "feedbackWrong": [
+          "Du weißt nicht, wofür die App die Adresse will. Dann gib noch nichts ein und prüfe erst.",
+          null,
+          "Eine falsche Adresse ist keine gute Lösung. Vielleicht braucht die App sie ja wirklich. Prüfe erst, wofür."
+        ],
+        "remember": "Wenn ich unsicher bin, gebe ich noch nichts frei."
+      },
+      "standard": {
+        "question": "Eine App fragt nach deiner Adresse, ohne dass du weißt, warum. Was ist besser?",
+        "hinweis": "Überlege: Weißt du, wofür die App deine Adresse will?",
+        "answers": [
+          "Ich trage die Adresse ein – die App wird sie schon brauchen.",
+          "Ich trage noch nichts ein und prüfe erst, wofür – oder ich hole mir Unterstützung.",
+          "Ich trage eine falsche Adresse ein – das merkt die App nicht."
+        ],
+        "feedbackCorrect": "Genau. Bist du unsicher, gibst du noch nichts frei: erst prüfen oder Unterstützung holen.",
+        "feedbackWrong": [
+          "Du weißt nicht, wofür die App die Adresse will – dann gib noch nichts ein und prüfe erst.",
+          null,
+          "Eine falsche Adresse ist keine gute Lösung. Vielleicht braucht die App sie ja tatsächlich – prüfe erst, wofür."
+        ],
+        "remember": "Bin ich unsicher, gebe ich noch nichts frei."
+      }
+    },
+
+    "Vor einem Monat hast du einer App deinen Standort erlaubt. Und du hast ein Foto in eine Gruppe geschickt. Was kannst du jetzt noch ändern?": {
+      "einfach": {
+        "question": "Vor einem Monat hast du einer App erlaubt, deinen Standort zu sehen. Außerdem hast du ein Foto in eine Gruppe geschickt. Was kannst du jetzt noch ändern?",
+        "hinweis": "Überlege: Was liegt noch bei dir, und was haben andere schon?",
+        "answers": [
+          "Die Erlaubnis für den Standort. Das Foto haben andere vielleicht schon gespeichert.",
+          "Beides, denn ich lösche das Foto einfach in der Gruppe. Dann ist es weg.",
+          "Gar nichts mehr, denn eine Erlaubnis gilt für immer."
+        ],
+        "feedbackCorrect": "Genau. Eine Erlaubnis kannst du oft ändern. Ein verschicktes Foto kannst du aber oft nicht zurückholen. Deshalb prüfst du vorher.",
+        "feedbackWrong": [
+          null,
+          "Die Erlaubnis kannst du in den Einstellungen ändern. Das Foto aber vielleicht nicht mehr, weil andere es schon gespeichert haben können.",
+          "Die Erlaubnis für den Standort kannst du in den Einstellungen noch ändern. Das lohnt sich."
+        ],
+        "remember": "Ich prüfe Fotos, bevor ich sie verschicke."
+      },
+      "standard": {
+        "question": "Vor einem Monat hast du einer App den Zugriff auf deinen Standort erlaubt und ein Foto in eine Gruppe geschickt. Was kannst du jetzt noch ändern?",
+        "hinweis": "Überlege: Was liegt noch bei dir – und was haben andere schon?",
+        "answers": [
+          "Die Standort-Berechtigung. Das Foto haben andere vielleicht schon gespeichert.",
+          "Beides – ich lösche das Foto einfach in der Gruppe, dann ist es weg.",
+          "Gar nichts – eine Berechtigung gilt für immer."
+        ],
+        "feedbackCorrect": "Genau. Eine Berechtigung lässt sich oft ändern, ein verschicktes Foto oft nicht zurückholen. Deshalb prüfst du vorher.",
+        "feedbackWrong": [
+          null,
+          "Die Berechtigung kannst du in den Einstellungen ändern, das Foto aber vielleicht nicht mehr – andere können es schon gespeichert haben.",
+          "Die Standort-Berechtigung kannst du in den Einstellungen noch ändern. Das lohnt sich."
+        ],
+        "remember": "Fotos prüfe ich, bevor ich sie verschicke."
+      }
+    },
+
+    "Was ist eine gute Regel für deine Daten?": {
+      "einfach": {
+        "question": "Welche Regel ist gut für deine Daten?",
+        "hinweis": "Denk an deinen Plan aus diesem Thema. Womit fängt er an?",
+        "answers": [
+          "Daten immer sofort eingeben.",
+          "Nie irgendwelche Daten eingeben.",
+          "Erst prüfen, dann entscheiden."
+        ],
+        "feedbackCorrect": "Genau. Zuerst prüfst du: Wer, was und wofür? Dann entscheidest du. Manchmal gibst du Daten, manchmal nicht.",
+        "feedbackWrong": [
+          "Sofort eingeben ist zu schnell. Prüfe erst, wer die Daten will und wofür.",
+          "Du darfst Nein sagen. Manchmal braucht jemand deine Daten aber wirklich. Wichtig ist, dass du erst prüfst und dann selbst entscheidest.",
+          null
+        ],
+        "remember": "Erst prüfen, dann entscheide ich."
+      },
+      "standard": {
+        "question": "Was ist eine gute Regel für deine Daten?",
+        "hinweis": "Denk an deinen Plan aus diesem Kapitel. Womit fängt er an?",
+        "answers": [
+          "Immer sofort eingeben.",
+          "Nie etwas eingeben.",
+          "Erst prüfen, dann entscheiden."
+        ],
+        "feedbackCorrect": "Genau. Zuerst prüfst du: Wer, was, wofür? Dann entscheidest du – manchmal gibst du Daten, manchmal nicht.",
+        "feedbackWrong": [
+          "Sofort eingeben ist zu schnell. Prüfe erst, wer die Daten will und wofür.",
+          "Du darfst Nein sagen – manchmal braucht jemand deine Daten aber tatsächlich. Wichtig ist: erst prüfen, dann selbst entscheiden.",
+          null
+        ],
+        "remember": "Erst prüfen, dann entscheiden."
+      }
+    },
+
+    "Was gibst du für die Kunden-Karte an?": {
+      "einfach": {
+        "question": "Was gibst du für die Kundenkarte an?",
+        "situation": "Du kaufst oft im gleichen Supermarkt ein. Mit der Kundenkarte wird manches billiger. Du willst die Karte haben, und du willst gern Angebote für deinen Lieblingskaffee bekommen.",
+        "hinweis": "Überlege: Was willst du? Welche Angaben passen zur Karte und zu deinen Angeboten, und welche Felder sind freiwillig? Weißt du bei jeder Angabe, wofür sie ist?",
+        "formular": {
+          "titel": "Deine Kundenkarte"
+        },
+        "felder": [
+          {
+            "name": "Name",
+            "wofuer": "Der Name steht auf deiner Karte.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur, dass es ohne Namen nicht weitergeht. Hier passt der Name aber auch zum Zweck, denn er steht auf deiner Karte.",
+              "leer": "Pflicht heißt, dass es ohne Namen nicht weitergeht. Der Name passt hier zum Zweck. Wenn du die Karte willst, gibst du ihn an. Sonst nutzt du die Karte nicht."
+            }
+          },
+          {
+            "name": "E-Mail",
+            "wofuer": "Über die E-Mail bekommst du deine Karte.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur, dass es ohne E-Mail nicht weitergeht. Hier passt die E-Mail aber auch zum Zweck, denn über sie bekommst du deine Karte.",
+              "leer": "Pflicht heißt, dass es ohne E-Mail nicht weitergeht. Die E-Mail passt hier zum Zweck. Wenn du die Karte willst, gibst du sie an. Sonst nutzt du die Karte nicht."
+            }
+          },
+          {
+            "name": "Geburtsdatum",
+            "wofuer": null,
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur, dass es ohne Geburtsdatum nicht weitergeht. Es heißt nicht, dass du den Zweck kennst. Die Seite schreibt nicht, wofür sie es haben will. Vielleicht gibt es einen guten Grund, aber der Zweck ist für dich nicht klar. Dann gib es noch nicht ein. Prüfe erst, oder nutze die Karte nicht.",
+              "leer": "Pflicht heißt nur, dass es ohne Geburtsdatum nicht weitergeht. Es heißt nicht, dass du den Zweck kennst. Die Seite schreibt nicht, wofür sie es haben will. Vielleicht gibt es einen guten Grund, aber der Zweck ist für dich nicht klar. Deshalb prüfst du erst, oder du nutzt die Karte nicht."
+            }
+          },
+          {
+            "name": "Wie viele Kinder hast du?",
+            "wofuer": null,
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Die Karte bekommst du also auch ohne diese Angabe. Außerdem schreibt die Seite nicht, wofür sie das wissen will. Für dein Ziel musst du das nicht angeben.",
+              "leer": "Das Feld ist freiwillig. Die Karte bekommst du also auch ohne diese Angabe. Außerdem schreibt die Seite nicht, wofür sie das wissen will. Für dein Ziel musst du das nicht angeben."
+            }
+          },
+          {
+            "name": "Einkäufe merken",
+            "zustand": {
+              "an": "Ja",
+              "aus": "Nein"
+            },
+            "wofuer": "Dürfen wir uns deine Einkäufe merken? Dann bekommst du passende Angebote.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Du willst Angebote für deinen Kaffee, und dafür passt das. Du kannst es später wieder ändern.",
+              "leer": "Das Feld ist freiwillig. Du kannst Nein sagen, dann merkt sich der Supermarkt deine Einkäufe nicht. Passende Angebote für deinen Kaffee bekommst du dann vielleicht nicht. Du entscheidest."
+            }
+          }
+        ],
+        "ausweg": {
+          "nichtNutzen": "Ich bestelle die Karte nicht."
+        },
+        "auswegRueckmeldung": {
+          "nichtNutzen": "Das ist deine Entscheidung, und sie ist in Ordnung. Beim Geburtsdatum ist der Zweck nicht klar, deshalb gibst du es nicht ein. Du kaufst dann ohne Karte ein.",
+          "erstPruefen": "Das ist in Ordnung. Beim Geburtsdatum ist der Zweck nicht klar, deshalb gibst du es noch nicht ein. Du prüfst erst, zum Beispiel, indem du im Supermarkt nachfragst oder dir Unterstützung holst. Danach entscheidest du."
+        },
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind."
+      },
+      "standard": {
+        "question": "Welche Angaben machst du für die Kundenkarte?",
+        "situation": "Du kaufst oft im selben Supermarkt ein, und mit der Kundenkarte wird manches günstiger. Du möchtest die Karte – und gern auch Angebote für deinen Lieblingskaffee.",
+        "hinweis": "Überlege: Was willst du? Welche Angaben passen zur Karte und zu deinen Angeboten, welche Felder sind freiwillig – und kennst du bei jeder Angabe den Zweck?",
+        "formular": {
+          "titel": "Deine Kundenkarte"
+        },
+        "felder": [
+          {
+            "name": "Name",
+            "wofuer": "Er steht auf deiner Karte.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur: Ohne Namen geht es nicht weiter. Hier passt er zugleich zum Zweck – er steht auf deiner Karte.",
+              "leer": "Pflicht heißt: Ohne Namen geht es nicht weiter. Der Name passt hier zum Zweck. Willst du die Karte, gibst du ihn an – sonst nutzt du die Karte nicht."
+            }
+          },
+          {
+            "name": "E-Mail",
+            "wofuer": "Über die E-Mail erhältst du deine Karte.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur: Ohne E-Mail geht es nicht weiter. Hier passt sie zugleich zum Zweck – darüber erhältst du deine Karte.",
+              "leer": "Pflicht heißt: Ohne E-Mail geht es nicht weiter. Die E-Mail passt hier zum Zweck. Willst du die Karte, gibst du sie an – sonst nutzt du die Karte nicht."
+            }
+          },
+          {
+            "name": "Geburtsdatum",
+            "wofuer": null,
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur: Ohne Geburtsdatum geht es nicht weiter – nicht, dass du den Zweck kennst. Die Seite nennt keinen Zweck. Vielleicht gibt es einen guten Grund, aber für dich ist er nicht erkennbar. Gib es deshalb noch nicht ein: Prüfe erst – oder nutze die Karte nicht.",
+              "leer": "Pflicht heißt nur: Ohne Geburtsdatum geht es nicht weiter – nicht, dass du den Zweck kennst. Die Seite nennt keinen Zweck. Vielleicht gibt es einen guten Grund, aber für dich ist er nicht erkennbar. Deshalb prüfst du erst – oder nutzt die Karte nicht."
+            }
+          },
+          {
+            "name": "Wie viele Kinder hast du?",
+            "wofuer": null,
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig – die Karte bekommst du also auch ohne diese Angabe. Einen Zweck nennt die Seite auch nicht. Für dein Ziel musst du das nicht angeben.",
+              "leer": "Das Feld ist freiwillig – die Karte bekommst du also auch ohne diese Angabe. Einen Zweck nennt die Seite auch nicht. Für dein Ziel musst du das nicht angeben."
+            }
+          },
+          {
+            "name": "Einkäufe merken",
+            "zustand": {
+              "an": "Ja",
+              "aus": "Nein"
+            },
+            "wofuer": "Dürfen wir deine Einkäufe speichern? Dann bekommst du passende Angebote.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Du willst Angebote für deinen Kaffee – dafür passt das. Du kannst es später wieder ändern.",
+              "leer": "Das Feld ist freiwillig. Du kannst Nein sagen – dann speichert der Supermarkt deine Einkäufe nicht, und passende Angebote für deinen Kaffee bekommst du vielleicht nicht. Du entscheidest."
+            }
+          }
+        ],
+        "ausweg": {
+          "nichtNutzen": "Ich bestelle die Karte nicht."
+        },
+        "auswegRueckmeldung": {
+          "nichtNutzen": "Das ist deine Entscheidung und in Ordnung. Beim Geburtsdatum ist der Zweck unklar, also gibst du es nicht ein. Du kaufst dann ohne Karte ein.",
+          "erstPruefen": "Das ist in Ordnung. Beim Geburtsdatum ist der Zweck unklar, also gibst du es noch nicht ein. Du prüfst erst, etwa indem du im Supermarkt nachfragst oder dir Unterstützung holst. Danach entscheidest du."
+        },
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind."
+      }
+    },
+
+    "Was gibst du für den Termin an?": {
+      "einfach": {
+        "question": "Was gibst du für den Termin an?",
+        "situation": "Du hast Zahnschmerzen und willst schnell einen Termin bei deiner Zahnärztin. Du kennst die Praxis. Auf deiner Terminkarte steht die Adresse der Seite für Termine, und du tippst sie selbst ein.",
+        "hinweis": "Überlege: Was braucht die Praxis für deinen Termin? Welche Angaben sind freiwillig, und welche sind sehr privat?",
+        "formular": {
+          "titel": "Zahnarztpraxis Berg: Termin online"
+        },
+        "felder": [
+          {
+            "name": "Name",
+            "wofuer": "Wir wollen wissen, wer kommt.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur, dass es ohne Namen nicht weitergeht. Hier passt der Name aber auch zum Zweck, denn die Praxis muss wissen, wer kommt.",
+              "leer": "Pflicht heißt, dass es ohne Namen nicht weitergeht. Der Name passt hier zum Zweck. Wenn du nicht online buchen willst, rufst du in der Praxis an."
+            }
+          },
+          {
+            "name": "Geburtsdatum",
+            "wofuer": "So finden wir deine Unterlagen, denn manche Menschen haben den gleichen Namen.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur, dass es ohne Geburtsdatum nicht weitergeht. Hier passt es aber auch zum Zweck, denn so findet die Praxis deine Unterlagen. Du kennst die Praxis und hast die Seite selbst geöffnet.",
+              "leer": "Pflicht heißt, dass es ohne Geburtsdatum nicht weitergeht. Es passt hier zum Zweck. Wenn du es nicht online angeben willst, rufst du in der Praxis an."
+            }
+          },
+          {
+            "name": "Grund für den Termin",
+            "wofuer": "Dann planen wir genug Zeit ein.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Das ist eine Angabe über deine Gesundheit. Sie hilft der Praxis beim Planen. Schreib nur kurz: Zahnschmerzen. Mehr muss nicht sein.",
+              "leer": "Das Feld ist freiwillig. Das ist eine Angabe über deine Gesundheit. Du kannst Nein sagen, dann plant die Praxis vielleicht nicht genug Zeit ein. Du kannst den Grund auch in der Praxis sagen. Du entscheidest."
+            }
+          },
+          {
+            "name": "Wie hast du von uns erfahren?",
+            "wofuer": "Für unsere Statistik.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Die Statistik ist nur für die Praxis. Für deinen Termin braucht sie das nicht.",
+              "leer": "Das Feld ist freiwillig. Für deinen Termin braucht die Praxis das nicht."
+            }
+          }
+        ],
+        "ausweg": {
+          "nichtNutzen": "Ich buche nicht online, sondern rufe an."
+        },
+        "auswegRueckmeldung": {
+          "nichtNutzen": "Das ist deine Entscheidung, und sie ist in Ordnung. Auch am Telefon bekommst du einen Termin."
+        },
+        "remember": "Ich gebe nur die Daten weiter, die nötig sind."
+      },
+      "standard": {
+        "question": "Welche Angaben machst du für den Termin?",
+        "situation": "Du hast Zahnschmerzen und willst schnell einen Termin bei deiner Zahnärztin. Du kennst die Praxis und tippst die Adresse der Terminseite selbst ein – sie steht auf deiner Terminkarte.",
+        "hinweis": "Überlege: Was braucht die Praxis für deinen Termin? Welche Angaben sind freiwillig – und welche sehr privat?",
+        "formular": {
+          "titel": "Zahnarztpraxis Berg: Online-Termin"
+        },
+        "felder": [
+          {
+            "name": "Name",
+            "wofuer": "Wir möchten wissen, wer kommt.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur: Ohne Namen geht es nicht weiter. Hier passt er zugleich zum Zweck – die Praxis muss wissen, wer kommt.",
+              "leer": "Pflicht heißt: Ohne Namen geht es nicht weiter. Der Name passt hier zum Zweck. Willst du nicht online buchen, ruf in der Praxis an."
+            }
+          },
+          {
+            "name": "Geburtsdatum",
+            "wofuer": "Damit finden wir deine Unterlagen – manche Menschen haben den gleichen Namen.",
+            "rueckmeldung": {
+              "angegeben": "Pflicht heißt nur: Ohne Geburtsdatum geht es nicht weiter. Hier passt es zugleich zum Zweck – so findet die Praxis deine Unterlagen. Du kennst die Praxis und hast die Seite selbst aufgerufen.",
+              "leer": "Pflicht heißt: Ohne Geburtsdatum geht es nicht weiter. Es passt hier zum Zweck. Willst du es nicht online angeben, ruf in der Praxis an."
+            }
+          },
+          {
+            "name": "Grund für den Termin",
+            "wofuer": "Dann planen wir genug Zeit ein.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Es geht um eine Gesundheitsangabe, die der Praxis bei der Planung hilft. Schreib nur kurz Zahnschmerzen – mehr muss nicht sein.",
+              "leer": "Das Feld ist freiwillig. Es geht um eine Gesundheitsangabe. Du kannst Nein sagen – dann plant die Praxis vielleicht nicht genug Zeit ein. Den Grund kannst du auch in der Praxis nennen. Du entscheidest."
+            }
+          },
+          {
+            "name": "Wie hast du von uns erfahren?",
+            "wofuer": "Für unsere Statistik.",
+            "rueckmeldung": {
+              "angegeben": "Das Feld ist freiwillig. Die Statistik dient nur der Praxis – für deinen Termin braucht sie das nicht.",
+              "leer": "Das Feld ist freiwillig. Für deinen Termin braucht die Praxis das nicht."
+            }
+          }
+        ],
+        "ausweg": {
+          "nichtNutzen": "Ich buche nicht online, sondern rufe an."
+        },
+        "auswegRueckmeldung": {
+          "nichtNutzen": "Das ist deine Entscheidung und in Ordnung. Auch telefonisch bekommst du einen Termin."
+        },
+        "remember": "Ich gebe nur die Daten weiter, die für den Zweck nötig sind."
+      }
+    }
+  }
+};
+
+/* Themen-Felder je Stufe (Paket 5): Beschreibung, Eine Sache für heute,
+   Lernziele (Rückfall), Hilfe-Fragen, Merk-Regeln. Die ersten 5 Merk-Regeln
+   sind die Handlungssätze der Kette und bleiben wortgleich (§2). */
+const THEMA_VERSIONS = {
+  datenschutz: {
+    "einfach": {
+      "desc": "Deine privaten Daten schützen",
+      "transfer": "Schau heute bei einer App nach, was sie sehen darf und ob sie das braucht. Du musst nichts ändern, du entscheidest selbst.",
+      "learningGoals": [
+        "Was private Daten sind",
+        "Welche Daten wirklich nötig sind",
+        "Wenn jemand nach deinen Daten fragt, entscheidest du selbst."
+      ],
+      "helpQuestions": [
+        "Wer bekommt meine Daten, und wer kann sie sehen?",
+        "Was genau soll ich angeben?",
+        "Wofür ist das, und ist das nötig?",
+        "Brauche ich Unterstützung?"
+      ],
+      "memoryRules": [
+        "Stopp. Ich prüfe zuerst.",
+        "Wer bekommt es? Wer kann es sehen?",
+        "Was genau soll ich geben?",
+        "Wofür? Wie viel davon ist nötig?",
+        "Ich entscheide.",
+        "Wenn du unsicher bist, gibst du noch nichts frei. Du prüfst erst oder holst dir Unterstützung."
+      ]
+    },
+    "standard": {
+      "desc": "Persönliche Daten schützen",
+      "transfer": "Sieh heute bei einer App nach, worauf sie zugreifen darf und ob sie das braucht. Ändern musst du nichts – du entscheidest selbst.",
+      "learningGoals": [
+        "Was persönliche Daten sind",
+        "Welche Daten tatsächlich nötig sind",
+        "Fragt jemand nach deinen Daten, entscheidest du selbst."
+      ],
+      "helpQuestions": [
+        "Wer bekommt meine Daten – und wer kann sie sehen?",
+        "Welche Daten genau soll ich angeben?",
+        "Wofür werden sie gebraucht, und ist das nötig?",
+        "Brauche ich Unterstützung?"
+      ],
+      "memoryRules": [
+        "Stopp. Ich prüfe zuerst.",
+        "Wer bekommt es? Wer kann es sehen?",
+        "Was genau soll ich geben?",
+        "Wofür? Wie viel davon ist nötig?",
+        "Ich entscheide.",
+        "Bist du unsicher, gib noch nichts frei – prüfe erst oder hol dir Unterstützung."
+      ]
+    }
+  }
+};
+
 /* Fassungen mit den Lektionen in topics.js verknüpfen */
 function applyContentVersions() {
   if (typeof topics === "undefined" || !Array.isArray(topics)) return;
@@ -2541,6 +3943,21 @@ function applyContentVersions() {
     anhaengen(topic.lessons, CONTENT_VERSIONS[topic.id]);
     /* Kurz-Weg: eigene Tabelle, siehe KURZ_VERSIONS oben. */
     anhaengen(topic.einfachLessons, KURZ_VERSIONS[topic.id]);
+    /* Paket 5: Aufgaben und Themen-Felder je Stufe – nur wo Einträge stehen.
+       Eingesetzt werden die Texte in app.js (sprachstufeAnwenden). */
+    const av = (typeof AUFGABEN_VERSIONS !== "undefined") && AUFGABEN_VERSIONS[topic.id];
+    if (av) {
+      const ns = topic.neueSituation || {};
+      [].concat((topic.lessons || []).map((l) => l.practice), (topic.einfachLessons || []).map((l) => l.practice),
+        topic.quizQuestions || [], ns.aufgaben || [], ns.fragen || [])
+        .forEach((q) => {
+          if (!q || !q.question || q.versions) return;
+          const v = av[q.question];
+          if (v) { q.versions = v; q.schluessel = q.question; }
+        });
+    }
+    const tv = (typeof THEMA_VERSIONS !== "undefined") && THEMA_VERSIONS[topic.id];
+    if (tv && !topic.versions) topic.versions = tv;
   });
 }
 

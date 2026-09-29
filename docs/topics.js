@@ -3,8 +3,8 @@ const topics = [
     "id": "datenschutz",
     "title": "Datenschutz",
     "icon": "lock",
-    "desc": "Private Daten und Passwörter schützen",
-    "transfer": "Prüfe heute ein Passwort von dir. Ist es lang? Ist es geheim?",
+    "desc": "Private Daten schützen",
+    "transfer": "Schau heute bei einer App nach: Was darf sie sehen? Braucht sie das? Du musst nichts ändern. Du entscheidest selbst.",
     "selfAssessment": {
       "question": "Was weißt du schon über den Schutz deiner Daten?",
       "pictogram": "pikto-lock",
@@ -14,10 +14,33 @@ const topics = [
         "Schon einiges"
       ]
     },
+    "vorhersage": {
+      "situation": {
+        "leicht": "Du lädst eine neue App: Foto-Spaß. Mit der App machst du Fotos schöner. Die App fragt: Darf ich deine Fotos sehen? Deinen Standort? Deine Kontakte?",
+        "einfach": "Du lädst eine neue App herunter: Foto-Spaß. Mit der App kannst du deine Fotos schöner machen. Die App fragt, ob sie deine Fotos, deinen Standort und deine Kontakte sehen darf.",
+        "standard": "Du installierst die App Foto-Spaß, mit der du Fotos verschönern kannst. Sie möchte auf deine Fotos, deinen Standort und deine Kontakte zugreifen."
+      },
+      "question": {
+        "leicht": "Was machst du?",
+        "einfach": "Was machst du jetzt?",
+        "standard": "Wie entscheidest du?"
+      },
+      "options": [
+        { "leicht": "Ich erlaube alles.", "einfach": "Ich erlaube alles.", "standard": "Ich erlaube alles." },
+        { "leicht": "Ich erlaube nichts.", "einfach": "Ich erlaube gar nichts.", "standard": "Ich erlaube nichts." },
+        { "leicht": "Ich prüfe jede Frage einzeln.", "einfach": "Ich prüfe jede Frage einzeln.", "standard": "Ich prüfe jede Anfrage einzeln." }
+      ],
+      "aufloesung": {
+        "leicht": "So kannst du entscheiden: Fotos: nötig. Die App macht ja Fotos schöner. Kontakte: nicht nötig. Die braucht sie dafür nicht. Standort: kommt darauf an. Willst du den Ort beim Foto sehen? Sonst braucht die App ihn nicht.",
+        "einfach": "So kannst du entscheiden: Die Fotos sind nötig, denn die App soll ja Fotos schöner machen. Die Kontakte sind nicht nötig, weil die App sie dafür nicht braucht. Beim Standort kommt es darauf an: Willst du sehen, wo ein Foto gemacht wurde? Sonst braucht die App ihn nicht.",
+        "standard": "So kannst du entscheiden: Fotos – nötig, denn die App soll sie ja verschönern. Kontakte – nicht nötig, dafür braucht die App sie nicht. Standort – hängt davon ab, ob du sehen willst, wo ein Foto entstanden ist; sonst braucht die App ihn nicht."
+      },
+      "pictogram": "pikto-phone"
+    },
     "learningGoals": [
       "Was private Daten sind",
-      "Warum dein Passwort geheim bleibt",
-      "Jemand fragt nach deinen Daten? Du hast eine Antwort."
+      "Welche Daten wirklich nötig sind",
+      "Jemand fragt nach deinen Daten? Du entscheidest selbst."
     ],
     "lessons": [
       {
@@ -26,18 +49,20 @@ const topics = [
         "icon": "lock",
         "text": [
           {
-            "text": "Stell dir vor: Eine App will deine Adresse wissen.",
+            "text": "Eine App will Daten von dir. Oder ein Formular im Internet.",
             "pictogram": "pikto-data"
           },
           {
-            "text": "Und dein Geburts-Datum."
+            "text": "Oder du willst selbst etwas teilen. Zum Beispiel ein Foto.",
+            "pictogram": "pikto-photo"
           },
           {
-            "text": "Was machst du? Das lernst du hier."
+            "text": "Manche Daten sind dafür nötig. Manche nicht.",
+            "pictogram": "pikto-search"
           },
           {
-            "text": "Du lernst: Welche Daten sind privat?",
-            "pictogram": "pikto-data"
+            "text": "Du lernst einen Plan mit 5 Schritten. Mit dem Plan prüfst du. Und du entscheidest selbst.",
+            "pictogram": "pikto-plan"
           },
           {
             "text": "Du bist unsicher? Dann tippe unten auf: Hilfe.",
@@ -47,663 +72,661 @@ const topics = [
         "pictogram": "pikto-lock"
       },
       {
-        "title": "Was sind private Daten?",
-        "module": "Grundwissen",
+        "title": "Deine Daten",
+        "module": "Deine Daten",
         "icon": "data",
+        "ketteSchritt": 3,
         "text": [
           {
-            "text": "Private Daten gehören zu dir.",
+            "text": "Deine Daten sagen etwas über dich.",
             "pictogram": "pikto-data"
           },
           {
-            "text": "Sie sagen etwas über dich.",
+            "text": "Zum Beispiel dein Name, deine Adresse und deine Telefon-Nummer.",
             "pictogram": "pikto-data"
           },
           {
-            "text": "Andere Menschen sollen diese Daten nicht einfach bekommen.",
-            "pictogram": "pikto-no"
-          }
-        ],
-        "bullets": [
-          {
-            "text": "dein Name",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "deine Adresse",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "deine Telefon-Nummer",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "dein Geburtstag",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "deine Fotos",
+            "text": "Auch dein Geburts-Datum, deine Fotos und deine Kontakte.",
             "pictogram": "pikto-photo"
           },
           {
-            "text": "dein Passwort",
-            "pictogram": "pikto-lock"
+            "text": "Und dein Standort. Der Standort zeigt: Hier bist du gerade.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Dein Passwort und deine PIN sind geheim.",
+            "pictogram": "pikto-key"
+          }
+        ],
+        "warning": "Manche Daten sind besonders wichtig. Zum Beispiel deine Gesundheit, deine Bank-Daten und dein Ausweis. Mit diesen Daten kann dir jemand sehr schaden. Hier prüfst du besonders genau.",
+        "examples": [
+          {
+            "art": "B",
+            "text": "Deine Ärztin fragt: Was tut dir weh? Du sagst es ihr. Sie braucht das für die Behandlung."
+          },
+          {
+            "art": "A",
+            "text": "Ein Quiz im Internet fragt nach deinen Krankheiten. Für ein Quiz braucht es die nicht."
           }
         ],
         "remember": "Private Daten gehören zu mir.",
-        "pictogram": "pikto-data"
-      },
-      {
-        "title": "Besonders wichtige Daten",
-        "module": "Grundwissen",
-        "icon": "warning",
-        "text": [
-          {
-            "text": "Manche Daten sind besonders wichtig.",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "Mit diesen Daten können andere Menschen viel über dich erfahren.",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "Darum schützt du diese Daten besonders gut.",
-            "pictogram": "pikto-data"
-          }
-        ],
-        "bullets": [
-          {
-            "text": "Passwort",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "PIN",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Adresse",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Telefon-Nummer",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "Bank-Daten",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "Ausweis-Daten",
-            "pictogram": "pikto-data"
-          }
-        ],
-        "remember": "Besonders wichtige Daten gebe ich nicht einfach weiter.",
-        "pictogram": "pikto-data"
-      },
-      {
-        "title": "Passwort bleibt geheim",
-        "module": "Passwort",
-        "icon": "lock",
-        "text": [
-          {
-            "text": "Ein Passwort schützt dein Konto.",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Ein Konto ist dein Bereich in einer App.",
-            "pictogram": "pikto-screen"
-          },
-          {
-            "text": "Ein Passwort ist wie ein Schlüssel.",
-            "pictogram": "pikto-key"
-          },
-          {
-            "text": "Andere Menschen dürfen dein Passwort nicht benutzen.",
-            "pictogram": "pikto-lock"
-          }
-        ],
-        "warning": "Gib dein Passwort nicht weiter.",
         "practice": {
-          "question": "Jemand fragt nach deinem Passwort. Was ist besser?",
-          "pictogram": "pikto-key",
+          "nachFehler": true,
+          "art": "B",
+          "pruefziel": "Besonders wichtige Daten erkennen – und geben, wenn der Zweck es braucht (Was? Wofür?)",
+          "question": "Du fängst eine neue Arbeit an. Die Firma will deine Konto-Nummer. Sie will dir deinen Lohn überweisen. Was machst du?",
+          "pictogram": "pikto-bank",
+          "hinweis": "Überlege: Wer will die Nummer? Und wofür?",
           "answers": [
-            "Ich gebe das Passwort weiter.",
-            "Ich behalte das Passwort für mich."
+            "Ich gebe die Konto-Nummer. Die Firma braucht sie für meinen Lohn.",
+            "Ich gebe die Konto-Nummer nicht. Bank-Daten sind besonders wichtig.",
+            "Ich gebe die Konto-Nummer. Und ein Foto von meiner Bank-Karte. Dann geht es schneller."
+          ],
+          "correctIndex": 0,
+          "feedbackCorrect": "Genau. Die Konto-Nummer ist wichtig. Aber die Firma braucht sie für deinen Lohn. Du kennst die Firma. Dann gibst du sie.",
+          "feedbackWrong": [
+            null,
+            "Bank-Daten sind wichtig. Aber hier gibt es einen klaren Zweck: deinen Lohn. Ohne Konto-Nummer bekommst du kein Geld. Private Daten heißt nicht: immer Nein.",
+            "Die Firma braucht nur die Konto-Nummer. Ein Foto von deiner Bank-Karte braucht sie nicht. Mit dem Foto kann jemand mit deiner Karte bezahlen."
+          ],
+          "remember": "Ich gebe nur nötige Daten weiter."
+        },
+        "pictogram": "pikto-data"
+      },
+      {
+        "title": "Wer will deine Daten?",
+        "module": "Deine Daten",
+        "icon": "understand",
+        "ketteSchritt": 2,
+        "text": [
+          {
+            "text": "Viele wollen deine Daten. Warum?",
+            "pictogram": "pikto-people"
+          },
+          {
+            "text": "Manche brauchen sie. Zum Beispiel für ein Paket.",
+            "pictogram": "pikto-house"
+          },
+          {
+            "text": "Manche verdienen Geld mit deinen Daten. Zum Beispiel mit Werbung.",
+            "pictogram": "pikto-money"
+          },
+          {
+            "text": "Manche wollen dich betrügen.",
+            "pictogram": "pikto-fraud"
+          },
+          {
+            "text": "Darum prüfst du: Wer bekommt meine Daten? Kenne ich den?",
+            "pictogram": "pikto-search"
+          }
+        ],
+        "examples": [
+          {
+            "art": "B",
+            "text": "Du meldest dich im Sport-Verein an. Der Verein braucht deinen Namen und deine Adresse."
+          },
+          {
+            "art": "A",
+            "text": "Eine fremde SMS will deine Adresse. Sie sagt: Dein Paket wartet. Du hast aber nichts bestellt."
+          }
+        ],
+        "remember": "Ich prüfe: Wer bekommt meine Daten?",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Ein Gewinn-Spiel im Internet will die Adresse von Alex.",
+          "Und seine Telefon-Nummer.",
+          "Alex prüft: Wer will das? Und wofür?",
+          "Er kennt die Seite nicht.",
+          "Für ein Spiel braucht sie seine Daten nicht.",
+          "Er gibt sie nicht ein."
+        ],
+        "practice": {
+          "nachFehler": true,
+          "art": "B",
+          "pruefziel": "Wer bekommt es? Bekannt und erwartet – oder fremd?",
+          "question": "Wer darf dein Geburts-Datum bekommen?",
+          "pictogram": "pikto-birthday",
+          "hinweis": "Überlege: Wen kennst du? Wer braucht es wirklich?",
+          "answers": [
+            "Eine fremde Person im Chat. Sie will dir zum Geburtstag gratulieren.",
+            "Deine Kranken-Kasse. Du hast dort selbst angerufen.",
+            "Eine Seite im Internet. Sie verspricht dir ein Geschenk."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Mit deinem Passwort kann jemand dein Konto benutzen.",
-          "feedbackCorrect": "Das ist sicher. Dein Passwort bleibt geheim.",
-          "remember": "Mein Passwort bleibt geheim."
+          "feedbackCorrect": "Genau. Deine Kranken-Kasse kennst du. Du hast selbst angerufen. Sie braucht dein Geburts-Datum. So erkennt sie dich. Die anderen kennst du nicht.",
+          "feedbackWrong": [
+            "Die Person kennst du nicht. Du weißt nicht: Wer ist das wirklich? Für einen Gruß braucht sie dein Geburts-Datum nicht.",
+            null,
+            "Die Seite kennst du nicht. Für ein Geschenk braucht sie dein Geburts-Datum nicht. Manche wollen so an deine Daten."
+          ],
+          "remember": "Ich prüfe: Wer bekommt meine Daten?"
         },
-        "pictogram": "pikto-lock"
+        "pictogram": "pikto-person"
       },
       {
-        "title": "Gutes Passwort",
-        "module": "Passwort",
+        "title": "Nötig oder freiwillig?",
+        "module": "Nötig oder nicht?",
         "icon": "check",
+        "ketteSchritt": [
+          4,
+          5
+        ],
         "text": [
           {
-            "text": "Ein gutes Passwort ist lang.",
-            "pictogram": "pikto-lock"
+            "text": "Im Internet füllst du oft ein Formular aus. Zum Beispiel bei einer Anmeldung.",
+            "pictogram": "pikto-data"
           },
           {
-            "text": "Es ist nicht dein Name.",
-            "pictogram": "pikto-no"
+            "text": "Manche Felder sind Pflicht. Ohne sie geht es nicht weiter.",
+            "pictogram": "pikto-warning"
           },
           {
-            "text": "Es ist nicht dein Geburtstag.",
-            "pictogram": "pikto-no"
-          },
-          {
-            "text": "Buchstaben und Zahlen sind gut.",
-            "pictogram": "pikto-key"
-          }
-        ],
-        "bullets": [
-          {
-            "text": "nicht dein Name",
-            "pictogram": "pikto-no"
-          },
-          {
-            "text": "nicht dein Geburtstag",
-            "pictogram": "pikto-no"
-          },
-          {
-            "text": "mindestens 10 Zeichen",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Buchstaben und Zahlen",
-            "pictogram": "pikto-shop"
-          },
-          {
-            "text": "Sonderzeichen sind gut, zum Beispiel ! oder ?",
-            "pictogram": "pikto-lock"
-          }
-        ],
-        "practice": {
-          "question": "Welches Passwort ist besser?",
-          "pictogram": "pikto-key",
-          "answers": [
-            "Frank1980",
-            "Blume!Tisch7Wasser"
-          ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht so sicher. Ein Name oder ein Geburtstag ist leichter zu erraten.",
-          "feedbackCorrect": "Das ist sicherer. Das Passwort ist lang und schwerer zu erraten.",
-          "remember": "Ich nehme ein langes Passwort."
-        },
-        "pictogram": "pikto-lock"
-      },
-      {
-        "title": "Doppelt sicher",
-        "pictogram": "pikto-key",
-        "module": "Passwort",
-        "icon": "lock",
-        "text": [
-          {
-            "text": "Manche Konten kann man doppelt sichern.",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Das heißt: Zwei-Faktor.",
-            "pictogram": "pikto-key"
-          },
-          {
-            "text": "Du gibst dein Passwort ein.",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Dann schickt die App eine Zahl auf dein Handy.",
-            "pictogram": "pikto-phone"
-          },
-          {
-            "text": "Du gibst die Zahl ein. Nur du hast dein Handy.",
-            "pictogram": "pikto-phone"
-          },
-          {
-            "text": "Die Zahl ist geheim.",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Du sagst die Zahl niemandem. Auch nicht am Telefon.",
-            "pictogram": "pikto-no"
-          },
-          {
-            "text": "Eine vertraute Person kann dir beim Einrichten helfen.",
-            "pictogram": "pikto-help"
-          }
-        ],
-        "practice": {
-          "question": "Was macht dein Konto doppelt sicher?",
-          "pictogram": "pikto-lock",
-          "answers": [
-            "Ein kurzes Passwort.",
-            "Passwort und eine Zahl auf deinem Handy."
-          ],
-          "correctIndex": 1,
-          "feedbackCorrect": "Das ist richtig. Passwort plus Zahl auf dem Handy: Das ist doppelt sicher.",
-          "feedbackWrong": "Das ist noch nicht richtig. Doppelt sicher heißt: Passwort und eine Zahl auf deinem Handy.",
-          "remember": "Doppelt sichern schützt mein Konto."
-        },
-        "remember": "Doppelt sichern schützt mein Konto."
-      },
-      {
-        "title": "Ohne Passwort anmelden",
-        "pictogram": "pikto-key",
-        "module": "Passwort",
-        "icon": "lock",
-        "text": [
-          {
-            "text": "Manche Konten brauchen kein Passwort mehr.",
-            "pictogram": "pikto-key"
-          },
-          {
-            "text": "Das heißt: Passkey.",
-            "pictogram": "pikto-key"
-          },
-          {
-            "text": "Du legst den Finger auf dein Handy.",
-            "pictogram": "pikto-phone"
-          },
-          {
-            "text": "Oder du zeigst dein Gesicht.",
-            "pictogram": "pikto-phone"
-          },
-          {
-            "text": "Dann bist du angemeldet.",
+            "text": "Manche Felder sind freiwillig. Die darfst du leer lassen.",
             "pictogram": "pikto-done"
           },
           {
-            "text": "Du musst dir nichts merken.",
-            "pictogram": "pikto-lock"
+            "text": "Du prüfst: Wofür brauchen die das?",
+            "pictogram": "pikto-search"
           },
           {
-            "text": "Niemand kann dein Passwort erraten. Du hast keins.",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Ein Passkey gehört zu einem Konto.",
-            "pictogram": "pikto-key"
-          },
-          {
-            "text": "Dein Finger bleibt auf deinem Handy. Die Internet-Seite bekommt deinen Finger nicht.",
-            "pictogram": "pikto-phone"
-          },
-          {
-            "text": "Eine vertraute Person hilft dir beim Einrichten.",
-            "pictogram": "pikto-help"
+            "text": "Ein Pflicht-Feld passt gar nicht? Dann musst du dich dort nicht anmelden.",
+            "pictogram": "pikto-no"
           }
         ],
         "examples": [
-          "Du meldest dich bei deinem Konto mit dem Finger an.",
-          "Du meldest dich beim Shop mit deinem Gesicht an."
+          {
+            "art": "B",
+            "text": "Du bestellst in einem Shop. Du kennst den Shop. Er braucht deine Adresse für das Paket."
+          },
+          {
+            "art": "A",
+            "text": "Beim Bestellen fragt der Shop nach deinem Geburts-Datum. Das Feld ist freiwillig. Du lässt es leer."
+          },
+          {
+            "art": "C",
+            "text": "Der Shop fragt: Willst du Werbung per E-Mail? Das entscheidest du selbst."
+          }
+        ],
+        "remember": "Ich gebe nur nötige Daten weiter.",
+        "vorbildWer": "Tilda",
+        "vorbild": [
+          "Tilda meldet sich im Internet bei der Bücherei an.",
+          "Das Formular fragt nach ihrem Namen und ihrer Adresse. Das ist Pflicht.",
+          "Tilda prüft: Wofür? Die Bücherei braucht das für den Ausweis. Das ist nötig.",
+          "Die Telefon-Nummer ist freiwillig.",
+          "Tilda lässt das Feld leer."
         ],
         "practice": {
-          "question": "Was brauchst du bei einem Passkey?",
-          "pictogram": "pikto-key",
-          "answers": [
-            "Ein langes Passwort.",
-            "Deinen Finger oder dein Gesicht."
+          "typ": "felder",
+          "nachFehler": true,
+          "remember": "Ich gebe nur nötige Daten weiter.",
+          "question": "Was gibst du bei der Fitness-App an?",
+          "art": "A+B+C",
+          "pruefziel": "Pflicht, freiwillig und Zweck getrennt prüfen: Was passt zu meinem Ziel?",
+          "hinweis": "Überlege: Was willst du mit der App? Welche Angaben passen dazu? Welche Felder sind freiwillig? Du kannst auch erst prüfen.",
+          "situation": {
+            "leicht": "Du willst eine Fitness-App nutzen. Sie zählt deine Schritte. Und sie zeigt: So viele Kalorien hast du verbraucht. Das willst du sehen. Für die App brauchst du ein Konto."
+          },
+          "formular": {
+            "titel": "Fitness-App: Konto anlegen"
+          },
+          "felder": [
+            {
+              "name": "E-Mail",
+              "pflicht": true,
+              "zweck": "passt",
+              "wofuer": "Für dein Konto. Mit der E-Mail meldest du dich an.",
+              "rueckmeldung": {
+                "angegeben": "Pflicht heißt nur: Ohne E-Mail geht es nicht weiter. Hier passt sie auch zum Zweck. Mit der E-Mail meldest du dich in deinem Konto an.",
+                "leer": "Pflicht heißt: Ohne E-Mail geht es nicht weiter. Die E-Mail passt hier zum Zweck. Willst du die App nutzen? Dann gib sie an. Sonst nutzt du die App nicht."
+              }
+            },
+            {
+              "name": "Gewicht",
+              "pflicht": false,
+              "zweck": "deine-wahl",
+              "sensibel": true,
+              "wofuer": "Mit dem Gewicht berechnen wir deine Kalorien.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Du willst deine Kalorien sehen. Dafür braucht die App dein Gewicht. Das passt zu deinem Ziel.",
+                "leer": "Das Feld ist freiwillig. Du kannst Nein sagen. Dann bekommt die App dein Gewicht nicht. Deine Kalorien kann sie dann vielleicht nicht berechnen. Die Schritte zählt sie trotzdem. Du entscheidest."
+              }
+            },
+            {
+              "name": "Telefon-Nummer",
+              "pflicht": false,
+              "zweck": "passt-nicht",
+              "wofuer": "Für Angebote per SMS.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Die Nummer ist nur für Werbung. Für Schritte und Kalorien braucht die App sie nicht.",
+                "leer": "Das Feld ist freiwillig. Die Nummer ist nur für Werbung. Für dein Ziel braucht die App sie nicht."
+              }
+            },
+            {
+              "name": "Geburts-Datum",
+              "pflicht": false,
+              "zweck": "passt-nicht",
+              "wofuer": "Wir gratulieren dir zum Geburtstag.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Der Gruß zum Geburtstag gehört nicht zu deinem Ziel. Für Schritte und Kalorien braucht die App das nicht.",
+                "leer": "Das Feld ist freiwillig. Der Gruß zum Geburtstag gehört nicht zu deinem Ziel."
+              }
+            }
           ],
-          "correctIndex": 1,
-          "feedbackCorrect": "Das ist richtig. Bei einem Passkey zeigst du deinen Finger oder dein Gesicht.",
-          "feedbackWrong": "Das ist noch nicht richtig. Bei einem Passkey brauchst du kein Passwort.",
-          "remember": "Mit Passkey brauche ich kein Passwort."
+          "ausweg": {
+            "nichtNutzen": "Ich lege kein Konto an."
+          },
+          "auswegRueckmeldung": {
+            "nichtNutzen": "Das ist deine Entscheidung. Das ist in Ordnung. Dann nutzt du die App nicht."
+          }
         },
-        "remember": "Mit Passkey brauche ich kein Passwort."
+        "pictogram": "pikto-data"
       },
       {
-        "title": "Adresse eingeben",
-        "module": "Private Daten",
+        "title": "Eine App will etwas sehen",
+        "module": "Nötig oder nicht?",
+        "icon": "lock",
+        "ketteSchritt": 4,
+        "text": [
+          {
+            "text": "Apps fragen oft: Darf ich etwas sehen?",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Zum Beispiel deine Fotos, deine Kontakte oder deinen Standort.",
+            "pictogram": "pikto-photo"
+          },
+          {
+            "text": "Du prüfst: Was macht die App? Braucht sie das dafür?",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Manchmal braucht sie nur ein bisschen. Zum Beispiel den Standort nur beim Benutzen.",
+            "pictogram": "pikto-location"
+          },
+          {
+            "text": "Eine Erlaubnis kannst du oft später in den Einstellungen ändern.",
+            "pictogram": "pikto-lock"
+          }
+        ],
+        "examples": [
+          {
+            "art": "A",
+            "text": "Eine Taschenlampen-App will deine Kontakte. Für Licht braucht sie die nicht."
+          },
+          {
+            "art": "B",
+            "text": "Eine Karten-App zeigt dir den Weg. Dafür braucht sie deinen Standort."
+          },
+          {
+            "art": "C",
+            "text": "Eine Wetter-App will deinen Standort. Willst du Warnungen unterwegs? Dann braucht sie ihn. Willst du nur das Wetter in deiner Stadt? Dann tippst du die Stadt selbst ein."
+          }
+        ],
+        "remember": "Ich erlaube nur, was die App braucht.",
+        "practice": {
+          "nachFehler": true,
+          "art": "C",
+          "pruefziel": "Wie viel davon ist nötig? Umfang einer Erlaubnis passend zum Zweck",
+          "question": "Eine App macht aus einem Foto eine Post-Karte. Du willst ein Foto verschicken. Auf dem Handy erscheint: Soll die App deine Fotos sehen? Was machst du?",
+          "pictogram": "pikto-photo",
+          "hinweis": "Überlege: Wie viele Fotos braucht die App für deine Karte?",
+          "answers": [
+            "Nur ausgewählte Fotos erlauben. Ich wähle das eine Foto aus.",
+            "Alle Fotos erlauben. Dann muss ich nicht lange suchen.",
+            "Keine Fotos erlauben. Fotos sind privat."
+          ],
+          "correctIndex": 0,
+          "feedbackCorrect": "Genau. Die App braucht nur dieses eine Foto. Viele Handys bieten dafür: Ausgewählte Fotos. Dann sieht die App deine anderen Fotos nicht.",
+          "feedbackWrong": [
+            null,
+            "Dann sieht die App alle deine Fotos. Für eine Karte braucht sie aber nur eins. Das ist mehr als nötig.",
+            "Dann kann die App keine Karte machen. Für die Karte braucht sie ein Foto. Gib ihr nur das eine Foto."
+          ],
+          "remember": "Ich erlaube nur, was die App braucht."
+        },
+        "pictogram": "pikto-phone"
+      },
+      {
+        "title": "Wer sieht dein Profil?",
+        "module": "Wer sieht es?",
         "icon": "data",
+        "ketteSchritt": 2,
         "text": [
           {
-            "text": "Eine App fragt nach deiner Adresse.",
-            "pictogram": "pikto-location"
+            "text": "In vielen Apps hast du ein Profil.",
+            "pictogram": "pikto-person"
           },
           {
-            "text": "Du weißt nicht warum.",
-            "pictogram": "pikto-no"
+            "text": "Dort stehen Dinge über dich. Zum Beispiel dein Name, dein Foto oder dein Wohnort.",
+            "pictogram": "pikto-data"
           },
           {
-            "text": "Dann musst du nicht sofort etwas eintragen.",
-            "pictogram": "pikto-location"
+            "text": "Du prüfst: Wer kann das sehen? Alle im Internet? Nur deine Freunde? Nur du?",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Das kannst du oft einstellen. Und später wieder ändern.",
+            "pictogram": "pikto-lock"
           }
         ],
         "examples": [
-          "Eine Spiele-App fragt nach deiner Adresse.",
-          "Ein Gewinnspiel fragt nach deinem Geburtstag."
-        ],
-        "practice": {
-          "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
-          "pictogram": "pikto-house",
-          "answers": [
-            "Ich trage die Adresse ein.",
-            "Ich trage die Adresse nicht ein."
-          ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wofür die App deine Adresse braucht.",
-          "feedbackCorrect": "Das ist sicher. Deine Adresse ist privat. Du gibst sie nicht einfach weiter.",
-          "remember": "Ich gebe meine Adresse nicht einfach weiter."
-        },
-        "pictogram": "pikto-data"
-      },
-      {
-        "title": "Telefon-Nummer und Geburtstag",
-        "module": "Private Daten",
-        "icon": "help",
-        "text": [
           {
-            "text": "Auch deine Telefon-Nummer ist privat.",
-            "pictogram": "pikto-phone"
+            "art": "B",
+            "text": "Dein Name steht im Profil. So finden dich deine Freunde."
           },
           {
-            "text": "Auch dein Geburtstag kann privat sein.",
-            "pictogram": "pikto-birthday"
-          },
-          {
-            "text": "Diese Daten gibst du nicht überall ein.",
-            "pictogram": "pikto-no"
+            "art": "C",
+            "text": "Dein Wohnort: Sollen Fremde ihn sehen? Oder nur deine Freunde? Oder niemand? Das entscheidest du."
           }
         ],
-        "examples": [
-          "Ein Formular fragt nach deiner Telefon-Nummer.",
-          "Ein Gewinnspiel fragt nach deinem Geburtstag."
-        ],
+        "remember": "Ich wähle aus: Wer sieht meine Daten?",
         "practice": {
-          "question": "Ein Gewinnspiel fragt nach deiner Telefon-Nummer. Was ist besser?",
-          "pictogram": "pikto-money",
+          "nachFehler": true,
+          "art": "C",
+          "pruefziel": "Wer kann es sehen? Sichtbarkeit passend zum eigenen Ziel einstellen",
+          "question": "In einer App hast du ein Profil. Dort steht deine Telefon-Nummer. Deine Freunde aus der App sollen dich anrufen können. Wer soll die Nummer sehen?",
+          "pictogram": "pikto-person",
+          "hinweis": "Überlege: Wer soll dich anrufen können?",
           "answers": [
-            "Ich trage die Telefon-Nummer ein.",
-            "Ich trage die Telefon-Nummer nicht ein."
+            "Alle Menschen in der App.",
+            "Nur meine Freunde.",
+            "Niemand. Die Nummer ist privat."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Deine Telefon-Nummer ist privat.",
-          "feedbackCorrect": "Das ist sicher. Du schützt deine Telefon-Nummer.",
-          "remember": "Ich gebe meine Telefon-Nummer nicht einfach weiter."
+          "feedbackCorrect": "Genau. Deine Freunde sollen dich anrufen können. Dafür reicht: Nur Freunde. Fremde brauchen deine Nummer nicht.",
+          "feedbackWrong": [
+            "Dann sehen auch Fremde deine Nummer. Das ist mehr als nötig. Für deine Freunde reicht: Nur Freunde.",
+            null,
+            "Das darfst du einstellen. Aber dann können dich deine Freunde nicht anrufen. Das wolltest du ja. Dafür reicht: Nur Freunde."
+          ],
+          "remember": "Ich wähle aus: Wer sieht meine Daten?"
         },
-        "pictogram": "pikto-data"
+        "pictogram": "pikto-person"
       },
       {
         "title": "Fotos prüfen",
-        "module": "Fotos",
+        "module": "Wer sieht es?",
         "icon": "photo",
+        "ketteSchritt": 5,
         "text": [
           {
-            "text": "Du willst ein Foto verschicken.",
+            "text": "Du willst ein Foto schicken oder zeigen.",
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Auf dem Foto sieht man vielleicht private Dinge.",
-            "pictogram": "pikto-photo"
+            "text": "Prüfe vorher: Was sieht man auf dem Foto? Und wer bekommt es?",
+            "pictogram": "pikto-search"
           },
           {
-            "text": "Zum Beispiel: dein Zimmer oder einen Brief.",
-            "pictogram": "pikto-photo"
+            "text": "Ist eine andere Person auf dem Foto? Dann fragst du sie vorher.",
+            "pictogram": "pikto-people"
+          },
+          {
+            "text": "Ein Foto ist verschickt? Dann kannst du es oft nicht zurückholen.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Darum prüfst du vorher.",
+            "pictogram": "pikto-done"
           }
         ],
         "examples": [
-          "Auf dem Foto liegt ein Brief.",
-          "Im Hintergrund sieht man eine andere Person.",
-          "Auf dem Foto sieht man deine Wohnung."
+          {
+            "art": "C",
+            "text": "Du willst ein Foto von deinem Kollegen in die Gruppe schicken. Frag ihn vorher. Er entscheidet mit."
+          },
+          {
+            "art": "A",
+            "text": "Im Hintergrund sieht man deine Haus-Nummer. Die muss niemand sehen."
+          }
         ],
+        "remember": "Ich prüfe Fotos vor dem Senden.",
         "practice": {
-          "question": "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?",
-          "pictogram": "pikto-house",
+          "nachFehler": true,
+          "art": "C",
+          "pruefziel": "Ich entscheide – Daten anderer: Menschen auf dem Foto entscheiden mit",
+          "question": "Du hast auf einer Feier ein Foto gemacht. Darauf sind 3 Freunde. Du willst es in deinen Status stellen. Was machst du?",
+          "pictogram": "pikto-people",
+          "hinweis": "Überlege: Wer ist noch auf dem Foto? Wer entscheidet mit?",
           "answers": [
-            "Ich schicke das Foto sofort.",
-            "Ich schicke das Foto nicht so weiter."
+            "Ich stelle es gleich rein. Ich habe das Foto ja gemacht.",
+            "Ich stelle es nur für 24 Stunden rein. Dann ist es wieder weg.",
+            "Ich frage die 3 vorher. Sagen alle Ja? Dann stelle ich es rein."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Andere können die Adresse auf dem Foto lesen.",
-          "feedbackCorrect": "Das ist sicher. Du schützt die Adresse auf dem Foto.",
-          "remember": "Ich prüfe Fotos vor dem Senden."
+          "correctIndex": 2,
+          "feedbackCorrect": "Genau. Auf dem Foto sind auch deine Freunde. Sie entscheiden mit. Sagt einer Nein? Dann stellst du es nicht rein.",
+          "feedbackWrong": [
+            "Das Foto zeigt auch deine Freunde. Sie entscheiden mit. Frag sie vorher.",
+            "Auch in 24 Stunden kann jemand das Foto speichern. Dann ist es nicht weg. Frag deine Freunde vorher.",
+            null
+          ],
+          "remember": "Fotos von anderen: erst fragen."
         },
         "pictogram": "pikto-photo"
       },
       {
-        "title": "Fremde Links und Nachrichten",
-        "warning": "Tippe nicht auf fremde Links. Ein fremder Link kann gefährlich sein. Frag im Zweifel eine vertraute Person.",
-        "module": "Nachrichten",
-        "icon": "link",
+        "title": "Standort teilen",
+        "module": "Wer sieht es?",
+        "icon": "check",
+        "ketteSchritt": 4,
         "text": [
           {
-            "text": "Manche Nachrichten wollen private Daten bekommen.",
-            "pictogram": "pikto-message"
+            "text": "Du kannst deinen Standort teilen. Dann sehen andere: Hier bist du gerade.",
+            "pictogram": "pikto-location"
           },
           {
-            "text": "In manchen Nachrichten ist ein Link.",
-            "pictogram": "pikto-message"
+            "text": "Prüfe: Wer sieht meinen Standort? Und wie lange?",
+            "pictogram": "pikto-search"
           },
           {
-            "text": "Ein fremder Link kann gefährlich sein.",
-            "pictogram": "pikto-link"
+            "text": "Oft kannst du wählen: nur kurz. Oder für immer.",
+            "pictogram": "pikto-clock"
+          },
+          {
+            "text": "Du kannst das Teilen später wieder ausschalten.",
+            "pictogram": "pikto-lock"
           }
         ],
         "examples": [
-          "Klick schnell auf diesen Link.",
-          "Gib deine Adresse ein.",
-          "Du hast etwas gewonnen."
+          {
+            "art": "B",
+            "text": "Du fährst allein zu einem neuen Ort. Deine Betreuerin will wissen: Bist du gut angekommen? Du teilst deinen Standort mit ihr. Bis du da bist."
+          },
+          {
+            "art": "A",
+            "text": "Ein Spiel zeigt deinen Standort allen Spielern. Das braucht das Spiel nicht."
+          }
+        ],
+        "remember": "Ich teile meinen Standort nicht einfach.",
+        "practice": {
+          "nachFehler": true,
+          "art": "C",
+          "pruefziel": "Wer und wie lange? Standort nur so weit teilen, wie der Zweck es braucht",
+          "question": "Du gehst mit 3 Freunden auf ein Konzert. Ihr wollt euch vor dem Eingang treffen. In eurer Chat-Gruppe sind aber 30 Leute. Wie teilst du deinen Standort?",
+          "pictogram": "pikto-location",
+          "hinweis": "Überlege: Wer braucht deinen Standort? Und wie lange?",
+          "answers": [
+            "Mit allen 30 Leuten. Für immer.",
+            "Nur mit den 3 Freunden. Für immer.",
+            "Nur mit den 3 Freunden. Bis zum Treffen."
+          ],
+          "correctIndex": 2,
+          "feedbackCorrect": "Genau. Nur die 3 brauchen deinen Standort. Und nur bis zum Treffen. Du darfst auch Nein sagen. Dann schreibt ihr euch: Hier bin ich.",
+          "feedbackWrong": [
+            "Dann sehen 30 Leute immer deinen Standort. Für das Treffen brauchen ihn nur 3. Und nur kurz.",
+            "Das sind die richtigen Leute. Aber für immer ist mehr als nötig. Für das Treffen reicht eine kurze Zeit.",
+            null
+          ],
+          "remember": "Ich teile meinen Standort nur so lange wie nötig."
+        },
+        "pictogram": "pikto-location"
+      },
+      {
+        "title": "Eine Nachricht will deine Daten",
+        "module": "Nachrichten",
+        "icon": "message",
+        "ketteSchritt": 1,
+        "text": [
+          {
+            "text": "Manchmal kommt eine Nachricht. Oder eine E-Mail. Sie will Daten von dir.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Du hast das nicht erwartet? Dann mache Stopp.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Prüfe genauso: Wer will das? Wofür?",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Du bist unsicher? Dann gib noch nichts ein. Hol dir Unterstützung.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Mehr dazu lernst du im Thema Betrug.",
+            "pictogram": "pikto-fraud"
+          }
+        ],
+        "examples": [
+          {
+            "art": "C",
+            "text": "Deine Freundin schreibt: Wie ist deine neue Adresse? Du kennst sie. Du entscheidest selbst."
+          },
+          {
+            "art": "A",
+            "text": "Eine fremde E-Mail sagt: Bestätige deine Daten. Sonst sperren wir dein Konto. Du kennst den Absender nicht."
+          }
+        ],
+        "remember": "Unsicher? Noch nichts freigeben.",
+        "vorbildWer": "Alex",
+        "vorbild": [
+          "Alex bekommt eine E-Mail.",
+          "Er soll seine Adresse bestätigen.",
+          "Alex macht Stopp.",
+          "Er prüft: Wer schreibt mir? Er kennt den Absender nicht.",
+          "Er gibt nichts ein.",
+          "Er ist noch unsicher. Dann zeigt er die E-Mail seiner Betreuerin."
         ],
         "practice": {
-          "question": "Eine fremde Nachricht schickt dir einen Link. Was ist besser?",
-          "pictogram": "pikto-stranger",
+          "nachFehler": true,
+          "art": "A",
+          "pruefziel": "Stopp und Wer? Unerwartete Anfrage selbst über einen bekannten Weg prüfen (Brücke Betrug)",
+          "question": "Du bekommst eine SMS: Hier ist deine Bank. Bitte bestätige dein Geburts-Datum. Tippe dafür auf den Link. Was machst du?",
+          "pictogram": "pikto-message",
+          "hinweis": "Überlege: Weißt du sicher, wer schreibt?",
           "answers": [
-            "Ich öffne den Link sofort.",
-            "Ich öffne den Link nicht sofort."
+            "Ich tippe auf den Link. Meine Bank kenne ich ja.",
+            "Ich schreibe mein Geburts-Datum zurück. Das ist ja nicht geheim.",
+            "Ich gebe nichts ein. Ich rufe die Nummer auf meiner Bank-Karte an."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Ein fremder Link kann gefährlich sein.",
-          "feedbackCorrect": "Das ist sicher. Du tippst nicht sofort auf einen fremden Link.",
-          "remember": "Ich öffne fremde Links nicht sofort."
+          "correctIndex": 2,
+          "feedbackCorrect": "Genau. Du weißt nicht: Schreibt wirklich deine Bank? Das prüfst du selbst. Mit einer bekannten Nummer.",
+          "feedbackWrong": [
+            "Jeder kann schreiben: Hier ist deine Bank. Der Link kann zu einer falschen Seite führen. Ruf lieber selbst an.",
+            "Auch das Geburts-Datum nutzen Betrüger. Du weißt nicht: Wer schreibt wirklich? Prüfe das zuerst selbst.",
+            null
+          ],
+          "remember": "Ich prüfe erst: Wer will meine Daten?"
         },
         "pictogram": "pikto-message"
       },
       {
-        "title": "Stress erkennen",
-        "module": "Nachrichten",
-        "icon": "warning",
-        "text": [
-          {
-            "text": "Manche Nachrichten machen dir Stress.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Sie wollen: Du sollst schnell handeln.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Stress ist ein Warnzeichen.",
-            "pictogram": "pikto-warning"
-          }
-        ],
-        "examples": [
-          "Klick sofort.",
-          "Sonst ist dein Konto weg.",
-          "Sag es niemandem."
-        ],
-        "practice": {
-          "question": "Eine Nachricht sagt: Klick sofort. Was ist besser?",
-          "pictogram": "pikto-link",
-          "answers": [
-            "Ich tippe sofort drauf.",
-            "Ich mache langsam."
-          ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Die Nachricht macht dir Stress. Stress ist ein Warnzeichen.",
-          "feedbackCorrect": "Das ist sicher. Du machst es langsam. Du überlegst zuerst.",
-          "remember": "Eine Nachricht macht dir Stress? Dann mache ich langsam."
-        },
-        "pictogram": "pikto-message"
-      },
-      {
-        "title": "Was kann ich tun?",
+        "title": "Dein Plan für deine Daten",
         "module": "Handlungsplan",
-        "icon": "help",
+        "icon": "check",
+        "erinnern": true,
+        "erinnernFrage": {
+          "leicht": "Du kennst schon alle 5 Schritte. Weißt du sie noch? Denk kurz nach. Dann tippe auf: Zeig mir den Plan.",
+          "einfach": "Du kennst schon alle 5 Schritte. Weißt du sie noch? Überleg kurz, bevor du den Plan aufdeckst.",
+          "standard": "Alle fünf Schritte kennst du schon. Weißt du sie noch? Überleg kurz und deck dann den Plan auf."
+        },
+        "erinnernKnopf": {
+          "leicht": "Zeig mir den Plan",
+          "einfach": "Zeig mir den Plan",
+          "standard": "Plan aufdecken"
+        },
         "text": [
           {
-            "text": "Eine Nachricht ist komisch.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Oder eine Nachricht macht dir Stress.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Dann hilft ein Plan.",
+            "text": "Das ist dein Plan für deine Daten:",
             "pictogram": "pikto-plan"
           }
         ],
         "bullets": [
           {
-            "text": "Ich antworte nicht sofort.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Ich tippe nicht auf Links.",
-            "pictogram": "pikto-link"
-          },
-          {
-            "text": "Ich gebe keine privaten Daten ein.",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "Ich mache eine Pause.",
+            "text": "Stopp. Ich prüfe zuerst.",
             "pictogram": "pikto-pause"
           },
           {
-            "text": "Ich frage eine vertraute Person.",
-            "pictogram": "pikto-ask"
+            "text": "Wer bekommt es? Wer kann es sehen?",
+            "pictogram": "pikto-person"
+          },
+          {
+            "text": "Was genau soll ich geben?",
+            "pictogram": "pikto-data"
+          },
+          {
+            "text": "Wofür? Wie viel davon ist nötig?",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Ich entscheide.",
+            "pictogram": "pikto-done"
           }
         ],
-        "practice": {
-          "question": "Eine Nachricht will schnell deine Daten. Was ist der erste Schritt in deinem Plan?",
-          "pictogram": "pikto-message",
-          "answers": [
-            "Ich gebe die Daten ein.",
-            "Ich mache Stopp und frage nach."
-          ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist zu schnell. Erst Stopp. Dann fragen.",
-          "feedbackCorrect": "Erst Stopp. Dann fragen.",
-          "remember": "Etwas ist komisch? Dann habe ich einen Plan."
-        },
-        "pictogram": "pikto-help"
+        "remember": "Erst prüfen. Dann entscheide ich.",
+        "pictogram": "pikto-plan"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
+        "mitPlan": "kurz",
+        "erinnernFrage": {
+          "leicht": "Was weißt du noch? Wie geht dein Plan? Denk kurz nach. Dann tippe auf: Zeig mir den Plan und die Regeln.",
+          "einfach": "Was weißt du noch aus diesem Thema, und wie geht dein Plan? Überleg kurz, bevor du Plan und Regeln aufdeckst.",
+          "standard": "Was ist dir aus diesem Kapitel geblieben – und wie geht dein Plan? Überleg kurz und deck dann Plan und Regeln auf."
+        },
+        "erinnernKnopf": {
+          "leicht": "Zeig mir den Plan und die Regeln",
+          "einfach": "Zeig mir den Plan und die Regeln",
+          "standard": "Plan und Regeln aufdecken"
+        },
         "text": [
           {
             "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
             "pictogram": "pikto-done"
           }
         ],
-        "bullets": [
-          {
-            "text": "Private Daten gehören zu mir.",
-            "pictogram": "pikto-data"
-          },
-          {
-            "text": "Mein Passwort bleibt geheim.",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Ich nehme ein gutes, langes Passwort.",
-            "pictogram": "pikto-lock"
-          },
-          {
-            "text": "Ich gebe meine Adresse nicht einfach weiter.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Ich prüfe Fotos vor dem Senden.",
-            "pictogram": "pikto-photo"
-          },
-          {
-            "text": "Ich öffne fremde Links nicht sofort.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Eine Nachricht macht dir Stress? Dann mache ich langsam.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Ich darf mir Unterstützung holen.",
-            "pictogram": "pikto-help"
-          }
-        ],
+        "bullets": [],
         "pictogram": "pikto-done"
       }
     ],
     "quizQuestions": [
       {
-        "hinweis": "Überlege: Was kann jemand mit der Antwort anfangen?",
-        "question": "Was ist eine private Information?",
-        "pictogram": "pikto-data",
+        "nachFehler": true,
+        "art": "B",
+        "pruefziel": "Wofür? Daten geben, wenn der Zweck klar ist (nicht immer Nein)",
+        "question": "Du meldest dich für einen Koch-Kurs an. Die Kurs-Leitung will deine Telefon-Nummer. Fällt der Kurs aus? Dann ruft sie dich an. Was machst du?",
+        "pictogram": "pikto-phone",
+        "hinweis": "Überlege: Wofür will die Kurs-Leitung die Nummer?",
         "answers": [
-          "Das Wetter.",
-          "Meine Adresse.",
-          "Meine Lieblings-Farbe."
+          "Ich gebe keine Nummer. Telefon-Nummern sind privat.",
+          "Ich gebe meine Telefon-Nummer. Dann bekomme ich Bescheid.",
+          "Ich gebe meine Nummer und meine Adresse. Dann erreichen sie mich sicher."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Deine Adresse ist eine private Information.",
+        "feedbackCorrect": "Genau. Die Kurs-Leitung braucht die Nummer für einen klaren Zweck. Du kennst sie. Dann ist das in Ordnung.",
         "feedbackWrong": [
-          "Das Wetter weiß jeder.",
+          "Private Daten heißt nicht: immer Nein. Hier gibt es einen klaren Zweck. Ohne Nummer bekommst du keinen Bescheid.",
           null,
-          "Die Lieblings-Farbe ist harmlos. Deine Adresse zeigt, wo du wohnst."
-        ]},
-      {
-        "hinweis": "Überlege: Wie viele Menschen sollten dein Passwort kennen?",
-        "question": "Was machst du mit deinem Passwort?",
-        "pictogram": "pikto-key",
-        "answers": [
-          "Ich gebe es weiter.",
-          "Ich behalte es für mich.",
-          "Ich sage es meiner besten Freundin."
+          "Die Adresse braucht die Kurs-Leitung dafür nicht. Gib nur, was für den Zweck nötig ist."
         ],
-        "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Dein Passwort bleibt geheim.",
-        "feedbackWrong": [
-          "Dann kann jemand dein Konto benutzen.",
-          null,
-          "Auch bei Menschen, die du magst, bleibt das Passwort geheim."
-        ]},
+        "remember": "Ich gebe nur nötige Daten weiter."
+      },
       {
-        "hinweis": "Überlege: Was kann jemand schnell ausprobieren?",
-        "question": "Was ist ein gutes Passwort?",
-        "pictogram": "pikto-key",
-        "answers": [
-          "Kurz und leicht.",
-          "Mein Geburtstag.",
-          "Lang und schwer zu erraten."
-        ],
-        "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Ein langes Passwort ist sicherer.",
-        "feedbackWrong": [
-          "Ein kurzes Passwort ist schnell erraten.",
-          "Deinen Geburtstag kennen viele Menschen. Das ist zu leicht.",
-          null
-        ]},
-      {
-        "hinweis": "Doppelt sicher heißt: 2 Dinge. Welche 2 Dinge sind das?",
-        "question": "Du sicherst dein Konto doppelt. Was brauchst du beim Anmelden?",
-        "pictogram": "pikto-help",
-        "answers": [
-          "Passwort und eine Zahl auf dem Handy.",
-          "Nur einmal tippen.",
-          "Zwei Passwörter."
-        ],
-        "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Beides zusammen macht dein Konto doppelt sicher.",
-        "feedbackWrong": [
-          null,
-          "Einmal tippen reicht nicht. Doppelt sicher braucht 2 Dinge.",
-          "Nicht 2 Passwörter. Ein Passwort und eine Zahl auf deinem Handy."
-        ]},
-      {
+        "nachFehler": true,
         "hinweis": "Frag dich: Braucht die Seite deine Adresse wirklich für ein Video?",
         "question": "Eine Internet-Seite will deine Adresse. Erst dann zeigt sie dir ein Video. Was machst du?",
         "pictogram": "pikto-house",
@@ -713,205 +736,542 @@ const topics = [
           "Ich gebe die Adresse nicht ein."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Für ein Video braucht niemand deine Adresse.",
+        "feedbackCorrect": "Genau. Für ein Video braucht niemand deine Adresse. Das passt nicht zum Zweck.",
         "feedbackWrong": [
-          "Für ein Video braucht niemand deine Adresse.",
-          "Auch die E-Mail-Adresse ist privat.",
+          "Für ein Video braucht niemand deine Adresse. Das passt nicht zum Zweck.",
+          "Auch die E-Mail-Adresse braucht die Seite für ein Video nicht. Das passt nicht zum Zweck.",
           null
-        ]},
+        ],
+        "remember": "Ich gebe nur nötige Daten weiter.",
+        "art": "A",
+        "pruefziel": "Wofür? Passt die Angabe zum Zweck?"
+      },
       {
+        "nachFehler": true,
         "hinweis": "Frag dich: Wofür braucht eine App deine Telefon-Nummer?",
         "question": "Eine kostenlose App fragt beim Anmelden nach deiner Telefon-Nummer. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
-          "Ich frage zuerst eine vertraute Person.",
-          "Ich gebe die Telefon-Nummer ein.",
-          "Ich gebe eine fremde Nummer ein."
+          "Ich prüfe: Braucht die App das? Sonst lasse ich das Feld leer.",
+          "Ich gebe die Telefon-Nummer ein. Sonst geht die App nicht.",
+          "Ich gebe eine fremde Nummer ein. Dann bleibt meine Nummer geheim."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Deine Telefon-Nummer ist privat. Frag lieber nach.",
+        "feedbackCorrect": "Genau. Du prüfst zuerst: Wofür braucht die App die Nummer? Ist sie nicht nötig? Dann lässt du das Feld leer.",
         "feedbackWrong": [
           null,
-          "Deine Telefon-Nummer kann dann an Fremde gehen.",
+          "Prüfe zuerst: Braucht die App deine Nummer wirklich? Sonst kann sie an Fremde gehen.",
           "Die Nummer von anderen Menschen gehört dir nicht."
-        ]},
-      {
-        "hinweis": "Überlege: Was ist auf dem Foto zu sehen? Und wer bekommt es?",
-        "question": "Du willst ein Foto senden. Was machst du zuerst?",
-        "pictogram": "pikto-photo",
-        "answers": [
-          "Sofort senden.",
-          "Foto prüfen.",
-          "Das Foto kleiner machen."
         ],
-        "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Du prüfst: Sind private Dinge zu sehen?",
-        "feedbackWrong": [
-          "Auf einem Foto können private Dinge zu sehen sein.",
-          null,
-          "Die Größe ändert nichts. Wichtig ist, was zu sehen ist."
-        ]},
+        "remember": "Ich gebe nur nötige Daten weiter.",
+        "art": "A",
+        "pruefziel": "Wofür? Erst selbst prüfen, sonst leer lassen"
+      },
       {
-        "hinweis": "Frag dich: Weißt du, wohin der Link führt?",
-        "question": "Eine fremde Nachricht schickt einen Link. Was ist besser?",
-        "pictogram": "pikto-stranger",
+        "nachFehler": true,
+        "art": "A",
+        "pruefziel": "Wofür? Und: „später ändern“ ist kein Grund für unnötige Erlaubnisse",
+        "question": "Du lädst eine Wecker-App. Sie fragt: Darf ich deine Kontakte sehen? Was machst du?",
+        "pictogram": "pikto-clock",
+        "hinweis": "Überlege: Was macht ein Wecker? Braucht er dafür Kontakte?",
         "answers": [
-          "Link sofort öffnen.",
-          "Den Link weiterschicken.",
-          "Link nicht sofort öffnen."
+          "Ich erlaube es. Sonst klingelt der Wecker vielleicht nicht.",
+          "Ich erlaube es. Ich kann das ja später wieder ändern.",
+          "Ich erlaube es nicht. Der Wecker klingelt auch ohne Kontakte."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Ein fremder Link kann gefährlich sein.",
+        "feedbackCorrect": "Genau. Für einen Wecker braucht die App keine Kontakte. Das passt nicht zum Zweck.",
         "feedbackWrong": [
-          "Ein fremder Link kann gefährlich sein.",
-          "Dann schickst du die Gefahr weiter.",
+          "Ein Wecker braucht keine Kontakte zum Klingeln. Das passt nicht zum Zweck.",
+          "Ändern kannst du die Erlaubnis später. Aber dann hat die App deine Kontakte schon gesehen. Darum prüfst du vorher.",
           null
-        ]},
-      {
-        "hinweis": "Stress ist ein Warnzeichen. Was hilft dir bei Stress?",
-        "question": "Eine Nachricht macht dir Stress. Was ist besser?",
-        "pictogram": "pikto-message",
-        "answers": [
-          "Schnell antippen.",
-          "Langsam machen.",
-          "Erst antworten, dann überlegen."
         ],
-        "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Du machst es langsam. Du überlegst zuerst.",
-        "feedbackWrong": [
-          "Stress ist ein Warnzeichen. Schnell antippen ist gefährlich.",
-          null,
-          "Antworten kannst du nicht zurücknehmen. Überlege zuerst."
-        ]},
+        "remember": "Ich erlaube nur, was die App braucht."
+      },
       {
-        "hinweis": "Ein Passwort ist wie ein Schlüssel. Wem gibst du deinen Schlüssel?",
-        "question": "Wer darf dein Passwort kennen?",
-        "pictogram": "pikto-key",
+        "nachFehler": true,
+        "art": "C",
+        "pruefziel": "Wie viel ist nötig? Hier braucht der Zweck mehr: Immer",
+        "question": "Dein Handy hat eine Funktion: Handy finden. Ist dein Handy weg? Dann zeigt sie dir den Ort von deinem Handy. Die Funktion fragt nach deinem Standort. Was passt?",
+        "pictogram": "pikto-location",
+        "hinweis": "Überlege: Wann brauchst du die Funktion? Benutzt du dann dein Handy?",
         "answers": [
-          "Nur ich.",
-          "Alle in der Gruppe.",
-          "Die Firma von der App."
+          "Nur beim Benutzen erlauben.",
+          "Nicht erlauben.",
+          "Immer erlauben."
+        ],
+        "correctIndex": 2,
+        "feedbackCorrect": "Genau. Dein Handy ist weg? Dann benutzt du es nicht. Die Funktion muss es trotzdem finden. Dafür braucht sie den Standort immer.",
+        "feedbackWrong": [
+          "Dein Handy ist weg? Dann benutzt du es nicht. Dann findet die Funktion es auch nicht. Hier braucht sie den Standort immer.",
+          "Das darfst du so wählen. Aber dann hilft dir die Funktion nicht. Dein Handy ist weg? Dann findest du es nicht.",
+          null
+        ],
+        "remember": "Ich erlaube nur, was die App braucht."
+      },
+      {
+        "nachFehler": true,
+        "art": "A",
+        "pruefziel": "Was genau? Nur den privaten Teil entfernen, nicht alles verweigern",
+        "question": "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?",
+        "pictogram": "pikto-house",
+        "hinweis": "Überlege: Welcher Teil vom Foto ist privat?",
+        "answers": [
+          "Ich schicke ein Foto ohne den Brief.",
+          "Ich schicke das Foto so.",
+          "Ich schicke gar keine Fotos mehr."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Nur du darfst dein Passwort kennen.",
+        "feedbackCorrect": "Genau. Nur der Brief ist privat. So geht das: Du schneidest den Brief weg. Oder du machst ein neues Foto ohne Brief.",
         "feedbackWrong": [
           null,
-          "Dein Passwort ist nicht für die Gruppe.",
-          "Auch die Firma fragt nie nach deinem Passwort."
-        ]},
+          "Dann können andere deine Adresse lesen. Die Adresse muss niemand sehen.",
+          "Das ist nicht nötig. Nur der Brief ist das Problem. Ohne Brief kannst du das Foto schicken."
+        ],
+        "remember": "Ich prüfe Fotos vor dem Senden."
+      },
       {
+        "nachFehler": true,
+        "art": "–",
+        "pruefziel": "Rückfall: unsicher – noch nichts freigeben, erst prüfen oder Unterstützung holen",
+        "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
+        "pictogram": "pikto-house",
+        "hinweis": "Überlege: Weißt du, wofür die App deine Adresse will?",
+        "answers": [
+          "Ich trage die Adresse ein. Die App wird sie schon brauchen.",
+          "Ich trage noch nichts ein. Ich prüfe erst: Wofür? Oder ich hole mir Unterstützung.",
+          "Ich trage eine falsche Adresse ein. Das merkt die App nicht."
+        ],
+        "correctIndex": 1,
+        "feedbackCorrect": "Genau. Du bist unsicher? Dann gibst du noch nichts frei. Erst prüfen. Oder Unterstützung holen.",
+        "feedbackWrong": [
+          "Du weißt nicht: Wofür will die App die Adresse? Dann gib noch nichts ein. Erst prüfen.",
+          null,
+          "Eine falsche Adresse ist keine gute Lösung. Vielleicht braucht die App sie ja wirklich. Prüfe erst: Wofür?"
+        ],
+        "remember": "Unsicher? Noch nichts freigeben."
+      },
+      {
+        "nachFehler": true,
+        "art": "–",
+        "pruefziel": "Folgen kennen: Erlaubnis änderbar – Verschicktes oft nicht zurückholbar",
+        "question": "Vor einem Monat hast du einer App deinen Standort erlaubt. Und du hast ein Foto in eine Gruppe geschickt. Was kannst du jetzt noch ändern?",
+        "pictogram": "pikto-lock",
+        "hinweis": "Überlege: Was liegt noch bei dir? Und was haben andere schon?",
+        "answers": [
+          "Die Erlaubnis für den Standort. Das Foto haben andere vielleicht schon gespeichert.",
+          "Beides. Ich lösche das Foto einfach in der Gruppe. Dann ist es weg.",
+          "Gar nichts. Eine Erlaubnis gilt für immer."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Genau. Eine Erlaubnis kannst du oft ändern. Ein verschicktes Foto kannst du oft nicht zurückholen. Darum prüfst du vorher.",
+        "feedbackWrong": [
+          null,
+          "Die Erlaubnis kannst du in den Einstellungen ändern. Das Foto aber vielleicht nicht mehr. Andere können es schon gespeichert haben.",
+          "Die Erlaubnis für den Standort kannst du noch ändern. In den Einstellungen. Das lohnt sich."
+        ],
+        "remember": "Ich prüfe Fotos vor dem Senden."
+      },
+      {
+        "nachFehler": true,
         "hinweis": "Denk an deinen Plan aus diesem Thema. Womit fängt er an?",
         "question": "Was ist eine gute Regel für deine Daten?",
         "pictogram": "pikto-lock",
         "answers": [
           "Immer sofort eingeben.",
           "Nie etwas eingeben.",
-          "Erst prüfen. Dann eingeben."
+          "Erst prüfen. Dann entscheiden."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Erst prüfen. Dann eingeben.",
+        "feedbackCorrect": "Genau. Erst prüfst du: Wer? Was? Wofür? Dann entscheidest du. Manchmal gibst du Daten. Manchmal nicht.",
         "feedbackWrong": [
-          "Prüfe erst, wer die Daten haben will.",
-          "Manchmal ist es in Ordnung. Wichtig ist: erst prüfen.",
+          "Sofort eingeben ist zu schnell. Prüfe erst: Wer will die Daten? Und wofür?",
+          "Du darfst Nein sagen. Manchmal braucht jemand deine Daten aber wirklich. Wichtig ist: Erst prüfen. Dann selbst entscheiden.",
           null
-        ]}
+        ],
+        "remember": "Erst prüfen. Dann entscheide ich.",
+        "art": "–",
+        "pruefziel": "Der Plan: erst prüfen, dann selbst entscheiden (nicht immer Nein)"
+      }
     ],
     "helpQuestions": [
-      "Muss ich diese Daten eingeben?",
-      "Weiß ich, wer die Daten bekommt?",
-      "Macht die Nachricht Stress?",
-      "Ist der Link fremd?",
+      "Wer bekommt meine Daten? Wer kann sie sehen?",
+      "Was genau soll ich geben?",
+      "Wofür? Ist das nötig?",
       "Brauche ich Unterstützung?"
     ],
     "memoryRules": [
-      "Private Daten gehören zu mir.",
-      "Mein Passwort bleibt geheim.",
-      "Ich nehme ein gutes, langes Passwort.",
-      "Ich gebe private Daten nicht einfach ein.",
-      "Ich prüfe Fotos vor dem Senden.",
-      "Ich öffne fremde Links nicht sofort.",
-      "Ich mache langsam bei komischen Nachrichten.",
-      "Ich darf mir Unterstützung holen."
+      "Stopp. Ich prüfe zuerst.",
+      "Wer bekommt es? Wer kann es sehen?",
+      "Was genau soll ich geben?",
+      "Wofür? Wie viel davon ist nötig?",
+      "Ich entscheide.",
+      "Unsicher? Noch nichts freigeben. Erst prüfen oder Unterstützung holen."
     ],
     "qrLink": "index.html#thema-datenschutz",
     "qrShortLink": "index.html#thema-datenschutz:kurz",
     "qrQuizLink": "index.html#thema-datenschutz:quiz",
     "qrMemoryLink": "index.html#thema-datenschutz:merk",
-    "einfachQuiz": [0, 1, 5],
+    "einfachQuiz": [
+      0,
+      1,
+      4
+    ],
     "einfachLessons": [
       {
-        "title": "Deine privaten Daten",
+        "title": "Deine Daten",
         "module": "Einfach",
         "pictogram": "pikto-data",
         "icon": "lock",
+        "ketteSchritt": 3,
         "text": [
-          "Du hast private Daten.",
-          "Das ist dein Name.",
-          "Das ist deine Adresse.",
-          "Das ist dein Passwort.",
-          "Diese Daten gehören nur dir."
+          "Deine Daten sagen etwas über dich.",
+          "Zum Beispiel dein Name, deine Adresse, deine Fotos und dein Standort.",
+          "Manche Daten sind besonders wichtig. Zum Beispiel deine Gesundheit und deine Bank-Daten.",
+          "Dein Passwort ist geheim.",
+          "Du entscheidest: Wer bekommt deine Daten?"
         ],
-        "remember": "Private Daten sind nur für dich.",
+        "examples": [
+          {
+            "art": "B",
+            "text": "Deine Ärztin fragt: Was tut dir weh? Du sagst es ihr. Sie braucht das für die Behandlung."
+          },
+          {
+            "art": "A",
+            "text": "Ein Quiz im Internet fragt nach deinen Krankheiten. Für ein Quiz braucht es die nicht."
+          }
+        ],
+        "remember": "Private Daten gehören zu mir.",
         "vorbildWer": "Alex",
         "vorbild": [
-          "Ein Gewinn-Spiel will die Adresse von Alex.",
-          "Und seine Telefon-Nummer.",
-          "Alex denkt: Das sind private Daten.",
-          "Er gibt sie nicht ein."
-        ]
+          "Alex will ein Bank-Konto.",
+          "Die Bank fragt nach seinem Ausweis.",
+          "Alex denkt: Das sind besonders wichtige Daten.",
+          "Er prüft: Wofür will die Bank den Ausweis? Mit dem Ausweis prüft die Bank: Ist das wirklich Alex?",
+          "Das passt zum Bank-Konto.",
+          "Alex entscheidet: Er zeigt den Ausweis."
+        ],
+        "practice": {
+          "nachFehler": true,
+          "art": "B",
+          "pruefziel": "Besonders wichtige Daten erkennen – und geben, wenn der Zweck es braucht (Was? Wofür?)",
+          "question": "Du fängst eine neue Arbeit an. Die Firma will deine Konto-Nummer. Sie will dir deinen Lohn überweisen. Was machst du?",
+          "pictogram": "pikto-bank",
+          "hinweis": "Überlege: Wer will die Nummer? Und wofür?",
+          "answers": [
+            "Ich gebe die Konto-Nummer. Die Firma braucht sie für meinen Lohn.",
+            "Ich gebe die Konto-Nummer nicht. Bank-Daten sind besonders wichtig.",
+            "Ich gebe die Konto-Nummer. Und ein Foto von meiner Bank-Karte. Dann geht es schneller."
+          ],
+          "correctIndex": 0,
+          "feedbackCorrect": "Genau. Die Konto-Nummer ist wichtig. Aber die Firma braucht sie für deinen Lohn. Du kennst die Firma. Dann gibst du sie.",
+          "feedbackWrong": [
+            null,
+            "Bank-Daten sind wichtig. Aber hier gibt es einen klaren Zweck: deinen Lohn. Ohne Konto-Nummer bekommst du kein Geld. Private Daten heißt nicht: immer Nein.",
+            "Die Firma braucht nur die Konto-Nummer. Ein Foto von deiner Bank-Karte braucht sie nicht. Mit dem Foto kann jemand mit deiner Karte bezahlen."
+          ],
+          "remember": "Ich gebe nur nötige Daten weiter."
+        }
       },
       {
-        "title": "Dein Passwort",
+        "title": "Nötig oder nicht?",
         "module": "Einfach",
-        "pictogram": "pikto-lock",
-        "icon": "lock",
+        "pictogram": "pikto-search",
+        "icon": "check",
+        "ketteSchritt": 4,
         "text": [
-          "Du hast ein Passwort.",
-          "Das Passwort ist geheim.",
-          "Du sagst es niemandem.",
-          "Auch nicht guten Freunden.",
-          "Dein Passwort ist lang und schwer zu erraten."
+          "Eine App oder ein Formular will Daten von dir.",
+          "Du prüfst: Wofür sind die Daten? Und welche Daten passen dazu?",
+          "In einem Formular gibt es Pflicht-Felder. Es gibt auch freiwillige Felder. Freiwillige Felder darfst du leer lassen.",
+          "Du bist unsicher? Dann gib noch nichts ein. Hol dir Unterstützung."
         ],
-        "remember": "Dein Passwort bleibt geheim.",
+        "examples": [
+          {
+            "art": "B",
+            "text": "Ein Shop braucht deine Adresse für das Paket."
+          },
+          {
+            "art": "A",
+            "text": "Eine Taschenlampen-App will deine Kontakte."
+          },
+          {
+            "art": "C",
+            "text": "Eine Wetter-App will deinen Standort. Oder du tippst deine Stadt selbst ein."
+          }
+        ],
+        "remember": "Ich gebe nur nötige Daten weiter.",
         "vorbildWer": "Tilda",
         "vorbild": [
-          "Ein Kollege fragt Tilda nach ihrem Passwort.",
-          "Er will nur kurz etwas nachsehen.",
-          "Tilda sagt: Nein.",
-          "Mein Passwort bleibt geheim."
-        ]
+          "Tilda meldet sich im Internet bei der Bücherei an.",
+          "Das Formular fragt nach ihrem Namen und ihrer Adresse. Das ist Pflicht.",
+          "Tilda prüft: Wofür? Die Bücherei braucht das für den Ausweis. Das ist nötig.",
+          "Die Telefon-Nummer ist freiwillig.",
+          "Tilda lässt das Feld leer."
+        ],
+        "practice": {
+          "typ": "felder",
+          "nachFehler": true,
+          "remember": "Ich gebe nur nötige Daten weiter.",
+          "question": "Was gibst du bei der Fitness-App an?",
+          "art": "A+B+C",
+          "pruefziel": "Pflicht, freiwillig und Zweck getrennt prüfen: Was passt zu meinem Ziel?",
+          "hinweis": "Überlege: Was willst du mit der App? Welche Angaben passen dazu? Welche Felder sind freiwillig? Du kannst auch erst prüfen.",
+          "situation": {
+            "leicht": "Du willst eine Fitness-App nutzen. Sie zählt deine Schritte. Und sie zeigt: So viele Kalorien hast du verbraucht. Das willst du sehen. Für die App brauchst du ein Konto."
+          },
+          "formular": {
+            "titel": "Fitness-App: Konto anlegen"
+          },
+          "felder": [
+            {
+              "name": "E-Mail",
+              "pflicht": true,
+              "zweck": "passt",
+              "wofuer": "Für dein Konto. Mit der E-Mail meldest du dich an.",
+              "rueckmeldung": {
+                "angegeben": "Pflicht heißt nur: Ohne E-Mail geht es nicht weiter. Hier passt sie auch zum Zweck. Mit der E-Mail meldest du dich in deinem Konto an.",
+                "leer": "Pflicht heißt: Ohne E-Mail geht es nicht weiter. Die E-Mail passt hier zum Zweck. Willst du die App nutzen? Dann gib sie an. Sonst nutzt du die App nicht."
+              }
+            },
+            {
+              "name": "Gewicht",
+              "pflicht": false,
+              "zweck": "deine-wahl",
+              "sensibel": true,
+              "wofuer": "Mit dem Gewicht berechnen wir deine Kalorien.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Du willst deine Kalorien sehen. Dafür braucht die App dein Gewicht. Das passt zu deinem Ziel.",
+                "leer": "Das Feld ist freiwillig. Du kannst Nein sagen. Dann bekommt die App dein Gewicht nicht. Deine Kalorien kann sie dann vielleicht nicht berechnen. Die Schritte zählt sie trotzdem. Du entscheidest."
+              }
+            },
+            {
+              "name": "Telefon-Nummer",
+              "pflicht": false,
+              "zweck": "passt-nicht",
+              "wofuer": "Für Angebote per SMS.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Die Nummer ist nur für Werbung. Für Schritte und Kalorien braucht die App sie nicht.",
+                "leer": "Das Feld ist freiwillig. Die Nummer ist nur für Werbung. Für dein Ziel braucht die App sie nicht."
+              }
+            },
+            {
+              "name": "Geburts-Datum",
+              "pflicht": false,
+              "zweck": "passt-nicht",
+              "wofuer": "Wir gratulieren dir zum Geburtstag.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Der Gruß zum Geburtstag gehört nicht zu deinem Ziel. Für Schritte und Kalorien braucht die App das nicht.",
+                "leer": "Das Feld ist freiwillig. Der Gruß zum Geburtstag gehört nicht zu deinem Ziel."
+              }
+            }
+          ],
+          "ausweg": {
+            "nichtNutzen": "Ich lege kein Konto an."
+          },
+          "auswegRueckmeldung": {
+            "nichtNutzen": "Das ist deine Entscheidung. Das ist in Ordnung. Dann nutzt du die App nicht."
+          }
+        }
       },
       {
-        "title": "Jemand fragt nach deinen Daten",
+        "title": "Wer sieht es?",
         "module": "Einfach",
-        "pictogram": "pikto-ask",
-        "icon": "warning",
+        "pictogram": "pikto-person",
+        "icon": "data",
+        "ketteSchritt": 2,
         "text": [
-          "Manchmal fragt jemand nach deinen Daten.",
-          "Das passiert in einer Nachricht.",
-          "Du gibst deine Daten nicht ein.",
-          "Du fragst zuerst eine vertraute Person.",
-          "Diese Person hilft dir."
+          "Du teilst etwas. Zum Beispiel ein Foto. Oder dein Profil.",
+          "Du prüfst: Wer kann das sehen? Alle? Oder nur deine Freunde?",
+          "Das kannst du oft einstellen. Und später ändern.",
+          "Ein Foto ist verschickt? Dann kannst du es oft nicht zurückholen. Darum prüfst du vorher.",
+          "Andere Personen auf dem Foto? Dann fragst du sie vorher."
         ],
-        "remember": "Erst fragen. Dann entscheiden.",
-        "vorbildWer": "Alex",
+        "examples": [
+          {
+            "art": "C",
+            "text": "Dein Wohnort im Profil: Sollen ihn alle sehen? Nur Freunde? Oder niemand? Das entscheidest du."
+          }
+        ],
+        "remember": "Ich wähle aus: Wer sieht meine Daten?",
+        "vorbildWer": "Tilda",
         "vorbild": [
-          "Alex bekommt eine E-Mail.",
-          "Er soll sein Geburts-Datum eingeben.",
-          "Alex gibt nichts ein.",
-          "Er zeigt die E-Mail zuerst seiner Betreuerin."
-        ]
+          "Tilda stellt ein neues Foto in ihr Profil.",
+          "Sie prüft: Wer kann das sehen?",
+          "Alle im Internet. Das will Tilda nicht.",
+          "Sie stellt ein: Nur Freunde."
+        ],
+        "practice": {
+          "nachFehler": true,
+          "art": "C",
+          "pruefziel": "Ich entscheide – Daten anderer: Menschen auf dem Foto entscheiden mit",
+          "question": "Du hast auf einer Feier ein Foto gemacht. Darauf sind 3 Freunde. Du willst es in deinen Status stellen. Was machst du?",
+          "pictogram": "pikto-people",
+          "hinweis": "Überlege: Wer ist noch auf dem Foto? Wer entscheidet mit?",
+          "answers": [
+            "Ich stelle es gleich rein. Ich habe das Foto ja gemacht.",
+            "Ich stelle es nur für 24 Stunden rein. Dann ist es wieder weg.",
+            "Ich frage die 3 vorher. Sagen alle Ja? Dann stelle ich es rein."
+          ],
+          "correctIndex": 2,
+          "feedbackCorrect": "Genau. Auf dem Foto sind auch deine Freunde. Sie entscheiden mit. Sagt einer Nein? Dann stellst du es nicht rein.",
+          "feedbackWrong": [
+            "Das Foto zeigt auch deine Freunde. Sie entscheiden mit. Frag sie vorher.",
+            "Auch in 24 Stunden kann jemand das Foto speichern. Dann ist es nicht weg. Frag deine Freunde vorher.",
+            null
+          ],
+          "remember": "Fotos von anderen: erst fragen."
+        }
       }
     ],
-    "miniQuestion": {
-      "question": "Welche Information bleibt geheim?",
-      "answers": [
-        "PIN und Passwort",
-        "Wetter",
-        "Lieblingsfarbe"
-      ],
-      "correct": 0,
-      "explanation": "PIN und Passwort bleiben geheim. Diese Daten darfst du nicht weitergeben."
+    "neueSituation": {
+      "aufgaben": [
+        {
+          "typ": "felder",
+          "nachFehler": true,
+          "remember": "Ich gebe nur nötige Daten weiter.",
+          "question": "Was gibst du für die Kunden-Karte an?",
+          "art": "A+B+C",
+          "pruefziel": "Anwenden: Karte (B), Pflicht-Angabe mit unklarem Zweck – erst prüfen oder nicht nutzen, nicht als unnötig bewerten (unklar), freiwillige Angabe ohne Zweck (A), Einkäufe merken nach eigenem Ziel (C)",
+          "hinweis": "Überlege: Was willst du? Welche Angaben passen zur Karte und zu deinen Angeboten? Welche Felder sind freiwillig? Und weißt du bei jeder Angabe: wofür?",
+          "situation": {
+            "leicht": "Du kaufst oft im gleichen Supermarkt ein. Mit der Kunden-Karte wird manches billiger. Du willst die Karte haben. Und du willst gern Angebote für deinen Lieblings-Kaffee bekommen."
+          },
+          "formular": {
+            "adresse": "kundenkarte.supermarkt-beispiel.xyz",
+            "titel": "Deine Kunden-Karte"
+          },
+          "felder": [
+            {
+              "name": "Name",
+              "pflicht": true,
+              "zweck": "passt",
+              "wofuer": "Er steht auf deiner Karte.",
+              "rueckmeldung": {
+                "angegeben": "Pflicht heißt nur: Ohne Namen geht es nicht weiter. Hier passt er auch zum Zweck. Der Name steht auf deiner Karte.",
+                "leer": "Pflicht heißt: Ohne Namen geht es nicht weiter. Der Name passt hier zum Zweck. Willst du die Karte? Dann gib ihn an. Sonst nutzt du die Karte nicht."
+              }
+            },
+            {
+              "name": "E-Mail",
+              "pflicht": true,
+              "zweck": "passt",
+              "wofuer": "Über die E-Mail bekommst du deine Karte.",
+              "rueckmeldung": {
+                "angegeben": "Pflicht heißt nur: Ohne E-Mail geht es nicht weiter. Hier passt sie auch zum Zweck. Über die E-Mail bekommst du deine Karte.",
+                "leer": "Pflicht heißt: Ohne E-Mail geht es nicht weiter. Die E-Mail passt hier zum Zweck. Willst du die Karte? Dann gib sie an. Sonst nutzt du die Karte nicht."
+              }
+            },
+            {
+              "name": "Geburts-Datum",
+              "pflicht": true,
+              "zweck": "unklar",
+              "wofuer": null,
+              "rueckmeldung": {
+                "angegeben": "Pflicht heißt nur: Ohne Geburts-Datum geht es nicht weiter. Es heißt nicht: Du kennst den Zweck. Die Seite sagt nicht: wofür? Vielleicht gibt es einen guten Grund. Aber der Zweck ist für dich nicht klar. Dann gib es noch nicht ein. Prüfe erst. Oder nutze die Karte nicht.",
+                "leer": "Pflicht heißt nur: Ohne Geburts-Datum geht es nicht weiter. Es heißt nicht: Du kennst den Zweck. Die Seite sagt nicht: wofür? Vielleicht gibt es einen guten Grund. Aber der Zweck ist für dich nicht klar. Darum prüfst du erst. Oder du nutzt die Karte nicht."
+              }
+            },
+            {
+              "name": "Wie viele Kinder hast du?",
+              "pflicht": false,
+              "zweck": "passt-nicht",
+              "wofuer": null,
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Die Karte bekommst du also auch ohne diese Angabe. Und die Seite sagt nicht: wofür? Für dein Ziel musst du das nicht angeben.",
+                "leer": "Das Feld ist freiwillig. Die Karte bekommst du also auch ohne diese Angabe. Und die Seite sagt nicht: wofür? Für dein Ziel musst du das nicht angeben."
+              }
+            },
+            {
+              "name": "Einkäufe merken",
+              "pflicht": false,
+              "zweck": "deine-wahl",
+              "wofuer": "Dürfen wir uns deine Einkäufe merken? Dann bekommst du passende Angebote.",
+              "zustand": {
+                "an": "Ja",
+                "aus": "Nein"
+              },
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Du willst Angebote für deinen Kaffee. Dafür passt das. Das kannst du später wieder ändern.",
+                "leer": "Das Feld ist freiwillig. Du kannst Nein sagen. Dann merkt sich der Supermarkt deine Einkäufe nicht. Passende Angebote für deinen Kaffee bekommst du dann vielleicht nicht. Du entscheidest."
+              }
+            }
+          ],
+          "ausweg": {
+            "nichtNutzen": "Ich bestelle die Karte nicht."
+          },
+          "auswegRueckmeldung": {
+            "nichtNutzen": "Das ist deine Entscheidung. Das ist in Ordnung. Beim Geburts-Datum ist der Zweck nicht klar. Du gibst es nicht ein. Du kaufst dann ohne Karte ein.",
+            "erstPruefen": "Das ist in Ordnung. Beim Geburts-Datum ist der Zweck nicht klar. Dann gibst du es noch nicht ein. Du prüfst erst. Zum Beispiel: Du fragst im Supermarkt nach. Oder du holst dir Unterstützung. Danach entscheidest du."
+          }
+        },
+        {
+          "typ": "felder",
+          "nachFehler": true,
+          "remember": "Ich gebe nur nötige Daten weiter.",
+          "nurLang": true,
+          "question": "Was gibst du für den Termin an?",
+          "art": "A+B+C",
+          "pruefziel": "Heikel, aber passend: Name und Geburts-Datum für den Termin (B); Gesundheits-Angabe freiwillig und knapp (C); Statistik nicht nötig (A)",
+          "hinweis": "Überlege: Was braucht die Praxis für deinen Termin? Welche Angaben sind freiwillig? Welche sind sehr privat?",
+          "situation": {
+            "leicht": "Du hast Zahn-Schmerzen. Du willst schnell einen Termin bei deiner Zahn-Ärztin. Du kennst die Praxis. Auf deiner Termin-Karte steht die Adresse von der Termin-Seite. Du tippst sie selbst ein."
+          },
+          "formular": {
+            "adresse": "zahnpraxis-berg-beispiel.xyz/termin",
+            "titel": "Zahnarzt-Praxis Berg: Termin online"
+          },
+          "felder": [
+            {
+              "name": "Name",
+              "pflicht": true,
+              "zweck": "passt",
+              "wofuer": "Wir wollen wissen: Wer kommt?",
+              "rueckmeldung": {
+                "angegeben": "Pflicht heißt nur: Ohne Namen geht es nicht weiter. Hier passt er auch zum Zweck. Die Praxis muss wissen: Wer kommt?",
+                "leer": "Pflicht heißt: Ohne Namen geht es nicht weiter. Der Name passt hier zum Zweck. Du willst nicht online buchen? Dann ruf in der Praxis an."
+              }
+            },
+            {
+              "name": "Geburts-Datum",
+              "pflicht": true,
+              "zweck": "passt",
+              "sensibel": true,
+              "wofuer": "So finden wir deine Unterlagen. Manche Menschen haben den gleichen Namen.",
+              "rueckmeldung": {
+                "angegeben": "Pflicht heißt nur: Ohne Geburts-Datum geht es nicht weiter. Hier passt es auch zum Zweck. So findet die Praxis deine Unterlagen. Du kennst die Praxis. Du hast die Seite selbst geöffnet.",
+                "leer": "Pflicht heißt: Ohne Geburts-Datum geht es nicht weiter. Es passt hier zum Zweck. Du willst das nicht online angeben? Dann ruf in der Praxis an."
+              }
+            },
+            {
+              "name": "Grund für den Termin",
+              "pflicht": false,
+              "zweck": "deine-wahl",
+              "sensibel": true,
+              "wofuer": "Dann planen wir genug Zeit ein.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Das ist eine Gesundheits-Angabe. Sie hilft der Praxis beim Planen. Schreib nur kurz: Zahn-Schmerzen. Mehr muss nicht sein.",
+                "leer": "Das Feld ist freiwillig. Das ist eine Gesundheits-Angabe. Du kannst Nein sagen. Dann plant die Praxis vielleicht nicht genug Zeit ein. Du kannst den Grund auch in der Praxis sagen. Du entscheidest."
+              }
+            },
+            {
+              "name": "Wie hast du von uns erfahren?",
+              "pflicht": false,
+              "zweck": "passt-nicht",
+              "wofuer": "Für unsere Statistik.",
+              "rueckmeldung": {
+                "angegeben": "Das Feld ist freiwillig. Die Statistik ist für die Praxis. Für deinen Termin braucht sie das nicht.",
+                "leer": "Das Feld ist freiwillig. Für deinen Termin braucht die Praxis das nicht."
+              }
+            }
+          ],
+          "ausweg": {
+            "nichtNutzen": "Ich buche nicht online. Ich rufe an."
+          },
+          "auswegRueckmeldung": {
+            "nichtNutzen": "Das ist deine Entscheidung. Das ist in Ordnung. Am Telefon bekommst du auch einen Termin."
+          }
+        }
+      ]
     }
   },
   {

@@ -27,57 +27,8 @@
 
 const EXTRA_PRACTICE = {
 
-  datenschutz: {
-    lessons: {
-      "Was sind private Daten?": {
-        question: "Was davon ist eine private Angabe?",
-        pictogram: "pikto-data",
-        answers: ["Deine Telefon-Nummer.", "Das Wetter von heute."],
-        correctIndex: 0,
-        feedbackWrong: "Das Wetter weiß jeder. Deine Telefon-Nummer gehört nur dir.",
-        feedbackCorrect: "Deine Telefon-Nummer gehört zu dir.",
-        remember: "Private Daten gehören zu mir."
-      },
-      "Besonders wichtige Daten": {
-        question: "Welche Angabe schützt du am besten?",
-        pictogram: "pikto-key",
-        answers: ["Deine Lieblings-Farbe.", "Deine Bank-Daten."],
-        correctIndex: 1,
-        feedbackWrong: "Die Lieblings-Farbe schadet niemandem. Mit Bank-Daten kann man dir Geld nehmen.",
-        feedbackCorrect: "Genau. Mit Bank-Daten kann jemand großen Schaden machen.",
-        remember: "Besonders wichtige Daten gebe ich nicht weiter."
-      }
-    },
-    kurz: {
-      "Deine privaten Daten": {
-        question: "Wem gehören deine privaten Daten?",
-        pictogram: "pikto-person",
-        answers: ["Nur mir.", "Allen im Internet."],
-        correctIndex: 0,
-        feedbackWrong: "Nein. Deine Daten gehören dir. Du entscheidest.",
-        feedbackCorrect: "Genau. Du entscheidest über deine Daten.",
-        remember: "Private Daten sind nur für mich."
-      },
-      "Dein Passwort": {
-        question: "Deine beste Freundin fragt nach deinem Passwort. Was machst du?",
-        pictogram: "pikto-lock",
-        answers: ["Ich sage es ihr.", "Ich sage es auch ihr nicht."],
-        correctIndex: 1,
-        feedbackWrong: "Ein Passwort bleibt geheim. Auch bei Menschen, die du magst.",
-        feedbackCorrect: "Ein Passwort bleibt geheim. Immer.",
-        remember: "Mein Passwort bleibt geheim."
-      },
-      "Jemand fragt nach deinen Daten": {
-        question: "Eine Nachricht fragt nach deinen Daten. Was tust du zuerst?",
-        pictogram: "pikto-ask",
-        answers: ["Ich frage eine vertraute Person.", "Ich gebe die Daten ein."],
-        correctIndex: 0,
-        feedbackWrong: "Erst eingeben und dann fragen ist zu spät. Frag vorher.",
-        feedbackCorrect: "Sehr gut. Erst fragen. Dann entscheiden.",
-        remember: "Erst fragen. Dann entscheiden."
-      }
-    }
-  },
+  /* datenschutz: seit Paket 2 (28.09.2026) stehen die Übungen direkt in
+     topics.js. Die alten Einträge liegen in geparkt/datenschutz-umbau-2026-09-28.js. */
 
   whatsapp: {
     lessons: {

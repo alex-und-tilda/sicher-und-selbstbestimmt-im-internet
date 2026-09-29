@@ -44,6 +44,13 @@ const SCENARIOS = {
      DATENSCHUTZ – Einstellungen und ein Formular
      --------------------------------------------------------- */
   datenschutz: {
+    /* Vor-Nutzertest (29.09.2026): vorerst AUSGEBLENDET, nicht gelöscht.
+       Altbestand aus der Zeit vor dem Musterthema (Paket-6-Bericht, C1):
+       nur Leichte Sprache, je 2 Antworten, Ablehnen ist immer richtig,
+       absoluter Merksatz – passt nicht zur A/B/C-Lernlogik. Für eine spätere
+       fachliche Überarbeitung vorgemerkt; nicht einfach übersetzen.
+       getScenario() in app.js liefert für ausgeblendete Szenarien nichts. */
+    ausgeblendet: true,
     titel: "Dein Konto einstellen",
     typ: "einstellungen",
     kanal: "Einstellungen",
@@ -66,21 +73,6 @@ const SCENARIOS = {
           feedbackWrong: "Dein Geburts-Datum ist eine private Angabe. Fremde brauchen sie nicht. Betrüger können damit arbeiten.",
           feedbackCorrect: "Gut. Dein Geburts-Datum geht nur dich etwas an.",
           remember: "Mein Geburts-Datum bleibt privat."
-        }
-      },
-      {
-        inhalt: [
-          { typ: "hinweis", text: "Jetzt brauchst du ein Passwort." },
-          { typ: "schalter", label: "Passwort", wert: "Noch leer", hinweis: "Mindestens 12 Zeichen" }
-        ],
-        frage: {
-          question: "Welches Passwort ist besser?",
-          pictogram: "pikto-key",
-          answers: ["BlauerStuhlAmFenster7", "12345678"],
-          correctIndex: 0,
-          feedbackWrong: "Dieses Passwort ist zu einfach. Ein Programm findet es in einer Sekunde.",
-          feedbackCorrect: "Gut. Das ist lang. Und es ist leicht zu merken.",
-          remember: "Ich nehme ein langes Passwort."
         }
       },
       {

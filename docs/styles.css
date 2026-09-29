@@ -3452,6 +3452,13 @@ p.feedback-wrong {
   border-radius: 10px;
 }
 
+/* Vor-Nutzertest: im Dunkelmodus lag halbweiß unter heller Schrift (Kontrast 2,5:1). */
+@media (prefers-color-scheme: dark) {
+  .einfach-quiz-feedback-text {
+    background: rgba(255,255,255,0.08);
+  }
+}
+
 .einfach-quiz-next-actions {
   margin-top: 12px;
   display: flex;
@@ -4298,6 +4305,11 @@ body.lesson-view .orient-line {
 
 .answer-text {
   flex: 1;
+  /* Paket 6: sehr lange Wörter (z. B. ein Beispiel-Passwort) brechen um,
+     statt bei großer Schrift aus dem Knopf zu ragen. min-width: 0, damit
+     das Flex-Element überhaupt schmaler als das Wort werden darf. */
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .question-pikto {
@@ -4764,6 +4776,13 @@ body.simple-mode .practice-box {
   background: rgba(255,255,255,0.5);
   border-radius: 10px;
   padding: 12px 16px;
+}
+
+/* Paket 6: Im Dunkelmodus lag halbweiß unter heller Schrift (Kontrast 2,9:1). */
+@media (prefers-color-scheme: dark) {
+  .einfach-done-praise {
+    background: rgba(255,255,255,0.08);
+  }
 }
 
 .einfach-done-actions {
@@ -5675,6 +5694,10 @@ body.simple-mode .practice-box {
   justify-self: start;
   transform: none;
   margin: 0 0 2px;
+  /* Paket 6: darf umbrechen – ungebrochen machte „Dein nächstes Thema“
+     bei 320 px alle Themen-Karten 9 px zu breit (Vorlese-Knöpfe halb
+     außerhalb, WCAG 1.4.10). Bei normaler Breite bleibt es einzeilig. */
+  white-space: normal;
 }
 
 /* Der Vorlese-Knopf bleibt pro Thema erhalten (§1) – er steht rechts neben
@@ -7379,3 +7402,164 @@ body.lesson-view .orient-line { margin: 8px 0 12px; }
   padding: 10px 20px;
 }
 .small-footer-notice .test-meinung { margin-top: 4px; font-size: 1rem; }
+
+/* Weiterlern-Bereich (28.09.2026): sichtbar als ZUSATZ abgesetzt –
+   gestrichelter Rahmen statt der durchgezogenen Themen-Kästen. Farben nur
+   über Tokens (Dunkelmodus). */
+.weiterlernen-box { border: 2px dashed var(--ink-soft); background: var(--surface); }
+.weiterlernen-box h3 { margin-top: 0; }
+.weiterlernen-zusatz { font-size: 0.95rem; color: var(--ink-soft); margin: 0 0 8px; }
+.weiterlernen-rueckmeldung:empty { display: none; }
+.weiterlernen-rueckmeldung { margin-top: 12px; }
+
+/* Datenschutz-Musterthema, Paket 2 (28.09.2026): Lernlogik.
+   Nur über Daten eingeschaltet (Beispiel-Art, Plan-Schritt, Rückfall-Zeile,
+   Vorhersage). Farben nur über Tokens (Dunkelmodus). */
+.beispiel-art { color: var(--ink); }
+.kette-bezug {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.kette-bezug-nr {
+  flex: 0 0 auto;
+  min-width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.kette-rueckfall {
+  max-width: 34rem;
+  margin: 14px auto 0;
+  padding: 10px 14px;
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius-m);
+  color: var(--ink);
+  font-weight: 600;
+  text-align: left;
+}
+.kette-card .kette-rueckfall { margin-left: 0; }
+.kette-merken { margin: 0 0 14px; }
+.kette-merken h3 { margin-top: 0; }
+.vorhersage-situation {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.vorhersage-anfang { margin: 0 0 10px; }
+
+/* Datenschutz-Musterthema, Paket 4 (28.09.2026): Aufgabenformat
+   „Felder auswählen“. Echte Kontrollkästchen in <label>-Zeilen: die ganze
+   Zeile ist tippbar, mindestens 58 px hoch. Zustand als Wort und Symbol
+   (✓ Wird angegeben / – Bleibt leer), nicht nur als Farbe. Nur Tokens. */
+.felder-aufgabe { margin-top: 12px; }
+.felder-formular {
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 12px;
+  background: var(--surface);
+}
+.felder-adresse {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  word-break: break-all;
+}
+.felder-formular-titel { margin: 0 0 8px; font-weight: 700; }
+.felder-liste { border: 0; margin: 0; padding: 0; min-width: 0; }
+.felder-liste legend { padding: 0; margin: 0 0 6px; }
+.felder-anleitung { margin: 0 0 10px; color: var(--ink-soft); }
+.feld-zeile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  margin: 8px 0;
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface-soft);
+  color: var(--ink);
+  cursor: pointer;
+}
+.feld-zeile.is-an { border-color: var(--accent); background: var(--accent-soft); }
+.feld-zeile:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.feld-check { flex: 0 0 auto; width: 28px; height: 28px; margin: 0; accent-color: var(--accent); cursor: pointer; }
+.feld-text { flex: 1 1 0%; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.feld-name { font-weight: 700; }
+.feld-art { font-size: 0.95rem; font-weight: 600; }
+.feld-wofuer { font-size: 0.92rem; color: var(--ink-soft); }
+.feld-zustand { flex: 0 0 auto; font-size: 0.92rem; font-weight: 700; text-align: right; }
+@media (max-width: 480px) {
+  .feld-zeile { flex-wrap: wrap; }
+  .feld-zustand { width: 100%; padding-left: 40px; text-align: left; }
+}
+.felder-aktionen { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.felder-aktionen button { flex: 1 1 12rem; }
+.felder-rueckmeldung:empty { display: none; }
+.felder-rueckmeldung {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+.felder-rueckmeldung:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+.felder-rueckmeldung h3 { margin-top: 0; }
+.felder-summe { font-weight: 600; }
+.felder-ergebnis-liste { list-style: none; margin: 8px 0; padding: 0; }
+.feld-ergebnis {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0 8px 12px;
+  border-left: 4px solid var(--line);
+  margin: 6px 0;
+}
+.feld-ergebnis--passt { border-left-color: var(--good); }
+.feld-ergebnis--wahl { border-left-color: var(--accent); }
+.feld-ergebnis--zuviel, .feld-ergebnis--pruefen { border-left-color: var(--warn); }
+.feld-ergebnis-wahl { font-size: 0.92rem; color: var(--ink-soft); }
+.felder-gesperrt { margin-top: 0; }
+/* Paket 4, Handy: Name und „Pflicht/freiwillig“ in einer Zeile (Marke mit
+   Wort, nicht nur Farbe); weniger verschachtelte Innenabstände, damit die
+   Zeile auf 375 px breit genug bleibt (gemessen: vorher 240 px). */
+.feld-kopf { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.feld-art {
+  padding: 0 8px;
+  border: 1px solid var(--ink-soft);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+@media (max-width: 480px) {
+  .practice-box--felder { padding: 12px 10px; }
+  .felder-formular { padding: 8px; }
+  .feld-zeile { gap: 10px; padding: 8px 10px; }
+}
+/* Paket 4, Nachtrag 2: Lern-Schritt nach „erst prüfen“ / „nicht nutzen“. */
+.felder-lernschritt {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-s);
+  background: var(--accent-soft);
+}
+.felder-lernschritt p { margin: 4px 0; }
+.feld-zeile.is-fest { border-style: dashed; cursor: default; }
+.feld-zeile.is-fest .feld-check { cursor: default; }
+.feld-ergebnis--gesichert { border-left-color: var(--good); }

@@ -1,5 +1,5 @@
 /* =============================================================
-   DEINE KARTE – die 12 Regeln unter allen Themen
+   DEINE KARTE – die Regeln unter allen Themen (12, seit 28.09.2026: 13)
    -------------------------------------------------------------
    Stand 04.09.2026.
 
@@ -160,7 +160,27 @@ const REGELN = [
                 was:  "Sprich mit einer Person, der du vertraust, oder mit einer Beratungsstelle. Wenn die erste Person nicht helfen kann, darfst du jemand anderen fragen." },
     standard: { kurz: "Ich hole mir Unterstützung – bei einer vertrauten Person oder einer Beratungsstelle.",
                 was:  "Wende dich bei Unsicherheit oder Problemen an eine vertraute Person oder eine Beratungsstelle. Hilfe ist auch dann möglich, wenn du schon reagiert hast." },
-    muster: /hilfe|hilft|unterstützung|vertrau|jemand|melde|blockier|allein|erzähl|zeige die nachricht|gefühle|sprechen|plan|helfen/i }
+    muster: /hilfe|hilft|unterstützung|vertrau|jemand|melde|blockier|allein|erzähl|zeige die nachricht|gefühle|sprechen|plan|helfen/i },
+
+  /* 13. Regel – Datenminimierung (28.09.2026). `kurz`/`was` sind eine
+     ARBEITSFASSUNG in Leichter Sprache; Einfach und Alltag kommen in
+     Paket 5 (bis dahin greift die Rückfall-Ebene von regelText()).
+     Fachliche Arbeitsfassung: „Ich gebe nur Daten weiter, die dafür nötig
+     sind.“ Ob die Leicht-Fassung verstanden wird: Nutzertest.
+     `muster` trifft absichtlich nie: nur feste Zuordnungen über
+     REGEL_SAETZE, damit die Regel keine Sätze anderer Themen anzieht. */
+  { id: "noetig",    pikto: "pikto-data",
+    kurz: "Ich gebe nur nötige Daten weiter.",
+    was:  "Eine App will Daten von dir. Oder ein Formular. Du prüfst: Wofür braucht sie die Daten? Dann gibst du nur die nötigen Daten.",
+    einfach: {
+      kurz: "Ich gebe nur die Daten weiter, die nötig sind.",
+      was: "Wenn eine App oder ein Formular Daten von dir will, prüfst du: Wofür braucht sie die Daten? Dann gibst du nur die Daten, die dafür nötig sind."
+    },
+    standard: {
+      kurz: "Ich gebe nur die Daten weiter, die für den Zweck nötig sind.",
+      was: "Will eine App oder ein Formular Daten von dir, prüfst du den Zweck – und gibst nur die Daten weiter, die dafür nötig sind."
+    },
+    muster: /(?!)/ }
 ];
 
 /* Feste Zuordnung Merksatz -> Regel (Stand 25.09.2026, 244 Sätze; gleichartige
@@ -170,7 +190,6 @@ const REGELN = [
 const REGEL_SAETZE = {
   codes: [
     "Mein Passwort bleibt geheim.", // datenschutz
-    "Dein Passwort bleibt geheim.", // datenschutz
     "Ich gebe keinen WhatsApp-Code weiter.", // whatsapp
     "Mein WhatsApp-Code bleibt geheim.", // whatsapp
     "Deinen WhatsApp-Code niemals weitergeben.", // whatsapp
@@ -184,7 +203,6 @@ const REGEL_SAETZE = {
     "Meine Codes sage ich niemandem. Auch nicht am Telefon." // betrug
   ],
   links: [
-    "Ich öffne fremde Links nicht sofort.", // datenschutz
     "Ich öffne unbekannte Links nicht sofort.", // whatsapp
     "Fremde Links nicht antippen.", // whatsapp
     "Fremde Links tippe ich nicht an.", // whatsapp
@@ -231,14 +249,10 @@ const REGEL_SAETZE = {
     "Nur bei sicheren Shops einkaufen.", // einkaufen
     "Ich kaufe bei sicheren Shops.", // einkaufen
     "PayPal oder Rechnung ist sicherer.", // einkaufen
-    "Bank-Daten gebe ich nicht für ein Gewinnspiel.", // datenschutz
     "Ich frage mich: Habe ich das wirklich bestellt?", // betrug, einkaufen
     "Sehr billig und kein Impressum: Warnzeichen." // einkaufen
   ],
   druck: [
-    "Ich mache langsam bei komischen Nachrichten.", // datenschutz
-    "Eine Nachricht macht dir Stress? Dann mache ich langsam.", // datenschutz
-    "Etwas ist komisch? Dann habe ich einen Plan.", // datenschutz
     "Ich mache Pause bei Stress.", // whatsapp
     "Etwas stresst mich? Dann mache ich Pause.", // whatsapp
     "Ich mache Stopp. Dann prüfe ich.", // whatsapp
@@ -271,7 +285,7 @@ const REGEL_SAETZE = {
     "Ich prüfe, was auf dem Foto zu sehen ist.", // instagram
     "Ich frage andere, bevor ich ihr Bild poste.", // instagram
     "Auch Stories prüfe ich vor dem Posten.", // instagram
-    "Fotos von anderen: erst fragen.", // instagram
+    "Fotos von anderen: erst fragen.", // instagram, datenschutz (Paket 3)
     "Bilder können gespeichert werden.", // snapchat
     "Ich sende nur Bilder, die sicher sind.", // snapchat
     "Ich denke vor dem Senden nach.", // snapchat
@@ -280,13 +294,8 @@ const REGEL_SAETZE = {
   ],
   wersieht: [
     "Private Daten gehören zu mir.", // datenschutz
-    "Ich gebe private Daten nicht einfach ein.", // datenschutz
-    "Besonders wichtige Daten gebe ich nicht einfach weiter.", // datenschutz
-    "Besonders wichtige Daten gebe ich nicht weiter.", // datenschutz
-    "Ich gebe meine Adresse nicht einfach weiter.", // datenschutz
-    "Ich gebe meine Telefon-Nummer nicht einfach weiter.", // datenschutz
-    "Private Daten sind nur für dich.", // datenschutz
-    "Private Daten sind nur für mich.", // datenschutz
+    "Ich prüfe: Wer bekommt meine Daten?", // datenschutz (Paket 2)
+    "Ich wähle aus: Wer sieht meine Daten?", // datenschutz (Paket 2)
     "In Gruppen schreibe ich nur, was alle sehen dürfen.", // whatsapp
     "Der KI schreibe ich nichts Privates.", // whatsapp
     "Ich zeige nicht alles in meinem Profil.", // facebook
@@ -295,7 +304,7 @@ const REGEL_SAETZE = {
     "Dein Profil: nur Freunde sehen es.", // facebook
     "Mein Profil sehen nur Freunde.", // facebook
     "Ich schütze meinen Standort.", // instagram, snapchat
-    "Ich teile meinen Standort nicht einfach.", // instagram, snapchat
+    "Ich teile meinen Standort nicht einfach.", // instagram, snapchat, datenschutz
     "Konto auf privat stellen.", // instagram
     "Mein Konto ist privat.", // instagram
     "Standort ausschalten.", // snapchat
@@ -306,6 +315,9 @@ const REGEL_SAETZE = {
     "Mein Geburts-Datum bleibt privat." // datenschutz
   ],
   echt: [
+    /* Datenschutz, Paket 2: Brücke Betrug – bei einer unerwarteten Nachricht
+       zuerst prüfen, wer die Daten will (dieselbe Regel wie in WhatsApp/Betrug). */
+    "Ich prüfe erst: Wer will meine Daten?", // datenschutz
     "Ich prüfe fremde Nummern.", // whatsapp
     "Ich entscheide, wem ich antworte.", // whatsapp
     "Ich antworte fremden Nummern nicht sofort.", // whatsapp
@@ -426,16 +438,37 @@ const REGEL_SAETZE = {
     "Betrug ist nicht meine Schuld. Ich hole Hilfe.", // betrug
     "Bei Beleidigungen hole ich Unterstützung.", // facebook
     "Unbekannte Nachrichten: erst fragen.", // whatsapp
-    "Erst fragen. Dann entscheiden." // datenschutz – vorher „keine“, inhaltlich Hilfe holen (Paket C, Prüfgruppen-Test C-3)
+    /* Datenschutz, Paket 2: Rückfall-Regel – Unterstützung als Rückfall,
+       nicht als erster Schritt. „Erst fragen. Dann entscheiden.“ ist geparkt. */
+    "Unsicher? Noch nichts freigeben.", // datenschutz
+    "Unsicher? Noch nichts freigeben. Erst prüfen oder Unterstützung holen." // datenschutz (Merk-Karte)
+  ],
+  /* Datenminimierung (28.09.2026, Datenschutz-Umbau). Vorerst nur in
+     Datenschutz geübt – bewusst keine künstliche Zuordnung in anderen
+     Themen (Entscheidung der nutzenden Person: die Lernlogik bestimmt die
+     Zuordnung, nicht die Karten-Logik). Die Regel kann deshalb vorerst
+     „gefunden“, aber noch nicht „in 2 Themen erkannt“ werden. */
+  noetig: [
+    "Bank-Daten gebe ich nicht für ein Gewinnspiel.", // datenschutz
+    "Ich gebe nur nötige Daten weiter.", // datenschutz (Paket 2)
+    "Ich erlaube nur, was die App braucht.", // datenschutz (Paket 2)
+    "Ich teile meinen Standort nur so lange wie nötig.", // datenschutz (Paket 2)
+    "Erst prüfen. Dann entscheide ich." // datenschutz (Paket 2, Merksatz des Plans)
   ],
   keine: [
-    "Ich nehme ein gutes, langes Passwort.", // datenschutz
     "Ich nehme ein langes Passwort.", // datenschutz
     "Doppelt sichern schützt mein Konto.", // datenschutz
     "Mit Passkey brauche ich kein Passwort.", // datenschutz
     "KI ist in vielen Apps. Auch wenn ich sie nicht sehe.", // ki
     "KI ist in vielen Apps.", // ki
-    "Online-Käufe kann ich oft 14 Tage zurückgeben." // einkaufen
+    "Online-Käufe kann ich oft 14 Tage zurückgeben.", // einkaufen
+    /* Datenschutz, Paket 2: die 5 Schritte des Plans auf der Merk-Karte.
+       Es sind Plan-Schritte, keine eigenen Regeln der Karte. */
+    "Stopp. Ich prüfe zuerst.", // datenschutz
+    "Wer bekommt es? Wer kann es sehen?", // datenschutz
+    "Was genau soll ich geben?", // datenschutz
+    "Wofür? Wie viel davon ist nötig?", // datenschutz
+    "Ich entscheide." // datenschutz
   ]
 };
 
@@ -502,7 +535,7 @@ function regelById(id) {
    Betrug fehlt bewusst: „Erzähle einer Person von einem Trick“ passt
    zu keiner der 12 Regeln. Dort bleibt der Kasten ohne Regel. */
 const TRANSFER_REGEL = {
-  datenschutz: "codes",
+  datenschutz: "noetig",
   whatsapp:    "echt",
   facebook:    "wersieht",
   instagram:   "wersieht",
@@ -536,6 +569,16 @@ function pruefeRegelZuordnung() {
       });
     });
   }
+  /* Weiterlern-Bereiche (weiterlernen-de.js): ihre Sätze sind in Gebrauch,
+     zählen aber NICHT als Thema (kein „in 2 Themen erkannt“ dadurch). */
+  if (typeof WEITERLERNEN !== "undefined") {
+    Object.keys(WEITERLERNEN).forEach(function (tid) {
+      (WEITERLERNEN[tid].lektionen || []).forEach(function (l) {
+        add(l.remember, "weiterlernen:" + tid);
+        if (l.practice) add(l.practice.remember, "weiterlernen:" + tid);
+      });
+    });
+  }
   if (typeof SCENARIOS !== "undefined") {
     Object.keys(SCENARIOS).forEach(function (id) {
       (SCENARIOS[id].szenen || []).forEach(function (z) {
@@ -554,7 +597,7 @@ function pruefeRegelZuordnung() {
       return;
     }
     proRegel[id].saetze++;
-    Object.keys(saetze[s]).forEach(function (t) { proRegel[id].themen[t] = true; });
+    Object.keys(saetze[s]).forEach(function (t) { if (t.indexOf("weiterlernen:") !== 0) proRegel[id].themen[t] = true; });
   });
   const schwach = REGELN.filter(function (r) { return Object.keys(proRegel[r.id].themen).length < 2; });
   /* Neue Sätze ohne festen Eintrag (laufen über die Muster) und Einträge,

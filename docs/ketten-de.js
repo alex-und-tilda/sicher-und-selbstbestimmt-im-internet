@@ -3,6 +3,11 @@
    -------------------------------------------------------------
    Stand 11.09.2026. Pilot: ein Thema (Datenschutz).
    Seit 27.09.2026 für weitere Themen ausgerollt (siehe unten).
+   Seit 28.09.2026 ohne den Datenschutz-Stopp-Plan: Er war ein Plan gegen
+   Betrug (Betrug hat einen eigenen). Der alte Plan liegt wörtlich in
+   geparkt/datenschutz-umbau-2026-09-28.js. Seit Paket 2 (28.09.2026)
+   hat Datenschutz eine eigene Handlungskette (Stopp – Wer – Was –
+   Wofür/wie viel – Ich entscheide) mit Rückfall-Regel, ohne Film.
 
    WOZU
    Die Plattform hat fünf Wege, eine ENTSCHEIDUNG zu üben: die
@@ -85,155 +90,128 @@
 
 const KETTEN = {
 
+  /* DATENSCHUTZ – eigene Handlungskette (Datenschutz-Musterthema, Paket 2,
+     28.09.2026). Kein Plan gegen Betrug und kein Film: Sie gilt für jede
+     Situation, in der Daten weitergegeben oder sichtbar werden – Apps,
+     Formulare, Profil, Fotos, Standort. Fachlich: Soll-Architektur Kap. 3.2.
+     „Später ändern“ gehört NICHT in die Kette, sondern nur je nach Lage in
+     `hilfe` von Schritt 5 (Einstellungen ja, Weitergegebenes oft nicht).
+     `rueckfall` ist die dauerhafte Rückfall-Regel (Zeile in jedem Schritt).
+     Texte nur in Leichter Sprache (Arbeitsfassung), Stufen in Paket 5.
+     Die `tun`-Sätze stehen wortgleich in den Lektionen (Plan-Schritt je
+     Einheit, „Dein Plan für deine Daten“) und auf der Merk-Karte. */
   datenschutz: {
-    titel: "Dein Stopp-Plan",
-    lektion: "Was kann ich tun?",
-    merksatz: "Bei Stress mache ich Stopp. Dann frage ich nach.",
-
-    /* ---------------------------------------------------------
-       FILM – der Einstieg in die Kette.
-       Vier Takte: Ruhe → Störung → Entscheidung → Auflösung.
-       Er zeigt, WIE dieser Stress entsteht und wie man aussteigt. Danach
-       übernimmt die Kette mit den fünf Schritten.
-
-       Wichtig: Der Film läuft NICHT von allein. Jeder Takt wird
-       angetippt. Damit greift WCAG 2.2.2 (Pause/Stopp bei
-       Auto-Bewegung über 5 Sekunden) gar nicht erst – und die
-       Forschung empfiehlt genau das: „systemseitig segmentierte
-       Häppchen mit Weiter-Knopf" statt einer durchlaufenden
-       Animation, weil Bewegung flüchtige Information erzeugt
-       (Transient-Information-Effekt).
-
-       Der Text ist kein Beiwerk. Eine wortlose Animation allein
-       wäre riskant: Abstrakte Bildsprache hat für diese Zielgruppe
-       geringe Ikonizität. Deshalb steht zu jedem Takt ein Satz –
-       in allen drei Ebenen.
-       --------------------------------------------------------- */
-    film: {
-      titel: "So entsteht Stress",
-      /* Was das Bild zeigt, für Menschen die es nicht sehen (§9). */
-      bildbeschreibung: "Ein Handy liegt da. Eine Nachricht kommt an. Ein Punkt blinkt. Die Person dreht den Kopf weg und wartet. Dann wird das Handy umgedreht. Die Person wird ruhig.",
-      takte: [
-        {
-          name: "ruhe",
-          text: {
-            leicht:   "Dein Handy liegt da. Alles ist ruhig.",
-            einfach:  "Dein Handy liegt neben dir. Es ist nichts los.",
-            standard: "Das Handy liegt ruhig da. Nichts verlangt gerade deine Aufmerksamkeit."
-          }
-        },
-        {
-          name: "stoerung",
-          text: {
-            leicht:   "Eine Nachricht kommt. Sie macht dir Stress.",
-            einfach:  "Eine Nachricht kommt an. Sie drängt dich zu einer schnellen Antwort.",
-            standard: "Eine Nachricht trifft ein und drängt auf eine sofortige Reaktion. Genau das ist die Masche."
-          }
-        },
-        {
-          name: "entscheidung",
-          text: {
-            leicht:   "Du willst schnell antworten. Du wartest.",
-            einfach:  "Du willst sofort antworten. Aber du hältst kurz inne.",
-            standard: "Der Reflex ist, sofort zu antworten. Du unterbrichst ihn und hältst inne."
-          }
-        },
-        {
-          name: "aufloesung",
-          text: {
-            leicht:   "Du legst das Handy weg. Jetzt bist du ruhig.",
-            einfach:  "Du legst das Handy zur Seite. Der Stress lässt nach.",
-            standard: "Du legst das Gerät aus der Hand. Damit ist der Stress weg – und dein Plan beginnt."
-          }
-        }
-      ]
-    },
+    titel: "Dein Plan für deine Daten",
+    lektion: "Dein Plan für deine Daten",
+    merksatz: { leicht: "Erst prüfen. Dann entscheide ich.", einfach: "Erst prüfen, dann entscheide ich.", standard: "Erst prüfen, dann entscheiden." },
 
     einstieg: {
-      leicht:   "Eine Nachricht macht dir Stress. Dann hilft dir dein Plan. Wir gehen ihn zusammen durch. Schritt für Schritt.",
-      einfach:  "Wenn eine Nachricht dir Stress macht, hilft dir ein fester Plan. Wir gehen ihn jetzt zusammen durch, Schritt für Schritt.",
-      standard: "Solche Nachrichten wirken, weil sie zum sofortigen Handeln drängen und dabei Stress erzeugen. Ein eingeübter Ablauf nimmt ihnen genau das. Gehen wir ihn Schritt für Schritt durch."
+      leicht: "Jemand will Daten von dir. Oder du willst etwas teilen. Dann hilft dir dein Plan. Er hat 5 Schritte. Wir gehen ihn zusammen durch.",
+      einfach: "Wenn jemand Daten von dir will oder du selbst etwas teilen willst, hilft dir dein Plan. Er hat 5 Schritte, und wir gehen ihn jetzt zusammen durch.",
+      standard: "Ob jemand Daten von dir will oder du selbst etwas teilen möchtest: Dein Plan hilft dir dabei. Er hat fünf Schritte – gehen wir sie gemeinsam durch."
     },
 
     abschluss: {
-      leicht:   "Das ist dein Plan. Er hilft bei jeder Nachricht, die dir Stress macht.",
-      einfach:  "Das ist dein Plan. Er hilft dir bei jeder Nachricht, die dir Stress macht – egal von wem sie kommt.",
-      standard: "Das ist dein Ablauf für jede Nachricht, die auf Eile drängt. Er funktioniert unabhängig davon, welche Masche gerade im Umlauf ist."
+      leicht: "Das ist dein Plan. Manchmal gibst du Daten. Manchmal nicht. Du entscheidest selbst.",
+      einfach: "Das ist dein Plan. Manchmal gibst du Daten weiter, manchmal nicht. Das entscheidest du selbst.",
+      standard: "Das ist dein Plan. Manchmal gibst du Daten weiter, manchmal nicht – die Entscheidung liegt bei dir."
+    },
+
+    rueckfall: {
+      leicht: "Unsicher? Noch nichts freigeben. Erst prüfen oder Unterstützung holen.",
+      einfach: "Wenn du unsicher bist, gibst du noch nichts frei. Du prüfst erst oder holst dir Unterstützung.",
+      standard: "Bist du unsicher, gib noch nichts frei – prüfe erst oder hol dir Unterstützung."
+    },
+
+    /* Dieselbe Situation wie die Vorhersage am Einstieg (topics.js).
+       Bewusst EIN kompakter Baustein: Gemessen auf 375 x 812 schob die
+       erste Fassung (Hinweis + Formular, 489 px) „Gemacht“ auf y=1242 –
+       jetzt so hoch wie die Situation im Betrug-Plan. */
+    situation: {
+      ort: "Neue App",
+      inhalt: [
+        { typ: "nachricht", von: "App Foto-Spaß", text: {
+          leicht: "Ich mache deine Fotos schöner. Darf ich sehen: deine Fotos, deinen Standort, deine Kontakte?",
+          einfach: "Ich mache deine Fotos schöner. Darf ich deine Fotos, deinen Standort und deine Kontakte sehen?",
+          standard: "Ich verschönere deine Fotos. Darf ich auf deine Fotos, deinen Standort und deine Kontakte zugreifen?"
+        } }
+      ]
     },
 
     liste: [
       {
-        tun: "Ich antworte nicht sofort.",
+        tun: "Stopp. Ich prüfe zuerst.",
         pictogram: "pikto-pause",
         warum: {
-          leicht:   "Der Absender will eine schnelle Antwort. Die bekommt er nicht.",
-          einfach:  "Wer dir Stress macht, will eine schnelle Antwort von dir. Genau die bekommt er nicht, wenn du kurz wartest.",
-          standard: "Stress erzeugt Eile, und Eile schaltet das Nachdenken aus. Wer wartet, nimmt der Masche ihr wichtigstes Werkzeug."
+          leicht: "Du sollst etwas eintippen. Oder erlauben. Oder teilen. Halte zuerst kurz an. Dann hast du Zeit zum Prüfen.",
+          einfach: "Wenn du etwas eintippen, erlauben oder teilen sollst, hältst du zuerst kurz an. So hast du Zeit, alles zu prüfen.",
+          standard: "Sollst du etwas eintippen, erlauben oder teilen, halte zuerst kurz an. So gewinnst du Zeit zum Prüfen."
         },
         hilfe: {
-          leicht:   "Leg das Handy kurz weg.",
-          einfach:  "Leg das Handy kurz weg. Die Nachricht läuft dir nicht davon.",
-          standard: "Leg das Gerät kurz aus der Hand. Kein seriöses Anliegen verliert dadurch seine Gültigkeit."
+          leicht: "Du musst nicht sofort tippen. Niemand darf dich hetzen.",
+          einfach: "Du musst nicht sofort tippen. Niemand darf dich dabei hetzen.",
+          standard: "Du musst nicht sofort reagieren – niemand darf dich hetzen."
         }
       },
       {
-        tun: "Ich tippe nicht auf Links.",
-        pictogram: "pikto-link",
+        tun: "Wer bekommt es? Wer kann es sehen?",
+        pictogram: "pikto-person",
         warum: {
-          leicht:   "Ein Link kann falsch sein. Dann landest du auf einer falschen Seite.",
-          einfach:  "Ein Link sieht oft echt aus, führt aber auf eine gefälschte Seite, die deine Daten abgreift.",
-          standard: "Links lassen sich beliebig beschriften. Der sichtbare Text sagt nichts darüber aus, wohin er tatsächlich führt."
+          leicht: "Eine App? Eine Internet-Seite? Eine Person? Oder alle im Internet? Kennst du sie? Hast du das erwartet?",
+          einfach: "Bekommt es eine App, eine Internetseite, eine Person, oder können es alle im Internet sehen? Kennst du sie, und hast du das erwartet?",
+          standard: "Geht es an eine App, eine Website, eine Person – oder ist es für alle im Internet sichtbar? Kennst du den Empfänger, und hast du die Anfrage erwartet?"
         },
         hilfe: {
-          leicht:   "Tippe nichts an. Auch nicht aus Neugier.",
-          einfach:  "Tippe den Link nicht an, auch nicht aus Neugier. Ein Blick genügt manchmal schon.",
-          standard: "Öffne den Link nicht, auch nicht zum Nachsehen. Ruf die Seite bei Bedarf selbst über die bekannte Adresse auf."
+          leicht: "Du kennst den Shop? Dann darf er deine Adresse für ein Paket bekommen. Eine fremde Nachricht nicht.",
+          einfach: "Wenn du den Shop kennst, darf er deine Adresse für ein Paket bekommen. Eine fremde Nachricht bekommt sie nicht.",
+          standard: "Einem Shop, den du kennst, darfst du deine Adresse für die Lieferung geben – einer fremden Nachricht nicht."
         }
       },
       {
-        tun: "Ich gebe keine privaten Daten ein.",
+        tun: "Was genau soll ich geben?",
         pictogram: "pikto-data",
         warum: {
-          leicht:   "Private Daten sind zum Beispiel dein Passwort. Oder deine Bank-Daten.",
-          einfach:  "Passwort, Bankdaten und Ausweis-Nummer gehören dir allein. Kein echter Anbieter fragt danach per Nachricht.",
-          standard: "Seriöse Anbieter fragen Zugangsdaten niemals per Nachricht ab. Wer es doch tut, will sie missbrauchen."
+          leicht: "Schau genau hin: Welche Daten sind das? Zum Beispiel deine Fotos, dein Standort oder deine Kontakte.",
+          einfach: "Schau genau hin, um welche Daten es geht, zum Beispiel um deine Fotos, deinen Standort oder deine Kontakte.",
+          standard: "Schau genau hin, um welche Daten es geht – etwa Fotos, Standort oder Kontakte."
         },
         hilfe: {
-          leicht:   "Fragt ein Feld nach dem Passwort? Dann schließ die Seite.",
-          einfach:  "Wenn ein Feld nach deinem Passwort fragt, schließe die Seite einfach wieder.",
-          standard: "Sobald ein Formular nach Zugangsdaten verlangt, schließt du die Seite. Das ist immer die richtige Reaktion."
+          leicht: "Manche Daten sind besonders wichtig. Zum Beispiel deine Gesundheit oder deine Bank-Daten. Da prüfst du besonders genau.",
+          einfach: "Manche Daten sind besonders wichtig, zum Beispiel Angaben zu deiner Gesundheit oder deine Bankdaten. Bei diesen Daten prüfst du besonders genau.",
+          standard: "Bei besonders schützenswerten Daten wie Gesundheits- oder Bankdaten prüfst du besonders genau."
         }
       },
       {
-        tun: "Ich mache eine Pause.",
-        pictogram: "pikto-pause",
+        tun: "Wofür? Wie viel davon ist nötig?",
+        pictogram: "pikto-search",
         warum: {
-          leicht:   "In der Pause wird dein Kopf ruhig. Dann siehst du mehr.",
-          einfach:  "Eine kurze Pause nimmt den Stress heraus, und mit ruhigem Kopf erkennst du die Masche viel leichter.",
-          standard: "Abstand ist das wirksamste Mittel gegen solche Maschen. Wer eine Nacht darüber schläft, entscheidet fast immer anders."
+          leicht: "Was macht die App? Passt es dazu? Ist das Feld Pflicht oder freiwillig? Braucht die App es immer? Oder nur beim Benutzen?",
+          einfach: "Was macht die App, und passt die Anfrage dazu? Ist das Feld Pflicht oder freiwillig? Braucht die App es immer oder nur, während du sie benutzt?",
+          standard: "Was macht die App, und passt die Anfrage dazu? Ist das Feld Pflicht oder freiwillig? Braucht die App den Zugriff dauerhaft oder nur während der Nutzung?"
         },
         hilfe: {
-          leicht:   "Trink etwas. Geh ein paar Schritte.",
-          einfach:  "Trink etwas oder geh ein paar Schritte. Fünf Minuten reichen schon.",
-          standard: "Fünf Minuten Abstand genügen oft. Bei größeren Beträgen schläfst du besser eine Nacht darüber."
+          leicht: "Nötig: Ein Shop braucht deine Adresse für das Paket. Nicht nötig: Eine Taschenlampen-App will deine Kontakte. Kommt darauf an: Eine Wetter-App will deinen Standort.",
+          einfach: "Nötig: Ein Shop braucht deine Adresse für das Paket. Nicht nötig: Eine Taschenlampen-App will deine Kontakte. Kommt darauf an: Eine Wetter-App will deinen Standort.",
+          standard: "Erforderlich: Ein Shop braucht deine Adresse für die Lieferung. Nicht erforderlich: Eine Taschenlampen-App will deine Kontakte. Hängt vom Zweck ab: Eine Wetter-App möchte deinen Standort."
         }
       },
       {
-        tun: "Ich frage eine vertraute Person.",
-        pictogram: "pikto-ask",
+        tun: "Ich entscheide.",
+        pictogram: "pikto-done",
         warum: {
-          leicht:   "Zu zweit seht ihr mehr. Du darfst immer fragen.",
-          einfach:  "Zu zweit fällt eine Masche viel schneller auf, und du musst die Entscheidung nicht allein tragen.",
-          standard: "Eine zweite Meinung ist der stärkste Schutz. Betrugsmaschen funktionieren fast nur, solange niemand sonst davon weiß."
+          leicht: "Du gibst nur das Nötige. Den Rest nicht. Oder du nutzt die App gar nicht. Sind andere Menschen auf dem Foto? Dann fragst du sie vorher.",
+          einfach: "Du gibst nur das, was nötig ist, und den Rest nicht. Oder du nutzt die App gar nicht. Wenn andere Menschen auf einem Foto sind, fragst du sie vorher.",
+          standard: "Du gibst nur das Nötige frei und den Rest nicht – oder du nutzt die App gar nicht. Sind andere Menschen auf einem Foto, fragst du sie vorher."
         },
         hilfe: {
-          leicht:   "Zeig die Nachricht einer Person, der du vertraust.",
-          einfach:  "Zeig die Nachricht einer Person, der du vertraust. Das ist kein Umstand, das ist klug.",
-          standard: "Zeig die Nachricht einer Person, der du vertraust. Genau dafür ist ein Umfeld da."
+          leicht: "Eine Erlaubnis in der App kannst du oft später ändern. Ein Foto ist schon verschickt? Oder deine Daten? Die kannst du oft nicht zurückholen. Darum prüfst du vorher.",
+          einfach: "Eine Erlaubnis in einer App kannst du oft später ändern. Wenn ein Foto oder deine Daten schon verschickt sind, kannst du sie oft nicht zurückholen. Deshalb prüfst du vorher.",
+          standard: "Eine Berechtigung in einer App lässt sich oft später ändern. Verschickte Fotos oder Daten kannst du dagegen oft nicht zurückholen – deshalb prüfst du vorher."
         }
       }
     ]
   },
+
 
   betrug: {
     titel: "Dein Plan gegen Betrug",

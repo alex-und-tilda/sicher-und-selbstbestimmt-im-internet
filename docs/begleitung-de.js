@@ -23,28 +23,26 @@ const COMPANION = {
       digcomp: [
         { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
           bezug: "Erkennt einfache personenbezogene Daten und weiß, dass Privatsphäre-Einstellungen veränderbar sind." },
-        { code: "4.1", titel: "Schutz von Geräten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Sichert das eigene Gerät mit PIN, Passwort und Zwei-Faktor-Anmeldung – bei Bedarf mit Anleitung." },
         { code: "2.6", titel: "Verwaltung der digitalen Identität", stufe: "Stufe 1 · grundlegend, mit Anleitung",
           bezug: "Entscheidet mit Unterstützung, welche Angaben im Profil sichtbar sein sollen." }
       ],
       icf: [
         { code: "d177", titel: "Entscheidungen treffen",
-          bezug: "Wählt im Alltag selbst aus, welche Daten sie weitergibt und welche nicht." },
-        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
-          bezug: "Bleibt bei drängenden Anfragen ruhig und reagiert nicht sofort." },
+          bezug: "Wählt im Alltag selbst aus, welche Daten sie weitergibt und welche nicht – und schiebt die Entscheidung bei Unsicherheit auf." },
         { code: "e125", titel: "Produkte und Technologien zur Kommunikation (Umweltfaktor)",
           bezug: "Das eigene Gerät wird durch Schutz-Einstellungen zum unterstützenden Faktor statt zur Barriere." }
       ]
     },
     lernziele: [
-      "Die Teilnehmenden erkennen, welche Informationen als private bzw. personenbezogene Daten gelten.",
-      "Sie wissen, warum Passwort, PIN und Zugangsdaten geheim bleiben.",
-      "Sie können im Alltag entscheiden, welche Daten sie weitergeben – und welche nicht.",
-      "Sie kennen einen Handlungsschritt, wenn jemand unter Druck nach Daten fragt: Stopp – nicht sofort reagieren – Hilfe holen."
+      "Die Teilnehmenden erkennen, welche Informationen als persönliche bzw. personenbezogene Daten gelten – auch Standort, Fotos und Kontakte.",
+      "Sie prüfen bei einer Datenabfrage, wer die Daten erhält und wofür sie gebraucht werden, und unterscheiden, was dafür notwendig ist (Datenminimierung).",
+      "Sie entscheiden selbst, welche Daten sie weitergeben oder freigeben. Das schließt ein begründetes Ja ein, nicht nur ein Nein.",
+      "Bei Unsicherheit schieben sie die Entscheidung auf und holen sich gezielt Unterstützung."
     ],
     methodik: [
-      "Zwei-Faktor-Anmeldung gemeinsam am eigenen Gerät einrichten und den Ablauf einmal komplett durchspielen (BSI-Empfehlung 2026).",
+      "Roter Faden ist der 5-Schritte-Plan: Stopp – Wer bekommt oder sieht es? – Was genau? – Wofür, und wie viel davon ist nötig? – Ich entscheide. Bei Unsicherheit gilt die Rückfall-Regel: noch nichts freigeben, erst prüfen oder Unterstützung holen.",
+      "Pflicht ist nicht gleich nötig: Ein Pflichtfeld heißt nur, dass das Formular ohne diese Angabe nicht weitergeht. Ob die Angabe für den Zweck nötig ist, ist eine eigene Prüfung. Ist der Zweck unklar, erst nachfragen oder den Dienst nicht nutzen – nicht einfach ausfüllen, weil es Pflicht ist.",
+      "Nicht nur Nein üben: gemeinsam Fälle besprechen, in denen Daten nötig sind (z. B. Lieferadresse beim bekannten Shop), und solche, bei denen der Umfang entscheidet (z. B. Standort nur während der Nutzung).",
       "Lebensweltorientierung: Beispiele aus dem Alltag der Teilnehmenden aufgreifen (eigenes Handy, Lieblings-App, echte Nachrichten).",
       "Micro-Learning: pro Einheit nur ein Lernschritt; Pausen aktiv anbieten (die Pause-Funktion nutzen).",
       "Aktivierung statt Berieselung: vor der Lösung erst selbst einschätzen lassen (Quiz, Daumen hoch oder runter).",
@@ -54,11 +52,12 @@ const COMPANION = {
     ],
     gespraechsanlaesse: [
       "Welche Daten von dir kennen andere Menschen schon? Welche möchtest du für dich behalten?",
-      "Wem würdest du dein Passwort geben – und warum ist niemand die beste Antwort?",
-      "Was machst du, wenn eine Nachricht dich drängt, schnell etwas zu schicken?"
+      "Welche App auf deinem Handy will viel über dich wissen? Braucht sie das wirklich?",
+      "Wann ist es richtig, Daten anzugeben – zum Beispiel beim Arzt oder bei einer Bestellung?"
     ],
     begleithinweise: [
-      "Auf Belastung achten: Betrugs- und Druck-Beispiele können verunsichern. Ruhig bleiben, normalisieren („Das passiert vielen Menschen“), bei Bedarf pausieren.",
+      "Fotos mit anderen Personen: Wer auf einem Foto zu sehen ist, entscheidet mit, ob es geteilt wird. Vorher fragen – auch in Gruppen und im Status.",
+      "Auf Verunsicherung achten: Manche merken hier, dass sie schon viele Daten angegeben oder Fotos geteilt haben. Nicht beschämen, normalisieren („Das haben viele so gemacht“) und zeigen, was sich jetzt noch ändern lässt – zum Beispiel Einstellungen und App-Berechtigungen.",
       "Keine echten Passwörter oder Daten im Kurs eingeben lassen – immer nur Beispiele verwenden.",
       "Selbstbestimmung wahren: Die Teilnehmenden entscheiden selbst; die Begleitperson berät, übernimmt aber nicht.",
       "Bei realen Vorfällen (Betrug, Datendiebstahl) konkrete Hilfe organisieren statt nur darüber zu sprechen."
@@ -71,8 +70,7 @@ const COMPANION = {
     ],
     transfer: [
       "Gemeinsam die Privatsphäre-Einstellungen am eigenen Gerät anschauen.",
-      "Eine echte verdächtige Nachricht – falls vorhanden – zusammen einordnen, ohne auf Links zu klicken.",
-      "Notfall-Kontakte griffbereit notieren: Vertrauensperson und Sperr-Notruf 116 116."
+      "Gemeinsam bei einer App prüfen: Welche Zugriffe hat sie (Standort, Fotos, Kontakte)? Braucht sie diese für ihren Zweck?"
     ]
   },
 
