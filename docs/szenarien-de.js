@@ -467,6 +467,12 @@ const SCENARIOS = {
      HILFE BEI PROBLEMEN – Stopp, zeigen, Unterstützung
      --------------------------------------------------------- */
   hilfe: {
+    /* Paket H1 (30.09.2026): vorerst AUSGEBLENDET, nicht gelöscht (wie das
+       Datenschutz-Handy im Vor-Nutzertest). Altbestand vor dem Umbau: der alte
+       Ablauf Stopp – zeigen – Hilfe holen, nur Leichte Sprache. Das Thema ist
+       jetzt auf den Hilfe-Check aufgebaut; eine eigene „Neue Situation“ folgt.
+       getScenario() in app.js liefert für ausgeblendete Szenarien nichts. */
+    ausgeblendet: true,
     titel: "Etwas ist passiert",
     typ: "chat",
     kanal: "Nachrichten",

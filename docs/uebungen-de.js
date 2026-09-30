@@ -324,70 +324,9 @@ const EXTRA_PRACTICE = {
     }
   },
 
-  hilfe: {
-    lessons: {
-      "Angst ernst nehmen": {
-        question: "Du hast ein komisches Gefühl im Bauch. Was heißt das?",
-        pictogram: "pikto-feel",
-        answers: ["Ich stelle mich an.", "Mein Gefühl sagt mir etwas."],
-        correctIndex: 1,
-        feedbackWrong: "Du stellst dich nicht an. Dieses Gefühl ist eine Warnung.",
-        feedbackCorrect: "Dein Gefühl ist ein guter Hinweis.",
-        remember: "Meine Gefühle sind wichtig."
-      },
-      /* Diese Frage hatte genau dieselben Antworten wie die Übung in
-         „Stopp-Regel" und wie Quizfrage 1 desselben Themas – dieselbe
-         Antwort-Kombination dreimal (Prüfbericht B23). Sie fragt jetzt nach
-         dem NÄCHSTEN Schritt im Plan, nicht wieder nach dem ersten. */
-      "Was kann ich konkret tun?": {
-        question: "Du hast Stopp gemacht. Was ist der nächste Schritt?",
-        pictogram: "pikto-plan",
-        answers: ["Ich zeige die Nachricht einer vertrauten Person.", "Ich lösche alles und sage nichts."],
-        correctIndex: 0,
-        feedbackWrong: "Dann bist du allein damit. Zeig die Nachricht lieber jemandem.",
-        feedbackCorrect: "Genau. Zeigen und Hilfe holen ist der nächste Schritt.",
-        remember: "Ich zeige die Nachricht. Ich hole Hilfe."
-      },
-      "Externe Hilfe": {
-        question: "Musst du bei einer Beratungs-Stelle allein anrufen?",
-        pictogram: "pikto-help",
-        answers: ["Ja, das muss ich allein machen.", "Nein. Eine vertraute Person kann mitkommen."],
-        correctIndex: 1,
-        feedbackWrong: "Du darfst jemanden mitnehmen. Das ist ausdrücklich erlaubt.",
-        feedbackCorrect: "Du musst das nicht allein machen.",
-        remember: "Es gibt immer jemanden, der hilft."
-      }
-    },
-    kurz: {
-      "Etwas fühlt sich falsch an": {
-        question: "Etwas fühlt sich falsch an. Was tust du?",
-        pictogram: "pikto-no",
-        answers: ["Ich mache weiter.", "Ich mache Stopp."],
-        correctIndex: 1,
-        feedbackWrong: "Weitermachen macht es oft schlimmer. Stopp ist erlaubt.",
-        feedbackCorrect: "Genau. Stopp machen ist mutig und richtig.",
-        remember: "Wenn es sich falsch anfühlt: Stopp."
-      },
-      "Wer hilft dir?": {
-        question: "Wen fragst du bei einem Problem im Internet?",
-        pictogram: "pikto-help",
-        answers: ["Eine vertraute Person.", "Die unbekannte Person aus der Nachricht."],
-        correctIndex: 0,
-        feedbackWrong: "Wer das Problem gemacht hat, hilft nicht dabei.",
-        feedbackCorrect: "Eine vertraute Person hilft dir.",
-        remember: "Ich frage eine vertraute Person."
-      },
-      "Du bist nicht allein": {
-        question: "Ist Hilfe holen eine Schwäche?",
-        pictogram: "pikto-people",
-        answers: ["Ja. Ich muss das allein schaffen.", "Nein. Es ist mutig."],
-        correctIndex: 1,
-        feedbackWrong: "Niemand schafft alles allein. Hilfe holen ist stark.",
-        feedbackCorrect: "Genau. Hilfe holen ist mutig.",
-        remember: "Hilfe holen ist mutig."
-      }
-    }
-  },
+  /* hilfe: seit Paket H1 (30.09.2026) neu aufgebaut – noch ohne Übungen (sie
+     kommen mit den Hilfe-Aufgaben). Die alten Einträge liegen wörtlich in
+     geparkt/hilfe-umbau-2026-09-30.js. */
 
   ki: {
     lessons: {

@@ -212,6 +212,72 @@ const KETTEN = {
     ]
   },
 
+  /* HILFE BEI PROBLEMEN – Hilfe-Check (Paket H1, 30.09.2026). Grundprinzip:
+     so viel Unterstützung wie nötig, so viel Selbstständigkeit wie möglich.
+     Drei Fragen statt „Problem → immer jemanden fragen“ (Wortlaut seit H2,
+     30.09.2026: Was ist los? – Was kann ich selbst tun? – Welche Hilfe passt?).
+     Ein Notfall wird schon bei Frage 1 erkannt; die Notfall-Grenze steht klein
+     und gleichlautend als dauerhafte Zeile (`rueckfall`) in jedem Schritt, im
+     Kurzplan und am Ende. Kein Film.
+     ARBEITSFASSUNG nur in Leichter Sprache – die genaue Formulierung für
+     Lernende und die Stufen kommen später (Rückfall: Leicht). Die `tun`-Sätze
+     stehen wortgleich in der Lektion „Dein Hilfe-Check“ und auf der Merk-Karte.
+     Die eigentliche Betrugs-Masche bleibt im Plan von „Betrug“. */
+  hilfe: {
+    titel: "Dein Hilfe-Check",
+    /* Sichtbare Bezeichnung statt „Plan“ in Knöpfen, Kopf und Plan-Schritt
+       (planWort() in app.js; H2-Korrektur, 30.09.2026). */
+    bezeichnung: "Hilfe-Check",
+    lektion: "Dein Hilfe-Check",
+    merksatz: { leicht: "Erst schauen: Was ist los? Dann selbst handeln oder passende Hilfe holen." },
+
+    einstieg: {
+      leicht: "Du hast ein Problem mit dem Handy oder im Internet. Dann hilft dir der Hilfe-Check. Er hat 3 Fragen. Wir gehen sie zusammen durch."
+    },
+
+    abschluss: {
+      leicht: "Das ist dein Hilfe-Check. Vieles löst du selbst. Manchmal holst du dir Hilfe. Du entscheidest."
+    },
+
+    /* Hier die Notfall-Grenze (nicht eine Rückfall-Regel wie bei Datenschutz). */
+    rueckfall: {
+      leicht: "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112."
+    },
+
+    liste: [
+      {
+        tun: "Was ist los?",
+        pictogram: "pikto-search",
+        warum: {
+          leicht: "Klappt etwas nicht? Macht dir etwas Druck oder Angst? Oder ist jemand in Gefahr? Für jedes Problem gibt es einen anderen nächsten Schritt."
+        },
+        hilfe: {
+          leicht: "Du weißt es noch nicht genau? Dann schau: Was ist passiert? Was macht dir Sorgen?"
+        }
+      },
+      {
+        tun: "Was kann ich selbst tun?",
+        pictogram: "pikto-done",
+        warum: {
+          leicht: "Etwas klappt nicht? Dann probierst du selbst etwas aus. Etwas macht dir Druck oder Angst? Dann machst du erst Stopp. Du schickst nichts. Du bezahlst nichts."
+        },
+        hilfe: {
+          leicht: "Du kannst einen Chat schließen. Du kannst eine Person blockieren. Oder du meldest etwas in der App."
+        }
+      },
+      {
+        tun: "Welche Hilfe passt?",
+        pictogram: "pikto-help",
+        warum: {
+          leicht: "Eine Frage zum Handy? Dann fragst du eine Person. Sie kennt sich mit Handys aus. Druck oder Angst? Dann sprichst du mit einer Person. Du vertraust ihr."
+        },
+        hilfe: {
+          leicht: "Die erste Person kann nicht helfen? Dann fragst du eine andere. Hilfe holen ist keine Schwäche."
+        }
+      }
+    ]
+  },
+
 
   betrug: {
     titel: "Dein Plan gegen Betrug",

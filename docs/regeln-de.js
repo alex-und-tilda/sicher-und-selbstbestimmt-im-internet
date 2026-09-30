@@ -261,8 +261,6 @@ const REGEL_SAETZE = {
     "Stress ist ein Warnzeichen.", // snapchat, hilfe
     "Kein Bild unter Stress. Ich sage Nein.", // snapchat
     "Private Daten sende ich nie unter Stress.", // tiktok
-    "Ich antworte nicht sofort.", // hilfe
-    "Stopp. Ich reagiere nicht sofort.", // hilfe
     "Stress und Drohung sind Warnzeichen.", // betrug
     "Ich lasse mich nicht drängen.", // betrug
     "Stress und Gewinn: Stopp machen.", // betrug
@@ -273,7 +271,10 @@ const REGEL_SAETZE = {
     "Stress und die Frage nach Bank-Daten: immer ein Trick.", // betrug
     "Stress und Geld sind ein Warnzeichen.", // whatsapp
     "Ich mache Stopp.", // hilfe
-    "Ich mache Stopp. Ich zeige es jemandem." // instagram
+    "Ich mache Stopp. Ich zeige es jemandem.", // instagram
+    /* Hilfe, Paket H2 (30.09.2026): Stopp nur bei Druck oder Angst – nicht bei
+       jedem Problem (K2, neue Situation). */
+    "Druck oder Angst? Dann mache ich erst Stopp." // hilfe
   ],
   bilder: [
     "Ich prüfe Fotos vor dem Senden.", // datenschutz, whatsapp
@@ -400,8 +401,6 @@ const REGEL_SAETZE = {
     "Ich mache Pause. Ich hole Unterstützung.", // tiktok
     "Timer stellen. Pause machen.", // tiktok
     "Ich stelle einen Timer.", // tiktok
-    "Fühlt sich etwas falsch an? Stopp machen.", // hilfe
-    "Wenn es sich falsch anfühlt: Stopp.", // hilfe
     "Ich darf jederzeit aufhören.", // whatsapp
     "Ich darf jeden Kauf abbrechen." // einkaufen
   ],
@@ -420,20 +419,7 @@ const REGEL_SAETZE = {
     "Nachrichten von Unbekannten: vertraute Person fragen.", // tiktok
     "Ich lösche nicht sofort.", // hilfe
     "Ich zeige die Nachricht.", // hilfe
-    "Ich hole Unterstützung.", // hilfe
-    "Ich bin nicht allein.", // hilfe
-    "Ich zeige die Nachricht, bevor ich sie lösche.", // hilfe
-    "Ich mache ein Bild vom Bildschirm.", // hilfe
     "Meine Gefühle sind wichtig. Ich darf darüber sprechen.", // hilfe
-    "Meine Gefühle sind wichtig.", // hilfe
-    "Ich darf mir Unterstützung holen. Das ist klug.", // hilfe
-    "Es gibt immer jemanden, der helfen kann.", // hilfe
-    "Es gibt immer jemanden, der hilft.", // hilfe
-    "Ich zeige die Nachricht. Ich hole Hilfe.", // hilfe
-    "Vertraute Person um Hilfe bitten.", // hilfe
-    "Ich frage eine vertraute Person.", // hilfe
-    "Du bist nicht allein. Hilfe holen ist mutig.", // hilfe
-    "Hilfe holen ist mutig.", // hilfe
     "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.", // betrug
     "Betrug ist nicht meine Schuld. Ich hole Hilfe.", // betrug
     "Bei Beleidigungen hole ich Unterstützung.", // facebook
@@ -441,7 +427,16 @@ const REGEL_SAETZE = {
     /* Datenschutz, Paket 2: Rückfall-Regel – Unterstützung als Rückfall,
        nicht als erster Schritt. „Erst fragen. Dann entscheiden.“ ist geparkt. */
     "Unsicher? Noch nichts freigeben.", // datenschutz
-    "Unsicher? Noch nichts freigeben. Erst prüfen oder Unterstützung holen." // datenschutz (Merk-Karte)
+    "Unsicher? Noch nichts freigeben. Erst prüfen oder Unterstützung holen.", // datenschutz (Merk-Karte)
+    /* Hilfe bei Problemen, Paket H1 (30.09.2026): Notfall-Grenze auf der
+       Merk-Karte (Arbeitsfassung). Die alten Hilfe-Sätze, die nirgends mehr
+       vorkommen, liegen in geparkt/hilfe-umbau-2026-09-30.js. */
+    "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112.", // hilfe (Merk-Karte, Wortlaut seit H2)
+    /* Hilfe, Paket H2: passende Hilfe wählen (K3, M4, neue Situation). */
+    "Ich hole mir passende Hilfe.", // hilfe
+    /* Hilfe, Paket H3 (30.09.2026): Hilfe wirklich holen (Übung in M5).
+       Keine neue Regel – das ist Regel hilfe. */
+    "Ich zeige das Problem. Und ich sage: Das habe ich schon probiert." // hilfe
   ],
   /* Datenminimierung (28.09.2026, Datenschutz-Umbau). Vorerst nur in
      Datenschutz geübt – bewusst keine künstliche Zuordnung in anderen
@@ -468,7 +463,17 @@ const REGEL_SAETZE = {
     "Wer bekommt es? Wer kann es sehen?", // datenschutz
     "Was genau soll ich geben?", // datenschutz
     "Wofür? Wie viel davon ist nötig?", // datenschutz
-    "Ich entscheide." // datenschutz
+    "Ich entscheide.", // datenschutz
+    /* Hilfe bei Problemen, Paket H1 (30.09.2026): die 3 Fragen des
+       Hilfe-Checks auf der Merk-Karte – Plan-Schritte, keine eigenen Regeln
+       (wie beim Datenschutz-Plan). Arbeitsfassung. */
+    "Was ist los?", // hilfe
+    "Was kann ich selbst tun?", // hilfe (Wortlaut seit H2)
+    "Welche Hilfe passt?", // hilfe (Wortlaut seit H2)
+    /* Hilfe, Paket H2 (30.09.2026): Merksatz zu „selbst handeln“ (M3). Bewusst
+       ohne Regel der Karte (Entscheidung 30.09.2026: keine eigene Regel
+       „selbst handeln“ – Selbstständigkeit ist Grundprinzip des Themas). */
+    "Vieles kann ich selbst lösen." // hilfe (M3)
   ]
 };
 

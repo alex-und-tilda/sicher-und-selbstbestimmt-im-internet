@@ -411,7 +411,7 @@ const COMPANION = {
       ],
       icf: [
         { code: "d175", titel: "Probleme lösen",
-          bezug: "Wendet die Stopp-Regel an: erst stoppen, dann überlegen, dann handeln." },
+          bezug: "Unterscheidet, was los ist, und wählt den nächsten Schritt: selbst handeln, bei Druck oder Angst stoppen oder passende Unterstützung holen." },
         { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
           bezug: "Bleibt in einer belastenden Lage handlungsfähig." },
         { code: "e310", titel: "Engster Familien- und Freundeskreis (Umweltfaktor)",
@@ -420,14 +420,21 @@ const COMPANION = {
           bezug: "Beratungsstellen und Notrufe sind bekannt und notiert." }
       ]
     },
+    /* Paket H1 (30.09.2026): neue fachliche Lernziel-Struktur (6 Ziele, siehe
+       topics.js › hilfe.lernzielStruktur) – Arbeitsfassung. Grundprinzip: so viel
+       Unterstützung wie nötig, so viel Selbstständigkeit wie möglich. Die alte
+       Fassung dieses Eintrags liegt in geparkt/hilfe-umbau-2026-09-30.js. */
     lernziele: [
-      "Die Teilnehmenden wenden die Stopp-Regel an: erst stoppen, dann überlegen.",
-      "Sie löschen verdächtige Nachrichten nicht sofort, sondern sichern und zeigen sie.",
-      "Sie holen sich aktiv Hilfe bei einer Vertrauensperson oder Beratungsstelle."
+      "Die Teilnehmenden unterscheiden, welche Art von Problem vorliegt: Etwas klappt nicht – etwas macht Druck oder Angst – jemand ist akut in Gefahr.",
+      "Sie handeln selbst, wo es sicher geht: ausprobieren, noch einmal nachsehen, schließen, ignorieren, blockieren oder melden.",
+      "Bei Druck oder Angst halten sie zuerst an und senden, zahlen oder bestätigen nichts vorschnell.",
+      "Sie wählen eine passende Unterstützung aus: technische Unterstützung, eine Vertrauensperson oder eine Beratungsstelle.",
+      "Sie holen Unterstützung tatsächlich ein: Sie zeigen oder erklären das Problem und fragen eine weitere Person, wenn die erste nicht helfen kann.",
+      "Sie erkennen einen Notfall und holen sofort eine Person vor Ort oder wählen 110 bzw. 112."
     ],
     methodik: [
       "Quer-Thema: als Anker bei allen anderen Themen mitnutzen.",
-      "Handlungs-Plan einüben: Stopp – nicht antworten – sichern – zeigen – Hilfe.",
+      "Roter Faden ist der Hilfe-Check mit drei Fragen: Was ist los? – Was kann ich selbst tun? – Welche Hilfe passt? Ein Notfall wird schon bei der ersten Frage erkannt (Person vor Ort holen, 110 oder 112). Nicht jedes Problem heißt „sofort jemanden fragen“.",
       "Rollenspiel: Hilfe holen üben (was sage ich, wen frage ich?).",
       "Sicherung über Merk-Karte; Notfall-Kontakte sichtbar machen."
     ],

@@ -1304,90 +1304,11 @@ const CONTENT_VERSIONS = {
   },
 
   hilfe: {
-    "Start": {
-      einfach: { text: [
-        { text: "Manchmal passiert im Internet etwas, das sich falsch oder komisch anfühlt, und das ist kein schönes Gefühl." },
-        { text: "Dieses Thema zeigt dir: Du bist nicht allein." },
-        { text: "Es gibt immer jemanden, der dir helfen kann." }
-      ] },
-      standard: { text: [{ text: "Manchmal passiert im Internet etwas, das sich falsch oder bedrohlich anfühlt. Das ist unangenehm – aber du musst damit nicht allein bleiben. Dieses Kapitel zeigt dir, wie du in solchen Situationen ruhig vorgehst und wo du Unterstützung findest." }] }
-    },
-    "Stopp-Regel": {
-      einfach: { text: [
-        { text: "Wenn dir eine Nachricht Stress oder Angst macht, willst du vielleicht sofort reagieren." },
-        { text: "Die Stopp-Regel hilft dir: erst stoppen, dann in Ruhe überlegen." }
-      ] },
-      standard: { text: [{ text: "Wenn dir eine Nachricht Stress macht, ist der erste Impuls oft, sofort zu reagieren. Die Stopp-Regel hilft dir dabei, das zu vermeiden: Halte zuerst inne und überlege in Ruhe, bevor du etwas tust." }] }
-    },
-    "Nicht sofort löschen": {
-      einfach: { examples: ["Jemand beleidigt dich in einer Nachricht. Du machst zuerst ein Bild vom Bildschirm und zeigst es einer Person, der du vertraust.", "Jemand droht dir. Du löschst die Nachricht nicht sofort, sondern zeigst sie zuerst jemandem, der dir helfen kann."], warning: "Lösche eine gemeine oder bedrohliche Nachricht nicht sofort. Mach vorher ein Bild vom Bildschirm (Screenshot). So kannst du sie später einer Person zeigen, die dir hilft.", text: [
-        { text: "Eine gemeine oder komische Nachricht willst du vielleicht sofort löschen." },
-        { text: "Manchmal ist es aber wichtig, sie erst aufzubewahren, damit du sie jemandem zeigen kannst." }
-      ] },
-      standard: { examples: ["Jemand beleidigt dich per Nachricht. Du sicherst sie zuerst mit einem Bildschirmfoto und zeigst sie dann einer Vertrauensperson.", "Du bekommst eine Drohung. Statt sie sofort zu löschen, hebst du sie auf – etwa für eine Beratungsstelle oder die Polizei."], warning: "Lösche belastende oder bedrohliche Nachrichten nicht vorschnell. Sichere sie vorher mit einem Screenshot – so bleibt ein Beleg, den du einer Vertrauensperson oder der Polizei zeigen kannst.", text: [{ text: "Gemeine oder verdächtige Nachrichten möchte man am liebsten sofort löschen. Manchmal ist es aber wichtig, sie zunächst aufzubewahren – als Beweis, um sie einer vertrauten Person oder einer Beratungsstelle zu zeigen." }] }
-    },
-    "Bild vom Bildschirm": {
-      einfach: { text: [
-        { text: "Ein Bild vom Bildschirm hilft dir, eine Nachricht später zu zeigen, auch wenn sie verschwindet." },
-        { text: "Wenn du nicht weißt, wie das geht, darfst du dir dabei helfen lassen." }
-      ] },
-      standard: { text: [{ text: "Ein Bildschirmfoto (Screenshot) hält eine Nachricht fest, sodass du sie später zeigen kannst – auch wenn das Original verschwindet. Wenn du nicht weißt, wie das geht, darfst du dir dabei helfen lassen." }] }
-    },
-    "Stress erkennen": {
-      einfach: { examples: ["„Antworte sofort, sonst passiert etwas!“", "„Erzähl das niemandem. Das bleibt unser Geheimnis.“"], warning: "Wenn dich jemand drängt – zum Beispiel „Mach das sofort“ oder „Sag es niemandem“ –, ist das ein Warnzeichen. Lass dich nicht drängen und hol dir Hilfe bei einer Person, der du vertraust.", text: [
-        { text: "Wenn jemand sagt: „Mach das sofort“ oder „Erzähl es niemandem“, ist das ein Warnzeichen." },
-        { text: "Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor." }
-      ] },
-      standard: { examples: ["„Wenn du nicht in einer Stunde antwortest, hat das Folgen.“", "„Sag niemandem etwas davon – das bleibt unter uns.“"], warning: "Stress ist ein deutliches Warnsignal: Wer verlangt, dass du sofort handelst oder etwas geheim hältst, will dich meist manipulieren. Lass dich nicht drängen und hol dir Unterstützung bei einer Person, der du vertraust.", text: [{ text: "Aufforderungen wie „Mach das sofort“ oder „Erzähl es niemandem“ sind typische Tricks. Wer dich drängt oder zur Geheimhaltung auffordert, hat meist nichts Gutes vor. Solche Sätze sind ein klares Warnzeichen." }] }
-    },
-    "Angst ernst nehmen": {
-      einfach: {
-        text: [
-          { text: "Wenn dir etwas Angst macht oder du ein komisches Gefühl im Bauch hast, nimm das ernst." },
-          { text: "Deine Gefühle sind ein wichtiger Hinweis, und du musst damit nicht allein bleiben." }
-        ],
-        remember: "Meine Gefühle sind wichtig. Ich darf darüber sprechen."
-      },
-      standard: {
-        text: [{ text: "Wenn dir etwas Angst macht oder du ein ungutes Bauchgefühl hast, nimm das ernst – Gefühle sind oft ein guter Warnhinweis. Du musst damit nicht allein bleiben, sondern darfst darüber sprechen." }],
-        remember: "Meine Gefühle sind ein wichtiger Hinweis – ich darf darüber sprechen."
-      }
-    },
-    "Vertraute Personen": {
-      einfach: { text: [
-        { text: "Bei Problemen im Internet kannst du eine vertraute Person fragen, zum Beispiel Betreuende, Angehörige oder Freunde." },
-        { text: "Du musst solche Probleme nicht allein lösen." },
-        { text: "Sich Hilfe zu holen ist keine Schwäche, sondern klug." }
-      ] },
-      standard: { text: [{ text: "Du kannst dich jederzeit an eine vertraute Person wenden – etwa Betreuende, Angehörige oder Freunde. Probleme im Internet musst du nicht allein lösen. Sich Hilfe zu holen ist kein Zeichen von Schwäche, sondern klug." }] }
-    },
-    "Was kann ich konkret tun?": {
-      einfach: {
-        text: [
-          { text: "Wenn etwas komisch ist, hilft dir ein klarer Plan, bei dem du einen Schritt nach dem anderen gehst." },
-          { text: "So musst du nicht alles allein entscheiden." }
-        ],
-        bullets: ["Stopp machen.", "Nicht sofort antworten.", "Nicht sofort löschen.", "Ein Bild vom Bildschirm machen.", "Die Nachricht zeigen.", "Gemeinsam den nächsten Schritt planen."]
-      },
-      standard: {
-        text: [{ text: "Wenn etwas merkwürdig ist, hilft ein klarer Plan: Geh Schritt für Schritt vor und entscheide nichts überstürzt allein. Stopp machen, nicht sofort antworten oder löschen, die Nachricht sichern und zeigen – und gemeinsam den nächsten Schritt überlegen." }],
-        bullets: []
-      }
-    },
-    "Externe Hilfe": {
-      einfach: {
-        text: [
-          { text: "Neben Menschen in deinem Umfeld gibt es auch Beratungs-Stellen und Hilfsangebote." },
-          { text: "Eine vertraute Person kann dich dorthin begleiten oder mit dir Kontakt aufnehmen." },
-          { text: "Solche Probleme haben viele Menschen – du bist damit nicht allein." }
-        ],
-        remember: "Es gibt immer jemanden, der helfen kann."
-      },
-      standard: {
-        text: [{ text: "Neben Menschen in deinem Umfeld gibt es Beratungsstellen und Hilfsangebote, an die du dich wenden kannst. Eine vertraute Person kann dich dorthin begleiten oder gemeinsam mit dir Kontakt aufnehmen. Solche Probleme haben viele – du bist damit nicht allein." }],
-        remember: "Es gibt immer jemanden, der mir helfen kann."
-      }
-    },
+    /* Paket H1 (30.09.2026): Das Thema ist neu aufgebaut (Kurz K1–K3, Mehr M1–M6,
+       Hilfe-Check). Die neuen Einheiten gibt es vorerst nur als ARBEITSFASSUNG in
+       Leichter Sprache (Rückfall: Leicht). Die alten Fassungen liegen wörtlich in
+       geparkt/hilfe-umbau-2026-09-30.js. „Das merke ich mir“ bleibt: Text und
+       Liste baut die App aus dem Weg (zusammenfassungFuerWeg). */
     "Das merke ich mir": {
       einfach: {
         text: [{ text: "Zum Schluss findest du die wichtigsten Regeln aus diesem Thema noch einmal." }],
@@ -2563,56 +2484,9 @@ const KURZ_VERSIONS = {
       }
     }
   },
-  hilfe: {
-    "Etwas fühlt sich falsch an": {
-      einfach: {
-        text: [
-          { text: "Manchmal passiert im Internet etwas, das sich falsch anfühlt. Oder du bist dir unsicher." },
-          { text: "Dann machst du Stopp und gehst nicht weiter." },
-          { text: "Das ist mutig und richtig." }
-        ],
-        remember: "Wenn sich etwas falsch anfühlt, machst du Stopp.",
-        vorbild: ["Tilda liest eine Nachricht, die ihr Angst macht.", "Sie macht Stopp und antwortet nicht."]
-      },
-      standard: {
-        text: [{ text: "Fühlt sich im Internet etwas falsch an oder bist du unsicher, hörst du auf dein Gefühl: Mach Stopp und geh nicht weiter. Das ist kein Zeichen von Schwäche, sondern mutig und richtig." }],
-        remember: "Fühlt sich etwas falsch an: Stopp.",
-        vorbild: ["Eine Nachricht macht Tilda Angst. Sie hält inne und antwortet nicht."]
-      }
-    },
-    "Wer hilft dir?": {
-      einfach: {
-        text: [
-          { text: "Wenn du im Internet ein Problem hast, musst du es nicht allein lösen." },
-          { text: "Geh zu einer Person, der du vertraust. Das kann zum Beispiel deine Betreuerin, dein Betreuer oder ein Freund sein." },
-          { text: "Zeig dieser Person das Problem. Dann könnt ihr es zusammen lösen." }
-        ],
-        remember: "Du bittest eine Person um Hilfe, der du vertraust.",
-        vorbild: ["Alex hat ein Problem mit seinem Handy.", "Er geht zu seiner Betreuerin und zeigt ihr, was passiert ist."]
-      },
-      standard: {
-        text: [{ text: "Hast du im Internet ein Problem, musst du es nicht allein lösen. Wende dich an eine Person, der du vertraust – etwa an deine Betreuerin, deinen Betreuer oder einen Freund – und zeig ihr, was passiert ist." }],
-        remember: "Hol dir Hilfe bei einer Person, der du vertraust.",
-        vorbild: ["Alex hat ein Problem mit seinem Handy. Er geht zu seiner Betreuerin und zeigt ihr, was passiert ist."]
-      }
-    },
-    "Du bist nicht allein": {
-      einfach: {
-        text: [
-          { text: "Viele Menschen haben Probleme im Internet. Das passiert nicht nur dir." },
-          { text: "Du bist also nicht allein damit." },
-          { text: "Hilfe zu holen ist keine Schwäche. Es ist mutig und richtig." }
-        ],
-        remember: "Du bist nicht allein. Hilfe holen ist mutig.",
-        vorbild: ["Tilda schämt sich ein bisschen für ihr Problem.", "Trotzdem erzählt sie Alex davon, und Alex sagt: Danke, das war mutig."]
-      },
-      standard: {
-        text: [{ text: "Probleme im Internet haben sehr viele Menschen – du bist damit nicht allein. Sich Hilfe zu holen, ist keine Schwäche, sondern mutig und richtig." }],
-        remember: "Hilfe holen ist mutig, nicht schwach.",
-        vorbild: ["Tilda schämt sich etwas, erzählt Alex aber trotzdem von ihrem Problem. Alex sagt: Danke, das war mutig."]
-      }
-    }
-  },
+  /* hilfe: seit Paket H1 (30.09.2026) neu aufgebaut; die neuen Kurz-Einheiten
+     K1–K3 gibt es vorerst nur als Arbeitsfassung in Leichter Sprache. Die alten
+     Fassungen liegen in geparkt/hilfe-umbau-2026-09-30.js. */
   ki: {
     "Was ist KI?": {
       einfach: {
@@ -2907,16 +2781,16 @@ const LERNZIELE = {
       standard: ["Nachvollziehen, wie TikTok Inhalte auswählt.", "Kontakte und Nachrichten sicher einschätzen.", "Bewusst und gesund mit TikTok umgehen."]
     }
   },
+  /* Paket H1 (30.09.2026): neue Lernziel-Struktur mit 6 Zielen (fachlich in
+     topics.js › hilfe.lernzielStruktur). Beide Wege vermitteln die ganze
+     Kern-Kompetenz. ARBEITSFASSUNG nur in Leichter Sprache (Rückfall: Leicht);
+     die alten Ziele liegen in geparkt/hilfe-umbau-2026-09-30.js. */
   hilfe: {
     kurz: {
-      leicht:   ["Stopp machen.", "Eine vertraute Person um Hilfe bitten.", "Wissen: Hilfe holen ist mutig."],
-      einfach:  ["Stopp machen, wenn sich etwas falsch anfühlt.", "Eine Person um Hilfe bitten, der du vertraust.", "Hilfe holen, ohne dich zu schämen."],
-      standard: ["Bei einem schlechten Gefühl innehalten.", "Gezielt Unterstützung bei einer Vertrauensperson holen.", "Hilfe annehmen, ohne dich zu schämen."]
+      leicht:   ["Erkennen: Was für ein Problem ist das?", "Sicher selbst handeln.", "Bei Druck oder Angst erst stoppen.", "Die passende Hilfe finden.", "Unterstützung wirklich holen.", "Einen Notfall erkennen."]
     },
     lang: {
-      leicht:   ["Bei Problemen richtig handeln.", "Um Hilfe bitten.", "Schlimme Dinge melden."],
-      einfach:  ["Richtig handeln, wenn etwas passiert.", "Die richtige Person um Hilfe bitten.", "Schlimme Dinge melden oder zeigen."],
-      standard: ["Bei Problemen besonnen handeln.", "Passende Unterstützung finden.", "Verletzende Inhalte melden oder sichern."]
+      leicht:   ["Erkennen: Was für ein Problem ist das?", "Sicher selbst handeln.", "Bei Druck oder Angst erst stoppen.", "Die passende Hilfe finden.", "Unterstützung wirklich holen.", "Einen Notfall erkennen."]
     }
   },
   ki: {

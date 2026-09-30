@@ -682,8 +682,9 @@ let vorhersageStart = {};
    wurde (`weg`). Ältere Abschlüsse – z. B. des alten Datenschutz-Themas bis
    v2026-19y – bleiben im Speicher liegen (nichts wird gelöscht), gelten aber
    nicht als Abschluss des neuen Wegs; die App bittet dann, das Thema noch
-   einmal anzusehen. Andere Themen: wie bisher. */
-const WEG_STAND = { datenschutz: "p2" };
+   einmal anzusehen. Andere Themen: wie bisher.
+   Hilfe bei Problemen: Neuaufbau Paket H1 (30.09.2026), Stand "h1". */
+const WEG_STAND = { datenschutz: "p2", hilfe: "h1" };
 
 function abschlussVeraltet(topicId, val) {
   const stand = WEG_STAND[topicId];
@@ -3261,8 +3262,9 @@ let lastLessonContext = null;
 /* Themen, deren Lernweg umgebaut wurde. Alte Wiedereinstiege OHNE Titel
    (gespeichert vor dem 28.09.2026) lassen sich dort nicht eindeutig einer
    Lektion zuordnen und werden verworfen. Datenschutz: Umbau zum
-   Muster-Thema, Paket 1 (28.09.2026). */
-const WEG_UMGEBAUT = ["datenschutz"];
+   Muster-Thema, Paket 1 (28.09.2026). Hilfe bei Problemen: Paket H1
+   (30.09.2026). */
+const WEG_UMGEBAUT = ["datenschutz", "hilfe"];
 const LAST_LESSON_KEY = "letzte-lektion";
 
 function saveLastLesson() {
@@ -3327,6 +3329,10 @@ const FUEHRUNG_TEXT = {
   zuDenThemen:      "Zu den Themen",
   weiterLernen:     "Weiter lernen",
   spaeterAuf:       "Für später: Quiz, Merk-Karte und Übungen",
+  /* Paket H2 (30.09.2026): für Themen ohne Quiz (vorerst nur Hilfe) –
+     die Zeile nennt nur, was im Bereich wirklich steckt. Neu, §13. */
+  spaeterOhneQuiz:  "Für später: Merk-Karte und Übungen",
+  spaeterNurMerk:   "Für später: Merk-Karte",
   oderAuf:          "Oder: anders weitermachen",
   geschafftAuf:     "Das hast du geschafft",
   offenAuf:         "Das ist noch offen",
@@ -3334,6 +3340,13 @@ const FUEHRUNG_TEXT = {
   appHilfeStill:    "App-Hilfe ist an. Die Schrift ist größer. Du kannst dir die Texte vorlesen lassen.",
   appHilfeLaut:     "App-Hilfe ist an. Die Schrift ist größer. Jede Seite wird dir vorgelesen."
 };
+
+/* Überschrift des zugeklappten Bereichs „Für später“ auf der Themen-Seite
+   (Paket H2): Themen mit Quiz wie bisher; ohne Quiz nur, was es gibt. */
+function spaeterTitel(hatQuiz, hatUebung) {
+  if (hatQuiz) return FUEHRUNG_TEXT.spaeterAuf;
+  return hatUebung ? FUEHRUNG_TEXT.spaeterOhneQuiz : FUEHRUNG_TEXT.spaeterNurMerk;
+}
 
 function buildResumeLessonChip() {
   const ctx = lastLessonContext;
@@ -4763,7 +4776,7 @@ function renderTopicChoice(topicId) {
           ${ueberarbeitetHinweis}
           ${amountToggle}
           <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', '${amount}')">Lernen starten</button>
-          ${spaeterBlock(FUEHRUNG_TEXT.spaeterAuf, `
+          ${spaeterBlock(spaeterTitel(hasQuiz, !!(uebung || training || alltagUebung)), `
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
             ${merkChip}${alltagUebung}${uebung}${training}`)}`;
       })()}
@@ -5071,6 +5084,10 @@ function zusammenfassungFuerWeg(topic, lektionen, ende, schluessel) {
      den Plan schon als eigene Einheit direkt davor). */
   const planHier = !!ketteDaten(topic.id)
     && (ende.mitPlan === true || (ende.mitPlan === "kurz" && schluessel === "_schlussKurz"));
+  /* Paket H1 (30.09.2026): Übt ein Weg (noch) keine Regel – Hilfe bei
+     Problemen hat vorerst keine Übungen –, steht keine leere Überschrift da;
+     die Seite zeigt dann nur den Plan. Themen mit Regeln: unverändert. */
+  const leer = !liste("leicht").length;
   topic[schluessel] = Object.assign({}, ende, {
     /* Erinnern statt Wiederlesen (Lernweg, 26.09.2026): renderLesson zeigt
        zuerst die Frage „Was weißt du noch?" und die Regeln erst auf Tippen. */
@@ -5081,15 +5098,15 @@ function zusammenfassungFuerWeg(topic, lektionen, ende, schluessel) {
     kettePlan: planHier ? topic.id : null,
     erinnernFrage: planHier ? ende.erinnernFrage : null,
     erinnernKnopf: planHier ? ende.erinnernKnopf : null,
-    text: [{ text: "Das sind deine Regeln aus diesem Thema:", pictogram: "pikto-done" }],
+    text: leer ? [] : [{ text: "Das sind deine Regeln aus diesem Thema:", pictogram: "pikto-done" }],
     bullets: liste("leicht"),
     versions: Object.assign({}, ende.versions, {
       einfach: Object.assign({}, ev, {
-        text: [{ text: "Diese Regeln aus dem Thema kannst du dir gut merken:" }],
+        text: leer ? [] : [{ text: "Diese Regeln aus dem Thema kannst du dir gut merken:" }],
         bullets: liste("einfach").map(x => x.text)
       }),
       standard: Object.assign({}, sv, {
-        text: [{ text: "Die Regeln aus diesem Thema im Überblick: " + liste("standard").map(x => x.text).join(" ") }],
+        text: leer ? [] : [{ text: "Die Regeln aus diesem Thema im Überblick: " + liste("standard").map(x => x.text).join(" ") }],
         bullets: []
       })
     })
@@ -5600,13 +5617,14 @@ const MODULE_SCENES = {
     "Handlungsplan": "szene-handlungsplan",
     "Zusammenfassung": "szene-merken"
   },
+  /* Paket H1 (30.09.2026): Module des neuen Wegs – nur vorhandene Bilder.
+     Die alte Zuordnung liegt in geparkt/hilfe-umbau-2026-09-30.js. */
   hilfe: {
-    "Stopp": "szene-private-nachrichten",
-    "Beweise": "hilfe-beweise",
-    "Stress": "hilfe-stress",
-    "Gefühle": "szene-gefuehle",
+    "Was ist los?": "szene-grundwissen",
+    "Druck oder Angst": "hilfe-stress",
+    "Selbst handeln": "hilfe-handlungsplan",
     "Unterstützung": "hilfe-unterstuetzung",
-    "Handlungsplan": "hilfe-handlungsplan",
+    "Hilfe-Check": "szene-handlungsplan",
     "Zusammenfassung": "szene-merken"
   },
   ki: {
@@ -5652,7 +5670,7 @@ const KURZ_SCENES = {
   youtube:     { "Videos prüfen": "szene-ki-echt", "Werbung erkennen": "youtube-werbung", "Pausen machen": "youtube-pausen" },
   snapchat:    { "Bilder verschwinden nicht wirklich": "snapchat-bilder", "Dein Standort": "szene-standort", "Niemand darf dich zwingen": "snapchat-private-bilder" },
   tiktok:      { "Was du bei TikTok siehst": "tiktok-trends", "Nachrichten auf TikTok": "szene-private-nachrichten", "Pause machen": "youtube-pausen" },
-  hilfe:       { "Etwas fühlt sich falsch an": "szene-stress", "Wer hilft dir?": "szene-hilfe-holen", "Du bist nicht allein": "szene-gefuehle" },
+  hilfe:       { "Was ist los?": "szene-grundwissen", "Was kann ich selbst tun?": "hilfe-handlungsplan", "Welche Hilfe passt?": "hilfe-unterstuetzung" },
   ki:          { "Was ist KI?": "ki-chatbot", "Was kann KI?": "ki-fehler", "Wann musst du aufpassen?": "fakes-stimmen" },
   fakes:       { "Was ist eine Fake-Nachricht?": "fakes-bilder", "Wie erkennst du Fakes?": "fakes-pruefen", "Was tust du bei Fakes?": "szene-hilfe-holen" },
   betrug:      { "Was ist Betrug im Internet?": "betrug-grundwissen", "Wie erkennst du Betrug?": "betrug-tricks", "Was tust du bei Betrug?": "betrug-hilfe" },
@@ -5665,7 +5683,7 @@ const KURZ_SCENES = {
 const START_SCENES = {
   datenschutz: "datenschutz-private-daten", whatsapp: "whatsapp-fremde-nummer", facebook: "facebook-anfragen",
   instagram: "szene-fotos", youtube: "szene-ki-echt", snapchat: "snapchat-private-bilder",
-  tiktok: "tiktok-trends", hilfe: "szene-stress", ki: "ki-chatbot",
+  tiktok: "tiktok-trends", hilfe: "szene-grundwissen", ki: "ki-chatbot",
   fakes: "fakes-pruefen", betrug: "betrug-tricks", einkaufen: "einkaufen-achtung"
 };
 
@@ -5677,6 +5695,10 @@ const LEKTION_SCENES = {
     "Wer will deine Daten?": "datenschutz-private-daten",
     "Fotos prüfen": "szene-fotos",
     "Standort teilen": "szene-standort"
+  },
+  /* Paket H1 (30.09.2026): zweite Einheit im Modul „Unterstützung“. */
+  hilfe: {
+    "Unterstützung wirklich holen": "szene-hilfe-holen"
   }
 };
 
@@ -5907,6 +5929,17 @@ function ketteDaten(id) {
   return (typeof KETTEN !== "undefined" && KETTEN) ? (KETTEN[id] || null) : null;
 }
 
+/* Sichtbare Bezeichnung des Plans (H2-Korrektur, 30.09.2026): Eine Kette kann
+   ein eigenes Wort haben (`KETTEN[id].bezeichnung`, z. B. „Hilfe-Check“). Dann
+   steht es in den Bedientexten rund um den Plan statt „Plan“ („Plans“ →
+   „Hilfe-Checks“). Das Wort muss wie „Plan“ männlich sein, damit die Sätze
+   stimmen. Ohne Angabe bleibt jeder Text, wie er ist (alle anderen Themen). */
+function planWort(text, idOderKette) {
+  const k = (idOderKette && typeof idOderKette === "object") ? idOderKette : ketteDaten(idOderKette);
+  const w = k && typeof k.bezeichnung === "string" ? k.bezeichnung.trim() : "";
+  return w ? String(text).replace(/\bPlan(s?)\b/g, (m, s) => w + s) : text;
+}
+
 /* Wie oft hat DIESE Person die Kette schon gemacht? Eine Zahl je Thema
    im Profil-Speicher – lokale Einstellung, kein personenbezogenes Datum,
    kein Versand (§14). */
@@ -5980,7 +6013,7 @@ function ketteAusfuehrlichWaehlen() {
 
 function ketteKurzWaehlen() {
   ketteAusfuehrlichSetzen(ketteId, false);
-  announce("Du siehst jetzt den kurzen Plan.");
+  announce(planWort("Du siehst jetzt den kurzen Plan.", ketteId));
   ketteIndex = 0;
   renderKetteKurz();
 }
@@ -6031,7 +6064,7 @@ function buildKetteBezug(topicId, schritte) {
     .filter(x => x.s);
   if (!liste.length) return "";
   return liste.map(x => `
-      <p class="kette-bezug"><span class="kette-bezug-nr" aria-hidden="true">${x.n}</span><span>${escapeHtml(lernwegText("planSchritt").replace("{n}", x.n))} <strong>${escapeHtml(ketteTun(x.s))}</strong></span></p>`).join("");
+      <p class="kette-bezug"><span class="kette-bezug-nr" aria-hidden="true">${x.n}</span><span>${escapeHtml(planWort(lernwegText("planSchritt"), topicId).replace("{n}", x.n))} <strong>${escapeHtml(ketteTun(x.s))}</strong></span></p>`).join("");
 }
 
 /* Der ganze Plan als Liste zum Aufdecken in „Das merke ich mir“. */
@@ -6054,7 +6087,7 @@ function buildKetteCard(id) {
   const k = ketteDaten(id);
   if (!k) return "";
   const stufe = ketteStufe(id);
-  const knopf = stufe >= 3 ? "Plan durchgehen" : "Plan üben";
+  const knopf = planWort(stufe >= 3 ? "Plan durchgehen" : "Plan üben", id);
   const einstieg = ketteText(k.einstieg);
   return `
     <div class="access-box kette-card">
@@ -6183,7 +6216,7 @@ function renderKetteFilm() {
       ${filmSvg(f.bildbeschreibung)}
       <p class="film-satz" role="status">${escapeHtml(satz)}</p>
       ${blockRead(satz)}
-      <button type="button" class="kette-done" onclick="filmWeiter()">${letzter ? "Und jetzt dein Plan" : "Weiter"}</button>
+      <button type="button" class="kette-done" onclick="filmWeiter()">${letzter ? planWort("Und jetzt dein Plan", ketteId) : "Weiter"}</button>
     </article>
     <div class="kette-fuss">
       ${filmTakt > 0 ? `<button type="button" class="plain-back-button" onclick="filmZurueck()">← Ein Bild zurück</button>` : ""}
@@ -6220,7 +6253,7 @@ function ketteKopf(k, unterzeile) {
   stopReading();
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(k.titel, "Handeln", "Plan", unterzeile, 0);
+  setHeader(k.titel, "Handeln", planWort("Plan", k), unterzeile, 0);
   hideHeaderSign();
   showNav(false, false);
 }
@@ -6336,7 +6369,7 @@ function renderKetteSchritt() {
     <div class="kette-fuss">
       ${ketteIndex > 0 ? `<button type="button" class="plain-back-button" onclick="ketteZurueck()">← Zurück</button>` : ""}
       ${(ketteWillAusfuehrlich(ketteId) || ketteLaeufe(ketteId) >= 2)
-        ? `<button type="button" class="plain-back-button" onclick="ketteKurzWaehlen()">Kurzen Plan zeigen</button>` : ""}
+        ? `<button type="button" class="plain-back-button" onclick="ketteKurzWaehlen()">${planWort("Kurzen Plan zeigen", ketteId)}</button>` : ""}
       <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">${ketteRueckText()}</button>
     </div>
   `;
@@ -6390,7 +6423,7 @@ function ketteAbbrechen() {
 function renderKetteKurz() {
   const k = ketteDaten(ketteId);
   if (!k) return renderMenu();
-  ketteKopf(k, "Dein Plan");
+  ketteKopf(k, planWort("Dein Plan", k));
   const zeilen = k.liste.map((s, i) => `
     <li class="kette-kurz-item">
       <span class="kette-kurz-num" aria-hidden="true">${i + 1}</span>
@@ -6399,7 +6432,7 @@ function renderKetteKurz() {
   const vorlese = k.liste.map(s => ketteTun(s)).join(" ");
   content.innerHTML = `
     ${buildToolRow()}
-    ${buildWegweiser(`${k.titel}. Dein Plan auf einen Blick.`)}
+    ${buildWegweiser(`${k.titel}. ${planWort("Dein Plan auf einen Blick.", k)}`)}
     <article class="card kette-step" data-readable="true">
       <h2>${escapeHtml(k.titel)}</h2>
       <p>Du kennst den Plan schon. Geh ihn einmal für dich durch.</p>
@@ -6450,7 +6483,7 @@ function renderKetteEnde(wieder) {
      getippt hat. Weniger Hilfe ist außerdem kein Maßstab für Erfolg. Jetzt
      steht dort, was wirklich passiert, und dass die Person wählen kann. */
   const ausblick = laeufe === 1
-    ? `<p class="kette-meta">Beim nächsten Mal zeigt dir die App den Plan kurz. Du kannst dir die Schritte aber jederzeit wieder einzeln zeigen lassen.</p>`
+    ? `<p class="kette-meta">${planWort("Beim nächsten Mal zeigt dir die App den Plan kurz.", ketteId)} Du kannst dir die Schritte aber jederzeit wieder einzeln zeigen lassen.</p>`
     : "";
 
   content.innerHTML = `
@@ -8184,7 +8217,7 @@ function renderCompletionPage(topicId) {
   const weiterlernenLink = wl
     ? `<button type="button" class="link-action" onclick="renderWeiterlernen('${id}', 0)">${escapeHtml(wl.titel)}</button>` : "";
   const planLink = (typeof ketteDaten === "function" && ketteDaten(topic.id))
-    ? `<button type="button" class="link-action" onclick="ketteVomAbschluss('${id}')">${LERNWEG_TEXT.planLink}</button>` : "";
+    ? `<button type="button" class="link-action" onclick="ketteVomAbschluss('${id}')">${planWort(LERNWEG_TEXT.planLink, topic.id)}</button>` : "";
   const schwerZahl = schwereAufgaben(topic.id).length;
   const nochmalLink = schwerZahl
     ? `<button type="button" class="link-action" onclick="startSchwereUeben('${id}')">${LERNWEG_TEXT.nochmalUeben}: ${schwerZahl} ${schwerZahl === 1 ? "Aufgabe" : "Aufgaben"}</button>` : "";
@@ -9915,6 +9948,16 @@ function renderCertificate(topicId, score, total, korrigiert) {
    Merk-Karte
    ============================================================ */
 
+/* Die zwei Schluss-Zeilen der Merk-Karte. Paket H2 (30.09.2026): Ein Thema
+   kann eigene haben (`topic.merkKarteSchluss`, genau 2 Sätze) – „Hilfe bei
+   Problemen“ nennt zuerst das Selbst-Lösen. Alle anderen Themen: wie bisher. */
+const MERKKARTE_SCHLUSS = ["Ich muss Probleme nicht allein lösen.", "Ich kann eine Person fragen, der ich vertraue."];
+function merkKarteSchlussHtml(topic) {
+  const s = (topic && Array.isArray(topic.merkKarteSchluss) && topic.merkKarteSchluss.length === 2) ? topic.merkKarteSchluss : MERKKARTE_SCHLUSS;
+  return `<p class="memory-help">${escapeHtml(s[0])}</p>
+      <p>${escapeHtml(s[1])}</p>`;
+}
+
 function renderMemoryCard(topicId) {
   stopReading();
   const topic = getTopicById(topicId);
@@ -9953,8 +9996,7 @@ function renderMemoryCard(topicId) {
         <ul>${questions}</ul>
       </div>
 
-      <p class="memory-help">Ich muss Probleme nicht allein lösen.</p>
-      <p>Ich kann eine Person fragen, der ich vertraue.</p>
+      ${merkKarteSchlussHtml(topic)}
 
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="window.print()">Merk-Karte drucken</button>

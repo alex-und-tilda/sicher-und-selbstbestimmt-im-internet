@@ -5053,8 +5053,8 @@ const topics = [
     "id": "hilfe",
     "title": "Hilfe bei Problemen",
     "icon": "help",
-    "desc": "Stopp machen, zeigen und Unterstützung holen",
-    "transfer": "Überlege dir heute eine vertraute Person. Etwas passiert? Dann fragst du diese Person.",
+    "desc": "Selbst lösen, erst stoppen, passende Unterstützung holen",
+    "transfer": "Überlege heute: Wer hilft dir bei einem Handy-Problem? Und wer hilft dir bei Angst oder Druck? Das kann auch dieselbe Person sein. Du kannst die Nummern im Handy speichern.",
     "selfAssessment": {
       "question": "Etwas passiert im Internet. Hast du einen Plan?",
       "pictogram": "pikto-help",
@@ -5064,179 +5064,159 @@ const topics = [
         "Schon ziemlich gut"
       ]
     },
+    "vorhersage": {
+      "stand": "H2-Arbeitsfassung",
+      "situation": {
+        "leicht": "An einem Tag passieren dir 2 Dinge. Am Morgen macht dein Handy keinen Ton mehr. Du hast den Wecker nicht gehört. Am Abend schreibt dir ein Bekannter: Antworte sofort. Und sag keinem etwas davon."
+      },
+      "question": {
+        "leicht": "Was machst du?"
+      },
+      "options": [
+        {
+          "leicht": "Bei beidem frage ich sofort jemanden um Hilfe."
+        },
+        {
+          "leicht": "Bei beidem mache ich erst Stopp."
+        },
+        {
+          "leicht": "Beim Handy probiere ich selbst etwas. Bei der Nachricht mache ich erst Stopp."
+        }
+      ],
+      "aufloesung": {
+        "leicht": "Die beiden Probleme sind verschieden. Beim Handy klappt etwas nicht. Da kannst du oft selbst etwas tun. Zum Beispiel: die Lautstärke prüfen. Bei der Nachricht macht dir jemand Druck. Da machst du erst Stopp. Und du schickst nichts. Du kommst nicht weiter? Dann holst du dir Hilfe."
+      },
+      "pictogram": "pikto-phone"
+    },
     "learningGoals": [
-      "Was du tust, wenn etwas passiert",
-      "Wen du um Hilfe bittest",
-      "Wie du Schlechtes meldest oder zeigst"
+      "Erkennen: Was für ein Problem ist das?",
+      "Sicher selbst handeln.",
+      "Bei Druck oder Angst erst stoppen.",
+      "Die passende Hilfe finden.",
+      "Unterstützung wirklich holen.",
+      "Einen Notfall erkennen."
+    ],
+    "lernzielStruktur": [
+      {
+        "id": "problemart",
+        "fach": "Problemart unterscheiden: etwas klappt nicht – etwas macht Druck oder Angst – jemand ist akut in Gefahr"
+      },
+      {
+        "id": "selbst",
+        "fach": "Selbst sicher handeln: ausprobieren, noch einmal nachsehen, schließen, ignorieren, blockieren, melden"
+      },
+      {
+        "id": "stoppen",
+        "fach": "Bei Druck oder Angst stoppen: nichts vorschnell senden, zahlen oder bestätigen"
+      },
+      {
+        "id": "unterstuetzung-waehlen",
+        "fach": "Passende Unterstützung auswählen: technische Unterstützung, Vertrauensperson, Beratungsstelle"
+      },
+      {
+        "id": "unterstuetzung-holen",
+        "fach": "Unterstützung wirklich holen: Problem zeigen oder erklären, bei Bedarf eine zweite Person fragen"
+      },
+      {
+        "id": "notfall",
+        "fach": "Notfall erkennen: sofort eine Person vor Ort holen, 110 oder 112"
+      }
     ],
     "lessons": [
       {
         "title": "Start",
         "module": "Start",
         "icon": "help",
+        "stand": "H1-Arbeitsfassung",
         "text": [
           {
-            "text": "Manchmal passiert etwas im Internet, das sich falsch oder komisch anfühlt.",
-            "pictogram": "pikto-fake"
+            "text": "Mit dem Handy oder im Internet klappt nicht immer alles.",
+            "pictogram": "pikto-phone"
           },
           {
-            "text": "Das ist kein schönes Gefühl.",
-            "pictogram": "pikto-feel"
+            "text": "Manchmal findest du eine Einstellung nicht. Manchmal macht dir eine Nachricht Druck.",
+            "pictogram": "pikto-message"
           },
           {
-            "text": "Dieses Thema zeigt dir: Du bist nicht allein.",
-            "pictogram": "pikto-no"
+            "text": "Vieles kannst du selbst lösen. Bei manchem holst du dir Hilfe.",
+            "pictogram": "pikto-done"
           },
           {
-            "text": "Es gibt immer jemanden, der dir helfen kann.",
-            "pictogram": "pikto-help"
+            "text": "Du lernst 3 Fragen. Mit den Fragen findest du deinen nächsten Schritt.",
+            "pictogram": "pikto-plan"
           }
         ],
         "pictogram": "pikto-help"
       },
       {
-        "title": "Stopp-Regel",
-        "module": "Stopp",
-        "icon": "stop",
+        "title": "Probleme sind verschieden",
+        "module": "Was ist los?",
+        "icon": "understand",
+        "ketteSchritt": 1,
+        "lernziele": [
+          "problemart",
+          "notfall"
+        ],
+        "stand": "H1-Arbeitsfassung",
         "text": [
           {
-            "text": "Eine Nachricht macht dir Stress oder Angst.",
-            "pictogram": "pikto-message"
+            "text": "Probleme sind verschieden. Darum schaust du zuerst: Was ist los?",
+            "pictogram": "pikto-search"
           },
           {
-            "text": "Du willst vielleicht sofort reagieren.",
-            "pictogram": "pikto-location"
+            "text": "Etwas klappt nicht. Zum Beispiel: Du findest eine Einstellung nicht. Oder dein Handy macht keinen Ton.",
+            "pictogram": "pikto-phone"
           },
           {
-            "text": "Die Stopp-Regel hilft: Erst stoppen, dann überlegen.",
-            "pictogram": "pikto-no"
+            "text": "Etwas macht dir Druck oder Angst. Zum Beispiel: Jemand drängt dich. Oder jemand droht dir.",
+            "pictogram": "pikto-warning"
+          },
+          {
+            "text": "Jemand ist in Gefahr. Das ist ein Notfall. Dann ruf sofort 110 oder 112.",
+            "pictogram": "pikto-help"
           }
         ],
+        "pictogram": "pikto-search",
         "practice": {
-          "question": "Eine Nachricht macht dir Angst. Was ist der erste Schritt?",
-          "pictogram": "pikto-message",
+          "nachFehler": true,
+          "question": "Deine Freundin Jana wohnt allein. Sie schreibt dir: Bin in der Küche gestürzt. Komme nicht mehr hoch. Mein Kopf blutet. Was ist los? Was machst du jetzt?",
+          "pictogram": "pikto-friend",
+          "hinweis": "Überlege: Ist Jana jetzt in Gefahr?",
           "answers": [
-            "Stopp machen.",
-            "Sofort antworten."
-          ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Du musst nicht sofort antworten.",
-          "feedbackCorrect": "Das ist sicher. Du machst zuerst Stopp.",
-          "remember": "Stopp. Ich reagiere nicht sofort."
-        },
-        "pictogram": "pikto-no"
-      },
-      {
-        "title": "Nicht sofort löschen",
-        "examples": ["Jemand beleidigt dich. Du machst ein Bild vom Bildschirm. Dann zeigst du es einer vertrauten Person.", "Jemand droht dir. Du löschst die Nachricht nicht sofort. Du zeigst sie zuerst."],
-        "warning": "Lösche eine gemeine Nachricht nicht sofort. Mach erst ein Bild vom Bildschirm. So kannst du sie später zeigen.",
-        "module": "Beweise",
-        "icon": "check",
-        "text": [
-          {
-            "text": "Eine Nachricht ist gemein oder komisch.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Du willst sie vielleicht löschen.",
-            "pictogram": "pikto-fake"
-          },
-          {
-            "text": "Manchmal ist es wichtig, die Nachricht erst zu zeigen.",
-            "pictogram": "pikto-message"
-          }
-        ],
-        "practice": {
-          "question": "Jemand beleidigt dich im Chat. Was ist besser?",
-          "pictogram": "pikto-help",
-          "answers": [
-            "Nachricht löschen und niemandem zeigen.",
-            "Nachricht zeigen und Hilfe holen."
+            "Ich schreibe Jana zurück: Ruf schnell 112 an.",
+            "Jana ist in Gefahr. Ich rufe sofort 112 an.",
+            "Ich frage morgen meine Betreuerin. Sie weiß dann Rat."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Wenn alles gelöscht ist, kann Hilfe schwerer sein.",
-          "feedbackCorrect": "Das ist sicher. Du zeigst die Nachricht.",
-          "remember": "Ich zeige die Nachricht, bevor ich sie lösche."
-        },
-        "pictogram": "pikto-fake"
-      },
-      {
-        "title": "Bild vom Bildschirm",
-        "module": "Beweise",
-        "icon": "photo",
-        "text": [
-          {
-            "text": "Ein Bild vom Bildschirm kann helfen.",
-            "pictogram": "pikto-photo"
-          },
-          {
-            "text": "So kannst du eine Nachricht später zeigen.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Jemand kann dir dabei helfen.",
-            "pictogram": "pikto-photo"
-          }
-        ],
-        "practice": {
-          "question": "Du willst eine gemeine Nachricht später zeigen. Was machst du?",
-          "pictogram": "pikto-photo",
-          "answers": [
-            "Ich lösche die Nachricht.",
-            "Ich mache ein Bild vom Bildschirm."
+          "feedbackCorrect": "Richtig. Jana ist verletzt. Und sie ist allein. Jana ist in Gefahr. Das ist ein Notfall. Du rufst sofort 112 an. Du sagst Janas Adresse.",
+          "feedbackWrong": [
+            "Jana ist verletzt. Vielleicht kann sie nicht mehr telefonieren. Darum rufst du selbst sofort 112 an.",
+            null,
+            "Morgen ist zu spät. Jana ist jetzt in Gefahr. Du rufst sofort 112 an."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Dann ist die Nachricht weg. Mach lieber ein Bild vom Bildschirm.",
-          "feedbackCorrect": "Genau. Mit dem Bild kannst du die Nachricht später zeigen.",
-          "remember": "Ich mache ein Bild vom Bildschirm."
-        },
-        "pictogram": "pikto-fake"
+          "remember": "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112."
+        }
       },
       {
-        "title": "Stress erkennen",
-        "examples": ["Jemand schreibt: Antworte sofort. Sonst passiert etwas.", "Jemand schreibt: Erzähl das niemandem. Das ist unser Geheimnis."],
-        "warning": "Jemand macht dir Stress. Zum Beispiel: Mach das sofort. Oder: Sag es niemandem. Das ist ein Warnzeichen. Hol dir Hilfe.",
-        "module": "Stress",
+        "title": "Druck oder Angst: erst stoppen",
+        "module": "Druck oder Angst",
         "icon": "warning",
-        "text": [
-          {
-            "text": "Jemand sagt: Mach das sofort.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Oder: Erzähl es niemandem.",
-            "pictogram": "pikto-feel"
-          },
-          {
-            "text": "Das ist Stress und ein Warnzeichen.",
-            "pictogram": "pikto-feel"
-          }
+        "ketteSchritt": 2,
+        "lernziele": [
+          "stoppen"
         ],
-        "practice": {
-          "question": "Jemand sagt: Mach das sofort und sag es niemandem. Was ist das?",
-          "pictogram": "pikto-warning",
-          "answers": [
-            "Ein Warnzeichen.",
-            "Ganz normal."
-          ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht richtig. Stress und Geheimhaltung sind Warnzeichen.",
-          "feedbackCorrect": "Das ist richtig. Es ist ein Warnzeichen.",
-          "remember": "Stress ist ein Warnzeichen."
-        },
-        "pictogram": "pikto-feel"
-      },
-      {
-        "title": "Angst ernst nehmen",
-        "module": "Gefühle",
-        "icon": "help",
+        "stand": "H1-Arbeitsfassung",
         "text": [
           {
-            "text": "Eine Nachricht macht dir Angst.",
+            "text": "Manchmal macht dir jemand Druck. Zum Beispiel: Mach das sofort. Oder: Erzähl es niemandem.",
             "pictogram": "pikto-message"
           },
           {
-            "text": "Oder du hast ein komisches Gefühl im Bauch.",
+            "text": "Oder jemand will etwas Wichtiges von dir. Zum Beispiel Geld, einen Code oder ein Foto.",
+            "pictogram": "pikto-warning"
+          },
+          {
+            "text": "Eine Nachricht macht dir Angst. Oder du hast ein komisches Gefühl im Bauch.",
             "pictogram": "pikto-feel"
           },
           {
@@ -5244,342 +5224,492 @@ const topics = [
             "pictogram": "pikto-feel"
           },
           {
-            "text": "Du musst nicht allein damit bleiben.",
-            "pictogram": "pikto-no"
+            "text": "Dann machst du erst Stopp. Du schickst nichts. Du bezahlst nichts. Du bestätigst nichts.",
+            "pictogram": "pikto-pause"
+          },
+          {
+            "text": "Mehr zu Tricks mit Geld und Codes lernst du im Thema Betrug.",
+            "pictogram": "pikto-fraud"
           }
         ],
-        "success": "Du darfst über deine Gefühle sprechen. Das ist mutig.",
         "remember": "Meine Gefühle sind wichtig. Ich darf darüber sprechen.",
-        "pictogram": "pikto-feel"
+        "pictogram": "pikto-feel",
+        "practice": {
+          "nachFehler": true,
+          "question": "Rico wohnt mit dir in der Wohn-Gruppe. Er schreibt dir: Leih mir morgen dein Fahrrad. Sag sofort Ja. Sonst bin ich sauer. Du willst morgen selbst mit dem Fahrrad fahren. Was machst du?",
+          "pictogram": "pikto-message",
+          "hinweis": "Überlege: Musst du sofort antworten?",
+          "answers": [
+            "Ich schreibe sofort Ja. Ich will keinen Ärger mit Rico.",
+            "Ich antworte noch nicht. Erst überlege ich: Will ich das?",
+            "Ich schreibe zurück: Dann bin ich eben auch sauer."
+          ],
+          "correctIndex": 1,
+          "feedbackCorrect": "Gut. Rico macht dir Druck. Du darfst später antworten. Du überlegst in Ruhe. Danach entscheidest du selbst.",
+          "feedbackWrong": [
+            "Rico drängt dich. Unter Druck sagst du vielleicht schnell Ja. Das willst du später vielleicht nicht. Erst überlegst du in Ruhe.",
+            null,
+            "Dann streitet ihr vielleicht. Du darfst später antworten. Erst überlegst du in Ruhe."
+          ],
+          "remember": "Druck oder Angst? Dann mache ich erst Stopp."
+        }
       },
       {
-        "title": "Vertraute Personen",
-        "module": "Unterstützung",
-        "icon": "help",
+        "title": "Das kannst du selbst",
+        "module": "Selbst handeln",
+        "icon": "check",
+        "ketteSchritt": 2,
+        "lernziele": [
+          "selbst"
+        ],
+        "stand": "H1-Arbeitsfassung",
         "text": [
           {
-            "text": "Du kannst eine vertraute Person fragen.",
+            "text": "Vieles kannst du selbst tun.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Etwas klappt nicht? Probier es noch einmal. Oder sieh in den Einstellungen nach.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Ein Chat tut dir nicht gut? Dann kannst du ihn schließen. Oder du antwortest einfach nicht.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Eine Person stört dich immer wieder? Dann kannst du sie blockieren. Danach kann sie dir nicht mehr schreiben.",
+            "pictogram": "pikto-no"
+          },
+          {
+            "text": "Etwas ist gemein oder verboten? Dann kannst du es melden. Die App prüft das dann.",
+            "pictogram": "pikto-warning"
+          },
+          {
+            "text": "Bei WhatsApp, Instagram oder TikTok geht das jeweils anders. Das lernst du in diesen Themen.",
+            "pictogram": "pikto-phone"
+          }
+        ],
+        "remember": "Vieles kann ich selbst lösen.",
+        "pictogram": "pikto-done",
+        "practice": {
+          "nachFehler": true,
+          "question": "Dein Handy macht plötzlich keinen Ton mehr. Du hörst keine Nachrichten und keine Anrufe. Was machst du zuerst?",
+          "pictogram": "pikto-phone",
+          "hinweis": "Überlege: Was kannst du selbst am Handy nachsehen?",
+          "answers": [
+            "Ich schaue zuerst in den Einstellungen nach dem Ton.",
+            "Mein Handy ist kaputt. Ich kaufe mir ein neues.",
+            "Ich frage eine Person. Sie kennt sich mit Handys aus.",
+            "Ich warte. Vielleicht kommt der Ton von allein wieder."
+          ],
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackCorrect": "Genau. Oft ist nur der Ton leise gestellt. Oder das Handy ist stumm. Das siehst du in den Einstellungen. Das kannst du selbst.",
+          "feedbackWrong": [
+            null,
+            "Dein Handy ist wahrscheinlich nicht kaputt. Oft ist nur der Ton aus. Schau zuerst in den Einstellungen nach.",
+            null,
+            "Der Ton kommt meistens nicht von allein wieder. Schau in den Einstellungen nach. Das dauert nicht lange."
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Eine Person kann dir helfen. Sie kennt sich mit Handys aus. Oft findest du den Ton aber schon selbst in den Einstellungen.",
+            null
+          ],
+          "remember": "Vieles kann ich selbst lösen."
+        }
+      },
+      {
+        "title": "Welche Hilfe passt?",
+        "module": "Unterstützung",
+        "icon": "help",
+        "ketteSchritt": 3,
+        "lernziele": [
+          "unterstuetzung-waehlen",
+          "notfall"
+        ],
+        "stand": "H1-Arbeitsfassung",
+        "text": [
+          {
+            "text": "Es gibt verschiedene Arten von Hilfe. Du suchst die passende aus.",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Du hast eine Frage zum Handy? Dann frag eine Person. Sie kennt sich mit Handys aus.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Dir macht etwas Druck oder Angst? Dann sprich mit einer Person. Du vertraust ihr.",
             "pictogram": "pikto-ask"
           },
           {
-            "text": "Zum Beispiel eine Unterstützerin, einen Unterstützer, Angehörige oder Freunde.",
+            "text": "Es gibt auch Beratungs-Stellen. Dort kannst du anrufen oder schreiben.",
             "pictogram": "pikto-help"
           },
           {
-            "text": "Du musst Probleme im Internet nicht allein lösen.",
-            "pictogram": "pikto-link"
+            "text": "Du hast ein Problem mit der Bank, einem Shop oder einer App? Dafür gibt es eigene Wege. Die lernst du in den anderen Themen.",
+            "pictogram": "pikto-shop"
           },
           {
-            "text": "Hilfe holen ist keine Schwäche. Es ist klug.",
-            "pictogram": "pikto-help"
+            "text": "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112.",
+            "pictogram": "pikto-warning"
           }
         ],
+        "remember": "Ich hole mir passende Hilfe.",
+        "pictogram": "pikto-help",
         "practice": {
-          "question": "Zu wem kannst du mit einer komischen Nachricht gehen?",
-          "pictogram": "pikto-message",
+          "nachFehler": true,
+          "question": "Es ist Freitag. Am Abend kommt eine Nachricht von deiner Chefin. Sie schreibt: Wir müssen am Montag über deine Arbeit sprechen. Du machst dir große Sorgen. Du kannst nicht schlafen. Welche Hilfe passt jetzt?",
+          "pictogram": "pikto-feel",
+          "hinweis": "Überlege: Wer kann dir jetzt zuhören?",
           "answers": [
-            "Zu einer vertrauten Person.",
-            "Zu niemandem."
+            "Ich melde mich am Montag krank. Dann muss ich nicht hin.",
+            "Ich sage niemandem etwas. Ich mache mir allein Sorgen.",
+            "Ich rede mit einer Person. Ich vertraue ihr."
+          ],
+          "correctIndex": 2,
+          "feedbackCorrect": "Gut. Die Nachricht macht dir Sorgen. Deine Gefühle sind wichtig. Du darfst darüber sprechen. Zusammen überlegt ihr: Was sagst du am Montag?",
+          "feedbackWrong": [
+            "Dann bleibt die Sorge. Und du weißt immer noch nicht: Was will die Chefin? Rede lieber mit einer Person. Du vertraust ihr.",
+            "Allein werden Sorgen oft größer. Du darfst darüber sprechen. Rede mit einer Person. Du vertraust ihr.",
+            null
+          ],
+          "remember": "Meine Gefühle sind wichtig. Ich darf darüber sprechen."
+        }
+      },
+      {
+        "title": "Unterstützung wirklich holen",
+        "module": "Unterstützung",
+        "icon": "message",
+        "ketteSchritt": 3,
+        "lernziele": [
+          "unterstuetzung-holen"
+        ],
+        "stand": "H1-Arbeitsfassung",
+        "text": [
+          {
+            "text": "Du fragst eine Person. Zeig ihr das Problem auf deinem Handy. Oder erzähl kurz: Das ist passiert.",
+            "pictogram": "pikto-message"
+          },
+          {
+            "text": "Sag auch: Das habe ich schon ausprobiert.",
+            "pictogram": "pikto-done"
+          },
+          {
+            "text": "Die Person kann nicht helfen? Oder sie ist nicht da? Zum Beispiel am Wochenende. Dann fragst du eine andere Person.",
+            "pictogram": "pikto-people"
+          },
+          {
+            "text": "Hilfe holen ist keine Schwäche.",
+            "pictogram": "pikto-help"
+          },
+          {
+            "text": "Du willst eine gemeine Nachricht zeigen? Dann mach vorher ein Bild vom Bildschirm.",
+            "pictogram": "pikto-photo"
+          }
+        ],
+        "pictogram": "pikto-people",
+        "practice": {
+          "nachFehler": true,
+          "question": "Deine Bus-App zeigt keine Zeiten mehr. Du hast die App schon neu gestartet. Jetzt fragst du deinen Mitbewohner Timo. Er kennt sich mit Apps aus. Was machst du?",
+          "pictogram": "pikto-ask",
+          "hinweis": "Überlege: Was muss Timo wissen?",
+          "answers": [
+            "Ich zeige Timo die App. Ich sage: Neu starten habe ich schon probiert.",
+            "Ich sage nur: Mein Handy geht nicht. Timo findet den Fehler dann schon.",
+            "Ich gebe Timo mein Handy. Dann gehe ich schnell in mein Zimmer."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Du musst das nicht allein schaffen. Eine vertraute Person ist für dich da.",
-          "feedbackCorrect": "Du holst dir Hilfe. Das ist mutig und richtig.",
-          "remember": "Ich darf mir Unterstützung holen. Das ist klug."
-        },
-        "pictogram": "pikto-help"
+          "feedbackCorrect": "Gut. Timo sieht das Problem gleich. Und er weiß: Das hast du schon probiert. So kann er dir schneller helfen.",
+          "feedbackWrong": [
+            null,
+            "Dann muss Timo lange suchen. Zeig ihm die App. Und sag: Das habe ich schon probiert.",
+            "Bleib lieber dabei. Dann siehst du: Das macht Timo. Und beim nächsten Mal kannst du es vielleicht selbst."
+          ],
+          "remember": "Ich zeige das Problem. Und ich sage: Das habe ich schon probiert."
+        }
       },
       {
-        "title": "Externe Hilfe",
-        "module": "Unterstützung",
-        "icon": "help",
-        "text": [
-          {
-            "text": "Es gibt Beratungs-Stellen und Hilfsangebote.",
-            "pictogram": "pikto-help"
-          },
-          {
-            "text": "Eine vertraute Person kann mit dir dort anrufen oder schreiben.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Du musst das nicht allein machen.",
-            "pictogram": "pikto-no"
-          },
-          {
-            "text": "Andere Menschen haben diese Probleme auch. Du bist nicht die einzige Person.",
-            "pictogram": "pikto-no"
-          }
+        "title": "Dein Hilfe-Check",
+        "module": "Hilfe-Check",
+        "icon": "check",
+        "lernziele": [
+          "problemart",
+          "selbst",
+          "stoppen",
+          "unterstuetzung-waehlen",
+          "unterstuetzung-holen",
+          "notfall"
         ],
-        "remember": "Es gibt immer jemanden, der helfen kann.",
-        "pictogram": "pikto-help"
-      },
-      {
-        "title": "Was kann ich konkret tun?",
-        "module": "Handlungsplan",
-        "icon": "help",
+        "stand": "H1-Arbeitsfassung",
+        "erinnern": true,
+        "erinnernFrage": {
+          "leicht": "Du kennst schon alle 3 Fragen. Weißt du sie noch? Denk kurz nach. Dann tippe auf: Zeig mir den Hilfe-Check."
+        },
+        "erinnernKnopf": {
+          "leicht": "Zeig mir den Hilfe-Check"
+        },
         "text": [
           {
-            "text": "Wenn etwas komisch ist, hilft ein Plan.",
-            "pictogram": "pikto-help"
-          },
-          {
-            "text": "Du machst einen Schritt nach dem anderen.",
-            "pictogram": "pikto-help"
-          },
-          {
-            "text": "Du musst nicht alles allein entscheiden.",
-            "pictogram": "pikto-no"
+            "text": "Das ist dein Hilfe-Check:",
+            "pictogram": "pikto-plan"
           }
         ],
         "bullets": [
           {
-            "text": "Stopp machen.",
-            "pictogram": "pikto-no"
+            "text": "Was ist los?",
+            "pictogram": "pikto-search"
           },
           {
-            "text": "Nicht sofort antworten.",
-            "pictogram": "pikto-location"
+            "text": "Was kann ich selbst tun?",
+            "pictogram": "pikto-done"
           },
           {
-            "text": "Nicht sofort löschen.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Bild vom Bildschirm machen.",
-            "pictogram": "pikto-photo"
-          },
-          {
-            "text": "Nachricht zeigen.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Gemeinsam den nächsten Schritt planen.",
+            "text": "Welche Hilfe passt?",
             "pictogram": "pikto-help"
           }
         ],
-        "pictogram": "pikto-help"
+        "pictogram": "pikto-plan"
       },
       {
         "title": "Das merke ich mir",
         "module": "Zusammenfassung",
         "icon": "remember",
+        "mitPlan": true,
+        "erinnernFrage": {
+          "leicht": "Was weißt du noch? Wie geht dein Hilfe-Check? Denk kurz nach. Dann tippe auf: Zeig mir den Hilfe-Check."
+        },
+        "erinnernKnopf": {
+          "leicht": "Zeig mir den Hilfe-Check"
+        },
         "text": [
           {
             "text": "Das sind die wichtigsten Regeln aus diesem Thema.",
             "pictogram": "pikto-done"
           }
         ],
-        "bullets": [
-          {
-            "text": "Stopp machen.",
-            "pictogram": "pikto-no"
-          },
-          {
-            "text": "Nicht sofort antworten.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Nicht sofort löschen.",
-            "pictogram": "pikto-location"
-          },
-          {
-            "text": "Nachricht zeigen.",
-            "pictogram": "pikto-message"
-          },
-          {
-            "text": "Unterstützung holen.",
-            "pictogram": "pikto-help"
-          }
-        ],
+        "bullets": [],
         "pictogram": "pikto-done"
       }
     ],
     "quizQuestions": [
       {
-        "hinweis": "Die Nachricht macht Eile. Was hilft gegen Eile?",
-        "question": "Eine Nachricht sagt: Dein Konto wird gleich gelöscht. Was machst du zuerst?",
-        "pictogram": "pikto-message",
+        "nachFehler": true,
+        "question": "Du willst in der Wetter-App nachsehen: Regnet es heute? Aber die App bewegt sich nicht mehr. Du tippst. Nichts passiert. Was machst du zuerst?",
+        "pictogram": "pikto-screen",
+        "hinweis": "Überlege: Was kannst du selbst mit der App machen?",
         "answers": [
-          "Ich mache Stopp und atme durch.",
-          "Ich tippe sofort auf den Link.",
-          "Ich schreibe schnell zurück."
+          "Ich schließe die App. Dann öffne ich sie noch einmal.",
+          "Ich lösche alle Apps. Dann ist das Handy wieder frei.",
+          "Ich tippe ganz fest und ganz oft auf den Bildschirm."
         ],
         "correctIndex": 0,
+        "feedbackCorrect": "Genau. Eine App hängt manchmal. Dann schließt du sie. Und du öffnest sie neu. Das klappt oft. Das kannst du selbst.",
         "feedbackWrong": [
           null,
-          "Das ist gefährlich. Mach erst Stopp.",
-          "Eine Antwort zeigt: Hier liest jemand. Mach erst Stopp."
+          "Dann sind alle deine Apps weg. Das ist nicht nötig. Schließ nur diese eine App. Und öffne sie neu.",
+          "Fest tippen hilft nicht. Die App hängt. Schließ die App. Und öffne sie neu."
         ],
-        "feedbackCorrect": "Erst Stopp. Dann in Ruhe überlegen."
+        "remember": "Vieles kann ich selbst lösen."
       },
       {
-        "hinweis": "Überlege: Brauchst du die Nachricht vielleicht noch?",
-        "question": "Du hast eine böse Nachricht bekommen. Du willst sie löschen. Was ist besser?",
-        "pictogram": "pikto-help",
+        "nachFehler": true,
+        "question": "Du schaust Nachrichten auf dem Handy. Ein Video zeigt einen schweren Unfall. Die Feuerwehr ist schon da. Das Video macht dir Angst. Was ist los? Was passt jetzt?",
+        "pictogram": "pikto-video",
+        "hinweis": "Überlege: Bist du in Gefahr? Oder macht dir etwas Angst?",
         "answers": [
-          "Erst zeigen. Dann löschen.",
-          "Sofort löschen.",
-          "Die Nachricht beantworten."
-        ],
-        "correctIndex": 0,
-        "feedbackWrong": [
-          null,
-          "Warte damit. Die Nachricht kann als Beweis helfen.",
-          "Eine Antwort hilft dir nicht. Zeig die Nachricht lieber."
-        ],
-        "feedbackCorrect": "Die Nachricht kann als Beweis helfen."
-      },
-      {
-        "hinweis": "Frag dich: Wie zeigst du jemandem, was passiert ist?",
-        "question": "Warum ist nicht sofort löschen wichtig?",
-        "pictogram": "pikto-warning",
-        "answers": [
-          "Die Nachricht ist unwichtig.",
-          "Löschen geht später nicht mehr.",
-          "Die Nachricht kann als Beweis helfen."
+          "Das ist ein Notfall. Ich rufe sofort 112 an.",
+          "Ich schaue noch mehr Videos. Ich will alles genau wissen.",
+          "Ich mache das Video aus. Ich rede mit jemandem darüber."
         ],
         "correctIndex": 2,
+        "feedbackCorrect": "Gut. Das Video macht dir Angst. Dann hörst du auf zu schauen. Reden hilft oft. Du bist mit der Angst nicht allein.",
         "feedbackWrong": [
-          "Manchmal braucht man die Nachricht noch.",
-          "Löschen geht auch später. Der Beweis ist der Grund.",
+          "Die Feuerwehr ist schon da. Und du bist nicht in Gefahr. Aber das Video macht dir Angst. Mach es aus. Und rede mit jemandem darüber.",
+          "Mehr Videos machen die Angst oft größer. Mach das Video aus. Und rede mit jemandem darüber.",
           null
         ],
-        "feedbackCorrect": "Das ist richtig. Die Nachricht kann als Beweis helfen."
+        "remember": "Druck oder Angst? Dann mache ich erst Stopp."
       },
       {
-        "hinweis": "Geheimnis und Stress kommen oft zusammen. Was heißt das?",
-        "question": "Jemand sagt: Das ist unser Geheimnis. Was ist das?",
-        "pictogram": "pikto-warning",
+        "nachFehler": true,
+        "question": "Du rufst deine Oma an. Du hörst sie gut. Aber Oma sagt: Hallo? Ich höre dich nicht. Was machst du zuerst?",
+        "pictogram": "pikto-phone",
+        "hinweis": "Überlege: Wer hört wen nicht? Was kannst du an deinem Handy nachsehen?",
         "answers": [
-          "Etwas Schönes.",
-          "Ein Warnzeichen.",
-          "Ein Spiel."
+          "Ich rufe ganz laut ins Handy. Dann hört Oma mich.",
+          "Ich schaue auf den Bildschirm: Ist mein Mikrofon aus?",
+          "Omas Handy ist kaputt. Sie soll ein neues kaufen."
         ],
         "correctIndex": 1,
+        "feedbackCorrect": "Genau. Vielleicht hast du aus Versehen das Mikrofon ausgemacht. Das siehst du auf dem Bildschirm. Das kannst du selbst ändern.",
         "feedbackWrong": [
-          "Geheimnisse mit Stress sind kein Geschenk.",
+          "Lauter rufen hilft nicht. Oma hört dich gar nicht. Vielleicht ist dein Mikrofon aus. Schau auf den Bildschirm.",
           null,
-          "Das ist kein Spiel. Sei vorsichtig."
+          "Du hörst Oma gut. Aber sie hört dich nicht. Das Problem ist wahrscheinlich bei dir. Schau nach: Ist dein Mikrofon aus?"
         ],
-        "feedbackCorrect": "Geheimnisse mit Stress sind ein Warnzeichen."
+        "remember": "Vieles kann ich selbst lösen."
       },
       {
-        "hinweis": "Überlege: Gibt es nur eine Person, der du vertraust?",
-        "question": "Es ist Wochenende. Deine Unterstützerin ist nicht da. Wen kannst du fragen?",
-        "pictogram": "pikto-message",
+        "nachFehler": true,
+        "question": "Ein fremder Mann schreibt dir jeden Tag. Du hast ihm geschrieben: Bitte schreib mir nicht mehr. Er schreibt trotzdem weiter. Was machst du jetzt?",
+        "pictogram": "pikto-stranger",
+        "hinweis": "Überlege: Er hört nicht auf. Was kannst du selbst am Handy machen?",
         "answers": [
-          "Niemanden. Ich warte allein.",
-          "Eine andere Person, der ich vertraue.",
-          "Die Person aus der Nachricht."
+          "Ich schreibe ihm zurück: Du nervst. Hör jetzt endlich auf.",
+          "Ich blockiere ihn. Dann kann er mir nicht mehr schreiben.",
+          "Ich zeige die Nachrichten einer Person. Ich vertraue ihr.",
+          "Ich antworte ihm freundlich. Dann hört er bestimmt auf."
         ],
         "correctIndex": 1,
-        "feedbackWrong": [
-          "Du musst nicht allein warten. Es gibt mehr als eine Person.",
-          null,
-          "Die fragst du nicht. Frag jemanden, dem du vertraust."
+        "auchMoeglich": [
+          2
         ],
-        "feedbackCorrect": "Es gibt immer mehr als eine Person."
+        "feedbackCorrect": "Genau. Du hast schon Nein gesagt. Er hört nicht auf. Dann blockierst du ihn. Das kannst du selbst.",
+        "feedbackWrong": [
+          "Dann antwortest du ihm wieder. Er merkt: Du liest seine Nachrichten. Blockier ihn lieber.",
+          null,
+          null,
+          "Du hast ihm schon geschrieben. Er hört trotzdem nicht auf. Noch mehr Antworten helfen nicht. Blockier ihn lieber."
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Du zeigst die Nachrichten einer Person. Das ist gut. Du kannst ihn aber auch selbst blockieren. Dann schreibt er dir nicht mehr.",
+          null
+        ],
+        "remember": "Vieles kann ich selbst lösen."
       },
       {
-        "hinweis": "Angst wird kleiner, wenn man sie teilt.",
-        "question": "Was hilft bei Angst?",
-        "pictogram": "pikto-warning",
+        "nachFehler": true,
+        "question": "Dein Handy geht seit gestern nicht mehr ins Internet. Du hast das Handy schon neu gestartet. Es klappt immer noch nicht. Was machst du jetzt?",
+        "pictogram": "pikto-globe",
+        "hinweis": "Überlege: Was hast du schon probiert?",
         "answers": [
-          "Allein bleiben.",
-          "Nicht mehr daran denken.",
-          "Mit jemandem sprechen."
+          "Ich kaufe ein neues Handy. Das alte ist bestimmt kaputt.",
+          "Ich starte das Handy noch 10 Mal neu. Irgendwann klappt es.",
+          "Ich frage meinen Cousin. Er kennt sich mit dem Internet aus."
         ],
         "correctIndex": 2,
+        "feedbackCorrect": "Genau. Du hast schon selbst etwas probiert. Jetzt kommst du nicht weiter. Dann holst du dir Hilfe. Dein Cousin kennt sich mit dem Internet aus.",
         "feedbackWrong": [
-          "Angst wird allein oft größer.",
-          "Wegdrücken hilft selten. Sprich lieber mit jemandem.",
+          "Dein Handy ist wahrscheinlich nicht kaputt. Vielleicht ist nur das Internet zu Hause gestört. Frag eine Person. Sie kennt sich mit dem Internet aus.",
+          "Du hast schon neu gestartet. Noch öfter neu starten hilft meistens nicht. Jetzt ist Hilfe gut. Frag eine Person. Sie kennt sich mit dem Internet aus.",
           null
         ],
-        "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein."
+        "remember": "Ich hole mir passende Hilfe."
       },
       {
-        "hinweis": "Überlege: Macht ein Foto etwas weg? Oder hält es etwas fest?",
-        "question": "Warum machst du ein Bild vom Bildschirm?",
+        "nachFehler": true,
+        "question": "In der Chat-Gruppe von deiner Arbeit ist ein Foto von dir. Darauf schläfst du in der Pause. Alle lachen darüber. Du bist traurig und wütend. Welche Hilfe passt?",
         "pictogram": "pikto-photo",
+        "hinweis": "Überlege: Wer kann dir bei so etwas helfen?",
         "answers": [
-          "Damit ich die Nachricht später zeigen kann.",
-          "Damit die Nachricht weg ist.",
-          "Damit die Nachricht nicht mehr kommt."
+          "Ich rede mit meiner Gruppen-Leiterin. Ich zeige ihr den Chat.",
+          "Ich schreibe in die Gruppe: Ihr seid alle total gemein.",
+          "Ich sage nichts. Das war doch bestimmt nur Spaß."
         ],
         "correctIndex": 0,
+        "feedbackCorrect": "Gut. Das Foto ist gemein. Das musst du nicht aushalten. Deine Gruppen-Leiterin kann helfen. Zusammen überlegt ihr: Wie kommt das Foto aus der Gruppe?",
         "feedbackWrong": [
           null,
-          "Das Bild löscht nichts. Es hilft dir beim Zeigen.",
-          "Das Bild stoppt keine Nachrichten. Es hilft beim Zeigen."
+          "Du darfst wütend sein. Aber dann gibt es vielleicht noch mehr Streit. Rede lieber mit einer Person. Du vertraust ihr.",
+          "Das Foto macht dich traurig. Dann ist es für dich kein Spaß. Du musst das nicht aushalten. Rede mit einer Person. Du vertraust ihr."
         ],
-        "feedbackCorrect": "Mit dem Bild kannst du die Nachricht zeigen."
+        "remember": "Ich hole mir passende Hilfe."
       },
       {
-        "hinweis": "Stress will Eile. Was ist das Gegenteil von Eile?",
-        "question": "Was ist bei Stress wichtig?",
-        "pictogram": "pikto-warning",
+        "nachFehler": true,
+        "question": "Du findest die Taschenlampe auf deinem Handy nicht mehr. Du hast schon selbst gesucht. Du fragst deinen Bruder. Er sagt: Keine Ahnung. Ich habe ein anderes Handy. Was machst du jetzt?",
+        "pictogram": "pikto-ask",
+        "hinweis": "Überlege: Wer kann dir noch helfen?",
         "answers": [
-          "Sofort alles machen. Ohne Nachdenken.",
-          "Nicht sofort handeln.",
-          "Sofort alles löschen."
+          "Ich frage eine andere Person. Vielleicht kennt sie mein Handy.",
+          "Ich gebe auf. Ohne Taschenlampe geht es auch ganz gut.",
+          "Ich frage meinen Bruder immer wieder. Irgendwann weiß er es."
+        ],
+        "correctIndex": 0,
+        "feedbackCorrect": "Genau. Dein Bruder kennt dein Handy nicht. Dann fragst du eine andere Person. Zum Beispiel im Handy-Laden. Oder eine Person mit dem gleichen Handy.",
+        "feedbackWrong": [
+          null,
+          "Du musst nicht aufgeben. Dein Bruder kann nicht helfen. Aber eine andere Person kann es vielleicht.",
+          "Dein Bruder kennt dein Handy nicht. Er weiß es auch morgen nicht. Frag lieber eine andere Person."
+        ],
+        "remember": "Ich hole mir passende Hilfe."
+      },
+      {
+        "nachFehler": true,
+        "question": "Du machst einen Video-Anruf mit deinem Opa. Plötzlich kippt er vom Stuhl. Er sagt nichts mehr. Er bewegt sich nicht. Was machst du?",
+        "pictogram": "pikto-person",
+        "hinweis": "Überlege: Ist Opa jetzt in Gefahr?",
+        "answers": [
+          "Ich warte ein paar Minuten. Vielleicht steht Opa gleich wieder auf.",
+          "Ich rufe sofort 112 an. Ich erzähle: Opa ist umgefallen.",
+          "Ich schreibe in die Familien-Gruppe: Opa ist umgefallen."
         ],
         "correctIndex": 1,
+        "feedbackCorrect": "Richtig. Opa ist in Gefahr. Das ist ein Notfall. Du rufst sofort 112 an. Die Leute am Telefon helfen dir. Sie fragen dich alles Wichtige.",
         "feedbackWrong": [
-          "Stress ist ein Warnzeichen. Handle nicht sofort.",
+          "Opa bewegt sich nicht. Er braucht jetzt Hilfe. Warte nicht. Ruf sofort 112 an.",
           null,
-          "Löschen ist auch schnell. Mach erst Stopp."
+          "Die Familie sieht die Nachricht vielleicht erst später. Opa braucht jetzt Hilfe. Ruf zuerst 112 an. Danach kannst du der Familie schreiben."
         ],
-        "feedbackCorrect": "Das ist sicher. Du handelst nicht sofort."
+        "remember": "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112."
       },
       {
-        "hinweis": "Es gibt ein kurzes Wort, das immer erlaubt ist.",
-        "question": "Was darfst du sagen?",
-        "pictogram": "pikto-help",
+        "nachFehler": true,
+        "question": "Unter einem Video liest du einen Kommentar. Er macht sich über Menschen im Rollstuhl lustig. Der Kommentar ist nicht gegen dich. Was machst du?",
+        "pictogram": "pikto-message",
+        "hinweis": "Überlege: Was kannst du selbst in der App tun?",
         "answers": [
-          "Immer Ja.",
-          "Nein. Aber nur mit einem Grund.",
-          "Nein."
+          "Ich teile den Kommentar mit allen. So sehen alle: Das ist gemein.",
+          "Ich scrolle einfach weiter. Ich muss nicht darauf antworten.",
+          "Ich melde den Kommentar. Dann prüft die App ihn.",
+          "Ich antworte darunter: Du bist so dumm."
         ],
         "correctIndex": 2,
+        "auchMoeglich": [
+          1
+        ],
+        "feedbackCorrect": "Gut. Der Kommentar ist gemein. Du meldest ihn. Dann prüft die App ihn. Vielleicht löscht sie ihn.",
         "feedbackWrong": [
-          "Du musst nicht immer Ja sagen.",
-          "Du brauchst keinen Grund. Nein reicht.",
+          "Dann sehen noch mehr Menschen den gemeinen Kommentar. Melde ihn lieber. Dann prüft die App ihn.",
+          null,
+          null,
+          "Dann gibt es vielleicht Streit unter dem Video. Du musst nicht antworten. Melde den Kommentar lieber."
+        ],
+        "feedbackAuch": [
+          null,
+          "Du musst nicht antworten. Das ist gut. Du kannst den Kommentar auch melden. Dann prüft die App ihn.",
+          null,
           null
         ],
-        "feedbackCorrect": "Das ist richtig. Du darfst Nein sagen."
-      },
-      {
-        "hinweis": "Denk an die 3 Schritte aus diesem Thema.",
-        "question": "Was ist eine gute Hilfe-Regel?",
-        "pictogram": "pikto-help",
-        "answers": [
-          "Allein bleiben.",
-          "Stopp. Zeigen. Unterstützung holen.",
-          "Warten, bis es vorbei ist."
-        ],
-        "correctIndex": 1,
-        "feedbackWrong": [
-          "Du musst nicht allein bleiben.",
-          null,
-          "Von allein wird es selten besser. Hol dir Hilfe."
-        ],
-        "feedbackCorrect": "Das ist sicher. Diese Regel hilft."
+        "remember": "Vieles kann ich selbst lösen."
       }
     ],
+    "einfachQuiz": [
+      1,
+      4,
+      7
+    ],
     "helpQuestions": [
-      "Macht mir die Nachricht Angst oder ein komisches Gefühl?",
-      "Macht jemand Stress?",
-      "Soll ich die Nachricht zeigen?",
-      "Wer ist eine vertraute Person für mich?",
-      "Darf ich Hilfe holen? — Ja, immer."
+      "Klappt etwas nicht? Oder macht mir etwas Druck oder Angst?",
+      "Was kann ich selbst ausprobieren?",
+      "Wer kennt sich damit aus? Wem vertraue ich?",
+      "Die erste Person kann nicht helfen? Wen frage ich dann?"
     ],
     "memoryRules": [
-      "Ich mache Stopp.",
-      "Ich antworte nicht sofort.",
-      "Ich lösche nicht sofort.",
-      "Ich zeige die Nachricht.",
-      "Ich hole Unterstützung.",
-      "Ich bin nicht allein."
+      "Was ist los?",
+      "Was kann ich selbst tun?",
+      "Welche Hilfe passt?",
+      "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112."
+    ],
+    "merkKarteSchluss": [
+      "Vieles kann ich selbst lösen.",
+      "Ich muss Probleme nicht allein lösen."
     ],
     "qrLink": "index.html#thema-hilfe",
     "qrShortLink": "index.html#thema-hilfe:kurz",
@@ -5587,78 +5717,224 @@ const topics = [
     "qrMemoryLink": "index.html#thema-hilfe:merk",
     "einfachLessons": [
       {
-        "title": "Etwas fühlt sich falsch an",
+        "title": "Was ist los?",
         "module": "Einfach",
-        "pictogram": "pikto-feel",
-        "icon": "help",
-        "text": [
-          "Manchmal passiert etwas im Internet.",
-          "Das fühlt sich falsch an.",
-          "Oder du bist unsicher.",
-          "Du machst Stopp.",
-          "Du gehst nicht weiter.",
-          "Das ist mutig und richtig."
+        "pictogram": "pikto-search",
+        "icon": "understand",
+        "ketteSchritt": 1,
+        "lernziele": [
+          "problemart",
+          "notfall"
         ],
-        "remember": "Fühlt sich etwas falsch an? Stopp machen.",
-        "vorbildWer": "Tilda",
-        "vorbild": [
-          "Tilda liest eine Nachricht.",
-          "Die Nachricht macht ihr Angst.",
-          "Tilda macht Stopp.",
-          "Sie antwortet nicht."
-        ]
+        "stand": "H1-Arbeitsfassung",
+        "text": [
+          "Zuerst schaust du: Was ist los?",
+          "Etwas klappt nicht. Zum Beispiel: Dein Handy macht keinen Ton.",
+          "Oder etwas macht dir Druck oder Angst. Zum Beispiel: Jemand drängt dich.",
+          "Oder jemand ist in Gefahr. Das ist ein Notfall. Dann ruf sofort 110 oder 112."
+        ],
+        "practice": {
+          "nachFehler": true,
+          "question": "Du schickst deiner Schwester eine Nachricht. Die Nachricht geht nicht raus. Neben der Nachricht steht: Nicht gesendet. Was ist los?",
+          "pictogram": "pikto-message",
+          "hinweis": "Überlege: Ist jemand in Gefahr? Oder klappt nur etwas nicht?",
+          "answers": [
+            "Etwas klappt gerade nicht. Ich probiere es gleich noch einmal.",
+            "Mein Handy ist kaputt. Ich bringe es gleich in den Laden.",
+            "Das ist komisch. Ich mache Stopp und schreibe nichts mehr."
+          ],
+          "correctIndex": 0,
+          "feedbackCorrect": "Genau. Oft ist nur das Internet kurz weg. Dann probierst du es noch einmal. Das kannst du selbst.",
+          "feedbackWrong": [
+            null,
+            "Dein Handy ist wahrscheinlich nicht kaputt. Oft ist nur das Internet kurz weg. Probier es erst selbst noch einmal. Klappt es dann immer noch nicht? Dann hol dir Hilfe.",
+            "Stopp machst du bei Druck oder Angst. Hier klappt nur etwas nicht. Probier es gleich noch einmal."
+          ],
+          "remember": "Vieles kann ich selbst lösen."
+        }
       },
       {
-        "title": "Wer hilft dir?",
+        "title": "Was kann ich selbst tun?",
         "module": "Einfach",
-        "pictogram": "pikto-help",
-        "icon": "help",
-        "text": [
-          "Du hast ein Problem im Internet.",
-          "Du brauchst Hilfe.",
-          "Du gehst zu einer vertrauten Person.",
-          "Das kann dein Betreuer sein.",
-          "Das kann ein Freund sein.",
-          "Du zeigst ihr das Problem."
-        ],
-        "remember": "Vertraute Person um Hilfe bitten.",
-        "vorbildWer": "Alex",
-        "vorbild": [
-          "Alex hat ein Problem mit seinem Handy.",
-          "Er geht zu seiner Betreuerin.",
-          "Er zeigt ihr das Problem."
-        ]
-      },
-      {
-        "title": "Du bist nicht allein",
-        "module": "Einfach",
-        "pictogram": "pikto-help",
+        "pictogram": "pikto-done",
         "icon": "check",
-        "text": [
-          "Viele Menschen haben Probleme im Internet.",
-          "Das passiert auch anderen.",
-          "Du bist nicht allein.",
-          "Hilfe holen ist keine Schwäche.",
-          "Es ist mutig und richtig."
+        "ketteSchritt": 2,
+        "lernziele": [
+          "selbst",
+          "stoppen"
         ],
-        "remember": "Du bist nicht allein. Hilfe holen ist mutig.",
-        "vorbildWer": "Tilda",
-        "vorbild": [
-          "Tilda schämt sich ein bisschen.",
-          "Trotzdem erzählt sie Alex von ihrem Problem.",
-          "Alex sagt: Danke. Das war mutig."
-        ]
+        "stand": "H1-Arbeitsfassung",
+        "text": [
+          "Etwas klappt nicht? Dann probierst du es noch einmal. Oder du siehst in den Einstellungen nach.",
+          "Etwas macht dir Druck oder Angst? Dann machst du erst Stopp.",
+          "Du schickst nichts. Du bezahlst nichts. Du bestätigst nichts.",
+          "Du kannst den Chat auch schließen.",
+          "Du kommst nicht weiter? Dann holst du dir Hilfe."
+        ],
+        "remember": "Druck oder Angst? Dann mache ich erst Stopp.",
+        "practice": {
+          "nachFehler": true,
+          "question": "Es ist 23 Uhr. In deiner Chat-Gruppe streiten sich alle. Jemand schreibt dir: Jetzt sag du auch mal was. Du bist müde. Was kannst du selbst tun?",
+          "pictogram": "pikto-people",
+          "hinweis": "Überlege: Musst du jetzt etwas schreiben?",
+          "answers": [
+            "Ich lese alles genau durch. Ich will nichts verpassen.",
+            "Ich schreibe schnell meine Meinung. Dann haben alle ihre Ruhe.",
+            "Ich lege das Handy weg. Heute antworte ich nicht mehr."
+          ],
+          "correctIndex": 2,
+          "feedbackCorrect": "Gut. Die Gruppe macht dir Druck. Du musst nicht mitmachen. Du darfst das Handy weglegen. Morgen entscheidest du in Ruhe.",
+          "feedbackWrong": [
+            "Du bist müde. Und der Streit macht dir Druck. Du musst nicht alles lesen. Leg das Handy lieber weg.",
+            "Eine schnelle Antwort macht den Streit oft größer. Du musst jetzt nichts schreiben. Leg das Handy lieber weg.",
+            null
+          ],
+          "remember": "Druck oder Angst? Dann mache ich erst Stopp."
+        }
+      },
+      {
+        "title": "Welche Hilfe passt?",
+        "module": "Einfach",
+        "pictogram": "pikto-help",
+        "icon": "help",
+        "ketteSchritt": 3,
+        "lernziele": [
+          "unterstuetzung-waehlen",
+          "unterstuetzung-holen",
+          "notfall"
+        ],
+        "stand": "H1-Arbeitsfassung",
+        "text": [
+          "Eine Frage zum Handy? Dann fragst du eine Person. Sie kennt sich mit Handys aus.",
+          "Druck oder Angst? Dann sprichst du mit einer Person. Du vertraust ihr. Du zeigst ihr das Problem.",
+          "Die erste Person kann nicht helfen? Dann fragst du eine andere.",
+          "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112."
+        ],
+        "remember": "Ich hole mir passende Hilfe.",
+        "practice": {
+          "nachFehler": true,
+          "question": "Du hast ein neues Handy. Deine Fotos sind noch auf dem alten Handy. Du weißt nicht: Wie kommen die Fotos auf das neue Handy? Welche Hilfe passt?",
+          "pictogram": "pikto-phone",
+          "hinweis": "Überlege: Ist das eine Frage zum Handy? Oder macht dir etwas Angst?",
+          "answers": [
+            "Ich rufe bei einer Beratungs-Stelle an. Die hilft bei Problemen.",
+            "Ich frage meine Nachbarin. Sie kennt sich mit Handys aus.",
+            "Ich lasse das. Das schaffe ich sowieso nicht allein."
+          ],
+          "correctIndex": 1,
+          "feedbackCorrect": "Genau. Das ist eine Frage zum Handy. Deine Nachbarin kennt sich mit Handys aus. Sie kann dir gut helfen.",
+          "feedbackWrong": [
+            "Eine Beratungs-Stelle hilft vor allem bei Sorgen und Angst. Bei einer Frage zum Handy fragst du besser eine Person. Sie kennt sich mit Handys aus.",
+            null,
+            "Du darfst dir dabei helfen lassen. Eine Person kann dir helfen. Sie kennt sich mit Handys aus."
+          ],
+          "remember": "Ich hole mir passende Hilfe."
+        }
       }
     ],
-    "miniQuestion": {
-      "question": "Du bist unsicher. Was machst du?",
-      "answers": [
-        "Ich frage eine vertraute Person.",
-        "Ich löse alles allein.",
-        "Ich tippe sofort drauf."
+    "neueSituation": {
+      "stand": "H2-Arbeitsfassung",
+      "einstieg": {
+        "leicht": "Kevin kennst du aus dem Sport-Verein. Am Abend schreibt er dir."
+      },
+      "kanal": {
+        "leicht": "Nachrichten"
+      },
+      "inhalt": [
+        {
+          "typ": "nachricht",
+          "von": "Kevin",
+          "text": "Was sollte dein Kommentar in der Gruppe?",
+          "zeit": "21:48"
+        },
+        {
+          "typ": "nachricht",
+          "von": "Kevin",
+          "text": "Lösch den sofort. Sonst erzähle ich allen was über dich.",
+          "zeit": "21:49"
+        },
+        {
+          "typ": "nachricht",
+          "von": "Kevin",
+          "text": "Und sag den anderen nichts davon.",
+          "zeit": "21:49"
+        }
       ],
-      "correct": 0,
-      "explanation": "Bei Unsicherheit ist Hilfe holen richtig. Du musst das nicht allein lösen."
+      "fragen": [
+        {
+          "id": "hilfe/neu/was-ist-los",
+          "question": "Was ist hier los?",
+          "pictogram": "pikto-message",
+          "hinweis": "Schau genau: Wie schreibt Kevin? Und was will er?",
+          "answers": [
+            "Nichts Schlimmes. Kevin ist halt sauer.",
+            "Kevin macht mir Druck. Und ich soll schweigen.",
+            "Ich war gemein. Darum lösche ich den Kommentar sofort."
+          ],
+          "correctIndex": 1,
+          "feedbackCorrect": "Genau. Kevin will: Du sollst sofort etwas tun. Er droht dir. Und du sollst es geheim halten. Das ist Druck.",
+          "feedbackWrong": [
+            "Kevin darf sauer sein. Aber er droht dir. Und du sollst es geheim halten. Das ist Druck. Dann machst du erst Stopp.",
+            null,
+            "Vielleicht war dein Kommentar nicht gut. Das kannst du später in Ruhe klären. Aber Kevin macht dir Druck. Du musst jetzt nichts tun."
+          ],
+          "remember": "Druck oder Angst? Dann mache ich erst Stopp."
+        },
+        {
+          "id": "hilfe/neu/selbst",
+          "question": "Was kannst du jetzt selbst tun?",
+          "pictogram": "pikto-pause",
+          "hinweis": "Überlege: Musst du heute Abend noch etwas tun?",
+          "answers": [
+            "Ich lösche den Kommentar sofort und schreibe: Tut mir leid.",
+            "Heute antworte ich nicht mehr. Morgen überlege ich in Ruhe.",
+            "Ich mache ein Bild vom Bildschirm. Dann lege ich das Handy weg."
+          ],
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackCorrect": "Genau. Kevin macht Druck. Du machst erst Stopp. Du musst nicht sofort antworten. Morgen entscheidest du in Ruhe: Was willst du?",
+          "feedbackWrong": [
+            "Vielleicht willst du den Kommentar später löschen. Das darfst du. Aber nicht jetzt unter Druck. Erst Stopp. Dann entscheidest du in Ruhe.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Du antwortest nicht. Und du hast den Chat gesichert. So kannst du ihn später zeigen."
+          ],
+          "remember": "Druck oder Angst? Dann mache ich erst Stopp."
+        },
+        {
+          "id": "hilfe/neu/welche-hilfe",
+          "question": "Am nächsten Tag schreibt Kevin wieder das Gleiche. Welche Hilfe passt jetzt?",
+          "pictogram": "pikto-help",
+          "hinweis": "Überlege: Ist gerade jemand in Gefahr? Oder brauchst du jemanden zum Reden?",
+          "answers": [
+            "Ich zeige den Chat einer vertrauten Person.",
+            "Ich rufe bei einer Beratungs-Stelle an.",
+            "Ich rufe sofort die Polizei an: 110."
+          ],
+          "correctIndex": 0,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackCorrect": "Genau. Du bist damit nicht allein. Zeig der Person den Chat. Dann überlegt ihr zusammen: Was machst du jetzt?",
+          "feedbackWrong": [
+            null,
+            null,
+            "Hier ist gerade niemand in Gefahr. Darum passt 110 hier nicht. Ist jemand jetzt in Gefahr? Dann rufst du sofort 110 oder 112. Hier zeigst du den Chat zuerst einer vertrauten Person. Zusammen überlegt ihr: Was machst du jetzt? Geht ihr zur Polizei?"
+          ],
+          "feedbackAuch": [
+            null,
+            "Eine Beratungs-Stelle kennt sich mit so etwas aus. Du kannst den Chat auch einer vertrauten Person zeigen.",
+            null
+          ],
+          "remember": "Ich hole mir passende Hilfe."
+        }
+      ]
     }
   },
   {
