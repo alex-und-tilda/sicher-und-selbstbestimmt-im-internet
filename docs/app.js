@@ -221,7 +221,12 @@ function resolveLessonContent(lesson, level) {
    Der Merksatz (remember) bleibt der Regel-Schlüssel; angezeigt wird die
    Stufen-Fassung. Themen ohne Einträge bleiben unverändert.
    ------------------------------------------------------------ */
-const AUFGABE_TEXTFELDER = ["question", "situation", "hinweis", "answers", "feedbackCorrect", "feedbackWrong", "ausweg", "auswegRueckmeldung"];
+/* Lerninhalt vs. Bedientext (Entscheidung 29.09.2026, PROJEKTREGELN §2):
+   Diese Felder sind LERNINHALT und haben je Stufe eine Fassung
+   (Aufgabenstellung, Antworten, Rückmeldung/Erklärung, Tipp, Ausweg).
+   Bedientexte (Knöpfe, „Ich bin unsicher“, Ansagen in RUECKMELDUNG,
+   FRAGE_TEXT) bleiben in allen Stufen gleich. */
+const AUFGABE_TEXTFELDER = ["question", "situation", "hinweis", "answers", "feedbackCorrect", "feedbackWrong", "feedbackAuch", "ausweg", "auswegRueckmeldung"];
 const THEMA_TEXTFELDER = ["desc", "transfer", "learningGoals", "helpQuestions", "memoryRules"];
 const leichtFassung = new WeakMap();
 
@@ -2253,29 +2258,78 @@ function openLanguageFromTools() {
   renderLanguageChoice();
 }
 
+/* ------------------------------------------------------------
+   STELLE MERKEN (Paket T2, 29.09.2026)
+   Ansichten, die einen eigenen Zustand haben (Quiz, Kurz-Quiz, Noch einmal
+   üben, Plan, Übungs-Handy, Szene im Anwenden-Schritt, neue Situation),
+   sagen beim Zeichnen selbst, wie sie sich wieder aufbauen: `wieder` stellt
+   Thema, Weg, Frage, Auswahl und Stand her – ohne etwas doppelt zu zählen
+   (kein zweites Merken, kein zweiter Punkt, kein zweiter Ton).
+   Gültig ist der Eintrag nur, solange genau dieser Bildschirm steht: Er
+   hängt am ersten Element des Inhalts. Jede andere Seite ersetzt den
+   Inhalt, damit verfällt der Eintrag von selbst.
+   Vorher fiel man nach einem Sprachwechsel an diesen Stellen auf die
+   Themen-Seite zurück (merkeStelle kannte sie nicht).
+   ------------------------------------------------------------ */
+let stelleWieder = null;
+let stelleKnoten = null;
+function stelleMerken(wieder) {
+  stelleWieder = typeof wieder === "function" ? wieder : null;
+  stelleKnoten = stelleWieder ? content.firstElementChild : null;
+}
+function gemerkteStelle() {
+  return (stelleWieder && stelleKnoten && content.contains(stelleKnoten)) ? stelleWieder : null;
+}
+
+/* Paket T4 (29.09.2026): Zur Stelle gehört auch, was auf dem Bildschirm
+   schon passiert ist – ein offener Tipp („Ich bin unsicher“) und bei einem
+   Formular („Felder auswählen“) der Lern-Schritt, „erst prüfen“ / „nicht
+   nutzen“, die Sperr-Meldung oder die Auswertung. Das wird hier beim
+   Antippen des Sprach-Knopfs abgelesen und nach dem Neuzeichnen still
+   wiederhergestellt – ohne neue Bewertung, ohne Merken, ohne Ton. */
 function merkeStelle() {
+  const ziel = stelleOhneZusatz();
+  if (!ziel) return null;
+  const hilfe = document.getElementById("taskHelpPanel");
+  const hilfeOffen = !!(hilfe && content.contains(hilfe) && !hilfe.hasAttribute("hidden"));
+  const form = (felderAktiv && content.querySelector(".felder-aufgabe"))
+    ? { key: aufgabeSchluessel(felderAktiv.q), lern: felderAktiv.lern, stand: felderAktiv.stand || null } : null;
+  return () => {
+    ziel();
+    if (form) felderWiederherstellen(form);
+    if (hilfeOffen) hilfeWiederOeffnen();
+  };
+}
+
+function hilfeWiederOeffnen() {
+  const panel = document.getElementById("taskHelpPanel");
+  if (panel && panel.hasAttribute("hidden")) toggleTaskHelp();
+}
+
+function stelleOhneZusatz() {
+  const eigene = gemerkteStelle();
+  if (eigene) return eigene;
   const topicId = currentTopicId, mode = currentMode, step = currentStep;
   /* Paket 5: Datenschutz-Ansichten aus Paket 2–4 (Weiterlernen, Vorhersage,
      neue Situation, Formular im Lern-Schritt). Die Formular-Wahl bleibt
-     über den Aufgaben-Schlüssel erhalten; der Lern-Schritt wird wieder geöffnet. */
+     über den Aufgaben-Schlüssel erhalten; Lern-Schritt und Auswertung stellt
+     merkeStelle wieder her (Paket T4). */
   if (weiterlernenThema && content.querySelector(".weiterlernen-card, .weiterlernen-zusatz")) {
     const thema = weiterlernenThema, idx = weiterlernenIndex;
     return () => renderWeiterlernen(thema, idx);
   }
   if (!topicId || !getTopicById(topicId)) return null;
   const ort = (moduleLabel && moduleLabel.textContent) || "";
-  const lern = felderAktiv && felderAktiv.lern ? felderAktiv.lern.art : null;
-  const lernWieder = () => { if (lern && felderAktiv && content.querySelector(".felder-aufgabe")) felderLernschritt(lern); };
   if (content.querySelector(".sa-card") && getTopicById(topicId).vorhersage) {
     return () => { currentTopicId = topicId; currentMode = mode; renderSelfAssessment(); };
   }
   if (felderAktiv && felderAktiv.ort === "neu" && content.querySelector(".transfer-card .felder-aufgabe")) {
     const idx = neueSituationIndex;
-    return () => { currentMode = mode; renderNeueSituationFelder(getTopicById(topicId), idx); lernWieder(); };
+    return () => { currentMode = mode; renderNeueSituationFelder(getTopicById(topicId), idx); };
   }
   /* Lernschritt, Übungsseite oder Rückmeldung zur Übung: derselbe Schritt. */
   if (document.body.classList.contains("lesson-view") || content.querySelector(".practice-box") || ort === "Übung") {
-    return () => { currentTopicId = topicId; currentMode = mode; currentStep = step; renderLesson(); lernWieder(); };
+    return () => { currentTopicId = topicId; currentMode = mode; currentStep = step; renderLesson(); };
   }
   if (ort === "Kurze Frage") return () => renderMiniCheck(topicId);
   if (content.querySelector(".completion-page")) return () => renderCompletionPage(topicId);
@@ -3356,17 +3410,20 @@ function answerDailyQuestion(index) {
   const daily = dailyQuestionCurrent;
   const box = document.getElementById("dailyQuestion");
   if (!daily || !box) return;
-  const isCorrect = index === Number(daily.q.correctIndex ?? 0);
-  const merkT = aufgabeMerken(daily.topic.id, daily.q, isCorrect);
+  /* Paket T5: „auch möglich“ ist kein Fehler und wird nicht als schwierig gemerkt. */
+  const art = antwortArt(daily.q, index);
+  const isCorrect = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  const merkT = aufgabeMerken(daily.topic.id, daily.q, ok);
   const feedback = isCorrect
     ? (daily.q.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
+    : istAuch ? (auchFeedback(daily.q, index) || RUECKMELDUNG.auchAnsage)
     : (falschFeedback(daily.q, index) || RUECKMELDUNG.fehlerOk);
-  playSound(isCorrect ? "correct" : "wrong");
+  playSound(ok ? "correct" : "wrong");
   box.innerHTML = `
-        <h3>${isCorrect ? "✓ " + RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</h3>
+        <h3>${isCorrect ? "✓ " + RUECKMELDUNG.passtAnsage : istAuch ? "✓ " + RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz}</h3>
         <p class="daily-question-text">${escapeHtml(feedback)}</p>
         ${korrekturHinweisHtml(merkT)}
-        ${isCorrect ? "" : `<button type="button" class="review-chip" style="${getTopicColorStyle(daily.topic.id)}" onclick="renderTopicChoice('${escapeHtml(daily.topic.id)}')"><span aria-hidden="true">${getIconHtml(daily.topic.icon || "start")}</span><span>${escapeHtml(daily.topic.title)} nochmal ansehen</span></button>`}
+        ${ok ? "" : `<button type="button" class="review-chip" style="${getTopicColorStyle(daily.topic.id)}" onclick="renderTopicChoice('${escapeHtml(daily.topic.id)}')"><span aria-hidden="true">${getIconHtml(daily.topic.icon || "start")}</span><span>${escapeHtml(daily.topic.title)} nochmal ansehen</span></button>`}
       `;
   announce(feedback);
   sprichEingefuegteRueckmeldung(box);
@@ -4824,6 +4881,46 @@ function falschFeedback(frage, index) {
   return (typeof f === "string" && f.trim()) ? f.trim() : "";
 }
 
+/* ------------------------------------------------------------
+   RÜCKMELDEART „DAS GEHT AUCH“ (Paket T5, 29.09.2026)
+   Manchmal sind mehrere Wege sicher und erlaubt. Neben der passenden
+   Antwort (correctIndex = bevorzugter Lernweg) kann eine Aufgabe weitere
+   zulässige Antworten nennen:
+     auchMoeglich  [Index, …]   Aufbau, in allen Stufen gleich
+     feedbackAuch  Text oder je Antwort einer (null an den anderen Stellen);
+                   Lerninhalt, dreistufig über AUFGABEN_VERSIONS
+   Wer eine solche Antwort wählt, macht keinen Fehler: keine
+   Fehlermarkierung, nicht als schwierige Aufgabe gemerkt (zählt fürs
+   Gedächtnis wie eine passende Antwort), kein Zähler für den zweiten
+   Versuch, kein Fehlerton, keine „passt noch nicht“-Ansage; der Lernweg
+   geht normal weiter. Kopf „Das geht auch“ (Bedientext), darunter die
+   Erklärung und der bevorzugte Weg („Noch ein guter Weg: …“).
+   Aufgaben ohne auchMoeglich: alles wie bisher.
+   ------------------------------------------------------------ */
+function antwortArt(frage, index, korrekt) {
+  const k = Number(korrekt !== undefined ? korrekt : ((frage && (frage.correctIndex ?? frage.correct)) ?? 0));
+  const i = Number(index);
+  if (i === k) return "richtig";
+  const auch = (frage && Array.isArray(frage.auchMoeglich)) ? frage.auchMoeglich.map(Number) : [];
+  return auch.indexOf(i) !== -1 ? "auch" : "falsch";
+}
+
+function auchFeedback(frage, index) {
+  const f = frage && frage.feedbackAuch;
+  const t = Array.isArray(f) ? f[index] : f;
+  return (typeof t === "string" && t.trim()) ? t.trim() : "";
+}
+
+function nochEinWegHtml(antwort) {
+  const t = answerText(antwort);
+  if (!t) return "";
+  return `
+      <div class="feedback-auch-weg">
+        <h3>${escapeHtml(RUECKMELDUNG.nochEinWeg)}</h3>
+        <p>${escapeHtml(t)}</p>
+      </div>`;
+}
+
 /* Hilfe zur Aufgabe in zwei Stufen (Prüfbericht B14).
    Vorher bekamen alle Fragen der Plattform denselben Text: fünf allgemeine
    Ratschläge. Beim dritten Mal ist das Rauschen, und wer inhaltlich nicht
@@ -5256,6 +5353,11 @@ const RUECKMELDUNG = {
   nochNichtAnsage: "Diese Antwort passt noch nicht. Schau dir die Erklärung an.",
   entscheidungGut: "Diese Entscheidung schützt dich.",
   passendeAntwort: "Die passende Antwort ist:",
+  /* Paket T5 (29.09.2026): Rückmeldeart „Das geht auch“ – Bedientext, in
+     allen Stufen gleich. Die Erklärung darunter ist Lerninhalt (feedbackAuch). */
+  auchTitel:       "Das geht auch",
+  auchAnsage:      "Das geht auch.",
+  nochEinWeg:      "Noch ein guter Weg:",
   /* Kurzform für Rückmeldungen auf derselben Seite (Übungs-Handy, Postfach,
      kurze Frage, Frage des Tages) – vorher stand dort „Richtig." / „Noch
      nicht sicher." / „Schau mal:" (Gesamtprüfung V4, 25.09.2026). */
@@ -5893,6 +5995,21 @@ function ketteText(feld) {
   return feld.leicht || feld.einfach || "";
 }
 
+/* Handlungsschritt (Entscheidung 29.09.2026, PROJEKTREGELN §2): Der Satz,
+   was die Person tun soll (`tun`), ist LERNINHALT. Er darf ein Text sein
+   (gleich in allen Stufen – so stehen die freigegebenen Pläne heute) oder
+   { leicht, einfach, standard }. Angezeigt wird die Stufe (Rückfall wie
+   ketteText); Vergleiche und Regel-Zuordnung lesen die Leicht-Fassung
+   (ketteTunLeicht). Bedien-Wörter rund um den Plan („Gemacht“, „Schritt 1
+   von 5“, „Dein Plan“) bleiben in allen Stufen gleich. */
+function ketteTun(schritt) {
+  return ketteText(schritt && schritt.tun);
+}
+function ketteTunLeicht(schritt) {
+  const t = schritt && schritt.tun;
+  return typeof t === "string" ? t : ((t && (t.leicht || t.einfach || t.standard)) || "");
+}
+
 /* Rückfall-Regel einer Kette (Datenschutz, Paket 2, 28.09.2026): eine
    dauerhafte Zeile, die in jedem Schritt, im Kurzplan und am Ende steht.
    Nur wenn die Kette das Feld `rueckfall` hat – alle anderen Pläne bleiben
@@ -5914,7 +6031,7 @@ function buildKetteBezug(topicId, schritte) {
     .filter(x => x.s);
   if (!liste.length) return "";
   return liste.map(x => `
-      <p class="kette-bezug"><span class="kette-bezug-nr" aria-hidden="true">${x.n}</span><span>${escapeHtml(lernwegText("planSchritt").replace("{n}", x.n))} <strong>${escapeHtml(x.s.tun)}</strong></span></p>`).join("");
+      <p class="kette-bezug"><span class="kette-bezug-nr" aria-hidden="true">${x.n}</span><span>${escapeHtml(lernwegText("planSchritt").replace("{n}", x.n))} <strong>${escapeHtml(ketteTun(x.s))}</strong></span></p>`).join("");
 }
 
 /* Der ganze Plan als Liste zum Aufdecken in „Das merke ich mir“. */
@@ -5925,7 +6042,7 @@ function buildKetteMerkListe(topicId) {
       <div class="kette-merken">
         <h3>${escapeHtml(k.titel)}</h3>
         <ol class="kette-kurz-liste">${k.liste.map((s, i) => `
-          <li class="kette-kurz-item"><span class="kette-kurz-num" aria-hidden="true">${i + 1}</span><span>${escapeHtml(s.tun)}</span></li>`).join("")}</ol>
+          <li class="kette-kurz-item"><span class="kette-kurz-num" aria-hidden="true">${i + 1}</span><span>${escapeHtml(ketteTun(s))}</span></li>`).join("")}</ol>
         ${ketteRueckfallHtml(k)}
       </div>`;
 }
@@ -6074,6 +6191,8 @@ function renderKetteFilm() {
       <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">${ketteRueckText()}</button>
     </div>
   `;
+  const kid = ketteId, taktJetzt = filmTakt;
+  stelleMerken(() => { ketteId = kid; filmTakt = taktJetzt; renderKetteFilm(); });
   focusContent();
   renderLegalFooter();
 }
@@ -6188,7 +6307,7 @@ function renderKetteSchritt() {
     ? `<p class="kette-hilfe" role="status">${escapeHtml(hilfeText)}</p>`
     : `<button type="button" class="plain-back-button" onclick="ketteHilfeZeigen()">Ich brauche Hilfe</button>`;
 
-  const vorlese = [schritt.tun, warumText].filter(Boolean).join(" ");
+  const vorlese = [ketteTun(schritt), warumText].filter(Boolean).join(" ");
 
   content.innerHTML = `
     ${buildToolRow()}
@@ -6199,7 +6318,7 @@ function renderKetteSchritt() {
     <article class="card kette-step" data-readable="true">
       <p class="kette-zaehler">Schritt ${ketteIndex + 1} von ${gesamt}</p>
       ${pikto}
-      <h2 class="kette-tun">${escapeHtml(schritt.tun)}</h2>
+      <h2 class="kette-tun">${escapeHtml(ketteTun(schritt))}</h2>
       ${warum}
       ${/* Die Situation steht NACH dem Handlungssatz, nicht davor. Gemessen
            am 21.09.2026 auf 375 x 812: Oberhalb gestellt schob sie den
@@ -6221,6 +6340,8 @@ function renderKetteSchritt() {
       <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">${ketteRueckText()}</button>
     </div>
   `;
+  const ks = { id: ketteId, i: ketteIndex, warum: ketteWarumOffen, hilfe: ketteHilfeOffen };
+  stelleMerken(() => { ketteId = ks.id; ketteIndex = ks.i; ketteWarumOffen = ks.warum; ketteHilfeOffen = ks.hilfe; renderKetteSchritt(); });
   focusContent();
   renderLegalFooter();
 }
@@ -6273,9 +6394,9 @@ function renderKetteKurz() {
   const zeilen = k.liste.map((s, i) => `
     <li class="kette-kurz-item">
       <span class="kette-kurz-num" aria-hidden="true">${i + 1}</span>
-      <span>${escapeHtml(s.tun)}</span>
+      <span>${escapeHtml(ketteTun(s))}</span>
     </li>`).join("");
-  const vorlese = k.liste.map(s => s.tun).join(" ");
+  const vorlese = k.liste.map(s => ketteTun(s)).join(" ");
   content.innerHTML = `
     ${buildToolRow()}
     ${buildWegweiser(`${k.titel}. Dein Plan auf einen Blick.`)}
@@ -6293,6 +6414,8 @@ function renderKetteKurz() {
       <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">${ketteRueckText()}</button>
     </div>
   `;
+  const kid = ketteId;
+  stelleMerken(() => { ketteId = kid; renderKetteKurz(); });
   focusContent();
   renderLegalFooter();
 }
@@ -6308,15 +6431,17 @@ function ketteSchritteZeigen() {
   renderKetteSchritt();
 }
 
-function renderKetteEnde() {
+/* `wieder` (Paket T2): nach einem Sprachwechsel nur neu zeichnen – den
+   Durchgang nicht noch einmal zählen, nicht noch einmal ansagen. */
+function renderKetteEnde(wieder) {
   const k = ketteDaten(ketteId);
   if (!k) return renderMenu();
-  ketteLaufPlus(ketteId);
+  if (!wieder) ketteLaufPlus(ketteId);
   const laeufe = ketteLaeufe(ketteId);
   ketteKopf(k, "Geschafft");
 
   const zeilen = k.liste.map(s => `
-    <li class="kette-ende-item"><span class="kette-haken" aria-hidden="true">✓</span><span>${escapeHtml(s.tun)}</span></li>`).join("");
+    <li class="kette-ende-item"><span class="kette-haken" aria-hidden="true">✓</span><span>${escapeHtml(ketteTun(s))}</span></li>`).join("");
   const abschluss = ketteText(k.abschluss);
   /* Beim ersten Abschluss ankündigen, dass es beim nächsten Mal kürzer wird.
      Vorhersehbarkeit statt Überraschung (§3 Došen).
@@ -6342,9 +6467,11 @@ function renderKetteEnde() {
       <button type="button" class="kette-done" onclick="ketteAbbrechen()">${ketteRueckkehr ? "Zurück zum Abschluss" : "Weiter lernen"}</button>
     </article>
   `;
+  const kid = ketteId;
+  stelleMerken(() => { ketteId = kid; renderKetteEnde(true); });
   focusContent();
   renderLegalFooter();
-  announce("Geschafft. Du hast alle Schritte gemacht.");
+  if (!wieder) announce("Geschafft. Du hast alle Schritte gemacht.");
 }
 
 /* Antworten dürfen Strings sein ODER Objekte { text, pictogram }.
@@ -6499,7 +6626,9 @@ function kennstDuHinweisHtml(satz, themaId) {
    anderer Reihenfolge – sonst genügte es, einfach die andere zu nehmen
    (Prüfgruppen-Test B-d). Gezählt wird je Frage, nur in der Sitzung. */
 let versucheJeFrage = {};
-function antwortReihenfolge(frage, anzahl) {
+function antwortReihenfolge(frage, anzahl, fest) {
+  /* Paket T2: Nach einem Sprachwechsel dieselbe Reihenfolge wie vorher. */
+  if (Array.isArray(fest) && fest.length === anzahl) return fest.slice();
   const k = versucheJeFrage[aufgabeSchluessel(frage)] || 0;
   const reihe = Array.from({ length: anzahl }, (_, i) => i);
   return reihe.slice(k % anzahl).concat(reihe.slice(0, k % anzahl));
@@ -6535,7 +6664,11 @@ function buildPractice(practice) {
 
 }
 
-function renderPracticeFeedbackPage(index, correctIndex) {
+/* `wieder` (Paket T4a, 29.09.2026): nach einem Sprachwechsel dieselbe
+   Rückmeldung zur gewählten Antwort neu zeichnen – in der neuen Stufe, aber
+   ohne noch einmal zu merken, zu zählen, zu klingen oder anzusagen.
+   Vorher landete man nach dem Wechsel wieder auf der Lektion. */
+function renderPracticeFeedbackPage(index, correctIndex, wieder) {
   stopReading();
   const topic = getCurrentTopic();
   const lessons = getLessonsForMode(topic, currentMode);
@@ -6545,35 +6678,39 @@ function renderPracticeFeedbackPage(index, correctIndex) {
 
   const answers = Array.isArray(practice.answers) ? practice.answers : [];
   const selectedText = answerText(answers[index]);
-  const isCorrect = index === Number(correctIndex);
-  playSound(isCorrect ? "correct" : "wrong");
+  /* Paket T5: richtig / auch möglich / falsch. „Auch möglich“ ist kein Fehler. */
+  const art = antwortArt(practice, index, correctIndex);
+  const isCorrect = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  if (!wieder) playSound(ok ? "correct" : "wrong");
   const explanation = isCorrect
     ? (practice.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
+    : istAuch ? auchFeedback(practice, index)
     : (falschFeedback(practice, index) || "Das ist nicht sicher. Du kannst es noch einmal versuchen.");
+  const kopf = isCorrect ? RUECKMELDUNG.passtTitel : istAuch ? RUECKMELDUNG.auchTitel : RUECKMELDUNG.nochNichtTitel;
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
-  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(practice.remember) : null, topic.id, isCorrect);
-  const merk = aufgabeMerken(topic.id, practice, isCorrect);
-  if (!isCorrect) versuchZaehlen(practice);
+  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(practice.remember) : null, topic.id, ok);
+  const merk = wieder ? wieder.merk : aufgabeMerken(topic.id, practice, ok);
+  if (!ok && !wieder) versuchZaehlen(practice);
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(topic.title, "Übung", "Rückmeldung", isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel, 100);
+  setHeader(topic.title, "Übung", "Rückmeldung", kopf, 100);
   setOrientation(`Du übst: ${topic.title}.`);
 
   content.innerHTML = `
     ${buildToolRow()}
-    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
-      <h2>${isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel}</h2>
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : istAuch ? "feedback-auch" : "feedback-wrong"}" data-readable="true">
+      <h2>${kopf}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
         <p>${escapeHtml(selectedText)}</p>
       </div>
 
-      <div class="feedback-explanation">
+      ${explanation ? `<div class="feedback-explanation">
         <h3>Erklärung:</h3>
         <p>${escapeHtml(explanation)}</p>
-      </div>
+      </div>` : ""}
 
       ${/* Refaktorierung, die die remember-Prüfung in buildRememberBox kapselt:
             hier stand früher "isCorrect && practice.remember ? … : ''". Der Baustein
@@ -6581,9 +6718,9 @@ function renderPracticeFeedbackPage(index, correctIndex) {
             Das ist keine reine Umstellung, sondern eine kleine Verbesserung — die
             Frage "gibt es überhaupt einen Merksatz?" gehört in den Baustein, nicht
             an jede Aufrufstelle. */""}
-      ${!isCorrect ? passendeAntwortHtml(answers[Number(correctIndex)]) : ""}
-      ${!isCorrect && practice.nachFehler ? vorbildAngebotHtml(topic, lesson, lessons) : ""}
-      ${!isCorrect ? roleFigure("ruhig") : ""}
+      ${!ok ? passendeAntwortHtml(answers[Number(correctIndex)]) : istAuch ? nochEinWegHtml(answers[Number(correctIndex)]) : ""}
+      ${!ok && practice.nachFehler ? vorbildAngebotHtml(topic, lesson, lessons) : ""}
+      ${!ok ? roleFigure("ruhig") : ""}
       ${/* Merksatz auch nach einer falschen Antwort (Gesamtprüfung V1): vorher
             stand dort nur die leere Überschrift „Merken". */""}
       ${practice.remember ? stationBadge("merken") : ""}
@@ -6591,7 +6728,7 @@ function renderPracticeFeedbackPage(index, correctIndex) {
       ${regelHinweis}
 
       <div class="feedback-actions">
-        ${isCorrect
+        ${ok
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterPractice()">Weiter</button>${korrekturHinweisHtml(merk)}`
           : `<button type="button" class="feedback-button secondary" onclick="renderPracticePage()">Frage nochmal versuchen</button>
              <button type="button" class="feedback-button ghost" onclick="renderLesson()">Lektion nochmal lesen</button>
@@ -6600,10 +6737,12 @@ function renderPracticeFeedbackPage(index, correctIndex) {
         }
       </div>
 
-      ${!isCorrect ? buildTaskHelpBox(taskHint(practice, "rueckmeldung"), false, true) : ""}
+      ${!ok ? buildTaskHelpBox(taskHint(practice, "rueckmeldung"), false, true) : ""}
     </article>
   `;
-  announce(isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtAnsage);
+  if (!wieder) announce(isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtAnsage);
+  const ort = { t: topic.id, mode: currentMode, step: currentStep };
+  stelleMerken(() => { currentTopicId = ort.t; currentMode = ort.mode; currentStep = ort.step; renderPracticeFeedbackPage(index, correctIndex, { merk: merk }); });
   focusContent();
   renderLegalFooter();
 }
@@ -6703,6 +6842,12 @@ function weiterTextAmEnde(topic) {
    Auswahl: bei Chat-Szenarien nur die erste Szene (spätere hängen am
    Verlauf), sonst eine Szene der Runde 1, deren Regel der Weg gerade geübt
    hat. Ohne passende Szene bleibt die alte kurze Frage (Rückfall).
+   Entscheidung 29.09.2026 (Paket T3): Das Übungs-Handy ist NICHT mehr das
+   Standard-Format für „Anwenden“. Der neue Lernweg bekommt je Thema eine
+   eigene „Neue Situation“ (topic.neueSituation, Format weiter unten) – wie
+   Datenschutz. Sie hat immer Vorrang. Die Szene aus dem Übungs-Handy bleibt
+   nur der Rückfall für Themen, die noch keine eigene haben; das
+   Übungs-Handy selbst bleibt erhalten.
    ------------------------------------------------------------ */
 function transferSzeneWaehlen(topic) {
   const scn = topic ? getScenario(topic.id) : null;
@@ -6718,7 +6863,10 @@ function transferSzeneWaehlen(topic) {
   return { runde: runde, index: wahl.i };
 }
 
-function renderTransfer(topic, auswahl) {
+/* `wieder` (Paket T2): { reihe, antwort } – nach einem Sprachwechsel dieselbe
+   Reihenfolge der Antworten und, falls schon geantwortet, dieselbe
+   Rückmeldung (ohne sie noch einmal zu zählen). */
+function renderTransfer(topic, auswahl, wieder) {
   stopReading();
   currentTopicId = topic.id;
   const szene = auswahl.runde.szenen[auswahl.index];
@@ -6728,7 +6876,8 @@ function renderTransfer(topic, auswahl) {
   showNav(false, false);
   setHeader(topic.title, "Neue Situation", "Neue Situation", "Fast fertig", 95);
   setOrientation(`Du bist fast fertig mit dem Thema: ${topic.title}. Jetzt kommt eine neue Situation.`);
-  const antworten = antwortReihenfolge(frage, (frage.answers || []).length).map((i, pos) => `
+  const reihe = antwortReihenfolge(frage, (frage.answers || []).length, wieder && wieder.reihe);
+  const antworten = reihe.map((i, pos) => `
     <button type="button" class="answer-option transfer-answer" data-index="${i}">
       ${answerNumBadge(pos)}${answerPikto(frage.answers[i])}<span class="answer-text">${escapeHtml(answerText(frage.answers[i]))}</span>
     </button>`).join("");
@@ -6743,62 +6892,98 @@ function renderTransfer(topic, auswahl) {
     </article>
   `;
   content.querySelectorAll(".transfer-answer").forEach(btn => {
-    btn.addEventListener("click", () => answerTransfer(topic, auswahl, Number(btn.dataset.index)));
+    btn.addEventListener("click", () => answerTransfer(topic, auswahl, Number(btn.dataset.index), { reihe: reihe }));
   });
+  const mode = currentMode;
+  stelleMerken(() => { currentMode = mode; renderTransfer(topic, auswahl, { reihe: reihe }); });
   focusContent();
   renderLegalFooter();
+  if (wieder && typeof wieder.antwort === "number") answerTransfer(topic, auswahl, wieder.antwort, { reihe: reihe, wieder: true });
 }
 
-function answerTransfer(topic, auswahl, index) {
+/* `opt`: { reihe, wieder } – `wieder` = nach einem Sprachwechsel nur wieder
+   anzeigen (nicht merken, nicht zählen, kein Ton, keine Ansage). */
+function answerTransfer(topic, auswahl, index, opt) {
+  const o = opt || {};
   const feld = document.getElementById("transferFeedback");
   if (!feld || !feld.classList.contains("is-hidden")) return;
   const frage = auswahl.runde.szenen[auswahl.index].frage;
   const korrekt = Number(frage.correctIndex ?? 0);
-  const richtig = index === korrekt;
-  playSound(richtig ? "correct" : "wrong");
-  aufgabeMerken(topic.id, frage, richtig);
-  if (richtig) miniCheckDone[topic.id] = true;
-  else versuchZaehlen(frage);
+  /* Paket T5: richtig / auch möglich / falsch („auch möglich“ ist kein Fehler). */
+  const art = antwortArt(frage, index, korrekt);
+  const richtig = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  if (!o.wieder) {
+    playSound(ok ? "correct" : "wrong");
+    aufgabeMerken(topic.id, frage, ok);
+    if (!ok) versuchZaehlen(frage);
+  }
+  if (ok) miniCheckDone[topic.id] = true;
   content.querySelectorAll(".transfer-answer").forEach(b => {
     const i = Number(b.dataset.index);
     b.disabled = true;
-    if (i === index) b.classList.add(richtig ? "is-correct" : "is-wrong");
+    if (i === index) b.classList.add(richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
     if (!richtig && i === korrekt) b.classList.add("is-correct");
   });
-  const text = richtig ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut) : (falschFeedback(frage, index) || RUECKMELDUNG.fehlerOk);
-  const regel = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, topic.id, richtig);
+  const text = richtig ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut) : istAuch ? auchFeedback(frage, index) : (falschFeedback(frage, index) || RUECKMELDUNG.fehlerOk);
+  const regel = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, topic.id, ok);
   const id = escapeHtml(topic.id);
-  feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
+  feld.className = "sz-feedback " + (richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
   feld.innerHTML = `
-    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</p>
+    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz}</p>
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
-    ${!richtig && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[korrekt]) : ""}
+    ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[korrekt]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[korrekt]) : ""}
     ${regel}
     <div class="certificate-actions">
-      ${richtig ? "" : `<button type="button" class="nav-button secondary" onclick="renderMiniCheck('${id}')">Nochmal versuchen</button>`}
+      ${ok ? "" : `<button type="button" class="nav-button secondary" onclick="renderMiniCheck('${id}')">Nochmal versuchen</button>`}
       <button type="button" class="nav-button primary" onclick="miniCheckDone['${id}'] = true; renderCompletionPage('${id}')">Weiter</button>
     </div>`;
+  const mode = currentMode;
+  stelleMerken(() => { currentMode = mode; renderTransfer(topic, auswahl, { reihe: o.reihe, antwort: index }); });
   const weiter = feld.querySelector(".nav-button.primary");
   if (weiter) weiter.focus();
-  sprichEingefuegteRueckmeldung(feld);
+  if (!o.wieder) sprichEingefuegteRueckmeldung(feld);
 }
 
 /* ------------------------------------------------------------
-   EIGENE NEUE SITUATION (Datenschutz-Musterthema, Paket 2, 28.09.2026)
+   EIGENE NEUE SITUATION (Datenschutz-Musterthema, Paket 2, 28.09.2026;
+   seit Paket T3, 29.09.2026, das allgemeine Anwenden-Format für JEDES Thema)
    Anwenden mit einer Situation, die im Lernweg nirgends als Beispiel mit
-   Lösung vorkam. Ein stiller Bildschirm (Bausteine wie im Übungs-Handy)
-   und danach mehrere Einzel-Entscheidungen hintereinander – je Feld eine.
-   So zeigt sich, ob die Person nötig, nicht nötig und „kommt darauf an“
-   unterscheidet, statt alles abzulehnen. Format der Fragen = lesson.practice.
-   Übergangsweise vorhandenes Frage-Format; Paket 4 macht daraus
-   „Felder auswählen“. Nur Themen mit topic.neueSituation.
+   Lösung vorkam: gleiche Kompetenz, neuer Kontext – keine Wiederholung
+   einer schon erklärten Aufgabe. Ein stiller Bildschirm (Bausteine wie im
+   Übungs-Handy) und danach eine oder mehrere Entscheidungen.
+   Nur Themen mit topic.neueSituation; sie hat Vorrang vor der Szene aus
+   dem Übungs-Handy (renderMiniCheck).
+
+   DATENFORMAT topic.neueSituation (Leichte Sprache = Referenz):
+     einstieg   Satz vor dem Bildschirm. Text oder { leicht, einfach, standard }
+     kanal      Zeile über dem Bildschirm (z. B. „Nachricht“). Text oder Stufen
+     inhalt     [ Bausteine wie im Übungs-Handy: { typ: "nachricht", von, text },
+                  { typ: "hinweis", text }, … ] – jeder Text darf
+                  { leicht, einfach, standard } sein
+     fragen     [ Auswahl-Aufgaben im Format lesson.practice:
+                  id          fest, z. B. "hilfe/neu/fremde-nachricht"
+                              (sonst "<thema>/neu/<Position>")
+                  question, answers[] (2 oder mehr plausible Antworten),
+                  correctIndex, feedbackCorrect,
+                  feedbackWrong (ein Text oder je Antwort einer, null bei der
+                              passenden), hinweis (Tipp), remember (Merksatz =
+                              Regel-Schlüssel), nachFehler (Fehler merken und
+                              zweiter Versuch mit neuer Reihenfolge),
+                  nurLang     nur im Weg „Mehr lernen“
+                  nurKurz     nur im Weg „Kurz lernen“ ]
+     aufgaben   statt `fragen`: Formular-Aufgaben „Felder auswählen“
+                (typ: "felder", Datenschutz, Paket 4)
+   Einfach und Alltag der Fragen: AUFGABEN_VERSIONS in content-de.js unter
+   der ID (oder der Leicht-Frage). Fehlt eine Stufe, zeigt die App Leicht.
+   Schwierige Aufgaben, Frage des Tages und zweiter Versuch hängen am
+   Schlüssel (Leicht-Frage) und bleiben beim Sprachwechsel dieselben.
    ------------------------------------------------------------ */
 function neueSituationDaten(topic) {
   const ns = topic && topic.neueSituation;
   if (!ns) return null;
   /* Paket 4: Formular-Aufgaben („Felder auswählen“), je Weg gefiltert. */
   if (Array.isArray(ns.aufgaben)) return neueSituationAufgaben(ns).length ? ns : null;
-  return (Array.isArray(ns.fragen) && ns.fragen.length) ? ns : null;
+  return neueSituationFragen(ns).length ? ns : null;
 }
 
 /* Aufgaben der neuen Situation für den aktuellen Weg (`nurLang`: nur „Mehr lernen“). */
@@ -6806,21 +6991,45 @@ function neueSituationAufgaben(ns) {
   return (ns && Array.isArray(ns.aufgaben) ? ns.aufgaben : []).filter(a => a && (!a.nurLang || currentMode !== "short"));
 }
 
-function renderNeueSituation(topic, index) {
+/* Paket T3: Auswahl-Fragen für den aktuellen Weg (`nurLang` / `nurKurz`). */
+function neueSituationFragen(ns) {
+  return (ns && Array.isArray(ns.fragen) ? ns.fragen : []).filter(q => q && Array.isArray(q.answers) && q.answers.length
+    && !(q.nurLang && currentMode === "short") && !(q.nurKurz && currentMode !== "short"));
+}
+
+/* Paket T3: Texte in Bausteinen je Sprachstufe – { leicht, einfach, standard }
+   wird zum Text der aktuellen Stufe (Rückfall wie ketteText), alles andere
+   bleibt, wie es ist. */
+function stufenWert(x) {
+  if (Array.isArray(x)) return x.map(stufenWert);
+  if (x && typeof x === "object") {
+    if ("leicht" in x || "einfach" in x || "standard" in x) return ketteText(x);
+    const o = {};
+    Object.keys(x).forEach(k => { o[k] = stufenWert(x[k]); });
+    return o;
+  }
+  return x;
+}
+
+/* `wieder` (Paket T2): { reihe, antwort, merk } – wie bei renderTransfer. */
+function renderNeueSituation(topic, index, wieder) {
   const ns = neueSituationDaten(topic);
   if (!ns) return renderCompletionPage(topic.id);
   if (Array.isArray(ns.aufgaben)) return renderNeueSituationFelder(topic, index);
   stopReading();
   currentTopicId = topic.id;
-  const i = Math.max(0, Math.min(index, ns.fragen.length - 1));
-  const frage = ns.fragen[i];
+  const liste = neueSituationFragen(ns);
+  const i = Math.max(0, Math.min(index, liste.length - 1));
+  neueSituationIndex = i;
+  const frage = liste[i];
   setProgressVisible(false);
   setBottomNavVisible(false);
   showNav(false, false);
   setHeader(topic.title, "Neue Situation", "Neue Situation", "Fast fertig", 95);
   setOrientation(`Du bist fast fertig mit dem Thema: ${topic.title}. Jetzt kommt eine neue Situation.`);
-  const bildschirm = buildScenarioScreen({ typ: "formular", kanal: ns.kanal || "Übung", szenen: [{ inhalt: ns.inhalt || [] }] }, 0);
-  const antworten = antwortReihenfolge(frage, (frage.answers || []).length).map((a, pos) => `
+  const bildschirm = buildScenarioScreen({ typ: "formular", kanal: ketteText(ns.kanal) || "Übung", szenen: [{ inhalt: stufenWert(ns.inhalt || []) }] }, 0);
+  const reihe = antwortReihenfolge(frage, (frage.answers || []).length, wieder && wieder.reihe);
+  const antworten = reihe.map((a, pos) => `
     <button type="button" class="answer-option transfer-answer" data-index="${a}">
       ${answerNumBadge(pos)}${answerPikto(frage.answers[a])}<span class="answer-text">${escapeHtml(answerText(frage.answers[a]))}</span>
     </button>`).join("");
@@ -6832,55 +7041,66 @@ function renderNeueSituation(topic, index) {
       ${ns.einstieg ? `<p class="vorhersage-situation">${escapeHtml(ketteText(ns.einstieg))}</p>` : ""}
       ${bildschirm}
       ${buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten,
-        zaehler: LERNWEG_TEXT.frageVon.replace("{i}", i + 1).replace("{n}", ns.fragen.length),
+        zaehler: LERNWEG_TEXT.frageVon.replace("{i}", i + 1).replace("{n}", liste.length),
         hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
       <div id="transferFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
     </article>
   `;
   content.querySelectorAll(".transfer-answer").forEach(btn => {
-    btn.addEventListener("click", () => answerNeueSituation(topic, i, Number(btn.dataset.index)));
+    btn.addEventListener("click", () => answerNeueSituation(topic, i, Number(btn.dataset.index), { reihe: reihe }));
   });
+  const mode = currentMode;
+  stelleMerken(() => { currentMode = mode; renderNeueSituation(topic, i, { reihe: reihe }); });
   focusContent();
   renderLegalFooter();
+  if (wieder && typeof wieder.antwort === "number") answerNeueSituation(topic, i, wieder.antwort, { reihe: reihe, wieder: true, merk: wieder.merk });
 }
 
-function answerNeueSituation(topic, i, index) {
+/* `opt`: { reihe, wieder, merk } – wie bei answerTransfer. */
+function answerNeueSituation(topic, i, index, opt) {
+  const o = opt || {};
   const ns = neueSituationDaten(topic);
   const feld = document.getElementById("transferFeedback");
   if (!ns || !feld || !feld.classList.contains("is-hidden")) return;
-  const frage = ns.fragen[i];
+  const liste = neueSituationFragen(ns);
+  const frage = liste[i];
+  if (!frage) return;
   const korrekt = Number(frage.correctIndex ?? 0);
-  const richtig = index === korrekt;
-  const letzte = i >= ns.fragen.length - 1;
-  playSound(richtig ? "correct" : "wrong");
-  const merkN = aufgabeMerken(topic.id, frage, richtig);
-  if (!richtig) versuchZaehlen(frage);
+  /* Paket T5: richtig / auch möglich / falsch („auch möglich“ ist kein Fehler). */
+  const art = antwortArt(frage, index, korrekt);
+  const richtig = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  const letzte = i >= liste.length - 1;
+  if (!o.wieder) playSound(ok ? "correct" : "wrong");
+  const merkN = o.wieder ? (o.merk || null) : aufgabeMerken(topic.id, frage, ok);
+  if (!ok && !o.wieder) versuchZaehlen(frage);
   content.querySelectorAll(".transfer-answer").forEach(b => {
     const n = Number(b.dataset.index);
     b.disabled = true;
-    if (n === index) b.classList.add(richtig ? "is-correct" : "is-wrong");
+    if (n === index) b.classList.add(richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
     if (!richtig && n === korrekt) b.classList.add("is-correct");
   });
-  const text = richtig ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut) : (falschFeedback(frage, index) || RUECKMELDUNG.fehlerOk);
-  const regel = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, topic.id, richtig);
+  const text = richtig ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut) : istAuch ? auchFeedback(frage, index) : (falschFeedback(frage, index) || RUECKMELDUNG.fehlerOk);
+  const regel = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, topic.id, ok);
   const id = escapeHtml(topic.id);
   const weiter = letzte
     ? `miniCheckDone['${id}'] = true; renderCompletionPage('${id}')`
     : `renderNeueSituation(getTopicById('${id}'), ${i + 1})`;
-  feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
+  feld.className = "sz-feedback " + (richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
   feld.innerHTML = `
-    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</p>
+    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz}</p>
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
     ${korrekturHinweisHtml(merkN)}
-    ${!richtig && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[korrekt]) : ""}
+    ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[korrekt]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[korrekt]) : ""}
     ${regel}
     <div class="certificate-actions">
-      ${richtig ? "" : `<button type="button" class="nav-button secondary" onclick="renderNeueSituation(getTopicById('${id}'), ${i})">Nochmal versuchen</button>`}
+      ${ok ? "" : `<button type="button" class="nav-button secondary" onclick="renderNeueSituation(getTopicById('${id}'), ${i})">Nochmal versuchen</button>`}
       <button type="button" class="nav-button primary" onclick="${weiter}">Weiter</button>
     </div>`;
+  const mode = currentMode;
+  stelleMerken(() => { currentMode = mode; renderNeueSituation(topic, i, { reihe: o.reihe, antwort: index, merk: merkN }); });
   const knopf = feld.querySelector(".nav-button.primary");
   if (knopf) knopf.focus();
-  sprichEingefuegteRueckmeldung(feld);
+  if (!o.wieder) sprichEingefuegteRueckmeldung(feld);
 }
 
 /* ------------------------------------------------------------
@@ -7152,12 +7372,32 @@ function felderSperren() {
   content.querySelectorAll(".feld-check, .felder-aktionen--start button").forEach(el => { el.disabled = true; });
 }
 
-function felderZeigen(html) {
+/* `still` (Paket T4b): beim Wiederherstellen nach einem Sprachwechsel nicht
+   noch einmal vorlesen. */
+function felderZeigen(html, still) {
   const box = document.getElementById("felderRueckmeldung");
   if (!box) return;
   box.innerHTML = html;
   box.focus();
-  sprichEingefuegteRueckmeldung(box);
+  if (!still) sprichEingefuegteRueckmeldung(box);
+}
+
+/* Paket T4b (29.09.2026): Formular nach einem Sprachwechsel wieder in den
+   Stand bringen, den die Person schon erreicht hatte. `form` kommt aus
+   merkeStelle: { key, lern, stand }. `stand` hält felderAktiv selbst fest:
+   { art: "gesperrt" } (Pflicht-Angabe leer), { art: "ausweg", ausweg }
+   („erst prüfen“ / „nicht nutzen“) oder { art: "bewertet", merk }
+   (Auswertung). Neu gezeichnet wird mit denselben Zeilen – die Texte in der
+   neuen Stufe –, aber ohne neue Bewertung: nichts gemerkt, nichts gezählt,
+   kein Ton, keine Ansage. Nur wenn wirklich dieselbe Aufgabe dasteht. */
+function felderWiederherstellen(form) {
+  const a = felderAktiv;
+  if (!a || !form || aufgabeSchluessel(a.q) !== form.key || !content.querySelector(".felder-aufgabe")) return;
+  if (form.lern && !a.lern) felderLernschritt(form.lern.art, true);
+  const s = form.stand;
+  if (!s) return;
+  if (s.art === "ausweg") felderAusweg(s.ausweg, true);
+  else if (s.art === "gesperrt" || s.art === "bewertet") felderFertig({ merk: s.merk || null });
 }
 
 /* Weiter-Knopf unten auf dem Lernschritt freigeben (vorher „Zur Übung ↓“). */
@@ -7167,7 +7407,9 @@ function felderNavFrei() {
   showNav(true, true, currentStep === lessons.length - 1 ? weiterTextAmEnde(topic) : "Weiter");
 }
 
-function felderFertig() {
+/* `wieder` (Paket T4b): { merk } – dieselbe Auswertung nach einem
+   Sprachwechsel nur neu zeigen (siehe felderWiederherstellen). */
+function felderFertig(wieder) {
   const a = felderAktiv;
   if (!a) return;
   const wahl = felderGewaehlt();
@@ -7185,7 +7427,8 @@ function felderFertig() {
     felderZeigen(`
       <p class="felder-gesperrt"><strong>${escapeHtml(FELDER_TEXT.gesperrt)}</strong> ${escapeHtml(gesperrt.map(x => x.f.name).join(", "))}.</p>
       ${klar.length ? `<p>${escapeHtml(mitNamen(klar, FELDER_TEXT.gesperrtWahl))}</p>` : ""}
-      ${unklar.length ? `<p>${escapeHtml(mitNamen(unklar, FELDER_TEXT.gesperrtUnklar))}</p>` : ""}`);
+      ${unklar.length ? `<p>${escapeHtml(mitNamen(unklar, FELDER_TEXT.gesperrtUnklar))}</p>` : ""}`, !!wieder);
+    a.stand = { art: "gesperrt" };
     return;
   }
   const fest = (a.lern && a.lern.fest) || [];
@@ -7203,9 +7446,10 @@ function felderFertig() {
   const neinGesagt = ergebnis.some(e => e.stufe === "wahl" && !e.an);
   const summe = !richtig ? (fehler === 1 ? FELDER_TEXT.nochNicht1 : FELDER_TEXT.nochNichtN.replace("{n}", fehler))
     : (neinGesagt ? FELDER_TEXT.allesWahl : FELDER_TEXT.allesPasst);
-  const merk = aufgabeMerken(a.topicId, a.q, richtig);
-  if (a.ort === "wiederholen" && richtig) { if (merk.korrektur) bigQuizKorrigiert++; else bigQuizScore++; }
-  playSound(richtig ? "correct" : "wrong");
+  const merk = wieder ? (wieder.merk || { korrektur: false }) : aufgabeMerken(a.topicId, a.q, richtig);
+  if (a.ort === "wiederholen" && richtig && !wieder) { if (merk.korrektur) bigQuizKorrigiert++; else bigQuizScore++; }
+  if (!wieder) playSound(richtig ? "correct" : "wrong");
+  a.stand = { art: "bewertet", merk: merk };
   felderSperren();
   const zeilen = ergebnis.map(e => `
       <li class="feld-ergebnis feld-ergebnis--${e.stufe}">
@@ -7231,7 +7475,7 @@ function felderFertig() {
       ${richtig ? "" : `<button type="button" class="secondary-action" onclick="felderNochmal()">${escapeHtml(FELDER_TEXT.nochmal)}</button>`}
       <button type="button" class="primary-action" onclick="felderWeiter()">${escapeHtml(FELDER_TEXT.weiter)}</button>
     </div>
-    ${richtig ? "" : `<p class="feedback-spaeter">${escapeHtml(FELDER_TEXT.spaeter)}</p>`}`);
+    ${richtig ? "" : `<p class="feedback-spaeter">${escapeHtml(FELDER_TEXT.spaeter)}</p>`}`, !!wieder);
   if (a.ort === "lektion") felderNavFrei();
 }
 
@@ -7245,9 +7489,11 @@ function felderUnklarePflicht(q) {
    Entscheidung ist sicher – sie zeigt aber noch nicht, dass die Person alle
    Angaben unterscheiden kann. Darum folgt der Lern-Schritt; gemerkt (gelöst
    oder schwierig) wird erst dort. Keine Lösungsliste vor der eigenen Wahl. */
-function felderAusweg(art) {
+/* `still` (Paket T4b): nach einem Sprachwechsel nur wieder zeigen. */
+function felderAusweg(art, still) {
   const a = felderAktiv;
   if (!a) return;
+  a.stand = { art: "ausweg", ausweg: art };
   const q = a.q;
   const hatUnklar = felderUnklarePflicht(q).length > 0;
   const eigen = q.auswegRueckmeldung && q.auswegRueckmeldung[art];
@@ -7261,13 +7507,14 @@ function felderAusweg(art) {
     <div class="felder-aktionen">
       <button type="button" class="secondary-action" onclick="felderNochmal()">${escapeHtml(FELDER_TEXT.zurueck)}</button>
       <button type="button" class="primary-action" onclick="felderLernschritt('${art === "nichtNutzen" ? "nichtNutzen" : "erstPruefen"}')">${escapeHtml(FELDER_TEXT.lernKnopf)}</button>
-    </div>`);
+    </div>`, !!still);
 }
 
 /* Lern-Schritt: dasselbe Formular. Unklare Pflicht-Angaben bleiben fest bei
    der sicheren Entscheidung; die anderen Zeilen entscheidet die Person selbst.
    Nur Simulation – es wird nichts weitergegeben. */
-function felderLernschritt(art) {
+/* `still` (Paket T4b): beim Wiederherstellen keine Ansage. */
+function felderLernschritt(art, still) {
   const a = felderAktiv;
   const el = content.querySelector(".felder-aufgabe");
   if (!a || !el) return;
@@ -7279,7 +7526,7 @@ function felderLernschritt(art) {
   felderAktiv.weiter = weiter;
   const erstes = content.querySelector(".feld-check:not([disabled])");
   if (erstes) erstes.focus();
-  announce(fest.length ? FELDER_TEXT.lernFrageAndere : FELDER_TEXT.lernFrageAlle);
+  if (!still) announce(fest.length ? FELDER_TEXT.lernFrageAndere : FELDER_TEXT.lernFrageAlle);
 }
 
 /* Zweiter Versuch: dasselbe Formular, die bisherige Wahl bleibt stehen –
@@ -7356,6 +7603,8 @@ function renderBigQuizFelder(q, total) {
       ${buildFelderAufgabe(q.felder, "wiederholen", q.topicId)}
     </article>
   `;
+  const i = bigQuizIndex;
+  stelleMerken(() => { bigQuizIndex = i; renderBigQuizQuestion(); });
   focusContent();
   renderLegalFooter();
 }
@@ -7855,14 +8104,16 @@ function weiterlernenAntwort(index) {
   const p = lesson && lesson.practice;
   const box = document.getElementById("weiterlernenRueckmeldung");
   if (!p || !box) return;
-  const richtig = index === Number(p.correctIndex ?? 0);
-  playSound(richtig ? "correct" : "wrong");
-  const erklaerung = richtig ? (p.feedbackCorrect || RUECKMELDUNG.entscheidungGut) : (falschFeedback(p, index) || "");
+  /* Paket T5: „auch möglich“ ist kein Fehler. */
+  const art = antwortArt(p, index);
+  const richtig = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  playSound(ok ? "correct" : "wrong");
+  const erklaerung = richtig ? (p.feedbackCorrect || RUECKMELDUNG.entscheidungGut) : istAuch ? auchFeedback(p, index) : (falschFeedback(p, index) || "");
   box.innerHTML = `
-    <div class="access-box ${richtig ? "success" : "warning"}">
-      <h3>${escapeHtml(richtig ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel)}</h3>
+    <div class="access-box ${ok ? "success" : "warning"}">
+      <h3>${escapeHtml(richtig ? RUECKMELDUNG.passtTitel : istAuch ? RUECKMELDUNG.auchTitel : RUECKMELDUNG.nochNichtTitel)}</h3>
       <p>${escapeHtml(erklaerung)}</p>
-      ${richtig ? "" : `<p>${escapeHtml(RUECKMELDUNG.fehlerOk)}</p>`}
+      ${ok ? "" : `<p>${escapeHtml(RUECKMELDUNG.fehlerOk)}</p>`}
     </div>`;
 }
 
@@ -8041,7 +8292,9 @@ function getEinfachQuizQuestions(topic) {
   return alle.slice(0, 3);
 }
 
-function renderEinfachQuizQuestion() {
+/* `fest` (Paket T2): nach einem Sprachwechsel dieselbe falsche Antwort an
+   derselben Stelle – nur in der neuen Sprachstufe. */
+function renderEinfachQuizQuestion(fest) {
   stopReading();
   const topic = getCurrentTopic();
   const questions = getEinfachQuizQuestions(topic);
@@ -8052,19 +8305,25 @@ function renderEinfachQuizQuestion() {
   const answers = Array.isArray(q.answers) ? q.answers : [];
   const correctIndex = Number(q.correctIndex ?? 0);
   const correctText = answerText(answers[correctIndex]);
+  const gleicheFrage = !!fest && fest.topicId === topic.id && fest.index === currentQuizIndex;
 
-  /* Eine falsche Antwort zufällig wählen */
-  const wrongPool = answers.filter((_, i) => i !== correctIndex);
-  const wrongText = wrongPool[Math.floor(Math.random() * wrongPool.length)] || "Weiß ich nicht";
+  /* Eine falsche Antwort zufällig wählen. Paket T5: eine „auch mögliche“
+     Antwort nur, wenn es keine unpassende gibt – sonst wären beide richtig. */
+  const auchListe = Array.isArray(q.auchMoeglich) ? q.auchMoeglich.map(Number) : [];
+  const andere = answers.map((_, i) => i).filter(i => i !== correctIndex);
+  const unpassend = andere.filter(i => auchListe.indexOf(i) === -1);
+  const wrongPool = unpassend.length ? unpassend : andere;
+  const wrongIndex = gleicheFrage ? fest.wrongIndex
+    : (wrongPool.length ? wrongPool[Math.floor(Math.random() * wrongPool.length)] : -1);
+  const wrongText = wrongIndex >= 0 ? answers[wrongIndex] : "Weiß ich nicht";
 
   /* Reihenfolge zufällig variieren */
-  const correctFirst = Math.random() < 0.5;
+  const correctFirst = gleicheFrage ? fest.correctFirst : Math.random() < 0.5;
   /* `index` = Platz der Antwort in der Frage (nicht auf dem Bildschirm). Die
      Rückmeldung bekommt immer diesen Platz – vorher bekam sie bei den Themen
      ohne `nachFehler` die Bildschirm-Position (0/1), und die Erklärung gehörte
      oft zu einer anderen Antwort (Paket 6: in 66 von 132 Fällen, alle 11
      anderen Themen). Datenschutz war seit Paket 3 korrekt. */
-  const wrongIndex = answers.indexOf(wrongText);
   const opts = correctFirst
     ? [{ text: correctText, correct: true, index: correctIndex }, { text: wrongText, correct: false, index: wrongIndex }]
     : [{ text: wrongText, correct: false, index: wrongIndex }, { text: correctText, correct: true, index: correctIndex }];
@@ -8095,57 +8354,64 @@ function renderEinfachQuizQuestion() {
       </div>
     </article>
   `;
+  const lage = { topicId: topic.id, index: currentQuizIndex, wrongIndex: wrongIndex, correctFirst: correctFirst };
+  stelleMerken(() => { currentTopicId = lage.topicId; currentQuizIndex = lage.index; renderEinfachQuizQuestion(lage); });
   focusContent();
   renderLegalFooter();
 }
 
-function renderEinfachQuizFeedback(optionIndex, isCorrect) {
+function renderEinfachQuizFeedback(optionIndex, istPassend) {
   stopReading();
   const topic = getCurrentTopic();
   const questions = getEinfachQuizQuestions(topic);
   const q = questions[currentQuizIndex];
   if (!topic || !q) return renderMenu();
 
-  playSound(isCorrect ? "correct" : "wrong");
+  /* Paket T5: richtig / auch möglich / falsch – aus der Antwort bestimmt
+     (`istPassend` vom Knopf bleibt nur zur Lesbarkeit der Aufrufe). */
+  const art = antwortArt(q, optionIndex);
+  const isCorrect = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  playSound(ok ? "correct" : "wrong");
   /* Datenschutz, Paket 3: Aufgabe merken (Wiederholen) und zweiter Versuch. */
   let merkK = null;
   if (q.nachFehler) {
-    merkK = aufgabeMerken(topic.id, q, isCorrect);
-    if (!isCorrect) versuchZaehlen(q);
+    merkK = aufgabeMerken(topic.id, q, ok);
+    if (!ok) versuchZaehlen(q);
   }
-  if (isCorrect) {
+  if (ok) {
     /* Vor-Nutzertest: Korrekturversuch getrennt zählen (nur strenge Themen). */
     if (merkK && merkK.korrektur) quizKorrigiert++; else quizScore++;
     quizAnsweredCorrect.add(currentQuizIndex);
   }
-  const nochmal = (!isCorrect && q.nachFehler)
+  const nochmal = (!ok && q.nachFehler)
     ? `<button type="button" class="secondary-action" onclick="renderEinfachQuizQuestion()">Nochmal versuchen</button>` : "";
 
   const feedbackText = isCorrect
     ? (q.feedbackCorrect || RUECKMELDUNG.passtAnsage)
+    : istAuch ? (auchFeedback(q, optionIndex) || RUECKMELDUNG.auchAnsage)
     : (falschFeedback(q, optionIndex) || RUECKMELDUNG.fehlerOk);
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(topic.title, "Einfach-Quiz", "Antwort", isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz, 100);
+  setHeader(topic.title, "Einfach-Quiz", "Antwort", isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz, 100);
   setOrientation(`Du machst das Quiz: ${topic.title}.`);
 
   content.innerHTML = `
-    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
-      <h2 class="einfach-quiz-result-title">${isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel}</h2>
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : istAuch ? "feedback-auch" : "feedback-wrong"}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <h2 class="einfach-quiz-result-title">${isCorrect ? RUECKMELDUNG.passtTitel : istAuch ? RUECKMELDUNG.auchTitel : RUECKMELDUNG.nochNichtTitel}</h2>
       <p class="einfach-quiz-feedback-text">${escapeHtml(feedbackText)}</p>
-      ${korrekturHinweisHtml(merkK)}
+      ${korrekturHinweisHtml(merkK)}${istAuch ? nochEinWegHtml((q.answers || [])[Number(q.correctIndex ?? 0)]) : ""}
       <div class="einfach-quiz-next-actions">
         ${nochmal}
         <button type="button" class="primary-action" onclick="einfachQuizNext()">
           ${currentQuizIndex < questions.length - 1 ? "Weiter" : "Ergebnis ansehen"}
         </button>
       </div>
-      ${!isCorrect ? buildTaskHelpBox(taskHint(q, "quiz"), false, true) : ""}
+      ${!ok ? buildTaskHelpBox(taskHint(q, "quiz"), false, true) : ""}
     </article>
   `;
   /* Vor-Nutzertest: Rückmeldung ansagen (wie im Quiz). */
-  announce(isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtAnsage);
+  announce(isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtAnsage);
   focusContent();
   renderLegalFooter();
 }
@@ -8236,11 +8502,15 @@ function renderQuizQuestion() {
       ${buildFrage({ frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${currentQuizIndex + 1} von ${questions.length}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) })}
     </article>
   `;
+  const t = topic.id, i = currentQuizIndex;
+  stelleMerken(() => { currentTopicId = t; currentQuizIndex = i; renderQuizQuestion(); });
   focusContent();
   renderLegalFooter();
 }
 
-function renderQuizFeedbackPage(index) {
+/* `wieder` (Paket T2): Rückmeldung nach einem Sprachwechsel nur neu zeichnen –
+   nicht noch einmal merken, zählen, klingen oder ansagen. */
+function renderQuizFeedbackPage(index, wieder) {
   stopReading();
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
@@ -8250,11 +8520,13 @@ function renderQuizFeedbackPage(index) {
   const answers = Array.isArray(q.answers) ? q.answers : [];
   const correctIndex = Number(q.correctIndex ?? q.correct ?? 0);
   const selectedText = answerText(answers[index]);
-  const isCorrect = index === correctIndex;
-  playSound(isCorrect ? "correct" : "wrong");
-  const merkQ = aufgabeMerken(topic.id, q, isCorrect);
+  /* Paket T5: „auch möglich“ zählt wie eine passende Antwort (kein Fehler). */
+  const art = antwortArt(q, index, correctIndex);
+  const isCorrect = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  if (!wieder) playSound(ok ? "correct" : "wrong");
+  const merkQ = wieder ? wieder.merk : aufgabeMerken(topic.id, q, ok);
 
-  if (isCorrect && !quizAnsweredCorrect.has(currentQuizIndex)) {
+  if (!wieder && ok && !quizAnsweredCorrect.has(currentQuizIndex)) {
     /* Vor-Nutzertest: Korrekturversuch getrennt zählen (nur strenge Themen). */
     if (merkQ.korrektur) quizKorrigiert += 1; else quizScore += 1;
     quizAnsweredCorrect.add(currentQuizIndex);
@@ -8262,7 +8534,9 @@ function renderQuizFeedbackPage(index) {
 
   const explanation = isCorrect
     ? (q.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
+    : istAuch ? auchFeedback(q, index)
     : (falschFeedback(q, index) || "Das ist nicht sicher. Du kannst die Frage noch einmal versuchen.");
+  const kopf = isCorrect ? RUECKMELDUNG.passtTitel : istAuch ? RUECKMELDUNG.auchTitel : RUECKMELDUNG.nochNichtTitel;
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
   /* Deine Karte: Quizfragen haben KEIN remember-Feld (122 Fragen, keine
      einzige). Deshalb wird die Regel aus der Erklaerung der richtigen
@@ -8271,44 +8545,46 @@ function renderQuizFeedbackPage(index) {
      gehen war messbar schlechter: "Am Automaten klebt ein QR-Code" landete
      bei den Codes statt bei den Links. Bekommt eine Frage spaeter ein
      remember, gewinnt das. */
-  const regelHinweis = regelKastenHtml(regelAusQuizfrage(q), topic.id, isCorrect);
+  const regelHinweis = regelKastenHtml(regelAusQuizfrage(q), topic.id, ok);
 
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setHeader(topic.title, "Quiz", "Rückmeldung", isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel, 100);
+  setHeader(topic.title, "Quiz", "Rückmeldung", kopf, 100);
   setOrientation(`Du machst das Quiz: ${topic.title}.`);
 
   content.innerHTML = `
     ${buildToolRow()}
-    <article class="card feedback-page ${isCorrect ? "feedback-correct" : "feedback-wrong"}" data-readable="true">
-      <h2>${isCorrect ? RUECKMELDUNG.passtTitel : RUECKMELDUNG.nochNichtTitel}</h2>
+    <article class="card feedback-page ${isCorrect ? "feedback-correct" : istAuch ? "feedback-auch" : "feedback-wrong"}" data-readable="true">
+      <h2>${kopf}</h2>
 
       <div class="feedback-selected">
         <h3>Deine Antwort:</h3>
         <p>${escapeHtml(selectedText)}</p>
       </div>
 
-      <div class="feedback-explanation">
+      ${explanation ? `<div class="feedback-explanation">
         <h3>Erklärung:</h3>
         <p>${escapeHtml(explanation)}</p>
-      </div>
-      ${!isCorrect ? passendeAntwortHtml(q.answers[correctIndex]) : ""}
-      ${!isCorrect ? roleFigure("ruhig") : ""}
+      </div>` : ""}
+      ${!ok ? passendeAntwortHtml(q.answers[correctIndex]) : istAuch ? nochEinWegHtml(q.answers[correctIndex]) : ""}
+      ${!ok ? roleFigure("ruhig") : ""}
 
       ${regelHinweis}
 
       <div class="feedback-actions">
-        ${isCorrect
+        ${ok
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterQuizAnswer()">Weiter</button>${korrekturHinweisHtml(merkQ)}`
           : `<button type="button" class="feedback-button secondary" onclick="renderQuizQuestion()">Nochmal versuchen</button>
              <button type="button" class="feedback-button ghost" onclick="startTopicMode('${escapeHtml(topic.id)}', 'full')">📖 Lektionen nachlesen</button>`
         }
       </div>
 
-      ${!isCorrect ? buildTaskHelpBox(taskHint(q, "quiz"), false, true) : ""}
+      ${!ok ? buildTaskHelpBox(taskHint(q, "quiz"), false, true) : ""}
     </article>
   `;
-  announce(isCorrect ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtAnsage);
+  if (!wieder) announce(isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtAnsage);
+  const t = topic.id, i = currentQuizIndex;
+  stelleMerken(() => { currentTopicId = t; currentQuizIndex = i; renderQuizFeedbackPage(index, { merk: merkQ }); });
   focusContent();
   renderLegalFooter();
 }
@@ -8318,15 +8594,16 @@ function continueAfterQuizAnswer() {
   renderQuizQuestion();
 }
 
-function renderQuizResult() {
+function renderQuizResult(wieder) {
   stopReading();
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
   const total = questions.length || 1;
   const percent = Math.round((quizScore / total) * 100);
   const streng = !!topic && wiederholenStreng(topic.id);
-  if (topic) markTopicDone(topic.id);
-  playSound("success");
+  /* Paket T2: nach einem Sprachwechsel nicht noch einmal abschließen. */
+  if (topic && !wieder) markTopicDone(topic.id);
+  if (!wieder) playSound("success");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -8356,6 +8633,8 @@ function renderQuizResult() {
       </div>
     </article>
   `;
+  const t = currentTopicId;
+  stelleMerken(() => { currentTopicId = t; renderQuizResult(true); });
   focusContent();
   renderLegalFooter();
 }
@@ -8622,29 +8901,40 @@ function renderBigQuizQuestion() {
       ${buildFrage({ frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${bigQuizIndex + 1} von ${total}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) })}
     </article>
   `;
+  const i = bigQuizIndex;
+  stelleMerken(() => { bigQuizIndex = i; renderBigQuizQuestion(); });
   focusContent();
   renderLegalFooter();
 }
 
-function renderBigQuizFeedback(selectedIndex) {
+/* `wieder` (Paket T2): nach einem Sprachwechsel nur neu zeichnen. */
+function renderBigQuizFeedback(selectedIndex, wieder) {
   stopReading();
   const q = bigQuizQuestions[bigQuizIndex];
   if (!q) return renderBigQuizResult();
+  /* Paket T2: auch die Rückmeldung zeigt die Texte der aktuellen Stufe. */
+  if (q.quelle) {
+    q.question = q.quelle.question || "";
+    q.answers = Array.isArray(q.quelle.answers) ? q.quelle.answers : [];
+  }
 
-  const isCorrect = selectedIndex === q.correct;
+  /* Paket T5: richtig / auch möglich / falsch („auch möglich“ ist kein Fehler). */
+  const art = antwortArt(q.quelle || q, selectedIndex, q.correct);
+  const isCorrect = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
   /* Lernweg (26.09.2026): auch hier erklären statt nur „passt / passt nicht",
      und schwierige Aufgaben merken bzw. nach richtiger Antwort austragen. */
-  const merkB = aufgabeMerken(q.topicId, q.quelle || q, isCorrect);
+  const merkB = wieder ? wieder.merk : aufgabeMerken(q.topicId, q.quelle || q, ok);
   /* Vor-Nutzertest: Korrekturversuch getrennt zählen (nur strenge Themen). */
-  if (isCorrect) { if (merkB.korrektur) bigQuizKorrigiert += 1; else bigQuizScore += 1; }
-  playSound(isCorrect ? "correct" : "wrong");
+  if (ok && !wieder) { if (merkB.korrektur) bigQuizKorrigiert += 1; else bigQuizScore += 1; }
+  if (!wieder) playSound(ok ? "correct" : "wrong");
   const erklaerung = q.quelle
-    ? (isCorrect ? (q.quelle.feedbackCorrect || "") : (falschFeedback(q.quelle, selectedIndex) || ""))
+    ? (isCorrect ? (q.quelle.feedbackCorrect || "") : istAuch ? auchFeedback(q.quelle, selectedIndex) : (falschFeedback(q.quelle, selectedIndex) || ""))
     : "";
 
-  const feedbackClass = isCorrect ? "feedback-correct" : "feedback-wrong";
+  const feedbackClass = isCorrect ? "feedback-correct" : istAuch ? "feedback-auch" : "feedback-wrong";
   const feedbackText  = isCorrect
     ? "✓ " + RUECKMELDUNG.passtAnsage
+    : istAuch ? `✓ ${escapeHtml(RUECKMELDUNG.auchAnsage)} ${escapeHtml(RUECKMELDUNG.nochEinWeg)} ${escapeHtml(q.answers[q.correct] || "")}`
     : `${RUECKMELDUNG.passendeAntwort} ${escapeHtml(q.answers[q.correct] || "")}`;
 
   const isLast = bigQuizIndex >= bigQuizQuestions.length - 1;
@@ -8658,8 +8948,8 @@ function renderBigQuizFeedback(selectedIndex) {
       ${questionPikto(q)}<p class="quiz-question">${escapeHtml(q.question)}</p>
       <div class="answers">
         ${q.answers.map((a, i) => `
-          <div class="answer-option answer-shown ${i === q.correct ? "answer-correct" : (i === selectedIndex ? "answer-wrong" : "")}">
-            ${i === q.correct ? "✓ " : (i === selectedIndex ? "✗ " : "")}${escapeHtml(a)}
+          <div class="answer-option answer-shown ${i === q.correct ? "answer-correct" : (i === selectedIndex ? (istAuch ? "answer-auch" : "answer-wrong") : "")}">
+            ${i === q.correct ? "✓ " : (i === selectedIndex ? (istAuch ? "✓ " : "✗ ") : "")}${escapeHtml(a)}
           </div>`).join("")}
       </div>
       <p class="${feedbackClass}">${feedbackText}</p>
@@ -8673,6 +8963,8 @@ function renderBigQuizFeedback(selectedIndex) {
       </div>
     </article>
   `;
+  const i = bigQuizIndex, merk = merkB;
+  stelleMerken(() => { bigQuizIndex = i; renderBigQuizFeedback(selectedIndex, { merk: merk }); });
   focusContent();
   renderLegalFooter();
 }
@@ -8682,11 +8974,11 @@ function nextBigQuizQuestion() {
   renderBigQuizQuestion();
 }
 
-function renderBigQuizResult() {
+function renderBigQuizResult(wieder) {
   stopReading();
   const total   = bigQuizQuestions.length || 1;
   const percent = Math.round((bigQuizScore / total) * 100);
-  playSound("success");
+  if (!wieder) playSound("success");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -8713,6 +9005,7 @@ function renderBigQuizResult() {
       </div>
     </article>
   `;
+  stelleMerken(() => renderBigQuizResult(true));
   focusContent();
   renderLegalFooter();
 }
@@ -9246,6 +9539,7 @@ function renderScenarioChooser() {
       </div>
     </article>
   `;
+  stelleMerken(() => renderScenarioChooser());
   focusContent();
   renderLegalFooter();
 }
@@ -9308,6 +9602,8 @@ function startScenario(topicId) {
       </div>
     </article>
   `;
+  const t = scenarioTopicId;
+  stelleMerken(() => startScenario(t));
   focusContent();
   renderLegalFooter();
 }
@@ -9379,11 +9675,15 @@ function renderScenarioScene() {
     btn.addEventListener("click", () => answerScenario(Number(btn.dataset.index)));
   });
 
+  const t = scenarioTopicId, st = scenarioStufe, idx = scenarioIndex, ri = scenarioRight;
+  stelleMerken(() => { scenarioTopicId = t; currentTopicId = t; scenarioStufe = st; scenarioIndex = idx; scenarioRight = ri; renderScenarioScene(); });
   focusContent();
   renderLegalFooter();
 }
 
-function answerScenario(index) {
+/* `wieder` (Paket T2): gegebene Antwort nach einem Sprachwechsel nur wieder
+   anzeigen – nicht noch einmal zählen oder klingen. */
+function answerScenario(index, wieder) {
   if (scenarioAnswered) return;
   const scn = getScenario(scenarioTopicId);
   if (!scn) return;
@@ -9393,21 +9693,24 @@ function answerScenario(index) {
   if (!frage) return;
 
   scenarioAnswered = true;
-  const richtig = index === Number(frage.correctIndex ?? 0);
-  if (richtig) scenarioRight += 1;
-  playSound(richtig ? "correct" : "wrong");
+  /* Paket T5: richtig / auch möglich / falsch („auch möglich“ zählt als geschafft). */
+  const art = antwortArt(frage, index);
+  const richtig = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  if (ok && !wieder) scenarioRight += 1;
+  if (!wieder) playSound(ok ? "correct" : "wrong");
 
   content.querySelectorAll(".sz-answer").forEach((b, i) => {
     b.disabled = true;
-    if (i === index) b.classList.add(richtig ? "is-correct" : "is-wrong");
+    if (i === index) b.classList.add(richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
     if (!richtig && i === Number(frage.correctIndex ?? 0)) b.classList.add("is-correct");
   });
 
   const text = richtig
     ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
+    : istAuch ? auchFeedback(frage, index)
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
-  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, scenarioTopicId, richtig);
+  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, scenarioTopicId, ok);
   const letzte = scenarioIndex >= runde.szenen.length - 1;
 
   /* "Die war schwer" – Einordnung statt Lob. Nimmt Erwachsene ernst und
@@ -9427,27 +9730,32 @@ function answerScenario(index) {
            <p class="phone-bar">Diese Seite geht auf</p>
            <div class="phone-screen">${(falle.inhalt || []).map(scenarioElementHtml).join("")}</div>
          </div>
-         <p class="sz-falle-text">${escapeHtml(richtig ? (falle.text || "") : (falle.textFalsch || falle.text || ""))}</p>
+         <p class="sz-falle-text">${escapeHtml(ok ? (falle.text || "") : (falle.textFalsch || falle.text || ""))}</p>
        </div>`
     : "";
 
   const feld = document.getElementById("szFeedback");
   if (!feld) return;
-  feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
+  feld.className = "sz-feedback " + (richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
   feld.innerHTML = `
-    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</p>
+    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz}</p>
     ${schwerHtml}
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
-    ${!richtig && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : ""}
+    ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : ""}
     ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
     ${regelHinweis}
     <div class="certificate-actions">
       <button type="button" class="nav-button primary" onclick="nextScenarioScene()">${letzte ? "Zum Ergebnis" : "Weiter"}</button>
     </div>`;
+  const t = scenarioTopicId, st = scenarioStufe, idx = scenarioIndex, ri = scenarioRight;
+  stelleMerken(() => {
+    scenarioTopicId = t; currentTopicId = t; scenarioStufe = st; scenarioIndex = idx; scenarioRight = ri;
+    renderScenarioScene(); answerScenario(index, true);
+  });
   const weiter = feld.querySelector("button");
   if (weiter) weiter.focus();
-  sprichEingefuegteRueckmeldung(feld);
+  if (!wieder) sprichEingefuegteRueckmeldung(feld);
 }
 
 function nextScenarioScene() {
@@ -9455,14 +9763,14 @@ function nextScenarioScene() {
   renderScenarioScene();
 }
 
-function renderScenarioResult() {
+function renderScenarioResult(wieder) {
   stopReading();
   const topic = getTopicById(scenarioTopicId);
   const scn = getScenario(scenarioTopicId);
   if (!topic || !scn) return renderMenu();
   const runde = scenarioRunde(scn, scenarioStufe);
   const total = runde.szenen.filter(s => s.frage).length || 1;
-  playSound("success");
+  if (!wieder) playSound("success");
 
   /* Naechste Runde freischalten (Sept 2026). Schwelle: drei Viertel richtig –
      ueber dem Zufall, aber erreichbar. Wer sie nicht schafft, verliert nichts
@@ -9533,6 +9841,8 @@ function renderScenarioResult() {
       </div>
     </article>
   `;
+  const t = scenarioTopicId, st = scenarioStufe, ri = scenarioRight;
+  stelleMerken(() => { scenarioTopicId = t; currentTopicId = t; scenarioStufe = st; scenarioRight = ri; renderScenarioResult(true); });
   focusContent();
   renderLegalFooter();
 }
@@ -9943,8 +10253,39 @@ function applyExtraPractice() {
   return gesetzt;
 }
 
+/* ------------------------------------------------------------
+   FESTE AUFGABEN-IDS (Paket T1, 29.09.2026)
+   Jede Übung in einer Lektion bekommt eine ID aus Thema, Weg und
+   Lektions-Titel: "whatsapp/lang/WhatsApp nutzen", "betrug/kurz/…".
+   Aufgaben einer eigenen neuen Situation: ihre `id` aus den Daten, sonst
+   die Position ("<thema>/neu/0"). Die ID hängt nicht an der Sprachstufe
+   und nicht am Wortlaut der Frage. Sie ist die Adresse für die
+   Sprachfassungen (AUFGABEN_VERSIONS in content-de.js) und für den
+   Rückweg nach einem Sprachwechsel.
+   Was eine Aufgabe für das Gedächtnis ist (schwierige Aufgaben, Frage des
+   Tages, zweiter Versuch, Formular-Wahl), bleibt der Schlüssel =
+   Leicht-Frage (aufgabeSchluessel): So finden bereits gespeicherte
+   Lernstände ihre Aufgaben weiter. Wird ein Leicht-Text später geändert,
+   den alten Text als `schluessel` in die Aufgabe schreiben.
+   Vorhandene IDs werden nie überschrieben.
+   ------------------------------------------------------------ */
+function aufgabenIdsVergeben() {
+  if (typeof topics === "undefined" || !Array.isArray(topics)) return;
+  topics.forEach(topic => {
+    const setze = (q, id) => { if (q && typeof q === "object" && !q.id) q.id = id; };
+    (topic.lessons || []).forEach(l => l && setze(l.practice, topic.id + "/lang/" + l.title));
+    (topic.einfachLessons || []).forEach(l => l && setze(l.practice, topic.id + "/kurz/" + l.title));
+    const ns = topic.neueSituation;
+    if (ns) (Array.isArray(ns.aufgaben) ? ns.aufgaben : (ns.fragen || [])).forEach((q, i) => setze(q, topic.id + "/neu/" + i));
+  });
+}
+
 /* Glossar initialisieren */
 applyExtraPractice();
+aufgabenIdsVergeben();
+/* Paket T1: Sprachfassungen jetzt auch für die eben eingehängten Übungen
+   (content-de.js hat sie beim Laden noch nicht gesehen). */
+if (typeof aufgabenFassungenAnhaengen === "function") topics.forEach(aufgabenFassungenAnhaengen);
 /* Handlungs-Ketten anhängen (ketten-de.js). Überschreibt nie etwas. */
 if (typeof applyChains === "function") applyChains();
 /* Weiterlern-Bereiche (weiterlernen-de.js): Sprachfassungen anhängen. */

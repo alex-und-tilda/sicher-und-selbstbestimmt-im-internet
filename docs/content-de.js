@@ -2975,9 +2975,20 @@ const LERNZIELE = {
    Schlüssel = die Frage in Leichter Sprache, wortgleich zu topics.js. Steht
    dieselbe Frage an mehreren Stellen (lange und kurze Einheit), bekommt sie
    überall dieselben Fassungen.
+   Seit Paket T1 (29.09.2026) geht als Schlüssel auch die feste Aufgaben-ID:
+   "<thema>/lang/<Lektions-Titel>" oder "<thema>/kurz/<Lektions-Titel>" für
+   Übungen in Lektionen – so auch für die nachgelieferten Übungen aus
+   uebungen-de.js, z. B. whatsapp: { "whatsapp/lang/WhatsApp nutzen":
+   { einfach: {…}, standard: {…} } } –, "<thema>/neu/<id>" für die Fragen
+   einer eigenen neuen Situation. Die ID ändert sich nicht, wenn der
+   Leicht-Text später verbessert wird. Liste aller IDs:
+   node pruefung/datenschutz/t1-uebungen.cjs --ids
    Felder je Fassung: question, situation, hinweis, answers[] (gleiche
    Reihenfolge und Anzahl), feedbackCorrect, feedbackWrong[] (null an derselben
-   Stelle), remember (nur Anzeige – die Regel liest weiter den Leicht-Satz),
+   Stelle), feedbackAuch (Paket T5: Text oder je Antwort einer, für Antworten
+   aus `auchMoeglich` – „Das geht auch“; `auchMoeglich` selbst steht nur in der
+   Leicht-Aufgabe und gilt für alle Stufen),
+   remember (nur Anzeige – die Regel liest weiter den Leicht-Satz),
    formular.titel, felder[] (name, wofuer, zustand, rueckmeldung), ausweg,
    auswegRueckmeldung. Eingesetzt in app.js (sprachstufeAnwenden).
    Themen ohne Einträge zeigen ihre Aufgaben wie bisher.
@@ -3929,6 +3940,29 @@ const THEMA_VERSIONS = {
   }
 };
 
+/* Aufgaben-Fassungen eines Themas anhängen – für ALLE Aufgaben, die gerade im
+   Thema hängen. Läuft zweimal: hier für topics.js und in app.js noch einmal,
+   nachdem die nachgelieferten Übungen (uebungen-de.js) eingehängt sind
+   (Paket T1, 29.09.2026 – vorher bekamen diese 57 Übungen nie Fassungen).
+   Gesucht wird zuerst unter der festen Aufgaben-ID (`id`, siehe
+   aufgabenIdsVergeben in app.js), dann – wie bisher bei Datenschutz – unter
+   der Frage in Leichter Sprache. Bereits verknüpfte Aufgaben bleiben, wie
+   sie sind. `schluessel` hält die Leicht-Frage fest: Er bleibt beim
+   Sprachwechsel gleich (schwierige Aufgaben, Frage des Tages, zweiter
+   Versuch). */
+function aufgabenFassungenAnhaengen(topic) {
+  const av = (typeof AUFGABEN_VERSIONS !== "undefined") && AUFGABEN_VERSIONS[topic.id];
+  if (!av) return;
+  const ns = topic.neueSituation || {};
+  [].concat((topic.lessons || []).map((l) => l.practice), (topic.einfachLessons || []).map((l) => l.practice),
+    topic.quizQuestions || [], ns.aufgaben || [], ns.fragen || [])
+    .forEach((q) => {
+      if (!q || !q.question || q.versions) return;
+      const v = (q.id && av[q.id]) || av[q.question];
+      if (v) { q.versions = v; q.schluessel = q.schluessel || q.question; }
+    });
+}
+
 /* Fassungen mit den Lektionen in topics.js verknüpfen */
 function applyContentVersions() {
   if (typeof topics === "undefined" || !Array.isArray(topics)) return;
@@ -3945,17 +3979,7 @@ function applyContentVersions() {
     anhaengen(topic.einfachLessons, KURZ_VERSIONS[topic.id]);
     /* Paket 5: Aufgaben und Themen-Felder je Stufe – nur wo Einträge stehen.
        Eingesetzt werden die Texte in app.js (sprachstufeAnwenden). */
-    const av = (typeof AUFGABEN_VERSIONS !== "undefined") && AUFGABEN_VERSIONS[topic.id];
-    if (av) {
-      const ns = topic.neueSituation || {};
-      [].concat((topic.lessons || []).map((l) => l.practice), (topic.einfachLessons || []).map((l) => l.practice),
-        topic.quizQuestions || [], ns.aufgaben || [], ns.fragen || [])
-        .forEach((q) => {
-          if (!q || !q.question || q.versions) return;
-          const v = av[q.question];
-          if (v) { q.versions = v; q.schluessel = q.question; }
-        });
-    }
+    aufgabenFassungenAnhaengen(topic);
     const tv = (typeof THEMA_VERSIONS !== "undefined") && THEMA_VERSIONS[topic.id];
     if (tv && !topic.versions) topic.versions = tv;
   });

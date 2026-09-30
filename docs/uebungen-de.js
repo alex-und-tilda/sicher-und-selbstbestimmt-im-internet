@@ -19,6 +19,16 @@
    Format = lesson.practice, unverändert:
      question, pictogram, answers, correctIndex,
      feedbackWrong, feedbackCorrect, remember
+   Optional (wie in topics.js): hinweis (Tipp bei „Ich bin unsicher“).
+
+   Die Texte hier sind die LEICHTE Sprache und bleiben die Referenz.
+   Einfach und Alltag (Paket T1, 29.09.2026) werden NICHT hier eingetragen,
+   sondern wie bei allen Aufgaben in content-de.js (AUFGABEN_VERSIONS),
+   unter der festen Aufgaben-ID "<thema>/lang|kurz/<Lektions-Titel>".
+   Fehlt eine Fassung, zeigt die App die Leichte Sprache (Rückfall).
+   Frage, Antworten, Rückmeldung, Tipp und Merksatz wechseln dann mit der
+   Stufe; die Aufgabe selbst (schwierige Aufgaben, Frage des Tages) bleibt
+   dieselbe.
 
    REGEL: die richtige Antwort darf nicht immer an derselben
    Stelle stehen. Sonst besteht man durch Muster statt durch
