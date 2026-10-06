@@ -209,7 +209,7 @@ const REGEL_SAETZE = {
     "Komische Nachrichten zeigen, nicht antippen.", // facebook
     "Werbung nicht antippen.", // youtube
     "Ich tippe nicht auf fremde Links.", // betrug
-    "Erst fragen. Dann scannen.", // betrug
+    "Bei einem Aufkleber scanne ich den Code nicht.", // betrug
     "Ich tippe nicht auf Links in Nachrichten. Ich öffne die App selbst.", // betrug
     "Angst und ein Link zusammen: ich mache nichts." // betrug
   ],
@@ -234,7 +234,6 @@ const REGEL_SAETZE = {
     "Die echte Polizei fordert nie Geld.", // betrug
     "Paket-SMS mit Geld-Forderung sind Betrug.", // betrug
     "Ich schicke kein Geld an fremde Menschen aus dem Internet.", // betrug
-    "Kein Geld an fremde Menschen aus dem Internet.", // betrug
     "Kostenlos kann teuer werden. Ich lese genau.", // betrug
     "Ich zahle nie sofort. Ich frage erst.", // betrug
     "Kein Geld senden. Vertraute Person fragen.", // betrug
@@ -497,8 +496,8 @@ function regelZuSatz(satz) {
   return null;
 }
 
-/* Quizfragen haben kein remember-Feld (122 Fragen, keine einzige).
-   Deshalb wird hier STRENG zugeordnet: nur wenn die Frage UND die
+/* Quizfragen mit festem Merksatz oder fester Zuordnung behalten ihre Regel.
+   Ohne diese Angabe wird hier STRENG zugeordnet: nur wenn die Frage UND die
    Erklaerung der richtigen Antwort zur selben Regel fuehren.
 
    Warum so streng? Gemessen am 06.09.2026:
@@ -517,12 +516,138 @@ function regelZuSatz(satz) {
    Gefunden beim Abgleich am 25.09.2026. */
 const REGEL_QUIZ = {
   /* „jemand“ + „hilft“ ergaben Hilfe holen – gemeint ist freundlich schreiben. */
-  "Jemand schreibt etwas. Du findest es dumm. Wie antwortest du?": "bilder"
+  "Jemand schreibt etwas. Du findest es dumm. Wie antwortest du?": "bilder",
+  /* Kernquiz (05.10.2026): feste Leicht-Zuordnung, einschließlich null.
+     Der Gedächtnisschlüssel hält diese Entscheidung beim Sprachwechsel.
+     Die reine Werbeerkennung bekommt keine Link-Regel: Der bisherige
+     Muster-Treffer maß keine sichere Entscheidung über das Öffnen. */
+  "Eine unbekannte Nummer schickt dir ein Foto. Was machst du?": null,
+  "In einer Gruppe steht ein Link. Es soll einen Gutschein geben. Was machst du?": "links",
+  "Eine Freundin schreibt: Ich habe dir aus Versehen einen Code geschickt. Schick ihn zurück. Was machst du?": "codes",
+  /* WhatsApp-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen sieben Quizfragen, unabhängig vom übersetzten Text. */
+  "Auf einem Foto von einer Feier sind mehrere Personen. Du willst es senden. Was machst du?": null,
+  "Jemand schreibt dir 10 Nachrichten hintereinander. Du sollst sofort antworten. Was machst du?": null,
+  "Was kannst du mit einer stressigen Gruppe machen?": null,
+  "Was ist bei Sprach-Nachrichten wichtig?": null,
+  "Eine Nachricht sagt: sofort bezahlen. Was ist besser?": "geld",
+  "Was gehört nicht in eine Gruppe?": "wersieht",
+  "Was ist eine gute WhatsApp-Regel?": null,
+  /* Facebook-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen neun Quizfragen, unabhängig vom übersetzten Text. */
+  "Du willst ein Foto von deiner neuen Wohnung posten. Woran denkst du zuerst?": null,
+  "Eine Anfrage kommt von einem Profil ohne Foto. Was machst du?": null,
+  "Was kann privat sein?": "wersieht",
+  "Eine Person beleidigt dich immer wieder unter deinen Beiträgen. Was machst du?": null,
+  "Bei einem Beitrag steht: öffentlich. Was heißt das?": "wersieht",
+  "Du hast ein Foto von einer Kollegin. Du willst es posten. Was machst du?": null,
+  "Warum sind alte Beiträge wichtig?": null,
+  "Was ist gut im Profil?": null,
+  "Was ist eine gute Regel für Facebook?": null,
+  /* Instagram-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen neun Quizfragen, unabhängig vom übersetzten Text. */
+  "Du machst ein Selfie in deiner Wohnung. Worauf achtest du?": null,
+  "Du markierst in einer Story den Ort. Wer sieht den Ort?": null,
+  "Deine Story ist nach 24 Stunden weg. Ist sie dann wirklich weg?": "bilder",
+  "Mehrere Personen schreiben Gemeines unter dein Foto. Was machst du?": null,
+  "Auf einem Foto sieht eine Person perfekt aus. Was kann sein?": "bilder",
+  "Was ist eine gute Regel für Instagram?": null,
+  "Wer darf private Fotos bekommen?": "bilder",
+  "Was hilft bei komischen Nachrichten?": null,
+  "Wie schützt du bei Instagram deinen Standort?": "wersieht",
+  /* YouTube-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen sieben Quizfragen, unabhängig vom übersetzten Text. */
+  "Ein Video verspricht: Dieses Mittel macht dich reich. Was ist besser?": null,
+  "Freunde sagen: Alle machen diese Mutprobe. Was machst du?": null,
+  "Nach einem Video kannst du nicht einschlafen. Was hilft dir?": null,
+  "Was macht Werbung oft?": null,
+  "Warum sind Pausen wichtig?": "aufhoeren",
+  "Was machst du bei verletzenden Kommentaren?": null,
+  "Was ist eine gute YouTube-Regel?": null,
+  /* Snapchat-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen sieben Quizfragen, unabhängig vom übersetzten Text. */
+  "Eine Person schickt dir viele Snaps. Du kennst sie nicht. Was machst du?": null,
+  "Eine Nachricht sagt: Schick ein Bild, aber sag es niemandem. Was ist das?": null,
+  "Snapchat zeigt deinen Ort auf einer Karte. Was ist sicherer?": null,
+  "Was darfst du bei Stress sagen?": null,
+  "Du machst ein Bild vom Bildschirm. Was hast du dann?": "bilder",
+  "Was machst du bei komischen Kontakten?": null,
+  "Was ist eine gute Snapchat-Regel?": null,
+  /* TikTok-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen sieben Quizfragen, unabhängig vom übersetzten Text. */
+  "In deinem Video sieht man das Straßen-Schild. Was machst du?": null,
+  "Unter deinem Video macht sich jemand über dich lustig. Was tust du?": null,
+  "Was macht TikTok mit ähnlichen Videos?": null,
+  "Was schützt dich bei Trends?": null,
+  "Was schützt private Daten?": null,
+  "Was darfst du bei TikTok machen?": null,
+  "Was ist eine gute TikTok-Regel?": null,
+  /* KI-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen acht Quizfragen, unabhängig vom übersetzten Text. */
+  "Was ist KI?": "wahr",
+  "Hat ein Chatbot Gefühle?": "wahr",
+  "Kann KI Fehler machen?": "wahr",
+  "Ein Chatbot fragt nach deinem Passwort. Was ist besser?": "codes",
+  "Du bist krank. Was ist besser?": null,
+  "Kann KI Bilder fälschen?": "bilder",
+  "Wo steckt überall KI drin?": "wahr",
+  "Darfst du der KI deine Adresse oder ein Geheimnis schreiben?": null,
+  /* Fake News-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen sieben Quizfragen, unabhängig vom übersetzten Text. */
+  "Kann KI Fotos fälschen?": "bilder",
+  "Was ist ein Deepfake?": "wahr",
+  "Ein Anruf will sofort Geld. Die Stimme klingt bekannt. Was ist besser?": null,
+  "Wie kannst du eine Nachricht prüfen?": null,
+  "Ein Promi verspricht im Video schnelles Geld. Was ist das oft?": null,
+  "Bevor du eine Nachricht teilst: Was machst du?": null,
+  "Ist alles im Internet wahr?": "wahr",
+  /* Betrug-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen zehn Quizfragen, unabhängig vom übersetzten Text. */
+  "Was ist Phishing?": null,
+  "Eine SMS: Zahlen Sie Gebühr für Ihr Paket. Was machst du?": null,
+  "Hallo Mama, neue Nummer, brauche Geld. Was machst du?": "selbst",
+  "Fordert die echte Polizei Geld am Telefon?": "geld",
+  "Jemand fragt nach deinem SMS-Code. Was machst du?": "codes",
+  "Am Automaten klebt ein QR-Code-Aufkleber. Was ist besser?": null,
+  "Du bist auf einen Betrug hereingefallen. Was ist richtig?": null,
+  "Welche Nummer sperrt deine Bank-Karte?": null,
+  "Eine SMS hat einen Link von einer fremden Nummer. Was machst du?": "links",
+  "Jemand aus dem Internet schreibt dir liebe Worte. Die Person bittet um Geld. Ihr habt euch nie getroffen. Was ist richtig?": "geld",
+  /* Einkaufen-Fassungen (05.10.2026): dieselbe bisherige Leicht-Zuordnung
+     für die übrigen acht Quizfragen, unabhängig vom übersetzten Text. */
+  "Was ist ein Fake-Shop?": null,
+  "Ein Shop will das Geld vorher. Du kennst den Shop nicht. Was ist besser?": "geld",
+  "Deine Bank schreibt eine E-Mail und will deine PIN. Was stimmt?": "codes",
+  "Ein Angebot sagt: Nur noch heute! Was machst du?": null,
+  "Was prüfst du vor dem Kaufen?": null,
+  "Du hast etwas Falsches bestellt. Was kannst du oft tun?": "geld",
+  "Kosten kleine Käufe in Spielen echtes Geld?": "geld",
+  "Bleiben deine PIN und TAN geheim?": "codes",
+  "Eine fremde Person bietet dir Geld für ein privates Foto. Was machst du?": null,
+  "Ein Video sagt etwas Überraschendes. Was machst du?": "wahr",
+  "Eine YouTuberin lobt ein Produkt. Darunter steht ein Link zum Kaufen. Was ist das?": null,
+  "Du wolltest 1 Video sehen. Jetzt ist 1 Stunde vorbei. Was machst du?": null,
+  "Dein Snap ist nach 10 Sekunden weg. Ist er aus der Welt?": null,
+  "Auf der Karte sehen alle Freunde dein Zuhause. Was machst du?": null,
+  "Jemand sagt: Wenn du mich magst, schick mir das Bild. Was machst du?": null,
+  "Bei einer Challenge sollst du die Luft anhalten. Was machst du?": null,
+  "Jemand will dir ein Geschenk schicken. Die Person fragt nach deiner Adresse. Was machst du?": null,
+  "Es ist spät. Das nächste Video startet von allein. Was machst du?": null,
+  "Ein Chatbot schreibt sehr nett. Was stimmt?": null,
+  "Die KI gibt eine wichtige Antwort. Was machst du?": null,
+  "Eine Nachricht klingt unglaublich. Sie stimmt nicht. Wie nennt man das?": "wahr",
+  "Eine Nachricht macht dich sehr wütend. Was bedeutet das?": null,
+  "Stimmt eine Nachricht? Du bist unsicher. Was machst du?": null,
+  "Du sollst für einen Gewinn erst Geld zahlen. Was stimmt?": "geld",
+  "Eine E-Mail drängt: Sofort klicken! Was bedeutet das?": null,
+  "Ein Shop ist extrem billig und will nur Vorkasse. Was ist das?": null,
+  "Ein Shop hat keine Adresse und keine Telefon-Nummer. Was heißt das?": null
 };
 
 function regelAusQuizfrage(q) {
   if (!q) return null;
-  if (q.question && Object.prototype.hasOwnProperty.call(REGEL_QUIZ, q.question.trim())) return REGEL_QUIZ[q.question.trim()];
+  const schluessel = String(q.schluessel || q.question || "").trim();
+  if (Object.prototype.hasOwnProperty.call(REGEL_QUIZ, schluessel)) return REGEL_QUIZ[schluessel];
   if (q.remember) return regelZuSatz(q.remember);
   const ausFrage = regelZuSatz(q.question);
   const ausErklaerung = regelZuSatz(q.feedbackCorrect);

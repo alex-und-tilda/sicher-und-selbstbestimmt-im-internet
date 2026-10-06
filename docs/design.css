@@ -35,7 +35,7 @@
 .app-header .header-text { min-width: 0; }
 .brand-name {
   margin: 0 0 1px;
-  font-size: 0.84rem;
+  font-size: var(--fs-mini);
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--ink-soft);
@@ -147,3 +147,1371 @@ body {
    über 3:1. Überfahren, Fokus und richtig/falsch behalten ihre eigenen Farben
    (die Regeln dafür sind spezifischer und gewinnen). */
 .answer-option { border-color: color-mix(in srgb, var(--ink-soft) 70%, var(--surface)); }
+
+/* ============================================================
+   D1 Design-System (01.10.2026, berichte/design-umbau/00-ENTSCHEIDUNGEN-2026-10-01.md)
+   ------------------------------------------------------------
+   1. Schrift: 5 Stufen statt 46 einzelner Größen. Alle font-size-Werte in
+      styles.css und design.css zeigen auf diese Token. Fließtext 1.06rem
+      = 18 px bei der kleinsten Schriftstufe (§10a Punkt 7).
+      Ausgenommen sind Symbole, Zahlen-Anzeigen, Profilbilder und der
+      Einfach-Modus (relativ in em).
+   2. Fläche heißt antippbar (§10a Punkt 1, COGA Richtlinie 1): Kästen um
+      reinen Text verlieren Rahmen, Fläche und Schatten. Gruppen trennt der
+      Abstand. Entscheidung E4: auch das Antwort-Feld ist nicht mehr getönt.
+      Ein Strich links bleibt erlaubt, er markiert Text, nicht einen Knopf
+      (§10a Punkt 6).
+   ============================================================ */
+:root {
+  --fs-mini: 0.84rem;
+  --fs-klein: 0.94rem;
+  --fs-text: 1.06rem;
+  --fs-gross: 1.25rem;
+  --fs-titel: 1.6rem;
+}
+
+/* Etiketten und Gruppen: reiner Text, kein Kasten */
+.station-badge { background: none; border: 0; padding: 0; }
+.settings-page-section { background: none; border: 0; box-shadow: none; padding: 0; margin-bottom: 32px; }
+.amount-box { background: none; border: 0; padding: 0; }
+.companion-qr { background: none; border: 0; padding: 0; }
+
+/* Frage und Antworten: Die Antwort-Knöpfe sind die einzige Fläche (E4) */
+.frage-antwortbereich { background: none; border: 0; padding: 0; }
+
+/* Situationen, Vorbilder, Plan-Bezug: Text mit Strich links statt Kasten */
+.vorhersage-situation,
+.vorbild-box,
+.kette-bezug {
+  background: none;
+  border: 0;
+  border-left: 4px solid var(--accent);
+  border-radius: 0;
+  padding: 4px 0 4px 14px;
+}
+
+/* Testphase-Hinweis in der Fußzeile: Text, kein Knopf-ähnlicher Rahmen */
+.small-footer-notice .test-hinweis { border: 0; background: none; padding: 0; }
+
+/* Piktogramm über der Frage: im hellen Modus ohne eigene Fläche.
+   Im Dunkelmodus bleibt die helle Unterlage, sonst verschwinden die
+   blauen Linien auf dunklem Grund. */
+@media (prefers-color-scheme: light) {
+  .question-pikto { background: transparent; padding: 0; }
+}
+
+/* Merksatz-, Hinweis- und Warn-Kästen: Text mit farbigem Strich links.
+   Die Farbe der jeweiligen Art bleibt (border-left-color aus styles.css). */
+.access-box {
+  background: none;
+  box-shadow: none;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left-width: 4px;
+  border-radius: 0;
+  padding: 4px 0 4px 14px;
+}
+/* D13 (02.10.2026, freigegeben): „Wichtig“ und „Beispiele aus dem Alltag“
+   stehen frei, nur mit dem Strich links. Die Regel oben wollte das schon
+   (D1), griff aber nicht: `.access-box.remember` und `.access-box.example`
+   in styles.css sind stärker und setzten weiter ihre getönte Fläche.
+   Fläche heißt antippbar (§10a Punkt 1) – beides ist reiner Text.
+   „Achtung“ und „Gut“ (warning, success) sind nicht Teil dieser Freigabe
+   und behalten ihre Fläche. */
+.access-box.remember,
+.access-box.example { background: none; }
+
+/* Übung in der Lektion: kein Rahmen um Frage und Antworten (Kasten im Kasten) */
+.practice-box { background: none; border: 0; padding: 0; }
+/* Die Frage bleibt auf schmalen Schirmen oben stehen und braucht dafür eine
+   Fläche – jetzt neutral statt getönt, damit sie nicht wie ein Knopf wirkt. */
+@media (max-width: 600px) {
+  .practice-box .frage-text { background: var(--surface); }
+}
+
+/* ============================================================
+   D2 Lernmodus (01.10.2026, Entscheidungen E1–E3)
+   Gilt auf Lernschritt, Übungs-Seite und Rückmeldung (body.lesson-view).
+   ============================================================ */
+/* E1: Menü unten aus. Die Schritt-Leiste rutscht an den unteren Rand. */
+body.lesson-view { --tabbar-h: 0rem; }
+body.lesson-view .main-tabbar { display: none; }
+/* Fußzeile mit Logo, Testphase-Hinweis und Links: nicht während des Lernens */
+body.lesson-view .app-footer,
+body.lesson-view .small-footer-notice { display: none; }
+/* E3: kein Szenenbild und keine Figur in der Lektion */
+body.lesson-view .lesson-card .lesson-scene,
+body.lesson-view .lesson-card .role-figure { display: none; }
+
+/* Leiste oben: Beenden – Vorlesen – Mehr */
+.lern-leiste {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+.lern-leiste .reading-toolbar { flex: 0 1 auto; margin: 0; }
+.lern-knopf {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 64px;
+  min-height: 58px;
+  padding: 6px 10px;
+  font: inherit;
+  font-size: var(--fs-mini);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+}
+.lern-knopf svg { width: 1.4rem; height: 1.4rem; }
+.lern-knopf:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+/* „Mehr": Blatt von unten, alle Einträge in derselben Knopf-Form */
+.lern-mehr {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+.lern-mehr-innen {
+  width: min(560px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  display: grid;
+  gap: 10px;
+  padding: 18px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface);
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+}
+.lern-mehr-innen h2 { margin: 0 0 4px; font-size: var(--fs-gross); }
+.lern-mehr-reihe { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.lern-mehr-knopf {
+  min-height: 58px;
+  padding: 12px 16px;
+  font: inherit;
+  font-size: var(--fs-text);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  text-align: center;
+}
+.lern-mehr-knopf.lern-mehr-zu { background: var(--accent); color: var(--on-accent); }
+.lern-mehr-knopf:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+/* Eine Sache pro Bildschirm: Auf dem Lerntext steht die Übung nicht mit
+   darunter. „Zur Übung" öffnet sie als eigene Seite (renderPracticePage). */
+body.lesson-view .lesson-card:not(.uebungs-seite) .practice-box { display: none; }
+/* „Zur Übung" führt jetzt auf eine eigene Seite: ein normaler Schritt nach
+   vorn, also die gefüllte Hauptknopf-Form. Nebenbei behoben: Beim Überfahren
+   wurden Schrift und Fläche des wartenden Knopfs gleich dunkel (Hover-Regel
+   von .nav-button.primary gewann gegen .is-waiting). */
+.nav-button.primary.is-waiting {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+.nav-button.primary.is-waiting:hover:not(:disabled) {
+  background: var(--accent-dark);
+  color: var(--on-accent);
+}
+
+/* ============================================================
+   D3 Tippen heißt Hören, erst hören dann wählen (01.10.2026, E5)
+   ============================================================ */
+/* Die runden Vorlese-Knöpfe je Absatz braucht es im Lernmodus nicht mehr:
+   Jeder Satz liest sich beim Antippen selbst vor. */
+body.lesson-view .lesson-card .card-read-button--block { display: none; }
+
+/* Hörbare Sätze: Zeiger und ein kleines Lautsprecher-Zeichen dahinter */
+body.lesson-view .lesson-card :is(.ls-text-row p, .ls-text-block > p, .ls-bullet-item, .ls-bullet-list > li,
+  .access-box p, .access-box li, .frage-text, .vorhersage-situation, .vorbild-box p, .learning-goals-list li) {
+  cursor: pointer;
+}
+body.lesson-view .lesson-card :is(.ls-text-row p, .ls-text-block > p, .access-box p, .frage-text)::after {
+  content: "";
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin-left: 0.35em;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  opacity: 0.55;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 9v6h4l5 4V5L9 9H4z' fill='black'/%3E%3Cpath d='M16 8.6a4 4 0 0 1 0 6.8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 9v6h4l5 4V5L9 9H4z' fill='black'/%3E%3Cpath d='M16 8.6a4 4 0 0 1 0 6.8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* Erst hören, dann wählen: markierte Antwort und „Das nehme ich" */
+.answer-option.ist-markiert {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent);
+}
+.nehmen-knopf {
+  display: block;
+  width: 100%;
+  min-height: 62px;
+  margin-top: 14px;
+  padding: 12px 18px;
+  font: inherit;
+  font-size: var(--fs-gross);
+  font-weight: 700;
+  color: var(--on-accent);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+}
+.nehmen-knopf:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.nehmen-knopf:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+/* Bild-Antworten: Piktogramm groß genug, um ohne Lesen zu wählen.
+   Zeigt sich überall, wo eine Antwort ein Piktogramm hat (answerPikto). */
+.answer-option .answer-pikto { width: 3rem; height: 3rem; flex: 0 0 3rem; }
+
+/* ============================================================
+   D4 „Wir lernen zu zweit" (01.10.2026)
+   Zugeklappter Tipp unten in der Lektion – leise, aber als Knopf erkennbar.
+   ============================================================ */
+.begleit-tipp {
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 2px dashed var(--line);
+}
+.begleit-tipp-knopf {
+  justify-self: start;
+  min-height: 48px;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: var(--fs-klein);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.begleit-tipp-knopf::after { content: " ▾"; }
+.begleit-tipp-knopf[aria-expanded="true"]::after { content: " ▴"; }
+.begleit-tipp-knopf:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.begleit-tipp-text {
+  margin: 0;
+  padding-left: 12px;
+  border-left: 4px solid var(--warn);
+  color: var(--ink-soft);
+  font-size: var(--fs-klein);
+}
+
+/* ============================================================
+   D5 Handy-Simulation (01.10.2026)
+   Nachgebautes Handy mit Systemfrage. Beide Antworten sehen gleich aus,
+   damit keine die Wahl lenkt. Keine echten App-Logos (§11).
+   ============================================================ */
+.sim-handy {
+  max-width: 360px;
+  margin: 18px auto 10px;
+  padding: 16px 14px 14px;
+  border: 3px solid var(--ink-soft);
+  border-radius: 28px;
+  background: var(--accent-soft);
+  display: grid;
+  gap: 12px;
+}
+.sim-app {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 700;
+  font-size: var(--fs-klein);
+  color: var(--ink-soft);
+}
+.sim-app-zeichen {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  background: var(--topic-color, var(--accent));
+}
+.sim-dialog {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  background: var(--surface);
+  border-radius: 18px;
+}
+.sim-pikto { width: 4rem; height: 4rem; }
+.sim-frage { margin: 0; font-weight: 700; font-size: var(--fs-gross); }
+.sim-knoepfe { display: grid; gap: 10px; width: 100%; }
+.sim-knopf {
+  min-height: 58px;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: var(--fs-text);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+}
+.sim-knopf:hover { background: var(--accent-soft); }
+.sim-knopf:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.sim-zaehler { margin: 0; text-align: center; font-size: var(--fs-mini); color: var(--ink-soft); }
+/* Helle Unterlage über das Token (§10: keine fest eingetragene Farbe) – wie alle gemeinsamen Piktogramme. */
+@media (prefers-color-scheme: dark) { .sim-pikto { background: var(--pictogram-backdrop); border-radius: 12px; padding: 4px; } }
+
+/* ============================================================
+   D8 Einheitlicher Lernrahmen (01.10.2026, Befunde B1–B5)
+   ============================================================ */
+/* E3: Figuren nur auf Start- und Abschluss-Seite – im ganzen Lernweg. */
+body.lesson-view .role-figure { display: none; }
+body.lesson-view .completion-page .role-figure { display: revert; }
+/* B2: Nach der Auswertung tritt das Formular zurück (Klasse aus felderZeigen). */
+.felder-aufgabe--ausgewertet .felder-formular,
+.felder-aufgabe--ausgewertet .felder-aktionen--start,
+.felder-aufgabe--ausgewertet .sz-fake-band { display: none; }
+/* B3: Ein ausgeschalteter Hauptknopf unten wird nicht gezeigt – kein
+   zweiter blauer Knopf, der nichts tut. Der Platz bleibt, damit „Zurück“
+   nicht springt. */
+body.lesson-view .nav .nav-button.primary:disabled { visibility: hidden; }
+/* B4: Oben überall dieselbe Reihenfolge – Kopf, Ort-Satz, Leiste, Inhalt.
+   Auf der Lektion stand der Ort-Satz bisher als Kopie unter der Leiste
+   (Wegweiser), auf allen anderen Seiten darüber. Im Lernmodus gilt jetzt
+   die Zeile #orientLine; die Kopie im Wegweiser entfällt, der Balken
+   bleibt. „0 geschafft · noch 4 Schritte“ sagt dasselbe wie „Schritt 1
+   von 5“ im Ort-Satz und entfällt im Lernmodus. */
+body.lesson-view .app:has(#content .wegweiser) #orientLine {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0 2px;
+  margin: 8px 0 12px;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+body.lesson-view .wegweiser-ort,
+body.lesson-view .step-path-summary { display: none; }
+body.lesson-view .wegweiser .step-bar-wrap { margin: 0 0 12px; }
+/* B5 (§10a Punkt 1): Kasten nur für Antippbares. „Deine Antwort“ und
+   „Erklärung“ sind Lesetext – Überschrift und Abstand gliedern sie. Die
+   Regel-Liste auf der Abschluss-Seite ist eine Liste, keine Knöpfe
+   (die Regel-Karte unter „Mein Lernweg“ bleibt, wie sie ist). */
+.feedback-selected,
+.feedback-explanation {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  margin-bottom: 18px;
+}
+.abschluss-regeln .regel-platz {
+  border: 0;
+  background: transparent;
+  padding: 6px 0;
+  box-shadow: none;
+}
+/* B9: „Das merke ich mir“ sagt „Tippe auf: Zeig mir …“ – das muss dann
+   auch wie ein Knopf aussehen (Umriss, zurückhaltend; „Weiter“ bleibt der
+   einzige gefüllte Knopf). */
+.erinnern-details > summary.later-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.6rem;
+  padding: 10px 18px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: var(--fs-text);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  list-style: none;
+}
+.erinnern-details > summary.later-title::-webkit-details-marker { display: none; }
+.erinnern-details[open] > summary.later-title { margin-bottom: 14px; }
+
+/* ============================================================
+   D9 Rest der Bedienung (01.10.2026)
+   ============================================================ */
+/* T2: Kopf im Lernmodus schmaler. Die Modus-Zeile („Lernen“, „Übung“ …)
+   sagt dasselbe wie der Ort-Satz darunter und entfällt hier. Figur,
+   „Alex und Tilda“ und Seitenname bleiben (§10a Punkt 8). */
+body.lesson-view .app-header #moduleLabel { display: none; }
+body.lesson-view .app-header { padding-block: 6px; }
+body.lesson-view .header-avatar { width: 36px; height: 36px; }
+/* T17: Abschluss kürzer – Figur kleiner, weniger Abstand. */
+body.lesson-view .completion-page .role-figure { width: 110px; max-height: 110px; margin-block: 4px; }
+body.lesson-view .completion-page .einfach-done-title { margin-bottom: 4px; }
+
+/* ============================================================
+   D10 Kompakter Lernmodus (01.10.2026)
+   Oben nur EINE Zeile: Beenden | Thema · Schritt · Balken | Vorlesen | Mehr.
+   Lerninhalte bleiben unberührt.
+   ============================================================ */
+body.lesson-view .app-header { display: none; }
+/* Ort-Satz: für Vorlese-Programme und „Vorlesen“ weiter da, nur unsichtbar. */
+body.lesson-view #orientLine,
+body.lesson-view .app:has(#content .wegweiser) #orientLine {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* Fortschritt steht jetzt in der Zeile oben. */
+body.lesson-view .wegweiser { display: none; }
+
+body.lesson-view .lern-leiste {
+  gap: 4px;
+  padding: 6px 0 10px;
+  margin: 0 0 8px;
+  border-bottom: 1px solid var(--line);
+}
+body.lesson-view .lern-knopf {
+  border: 0;
+  background: transparent;
+  min-width: 56px;
+  min-height: 56px;
+  padding: 4px 6px;
+}
+body.lesson-view .lern-knopf:hover { background: var(--surface-soft); }
+.lern-ort {
+  flex: 1 1 0;
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  text-align: center;
+  line-height: 1.2;
+}
+.lern-ort-titel {
+  font-size: var(--fs-klein);
+  font-weight: 700;
+  color: var(--ink);
+  max-width: 100%;
+  /* Der Themen-Name wird nie abgeschnitten (02.10.2026, WCAG 1.4.4 und 1.4.12).
+     Vorher „…“: bei 390 px waren 3 von 12 Namen gekürzt, bei 320 px 5, mit
+     großen Textabständen 8, mit Schrift 200 % alle. Er bricht an Leerzeichen
+     und am Bindestrich um; `anywhere` greift nur, wenn ein Wort allein nicht passt. */
+  overflow-wrap: anywhere;
+}
+/* Wenig Platz im Verhältnis zur Schrift (schmales Handy, große Schrift): Thema,
+   Schritt und Balken bekommen eine eigene Zeile unter den drei Knöpfen. Gemessen
+   wird die Leiste selbst (Container-Abfrage), in em – so zählt auch die in der
+   App gewählte Schriftgröße. 19em: 320 px breit → eigene Zeile, 360 und 390 px →
+   eine Zeile wie bisher. Browser ohne Container-Abfragen (Safari vor 16) bleiben
+   bei einer Zeile; der Name bricht dort in seiner Spalte um. */
+.lern-leiste { container-type: inline-size; flex-wrap: wrap; }
+@container (max-width: 19em) {
+  .lern-ort { order: 9; flex: 1 1 100%; }
+  .lern-leiste > .lern-knopf:first-child { margin-right: auto; }
+}
+.lern-ort-schritt { font-size: var(--fs-mini); color: var(--ink-soft); }
+.lern-ort-balken {
+  display: block;
+  width: min(120px, 100%);
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+.lern-ort-balken i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+/* Vorlesen in derselben Form wie Beenden und Mehr: Zeichen über Wort. */
+body.lesson-view .lern-leiste .reading-toolbar { flex: 0 0 auto; }
+body.lesson-view .lern-leiste .reading-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 56px;
+  min-height: 56px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--accent);
+  font-size: var(--fs-mini);
+  font-weight: 700;
+}
+body.lesson-view .lern-leiste .rb-coin { width: 1.6rem; height: 1.6rem; background: transparent; color: var(--accent); }
+body.lesson-view .lern-leiste .rb-label { font-size: var(--fs-mini); }
+body.lesson-view .lern-leiste .reading-status:empty { display: none; }
+body.lesson-view .content { padding-top: 4px; }
+/* Kein zweiter Balken über der Zeile (Quiz), kein Leerraum oben. */
+body.lesson-view .progress-area { display: none; }
+body.lesson-view .app { padding-top: 0; }
+body.lesson-view .content { margin-top: 0; }
+
+/* ============================================================
+   D11 Anordnung des Lerninhalts (02.10.2026)
+   ============================================================ */
+/* 1. Zusammengehörige Sätze zusammenhalten. Leichte Sprache: ein Satz pro
+   Zeile bleibt – aber als EIN Absatz mit gutem Zeilenabstand statt
+   einzelner Inseln (vorher 18 px über und unter jedem Satz). */
+body.lesson-view .ls-text-block > p { margin: 0 0 6px; line-height: 1.6; }
+body.lesson-view .ls-text-block > p:last-of-type { margin-bottom: 0; }
+body.lesson-view .ls-text-row { margin-bottom: 6px; }
+body.lesson-view .ls-bullet-list > li,
+body.lesson-view .ls-bullet-item { margin-bottom: 6px; }
+body.lesson-view .lesson-card > * + * { margin-top: 18px; }
+
+/* 3a. Rückmeldung: Antwort und Begründung gehören zusammen. „Deine
+   Antwort“ wird eine kleine Vorzeile, die Begründung folgt direkt;
+   die Überschrift „Erklärung:“ bleibt nur für Vorlese-Programme. */
+.feedback-selected { margin-bottom: 6px; }
+.feedback-selected h3 { display: inline; font-size: var(--fs-klein); font-weight: 400; color: var(--ink-soft); margin: 0; }
+.feedback-selected p { display: inline; font-size: var(--fs-klein); color: var(--ink-soft); }
+.feedback-selected h3::after { content: " "; }
+.feedback-explanation h3 {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.feedback-explanation p { font-size: var(--fs-text); line-height: 1.6; }
+
+/* 4. „Zurück“ zurückhaltend: erreichbar und groß genug zum Tippen, aber
+   ohne Rahmen. Der nächste Schritt ist der einzige gefüllte Knopf. */
+body.lesson-view .nav { gap: 8px; }
+body.lesson-view .nav-button.secondary {
+  flex: 0 0 auto;
+  min-width: 96px;
+  padding-inline: 12px;
+  border-color: transparent;
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--fs-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+body.lesson-view .nav-button.primary { flex: 1 1 auto; }
+
+/* ============================================================
+   D11b Regel in der Rückmeldung als schlichte Zeile (02.10.2026,
+   „Mittelweg“, entschieden von der nutzenden Person)
+   Statt der großen Karte: kleine Zeile „✓ Neue Regel für deine Karte“ und
+   der Regel-Satz. Kein Rahmen, keine Fläche, kein Zähler („1 von 13“).
+   Die Sammlung zeigt der Abschluss („Diese Regeln hast du geübt“) und
+   „Deine Karte“. Gutschrift und Zeitpunkt bleiben unverändert.
+   ============================================================ */
+body.lesson-view .regel-treffer {
+  margin: 14px 0 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+body.lesson-view .regel-treffer-kopf {
+  margin: 0 0 2px;
+  font-size: var(--fs-klein);
+  font-weight: 700;
+  /* --good-text statt --good: Die Zeile steht seit D11b ohne Fläche direkt
+     auf dem Seitenverlauf; --good hatte dort nur 4,29:1 (WCAG 1.4.3). */
+  color: var(--good-text);
+}
+body.lesson-view .regel-treffer:not(.regel-treffer--bekannt) .regel-treffer-kopf::before { content: "✓ "; }
+body.lesson-view .regel-treffer--bekannt .regel-treffer-kopf { color: var(--ink-soft); }
+body.lesson-view .regel-treffer-zeile { gap: 8px; }
+body.lesson-view .regel-treffer .regel-pikto { width: 28px; height: 28px; }
+body.lesson-view .regel-treffer-satz { font-size: var(--fs-text); }
+body.lesson-view .regel-treffer-stand { display: none; }
+
+/* D12: Start und situationsbezogener Einstieg. Gleiche lokalen Token,
+   eine Aufgabe je Ansicht; keine neuen Farben, Effekte oder Bewegungen. */
+.app:has(.einstieg-start) .app-header,
+.app:has(.einstieg-folge) .app-header {
+  padding: .75rem 0;
+  border: 0;
+  background: transparent;
+}
+.app:has(.einstieg-start) .header-avatar,
+.app:has(.einstieg-folge) .header-avatar { display: none; }
+.app:has(.einstieg-start) .app-header h1,
+.app:has(.einstieg-folge) .app-header h1 { font-size: var(--fs-text); }
+.app:has(.einstieg-start) #orientLine,
+.app:has(.einstieg-folge) #orientLine {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.start-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+.start-tools .reading-button,
+.start-help {
+  min-height: 3.625rem;
+  padding: .5rem .75rem;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  box-shadow: none;
+  font-size: var(--fs-klein);
+  font-weight: 700;
+}
+.start-help { display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; }
+.start-help svg { width: 1.5rem; height: 1.5rem; }
+.start-help:hover { background: var(--surface-soft); }
+.einstieg-start,
+.einstieg-folge { max-width: 42rem; margin-inline: auto; text-align: left; }
+.einstieg-start .intro-welcome { margin: 0 0 1.25rem; gap: 1rem; }
+.einstieg-start .intro-welcome .intro-welcome-figure { width: 5rem; max-height: 6rem; }
+.einstieg-start .intro-welcome-text p { font-size: var(--fs-klein); }
+.einstieg-frage > p { margin: 0 0 .375rem; }
+.einstieg-frage h2 { margin: 0 0 1rem; font-size: var(--fs-gross); }
+.einstieg-optionen { display: grid; gap: .625rem; }
+.einstieg-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  width: 100%;
+  min-height: 3.625rem;
+  padding: .75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--fs-text);
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: none;
+}
+.einstieg-option > span:last-child { color: var(--accent); }
+.einstieg-option:hover { border-color: var(--accent); background: var(--surface-soft); }
+.einstieg-resume { margin-bottom: 1.5rem; }
+.einstieg-start .intro-start-button,
+.einstieg-folge .intro-start-button { width: 100%; min-height: 3.625rem; margin: .75rem 0; }
+.einstieg-start .intro-quickstart-link,
+.einstieg-folge .intro-quickstart-link {
+  display: block; min-height: 3.625rem; width: fit-content; max-width: 100%;
+  margin: .25rem 0; padding: .625rem .25rem; line-height: 1.5;
+  text-align: left; color: var(--accent);
+}
+.einstieg-extra { margin-top: 1rem; }
+.einstieg-extra > summary {
+  min-height: 3.625rem; padding: .75rem 0;
+  color: var(--accent); font-size: var(--fs-klein); cursor: pointer;
+}
+.einstieg-gewaehlt { color: var(--ink-soft); font-size: var(--fs-klein); }
+.einstieg-folge > h2 { margin: .5rem 0 1rem; }
+.einstieg-folge > p { line-height: 1.6; }
+@media (forced-colors: active) {
+  .einstieg-option { border-color: ButtonText; }
+}
+/* Alte mobile Begrüßung war zentriert und untereinander. Hier bewusst
+   eine kleine Figur neben dem Text, damit die Auswahl sofort beginnt. */
+.einstieg-start .intro-welcome {
+  flex-direction: row; align-items: center; text-align: left; padding: 0;
+}
+.einstieg-start .intro-welcome .intro-welcome-figure {
+  flex: 0 0 4.5rem; width: 4.5rem; height: auto; max-height: 5.5rem;
+  margin: 0; padding: .375rem;
+}
+.einstieg-start .intro-welcome-text { flex: 1; min-width: 0; }
+.start-tools .reading-toolbar { margin: 0; }
+.start-tools .start-help { flex: 0 0 auto; width: auto; min-width: 6rem; }
+.start-help > img { width: 1.5rem; height: 1.5rem; flex: 0 0 1.5rem; }
+
+/* ============================================================
+   D13 Einheitlicher Knopf-Platz unten (02.10.2026, freigegeben)
+   ------------------------------------------------------------
+   leisteSpiegeln() in app.js zeigt den Hauptknopf der Seite unten rechts
+   in der Leiste und einen zweiten Weg leise links. Das Original im Inhalt
+   trägt dann .in-leiste und ist ausgeblendet. Während leisteSpiegeln() misst,
+   was die Seite selbst zeigt, steht kurz .leiste-messen am body; dann gilt die
+   Ausblendung nicht.
+   ============================================================ */
+body.lesson-view:not(.leiste-messen) .in-leiste { display: none !important; }
+/* Rückmeldung, Quiz und Neue Situation blenden die Leiste sonst aus
+   (.is-hidden). Mit einem gespiegelten Knopf ist sie da – dann aber ohne
+   die beiden festen Knöpfe „Zurück“ und „Weiter“ der Lernseite. */
+.nav.is-hidden.leiste-aktiv { display: flex !important; }
+.nav.is-hidden.leiste-aktiv > #backButton,
+.nav.leiste-aktiv > #nextButton,
+.nav.leiste-neben > #backButton { display: none; }
+/* Lange Beschriftung („Frage nochmal versuchen“) darf umbrechen. */
+.nav .leiste-knopf { white-space: normal; line-height: 1.2; padding-block: 8px; }
+/* Passen zwei Knöpfe nicht nebeneinander (große Schrift, schmales Handy),
+   stehen sie untereinander – der Hauptknopf unten, über die ganze Breite.
+   Vorher wurde die Leiste rechts abgeschnitten (gemessen bei Schrift 200 %
+   und 390 px, WCAG 1.4.4). */
+body.lesson-view .nav { flex-wrap: wrap; }
+body.lesson-view .nav .nav-button { max-width: 100%; }
+/* Der Hauptknopf rechnet beim Umbrechen nicht mit seiner ganzen Beschriftung,
+   sondern mit einer kleinen Mindestbreite. So bleibt „Weiter | Frage nochmal
+   versuchen“ bei normaler Schrift in einer Zeile (die Beschriftung bricht im
+   Knopf um, wie im freigegebenen Entwurf) und geht erst bei großer Schrift
+   in zwei Zeilen. */
+body.lesson-view .nav .nav-button.primary { flex: 1 1 0; min-width: min(100%, 5em); }
+/* Bleibt im Inhalt nur ein leerer Knopf-Bereich zurück, nimmt er keinen Platz weg. */
+body.lesson-view:not(.leiste-messen) :is(.feedback-actions, .certificate-actions, .einfach-quiz-next-actions, .felder-aktionen):not(:has(> :not(.in-leiste))) { display: none; }
+
+/* ============================================================
+   D13 Hilfe in Stufen auf der Rückmeldeseite (02.10.2026, freigegeben)
+   ------------------------------------------------------------
+   „Ich bin unsicher“ zeigt zuerst nur den Tipp. „Mehr Hilfe zeigen“ öffnet
+   die zweite Stufe. Was man antippen kann, sieht aus wie ein Knopf
+   (Umriss, zurückhaltend – der gefüllte Knopf bleibt der nächste Schritt
+   unten). Der Beispiel-Text selbst steht frei mit Strich, ohne Fläche.
+   ============================================================ */
+.hilfe-angebot,
+.task-help-mehr .vorbild-details > summary.later-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 3.4rem;
+  margin: 12px 0 0;
+  padding: 8px 18px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: var(--fs-text);
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  list-style: none;
+}
+/* `display: flex` oben überstimmt sonst das Attribut `hidden` (zweite Stufe offen: der Knopf tritt zurück). */
+.hilfe-angebot[hidden] { display: none; }
+.hilfe-angebot:hover,
+.task-help-mehr .vorbild-details > summary.later-title:hover { background: var(--accent-soft); }
+.task-help-mehr .vorbild-details > summary.later-title::-webkit-details-marker { display: none; }
+.task-help-mehr .vorbild-details { margin: 0; }
+.task-help-mehr .vorbild-details[open] > summary.later-title { margin-bottom: 10px; }
+.task-help-mehr > ul { margin: 14px 0 0; }
+
+/* D14 Bildsprache (02.10.2026): freigegebene Bibliothekskopien und ein
+   Piktogramm je Begriff. Die festen SVG-Farben erhalten in beiden Modi
+   dieselbe helle Fläche; nur die Größe richtet sich nach dem Einsatzort. */
+.app-pictogram,
+img[src^="assets/pictograms/"] {
+  object-fit: contain;
+  background: var(--pictogram-backdrop);
+  border-radius: 0.25rem;
+  padding: 0.125rem;
+  box-sizing: border-box;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.app-pictogram { width: 1.75rem; height: 1.75rem; }
+/* Ältere Themen-Filter dürfen das gemeinsame blaue Set nicht umfärben. */
+.topic-icon img.app-pictogram { filter: none; }
+.tab-item .tab-icon .app-pictogram { width: 1.75rem; height: 1.75rem; }
+.lern-knopf > .app-pictogram,
+.utility-chip > .app-pictogram { width: 1.4rem; height: 1.4rem; }
+.device-icon .app-pictogram { width: 3rem; height: 3rem; }
+.symbol-help-list strong { display: inline-flex; align-items: center; }
+.reading-button .rb-ico-stop { display: none; }
+.reading-button.is-active .rb-ico-stop { display: block; }
+/* Beim Vorlesen bleibt das gemeinsame Stopp-Piktogramm sichtbar;
+   es ist kein Bewertungs-Haken und keine neue Animation. */
+.reading-button .rb-eq { display: none; }
+
+body.lesson-view .lesson-card .lesson-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-block: 0 1rem;
+  min-width: 0;
+}
+.lesson-heading h2 { min-width: 0; overflow-wrap: anywhere; }
+body.lesson-view .lesson-card .lesson-heading .lesson-scene--small {
+  display: block;
+  flex: 0 0 clamp(3rem, 22vw, 5rem);
+  width: clamp(3rem, 22vw, 5rem);
+  padding: 0.15rem;
+  margin: 0;
+  border-radius: 0.65rem;
+  background: var(--scene-backdrop);
+}
+body.lesson-view .lesson-heading .lesson-scene--small img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+.vorbild-text { min-width: 0; width: 100%; }
+.vorbild-heading { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.5rem; }
+.vorbild-heading h3 { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.vorbild-figure {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  flex: 0 0 4rem;
+  object-fit: contain;
+  background: var(--scene-backdrop);
+  border-radius: 50%;
+}
+@media (max-width: 360px) {
+  .tab-item .tab-icon .app-pictogram { width: 1.4rem; height: 1.4rem; }
+}
+@media (forced-colors: active) {
+  .app-pictogram, img[src^="assets/pictograms/"] { forced-color-adjust: none; }
+}
+
+/* ============================================================
+   Ruhiger Lernablauf (04.10.2026, gemeinsamer Entwurf 07/08)
+   Fester Hilfe-Zugang, native Antwortwahl und eine Hauptaktion unten.
+   Reiner Lerntext bleibt ohne Fläche; Größe und Abstand wachsen mit
+   der gewählten Schrift. Die übrigen Menü-Seiten bleiben unverändert.
+   ============================================================ */
+
+/* Kein zweiter Werkzeugpark im Aufgabeninhalt. Der feste Hilfe-Knopf
+   öffnet den passenden Tipp im Dialog, einschließlich weiterer Hilfe. */
+body.lesson-view #content .task-help-area { display: none; }
+/* Vorlesen ist oben gebündelt. Alte D3-Lautsprecher und Zeiger an
+   gewöhnlichem Lerntext würden eine weitere Bedienfunktion andeuten. */
+body.lesson-view .lesson-card :is(.ls-text-row p, .ls-text-block > p, .ls-bullet-item,
+  .ls-bullet-list > li, .access-box p, .access-box li, .frage-text,
+  .vorhersage-situation, .vorbild-box p, .learning-goals-list li) { cursor: auto; }
+body.lesson-view .lesson-card :is(.ls-text-row p, .ls-text-block > p,
+  .access-box p, .frage-text)::after { content: none; }
+/* Eine lange Frage darf bei großer Schrift keine Antworten überdecken.
+   Der alte mobile Sticky-Block fing bei 320px/200% sogar Klicks auf
+   das native Optionsfeld ab; die Frage bleibt im normalen Textfluss. */
+body.lesson-view .frage-text {
+  position: static;
+  top: auto;
+  z-index: auto;
+  box-shadow: none;
+}
+
+/* Der Teil-Zähler gehört zum Titel, ohne eigene Karte oder Pille. */
+body.lesson-view .lern-teil-label {
+  margin: 0 0 0.45rem;
+  color: var(--ink-soft);
+  font-size: var(--fs-klein);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+body.lesson-view .beispiel-seite {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+body.lesson-view .beispiel-seite .vorbild-box { margin-top: 1.3rem; }
+
+/* Auch „Achtung“ und „Gut“ sind reiner Text. Wort und Strich tragen
+   die Bedeutung; die freie grüne Überschrift nutzt --good-text, weil
+   --good ohne getönte Unterlage im hellen Modus zu wenig Kontrast hat. */
+body.lesson-view .access-box.warning,
+body.lesson-view .access-box.success {
+  background: none;
+  box-shadow: none;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left-width: 0.25rem;
+  border-radius: 0;
+  padding: 0.25rem 0 0.25rem 0.9rem;
+}
+body.lesson-view .access-box.success h3 { color: var(--good-text); }
+
+/* Unten steht die Handlung selbst, ohne weiße Kapsel oder Schatten.
+   „Zurück“ ist im festen Hilfe-Zugang erreichbar. Eine noch nicht
+   verfügbare Bestätigung beansprucht keinen Platz in der Leiste. */
+body.lesson-view .nav {
+  gap: 0.65rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
+}
+body.lesson-view .nav > #backButton,
+body.lesson-view .nav > #nextButton:disabled { display: none; }
+body.lesson-view .nav .nav-button {
+  min-height: 3.5rem;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-s);
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+}
+body.lesson-view .nav .nav-button.primary {
+  flex: 1 1 9rem;
+  min-width: 0;
+  font-size: var(--fs-gross);
+}
+body.lesson-view .nav .nav-button.primary:hover:not(:disabled),
+body.lesson-view .nav .nav-button.primary:active {
+  box-shadow: none;
+  transform: none;
+}
+body.lesson-view .nav .nav-button.secondary {
+  flex: 0 1 auto;
+  min-width: 0;
+  padding-inline: 0.65rem;
+  font-size: var(--fs-text);
+  text-underline-offset: 0.2em;
+}
+body.lesson-view .nav .nav-button:focus-visible {
+  outline: 0.2rem solid var(--focus);
+  outline-offset: 0.2rem;
+}
+
+/* D17: Abschluss und beide Themenquiz-Ergebnisse verwenden dieselbe
+   Leiste. Ihre Textwege bleiben frei und erhalten große Antippflächen.
+   Der Fokus hält die tatsächlich gemessene Leistenhöhe frei, auch wenn
+   die Knöpfe bei großer Schrift untereinander stehen. */
+body.lesson-view #content > :is(.completion-page, .completion-card--einfach, .quiz-result-card):has([data-leiste="haupt"]) .link-action {
+  min-height: 3.5rem;
+  max-width: 100%;
+  padding: 0.7rem 0.25rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+/* Lange Regelwörter dürfen die Abschlussliste nicht breiter ziehen als
+   ihren Inhalt. Die vollständigen Sätze bleiben in der vorhandenen Breite. */
+body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) .abschluss-regeln .regel-liste {
+  grid-template-columns: minmax(0, 1fr);
+}
+body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) .abschluss-regeln :is(.regel-platz, .regel-platz-text) {
+  min-width: 0;
+}
+body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) .abschluss-regeln .regel-platz-text {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) .remember-text {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+/* Die zusätzlichen Kurzquiz-Wege stehen mit Abstand unter dem Ergebnis.
+   Auch bei großer Schrift beginnt kein kleiner Link-Rest an der Leiste. */
+body.lesson-view #content > .completion-card--einfach:has([data-leiste="haupt"]) .einfach-done-actions .completion-links {
+  margin-top: 2rem;
+}
+body.lesson-view #content > .quiz-result-card:has([data-leiste="haupt"]) > .certificate-actions > .nav-button.secondary {
+  flex: 1 1 12rem;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+html:has(body.lesson-view #content > :is(.completion-page, .completion-card--einfach, .quiz-result-card) [data-leiste="haupt"]) {
+  scroll-padding-bottom: calc(var(--lern-nav-hoehe, 10rem) + 1.6rem + env(safe-area-inset-bottom, 0px));
+}
+/* Eine flache Unterlage verdeckt durchlaufenden Text hinter und zwischen
+   den Knöpfen vollständig. So bleiben dort keine winzigen Link-Fragmente
+   antippbar. Die Leiste hat weiterhin keinen Rahmen oder Schatten. */
+body.lesson-view .app:has(#content > :is(.completion-page, .completion-card--einfach, .quiz-result-card) [data-leiste="haupt"]) .nav.leiste-aktiv::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem 0 calc(-0.6rem - env(safe-area-inset-bottom, 0px));
+  background: var(--bg-grad-2);
+  z-index: -1;
+}
+
+/* Ein Auswahlfeld für die ganze Antwort, mit echtem Optionsfeld.
+   Markierung bedeutet nur „gewählt“, niemals „richtig“. Das native
+   Feld und der sichtbare Fokus tragen die Bedeutung auch ohne Farbe. */
+body.lesson-view label.answer-option {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.8rem;
+  min-width: 0;
+  min-height: 3.5rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: var(--radius-s);
+  font-size: var(--fs-text);
+  font-weight: 400;
+  line-height: 1.5;
+  box-shadow: none;
+  transition: none;
+}
+body.lesson-view label.answer-option > input[type="radio"] {
+  appearance: auto;
+  flex: 0 0 1.35rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  min-width: 0;
+  margin: 0.12rem 0 0;
+  padding: 0;
+  accent-color: var(--accent);
+}
+body.lesson-view label.answer-option .answer-text {
+  flex: 1 1 12rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+/* Die gesprochene Antwortnummer bleibt als schlichter Text erhalten;
+   eine zweite runde Fläche würde neben dem Optionsfeld konkurrieren. */
+body.lesson-view label.answer-option .answer-num {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  margin-top: 0.12rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink-soft);
+  font-size: var(--fs-text);
+  line-height: 1.5;
+}
+body.lesson-view label.answer-option .answer-pikto {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 2.25rem;
+}
+body.lesson-view label.answer-option:has(> input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: none;
+}
+body.lesson-view label.answer-option:focus-within {
+  outline: 0.2rem solid var(--focus);
+  outline-offset: 0.2rem;
+}
+/* Der Fokus liegt sichtbar um die gesamte Antwort; kein zweiter Ring. */
+body.lesson-view label.answer-option > input:focus-visible { outline: none; }
+
+/* Hilfe zeigt den Tipp zuerst. Weitere Wege stehen erst in den nativen
+   Details; Einstellungen bleiben ein eigener Dialog. Kein Hinweistext
+   sieht wie eine weitere antippbare Karte aus. */
+.lern-mehr-innen.hilfe-dialog,
+.lern-mehr-innen.lern-einstellungen,
+.lern-einstellungen > .lern-mehr-innen {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  width: min(32rem, 100%);
+  max-height: 92vh;
+  max-height: 92dvh;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 1rem 1rem calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  gap: 1rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: none;
+  overflow-wrap: anywhere;
+}
+#lernMehrDialog.hilfe-dialog > h2,
+.lern-einstellungen > .lern-mehr-innen > h2 { margin: 0; line-height: 1.3; }
+/* Im Dialog bleibt Vorlesen erreichbar, ohne eine zusätzliche Pille.
+   Beschriftung, Piktogramm und großer Trefferbereich bleiben sichtbar. */
+.hilfe-dialog > .reading-toolbar,
+.lern-einstellungen .lern-mehr-innen > .reading-toolbar { margin: 0; }
+.hilfe-dialog .reading-button-normal,
+.lern-einstellungen .reading-button-normal {
+  min-width: 0;
+  min-height: 3.5rem;
+  max-width: 100%;
+  gap: 0.5rem;
+  padding: 0.45rem 0.4rem;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--accent);
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-shadow: none;
+  transition: none;
+}
+.hilfe-dialog .reading-button-normal:hover,
+.lern-einstellungen .reading-button-normal:hover,
+.hilfe-dialog .reading-button-normal.is-active,
+.lern-einstellungen .reading-button-normal.is-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.hilfe-dialog .reading-button-normal:focus-visible,
+.lern-einstellungen .reading-button-normal:focus-visible {
+  outline: 0.2rem solid var(--focus);
+  outline-offset: 0.2rem;
+}
+.hilfe-dialog .reading-button-normal .rb-label,
+.lern-einstellungen .reading-button-normal .rb-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.hilfe-dialog .reading-button-normal > .app-pictogram,
+.lern-einstellungen .reading-button-normal > .app-pictogram {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex: 0 0 1.4rem;
+}
+#lernMehrDialog .task-help-panel {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#lernMehrDialog .task-help-tip {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  line-height: 1.6;
+}
+#lernMehrDialog.hilfe-dialog details { margin: 0.75rem 0 0; }
+#lernMehrDialog.hilfe-dialog details > summary {
+  display: list-item;
+  list-style-position: inside;
+  min-height: 3.5rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.65rem 0;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--fs-text);
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+#lernMehrDialog.hilfe-dialog details > summary::-webkit-details-marker { display: revert; }
+#lernMehrDialog.hilfe-dialog details > summary:hover { background: var(--accent-soft); }
+#lernMehrDialog.hilfe-dialog details > summary:focus-visible {
+  outline: 0.2rem solid var(--focus);
+  outline-offset: 0.2rem;
+}
+#lernMehrDialog.hilfe-dialog details[open] > summary { margin-bottom: 0.75rem; }
+.lern-hilfe-wege {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+#lernMehrDialog .task-help-mehr-knopf {
+  min-width: 0;
+  min-height: 3.5rem;
+  max-width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.65rem 0;
+  justify-content: flex-start;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--accent);
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+#lernMehrDialog .task-help-mehr-knopf:hover { background: var(--accent-soft); }
+.hilfe-dialog .lern-mehr-knopf,
+.lern-einstellungen .lern-mehr-knopf {
+  min-width: 0;
+  min-height: 3.5rem;
+  max-width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--accent);
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-shadow: none;
+}
+.hilfe-dialog .lern-mehr-knopf:hover,
+.lern-einstellungen .lern-mehr-knopf:hover { background: var(--accent-soft); }
+.lern-einstellungen .lern-mehr-reihe {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: 0.65rem;
+}
+.lern-einstellungen select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 3.5rem;
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 0.125rem solid var(--accent);
+  border-radius: var(--radius-s);
+}
+
+/* Unter 22rem, auch bei vergrößerter Schrift, ist die Hauptaktion
+   eine vollständige Zeile. Der zweite erlaubte Weg bleibt darüber. */
+@media (max-width: 22rem) {
+  body.lesson-view .nav .nav-button.primary {
+    flex-basis: 100%;
+    order: 2;
+  }
+  .lern-mehr-innen.hilfe-dialog,
+  .lern-mehr-innen.lern-einstellungen,
+  .lern-einstellungen > .lern-mehr-innen { padding-inline: 0.65rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lesson-view .nav .nav-button,
+  body.lesson-view label.answer-option,
+  .hilfe-dialog .lern-mehr-knopf,
+  .lern-einstellungen .lern-mehr-knopf { transition: none; animation: none; }
+}
+@media (forced-colors: active) {
+  body.lesson-view label.answer-option,
+  .hilfe-dialog .reading-button-normal,
+  .lern-einstellungen .reading-button-normal,
+  .hilfe-dialog .lern-mehr-knopf,
+  .lern-einstellungen .lern-mehr-knopf,
+  .lern-einstellungen select { border-color: ButtonBorder; }
+  body.lesson-view label.answer-option:has(> input:checked),
+  body.lesson-view .nav .nav-button.primary { border-color: Highlight; }
+  body.lesson-view label.answer-option > input[type="radio"] { accent-color: auto; }
+  body.lesson-view label.answer-option:focus-within,
+  body.lesson-view .nav .nav-button:focus-visible,
+  .hilfe-dialog .reading-button-normal:focus-visible,
+  .lern-einstellungen .reading-button-normal:focus-visible,
+  #lernMehrDialog.hilfe-dialog details > summary:focus-visible { outline-color: Highlight; }
+  body.lesson-view .access-box.warning,
+  body.lesson-view .access-box.success { border-left-color: CanvasText; }
+  body.lesson-view .access-box.warning h3,
+  body.lesson-view .access-box.success h3 { color: CanvasText; }
+}
+
+/* ============================================================
+   Übersicht (06.10.2026, Auftrag „alle Änderungsvorschläge umsetzen“)
+   ============================================================ */
+/* 1. Werkzeugzeile außerhalb des Lernens so ruhig wie auf der Startseite
+   (D12): eine Zeile, rechtsbündig, ohne Pille und Kapsel. Inhalt und
+   Reihenfolge bleiben (Vorlesen · Pause · Sprache, §10a.8); Zielgröße
+   58 px (§9). Der Lernmodus hat seine eigene Leiste (D10). */
+body:not(.lesson-view) .tool-row {
+  justify-content: flex-end;
+  align-items: center;
+  gap: .25rem .5rem;
+  margin: .25rem 0 .75rem;
+}
+body:not(.lesson-view) .tool-row .utility-bar {
+  gap: .25rem;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+body:not(.lesson-view) .tool-row .reading-button:not(.is-active),
+body:not(.lesson-view) .tool-row .utility-chip {
+  min-height: 3.625rem;
+  padding: .5rem .375rem;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  box-shadow: none;
+  color: var(--accent);
+  font-size: var(--fs-klein);
+  font-weight: 700;
+}
+body:not(.lesson-view) .tool-row .utility-chip + .utility-chip { margin-left: 0; }
+/* Damit Vorlesen · Pause · Sprache auf einem üblichen Handy (390 px) in
+   eine Zeile passen: kleinere Münze, engere Abstände. Bei größerer
+   Schrift oder sehr schmalem Bildschirm dürfen sie umbrechen. */
+body:not(.lesson-view) .tool-row .reading-button { gap: .375rem; }
+body:not(.lesson-view) .tool-row .rb-coin { width: 2.25rem; height: 2.25rem; }
+body:not(.lesson-view) .tool-row .reading-button:not(.is-active):hover,
+body:not(.lesson-view) .tool-row .utility-chip:hover { background: var(--surface-soft); color: var(--accent-dark); }
+
+/* 2. Start-Schritt: Hinweis „Du darfst Fehler machen.“ ohne Fläche, wie
+   „Achtung“ und „Gut“ im Lernmodus (T26). Grün bleibt nur am Strich und
+   an der Überschrift (--good-text: Kontrast ohne getönte Unterlage). */
+body.lesson-view .start-safe-notice {
+  background: none;
+  border-radius: 0;
+  padding: .25rem 0 .25rem .9rem;
+}
+body.lesson-view .start-safe-notice .start-safe-icon,
+body.lesson-view .start-safe-notice .start-safe-main { color: var(--good-text); }
+
+/* 3. Gleicher linker Textrand: Stehen in einem Textblock Sätze mit und
+   ohne Piktogramm, beginnen alle Sätze an derselben Kante (vorher sprang
+   der Text hin und her). 56 px Piktogramm + 16 px Abstand (.ls-text-row).
+   Passt ein Satz bei sehr schmalem Bildschirm nicht neben das Piktogramm
+   (I9), steht er darunter; dann gilt der Einzug nicht. */
+.ls-text-block:has(> .ls-text-row > .ls-sentence-pikto) > p,
+.ls-text-block:has(> .ls-text-row > .ls-sentence-pikto) > .ls-text-row:not(:has(> .ls-sentence-pikto)) > p {
+  padding-left: calc(56px + 16px);
+}
+@media (forced-colors: active) {
+  body.lesson-view .start-safe-notice { border-left-color: CanvasText; }
+  body.lesson-view .start-safe-notice .start-safe-icon,
+  body.lesson-view .start-safe-notice .start-safe-main { color: CanvasText; }
+}
+
+/* 4. Steht die Überschrift neben dem Symbol nur für Vorlese-Programme da
+   (gleich wie der Kopf, focusContent), steht auch das Symbol nicht allein. */
+.symbol-heading.is-duplicate .access-box-symbol { display: none; }
+.symbol-heading.is-duplicate { margin-bottom: 0; }
+
+/* ============================================================
+   Bilder an Antworten (I1, Probe Betrug, 06.10.2026, Bericht 24)
+   ============================================================ */
+/* Übung im Lernmodus: Mit Bild passt der Text noch neben Optionsfeld,
+   Nummer und Bild (vorher rutschte er auf 390 px in die nächste Zeile).
+   Bei sehr großer Schrift darf er weiter umbrechen. */
+body.lesson-view label.answer-option:has(.answer-pikto) .answer-text { flex-basis: 7rem; }
+body.lesson-view label.answer-option:has(.answer-pikto) { align-items: center; }
+/* Kurz-Quiz: Bild links neben dem Text, gleiche Größe wie im Quiz. */
+.einfach-quiz-btn:has(.answer-pikto) { display: flex; align-items: center; gap: .8rem; }
+.einfach-quiz-btn .answer-pikto { width: 3rem; height: 3rem; flex: 0 0 3rem; }
+
+/* ============================================================
+   Beta-Version (06.10.2026, Bericht 25)
+   ============================================================ */
+/* Das Zeichen im Kopf ist jetzt ein Knopf: Antippen öffnet die Erklärung
+   aus der Wörter-Hilfe (§10a.1: Fläche heißt antippbar). Aussehen wie das
+   frühere Zeichen „Testphase“. */
+.app-header .test-badge { letter-spacing: inherit; min-height: 24px; cursor: pointer; }
+.app-header .test-badge:hover { text-decoration: underline; text-underline-offset: 2px; }
+/* „Beta-Version“ in der Fußzeile sieht aus wie ein erklärtes Wort im Text. */
+.glossar-knopf {
+  font: inherit;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  border-bottom: 2px dotted var(--accent);
+  border-radius: 2px;
+  padding: 0;
+  cursor: pointer;
+}
+.glossar-knopf:hover { background: var(--accent-soft); }
+/* „Was ist eine Version?“ unter einer Erklärung */
+.glossar-siehe { display: block; margin-top: 12px; font-size: var(--fs-text); color: var(--accent); }
+.glossar-siehe[hidden] { display: none; }

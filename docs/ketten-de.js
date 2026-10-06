@@ -219,8 +219,8 @@ const KETTEN = {
      Ein Notfall wird schon bei Frage 1 erkannt; die Notfall-Grenze steht klein
      und gleichlautend als dauerhafte Zeile (`rueckfall`) in jedem Schritt, im
      Kurzplan und am Ende. Kein Film.
-     ARBEITSFASSUNG nur in Leichter Sprache – die genaue Formulierung für
-     Lernende und die Stufen kommen später (Rückfall: Leicht). Die `tun`-Sätze
+     Begründung und Hilfe in drei Stufen seit Paket H4 (03.10.2026); die
+     Notfall-Zeile bleibt in allen Stufen derselbe Satz. Die `tun`-Sätze
      stehen wortgleich in der Lektion „Dein Hilfe-Check“ und auf der Merk-Karte.
      Die eigentliche Betrugs-Masche bleibt im Plan von „Betrug“. */
   hilfe: {
@@ -229,14 +229,18 @@ const KETTEN = {
        (planWort() in app.js; H2-Korrektur, 30.09.2026). */
     bezeichnung: "Hilfe-Check",
     lektion: "Dein Hilfe-Check",
-    merksatz: { leicht: "Erst schauen: Was ist los? Dann selbst handeln oder passende Hilfe holen." },
+    merksatz: { leicht: "Erst schauen: Was ist los? Dann selbst handeln oder passende Hilfe holen.", einfach: "Erst schauen, was los ist. Dann selbst handeln oder passende Hilfe holen.", standard: "Erst klären, was los ist – dann selbst handeln oder passende Hilfe holen." },
 
     einstieg: {
-      leicht: "Du hast ein Problem mit dem Handy oder im Internet. Dann hilft dir der Hilfe-Check. Er hat 3 Fragen. Wir gehen sie zusammen durch."
+      leicht: "Du hast ein Problem mit dem Handy oder im Internet. Dann hilft dir der Hilfe-Check. Er hat 3 Fragen. Wir gehen sie zusammen durch.",
+      einfach: "Wenn du ein Problem mit dem Handy oder im Internet hast, hilft dir der Hilfe-Check. Er hat 3 Fragen, und wir gehen sie jetzt zusammen durch.",
+      standard: "Bei einem Problem mit dem Handy oder im Internet hilft dir der Hilfe-Check. Er besteht aus 3 Fragen – wir gehen sie gemeinsam durch."
     },
 
     abschluss: {
-      leicht: "Das ist dein Hilfe-Check. Vieles löst du selbst. Manchmal holst du dir Hilfe. Du entscheidest."
+      leicht: "Das ist dein Hilfe-Check. Vieles löst du selbst. Manchmal holst du dir Hilfe. Du entscheidest.",
+      einfach: "Das ist dein Hilfe-Check. Vieles löst du selbst, und manchmal holst du dir Hilfe. Du entscheidest.",
+      standard: "Das ist dein Hilfe-Check. Vieles löst du selbst, manchmal holst du dir Hilfe – du entscheidest."
     },
 
     /* Hier die Notfall-Grenze (nicht eine Rückfall-Regel wie bei Datenschutz). */
@@ -249,30 +253,42 @@ const KETTEN = {
         tun: "Was ist los?",
         pictogram: "pikto-search",
         warum: {
-          leicht: "Klappt etwas nicht? Macht dir etwas Druck oder Angst? Oder ist jemand in Gefahr? Für jedes Problem gibt es einen anderen nächsten Schritt."
+          leicht: "Klappt etwas nicht? Macht dir etwas Druck oder Angst? Oder ist jemand in Gefahr? Für jedes Problem gibt es einen anderen nächsten Schritt.",
+          einfach: "Vielleicht klappt etwas nicht, vielleicht macht dir etwas Druck oder Angst, oder jemand ist in Gefahr. Für jedes Problem gibt es einen anderen nächsten Schritt.",
+          standard: "Klappt etwas nicht, macht dir etwas Druck oder Angst, oder ist jemand in Gefahr? Je nach Problem ist der nächste Schritt ein anderer."
         },
         hilfe: {
-          leicht: "Du weißt es noch nicht genau? Dann schau: Was ist passiert? Was macht dir Sorgen?"
+          leicht: "Du weißt es noch nicht genau? Dann schau: Was ist passiert? Was macht dir Sorgen?",
+          einfach: "Wenn du es noch nicht genau weißt, schaust du, was passiert ist und was dir Sorgen macht.",
+          standard: "Bist du dir noch nicht sicher, überleg: Was ist passiert, und was macht dir Sorgen?"
         }
       },
       {
         tun: "Was kann ich selbst tun?",
         pictogram: "pikto-done",
         warum: {
-          leicht: "Etwas klappt nicht? Dann probierst du selbst etwas aus. Etwas macht dir Druck oder Angst? Dann machst du erst Stopp. Du schickst nichts. Du bezahlst nichts."
+          leicht: "Etwas klappt nicht? Dann probierst du selbst etwas aus. Etwas macht dir Druck oder Angst? Dann machst du erst Stopp. Du schickst nichts. Du bezahlst nichts.",
+          einfach: "Wenn etwas nicht klappt, probierst du selbst etwas aus. Wenn dir etwas Druck oder Angst macht, machst du erst Stopp: Du schickst nichts und bezahlst nichts.",
+          standard: "Klappt etwas nicht, probierst du selbst etwas aus. Macht dir etwas Druck oder Angst, heißt es erst einmal Stopp: nichts schicken, nichts bezahlen."
         },
         hilfe: {
-          leicht: "Du kannst einen Chat schließen. Du kannst eine Person blockieren. Oder du meldest etwas in der App."
+          leicht: "Du kannst einen Chat schließen. Du kannst eine Person blockieren. Oder du meldest etwas in der App.",
+          einfach: "Du kannst einen Chat schließen, eine Person blockieren oder etwas in der App melden.",
+          standard: "Du kannst einen Chat schließen, jemanden blockieren oder etwas in der App melden."
         }
       },
       {
         tun: "Welche Hilfe passt?",
         pictogram: "pikto-help",
         warum: {
-          leicht: "Eine Frage zum Handy? Dann fragst du eine Person. Sie kennt sich mit Handys aus. Druck oder Angst? Dann sprichst du mit einer Person. Du vertraust ihr."
+          leicht: "Eine Frage zum Handy? Dann fragst du eine Person. Sie kennt sich mit Handys aus. Druck oder Angst? Dann sprichst du mit einer Person. Du vertraust ihr.",
+          einfach: "Bei einer Frage zum Handy fragst du eine Person, die sich mit Handys auskennt. Bei Druck oder Angst sprichst du mit einer Person, der du vertraust.",
+          standard: "Bei einer Frage zum Handy fragst du jemanden, der sich damit auskennt. Bei Druck oder Angst sprichst du mit einer Person, der du vertraust."
         },
         hilfe: {
-          leicht: "Die erste Person kann nicht helfen? Dann fragst du eine andere. Hilfe holen ist keine Schwäche."
+          leicht: "Die erste Person kann nicht helfen? Dann fragst du eine andere. Hilfe holen ist keine Schwäche.",
+          einfach: "Wenn die erste Person nicht helfen kann, fragst du eine andere. Hilfe holen ist keine Schwäche.",
+          standard: "Kann die erste Person nicht helfen, frag eine andere. Hilfe holen ist keine Schwäche."
         }
       }
     ]

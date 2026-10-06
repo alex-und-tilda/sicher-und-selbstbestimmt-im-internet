@@ -8,7 +8,7 @@
 
    Aufbau:  COMPANION[themaId] = { kompetenzen{digcomp[], icf[]}, lernziele[],
             methodik[], gespraechsanlaesse[], begleithinweise[],
-            rechtsbezuege[], transfer[] }
+            rechtsbezuege[], transfer[], lektionen{short{}, full{}} }
 
    kompetenzen: Verortung im Europäischen Referenzrahmen DigComp 2.2
    (Code, Kompetenz, Stufe) und in der ICF (Aktivität und Teilhabe bzw.
@@ -405,7 +405,7 @@ const COMPANION = {
         { code: "5.4", titel: "Erkennen von Lücken in der digitalen Kompetenz", stufe: "Stufe 1–2 · grundlegend",
           bezug: "Merkt, wann sie etwas nicht allein lösen kann, und holt Hilfe." },
         { code: "1.3", titel: "Verwalten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Sichert einen Beweis als Screenshot und löscht ihn nicht vorschnell." },
+          bezug: "Sichert eine Nachricht als Bild vom Bildschirm, um sie einer Person zeigen zu können." },
         { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
           bezug: "Nutzt den Hilfe- und Melde-Knopf einer Plattform." }
       ],
@@ -421,9 +421,12 @@ const COMPANION = {
       ]
     },
     /* Paket H1 (30.09.2026): neue fachliche Lernziel-Struktur (6 Ziele, siehe
-       topics.js › hilfe.lernzielStruktur) – Arbeitsfassung. Grundprinzip: so viel
-       Unterstützung wie nötig, so viel Selbstständigkeit wie möglich. Die alte
-       Fassung dieses Eintrags liegt in geparkt/hilfe-umbau-2026-09-30.js. */
+       topics.js › hilfe.lernzielStruktur). Grundprinzip: so viel Unterstützung
+       wie nötig, so viel Selbstständigkeit wie möglich. Die alte Fassung dieses
+       Eintrags liegt in geparkt/hilfe-umbau-2026-09-30.js.
+       Paket H5 (03.10.2026): Methodik nennt Übungen, Quiz und neue Situation;
+       Gesprächsanlässe und Alltagstransfer an den Hilfe-Check angeglichen (kein
+       „nicht sofort löschen“ mehr, keine Nummer außer 110 und 112). */
     lernziele: [
       "Die Teilnehmenden unterscheiden, welche Art von Problem vorliegt: Etwas klappt nicht – etwas macht Druck oder Angst – jemand ist akut in Gefahr.",
       "Sie handeln selbst, wo es sicher geht: ausprobieren, noch einmal nachsehen, schließen, ignorieren, blockieren oder melden.",
@@ -435,16 +438,20 @@ const COMPANION = {
     methodik: [
       "Quer-Thema: als Anker bei allen anderen Themen mitnutzen.",
       "Roter Faden ist der Hilfe-Check mit drei Fragen: Was ist los? – Was kann ich selbst tun? – Welche Hilfe passt? Ein Notfall wird schon bei der ersten Frage erkannt (Person vor Ort holen, 110 oder 112). Nicht jedes Problem heißt „sofort jemanden fragen“.",
-      "Rollenspiel: Hilfe holen üben (was sage ich, wen frage ich?).",
+      "Übungen und Quiz enthalten bewusst auch harmlose Technik-Probleme, bei denen selbst ausprobieren der passende Weg ist. Die Rückmeldung „Das geht auch“ ist kein Fehler: gemeinsam besprechen, warum hier mehrere Wege sicher sind.",
+      "Die neue Situation am Ende (eine Nachricht mit Druck von einem Bekannten) geht den Hilfe-Check einmal ganz durch – ein guter Anlass, die drei Fragen laut mitzusprechen.",
+      "Rollenspiel: Hilfe holen üben (was zeige ich, was habe ich schon probiert, wen frage ich als Nächstes?).",
       "Sicherung über Merk-Karte; Notfall-Kontakte sichtbar machen."
     ],
     gespraechsanlaesse: [
-      "An wen kannst du dich wenden, wenn im Internet etwas schiefgeht?",
-      "Warum ist es manchmal besser, eine Nachricht nicht sofort zu löschen?",
+      "Welches Problem mit dem Handy hast du schon einmal selbst gelöst?",
+      "Woran merkst du, dass dir eine Nachricht Druck oder Angst macht?",
+      "Wen fragst du bei einem Handy-Problem – und mit wem sprichst du bei Druck oder Angst?",
       "Was hilft dir, ruhig zu bleiben?"
     ],
     begleithinweise: [
       "Sicheren, vorwurfsfreien Rahmen schaffen: Hilfe holen ist Stärke, nicht Versagen.",
+      "Selbstständigkeit stärken: zuerst fragen, was die Person schon selbst probiert hat, und erst dann unterstützen – nicht das Handy aus der Hand nehmen.",
       "Konkrete regionale Beratungs- und Notfall-Kontakte bereithalten.",
       "Bei akuten Vorfällen sofort handeln, nicht nur besprechen."
     ],
@@ -454,8 +461,8 @@ const COMPANION = {
       "KDG; Schutzkonzepte des Trägers einbeziehen."
     ],
     transfer: [
-      "Eine persönliche Notfall-Karte erstellen (Vertrauensperson, 116 116, Polizei 110).",
-      "Einen Screenshot gemeinsam üben.",
+      "Eine persönliche Hilfe-Karte erstellen: eine Person für Handy-Fragen, eine Vertrauensperson, für den Notfall 110 und 112.",
+      "Ein Bild vom Bildschirm (Screenshot) gemeinsam üben.",
       "Den Hilfe-Knopf der Plattform zeigen und ausprobieren."
     ]
   },
@@ -677,12 +684,310 @@ const COMPANION = {
   }
 };
 
+/* I2 (05.10.2026, auf v2026-27c): feste Zuordnung statt wechselnder Hinweise nach Schrittzahl.
+   Die Schlüssel sind die ORIGINALTITEL aus topics.js, getrennt nach Kern
+   (short) und „Mehr dazu“ (full). Auch der gemeinsame Start und das Erinnern
+   sind ausdrücklich zugeordnet. Lektionen haben derzeit keine eigene ID.
+
+   Jede Referenz [Abschnitt, Index] liest einen bestehenden Text WÖRTLICH aus
+   COMPANION; die fachlichen Texte oben bleiben unverändert. Ein Gesprächs-
+   anlass wird als Frage gekennzeichnet, Methodik, Hinweise, Lernziele und
+   Transfer nicht. Dieselbe Zuordnung gilt für alle drei Sprachstufen, denn
+   die Begleit-Ebene ist keine Sprachstufe für Lernende (§7).
+
+   Keine Reihenfolge- oder Modulo-Rückfallebene: Fehlt ein Titel oder verweist
+   ein Eintrag ins Leere, liefert companionTippFuer null. So erscheint kein
+   unpassender Hinweis; neue/umbenannte Lektionen müssen zugeordnet werden.
+   Indizes sind nullbasiert; beim Umsortieren der Quelllisten mitpflegen. */
+const COMPANION_LEKTIONEN = {
+  datenschutz: {
+    short: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 3] },
+      "Deine Daten": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Nötig oder nicht?": { lernen: ["gespraechsanlaesse", 2], uebung: ["methodik", 1] },
+      "Wer sieht es?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Das merke ich mir": { lernen: ["methodik", 6], uebung: ["begleithinweise", 3] }
+    },
+    full: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 3] },
+      "Deine Daten": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Wer will deine Daten?": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 3] },
+      "Nötig oder freiwillig?": { lernen: ["gespraechsanlaesse", 2], uebung: ["methodik", 1] },
+      "Eine App will etwas sehen": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 1] },
+      "Wer sieht dein Profil?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Fotos prüfen": { lernen: ["begleithinweise", 0], uebung: ["begleithinweise", 0] },
+      "Standort teilen": { lernen: ["gespraechsanlaesse", 1], uebung: ["methodik", 2] },
+      "Eine Nachricht will deine Daten": { lernen: ["methodik", 0], uebung: ["begleithinweise", 2] },
+      "Dein Plan für deine Daten": { lernen: ["methodik", 0], uebung: ["begleithinweise", 3] },
+      "Das merke ich mir": { lernen: ["methodik", 6], uebung: ["begleithinweise", 3] }
+    }
+  },
+  whatsapp: {
+    short: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Unbekannte Nachrichten": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Links in Nachrichten": { lernen: ["methodik", 2], uebung: ["methodik", 2] },
+      "Dein WhatsApp-Code": { lernen: ["lernziele", 2], uebung: ["begleithinweise", 1] },
+      "Das merke ich mir": { lernen: ["methodik", 4], uebung: ["methodik", 4] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "WhatsApp nutzen": { lernen: ["methodik", 0], uebung: ["methodik", 0] },
+      "Fremde Nummer": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Geld und Betrug": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 1] },
+      "Links in Nachrichten": { lernen: ["methodik", 2], uebung: ["methodik", 2] },
+      "WhatsApp-Code": { lernen: ["lernziele", 2], uebung: ["begleithinweise", 1] },
+      "Gruppen": { lernen: ["gespraechsanlaesse", 2], uebung: ["methodik", 0] },
+      "Fotos senden": { lernen: ["gespraechsanlaesse", 2], uebung: ["methodik", 0] },
+      "Stress und Eile": { lernen: ["begleithinweise", 0], uebung: ["begleithinweise", 0] },
+      "Die KI in WhatsApp": { lernen: ["lernziele", 3], uebung: ["methodik", 0] },
+      "Was kann ich tun?": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 4], uebung: ["methodik", 4] }
+    }
+  },
+  facebook: {
+    short: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Dein Facebook-Profil": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Unbekannte Personen": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 1] },
+      "Komische Nachrichten": { lernen: ["methodik", 0], uebung: ["methodik", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 2], uebung: ["methodik", 2] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Profil": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Beitrag schreiben": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Wer darf etwas sehen?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Freundschafts-Anfragen": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 1] },
+      "Kommentare schreiben": { lernen: ["lernziele", 2], uebung: ["begleithinweise", 0] },
+      "Beleidigungen": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 0] },
+      "Fotos mit anderen Personen": { lernen: ["methodik", 1], uebung: ["methodik", 2] },
+      "Was kann ich tun?": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 2], uebung: ["methodik", 2] }
+    }
+  },
+  instagram: {
+    short: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 2] },
+      "Deine Fotos auf Instagram": { lernen: ["transfer", 1], uebung: ["transfer", 1] },
+      "Fotos von anderen Personen": { lernen: ["methodik", 1], uebung: ["begleithinweise", 2] },
+      "Nachrichten von Unbekannten": { lernen: ["lernziele", 1], uebung: ["begleithinweise", 1] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 2] },
+      "Foto posten": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Andere Personen auf Fotos": { lernen: ["methodik", 1], uebung: ["begleithinweise", 2] },
+      "Kurze Videos und Stories": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Standort": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 0] },
+      "Private Nachrichten": { lernen: ["lernziele", 1], uebung: ["begleithinweise", 1] },
+      "Verletzende Kommentare": { lernen: ["methodik", 0], uebung: ["methodik", 0] },
+      "Bearbeitete Bilder": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 0] },
+      "Was kann ich tun?": { lernen: ["transfer", 2], uebung: ["begleithinweise", 1] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  },
+  youtube: {
+    short: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Videos prüfen": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Werbung erkennen": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 1] },
+      "Pausen machen": { lernen: ["methodik", 2], uebung: ["begleithinweise", 1] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Videos prüfen": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Werbung erkennen": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 1] },
+      "Autoplay und Zeit": { lernen: ["methodik", 2], uebung: ["begleithinweise", 1] },
+      "Gefährliche Mutproben": { lernen: ["lernziele", 2], uebung: ["begleithinweise", 0] },
+      "Videos, die Angst machen": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 2] },
+      "Kommentare": { lernen: ["begleithinweise", 2], uebung: ["begleithinweise", 2] },
+      "Nicht jedes Video ist echt": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Was kann ich tun?": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  },
+  snapchat: {
+    short: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Bilder verschwinden nicht wirklich": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Dein Standort": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 1] },
+      "Niemand darf dich zwingen": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 0] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Bilder verschwinden nicht immer": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Bild vom Bildschirm": { lernen: ["methodik", 1], uebung: ["methodik", 1] },
+      "Sehr private Bilder": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 0] },
+      "Standort": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 1] },
+      "Kontakte": { lernen: ["methodik", 0], uebung: ["methodik", 0] },
+      "Stress erkennen": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 0] },
+      "Was kann ich tun?": { lernen: ["transfer", 1], uebung: ["begleithinweise", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  },
+  tiktok: {
+    short: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Was du bei TikTok siehst": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Nachrichten auf TikTok": { lernen: ["lernziele", 1], uebung: ["begleithinweise", 2] },
+      "Pause machen": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 1] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Trends": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Gefährliche Trends erkennen": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Ähnliche Videos": { lernen: ["gespraechsanlaesse", 1], uebung: ["methodik", 2] },
+      "Private Nachrichten": { lernen: ["lernziele", 1], uebung: ["begleithinweise", 2] },
+      "Videos posten": { lernen: ["methodik", 0], uebung: ["begleithinweise", 2] },
+      "Kommentare": { lernen: ["begleithinweise", 1], uebung: ["begleithinweise", 1] },
+      "Gefühle und Pausen": { lernen: ["begleithinweise", 1], uebung: ["begleithinweise", 1] },
+      "Nicht jedes Video ist echt": { lernen: ["gespraechsanlaesse", 2], uebung: ["lernziele", 3] },
+      "Was kann ich tun?": { lernen: ["lernziele", 1], uebung: ["begleithinweise", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  },
+  hilfe: {
+    short: {
+      "Start": { lernen: ["methodik", 1], uebung: ["begleithinweise", 0] },
+      "Was ist los?": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 2] },
+      "Was kann ich selbst tun?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Welche Hilfe passt?": { lernen: ["gespraechsanlaesse", 2], uebung: ["gespraechsanlaesse", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 5], uebung: ["begleithinweise", 0] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 1], uebung: ["begleithinweise", 0] },
+      "Probleme sind verschieden": { lernen: ["methodik", 1], uebung: ["lernziele", 5] },
+      "Druck oder Angst: erst stoppen": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 0] },
+      "Das kannst du selbst": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Welche Hilfe passt?": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 2] },
+      "Unterstützung wirklich holen": { lernen: ["methodik", 4], uebung: ["begleithinweise", 1] },
+      "Dein Hilfe-Check": { lernen: ["methodik", 1], uebung: ["methodik", 3] },
+      "Das merke ich mir": { lernen: ["methodik", 5], uebung: ["begleithinweise", 0] }
+    }
+  },
+  ki: {
+    short: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Was ist KI?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Was kann KI?": { lernen: ["methodik", 0], uebung: ["methodik", 1] },
+      "Wann musst du aufpassen?": { lernen: ["lernziele", 3], uebung: ["lernziele", 3] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
+      "Was ist KI?": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 0] },
+      "Wo triffst du KI?": { lernen: ["gespraechsanlaesse", 0], uebung: ["transfer", 2] },
+      "Ein Chatbot ist kein Mensch": { lernen: ["lernziele", 0], uebung: ["begleithinweise", 0] },
+      "KI macht Fehler": { lernen: ["methodik", 2], uebung: ["methodik", 1] },
+      "So prüfst du eine Antwort": { lernen: ["transfer", 0], uebung: ["methodik", 1] },
+      "Keine privaten Daten": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 1] },
+      "Gesundheit und Geld": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 0] },
+      "KI kann Bilder und Stimmen fälschen": { lernen: ["lernziele", 3], uebung: ["lernziele", 3] },
+      "Was kann ich tun?": { lernen: ["transfer", 0], uebung: ["lernziele", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  },
+  fakes: {
+    short: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Was ist eine Fake-Nachricht?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Wie erkennst du Fakes?": { lernen: ["gespraechsanlaesse", 2], uebung: ["methodik", 1] },
+      "Was tust du bei Fakes?": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Was sind Fake News?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 2] },
+      "Warum gibt es Fake News?": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 0] },
+      "KI-Bilder erkennen": { lernen: ["methodik", 0], uebung: ["begleithinweise", 2] },
+      "Gefälschte Videos: Deepfakes": { lernen: ["methodik", 0], uebung: ["begleithinweise", 2] },
+      "Geklonte Stimmen am Telefon": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 1] },
+      "Nachrichten prüfen": { lernen: ["gespraechsanlaesse", 2], uebung: ["methodik", 1] },
+      "Die Nachricht will dich aufregen": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 1] },
+      "Nicht einfach weiterleiten": { lernen: ["transfer", 1], uebung: ["begleithinweise", 2] },
+      "Was kann ich tun?": { lernen: ["transfer", 0], uebung: ["methodik", 1] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  },
+  betrug: {
+    short: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Was ist Betrug im Internet?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Wie erkennst du Betrug?": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Was tust du bei Betrug?": { lernen: ["methodik", 3], uebung: ["begleithinweise", 0] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Was ist Phishing?": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Falsche Nachrichten erkennen": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Der Paket-Trick": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
+      "Der Hallo-Mama-Trick": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
+      "Schockanrufe": { lernen: ["gespraechsanlaesse", 1], uebung: ["methodik", 1] },
+      "Liebe im Internet": { lernen: ["methodik", 4], uebung: ["begleithinweise", 0] },
+      "Falsche Gewinne": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 1] },
+      "Abo-Fallen": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Codes nie weitergeben": { lernen: ["lernziele", 1], uebung: ["begleithinweise", 1] },
+      "Vorsicht bei QR-Codes": { lernen: ["methodik", 2], uebung: ["methodik", 2] },
+      "Was kann ich tun?": { lernen: ["methodik", 3], uebung: ["begleithinweise", 0] },
+      "Was tun nach einem Betrug?": { lernen: ["methodik", 3], uebung: ["begleithinweise", 2] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  },
+  einkaufen: {
+    short: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Einkaufen im Internet": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Gute Shops erkennen": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Sicher bezahlen": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 1] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    },
+    full: {
+      "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 0] },
+      "Gute Shops erkennen": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Fake-Shops erkennen": { lernen: ["gespraechsanlaesse", 0], uebung: ["methodik", 1] },
+      "Vor dem Kaufen prüfen": { lernen: ["transfer", 0], uebung: ["begleithinweise", 0] },
+      "Sicher bezahlen": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 1] },
+      "Bank-Daten schützen": { lernen: ["lernziele", 1], uebung: ["begleithinweise", 1] },
+      "Versteckte Kosten in Apps und Spielen": { lernen: ["gespraechsanlaesse", 2], uebung: ["methodik", 2] },
+      "Nicht sofort kaufen": { lernen: ["begleithinweise", 0], uebung: ["begleithinweise", 0] },
+      "Falsch gekauft? Das kannst du tun": { lernen: ["transfer", 2], uebung: ["begleithinweise", 2] },
+      "Was kann ich tun?": { lernen: ["transfer", 0], uebung: ["begleithinweise", 0] },
+      "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
+    }
+  }
+};
+
+/* Originallektion verwenden, bevor resolveLessonContent ihren Titel ggf.
+   sprachabhängig ersetzt. art: "uebung" oder "lernen". */
+function companionTippFuer(topic, lesson, mode, art) {
+  if (!topic || !lesson || typeof lesson.title !== "string") return null;
+  const c = topic.companion || COMPANION[topic.id];
+  const weg = mode === "short" ? "short" : "full";
+  const tabelle = c && c.lektionen && c.lektionen[weg];
+  if (!tabelle || !Object.prototype.hasOwnProperty.call(tabelle, lesson.title)) return null;
+  const eintrag = tabelle[lesson.title];
+  const ref = eintrag && eintrag[art === "uebung" ? "uebung" : "lernen"];
+  if (!Array.isArray(ref) || ref.length !== 2 || !Number.isInteger(ref[1]) || ref[1] < 0) return null;
+  const liste = c[ref[0]];
+  const text = Array.isArray(liste) && liste[ref[1]];
+  if (typeof text !== "string" || !text.trim()) return null;
+  return { text: text, frage: ref[0] === "gespraechsanlaesse", abschnitt: ref[0], index: ref[1] };
+}
+
 /* Begleit-Material an die Themen in topics.js hängen */
 function applyCompanion() {
   if (typeof topics === "undefined" || !Array.isArray(topics)) return;
   topics.forEach((topic) => {
     const c = COMPANION[topic.id];
-    if (c) topic.companion = c;
+    if (c) {
+      c.lektionen = COMPANION_LEKTIONEN[topic.id];
+      topic.companion = c;
+    }
   });
 }
 

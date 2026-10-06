@@ -34,4 +34,8 @@ curl -L "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt23C1KxNDXMspQ1l
 curl -L "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8WbcNcw.ttf" -o atkinson-bold.ttf
 ```
 
-**Lizenz:** Atkinson Hyperlegible ist unter der [Atkinson Hyperlegible Font License](https://brailleinstitute.org/freefont) frei verfügbar (Braille Institute).
+**Lizenz:** Die hier liegenden Dateien stammen aus Google Fonts (siehe Adressen oben) und stehen unter der
+SIL Open Font License, Version 1.1 – Copyright 2020 Braille Institute of America, Inc.
+Der Lizenztext liegt als [OFL.txt](OFL.txt) in diesem Ordner und wird mit den Schrift-Dateien ausgeliefert
+(die Lizenz verlangt das). Quelle des Textes: `google/fonts`, `ofl/atkinsonhyperlegible/OFL.txt`, übernommen am 03.10.2026.
+Herkunft der Schrift: [Braille Institute](https://brailleinstitute.org/freefont).

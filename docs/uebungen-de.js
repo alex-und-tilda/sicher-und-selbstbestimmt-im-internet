@@ -111,22 +111,22 @@ const EXTRA_PRACTICE = {
         answers: ["Nur meine Freunde.", "Alle Menschen im Internet."],
         correctIndex: 0,
         feedbackWrong: "Dann sehen auch fremde Menschen deine Bilder und Angaben.",
-        feedbackCorrect: "Gut. Deine Freunde reichen.",
+        feedbackCorrect: "Gut. Deine Freunde reichen. Aber: Name, Profil-Bild und Titel-Bild sehen immer alle.",
         remember: "Mein Profil sehen nur Freunde."
       },
       "Unbekannte Personen": {
         question: "Eine unbekannte Person will dein Freund sein. Was tust du?",
         pictogram: "pikto-stranger",
-        answers: ["Ich nehme die Anfrage an.", "Ich lehne ab und frage eine vertraute Person."],
+        answers: ["Ich nehme die Anfrage an. Ich will nicht unhöflich sein.", "Ich lehne ab. Ich frage eine vertraute Person."],
         correctIndex: 1,
-        feedbackWrong: "Wer dich nicht kennt, will oft an deine Daten.",
+        feedbackWrong: "Du musst die Anfrage nicht annehmen. Du kennst die Person nicht. Manche fremden Profile sind falsch. Sie wollen deine Daten.",
         feedbackCorrect: "Unbekannte Anfragen lehnst du ab.",
         remember: "Unbekannte Anfragen lehne ich ab."
       },
       "Komische Nachrichten": {
         question: "Jemand schickt dir einen Link und fragt nach Geld. Was tust du?",
         pictogram: "pikto-warning",
-        answers: ["Ich tippe nicht drauf. Ich zeige es einer vertrauten Person.", "Ich tippe auf den Link."],
+        answers: ["Ich tippe nichts an. Ich zeige es einer vertrauten Person.", "Ich tippe auf den Link. Ich will nur ganz kurz nachsehen."],
         correctIndex: 0,
         feedbackWrong: "Antippen kann Schaden machen. Zeigen kostet nichts.",
         feedbackCorrect: "Du tippst nicht drauf. Und du zeigst es jemandem. Das schützt dich.",
@@ -144,7 +144,7 @@ const EXTRA_PRACTICE = {
         answers: ["Offen für alle.", "Privat."],
         correctIndex: 1,
         feedbackWrong: "Bei einem offenen Konto sehen fremde Menschen alle deine Fotos.",
-        feedbackCorrect: "Gut. Privat heißt: nur Menschen, die du erlaubst.",
+        feedbackCorrect: "Gut. Bei einem privaten Konto bestätigst du jede Anfrage selbst. Nur diese Menschen sehen deine Fotos. Profil-Bild, Name und Profil-Text sehen trotzdem alle.",
         remember: "Mein Konto ist privat."
       },
       "Fotos von anderen Personen": {
@@ -159,7 +159,7 @@ const EXTRA_PRACTICE = {
       "Nachrichten von Unbekannten": {
         question: "In deinem Postfach ist eine Nachricht von einem fremden Profil. Was tust du?",
         pictogram: "pikto-stranger",
-        answers: ["Ich schreibe zurück.", "Ich antworte nicht und zeige es."],
+        answers: ["Ich schreibe zurück. Das ist höflich.", "Ich antworte nicht und zeige es."],
         correctIndex: 1,
         feedbackWrong: "Eine Antwort ist für Fremde ein Anfang. Zeigen ist sicherer.",
         feedbackCorrect: "Gut. Nicht antworten und zeigen.",
@@ -193,7 +193,7 @@ const EXTRA_PRACTICE = {
       "Videos prüfen": {
         question: "Ein Video sagt etwas Überraschendes. Was tust du?",
         pictogram: "pikto-search",
-        answers: ["Ich schaue auf einer anderen Seite nach.", "Ich glaube es."],
+        answers: ["Ich schaue auf einer anderen Seite nach.", "Ich glaube es. Das Video sieht echt aus."],
         correctIndex: 0,
         feedbackWrong: "Ein Video allein ist kein Beweis. Prüfen hilft.",
         feedbackCorrect: "Gut. Zweite Quelle ist die beste Prüfung.",
@@ -205,7 +205,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ja, sonst geht das Video nicht weiter.", "Nein. Ich muss nichts kaufen."],
         correctIndex: 1,
         feedbackWrong: "Werbung will das nur. Kaufen musst du nie.",
-        feedbackCorrect: "Genau. Werbung darfst du überspringen.",
+        feedbackCorrect: "Genau. Du musst nichts kaufen. Manche Werbung kannst du überspringen.",
         remember: "Ich kaufe nichts wegen Werbung."
       },
       "Pausen machen": {
@@ -223,9 +223,10 @@ const EXTRA_PRACTICE = {
   snapchat: {
     lessons: {
       "Bild vom Bildschirm": {
-        question: "Dein Bild verschwindet nach zehn Sekunden. Ist es dann weg?",
+        question: "Dein Bild verschwindet nach 10 Sekunden. Ist es dann weg?",
+        schluessel: "Dein Bild verschwindet nach zehn Sekunden. Ist es dann weg?",
         pictogram: "pikto-screen",
-        answers: ["Ja, danach kann es niemand mehr sehen.", "Nein. Man kann ein Bild vom Bildschirm machen."],
+        answers: ["Ja. Danach kann es wirklich niemand mehr sehen.", "Nein. Man kann ein Bild vom Bildschirm machen."],
         correctIndex: 1,
         feedbackWrong: "Ein Bildschirm-Foto dauert eine Sekunde. Danach ist dein Bild gespeichert.",
         feedbackCorrect: "Ein Bildschirm-Foto geht immer.",
@@ -236,16 +237,16 @@ const EXTRA_PRACTICE = {
       "Bilder verschwinden nicht wirklich": {
         question: "Welche Bilder schickst du?",
         pictogram: "pikto-photo",
-        answers: ["Dürfen alle das Bild sehen? Nur dann schicke ich es.", "Alle Bilder. Sie verschwinden ja."],
+        answers: ["Dürfen alle das Bild sehen? Nur dann schicke ich es.", "Alle Bilder. Sie sind ja nach ein paar Sekunden weg."],
         correctIndex: 0,
-        feedbackWrong: "Sie verschwinden nur auf deinem Bildschirm. Gespeichert bleiben sie.",
-        feedbackCorrect: "Genau richtig gedacht.",
+        feedbackWrong: "Sie verschwinden nur auf deinem Bildschirm. Andere können sie vorher speichern.",
+        feedbackCorrect: "Genau. Andere können ein Bild speichern. Also prüfst du vorher: Dürfen alle es sehen?",
         remember: "Bilder verschwinden nicht wirklich."
       },
       "Dein Standort": {
         question: "Snapchat zeigt deinen Ort. Was machst du?",
         pictogram: "pikto-location",
-        answers: ["Ich lasse es an.", "Ich schalte den Standort aus."],
+        answers: ["Ich lasse es an. Das ist praktisch.", "Ich schalte den Standort aus."],
         correctIndex: 1,
         feedbackWrong: "Dann sehen andere, wo du wohnst und wann du unterwegs bist.",
         feedbackCorrect: "Gut. Deinen Standort brauchst nur du.",
@@ -306,7 +307,7 @@ const EXTRA_PRACTICE = {
       "Nachrichten auf TikTok": {
         question: "Jemand aus den Kommentaren schreibt dir privat. Du kennst die Person nicht. Was tust du?",
         pictogram: "pikto-stranger",
-        answers: ["Ich antworte kurz.", "Ich antworte nicht und zeige es."],
+        answers: ["Ich antworte kurz. Das ist höflich.", "Ich antworte nicht und zeige es."],
         correctIndex: 1,
         feedbackWrong: "Auch eine kurze Antwort ist ein Anfang. Lieber gar nicht.",
         feedbackCorrect: "Gut. Nicht antworten und zeigen.",
@@ -317,7 +318,7 @@ const EXTRA_PRACTICE = {
         pictogram: "pikto-clock",
         answers: ["Ein Timer.", "Warten, bis die App aufhört."],
         correctIndex: 0,
-        feedbackWrong: "Die App hört nie von allein auf. Ein Timer schon.",
+        feedbackWrong: "Die App hört nicht von allein auf. Ein Timer hilft. TikTok hat auch eine Pausen-Erinnerung.",
         feedbackCorrect: "Genau. Ein Timer erinnert dich.",
         remember: "Ich stelle einen Timer."
       }
@@ -342,10 +343,10 @@ const EXTRA_PRACTICE = {
       "Wo triffst du KI?": {
         question: "Wo kann KI überall stecken?",
         pictogram: "pikto-globe",
-        answers: ["Nur in besonderen KI-Apps.", "In vielen Apps. Auch ohne dass ich es sehe."],
+        answers: ["Nur in besonderen KI-Apps. Sonst nirgends.", "In vielen Apps. Oft sehe ich das nicht."],
         correctIndex: 1,
         feedbackWrong: "KI steckt heute auch in Apps, die du täglich nutzt.",
-        feedbackCorrect: "Genau. KI ist oft eingebaut, ohne dass man es merkt.",
+        feedbackCorrect: "Genau. KI ist oft eingebaut. Man merkt es nicht immer.",
         remember: "KI ist in vielen Apps."
       },
       "KI kann Bilder und Stimmen fälschen": {
@@ -371,7 +372,7 @@ const EXTRA_PRACTICE = {
       "Was kann KI?": {
         question: "Die KI gibt dir eine Antwort. Stimmt sie immer?",
         pictogram: "pikto-search",
-        answers: ["Ja, sie weiß alles.", "Nein. Ich prüfe wichtige Antworten."],
+        answers: ["Ja. Sie weiß alles und klingt sicher.", "Nein. Ich prüfe wichtige Antworten."],
         correctIndex: 1,
         feedbackWrong: "KI klingt sicher, auch wenn sie sich irrt. Prüfen hilft.",
         feedbackCorrect: "Wichtige Antworten prüfst du nach.",
@@ -380,7 +381,7 @@ const EXTRA_PRACTICE = {
       "Wann musst du aufpassen?": {
         question: "Am Telefon klingt eine Stimme wie deine Schwester. Sie will sofort Geld. Was tust du?",
         pictogram: "pikto-phone",
-        answers: ["Ich schicke das Geld schnell.", "Ich lege auf. Ich rufe meine Schwester selbst an."],
+        answers: ["Ich schicke das Geld schnell. Sie braucht es ja.", "Ich lege auf. Ich rufe meine Schwester selbst an."],
         correctIndex: 1,
         feedbackWrong: "KI kann Stimmen nachmachen. Die Stimme allein beweist nichts.",
         feedbackCorrect: "Genau. Du rufst die bekannte Nummer selbst an. So kannst du nachfragen.",
@@ -394,16 +395,16 @@ const EXTRA_PRACTICE = {
       "Was sind Fake News?": {
         question: "Was sind Fake News?",
         pictogram: "pikto-fake",
-        answers: ["Ein Fehler aus Versehen.", "Falsche Nachrichten. Jemand verbreitet sie mit Absicht."],
+        answers: ["Ein Fehler in einer Nachricht. Er passiert aus Versehen.", "Falsche Nachrichten. Jemand verbreitet sie mit Absicht."],
         correctIndex: 1,
-        feedbackWrong: "Ein Irrtum passiert. Fake News werden gemacht. Das ist der Unterschied.",
+        feedbackWrong: "Ein Irrtum passiert aus Versehen. Fake News macht jemand mit Absicht. Das ist der Unterschied.",
         feedbackCorrect: "Jemand macht Fake News mit Absicht.",
         remember: "Nicht jede Nachricht im Internet ist wahr."
       },
       "Warum gibt es Fake News?": {
         question: "Warum machen Menschen Fake News?",
         pictogram: "pikto-money",
-        answers: ["Zum Beispiel für Geld durch viele Aufrufe.", "Aus Versehen."],
+        answers: ["Zum Beispiel für Geld durch viele Aufrufe.", "Aus Versehen. Niemand will das wirklich."],
         correctIndex: 0,
         feedbackWrong: "Aus Versehen passiert das nicht. Es steckt ein Ziel dahinter.",
         feedbackCorrect: "Genau. Geld, Wut oder eine Meinung sind häufige Ziele.",
@@ -423,7 +424,7 @@ const EXTRA_PRACTICE = {
       "Wie erkennst du Fakes?": {
         question: "Eine Nachricht macht dich sehr aufgeregt. Was heißt das?",
         pictogram: "pikto-feel",
-        answers: ["Das kann ein Warnzeichen sein. Ich mache Stopp.", "Dann ist sie besonders wichtig."],
+        answers: ["Das kann ein Warnzeichen sein. Ich mache Stopp.", "Dann ist die Nachricht besonders wichtig und echt."],
         correctIndex: 0,
         feedbackWrong: "Aufregung ist oft Absicht. Sie soll das Nachdenken verhindern.",
         feedbackCorrect: "Genau. Große Aufregung ist ein Warnzeichen. Dann machst du Stopp.",
@@ -434,8 +435,8 @@ const EXTRA_PRACTICE = {
         pictogram: "pikto-no",
         answers: ["Ich schicke sie weiter und warne alle.", "Ich schicke sie nicht weiter."],
         correctIndex: 1,
-        feedbackWrong: "Auch als Warnung verbreitest du sie damit. Lieber nur der vertrauten Person zeigen.",
-        feedbackCorrect: "Nicht weiterleiten.",
+        feedbackWrong: "Auch eine Warnung verbreitet die Lüge weiter. Zeig sie lieber nur einer vertrauten Person.",
+        feedbackCorrect: "Genau. Du leitest die Nachricht nicht weiter. So verbreitet sich die Lüge nicht.",
         remember: "Fakes leite ich nicht weiter."
       }
     }
@@ -446,7 +447,7 @@ const EXTRA_PRACTICE = {
       "Falsche Nachrichten erkennen": {
         question: "Welches ist ein Warnzeichen?",
         pictogram: "pikto-warning",
-        answers: ["Die Nachricht macht dir Stress: Sofort! Schnell!", "Die Nachricht ist freundlich geschrieben."],
+        answers: ["Die Nachricht macht dir Stress: Sofort! Schnell!", "Die Nachricht ist sehr freundlich geschrieben."],
         correctIndex: 0,
         feedbackWrong: "Freundlich schreiben Betrüger auch. Der Stress ist das Zeichen.",
         feedbackCorrect: "Genau. Stress und Eile sind das Warnzeichen.",
@@ -464,7 +465,7 @@ const EXTRA_PRACTICE = {
       "Was tun nach einem Betrug?": {
         question: "Du bist auf einen Betrug hereingefallen. Was gilt?",
         pictogram: "pikto-help",
-        answers: ["Das ist mir peinlich. Ich sage nichts.", "Das kann jedem passieren. Ich hole schnell Hilfe."],
+        answers: ["Das ist mir peinlich. Ich sage niemandem etwas.", "Das kann jedem passieren. Ich hole schnell Hilfe."],
         correctIndex: 1,
         feedbackWrong: "Schweigen hilft nur den Betrügern. Schnelle Hilfe kann noch retten.",
         feedbackCorrect: "Genau. Kein Grund für Scham. Schnell Hilfe holen.",
@@ -475,7 +476,7 @@ const EXTRA_PRACTICE = {
       "Was ist Betrug im Internet?": {
         question: "Was wollen Betrüger von dir?",
         pictogram: "pikto-fraud",
-        answers: ["Dein Geld oder deine Daten.", "Nur mit dir reden."],
+        answers: ["Dein Geld oder deine Daten.", "Nur mit dir reden. Sonst nichts."],
         correctIndex: 0,
         feedbackWrong: "Das Reden ist nur der Anfang. Am Ende geht es um Geld oder Daten.",
         feedbackCorrect: "Betrüger wollen fast immer dein Geld oder deine Daten.",
@@ -493,7 +494,7 @@ const EXTRA_PRACTICE = {
       "Was tust du bei Betrug?": {
         question: "Eine SMS sagt: Ihr Bank-Konto ist gesperrt. Tippen Sie hier. Was tust du?",
         pictogram: "pikto-phone",
-        answers: ["Ich tippe auf den Link.", "Ich öffne meine Bank-App selbst."],
+        answers: ["Ich tippe auf den Link in der SMS.", "Ich öffne meine Bank-App selbst."],
         correctIndex: 1,
         feedbackWrong: "Der Link kann auf eine falsche Seite führen. Deine Bank-App öffnest du selbst.",
         feedbackCorrect: "Genau. Du tippst nicht auf den Link aus der SMS. Du öffnest die App selbst.",
@@ -507,16 +508,16 @@ const EXTRA_PRACTICE = {
       "Gute Shops erkennen": {
         question: "Woran erkennst du einen guten Shop?",
         pictogram: "pikto-shop",
-        answers: ["An sehr niedrigen Preisen.", "An einem Impressum mit Name und Adresse."],
+        answers: ["An sehr niedrigen Preisen für alle Sachen.", "An einem Impressum mit Name und Adresse."],
         correctIndex: 1,
         feedbackWrong: "Sehr niedrige Preise sind eher ein Warnzeichen als ein gutes Zeichen.",
-        feedbackCorrect: "Im Impressum stehen Name und Adresse vom Shop.",
+        feedbackCorrect: "Im Impressum stehen Name und Adresse vom Shop. Aber: Betrüger können ein Impressum fälschen. Achte auch auf andere Warnzeichen.",
         remember: "Ich kaufe bei Shops, die ich geprüft habe."
       },
       "Versteckte Kosten in Apps und Spielen": {
         question: "Ein Spiel ist kostenlos. Kann es trotzdem Geld kosten?",
         pictogram: "pikto-money",
-        answers: ["Ja. Käufe im Spiel kosten echtes Geld.", "Nein. Kostenlos ist kostenlos."],
+        answers: ["Ja. Käufe im Spiel kosten echtes Geld.", "Nein. Kostenlos bleibt immer kostenlos."],
         correctIndex: 0,
         feedbackWrong: "Der Einstieg ist kostenlos. Die Käufe im Spiel sind es nicht.",
         feedbackCorrect: "Genau. Viele kleine Käufe werden schnell teuer.",
@@ -525,7 +526,7 @@ const EXTRA_PRACTICE = {
       "Vor dem Kaufen prüfen": {
         question: "Welche Frage stellst du dir vor dem Kaufen?",
         pictogram: "pikto-ask",
-        answers: ["Sieht die Seite schön aus?", "Was kostet es wirklich, mit Versand?"],
+        answers: ["Sieht die Seite schön und modern aus?", "Was kostet es wirklich, mit Versand?"],
         correctIndex: 1,
         feedbackWrong: "Wie die Seite aussieht, sagt nichts über den Preis.",
         feedbackCorrect: "Der Endpreis zählt, nicht der erste Preis.",
@@ -534,7 +535,7 @@ const EXTRA_PRACTICE = {
       "Falsch gekauft? Das kannst du tun": {
         question: "Du hast online etwas Falsches gekauft. Was gilt oft?",
         pictogram: "pikto-plan",
-        answers: ["Ich kann es oft 14 Tage zurückgeben.", "Gekauft ist gekauft."],
+        answers: ["Ich kann es oft 14 Tage zurückgeben.", "Ich muss es behalten. Zurückgeben geht nicht."],
         correctIndex: 0,
         feedbackWrong: "Bei vielen Online-Käufen hast du 14 Tage Zeit. Das heißt Widerruf.",
         feedbackCorrect: "Genau. Das nennt man Widerruf.",
@@ -554,10 +555,10 @@ const EXTRA_PRACTICE = {
       "Gute Shops erkennen": {
         question: "Welches Zeichen ist gut?",
         pictogram: "pikto-location",
-        answers: ["Name und Adresse vom Shop stehen auf der Seite.", "Viele blinkende Angebote."],
+        answers: ["Name und Adresse vom Shop stehen auf der Seite.", "Viele bunte und blinkende Angebote auf der Seite."],
         correctIndex: 0,
         feedbackWrong: "Blinkende Angebote machen nur Stress. Gut ist: Der Shop zeigt Name und Adresse.",
-        feedbackCorrect: "Gut erkannt. Ein guter Shop hat ein Impressum mit Name und Adresse.",
+        feedbackCorrect: "Gut erkannt. Ein guter Shop hat ein Impressum mit Name und Adresse. Aber: Auch ein Impressum kann gefälscht sein.",
         remember: "Ein guter Shop zeigt Name und Adresse."
       },
       "Sicher bezahlen": {
