@@ -56,7 +56,7 @@ const EXTRA_PRACTICE = {
         pictogram: "pikto-ki",
         answers: ["Ich schreibe sie nicht hin.", "Ich schreibe sie hin. Es ist ja nur ein Programm."],
         correctIndex: 0,
-        feedbackWrong: "Gerade weil es ein Programm ist: Alles wird gespeichert. Private Dinge gehören da nicht hinein.",
+        feedbackWrong: "Die KI kann deine Eingaben verarbeiten. Schreib ihr keine privaten Daten.",
         feedbackCorrect: "Der KI schreibst du keine privaten Dinge.",
         remember: "Der KI schreibe ich nichts Privates."
       }
@@ -76,7 +76,7 @@ const EXTRA_PRACTICE = {
         pictogram: "pikto-link",
         answers: ["Ich tippe nicht drauf.", "Ich tippe drauf und schaue nach."],
         correctIndex: 0,
-        feedbackWrong: "Ein Link kann dich auf eine falsche Seite bringen. Nachschauen ist zu spät.",
+        feedbackWrong: "Ein Link kann dich auf eine falsche Seite bringen. Prüfe ihn vor dem Antippen. Schon angetippt? Gib keine Daten ein. Hol dir Hilfe.",
         feedbackCorrect: "Auf fremde Links tippst du nicht.",
         remember: "Fremde Links tippe ich nicht an."
       },

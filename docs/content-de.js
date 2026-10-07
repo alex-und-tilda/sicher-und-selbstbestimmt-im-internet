@@ -2536,16 +2536,17 @@ const KURZ_VERSIONS = {
       einfach: {
         text: [
           { text: "Auf Facebook hast du ein Profil, das andere Menschen sehen können." },
-          { text: "In den Einstellungen legst du fest, wer dein Profil sieht." },
-          { text: "Am besten sehen es nur deine Freunde. Eine Person, der du vertraust, kann dir beim Einstellen helfen." }
+          { text: "Dein Name, dein aktuelles Profil-Bild und dein Titel-Bild sind öffentlich. Das Titel-Bild ist das große Bild oben im Profil." },
+          { text: "Für deine Beiträge wählst du aus, wer sie sehen kann." },
+          { text: "Du kannst für deine Beiträge Freunde auswählen. Eine vertraute Person hilft dir bei den Einstellungen." }
         ],
-        remember: "Dein Profil sehen nur deine Freunde.",
-        vorbild: ["Alex öffnet bei Facebook die Einstellungen.", "Dort stellt er ein, dass nur seine Freunde sein Profil sehen.", "Tilda hilft ihm dabei."]
+        remember: "Ich prüfe, wer meinen Beitrag sehen kann.",
+        vorbild: ["Alex öffnet bei Facebook die Einstellungen.", "Für seine neuen Beiträge wählt er Freunde aus.", "Tilda hilft ihm dabei."]
       },
       standard: {
-        text: [{ text: "Dein Facebook-Profil ist für andere sichtbar. In den Einstellungen legst du fest, wer es sehen darf – am besten nur deine Freunde. Eine Person, der du vertraust, kann dir beim Einstellen helfen." }],
-        remember: "Dein Profil ist nur für Freunde sichtbar.",
-        vorbild: ["Alex öffnet die Facebook-Einstellungen und macht sein Profil nur für Freunde sichtbar. Tilda hilft ihm dabei."]
+        text: [{ text: "Dein Name, dein aktuelles Profilbild und dein Titelbild sind öffentlich sichtbar. Für Beiträge und weitere Profilangaben kannst du die Sichtbarkeit einzeln wählen. Bei neuen Beiträgen kannst du zum Beispiel Freunde auswählen. Eine vertraute Person kann dir dabei helfen." }],
+        remember: "Ich prüfe, wer meinen Beitrag sehen kann.",
+        vorbild: ["Alex öffnet die Facebook-Einstellungen und wählt für seine neuen Beiträge Freunde aus. Tilda hilft ihm dabei."]
       }
     },
     "Unbekannte Personen": {
@@ -3136,9 +3137,9 @@ const LERNZIELE = {
   },
   facebook: {
     kurz: {
-      leicht:   ["Dein Profil nur für Freunde einstellen.", "Fremde Anfragen ablehnen.", "Komische Nachrichten erkennen."],
-      einfach:  ["Dein Profil so einstellen, dass nur Freunde es sehen.", "Freundschafts-Anfragen von Fremden ablehnen.", "Komische Nachrichten erkennen und jemandem zeigen."],
-      standard: ["Die Sichtbarkeit deines Profils einschränken.", "Anfragen von Unbekannten einschätzen und ablehnen.", "Verdächtige Nachrichten erkennen, ohne Links anzutippen."]
+      leicht:   ["Auswählen: Wer sieht deine Beiträge?", "Fremde Anfragen ablehnen.", "Komische Nachrichten erkennen."],
+      einfach:  ["Für deine Beiträge auswählen, wer sie sehen kann.", "Freundschafts-Anfragen von Fremden ablehnen.", "Komische Nachrichten erkennen und jemandem zeigen."],
+      standard: ["Die Sichtbarkeit von Beiträgen und weiteren Profilangaben bewusst wählen.", "Anfragen von Unbekannten einschätzen und ablehnen.", "Verdächtige Nachrichten erkennen, ohne Links anzutippen."]
     },
     lang: {
       leicht:   ["Dein Profil sicher einstellen.", "Bei fremden Kontakten richtig handeln.", "Private Daten schützen."],
@@ -11236,6 +11237,1815 @@ const THEMA_VERSIONS = {
     }
   }
 };
+
+/* FERTIGSTELLUNG-LERNWEGE-2026-10-06 BEGIN */
+/* Zusätzliche Anwendungen üben bekannte Regeln in neuen Situationen.
+   Die vollständigen bisherigen Lektionen bleiben unter Nachlesen erhalten.
+   Die Auswahl für Mehr dazu wurde inhaltlich mit dem Kern verglichen;
+   gleiche Überschriften allein sind kein Grund zum Weglassen. */
+const ANWENDEN_ERGAENZUNGEN = {
+  "betrug": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du leihst gern Bücher. Du nutzt die App von deiner Bücherei. Dann kommt diese E-Mail.",
+        "einfach": "Du leihst gern Bücher und nutzt die App von deiner Bücherei. Jetzt bekommst du diese E-Mail.",
+        "standard": "Du nutzt regelmäßig deine Bücherei und hast ihre App eingerichtet. Dann erhältst du diese E-Mail."
+      },
+      "kanal": {
+        "leicht": "E-Mail",
+        "einfach": "E-Mail",
+        "standard": "E-Mail"
+      },
+      "inhalt": [
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Bücherei-Service",
+            "einfach": "Bücherei-Service",
+            "standard": "Bücherei-Service"
+          },
+          "text": {
+            "leicht": "Dein Konto muss heute bestätigt werden. Sonst kannst du keine Bücher mehr ausleihen. Gib hier deine Bank-Daten ein: Konto bestätigen.",
+            "einfach": "Bestätige dein Konto bitte bis heute Abend. Sonst kannst du keine Bücher mehr ausleihen. Gib deine Bank-Daten über den Link Konto bestätigen ein.",
+            "standard": "Bitte bestätige dein Konto bis heute Abend, damit du weiter Bücher ausleihen kannst. Gib dazu deine Bankdaten über den Link Konto bestätigen ein."
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Du hast diese E-Mail nicht erwartet. In der App hast du noch nicht nachgesehen.",
+            "einfach": "Die E-Mail kommt unerwartet. In deiner Bücherei-App hast du noch nicht nachgesehen.",
+            "standard": "Die Aufforderung kommt unerwartet. Du hast dein Konto in der Bücherei-App noch nicht geprüft."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "betrug/neu/buecherei-forderung",
+          "question": "Die E-Mail macht dir Druck. Du sollst Bank-Daten eingeben. Wie prüfst du die Forderung?",
+          "answers": [
+            "Ich rufe die Bücherei über meine bekannte Nummer an.",
+            "Ich gebe die Bank-Daten über den Link ein. Dann ist es erledigt.",
+            "Ich öffne die Bücherei-App selbst. Ich prüfe mein Konto."
+          ],
+          "feedbackCorrect": "Du nutzt deine eigene Bücherei-App. Du prüfst dort die Meldung. Den Link aus der E-Mail brauchst du nicht.",
+          "feedbackWrong": [
+            null,
+            "Der Link kann zu einer falschen Seite führen. Prüfe über deine eigene App oder die bekannte Nummer.",
+            null
+          ],
+          "hinweis": "Wie erreichst du die Bücherei ohne den Link aus der E-Mail?",
+          "remember": "Ich öffne die App selbst. Oder ich rufe eine bekannte Nummer an.",
+          "feedbackAuch": [
+            "Du nutzt die bekannte Nummer. So prüfst du direkt bei der Bücherei.",
+            null,
+            null
+          ],
+          "correctIndex": 2,
+          "nachFehler": true,
+          "auchMoeglich": [
+            0
+          ]
+        },
+        {
+          "id": "betrug/neu/buecherei-passwort",
+          "question": "Stell dir vor: Du hast dein Passwort über den Link eingegeben. Die Bücherei hat die E-Mail nicht geschickt. Was machst du jetzt?",
+          "answers": [
+            "Ich ändere mein Passwort in der echten App. Bei Bedarf hole ich Hilfe.",
+            "Ich warte erst ein paar Tage. Vielleicht passiert mit meinem Konto nichts."
+          ],
+          "feedbackCorrect": "Du änderst dein Passwort über die echte App. Bei Fragen hilft dir die Bücherei. Du musst dich nicht schämen.",
+          "feedbackWrong": [
+            null,
+            "Jemand kann dein Passwort benutzen. Warte nicht unnötig. Ändere es über die echte App. Du darfst dir helfen lassen."
+          ],
+          "hinweis": "Du hast ein Passwort auf einer falschen Seite eingegeben. Wie schützt du dein Konto jetzt?",
+          "remember": "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.",
+          "correctIndex": 0,
+          "nachFehler": true
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "betrug/neu/buecherei-forderung": {
+        "einfach": {
+          "question": "Die unerwartete E-Mail setzt dich unter Druck und verlangt Bank-Daten. Wie prüfst du die Forderung?",
+          "answers": [
+            "Ich rufe die Bücherei unter der Nummer an, die ich schon kenne.",
+            "Ich gebe meine Bank-Daten über den Link ein, damit es schnell erledigt ist.",
+            "Ich öffne meine Bücherei-App selbst und prüfe mein Konto."
+          ],
+          "feedbackCorrect": "Du prüfst die Forderung in deiner selbst geöffneten Bücherei-App. So musst du dem Link aus der E-Mail nicht vertrauen.",
+          "feedbackWrong": [
+            null,
+            "Der Link kann auf eine falsche Seite führen. Prüfe über die eigene App oder eine bekannte Nummer.",
+            null
+          ],
+          "hinweis": "Überlege, wie du die Bücherei unabhängig von der E-Mail erreichen kannst.",
+          "remember": "Ich öffne die App selbst oder rufe eine schon bekannte Nummer an.",
+          "feedbackAuch": [
+            "Du rufst unter einer unabhängig bekannten Nummer an und klärst die Forderung direkt mit der Bücherei.",
+            null,
+            null
+          ]
+        },
+        "standard": {
+          "question": "Eine unerwartete E-Mail verlangt unter Zeitdruck deine Bankdaten. Wie überprüfst du die Aufforderung?",
+          "answers": [
+            "Ich rufe die Bücherei über eine bereits bekannte Telefonnummer an.",
+            "Ich gebe die Bankdaten über den Link ein, um die Forderung schnell zu erledigen.",
+            "Ich starte die eingerichtete Bücherei-App selbst und prüfe mein Konto."
+          ],
+          "feedbackCorrect": "Du wählst einen unabhängigen Zugang zur Bücherei. Den fraglichen Link brauchst du dafür nicht zu öffnen.",
+          "feedbackWrong": [
+            null,
+            "Eine unerwartete Mail kann auf eine gefälschte Seite führen. Prüfe die Aufforderung unabhängig.",
+            null
+          ],
+          "hinweis": "Welcher Kontaktweg stammt nicht aus der fraglichen E-Mail?",
+          "remember": "Ich öffne die App selbst oder rufe eine Nummer an, die ich schon kenne.",
+          "feedbackAuch": [
+            "Auch der Anruf über eine bereits bekannte Nummer ist eine unabhängige Prüfung bei der Bücherei.",
+            null,
+            null
+          ]
+        }
+      },
+      "betrug/neu/buecherei-passwort": {
+        "einfach": {
+          "question": "Stell dir vor, du hast dein Passwort über den Link eingegeben. Die Bücherei bestätigt, dass sie die E-Mail nicht geschickt hat. Was tust du jetzt?",
+          "answers": [
+            "Ich ändere mein Passwort in der echten App und hole bei Bedarf Hilfe.",
+            "Ich warte ein paar Tage, weil vielleicht nichts mit dem Konto passiert."
+          ],
+          "feedbackCorrect": "Du änderst dein Passwort über den echten Zugang. Wenn du Hilfe brauchst, fragst du bei der Bücherei nach. Betrug kann jedem passieren.",
+          "feedbackWrong": [
+            null,
+            "Jemand kann das eingegebene Passwort benutzen. Ändere es zeitnah über die echte App und hol dir bei Bedarf Hilfe."
+          ],
+          "hinweis": "Was kannst du jetzt tun, damit das verratene Passwort nicht weiter benutzt wird?",
+          "remember": "Nach einem Betrug hole ich mir passende Hilfe."
+        },
+        "standard": {
+          "question": "Angenommen, du hast dein Passwort auf der verlinkten Seite eingegeben. Die Bücherei bestätigt, dass die Mail gefälscht ist. Wie reagierst du?",
+          "answers": [
+            "Ich ändere das Passwort über die echte App und hole nötigenfalls Hilfe.",
+            "Ich warte einige Tage ab; vielleicht wird mein Konto nicht benutzt."
+          ],
+          "feedbackCorrect": "Du änderst das offengelegte Passwort über einen echten Zugang. Bei Problemen unterstützt dich die Bücherei. Du musst dich dafür nicht schämen.",
+          "feedbackWrong": [
+            null,
+            "Mit dem Passwort kann ein fremder Zugriff möglich sein. Reagiere zeitnah und ändere es über den echten Zugang."
+          ],
+          "hinweis": "Wie verhinderst du, dass das offengelegte Passwort weiter zum Anmelden genutzt wird?",
+          "remember": "Nach einem Betrug hole ich mir passende Unterstützung."
+        }
+      }
+    }
+  },
+  "einkaufen": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du suchst eine Tasche für deinen Sport-Kurs. Du findest einen Shop. Du kennst den Shop noch nicht.",
+        "einfach": "Du suchst eine Tasche für deinen Sportkurs und findest einen Shop, in dem du noch nie bestellt hast.",
+        "standard": "Du suchst eine Tasche für deinen Sportkurs. Das Angebot stammt von einem Shop, bei dem du bisher nicht bestellt hast."
+      },
+      "kanal": {
+        "leicht": "Angebot im Shop",
+        "einfach": "Angebot im Onlineshop",
+        "standard": "Angebot im Onlineshop"
+      },
+      "inhalt": [
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Der Shop",
+            "einfach": "Der Shop",
+            "standard": "Der Shop"
+          },
+          "text": {
+            "leicht": "Sport-Tasche: 28 Euro. Versand: 4 Euro. Du kannst vorab überweisen. Oder du zahlst nach Erhalt auf Rechnung.",
+            "einfach": "Die Sporttasche kostet 28 Euro, der Versand 4 Euro. Du kannst vorab überweisen oder nach Erhalt auf Rechnung bezahlen.",
+            "standard": "Sporttasche: 28 Euro, Versand: 4 Euro. Zahlung per Überweisung vorab oder auf Rechnung nach Erhalt."
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Im Impressum stehen ein Name und eine Adresse. Das Impressum nennt die Firma für den Shop.",
+            "einfach": "Im Impressum stehen der Name und die Adresse der Firma, die den Shop betreibt.",
+            "standard": "Das Impressum nennt einen Firmennamen und eine Anschrift für den Shop."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "einkaufen/neu/sporttasche-shop",
+          "question": "Du kennst den Shop noch nicht. Er zeigt einen Namen und eine Adresse. Was machst du vor dem Bestellen?",
+          "answers": [
+            "Name und Adresse stehen da. Das reicht mir zum Bestellen.",
+            "Ich prüfe die Shop-Adresse und Erfahrungen auf anderen Seiten."
+          ],
+          "feedbackCorrect": "Du prüfst auch außerhalb vom Shop. Ein Name und eine Adresse allein beweisen nicht: Der Shop ist echt.",
+          "feedbackWrong": [
+            "Auch ein falscher Shop kann einen Namen und eine Adresse zeigen. Prüfe weitere Angaben.",
+            null
+          ],
+          "hinweis": "Du siehst nur Angaben vom Shop selbst. Was findest du außerhalb vom Shop?",
+          "remember": "Ich kaufe bei Shops, die ich geprüft habe.",
+          "correctIndex": 1,
+          "nachFehler": true
+        },
+        {
+          "id": "einkaufen/neu/sporttasche-zahlung",
+          "question": "Du hast den Shop geprüft. Du kannst vorab überweisen oder nach Erhalt auf Rechnung zahlen. Was schützt dich besser bei fehlender Lieferung?",
+          "answers": [
+            "Ich wähle Rechnung. Ich zahle nach Erhalt der Tasche.",
+            "Ich überweise vorher. Die Prüfung vom Shop gibt mir Sicherheit."
+          ],
+          "feedbackCorrect": "Auf Rechnung zahlst du nach Erhalt. Du kannst die Tasche zuerst ansehen. Du überweist vorher noch kein Geld für die Tasche.",
+          "feedbackWrong": [
+            null,
+            "Bei Vorkasse zahlst du vor der Lieferung. Auch ein geprüfter Shop kann Probleme machen. Eine Prüfung ist keine Garantie."
+          ],
+          "hinweis": "Bei welcher Wahl bleibt dein Geld zuerst bei dir?",
+          "remember": "Rechnung ist sicherer als Vorkasse.",
+          "correctIndex": 0,
+          "nachFehler": true
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "einkaufen/neu/sporttasche-shop": {
+        "einfach": {
+          "question": "Du hast in diesem Shop noch nie bestellt. Er zeigt einen Namen und eine Adresse. Was prüfst du vor dem Bestellen?",
+          "answers": [
+            "Name und Adresse stehen dort, deshalb bestelle ich jetzt gleich.",
+            "Ich prüfe die Shop-Adresse und suche Erfahrungen auf anderen Seiten."
+          ],
+          "feedbackCorrect": "Du vergleichst die Angaben mit Informationen außerhalb vom Shop. Auch ein gefälschtes Impressum kann echt aussehen.",
+          "feedbackWrong": [
+            "Die Angaben im Shop allein bestätigen seine Echtheit nicht. Prüfe auch unabhängige Informationen.",
+            null
+          ],
+          "hinweis": "Welche Angaben findest du unabhängig von der Shop-Seite?",
+          "remember": "Ich bestelle bei Shops, die ich vorher geprüft habe."
+        },
+        "standard": {
+          "question": "Du kennst den Shop bisher nicht. Das Impressum nennt Firma und Anschrift. Wie gehst du vor?",
+          "answers": [
+            "Firma und Anschrift sind angegeben; das genügt mir zum Bestellen.",
+            "Ich prüfe die Shopadresse und suche unabhängige Erfahrungen."
+          ],
+          "feedbackCorrect": "Du prüfst die Angaben unabhängig von der Shopseite. Ein vorhandenes Impressum allein schützt nicht vor einer Fälschung.",
+          "feedbackWrong": [
+            "Fake-Shops können echte Firmendaten kopieren. Das Impressum allein reicht zur Prüfung nicht aus.",
+            null
+          ],
+          "hinweis": "Welche Informationen bekommst du außerhalb der Selbstdarstellung des Shops?",
+          "remember": "Ich kaufe bei Shops, die ich unabhängig geprüft habe."
+        }
+      },
+      "einkaufen/neu/sporttasche-zahlung": {
+        "einfach": {
+          "question": "Du hast den Shop geprüft. Du kannst vorab überweisen oder nach Erhalt auf Rechnung zahlen. Was schützt dich besser, falls keine Tasche kommt?",
+          "answers": [
+            "Ich wähle Rechnung und zahle erst nach Erhalt der Tasche.",
+            "Ich überweise vorher, weil ich den Shop geprüft habe."
+          ],
+          "feedbackCorrect": "Bei Rechnung bezahlst du nach Erhalt. Du kannst die Tasche zuerst ansehen und hast bis dahin noch kein Geld dafür überwiesen.",
+          "feedbackWrong": [
+            null,
+            "Bei Vorkasse zahlst du vor der Lieferung. Die Prüfung vom Shop ist keine Garantie, dass alles klappt."
+          ],
+          "hinweis": "Überlege, bei welcher Zahlungsart dein Geld bis zum Erhalt noch bei dir bleibt.",
+          "remember": "Rechnung ist sicherer als eine Zahlung vor der Lieferung."
+        },
+        "standard": {
+          "question": "Der Shop ist geprüft und bietet Vorkasse oder Rechnung nach Erhalt. Welche Wahl schützt dich besser, wenn die Tasche nicht geliefert wird?",
+          "answers": [
+            "Ich wähle Rechnung und bezahle nach Erhalt der Tasche.",
+            "Ich überweise vorab, denn ich habe den Shop schon geprüft."
+          ],
+          "feedbackCorrect": "Bei Rechnung zahlst du nach Erhalt. Du kannst die gelieferte Tasche zuerst prüfen und hast vorher noch kein Geld dafür ausgegeben.",
+          "feedbackWrong": [
+            null,
+            "Vorkasse bedeutet Zahlung vor Lieferung. Ein vorheriger Shopcheck gibt keine Liefergarantie."
+          ],
+          "hinweis": "Bei welcher Zahlungsart hast du vor der Lieferung noch kein Geld ausgegeben?",
+          "remember": "Rechnung ist sicherer als Vorkasse."
+        }
+      }
+    }
+  },
+  "facebook": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du hast ein Bücher-Regal gebaut. Du willst deinen Freunden ein Foto zeigen.",
+        "einfach": "Du hast ein Bücherregal gebaut und möchtest deinen Freunden auf Facebook ein Foto davon zeigen.",
+        "standard": "Dein selbst gebautes Bücherregal ist fertig. Du möchtest ein Foto mit deinen Facebook-Freunden teilen."
+      },
+      "kanal": {
+        "leicht": "Beitrag und Nachricht",
+        "einfach": "Beitrag und neue Nachricht",
+        "standard": "Geplanter Beitrag und neue Nachricht"
+      },
+      "inhalt": [
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Auf dem Foto steht nur das Regal. Keine Person ist zu sehen. Du hast das Foto noch nicht geteilt.",
+            "einfach": "Auf dem Foto ist nur dein Regal zu sehen. Du hast es noch nicht geteilt und willst es deinem Freundeskreis zeigen.",
+            "standard": "Das Foto zeigt ausschließlich dein Regal und keine Personen. Du möchtest es im Freundeskreis teilen; es ist noch nicht veröffentlicht."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Ein unbekanntes Profil",
+            "einfach": "Ein Profil, das du nicht kennst",
+            "standard": "Unbekanntes Profil"
+          },
+          "text": {
+            "leicht": "Ich verlose einen Gutschein für Möbel. Nimm meine Freundschaftsanfrage an. Die Teilnahme kostet 10 Euro. Über den Link kannst du bezahlen.",
+            "einfach": "Ich verlose einen Gutschein für Möbel. Nimm meine Freundschaftsanfrage an. Für 10 Euro bist du dabei. Bezahlen kannst du über den Link.",
+            "standard": "Ich verlose einen Möbelgutschein. Nimm meine Freundschaftsanfrage an. Die Teilnahme kostet 10 Euro, die du über den Link bezahlen kannst."
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Unter der Nachricht steht ein Link. Dazu kommt eine Freundschafts-Anfrage.",
+            "einfach": "Die Nachricht enthält einen Link und eine Freundschaftsanfrage.",
+            "standard": "Das Profil hat zusätzlich eine Freundschaftsanfrage und einen Zahlungslink geschickt."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "facebook/neu/regal-freundeskreis",
+          "pictogram": "pikto-people",
+          "correctIndex": 1,
+          "nachFehler": true,
+          "question": "Du willst das Regal deinen Freunden zeigen. Wie teilst du das Foto?",
+          "answers": [
+            "Ich teile es öffentlich. Alle können es sehen.",
+            "Ich teile es nur mit meinen Facebook-Freunden.",
+            "Ich teile dieses Foto nicht. Es bleibt bei mir."
+          ],
+          "feedbackCorrect": "Du wählst deine Freunde aus. Das Foto ist nicht öffentlich.",
+          "feedbackWrong": [
+            "Öffentlich heißt auch für Fremde. Du willst es deinen Freunden zeigen.",
+            null,
+            null
+          ],
+          "hinweis": "Überlege: Wer soll dieses Foto sehen?",
+          "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
+          "feedbackAuch": "Du darfst das Foto für dich behalten. Du musst nichts posten.",
+          "auchMoeglich": [
+            2
+          ]
+        },
+        {
+          "id": "facebook/neu/auslosung-anfrage",
+          "pictogram": "pikto-message",
+          "correctIndex": 0,
+          "nachFehler": true,
+          "question": "Du kennst das neue Profil nicht. Was machst du mit der Anfrage und der Nachricht?",
+          "answers": [
+            "Ich öffne den Link nicht. Ich prüfe die Nachricht.",
+            "Ich nehme die Anfrage an. Ich zahle die Gebühr.",
+            "Ich lehne die Anfrage ab. Ich lösche die Nachricht."
+          ],
+          "feedbackCorrect": "Du tippst nicht auf den Link. Du zahlst nicht sofort. Du kannst die Nachricht jemandem zeigen.",
+          "feedbackWrong": [
+            null,
+            "Du kennst das Profil nicht. Das Versprechen beweist nichts. Du musst nicht zahlen.",
+            null
+          ],
+          "hinweis": "Was weißt du über das Profil? Ein versprochener Gewinn ist kein Beweis.",
+          "remember": "Fremde Links tippe ich nicht an.",
+          "feedbackAuch": "Du darfst die Anfrage ablehnen. Du musst den Link nicht öffnen und nicht zahlen.",
+          "auchMoeglich": [
+            2
+          ]
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "facebook/neu/regal-freundeskreis": {
+        "einfach": {
+          "question": "Du möchtest das Foto deines Regals mit deinen Freunden teilen. Welche Sichtbarkeit wählst du?",
+          "answers": [
+            "Ich mache es öffentlich und damit auch für fremde Menschen sichtbar.",
+            "Ich teile es mit meinen Facebook-Freunden.",
+            "Ich poste das Foto nicht und behalte es für mich."
+          ],
+          "feedbackCorrect": "Du begrenzt die Sichtbarkeit auf deine Facebook-Freunde. So ist der Beitrag nicht öffentlich.",
+          "feedbackWrong": [
+            "Für deinen Freundeskreis musst du das Foto nicht öffentlich machen. Prüfe vorher, wer es sehen kann.",
+            null,
+            null
+          ],
+          "hinweis": "Wem möchtest du das Foto zeigen? Danach richtet sich deine Auswahl.",
+          "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
+          "feedbackAuch": "Du darfst dich gegen das Posten entscheiden. Deine Freunde müssen das Foto nicht auf Facebook sehen."
+        },
+        "standard": {
+          "question": "Du willst deinen Freunden dein selbst gebautes Regal zeigen. Wie entscheidest du über die Sichtbarkeit?",
+          "answers": [
+            "Ich veröffentliche es für alle, auch außerhalb meines Freundeskreises.",
+            "Ich teile es mit meinen Facebook-Freunden.",
+            "Ich veröffentliche es nicht und behalte das Foto für mich."
+          ],
+          "feedbackCorrect": "Du beschränkst diesen Beitrag auf deinen Freundeskreis. Dafür musst du das Foto nicht öffentlich machen.",
+          "feedbackWrong": [
+            "Eine öffentliche Freigabe geht über deinen gewünschten Freundeskreis hinaus. Begrenze die Sichtbarkeit entsprechend deinem Ziel.",
+            null,
+            null
+          ],
+          "hinweis": "Für wen ist das Foto gedacht? Prüfe die Sichtbarkeit vor dem Veröffentlichen.",
+          "remember": "Vor dem Posten prüfe ich, wer meinen Beitrag sehen kann.",
+          "feedbackAuch": "Auch nicht zu posten ist deine Entscheidung. Du musst ein Foto nicht veröffentlichen."
+        }
+      },
+      "facebook/neu/auslosung-anfrage": {
+        "einfach": {
+          "question": "Ein unbekanntes Profil schickt dir eine Anfrage und verlangt Geld für eine Auslosung. Wie reagierst du?",
+          "answers": [
+            "Ich öffne den Link nicht und prüfe die Nachricht erst.",
+            "Ich nehme die Anfrage an und bezahle die Teilnahmegebühr sofort.",
+            "Ich lehne die Anfrage ab und lösche die Nachricht ohne Antwort."
+          ],
+          "feedbackCorrect": "Du zahlst nicht vorschnell und lässt den Link geschlossen. Du kannst mit einer vertrauten Person prüfen, was hinter der Nachricht steckt.",
+          "feedbackWrong": [
+            null,
+            "Die Nachricht belegt nicht, dass der Gewinn echt ist. Nimm dir Zeit, statt die Anfrage sofort anzunehmen und zu zahlen.",
+            null
+          ],
+          "hinweis": "Du kennst das Profil nicht. Was belegt, dass die versprochene Auslosung echt ist?",
+          "remember": "Fremde Links tippe ich nicht an.",
+          "feedbackAuch": "Du darfst auf die Anfrage verzichten und die Nachricht löschen. Du musst weder den Link öffnen noch Geld senden."
+        },
+        "standard": {
+          "question": "Ein unbekanntes Profil bietet dir per Nachricht eine Gewinnchance gegen Gebühr an. Wie gehst du vor?",
+          "answers": [
+            "Ich lasse den Link geschlossen und prüfe die Nachricht zunächst.",
+            "Ich bestätige die Anfrage und zahle sofort die verlangte Teilnahmegebühr.",
+            "Ich lehne die Anfrage ab und lösche die Nachricht unbeantwortet."
+          ],
+          "feedbackCorrect": "Du vermeidest einen vorschnellen Klick und eine Zahlung. Du kannst die Angaben prüfen oder eine vertraute Person hinzuziehen.",
+          "feedbackWrong": [
+            null,
+            "Ein Gewinnversprechen belegt nicht die Vertrauenswürdigkeit des Profils. Prüfe die Nachricht, bevor du Kontakt bestätigst oder Geld ausgibst.",
+            null
+          ],
+          "hinweis": "Welche verlässlichen Informationen hast du über die Person und die Auslosung? Freundliche Worte und ein Versprechen reichen nicht.",
+          "remember": "Unbekannte Links öffne ich nicht vorschnell.",
+          "feedbackAuch": "Du kannst auf den Kontakt verzichten. Mit Ablehnen und Löschen öffnest du keinen Link und zahlst keine Gebühr."
+        }
+      }
+    }
+  },
+  "fakes": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du nutzt die Bus-Linie 42. Im Haus-Chat kommt ein Bild mit einer Meldung.",
+        "einfach": "Du möchtest morgen mit der Buslinie 42 fahren. Im Hauschat wird ein Bild mit einer Meldung geteilt.",
+        "standard": "Du willst morgen mit der Buslinie 42 fahren. Im Hauschat taucht ein Bildschirmfoto mit einer Meldung auf."
+      },
+      "kanal": {
+        "leicht": "Haus-Chat",
+        "einfach": "Hauschat",
+        "standard": "Hauschat"
+      },
+      "inhalt": [
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Nora",
+            "einfach": "Nora aus dem Haus",
+            "standard": "Nora aus dem Haus"
+          },
+          "text": {
+            "leicht": "Weiß jemand mehr? Das Bild hat mir ein Bekannter geschickt.",
+            "einfach": "Weiß jemand, ob das stimmt? Ein Bekannter hat mir dieses Bild geschickt.",
+            "standard": "Weiß jemand, ob die Meldung stimmt? Das Bildschirmfoto kam von einem Bekannten."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Text auf dem Bild",
+            "einfach": "Text auf dem geteilten Bild",
+            "standard": "Text im Bildschirmfoto"
+          },
+          "text": {
+            "leicht": "Bus-Linie 42 fällt ab Montag aus. Gebt das bitte an alle weiter.",
+            "einfach": "Die Buslinie 42 fährt ab Montag nicht mehr. Gebt das bitte an alle weiter.",
+            "standard": "Die Buslinie 42 fährt ab Montag nicht mehr. Bitte an alle weitergeben."
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Auf dem Bild fehlt ein Datum. Du siehst auch keine Quelle.",
+            "einfach": "Auf dem Bild stehen weder ein Datum noch eine Quelle für die Meldung.",
+            "standard": "Datum und ursprüngliche Quelle sind im Bildschirmfoto nicht zu erkennen."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "fakes/neu/bus-meldung-pruefen",
+          "question": "Du brauchst morgen die Bus-Linie 42. Du weißt nicht: Stimmt die Meldung? Was machst du zuerst?",
+          "answers": [
+            "Ich sage meine Fahrt ab. Im Haus-Chat steht es so.",
+            "Ich prüfe die Meldung auf der Seite vom Bus-Betrieb."
+          ],
+          "feedbackCorrect": "Du prüfst beim Bus-Betrieb. Dort suchst du die aktuelle Auskunft für deine Bus-Linie.",
+          "feedbackWrong": [
+            "Die Meldung kann alt oder falsch sein. Prüfe zuerst beim Bus-Betrieb.",
+            null
+          ],
+          "hinweis": "Wo gibt der Bus-Betrieb selbst die aktuellen Fahrten bekannt?",
+          "remember": "Erst prüfen. Dann teilen.",
+          "correctIndex": 1,
+          "nachFehler": true
+        },
+        {
+          "id": "fakes/neu/bus-auskunft-teilen",
+          "question": "Du hast geprüft. Die Meldung ist alt. Die Bus-Linie fährt morgen. Was schickst du in den Haus-Chat?",
+          "answers": [
+            "Ich schicke die aktuelle Auskunft. Das alte Bild leite ich nicht weiter.",
+            "Ich schicke nur das alte Bild. Die anderen sollen ihre Fahrt auch absagen."
+          ],
+          "feedbackCorrect": "Du schickst die aktuelle Auskunft vom Bus-Betrieb. Du verbreitest die alte Meldung nicht weiter.",
+          "feedbackWrong": [
+            null,
+            "Das alte Bild passt nicht mehr. Andere sagen dann vielleicht ihre Fahrt ab. Schicke die aktuelle Auskunft."
+          ],
+          "hinweis": "Die alte Meldung gilt heute nicht mehr. Welche Auskunft hilft der Gruppe?",
+          "remember": "Erst prüfen. Dann teilen.",
+          "correctIndex": 0,
+          "nachFehler": true
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "fakes/neu/bus-meldung-pruefen": {
+        "einfach": {
+          "question": "Du brauchst morgen die Buslinie 42, weißt aber nicht, ob die Meldung stimmt. Was machst du zuerst?",
+          "answers": [
+            "Ich sage meine Fahrt ab, weil die Meldung im Hauschat steht.",
+            "Ich prüfe die aktuelle Auskunft auf der Seite vom Busbetrieb."
+          ],
+          "feedbackCorrect": "Du suchst die aktuelle Auskunft bei der Stelle, die den Bus betreibt. So verlässt du dich nicht allein auf das geteilte Bild.",
+          "feedbackWrong": [
+            "Auch eine Nachricht von einem Bekannten kann alt oder falsch sein. Prüfe zuerst beim Busbetrieb.",
+            null
+          ],
+          "hinweis": "Überlege, wo der Busbetrieb selbst seine aktuellen Fahrten bekannt gibt.",
+          "remember": "Ich prüfe zuerst und entscheide dann über das Teilen."
+        },
+        "standard": {
+          "question": "Du brauchst morgen die Buslinie 42. Wie klärst du, ob die Meldung zutrifft?",
+          "answers": [
+            "Ich sage meine Fahrt ab, denn die Meldung wurde im Hauschat geteilt.",
+            "Ich prüfe die aktuelle Auskunft auf der offiziellen Seite vom Busbetrieb."
+          ],
+          "feedbackCorrect": "Du prüfst die Angaben beim zuständigen Busbetrieb. Ein weitergeleitetes Bild ohne Datum und Quelle reicht für deine Entscheidung nicht aus.",
+          "feedbackWrong": [
+            "Der Hauschat bestätigt die Meldung nicht. Das Bild kann veraltet oder falsch sein.",
+            null
+          ],
+          "hinweis": "Wo veröffentlicht der Busbetrieb selbst aktuelle Informationen zu seiner Linie?",
+          "remember": "Vor dem Teilen prüfe ich Inhalt und Quelle."
+        }
+      },
+      "fakes/neu/bus-auskunft-teilen": {
+        "einfach": {
+          "question": "Du hast beim Busbetrieb geprüft: Die Meldung ist alt, und der Bus fährt morgen. Was schickst du in den Hauschat?",
+          "answers": [
+            "Ich schicke die aktuelle Auskunft und leite das alte Bild nicht weiter.",
+            "Ich schicke nur das alte Bild, damit die anderen ihre Fahrt auch absagen."
+          ],
+          "feedbackCorrect": "Du gibst der Gruppe die aktuelle Auskunft vom Busbetrieb. So bekommen die anderen die passende Information für ihre Fahrt.",
+          "feedbackWrong": [
+            null,
+            "Das alte Bild passt nicht zur Fahrt von morgen. Teile die aktuelle Auskunft statt der veralteten Meldung."
+          ],
+          "hinweis": "Welche Information gilt für morgen und hilft der Gruppe beim Planen?",
+          "remember": "Ich prüfe zuerst und entscheide dann über das Teilen."
+        },
+        "standard": {
+          "question": "Der Busbetrieb bestätigt: Die Meldung ist veraltet, die Linie fährt morgen. Was teilst du im Hauschat?",
+          "answers": [
+            "Ich teile die aktuelle Auskunft und lasse das alte Bildschirmfoto weg.",
+            "Ich teile nur das alte Bildschirmfoto, damit andere ihre Fahrt ebenfalls absagen."
+          ],
+          "feedbackCorrect": "Du gibst die überprüfte, aktuelle Auskunft weiter. Das veraltete Bild würde den anderen beim Planen ihrer Fahrt nicht helfen.",
+          "feedbackWrong": [
+            null,
+            "Die alte Meldung würde die Gruppe trotz deiner Prüfung falsch informieren. Teile die aktuelle Auskunft."
+          ],
+          "hinweis": "Welche Auskunft ist jetzt belegt und für die morgige Fahrt relevant?",
+          "remember": "Vor dem Teilen prüfe ich Inhalt und Quelle."
+        }
+      }
+    }
+  },
+  "instagram": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du warst mit Freunden im Park. Du hast ein Gruppen-Foto gemacht. Du willst es auf Instagram zeigen.",
+        "einfach": "Nach einem Treffen mit Freunden im Park möchtest du ein gemeinsames Foto auf Instagram teilen.",
+        "standard": "Nach einem Treffen im Park möchtest du ein gemeinsames Gruppenfoto auf Instagram veröffentlichen."
+      },
+      "kanal": {
+        "leicht": "Gespräch und Nachricht",
+        "einfach": "Gespräch und neue Nachricht",
+        "standard": "Gespräch vor dem Posten und neue Nachricht"
+      },
+      "inhalt": [
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Dana",
+            "einfach": "Dana",
+            "standard": "Dana"
+          },
+          "text": {
+            "leicht": "Ich möchte auf dem Foto nicht im Internet zu sehen sein. Bitte poste es nicht.",
+            "einfach": "Ich möchte nicht, dass du dieses Foto von mir ins Internet stellst. Bitte poste es nicht.",
+            "standard": "Bitte veröffentliche das Foto nicht. Ich möchte darauf nicht im Internet zu sehen sein."
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Es gibt noch ein Foto nur vom Park. Auf diesem Foto ist niemand zu sehen.",
+            "einfach": "Du hast außerdem ein Foto vom Park, auf dem keine Person zu sehen ist.",
+            "standard": "Du hast auch ein anderes Foto aufgenommen, das nur den Park und keine Personen zeigt."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Ein unbekanntes Profil",
+            "einfach": "Ein Profil, das du nicht kennst",
+            "standard": "Unbekanntes Profil"
+          },
+          "text": {
+            "leicht": "Deine Fotos gefallen mir. Schick mir doch ein paar Bilder aus deinem Zimmer. Nur für mich, ich zeige sie niemandem.",
+            "einfach": "Deine Fotos gefallen mir. Schick mir doch ein paar private Bilder aus deinem Zimmer. Die bleiben bei mir, versprochen.",
+            "standard": "Deine Fotos gefallen mir. Schick mir ein paar private Bilder aus deinem Zimmer. Die bleiben nur bei mir, versprochen."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "instagram/neu/gruppenfoto-nein",
+          "pictogram": "pikto-photo",
+          "correctIndex": 0,
+          "nachFehler": true,
+          "question": "Dana will nicht auf Instagram zu sehen sein. Was machst du?",
+          "answers": [
+            "Ich nehme das Foto vom Park.",
+            "Ich poste das Foto nur für Freunde.",
+            "Ich poste das Foto mit Dana nicht."
+          ],
+          "feedbackCorrect": "Du nimmst ein Foto ohne Dana. So beachtest du ihre Entscheidung.",
+          "feedbackWrong": [
+            null,
+            "Auch deine Freunde können Dana sehen. Dana will das Foto nicht auf Instagram.",
+            null
+          ],
+          "hinweis": "Dana hat Nein gesagt. Wer kann sie auf dem Foto erkennen?",
+          "remember": "Ich frage andere, bevor ich ihr Bild poste.",
+          "feedbackAuch": "Du darfst dieses Foto für dich behalten. Dann zeigt dein Beitrag kein Foto mit Dana.",
+          "auchMoeglich": [
+            2
+          ]
+        },
+        {
+          "id": "instagram/neu/private-bilder-anfrage",
+          "pictogram": "pikto-message",
+          "correctIndex": 2,
+          "nachFehler": true,
+          "question": "Was machst du mit der Bitte um private Bilder aus deinem Zimmer?",
+          "answers": [
+            "Ich sende nichts. Ich zeige jemandem die Nachricht.",
+            "Ich sende ein Bild. Die Person verspricht es.",
+            "Ich sende keine Bilder. Ich beende den Kontakt."
+          ],
+          "feedbackCorrect": "Du behältst deine privaten Bilder. Du musst auf die Bitte nicht eingehen.",
+          "feedbackWrong": [
+            null,
+            "Du kennst die Person nicht. Das Versprechen sagt nicht, was später mit deinem Bild passiert.",
+            null
+          ],
+          "hinweis": "Du kennst die Person nicht. Was willst du ihr wirklich zeigen?",
+          "remember": "Ich schicke fremden Personen keine privaten Fotos.",
+          "feedbackAuch": "Du schickst keine privaten Bilder. Eine vertraute Person kann mit dir die Nachricht ansehen.",
+          "auchMoeglich": [
+            0
+          ]
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "instagram/neu/gruppenfoto-nein": {
+        "einfach": {
+          "question": "Dana hat Nein zum Posten gesagt. Wie gehst du mit dem gemeinsamen Foto um?",
+          "answers": [
+            "Ich wähle stattdessen ein anderes Foto ohne Dana.",
+            "Ich poste das gemeinsame Foto nur für meine Freunde.",
+            "Ich poste das gemeinsame Foto überhaupt nicht."
+          ],
+          "feedbackCorrect": "Mit einem anderen Foto respektierst du Danas Nein. Du kannst trotzdem etwas vom Treffen zeigen.",
+          "feedbackWrong": [
+            null,
+            "Auch für einen Beitrag im Freundeskreis zählt Danas Nein. Sie möchte auf diesem Foto nicht online zu sehen sein.",
+            null
+          ],
+          "hinweis": "Ihre Entscheidung gilt auch, wenn nur deine Freunde den Beitrag sehen würden.",
+          "remember": "Ich frage andere, bevor ich ihr Bild poste.",
+          "feedbackAuch": "Du kannst auf den Beitrag mit diesem Foto verzichten. Niemand ist verpflichtet, ein gemeinsames Foto zu posten."
+        },
+        "standard": {
+          "question": "Dana ist mit der Veröffentlichung des Gruppenfotos nicht einverstanden. Wie reagierst du?",
+          "answers": [
+            "Ich verwende ein anderes Foto ohne Dana im Bild.",
+            "Ich veröffentliche das gemeinsame Foto für Freunde, die Dana auch kennen.",
+            "Ich verzichte auf die Veröffentlichung dieses Fotos."
+          ],
+          "feedbackCorrect": "Du respektierst Danas Entscheidung und wählst ein anderes Foto ohne sie.",
+          "feedbackWrong": [
+            null,
+            "Ein eingeschränktes Publikum ersetzt Danas Einverständnis nicht. Sie hat der Veröffentlichung widersprochen.",
+            null
+          ],
+          "hinweis": "Danas Nein bezieht sich auf die Veröffentlichung ihres Fotos, auch in einem privaten Konto.",
+          "remember": "Vor dem Posten frage ich die abgebildeten Personen.",
+          "feedbackAuch": "Du darfst auf diesen Beitrag verzichten. Damit respektierst du ebenfalls Danas Entscheidung."
+        }
+      },
+      "instagram/neu/private-bilder-anfrage": {
+        "einfach": {
+          "question": "Ein unbekanntes Profil bittet um private Bilder aus deinem Zimmer. Wie reagierst du?",
+          "answers": [
+            "Ich sende keine Bilder und zeige die Nachricht einer vertrauten Person.",
+            "Ich sende ein Bild, weil die Person es angeblich nicht weitergibt.",
+            "Ich sende keine Bilder und beende den Kontakt zu dem Profil."
+          ],
+          "feedbackCorrect": "Du schützt deine privaten Fotos und entscheidest selbst, den Kontakt zu beenden.",
+          "feedbackWrong": [
+            null,
+            "Ein Versprechen einer unbekannten Person belegt nicht, wie sie mit deinem privaten Bild umgehen wird.",
+            null
+          ],
+          "hinweis": "Du kennst die Person nicht. Du musst ihr keine privaten Bilder anvertrauen.",
+          "remember": "Ich schicke fremden Personen keine privaten Fotos.",
+          "feedbackAuch": "Du behältst die Bilder für dich und kannst dir Hilfe beim Einschätzen der Nachricht holen."
+        },
+        "standard": {
+          "question": "Ein fremdes Profil fragt nach privaten Zimmerfotos und verspricht Vertraulichkeit. Wie gehst du damit um?",
+          "answers": [
+            "Ich sende nichts und bespreche die Anfrage mit einer vertrauten Person.",
+            "Ich sende ein Foto, weil die Person Vertraulichkeit versprochen hat.",
+            "Ich behalte die Fotos für mich und beende diesen Kontakt."
+          ],
+          "feedbackCorrect": "Du gibst keine privaten Bilder weiter und darfst den unerwünschten Kontakt beenden.",
+          "feedbackWrong": [
+            null,
+            "Das Versprechen klärt nicht, wer hinter dem Profil steht oder was mit deinem Bild passiert.",
+            null
+          ],
+          "hinweis": "Welche privaten Einblicke möchtest du überhaupt geben, und wem vertraust du sie an?",
+          "remember": "Private Fotos sende ich nicht an unbekannte Personen.",
+          "feedbackAuch": "Auch das ist ein sicherer Weg: Du gibst keine Bilder weiter und kannst die Anfrage mit Unterstützung einordnen."
+        }
+      }
+    }
+  },
+  "ki": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du willst einen Mal-Kurs besuchen. Du fragst eine KI nach der Uhrzeit.",
+        "einfach": "Du möchtest einen Malkurs im Bürgerhaus besuchen und fragst eine KI nach der Uhrzeit.",
+        "standard": "Du möchtest einen Malkurs im Bürgerhaus besuchen. Die Uhrzeit fragst du bei einer KI nach."
+      },
+      "kanal": {
+        "leicht": "KI-Antwort und Sprach-Nachricht",
+        "einfach": "KI-Antwort und Sprachnachricht",
+        "standard": "KI-Antwort und Sprachnachricht"
+      },
+      "inhalt": [
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "KI",
+            "einfach": "KI",
+            "standard": "KI"
+          },
+          "text": {
+            "leicht": "Der Mal-Kurs beginnt am Samstag um 15 Uhr. Viel Spaß!",
+            "einfach": "Der Malkurs beginnt am Samstag um 15 Uhr. Viel Spaß dabei!",
+            "standard": "Der Malkurs startet am Samstag um 15 Uhr. Viel Spaß!"
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Danach kommt eine Sprach-Nachricht. Die Stimme klingt wie Leila. Du kennst Leila vom Kurs.",
+            "einfach": "Danach bekommst du eine Sprachnachricht. Die Stimme klingt wie Leila, die du vom Kurs kennst.",
+            "standard": "Danach bekommst du eine Sprachnachricht. Die Stimme klingt wie deine Bekannte Leila aus dem Kurs."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Die Stimme",
+            "einfach": "Die Stimme in der Nachricht",
+            "standard": "Stimme in der Nachricht"
+          },
+          "text": {
+            "leicht": "Ich reserviere unsere Plätze. Überweis mir schnell 40 Euro. Nimm diese neue Konto-Nummer.",
+            "einfach": "Ich reserviere unsere Plätze. Überweis mir schnell 40 Euro auf diese neue Kontonummer.",
+            "standard": "Ich reserviere unsere Plätze. Überweis mir schnell 40 Euro auf diese neue Kontonummer."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "ki/neu/malkurs-zeit",
+          "question": "Die KI nennt eine Uhrzeit für den Mal-Kurs. Du willst den Kurs besuchen. Was machst du zuerst?",
+          "answers": [
+            "Ich prüfe die Uhrzeit im Kurs-Plan vom Bürger-Haus.",
+            "Ich fahre erst kurz vor 15 Uhr los. Die KI klingt sicher.",
+            "Ich frage die KI noch einmal. 2 gleiche Antworten reichen."
+          ],
+          "correctIndex": 0,
+          "feedbackCorrect": "Du prüfst bei der Stelle für den Kurs. Eine wichtige KI-Antwort kann falsch sein.",
+          "feedbackWrong": [
+            null,
+            "Die KI kann eine falsche Uhrzeit nennen. Prüfe erst den Kurs-Plan.",
+            "Auch 2 gleiche Antworten können falsch sein. Prüfe den Kurs-Plan."
+          ],
+          "hinweis": "Wer macht den Kurs? Wo steht die Uhrzeit von dieser Stelle?",
+          "remember": "KI kann Fehler machen. Ich prüfe wichtige Antworten.",
+          "nachFehler": true
+        },
+        {
+          "id": "ki/neu/malkurs-stimme",
+          "question": "Die Stimme will Geld auf ein neues Konto. Sie klingt wie Leila. Was machst du?",
+          "answers": [
+            "Ich zahle noch nichts. Ich frage Leila beim Treffen.",
+            "Ich überweise schnell. Ich erkenne die Stimme.",
+            "Ich rufe Leilas bekannte Nummer an. Ich frage nach."
+          ],
+          "correctIndex": 2,
+          "auchMoeglich": [
+            0
+          ],
+          "feedbackCorrect": "Du prüfst die Bitte über die bekannte Nummer. Die Stimme allein ist kein Beweis.",
+          "feedbackWrong": [
+            null,
+            "Eine Stimme kann nachgemacht sein. Prüfe die Bitte vor dem Überweisen.",
+            null
+          ],
+          "feedbackAuch": [
+            "Du überweist kein Geld. Du prüfst die Bitte später direkt bei Leila.",
+            null,
+            null
+          ],
+          "hinweis": "Eine bekannte Stimme kann nachgemacht sein. Wie erreichst du Leila selbst?",
+          "remember": "Bei Geld-Bitten rufe ich selbst an.",
+          "nachFehler": true
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "ki/neu/malkurs-zeit": {
+        "einfach": {
+          "question": "Die KI nennt dir die Uhrzeit für den Malkurs, den du besuchen möchtest. Was machst du zuerst?",
+          "answers": [
+            "Ich prüfe die Uhrzeit im Kursplan vom Bürgerhaus.",
+            "Ich fahre kurz vor 15 Uhr los, weil die KI sicher klingt.",
+            "Ich frage die KI noch einmal und vertraue auf zwei gleiche Antworten."
+          ],
+          "feedbackCorrect": "Du prüfst die Uhrzeit bei der Stelle, die den Kurs anbietet. Wichtige Antworten einer KI können falsch sein.",
+          "feedbackWrong": [
+            null,
+            "Eine sichere Formulierung beweist nicht, dass die Uhrzeit stimmt. Prüfe zuerst den Kursplan.",
+            "Auch zwei gleiche Antworten können falsch sein. Prüfe die Uhrzeit beim Anbieter des Kurses."
+          ],
+          "hinweis": "Überlege, wer den Kurs anbietet und wo diese Stelle die Uhrzeit bekannt gibt.",
+          "remember": "KI kann sich irren, deshalb prüfe ich wichtige Antworten."
+        },
+        "standard": {
+          "question": "Die KI nennt dir eine Uhrzeit für deinen Malkurs. Wie gehst du vor?",
+          "answers": [
+            "Ich sehe im Kursplan des Bürgerhauses nach.",
+            "Ich fahre kurz vor 15 Uhr los, weil die KI sicher klingt.",
+            "Ich frage noch einmal. Wenn die KI dasselbe sagt, reicht das."
+          ],
+          "feedbackCorrect": "Du prüfst die Uhrzeit beim Kursanbieter. Auch überzeugende KI-Antworten können falsch sein.",
+          "feedbackWrong": [
+            null,
+            "Selbstsicher zu klingen beweist keine richtige Uhrzeit. Prüfe den Kursplan.",
+            "Wiederholte KI-Antworten sind kein unabhängiger Beleg. Sieh beim Kursanbieter nach."
+          ],
+          "hinweis": "Wo gibt der Kursanbieter selbst die Uhrzeit an?",
+          "remember": "KI kann Fehler machen. Wichtige Antworten prüfe ich."
+        }
+      },
+      "ki/neu/malkurs-stimme": {
+        "einfach": {
+          "question": "Die Stimme klingt wie Leila und bittet um Geld auf ein neues Konto. Was machst du?",
+          "answers": [
+            "Ich überweise noch kein Geld und frage Leila beim nächsten Treffen.",
+            "Ich überweise gleich, weil ich die Stimme erkenne.",
+            "Ich rufe Leila unter ihrer bekannten Nummer an und frage nach."
+          ],
+          "feedbackCorrect": "Du fragst unter der bekannten Nummer nach, denn eine bekannte Stimme allein beweist nicht, wer geschrieben hat.",
+          "feedbackWrong": [
+            null,
+            "Die Stimme kann nachgemacht sein. Prüfe die Geldbitte, bevor du etwas überweist.",
+            null
+          ],
+          "feedbackAuch": [
+            "Du bezahlst noch nichts und prüfst die Bitte beim nächsten persönlichen Treffen mit Leila.",
+            null,
+            null
+          ],
+          "hinweis": "Überlege, wie du Leila unabhängig von der neuen Nachricht erreichen kannst.",
+          "remember": "Bei einer Geldbitte rufe ich selbst bei der Person an."
+        },
+        "standard": {
+          "question": "Eine Sprachnachricht klingt wie Leila und verlangt Geld für ein neues Konto. Wie reagierst du?",
+          "answers": [
+            "Ich überweise nichts und frage Leila beim nächsten Treffen.",
+            "Ich zahle sofort, weil ich die Stimme erkenne.",
+            "Ich rufe Leilas bekannte Nummer an und kläre die Bitte."
+          ],
+          "feedbackCorrect": "Du prüfst die Bitte über die bekannte Nummer. Der Klang der Stimme allein beweist die Identität nicht.",
+          "feedbackWrong": [
+            null,
+            "Auch eine vertraute Stimme kann imitiert sein. Prüfe die Bitte vor dem Überweisen.",
+            null
+          ],
+          "feedbackAuch": [
+            "Du zahlst nicht vorschnell und klärst die Bitte später direkt mit Leila.",
+            null,
+            null
+          ],
+          "hinweis": "Wie erreichst du Leila unabhängig von dieser Sprachnachricht?",
+          "remember": "Bei Geldbitten rufe ich die Person selbst an."
+        }
+      }
+    }
+  },
+  "snapchat": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du sitzt mit Freunden in einem Café. Mara sucht euch.",
+        "einfach": "Du sitzt mit Freunden in einem Café. Mara möchte wissen, an welchem Tisch ihr seid.",
+        "standard": "Du sitzt mit Freunden im Café. Mara möchte euch finden."
+      },
+      "kanal": {
+        "leicht": "Nachrichten von Mara",
+        "einfach": "Nachrichten von Mara",
+        "standard": "Nachrichten von Mara"
+      },
+      "inhalt": [
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Auf deinem Tisch liegt ein Brief. Deine Adresse steht auf dem Brief.",
+            "einfach": "Auf dem Tisch liegt ein Brief, auf dem deine Adresse zu lesen ist.",
+            "standard": "Auf dem Tisch liegt ein Brief mit deiner Adresse."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Mara",
+            "einfach": "Mara",
+            "standard": "Mara"
+          },
+          "text": {
+            "leicht": "Schick mir kurz ein Bild vom Tisch. Das Bild verschwindet doch gleich.",
+            "einfach": "Schick mir kurz ein Bild vom Tisch, dann finde ich euch. Das Bild verschwindet doch gleich.",
+            "standard": "Schick mir kurz ein Foto vom Tisch, dann finde ich euch. Verschwindet doch gleich."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Mara",
+            "einfach": "Mara",
+            "standard": "Mara"
+          },
+          "text": {
+            "leicht": "Oder zeig mir deinen Standort. Mach schnell, sonst fahre ich allein.",
+            "einfach": "Oder zeig mir deinen Standort. Mach schnell, sonst fahre ich allein.",
+            "standard": "Oder teil deinen Standort mit mir. Schnell, sonst fahre ich allein."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "snapchat/neu/cafe-foto",
+          "question": "Du willst ein Bild vom Tisch senden. Auf dem Bild steht deine Adresse. Was machst du?",
+          "answers": [
+            "Ich sende das Bild. Es verschwindet ja gleich.",
+            "Ich mache ein neues Bild ohne den Brief.",
+            "Ich sende kein Bild. Ich beschreibe den Tisch."
+          ],
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackCorrect": "Auf dem neuen Bild steht deine Adresse nicht. Du prüfst vor dem Senden.",
+          "feedbackWrong": [
+            "Die Adresse steht auf dem Bild. Eine andere Person kann das Bild speichern.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das geht auch. Du kannst den Tisch beschreiben. Du musst kein Bild senden."
+          ],
+          "hinweis": "Eine Kopie vom Bild kann bleiben. Was darf darauf zu sehen sein?",
+          "remember": "Ich denke vor dem Senden nach.",
+          "nachFehler": true
+        },
+        {
+          "id": "snapchat/neu/cafe-standort",
+          "question": "Mara macht dir Druck. Du willst deinen Standort nicht teilen. Was machst du?",
+          "answers": [
+            "Ich lasse die Freigabe aus. Ich sage Mara Nein.",
+            "Ich teile meinen Standort. Dann hört der Stress auf.",
+            "Ich teile nichts. Ich zeige es einer vertrauten Person."
+          ],
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackCorrect": "Du entscheidest selbst. Du musst deinen Standort nicht unter Druck teilen.",
+          "feedbackWrong": [
+            null,
+            "Du willst deinen Standort nicht teilen. Du musst es auch bei Druck nicht machen.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Du teilst deinen Standort nicht. Du holst dir Hilfe für die Nachricht mit Druck."
+          ],
+          "hinweis": "Du willst deinen Standort nicht teilen. Gilt dein Nein auch bei Druck?",
+          "remember": "Ich teile meinen Standort nicht einfach.",
+          "nachFehler": true
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "snapchat/neu/cafe-foto": {
+        "einfach": {
+          "question": "Du möchtest ein Bild vom Tisch schicken, auf dem auch deine Adresse zu lesen ist. Was machst du?",
+          "answers": [
+            "Ich schicke das Bild, weil es gleich wieder verschwindet.",
+            "Ich fotografiere den Tisch ohne den Brief.",
+            "Ich schicke kein Bild, sondern beschreibe den Tisch."
+          ],
+          "feedbackCorrect": "Auf dem neuen Bild ist deine Adresse nicht zu sehen. Du prüfst das Bild, bevor du es sendest.",
+          "feedbackWrong": [
+            "Jemand kann das Bild mit deiner Adresse speichern, obwohl es nur kurz angezeigt wird.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Du darfst den Tisch auch beschreiben. Dazu musst du kein Bild schicken."
+          ],
+          "hinweis": "Eine Kopie kann erhalten bleiben. Überlege, was auf deinem Bild zu sehen sein darf.",
+          "remember": "Ich denke nach, bevor ich ein Bild sende."
+        },
+        "standard": {
+          "question": "Du willst ein Foto vom Tisch verschicken. Darauf steht auch deine Adresse. Wie gehst du vor?",
+          "answers": [
+            "Ich schicke es, weil es gleich verschwindet.",
+            "Ich fotografiere den Tisch ohne den Brief.",
+            "Ich schicke kein Foto und beschreibe den Tisch."
+          ],
+          "feedbackCorrect": "Du prüfst das neue Foto vor dem Verschicken. Deine Adresse ist darauf nicht zu sehen.",
+          "feedbackWrong": [
+            "Eine gespeicherte Kopie könnte deine Adresse weiter zeigen.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Den Tisch zu beschreiben ist ebenso in Ordnung. Ein Foto musst du nicht schicken."
+          ],
+          "hinweis": "Eine gespeicherte Kopie kann bleiben. Welche Angaben möchtest du im Bild zeigen?",
+          "remember": "Vor dem Senden denke ich nach."
+        }
+      },
+      "snapchat/neu/cafe-standort": {
+        "einfach": {
+          "question": "Mara macht dir Druck, obwohl du deinen Standort nicht teilen möchtest. Was machst du?",
+          "answers": [
+            "Ich lasse die Freigabe aus und sage Mara Nein.",
+            "Ich teile den Standort, damit Mara aufhört, Druck zu machen.",
+            "Ich teile nichts und zeige es einer vertrauten Person."
+          ],
+          "feedbackCorrect": "Du entscheidest selbst, ob du deinen Standort teilst. Unter Druck musst du ihn nicht freigeben.",
+          "feedbackWrong": [
+            null,
+            "Du musst deinen Standort nicht gegen deinen Willen teilen, nur damit der Druck aufhört.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Du gibst deinen Standort nicht frei und holst dir Hilfe wegen der drängenden Nachricht."
+          ],
+          "hinweis": "Du möchtest deinen Standort nicht teilen. Überlege, ob der Druck daran etwas ändert.",
+          "remember": "Ich überlege erst, bevor ich meinen Standort teile."
+        },
+        "standard": {
+          "question": "Mara setzt dich unter Druck. Du möchtest deinen Standort nicht teilen. Wie reagierst du?",
+          "answers": [
+            "Ich lasse die Freigabe aus und sage Nein.",
+            "Ich teile den Standort, damit der Stress aufhört.",
+            "Ich teile nichts und zeige es einer vertrauten Person."
+          ],
+          "feedbackCorrect": "Du entscheidest über deinen Standort. Druck verpflichtet dich nicht, ihn zu teilen.",
+          "feedbackWrong": [
+            null,
+            "Du musst deinen Standort auch unter Druck nicht gegen deinen Willen freigeben.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Du schützt deinen Standort und holst dir Hilfe im Umgang mit der Nachricht."
+          ],
+          "hinweis": "Ändert Maras Druck dein Recht, selbst über deinen Standort zu entscheiden?",
+          "remember": "Meinen Standort teile ich nicht einfach."
+        }
+      }
+    }
+  },
+  "tiktok": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du suchst auf TikTok ein Rezept. Danach willst du kochen.",
+        "einfach": "Du suchst bei TikTok eine Idee fürs Abendessen. Danach möchtest du selbst kochen.",
+        "standard": "Du suchst bei TikTok ein Rezept fürs Abendessen. Anschließend willst du kochen."
+      },
+      "kanal": {
+        "leicht": "Videos und eine Nachricht",
+        "einfach": "Videos und eine private Nachricht",
+        "standard": "Videos und eine private Nachricht"
+      },
+      "inhalt": [
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Du hast einen Timer gestellt. Der Timer klingelt. Dein Rezept hast du gefunden.",
+            "einfach": "Dein Timer klingelt, und du hast ein passendes Rezept gefunden.",
+            "standard": "Dein Timer klingelt. Du hast bereits ein passendes Rezept gefunden."
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Schon erscheint das nächste Video. Es sieht interessant aus.",
+            "einfach": "Das nächste Video wird schon angezeigt und sieht interessant aus.",
+            "standard": "Ein weiteres interessantes Video erscheint."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Eine unbekannte Person",
+            "einfach": "Eine Person, die du nicht kennst",
+            "standard": "Unbekannter Kontakt"
+          },
+          "text": {
+            "leicht": "Das Rezept gibt es auch in meinem Heft. Ich schicke es dir kostenlos. Gib mir deine Adresse.",
+            "einfach": "Das Rezept steht auch in meinem Heft. Ich schicke es dir kostenlos. Gib mir deine Adresse.",
+            "standard": "Ich habe das Rezept auch in einem Heft. Schicke ich dir kostenlos. Gib mir deine Adresse."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "tiktok/neu/rezept-pause",
+          "question": "Dein Timer klingelt. Du willst jetzt kochen. Was machst du?",
+          "answers": [
+            "Ich schaue noch so lange Videos, bis keine mehr kommen.",
+            "Ich schalte nur den Timer aus. Ich schaue weiter.",
+            "Ich schließe TikTok. Ich fange mit dem Kochen an."
+          ],
+          "correctIndex": 2,
+          "feedbackCorrect": "Du nutzt die Erinnerung. Du hörst auf und machst das, was du vorhattest.",
+          "feedbackWrong": [
+            "Es können noch viele Videos kommen. Du darfst selbst aufhören.",
+            "Der Timer erinnert dich ans Aufhören. Du willst jetzt kochen.",
+            null
+          ],
+          "hinweis": "Du hast dein Rezept. Was wolltest du danach machen?",
+          "remember": "Ich stelle einen Timer.",
+          "nachFehler": true
+        },
+        {
+          "id": "tiktok/neu/rezept-adresse",
+          "question": "Du kennst die Person mit dem Heft nicht. Sie fragt nach deiner Adresse. Was machst du?",
+          "answers": [
+            "Ich antworte nicht. Ich zeige die Nachricht einer vertrauten Person.",
+            "Ich schließe die Nachricht. Meine Adresse sende ich nicht.",
+            "Ich sende meine Adresse für das kostenlose Heft. Ich will es bekommen."
+          ],
+          "correctIndex": 0,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackCorrect": "Du schickst deine Adresse nicht. Du prüfst die Nachricht mit einer vertrauten Person.",
+          "feedbackWrong": [
+            null,
+            null,
+            "Auch ein kostenloses Angebot ist kein Grund für deine private Adresse an Fremde."
+          ],
+          "feedbackAuch": [
+            null,
+            "Du schickst deine Adresse nicht. Du darfst die Nachricht selbst schließen.",
+            null
+          ],
+          "hinweis": "Das Angebot ist kostenlos. Kennst du deshalb die Person?",
+          "remember": "Ich schütze meine privaten Daten.",
+          "nachFehler": true
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "tiktok/neu/rezept-pause": {
+        "einfach": {
+          "question": "Dein Timer klingelt und du möchtest jetzt kochen. Was machst du?",
+          "answers": [
+            "Ich schaue Videos, bis die App keine mehr zeigt.",
+            "Ich schalte den Timer aus und schaue weiter.",
+            "Ich schließe TikTok und fange mit dem Kochen an."
+          ],
+          "feedbackCorrect": "Du nutzt den Timer als Erinnerung und machst jetzt das, was du dir vorgenommen hast.",
+          "feedbackWrong": [
+            "Es können weitere Videos kommen. Du entscheidest selbst, wann du aufhörst.",
+            "Dein Timer erinnert dich daran, dass du jetzt kochen möchtest.",
+            null
+          ],
+          "hinweis": "Du hast ein Rezept gefunden. Überlege, was du danach vorhattest.",
+          "remember": "Ich stelle einen Timer, der mich an meine Pause erinnert."
+        },
+        "standard": {
+          "question": "Der Timer klingelt. Du möchtest jetzt kochen. Wie gehst du vor?",
+          "answers": [
+            "Ich schaue, bis keine Videos mehr kommen.",
+            "Ich stelle den Timer ab und schaue weiter.",
+            "Ich schließe TikTok und beginne zu kochen."
+          ],
+          "feedbackCorrect": "Du folgst deiner eigenen Erinnerung und gehst deinem Plan nach.",
+          "feedbackWrong": [
+            "Auf das Ende der Videos musst du nicht warten. Du darfst selbst aufhören.",
+            "Der Timer erinnert dich an deinen Plan, jetzt zu kochen.",
+            null
+          ],
+          "hinweis": "Dein Rezept hast du gefunden. Was hast du dir danach vorgenommen?",
+          "remember": "Ich stelle mir einen Timer."
+        }
+      },
+      "tiktok/neu/rezept-adresse": {
+        "einfach": {
+          "question": "Die Person mit dem kostenlosen Heft fragt nach deiner Adresse, aber du kennst sie nicht. Was machst du?",
+          "answers": [
+            "Ich antworte nicht und zeige die Nachricht einer vertrauten Person.",
+            "Ich schließe die Nachricht, ohne meine Adresse zu schicken.",
+            "Ich schicke meine Adresse, damit ich das kostenlose Rezeptheft bekomme."
+          ],
+          "feedbackCorrect": "Du gibst deine Adresse nicht weiter und prüfst die Nachricht mit einer vertrauten Person.",
+          "feedbackWrong": [
+            null,
+            null,
+            "Auch bei einem kostenlosen Angebot kennst du die Person nicht. Deine Adresse bleibt privat."
+          ],
+          "feedbackAuch": [
+            null,
+            "Du gibst deine Adresse nicht weiter und schließt die Nachricht. Du darfst das selbst entscheiden.",
+            null
+          ],
+          "hinweis": "Überlege, ob du die Person durch das kostenlose Angebot wirklich kennst.",
+          "remember": "Ich passe auf meine privaten Daten auf."
+        },
+        "standard": {
+          "question": "Eine unbekannte Person bietet dir ein kostenloses Rezeptheft an und fragt nach deiner Adresse. Wie reagierst du?",
+          "answers": [
+            "Ich antworte nicht und zeige die Nachricht einer vertrauten Person.",
+            "Ich schließe die Nachricht und gebe meine Adresse nicht weiter.",
+            "Ich sende meine Adresse, damit ich das kostenlose Rezeptheft bekomme."
+          ],
+          "feedbackCorrect": "Du schützt deine Adresse und prüfst die Nachricht mit einer vertrauten Person.",
+          "feedbackWrong": [
+            null,
+            null,
+            "Ein kostenloses Angebot macht die unbekannte Person nicht vertraut. Gib deine Adresse nicht weiter."
+          ],
+          "feedbackAuch": [
+            null,
+            "Du schützt deine Adresse und beendest die Nachricht selbst.",
+            null
+          ],
+          "hinweis": "Macht ein kostenloses Angebot die fremde Person vertraut?",
+          "remember": "Ich schütze meine privaten Daten."
+        }
+      }
+    }
+  },
+  "whatsapp": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du hast einen Ausflug beim Freizeit-Treff gebucht. Du wartest auf neue Nachrichten.",
+        "einfach": "Du hast einen Ausflug beim Freizeit-Treff gebucht und wartest auf Informationen.",
+        "standard": "Du hast einen Ausflug beim Freizeit-Treff gebucht und erwartest weitere Infos."
+      },
+      "kanal": {
+        "leicht": "Nachrichten von einer fremden Nummer",
+        "einfach": "Nachrichten von einer unbekannten Nummer",
+        "standard": "Nachrichten von einer unbekannten Nummer"
+      },
+      "inhalt": [
+        {
+          "typ": "nachricht",
+          "von": "Fremde Nummer",
+          "text": {
+            "leicht": "Der Ausflug fällt aus. Du bekommst dein Geld zurück. Bestätige hier deine Daten: [Link]",
+            "einfach": "Der Ausflug fällt aus. Du bekommst dein Geld zurück. Bestätige hier deine Daten: [Link]",
+            "standard": "Der Ausflug fällt aus. Du bekommst dein Geld zurück. Bestätige hier deine Daten: [Link]"
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": "Fremde Nummer",
+          "text": {
+            "leicht": "Du bekommst gleich einen Code per SMS. Schick ihn mir für die Rückzahlung.",
+            "einfach": "Du bekommst gleich einen Code per SMS. Schick ihn mir für die Rückzahlung.",
+            "standard": "Du bekommst gleich einen Code per SMS. Schick ihn mir für die Rückzahlung."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "whatsapp/neu/ausflug-rueckzahlung",
+          "question": "Du wartest auf Nachrichten zum Ausflug. Diese Nachricht kommt von einer fremden Nummer. Was machst du?",
+          "answers": [
+            "Ich frage eine vertraute Person. Den Link lasse ich zu.",
+            "Ich rufe beim Freizeit-Treff an. Ich nutze die bekannte Nummer.",
+            "Ich tippe auf den Link. Ich will mein Geld schnell zurück."
+          ],
+          "correctIndex": 1,
+          "auchMoeglich": [
+            0
+          ],
+          "feedbackCorrect": "Du prüfst beim Freizeit-Treff. Du nutzt dafür die bekannte Nummer. Der Link in der fremden Nachricht bleibt zu.",
+          "feedbackWrong": [
+            null,
+            null,
+            "Du weißt noch nicht: Wer schreibt dir? Prüfe erst beim Freizeit-Treff."
+          ],
+          "feedbackAuch": [
+            "Du öffnest den Link nicht. Eine vertraute Person kann mit dir beim Freizeit-Treff prüfen.",
+            null,
+            null
+          ],
+          "hinweis": "Du kennst die Nummer vom Freizeit-Treff schon. Welche Nummer nutzt du zum Prüfen?",
+          "remember": "Ich öffne die App selbst. Oder ich rufe eine bekannte Nummer an.",
+          "nachFehler": true
+        },
+        {
+          "id": "whatsapp/neu/ausflug-code",
+          "question": "Jetzt kommt eine SMS mit deinem WhatsApp-Code. Die fremde Nummer will den Code für die Rückzahlung. Was machst du?",
+          "answers": [
+            "Ich sende den Code. Dann bekomme ich das Geld zurück.",
+            "Ich sende nichts. Ich zeige es einer vertrauten Person.",
+            "Ich gebe den Code nicht weiter. Ich beende den Chat."
+          ],
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackCorrect": "Der Code gehört zu deinem WhatsApp-Konto. Für eine Rückzahlung braucht ihn niemand. Du gibst ihn nicht weiter.",
+          "feedbackWrong": [
+            "Mit dem Code kann jemand dein WhatsApp-Konto übernehmen. Schicke ihn nicht.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Du gibst den Code nicht weiter. Du holst dir Hilfe für diese Nachricht.",
+            null
+          ],
+          "hinweis": "Es ist dein WhatsApp-Code. Wozu gehört er?",
+          "remember": "Ich gebe keine Passwörter oder geheimen Codes weiter.",
+          "nachFehler": true
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "whatsapp/neu/ausflug-rueckzahlung": {
+        "einfach": {
+          "question": "Du erwartest Informationen zum Ausflug. Die Nachricht kommt aber von einer unbekannten Nummer. Was machst du?",
+          "answers": [
+            "Ich lasse den Link geschlossen und prüfe mit einer vertrauten Person.",
+            "Ich rufe den Freizeit-Treff unter seiner bekannten Nummer an.",
+            "Ich öffne den Link, weil ich die Rückzahlung schnell haben möchte."
+          ],
+          "feedbackCorrect": "Du prüfst die Nachricht beim Freizeit-Treff über den dir bekannten Kontakt. Dafür brauchst du den unbekannten Link nicht.",
+          "feedbackWrong": [
+            null,
+            null,
+            "Die unbekannte Nummer ist noch nicht geprüft. Frage beim Freizeit-Treff nach, bevor du einen Link öffnest."
+          ],
+          "feedbackAuch": [
+            "Du öffnest den Link nicht. Eine vertraute Person kann dir beim Prüfen helfen.",
+            null,
+            null
+          ],
+          "hinweis": "Du hast schon eine Nummer vom Freizeit-Treff. Nutze zum Prüfen diesen bekannten Kontakt.",
+          "remember": "Ich öffne die App selbst oder rufe eine bekannte Nummer an."
+        },
+        "standard": {
+          "question": "Du erwartest Infos zum Ausflug, doch diese Nachricht kommt von einer unbekannten Nummer. Wie prüfst du sie?",
+          "answers": [
+            "Ich lasse den Link zu und hole eine vertraute Person zum Prüfen dazu.",
+            "Ich rufe den Freizeit-Treff über die bekannte Nummer an.",
+            "Ich öffne den Link, damit ich mein Geld möglichst schnell zurückbekomme."
+          ],
+          "feedbackCorrect": "Du fragst beim Freizeit-Treff über den bekannten Kontakt nach. Den Link aus der unbekannten Nachricht brauchst du dafür nicht zu öffnen.",
+          "feedbackWrong": [
+            null,
+            null,
+            "Der Absender ist noch nicht geprüft. Frage über den bekannten Kontakt nach, bevor du einen Link öffnest."
+          ],
+          "feedbackAuch": [
+            "Mit einer vertrauten Person zu prüfen ist ebenso sicher. Der unbekannte Link bleibt geschlossen.",
+            null,
+            null
+          ],
+          "hinweis": "Welchen Kontakt zum Freizeit-Treff hattest du bereits vor dieser Nachricht?",
+          "remember": "Ich öffne die App selbst oder rufe eine mir bekannte Nummer an."
+        }
+      },
+      "whatsapp/neu/ausflug-code": {
+        "einfach": {
+          "question": "Du bekommst nun eine SMS mit deinem WhatsApp-Code. Die unbekannte Nummer will den Code für die Rückzahlung. Wie reagierst du?",
+          "answers": [
+            "Ich schicke den Code, damit das Geld schnell auf mein Konto kommt.",
+            "Ich sende nichts und zeige die Nachricht einer vertrauten Person.",
+            "Ich gebe den WhatsApp-Code nicht weiter und beende den Chat."
+          ],
+          "feedbackCorrect": "Der Code gehört zu deinem WhatsApp-Konto. Für eine Rückzahlung ist er nicht nötig. Du gibst ihn nicht weiter.",
+          "feedbackWrong": [
+            "Jemand kann mit deinem Code das WhatsApp-Konto übernehmen. Gib den Code nicht weiter.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Du gibst den Code nicht weiter und holst dir Hilfe für die Nachricht.",
+            null
+          ],
+          "hinweis": "Überlege, welches Konto dieser Code schützt.",
+          "remember": "Ich gebe keine Passwörter oder geheimen Codes weiter."
+        },
+        "standard": {
+          "question": "Eine SMS mit deinem WhatsApp-Code kommt an. Die fremde Nummer verlangt ihn für die Rückzahlung. Was tust du?",
+          "answers": [
+            "Ich schicke den Code, damit die Rückzahlung endlich bearbeitet wird.",
+            "Ich sende nichts und bespreche die Nachricht mit einer vertrauten Person.",
+            "Ich behalte den WhatsApp-Code für mich und beende den Chat."
+          ],
+          "feedbackCorrect": "Dein WhatsApp-Code wird für die Anmeldung an deinem Konto gebraucht. Eine Rückzahlung benötigt ihn nicht. Du gibst ihn nicht weiter.",
+          "feedbackWrong": [
+            "Mit deinem Code könnte jemand dein WhatsApp-Konto übernehmen. Schicke ihn nicht weiter.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Du schützt den Code und holst dir Unterstützung für die Nachricht. Das ist ebenso in Ordnung.",
+            null
+          ],
+          "hinweis": "Zu welchem Konto gehört der Code aus der SMS?",
+          "remember": "Ich gebe keine Passwörter oder geheimen Codes weiter."
+        }
+      }
+    }
+  },
+  "youtube": {
+    "neueSituation": {
+      "einstieg": {
+        "leicht": "Du willst deine Zimmer-Pflanze pflegen. Du suchst einen Tipp auf YouTube.",
+        "einfach": "Du suchst auf YouTube nach einem Tipp für die Pflege deiner Zimmerpflanze.",
+        "standard": "Du möchtest deine Zimmerpflanze pflegen und suchst auf YouTube nach einem passenden Tipp."
+      },
+      "kanal": {
+        "leicht": "Video und nächstes Video",
+        "einfach": "Pflanzenvideo und automatische Wiedergabe",
+        "standard": "Pflanzenvideo und automatische Wiedergabe"
+      },
+      "inhalt": [
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Im Video steht Werbung. Eine Person zeigt eine Flasche Dünger.",
+            "einfach": "Im Video steht Werbung. Eine Person stellt eine Flasche Dünger vor.",
+            "standard": "Das Video ist als Werbung gekennzeichnet und stellt einen Pflanzendünger vor."
+          }
+        },
+        {
+          "typ": "nachricht",
+          "von": {
+            "leicht": "Die Person im Video",
+            "einfach": "Die Person im Video",
+            "standard": "Person im Pflanzenvideo"
+          },
+          "text": {
+            "leicht": "Mit diesem Dünger wächst deine Pflanze 10-mal schneller. Kauf ihn heute. Den Link findest du unter dem Video.",
+            "einfach": "Mit diesem Dünger wächst deine Pflanze zehnmal schneller. Kauf ihn heute über den Link unter dem Video.",
+            "standard": "Mit diesem Dünger wächst deine Pflanze zehnmal schneller. Kauf ihn noch heute über den Link unter dem Video."
+          }
+        },
+        {
+          "typ": "hinweis",
+          "text": {
+            "leicht": "Das Pflanzen-Video ist vorbei. Ein neues Video startet. Du hast Lust auf einen Spaziergang.",
+            "einfach": "Nach dem Pflanzenvideo startet automatisch ein neues Video. Du möchtest jetzt einen Spaziergang machen.",
+            "standard": "Das Pflanzenvideo ist beendet, und Autoplay startet das nächste Video. Du möchtest jetzt eine Pause und einen Spaziergang machen."
+          }
+        }
+      ],
+      "fragen": [
+        {
+          "id": "youtube/neu/pflanzentipp-werbung",
+          "pictogram": "pikto-search",
+          "correctIndex": 2,
+          "nachFehler": true,
+          "question": "Du willst deine Pflanze pflegen. Was machst du mit dem Versprechen aus dem Video?",
+          "answers": [
+            "Ich kaufe den Dünger sofort. Das Video verspricht viel.",
+            "Ich kaufe keinen Dünger. Ich suche einen anderen Tipp.",
+            "Ich prüfe das Versprechen. Dann entscheide ich in Ruhe."
+          ],
+          "feedbackCorrect": "Du prüfst die Aussage auf einer anderen Seite. Die Werbung allein ist kein Beweis.",
+          "feedbackWrong": [
+            "Das Versprechen allein beweist nichts. Du musst den Dünger nicht sofort kaufen.",
+            null,
+            null
+          ],
+          "hinweis": "Werbung will etwas verkaufen. Wo findest du noch Informationen über deine Pflanze?",
+          "remember": "Ich prüfe: Stimmt das Video?",
+          "feedbackAuch": "Du darfst auf den Kauf verzichten. Du kannst nach einem anderen Pflege-Tipp suchen.",
+          "auchMoeglich": [
+            1
+          ]
+        },
+        {
+          "id": "youtube/neu/spaziergang-autoplay",
+          "pictogram": "pikto-pause",
+          "correctIndex": 1,
+          "nachFehler": true,
+          "question": "Du willst jetzt spazieren gehen. Ein neues Video läuft schon. Wie machst du Pause?",
+          "answers": [
+            "Ich schaue das neue Video erst noch zu Ende.",
+            "Ich stoppe das Video. Dann gehe ich spazieren.",
+            "Ich schließe YouTube. Dann gehe ich spazieren."
+          ],
+          "feedbackCorrect": "Du stoppst das Video. Du entscheidest über deine Zeit.",
+          "feedbackWrong": [
+            "Das neue Video hält dich noch am Bildschirm. Du darfst es sofort stoppen.",
+            null,
+            null
+          ],
+          "hinweis": "Du musst das neue Video nicht fertig schauen. Was willst du jetzt machen?",
+          "remember": "Ich darf Videos stoppen.",
+          "feedbackAuch": "Du kannst YouTube schließen. So machst du auch eine Pause vom Bildschirm.",
+          "auchMoeglich": [
+            2
+          ]
+        }
+      ],
+      "segmentiert": true
+    },
+    "aufgabenVersionen": {
+      "youtube/neu/pflanzentipp-werbung": {
+        "einfach": {
+          "question": "Ein Video verspricht mit einem Dünger besonders schnelles Wachstum. Wie entscheidest du?",
+          "answers": [
+            "Ich kaufe sofort, weil mich das Versprechen im Video überzeugt.",
+            "Ich kaufe den Dünger nicht und suche einen anderen Pflegetipp.",
+            "Ich prüfe das Versprechen erst und entscheide ohne Kaufdruck."
+          ],
+          "feedbackCorrect": "Du vergleichst die Werbeaussage mit Informationen aus einer weiteren Quelle. Das Video allein belegt das Versprechen nicht.",
+          "feedbackWrong": [
+            "Ein großes Werbeversprechen reicht nicht als Beleg. Du kannst dir vor einem Kauf Zeit für die Prüfung nehmen.",
+            null,
+            null
+          ],
+          "hinweis": "Wer möchte dir etwas verkaufen? Welche andere Quelle erklärt, was deine Pflanze braucht?",
+          "remember": "Ich prüfe, ob die Aussage im Video stimmt.",
+          "feedbackAuch": "Du darfst dich gegen das Produkt entscheiden. Mit einem anderen Tipp kannst du auch ohne diesen Kauf weiterlernen."
+        },
+        "standard": {
+          "question": "Ein Pflanzenvideo wirbt mit einem besonders wirksamen Dünger. Wie gehst du mit dem Verkaufsversprechen um?",
+          "answers": [
+            "Ich kaufe das Produkt sofort, weil das Versprechen überzeugend klingt.",
+            "Ich kaufe dieses Produkt nicht und suche nach einem anderen Pflegetipp.",
+            "Ich vergleiche die Aussage mit anderen Quellen und entscheide danach."
+          ],
+          "feedbackCorrect": "Du prüfst die Behauptung unabhängig von der Werbung und entscheidest anschließend ohne Kaufdruck.",
+          "feedbackWrong": [
+            "Ein überzeugendes Verkaufsversprechen belegt die behauptete Wirkung nicht. Prüfe es vor einer Kaufentscheidung.",
+            null,
+            null
+          ],
+          "hinweis": "Welche Quelle ohne dieses Verkaufsziel hilft dir, die Bedürfnisse deiner Pflanze und die Behauptung einzuordnen?",
+          "remember": "Behauptungen aus Videos prüfe ich mit weiteren Informationen.",
+          "feedbackAuch": "Du kannst das Produkt ablehnen und nach einem anderen Pflegetipp suchen. Eine Kaufpflicht entsteht durch das Video nicht."
+        }
+      },
+      "youtube/neu/spaziergang-autoplay": {
+        "einfach": {
+          "question": "Du möchtest jetzt einen Spaziergang machen, aber das nächste Video hat schon begonnen. Wie beginnst du deine Pause?",
+          "answers": [
+            "Ich schaue das neue Video zuerst vollständig an.",
+            "Ich stoppe das Video und gehe spazieren.",
+            "Ich schließe YouTube und gehe spazieren."
+          ],
+          "feedbackCorrect": "Du darfst die Wiedergabe beenden. Auch ein automatisch gestartetes Video verpflichtet dich zu nichts.",
+          "feedbackWrong": [
+            "Dann verschiebst du die Pause für ein weiteres Video. Du darfst auch mitten im Video stoppen.",
+            null,
+            null
+          ],
+          "hinweis": "Was möchtest du jetzt tun? Das automatisch gestartete Video entscheidet nicht für dich.",
+          "remember": "Ich darf Videos stoppen.",
+          "feedbackAuch": "Das Schließen der App beendet ebenfalls das Weiterschauen. Du kannst deinen Spaziergang beginnen."
+        },
+        "standard": {
+          "question": "Du willst eine Bildschirmpause und einen Spaziergang machen. Wie gehst du mit dem bereits gestarteten nächsten Video um?",
+          "answers": [
+            "Ich schaue das nächste Video noch vollständig an und verschiebe die Pause.",
+            "Ich stoppe die Wiedergabe und beginne meinen Spaziergang.",
+            "Ich schließe YouTube und beginne meinen Spaziergang."
+          ],
+          "feedbackCorrect": "Du beendest die Wiedergabe und setzt deine eigene Absicht um. Autoplay verpflichtet dich nicht zum Weiterschauen.",
+          "feedbackWrong": [
+            "Damit verschiebst du die gewünschte Pause. Du musst das Video nicht zu Ende sehen, um aufhören zu dürfen.",
+            null,
+            null
+          ],
+          "hinweis": "Welche Handlung führt jetzt zu der Pause, die du selbst möchtest?",
+          "remember": "Ich entscheide selbst, wann ich Videos stoppe.",
+          "feedbackAuch": "Auch das Schließen von YouTube beendet die Wiedergabe und ermöglicht deine gewünschte Pause."
+        }
+      }
+    }
+  }
+};
+const ZUSATZ_LEKTIONEN = {
+  "betrug": [
+    "Was ist Phishing?",
+    "Falsche Nachrichten erkennen",
+    "Der Paket-Trick",
+    "Der Hallo-Mama-Trick",
+    "Schockanrufe",
+    "Liebe im Internet",
+    "Falsche Gewinne",
+    "Abo-Fallen",
+    "Codes nie weitergeben",
+    "Vorsicht bei QR-Codes",
+    "Was tun nach einem Betrug?"
+  ],
+  "datenschutz": [
+    "Wer will deine Daten?",
+    "Eine App will etwas sehen",
+    "Fotos prüfen",
+    "Standort teilen",
+    "Eine Nachricht will deine Daten"
+  ],
+  "einkaufen": [
+    "Gute Shops erkennen",
+    "Fake-Shops erkennen",
+    "Vor dem Kaufen prüfen",
+    "Sicher bezahlen",
+    "Bank-Daten schützen",
+    "Versteckte Kosten in Apps und Spielen",
+    "Nicht sofort kaufen",
+    "Falsch gekauft? Das kannst du tun"
+  ],
+  "facebook": [
+    "Profil",
+    "Beitrag schreiben",
+    "Wer darf etwas sehen?",
+    "Kommentare schreiben",
+    "Beleidigungen",
+    "Fotos mit anderen Personen",
+    "Was kann ich tun?"
+  ],
+  "fakes": [
+    "Was sind Fake News?",
+    "Warum gibt es Fake News?",
+    "KI-Bilder erkennen",
+    "Gefälschte Videos: Deepfakes",
+    "Geklonte Stimmen am Telefon",
+    "Nachrichten prüfen",
+    "Nicht einfach weiterleiten"
+  ],
+  "hilfe": [
+    "Das kannst du selbst",
+    "Welche Hilfe passt?",
+    "Unterstützung wirklich holen",
+    "Druck oder Angst: erst stoppen"
+  ],
+  "instagram": [
+    "Foto posten",
+    "Kurze Videos und Stories",
+    "Standort",
+    "Private Nachrichten",
+    "Verletzende Kommentare",
+    "Bearbeitete Bilder",
+    "Was kann ich tun?"
+  ],
+  "ki": [
+    "Wo triffst du KI?",
+    "Ein Chatbot ist kein Mensch",
+    "So prüfst du eine Antwort",
+    "Keine privaten Daten",
+    "Gesundheit und Geld"
+  ],
+  "snapchat": [
+    "Kontakte",
+    "Stress erkennen"
+  ],
+  "tiktok": [
+    "Private Nachrichten",
+    "Videos posten",
+    "Kommentare",
+    "Gefühle und Pausen",
+    "Nicht jedes Video ist echt"
+  ],
+  "whatsapp": [
+    "WhatsApp nutzen",
+    "Geld und Betrug",
+    "Gruppen",
+    "Fotos senden",
+    "Stress und Eile",
+    "Die KI in WhatsApp"
+  ],
+  "youtube": [
+    "Werbung erkennen",
+    "Autoplay und Zeit",
+    "Gefährliche Mutproben",
+    "Videos, die Angst machen",
+    "Kommentare",
+    "Nicht jedes Video ist echt",
+    "Was kann ich tun?"
+  ]
+};
+
+topics.forEach(topic => {
+  const neu = ANWENDEN_ERGAENZUNGEN[topic.id];
+  if (neu) {
+    topic.neueSituation = neu.neueSituation;
+    AUFGABEN_VERSIONS[topic.id] = Object.assign({}, AUFGABEN_VERSIONS[topic.id], neu.aufgabenVersionen);
+  }
+  topic.zusatzLektionen = ZUSATZ_LEKTIONEN[topic.id].slice();
+});
+/* FERTIGSTELLUNG-LERNWEGE-2026-10-06 END */
 
 /* Aufgaben-Fassungen eines Themas anhängen – für ALLE Aufgaben, die gerade im
    Thema hängen. Läuft zweimal: hier für topics.js und in app.js noch einmal,

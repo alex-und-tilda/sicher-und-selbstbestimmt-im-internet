@@ -1887,12 +1887,12 @@ const topics = [
         "feedbackWrong": [
           null,
           "Ein Gruß ist in Ordnung. Er zeigt nichts Privates.",
-          "Eine Frage ist in Ordnung. Sie zeigt nichts Privates von dir."
+          "Eine Frage ohne private Angaben ist in Ordnung. Prüfe vorher: Was steht in deiner Frage?"
         ],
         "feedbackCorrect": "Das ist richtig. Private Daten bleiben geschützt."
       },
       {
-        "hinweis": "Das Antippen kannst du nicht zurücknehmen.",
+        "hinweis": "Prüfe einen Link vor dem Antippen. Schon angetippt? Gib keine Daten ein. Hol dir Hilfe.",
         "question": "Was ist eine gute WhatsApp-Regel?",
         "pictogram": "pikto-message",
         "answers": [
@@ -2632,15 +2632,18 @@ const topics = [
         "text": [
           "Du hast ein Profil auf Facebook.",
           "Andere sehen dein Profil.",
-          "Du kannst einstellen: Wer sieht dein Profil?",
-          "Am besten sehen es nur Freunde.",
+          "Dein Name und dein Profil-Bild sind öffentlich.",
+          "Auch dein Titel-Bild ist öffentlich.",
+          "Das Titel-Bild ist das große Bild oben im Profil.",
+          "Du kannst einstellen: Wer sieht deine Beiträge?",
+          "Für deine Beiträge kannst du Freunde auswählen.",
           "Eine vertraute Person hilft dir beim Einstellen."
         ],
-        "remember": "Dein Profil: nur Freunde sehen es.",
+        "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "vorbildWer": "Alex",
         "vorbild": [
           "Alex öffnet die Einstellungen bei Facebook.",
-          "Er stellt ein: Nur Freunde sehen mein Profil.",
+          "Er wählt für seine neuen Beiträge: Freunde.",
           "Tilda hilft ihm dabei."
         ]
       },

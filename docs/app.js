@@ -655,10 +655,17 @@ function setProgressEnabled(enabled) {
   if (enabled) {
     const progress = loadProgress() || {};
     progress.enabled = true;
+    /* Diese Zustimmung erklärt auch unterbrochene Runden. Alte gespeicherte
+       Zustimmungen werden nicht automatisch auf Antworten erweitert. */
+    progress.pauseErlaubt = true;
     progress.done = progress.done || {};
+    const ctx = lastLessonContext && lastLessonContext.pause ? pauseCursorPruefen(lastLessonContext) : null;
+    const stand = ctx && pauseStandPruefen(pauseSitzung, ctx);
+    if (stand) progress.pause = stand;
     saveProgress(progress);
   } else {
     pRemove(STORAGE_KEY);
+    pauseBewertungLoeschen();
   }
 }
 
@@ -823,11 +830,12 @@ function hasResumeData() {
 /* Lernstand direkt auf der Abschluss-Seite einschalten – ohne die Seite
    neu zu bauen (kein Kontextverlust, kein Sprung). */
 function enableProgressInline(button) {
+  const bereitsAktiv = isProgressEnabled();
   setProgressEnabled(true);
-  sessionDoneTopics.forEach((id) => markTopicDone(id));
+  if (!bereitsAktiv) sessionDoneTopics.forEach((id) => markTopicDone(id));
   announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
   const box = button.closest(".progress-consent");
-  if (box) box.innerHTML = `<p class="progress-consent-title">✓ Ich merke mir deinen Lernstand. Nur auf diesem Gerät. Ohne Namen.</p>`;
+  if (box) box.innerHTML = `<p class="progress-consent-title">✓ Ich merke mir deinen Lernstand. Nur auf diesem Gerät. Ohne Namen.</p><p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>`;
 }
 
 /* ============================================================
@@ -2427,6 +2435,7 @@ function lernRahmenLeiste(ziel) {
 
 function lernmodusBeenden() {
   stopReading();
+  pauseMerken();
   aufUebungsSeite = false;
   if (lernBeendenZiel === "renderMyPath") { lernBeendenZiel = null; return renderMyPath(); }
   renderIntro();
@@ -3077,6 +3086,7 @@ function avatarLabel(av) {
 
 function switchProfile(id) {
   if (!profiles.some(p => p.id === id)) return;
+  pauseBewertungLoeschen();
   activeProfileId = id;
   saveProfiles();
   loadActiveProfileSettings();
@@ -3595,6 +3605,7 @@ function resetProfile(id) {
   PROFILE_BASE_KEYS.forEach(base => pRemove(base));
   activeProfileId = prevActive;
   if (wasActive) {
+    pauseBewertungLoeschen();
     loadActiveProfileSettings();
     finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
@@ -3637,13 +3648,26 @@ function confirmDeleteProfile(id) {
 }
 
 function deleteProfile(id) {
+  if (!profiles.some(p => p.id === id)) return;
   const prevActive = activeProfileId;
+  if (id === activeProfileId) pauseBewertungLoeschen();
   activeProfileId = id;
   PROFILE_BASE_KEYS.forEach(base => pRemove(base));
   activeProfileId = prevActive;
   profiles = profiles.filter(p => p.id !== id);
   if (activeProfileId === id) activeProfileId = profiles[0] ? profiles[0].id : null;
   saveProfiles();
+  if (prevActive === id) {
+    finishedTopicThisSession = false;
+    sessionDoneTopics = new Set();
+    sessionScenarioStufe = {};
+    sessionRegeln = {};
+    schwereSitzung = {};
+    /* Der Rück-Anker gehört zum nun aktiven Profil. Bei der letzten
+       gelöschten Person werden auch die alten RAM-Einstellungen geleert. */
+    loadLastLesson();
+    loadTopicAmounts();
+  }
   if (profiles.length === 0) {
     /* Keine Person mehr: neues Zeichen bauen. */
     signDraft = { icon: null, color: null, number: null };
@@ -3862,9 +3886,278 @@ let lastLessonContext = null;
 const WEG_UMGEBAUT = ["datenschutz", "hilfe"];
 const LAST_LESSON_KEY = "letzte-lektion";
 
+/* BEGIN T24-PAUSE-HELPERS
+   Beenden merkt auch Quiz und Anwenden. Der Bedien-Cursor enthält
+   keine Antwort oder Bewertung. Der genaue Stand lebt in dieser Sitzung;
+   dauerhaft steht er ausschließlich im eingewilligten Lernstand. */
+let pauseStelle = null;
+let pauseKnoten = null;
+let pauseSitzung = null;
+let pauseTeilrunde = null;
+/* Ohne Speicherung: genauer Nachweis für wortgleiche Kernübungen. */
+let kernUebungenErkannt = new Set();
+
+function pauseSpeicherErlaubt() {
+  const progress = loadProgress();
+  return !!(progress && progress.enabled && progress.pauseErlaubt === true);
+}
+
+function pauseEinwilligungHtml() {
+  if (!isProgressEnabled() || pauseSpeicherErlaubt()) return "";
+  return `<div class="progress-consent">
+    <p class="progress-consent-title">Unterbrochene Runden auch merken?</p>
+    <p class="progress-consent-note">Deine Antworten und Treffer bleiben dann nach dem Schließen erhalten. Nur auf diesem Gerät.</p>
+    <button type="button" class="utility-button" onclick="enableProgressInline(this)">Ja, Runden merken</button>
+  </div>`;
+}
+
+function pauseFrageSignatur(q) {
+  const leicht = leichtFassung.get(q) || aufgabeSchnappschuss(q);
+  const text = JSON.stringify([aufgabeSchluessel(q), leicht.question, leicht.answers,
+    Number(q.correctIndex ?? q.correct ?? 0), q.auchMoeglich || [], leicht.felder || null,
+    Array.isArray(q.felder) ? q.felder.map(f => [f.zweck, f.pflicht]) : null]);
+  let n = 2166136261;
+  for (let i = 0; i < text.length; i++) n = Math.imul(n ^ text.charCodeAt(i), 16777619);
+  return (n >>> 0).toString(16);
+}
+
+function pauseAufgaben(topic, mode) {
+  const ns = topic && topic.neueSituation;
+  const liste = ns && (ns.aufgaben || ns.fragen);
+  return (Array.isArray(liste) ? liste : []).filter(q => q
+    && !(q.nurLang && mode === "short") && !(q.nurKurz && mode !== "short"));
+}
+
+function pauseCursorPruefen(ctx) {
+  if (!ctx || !ctx.pause || !["short", "full", "extra"].includes(ctx.mode)) return null;
+  const topic = getTopicById(ctx.topicId), p = ctx.pause;
+  if (!topic || !["quiz", "kurzquiz", "wiederholen", "neu"].includes(p.art)
+    || !Number.isInteger(p.index) || p.index < 0 || typeof p.frage !== "string") return null;
+  const liste = p.art === "quiz" ? getQuizQuestions(topic)
+    : p.art === "kurzquiz" ? getEinfachQuizQuestions(topic)
+    : p.art === "neu" ? pauseAufgaben(topic, ctx.mode) : null;
+  const q = liste ? liste[p.index] : findeAufgabe(topic.id, p.frage);
+  if (!q || aufgabeSchluessel(q) !== p.frage || pauseFrageSignatur(q) !== p.signatur) return null;
+  const teil = p.teil === "situation" && p.art === "neu" ? "situation" : "frage";
+  const cursor = { art: p.art, index: p.index, frage: p.frage, signatur: p.signatur, teil };
+  if (p.art === "wiederholen") {
+    if (!Number.isInteger(p.gesamt) || p.gesamt < 1 || p.gesamt > 500 || p.index >= p.gesamt
+      || !["Das große Quiz", "Wiederholen", LERNWEG_TEXT.nochmalUeben].includes(p.titel)) return null;
+    cursor.gesamt = p.gesamt; cursor.titel = p.titel;
+  }
+  return { topicId: topic.id, mode: ctx.mode, pause: cursor };
+}
+
+function pauseFrageFuer(ctx) {
+  const t = getTopicById(ctx.topicId), p = ctx.pause;
+  return p.art === "quiz" ? getQuizQuestions(t)[p.index]
+    : p.art === "kurzquiz" ? getEinfachQuizQuestions(t)[p.index]
+    : p.art === "neu" ? pauseAufgaben(t, ctx.mode)[p.index] : findeAufgabe(t.id, p.frage);
+}
+
+function pauseStelleMerken(daten) {
+  const topicId = daten.topicId || currentTopicId;
+  const topic = getTopicById(topicId);
+  const q = daten.art === "wiederholen" ? (bigQuizQuestions[daten.index] || {}).quelle
+    : daten.art === "quiz" ? getQuizQuestions(topic)[daten.index]
+    : daten.art === "kurzquiz" ? getEinfachQuizQuestions(topic)[daten.index]
+    : pauseAufgaben(topic, currentMode)[daten.index];
+  if (!q) { pauseStelle = null; pauseKnoten = null; return; }
+  const ctx = { topicId, mode: currentMode,
+    pause: { art: daten.art, index: daten.index, frage: aufgabeSchluessel(q),
+      signatur: pauseFrageSignatur(q), teil: daten.teil === "situation" ? "situation" : "frage" } };
+  if (daten.art === "wiederholen") Object.assign(ctx.pause, { gesamt: bigQuizQuestions.length, titel: bigQuizTitle });
+  pauseStelle = { cursor: ctx, teil: daten.teil || "frage", wieder: textKopie(daten.wieder || {}) };
+  pauseKnoten = content.firstElementChild;
+}
+
+function pauseBewertungLoeschen() {
+  pauseStelle = null; pauseKnoten = null; pauseSitzung = null; pauseTeilrunde = null;
+  kernUebungenErkannt = new Set();
+  topics.forEach(t => { delete t._zusatzWeg; delete t._schlussZusatz; });
+  selfAssessmentStart = {}; miniCheckDone = {}; vorhersageStart = {};
+  simulationFertig = {}; simulationWahl = {};
+  quizScore = 0; quizKorrigiert = 0; quizAnsweredCorrect = new Set();
+  bigQuizScore = 0; bigQuizKorrigiert = 0;
+  felderWahl = {}; felderAktiv = null;
+  antwortFolge = { schluessel: null, mitFehler: false }; versucheJeFrage = {};
+}
+
+function pauseDatenLoeschen() {
+  pauseSitzung = null;
+  const p = loadProgress();
+  if (p && Object.prototype.hasOwnProperty.call(p, "pause")) { delete p.pause; saveProgress(p); }
+}
+
+function pauseRundeStarten() {
+  pauseStelle = null; pauseKnoten = null; pauseTeilrunde = null;
+  pauseDatenLoeschen();
+  if (lastLessonContext && lastLessonContext.pause) { lastLessonContext = null; pRemove(LAST_LESSON_KEY); }
+}
+
+function pauseEnde(art) {
+  pauseStelle = null; pauseKnoten = null;
+  if (lastLessonContext && lastLessonContext.pause && lastLessonContext.pause.art === art) {
+    lastLessonContext = null; pRemove(LAST_LESSON_KEY); pauseDatenLoeschen();
+  }
+}
+
+function pauseStandPruefen(s, ctx) {
+  if (!s || s.profil !== (activeProfileId || null)
+    || JSON.stringify(s.cursor) !== JSON.stringify(ctx)) return null;
+  const q = pauseFrageFuer(ctx), p = ctx.pause;
+  const total = p.art === "wiederholen" ? p.gesamt
+    : p.art === "quiz" ? getQuizQuestions(getTopicById(ctx.topicId)).length
+    : p.art === "kurzquiz" ? getEinfachQuizQuestions(getTopicById(ctx.topicId)).length : 1;
+  if (![s.richtig, s.korrigiert, s.ab].every(n => Number.isInteger(n) && n >= 0)
+    || s.ab > p.index || s.richtig + s.korrigiert > total - s.ab
+    || !Array.isArray(s.geschafft) || new Set(s.geschafft).size !== s.geschafft.length
+    || s.geschafft.some(n => !Number.isInteger(n) || n < 0 || n >= total)
+    || !["situation", "frage", "rueckmeldung"].includes(s.teil)) return null;
+  const w = s.wieder || {};
+  if (w.antwort !== undefined && (!Number.isInteger(w.antwort) || !Array.isArray(q.answers)
+    || w.antwort < 0 || w.antwort >= q.answers.length)) return null;
+  if (w.wahl !== undefined && w.wahl !== null && (!Number.isInteger(w.wahl) || !Array.isArray(q.answers)
+    || w.wahl < 0 || w.wahl >= q.answers.length)) return null;
+  if (s.teil === "rueckmeldung" && !felderAufgabe(q) && w.antwort === undefined) return null;
+  if (w.reihe && (!Array.isArray(w.reihe) || !Array.isArray(q.answers)
+    || w.reihe.length !== q.answers.length || new Set(w.reihe).size !== w.reihe.length
+    || w.reihe.some(n => !Number.isInteger(n) || n < 0 || n >= q.answers.length))) return null;
+  if (w.fest && (!Array.isArray(q.answers) || w.fest.topicId !== ctx.topicId || w.fest.index !== p.index
+    || w.fest.mode !== ctx.mode
+    || !Number.isInteger(w.fest.wrongIndex) || w.fest.wrongIndex < 0
+    || w.fest.wrongIndex >= q.answers.length || w.fest.wrongIndex === Number(q.correctIndex ?? 0)
+    || typeof w.fest.correctFirst !== "boolean")) return null;
+  if (p.art === "kurzquiz" && s.teil === "frage" && !w.fest) return null;
+  const schon = p.index - s.ab + ((s.teil === "rueckmeldung"
+    || (s.form && s.form.stand && s.form.stand.art === "bewertet")) ? 1 : 0);
+  if (p.art !== "neu" && (s.richtig + s.korrigiert > schon
+    || s.geschafft.some(n => n < s.ab || n > p.index)
+    || (p.art !== "wiederholen" && s.geschafft.length !== s.richtig + s.korrigiert))) return null;
+  if (s.vorwahl !== null && (!Number.isInteger(s.vorwahl) || !Array.isArray(q.answers)
+    || s.vorwahl < 0 || s.vorwahl >= q.answers.length)) return null;
+  if (felderAufgabe(q)) {
+    if (!s.form || !Array.isArray(s.form.wahl) || new Set(s.form.wahl).size !== s.form.wahl.length
+      || s.form.wahl.some(n => !Number.isInteger(n) || n < 0 || n >= q.felder.length)) return null;
+    if (s.form.lern && !["erstPruefen", "nichtNutzen"].includes(s.form.lern.art)) return null;
+    if (s.form.stand && !["gesperrt", "ausweg", "bewertet"].includes(s.form.stand.art)) return null;
+    if (s.form.stand && s.form.stand.art === "ausweg"
+      && !["erstPruefen", "nichtNutzen"].includes(s.form.stand.ausweg)) return null;
+  }
+  if (p.art === "wiederholen") {
+    if (!Array.isArray(s.pool) || s.pool.length !== total) return null;
+    for (let i = 0; i < s.pool.length; i++) {
+      const e = s.pool[i];
+      if (!e && i < s.ab) continue;
+      const quelle = e && findeAufgabe(e.topicId, e.frage);
+      if (!quelle || pauseFrageSignatur(quelle) !== e.signatur) return null;
+    }
+    if (!s.pool[p.index] || s.pool[p.index].topicId !== ctx.topicId || s.pool[p.index].frage !== p.frage) return null;
+  }
+  return s;
+}
+
+function pauseMerken() {
+  if (!pauseStelle || !pauseKnoten || !content.contains(pauseKnoten)) return false;
+  const ctx = pauseCursorPruefen(pauseStelle.cursor);
+  if (!ctx) return false;
+  const p = ctx.pause, q = pauseFrageFuer(ctx), gross = p.art === "wiederholen";
+  const markiert = content.querySelector("button.answer-option.ist-markiert");
+  const klick = markiert && String(markiert.getAttribute("onclick") || "").match(/\((\d+)\)/);
+  const vorwahl = markiert ? Number(markiert.dataset.index ?? (klick && klick[1])) : null;
+  const s = { profil: activeProfileId || null, cursor: ctx, teil: pauseStelle.teil,
+    wieder: textKopie(pauseStelle.wieder), vorwahl,
+    richtig: gross ? bigQuizScore : p.art === "neu" ? 0 : quizScore,
+    korrigiert: gross ? bigQuizKorrigiert : p.art === "neu" ? 0 : quizKorrigiert,
+    geschafft: gross || p.art === "neu" ? [] : Array.from(quizAnsweredCorrect),
+    ab: pauseTeilrunde && pauseTeilrunde.art === p.art ? pauseTeilrunde.ab : 0,
+    folge: textKopie(antwortFolge), versuche: versucheJeFrage[aufgabeSchluessel(q)] || 0 };
+  if (gross) s.pool = bigQuizQuestions.map(x => x && ({ topicId: x.topicId,
+    frage: aufgabeSchluessel(x.quelle || x), signatur: pauseFrageSignatur(x.quelle || x) }));
+  if (felderAktiv && felderAufgabe(q) && aufgabeSchluessel(felderAktiv.q) === p.frage) {
+    s.form = { wahl: felderGewaehlt(), lern: textKopie(felderAktiv.lern), stand: textKopie(felderAktiv.stand) };
+    s.vorwahl = null;
+  }
+  pauseSitzung = pauseStandPruefen(s, ctx);
+  lastLessonContext = ctx;
+  saveLastLesson();
+  if (pauseSpeicherErlaubt()) {
+    const stand = loadProgress();
+    if (pauseSitzung) stand.pause = pauseSitzung; else delete stand.pause;
+    saveProgress(stand);
+  }
+  return true;
+}
+
+function pauseResumeText(ctx) {
+  const p = ctx.pause;
+  const art = p.art === "kurzquiz" ? "Kurz-Quiz" : p.art === "quiz" ? "Quiz"
+    : p.art === "wiederholen" ? p.titel : "Neue Situation";
+  return `${art}, ${p.teil === "situation" ? "Situation" : "Frage " + (p.index + 1)}`;
+}
+
+function pauseTeilHinweisHtml(art) {
+  return pauseTeilrunde && pauseTeilrunde.art === art
+    ? `<p class="quiz-teilhinweis">Du hast bei Frage ${pauseTeilrunde.ab + 1} neu begonnen. Hier zählen nur die Fragen ab dieser Stelle.</p>` : "";
+}
+
+function pauseFortsetzen(raw) {
+  const ctx = pauseCursorPruefen(raw);
+  if (!ctx) { clearLastLesson(); return renderMenu(); }
+  const p = ctx.pause, q = pauseFrageFuer(ctx), topic = getTopicById(ctx.topicId);
+  const gespeichert = pauseSpeicherErlaubt() ? (loadProgress() || {}).pause : null;
+  const s = pauseStandPruefen(pauseSitzung, ctx) || pauseStandPruefen(gespeichert, ctx);
+  currentTopicId = ctx.topicId; currentMode = ctx.mode;
+  const gross = p.art === "wiederholen";
+  pauseTeilrunde = s ? (s.ab > 0 ? { art: p.art, ab: s.ab } : null)
+    : p.art === "neu" || p.index === 0 ? null : { art: p.art, ab: p.index };
+  quizScore = !gross && s ? s.richtig : 0; quizKorrigiert = !gross && s ? s.korrigiert : 0;
+  quizAnsweredCorrect = new Set(!gross && s ? s.geschafft : []);
+  bigQuizScore = gross && s ? s.richtig : 0; bigQuizKorrigiert = gross && s ? s.korrigiert : 0;
+  if (s) {
+    antwortFolge = s.folge && s.folge.schluessel === ctx.topicId + "\u0000" + p.frage
+      ? { schluessel: s.folge.schluessel, mitFehler: s.folge.mitFehler === true } : { schluessel: null, mitFehler: false };
+    versucheJeFrage[p.frage] = Number.isInteger(s.versuche) && s.versuche >= 0 ? s.versuche : 0;
+  } else { antwortFolge = { schluessel: null, mitFehler: false }; versucheJeFrage[p.frage] = 0; }
+  if (gross) {
+    bigQuizTitle = p.titel; bigQuizIndex = p.index;
+    if (s) bigQuizQuestions = s.pool.map(e => e && quizPoolEintrag(findeAufgabe(e.topicId, e.frage), getTopicById(e.topicId)));
+    else {
+      const rest = buildBigQuizPool(topics, p.gesamt).filter(x => aufgabeSchluessel(x.quelle || x) !== p.frage);
+      bigQuizQuestions = Array(p.index).fill(null).concat(quizPoolEintrag(q, topic), rest.slice(0, p.gesamt - p.index - 1));
+    }
+  } else currentQuizIndex = p.index;
+  if (felderAufgabe(q)) felderWahl[p.frage] = s && s.form ? s.form.wahl.slice() : [];
+  stillerNeuaufbau = true;
+  const w = s ? textKopie(s.wieder || {}) : {};
+  if (p.art === "quiz") {
+    if (s && s.teil === "rueckmeldung") renderQuizFeedbackPage(w.antwort, { merk: w.merk });
+    else renderQuizQuestion();
+  } else if (p.art === "kurzquiz") {
+    if (s && s.teil === "rueckmeldung") renderEinfachQuizFeedback(w.antwort, antwortArt(q, w.antwort) !== "falsch", { merk: w.merk });
+    else renderEinfachQuizQuestion(w.fest);
+  } else if (gross) {
+    if (s && s.teil === "rueckmeldung" && !felderAufgabe(q)) renderBigQuizFeedback(w.antwort, { merk: w.merk });
+    else renderBigQuizQuestion();
+  } else if (felderAufgabe(q)) renderNeueSituationFelder(topic, p.index);
+  else renderNeueSituation(topic, p.index, Object.assign(w, { teil: s ? (w.teil || (s.teil === "situation" ? "situation" : "frage")) : p.teil }));
+  if (s && s.form) felderWiederherstellen({ key: p.frage, lern: s.form.lern, stand: s.form.stand });
+  if (s && s.vorwahl !== null && s.teil === "frage") {
+    const opt = Array.from(content.querySelectorAll("button.answer-option")).find(el => {
+      const klick = String(el.getAttribute("onclick") || "").match(/\((\d+)\)/);
+      return Number(el.dataset.index ?? (klick && klick[1])) === s.vorwahl;
+    });
+    if (opt) { antwortVorwahlMarkieren(opt); leisteSpiegeln(); }
+  }
+}
+
+/* END T24-PAUSE-HELPERS */
+
 function saveLastLesson() {
   if (!lastLessonContext) { pRemove(LAST_LESSON_KEY); return; }
-  try { pSet(LAST_LESSON_KEY, JSON.stringify(lastLessonContext)); } catch (e) { /* nichts tun */ }
+  const ctx = lastLessonContext.pause ? pauseCursorPruefen(lastLessonContext) : lastLessonContext;
+  if (!ctx) { clearLastLesson(); return; }
+  try { pSet(LAST_LESSON_KEY, JSON.stringify(ctx)); } catch (e) { /* nichts tun */ }
 }
 
 function loadLastLesson() {
@@ -3874,9 +4167,11 @@ function loadLastLesson() {
     if (!raw) return;
     const ctx = JSON.parse(raw);
     if (!ctx || typeof ctx.topicId !== "string") return;
+    if (ctx.pause) { lastLessonContext = pauseCursorPruefen(ctx); return; }
     const topic = getTopicById(ctx.topicId);
     if (!topic) return;
-    const mode = ctx.mode === "short" ? "short" : "full";
+    if (!["short", "full", "extra"].includes(ctx.mode)) return;
+    const mode = ctx.mode;
     const lektionen = getLessonsForMode(topic, mode);
     const step = Number(ctx.step);
     /* Nur übernehmen, wenn der Schritt heute noch existiert – sonst käme die
@@ -3905,6 +4200,8 @@ function loadLastLesson() {
 function clearLastLesson() {
   lastLessonContext = null;
   pRemove(LAST_LESSON_KEY);
+  pauseDatenLoeschen();
+  pauseStelle = null; pauseKnoten = null; pauseTeilrunde = null;
 }
 
 /* ============================================================
@@ -3955,7 +4252,7 @@ function buildResumeLessonChip() {
     <p class="resume-lesson-wrap">
       <button type="button" class="review-chip resume-lesson-chip" style="${getTopicColorStyle(topic.id)}" onclick="resumeLastLesson()">
         <span aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
-        <span>${FUEHRUNG_TEXT.weiterLernen}: ${escapeHtml(topic.title)}, Schritt ${ctx.step + 1}</span>
+        <span>${FUEHRUNG_TEXT.weiterLernen}: ${escapeHtml(topic.title)}, ${ctx.pause ? escapeHtml(pauseResumeText(ctx)) : "Schritt " + (ctx.step + 1)}</span>
       </button>
     </p>`;
 }
@@ -3971,13 +4268,14 @@ function buildResumeLessonButton() {
   if (!topic) return "";
   return `
     <button type="button" class="intro-start-button intro-resume-button" onclick="resumeLastLesson()">
-      ${FUEHRUNG_TEXT.weiterLernen}: ${escapeHtml(topic.title)}, Schritt ${ctx.step + 1}
+      ${FUEHRUNG_TEXT.weiterLernen}: ${escapeHtml(topic.title)}, ${ctx.pause ? escapeHtml(pauseResumeText(ctx)) : "Schritt " + (ctx.step + 1)}
     </button>`;
 }
 
 function resumeLastLesson() {
   const ctx = lastLessonContext;
   if (!ctx || !getTopicById(ctx.topicId)) return renderMenu();
+  if (ctx.pause) return pauseFortsetzen(ctx);
   currentTopicId = ctx.topicId;
   currentMode = ctx.mode;
   currentStep = ctx.step;
@@ -4506,6 +4804,7 @@ function renderMyPath() {
       <div class="progress-consent">
         <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.</p>
         <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
+        ${pauseEinwilligungHtml()}
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Lernstand löschen und nicht mehr merken</button>
       </div>${resumeDelete}`;
   } else if (doneCount > 0) {
@@ -4513,6 +4812,7 @@ function renderMyPath() {
       <div class="progress-consent">
         <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
         <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
+        <p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
       </div>${resumeDelete}`;
   } else {
@@ -5365,9 +5665,9 @@ function renderTopicChoice(topicId) {
         if (resume) {
           return `
             ${ueberarbeitetHinweis}
-            <button type="button" class="topic-start-button" onclick="resumeLastLesson()">Weiter lernen: Schritt ${resume.step + 1}</button>
+            ${resume.pause ? buildResumeLessonChip() : `<button type="button" class="topic-start-button" onclick="resumeLastLesson()">Weiter lernen: Schritt ${resume.step + 1}</button>`}
             ${spaeterBlock(FUEHRUNG_TEXT.oderAuf, `
-              ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${resume.mode === "full" ? "full" : "short"}')`)}
+              ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${resume.mode}')`)}
               ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
               ${merkChip}${alltagUebung}${uebung}${training}`)}`;
         }
@@ -5377,7 +5677,8 @@ function renderTopicChoice(topicId) {
             ${hasQuiz ? `<button type="button" class="topic-start-button" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz wiederholen</button>` : ""}
             ${spaeterBlock(FUEHRUNG_TEXT.oderAuf, `
               ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', 'short')`)}
-              ${laterChip(`Mehr dazu: ${escapeHtml(topic.title)}`, `startTopicMode('${escapeHtml(topic.id)}', 'full')`)}
+              ${laterChip(`Mehr dazu: ${escapeHtml(topic.title)}`, `startTopicMode('${escapeHtml(topic.id)}', 'extra')`)}
+              ${laterChip("Alle Lektionen nachlesen", `startTopicMode('${escapeHtml(topic.id)}', 'full')`)}
               ${merkChip}${alltagUebung}${uebung}${training}`)}`;
         }
         /* Paket C (26.09.2026): „Lernen starten" steht UNTER der Mengen-Wahl.
@@ -5639,6 +5940,30 @@ function toggleTaskHelp() {
 
 function getLessonsForMode(topic, mode) {
   if (!topic || !Array.isArray(topic.lessons)) return [];
+  /* Zusatzweg: fachlich ausgewählte neue Fälle. Der vollständige alte Weg
+     bleibt unter full zum Nachlesen erhalten; seine Daten werden nicht
+     gekürzt. Nur eine bereits passend beantwortete identische Kernaufgabe
+     entfällt hier. Ohne Nachweis bleibt die Wiederholung erhalten. */
+  if (mode === "extra") {
+    if (topic._zusatzWeg) return topic._zusatzWeg;
+    const titel = Array.isArray(topic.zusatzLektionen) ? topic.zusatzLektionen : [];
+    const kern = topic.einfachLessons || [];
+    const gleich = (a, b) => {
+      if (!a || !b) return false;
+      const aa = leichtFassung.get(a) || a, bb = leichtFassung.get(b) || b;
+      return aa.question === bb.question && JSON.stringify(aa.answers) === JSON.stringify(bb.answers)
+        && a.correctIndex === b.correctIndex;
+    };
+    const lektionen = titel.map(t => topic.lessons.find(l => l.title === t)).filter(Boolean)
+      .map(l => kern.some(k => gleich(k.practice, l.practice)
+        && kernUebungenErkannt.has(topic.id + "\u0000" + aufgabeSchluessel(k.practice)))
+        ? Object.assign({}, l, { practice: null }) : l);
+    if (!lektionen.length) return [];
+    const ende = topic.lessons[topic.lessons.length - 1];
+    topic._zusatzWeg = ende && /merke ich mir/i.test(ende.title || "")
+      ? lektionen.concat(zusammenfassungFuerWeg(topic, lektionen, ende, "_schlussZusatz")) : lektionen;
+    return topic._zusatzWeg;
+  }
   if (mode === "short") {
     if (Array.isArray(topic.einfachLessons) && topic.einfachLessons.length) {
       /* Der Kurz-Modus bekommt denselben Rahmen wie der lange Weg
@@ -5750,6 +6075,8 @@ function zusammenfassungFuerWeg(topic, lektionen, ende, schluessel) {
    langen Wegs kündigten Dinge an, die im Kurz-Weg nicht vorkamen
    (Prüfgruppen-Test F5, 26.09.2026). */
 function zieleFuerWeg(topic, mode) {
+  if (mode === "extra") return getLessonsForMode(topic, mode)
+    .filter(l => !l.erinnern).map(l => (resolveLessonContent(l, languageLevel) || l).title);
   /* Lernweg (26.09.2026): „Danach kannst du …" je Weg und Stufe (LERNZIELE). */
   const lz = (typeof LERNZIELE !== "undefined" && LERNZIELE) ? LERNZIELE[topic.id] : null;
   const weg = lz ? lz[mode === "short" ? "kurz" : "lang"] : null;
@@ -5768,7 +6095,7 @@ function startTopicMode(topicId, mode) {
   if (!topic) return renderMenu();
   rememberTopicAmount(topic.id, mode);
   currentTopicId = topic.id;
-  currentMode = mode === "short" ? "short" : "full";
+  currentMode = ["short", "extra", "full"].includes(mode) ? mode : "short";
   currentStep = 0;
   /* D8 (01.10.2026): „Mehr dazu“ kommt nach dem Kern (E6). Die Einstiegsfrage
      war dann schon dran und wird nicht noch einmal gestellt. */
@@ -5870,8 +6197,9 @@ function buildProgress(done, total, opts) {
     <div class="progress-consent">
       <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
       <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
+        <p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>
       <button type="button" class="utility-button" onclick="enableProgressInline(this)">Ja, Lernstand merken</button>
-    </div>` : "";
+    </div>` : pauseEinwilligungHtml();
     return `
     ${buildGrandFinish()}
     <div class="hero-progress-row" role="region" aria-label="Dein Lernfortschritt">
@@ -6400,7 +6728,7 @@ function renderLesson(teil = "text") {
 
   const lesson = resolveLessonContent(lessons[currentStep], languageLevel);
   const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
-  const modeLabel = currentMode === "short" ? "Lernen" : "Mehr dazu";
+  const modeLabel = currentMode === "short" ? "Lernen" : currentMode === "extra" ? "Mehr dazu" : "Nachlesen";
   const hasPractice = Boolean(lesson.practice);
   const hatBeispiele = lessonHasExamples(topic, lessons[currentStep], lessons);
   lernTeil = teil === "beispiele" && hatBeispiele ? "beispiele" : "text";
@@ -7034,7 +7362,7 @@ function renderKetteSchritt() {
            unmittelbar darunter. */""}
       ${ketteSituationHtml(ketteId)}
       ${blockRead(vorlese)}
-      <button type="button" class="kette-done" onclick="ketteWeiter()">${letzter ? "Gemacht – fertig" : "Gemacht"}</button>
+      <button type="button" class="kette-done" data-leiste="haupt" onclick="ketteWeiter()">${letzter ? "Gemacht – fertig" : "Gemacht"}</button>
       ${hilfe}
       ${/* Unter der Hauptaktion, damit „Gemacht“ oben bleibt (§3 CLT). */""}
       ${ketteRueckfallHtml(k)}
@@ -7113,7 +7441,7 @@ function renderKetteKurz() {
       <ol class="kette-kurz-liste">${zeilen}</ol>
       ${ketteRueckfallHtml(k)}
       ${blockRead(k.titel + ". " + vorlese + (k.rueckfall ? " " + ketteText(k.rueckfall) : ""))}
-      <button type="button" class="kette-done" onclick="ketteWeiterKurz()">Gemacht</button>
+      <button type="button" class="kette-done" data-leiste="haupt" onclick="ketteWeiterKurz()">Gemacht</button>
     </article>
     <div class="kette-fuss">
       <button type="button" class="plain-back-button" onclick="ketteAusfuehrlichWaehlen()">Lieber einzeln durchgehen</button>
@@ -7473,6 +7801,15 @@ function renderPracticeFeedbackPage(index, correctIndex, wieder) {
      wie die Regel darunter, steht er nur einmal da – als Regel. */
   const wichtigDoppelt = !!regelHinweis && gleicherSatz(merksatzAnzeige(practice), regelSatzZu(practice.remember));
   const merk = wieder ? wieder.merk : aufgabeMerken(topic.id, practice, ok);
+  /* Nur die tatsächliche Kernantwort dieser Sitzung erlaubt, eine wortgleiche
+     Aufgabe im Zusatzweg auszulassen. Eine bloße Themen-Gutschrift reicht
+     nicht; unmittelbar nach gezeigter Lösung bleibt die Wiederholung nötig. */
+  if (!wieder && currentMode === "short") {
+    const key = topic.id + "\u0000" + aufgabeSchluessel(practice);
+    if (ok && !merk.korrektur) kernUebungenErkannt.add(key);
+    else kernUebungenErkannt.delete(key);
+    delete topic._zusatzWeg; delete topic._schlussZusatz;
+  }
   if (!ok && !wieder) versuchZaehlen(practice);
 
   setProgressVisible(false);
@@ -7587,7 +7924,7 @@ function renderPracticePage(wieder) {
     /* Gleiche Leiste wie auf dem Lernschritt (B2): sichtbar, „Weiter" aus. */
     setBottomNavVisible(true);
     const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
-    const modeLabel = currentMode === "short" ? "Lernen" : "Mehr dazu";
+    const modeLabel = currentMode === "short" ? "Lernen" : currentMode === "extra" ? "Mehr dazu" : "Nachlesen";
     setHeader(topic.title, modeLabel, `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
     setOrientation(`Du übst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
     showNav(true, false, currentStep === lessons.length - 1 ? weiterTextAmEnde(topic) : "Weiter");
@@ -7875,8 +8212,37 @@ function renderNeueSituation(topic, index, wieder) {
   setHeader(topic.title, "Neue Situation", "Neue Situation", "Fast fertig", 95);
   setOrientation(`Du bist fast fertig mit dem Thema: ${topic.title}. Jetzt kommt eine neue Situation.`);
   const bildschirm = buildScenarioScreen({ typ: "formular", kanal: ketteText(ns.kanal) || "Übung", szenen: [{ inhalt: stufenWert(ns.inhalt || []) }] }, 0);
+  /* Neue Anwendungen trennen Situation, Entscheidung und Rückmeldung.
+     Der Kontext bleibt in der Hilfe nachlesbar; niemand muss ihn aus dem
+     Gedächtnis ergänzen. Die bestehenden Datenschutz-/Hilfeformate bleiben. */
+  const situationTeil = ns.segmentiert && i === 0 && (!wieder || wieder.teil === "situation");
+  if (situationTeil) {
+    content.innerHTML = `
+      ${lernRahmenLeiste()}
+      <article class="card scenario-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+        <h2>${LERNWEG_TEXT.neueSituation}</h2>
+        ${ns.einstieg ? `<p>${escapeHtml(ketteText(ns.einstieg))}</p>` : ""}
+        ${bildschirm}
+        <button type="button" class="primary-action" data-leiste="haupt" onclick="renderNeueSituation(getTopicById('${escapeHtml(topic.id)}'), 0, { teil: 'frage' })">Weiter</button>
+      </article>`;
+    const mode = currentMode;
+    stelleMerken(() => { currentMode = mode; renderNeueSituation(topic, 0, { teil: "situation" }); });
+    pauseStelleMerken({ art: "neu", topicId: topic.id, index: 0, teil: "situation", wieder: { teil: "situation" } });
+    focusContent();
+    renderLegalFooter();
+    return;
+  }
+  const kontextHilfe = ns.segmentiert
+    ? `<details class="situation-nachlesen"><summary>Situation nochmal ansehen</summary>${ns.einstieg ? `<p>${escapeHtml(ketteText(ns.einstieg))}</p>` : ""}${bildschirm}</details>` : "";
   const reihe = antwortReihenfolge(frage, (frage.answers || []).length, wieder && wieder.reihe);
-  const antworten = reihe.map((a, pos) => `
+  let wahl = wieder && Number.isInteger(wieder.wahl) && wieder.wahl >= 0 && wieder.wahl < frage.answers.length ? wieder.wahl : null;
+  const nehmenHtml = () => Number.isInteger(wahl)
+    ? `<button type="button" class="nehmen-knopf" data-leiste="haupt" onclick="answerNeueSituation(getTopicById('${escapeHtml(topic.id)}'), ${i}, ${wahl}, { reihe: [${reihe.join(',')}] })">Das nehme ich</button>` : "";
+  const antworten = ns.segmentiert ? reihe.map((a, pos) => `
+    <label class="answer-option transfer-answer${wahl === a ? ' ist-markiert' : ''}" data-index="${a}">
+      <input type="radio" name="transferAntwort" value="${a}" ${wahl === a ? 'checked' : ''}>
+      ${answerNumBadge(pos)}${answerPikto(frage.answers[a], frage, a)}<span class="answer-text">${escapeHtml(answerText(frage.answers[a]))}</span>
+    </label>`).join("") : reihe.map((a, pos) => `
     <button type="button" class="answer-option transfer-answer" data-index="${a}">
       ${answerNumBadge(pos)}${answerPikto(frage.answers[a], frage, a)}<span class="answer-text">${escapeHtml(answerText(frage.answers[a]))}</span>
     </button>`).join("");
@@ -7884,20 +8250,37 @@ function renderNeueSituation(topic, index, wieder) {
     ${lernRahmenLeiste()}
     <article class="card scenario-card transfer-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <h2>${LERNWEG_TEXT.neueSituation}</h2>
-      <p class="transfer-intro">${escapeHtml(lernwegText("neueSituationText"))}</p>
-      ${ns.einstieg ? `<p class="vorhersage-situation">${escapeHtml(ketteText(ns.einstieg))}</p>` : ""}
-      ${bildschirm}
+      ${ns.segmentiert ? "" : `<p class="transfer-intro">${escapeHtml(lernwegText("neueSituationText"))}</p>`}
+      ${!ns.segmentiert && ns.einstieg ? `<p class="vorhersage-situation">${escapeHtml(ketteText(ns.einstieg))}</p>` : ""}
+      ${ns.segmentiert ? "" : bildschirm}
+      ${kontextHilfe}
       ${buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten,
         zaehler: LERNWEG_TEXT.frageVon.replace("{i}", i + 1).replace("{n}", liste.length),
         hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
+      ${ns.segmentiert ? `<div id="transferAuswahl">${nehmenHtml()}</div>` : ""}
       <div id="transferFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
     </article>
   `;
-  content.querySelectorAll(".transfer-answer").forEach(btn => {
-    btn.addEventListener("click", () => answerNeueSituation(topic, i, Number(btn.dataset.index), { reihe: reihe }));
-  });
   const mode = currentMode;
-  stelleMerken(() => { currentMode = mode; renderNeueSituation(topic, i, { reihe: reihe }); });
+  const stelleSichern = () => {
+    stelleMerken(() => { currentMode = mode; renderNeueSituation(topic, i, { reihe, teil: "frage", wahl }); });
+    pauseStelleMerken({ art: "neu", topicId: topic.id, index: i, teil: "frage", wieder: { teil: "frage", reihe, wahl } });
+  };
+  if (ns.segmentiert) {
+    content.querySelectorAll('input[name="transferAntwort"]').forEach(input => {
+      input.addEventListener("change", () => {
+        wahl = Number(input.value);
+        content.querySelectorAll(".transfer-answer").forEach(label => label.classList.toggle("ist-markiert", Number(label.dataset.index) === wahl));
+        document.getElementById("transferAuswahl").innerHTML = nehmenHtml();
+        stelleSichern();
+      });
+    });
+  } else {
+    content.querySelectorAll(".transfer-answer").forEach(btn => {
+      btn.addEventListener("click", () => answerNeueSituation(topic, i, Number(btn.dataset.index), { reihe }));
+    });
+  }
+  stelleSichern();
   focusContent();
   renderLegalFooter();
   if (wieder && typeof wieder.antwort === "number") answerNeueSituation(topic, i, wieder.antwort, { reihe: reihe, wieder: true, merk: wieder.merk });
@@ -7907,7 +8290,7 @@ function renderNeueSituation(topic, index, wieder) {
 function answerNeueSituation(topic, i, index, opt) {
   const o = opt || {};
   const ns = neueSituationDaten(topic);
-  const feld = document.getElementById("transferFeedback");
+  let feld = document.getElementById("transferFeedback");
   if (!ns || !feld || !feld.classList.contains("is-hidden")) return;
   const liste = neueSituationFragen(ns);
   const frage = liste[i];
@@ -7932,19 +8315,25 @@ function answerNeueSituation(topic, i, index, opt) {
   const weiter = letzte
     ? `miniCheckDone['${id}'] = true; renderCompletionPage('${id}')`
     : `renderNeueSituation(getTopicById('${id}'), ${i + 1})`;
+  if (ns.segmentiert) {
+    content.innerHTML = `${lernRahmenLeiste()}<article class="card feedback-page" style="${getTopicColorStyle(topic.id)}" data-readable="true"><h2>${richtig ? RUECKMELDUNG.passtTitel : istAuch ? RUECKMELDUNG.auchTitel : RUECKMELDUNG.nochNichtTitel}</h2><div id="transferFeedback" role="status" aria-live="polite"></div></article>`;
+    feld = document.getElementById("transferFeedback");
+  }
   feld.className = "sz-feedback " + (richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
   feld.innerHTML = `
-    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz}</p>
+    ${ns.segmentiert ? "" : `<p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz}</p>`}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
     ${korrekturHinweisHtml(merkN)}
     ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[korrekt]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[korrekt]) : ""}
     ${regel}
     <div class="certificate-actions">
-      ${ok ? "" : `<button type="button" class="nav-button secondary" onclick="renderNeueSituation(getTopicById('${id}'), ${i})">Nochmal versuchen</button>`}
-      <button type="button" class="nav-button primary" onclick="${weiter}">Weiter</button>
+      ${ok ? "" : `<button type="button" class="nav-button ${ns.segmentiert ? "primary" : "secondary"}"${ns.segmentiert ? ' data-leiste="haupt"' : ""} onclick="renderNeueSituation(getTopicById('${id}'), ${i}, { teil: 'frage' })">Nochmal versuchen</button>`}
+      <button type="button" class="nav-button ${ns.segmentiert && !ok ? "secondary" : "primary"}"${ns.segmentiert ? ` data-leiste="${!ok ? "neben" : "haupt"}"` : ""} onclick="${weiter}">Weiter</button>
     </div>`;
   const mode = currentMode;
-  stelleMerken(() => { currentMode = mode; renderNeueSituation(topic, i, { reihe: o.reihe, antwort: index, merk: merkN }); });
+  stelleMerken(() => { currentMode = mode; renderNeueSituation(topic, i, { reihe: o.reihe, antwort: index, merk: merkN, teil: "frage" }); });
+  pauseStelleMerken({ art: "neu", topicId: topic.id, index: i, teil: "rueckmeldung", wieder: { teil: "frage", reihe: o.reihe, antwort: index, merk: merkN } });
+  if (ns.segmentiert) { focusContent(); renderLegalFooter(); }
   const knopf = feld.querySelector(".nav-button.primary");
   if (knopf) knopf.focus();
   if (!o.wieder) sprichEingefuegteRueckmeldung(feld);
@@ -8436,6 +8825,9 @@ function renderNeueSituationFelder(topic, index) {
     miniCheckDone[topic.id] = true;
     return renderCompletionPage(topic.id);
   };
+  const weg = currentMode;
+  stelleMerken(() => { currentTopicId = topic.id; currentMode = weg; renderNeueSituationFelder(topic, i); });
+  pauseStelleMerken({ art: "neu", topicId: topic.id, index: i, teil: "frage" });
   focusContent();
   renderLegalFooter();
 }
@@ -8460,6 +8852,7 @@ function renderBigQuizFelder(q, total) {
   `;
   const i = bigQuizIndex;
   stelleMerken(() => { bigQuizIndex = i; renderBigQuizQuestion(); });
+  pauseStelleMerken({ art: "wiederholen", topicId: q.topicId, index: i, teil: "frage" });
   focusContent();
   renderLegalFooter();
 }
@@ -9136,8 +9529,9 @@ function fuerHeuteAufhoeren() {
   renderLegalFooter();
 }
 
-function renderCompletionPage(topicId, wieder = false) {
+function renderCompletionPage(topicId, wieder = false, teil = 0) {
   stopReading();
+  pauseEnde("neu");
   const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
 
@@ -9168,22 +9562,23 @@ function renderCompletionPage(topicId, wieder = false) {
      er ist ein Einstieg). Die drei sensiblen Themen behalten „Hilfe nochmal
      lesen" sichtbar (Station 5, §3). */
   const istKurz = currentMode === "short";
+  const abschlussTeil = teil === 1 ? 1 : 0;
   const id = escapeHtml(topic.id);
-  setHeader(topic.title, "Fertig", "Abschluss", "Du bist fertig", 100);
-  setOrientation(`Geschafft! Du bist fertig mit dem Thema: ${topic.title}.`);
+  setHeader(topic.title, "Abschluss", "Abschluss", `Teil ${abschlussTeil + 1} von 2`, 100);
+  setOrientation(`Du bist beim Abschluss zum Thema: ${topic.title}. Teil ${abschlussTeil + 1} von 2.`);
   const chip = (label, click) => `<button type="button" class="later-chip" onclick="${click}">${label}</button>`;
   const hatQuiz = getQuizQuestions(topic).length > 0;
   const mehrChips = [
+    istKurz ? chip(`Mehr dazu: ${escapeHtml(topic.title)}`, `startTopicMode('${id}', 'extra')`) : "",
+    chip("Regeln nochmal ansehen", `renderCompletionPage('${id}', true, 0)`),
     hatQuiz ? chip("Quiz machen", istKurz ? `startEinfachQuiz('${id}')` : `startQuiz('${id}')`) : "",
     !istKurz ? chip("Merk-Karte ansehen", `renderMemoryCard('${id}')`) : "",
-    chip("Nochmal von vorne", `startTopicMode('${id}', '${istKurz ? "short" : "full"}')`),
+    chip("Nochmal von vorne", `startTopicMode('${id}', '${currentMode}')`),
+    chip("Alle Lektionen nachlesen", `startTopicMode('${id}', 'full')`),
     !istKurz ? chip("Urkunde ansehen", `renderCertificate('${id}')`) : "",
     chip("Mein Lernweg ansehen", "renderMyPath()"),
-    istKurz ? chip(FUEHRUNG_TEXT.zuDenThemen, "renderMenu()") : ""
+    chip(FUEHRUNG_TEXT.zuDenThemen, "renderMenu()")
   ].join("");
-  const zweiterKnopf = istKurz
-    ? `<button type="button" class="secondary-action" data-leiste="neben" onclick="startTopicMode('${id}', 'full')">Mehr dazu: ${escapeHtml(topic.title)}</button>`
-    : `<button type="button" class="secondary-action" data-leiste="neben" onclick="renderMenu()">${FUEHRUNG_TEXT.zuDenThemen}</button>`;
   const hilfeLink = ["hilfe", "betrug", "ki"].includes(topic.id)
     ? `<button type="button" class="link-action" onclick="openTopicHelpLesson('${id}')">Hilfe nochmal lesen</button>` : "";
   /* Mit Vorhersage (Datenschutz, Paket 2) steht an dieser Stelle der
@@ -9202,16 +9597,24 @@ function renderCompletionPage(topicId, wieder = false) {
   const nochmalLink = schwerZahl
     ? `<button type="button" class="link-action" onclick="startSchwereUeben('${id}')">${LERNWEG_TEXT.nochmalUeben}: ${schwerZahl} ${schwerZahl === 1 ? "Aufgabe" : "Aufgaben"}</button>` : "";
 
-  content.innerHTML = `
+  /* Ein Rückblick und eine Anwendung sind zwei Aufgaben. Die Inhalte
+     bleiben vollständig erhalten, erscheinen aber nacheinander. */
+  content.innerHTML = abschlussTeil === 0 ? `
+    ${lernRahmenLeiste()}
+    <section class="completion-page" data-readable="true">
+      <article class="card completion-card" style="${getTopicColorStyle(topic.id)}">
+        <h2>${RUECKMELDUNG.themaGeschafft}</h2>
+        ${roleFigure("erfolg")}
+        <p class="einfach-done-praise">Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
+        ${buildRegelnAbschluss(topic)}
+        <button type="button" class="primary-action" data-leiste="haupt" onclick="renderCompletionPage('${id}', true, 1)">Weiter</button>
+      </article>
+    </section>
+  ` : `
     ${lernRahmenLeiste()}
     <section class="completion-page${istKurz ? " einfach-completion" : ""}" data-readable="true">
       <article class="card ${istKurz ? "completion-card--einfach" : "completion-card"}" style="${getTopicColorStyle(topic.id)}">
-        <h2 class="einfach-done-title">${RUECKMELDUNG.themaGeschafft}</h2>
-        ${roleFigure("erfolg")}
-        <p class="einfach-done-praise">Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
-
-        ${buildRegelnAbschluss(topic)}
-
+        <h2>Für deinen Alltag</h2>
         ${topic.transfer ? `
         ${stationBadge("handeln")}
         <div class="access-box remember remember-box">
@@ -9220,26 +9623,16 @@ function renderCompletionPage(topicId, wieder = false) {
           ${transferRegelHtml(topic)}
         </div>` : ""}
         ${planLink}
-
         <div class="completion-actions">
           ${nextActionHtml()}
-          ${zweiterKnopf}
-          <button type="button" class="link-action" onclick="fuerHeuteAufhoeren()">Für heute aufhören</button>
-          ${nochmalLink}
+          <button type="button" class="link-action" data-leiste="neben" onclick="fuerHeuteAufhoeren()">Für heute aufhören</button>
           ${hilfeLink}
         </div>
-
-        ${buildProgress(countDoneTopics(), topics.length, { complete: true })}
-
-        ${/* Übersicht (06.10.2026): Das Zusatz-Angebot „Weiterlernen“ steht
-              bei den übrigen Angeboten unter „Mehr zu diesem Thema“. Sichtbar
-              bleiben, was entschieden ist: Regeln, Eine Sache für heute, Plan,
-              Für heute aufhören (D6), Noch einmal üben, Hilfe nochmal lesen
-              bei den drei sensiblen Themen, Fortschritt und Lernstand (§1). */""}
         <details class="later-details">
           <summary class="later-title">${RUECKMELDUNG.mehrZumThema}</summary>
-          <div class="later-row">${mehrChips}</div>
+          <div class="later-row">${mehrChips}${nochmalLink}</div>
           ${weiterlernenLink}
+          ${buildProgress(countDoneTopics(), topics.length, { complete: true })}
         </details>
         ${selbstCheck ? `
         <details class="later-details">
@@ -9249,12 +9642,14 @@ function renderCompletionPage(topicId, wieder = false) {
       </article>
     </section>
   `;
-  if (mitVorhersage) bindVorhersageRueckblick(topic);
-  else bindClosingSelfCheck(topic);
+  if (abschlussTeil === 1) {
+    if (mitVorhersage) bindVorhersageRueckblick(topic);
+    else bindClosingSelfCheck(topic);
+  }
   /* D17: Einstellungen/Sprache kehren zum Abschluss zurück. Wiederanzeige
      zählt den Abschluss nicht erneut und spielt keinen zweiten Erfolgston. */
   const weg = currentMode;
-  stelleMerken(() => { currentTopicId = topic.id; currentMode = weg; renderCompletionPage(topic.id, true); });
+  stelleMerken(() => { currentTopicId = topic.id; currentMode = weg; renderCompletionPage(topic.id, true, abschlussTeil); });
   focusContent();
   renderLegalFooter();
 }
@@ -9266,6 +9661,7 @@ function renderCompletionPage(topicId, wieder = false) {
 function startQuiz(topicId) {
   const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
+  pauseRundeStarten();
   currentTopicId = topic.id;
   currentQuizIndex = 0;
   quizScore = 0;
@@ -9281,6 +9677,7 @@ function startQuiz(topicId) {
 function startEinfachQuiz(topicId) {
   const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
+  pauseRundeStarten();
   currentTopicId = topic.id;
   currentQuizIndex = 0;
   quizScore = 0;
@@ -9381,6 +9778,7 @@ function renderEinfachQuizQuestion(fest) {
   `;
   const lage = { topicId: topic.id, mode: currentMode, index: currentQuizIndex, wrongIndex: wrongIndex, correctFirst: correctFirst };
   stelleMerken(() => { currentTopicId = lage.topicId; currentMode = lage.mode; currentQuizIndex = lage.index; renderEinfachQuizQuestion(lage); });
+  pauseStelleMerken({ art: "kurzquiz", topicId: topic.id, index: currentQuizIndex, teil: "frage", wieder: { fest: lage } });
   focusContent();
   renderLegalFooter();
 }
@@ -9442,6 +9840,7 @@ function renderEinfachQuizFeedback(optionIndex, istPassend, wieder) {
   if (!wieder) announce(isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtAnsage);
   const t = topic.id, mode = currentMode, i = currentQuizIndex;
   stelleMerken(() => { currentTopicId = t; currentMode = mode; currentQuizIndex = i; renderEinfachQuizFeedback(optionIndex, istPassend, { merk: merkK }); });
+  pauseStelleMerken({ art: "kurzquiz", topicId: t, index: i, teil: "rueckmeldung", wieder: { antwort: optionIndex, merk: merkK } });
   focusContent();
   renderLegalFooter();
 }
@@ -9455,7 +9854,8 @@ function renderEinfachQuizResult(wieder = false) {
   stopReading();
   const topic = getCurrentTopic();
   if (!topic) return renderMenu();
-  const total = getEinfachQuizQuestions(topic).length;
+  const total = getEinfachQuizQuestions(topic).length - (pauseTeilrunde && pauseTeilrunde.art === "kurzquiz" ? pauseTeilrunde.ab : 0);
+  pauseEnde("kurzquiz");
 
   if (!wieder) playSound("success");
   setProgressVisible(false);
@@ -9475,6 +9875,7 @@ function renderEinfachQuizResult(wieder = false) {
       ${ergebnisZeilenHtml(quizScore, quizKorrigiert, total)}` : `<h2 class="einfach-done-title">Quiz fertig</h2>
       ${ergebnisRuhigHtml(quizScore, total)}`}
       <p class="einfach-done-praise">${escapeHtml(praise)}</p>
+      ${pauseTeilHinweisHtml("kurzquiz")}
       <div class="einfach-done-actions">
         <button type="button" class="primary-action einfach-done-btn" data-leiste="haupt" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
           Quiz nochmal
@@ -9542,6 +9943,7 @@ function renderQuizQuestion() {
   `;
   const t = topic.id, i = currentQuizIndex;
   stelleMerken(() => { currentTopicId = t; currentQuizIndex = i; renderQuizQuestion(); });
+  pauseStelleMerken({ art: "quiz", topicId: t, index: i, teil: "frage" });
   focusContent();
   renderLegalFooter();
 }
@@ -9623,6 +10025,7 @@ function renderQuizFeedbackPage(index, wieder) {
   if (!wieder) announce(isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtAnsage);
   const t = topic.id, i = currentQuizIndex;
   stelleMerken(() => { currentTopicId = t; currentQuizIndex = i; renderQuizFeedbackPage(index, { merk: merkQ }); });
+  pauseStelleMerken({ art: "quiz", topicId: t, index: i, teil: "rueckmeldung", wieder: { antwort: index, merk: merkQ } });
   focusContent();
   renderLegalFooter();
 }
@@ -9636,10 +10039,12 @@ function renderQuizResult(wieder) {
   stopReading();
   const topic = getCurrentTopic();
   const questions = getQuizQuestions(topic);
-  const total = questions.length || 1;
+  const teilrunde = pauseTeilrunde && pauseTeilrunde.art === "quiz";
+  const total = Math.max(1, questions.length - (teilrunde ? pauseTeilrunde.ab : 0));
+  pauseEnde("quiz");
   const streng = !!topic && wiederholenStreng(topic.id);
   /* Paket T2: nach einem Sprachwechsel nicht noch einmal abschließen. */
-  if (topic && !wieder) markTopicDone(topic.id);
+  if (topic && !wieder && !teilrunde) markTopicDone(topic.id);
   if (!wieder) playSound("success");
 
   setProgressVisible(false);
@@ -9654,6 +10059,7 @@ function renderQuizResult(wieder) {
       <h2>Quiz fertig</h2>
       ${stationBadge("pruefen")}
       ${streng ? ergebnisZeilenHtml(quizScore, quizKorrigiert, total) : ergebnisRuhigHtml(quizScore, total)}
+      ${pauseTeilHinweisHtml("quiz")}
       <p>Wichtig ist: Du hast geübt.</p>
       ${(topic && Array.isArray(topic.helpQuestions) && topic.helpQuestions.length) ? `
       <div class="selfcheck-box">
@@ -9663,8 +10069,8 @@ function renderQuizResult(wieder) {
         </ul>
       </div>` : ""}
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" data-leiste="haupt" onclick="renderCertificate('${escapeHtml(currentTopicId)}', ${quizScore}, ${total}${streng ? ", " + quizKorrigiert : ""})">Urkunde ansehen</button>
-        <button type="button" class="nav-button secondary" onclick="startQuiz('${escapeHtml(currentTopicId)}')">Quiz wiederholen</button>
+        ${!teilrunde ? `<button type="button" class="quiz-link quiz-button" data-leiste="haupt" onclick="renderCertificate('${escapeHtml(currentTopicId)}', ${quizScore}, ${total}${streng ? ", " + quizKorrigiert : ""})">Urkunde ansehen</button>` : ""}
+        <button type="button" class="${teilrunde ? "quiz-link quiz-button" : "nav-button secondary"}"${teilrunde ? ' data-leiste="haupt"' : ""} onclick="startQuiz('${escapeHtml(currentTopicId)}')">Quiz wiederholen</button>
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(currentTopicId)}')">← Zum Thema</button>
       </div>
     </article>
@@ -9786,6 +10192,7 @@ function quizPoolEintrag(q, topic) {
 function startSchwereUeben(topicId) {
   const liste = schwereAufgaben(topicId || null);
   if (!liste.length) return topicId ? renderTopicChoice(topicId) : renderMyPath();
+  pauseRundeStarten();
   bigQuizTitle = LERNWEG_TEXT.nochmalUeben;
   bigQuizQuestions = liste.map(e => quizPoolEintrag(e.frage, getTopicById(e.topicId)));
   bigQuizIndex = 0;
@@ -9850,6 +10257,7 @@ function startBigQuiz() {
     return;
   }
 
+  pauseRundeStarten();
   bigQuizTitle = "Das große Quiz";
   bigQuizQuestions = buildBigQuizPool();
   bigQuizIndex  = 0;
@@ -9888,6 +10296,7 @@ function startRepeatQuiz() {
     renderLegalFooter();
     return;
   }
+  pauseRundeStarten();
   bigQuizTitle = "Wiederholen";
   const rest = buildBigQuizPool(doneTopics, REPEAT_QUIZ_COUNT + schwer.length)
     .filter(q => !schwer.some(x => aufgabeSchluessel(x.quelle || x) === aufgabeSchluessel(q.quelle || q)));
@@ -9939,6 +10348,7 @@ function renderBigQuizQuestion() {
   `;
   const i = bigQuizIndex;
   stelleMerken(() => { bigQuizIndex = i; renderBigQuizQuestion(); });
+  pauseStelleMerken({ art: "wiederholen", topicId: q.topicId, index: i, teil: "frage" });
   focusContent();
   renderLegalFooter();
 }
@@ -10001,6 +10411,7 @@ function renderBigQuizFeedback(selectedIndex, wieder) {
   `;
   const i = bigQuizIndex, merk = merkB;
   stelleMerken(() => { bigQuizIndex = i; renderBigQuizFeedback(selectedIndex, { merk: merk }); });
+  pauseStelleMerken({ art: "wiederholen", topicId: q.topicId, index: i, teil: "rueckmeldung", wieder: { antwort: selectedIndex, merk: merkB } });
   focusContent();
   renderLegalFooter();
 }
@@ -10012,7 +10423,8 @@ function nextBigQuizQuestion() {
 
 function renderBigQuizResult(wieder) {
   stopReading();
-  const total   = bigQuizQuestions.length || 1;
+  const total = Math.max(1, bigQuizQuestions.length - (pauseTeilrunde && pauseTeilrunde.art === "wiederholen" ? pauseTeilrunde.ab : 0));
+  pauseEnde("wiederholen");
   if (!wieder) playSound("success");
 
   setProgressVisible(false);
@@ -10026,9 +10438,10 @@ function renderBigQuizResult(wieder) {
     <article class="card quiz-result-card" data-readable="true">
       <h2>${escapeHtml(bigQuizTitle)} – Fertig!</h2>
       ${bigQuizKorrigiert > 0 ? ergebnisZeilenHtml(bigQuizScore, bigQuizKorrigiert, total) : ergebnisRuhigHtml(bigQuizScore, total)}
+      ${pauseTeilHinweisHtml("wiederholen")}
       <p>Wichtig ist: Du hast geübt.</p>
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="${bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()"}">Noch einmal üben</button>
+        <button type="button" class="quiz-link quiz-button" data-leiste="haupt" onclick="${bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()"}">Noch einmal üben</button>
         <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
       </div>
     </article>

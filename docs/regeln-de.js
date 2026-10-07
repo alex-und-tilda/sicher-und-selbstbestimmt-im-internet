@@ -301,8 +301,6 @@ const REGEL_SAETZE = {
     "Ich zeige nicht alles in meinem Profil.", // facebook
     "Ich prüfe, wer meinen Beitrag sehen kann.", // facebook
     "Ich prüfe meine Einstellungen.", // facebook
-    "Dein Profil: nur Freunde sehen es.", // facebook
-    "Mein Profil sehen nur Freunde.", // facebook
     "Ich schütze meinen Standort.", // instagram, snapchat
     "Ich teile meinen Standort nicht einfach.", // instagram, snapchat, datenschutz
     "Konto auf privat stellen.", // instagram

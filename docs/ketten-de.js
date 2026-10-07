@@ -558,6 +558,20 @@ const KETTEN = {
 
     liste: [
       {
+        tun: "Ich mache ein Bildschirm-Foto vom Beitrag.",
+        pictogram: "pikto-photo",
+        warum: {
+          leicht: "Der Beitrag kann verschwinden. Das Foto zeigt danach noch: Was ist passiert?",
+          einfach: "Ein Beitrag kann verschwinden. Mit einem Bildschirm-Foto kannst du später zeigen, was passiert ist.",
+          standard: "Ein Bildschirmfoto sichert den Beitrag, falls er später gelöscht wird. So kannst du den Vorfall auch danach zeigen."
+        },
+        hilfe: {
+          leicht: "Ist das zu schwer? Hol zuerst Hilfe. Eine vertraute Person kann das Foto für dich machen.",
+          einfach: "Wenn das Sichern gerade zu schwer ist, hol zuerst Hilfe. Eine vertraute Person kann das Bildschirm-Foto für dich machen.",
+          standard: "Ist die Beweissicherung gerade zu belastend, hol zuerst Unterstützung. Eine vertraute Person kann den Beitrag für dich sichern."
+        }
+      },
+      {
         tun: "Du kannst die Person blockieren.",
         pictogram: "pikto-no",
         warum: {

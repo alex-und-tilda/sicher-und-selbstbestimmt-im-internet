@@ -683,6 +683,10 @@ body.lesson-view .lesson-card > * + * { margin-top: 18px; }
 }
 .feedback-explanation p { font-size: var(--fs-text); line-height: 1.6; }
 
+/* Die passende Antwort steht auch auf der warmen Rückmeldungsfläche.
+   Das dunklere Grün erreicht dort den erforderlichen Textkontrast. */
+.feedback-passend h3 { color: var(--good-text); }
+
 /* 4. „Zurück“ zurückhaltend: erreichbar und groß genug zum Tippen, aber
    ohne Rahmen. Der nächste Schritt ist der einzige gefüllte Knopf. */
 body.lesson-view .nav { gap: 8px; }
@@ -940,6 +944,16 @@ body.lesson-view .lesson-card .lesson-heading {
   min-width: 0;
 }
 .lesson-heading h2 { min-width: 0; overflow-wrap: anywhere; }
+/* Auch Überschriften ohne Szenenbild und Modulnamen dürfen bei 320 px und
+   großer Schrift umbrechen. Der vollständige Text bleibt sichtbar. */
+body.lesson-view .card :is(h2, h3),
+body.lesson-view .module-cluster-name {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+body.lesson-view .module-cluster-badge { flex-wrap: wrap; }
 body.lesson-view .lesson-card .lesson-heading .lesson-scene--small {
   display: block;
   flex: 0 0 clamp(3rem, 22vw, 5rem);
@@ -1099,10 +1113,10 @@ body.lesson-view #content > :is(.completion-page, .completion-card--einfach, .qu
 body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) .abschluss-regeln .regel-liste {
   grid-template-columns: minmax(0, 1fr);
 }
-body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) .abschluss-regeln :is(.regel-platz, .regel-platz-text) {
+body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) :is(.abschluss-regeln, .transfer-regel) :is(.regel-platz, .regel-platz-text) {
   min-width: 0;
 }
-body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) .abschluss-regeln .regel-platz-text {
+body.lesson-view #content > .completion-page:has([data-leiste="haupt"]) :is(.abschluss-regeln, .transfer-regel) .regel-platz-text {
   overflow-wrap: anywhere;
   hyphens: auto;
 }
