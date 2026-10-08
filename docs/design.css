@@ -1551,3 +1551,39 @@ body .reading-button > .app-pictogram {
 .einstieg-option { min-width: 0; }
 body:has(.einstieg-start) .orient-text,
 body:has(.einstieg-start) .tab-item { min-width: 0; overflow-wrap: anywhere; }
+
+/* Lernen starten: dasselbe freigegebene Piktogramm wie bei der Bedienung. */
+.topic-start-button:has(> .app-pictogram),
+.intro-start-button:has(> .app-pictogram) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: .7rem 1rem;
+}
+.topic-start-button > .app-pictogram,
+.intro-start-button > .app-pictogram { flex: 0 0 2rem; }
+.topic-start-button > span,
+.intro-start-button:has(> .app-pictogram) > span { min-width: 0; overflow-wrap: anywhere; }
+
+/* Themenstart bei großer Schrift: Text statt Inhalt rechts abschneiden. */
+.topic-choice .support-help-text { min-width: 0; overflow-wrap: anywhere; }
+.topic-choice .companion-badge { overflow-wrap: anywhere; }
+.topic-choice .utility-bar { max-width: 100%; flex-wrap: wrap; }
+.topic-choice .utility-chip,
+.topic-choice .utility-chip > span { min-width: 0; overflow-wrap: anywhere; }
+.tab-item { min-width: 0; overflow-wrap: anywhere; }
+
+/* Reicht der Textbereich neben dem Piktogramm nicht, steht das Zeichen
+   darüber. Die rem-Grenze reagiert auch auf große Schrift: kein fester
+   Einzug von 72px mehr, wenn der Satz die volle Breite braucht (I9). */
+.lesson-card .ls-text-block { container: lerntext / inline-size; }
+@container lerntext (max-width: 18rem) {
+  .ls-text-row { flex-direction: column; align-items: flex-start; }
+  .ls-text-row p { flex: none; width: 100%; }
+  /* Erst die volle Zeile nutzen. Keine zusätzliche Silbentrennung:
+     Nur ein Wort, das selbst in die ganze Zeile nicht passt, darf umbrechen. */
+  .ls-text-block p { hyphens: manual; -webkit-hyphens: manual; overflow-wrap: anywhere; }
+  .ls-text-block:has(> .ls-text-row > .ls-sentence-pikto) > p,
+  .ls-text-block:has(> .ls-text-row > .ls-sentence-pikto) > .ls-text-row:not(:has(> .ls-sentence-pikto)) > p { padding-left: 0; }
+}

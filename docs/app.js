@@ -190,7 +190,7 @@ function resolveSelfAssessment(topic, level) {
       : level === "einfach"
         ? topic.saVersions.einfach
         : null;
-    if (v && Array.isArray(v.options) && v.options.length) return v;
+    if (v && Array.isArray(v.options) && v.options.length) return Object.assign({}, topic.selfAssessment, v);
   }
   return topic.selfAssessment;
 }
@@ -2330,12 +2330,417 @@ function buildUtilityBar() {
    untereinander (90 px + 58 px). Sie gehoeren beide zur Bedienung, nicht zum
    Inhalt – deshalb jetzt EINE Zeile. Auf allen Seiten gleich, damit die
    Bedienung vorhersehbar bleibt (§3 Emotionale Sicherheit). */
+/* BEGIN KERN-SATZ-PIKTOGRAMME-2026-10-08 */
+/* Konkrete Begriffe der 36 Kernlektionen, in drei Sprachstufen.
+   Exakte vorhandene Texte statt Raten aus Wortteilen oder Satzpositionen.
+   Bei geändertem Text wird kein möglicherweise unpassendes Bild eingesetzt.
+   Wortlaut, Reihenfolge und Bibliotheksdateien bleiben unverändert. */
+const KERN_SATZ_PIKTOGRAMME = {
+  "datenschutz": {
+    "Deine Daten": [
+      {
+        "piktogramm": "data",
+        "saetze": {
+          "leicht": "Deine Daten sagen etwas über dich.",
+          "einfach": "Deine Daten sind Angaben, die etwas über dich verraten.",
+          "standard": "Zu deinen Daten gehört alles, was etwas über dich aussagt – etwa dein Name, deine Adresse, deine Fotos und dein Standort. Besonders schützenswert sind Gesundheits- und Bankdaten. Dein Passwort ist geheim. Wer deine Daten bekommt, entscheidest du selbst."
+        }
+      }
+    ],
+    "Nötig oder nicht?": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Du prüfst: Wofür sind die Daten? Und welche Daten passen dazu?",
+          "einfach": "Du prüfst, wofür die Daten gebraucht werden und welche Angaben dazu passen.",
+          "standard": "Will eine App oder ein Formular Daten von dir, prüfst du: Wofür werden sie gebraucht, und ist das nötig? Außerdem gibt es Pflichtfelder und freiwillige Felder – freiwillige darfst du leer lassen. Bist du unsicher, gib noch nichts ein und hol dir Unterstützung."
+        }
+      }
+    ],
+    "Wer sieht es?": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Du teilst etwas. Zum Beispiel ein Foto. Oder dein Profil.",
+          "einfach": "Du teilst etwas mit anderen, zum Beispiel ein Foto oder dein Profil.",
+          "standard": "Wenn du etwas teilst, etwa ein Foto oder dein Profil, prüfe, wer es sehen kann: alle oder nur deine Freunde? Das lässt sich oft einstellen und später ändern. Ein verschicktes Foto kannst du aber oft nicht zurückholen – deshalb prüfst du vorher. Sind andere Menschen auf dem Foto, fragst du sie vorher."
+        }
+      }
+    ]
+  },
+  "whatsapp": {
+    "Unbekannte Nachrichten": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Du bekommst eine Nachricht.",
+          "einfach": "Manchmal bekommst du eine Nachricht von einer Person, die du nicht kennst.",
+          "standard": "Bekommst du eine Nachricht von jemandem, den du nicht kennst, antwortest du nicht sofort – auch wenn sie freundlich klingt. Zeig sie zuerst einer Person, der du vertraust. Gemeinsam entscheidet ihr, wie es weitergeht."
+        }
+      }
+    ],
+    "Links in Nachrichten": [
+      {
+        "piktogramm": "link",
+        "saetze": {
+          "leicht": "Du bekommst einen Link.",
+          "einfach": "Ein Link ist eine Adresse zu einer Internet-Seite. Meistens ist er blau.",
+          "standard": "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht an, sondern frag eine Person, der du vertraust."
+        }
+      }
+    ],
+    "Dein WhatsApp-Code": [
+      {
+        "piktogramm": "code",
+        "saetze": {
+          "leicht": "WhatsApp schickt dir manchmal einen Code.",
+          "einfach": "Manchmal schickt dir WhatsApp einen Code per SMS.",
+          "standard": "WhatsApp schickt dir manchmal einen Bestätigungscode per SMS. Diesen Code gibst du niemals weiter – auch nicht an Freunde. Wer ihn hat, kann damit dein Konto übernehmen."
+        }
+      }
+    ]
+  },
+  "facebook": {
+    "Dein Facebook-Profil": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Dein Name und dein Profil-Bild sind öffentlich.",
+          "einfach": "Dein Name, dein aktuelles Profil-Bild und dein Titel-Bild sind öffentlich. Das Titel-Bild ist das große Bild oben im Profil.",
+          "standard": "Dein Name, dein aktuelles Profilbild und dein Titelbild sind öffentlich sichtbar. Für Beiträge und weitere Profilangaben kannst du die Sichtbarkeit einzeln wählen. Bei neuen Beiträgen kannst du zum Beispiel Freunde auswählen. Eine vertraute Person kann dir dabei helfen."
+        }
+      }
+    ],
+    "Unbekannte Personen": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Manchmal fragt eine unbekannte Person.",
+          "einfach": "Manchmal schickt dir eine unbekannte Person eine Freundschafts-Anfrage.",
+          "standard": "Manchmal schickt dir jemand eine Freundschaftsanfrage, den du nicht kennst. Solche Anfragen nimmst du nicht an. Bist du unsicher, fragst du eine Person, der du vertraust."
+        }
+      }
+    ],
+    "Komische Nachrichten": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Du bekommst eine komische Nachricht.",
+          "einfach": "Manchmal bekommst du eine komische Nachricht, zum Beispiel mit einer Frage nach Geld oder mit einem Link.",
+          "standard": "Seltsame Nachrichten, in denen jemand nach Geld fragt oder einen Link schickt, sind oft Betrug. Tippe nichts an und zeig die Nachricht einer Person, der du vertraust."
+        }
+      }
+    ]
+  },
+  "instagram": {
+    "Deine Fotos auf Instagram": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Du postest Fotos auf Instagram.",
+          "einfach": "Wenn du Fotos auf Instagram postest, können andere Menschen sie sehen.",
+          "standard": "Fotos, die du auf Instagram postest, sind für andere sichtbar. Stellst du dein Konto auf privat, sehen nur noch die Menschen deine Fotos, die du selbst bestätigt hast."
+        }
+      }
+    ],
+    "Fotos von anderen Personen": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Auf dem Foto ist eine andere Person.",
+          "einfach": "Du willst ein Foto posten, auf dem eine andere Person zu sehen ist.",
+          "standard": "Ist auf einem Foto eine andere Person zu sehen, fragst du sie vor dem Posten um Erlaubnis. Nur wenn sie zustimmt, stellst du das Foto online – jeder Mensch hat ein Recht am eigenen Bild."
+        }
+      }
+    ],
+    "Nachrichten von Unbekannten": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Jemand schreibt dir eine Nachricht.",
+          "einfach": "Manchmal schreibt dir eine Person, die du nicht kennst.",
+          "standard": "Schreibt dir jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht stattdessen einer Person, der du vertraust – sie hilft dir, die Nachricht richtig einzuschätzen."
+        }
+      }
+    ]
+  },
+  "youtube": {
+    "Videos prüfen": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Du schaust Videos auf YouTube.",
+          "einfach": "Manche Videos auf YouTube erzählen Dinge, die nicht stimmen.",
+          "standard": "Nicht jedes Video auf YouTube erzählt die Wahrheit. Frag dich deshalb, ob stimmt, was du siehst: Vergleiche mit anderen Kanälen oder sprich mit einer Person, der du vertraust."
+        }
+      }
+    ],
+    "Werbung erkennen": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Werbung will: Du sollst etwas kaufen.",
+          "einfach": "In vielen Videos kommt Werbung. Die Werbung will, dass du etwas kaufst.",
+          "standard": "In vielen Videos läuft Werbung, die dich zum Kaufen bringen soll. Du musst nichts kaufen: Überspring die Werbung, wenn das geht, und tippe sie nicht an."
+        }
+      }
+    ],
+    "Pausen machen": [
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "leicht": "Du machst nach einer Stunde Pause.",
+          "einfach": "Mach deshalb nach einer Stunde eine Pause.",
+          "standard": "Lange Videos am Stück sind anstrengend. Mach spätestens nach einer Stunde eine Pause – geh an die frische Luft oder beweg dich. Das tut Körper und Kopf gut."
+        }
+      }
+    ]
+  },
+  "snapchat": {
+    "Bilder verschwinden nicht wirklich": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Du sendest ein Bild auf Snapchat.",
+          "einfach": "Auf Snapchat verschwindet ein Bild nach kurzer Zeit wieder.",
+          "standard": "Auf Snapchat verschwinden Bilder nach kurzer Zeit – aber nur scheinbar. Andere können sie vorher mit einem Screenshot speichern, und dann bleiben sie dauerhaft erhalten. Schick deshalb nur Bilder, die jeder sehen darf."
+        }
+      }
+    ],
+    "Dein Standort": [
+      {
+        "piktogramm": "location",
+        "saetze": {
+          "leicht": "Snapchat kann deinen Standort zeigen.",
+          "einfach": "Snapchat kann anderen zeigen, wo du gerade bist. Das nennt man Standort.",
+          "standard": "Snapchat kann deinen Standort auf einer Karte anzeigen – dann sehen andere, wo du gerade bist. Das kann gefährlich werden. Schalte die Standort-Freigabe deshalb aus; eine Person, der du vertraust, kann dir dabei helfen."
+        }
+      }
+    ],
+    "Niemand darf dich zwingen": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Die Person sagt: Schick mir ein Bild!",
+          "einfach": "Manchmal macht dir jemand Druck und will ein Bild von dir.",
+          "standard": "Setzt dich jemand unter Druck, ein Bild von dir zu schicken, musst du das nicht tun. Du darfst jederzeit Nein sagen. Erzähl einer Person, der du vertraust, davon – du bist damit nicht allein."
+        }
+      }
+    ]
+  },
+  "tiktok": {
+    "Was du bei TikTok siehst": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "TikTok zeigt dir viele Videos.",
+          "einfach": "TikTok zeigt dir sehr viele Videos. Dabei merkt sich die App, was dir gefällt.",
+          "standard": "TikTok merkt sich, welche Videos dir gefallen, und zeigt dir immer mehr davon. So entsteht schnell ein einseitiges Bild. Schau deshalb bewusst auch andere Kanäle und Meinungen an. Manche Videos zeigen gefährliche Trends oder Mutproben – mitmachen musst du nicht, auch wenn es alle tun."
+        }
+      }
+    ],
+    "Nachrichten auf TikTok": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Jemand schreibt dir eine Nachricht.",
+          "einfach": "Manchmal schreibt dir auf TikTok eine Person, die du nicht kennst.",
+          "standard": "Schreibt dir auf TikTok jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht einer Person, der du vertraust – gemeinsam entscheidet ihr, was zu tun ist."
+        }
+      }
+    ],
+    "Pause machen": [
+      {
+        "piktogramm": "clock",
+        "saetze": {
+          "leicht": "Du stellst einen Timer.",
+          "einfach": "Stell dir deshalb einen Timer, zum Beispiel auf eine Stunde.",
+          "standard": "TikTok ist darauf ausgelegt, dich möglichst lange in der App zu halten. Stell dir deshalb einen Timer, etwa auf eine Stunde, und mach eine Pause, sobald er klingelt."
+        }
+      }
+    ]
+  },
+  "hilfe": {
+    "Was ist los?": [
+      {
+        "piktogramm": "handy",
+        "saetze": {
+          "leicht": "Etwas klappt nicht. Zum Beispiel: Dein Handy macht keinen Ton.",
+          "einfach": "Manchmal klappt etwas nicht. Zum Beispiel macht dein Handy keinen Ton.",
+          "standard": "Vielleicht funktioniert etwas nicht – dein Handy bleibt zum Beispiel stumm."
+        }
+      }
+    ],
+    "Was kann ich selbst tun?": [
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "leicht": "Etwas klappt nicht? Dann probierst du es noch einmal. Oder du siehst in den Einstellungen nach.",
+          "einfach": "Wenn etwas nicht klappt, probierst du es noch einmal oder siehst in den Einstellungen nach.",
+          "standard": "Etwas klappt nicht? Versuch es noch einmal oder sieh in den Einstellungen nach."
+        }
+      }
+    ],
+    "Welche Hilfe passt?": [
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "leicht": "Druck oder Angst? Dann sprichst du mit einer Person. Du vertraust ihr. Du zeigst ihr das Problem.",
+          "einfach": "Bei Druck oder Angst sprichst du mit einer Person, der du vertraust, und zeigst ihr das Problem.",
+          "standard": "Bei Druck oder Angst sprichst du mit einer Person, der du vertraust, und zeigst ihr das Problem."
+        }
+      }
+    ]
+  },
+  "ki": {
+    "Was ist KI?": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "KI bedeutet Künstliche Intelligenz.",
+          "einfach": "KI ist die Abkürzung für Künstliche Intelligenz.",
+          "standard": "KI steht für Künstliche Intelligenz. Gemeint sind Computerprogramme, die Fragen beantworten, Texte schreiben oder Bilder erzeugen können. Auch wenn sie dabei menschlich wirken: Eine KI ist kein Mensch, sondern ein Programm."
+        }
+      }
+    ],
+    "Was kann KI?": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Du prüfst die Antwort.",
+          "einfach": "Deshalb prüfst du die Antwort, bevor du ihr glaubst.",
+          "standard": "KI kann dir helfen: Du stellst eine Frage und bekommst schnell eine Antwort. Diese Antworten klingen oft sicher, sind aber nicht immer richtig. Prüf deshalb wichtige Antworten, bevor du dich darauf verlässt."
+        }
+      }
+    ],
+    "Wann musst du aufpassen?": [
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "leicht": "Du rufst die Person selbst an.",
+          "einfach": "Will eine bekannte Stimme am Telefon Geld, legst du auf und rufst die Person unter ihrer bekannten Nummer selbst an.",
+          "standard": "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst, und frag im Zweifel eine Person, der du vertraust."
+        }
+      }
+    ]
+  },
+  "fakes": {
+    "Was ist eine Fake-Nachricht?": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Manchmal ist sie auch ein Bild.",
+          "einfach": "Manchmal ist die Fake-Nachricht auch ein Bild, das jemand verändert hat.",
+          "standard": "Eine Fake-Nachricht ist eine Falschmeldung, die wie eine echte Nachricht aussieht. Manchmal ist es auch ein Bild, das jemand bearbeitet hat, damit es etwas Falsches zeigt."
+        }
+      }
+    ],
+    "Wie erkennst du Fakes?": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Du prüfst auf einer anderen Seite.",
+          "einfach": "Prüf die Nachricht auf einer anderen Seite oder frag eine Person, der du vertraust.",
+          "standard": "Macht dich eine Nachricht sehr aufgeregt oder wütend, ist Vorsicht angebracht – genau darauf zielen viele Fakes ab. Halte kurz inne und prüf die Meldung auf einer anderen, verlässlichen Seite oder frag eine Person, der du vertraust."
+        }
+      }
+    ],
+    "Was tust du bei Fakes?": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Du erkennst eine Fake-Nachricht.",
+          "einfach": "Wenn du eine Fake-Nachricht erkennst, schickst du sie nicht weiter.",
+          "standard": "Hast du eine Fake-Nachricht erkannt, leitest du sie nicht weiter – so stoppst du ihre Verbreitung. Lösch sie und erzähl einer Person, der du vertraust, davon."
+        }
+      }
+    ]
+  },
+  "betrug": {
+    "Was ist Betrug im Internet?": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Aber sie wollen dein Geld.",
+          "einfach": "In Wirklichkeit wollen sie aber dein Geld oder deine Daten. Das ist Betrug.",
+          "standard": "Im Internet geben sich manche Menschen hilfsbereit oder freundlich, wollen aber in Wahrheit an dein Geld oder deine Daten. Genau das ist Betrug."
+        }
+      }
+    ],
+    "Wie erkennst du Betrug?": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Jemand braucht dringend Geld.",
+          "einfach": "Es gibt typische Zeichen für Betrug: Du gewinnst plötzlich etwas, jemand braucht dringend Geld, oder jemand will sofort eine Antwort.",
+          "standard": "Typische Warnzeichen für Betrug sind überraschende Gewinne, dringende Bitten um Geld und Zeitdruck. Siehst du so ein Zeichen, machst du Stopp und fragst eine Person, der du vertraust."
+        }
+      }
+    ],
+    "Was tust du bei Betrug?": [
+      {
+        "piktogramm": "bank",
+        "saetze": {
+          "leicht": "Dann öffnest du die Bank-App selbst.",
+          "einfach": "Sagt eine Nachricht, mit deinem Bank-Konto stimmt etwas nicht, tippst du nicht auf den Link. Du öffnest deine Bank-App selbst.",
+          "standard": "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Meldet eine Nachricht ein Problem mit deinem Konto, öffne die Bank-App selbst, statt dem Link zu folgen. Erzähl einer Person, der du vertraust, davon – gemeinsam findet ihr den nächsten Schritt."
+        }
+      }
+    ]
+  },
+  "einkaufen": {
+    "Einkaufen im Internet": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Du kannst im Internet einkaufen.",
+          "einfach": "Im Internet kannst du einkaufen. Das nennt man Online-Shopping.",
+          "standard": "Online-Shopping heißt: Du suchst im Internet etwas aus, bezahlst es und bekommst die Ware nach Hause geliefert. Das ist bequem – wichtig ist aber, dass du nur in sicheren Shops einkaufst."
+        }
+      }
+    ],
+    "Gute Shops erkennen": [
+      {
+        "piktogramm": "lock",
+        "saetze": {
+          "leicht": "Auch falsche Shops haben ein Schloss in der Adress-Zeile.",
+          "einfach": "Das Schloss in der Adress-Zeile allein ist kein gutes Zeichen, weil auch falsche Shops es haben.",
+          "standard": "Seriöse Shops nennen im Impressum ihren Namen und ihre Anschrift, und ihre Preise sind realistisch statt verdächtig niedrig. Das Schloss-Symbol in der Adresszeile reicht allein nicht: Es zeigt nur eine verschlüsselte Verbindung, und auch Fake-Shops haben es. Bist du unsicher, frag eine Person, der du vertraust."
+        }
+      }
+    ],
+    "Sicher bezahlen": [
+      {
+        "piktogramm": "card",
+        "saetze": {
+          "leicht": "Du gibst deine Kreditkarte nicht überall ein.",
+          "einfach": "Deine Kreditkarte gibst du nicht auf jeder Seite ein.",
+          "standard": "Sicherer bezahlst du auf Rechnung – dann zahlst du erst, wenn die Ware da ist – oder über PayPal mit Käuferschutz. Deine Kreditkartendaten gibst du nicht auf jeder Seite ein. Gibt es Probleme, frag eine Person, der du vertraust."
+        }
+      }
+    ]
+  }
+};
+
+function kernSatzPikto(topic, rawLesson, text, gezeigt) {
+  if (!topic || !rawLesson || typeof text !== "string"
+      || !Array.isArray(topic.einfachLessons) || !topic.einfachLessons.includes(rawLesson)) return "";
+  const thema = KERN_SATZ_PIKTOGRAMME[topic.id];
+  const liste = thema && thema[rawLesson.title];
+  const eintrag = liste && liste.find(e => e.saetze[languageLevel] === text);
+  if (!eintrag) return "";
+  const src = pictoSrc(eintrag.piktogramm);
+  if (gezeigt && gezeigt.has(src)) return "";
+  if (gezeigt) gezeigt.add(src);
+  return `<img class="ls-sentence-pikto" src="${src}" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`;
+}
 /* Übersicht (06.10.2026): Satz-Piktogramm einer Lektion. Dasselbe Bild
    steht in einem Textblock nur einmal – beim ersten Satz, zu dem es gehört.
    Vorher stand z. B. im Start-Schritt von Betrug derselbe Brief mit Haken
    dreimal; ein wiederholtes Bild trägt keine neue Information (§3 Kohärenz).
    Die Zuordnung (PICTO_RULES, refinePicto) bleibt unverändert; Sätze ohne
    Bild beginnen an derselben Kante (design.css, „Gleicher linker Textrand“). */
+/* END KERN-SATZ-PIKTOGRAMME-2026-10-08 */
 function satzPiktoBild(item, gezeigt) {
   if (!item || !item.pictogram) return "";
   const src = pictoSrc(refinePicto(item.pictogram, item.text));
@@ -2923,7 +3328,7 @@ function stelleOhneZusatz() {
   }
   if (!topicId || !getTopicById(topicId)) return null;
   const ort = (moduleLabel && moduleLabel.textContent) || "";
-  if (content.querySelector(".sa-card") && getTopicById(topicId).vorhersage) {
+  if (content.querySelector(".sa-card .sa-option-btn") && (getTopicById(topicId).vorhersage || getTopicById(topicId).selfAssessment)) {
     return () => { currentTopicId = topicId; currentMode = mode; renderSelfAssessment(); };
   }
   if (felderAktiv && felderAktiv.ort === "neu" && content.querySelector(".transfer-card .felder-aufgabe")) {
@@ -4490,7 +4895,7 @@ function renderEinstieg(id) {
     content.innerHTML = `${buildEinstiegTools()}<section class="einstieg-folge" data-readable="true">
       <p class="einstieg-gewaehlt">${escapeHtml(option.text)}</p>
       <h2>${escapeHtml(topic.title)}</h2><p>${escapeHtml(hinweise[id])}</p>
-      <button type="button" class="intro-start-button" onclick="startTopicMode('${topic.id}', 'short')">Lernen starten: ${escapeHtml(topic.title)}</button>
+      <button type="button" class="intro-start-button" onclick="startTopicMode('${topic.id}', 'short')">${pictoHtml("start")}<span>Lernen starten: ${escapeHtml(topic.title)}</span></button>
       <button type="button" class="intro-quickstart-link" onclick="renderIntro()">Andere Situation wählen</button>
       <button type="button" class="intro-quickstart-link" onclick="renderMenu()">Zeig mir alle Themen</button>
     </section>`;
@@ -5688,7 +6093,7 @@ function renderTopicChoice(topicId) {
            Wahl sah, bekam die Vorauswahl (Prüfgruppen-Test B-c). */
         return `
           ${ueberarbeitetHinweis}
-          <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">Lernen starten</button>
+          <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">${pictoHtml("start")}<span>Lernen starten</span></button>
           ${spaeterBlock(spaeterTitel(hasQuiz, !!(uebung || training || alltagUebung)), `
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
             ${merkChip}${alltagUebung}${uebung}${training}`)}`;
@@ -6665,12 +7070,13 @@ const START_SCENES = {
   datenschutz: "datenschutz-private-daten", whatsapp: "whatsapp-fremde-nummer", facebook: "facebook-anfragen",
   instagram: "szene-fotos", youtube: "szene-ki-echt", snapchat: "snapchat-private-bilder",
   tiktok: "tiktok-trends", hilfe: "szene-grundwissen", ki: "ki-chatbot",
-  fakes: "fakes-pruefen", betrug: "betrug-tricks", einkaufen: "einkaufen-achtung"
+  fakes: "fakes-pruefen", betrug: "betrug-gewinn", einkaufen: "einkaufen-achtung"
 };
 
 /* Einzelne Lektionen im langen Weg, deren Modul-Szene nicht passt (27.09.2026). */
 const LEKTION_SCENES = {
   datenschutz: {
+    "Deine Daten": "datenschutz-private-daten",
     "Wer will deine Daten?": "datenschutz-private-daten",
     "Fotos prüfen": "szene-fotos", "Standort teilen": "szene-standort",
     "Eine Nachricht will deine Daten": "datenschutz-daten-anfrage"
@@ -6686,6 +7092,7 @@ const LEKTION_SCENES = {
     "Was kann KI?": "ki-antwort-pruefen", "Keine privaten Daten": "datenschutz-private-daten",
     "Gesundheit und Geld": null, "KI kann Bilder und Stimmen fälschen": "fakes-stimmen"
   },
+  einkaufen: { "Einkaufen im Internet": "einkaufen-shop" },
   fakes: { "KI-Bilder erkennen": "fakes-bilder", "Gefälschte Videos: Deepfakes": "szene-ki-echt" },
   betrug: {
     "Der Paket-Trick": "betrug-paket", "Der Hallo-Mama-Trick": "betrug-hallo-mama",
@@ -6785,10 +7192,13 @@ function renderLesson(teil = "text") {
   const textRows = Array.isArray(lesson.text)
     ? lesson.text.map(item => {
         if (typeof item === "object" && item.text) {
-          const img = satzPiktoBild(item, gezeigtePiktos);
+          const img = item.pictogram
+            ? satzPiktoBild(item, gezeigtePiktos)
+            : kernSatzPikto(topic, lessons[currentStep], item.text, gezeigtePiktos);
           return `<div class="ls-text-row">${img}<p>${escapeHtml(item.text)}</p></div>`;
         }
-        return `<p>${escapeHtml(item)}</p>`;
+        const img = kernSatzPikto(topic, lessons[currentStep], item, gezeigtePiktos);
+        return img ? `<div class="ls-text-row">${img}<p>${escapeHtml(item)}</p></div>` : `<p>${escapeHtml(item)}</p>`;
       }).join("")
     : "";
   const text = textRows
