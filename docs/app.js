@@ -4401,8 +4401,10 @@ function buildEinstiegTools() {
   </div>`;
 }
 function buildEinstiegOptionen(optionen) {
+  const bilder = { nachrichten: "message", passwort: "lock", teilen: "photo",
+    aufpassen: "help", offen: "ask", einkaufen: "einkaufen" };
   return `<div class="einstieg-optionen">${optionen.map(o =>
-    `<button type="button" class="einstieg-option" onclick="renderEinstieg('${o.id}')"><span>${escapeHtml(o.text)}</span><span aria-hidden="true">→</span></button>`
+    `<button type="button" class="einstieg-option" onclick="renderEinstieg('${o.id}')">${pictoHtml(bilder[o.id] || "ask", "einstieg-piktogramm")}<span class="einstieg-option-text">${escapeHtml(o.text)}</span><span aria-hidden="true">→</span></button>`
   ).join("")}</div>`;
 }
 function renderIntro() {

@@ -1529,3 +1529,25 @@ body.lesson-view label.answer-option:has(.answer-pikto) { align-items: center; }
 /* „Was ist eine Version?“ unter einer Erklärung */
 .glossar-siehe { display: block; margin-top: 12px; font-size: var(--fs-text); color: var(--accent); }
 .glossar-siehe[hidden] { display: none; }
+
+/* 08.10.2026: gemeinsame Piktogramme auch bei der Situationswahl.
+   Text bleibt sichtbar; das Bild erzeugt keinen zusätzlichen Tab-Halt. */
+.einstieg-option .einstieg-piktogramm { flex: 0 0 2rem; width: 2rem; height: 2rem; }
+.einstieg-option .einstieg-option-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+/* Das blaue Set benötigt auch auf dem blauen aktiven Vorleseknopf eine
+   helle Unterlage. Dieselben Dateien bleiben in allen Zuständen erhalten. */
+body .reading-button .rb-coin,
+body .reading-button.is-active .rb-coin,
+body.lesson-view .lern-leiste .rb-coin,
+body .reading-button > .app-pictogram {
+  background: #fff;
+  border-radius: .35rem;
+  padding: .15rem;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.reading-button .rb-coin .app-pictogram { width: 100%; height: 100%; margin: 0; }
+.einstieg-optionen { grid-template-columns: minmax(0, 1fr); }
+.einstieg-option { min-width: 0; }
+body:has(.einstieg-start) .orient-text,
+body:has(.einstieg-start) .tab-item { min-width: 0; overflow-wrap: anywhere; }
