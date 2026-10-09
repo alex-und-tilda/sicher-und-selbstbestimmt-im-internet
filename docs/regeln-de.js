@@ -91,12 +91,12 @@ const REGELN = [
     muster: /geld|zahl|gewinn|gebühr|bezahl|kauf|euro|vorkasse|rechnung|bestellt|kostenlos|impressum|zurückgeben|abo/i },
 
   { id: "druck",     pikto: "pikto-clock",
-    kurz: "Stress heißt: Stopp.",
-    was:  "Eine Nachricht macht Druck. Zum Beispiel: Nur heute. Dann machst du Stopp. Du antwortest nicht sofort. Du zahlst nicht sofort. Du darfst dir Zeit nehmen.",
-    einfach:  { kurz: "Wenn mich jemand unter Druck setzt, mache ich erst einmal Stopp.",
-                was:  "Eine dringende Nachricht oder ein Countdown soll dich zu einer schnellen Entscheidung bringen. Du darfst unterbrechen und erst prüfen, bevor du antwortest, zahlst oder etwas sendest." },
-    standard: { kurz: "Bei Druck und Eile halte ich an und prüfe in Ruhe.",
-                was:  "Lass dich durch Drängen nicht zu einer unüberlegten Antwort, Zahlung oder Freigabe bewegen. Nimm dir Zeit für die Prüfung und nutze bei Bedarf Unterstützung." },
+    kurz: "Druck oder Angst? Dann mache ich erst Stopp.",
+    was:  "Eine Nachricht drängt dich. Oder sie macht dir Angst. Dann machst du erst Stopp. Du antwortest nicht sofort. Du sendest nichts. Du zahlst nichts. Du bestätigst nichts. Du darfst dir Zeit nehmen.",
+    einfach:  { kurz: "Bei Druck oder Angst mache ich erst Stopp.",
+                was:  "Wenn dich eine Nachricht drängt oder dir Angst macht, nimmst du dir Zeit. Du antwortest, sendest, zahlst oder bestätigst noch nichts. Erst prüfst du in Ruhe, was los ist." },
+    standard: { kurz: "Bei Druck oder Angst halte ich an und prüfe in Ruhe.",
+                was:  "Wenn eine Nachricht dich unter Druck setzt oder dir Angst macht, unterbrichst du erst einmal. Antworte, sende, zahle oder bestätige nichts vorschnell. Prüfe in Ruhe, was los ist, und hol dir bei Bedarf Hilfe." },
     muster: /stress|druck|draeng|dräng|\beile\b|sofort|hetzen|zeit-druck|zeitdruck|langsam|nachdenk|denke.*nach|komisch/i },
 
   { id: "bilder",    pikto: "pikto-photo",
@@ -154,12 +154,12 @@ const REGELN = [
     muster: /pause|aufhör|weglegen|stopp|abbrech|zeit für|genug|darf.*stopp/i },
 
   { id: "hilfe",     pikto: "pikto-help",
-    kurz: "Ich hole mir Hilfe.",
-    was:  "Sprich mit einer vertrauten Person. Erzähle: Das ist passiert. Die Person hilft dir nicht? Dann frag eine andere Person. Du bist nicht allein.",
-    einfach:  { kurz: "Ich hole mir Unterstützung, wenn ich sie brauche.",
-                was:  "Sprich mit einer Person, der du vertraust, oder mit einer Beratungsstelle. Wenn die erste Person nicht helfen kann, darfst du jemand anderen fragen." },
-    standard: { kurz: "Ich hole mir Unterstützung – bei einer vertrauten Person oder einer Beratungsstelle.",
-                was:  "Wende dich bei Unsicherheit oder Problemen an eine vertraute Person oder eine Beratungsstelle. Hilfe ist auch dann möglich, wenn du schon reagiert hast." },
+    kurz: "Ich darf selbst handeln. Ich darf Hilfe holen.",
+    was:  "Du kannst vieles selbst tun. Du darfst dir auch helfen lassen. Frag eine Person. Sie kennt sich damit aus. Oder sprich mit einer Person. Du vertraust ihr. Die erste Person kann nicht helfen? Dann frag eine andere.",
+    einfach:  { kurz: "Ich kann selbst handeln und darf passende Hilfe holen.",
+                was:  "Du kannst selbst etwas ausprobieren oder eine Person um Hilfe bitten. Bei einer Handy-Frage hilft jemand, der sich damit auskennt. Bei Sorgen kannst du mit einer vertrauten Person oder einer Beratungsstelle sprechen. Wenn die erste Person nicht helfen kann, fragst du eine andere." },
+    standard: { kurz: "Ich darf selbst handeln und mir Hilfe holen, die zu meinem Problem passt.",
+                was:  "Du entscheidest, was du sicher selbst versuchen willst und wo du Hilfe brauchst. Bei technischen Fragen passt jemand mit Erfahrung, bei Sorgen eine vertraute Person oder Beratungsstelle. Kann die erste Person nicht helfen, darfst du eine andere fragen. Hilfe ist auch möglich, wenn du schon reagiert hast." },
     muster: /hilfe|hilft|unterstützung|vertrau|jemand|melde|blockier|allein|erzähl|zeige die nachricht|gefühle|sprechen|plan|helfen/i },
 
   /* 13. Regel – Datenminimierung (28.09.2026). `kurz`/`was` sind eine
@@ -301,6 +301,7 @@ const REGEL_SAETZE = {
     "Ich zeige nicht alles in meinem Profil.", // facebook
     "Ich prüfe, wer meinen Beitrag sehen kann.", // facebook
     "Ich prüfe meine Einstellungen.", // facebook
+    "Private Angaben zeige ich nur Freunden.", // facebook (Beta 2: Übung zu privaten Angaben)
     "Ich schütze meinen Standort.", // instagram, snapchat
     "Ich teile meinen Standort nicht einfach.", // instagram, snapchat, datenschutz
     "Konto auf privat stellen.", // instagram
@@ -689,7 +690,11 @@ function pruefeRegelZuordnung() {
   };
   if (typeof topics !== "undefined") {
     topics.forEach(function (x) {
-      (x.memoryRules || []).forEach(function (s) { add(s, x.id); });
+      /* Themenfelder sind Anzeigetexte je Stufe. Die feste Zuordnung
+         prüft ihre Leicht-Basis, genau wie die Gutschrift einer Aufgabe. */
+      const basis = typeof leichtFassung !== "undefined" && leichtFassung.has(x)
+        ? leichtFassung.get(x) : x;
+      (basis.memoryRules || []).forEach(function (s) { add(s, x.id); });
       /* Auch der Kurz-Weg (einfachLessons): dort wird ebenfalls gutgeschrieben. */
       (x.lessons || []).concat(x.einfachLessons || []).forEach(function (l) {
         add(l.remember, x.id);
@@ -714,6 +719,16 @@ function pruefeRegelZuordnung() {
       });
     });
   }
+  /* Die ausgeblendeten Original-Handys bleiben als Archiv erhalten. Ihre
+     festen Merksatz-Schlüssel sind deshalb nicht verwaist. Sie machen eine
+     Regel aber nicht in einem aktiven zweiten Thema verfügbar. */
+  if (typeof UEBUNGSHANDY_ARCHIV !== "undefined") {
+    Object.keys(UEBUNGSHANDY_ARCHIV).forEach(function (id) {
+      (UEBUNGSHANDY_ARCHIV[id].szenen || []).forEach(function (z) {
+        if (z.frage) add(z.frage.remember, "archiv:" + id);
+      });
+    });
+  }
   const proRegel = {};
   REGELN.forEach(function (r) { proRegel[r.id] = { saetze: 0, themen: {} }; });
   const ohne = [];
@@ -725,7 +740,7 @@ function pruefeRegelZuordnung() {
       return;
     }
     proRegel[id].saetze++;
-    Object.keys(saetze[s]).forEach(function (t) { if (t.indexOf("weiterlernen:") !== 0) proRegel[id].themen[t] = true; });
+    Object.keys(saetze[s]).forEach(function (t) { if (t.indexOf("weiterlernen:") !== 0 && t.indexOf("archiv:") !== 0) proRegel[id].themen[t] = true; });
   });
   const schwach = REGELN.filter(function (r) { return Object.keys(proRegel[r.id].themen).length < 2; });
   /* Neue Sätze ohne festen Eintrag (laufen über die Muster) und Einträge,

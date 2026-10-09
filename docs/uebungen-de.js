@@ -106,13 +106,14 @@ const EXTRA_PRACTICE = {
     },
     kurz: {
       "Dein Facebook-Profil": {
-        question: "Wer soll dein Profil sehen?",
+        question: "Wer soll deine privaten Angaben sehen?",
+        schluessel: "Wer soll dein Profil sehen?",
         pictogram: "pikto-people",
         answers: ["Nur meine Freunde.", "Alle Menschen im Internet."],
         correctIndex: 0,
-        feedbackWrong: "Dann sehen auch fremde Menschen deine Bilder und Angaben.",
-        feedbackCorrect: "Gut. Deine Freunde reichen. Aber: Name, Profil-Bild und Titel-Bild sehen immer alle.",
-        remember: "Mein Profil sehen nur Freunde."
+        feedbackWrong: "Dann sehen auch fremde Menschen deine privaten Angaben. Zeige sie nur deinen Freunden.",
+        feedbackCorrect: "Gut. Private Angaben zeigst du nur Freunden. Aber: Deinen Namen, dein aktuelles Profil-Bild und dein Titel-Bild sehen alle.",
+        remember: "Private Angaben zeige ich nur Freunden."
       },
       "Unbekannte Personen": {
         question: "Eine unbekannte Person will dein Freund sein. Was tust du?",

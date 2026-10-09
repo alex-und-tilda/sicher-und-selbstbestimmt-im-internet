@@ -4343,10 +4343,10 @@ const AUFGABEN_VERSIONS = {
           "Ich sage niemandem etwas und mache mir allein Sorgen.",
           "Ich rede mit einer Person, der ich vertraue."
         ],
-        "feedbackCorrect": "Gut. Die Nachricht macht dir Sorgen, und deine Gefühle sind wichtig. Du darfst darüber sprechen. Zusammen überlegt ihr, was du am Montag sagst.",
+        "feedbackCorrect": "Gut. Deine Gefühle sind wichtig, und du darfst darüber sprechen. Eine vertraute Person kann dir zuhören. Zusammen überlegt ihr, was du am Montag fragen möchtest.",
         "feedbackWrong": [
-          "Dann bleibt die Sorge, und das Gespräch kommt später trotzdem. Rede lieber mit einer Person, der du vertraust.",
-          "Allein werden Sorgen oft größer. Du darfst darüber sprechen, deshalb redest du mit einer Person, der du vertraust.",
+          "Du weißt noch nicht, was los war. Eine vertraute Person kann dir jetzt zuhören. Zusammen überlegt ihr, was du am Montag fragen möchtest.",
+          "Du musst mit deinen Sorgen nicht allein bleiben. Wenn du mit einer vertrauten Person sprichst, kann sie dir zuhören. Zusammen überlegt ihr, was du am Montag fragen möchtest.",
           null
         ],
         "remember": "Meine Gefühle sind wichtig, und ich darf darüber sprechen."
@@ -4359,10 +4359,10 @@ const AUFGABEN_VERSIONS = {
           "Ich sage niemandem etwas und mache die Sorgen mit mir allein aus.",
           "Ich rede mit einer Person, der ich vertraue."
         ],
-        "feedbackCorrect": "Gut. Die Nachricht macht dir Sorgen, und deine Gefühle sind wichtig. Du darfst darüber sprechen – gemeinsam überlegt ihr, was du am Montag sagst.",
+        "feedbackCorrect": "Gut. Du darfst über deine Sorgen sprechen. Eine vertraute Person kann dir zuhören und mit dir überlegen, was du am Montag klären möchtest.",
         "feedbackWrong": [
-          "Die Sorge bleibt, und das Gespräch holt dich später trotzdem ein. Rede lieber mit einer Person, der du vertraust.",
-          "Allein werden Sorgen oft größer. Du darfst darüber sprechen – rede mit einer Person, der du vertraust.",
+          "Du weißt noch nicht, worum es geht. Eine vertraute Person kann dir jetzt zuhören und mit dir überlegen, was du am Montag klären möchtest.",
+          "Du musst deine Sorgen nicht allein mit dir ausmachen. Eine vertraute Person kann dir zuhören und mit dir überlegen, was du am Montag klären möchtest.",
           null
         ],
         "remember": "Meine Gefühle sind wichtig. Ich darf darüber sprechen."
@@ -4747,7 +4747,7 @@ const AUFGABEN_VERSIONS = {
         "answers": [
           "Ich frage jemand anderen – vielleicht kennt die Person mein Handy.",
           "Ich gebe auf. Ohne Taschenlampe geht es auch.",
-          "Ich frage meinen Bruder immer wieder, irgendwann weiß er es."
+          "Ich frage meinen Bruder trotzdem immer wieder, irgendwann weiß er es."
         ],
         "feedbackCorrect": "Genau. Dein Bruder kennt dein Handy nicht, also fragst du jemand anderen – zum Beispiel im Handy-Laden oder eine Person mit dem gleichen Handy.",
         "feedbackWrong": [
@@ -5518,12 +5518,12 @@ const AUFGABEN_VERSIONS = {
         "answers": [
           "Private Daten von mir.",
           "Ein freundlicher Gruß an die Gruppe.",
-          "Eine Frage an die Menschen in der Gruppe."
+          "Eine Frage ohne private Angaben an die Gruppe."
         ],
         "feedbackWrong": [
           null,
           "Ein freundlicher Gruß ist in Ordnung, weil du damit nichts Privates zeigst.",
-          "Eine Frage an die Gruppe ist in Ordnung, wenn du darin nichts Privates von dir schreibst."
+          "Eine Frage ohne private Angaben ist in Ordnung, weil du damit nichts Privates von dir zeigst.",
         ],
         "feedbackCorrect": "Das stimmt, denn deine privaten Daten bleiben geschützt."
       },
@@ -5533,12 +5533,12 @@ const AUFGABEN_VERSIONS = {
         "answers": [
           "Meine privaten Daten.",
           "Ein freundlicher Gruß.",
-          "Eine Frage an die Gruppe."
+          "Eine Frage ohne private Angaben."
         ],
         "feedbackWrong": [
           null,
           "Ein Gruß ist in Ordnung. Er verrät nichts Privates.",
-          "Du darfst der Gruppe eine Frage stellen. Achte dabei darauf, nichts Privates von dir zu verraten."
+          "Eine Frage ohne private Angaben ist in Ordnung. Sie verrät nichts Privates von dir.",
         ],
         "feedbackCorrect": "Deine privaten Daten bleiben geschützt."
       }
@@ -10757,24 +10757,24 @@ const AUFGABEN_VERSIONS = {
     },
     "facebook/kurz/Dein Facebook-Profil": {
       "einfach": {
-        "question": "Wer soll die Angaben und Bilder in deinem Profil sehen?",
+        "question": "Wer soll deine privaten Angaben im Profil sehen?",
         "answers": [
           "Nur meine Freunde.",
           "Alle Menschen im Internet."
         ],
-        "feedbackWrong": "Dann sehen auch fremde Menschen deine Bilder und Angaben. Deine Freunde reichen.",
-        "feedbackCorrect": "Gut. Deine Freunde reichen, denn sie kennen dich. Deinen Namen, dein Profil-Bild und dein Titel-Bild sehen aber immer alle.",
-        "remember": "Mein Profil sehen nur meine Freunde."
+        "feedbackWrong": "Dann sehen auch fremde Menschen deine privaten Angaben. Zeige diese Angaben nur deinen Freunden.",
+        "feedbackCorrect": "Gut. Deine privaten Angaben zeigst du nur deinen Freunden. Deinen Namen, dein aktuelles Profil-Bild und dein Titel-Bild sehen aber alle.",
+        "remember": "Meine privaten Angaben zeige ich nur meinen Freunden."
       },
       "standard": {
-        "question": "Wer soll die Angaben und Bilder in deinem Facebook-Profil sehen?",
+        "question": "Wer soll private Angaben in deinem Facebook-Profil sehen?",
         "answers": [
           "Nur meine Freunde.",
           "Alle im Internet."
         ],
-        "feedbackWrong": "Dann können auch Fremde deine Bilder und Angaben sehen. Deine Freunde reichen völlig.",
-        "feedbackCorrect": "Richtig. Deine Freunde reichen – sie kennen dich ja. Name, Profilbild und Titelbild sind bei Facebook allerdings immer öffentlich.",
-        "remember": "Mein Profil ist nur für Freunde sichtbar."
+        "feedbackWrong": "Dann können auch Fremde deine privaten Angaben sehen. Gib diese Angaben nur für Freunde frei.",
+        "feedbackCorrect": "Richtig. Private Angaben gibst du nur für Freunde frei. Name, aktuelles Profilbild und Titelbild bleiben bei Facebook öffentlich.",
+        "remember": "Private Angaben gebe ich nur für Freunde frei."
       }
     },
     "facebook/kurz/Unbekannte Personen": {
@@ -11148,6 +11148,167 @@ const AUFGABEN_VERSIONS = {
    Lernziele (Rückfall), Hilfe-Fragen, Merk-Regeln. Die ersten 5 Merk-Regeln
    sind die Handlungssätze der Kette und bleiben wortgleich (§2). */
 const THEMA_VERSIONS = {
+  /* Beta 2: Themenfelder der übrigen zehn Themen in Einfach und Alltag. */
+  whatsapp: {
+    einfach: {
+      desc: "Nachrichten, Links und Gruppen sicher nutzen und Codes geheim halten",
+      learningGoals: ["Was du bei Nachrichten von fremden Nummern tun kannst", "Warum du deinen WhatsApp-Code nicht weitergibst", "Wie du eine Bitte um Geld zuerst prüfst"],
+      transfer: "Schau heute in deine WhatsApp-Chats und überlege, ob du die Personen wirklich kennst.",
+      helpQuestions: ["Kenne ich die Nummer wirklich?", "Setzt mich die Nachricht unter Druck?", "Habe ich den Link geprüft?", "Will jemand Geld oder einen Code von mir?"],
+      memoryRules: ["Unbekannte Links öffne ich erst nach dem Prüfen.", "Meinen WhatsApp-Code gebe ich niemandem weiter.", "Bei fremden Nummern prüfe ich zuerst, wer schreibt.", "An fremde Nummern schicke ich kein Geld.", "Fotos prüfe ich, bevor ich sie sende.", "Wenn mir etwas Stress macht, mache ich eine Pause."]
+    },
+    standard: {
+      desc: "Mit Nachrichten, Links und Gruppen sicher umgehen und Zugangscodes schützen",
+      learningGoals: ["Nachrichten von unbekannten Nummern prüfen", "Den WhatsApp-Code für dich behalten", "Geldbitten vor einer Zahlung überprüfen"],
+      transfer: "Geh heute deine WhatsApp-Chats durch: Kennst du die Personen hinter den Nummern tatsächlich?",
+      helpQuestions: ["Weiß ich, wer hinter dieser Nummer steckt?", "Drängt mich die Nachricht zu einer schnellen Entscheidung?", "Habe ich den Link vor dem Öffnen geprüft?", "Geht es um Geld oder einen Zugangscode?"],
+      memoryRules: ["Ich öffne unbekannte Links erst, nachdem ich sie geprüft habe.", "Mein WhatsApp-Code bleibt bei mir.", "Bei unbekannten Nummern prüfe ich die Person dahinter.", "Ich überweise kein Geld an unbekannte Nummern.", "Vor dem Senden schaue ich Fotos genau an.", "Bei Stress nehme ich mir eine Pause."]
+    }
+  },
+  facebook: {
+    einfach: {
+      desc: "Prüfen, wer Beiträge und Profilangaben sieht, und Kontakte bewusst auswählen",
+      learningGoals: ["Wie du einstellst, wer einzelne Profilangaben sehen darf", "Was du bei Anfragen von unbekannten Personen tun kannst", "Welche privaten Daten du nicht öffentlich teilst"],
+      transfer: "Prüfe heute bei einem Facebook-Beitrag, wer ihn sehen kann.",
+      helpQuestions: ["Wer kann diesen Beitrag oder diese Angabe sehen?", "Kenne ich die Person wirklich?", "Ist mein Kommentar respektvoll?", "Brauche ich Hilfe dabei?"],
+      memoryRules: ["Ich teile nicht alle Beiträge öffentlich.", "Freundschafts-Anfragen prüfe ich, bevor ich sie annehme.", "Ich schreibe so, dass ich andere respektiere.", "Wenn ich beleidigt werde, darf ich mir Hilfe holen."]
+    },
+    standard: {
+      desc: "Sichtbarkeit von Beiträgen und Profilangaben prüfen und Kontakte bewusst wählen",
+      learningGoals: ["Die Sichtbarkeit einzelner Profilangaben einstellen", "Mit Kontaktanfragen unbekannter Personen umgehen", "Private Angaben vor einer öffentlichen Veröffentlichung schützen"],
+      transfer: "Sieh dir heute bei einem Facebook-Beitrag an, für wen er sichtbar ist.",
+      helpQuestions: ["Für wen ist dieser Beitrag oder diese Angabe sichtbar?", "Weiß ich, wer hinter dem Profil steckt?", "Schreibe ich respektvoll?", "Möchte ich Unterstützung dabei?"],
+      memoryRules: ["Ich veröffentliche nicht jeden Beitrag für alle.", "Ich prüfe eine Kontaktanfrage, bevor ich sie annehme.", "Ich gehe in meinen Kommentaren respektvoll mit anderen um.", "Bei Beleidigungen kann ich Unterstützung holen."]
+    }
+  },
+  instagram: {
+    einfach: {
+      desc: "Fotos vor dem Teilen prüfen und mit Standortangaben und Nachrichten bewusst umgehen",
+      learningGoals: ["Was du vor dem Teilen eines Fotos prüfst", "Warum du deinen Standort nicht allen zeigen musst", "Was gefälschte Profile sind und wie du sie prüfen kannst"],
+      transfer: "Schau heute in den Instagram-Einstellungen nach, ob dein Konto privat ist.",
+      helpQuestions: ["Was ist auf dem Foto auch im Hintergrund zu sehen?", "Zeige ich damit meinen Standort?", "Kenne ich die Person hinter dem Profil?", "Macht mir ein Kommentar Druck oder Angst?"],
+      memoryRules: ["Ich prüfe Fotos, bevor ich sie teile.", "Ich schütze die Angaben zu meinem Standort.", "Fremden Personen schicke ich keine privaten Fotos.", "Bei verletzenden Kommentaren darf ich Hilfe holen."]
+    },
+    standard: {
+      desc: "Fotos, Standortangaben und Nachrichten vor dem Teilen oder Antworten prüfen",
+      learningGoals: ["Fotos vor dem Veröffentlichen prüfen", "Den eigenen Standort bewusst schützen", "Gefälschte Profile erkennen und überprüfen"],
+      transfer: "Sieh heute in deinen Instagram-Einstellungen nach, ob dein Konto auf privat steht.",
+      helpQuestions: ["Welche Informationen zeigt das Foto, auch im Hintergrund?", "Ist mein Standort erkennbar?", "Weiß ich, wer hinter diesem Profil steckt?", "Setzt mich ein Kommentar unter Druck oder macht er mir Angst?"],
+      memoryRules: ["Vor dem Posten prüfe ich den gesamten Bildinhalt.", "Ich schütze Informationen über meinen Standort.", "Ich sende unbekannten Personen keine privaten Fotos.", "Bei verletzenden Kommentaren hole ich mir bei Bedarf Unterstützung."]
+    }
+  },
+  youtube: {
+    einfach: {
+      desc: "Videos und Werbung prüfen und die eigenen Pausen bestimmen",
+      learningGoals: ["Wie du prüfst, ob die Aussage in einem Video stimmt", "Wie du Werbung in Videos erkennst", "Wie du Pausen machst und auf dich achtest"],
+      transfer: "Achte heute bei einem YouTube-Video darauf, ob es Werbung ist oder Werbung enthält.",
+      helpQuestions: ["Ist das Video Werbung oder enthält es Werbung?", "Habe ich geprüft, ob die Aussage stimmt?", "Tut mir das Video gut?", "Möchte ich jetzt eine Pause machen?"],
+      memoryRules: ["Ich glaube eine Aussage nicht sofort.", "Nach einem Video kaufe ich nicht sofort etwas.", "Gefährliche Dinge aus Videos mache ich nicht nach.", "Ich darf ein Video jederzeit stoppen."]
+    },
+    standard: {
+      desc: "Videoaussagen und Werbung prüfen und Pausen selbst bestimmen",
+      learningGoals: ["Aussagen in Videos mit anderen Quellen überprüfen", "Werbung bei YouTube erkennen", "Pausen einlegen und auf das eigene Wohlbefinden achten"],
+      transfer: "Schau heute bei einem YouTube-Video genauer hin: Enthält es Werbung?",
+      helpQuestions: ["Wird hier für etwas geworben?", "Stimmt die Aussage auch nach dem Überprüfen?", "Wie geht es mir mit diesem Video?", "Brauche ich gerade eine Pause?"],
+      memoryRules: ["Ich prüfe Aussagen, bevor ich sie glaube.", "Ich kaufe nach einer Empfehlung im Video nicht vorschnell.", "Gefährliche Aktionen aus Videos mache ich nicht nach.", "Ich entscheide, wann ich ein Video stoppe."]
+    }
+  },
+  snapchat: {
+    einfach: {
+      desc: "Mit Bildern und Standortangaben bewusst umgehen und bei Druck selbst entscheiden",
+      learningGoals: ["Warum andere auch einen verschwundenen Snap gespeichert haben können", "Wie du deinen Standort schützt", "Was du tun kannst, wenn jemand Druck macht"],
+      transfer: "Schau heute in Snapchat nach, wer deinen Standort auf der Karte sehen kann.",
+      helpQuestions: ["Kann die andere Person das Bild speichern?", "Will ich meinen Standort wirklich zeigen?", "Setzt mich jemand unter Druck?", "Kenne ich die Person wirklich?"],
+      memoryRules: ["Andere können Bilder speichern, auch wenn sie später verschwinden.", "Ich schütze die Angaben zu meinem Standort.", "Ich prüfe, wen ich als Kontakt annehme.", "Wenn mir jemand Druck macht, darf ich Nein sagen."]
+    },
+    standard: {
+      desc: "Bilder und Standort bewusst teilen und mit Druck umgehen",
+      learningGoals: ["Verstehen, dass empfangene Snaps gespeichert sein können", "Den eigenen Standort bewusst schützen", "Bei Druck selbst entscheiden und Unterstützung finden"],
+      transfer: "Prüfe heute auf der Snapchat-Karte, für wen dein Standort sichtbar ist.",
+      helpQuestions: ["Kann jemand eine Kopie dieses Bildes behalten?", "Möchte ich meinen Standort teilen?", "Drängt mich jemand zu etwas?", "Weiß ich, mit wem ich Kontakt habe?"],
+      memoryRules: ["Auch vorübergehend sichtbare Bilder lassen sich speichern.", "Ich schütze Informationen über meinen Standort.", "Ich wähle meine Kontakte bewusst aus.", "Auch unter Druck darf ich Nein sagen."]
+    }
+  },
+  tiktok: {
+    einfach: {
+      desc: "Videos und Trends prüfen, private Daten schützen und Pausen machen",
+      learningGoals: ["Warum TikTok dir bestimmte Videos zeigt", "Was du bei Nachrichten und Kontakten prüfst", "Wie du Pausen machst und auf dich achtest"],
+      transfer: "Achte heute darauf, wie lange du TikTok-Videos schaust. Mach danach eine Pause.",
+      helpQuestions: ["Ist es sicher, bei diesem Trend mitzumachen?", "Tut mir das Video gut?", "Will jemand private Daten von mir?", "Möchte ich jetzt eine Pause machen?"],
+      memoryRules: ["Bei gefährlichen Trends mache ich nicht mit.", "Ich nehme mir Pausen vom Schauen.", "Meine privaten Daten schütze ich.", "Ich prüfe ein Video, bevor ich es poste.", "Auch ein Video kann etwas Falsches zeigen."]
+    },
+    standard: {
+      desc: "Mit Videos, Trends und Nachrichten bewusst umgehen und Pausen selbst bestimmen",
+      learningGoals: ["Verstehen, warum TikTok ähnliche Videos empfiehlt", "Nachrichten und Kontakte vor einer Antwort prüfen", "TikTok so nutzen, dass du auf dein Wohlbefinden achtest"],
+      transfer: "Behalte heute im Blick, wie lange du TikTok-Videos anschaust, und leg anschließend eine Pause ein.",
+      helpQuestions: ["Kann ich bei diesem Trend sicher mitmachen?", "Wie geht es mir beim Anschauen?", "Fragt jemand nach persönlichen Angaben?", "Ist jetzt Zeit für meine Pause?"],
+      memoryRules: ["Gefährliche Trends lasse ich aus.", "Ich unterbreche das Schauen für eine Pause.", "Ich gehe mit meinen privaten Daten bewusst um.", "Vor dem Veröffentlichen prüfe ich den Inhalt des Videos.", "Videos sind nicht automatisch echt."]
+    }
+  },
+  ki: {
+    einfach: {
+      desc: "Verstehen, was Künstliche Intelligenz kann, und ihre Antworten prüfen",
+      learningGoals: ["Was Künstliche Intelligenz ist", "Wobei eine KI dich unterstützen kann", "Warum du bei wichtigen KI-Antworten genau prüfst"],
+      transfer: "Nutzt du heute eine KI? Prüfe eine ihrer Antworten mit einer anderen Quelle nach.",
+      helpQuestions: ["Schreibt hier ein Mensch oder ein KI-Programm?", "Habe ich die Antwort geprüft?", "Soll ich private Daten eingeben?", "Geht es um meine Gesundheit oder mein Geld?", "Möchte ich jemanden um Hilfe bitten?"],
+      memoryRules: ["Eine KI ist ein Programm und kein Mensch.", "Auch eine KI kann etwas Falsches schreiben.", "Wichtige Antworten einer KI prüfe ich nach.", "Ich schreibe der KI keine privaten Daten.", "Bei Fragen zu Gesundheit und Geld frage ich einen Menschen.", "Ich darf jemanden um Hilfe bitten."]
+    },
+    standard: {
+      desc: "KI und Chatbots verstehen, sinnvoll nutzen und Antworten überprüfen",
+      learningGoals: ["Verstehen, was mit Künstlicher Intelligenz gemeint ist", "Eine KI als Unterstützung nutzen", "Wichtige Antworten prüfen und Grenzen der KI beachten"],
+      transfer: "Wenn du heute eine KI nutzt, überprüfe eine Antwort anhand einer anderen Quelle.",
+      helpQuestions: ["Kommt die Antwort von einem Menschen oder einer KI?", "Stimmt die Antwort nach dem Überprüfen?", "Will das Programm persönliche Angaben von mir?", "Betrifft der Rat meine Gesundheit oder meine Finanzen?", "Brauche ich Unterstützung beim Einordnen?"],
+      memoryRules: ["Eine KI ist ein Computerprogramm, kein Mensch.", "KI-Antworten können falsch sein.", "Bei wichtigen KI-Antworten prüfe ich die Angaben nach.", "Meine privaten Daten gebe ich nicht in einen Chatbot ein.", "Bei Gesundheit und Geld wende ich mich an Menschen.", "Ich kann mir Unterstützung holen."]
+    }
+  },
+  fakes: {
+    einfach: {
+      desc: "Nachrichten, Bilder und Stimmen prüfen, bevor du ihnen glaubst",
+      learningGoals: ["Was eine erfundene oder falsche Nachricht ist", "Wie du Nachrichten mit anderen Quellen prüfst", "Was du mit einer falschen Nachricht tun kannst"],
+      transfer: "Siehst du heute eine überraschende Nachricht? Prüfe zuerst, ob sie stimmt. Erst danach entscheidest du, ob du sie teilst.",
+      helpQuestions: ["Wer hat die Nachricht veröffentlicht?", "Berichten bekannte Nachrichten-Seiten auch darüber?", "Macht mich die Nachricht sehr wütend oder aufgeregt?", "Kann jemand das Bild oder Video verändert haben?", "Brauche ich Hilfe beim Prüfen?"],
+      memoryRules: ["Eine Nachricht im Internet muss nicht stimmen.", "Bilder und Videos können verändert oder erfunden sein.", "Auch eine bekannte Stimme am Telefon kann nachgemacht sein.", "Eine aufregende Nachricht prüfe ich zuerst.", "Ich prüfe eine Nachricht, bevor ich sie teile.", "Bei einem Anruf wegen Geld rufe ich die Person selbst zurück.", "Ich darf mir beim Prüfen helfen lassen."]
+    },
+    standard: {
+      desc: "Falsche Nachrichten und gefälschte Bilder, Videos und Stimmen überprüfen",
+      learningGoals: ["Falsche oder erfundene Nachrichten einordnen", "Eine Behauptung anhand anderer Quellen prüfen", "Mit einer erkannten Falschnachricht umgehen"],
+      transfer: "Prüfe heute eine überraschende Nachricht, bevor du über das Teilen entscheidest.",
+      helpQuestions: ["Von wem stammt diese Nachricht?", "Findet sich die Meldung auch bei bekannten Nachrichten-Seiten?", "Löst die Nachricht starke Gefühle bei mir aus?", "Könnte das Bild oder Video manipuliert sein?", "Möchte ich Unterstützung beim Überprüfen?"],
+      memoryRules: ["Nicht jede Behauptung im Internet ist richtig.", "Fotos und Videos können gefälscht werden.", "Eine vertraut klingende Stimme kann künstlich erzeugt sein.", "Aufwühlende Nachrichten überprüfe ich zuerst.", "Vor dem Weiterleiten prüfe ich die Nachricht.", "Bei Geldforderungen am Telefon rufe ich über die bekannte Nummer zurück.", "Ich darf Unterstützung beim Prüfen holen."]
+    }
+  },
+  betrug: {
+    einfach: {
+      desc: "Tricks mit Nachrichten, falschen Gewinnen und Geldforderungen erkennen",
+      learningGoals: ["Wie Menschen mit falschen Nachrichten an Geld oder Daten kommen wollen", "Welche Tricks du erkennen kannst", "Was du tun kannst, wenn du schon auf einen Trick reagiert hast"],
+      transfer: "Erzähle heute einer Person von einem Trick aus diesem Thema. So könnt ihr beide besser darauf achten.",
+      helpQuestions: ["Macht mir die Nachricht Druck oder Angst?", "Soll ich Geld zahlen oder Daten eingeben?", "Kenne ich die Person hinter der Nachricht wirklich?", "Kann ich sie über eine bekannte Nummer selbst anrufen?", "Brauche ich Hilfe dabei?"],
+      memoryRules: ["Druck und Drohungen können auf einen Trick hinweisen.", "Links von fremden Personen öffne ich nicht.", "Codes und Bank-Daten gebe ich nicht an andere weiter.", "Für einen echten Gewinn zahle ich kein Geld.", "Die echte Polizei verlangt am Telefon kein Geld von mir.", "Bei einer Bitte um Geld rufe ich die Person selbst zurück.", "Nach einem Betrug muss ich mich nicht schämen. Ich darf Hilfe holen.", "Klebt ein Aufkleber mit einem Code am Automaten? Dann scanne ich ihn nicht."]
+    },
+    standard: {
+      desc: "Phishing, falsche Gewinne und andere Betrugsversuche erkennen und handeln",
+      learningGoals: ["Verstehen, wie Betrugsversuche an Geld oder Daten gelangen sollen", "Typische Tricks überprüfen", "Nach einem Betrugsversuch selbst handeln und Hilfe finden"],
+      transfer: "Sprich heute mit jemandem über einen Trick aus diesem Thema. Das hilft euch beiden, darauf zu achten.",
+      helpQuestions: ["Drängt oder bedroht mich diese Nachricht?", "Werde ich zu einer Zahlung oder zur Eingabe von Daten aufgefordert?", "Weiß ich tatsächlich, wer die Nachricht geschickt hat?", "Kann ich die Person über ihre bekannte Nummer zurückrufen?", "Möchte ich Unterstützung dabei?"],
+      memoryRules: ["Druck und Drohungen sind mögliche Warnzeichen für Betrug.", "Ich öffne keine Links von unbekannten Absendern.", "Meine Codes und Bank-Daten bleiben bei mir.", "Ein echter Gewinn erfordert keine Vorabgebühr.", "Die Polizei verlangt von mir kein Geld am Telefon.", "Geldforderungen prüfe ich mit einem eigenen Rückruf.", "Bei Betrug trage ich nicht die Schuld. Ich kann Hilfe holen.", "Einen Code auf einem aufgeklebten Zettel am Automaten scanne ich nicht."]
+    }
+  },
+  einkaufen: {
+    einfach: {
+      desc: "Shops und Bezahlarten prüfen und beim Kaufen selbst entscheiden",
+      learningGoals: ["Wie du einen Shop vor dem Kauf prüfst", "Welche Bezahlart dir mehr Schutz gibt", "Was du tun kannst, wenn bei einem Kauf etwas nicht klappt"],
+      transfer: "Willst du heute online etwas kaufen? Prüfe den Shop, bevor du bestellst.",
+      helpQuestions: ["Kenne ich den Shop und habe ich ihn geprüft?", "Ist der Preis auffällig niedrig?", "Kann ich erst nach der Lieferung auf Rechnung zahlen?", "Schließe ich damit ein Abo ab?", "Brauche ich Hilfe beim Prüfen?"],
+      memoryRules: ["Ich kaufe in Shops, die ich kenne.", "Ein sehr niedriger Preis und nur Vorkasse sind Warnzeichen.", "Auf Rechnung zu zahlen gibt mir mehr Schutz als Vorkasse.", "Meine PIN und TAN gebe ich niemandem weiter.", "Ich nehme mir Zeit für meine Entscheidung.", "Viele Online-Käufe kann ich innerhalb von 14 Tagen zurückgeben.", "Ich darf beim Einkaufen Hilfe holen."]
+    },
+    standard: {
+      desc: "Online-Shops und Zahlungen prüfen und bewusst einkaufen",
+      learningGoals: ["Prüfen, ob ich einem Shop vertrauen kann", "Bezahlarten nach ihrem Schutz vergleichen", "Bei Problemen mit einem Kauf handeln"],
+      transfer: "Prüfe heute vor einer Online-Bestellung den Shop.",
+      helpQuestions: ["Ist mir der Shop bekannt und habe ich ihn überprüft?", "Ist der Preis ungewöhnlich günstig?", "Wird Rechnungskauf mit Zahlung nach der Lieferung angeboten?", "Entsteht durch den Kauf ein laufendes Abo?", "Möchte ich Unterstützung beim Prüfen?"],
+      memoryRules: ["Ich bestelle bei mir bekannten Shops.", "Sehr günstige Preise zusammen mit reiner Vorkasse sind Warnzeichen.", "Rechnungskauf schützt mich besser als eine Vorauszahlung.", "PIN und TAN behalte ich für mich.", "Beim Kaufen lasse ich mich nicht unter Zeitdruck setzen.", "Bei vielen Online-Käufen ist eine Rückgabe innerhalb von 14 Tagen möglich.", "Ich kann mir Unterstützung beim Einkaufen holen."]
+    }
+  },
   datenschutz: {
     "einfach": {
       "desc": "Deine privaten Daten schützen",

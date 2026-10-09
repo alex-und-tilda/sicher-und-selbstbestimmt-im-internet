@@ -681,6 +681,41 @@ let sessionScenarioStufe = {};
    keine Einwilligung und keine neue Datenkategorie. */
 let selfAssessmentStart = {};
 let miniCheckDone = {};
+/* Kern und Zusatzfolge können unterschiedliche Anwendungen enthalten.
+   Dieser Runden-Cursor hält nur fest, welche Aufgaben gerade angeboten
+   werden; Antworten bleiben in den vorhandenen Pause-/Lernstand-Daten. */
+let neueSituationAuswahl = null;
+
+function miniCheckSchluessel(topicId, mode = currentMode) {
+  return topicId + "::" + (mode === "short" ? "short" : "lang");
+}
+
+function miniCheckIstFertig(topic, mode = currentMode) {
+  if (!topic) return false;
+  if (miniCheckDone[miniCheckSchluessel(topic.id, mode)]) return true;
+  if (mode === "short" || !miniCheckDone[miniCheckSchluessel(topic.id, "short")]) return false;
+  const ns = topic.neueSituation;
+  const liste = ns && (ns.aufgaben || ns.fragen);
+  return !(Array.isArray(liste) && liste.some(q => q && q.nurLang));
+}
+
+function neueSituationZusatzAuswahl(topic, mode = currentMode) {
+  if (!topic || mode === "short") return false;
+  const key = miniCheckSchluessel(topic.id, mode);
+  if (neueSituationAuswahl && neueSituationAuswahl.schluessel === key) return neueSituationAuswahl.nurZusatz;
+  return !!miniCheckDone[miniCheckSchluessel(topic.id, "short")];
+}
+
+function neueSituationListe(ns, mode = currentMode, nurZusatz) {
+  const topic = topics.find(t => t.neueSituation === ns);
+  const nurLang = nurZusatz === undefined ? neueSituationZusatzAuswahl(topic, mode) : nurZusatz;
+  const formular = ns && Array.isArray(ns.aufgaben);
+  const liste = ns && (formular ? ns.aufgaben : ns.fragen);
+  return (Array.isArray(liste) ? liste : []).filter(q => q
+    && (formular || (Array.isArray(q.answers) && q.answers.length))
+    && !(q.nurLang && mode === "short") && !(q.nurKurz && mode !== "short")
+    && (!nurLang || q.nurLang));
+}
 /* Vorhersage am Einstieg (Datenschutz, Paket 2): gewählte Antwort je Thema,
    nur im Arbeitsspeicher – die Abschluss-Seite greift sie wieder auf. */
 let vorhersageStart = {};
@@ -901,15 +936,100 @@ const GLOSSAR = {
   "quishing":               "Quishing ist Betrug mit falschen QR-Codes. Betrüger kleben falsche Codes über echte. Scanne nur Codes von vertrauten Menschen.",
   /* Beta-Version (06.10.2026): Kopf und Fußzeile nennen die Plattform
      „Beta-Version“. Leichte Sprache, ein Wort für beides (§5). */
-  "beta-version":           "Eine Beta-Version ist eine Test-Version. Das Programm ist noch nicht ganz fertig. Manches ändert sich noch. Manches klappt vielleicht noch nicht. Du kannst uns helfen. Sag uns: Was ist gut? Was ist schwer?",
-  "version":                "Eine Version ist ein Stand von einem Programm. Kommt etwas Neues dazu? Dann gibt es eine neue Version."
+  "beta-version":           "Beta 2 ist die zweite Test-Version dieser Lern-Plattform. Eine Beta-Version ist eine Test-Version. Das Programm ist noch nicht ganz fertig. Manches ändert sich noch. Manches klappt vielleicht noch nicht. Du kannst uns helfen. Sag uns: Was ist gut? Was ist schwer?",
+  "version":                "Eine Version ist ein Stand von einem Programm. Kommt etwas Neues dazu? Dann gibt es eine neue Version.",
+  /* Wörter-Hilfe (08.10.2026, Bericht 32): schwere Wörter aus den Lerntexten.
+     Leichte Sprache (§5). Die Erklärung sagt, was das Wort bedeutet – nicht,
+     was man tun soll. So nimmt sie keine Antwort einer Aufgabe vorweg.
+     Wörter, nach deren Bedeutung eine Aufgabe fragt, stehen hier bewusst
+     nicht (z. B. Fake-Shop, Anzeige). */
+  "tan":                    "Eine TAN ist eine geheime Zahl von deiner Bank. Zum Beispiel: Du schickst im Internet Geld an jemanden. Dann bestätigst du das mit einer TAN. Jede TAN gilt nur für einen Auftrag.",
+  "sms":                    "Eine SMS ist eine kurze Text-Nachricht auf dem Handy. Sie geht an eine Telefon-Nummer. Dafür brauchst du kein Internet.",
+  "chat":                   "Ein Chat ist ein Gespräch mit Nachrichten. Ihr schreibt euch zum Beispiel bei WhatsApp.",
+  "status":                 "Der Status ist ein Bereich bei WhatsApp. Dort zeigst du ein Foto, ein Video oder einen Text. Deine Kontakte können den Status sehen. Nach 24 Stunden ist er wieder weg.",
+  "story":                  "Eine Story ist ein Foto oder ein Video in einer App. Zum Beispiel bei Instagram. Andere sehen die Story nur kurze Zeit. Meistens 24 Stunden lang.",
+  "snap":                   "Ein Snap ist ein Foto oder ein Video bei Snapchat. Du schickst es an andere Personen. Snapchat zeigt den Snap nur kurze Zeit an.",
+  "snap map":               "Die Snap Map ist eine Karte in Snapchat. Auf der Karte kann Snapchat deinen Standort zeigen. Dann sehen andere: Hier bist du gerade.",
+  "beitrag":                "Ein Beitrag ist ein Foto, ein Video oder ein Text im Internet. Jemand hat ihn gepostet. Andere können ihn sehen.",
+  "like":                   "Ein Like ist ein Zeichen. Es heißt: Das gefällt mir. Du tippst zum Beispiel auf ein Herz. Oder auf einen Daumen nach oben.",
+  "follower":               "Follower sind Menschen in einer App. Sie folgen dir. Das heißt: Sie sehen deine neuen Beiträge.",
+  "selfie":                 "Ein Selfie ist ein Foto von dir selbst. Du machst es selbst. Zum Beispiel mit der Kamera von deinem Handy.",
+  "profilbild":             "Ein Profilbild ist das Bild auf deinem Profil. Andere sehen es neben deinem Namen.",
+  "filter":                 "Ein Filter verändert ein Foto oder ein Video. Zum Beispiel: Die Farben sehen anders aus. Oder die Haut sieht glatter aus.",
+  "challenge":              "Eine Challenge ist eine Mitmach-Aufgabe im Internet. Viele Menschen machen die gleiche Aufgabe. Sie filmen sich dabei. Dann zeigen sie das Video im Internet.",
+  "trend":                  "Ein Trend ist etwas Neues. Viele Menschen machen es gerade nach. Zum Beispiel einen Tanz in einem Video.",
+  "autoplay":               "Autoplay heißt: Das nächste Video startet von selbst. Du musst dafür nichts antippen.",
+  "privatsphäre":           "Privatsphäre heißt: Manche Dinge gehören nur dir. Zum Beispiel deine Fotos oder deine Adresse. Du bestimmst: Wer darf das sehen?",
+  "privatsphäre-einstellungen": "Privatsphäre-Einstellungen sind ein Bereich in einer App. Dort bestimmst du: Wer darf was von dir sehen?",
+  "freundschaftsanfrage":   "Bei einer Freundschafts-Anfrage fragt dich jemand bei Facebook: Wollen wir Freunde sein? Du kannst Ja sagen. Oder Nein.",
+  "berechtigung":           "Eine Berechtigung ist eine Erlaubnis für eine App. Zum Beispiel: Die App darf deine Fotos sehen. Oder deinen Standort.",
+  "zugangsdaten":           "Zugangsdaten sind die Daten für dein Konto. Zum Beispiel dein Benutzer-Name und dein Passwort.",
+  "fernwartung":            "Bei einer Fernwartung steuert eine andere Person dein Gerät. Die Person ist nicht bei dir. Sie steuert dein Gerät über das Internet.",
+  "fake":                   "Fake ist Englisch. Es heißt: falsch oder gefälscht. Etwas sieht echt aus. Aber es ist nicht echt.",
+  "quelle":                 "Die Quelle sagt dir: Woher kommt eine Nachricht? Wer hat sie zuerst gemeldet? Zum Beispiel eine Zeitung. Oder die Polizei.",
+  "countdown":              "Ein Countdown zählt die Zeit rückwärts. Zum Beispiel: Noch 2 Minuten. Noch 1 Minute. Dann ist die Zeit um.",
+  "paypal":                 "PayPal ist eine Firma. Mit PayPal kannst du im Internet bezahlen.",
+  "käufer-schutz":          "Käufer-Schutz heißt: Du hast im Internet bezahlt. Aber die Ware kommt nicht. Dann kannst du dein Geld zurück-fordern. Manche Bezahl-Dienste bieten das an. Zum Beispiel PayPal.",
+  "widerruf":               "Widerruf heißt: Du gibst etwas zurück. Du hast es im Internet gekauft. Bei vielen Online-Käufen geht das 14 Tage lang.",
+  "schockanruf":            "Bei einem Schockanruf ruft dich jemand an. Die Person macht dir große Angst. Sie sagt zum Beispiel: Jemand aus deiner Familie hatte einen Unfall. Dann will die Person schnell Geld. Das ist ein Trick von Betrügern.",
+  "liebes-betrug":          "Liebes-Betrug ist ein Trick von Betrügern. Eine Person schreibt dir lange Zeit sehr nette Nachrichten. Sie sagt: Ich liebe dich. Später will die Person Geld von dir."
+};
+
+/* Wörter-Hilfe (08.10.2026, Bericht 32): Mehrzahl und andere Schreibweisen
+   eines Wortes zeigen auf dieselbe Erklärung. Pro Seite bleibt nur das erste
+   Vorkommen antippbar – egal, ob dort „Story“ oder „Stories“ steht.
+   Bewusst NICHT: „links“ (heißt auch: auf der linken Seite) und „Apps“
+   (Gruppen-Name auf der Themen-Seite). */
+const GLOSSAR_FORMEN = {
+  "chats": "chat",
+  "stories": "story",
+  "snaps": "snap",
+  "beiträge": "beitrag",
+  "likes": "like",
+  "selfies": "selfie",
+  "challenges": "challenge",
+  "trends": "trend",
+  "fakes": "fake",
+  "quellen": "quelle",
+  "freundschaftsanfragen": "freundschaftsanfrage",
+  "freundschafts-anfrage": "freundschaftsanfrage",
+  "freundschafts-anfragen": "freundschaftsanfrage",
+  "berechtigungen": "berechtigung",
+  "app-berechtigung": "berechtigung",
+  "app-berechtigungen": "berechtigung",
+  "käuferschutz": "käufer-schutz",
+  "schockanrufe": "schockanruf",
+  "schockanrufen": "schockanruf",
+  "romance scamming": "liebes-betrug",
+  "passkeys": "passkey",
+  "qr-codes": "qr-code",
+  "passwörter": "passwort",
+  "e-mails": "e-mail",
+  "kommentare": "kommentar",
+  "bewertungen": "bewertung",
+  "benachrichtigungen": "benachrichtigung",
+  "emojis": "emoji",
+  "screenshots": "screenshot",
+  "chatbots": "chatbot",
+  "deepfakes": "deepfake",
+  "updates": "update",
+  "abos": "abo",
+  "abo-fallen": "abo-falle",
+  "fake-profile": "fake-profil",
+  "online-shops": "online-shop",
+  "gewinnspiele": "gewinnspiel",
+  "sprach-nachrichten": "sprach-nachricht"
 };
 
 /* Beta-Version (06.10.2026): Braucht ein Wort in einer Erklärung selbst eine
    Erklärung, bietet die Erklärung darunter einen Knopf dorthin an. */
 const GLOSSAR_SIEHE = {
   "beta-version": { wort: "version", frage: "Was ist eine Version?" },
-  "update":       { wort: "version", frage: "Was ist eine Version?" }
+  "update":       { wort: "version", frage: "Was ist eine Version?" },
+  /* Wörter-Hilfe (08.10.2026, Bericht 32) */
+  "käufer-schutz":   { wort: "paypal", frage: "Was ist PayPal?", anzeige: "PayPal" },
+  "follower":        { wort: "beitrag", frage: "Was ist ein Beitrag?" },
+  "privatsphäre-einstellungen": { wort: "privatsphäre", frage: "Was ist Privatsphäre?" }
 };
 
 let glossarOverlay = null;
@@ -1023,7 +1143,11 @@ function showGlossar(termKey, anzeige) {
   const siehe = glossarOverlay.querySelector(".glossar-siehe");
   const weiter = GLOSSAR_SIEHE[termKey];
   siehe.hidden = !weiter;
-  if (weiter) { siehe.dataset.glossar = weiter.wort; siehe.textContent = weiter.frage; }
+  if (weiter) {
+    siehe.dataset.glossar = weiter.wort;
+    siehe.dataset.glossarWort = weiter.anzeige || "";
+    siehe.textContent = weiter.frage;
+  }
   glossarOverlay.classList.remove("is-hidden");
   glossarOverlay.querySelector(".glossar-close").focus();
 }
@@ -1037,12 +1161,12 @@ function hideGlossar() {
 function initGlossarEvents() {
   content.addEventListener("click", (e) => {
     const term = e.target.closest(".glossar-term");
-    if (term) showGlossar(term.dataset.term);
+    if (term) showGlossar(term.dataset.term, glossarAnzeige(term.textContent));
   });
   content.addEventListener("keydown", (e) => {
     if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("glossar-term")) {
       e.preventDefault();
-      showGlossar(e.target.dataset.term);
+      showGlossar(e.target.dataset.term, glossarAnzeige(e.target.textContent));
     }
   });
   /* Beta-Version (06.10.2026): Knöpfe außerhalb des Inhalts (Kopf, Fußzeile)
@@ -1053,11 +1177,18 @@ function initGlossarEvents() {
   });
 }
 
+/* Wörter-Hilfe (08.10.2026, Bericht 32): Die Erklärung nennt das Wort so,
+   wie es im Text steht – also „TAN“ und „E-Mail“, nicht „Tan“ und „E-mail“. */
+function glossarAnzeige(wort) {
+  const w = String(wort || "").trim();
+  return w ? w.charAt(0).toUpperCase() + w.slice(1) : "";
+}
+
 /* Hebt Glossar-Wörter im gerade gerenderten Inhalt hervor */
 function applyGlossar() {
   if (!glossarOverlay) return;
 
-  const terms = Object.keys(GLOSSAR);
+  const terms = [...Object.keys(GLOSSAR), ...Object.keys(GLOSSAR_FORMEN)];
   /* Längere Begriffe zuerst (z. B. "datenschutzerklärung" vor "datenschutz") */
   const sorted = [...terms].sort((a, b) => b.length - a.length);
   const escRe  = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -1103,13 +1234,19 @@ function applyGlossar() {
     let m;
     pattern.lastIndex = 0;
     while ((m = pattern.exec(text)) !== null) {
-      if (schonMarkiert.has(m[0].toLowerCase())) continue;
-      schonMarkiert.add(m[0].toLowerCase());
+      const klein = m[0].toLowerCase();
+      const schluessel = GLOSSAR_FORMEN[klein] || klein;
+      /* KI-Definitionsaufgaben: Nur die lösungsgebenden Wörter auslassen.
+         Andere Erklärungen und die Lern-/Rückmeldetexte bleiben erreichbar. */
+      const auslassen = textNode.parentElement.closest("[data-glossar-auslassen]");
+      if (auslassen && auslassen.dataset.glossarAuslassen.split(" ").includes(schluessel)) continue;
+      if (schonMarkiert.has(schluessel)) continue;
+      schonMarkiert.add(schluessel);
       if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
       const span = document.createElement("span");
       span.className = "glossar-term";
       span.textContent = m[0];
-      span.dataset.term = m[0].toLowerCase();
+      span.dataset.term = schluessel;
       span.setAttribute("tabindex", "0");
       span.setAttribute("role", "button");
       span.setAttribute("aria-label", `Erklärung: ${m[0]}`);
@@ -1891,10 +2028,8 @@ function readCurrentPage(rate) {
         const isOption = el.matches(OPTION);
         const isKarte = el.matches(KARTE);
         const isAktion = el.matches(AKTION);
-        /* Nichts vorlesen, was gerade zugeklappt ist: der Begleit-Bereich
-           enthaelt Fachtexte (DigComp, ICF) und ist fast 4000 px hoch. Sein
-           Kasten hat overflow:hidden – die Kinder behalten dadurch eine
-           Groesse, obwohl sie niemand sieht. Nur auf <details open> pruefen. */
+        /* Begleithinweise gehören nicht in das Vorlesen für Lernende.
+           Das gilt auch, wenn der Begleitbereich gerade geöffnet ist. */
         if (el.closest(".companion-panel, .begleit-tipp")) return false;
         /* D2/D4: Was im Lernmodus per CSS ausgeblendet ist (Übung unter dem
            Lerntext, Szenenbild), hat keine Fläche und wird nicht vorgelesen. */
@@ -2915,7 +3050,7 @@ function lernMehrOeffnen(ausloeser) {
   blatt.addEventListener("click", e => {
     if (e.target === blatt) return schliessen();
     const wort = e.target.closest(".glossar-term");
-    if (wort) { const key = wort.dataset.term; schliessen(); showGlossar(key); return; }
+    if (wort) { const key = wort.dataset.term, anzeige = glossarAnzeige(wort.textContent); schliessen(); showGlossar(key, anzeige); return; }
     const k = e.target.closest("[data-aktion]");
     if (!k) return;
     const aktion = k.dataset.aktion;
@@ -2931,7 +3066,7 @@ function lernMehrOeffnen(ausloeser) {
   blatt.addEventListener("keydown", e => {
     if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("glossar-term")) {
       e.preventDefault(); e.stopPropagation();
-      const key = e.target.dataset.term; schliessen(); showGlossar(key); return;
+      const key = e.target.dataset.term, anzeige = glossarAnzeige(e.target.textContent); schliessen(); showGlossar(key, anzeige); return;
     }
     if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); schliessen(); }
   });
@@ -3216,7 +3351,7 @@ function renderLegalFooter() {
   const footer = document.createElement("div");
   footer.className = "small-footer-notice";
   footer.innerHTML = `
-    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta-Version" aria-label="Erklärung: Beta-Version">Beta-Version</button>:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.<br />
+    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta 2" aria-label="Erklärung: Beta 2">Beta 2</button>:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.<br />
     <button type="button" class="link-action test-meinung" onclick="zurMeinung()">Sag uns deine Meinung</button></p>
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
     <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
@@ -3297,12 +3432,19 @@ function merkeStelle() {
     ? { key: aufgabeSchluessel(felderAktiv.q), lern: felderAktiv.lern, stand: felderAktiv.stand || null } : null;
   const quizVorwahl = content.querySelector(".quiz-card:not(.big-quiz-card) .answer-option.ist-markiert");
   const quizAntwort = quizVorwahl ? quizVorwahl.getAttribute("onclick") : null;
+  const handyVorwahl = content.querySelector(".scenario-card .sz-answer.ist-markiert:not(:disabled)");
+  const handyIndex = handyVorwahl ? handyVorwahl.dataset.index : null;
   return () => {
     ziel();
     if (form) felderWiederherstellen(form);
     if (quizAntwort) {
       const opt = Array.from(content.querySelectorAll(".quiz-card:not(.big-quiz-card) .answer-option"))
         .find(o => o.getAttribute("onclick") === quizAntwort);
+      if (opt) antwortVorwahlMarkieren(opt);
+    }
+    if (handyIndex !== null) {
+      const opt = Array.from(content.querySelectorAll(".scenario-card .sz-answer:not(:disabled)"))
+        .find(o => o.dataset.index === handyIndex);
       if (opt) antwortVorwahlMarkieren(opt);
     }
     if (hilfeOffen) hilfeWiederOeffnen();
@@ -4326,11 +4468,8 @@ function pauseFrageSignatur(q) {
   return (n >>> 0).toString(16);
 }
 
-function pauseAufgaben(topic, mode) {
-  const ns = topic && topic.neueSituation;
-  const liste = ns && (ns.aufgaben || ns.fragen);
-  return (Array.isArray(liste) ? liste : []).filter(q => q
-    && !(q.nurLang && mode === "short") && !(q.nurKurz && mode !== "short"));
+function pauseAufgaben(topic, mode, nurZusatz) {
+  return neueSituationListe(topic && topic.neueSituation, mode, nurZusatz);
 }
 
 function pauseCursorPruefen(ctx) {
@@ -4338,13 +4477,15 @@ function pauseCursorPruefen(ctx) {
   const topic = getTopicById(ctx.topicId), p = ctx.pause;
   if (!topic || !["quiz", "kurzquiz", "wiederholen", "neu"].includes(p.art)
     || !Number.isInteger(p.index) || p.index < 0 || typeof p.frage !== "string") return null;
+  if (p.auswahl !== undefined && (p.art !== "neu" || p.auswahl !== "zusatz" || ctx.mode === "short")) return null;
   const liste = p.art === "quiz" ? getQuizQuestions(topic)
     : p.art === "kurzquiz" ? getEinfachQuizQuestions(topic)
-    : p.art === "neu" ? pauseAufgaben(topic, ctx.mode) : null;
+    : p.art === "neu" ? pauseAufgaben(topic, ctx.mode, p.auswahl === "zusatz") : null;
   const q = liste ? liste[p.index] : findeAufgabe(topic.id, p.frage);
   if (!q || aufgabeSchluessel(q) !== p.frage || pauseFrageSignatur(q) !== p.signatur) return null;
   const teil = p.teil === "situation" && p.art === "neu" ? "situation" : "frage";
   const cursor = { art: p.art, index: p.index, frage: p.frage, signatur: p.signatur, teil };
+  if (p.auswahl === "zusatz") cursor.auswahl = "zusatz";
   if (p.art === "wiederholen") {
     if (!Number.isInteger(p.gesamt) || p.gesamt < 1 || p.gesamt > 500 || p.index >= p.gesamt
       || !["Das große Quiz", "Wiederholen", LERNWEG_TEXT.nochmalUeben].includes(p.titel)) return null;
@@ -4357,7 +4498,7 @@ function pauseFrageFuer(ctx) {
   const t = getTopicById(ctx.topicId), p = ctx.pause;
   return p.art === "quiz" ? getQuizQuestions(t)[p.index]
     : p.art === "kurzquiz" ? getEinfachQuizQuestions(t)[p.index]
-    : p.art === "neu" ? pauseAufgaben(t, ctx.mode)[p.index] : findeAufgabe(t.id, p.frage);
+    : p.art === "neu" ? pauseAufgaben(t, ctx.mode, p.auswahl === "zusatz")[p.index] : findeAufgabe(t.id, p.frage);
 }
 
 function pauseStelleMerken(daten) {
@@ -4371,6 +4512,10 @@ function pauseStelleMerken(daten) {
   const ctx = { topicId, mode: currentMode,
     pause: { art: daten.art, index: daten.index, frage: aufgabeSchluessel(q),
       signatur: pauseFrageSignatur(q), teil: daten.teil === "situation" ? "situation" : "frage" } };
+  /* Die Zusatz-Teilmenge ist eine Position im Lernweg. Sie enthält keine
+     Aussage über Antworten oder Treffer und muss auch nach einem Neustart
+     dieselbe Aufgabe meinen. Alte Cursor ohne Auswahl behalten ihren Pool. */
+  if (daten.art === "neu" && neueSituationZusatzAuswahl(topic, currentMode)) ctx.pause.auswahl = "zusatz";
   if (daten.art === "wiederholen") Object.assign(ctx.pause, { gesamt: bigQuizQuestions.length, titel: bigQuizTitle });
   pauseStelle = { cursor: ctx, teil: daten.teil || "frage", wieder: textKopie(daten.wieder || {}) };
   pauseKnoten = content.firstElementChild;
@@ -4380,7 +4525,7 @@ function pauseBewertungLoeschen() {
   pauseStelle = null; pauseKnoten = null; pauseSitzung = null; pauseTeilrunde = null;
   kernUebungenErkannt = new Set();
   topics.forEach(t => { delete t._zusatzWeg; delete t._schlussZusatz; });
-  selfAssessmentStart = {}; miniCheckDone = {}; vorhersageStart = {};
+  selfAssessmentStart = {}; miniCheckDone = {}; neueSituationAuswahl = null; vorhersageStart = {};
   simulationFertig = {}; simulationWahl = {};
   quizScore = 0; quizKorrigiert = 0; quizAnsweredCorrect = new Set();
   bigQuizScore = 0; bigQuizKorrigiert = 0;
@@ -4396,12 +4541,14 @@ function pauseDatenLoeschen() {
 
 function pauseRundeStarten() {
   pauseStelle = null; pauseKnoten = null; pauseTeilrunde = null;
+  neueSituationAuswahl = null;
   pauseDatenLoeschen();
   if (lastLessonContext && lastLessonContext.pause) { lastLessonContext = null; pRemove(LAST_LESSON_KEY); }
 }
 
 function pauseEnde(art) {
   pauseStelle = null; pauseKnoten = null;
+  if (art === "neu") neueSituationAuswahl = null;
   if (lastLessonContext && lastLessonContext.pause && lastLessonContext.pause.art === art) {
     lastLessonContext = null; pRemove(LAST_LESSON_KEY); pauseDatenLoeschen();
   }
@@ -4513,6 +4660,8 @@ function pauseFortsetzen(raw) {
   const gespeichert = pauseSpeicherErlaubt() ? (loadProgress() || {}).pause : null;
   const s = pauseStandPruefen(pauseSitzung, ctx) || pauseStandPruefen(gespeichert, ctx);
   currentTopicId = ctx.topicId; currentMode = ctx.mode;
+  neueSituationAuswahl = p.art === "neu"
+    ? { schluessel: miniCheckSchluessel(ctx.topicId, ctx.mode), nurZusatz: p.auswahl === "zusatz" } : null;
   const gross = p.art === "wiederholen";
   pauseTeilrunde = s ? (s.ab > 0 ? { art: p.art, ab: s.ab } : null)
     : p.art === "neu" || p.index === 0 ? null : { art: p.art, ab: p.index };
@@ -4607,6 +4756,7 @@ function clearLastLesson() {
   pRemove(LAST_LESSON_KEY);
   pauseDatenLoeschen();
   pauseStelle = null; pauseKnoten = null; pauseTeilrunde = null;
+  neueSituationAuswahl = null;
 }
 
 /* ============================================================
@@ -4718,7 +4868,7 @@ function buildDailyQuestionCard() {
       <div class="intro-offer daily-question" id="dailyQuestion" style="${getTopicColorStyle(daily.topic.id)}" data-readable="true" role="region" aria-label="Frage des Tages">
         <h3>Deine Frage für heute</h3>
         <p class="daily-question-topic">Aus dem Thema: ${escapeHtml(daily.topic.title)}</p>
-        ${buildFrage({ frage: daily.q.question || "", pikto: questionPikto(daily.q), antworten: answers, hilfe: buildTaskHelpBox(taskHint(daily.q, "quiz"), true) })}
+        ${buildFrage({ aufgabe: daily.q, frage: daily.q.question || "", pikto: questionPikto(daily.q), antworten: answers, hilfe: buildTaskHelpBox(taskHint(daily.q, "quiz"), true) })}
       </div>`;
 }
 
@@ -5071,9 +5221,7 @@ function renderMenu() {
 
   let companionNote = "";
   if (learnMode === "begleitung") {
-    companionNote = languageLevel === "leicht"
-      ? `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr Hinweise für das gemeinsame Lernen.</p>`
-      : `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Die ausführlichen Hinweise für Begleitpersonen findet ihr in der Leichten Sprache.</p>`;
+    companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr praktische Hilfe für das gemeinsame Lernen.</p>`;
   } else if (learnMode === "app") {
     /* Befund 4 (21.09.2026): Hier stand „… und jede Seite wird dir
        vorgelesen." Das stimmte nicht: chooseLearnMode() vergrössert nur
@@ -5719,77 +5867,61 @@ function renderSettingsPage() {
    Themenseite: Lernweg wählen
    ============================================================ */
 
-/* Kompetenz-Einordnung (DigComp 2.2 + ICF) als Block.
-   Reine Fachkräfte-Information: zeigt, was die Person danach im ALLTAG
-   kann (Aktivität und Teilhabe), nicht nur, was sie weiß. */
-function buildCompetenceBlock(c) {
-  const k = c && c.kompetenzen;
-  if (!k) return "";
-  const liste = (items, mitStufe) => {
-    if (!Array.isArray(items) || !items.length) return "";
-    return `<ul class="komp-liste">` + items.map(e =>
-      `<li><span class="komp-code">${escapeHtml(e.code)}</span>` +
-      `<span class="komp-titel">${escapeHtml(e.titel)}</span>` +
-      (mitStufe && e.stufe ? `<span class="komp-stufe">${escapeHtml(e.stufe)}</span>` : "") +
-      `<span class="komp-bezug">${escapeHtml(e.bezug)}</span></li>`).join("") + `</ul>`;
-  };
-  const dc = liste(k.digcomp, true);
-  const icf = liste(k.icf, false);
-  if (!dc && !icf) return "";
-  return `<div class="companion-section companion-kompetenz">
-      <h4>Kompetenz-Einordnung</h4>
-      ${dc ? `<h5>DigComp 2.2 – Europäischer Referenzrahmen für digitale Kompetenzen</h5>${dc}` : ""}
-      ${icf ? `<h5>ICF – Aktivität, Teilhabe und Umweltfaktoren</h5>${icf}` : ""}
-      <p class="komp-fuss">Die Stufen 1–2 stehen für grundlegende Kompetenz: mit Anleitung bis selbstständig bei einfachen Aufgaben. Die ICF-Bezüge benennen den Alltags-Nutzen, nicht ein Defizit.</p>
-    </div>`;
+/* Begleitpraxis: dieselben Abschnitte in der App und im Ausdruck.
+   Die fachliche Zuordnung bleibt ausschließlich in der privaten Dokumentation. */
+function companionPraxisAbschnitte(c) {
+  const p = c && c.praxis;
+  if (!p) return [];
+  return [
+    ["Vor dem Start", p.vorbereiten],
+    ["Fragen, die du stellen kannst", p.fragen],
+    ["Wenn etwas unklar ist", p.helfen],
+    ["Daran erkennst du Verständnis", p.erkennen],
+    ["Im Alltag ausprobieren", p.alltag]
+  ].filter(([, items]) => Array.isArray(items) && items.length);
 }
 
-/* Begleit-Material als saubere Druck-/PDF-Ansicht (Handout für Fachkräfte). */
+function companionWeitereAbschnitte(c) {
+  if (!c) return [];
+  return [
+    ["Was die Person hier übt", c.lernziele],
+    ["Weitere Ideen zum gemeinsamen Lernen", c.methodik],
+    ["Weitere Gesprächsfragen", c.gespraechsanlaesse],
+    ["Weitere Hinweise zum Begleiten", c.begleithinweise],
+    ["Weitere Ideen für den Alltag", c.transfer]
+  ].filter(([, items]) => Array.isArray(items) && items.length);
+}
+
+function companionAbschnittHtml(titel, items) {
+  return `<section class="companion-section">
+    <h3>${escapeHtml(titel)}</h3>
+    <ul>${items.map(text => `<li>${escapeHtml(text)}</li>`).join("")}</ul>
+  </section>`;
+}
+
+/* Praktische Begleithilfe als Druck-/PDF-Ansicht. Keine fachlichen Codes. */
 function printCompanion(topicId) {
   const topic = getTopicById(topicId);
   const c = topic && topic.companion;
   if (!c) return;
-  const sections = [
-    ["Lernziele", c.lernziele],
-    ["Methodische Hinweise", c.methodik],
-    ["Gesprächsanlässe", c.gespraechsanlaesse],
-    ["Hinweise zur Begleitung", c.begleithinweise],
-    ["Rechts- und Fachbezüge", c.rechtsbezuege],
-    ["Alltagstransfer", c.transfer]
-  ];
-  /* Kompetenz-Einordnung fürs Handout (steht direkt hinter den Lernzielen). */
-  const k = c.kompetenzen;
-  const kompListe = (items, mitStufe) => (Array.isArray(items) && items.length)
-    ? `<ul>${items.map(e => `<li><b>${escapeHtml(e.code)}</b> ${escapeHtml(e.titel)}` +
-        (mitStufe && e.stufe ? ` <span class="stufe">${escapeHtml(e.stufe)}</span>` : "") +
-        `<br>${escapeHtml(e.bezug)}</li>`).join("")}</ul>`
-    : "";
-  const kompPrint = k
-    ? `<h2>Kompetenz-Einordnung</h2>` +
-      (kompListe(k.digcomp, true) ? `<h3>DigComp 2.2 – Europäischer Referenzrahmen für digitale Kompetenzen</h3>${kompListe(k.digcomp, true)}` : "") +
-      (kompListe(k.icf, false) ? `<h3>ICF – Aktivität, Teilhabe und Umweltfaktoren</h3>${kompListe(k.icf, false)}` : "") +
-      `<p class="meta">Stufe 1–2 = grundlegende Kompetenz: mit Anleitung bis selbstständig bei einfachen Aufgaben. Die ICF-Bezüge benennen den Alltags-Nutzen, kein Defizit.</p>`
-    : "";
-  const body = sections
-    .filter(([, it]) => Array.isArray(it) && it.length)
-    .map(([t, it]) => {
-      const block = `<h2>${escapeHtml(t)}</h2><ul>${it.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>`;
-      return t === "Lernziele" ? block + kompPrint : block;
-    })
-    .join("");
+  const abschnitt = ([titel, items]) => `<h2>${escapeHtml(titel)}</h2><ul>${items.map(text => `<li>${escapeHtml(text)}</li>`).join("")}</ul>`;
+  const body = companionPraxisAbschnitte(c).map(abschnitt).join("") +
+    `<h2>So kannst du unterstützen</h2><ol>${COMPANION_HILFE.map(text => `<li>${escapeHtml(text)}</li>`).join("")}</ol>` +
+    `<h2>Weitere Tipps zum Thema</h2>` + companionWeitereAbschnitte(c).map(([titel, items]) =>
+      `<h3>${escapeHtml(titel)}</h3><ul>${items.map(text => `<li>${escapeHtml(text)}</li>`).join("")}</ul>`).join("");
   const html = `<!doctype html><html lang="de"><head><meta charset="utf-8">` +
-    `<title>Begleit-Material – ${escapeHtml(topic.title)}</title>` +
+    `<title>Praktische Begleithilfe – ${escapeHtml(topic.title)}</title>` +
     `<style>body{font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:24px auto;padding:0 16px;color:#142231;line-height:1.55;}` +
     `h1{font-size:20px;margin:0 0 4px;}h2{font-size:15px;margin:18px 0 4px;border-bottom:1px solid #ccd;padding-bottom:4px;}` +
     `h3{font-size:13px;margin:12px 0 2px;color:#334;}` +
-    `.stufe{color:#555;font-size:11px;white-space:nowrap;}b{font-family:"Courier New",monospace;}` +
-    `ul{margin:6px 0;padding-left:20px;}li{margin-bottom:5px;}.meta{color:#555;font-size:12px;margin:0 0 12px;}` +
+    `ul,ol{margin:6px 0;padding-left:20px;}li{margin-bottom:5px;}.meta{color:#555;font-size:12px;margin:0 0 12px;}` +
     `.foot{margin-top:24px;border-top:1px solid #ccd;padding-top:8px;color:#555;font-size:11px;}</style></head><body>` +
-    `<h1>Für Begleitpersonen und Fachkräfte</h1>` +
+    `<h1>Praktische Hilfe beim Begleiten</h1>` +
     `<p class="meta">Thema: ${escapeHtml(topic.title)} · Sicher und selbstbestimmt im Internet</p>` +
-    body +
-    `<p class="foot">Begleit-Material zur Lernplattform „Sicher und selbstbestimmt im Internet". ` +
-    `Diese Hinweise richten sich an Fachkräfte und sind nicht Teil der Lern-Texte.</p></body></html>`;
+    `<p>Die Person entscheidet, welche Hilfe sie möchte. Hilfe und Pausen sind jederzeit möglich.</p>` +
+    `<p class="meta">Diese neuen Begleithilfen sind noch nicht praktisch erprobt.</p>` + body +
+    `<p class="foot">Begleithilfe zur Lernplattform „Sicher und selbstbestimmt im Internet". ` +
+    `Für Angehörige, Assistenz und Fachkräfte. Diese Hinweise gehören nicht zu den Lern-Texten.</p></body></html>`;
   const w = window.open("", "_blank");
   if (!w) return;
   w.document.write(html);
@@ -5834,47 +5966,34 @@ function printQrCards() {
 /* Begleit-Panel „Für Begleitpersonen und Fachkräfte" (eigene Ebene,
    keine Sprach-Stufe). Erscheint nur, wenn das Thema Begleit-Material hat. */
 function buildCompanionPanel(topic) {
-  /* Die Begleit-Ebene ist nach §7 KEINE Sprach-Stufe für Lernende, sondern
-     eine eigene Ebene für Fachkräfte. Sie war trotzdem an die Leichte Sprache
-     gebunden und fehlte in Einfacher Sprache und Alltagssprache vollständig
-     (Prüfbericht B21) – eine Fachkraft, die jemanden auf B1-Niveau begleitet,
-     sah weder Lernziele noch Methodik noch Rechtsbezüge. Das Panel ist
-     zugeklappt und trägt eine eindeutige Überschrift; es stört den
-     SOLO-Gebrauch also auch in den anderen Stufen nicht. */
   const c = topic && topic.companion;
-  if (!c) return "";
-  const sections = [
-    ["Lernziele", c.lernziele],
-    ["Methodische Hinweise", c.methodik],
-    ["Gesprächsanlässe", c.gespraechsanlaesse],
-    ["Hinweise zur Begleitung", c.begleithinweise],
-    ["Rechts- und Fachbezüge", c.rechtsbezuege],
-    ["Alltagstransfer", c.transfer]
-  ];
-  const blocks = sections
-    .filter(([, items]) => Array.isArray(items) && items.length)
-    .map(([titel, items]) =>
-      `<div class="companion-section">
-         <h4>${escapeHtml(titel)}</h4>
-         <ul>${items.map(it => `<li>${escapeHtml(it)}</li>`).join("")}</ul>
-       </div>`)
-    .join("");
-  if (!blocks) return "";
+  const sections = companionPraxisAbschnitte(c);
+  if (!sections.length) return "";
+  const blocks = sections.map(([titel, items]) => companionAbschnittHtml(titel, items)).join("");
+  const weitere = companionWeitereAbschnitte(c).map(([titel, items]) => companionAbschnittHtml(titel, items)).join("");
   return `
     <details class="companion-panel"${isCompanionMode() ? " open" : ""}>
       <summary>
-        <span class="companion-badge">Für Begleitpersonen und Fachkräfte</span>
-        <span class="companion-hint">Lernziele, Methodik, Rechtsbezüge – zum Aufklappen</span>
+        <span class="companion-badge">Für Begleitpersonen</span>
+        <span class="companion-hint">Praktische Hilfe beim gemeinsamen Lernen</span>
       </summary>
       <div class="companion-body">
-        <p class="companion-intro">Diese Hinweise richten sich an Betreuende, Assistenz, Angehörige und Fachkräfte. Sie sind nicht Teil der Lern-Texte.</p>
-        ${buildCompetenceBlock(c)}
+        <p class="companion-intro">Für Angehörige, Assistenz und Fachkräfte. Die Person entscheidet, welche Hilfe sie möchte. Hilfe und Pausen sind jederzeit möglich.</p>
+        <p class="companion-intro">Diese neuen Begleithilfen sind noch nicht praktisch erprobt.</p>
         ${blocks}
+        <details class="companion-help companion-section">
+          <summary>So kannst du unterstützen</summary>
+          <ol>${COMPANION_HILFE.map(text => `<li>${escapeHtml(text)}</li>`).join("")}</ol>
+        </details>
+        <details class="companion-more companion-section">
+          <summary>Weitere Tipps zum Thema</summary>
+          ${weitere}
+        </details>
         <div class="companion-qr">
           <img src="assets/qr/${escapeHtml(topic.id)}.svg" alt="QR-Code für das Thema ${escapeHtml(topic.title)}" width="132" height="132" loading="lazy">
           <p>Zum Weiterlernen am eigenen Handy: QR-Code scannen – das Thema öffnet sich direkt.</p>
         </div>
-        <button type="button" class="companion-print" onclick="printCompanion('${escapeHtml(topic.id)}')">${pictoHtml("drucken")} Drucken / als PDF speichern</button>
+        <button type="button" class="companion-print" onclick="printCompanion('${escapeHtml(topic.id)}')">${pictoHtml("drucken")} Begleithilfe drucken / als PDF speichern</button>
         <button type="button" class="companion-print" onclick="printQrCards()">${pictoHtml("drucken")} QR-Karten für alle Themen drucken</button>
         ${buildPraxisLinks(topic)}
       </div>
@@ -6504,6 +6623,7 @@ function startTopicMode(topicId, mode) {
   currentTopicId = topic.id;
   currentMode = ["short", "extra", "full"].includes(mode) ? mode : "short";
   currentStep = 0;
+  neueSituationAuswahl = null;
   /* D8 (01.10.2026): „Mehr dazu“ kommt nach dem Kern (E6). Die Einstiegsfrage
      war dann schon dran und wird nicht noch einmal gestellt. */
   if (currentMode === "short" && (topic.vorhersage || topic.selfAssessment)) {
@@ -6811,9 +6931,17 @@ const FRAGE_TEXT = {
   keinFalsch:          "Hier gibt es kein Richtig und kein Falsch.",
   meinungAufforderung: "Tippe an, was für dich stimmt."
 };
-function buildFrage({ frage, pikto = "", antworten, zaehler = "", hilfe = "" }) {
+function glossarAufgabenAttribut(aufgabe) {
+  /* Feste Leicht-Schlüssel bleiben auch nach Sprachwechseln gleich.
+     KI und Chatbot erklären hier genau den Inhalt der gesuchten Antwort. */
+  const definition = ["Was ist eine KI?", "Ist eine KI ein Mensch?", "Was ist KI?",
+    "Ein Chatbot schreibt: Ich bin dein Freund. Was stimmt?",
+    "Ein Chatbot schreibt sehr nett. Was stimmt?"].includes(aufgabeSchluessel(aufgabe));
+  return definition ? ' data-glossar-auslassen="ki chatbot"' : "";
+}
+function buildFrage({ frage, pikto = "", antworten, zaehler = "", hilfe = "", aufgabe = null }) {
   return `
-    <section class="frage">
+    <section class="frage"${glossarAufgabenAttribut(aufgabe)}>
       ${(stationBadge("pruefen") || zaehler) ? `<div class="frage-kopf">
         ${stationBadge("pruefen")}
         ${zaehler ? `<span class="frage-zaehler">${escapeHtml(zaehler)}</span>` : ""}
@@ -8162,7 +8290,7 @@ function buildPractice(practice) {
     <div class="practice-box practice-box--frage">
       <h3 class="sr-only">Übung</h3>
       ${aktuell ? kennstDuHinweisHtml(practice.remember, aktuell.id) : ""}
-      ${buildFrage({ frage: question, pikto: questionPikto(practice), antworten: answerHtml, hilfe: buildTaskHelpBox(taskHint(practice, "lektion"), true) })}
+      ${buildFrage({ aufgabe: practice, frage: question, pikto: questionPikto(practice), antworten: answerHtml, hilfe: buildTaskHelpBox(taskHint(practice, "lektion"), true) })}
       ${Number.isInteger(uebungsAuswahl) ? `<button type="button" class="nehmen-knopf" onclick="renderPracticeFeedbackPage(${uebungsAuswahl}, ${correctIndex})">Das nehme ich</button>` : ""}
     </div>
   `;
@@ -8423,7 +8551,7 @@ function continueAfterPractice() {
    Folgt noch die kurze Frage, heißt der letzte Knopf „Weiter". */
 function weiterTextAmEnde(topic) {
   const mq = topic && topic.miniQuestion;
-  const frageFolgt = topic && !miniCheckDone[topic.id]
+  const frageFolgt = topic && !miniCheckIstFertig(topic)
     && (neueSituationDaten(topic) || transferSzeneWaehlen(topic) || (mq && Array.isArray(mq.answers) && mq.answers.length));
   return frageFolgt ? "Weiter" : "Fertig";
 }
@@ -8483,7 +8611,7 @@ function renderTransfer(topic, auswahl, wieder) {
       <h2>${LERNWEG_TEXT.neueSituation}</h2>
       <p class="transfer-intro">${escapeHtml(lernwegText("neueSituationText"))}</p>
       ${buildScenarioScreen(auswahl.runde, auswahl.index)}
-      ${buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
+      ${buildFrage({ aufgabe: frage, frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
       <div id="transferFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
     </article>
   `;
@@ -8513,7 +8641,7 @@ function answerTransfer(topic, auswahl, index, opt) {
     aufgabeMerken(topic.id, frage, ok);
     if (!ok) versuchZaehlen(frage);
   }
-  if (ok) miniCheckDone[topic.id] = true;
+  if (ok) miniCheckDone[miniCheckSchluessel(topic.id)] = true;
   content.querySelectorAll(".transfer-answer").forEach(b => {
     const i = Number(b.dataset.index);
     b.disabled = true;
@@ -8531,7 +8659,7 @@ function answerTransfer(topic, auswahl, index, opt) {
     ${regel}
     <div class="certificate-actions">
       ${ok ? "" : `<button type="button" class="nav-button secondary" onclick="renderMiniCheck('${id}')">Nochmal versuchen</button>`}
-      <button type="button" class="nav-button primary" onclick="miniCheckDone['${id}'] = true; renderCompletionPage('${id}')">Weiter</button>
+      <button type="button" class="nav-button primary" onclick="miniCheckDone[miniCheckSchluessel('${id}')] = true; renderCompletionPage('${id}')">Weiter</button>
     </div>`;
   const mode = currentMode;
   stelleMerken(() => { currentMode = mode; renderTransfer(topic, auswahl, { reihe: o.reihe, antwort: index }); });
@@ -8584,13 +8712,12 @@ function neueSituationDaten(topic) {
 
 /* Aufgaben der neuen Situation für den aktuellen Weg (`nurLang`: nur „Mehr lernen“). */
 function neueSituationAufgaben(ns) {
-  return (ns && Array.isArray(ns.aufgaben) ? ns.aufgaben : []).filter(a => a && (!a.nurLang || currentMode !== "short"));
+  return ns && Array.isArray(ns.aufgaben) ? neueSituationListe(ns) : [];
 }
 
 /* Paket T3: Auswahl-Fragen für den aktuellen Weg (`nurLang` / `nurKurz`). */
 function neueSituationFragen(ns) {
-  return (ns && Array.isArray(ns.fragen) ? ns.fragen : []).filter(q => q && Array.isArray(q.answers) && q.answers.length
-    && !(q.nurLang && currentMode === "short") && !(q.nurKurz && currentMode !== "short"));
+  return ns && Array.isArray(ns.fragen) ? neueSituationListe(ns) : [];
 }
 
 /* Paket T3: Texte in Bausteinen je Sprachstufe – { leicht, einfach, standard }
@@ -8666,7 +8793,7 @@ function renderNeueSituation(topic, index, wieder) {
       ${!ns.segmentiert && ns.einstieg ? `<p class="vorhersage-situation">${escapeHtml(ketteText(ns.einstieg))}</p>` : ""}
       ${ns.segmentiert ? "" : bildschirm}
       ${kontextHilfe}
-      ${buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten,
+      ${buildFrage({ aufgabe: frage, frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten,
         zaehler: LERNWEG_TEXT.frageVon.replace("{i}", i + 1).replace("{n}", liste.length),
         hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
       ${ns.segmentiert ? `<div id="transferAuswahl">${nehmenHtml()}</div>` : ""}
@@ -8725,7 +8852,7 @@ function answerNeueSituation(topic, i, index, opt) {
   const regel = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, topic.id, ok);
   const id = escapeHtml(topic.id);
   const weiter = letzte
-    ? `miniCheckDone['${id}'] = true; renderCompletionPage('${id}')`
+    ? `miniCheckDone[miniCheckSchluessel('${id}')] = true; renderCompletionPage('${id}')`
     : `renderNeueSituation(getTopicById('${id}'), ${i + 1})`;
   if (ns.segmentiert) {
     content.innerHTML = `${lernRahmenLeiste()}<article class="card feedback-page" style="${getTopicColorStyle(topic.id)}" data-readable="true"><h2>${richtig ? RUECKMELDUNG.passtTitel : istAuch ? RUECKMELDUNG.auchTitel : RUECKMELDUNG.nochNichtTitel}</h2><div id="transferFeedback" role="status" aria-live="polite"></div></article>`;
@@ -9234,7 +9361,7 @@ function renderNeueSituationFelder(topic, index) {
   `;
   felderAktiv.weiter = () => {
     if (i + 1 < liste.length) return renderNeueSituationFelder(topic, i + 1);
-    miniCheckDone[topic.id] = true;
+    miniCheckDone[miniCheckSchluessel(topic.id, weg)] = true;
     return renderCompletionPage(topic.id);
   };
   const weg = currentMode;
@@ -9477,17 +9604,18 @@ function renderHandySimulationErgebnis(topic, wieder) {
 function renderMiniCheck(topicId) {
   const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
+  neueSituationAuswahl = null;
   /* Anwenden (26.09.2026): zuerst eine neue Situation, sonst die kurze Frage.
      Datenschutz (Paket 2): eine EIGENE neue Situation (topic.neueSituation),
      die sonst nirgends vorkommt – nicht das Übungs-Handy. */
   /* D5 (01.10.2026): zuerst die Handy-Simulation, wo es eine gibt. */
-  if (!miniCheckDone[topic.id] && HANDY_SIMULATION[topic.id] && !simulationFertig[topic.id]) return renderHandySimulation(topic, 0);
-  if (!miniCheckDone[topic.id] && neueSituationDaten(topic)) return renderNeueSituation(topic, 0);
-  const transfer = !miniCheckDone[topic.id] ? transferSzeneWaehlen(topic) : null;
+  if (!miniCheckIstFertig(topic) && HANDY_SIMULATION[topic.id] && !simulationFertig[topic.id]) return renderHandySimulation(topic, 0);
+  if (!miniCheckIstFertig(topic) && neueSituationDaten(topic)) return renderNeueSituation(topic, 0);
+  const transfer = !miniCheckIstFertig(topic) ? transferSzeneWaehlen(topic) : null;
   if (transfer) return renderTransfer(topic, transfer);
   const mq = topic.miniQuestion;
   /* Kein Zwang: ohne Frage oder wenn schon beantwortet, direkt weiter. */
-  if (!mq || !Array.isArray(mq.answers) || !mq.answers.length || miniCheckDone[topic.id]) {
+  if (!mq || !Array.isArray(mq.answers) || !mq.answers.length || miniCheckIstFertig(topic)) {
     return renderCompletionPage(topic.id);
   }
 
@@ -9510,7 +9638,7 @@ function renderMiniCheck(topicId) {
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
         <h2>Eine kurze Frage</h2>
       </div>
-      ${buildFrage({ frage: mq.question || "", pikto: questionPikto(mq), antworten: optionen, hilfe: buildTaskHelpBox(taskHint(mq, "quiz"), true) })}
+      ${buildFrage({ aufgabe: mq, frage: mq.question || "", pikto: questionPikto(mq), antworten: optionen, hilfe: buildTaskHelpBox(taskHint(mq, "quiz"), true) })}
       <p class="sa-hint">Das ist kein Test. Du darfst raten.</p>
       <div id="miniFeedback" class="mini-feedback is-hidden" role="status" aria-live="polite"></div>
     </article>
@@ -9518,10 +9646,10 @@ function renderMiniCheck(topicId) {
 
   content.querySelectorAll(".mini-answer").forEach(btn => {
     btn.addEventListener("click", () => {
-      if (miniCheckDone[topic.id]) return;
+      if (miniCheckIstFertig(topic)) return;
       const gewaehlt = Number(btn.dataset.index);
       const richtig = gewaehlt === mq.correct;
-      miniCheckDone[topic.id] = true;
+      miniCheckDone[miniCheckSchluessel(topic.id)] = true;
       content.querySelectorAll(".mini-answer").forEach(b => {
         b.disabled = true;
         const i = Number(b.dataset.index);
@@ -9854,7 +9982,7 @@ function renderWeiterlernen(topicId, index) {
   const frage = (p && Array.isArray(p.answers) && p.answers.length) ? `
     <div class="practice-box practice-box--frage">
       <h3 class="sr-only">Übung</h3>
-      ${buildFrage({ frage: p.question || "", pikto: questionPikto(p),
+      ${buildFrage({ aufgabe: p, frage: p.question || "", pikto: questionPikto(p),
         antworten: p.answers.map((a, i) => `
           <button type="button" class="answer-option" onclick="weiterlernenAntwort(${i})">
             ${answerNumBadge(i)}${answerPikto(a, p, i)}<span class="answer-text">${escapeHtml(answerText(a))}</span>
@@ -9984,6 +10112,7 @@ function renderCompletionPage(topicId, wieder = false, teil = 0) {
     istKurz ? chip(`Mehr dazu: ${escapeHtml(topic.title)}`, `startTopicMode('${id}', 'extra')`) : "",
     chip("Regeln nochmal ansehen", `renderCompletionPage('${id}', true, 0)`),
     hatQuiz ? chip("Quiz machen", istKurz ? `startEinfachQuiz('${id}')` : `startQuiz('${id}')`) : "",
+    hasScenario(topic.id) ? chip("Im Übungs-Handy üben", `startScenario('${id}')`) : "",
     !istKurz ? chip("Merk-Karte ansehen", `renderMemoryCard('${id}')`) : "",
     chip("Nochmal von vorne", `startTopicMode('${id}', '${currentMode}')`),
     chip("Alle Lektionen nachlesen", `startTopicMode('${id}', 'full')`),
@@ -10171,7 +10300,7 @@ function renderEinfachQuizQuestion(fest) {
 
   content.innerHTML = `
     ${lernRahmenLeiste()}
-    <article class="card einfach-quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+    <article class="card einfach-quiz-card" style="${getTopicColorStyle(topic.id)}" data-readable="true"${glossarAufgabenAttribut(q)}>
       ${/* Vor-Nutzertest (29.09.2026), alle Themen: Überschrift für die
             Überschriften-Navigation (wie „Quiz“ im langen Quiz, V-2) und
             „Ich bin unsicher“ vor den Antworten wie in den anderen Aufgaben. */""}
@@ -10350,7 +10479,7 @@ function renderQuizQuestion() {
            Satz, hier). Die Ueberschrift bleibt fuer Screenreader und die
            Gliederung erhalten, kostet aber keinen Platz mehr. -->
       <h2 class="sr-only">Quiz</h2>
-      ${buildFrage({ frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${currentQuizIndex + 1} von ${questions.length}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) })}
+      ${buildFrage({ aufgabe: q, frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${currentQuizIndex + 1} von ${questions.length}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) })}
     </article>
   `;
   const t = topic.id, i = currentQuizIndex;
@@ -10755,7 +10884,7 @@ function renderBigQuizQuestion() {
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
       <!-- V-2: derselbe Titel steht schon in der Kopfzeile. -->
       <h2 class="sr-only">${escapeHtml(bigQuizTitle)}</h2>
-      ${buildFrage({ frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${bigQuizIndex + 1} von ${total}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) })}
+      ${buildFrage({ aufgabe: q, frage: q.question || "", pikto: questionPikto(q), antworten: answerHtml, zaehler: `Frage ${bigQuizIndex + 1} von ${total}`, hilfe: buildTaskHelpBox(taskHint(q, "quiz"), true) })}
     </article>
   `;
   const i = bigQuizIndex;
@@ -10973,6 +11102,7 @@ function startTrainingInbox() {
       `}
     </article>
   `;
+  stelleMerken(() => startTrainingInbox());
   focusContent();
   renderLegalFooter();
 }
@@ -11005,7 +11135,8 @@ function renderTrainingMessage() {
   if (postfachIndex >= postfachListe.length) return renderTrainingResult();
 
   const eintrag = postfachListe[postfachIndex];
-  const frage = eintrag.szene.frage;
+  const szene = scenarioSzene(eintrag.szene);
+  const frage = szene.frage;
   const total = postfachListe.length;
   postfachAntwort = false;
 
@@ -11024,8 +11155,9 @@ function renderTrainingMessage() {
     ${lernRahmenLeiste()}
     <article class="card scenario-card" style="${getTopicColorStyle(eintrag.thema)}" data-readable="true">
       <p class="sz-count">Nachricht ${postfachIndex + 1} von ${total}</p>
+      ${frage.situation ? `<p>${escapeHtml(frage.situation)}</p>` : ""}
       ${postfachScreen(eintrag)}
-      ${buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
+      ${buildFrage({ aufgabe: frage, frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
       <div id="szFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
       <div class="certificate-actions sz-exit">
         <button type="button" class="nav-button secondary" onclick="startTrainingInbox()">Üben beenden</button>
@@ -11037,35 +11169,43 @@ function renderTrainingMessage() {
     btn.addEventListener("click", function () { answerTraining(Number(btn.dataset.index)); });
   });
 
+  const liste = postfachListe, idx = postfachIndex, richtig = postfachRichtig;
+  stelleMerken(() => {
+    postfachListe = liste; postfachIndex = idx; postfachRichtig = richtig;
+    renderTrainingMessage();
+  });
   focusContent();
   renderLegalFooter();
 }
 
-function answerTraining(index) {
+function answerTraining(index, wieder) {
   if (postfachAntwort) return;
   const eintrag = postfachListe[postfachIndex];
   if (!eintrag) return;
-  const frage = eintrag.szene.frage;
-  const szene = eintrag.szene;
+  const szene = scenarioSzene(eintrag.szene);
+  const frage = szene.frage;
+  if (!Number.isInteger(index) || index < 0 || index >= frage.answers.length) return;
 
   postfachAntwort = true;
-  const richtig = index === Number(frage.correctIndex ?? 0);
-  if (richtig) postfachRichtig += 1;
-  playSound(richtig ? "correct" : "wrong");
+  const art = antwortArt(frage, index);
+  const richtig = art === "richtig", istAuch = art === "auch", ok = art !== "falsch";
+  if (ok && !wieder) postfachRichtig += 1;
+  if (!wieder) playSound(ok ? "correct" : "wrong");
 
   content.querySelectorAll(".sz-answer").forEach(function (b, i) {
     b.disabled = true;
-    if (i === index) b.classList.add(richtig ? "is-correct" : "is-wrong");
+    if (i === index) b.classList.add(richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
     if (!richtig && i === Number(frage.correctIndex ?? 0)) b.classList.add("is-correct");
   });
 
   const text = richtig
     ? (frage.feedbackCorrect || RUECKMELDUNG.entscheidungGut)
+    : istAuch ? auchFeedback(frage, index)
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
 
   /* Deine Karte: das Postfach zahlt jetzt genauso ein wie das Übungs-Handy.
      Das Herkunfts-Thema zaehlt – so entsteht der Transfer ueber Themen. */
-  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, eintrag.thema, richtig);
+  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, eintrag.thema, ok && !wieder);
 
   const schwerHtml = szene.schwer
     ? `<p class="sz-schwer">Die war schwer. Da fallen viele darauf herein.</p>` : "";
@@ -11078,29 +11218,34 @@ function answerTraining(index) {
            <p class="phone-bar">Diese Seite geht auf</p>
            <div class="phone-screen">${(falle.inhalt || []).map(scenarioElementHtml).join("")}</div>
          </div>
-         <p class="sz-falle-text">${escapeHtml(richtig ? (falle.text || "") : (falle.textFalsch || falle.text || ""))}</p>
+         <p class="sz-falle-text">${escapeHtml(ok ? (falle.text || "") : (falle.textFalsch || falle.text || ""))}</p>
        </div>`
     : "";
 
   const letzte = postfachIndex >= postfachListe.length - 1;
   const feld = document.getElementById("szFeedback");
   if (!feld) return;
-  feld.className = "sz-feedback " + (richtig ? "is-correct" : "is-wrong");
+  feld.className = "sz-feedback " + (richtig ? "is-correct" : istAuch ? "is-auch" : "is-wrong");
   feld.innerHTML = `
-    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : RUECKMELDUNG.nochNichtKurz}</p>
+    <p class="sz-feedback-kopf">${richtig ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtKurz}</p>
     ${schwerHtml}
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
-    ${!richtig && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : ""}
-    ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
+    ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : ""}
+    ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(merksatzAnzeige(frage))}</p>` : ""}
     ${regelHinweis}
     <p class="sz-feedback-herkunft">Diese Nachricht kommt aus dem Thema: ${escapeHtml(eintrag.titel)}.</p>
     <div class="certificate-actions">
       <button type="button" class="nav-button primary" onclick="nextTrainingMessage()">${letzte ? "Zum Ergebnis" : "Weiter"}</button>
     </div>`;
+  const liste = postfachListe, idx = postfachIndex, ri = postfachRichtig;
+  stelleMerken(() => {
+    postfachListe = liste; postfachIndex = idx; postfachRichtig = ri;
+    renderTrainingMessage(); answerTraining(index, true);
+  });
   const weiter = feld.querySelector("button");
   if (weiter) weiter.focus();
-  sprichEingefuegteRueckmeldung(feld);
+  if (!wieder) sprichEingefuegteRueckmeldung(feld);
 }
 
 function nextTrainingMessage() {
@@ -11108,10 +11253,10 @@ function nextTrainingMessage() {
   renderTrainingMessage();
 }
 
-function renderTrainingResult() {
+function renderTrainingResult(wieder) {
   stopReading();
   const total = postfachListe.length || 1;
-  playSound("success");
+  if (!wieder) playSound("success");
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -11147,7 +11292,7 @@ function renderTrainingResult() {
       <p>${escapeHtml(lob)}</p>
       ${themen.length ? `<p>Die Nachrichten kamen aus: ${escapeHtml(themen.join(", "))}.</p>` : ""}
       ${waechst}
-      ${buildRememberBox("Wichtig", "Bekommst du wirklich so eine Nachricht? Zeige sie einer Person, der du vertraust. Du musst nichts allein entscheiden.")}
+      ${buildRememberBox("Wichtig", "Du kannst selbst handeln. Du willst Unterstützung? Dann kannst du passende Hilfe holen.")}
       <div class="certificate-actions">
         <button type="button" class="quiz-link quiz-button" onclick="beginTraining()">Noch einmal üben</button>
         <button type="button" class="nav-button secondary" onclick="renderRegelKarte()">Deine Karte ansehen</button>
@@ -11155,6 +11300,11 @@ function renderTrainingResult() {
       </div>
     </article>
   `;
+  const liste = postfachListe, idx = postfachIndex, ri = postfachRichtig;
+  stelleMerken(() => {
+    postfachListe = liste; postfachIndex = idx; postfachRichtig = ri;
+    renderTrainingResult(true);
+  });
   focusContent();
   renderLegalFooter();
 }
@@ -11236,7 +11386,33 @@ function getScenario(topicId) {
   /* Vor-Nutzertest (29.09.2026): ausgeblendete Szenarien (Altbestand, siehe
      szenarien-de.js) gibt es für die App nicht – kein Chip, keine Übersicht,
      kein Postfach, kein Direkt-Link. Die Daten bleiben erhalten. */
-  return (s && !s.ausgeblendet) ? s : null;
+  return (s && !s.ausgeblendet) ? resolveLessonContent(s, languageLevel) : null;
+}
+
+/* Die Runde und die Sprachstufe sind unabhängig. Nur Lerntexte wechseln;
+   Nachrichten, Bewertung und der Leicht-Merksatz als Regelschlüssel bleiben
+   erhalten. Eine Kopie verhindert, dass das gemischte Postfach beim Wechsel
+   seine Quellen oder bereits gewählte Antworten verändert. */
+function scenarioSzene(szene) {
+  if (!szene) return szene;
+  const out = Object.assign({}, szene);
+  if (szene.frage) {
+    const q = szene.frage;
+    const v = resolveLessonContent(q, languageLevel);
+    out.frage = Object.assign({}, q);
+    AUFGABE_TEXTFELDER.forEach(k => {
+      if (v[k] !== undefined) out.frage[k] = v[k];
+    });
+    out.frage.schluessel = q.schluessel || q.question;
+    out.frage.rememberAnzeige = v.remember || q.remember;
+  }
+  if (szene.falle) {
+    const v = resolveLessonContent(szene, languageLevel);
+    out.falle = Object.assign({}, szene.falle);
+    if (v.falleText !== undefined) out.falle.text = v.falleText;
+    if (v.falleTextFalsch !== undefined) out.falle.textFalsch = v.falleTextFalsch;
+  }
+  return out;
 }
 
 function hasScenario(topicId) {
@@ -11424,8 +11600,8 @@ function startScenario(topicId) {
           const zahl = (scn.szenen || []).filter(z => (Number(z.stufe) || 1) === st).length;
           const offen = st <= frei;
           const untertitel = st === 1 ? "Zum Anfangen"
-                           : st === 2 ? "Die Tricks sind besser gemacht"
-                           : "Jetzt zählt, was du tust";
+                           : st === 2 ? "Weitere Nachrichten prüfen"
+                           : "Weitere Situationen üben";
           return offen
             ? `<button type="button" class="sz-runde" onclick="beginScenario(${st})">
                  <span class="sz-runde-titel">${escapeHtml(stufenName(st))}</span>
@@ -11485,7 +11661,7 @@ function renderScenarioScene() {
   const runde = scenarioRunde(scn, scenarioStufe);
   if (scenarioIndex >= runde.szenen.length) return renderScenarioResult();
 
-  const szene = runde.szenen[scenarioIndex];
+  const szene = scenarioSzene(runde.szenen[scenarioIndex]);
   const total = runde.szenen.length;
   const frage = szene.frage || null;
   scenarioAnswered = false;
@@ -11510,9 +11686,10 @@ function renderScenarioScene() {
     ${lernRahmenLeiste()}
     <article class="card scenario-card" style="${getTopicColorStyle(topic.id)}" data-readable="true">
       <p class="sz-count">${escapeHtml(rundeText)}Schritt ${scenarioIndex + 1} von ${total}</p>
+      ${frage && frage.situation ? `<p>${escapeHtml(frage.situation)}</p>` : ""}
       ${buildScenarioScreen(runde, scenarioIndex)}
       ${frage ? `
-        ${buildFrage({ frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
+        ${buildFrage({ aufgabe: frage, frage: frage.question || "", pikto: questionPikto(frage), antworten: antworten, hilfe: buildTaskHelpBox(taskHint(frage, "quiz"), true) })}
         <div id="szFeedback" class="sz-feedback is-hidden" role="status" aria-live="polite"></div>
       ` : `
         <div class="certificate-actions">
@@ -11541,9 +11718,9 @@ function answerScenario(index, wieder) {
   const scn = getScenario(scenarioTopicId);
   if (!scn) return;
   const runde = scenarioRunde(scn, scenarioStufe);
-  const szene = runde.szenen[scenarioIndex] || {};
+  const szene = scenarioSzene(runde.szenen[scenarioIndex]) || {};
   const frage = szene.frage;
-  if (!frage) return;
+  if (!frage || !Number.isInteger(index) || index < 0 || index >= frage.answers.length) return;
 
   scenarioAnswered = true;
   /* Paket T5: richtig / auch möglich / falsch („auch möglich“ zählt als geschafft). */
@@ -11563,7 +11740,7 @@ function answerScenario(index, wieder) {
     : istAuch ? auchFeedback(frage, index)
     : (falschFeedback(frage, index) || "Das ist nicht sicher. Schau noch einmal.");
   /* Deine Karte: angewendete Regel eintragen (nur bei richtiger Antwort). */
-  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, scenarioTopicId, ok);
+  const regelHinweis = regelKastenHtml((typeof regelZuSatz === "function") ? regelZuSatz(frage.remember) : null, scenarioTopicId, ok && !wieder);
   const letzte = scenarioIndex >= runde.szenen.length - 1;
 
   /* "Die war schwer" – Einordnung statt Lob. Nimmt Erwachsene ernst und
@@ -11596,7 +11773,7 @@ function answerScenario(index, wieder) {
     ${falleHtml}
     <p class="sz-feedback-text">${escapeHtml(text)}</p>
     ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[Number(frage.correctIndex ?? 0)]) : ""}
-    ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(frage.remember)}</p>` : ""}
+    ${frage.remember ? `<p class="sz-feedback-merk">Merksatz: ${escapeHtml(merksatzAnzeige(frage))}</p>` : ""}
     ${regelHinweis}
     <div class="certificate-actions">
       <button type="button" class="nav-button primary" onclick="nextScenarioScene()">${letzte ? "Zum Ergebnis" : "Weiter"}</button>
@@ -11652,8 +11829,8 @@ function renderScenarioResult(wieder) {
       ? `<div class="access-box remember remember-box">
            <h3>${escapeHtml(stufenName(naechste))} ist jetzt offen</h3>
            <p class="remember-text">${naechste === 3
-             ? "In Runde 3 kannst du die Tricks nicht mehr sehen. Auch geübte Menschen nicht. Dort zählt, was du tust."
-             : "In Runde 2 sind die Tricks besser gemacht. Kein Fehler im Text. Du musst genau hinschauen."}</p>
+             ? "In Runde 3 übst du weitere Situationen."
+             : "In Runde 2 prüfst du weitere Nachrichten."}</p>
          </div>`
       : naechste
         ? `<div class="access-box remember remember-box">
@@ -11662,12 +11839,12 @@ function renderScenarioResult(wieder) {
            </div>`
         : `<div class="access-box remember remember-box">
              <h3>Du hast alle Runden gemacht</h3>
-             <p class="remember-text">Das war die schwerste. Du kannst jede Runde jederzeit wiederholen.</p>
+             <p class="remember-text">Du kannst jede Runde jederzeit wiederholen.</p>
            </div>`;
 
   const merksaetze = runde.szenen
     .filter(s => s.frage && s.frage.remember)
-    .map(s => `<li>${escapeHtml(s.frage.remember)}</li>`).join("");
+    .map(s => `<li>${escapeHtml(merksatzAnzeige(scenarioSzene(s).frage))}</li>`).join("");
 
   content.innerHTML = `
     ${lernRahmenLeiste()}
@@ -11682,7 +11859,7 @@ function renderScenarioResult(wieder) {
         <h3>Das nimmst du mit</h3>
         <ul class="sz-merkliste">${merksaetze}</ul>
       </div>` : ""}
-      ${buildRememberBox("Wichtig", "Passiert dir so etwas wirklich? Zeige es einer Person, der du vertraust. Du musst nichts allein entscheiden.")}
+      ${buildRememberBox("Wichtig", "Du kannst selbst handeln. Du willst Unterstützung? Dann kannst du passende Hilfe holen.")}
       <div class="certificate-actions">
         ${(naechste && bestanden)
           ? `<button type="button" class="quiz-link quiz-button" onclick="beginScenario(${naechste})">${escapeHtml(stufenName(naechste))} starten</button>`

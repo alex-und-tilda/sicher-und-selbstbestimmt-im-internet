@@ -28,7 +28,7 @@ Alle Vorlagen gibt es zweimal: als **PowerPoint zum Bearbeiten** und als **PDF z
 
 Das **Ablauf-Plakat** hat eine Seite je Modul. Die vier Themen stehen dort wortgleich wie auf Folie 2 des Workshops. Seite 1 ist eine leere Vorlage für ein weiteres Modul.
 
-Die **Merk-Karte** zum Mitnehmen liegt nicht in diesem Ordner. Sie wird aus der Lernplattform gedruckt: Thema öffnen, Begleit-Ebene aufklappen, Knopf „Drucken / als PDF speichern“.
+Die **Merk-Karte** zum Mitnehmen liegt nicht in diesem Ordner. Sie wird aus der Lernplattform gedruckt: Thema öffnen, „Für später“ aufklappen, „Merk-Karte“ öffnen und „Merk-Karte drucken“ wählen. Der Knopf „Begleithilfe drucken / als PDF speichern“ im Begleitbereich druckt dagegen die Hinweise für Begleitpersonen.
 
 ## 2. Was die Einrichtung vor dem Workshop ausfüllt
 

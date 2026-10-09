@@ -1881,7 +1881,7 @@ const topics = [
         "answers": [
           "Private Daten.",
           "Ein freundlicher Gruß.",
-          "Eine Frage an die Gruppe."
+          "Eine Frage ohne private Angaben."
         ],
         "correctIndex": 0,
         "feedbackWrong": [
@@ -3292,7 +3292,7 @@ const topics = [
       "Was ist auf dem Foto zu sehen?",
       "Ist mein Standort sichtbar?",
       "Kenne ich diese Person?",
-      "Macht mir ein Kommentar Stress oder Stress?"
+      "Macht mir ein Kommentar Druck oder Angst?"
     ],
     "memoryRules": [
       "Ich prüfe Fotos vor dem Posten.",
@@ -5539,10 +5539,10 @@ const topics = [
             "Ich rede mit einer Person. Ich vertraue ihr."
           ],
           "correctIndex": 2,
-          "feedbackCorrect": "Gut. Die Nachricht macht dir Sorgen. Deine Gefühle sind wichtig. Du darfst darüber sprechen. Zusammen überlegt ihr: Was sagst du am Montag?",
+          "feedbackCorrect": "Gut. Deine Gefühle sind wichtig. Du darfst darüber sprechen. Eine vertraute Person kann dir zuhören. Zusammen überlegt ihr: Was willst du am Montag fragen?",
           "feedbackWrong": [
-            "Dann bleibt die Sorge. Und das Gespräch kommt später trotzdem. Rede lieber mit einer Person. Du vertraust ihr.",
-            "Allein werden Sorgen oft größer. Du darfst darüber sprechen. Rede mit einer Person. Du vertraust ihr.",
+            "Du weißt noch nicht: Was war los? Eine vertraute Person kann dir jetzt zuhören. Zusammen überlegt ihr: Was willst du am Montag fragen?",
+            "Du musst mit deinen Sorgen nicht allein bleiben. Eine vertraute Person kann dir zuhören. Zusammen überlegt ihr: Was willst du am Montag fragen?",
             null
           ],
           "remember": "Meine Gefühle sind wichtig. Ich darf darüber sprechen."
@@ -5783,7 +5783,7 @@ const topics = [
         "hinweis": "Überlege: Wer kann dir bei so etwas helfen?",
         "answers": [
           "Ich rede mit meiner Gruppen-Leiterin. Ich zeige ihr den Chat.",
-          "Ich schreibe in die Gruppe: Ihr seid alle total gemein.",
+          "Ich schreibe wütend in die Gruppe: Ihr seid alle total gemein.",
           "Ich sage nichts. Das war doch bestimmt nur Spaß."
         ],
         "correctIndex": 0,

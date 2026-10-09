@@ -1,36 +1,51 @@
 /* ============================================================
    Begleit-Ebene „Für Begleitpersonen und Fachkräfte"
-   (Fachsprache Eingliederungshilfe)
+   Praktische Hilfen für das gemeinsame Lernen
 
    Eigene, klar getrennte Ebene – KEINE Sprach-Stufe für Lernende.
    Sie erscheint als aufklappbares Panel im Themen-Einstieg und
    richtet sich an Betreuende, Assistenz, Angehörige und Fachkräfte.
 
-   Aufbau:  COMPANION[themaId] = { kompetenzen{digcomp[], icf[]}, lernziele[],
+   Aufbau:  COMPANION[themaId] = { praxis{vorbereiten[], fragen[], helfen[],
+            erkennen[], alltag[]}, lernziele[],
             methodik[], gespraechsanlaesse[], begleithinweise[],
             rechtsbezuege[], transfer[], lektionen{short{}, full{}} }
 
-   kompetenzen: Verortung im Europäischen Referenzrahmen DigComp 2.2
-   (Code, Kompetenz, Stufe) und in der ICF (Aktivität und Teilhabe bzw.
-   Umweltfaktoren). Macht sichtbar, was die Person danach im ALLTAG kann –
-   nicht nur, was sie weiß. Reine Fachkräfte-Information.
+   Die neuen praktischen Hinweise und die gemeinsame Unterstützungsfolge
+   sind ein Begleitentwurf, keine bereits geprüften Lerntexte.
+   Fachliche Zuordnungen werden ausschließlich intern gepflegt.
    Verknüpfung am Ende: applyCompanion() hängt es als topic.companion an.
    ============================================================ */
 
+/* Gemeinsame Unterstützung nach Wunsch, Begleitentwurf vom 09.10.2026.
+   Diese Folge ist kein Test und keine Voraussetzung für Hilfe. */
+const COMPANION_HILFE = [
+  "Vor dem Helfen fragen: Welche Hilfe möchtest du? Gemeinsam ansehen, zeigen oder vorlesen nur mit Einverständnis.",
+  "Denselben Schritt gemeinsam ansehen. Eine kurze Frage stellen und Zeit für die eigene Antwort lassen.",
+  "Auf Wunsch ein anderes Beispiel anbieten oder einen Schritt vormachen. Dafür nur erfundene Angaben verwenden.",
+  "Die Person kann selbst ausprobieren oder selbst entscheiden. Das Gerät und die Entscheidung bleiben bei ihr.",
+  "Pause und Hilfe sind jederzeit möglich. Niemand muss es erst allein versuchen, etwas richtig beantworten oder Verständnis bestätigen."
+];
+
 const COMPANION = {
   datenschutz: {
-    kompetenzen: {
-      digcomp: [
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Erkennt einfache personenbezogene Daten und weiß, dass Privatsphäre-Einstellungen veränderbar sind." },
-        { code: "2.6", titel: "Verwaltung der digitalen Identität", stufe: "Stufe 1 · grundlegend, mit Anleitung",
-          bezug: "Entscheidet mit Unterstützung, welche Angaben im Profil sichtbar sein sollen." }
+    praxis: {
+      "vorbereiten": [
+        "Ein erfundenes Formular mit nötigen und freiwilligen Angaben bereithalten. Keine echten Daten eintragen."
       ],
-      icf: [
-        { code: "d177", titel: "Entscheidungen treffen",
-          bezug: "Wählt im Alltag selbst aus, welche Daten sie weitergibt und welche nicht – und schiebt die Entscheidung bei Unsicherheit auf." },
-        { code: "e125", titel: "Produkte und Technologien zur Kommunikation (Umweltfaktor)",
-          bezug: "Das eigene Gerät wird durch Schutz-Einstellungen zum unterstützenden Faktor statt zur Barriere." }
+      "fragen": [
+        "Wofür braucht die App oder das Formular diese Angabe?",
+        "Welche Daten sind für diesen Zweck nötig, und welche können offenbleiben?"
+      ],
+      "helfen": [
+        "Eine Angabe gemeinsam prüfen: Empfänger, Zweck und benötigte Menge. Ein Pflichtfeld ist noch keine Begründung.",
+        "Bei unklarem Zweck gemeinsam eine Rückfrage überlegen. Die Person entscheidet über die Freigabe."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person beim nächsten Beispiel den Zweck prüft, statt immer Ja oder immer Nein zu wählen."
+      ],
+      "alltag": [
+        "Auf Wunsch bei einer selbst gewählten App eine Berechtigung ansehen. Änderungen nur mit Einverständnis; die Person entscheidet."
       ]
     },
     lernziele: [
@@ -75,22 +90,23 @@ const COMPANION = {
   },
 
   whatsapp: {
-    kompetenzen: {
-      digcomp: [
-        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Nutzt Nachrichten, Sprach-Nachrichten und Gruppen und wählt selbst, wem sie antwortet." },
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Prüft eine Nachricht von einer unbekannten Nummer auf Warnzeichen (Hallo-Mama-Trick) und erkennt Meta AI als Programm." },
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Stellt Profilbild, Zuletzt-online und Gruppen-Einladungen ein und gibt keine Bestätigungs-Codes weiter." }
+    praxis: {
+      "vorbereiten": [
+        "Erfundene Nachrichten bereithalten: eine normale Nachricht und eine Geldbitte von einer neuen Nummer. Keine echten Chats öffnen."
       ],
-      icf: [
-        { code: "d360", titel: "Kommunikationsgeräte und -techniken benutzen",
-          bezug: "Schreibt, telefoniert und verschickt Sprach-Nachrichten selbstständig." },
-        { code: "d720", titel: "Komplexe interpersonelle Interaktionen",
-          bezug: "Setzt Grenzen: antwortet nicht, blockiert, beendet ein Gespräch." },
-        { code: "d760", titel: "Familienbeziehungen",
-          bezug: "Ruft bei angeblichen Nachrichten von Angehörigen über die bekannte Nummer zurück." }
+      "fragen": [
+        "Was verlangt die Nachricht von dir?",
+        "Wie kannst du die Person über einen schon bekannten Kontakt selbst erreichen?"
+      ],
+      "helfen": [
+        "Die Geldbitte ohne Zeitdruck gemeinsam lesen. Auf Wunsch das Beenden und den selbst gewählten Rückruf im Rollenspiel zeigen.",
+        "Bei einer Code-Frage nur Beispielzahlen verwenden. Kein echter Code wird abgefragt oder weitergegeben."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person die Geldbitte selbst prüft, statt allein dem Namen oder der Dringlichkeit zu vertrauen."
+      ],
+      "alltag": [
+        "Auf Wunsch gemeinsam ansehen, wer das Profilbild sehen darf. Die Person wählt die Einstellung und bedient ihr Gerät selbst."
       ]
     },
     lernziele: [
@@ -130,24 +146,23 @@ const COMPANION = {
   },
 
   facebook: {
-    kompetenzen: {
-      digcomp: [
-        { code: "2.6", titel: "Verwaltung der digitalen Identität", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Gestaltet das Profil so, dass private Angaben nicht öffentlich sind." },
-        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Prüft Freundschafts-Anfragen und nimmt nicht jede an." },
-        { code: "2.5", titel: "Netiquette", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Schreibt respektvoll und erkennt Beleidigungen als nicht hinnehmbar." },
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Stellt die Sichtbarkeit von Beiträgen auf Freunde." }
+    praxis: {
+      "vorbereiten": [
+        "Ein erfundenes Profil und Beispielnachrichten verwenden. Für Foto-Fragen ein erfundenes Bild mit zwei Personen auswählen."
       ],
-      icf: [
-        { code: "d750", titel: "Informelle soziale Beziehungen",
-          bezug: "Pflegt Kontakte zu Bekannten und unterscheidet sie von Fremden." },
-        { code: "d730", titel: "Umgang mit fremden Personen",
-          bezug: "Reagiert zurückhaltend auf Anfragen unbekannter Profile." },
-        { code: "d175", titel: "Probleme lösen",
-          bezug: "Wendet bei Beleidigungen einen festen Plan an: blockieren, melden, erzählen, Hilfe holen." }
+      "fragen": [
+        "Wer soll diesen Beitrag sehen?",
+        "Sind alle abgebildeten Personen mit diesem Foto und diesem Empfängerkreis einverstanden?"
+      ],
+      "helfen": [
+        "Die Auswahl für einen einzelnen Beitrag gemeinsam ansehen. Darauf hinweisen, dass Profilbild und Beiträge verschiedene Einstellungen haben.",
+        "Bei einer Geldbitte den Link geschlossen lassen. Einen angeblich bekannten Absender über einen schon bekannten Kontakt prüfen. Auf Wunsch Schließen, Blockieren oder Melden zeigen."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person den Empfängerkreis bewusst auswählt und ein Nein zum Teilen eines Fotos berücksichtigt."
+      ],
+      "alltag": [
+        "Auf Wunsch bei einem selbst gewählten Beitrag die Sichtbarkeit prüfen. Nichts ohne Einverständnis veröffentlichen oder ändern."
       ]
     },
     lernziele: [
@@ -170,7 +185,9 @@ const COMPANION = {
     begleithinweise: [
       "Beleidigungen und Cyber-Mobbing ernst nehmen; Gefühlen Raum geben.",
       "Einstellungen sind komplex – die Begleitperson unterstützt, entscheidet aber nicht für die Person.",
-      "Bei Mobbing dokumentieren (Screenshot), melden, blockieren, Hilfe holen."
+      "Bei Mobbing dokumentieren (Screenshot), melden, blockieren, Hilfe holen.",
+      "Foto-Einwilligung: am erfundenen Beispiel fragen, wer zu sehen ist und wer das Bild sehen soll. Vor dem Teilen die Zustimmung aller abgebildeten Personen für diesen Empfängerkreis klären. Ein Nein respektieren; gemeinsam ein anderes Bild ohne diese Person überlegen.",
+      "Geld-Link in einer Nachricht: am erfundenen Beispiel Geldbitte und Link gemeinsam ansehen. Die Person kann den Link geschlossen lassen und kein Geld senden. Bei einem angeblich bekannten Absender über einen schon bekannten Kontakt selbst nachfragen, statt den Link oder die neue Nummer zu nutzen. Auf Wunsch Schließen, Blockieren oder Melden zeigen."
     ],
     rechtsbezuege: [
       "UN-BRK Artikel 21: Zugang zu Information und Meinungsäußerung.",
@@ -186,24 +203,23 @@ const COMPANION = {
   },
 
   instagram: {
-    kompetenzen: {
-      digcomp: [
-        { code: "2.2", titel: "Teilen durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Prüft Fotos und Videos vor dem Posten, auch den Hintergrund." },
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Schaltet die Standort-Freigabe aus und stellt das Konto auf privat." },
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Erkennt, dass viele Bilder bearbeitet und gefiltert sind." },
-        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Ordnet den Vergleichs-Druck ein und schützt das eigene Wohlbefinden." }
+    praxis: {
+      "vorbereiten": [
+        "Ein erfundenes Foto mit erkennbaren Hinweisen im Hintergrund und ohne echte private Daten bereithalten."
       ],
-      icf: [
-        { code: "d177", titel: "Entscheidungen treffen",
-          bezug: "Entscheidet vor dem Posten selbst, was privat bleibt." },
-        { code: "d720", titel: "Komplexe interpersonelle Interaktionen",
-          bezug: "Antwortet Fremden nicht vorschnell und blockiert bei Bedarf." },
-        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
-          bezug: "Hält dem Vergleich mit bearbeiteten Bildern stand." }
+      "fragen": [
+        "Was sehen andere auf dem Foto außer der Person?",
+        "Ist jemand mit dem Teilen nicht einverstanden?"
+      ],
+      "helfen": [
+        "Auf Wunsch gemeinsam im Beispiel nach Namen, Adressen oder Standort-Hinweisen suchen. Die Person wählt, ob das Bild geteilt werden soll.",
+        "Bei einer unerwünschten Nachricht die möglichen Wege Schließen, Blockieren und Melden am Beispiel zeigen."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person vor dem Posten auch Hintergrund, Standort und Zustimmung anderer berücksichtigt."
+      ],
+      "alltag": [
+        "Auf Wunsch die Sichtbarkeit oder Standort-Angabe eines selbst gewählten Beitrags ansehen. Die Person entscheidet über jede Änderung."
       ]
     },
     lernziele: [
@@ -241,22 +257,23 @@ const COMPANION = {
   },
 
   youtube: {
-    kompetenzen: {
-      digcomp: [
-        { code: "1.1", titel: "Browsen, Suchen und Filtern von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Sucht Videos gezielt und schaltet Autoplay aus." },
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Prüft Aussagen in Videos und erkennt Werbung als Werbung." },
-        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Macht bewusst Pausen und macht gefährliche Mutproben nicht nach." }
+    praxis: {
+      "vorbereiten": [
+        "Ein kurzes unbedenkliches Beispielvideo und eine deutlich erkennbare Werbeaussage auswählen. Keine gefährliche Mutprobe vorführen."
       ],
-      icf: [
-        { code: "d163", titel: "Denken",
-          bezug: "Hinterfragt eine Aussage, bevor sie sie übernimmt." },
-        { code: "d570", titel: "Auf die eigene Gesundheit achten",
-          bezug: "Vereinbart eine Pausen-Regel und hält sie ein." },
-        { code: "d920", titel: "Erholung und Freizeit",
-          bezug: "Nutzt Videos als Freizeit, ohne die Kontrolle über die Zeit zu verlieren." }
+      "fragen": [
+        "Will das Video etwas erklären oder etwas verkaufen?",
+        "Wie kannst du diese Behauptung außerhalb des Videos prüfen?"
+      ],
+      "helfen": [
+        "Eine Aussage gemeinsam mit einer unabhängigen passenden Quelle vergleichen. Nicht allein Aufrufzahlen als Beleg nehmen.",
+        "Auf Wunsch zeigen, wie ein Video gestoppt und die automatische Wiedergabe ausgeschaltet wird. Die Person wählt ihre Pause."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person Werbung von einer Erklärung unterscheidet und bei einer fraglichen Aussage einen weiteren Beleg sucht."
+      ],
+      "alltag": [
+        "Die Person kann bei einem selbst gewählten Video eine Aussage prüfen oder eine Pause ausprobieren. Keine verpflichtende Zeitkontrolle."
       ]
     },
     lernziele: [
@@ -293,22 +310,23 @@ const COMPANION = {
   },
 
   snapchat: {
-    kompetenzen: {
-      digcomp: [
-        { code: "2.2", titel: "Teilen durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Weiß, dass verschwindende Bilder per Screenshot gespeichert werden können." },
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Stellt die Snap Map auf den Geistmodus." },
-        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Erkennt Geheimhaltungs-Druck als Warnzeichen und holt Hilfe." }
+    praxis: {
+      "vorbereiten": [
+        "Erfundene Bilder und Nachrichten verwenden. Keine sehr privaten Bilder verlangen, anschauen oder für die Übung versenden."
       ],
-      icf: [
-        { code: "d730", titel: "Umgang mit fremden Personen",
-          bezug: "Hält Abstand zu unbekannten Kontakten." },
-        { code: "d720", titel: "Komplexe interpersonelle Interaktionen",
-          bezug: "Sagt Nein und beendet den Kontakt bei Druck." },
-        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
-          bezug: "Holt bei Druck Hilfe, statt allein damit zu bleiben." }
+      "fragen": [
+        "Was kann mit einem Bild passieren, auch wenn es später nicht mehr im Chat zu sehen ist?",
+        "Was möchtest du tun, wenn jemand ein Bild fordert und Geheimhaltung verlangt?"
+      ],
+      "helfen": [
+        "Am unbedenklichen Beispiel erklären, dass ein Bild kopiert werden kann. Für den Bildvergleich reicht die Übung in der App.",
+        "Bei Druck ruhig zuhören und auf Wunsch das Beenden oder Hilfeholen üben. Keine Offenlegung privater Bilder als Voraussetzung verlangen."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person ein Bild auch bei behauptetem Verschwinden bewusst auswählt und bei Druck eine Grenze setzen kann."
+      ],
+      "alltag": [
+        "Auf Wunsch gemeinsam ansehen, wer den Standort sehen darf. Die Person entscheidet, ob sie eine Einstellung ändern möchte."
       ]
     },
     lernziele: [
@@ -346,22 +364,23 @@ const COMPANION = {
   },
 
   tiktok: {
-    kompetenzen: {
-      digcomp: [
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Erkennt gefährliche Trends und mit KI gefälschte Videos." },
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Stellt das Konto auf privat und gibt keine privaten Daten preis." },
-        { code: "4.3", titel: "Schutz von Gesundheit und Wohlbefinden", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Stellt eine Bildschirmzeit-Grenze ein und erkennt den Sog des Algorithmus." }
+    praxis: {
+      "vorbereiten": [
+        "Einen unbedenklichen Trend und eine erfundene Nachricht mit einer Daten- oder Foto-Forderung als Beispiele wählen."
       ],
-      icf: [
-        { code: "d177", titel: "Entscheidungen treffen",
-          bezug: "Entscheidet selbst, einen Trend nicht nachzumachen." },
-        { code: "d570", titel: "Auf die eigene Gesundheit achten",
-          bezug: "Beendet das Schauen nach der vereinbarten Zeit." },
-        { code: "d920", titel: "Erholung und Freizeit",
-          bezug: "Gestaltet Medien-Freizeit bewusst und begrenzt." }
+      "fragen": [
+        "Möchtest du bei diesem Trend mitmachen? Was gefällt dir daran, und was kann dir schaden?",
+        "Wie merkst du, dass du eine Pause möchtest?"
+      ],
+      "helfen": [
+        "Eine Ablehnung im Rollenspiel ausprobieren: nicht mitmachen oder die Nachricht schließen. Niemand muss einen gefährlichen Trend vorführen.",
+        "Auf Wunsch gemeinsam nachsehen, wie unerwünschte Kontakte blockiert oder gemeldet werden. Keine privaten Nachrichten ohne Zustimmung öffnen."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person bei Druck selbst eine Grenze wählt oder eine Pause einlegt. Viele Aufrufe sind kein Sicherheitsbeleg."
+      ],
+      "alltag": [
+        "Die Person kann eine selbst gewählte Pause oder eine Einstellung für Nachrichten ausprobieren. Keine Kontrolle der Nutzungszeit erzwingen."
       ]
     },
     lernziele: [
@@ -398,26 +417,23 @@ const COMPANION = {
   },
 
   hilfe: {
-    kompetenzen: {
-      digcomp: [
-        { code: "5.1", titel: "Lösen technischer Probleme", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Erkennt ein Problem am Gerät oder in einer App und sucht eine Lösung." },
-        { code: "5.4", titel: "Erkennen von Lücken in der digitalen Kompetenz", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Merkt, wann sie etwas nicht allein lösen kann, und holt Hilfe." },
-        { code: "1.3", titel: "Verwalten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Sichert eine Nachricht als Bild vom Bildschirm, um sie einer Person zeigen zu können." },
-        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Nutzt den Hilfe- und Melde-Knopf einer Plattform." }
+    praxis: {
+      "vorbereiten": [
+        "Zwei erfundene Situationen wählen: ein Handy ohne Ton und eine Nachricht, die Druck macht. Passende Hilfekontakte gemeinsam bereithalten."
       ],
-      icf: [
-        { code: "d175", titel: "Probleme lösen",
-          bezug: "Unterscheidet, was los ist, und wählt den nächsten Schritt: selbst handeln, bei Druck oder Angst stoppen oder passende Unterstützung holen." },
-        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
-          bezug: "Bleibt in einer belastenden Lage handlungsfähig." },
-        { code: "e310", titel: "Engster Familien- und Freundeskreis (Umweltfaktor)",
-          bezug: "Eine Vertrauensperson ist benannt und erreichbar." },
-        { code: "e5750", titel: "Allgemeine soziale Unterstützungsdienste (Umweltfaktor)",
-          bezug: "Beratungsstellen und Notrufe sind bekannt und notiert." }
+      "fragen": [
+        "Was ist los: Technik, Druck oder Angst, oder ist jemand gerade in Gefahr?",
+        "Welche Hilfe möchtest du jetzt?"
+      ],
+      "helfen": [
+        "Den Hilfe-Check am selben Beispiel durchgehen. Bei einem harmlosen Technikproblem sind selbst ausprobieren und Hilfeholen mögliche Wege.",
+        "Hilfe sofort anbieten, auch ohne vorherigen Eigenversuch. Die Person kann zeigen oder erzählen; das Gerät bleibt bei ihr."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person zum Problem einen passenden nächsten Schritt wählt. Bei akuter Gefahr zählt sofortige Hilfe, kein Übungsdurchgang."
+      ],
+      "alltag": [
+        "Auf Wunsch eine persönliche Hilfe-Karte mit selbst gewählten Kontakten erstellen. Die Karte bleibt bei der Person."
       ]
     },
     /* Paket H1 (30.09.2026): neue fachliche Lernziel-Struktur (6 Ziele, siehe
@@ -451,7 +467,7 @@ const COMPANION = {
     ],
     begleithinweise: [
       "Sicheren, vorwurfsfreien Rahmen schaffen: Hilfe holen ist Stärke, nicht Versagen.",
-      "Selbstständigkeit stärken: zuerst fragen, was die Person schon selbst probiert hat, und erst dann unterstützen – nicht das Handy aus der Hand nehmen.",
+      "Vor dem Unterstützen fragen, welche Hilfe die Person möchte. Hilfe ist auch ohne vorherigen Eigenversuch möglich; nicht das Handy aus der Hand nehmen.",
       "Konkrete regionale Beratungs- und Notfall-Kontakte bereithalten.",
       "Bei akuten Vorfällen sofort handeln, nicht nur besprechen."
     ],
@@ -468,24 +484,23 @@ const COMPANION = {
   },
 
   ki: {
-    kompetenzen: {
-      digcomp: [
-        { code: "2.1", titel: "Interagieren durch digitale Technologien", stufe: "Stufe 1 · grundlegend, mit Anleitung",
-          bezug: "Erkennt beim Schreiben mit einem Chatbot, dass kein Mensch antwortet." },
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Prüft wichtige KI-Antworten an einer zweiten Quelle." },
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Gibt keine privaten Daten in einen Chatbot ein." },
-        { code: "5.4", titel: "Erkennen von Lücken in der digitalen Kompetenz", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Holt bei Gesundheit und Geld zusätzlich menschlichen Rat." }
+    praxis: {
+      "vorbereiten": [
+        "Eine harmlose erfundene KI-Antwort bereithalten. Keine Namen, Gesundheitsangaben, Kontodaten oder anderen privaten Daten eingeben."
       ],
-      icf: [
-        { code: "d163", titel: "Denken",
-          bezug: "Unterscheidet zwischen einem Programm und einem Menschen." },
-        { code: "d177", titel: "Entscheidungen treffen",
-          bezug: "Entscheidet bewusst, was sie einer KI erzählt und was nicht." },
-        { code: "d360", titel: "Kommunikationsgeräte und -techniken benutzen",
-          bezug: "Nutzt Chatbots als Werkzeug, ohne sie für eine Person zu halten." }
+      "fragen": [
+        "Wie kannst du prüfen, ob diese Antwort stimmt?",
+        "Was machst du, wenn eine bekannte Stimme plötzlich Geld verlangt?"
+      ],
+      "helfen": [
+        "Eine überprüfbare Aussage aus der KI-Antwort auswählen und mit einer unabhängigen passenden Quelle vergleichen.",
+        "Auf Wunsch einen Rückruf im Rollenspiel zeigen: Gespräch beenden und eine schon bekannte Nummer selbst wählen. Die Stimme allein reicht nicht."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person eine KI-Antwort überprüft und die bekannte Stimme nicht als sicheren Nachweis behandelt."
+      ],
+      "alltag": [
+        "Die Person kann eine unverfängliche KI-Antwort selbst prüfen. Bei Fragen zu Gesundheit oder Geld passende menschliche Unterstützung anbieten."
       ]
     },
     lernziele: [
@@ -508,7 +523,8 @@ const COMPANION = {
     begleithinweise: [
       "Parasozialen Bezug ansprechen: Ein Chatbot ist kein Freund und keine Therapie.",
       "Keine echten privaten Daten eingeben lassen.",
-      "Bei emotionaler Abhängigkeit von Chatbots aufmerksam sein und das Gespräch suchen."
+      "Bei emotionaler Abhängigkeit von Chatbots aufmerksam sein und das Gespräch suchen.",
+      "Gefälschte Angehörigen-Stimme: auf Wunsch mit erfundenen Rollen üben, das Gespräch zu beenden und eine bereits bekannte Nummer der Person selbst zu wählen. Keine Nummer aus der verdächtigen Nachricht nutzen. Ist niemand erreichbar, bleibt die Forderung ungeklärt: bis zur Klärung nichts zahlen oder freigeben und passende Unterstützung anbieten."
     ],
     rechtsbezuege: [
       "UN-BRK Artikel 21: Zugang zu Information und kritische Nutzung.",
@@ -523,22 +539,23 @@ const COMPANION = {
   },
 
   fakes: {
-    kompetenzen: {
-      digcomp: [
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Prüft Meldungen mit einem festen Fragen-Check." },
-        { code: "1.1", titel: "Browsen, Suchen und Filtern von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Sucht eine zweite, seriöse Quelle." },
-        { code: "2.2", titel: "Teilen durch digitale Technologien", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Teilt erst nach dem Prüfen." }
+    praxis: {
+      "vorbereiten": [
+        "Eine harmlose erfundene Nachricht und einen unabhängigen Vergleichstext zum selben Thema bereithalten. Keine verstörenden Bilder verwenden."
       ],
-      icf: [
-        { code: "d163", titel: "Denken",
-          bezug: "Erkennt, dass ein Bild, ein Video oder eine Stimme gefälscht sein kann." },
-        { code: "d175", titel: "Probleme lösen",
-          bezug: "Wendet den Fragen-Check auf eine echte Meldung an." },
-        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
-          bezug: "Behandelt starke Gefühle als Warnzeichen, nicht als Beweis." }
+      "fragen": [
+        "Wer sagt das, und von wann ist die Nachricht?",
+        "Wo findest du einen unabhängigen Beleg für die Behauptung?"
+      ],
+      "helfen": [
+        "Eine Behauptung auswählen und Quelle, Datum und einen weiteren Beleg gemeinsam ansehen. Kleine Bildfehler allein beweisen keinen Fake.",
+        "Auf Wunsch das Nicht-Weiterleiten und den unabhängigen Rückruf bei einer Geldforderung im Rollenspiel üben."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person vor dem Glauben oder Weiterleiten einen Beleg sucht. Ein überzeugendes Bild oder eine Stimme genügt nicht."
+      ],
+      "alltag": [
+        "Auf Wunsch eine selbst gewählte harmlose Nachricht prüfen. Private Nachrichten werden nur mit Einverständnis gemeinsam angesehen."
       ]
     },
     lernziele: [
@@ -575,26 +592,23 @@ const COMPANION = {
   },
 
   betrug: {
-    kompetenzen: {
-      digcomp: [
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Gibt keine Codes, PINs oder Bankdaten weiter." },
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Erkennt Phishing, Paket-Trick, Schockanruf, falsche Gewinne, Abo-Fallen und gefälschte QR-Codes." },
-        { code: "4.1", titel: "Schutz von Geräten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Klickt verdächtige Links nicht an und scannt fremde QR-Codes nicht." },
-        { code: "5.1", titel: "Lösen technischer Probleme", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Weiß, was nach einem Betrug zu tun ist: Karte sperren, Hilfe holen, Anzeige erstatten." }
+    praxis: {
+      "vorbereiten": [
+        "Erfundene Beispiele für Paketnachricht, neue Nummer und Gewinnforderung bereithalten. Keine echten Links öffnen oder Zahlungen auslösen."
       ],
-      icf: [
-        { code: "d860", titel: "Einfache wirtschaftliche Transaktionen",
-          bezug: "Schützt das eigene Geld bei Zahlungen und Überweisungen." },
-        { code: "d240", titel: "Mit Stress und anderen psychischen Anforderungen umgehen",
-          bezug: "Reagiert bei Druck und Schock nicht sofort, sondern ruft selbst zurück." },
-        { code: "d175", titel: "Probleme lösen",
-          bezug: "Handelt nach einem Betrug in einer festen Reihenfolge." },
-        { code: "e5750", titel: "Allgemeine soziale Unterstützungsdienste (Umweltfaktor)",
-          bezug: "Sperr-Notruf 116 116, Polizei 110 und Beratungsstellen sind notiert." }
+      "fragen": [
+        "Will die Nachricht Geld, Daten oder einen geheimen Code?",
+        "Welchen bereits bekannten Zugang kannst du zum Prüfen selbst wählen?"
+      ],
+      "helfen": [
+        "Auf Wunsch das Stoppen und den selbst gewählten Kontakt im Rollenspiel vormachen. Ein Link oder eine Nummer aus der Nachricht dient nicht als Prüfweg.",
+        "Bei einem echten Vorfall ruhig bleiben und passende Hilfe organisieren. Weder Schuldvorwürfe noch Beweise sind Voraussetzung für Hilfe."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person vor einer Forderung innehält und über einen unabhängigen Zugang prüft, statt wegen Eile zu handeln."
+      ],
+      "alltag": [
+        "Auf Wunsch einen persönlichen Weg für Hilfe im Betrugsfall festhalten. Keine Bankdaten, Passwörter oder Codes auf die Karte schreiben."
       ]
     },
     lernziele: [
@@ -632,22 +646,23 @@ const COMPANION = {
   },
 
   einkaufen: {
-    kompetenzen: {
-      digcomp: [
-        { code: "1.2", titel: "Auswerten von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Prüft Shop, Impressum und Bewertungen vor dem Kauf." },
-        { code: "1.1", titel: "Browsen, Suchen und Filtern von Daten, Informationen und digitalen Inhalten", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Nutzt den Fakeshop-Finder der Verbraucher-Zentrale zum Prüfen." },
-        { code: "4.2", titel: "Schutz personenbezogener Daten und der Privatsphäre", stufe: "Stufe 1–2 · grundlegend",
-          bezug: "Schützt PIN und TAN und gibt Zahlungsdaten nur in geprüften Shops ein." }
+    praxis: {
+      "vorbereiten": [
+        "Ein erfundenes Angebot mit Artikelpreis, Versand und möglichen Folgekosten bereithalten. Keine Bestellung oder Zahlung auslösen."
       ],
-      icf: [
-        { code: "d620", titel: "Beschaffung von Waren und Dienstleistungen",
-          bezug: "Kauft online ein und wählt eine sichere Zahlungsart." },
-        { code: "d860", titel: "Einfache wirtschaftliche Transaktionen",
-          bezug: "Bezahlt möglichst auf Rechnung und behält die Kosten im Blick." },
-        { code: "d177", titel: "Entscheidungen treffen",
-          bezug: "Erkennt Kauf-Druck und entscheidet trotzdem selbst." }
+      "fragen": [
+        "Was kostet der Kauf insgesamt, und kommen weitere Zahlungen dazu?",
+        "Welche Angaben zum Shop möchtest du vor dem Kauf prüfen?"
+      ],
+      "helfen": [
+        "Die Kosten im Beispiel gemeinsam zusammensuchen. Ein niedriger Artikelpreis allein sagt noch nicht, was insgesamt bezahlt wird.",
+        "Auf Wunsch Shop-Angaben und eine unabhängige Bewertung ansehen. Die Person entscheidet, ob sie kaufen, weiter prüfen oder abbrechen möchte."
+      ],
+      "erkennen": [
+        "Darauf achten, ob die Person Gesamtkosten und Shop prüft und bei einer offenen Frage mit dem Kauf warten kann."
+      ],
+      "alltag": [
+        "Auf Wunsch ein selbst gewähltes Angebot ohne Kauf durchgehen. Änderungen am Gerät und Einschränkungen von Käufen nur mit Einverständnis."
       ]
     },
     lernziele: [
@@ -686,11 +701,13 @@ const COMPANION = {
 
 /* I2 (05.10.2026, auf v2026-27c): feste Zuordnung statt wechselnder Hinweise nach Schrittzahl.
    Die Schlüssel sind die ORIGINALTITEL aus topics.js, getrennt nach Kern
-   (short) und „Mehr dazu“ (full). Auch der gemeinsame Start und das Erinnern
+   (short) und „Alle Lektionen nachlesen“ (full). „Mehr dazu“ (extra) nutzt
+   die Zuordnung seiner ausgewählten Originallektionen aus full. Start und Erinnern
    sind ausdrücklich zugeordnet. Lektionen haben derzeit keine eigene ID.
 
    Jede Referenz [Abschnitt, Index] liest einen bestehenden Text WÖRTLICH aus
-   COMPANION; die fachlichen Texte oben bleiben unverändert. Ein Gesprächs-
+   COMPANION; vorhandene Quellindizes bleiben erhalten. Neue Hinweise werden
+   hinten angehängt, damit bestehende Zuordnungen stabil bleiben. Ein Gesprächs-
    anlass wird als Frage gekennzeichnet, Methodik, Hinweise, Lernziele und
    Transfer nicht. Dieselbe Zuordnung gilt für alle drei Sprachstufen, denn
    die Begleit-Ebene ist keine Sprachstufe für Lernende (§7).
@@ -750,7 +767,7 @@ const COMPANION_LEKTIONEN = {
       "Start": { lernen: ["methodik", 0], uebung: ["begleithinweise", 1] },
       "Dein Facebook-Profil": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
       "Unbekannte Personen": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 1] },
-      "Komische Nachrichten": { lernen: ["methodik", 0], uebung: ["methodik", 2] },
+      "Komische Nachrichten": { lernen: ["begleithinweise", 4], uebung: ["begleithinweise", 4] },
       "Das merke ich mir": { lernen: ["methodik", 2], uebung: ["methodik", 2] }
     },
     full: {
@@ -761,8 +778,8 @@ const COMPANION_LEKTIONEN = {
       "Freundschafts-Anfragen": { lernen: ["gespraechsanlaesse", 1], uebung: ["transfer", 1] },
       "Kommentare schreiben": { lernen: ["lernziele", 2], uebung: ["begleithinweise", 0] },
       "Beleidigungen": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 0] },
-      "Fotos mit anderen Personen": { lernen: ["methodik", 1], uebung: ["methodik", 2] },
-      "Was kann ich tun?": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 2] },
+      "Fotos mit anderen Personen": { lernen: ["begleithinweise", 3], uebung: ["begleithinweise", 3] },
+      "Was kann ich tun?": { lernen: ["begleithinweise", 4], uebung: ["begleithinweise", 4] },
       "Das merke ich mir": { lernen: ["methodik", 2], uebung: ["methodik", 2] }
     }
   },
@@ -874,7 +891,7 @@ const COMPANION_LEKTIONEN = {
       "Start": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 1] },
       "Was ist KI?": { lernen: ["gespraechsanlaesse", 0], uebung: ["begleithinweise", 0] },
       "Was kann KI?": { lernen: ["methodik", 0], uebung: ["methodik", 1] },
-      "Wann musst du aufpassen?": { lernen: ["lernziele", 3], uebung: ["lernziele", 3] },
+      "Wann musst du aufpassen?": { lernen: ["begleithinweise", 3], uebung: ["begleithinweise", 3] },
       "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
     },
     full: {
@@ -886,7 +903,7 @@ const COMPANION_LEKTIONEN = {
       "So prüfst du eine Antwort": { lernen: ["transfer", 0], uebung: ["methodik", 1] },
       "Keine privaten Daten": { lernen: ["gespraechsanlaesse", 1], uebung: ["begleithinweise", 1] },
       "Gesundheit und Geld": { lernen: ["gespraechsanlaesse", 2], uebung: ["begleithinweise", 0] },
-      "KI kann Bilder und Stimmen fälschen": { lernen: ["lernziele", 3], uebung: ["lernziele", 3] },
+      "KI kann Bilder und Stimmen fälschen": { lernen: ["begleithinweise", 3], uebung: ["begleithinweise", 3] },
       "Was kann ich tun?": { lernen: ["transfer", 0], uebung: ["lernziele", 2] },
       "Das merke ich mir": { lernen: ["methodik", 3], uebung: ["methodik", 3] }
     }

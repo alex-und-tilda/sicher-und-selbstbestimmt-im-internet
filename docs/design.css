@@ -1150,6 +1150,26 @@ body.lesson-view .app:has(#content > :is(.completion-page, .completion-card--ein
   background: var(--bg-grad-2);
   z-index: -1;
 }
+/* 09.10.2026: Dieselbe Unterlage auf jeder Lernseite. Ohne sie lief auf
+   langen Seiten (Rückmeldung, Beispiele) Text sichtbar hinter und neben
+   den Knöpfen durch. Sie trägt denselben, am Fenster festen Verlauf wie
+   die Seite: Auf kurzen Seiten ist sie deshalb nicht zu sehen, auf langen
+   Seiten schneidet sie den durchlaufenden Text sauber ab. Weiterhin kein
+   Rahmen, kein Schatten, keine Kapsel. Die Abschluss-Seiten behalten ihre
+   Regel oben. */
+body.lesson-view .nav::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem 0 calc(-0.6rem - env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%) fixed;
+  z-index: -1;
+}
+@media (forced-colors: active) {
+  body.lesson-view .nav::before { background: Canvas; }
+}
+@media print {
+  body.lesson-view .nav::before { content: none; }
+}
 
 /* Ein Auswahlfeld für die ganze Antwort, mit echtem Optionsfeld.
    Markierung bedeutet nur „gewählt“, niemals „richtig“. Das native

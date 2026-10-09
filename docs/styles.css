@@ -889,7 +889,7 @@ html.no-motion *::after {
   margin-bottom: 14px;
 }
 
-.companion-section h4 {
+.companion-section h3 {
   font-size: var(--fs-text);
   margin: 0 0 6px;
   color: var(--ink);
@@ -907,63 +907,42 @@ html.no-motion *::after {
   color: var(--ink);
 }
 
-/* Kompetenz-Einordnung: DigComp 2.2 + ICF (nur Begleit-Ebene) */
-.companion-kompetenz h5 {
-  font-size: var(--fs-klein);
-  margin: 12px 0 4px;
-  color: var(--ink-soft);
-  letter-spacing: 0.01em;
-}
-
-.companion-kompetenz .komp-liste {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.companion-kompetenz .komp-liste li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 10px;
-  padding: 8px 0;
-  border-top: 1px solid var(--line);
-  margin: 0;
-}
-
-.komp-code {
-  grid-row: span 3;
-  align-self: start;
+/* Zusätzliche Begleithilfe auf Wunsch: klare native Aufklappbereiche. */
+.companion-help > summary,
+.companion-more > summary {
+  min-height: 3.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.35rem 0;
+  font-size: var(--fs-text);
   font-weight: 700;
-  font-size: var(--fs-mini);
+  cursor: pointer;
   color: var(--accent-dark);
-  background: var(--accent-soft);
-  border-radius: var(--radius-s);
-  padding: 3px 9px;
-  white-space: nowrap;
 }
 
-.komp-titel {
-  font-weight: 700;
-  font-size: var(--fs-klein);
-  color: var(--ink);
+.companion-help > summary::before,
+.companion-more > summary::before {
+  content: "+";
 }
 
-.komp-stufe {
-  font-size: var(--fs-mini);
-  color: var(--ink-soft);
+.companion-help[open] > summary::before,
+.companion-more[open] > summary::before {
+  content: "−";
 }
 
-.komp-bezug {
-  font-size: var(--fs-klein);
-  line-height: 1.5;
-  color: var(--ink);
+.companion-help > summary:focus-visible,
+.companion-more > summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
-.komp-fuss {
-  font-size: var(--fs-mini);
-  font-style: italic;
-  color: var(--ink-soft);
-  margin: 10px 0 0;
+.companion-help ol {
+  padding-left: 1.3em;
+}
+
+.companion-more[open] > .companion-section:first-of-type {
+  margin-top: 0.6rem;
 }
 
 .companion-print {
@@ -5886,6 +5865,15 @@ body.simple-mode .practice-box {
   padding: 14px 14px 4px;
 }
 
+/* Auch bei schmalem Bildschirm und großer Schrift bleiben lange Wörter
+   und Absender lesbar. Die gezeigten Nachrichten bleiben unverändert. */
+.phone-screen p,
+.phone-screen li,
+.scenario-card p,
+.scenario-card li {
+  overflow-wrap: anywhere;
+}
+
 /* Ab Tablet: erkennbares Gerät, mittig, mit Griffleiste unten. */
 @media (min-width: 700px) {
   .phone {
@@ -7389,6 +7377,9 @@ body.lesson-view .orient-line { margin: 8px 0 12px; }
 }
 .hoer-angebot-knoepfe .nav-button {
   flex: 1 1 140px;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
   min-height: 56px;
   font-size: var(--fs-text);
 }

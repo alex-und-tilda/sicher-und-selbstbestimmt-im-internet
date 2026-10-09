@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-28m";
+const CACHE_VERSION = "v2026-28v";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -328,10 +328,13 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
           return response;
         })
-        .catch(() =>
-          caches.match(event.request).then(
-            (cached) => cached || caches.match("./index.html") || caches.match("./404.html") || offlineFallback()
-          )
+        .catch(async () =>
+          /* Erst das Ergebnis abwarten: ein Promise ist auch ohne Treffer
+             wahr und würde die weiteren Ersatzseiten überspringen. */
+          (await caches.match(event.request)) ||
+          (await caches.match("./index.html")) ||
+          (await caches.match("./404.html")) ||
+          offlineFallback()
         )
     );
     return;
