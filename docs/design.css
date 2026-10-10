@@ -139,6 +139,9 @@ body {
   top: 0;
   line-height: inherit;
 }
+/* Ein langes Wort darf bei großer Schrift innerhalb der Lernziel-Liste
+   umbrechen, sobald es selbst in die ganze verfügbare Zeile nicht passt. */
+.learning-goals-list li { overflow-wrap: anywhere; }
 
 /* ---------- 10. Kante der Antwort-Knöpfe (WCAG 1.4.11) ----------
    Der Rand der Antworten lag bei 1,33:1 (hell) und 1,19:1 (dunkel) – die
@@ -1649,6 +1652,34 @@ h3.bedien-pikto {
 .bedien-pikto > .app-pictogram { flex: 0 0 1.75rem; width: 1.75rem; height: 1.75rem; }
 .bedien-pikto > span { min-width: 0; overflow-wrap: anywhere; }
 .bedien-pikto[hidden] { display: none; }
+
+/* Ein Formular zeigt eine Angabe oder Rückmeldung pro Schritt. hidden
+   bleibt auch bei den vorhandenen Flex-Regeln wirksam. */
+.felder-aufgabe :is(.felder-formular, .feld-zeile, .feld-ergebnis, .felder-aktionen button)[hidden] { display: none; }
+.felder-aufgabe--intro > .felder-kontext > summary { display: none; }
+.felder-aufgabe:not(.felder-aufgabe--intro) .felder-einstiegsfrage { display: none; }
+.scenario-card:has(.felder-aufgabe:not(.felder-aufgabe--intro)) > .transfer-intro { display: none; }
+.felder-aufgabe > .sz-fake-band {
+  border: 0;
+  padding: 0;
+  margin-block: 0.75rem;
+  color: var(--ink-soft);
+  text-align: left;
+}
+.felder-schritt-zaehler, .felder-ergebnis-zaehler { color: var(--ink-soft); }
+.reading-status.reading-status--hinweis {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  clip-path: none;
+  overflow: visible;
+  white-space: normal;
+  max-width: 32rem;
+  color: var(--ink);
+  font-size: var(--fs-klein);
+}
 .certificate-actions > .nav-button.bedien-pikto { flex-basis: 9rem; }
 .topic-done-corner > .app-pictogram { width: 24px; height: 24px; }
 

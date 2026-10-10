@@ -1855,26 +1855,33 @@ function supportsSpeech() {
 /* Stimme des Geräts bevorzugen (Datenschutz, §14; datenschutz.html sagt zu:
    „die Stimme deines eigenen Geräts“). Manche Browser bieten für Deutsch auch
    Stimmen an, die den Text zu einem Dienst im Internet schicken
-   (localService === false). Nur dann greift die App ein und nimmt eine
-   deutsche Stimme, die auf dem Gerät selbst läuft. Laufen ohnehin alle
-   deutschen Stimmen auf dem Gerät, wählt der Browser wie bisher – so bleibt
-   die Stimme, die die Person an ihrem Gerät eingestellt hat. Gibt es gar
-   keine Stimme auf dem Gerät, bleibt es ebenfalls bei der Wahl des Browsers.
+   (localService === false). Die App wählt ausdrücklich eine lokale deutsche
+   Stimme und bevorzugt dabei die voreingestellte Gerätestimme. Ohne deutsche
+   Gerätestimme wird kein Text an eine unbekannte oder Internet-Stimme gegeben.
    Die Liste ist beim ersten Aufruf manchmal noch leer – deshalb wird sie
    beim Start einmal angefordert (siehe unten). */
 function lokaleStimme() {
   try {
     const deutsch = (window.speechSynthesis.getVoices() || []).filter(v => /^de([-_]|$)/i.test(v.lang || ""));
-    if (!deutsch.some(v => !v.localService)) return null;
     const lokal = deutsch.filter(v => v.localService);
     return lokal.find(v => v.default) || lokal.find(v => /^de[-_]DE$/i.test(v.lang)) || lokal[0] || null;
   } catch (e) { return null; }
 }
 function stimmeSetzen(u) {
   const stimme = lokaleStimme();
-  if (stimme) u.voice = stimme;
+  if (stimme) { u.voice = stimme; return true; }
+  stopReading();
+  let liste = [];
+  try { liste = window.speechSynthesis.getVoices() || []; } catch (e) { /* nicht verfügbar */ }
+  updateReadingStatus(liste.length ? VORLESE_HINWEIS.fehlend : VORLESE_HINWEIS.wartend, true);
+  return false;
 }
-if (supportsSpeech()) { try { window.speechSynthesis.getVoices(); } catch (e) { /* ohne Liste wählt der Browser */ } }
+const VORLESE_HINWEIS = {
+  fehlend: "Vorlesen braucht eine deutsche Stimme auf diesem Gerät. Du kannst sie in den Geräte-Einstellungen hinzufügen.",
+  wartend: "Vorlesen ist gerade nicht verfügbar. Tippe später noch einmal auf Vorlesen.",
+  nichtUnterstuetzt: "Vorlesen geht auf diesem Gerät nicht."
+};
+if (supportsSpeech()) { try { window.speechSynthesis.getVoices(); } catch (e) { /* vorerst kein Vorlesen */ } }
 
 /* Zustand für satzweises Vorlesen mit Mitlesen-Hervorhebung. */
 let _readQueue = [];
@@ -1887,7 +1894,7 @@ function clearReadingHighlight() {
 }
 
 function readShortText(text, el) {
-  if (!supportsSpeech()) return;
+  if (!supportsSpeech()) { updateReadingStatus(VORLESE_HINWEIS.nichtUnterstuetzt, true); return; }
   const cleaned = String(text || "").trim();
   if (!cleaned) return;
   _readGen++;
@@ -1900,7 +1907,7 @@ function readShortText(text, el) {
   if (el) el.classList.add("reading-highlight");
   const utterance = new SpeechSynthesisUtterance(cleaned);
   utterance.lang = "de-DE";
-  stimmeSetzen(utterance);
+  if (!stimmeSetzen(utterance)) return;
   utterance.rate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.82;
   utterance.pitch = 1;
   utterance.onstart = () => {
@@ -1927,7 +1934,7 @@ function readShortText(text, el) {
 function sprichEingefuegteRueckmeldung(kasten) {
   if (!kasten || typeof autoRead === "undefined" || !autoRead || !supportsSpeech()) return;
   const kopie = kasten.cloneNode(true);
-  kopie.querySelectorAll("button, [role='button'], .sr-only, [aria-hidden='true']").forEach(e => e.remove());
+  kopie.querySelectorAll("button, [role='button'], .sr-only, [aria-hidden='true'], [hidden]").forEach(e => e.remove());
   /* Absatz-Grenzen hörbar machen: Überschrift und Satz liefen sonst
      ineinander („Neue Regel für deine Karte Bei Geld …"). */
   const BLOCK = "p, li, h1, h2, h3, h4, div, section, article";
@@ -1972,10 +1979,16 @@ function setReadingActive(mode) {
   document.querySelectorAll(".reading-button-slow").forEach(s => { s.classList.toggle("is-active", mode === "slow"); s.setAttribute("aria-pressed", mode === "slow" ? "true" : "false"); });
 }
 
-function updateReadingStatus(text) {
+function updateReadingStatus(text, hinweis = false) {
   const status = Array.from(document.querySelectorAll('[role="dialog"][aria-modal="true"] .reading-status'))
     .find(s => s.closest('[role="dialog"]').getClientRects().length > 0) || document.getElementById("readingStatus");
-  if (status) status.textContent = text || "";
+  if (status) {
+    status.textContent = text || "";
+    status.classList.toggle("reading-status--hinweis", hinweis);
+    /* Der Hinweis steht unter der Lernleiste; ihre Knöpfe behalten ihren Platz. */
+    const leiste = status.closest(".lern-leiste");
+    if (hinweis && leiste) leiste.insertAdjacentElement("afterend", status);
+  }
 }
 
 /* Auswahl-Karten, die selbst <button> sind. Ihr Text muss trotzdem vorgelesen
@@ -2018,9 +2031,10 @@ function cleanSpeechText(text) {
    (Mitlesen, §3). Satzweise = zuverlässig auf allen Geräten. */
 function readCurrentPage(rate) {
   if (!supportsSpeech()) {
-    updateReadingStatus("Vorlesen geht auf diesem Gerät nicht.");
+    updateReadingStatus(VORLESE_HINWEIS.nichtUnterstuetzt, true);
     return;
   }
+  if (!stimmeSetzen({})) return;
   frageAufforderungAktualisieren();
   _readGen++;
   const gen = _readGen;
@@ -2045,13 +2059,13 @@ function readCurrentPage(rate) {
      oder "Quiz machen" – die Seite blieb fuer sie eine Sackgasse. */
   const AKTION = AKTION_SELEKTOR + (dialogRoot ? ", .lern-mehr-knopf, .hilfe-angebot, summary" : "");
   const els = root
-    ? Array.from(root.querySelectorAll("h2, h3, p, li, " + OPTION + ", " + KARTE + ", " + AKTION)).filter(el => {
+    ? Array.from(root.querySelectorAll("h2, h3, p, li, .feld-zeile, .felder-liste legend, " + OPTION + ", " + KARTE + ", " + AKTION)).filter(el => {
         const isOption = el.matches(OPTION);
         const isKarte = el.matches(KARTE);
         const isAktion = el.matches(AKTION);
         /* Begleithinweise gehören nicht in das Vorlesen für Lernende.
            Das gilt auch, wenn der Begleitbereich gerade geöffnet ist. */
-        if (el.closest(".companion-panel, .begleit-tipp")) return false;
+        if (el.closest(".companion-panel, .begleit-tipp, .reading-status")) return false;
         /* D2/D4: Was im Lernmodus per CSS ausgeblendet ist (Übung unter dem
            Lerntext, Szenenbild), hat keine Fläche und wird nicht vorgelesen. */
         if (typeof el.getClientRects === "function" && el.getClientRects().length === 0) return false;
@@ -2234,7 +2248,7 @@ function speakNextSentence(gen) {
   const slow = _readRate && _readRate < 0.8;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "de-DE";
-  stimmeSetzen(u);
+  if (!stimmeSetzen(u)) return;
   u.rate = _readRate;
   u.pitch = 1;
   u.volume = 1;
@@ -2251,7 +2265,7 @@ function speakNextSentence(gen) {
 /* Liest nur EINEN Abschnitt vor (statt der ganzen Seite) – für lange
    Seiten wie Hilfe und Einstellungen. Gleiches Hervorheben wie sonst. */
 function readSectionFrom(button) {
-  if (!supportsSpeech()) { updateReadingStatus("Vorlesen geht auf diesem Gerät nicht."); return; }
+  if (!supportsSpeech()) { updateReadingStatus(VORLESE_HINWEIS.nichtUnterstuetzt, true); return; }
   const section = button.closest(".settings-page-section, .support-help-card, .intro-offer");
   if (!section) return;
   _readGen++;
@@ -2326,7 +2340,7 @@ function buildReadingToolbar(statusId = "readingStatus") {
   if (!supportsSpeech()) {
     return `
       <div class="reading-toolbar" role="group" aria-label="Vorlesen">
-        <p class="reading-unavailable">Vorlesen geht auf diesem Gerät vielleicht nicht.</p>
+        <p class="reading-unavailable">${VORLESE_HINWEIS.nichtUnterstuetzt}</p>
       </div>
     `;
   }
@@ -5741,7 +5755,7 @@ function merkeStelle() {
   const hilfe = document.getElementById("taskHelpPanel");
   const hilfeOffen = !!(hilfe && content.contains(hilfe) && !hilfe.hasAttribute("hidden"));
   const form = (felderAktiv && content.querySelector(".felder-aufgabe"))
-    ? { key: aufgabeSchluessel(felderAktiv.q), lern: felderAktiv.lern, stand: felderAktiv.stand || null } : null;
+    ? { key: aufgabeSchluessel(felderAktiv.q), lern: felderAktiv.lern, stand: felderAktiv.stand || null, index: felderAktiv.index, intro: felderAktiv.intro } : null;
   const quizVorwahl = content.querySelector(".quiz-card .answer-option.ist-markiert");
   const quizAntwort = quizVorwahl ? quizVorwahl.getAttribute("onclick") : null;
   const handyVorwahl = content.querySelector(".scenario-card .sz-answer.ist-markiert:not(:disabled)");
@@ -6787,14 +6801,16 @@ function pauseAufgaben(topic, mode, nurZusatz) {
 function pauseCursorPruefen(ctx) {
   if (!ctx || !ctx.pause || !["short", "full", "extra"].includes(ctx.mode)) return null;
   const topic = getTopicById(ctx.topicId), p = ctx.pause;
-  if (!topic || !["quiz", "kurzquiz", "wiederholen", "neu"].includes(p.art)
+  if (!topic || !["quiz", "kurzquiz", "wiederholen", "neu", "formular"].includes(p.art)
     || !Number.isInteger(p.index) || p.index < 0 || typeof p.frage !== "string") return null;
   if (p.auswahl !== undefined && (p.art !== "neu" || p.auswahl !== "zusatz" || ctx.mode === "short")) return null;
   const liste = p.art === "quiz" ? getQuizQuestions(topic)
     : p.art === "kurzquiz" ? getEinfachQuizQuestions(topic)
-    : p.art === "neu" ? pauseAufgaben(topic, ctx.mode, p.auswahl === "zusatz") : null;
+    : p.art === "neu" ? pauseAufgaben(topic, ctx.mode, p.auswahl === "zusatz")
+    : p.art === "formular" ? getLessonsForMode(topic, ctx.mode).map(l => l.practice) : null;
   const q = liste ? liste[p.index] : findeAufgabe(topic.id, p.frage);
   if (!q || aufgabeSchluessel(q) !== p.frage || pauseFrageSignatur(q) !== p.signatur) return null;
+  if (p.art === "formular" && !felderAufgabe(q)) return null;
   const teil = p.teil === "situation" && p.art === "neu" ? "situation" : "frage";
   const cursor = { art: p.art, index: p.index, frage: p.frage, signatur: p.signatur, teil };
   if (p.auswahl === "zusatz") cursor.auswahl = "zusatz";
@@ -6810,7 +6826,8 @@ function pauseFrageFuer(ctx) {
   const t = getTopicById(ctx.topicId), p = ctx.pause;
   return p.art === "quiz" ? getQuizQuestions(t)[p.index]
     : p.art === "kurzquiz" ? getEinfachQuizQuestions(t)[p.index]
-    : p.art === "neu" ? pauseAufgaben(t, ctx.mode, p.auswahl === "zusatz")[p.index] : findeAufgabe(t.id, p.frage);
+    : p.art === "neu" ? pauseAufgaben(t, ctx.mode, p.auswahl === "zusatz")[p.index]
+    : p.art === "formular" ? (getLessonsForMode(t, ctx.mode)[p.index] || {}).practice : findeAufgabe(t.id, p.frage);
 }
 
 function pauseStelleMerken(daten) {
@@ -6819,6 +6836,7 @@ function pauseStelleMerken(daten) {
   const q = daten.art === "wiederholen" ? (bigQuizQuestions[daten.index] || {}).quelle
     : daten.art === "quiz" ? getQuizQuestions(topic)[daten.index]
     : daten.art === "kurzquiz" ? getEinfachQuizQuestions(topic)[daten.index]
+    : daten.art === "formular" ? (getLessonsForMode(topic, currentMode)[daten.index] || {}).practice
     : pauseAufgaben(topic, currentMode)[daten.index];
   if (!q) { pauseStelle = null; pauseKnoten = null; return; }
   const ctx = { topicId, mode: currentMode,
@@ -6907,6 +6925,9 @@ function pauseStandPruefen(s, ctx) {
     if (s.form.stand && !["gesperrt", "ausweg", "bewertet"].includes(s.form.stand.art)) return null;
     if (s.form.stand && s.form.stand.art === "ausweg"
       && !["erstPruefen", "nichtNutzen"].includes(s.form.stand.ausweg)) return null;
+    if (s.form.index !== undefined && (!Number.isInteger(s.form.index)
+      || s.form.index < 0 || s.form.index >= q.felder.length)) return null;
+    if (s.form.intro !== undefined && typeof s.form.intro !== "boolean") return null;
   }
   if (p.art === "wiederholen") {
     if (!Array.isArray(s.pool) || s.pool.length !== total) return null;
@@ -6931,15 +6952,15 @@ function pauseMerken() {
   const vorwahl = markiert ? Number(markiert.dataset.index ?? (klick && klick[1])) : null;
   const s = { profil: activeProfileId || null, cursor: ctx, teil: pauseStelle.teil,
     wieder: textKopie(pauseStelle.wieder), vorwahl,
-    richtig: gross ? bigQuizScore : p.art === "neu" ? 0 : quizScore,
-    korrigiert: gross ? bigQuizKorrigiert : p.art === "neu" ? 0 : quizKorrigiert,
-    geschafft: gross || p.art === "neu" ? [] : Array.from(quizAnsweredCorrect),
+    richtig: gross ? bigQuizScore : ["neu", "formular"].includes(p.art) ? 0 : quizScore,
+    korrigiert: gross ? bigQuizKorrigiert : ["neu", "formular"].includes(p.art) ? 0 : quizKorrigiert,
+    geschafft: gross || ["neu", "formular"].includes(p.art) ? [] : Array.from(quizAnsweredCorrect),
     ab: pauseTeilrunde && pauseTeilrunde.art === p.art ? pauseTeilrunde.ab : 0,
     folge: textKopie(antwortFolge), versuche: versucheJeFrage[aufgabeSchluessel(q)] || 0 };
   if (gross) s.pool = bigQuizQuestions.map(x => x && ({ topicId: x.topicId,
     frage: aufgabeSchluessel(x.quelle || x), signatur: pauseFrageSignatur(x.quelle || x) }));
   if (felderAktiv && felderAufgabe(q) && aufgabeSchluessel(felderAktiv.q) === p.frage) {
-    s.form = { wahl: felderGewaehlt(), lern: textKopie(felderAktiv.lern), stand: textKopie(felderAktiv.stand) };
+    s.form = { wahl: felderGewaehlt(), lern: textKopie(felderAktiv.lern), stand: textKopie(felderAktiv.stand), index: felderAktiv.index, intro: felderAktiv.intro };
     s.vorwahl = null;
   }
   pauseSitzung = pauseStandPruefen(s, ctx);
@@ -6955,6 +6976,7 @@ function pauseMerken() {
 
 function pauseResumeText(ctx) {
   const p = ctx.pause;
+  if (p.art === "formular") return `Übung, Schritt ${p.index + 1}`;
   const art = p.art === "kurzquiz" ? "Kurz-Quiz" : p.art === "quiz" ? "Quiz"
     : p.art === "wiederholen" ? p.titel : "Neue Situation";
   return `${art}, ${p.teil === "situation" ? "Situation" : "Frage " + (p.index + 1)}`;
@@ -6976,7 +6998,7 @@ function pauseFortsetzen(raw) {
     ? { schluessel: miniCheckSchluessel(ctx.topicId, ctx.mode), nurZusatz: p.auswahl === "zusatz" } : null;
   const gross = p.art === "wiederholen";
   pauseTeilrunde = s ? (s.ab > 0 ? { art: p.art, ab: s.ab } : null)
-    : p.art === "neu" || p.index === 0 ? null : { art: p.art, ab: p.index };
+    : ["neu", "formular"].includes(p.art) || p.index === 0 ? null : { art: p.art, ab: p.index };
   quizScore = !gross && s ? s.richtig : 0; quizKorrigiert = !gross && s ? s.korrigiert : 0;
   quizAnsweredCorrect = new Set(!gross && s ? s.geschafft : []);
   bigQuizScore = gross && s ? s.richtig : 0; bigQuizKorrigiert = gross && s ? s.korrigiert : 0;
@@ -6996,7 +7018,10 @@ function pauseFortsetzen(raw) {
   if (felderAufgabe(q)) felderWahl[p.frage] = s && s.form ? s.form.wahl.slice() : [];
   stillerNeuaufbau = true;
   const w = s ? textKopie(s.wieder || {}) : {};
-  if (p.art === "quiz") {
+  if (p.art === "formular") {
+    currentStep = p.index;
+    renderPracticePage();
+  } else if (p.art === "quiz") {
     if (s && s.teil === "rueckmeldung") renderQuizFeedbackPage(w.antwort, { merk: w.merk });
     else renderQuizQuestion();
   } else if (p.art === "kurzquiz") {
@@ -7007,7 +7032,7 @@ function pauseFortsetzen(raw) {
     else renderBigQuizQuestion();
   } else if (felderAufgabe(q)) renderNeueSituationFelder(topic, p.index);
   else renderNeueSituation(topic, p.index, Object.assign(w, { teil: s ? (w.teil || (s.teil === "situation" ? "situation" : "frage")) : p.teil }));
-  if (s && s.form) felderWiederherstellen({ key: p.frage, lern: s.form.lern, stand: s.form.stand });
+  if (s && s.form) felderWiederherstellen({ key: p.frage, lern: s.form.lern, stand: s.form.stand, index: s.form.index, intro: s.form.intro });
   if (s && s.vorwahl !== null && s.teil === "frage") {
     const opt = Array.from(content.querySelectorAll("button.answer-option")).find(el => {
       const klick = String(el.getAttribute("onclick") || "").match(/\((\d+)\)/);
@@ -10815,7 +10840,10 @@ function renderPracticePage(wieder) {
     document.body.classList.add("lesson-view");
     aufUebungsSeite = true;
     /* D8: Der Wiedereinstieg merkt sich, dass die Übung schon offen ist (B14). */
-    lastLessonContext = { topicId: topic.id, step: currentStep, mode: currentMode, titel: lesson.title || "", uebung: true };
+    const formPause = lastLessonContext && lastLessonContext.pause && lastLessonContext.pause.art === "formular"
+      ? pauseCursorPruefen(lastLessonContext) : null;
+    lastLessonContext = formPause && formPause.topicId === topic.id && formPause.mode === currentMode && formPause.pause.index === currentStep
+      ? formPause : { topicId: topic.id, step: currentStep, mode: currentMode, titel: lesson.title || "", uebung: true };
     saveLastLesson();
     const ort = { t: topic.id, mode: currentMode, step: currentStep };
     content.innerHTML = `
@@ -10833,6 +10861,7 @@ function renderPracticePage(wieder) {
         ${begleitTippHtml(topic, "uebung")}
       </article>
     `;
+    if (felderAufgabe(lesson.practice)) pauseStelleMerken({ art: "formular", topicId: topic.id, index: currentStep, teil: "frage" });
     stelleMerken(() => {
       const auswahl = uebungsAuswahl, reihenfolge = uebungsReihenfolge;
       currentTopicId = ort.t; currentMode = ort.mode; currentStep = ort.step;
@@ -10860,6 +10889,7 @@ function passendeAntwortHtml(antwort) {
 }
 
 function continueAfterPractice() {
+  pauseEnde("formular");
   const topic = getCurrentTopic();
   const lessons = getLessonsForMode(topic, currentMode);
   if (!topic || !lessons.length) return renderMenu();
@@ -11387,6 +11417,11 @@ const FELDER_TEXT = stufenTabelle({ leicht: FELDER_TEXT_LEICHT, einfach: FELDER_
 
 let felderAktiv = null;  /* die eine Formular-Aufgabe auf dem Bildschirm */
 let felderWahl = {};     /* Sitzung: gewählte Zeilen je Aufgabe (Fragetext) – nichts gespeichert */
+const FELDER_SCHRITT_TEXT = {
+  zaehler: "Angabe {i} von {n}",
+  anleitung: "Tippe auf die Angabe. Dann gibst du sie an. Oder lasse sie leer.",
+  fest: "Diese Angabe bleibt leer."
+};
 
 function felderAufgabe(q) {
   return !!(q && q.typ === "felder" && Array.isArray(q.felder) && q.felder.length);
@@ -11410,7 +11445,7 @@ function felderZustandText(feld, an) {
    { art, fest: [Zeilen mit unklarer Pflicht, bleiben leer und gesperrt] }. */
 function buildFelderAufgabe(q, ort, topicId, lern) {
   const vorher = felderAktiv;
-  felderAktiv = { q, ort, topicId, lern: lern || null, weiter: vorher && vorher.q === q ? vorher.weiter : null };
+  felderAktiv = { q, ort, topicId, lern: lern || null, index: 0, intro: !lern, weiter: vorher && vorher.q === q ? vorher.weiter : null };
   const wahl = felderWahl[aufgabeSchluessel(q)] || [];
   const fest = (lern && lern.fest) || [];
   const zeilen = q.felder.map((f, i) => {
@@ -11420,7 +11455,7 @@ function buildFelderAufgabe(q, ort, topicId, lern) {
     const wofuer = f.wofuer ? `${FELDER_TEXT.wofuer} ${f.wofuer}` : FELDER_TEXT.ohneGrund;
     const festText = istFest ? FELDER_TEXT.lernZustand[lern.art] : "";
     return `
-        <label class="feld-zeile${an ? " is-an" : ""}${istFest ? " is-fest" : ""}" for="${id}">
+        <label class="feld-zeile${an ? " is-an" : ""}${istFest ? " is-fest" : ""}" for="${id}"${i ? " hidden" : ""}>
           <input type="checkbox" class="feld-check" id="${id}" data-index="${i}"${an ? " checked" : ""}${istFest ? " disabled" : ""} onchange="felderUmschalten(this)"
             aria-label="${escapeHtml(f.name + ", " + (f.pflicht ? FELDER_TEXT.pflicht : FELDER_TEXT.freiwillig) + ". " + wofuer + (istFest ? " " + festText + "." : ""))}">
           <span class="feld-text">
@@ -11435,34 +11470,78 @@ function buildFelderAufgabe(q, ort, topicId, lern) {
   const situation = ketteText(q.situation);
   const auswegName = lern && (lern.art === "nichtNutzen" ? ((q.ausweg && q.ausweg.nichtNutzen) || FELDER_TEXT.nichtNutzen) : FELDER_TEXT.erstPruefen);
   const knoepfe = lern
-    ? `<button type="button" class="primary-action felder-fertig" onclick="felderFertig()">${escapeHtml(FELDER_TEXT.fertig)}</button>`
-    : `<button type="button" class="primary-action felder-fertig" onclick="felderFertig()">${escapeHtml(FELDER_TEXT.fertig)}</button>
+    ? `<button type="button" class="primary-action felder-fertig" data-leiste="haupt"${!lern || q.felder.length > 1 ? " hidden" : ""} onclick="felderFertig()">${escapeHtml(FELDER_TEXT.fertig)}</button>`
+    : `<button type="button" class="primary-action felder-fertig" data-leiste="haupt"${!lern || q.felder.length > 1 ? " hidden" : ""} onclick="felderFertig()">${escapeHtml(FELDER_TEXT.fertig)}</button>
         <button type="button" class="secondary-action" onclick="felderAusweg('erstPruefen')">${escapeHtml(FELDER_TEXT.erstPruefen)}</button>
         <button type="button" class="secondary-action" onclick="felderAusweg('nichtNutzen')">${escapeHtml((q.ausweg && q.ausweg.nichtNutzen) || FELDER_TEXT.nichtNutzen)}</button>`;
   return `
-    <div class="felder-aufgabe${lern ? " felder-aufgabe--lern" : ""}">
+    <div class="felder-aufgabe${lern ? " felder-aufgabe--lern" : " felder-aufgabe--intro"}">
+      <details class="later-details felder-kontext"${lern ? "" : " open"}>
+      <summary class="later-title">Situation nochmal ansehen</summary>
       ${situation ? `<p class="vorhersage-situation">${escapeHtml(situation)}</p>` : ""}
-      <p class="sz-fake-band">Das ist nicht echt. Das ist nur zum Üben.</p>
       ${lern ? `<div class="felder-lernschritt">
         <p><strong>${escapeHtml(FELDER_TEXT.lernBleibt)}</strong> ${escapeHtml(String(auswegName).replace(/\.$/, ""))}.</p>
         <p>${escapeHtml(fest.length ? FELDER_TEXT.lernFrageAndere : FELDER_TEXT.lernFrageAlle)}</p>
         <p>${escapeHtml(FELDER_TEXT.lernNurUeben)}</p>
       </div>` : ""}
-      <div class="felder-formular">
+      <p class="felder-einstiegsfrage">${escapeHtml(q.question)}</p>
+      </details>
+      <p class="sz-fake-band">Das ist nicht echt. Das ist nur zum Üben.</p>
+      <div class="felder-formular"${lern ? "" : " hidden"}>
         ${form.adresse ? `<p class="felder-adresse">${escapeHtml(form.adresse)}</p>` : ""}
         ${form.titel ? `<p class="felder-formular-titel">${escapeHtml(form.titel)}</p>` : ""}
         <fieldset class="felder-liste">
           <legend class="frage-text">${escapeHtml(q.question)}</legend>
-          <p class="felder-anleitung">${escapeHtml(FELDER_TEXT.anleitung)}</p>
+          <p class="felder-schritt-zaehler">${escapeHtml(FELDER_SCHRITT_TEXT.zaehler.replace("{i}", 1).replace("{n}", q.felder.length))}</p>
+          <p class="felder-anleitung">${escapeHtml(FELDER_SCHRITT_TEXT.anleitung)}</p>
           ${buildTaskHelpBox(taskHint(q, "quiz"), true)}
           ${zeilen}
         </fieldset>
       </div>
       <div class="felder-aktionen felder-aktionen--start">
+        <button type="button" class="primary-action felder-start" data-leiste="haupt"${lern ? " hidden" : ""} onclick="felderSchrittZeigen(0)">Angaben ansehen</button>
+        <button type="button" class="primary-action felder-schritt-weiter" data-leiste="haupt"${!lern || q.felder.length === 1 ? " hidden" : ""} onclick="felderSchrittZeigen(felderAktiv.index + 1)">Weiter</button>
         ${knoepfe}
       </div>
       <div class="felder-rueckmeldung" id="felderRueckmeldung" role="status" aria-live="polite" tabindex="-1"></div>
     </div>`;
+}
+
+/* Nur eine Angabe bzw. Erklärung sichtbar. Verdeckte Zeilen behalten ihre
+   Auswahl, sind aber weder im Tastaturweg noch im Vorlesen erreichbar.
+   Ein Schrittwechsel bewertet nichts und speichert keine neue Einstellung. */
+function felderSchrittZeigen(index, still = false) {
+  const a = felderAktiv;
+  if (!a || !Number.isInteger(index)) return;
+  const aufgabe = content.querySelector(".felder-aufgabe");
+  if (!aufgabe || typeof aufgabe.querySelectorAll !== "function") return;
+  if (a.stand && !["bewertet", "gesperrt"].includes(a.stand.art)) return;
+  if (a.stand && a.stand.art === "gesperrt") a.stand = null;
+  stopReading();
+  a.index = Math.max(0, Math.min(index, a.q.felder.length - 1));
+  const bewertet = a.stand && a.stand.art === "bewertet";
+  a.intro = false;
+  aufgabe.classList.remove("felder-aufgabe--intro");
+  const kontext = aufgabe.querySelector(".felder-kontext");
+  if (kontext) kontext.open = false;
+  aufgabe.querySelectorAll(bewertet ? ".feld-ergebnis" : ".feld-zeile").forEach((el, i) => { el.hidden = i !== a.index; });
+  const zaehler = aufgabe.querySelector(bewertet ? ".felder-ergebnis-zaehler" : ".felder-schritt-zaehler");
+  if (zaehler) zaehler.textContent = FELDER_SCHRITT_TEXT.zaehler.replace("{i}", a.index + 1).replace("{n}", a.q.felder.length);
+  if (!bewertet) {
+    const start = aufgabe.querySelector(".felder-start"), formular = aufgabe.querySelector(".felder-formular");
+    if (start) start.hidden = true;
+    if (formular) formular.hidden = false;
+    const weiter = aufgabe.querySelector(".felder-schritt-weiter"), fertig = aufgabe.querySelector(".felder-fertig");
+    if (weiter) weiter.hidden = a.index === a.q.felder.length - 1;
+    if (fertig) fertig.hidden = a.index !== a.q.felder.length - 1;
+    const anleitung = aufgabe.querySelector(".felder-anleitung");
+    if (anleitung) anleitung.textContent = a.lern && a.lern.fest.includes(a.index)
+      ? FELDER_SCHRITT_TEXT.fest : FELDER_SCHRITT_TEXT.anleitung;
+    const box = aufgabe.querySelector(".felder-rueckmeldung");
+    if (box) box.innerHTML = "";
+  }
+  showNav(a.index > 0 || a.ort === "lektion", false);
+  if (still) leisteSpiegeln(); else focusContent();
 }
 
 function felderUmschalten(el) {
@@ -11479,6 +11558,9 @@ function felderUmschalten(el) {
   const wahl = (felderWahl[key] || []).filter(x => x !== i);
   if (el.checked) wahl.push(i);
   felderWahl[key] = wahl;
+  /* Nach einer Pflicht-Meldung darf die Person ihre Wahl ändern und wieder
+     zwischen Angaben wechseln; das ist noch keine bewertete Antwort. */
+  if (a.stand && a.stand.art === "gesperrt") a.stand = null;
 }
 
 function felderGewaehlt() {
@@ -11518,9 +11600,9 @@ function felderWiederherstellen(form) {
   if (!a || !form || aufgabeSchluessel(a.q) !== form.key || !content.querySelector(".felder-aufgabe")) return;
   if (form.lern && !a.lern) felderLernschritt(form.lern.art, true);
   const s = form.stand;
-  if (!s) return;
-  if (s.art === "ausweg") felderAusweg(s.ausweg, true);
-  else if (s.art === "gesperrt" || s.art === "bewertet") felderFertig({ merk: s.merk || null });
+  if (s && s.art === "ausweg") felderAusweg(s.ausweg, true);
+  else if (s && (s.art === "gesperrt" || s.art === "bewertet")) felderFertig({ merk: s.merk || null });
+  if ((!s && form.intro !== true) || (s && s.art === "bewertet")) felderSchrittZeigen(Number.isInteger(form.index) ? form.index : 0, true);
 }
 
 /* Weiter-Knopf unten auf dem Lernschritt freigeben (vorher „Zur Übung ↓“). */
@@ -11542,6 +11624,9 @@ function felderFertig(wieder) {
      hier zählt nur die Überlegung je Zeile – leer lassen ist nie ein Fehler. */
   const gesperrt = a.q.felder.map((f, i) => ({ f, i })).filter(x => !a.lern && x.f.pflicht && wahl.indexOf(x.i) === -1);
   if (gesperrt.length) {
+    /* Zur betroffenen Angabe zurück, ohne sie automatisch auszuwählen. */
+    a.stand = null;
+    felderSchrittZeigen(gesperrt[0].i, true);
     /* Zweck klar: angeben oder nicht nutzen. Zweck unklar: erst prüfen oder
        nicht nutzen – nie „das ist unnötig“. Bei beiden Gruppen mit Namen. */
     const unklar = gesperrt.filter(x => x.f.zweck === "unklar" || x.f.zweck === "passt-nicht");
@@ -11573,9 +11658,10 @@ function felderFertig(wieder) {
   if (a.ort === "wiederholen" && richtig && !wieder) { if (merk.korrektur) bigQuizKorrigiert++; else bigQuizScore++; }
   if (!wieder) playSound(richtig ? "correct" : "wrong");
   a.stand = { art: "bewertet", merk: merk };
+  a.index = 0;
   felderSperren();
-  const zeilen = ergebnis.map(e => `
-      <li class="feld-ergebnis feld-ergebnis--${e.stufe}">
+  const zeilen = ergebnis.map((e, i) => `
+      <li class="feld-ergebnis feld-ergebnis--${e.stufe}"${i ? " hidden" : ""}>
         <strong>${escapeHtml(FELDER_TEXT.status[e.stufe])}: ${escapeHtml(e.f.name)}</strong>
         <span class="feld-ergebnis-wahl">(${escapeHtml(e.f.pflicht ? FELDER_TEXT.pflicht : FELDER_TEXT.freiwillig)}, ${escapeHtml(e.fest ? FELDER_TEXT.lernWort[a.lern.art] : (e.an ? FELDER_TEXT.angegebenWort : FELDER_TEXT.leerWort))})</span>
         <span class="feld-ergebnis-text">${escapeHtml(e.text)}</span>
@@ -11588,6 +11674,7 @@ function felderFertig(wieder) {
   }
   felderZeigen(`
     <h3>${escapeHtml(FELDER_TEXT.ergebnisTitel)}</h3>
+    <p class="felder-ergebnis-zaehler">${escapeHtml(FELDER_SCHRITT_TEXT.zaehler.replace("{i}", 1).replace("{n}", ergebnis.length))}</p>
     ${a.lern ? `<p class="felder-summe">${escapeHtml(FELDER_TEXT.sicherGehandelt)}</p>` : ""}
     <p class="felder-summe">${escapeHtml(summe)}</p>
     <ul class="felder-ergebnis-liste">${zeilen}</ul>
@@ -11599,7 +11686,9 @@ function felderFertig(wieder) {
             zweiter Versuch angeboten, ist er der Hauptknopf und „Weiter“ der zweite Weg. */""}${richtig ? "" : `<button type="button" class="bedien-pikto secondary-action" data-leiste="haupt" onclick="felderNochmal()">${pictoHtml("wiederholen")}<span>${escapeHtml(FELDER_TEXT.nochmal)}</span></button>`}
       <button type="button" class="primary-action" data-leiste="${richtig ? "haupt" : "neben"}" onclick="felderWeiter()">${escapeHtml(FELDER_TEXT.weiter)}</button>
     </div>
-    ${richtig ? "" : `<p class="feedback-spaeter">${escapeHtml(FELDER_TEXT.spaeter)}</p>`}`, !!wieder, true);
+    ${richtig ? "" : `<p class="feedback-spaeter">${escapeHtml(FELDER_TEXT.spaeter)}</p>`}`, true, true);
+  felderSchrittZeigen(0, true);
+  if (!wieder) sprichEingefuegteRueckmeldung(document.getElementById("felderRueckmeldung"));
   /* D8: unten kein zweites „Weiter“ mehr freischalten (Befund B3) –
      der Knopf in der Rückmeldung führt weiter. */
 }
@@ -11649,8 +11738,7 @@ function felderLernschritt(art, still) {
   const weiter = a.weiter;
   el.outerHTML = buildFelderAufgabe(a.q, a.ort, a.topicId, { art, fest });
   felderAktiv.weiter = weiter;
-  const erstes = content.querySelector(".feld-check:not([disabled])");
-  if (erstes) erstes.focus();
+  felderSchrittZeigen(0, !!still);
   if (!still) announce(fest.length ? FELDER_TEXT.lernFrageAndere : FELDER_TEXT.lernFrageAlle);
 }
 
@@ -11663,14 +11751,14 @@ function felderNochmal() {
   const weiter = a.weiter;
   el.outerHTML = buildFelderAufgabe(a.q, a.ort, a.topicId, a.lern);
   felderAktiv.weiter = weiter;
-  const erstes = content.querySelector(".feld-check:not([disabled])");
-  if (erstes) erstes.focus();
+  felderSchrittZeigen(0);
   announce(FELDER_TEXT.anleitung);
 }
 
 function felderWeiter() {
   const a = felderAktiv;
   if (!a) return;
+  if (a.stand && a.stand.art === "bewertet" && a.index < a.q.felder.length - 1) return felderSchrittZeigen(a.index + 1);
   felderAktiv = null;
   if (a.ort === "lektion") return continueAfterPractice();
   if (a.ort === "wiederholen") return nextBigQuizQuestion();
@@ -14351,6 +14439,8 @@ function renderMemoryCard(topicId) {
    ============================================================ */
 
 function goBack() {
+  if (felderAktiv && content.querySelector(".felder-aufgabe") && felderAktiv.index > 0
+    && (!felderAktiv.stand || ["bewertet", "gesperrt"].includes(felderAktiv.stand.art))) return felderSchrittZeigen(felderAktiv.index - 1);
   if (!currentTopicId) return renderMenu();
   /* D2: Von der Übung (oder ihrer Rückmeldung) zurück zum Lerntext. */
   if (aufUebungsSeite) {
