@@ -114,9 +114,9 @@ function toggleSettings() { renderSettingsPage(); }
    (Steuert, wann die freiwillige Lernstand-Frage erscheint.) */
 let finishedTopicThisSession = false;
 const LEARN_MODES = {
-  allein:     { title: "Ich lerne allein",      desc: "Die App erklärt dir alles. Mit Vorlesen.",        icon: "understand" },
-  app:        { title: "Mit Hilfe der App",     desc: "Große Schrift. Vorlesen, wenn du es möchtest.",   icon: "message" },
-  begleitung: { title: "Mit einer Begleitung",  desc: "Ihr lernt zu zweit. Mit Tipps zum Reden.",        icon: "help" }
+  allein:     { title: "Ich lerne allein",      desc: "Die App erklärt dir alles. Mit Vorlesen.",        icon: "person" },
+  app:        { title: "Mit Hilfe der App",     desc: "Große Schrift. Vorlesen, wenn du es möchtest.",   icon: "handy" },
+  begleitung: { title: "Mit einer Begleitung",  desc: "Ihr lernt zu zweit. Mit Tipps zum Reden.",        icon: "people" }
 };
 
 function loadLearnMode() {
@@ -1121,6 +1121,7 @@ function initGlossar() {
       <button class="glossar-close" aria-label="Erklärung schließen" type="button">✕ Schließen</button>
       <p class="glossar-word-label">Was bedeutet:</p>
       <p class="glossar-word-title" id="glossarWordTitle"></p>
+      ${buildReadingToolbar("glossarReadingStatus")}
       <p class="glossar-word-def" id="glossarWordDef"></p>
       <button class="link-action glossar-siehe" type="button" hidden></button>
     </div>`;
@@ -1136,6 +1137,7 @@ function initGlossar() {
 function showGlossar(termKey, anzeige) {
   const def = GLOSSAR[termKey];
   if (!def || !glossarOverlay) return;
+  stopReading();
   dialogOeffnen(glossarOverlay);
   const display = anzeige || (termKey.charAt(0).toUpperCase() + termKey.slice(1));
   document.getElementById("glossarWordTitle").textContent = display;
@@ -1153,7 +1155,8 @@ function showGlossar(termKey, anzeige) {
 }
 
 function hideGlossar() {
-  if (!glossarOverlay) return;
+  if (!glossarOverlay || glossarOverlay.classList.contains("is-hidden")) return;
+  stopReading();
   glossarOverlay.classList.add("is-hidden");
   dialogSchliessen(glossarOverlay);
 }
@@ -1693,7 +1696,8 @@ function focusContent() {
   const leise = stillerNeuaufbau;
   stillerNeuaufbau = false;
   if (!leise && typeof autoRead !== "undefined" && autoRead && supportsSpeech()) {
-    window.setTimeout(() => { if (autoRead) readStart(); }, 450);
+    const generation = _readGen;
+    window.setTimeout(() => { if (autoRead && generation === _readGen) readStart(); }, 450);
   }
   const reduceMotion = !motionEnabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
@@ -1889,15 +1893,29 @@ function readShortText(text, el) {
   _readGen++;
   const gen = _readGen;
   window.speechSynthesis.cancel();
+  _readQueue = [];
+  _readIndex = 0;
   clearReadingHighlight();
+  setReadingActive(null);
   if (el) el.classList.add("reading-highlight");
   const utterance = new SpeechSynthesisUtterance(cleaned);
   utterance.lang = "de-DE";
   stimmeSetzen(utterance);
   utterance.rate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.82;
   utterance.pitch = 1;
-  utterance.onend = () => { if (gen === _readGen) clearReadingHighlight(); };
-  utterance.onerror = () => { if (gen === _readGen) clearReadingHighlight(); };
+  utterance.onstart = () => {
+    if (gen !== _readGen) return;
+    setReadingActive(utterance.rate < 0.8 ? "slow" : "normal");
+    updateReadingStatus(utterance.rate < 0.8 ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
+  };
+  const fertig = (status) => {
+    if (gen !== _readGen) return;
+    clearReadingHighlight();
+    setReadingActive(null);
+    updateReadingStatus(status);
+  };
+  utterance.onend = () => fertig("Vorlesen beendet.");
+  utterance.onerror = () => fertig("Vorlesen gestoppt.");
   window.speechSynthesis.speak(utterance);
 }
 
@@ -1938,7 +1956,7 @@ function stopReading() {
   updateReadingStatus("Vorlesen gestoppt.");
 }
 
-/* Markiert den aktiven Vorlese-Knopf grün, damit man immer sieht, was läuft. */
+/* Vorlesezustand: Beschriftung, Stopp-Piktogramm und sichtbare Hervorhebung. */
 function setReadingActive(mode) {
   document.querySelectorAll(".reading-button-normal").forEach(n => {
     const on = mode === "normal" || mode === "slow";
@@ -1955,7 +1973,8 @@ function setReadingActive(mode) {
 }
 
 function updateReadingStatus(text) {
-  const status = document.getElementById("readingStatus");
+  const status = Array.from(document.querySelectorAll('[role="dialog"][aria-modal="true"] .reading-status'))
+    .find(s => s.closest('[role="dialog"]').getClientRects().length > 0) || document.getElementById("readingStatus");
   if (status) status.textContent = text || "";
 }
 
@@ -1978,7 +1997,7 @@ const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
    waeren die Angebote dahinter fuer eine hoerende Nutzung unsichtbar,
    genau wie es `.alltag-help > summary` und `.support-help-button`
    vorher schon einmal waren. */
-const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary, .later-details > summary, .path-details > summary, .alltag-variant .alltag-v-way";
+const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary, .later-details > summary, .path-details > summary, .alltag-variant .alltag-v-way, .einstieg-option, .topic-group-link";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -2002,12 +2021,14 @@ function readCurrentPage(rate) {
     updateReadingStatus("Vorlesen geht auf diesem Gerät nicht.");
     return;
   }
+  frageAufforderungAktualisieren();
   _readGen++;
   const gen = _readGen;
   window.speechSynthesis.cancel();
   clearReadingHighlight();
 
-  const dialogRoot = document.querySelector("#lernMehr .lern-mehr-innen, #lernEinstellungen .lern-mehr-innen");
+  const dialogRoot = document.querySelector(".glossar-overlay:not(.is-hidden) .glossar-panel")
+    || document.querySelector("#lernMehr .lern-mehr-innen, #lernEinstellungen .lern-mehr-innen");
   const root = dialogRoot || document.querySelector("[data-readable='true']") || content;
   /* Antwort-Optionen werden MIT vorgelesen (nummeriert) – sonst hört eine
      nicht lesende Person die Frage, aber nie die Antworten. */
@@ -2092,7 +2113,7 @@ function readCurrentPage(rate) {
     ? content.querySelector('.lern-leiste button[onclick="lernMehrOeffnen(this)"]')
     : root ? (root.querySelector(".task-help-button") || (root.classList.contains("alltag-variant") ? document.querySelector(".alltag-v-help-button") : null)) : null;
   const hilfeSatz = hilfeKnopf
-    ? " Wenn du unsicher bist, tippe auf: " + cleanSpeechText(hilfeKnopf.textContent).replace(/\.$/, "") + "."
+    ? " Für Hilfe tippe auf: " + cleanSpeechText(hilfeKnopf.textContent).replace(/\.$/, "") + "."
     : "";
   if (hatOptionen) {
     /* Auf reinen Einschätzungs-Seiten die passende Aufforderung – dort gibt es
@@ -2102,7 +2123,8 @@ function readCurrentPage(rate) {
        „Das nehme ich“ der normalen Antwort-Optionen. */
     const direkteWahl = root && root.querySelector(".einfach-quiz-btn");
     els.push({ pseudoText: (nurMeinung ? FRAGE_TEXT.meinungAufforderung
-      : direkteWahl ? "Tippe deine Antwort an." : FRAGE_TEXT.aufforderung) + hilfeSatz });
+      : direkteWahl ? "Tippe deine Antwort an."
+      : (root && root.querySelector(".frage:not(.frage--meinung) .frage-aufforderung")?.textContent || FRAGE_TEXT.aufforderung)) + hilfeSatz });
   } else if (rueckmeldeKnoepfe.length) {
     /* Lernweg-Test (26.09.2026): Der Knopf-Name steht nach einem
        Doppelpunkt – vorher „Du kannst jetzt auf Frage nochmal versuchen
@@ -2300,7 +2322,7 @@ function readStart() {
   if (readTempo === "langsam") readSlow(); else readNormal();
 }
 
-function buildReadingToolbar() {
+function buildReadingToolbar(statusId = "readingStatus") {
   if (!supportsSpeech()) {
     return `
       <div class="reading-toolbar" role="group" aria-label="Vorlesen">
@@ -2324,9 +2346,9 @@ function buildReadingToolbar() {
           ${pictoHtml("vorlesen", "rb-ico rb-ico-speak")}
           ${pictoHtml("stop", "rb-ico rb-ico-stop")}
         </span>
-        <span class="rb-label">Vorlesen</span>
+        <span class="rb-caption"><span class="rb-label">Vorlesen</span><span class="rb-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span>
       </button>
-      <p id="readingStatus" class="reading-status" aria-live="polite"></p>
+      <p id="${statusId}" class="reading-status" aria-live="polite"></p>
     </div>
   `;
 }
@@ -2391,7 +2413,7 @@ function showPauseOverlay() {
       <p>Du kannst kurz Pause machen.</p>
       <p>Atme ruhig.</p>
       <p>Mach weiter, wenn du bereit bist.</p>
-      <button type="button" class="primary-action" onclick="closeCalmOverlay()">Weiter lernen</button>
+      <button type="button" class="bedien-pikto primary-action" onclick="closeCalmOverlay()">${pictoHtml("start")}<span>Weiter lernen</span></button>
     </div>
   `;
   document.body.appendChild(overlay);
@@ -2857,17 +2879,2294 @@ const KERN_SATZ_PIKTOGRAMME = {
   }
 };
 
-function kernSatzPikto(topic, rawLesson, text, gezeigt) {
-  if (!topic || !rawLesson || typeof text !== "string"
-      || !Array.isArray(topic.einfachLessons) || !topic.einfachLessons.includes(rawLesson)) return "";
-  const thema = KERN_SATZ_PIKTOGRAMME[topic.id];
-  const liste = thema && thema[rawLesson.title];
+/* Explizite Satz-/Listenpiktogramme für vorhandene Lerninhalte.
+   Bibliotheksmanifest, Bildregeln und Bild-Master gelesen; nur freigegebene
+   vorhandene SVGs. Texte unverändert aus v2026-28v/ece6b05.
+   Originaltitel + exakter Sprachtext; keine Wort- oder Positionszuordnung.
+   KERN_SATZ_PIKTOGRAMME bleibt unverändert und hat Vorrang.
+   Standard: zusätzliche Kernanker nur beim eigenständigen Hilfe-Notruf;
+   sonst bleibt das bereits bebilderte zusammengefasste Kern-Textfeld erhalten.
+   Facebook/Beleidigungen und Fakes/Was kann ich tun?: Leicht/Einfach
+   verankern konkret in bullets; Standard nennt dasselbe Tun im Absatz.
+*/
+const ERGAENZTE_SATZ_PIKTOGRAMME = {
+  "datenschutz": {
+    "Start": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Oder du willst selbst etwas teilen. Zum Beispiel ein Foto.",
+          "einfach": "Manchmal willst du auch selbst etwas teilen, zum Beispiel ein Foto.",
+          "standard": "Apps und Online-Formulare fragen oft nach deinen Daten – und manchmal willst du selbst etwas teilen, etwa ein Foto. Manche dieser Daten sind für den Zweck nötig, andere nicht. In diesem Kapitel lernst du einen Plan mit fünf Schritten: Damit prüfst du solche Situationen und entscheidest selbst. Wenn du unsicher bist, tippe oben auf Hilfe."
+        }
+      }
+    ],
+    "Deine Daten": [
+      {
+        "piktogramm": "data",
+        "saetze": {
+          "leicht": "Deine Daten sagen etwas über dich.",
+          "einfach": "Deine Daten sind alle Angaben, die etwas über dich verraten.",
+          "standard": "Zu deinen persönlichen Daten gehört alles, was etwas über dich aussagt: dein Name, deine Adresse und Telefonnummer, dein Geburtsdatum, deine Fotos und Kontakte – und auch dein Standort, also der Ort, an dem du gerade bist. Passwort und PIN sind geheim."
+        }
+      },
+      {
+        "piktogramm": "key",
+        "saetze": {
+          "leicht": "Dein Passwort ist geheim.",
+          "einfach": "Dein Passwort ist geheim."
+        }
+      },
+      {
+        "piktogramm": "key",
+        "saetze": {
+          "einfach": "Dein Passwort und deine PIN sind geheim."
+        }
+      }
+    ],
+    "Wer will deine Daten?": [
+      {
+        "piktogramm": "paket",
+        "saetze": {
+          "leicht": "Manche brauchen sie. Zum Beispiel für ein Paket.",
+          "einfach": "Manche brauchen deine Daten, zum Beispiel, um dir ein Paket zu liefern.",
+          "standard": "Viele wollen deine Daten – aber aus ganz unterschiedlichen Gründen. Manche brauchen sie, etwa um dir ein Paket zu liefern. Andere verdienen damit Geld, zum Beispiel über Werbung. Und manche wollen dich betrügen. Deshalb prüfst du: Wer bekommt meine Daten – und kenne ich diese Stelle?"
+        }
+      }
+    ],
+    "Nötig oder freiwillig?": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Du prüfst: Wofür brauchen die das?",
+          "einfach": "Du prüfst bei jeder Angabe: Wofür brauchen die das eigentlich?",
+          "standard": "Bei vielen Anmeldungen im Internet füllst du ein Formular aus. Ohne die Pflichtfelder geht es nicht weiter, freiwillige Felder darfst du leer lassen. Prüfe bei jeder Angabe, wofür sie gebraucht wird. Passt ein Pflichtfeld überhaupt nicht zum Zweck, musst du dich dort nicht anmelden."
+        }
+      }
+    ],
+    "Eine App will etwas sehen": [
+      {
+        "piktogramm": "handy",
+        "saetze": {
+          "leicht": "Apps fragen oft: Darf ich etwas sehen?",
+          "einfach": "Apps fragen oft, ob sie etwas auf deinem Handy sehen dürfen.",
+          "standard": "Viele Apps bitten um Zugriff auf deine Fotos, deine Kontakte oder deinen Standort – solche Berechtigungen fragt dein Handy ab. Prüfe dabei, was die App macht und ob sie den Zugriff dafür braucht. Manchmal reicht ein Teil davon, zum Beispiel der Standort nur während der Nutzung. Eine Berechtigung kannst du oft später in den Einstellungen ändern."
+        }
+      },
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "einfach": "Eine Erlaubnis kannst du oft später in den Einstellungen wieder ändern."
+        }
+      }
+    ],
+    "Wer sieht dein Profil?": [
+      {
+        "piktogramm": "data",
+        "saetze": {
+          "leicht": "Dort stehen Dinge über dich. Zum Beispiel dein Name, dein Foto oder dein Wohnort.",
+          "einfach": "Im Profil stehen Angaben über dich, zum Beispiel dein Name, dein Foto oder dein Wohnort.",
+          "standard": "In vielen Apps hast du ein Profil mit Angaben über dich – etwa deinem Namen, einem Foto oder deinem Wohnort. Prüfe, wer das sehen kann: alle im Internet, nur deine Freunde oder nur du. Das lässt sich oft einstellen und später wieder ändern."
+        }
+      },
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "einfach": "Das kannst du oft selbst einstellen und später auch wieder ändern."
+        }
+      }
+    ],
+    "Fotos prüfen": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Du willst ein Foto schicken oder zeigen.",
+          "einfach": "Du willst ein Foto verschicken oder anderen zeigen.",
+          "standard": "Bevor du ein Foto verschickst oder zeigst, prüfe: Was ist darauf zu sehen, und wer bekommt es? Sind andere Menschen darauf, fragst du sie vorher. Ein verschicktes Foto lässt sich oft nicht mehr zurückholen – deshalb prüfst du vorher."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Wenn eine andere Person auf dem Foto ist, fragst du sie vorher."
+        }
+      }
+    ],
+    "Standort teilen": [
+      {
+        "piktogramm": "location",
+        "saetze": {
+          "leicht": "Du kannst deinen Standort teilen. Dann sehen andere: Hier bist du gerade.",
+          "einfach": "Du kannst deinen Standort mit anderen teilen. Dann sehen sie, wo du gerade bist.",
+          "standard": "Wenn du deinen Standort teilst, sehen andere, wo du gerade bist. Prüfe dabei, wer ihn sieht und wie lange. Oft kannst du wählen, ob du ihn nur kurz oder dauerhaft teilst – und du kannst das Teilen später wieder beenden."
+        }
+      },
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "einfach": "Du kannst das Teilen später auch wieder ausschalten."
+        }
+      }
+    ],
+    "Eine Nachricht will deine Daten": [
+      {
+        "piktogramm": "mail",
+        "saetze": {
+          "leicht": "Manchmal kommt eine Nachricht. Oder eine E-Mail. Sie will Daten von dir.",
+          "einfach": "Manchmal bekommst du eine Nachricht oder eine E-Mail, in der jemand Daten von dir will.",
+          "standard": "Manchmal verlangt eine Nachricht oder E-Mail Daten von dir. Hast du das nicht erwartet, mach zuerst Stopp und prüfe genauso wie sonst: Wer will das, und wofür? Bist du unsicher, gib noch nichts ein und hol dir Unterstützung. Mehr dazu lernst du im Thema Betrug."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "einfach": "Wenn du so eine Nachricht nicht erwartet hast, machst du zuerst Stopp."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Wenn du unsicher bist, gibst du noch nichts ein und holst dir Unterstützung."
+        }
+      }
+    ],
+    "Dein Plan für deine Daten": [
+      {
+        "piktogramm": "plan",
+        "saetze": {
+          "leicht": "Das ist dein Plan für deine Daten:",
+          "einfach": "Das ist dein Plan für deine Daten, Schritt für Schritt:",
+          "standard": "Hier ist dein Plan für deine Daten im Überblick – Schritt für Schritt:"
+        }
+      }
+    ],
+    "Nötig oder nicht?": [
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "leicht": "Du bist unsicher? Dann gib noch nichts ein. Hol dir Unterstützung.",
+          "einfach": "Wenn du unsicher bist, gibst du noch nichts ein und holst dir Unterstützung."
+        }
+      }
+    ],
+    "Wer sieht es?": [
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "leicht": "Das kannst du oft einstellen. Und später ändern.",
+          "einfach": "Das kannst du oft selbst einstellen und später auch wieder ändern."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "leicht": "Andere Personen auf dem Foto? Dann fragst du sie vorher.",
+          "einfach": "Wenn andere Personen auf dem Foto sind, fragst du sie vorher."
+        }
+      }
+    ]
+  },
+  "whatsapp": {
+    "Start": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Stell dir vor: Eine fremde Nummer schreibt dir.",
+          "einfach": "Stell dir vor: Eine fremde Nummer schreibt dir bei WhatsApp, und in der Nachricht ist ein Link. Was machst du? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Eine unbekannte Nummer schreibt dir bei WhatsApp und schickt einen Link. Wie reagierst du? In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+        }
+      }
+    ],
+    "WhatsApp nutzen": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Mit WhatsApp kannst du Nachrichten schreiben.",
+          "einfach": "Mit WhatsApp kannst du Nachrichten, Bilder und Sprach-Nachrichten verschicken und auch in Gruppen schreiben.",
+          "standard": "Mit WhatsApp kannst du Textnachrichten, Fotos und Sprachnachrichten verschicken und in Gruppen schreiben. Du bestimmst dabei selbst, mit wem du Kontakt hast und wem du antwortest."
+        }
+      }
+    ],
+    "Fremde Nummer": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Eine fremde Nummer schreibt dir.",
+          "einfach": "Wenn dir eine fremde Nummer schreibt, weißt du nicht, wer wirklich dahintersteckt.",
+          "standard": "Wenn dir eine unbekannte Nummer schreibt, weißt du nicht, wer wirklich dahintersteckt. Antworte nicht vorschnell, gib keine persönlichen Daten weiter und überweise kein Geld. Im Zweifel ignorierst oder blockierst du den Kontakt."
+        }
+      },
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "einfach": "Im Zweifel kannst du den Kontakt einfach blockieren."
+        }
+      }
+    ],
+    "Geld und Betrug": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Manche Nachrichten fragen nach Geld.",
+          "einfach": "Manche Nachrichten fragen nach Geld, und die Betrüger tun oft so, als wären sie Familie oder Freunde.",
+          "standard": "Eine häufige Betrugsmasche sind Nachrichten, die nach Geld fragen. Betrüger geben sich als Angehörige aus – etwa mit der Nachricht „Hallo Mama, ich habe eine neue Nummer und brauche Geld.“ Inzwischen lassen sich sogar Stimmen in Sprachnachrichten mit künstlicher Intelligenz täuschend echt nachahmen. Überweise deshalb niemals Geld an eine unbekannte Nummer und ruf die Person im Zweifel unter ihrer bekannten Nummer zurück."
+        }
+      },
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "einfach": "Schick deshalb niemals Geld an eine fremde Nummer, sondern ruf die Person vorher an."
+        }
+      }
+    ],
+    "Links in Nachrichten": [
+      {
+        "piktogramm": "link",
+        "saetze": {
+          "leicht": "Ein Link führt zu einer Internet-Seite.",
+          "einfach": "Ein Link führt dich zu einer Internet-Seite, doch manche Links sind gefährlich.",
+          "standard": "Ein Link führt dich auf eine Internetseite. Manche Links stammen von Betrügern und führen zu gefälschten Seiten, die deine Daten abgreifen wollen. Öffne Links aus unbekannten Nachrichten nicht und gib dort keine Daten ein."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Du tippst nicht drauf.",
+          "einfach": "Tippe deshalb nicht darauf. Frag lieber eine Person, der du vertraust."
+        }
+      }
+    ],
+    "WhatsApp-Code": [
+      {
+        "piktogramm": "code",
+        "saetze": {
+          "leicht": "Du bekommst manchmal einen Code per SMS.",
+          "einfach": "Manchmal bekommst du einen Code per SMS, der dein WhatsApp schützt.",
+          "standard": "Gelegentlich erhältst du einen Bestätigungscode per SMS. Dieser Code schützt dein WhatsApp-Konto vor fremdem Zugriff. Gib ihn niemals weiter – wer dich danach fragt, will dein Konto übernehmen."
+        }
+      }
+    ],
+    "Gruppen": [
+      {
+        "piktogramm": "people",
+        "saetze": {
+          "leicht": "In Gruppen lesen viele Menschen mit.",
+          "einfach": "In Gruppen lesen oft viele Menschen mit, die du nicht alle kennst.",
+          "standard": "In Gruppen lesen oft viele Menschen mit, die du nicht alle kennst. Überlege deshalb, was du dort teilst. Private Informationen, Adressen oder Fotos gehören nicht in eine große Gruppe."
+        }
+      }
+    ],
+    "Fotos senden": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Andere können dein Foto weiter-schicken.",
+          "einfach": "Ein Foto kann leicht weiter-geschickt werden und zeigt manchmal private Dinge.",
+          "standard": "Einmal verschickte Fotos lassen sich leicht weiterleiten und sind kaum zurückzuholen. Achte darauf, ob ein Bild private Dinge zeigt, und frage andere Personen um Erlaubnis, bevor du ein Foto von ihnen versendest."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Frag andere Personen deshalb um Erlaubnis, bevor du ein Foto von ihnen sendest."
+        }
+      }
+    ],
+    "Stress und Eile": [
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "leicht": "Du darfst eine Pause machen.",
+          "einfach": "Mach ruhig eine Pause und entscheide in Ruhe.",
+          "standard": "Manche Nachrichten erzeugen bewusst Stress oder Angst, damit du unüberlegt reagierst. Du musst nicht sofort antworten. Mach ruhig eine Pause und entscheide in Ruhe – oder hol dir Rat von einer vertrauten Person."
+        }
+      }
+    ],
+    "Die KI in WhatsApp": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "In WhatsApp gibt es jetzt eine KI. Sie heißt Meta AI.",
+          "einfach": "In WhatsApp gibt es eine KI mit dem Namen Meta AI, die du an einem blauen Kreis erkennst.",
+          "standard": "In WhatsApp ist eine künstliche Intelligenz namens Meta AI eingebaut, erkennbar an einem blauen Kreis. Sie ist kein Mensch, sondern ein Computerprogramm: Sie kann Fragen beantworten, macht aber auch Fehler. Du musst sie nicht nutzen – und persönliche oder vertrauliche Dinge solltest du ihr nicht anvertrauen."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "leicht": "Du reagierst nicht sofort.",
+          "einfach": "Wenn etwas komisch wirkt oder Stress macht, bleib ruhig und reagiere nicht sofort.",
+          "standard": "Wenn dir etwas merkwürdig vorkommt oder dir Stress gemacht wird, halte kurz inne: Reagiere nicht sofort, öffne keine Links und zeige die Nachricht einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "einfach": "Stopp machen."
+        }
+      },
+      {
+        "piktogramm": "link",
+        "saetze": {
+          "einfach": "Den Link nicht öffnen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Den Hilfe-Knopf nutzen."
+        }
+      }
+    ],
+    "Unbekannte Nachrichten": [
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du zeigst es einer vertrauten Person.",
+          "einfach": "Zeig sie zuerst einer Person, der du vertraust. Sie hilft dir weiter."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Du antwortest nicht sofort.",
+          "einfach": "Antworte nicht sofort, auch wenn die Nachricht freundlich klingt."
+        }
+      }
+    ],
+    "Dein WhatsApp-Code": [
+      {
+        "piktogramm": "lock",
+        "saetze": {
+          "leicht": "Den Code gibst du niemandem.",
+          "einfach": "Diesen Code gibst du niemandem weiter, auch nicht deinen Freunden."
+        }
+      }
+    ]
+  },
+  "facebook": {
+    "Start": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Stell dir vor: Eine fremde Person will bei Facebook dein Freund sein.",
+          "einfach": "Stell dir vor: Eine Person, die du nicht kennst, schickt dir bei Facebook eine Freundschafts-Anfrage. Was machst du? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Jemand, den du nicht kennst, schickt dir bei Facebook eine Freundschaftsanfrage. Nimmst du sie an? In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+        }
+      }
+    ],
+    "Profil": [
+      {
+        "piktogramm": "data",
+        "saetze": {
+          "leicht": "Im Profil stehen Informationen über dich.",
+          "einfach": "In deinem Profil stehen Informationen über dich, aber nicht alles muss dort öffentlich stehen.",
+          "standard": "In deinem Profil stehen Informationen über dich – aber nicht alles muss dort öffentlich sichtbar sein. Angaben wie Adresse, Telefonnummer, Geburtsdatum oder private Fotos solltest du entweder weglassen oder nur für ausgewählte Personen freigeben."
+        }
+      }
+    ],
+    "Beitrag schreiben": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Du willst etwas schreiben.",
+          "einfach": "Wenn du etwas postest, können viele Menschen deinen Beitrag sehen – manchmal mehr als nur deine Freunde.",
+          "standard": "Bevor du einen Beitrag veröffentlichst, denk daran: Oft können sehr viele Menschen ihn lesen – manchmal auch über deinen Freundeskreis hinaus. Überlege deshalb vorher, ob der Inhalt wirklich für alle bestimmt ist."
+        }
+      }
+    ],
+    "Wer darf etwas sehen?": [
+      {
+        "piktogramm": "understand",
+        "saetze": {
+          "leicht": "Du kannst einstellen, wer einen Beitrag sehen darf.",
+          "einfach": "Du kannst bei Facebook einstellen, wer deine Beiträge sehen darf – das nennt man Privatsphäre-Einstellungen.",
+          "standard": "Facebook bietet Einstellungen, mit denen du festlegst, wer deine Beiträge sehen darf – zum Beispiel nur Freunde statt aller Nutzer. Diese Privatsphäre-Einstellungen lohnen sich. Wenn sie unübersichtlich sind, lass dir ruhig dabei helfen."
+        }
+      }
+    ],
+    "Freundschafts-Anfragen": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Eine unbekannte Person sendet eine Anfrage.",
+          "einfach": "Nicht jede Freundschafts-Anfrage kommt von jemandem, den du kennst.",
+          "standard": "Nicht jede Freundschaftsanfrage stammt von jemandem, den du kennst. Hinter unbekannten Profilen können sich auch Betrüger verbergen. Du musst keine Anfrage annehmen – im Zweifel lehnst du sie ab oder ignorierst sie."
+        }
+      }
+    ],
+    "Kommentare schreiben": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Freundlich bleiben ist wichtig.",
+          "einfach": "Wenn du kommentierst, bleib freundlich und sachlich.",
+          "standard": "Was du kommentierst, können viele Menschen lesen, und Worte können verletzen. Du musst nicht auf jeden Beitrag reagieren. Wenn du kommentierst, bleib sachlich und respektvoll."
+        }
+      }
+    ],
+    "Beleidigungen": [
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "leicht": "Blockieren.",
+          "einfach": "Die Person blockieren.",
+          "standard": "Auch auf Facebook kommt es zu Streit und Beleidigungen. Du musst dich darauf nicht einlassen und nicht zurückbeleidigen. Stattdessen kannst du die Nachricht aufbewahren, die Person blockieren, den Beitrag melden und dir Unterstützung holen."
+        }
+      },
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "einfach": "Die Nachricht zeigen."
+        }
+      },
+      {
+        "piktogramm": "report",
+        "saetze": {
+          "einfach": "Den Beitrag melden."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Unterstützung holen."
+        }
+      }
+    ],
+    "Fotos mit anderen Personen": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Ein Foto zeigt andere Menschen.",
+          "einfach": "Wenn auf einem Foto andere Menschen zu sehen sind, möchte nicht jeder im Internet erscheinen.",
+          "standard": "Wenn auf einem Foto andere Personen zu sehen sind, gilt: Nicht jeder möchte im Internet erscheinen. Frag die abgebildeten Personen um Erlaubnis, bevor du ein solches Bild veröffentlichst."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Frag die Personen deshalb um Erlaubnis, bevor du ein solches Foto postest."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "person",
+        "saetze": {
+          "leicht": "Zum Beispiel ist eine Person gemein zu dir.",
+          "einfach": "Du kannst die Person blockieren und den Beitrag melden. Und du kannst es einer Person sagen, der du vertraust.",
+          "standard": "Wenn dich auf Facebook etwas belastet oder jemand verletzend ist, musst du das nicht alleine tragen. Du kannst die Person blockieren, den Beitrag oder Kommentar melden und dir Unterstützung holen – sprich am besten mit jemandem, dem du vertraust. Wichtig: Es ist nicht deine Schuld."
+        }
+      },
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "einfach": "Die Person blockieren."
+        }
+      },
+      {
+        "piktogramm": "report",
+        "saetze": {
+          "einfach": "Den Beitrag oder Kommentar melden."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "einfach": "Einer vertrauten Person davon erzählen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Hilfe holen."
+        }
+      }
+    ],
+    "Dein Facebook-Profil": [
+      {
+        "piktogramm": "understand",
+        "saetze": {
+          "leicht": "Andere sehen dein Profil.",
+          "einfach": "Auf Facebook hast du ein Profil, das andere Menschen sehen können."
+        }
+      },
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "leicht": "Du kannst einstellen: Wer sieht deine Beiträge?",
+          "einfach": "Für deine Beiträge wählst du aus, wer sie sehen kann."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Eine vertraute Person hilft dir beim Einstellen.",
+          "einfach": "Du kannst für deine Beiträge Freunde auswählen. Eine vertraute Person hilft dir bei den Einstellungen."
+        }
+      }
+    ],
+    "Unbekannte Personen": [
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "leicht": "Du nimmst die Anfrage nicht an.",
+          "einfach": "Wenn du die Person nicht kennst, nimmst du die Anfrage nicht an."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du fragst eine vertraute Person.",
+          "einfach": "Bist du unsicher, fragst du eine Person, der du vertraust."
+        }
+      }
+    ],
+    "Komische Nachrichten": [
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Du tippst nicht drauf.",
+          "einfach": "Tippe nicht auf den Link und schick kein Geld."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du zeigst es einer vertrauten Person.",
+          "einfach": "Zeig die Nachricht lieber einer Person, der du vertraust."
+        }
+      }
+    ]
+  },
+  "instagram": {
+    "Start": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Stell dir vor: Du willst ein Foto bei Instagram posten.",
+          "einfach": "Stell dir vor: Du willst ein Foto bei Instagram posten, auf dem auch deine Freundin zu sehen ist. Was machst du? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Du möchtest ein Foto auf Instagram posten – deine Freundin ist mit drauf. Was tust du vorher? In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+        }
+      }
+    ],
+    "Foto posten": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Du willst ein Foto posten.",
+          "einfach": "Wenn du ein Foto postest, können viele Menschen es sehen.",
+          "standard": "Wenn du ein Foto postest, können es viele Menschen sehen. Achte darauf, was im Bild zu erkennen ist – oft verraten Hintergrund oder Details mehr über dich, als dir bewusst ist."
+        }
+      }
+    ],
+    "Andere Personen auf Fotos": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Auf dem Foto sind andere Personen.",
+          "einfach": "Wenn auf einem Foto andere Personen zu sehen sind, möchte nicht jeder im Internet erscheinen.",
+          "standard": "Sind auf einem Foto andere Personen zu sehen, solltest du sie vor dem Posten um Erlaubnis fragen. Wer das nicht möchte, hat ein Recht darauf – dann wählst du besser ein anderes Bild."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Frag sie deshalb vorher um Erlaubnis oder nimm ein anderes Foto."
+        }
+      }
+    ],
+    "Kurze Videos und Stories": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Kurze Videos können viele Menschen sehen.",
+          "einfach": "Kurze Videos und Stories verschwinden zwar wieder, doch in der Zeit können viele Menschen sie sehen.",
+          "standard": "Stories und kurze Videos verschwinden zwar nach einer Weile, doch in dieser Zeit können viele Menschen sie sehen – und mit einem Bildschirmfoto dauerhaft speichern. Behandle sie deshalb so vorsichtig wie jeden anderen Beitrag."
+        }
+      }
+    ],
+    "Standort": [
+      {
+        "piktogramm": "location",
+        "saetze": {
+          "leicht": "Der Standort zeigt, wo du bist.",
+          "einfach": "Wenn du deinen Standort teilst, sehen andere, wo du gerade bist.",
+          "standard": "Wenn du deinen Standort teilst, sehen andere, wo du dich aufhältst. Das muss nicht jeder wissen und kann ausgenutzt werden. Gib deinen Standort nur bewusst und nur an Menschen weiter, denen du vertraust."
+        }
+      }
+    ],
+    "Private Nachrichten": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Eine fremde Person schreibt dir privat.",
+          "einfach": "Wenn dir eine fremde Person privat schreibt und nach Fotos oder Daten fragt, ist das ein Warnzeichen.",
+          "standard": "Wenn dir eine fremde Person private Nachrichten schickt und nach Fotos oder persönlichen Daten fragt, ist das ein deutliches Warnzeichen. Geh darauf nicht ein, schick keine privaten Bilder und blockiere den Kontakt im Zweifel."
+        }
+      },
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "einfach": "Im Zweifel blockierst du den Kontakt."
+        }
+      }
+    ],
+    "Verletzende Kommentare": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Kommentare können nett sein.",
+          "einfach": "Kommentare können nett sein, manche aber auch verletzend.",
+          "standard": "Kommentare können freundlich, aber auch verletzend sein. Du musst nicht auf jeden reagieren. Bei verletzenden Kommentaren kannst du die Nachricht aufbewahren, die Person blockieren, den Kommentar melden und mit jemandem darüber sprechen."
+        }
+      },
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "einfach": "Die Nachricht zeigen."
+        }
+      },
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "einfach": "Die Person blockieren."
+        }
+      },
+      {
+        "piktogramm": "report",
+        "saetze": {
+          "einfach": "Den Kommentar melden."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "einfach": "Mit jemandem darüber sprechen."
+        }
+      }
+    ],
+    "Bearbeitete Bilder": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Bilder können bearbeitet sein.",
+          "einfach": "Auf Instagram wirkt vieles perfekt, doch viele Bilder sind bearbeitet oder mit Filtern verändert.",
+          "standard": "Vieles auf Instagram wirkt makellos – doch zahlreiche Bilder sind nachbearbeitet oder mit Filtern verändert. Mach dir bewusst: Das Gezeigte entspricht oft nicht der Wirklichkeit, und du musst dich damit nicht vergleichen."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "leicht": "Du machst Stopp und antwortest nicht sofort.",
+          "einfach": "Wenn ein Profil oder eine Nachricht komisch wirkt, mach Stopp und antworte nicht sofort.",
+          "standard": "Wenn dir ein Profil oder eine Nachricht merkwürdig vorkommt, halte inne: Antworte nicht sofort und zeige es einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "einfach": "Stopp machen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Den Hilfe-Knopf nutzen."
+        }
+      },
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "einfach": "Das Profil oder die Nachricht zeigen."
+        }
+      }
+    ],
+    "Fotos von anderen Personen": [
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "leicht": "Du fragst die Person zuerst.",
+          "einfach": "Dann fragst du diese Person zuerst."
+        }
+      }
+    ],
+    "Deine Fotos auf Instagram": [
+      {
+        "piktogramm": "lock",
+        "saetze": {
+          "leicht": "Am besten ist dein Konto privat.",
+          "einfach": "Am besten stellst du dein Konto auf privat. Dann sehen nur deine Freunde deine Fotos."
+        }
+      }
+    ],
+    "Nachrichten von Unbekannten": [
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Du antwortest nicht.",
+          "einfach": "Dann antwortest du ihr nicht."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du zeigst es einer vertrauten Person.",
+          "einfach": "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter."
+        }
+      }
+    ]
+  },
+  "youtube": {
+    "Start": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Stell dir vor: Ein Video bei YouTube erzählt etwas sehr Überraschendes.",
+          "einfach": "Stell dir vor: Ein Video bei YouTube erzählt etwas sehr Überraschendes. Stimmt das wirklich? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Ein YouTube-Video behauptet etwas sehr Überraschendes. Wie findest du heraus, ob es stimmt? In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+        }
+      }
+    ],
+    "Videos prüfen": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Nicht jedes Video ist wahr.",
+          "einfach": "Nicht alles, was in Videos gesagt wird, ist wahr, denn manche Videos übertreiben oder lügen.",
+          "standard": "Nicht alles, was in Videos behauptet wird, stimmt. Manche Inhalte übertreiben oder sind bewusst falsch, um Aufmerksamkeit zu erzeugen. Prüfe wichtige Aussagen und glaub nicht alles sofort."
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Du fragst dich: Stimmt das wirklich?",
+          "einfach": "Frag dich deshalb beim Schauen: Stimmt das wirklich?"
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Oder du fragst eine vertraute Person.",
+          "einfach": "Schau nach, was ein anderer Kanal dazu sagt, oder frag eine Person, der du vertraust."
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "einfach": "Glaub deshalb nicht alles sofort und prüfe wichtige Aussagen."
+        }
+      }
+    ],
+    "Werbung erkennen": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Werbung will: Du sollst etwas kaufen.",
+          "einfach": "In vielen Videos steckt Werbung, die dich zum Kaufen bringen will.",
+          "standard": "In vielen Videos steckt Werbung – manchmal offen, manchmal versteckt als Empfehlung. Ihr Ziel ist, dass du etwas kaufst. Lass dich nicht zu schnellen Käufen drängen und überlege in Ruhe."
+        }
+      },
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "leicht": "Du tippst nicht auf Werbung.",
+          "einfach": "Oft kannst du die Werbung überspringen. Auf die Werbung tippst du nicht."
+        }
+      }
+    ],
+    "Autoplay und Zeit": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "YouTube spielt oft automatisch das nächste Video ab.",
+          "einfach": "YouTube spielt automatisch das nächste Video ab, sodass man schnell sehr lange schaut.",
+          "standard": "YouTube startet automatisch das nächste Video, sodass man schnell viel Zeit verliert. Achte darauf, wie lange du schon schaust, und mach bewusst Pausen. Du darfst jederzeit stoppen."
+        }
+      },
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "einfach": "Du darfst jederzeit stoppen und eine Pause machen."
+        }
+      }
+    ],
+    "Gefährliche Mutproben": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Manche Videos zeigen gefährliche Mutproben.",
+          "einfach": "Manche Videos zeigen gefährliche Mutproben, die du nicht nachmachen musst.",
+          "standard": "Im Netz kursieren Videos mit gefährlichen Mutproben oder „Challenges“. Du musst bei so etwas nicht mitmachen – deine Gesundheit ist wichtiger als ein Trend oder die Anerkennung anderer."
+        }
+      }
+    ],
+    "Videos, die Angst machen": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Manche Videos machen Angst oder Stress.",
+          "einfach": "Manche Videos machen Angst oder Stress, und du musst sie nicht zu Ende sehen.",
+          "standard": "Manche Videos lösen Angst oder Stress aus. Du musst sie nicht zu Ende sehen – stopp das Video und wende dich bei Bedarf an eine Person, der du vertraust."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "einfach": "Du darfst das Video stoppen und mit einer vertrauten Person darüber sprechen."
+        }
+      }
+    ],
+    "Kommentare": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Kommentare können nett sein.",
+          "einfach": "Unter Videos gibt es nette, aber auch verletzende Kommentare.",
+          "standard": "Unter Videos finden sich freundliche, aber auch verletzende Kommentare. Du musst sie weder lesen noch beantworten. Lass dich von gemeinen Kommentaren nicht herunterziehen."
+        }
+      }
+    ],
+    "Nicht jedes Video ist echt": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Manche Videos sind mit KI gemacht.",
+          "einfach": "Manche Videos sind mit KI gemacht und sehen echt aus, sind aber gefälscht.",
+          "standard": "Manche Videos werden mit künstlicher Intelligenz erzeugt. Sie wirken echt, sind aber gefälscht – mitunter werden sogar bekannte Personen täuschend echt nachgebildet. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Ein Video macht dir Angst oder drängt dich.",
+          "einfach": "Wenn ein Video dir Angst macht oder dir Stress macht, mach Stopp und mach nichts Gefährliches nach.",
+          "standard": "Wenn dir ein Video Angst macht oder dir Stress macht, stopp es und mach nichts nach, was gefährlich ist. Zeig es bei Bedarf einer Person, der du vertraust, und mach eine Pause."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "einfach": "Das Video stoppen."
+        }
+      },
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "einfach": "Nichts nachmachen."
+        }
+      },
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "einfach": "Eine Pause machen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Unterstützung holen."
+        }
+      }
+    ]
+  },
+  "snapchat": {
+    "Start": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Stell dir vor: Jemand bei Snapchat will ein Foto von dir.",
+          "einfach": "Stell dir vor: Jemand bei Snapchat will unbedingt ein Foto von dir, aber du willst das nicht. Was machst du? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Jemand drängt dich bei Snapchat, ein Foto von dir zu schicken – du willst das aber nicht. Was machst du? In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Stress erkennst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+        }
+      }
+    ],
+    "Bilder verschwinden nicht immer": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Du sendest ein Bild.",
+          "einfach": "Bei Snapchat ist ein Bild oft nur kurz zu sehen.",
+          "standard": "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich weg sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften."
+        }
+      }
+    ],
+    "Bild vom Bildschirm": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Jemand kann ein Bild vom Bildschirm machen.",
+          "einfach": "Mit einem Bild vom Bildschirm kann jemand dein Bild speichern und weiterschicken – auch ohne dass du es merkst.",
+          "standard": "Mit einem Bildschirmfoto kann der Empfänger dein Bild dauerhaft speichern und weiterleiten – auch ohne dass du es merkst. Überlege deshalb vor jedem Bild, ob es in fremden Händen ein Problem wäre."
+        }
+      }
+    ],
+    "Sehr private Bilder": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Manche Bilder sind sehr privat.",
+          "einfach": "Manche Bilder sind sehr privat, und niemand darf dich zu solchen Bildern drängen.",
+          "standard": "Sehr private oder intime Bilder solltest du besonders schützen. Niemand hat das Recht, dich zu solchen Aufnahmen zu drängen. Du darfst jederzeit Nein sagen und dir Hilfe holen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Du darfst jederzeit Nein sagen und dir Hilfe holen."
+        }
+      }
+    ],
+    "Standort": [
+      {
+        "piktogramm": "location",
+        "saetze": {
+          "leicht": "Snapchat kann zeigen, wo du bist.",
+          "einfach": "Snapchat kann anderen zeigen, wo du gerade bist.",
+          "standard": "Snapchat kann über die „Snap Map“ deinen Standort anzeigen. Dann sehen andere, wo du dich aufhältst – das kann unsicher sein. Schalte die Standortfreigabe aus oder nutze den „Geistmodus“, wenn du das nicht möchtest."
+        }
+      },
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "einfach": "Schalte die Standort-Anzeige aus, wenn du das nicht möchtest."
+        }
+      }
+    ],
+    "Kontakte": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Fremde Personen können schreiben.",
+          "einfach": "Nicht jeder, der dir schreibt, ist vertrauenswürdig, denn auch Fremde können Kontakt aufnehmen.",
+          "standard": "Nicht jeder, der dir schreibt, ist vertrauenswürdig. Auch Fremde können Kontakt aufnehmen. Du musst nicht antworten und kannst unbekannte Kontakte ablehnen oder blockieren."
+        }
+      },
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "einfach": "Du musst nicht antworten und kannst unbekannte Kontakte blockieren."
+        }
+      }
+    ],
+    "Stress erkennen": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Jemand sagt: Schick das Bild, aber sag es niemandem.",
+          "einfach": "Wenn jemand sagt: „Schick das Bild, aber sag es niemandem“, ist das ein Warnzeichen.",
+          "standard": "Sätze wie „Schick mir das Bild, aber sag es niemandem“ sind ein klares Warnzeichen. Wer Geheimhaltung verlangt, drängt dich bewusst. Du darfst Nein sagen und dir sofort Unterstützung holen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Du darfst Nein sagen und dir Hilfe holen."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Eine Nachricht macht dir Stress.",
+          "einfach": "Wenn dir eine Nachricht Stress macht, sende kein Bild und reagiere nicht vorschnell.",
+          "standard": "Wenn dir eine Nachricht Stress macht, sende kein Bild und reagiere nicht vorschnell. Zeig die Nachricht einer Person, der du vertraust, und hol dir Unterstützung."
+        }
+      },
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "einfach": "Nein sagen."
+        }
+      },
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "einfach": "Kein Bild senden."
+        }
+      },
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "einfach": "Die Nachricht zeigen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Unterstützung holen."
+        }
+      }
+    ],
+    "Bilder verschwinden nicht wirklich": [
+      {
+        "piktogramm": "understand",
+        "saetze": {
+          "leicht": "Dürfen alle das Bild sehen? Nur dann schickst du es.",
+          "einfach": "Schick deshalb nur Bilder, die alle sehen dürfen."
+        }
+      }
+    ],
+    "Dein Standort": [
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "leicht": "Du schaltest den Standort aus.",
+          "einfach": "Schalte deinen Standort deshalb aus. Eine Person, der du vertraust, hilft dir dabei."
+        }
+      }
+    ],
+    "Niemand darf dich zwingen": [
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "leicht": "Du sagst nein.",
+          "einfach": "Wenn du das nicht willst, musst du es auch nicht tun. Du darfst Nein sagen."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du sagst es einer vertrauten Person.",
+          "einfach": "Erzähl es danach eine Person, der du vertraust."
+        }
+      }
+    ]
+  },
+  "tiktok": {
+    "Start": [
+      {
+        "piktogramm": "tiktok",
+        "saetze": {
+          "leicht": "Stell dir vor: Bei TikTok machen viele einen gefährlichen Trend nach.",
+          "einfach": "Stell dir vor: Bei TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Auf TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+        }
+      }
+    ],
+    "Trends": [
+      {
+        "piktogramm": "people",
+        "saetze": {
+          "leicht": "Viele Menschen machen bei Trends mit.",
+          "einfach": "Auf TikTok machen viele Menschen bei Trends mit, und manche Trends sind lustig.",
+          "standard": "Auf TikTok verbreiten sich Trends sehr schnell. Viele sind harmlos und lustig, manche aber gefährlich. Du entscheidest selbst, ob du mitmachst – und musst es nicht."
+        }
+      }
+    ],
+    "Gefährliche Trends erkennen": [
+      {
+        "piktogramm": "warning",
+        "saetze": {
+          "leicht": "Ein Trend sieht gefährlich aus.",
+          "einfach": "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun.",
+          "standard": "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun. Deine Sicherheit ist wichtiger als Likes."
+        }
+      }
+    ],
+    "Ähnliche Videos": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Dann zeigt TikTok ähnliche Videos.",
+          "einfach": "TikTok merkt sich, was du anschaust, und zeigt dir immer mehr vom Gleichen.",
+          "standard": "TikTok beobachtet, welche Videos du ansiehst, und zeigt dir immer mehr vom Gleichen. Dieser Sog führt dazu, dass man schnell sehr lange schaut. Mach dir das bewusst und leg bewusst Pausen ein."
+        }
+      }
+    ],
+    "Private Nachrichten": [
+      {
+        "piktogramm": "stranger",
+        "saetze": {
+          "leicht": "Fremde Personen können dir schreiben.",
+          "einfach": "Auch auf TikTok können dir Fremde schreiben und nach Adresse, Fotos oder anderen Daten fragen.",
+          "standard": "Auch auf TikTok können dir Fremde private Nachrichten schicken und nach Adresse, Fotos oder anderen Daten fragen. Gib solche Informationen nicht weiter und blockiere den Kontakt im Zweifel."
+        }
+      },
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "einfach": "Gib solche Daten nicht weiter und blockiere den Kontakt im Zweifel."
+        }
+      }
+    ],
+    "Videos posten": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Andere können dein Video sehen und speichern.",
+          "einfach": "Ein Video, das du postest, können viele Menschen sehen und speichern.",
+          "standard": "Ein gepostetes Video können viele Menschen sehen und speichern. Prüfe vorher, was darauf zu erkennen ist, und veröffentliche nichts, was dir später unangenehm sein oder schaden könnte."
+        }
+      }
+    ],
+    "Kommentare": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Kommentare können nett sein.",
+          "einfach": "Unter Videos gibt es nette, aber auch verletzende Kommentare.",
+          "standard": "Unter Videos gibt es freundliche, aber auch verletzende Kommentare. Du musst auf keinen reagieren. Bei gemeinen Kommentaren kannst du die Person blockieren oder den Kommentar melden."
+        }
+      }
+    ],
+    "Gefühle und Pausen": [
+      {
+        "piktogramm": "feel",
+        "saetze": {
+          "leicht": "Manche Videos machen traurig, wütend oder nervös.",
+          "einfach": "Manche Videos machen traurig, wütend oder nervös.",
+          "standard": "Manche Videos lösen Traurigkeit, Wut oder Unruhe aus. Du darfst die App jederzeit schließen und eine Pause machen. Über belastende Gefühle kannst du mit einer vertrauten Person sprechen."
+        }
+      },
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "einfach": "Du darfst TikTok jederzeit schließen und eine Pause machen."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "einfach": "Über belastende Gefühle kannst du mit einer vertrauten Person sprechen."
+        }
+      }
+    ],
+    "Nicht jedes Video ist echt": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Viele Videos auf TikTok sind mit KI gemacht.",
+          "einfach": "Viele Videos auf TikTok sind mit KI gemacht und sehen echt aus, sind aber gefälscht.",
+          "standard": "Viele TikTok-Videos werden mit künstlicher Intelligenz erstellt. Sie wirken echt, sind aber gefälscht – sogar Stimmen und Gesichter lassen sich täuschend echt nachbilden. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Du zeigst die Nachricht oder das Video einer vertrauten Person.",
+          "einfach": "Gib keine privaten Daten preis und zeig die Nachricht oder das Video einer vertrauten Person.",
+          "standard": "Ob gefährlicher Trend, gemeiner Kommentar oder Stress – halte inne und mach nichts Gefährliches nach. Gib keine privaten Daten preis, mach eine Pause und zeig die Nachricht oder das Video einer Person, der du vertraust."
+        }
+      },
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "einfach": "Nichts Gefährliches nachmachen."
+        }
+      },
+      {
+        "piktogramm": "data",
+        "saetze": {
+          "einfach": "Keine privaten Daten senden."
+        }
+      },
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "einfach": "Eine Pause machen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Unterstützung holen."
+        }
+      }
+    ],
+    "Pause machen": [
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "leicht": "Du machst nach einer Stunde Pause.",
+          "einfach": "Wenn der Timer klingelt, machst du Pause."
+        }
+      }
+    ],
+    "Was du bei TikTok siehst": [
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "leicht": "Du musst nicht mitmachen.",
+          "einfach": "Manche Videos zeigen gefährliche Trends oder Mutproben. Da musst du nicht mitmachen, auch wenn viele andere es tun."
+        }
+      }
+    ],
+    "Nachrichten auf TikTok": [
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Du antwortest nicht.",
+          "einfach": "Dann antwortest du ihr nicht."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du zeigst es einer vertrauten Person.",
+          "einfach": "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter."
+        }
+      }
+    ]
+  },
+  "hilfe": {
+    "Start": [
+      {
+        "piktogramm": "handy",
+        "saetze": {
+          "leicht": "Mit dem Handy oder im Internet klappt nicht immer alles.",
+          "einfach": "Mit dem Handy oder im Internet klappt nicht immer alles.",
+          "standard": "Mit dem Handy oder im Internet läuft nicht immer alles rund."
+        }
+      }
+    ],
+    "Probleme sind verschieden": [
+      {
+        "piktogramm": "handy",
+        "saetze": {
+          "leicht": "Etwas klappt nicht. Zum Beispiel: Du findest eine Einstellung nicht. Oder dein Handy macht keinen Ton.",
+          "einfach": "Manchmal klappt etwas nicht. Zum Beispiel findest du eine Einstellung nicht, oder dein Handy macht keinen Ton.",
+          "standard": "Etwas funktioniert nicht – du findest zum Beispiel eine Einstellung nicht, oder dein Handy bleibt stumm."
+        }
+      },
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "einfach": "Wenn jemand in Gefahr ist, ist das ein Notfall. Dann ruf sofort 110 oder 112.",
+          "standard": "Ist jemand in Gefahr, ist das ein Notfall: Dann ruf sofort 110 oder 112."
+        }
+      }
+    ],
+    "Druck oder Angst: erst stoppen": [
+      {
+        "piktogramm": "feel",
+        "saetze": {
+          "leicht": "Eine Nachricht macht dir Angst. Oder du hast ein komisches Gefühl im Bauch.",
+          "einfach": "Vielleicht macht dir eine Nachricht Angst, oder du hast ein komisches Gefühl im Bauch.",
+          "standard": "Vielleicht macht dir eine Nachricht Angst, oder du hast ein ungutes Gefühl."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "einfach": "Dann machst du erst Stopp: Du schickst nichts, du bezahlst nichts und du bestätigst nichts.",
+          "standard": "Dann heißt es erst einmal Stopp: nichts schicken, nichts bezahlen, nichts bestätigen."
+        }
+      }
+    ],
+    "Das kannst du selbst": [
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "leicht": "Eine Person stört dich immer wieder? Dann kannst du sie blockieren. Danach kann sie dir nicht mehr schreiben.",
+          "einfach": "Wenn dich eine Person immer wieder stört, kannst du sie blockieren. Danach kann sie dir nicht mehr schreiben.",
+          "standard": "Jemand stört dich immer wieder? Dann blockier die Person, danach kann sie dir nicht mehr schreiben."
+        }
+      },
+      {
+        "piktogramm": "einstellungen",
+        "saetze": {
+          "einfach": "Wenn etwas nicht klappt, probierst du es noch einmal oder siehst in den Einstellungen nach.",
+          "standard": "Etwas klappt nicht? Versuch es noch einmal oder sieh in den Einstellungen nach."
+        }
+      },
+      {
+        "piktogramm": "report",
+        "saetze": {
+          "einfach": "Wenn etwas gemein oder verboten ist, kannst du es melden. Die App prüft das dann.",
+          "standard": "Etwas ist gemein oder verboten? Dann melde es, die App prüft das."
+        }
+      }
+    ],
+    "Welche Hilfe passt?": [
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "leicht": "Es gibt verschiedene Arten von Hilfe. Du suchst die passende aus.",
+          "einfach": "Es gibt verschiedene Arten von Hilfe, und du suchst dir die passende aus.",
+          "standard": "Hilfe gibt es in verschiedenen Formen – such dir die passende aus."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "leicht": "Die erste Person kann nicht helfen? Dann fragst du eine andere.",
+          "einfach": "Wenn die erste Person nicht helfen kann, fragst du eine andere.",
+          "standard": "Kann die erste Person nicht helfen, frag eine andere."
+        }
+      },
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "leicht": "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112.",
+          "einfach": "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112.",
+          "standard": "Jemand ist in Gefahr? Dann ruf sofort 110 oder 112."
+        }
+      }
+    ],
+    "Unterstützung wirklich holen": [
+      {
+        "piktogramm": "handy",
+        "saetze": {
+          "leicht": "Du fragst eine Person. Zeig ihr das Problem auf deinem Handy. Oder erzähl kurz: Das ist passiert.",
+          "einfach": "Wenn du eine Person um Hilfe bittest, zeigst du ihr das Problem auf deinem Handy. Oder du erzählst kurz, was passiert ist.",
+          "standard": "Wenn du jemanden um Hilfe bittest, zeig das Problem direkt auf deinem Handy oder erzähl kurz, was passiert ist."
+        }
+      },
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "einfach": "Wenn du eine gemeine Nachricht zeigen willst, machst du vorher ein Bild vom Bildschirm.",
+          "standard": "Willst du eine gemeine Nachricht zeigen, mach vorher einen Screenshot."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Wenn die Person nicht helfen kann oder nicht da ist, zum Beispiel am Wochenende, fragst du eine andere Person.",
+          "standard": "Kann die Person nicht helfen oder ist sie nicht erreichbar, zum Beispiel am Wochenende, frag jemand anderen."
+        }
+      }
+    ],
+    "Dein Hilfe-Check": [
+      {
+        "piktogramm": "plan",
+        "saetze": {
+          "leicht": "Das ist dein Hilfe-Check:",
+          "einfach": "Das ist dein Hilfe-Check mit seinen 3 Fragen:",
+          "standard": "Dein Hilfe-Check im Überblick:"
+        }
+      }
+    ],
+    "Was ist los?": [
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "leicht": "Oder jemand ist in Gefahr. Das ist ein Notfall. Dann ruf sofort 110 oder 112.",
+          "einfach": "Oder jemand ist in Gefahr. Das ist ein Notfall, und dann rufst du sofort 110 oder 112.",
+          "standard": "Oder jemand ist in Gefahr. Das ist ein Notfall: Dann ruf sofort 110 oder 112."
+        }
+      },
+      {
+        "piktogramm": "feel",
+        "saetze": {
+          "leicht": "Oder etwas macht dir Druck oder Angst. Zum Beispiel: Jemand drängt dich.",
+          "einfach": "Oder etwas macht dir Druck oder Angst, zum Beispiel weil dich jemand drängt.",
+          "standard": "Oder etwas macht dir Druck oder Angst, etwa weil dich jemand drängt."
+        }
+      }
+    ],
+    "Was kann ich selbst tun?": [
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Etwas macht dir Druck oder Angst? Dann machst du erst Stopp.",
+          "einfach": "Wenn dir etwas Druck oder Angst macht, machst du erst Stopp.",
+          "standard": "Etwas macht dir Druck oder Angst? Dann heißt es erst einmal Stopp."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "leicht": "Du kommst nicht weiter? Dann holst du dir Hilfe.",
+          "einfach": "Wenn du nicht weiterkommst, holst du dir Hilfe.",
+          "standard": "Kommst du nicht weiter, hol dir Hilfe."
+        }
+      }
+    ]
+  },
+  "ki": {
+    "Start": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "Stell dir vor: Du stellst einer KI eine Frage.",
+          "einfach": "Stell dir vor: Du stellst einer KI eine Frage, und sie antwortet sofort. Stimmt die Antwort? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Du stellst einem Chatbot eine Frage und bekommst sofort eine überzeugende Antwort. Kannst du dich darauf verlassen? In diesem Kapitel geht es um künstliche Intelligenz, kurz KI. Du erfährst, was KI leisten kann und was nicht, wo du ihr begegnest und wie du sie sicher und kritisch nutzt."
+        }
+      }
+    ],
+    "Was ist KI?": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "KI ist ein Computer-Programm.",
+          "einfach": "KI ist ein Computer-Programm, das aus sehr vielen Texten und Bildern gelernt hat.",
+          "standard": "KI ist ein Computerprogramm, das aus sehr großen Mengen an Texten und Bildern gelernt hat. Dadurch kann sie Fragen beantworten sowie selbst Texte und Bilder erzeugen. Sie versteht die Welt aber nicht wie ein Mensch, sondern berechnet wahrscheinliche Antworten."
+        }
+      },
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "Es kann Bilder machen.",
+          "einfach": "KI ist ein Computer-Programm, das Fragen beantworten, Texte schreiben und Bilder machen kann."
+        }
+      }
+    ],
+    "Wo triffst du KI?": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "KI ist heute in vielen Apps.",
+          "einfach": "KI steckt heute in vielen Apps, oft ohne dass du es sofort merkst.",
+          "standard": "Künstliche Intelligenz steckt heute in vielen Programmen und Apps, oft ohne dass man es sofort merkt – etwa in Chatbots wie ChatGPT, in Sprachassistenten wie Alexa oder Siri, in WhatsApp und Instagram sowie in KI-erzeugten Bildern und Videos."
+        }
+      }
+    ],
+    "Ein Chatbot ist kein Mensch": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "Aber ein Chatbot ist ein Programm.",
+          "einfach": "Trotzdem ist er nur ein Programm und hat keine echten Gefühle.",
+          "standard": "Chatbots antworten freundlich und persönlich, sodass sich ein Gespräch fast wie mit einem Freund anfühlen kann. Trotzdem ist ein Chatbot nur ein Programm ohne echte Gefühle. Wichtige Sorgen solltest du mit einem Menschen besprechen."
+        }
+      }
+    ],
+    "KI macht Fehler": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Darum prüfst du wichtige Antworten.",
+          "einfach": "Prüfe wichtige Antworten deshalb lieber an einer zweiten Stelle.",
+          "standard": "Auch wenn KI sehr überzeugend klingt, kann sie sich irren – und erfindet manchmal sogar Fakten, Namen oder Quellen. Verlass dich bei wichtigen Dingen nicht blind auf sie, sondern prüfe die Antworten an einer zweiten Stelle."
+        }
+      }
+    ],
+    "So prüfst du eine Antwort": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Du kannst die Antwort prüfen.",
+          "einfach": "Du kannst eine Antwort von der KI selbst prüfen. Dabei helfen dir 3 Fragen.",
+          "standard": "Ob eine KI-Antwort belastbar ist, lässt sich mit drei Fragen klären: Worauf stützt sich die Aussage? Findet sie sich in einer unabhängigen Quelle wieder? Und wen kann ich fragen, wenn ich unsicher bleibe? Sprachmodelle erzeugen flüssigen Text, keine geprüften Fakten – sie können Namen, Zahlen und Quellen erfinden, ohne dass man es dem Text ansieht."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Woher weiß die KI das?"
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "einfach": "Steht das auch woanders?"
+        }
+      },
+      {
+        "piktogramm": "people",
+        "saetze": {
+          "einfach": "Wen kann ich fragen?"
+        }
+      }
+    ],
+    "Keine privaten Daten": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Die KI speichert deine Nachrichten oft.",
+          "einfach": "Die KI speichert oft, was du ihr schreibst.",
+          "standard": "Eingaben an eine KI werden häufig gespeichert und weiterverarbeitet. Gib deshalb keine sensiblen Informationen ein – etwa Passwörter, deine Adresse, Bankdaten oder sehr private Geheimnisse."
+        }
+      },
+      {
+        "piktogramm": "key",
+        "saetze": {
+          "einfach": "kein Passwort"
+        }
+      },
+      {
+        "piktogramm": "home",
+        "saetze": {
+          "einfach": "keine Adresse"
+        }
+      },
+      {
+        "piktogramm": "bank",
+        "saetze": {
+          "einfach": "keine Bank-Daten"
+        }
+      },
+      {
+        "piktogramm": "lock",
+        "saetze": {
+          "einfach": "keine sehr privaten Geheimnisse"
+        }
+      }
+    ],
+    "Gesundheit und Geld": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Bei Gesundheit und Geld ist Vorsicht wichtig.",
+          "einfach": "Bei Gesundheit und Geld ist Vorsicht wichtig, denn die KI kennt deine Situation nicht und kann falsche Tipps geben.",
+          "standard": "Bei Gesundheit und Geld ist besondere Vorsicht geboten: Die KI kennt deine persönliche Situation nicht und kann falsche oder gefährliche Ratschläge geben. Hol dir bei solchen Themen immer zusätzlich den Rat eines Menschen – etwa einer Ärztin, eines Arztes oder einer Vertrauensperson."
+        }
+      },
+      {
+        "piktogramm": "person",
+        "saetze": {
+          "einfach": "Frag bei solchen Themen deshalb immer auch einen Menschen."
+        }
+      }
+    ],
+    "KI kann Bilder und Stimmen fälschen": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "KI kann Bilder machen, die echt aussehen.",
+          "einfach": "KI kann Bilder erstellen, die echt aussehen, und sogar Stimmen nachmachen.",
+          "standard": "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Du musst das nicht allein einschätzen – bei Unsicherheit lohnt sich die Rückfrage bei einer Person, der du vertraust. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "einfach": "Wenn du unsicher bist, frag eine Person, der du vertraust."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "Du darfst KI benutzen.",
+          "einfach": "Du darfst KI ruhig benutzen, denn sie kann dir bei vielem helfen.",
+          "standard": "Du darfst KI ruhig nutzen – sie kann dir bei vielem helfen. Behalte dabei einige Regeln im Kopf: Denk daran, dass KI ein Programm ist, prüfe wichtige Antworten, gib keine privaten Daten ein, frag bei Gesundheit und Geld zusätzlich Menschen und hol dir bei Unsicherheit Unterstützung."
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "einfach": "Ich prüfe wichtige Antworten."
+        }
+      },
+      {
+        "piktogramm": "data",
+        "saetze": {
+          "einfach": "Ich gebe keine privaten Daten ein."
+        }
+      },
+      {
+        "piktogramm": "person",
+        "saetze": {
+          "einfach": "Bei Gesundheit und Geld frage ich Menschen."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Bei Unsicherheit hole ich Hilfe."
+        }
+      }
+    ],
+    "Wann musst du aufpassen?": [
+      {
+        "piktogramm": "fake",
+        "saetze": {
+          "leicht": "KI kann Bilder fälschen.",
+          "einfach": "Mit KI kann man außerdem Bilder fälschen und Stimmen nachmachen."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Eine bekannte Stimme will Geld? Dann legst du auf."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du fragst eine vertraute Person.",
+          "einfach": "Glaub deshalb nicht alles. Frag im Zweifel eine Person, der du vertraust."
+        }
+      }
+    ]
+  },
+  "fakes": {
+    "Start": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Stell dir vor: Eine Nachricht macht dich sehr wütend.",
+          "einfach": "Stell dir vor: Eine Nachricht macht dich sehr wütend, und du willst sie sofort teilen. Was machst du? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Eine Nachricht macht dich wütend, und du möchtest sie sofort weiterleiten. Was tust du? In diesem Kapitel geht es um Fakes – also um Gefälschtes im Internet. Du erfährst, wie du falsche Nachrichten erkennst und wie du gefälschte Bilder, Videos und Stimmen einordnest. Wenn dich ein Beispiel belastet, mach ruhig eine Pause."
+        }
+      }
+    ],
+    "Was sind Fake News?": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Fake News sind falsche Nachrichten.",
+          "einfach": "Fake News sind falsche Nachrichten, die jemand mit Absicht verbreitet.",
+          "standard": "Fake News sind absichtlich verbreitete Falschmeldungen. Sie sind oft so aufgemacht wie echte Nachrichten und deshalb schwer zu erkennen. Genau das macht sie gefährlich."
+        }
+      }
+    ],
+    "Warum gibt es Fake News?": [
+      {
+        "piktogramm": "fake",
+        "saetze": {
+          "leicht": "Menschen machen Fake News aus verschiedenen Gründen.",
+          "einfach": "Menschen machen Fake News aus verschiedenen Gründen, denn sie verfolgen damit immer ein bestimmtes Ziel.",
+          "standard": "Hinter Fake News stecken meist klare Absichten: Manche wollen mit vielen Aufrufen Geld verdienen, andere Menschen verärgern, etwas Falsches glaubhaft machen oder eine bestimmte Meinung verbreiten."
+        }
+      }
+    ],
+    "KI-Bilder erkennen": [
+      {
+        "piktogramm": "photo",
+        "saetze": {
+          "leicht": "KI kann Bilder machen, die echt aussehen.",
+          "einfach": "KI kann Bilder erstellen, die echt aussehen.",
+          "standard": "KI kann Bilder erzeugen, die täuschend echt wirken. Manchmal verraten kleine Fehler die Fälschung – etwa an Händen, Schrift oder Schatten. Verlass dich aber nicht darauf: Viele KI-Bilder sind inzwischen fehlerfrei."
+        }
+      }
+    ],
+    "Gefälschte Videos: Deepfakes": [
+      {
+        "piktogramm": "video",
+        "saetze": {
+          "leicht": "Ein Deepfake ist ein gefälschtes Video.",
+          "einfach": "Ein Deepfake ist ein gefälschtes Video, in dem KI Gesicht oder Stimme austauscht.",
+          "standard": "Ein Deepfake ist ein mit KI gefälschtes Video, in dem Gesicht oder Stimme ausgetauscht werden. So scheint eine Person etwas zu sagen, das sie nie gesagt hat – oft trifft es bekannte Persönlichkeiten. Bleib deshalb auch bei „Video-Beweisen“ kritisch."
+        }
+      }
+    ],
+    "Geklonte Stimmen am Telefon": [
+      {
+        "piktogramm": "ki",
+        "saetze": {
+          "leicht": "KI kann Stimmen nachmachen.",
+          "einfach": "KI kann Stimmen nachmachen, und Betrüger rufen damit an, sodass die Stimme wie deine Familie klingt.",
+          "standard": "KI kann Stimmen täuschend echt nachahmen. Betrüger nutzen das für sogenannte Schockanrufe: Eine vertraut klingende Stimme bittet dringend um Geld. Lass dich nicht drängen, leg auf und ruf die Person über ihre dir bekannte Nummer selbst zurück."
+        }
+      }
+    ],
+    "Nachrichten prüfen": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Du kannst Nachrichten prüfen.",
+          "einfach": "Du kannst eine Nachricht mit ein paar einfachen Fragen prüfen.",
+          "standard": "Du kannst Meldungen mit ein paar einfachen Fragen prüfen: Wer hat sie verfasst? Berichten auch bekannte, seriöse Nachrichtenseiten darüber? Wie aktuell ist die Meldung, und wird eine Quelle genannt?"
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "einfach": "Steht das auch bei bekannten Nachrichten-Seiten?"
+        }
+      },
+      {
+        "piktogramm": "clock",
+        "saetze": {
+          "einfach": "Wie alt ist die Nachricht?"
+        }
+      }
+    ],
+    "Die Nachricht will dich aufregen": [
+      {
+        "piktogramm": "feel",
+        "saetze": {
+          "leicht": "Zum Beispiel Wut oder Angst.",
+          "einfach": "Fake News lösen oft starke Gefühle wie Wut oder Angst aus, denn wer aufgewühlt ist, prüft weniger.",
+          "standard": "Fake News sind oft so gemacht, dass sie starke Gefühle wie Wut oder Angst auslösen – denn wer aufgewühlt ist, prüft weniger. Deine Reaktion ist dabei nicht das Problem: Die Meldung ist bewusst darauf angelegt. Genau deshalb gilt: Wenn dich etwas stark aufregt, prüfe es besonders gründlich."
+        }
+      }
+    ],
+    "Nicht einfach weiterleiten": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Wenn du Fakes weiterleitest, verbreiten sie sich.",
+          "einfach": "Wenn du Fakes weiterleitest, verbreiten sie sich, und noch mehr Menschen glauben die Lüge.",
+          "standard": "Jede Weiterleitung hilft einer Falschmeldung, sich zu verbreiten – und mehr Menschen glauben sie. Teile deshalb nur, was du geprüft hast. Im Zweifel gilt: lieber nicht weiterleiten."
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "einfach": "Darum gilt: erst prüfen, dann teilen – und im Zweifel lieber nicht teilen."
+        }
+      }
+    ],
+    "Wie erkennst du Fakes?": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Du liest eine Nachricht.",
+          "einfach": "Manche Nachrichten machen dich sehr aufgeregt. Das kann ein Zeichen für einen Fake sein."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Oder du fragst eine vertraute Person."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Ich prüfe: Wer schreibt das? Steht das auch woanders?",
+          "einfach": "Ich prüfe: Wer schreibt das? Steht das auch woanders?",
+          "standard": "Du kannst dich gut schützen: Glaub nicht alles sofort, prüfe Absender und ob seriöse Quellen dasselbe berichten, und werde besonders aufmerksam, wenn eine Meldung starke Gefühle auslöst. Teile im Zweifel nicht und frag bei Unsicherheit eine Person, der du vertraust."
+        }
+      },
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "einfach": "Ich glaube nicht alles sofort."
+        }
+      },
+      {
+        "piktogramm": "feel",
+        "saetze": {
+          "einfach": "Bei starken Gefühlen mache ich langsam."
+        }
+      },
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "einfach": "Im Zweifel teile ich nicht."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "einfach": "Ich kann eine Person fragen, der ich vertraue."
+        }
+      }
+    ],
+    "Was tust du bei Fakes?": [
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "leicht": "Du schickst sie nicht weiter."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du sagst es einer vertrauten Person.",
+          "einfach": "Du löschst sie und erzählst eine Person, der du vertraust davon."
+        }
+      }
+    ]
+  },
+  "betrug": {
+    "Start": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Stell dir vor: Eine SMS sagt: Du hast gewonnen.",
+          "einfach": "Stell dir vor: Eine SMS sagt, dass du gewonnen hast. Du sollst nur schnell eine kleine Gebühr bezahlen. Was machst du? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Eine SMS meldet einen Gewinn – du sollst nur schnell eine kleine Gebühr zahlen. Was tust du? In diesem Kapitel geht es um Betrug im Internet. Vorweg das Wichtigste: Betrug kann jedem passieren und ist nie die Schuld der betroffenen Person. Betrüger haben es auf dein Geld oder deine Daten abgesehen. Du lernst die häufigsten Maschen kennen – denn wer die Tricks kennt, fällt seltener darauf herein. Wenn dich ein Beispiel belastet, mach ruhig eine Pause."
+        }
+      }
+    ],
+    "Was ist Phishing?": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Phishing ist ein Trick mit falschen Nachrichten.",
+          "einfach": "Phishing ist ein Trick mit falschen Nachrichten, die aussehen wie von deiner Bank oder einer Firma.",
+          "standard": "Beim Phishing verschicken Betrüger Nachrichten, die täuschend echt aussehen – etwa angeblich von deiner Bank oder einem bekannten Unternehmen. Über einen Link wirst du auf eine gefälschte Seite gelockt, die deine Zugangsdaten abgreifen soll. Gib dort nichts ein."
+        }
+      }
+    ],
+    "Falsche Nachrichten erkennen": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Betrugs-Nachrichten haben oft die gleichen Zeichen.",
+          "einfach": "Betrugs-Nachrichten haben oft die gleichen Merkmale, die du erkennen lernen kannst.",
+          "standard": "Betrugsnachrichten ähneln sich oft: Sie erzeugen Stress oder drohen mit Folgen, fordern dich auf, einen Link anzutippen, verlangen Daten oder Geld – und kommen meist überraschend. Wer diese Muster kennt, erkennt den Betrug leichter."
+        }
+      }
+    ],
+    "Der Paket-Trick": [
+      {
+        "piktogramm": "paket",
+        "saetze": {
+          "leicht": "Eine SMS sagt: Ihr Paket wartet.",
+          "einfach": "Eine SMS behauptet: „Ihr Paket wartet“, und du sollst eine kleine Gebühr zahlen oder auf einen Link tippen.",
+          "standard": "Eine beliebte Masche ist die Paket-SMS: Angeblich wartet eine Sendung, du sollst eine kleine Gebühr zahlen oder einen Link antippen. Dahinter steckt fast immer Betrug. Seriöse Paketdienste fordern kein Geld per SMS."
+        }
+      }
+    ],
+    "Der Hallo-Mama-Trick": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Eine WhatsApp-Nachricht sagt: Hallo Mama, hallo Papa.",
+          "einfach": "Eine WhatsApp-Nachricht sagt: „Hallo Mama, ich habe eine neue Nummer und brauche schnell Geld.“",
+          "standard": "Beim „Hallo-Mama-Trick“ geben sich Betrüger über WhatsApp als Sohn oder Tochter mit neuer Nummer aus und bitten dringend um Geld. Überweise nichts, sondern ruf die echte Person unter ihrer bekannten Nummer an."
+        }
+      }
+    ],
+    "Schockanrufe": [
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "leicht": "Ein Anruf macht dir große Angst.",
+          "einfach": "Bei einem Schockanruf macht dir jemand große Angst, zum Beispiel mit den Worten: „Ihr Kind hatte einen Unfall, wir brauchen Geld.“",
+          "standard": "Bei Schockanrufen erzeugen Betrüger gezielt Angst – etwa mit der Behauptung, ein Angehöriger hatte einen Unfall und brauche sofort Geld. Mit KI kann die Stimme sogar vertraut klingen, und manche geben sich als Polizei aus. Der Notfall ist erfunden: Leg auf und ruf die echte Person oder Stelle selbst an, unter der Nummer, die du kennst. Sprich danach mit jemandem darüber – solche Anrufe wirken nach."
+        }
+      }
+    ],
+    "Liebe im Internet": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Dann bittet die Person um Geld.",
+          "einfach": "Irgendwann bittet die Person um Geld, zum Beispiel für eine Reise oder für einen Notfall.",
+          "standard": "Irgendwann folgt die Bitte um Geld: für ein Ticket, eine Notlage, eine angeblich sichere Geldanlage. Danach folgen weitere Bitten."
+        }
+      },
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "leicht": "Ich schicke kein Geld.",
+          "einfach": "Ich schicke kein Geld.",
+          "standard": "Kein Geld überweisen, auch nicht in kleinen Beträgen."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Ich spreche mit einer vertrauten Person.",
+          "einfach": "Ich spreche mit einer Person, der ich vertraue.",
+          "standard": "Mit einer Vertrauensperson sprechen, bevor du etwas tust."
+        }
+      },
+      {
+        "piktogramm": "block",
+        "saetze": {
+          "leicht": "Ich kann die Person blockieren.",
+          "einfach": "Ich kann den Kontakt blockieren.",
+          "standard": "Den Kontakt blockieren und melden."
+        }
+      }
+    ],
+    "Falsche Gewinne": [
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "leicht": "Eine Nachricht sagt: Sie haben gewonnen!",
+          "einfach": "Eine Nachricht sagt: „Sie haben gewonnen!“, obwohl du bei keinem Gewinnspiel mitgemacht hast.",
+          "standard": "Nachrichten über angebliche Gewinne sind oft Betrug – vor allem, wenn du gar nicht an einem Gewinnspiel teilgenommen hast. Sobald du für den „Gewinn“ zuerst zahlen sollst, ist klar: Echte Gewinne kosten kein Geld."
+        }
+      }
+    ],
+    "Abo-Fallen": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Aber ganz unten steht in kleiner Schrift: Danach kostet es jeden Monat Geld.",
+          "einfach": "Ein Angebot lockt mit „Kostenlos testen!“, doch im Kleingedruckten steht, dass es danach jeden Monat Geld kostet.",
+          "standard": "Bei Abo-Fallen lockt ein „kostenloser Test“, doch im Kleingedruckten verbirgt sich eine monatliche Zahlung. Lies vor jeder Bestellung genau nach: Gibt es einen monatlichen Preis, wie lange läuft der Vertrag? Im Zweifel frag jemanden, bevor du bestellst."
+        }
+      },
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "einfach": "Steht da ein Preis pro Monat?"
+        }
+      },
+      {
+        "piktogramm": "clock",
+        "saetze": {
+          "einfach": "Wie lange läuft das Abo?"
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Frag eine Person, bevor du bestellst."
+        }
+      }
+    ],
+    "Codes nie weitergeben": [
+      {
+        "piktogramm": "code",
+        "saetze": {
+          "leicht": "Manchmal bekommst du einen Code per SMS.",
+          "einfach": "Manchmal bekommst du einen Code per SMS, zum Beispiel von der Bank oder von WhatsApp.",
+          "standard": "Bestätigungscodes per SMS – etwa von der Bank oder von WhatsApp – sind nur für dich bestimmt. Betrüger versuchen, an sie zu gelangen, um dein Konto zu übernehmen. Gib einen solchen Code niemals weiter. Häufig kommt so ein Versuch per Anruf: Jemand gibt sich als Bank-Mitarbeiterin oder als technischer Kundenservice aus und will den Code oder Zugriff auf deinen Computer. Seriöse Unternehmen fragen so etwas nie."
+        }
+      }
+    ],
+    "Vorsicht bei QR-Codes": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Ein Aufkleber auf dem Automaten? Dann scanne nicht. Zahle mit Münzen oder in deiner Park-App.",
+          "einfach": "Klebt ein Code als Aufkleber auf einem Automaten, scannst du ihn besser nicht. Zahle dann mit Münzen oder in deiner eigenen Park-App. Bei einem Brief prüfst du zuerst, wer ihn geschickt hat.",
+          "standard": "QR-Codes zeigen erst nach dem Scannen, wohin sie führen. Kriminelle nutzen das aus und überkleben echte Codes mit gefälschten – etwa an Parkautomaten, in Briefen oder auf falschen Paket-Benachrichtigungen (sogenanntes Quishing). Bei überklebten Codes an Automaten zahlst du besser bar oder über die offizielle App; bei anderen Codes prüfst du die geöffnete Internet-Adresse, bevor du dort etwas eingibst."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "plan",
+        "saetze": {
+          "leicht": "Dann hilft dir dein Plan.",
+          "einfach": "Ein fester Plan hilft dir, ruhig zu bleiben. Denn wer ruhig bleibt, macht keinen Fehler.",
+          "standard": "Betrugsmaschen funktionieren über Eile: Wer sofort handeln soll, denkt nicht nach. Ein eingeübter Ablauf nimmt diesem Stress seine Wirkung, weil er die Entscheidung aus dem Moment herausnimmt. Er wirkt auch dann, wenn die Masche neu ist und du sie noch nie gehört hast."
+        }
+      },
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "einfach": "Bei Stress mache ich Stopp.",
+          "standard": "Bei Stress grundsätzlich anhalten – Eile ist das Warnzeichen, nicht der Inhalt."
+        }
+      },
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "einfach": "Ich rufe selbst an – mit der Nummer, die ich schon habe.",
+          "standard": "Selbst zurückrufen, und zwar über die Nummer, die du schon kennst – nie über die aus der Nachricht."
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "einfach": "Ich lese genau nach, was etwas kostet.",
+          "standard": "Bei Angeboten das Kleingedruckte lesen: Was kostet es, ab wann, und wie kündigt man?"
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Ich frage eine Person, der ich vertraue.",
+          "standard": "Eine zweite Meinung einholen. Maschen funktionieren fast nur, solange niemand sonst davon weiß."
+        }
+      }
+    ],
+    "Was tun nach einem Betrug?": [
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "leicht": "Wichtig ist: Hol dir schnell Hilfe.",
+          "einfach": "Wichtig ist, dass du dir schnell Hilfe holst.",
+          "standard": "Betrug kann jedem passieren – dafür musst du dich nicht schämen. Wichtig ist schnelles Handeln: Informiere eine Vertrauensperson, lass bei betroffenen Bankdaten sofort die Karte sperren (Sperr-Notruf 116 116), erstatte gegebenenfalls Anzeige bei der Polizei und bewahre die Nachricht als Beweis auf."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "einfach": "Sag einer Person Bescheid, der du vertraust."
+        }
+      },
+      {
+        "piktogramm": "bank",
+        "saetze": {
+          "einfach": "Bei Bank-Daten: Ruf sofort die Bank an und lass die Karte sperren."
+        }
+      },
+      {
+        "piktogramm": "anruf",
+        "saetze": {
+          "einfach": "Der Sperr-Notruf ist die 116 116."
+        }
+      },
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "einfach": "Heb die Nachricht als Beweis auf."
+        }
+      }
+    ],
+    "Was tust du bei Betrug?": [
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du sagst es einer vertrauten Person.",
+          "einfach": "Erzähl es eine Person, der du vertraust. Sie hilft dir weiter."
+        }
+      },
+      {
+        "piktogramm": "no",
+        "saetze": {
+          "leicht": "Du zahlst kein Geld.",
+          "einfach": "Wenn du Betrug vermutest, zahlst du kein Geld und gibst keine Daten ein."
+        }
+      }
+    ],
+    "Wie erkennst du Betrug?": [
+      {
+        "piktogramm": "stop",
+        "saetze": {
+          "leicht": "Du machst Stopp.",
+          "einfach": "Wenn du so ein Zeichen siehst, machst du Stopp."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Du fragst eine vertraute Person.",
+          "einfach": "Dann fragst du eine Person, der du vertraust."
+        }
+      }
+    ]
+  },
+  "einkaufen": {
+    "Start": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Stell dir vor: Ein Shop im Internet ist sehr billig.",
+          "einfach": "Stell dir vor: Ein Shop im Internet ist sehr billig, und du sollst vorher bezahlen. Was machst du? Darum geht es in diesem Thema.",
+          "standard": "Stell dir vor: Ein Onlineshop ist auffällig billig und verlangt Vorkasse. Bestellst du? In diesem Kapitel geht es um sicheres Einkaufen im Internet. Du erfährst, wie du seriöse Shops erkennst, sicher bezahlst und was du tun kannst, wenn beim Einkauf etwas schiefgeht."
+        }
+      }
+    ],
+    "Gute Shops erkennen": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Es gibt viele gute Shops im Internet.",
+          "einfach": "Es gibt viele gute Shops im Internet, die du an einigen Merkmalen erkennst.",
+          "standard": "Seriöse Online-Shops erkennst du an mehreren Merkmalen: Sie sind bekannt oder gut bewertet, haben ein vollständiges Impressum mit Firmenname und Adresse und verlangen keine verdächtig niedrigen Preise. Echte Kundenbewertungen geben zusätzliche Sicherheit."
+        }
+      },
+      {
+        "piktogramm": "home",
+        "saetze": {
+          "leicht": "Ein guter Shop zeigt seinen Namen und seine Adresse.",
+          "einfach": "Einen guten Shop erkennst du am Impressum. Dort stehen der Name und die Adresse vom Shop."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Bist du unsicher? Dann fragst du eine vertraute Person.",
+          "einfach": "Wenn du unsicher bist, fragst du eine Person, der du vertraust."
+        }
+      },
+      {
+        "piktogramm": "home",
+        "saetze": {
+          "einfach": "Der Shop hat ein Impressum mit Name und Adresse der Firma."
+        }
+      },
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "einfach": "Die Preise sind normal, nicht verdächtig billig."
+        }
+      }
+    ],
+    "Fake-Shops erkennen": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Ein Fake-Shop ist ein falscher Shop.",
+          "einfach": "Ein Fake-Shop ist ein falscher Shop: Du bezahlst, aber die Ware kommt nie.",
+          "standard": "Fake-Shops sehen oft täuschend echt aus, doch nach der Zahlung kommt keine Ware. Stutzig machen sollten dich extrem niedrige Preise, fehlendes Impressum, eine merkwürdige Internetadresse und die Vorgabe, nur per Vorkasse zahlen zu können. Ein schneller Check: der kostenlose Fakeshop-Finder der Verbraucherzentrale – Shop-Adresse eingeben und die Einschätzung lesen."
+        }
+      },
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "einfach": "Du kannst nur per Vorkasse zahlen."
+        }
+      },
+      {
+        "piktogramm": "globe",
+        "saetze": {
+          "einfach": "Der Name der Internet-Seite ist komisch."
+        }
+      }
+    ],
+    "Vor dem Kaufen prüfen": [
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "leicht": "Prüfe vor dem Kaufen.",
+          "einfach": "Bevor du auf „Kaufen“ tippst, lohnt sich ein kurzer Check.",
+          "standard": "Bevor du auf „Kaufen“ tippst, lohnt sich ein kurzer Check: Was kostet der Artikel wirklich, inklusive Versand? Handelt es sich um einen einmaligen Kauf oder ein Abo? Brauchst du das Produkt wirklich, und ist genug Geld da?"
+        }
+      },
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "einfach": "Was kostet es wirklich? Mit Versand?"
+        }
+      }
+    ],
+    "Sicher bezahlen": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Es gibt verschiedene Arten zu bezahlen.",
+          "einfach": "Es gibt verschiedene Arten zu bezahlen, und manche sind sicherer als andere.",
+          "standard": "Beim Bezahlen gibt es sicherere und riskantere Wege. Der Kauf auf Rechnung ist sicher, weil du erst nach Erhalt der Ware zahlst. Dienste wie PayPal bieten einen Käuferschutz. Vorkasse an Unbekannte ist dagegen riskant – das Geld ist im Betrugsfall meist verloren. Bei privaten Kleinanzeigen zahlst du am besten erst bei der Übergabe, und nie über die Funktion „Geld an Freunde senden“: Dort greift der Käuferschutz nicht."
+        }
+      },
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Oder du bezahlst auf Rechnung.",
+          "einfach": "PayPal und der Kauf auf Rechnung sind sicherer als andere Bezahl-Arten. Bei Rechnung bekommst du zuerst die Ware und zahlst danach."
+        }
+      },
+      {
+        "piktogramm": "friend",
+        "saetze": {
+          "leicht": "Bei Problemen fragst du eine vertraute Person.",
+          "einfach": "Wenn es Probleme gibt, fragst du eine Person, der du vertraust."
+        }
+      },
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "einfach": "Kauf auf Rechnung ist sicher: Du zahlst erst, wenn die Ware da ist."
+        }
+      }
+    ],
+    "Bank-Daten schützen": [
+      {
+        "piktogramm": "bank",
+        "saetze": {
+          "leicht": "Deine Bank-Daten sind sehr wichtig.",
+          "einfach": "Deine Bank-Daten sind sehr wichtig, und PIN und TAN bleiben immer geheim.",
+          "standard": "Deine Bankdaten verdienen besonderen Schutz: PIN und TAN sind streng geheim. Deine Bank wird dich niemals per E-Mail oder Telefon danach fragen. Wer das doch tut, ist ein Betrüger."
+        }
+      }
+    ],
+    "Versteckte Kosten in Apps und Spielen": [
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "leicht": "Das kostet echtes Geld.",
+          "einfach": "Viele Spiele sind zuerst kostenlos, verkaufen dir dann aber Dinge gegen echtes Geld.",
+          "standard": "Viele Apps und Spiele sind zunächst gratis, verkaufen dann aber Zusatzinhalte gegen echtes Geld. Solche In-App-Käufe wirken klein, summieren sich aber schnell. Behalte im Blick, was du tatsächlich ausgibst."
+        }
+      }
+    ],
+    "Nicht sofort kaufen": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Shops machen dir oft Stress.",
+          "einfach": "Shops machen dir oft Stress, zum Beispiel mit „Nur noch heute! Nur noch 2 Stück!“.",
+          "standard": "Online-Shops machen dir oft künstlich Stress – etwa mit „Nur noch heute!“ oder „Nur noch 2 Stück!“. Das soll dich zu einem schnellen Kauf verleiten. Lass dich nicht hetzen: Du darfst dir Zeit nehmen und in Ruhe überlegen."
+        }
+      }
+    ],
+    "Falsch gekauft? Das kannst du tun": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Ein Fehl-Kauf kann passieren.",
+          "einfach": "Ein Fehl-Kauf kann passieren, und oft kannst du noch etwas tun.",
+          "standard": "Ein Fehlkauf lässt sich oft korrigieren: Bei vielen Online-Käufen hast du ein 14-tägiges Widerrufsrecht und kannst die Ware zurückgeben. Wende dich an den Shop, hol dir bei Bedarf Hilfe von einer Vertrauensperson und ruf bei Betrug sofort deine Bank an."
+        }
+      },
+      {
+        "piktogramm": "message",
+        "saetze": {
+          "einfach": "Schreib dem Shop eine Nachricht."
+        }
+      },
+      {
+        "piktogramm": "help",
+        "saetze": {
+          "einfach": "Frag eine Person, der du vertraust, um Hilfe."
+        }
+      },
+      {
+        "piktogramm": "bank",
+        "saetze": {
+          "einfach": "Bei Betrug: Ruf deine Bank an."
+        }
+      }
+    ],
+    "Was kann ich tun?": [
+      {
+        "piktogramm": "einkaufen",
+        "saetze": {
+          "leicht": "Du kannst sicher im Internet einkaufen.",
+          "einfach": "Mit ein paar einfachen Regeln kannst du sicher im Internet einkaufen.",
+          "standard": "Sicheres Einkaufen gelingt mit einfachen Regeln: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim, lass dich nicht zu schnellen Käufen drängen und frag im Zweifel vor dem Kauf eine Vertrauensperson."
+        }
+      },
+      {
+        "piktogramm": "search",
+        "saetze": {
+          "einfach": "Ich prüfe Preis und Impressum."
+        }
+      },
+      {
+        "piktogramm": "money",
+        "saetze": {
+          "einfach": "Ich zahle möglichst auf Rechnung."
+        }
+      },
+      {
+        "piktogramm": "code",
+        "saetze": {
+          "einfach": "PIN und TAN bleiben geheim."
+        }
+      },
+      {
+        "piktogramm": "pause",
+        "saetze": {
+          "einfach": "Ich lasse mich nicht hetzen."
+        }
+      },
+      {
+        "piktogramm": "ask",
+        "saetze": {
+          "einfach": "Vor dem Kaufen kann ich eine Person fragen."
+        }
+      }
+    ],
+    "Einkaufen im Internet": [
+      {
+        "piktogramm": "paket",
+        "saetze": {
+          "leicht": "Die Ware kommt nach Hause.",
+          "einfach": "Du suchst dir etwas aus und bezahlst es. Dann bringt ein Paket-Dienst die Ware zu dir nach Hause."
+        }
+      }
+    ]
+  }
+};
+
+function kernSatzPikto(topic, rawLesson, text, gezeigt, klasse = "ls-sentence-pikto", groesse = 56) {
+  if (!topic || !rawLesson || typeof text !== "string") return "";
+  const imKern = Array.isArray(topic.einfachLessons) && topic.einfachLessons.includes(rawLesson);
+  /* Zusatzwege dürfen nur die Übung einer Originallektion ausblenden.
+     Ihr unveränderter Text und ihre Fassungen bleiben dieselben Objekte. */
+  const imBestand = Array.isArray(topic.lessons) && topic.lessons.some(l => l === rawLesson
+    || (l.title === rawLesson.title && l.text === rawLesson.text && l.versions === rawLesson.versions));
+  if (!imKern && !imBestand) return "";
+  const thema = imKern && KERN_SATZ_PIKTOGRAMME[topic.id];
+  const ergaenzt = ERGAENZTE_SATZ_PIKTOGRAMME[topic.id];
+  const liste = [...(thema && thema[rawLesson.title] || []), ...(ergaenzt && ergaenzt[rawLesson.title] || [])];
   const eintrag = liste && liste.find(e => e.saetze[languageLevel] === text);
   if (!eintrag) return "";
   const src = pictoSrc(eintrag.piktogramm);
   if (gezeigt && gezeigt.has(src)) return "";
   if (gezeigt) gezeigt.add(src);
-  return `<img class="ls-sentence-pikto" src="${src}" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`;
+  return `<img class="${klasse}" src="${src}" alt="" width="${groesse}" height="${groesse}" aria-hidden="true" loading="lazy">`;
 }
 /* Übersicht (06.10.2026): Satz-Piktogramm einer Lektion. Dasselbe Bild
    steht in einem Textblock nur einmal – beim ersten Satz, zu dem es gehört.
@@ -2981,16 +5280,16 @@ function lernmodusBeenden() {
   renderIntro();
 }
 
-/* D11 (02.10.2026): „Hilfe“ oben und „Ich bin unsicher“ an der Aufgabe
+/* D11 (02.10.2026): „Hilfe“ oben und „Hilfe zur Aufgabe“ an der Aufgabe
    gehören zusammen. Das Blatt „Hilfe und mehr“ nennt den Aufgaben-Tipp
-   zuerst (derselbe Knopf wie „Ich bin unsicher“), dann die Hilfe-Seite. */
+   zuerst (derselbe Knopf wie „Hilfe zur Aufgabe“), dann die Hilfe-Seite. */
 function sichtbarerTippKnopf() {
   return [...content.querySelectorAll(".task-help-button")].find(b => b.getClientRects().length > 0) || null;
 }
 function aufgabeHatTipp() { return !!sichtbarerTippKnopf(); }
 
 function lernDialogVorlesen() {
-  return `<div class="reading-toolbar"><button type="button" class="reading-button reading-button-normal" aria-pressed="false" onclick="toggleReading()">${pictoHtml("vorlesen")}<span class="rb-label">Vorlesen</span></button></div>`;
+  return buildReadingToolbar("dialogReadingStatus");
 }
 
 /* D16: Hilfe zeigt sofort den Tipp. Das vorhandene Panel wird vorübergehend
@@ -3008,20 +5307,20 @@ function lernMehrOeffnen(ausloeser) {
   const aufLektion = !!content.querySelector(".lesson-card");
   const zurueck = backButton && !backButton.disabled;
   const extra = `<div class="lern-hilfe-wege" data-hilfe-extra="true">
-    ${aufLektion ? `<button type="button" class="lern-mehr-knopf" data-aktion="nachlesen">Lektion nochmal lesen</button>` : ""}
-    ${aufLektion && lessonHasExamples(getCurrentTopic(), getLessonsForMode(getCurrentTopic(), currentMode)[currentStep], getLessonsForMode(getCurrentTopic(), currentMode)) ? `<button type="button" class="lern-mehr-knopf" data-aktion="beispiel">Beispiel ansehen</button>` : ""}
+    ${aufLektion ? `<button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="nachlesen">${pictoHtml("lesen")}<span>Lektion nochmal lesen</span></button>` : ""}
+    ${aufLektion && lessonHasExamples(getCurrentTopic(), getLessonsForMode(getCurrentTopic(), currentMode)[currentStep], getLessonsForMode(getCurrentTopic(), currentMode)) ? `<button type="button" class="lern-mehr-knopf bedien-pikto" data-aktion="beispiel">${vorbildFuer(getCurrentTopic(), getLessonsForMode(getCurrentTopic(), currentMode)[currentStep], getLessonsForMode(getCurrentTopic(), currentMode)) ? pictoHtml("example") : ""}<span>Beispiel ansehen</span></button>` : ""}
     ${zurueck ? `<button type="button" class="lern-mehr-knopf" data-aktion="zurueck">Zurück</button>` : ""}
-    <button type="button" class="lern-mehr-knopf" data-aktion="pause">Pause</button>
-    <button type="button" class="lern-mehr-knopf" data-aktion="hilfe">Hilfe-Seite: Wer kann mir helfen?</button>
-    ${document.body.classList.contains("lesson-view") ? `<button type="button" class="lern-mehr-knopf" data-aktion="beenden">Für heute aufhören</button>` : ""}
+    <button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="pause">${pictoHtml("pause")}<span>Pause</span></button>
+    <button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="hilfe">${pictoHtml("help")}<span>Hilfe-Seite ansehen</span></button>
+    ${document.body.classList.contains("lesson-view") ? `<button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="beenden">${pictoHtml("pause")}<span>Für heute aufhören</span></button>` : ""}
   </div>`;
   blatt.innerHTML = `<div id="lernMehrDialog" class="lern-mehr-innen hilfe-dialog" role="dialog" aria-modal="true" aria-labelledby="lernMehrTitel">
     <h2 id="lernMehrTitel" tabindex="-1">Hilfe</h2>
     ${lernDialogVorlesen()}
     <div class="lern-hilfe-inhalt"></div>
-    ${panel ? "" : `<p>Du kannst den Text vorlesen lassen. Du kannst den Schritt noch einmal lesen.</p>
+    ${panel ? "" : `<p>Du kannst den Text vorlesen lassen. Oder noch einmal lesen. Du kannst auch eine Person fragen.</p>
       <details class="lern-hilfe-mehr"><summary>${RUHIG_TEXT.mehrHilfe}</summary>${extra}</details>`}
-    <button type="button" class="lern-mehr-knopf" data-aktion="einstellungen">${RUHIG_TEXT.einstellungen}</button>
+    <button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="einstellungen">${pictoHtml("einstellungen")}<span>${RUHIG_TEXT.einstellungen}</span></button>
     <button type="button" class="lern-mehr-knopf lern-mehr-zu" data-aktion="zu">Schließen</button>
   </div>`;
   if (panel) {
@@ -3087,7 +5386,7 @@ function lernEinstellungenOeffnen(ausloeser) {
     <button type="button" class="lern-mehr-knopf" data-aktion="sprache">Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])}</button>
     <div class="lern-mehr-reihe"><button type="button" class="lern-mehr-knopf" data-aktion="kleiner">A– kleiner</button><button type="button" class="lern-mehr-knopf" data-aktion="groesser">A+ größer</button></div>
     <button type="button" class="lern-mehr-knopf" data-aktion="sofort" aria-pressed="${sofortWaehlen ? "true" : "false"}">Antwort sofort wählen: ${sofortWaehlen ? "an" : "aus"}</button>
-    <button type="button" class="lern-mehr-knopf" data-aktion="zuzweit" aria-pressed="${isCompanionMode() ? "true" : "false"}">Wir lernen zu zweit: ${isCompanionMode() ? "an" : "aus"}</button>
+    <button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="zuzweit" aria-pressed="${isCompanionMode() ? "true" : "false"}">${pictoHtml("people")}<span>Wir lernen zu zweit: ${isCompanionMode() ? "an" : "aus"}</span></button>
     <button type="button" class="lern-mehr-knopf lern-mehr-zu" data-aktion="zu">Schließen</button>
   </div>`;
   const schliessen = () => { stopReading(); blatt.remove(); dialogSchliessen(blatt); if (ausloeser && document.body.contains(ausloeser)) ausloeser.focus(); };
@@ -3228,6 +5527,7 @@ function lernNavHoeheMessen() {
 function leisteSpiegeln() {
   const nav = document.querySelector(".nav");
   if (!nav || !content || typeof content.querySelectorAll !== "function") return;
+  frageAufforderungAktualisieren();
   const aktiv = document.body.classList.contains("lesson-view");
   /* Gespiegelt wird nur, was die Seite selbst gerade zeigt. Auf dem Lerntext
      steckt die Übung schon im Seiten-Text, ist aber per CSS ausgeblendet –
@@ -3269,10 +5569,21 @@ function leisteSpiegeln() {
       k.className = "nav-button leiste-knopf leiste-knopf--" + art + (art === "haupt" ? " primary" : " secondary");
       k._quelle = quelle;
       k.addEventListener("click", () => { if (k._quelle && document.body.contains(k._quelle)) k._quelle.click(); });
-      if (art === "haupt") nav.appendChild(k); else nav.insertBefore(k, nav.firstChild);
+      if (art === "haupt") nav.appendChild(k); else nav.insertBefore(k, nav.querySelector("#nextButton"));
     }
     const text = quelle.textContent.replace(/\s+/g, " ").trim();
-    if (k.textContent !== text) k.textContent = text;
+    /* Das feste Angebot zeigt genau das dekorative Zeichen der Quelle.
+       Eine textliche Vermutung über die Aktion erzeugt hier kein Bild. */
+    const bild = quelle.querySelector(':scope > img.app-pictogram[aria-hidden="true"]');
+    const zielBild = k.querySelector("img.app-pictogram");
+    if (bild) {
+      if (k.textContent !== text || !zielBild || zielBild.getAttribute("src") !== bild.getAttribute("src")) {
+        const wort = document.createElement("span");
+        wort.textContent = text;
+        k.replaceChildren(bild.cloneNode(true), wort);
+      }
+    } else if (k.textContent !== text || zielBild) k.textContent = text;
+    k.classList.toggle("bedien-pikto", !!bild);
     if (fokus === quelle) fokusZiel = k;
   };
   setze(haupt, "haupt");
@@ -3299,7 +5610,8 @@ window.addEventListener("resize", lernNavHoeheMessen);
 
 /* Die Texte der Knöpfe unten, Hauptknopf zuerst – für die Ansage am Ende des Vorlesens. */
 function leisteTexte() {
-  return Array.from(document.querySelectorAll(".nav .leiste-knopf--haupt, .nav .leiste-knopf--neben"))
+  return Array.from(document.querySelectorAll(".nav .leiste-knopf--haupt, .nav .leiste-knopf--neben, .nav #backButton"))
+    .filter(b => !b.disabled && b.getClientRects().length > 0)
     .sort((a, b) => (a.classList.contains("leiste-knopf--haupt") ? 0 : 1) - (b.classList.contains("leiste-knopf--haupt") ? 0 : 1))
     .map(b => cleanSpeechText(b.textContent))
     .filter(Boolean);
@@ -3430,7 +5742,7 @@ function merkeStelle() {
   const hilfeOffen = !!(hilfe && content.contains(hilfe) && !hilfe.hasAttribute("hidden"));
   const form = (felderAktiv && content.querySelector(".felder-aufgabe"))
     ? { key: aufgabeSchluessel(felderAktiv.q), lern: felderAktiv.lern, stand: felderAktiv.stand || null } : null;
-  const quizVorwahl = content.querySelector(".quiz-card:not(.big-quiz-card) .answer-option.ist-markiert");
+  const quizVorwahl = content.querySelector(".quiz-card .answer-option.ist-markiert");
   const quizAntwort = quizVorwahl ? quizVorwahl.getAttribute("onclick") : null;
   const handyVorwahl = content.querySelector(".scenario-card .sz-answer.ist-markiert:not(:disabled)");
   const handyIndex = handyVorwahl ? handyVorwahl.dataset.index : null;
@@ -3438,7 +5750,7 @@ function merkeStelle() {
     ziel();
     if (form) felderWiederherstellen(form);
     if (quizAntwort) {
-      const opt = Array.from(content.querySelectorAll(".quiz-card:not(.big-quiz-card) .answer-option"))
+      const opt = Array.from(content.querySelectorAll(".quiz-card .answer-option"))
         .find(o => o.getAttribute("onclick") === quizAntwort);
       if (opt) antwortVorwahlMarkieren(opt);
     }
@@ -3729,7 +6041,7 @@ function codeForgot() {
       <p>Du kannst den Code jetzt wegnehmen. Dann kommst du wieder zu deinem Zeichen.</p>
       <p>Einen neuen Code kannst du dir später aussuchen. Am besten zusammen mit einer Person, der du vertraust.</p>
       <div class="feedback-actions">
-        <button type="button" class="utility-button" onclick="renderCodeAsk()">Nochmal versuchen</button>
+        <button type="button" class="bedien-pikto utility-button" onclick="renderCodeAsk()">${pictoHtml("wiederholen")}<span>Nochmal versuchen</span></button>
         <button type="button" class="utility-button danger-button" onclick="dropCodeAndEnter()">Code wegnehmen</button>
       </div>
     </section>
@@ -3879,12 +6191,12 @@ function renderDeviceQuestion(showSharedChoice = false) {
       <p class="profile-picker-intro">Eine Frage zum Anfang: Benutzt du dieses Gerät allein? Oder benutzen es mehrere Personen?</p>
       <div class="device-grid">
         <button type="button" class="device-card" onclick="chooseDevice(false)">
-          <span class="device-icon" aria-hidden="true">📱</span>
+          <span class="device-icon" aria-hidden="true">${pictoHtml("handy")}</span>
           <strong>Nur ich</strong>
           <span>Mein eigenes Handy oder Tablet.</span>
         </button>
         <button type="button" class="device-card${showSharedChoice ? " is-active" : ""}" onclick="chooseDevice(true)">
-          <span class="device-icon" aria-hidden="true">👥</span>
+          <span class="device-icon" aria-hidden="true">${pictoHtml("people")}</span>
           <strong>Mehrere Personen</strong>
           <span>Ein Gerät, das wir uns teilen.</span>
         </button>
@@ -4822,8 +7134,8 @@ function buildResumeLessonButton() {
   const topic = getTopicById(ctx.topicId);
   if (!topic) return "";
   return `
-    <button type="button" class="intro-start-button intro-resume-button" onclick="resumeLastLesson()">
-      ${FUEHRUNG_TEXT.weiterLernen}: ${escapeHtml(topic.title)}, ${ctx.pause ? escapeHtml(pauseResumeText(ctx)) : "Schritt " + (ctx.step + 1)}
+    <button type="button" class="intro-start-button intro-resume-button bedien-pikto" onclick="resumeLastLesson()">
+      ${pictoHtml("lernweg")}<span>${FUEHRUNG_TEXT.weiterLernen}: ${escapeHtml(topic.title)}, ${ctx.pause ? escapeHtml(pauseResumeText(ctx)) : "Schritt " + (ctx.step + 1)}</span>
     </button>`;
 }
 
@@ -4921,11 +7233,11 @@ function feedbackMailen() {
 function buildMenuExplainList() {
   return `
       <ul class="intro-offer-list">
-        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("start")}</span><span><strong>Start</strong> bringt dich zur ersten Seite zurück.</span></li>
-        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("example")}</span><span><strong>Themen</strong> zeigt dir alle 12 Themen.</span></li>
-        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("check")}</span><span><strong>Mein Lernweg</strong> zeigt dir: Das hast du geschafft. Hier kannst du üben.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("home")}</span><span><strong>Start</strong> bringt dich zur ersten Seite zurück.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("themen")}</span><span><strong>Themen</strong> zeigt dir alle 12 Themen.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("lernweg")}</span><span><strong>Mein Lernweg</strong> zeigt dir: Das hast du geschafft. Hier kannst du üben.</span></li>
         <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("help")}</span><span><strong>Hilfe</strong> ist immer für dich da.</span></li>
-        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("understand")}</span><span>Bei <strong>Einstellungen</strong> änderst du Schrift, Töne und Sprache.</span></li>
+        <li><span class="intro-offer-icon" aria-hidden="true">${getIconHtml("einstellungen")}</span><span>Bei <strong>Einstellungen</strong> änderst du Schrift, Töne und Sprache.</span></li>
       </ul>`;
 }
 
@@ -4936,9 +7248,9 @@ function menuIntroSeen() { return pGet(MENU_INTRO_KEY) === "1"; }
 /* D12: situationsbezogener Einstieg. Reine Orientierung, keine Bewertung,
    keine neuen Speicher-Schlüssel. Die vorhandenen Kern-Lernwege bleiben. */
 const EINSTIEG_OPTIONEN = [
-  { id: "nachrichten", text: "Eine Nachricht oder ein Anruf kam mir komisch vor.", topic: "betrug" },
-  { id: "passwort", text: "Bei Passwörtern bin ich unsicher.", topic: "datenschutz" },
-  { id: "teilen", text: "Ich bin unsicher: Was kann ich im Internet teilen?", topic: "datenschutz" },
+  { id: "nachrichten", text: "Ich möchte eine Nachricht prüfen.", topic: "betrug" },
+  { id: "passwort", text: "Ich möchte mein Passwort schützen.", topic: "datenschutz" },
+  { id: "teilen", text: "Ich möchte ein Foto teilen.", topic: "datenschutz" },
   { id: "aufpassen", text: "Jemand sagt: Ich soll im Internet aufpassen." },
   { id: "offen", text: "Ich weiß es noch nicht.", topic: "datenschutz" }
 ];
@@ -4981,14 +7293,14 @@ function renderIntro() {
         ${roleFigure("winken", "intro-welcome-figure")}
         <div class="intro-welcome-text"><h2>Willkommen!</h2><p>Alex und Tilda begleiten dich.</p></div>
       </div>
-      <div class="einstieg-resume">${resume || `<button type="button" class="intro-start-button" onclick="renderEinstiegAuswahl()">${RUHIG_TEXT.starten}</button>`}</div>
-      <button type="button" class="intro-quickstart-link" onclick="renderMenu()">${RUHIG_TEXT.themen}</button>
-      ${resume ? `<button type="button" class="intro-quickstart-link" onclick="renderEinstiegAuswahl()">Ein anderes Thema finden</button>` : ""}
+      <div class="einstieg-resume">${resume || `<button type="button" class="bedien-pikto intro-start-button" onclick="renderEinstiegAuswahl()">${pictoHtml("start")}<span>${RUHIG_TEXT.starten}</span></button>`}</div>
+      <button type="button" class="bedien-pikto intro-quickstart-link" onclick="renderMenu()">${pictoHtml("themen")}<span>${RUHIG_TEXT.themen}</span></button>
+      ${resume ? `<button type="button" class="bedien-pikto intro-quickstart-link" onclick="renderEinstiegAuswahl()">${pictoHtml("themen")}<span>Ein anderes Thema finden</span></button>` : ""}
       ${daily ? `<details class="einstieg-extra"><summary>Deine Frage für heute</summary>${daily}</details>` : ""}
       <details class="einstieg-extra"><summary>Sprache und Einrichtung</summary>
         <p>Du kannst die Sprache jederzeit ändern.</p>
         <button type="button" class="intro-quickstart-link" onclick="openLanguageFromTools()">Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])}</button>
-        <button type="button" class="intro-quickstart-link" onclick="introStart()">App einrichten</button>
+        <button type="button" class="bedien-pikto intro-quickstart-link" onclick="introStart()">${pictoHtml("einstellungen")}<span>App einrichten</span></button>
       </details>
     </section>`;
   stelleMerken(renderIntro);
@@ -5004,9 +7316,9 @@ function renderEinstiegAuswahl() {
   setActiveTab("start"); setOrientation("Du wählst, was zu dir passt.");
   rememberRoute("einstieg:auswahl"); showNav(false, false);
   content.innerHTML = `${buildEinstiegTools()}<section class="einstieg-folge" data-readable="true">
-    <p>Denk an dein Handy oder das Internet.</p><h2>Was passt zu dir?</h2>
+    <h2>Was möchtest du üben?</h2>
     ${buildEinstiegOptionen(EINSTIEG_OPTIONEN)}
-    <button type="button" class="intro-quickstart-link" onclick="renderMenu()">Zeig mir alle Themen</button>
+    <button type="button" class="bedien-pikto intro-quickstart-link" onclick="renderMenu()">${pictoHtml("themen")}<span>Zeig mir alle Themen</span></button>
     <button type="button" class="intro-quickstart-link" onclick="renderIntro()">Zurück</button>
   </section>`;
   stelleMerken(renderEinstiegAuswahl); focusContent(); renderLegalFooter();
@@ -5046,8 +7358,8 @@ function renderEinstieg(id) {
       <p class="einstieg-gewaehlt">${escapeHtml(option.text)}</p>
       <h2>${escapeHtml(topic.title)}</h2><p>${escapeHtml(hinweise[id])}</p>
       <button type="button" class="intro-start-button" onclick="startTopicMode('${topic.id}', 'short')">${pictoHtml("start")}<span>Lernen starten: ${escapeHtml(topic.title)}</span></button>
-      <button type="button" class="intro-quickstart-link" onclick="renderIntro()">Andere Situation wählen</button>
-      <button type="button" class="intro-quickstart-link" onclick="renderMenu()">Zeig mir alle Themen</button>
+      <button type="button" class="intro-quickstart-link" onclick="renderEinstiegAuswahl()">Zur Auswahl</button>
+      <button type="button" class="bedien-pikto intro-quickstart-link" onclick="renderMenu()">${pictoHtml("themen")}<span>Zeig mir alle Themen</span></button>
     </section>`;
   }
   stelleMerken(() => renderEinstieg(id));
@@ -5118,7 +7430,7 @@ function renderResume() {
           <button type="button" class="resume-change" onclick="renderProfileManage('${escapeHtml(prof.id)}')">ändern</button>
         </li>
       </ul>
-      <button type="button" class="intro-start-button" onclick="renderMenu()">Weiter zu den Themen</button>
+      <button type="button" class="bedien-pikto intro-start-button" onclick="renderMenu()">${pictoHtml("themen")}<span>Weiter zu den Themen</span></button>
     </section>
   `;
   focusContent();
@@ -5137,6 +7449,17 @@ const TOPIC_GROUPS = [
   { title: "Apps",               hint: "So nutzt du diese Apps sicher.",     ids: ["whatsapp", "facebook", "instagram", "youtube", "snapchat", "tiktok"] },
   { title: "Gefahren und Hilfe", hint: "So erkennst du Tricks. So holst du Hilfe.", ids: ["fakes", "betrug"] }
 ];
+
+/* D25: Direkt zu einer Gruppe, ohne die Themenwahl oder Route zu ändern.
+   Der Fokus folgt der Ansicht auch bei Tastatur und Vorleseprogrammen. */
+function themenGruppeAnzeigen(index) {
+  if (!Number.isInteger(index) || index < 0 || index >= TOPIC_GROUPS.length) return;
+  const ziel = content.querySelector("#themengruppe-" + index);
+  if (!ziel) return;
+  stopReading();
+  ziel.focus({ preventScroll: true });
+  ziel.scrollIntoView({ block: "start" });
+}
 
 function renderMenu() {
   stopReading();
@@ -5174,11 +7497,11 @@ function renderMenu() {
       ${showFirstBadge ? `<span class="topic-start-badge topic-start-badge--first">Fang hier an</span>` : ""}
       ${showNextBadge ? `<span class="topic-start-badge">Dein nächstes Thema</span>` : ""}
       ${ueberarbeitet ? `<span class="topic-start-badge">${escapeHtml(lernwegText("ueberarbeitetKurz"))}</span>` : ""}
-      ${done ? `<span class="topic-done-corner" aria-label="Geschafft" title="Geschafft">✓</span>` : ""}
+      ${done ? `<span class="topic-done-corner" aria-label="Geschafft" title="Geschafft">${pictoHtml("geschafft")}</span>` : ""}
       <span class="topic-icon" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
       <span class="topic-title">${escapeHtml(topic.title)}</span>
       <span class="topic-desc">${escapeHtml(topic.desc || "")}</span>
-      ${done ? `<span class="topic-done-badge">✓ Geschafft</span>` : ""}
+      ${done ? `<span class="topic-done-badge">Geschafft</span>` : ""}
       </button>
       <button type="button" class="card-read-button" data-read-card-text="${escapeHtml(topic.title)}. ${escapeHtml(topic.desc || "")}" aria-label="Thema ${escapeHtml(topic.title)} vorlesen">
         ${pictoHtml("vorlesen", "rb-ico")}
@@ -5194,7 +7517,7 @@ function renderMenu() {
     if (!groupTopics.length) return "";
     return `
       <section class="topic-group" aria-label="${escapeHtml(g.title)}">
-        <h3 class="topic-grid-title">${escapeHtml(g.title)}</h3>
+        <h3 class="topic-grid-title" id="themengruppe-${gIdx}" tabindex="-1">${escapeHtml(g.title)}</h3>
         <p class="topic-grid-hint">${escapeHtml(g.hint)}</p>
         <div class="topic-grid">${groupTopics.map((t, tIdx) => cardFor(t, gIdx === 0 && tIdx === 0)).join("")}</div>
       </section>`;
@@ -5221,7 +7544,7 @@ function renderMenu() {
 
   let companionNote = "";
   if (learnMode === "begleitung") {
-    companionNote = `<p class="learn-mode-status" role="status"><span aria-hidden="true">👋</span> Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr praktische Hilfe für das gemeinsame Lernen.</p>`;
+    companionNote = `<p class="learn-mode-status" role="status">${pictoHtml("people")} Begleit-Tipps sind an. Auf jeder Themen-Seite findet ihr praktische Hilfe für das gemeinsame Lernen.</p>`;
   } else if (learnMode === "app") {
     /* Befund 4 (21.09.2026): Hier stand „… und jede Seite wird dir
        vorgelesen." Das stimmte nicht: chooseLearnMode() vergrössert nur
@@ -5265,6 +7588,9 @@ function renderMenu() {
       ${buildResumeLessonChip()}
       <h2 class="topic-grid-title">Wähle ein Thema</h2>
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
+      <nav class="topic-group-links" aria-label="Themengruppen">
+        ${TOPIC_GROUPS.map((g, i) => `<button type="button" class="topic-group-link" onclick="themenGruppeAnzeigen(${i})">${escapeHtml(g.title)}</button>`).join("")}
+      </nav>
       ${/* Übersicht (06.10.2026): ohne großes Bild – die Themen selbst sind
             der Inhalt und stehen so ohne Scrollen oben. Die Figur bleibt im
             Bestand (assets/figures). */""}
@@ -5421,7 +7747,7 @@ function renderMyPath() {
         kz.gefunden === 0
           ? "Beim Üben sammelst du deine eigenen Regeln."
           : (kz.gefunden < kz.gesamt
-              ? "Dir fehlen noch " + (kz.gesamt - kz.gefunden) + " " + (kz.gesamt - kz.gefunden === 1 ? "Regel" : "Regeln") + ". " + (kz.sitzt > 0 ? kz.sitzt + " davon hast du in 2 Themen erkannt." : "")
+              ? "Du hast " + kz.gefunden + " " + (kz.gefunden === 1 ? "Regel" : "Regeln") + " gesammelt." + (kz.sitzt > 0 ? " " + kz.sitzt + " davon hast du in 2 Themen erkannt." : "")
               : (kz.sitzt < kz.gesamt
                   ? "Alle Regeln gefunden. " + kz.sitzt + " davon hast du schon in 2 Themen erkannt."
                   : "Alle Regeln hast du in 2 Themen erkannt. Deine Karte ist voll."))
@@ -5488,7 +7814,7 @@ function renderMyPath() {
           </div>
           <div class="card-read-pair card-read-pair--action">
             <button type="button" class="action-card" onclick="startRepeatQuiz()">
-            <span class="action-icon" aria-hidden="true">${getIconHtml("exercise")}</span>
+            <span class="action-icon" aria-hidden="true">${getIconHtml("wiederholen")}</span>
             <span class="action-text">
               <span class="action-title">Wiederholen</span>
               <span class="action-desc">Fragen aus deinen Themen.</span>
@@ -5498,7 +7824,7 @@ function renderMyPath() {
           </div>
           <div class="card-read-pair card-read-pair--action">
             <button type="button" class="action-card" onclick="renderScenarioChooser()">
-            <span class="action-icon" aria-hidden="true">${getIconHtml("start")}</span>
+            <span class="action-icon" aria-hidden="true">${getIconHtml("exercise")}</span>
             <span class="action-text">
               <span class="action-title">Übungs-Handy</span>
               <span class="action-desc">Üben wie auf dem Handy.</span>
@@ -5605,7 +7931,7 @@ function printGrandCertificate() {
     (wer ? `<p class="wer">${escapeHtml(wer)}</p>` : "") +
     `<p class="was">hat alle ${topics.length} Themen geschafft:</p>` +
     `<p class="was"><strong>Sicher und selbstbestimmt im Internet</strong></p>` +
-    `<p class="gross">Du kennst dich jetzt gut aus.<br>Du kannst dich sicher im Internet bewegen.</p>` +
+    `<p class="gross">Du hast alle Themen geübt.<br>Du kannst deine Regeln im Alltag nutzen.</p>` +
     `<p class="datum">Geschafft am ${datum}</p>` +
     `<p class="fuss">Lernplattform der Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW</p>` +
     `</div></body></html>`;
@@ -5623,7 +7949,7 @@ function buildGrandFinish() {
   if (countDoneTopics() < topics.length) return "";
   return `
     <div class="grand-finish" role="region" aria-label="Alle Themen geschafft">
-      <h3>🎉 Du hast alle ${topics.length} Themen geschafft!</h3>
+      <h3 class="bedien-pikto">${pictoHtml("geschafft")}<span>Du hast alle ${topics.length} Themen geschafft!</span></h3>
       <p>Das ist eine große Leistung.</p>
       <p>Du kennst dich jetzt gut aus. Du kannst dich sicher im Internet bewegen.</p>
       <button type="button" class="setting-big-button" onclick="printGrandCertificate()">${pictoHtml("drucken")} Deine große Urkunde drucken</button>
@@ -5664,16 +7990,16 @@ function renderHelpPage() {
     <section class="start-page" data-readable="true">
       ${buildToolRow()}
       <h2 class="topic-grid-title">Hilfe</h2>
-      <p class="topic-grid-hint">Du musst das nicht allein schaffen.</p>
+      <p class="topic-grid-hint">Du wählst deine Hilfe.</p>
       ${/* Übersicht (06.10.2026): Der Notfall steht auch hier, immer mit
             demselben Satz wie im Thema „Hilfe bei Problemen“ (§2, H1). */""}
-      <p class="hilfe-notfall">Jemand ist in Gefahr? Dann ruf sofort 110 oder 112.</p>
+      <p class="hilfe-notfall bedien-pikto">${pictoHtml("anruf")}<span>Jemand ist in Gefahr? Dann ruf sofort 110 oder 112.</span></p>
       ${buildResumeLessonChip()}
       ${roleFigure("hilfe")}
 
       <div class="help-page-actions">
         <button type="button" class="setting-big-button" onclick="showSymbolHelp()">Piktogramme erklären</button>
-        <button type="button" class="setting-big-button" onclick="showPauseOverlay()">Pause machen</button>
+        <button type="button" class="bedien-pikto setting-big-button" onclick="showPauseOverlay()">${pictoHtml("pause")}<span>Pause machen</span></button>
       </div>
 
       <div class="support-help-grid">
@@ -5688,16 +8014,16 @@ function renderHelpPage() {
         <div class="support-help-card">
           <h3>Wenn du etwas nicht verstehst ${sectionReadChip("Wenn du etwas nicht verstehst")}</h3>
           <ul>
-            <li>Lies den Text noch einmal.</li>
-            <li>Nutze den Knopf: Vorlesen.</li>
-            <li>Bitte eine Person um Erklärung.</li>
+            <li class="bedien-pikto">${pictoHtml("lesen")}<span>Lies den Text noch einmal.</span></li>
+            <li class="bedien-pikto">${pictoHtml("vorlesen")}<span>Nutze den Knopf: Vorlesen.</span></li>
+            <li class="bedien-pikto">${pictoHtml("ask")}<span>Du kannst eine Person um Erklärung bitten.</span></li>
             <li>Sage: Bitte erkläre mir das einfacher.</li>
           </ul>
         </div>
         <div class="support-help-card">
           <h3>Wen kannst du fragen? ${sectionReadChip("Wen kannst du fragen?")}</h3>
           <ul>
-            <li>Eine Person, der du vertraust.</li>
+            <li class="bedien-pikto">${pictoHtml("friend")}<span>Eine Person, der du vertraust.</span></li>
             <li>Eine Person, die dich unterstützt.</li>
             <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
             <li>Jemanden im Wohnbereich oder Dienst.</li>
@@ -5713,8 +8039,8 @@ function renderHelpPage() {
         </div>
       </div>
 
-      ${/* Übersicht (06.10.2026): Der Satz „Du musst das nicht allein
-            schaffen.“ steht nur noch oben. Die kurze Rückmeldung bleibt auf
+      ${/* Übersicht (06.10.2026): Der allgemeine Hilfe-Hinweis steht nur
+            oben. Die kurze Rückmeldung bleibt auf
             der Hilfe-Seite (§13), ist aber zugeklappt: Wer Hilfe sucht,
             sieht zuerst die Hilfe. */""}
       <details class="later-details meinung-details" id="meinung">
@@ -5735,7 +8061,7 @@ function renderHelpPage() {
         <p class="feedback-hinweis">Du musst keinen Namen schreiben.<br>
         Die App speichert deine Antwort nicht.<br>
         Du tippst auf den Knopf. Dann öffnet sich dein E-Mail-Programm. Du schickst die E-Mail selbst ab.</p>
-        <button type="button" class="nav-button primary feedback-senden" onclick="feedbackMailen()">Als E-Mail schicken</button>
+        <button type="button" class="bedien-pikto nav-button primary feedback-senden" onclick="feedbackMailen()">${pictoHtml("mail")}<span>Als E-Mail schicken</span></button>
         </div>
       </details>
 
@@ -5781,7 +8107,7 @@ function renderSettingsPage() {
       <h3>Dein Zeichen</h3>
       <p class="settings-explain">Du bist gerade: ${escapeHtml(signLabel(activeProfile))}.</p>
       <div class="settings-toggle-row">
-        <button type="button" class="setting-big-button" onclick="renderProfilePicker()">Person wechseln</button>
+        <button type="button" class="bedien-pikto setting-big-button" onclick="renderProfilePicker()">${pictoHtml("people")}<span>Person wechseln</span></button>
         <button type="button" class="setting-big-button" onclick="renderProfileManage('${escapeHtml(activeProfile.id)}')">Zeichen und Code ändern</button>
       </div>
     </section>
@@ -5789,15 +8115,15 @@ function renderSettingsPage() {
       <h3>Dieses Gerät</h3>
       <p class="settings-explain">Benutzt du dieses Gerät allein? Oder benutzen es mehrere Personen? Bei mehreren Personen fragt die App beim Start immer: Wer lernt gerade?</p>
       <div class="settings-toggle-row" role="group" aria-label="Wer benutzt dieses Gerät">
-        <button type="button" class="setting-big-button" aria-pressed="${deviceShared ? "false" : "true"}" onclick="setSharedFromSettings(false)">Nur ich</button>
-        <button type="button" class="setting-big-button" aria-pressed="${deviceShared ? "true" : "false"}" onclick="setSharedFromSettings(true)">Mehrere Personen</button>
+        <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${deviceShared ? "false" : "true"}" onclick="setSharedFromSettings(false)">${pictoHtml("person")}<span>Nur ich</span></button>
+        <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${deviceShared ? "true" : "false"}" onclick="setSharedFromSettings(true)">${pictoHtml("people")}<span>Mehrere Personen</span></button>
       </div>
     </section>` : "";
 
   const learnModeButtons = Object.keys(LEARN_MODES).map(key => {
     const m = LEARN_MODES[key];
     const active = learnMode === key;
-    return `<button type="button" class="setting-big-button" aria-pressed="${active ? "true" : "false"}" onclick="chooseLearnMode('${key}')">${escapeHtml(m.title)}</button>`;
+    return `<button type="button" class="setting-big-button bedien-pikto" aria-pressed="${active ? "true" : "false"}" onclick="chooseLearnMode('${key}')">${pictoHtml(m.icon)}<span>${escapeHtml(m.title)}</span></button>`;
   }).join("");
 
   content.innerHTML = `
@@ -5821,7 +8147,7 @@ function renderSettingsPage() {
         <h3>Vorlesen ${sectionReadChip("Vorlesen")}</h3>
         <p class="settings-explain">Soll jede Seite automatisch vorgelesen werden?</p>
         <div class="settings-toggle-row" role="group" aria-label="Automatisch vorlesen">
-          <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "true" : "false"}" onclick="setAutoRead(true); renderSettingsPage();">Ja, immer vorlesen</button>
+          <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${autoRead ? "true" : "false"}" onclick="setAutoRead(true); renderSettingsPage();">${pictoHtml("vorlesen")}<span>Ja, immer vorlesen</span></button>
           <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "false" : "true"}" onclick="setAutoRead(false); renderSettingsPage();">Nein, ich tippe selbst</button>
         </div>
         <p class="settings-explain" style="margin-top:14px;">Wie schnell soll die Stimme lesen?</p>
@@ -6149,13 +8475,13 @@ function renderTopicChoice(topicId) {
         const done = isTopicDone(topic.id);
         const resume = (lastLessonContext && lastLessonContext.topicId === topic.id) ? lastLessonContext : null;
         const hasQuiz = getQuizQuestions(topic).length > 0;
-        const laterChip = (label, click) => `<button type="button" class="later-chip" onclick="${click}">${label}</button>`;
+        const laterChip = (label, click, icon) => `<button type="button" class="later-chip${icon ? " bedien-pikto" : ""}" onclick="${click}">${icon ? pictoHtml(icon) : ""}<span>${label}</span></button>`;
         const training = (topic.id === "betrug" || topic.id === "fakes")
           ? laterChip("Trainings-Postfach", "startTrainingInbox()") : "";
         /* Uebungs-Handy: jedes Thema hat ein eigenes Szenario (szenarien-de.js). */
         const uebung = hasScenario(topic.id)
-          ? laterChip("Übungs-Handy", `startScenario('${escapeHtml(topic.id)}')`) : "";
-        const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`);
+          ? laterChip("Übungs-Handy", `startScenario('${escapeHtml(topic.id)}')`, "exercise") : "";
+        const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`, "remember");
         /* Alltags-Übung (alltag-de.js), nur für Themen mit eigener Übung. */
         const alltagScene = (typeof ALLTAG_SCENES !== "undefined")
           ? Object.entries(ALLTAG_SCENES).find(([, scene]) => scene && scene.topic === topic.id)
@@ -6191,20 +8517,20 @@ function renderTopicChoice(topicId) {
         if (resume) {
           return `
             ${ueberarbeitetHinweis}
-            ${resume.pause ? buildResumeLessonChip() : `<button type="button" class="topic-start-button" onclick="resumeLastLesson()">Weiter lernen: Schritt ${resume.step + 1}</button>`}
+            ${resume.pause ? buildResumeLessonChip() : `<button type="button" class="bedien-pikto topic-start-button" onclick="resumeLastLesson()">${pictoHtml("lernweg")}<span>Weiter lernen: Schritt ${resume.step + 1}</span></button>`}
             ${spaeterBlock(FUEHRUNG_TEXT.oderAuf, `
-              ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${resume.mode}')`)}
-              ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
+              ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${resume.mode}')`, "wiederholen")}
+              ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`, "quiz") : ""}
               ${merkChip}${alltagUebung}${uebung}${training}`)}`;
         }
         if (done) {
           return `
             <p class="done-note">✓ Du hast dieses Thema geschafft. Wiederholen festigt dein Wissen.</p>
-            ${hasQuiz ? `<button type="button" class="topic-start-button" onclick="startQuiz('${escapeHtml(topic.id)}')">Quiz wiederholen</button>` : ""}
+            ${hasQuiz ? `<button type="button" class="bedien-pikto topic-start-button" onclick="startQuiz('${escapeHtml(topic.id)}')">${pictoHtml("wiederholen")}<span>Quiz wiederholen</span></button>` : ""}
             ${spaeterBlock(FUEHRUNG_TEXT.oderAuf, `
-              ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', 'short')`)}
+              ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', 'short')`, "wiederholen")}
               ${laterChip(`Mehr dazu: ${escapeHtml(topic.title)}`, `startTopicMode('${escapeHtml(topic.id)}', 'extra')`)}
-              ${laterChip("Alle Lektionen nachlesen", `startTopicMode('${escapeHtml(topic.id)}', 'full')`)}
+              ${laterChip("Alle Lektionen nachlesen", `startTopicMode('${escapeHtml(topic.id)}', 'full')`, "lesen")}
               ${merkChip}${alltagUebung}${uebung}${training}`)}`;
         }
         /* Paket C (26.09.2026): „Lernen starten" steht UNTER der Mengen-Wahl.
@@ -6214,7 +8540,7 @@ function renderTopicChoice(topicId) {
           ${ueberarbeitetHinweis}
           <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">${pictoHtml("start")}<span>Lernen starten</span></button>
           ${spaeterBlock(spaeterTitel(hasQuiz, !!(uebung || training || alltagUebung)), `
-            ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`) : ""}
+            ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`, "quiz") : ""}
             ${merkChip}${alltagUebung}${uebung}${training}`)}`;
       })()}
 
@@ -6247,7 +8573,7 @@ function buildSupportBox() {
       <button type="button" class="support-help-button" onclick="toggleSupportHelp()" aria-expanded="false" aria-controls="supportHelpPanel">
         <span class="support-help-icon" aria-hidden="true">${getIconHtml("help")}</span>
         <span class="support-help-text">
-          <span class="support-help-title">Du brauchst Unterstützung?</span>
+          <span class="support-help-title">Hilfe beim Lernen</span>
           <span class="support-help-desc">Hilfe anzeigen.</span>
         </span>
       </button>
@@ -6267,23 +8593,23 @@ function buildSupportBox() {
           <div class="support-help-card">
             <h4>Wenn du eine Frage nicht verstehst ${sectionReadChip("Wenn du eine Frage nicht verstehst")}</h4>
             <ul>
-              <li>Lies die Frage noch einmal.</li>
-              <li>Bitte eine Person um Erklärung.</li>
+              <li class="bedien-pikto">${pictoHtml("lesen")}<span>Lies die Frage noch einmal.</span></li>
+              <li class="bedien-pikto">${pictoHtml("ask")}<span>Du kannst eine Person um Erklärung bitten.</span></li>
               <li>Sage: Bitte erkläre mir das einfacher.</li>
             </ul>
           </div>
           <div class="support-help-card">
             <h4>Wen kannst du fragen? ${sectionReadChip("Wen kannst du fragen?")}</h4>
             <ul>
-              <li>Eine Person, der du vertraust.</li>
+              <li class="bedien-pikto">${pictoHtml("friend")}<span>Eine Person, der du vertraust.</span></li>
               <li>Eine Person, die dich unterstützt.</li>
               <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
               <li>Jemanden im Wohnbereich oder Dienst.</li>
             </ul>
           </div>
         </div>
-        <p class="support-help-remember">Du musst das nicht allein schaffen.</p>
-        <button type="button" class="support-help-close" onclick="closeSupportHelp()">Hilfe ausblenden</button>
+        <p class="support-help-remember">Du wählst deine Hilfe.</p>
+        <button type="button" class="bedien-pikto support-help-close" onclick="closeSupportHelp()">${pictoHtml("help")}<span>Hilfe ausblenden</span></button>
       </div>
     </div>
   `;
@@ -6409,21 +8735,21 @@ function buildTaskHelpBox(hinweis, vorneDran, aufRueckmeldung, mehr) {
     : "";
   return `
     <div class="task-help-area">
-      <button type="button" class="task-help-button" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
-        Ich bin unsicher
+      <button type="button" class="task-help-button bedien-pikto" onclick="toggleTaskHelp()" aria-expanded="false" aria-controls="taskHelpPanel">
+        ${pictoHtml("help")}<span>Hilfe zur Aufgabe</span>
       </button>
       <div id="taskHelpPanel" class="task-help-panel" hidden>
-        <h3>Du bist unsicher?</h3>
-        <p>Du musst nicht raten.</p>
+        <h3>Hilfe zur Aufgabe</h3>
+        <p>${aufRueckmeldung ? "Du kannst die Erklärung noch einmal lesen." : "Du kannst die Frage noch einmal lesen."} Oder eine Person fragen.</p>
         ${stufe1}
-        <button type="button" class="hilfe-angebot task-help-mehr-knopf" onclick="taskHelpMehr(this)" aria-expanded="false" aria-controls="taskHelpMehr">Mehr Hilfe zeigen</button>
+        <button type="button" class="bedien-pikto hilfe-angebot task-help-mehr-knopf" onclick="taskHelpMehr(this)" aria-expanded="false" aria-controls="taskHelpMehr">${pictoHtml("help")}<span>Mehr Hilfe zeigen</span></button>
         <div id="taskHelpMehr" class="task-help-mehr" hidden>
           ${mehr || ""}
           <ul>
-            <li>${aufRueckmeldung ? "Lies die Erklärung noch einmal langsam." : "Lies die Frage noch einmal langsam."}</li>
+            <li class="bedien-pikto">${pictoHtml("lesen")}<span>${aufRueckmeldung ? "Lies die Erklärung noch einmal langsam." : "Lies die Frage noch einmal langsam."}</span></li>
             <li>${aufRueckmeldung ? escapeHtml(RUECKMELDUNG.fehlerOk) : "Schau dir alle Antworten an."}</li>
-            <li>Du kannst eine Pause machen.</li>
-            <li>Du kannst eine Person fragen, der du vertraust.</li>
+            <li class="bedien-pikto">${pictoHtml("pause")}<span>Du kannst eine Pause machen.</span></li>
+            <li class="bedien-pikto">${pictoHtml("friend")}<span>Du kannst eine Person fragen, der du vertraust.</span></li>
           </ul>
         </div>
       </div>
@@ -6452,11 +8778,11 @@ function toggleTaskHelp() {
   if (show) {
     panel.removeAttribute("hidden");
     button.setAttribute("aria-expanded", "true");
-    button.textContent = "Hilfe ausblenden";
+    button.innerHTML = `${pictoHtml("help")}<span>Hilfe ausblenden</span>`;
   } else {
     panel.setAttribute("hidden", "");
     button.setAttribute("aria-expanded", "false");
-    button.textContent = "Ich bin unsicher";
+    button.innerHTML = `${pictoHtml("help")}<span>Hilfe zur Aufgabe</span>`;
   }
 }
 
@@ -6915,14 +9241,14 @@ const RUECKMELDUNG = {
    das lauteste Element der Seite.
    Wörter zentral (§13) und auf der Prüfliste (§18.8). */
 const FRAGE_TEXT = {
-  /* D8 (01.10.2026, Befund B12): Seit D3 heißt erstes Tippen „hören und
-     markieren“. Das steht jetzt VOR den Antworten, nicht erst danach. Mit
-     „Antwort sofort wählen“ (unter „Mehr“) gilt der alte Satz. */
+  /* D25: eine Anweisung pro Schritt. Die Bestätigung wird erst nach der
+     Vorwahl genannt; Sofortwahl behält ihre direkte Aufforderung. */
   get aufforderung() {
     return (typeof sofortWaehlen !== "undefined" && sofortWaehlen)
       ? "Tippe deine Antwort an."
-      : "Tippe eine Antwort an. Dann tippe auf: Das nehme ich.";
+      : "Wähle eine Antwort.";
   },
+  auswahl: "Ausgewählt. Tippe auf: Das nehme ich.",
   /* Einschätzungen (Einstieg und Abschluss) haben kein Richtig und kein
      Falsch. Sie bekommen deshalb ein eigenes Etikett statt ✅ Prüfen und den
      beruhigenden Satz VOR den Antworten – vorher stand er darunter und wurde
@@ -6931,6 +9257,21 @@ const FRAGE_TEXT = {
   keinFalsch:          "Hier gibt es kein Richtig und kein Falsch.",
   meinungAufforderung: "Tippe an, was für dich stimmt."
 };
+/* Der sichtbare Hinweis folgt der noch offenen Auswahl. Das gilt auch
+   beim Sprachwechsel und Wiedereinstieg. Gespiegelte Bestätigungsknöpfe
+   sind im Inhalt unsichtbar, bleiben aber die Quelle für die Lernleiste. */
+function frageAufforderungAktualisieren() {
+  content.querySelectorAll(".frage:not(.frage--meinung)").forEach(frage => {
+    const gruppe = frage.querySelector(".answers");
+    const hinweis = frage.querySelector(".frage-aufforderung");
+    if (!gruppe || !hinweis || !gruppe.querySelector(".answer-option")) return;
+    const offen = gruppe.querySelector("button.answer-option:not(:disabled), .answer-option input:not(:disabled)");
+    const wahl = gruppe.querySelector("button.answer-option.ist-markiert:not(:disabled), .answer-option input:checked:not(:disabled)");
+    const nehmen = frage.parentElement.querySelector(".nehmen-knopf:not(:disabled)");
+    const text = !offen ? "" : wahl && nehmen ? FRAGE_TEXT.auswahl : FRAGE_TEXT.aufforderung;
+    if (hinweis.textContent !== text) hinweis.textContent = text;
+  });
+}
 function glossarAufgabenAttribut(aufgabe) {
   /* Feste Leicht-Schlüssel bleiben auch nach Sprachwechseln gleich.
      KI und Chatbot erklären hier genau den Inhalt der gesuchten Antwort. */
@@ -7320,9 +9661,8 @@ function renderLesson(teil = "text") {
   const textRows = Array.isArray(lesson.text)
     ? lesson.text.map(item => {
         if (typeof item === "object" && item.text) {
-          const img = item.pictogram
-            ? satzPiktoBild(item, gezeigtePiktos)
-            : kernSatzPikto(topic, lessons[currentStep], item.text, gezeigtePiktos);
+          const img = kernSatzPikto(topic, lessons[currentStep], item.text, gezeigtePiktos)
+            || (item.pictogram ? satzPiktoBild(item, gezeigtePiktos) : "");
           return `<div class="ls-text-row">${img}<p>${escapeHtml(item.text)}</p></div>`;
         }
         const img = kernSatzPikto(topic, lessons[currentStep], item, gezeigtePiktos);
@@ -7334,15 +9674,16 @@ function renderLesson(teil = "text") {
     : "";
 
   /* Bullet-Punkte — unterstützt Strings und {text, pictogram}-Objekte */
+  const gezeigteListenPiktos = new Set();
   const bullets = Array.isArray(lesson.bullets) && lesson.bullets.length
     ? `<div class="ls-bullet-block"><ul class="ls-bullet-list">${lesson.bullets.map(item => {
         if (typeof item === "object" && item.text) {
-          const img = item.pictogram
-            ? `<img class="ls-bullet-pikto" src="${pictoSrc(refinePicto(item.pictogram, item.text))}" alt="" width="40" height="40" aria-hidden="true" loading="lazy">`
-            : "";
+          const img = kernSatzPikto(topic, lessons[currentStep], item.text, gezeigteListenPiktos, "ls-bullet-pikto", 40)
+            || (item.pictogram ? `<img class="ls-bullet-pikto" src="${pictoSrc(refinePicto(item.pictogram, item.text))}" alt="" width="40" height="40" aria-hidden="true" loading="lazy">` : "");
           return `<li class="ls-bullet-item">${img}<span>${escapeHtml(item.text)}</span></li>`;
         }
-        return `<li>${escapeHtml(item)}</li>`;
+        const img = kernSatzPikto(topic, lessons[currentStep], item, gezeigteListenPiktos, "ls-bullet-pikto", 40);
+        return img ? `<li class="ls-bullet-item">${img}<span>${escapeHtml(item)}</span></li>` : `<li>${escapeHtml(item)}</li>`;
       }).join("")}</ul>${blockRead(plain(lesson.bullets))}</div>`
     : "";
 
@@ -7879,7 +10220,7 @@ function renderKetteSchritt() {
   const hilfeText = ketteText(schritt.hilfe);
   const hilfe = !hilfeText ? "" : ketteHilfeOffen
     ? `<p class="kette-hilfe" role="status">${escapeHtml(hilfeText)}</p>`
-    : `<button type="button" class="plain-back-button" onclick="ketteHilfeZeigen()">Ich brauche Hilfe</button>`;
+    : `<button type="button" class="bedien-pikto plain-back-button" onclick="ketteHilfeZeigen()">${pictoHtml("help")}<span>Ich brauche Hilfe</span></button>`;
 
   const vorlese = [ketteTun(schritt), warumText].filter(Boolean).join(" ");
 
@@ -8355,6 +10696,7 @@ function renderPracticeFeedbackPage(index, correctIndex, wieder) {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader(topic.title, "Übung", "Rückmeldung", kopf, 100);
+  showNav(true, false);
   document.body.classList.add("lesson-view");
   aufUebungsSeite = true;
   setOrientation(`Du übst: ${topic.title}.`);
@@ -8397,7 +10739,7 @@ function renderPracticeFeedbackPage(index, correctIndex, wieder) {
           : `${/* D13, Bild 4: Beide Lernhandlungen stehen unten in der Leiste –
                    rechts der zweite Versuch als Hauptknopf, links „Weiter“
                    (leisteSpiegeln). Beispiel und „Lektion nochmal lesen“
-                   stehen in der zweiten Hilfe-Stufe. */""}<button type="button" class="feedback-button secondary" data-leiste="haupt" onclick="renderPracticePage()">Frage nochmal versuchen</button>
+                   stehen in der zweiten Hilfe-Stufe. */""}<button type="button" class="bedien-pikto feedback-button secondary" data-leiste="haupt" onclick="renderPracticePage()">${pictoHtml("wiederholen")}<span>Frage nochmal versuchen</span></button>
              <button type="button" class="feedback-button quiet" data-leiste="neben" onclick="continueAfterPractice()">Weiter</button>
              <p class="feedback-spaeter">Diese Aufgabe kommt später noch einmal.</p>`
         }
@@ -8405,7 +10747,7 @@ function renderPracticeFeedbackPage(index, correctIndex, wieder) {
 
       ${!ok ? buildTaskHelpBox(taskHint(practice, "rueckmeldung"), false, true,
         (practice.nachFehler ? vorbildAngebotHtml(topic, lesson, lessons) : "")
-        + `<button type="button" class="hilfe-angebot" onclick="renderLesson()">Lektion nochmal lesen</button>`) : ""}
+        + `<button type="button" class="bedien-pikto hilfe-angebot" onclick="renderLesson()">${pictoHtml("lesen")}<span>Lektion nochmal lesen</span></button>`) : ""}
     </article>
   `;
   if (!wieder) announce(isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtAnsage);
@@ -8440,7 +10782,7 @@ function lernPause() {
         <p>Deine Stelle ist gemerkt.</p>
         <p>Du kannst jederzeit weitermachen.</p>
         <div class="completion-actions">
-          <button type="button" class="primary-action" onclick="resumeLastLesson()">Weiter lernen</button>
+          <button type="button" class="bedien-pikto primary-action" onclick="resumeLastLesson()">${pictoHtml("start")}<span>Weiter lernen</span></button>
           <button type="button" class="secondary-action" onclick="navigateTab('start')">Zur Startseite</button>
         </div>
       </article>
@@ -8658,7 +11000,7 @@ function answerTransfer(topic, auswahl, index, opt) {
     ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[korrekt]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[korrekt]) : ""}
     ${regel}
     <div class="certificate-actions">
-      ${ok ? "" : `<button type="button" class="nav-button secondary" onclick="renderMiniCheck('${id}')">Nochmal versuchen</button>`}
+      ${ok ? "" : `<button type="button" class="bedien-pikto nav-button secondary" onclick="renderMiniCheck('${id}')">${pictoHtml("wiederholen")}<span>Nochmal versuchen</span></button>`}
       <button type="button" class="nav-button primary" onclick="miniCheckDone[miniCheckSchluessel('${id}')] = true; renderCompletionPage('${id}')">Weiter</button>
     </div>`;
   const mode = currentMode;
@@ -8866,7 +11208,7 @@ function answerNeueSituation(topic, i, index, opt) {
     ${!ok && Array.isArray(frage.answers) ? passendeAntwortHtml(frage.answers[korrekt]) : istAuch && Array.isArray(frage.answers) ? nochEinWegHtml(frage.answers[korrekt]) : ""}
     ${regel}
     <div class="certificate-actions">
-      ${ok ? "" : `<button type="button" class="nav-button ${ns.segmentiert ? "primary" : "secondary"}"${ns.segmentiert ? ' data-leiste="haupt"' : ""} onclick="renderNeueSituation(getTopicById('${id}'), ${i}, { teil: 'frage' })">Nochmal versuchen</button>`}
+      ${ok ? "" : `<button type="button" class="bedien-pikto nav-button ${ns.segmentiert ? "primary" : "secondary"}"${ns.segmentiert ? ' data-leiste="haupt"' : ""} onclick="renderNeueSituation(getTopicById('${id}'), ${i}, { teil: 'frage' })">${pictoHtml("wiederholen")}<span>Nochmal versuchen</span></button>`}
       <button type="button" class="nav-button ${ns.segmentiert && !ok ? "secondary" : "primary"}"${ns.segmentiert ? ` data-leiste="${!ok ? "neben" : "haupt"}"` : ""} onclick="${weiter}">Weiter</button>
     </div>`;
   const mode = currentMode;
@@ -9254,7 +11596,7 @@ function felderFertig(wieder) {
     ${vorbild}
     <div class="felder-aktionen">
       ${/* D13: Die Knöpfe stehen unten in der Leiste (leisteSpiegeln). Wird ein
-            zweiter Versuch angeboten, ist er der Hauptknopf und „Weiter“ der zweite Weg. */""}${richtig ? "" : `<button type="button" class="secondary-action" data-leiste="haupt" onclick="felderNochmal()">${escapeHtml(FELDER_TEXT.nochmal)}</button>`}
+            zweiter Versuch angeboten, ist er der Hauptknopf und „Weiter“ der zweite Weg. */""}${richtig ? "" : `<button type="button" class="bedien-pikto secondary-action" data-leiste="haupt" onclick="felderNochmal()">${pictoHtml("wiederholen")}<span>${escapeHtml(FELDER_TEXT.nochmal)}</span></button>`}
       <button type="button" class="primary-action" data-leiste="${richtig ? "haupt" : "neben"}" onclick="felderWeiter()">${escapeHtml(FELDER_TEXT.weiter)}</button>
     </div>
     ${richtig ? "" : `<p class="feedback-spaeter">${escapeHtml(FELDER_TEXT.spaeter)}</p>`}`, !!wieder, true);
@@ -9453,7 +11795,7 @@ function vorbildHtml(topic, rohLektion, lessons, { offen = false } = {}) {
   /* Auf dem verpflichtenden Beispielteil wird das Vorbild sichtbar gezeigt.
      Andere Aufrufe behalten das bisherige Zurücknehmen bekannter Hilfe. */
   return bekannt && !offen
-    ? `<details class="later-details vorbild-details"><summary class="later-title">Beispiel ansehen: So macht es ${escapeHtml(vb.wer)}</summary>${kasten}</details>`
+    ? `<details class="later-details vorbild-details"><summary class="later-title bedien-pikto">${pictoHtml("example")}<span>Beispiel ansehen: So macht es ${escapeHtml(vb.wer)}</span></summary>${kasten}</details>`
     : kasten;
 }
 
@@ -9467,7 +11809,7 @@ function vorbildAngebotHtml(topic, rohLektion, lessons) {
   const saetze = vb.text.map(x => `<p>${escapeHtml(typeof x === "string" ? x : (x && x.text) || "")}</p>`).join("");
   return `
       <details class="later-details vorbild-details vorbild-nach-fehler">
-        <summary class="later-title">Beispiel ansehen: So macht es ${escapeHtml(vb.wer)}</summary>
+        <summary class="later-title bedien-pikto">${pictoHtml("example")}<span>Beispiel ansehen: So macht es ${escapeHtml(vb.wer)}</span></summary>
         <div class="vorbild-box"><div class="vorbild-text">${vorbildHeading(vb.wer)}${saetze}</div></div>
       </details>`;
 }
@@ -9592,7 +11934,7 @@ function renderHandySimulationErgebnis(topic, wieder) {
       ${vh && vh.aufloesung ? `<p>${escapeHtml(vh.aufloesung)}</p>` : ""}
       ${vh && typeof vorher === "number" && vh.options[vorher] ? `<p class="vorhersage-anfang">${escapeHtml(lernwegText("vorhersageAnfang"))} <strong>${escapeHtml(vh.options[vorher])}</strong></p>` : ""}
       <div class="felder-aktionen">
-        ${fehler ? `<button type="button" class="secondary-action" data-leiste="haupt" onclick="renderHandySimulation(getTopicById('${escapeHtml(topic.id)}'), 0)">${escapeHtml(FELDER_TEXT.nochmal)}</button>` : ""}
+        ${fehler ? `<button type="button" class="bedien-pikto secondary-action" data-leiste="haupt" onclick="renderHandySimulation(getTopicById('${escapeHtml(topic.id)}'), 0)">${pictoHtml("wiederholen")}<span>${escapeHtml(FELDER_TEXT.nochmal)}</span></button>` : ""}
         <button type="button" class="primary-action" data-leiste="${fehler ? "neben" : "haupt"}" onclick="simulationFertig['${escapeHtml(topic.id)}'] = true; renderMiniCheck('${escapeHtml(topic.id)}')">${escapeHtml(FELDER_TEXT.weiter)}</button>
       </div>
     </article>`;
@@ -10082,14 +12424,13 @@ function renderCompletionPage(topicId, wieder = false, teil = 0) {
     playSound("success");
   }
 
-  /* Hauptaktion der Abschluss-Seite ist der nächste Schritt, nicht das Quiz
-     (Prüfbericht B7). markTopicDone() lief schon, der Vorschlag überspringt
-     dieses Thema also von selbst. Sind alle Themen geschafft, tritt der
-     Lernweg an die Stelle des Vorschlags. */
+  /* D25: Aufhören ist ein guter Abschluss. Weiterlernen bleibt daneben
+     erreichbar. markTopicDone() lief schon: der Vorschlag überspringt
+     dieses Thema; nach allen Themen führt der zweite Weg zum Lernweg. */
   const nextTopic = getNextTopicSuggestion();
   const nextActionHtml = (extraClass = "") => nextTopic
-    ? `<button type="button" class="primary-action${extraClass ? " " + extraClass : ""}" data-leiste="haupt" onclick="weiterNachThema('${escapeHtml(nextTopic.id)}')">Nächstes Thema: ${escapeHtml(nextTopic.title)}</button>`
-    : `<button type="button" class="primary-action${extraClass ? " " + extraClass : ""}" data-leiste="haupt" onclick="weiterNachThema('')">Alle Themen geschafft — zu Mein Lernweg</button>`;
+    ? `<button type="button" class="link-action${extraClass ? " " + extraClass : ""}" data-leiste="neben" onclick="weiterNachThema('${escapeHtml(nextTopic.id)}')">Nächstes Thema: ${escapeHtml(nextTopic.title)}</button>`
+    : `<button type="button" class="bedien-pikto link-action${extraClass ? " " + extraClass : ""}" data-leiste="neben" onclick="weiterNachThema('')">${pictoHtml("lernweg")}<span>Alle Themen geschafft — zu Mein Lernweg</span></button>`;
   setProgressVisible(false);
   setBottomNavVisible(false);
   showNav(false, false);
@@ -10106,22 +12447,22 @@ function renderCompletionPage(topicId, wieder = false, teil = 0) {
   const id = escapeHtml(topic.id);
   setHeader(topic.title, "Abschluss", "Abschluss", `Teil ${abschlussTeil + 1} von 2`, 100);
   setOrientation(`Du bist beim Abschluss zum Thema: ${topic.title}. Teil ${abschlussTeil + 1} von 2.`);
-  const chip = (label, click) => `<button type="button" class="later-chip" onclick="${click}">${label}</button>`;
+  const chip = (label, click, icon) => `<button type="button" class="later-chip${icon ? " bedien-pikto" : ""}" onclick="${click}">${icon ? pictoHtml(icon) : ""}<span>${label}</span></button>`;
   const hatQuiz = getQuizQuestions(topic).length > 0;
   const mehrChips = [
     istKurz ? chip(`Mehr dazu: ${escapeHtml(topic.title)}`, `startTopicMode('${id}', 'extra')`) : "",
-    chip("Regeln nochmal ansehen", `renderCompletionPage('${id}', true, 0)`),
-    hatQuiz ? chip("Quiz machen", istKurz ? `startEinfachQuiz('${id}')` : `startQuiz('${id}')`) : "",
-    hasScenario(topic.id) ? chip("Im Übungs-Handy üben", `startScenario('${id}')`) : "",
-    !istKurz ? chip("Merk-Karte ansehen", `renderMemoryCard('${id}')`) : "",
-    chip("Nochmal von vorne", `startTopicMode('${id}', '${currentMode}')`),
-    chip("Alle Lektionen nachlesen", `startTopicMode('${id}', 'full')`),
+    chip("Regeln nochmal ansehen", `renderCompletionPage('${id}', true, 0)`, "remember"),
+    hatQuiz ? chip("Quiz machen", istKurz ? `startEinfachQuiz('${id}')` : `startQuiz('${id}')`, "quiz") : "",
+    hasScenario(topic.id) ? chip("Im Übungs-Handy üben", `startScenario('${id}')`, "exercise") : "",
+    !istKurz ? chip("Merk-Karte ansehen", `renderMemoryCard('${id}')`, "remember") : "",
+    chip("Nochmal von vorne", `startTopicMode('${id}', '${currentMode}')`, "wiederholen"),
+    chip("Alle Lektionen nachlesen", `startTopicMode('${id}', 'full')`, "lesen"),
     !istKurz ? chip("Urkunde ansehen", `renderCertificate('${id}')`) : "",
-    chip("Mein Lernweg ansehen", "renderMyPath()"),
-    chip(FUEHRUNG_TEXT.zuDenThemen, "renderMenu()")
+    chip("Mein Lernweg ansehen", "renderMyPath()", "lernweg"),
+    chip(FUEHRUNG_TEXT.zuDenThemen, "renderMenu()", "themen")
   ].join("");
   const hilfeLink = ["hilfe", "betrug", "ki"].includes(topic.id)
-    ? `<button type="button" class="link-action" onclick="openTopicHelpLesson('${id}')">Hilfe nochmal lesen</button>` : "";
+    ? `<button type="button" class="bedien-pikto link-action" onclick="openTopicHelpLesson('${id}')">${pictoHtml("help")}<span>Hilfe nochmal lesen</span></button>` : "";
   /* Mit Vorhersage (Datenschutz, Paket 2) steht an dieser Stelle der
      Rückblick auf die Frage vom Anfang statt der Selbsteinschätzung. */
   const mitVorhersage = !!vorhersageFuer(topic);
@@ -10133,10 +12474,10 @@ function renderCompletionPage(topicId, wieder = false, teil = 0) {
   const weiterlernenLink = wl
     ? `<button type="button" class="link-action" onclick="renderWeiterlernen('${id}', 0)">${escapeHtml(wl.titel)}</button>` : "";
   const planLink = (typeof ketteDaten === "function" && ketteDaten(topic.id))
-    ? `<button type="button" class="link-action" onclick="ketteVomAbschluss('${id}')">${planWort(LERNWEG_TEXT.planLink, topic.id)}</button>` : "";
+    ? `<button type="button" class="bedien-pikto link-action" onclick="ketteVomAbschluss('${id}')">${pictoHtml("plan")}<span>${planWort(LERNWEG_TEXT.planLink, topic.id)}</span></button>` : "";
   const schwerZahl = schwereAufgaben(topic.id).length;
   const nochmalLink = schwerZahl
-    ? `<button type="button" class="link-action" onclick="startSchwereUeben('${id}')">${LERNWEG_TEXT.nochmalUeben}: ${schwerZahl} ${schwerZahl === 1 ? "Aufgabe" : "Aufgaben"}</button>` : "";
+    ? `<button type="button" class="bedien-pikto link-action" onclick="startSchwereUeben('${id}')">${pictoHtml("wiederholen")}<span>${LERNWEG_TEXT.nochmalUeben}: ${schwerZahl} ${schwerZahl === 1 ? "Aufgabe" : "Aufgaben"}</span></button>` : "";
 
   /* Ein Rückblick und eine Anwendung sind zwei Aufgaben. Die Inhalte
      bleiben vollständig erhalten, erscheinen aber nacheinander. */
@@ -10146,7 +12487,7 @@ function renderCompletionPage(topicId, wieder = false, teil = 0) {
       <article class="card completion-card" style="${getTopicColorStyle(topic.id)}">
         <h2>${RUECKMELDUNG.themaGeschafft}</h2>
         ${roleFigure("erfolg")}
-        <p class="einfach-done-praise">Du hast das Thema <strong>${escapeHtml(topic.title)}</strong> geschafft.</p>
+        <p class="einfach-done-praise">Du hast zum Thema <strong>${escapeHtml(topic.title)}</strong> geübt.</p>
         ${buildRegelnAbschluss(topic)}
         <button type="button" class="primary-action" data-leiste="haupt" onclick="renderCompletionPage('${id}', true, 1)">Weiter</button>
       </article>
@@ -10166,7 +12507,7 @@ function renderCompletionPage(topicId, wieder = false, teil = 0) {
         ${planLink}
         <div class="completion-actions">
           ${nextActionHtml()}
-          <button type="button" class="link-action" data-leiste="neben" onclick="fuerHeuteAufhoeren()">Für heute aufhören</button>
+          <button type="button" class="bedien-pikto primary-action" data-leiste="haupt" onclick="fuerHeuteAufhoeren()">${pictoHtml("pause")}<span>Für heute aufhören</span></button>
           ${hilfeLink}
         </div>
         <details class="later-details">
@@ -10350,7 +12691,7 @@ function renderEinfachQuizFeedback(optionIndex, istPassend, wieder) {
     quizAnsweredCorrect.add(currentQuizIndex);
   }
   const nochmal = (!ok && q.nachFehler)
-    ? `<button type="button" class="secondary-action" onclick="renderEinfachQuizQuestion()">Nochmal versuchen</button>` : "";
+    ? `<button type="button" class="bedien-pikto secondary-action" onclick="renderEinfachQuizQuestion()">${pictoHtml("wiederholen")}<span>Nochmal versuchen</span></button>` : "";
 
   const feedbackText = isCorrect
     ? (q.feedbackCorrect || RUECKMELDUNG.passtAnsage)
@@ -10418,15 +12759,15 @@ function renderEinfachQuizResult(wieder = false) {
       <p class="einfach-done-praise">${escapeHtml(praise)}</p>
       ${pauseTeilHinweisHtml("kurzquiz")}
       <div class="einfach-done-actions">
-        <button type="button" class="primary-action einfach-done-btn" data-leiste="haupt" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
-          Quiz nochmal
+        <button type="button" class="bedien-pikto primary-action einfach-done-btn" data-leiste="haupt" onclick="startEinfachQuiz('${escapeHtml(topic.id)}')">
+          ${pictoHtml("wiederholen")}<span>Quiz nochmal</span>
         </button>
         <div class="completion-links">
-          <button type="button" class="link-action" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
-            Lektionen nochmal
+          <button type="button" class="bedien-pikto link-action" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">
+            ${pictoHtml("wiederholen")}<span>Lektionen nochmal</span>
           </button>
-          <button type="button" class="link-action" onclick="renderMenu()">
-            Zu den Themen
+          <button type="button" class="bedien-pikto link-action" onclick="renderMenu()">
+            ${pictoHtml("themen")}<span>Zu den Themen</span>
           </button>
         </div>
       </div>
@@ -10555,12 +12896,12 @@ function renderQuizFeedbackPage(index, wieder) {
       <div class="feedback-actions">
         ${ok
           ? `<button type="button" class="feedback-button primary" onclick="continueAfterQuizAnswer()">Weiter</button>${korrekturHinweisHtml(merkQ)}`
-          : `<button type="button" class="feedback-button secondary" data-leiste="haupt" onclick="renderQuizQuestion()">Nochmal versuchen</button>`
+          : `<button type="button" class="bedien-pikto feedback-button secondary" data-leiste="haupt" onclick="renderQuizQuestion()">${pictoHtml("wiederholen")}<span>Nochmal versuchen</span></button>`
         }
       </div>
 
       ${!ok ? buildTaskHelpBox(taskHint(q, "quiz"), false, true,
-        `<button type="button" class="hilfe-angebot" onclick="lektionenNachlesen('${escapeHtml(topic.id)}')">${pictoHtml("lesen")} Lektionen nachlesen</button>`) : ""}
+        `<button type="button" class="hilfe-angebot bedien-pikto" onclick="lektionenNachlesen('${escapeHtml(topic.id)}')">${pictoHtml("lesen")}<span>Lektionen nachlesen</span></button>`) : ""}
     </article>
   `;
   if (!wieder) announce(isCorrect ? RUECKMELDUNG.passtAnsage : istAuch ? RUECKMELDUNG.auchAnsage : RUECKMELDUNG.nochNichtAnsage);
@@ -10611,7 +12952,7 @@ function renderQuizResult(wieder) {
       </div>` : ""}
       <div class="certificate-actions">
         ${!teilrunde ? `<button type="button" class="quiz-link quiz-button" data-leiste="haupt" onclick="renderCertificate('${escapeHtml(currentTopicId)}', ${quizScore}, ${total}${streng ? ", " + quizKorrigiert : ""})">Urkunde ansehen</button>` : ""}
-        <button type="button" class="${teilrunde ? "quiz-link quiz-button" : "nav-button secondary"}"${teilrunde ? ' data-leiste="haupt"' : ""} onclick="startQuiz('${escapeHtml(currentTopicId)}')">Quiz wiederholen</button>
+        <button type="button" class="bedien-pikto ${teilrunde ? "quiz-link quiz-button" : "nav-button secondary"}"${teilrunde ? ' data-leiste="haupt"' : ""} onclick="startQuiz('${escapeHtml(currentTopicId)}')">${pictoHtml("wiederholen")}<span>Quiz wiederholen</span></button>
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(currentTopicId)}')">← Zum Thema</button>
       </div>
     </article>
@@ -10789,7 +13130,7 @@ function startBigQuiz() {
           ${vorschlag
             ? `<button type="button" class="primary-action" onclick="renderTopicChoice('${escapeHtml(vorschlag.id)}')">Thema starten: ${escapeHtml(vorschlag.title)}</button>`
             : ""}
-          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zu den Themen</button>
+          <button type="button" class="bedien-pikto quiz-link quiz-button" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
         </div>
       </article>
     `;
@@ -10829,7 +13170,7 @@ function startRepeatQuiz() {
         <p>Du hast noch kein Thema fertig gemacht.</p>
         <p>Mach zuerst ein Thema fertig. Dann kannst du hier üben.</p>
         <div class="certificate-actions">
-          <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Zu den Themen</button>
+          <button type="button" class="bedien-pikto quiz-link quiz-button" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
         </div>
       </article>
     `;
@@ -10982,8 +13323,8 @@ function renderBigQuizResult(wieder) {
       ${pauseTeilHinweisHtml("wiederholen")}
       <p>Wichtig ist: Du hast geübt.</p>
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" data-leiste="haupt" onclick="${bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()"}">Noch einmal üben</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
+        <button type="button" class="bedien-pikto quiz-link quiz-button" data-leiste="haupt" onclick="${bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()"}">${pictoHtml("wiederholen")}<span>Noch einmal üben</span></button>
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
       </div>
     </article>
   `;
@@ -11085,7 +13426,7 @@ function startTrainingInbox() {
         </div>
         <div class="certificate-actions">
           <button type="button" class="quiz-link quiz-button" onclick="renderMenu()">Erstes Thema starten</button>
-          <button type="button" class="nav-button secondary" onclick="renderScenarioChooser()">Zum Übungs-Handy</button>
+          <button type="button" class="bedien-pikto nav-button secondary" onclick="renderScenarioChooser()">${pictoHtml("exercise")}<span>Zum Übungs-Handy</span></button>
         </div>
       ` : `
         <p>Hier kommt alles durcheinander an. So wie im echten Leben.</p>
@@ -11097,7 +13438,7 @@ function startTrainingInbox() {
         ${buildRememberBox("Wichtig", "Alle Nachrichten hier sind erfunden. Es gibt keine Zeit-Grenze. Fehler sind erlaubt. Du kannst jederzeit aufhören.")}
         <div class="certificate-actions">
           <button type="button" class="quiz-link quiz-button" onclick="beginTraining()">${anzahl} Nachrichten prüfen</button>
-          <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
+          <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
         </div>
       `}
     </article>
@@ -11294,9 +13635,9 @@ function renderTrainingResult(wieder) {
       ${waechst}
       ${buildRememberBox("Wichtig", "Du kannst selbst handeln. Du willst Unterstützung? Dann kannst du passende Hilfe holen.")}
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="beginTraining()">Noch einmal üben</button>
+        <button type="button" class="bedien-pikto quiz-link quiz-button" onclick="beginTraining()">${pictoHtml("wiederholen")}<span>Noch einmal üben</span></button>
         <button type="button" class="nav-button secondary" onclick="renderRegelKarte()">Deine Karte ansehen</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
       </div>
     </article>
   `;
@@ -11564,7 +13905,7 @@ function renderScenarioChooser() {
       <h3>Wähle ein Thema</h3>
       <div class="action-grid">${karten}</div>
       <div class="certificate-actions">
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
       </div>
     </article>
   `;
@@ -11864,10 +14205,10 @@ function renderScenarioResult(wieder) {
         ${(naechste && bestanden)
           ? `<button type="button" class="quiz-link quiz-button" onclick="beginScenario(${naechste})">${escapeHtml(stufenName(naechste))} starten</button>`
           : ""}
-        <button type="button" class="${(naechste && bestanden) ? "nav-button secondary" : "quiz-link quiz-button"}" onclick="beginScenario(${scenarioStufe})">${mehrereRunden ? escapeHtml(stufenName(scenarioStufe)) + " noch einmal" : "Noch einmal üben"}</button>
+        <button type="button" class="bedien-pikto ${(naechste && bestanden) ? "nav-button secondary" : "quiz-link quiz-button"}" onclick="beginScenario(${scenarioStufe})">${pictoHtml("wiederholen")}<span>${mehrereRunden ? escapeHtml(stufenName(scenarioStufe)) + " noch einmal" : "Noch einmal üben"}</span></button>
         ${mehrereRunden ? `<button type="button" class="nav-button secondary" onclick="startScenario('${escapeHtml(topic.id)}')">Andere Runde wählen</button>` : ""}
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">← Zum Thema</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
       </div>
     </article>
   `;
@@ -11930,10 +14271,10 @@ function renderCertificate(topicId, score, total, korrigiert) {
       </div>
 
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="window.print()">Urkunde drucken</button>
+        <button type="button" class="bedien-pikto quiz-link quiz-button" onclick="window.print()">${pictoHtml("drucken")}<span>Urkunde drucken</span></button>
         ${(() => { const next = getNextTopicSuggestion(); return next && next.id !== topic.id ? `<button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(next.id)}')">Nächstes Thema: ${escapeHtml(next.title)}</button>` : ""; })()}
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">← Zum Thema</button>
-        <button type="button" class="nav-button secondary" onclick="renderMenu()">Zu den Themen</button>
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
       </div>
     </article>
   `;
@@ -11996,7 +14337,7 @@ function renderMemoryCard(topicId) {
       ${merkKarteSchlussHtml(topic)}
 
       <div class="certificate-actions">
-        <button type="button" class="quiz-link quiz-button" onclick="window.print()">Merk-Karte drucken</button>
+        <button type="button" class="bedien-pikto quiz-link quiz-button" onclick="window.print()">${pictoHtml("drucken")}<span>Merk-Karte drucken</span></button>
         <button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(topic.id)}')">← Zum Thema</button>
       </div>
     </article>
@@ -12096,7 +14437,7 @@ function renderAllMemoryCards() {
     <section class="all-memory-page">
       <div class="all-memory-toolbar no-print">
         <button type="button" class="plain-back-button" onclick="renderMenu()">← Zu den Themen</button>
-        <button type="button" class="quiz-link quiz-button" onclick="window.print()">Alle drucken</button>
+        <button type="button" class="bedien-pikto quiz-link quiz-button" onclick="window.print()">${pictoHtml("drucken")}<span>Alle drucken</span></button>
       </div>
       <h2 class="all-memory-heading no-print">Alle Merk-Karten</h2>
       <p class="all-memory-intro no-print">Alle 12 Themen auf einen Blick. Du kannst diese Seite ausdrucken.</p>
@@ -12648,9 +14989,9 @@ function renderRegelKarte() {
 
   const offen = z.gesamt - z.gefunden;
   const einleitung = z.gefunden === 0
-    ? "Hier sammelst du deine Regeln. Du bekommst sie nicht geschenkt. Du findest sie beim Üben."
+    ? "Beim Üben sammelst du deine eigenen Regeln."
     : (offen > 0
-        ? `Dir fehlen noch ${offen} ${offen === 1 ? "Regel" : "Regeln"}.`
+        ? `Du hast ${z.gefunden} ${z.gefunden === 1 ? "Regel" : "Regeln"} gesammelt.`
         : (z.sitzt < z.gesamt
             ? (zweitesMoeglich ? "Du hast alle Regeln gefunden. Jetzt erkenne sie in einem zweiten Thema wieder." : "Du hast alle Regeln gefunden.")
             : "Alle Regeln hast du in 2 Themen erkannt. Das ist deine Karte."));

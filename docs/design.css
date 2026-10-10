@@ -847,11 +847,21 @@ body.lesson-view .regel-treffer-stand { display: none; }
 body.lesson-view:not(.leiste-messen) .in-leiste { display: none !important; }
 /* Rückmeldung, Quiz und Neue Situation blenden die Leiste sonst aus
    (.is-hidden). Mit einem gespiegelten Knopf ist sie da – dann aber ohne
-   die beiden festen Knöpfe „Zurück“ und „Weiter“ der Lernseite. */
+   den festen Weiter-Knopf. Zurück bleibt erreichbar, wenn es ein Ziel hat. */
 .nav.is-hidden.leiste-aktiv { display: flex !important; }
-.nav.is-hidden.leiste-aktiv > #backButton,
-.nav.leiste-aktiv > #nextButton,
-.nav.leiste-neben > #backButton { display: none; }
+.glossar-panel {
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+}
+.glossar-close {
+  position: static;
+  display: block;
+  margin-left: auto;
+  margin-bottom: 12px;
+}
+.nav.is-hidden.leiste-aktiv > #backButton:disabled,
+.nav.leiste-aktiv > #nextButton { display: none; }
 /* Lange Beschriftung („Frage nochmal versuchen“) darf umbrechen. */
 .nav .leiste-knopf { white-space: normal; line-height: 1.2; padding-block: 8px; }
 /* Passen zwei Knöpfe nicht nebeneinander (große Schrift, schmales Handy),
@@ -932,9 +942,18 @@ img[src^="assets/pictograms/"] {
 .symbol-help-list strong { display: inline-flex; align-items: center; }
 .reading-button .rb-ico-stop { display: none; }
 .reading-button.is-active .rb-ico-stop { display: block; }
-/* Beim Vorlesen bleibt das gemeinsame Stopp-Piktogramm sichtbar;
-   es ist kein Bewertungs-Haken und keine neue Animation. */
-.reading-button .rb-eq { display: none; }
+/* Der Stopp-Begriff bleibt das gemeinsame Piktogramm. Die Balken neben
+   „Liest vor“ zeigen zusätzlich den laufenden Zustand (Bericht 46). */
+.reading-button .rb-caption { display: inline-flex; align-items: center; gap: 0.3rem; }
+.reading-button .rb-eq { width: 0.9rem; height: 0.75rem; gap: 0.125rem; }
+.reading-button .rb-eq i { width: 0.125rem; height: 0.3rem; }
+.reading-button .rb-eq i:nth-child(2) { height: 0.65rem; }
+.reading-button .rb-eq i:nth-child(3) { height: 0.4rem; }
+.reading-button .rb-eq i:nth-child(4) { height: 0.75rem; }
+@media (prefers-reduced-motion: reduce) {
+  .reading-button.is-active .rb-eq i { animation: none; }
+}
+html.no-motion .reading-button.is-active .rb-eq i { animation: none; }
 
 body.lesson-view .lesson-card .lesson-heading {
   display: flex;
@@ -1060,7 +1079,7 @@ body.lesson-view .nav {
   box-shadow: none;
   bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
 }
-body.lesson-view .nav > #backButton,
+body.lesson-view .nav > #backButton:disabled,
 body.lesson-view .nav > #nextButton:disabled { display: none; }
 body.lesson-view .nav .nav-button {
   min-height: 3.5rem;
@@ -1569,6 +1588,33 @@ body .reading-button > .app-pictogram {
 .reading-button .rb-coin .app-pictogram { width: 100%; height: 100%; margin: 0; }
 .einstieg-optionen { grid-template-columns: minmax(0, 1fr); }
 .einstieg-option { min-width: 0; }
+.topic-group-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-block: 1rem;
+}
+.topic-group-link {
+  min-height: 3.5rem;
+  max-width: 100%;
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  color: var(--accent-dark);
+  font: inherit;
+  line-height: 1.4;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.topic-group-link:hover { border-color: var(--accent); }
+.topic-group-link:focus-visible,
+.topic-grid-title[tabindex="-1"]:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.topic-grid-title[tabindex="-1"] { scroll-margin-top: 1rem; }
 body:has(.einstieg-start) .orient-text,
 body:has(.einstieg-start) .tab-item { min-width: 0; overflow-wrap: anywhere; }
 
@@ -1585,6 +1631,38 @@ body:has(.einstieg-start) .tab-item { min-width: 0; overflow-wrap: anywhere; }
 .intro-start-button > .app-pictogram { flex: 0 0 2rem; }
 .topic-start-button > span,
 .intro-start-button:has(> .app-pictogram) > span { min-width: 0; overflow-wrap: anywhere; }
+
+/* Konkrete Bedienangebote: Zeichen und vollständiger Text bleiben eine Zeile
+   mit gemeinsamem Umbruch, auch unten in der gespiegelten Lernleiste. */
+button.bedien-pikto,
+summary.bedien-pikto,
+li.bedien-pikto,
+p.bedien-pikto,
+h3.bedien-pikto {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+}
+.bedien-pikto > .app-pictogram { flex: 0 0 1.75rem; width: 1.75rem; height: 1.75rem; }
+.bedien-pikto > span { min-width: 0; overflow-wrap: anywhere; }
+.bedien-pikto[hidden] { display: none; }
+.certificate-actions > .nav-button.bedien-pikto { flex-basis: 9rem; }
+.topic-done-corner > .app-pictogram { width: 24px; height: 24px; }
+
+/* Listen mit Piktogramm müssen sich auch bei 200 % Schrift an die
+   schmale Lektionsbreite anpassen, statt ihre Mindestbreite zu erzwingen. */
+body.lesson-view .lesson-card .ls-bullet-list,
+body.lesson-view .lesson-card .ls-bullet-item {
+  min-width: 0;
+  max-width: 100%;
+}
+body.lesson-view .lesson-card .ls-bullet-item > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 
 /* Themenstart bei großer Schrift: Text statt Inhalt rechts abschneiden. */
 .topic-choice .support-help-text { min-width: 0; overflow-wrap: anywhere; }
@@ -1606,4 +1684,37 @@ body:has(.einstieg-start) .tab-item { min-width: 0; overflow-wrap: anywhere; }
   .ls-text-block p { hyphens: manual; -webkit-hyphens: manual; overflow-wrap: anywhere; }
   .ls-text-block:has(> .ls-text-row > .ls-sentence-pikto) > p,
   .ls-text-block:has(> .ls-text-row > .ls-sentence-pikto) > .ls-text-row:not(:has(> .ls-sentence-pikto)) > p { padding-left: 0; }
+}
+
+/* D25: Auch bei doppelter Schrift bleiben Themen und Sprache in der
+   Bildschirmbreite. Der leere Platz der gespiegelten Abschlussaktionen
+   entfällt; beim Messen bleiben deren Quellen sichtbar. */
+.start-page .utility-bar { max-width: 100%; flex-wrap: wrap; }
+.start-page .utility-chip,
+.start-page .utility-chip > span,
+.start-page .topic-card,
+.start-page .topic-title,
+.start-page .topic-desc { min-width: 0; overflow-wrap: anywhere; }
+.start-page .utility-chip { white-space: normal; }
+@media (max-width: 859px) {
+  .start-page .topic-grid { grid-template-columns: minmax(0, 1fr); }
+}
+body.lesson-view:not(.leiste-messen) .completion-actions:not(:has(> :not(.in-leiste))) { display: none; }
+.completion-page .later-details { margin-top: .5rem; }
+.frage-aufforderung,
+.lern-ort-schritt { color: var(--ink); }
+
+/* Vorlesen aktiv (10.10.2026): Kompakte Werkzeugleisten hatten den
+   Farbwechsel überschrieben. Gemeinsamer Zustand auf Seite und Dialog;
+   die helle Unterlage des blauen Stopp-Piktogramms bleibt erhalten. */
+body .reading-button-normal.is-active,
+body .start-tools .reading-button-normal.is-active,
+body .tool-row .reading-button-normal.is-active,
+body.lesson-view .lern-leiste .reading-button-normal.is-active,
+.hilfe-dialog .reading-button-normal.is-active,
+.lern-einstellungen .reading-button-normal.is-active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+  border-radius: var(--radius-s);
 }
