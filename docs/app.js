@@ -18,6 +18,8 @@
 
 let currentTopicId = null;
 let currentMode = "full";
+/* Nur die eigene Einstiegsauswahl dieser Sitzung, keine neue Speicherung. */
+let einstiegAuswahl = null;
 /* Einmal-Schalter: Die nächste Seite wird ohne automatisches Vorlesen
    aufgebaut (siehe setTopicAmount). */
 let stillerNeuaufbau = false;
@@ -539,7 +541,7 @@ function hideHeaderSign() {
    (Reihenfolge egal), damit die Deklarations-Reihenfolge der KEY-Konstanten
    im Modul keine Rolle spielt. Global bleiben nur profile-liste,
    profil-aktiv und geraet-geteilt – sie stehen hier NICHT drin. */
-const PROFILE_BASE_KEYS = ["language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf"];
+const PROFILE_BASE_KEYS = ["language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf", "lesehilfen"];
 
 /* Schlüssel für das aktive Profil. Ohne aktives Profil: alter Schlüssel
    (Rückfall – so bricht nie etwas). */
@@ -615,6 +617,7 @@ function loadActiveProfileSettings() {
   fontSizeStep = 0;
   loadFontSize();       /* liest + wendet Schriftgröße an */
   loadReadTempo();      /* Vorlese-Tempo (normal / langsam) */
+  loadLesehilfen();     /* Persönliche Anzeige, kein Lernstand. */
   loadAutoRead();       /* Automatisches Vorlesen (Wahl, Standard: aus) */
   loadMotion();         /* liest + wendet Bewegungs-Einstellung an */
   loadLanguageLevel();  /* setzt languageLevel + languageChosen, falls gemerkt */
@@ -1151,6 +1154,7 @@ function showGlossar(termKey, anzeige) {
     siehe.textContent = weiter.frage;
   }
   glossarOverlay.classList.remove("is-hidden");
+  lesehilfenAnwenden(glossarOverlay);
   glossarOverlay.querySelector(".glossar-close").focus();
 }
 
@@ -1201,7 +1205,7 @@ function applyGlossar() {
   const WA = "(?![\\w\\u00C0-\\u017E-])";
   const pattern = new RegExp(WB + "(" + sorted.map(escRe).join("|") + ")" + WA, "gi");
 
-  const SKIP = new Set(["H1","H2","H3","H4","BUTTON","A","SCRIPT","STYLE","LABEL","NOSCRIPT"]);
+  const SKIP = new Set(["H1","H2","H3","H4","BUTTON","A","SUMMARY","SCRIPT","STYLE","LABEL","NOSCRIPT"]);
 
   const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
     acceptNode(node) {
@@ -1702,6 +1706,7 @@ function focusContent() {
   const reduceMotion = !motionEnabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   applyGlossar();
+  lesehilfenAnwenden(content);
 }
 
 /* ============================================================
@@ -1888,6 +1893,7 @@ let _readQueue = [];
 let _readIndex = 0;
 let _readRate = 0.85;
 let _readGen = 0;   /* macht alte Vorlese-Abläufe ungültig */
+let _readShort = false;
 
 function clearReadingHighlight() {
   document.querySelectorAll(".reading-highlight").forEach(e => e.classList.remove("reading-highlight"));
@@ -1900,30 +1906,13 @@ function readShortText(text, el) {
   _readGen++;
   const gen = _readGen;
   window.speechSynthesis.cancel();
-  _readQueue = [];
+  _readQueue = leseQueueEintraege(el, cleaned);
   _readIndex = 0;
   clearReadingHighlight();
   setReadingActive(null);
-  if (el) el.classList.add("reading-highlight");
-  const utterance = new SpeechSynthesisUtterance(cleaned);
-  utterance.lang = "de-DE";
-  if (!stimmeSetzen(utterance)) return;
-  utterance.rate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.82;
-  utterance.pitch = 1;
-  utterance.onstart = () => {
-    if (gen !== _readGen) return;
-    setReadingActive(utterance.rate < 0.8 ? "slow" : "normal");
-    updateReadingStatus(utterance.rate < 0.8 ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
-  };
-  const fertig = (status) => {
-    if (gen !== _readGen) return;
-    clearReadingHighlight();
-    setReadingActive(null);
-    updateReadingStatus(status);
-  };
-  utterance.onend = () => fertig("Vorlesen beendet.");
-  utterance.onerror = () => fertig("Vorlesen gestoppt.");
-  window.speechSynthesis.speak(utterance);
+  _readShort = true;
+  _readRate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.82;
+  speakNextSentence(gen);
 }
 
 /* Hör-Modus: Rückmeldungen, die nur IN die Seite eingefügt werden (kein
@@ -1933,6 +1922,7 @@ function readShortText(text, el) {
    wie die Handlungsansage auf ganzen Seiten. */
 function sprichEingefuegteRueckmeldung(kasten) {
   if (!kasten || typeof autoRead === "undefined" || !autoRead || !supportsSpeech()) return;
+  lesehilfenAnwenden(kasten);
   const kopie = kasten.cloneNode(true);
   kopie.querySelectorAll("button, [role='button'], .sr-only, [aria-hidden='true'], [hidden]").forEach(e => e.remove());
   /* Absatz-Grenzen hörbar machen: Überschrift und Satz liefen sonst
@@ -1951,12 +1941,30 @@ function sprichEingefuegteRueckmeldung(kasten) {
   text = cleanSpeechText(text);
   const knopf = kasten.querySelector("button");
   if (knopf && cleanSpeechText(knopf.textContent)) text += ` Tippe auf: ${cleanSpeechText(knopf.textContent)}.`;
-  readShortText(text, kasten);
+  /* Sichtbare Absätze erhalten eigene Satzmarkierungen. Die zusätzliche
+     Knopfansage hat keinen Textbereich und bleibt ohne Markierung. */
+  const abschnitte = Array.from(kasten.querySelectorAll("h2, h3, h4, p, li"))
+    .filter(el => !el.closest("button, .sr-only, [aria-hidden='true'], [hidden]")
+      && el.getClientRects().length && !el.querySelector("p, li"));
+  if (!abschnitte.length) return readShortText(text, kasten);
+  _readGen++;
+  const gen = _readGen;
+  window.speechSynthesis.cancel();
+  clearReadingHighlight();
+  _readQueue = abschnitte.flatMap(el => leseQueueEintraege(el, el.textContent));
+  if (knopf && cleanSpeechText(knopf.textContent)) _readQueue.push({ pseudoText: `Tippe auf: ${cleanSpeechText(knopf.textContent)}.` });
+  _readIndex = 0;
+  _readShort = true;
+  _readRate = readTempo === "langsam" ? 0.5 : 0.82;
+  speakNextSentence(gen);
 }
 
 function stopReading() {
   if (!supportsSpeech()) return;
   _readGen++;                 /* laufenden Ablauf ungültig machen */
+  _readQueue = [];
+  _readIndex = 0;
+  _readShort = false;
   window.speechSynthesis.cancel();
   clearReadingHighlight();
   setReadingActive(null);
@@ -2010,7 +2018,7 @@ const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
    waeren die Angebote dahinter fuer eine hoerende Nutzung unsichtbar,
    genau wie es `.alltag-help > summary` und `.support-help-button`
    vorher schon einmal waren. */
-const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary, .later-details > summary, .path-details > summary, .alltag-variant .alltag-v-way, .einstieg-option, .topic-group-link";
+const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary, .later-details > summary, .path-details > summary, .alltag-variant .alltag-v-way, .einstieg-option, .topic-group-link, .hilfe-anliegen > summary, .feedback-selected > summary, .einstieg-alternativen > summary, .einstieg-alternativen .intro-quickstart-link, .hilfe-werkzeuge .setting-big-button";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -2037,6 +2045,9 @@ function readCurrentPage(rate) {
   if (!stimmeSetzen({})) return;
   frageAufforderungAktualisieren();
   _readGen++;
+  _readQueue = [];
+  _readIndex = 0;
+  _readShort = false;
   const gen = _readGen;
   window.speechSynthesis.cancel();
   clearReadingHighlight();
@@ -2125,7 +2136,8 @@ function readCurrentPage(rate) {
      wird aus dem Knopf gebaut, der wirklich dasteht. */
   const hilfeKnopf = dialogRoot ? null : document.body.classList.contains("lesson-view")
     ? content.querySelector('.lern-leiste button[onclick="lernMehrOeffnen(this)"]')
-    : root ? (root.querySelector(".task-help-button") || (root.classList.contains("alltag-variant") ? document.querySelector(".alltag-v-help-button") : null)) : null;
+    : (root ? (root.querySelector(".task-help-button") || (root.classList.contains("alltag-variant") ? document.querySelector(".alltag-v-help-button") : null)) : null)
+      || content.querySelector(".seiten-hilfe, .start-help");
   const hilfeSatz = hilfeKnopf
     ? " Für Hilfe tippe auf: " + cleanSpeechText(hilfeKnopf.textContent).replace(/\.$/, "") + "."
     : "";
@@ -2170,6 +2182,9 @@ function readCurrentPage(rate) {
       els.push({ pseudoText: ansage });
     }
   }
+  if (!dialogRoot && hilfeSatz && !hatOptionen && !rueckmeldeKnoepfe.length) {
+    els.push({ pseudoText: hilfeSatz.trim() });
+  }
   /* Einmaliges Angebot, jede Seite von selbst vorzulesen (Gesamtprüfung
      25.09.2026, Z5). Es wird mitgesprochen – wer nicht liest, könnte den
      Kasten sonst nicht nutzen. Vorher kam die Frage erst nach dem ersten
@@ -2182,8 +2197,15 @@ function readCurrentPage(rate) {
     updateReadingStatus("Es gibt keinen Text zum Vorlesen.");
     return;
   }
-  _readQueue = els;
+  _readQueue = els.flatMap(el => {
+    if (el.pseudoText) return [el];
+    const prefix = el.getAttribute("data-read-prefix") ? el.getAttribute("data-read-prefix") + " " : "";
+    const text = el.matches(KARTEN_SELEKTOR) || el.matches(AKTION_SELEKTOR) || el.querySelector(".answer-num, .card-read-button")
+      ? kartenText(el) : el.textContent;
+    return leseQueueEintraege(el, text, prefix);
+  });
   _readIndex = 0;
+  _readShort = false;
   _readRate = rate || speechRate;
   speakNextSentence(gen);
 }
@@ -2194,6 +2216,7 @@ function readCurrentPage(rate) {
    Jede Zeile der Karte wird deshalb ein eigener Satz. */
 function kartenText(el) {
   const kopie = el.cloneNode(true);
+  kopie.querySelectorAll(".lese-satz, strong.lese-schluesselwort").forEach(n => n.replaceWith(...n.childNodes));
   kopie.querySelectorAll(".answer-num, .card-read-button").forEach(n => n.remove());
   const teile = [];
   kopie.querySelectorAll("*").forEach(n => {
@@ -2212,15 +2235,20 @@ function speakNextSentence(gen) {
   if (gen !== _readGen) return;
   clearReadingHighlight();
   if (_readIndex >= _readQueue.length) {
+    const warKurz = _readShort;
+    if (_readShort) { _readQueue = []; _readIndex = 0; _readShort = false; }
     setReadingActive(null);
-    updateReadingStatus("Vorlesen fertig.");
+    updateReadingStatus(warKurz ? "Vorlesen beendet." : "Vorlesen fertig.");
     return;
   }
-  const el = _readQueue[_readIndex];
+  const entry = _readQueue[_readIndex];
+  const el = entry.leseElement || entry;
   const istPseudo = !!(el && el.pseudoText);
   const prefix = (!istPseudo && el.getAttribute && el.getAttribute("data-read-prefix")) ? el.getAttribute("data-read-prefix") + " " : "";
   let roherText;
-  if (istPseudo) {
+  if (entry.leseText !== undefined) {
+    roherText = entry.leseText;
+  } else if (istPseudo) {
     roherText = el.pseudoText;
   } else if (el.matches && (el.matches(KARTEN_SELEKTOR) || el.matches(AKTION_SELEKTOR))) {
     roherText = prefix + kartenText(el);
@@ -2234,11 +2262,11 @@ function speakNextSentence(gen) {
   const text = cleanSpeechText(roherText);
   if (!text) { _readIndex++; return speakNextSentence(gen); }
 
-  if (!istPseudo) el.classList.add("reading-highlight");
+  if (!istPseudo) leseMarkieren(el);
   /* Den aktuellen Satz sichtbar halten – aber nur scrollen, wenn er aus dem
      Bild läuft (kein ständiges Springen). */
   if (!istPseudo) {
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = !motionEnabled || (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     const r = el.getBoundingClientRect();
     if (r.top < 90 || r.bottom > window.innerHeight - 90) {
       try { el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); } catch (e) { /* nichts */ }
@@ -2258,7 +2286,11 @@ function speakNextSentence(gen) {
     updateReadingStatus(slow ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
   };
   u.onend = () => { if (gen !== _readGen) return; _readIndex++; speakNextSentence(gen); };
-  u.onerror = () => { if (gen !== _readGen) return; _readIndex++; speakNextSentence(gen); };
+  u.onerror = () => {
+    if (gen !== _readGen) return;
+    if (_readShort) { stopReading(); return; }
+    _readIndex++; speakNextSentence(gen);
+  };
   window.speechSynthesis.speak(u);
 }
 
@@ -2275,8 +2307,9 @@ function readSectionFrom(button) {
   const els = Array.from(section.querySelectorAll("h3, h4, p, li")).filter(el =>
     !el.closest("button") && cleanSpeechText(el.textContent).length > 0);
   if (!els.length) return;
-  _readQueue = els;
+  _readQueue = els.flatMap(el => leseQueueEintraege(el, el.textContent));
   _readIndex = 0;
+  _readShort = false;
   _readRate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.85;
   speakNextSentence(gen);
 }
@@ -5198,7 +5231,9 @@ function satzPiktoBild(item, gezeigt) {
 }
 
 function buildToolRow() {
-  return `<div class="tool-row">${buildReadingToolbar()}${buildUtilityBar()}</div>`;
+  return `<div class="tool-row">${buildReadingToolbar()}
+    <button type="button" class="utility-chip bedien-pikto seiten-hilfe" aria-haspopup="dialog" onclick="lernMehrOeffnen(this)">${pictoHtml("help")}<span>Hilfe</span></button>
+  </div>`;
 }
 
 /* ============================================================
@@ -5219,7 +5254,13 @@ let uebungsReihenfolge = null;
 const RUHIG_TEXT = {
   starten: "Lernen starten", themen: "Themen ansehen",
   lernen: "Lernen", beispiele: "Beispiele aus dem Alltag",
-  mehrHilfe: "Mehr Hilfe zeigen", einstellungen: "Einstellungen"
+  mehrHilfe: "Mehr Hilfe zeigen", einstellungen: "Einstellungen",
+  textLesen: "Text lesen", beispieleAnsehen: "Beispiele ansehen",
+  planBezug: "In deinem Plan:", antwortAnsehen: "Deine Antwort ansehen",
+  nochmal: "Nochmal versuchen",
+  hilfeBedienen: "Die App bedienen", hilfeTexte: "Texte verstehen",
+  hilfePerson: "Eine Person fragen", hilfeInternet: "Hilfe bei Problemen im Internet",
+  hilfeMenue: "Das Menü erklären", anderesThema: "Anderes Thema wählen"
 };
 /* D9: Wohin „Beenden“ führt, wenn die Seite nicht zu einem Thema gehört
    (Wiederholen, großes Quiz → Mein Lernweg). null = Themen-Seite. */
@@ -5333,7 +5374,7 @@ function lernMehrOeffnen(ausloeser) {
     ${lernDialogVorlesen()}
     <div class="lern-hilfe-inhalt"></div>
     ${panel ? "" : `<p>Du kannst den Text vorlesen lassen. Oder noch einmal lesen. Du kannst auch eine Person fragen.</p>
-      <details class="lern-hilfe-mehr"><summary>${RUHIG_TEXT.mehrHilfe}</summary>${extra}</details>`}
+      <details class="lern-hilfe-mehr"><summary>${RUHIG_TEXT.mehrHilfe}</summary>${buildSupportHelpContent()}${extra}</details>`}
     <button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="einstellungen">${pictoHtml("einstellungen")}<span>${RUHIG_TEXT.einstellungen}</span></button>
     <button type="button" class="lern-mehr-knopf lern-mehr-zu" data-aktion="zu">Schließen</button>
   </div>`;
@@ -5399,6 +5440,7 @@ function lernEinstellungenOeffnen(ausloeser) {
     ${lernDialogVorlesen()}
     <button type="button" class="lern-mehr-knopf" data-aktion="sprache">Sprache: ${escapeHtml(LANGUAGE_LABEL[languageLevel])}</button>
     <div class="lern-mehr-reihe"><button type="button" class="lern-mehr-knopf" data-aktion="kleiner">A– kleiner</button><button type="button" class="lern-mehr-knopf" data-aktion="groesser">A+ größer</button></div>
+    ${buildLesehilfenSettings(true)}
     <button type="button" class="lern-mehr-knopf" data-aktion="sofort" aria-pressed="${sofortWaehlen ? "true" : "false"}">Antwort sofort wählen: ${sofortWaehlen ? "an" : "aus"}</button>
     <button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="zuzweit" aria-pressed="${isCompanionMode() ? "true" : "false"}">${pictoHtml("people")}<span>Wir lernen zu zweit: ${isCompanionMode() ? "an" : "aus"}</span></button>
     <button type="button" class="lern-mehr-knopf lern-mehr-zu" data-aktion="zu">Schließen</button>
@@ -6543,6 +6585,7 @@ function deleteProfile(id) {
   }
   if (profiles.length === 0) {
     /* Keine Person mehr: neues Zeichen bauen. */
+    loadLesehilfen();
     signDraft = { icon: null, color: null, number: null };
     return renderBuildSign(0, null);
   }
@@ -6852,6 +6895,7 @@ function pauseStelleMerken(daten) {
 }
 
 function pauseBewertungLoeschen() {
+  einstiegAuswahl = null;
   pauseStelle = null; pauseKnoten = null; pauseSitzung = null; pauseTeilrunde = null;
   kernUebungenErkannt = new Set();
   topics.forEach(t => { delete t._zusatzWeg; delete t._schlussZusatz; });
@@ -7286,6 +7330,25 @@ const EINSTIEG_RUECKFRAGE = [
   { id: "einkaufen", text: "Beim Einkaufen im Internet", topic: "einkaufen" },
   { id: "offen", text: "Ich weiß es nicht." }
 ];
+const EINSTIEG_HINWEISE = {
+  nachrichten: "Im Thema Betrug lernst du: Wie prüfe ich eine Nachricht? Was kann ich tun?",
+  passwort: "Im Thema Datenschutz geht es auch um Passwörter. Du lernst, deine Daten zu schützen.",
+  teilen: "Im Thema Datenschutz lernst du: Welche Daten möchte ich teilen? Was behalte ich für mich?",
+  einkaufen: "Hier lernst du, beim Einkaufen im Internet auf wichtige Dinge zu achten.",
+  offen: "Du musst noch kein Thema wissen. Du kannst mit Datenschutz anfangen. Oder alle Themen ansehen."
+};
+function buildEinstiegHinweis(topic, ersteFrage = false) {
+  const option = EINSTIEG_OPTIONEN.find(o => o.id === einstiegAuswahl)
+    || EINSTIEG_RUECKFRAGE.find(o => o.id === einstiegAuswahl);
+  if (!option || option.topic !== topic.id) return "";
+  return `<div class="einstieg-lern-hinweis">
+    ${ersteFrage ? `<p class="einstieg-gewaehlt">${escapeHtml(option.text)}</p>
+    <details class="einstieg-alternativen"><summary>${RUHIG_TEXT.anderesThema}</summary>
+      <button type="button" class="intro-quickstart-link" onclick="renderEinstiegAuswahl()">Zur Auswahl</button>
+      <button type="button" class="bedien-pikto intro-quickstart-link" onclick="renderMenu()">${pictoHtml("themen")}<span>Zeig mir alle Themen</span></button>
+    </details>` : `<p>${escapeHtml(EINSTIEG_HINWEISE[option.id])}</p>`}
+  </div>`;
+}
 
 function buildEinstiegTools() {
   return `<div class="start-tools">${buildReadingToolbar()}
@@ -7301,6 +7364,7 @@ function buildEinstiegOptionen(optionen) {
 }
 function renderIntro() {
   stopReading();
+  einstiegAuswahl = null;
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -7336,6 +7400,7 @@ function renderIntro() {
 /* Die bisherigen Situationsantworten bleiben auf einer eigenen Folgeseite. */
 function renderEinstiegAuswahl() {
   stopReading(); currentTopicId = null;
+  einstiegAuswahl = null;
   setProgressVisible(false); setBottomNavVisible(false);
   setHeader("Dein Einstieg", "", "Start", "", 0);
   setActiveTab("start"); setOrientation("Du wählst, was zu dir passt.");
@@ -7353,6 +7418,12 @@ function renderEinstieg(id) {
   if (id === "auswahl") return renderEinstiegAuswahl();
   const option = EINSTIEG_OPTIONEN.find(o => o.id === id) || EINSTIEG_RUECKFRAGE.find(o => o.id === id);
   if (!option) return renderIntro();
+  /* Eine eindeutige Wahl beginnt das Thema. Der offene Einstieg bleibt
+     ein freiwilliger Vorschlag mit eigener Auswahlmöglichkeit. */
+  if (id !== "aufpassen" && id !== "offen") {
+    rememberRoute("einstieg:" + id);
+    return startTopicMode(option.topic, "short", id);
+  }
   stopReading();
   currentTopicId = null;
   setHeader("Dein Einstieg", "", "Start", "", 0);
@@ -7372,16 +7443,9 @@ function renderEinstieg(id) {
   } else {
     const topic = getTopicById(option.topic);
     if (!topic) return renderMenu();
-    const hinweise = {
-      nachrichten: "Im Thema Betrug lernst du: Wie prüfe ich eine Nachricht? Was kann ich tun?",
-      passwort: "Im Thema Datenschutz geht es auch um Passwörter. Du lernst, deine Daten zu schützen.",
-      teilen: "Im Thema Datenschutz lernst du: Welche Daten möchte ich teilen? Was behalte ich für mich?",
-      einkaufen: "Hier lernst du, beim Einkaufen im Internet auf wichtige Dinge zu achten.",
-      offen: "Du musst noch kein Thema wissen. Du kannst mit Datenschutz anfangen. Oder alle Themen ansehen."
-    };
     content.innerHTML = `${buildEinstiegTools()}<section class="einstieg-folge" data-readable="true">
       <p class="einstieg-gewaehlt">${escapeHtml(option.text)}</p>
-      <h2>${escapeHtml(topic.title)}</h2><p>${escapeHtml(hinweise[id])}</p>
+      <h2>${escapeHtml(topic.title)}</h2><p>${escapeHtml(EINSTIEG_HINWEISE[id])}</p>
       <button type="button" class="intro-start-button" onclick="startTopicMode('${topic.id}', 'short')">${pictoHtml("start")}<span>Lernen starten: ${escapeHtml(topic.title)}</span></button>
       <button type="button" class="intro-quickstart-link" onclick="renderEinstiegAuswahl()">Zur Auswahl</button>
       <button type="button" class="bedien-pikto intro-quickstart-link" onclick="renderMenu()">${pictoHtml("themen")}<span>Zeig mir alle Themen</span></button>
@@ -7488,6 +7552,7 @@ function themenGruppeAnzeigen(index) {
 
 function renderMenu() {
   stopReading();
+  einstiegAuswahl = null;
   currentTopicId = null;
   currentStep = 0;
   currentQuizIndex = 0;
@@ -8020,23 +8085,18 @@ function renderHelpPage() {
             demselben Satz wie im Thema „Hilfe bei Problemen“ (§2, H1). */""}
       <p class="hilfe-notfall bedien-pikto">${pictoHtml("anruf")}<span>Jemand ist in Gefahr? Dann ruf sofort 110 oder 112.</span></p>
       ${buildResumeLessonChip()}
-      ${roleFigure("hilfe")}
-
-      <div class="help-page-actions">
-        <button type="button" class="setting-big-button" onclick="showSymbolHelp()">Piktogramme erklären</button>
-        <button type="button" class="bedien-pikto setting-big-button" onclick="showPauseOverlay()">${pictoHtml("pause")}<span>Pause machen</span></button>
-      </div>
-
       <div class="support-help-grid">
-        <div class="support-help-card">
+        <details class="support-help-card hilfe-anliegen">
+          <summary>${RUHIG_TEXT.hilfeBedienen}</summary>
           <h3>Wenn du die Seite nicht bedienen kannst ${sectionReadChip("Wenn du die Seite nicht bedienen kannst")}</h3>
           <ul>
             <li>Zeige auf die Stelle.</li>
             <li>Sage: Ich brauche Hilfe bei der Bedienung.</li>
             <li>Bitte um langsames Erklären.</li>
           </ul>
-        </div>
-        <div class="support-help-card">
+        </details>
+        <details class="support-help-card hilfe-anliegen">
+          <summary>${RUHIG_TEXT.hilfeTexte}</summary>
           <h3>Wenn du etwas nicht verstehst ${sectionReadChip("Wenn du etwas nicht verstehst")}</h3>
           <ul>
             <li class="bedien-pikto">${pictoHtml("lesen")}<span>Lies den Text noch einmal.</span></li>
@@ -8044,8 +8104,9 @@ function renderHelpPage() {
             <li class="bedien-pikto">${pictoHtml("ask")}<span>Du kannst eine Person um Erklärung bitten.</span></li>
             <li>Sage: Bitte erkläre mir das einfacher.</li>
           </ul>
-        </div>
-        <div class="support-help-card">
+        </details>
+        <details class="support-help-card hilfe-anliegen">
+          <summary>${RUHIG_TEXT.hilfePerson}</summary>
           <h3>Wen kannst du fragen? ${sectionReadChip("Wen kannst du fragen?")}</h3>
           <ul>
             <li class="bedien-pikto">${pictoHtml("friend")}<span>Eine Person, der du vertraust.</span></li>
@@ -8053,16 +8114,26 @@ function renderHelpPage() {
             <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
             <li>Jemanden im Wohnbereich oder Dienst.</li>
           </ul>
-        </div>
-        <div class="support-help-card">
+        </details>
+        <details class="support-help-card hilfe-anliegen">
+          <summary>${RUHIG_TEXT.hilfeInternet}</summary>
           <h3>Wenn dir im Internet etwas Schlechtes passiert ${sectionReadChip("Wenn dir im Internet etwas Schlechtes passiert")}</h3>
           <ul>
             <li>Das ist nicht deine Schuld.</li>
             <li>Sprich mit einer Person, der du vertraust.</li>
             <li>Es gibt das Thema: Hilfe bei Problemen. Dort steht mehr.</li>
           </ul>
-        </div>
+        </details>
       </div>
+
+      <details class="hilfe-anliegen hilfe-werkzeuge">
+        <summary>Piktogramme und Pause</summary>
+        ${roleFigure("hilfe")}
+        <div class="help-page-actions">
+          <button type="button" class="setting-big-button" onclick="showSymbolHelp()">Piktogramme erklären</button>
+          <button type="button" class="bedien-pikto setting-big-button" onclick="showPauseOverlay()">${pictoHtml("pause")}<span>Pause machen</span></button>
+        </div>
+      </details>
 
       ${/* Übersicht (06.10.2026): Der allgemeine Hilfe-Hinweis steht nur
             oben. Die kurze Rückmeldung bleibt auf
@@ -8090,10 +8161,11 @@ function renderHelpPage() {
         </div>
       </details>
 
-      <div class="intro-offer" role="region" aria-label="Das Menü">
+      <details class="intro-offer hilfe-anliegen" aria-label="Das Menü">
+        <summary>${RUHIG_TEXT.hilfeMenue}</summary>
         <h3>Das Menü ${sectionReadChip("Das Menü")}</h3>
         ${buildMenuExplainList()}
-      </div>
+      </details>
     </section>
   `;
   focusContent();
@@ -8180,6 +8252,7 @@ function renderSettingsPage() {
           <button type="button" class="setting-big-button" aria-pressed="${readTempo === "normal" ? "true" : "false"}" onclick="setReadTempo('normal')">Normal</button>
           <button type="button" class="setting-big-button" aria-pressed="${readTempo === "langsam" ? "true" : "false"}" onclick="setReadTempo('langsam')">Langsam</button>
         </div>
+        ${buildLesehilfenSettings()}
       </section>
 
       <section class="settings-page-section" aria-label="Töne und Bewegung">
@@ -8579,8 +8652,6 @@ function renderTopicChoice(topicId) {
             Begleit-Panel, klar als Zusatz benannt. Nur wenn es einen gibt. */""}
       ${buildWeiterlernenBlock(topic)}
 
-      ${buildSupportBox()}
-
       <button type="button" class="plain-back-button plain-back-button--end" onclick="renderMenu()">← Zu den Themen</button>
     </section>
   `;
@@ -8604,7 +8675,17 @@ function buildSupportBox() {
       </button>
 
       <div id="supportHelpPanel" class="support-help-panel" hidden>
-        <h3>Du kannst Hilfe holen.</h3>
+        ${buildSupportHelpContent()}
+        <button type="button" class="bedien-pikto support-help-close" onclick="closeSupportHelp()">${pictoHtml("help")}<span>Hilfe ausblenden</span></button>
+      </div>
+    </div>
+  `;
+}
+
+/* Dieselben Bedienhilfen sind im gemeinsamen Hilfe-Dialog erreichbar.
+   Der Themenstart braucht dafür kein zweites, anders bedientes Panel. */
+function buildSupportHelpContent() {
+  return `<h3>Du kannst Hilfe holen.</h3>
         ${roleFigure("hilfe")}
         <div class="support-help-grid">
           <div class="support-help-card">
@@ -8634,9 +8715,6 @@ function buildSupportBox() {
           </div>
         </div>
         <p class="support-help-remember">Du wählst deine Hilfe.</p>
-        <button type="button" class="bedien-pikto support-help-close" onclick="closeSupportHelp()">${pictoHtml("help")}<span>Hilfe ausblenden</span></button>
-      </div>
-    </div>
   `;
 }
 
@@ -8671,6 +8749,13 @@ function closeSupportHelp() {
    andere. `feedbackWrong` darf deshalb jetzt auch eine Liste sein, mit einem
    Eintrag je Antwort-Position (null an der Stelle der richtigen Antwort).
    Ein einzelner Text funktioniert unverändert weiter. */
+function buildGewaehlteAntwort(text) {
+  return `<details class="feedback-selected">
+    <summary>${RUHIG_TEXT.antwortAnsehen}</summary>
+    <h3>Deine Antwort:</h3><p>${escapeHtml(text)}</p>
+  </details>`;
+}
+
 function falschFeedback(frage, index) {
   const f = frage && frage.feedbackWrong;
   if (Array.isArray(f)) {
@@ -8967,12 +9052,13 @@ function zieleFuerWeg(topic, mode) {
   return Array.isArray(topic.learningGoals) ? topic.learningGoals : [];
 }
 
-function startTopicMode(topicId, mode) {
+function startTopicMode(topicId, mode, einstiegId = null) {
   const topic = getTopicById(topicId);
   if (!topic) return renderMenu();
   rememberTopicAmount(topic.id, mode);
   currentTopicId = topic.id;
   currentMode = ["short", "extra", "full"].includes(mode) ? mode : "short";
+  einstiegAuswahl = einstiegId;
   currentStep = 0;
   neueSituationAuswahl = null;
   /* D8 (01.10.2026): „Mehr dazu“ kommt nach dem Kern (E6). Die Einstiegsfrage
@@ -9024,6 +9110,7 @@ function renderSelfAssessment() {
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(topic.icon || "start")}</span>
         <h2>${escapeHtml(topic.title)}</h2>
       </div>
+      ${buildEinstiegHinweis(topic, true)}
       <p class="sa-intro">Bevor wir starten:</p>
       ${vh && vh.situation ? `<p class="vorhersage-situation">${escapeHtml(vh.situation)}</p>` : ""}
       ${`${roleFigure("nachdenken")}${buildMeinung({ frage: sa.question, pikto: questionPikto(sa), optionen: optionButtons })}`}
@@ -9777,11 +9864,12 @@ function renderLesson(teil = "text") {
     ${buildWegweiser(`Du lernst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`, { index: currentStep, total: lessons.length })}
     ${moduleBadge}
     <article class="card lesson-card${beispielSeite ? " beispiel-seite" : ""} page-flip page-flip--${pageDirection}${isEinfachLesson ? " lesson-card--einfach" : ""}" style="${getTopicColorStyle(topic.id)}" data-readable="true">
-      ${hatBeispiele ? `<p class="lern-teil-label">${RUHIG_TEXT.lernen} · Teil ${beispielSeite ? 2 : 1} von 2</p>` : ""}
+      ${hatBeispiele ? `<p class="lern-teil-label">${beispielSeite ? RUHIG_TEXT.beispieleAnsehen : RUHIG_TEXT.textLesen}</p>` : ""}
       <div class="symbol-heading lesson-heading">
         ${(!beispielSeite && scene) || `<span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>`}
         <h2>${escapeHtml(beispielSeite ? RUHIG_TEXT.beispiele : (lesson.title || topic.title))}</h2>
       </div>
+      ${!beispielSeite && currentStep === 0 ? buildEinstiegHinweis(topic) : ""}
       ${beispielSeite ? "" : lesson.erinnern
         ? erinnernHtml((lesson.kettePlan ? buildKetteMerkListe(lesson.kettePlan) : "") + text + bullets, lesson.erinnernFrage, lesson.erinnernKnopf)
         : text}
@@ -9971,7 +10059,7 @@ function buildKetteBezug(topicId, schritte) {
     .filter(x => x.s);
   if (!liste.length) return "";
   return liste.map(x => `
-      <p class="kette-bezug"><span class="kette-bezug-nr" aria-hidden="true">${x.n}</span><span>${escapeHtml(planWort(lernwegText("planSchritt"), topicId).replace("{n}", x.n))} <strong>${escapeHtml(ketteTun(x.s))}</strong></span></p>`).join("");
+      <p class="kette-bezug"><span>${escapeHtml(planWort(RUHIG_TEXT.planBezug, topicId))} <strong>${escapeHtml(ketteTun(x.s))}</strong></span></p>`).join("");
 }
 
 /* Der ganze Plan als Liste zum Aufdecken in „Das merke ich mir“. */
@@ -10731,15 +10819,12 @@ function renderPracticeFeedbackPage(index, correctIndex, wieder) {
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : istAuch ? "feedback-auch" : "feedback-wrong"}" data-readable="true">
       <h2>${kopf}</h2>
 
-      <div class="feedback-selected">
-        <h3>Deine Antwort:</h3>
-        <p>${escapeHtml(selectedText)}</p>
-      </div>
-
       ${explanation ? `<div class="feedback-explanation">
         <h3>Erklärung:</h3>
         <p>${escapeHtml(explanation)}</p>
       </div>` : ""}
+
+      ${buildGewaehlteAntwort(selectedText)}
 
       ${/* Refaktorierung, die die remember-Prüfung in buildRememberBox kapselt:
             hier stand früher "isCorrect && practice.remember ? … : ''". Der Baustein
@@ -10764,7 +10849,7 @@ function renderPracticeFeedbackPage(index, correctIndex, wieder) {
           : `${/* D13, Bild 4: Beide Lernhandlungen stehen unten in der Leiste –
                    rechts der zweite Versuch als Hauptknopf, links „Weiter“
                    (leisteSpiegeln). Beispiel und „Lektion nochmal lesen“
-                   stehen in der zweiten Hilfe-Stufe. */""}<button type="button" class="bedien-pikto feedback-button secondary" data-leiste="haupt" onclick="renderPracticePage()">${pictoHtml("wiederholen")}<span>Frage nochmal versuchen</span></button>
+                   stehen in der zweiten Hilfe-Stufe. */""}<button type="button" class="bedien-pikto feedback-button secondary" data-leiste="haupt" onclick="renderPracticePage()">${pictoHtml("wiederholen")}<span>${RUHIG_TEXT.nochmal}</span></button>
              <button type="button" class="feedback-button quiet" data-leiste="neben" onclick="continueAfterPractice()">Weiter</button>
              <p class="feedback-spaeter">Diese Aufgabe kommt später noch einmal.</p>`
         }
@@ -12967,15 +13052,11 @@ function renderQuizFeedbackPage(index, wieder) {
     <article class="card feedback-page ${isCorrect ? "feedback-correct" : istAuch ? "feedback-auch" : "feedback-wrong"}" data-readable="true">
       <h2>${kopf}</h2>
 
-      <div class="feedback-selected">
-        <h3>Deine Antwort:</h3>
-        <p>${escapeHtml(selectedText)}</p>
-      </div>
-
       ${explanation ? `<div class="feedback-explanation">
         <h3>Erklärung:</h3>
         <p>${escapeHtml(explanation)}</p>
       </div>` : ""}
+      ${buildGewaehlteAntwort(selectedText)}
       ${!ok ? passendeAntwortHtml(q.answers[correctIndex]) : istAuch ? nochEinWegHtml(q.answers[correctIndex]) : ""}
       ${!ok ? roleFigure("ruhig") : ""}
 

@@ -686,6 +686,54 @@ body.lesson-view .lesson-card > * + * { margin-top: 18px; }
 }
 .feedback-explanation p { font-size: var(--fs-text); line-height: 1.6; }
 
+/* Bedienbarkeit (11.10.2026): Erklärung zuerst; die eigene Antwort ist
+   jederzeit aufklappbar. Hilfen werden nach Anliegen geöffnet. */
+.feedback-selected > summary,
+.hilfe-anliegen > summary,
+.einstieg-alternativen > summary {
+  box-sizing: border-box;
+  min-height: 3.625rem;
+  padding: .75rem .5rem;
+  color: var(--accent);
+  font-size: var(--fs-text);
+  font-weight: 700;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  border-radius: var(--radius-s);
+}
+.feedback-selected > summary:hover,
+.hilfe-anliegen > summary:hover,
+.einstieg-alternativen > summary:hover { background: var(--surface-soft); }
+.feedback-selected > summary:focus-visible,
+.hilfe-anliegen > summary:focus-visible,
+.einstieg-alternativen > summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.feedback-selected[open] > summary,
+.hilfe-anliegen[open] > summary { margin-bottom: .5rem; }
+.feedback-selected[open] p {
+  display: block;
+  font-size: var(--fs-text);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.start-page .support-help-grid:has(.hilfe-anliegen) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .5rem;
+}
+.hilfe-anliegen { min-width: 0; }
+.start-page .support-help-grid > .hilfe-anliegen { margin: 0; padding: 0; }
+.hilfe-werkzeuge { margin-top: 1rem; }
+.einstieg-lern-hinweis { margin-bottom: 1.25rem; }
+
+@media (forced-colors: active) {
+  .feedback-selected > summary:focus-visible,
+  .hilfe-anliegen > summary:focus-visible,
+  .einstieg-alternativen > summary:focus-visible { outline-color: Highlight; }
+}
+
 /* Die passende Antwort steht auch auf der warmen Rückmeldungsfläche.
    Das dunklere Grün erreicht dort den erforderlichen Textkontrast. */
 .feedback-passend h3 { color: var(--good-text); }

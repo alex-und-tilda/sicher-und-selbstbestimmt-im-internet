@@ -3007,6 +3007,46 @@ html.no-motion *::after {
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
+/* Satzweise Mitlesen ohne neue Textfläche oder Verschieben des Inhalts.
+   Unterstreichung grenzt den Satz auch innerhalb derselben Zeile ab.
+   Der schmale Strich zeigt den Anfang; die Schrift behält ihre Farbe. */
+.lese-satz.reading-highlight {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  text-decoration: underline solid var(--accent) 2px;
+  text-underline-offset: .3em;
+}
+.lese-satz.reading-highlight::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -.55em;
+  top: 0;
+  height: 1.15em;
+  border-inline-start: 3px solid var(--accent);
+  pointer-events: none;
+}
+.lese-schluesselwort { font-weight: 700; }
+.lesehilfen-einstellungen { margin-block: 16px; }
+.lesehilfen-einstellungen > summary {
+  min-height: 58px;
+  display: list-item;
+  padding-block: 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.lesehilfen-einstellungen > button {
+  width: 100%;
+  margin-block: 5px;
+  white-space: normal;
+}
+@media print {
+  .tool-row, .lesehilfen-einstellungen { display: none !important; }
+  .lese-satz.reading-highlight { text-decoration: none; }
+  .lese-satz.reading-highlight::before { display: none; }
+}
+
 /* .reading-status wird oben (Paket G) global auf sr-only gesetzt. */
 
 .reading-unavailable {
