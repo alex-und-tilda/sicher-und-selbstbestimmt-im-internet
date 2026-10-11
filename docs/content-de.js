@@ -31,16 +31,13 @@ const CONTENT_VERSIONS = {
           },
           {
             "text": "Du lernst hier einen Plan mit 5 Schritten. Mit diesem Plan prüfst du genau, und dann entscheidest du selbst."
-          },
-          {
-            "text": "Wenn du unsicher bist, tippst du oben auf Hilfe."
           }
         ]
       },
       "standard": {
         "text": [
           {
-            "text": "Apps und Online-Formulare fragen oft nach deinen Daten – und manchmal willst du selbst etwas teilen, etwa ein Foto. Manche dieser Daten sind für den Zweck nötig, andere nicht. In diesem Kapitel lernst du einen Plan mit fünf Schritten: Damit prüfst du solche Situationen und entscheidest selbst. Wenn du unsicher bist, tippe oben auf Hilfe."
+            "text": "Apps und Online-Formulare fragen oft nach deinen Daten – und manchmal willst du selbst etwas teilen, etwa ein Foto. Manche dieser Daten sind für den Zweck nötig, andere nicht. In diesem Kapitel lernst du einen Plan mit fünf Schritten: Damit prüfst du solche Situationen und entscheidest selbst."
           }
         ]
       }
@@ -566,13 +563,12 @@ const CONTENT_VERSIONS = {
       einfach: {
         text: [
           { text: "Stell dir vor: Eine fremde Nummer schreibt dir bei WhatsApp, und in der Nachricht ist ein Link. Was machst du? Darum geht es in diesem Thema." },
-          { text: "Du lernst, wie du Nachrichten sicher nutzt und Betrug erkennst." },
-          { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
+          { text: "Du lernst, wie du Nachrichten sicher nutzt und Betrug erkennst." }
         ]
       },
       standard: {
         text: [
-          { text: "Stell dir vor: Eine unbekannte Nummer schreibt dir bei WhatsApp und schickt einen Link. Wie reagierst du? In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+          { text: "Stell dir vor: Eine unbekannte Nummer schreibt dir bei WhatsApp und schickt einen Link. Wie reagierst du? In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst." }
         ]
       }
     },
@@ -761,11 +757,10 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: { text: [
         { text: "Stell dir vor: Eine Person, die du nicht kennst, schickt dir bei Facebook eine Freundschafts-Anfrage. Was machst du? Darum geht es in diesem Thema." },
-        { text: "Du lernst, wie du dein Profil schützt und dich vor unbekannten Kontakten in Acht nimmst." },
-        { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
+        { text: "Du lernst, wie du dein Profil schützt und dich vor unbekannten Kontakten in Acht nimmst." }
       ] },
       standard: { text: [
-        { text: "Stell dir vor: Jemand, den du nicht kennst, schickt dir bei Facebook eine Freundschaftsanfrage. Nimmst du sie an? In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+        { text: "Stell dir vor: Jemand, den du nicht kennst, schickt dir bei Facebook eine Freundschaftsanfrage. Nimmst du sie an? In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst." }
       ] }
     },
     "Profil": {
@@ -883,11 +878,10 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: { text: [
         { text: "Stell dir vor: Du willst ein Foto bei Instagram posten, auf dem auch deine Freundin zu sehen ist. Was machst du? Darum geht es in diesem Thema." },
-        { text: "Du lernst, worauf du beim Posten von Fotos und Videos achtest und wie du deinen Standort schützt." },
-        { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
+        { text: "Du lernst, worauf du beim Posten von Fotos und Videos achtest und wie du deinen Standort schützt." }
       ] },
       standard: { text: [
-        { text: "Stell dir vor: Du möchtest ein Foto auf Instagram posten – deine Freundin ist mit drauf. Was tust du vorher? In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }
+        { text: "Stell dir vor: Du möchtest ein Foto auf Instagram posten – deine Freundin ist mit drauf. Was tust du vorher? In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt." }
       ] }
     },
     "Foto posten": {
@@ -998,10 +992,9 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: { text: [
         { text: "Stell dir vor: Ein Video bei YouTube erzählt etwas sehr Überraschendes. Stimmt das wirklich? Darum geht es in diesem Thema." },
-        { text: "Du lernst, wie du Videos und Werbung einschätzt und gut auf Pausen achtest." },
-        { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
+        { text: "Du lernst, wie du Videos und Werbung einschätzt und gut auf Pausen achtest." }
       ] },
-      standard: { text: [{ text: "Stell dir vor: Ein YouTube-Video behauptet etwas sehr Überraschendes. Wie findest du heraus, ob es stimmt? In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+      standard: { text: [{ text: "Stell dir vor: Ein YouTube-Video behauptet etwas sehr Überraschendes. Wie findest du heraus, ob es stimmt? In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst." }] }
     },
     "Videos prüfen": {
       einfach: { examples: ["Ein Video verspricht: „Mit diesem Trick bist du in einer Woche reich.“", "Ein Video sagt, dass ein bestimmtes Wasser jede Krankheit heilt."], text: [
@@ -1100,10 +1093,9 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: { text: [
         { text: "Stell dir vor: Jemand bei Snapchat will unbedingt ein Foto von dir, aber du willst das nicht. Was machst du? Darum geht es in diesem Thema." },
-        { text: "Du lernst, warum Bilder nicht wirklich verschwinden und wie du Stress erkennst." },
-        { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
+        { text: "Du lernst, warum Bilder nicht wirklich verschwinden und wie du Stress erkennst." }
       ] },
-      standard: { text: [{ text: "Stell dir vor: Jemand drängt dich bei Snapchat, ein Foto von dir zu schicken – du willst das aber nicht. Was machst du? In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Stress erkennst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+      standard: { text: [{ text: "Stell dir vor: Jemand drängt dich bei Snapchat, ein Foto von dir zu schicken – du willst das aber nicht. Was machst du? In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Stress erkennst." }] }
     },
     "Bilder verschwinden nicht immer": {
       einfach: { examples: ["Du schickst ein lustiges Bild, das nach 10 Sekunden verschwindet. Aber dein Freund hat es vorher gespeichert.", "Ein Bild, das du nur einer Person geschickt hast, taucht später in einer Gruppe auf."], text: [
@@ -1189,10 +1181,9 @@ const CONTENT_VERSIONS = {
     "Start": {
       einfach: { text: [
         { text: "Stell dir vor: Bei TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? Darum geht es in diesem Thema." },
-        { text: "Du lernst, wie du gefährliche Trends erkennst, deine Daten schützt und Pausen machst." },
-        { text: "Wenn du unsicher bist, kannst du jederzeit den Hilfe-Knopf benutzen." }
+        { text: "Du lernst, wie du gefährliche Trends erkennst, deine Daten schützt und Pausen machst." }
       ] },
-      standard: { text: [{ text: "Stell dir vor: Auf TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung." }] }
+      standard: { text: [{ text: "Stell dir vor: Auf TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest." }] }
     },
     "Trends": {
       einfach: { text: [

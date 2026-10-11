@@ -2944,7 +2944,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Oder du willst selbst etwas teilen. Zum Beispiel ein Foto.",
           "einfach": "Manchmal willst du auch selbst etwas teilen, zum Beispiel ein Foto.",
-          "standard": "Apps und Online-Formulare fragen oft nach deinen Daten – und manchmal willst du selbst etwas teilen, etwa ein Foto. Manche dieser Daten sind für den Zweck nötig, andere nicht. In diesem Kapitel lernst du einen Plan mit fünf Schritten: Damit prüfst du solche Situationen und entscheidest selbst. Wenn du unsicher bist, tippe oben auf Hilfe."
+          "standard": "Apps und Online-Formulare fragen oft nach deinen Daten – und manchmal willst du selbst etwas teilen, etwa ein Foto. Manche dieser Daten sind für den Zweck nötig, andere nicht. In diesem Kapitel lernst du einen Plan mit fünf Schritten: Damit prüfst du solche Situationen und entscheidest selbst."
         }
       }
     ],
@@ -3120,7 +3120,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Stell dir vor: Eine fremde Nummer schreibt dir.",
           "einfach": "Stell dir vor: Eine fremde Nummer schreibt dir bei WhatsApp, und in der Nachricht ist ein Link. Was machst du? Darum geht es in diesem Thema.",
-          "standard": "Stell dir vor: Eine unbekannte Nummer schreibt dir bei WhatsApp und schickt einen Link. Wie reagierst du? In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+          "standard": "Stell dir vor: Eine unbekannte Nummer schreibt dir bei WhatsApp und schickt einen Link. Wie reagierst du? In diesem Kapitel geht es um den sicheren Umgang mit WhatsApp. Du erfährst, wie du fremde Nachrichten einschätzt, Betrugsversuche erkennst und mit Codes, Gruppen und Fotos vorsichtig umgehst."
         }
       }
     ],
@@ -3300,7 +3300,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Stell dir vor: Eine fremde Person will bei Facebook dein Freund sein.",
           "einfach": "Stell dir vor: Eine Person, die du nicht kennst, schickt dir bei Facebook eine Freundschafts-Anfrage. Was machst du? Darum geht es in diesem Thema.",
-          "standard": "Stell dir vor: Jemand, den du nicht kennst, schickt dir bei Facebook eine Freundschaftsanfrage. Nimmst du sie an? In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+          "standard": "Stell dir vor: Jemand, den du nicht kennst, schickt dir bei Facebook eine Freundschaftsanfrage. Nimmst du sie an? In diesem Kapitel geht es um den sicheren Umgang mit Facebook. Du erfährst, wie du dein Profil schützt, Beiträge und Freundschaftsanfragen einschätzt und respektvoll mit anderen umgehst."
         }
       }
     ],
@@ -3495,7 +3495,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Stell dir vor: Du willst ein Foto bei Instagram posten.",
           "einfach": "Stell dir vor: Du willst ein Foto bei Instagram posten, auf dem auch deine Freundin zu sehen ist. Was machst du? Darum geht es in diesem Thema.",
-          "standard": "Stell dir vor: Du möchtest ein Foto auf Instagram posten – deine Freundin ist mit drauf. Was tust du vorher? In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+          "standard": "Stell dir vor: Du möchtest ein Foto auf Instagram posten – deine Freundin ist mit drauf. Was tust du vorher? In diesem Kapitel geht es um den sicheren Umgang mit Instagram. Du erfährst, worauf du beim Posten von Fotos und Videos achtest, wie du deinen Standort schützt und fremde Nachrichten einschätzt."
         }
       }
     ],
@@ -3675,7 +3675,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Stell dir vor: Ein Video bei YouTube erzählt etwas sehr Überraschendes.",
           "einfach": "Stell dir vor: Ein Video bei YouTube erzählt etwas sehr Überraschendes. Stimmt das wirklich? Darum geht es in diesem Thema.",
-          "standard": "Stell dir vor: Ein YouTube-Video behauptet etwas sehr Überraschendes. Wie findest du heraus, ob es stimmt? In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+          "standard": "Stell dir vor: Ein YouTube-Video behauptet etwas sehr Überraschendes. Wie findest du heraus, ob es stimmt? In diesem Kapitel geht es um den sicheren Umgang mit YouTube. Du erfährst, wie du Videos und Werbung einschätzt, Pausen machst und mit beängstigenden oder gefälschten Inhalten umgehst."
         }
       }
     ],
@@ -3830,7 +3830,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Stell dir vor: Jemand bei Snapchat will ein Foto von dir.",
           "einfach": "Stell dir vor: Jemand bei Snapchat will unbedingt ein Foto von dir, aber du willst das nicht. Was machst du? Darum geht es in diesem Thema.",
-          "standard": "Stell dir vor: Jemand drängt dich bei Snapchat, ein Foto von dir zu schicken – du willst das aber nicht. Was machst du? In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Stress erkennst. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+          "standard": "Stell dir vor: Jemand drängt dich bei Snapchat, ein Foto von dir zu schicken – du willst das aber nicht. Was machst du? In diesem Kapitel geht es um den sicheren Umgang mit Snapchat. Du erfährst, warum Bilder trotz „Verschwinden“ gespeichert werden können, wie du deinen Standort schützt und Stress erkennst."
         }
       }
     ],
@@ -3994,7 +3994,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Stell dir vor: Bei TikTok machen viele einen gefährlichen Trend nach.",
           "einfach": "Stell dir vor: Bei TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? Darum geht es in diesem Thema.",
-          "standard": "Stell dir vor: Auf TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest. Wenn du unsicher bist, steht dir jederzeit der Hilfe-Knopf zur Verfügung."
+          "standard": "Stell dir vor: Auf TikTok machen gerade viele einen gefährlichen Trend nach. Musst du mitmachen? In diesem Kapitel geht es um den sicheren Umgang mit TikTok. Du erfährst, wie du gefährliche Trends erkennst, deine Daten schützt, Pausen machst und gefälschte Videos einordnest."
         }
       }
     ],
@@ -9834,7 +9834,12 @@ function renderLesson(teil = "text") {
   // Die Zuordnung folgt dem Originaltitel, auch bei anderer Sprachstufe.
   const scene = buildModuleScene(topic.id, lessons[currentStep]);
 
-  /* Lernziele und Fehler-Normalisierung nur im Start-Screen */
+  /* Lernziele nur im Start-Screen. Der feste Hinweis „Du darfst Fehler
+     machen.“ stand bis v2026-29g zusätzlich auf jeder Start-Seite. Er ist
+     entfallen (Auftrag 11.10.2026, Bericht 59): gleicher Text in allen zwölf
+     Themen, bis zur Hälfte der Start-Seite. Nach einer unpassenden Antwort
+     sagt die App es weiter an Ort und Stelle (RUECKMELDUNG, Hilfe zur
+     Aufgabe). */
   const isStartLesson = lesson.module === "Start";
 
   const wegZiele = zieleFuerWeg(topic, currentMode);
@@ -9844,17 +9849,6 @@ function renderLesson(teil = "text") {
          <ul class="learning-goals-list">
            ${wegZiele.map(g => `<li>${escapeHtml(g)}</li>`).join("")}
          </ul>
-       </div>`
-    : "";
-
-  const safeNotice = isStartLesson
-    ? `<div class="start-safe-notice" role="note">
-         <p class="start-safe-icon" aria-hidden="true">✓</p>
-         <div>
-           <p class="start-safe-main">Du darfst Fehler machen.</p>
-           <p class="start-safe-sub">Das ist beim Lernen ganz normal.</p>
-           <p class="start-safe-sub">Du kannst jeden Schritt so oft machen, wie du möchtest.</p>
-         </div>
        </div>`
     : "";
 
@@ -9874,7 +9868,6 @@ function renderLesson(teil = "text") {
         ? erinnernHtml((lesson.kettePlan ? buildKetteMerkListe(lesson.kettePlan) : "") + text + bullets, lesson.erinnernFrage, lesson.erinnernKnopf)
         : text}
       ${beispielSeite ? "" : learningGoals}
-      ${beispielSeite ? "" : safeNotice}
       ${beispielSeite || lesson.erinnern ? "" : bullets}
       ${!beispielSeite && lesson.ketteSchritt ? buildKetteBezug(topic.id, lesson.ketteSchritt) : ""}
       ${!beispielSeite && lesson.kette ? buildKetteCard(lesson.kette) : ""}

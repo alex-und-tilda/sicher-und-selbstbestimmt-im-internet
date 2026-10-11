@@ -63,10 +63,6 @@ const topics = [
           {
             "text": "Du lernst einen Plan mit 5 Schritten. Mit dem Plan prüfst du. Und du entscheidest selbst.",
             "pictogram": "pikto-plan"
-          },
-          {
-            "text": "Du bist unsicher? Dann tippe oben auf: Hilfe.",
-            "pictogram": "pikto-help"
           }
         ],
         "pictogram": "pikto-lock"
@@ -1331,10 +1327,6 @@ const topics = [
           },
           {
             "text": "Was machst du? Das lernst du hier."
-          },
-          {
-            "text": "Du bist unsicher? Dann tippe oben auf: Hilfe.",
-            "pictogram": "pikto-help"
           }
         ],
         "pictogram": "pikto-message"
@@ -2040,10 +2032,6 @@ const topics = [
           },
           {
             "text": "Was machst du? Das lernst du hier."
-          },
-          {
-            "text": "Du bist unsicher? Dann tippe oben auf: Hilfe.",
-            "pictogram": "pikto-help"
           }
         ],
         "pictogram": "pikto-message"
@@ -2740,10 +2728,6 @@ const topics = [
           },
           {
             "text": "Was machst du? Das lernst du hier."
-          },
-          {
-            "text": "Du bist unsicher? Dann tippe oben auf: Hilfe.",
-            "pictogram": "pikto-help"
           }
         ],
         "pictogram": "pikto-photo"
@@ -3415,10 +3399,6 @@ const topics = [
           },
           {
             "text": "Stimmt das? Das lernst du hier."
-          },
-          {
-            "text": "Du bist unsicher? Dann tippe oben auf: Hilfe.",
-            "pictogram": "pikto-help"
           }
         ],
         "pictogram": "pikto-help"
@@ -4027,10 +4007,6 @@ const topics = [
           },
           {
             "text": "Was machst du? Das lernst du hier."
-          },
-          {
-            "text": "Du bist unsicher? Dann tippe oben auf: Hilfe.",
-            "pictogram": "pikto-help"
           }
         ],
         "pictogram": "pikto-photo"
@@ -4609,10 +4585,6 @@ const topics = [
           },
           {
             "text": "Musst du mitmachen? Das lernst du hier."
-          },
-          {
-            "text": "Du bist unsicher? Dann tippe oben auf: Hilfe.",
-            "pictogram": "pikto-help"
           }
         ],
         "pictogram": "pikto-help"
