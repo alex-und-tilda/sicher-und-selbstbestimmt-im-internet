@@ -20,11 +20,11 @@
 /* Gemeinsame Unterstützung nach Wunsch, Begleitentwurf vom 09.10.2026.
    Diese Folge ist kein Test und keine Voraussetzung für Hilfe. */
 const COMPANION_HILFE = [
-  "Vor dem Helfen fragen: Welche Hilfe möchtest du? Gemeinsam ansehen, zeigen oder vorlesen nur mit Einverständnis.",
+  "Vor dem Helfen fragen: Welche Hilfe möchtest du? Vorlesen, Vormachen oder ein eigenes Gerät ansehen nur mit Einverständnis. Übungen gehen auch mit erfundenen Beispielen. Niemand muss ein Konto, Nachrichten oder private Daten zeigen.",
   "Denselben Schritt gemeinsam ansehen. Eine kurze Frage stellen und Zeit für die eigene Antwort lassen.",
   "Auf Wunsch ein anderes Beispiel anbieten oder einen Schritt vormachen. Dafür nur erfundene Angaben verwenden.",
   "Die Person kann selbst ausprobieren oder selbst entscheiden. Das Gerät und die Entscheidung bleiben bei ihr.",
-  "Pause und Hilfe sind jederzeit möglich. Niemand muss es erst allein versuchen, etwas richtig beantworten oder Verständnis bestätigen."
+  "Pause und Hilfe sind jederzeit möglich. Niemand muss es erst allein versuchen oder etwas richtig beantworten. Was jemand in einer Übung zeigt, sagt nicht sicher, was im Alltag allein gelingt."
 ];
 
 const COMPANION = {
@@ -38,7 +38,7 @@ const COMPANION = {
         "Welche Daten sind für diesen Zweck nötig, und welche können offenbleiben?"
       ],
       "helfen": [
-        "Eine Angabe gemeinsam prüfen: Empfänger, Zweck und benötigte Menge. Ein Pflichtfeld ist noch keine Begründung.",
+        "Eine Angabe gemeinsam prüfen: Wer bekommt sie? Wofür wird sie gebraucht? Wie viele Angaben sind dafür nötig? Ein Pflichtfeld ist noch keine Begründung.",
         "Bei unklarem Zweck gemeinsam eine Rückfrage überlegen. Die Person entscheidet über die Freigabe."
       ],
       "erkennen": [
@@ -49,26 +49,26 @@ const COMPANION = {
       ]
     },
     lernziele: [
-      "Die Teilnehmenden erkennen, welche Informationen als persönliche bzw. personenbezogene Daten gelten – auch Standort, Fotos und Kontakte.",
-      "Sie prüfen bei einer Datenabfrage, wer die Daten erhält und wofür sie gebraucht werden, und unterscheiden, was dafür notwendig ist (Datenminimierung).",
+      "Die Teilnehmenden erkennen persönliche Angaben, zum Beispiel Standort, Fotos und Kontakte.",
+      "Sie fragen bei einer Datenabfrage: Wer bekommt die Angaben? Wofür werden sie gebraucht? Welche Angaben sind dafür nötig?",
       "Sie entscheiden selbst, welche Daten sie weitergeben oder freigeben. Das schließt ein begründetes Ja ein, nicht nur ein Nein.",
       "Bei Unsicherheit schieben sie die Entscheidung auf und holen sich gezielt Unterstützung."
     ],
     methodik: [
-      "Roter Faden ist der 5-Schritte-Plan: Stopp – Wer bekommt oder sieht es? – Was genau? – Wofür, und wie viel davon ist nötig? – Ich entscheide. Bei Unsicherheit gilt die Rückfall-Regel: noch nichts freigeben, erst prüfen oder Unterstützung holen.",
+      "Roter Faden ist der 5-Schritte-Plan: Stopp – Wer bekommt oder sieht es? – Was genau? – Wofür, und wie viel davon ist nötig? – Ich entscheide. Wenn du unsicher bist, gib noch nichts weiter. Frag nach oder hol Hilfe.",
       "Pflicht ist nicht gleich nötig: Ein Pflichtfeld heißt nur, dass das Formular ohne diese Angabe nicht weitergeht. Ob die Angabe für den Zweck nötig ist, ist eine eigene Prüfung. Ist der Zweck unklar, erst nachfragen oder den Dienst nicht nutzen – nicht einfach ausfüllen, weil es Pflicht ist.",
       "Nicht nur Nein üben: gemeinsam Fälle besprechen, in denen Daten nötig sind (z. B. Lieferadresse beim bekannten Shop), und solche, bei denen der Umfang entscheidet (z. B. Standort nur während der Nutzung).",
-      "Lebensweltorientierung: Beispiele aus dem Alltag der Teilnehmenden aufgreifen (eigenes Handy, Lieblings-App, echte Nachrichten).",
-      "Micro-Learning: pro Einheit nur ein Lernschritt; Pausen aktiv anbieten (die Pause-Funktion nutzen).",
-      "Aktivierung statt Berieselung: vor der Lösung erst selbst einschätzen lassen (Quiz, Daumen hoch oder runter).",
-      "Sicherung: die Merk-Karte gemeinsam laut lesen, ausdrucken und sichtbar aufhängen.",
-      "Tandem und Peer: in Zweier-Teams arbeiten; eine geübtere Person begleitet.",
-      "Wertschätzendes Feedback: Fehler sind erlaubt und normal; richtige Entscheidungen ausdrücklich loben."
+      "Alltagsnahe, erfundene Beispiele nutzen. Niemand muss das eigene Handy, eine Lieblings-App oder echte Nachrichten zeigen.",
+      "Pro Einheit einen Lernschritt behandeln. Pausen anbieten und die Pause-Funktion zeigen.",
+      "Vor der Erklärung fragen, was die Person selbst vermutet. Sie darf auch passen oder gleich Hilfe wählen.",
+      "Die Merk-Karte gemeinsam ansehen oder vorlesen. Aufhängen oder ausdrucken nur, wenn die Person das möchte.",
+      "Zu zweit üben, wenn beide das möchten. Eine weitere lernende Person kann eigene Erfahrungen teilen.",
+      "Wertschätzendes Feedback: Fehler sind erlaubt und normal; Entscheidungen respektvoll besprechen und hilfreiche Schritte anerkennen."
     ],
     gespraechsanlaesse: [
       "Welche Daten von dir kennen andere Menschen schon? Welche möchtest du für dich behalten?",
-      "Welche App auf deinem Handy will viel über dich wissen? Braucht sie das wirklich?",
-      "Wann ist es richtig, Daten anzugeben – zum Beispiel beim Arzt oder bei einer Bestellung?"
+      "Welche Angaben könnte eine App verlangen? Welche davon braucht sie für einen bestimmten Zweck? Wir können ein erfundenes Beispiel nehmen.",
+      "Welche Angaben können für einen Arzttermin oder eine Bestellung nötig sein? Was sollte man vorher fragen?"
     ],
     begleithinweise: [
       "Fotos mit anderen Personen: Wer auf einem Foto zu sehen ist, entscheidet mit, ob es geteilt wird. Vorher fragen – auch in Gruppen und im Status.",
@@ -81,11 +81,11 @@ const COMPANION = {
       "UN-Behindertenrechtskonvention, Artikel 9 (Zugänglichkeit) und Artikel 21 (Zugang zu Informationen): Grundlage für barrierefreie digitale Teilhabe.",
       "SGB IX: Teilhabe und Selbstbestimmung als Leitprinzip der Eingliederungshilfe.",
       "KDG (Katholisches Datenschutzgesetz): maßgeblich beim kirchlichen Träger; das Grundprinzip Datensparsamkeit wird hier didaktisch vermittelt.",
-      "Anschluss an die Tilbecker Tandem- und TeBI-Methodik (Lernen in Begleitung)."
+      "Gemeinsam lernen: Die lernende Person entscheidet, was sie selbst tun möchte und wobei sie Hilfe wünscht."
     ],
     transfer: [
-      "Gemeinsam die Privatsphäre-Einstellungen am eigenen Gerät anschauen.",
-      "Gemeinsam bei einer App prüfen: Welche Zugriffe hat sie (Standort, Fotos, Kontakte)? Braucht sie diese für ihren Zweck?"
+      "Nur auf ausdrücklichen Wunsch gemeinsam die Einstellungen einer selbst gewählten App ansehen. Die Person entscheidet, ob sie etwas zeigt oder ändert.",
+      "Nur auf ausdrücklichen Wunsch die Zugriffe einer selbst gewählten App ansehen. Die Person entscheidet, ob sie etwas zeigt oder ändert."
     ]
   },
 
@@ -96,7 +96,7 @@ const COMPANION = {
       ],
       "fragen": [
         "Was verlangt die Nachricht von dir?",
-        "Wie kannst du die Person über einen schon bekannten Kontakt selbst erreichen?"
+        "Wie kannst du die Person über eine Telefonnummer erreichen, die du schon vorher hattest?"
       ],
       "helfen": [
         "Die Geldbitte ohne Zeitdruck gemeinsam lesen. Auf Wunsch das Beenden und den selbst gewählten Rückruf im Rollenspiel zeigen.",
@@ -116,15 +116,15 @@ const COMPANION = {
       "Sie wissen, dass die KI Meta AI kein Mensch ist."
     ],
     methodik: [
-      "Lebensweltorientierung: am echten WhatsApp der Teilnehmenden zeigen, mit Beispiel-Chats statt echter Kontakte.",
-      "Micro-Learning: ein Trick pro Einheit; Pausen aktiv anbieten.",
-      "Aktivierung: echte und gefälschte Nachrichten vergleichen lassen („echt oder Betrug?“).",
-      "Rollenspiel im Tandem: eine Person schreibt eine Betrugs-Nachricht, die andere reagiert sicher.",
-      "Sicherung: Merk-Karte gemeinsam lesen und sichtbar aufhängen."
+      "An zwei erfundenen Beispiel-Chats üben. Keine privaten Nachrichten öffnen oder zeigen lassen.",
+      "Einen Trick pro Einheit behandeln. Pausen anbieten.",
+      "Zwei erfundene Beispielnachrichten vergleichen. Keine privaten Chats zeigen lassen.",
+      "Eine erfundene Betrugsnachricht nachspielen: Eine Person liest vor, die andere überlegt einen sicheren nächsten Schritt.",
+      "Die Merk-Karte gemeinsam lesen oder ansehen. Aufhängen nur, wenn die Person das möchte."
     ],
     gespraechsanlaesse: [
-      "Hast du schon einmal eine Nachricht von einer unbekannten Nummer bekommen? Was hast du gemacht?",
-      "Was würdest du tun, wenn „deine Tochter“ mit neuer Nummer dringend Geld will?",
+      "Was könnte man bei einer Nachricht von einer neuen Nummer tun? Wir können mit einem erfundenen Beispiel üben.",
+      "Was könnte eine Person in diesem erfundenen Beispiel tun, wenn eine angebliche Tochter mit neuer Nummer Geld verlangt?",
       "Welche Dinge gehören in eine Gruppe – und welche nicht?"
     ],
     begleithinweise: [
@@ -139,8 +139,8 @@ const COMPANION = {
       "Betrug ist strafbar (§ 263 StGB) – im Schadensfall Anzeige möglich."
     ],
     transfer: [
-      "Gemeinsam die Datenschutz-Einstellungen in WhatsApp anschauen (Profilbild, Zuletzt-online, Gruppen).",
-      "Eine unbekannte Nummer gemeinsam blockieren üben.",
+      "Auf Wunsch die Einstellungen an einem erfundenen Beispiel zeigen. Einstellungen am eigenen Konto nur mit Einverständnis ansehen oder ändern.",
+      "Blockieren und Melden an einem erfundenen Beispiel zeigen. Echte Kontakte oder Nachrichten nur auf ausdrücklichen Wunsch ansehen.",
       "Sperr-Notruf 116 116 und Vertrauensperson notieren."
     ]
   },
@@ -152,14 +152,14 @@ const COMPANION = {
       ],
       "fragen": [
         "Wer soll diesen Beitrag sehen?",
-        "Sind alle abgebildeten Personen mit diesem Foto und diesem Empfängerkreis einverstanden?"
+        "Sind alle Personen auf dem Foto damit einverstanden, dass genau diese Menschen das Foto sehen können?"
       ],
       "helfen": [
         "Die Auswahl für einen einzelnen Beitrag gemeinsam ansehen. Darauf hinweisen, dass Profilbild und Beiträge verschiedene Einstellungen haben.",
-        "Bei einer Geldbitte den Link geschlossen lassen. Einen angeblich bekannten Absender über einen schon bekannten Kontakt prüfen. Auf Wunsch Schließen, Blockieren oder Melden zeigen."
+        "Bei einer Geldbitte den Link geschlossen lassen. Die angeblich bekannte Person über eine Telefonnummer kontaktieren, die schon vorher bekannt war. Auf Wunsch Schließen, Blockieren oder Melden zeigen."
       ],
       "erkennen": [
-        "Darauf achten, ob die Person den Empfängerkreis bewusst auswählt und ein Nein zum Teilen eines Fotos berücksichtigt."
+        "Gemeinsam besprechen, wer den Beitrag sehen soll und warum ein Nein zum Teilen eines Fotos gilt. Das ist eine Beobachtung in der Übung, kein Nachweis für selbstständiges Handeln im Alltag."
       ],
       "alltag": [
         "Auf Wunsch bei einem selbst gewählten Beitrag die Sichtbarkeit prüfen. Nichts ohne Einverständnis veröffentlichen oder ändern."
@@ -172,10 +172,10 @@ const COMPANION = {
       "Sie kennen einen einfachen Handlungsplan bei Problemen: blockieren, melden, einer vertrauten Person erzählen, Hilfe holen."
     ],
     methodik: [
-      "Lebensweltorientierung: am eigenen oder einem Beispiel-Profil zeigen.",
-      "Aktivierung: „öffentlich oder privat?“ – Angaben gemeinsam einsortieren.",
-      "Micro-Learning und Sicherung über die Merk-Karte.",
-      "Tandem und Peer: Privatsphäre-Einstellungen zu zweit durchgehen."
+      "Mit einem erfundenen Beispiel-Profil üben. Das eigene Profil nur auf Wunsch und mit Einverständnis ansehen.",
+      "Gemeinsam an erfundenen Angaben überlegen: Wer soll sie sehen können?",
+      "Nur einen Schritt auf einmal ansehen. Die Merk-Karte gemeinsam lesen oder ansehen.",
+      "Einstellungen zu zweit ansehen, wenn die Person das möchte. Sie entscheidet, was gezeigt oder geändert wird."
     ],
     gespraechsanlaesse: [
       "Welche Angaben in deinem Profil sollen alle sehen – welche nur Freunde?",
@@ -185,8 +185,8 @@ const COMPANION = {
     begleithinweise: [
       "Beleidigungen und Cyber-Mobbing ernst nehmen; Gefühlen Raum geben.",
       "Einstellungen sind komplex – die Begleitperson unterstützt, entscheidet aber nicht für die Person.",
-      "Bei Mobbing dokumentieren (Screenshot), melden, blockieren, Hilfe holen.",
-      "Foto-Einwilligung: am erfundenen Beispiel fragen, wer zu sehen ist und wer das Bild sehen soll. Vor dem Teilen die Zustimmung aller abgebildeten Personen für diesen Empfängerkreis klären. Ein Nein respektieren; gemeinsam ein anderes Bild ohne diese Person überlegen.",
+      "Bei Mobbing kann die Person auf Wunsch einen Beleg sichern, zum Beispiel ein Bildschirmfoto. Nur wenn das sicher ist und keine anderen privaten Daten offengelegt werden. Dann passende Hilfe anbieten.",
+      "Foto-Einwilligung: am erfundenen Beispiel fragen, wer zu sehen ist und welche Personen das Bild sehen können. Vor dem Teilen müssen alle abgebildeten Personen zustimmen. Ein Nein respektieren; gemeinsam ein anderes Bild überlegen.",
       "Geld-Link in einer Nachricht: am erfundenen Beispiel Geldbitte und Link gemeinsam ansehen. Die Person kann den Link geschlossen lassen und kein Geld senden. Bei einem angeblich bekannten Absender über einen schon bekannten Kontakt selbst nachfragen, statt den Link oder die neue Nummer zu nutzen. Auf Wunsch Schließen, Blockieren oder Melden zeigen."
     ],
     rechtsbezuege: [
@@ -196,9 +196,9 @@ const COMPANION = {
       "Beleidigung ist strafbar (§ 185 StGB)."
     ],
     transfer: [
-      "Privatsphäre-Einstellungen gemeinsam auf „Freunde“ stellen.",
-      "Eine Freundschafts-Anfrage gemeinsam prüfen.",
-      "Blockieren und Melden einmal zusammen ausprobieren."
+      "Auf Wunsch gemeinsam ansehen, wer Beiträge sehen darf. Die Person entscheidet selbst, ob sie etwas ändern möchte.",
+      "Eine erfundene Freundschafts-Anfrage gemeinsam prüfen.",
+      "Blockieren und Melden an einer erfundenen Situation zeigen."
     ]
   },
 
@@ -228,15 +228,15 @@ const COMPANION = {
       "Sie wissen, dass viele Bilder bearbeitet sind, und vergleichen sich nicht damit."
     ],
     methodik: [
-      "Lebensweltorientierung an echten Posts und Stories.",
-      "Aktivierung: „Was sieht man auf diesem Foto noch?“ – Hintergrund-Suche.",
+      "Mit erfundenen Beispiel-Posts und Beispiel-Stories üben. Niemand muss eigene Inhalte zeigen.",
+      "An einem Beispiel-Foto überlegen: Welche Informationen verrät der Hintergrund?",
       "Medienkritik: echtes und bearbeitetes Bild vergleichen.",
-      "Sicherung über Merk-Karte; Tandem beim Einstellen."
+      "Die Merk-Karte gemeinsam lesen oder ansehen. Einstellungen nur mit Einverständnis ändern."
     ],
     gespraechsanlaesse: [
-      "Was kann man auf deinem Foto im Hintergrund erkennen?",
+      "Welche Informationen könnte ein Hintergrund auf diesem Beispiel-Foto verraten?",
       "Warum teilst du deinen Standort besser nicht mit allen?",
-      "Glaubst du, dass alle Bilder auf Instagram echt sind?"
+      "Kann ein Bild bearbeitet sein? Woran könnte man das merken?"
     ],
     begleithinweise: [
       "Selbstwert-Thema (bearbeitete Bilder) behutsam begleiten, nicht abwerten.",
@@ -250,8 +250,8 @@ const COMPANION = {
       "Bei sexueller Belästigung: Schutzauftrag, sofort Hilfe holen."
     ],
     transfer: [
-      "Standortfreigabe gemeinsam ausschalten.",
-      "Privates Konto einstellen (nur bestätigte Follower).",
+      "Auf Wunsch gemeinsam die Standortfreigabe ansehen. Die Person entscheidet selbst, ob sie sie ausschalten möchte.",
+      "Auf Wunsch zeigen, wie ein privates Konto funktioniert. Die Person entscheidet über die Einstellung.",
       "Eine fremde Nachricht gemeinsam einordnen und blockieren."
     ]
   },
@@ -266,7 +266,7 @@ const COMPANION = {
         "Wie kannst du diese Behauptung außerhalb des Videos prüfen?"
       ],
       "helfen": [
-        "Eine Aussage gemeinsam mit einer unabhängigen passenden Quelle vergleichen. Nicht allein Aufrufzahlen als Beleg nehmen.",
+        "Eine Aussage mit einer zweiten, verlässlichen Quelle vergleichen, zum Beispiel einer offiziellen Informationsseite. Viele Aufrufe allein beweisen nicht, dass etwas stimmt.",
         "Auf Wunsch zeigen, wie ein Video gestoppt und die automatische Wiedergabe ausgeschaltet wird. Die Person wählt ihre Pause."
       ],
       "erkennen": [
@@ -282,15 +282,15 @@ const COMPANION = {
       "Sie machen bewusst Pausen und machen gefährliche Mutproben nicht nach."
     ],
     methodik: [
-      "Lebensweltorientierung an Lieblings-Videos.",
-      "Aktivierung: „Stimmt das wirklich?“ – Aussagen gemeinsam prüfen.",
-      "Zeitbewusstsein: Autoplay thematisieren, Pausen einplanen.",
-      "Sicherung über Merk-Karte."
+      "Mit einem frei gewählten oder erfundenen Beispielvideo üben.",
+      "Eine Aussage aus dem Beispiel gemeinsam prüfen.",
+      "Besprechen, dass das nächste Video automatisch starten kann. Die Person entscheidet selbst über Pausen.",
+      "Die Merk-Karte gemeinsam lesen oder ansehen."
     ],
     gespraechsanlaesse: [
       "Hast du in einem Video schon mal etwas gesehen, das nicht stimmen konnte?",
       "Wie merkst du, dass ein Video Werbung ist?",
-      "Was machst du, wenn ein Video dir Angst macht?"
+      "Was kann eine Person tun, wenn ein Video Angst macht? Hilfe und Pause sind möglich."
     ],
     begleithinweise: [
       "Angst machende oder gefährliche Inhalte (Challenges) ernst nehmen und einordnen.",
@@ -303,9 +303,9 @@ const COMPANION = {
       "Verbraucher- und Jugendschutz: Werbung muss erkennbar sein."
     ],
     transfer: [
-      "Autoplay gemeinsam ausschalten.",
+      "Auf Wunsch die automatische Wiedergabe an einem Beispiel zeigen. Die Person entscheidet selbst, ob sie sie ausschaltet.",
       "Eine Werbung im Video zusammen erkennen.",
-      "Eine feste Pausen-Regel vereinbaren, zum Beispiel nach 20 Minuten."
+      "Auf Wunsch eine eigene Pausen-Idee ausprobieren, zum Beispiel nach 20 Minuten. Die Person entscheidet selbst, ob und wie sie eine Pause machen möchte."
     ]
   },
 
@@ -335,10 +335,10 @@ const COMPANION = {
       "Sie erkennen Geheimhaltungs-Druck als Warnzeichen und holen Hilfe."
     ],
     methodik: [
-      "Lebensweltorientierung an echter Nutzung.",
-      "Aktivierung: „Was passiert mit dem Bild wirklich?“",
+      "Mit erfundenen Beispielen üben. Keine eigenen Fotos oder Konten öffnen.",
+      "Gemeinsam besprechen, was mit einem Bild passieren kann.",
       "Klares Stopp- und Nein-Training (Rollenspiel).",
-      "Sicherung über Merk-Karte; Tandem und Peer."
+      "Die Merk-Karte gemeinsam ansehen. Bei Bedarf kann eine zweite lernende Person mitüben."
     ],
     gespraechsanlaesse: [
       "Glaubst du, ein Snap ist wirklich für immer weg?",
@@ -357,7 +357,7 @@ const COMPANION = {
       "Erpressung und Nötigung sind strafbar (§§ 240, 253 StGB)."
     ],
     transfer: [
-      "Standort (Snap Map) gemeinsam auf den „Geistmodus“ stellen.",
+      "Auf Wunsch zeigen, wie der Geistmodus funktioniert. Die Person entscheidet selbst über die Standortfreigabe.",
       "Einen Stopp- und Nein-Satz gemeinsam üben.",
       "Vertrauensperson und Hilfe-Kontakte notieren."
     ]
@@ -386,18 +386,18 @@ const COMPANION = {
     lernziele: [
       "Die Teilnehmenden erkennen gefährliche Trends und machen sie nicht nach.",
       "Sie schützen private Daten und antworten Fremden nicht vorschnell.",
-      "Sie machen bewusst Pausen und erkennen den Sog des Algorithmus.",
+      "Sie überlegen, ob sie eine Pause möchten und dass die App oft weitere Videos vorschlägt.",
       "Sie wissen, dass viele Videos mit KI gefälscht sein können."
     ],
     methodik: [
-      "Lebensweltorientierung an echten Trends.",
-      "Aktivierung: Trend einschätzen – „lustig oder gefährlich?“",
-      "Sog des Algorithmus und Zeitgefühl thematisieren.",
-      "Sicherung über Merk-Karte; Tandem und Peer."
+      "Einen öffentlich bekannten, unbedenklichen Trend als Beispiel besprechen. Niemand muss den eigenen Verlauf oder das eigene Konto zeigen.",
+      "Einen Trend als Beispiel einschätzen: Was daran ist interessant? Was könnte gefährlich sein?",
+      "Besprechen, dass die App weitere Videos vorschlägt, und fragen, ob die Person eine Pause möchte.",
+      "Die Merk-Karte gemeinsam ansehen. Bei Bedarf kann eine zweite lernende Person mitüben."
     ],
     gespraechsanlaesse: [
-      "Welche Trends hast du zuletzt gesehen? Welche wären gefährlich?",
-      "Warum schaut man bei TikTok oft so lange?",
+      "Welche bekannten Trends könnten gefährlich sein? Wir können mit einem Beispiel üben.",
+      "Warum schlägt eine App oft weitere Videos vor? Möchtest du weiterschauen oder eine Pause machen?",
       "Wie erkennst du, dass ein Video gefälscht sein könnte?"
     ],
     begleithinweise: [
@@ -410,8 +410,8 @@ const COMPANION = {
       "KDG und Datenschutz; Jugendschutz bei gefährlichen Inhalten."
     ],
     transfer: [
-      "Eine Bildschirmzeit-Grenze gemeinsam einstellen.",
-      "Privates Konto einstellen.",
+      "Auf Wunsch eine selbst gewählte Pause oder Erinnerung ausprobieren. Die Person entscheidet, ob eine Einstellung geändert werden soll.",
+      "Auf Wunsch zeigen, wie ein privates Konto funktioniert. Die Person entscheidet selbst über die Einstellung.",
       "Einen gefährlichen Trend gemeinsam als „nicht nachmachen“ einordnen."
     ]
   },
@@ -457,7 +457,7 @@ const COMPANION = {
       "Übungen und Quiz enthalten bewusst auch harmlose Technik-Probleme, bei denen selbst ausprobieren der passende Weg ist. Die Rückmeldung „Das geht auch“ ist kein Fehler: gemeinsam besprechen, warum hier mehrere Wege sicher sind.",
       "Die neue Situation am Ende (eine Nachricht mit Druck von einem Bekannten) geht den Hilfe-Check einmal ganz durch – ein guter Anlass, die drei Fragen laut mitzusprechen.",
       "Rollenspiel: Hilfe holen üben (was zeige ich, was habe ich schon probiert, wen frage ich als Nächstes?).",
-      "Sicherung über Merk-Karte; Notfall-Kontakte sichtbar machen."
+      "Die Merk-Karte gemeinsam ansehen; Notfall-Kontakte sichtbar machen."
     ],
     gespraechsanlaesse: [
       "Welches Problem mit dem Handy hast du schon einmal selbst gelöst?",
@@ -478,7 +478,7 @@ const COMPANION = {
     ],
     transfer: [
       "Eine persönliche Hilfe-Karte erstellen: eine Person für Handy-Fragen, eine Vertrauensperson, für den Notfall 110 und 112.",
-      "Ein Bild vom Bildschirm (Screenshot) gemeinsam üben.",
+      "Ein Bildschirmfoto nur an einem erfundenen Beispiel üben. Keine privaten Nachrichten oder Kontodaten abbilden.",
       "Den Hilfe-Knopf der Plattform zeigen und ausprobieren."
     ]
   },
@@ -493,7 +493,7 @@ const COMPANION = {
         "Was machst du, wenn eine bekannte Stimme plötzlich Geld verlangt?"
       ],
       "helfen": [
-        "Eine überprüfbare Aussage aus der KI-Antwort auswählen und mit einer unabhängigen passenden Quelle vergleichen.",
+        "Eine überprüfbare Aussage aus der KI-Antwort mit einer zweiten verlässlichen Quelle vergleichen, zum Beispiel mit einer offiziellen Informationsseite.",
         "Auf Wunsch einen Rückruf im Rollenspiel zeigen: Gespräch beenden und eine schon bekannte Nummer selbst wählen. Die Stimme allein reicht nicht."
       ],
       "erkennen": [
@@ -510,15 +510,15 @@ const COMPANION = {
       "Sie wissen, dass KI Bilder und Stimmen fälschen kann."
     ],
     methodik: [
-      "Lebensweltorientierung: einen echten Chatbot mit harmlosen Fragen gemeinsam ausprobieren.",
-      "Aktivierung: eine KI-Antwort gemeinsam prüfen – stimmt das?",
+      "Eine vorbereitete, harmlose Chatbot-Antwort gemeinsam ansehen. Keine persönlichen Angaben in einen Chatbot eingeben.",
+      "Eine vorbereitete KI-Antwort gemeinsam prüfen.",
       "Grenzen erfahrbar machen (die KI erfindet etwas).",
-      "Sicherung über Merk-Karte."
+      "Die Merk-Karte gemeinsam lesen oder ansehen."
     ],
     gespraechsanlaesse: [
-      "Hast du schon mit einer KI geschrieben? Wie war das?",
-      "Würdest du der KI dein Passwort sagen – warum nicht?",
-      "Wem glaubst du bei einer Gesundheits-Frage mehr: der KI oder der Ärztin?"
+      "Was kann man eine KI fragen? Wir können mit einer erfundenen Frage üben.",
+      "Warum sollte ein Passwort nicht in einen Chatbot eingegeben werden?",
+      "Wen kannst du bei einer Gesundheitsfrage fragen? Eine KI ersetzt keine Fachperson."
     ],
     begleithinweise: [
       "Parasozialen Bezug ansprechen: Ein Chatbot ist kein Freund und keine Therapie.",
@@ -541,15 +541,15 @@ const COMPANION = {
   fakes: {
     praxis: {
       "vorbereiten": [
-        "Eine harmlose erfundene Nachricht und einen unabhängigen Vergleichstext zum selben Thema bereithalten. Keine verstörenden Bilder verwenden."
+        "Eine erfundene, harmlose Nachricht und einen zweiten verlässlichen Text zum selben Thema bereithalten. Keine verstörenden Bilder verwenden."
       ],
       "fragen": [
         "Wer sagt das, und von wann ist die Nachricht?",
-        "Wo findest du einen unabhängigen Beleg für die Behauptung?"
+        "Wo findest du einen zweiten verlässlichen Text oder eine offizielle Informationsseite zu der Behauptung?"
       ],
       "helfen": [
-        "Eine Behauptung auswählen und Quelle, Datum und einen weiteren Beleg gemeinsam ansehen. Kleine Bildfehler allein beweisen keinen Fake.",
-        "Auf Wunsch das Nicht-Weiterleiten und den unabhängigen Rückruf bei einer Geldforderung im Rollenspiel üben."
+        "Eine erfundene Behauptung prüfen: Wer hat sie veröffentlicht? Von wann ist sie? Was sagt eine zweite verlässliche Stelle dazu? Kleine Bildfehler allein beweisen keine Fälschung.",
+        "Im Rollenspiel üben, eine Geldforderung nicht weiterzuleiten und über eine Telefonnummer nachzufragen, die schon vorher bekannt war."
       ],
       "erkennen": [
         "Darauf achten, ob die Person vor dem Glauben oder Weiterleiten einen Beleg sucht. Ein überzeugendes Bild oder eine Stimme genügt nicht."
@@ -564,10 +564,10 @@ const COMPANION = {
       "Sie behandeln starke Gefühle als Warnzeichen und prüfen vor dem Teilen."
     ],
     methodik: [
-      "Aktivierung: echtes und gefälschtes Bild oder Video vergleichen.",
+      "Ein erfundenes Bild oder Video mit einem verlässlichen Beispiel vergleichen.",
       "Quellen-Check einüben: wer, wo noch, wie alt, welche Quelle.",
       "Emotions-Stopp: bei Wut oder Angst erst prüfen.",
-      "Sicherung über Merk-Karte."
+      "Die Merk-Karte gemeinsam lesen oder ansehen."
     ],
     gespraechsanlaesse: [
       "Hast du schon mal etwas geglaubt, das nicht stimmte?",
@@ -575,7 +575,7 @@ const COMPANION = {
       "Wie kannst du prüfen, ob etwas wahr ist?"
     ],
     begleithinweise: [
-      "Politische und emotionale Inhalte neutral und altersgerecht begleiten.",
+      "Politische oder emotionale Inhalte ruhig und ohne Druck besprechen. Erwachsene entscheiden selbst, ob sie darüber sprechen möchten.",
       "Verschwörungs- und Angst-Themen ernst, aber entlastend einordnen.",
       "Nicht beschämen, wenn jemand etwas geglaubt oder geteilt hat."
     ],
@@ -598,14 +598,14 @@ const COMPANION = {
       ],
       "fragen": [
         "Will die Nachricht Geld, Daten oder einen geheimen Code?",
-        "Welchen bereits bekannten Zugang kannst du zum Prüfen selbst wählen?"
+        "Welche Telefonnummer kennst du schon, über die du selbst nachfragen kannst? Wir können mit erfundenen Beispielen üben."
       ],
       "helfen": [
         "Auf Wunsch das Stoppen und den selbst gewählten Kontakt im Rollenspiel vormachen. Ein Link oder eine Nummer aus der Nachricht dient nicht als Prüfweg.",
         "Bei einem echten Vorfall ruhig bleiben und passende Hilfe organisieren. Weder Schuldvorwürfe noch Beweise sind Voraussetzung für Hilfe."
       ],
       "erkennen": [
-        "Darauf achten, ob die Person vor einer Forderung innehält und über einen unabhängigen Zugang prüft, statt wegen Eile zu handeln."
+        "In der Übung beobachten, ob die Person bei einer Forderung kurz wartet und über eine schon vorher bekannte Telefonnummer nachfragt. Das ist kein Nachweis für selbstständiges Handeln im Alltag."
       ],
       "alltag": [
         "Auf Wunsch einen persönlichen Weg für Hilfe im Betrugsfall festhalten. Keine Bankdaten, Passwörter oder Codes auf die Karte schreiben."
@@ -617,11 +617,11 @@ const COMPANION = {
       "Sie wissen, was nach einem Betrug zu tun ist (Karte sperren, Hilfe, Anzeige)."
     ],
     methodik: [
-      "Aktivierung: Warnzeichen in Beispiel-Nachrichten suchen.",
+      "In erfundenen Nachrichten nach Warnzeichen suchen.",
       "Rollenspiel: einen Schockanruf sicher beenden.",
       "QR-Codes gemeinsam prüfen: Woher kommt der Code? Aufkleber und Briefe als Warnsignal besprechen (aktuelle Quishing-Maschen laut BSI/Polizei).",
       "Notfall-Plan einüben; Merk-Karte sichern.",
-      "Lebensweltorientierung an realen, aktuellen Maschen."
+      "Aktuelle Betrugsmaschen anhand erfundener Beispiele besprechen."
     ],
     gespraechsanlaesse: [
       "Welche Betrugsmasche hast du schon einmal gehört oder erlebt?",
@@ -640,7 +640,7 @@ const COMPANION = {
     ],
     transfer: [
       "Sperr-Notruf 116 116 und Polizei 110 auf einer Notfall-Karte notieren.",
-      "Eine echte Betrugs-SMS – falls vorhanden – gemeinsam einordnen, ohne zu klicken.",
+      "Eine erfundene Betrugs-SMS gemeinsam einordnen. Eine private Nachricht nur ansehen, wenn die Person das von sich aus möchte; sie muss nichts zeigen.",
       "Mit der Bank klären, wie man eine Karte sperrt."
     ]
   },
@@ -656,7 +656,7 @@ const COMPANION = {
       ],
       "helfen": [
         "Die Kosten im Beispiel gemeinsam zusammensuchen. Ein niedriger Artikelpreis allein sagt noch nicht, was insgesamt bezahlt wird.",
-        "Auf Wunsch Shop-Angaben und eine unabhängige Bewertung ansehen. Die Person entscheidet, ob sie kaufen, weiter prüfen oder abbrechen möchte."
+        "Auf Wunsch Shop-Angaben und eine Bewertung auf einer anderen, verlässlichen Seite ansehen. Die Person entscheidet, ob sie kaufen, weiter prüfen oder abbrechen möchte."
       ],
       "erkennen": [
         "Darauf achten, ob die Person Gesamtkosten und Shop prüft und bei einer offenen Frage mit dem Kauf warten kann."
@@ -671,10 +671,10 @@ const COMPANION = {
       "Sie erkennen Kauf-Druck und versteckte Kosten und kennen das 14-tägige Widerrufsrecht."
     ],
     methodik: [
-      "Lebensweltorientierung an echten Shops und Apps.",
-      "Aktivierung: „guter Shop oder Fake-Shop?“ – Merkmale prüfen.",
+      "Mit einem erfundenen Shop-Angebot üben. Ein echtes Angebot nur auf ausdrücklichen Wunsch ansehen.",
+      "An einem erfundenen Shop-Beispiel nach Warnzeichen suchen.",
       "Budget-Bewusstsein (In-App-Käufe) erfahrbar machen.",
-      "Sicherung über Merk-Karte; Tandem beim Bezahlen."
+      "Die Merk-Karte gemeinsam lesen oder ansehen. Eine Zahlung nur mit ausdrücklicher Zustimmung und im Tempo der Person üben."
     ],
     gespraechsanlaesse: [
       "Woran erkennst du, ob ein Shop seriös ist?",

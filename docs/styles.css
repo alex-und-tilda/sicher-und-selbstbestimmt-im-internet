@@ -3479,7 +3479,7 @@ p.feedback-wrong {
 }
 
 /* Vor-Nutzertest: im Dunkelmodus lag halbweiß unter heller Schrift (Kontrast 2,5:1). */
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   .einfach-quiz-feedback-text {
     background: rgba(255,255,255,0.08);
   }
@@ -4747,7 +4747,7 @@ body.simple-mode .practice-box {
 }
 
 /* Dark mode Anpassungen */
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   .ls-sentence-pikto,
   .ls-bullet-pikto,
   .einfach-pictogram img {
@@ -4824,7 +4824,7 @@ body.simple-mode .practice-box {
 }
 
 /* Paket 6: Im Dunkelmodus lag halbweiß unter heller Schrift (Kontrast 2,9:1). */
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   .einfach-done-praise {
     background: rgba(255,255,255,0.08);
   }
@@ -5330,7 +5330,7 @@ body.simple-mode .practice-box {
    WCAG 1.4.3 / 1.4.6: alle Kontraste ≥ 4.5:1 auf --bg
    ============================================================ */
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
 
   :root {
     /* Hintergründe */
@@ -6992,7 +6992,7 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
   .link-action { text-decoration-thickness: 2px; }
 }
 
-@media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+@media screen and (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {
     --ink-soft: #d3e6f2;
     --line:     #6d8399;
@@ -7665,3 +7665,15 @@ p.feedback-auch {
 .feld-zeile.is-fest { border-style: dashed; cursor: default; }
 .feld-zeile.is-fest .feld-check { cursor: default; }
 .feld-ergebnis--gesichert { border-left-color: var(--good); }
+
+/* 10.10.2026: Ausdrucke verwenden die hellen Farb-Token auch bei dunkler
+   Geräte-Einstellung. Die Bildschirm-Einblendung darf den Druck nicht
+   durchsichtig machen; Themenüberschriften erben die dunkle Druckschrift. */
+@media print {
+  #content {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .print-memory-header h2 { color: var(--ink); }
+}
