@@ -3027,7 +3027,9 @@ html.no-motion *::after {
   border-inline-start: 3px solid var(--accent);
   pointer-events: none;
 }
-.lese-schluesselwort { font-weight: 700; }
+/* 12.10.2026 (Bericht 63): Ein fettes Wort ist breiter als im Fließtext. Passt es
+   allein nicht in die Zeile, darf es umbrechen, statt über den Rand zu ragen. */
+.lese-schluesselwort { font-weight: 700; overflow-wrap: anywhere; }
 .lesehilfen-einstellungen { margin-block: 16px; }
 .lesehilfen-einstellungen > summary {
   min-height: 58px;

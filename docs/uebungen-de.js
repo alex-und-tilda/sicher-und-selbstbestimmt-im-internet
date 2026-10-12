@@ -43,50 +43,65 @@ const EXTRA_PRACTICE = {
   whatsapp: {
     lessons: {
       "WhatsApp nutzen": {
-        question: "Eine Person schreibt dir. Musst du antworten?",
+        question: "Eine Person aus deinem Sport-Verein schreibt dir sehr oft. Du willst das nicht. Musst du antworten?",
+        schluessel: "Eine Person schreibt dir. Musst du antworten?",
         pictogram: "pikto-message",
-        answers: ["Ja, sonst ist es unhöflich.", "Nein. Ich entscheide das."],
+        answers: ["Ja. Sonst ist es unhöflich.", "Nein. Ich entscheide das.", "Nein. Ich schreibe: Bitte schreib mir nicht so oft."],
         correctIndex: 1,
-        feedbackWrong: "Niemand muss antworten. Du bestimmst, mit wem du schreibst.",
-        feedbackCorrect: "Genau. Du entscheidest, wem du antwortest.",
+        auchMoeglich: [2],
+        feedbackWrong: ["Du musst nicht antworten. Auch nicht aus Höflichkeit. Du bestimmst, mit wem du schreibst.", null, null],
+        feedbackAuch: [null, null, "Das ist klar und freundlich. So weiß die Person Bescheid."],
+        feedbackCorrect: "Genau. Du entscheidest, wem du antwortest. Das ist nicht unhöflich.",
         remember: "Ich entscheide, wem ich antworte."
       },
       "Die KI in WhatsApp": {
-        question: "Die KI in WhatsApp fragt nach deiner Adresse. Was tust du?",
+        question: "Du fragst die KI in WhatsApp: Wo gibt es Pizza? Die KI fragt nach deiner Adresse. Was machst du?",
+        schluessel: "Die KI in WhatsApp fragt nach deiner Adresse. Was tust du?",
         pictogram: "pikto-ki",
-        answers: ["Ich schreibe sie nicht hin.", "Ich schreibe sie hin. Es ist ja nur ein Programm."],
+        answers: ["Ich schreibe meine Adresse nicht hin.", "Ich schreibe meine Adresse hin. Es ist ja nur ein Programm.", "Ich schreibe nichts mehr. Ich suche selbst im Internet."],
         correctIndex: 0,
-        feedbackWrong: "Die KI kann deine Eingaben verarbeiten. Schreib ihr keine privaten Daten.",
-        feedbackCorrect: "Der KI schreibst du keine privaten Dinge.",
+        auchMoeglich: [2],
+        feedbackWrong: [null, "Die KI kann deine Eingaben verarbeiten. Schreib ihr keine privaten Daten.", null],
+        feedbackAuch: [null, null, "Deine Adresse bleibt bei dir. Pizza findest du auch ohne die KI."],
+        feedbackCorrect: "Genau. Deine Adresse ist privat. Der KI schreibst du keine privaten Dinge.",
         remember: "Der KI schreibe ich nichts Privates."
       }
     },
     kurz: {
       "Unbekannte Nachrichten": {
-        question: "Eine unbekannte Person schreibt dir. Was tust du?",
+        question: "Eine fremde Nummer schreibt dir: Hallo Kim, bist du das? Du heißt nicht Kim. Was machst du?",
+        schluessel: "Eine unbekannte Person schreibt dir. Was tust du?",
         pictogram: "pikto-stranger",
-        answers: ["Ich antworte sofort.", "Ich zeige es einer vertrauten Person."],
-        correctIndex: 1,
-        feedbackWrong: "Eine Antwort zeigt: Hier liest jemand. Zeig die Nachricht lieber einer vertrauten Person.",
-        feedbackCorrect: "Gut. Erst zeigen. Dann entscheiden.",
-        remember: "Unbekannte Nachrichten: erst fragen."
+        answers: ["Ich antworte nicht.", "Ich schreibe zurück. Ich sage meinen Namen.", "Ich blockiere die Nummer."],
+        correctIndex: 0,
+        auchMoeglich: [2],
+        feedbackWrong: [null, "Dann kennt eine fremde Person deinen Namen. Und sie weiß: Hier antwortet jemand. Manche Betrüger schreiben viele Nummern einfach an.", null],
+        feedbackAuch: [null, null, "Dann kann dir die Nummer nicht mehr schreiben."],
+        feedbackCorrect: "Genau. Du kennst die Nummer nicht. Du musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        remember: "Fremden Nummern sage ich nichts über mich."
       },
       "Links in Nachrichten": {
-        question: "In einer fremden Nachricht ist ein Link. Was tust du?",
+        question: "Eine fremde Nummer schreibt dir: Guter Job für dich. 200 Euro am Tag. Tippe hier. Was machst du?",
+        schluessel: "In einer fremden Nachricht ist ein Link. Was tust du?",
         pictogram: "pikto-link",
-        answers: ["Ich tippe nicht drauf.", "Ich tippe drauf und schaue nach."],
-        correctIndex: 0,
-        feedbackWrong: "Ein Link kann dich auf eine falsche Seite bringen. Prüfe ihn vor dem Antippen. Schon angetippt? Gib keine Daten ein. Hol dir Hilfe.",
-        feedbackCorrect: "Auf fremde Links tippst du nicht.",
+        answers: ["Ich tippe auf den Link. Ich will mehr wissen.", "Ich tippe nicht auf den Link.", "Ich frage erst jemanden. Der Link bleibt zu."],
+        correctIndex: 1,
+        auchMoeglich: [2],
+        feedbackWrong: ["Die Nachricht verspricht viel Geld. Das soll neugierig machen. Der Link kann auf eine falsche Seite führen. Dort will jemand deine Daten.", null, null],
+        feedbackAuch: [null, null, "Der Link bleibt zu. Das ist das Wichtigste. Du kannst das auch allein entscheiden."],
+        feedbackCorrect: "Genau. Du kennst die Nummer nicht. Dann bleibt der Link zu. Du verpasst nichts.",
         remember: "Fremde Links tippe ich nicht an."
       },
       "Dein WhatsApp-Code": {
-        question: "Ein Freund bittet dich um deinen WhatsApp-Code. Was tust du?",
+        question: "Ein Freund schreibt dir: Schick mir bitte deinen WhatsApp-Code. Was machst du?",
+        schluessel: "Ein Freund bittet dich um deinen WhatsApp-Code. Was tust du?",
         pictogram: "pikto-code",
-        answers: ["Ich schicke ihn. Es ist ja ein Freund.", "Ich schicke ihn nicht."],
+        answers: ["Ich schicke ihm den Code. Er ist ja mein Freund.", "Ich schicke den Code nicht.", "Ich schicke den Code nicht. Ich rufe meinen Freund an."],
         correctIndex: 1,
-        feedbackWrong: "Oft schreibt gar nicht der Freund. Betrüger nutzen sein Konto. Der Code bleibt bei dir.",
-        feedbackCorrect: "Genau. Der Code bleibt immer bei dir.",
+        auchMoeglich: [2],
+        feedbackWrong: ["Oft schreibt gar nicht der Freund. Betrüger nutzen sein Konto. Der Code bleibt bei dir.", null, null],
+        feedbackAuch: [null, null, "Der Code bleibt bei dir. Am Telefon merkst du: Hat dein Freund das wirklich geschrieben?"],
+        feedbackCorrect: "Genau. Mit dem Code kann jemand dein Konto stehlen. Darum bleibt der Code immer bei dir.",
         remember: "Meinen Code gebe ich nie weiter."
       }
     }

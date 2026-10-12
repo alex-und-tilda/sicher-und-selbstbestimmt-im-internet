@@ -330,7 +330,8 @@ const REGEL_SAETZE = {
     "Kein Geld und kein Stress von einer Person, die ich kenne: das ist normal.", // whatsapp
     "Kein Geld, kein Link, kein Stress: meistens echt.", // betrug
     "Kein Link und kein Stress: das ist ein gutes Zeichen.", // betrug
-    "Ein guter Shop zeigt Name und Adresse." // einkaufen
+    "Ein guter Shop zeigt Name und Adresse.", // einkaufen
+    "Fremde Nummer? Ich prüfe erst. Dann entscheide ich." // whatsapp (Bericht 62)
   ],
   wahr: [
     "Die KI in WhatsApp ist kein Mensch.", // whatsapp
@@ -421,7 +422,6 @@ const REGEL_SAETZE = {
     "Betrug ist nicht meine Schuld. Ich hole mir Hilfe.", // betrug
     "Betrug ist nicht meine Schuld. Ich hole Hilfe.", // betrug
     "Bei Beleidigungen hole ich Unterstützung.", // facebook
-    "Unbekannte Nachrichten: erst fragen.", // whatsapp
     /* Datenschutz, Paket 2: Rückfall-Regel – Unterstützung als Rückfall,
        nicht als erster Schritt. „Erst fragen. Dann entscheiden.“ ist geparkt. */
     "Unsicher? Noch nichts freigeben.", // datenschutz
@@ -446,7 +446,8 @@ const REGEL_SAETZE = {
     "Ich gebe nur nötige Daten weiter.", // datenschutz (Paket 2)
     "Ich erlaube nur, was die App braucht.", // datenschutz (Paket 2)
     "Ich teile meinen Standort nur so lange wie nötig.", // datenschutz (Paket 2)
-    "Erst prüfen. Dann entscheide ich." // datenschutz (Paket 2, Merksatz des Plans)
+    "Erst prüfen. Dann entscheide ich.", // datenschutz (Paket 2, Merksatz des Plans)
+    "Fremden Nummern sage ich nichts über mich." // whatsapp (Bericht 62)
   ],
   keine: [
     "Ich nehme ein langes Passwort.", // datenschutz

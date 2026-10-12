@@ -1261,9 +1261,10 @@ body.lesson-view label.answer-option {
 }
 body.lesson-view label.answer-option > input[type="radio"] {
   appearance: auto;
-  flex: 0 0 1.35rem;
-  width: 1.35rem;
-  height: 1.35rem;
+  /* Auch bei Standardschrift mindestens 24 px als eigenes Trefferziel. */
+  flex: 0 0 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
   min-width: 0;
   margin: 0.12rem 0 0;
   padding: 0;

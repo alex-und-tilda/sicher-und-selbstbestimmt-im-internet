@@ -1375,15 +1375,29 @@ const topics = [
           "Schick mir bitte Geld."
         ],
         "practice": {
-          "question": "Eine fremde Nummer schreibt dir. Was ist besser?",
+          "question": "Eine fremde Nummer schreibt dir: Du hast 500 Euro gewonnen. Schick uns deinen Namen und deine Adresse. Was machst du?",
+          "schluessel": "Eine fremde Nummer schreibt dir. Was ist besser?",
           "pictogram": "pikto-stranger",
           "answers": [
-            "Ich schicke private Daten.",
-            "Ich antworte nicht sofort."
+            "Ich schicke meinen Namen und meine Adresse. Ich will den Gewinn.",
+            "Ich melde die Nummer bei WhatsApp. Dann blockiere ich sie.",
+            "Ich antworte nicht."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer das wirklich ist.",
-          "feedbackCorrect": "Das ist sicher. Du gibst keine privaten Daten an eine fremde Nummer.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Dann hat eine fremde Person deinen Namen und deine Adresse. So ein Gewinn ist fast immer ein Trick.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Dann kann WhatsApp die Nummer prüfen. Und die Nummer kann dir nicht mehr schreiben.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Du kennst die Nummer nicht. Sie will deine privaten Daten. Darum antwortest du nicht.",
           "remember": "Ich antworte fremden Nummern nicht sofort."
         },
         "pictogram": "pikto-message"
@@ -1420,15 +1434,29 @@ const topics = [
           "Eine Sprach-Nachricht klingt wie deine Schwester. Sie will Geld. Die Stimme kann gefälscht sein."
         ],
         "practice": {
-          "question": "Eine fremde Nummer bittet um Geld. Was ist besser?",
+          "question": "Eine fremde Nummer schreibt dir: Hallo, hier ist deine Schwester. Mein Handy ist kaputt. Schick mir bitte schnell 300 Euro. Was machst du?",
+          "schluessel": "Eine fremde Nummer bittet um Geld. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Ich schicke Geld.",
-            "Ich schicke kein Geld."
+            "Ich schicke das Geld. Meine Schwester braucht Hilfe.",
+            "Ich schicke kein Geld. Ich rufe ihre alte Nummer an.",
+            "Ich schicke kein Geld. Ich frage erst jemanden aus meiner Familie."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Es kann Betrug sein.",
-          "feedbackCorrect": "Das ist sicher. Du schickst kein Geld an eine fremde Nummer.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Du willst helfen. Das nutzen Betrüger aus. Die Nummer ist fremd. Dann ist dein Geld weg.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das Geld bleibt bei dir. Zusammen merkt ihr schnell: Stimmt die Geschichte?"
+          ],
+          "feedbackCorrect": "Genau. An der alten Nummer erreichst du deine echte Schwester. So merkst du: Stimmt die Nachricht?",
           "remember": "Ich schicke kein Geld an fremde Nummern."
         },
         "pictogram": "pikto-message"
@@ -1452,15 +1480,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein unbekannter Link kommt an. Was ist besser?",
+          "question": "Eine fremde Nummer schreibt dir: Dein Paket kommt nicht an. Tippe hier. Du wartest gerade auf ein Paket. Was machst du?",
+          "schluessel": "Ein unbekannter Link kommt an. Was ist besser?",
           "pictogram": "pikto-stranger",
           "answers": [
-            "Ich öffne den Link.",
-            "Ich öffne den Link nicht."
+            "Ich tippe auf den Link. Ich warte ja auf mein Paket.",
+            "Ich tippe nicht. Ich schaue selbst beim Paket-Dienst nach.",
+            "Ich tippe auf den Link. Aber ich gebe keine Daten ein."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Unbekannte Links können gefährlich sein.",
-          "feedbackCorrect": "Das ist sicher. Du öffnest den unbekannten Link nicht.",
+          "feedbackWrong": [
+            "Viele Menschen warten auf ein Paket. Das wissen Betrüger. Der Link kann auf eine falsche Seite führen. Dort will jemand deine Daten.",
+            null,
+            "Besser gar nicht tippen. Die falsche Seite sieht oft echt aus. Schon angetippt? Dann gib keine Daten ein."
+          ],
+          "feedbackCorrect": "Genau. Beim Paket-Dienst siehst du selbst: Wo ist mein Paket? Der Link bleibt zu.",
           "remember": "Ich öffne unbekannte Links nicht sofort."
         },
         "pictogram": "pikto-link"
@@ -1485,15 +1519,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
+          "question": "Eine Nachricht kommt: Hier ist WhatsApp. Wir sperren dein Konto. Schick uns den Code aus der SMS. Was machst du?",
+          "schluessel": "Jemand fragt nach deinem WhatsApp-Code. Was ist besser?",
           "pictogram": "pikto-code",
           "answers": [
-            "Ich schicke den Code.",
+            "Ich schicke den Code. Ich will mein Konto behalten.",
+            "Ich frage zurück: Bist du wirklich von WhatsApp?",
             "Ich schicke den Code nicht."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Mit dem Code kann jemand dein WhatsApp übernehmen.",
-          "feedbackCorrect": "Das ist sicher. Dein WhatsApp-Code bleibt geheim.",
+          "correctIndex": 2,
+          "feedbackWrong": [
+            "Die Nachricht macht Angst. Das ist Absicht. Mit dem Code kann jemand dein WhatsApp übernehmen.",
+            "Betrüger sagen einfach: Ja. Die Frage schützt dich nicht. Der Code bleibt bei dir.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Der Code ist nur für dich. Jemand fragt nach dem Code? Dann will die Person dein Konto.",
           "remember": "Mein WhatsApp-Code bleibt geheim."
         },
         "pictogram": "pikto-lock"
@@ -1517,15 +1557,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Was ist bei Gruppen wichtig?",
+          "question": "Du ziehst um. Du willst deine neue Adresse in die Gruppe von deiner Arbeit schreiben. In der Gruppe sind 30 Menschen. Was machst du?",
+          "schluessel": "Was ist bei Gruppen wichtig?",
           "pictogram": "pikto-message",
           "answers": [
-            "Alle können mitlesen.",
-            "Nur ich kann es sehen."
+            "Ich schreibe die Adresse in die Gruppe. Dann wissen es alle.",
+            "Ich schicke die Adresse einzeln an meine Freunde.",
+            "Ich schreibe die Adresse nicht in die Gruppe."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht richtig. In Gruppen können viele Menschen mitlesen.",
-          "feedbackCorrect": "Das ist richtig. In Gruppen können viele Menschen mitlesen.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Dann haben 30 Menschen deine Adresse. Nicht alle kennst du gut. Jeder kann die Adresse weiter-geben.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "So bekommen nur deine Freunde die Adresse.",
+            null
+          ],
+          "feedbackCorrect": "Genau. In der Gruppe lesen 30 Menschen mit. Deine Adresse ist privat. Sie gehört nicht in die Gruppe.",
           "remember": "In Gruppen schreibe ich nur, was alle sehen dürfen."
         },
         "pictogram": "pikto-message"
@@ -1549,15 +1603,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du willst ein Foto von einer Person senden. Was ist besser?",
+          "question": "Du hast ein lustiges Foto von deiner Kollegin. Sie hat Sahne im Gesicht. Du willst das Foto in eine Gruppe schicken. Was machst du?",
+          "schluessel": "Du willst ein Foto von einer Person senden. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Erst fragen.",
-            "Einfach senden."
+            "Ich frage meine Kollegin: Darf ich das Foto schicken?",
+            "Ich schicke das Foto. Es ist doch nur Spaß.",
+            "Ich schicke das Foto nur an meine beste Freundin."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen mitbestimmen.",
-          "feedbackCorrect": "Das ist sicher. Du fragst vorher.",
+          "feedbackWrong": [
+            null,
+            "Für dich ist es Spaß. Für deine Kollegin ist es vielleicht peinlich. Es ist ihr Bild. Sie darf mitbestimmen.",
+            "Auch eine Freundin kann das Foto weiter-schicken. Frag erst deine Kollegin."
+          ],
+          "feedbackCorrect": "Genau. Es ist ihr Bild. Sie darf mitbestimmen: Wer sieht das Foto?",
           "remember": "Ich prüfe Fotos vor dem Senden."
         },
         "pictogram": "pikto-photo"
@@ -1581,15 +1641,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine Nachricht macht dir Stress. Was ist besser?",
+          "question": "Eine Nachricht kommt: Letzte Warnung! Tippe heute auf den Link. Sonst löschen wir dein Konto. Du bekommst Angst. Was machst du?",
+          "schluessel": "Eine Nachricht macht dir Stress. Was ist besser?",
           "pictogram": "pikto-message",
           "answers": [
-            "Pause machen.",
-            "Sofort antworten."
+            "Ich lege das Handy weg. Ich mache eine Pause.",
+            "Ich tippe schnell auf den Link. Dann ist die Angst weg.",
+            "Ich mache eine Pause. Dann spreche ich mit jemandem darüber."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Unter Stress machst du leichter Fehler.",
-          "feedbackCorrect": "Das ist sicher. Du machst erst eine Pause.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Die Angst ist Absicht. Du sollst schnell tippen. Unter Stress machst du leichter Fehler.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Zu zweit seht ihr oft schneller: Ist das ein Trick?"
+          ],
+          "feedbackCorrect": "Genau. Die Nachricht macht Druck. In der Pause wirst du ruhig. Dann entscheidest du in Ruhe.",
           "remember": "Etwas stresst mich? Dann mache ich Pause."
         },
         "pictogram": "pikto-feel"
@@ -1651,8 +1725,8 @@ const topics = [
             "pictogram": "pikto-location"
           },
           {
-            "text": "Du zeigst die Nachricht einer vertrauten Person.",
-            "pictogram": "pikto-message"
+            "text": "Du prüfst in Ruhe: Was will die Nachricht von mir?",
+            "pictogram": "pikto-search"
           }
         ],
         "bullets": [
@@ -1676,15 +1750,21 @@ const topics = [
         "warning": "Auch ein bekannter Name kann falsch sein. Erst selbst anrufen, dann reagieren.",
         "success": "Mit deinem Plan lässt du dich nicht überrumpeln.",
         "practice": {
-          "question": "Eine Nachricht von einem bekannten Namen bittet dich plötzlich um Geld. Was machst du zuerst?",
+          "question": "Dein Freund Tom schreibt dir: Ich bin im Urlaub. Mein Geld ist weg. Schick mir bitte schnell 200 Euro. Was machst du zuerst?",
+          "schluessel": "Eine Nachricht von einem bekannten Namen bittet dich plötzlich um Geld. Was machst du zuerst?",
           "pictogram": "pikto-phone",
           "answers": [
-            "Ich rufe die Person selbst an.",
-            "Ich überweise das Geld schnell."
+            "Ich rufe Tom selbst an.",
+            "Ich überweise das Geld schnell. Tom ist mein Freund.",
+            "Ich schicke erst nur 50 Euro."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist zu schnell. Ruf die Person zuerst selbst an. Nimm die Nummer, die du schon kennst.",
-          "feedbackCorrect": "So merkst du, ob die Nachricht wirklich von dieser Person ist.",
+          "feedbackWrong": [
+            null,
+            "Das ist zu schnell. Vielleicht schreibt gar nicht Tom. Betrüger nutzen manchmal fremde Konten. Ruf Tom zuerst selbst an.",
+            "Auch 50 Euro sind dann weg. Ruf Tom zuerst selbst an."
+          ],
+          "feedbackCorrect": "Genau. Am Telefon merkst du: Hat wirklich Tom geschrieben?",
           "remember": "Bei Geld-Bitten rufe ich selbst an."
         },
         "remember": "Ich mache Stopp. Dann prüfe ich.",
@@ -1735,8 +1815,8 @@ const topics = [
         "question": "Eine unbekannte Nummer schickt dir ein Foto. Was machst du?",
         "pictogram": "pikto-stranger",
         "answers": [
-          "Ich antworte sofort.",
-          "Ich antworte nicht. Ich zeige es einer vertrauten Person.",
+          "Ich antworte sofort. Ich will höflich sein.",
+          "Ich antworte nicht. Ich blockiere die Nummer.",
           "Ich schicke ein Foto zurück."
         ],
         "correctIndex": 1,
@@ -1745,7 +1825,7 @@ const topics = [
           null,
           "Dann hat eine fremde Nummer ein Bild von dir."
         ],
-        "feedbackCorrect": "Bei unbekannten Nummern antwortest du nicht sofort."
+        "feedbackCorrect": "Du kennst die Nummer nicht. Du musst nicht antworten. Nach dem Blockieren kommt von der Nummer nichts mehr."
       },
       {
         "hinweis": "Frag dich: Woher weißt du, dass wirklich deine Freundin schreibt?",
@@ -1926,19 +2006,21 @@ const topics = [
         "pictogram": "pikto-message",
         "icon": "message",
         "text": [
-          "Du bekommst eine Nachricht.",
-          "Du kennst die Person nicht.",
-          "Du antwortest nicht sofort.",
-          "Du zeigst es einer vertrauten Person.",
-          "Die Person hilft dir."
+          "Eine fremde Nummer schreibt dir.",
+          "Du musst nicht antworten.",
+          "Du prüfst erst: Wer schreibt? Was will die Person?",
+          "Dann entscheidest du selbst.",
+          "Du kannst die Nummer blockieren.",
+          "Du willst erst mit jemandem darüber sprechen? Das geht auch."
         ],
-        "remember": "Unbekannte Nachrichten: erst fragen.",
+        "remember": "Fremde Nummer? Ich prüfe erst. Dann entscheide ich.",
         "vorbildWer": "Tilda",
         "vorbild": [
           "Eine fremde Nummer schreibt Tilda.",
           "Hallo, wie geht es dir?",
-          "Tilda antwortet nicht sofort.",
-          "Sie zeigt die Nachricht Alex."
+          "Tilda kennt die Nummer nicht.",
+          "Sie antwortet nicht.",
+          "Sie blockiert die Nummer."
         ]
       },
       {
@@ -1951,7 +2033,8 @@ const topics = [
           "Ein Link ist eine blaue Adresse.",
           "Du tippst nicht drauf.",
           "Fremde Links können gefährlich sein.",
-          "Du fragst eine vertraute Person."
+          "Du willst wissen: Stimmt die Nachricht? Dann öffnest du die App selbst.",
+          "Oder du rufst eine bekannte Nummer an."
         ],
         "remember": "Fremde Links nicht antippen.",
         "vorbildWer": "Alex",
@@ -1959,7 +2042,7 @@ const topics = [
           "Alex bekommt eine Nachricht mit einem Link.",
           "Die Nummer kennt er nicht.",
           "Alex tippt nicht auf den Link.",
-          "Er fragt Tilda."
+          "Er löscht die Nachricht."
         ]
       },
       {

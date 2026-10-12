@@ -1046,9 +1046,9 @@ let glossarOverlay = null;
    sichtbar war aber nur der Dialog. Wer mit der Tastatur bedient, hat
    den Fokus damit verloren.
 
-   Bewusst von Hand geloest und nicht ueber das inert-Attribut: inert
-   wird von aelteren Geraeten stillschweigend ignoriert, und dann gaebe
-   es gar keine Falle. Diese Fassung funktioniert ueberall gleich.
+   Die Fokus-Falle funktioniert auch auf aelteren Geraeten ohne inert.
+   Auf Geraeten mit inert ist die App hinter dem Dialog zusaetzlich
+   nicht bedienbar, solange der Dialog offen ist.
 
    EINE Stelle fuer alle drei Dialoge - vorher hatte die
    Woerter-Erklaerung ihre eigene Loesung fuer die Rueckgabe und die
@@ -1056,6 +1056,7 @@ let glossarOverlay = null;
    ============================================================ */
 let _dialogAktiv = null;   /* der gerade offene Dialog */
 let _dialogFokus = null;   /* was vorher den Fokus hatte */
+let _dialogAppWarInert = null;
 
 const DIALOG_FOKUSSIERBAR =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]),' +
@@ -1092,7 +1093,12 @@ function dialogOeffnen(dialog) {
   if (!dialog) return;
   /* Nur merken, wenn nicht schon ein Dialog offen war - sonst ginge der
      urspruengliche Ausgangspunkt verloren. */
-  if (!_dialogAktiv) _dialogFokus = document.activeElement;
+  if (!_dialogAktiv) {
+    _dialogFokus = document.activeElement;
+    const app = document.querySelector(".app");
+    _dialogAppWarInert = app ? app.inert : null;
+    if (app) app.inert = true;
+  }
   _dialogAktiv = dialog;
   document.addEventListener("keydown", dialogTabFalle, true);
 }
@@ -1104,6 +1110,9 @@ function dialogSchliessen(dialog) {
   if (!_dialogAktiv || (dialog && dialog !== _dialogAktiv)) return;
   document.removeEventListener("keydown", dialogTabFalle, true);
   _dialogAktiv = null;
+  const app = document.querySelector(".app");
+  if (app && _dialogAppWarInert !== null) app.inert = _dialogAppWarInert;
+  _dialogAppWarInert = null;
   const zurueck = _dialogFokus;
   _dialogFokus = null;
   if (zurueck && document.contains(zurueck) && typeof zurueck.focus === "function") {
@@ -2575,11 +2584,11 @@ const KERN_SATZ_PIKTOGRAMME = {
   "whatsapp": {
     "Unbekannte Nachrichten": [
       {
-        "piktogramm": "message",
+        "piktogramm": "stranger",
         "saetze": {
-          "leicht": "Du bekommst eine Nachricht.",
-          "einfach": "Manchmal bekommst du eine Nachricht von einer Person, die du nicht kennst.",
-          "standard": "Bekommst du eine Nachricht von jemandem, den du nicht kennst, antwortest du nicht sofort – auch wenn sie freundlich klingt. Zeig sie zuerst einer Person, der du vertraust. Gemeinsam entscheidet ihr, wie es weitergeht."
+          "leicht": "Eine fremde Nummer schreibt dir.",
+          "einfach": "Manchmal schreibt dir eine Nummer, die du nicht kennst.",
+          "standard": "Schreibt dir eine unbekannte Nummer, musst du nicht antworten – auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte. Danach entscheidest du selbst, ob du die Nachricht unbeantwortet lässt oder die Nummer blockierst. Wenn du möchtest, besprichst du das vorher mit jemandem."
         }
       }
     ],
@@ -2589,7 +2598,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du bekommst einen Link.",
           "einfach": "Ein Link ist eine Adresse zu einer Internet-Seite. Meistens ist er blau.",
-          "standard": "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht an, sondern frag eine Person, der du vertraust."
+          "standard": "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht an. Willst du wissen, ob die Nachricht stimmt, öffne die App selbst oder ruf eine Nummer an, die du bereits kennst."
         }
       }
     ],
@@ -3179,7 +3188,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "stop",
         "saetze": {
           "leicht": "Du tippst nicht drauf.",
-          "einfach": "Tippe deshalb nicht darauf. Frag lieber eine Person, der du vertraust."
+          "einfach": "Tippe deshalb nicht darauf. Wenn du wissen willst, ob die Nachricht stimmt, öffnest du die App selbst oder rufst eine Nummer an, die du schon kennst."
         }
       }
     ],
@@ -3245,7 +3254,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du reagierst nicht sofort.",
           "einfach": "Wenn etwas komisch wirkt oder Stress macht, bleib ruhig und reagiere nicht sofort.",
-          "standard": "Wenn dir etwas merkwürdig vorkommt oder dir Stress gemacht wird, halte kurz inne: Reagiere nicht sofort, öffne keine Links und zeige die Nachricht einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter."
+          "standard": "Wenn dir etwas merkwürdig vorkommt oder dir Stress gemacht wird, halte kurz inne: Reagiere nicht sofort, öffne keine Links und prüfe in Ruhe, was die Nachricht von dir möchte. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter."
         }
       },
       {
@@ -3269,17 +3278,17 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
     ],
     "Unbekannte Nachrichten": [
       {
-        "piktogramm": "friend",
+        "piktogramm": "search",
         "saetze": {
-          "leicht": "Du zeigst es einer vertrauten Person.",
-          "einfach": "Zeig sie zuerst einer Person, der du vertraust. Sie hilft dir weiter."
+          "leicht": "Du prüfst erst: Wer schreibt? Was will die Person?",
+          "einfach": "Du musst nicht antworten, auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte."
         }
       },
       {
-        "piktogramm": "stop",
+        "piktogramm": "block",
         "saetze": {
-          "leicht": "Du antwortest nicht sofort.",
-          "einfach": "Antworte nicht sofort, auch wenn die Nachricht freundlich klingt."
+          "leicht": "Du kannst die Nummer blockieren.",
+          "einfach": "Dann entscheidest du selbst: Du kannst die Nachricht stehen lassen oder die Nummer blockieren. Wenn du möchtest, sprichst du vorher mit jemandem darüber."
         }
       }
     ],
@@ -5446,6 +5455,7 @@ function lernEinstellungenOeffnen(ausloeser) {
     <button type="button" class="lern-mehr-knopf lern-mehr-zu" data-aktion="zu">Schließen</button>
   </div>`;
   const schliessen = () => { stopReading(); blatt.remove(); dialogSchliessen(blatt); if (ausloeser && document.body.contains(ausloeser)) ausloeser.focus(); };
+  blatt._schliessen = schliessen;
   blatt.addEventListener("click", e => {
     if (e.target === blatt) return schliessen();
     const k = e.target.closest("[data-aktion]"); if (!k) return;

@@ -721,7 +721,7 @@ const CONTENT_VERSIONS = {
       einfach: {
         text: [
           { text: "Wenn etwas komisch wirkt oder Stress macht, bleib ruhig und reagiere nicht sofort." },
-          { text: "Zeig die Nachricht am besten einer Person, der du vertraust." }
+          { text: "Prüfe in Ruhe, was die Nachricht von dir möchte." }
         ],
         bullets: ["Stopp machen.", "Nicht sofort antworten.", "Den Link nicht öffnen.", "Den Hilfe-Knopf nutzen."],
         warning: "Auch wenn eine Nachricht von einem bekannten Namen kommt, kann sie gefälscht sein. Ruf die Person lieber selbst über die Nummer an, die du schon kennst, bevor du reagierst.",
@@ -729,7 +729,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [
-          { text: "Wenn dir etwas merkwürdig vorkommt oder dir Stress gemacht wird, halte kurz inne: Reagiere nicht sofort, öffne keine Links und zeige die Nachricht einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
+          { text: "Wenn dir etwas merkwürdig vorkommt oder dir Stress gemacht wird, halte kurz inne: Reagiere nicht sofort, öffne keine Links und prüfe in Ruhe, was die Nachricht von dir möchte. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
         ],
         bullets: [],
         warning: "Ein bekannter Name allein ist kein Beweis für die Identität des Absenders – Betrüger nutzen häufig genau dieses Vertrauen aus. Ruf die Person deshalb über eine dir bereits bekannte Nummer zurück, bevor du auf eine ungewöhnliche Bitte reagierst.",
@@ -2476,17 +2476,17 @@ const KURZ_VERSIONS = {
     "Unbekannte Nachrichten": {
       einfach: {
         text: [
-          { text: "Manchmal bekommst du eine Nachricht von einer Person, die du nicht kennst." },
-          { text: "Antworte nicht sofort, auch wenn die Nachricht freundlich klingt." },
-          { text: "Zeig sie zuerst einer Person, der du vertraust. Sie hilft dir weiter." }
+          { text: "Manchmal schreibt dir eine Nummer, die du nicht kennst." },
+          { text: "Du musst nicht antworten, auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte." },
+          { text: "Dann entscheidest du selbst: Du kannst die Nachricht stehen lassen oder die Nummer blockieren. Wenn du möchtest, sprichst du vorher mit jemandem darüber." }
         ],
-        remember: "Bei unbekannten Nachrichten fragst du zuerst eine Person, der du vertraust.",
-        vorbild: ["Eine fremde Nummer schreibt Tilda: Hallo, wie geht es dir?", "Tilda antwortet nicht sofort, sondern zeigt die Nachricht zuerst Alex."]
+        remember: "Bei einer fremden Nummer prüfe ich zuerst, wer schreibt. Dann entscheide ich selbst.",
+        vorbild: ["Eine fremde Nummer schreibt Tilda: Hallo, wie geht es dir?", "Tilda kennt die Nummer nicht. Sie antwortet nicht und blockiert die Nummer."]
       },
       standard: {
-        text: [{ text: "Bekommst du eine Nachricht von jemandem, den du nicht kennst, antwortest du nicht sofort – auch wenn sie freundlich klingt. Zeig sie zuerst einer Person, der du vertraust. Gemeinsam entscheidet ihr, wie es weitergeht." }],
-        remember: "Unbekannte Nachrichten: erst Rat holen, dann antworten.",
-        vorbild: ["Eine unbekannte Nummer schreibt Tilda freundlich an. Tilda antwortet nicht sofort, sondern zeigt die Nachricht zuerst Alex."]
+        text: [{ text: "Schreibt dir eine unbekannte Nummer, musst du nicht antworten – auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte. Danach entscheidest du selbst, ob du die Nachricht unbeantwortet lässt oder die Nummer blockierst. Wenn du möchtest, besprichst du das vorher mit jemandem." }],
+        remember: "Unbekannte Nummer: erst prüfen, dann selbst entscheiden.",
+        vorbild: ["Eine unbekannte Nummer schreibt Tilda freundlich an. Tilda kennt die Nummer nicht, antwortet nicht und blockiert sie."]
       }
     },
     "Links in Nachrichten": {
@@ -2494,15 +2494,15 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Ein Link ist eine Adresse zu einer Internet-Seite. Meistens ist er blau." },
           { text: "Fremde Links können gefährlich sein, weil sie auf falsche Seiten führen." },
-          { text: "Tippe deshalb nicht darauf. Frag lieber eine Person, der du vertraust." }
+          { text: "Tippe deshalb nicht darauf. Wenn du wissen willst, ob die Nachricht stimmt, öffnest du die App selbst oder rufst eine Nummer an, die du schon kennst." }
         ],
         remember: "Auf fremde Links tippst du nicht.",
-        vorbild: ["Alex bekommt von einer Nummer, die er nicht kennt, eine Nachricht mit einem Link.", "Er tippt nicht auf den Link und fragt zuerst Tilda."]
+        vorbild: ["Alex bekommt von einer Nummer, die er nicht kennt, eine Nachricht mit einem Link.", "Er tippt nicht auf den Link und löscht die Nachricht."]
       },
       standard: {
-        text: [{ text: "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht an, sondern frag eine Person, der du vertraust." }],
+        text: [{ text: "Ein Link führt dich auf eine Internetseite – meist erkennst du ihn an der blauen Schrift. Links von Fremden können auf gefälschte Seiten führen. Tippe sie deshalb nicht an. Willst du wissen, ob die Nachricht stimmt, öffne die App selbst oder ruf eine Nummer an, die du bereits kennst." }],
         remember: "Fremde Links nicht antippen.",
-        vorbild: ["Von einer unbekannten Nummer kommt eine Nachricht mit Link. Alex tippt ihn nicht an und fragt zuerst Tilda."]
+        vorbild: ["Von einer unbekannten Nummer kommt eine Nachricht mit Link. Alex tippt ihn nicht an und löscht die Nachricht."]
       }
     },
     "Dein WhatsApp-Code": {
@@ -4966,7 +4966,7 @@ const AUFGABEN_VERSIONS = {
         "hinweis": "Du weißt nicht, wer die Nummer benutzt. Überlege, was das für deine Antwort bedeutet.",
         "answers": [
           "Ich antworte gleich auf die Nachricht.",
-          "Ich antworte nicht und zeige das Foto einer Person, der ich vertraue.",
+          "Ich antworte nicht und blockiere die Nummer.",
           "Ich antworte der Nummer mit einem Foto."
         ],
         "feedbackWrong": [
@@ -4974,14 +4974,14 @@ const AUFGABEN_VERSIONS = {
           null,
           "Wenn du ein Foto zurückschickst, hat jemand mit einer fremden Nummer ein Bild von dir."
         ],
-        "feedbackCorrect": "Wenn du die Nummer nicht kennst, antwortest du nicht sofort."
+        "feedbackCorrect": "Du kennst die Nummer nicht und musst nicht antworten. Wenn du sie blockierst, kommt von ihr nichts mehr."
       },
       "standard": {
         "question": "Eine unbekannte Nummer schickt dir ein Foto. Wie reagierst du?",
         "hinweis": "Du weißt nicht, wer hinter der Nummer steckt. Was bedeutet das für deine Antwort?",
         "answers": [
-          "Ich antworte sofort auf die Nachricht.",
-          "Ich antworte nicht und zeige das Foto einer vertrauten Person.",
+          "Ich antworte sofort auf diese Nachricht.",
+          "Ich antworte nicht und blockiere die Nummer.",
           "Ich schicke ein Foto zurück."
         ],
         "feedbackWrong": [
@@ -4989,7 +4989,7 @@ const AUFGABEN_VERSIONS = {
           null,
           "So bekommt jemand mit einer unbekannten Nummer ein Bild von dir."
         ],
-        "feedbackCorrect": "Bei Nachrichten von unbekannten Nummern antwortest du nicht vorschnell."
+        "feedbackCorrect": "Du kennst die Nummer nicht und musst nicht antworten. Nach dem Blockieren kommt von ihr nichts mehr."
       }
     },
     "In einer Gruppe steht ein Link. Es soll einen Gutschein geben. Was machst du?": {
@@ -5058,287 +5058,507 @@ const AUFGABEN_VERSIONS = {
     },
     "whatsapp/lang/WhatsApp nutzen": {
       "einfach": {
-        "question": "Du bekommst eine Nachricht von einer Person. Musst du ihr antworten?",
+        "question": "Eine Person aus deinem Sportverein schreibt dir sehr oft, und du möchtest das nicht. Musst du ihr antworten?",
         "answers": [
           "Ja, denn sonst bin ich unhöflich.",
-          "Nein, denn ich entscheide selbst, wem ich antworte."
+          "Nein, denn ich entscheide selbst, wem ich antworte.",
+          "Nein, aber ich schreibe ihr: Bitte schreib mir nicht so oft."
         ],
-        "feedbackWrong": "Du musst nicht auf jede Nachricht antworten, denn du bestimmst selbst, mit wem du schreibst.",
-        "feedbackCorrect": "Genau, du entscheidest selbst, wem du auf WhatsApp antwortest.",
+        "feedbackWrong": [
+          "Du musst nicht antworten, auch nicht aus Höflichkeit. Du bestimmst selbst, mit wem du schreibst.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist klar und freundlich, und die Person weiß danach Bescheid."
+        ],
+        "feedbackCorrect": "Genau, du entscheidest selbst, wem du antwortest. Das ist nicht unhöflich.",
         "remember": "Ich entscheide selbst, wem ich eine Antwort schreibe."
       },
       "standard": {
-        "question": "Jemand schreibt dir bei WhatsApp. Musst du darauf antworten?",
+        "question": "Jemand aus deinem Sportverein schreibt dir ständig, obwohl du das nicht möchtest. Musst du antworten?",
         "answers": [
           "Ja, sonst bin ich unhöflich.",
-          "Nein, das entscheide ich selbst."
+          "Nein, das entscheide ich selbst.",
+          "Nein, aber ich schreibe: Bitte schreib mir nicht so oft."
         ],
-        "feedbackWrong": "Du musst nicht antworten. Du bestimmst selbst, mit wem du schreibst.",
-        "feedbackCorrect": "Du entscheidest selbst, wem du antwortest.",
+        "feedbackWrong": [
+          "Du musst nicht antworten, auch nicht aus Höflichkeit. Du bestimmst selbst, mit wem du schreibst.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist klar und freundlich. Danach weiß die Person, woran sie ist."
+        ],
+        "feedbackCorrect": "Du entscheidest selbst, wem du antwortest. Unhöflich ist das nicht.",
         "remember": "Ich entscheide selbst, wem ich antworte."
       }
     },
     "whatsapp/lang/Fremde Nummer": {
       "einfach": {
-        "question": "Du bekommst eine Nachricht von einer Nummer, die du nicht kennst. Was ist besser?",
+        "question": "Eine Nummer, die du nicht kennst, schreibt dir: Du hast 500 Euro gewonnen. Schick uns deinen Namen und deine Adresse. Was machst du?",
         "answers": [
-          "Ich schicke der Nummer private Daten von mir.",
-          "Ich antworte der Nummer nicht sofort."
+          "Ich schicke meinen Namen und meine Adresse, weil ich den Gewinn haben möchte.",
+          "Ich melde die Nummer bei WhatsApp und blockiere sie danach.",
+          "Ich antworte der Nummer nicht."
         ],
-        "feedbackWrong": "Das ist nicht sicher, weil du nicht weißt, wer dir wirklich schreibt.",
-        "feedbackCorrect": "Das ist sicher, weil du einer fremden Nummer keine privaten Daten gibst.",
+        "feedbackWrong": [
+          "Dann hat eine fremde Person deinen Namen und deine Adresse. So ein Gewinn ist fast immer ein Trick.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann kann WhatsApp die Nummer prüfen, und sie kann dir nicht mehr schreiben.",
+          null
+        ],
+        "feedbackCorrect": "Genau, du kennst die Nummer nicht, und sie will deine privaten Daten haben. Deshalb antwortest du nicht.",
         "remember": "Ich antworte nicht sofort, wenn mir eine fremde Nummer schreibt."
       },
       "standard": {
-        "question": "Eine unbekannte Nummer schreibt dir. Wie gehst du mit der Nachricht um?",
+        "question": "Eine unbekannte Nummer schreibt: Du hast 500 Euro gewonnen. Schick uns deinen Namen und deine Adresse. Wie reagierst du?",
         "answers": [
-          "Ich schicke der Nummer private Daten.",
-          "Ich antworte nicht sofort."
+          "Ich schicke Namen und Adresse, schließlich möchte ich den Gewinn.",
+          "Ich melde die Nummer bei WhatsApp und blockiere sie.",
+          "Ich antworte nicht."
         ],
-        "feedbackWrong": "Du weißt nicht, wer hinter der Nummer steckt. Private Daten weiterzugeben ist deshalb unsicher.",
-        "feedbackCorrect": "Du gibst einer unbekannten Nummer keine privaten Daten.",
+        "feedbackWrong": [
+          "Damit hätte eine fremde Person deinen Namen und deine Adresse. Solche Gewinne sind fast immer ein Trick.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "WhatsApp kann die Nummer dann prüfen, und sie kann dir nicht mehr schreiben.",
+          null
+        ],
+        "feedbackCorrect": "Du kennst die Nummer nicht, und sie will an deine privaten Daten. Deshalb antwortest du nicht.",
         "remember": "Bei unbekannten Nummern antworte ich nicht sofort."
       }
     },
     "whatsapp/lang/Geld und Betrug": {
       "einfach": {
-        "question": "Eine Nummer, die du nicht kennst, bittet dich um Geld. Was ist besser?",
+        "question": "Eine Nummer, die du nicht kennst, schreibt dir: Hallo, hier ist deine Schwester. Mein Handy ist kaputt. Schick mir bitte schnell 300 Euro. Was machst du?",
         "answers": [
-          "Ich schicke der fremden Nummer Geld.",
-          "Ich schicke der fremden Nummer kein Geld."
+          "Ich schicke das Geld, weil meine Schwester Hilfe braucht.",
+          "Ich schicke kein Geld und rufe ihre alte Nummer an.",
+          "Ich schicke kein Geld und frage zuerst jemanden aus meiner Familie."
         ],
-        "feedbackWrong": "Das ist nicht sicher, weil hinter der Bitte Betrug stecken kann.",
-        "feedbackCorrect": "Das ist sicher, weil du einer fremden Nummer kein Geld schickst.",
+        "feedbackWrong": [
+          "Du möchtest helfen, und genau das nutzen Betrüger aus. Die Nummer ist fremd, und dein Geld ist dann weg.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das Geld bleibt bei dir, und gemeinsam merkt ihr schnell, ob die Geschichte stimmt."
+        ],
+        "feedbackCorrect": "Genau, unter der alten Nummer erreichst du deine echte Schwester. So merkst du, ob die Nachricht stimmt.",
         "remember": "Ich schicke kein Geld an eine Nummer, die ich nicht kenne."
       },
       "standard": {
-        "question": "Eine fremde Nummer bittet dich um Geld. Wie reagierst du?",
+        "question": "Eine unbekannte Nummer schreibt: Hallo, hier ist deine Schwester. Mein Handy ist kaputt. Schick mir bitte schnell 300 Euro. Wie reagierst du?",
         "answers": [
-          "Ich schicke Geld.",
-          "Ich schicke kein Geld."
+          "Ich überweise das Geld, meine Schwester braucht schließlich Hilfe.",
+          "Ich überweise nichts und rufe ihre bekannte Nummer an.",
+          "Ich überweise nichts und frage zuerst jemanden aus der Familie."
         ],
-        "feedbackWrong": "Hinter der Geldbitte kann Betrug stecken.",
-        "feedbackCorrect": "Du schickst einer unbekannten Nummer kein Geld.",
+        "feedbackWrong": [
+          "Du möchtest helfen – genau darauf setzen Betrüger. Die Nummer ist fremd, und überwiesenes Geld ist meist verloren.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dein Geld bleibt bei dir, und zu zweit klärt sich schnell, ob die Geschichte stimmt."
+        ],
+        "feedbackCorrect": "Unter der bekannten Nummer erreichst du deine echte Schwester und merkst sofort, ob die Nachricht stimmt.",
         "remember": "Ich schicke kein Geld an fremde Nummern."
       }
     },
     "whatsapp/lang/Links in Nachrichten": {
       "einfach": {
-        "question": "Du bekommst einen Link, den du nicht kennst. Was ist besser?",
+        "question": "Eine Nummer, die du nicht kennst, schreibt dir: Dein Paket kommt nicht an. Tippe hier. Du wartest gerade wirklich auf ein Paket. Was machst du?",
         "answers": [
-          "Ich öffne den unbekannten Link.",
-          "Ich öffne den unbekannten Link nicht."
+          "Ich tippe auf den Link, weil ich ja auf mein Paket warte.",
+          "Ich tippe nicht und schaue selbst beim Paketdienst nach.",
+          "Ich tippe auf den Link, aber ich gebe dort keine Daten ein."
         ],
-        "feedbackWrong": "Das ist nicht sicher, weil unbekannte Links gefährlich sein können.",
-        "feedbackCorrect": "Das ist sicher, weil du den unbekannten Link nicht öffnest.",
+        "feedbackWrong": [
+          "Viele Menschen warten auf ein Paket, und das wissen Betrüger. Der Link kann auf eine falsche Seite führen, auf der jemand deine Daten haben will.",
+          null,
+          "Tippe besser gar nicht auf den Link, denn die falsche Seite sieht oft echt aus. Wenn du schon getippt hast, gib dort keine Daten ein."
+        ],
+        "feedbackCorrect": "Genau, beim Paketdienst siehst du selbst, wo dein Paket ist. Der Link bleibt zu.",
         "remember": "Wenn ich einen Link nicht kenne, öffne ich ihn nicht sofort."
       },
       "standard": {
-        "question": "Ein unbekannter Link kommt in einer Nachricht bei dir an. Wie reagierst du?",
+        "question": "Eine unbekannte Nummer schreibt: Dein Paket kann nicht zugestellt werden. Tippe hier. Du wartest tatsächlich gerade auf ein Paket. Wie reagierst du?",
         "answers": [
-          "Ich öffne den Link.",
-          "Ich öffne den Link nicht."
+          "Ich tippe auf den Link, ich warte ja auf mein Paket.",
+          "Ich tippe nicht und sehe selbst beim Paketdienst nach.",
+          "Ich tippe auf den Link, gebe dort aber keine Daten ein."
         ],
-        "feedbackWrong": "Unbekannte Links können gefährlich sein. Öffne sie deshalb nicht einfach.",
-        "feedbackCorrect": "Du öffnest den unbekannten Link nicht.",
+        "feedbackWrong": [
+          "Fast immer wartet irgendjemand auf ein Paket – darauf setzen Betrüger. Der Link kann auf eine gefälschte Seite führen, die deine Daten abgreifen will.",
+          null,
+          "Am besten öffnest du den Link gar nicht, denn gefälschte Seiten sehen oft echt aus. Falls du schon getippt hast, gib dort keine Daten ein."
+        ],
+        "feedbackCorrect": "Beim Paketdienst siehst du selbst, wo dein Paket ist. Der Link bleibt zu.",
         "remember": "Unbekannte Links öffne ich nicht sofort."
       }
     },
     "whatsapp/lang/WhatsApp-Code": {
       "einfach": {
-        "question": "Jemand bittet dich, deinen WhatsApp-Code zu schicken. Was ist besser?",
+        "question": "Du bekommst eine Nachricht: Hier ist WhatsApp. Wir sperren dein Konto. Schick uns den Code aus der SMS. Was machst du?",
         "answers": [
-          "Ich schicke der Person meinen Code.",
-          "Ich schicke der Person meinen Code nicht."
+          "Ich schicke den Code, weil ich mein Konto behalten möchte.",
+          "Ich frage zurück, ob die Nachricht wirklich von WhatsApp kommt.",
+          "Ich schicke den Code nicht."
         ],
-        "feedbackWrong": "Das ist nicht sicher, weil jemand mit dem Code dein WhatsApp übernehmen kann.",
-        "feedbackCorrect": "Das ist sicher, weil dein WhatsApp-Code geheim bleibt.",
+        "feedbackWrong": [
+          "Die Nachricht soll dir Angst machen. Mit dem Code kann jemand dein WhatsApp übernehmen.",
+          "Betrüger antworten einfach mit Ja, deshalb schützt dich die Frage nicht. Dein Code bleibt bei dir.",
+          null
+        ],
+        "feedbackCorrect": "Genau, der Code ist nur für dich bestimmt. Wer danach fragt, will dein Konto übernehmen.",
         "remember": "Ich behalte meinen WhatsApp-Code für mich, damit er geheim bleibt."
       },
       "standard": {
-        "question": "Jemand fragt nach deinem WhatsApp-Code. Wie reagierst du?",
+        "question": "Du erhältst die Nachricht: Hier ist WhatsApp. Wir sperren dein Konto. Schick uns den Code aus der SMS. Wie reagierst du?",
         "answers": [
-          "Ich schicke den Code.",
+          "Ich schicke den Code, ich möchte mein Konto behalten.",
+          "Ich frage nach, ob die Nachricht wirklich von WhatsApp stammt.",
           "Ich gebe den Code nicht weiter."
         ],
-        "feedbackWrong": "Mit dem Code kann jemand dein WhatsApp-Konto übernehmen. Gib ihn deshalb nicht weiter.",
-        "feedbackCorrect": "Dein WhatsApp-Code bleibt geheim.",
+        "feedbackWrong": [
+          "Die Nachricht soll dir Angst machen. Mit dem Code kann jemand dein WhatsApp-Konto übernehmen.",
+          "Betrüger antworten einfach mit Ja – die Rückfrage schützt dich also nicht. Behalte den Code für dich.",
+          null
+        ],
+        "feedbackCorrect": "Der Code ist nur für dich bestimmt. Wer danach fragt, will dein Konto übernehmen.",
         "remember": "Ich halte meinen WhatsApp-Code geheim."
       }
     },
     "whatsapp/lang/Gruppen": {
       "einfach": {
-        "question": "Du schreibst in einer WhatsApp-Gruppe. Was ist dabei wichtig?",
+        "question": "Du ziehst um und möchtest deine neue Adresse in die WhatsApp-Gruppe von deiner Arbeit schreiben. In der Gruppe sind 30 Menschen. Was machst du?",
         "answers": [
-          "Alle in der Gruppe können die Nachrichten mitlesen.",
-          "Nur ich kann die Nachrichten sehen."
+          "Ich schreibe die Adresse in die Gruppe, damit es alle wissen.",
+          "Ich schicke die Adresse einzeln an meine Freunde.",
+          "Ich schreibe die Adresse nicht in die Gruppe."
         ],
-        "feedbackWrong": "Das stimmt nicht, denn in einer Gruppe können viele Menschen die Nachrichten mitlesen.",
-        "feedbackCorrect": "Das stimmt, denn in einer Gruppe können viele Menschen die Nachrichten mitlesen.",
+        "feedbackWrong": [
+          "Dann haben 30 Menschen deine Adresse, und nicht alle kennst du gut. Jeder von ihnen kann die Adresse weitergeben.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "So bekommen nur deine Freunde die Adresse.",
+          null
+        ],
+        "feedbackCorrect": "Genau, in der Gruppe lesen 30 Menschen mit. Deine Adresse ist privat und gehört deshalb nicht in die Gruppe.",
         "remember": "Ich schreibe in einer Gruppe nur Dinge, die alle dort sehen dürfen."
       },
       "standard": {
-        "question": "Was beachtest du beim Schreiben in einer WhatsApp-Gruppe?",
+        "question": "Du ziehst um und willst deine neue Adresse in die WhatsApp-Gruppe deiner Arbeit schreiben. Die Gruppe hat 30 Mitglieder. Wie gehst du vor?",
         "answers": [
-          "Alle in der Gruppe können mitlesen.",
-          "Nur ich sehe die Nachrichten."
+          "Ich schreibe die Adresse in die Gruppe, dann wissen alle Bescheid.",
+          "Ich schicke die Adresse einzeln an meine Freunde.",
+          "Ich schreibe die Adresse nicht in die Gruppe."
         ],
-        "feedbackWrong": "In einer Gruppe lesen viele Menschen mit. Die Nachrichten sind dort nicht nur für dich sichtbar.",
-        "feedbackCorrect": "In einer Gruppe können viele Menschen deine Nachrichten mitlesen.",
+        "feedbackWrong": [
+          "Dann hätten 30 Menschen deine Adresse, und nicht alle kennst du gut. Jeder von ihnen kann sie weitergeben.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "So bekommen nur die Menschen deine Adresse, denen du sie geben willst.",
+          null
+        ],
+        "feedbackCorrect": "In der Gruppe lesen 30 Menschen mit. Deine Adresse ist privat und gehört nicht dorthin.",
         "remember": "In Gruppen schreibe ich nur, was alle dort sehen dürfen."
       }
     },
     "whatsapp/lang/Fotos senden": {
       "einfach": {
-        "question": "Du möchtest ein Foto verschicken, auf dem eine andere Person zu sehen ist. Was ist besser?",
+        "question": "Du hast ein lustiges Foto von deiner Kollegin: Sie hat Sahne im Gesicht. Du möchtest das Foto in eine Gruppe schicken. Was machst du?",
         "answers": [
-          "Ich frage die Person, bevor ich das Foto sende.",
-          "Ich sende das Foto, ohne sie zu fragen."
+          "Ich frage meine Kollegin, ob ich das Foto schicken darf.",
+          "Ich schicke das Foto, weil es doch nur ein Spaß ist.",
+          "Ich schicke das Foto nur an meine beste Freundin."
         ],
-        "feedbackWrong": "Das ist nicht sicher, denn andere Menschen dürfen mitbestimmen, ob du ihr Foto sendest.",
-        "feedbackCorrect": "Das ist sicher, weil du die Person vor dem Senden fragst.",
+        "feedbackWrong": [
+          null,
+          "Für dich ist es Spaß, aber für deine Kollegin ist es vielleicht peinlich. Es ist ihr Bild, deshalb darf sie mitbestimmen.",
+          "Auch eine Freundin kann das Foto weiterschicken. Frag deshalb zuerst deine Kollegin."
+        ],
+        "feedbackCorrect": "Genau, es ist ihr Bild. Deshalb darf sie mitbestimmen, wer das Foto sieht.",
         "remember": "Bevor ich ein Foto sende, prüfe ich es."
       },
       "standard": {
-        "question": "Du willst ein Foto einer anderen Person verschicken. Wie gehst du vor?",
+        "question": "Du hast ein lustiges Foto von deiner Kollegin – sie hat Sahne im Gesicht. Du willst es in eine Gruppe schicken. Wie gehst du vor?",
         "answers": [
-          "Ich frage die Person vorher.",
-          "Ich schicke das Foto einfach ab."
+          "Ich frage meine Kollegin, ob ich es verschicken darf.",
+          "Ich schicke das Foto ab, es ist ja nur Spaß.",
+          "Ich schicke das Foto nur an meine beste Freundin."
         ],
-        "feedbackWrong": "Die Person auf dem Foto darf mitbestimmen, ob du es verschickst. Frag sie deshalb vorher.",
-        "feedbackCorrect": "Du fragst die Person, bevor du das Foto verschickst.",
+        "feedbackWrong": [
+          null,
+          "Was für dich Spaß ist, kann deiner Kollegin peinlich sein. Es ist ihr Bild, also entscheidet sie mit.",
+          "Auch eine einzelne Freundin kann das Foto weiterleiten. Frag deshalb zuerst deine Kollegin."
+        ],
+        "feedbackCorrect": "Es ist ihr Bild. Deshalb entscheidet sie mit, wer das Foto zu sehen bekommt.",
         "remember": "Ich prüfe Fotos, bevor ich sie verschicke."
       }
     },
     "whatsapp/lang/Stress und Eile": {
       "einfach": {
-        "question": "Du bekommst eine Nachricht, die dir Stress macht. Was ist besser?",
+        "question": "Du bekommst eine Nachricht: Letzte Warnung! Tippe heute auf den Link. Sonst löschen wir dein Konto. Die Nachricht macht dir Angst. Was machst du?",
         "answers": [
-          "Ich mache erst eine Pause.",
-          "Ich antworte sofort auf die Nachricht."
+          "Ich lege das Handy weg und mache erst eine Pause.",
+          "Ich tippe schnell auf den Link, damit die Angst weg ist.",
+          "Ich mache eine Pause und spreche danach mit jemandem darüber."
         ],
-        "feedbackWrong": "Das ist nicht sicher, weil du unter Stress leichter Fehler machst.",
-        "feedbackCorrect": "Das ist sicher, weil du zuerst eine Pause machst.",
+        "feedbackWrong": [
+          null,
+          "Die Angst ist Absicht, denn du sollst schnell tippen. Unter Stress machst du leichter Fehler.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Zu zweit seht ihr oft schneller, ob die Nachricht ein Trick ist."
+        ],
+        "feedbackCorrect": "Genau, die Nachricht macht Druck. In der Pause wirst du ruhig und kannst danach in Ruhe entscheiden.",
         "remember": "Wenn mich etwas stresst, mache ich erst eine Pause."
       },
       "standard": {
-        "question": "Eine Nachricht stresst dich. Wie reagierst du?",
+        "question": "Du erhältst die Nachricht: Letzte Warnung! Tippe heute auf den Link, sonst löschen wir dein Konto. Dir wird mulmig. Wie reagierst du?",
         "answers": [
-          "Ich mache eine Pause.",
-          "Ich antworte sofort."
+          "Ich lege das Handy weg und mache eine Pause.",
+          "Ich tippe schnell auf den Link, dann ist die Sorge weg.",
+          "Ich mache eine Pause und bespreche die Nachricht danach mit jemandem."
         ],
-        "feedbackWrong": "Unter Stress machst du leichter Fehler. Antworte deshalb nicht sofort.",
-        "feedbackCorrect": "Du machst erst einmal eine Pause.",
+        "feedbackWrong": [
+          null,
+          "Die Angst ist gewollt: Du sollst schnell tippen. Unter Stress machst du leichter Fehler.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Zu zweit erkennt man oft schneller, ob hinter der Nachricht ein Trick steckt."
+        ],
+        "feedbackCorrect": "Die Nachricht setzt dich unter Druck. In der Pause kommst du zur Ruhe und kannst danach überlegt entscheiden.",
         "remember": "Wenn mich etwas stresst, mache ich Pause."
       }
     },
     "whatsapp/lang/Die KI in WhatsApp": {
       "einfach": {
-        "question": "Die KI in WhatsApp fragt dich nach deiner Adresse. Was machst du?",
+        "question": "Du fragst die KI in WhatsApp, wo es Pizza in deiner Nähe gibt. Die KI fragt dich nach deiner Adresse. Was machst du?",
         "answers": [
           "Ich schreibe meine Adresse nicht in den Chat.",
-          "Ich schreibe meine Adresse in den Chat, weil es nur ein Programm ist."
+          "Ich schreibe meine Adresse in den Chat, weil es nur ein Programm ist.",
+          "Ich schreibe nichts mehr und suche selbst im Internet."
         ],
-        "feedbackWrong": "Auch ein Programm bekommt die Daten, die du eingibst. Deshalb gehören private Dinge nicht in den KI-Chat.",
-        "feedbackCorrect": "Du schreibst der KI keine privaten Dinge wie deine Adresse.",
+        "feedbackWrong": [
+          null,
+          "Auch ein Programm bekommt die Daten, die du eingibst. Deshalb gehören private Dinge nicht in den KI-Chat.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Deine Adresse bleibt bei dir, und Pizza findest du auch ohne die KI."
+        ],
+        "feedbackCorrect": "Genau, deine Adresse ist privat. Du schreibst der KI keine privaten Dinge wie deine Adresse.",
         "remember": "Ich schreibe der KI keine privaten Dinge von mir."
       },
       "standard": {
-        "question": "Die KI in WhatsApp möchte deine Adresse wissen. Wie reagierst du?",
+        "question": "Du fragst die KI in WhatsApp, wo es Pizza in deiner Nähe gibt. Daraufhin möchte die KI deine Adresse wissen. Wie reagierst du?",
         "answers": [
           "Ich gebe meine Adresse nicht ein.",
-          "Ich gebe meine Adresse ein. Es ist schließlich nur ein Programm."
+          "Ich gebe meine Adresse ein. Es ist schließlich nur ein Programm.",
+          "Ich schreibe nicht weiter und suche selbst im Internet."
         ],
-        "feedbackWrong": "Was du eingibst, geht an das Programm. Private Daten gehören deshalb nicht in den KI-Chat.",
-        "feedbackCorrect": "Du gibst der KI keine privaten Daten wie deine Adresse.",
+        "feedbackWrong": [
+          null,
+          "Was du eingibst, geht an das Programm. Private Daten gehören deshalb nicht in den KI-Chat.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Deine Adresse bleibt bei dir – Pizza findest du auch ohne die KI."
+        ],
+        "feedbackCorrect": "Deine Adresse ist privat. Du gibst der KI keine privaten Daten wie deine Adresse.",
         "remember": "Ich schreibe der KI nichts Privates."
       }
     },
     "whatsapp/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "Eine Nachricht mit einem Namen, den du kennst, bittet dich plötzlich um Geld. Was machst du zuerst?",
+        "question": "Dein Freund Tom schreibt dir: Ich bin im Urlaub. Mein Geld ist weg. Schick mir bitte schnell 200 Euro. Was machst du zuerst?",
         "answers": [
-          "Ich rufe selbst bei der Person an.",
-          "Ich überweise das Geld gleich."
+          "Ich rufe selbst bei Tom an.",
+          "Ich überweise das Geld gleich, weil Tom mein Freund ist.",
+          "Ich schicke zuerst nur 50 Euro."
         ],
-        "feedbackWrong": "Das ist zu schnell. Ruf die Person zuerst selbst an. Nimm dafür die Nummer, die du schon kennst.",
-        "feedbackCorrect": "Wenn du selbst anrufst, kannst du herausfinden, ob die Nachricht wirklich von dieser Person kommt.",
+        "feedbackWrong": [
+          null,
+          "Das ist zu schnell, denn vielleicht schreibt gar nicht Tom. Betrüger nutzen manchmal fremde Konten. Ruf Tom zuerst selbst an.",
+          "Wenn es Betrug ist, sind auch 50 Euro weg. Ruf Tom zuerst selbst an."
+        ],
+        "feedbackCorrect": "Genau, wenn du selbst anrufst, merkst du, ob die Nachricht wirklich von Tom kommt.",
         "remember": "Wenn mich jemand um Geld bittet, rufe ich die Person selbst an."
       },
       "standard": {
-        "question": "Du bekommst plötzlich eine Geldbitte von einem bekannten Namen. Was tust du zuerst?",
+        "question": "Dein Freund Tom schreibt: Ich bin im Urlaub, und mein Geld ist weg. Schick mir bitte schnell 200 Euro. Was tust du zuerst?",
         "answers": [
-          "Ich rufe die Person selbst an.",
-          "Ich überweise das Geld schnell."
+          "Ich rufe Tom selbst an.",
+          "Ich überweise das Geld sofort, Tom ist schließlich mein Freund.",
+          "Ich schicke erst einmal nur 50 Euro."
         ],
-        "feedbackWrong": "Das geht zu schnell. Ruf die Person erst selbst unter der Nummer an, die du schon kennst.",
-        "feedbackCorrect": "Durch deinen eigenen Anruf kannst du prüfen, ob die Nachricht wirklich von der Person stammt.",
+        "feedbackWrong": [
+          null,
+          "Das geht zu schnell: Vielleicht schreibt gar nicht Tom, denn Betrüger nutzen manchmal fremde Konten. Ruf Tom erst selbst an.",
+          "Bei einem Betrug sind auch 50 Euro verloren. Ruf Tom erst selbst an."
+        ],
+        "feedbackCorrect": "Durch deinen eigenen Anruf klärst du, ob die Nachricht wirklich von Tom stammt.",
         "remember": "Bei Geldbitten rufe ich selbst an."
       }
     },
     "whatsapp/kurz/Unbekannte Nachrichten": {
       "einfach": {
-        "question": "Du bekommst eine Nachricht von einer Person, die du nicht kennst. Was machst du?",
+        "question": "Eine Nummer, die du nicht kennst, schreibt dir: Hallo Kim, bist du das? Du heißt aber nicht Kim. Was machst du?",
         "answers": [
-          "Ich antworte der Person sofort.",
-          "Ich zeige die Nachricht einer Person, der ich vertraue."
+          "Ich antworte nicht auf die Nachricht.",
+          "Ich schreibe zurück und nenne meinen Namen.",
+          "Ich blockiere die Nummer."
         ],
-        "feedbackWrong": "Mit einer Antwort zeigst du, dass jemand die Nachricht liest. Zeig die Nachricht lieber einer Person, der du vertraust.",
-        "feedbackCorrect": "Gut, du zeigst die Nachricht erst einer vertrauten Person und entscheidest danach.",
-        "remember": "Wenn ich eine unbekannte Nachricht bekomme, frage ich zuerst eine vertraute Person."
+        "feedbackWrong": [
+          null,
+          "Dann kennt eine fremde Person deinen Namen und weiß, dass unter dieser Nummer jemand antwortet. Manche Betrüger schreiben einfach viele Nummern an.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Wenn du die Nummer blockierst, kann sie dir nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Genau, du kennst die Nummer nicht und musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        "remember": "Einer fremden Nummer erzähle ich nichts über mich."
       },
       "standard": {
-        "question": "Eine unbekannte Person schreibt dir. Wie reagierst du auf die Nachricht?",
+        "question": "Eine unbekannte Nummer schreibt: Hallo Kim, bist du das? Du bist nicht Kim. Wie reagierst du?",
         "answers": [
-          "Ich antworte sofort.",
-          "Ich zeige die Nachricht einer vertrauten Person."
+          "Ich antworte nicht.",
+          "Ich schreibe zurück und nenne meinen Namen.",
+          "Ich blockiere die Nummer."
         ],
-        "feedbackWrong": "Eine Antwort zeigt, dass hier jemand mitliest. Zeig die Nachricht lieber einer vertrauten Person.",
-        "feedbackCorrect": "Du zeigst die Nachricht erst und entscheidest danach, wie du damit umgehst.",
-        "remember": "Bei unbekannten Nachrichten frage ich erst eine vertraute Person."
+        "feedbackWrong": [
+          null,
+          "Damit kennt eine fremde Person deinen Namen und weiß, dass die Nummer benutzt wird. Betrüger schreiben oft wahllos viele Nummern an.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Nach dem Blockieren kann dir die Nummer nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Du kennst die Nummer nicht und musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        "remember": "Unbekannten Nummern gebe ich nichts über mich preis."
       }
     },
     "whatsapp/kurz/Links in Nachrichten": {
       "einfach": {
-        "question": "Eine Nachricht von jemandem, den du nicht kennst, enthält einen Link. Was machst du?",
+        "question": "Eine Nummer, die du nicht kennst, schreibt dir: Guter Job für dich, 200 Euro am Tag. Tippe hier. Was machst du?",
         "answers": [
-          "Ich tippe diesen Link nicht an.",
-          "Ich tippe den Link an, um nachzuschauen."
+          "Ich tippe auf den Link, weil ich mehr wissen will.",
+          "Ich tippe den Link nicht an.",
+          "Ich frage erst jemanden und lasse den Link zu."
         ],
-        "feedbackWrong": "Ein Link kann dich auf eine falsche Seite bringen. Prüfe den Link deshalb, bevor du ihn antippst.",
-        "feedbackCorrect": "Du tippst einen fremden Link nicht an, weil du ihn nicht kennst.",
+        "feedbackWrong": [
+          "Die Nachricht verspricht viel Geld, damit du neugierig wirst. Der Link kann auf eine falsche Seite führen, auf der jemand deine Daten haben will.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Der Link bleibt zu, und das ist das Wichtigste. Du kannst das auch allein entscheiden."
+        ],
+        "feedbackCorrect": "Genau, du kennst die Nummer nicht, deshalb bleibt der Link zu. Du verpasst dabei nichts.",
         "remember": "Wenn ich einen Link nicht kenne, tippe ich ihn nicht an."
       },
       "standard": {
-        "question": "In einer fremden Nachricht steht ein Link. Wie gehst du damit um?",
+        "question": "Eine unbekannte Nummer schreibt: Guter Job für dich, 200 Euro am Tag. Tippe hier. Wie gehst du damit um?",
         "answers": [
+          "Ich tippe auf den Link, um mehr zu erfahren.",
           "Ich tippe den Link nicht an.",
-          "Ich öffne den Link und schaue nach."
+          "Ich frage erst jemanden und lasse den Link zu."
         ],
-        "feedbackWrong": "Der Link kann dich auf eine falsche Seite führen. Prüfe ihn deshalb vor dem Antippen.",
-        "feedbackCorrect": "Fremde Links tippst du nicht an.",
+        "feedbackWrong": [
+          "Das Versprechen von viel Geld soll dich neugierig machen. Der Link kann auf eine gefälschte Seite führen, die deine Daten abgreifen will.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Der Link bleibt zu – das ist das Wichtigste. Entscheiden kannst du das auch allein."
+        ],
+        "feedbackCorrect": "Du kennst die Nummer nicht, also bleibt der Link zu. Du verpasst nichts.",
         "remember": "Ich tippe fremde Links nicht an."
       }
     },
     "whatsapp/kurz/Dein WhatsApp-Code": {
       "einfach": {
-        "question": "Ein Freund bittet dich, ihm deinen WhatsApp-Code zu schicken. Was machst du?",
+        "question": "Ein Freund schreibt dir: Schick mir bitte deinen WhatsApp-Code. Was machst du?",
         "answers": [
-          "Ich schicke meinem Freund den Code, weil ich ihn kenne.",
-          "Ich schicke meinem Freund den Code nicht."
+          "Ich schicke ihm den Code, weil er mein Freund ist.",
+          "Ich schicke den Code nicht.",
+          "Ich schicke den Code nicht und rufe meinen Freund an."
         ],
-        "feedbackWrong": "Oft kommt die Nachricht gar nicht vom Freund, weil Betrüger sein Konto nutzen. Dein Code bleibt deshalb bei dir.",
-        "feedbackCorrect": "Genau, deinen WhatsApp-Code behältst du immer für dich.",
+        "feedbackWrong": [
+          "Oft kommt die Nachricht gar nicht vom Freund, weil Betrüger sein Konto nutzen. Dein Code bleibt deshalb bei dir.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Der Code bleibt bei dir, und am Telefon merkst du, ob dein Freund das wirklich geschrieben hat."
+        ],
+        "feedbackCorrect": "Genau, mit dem Code kann jemand dein Konto stehlen. Deshalb behältst du ihn immer für dich.",
         "remember": "Ich gebe meinen WhatsApp-Code niemals an andere weiter."
       },
       "standard": {
-        "question": "Ein Freund fragt nach deinem WhatsApp-Code. Wie reagierst du?",
+        "question": "Ein Freund schreibt: Schick mir bitte deinen WhatsApp-Code. Wie reagierst du?",
         "answers": [
           "Ich schicke den Code, schließlich ist es ein Freund.",
-          "Ich gebe den Code nicht weiter."
+          "Ich gebe den Code nicht weiter.",
+          "Ich gebe den Code nicht weiter und rufe meinen Freund an."
         ],
-        "feedbackWrong": "Oft nutzen Betrüger das Konto deines Freundes und schreiben an seiner Stelle. Behalte deinen Code für dich.",
-        "feedbackCorrect": "Deinen WhatsApp-Code behältst du immer für dich.",
+        "feedbackWrong": [
+          "Oft nutzen Betrüger das Konto deines Freundes und schreiben an seiner Stelle. Behalte deinen Code für dich.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Der Code bleibt bei dir, und am Telefon klärt sich, ob die Nachricht wirklich von deinem Freund kam."
+        ],
+        "feedbackCorrect": "Mit dem Code kann jemand dein Konto übernehmen. Deshalb behältst du ihn immer für dich.",
         "remember": "Meinen WhatsApp-Code gebe ich nie weiter."
       }
     },
