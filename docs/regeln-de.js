@@ -206,7 +206,7 @@ const REGEL_SAETZE = {
     "Ich öffne unbekannte Links nicht sofort.", // whatsapp
     "Fremde Links nicht antippen.", // whatsapp
     "Fremde Links tippe ich nicht an.", // whatsapp
-    "Komische Nachrichten zeigen, nicht antippen.", // facebook
+    "Komische Nachrichten tippe ich nicht an.", // facebook
     "Werbung nicht antippen.", // youtube
     "Ich tippe nicht auf fremde Links.", // betrug
     "Bei einem Aufkleber scanne ich den Code nicht.", // betrug
@@ -236,7 +236,7 @@ const REGEL_SAETZE = {
     "Ich schicke kein Geld an fremde Menschen aus dem Internet.", // betrug
     "Kostenlos kann teuer werden. Ich lese genau.", // betrug
     "Ich zahle nie sofort. Ich frage erst.", // betrug
-    "Kein Geld senden. Vertraute Person fragen.", // betrug
+    "Kein Geld senden. Keine Daten eingeben.", // betrug
     "Ich kaufe bei Shops, die ich kenne.", // einkaufen
     "Sehr billig und nur Vorkasse: Warnzeichen.", // einkaufen
     "Rechnung ist sicherer als Vorkasse.", // einkaufen
@@ -410,12 +410,11 @@ const REGEL_SAETZE = {
     "Ich blockiere. Ich melde. Ich hole Hilfe.", // facebook
     "Ich hole Unterstützung bei verletzenden Kommentaren.", // instagram, tiktok
     "Bei Stress zeige ich es einer Person, der ich vertraue.", // instagram
-    "Unbekannte Nachrichten: vertraute Person fragen.", // instagram
-    "Unbekannte Nachrichten zeige ich.", // instagram, tiktok
+    "Fremdes Profil? Ich entscheide selbst. Ich darf Hilfe holen.", // instagram, tiktok
+    "Fremden Profilen muss ich nicht antworten.", // instagram, tiktok
     "Ich bin mit meiner Angst nicht allein.", // youtube
     "Bei Angst stoppe ich das Video. Ich hole Hilfe.", // youtube
     "Ich sage Nein. Ich zeige es jemandem.", // snapchat
-    "Nachrichten von Unbekannten: vertraute Person fragen.", // tiktok
     "Ich lösche nicht sofort.", // hilfe
     "Ich zeige die Nachricht.", // hilfe
     "Meine Gefühle sind wichtig. Ich darf darüber sprechen.", // hilfe

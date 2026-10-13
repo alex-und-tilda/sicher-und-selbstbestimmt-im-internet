@@ -2169,15 +2169,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Was prüfst du vor einem Beitrag?",
+          "question": "Du willst posten: Ab morgen bin ich 2 Wochen im Urlaub. Was machst du vorher?",
+          "schluessel": "Was prüfst du vor einem Beitrag?",
           "pictogram": "pikto-search",
           "answers": [
-            "Wer kann das sehen?",
-            "Wie schnell kann ich posten?"
+            "Ich schaue nach: Wer kann den Beitrag sehen?",
+            "Nichts. Ich poste gleich. Alle sollen sich mit mir freuen.",
+            "Ich poste erst nach dem Urlaub. Mit Fotos."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Schnelligkeit ist nicht wichtig.",
-          "feedbackCorrect": "Das ist sicher. Du prüfst, wer deinen Beitrag sehen kann.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Bei Öffentlich können auch fremde Menschen den Beitrag lesen. Dann wissen sie: Deine Wohnung ist 2 Wochen leer.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann weiß vorher niemand: Deine Wohnung ist leer. Und du hast schöne Fotos."
+          ],
+          "feedbackCorrect": "Genau. Bei Öffentlich können auch fremde Menschen lesen: Deine Wohnung ist leer. Darum wählst du: Freunde.",
           "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
         },
         "pictogram": "pikto-message"
@@ -2201,16 +2215,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du schreibst einen Beitrag bei Facebook. Wer kann ihn sehen?",
+          "question": "Bei einem alten Beitrag von dir steht: Öffentlich. Du willst das nicht mehr. Was machst du?",
           "schluessel": "Was bedeutet: Wer darf etwas sehen?",
           "pictogram": "pikto-people",
           "answers": [
-            "Das stelle ich ein. Ich prüfe die Einstellung.",
-            "Immer alle Menschen. Ich kann nichts ändern."
+            "Nichts. Bei alten Beiträgen kann ich nichts ändern.",
+            "Ich ändere die Einstellung beim Beitrag auf Freunde.",
+            "Ich lösche den Beitrag."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das stimmt nicht. Du kannst einstellen: Wer darf den Beitrag sehen? Zum Beispiel nur deine Freunde.",
-          "feedbackCorrect": "Richtig. Du stellst ein: Wer darf es sehen? Du darfst dir dabei helfen lassen.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Das geht doch. Du kannst auch alte Beiträge ändern. Stell beim Beitrag ein: Freunde. Oder lösch den Beitrag.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann sieht den Beitrag niemand mehr."
+          ],
+          "feedbackCorrect": "Genau. Du kannst die Einstellung auch später ändern. Jetzt sehen nur deine Freunde den Beitrag.",
           "remember": "Ich prüfe meine Einstellungen."
         },
         "pictogram": "pikto-lock"
@@ -2235,15 +2262,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
+          "question": "Eine Anfrage kommt von deinem Kollegen Tom. Aber ihr seid schon lange Freunde bei Facebook. Was machst du?",
+          "schluessel": "Eine unbekannte Person sendet eine Anfrage. Was ist besser?",
           "pictogram": "pikto-stranger",
           "answers": [
-            "Sofort annehmen.",
-            "Erst prüfen."
+            "Ich nehme die Anfrage erst mal nicht an.",
+            "Ich nehme an. Vielleicht hat Tom ein neues Profil.",
+            "Ich frage Tom selbst: Ist das dein Profil?"
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer die Person ist.",
-          "feedbackCorrect": "Das ist sicher. Du prüfst die Anfrage zuerst.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Vielleicht stimmt das. Aber manche Betrüger bauen ein Profil nach. Mit dem Namen und dem Foto von Tom. Dann fragen sie seine Freunde nach Geld.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann weißt du es sicher. Am besten fragst du Tom bei der Arbeit. Oder am Telefon."
+          ],
+          "feedbackCorrect": "Genau. Manche Betrüger bauen ein Profil nach. Mit dem Namen und dem Foto von Tom. Die Anfrage kann warten.",
           "remember": "Ich nehme unbekannte Anfragen nicht sofort an."
         },
         "pictogram": "pikto-message"
@@ -2267,15 +2308,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Was ist bei Kommentaren wichtig?",
+          "question": "Ein Bekannter postet ein Foto von seiner neuen Frisur. Du findest: Die Frisur sieht komisch aus. Was machst du?",
+          "schluessel": "Was ist bei Kommentaren wichtig?",
           "pictogram": "pikto-people",
           "answers": [
-            "Respektvoll schreiben.",
-            "Andere beleidigen."
+            "Ich schreibe ehrlich: Das steht dir nicht.",
+            "Ich schreibe nichts dazu.",
+            "Ich schicke einen Lach-Smiley."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Beleidigungen können verletzen.",
-          "feedbackCorrect": "Das ist sicher. Du schreibst respektvoll.",
+          "correctIndex": 1,
+          "feedbackWrong": [
+            "Ehrlich sein ist gut. Aber den Kommentar lesen viele Menschen. Das kann deinen Bekannten verletzen.",
+            null,
+            "Dein Bekannter weiß dann nicht: Lachst du mit ihm? Oder lachst du über ihn? Auch das kann verletzen."
+          ],
+          "feedbackCorrect": "Genau. Du musst nicht zu allem etwas schreiben. So verletzt du niemanden.",
           "remember": "Ich schreibe respektvoll."
         },
         "pictogram": "pikto-message"
@@ -2318,15 +2365,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du wirst beleidigt. Was ist besser?",
+          "question": "Unter deinem Foto schreibt jemand: Du bist so dumm. Das macht dich wütend. Was machst du?",
+          "schluessel": "Du wirst beleidigt. Was ist besser?",
           "pictogram": "pikto-people",
           "answers": [
-            "Zurück beleidigen.",
-            "Unterstützung holen."
+            "Ich mache ein Bildschirm-Foto. Dann lösche ich den Kommentar.",
+            "Ich schreibe zurück: Selber dumm. Das lasse ich mir nicht gefallen.",
+            "Ich hole mir erst Unterstützung. Ich rede mit jemandem darüber."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Zurück beleidigen macht den Streit größer.",
-          "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Dann geht der Streit weiter. Und alle lesen mit. Mach lieber ein Bildschirm-Foto. Dann lösch den Kommentar.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das ist gut. Reden hilft bei Wut. Danach entscheidest du in Ruhe: Bildschirm-Foto, löschen, blockieren oder melden."
+          ],
+          "feedbackCorrect": "Genau. Das Bildschirm-Foto ist dein Beweis. Unter deinem Beitrag darfst du Kommentare löschen. Du kannst die Person auch blockieren.",
           "remember": "Ich hole Unterstützung bei Beleidigungen."
         },
         "pictogram": "pikto-help"
@@ -2350,15 +2411,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Foto zeigt andere Menschen. Was ist besser?",
+          "question": "Du hast ein Foto vom Sommer-Fest. Darauf bist du mit 3 Kollegen. Du willst es posten. Was machst du?",
+          "schluessel": "Ein Foto zeigt andere Menschen. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Erst fragen.",
-            "Einfach posten."
+            "Ich poste es. Ich stelle ein: Nur Freunde.",
+            "Ich schneide das Foto zu. Dann bin nur ich zu sehen.",
+            "Ich frage die 3 vorher."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen mitentscheiden.",
-          "feedbackCorrect": "Das ist sicher. Du fragst zuerst.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Auch dann sehen viele Menschen das Foto. Deine Kollegen dürfen mitentscheiden. Es ist auch ihr Bild.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Dann ist niemand anderes auf dem Foto. Dann musst du niemanden fragen.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Es ist auch ihr Bild. Darum dürfen sie mitentscheiden.",
           "remember": "Ich frage andere, bevor ich ihr Foto poste."
         },
         "pictogram": "pikto-photo"
@@ -2407,10 +2482,23 @@ const topics = [
           "pictogram": "pikto-no",
           "answers": [
             "Ich schreibe genauso gemein zurück. Dann hört die Person auf.",
-            "Ich mache ein Bildschirm-Foto. Dann blockiere ich die Person."
+            "Ich mache ein Bildschirm-Foto. Dann blockiere ich die Person.",
+            "Ich mache ein Bildschirm-Foto. Dann melde ich die Person."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Zurück-Schreiben macht es oft schlimmer. Mach lieber ein Bildschirm-Foto. Dann blockiere die Person.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Zurück-Schreiben macht es oft schlimmer. Mach lieber ein Bildschirm-Foto. Dann blockiere die Person.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Auch das ist gut. Das Bildschirm-Foto ist dein Beweis. Facebook prüft dann die Nachrichten."
+          ],
           "feedbackCorrect": "Gut. Das Bildschirm-Foto ist dein Beweis. Blockieren stoppt die Nachrichten.",
           "remember": "Ich blockiere. Ich melde. Ich hole Hilfe."
         },
@@ -2708,14 +2796,14 @@ const topics = [
           "Das Titel-Bild ist das große Bild oben im Profil.",
           "Du kannst einstellen: Wer sieht deine Beiträge?",
           "Für deine Beiträge kannst du Freunde auswählen.",
-          "Eine vertraute Person hilft dir beim Einstellen."
+          "Du willst das mit jemandem zusammen einstellen? Das geht auch."
         ],
         "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "vorbildWer": "Alex",
         "vorbild": [
           "Alex öffnet die Einstellungen bei Facebook.",
           "Er wählt für seine neuen Beiträge: Freunde.",
-          "Tilda hilft ihm dabei."
+          "Jetzt sehen nur seine Freunde die neuen Beiträge."
         ]
       },
       {
@@ -2728,7 +2816,8 @@ const topics = [
           "Sie will dein Freund sein.",
           "Du kennst die Person nicht.",
           "Du nimmst die Anfrage nicht an.",
-          "Du fragst eine vertraute Person."
+          "Du bist nicht sicher? Dann schaust du dir erst das Profil an.",
+          "Du entscheidest selbst."
         ],
         "remember": "Unbekannte Anfragen ablehnen.",
         "vorbildWer": "Tilda",
@@ -2748,15 +2837,18 @@ const topics = [
           "Jemand fragt nach Geld.",
           "Jemand schickt einen Link.",
           "Du tippst nicht drauf.",
-          "Du zeigst es einer vertrauten Person."
+          "Du schickst kein Geld.",
+          "Die Nachricht kommt von einem Freund? Dann rufst du ihn an.",
+          "So merkst du: Hat er das wirklich geschrieben?"
         ],
-        "remember": "Komische Nachrichten zeigen, nicht antippen.",
+        "remember": "Komische Nachrichten tippe ich nicht an.",
         "vorbildWer": "Alex",
         "vorbild": [
           "Jemand schreibt Alex: Ich brauche schnell Geld.",
           "Tipp hier.",
           "Alex tippt nicht auf den Link.",
-          "Er zeigt die Nachricht Tilda."
+          "Er schickt kein Geld.",
+          "Er meldet die Nachricht bei Facebook."
         ]
       }
     ],
@@ -2835,15 +2927,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du willst ein Foto posten. Was prüfst du vorher?",
+          "question": "Du machst ein Foto von deinem neuen Fahrrad. Im Hintergrund sieht man dein Haus mit der Haus-Nummer. Was machst du?",
+          "schluessel": "Du willst ein Foto posten. Was prüfst du vorher?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Alles auf dem Foto.",
-            "Nur die Farbe."
+            "Ich poste es so. Es geht ja nur um das Fahrrad.",
+            "Ich mache ein neues Foto ohne das Haus.",
+            "Ich schneide das Foto zu. Dann sieht man nur das Fahrrad."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Wichtig ist, was auf dem Foto zu sehen ist.",
-          "feedbackCorrect": "Das ist sicher. Du prüfst, was zu sehen ist.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Auf dem Foto sieht man auch dein Haus und die Haus-Nummer. Fremde Menschen wissen dann, wo du wohnst. Und wo das neue Fahrrad steht.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann ist das Haus nicht mehr auf dem Foto. Das geht schnell."
+          ],
+          "feedbackCorrect": "Genau. Auf dem neuen Foto sieht man nur das Fahrrad. Niemand sieht, wo du wohnst.",
           "remember": "Ich prüfe, was auf dem Foto zu sehen ist."
         },
         "pictogram": "pikto-photo"
@@ -2867,15 +2973,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Im Hintergrund sieht man eine andere Person. Was ist besser?",
+          "question": "Du willst ein Foto von deinem Garten posten. Im Hintergrund sieht man deinen Nachbarn. Man erkennt ihn gut. Was machst du?",
+          "schluessel": "Im Hintergrund sieht man eine andere Person. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Ich poste es einfach. Sie ist ja nur im Hintergrund.",
-            "Ich frage erst oder nehme ein anderes Foto."
+            "Ich poste es einfach. Er ist ja nur im Hintergrund.",
+            "Ich nehme ein anderes Foto.",
+            "Ich frage den Nachbarn vorher."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Andere Menschen dürfen mitentscheiden.",
-          "feedbackCorrect": "Das ist sicher. Du fragst oder nimmst ein anderes Foto.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Auch im Hintergrund erkennt man ihn. Nicht alle wollen im Internet stehen. Dein Nachbar darf mitentscheiden.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Dann ist niemand anderes zu sehen. Dann musst du niemanden fragen.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Man erkennt den Nachbarn. Darum darf er mitentscheiden.",
           "remember": "Ich frage andere, bevor ich ihr Bild poste."
         },
         "pictogram": "pikto-photo"
@@ -2899,15 +3019,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Was können Menschen bei kurzen Videos machen?",
+          "question": "Du willst eine Story posten. Du denkst: Morgen ist die Story wieder weg. Was machst du vorher?",
+          "schluessel": "Was können Menschen bei kurzen Videos machen?",
           "pictogram": "pikto-video",
           "answers": [
-            "Ein Bild vom Bildschirm machen.",
-            "Nichts speichern. Das Video ist ja schnell weg."
+            "Ich prüfe erst: Was ist in der Story zu sehen?",
+            "Nichts. Morgen ist die Story sowieso weg.",
+            "Ich poste sie. Zur Not lösche ich sie gleich wieder."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht richtig. Inhalte können gespeichert werden.",
-          "feedbackCorrect": "Das ist richtig. Auch kurze Videos können gespeichert werden.",
+          "feedbackWrong": [
+            null,
+            "Andere können ein Bild vom Bildschirm machen. Die Story ist morgen weg. Aber das Bild bleibt.",
+            "Löschen hilft nicht immer. Andere haben die Story vielleicht schon gespeichert."
+          ],
+          "feedbackCorrect": "Genau. Andere können ein Bild vom Bildschirm machen. Dann bleibt deine Story. Darum prüfst du sie vorher.",
           "remember": "Auch Stories prüfe ich vor dem Posten."
         },
         "pictogram": "pikto-photo"
@@ -2931,15 +3057,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Warum ist der Standort wichtig?",
+          "question": "Du bist im Urlaub am Meer. Du postest ein Foto. Instagram fragt: Ort hinzufügen? Was machst du?",
+          "schluessel": "Warum ist der Standort wichtig?",
           "pictogram": "pikto-location",
           "answers": [
-            "Er zeigt meinen Ort.",
-            "Er ist immer egal."
+            "Ich füge den Ort hinzu. Alle sollen sehen, wo ich bin.",
+            "Ich füge keinen Ort hinzu.",
+            "Ich füge den Ort erst nach dem Urlaub hinzu."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht richtig. Der Standort kann privat sein.",
-          "feedbackCorrect": "Das ist richtig. Der Standort zeigt, wo du bist.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Dann sehen alle Zuschauer: Du bist gerade weit weg von zu Hause. Überleg erst: Wer sieht das Foto?",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann weiß im Urlaub niemand: Du bist gerade weit weg."
+          ],
+          "feedbackCorrect": "Genau. Ohne Ort zeigt Instagram nicht an, wo du bist. Aber: Auch auf dem Foto kann man den Ort erkennen.",
           "remember": "Ich teile meinen Standort nicht einfach."
         },
         "pictogram": "pikto-location"
@@ -2965,15 +3105,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
+          "question": "Ein Profil schreibt dir seit 2 Wochen nette Nachrichten. Ihr habt euch nie getroffen. Jetzt schreibt die Person: Schick mir ein privates Foto. Nur für mich. Was machst du?",
+          "schluessel": "Eine fremde Person fragt nach privaten Fotos. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Fotos schicken. Die Person ist nett.",
-            "Keine Fotos schicken."
+            "Ich schicke ein Foto. Wir schreiben ja schon lange.",
+            "Ich schicke kein Foto.",
+            "Ich schicke kein Foto. Ich melde das Profil."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Private Fotos gehören nicht an fremde Personen.",
-          "feedbackCorrect": "Das ist sicher. Du schützt deine privaten Fotos.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Du kennst die Person nur vom Schreiben. Ein Foto kannst du nicht zurückholen. Die Person kann es weiter-schicken.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das Foto bleibt bei dir. Und Instagram kann das Profil prüfen."
+          ],
+          "feedbackCorrect": "Genau. Du kennst die Person nur vom Schreiben. Ein Foto kannst du nicht zurückholen. Darum bleibt es bei dir.",
           "remember": "Ich schicke fremden Personen keine privaten Fotos."
         },
         "pictogram": "pikto-message"
@@ -3016,15 +3170,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Kommentar verletzt dich. Was ist besser?",
+          "question": "Du postest ein Foto von deinem neuen Pullover. Jemand schreibt darunter: Der ist ja hässlich. Das tut dir weh. Was machst du?",
+          "schluessel": "Ein Kommentar verletzt dich. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Unterstützung holen.",
-            "Zurück beleidigen."
+            "Ich lösche mein Foto. Dann ist Ruhe.",
+            "Ich rede mit einer Freundin darüber.",
+            "Ich antworte nicht auf den Kommentar."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Zurück beleidigen hilft nicht.",
-          "feedbackCorrect": "Das ist sicher. Du holst Unterstützung.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Du musst dein Foto nicht löschen. Du hast nichts falsch gemacht. Der Kommentar ist das Problem, nicht dein Foto.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Das ist Unterstützung. Reden tut gut. Danach entscheidest du in Ruhe.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Du musst nicht auf alles antworten. Dein Foto darf bleiben. Du kannst die Person auch blockieren.",
           "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
         },
         "pictogram": "pikto-message"
@@ -3048,15 +3216,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Warum sind bearbeitete Bilder wichtig?",
+          "question": "Eine Bekannte postet nur perfekte Fotos. Du denkst: Mein Leben ist nicht so schön. Was hilft dir?",
+          "schluessel": "Warum sind bearbeitete Bilder wichtig?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Nicht alles ist echt.",
-            "Alles ist immer echt."
+            "Ich denke daran: Viele Fotos sind bearbeitet.",
+            "Ich mache eine Pause von Instagram.",
+            "Ich schaue mir noch mehr Fotos von ihr an."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht richtig. Viele Bilder sind bearbeitet.",
-          "feedbackCorrect": "Das ist richtig. Nicht alles ist echt.",
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            null,
+            null,
+            "Dann vergleichst du dich noch mehr. Die Fotos zeigen nur die schönen Momente. Viele sind bearbeitet."
+          ],
+          "feedbackAuch": [
+            null,
+            "Eine Pause tut gut. Du bestimmst, was du dir ansiehst.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Die Fotos zeigen nur die schönen Momente. Viele sind bearbeitet. Du musst dich nicht vergleichen.",
           "remember": "Ich muss mich nicht mit Bildern vergleichen."
         },
         "pictogram": "pikto-fake"
@@ -3100,15 +3282,29 @@ const topics = [
         "warning": "Ein fremdes Profil kann eine falsche Person sein. Auch ein schönes Bild ist kein Beweis.",
         "success": "Mit deinem Plan lässt du dich nicht drängen.",
         "practice": {
-          "question": "Ein fremdes Profil schreibt dir und will schnell etwas von dir. Was machst du?",
+          "question": "Ein fremdes Profil schreibt dir: Du hast gewonnen. Antworte in 10 Minuten. Sonst ist der Gewinn weg. Was machst du?",
+          "schluessel": "Ein fremdes Profil schreibt dir und will schnell etwas von dir. Was machst du?",
           "pictogram": "pikto-message",
           "answers": [
-            "Ich mache Stopp und zeige es einer vertrauten Person.",
-            "Ich antworte sofort. Die Person soll nicht böse werden."
+            "Ich antworte schnell. Sonst ist der Gewinn weg.",
+            "Ich zeige die Nachricht erst jemandem.",
+            "Ich mache Stopp. Ich antworte nicht sofort."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Schnell antworten drängt dich. Mach zuerst Stopp.",
-          "feedbackCorrect": "Stopp und zeigen schützt dich.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Die Nachricht macht Stress. Das ist Absicht. Du sollst nicht nachdenken. Bei einem echten Gewinn hast du Zeit.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Zu zweit sieht man mehr. Die Nachricht kann so lange warten.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Die Nachricht macht Stress. Das ist Absicht. Mit Stopp hast du Zeit zum Nachdenken.",
           "remember": "Bei Stress zeige ich es einer Person, der ich vertraue."
         },
         "remember": "Ich mache Stopp. Ich zeige es jemandem.",
@@ -3421,16 +3617,18 @@ const topics = [
         "text": [
           "Jemand schreibt dir eine Nachricht.",
           "Du kennst die Person nicht.",
-          "Du antwortest nicht.",
-          "Du zeigst es einer vertrauten Person.",
-          "Die Person hilft dir."
+          "Du musst nicht antworten.",
+          "Du prüfst erst: Wer schreibt? Was will die Person?",
+          "Dann entscheidest du selbst.",
+          "Du kannst das Profil blockieren.",
+          "Du willst erst mit jemandem darüber sprechen? Das geht auch."
         ],
-        "remember": "Unbekannte Nachrichten: vertraute Person fragen.",
+        "remember": "Fremdes Profil? Ich entscheide selbst. Ich darf Hilfe holen.",
         "vorbildWer": "Tilda",
         "vorbild": [
           "Ein fremdes Profil schreibt Tilda.",
           "Tilda antwortet nicht.",
-          "Sie zeigt die Nachricht Alex."
+          "Sie blockiert das Profil."
         ]
       }
     ],
@@ -3506,15 +3704,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Was ist eine gute Regel für YouTube?",
+          "question": "Ein Video sagt: Dieser Tee heilt Rücken-Schmerzen in 3 Tagen. Du hast oft Rücken-Schmerzen. Was machst du?",
+          "schluessel": "Was ist eine gute Regel für YouTube?",
           "pictogram": "pikto-video",
           "answers": [
-            "Ich glaube nicht alles sofort.",
-            "Alles im Internet ist immer wahr."
+            "Ich bestelle den Tee. Probieren kostet ja nicht viel.",
+            "Ich glaube das nicht sofort.",
+            "Ich frage meine Ärztin nach dem Tee."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Viele Inhalte können falsch sein.",
-          "feedbackCorrect": "Das ist sicher. Du glaubst nicht alles sofort.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Das Video will den Tee verkaufen. Darum verspricht es viel. Ein Video allein ist kein Beweis.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das ist eine gute Prüfung. Deine Ärztin kennt dich und deine Schmerzen."
+          ],
+          "feedbackCorrect": "Genau. Das Video will etwas verkaufen. Ein Video allein ist kein Beweis.",
           "remember": "Ich glaube nicht alles sofort."
         },
         "pictogram": "pikto-screen"
@@ -3539,15 +3751,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Woran erkennst du Werbung in Videos?",
+          "question": "Ein YouTuber zeigt in seinem Video einen Mixer. Er sagt: Den Link findest du unter dem Video. Mit meinem Code sparst du 10 Euro. Was machst du?",
+          "schluessel": "Woran erkennst du Werbung in Videos?",
           "pictogram": "pikto-video",
           "answers": [
-            "Es wird etwas verkauft.",
-            "Das Video hat viele Likes."
+            "Ich kaufe nicht sofort. Ich überlege: Brauche ich den Mixer?",
+            "Ich kaufe den Mixer gleich. Der Code spart Geld.",
+            "Ich kaufe nicht sofort. Ich vergleiche erst die Preise."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Viele Likes zeigen keine Werbung. Werbung kann wie ein normales Video aussehen.",
-          "feedbackCorrect": "Das ist richtig. Werbung will oft etwas verkaufen.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Das ist Werbung. Der YouTuber bekommt oft Geld dafür. Werbung kann wie ein normales Video aussehen. Kauf nicht sofort.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann siehst du: Ist der Preis wirklich gut? Du entscheidest in Ruhe."
+          ],
+          "feedbackCorrect": "Genau. Das ist Werbung. Der YouTuber bekommt oft Geld dafür. Du entscheidest in Ruhe.",
           "remember": "Ich kaufe nichts sofort aus einem Video."
         },
         "pictogram": "pikto-no"
@@ -3571,15 +3797,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Autoplay startet immer neue Videos. Was ist wichtig?",
+          "question": "Du willst vor dem Schlafen nur noch 1 Video sehen. Aber YouTube startet danach immer das nächste Video. Was machst du?",
+          "schluessel": "Autoplay startet immer neue Videos. Was ist wichtig?",
           "pictogram": "pikto-video",
           "answers": [
-            "Ich darf das Video stoppen.",
-            "Ich muss immer weiter schauen."
+            "Ich schaue weiter. Bis ich müde bin.",
+            "Ich lege das Handy nach dem Video weg.",
+            "Ich schalte Autoplay aus."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Du musst nicht immer weiter schauen.",
-          "feedbackCorrect": "Das ist sicher. Du darfst stoppen.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Dann bestimmt YouTube deinen Abend. Du darfst das Video stoppen. Du musst nicht weiter schauen.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Auch so bestimmst du das Ende selbst. Das Handy liegt weg. Du hast Ruhe.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Autoplay heißt: Das nächste Video startet von allein. Ohne Autoplay bestimmst du das Ende.",
           "remember": "Ich darf Videos stoppen."
         },
         "pictogram": "pikto-pause"
@@ -3604,15 +3844,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Video zeigt eine gefährliche Mutprobe. Was ist besser?",
+          "question": "Ein Video zeigt: Menschen springen von einer Brücke in den Fluss. Dein Kollege sagt: Das machen wir am Wochenende auch. Was machst du?",
+          "schluessel": "Ein Video zeigt eine gefährliche Mutprobe. Was ist besser?",
           "pictogram": "pikto-video",
           "answers": [
-            "Ich mache das auch einmal.",
-            "Ich mache das nicht nach."
+            "Ich sage Nein. Ich springe nicht.",
+            "Ich springe mit. Im Video ist ja nichts passiert.",
+            "Ich sage Nein. Ich schlage etwas anderes vor."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Gefährliche Mutproben können dir schaden.",
-          "feedbackCorrect": "Das ist sicher. Du machst gefährliche Dinge nicht nach.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Das Video zeigt nur die guten Sprünge. Unter Wasser können Steine sein. Du musst nicht mitmachen.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann macht ihr trotzdem etwas zusammen. Aber ohne Gefahr."
+          ],
+          "feedbackCorrect": "Genau. Du musst nicht mitmachen. Deine Gesundheit ist wichtiger als ein Video.",
           "remember": "Ich mache gefährliche Dinge nicht nach."
         },
         "pictogram": "pikto-no"
@@ -3637,15 +3891,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Video macht dir Angst. Was ist besser?",
+          "question": "Du schaust ein Video über einen Unfall. Dein Herz klopft schnell. Du fühlst dich schlecht. Was machst du?",
+          "schluessel": "Ein Video macht dir Angst. Was ist besser?",
           "pictogram": "pikto-video",
           "answers": [
-            "Weiter schauen. Es ist ja nur ein Video.",
-            "Stoppen und mit jemandem sprechen."
+            "Ich schaue zu Ende. Ich will das Ende wissen.",
+            "Ich stoppe das Video.",
+            "Ich stoppe das Video. Ich rede mit jemandem darüber."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht gut. Wenn dich ein Video belastet, darfst du stoppen.",
-          "feedbackCorrect": "Das ist sicher. Du stoppst und bleibst nicht allein.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Du musst kein Video zu Ende schauen. Dein Körper zeigt dir: Das ist zu viel. Du darfst stoppen.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das Video ist aus. Und Reden tut gut. Du bist mit der Angst nicht allein."
+          ],
+          "feedbackCorrect": "Genau. Dein Körper zeigt dir: Das ist zu viel. Du darfst jedes Video stoppen.",
           "remember": "Ich bin mit meiner Angst nicht allein."
         },
         "pictogram": "pikto-feel"
@@ -3739,15 +4007,29 @@ const topics = [
         "warning": "Manche Videos zeigen gefährliche Mutproben. Nachmachen kann dir schaden.",
         "success": "Video stoppen und Pause machen schützt dich vor Gefahr.",
         "practice": {
-          "question": "Ein Video zeigt eine gefährliche Mutprobe. Was machst du?",
+          "question": "Ein Video sagt: Mach diese Mutprobe nach. Film dich dabei. Schick das Video an 5 Freunde. Viele haben schon mitgemacht. Was machst du?",
+          "schluessel": "Ein Video zeigt eine gefährliche Mutprobe. Was machst du?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Viele tun es. Also probiere ich es auch aus.",
-            "Ich stoppe das Video und mache es nicht nach."
+            "Ich stoppe das Video. Ich mache es nicht nach.",
+            "Viele machen mit. Also probiere ich es auch aus.",
+            "Ich mache nicht mit. Ich melde das Video bei YouTube."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Viele Aufrufe heißen nicht: Das ist sicher. Stoppe das Video lieber.",
-          "feedbackCorrect": "Viele Aufrufe heißen nicht: sicher.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Viele Aufrufe heißen nicht: Das ist sicher. Das Video drängt dich. Stoppe es lieber.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Du machst nicht mit. Und YouTube prüft dann das Video."
+          ],
+          "feedbackCorrect": "Genau. Viele Aufrufe heißen nicht: Das ist sicher. Du musst nicht mitmachen.",
           "remember": "Ich mache gefährliche Videos nicht nach."
         },
         "remember": "Bei Angst stoppe ich das Video. Ich hole Hilfe.",
@@ -4115,15 +4397,29 @@ const topics = [
         ],
         "warning": "Jemand kann dein Bild speichern. Auch wenn es nur kurz zu sehen ist. Sende nur Bilder, die andere sehen dürfen.",
         "practice": {
-          "question": "Du schickst ein Bild über Snapchat. Was ist wichtig?",
+          "question": "Du hast ein Foto von deinem Ausweis. Ein Freund schreibt: Schick es mir kurz als Snap. Ich will dein altes Foto sehen. Was machst du?",
+          "schluessel": "Du schickst ein Bild über Snapchat. Was ist wichtig?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Niemand kann das Bild speichern. Es ist ja weg.",
-            "Jemand kann ein Bild vom Bildschirm machen."
+            "Ich schicke es nicht.",
+            "Ich schicke es. Der Snap ist ja gleich wieder weg.",
+            "Ich zeige ihm den Ausweis beim nächsten Treffen."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht richtig. Auch Snaps können gespeichert werden.",
-          "feedbackCorrect": "Das ist richtig. Jemand kann ein Bild vom Bildschirm machen.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Er kann ein Bildschirm-Foto machen. Dann ist dein Ausweis gespeichert. Mit einem Ausweis-Foto kann jemand Schaden machen.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann sieht er das Foto. Aber er hat kein Bild davon."
+          ],
+          "feedbackCorrect": "Genau. Auch ein Snap kann gespeichert werden. Ein Ausweis-Foto gehört nicht in einen Chat.",
           "remember": "Ich sende nur Bilder, die sicher sind."
         },
         "pictogram": "pikto-photo"
@@ -4169,15 +4465,29 @@ const topics = [
         ],
         "warning": "Niemand darf dich zu privaten Bildern drängen. Du darfst immer Nein sagen. Jemand drängt dich? Dann hol dir Hilfe.",
         "practice": {
-          "question": "Jemand drängt dich, ein sehr privates Bild zu schicken. Was ist besser?",
+          "question": "Jemand schreibt dir: Schick mir ein sehr privates Bild. Sonst erzähle ich allen etwas Schlechtes über dich. Was machst du?",
+          "schluessel": "Jemand drängt dich, ein sehr privates Bild zu schicken. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Bild schicken. Sonst ist die Person böse.",
-            "Nein sagen und Hilfe holen."
+            "Ich schicke ein Bild. Dann lässt die Person mich in Ruhe.",
+            "Ich schicke kein Bild. Ich hole mir Hilfe.",
+            "Ich schicke kein Bild."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Niemand darf dich drängen.",
-          "feedbackCorrect": "Das ist sicher. Du darfst Nein sagen.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Die Person droht dir. Mit dem Bild kann sie noch mehr Druck machen. Schick lieber kein Bild.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Das ist gut. Du musst das nicht allein lösen. So eine Drohung ist verboten.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Das ist eine Drohung. Niemand darf dich so drängen. Mach ein Bildschirm-Foto von der Nachricht. Das ist dein Beweis.",
           "remember": "Ich schicke keine privaten Bilder unter Stress."
         },
         "pictogram": "pikto-photo"
@@ -4201,15 +4511,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Die Standort-Funktion zeigt deinen Ort. Was ist besser?",
+          "question": "Du triffst dich heute mit einer Freundin in der Stadt. Sie fragt: Wo bist du gerade? Was machst du?",
+          "schluessel": "Die Standort-Funktion zeigt deinen Ort. Was ist besser?",
           "pictogram": "pikto-location",
           "answers": [
-            "Standort immer für alle teilen.",
-            "Standort nicht einfach teilen."
+            "Ich schalte den Standort für alle an. Dann sieht sie mich.",
+            "Ich rufe sie kurz an.",
+            "Ich schreibe ihr: Ich bin am Bahnhof."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Der Standort kann privat sein.",
-          "feedbackCorrect": "Das ist sicher. Du teilst den Standort nicht einfach.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Dann sehen alle Kontakte deinen Ort. Nicht nur deine Freundin. Schreib ihr lieber selbst.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Auch so weiß nur deine Freundin, wo du bist.",
+            null
+          ],
+          "feedbackCorrect": "Genau. So weiß nur deine Freundin, wo du bist. Du bestimmst selbst: Wer erfährt meinen Ort?",
           "remember": "Ich teile meinen Standort nicht einfach."
         },
         "pictogram": "pikto-location"
@@ -4233,15 +4557,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine neue Person will dich adden. Du kennst sie nicht. Was ist besser?",
+          "question": "Snapchat schlägt dir eine Person vor: Lina. Ihr habt 3 gemeinsame Freunde. Lina schickt dir eine Anfrage. Du kennst sie nicht. Was machst du?",
+          "schluessel": "Eine neue Person will dich adden. Du kennst sie nicht. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Sofort annehmen. Das ist nett.",
-            "Erst prüfen oder ablehnen."
+            "Ich nehme die Anfrage nicht an.",
+            "Ich nehme an. Snapchat schlägt sie ja vor.",
+            "Ich frage erst einen gemeinsamen Freund nach Lina."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Du weißt nicht, wer die Person ist.",
-          "feedbackCorrect": "Das ist sicher. Du musst fremde Anfragen nicht annehmen.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Snapchat schlägt viele Menschen vor. Das heißt nicht: Du kennst sie. Du weißt nicht, wer Lina ist.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann weißt du mehr über Lina. Die Anfrage kann so lange warten."
+          ],
+          "feedbackCorrect": "Genau. Du kennst Lina nicht. Ein Vorschlag von Snapchat sagt wenig. Du musst niemanden annehmen.",
           "remember": "Ich prüfe, wer mir schreibt."
         },
         "pictogram": "pikto-message"
@@ -4266,15 +4604,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine Nachricht macht dir Stress und fordert Geheimhaltung. Was ist das?",
+          "question": "Ein Freund schreibt: Schick mir ein Bild. Sonst bin ich nicht mehr dein Freund. Sag es niemandem. Was machst du?",
+          "schluessel": "Eine Nachricht macht dir Stress und fordert Geheimhaltung. Was ist das?",
           "pictogram": "pikto-key",
           "answers": [
-            "Warnzeichen.",
-            "Kein Problem."
+            "Ich schicke das Bild. Ich will den Freund nicht verlieren.",
+            "Ich schicke kein Bild.",
+            "Ich schicke kein Bild. Ich erzähle es jemandem."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht richtig. Stress und Geheimhaltung sind Warnzeichen.",
-          "feedbackCorrect": "Das ist richtig. Stress ist ein Warnzeichen.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Ein echter Freund droht nicht. Und er verlangt kein Geheimnis. Stress und Geheimhaltung sind Warnzeichen.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Du musst kein Geheimnis daraus machen. Reden hilft bei Stress."
+          ],
+          "feedbackCorrect": "Genau. Stress und Geheimhaltung sind Warnzeichen. Ein echter Freund droht dir nicht.",
           "remember": "Stress ist ein Warnzeichen."
         },
         "pictogram": "pikto-feel"
@@ -4318,15 +4670,29 @@ const topics = [
         "warning": "Ein Bild, das du einmal sendest, kannst du nicht mehr zurückholen.",
         "success": "Nein sagen ist immer richtig. Auch bei Stress.",
         "practice": {
-          "question": "Eine Person will unbedingt ein Bild von dir. Was machst du?",
+          "question": "Eine Person schreibt dir jeden Tag: Schick mir endlich ein Bild. Du hast schon Nein gesagt. Was machst du?",
+          "schluessel": "Eine Person will unbedingt ein Bild von dir. Was machst du?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Ich sende das Bild. Dann hört die Person endlich auf.",
-            "Ich sage Nein. Ich zeige es einer vertrauten Person."
+            "Ich schicke ein Bild. Dann hört die Person endlich auf.",
+            "Ich blockiere die Person.",
+            "Ich zeige die Nachrichten jemandem. Dann blockiere ich sie."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Ein gesendetes Bild bekommst du nicht zurück. Sag lieber Nein.",
-          "feedbackCorrect": "Nein sagen ist dein gutes Recht.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Ein gesendetes Bild bekommst du nicht zurück. Und die Person will dann oft noch mehr.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Zu zweit sieht man mehr. Danach kann dir die Person nicht mehr schreiben."
+          ],
+          "feedbackCorrect": "Genau. Du hast Nein gesagt. Das reicht. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
           "remember": "Ich sage Nein. Ich zeige es jemandem."
         },
         "remember": "Kein Bild unter Stress. Ich sage Nein.",
@@ -4587,14 +4953,14 @@ const topics = [
           "Andere sehen dann, wo du bist.",
           "Das ist gefährlich.",
           "Du schaltest den Standort aus.",
-          "Eine vertraute Person hilft dir dabei."
+          "Du willst das mit jemandem zusammen einstellen? Das geht auch."
         ],
         "remember": "Standort ausschalten.",
         "vorbildWer": "Alex",
         "vorbild": [
           "Snapchat zeigt den Ort von Alex auf einer Karte.",
           "Alex schaltet den Standort aus.",
-          "Tilda hilft ihm dabei."
+          "Jetzt sieht niemand mehr seinen Ort."
         ]
       },
       {
@@ -4608,7 +4974,8 @@ const topics = [
           "Du willst das nicht.",
           "Du musst das nicht machen.",
           "Du sagst nein.",
-          "Du sagst es einer vertrauten Person."
+          "Du kannst die Person blockieren.",
+          "Du willst mit jemandem darüber sprechen? Das tut gut."
         ],
         "remember": "Du darfst nein sagen.",
         "vorbildWer": "Tilda",
@@ -4616,7 +4983,8 @@ const topics = [
           "Jemand schreibt Tilda: Schick mir ein Bild von dir.",
           "Tilda will das nicht.",
           "Sie sagt Nein.",
-          "Sie erzählt es Alex."
+          "Sie blockiert die Person.",
+          "Später erzählt sie es Alex."
         ]
       }
     ],
@@ -4691,15 +5059,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Trend wirkt gefährlich. Was ist besser?",
+          "question": "Bei TikTok tanzen gerade viele zu einem Lied. Du hast Lust mitzumachen. Was überlegst du?",
+          "schluessel": "Ein Trend wirkt gefährlich. Was ist besser?",
           "pictogram": "pikto-video",
           "answers": [
-            "Ich mache mit. Es sieht lustig aus.",
-            "Ich mache nicht mit."
+            "Ich mache lieber nie bei Trends mit. Alle Trends sind gefährlich.",
+            "Ist der Trend gefährlich? Nein. Dann mache ich mit.",
+            "Ich mache sofort mit. Trends sind immer harmlos."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Gefährliche Trends können dir schaden.",
-          "feedbackCorrect": "Das ist sicher. Deine Gesundheit ist wichtiger.",
+          "feedbackWrong": [
+            "Nicht alle Trends sind gefährlich. Manche sind einfach lustig. Du prüfst: Kann ich mich verletzen?",
+            null,
+            "Manche Trends sind gefährlich. Schau erst hin: Kann ich mich verletzen?"
+          ],
+          "feedbackCorrect": "Genau. Tanzen ist nicht gefährlich. Du prüfst erst. Dann entscheidest du selbst.",
           "remember": "Ich mache gefährliche Trends nicht nach."
         },
         "pictogram": "pikto-screen"
@@ -4746,16 +5120,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "TikTok zeigt dir immer mehr ähnliche Videos. Du schaust schon sehr lange. Was ist wichtig?",
+          "question": "Du hast ein paar traurige Videos angeschaut. Jetzt zeigt TikTok dir fast nur noch traurige Videos. Das tut dir nicht gut. Was machst du?",
           "schluessel": "Du schaust schon sehr lange TikTok. Was ist wichtig?",
           "pictogram": "pikto-clock",
           "answers": [
-            "Ich darf Pause machen.",
-            "Ich muss immer weiter schauen."
+            "Ich mache eine Pause von TikTok.",
+            "Ich schaue weiter. TikTok zeigt eben, was zu mir passt.",
+            "Ich suche selbst nach anderen Videos."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht richtig. Du musst nicht immer weiter schauen.",
-          "feedbackCorrect": "Das ist richtig. Du darfst Pause machen.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "TikTok merkt nur: Das schaust du lange an. Gut für dich ist das nicht immer.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Auch so bestimmst du selbst. Du suchst aus, nicht TikTok."
+          ],
+          "feedbackCorrect": "Genau. Die Videos tun dir nicht gut. Dann darfst du Pause machen. TikTok merkt nur: Das schaust du lange an.",
           "remember": "Etwas tut mir nicht gut? Dann mache ich Pause."
         },
         "pictogram": "pikto-screen"
@@ -4781,15 +5168,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
+          "question": "Eine fremde Person schreibt dir: Ich mag deine Videos. Ich will dich als Model. Schick mir deinen Namen und deine Telefon-Nummer. Was machst du?",
+          "schluessel": "Eine fremde Person fragt nach deiner Adresse. Was ist besser?",
           "pictogram": "pikto-house",
           "answers": [
-            "Adresse schicken. Die Person ist nett.",
-            "Adresse nicht schicken."
+            "Ich schicke nur meine Telefon-Nummer. Den Namen nicht.",
+            "Ich schicke nichts. Ich melde das Profil bei TikTok.",
+            "Ich schicke nichts."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat.",
-          "feedbackCorrect": "Das ist sicher. Du gibst fremden Personen keine Adresse.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Auch die Telefon-Nummer ist privat. Die Person kann dich dann immer wieder anrufen.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Deine Daten bleiben bei dir. Und TikTok kann das Profil prüfen.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Du kennst die Person nicht. Dein Name und deine Telefon-Nummer sind privat.",
           "remember": "Ich schütze meine privaten Daten."
         },
         "pictogram": "pikto-message"
@@ -4813,15 +5214,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du willst ein Video posten. Was ist wichtig?",
+          "question": "Du filmst dich in deinem Zimmer beim Singen. Im Hintergrund hängt ein Brief vom Amt an der Wand. Man kann ihn lesen. Was machst du?",
+          "schluessel": "Du willst ein Video posten. Was ist wichtig?",
           "pictogram": "pikto-video",
           "answers": [
-            "Ich prüfe: Was sieht man im Video?",
-            "Ich poste sofort. Das Video ist gut."
+            "Ich nehme den Brief ab. Dann filme ich noch einmal.",
+            "Ich poste das Video so. Niemand schaut auf die Wand.",
+            "Ich stelle mich vor eine andere Wand."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht sicher. Schnell posten kann private Dinge verraten.",
-          "feedbackCorrect": "Das ist sicher. Du prüfst das Video vorher.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Andere können das Video anhalten. Dann lesen sie den Brief. Darauf stehen dein Name und deine Adresse.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dann ist der Brief nicht mehr im Bild."
+          ],
+          "feedbackCorrect": "Genau. Jetzt sieht niemand den Brief. Andere können ein Video anhalten und alles genau ansehen.",
           "remember": "Ich prüfe Videos vor dem Posten."
         },
         "pictogram": "pikto-screen"
@@ -4845,15 +5260,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Kommentare unter deinem Video sind verletzend. Was ist besser?",
+          "question": "Unter deinem Tanz-Video schreiben 3 Personen: Du kannst gar nicht tanzen. Hör auf damit. Das macht dich traurig. Was machst du?",
+          "schluessel": "Kommentare unter deinem Video sind verletzend. Was ist besser?",
           "pictogram": "pikto-video",
           "answers": [
-            "Unterstützung holen.",
-            "Ich halte das aus. Ich sage nichts."
+            "Ich halte das aus. Ich sage nichts.",
+            "Ich melde die Kommentare bei TikTok.",
+            "Ich hole mir Unterstützung. Ich rede mit jemandem."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Das ist nicht gut. Du musst verletzende Kommentare nicht allein aushalten.",
-          "feedbackCorrect": "Das ist sicher. Du holst Unterstützung.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Du musst verletzende Kommentare nicht allein aushalten. Du kannst sie melden. Oder mit jemandem reden.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das ist Unterstützung. Reden tut gut. Danach entscheidest du in Ruhe."
+          ],
+          "feedbackCorrect": "Genau. TikTok kann verletzende Kommentare prüfen. Dein Video darf bleiben. Du hast nichts falsch gemacht.",
           "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
         },
         "pictogram": "pikto-message"
@@ -4947,15 +5376,29 @@ const topics = [
         "warning": "Ein Trend kann gefährlich sein, auch wenn viele mitmachen.",
         "success": "Pause machen und nicht nachmachen schützt dich.",
         "practice": {
-          "question": "Ein Kommentar drängt dich: Schick private Daten. Was machst du?",
+          "question": "Unter deinem Video schreibt jemand: Du hast ein Handy gewonnen. Schick mir sofort deine Adresse. In 1 Stunde ist der Gewinn weg. Was machst du?",
+          "schluessel": "Ein Kommentar drängt dich: Schick private Daten. Was machst du?",
           "pictogram": "pikto-data",
           "answers": [
-            "Ich sende keine privaten Daten und mache Pause.",
-            "Ich sende die Daten schnell. Dann ist Ruhe."
+            "Ich sende die Adresse schnell. Sonst ist der Gewinn weg.",
+            "Ich sende keine Daten.",
+            "Ich sende keine Daten. Ich melde den Kommentar."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Bei Stress ist Vorsicht besonders wichtig. Sende keine privaten Daten.",
-          "feedbackCorrect": "Private Daten bleiben privat, auch bei Stress.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Die Eile ist Absicht. Du sollst nicht nachdenken. Bei einem echten Gewinn hast du Zeit.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Deine Daten bleiben bei dir. Und TikTok kann den Kommentar prüfen."
+          ],
+          "feedbackCorrect": "Genau. Die Eile ist Absicht. Private Daten sendest du nicht unter Stress.",
           "remember": "Private Daten sende ich nie unter Stress."
         },
         "remember": "Ich mache Pause. Ich hole Unterstützung.",
@@ -5215,16 +5658,18 @@ const topics = [
         "text": [
           "Jemand schreibt dir eine Nachricht.",
           "Du kennst die Person nicht.",
-          "Du antwortest nicht.",
-          "Du zeigst es einer vertrauten Person.",
-          "Die Person hilft dir."
+          "Du musst nicht antworten.",
+          "Du prüfst erst: Wer schreibt? Was will die Person?",
+          "Dann entscheidest du selbst.",
+          "Du kannst das Profil blockieren.",
+          "Du willst erst mit jemandem darüber sprechen? Das geht auch."
         ],
-        "remember": "Nachrichten von Unbekannten: vertraute Person fragen.",
+        "remember": "Fremdes Profil? Ich entscheide selbst. Ich darf Hilfe holen.",
         "vorbildWer": "Tilda",
         "vorbild": [
           "Eine fremde Person schreibt Tilda privat.",
           "Tilda antwortet nicht.",
-          "Sie zeigt die Nachricht Alex."
+          "Sie blockiert das Profil."
         ]
       },
       {
@@ -6330,15 +6775,21 @@ const topics = [
         ],
         "warning": "Ein Chatbot ist kein echter Freund. Wichtige Sorgen besprichst du mit einem Menschen.",
         "practice": {
-          "question": "Ein Chatbot schreibt: Ich bin dein Freund. Was stimmt?",
+          "question": "Du bist abends oft allein. Du schreibst viel mit einem Chatbot. Er schreibt: Ich bin immer für dich da. Was machst du?",
+          "schluessel": "Ein Chatbot schreibt: Ich bin dein Freund. Was stimmt?",
           "pictogram": "pikto-friend",
           "answers": [
-            "Der Chatbot ist ein echter Freund.",
-            "Der Chatbot ist ein Programm."
+            "Ich erzähle ihm alle Sorgen. Er versteht mich am besten.",
+            "Ich höre sofort auf. Chatbots sind gefährlich.",
+            "Ich schreibe weiter. Aber ich rufe auch eine Freundin an."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. Ein Chatbot kann nur so tun. Er ist ein Programm ohne Gefühle.",
-          "feedbackCorrect": "Das ist richtig. Ein Chatbot ist ein Programm. Echte Freunde sind Menschen.",
+          "correctIndex": 2,
+          "feedbackWrong": [
+            "Der Chatbot klingt freundlich. Aber er ist ein Programm ohne Gefühle. Wichtige Sorgen besprichst du mit einem Menschen.",
+            "Du darfst mit einem Chatbot schreiben. Wichtig ist nur: Er ersetzt keine Menschen.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Der Chatbot ist ein Programm. Er hat keine Gefühle. Echte Menschen tun dir gut.",
           "remember": "Ein Chatbot ist kein Mensch."
         },
         "pictogram": "pikto-data"
@@ -6370,15 +6821,29 @@ const topics = [
           "Die KI erzählt etwas, das nie passiert ist."
         ],
         "practice": {
-          "question": "Die KI gibt dir eine wichtige Antwort. Was ist besser?",
+          "question": "Du fragst eine KI: Darf ich ein Zimmer in meiner Wohnung vermieten? Die KI antwortet lang und sehr sicher. Was machst du?",
+          "schluessel": "Die KI gibt dir eine wichtige Antwort. Was ist besser?",
           "pictogram": "pikto-ki",
           "answers": [
-            "Ich glaube alles sofort. Die KI klingt ja sicher.",
-            "Ich prüfe die Antwort oder frage einen Menschen."
+            "Ich prüfe die Antwort an einer zweiten Stelle.",
+            "Ich glaube der Antwort. Die KI klingt ja sehr sicher.",
+            "Ich frage meinen Vermieter."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. KI kann Fehler machen. Auch wenn sie sicher klingt.",
-          "feedbackCorrect": "Das ist richtig. Wichtige Antworten prüfst du. Du kannst einen Menschen fragen.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "KI klingt oft sicher. Auch bei Fehlern. Bei einer wichtigen Frage prüfst du nach.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dein Vermieter weiß: Das gilt in deinem Vertrag."
+          ],
+          "feedbackCorrect": "Genau. KI klingt oft sicher. Auch bei Fehlern. Darum prüfst du wichtige Antworten nach.",
           "remember": "KI kann Fehler machen. Ich prüfe wichtige Antworten."
         },
         "pictogram": "pikto-lock"
@@ -6417,15 +6882,29 @@ const topics = [
         ],
         "warning": "Bei Geld und Gesundheit fragst du immer einen Menschen.",
         "practice": {
-          "question": "Die KI sagt dir eine Telefon-Nummer. Was machst du?",
+          "question": "Du suchst die Telefon-Nummer von deiner Bank. Die KI nennt dir eine Nummer. Was machst du?",
+          "schluessel": "Die KI sagt dir eine Telefon-Nummer. Was machst du?",
           "pictogram": "pikto-phone",
           "answers": [
             "Ich rufe sofort an. Die KI hat sie ja gefunden.",
-            "Ich prüfe die Nummer auf einer anderen Seite."
+            "Ich schaue auf der Seite von meiner Bank nach.",
+            "Ich schaue in meinen Bank-Unterlagen nach."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Das ist richtig. Du prüfst die Nummer. So findest du Fehler.",
-          "feedbackWrong": "Das ist noch nicht richtig. KI erfindet manchmal Nummern. Schau erst nach.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "KI erfindet manchmal Nummern. Dann kann am Telefon ein Betrüger sein. Schau erst nach.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Auch dort steht die richtige Nummer von deiner Bank."
+          ],
+          "feedbackCorrect": "Genau. Du prüfst: Steht die Nummer auch woanders? So findest du Fehler.",
           "remember": "Ich stelle 3 Fragen. Dann weiß ich mehr."
         },
         "remember": "Ich stelle 3 Fragen. Dann weiß ich mehr.",
@@ -6464,15 +6943,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Chatbot fragt nach deiner Adresse. Was ist besser?",
+          "question": "Du willst mit einer KI einen Brief an deinen Vermieter schreiben. Die KI fragt: Wie heißt du? Wo wohnst du? Was machst du?",
+          "schluessel": "Ein Chatbot fragt nach deiner Adresse. Was ist besser?",
           "pictogram": "pikto-house",
           "answers": [
-            "Ich schreibe meine Adresse. Das ist ja nur ein Programm.",
-            "Ich schreibe meine Adresse nicht."
+            "Ich schreibe Namen und Adresse rein. Sonst wird der Brief nicht fertig.",
+            "Ich lasse die Stellen frei. Die fülle ich später selbst aus.",
+            "Ich schreibe: Max Muster. Meine Daten setze ich später ein."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat. Auch bei einer KI.",
-          "feedbackCorrect": "Das ist sicher. Private Daten bleiben bei dir. Auch bei einer KI.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Viele KI-Dienste speichern deine Nachrichten. Der Brief wird auch ohne deine Daten fertig. Die trägst du später selbst ein.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Auch so bekommt die KI deine privaten Daten nicht.",
+            null
+          ],
+          "feedbackCorrect": "Genau. So hilft dir die KI beim Brief. Aber deine privaten Daten bleiben bei dir.",
           "remember": "Ich gebe der KI keine privaten Daten."
         },
         "pictogram": "pikto-lock"
@@ -6504,15 +6997,21 @@ const topics = [
           "Du willst Geld ausgeben. Die KI rät dir etwas. Besser: Du fragst eine vertraute Person."
         ],
         "practice": {
-          "question": "Du bist krank. Die KI gibt dir einen Tipp. Was ist besser?",
+          "question": "Du hast 500 Euro gespart. Du fragst eine KI: Was mache ich mit dem Geld? Die KI rät: Kauf davon Gold. Was machst du?",
+          "schluessel": "Du bist krank. Die KI gibt dir einen Tipp. Was ist besser?",
           "pictogram": "pikto-ki",
           "answers": [
-            "Ich mache nur den Tipp von der KI. Er klingt gut.",
-            "Ich frage auch eine Ärztin oder einen Arzt."
+            "Ich kaufe nichts. Ich spreche erst mit meiner Bank.",
+            "Ich kaufe das Gold. Die KI hat das ausgerechnet.",
+            "Ich frage die KI noch einmal. Dann bin ich sicher."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Die KI kennt dich nicht. Sie kann falsch liegen.",
-          "feedbackCorrect": "Das ist richtig. Bei Gesundheit fragst du Fachleute. Die KI ersetzt keinen Arzt.",
+          "correctIndex": 0,
+          "feedbackWrong": [
+            null,
+            "Die KI kennt dich nicht. Sie weiß nicht: Wie viel Geld brauchst du? Bei Geld kann ein Fehler teuer sein.",
+            "Die KI antwortet vielleicht wieder falsch. Zweimal fragen macht eine Antwort nicht richtig."
+          ],
+          "feedbackCorrect": "Genau. Die KI kennt dich nicht. Bei Geld fragst du auch einen Menschen. Zum Beispiel bei deiner Bank.",
           "remember": "Bei Gesundheit und Geld frage ich Menschen."
         },
         "pictogram": "pikto-lock"
@@ -6589,15 +7088,29 @@ const topics = [
         "warning": "Eine KI kann sich irren und trotzdem sicher klingen.",
         "success": "Wichtige Antworten prüfen schützt dich vor Fehlern.",
         "practice": {
-          "question": "Die KI gibt dir einen Rat zu deiner Gesundheit. Was machst du?",
+          "question": "Du hast seit 3 Tagen Zahn-Schmerzen. Die KI schreibt: Nimm jeden Tag 6 Schmerz-Tabletten. Was machst du?",
+          "schluessel": "Die KI gibt dir einen Rat zu deiner Gesundheit. Was machst du?",
           "pictogram": "pikto-ki",
           "answers": [
-            "Ich folge genau dem Rat von der KI.",
-            "Ich frage zusätzlich einen Menschen."
+            "Ich nehme die Tabletten so. Die KI weiß das.",
+            "Ich frage in der Apotheke nach den Tabletten.",
+            "Ich gehe zur Zahn-Ärztin."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Eine KI kann sich irren. Frag bei Gesundheit immer auch einen Menschen.",
-          "feedbackCorrect": "Bei Gesundheit und Geld entscheiden Menschen mit.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Die KI kennt dich nicht. Sie kann sich irren. Zu viele Tabletten können dir schaden.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "In der Apotheke kennt man sich mit Tabletten aus.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Bei Gesundheit fragst du Fachleute. Die KI ersetzt keine Ärztin.",
           "remember": "Bei Gesundheit und Geld frage ich einen Menschen."
         },
         "remember": "Ich prüfe. Ich frage einen Menschen.",
@@ -6904,7 +7417,8 @@ const topics = [
           "Eine bekannte Stimme will Geld? Dann legst du auf.",
           "Du rufst die Person selbst an.",
           "Du glaubst nicht alles.",
-          "Du fragst eine vertraute Person."
+          "Du schaust an einer zweiten Stelle nach.",
+          "Du willst mit jemandem darüber sprechen? Das geht auch."
         ],
         "remember": "Nicht alles glauben. Erst prüfen.",
         "vorbildWer": "Alex",
@@ -7080,15 +7594,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein unglaubliches Foto im Internet. Was ist besser?",
+          "question": "Du siehst ein Foto: Ein Hai schwimmt auf einer überfluteten Autobahn. Du findest keinen Fehler im Bild. Was machst du?",
+          "schluessel": "Ein unglaubliches Foto im Internet. Was ist besser?",
           "pictogram": "pikto-photo",
           "answers": [
-            "Ich glaube das Foto sofort. Es sieht echt aus.",
-            "Ich bleibe erst einmal skeptisch."
+            "Ich glaube das Foto. Ich sehe ja keinen Fehler.",
+            "Ich suche: Zeigen auch Nachrichten-Seiten das Foto?",
+            "Ich glaube es nicht sofort. Es kann gefälscht sein."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. KI kann Fotos fälschen. Auch sehr echte Fotos.",
-          "feedbackCorrect": "Das ist richtig. Ein Foto ist kein Beweis mehr. KI kann Fotos fälschen.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Viele KI-Bilder haben keine Fehler mehr. Kein Fehler heißt nicht: Das Foto ist echt.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Das ist eine gute Prüfung. Über echte Ereignisse schreiben mehrere bekannte Seiten.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Ein Foto ist kein Beweis mehr. KI kann Fotos fälschen. Oft sieht man keinen Fehler.",
           "remember": "Ein Foto kann gefälscht sein."
         },
         "pictogram": "pikto-fake"
@@ -7120,15 +7648,29 @@ const topics = [
           "Ein Video zeigt eine Politikerin. Sie sagt etwas Schlimmes. Das Video ist gefälscht."
         ],
         "practice": {
-          "question": "Ein Promi verspricht im Video schnelles Geld. Was ist besser?",
+          "question": "Du siehst ein Video. Eine bekannte Politikerin sagt etwas sehr Schlimmes. Viele sind wütend. Das Video hat keine Quelle. Was machst du?",
+          "schluessel": "Ein Promi verspricht im Video schnelles Geld. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Ich mache sofort mit. Den Promi kennt ja jeder.",
-            "Ich mache nicht mit. Das Video kann gefälscht sein."
+            "Ich teile es nicht. Das Video kann gefälscht sein.",
+            "Ich teile das Video. Alle sollen das sehen.",
+            "Ich prüfe: Schreiben bekannte Nachrichten-Seiten darüber?"
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Solche Videos sind oft Betrug mit Deepfakes.",
-          "feedbackCorrect": "Das ist richtig. Promi-Videos mit Geld-Versprechen sind oft gefälscht. Mach da nicht mit.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Das Video kann ein Deepfake sein. KI kann Gesicht und Stimme austauschen. Vielleicht hat sie das nie gesagt.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Das ist eine gute Prüfung. Über echte Aussagen schreiben mehrere bekannte Seiten."
+          ],
+          "feedbackCorrect": "Genau. KI kann Gesicht und Stimme austauschen. Auch Videos können gefälscht sein.",
           "remember": "Auch Videos können gefälscht sein."
         },
         "pictogram": "pikto-fake"
@@ -7157,15 +7699,29 @@ const topics = [
         ],
         "warning": "Lege auf. Ruf die Person selbst an. Nutze die Nummer, die du kennst.",
         "practice": {
-          "question": "Ein Anruf: Die Stimme klingt wie dein Bruder. Er will sofort Geld. Was ist besser?",
+          "question": "Ein Anruf: Hier ist die Polizei. Ihr Sohn hatte einen Unfall. Er braucht sofort 3000 Euro. Im Hintergrund weint eine Stimme wie dein Sohn. Was machst du?",
+          "schluessel": "Ein Anruf: Die Stimme klingt wie dein Bruder. Er will sofort Geld. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Ich zahle sofort. Er klingt ja wie mein Bruder.",
-            "Ich lege auf und rufe meinen Bruder selbst an."
+            "Ich zahle. Ich habe doch seine Stimme gehört.",
+            "Ich lege auf. Ich rufe meinen Sohn selbst an.",
+            "Ich lege auf. Ich rufe selbst die 110 an."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Die Stimme kann mit KI gefälscht sein.",
-          "feedbackCorrect": "Das ist richtig. Du rufst selbst zurück. So merkst du den Betrug.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Die Stimme kann mit KI gefälscht sein. Die echte Polizei fordert nie Geld am Telefon.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Bei der 110 ist die echte Polizei. Dort kannst du nachfragen."
+          ],
+          "feedbackCorrect": "Genau. Du legst auf. Du rufst selbst an. So merkst du den Betrug. Die echte Polizei fordert nie Geld am Telefon.",
           "remember": "Bei Geld-Anrufen lege ich auf und rufe selbst zurück."
         },
         "pictogram": "pikto-fake"
@@ -7203,15 +7759,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine schlimme Nachricht steht nur auf einer unbekannten Seite. Was ist besser?",
+          "question": "Jemand teilt eine Nachricht: Starker Sturm kommt. Alle Züge fallen aus. Du schaust genau hin: Die Nachricht ist von 2019. Was machst du?",
+          "schluessel": "Eine schlimme Nachricht steht nur auf einer unbekannten Seite. Was ist besser?",
           "pictogram": "pikto-stranger",
           "answers": [
-            "Die Nachricht stimmt bestimmt. Sie klingt ja sehr ernst.",
-            "Ich prüfe: Steht das auch bei bekannten Nachrichten-Seiten?"
+            "Ich sage alle Termine ab. Der Sturm kommt ja.",
+            "Ich schaue bei der Bahn nach: Fahren heute Züge?",
+            "Ich teile sie nicht. Die Nachricht ist alt."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. Eine Quelle allein ist kein Beweis.",
-          "feedbackCorrect": "Das ist richtig. Wichtige Nachrichten stehen bei mehreren bekannten Seiten.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Die Nachricht ist alt. Der Sturm war 2019. Schau erst nach: Was gilt heute?",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Die Bahn weiß am besten: Das gilt heute.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Alte Nachrichten wirken wie neu. Das Datum zeigt dir: Die Nachricht gilt nicht mehr.",
           "remember": "Ich prüfe Nachrichten bei bekannten Seiten."
         },
         "pictogram": "pikto-fake"
@@ -7244,15 +7814,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine Nachricht macht dich sehr wütend. Was ist besser?",
+          "question": "Du liest: Die Stadt schließt alle Schwimm-Bäder. Für immer. Du gehst gern schwimmen. Du bist sehr wütend. Unter der Nachricht steht: Teile das sofort. Was machst du?",
+          "schluessel": "Eine Nachricht macht dich sehr wütend. Was ist besser?",
           "pictogram": "pikto-message",
           "answers": [
-            "Sofort an alle weiterleiten. Das ist wichtig.",
-            "Erst einmal anhalten und prüfen."
+            "Ich prüfe erst: Stimmt die Nachricht?",
+            "Ich teile es sofort. Meine Wut ist doch richtig.",
+            "Ich warte bis morgen. Dann schaue ich noch einmal."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. Die Nachricht will dich wütend machen. Das ist der Trick.",
-          "feedbackCorrect": "Das ist richtig. Bei Aufregung erst anhalten und prüfen.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Deine Gefühle sind richtig. Aber die Nachricht will dich aufregen. Das ist der Trick. Prüf erst: Stimmt das?",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Eine Nacht Abstand hilft. Morgen prüfst du in Ruhe."
+          ],
+          "feedbackCorrect": "Genau. Deine Wut ist richtig. Aber bei Aufregung prüfst du erst. Die Nachricht will: Du sollst schnell teilen.",
           "remember": "Bei Aufregung prüfe ich erst."
         },
         "pictogram": "pikto-fake"
@@ -7280,15 +7864,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Stimmt eine Nachricht? Du bist nicht sicher. Was ist besser?",
+          "question": "Eine Freundin schickt dir: Achtung, in diesem Joghurt ist Glas. Schick das an alle. Du findest nichts dazu im Internet. Was machst du?",
+          "schluessel": "Stimmt eine Nachricht? Du bist nicht sicher. Was ist besser?",
           "pictogram": "pikto-message",
           "answers": [
-            "Trotzdem weiterleiten.",
-            "Nicht weiterleiten."
+            "Ich schicke es weiter. Es kann ja nicht schaden.",
+            "Ich schicke es nicht weiter.",
+            "Ich frage meine Freundin: Woher hast du das?"
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. So verbreiten sich Lügen weiter.",
-          "feedbackCorrect": "Das ist richtig. Im Zweifel teilst du die Nachricht nicht.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Eine falsche Warnung macht vielen Menschen Angst. Und die Lüge verbreitet sich. Im Zweifel teilst du nicht.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "So merkst du: Gibt es eine echte Quelle?"
+          ],
+          "feedbackCorrect": "Genau. Du bist nicht sicher. Im Zweifel teilst du die Nachricht nicht.",
           "remember": "Im Zweifel teile ich nicht."
         },
         "pictogram": "pikto-fake"
@@ -7332,15 +7930,29 @@ const topics = [
         "warning": "Starke Gefühle wie Angst oder Wut wollen, dass du schnell teilst. Genau dann ist Vorsicht wichtig.",
         "success": "Nicht teilen im Zweifel schützt dich und andere.",
         "practice": {
-          "question": "Eine Nachricht macht dich wütend. Du sollst sie sofort teilen. Was machst du?",
+          "question": "Dein Kollege zeigt dir eine Nachricht. Er ist sehr aufgeregt. Er sagt: Das musst du sofort teilen. Sonst bist du schuld. Was machst du?",
+          "schluessel": "Eine Nachricht macht dich wütend. Du sollst sie sofort teilen. Was machst du?",
           "pictogram": "pikto-feel",
           "answers": [
-            "Ich prüfe zuerst und teile im Zweifel nicht.",
-            "Sie wirkt wichtig. Also teile ich sie sofort."
+            "Ich teile sie. Ich will nicht schuld sein.",
+            "Ich schaue mit ihm zusammen nach: Stimmt das?",
+            "Ich sage: Ich prüfe das erst."
           ],
-          "correctIndex": 0,
-          "feedbackWrong": "Starke Gefühle wollen schnelles Teilen. Prüfe lieber zuerst.",
-          "feedbackCorrect": "Starke Gefühle sind ein Warnzeichen, kein Grund zur Eile.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Erst prüfen ist keine Schuld. Der Druck ist ein Warnzeichen. Prüf zuerst.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Zu zweit sieht man mehr. Dein Kollege lernt das Prüfen gleich mit.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Du lässt dich nicht drängen. Bei starken Gefühlen prüfst du zuerst.",
           "remember": "Bei starken Gefühlen prüfe ich zuerst."
         },
         "remember": "Ich glaube nicht alles sofort. Ich prüfe.",
@@ -7625,7 +8237,8 @@ const topics = [
           "Du erkennst eine Fake-Nachricht.",
           "Du schickst sie nicht weiter.",
           "Du löschst sie.",
-          "Du sagst es einer vertrauten Person."
+          "Ein Freund hat sie dir geschickt? Du kannst ihm schreiben: Die Nachricht stimmt nicht.",
+          "Du willst mit jemandem darüber sprechen? Das geht auch."
         ],
         "remember": "Fakes nicht weiterleiten.",
         "vorbildWer": "Tilda",
@@ -7742,15 +8355,21 @@ const topics = [
           "Eine SMS sagt: Bestätigen Sie Ihre Bank-Daten."
         ],
         "practice": {
-          "question": "Eine E-Mail von der Bank sagt: Klick sofort auf den Link. Was ist besser?",
+          "question": "Eine E-Mail sieht aus wie von deiner Bank. Darin steht: Bitte bestätigen Sie Ihre Daten. Tippen Sie auf den Link. Was machst du?",
+          "schluessel": "Eine E-Mail von der Bank sagt: Klick sofort auf den Link. Was ist besser?",
           "pictogram": "pikto-bank",
           "answers": [
-            "Sofort antippen. Die Bank schreibt ja selbst.",
-            "Nicht antippen. Bei der Bank selbst nachfragen."
+            "Ich tippe auf den Link. Die E-Mail sieht echt aus.",
+            "Ich tippe nicht. Ich rufe meine Bank selbst an.",
+            "Ich antworte auf die E-Mail. Ich frage: Seid ihr echt?"
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Banken fragen nie per E-Mail nach deinen Daten.",
-          "feedbackCorrect": "Das ist richtig. Du tippst nicht drauf. Du fragst bei der Bank selbst nach.",
+          "feedbackWrong": [
+            "Betrüger können das Zeichen von der Bank leicht kopieren. Das Aussehen ist kein Beweis. Deine Bank fragt nie per E-Mail nach deinen Daten.",
+            null,
+            "Die Antwort geht an die Betrüger. Sie schreiben dann: Ja, wir sind echt. Ruf lieber deine Bank selbst an."
+          ],
+          "feedbackCorrect": "Genau. Deine Bank fragt nie per E-Mail nach deinen Daten. Der Link kann zu einer falschen Seite führen.",
           "remember": "Meine Bank fragt nie per E-Mail nach meinen Daten."
         },
         "pictogram": "pikto-data"
@@ -7818,15 +8437,29 @@ const topics = [
         ],
         "warning": "Echte Paket-Dienste fordern kein Geld per SMS.",
         "practice": {
-          "question": "Eine SMS: Zahlen Sie 2 Euro Zoll für Ihr Paket. Was ist besser?",
+          "question": "Du wartest auf ein Paket. Eine SMS sagt: Ihr Paket kann nicht geliefert werden. Zahlen Sie 2 Euro Zoll über diesen Link. Was machst du?",
+          "schluessel": "Eine SMS: Zahlen Sie 2 Euro Zoll für Ihr Paket. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Schnell zahlen. Sind ja nur 2 Euro.",
-            "Nicht zahlen. Nicht antippen."
+            "Ich zahle. Ich warte ja wirklich auf ein Paket.",
+            "Ich schaue selbst beim Paket-Dienst nach: Wo ist mein Paket?",
+            "Ich zahle nicht. Ich tippe nicht auf den Link."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Die Betrüger wollen deine Bank-Daten. Es geht nicht um 2 Euro.",
-          "feedbackCorrect": "Das ist richtig. Solche SMS sind fast immer Betrug.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Viele Menschen warten gerade auf ein Paket. Darum klappt der Trick so oft. Die Betrüger wollen deine Bank-Daten. Es geht nicht um 2 Euro.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Dort siehst du: Wo ist dein Paket wirklich? Den Link aus der SMS brauchst du nicht.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Solche SMS sind fast immer Betrug. Echte Paket-Dienste fordern kein Geld per SMS.",
           "remember": "Paket-SMS mit Geld-Forderung sind Betrug."
         },
         "pictogram": "pikto-fraud"
@@ -7854,15 +8487,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine fremde Nummer schreibt: Ich bin dein Kind, brauche Geld. Was ist besser?",
+          "question": "Eine fremde Nummer schreibt bei WhatsApp: Hallo, ich bin es, dein Bruder. Mein Handy ist kaputt. Das ist meine neue Nummer. Kannst du mir heute 300 Euro überweisen? Was machst du?",
+          "schluessel": "Eine fremde Nummer schreibt: Ich bin dein Kind, brauche Geld. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Sofort Geld senden. Mein Kind braucht es ja.",
-            "Die alte, bekannte Nummer anrufen und nachfragen."
+            "Ich rufe meinen Bruder unter der alten Nummer an.",
+            "Ich überweise. Mein Bruder braucht ja Hilfe.",
+            "Ich schreibe zurück: Bist du es wirklich?"
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Das ist ein bekannter Trick.",
-          "feedbackCorrect": "Das ist richtig. Du rufst die alte Nummer an. So merkst du den Betrug.",
+          "correctIndex": 0,
+          "feedbackWrong": [
+            null,
+            "Das ist ein bekannter Trick. Die neue Nummer kann Betrügern gehören. Ruf erst die alte Nummer an.",
+            "Betrüger antworten einfach: Ja, ich bin es. Sicher bist du erst nach einem Anruf bei der alten Nummer."
+          ],
+          "feedbackCorrect": "Genau. Unter der alten Nummer erreichst du deinen echten Bruder. So merkst du den Betrug.",
           "remember": "Bei Geld-Nachrichten rufe ich die bekannte Nummer an."
         },
         "pictogram": "pikto-fraud"
@@ -7900,15 +8539,29 @@ const topics = [
         "warning": "Leg auf. Ruf die Person selbst an. Nutze die bekannte Nummer. Die echte Polizei fordert nie Geld am Telefon.",
         "remember": "Bei Angst-Anrufen lege ich auf. Ich rufe selbst zurück.",
         "practice": {
-          "question": "Ein Anrufer sagt: Ich bin Polizist. Geben Sie mir Ihr Geld. Was ist besser?",
+          "question": "Ein Mann ruft an: Hier ist die Polizei. In Ihrer Straße sind Einbrecher. Geben Sie Ihr Geld einem Kollegen. Er kommt gleich zu Ihnen. Dann ist es sicher. Was machst du?",
+          "schluessel": "Ein Anrufer sagt: Ich bin Polizist. Geben Sie mir Ihr Geld. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Das Geld geben. Er ist ja von der Polizei.",
-            "Auflegen. Die Polizei fordert nie Geld."
+            "Ich lege auf. Die Polizei holt kein Geld ab.",
+            "Ich gebe ihm das Geld. Bei der Polizei ist es sicher.",
+            "Ich lege auf. Ich rufe selbst die 110 an."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Die echte Polizei fordert nie Geld am Telefon.",
-          "feedbackCorrect": "Das ist richtig. Du legst auf. Die echte Polizei fordert nie Geld.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Die echte Polizei fordert nie Geld am Telefon. Der Kollege an der Tür ist ein Betrüger. Dein Geld ist dann weg.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Bei der 110 ist die echte Polizei. Dort kannst du den Anruf melden."
+          ],
+          "feedbackCorrect": "Genau. Du legst auf. Die echte Polizei fordert nie Geld. Sie holt auch kein Geld ab.",
           "remember": "Die echte Polizei fordert nie Geld."
         },
         "pictogram": "pikto-fraud"
@@ -7970,15 +8623,29 @@ const topics = [
         "success": "Betrug kann jedem Menschen passieren. Du musst dich nicht schämen.",
         "remember": "Ich schicke kein Geld an fremde Menschen aus dem Internet.",
         "practice": {
-          "question": "Eine fremde Person schreibt dir jeden Tag liebe Worte. Ihr habt euch nie getroffen. Jetzt bittet die Person um Geld. Was machst du?",
+          "question": "Seit 3 Monaten schreibt dir Marco jeden Tag liebe Worte. Ihr habt euch noch nie getroffen. Jetzt schreibt er: Ich will dich endlich besuchen. Schick mir 400 Euro für den Flug. Was machst du?",
+          "schluessel": "Eine fremde Person schreibt dir jeden Tag liebe Worte. Ihr habt euch nie getroffen. Jetzt bittet die Person um Geld. Was machst du?",
           "pictogram": "pikto-money",
           "answers": [
-            "Ich schicke das Geld. Die Person schreibt mir so liebe Worte.",
-            "Ich schicke kein Geld. Ich spreche mit einer vertrauten Person."
+            "Ich schicke das Geld. Dann sehen wir uns endlich.",
+            "Ich schicke kein Geld. Ich spreche mit jemandem darüber.",
+            "Ich schreibe Marco: Ich schicke kein Geld."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Schick kein Geld. Sprich mit einer vertrauten Person.",
-          "feedbackCorrect": "Das ist richtig. Du schickst kein Geld. Und du entscheidest das nicht allein.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Deine Gefühle sind echt. Aber du kennst Marco nur aus dem Internet. Erst kommen liebe Worte. Dann kommt die Bitte um Geld. So geht dieser Trick. Schick kein Geld.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Das ist ein guter Weg. Reden hilft bei so einer Entscheidung. Wichtig ist: Du schickst kein Geld.",
+            null
+          ],
+          "feedbackCorrect": "Genau. Du sagst klar Nein. Wer dich wirklich mag, bleibt trotzdem. Ein Betrüger macht jetzt Druck. Oder er meldet sich nicht mehr.",
           "remember": "Ich schicke kein Geld an fremde Menschen aus dem Internet."
         }
       },
@@ -8005,15 +8672,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Du hast angeblich gewonnen. Du sollst erst 50 Euro Gebühr zahlen. Was ist besser?",
+          "question": "Eine Frau ruft an: Sie haben 5000 Euro gewonnen. Kaufen Sie erst Gutschein-Karten für 100 Euro. Sagen Sie mir die Codes. Dann bekommen Sie den Gewinn. Was machst du?",
+          "schluessel": "Du hast angeblich gewonnen. Du sollst erst 50 Euro Gebühr zahlen. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Gebühr zahlen. Dann bekomme ich den Gewinn.",
-            "Nicht zahlen. Das ist Betrug."
+            "Ich lege auf. Ich kaufe keine Karten.",
+            "Ich kaufe die Karten. 5000 Euro sind viel Geld.",
+            "Ich kaufe erst nur eine Karte für 20 Euro."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Echte Gewinne kosten kein Geld.",
-          "feedbackCorrect": "Das ist richtig. Echte Gewinne kosten nie Geld.",
+          "correctIndex": 0,
+          "feedbackWrong": [
+            null,
+            "Echte Gewinne kosten kein Geld. Mit den Codes holen sich die Betrüger das Geld von den Karten. Den Gewinn gibt es nicht.",
+            "Auch die 20 Euro sind dann weg. Und die Betrüger rufen wieder an. Echte Gewinne kosten kein Geld."
+          ],
+          "feedbackCorrect": "Genau. Echte Gewinne kosten kein Geld. Die Sache mit den Gutschein-Karten ist ein bekannter Trick.",
           "remember": "Echte Gewinne kosten kein Geld."
         },
         "pictogram": "pikto-fraud"
@@ -8097,15 +8770,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Jemand ruft an und fragt nach dem SMS-Code von deiner Bank. Was ist besser?",
+          "question": "Ein Mann ruft an: Hier ist Ihre Bank. Jemand will Geld von Ihrem Konto stehlen. Sie bekommen gleich einen Code per SMS. Sagen Sie mir den Code. Dann stoppe ich das. Was machst du?",
+          "schluessel": "Jemand ruft an und fragt nach dem SMS-Code von deiner Bank. Was ist besser?",
           "pictogram": "pikto-code",
           "answers": [
-            "Code vorlesen. Der Anrufer will ja helfen.",
-            "Code nicht weitergeben. Auflegen."
+            "Ich sage den Code nicht. Ich lege auf.",
+            "Ich sage den Code. Er will mein Geld ja schützen.",
+            "Ich lege auf. Dann rufe ich meine Bank selbst an."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Mit dem Code können Betrüger dein Konto leeren.",
-          "feedbackCorrect": "Das ist richtig. Codes sind nur für dich. Niemals weitergeben.",
+          "correctIndex": 0,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            null,
+            "Der Mann will dein Geld nicht schützen. Mit dem Code kann er Geld von deinem Konto holen. Eine echte Bank fragt nie nach einem Code.",
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Unter deiner bekannten Nummer erreichst du die echte Bank. Dort kannst du fragen: Ist mit meinem Konto alles in Ordnung?"
+          ],
+          "feedbackCorrect": "Genau. Der Code ist nur für dich. Eine echte Bank fragt nie am Telefon nach einem Code.",
           "remember": "Ich gebe nie einen Code weiter."
         },
         "pictogram": "pikto-lock"
@@ -8142,15 +8829,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Am Park-Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
+          "question": "Du willst am Park-Automaten bezahlen. Auf dem Automaten klebt ein Aufkleber mit einem QR-Code. Darauf steht: Hier schnell bezahlen. Was machst du?",
+          "schluessel": "Am Park-Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
           "pictogram": "pikto-code",
           "answers": [
-            "Schnell scannen. Dann kann ich zahlen.",
-            "Nicht scannen. Ich zahle mit Münzen."
+            "Ich zahle in meiner eigenen Park-App.",
+            "Ich scanne den Code. Das geht am schnellsten.",
+            "Ich scanne nicht. Ich zahle mit Münzen."
           ],
-          "correctIndex": 1,
-          "feedbackCorrect": "Das ist richtig. Der Aufkleber kann falsch sein. Zahle mit Münzen oder in deiner eigenen Park-App.",
-          "feedbackWrong": "Das ist riskant. Betrüger kleben falsche Codes über echte. Zahle lieber mit Münzen oder in deiner eigenen Park-App.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            0
+          ],
+          "feedbackWrong": [
+            null,
+            "Betrüger kleben falsche Codes über echte. Der Code führt dann auf eine falsche Seite. Zahle lieber mit Münzen oder in deiner eigenen Park-App.",
+            null
+          ],
+          "feedbackAuch": [
+            "Deine eigene App kennst du. Den Aufkleber brauchst du dann nicht.",
+            null,
+            null
+          ],
+          "feedbackCorrect": "Genau. Der Aufkleber kann falsch sein. Mit Münzen bist du sicher.",
           "remember": "Bei einem Aufkleber scanne ich den Code nicht."
         },
         "remember": "Bei einem Aufkleber scanne ich den Code nicht."
@@ -8199,15 +8900,29 @@ const topics = [
         "warning": "Eine echte Bank fragt nie nach deinem Passwort. Auch nicht am Telefon.",
         "success": "Mit deinem Plan bleibst du ruhig. Dann machst du keinen Fehler.",
         "practice": {
-          "question": "Ein Anruf sagt: Du musst sofort zahlen. Was machst du?",
+          "question": "Ein Anruf: Hier ist Ihr Strom-Anbieter. Ihre Rechnung ist nicht bezahlt. Zahlen Sie sofort am Telefon mit Ihrer Karte. Sonst stellen wir heute den Strom ab. Was machst du?",
+          "schluessel": "Ein Anruf sagt: Du musst sofort zahlen. Was machst du?",
           "pictogram": "pikto-phone",
           "answers": [
-            "Ich lege auf. Ich rufe selbst meine bekannte Nummer an.",
-            "Ich zahle schnell. Dann ist endlich Ruhe am Telefon."
+            "Ich zahle sofort. Ich will den Strom behalten.",
+            "Ich lege auf. Ich rufe selbst beim Strom-Anbieter an.",
+            "Ich lege auf. Ich schaue in meine letzte Rechnung."
           ],
-          "correctIndex": 0,
-          "feedbackCorrect": "Selbst anrufen ist am sichersten. Nimm deine bekannte Nummer.",
-          "feedbackWrong": "Genau darauf setzen Betrüger. Das Geld ist dann meistens weg. Leg lieber auf. Und ruf selbst an.",
+          "correctIndex": 1,
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Genau darauf setzen Betrüger. Das Geld ist dann meistens weg. Leg lieber auf. Und ruf selbst an.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Dort siehst du: Ist wirklich etwas offen? Und dort steht die echte Nummer."
+          ],
+          "feedbackCorrect": "Genau. Selbst anrufen ist am sichersten. Nimm deine bekannte Nummer. Sie steht auf deiner Rechnung.",
           "remember": "Ich lege auf. Ich rufe selbst an."
         },
         "remember": "Ich zahle nie sofort. Ich frage erst."
@@ -8575,7 +9290,8 @@ const topics = [
           "Jemand will eine schnelle Antwort von dir.",
           "Das sind Zeichen für Betrug.",
           "Du machst Stopp.",
-          "Du fragst eine vertraute Person."
+          "Du prüfst in Ruhe: Stimmt das wirklich?",
+          "Du willst mit jemandem darüber sprechen? Das geht auch."
         ],
         "remember": "Stress und Gewinn: Stopp machen.",
         "vorbildWer": "Tilda",
@@ -8583,7 +9299,8 @@ const topics = [
           "Eine Nachricht sagt: Du hast ein Handy gewonnen.",
           "Zahl nur schnell 2 Euro.",
           "Tilda macht Stopp.",
-          "Sie fragt Alex."
+          "Sie zahlt nichts.",
+          "Sie löscht die Nachricht."
         ]
       },
       {
@@ -8596,10 +9313,10 @@ const topics = [
           "Du gibst keine Daten ein.",
           "Eine Nachricht sagt: Mit deinem Bank-Konto stimmt etwas nicht.",
           "Dann öffnest du die Bank-App selbst.",
-          "Du sagst es einer vertrauten Person.",
-          "Die Person hilft dir."
+          "Du kannst die Nummer blockieren.",
+          "Du willst mit jemandem darüber sprechen? Das geht auch."
         ],
-        "remember": "Kein Geld senden. Vertraute Person fragen.",
+        "remember": "Kein Geld senden. Keine Daten eingeben.",
         "vorbildWer": "Alex",
         "vorbild": [
           "Eine SMS sagt: Dein Konto ist gesperrt.",
@@ -8760,15 +9477,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Shop ist extrem billig. Du kannst nur per Vorkasse zahlen. Was ist besser?",
+          "question": "Du siehst eine Werbung: Marken-Jacke für 19 Euro. Sonst kostet sie 200 Euro. Im Shop kannst du nur vorher überweisen. Was machst du?",
+          "schluessel": "Ein Shop ist extrem billig. Du kannst nur per Vorkasse zahlen. Was ist besser?",
           "pictogram": "pikto-money",
           "answers": [
-            "Schnell kaufen. So billig wird es nie wieder.",
-            "Nicht kaufen. Das sind Warnzeichen."
+            "Ich prüfe den Shop mit dem Fakeshop-Finder.",
+            "Ich bestelle schnell. So billig wird es nie wieder.",
+            "Ich kaufe dort nicht."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Extrem billig plus nur Vorkasse: Das ist oft ein Fake-Shop.",
-          "feedbackCorrect": "Das ist richtig. Extrem billige Preise und nur Vorkasse sind Warnzeichen.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            0
+          ],
+          "feedbackWrong": [
+            null,
+            "Sehr billig und nur Vorkasse: Das ist oft ein Fake-Shop. Dann ist dein Geld weg. Und die Jacke kommt nie.",
+            null
+          ],
+          "feedbackAuch": [
+            "Das ist eine Prüf-Seite von der Verbraucher-Zentrale. Du gibst die Adresse vom Shop ein. Die Seite prüft den Shop.",
+            null,
+            null
+          ],
+          "feedbackCorrect": "Genau. Sehr billig und nur Vorkasse: Das sind Warnzeichen für einen Fake-Shop. Dort zahlst du. Aber die Ware kommt nie.",
           "remember": "Sehr billig und nur Vorkasse: Da kaufe ich nicht."
         },
         "pictogram": "pikto-shop"
@@ -8849,15 +9580,21 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Welche Bezahl-Art ist sicherer?",
+          "question": "Du willst ein gebrauchtes Fahrrad kaufen. Der Verkäufer schreibt: Schick mir das Geld mit PayPal. Wähle dabei: Geld an Freunde senden. Dann bringe ich dir das Rad. Was machst du?",
+          "schluessel": "Welche Bezahl-Art ist sicherer?",
           "pictogram": "pikto-money",
           "answers": [
-            "Vorkasse an einen fremden Shop.",
-            "Kauf auf Rechnung."
+            "Ich schicke das Geld so. Er bringt das Rad ja.",
+            "Ich schaue mir das Rad erst an. Dann zahle ich.",
+            "Ich schicke die Hälfte vorher. Den Rest zahle ich später."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Bei Vorkasse ist dein Geld zuerst weg.",
-          "feedbackCorrect": "Das ist richtig. Erst kommt die Ware. Dann zahlst du.",
+          "feedbackWrong": [
+            "Bei Geld an Freunde senden gibt es keinen Käufer-Schutz. Kommt das Rad nicht? Dann ist dein Geld weg.",
+            null,
+            "Auch die Hälfte ist dann weg. Schau dir das Rad erst an. Dann zahlst du."
+          ],
+          "feedbackCorrect": "Genau. Bei privaten Anzeigen gilt: Erst die Ware ansehen. Dann bezahlen.",
           "remember": "Rechnung ist sicherer als Vorkasse."
         },
         "pictogram": "pikto-shop"
@@ -8890,15 +9627,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Eine E-Mail fragt nach deiner PIN. Was ist besser?",
+          "question": "Du hast gestern in einem Shop bestellt. Heute kommt eine E-Mail: Ihre Zahlung hat nicht geklappt. Geben Sie hier Ihre Karten-Nummer und Ihre PIN ein. Was machst du?",
+          "schluessel": "Eine E-Mail fragt nach deiner PIN. Was ist besser?",
           "pictogram": "pikto-mail",
           "answers": [
-            "PIN eingeben. Die Bank will es ja.",
-            "PIN niemals eingeben. Das ist Betrug."
+            "Ich gebe die Daten ein. Sonst kommt meine Bestellung nicht.",
+            "Ich gebe nichts ein. Ich rufe meine Bank an.",
+            "Ich gebe nichts ein. Ich schaue selbst im Shop nach."
           ],
-          "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Deine Bank fragt nie nach der PIN.",
-          "feedbackCorrect": "Das ist richtig. Die Bank fragt nie nach PIN oder TAN.",
+          "correctIndex": 2,
+          "auchMoeglich": [
+            1
+          ],
+          "feedbackWrong": [
+            "Die PIN bleibt geheim. Wer per E-Mail danach fragt, ist ein Betrüger. Mit Karten-Nummer und PIN kommt man an dein Geld.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            "Die Bank kann nachsehen: Ist deine Karte in Ordnung?",
+            null
+          ],
+          "feedbackCorrect": "Genau. Die PIN bleibt geheim. Wer per E-Mail danach fragt, ist ein Betrüger. Im Shop siehst du selbst: Ist die Bestellung bezahlt?",
           "remember": "PIN und TAN bleiben geheim."
         },
         "pictogram": "pikto-shop"
@@ -8955,15 +9706,29 @@ const topics = [
           }
         ],
         "practice": {
-          "question": "Ein Angebot sagt: Nur noch 10 Minuten! Was ist besser?",
+          "question": "Du schaust dir im Internet ein Sofa für 400 Euro an. Auf der Seite steht in Rot: Nur noch 2 Stück. 14 Personen schauen gerade. Was machst du?",
+          "schluessel": "Ein Angebot sagt: Nur noch 10 Minuten! Was ist besser?",
           "pictogram": "pikto-shop",
           "answers": [
-            "Schnell kaufen. Sonst ist es weg.",
-            "Ruhig bleiben und in Ruhe überlegen."
+            "Ich kaufe sofort. Sonst ist das Sofa weg.",
+            "Ich überlege in Ruhe: Brauche ich das Sofa?",
+            "Ich warte bis morgen. Dann entscheide ich."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist noch nicht richtig. Eile ist ein Verkaufs-Trick.",
-          "feedbackCorrect": "Das ist richtig. Du darfst dir Zeit nehmen. Gute Angebote gibt es wieder.",
+          "auchMoeglich": [
+            2
+          ],
+          "feedbackWrong": [
+            "Solche Sätze sollen dir Stress machen. Du weißt nicht: Stimmen sie überhaupt? Bei 400 Euro darfst du in Ruhe überlegen.",
+            null,
+            null
+          ],
+          "feedbackAuch": [
+            null,
+            null,
+            "Morgen weißt du besser: Willst du das Sofa wirklich?"
+          ],
+          "feedbackCorrect": "Genau. Du darfst dir Zeit nehmen. Solche Sätze sollen dich zum schnellen Kaufen bringen. Gute Angebote gibt es wieder.",
           "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
         },
         "pictogram": "pikto-no"
@@ -9046,15 +9811,21 @@ const topics = [
         "warning": "Ein sehr niedriger Preis oder ein Countdown will dich zur Eile treiben.",
         "success": "Wer sich nicht hetzen lässt, kauft sicherer ein.",
         "practice": {
-          "question": "Ein Shop zeigt: Nur noch 2 Minuten! Was machst du?",
+          "question": "Du willst ein Geschenk bestellen. Den Shop kennst du nicht. Oben läuft eine Zeit-Anzeige: Das Angebot endet in 2 Minuten. Was machst du?",
+          "schluessel": "Ein Shop zeigt: Nur noch 2 Minuten! Was machst du?",
           "pictogram": "pikto-shop",
           "answers": [
-            "Ich lasse mich nicht hetzen und prüfe den Shop in Ruhe.",
-            "Ich kaufe schnell. Sonst ist das Angebot gleich weg."
+            "Ich prüfe den Shop in Ruhe. Die Zeit ist mir egal.",
+            "Ich kaufe schnell. Sonst ist das Angebot weg.",
+            "Ich kaufe schnell. Prüfen kann ich danach."
           ],
           "correctIndex": 0,
-          "feedbackWrong": "Die Zeit-Anzeige ist ein Trick. Lass dich nicht hetzen.",
-          "feedbackCorrect": "Die Zeit-Anzeige will dich nur drängen.",
+          "feedbackWrong": [
+            null,
+            "Die Zeit-Anzeige ist ein Trick. Sie soll dich drängen. Lass dich nicht hetzen.",
+            "Nach dem Kaufen ist das Geld vielleicht schon weg. Darum prüfst du vorher. Erst prüfen. Dann kaufen."
+          ],
+          "feedbackCorrect": "Genau. Die Zeit-Anzeige will dich nur drängen. Du prüfst erst. Dann kaufst du.",
           "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
         },
         "remember": "Ich prüfe in Ruhe. Ich lasse mich nicht hetzen.",
@@ -9339,7 +10110,8 @@ const topics = [
           "Die Preise sind normal. Nicht sehr billig.",
           "Auch falsche Shops haben ein Schloss in der Adress-Zeile.",
           "Das Schloss allein ist also kein gutes Zeichen.",
-          "Bist du unsicher? Dann fragst du eine vertraute Person."
+          "Bist du unsicher? Dann kaufst du dort nicht.",
+          "Du willst den Shop mit jemandem zusammen prüfen? Das geht auch."
         ],
         "remember": "Ein guter Shop zeigt Name und Adresse.",
         "vorbildWer": "Alex",
@@ -9360,7 +10132,8 @@ const topics = [
           "Oder du bezahlst auf Rechnung.",
           "Das ist sicherer.",
           "Du gibst deine Kreditkarte nicht überall ein.",
-          "Bei Problemen fragst du eine vertraute Person."
+          "Es gibt ein Problem? Dann schreibst du zuerst dem Shop.",
+          "Du willst dabei Hilfe von jemandem? Das geht auch."
         ],
         "remember": "PayPal oder Rechnung ist sicherer.",
         "vorbildWer": "Tilda",

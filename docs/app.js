@@ -2620,7 +2620,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Dein Name und dein Profil-Bild sind öffentlich.",
           "einfach": "Dein Name, dein aktuelles Profil-Bild und dein Titel-Bild sind öffentlich. Das Titel-Bild ist das große Bild oben im Profil.",
-          "standard": "Dein Name, dein aktuelles Profilbild und dein Titelbild sind öffentlich sichtbar. Für Beiträge und weitere Profilangaben kannst du die Sichtbarkeit einzeln wählen. Bei neuen Beiträgen kannst du zum Beispiel Freunde auswählen. Eine vertraute Person kann dir dabei helfen."
+          "standard": "Dein Name, dein aktuelles Profilbild und dein Titelbild sind öffentlich sichtbar. Für Beiträge und weitere Profilangaben kannst du die Sichtbarkeit einzeln wählen. Bei neuen Beiträgen kannst du zum Beispiel Freunde auswählen. Wenn du möchtest, gehst du die Einstellungen mit jemandem zusammen durch."
         }
       }
     ],
@@ -2630,7 +2630,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Manchmal fragt eine unbekannte Person.",
           "einfach": "Manchmal schickt dir eine unbekannte Person eine Freundschafts-Anfrage.",
-          "standard": "Manchmal schickt dir jemand eine Freundschaftsanfrage, den du nicht kennst. Solche Anfragen nimmst du nicht an. Bist du unsicher, fragst du eine Person, der du vertraust."
+          "standard": "Manchmal schickt dir jemand eine Freundschaftsanfrage, den du nicht kennst. Solche Anfragen nimmst du nicht an. Bist du unsicher, siehst du dir zuerst das Profil an und entscheidest dann selbst."
         }
       }
     ],
@@ -2640,7 +2640,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du bekommst eine komische Nachricht.",
           "einfach": "Manchmal bekommst du eine komische Nachricht, zum Beispiel mit einer Frage nach Geld oder mit einem Link.",
-          "standard": "Seltsame Nachrichten, in denen jemand nach Geld fragt oder einen Link schickt, sind oft Betrug. Tippe nichts an und zeig die Nachricht einer Person, der du vertraust."
+          "standard": "Seltsame Nachrichten, in denen jemand nach Geld fragt oder einen Link schickt, sind oft Betrug. Tippe nichts an und schick kein Geld. Kommt die Nachricht von einem Freund, ruf ihn an und frag, ob er sie wirklich geschrieben hat."
         }
       }
     ]
@@ -2672,7 +2672,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Jemand schreibt dir eine Nachricht.",
           "einfach": "Manchmal schreibt dir eine Person, die du nicht kennst.",
-          "standard": "Schreibt dir jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht stattdessen einer Person, der du vertraust – sie hilft dir, die Nachricht richtig einzuschätzen."
+          "standard": "Schreibt dir jemand, den du nicht kennst, musst du nicht antworten. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte, und entscheide dann selbst. Du kannst die Nachricht ignorieren oder das Profil blockieren – und wenn du möchtest, sprichst du vorher mit jemandem darüber."
         }
       }
     ]
@@ -2726,7 +2726,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Snapchat kann deinen Standort zeigen.",
           "einfach": "Snapchat kann anderen zeigen, wo du gerade bist. Das nennt man Standort.",
-          "standard": "Snapchat kann deinen Standort auf einer Karte anzeigen – dann sehen andere, wo du gerade bist. Das kann gefährlich werden. Schalte die Standort-Freigabe deshalb aus; eine Person, der du vertraust, kann dir dabei helfen."
+          "standard": "Snapchat kann deinen Standort auf einer Karte anzeigen – dann sehen andere, wo du gerade bist. Das kann gefährlich werden. Schalte die Standort-Freigabe deshalb aus. Wenn du möchtest, gehst du die Einstellung mit jemandem zusammen durch."
         }
       }
     ],
@@ -2736,7 +2736,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Die Person sagt: Schick mir ein Bild!",
           "einfach": "Manchmal macht dir jemand Druck und will ein Bild von dir.",
-          "standard": "Setzt dich jemand unter Druck, ein Bild von dir zu schicken, musst du das nicht tun. Du darfst jederzeit Nein sagen. Erzähl einer Person, der du vertraust, davon – du bist damit nicht allein."
+          "standard": "Setzt dich jemand unter Druck, ein Bild von dir zu schicken, musst du das nicht tun. Du darfst jederzeit Nein sagen und die Person blockieren. Wenn du möchtest, sprichst du mit jemandem darüber – du bist damit nicht allein."
         }
       }
     ]
@@ -2758,7 +2758,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Jemand schreibt dir eine Nachricht.",
           "einfach": "Manchmal schreibt dir auf TikTok eine Person, die du nicht kennst.",
-          "standard": "Schreibt dir auf TikTok jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht einer Person, der du vertraust – gemeinsam entscheidet ihr, was zu tun ist."
+          "standard": "Schreibt dir auf TikTok jemand, den du nicht kennst, musst du nicht antworten. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte, und entscheide dann selbst. Du kannst die Nachricht ignorieren oder das Profil blockieren – und wenn du möchtest, sprichst du vorher mit jemandem darüber."
         }
       }
     ],
@@ -2832,7 +2832,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du rufst die Person selbst an.",
           "einfach": "Will eine bekannte Stimme am Telefon Geld, legst du auf und rufst die Person unter ihrer bekannten Nummer selbst an.",
-          "standard": "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst, und frag im Zweifel eine Person, der du vertraust."
+          "standard": "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst. Prüf es im Zweifel an einer zweiten Stelle oder sprich mit jemandem darüber."
         }
       }
     ]
@@ -2864,7 +2864,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du erkennst eine Fake-Nachricht.",
           "einfach": "Wenn du eine Fake-Nachricht erkennst, schickst du sie nicht weiter.",
-          "standard": "Hast du eine Fake-Nachricht erkannt, leitest du sie nicht weiter – so stoppst du ihre Verbreitung. Lösch sie und erzähl einer Person, der du vertraust, davon."
+          "standard": "Hast du eine Fake-Nachricht erkannt, leitest du sie nicht weiter – so stoppst du ihre Verbreitung. Lösch sie. Kam sie von einem Freund, kannst du ihm schreiben, dass sie nicht stimmt. Wenn du möchtest, sprichst du mit jemandem darüber."
         }
       }
     ]
@@ -2886,7 +2886,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Jemand braucht dringend Geld.",
           "einfach": "Es gibt typische Zeichen für Betrug: Du gewinnst plötzlich etwas, jemand braucht dringend Geld, oder jemand will sofort eine Antwort.",
-          "standard": "Typische Warnzeichen für Betrug sind überraschende Gewinne, dringende Bitten um Geld und Zeitdruck. Siehst du so ein Zeichen, machst du Stopp und fragst eine Person, der du vertraust."
+          "standard": "Typische Warnzeichen für Betrug sind überraschende Gewinne, dringende Bitten um Geld und Zeitdruck. Siehst du so ein Zeichen, machst du Stopp und prüfst in Ruhe, ob das wirklich stimmt. Wenn du möchtest, sprichst du mit jemandem darüber."
         }
       }
     ],
@@ -2896,7 +2896,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Dann öffnest du die Bank-App selbst.",
           "einfach": "Sagt eine Nachricht, mit deinem Bank-Konto stimmt etwas nicht, tippst du nicht auf den Link. Du öffnest deine Bank-App selbst.",
-          "standard": "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Meldet eine Nachricht ein Problem mit deinem Konto, öffne die Bank-App selbst, statt dem Link zu folgen. Erzähl einer Person, der du vertraust, davon – gemeinsam findet ihr den nächsten Schritt."
+          "standard": "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Meldet eine Nachricht ein Problem mit deinem Konto, öffne die Bank-App selbst, statt dem Link zu folgen. Du kannst die Nummer blockieren – und wenn du möchtest, sprichst du mit jemandem darüber."
         }
       }
     ]
@@ -2918,7 +2918,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Auch falsche Shops haben ein Schloss in der Adress-Zeile.",
           "einfach": "Das Schloss in der Adress-Zeile allein ist kein gutes Zeichen, weil auch falsche Shops es haben.",
-          "standard": "Seriöse Shops nennen im Impressum ihren Namen und ihre Anschrift, und ihre Preise sind realistisch statt verdächtig niedrig. Das Schloss-Symbol in der Adresszeile reicht allein nicht: Es zeigt nur eine verschlüsselte Verbindung, und auch Fake-Shops haben es. Bist du unsicher, frag eine Person, der du vertraust."
+          "standard": "Seriöse Shops nennen im Impressum ihren Namen und ihre Anschrift, und ihre Preise sind realistisch statt verdächtig niedrig. Das Schloss-Symbol in der Adresszeile reicht allein nicht: Es zeigt nur eine verschlüsselte Verbindung, und auch Fake-Shops haben es. Bist du unsicher, kauf dort nicht – oder prüf den Shop gemeinsam mit jemandem."
         }
       }
     ],
@@ -2928,7 +2928,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du gibst deine Kreditkarte nicht überall ein.",
           "einfach": "Deine Kreditkarte gibst du nicht auf jeder Seite ein.",
-          "standard": "Sicherer bezahlst du auf Rechnung – dann zahlst du erst, wenn die Ware da ist – oder über PayPal mit Käuferschutz. Deine Kreditkartendaten gibst du nicht auf jeder Seite ein. Gibt es Probleme, frag eine Person, der du vertraust."
+          "standard": "Sicherer bezahlst du auf Rechnung – dann zahlst du erst, wenn die Ware da ist – oder über PayPal mit Käuferschutz. Deine Kreditkartendaten gibst du nicht auf jeder Seite ein. Gibt es Probleme, schreib zuerst dem Shop – und hol dir dabei Hilfe, wenn du möchtest."
         }
       }
     ]
@@ -3459,8 +3459,8 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
       {
         "piktogramm": "friend",
         "saetze": {
-          "leicht": "Eine vertraute Person hilft dir beim Einstellen.",
-          "einfach": "Du kannst für deine Beiträge Freunde auswählen. Eine vertraute Person hilft dir bei den Einstellungen."
+          "leicht": "Du willst das mit jemandem zusammen einstellen? Das geht auch.",
+          "einfach": "Du kannst für deine Beiträge Freunde auswählen. Wenn du möchtest, stellst du das zusammen mit einer anderen Person ein."
         }
       }
     ],
@@ -3473,10 +3473,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "search",
         "saetze": {
-          "leicht": "Du fragst eine vertraute Person.",
-          "einfach": "Bist du unsicher, fragst du eine Person, der du vertraust."
+          "leicht": "Du bist nicht sicher? Dann schaust du dir erst das Profil an.",
+          "einfach": "Wenn du nicht sicher bist, schaust du dir zuerst das Profil an und entscheidest dann selbst."
         }
       }
     ],
@@ -3489,10 +3489,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "anruf",
         "saetze": {
-          "leicht": "Du zeigst es einer vertrauten Person.",
-          "einfach": "Zeig die Nachricht lieber einer Person, der du vertraust."
+          "leicht": "Die Nachricht kommt von einem Freund? Dann rufst du ihn an.",
+          "einfach": "Wenn die Nachricht von einem Freund kommt, rufst du ihn an und fragst, ob er das wirklich geschrieben hat."
         }
       }
     ]
@@ -3662,17 +3662,17 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
     ],
     "Nachrichten von Unbekannten": [
       {
-        "piktogramm": "stop",
+        "piktogramm": "search",
         "saetze": {
-          "leicht": "Du antwortest nicht.",
-          "einfach": "Dann antwortest du ihr nicht."
+          "leicht": "Du prüfst erst: Wer schreibt? Was will die Person?",
+          "einfach": "Du musst nicht antworten, auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte."
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "block",
         "saetze": {
-          "leicht": "Du zeigst es einer vertrauten Person.",
-          "einfach": "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter."
+          "leicht": "Du kannst das Profil blockieren.",
+          "einfach": "Dann entscheidest du selbst: Du kannst die Nachricht stehen lassen oder das Profil blockieren. Wenn du möchtest, sprichst du vorher mit jemandem darüber."
         }
       }
     ]
@@ -3975,7 +3975,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "einstellungen",
         "saetze": {
           "leicht": "Du schaltest den Standort aus.",
-          "einfach": "Schalte deinen Standort deshalb aus. Eine Person, der du vertraust, hilft dir dabei."
+          "einfach": "Schalte deinen Standort deshalb aus. Wenn du möchtest, stellst du das zusammen mit einer anderen Person ein."
         }
       }
     ],
@@ -3988,10 +3988,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "block",
         "saetze": {
-          "leicht": "Du sagst es einer vertrauten Person.",
-          "einfach": "Erzähl es danach eine Person, der du vertraust."
+          "leicht": "Du kannst die Person blockieren.",
+          "einfach": "Du kannst die Person blockieren. Wenn du möchtest, sprichst du danach mit jemandem darüber."
         }
       }
     ]
@@ -4159,17 +4159,17 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
     ],
     "Nachrichten auf TikTok": [
       {
-        "piktogramm": "stop",
+        "piktogramm": "search",
         "saetze": {
-          "leicht": "Du antwortest nicht.",
-          "einfach": "Dann antwortest du ihr nicht."
+          "leicht": "Du prüfst erst: Wer schreibt? Was will die Person?",
+          "einfach": "Du musst nicht antworten, auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte."
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "block",
         "saetze": {
-          "leicht": "Du zeigst es einer vertrauten Person.",
-          "einfach": "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter."
+          "leicht": "Du kannst das Profil blockieren.",
+          "einfach": "Dann entscheidest du selbst: Du kannst die Nachricht stehen lassen oder das Profil blockieren. Wenn du möchtest, sprichst du vorher mit jemandem darüber."
         }
       }
     ]
@@ -4541,10 +4541,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "search",
         "saetze": {
-          "leicht": "Du fragst eine vertraute Person.",
-          "einfach": "Glaub deshalb nicht alles. Frag im Zweifel eine Person, der du vertraust."
+          "leicht": "Du schaust an einer zweiten Stelle nach.",
+          "einfach": "Glaub deshalb nicht alles. Schau im Zweifel an einer zweiten Stelle nach oder sprich mit jemandem darüber."
         }
       }
     ]
@@ -4715,10 +4715,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "message",
         "saetze": {
-          "leicht": "Du sagst es einer vertrauten Person.",
-          "einfach": "Du löschst sie und erzählst eine Person, der du vertraust davon."
+          "leicht": "Ein Freund hat sie dir geschickt? Du kannst ihm schreiben: Die Nachricht stimmt nicht.",
+          "einfach": "Du löschst sie. Wenn ein Freund sie dir geschickt hat, kannst du ihm schreiben, dass sie nicht stimmt. Du kannst auch mit jemandem darüber sprechen."
         }
       }
     ]
@@ -4950,10 +4950,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
     ],
     "Was tust du bei Betrug?": [
       {
-        "piktogramm": "friend",
+        "piktogramm": "block",
         "saetze": {
-          "leicht": "Du sagst es einer vertrauten Person.",
-          "einfach": "Erzähl es eine Person, der du vertraust. Sie hilft dir weiter."
+          "leicht": "Du kannst die Nummer blockieren.",
+          "einfach": "Du kannst die Nummer blockieren. Wenn du möchtest, sprichst du mit jemandem darüber."
         }
       },
       {
@@ -4973,10 +4973,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "search",
         "saetze": {
-          "leicht": "Du fragst eine vertraute Person.",
-          "einfach": "Dann fragst du eine Person, der du vertraust."
+          "leicht": "Du prüfst in Ruhe: Stimmt das wirklich?",
+          "einfach": "Dann prüfst du in Ruhe, ob das wirklich stimmt. Wenn du möchtest, sprichst du mit jemandem darüber."
         }
       }
     ]
@@ -5009,10 +5009,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "no",
         "saetze": {
-          "leicht": "Bist du unsicher? Dann fragst du eine vertraute Person.",
-          "einfach": "Wenn du unsicher bist, fragst du eine Person, der du vertraust."
+          "leicht": "Bist du unsicher? Dann kaufst du dort nicht.",
+          "einfach": "Wenn du unsicher bist, kaufst du dort nicht. Du kannst den Shop auch mit jemandem zusammen prüfen."
         }
       },
       {
@@ -5083,10 +5083,10 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         }
       },
       {
-        "piktogramm": "friend",
+        "piktogramm": "message",
         "saetze": {
-          "leicht": "Bei Problemen fragst du eine vertraute Person.",
-          "einfach": "Wenn es Probleme gibt, fragst du eine Person, der du vertraust."
+          "leicht": "Es gibt ein Problem? Dann schreibst du zuerst dem Shop.",
+          "einfach": "Wenn es Probleme gibt, schreibst du zuerst dem Shop. Wenn du möchtest, holst du dir dabei Hilfe."
         }
       },
       {
@@ -10523,15 +10523,15 @@ function answerText(a) {
    nach Freigabe der Probe (§11, §13). */
 const ANTWORT_BILDER = {
   betrug: {
-    "betrug/lang/Was ist Phishing?": ["link", "bank"],
-    "betrug/lang/Der Hallo-Mama-Trick": ["money", "anruf"],
-    "betrug/lang/Liebe im Internet": ["money", "friend"],
-    "betrug/lang/Abo-Fallen": ["photo", "lesen"],
-    "betrug/lang/Vorsicht bei QR-Codes": ["code", "money"],
-    "betrug/lang/Was kann ich tun?": ["anruf", "money"],
-    "betrug/kurz/Was ist Betrug im Internet?": ["money", "message"],
-    "betrug/kurz/Wie erkennst du Betrug?": ["geschenk", "ask"],
-    "betrug/kurz/Was tust du bei Betrug?": ["link", "bank"],
+    "betrug/lang/Was ist Phishing?": ["link", "bank", "mail"],
+    "betrug/lang/Der Hallo-Mama-Trick": ["anruf", "money", "message"],
+    "betrug/lang/Liebe im Internet": ["money", "friend", "message"],
+    "betrug/lang/Abo-Fallen": ["geschenk", "lesen", "search"],
+    "betrug/lang/Vorsicht bei QR-Codes": ["handy", "code", "money"],
+    "betrug/lang/Was kann ich tun?": ["card", "anruf", "lesen"],
+    "betrug/kurz/Was ist Betrug im Internet?": ["data", "message", "stranger"],
+    "betrug/kurz/Wie erkennst du Betrug?": ["money", "message", "search"],
+    "betrug/kurz/Was tust du bei Betrug?": ["bank", "link", "anruf"],
     "Hallo Mama, neue Nummer, brauche Geld. Was machst du?": ["money", "message", "anruf"],
     "Jemand fragt nach deinem SMS-Code. Was machst du?": ["code", "anruf", "lock"],
     "Jemand aus dem Internet schreibt dir liebe Worte. Die Person bittet um Geld. Ihr habt euch nie getroffen. Was ist richtig?": ["friend", "money", "bank"],

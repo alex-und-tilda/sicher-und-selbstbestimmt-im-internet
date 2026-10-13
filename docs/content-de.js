@@ -2529,15 +2529,15 @@ const KURZ_VERSIONS = {
           { text: "Auf Facebook hast du ein Profil, das andere Menschen sehen können." },
           { text: "Dein Name, dein aktuelles Profil-Bild und dein Titel-Bild sind öffentlich. Das Titel-Bild ist das große Bild oben im Profil." },
           { text: "Für deine Beiträge wählst du aus, wer sie sehen kann." },
-          { text: "Du kannst für deine Beiträge Freunde auswählen. Eine vertraute Person hilft dir bei den Einstellungen." }
+          { text: "Du kannst für deine Beiträge Freunde auswählen. Wenn du möchtest, stellst du das zusammen mit einer anderen Person ein." }
         ],
         remember: "Ich prüfe, wer meinen Beitrag sehen kann.",
-        vorbild: ["Alex öffnet bei Facebook die Einstellungen.", "Für seine neuen Beiträge wählt er Freunde aus.", "Tilda hilft ihm dabei."]
+        vorbild: ["Alex öffnet bei Facebook die Einstellungen.", "Für seine neuen Beiträge wählt er Freunde aus.", "Jetzt sehen nur noch seine Freunde, was er neu postet."]
       },
       standard: {
-        text: [{ text: "Dein Name, dein aktuelles Profilbild und dein Titelbild sind öffentlich sichtbar. Für Beiträge und weitere Profilangaben kannst du die Sichtbarkeit einzeln wählen. Bei neuen Beiträgen kannst du zum Beispiel Freunde auswählen. Eine vertraute Person kann dir dabei helfen." }],
+        text: [{ text: "Dein Name, dein aktuelles Profilbild und dein Titelbild sind öffentlich sichtbar. Für Beiträge und weitere Profilangaben kannst du die Sichtbarkeit einzeln wählen. Bei neuen Beiträgen kannst du zum Beispiel Freunde auswählen. Wenn du möchtest, gehst du die Einstellungen mit jemandem zusammen durch." }],
         remember: "Ich prüfe, wer meinen Beitrag sehen kann.",
-        vorbild: ["Alex öffnet die Facebook-Einstellungen und wählt für seine neuen Beiträge Freunde aus. Tilda hilft ihm dabei."]
+        vorbild: ["Alex öffnet die Facebook-Einstellungen und wählt für seine neuen Beiträge Freunde aus. Danach sehen nur noch seine Freunde, was er neu postet."]
       }
     },
     "Unbekannte Personen": {
@@ -2545,13 +2545,13 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Manchmal schickt dir eine unbekannte Person eine Freundschafts-Anfrage." },
           { text: "Wenn du die Person nicht kennst, nimmst du die Anfrage nicht an." },
-          { text: "Bist du unsicher, fragst du eine Person, der du vertraust." }
+          { text: "Wenn du nicht sicher bist, schaust du dir zuerst das Profil an und entscheidest dann selbst." }
         ],
         remember: "Anfragen von Unbekannten lehnst du ab.",
         vorbild: ["Eine Person, die Tilda nicht kennt, schickt ihr eine Freundschafts-Anfrage.", "Tilda lehnt die Anfrage ab."]
       },
       standard: {
-        text: [{ text: "Manchmal schickt dir jemand eine Freundschaftsanfrage, den du nicht kennst. Solche Anfragen nimmst du nicht an. Bist du unsicher, fragst du eine Person, der du vertraust." }],
+        text: [{ text: "Manchmal schickt dir jemand eine Freundschaftsanfrage, den du nicht kennst. Solche Anfragen nimmst du nicht an. Bist du unsicher, siehst du dir zuerst das Profil an und entscheidest dann selbst." }],
         remember: "Anfragen von Unbekannten ablehnen.",
         vorbild: ["Eine unbekannte Person schickt Tilda eine Freundschaftsanfrage. Tilda lehnt sie ab."]
       }
@@ -2561,15 +2561,15 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Manchmal bekommst du eine komische Nachricht, zum Beispiel mit einer Frage nach Geld oder mit einem Link." },
           { text: "Tippe nicht auf den Link und schick kein Geld." },
-          { text: "Zeig die Nachricht lieber einer Person, der du vertraust." }
+          { text: "Wenn die Nachricht von einem Freund kommt, rufst du ihn an und fragst, ob er das wirklich geschrieben hat." }
         ],
-        remember: "Komische Nachrichten zeigst du jemandem. Du tippst nichts an.",
-        vorbild: ["Jemand schreibt Alex, dass er schnell Geld braucht, und schickt einen Link.", "Alex tippt nicht auf den Link und zeigt die Nachricht Tilda."]
+        remember: "Komische Nachrichten tippe ich nicht an.",
+        vorbild: ["Jemand schreibt Alex, dass er schnell Geld braucht, und schickt einen Link.", "Alex tippt nicht auf den Link und schickt kein Geld. Er meldet die Nachricht bei Facebook."]
       },
       standard: {
-        text: [{ text: "Seltsame Nachrichten, in denen jemand nach Geld fragt oder einen Link schickt, sind oft Betrug. Tippe nichts an und zeig die Nachricht einer Person, der du vertraust." }],
-        remember: "Seltsame Nachrichten zeigen statt antippen.",
-        vorbild: ["Jemand bittet Alex per Nachricht dringend um Geld und schickt einen Link. Alex tippt ihn nicht an und zeigt Tilda die Nachricht."]
+        text: [{ text: "Seltsame Nachrichten, in denen jemand nach Geld fragt oder einen Link schickt, sind oft Betrug. Tippe nichts an und schick kein Geld. Kommt die Nachricht von einem Freund, ruf ihn an und frag, ob er sie wirklich geschrieben hat." }],
+        remember: "Seltsame Nachrichten tippe ich nicht an.",
+        vorbild: ["Jemand bittet Alex per Nachricht dringend um Geld und schickt einen Link. Alex tippt ihn nicht an, schickt kein Geld und meldet die Nachricht bei Facebook."]
       }
     }
   },
@@ -2610,16 +2610,16 @@ const KURZ_VERSIONS = {
       einfach: {
         text: [
           { text: "Manchmal schreibt dir eine Person, die du nicht kennst." },
-          { text: "Dann antwortest du ihr nicht." },
-          { text: "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter." }
+          { text: "Du musst nicht antworten, auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte." },
+          { text: "Dann entscheidest du selbst: Du kannst die Nachricht stehen lassen oder das Profil blockieren. Wenn du möchtest, sprichst du vorher mit jemandem darüber." }
         ],
-        remember: "Bei Nachrichten von Unbekannten fragst du eine Person, der du vertraust.",
-        vorbild: ["Ein Profil, das Tilda nicht kennt, schreibt ihr eine Nachricht.", "Tilda antwortet nicht und zeigt die Nachricht Alex."]
+        remember: "Bei einem fremden Profil entscheide ich selbst, und ich darf mir Hilfe holen.",
+        vorbild: ["Ein Profil, das Tilda nicht kennt, schreibt ihr eine Nachricht.", "Tilda antwortet nicht und blockiert das Profil."]
       },
       standard: {
-        text: [{ text: "Schreibt dir jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht stattdessen einer Person, der du vertraust – sie hilft dir, die Nachricht richtig einzuschätzen." }],
-        remember: "Nachrichten von Unbekannten: nicht antworten, Rat holen.",
-        vorbild: ["Ein fremdes Profil schreibt Tilda an. Sie antwortet nicht und zeigt Alex die Nachricht."]
+        text: [{ text: "Schreibt dir jemand, den du nicht kennst, musst du nicht antworten. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte, und entscheide dann selbst. Du kannst die Nachricht ignorieren oder das Profil blockieren – und wenn du möchtest, sprichst du vorher mit jemandem darüber." }],
+        remember: "Fremdes Profil: Ich entscheide selbst und darf mir Hilfe holen.",
+        vorbild: ["Ein fremdes Profil schreibt Tilda an. Sie antwortet nicht und blockiert das Profil."]
       }
     }
   },
@@ -2695,15 +2695,15 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Snapchat kann anderen zeigen, wo du gerade bist. Das nennt man Standort." },
           { text: "Das ist gefährlich, weil dich so auch Fremde finden können." },
-          { text: "Schalte deinen Standort deshalb aus. Eine Person, der du vertraust, hilft dir dabei." }
+          { text: "Schalte deinen Standort deshalb aus. Wenn du möchtest, stellst du das zusammen mit einer anderen Person ein." }
         ],
         remember: "Du schaltest deinen Standort aus.",
-        vorbild: ["Alex sieht, dass Snapchat seinen Ort auf einer Karte zeigt.", "Er schaltet den Standort aus, und Tilda hilft ihm dabei."]
+        vorbild: ["Alex sieht, dass Snapchat seinen Ort auf einer Karte zeigt.", "Er schaltet den Standort aus. Jetzt sieht niemand mehr seinen Ort."]
       },
       standard: {
-        text: [{ text: "Snapchat kann deinen Standort auf einer Karte anzeigen – dann sehen andere, wo du gerade bist. Das kann gefährlich werden. Schalte die Standort-Freigabe deshalb aus; eine Person, der du vertraust, kann dir dabei helfen." }],
+        text: [{ text: "Snapchat kann deinen Standort auf einer Karte anzeigen – dann sehen andere, wo du gerade bist. Das kann gefährlich werden. Schalte die Standort-Freigabe deshalb aus. Wenn du möchtest, gehst du die Einstellung mit jemandem zusammen durch." }],
         remember: "Standort-Freigabe ausschalten.",
-        vorbild: ["Alex merkt, dass Snapchat seinen Standort auf einer Karte zeigt. Mit Tildas Hilfe schaltet er die Freigabe aus."]
+        vorbild: ["Alex merkt, dass Snapchat seinen Standort auf einer Karte zeigt. Er schaltet die Freigabe aus."]
       }
     },
     "Niemand darf dich zwingen": {
@@ -2711,15 +2711,15 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Manchmal macht dir jemand Druck und will ein Bild von dir." },
           { text: "Wenn du das nicht willst, musst du es auch nicht tun. Du darfst Nein sagen." },
-          { text: "Erzähl es danach eine Person, der du vertraust." }
+          { text: "Du kannst die Person blockieren. Wenn du möchtest, sprichst du danach mit jemandem darüber." }
         ],
         remember: "Du darfst immer Nein sagen.",
-        vorbild: ["Jemand drängt Tilda, ein Bild von sich zu schicken.", "Tilda will das nicht und sagt Nein.", "Danach erzählt sie Alex davon."]
+        vorbild: ["Jemand drängt Tilda, ein Bild von sich zu schicken.", "Tilda will das nicht und sagt Nein.", "Sie blockiert die Person und erzählt Alex später davon."]
       },
       standard: {
-        text: [{ text: "Setzt dich jemand unter Druck, ein Bild von dir zu schicken, musst du das nicht tun. Du darfst jederzeit Nein sagen. Erzähl einer Person, der du vertraust, davon – du bist damit nicht allein." }],
+        text: [{ text: "Setzt dich jemand unter Druck, ein Bild von dir zu schicken, musst du das nicht tun. Du darfst jederzeit Nein sagen und die Person blockieren. Wenn du möchtest, sprichst du mit jemandem darüber – du bist damit nicht allein." }],
         remember: "Du darfst Nein sagen – immer.",
-        vorbild: ["Jemand drängt Tilda, ein Bild von sich zu schicken. Sie sagt Nein und erzählt Alex davon."]
+        vorbild: ["Jemand drängt Tilda, ein Bild von sich zu schicken. Sie sagt Nein, blockiert die Person und erzählt Alex später davon."]
       }
     }
   },
@@ -2745,16 +2745,16 @@ const KURZ_VERSIONS = {
       einfach: {
         text: [
           { text: "Manchmal schreibt dir auf TikTok eine Person, die du nicht kennst." },
-          { text: "Dann antwortest du ihr nicht." },
-          { text: "Zeig die Nachricht einer Person, der du vertraust. Sie hilft dir weiter." }
+          { text: "Du musst nicht antworten, auch wenn die Nachricht freundlich klingt. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte." },
+          { text: "Dann entscheidest du selbst: Du kannst die Nachricht stehen lassen oder das Profil blockieren. Wenn du möchtest, sprichst du vorher mit jemandem darüber." }
         ],
-        remember: "Bei Nachrichten von Unbekannten fragst du eine Person, der du vertraust.",
-        vorbild: ["Eine fremde Person schreibt Tilda bei TikTok eine private Nachricht.", "Tilda antwortet nicht und zeigt die Nachricht Alex."]
+        remember: "Bei einem fremden Profil entscheide ich selbst, und ich darf mir Hilfe holen.",
+        vorbild: ["Eine fremde Person schreibt Tilda bei TikTok eine private Nachricht.", "Tilda antwortet nicht und blockiert das Profil."]
       },
       standard: {
-        text: [{ text: "Schreibt dir auf TikTok jemand, den du nicht kennst, antwortest du nicht. Zeig die Nachricht einer Person, der du vertraust – gemeinsam entscheidet ihr, was zu tun ist." }],
-        remember: "Nachrichten von Unbekannten: nicht antworten, Rat holen.",
-        vorbild: ["Eine fremde Person schreibt Tilda privat an. Sie antwortet nicht und zeigt Alex die Nachricht."]
+        text: [{ text: "Schreibt dir auf TikTok jemand, den du nicht kennst, musst du nicht antworten. Prüfe zuerst, wer dir schreibt und was die Person von dir möchte, und entscheide dann selbst. Du kannst die Nachricht ignorieren oder das Profil blockieren – und wenn du möchtest, sprichst du vorher mit jemandem darüber." }],
+        remember: "Fremdes Profil: Ich entscheide selbst und darf mir Hilfe holen.",
+        vorbild: ["Eine fremde Person schreibt Tilda privat an. Sie antwortet nicht und blockiert das Profil."]
       }
     },
     "Pause machen": {
@@ -2931,13 +2931,13 @@ const KURZ_VERSIONS = {
           { text: "KI kann auch falsche Dinge sagen." },
           { text: "Mit KI kann man außerdem Bilder fälschen und Stimmen nachmachen." },
           { text: "Will eine bekannte Stimme am Telefon Geld, legst du auf und rufst die Person unter ihrer bekannten Nummer selbst an." },
-          { text: "Glaub deshalb nicht alles. Frag im Zweifel eine Person, der du vertraust." }
+          { text: "Glaub deshalb nicht alles. Schau im Zweifel an einer zweiten Stelle nach oder sprich mit jemandem darüber." }
         ],
         remember: "Du glaubst nicht alles. Du prüfst es zuerst.",
         vorbild: ["Am Telefon klingt eine Stimme wie der Bruder von Alex und will sofort Geld.", "Alex legt auf und ruft seinen Bruder unter der bekannten Nummer selbst an."]
       },
       standard: {
-        text: [{ text: "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst, und frag im Zweifel eine Person, der du vertraust." }],
+        text: [{ text: "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst. Prüf es im Zweifel an einer zweiten Stelle oder sprich mit jemandem darüber." }],
         remember: "Nicht alles glauben – erst prüfen.",
         vorbild: ["Am Telefon klingt eine Stimme wie Alex' Bruder und verlangt sofort Geld. Alex legt auf und ruft seinen Bruder unter der bekannten Nummer an."]
       }
@@ -2979,13 +2979,13 @@ const KURZ_VERSIONS = {
       einfach: {
         text: [
           { text: "Wenn du eine Fake-Nachricht erkennst, schickst du sie nicht weiter." },
-          { text: "Du löschst sie und erzählst eine Person, der du vertraust davon." }
+          { text: "Du löschst sie. Wenn ein Freund sie dir geschickt hat, kannst du ihm schreiben, dass sie nicht stimmt. Du kannst auch mit jemandem darüber sprechen." }
         ],
         remember: "Fake-Nachrichten leitest du nicht weiter.",
         vorbild: ["Tilda erkennt, dass eine Nachricht ein Fake ist.", "Sie schickt sie nicht weiter und löscht sie."]
       },
       standard: {
-        text: [{ text: "Hast du eine Fake-Nachricht erkannt, leitest du sie nicht weiter – so stoppst du ihre Verbreitung. Lösch sie und erzähl einer Person, der du vertraust, davon." }],
+        text: [{ text: "Hast du eine Fake-Nachricht erkannt, leitest du sie nicht weiter – so stoppst du ihre Verbreitung. Lösch sie. Kam sie von einem Freund, kannst du ihm schreiben, dass sie nicht stimmt. Wenn du möchtest, sprichst du mit jemandem darüber." }],
         remember: "Fakes nicht weiterleiten.",
         vorbild: ["Tilda erkennt eine Falschmeldung. Sie leitet sie nicht weiter und löscht sie."]
       }
@@ -3013,15 +3013,15 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Es gibt typische Zeichen für Betrug: Du gewinnst plötzlich etwas, jemand braucht dringend Geld, oder jemand will sofort eine Antwort." },
           { text: "Wenn du so ein Zeichen siehst, machst du Stopp." },
-          { text: "Dann fragst du eine Person, der du vertraust." }
+          { text: "Dann prüfst du in Ruhe, ob das wirklich stimmt. Wenn du möchtest, sprichst du mit jemandem darüber." }
         ],
         remember: "Bei Stress oder Gewinn machst du Stopp.",
-        vorbild: ["Eine Nachricht sagt, dass Tilda ein Handy gewonnen hat.", "Sie soll nur schnell 2 Euro bezahlen.", "Tilda macht Stopp und fragt Alex."]
+        vorbild: ["Eine Nachricht sagt, dass Tilda ein Handy gewonnen hat.", "Sie soll nur schnell 2 Euro bezahlen.", "Tilda macht Stopp, zahlt nichts und löscht die Nachricht."]
       },
       standard: {
-        text: [{ text: "Typische Warnzeichen für Betrug sind überraschende Gewinne, dringende Bitten um Geld und Zeitdruck. Siehst du so ein Zeichen, machst du Stopp und fragst eine Person, der du vertraust." }],
+        text: [{ text: "Typische Warnzeichen für Betrug sind überraschende Gewinne, dringende Bitten um Geld und Zeitdruck. Siehst du so ein Zeichen, machst du Stopp und prüfst in Ruhe, ob das wirklich stimmt. Wenn du möchtest, sprichst du mit jemandem darüber." }],
         remember: "Zeitdruck oder Gewinn: erst Stopp machen.",
-        vorbild: ["Eine Nachricht meldet Tilda einen Handy-Gewinn – sie soll nur schnell 2 Euro zahlen. Tilda hält inne und fragt Alex."]
+        vorbild: ["Eine Nachricht meldet Tilda einen Handy-Gewinn – sie soll nur schnell 2 Euro zahlen. Tilda hält inne, zahlt nichts und löscht die Nachricht."]
       }
     },
     "Was tust du bei Betrug?": {
@@ -3029,14 +3029,14 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Wenn du Betrug vermutest, zahlst du kein Geld und gibst keine Daten ein." },
           { text: "Sagt eine Nachricht, mit deinem Bank-Konto stimmt etwas nicht, tippst du nicht auf den Link. Du öffnest deine Bank-App selbst." },
-          { text: "Erzähl es eine Person, der du vertraust. Sie hilft dir weiter." }
+          { text: "Du kannst die Nummer blockieren. Wenn du möchtest, sprichst du mit jemandem darüber." }
         ],
-        remember: "Kein Geld senden. Frag eine Person, der du vertraust.",
+        remember: "Kein Geld senden und keine Daten eingeben.",
         vorbild: ["Eine SMS sagt Alex, dass sein Konto gesperrt ist, und schickt einen Link.", "Alex tippt nicht auf den Link, sondern öffnet seine Bank-App selbst."]
       },
       standard: {
-        text: [{ text: "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Meldet eine Nachricht ein Problem mit deinem Konto, öffne die Bank-App selbst, statt dem Link zu folgen. Erzähl einer Person, der du vertraust, davon – gemeinsam findet ihr den nächsten Schritt." }],
-        remember: "Kein Geld, keine Daten – Hilfe holen.",
+        text: [{ text: "Vermutest du Betrug, zahlst du nichts und gibst keine Daten ein. Meldet eine Nachricht ein Problem mit deinem Konto, öffne die Bank-App selbst, statt dem Link zu folgen. Du kannst die Nummer blockieren – und wenn du möchtest, sprichst du mit jemandem darüber." }],
+        remember: "Kein Geld, keine Daten – die App selbst öffnen.",
         vorbild: ["Eine SMS meldet Alex ein gesperrtes Konto und schickt einen Link. Er öffnet stattdessen seine Bank-App selbst."]
       }
     }
@@ -3063,13 +3063,13 @@ const KURZ_VERSIONS = {
           { text: "Einen guten Shop erkennst du am Impressum. Dort stehen der Name und die Adresse vom Shop." },
           { text: "Die Preise sind normal und nicht sehr billig." },
           { text: "Das Schloss in der Adress-Zeile allein ist kein gutes Zeichen, weil auch falsche Shops es haben." },
-          { text: "Wenn du unsicher bist, fragst du eine Person, der du vertraust." }
+          { text: "Wenn du unsicher bist, kaufst du dort nicht. Du kannst den Shop auch mit jemandem zusammen prüfen." }
         ],
         remember: "Ein guter Shop zeigt Name und Adresse im Impressum.",
         vorbild: ["Alex findet einen neuen Shop und schaut zuerst ins Impressum.", "Dort stehen Name und Adresse, und das ist ein gutes Zeichen."]
       },
       standard: {
-        text: [{ text: "Seriöse Shops nennen im Impressum ihren Namen und ihre Anschrift, und ihre Preise sind realistisch statt verdächtig niedrig. Das Schloss-Symbol in der Adresszeile reicht allein nicht: Es zeigt nur eine verschlüsselte Verbindung, und auch Fake-Shops haben es. Bist du unsicher, frag eine Person, der du vertraust." }],
+        text: [{ text: "Seriöse Shops nennen im Impressum ihren Namen und ihre Anschrift, und ihre Preise sind realistisch statt verdächtig niedrig. Das Schloss-Symbol in der Adresszeile reicht allein nicht: Es zeigt nur eine verschlüsselte Verbindung, und auch Fake-Shops haben es. Bist du unsicher, kauf dort nicht – oder prüf den Shop gemeinsam mit jemandem." }],
         remember: "Ein seriöser Shop nennt Name und Anschrift.",
         vorbild: ["Bei einem neuen Shop schaut Alex zuerst ins Impressum. Name und Anschrift stehen dort – ein gutes Zeichen."]
       }
@@ -3079,13 +3079,13 @@ const KURZ_VERSIONS = {
         text: [
           { text: "PayPal und der Kauf auf Rechnung sind sicherer als andere Bezahl-Arten. Bei Rechnung bekommst du zuerst die Ware und zahlst danach." },
           { text: "Deine Kreditkarte gibst du nicht auf jeder Seite ein." },
-          { text: "Wenn es Probleme gibt, fragst du eine Person, der du vertraust." }
+          { text: "Wenn es Probleme gibt, schreibst du zuerst dem Shop. Wenn du möchtest, holst du dir dabei Hilfe." }
         ],
         remember: "PayPal oder Rechnung ist sicherer.",
         vorbild: ["Tilda kauft zum ersten Mal in einem Shop.", "Sie bezahlt auf Rechnung, damit sie zuerst die Ware bekommt."]
       },
       standard: {
-        text: [{ text: "Sicherer bezahlst du auf Rechnung – dann zahlst du erst, wenn die Ware da ist – oder über PayPal mit Käuferschutz. Deine Kreditkartendaten gibst du nicht auf jeder Seite ein. Gibt es Probleme, frag eine Person, der du vertraust." }],
+        text: [{ text: "Sicherer bezahlst du auf Rechnung – dann zahlst du erst, wenn die Ware da ist – oder über PayPal mit Käuferschutz. Deine Kreditkartendaten gibst du nicht auf jeder Seite ein. Gibt es Probleme, schreib zuerst dem Shop – und hol dir dabei Hilfe, wenn du möchtest." }],
         remember: "Rechnung oder PayPal sind sicherer.",
         vorbild: ["Beim ersten Einkauf in einem Shop zahlt Tilda auf Rechnung – so bekommt sie zuerst die Ware."]
       }
@@ -5886,243 +5886,443 @@ const AUFGABEN_VERSIONS = {
     },
     "youtube/lang/Videos prüfen": {
       "einfach": {
-        "question": "Ein YouTube-Video behauptet etwas, das du nicht kennst. Welche Regel hilft dir?",
+        "question": "Ein Video sagt: Dieser Tee heilt Rücken-Schmerzen in 3 Tagen. Du hast oft Rücken-Schmerzen. Was machst du?",
         "answers": [
-          "Ich glaube nicht alles sofort und prüfe es.",
-          "Was in einem Video gesagt wird, stimmt immer."
+          "Ich bestelle den Tee, weil Probieren ja nicht viel kostet.",
+          "Ich glaube das nicht sofort.",
+          "Ich frage meine Ärztin nach dem Tee."
         ],
-        "feedbackWrong": "Das stimmt nicht. Manche Videos übertreiben oder sagen etwas Falsches.",
-        "feedbackCorrect": "Gut. Du glaubst nicht alles sofort und prüfst wichtige Aussagen.",
+        "feedbackWrong": [
+          "Das Video will den Tee verkaufen und verspricht deshalb viel. Ein Video allein ist kein Beweis.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist eine gute Prüfung, denn deine Ärztin kennt dich und deine Schmerzen."
+        ],
+        "feedbackCorrect": "Genau. Das Video will etwas verkaufen, und ein Video allein ist kein Beweis.",
         "remember": "Ich glaube nicht alles sofort."
       },
       "standard": {
-        "question": "Ein YouTube-Video behauptet etwas, das du noch nie gehört hast. Welche Regel hilft dir?",
+        "question": "Ein Video behauptet: Dieser Tee heilt Rückenschmerzen in drei Tagen. Du hast oft Rückenschmerzen. Was machst du?",
         "answers": [
-          "Ich glaube nicht alles sofort, sondern prüfe es.",
-          "Was in Videos behauptet wird, stimmt immer."
+          "Ich bestelle den Tee, Probieren kostet ja nicht viel.",
+          "Ich glaube das nicht sofort.",
+          "Ich frage meine Ärztin nach dem Tee."
         ],
-        "feedbackWrong": "Das stimmt nicht. Manche Videos übertreiben oder verbreiten bewusst Falsches.",
-        "feedbackCorrect": "Richtig. Du glaubst nicht alles sofort und prüfst wichtige Aussagen.",
+        "feedbackWrong": [
+          "Das Video will den Tee verkaufen und verspricht deshalb viel. Ein Video allein beweist nichts.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist eine gute Prüfung: Deine Ärztin kennt dich und deine Beschwerden."
+        ],
+        "feedbackCorrect": "Das Video will etwas verkaufen, und ein Video allein ist kein Beweis.",
         "remember": "Ich glaube nicht alles sofort, was ich in Videos sehe."
       }
     },
     "youtube/lang/Werbung erkennen": {
       "einfach": {
-        "question": "Eine Frau stellt in einem Video eine Creme vor. Woran erkennst du, dass es Werbung sein kann?",
+        "question": "Ein YouTuber zeigt in seinem Video einen Mixer und sagt: Den Link findest du unter dem Video. Mit meinem Code sparst du 10 Euro. Was machst du?",
         "answers": [
-          "Es wird etwas angepriesen, das ich kaufen soll.",
-          "Daran, dass das Video sehr viele Likes hat."
+          "Ich kaufe nicht sofort und überlege, ob ich den Mixer brauche.",
+          "Ich kaufe den Mixer gleich, weil ich mit dem Code Geld spare.",
+          "Ich kaufe nicht sofort und vergleiche erst die Preise."
         ],
-        "feedbackWrong": "Viele Likes sagen nichts über Werbung. Werbung kann aussehen wie ein ganz normales Video.",
-        "feedbackCorrect": "Genau. Wenn dir jemand etwas verkaufen will, ist es oft Werbung. Manchmal steht auch Werbung oder Anzeige dabei.",
+        "feedbackWrong": [
+          null,
+          "Das ist Werbung, und der YouTuber bekommt oft Geld dafür. Werbung kann aussehen wie ein ganz normales Video. Kauf deshalb nicht sofort.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann siehst du, ob der Preis wirklich gut ist, und entscheidest in Ruhe."
+        ],
+        "feedbackCorrect": "Genau. Das ist Werbung, und der YouTuber bekommt oft Geld dafür. Du entscheidest in Ruhe.",
         "remember": "Ich kaufe nichts sofort aus einem Video."
       },
       "standard": {
-        "question": "In einem Video wird eine Creme vorgestellt. Woran erkennst du, dass es Werbung sein kann?",
+        "question": "Ein YouTuber stellt in seinem Video einen Mixer vor: Den Link findest du unter dem Video, mit meinem Code sparst du 10 Euro. Was machst du?",
         "answers": [
-          "Mir soll etwas verkauft werden.",
-          "Das Video hat besonders viele Likes."
+          "Ich kaufe nicht sofort und überlege, ob ich ihn brauche.",
+          "Ich kaufe ihn gleich, mit dem Code spare ich ja Geld.",
+          "Ich kaufe nicht sofort und vergleiche erst die Preise."
         ],
-        "feedbackWrong": "Likes sagen nichts darüber, ob es Werbung ist. Werbung kann wie ein ganz normales Video aussehen, etwa als Empfehlung.",
-        "feedbackCorrect": "Richtig. Wenn dir etwas verkauft werden soll, ist es oft Werbung – manchmal steht klein „Werbung“ oder „Anzeige“ dabei.",
+        "feedbackWrong": [
+          null,
+          "Das ist Werbung, für die der YouTuber oft Geld bekommt. Werbung kann wie ein ganz normales Video aussehen. Kauf deshalb nicht sofort.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann siehst du, ob der Preis wirklich gut ist, und entscheidest in Ruhe."
+        ],
+        "feedbackCorrect": "Das ist Werbung, für die der YouTuber oft Geld bekommt. Du entscheidest in Ruhe.",
         "remember": "Aus einem Video heraus kaufe ich nichts sofort."
       }
     },
     "youtube/lang/Autoplay und Zeit": {
       "einfach": {
-        "question": "YouTube startet von selbst immer das nächste Video. Was ist dabei wichtig?",
+        "question": "Du willst vor dem Schlafen nur noch ein Video sehen, aber YouTube startet danach immer das nächste. Was machst du?",
         "answers": [
-          "Ich darf jederzeit stoppen.",
-          "Ich muss immer weiter schauen."
+          "Ich schaue weiter, bis ich müde bin.",
+          "Ich lege das Handy nach dem Video weg.",
+          "Ich schalte Autoplay aus."
         ],
-        "feedbackWrong": "Das stimmt nicht. Du musst nicht weiter schauen, auch wenn das nächste Video schon startet.",
-        "feedbackCorrect": "Gut. Du darfst jederzeit stoppen. Du kannst die automatische Wiedergabe auch ausschalten.",
+        "feedbackWrong": [
+          "Dann bestimmt YouTube deinen Abend. Du darfst das Video stoppen und musst nicht weiterschauen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch so bestimmst du das Ende selbst, denn das Handy liegt weg und du hast Ruhe.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Autoplay heißt, dass das nächste Video von allein startet. Ohne Autoplay bestimmst du das Ende.",
         "remember": "Ich darf Videos stoppen."
       },
       "standard": {
-        "question": "YouTube spielt automatisch das nächste Video ab. Was ist dabei wichtig?",
+        "question": "Du willst vor dem Schlafen nur noch ein Video sehen, aber YouTube startet danach immer das nächste. Was machst du?",
         "answers": [
-          "Ich darf jederzeit aufhören.",
-          "Ich muss immer weiterschauen."
+          "Ich schaue weiter, bis ich müde bin.",
+          "Ich lege das Handy nach dem Video weg.",
+          "Ich schalte Autoplay aus."
         ],
-        "feedbackWrong": "Das stimmt nicht. Du musst nicht weiterschauen, auch wenn das nächste Video schon läuft.",
-        "feedbackCorrect": "Richtig. Du darfst jederzeit aufhören – und kannst Autoplay auch ausschalten.",
+        "feedbackWrong": [
+          "Dann bestimmt YouTube deinen Abend. Du darfst das Video stoppen und musst nicht weiterschauen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch so bestimmst du das Ende selbst: Das Handy liegt weg, und du hast Ruhe.",
+          null
+        ],
+        "feedbackCorrect": "Autoplay startet das nächste Video automatisch. Ohne Autoplay bestimmst du das Ende selbst.",
         "remember": "Ich darf jederzeit aufhören zu schauen."
       }
     },
     "youtube/lang/Gefährliche Mutproben": {
       "einfach": {
-        "question": "In einem Video macht jemand eine gefährliche Mutprobe. Was ist besser?",
+        "question": "Ein Video zeigt Menschen, die von einer Brücke in den Fluss springen. Dein Kollege sagt: Das machen wir am Wochenende auch. Was machst du?",
         "answers": [
-          "Ich probiere das auch einmal aus.",
-          "Ich mache das nicht nach."
+          "Ich sage Nein und springe nicht.",
+          "Ich springe mit, weil im Video ja nichts passiert ist.",
+          "Ich sage Nein und schlage etwas anderes vor."
         ],
-        "feedbackWrong": "Das ist nicht sicher, denn gefährliche Mutproben können zu Verletzungen führen.",
-        "feedbackCorrect": "Gut. Deine Gesundheit ist wichtiger als ein Video.",
+        "feedbackWrong": [
+          null,
+          "Das Video zeigt nur die Sprünge, bei denen nichts passiert ist. Unter Wasser können Steine sein, und du musst nicht mitmachen.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann macht ihr trotzdem etwas zusammen, aber ohne Gefahr."
+        ],
+        "feedbackCorrect": "Genau. Du musst nicht mitmachen, denn deine Gesundheit ist wichtiger als ein Video.",
         "remember": "Ich mache gefährliche Dinge nicht nach."
       },
       "standard": {
-        "question": "In einem Video zeigt jemand eine gefährliche Mutprobe. Was ist besser?",
+        "question": "Ein Video zeigt Menschen, die von einer Brücke in den Fluss springen. Dein Kollege sagt: Das machen wir am Wochenende auch. Was machst du?",
         "answers": [
-          "Ich probiere es auch einmal aus.",
-          "Ich mache es nicht nach."
+          "Ich sage Nein und springe nicht.",
+          "Ich springe mit, im Video ist ja nichts passiert.",
+          "Ich sage Nein und schlage etwas anderes vor."
         ],
-        "feedbackWrong": "Das ist riskant – gefährliche Mutproben können zu Verletzungen führen.",
-        "feedbackCorrect": "Richtig. Deine Gesundheit ist wichtiger als ein Trend.",
+        "feedbackWrong": [
+          null,
+          "Das Video zeigt nur die Sprünge, die gut gegangen sind. Unter Wasser können Steine liegen, und mitmachen musst du nicht.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann unternehmt ihr trotzdem etwas zusammen – ohne Gefahr."
+        ],
+        "feedbackCorrect": "Du musst nicht mitmachen. Deine Gesundheit ist wichtiger als ein Video.",
         "remember": "Gefährliche Mutproben mache ich nicht nach."
       }
     },
     "youtube/lang/Videos, die Angst machen": {
       "einfach": {
-        "question": "Du siehst ein Video, das dir Angst macht. Was ist besser?",
+        "question": "Du schaust ein Video über einen Unfall. Dein Herz klopft schnell, und du fühlst dich schlecht. Was machst du?",
         "answers": [
-          "Ich schaue weiter bis zum Ende.",
-          "Ich stoppe und spreche mit jemandem."
+          "Ich schaue zu Ende, weil ich das Ende wissen will.",
+          "Ich stoppe das Video.",
+          "Ich stoppe das Video und rede mit jemandem darüber."
         ],
-        "feedbackWrong": "Wenn dich ein Video belastet, musst du nicht weiterschauen. Du darfst stoppen.",
-        "feedbackCorrect": "Gut. Du stoppst das Video und sprichst mit jemandem darüber. So bleibst du nicht allein.",
+        "feedbackWrong": [
+          "Du musst kein Video zu Ende schauen. Dein Körper zeigt dir, dass es zu viel ist, und du darfst stoppen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das Video ist aus, und Reden tut gut. Du bist mit der Angst nicht allein."
+        ],
+        "feedbackCorrect": "Genau. Dein Körper zeigt dir, dass es zu viel ist. Du darfst jedes Video stoppen.",
         "remember": "Ich bin mit meiner Angst nicht allein."
       },
       "standard": {
-        "question": "Ein Video macht dir Angst. Wie reagierst du am besten?",
+        "question": "Du siehst ein Video über einen Unfall. Dein Herz klopft, und dir geht es schlecht dabei. Was machst du?",
         "answers": [
-          "Ich schaue es trotzdem bis zum Ende.",
-          "Ich stoppe und spreche mit jemandem."
+          "Ich schaue zu Ende, ich will wissen, wie es ausgeht.",
+          "Ich stoppe das Video.",
+          "Ich stoppe das Video und rede mit jemandem darüber."
         ],
-        "feedbackWrong": "Wenn dich ein Video belastet, musst du es nicht zu Ende schauen. Du darfst stoppen.",
-        "feedbackCorrect": "Richtig. Du stoppst und sprichst mit jemandem darüber – so bleibst du nicht allein damit.",
+        "feedbackWrong": [
+          "Du musst kein Video zu Ende schauen. Dein Körper zeigt dir, dass es zu viel ist – du darfst stoppen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das Video ist aus, und Reden tut gut. Mit der Angst bist du nicht allein."
+        ],
+        "feedbackCorrect": "Dein Körper zeigt dir, dass es zu viel ist. Du darfst jedes Video stoppen.",
         "remember": "Mit meiner Angst bleibe ich nicht allein."
       }
     },
     "youtube/lang/Kommentare": {
       "einfach": {
-        "question": "Unter einem Video steht ein gemeiner Kommentar. Musst du darauf antworten?",
+        "question": "Du schreibst unter ein Video: Tolles Lied. Jemand antwortet dir: Du hast keine Ahnung. Was machst du?",
         "answers": [
-          "Nein, ich muss nicht darauf reagieren.",
-          "Ja, sonst hat die andere Person gewonnen."
+          "Ich schreibe zurück, dass er selber keine Ahnung hat.",
+          "Ich antworte nicht.",
+          "Ich lösche meinen Kommentar."
         ],
-        "feedbackWrong": "Hier gibt es nichts zu gewinnen. Du darfst einfach nicht antworten, und das ist oft klüger.",
-        "feedbackCorrect": "Genau. Du musst auf keinen Kommentar reagieren. Du kannst ihn auch melden.",
+        "feedbackWrong": [
+          "Dann geht der Streit weiter, und es gibt nichts zu gewinnen. Nicht antworten ist erlaubt.",
+          null,
+          "Du musst deinen Kommentar nicht löschen, denn deine Meinung darf stehen bleiben. Unfreundlich war der andere, nicht du."
+        ],
+        "feedbackCorrect": "Genau. Du musst auf keinen Kommentar reagieren, und deine Meinung darf stehen bleiben.",
         "remember": "Ich muss nicht auf Kommentare reagieren."
       },
       "standard": {
-        "question": "Unter einem Video steht ein gemeiner Kommentar. Musst du darauf reagieren?",
+        "question": "Du schreibst unter ein Video: Tolles Lied. Jemand antwortet dir: Du hast keine Ahnung. Was machst du?",
         "answers": [
-          "Nein, ich muss nicht reagieren.",
-          "Ja, sonst hat der andere gewonnen."
+          "Ich schreibe zurück: Du hast selber keine Ahnung.",
+          "Ich antworte nicht.",
+          "Ich lösche meinen Kommentar."
         ],
-        "feedbackWrong": "Hier gibt es nichts zu gewinnen. Nicht zu antworten ist erlaubt und oft die klügere Wahl.",
-        "feedbackCorrect": "Richtig. Du musst auf keinen Kommentar reagieren – melden kannst du ihn trotzdem.",
+        "feedbackWrong": [
+          "Dann geht der Streit weiter, und zu gewinnen gibt es nichts. Nicht zu antworten ist völlig in Ordnung.",
+          null,
+          "Du musst deinen Kommentar nicht löschen, deine Meinung darf stehen bleiben. Unfreundlich war der andere, nicht du."
+        ],
+        "feedbackCorrect": "Du musst auf keinen Kommentar reagieren, und deine Meinung darf stehen bleiben.",
         "remember": "Auf Kommentare muss ich nicht reagieren."
       }
     },
     "youtube/lang/Nicht jedes Video ist echt": {
       "einfach": {
-        "question": "In einem Video sagt ein bekannter Mensch etwas sehr Seltsames. Was kann der Grund sein?",
+        "question": "In einem Video sagt ein bekannter Fußballer: Mit dieser App verdienst du 500 Euro am Tag. Das Video sieht echt aus. Was machst du?",
         "answers": [
-          "Er hat es sicher gesagt, denn man sieht ihn ja.",
-          "Das Video kann mit KI gefälscht sein."
+          "Ich lade die App, weil der Fußballer doch nicht lügt.",
+          "Ich suche erst, ob das auch in den Nachrichten steht.",
+          "Ich lade die App nicht, das Video kann gefälscht sein."
         ],
-        "feedbackWrong": "Ein Video ist kein sicherer Beweis mehr, denn KI kann Gesichter und Stimmen nachmachen.",
-        "feedbackCorrect": "Genau. Heute kann man auch Gesichter und Stimmen fälschen. Prüfe deshalb, ob seriöse Nachrichten darüber berichten.",
+        "feedbackWrong": [
+          "Das Video kann mit KI gemacht sein, denn KI kann Gesichter und Stimmen nachmachen. Vielleicht weiß der Fußballer gar nichts davon.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist eine gute Prüfung: Du lädst nichts und schaust an einer zweiten Stelle nach.",
+          null
+        ],
+        "feedbackCorrect": "Genau. KI kann Gesichter und Stimmen nachmachen. Vielleicht weiß der Fußballer gar nichts von dem Video.",
         "remember": "Auch Videos können gefälscht sein."
       },
       "standard": {
-        "question": "In einem Video sagt eine bekannte Person etwas sehr Seltsames. Woran kann das liegen?",
+        "question": "In einem Video sagt ein bekannter Fußballer: Mit dieser App verdienst du 500 Euro am Tag. Das Video wirkt echt. Was machst du?",
         "answers": [
-          "Sie hat es sicher gesagt – man sieht sie ja.",
-          "Das Video kann mit KI gefälscht sein."
+          "Ich lade die App, der Fußballer lügt doch nicht.",
+          "Ich suche erst, ob auch Nachrichtenseiten darüber berichten.",
+          "Ich lade die App nicht, das Video kann gefälscht sein."
         ],
-        "feedbackWrong": "Sehen ist kein sicherer Beweis mehr: KI kann Gesichter und Stimmen täuschend echt nachahmen.",
-        "feedbackCorrect": "Richtig. Auch Gesichter und Stimmen lassen sich heute fälschen. Prüfe, ob seriöse Medien darüber berichten.",
+        "feedbackWrong": [
+          "Das Video kann mit KI gemacht sein: KI kann Gesichter und Stimmen nachahmen. Vielleicht weiß der Fußballer gar nichts davon.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist eine gute Prüfung: Du lädst nichts herunter und siehst an einer zweiten Stelle nach.",
+          null
+        ],
+        "feedbackCorrect": "KI kann Gesichter und Stimmen täuschend echt nachahmen. Vielleicht weiß der Fußballer gar nichts von dem Video.",
         "remember": "Auch Videos können gefälscht sein."
       }
     },
     "youtube/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "Ein Video mit vielen Aufrufen zeigt eine gefährliche Mutprobe. Was machst du?",
+        "question": "Ein Video sagt: Mach diese Mutprobe nach, film dich dabei und schick das Video an 5 Freunde. Viele haben schon mitgemacht. Was machst du?",
         "answers": [
-          "Viele machen es, also probiere ich es auch aus.",
-          "Ich stoppe das Video und mache es nicht nach."
+          "Ich stoppe das Video und mache es nicht nach.",
+          "Ich probiere es auch aus, weil so viele mitmachen.",
+          "Ich mache nicht mit und melde das Video bei YouTube."
         ],
-        "feedbackWrong": "Viele Aufrufe bedeuten nicht, dass etwas sicher ist. Stoppe das Video lieber.",
-        "feedbackCorrect": "Gut. Auch wenn viele es machen, ist es nicht sicher. Du stoppst das Video.",
+        "feedbackWrong": [
+          null,
+          "Viele Aufrufe heißen nicht, dass etwas sicher ist. Das Video drängt dich, deshalb stoppst du es lieber.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Du machst nicht mit, und YouTube prüft dann das Video."
+        ],
+        "feedbackCorrect": "Genau. Viele Aufrufe heißen nicht, dass etwas sicher ist. Du musst nicht mitmachen.",
         "remember": "Ich mache gefährliche Videos nicht nach."
       },
       "standard": {
-        "question": "Ein Video mit vielen Aufrufen zeigt eine gefährliche Mutprobe. Wie reagierst du?",
+        "question": "Ein Video fordert dich auf: Mach diese Mutprobe nach, film dich dabei und schick das Video an fünf Freunde. Viele haben schon mitgemacht. Was machst du?",
         "answers": [
-          "Viele machen es – also probiere ich es auch.",
-          "Ich stoppe das Video und mache es nicht nach."
+          "Ich stoppe das Video und mache es nicht nach.",
+          "Ich probiere es auch aus, es machen ja so viele mit.",
+          "Ich mache nicht mit und melde das Video bei YouTube."
         ],
-        "feedbackWrong": "Viele Aufrufe heißen nicht, dass etwas ungefährlich ist. Stoppe das Video lieber.",
-        "feedbackCorrect": "Richtig. Viele Aufrufe sind kein Zeichen für Sicherheit.",
+        "feedbackWrong": [
+          null,
+          "Viele Aufrufe bedeuten nicht, dass etwas sicher ist. Das Video setzt dich unter Druck – stopp es lieber.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Du machst nicht mit, und YouTube prüft dann das Video."
+        ],
+        "feedbackCorrect": "Viele Aufrufe bedeuten nicht, dass etwas sicher ist. Mitmachen musst du nicht.",
         "remember": "Gefährliche Videos mache ich nicht nach."
       }
     },
     "youtube/kurz/Videos prüfen": {
       "einfach": {
-        "question": "Ein Video behauptet etwas sehr Überraschendes. Was tust du?",
+        "question": "Ein Video sagt: Ab Montag fährt in deiner Stadt kein Bus mehr. Was machst du?",
         "answers": [
-          "Ich schaue auf einer anderen Seite nach.",
-          "Ich glaube es, weil es im Video so gesagt wird."
+          "Ich schaue auf der Seite der Stadt nach.",
+          "Ich glaube es, weil das Video viele Aufrufe hat.",
+          "Ich frage eine Nachbarin, ob das stimmt."
         ],
-        "feedbackWrong": "Ein Video allein ist kein Beweis. Wenn du auf einer anderen Seite nachschaust, kannst du es prüfen.",
-        "feedbackCorrect": "Gut. Eine zweite Quelle hilft dir beim Prüfen.",
+        "feedbackWrong": [
+          null,
+          "Viele Aufrufe sind kein Beweis, denn auch falsche Videos sehen viele Menschen. Schau lieber an einer zweiten Stelle nach.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Vielleicht weiß sie mehr. Sonst schaut ihr zusammen an einer zweiten Stelle nach."
+        ],
+        "feedbackCorrect": "Genau. Die Stadt weiß das am besten, und ein Video allein ist kein Beweis.",
         "remember": "Ich prüfe, ob das Video stimmt."
       },
       "standard": {
-        "question": "Ein Video erzählt etwas sehr Überraschendes. Was tust du?",
+        "question": "Ein Video behauptet: Ab Montag fährt in deiner Stadt kein Bus mehr. Was machst du?",
         "answers": [
-          "Ich prüfe es auf einer anderen Seite.",
-          "Ich glaube es – es wird ja im Video gesagt."
+          "Ich sehe auf der Website der Stadt nach.",
+          "Ich glaube es, das Video hat ja viele Aufrufe.",
+          "Ich frage eine Nachbarin, ob das stimmt."
         ],
-        "feedbackWrong": "Ein Video allein ist kein Beweis. Prüfe die Aussage bei einer zweiten Quelle.",
-        "feedbackCorrect": "Richtig. Eine zweite, seriöse Quelle hilft dir beim Prüfen.",
+        "feedbackWrong": [
+          null,
+          "Viele Aufrufe beweisen nichts: Auch falsche Videos werden oft angesehen. Sieh lieber an einer zweiten Stelle nach.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Vielleicht weiß sie mehr. Sonst seht ihr zusammen an einer zweiten Stelle nach."
+        ],
+        "feedbackCorrect": "Die Stadt weiß das am besten, und ein Video allein ist kein Beweis.",
         "remember": "Ich prüfe, ob das Video stimmt."
       }
     },
     "youtube/kurz/Werbung erkennen": {
       "einfach": {
-        "question": "In einem Video kommt Werbung. Musst du dann etwas kaufen?",
+        "question": "Vor deinem Video kommt Werbung für Kopf-Hörer. Dort steht: Nur heute 20 Euro billiger. Was machst du?",
         "answers": [
-          "Ja, sonst geht das Video nicht weiter.",
-          "Nein, ich muss nichts kaufen."
+          "Ich tippe auf die Werbung, weil das Angebot nur heute gilt.",
+          "Ich warte und überspringe dann die Werbung.",
+          "Ich brauche Kopf-Hörer und vergleiche später in Ruhe die Preise."
         ],
-        "feedbackWrong": "Werbung möchte, dass du kaufst. Aber kaufen musst du nie, und das Video geht trotzdem weiter.",
-        "feedbackCorrect": "Genau. Du musst nichts kaufen. Manche Werbung kannst du auch überspringen.",
+        "feedbackWrong": [
+          "Nur heute: Das soll Druck machen, und das ist Absicht. Du musst nichts kaufen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Kaufen ist erlaubt. Du entscheidest in Ruhe, und nicht die Werbung."
+        ],
+        "feedbackCorrect": "Genau. Du musst nichts kaufen, und manche Werbung kannst du überspringen. Dann geht dein Video weiter.",
         "remember": "Ich kaufe nichts wegen Werbung."
       },
       "standard": {
-        "question": "Mitten im Video läuft Werbung. Musst du dann etwas kaufen?",
+        "question": "Vor deinem Video läuft Werbung für Kopfhörer: Nur heute 20 Euro billiger. Was machst du?",
         "answers": [
-          "Ja, sonst geht das Video nicht weiter.",
-          "Nein, ich muss nichts kaufen."
+          "Ich tippe auf die Werbung, das Angebot gilt ja nur heute.",
+          "Ich warte und überspringe die Werbung.",
+          "Ich brauche Kopfhörer und vergleiche später in Ruhe die Preise."
         ],
-        "feedbackWrong": "Werbung will dich zum Kaufen bringen – aber kaufen musst du nie, und das Video läuft trotzdem weiter.",
-        "feedbackCorrect": "Richtig. Du musst nichts kaufen. Manche Werbung lässt sich auch überspringen.",
+        "feedbackWrong": [
+          "Nur heute: Das soll Zeitdruck erzeugen. Kaufen musst du deshalb nichts.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Kaufen ist erlaubt. Du entscheidest in Ruhe – nicht die Werbung."
+        ],
+        "feedbackCorrect": "Du musst nichts kaufen, und manche Werbung lässt sich überspringen. Danach läuft dein Video weiter.",
         "remember": "Wegen Werbung kaufe ich nichts."
       }
     },
     "youtube/kurz/Pausen machen": {
       "einfach": {
-        "question": "Du schaust schon seit einer Stunde Videos. Was ist jetzt gut für dich?",
+        "question": "Du schaust seit einer Stunde Videos, und deine Augen brennen. Das nächste Video startet schon. Was machst du?",
         "answers": [
-          "Ich mache eine Pause.",
-          "Ich schaue noch ein Video."
+          "Ich schaue weiter, weil das Video ja schon angefangen hat.",
+          "Ich stelle einen Wecker und höre in 10 Minuten auf.",
+          "Ich mache jetzt eine Pause."
         ],
-        "feedbackWrong": "Das nächste Video startet immer von selbst. Deshalb musst du die Pause selbst machen.",
-        "feedbackCorrect": "Sehr gut. Nach einer Stunde tut dir eine Pause gut.",
+        "feedbackWrong": [
+          "Das nächste Video startet immer von allein. Die Pause musst du deshalb selbst machen.",
+          "Der Wecker ist eine gute Idee, aber deine Augen brennen schon jetzt. Mach die Pause lieber gleich.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Deine Augen brauchen eine Pause, und du bestimmst das Ende selbst, nicht YouTube.",
         "remember": "Nach einer Stunde mache ich eine Pause."
       },
       "standard": {
-        "question": "Du schaust seit einer Stunde Videos. Was tut dir jetzt gut?",
+        "question": "Du schaust seit einer Stunde Videos, deine Augen brennen, und das nächste Video startet schon. Was machst du?",
         "answers": [
-          "Eine Pause machen.",
-          "Noch ein weiteres Video schauen."
+          "Ich schaue weiter, das Video hat ja schon angefangen.",
+          "Ich stelle einen Wecker und höre in zehn Minuten auf.",
+          "Ich mache jetzt eine Pause."
         ],
-        "feedbackWrong": "Das nächste Video startet immer automatisch – die Pause musst du selbst einlegen.",
-        "feedbackCorrect": "Sehr gut. Nach einer Stunde tut eine Pause gut.",
+        "feedbackWrong": [
+          "Das nächste Video startet immer von selbst. Die Pause musst du deshalb selbst einlegen.",
+          "Der Wecker ist eine gute Idee, aber deine Augen brennen schon jetzt. Leg die Pause lieber gleich ein.",
+          null
+        ],
+        "feedbackCorrect": "Deine Augen brauchen eine Pause, und das Ende bestimmst du selbst – nicht YouTube.",
         "remember": "Nach einer Stunde lege ich eine Pause ein."
       }
     },
@@ -6450,221 +6650,391 @@ const AUFGABEN_VERSIONS = {
     },
     "snapchat/lang/Bilder verschwinden nicht immer": {
       "einfach": {
-        "question": "Du schickst bei Snapchat ein Bild, das nach kurzer Zeit verschwindet. Was ist wichtig zu wissen?",
+        "question": "Du hast ein Foto von deinem Ausweis. Ein Freund schreibt: Schick es mir kurz als Snap, ich will dein altes Foto sehen. Was machst du?",
         "answers": [
-          "Niemand kann das Bild speichern, denn es ist bald weg.",
-          "Die andere Person kann ein Bild vom Bildschirm machen."
+          "Ich schicke es nicht.",
+          "Ich schicke es, weil der Snap ja gleich wieder weg ist.",
+          "Ich zeige ihm den Ausweis beim nächsten Treffen."
         ],
-        "feedbackWrong": "Das stimmt nicht. Auch Snaps können gespeichert werden, bevor sie verschwinden.",
-        "feedbackCorrect": "Genau. Die andere Person kann ein Bild vom Bildschirm machen. Deshalb sendest du nur Bilder, die alle sehen dürfen.",
+        "feedbackWrong": [
+          null,
+          "Er kann ein Bildschirm-Foto machen, und dann ist dein Ausweis gespeichert. Mit einem Ausweis-Foto kann jemand Schaden anrichten.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht er das Foto, aber er hat kein Bild davon."
+        ],
+        "feedbackCorrect": "Genau. Auch ein Snap kann gespeichert werden, und ein Ausweis-Foto gehört nicht in einen Chat.",
         "remember": "Ich sende nur Bilder, die auch andere sehen dürfen."
       },
       "standard": {
-        "question": "Du schickst auf Snapchat ein Bild, das nach kurzer Zeit verschwindet. Was solltest du wissen?",
+        "question": "Du hast ein Foto deines Ausweises. Ein Freund schreibt: Schick es mir kurz als Snap, ich will dein altes Foto sehen. Was machst du?",
         "answers": [
-          "Niemand kann es speichern – es ist ja gleich weg.",
-          "Der Empfänger kann einen Screenshot machen."
+          "Ich schicke es nicht.",
+          "Ich schicke es, der Snap ist ja gleich wieder weg.",
+          "Ich zeige ihm den Ausweis beim nächsten Treffen."
         ],
-        "feedbackWrong": "Das stimmt nicht. Auch Snaps lassen sich speichern, bevor sie verschwinden.",
-        "feedbackCorrect": "Richtig. Ein Screenshot genügt, um dein Bild zu behalten. Schick deshalb nur Bilder, deren Weitergabe für dich in Ordnung wäre.",
+        "feedbackWrong": [
+          null,
+          "Er kann einen Screenshot machen, dann ist dein Ausweis gespeichert. Mit einem Ausweisfoto lässt sich Schaden anrichten.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht er das Foto, hat aber kein Bild davon."
+        ],
+        "feedbackCorrect": "Auch ein Snap lässt sich speichern, und ein Ausweisfoto gehört nicht in einen Chat.",
         "remember": "Ich sende nur Bilder, die auch andere sehen dürften."
       }
     },
     "snapchat/lang/Bild vom Bildschirm": {
       "einfach": {
-        "question": "Dein Bild verschwindet nach zehn Sekunden. Ist es dann wirklich weg?",
+        "question": "Du willst einen Snap schicken und stellst ein, dass er nur 3 Sekunden sichtbar ist. Ist dein Bild dann geschützt?",
         "answers": [
-          "Ja, nach zehn Sekunden kann es niemand mehr sehen.",
-          "Nein, jemand kann vorher ein Bildschirm-Foto machen."
+          "Ja, weil das in 3 Sekunden niemand schafft.",
+          "Nein, weil ein Bildschirm-Foto trotzdem geht.",
+          "Nein, aber Snapchat sagt mir dann Bescheid."
         ],
-        "feedbackWrong": "Ein Bildschirm-Foto dauert nur eine Sekunde. Danach ist dein Bild bei der anderen Person gespeichert.",
-        "feedbackCorrect": "Genau. Ein Bildschirm-Foto ist immer möglich. Deshalb denkst du vor dem Senden nach.",
+        "feedbackWrong": [
+          "Ein Bildschirm-Foto dauert nur eine Sekunde, und danach ist dein Bild gespeichert.",
+          null,
+          "Snapchat sagt dir oft Bescheid, aber dann ist das Bild schon gespeichert."
+        ],
+        "feedbackCorrect": "Genau. Ein Bildschirm-Foto dauert nur eine Sekunde. Deshalb überlegst du vor dem Senden, ob das Bild bleiben darf.",
         "remember": "Ich denke vor dem Senden nach."
       },
       "standard": {
-        "question": "Dein Snap ist nur zehn Sekunden zu sehen. Ist er danach wirklich weg?",
+        "question": "Du willst einen Snap schicken und stellst ein, dass er nur drei Sekunden sichtbar ist. Ist dein Bild damit geschützt?",
         "answers": [
-          "Ja, nach zehn Sekunden kann ihn niemand mehr sehen.",
-          "Nein, vorher kann jemand einen Screenshot machen."
+          "Ja, in drei Sekunden schafft das niemand.",
+          "Nein, ein Screenshot geht trotzdem.",
+          "Nein, aber Snapchat meldet mir das dann."
         ],
-        "feedbackWrong": "Ein Screenshot dauert eine Sekunde – danach ist dein Bild beim Empfänger gespeichert.",
-        "feedbackCorrect": "Richtig. Ein Screenshot ist immer möglich. Überleg dir deshalb vor dem Senden, was du schickst.",
+        "feedbackWrong": [
+          "Ein Screenshot dauert nur eine Sekunde, und danach ist dein Bild gespeichert.",
+          null,
+          "Snapchat meldet es dir oft, aber dann ist das Bild schon gespeichert."
+        ],
+        "feedbackCorrect": "Ein Screenshot dauert nur eine Sekunde. Deshalb überlegst du vor dem Senden, ob das Bild bleiben darf.",
         "remember": "Vor dem Senden denke ich nach."
       }
     },
     "snapchat/lang/Sehr private Bilder": {
       "einfach": {
-        "question": "Jemand drängt dich immer wieder, ein sehr privates Bild von dir zu schicken. Was ist besser?",
+        "question": "Jemand schreibt dir: Schick mir ein sehr privates Bild, sonst erzähle ich allen etwas Schlechtes über dich. Was machst du?",
         "answers": [
-          "Ich schicke das Bild, damit Ruhe ist.",
-          "Ich sage Nein und hole mir Hilfe."
+          "Ich schicke ein Bild, damit die Person mich in Ruhe lässt.",
+          "Ich schicke kein Bild und hole mir Hilfe.",
+          "Ich schicke kein Bild."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Niemand darf dich drängen, und ein geschicktes Bild bekommst du nicht zurück.",
-        "feedbackCorrect": "Gut. Du darfst Nein sagen und dir Hilfe holen. Der Druck ist nicht deine Schuld.",
+        "feedbackWrong": [
+          "Die Person droht dir, und mit dem Bild kann sie noch mehr Druck machen. Schick lieber kein Bild.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist gut, denn du musst das nicht allein lösen. So eine Drohung ist verboten.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Das ist eine Drohung, und niemand darf dich so drängen. Mach ein Bildschirm-Foto von der Nachricht, denn das ist dein Beweis.",
         "remember": "Ich schicke keine privaten Bilder, wenn ich Stress habe."
       },
       "standard": {
-        "question": "Jemand drängt dich immer wieder, ein sehr privates Bild von dir zu schicken. Wie reagierst du?",
+        "question": "Jemand schreibt dir: Schick mir ein sehr privates Bild, sonst erzähle ich allen etwas Schlechtes über dich. Was machst du?",
         "answers": [
-          "Ich schicke es, damit endlich Ruhe ist.",
-          "Ich sage Nein und hole mir Hilfe."
+          "Ich schicke eins, damit die Person Ruhe gibt.",
+          "Ich schicke kein Bild und hole mir Hilfe.",
+          "Ich schicke kein Bild."
         ],
-        "feedbackWrong": "Das ist riskant: Niemand darf dich unter Druck setzen, und ein verschicktes Bild bekommst du nicht zurück.",
-        "feedbackCorrect": "Richtig. Du darfst Nein sagen und dir Hilfe holen – der Druck ist nicht deine Schuld.",
+        "feedbackWrong": [
+          "Die Person droht dir, und mit dem Bild könnte sie den Druck noch erhöhen. Schick lieber keins.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist gut: Du musst das nicht allein lösen. Eine solche Drohung ist strafbar.",
+          null
+        ],
+        "feedbackCorrect": "Das ist eine Drohung, und niemand darf dich so unter Druck setzen. Mach einen Screenshot der Nachricht – er ist dein Beweis.",
         "remember": "Unter Druck schicke ich keine privaten Bilder."
       }
     },
     "snapchat/lang/Standort": {
       "einfach": {
-        "question": "Snapchat kann anderen zeigen, wo du gerade bist. Was ist besser?",
+        "question": "Du triffst dich heute mit einer Freundin in der Stadt, und sie fragt: Wo bist du gerade? Was machst du?",
         "answers": [
-          "Ich teile meinen Standort immer mit allen.",
-          "Ich teile meinen Standort nicht einfach."
+          "Ich schalte den Standort für alle an, damit sie mich sieht.",
+          "Ich rufe sie kurz an.",
+          "Ich schreibe ihr, dass ich am Bahnhof bin."
         ],
-        "feedbackWrong": "Das ist nicht sicher, denn dein Standort kann privat sein.",
-        "feedbackCorrect": "Gut. Du teilst deinen Standort nur, wenn du es wirklich willst.",
+        "feedbackWrong": [
+          "Dann sehen alle Kontakte deinen Ort und nicht nur deine Freundin. Schreib ihr lieber selbst, wo du bist.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch so erfährt nur deine Freundin, wo du bist.",
+          null
+        ],
+        "feedbackCorrect": "Genau. So weiß nur deine Freundin, wo du bist, und du bestimmst selbst, wer deinen Ort erfährt.",
         "remember": "Ich teile meinen Standort nicht einfach."
       },
       "standard": {
-        "question": "Snapchat kann deinen Standort für andere sichtbar machen. Was ist besser?",
+        "question": "Du triffst dich heute mit einer Freundin in der Stadt, und sie fragt: Wo bist du gerade? Was machst du?",
         "answers": [
-          "Den Standort immer mit allen teilen.",
-          "Den Standort nicht einfach teilen."
+          "Ich schalte den Standort für alle frei, dann sieht sie mich.",
+          "Ich rufe sie kurz an.",
+          "Ich schreibe ihr, dass ich am Bahnhof bin."
         ],
-        "feedbackWrong": "Das ist riskant – dein Standort kann privat sein.",
-        "feedbackCorrect": "Richtig. Du teilst deinen Standort nur bewusst.",
+        "feedbackWrong": [
+          "Dann sehen alle Kontakte deinen Standort, nicht nur deine Freundin. Schreib ihr lieber selbst, wo du bist.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch so erfährt nur deine Freundin, wo du bist.",
+          null
+        ],
+        "feedbackCorrect": "So weiß nur deine Freundin, wo du bist – und du bestimmst selbst, wer deinen Standort erfährt.",
         "remember": "Meinen Standort teile ich nur bewusst."
       }
     },
     "snapchat/lang/Kontakte": {
       "einfach": {
-        "question": "Eine Person, die du nicht kennst, will dich bei Snapchat als Freund hinzufügen. Was ist besser?",
+        "question": "Snapchat schlägt dir eine Person vor: Lina. Ihr habt drei gemeinsame Freunde, und Lina schickt dir eine Anfrage. Du kennst sie nicht. Was machst du?",
         "answers": [
-          "Ich nehme die Anfrage sofort an.",
-          "Ich prüfe erst oder lehne ab."
+          "Ich nehme die Anfrage nicht an.",
+          "Ich nehme an, weil Snapchat sie ja vorschlägt.",
+          "Ich frage erst einen gemeinsamen Freund nach Lina."
         ],
-        "feedbackWrong": "Das ist nicht sicher, weil du nicht weißt, wer die Person ist.",
-        "feedbackCorrect": "Gut. Du musst Anfragen von Fremden nicht annehmen.",
+        "feedbackWrong": [
+          null,
+          "Snapchat schlägt viele Menschen vor, aber das heißt nicht, dass du sie kennst. Du weißt nicht, wer Lina ist.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Danach weißt du mehr über Lina. Die Anfrage kann so lange warten."
+        ],
+        "feedbackCorrect": "Genau. Du kennst Lina nicht, und ein Vorschlag von Snapchat sagt wenig. Du musst niemanden annehmen.",
         "remember": "Ich prüfe, wer mir schreibt."
       },
       "standard": {
-        "question": "Eine unbekannte Person will dich auf Snapchat hinzufügen. Was ist besser?",
+        "question": "Snapchat schlägt dir eine Person vor: Lina. Ihr habt drei gemeinsame Freunde, und Lina schickt dir eine Anfrage. Du kennst sie nicht. Was machst du?",
         "answers": [
-          "Ich nehme die Anfrage sofort an.",
-          "Ich prüfe erst oder lehne ab."
+          "Ich nehme die Anfrage nicht an.",
+          "Ich nehme an, Snapchat schlägt sie ja vor.",
+          "Ich frage erst einen gemeinsamen Freund nach ihr."
         ],
-        "feedbackWrong": "Das ist riskant – du weißt nicht, wer hinter dem Profil steckt.",
-        "feedbackCorrect": "Richtig. Anfragen von Fremden musst du nicht annehmen.",
+        "feedbackWrong": [
+          null,
+          "Snapchat schlägt viele Menschen vor – das heißt nicht, dass du sie kennst. Du weißt nicht, wer Lina ist.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Danach weißt du mehr über Lina. Die Anfrage kann so lange warten."
+        ],
+        "feedbackCorrect": "Du kennst Lina nicht, und ein Vorschlag von Snapchat sagt wenig. Annehmen musst du niemanden.",
         "remember": "Ich prüfe, wer mir schreibt, bevor ich annehme."
       }
     },
     "snapchat/lang/Stress erkennen": {
       "einfach": {
-        "question": "Jemand schreibt dir: Mach schnell und sag es niemandem. Was ist das?",
+        "question": "Ein Freund schreibt: Schick mir ein Bild, sonst bin ich nicht mehr dein Freund. Sag es niemandem. Was machst du?",
         "answers": [
-          "Ein Warnzeichen.",
-          "Kein Problem."
+          "Ich schicke das Bild, weil ich den Freund nicht verlieren will.",
+          "Ich schicke kein Bild.",
+          "Ich schicke kein Bild und erzähle es jemandem."
         ],
-        "feedbackWrong": "Das stimmt nicht. Wenn jemand Druck macht und Geheimhaltung will, ist das ein Warnzeichen.",
-        "feedbackCorrect": "Genau. Druck und Geheimhaltung sind Warnzeichen. Zeig die Nachricht einer Person, der du vertraust.",
+        "feedbackWrong": [
+          "Ein echter Freund droht nicht und verlangt auch kein Geheimnis. Stress und Geheimhaltung sind Warnzeichen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Du musst kein Geheimnis daraus machen, und Reden hilft bei Stress."
+        ],
+        "feedbackCorrect": "Genau. Stress und Geheimhaltung sind Warnzeichen, und ein echter Freund droht dir nicht.",
         "remember": "Stress ist ein Warnzeichen."
       },
       "standard": {
-        "question": "Jemand schreibt dir: „Mach schnell und erzähl es keinem.“ Was ist das?",
+        "question": "Ein Freund schreibt: Schick mir ein Bild, sonst bin ich nicht mehr dein Freund. Sag es niemandem. Was machst du?",
         "answers": [
-          "Ein Warnzeichen.",
-          "Ganz normal."
+          "Ich schicke es, ich will den Freund nicht verlieren.",
+          "Ich schicke kein Bild.",
+          "Ich schicke kein Bild und erzähle es jemandem."
         ],
-        "feedbackWrong": "Das stimmt nicht. Zeitdruck und Geheimhaltung sind typische Warnzeichen.",
-        "feedbackCorrect": "Richtig. Druck und Geheimhaltung sind Warnzeichen – zeig die Nachricht einer Vertrauensperson.",
+        "feedbackWrong": [
+          "Ein echter Freund droht nicht und verlangt kein Geheimnis. Druck und Geheimhaltung sind Warnzeichen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Du musst kein Geheimnis daraus machen, und Reden hilft gegen den Druck."
+        ],
+        "feedbackCorrect": "Druck und Geheimhaltung sind Warnzeichen. Ein echter Freund droht dir nicht.",
         "remember": "Druck und Geheimhaltung sind Warnzeichen."
       }
     },
     "snapchat/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "Eine Person will unbedingt ein Bild von dir und schreibt immer wieder. Was machst du?",
+        "question": "Eine Person schreibt dir jeden Tag: Schick mir endlich ein Bild. Du hast schon Nein gesagt. Was machst du?",
         "answers": [
-          "Ich sende das Bild, damit endlich wieder Ruhe ist.",
-          "Ich sage Nein und zeige es einer vertrauten Person."
+          "Ich schicke ein Bild, damit die Person endlich aufhört.",
+          "Ich blockiere die Person.",
+          "Ich zeige die Nachrichten jemandem und blockiere sie dann."
         ],
-        "feedbackWrong": "Ein Bild, das du gesendet hast, bekommst du nicht zurück. Sag lieber Nein.",
-        "feedbackCorrect": "Gut. Nein zu sagen ist dein gutes Recht. Und du bleibst damit nicht allein.",
+        "feedbackWrong": [
+          "Ein gesendetes Bild bekommst du nicht zurück, und die Person will dann oft noch mehr.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Zu zweit sieht man mehr, und danach kann dir die Person nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Genau. Du hast Nein gesagt, und das reicht. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
         "remember": "Ich sage Nein und zeige es jemandem."
       },
       "standard": {
-        "question": "Eine Person will unbedingt ein Bild von dir und hört nicht auf zu schreiben. Wie reagierst du?",
+        "question": "Eine Person schreibt dir jeden Tag: Schick mir endlich ein Bild. Du hast schon Nein gesagt. Was machst du?",
         "answers": [
-          "Ich schicke es, damit endlich wieder Ruhe ist.",
-          "Ich sage Nein und zeige es einer Vertrauensperson."
+          "Ich schicke eins, damit die Person endlich aufhört.",
+          "Ich blockiere die Person.",
+          "Ich zeige die Nachrichten jemandem und blockiere sie dann."
         ],
-        "feedbackWrong": "Ein verschicktes Bild bekommst du nicht zurück. Sag lieber Nein.",
-        "feedbackCorrect": "Richtig. Nein zu sagen ist dein gutes Recht – und mit einer Vertrauensperson bist du nicht allein.",
+        "feedbackWrong": [
+          "Ein gesendetes Bild bekommst du nicht zurück, und oft will die Person danach noch mehr.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Zu zweit sieht man mehr, und danach kann dir die Person nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Du hast Nein gesagt, und das genügt. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
         "remember": "Ich sage Nein und zeige die Nachricht jemandem."
       }
     },
     "snapchat/kurz/Bilder verschwinden nicht wirklich": {
       "einfach": {
-        "question": "Welche Bilder schickst du bei Snapchat?",
+        "question": "Du hast ein albernes Foto von dir gemacht und willst es einem Freund als Snap schicken. Was überlegst du vorher?",
         "answers": [
-          "Nur Bilder, die alle sehen dürfen.",
-          "Alle Bilder, denn sie verschwinden ja."
+          "Nichts, weil der Snap ja nach 10 Sekunden weg ist.",
+          "Ich überlege, ob auch andere das Foto sehen dürfen.",
+          "Ich schicke es, weil mein Freund es bestimmt niemandem zeigt."
         ],
-        "feedbackWrong": "Die Bilder verschwinden nur auf dem Bildschirm. Vorher kann sie jemand speichern.",
-        "feedbackCorrect": "Genau. Du schickst nur Bilder, die alle sehen dürfen.",
+        "feedbackWrong": [
+          "Der Snap verschwindet nur auf deinem Bildschirm. Dein Freund kann vorher ein Bildschirm-Foto machen.",
+          null,
+          "Das kann sein, aber sicher weißt du es nicht. Ein Bildschirm-Foto kann er weiterschicken, auch aus Versehen."
+        ],
+        "feedbackCorrect": "Genau. Andere können ein Bild speichern. Deshalb prüfst du vorher, ob alle es sehen dürfen.",
         "remember": "Bilder verschwinden nicht wirklich."
       },
       "standard": {
-        "question": "Welche Bilder schickst du auf Snapchat?",
+        "question": "Du hast ein albernes Foto von dir gemacht und willst es einem Freund als Snap schicken. Was überlegst du vorher?",
         "answers": [
-          "Nur solche, die alle sehen dürften.",
-          "Alle – sie verschwinden ja sowieso."
+          "Nichts, der Snap ist ja nach zehn Sekunden weg.",
+          "Ich überlege, ob es auch andere sehen dürften.",
+          "Ich schicke es, mein Freund zeigt es bestimmt niemandem."
         ],
-        "feedbackWrong": "Die Bilder verschwinden nur vom Bildschirm. Vorher kann sie jemand speichern.",
-        "feedbackCorrect": "Richtig. Du schickst nur Bilder, die auch alle anderen sehen dürften.",
+        "feedbackWrong": [
+          "Der Snap verschwindet nur von deinem Bildschirm. Dein Freund kann vorher einen Screenshot machen.",
+          null,
+          "Mag sein, aber sicher weißt du es nicht. Einen Screenshot kann er weiterleiten, auch aus Versehen."
+        ],
+        "feedbackCorrect": "Andere können ein Bild speichern. Deshalb prüfst du vorher, ob es jeder sehen dürfte.",
         "remember": "Bilder verschwinden nicht wirklich."
       }
     },
     "snapchat/kurz/Dein Standort": {
       "einfach": {
-        "question": "Snapchat zeigt deinen Ort auf einer Karte. Was machst du?",
+        "question": "Du öffnest die Karte bei Snapchat und siehst, dass alle deine Kontakte deinen Ort sehen können, auch fast fremde Menschen. Was machst du?",
         "answers": [
-          "Ich lasse die Karte für alle an.",
+          "Ich lasse es so, damit meine Freunde mich finden.",
+          "Ich zeige meinen Ort nur noch zwei guten Freunden.",
           "Ich schalte den Standort aus."
         ],
-        "feedbackWrong": "Dann können andere sehen, wo du wohnst und wann du unterwegs bist.",
-        "feedbackCorrect": "Gut. Deinen Standort musst du niemandem zeigen.",
+        "feedbackWrong": [
+          "Dann sehen auch fast fremde Menschen, wo du wohnst und wann du unterwegs bist.",
+          "Das ist besser als für alle. Aber auch ein Freund kann es weitererzählen. Am sichersten ist es, den Standort auszuschalten.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Dann zeigt die Karte deinen Ort nicht mehr. Auch ein Bild kann aber den Ort zeigen.",
         "remember": "Ich schalte den Standort aus."
       },
       "standard": {
-        "question": "Snapchat zeigt deinen Standort auf einer Karte. Was tust du?",
+        "question": "Du öffnest die Snapchat-Karte und stellst fest: Alle deine Kontakte sehen deinen Standort, auch flüchtige Bekannte. Was machst du?",
         "answers": [
-          "Ich lasse die Karte für alle an.",
-          "Ich schalte den Standort aus."
+          "Ich lasse es so, dann finden mich meine Freunde.",
+          "Ich zeige meinen Standort nur noch zwei guten Freunden.",
+          "Ich schalte die Standort-Freigabe aus."
         ],
-        "feedbackWrong": "Dann können andere sehen, wo du wohnst und wann du unterwegs bist.",
-        "feedbackCorrect": "Richtig. Deinen Standort musst du niemandem zeigen – du kannst ihn ausschalten.",
+        "feedbackWrong": [
+          "Dann sehen auch flüchtige Bekannte, wo du wohnst und wann du unterwegs bist.",
+          "Das ist schon besser als für alle – aber auch ein Freund kann ihn weitergeben. Am sichersten ist es, die Freigabe auszuschalten.",
+          null
+        ],
+        "feedbackCorrect": "Dann zeigt die Karte deinen Standort nicht mehr. Auch ein Bild kann den Ort allerdings verraten.",
         "remember": "Den Standort schalte ich aus."
       }
     },
     "snapchat/kurz/Niemand darf dich zwingen": {
       "einfach": {
-        "question": "Jemand macht dir Druck und schreibt: Schick mir ein Bild! Was gilt?",
+        "question": "Ein Bekannter schreibt dir bei Snapchat: Schick mir ein Bild von dir. Alle anderen machen das auch. Du willst das nicht. Was machst du?",
         "answers": [
-          "Ich darf Nein sagen.",
-          "Ich muss es machen, sonst ist er sauer."
+          "Ich schreibe ihm, dass ich das nicht will.",
+          "Ich schicke ein Bild, weil es alle anderen ja auch machen.",
+          "Ich sage Nein und blockiere ihn dann."
         ],
-        "feedbackWrong": "Wenn jemand sauer wird, weil du Nein sagst, meint die Person es nicht gut mit dir.",
-        "feedbackCorrect": "Genau. Dein Nein gilt immer, auch bei Freunden.",
+        "feedbackWrong": [
+          null,
+          "Du weißt nicht, ob das überhaupt stimmt, und es ist auch egal. Dein Nein gilt.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kann er dir nicht mehr schreiben, und dein Nein gilt."
+        ],
+        "feedbackCorrect": "Genau. Du willst das nicht, und dein Nein gilt. Du musst es nicht erklären.",
         "remember": "Ich darf Nein sagen."
       },
       "standard": {
-        "question": "Jemand setzt dich unter Druck: „Schick mir ein Bild!“ Was gilt?",
+        "question": "Ein Bekannter schreibt dir bei Snapchat: Schick mir ein Bild von dir. Alle anderen machen das auch. Du willst das nicht. Was machst du?",
         "answers": [
-          "Ich darf Nein sagen.",
-          "Ich muss es tun, sonst ist er sauer."
+          "Ich schreibe ihm, dass ich das nicht möchte.",
+          "Ich schicke eins, alle anderen machen es ja auch.",
+          "Ich sage Nein und blockiere ihn."
         ],
-        "feedbackWrong": "Wer sauer wird, weil du Nein sagst, meint es nicht gut mit dir.",
-        "feedbackCorrect": "Richtig. Dein Nein gilt immer – auch gegenüber Freunden.",
+        "feedbackWrong": [
+          null,
+          "Ob das überhaupt stimmt, weißt du nicht – und es spielt keine Rolle. Dein Nein gilt.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kann er dir nicht mehr schreiben, und dein Nein gilt."
+        ],
+        "feedbackCorrect": "Du möchtest das nicht, und dein Nein gilt. Erklären musst du es nicht.",
         "remember": "Ich darf jederzeit Nein sagen."
       }
     },
@@ -6992,265 +7362,495 @@ const AUFGABEN_VERSIONS = {
     },
     "tiktok/lang/Trends": {
       "einfach": {
-        "question": "Bei TikTok machen viele einen Trend nach, der gefährlich wirkt. Was ist besser?",
+        "question": "Bei TikTok tanzen gerade viele zu einem Lied, und du hast Lust mitzumachen. Was überlegst du?",
         "answers": [
-          "Ich mache auch mit.",
-          "Ich mache nicht mit."
+          "Ich mache lieber nie mit, weil alle Trends gefährlich sind.",
+          "Ich prüfe, ob der Trend gefährlich ist, und mache dann mit.",
+          "Ich mache sofort mit, weil Trends immer harmlos sind."
         ],
-        "feedbackWrong": "Das ist nicht sicher, denn gefährliche Trends können dir schaden.",
-        "feedbackCorrect": "Gut. Deine Gesundheit ist wichtiger als ein Trend.",
+        "feedbackWrong": [
+          "Nicht alle Trends sind gefährlich, manche sind einfach lustig. Du prüfst, ob du dich verletzen kannst.",
+          null,
+          "Manche Trends sind gefährlich. Schau deshalb zuerst hin, ob du dich verletzen kannst."
+        ],
+        "feedbackCorrect": "Genau. Tanzen ist nicht gefährlich. Du prüfst zuerst und entscheidest dann selbst.",
         "remember": "Ich mache gefährliche Trends nicht nach."
       },
       "standard": {
-        "question": "Auf TikTok machen viele einen Trend nach, der gefährlich wirkt. Was ist besser?",
+        "question": "Auf TikTok tanzen gerade viele zu einem Lied, und du hast Lust mitzumachen. Was überlegst du?",
         "answers": [
-          "Ich mache auch mit.",
-          "Ich mache nicht mit."
+          "Ich mache lieber nie mit, alle Trends sind gefährlich.",
+          "Ich prüfe erst, ob er gefährlich ist, und mache dann mit.",
+          "Ich mache sofort mit, Trends sind immer harmlos."
         ],
-        "feedbackWrong": "Das ist riskant – gefährliche Trends können dir ernsthaft schaden.",
-        "feedbackCorrect": "Richtig. Deine Gesundheit ist wichtiger als jeder Trend.",
+        "feedbackWrong": [
+          "Nicht alle Trends sind gefährlich, manche machen einfach Spaß. Du prüfst, ob du dich dabei verletzen kannst.",
+          null,
+          "Manche Trends sind gefährlich. Sieh deshalb zuerst hin, ob du dich dabei verletzen kannst."
+        ],
+        "feedbackCorrect": "Tanzen ist ungefährlich. Du prüfst zuerst und entscheidest dann selbst.",
         "remember": "Gefährliche Trends mache ich nicht nach."
       }
     },
     "tiktok/lang/Gefährliche Trends erkennen": {
       "einfach": {
-        "question": "Bei einem Trend sollen alle so lange wie möglich die Luft anhalten. Was tust du?",
+        "question": "Ein Trend sagt: Iss einen ganz scharfen Chip, halte 5 Minuten durch und trink nichts. Deine Freunde filmen schon. Was machst du?",
         "answers": [
-          "Ich mache mit, weil alle es machen.",
+          "Ich esse den Chip, weil meine Freunde ja warten.",
+          "Ich sage, dass ich lieber filme und das nicht essen will.",
           "Ich mache nicht mit."
         ],
-        "feedbackWrong": "Der Trend ist bald vorbei, aber eine Verletzung kann lange bleiben.",
-        "feedbackCorrect": "Gut. Du musst bei keinem Trend mitmachen, auch wenn viele es tun.",
+        "feedbackWrong": [
+          "Sehr scharfe Chips können weh tun, und manche Menschen bekommen schlecht Luft. Deine Freunde können warten.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann bist du dabei, aber du isst nichts Gefährliches.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Der Trend kann weh tun, und du musst bei keinem Trend mitmachen, auch nicht vor Freunden.",
         "remember": "Ich muss bei keinem Trend mitmachen."
       },
       "standard": {
-        "question": "Bei einem Trend sollen alle möglichst lange die Luft anhalten. Was tust du?",
+        "question": "Ein Trend verlangt: Iss einen extrem scharfen Chip, halte fünf Minuten durch und trink nichts. Deine Freunde filmen schon. Was machst du?",
         "answers": [
-          "Ich mache mit, weil es alle machen.",
+          "Ich esse den Chip, meine Freunde warten ja.",
+          "Ich sage, dass ich lieber filme und das nicht esse.",
           "Ich mache nicht mit."
         ],
-        "feedbackWrong": "Der Trend ist bald vorbei – eine Verletzung kann lange bleiben.",
-        "feedbackCorrect": "Richtig. Bei keinem Trend musst du mitmachen, egal wie viele es tun.",
+        "feedbackWrong": [
+          "Extrem scharfe Chips können wehtun, und manche bekommen davon schlecht Luft. Deine Freunde können warten.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann bist du dabei, isst aber nichts Gefährliches.",
+          null
+        ],
+        "feedbackCorrect": "Der Trend kann wehtun, und du musst bei keinem Trend mitmachen – auch nicht vor Freunden.",
         "remember": "Bei keinem Trend muss ich mitmachen."
       }
     },
     "tiktok/lang/Ähnliche Videos": {
       "einfach": {
-        "question": "TikTok zeigt dir immer mehr ähnliche Videos, und du schaust schon sehr lange. Was ist wichtig?",
+        "question": "Du hast ein paar traurige Videos angeschaut, und jetzt zeigt TikTok dir fast nur noch traurige Videos. Das tut dir nicht gut. Was machst du?",
         "answers": [
-          "Ich darf eine Pause machen.",
-          "Ich muss immer weiter schauen."
+          "Ich mache eine Pause von TikTok.",
+          "Ich schaue weiter, weil TikTok eben zeigt, was zu mir passt.",
+          "Ich suche selbst nach anderen Videos."
         ],
-        "feedbackWrong": "Das stimmt nicht. TikTok zeigt immer weiter Videos, aber du musst nicht weiter schauen.",
-        "feedbackCorrect": "Gut. Du darfst jederzeit eine Pause machen.",
+        "feedbackWrong": [
+          null,
+          "TikTok merkt nur, was du lange anschaust. Das ist nicht immer das, was dir gut tut.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so bestimmst du selbst, was du anschaust."
+        ],
+        "feedbackCorrect": "Genau. Die Videos tun dir nicht gut, also darfst du Pause machen. TikTok merkt nur, was du lange anschaust.",
         "remember": "Wenn mir etwas nicht guttut, mache ich eine Pause."
       },
       "standard": {
-        "question": "TikTok zeigt dir ständig ähnliche Videos – du schaust schon sehr lange. Was ist wichtig?",
+        "question": "Du hast ein paar traurige Videos angesehen, und jetzt zeigt TikTok dir fast nur noch traurige Videos. Das tut dir nicht gut. Was machst du?",
         "answers": [
-          "Ich darf jederzeit Pause machen.",
-          "Ich muss immer weiterschauen."
+          "Ich lege eine TikTok-Pause ein.",
+          "Ich schaue weiter, TikTok zeigt eben, was zu mir passt.",
+          "Ich suche selbst nach anderen Videos."
         ],
-        "feedbackWrong": "Das stimmt nicht. Die Videos laufen immer weiter – aber du musst nicht weiterschauen.",
-        "feedbackCorrect": "Richtig. Du darfst jederzeit eine Pause einlegen.",
+        "feedbackWrong": [
+          null,
+          "TikTok registriert nur, was du lange ansiehst – nicht, was dir guttut.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so bestimmst du selbst, was du dir ansiehst."
+        ],
+        "feedbackCorrect": "Die Videos tun dir nicht gut, also darfst du eine Pause machen. TikTok registriert nur, was du lange ansiehst.",
         "remember": "Wenn mir etwas nicht guttut, lege ich eine Pause ein."
       }
     },
     "tiktok/lang/Private Nachrichten": {
       "einfach": {
-        "question": "Eine Person, die du nicht kennst, schreibt dir privat: Wo wohnst du eigentlich? Was ist besser?",
+        "question": "Eine fremde Person schreibt dir: Ich mag deine Videos und will dich als Model. Schick mir deinen Namen und deine Telefon-Nummer. Was machst du?",
         "answers": [
-          "Ich schicke ihr meine Adresse.",
-          "Ich schicke meine Adresse nicht."
+          "Ich schicke nur meine Telefon-Nummer, aber nicht den Namen.",
+          "Ich schicke nichts und melde das Profil bei TikTok.",
+          "Ich schicke nichts."
         ],
-        "feedbackWrong": "Das ist nicht sicher, denn deine Adresse ist privat.",
-        "feedbackCorrect": "Gut. Fremde Personen bekommen deine Adresse nicht.",
+        "feedbackWrong": [
+          "Auch die Telefon-Nummer ist privat. Damit kann die Person dich immer wieder anrufen oder anschreiben.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Deine Daten bleiben bei dir, und TikTok kann das Profil prüfen.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du kennst die Person nicht, und dein Name und deine Telefon-Nummer sind privat.",
         "remember": "Ich schütze meine privaten Daten."
       },
       "standard": {
-        "question": "Eine unbekannte Person schreibt dir privat: „Wo wohnst du eigentlich?“ Was ist besser?",
+        "question": "Eine fremde Person schreibt dir: Ich mag deine Videos und möchte dich als Model. Schick mir deinen Namen und deine Telefonnummer. Was machst du?",
         "answers": [
-          "Ich gebe ihr meine Adresse, sie fragt ja nett.",
-          "Ich gebe meine Adresse nicht heraus."
+          "Ich schicke nur meine Telefonnummer, den Namen nicht.",
+          "Ich schicke nichts und melde das Profil bei TikTok.",
+          "Ich schicke nichts."
         ],
-        "feedbackWrong": "Das ist riskant – auch eine nette Frage ändert nichts daran, dass deine Adresse privat ist.",
-        "feedbackCorrect": "Richtig. Fremde bekommen deine Adresse nicht.",
+        "feedbackWrong": [
+          "Auch die Telefonnummer ist privat. Damit kann die Person dich immer wieder anrufen oder anschreiben.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Deine Daten bleiben bei dir, und TikTok kann das Profil prüfen.",
+          null
+        ],
+        "feedbackCorrect": "Du kennst die Person nicht, und dein Name und deine Telefonnummer sind privat.",
         "remember": "Meine privaten Daten schütze ich."
       }
     },
     "tiktok/lang/Videos posten": {
       "einfach": {
-        "question": "Du hast ein TikTok-Video gedreht und willst es posten. Was ist wichtig?",
+        "question": "Du filmst dich in deinem Zimmer beim Singen. Im Hintergrund hängt ein Brief vom Amt an der Wand, und man kann ihn lesen. Was machst du?",
         "answers": [
-          "Ich prüfe, was man im Video sieht.",
-          "Ich poste es sofort, damit es schnell online ist."
+          "Ich nehme den Brief ab und filme noch einmal.",
+          "Ich poste das Video so, weil niemand auf die Wand schaut.",
+          "Ich stelle mich vor eine andere Wand."
         ],
-        "feedbackWrong": "Das ist nicht sicher, denn ein Video kann private Dinge verraten, zum Beispiel deine Straße.",
-        "feedbackCorrect": "Gut. Du schaust dir das Video vorher genau an.",
+        "feedbackWrong": [
+          null,
+          "Andere können das Video anhalten und den Brief lesen. Darauf stehen dein Name und deine Adresse.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann ist der Brief nicht mehr im Bild."
+        ],
+        "feedbackCorrect": "Genau. Jetzt sieht niemand den Brief. Andere können ein Video anhalten und sich alles genau ansehen.",
         "remember": "Ich prüfe Videos vor dem Posten."
       },
       "standard": {
-        "question": "Du hast ein TikTok-Video gedreht und möchtest es posten. Was ist wichtig?",
+        "question": "Du filmst dich in deinem Zimmer beim Singen. Im Hintergrund hängt gut lesbar ein Brief vom Amt an der Wand. Was machst du?",
         "answers": [
-          "Ich prüfe, was im Video zu sehen ist.",
-          "Ich poste es sofort, damit es schnell online ist."
+          "Ich nehme den Brief ab und filme noch einmal.",
+          "Ich poste das Video so, auf die Wand schaut niemand.",
+          "Ich stelle mich vor eine andere Wand."
         ],
-        "feedbackWrong": "Das ist riskant – ein Video kann Privates verraten, etwa deine Straße.",
-        "feedbackCorrect": "Richtig. Du siehst dir das Video vor dem Posten genau an.",
+        "feedbackWrong": [
+          null,
+          "Andere können das Video anhalten und den Brief lesen – mit deinem Namen und deiner Adresse.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann ist der Brief nicht mehr im Bild."
+        ],
+        "feedbackCorrect": "Jetzt sieht niemand den Brief. Andere können ein Video anhalten und sich alles genau ansehen.",
         "remember": "Videos prüfe ich vor dem Posten."
       }
     },
     "tiktok/lang/Kommentare": {
       "einfach": {
-        "question": "Unter deinem Video stehen verletzende Kommentare. Was ist besser?",
+        "question": "Unter deinem Tanz-Video schreiben drei Personen: Du kannst gar nicht tanzen. Hör auf damit. Das macht dich traurig. Was machst du?",
         "answers": [
-          "Ich hole mir Unterstützung.",
-          "Ich halte das aus und sage nichts."
+          "Ich halte das aus und sage nichts.",
+          "Ich melde die Kommentare bei TikTok.",
+          "Ich hole mir Unterstützung und rede mit jemandem darüber."
         ],
-        "feedbackWrong": "Du musst verletzende Kommentare nicht allein aushalten. Hol dir lieber Unterstützung.",
-        "feedbackCorrect": "Gut. Du holst dir Unterstützung und bist nicht allein.",
+        "feedbackWrong": [
+          "Du musst verletzende Kommentare nicht allein aushalten. Du kannst sie melden oder mit jemandem darüber reden.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist Unterstützung, und Reden tut gut. Danach entscheidest du in Ruhe."
+        ],
+        "feedbackCorrect": "Genau. TikTok kann verletzende Kommentare prüfen, und dein Video darf bleiben. Du hast nichts falsch gemacht.",
         "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
       },
       "standard": {
-        "question": "Unter deinem TikTok-Video häufen sich verletzende Kommentare. Was ist besser?",
+        "question": "Unter deinem Tanzvideo schreiben drei Personen: Du kannst gar nicht tanzen. Hör auf damit. Das macht dich traurig. Was machst du?",
         "answers": [
-          "Ich hole mir Unterstützung.",
-          "Ich halte es aus und sage nichts."
+          "Ich halte das aus und sage nichts.",
+          "Ich melde die Kommentare bei TikTok.",
+          "Ich hole mir Unterstützung und rede mit jemandem darüber."
         ],
-        "feedbackWrong": "Verletzende Kommentare musst du nicht allein aushalten. Hol dir lieber Unterstützung.",
-        "feedbackCorrect": "Richtig. Mit Unterstützung bist du nicht allein.",
+        "feedbackWrong": [
+          "Verletzende Kommentare musst du nicht allein aushalten. Du kannst sie melden oder mit jemandem darüber reden.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist Unterstützung, und Reden tut gut. Danach entscheidest du in Ruhe."
+        ],
+        "feedbackCorrect": "TikTok kann verletzende Kommentare prüfen, und dein Video darf bleiben. Du hast nichts falsch gemacht.",
         "remember": "Bei verletzenden Kommentaren hole ich mir Unterstützung."
       }
     },
     "tiktok/lang/Gefühle und Pausen": {
       "einfach": {
-        "question": "Ein Video macht dich traurig. Was darfst du dann tun?",
+        "question": "Du schaust abends TikTok. Nach vielen Videos bist du nervös und kannst nicht abschalten. Was machst du?",
         "answers": [
-          "Die App schließen und mit jemandem reden.",
-          "Weiterschauen, bis es mir besser geht."
+          "Ich schaue weiter, weil vielleicht ein ruhiges Video kommt.",
+          "Ich schließe die App und rede mit jemandem.",
+          "Ich schließe die App und lege das Handy weg."
         ],
-        "feedbackWrong": "Weiterschauen macht es meistens nicht besser. Das Handy wegzulegen hilft oft.",
-        "feedbackCorrect": "Genau. Du darfst die App schließen und mit jemandem darüber reden.",
+        "feedbackWrong": [
+          "Weiterschauen macht es meistens nicht besser. Es hilft mehr, das Handy wegzulegen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Die App ist zu, und Reden hilft beim Abschalten.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du darfst TikTok weglegen, denn dein Kopf braucht jetzt Ruhe.",
         "remember": "Ich darf TikTok weglegen."
       },
       "standard": {
-        "question": "Ein Video macht dich traurig. Was darfst du tun?",
+        "question": "Du schaust abends TikTok. Nach vielen Videos bist du nervös und kannst nicht abschalten. Was machst du?",
         "answers": [
-          "Die App schließen und mit jemandem sprechen.",
-          "Weiterschauen, bis die Stimmung besser wird."
+          "Ich schaue weiter, vielleicht kommt ein ruhiges Video.",
+          "Ich schließe die App und rede mit jemandem.",
+          "Ich schließe die App und lege das Handy weg."
         ],
-        "feedbackWrong": "Weiterschauen hilft meistens nicht. Das Handy wegzulegen tut oft gut.",
-        "feedbackCorrect": "Richtig. Du darfst die App schließen und mit jemandem darüber sprechen.",
+        "feedbackWrong": [
+          "Weiterschauen macht es meistens nicht besser. Mehr hilft es, das Handy wegzulegen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Die App ist zu, und Reden hilft beim Abschalten.",
+          null
+        ],
+        "feedbackCorrect": "Du darfst TikTok weglegen – dein Kopf braucht jetzt Ruhe.",
         "remember": "TikTok darf ich jederzeit weglegen."
       }
     },
     "tiktok/lang/Nicht jedes Video ist echt": {
       "einfach": {
-        "question": "In einem Video sagt eine bekannte Stimme etwas sehr Seltsames. Was kann der Grund sein?",
+        "question": "In einem Video sagt eine bekannte Ärztin aus dem Fernsehen: Diese Tabletten machen dich in einer Woche schlank. Was machst du?",
         "answers": [
-          "Das stimmt sicher, Stimmen kann man nicht fälschen.",
-          "Die Stimme kann mit KI gemacht sein."
+          "Ich glaube das nicht sofort, weil das Video gefälscht sein kann.",
+          "Ich bestelle die Tabletten, weil ich die Ärztin aus dem Fernsehen kenne.",
+          "Ich frage in meiner Apotheke nach."
         ],
-        "feedbackWrong": "Doch, KI kann Stimmen sehr echt nachmachen.",
-        "feedbackCorrect": "Genau. Auch Stimmen kann man heute fälschen. Prüfe deshalb, ob seriöse Nachrichten darüber berichten.",
+        "feedbackWrong": [
+          null,
+          "Auch Stimmen und Gesichter kann man fälschen. Vielleicht weiß die Ärztin gar nichts von dem Video.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist eine gute Prüfung, denn in der Apotheke kennt man sich mit Tabletten aus."
+        ],
+        "feedbackCorrect": "Genau. KI kann Stimmen und Gesichter nachmachen. Vielleicht weiß die Ärztin gar nichts von dem Video.",
         "remember": "Auch Videos und Stimmen können gefälscht sein."
       },
       "standard": {
-        "question": "In einem Video sagt eine bekannte Stimme etwas sehr Seltsames. Woran kann das liegen?",
+        "question": "In einem Video sagt eine bekannte Ärztin aus dem Fernsehen: Diese Tabletten machen dich in einer Woche schlank. Was machst du?",
         "answers": [
-          "Das ist echt – Stimmen lassen sich nicht fälschen.",
-          "Die Stimme kann mit KI erzeugt sein."
+          "Ich glaube das nicht sofort, das Video kann gefälscht sein.",
+          "Ich bestelle die Tabletten, die Ärztin kenne ich ja aus dem Fernsehen.",
+          "Ich frage in meiner Apotheke nach."
         ],
-        "feedbackWrong": "Doch: KI kann Stimmen täuschend echt nachahmen.",
-        "feedbackCorrect": "Richtig. Auch Stimmen lassen sich heute fälschen – prüfe, ob seriöse Medien darüber berichten.",
+        "feedbackWrong": [
+          null,
+          "Auch Stimmen und Gesichter lassen sich fälschen. Vielleicht weiß die Ärztin gar nichts von dem Video.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist eine gute Prüfung: In der Apotheke kennt man sich mit Tabletten aus."
+        ],
+        "feedbackCorrect": "KI kann Stimmen und Gesichter täuschend echt nachahmen. Vielleicht weiß die Ärztin gar nichts von dem Video.",
         "remember": "Auch Videos und Stimmen können gefälscht sein."
       }
     },
     "tiktok/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "In einem Kommentar drängt dich jemand, private Daten zu schicken. Was machst du?",
+        "question": "Unter deinem Video schreibt jemand: Du hast ein Handy gewonnen. Schick mir sofort deine Adresse, in einer Stunde ist der Gewinn weg. Was machst du?",
         "answers": [
-          "Ich sende keine privaten Daten und mache Pause.",
-          "Ich sende die Daten schnell, damit Ruhe ist."
+          "Ich sende die Adresse schnell, weil der Gewinn sonst weg ist.",
+          "Ich sende keine Daten.",
+          "Ich sende keine Daten und melde den Kommentar."
         ],
-        "feedbackWrong": "Gerade wenn du Stress hast, ist Vorsicht wichtig. Sende keine privaten Daten.",
-        "feedbackCorrect": "Gut. Deine privaten Daten bleiben privat, auch wenn jemand Druck macht.",
+        "feedbackWrong": [
+          "Die Eile ist Absicht, damit du nicht nachdenkst. Bei einem echten Gewinn hast du Zeit.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Deine Daten bleiben bei dir, und TikTok kann den Kommentar prüfen."
+        ],
+        "feedbackCorrect": "Genau. Die Eile ist Absicht, und private Daten sendest du nicht unter Stress.",
         "remember": "Private Daten sende ich nie, wenn ich Stress habe."
       },
       "standard": {
-        "question": "In einem Kommentar drängt dich jemand, private Daten zu schicken. Wie reagierst du?",
+        "question": "Unter deinem Video schreibt jemand: Du hast ein Handy gewonnen. Schick mir sofort deine Adresse, in einer Stunde verfällt der Gewinn. Was machst du?",
         "answers": [
-          "Ich sende keine privaten Daten und mache Pause.",
-          "Ich schicke die Daten schnell, damit Ruhe ist."
+          "Ich sende die Adresse schnell, sonst verfällt der Gewinn.",
+          "Ich sende keine Daten.",
+          "Ich sende keine Daten und melde den Kommentar."
         ],
-        "feedbackWrong": "Gerade unter Druck ist Vorsicht wichtig. Sende keine privaten Daten.",
-        "feedbackCorrect": "Richtig. Private Daten bleiben privat – auch wenn jemand Druck macht.",
+        "feedbackWrong": [
+          "Der Zeitdruck ist gewollt, damit du nicht nachdenkst. Bei einem echten Gewinn hättest du Zeit.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Deine Daten bleiben bei dir, und TikTok kann den Kommentar prüfen."
+        ],
+        "feedbackCorrect": "Der Zeitdruck ist gewollt. Private Daten sendest du nicht unter Druck.",
         "remember": "Unter Druck sende ich keine privaten Daten."
       }
     },
     "tiktok/kurz/Was du bei TikTok siehst": {
       "einfach": {
-        "question": "Bei TikTok machen viele einen gefährlichen Trend nach. Was tust du?",
+        "question": "Bei TikTok springen viele von einer hohen Mauer, und ein Freund schreibt dir: Mach auch ein Video davon. Was machst du?",
         "answers": [
           "Ich mache nicht mit.",
-          "Ich mache mit, weil es alle machen."
+          "Ich mache mit, weil es ja alle machen.",
+          "Ich mache ein anderes Video ohne Gefahr."
         ],
-        "feedbackWrong": "Ein gefährlicher Trend kann dich verletzen, und du musst nicht mitmachen.",
-        "feedbackCorrect": "Genau. Du entscheidest selbst, ob du mitmachst.",
+        "feedbackWrong": [
+          null,
+          "Viele Videos heißen nicht, dass etwas sicher ist. Du siehst nur die Sprünge, bei denen nichts passiert ist.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann bist du dabei, aber ohne Risiko. Du entscheidest selbst."
+        ],
+        "feedbackCorrect": "Genau. Du entscheidest selbst und musst bei keinem Trend mitmachen. Deine Gesundheit ist wichtiger.",
         "remember": "Ich muss bei keinem Trend mitmachen."
       },
       "standard": {
-        "question": "Auf TikTok machen viele einen gefährlichen Trend nach. Was tust du?",
+        "question": "Auf TikTok springen viele von einer hohen Mauer, und ein Freund schreibt dir: Mach auch ein Video davon. Was machst du?",
         "answers": [
           "Ich mache nicht mit.",
-          "Ich mache mit, weil es ja alle machen."
+          "Ich mache mit, es machen ja alle.",
+          "Ich mache ein anderes Video – ohne Gefahr."
         ],
-        "feedbackWrong": "Gefährliche Trends können dich verletzen – mitmachen musst du nicht.",
-        "feedbackCorrect": "Richtig. Du entscheidest selbst, ob du mitmachst.",
+        "feedbackWrong": [
+          null,
+          "Viele Videos bedeuten nicht, dass etwas sicher ist. Du siehst nur die Sprünge, die gut gegangen sind.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann bist du dabei, aber ohne Risiko. Du entscheidest selbst."
+        ],
+        "feedbackCorrect": "Du entscheidest selbst und musst bei keinem Trend mitmachen. Deine Gesundheit geht vor.",
         "remember": "Bei keinem Trend muss ich mitmachen."
       }
     },
     "tiktok/kurz/Nachrichten auf TikTok": {
       "einfach": {
-        "question": "Eine Person aus den Kommentaren schreibt dir privat. Du kennst sie nicht. Was tust du?",
+        "question": "Du postest ein Tanz-Video. Jemand aus den Kommentaren schreibt dir privat: Tolles Video. Wollen wir uns treffen? Du kennst die Person nicht. Was machst du?",
         "answers": [
-          "Ich antworte kurz, damit die Person nicht wartet.",
-          "Ich antworte nicht und zeige die Nachricht jemandem."
+          "Ich antworte kurz, weil das höflich ist.",
+          "Ich antworte nicht.",
+          "Ich blockiere die Person."
         ],
-        "feedbackWrong": "Auch eine kurze Antwort ist ein Anfang für ein Gespräch. Antworte lieber gar nicht.",
-        "feedbackCorrect": "Gut. Du antwortest nicht und zeigst die Nachricht einer Person, der du vertraust.",
-        "remember": "Nachrichten von Unbekannten zeige ich jemandem."
+        "feedbackWrong": [
+          "Du kennst die Person nicht, und nach einer Antwort schreibt sie oft weiter. Du musst nicht höflich sein.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kann dir die Person nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Genau. Du kennst die Person nicht und musst nicht antworten. Du entscheidest selbst, mit wem du schreibst.",
+        "remember": "Fremden Profilen muss ich nicht antworten."
       },
       "standard": {
-        "question": "Eine unbekannte Person aus den Kommentaren schreibt dir privat. Was tust du?",
+        "question": "Du postest ein Tanzvideo. Jemand aus den Kommentaren schreibt dir privat: Tolles Video. Wollen wir uns treffen? Du kennst die Person nicht. Was machst du?",
         "answers": [
-          "Ich antworte kurz, damit sie nicht wartet.",
-          "Ich antworte nicht und zeige es jemandem."
+          "Ich antworte kurz, das ist höflich.",
+          "Ich antworte nicht.",
+          "Ich blockiere die Person."
         ],
-        "feedbackWrong": "Auch eine kurze Antwort eröffnet ein Gespräch. Antworte lieber gar nicht.",
-        "feedbackCorrect": "Richtig. Du antwortest nicht und holst dir eine zweite Meinung.",
-        "remember": "Nachrichten von Unbekannten zeige ich einer Vertrauensperson."
+        "feedbackWrong": [
+          "Du kennst die Person nicht, und nach einer Antwort schreibt sie oft weiter. Höflich sein musst du hier nicht.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Danach kann dir die Person nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Du kennst die Person nicht und musst nicht antworten. Du entscheidest selbst, mit wem du schreibst.",
+        "remember": "Fremden Profilen muss ich nicht antworten."
       }
     },
     "tiktok/kurz/Pause machen": {
       "einfach": {
-        "question": "Du willst nicht zu lange TikTok schauen. Was hilft dir beim Aufhören?",
+        "question": "Du willst heute Abend nur 30 Minuten TikTok schauen, aber du weißt, dass du oft die Zeit vergisst. Was machst du vorher?",
         "answers": [
-          "Ein Timer, der mich erinnert.",
-          "Ich warte, bis die App aufhört."
+          "Nichts, weil ich das schon selbst merke.",
+          "Ich stelle in TikTok die Pausen-Erinnerung ein.",
+          "Ich stelle einen Timer auf 30 Minuten."
         ],
-        "feedbackWrong": "Die App hört nicht von selbst auf. Ein Timer erinnert dich. Auch in TikTok kannst du eine Pausen-Erinnerung einstellen.",
-        "feedbackCorrect": "Genau. Ein Timer erinnert dich daran, aufzuhören.",
+        "feedbackWrong": [
+          "Die App hört nicht von selbst auf, und beim Schauen vergisst man leicht die Zeit. Ein Timer erinnert dich.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann erinnert dich TikTok selbst an die Pause.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Ein Timer erinnert dich, denn die App hört nicht von selbst auf.",
         "remember": "Ich stelle einen Timer."
       },
       "standard": {
-        "question": "Du willst nicht zu lange auf TikTok bleiben. Was hilft dir beim Aufhören?",
+        "question": "Du willst heute Abend nur 30 Minuten TikTok schauen, weißt aber, dass du oft die Zeit vergisst. Was machst du vorher?",
         "answers": [
-          "Ein Timer, der mich erinnert.",
-          "Warten, bis die App von selbst aufhört."
+          "Nichts, das merke ich schon selbst.",
+          "Ich stelle in TikTok die Pausen-Erinnerung ein.",
+          "Ich stelle einen Timer auf 30 Minuten."
         ],
-        "feedbackWrong": "Die App hört nicht von selbst auf – ein Timer erinnert dich. Auch TikTok selbst bietet eine Pausen-Erinnerung.",
-        "feedbackCorrect": "Richtig. Ein Timer erinnert dich ans Aufhören.",
+        "feedbackWrong": [
+          "Die App hört nicht von selbst auf, und beim Schauen vergisst man leicht die Zeit. Ein Timer erinnert dich.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann erinnert dich TikTok selbst an die Pause.",
+          null
+        ],
+        "feedbackCorrect": "Ein Timer erinnert dich – die App hört nicht von selbst auf.",
         "remember": "Ich stelle mir einen Timer."
       }
     },
@@ -7578,265 +8178,485 @@ const AUFGABEN_VERSIONS = {
     },
     "fakes/lang/Was sind Fake News?": {
       "einfach": {
-        "question": "Man hört oft das Wort Fake News. Was ist damit gemeint?",
+        "question": "Eine Zeitung schreibt: Das Konzert ist am Samstag. Am nächsten Tag schreibt sie: Entschuldigung, es ist am Sonntag. War das eine Fake-Nachricht?",
         "answers": [
-          "Ein Fehler in einer Nachricht, der aus Versehen passiert.",
-          "Falsche Nachrichten, die jemand mit Absicht verbreitet."
+          "Ja, weil die Zeitung etwas Falsches geschrieben hat.",
+          "Nein, das war ein Fehler aus Versehen.",
+          "Ja, weil jede falsche Nachricht eine Lüge ist."
         ],
-        "feedbackWrong": "Ein Irrtum kann passieren. Fake News macht jemand aber mit Absicht.",
-        "feedbackCorrect": "Genau. Fake News sind falsche Nachrichten, die jemand mit Absicht verbreitet.",
+        "feedbackWrong": [
+          "Die Zeitung hat aus Versehen einen Fehler gemacht und ihn verbessert. Fake News macht jemand mit Absicht.",
+          null,
+          "Ein Fehler ist keine Lüge, denn eine Lüge ist Absicht. Die Zeitung hat ihren Fehler selbst verbessert."
+        ],
+        "feedbackCorrect": "Genau. Ein Irrtum passiert aus Versehen, Fake News macht jemand mit Absicht. Das ist der Unterschied.",
         "remember": "Nicht jede Nachricht im Internet ist wahr."
       },
       "standard": {
-        "question": "Was ist mit dem Begriff Fake News gemeint?",
+        "question": "Eine Zeitung schreibt: Das Konzert ist am Samstag. Am nächsten Tag schreibt sie: Entschuldigung, es ist am Sonntag. War das eine Fake-Nachricht?",
         "answers": [
-          "Ein Fehler in einer Meldung, der versehentlich passiert.",
-          "Falschmeldungen, die jemand absichtlich verbreitet."
+          "Ja, die Zeitung hat ja etwas Falsches geschrieben.",
+          "Nein, das war ein Fehler aus Versehen.",
+          "Ja, jede falsche Nachricht ist eine Lüge."
         ],
-        "feedbackWrong": "Ein Irrtum kann passieren – Fake News werden dagegen bewusst gemacht.",
-        "feedbackCorrect": "Richtig. Fake News sind absichtlich verbreitete Falschmeldungen.",
+        "feedbackWrong": [
+          "Die Zeitung hat sich geirrt und den Fehler berichtigt. Fake News verbreitet jemand mit Absicht.",
+          null,
+          "Ein Fehler ist keine Lüge – eine Lüge ist Absicht. Die Zeitung hat ihren Fehler selbst berichtigt."
+        ],
+        "feedbackCorrect": "Ein Irrtum passiert aus Versehen, Fake News verbreitet jemand mit Absicht. Das ist der Unterschied.",
         "remember": "Nicht jede Nachricht im Internet ist wahr."
       }
     },
     "fakes/lang/Warum gibt es Fake News?": {
       "einfach": {
-        "question": "Warum denken sich Menschen Fake News aus?",
+        "question": "Eine Seite bringt jeden Tag unglaubliche Nachrichten, und daneben steht sehr viel Werbung. Warum macht die Seite das wahrscheinlich?",
         "answers": [
-          "Zum Beispiel, um mit vielen Aufrufen Geld zu verdienen.",
-          "Das passiert eigentlich immer nur aus Versehen, ohne Ziel."
+          "Sie verdient Geld mit vielen Aufrufen.",
+          "Sie will mich gut informieren.",
+          "Das passiert aus Versehen, denn niemand will das."
         ],
-        "feedbackWrong": "Fake News passieren nicht aus Versehen. Es steckt immer ein Ziel dahinter.",
-        "feedbackCorrect": "Genau. Häufige Ziele sind Geld, Wut oder eine bestimmte Meinung.",
+        "feedbackWrong": [
+          null,
+          "Unglaubliche Nachrichten bringen viele Aufrufe, und viele Aufrufe bringen Geld durch Werbung. Um die Wahrheit geht es dabei nicht.",
+          "Aus Versehen passiert das nicht jeden Tag. Es steckt ein Ziel dahinter."
+        ],
+        "feedbackCorrect": "Genau. Viele Aufrufe bringen Geld durch Werbung. Fake News haben also ein Ziel.",
         "remember": "Fake News haben ein Ziel."
       },
       "standard": {
-        "question": "Aus welchem Grund werden Fake News gemacht?",
+        "question": "Eine Seite bringt täglich unglaubliche Nachrichten, daneben steht sehr viel Werbung. Warum macht die Seite das vermutlich?",
         "answers": [
-          "Zum Beispiel, um mit vielen Klicks Geld zu verdienen.",
-          "Meistens passiert das ganz einfach nur aus Versehen."
+          "Sie verdient Geld mit vielen Aufrufen.",
+          "Sie will mich gut informieren.",
+          "Das passiert aus Versehen, niemand will das wirklich."
         ],
-        "feedbackWrong": "Fake News entstehen nicht aus Versehen – dahinter steckt ein Ziel.",
-        "feedbackCorrect": "Richtig. Häufige Ziele sind Geld, Empörung oder eine bestimmte Meinung.",
+        "feedbackWrong": [
+          null,
+          "Unglaubliche Nachrichten bringen viele Aufrufe, und viele Aufrufe bringen Werbegeld. Um die Wahrheit geht es dabei nicht.",
+          "Aus Versehen passiert das nicht jeden Tag. Dahinter steckt ein Ziel."
+        ],
+        "feedbackCorrect": "Viele Aufrufe bringen Geld durch Werbung. Fake News verfolgen also ein Ziel.",
         "remember": "Hinter Fake News steckt ein Ziel."
       }
     },
     "fakes/lang/KI-Bilder erkennen": {
       "einfach": {
-        "question": "Du siehst im Internet ein unglaubliches Foto, zum Beispiel einen Hai auf der Autobahn. Was ist besser?",
+        "question": "Du siehst ein Foto: Ein Hai schwimmt auf einer überfluteten Autobahn. Du findest keinen Fehler im Bild. Was machst du?",
         "answers": [
-          "Ich glaube das Foto sofort, es sieht echt aus.",
-          "Ich bleibe erst einmal vorsichtig."
+          "Ich glaube das Foto, weil ich ja keinen Fehler sehe.",
+          "Ich suche, ob auch Nachrichten-Seiten das Foto zeigen.",
+          "Ich glaube es nicht sofort, weil es gefälscht sein kann."
         ],
-        "feedbackWrong": "KI kann Fotos fälschen, auch solche, die sehr echt aussehen.",
-        "feedbackCorrect": "Gut. Ein Foto ist kein sicherer Beweis mehr, denn KI kann Fotos fälschen.",
+        "feedbackWrong": [
+          "Viele KI-Bilder haben keine Fehler mehr. Dass du keinen Fehler findest, heißt nicht, dass das Foto echt ist.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist eine gute Prüfung. Über echte Ereignisse berichten mehrere bekannte Seiten.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Ein Foto ist kein Beweis mehr, denn KI kann Fotos fälschen, auch ohne sichtbare Fehler.",
         "remember": "Ein Foto kann gefälscht sein."
       },
       "standard": {
-        "question": "Im Internet siehst du ein unglaubliches Foto – etwa einen Hai auf der Autobahn. Was ist besser?",
+        "question": "Du siehst ein Foto: Ein Hai schwimmt auf einer überfluteten Autobahn. Einen Fehler findest du im Bild nicht. Was machst du?",
         "answers": [
-          "Ich glaube das Foto sofort – es wirkt echt.",
-          "Ich bleibe erst einmal skeptisch."
+          "Ich glaube das Foto, ich sehe ja keinen Fehler.",
+          "Ich suche, ob auch Nachrichtenseiten das Foto zeigen.",
+          "Ich glaube es nicht sofort, es kann gefälscht sein."
         ],
-        "feedbackWrong": "KI kann Fotos fälschen – auch solche, die völlig echt wirken.",
-        "feedbackCorrect": "Richtig. Ein Foto ist kein sicherer Beweis mehr; KI kann Bilder fälschen.",
+        "feedbackWrong": [
+          "Viele KI-Bilder haben keine Fehler mehr. Dass du keinen findest, heißt nicht, dass das Foto echt ist.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist eine gute Prüfung. Über echte Ereignisse berichten mehrere bekannte Seiten.",
+          null
+        ],
+        "feedbackCorrect": "Ein Foto ist kein Beweis mehr: KI kann Fotos fälschen, auch ohne sichtbare Fehler.",
         "remember": "Ein Foto kann gefälscht sein."
       }
     },
     "fakes/lang/Gefälschte Videos: Deepfakes": {
       "einfach": {
-        "question": "Eine bekannte Person verspricht in einem Video schnelles Geld mit einer App. Was ist besser?",
+        "question": "Du siehst ein Video, in dem eine bekannte Politikerin etwas sehr Schlimmes sagt. Viele sind wütend, aber das Video hat keine Quelle. Was machst du?",
         "answers": [
-          "Ich mache sofort mit, die Person ist ja bekannt.",
-          "Ich mache nicht mit, das Video kann gefälscht sein."
+          "Ich teile es nicht, weil das Video gefälscht sein kann.",
+          "Ich teile das Video, damit alle das sehen.",
+          "Ich prüfe, ob bekannte Nachrichten-Seiten darüber berichten."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Solche Videos sind oft Betrug mit gefälschten Videos.",
-        "feedbackCorrect": "Gut. Videos von bekannten Personen, die schnelles Geld versprechen, sind oft gefälscht. Mach da nicht mit.",
+        "feedbackWrong": [
+          null,
+          "Das Video kann ein Deepfake sein. KI kann Gesicht und Stimme austauschen, und vielleicht hat sie das nie gesagt.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist eine gute Prüfung. Über echte Aussagen berichten mehrere bekannte Seiten."
+        ],
+        "feedbackCorrect": "Genau. KI kann Gesicht und Stimme austauschen, deshalb können auch Videos gefälscht sein.",
         "remember": "Auch Videos können gefälscht sein."
       },
       "standard": {
-        "question": "Ein Promi verspricht in einem Video schnelles Geld mit einer App. Wie reagierst du?",
+        "question": "Du siehst ein Video, in dem eine bekannte Politikerin etwas sehr Schlimmes sagt. Viele sind empört, eine Quelle hat das Video nicht. Was machst du?",
         "answers": [
-          "Ich mache sofort mit – den Promi kennt doch jeder.",
-          "Ich mache nicht mit, das Video kann gefälscht sein."
+          "Ich teile es nicht, das Video kann gefälscht sein.",
+          "Ich teile das Video, das sollen alle sehen.",
+          "Ich prüfe, ob bekannte Nachrichtenseiten darüber berichten."
         ],
-        "feedbackWrong": "Das ist riskant – solche Videos sind oft Betrug mit Deepfakes.",
-        "feedbackCorrect": "Richtig. Promi-Videos mit Geldversprechen sind oft gefälscht – mach da nicht mit.",
+        "feedbackWrong": [
+          null,
+          "Das Video kann ein Deepfake sein: KI kann Gesicht und Stimme austauschen, und vielleicht hat sie das nie gesagt.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist eine gute Prüfung. Über echte Aussagen berichten mehrere bekannte Seiten."
+        ],
+        "feedbackCorrect": "KI kann Gesicht und Stimme austauschen, deshalb können auch Videos gefälscht sein.",
         "remember": "Auch Videos können gefälscht sein."
       }
     },
     "fakes/lang/Geklonte Stimmen am Telefon": {
       "einfach": {
-        "question": "Du bekommst einen Anruf. Die Stimme klingt wie dein Bruder, und er will sofort Geld. Was ist besser?",
+        "question": "Ein Anruf: Hier ist die Polizei. Ihr Sohn hatte einen Unfall und braucht sofort 3000 Euro. Im Hintergrund weint eine Stimme, die wie dein Sohn klingt. Was machst du?",
         "answers": [
-          "Ich zahle sofort, er klingt ja wie mein Bruder.",
-          "Ich lege auf und rufe meinen Bruder selbst an."
+          "Ich zahle, weil ich doch seine Stimme gehört habe.",
+          "Ich lege auf und rufe meinen Sohn selbst an.",
+          "Ich lege auf und rufe selbst die 110 an."
         ],
-        "feedbackWrong": "Das ist nicht sicher, denn die Stimme kann mit KI gefälscht sein.",
-        "feedbackCorrect": "Gut. Wenn du selbst zurückrufst, merkst du einen Betrug.",
+        "feedbackWrong": [
+          "Die Stimme kann mit KI gefälscht sein. Die echte Polizei fordert am Telefon nie Geld.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Bei der 110 erreichst du die echte Polizei und kannst nachfragen."
+        ],
+        "feedbackCorrect": "Genau. Du legst auf und rufst selbst an, und so merkst du den Betrug. Die echte Polizei fordert am Telefon nie Geld.",
         "remember": "Bei Geld-Anrufen lege ich auf und rufe selbst zurück."
       },
       "standard": {
-        "question": "Ein Anruf: Die Stimme klingt wie dein Bruder, und er will sofort Geld. Was ist besser?",
+        "question": "Ein Anruf: Hier ist die Polizei, Ihr Sohn hatte einen Unfall und braucht sofort 3000 Euro. Im Hintergrund weint eine Stimme, die wie dein Sohn klingt. Was machst du?",
         "answers": [
-          "Ich zahle sofort – er klingt ja genau wie mein Bruder.",
-          "Ich lege auf und rufe meinen Bruder selbst an."
+          "Ich zahle, ich habe doch seine Stimme gehört.",
+          "Ich lege auf und rufe meinen Sohn selbst an.",
+          "Ich lege auf und wähle selbst die 110."
         ],
-        "feedbackWrong": "Das ist riskant – die Stimme kann mit KI gefälscht sein.",
-        "feedbackCorrect": "Richtig. Mit einem eigenen Rückruf deckst du den Betrug auf.",
+        "feedbackWrong": [
+          "Die Stimme kann mit KI gefälscht sein. Die echte Polizei fordert am Telefon nie Geld.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Unter der 110 erreichst du die echte Polizei und kannst nachfragen."
+        ],
+        "feedbackCorrect": "Du legst auf und rufst selbst an – so fliegt der Betrug auf. Die echte Polizei fordert am Telefon nie Geld.",
         "remember": "Bei Geldanrufen lege ich auf und rufe selbst zurück."
       }
     },
     "fakes/lang/Nachrichten prüfen": {
       "einfach": {
-        "question": "Eine schlimme Nachricht steht nur auf einer Internet-Seite, die du nicht kennst. Was ist besser?",
+        "question": "Jemand teilt eine Nachricht: Starker Sturm kommt, alle Züge fallen aus. Du schaust genau hin und siehst, dass die Nachricht von 2019 ist. Was machst du?",
         "answers": [
-          "Die Nachricht stimmt bestimmt, sie klingt ja ernst.",
-          "Ich prüfe, ob bekannte Seiten das auch melden."
+          "Ich sage alle Termine ab, weil der Sturm ja kommt.",
+          "Ich schaue bei der Bahn nach, ob heute Züge fahren.",
+          "Ich teile sie nicht, weil die Nachricht alt ist."
         ],
-        "feedbackWrong": "Eine einzige Quelle ist kein Beweis.",
-        "feedbackCorrect": "Gut. Wichtige Nachrichten stehen auf mehreren bekannten Nachrichten-Seiten.",
+        "feedbackWrong": [
+          "Die Nachricht ist alt, denn der Sturm war 2019. Schau erst nach, was heute gilt.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Die Bahn weiß am besten, was heute gilt.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Alte Nachrichten wirken oft wie neu. Das Datum zeigt dir, dass die Nachricht nicht mehr gilt.",
         "remember": "Ich prüfe Nachrichten bei bekannten Seiten."
       },
       "standard": {
-        "question": "Eine schlimme Nachricht steht nur auf einer Website, die du nicht kennst. Was ist besser?",
+        "question": "Jemand teilt eine Nachricht: Schwerer Sturm im Anmarsch, alle Züge fallen aus. Beim genauen Hinsehen merkst du: Die Nachricht ist von 2019. Was machst du?",
         "answers": [
-          "Sie stimmt bestimmt – sie klingt ja ernst.",
-          "Ich prüfe, ob bekannte Medien sie auch melden."
+          "Ich sage alle Termine ab, der Sturm kommt ja.",
+          "Ich sehe bei der Bahn nach, ob heute Züge fahren.",
+          "Ich teile sie nicht, die Nachricht ist alt."
         ],
-        "feedbackWrong": "Eine einzige Quelle ist kein Beweis.",
-        "feedbackCorrect": "Richtig. Über wichtige Ereignisse berichten mehrere bekannte Medien.",
+        "feedbackWrong": [
+          "Die Nachricht ist alt, der Sturm war 2019. Sieh erst nach, was heute gilt.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Die Bahn weiß am besten, was heute gilt.",
+          null
+        ],
+        "feedbackCorrect": "Alte Nachrichten wirken oft wie neu. Das Datum zeigt dir, dass die Nachricht nicht mehr gilt.",
         "remember": "Nachrichten prüfe ich bei bekannten Medien."
       }
     },
     "fakes/lang/Die Nachricht will dich aufregen": {
       "einfach": {
-        "question": "Du liest eine Nachricht, die dich sehr wütend macht. Was ist besser?",
+        "question": "Du liest: Die Stadt schließt alle Schwimm-Bäder für immer. Du gehst gern schwimmen und bist sehr wütend. Unter der Nachricht steht: Teile das sofort. Was machst du?",
         "answers": [
-          "Ich leite sie sofort an alle weiter.",
-          "Ich halte erst einmal an und prüfe sie."
+          "Ich prüfe erst, ob die Nachricht stimmt.",
+          "Ich teile es sofort, weil meine Wut doch richtig ist.",
+          "Ich warte bis morgen und schaue dann noch einmal."
         ],
-        "feedbackWrong": "Die Nachricht will dich wütend machen, damit du schnell teilst. Das ist der Trick.",
-        "feedbackCorrect": "Gut. Wenn du dich aufregst, hältst du erst an und prüfst.",
+        "feedbackWrong": [
+          null,
+          "Deine Gefühle sind richtig, aber die Nachricht will dich aufregen. Das ist der Trick. Prüf erst, ob sie stimmt.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Eine Nacht Abstand hilft, und morgen prüfst du in Ruhe."
+        ],
+        "feedbackCorrect": "Genau. Deine Wut ist richtig, aber bei Aufregung prüfst du erst. Die Nachricht will, dass du schnell teilst.",
         "remember": "Bei Aufregung prüfe ich erst."
       },
       "standard": {
-        "question": "Eine Nachricht macht dich richtig wütend. Was ist besser?",
+        "question": "Du liest: Die Stadt schließt alle Schwimmbäder für immer. Du gehst gern schwimmen und bist sehr wütend. Darunter steht: Teile das sofort. Was machst du?",
         "answers": [
-          "Sie sofort an alle weiterleiten.",
-          "Erst einmal innehalten und prüfen."
+          "Ich prüfe erst, ob die Nachricht stimmt.",
+          "Ich teile es sofort, meine Wut ist doch berechtigt.",
+          "Ich warte bis morgen und sehe dann noch einmal hin."
         ],
-        "feedbackWrong": "Die Nachricht soll dich wütend machen, damit du schnell teilst – genau das ist der Trick.",
-        "feedbackCorrect": "Richtig. Bei Aufregung hältst du zuerst inne und prüfst.",
+        "feedbackWrong": [
+          null,
+          "Deine Gefühle sind berechtigt, aber die Nachricht will dich aufregen – das ist der Trick. Prüf erst, ob sie stimmt.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Eine Nacht Abstand hilft, und morgen prüfst du in Ruhe."
+        ],
+        "feedbackCorrect": "Deine Wut ist berechtigt, aber bei Aufregung prüfst du erst. Die Nachricht will, dass du schnell teilst.",
         "remember": "Wenn ich mich aufrege, prüfe ich zuerst."
       }
     },
     "fakes/lang/Nicht einfach weiterleiten": {
       "einfach": {
-        "question": "Du bist nicht sicher, ob eine Nachricht stimmt. Was ist besser?",
+        "question": "Eine Freundin schickt dir: Achtung, in diesem Joghurt ist Glas. Schick das an alle. Du findest dazu nichts im Internet. Was machst du?",
         "answers": [
-          "Ich leite sie trotzdem weiter.",
-          "Ich leite sie nicht weiter."
+          "Ich schicke es weiter, weil es ja nicht schaden kann.",
+          "Ich schicke es nicht weiter.",
+          "Ich frage meine Freundin, woher sie das hat."
         ],
-        "feedbackWrong": "So verbreiten sich falsche Nachrichten immer weiter.",
-        "feedbackCorrect": "Gut. Wenn du unsicher bist, teilst du die Nachricht nicht.",
+        "feedbackWrong": [
+          "Eine falsche Warnung macht vielen Menschen Angst, und die Lüge verbreitet sich weiter. Im Zweifel teilst du nicht.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "So erfährst du, ob es eine echte Quelle gibt."
+        ],
+        "feedbackCorrect": "Genau. Du bist nicht sicher, und im Zweifel teilst du die Nachricht nicht.",
         "remember": "Im Zweifel teile ich nicht."
       },
       "standard": {
-        "question": "Du bist unsicher, ob eine Nachricht stimmt. Was ist besser?",
+        "question": "Eine Freundin schickt dir: Achtung, in diesem Joghurt ist Glas. Schick das an alle. Du findest dazu nichts im Internet. Was machst du?",
         "answers": [
-          "Sie trotzdem weiterleiten.",
-          "Sie nicht weiterleiten."
+          "Ich schicke es weiter, schaden kann es ja nicht.",
+          "Ich schicke es nicht weiter.",
+          "Ich frage meine Freundin, woher sie das hat."
         ],
-        "feedbackWrong": "So verbreiten sich Falschmeldungen immer weiter.",
-        "feedbackCorrect": "Richtig. Im Zweifel teilst du die Nachricht nicht.",
+        "feedbackWrong": [
+          "Eine falsche Warnung macht vielen Angst, und die Lüge verbreitet sich weiter. Im Zweifel teilst du nicht.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "So erfährst du, ob es eine echte Quelle gibt."
+        ],
+        "feedbackCorrect": "Du bist nicht sicher, und im Zweifel teilst du die Nachricht nicht.",
         "remember": "Im Zweifel teile ich nicht."
       }
     },
     "fakes/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "Eine Nachricht macht dich wütend, und unten steht: Sofort teilen! Was machst du?",
+        "question": "Dein Kollege zeigt dir eine Nachricht und ist sehr aufgeregt. Er sagt: Das musst du sofort teilen, sonst bist du schuld. Was machst du?",
         "answers": [
-          "Ich prüfe zuerst und teile im Zweifel nicht.",
-          "Sie wirkt wichtig, also teile ich sie sofort."
+          "Ich teile sie, weil ich nicht schuld sein will.",
+          "Ich schaue mit ihm zusammen nach, ob das stimmt.",
+          "Ich sage ihm, dass ich das erst prüfe."
         ],
-        "feedbackWrong": "Starke Gefühle verleiten dazu, schnell zu teilen. Prüfe lieber zuerst.",
-        "feedbackCorrect": "Gut. Starke Gefühle sind ein Warnzeichen und kein Grund, dich zu beeilen.",
+        "feedbackWrong": [
+          "Erst prüfen ist keine Schuld. Der Druck ist ein Warnzeichen, deshalb prüfst du zuerst.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Zu zweit sieht man mehr, und dein Kollege lernt das Prüfen gleich mit.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du lässt dich nicht drängen, und bei starken Gefühlen prüfst du zuerst.",
         "remember": "Bei starken Gefühlen prüfe ich zuerst."
       },
       "standard": {
-        "question": "Eine Nachricht macht dich wütend, und darunter steht: „Sofort teilen!“ Was tust du?",
+        "question": "Dein Kollege zeigt dir eine Nachricht und ist sehr aufgeregt. Er sagt: Das musst du sofort teilen, sonst bist du schuld. Was machst du?",
         "answers": [
-          "Ich prüfe zuerst und teile im Zweifel nicht.",
-          "Sie wirkt wichtig – also teile ich sie sofort."
+          "Ich teile sie, ich will nicht schuld sein.",
+          "Ich sehe mit ihm zusammen nach, ob das stimmt.",
+          "Ich sage ihm, dass ich das erst prüfe."
         ],
-        "feedbackWrong": "Starke Gefühle verleiten zum schnellen Teilen. Prüf lieber zuerst.",
-        "feedbackCorrect": "Richtig. Starke Gefühle sind ein Warnzeichen, kein Grund zur Eile.",
+        "feedbackWrong": [
+          "Erst zu prüfen ist keine Schuld. Der Druck ist ein Warnzeichen – deshalb prüfst du zuerst.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Zu zweit sieht man mehr, und dein Kollege lernt das Prüfen gleich mit.",
+          null
+        ],
+        "feedbackCorrect": "Du lässt dich nicht drängen, und bei starken Gefühlen prüfst du zuerst.",
         "remember": "Bei starken Gefühlen prüfe ich zuerst."
       }
     },
     "fakes/kurz/Was ist eine Fake-Nachricht?": {
       "einfach": {
-        "question": "Jemand sagt: Das ist eine Fake-Nachricht. Was bedeutet das?",
+        "question": "Du liest auf dem Handy: Ab Montag ist Bargeld in Deutschland verboten. Die Nachricht sieht aus wie von einer echten Zeitung. Was machst du?",
         "answers": [
-          "Es ist eine lustige Nachricht.",
-          "Es ist eine falsche Nachricht."
+          "Ich glaube es, weil es wie eine echte Nachricht aussieht.",
+          "Ich bleibe ruhig, denn das kann eine Fake-Nachricht sein.",
+          "Ich schaue auf der Seite der Zeitung nach."
         ],
-        "feedbackWrong": "Lustig kann sie auch sein. Wichtig ist aber, dass sie nicht stimmt.",
-        "feedbackCorrect": "Genau. Eine Fake-Nachricht sieht echt aus, aber sie stimmt nicht.",
+        "feedbackWrong": [
+          "Fake-Nachrichten sehen oft echt aus, und genau das ist der Trick. Das Aussehen ist kein Beweis.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann siehst du, ob die Nachricht dort wirklich steht."
+        ],
+        "feedbackCorrect": "Genau. Eine Fake-Nachricht sieht echt aus, stimmt aber nicht. Deshalb glaubst du sie nicht sofort.",
         "remember": "Fake-Nachrichten sind Lügen."
       },
       "standard": {
-        "question": "Jemand sagt: „Das ist eine Fake-Nachricht.“ Was bedeutet das?",
+        "question": "Du liest auf dem Handy: Ab Montag ist Bargeld in Deutschland verboten. Die Nachricht sieht aus wie von einer echten Zeitung. Was machst du?",
         "answers": [
-          "Es ist eine lustige Nachricht.",
-          "Es ist eine falsche Nachricht."
+          "Ich glaube es, es sieht ja wie eine echte Nachricht aus.",
+          "Ich bleibe ruhig, das kann eine Fake-Nachricht sein.",
+          "Ich sehe auf der Website der Zeitung nach."
         ],
-        "feedbackWrong": "Lustig kann sie auch sein – entscheidend ist, dass sie nicht stimmt.",
-        "feedbackCorrect": "Richtig. Eine Fake-Nachricht wirkt echt, stimmt aber nicht.",
+        "feedbackWrong": [
+          "Fake-Nachrichten sehen oft echt aus – genau das ist der Trick. Das Aussehen beweist nichts.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann siehst du, ob die Nachricht dort wirklich steht."
+        ],
+        "feedbackCorrect": "Eine Fake-Nachricht sieht echt aus, stimmt aber nicht. Deshalb glaubst du sie nicht sofort.",
         "remember": "Fake-Nachrichten sind Lügen."
       }
     },
     "fakes/kurz/Wie erkennst du Fakes?": {
       "einfach": {
-        "question": "Eine Nachricht regt dich sehr auf. Was kann das bedeuten?",
+        "question": "Du liest: In deinem Stadt-Teil laufen Einbrecher herum. Schließ alle Türen ab und teile das sofort. Du bekommst Angst. Was machst du?",
         "answers": [
-          "Das kann ein Warnzeichen sein, und ich mache Stopp.",
-          "Dann ist die Nachricht besonders wichtig und echt."
+          "Ich mache Stopp und prüfe die Nachricht erst.",
+          "Ich teile es sofort, damit alle gewarnt sind.",
+          "Ich schaue bei der Polizei nach, ob das dort auch steht."
         ],
-        "feedbackWrong": "Die Aufregung ist oft Absicht, denn sie soll dich vom Nachdenken abhalten.",
-        "feedbackCorrect": "Genau. Große Aufregung ist ein Warnzeichen. Dann machst du Stopp.",
+        "feedbackWrong": [
+          null,
+          "Die Nachricht macht Angst, und das ist oft Absicht. Angst soll das Nachdenken verhindern. Prüf die Nachricht erst.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Die Polizei weiß das am besten, und dort stehen echte Warnungen."
+        ],
+        "feedbackCorrect": "Genau. Große Aufregung ist ein Warnzeichen. Dann machst du Stopp und entscheidest erst danach.",
         "remember": "Aufregung ist ein Warnzeichen. Ich mache Stopp."
       },
       "standard": {
-        "question": "Eine Nachricht bringt dich sehr in Aufregung. Was kann das bedeuten?",
+        "question": "Du liest: In deinem Stadtteil sind Einbrecher unterwegs. Schließ alle Türen ab und teile das sofort. Du bekommst Angst. Was machst du?",
         "answers": [
-          "Ein mögliches Warnzeichen – ich mache Stopp.",
-          "Dass sie besonders wichtig und echt ist."
+          "Ich mache Stopp und prüfe die Nachricht erst.",
+          "Ich teile es sofort, alle sollen gewarnt sein.",
+          "Ich sehe bei der Polizei nach, ob das dort auch steht."
         ],
-        "feedbackWrong": "Die Aufregung ist oft gewollt – sie soll dich vom Nachdenken abhalten.",
-        "feedbackCorrect": "Richtig. Große Aufregung ist ein Warnzeichen – dann machst du Stopp.",
+        "feedbackWrong": [
+          null,
+          "Die Nachricht macht Angst, und das ist oft gewollt: Angst soll das Nachdenken verhindern. Prüf die Nachricht erst.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Die Polizei weiß das am besten, dort stehen echte Warnungen."
+        ],
+        "feedbackCorrect": "Große Aufregung ist ein Warnzeichen. Dann machst du Stopp und entscheidest erst danach.",
         "remember": "Aufregung ist ein Warnzeichen: Ich mache Stopp."
       }
     },
     "fakes/kurz/Was tust du bei Fakes?": {
       "einfach": {
-        "question": "Du merkst, dass eine Nachricht ein Fake ist. Was tust du?",
+        "question": "In deiner Familien-Gruppe steht eine Nachricht, und du hast geprüft: Sie ist falsch. Was machst du?",
         "answers": [
-          "Ich schicke sie weiter und warne damit alle.",
-          "Ich schicke sie nicht weiter."
+          "Ich leite sie weiter und schreibe dazu, dass sie falsch ist.",
+          "Ich schreibe in die Gruppe, dass die Nachricht nicht stimmt.",
+          "Ich leite sie nicht weiter."
         ],
-        "feedbackWrong": "Auch als Warnung verbreitest du die falsche Nachricht weiter. Zeig sie lieber nur einer vertrauten Person.",
-        "feedbackCorrect": "Genau. Du leitest die Fake-Nachricht nicht weiter.",
+        "feedbackWrong": [
+          "Auch eine Warnung verbreitet die Lüge weiter. Schreib lieber nur, dass die Nachricht nicht stimmt.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "So wissen die anderen Bescheid, und die Lüge geht nicht weiter.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du leitest die Nachricht nicht weiter, und so verbreitet sich die Lüge nicht.",
         "remember": "Fakes leite ich nicht weiter."
       },
       "standard": {
-        "question": "Du erkennst, dass eine Nachricht gefälscht ist. Was tust du?",
+        "question": "In deiner Familiengruppe steht eine Nachricht, und du hast geprüft: Sie ist falsch. Was machst du?",
         "answers": [
-          "Ich leite sie weiter und warne damit alle.",
+          "Ich leite sie weiter und schreibe dazu, dass sie falsch ist.",
+          "Ich schreibe in die Gruppe, dass die Nachricht nicht stimmt.",
           "Ich leite sie nicht weiter."
         ],
-        "feedbackWrong": "Auch als Warnung verbreitest du die Falschmeldung weiter. Zeig sie lieber nur einer Vertrauensperson.",
-        "feedbackCorrect": "Richtig. Du leitest die Fake-Nachricht nicht weiter.",
+        "feedbackWrong": [
+          "Auch eine Warnung verbreitet die Lüge weiter. Schreib lieber nur, dass die Nachricht nicht stimmt.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "So wissen die anderen Bescheid, und die Lüge wandert nicht weiter.",
+          null
+        ],
+        "feedbackCorrect": "Du leitest die Nachricht nicht weiter, und so verbreitet sich die Lüge nicht.",
         "remember": "Fakes leite ich nicht weiter."
       }
     },
@@ -8166,265 +8986,455 @@ const AUFGABEN_VERSIONS = {
     },
     "ki/lang/Was ist KI?": {
       "einfach": {
-        "question": "Du schreibst mit einer KI, und sie antwortet sofort. Was ist eine KI?",
+        "question": "Du fragst eine KI nach einem Rezept für Apfel-Kuchen, und nach 2 Sekunden ist die Antwort da. Wie macht die KI das?",
         "answers": [
-          "Ein Computer-Programm.",
-          "Ein Mensch, der sehr schnell tippt."
+          "Ein Mensch tippt die Antwort sehr schnell.",
+          "Das Programm hat sehr viele Texte gelernt.",
+          "Die KI kennt mich und weiß, was ich mag."
         ],
-        "feedbackWrong": "Hinter der Antwort sitzt kein Mensch. Es ist ein Programm, das Texte erstellt.",
-        "feedbackCorrect": "Genau. Eine KI ist ein Computer-Programm, das aus sehr vielen Texten gelernt hat.",
+        "feedbackWrong": [
+          "Da sitzt kein Mensch, denn so schnell tippt niemand. Es ist ein Programm.",
+          null,
+          "Die KI kennt dich nicht. Sie hat viele Rezepte gelernt und baut daraus eine Antwort."
+        ],
+        "feedbackCorrect": "Genau. KI ist ein Programm, das sehr viele Texte gelernt hat. Daraus baut es schnell eine Antwort.",
         "remember": "KI ist ein Programm, kein Mensch."
       },
       "standard": {
-        "question": "Eine KI beantwortet deine Frage in Sekunden. Was ist eine KI?",
+        "question": "Du fragst eine KI nach einem Rezept für Apfelkuchen, und nach zwei Sekunden ist die Antwort da. Wie macht die KI das?",
         "answers": [
-          "Ein Computerprogramm.",
-          "Ein Mensch, der sehr schnell tippt."
+          "Ein Mensch tippt die Antwort sehr schnell.",
+          "Das Programm hat sehr viele Texte gelernt.",
+          "Die KI kennt mich und weiß, was ich mag."
         ],
-        "feedbackWrong": "Hinter der Antwort sitzt kein Mensch, sondern ein Programm, das Text erzeugt.",
-        "feedbackCorrect": "Richtig. Eine KI ist ein Computerprogramm, das aus riesigen Textmengen gelernt hat.",
+        "feedbackWrong": [
+          "Da sitzt kein Mensch – so schnell tippt niemand. Es ist ein Programm.",
+          null,
+          "Die KI kennt dich nicht. Sie hat viele Rezepte gelernt und setzt daraus eine Antwort zusammen."
+        ],
+        "feedbackCorrect": "KI ist ein Programm, das sehr viele Texte gelernt hat. Daraus setzt es schnell eine Antwort zusammen.",
         "remember": "KI ist ein Programm, kein Mensch."
       }
     },
     "ki/lang/Wo triffst du KI?": {
       "einfach": {
-        "question": "Wo kann dir KI im Alltag begegnen?",
+        "question": "In WhatsApp siehst du einen neuen blauen Kreis. Du tippst darauf, und ein Chat geht auf: Frag Meta AI. Was ist das?",
         "answers": [
-          "Nur in besonderen Apps, auf denen KI steht.",
-          "In vielen Apps, auch wenn ich es nicht sehe."
+          "Eine KI, die in WhatsApp eingebaut ist.",
+          "Ein neuer Kontakt, also ein Mensch von WhatsApp.",
+          "Ein Fehler, deshalb lösche ich lieber WhatsApp."
         ],
-        "feedbackWrong": "KI steckt heute auch in Apps, die du jeden Tag nutzt, zum Beispiel in WhatsApp.",
-        "feedbackCorrect": "Genau. KI ist oft eingebaut, ohne dass man es merkt.",
+        "feedbackWrong": [
+          null,
+          "Meta AI ist kein Mensch, sondern eine KI, die in WhatsApp eingebaut ist.",
+          "Das ist kein Fehler, und du musst WhatsApp nicht löschen. Du musst die KI auch nicht benutzen."
+        ],
+        "feedbackCorrect": "Genau. KI ist in vielen Apps eingebaut, und du entscheidest selbst, ob du sie benutzen willst.",
         "remember": "KI ist in vielen Apps."
       },
       "standard": {
-        "question": "Wo begegnet dir KI im Alltag?",
+        "question": "In WhatsApp fällt dir ein neuer blauer Kreis auf. Du tippst darauf, und ein Chat öffnet sich: Frag Meta AI. Was ist das?",
         "answers": [
-          "Nur in Apps, auf denen ausdrücklich KI steht.",
-          "In vielen Apps – auch wenn ich es nicht sehe."
+          "Eine KI, die in WhatsApp eingebaut ist.",
+          "Ein neuer Kontakt, ein Mensch von WhatsApp.",
+          "Ein Fehler, ich lösche lieber WhatsApp."
         ],
-        "feedbackWrong": "KI steckt heute auch in Apps, die du täglich nutzt – etwa in WhatsApp oder Instagram.",
-        "feedbackCorrect": "Richtig. KI ist oft eingebaut, ohne dass man es merkt.",
+        "feedbackWrong": [
+          null,
+          "Meta AI ist kein Mensch, sondern eine KI, die in WhatsApp eingebaut ist.",
+          "Das ist kein Fehler, und löschen musst du WhatsApp nicht. Nutzen musst du die KI auch nicht."
+        ],
+        "feedbackCorrect": "KI ist in vielen Apps eingebaut, und du entscheidest selbst, ob du sie nutzen willst.",
         "remember": "KI steckt in vielen Apps."
       }
     },
     "ki/lang/Ein Chatbot ist kein Mensch": {
       "einfach": {
-        "question": "Ein Chatbot schreibt dir: Ich bin dein Freund. Was stimmt?",
+        "question": "Du bist abends oft allein und schreibst viel mit einem Chatbot. Er schreibt: Ich bin immer für dich da. Was machst du?",
         "answers": [
-          "Der Chatbot ist ein echter Freund.",
-          "Der Chatbot ist ein Programm."
+          "Ich erzähle ihm alle Sorgen, weil er mich am besten versteht.",
+          "Ich höre sofort auf, weil Chatbots gefährlich sind.",
+          "Ich schreibe weiter mit ihm, aber ich rufe auch eine Freundin an."
         ],
-        "feedbackWrong": "Der Chatbot kann nur so tun, als wäre er ein Freund. Er ist ein Programm ohne Gefühle.",
-        "feedbackCorrect": "Genau. Ein Chatbot ist ein Programm. Echte Freundinnen und Freunde sind Menschen.",
+        "feedbackWrong": [
+          "Der Chatbot klingt freundlich, aber er ist ein Programm ohne Gefühle. Wichtige Sorgen besprichst du mit einem Menschen.",
+          "Du darfst mit einem Chatbot schreiben. Wichtig ist nur, dass er keine Menschen ersetzt.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Der Chatbot ist ein Programm ohne Gefühle. Echte Menschen tun dir gut.",
         "remember": "Ein Chatbot ist kein Mensch."
       },
       "standard": {
-        "question": "Ein Chatbot schreibt dir: „Ich bin dein Freund.“ Was stimmt?",
+        "question": "Du bist abends oft allein und schreibst viel mit einem Chatbot. Er schreibt: Ich bin immer für dich da. Was machst du?",
         "answers": [
-          "Der Chatbot ist ein echter Freund.",
-          "Der Chatbot ist ein Programm."
+          "Ich erzähle ihm alle Sorgen, er versteht mich am besten.",
+          "Ich höre sofort auf, Chatbots sind gefährlich.",
+          "Ich schreibe weiter mit ihm, rufe aber auch eine Freundin an."
         ],
-        "feedbackWrong": "Ein Chatbot kann Freundschaft nur vortäuschen – er ist ein Programm ohne Gefühle.",
-        "feedbackCorrect": "Richtig. Ein Chatbot ist ein Programm; echte Freundschaft gibt es nur mit Menschen.",
+        "feedbackWrong": [
+          "Der Chatbot klingt freundlich, ist aber ein Programm ohne Gefühle. Wichtige Sorgen besprichst du mit einem Menschen.",
+          "Du darfst mit einem Chatbot schreiben. Wichtig ist nur, dass er keine Menschen ersetzt.",
+          null
+        ],
+        "feedbackCorrect": "Der Chatbot ist ein Programm ohne Gefühle. Echte Menschen tun dir gut.",
         "remember": "Ein Chatbot ist kein Mensch."
       }
     },
     "ki/lang/KI macht Fehler": {
       "einfach": {
-        "question": "Du fragst eine KI nach den Öffnungszeiten vom Amt. Die Antwort ist dir wichtig. Was ist besser?",
+        "question": "Du fragst eine KI, ob du ein Zimmer in deiner Wohnung vermieten darfst. Die KI antwortet lang und sehr sicher. Was machst du?",
         "answers": [
-          "Ich glaube die Antwort sofort, sie klingt sicher.",
-          "Ich prüfe die Antwort oder frage einen Menschen."
+          "Ich prüfe die Antwort an einer zweiten Stelle.",
+          "Ich glaube der Antwort, weil die KI ja sehr sicher klingt.",
+          "Ich frage meinen Vermieter."
         ],
-        "feedbackWrong": "KI kann Fehler machen, auch wenn sie sehr sicher klingt.",
-        "feedbackCorrect": "Gut. Wichtige Antworten prüfst du, zum Beispiel auf der Seite vom Amt. Oder du fragst einen Menschen.",
+        "feedbackWrong": [
+          null,
+          "KI klingt oft sicher, auch wenn sie Fehler macht. Bei einer wichtigen Frage prüfst du deshalb nach.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dein Vermieter weiß, was in deinem Vertrag gilt."
+        ],
+        "feedbackCorrect": "Genau. KI klingt oft sicher, auch wenn sie Fehler macht. Deshalb prüfst du wichtige Antworten nach.",
         "remember": "KI kann Fehler machen. Ich prüfe wichtige Antworten."
       },
       "standard": {
-        "question": "Du fragst eine KI nach den Öffnungszeiten eines Amts. Die Antwort ist dir wichtig. Was ist besser?",
+        "question": "Du fragst eine KI, ob du ein Zimmer deiner Wohnung vermieten darfst. Sie antwortet ausführlich und sehr bestimmt. Was machst du?",
         "answers": [
-          "Ich glaube sie sofort – sie klingt ja sicher.",
-          "Ich prüfe sie oder frage einen Menschen."
+          "Ich prüfe die Antwort an einer zweiten Stelle.",
+          "Ich glaube der Antwort, die KI klingt ja sehr sicher.",
+          "Ich frage meinen Vermieter."
         ],
-        "feedbackWrong": "KI kann Fehler machen, auch wenn sie sehr überzeugt klingt.",
-        "feedbackCorrect": "Richtig. Wichtige Antworten prüfst du – etwa auf der Website des Amts – oder fragst einen Menschen.",
+        "feedbackWrong": [
+          null,
+          "KI klingt oft sicher, auch wenn sie sich irrt. Bei einer wichtigen Frage prüfst du deshalb nach.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dein Vermieter weiß, was in deinem Vertrag gilt."
+        ],
+        "feedbackCorrect": "KI klingt oft sicher, auch wenn sie sich irrt. Deshalb prüfst du wichtige Antworten nach.",
         "remember": "KI kann sich irren. Wichtige Antworten prüfe ich."
       }
     },
     "ki/lang/So prüfst du eine Antwort": {
       "einfach": {
-        "question": "Eine KI nennt dir die Telefon-Nummer von deiner Arztpraxis. Was machst du?",
+        "question": "Du suchst die Telefon-Nummer deiner Bank, und die KI nennt dir eine Nummer. Was machst du?",
         "answers": [
-          "Ich rufe die Nummer gleich an, die KI weiß das sicher.",
-          "Ich prüfe, ob die Nummer auch woanders steht."
+          "Ich rufe sofort an, weil die KI sie ja gefunden hat.",
+          "Ich schaue auf der Seite meiner Bank nach.",
+          "Ich schaue in meinen Bank-Unterlagen nach."
         ],
-        "feedbackWrong": "KI erfindet manchmal Nummern. Schau deshalb erst nach, zum Beispiel auf der Seite von der Praxis.",
-        "feedbackCorrect": "Genau. Du prüfst die Nummer auf einer anderen Seite. So findest du Fehler.",
+        "feedbackWrong": [
+          "KI erfindet manchmal Nummern. Dann kann am Telefon auch ein Betrüger sein. Schau erst nach.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch dort steht die richtige Nummer deiner Bank."
+        ],
+        "feedbackCorrect": "Genau. Du prüfst, ob die Nummer auch woanders steht. So findest du Fehler.",
         "remember": "Ich stelle 3 Fragen. Dann weiß ich mehr."
       },
       "standard": {
-        "question": "Eine KI nennt dir die Telefonnummer deiner Arztpraxis. Was tust du?",
+        "question": "Du suchst die Telefonnummer deiner Bank, und die KI nennt dir eine. Was machst du?",
         "answers": [
-          "Ich rufe gleich an – die KI weiß das bestimmt.",
-          "Ich prüfe, ob die Nummer auch woanders steht."
+          "Ich rufe sofort an, die KI hat sie ja gefunden.",
+          "Ich sehe auf der Website meiner Bank nach.",
+          "Ich sehe in meinen Bankunterlagen nach."
         ],
-        "feedbackWrong": "KI erfindet manchmal Nummern. Prüf sie zuerst, etwa auf der Website der Praxis.",
-        "feedbackCorrect": "Richtig. Du gleichst die Nummer mit einer anderen Quelle ab – so findest du Fehler.",
+        "feedbackWrong": [
+          "KI erfindet manchmal Nummern. Dann kann am anderen Ende auch ein Betrüger sitzen. Sieh erst nach.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch dort steht die richtige Nummer deiner Bank."
+        ],
+        "feedbackCorrect": "Du prüfst, ob die Nummer auch an anderer Stelle steht. So fallen Fehler auf.",
         "remember": "Mit drei Fragen prüfe ich eine KI-Antwort."
       }
     },
     "ki/lang/Keine privaten Daten": {
       "einfach": {
-        "question": "Ein Chatbot fragt dich nach deiner Adresse, damit er dir besser helfen kann. Was ist besser?",
+        "question": "Du willst mit einer KI einen Brief an deinen Vermieter schreiben. Die KI fragt nach deinem Namen und deiner Adresse. Was machst du?",
         "answers": [
-          "Ich schreibe meine Adresse, er will ja helfen.",
-          "Ich schreibe meine Adresse nicht."
+          "Ich gebe Namen und Adresse ein, weil der Brief sonst nicht fertig wird.",
+          "Ich lasse die Stellen frei und fülle sie später selbst aus.",
+          "Ich schreibe Max Muster und setze meine Daten später selbst ein."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Deine Adresse ist privat, auch bei einer KI.",
-        "feedbackCorrect": "Gut. Deine privaten Daten bleiben bei dir, auch bei einer KI.",
+        "feedbackWrong": [
+          "Viele KI-Dienste speichern deine Nachrichten. Der Brief wird auch ohne deine Daten fertig, und du trägst sie später selbst ein.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch so bekommt die KI deine privaten Daten nicht.",
+          null
+        ],
+        "feedbackCorrect": "Genau. So hilft dir die KI beim Brief, und deine privaten Daten bleiben trotzdem bei dir.",
         "remember": "Ich gebe der KI keine privaten Daten."
       },
       "standard": {
-        "question": "Ein Chatbot fragt nach deiner Adresse, um dir angeblich besser helfen zu können. Was ist besser?",
+        "question": "Du willst mit einer KI einen Brief an deinen Vermieter schreiben. Die KI fragt nach deinem Namen und deiner Adresse. Was machst du?",
         "answers": [
-          "Ich gebe sie ein – er will ja helfen.",
-          "Ich gebe meine Adresse nicht ein."
+          "Ich gebe Namen und Adresse ein, sonst wird der Brief nicht fertig.",
+          "Ich lasse die Stellen frei und fülle sie später selbst aus.",
+          "Ich schreibe Max Mustermann und setze meine Daten später selbst ein."
         ],
-        "feedbackWrong": "Das ist riskant – deine Adresse ist privat, auch gegenüber einer KI.",
-        "feedbackCorrect": "Richtig. Private Daten behältst du für dich, auch bei einer KI.",
+        "feedbackWrong": [
+          "Viele KI-Dienste speichern deine Eingaben. Der Brief wird auch ohne deine Daten fertig – du trägst sie später selbst ein.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch so erhält die KI deine privaten Daten nicht.",
+          null
+        ],
+        "feedbackCorrect": "So hilft dir die KI beim Brief, und deine privaten Daten bleiben trotzdem bei dir.",
         "remember": "Einer KI gebe ich keine privaten Daten."
       }
     },
     "ki/lang/Gesundheit und Geld": {
       "einfach": {
-        "question": "Du hast seit Tagen Bauchschmerzen. Eine KI gibt dir einen Tipp. Was ist besser?",
+        "question": "Du hast 500 Euro gespart und fragst eine KI, was du mit dem Geld machen sollst. Die KI rät: Kauf davon Gold. Was machst du?",
         "answers": [
-          "Ich mache nur das, was die KI mir sagt, sonst nichts.",
-          "Ich frage auch eine Ärztin oder einen Arzt."
+          "Ich kaufe nichts und spreche erst mit meiner Bank.",
+          "Ich kaufe das Gold, weil die KI das ausgerechnet hat.",
+          "Ich frage die KI noch einmal, damit ich sicher bin."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Die KI kennt dich nicht und kann sich irren.",
-        "feedbackCorrect": "Gut. Bei der Gesundheit fragst du Fachleute, denn die KI ersetzt keine Ärztin und keinen Arzt.",
+        "feedbackWrong": [
+          null,
+          "Die KI kennt dich nicht und weiß nicht, wie viel Geld du brauchst. Bei Geld kann ein Fehler teuer werden.",
+          "Die KI antwortet vielleicht wieder falsch. Zweimal fragen macht eine Antwort nicht richtig."
+        ],
+        "feedbackCorrect": "Genau. Die KI kennt dich nicht. Bei Geld fragst du auch einen Menschen, zum Beispiel bei deiner Bank.",
         "remember": "Bei Gesundheit und Geld frage ich Menschen."
       },
       "standard": {
-        "question": "Du hast seit Tagen Bauchschmerzen, und eine KI gibt dir einen Rat. Was ist besser?",
+        "question": "Du hast 500 Euro gespart und fragst eine KI, was du mit dem Geld machen sollst. Die KI rät: Kauf davon Gold. Was machst du?",
         "answers": [
-          "Ich verlasse mich allein auf den Rat der KI.",
-          "Ich frage auch eine Ärztin oder einen Arzt."
+          "Ich kaufe nichts und spreche erst mit meiner Bank.",
+          "Ich kaufe das Gold, die KI hat das ja ausgerechnet.",
+          "Ich frage die KI noch einmal, dann bin ich sicher."
         ],
-        "feedbackWrong": "Das ist riskant – die KI kennt dich nicht und kann sich irren.",
-        "feedbackCorrect": "Richtig. Bei Gesundheitsfragen fragst du Fachleute; eine KI ersetzt keine ärztliche Beratung.",
+        "feedbackWrong": [
+          null,
+          "Die KI kennt dich nicht und weiß nicht, wie viel Geld du brauchst. Bei Geld kann ein Fehler teuer werden.",
+          "Die KI antwortet vielleicht wieder falsch. Zweimal fragen macht eine Antwort nicht richtiger."
+        ],
+        "feedbackCorrect": "Die KI kennt dich nicht. Bei Geld fragst du auch einen Menschen, etwa bei deiner Bank.",
         "remember": "Bei Gesundheit und Geld frage ich Menschen."
       }
     },
     "ki/lang/KI kann Bilder und Stimmen fälschen": {
       "einfach": {
-        "question": "Am Telefon klingt jemand genau wie deine Tochter und bittet dringend um Geld. Was tust du?",
+        "question": "Du bekommst eine Sprach-Nachricht, und die Stimme klingt wie dein Chef. Er sagt: Kauf bitte drei Gutschein-Karten und schick mir die Codes. Was machst du?",
         "answers": [
-          "Ich schicke das Geld, denn ich erkenne die Stimme.",
-          "Ich lege auf und rufe die bekannte Nummer an."
+          "Ich kaufe die Karten, weil mein Chef sie ja braucht.",
+          "Ich kaufe nichts und rufe meinen Chef selbst an.",
+          "Ich kaufe nichts und frage ihn morgen bei der Arbeit."
         ],
-        "feedbackWrong": "KI kann Stimmen nachmachen. Erst ein Rückruf unter der bekannten Nummer gibt dir Sicherheit.",
-        "feedbackCorrect": "Sehr gut. Du legst auf und rufst selbst zurück.",
+        "feedbackWrong": [
+          "KI kann Stimmen nachmachen, und Gutschein-Codes sind wie Geld. Betrüger fragen oft danach.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so merkst du, ob die Nachricht wirklich von ihm kam."
+        ],
+        "feedbackCorrect": "Genau. KI kann Stimmen nachmachen. Am Telefon merkst du, ob dein Chef das wirklich gesagt hat.",
         "remember": "Stimmen können gefälscht sein."
       },
       "standard": {
-        "question": "Am Telefon klingt jemand genau wie deine Tochter und bittet dringend um Geld. Wie reagierst du?",
+        "question": "Du bekommst eine Sprachnachricht, die Stimme klingt wie dein Chef: Kauf bitte drei Gutscheinkarten und schick mir die Codes. Was machst du?",
         "answers": [
-          "Ich schicke das Geld – ich erkenne doch die Stimme.",
-          "Ich lege auf und rufe die bekannte Nummer an."
+          "Ich kaufe die Karten, mein Chef braucht sie ja.",
+          "Ich kaufe nichts und rufe meinen Chef selbst an.",
+          "Ich kaufe nichts und frage ihn morgen bei der Arbeit."
         ],
-        "feedbackWrong": "KI kann Stimmen täuschend echt nachmachen. Erst ein Rückruf unter der bekannten Nummer schafft Sicherheit.",
-        "feedbackCorrect": "Sehr gut. Auflegen und selbst zurückrufen – so gehst du sicher.",
+        "feedbackWrong": [
+          "KI kann Stimmen nachahmen, und Gutscheincodes sind so gut wie Bargeld. Betrüger fragen oft danach.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so merkst du, ob die Nachricht wirklich von ihm kam."
+        ],
+        "feedbackCorrect": "KI kann Stimmen nachahmen. Am Telefon merkst du, ob dein Chef das wirklich gesagt hat.",
         "remember": "Stimmen können gefälscht sein."
       }
     },
     "ki/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "Eine KI rät dir, ein Medikament anders zu nehmen. Was machst du?",
+        "question": "Du hast seit drei Tagen Zahn-Schmerzen. Die KI schreibt: Nimm jeden Tag sechs Schmerz-Tabletten. Was machst du?",
         "answers": [
-          "Ich mache genau das, was die KI sagt.",
-          "Ich frage zusätzlich einen Menschen."
+          "Ich nehme die Tabletten so, weil die KI das weiß.",
+          "Ich frage in der Apotheke nach den Tabletten.",
+          "Ich gehe zur Zahn-Ärztin."
         ],
-        "feedbackWrong": "Eine KI kann sich irren. Frag bei der Gesundheit immer auch einen Menschen, zum Beispiel in der Apotheke.",
-        "feedbackCorrect": "Gut. Bei Gesundheit und Geld entscheiden Menschen mit.",
+        "feedbackWrong": [
+          "Die KI kennt dich nicht und kann sich irren. Zu viele Tabletten können dir schaden.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "In der Apotheke weiß man, wie viele Tabletten gut für dich sind.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Bei Gesundheit fragst du Fachleute, denn die KI ersetzt keine Ärztin.",
         "remember": "Bei Gesundheit und Geld frage ich einen Menschen."
       },
       "standard": {
-        "question": "Eine KI rät dir, ein Medikament anders einzunehmen. Was tust du?",
+        "question": "Du hast seit drei Tagen Zahnschmerzen. Die KI schreibt: Nimm täglich sechs Schmerztabletten. Was machst du?",
         "answers": [
-          "Ich folge genau dem Rat der KI.",
-          "Ich frage zusätzlich einen Menschen."
+          "Ich nehme die Tabletten so, die KI weiß das.",
+          "Ich frage in der Apotheke nach den Tabletten.",
+          "Ich gehe zur Zahnärztin."
         ],
-        "feedbackWrong": "Eine KI kann sich irren. Frag bei Gesundheitsfragen immer auch einen Menschen, etwa in der Apotheke.",
-        "feedbackCorrect": "Richtig. Bei Gesundheit und Geld entscheiden Menschen mit.",
+        "feedbackWrong": [
+          "Die KI kennt dich nicht und kann sich irren. Zu viele Tabletten können dir schaden.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "In der Apotheke weiß man, wie viele Tabletten für dich in Ordnung sind.",
+          null
+        ],
+        "feedbackCorrect": "Bei Gesundheit fragst du Fachleute – die KI ersetzt keine Ärztin.",
         "remember": "Bei Gesundheit und Geld frage ich einen Menschen."
       }
     },
     "ki/kurz/Was ist KI?": {
       "einfach": {
-        "question": "Eine KI schreibt mit dir wie ein Mensch. Ist sie ein Mensch?",
+        "question": "Du schreibst mit dem Chatbot deiner Kranken-Kasse. Er schreibt: Hallo, ich bin Mia. Wie kann ich helfen? Wer ist Mia?",
         "answers": [
-          "Nein, sie ist ein Programm.",
-          "Ja, sie schreibt ja mit mir."
+          "Ein Programm, das nur Mia heißt.",
+          "Eine Mitarbeiterin, weil sie ja einen Namen hat.",
+          "Das weiß ich nicht, deshalb frage ich: Bist du ein Mensch?"
         ],
-        "feedbackWrong": "Die KI schreibt zwar mit dir, aber sie ist ein Programm und kein Mensch.",
-        "feedbackCorrect": "Genau. Eine KI ist ein Programm und kein Mensch.",
+        "feedbackWrong": [
+          null,
+          "Viele Chatbots haben einen Namen, damit sie freundlich wirken. Mia ist trotzdem ein Programm und kein Mensch.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Du darfst nachfragen. Viele Chatbots sagen dann, dass sie ein Programm sind."
+        ],
+        "feedbackCorrect": "Genau. Mia ist ein Programm, und der Name macht den Chatbot nur freundlicher.",
         "remember": "KI ist ein Programm, kein Mensch."
       },
       "standard": {
-        "question": "Eine KI schreibt mit dir wie ein Mensch. Ist sie einer?",
+        "question": "Du schreibst mit dem Chatbot deiner Krankenkasse. Er meldet sich mit: Hallo, ich bin Mia. Wie kann ich helfen? Wer ist Mia?",
         "answers": [
-          "Nein, sie ist ein Programm.",
-          "Ja, sie schreibt ja mit mir."
+          "Ein Programm, das nur Mia heißt.",
+          "Eine Mitarbeiterin, sie hat ja einen Namen.",
+          "Das weiß ich nicht, ich frage: Bist du ein Mensch?"
         ],
-        "feedbackWrong": "Sie schreibt zwar mit dir, ist aber ein Programm – kein Mensch.",
-        "feedbackCorrect": "Richtig. Eine KI ist ein Programm, kein Mensch.",
+        "feedbackWrong": [
+          null,
+          "Viele Chatbots tragen einen Namen, damit sie freundlich wirken. Mia ist trotzdem ein Programm und kein Mensch.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Nachfragen ist erlaubt. Viele Chatbots antworten dann, dass sie ein Programm sind."
+        ],
+        "feedbackCorrect": "Mia ist ein Programm. Der Name soll den Chatbot nur freundlicher wirken lassen.",
         "remember": "KI ist ein Programm, kein Mensch."
       }
     },
     "ki/kurz/Was kann KI?": {
       "einfach": {
-        "question": "Eine KI gibt dir eine Antwort. Stimmt diese Antwort immer?",
+        "question": "Du fragst eine KI, wie lange das Bürger-Amt morgen geöffnet hat. Die KI schreibt: Von 8 bis 18 Uhr. Du willst morgen hingehen. Was machst du?",
         "answers": [
-          "Ja, die KI weiß wirklich alles.",
-          "Nein, ich prüfe wichtige Antworten."
+          "Ich gehe um 17 Uhr hin, weil die KI es ja gesagt hat.",
+          "Ich schaue auf der Seite vom Bürger-Amt nach.",
+          "Ich rufe beim Bürger-Amt an."
         ],
-        "feedbackWrong": "KI klingt sicher, auch wenn sie sich irrt. Deshalb hilft es, wichtige Antworten zu prüfen.",
-        "feedbackCorrect": "Genau. Wichtige Antworten prüfst du nach.",
+        "feedbackWrong": [
+          "KI klingt sicher, kann sich aber irren. Dann stehst du vielleicht vor einer geschlossenen Tür.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so erfährst du die Zeiten direkt vom Amt."
+        ],
+        "feedbackCorrect": "Genau. Das Amt weiß es am besten. Die KI war ein guter Anfang, aber wichtige Antworten prüfst du nach.",
         "remember": "KI-Antworten prüfe ich."
       },
       "standard": {
-        "question": "Eine KI gibt dir eine Antwort. Stimmt sie immer?",
+        "question": "Du fragst eine KI, wie lange das Bürgeramt morgen geöffnet hat. Sie antwortet: von 8 bis 18 Uhr. Du willst morgen hingehen. Was machst du?",
         "answers": [
-          "Ja, die KI weiß einfach alles.",
-          "Nein, wichtige Antworten prüfe ich."
+          "Ich gehe um 17 Uhr hin, die KI hat es ja gesagt.",
+          "Ich sehe auf der Website des Bürgeramts nach.",
+          "Ich rufe beim Bürgeramt an."
         ],
-        "feedbackWrong": "KI klingt überzeugt, auch wenn sie sich irrt – prüfen hilft.",
-        "feedbackCorrect": "Richtig. Wichtige Antworten prüfst du nach.",
+        "feedbackWrong": [
+          "KI klingt sicher, kann sich aber irren. Dann stehst du womöglich vor verschlossener Tür.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so erfährst du die Zeiten direkt vom Amt."
+        ],
+        "feedbackCorrect": "Das Amt weiß es am besten. Die KI war ein guter Anfang, aber wichtige Antworten prüfst du nach.",
         "remember": "Wichtige KI-Antworten prüfe ich."
       }
     },
     "ki/kurz/Wann musst du aufpassen?": {
       "einfach": {
-        "question": "Am Telefon klingt eine Stimme wie deine Schwester und will sofort Geld. Was tust du?",
+        "question": "Dein Telefon klingelt, und die Stimme klingt wie deine Schwester. Sie sagt: Ich hatte einen Unfall und brauche sofort 2000 Euro. Was machst du?",
         "answers": [
-          "Ich schicke das Geld schnell, sie klingt ja wie meine Schwester.",
+          "Ich überweise das Geld schnell, weil sie es ja braucht.",
+          "Ich bleibe am Telefon, weil ich erst mehr hören will.",
           "Ich lege auf und rufe meine Schwester selbst an."
         ],
-        "feedbackWrong": "KI kann Stimmen nachmachen. Die Stimme allein beweist nichts.",
-        "feedbackCorrect": "Genau. Du rufst die bekannte Nummer selbst an und kannst so nachfragen.",
+        "feedbackWrong": [
+          "KI kann Stimmen nachmachen, und die Stimme allein beweist nichts. Leg auf und ruf deine Schwester selbst an.",
+          "Betrüger machen am Telefon Druck, und langes Zuhören macht das Auflegen schwer. Leg lieber gleich auf.",
+          null
+        ],
+        "feedbackCorrect": "Genau. KI kann Stimmen nachmachen. Wenn du die bekannte Nummer selbst anrufst, kannst du nachfragen.",
         "remember": "Ich lege auf und rufe selbst an."
       },
       "standard": {
-        "question": "Am Telefon klingt jemand wie deine Schwester und will sofort Geld. Was tust du?",
+        "question": "Dein Telefon klingelt, die Stimme klingt wie deine Schwester: Ich hatte einen Unfall und brauche sofort 2000 Euro. Was machst du?",
         "answers": [
-          "Ich schicke das Geld schnell – sie klingt ja wie sie.",
+          "Ich überweise das Geld schnell, sie braucht es ja.",
+          "Ich bleibe dran, ich will erst mehr hören.",
           "Ich lege auf und rufe meine Schwester selbst an."
         ],
-        "feedbackWrong": "KI kann Stimmen nachahmen – die Stimme allein beweist nichts.",
-        "feedbackCorrect": "Richtig. Du rufst die bekannte Nummer selbst an und fragst nach.",
+        "feedbackWrong": [
+          "KI kann Stimmen nachahmen, die Stimme allein beweist nichts. Leg auf und ruf deine Schwester selbst an.",
+          "Betrüger machen am Telefon Druck, und je länger du zuhörst, desto schwerer fällt das Auflegen. Leg lieber gleich auf.",
+          null
+        ],
+        "feedbackCorrect": "KI kann Stimmen nachahmen. Rufst du die bekannte Nummer selbst an, kannst du nachfragen.",
         "remember": "Ich lege auf und rufe selbst zurück."
       }
     },
@@ -8788,244 +9798,454 @@ const AUFGABEN_VERSIONS = {
     },
     "instagram/lang/Foto posten": {
       "einfach": {
-        "question": "Du willst bei Instagram ein Foto posten. Was prüfst du, bevor du es teilst?",
+        "question": "Du hast ein Foto von deinem neuen Fahrrad gemacht. Im Hintergrund sieht man dein Haus mit der Haus-Nummer. Was machst du?",
         "answers": [
-          "Alles, was auf dem Foto zu sehen ist.",
-          "Nur, ob die Farben auf dem Foto schön sind."
+          "Ich poste es so, weil es ja nur um das Fahrrad geht.",
+          "Ich mache ein neues Foto, auf dem das Haus nicht zu sehen ist.",
+          "Ich schneide das Foto so zu, dass man nur das Fahrrad sieht."
         ],
-        "feedbackWrong": "Schöne Farben schützen dich nicht. Wichtig ist, was auf dem Foto zu sehen ist, zum Beispiel ein Straßenschild oder ein Brief.",
-        "feedbackCorrect": "Gut. Du schaust dir alles auf dem Foto genau an, auch den Hintergrund.",
+        "feedbackWrong": [
+          "Auf dem Foto sieht man auch dein Haus und die Haus-Nummer. Fremde Menschen wissen dann, wo du wohnst und wo das neue Fahrrad steht.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann ist das Haus nicht mehr auf dem Foto, und das geht schnell."
+        ],
+        "feedbackCorrect": "Genau. Auf dem neuen Foto sieht man nur das Fahrrad, und niemand sieht, wo du wohnst.",
         "remember": "Ich prüfe, was auf dem Foto zu sehen ist."
       },
       "standard": {
-        "question": "Du möchtest ein Foto auf Instagram posten. Was prüfst du vorher?",
+        "question": "Du hast dein neues Fahrrad fotografiert. Im Hintergrund ist dein Haus mit der Hausnummer zu sehen. Was machst du?",
         "answers": [
-          "Alles, was darauf zu erkennen ist.",
-          "Nur, ob die Farben gut wirken."
+          "Ich poste es so, es geht ja nur ums Fahrrad.",
+          "Ich mache ein neues Foto ohne das Haus.",
+          "Ich schneide es so zu, dass nur das Fahrrad zu sehen ist."
         ],
-        "feedbackWrong": "Die Farben schützen dich nicht. Entscheidend ist, was auf dem Foto zu erkennen ist – etwa ein Straßenschild oder ein Brief mit deiner Adresse.",
-        "feedbackCorrect": "Richtig. Du prüfst alles, was auf dem Foto zu sehen ist – auch den Hintergrund.",
+        "feedbackWrong": [
+          "Auf dem Foto sind auch dein Haus und die Hausnummer zu sehen. Fremde wissen dann, wo du wohnst und wo das neue Fahrrad steht.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann ist das Haus nicht mehr im Bild, und das geht schnell."
+        ],
+        "feedbackCorrect": "Auf dem neuen Foto ist nur das Fahrrad zu sehen, und niemand erfährt, wo du wohnst.",
         "remember": "Vor dem Posten prüfe ich, was auf dem Foto zu sehen ist."
       }
     },
     "instagram/lang/Andere Personen auf Fotos": {
       "einfach": {
-        "question": "Auf deinem Foto sieht man im Hintergrund eine andere Person. Was ist besser?",
+        "question": "Du willst ein Foto von deinem Garten posten. Im Hintergrund sieht man deinen Nachbarn, und man erkennt ihn gut. Was machst du?",
         "answers": [
-          "Ich poste das Foto einfach, sie ist ja nur im Hintergrund.",
-          "Ich frage die Person oder nehme ein anderes Foto."
+          "Ich poste es einfach, weil er ja nur im Hintergrund ist.",
+          "Ich nehme ein anderes Foto.",
+          "Ich frage den Nachbarn vorher."
         ],
-        "feedbackWrong": "Auch im Hintergrund darf die Person mitentscheiden, ob ihr Bild im Internet zu sehen ist.",
-        "feedbackCorrect": "Gut. Du fragst die Person oder nimmst ein anderes Foto, auf dem sie nicht zu sehen ist.",
+        "feedbackWrong": [
+          "Auch im Hintergrund erkennt man ihn, und nicht alle wollen im Internet stehen. Dein Nachbar darf mitentscheiden.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann ist niemand anderes zu sehen, und du musst niemanden fragen.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Man erkennt den Nachbarn, deshalb darf er mitentscheiden.",
         "remember": "Ich frage andere, bevor ich ihr Bild poste."
       },
       "standard": {
-        "question": "Im Hintergrund deines Fotos ist eine andere Person zu sehen. Was ist besser?",
+        "question": "Du möchtest ein Foto deines Gartens posten. Im Hintergrund ist dein Nachbar gut zu erkennen. Was machst du?",
         "answers": [
-          "Ich poste es einfach – sie ist ja nur im Hintergrund.",
-          "Ich frage die Person oder nehme ein anderes Foto."
+          "Ich poste es einfach, er ist ja nur im Hintergrund.",
+          "Ich nehme ein anderes Foto.",
+          "Ich frage den Nachbarn vorher."
         ],
-        "feedbackWrong": "Auch wer nur im Hintergrund zu sehen ist, darf mitentscheiden, ob das Bild online erscheint.",
-        "feedbackCorrect": "Richtig. Du fragst die Person oder wählst ein Foto, auf dem sie nicht zu sehen ist.",
+        "feedbackWrong": [
+          "Auch im Hintergrund ist er zu erkennen, und nicht jeder möchte im Internet stehen. Dein Nachbar entscheidet mit.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann ist niemand anderes zu sehen, und du musst niemanden fragen.",
+          null
+        ],
+        "feedbackCorrect": "Dein Nachbar ist zu erkennen, deshalb entscheidet er mit.",
         "remember": "Bevor ich ein Bild mit anderen poste, frage ich sie."
       }
     },
     "instagram/lang/Kurze Videos und Stories": {
       "einfach": {
-        "question": "Deine Story ist nur 24 Stunden zu sehen. Was können andere in dieser Zeit machen?",
+        "question": "Du willst eine Story posten und denkst: Morgen ist sie ja wieder weg. Was machst du vorher?",
         "answers": [
-          "Ein Bild vom Bildschirm machen und es behalten.",
-          "Nichts, denn eine Story kann niemand speichern."
+          "Ich prüfe zuerst, was in der Story zu sehen ist.",
+          "Nichts, denn morgen ist die Story sowieso weg.",
+          "Ich poste sie und lösche sie zur Not gleich wieder."
         ],
-        "feedbackWrong": "Das stimmt nicht. Andere können ein Bild vom Bildschirm machen. Dann bleibt deine Story bei ihnen.",
-        "feedbackCorrect": "Genau. Andere können ein Bild vom Bildschirm machen. Deshalb prüfst du auch eine Story, bevor du sie postest.",
+        "feedbackWrong": [
+          null,
+          "Andere können ein Bild vom Bildschirm machen. Dann bleibt deine Story, auch wenn sie bei Instagram schon weg ist.",
+          "Löschen hilft nicht immer, denn andere haben die Story vielleicht schon gespeichert."
+        ],
+        "feedbackCorrect": "Genau. Andere können ein Bild vom Bildschirm machen, und dann bleibt deine Story. Deshalb prüfst du sie vorher.",
         "remember": "Auch Stories prüfe ich vor dem Posten."
       },
       "standard": {
-        "question": "Deine Story verschwindet nach 24 Stunden. Was können andere in dieser Zeit tun?",
+        "question": "Du willst eine Story posten und denkst: Morgen ist sie ohnehin wieder weg. Was machst du vorher?",
         "answers": [
-          "Einen Screenshot machen und ihn behalten.",
-          "Nichts – eine Story lässt sich nicht speichern."
+          "Ich prüfe zuerst, was in der Story zu sehen ist.",
+          "Nichts, morgen ist die Story ohnehin wieder weg.",
+          "Ich poste sie und lösche sie notfalls gleich wieder."
         ],
-        "feedbackWrong": "Das stimmt nicht. Mit einem Screenshot kann jeder deine Story dauerhaft speichern.",
-        "feedbackCorrect": "Richtig. Ein Screenshot reicht, um eine Story zu behalten. Prüfe Stories deshalb genauso sorgfältig wie andere Beiträge.",
+        "feedbackWrong": [
+          null,
+          "Andere können einen Screenshot machen. Dann bleibt deine Story erhalten, auch wenn sie auf Instagram längst verschwunden ist.",
+          "Löschen hilft nicht immer: Andere haben die Story vielleicht schon gespeichert."
+        ],
+        "feedbackCorrect": "Andere können einen Screenshot machen, dann bleibt deine Story erhalten. Deshalb prüfst du sie vorher.",
         "remember": "Auch Stories prüfe ich vor dem Posten."
       }
     },
     "instagram/lang/Standort": {
       "einfach": {
-        "question": "Du willst bei einem Foto den Ort angeben. Was verrät diese Angabe?",
+        "question": "Du bist im Urlaub am Meer und postest ein Foto. Instagram fragt, ob du den Ort hinzufügen willst. Was machst du?",
         "answers": [
-          "Sie zeigt anderen, wo ich gerade bin.",
-          "Nichts, der Ort ist doch immer egal."
+          "Ich füge den Ort hinzu, damit alle sehen, wo ich bin.",
+          "Ich füge keinen Ort hinzu.",
+          "Ich füge den Ort erst nach dem Urlaub hinzu."
         ],
-        "feedbackWrong": "Das stimmt nicht. Der Ort kann privat sein, denn er zeigt anderen, wo du bist.",
-        "feedbackCorrect": "Genau. Die Ort-Angabe zeigt, wo du bist. Deshalb teilst du sie nur bewusst.",
+        "feedbackWrong": [
+          "Dann sehen alle Zuschauer, dass du gerade weit weg von zu Hause bist. Überleg zuerst, wer das Foto sehen kann.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann weiß während des Urlaubs niemand, dass du gerade weit weg bist."
+        ],
+        "feedbackCorrect": "Genau. Ohne Ort zeigt Instagram nicht an, wo du bist. Auch auf dem Foto kann man den Ort aber manchmal erkennen.",
         "remember": "Ich teile meinen Standort nicht einfach."
       },
       "standard": {
-        "question": "Du möchtest bei einem Foto deinen Standort angeben. Was verrät diese Angabe?",
+        "question": "Du postest im Urlaub ein Foto vom Meer. Instagram schlägt vor, den Ort hinzuzufügen. Was machst du?",
         "answers": [
-          "Sie zeigt anderen, wo ich mich gerade aufhalte.",
-          "Nichts Wichtiges – der Ort spielt keine Rolle."
+          "Ich füge den Ort hinzu, alle sollen sehen, wo ich bin.",
+          "Ich füge keinen Ort hinzu.",
+          "Ich füge den Ort erst nach dem Urlaub hinzu."
         ],
-        "feedbackWrong": "Das stimmt nicht. Dein Standort kann privat sein, weil er zeigt, wo du dich aufhältst.",
-        "feedbackCorrect": "Richtig. Der Standort zeigt, wo du bist. Teile ihn deshalb nur bewusst.",
+        "feedbackWrong": [
+          "Dann sehen alle, dass du gerade weit weg von zu Hause bist. Überleg zuerst, wer das Foto sehen kann.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "So erfährt während des Urlaubs niemand, dass du gerade weit weg bist."
+        ],
+        "feedbackCorrect": "Ohne Ortsangabe zeigt Instagram nicht an, wo du bist. Auf dem Foto selbst lässt sich der Ort aber manchmal erkennen.",
         "remember": "Meinen Standort teile ich nur bewusst."
       }
     },
     "instagram/lang/Private Nachrichten": {
       "einfach": {
-        "question": "Eine fremde Person schreibt dir privat: „Du bist so schön. Schick mir mehr Fotos von dir.“ Was machst du?",
+        "question": "Ein Profil schreibt dir seit zwei Wochen nette Nachrichten, aber ihr habt euch nie getroffen. Jetzt schreibt die Person: Schick mir ein privates Foto. Nur für mich. Was machst du?",
         "answers": [
-          "Ich schicke ein paar Fotos, weil sie so nett schreibt.",
-          "Ich schicke keine privaten Fotos."
+          "Ich schicke ein Foto, weil wir ja schon lange schreiben.",
+          "Ich schicke kein Foto.",
+          "Ich schicke kein Foto und melde das Profil."
         ],
-        "feedbackWrong": "Auch wenn die Person nett schreibt, schickst du einer fremden Person keine privaten Fotos.",
-        "feedbackCorrect": "Gut. Du schickst keine Fotos. Du kannst die Person auch blockieren.",
+        "feedbackWrong": [
+          "Du kennst die Person nur vom Schreiben. Ein Foto kannst du nicht zurückholen, und die Person kann es weiterschicken.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das Foto bleibt bei dir, und Instagram kann das Profil prüfen."
+        ],
+        "feedbackCorrect": "Genau. Du kennst die Person nur vom Schreiben, und ein Foto kannst du nicht zurückholen. Deshalb bleibt es bei dir.",
         "remember": "Ich schicke fremden Personen keine privaten Fotos."
       },
       "standard": {
-        "question": "Eine fremde Person schreibt dir privat: „Du siehst toll aus. Schick mir doch noch ein paar Fotos.“ Wie reagierst du?",
+        "question": "Ein Profil schreibt dir seit zwei Wochen nette Nachrichten, getroffen habt ihr euch nie. Jetzt heißt es: Schick mir ein privates Foto. Nur für mich. Was machst du?",
         "answers": [
-          "Ich schicke ein paar, weil die Person so nett ist.",
-          "Ich schicke keine privaten Fotos."
+          "Ich schicke eins, wir schreiben ja schon lange.",
+          "Ich schicke kein Foto.",
+          "Ich schicke kein Foto und melde das Profil."
         ],
-        "feedbackWrong": "Freundliche Worte sagen nichts darüber, wer hinter dem Profil steckt. Private Fotos schickst du nicht an Fremde.",
-        "feedbackCorrect": "Richtig. Du schickst keine privaten Fotos und kannst die Person blockieren oder melden.",
+        "feedbackWrong": [
+          "Du kennst die Person nur aus Nachrichten. Ein Foto lässt sich nicht zurückholen, und die Person kann es weiterleiten.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das Foto bleibt bei dir, und Instagram kann das Profil prüfen."
+        ],
+        "feedbackCorrect": "Du kennst die Person nur aus Nachrichten, und ein Foto lässt sich nicht zurückholen. Deshalb bleibt es bei dir.",
         "remember": "Fremden schicke ich keine privaten Fotos."
       }
     },
     "instagram/lang/Verletzende Kommentare": {
       "einfach": {
-        "question": "Unter deinem Foto steht ein Kommentar, der dich verletzt. Was ist besser?",
+        "question": "Du postest ein Foto von deinem neuen Pullover, und jemand schreibt darunter: Der ist ja hässlich. Das tut dir weh. Was machst du?",
         "answers": [
-          "Ich hole mir Unterstützung.",
-          "Ich beleidige die Person zurück."
+          "Ich lösche mein Foto, damit Ruhe ist.",
+          "Ich rede mit einer Freundin darüber.",
+          "Ich antworte nicht auf den Kommentar."
         ],
-        "feedbackWrong": "Wenn du zurück beleidigst, wird es meistens schlimmer. Hol dir lieber Unterstützung.",
-        "feedbackCorrect": "Gut. Du holst dir Unterstützung und bist nicht allein. Der Kommentar ist nicht deine Schuld.",
+        "feedbackWrong": [
+          "Du musst dein Foto nicht löschen, denn du hast nichts falsch gemacht. Der Kommentar ist das Problem, nicht dein Foto.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist Unterstützung, und Reden hilft, wenn etwas weh tut. Danach entscheidest du in Ruhe.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du musst nicht auf alles antworten, und dein Foto darf bleiben. Du kannst die Person auch blockieren.",
         "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
       },
       "standard": {
-        "question": "Unter deinem Foto steht ein verletzender Kommentar. Wie reagierst du am besten?",
+        "question": "Du postest ein Foto deines neuen Pullovers. Jemand kommentiert: Der ist ja hässlich. Das trifft dich. Was machst du?",
         "answers": [
-          "Ich hole mir Unterstützung.",
-          "Ich beleidige die Person zurück."
+          "Ich lösche mein Foto, dann ist Ruhe.",
+          "Ich rede mit einer Freundin darüber.",
+          "Ich antworte nicht auf den Kommentar."
         ],
-        "feedbackWrong": "Eine Gegenbeleidigung macht es meist nur schlimmer. Hol dir lieber Unterstützung.",
-        "feedbackCorrect": "Richtig. Mit Unterstützung bist du nicht allein – und der Kommentar ist nicht deine Schuld.",
+        "feedbackWrong": [
+          "Du musst dein Foto nicht löschen, du hast nichts falsch gemacht. Das Problem ist der Kommentar, nicht dein Foto.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist Unterstützung: Reden hilft, wenn etwas wehtut. Danach entscheidest du in Ruhe.",
+          null
+        ],
+        "feedbackCorrect": "Du musst nicht auf alles antworten, und dein Foto darf bleiben. Du kannst die Person auch blockieren.",
         "remember": "Bei verletzenden Kommentaren hole ich mir Unterstützung."
       }
     },
     "instagram/lang/Bearbeitete Bilder": {
       "einfach": {
-        "question": "Auf Instagram siehst du viele Menschen, die perfekt aussehen. Was stimmt?",
+        "question": "Eine Bekannte postet nur perfekte Fotos, und du denkst: Mein Leben ist nicht so schön. Was hilft dir?",
         "answers": [
-          "Viele Bilder sind bearbeitet und nicht ganz echt.",
-          "Die Bilder zeigen immer genau, wie es wirklich ist."
+          "Ich denke daran: Viele Fotos sind bearbeitet.",
+          "Ich mache eine Pause von Instagram.",
+          "Ich schaue mir noch mehr Fotos von ihr an."
         ],
-        "feedbackWrong": "Das stimmt nicht. Viele Bilder sind bearbeitet oder mit Filtern verändert.",
-        "feedbackCorrect": "Genau. Nicht alles ist echt, deshalb musst du dich damit nicht vergleichen.",
+        "feedbackWrong": [
+          null,
+          null,
+          "Dann vergleichst du dich noch mehr. Die Fotos zeigen nur die schönen Momente, und viele sind bearbeitet."
+        ],
+        "feedbackAuch": [
+          null,
+          "Eine Pause tut gut, und du bestimmst selbst, was du dir ansiehst.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Die Fotos zeigen nur die schönen Momente, und viele sind bearbeitet. Du musst dich nicht damit vergleichen.",
         "remember": "Ich muss mich nicht mit Bildern vergleichen."
       },
       "standard": {
-        "question": "Auf Instagram wirken viele Menschen perfekt. Was stimmt?",
+        "question": "Eine Bekannte postet nur perfekte Fotos, und du denkst: Mein Leben ist nicht so schön. Was hilft dir?",
         "answers": [
-          "Viele Bilder sind bearbeitet und nicht ganz echt.",
-          "Die Bilder zeigen immer, wie es wirklich ist."
+          "Ich mache mir klar, dass viele Fotos bearbeitet sind.",
+          "Ich lege eine Instagram-Pause ein.",
+          "Ich sehe mir noch mehr Fotos von ihr an, um zu vergleichen."
         ],
-        "feedbackWrong": "Das stimmt nicht. Viele Bilder sind nachbearbeitet oder mit Filtern verändert.",
-        "feedbackCorrect": "Richtig. Vieles ist nicht echt – du musst dich damit nicht vergleichen.",
+        "feedbackWrong": [
+          null,
+          null,
+          "Dann vergleichst du dich noch mehr. Die Fotos zeigen nur die schönen Momente, und viele sind bearbeitet."
+        ],
+        "feedbackAuch": [
+          null,
+          "Eine Pause tut gut, und du bestimmst selbst, was du dir ansiehst.",
+          null
+        ],
+        "feedbackCorrect": "Die Fotos zeigen nur die schönen Momente, und viele sind bearbeitet. Du musst dich nicht damit vergleichen.",
         "remember": "Mit bearbeiteten Bildern muss ich mich nicht vergleichen."
       }
     },
     "instagram/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "Ein Profil, das du nicht kennst, schreibt dir und will schnell etwas von dir. Was machst du?",
+        "question": "Ein fremdes Profil schreibt dir: Du hast gewonnen. Antworte in 10 Minuten, sonst ist der Gewinn weg. Was machst du?",
         "answers": [
-          "Ich mache Stopp und zeige es einer vertrauten Person.",
-          "Ich antworte sofort, damit die Person nicht böse wird."
+          "Ich antworte schnell, weil der Gewinn sonst weg ist.",
+          "Ich zeige die Nachricht erst jemandem.",
+          "Ich mache Stopp und antworte nicht sofort."
         ],
-        "feedbackWrong": "Wenn du schnell antwortest, lässt du dich unter Druck setzen. Mach zuerst Stopp.",
-        "feedbackCorrect": "Gut. Du machst Stopp und zeigst die Nachricht jemandem, dem du vertraust. Das schützt dich.",
+        "feedbackWrong": [
+          "Die Nachricht macht mit Absicht Stress, damit du nicht nachdenkst. Bei einem echten Gewinn hast du Zeit.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Zu zweit sieht man mehr, und die Nachricht kann so lange warten.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Die Nachricht macht mit Absicht Stress. Wenn du Stopp machst, hast du Zeit zum Nachdenken.",
         "remember": "Bei Stress zeige ich die Nachricht einer Person, der ich vertraue."
       },
       "standard": {
-        "question": "Ein unbekanntes Profil schreibt dir und will schnell etwas von dir. Wie reagierst du?",
+        "question": "Ein fremdes Profil schreibt dir: Du hast gewonnen. Antworte in 10 Minuten, sonst verfällt der Gewinn. Was machst du?",
         "answers": [
-          "Ich mache Stopp und zeige es einer Vertrauensperson.",
-          "Ich antworte sofort, damit die Person nicht sauer wird."
+          "Ich antworte schnell, sonst verfällt der Gewinn.",
+          "Ich zeige die Nachricht erst jemandem.",
+          "Ich mache Stopp und antworte nicht sofort."
         ],
-        "feedbackWrong": "Wer auf Tempo drängt, will dich unter Druck setzen. Mach zuerst Stopp.",
-        "feedbackCorrect": "Richtig. Stopp machen und die Nachricht jemandem zeigen schützt dich.",
+        "feedbackWrong": [
+          "Der Zeitdruck ist gewollt, damit du nicht nachdenkst. Bei einem echten Gewinn hättest du Zeit.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Zu zweit sieht man mehr, und die Nachricht kann so lange warten.",
+          null
+        ],
+        "feedbackCorrect": "Der Zeitdruck ist gewollt. Wenn du Stopp machst, gewinnst du Zeit zum Nachdenken.",
         "remember": "Bei Druck zeige ich die Nachricht einer Vertrauensperson."
       }
     },
     "instagram/kurz/Deine Fotos auf Instagram": {
       "einfach": {
-        "question": "Wie stellst du dein Instagram-Konto am besten ein?",
+        "question": "Dein Instagram-Konto ist privat, und ein fremdes Profil möchte dir folgen. Was machst du?",
         "answers": [
-          "Öffentlich für alle Menschen.",
-          "Privat."
+          "Ich nehme an, weil mein Konto ja privat ist.",
+          "Ich lehne die Anfrage ab.",
+          "Ich schaue mir das Profil erst einmal an."
         ],
-        "feedbackWrong": "Bei einem öffentlichen Konto können auch fremde Menschen alle deine Fotos sehen.",
-        "feedbackCorrect": "Gut. Bei einem privaten Konto sehen nur die Menschen deine Fotos, die du selbst bestätigt hast. Dein Profil-Bild, deinen Namen und deinen Profil-Text sehen aber alle.",
+        "feedbackWrong": [
+          "Ein privates Konto hilft nur, wenn du auswählst, wer dir folgt. Nach dem Annehmen sieht das fremde Profil alle deine Fotos.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann weißt du mehr über das Profil und entscheidest danach, ob du annimmst oder ablehnst."
+        ],
+        "feedbackCorrect": "Genau. Bei einem privaten Konto sehen nur die Menschen deine Fotos, die du selbst bestätigt hast. Dein Profil-Bild, deinen Namen und deinen Profil-Text sehen aber alle.",
         "remember": "Mein Konto ist privat."
       },
       "standard": {
-        "question": "Welche Einstellung ist für dein Instagram-Konto am sichersten?",
+        "question": "Dein Instagram-Konto ist privat. Ein fremdes Profil möchte dir folgen. Was machst du?",
         "answers": [
-          "Öffentlich für alle.",
-          "Privat."
+          "Ich nehme an, mein Konto ist ja privat.",
+          "Ich lehne die Anfrage ab.",
+          "Ich sehe mir das Profil erst einmal an."
         ],
-        "feedbackWrong": "Bei einem öffentlichen Konto können auch Fremde alle deine Fotos sehen.",
-        "feedbackCorrect": "Richtig. Bei einem privaten Konto sehen nur Follower, die du bestätigt hast, deine Fotos und Stories. Profilbild, Name und Bio sind aber für alle sichtbar.",
+        "feedbackWrong": [
+          "Ein privates Konto schützt nur, wenn du auswählst, wer dir folgt. Nach dem Annehmen sieht das fremde Profil alle deine Fotos und Stories.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Danach weißt du mehr über das Profil und entscheidest, ob du annimmst oder ablehnst."
+        ],
+        "feedbackCorrect": "Bei einem privaten Konto sehen nur Follower, die du bestätigt hast, deine Fotos und Stories. Profilbild, Name und Bio sind aber für alle sichtbar.",
         "remember": "Mein Konto ist auf privat gestellt."
       }
     },
     "instagram/kurz/Fotos von anderen Personen": {
       "einfach": {
-        "question": "Auf deinem Foto ist auch eine Freundin zu sehen. Was machst du, bevor du es postest?",
+        "question": "Du hast ein Foto von der Geburtstags-Feier, auf dem dein Freund Ben auf dem Sofa schläft. Du findest das Foto lustig. Was machst du?",
         "answers": [
-          "Ich frage sie, ob sie einverstanden ist.",
-          "Ich poste es einfach, sie ist ja meine Freundin."
+          "Ich frage Ben, ob ich das Foto posten darf.",
+          "Ich poste es, weil es doch nur Spaß ist.",
+          "Ich poste es nicht und schicke es nur an Ben."
         ],
-        "feedbackWrong": "Auch eine Freundin entscheidet selbst über ihr Bild. Deshalb fragst du sie vorher.",
-        "feedbackCorrect": "Gut. Erst fragen, dann posten.",
+        "feedbackWrong": [
+          null,
+          "Für Ben ist das Foto vielleicht peinlich, und viele Menschen können es sehen. Deshalb darf Ben mitentscheiden.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht nur Ben das Foto, und er kann selbst entscheiden, was damit passiert."
+        ],
+        "feedbackCorrect": "Genau. Es ist sein Bild, deshalb darf Ben mitentscheiden.",
         "remember": "Fotos von anderen poste ich erst, wenn ich gefragt habe."
       },
       "standard": {
-        "question": "Auf deinem Foto ist eine Freundin zu sehen. Was tust du vor dem Posten?",
+        "question": "Auf einem Foto von der Geburtstagsfeier schläft dein Freund Ben auf dem Sofa. Du findest es lustig. Was machst du?",
         "answers": [
-          "Ich frage sie, ob sie einverstanden ist.",
-          "Ich poste es einfach – wir sind ja befreundet."
+          "Ich frage Ben, ob ich es posten darf.",
+          "Ich poste es, es ist doch nur Spaß.",
+          "Ich poste es nicht und schicke es nur Ben."
         ],
-        "feedbackWrong": "Auch Freundinnen und Freunde entscheiden selbst über ihr Bild. Frag deshalb vorher.",
-        "feedbackCorrect": "Richtig: erst fragen, dann posten.",
+        "feedbackWrong": [
+          null,
+          "Ben ist das Foto vielleicht peinlich, und viele können es sehen. Deshalb entscheidet er mit.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht nur Ben das Foto und kann selbst entscheiden, was damit passiert."
+        ],
+        "feedbackCorrect": "Es ist sein Bild, deshalb entscheidet Ben mit.",
         "remember": "Fotos von anderen: erst fragen, dann posten."
       }
     },
     "instagram/kurz/Nachrichten von Unbekannten": {
       "einfach": {
-        "question": "In deinem Postfach ist eine Nachricht von einem Profil, das du nicht kennst. Was tust du?",
+        "question": "Ein fremdes Profil schreibt dir bei Instagram: Hallo, du siehst nett aus. Wo wohnst du? Was machst du?",
         "answers": [
-          "Ich schreibe gleich zurück, weil ich neugierig bin.",
-          "Ich antworte nicht und zeige die Nachricht jemandem."
+          "Ich antworte nicht.",
+          "Ich schreibe zurück und nenne nur meine Stadt.",
+          "Ich blockiere das Profil."
         ],
-        "feedbackWrong": "Wenn du antwortest, weiß die fremde Person, dass hier jemand liest. Zeig die Nachricht lieber einer Person, der du vertraust.",
-        "feedbackCorrect": "Gut. Du antwortest nicht und zeigst die Nachricht einer Person, der du vertraust.",
-        "remember": "Nachrichten von Unbekannten zeige ich einer vertrauten Person."
+        "feedbackWrong": [
+          null,
+          "Dann weiß eine fremde Person, in welcher Stadt du wohnst, und sie weiß auch, dass hier jemand antwortet.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kann dir das Profil nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Genau. Du kennst das Profil nicht und musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        "remember": "Fremden Profilen muss ich nicht antworten."
       },
       "standard": {
-        "question": "In deinem Postfach liegt eine Nachricht von einem unbekannten Profil. Was tust du?",
+        "question": "Ein fremdes Profil schreibt dir auf Instagram: Hallo, du siehst nett aus. Wo wohnst du? Was machst du?",
         "answers": [
-          "Ich schreibe gleich zurück, ich bin ja neugierig.",
-          "Ich antworte nicht und zeige sie jemandem."
+          "Ich antworte nicht.",
+          "Ich antworte und nenne nur meine Stadt.",
+          "Ich blockiere das Profil."
         ],
-        "feedbackWrong": "Eine Antwort zeigt der fremden Person, dass jemand liest. Zeig die Nachricht lieber einer Vertrauensperson.",
-        "feedbackCorrect": "Richtig. Du antwortest nicht und holst dir eine zweite Meinung.",
-        "remember": "Nachrichten von Unbekannten zeige ich einer Vertrauensperson."
+        "feedbackWrong": [
+          null,
+          "Dann weiß eine fremde Person, in welcher Stadt du wohnst – und dass hier jemand antwortet.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Danach kann dir das Profil nicht mehr schreiben."
+        ],
+        "feedbackCorrect": "Du kennst das Profil nicht und musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        "remember": "Fremden Profilen muss ich nicht antworten."
       }
     },
     "Du machst ein Selfie in deiner Wohnung. Worauf achtest du?": {
@@ -9418,265 +10638,475 @@ const AUFGABEN_VERSIONS = {
     },
     "einkaufen/lang/Gute Shops erkennen": {
       "einfach": {
-        "question": "Woran erkennst du einen guten Shop im Internet?",
+        "question": "Du suchst eine Kaffee-Maschine. Ein Shop hat sehr viele Bewertungen, alle mit 5 Sternen und alle von gestern. Was machst du?",
         "answers": [
-          "Daran, dass die Preise sehr niedrig sind.",
-          "An einem Impressum mit Name und Adresse."
+          "Ich bestelle, weil so viele Menschen zufrieden sind.",
+          "Ich prüfe den Shop erst noch genauer.",
+          "Ich kaufe lieber in einem Shop, den ich kenne."
         ],
-        "feedbackWrong": "Sehr niedrige Preise sind eher ein Warnzeichen, kein gutes Zeichen.",
-        "feedbackCorrect": "Genau. Im Impressum stehen der Name und die Adresse vom Shop. Aber auch ein Impressum kann gefälscht sein. Achte deshalb auch auf andere Warnzeichen.",
+        "feedbackWrong": [
+          "Bewertungen können gefälscht sein. Hier sind alle von gestern und haben alle 5 Sterne. Das ist ein Warnzeichen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Bei einem Shop, den du kennst, weißt du, dass die Ware ankommt."
+        ],
+        "feedbackCorrect": "Genau. Alle Bewertungen sind von gestern, und das ist komisch. Betrüger können Bewertungen fälschen und auch ein Impressum. Achte deshalb auf mehrere Warnzeichen.",
         "remember": "Ich kaufe bei Shops, die ich vorher geprüft habe."
       },
       "standard": {
-        "question": "Woran erkennst du einen seriösen Onlineshop?",
+        "question": "Du suchst eine Kaffeemaschine. Ein Shop hat auffällig viele Bewertungen – alle mit 5 Sternen, alle von gestern. Was machst du?",
         "answers": [
-          "Daran, dass die Preise besonders niedrig sind.",
-          "An einem Impressum mit Name und Anschrift."
+          "Ich bestelle, so viele Kunden sind ja zufrieden.",
+          "Ich prüfe den Shop erst noch genauer.",
+          "Ich kaufe lieber in einem Shop, den ich kenne."
         ],
-        "feedbackWrong": "Auffällig niedrige Preise sind eher ein Warnzeichen als ein gutes Zeichen.",
-        "feedbackCorrect": "Richtig. Im Impressum stehen Name und Anschrift des Shops. Allerdings kopieren Fake-Shops oft echte Impressen – achte auch auf andere Warnzeichen.",
+        "feedbackWrong": [
+          "Bewertungen können gefälscht sein. Hier stammen alle von gestern und haben 5 Sterne – ein Warnzeichen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Bei einem Shop, den du kennst, weißt du, dass die Ware ankommt."
+        ],
+        "feedbackCorrect": "Alle Bewertungen stammen von gestern – das ist auffällig. Bewertungen lassen sich fälschen, ein Impressum auch. Achte deshalb auf mehrere Warnzeichen.",
         "remember": "Ich kaufe bei Shops, die ich geprüft habe."
       }
     },
     "einkaufen/lang/Fake-Shops erkennen": {
       "einfach": {
-        "question": "Ein Shop ist extrem billig, und du kannst nur per Vorkasse zahlen. Was ist besser?",
+        "question": "Du siehst eine Werbung: Marken-Jacke für 19 Euro statt 200 Euro. Im Shop kannst du nur vorher überweisen. Was machst du?",
         "answers": [
-          "Ich kaufe schnell, so billig ist es selten.",
-          "Ich kaufe nicht, das sind Warnzeichen."
+          "Ich prüfe den Shop mit dem Fakeshop-Finder.",
+          "Ich bestelle schnell, weil es so billig nie wieder wird.",
+          "Ich kaufe dort nicht."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Extrem billig und nur Vorkasse: Das ist oft ein Fake-Shop.",
-        "feedbackCorrect": "Gut. Extrem billige Preise und nur Vorkasse sind Warnzeichen.",
+        "feedbackWrong": [
+          null,
+          "Sehr billig und nur Vorkasse: Das ist oft ein Fake-Shop. Dann ist dein Geld weg, und die Jacke kommt nie.",
+          null
+        ],
+        "feedbackAuch": [
+          "Das ist eine Prüf-Seite der Verbraucher-Zentrale. Du gibst die Adresse vom Shop ein und bekommst eine Einschätzung.",
+          null,
+          null
+        ],
+        "feedbackCorrect": "Genau. Sehr billig und nur Vorkasse sind Warnzeichen für einen Fake-Shop. Dort zahlst du, aber die Ware kommt nie.",
         "remember": "Wenn es sehr billig ist und nur Vorkasse geht, kaufe ich nicht."
       },
       "standard": {
-        "question": "Ein Shop ist extrem günstig, und bezahlen kannst du nur per Vorkasse. Was ist besser?",
+        "question": "Du siehst eine Werbung: Markenjacke für 19 statt 200 Euro. Bezahlen kannst du im Shop nur per Vorkasse. Was machst du?",
         "answers": [
-          "Schnell kaufen – so billig wird es nie wieder.",
-          "Nicht kaufen – das sind Warnzeichen."
+          "Ich prüfe den Shop mit dem Fakeshop-Finder.",
+          "Ich bestelle schnell, so billig wird es nie wieder.",
+          "Ich kaufe dort nicht."
         ],
-        "feedbackWrong": "Das ist riskant – extrem billig und nur Vorkasse deutet oft auf einen Fake-Shop hin.",
-        "feedbackCorrect": "Richtig. Extrem niedrige Preise und nur Vorkasse sind Warnzeichen.",
+        "feedbackWrong": [
+          null,
+          "Extrem billig und nur Vorkasse deutet oft auf einen Fake-Shop hin. Dann ist dein Geld weg, und die Jacke kommt nie.",
+          null
+        ],
+        "feedbackAuch": [
+          "Das ist ein kostenloser Check der Verbraucherzentrale: Shop-Adresse eingeben und die Einschätzung lesen.",
+          null,
+          null
+        ],
+        "feedbackCorrect": "Extrem niedrige Preise und nur Vorkasse sind Warnzeichen für einen Fake-Shop: Du zahlst, aber die Ware kommt nie.",
         "remember": "Sehr billig und nur Vorkasse? Dann kaufe ich nicht."
       }
     },
     "einkaufen/lang/Vor dem Kaufen prüfen": {
       "einfach": {
-        "question": "Welche Frage stellst du dir, bevor du etwas kaufst?",
+        "question": "Du willst Kopf-Hörer kaufen. Im Shop steht groß 25 Euro, aber im Waren-Korb stehen am Ende 34 Euro. Was machst du?",
         "answers": [
-          "Sieht die Internet-Seite schön aus?",
-          "Was kostet es wirklich, mit Versand?"
+          "Ich schaue nach, was noch dazukommt.",
+          "Ich kaufe, weil ich bestimmt nur 25 Euro zahle.",
+          "Ich vergleiche erst mit einem anderen Shop."
         ],
-        "feedbackWrong": "Ob die Seite schön ist, sagt nichts über den Preis.",
-        "feedbackCorrect": "Genau. Wichtig ist der Preis am Ende, nicht der erste Preis.",
+        "feedbackWrong": [
+          null,
+          "Du zahlst den Preis am Ende, also 34 Euro. Oft kommt der Versand dazu, deshalb schaust du vor dem Kaufen in den Waren-Korb.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Vergleichen lohnt sich. Achte auch dort auf den Preis am Ende."
+        ],
+        "feedbackCorrect": "Genau. Oft kommt der Versand dazu. Wichtig ist der Preis am Ende, und jetzt entscheidest du selbst.",
         "remember": "Erst prüfe ich, dann kaufe ich."
       },
       "standard": {
-        "question": "Welche Frage stellst du dir vor einem Kauf?",
+        "question": "Du willst Kopfhörer kaufen. Im Shop steht groß 25 Euro, im Warenkorb stehen am Ende aber 34 Euro. Was machst du?",
         "answers": [
-          "Ist die Website schön und modern gestaltet?",
-          "Was kostet es wirklich – inklusive Versand?"
+          "Ich sehe nach, was noch dazukommt.",
+          "Ich kaufe, ich zahle bestimmt nur 25 Euro.",
+          "Ich vergleiche erst mit einem anderen Shop."
         ],
-        "feedbackWrong": "Das Design sagt nichts über den Preis.",
-        "feedbackCorrect": "Richtig. Entscheidend ist der Endpreis, nicht der erste Preis.",
+        "feedbackWrong": [
+          null,
+          "Du zahlst den Endpreis, also 34 Euro. Oft kommt der Versand dazu – sieh vor dem Kauf in den Warenkorb.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Vergleichen lohnt sich. Achte auch dort auf den Endpreis."
+        ],
+        "feedbackCorrect": "Oft kommt der Versand dazu. Entscheidend ist der Endpreis – und jetzt entscheidest du selbst.",
         "remember": "Erst prüfen, dann kaufen."
       }
     },
     "einkaufen/lang/Sicher bezahlen": {
       "einfach": {
-        "question": "Welche Art zu bezahlen ist sicherer?",
+        "question": "Du willst ein gebrauchtes Fahrrad kaufen. Der Verkäufer schreibt: Schick mir das Geld mit PayPal und wähle dabei: Geld an Freunde senden. Dann bringe ich dir das Rad. Was machst du?",
         "answers": [
-          "Ich zahle vorher an einen fremden Shop.",
-          "Ich kaufe auf Rechnung."
+          "Ich schicke das Geld so, weil er das Rad ja bringt.",
+          "Ich schaue mir das Rad erst an und zahle dann.",
+          "Ich schicke die Hälfte vorher und zahle den Rest später."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Bei Vorkasse ist dein Geld weg, bevor die Ware da ist.",
-        "feedbackCorrect": "Gut. Zuerst kommt die Ware, und danach bezahlst du.",
+        "feedbackWrong": [
+          "Wenn du Geld an Freunde sendest, gibt es keinen Käufer-Schutz. Kommt das Rad nicht, ist dein Geld weg.",
+          null,
+          "Auch die Hälfte ist dann weg. Schau dir das Rad erst an und zahle danach."
+        ],
+        "feedbackCorrect": "Genau. Bei privaten Anzeigen gilt: erst die Ware ansehen, dann bezahlen.",
         "remember": "Rechnung ist sicherer als Vorkasse."
       },
       "standard": {
-        "question": "Welche Zahlungsart ist sicherer?",
+        "question": "Du willst ein gebrauchtes Fahrrad kaufen. Der Verkäufer schreibt: Schick mir das Geld per PayPal über die Funktion Geld an Freunde senden, dann bringe ich dir das Rad. Was machst du?",
         "answers": [
-          "Vorkasse an einen unbekannten Shop.",
-          "Kauf auf Rechnung."
+          "Ich schicke das Geld so, er bringt das Rad ja.",
+          "Ich sehe mir das Rad erst an und zahle dann.",
+          "Ich schicke die Hälfte vorab und zahle den Rest später."
         ],
-        "feedbackWrong": "Das ist riskant – bei Vorkasse ist dein Geld weg, bevor die Ware da ist.",
-        "feedbackCorrect": "Richtig. Erst kommt die Ware, dann zahlst du.",
+        "feedbackWrong": [
+          "Bei dieser Funktion greift der Käuferschutz nicht. Kommt das Rad nicht, ist dein Geld weg.",
+          null,
+          "Auch die Hälfte ist dann weg. Sieh dir das Rad erst an und zahl danach."
+        ],
+        "feedbackCorrect": "Bei privaten Kleinanzeigen gilt: erst die Ware ansehen, dann bezahlen.",
         "remember": "Rechnung ist sicherer als Vorkasse."
       }
     },
     "einkaufen/lang/Bank-Daten schützen": {
       "einfach": {
-        "question": "Du bekommst eine E-Mail. Darin sollst du deine PIN eingeben. Was ist besser?",
+        "question": "Du hast gestern in einem Shop bestellt. Heute kommt eine E-Mail: Ihre Zahlung hat nicht geklappt. Bitte geben Sie hier Ihre Karten-Nummer und Ihre PIN ein. Was machst du?",
         "answers": [
-          "Ich gebe die PIN ein, damit alles klappt.",
-          "Ich gebe die PIN niemals ein, das ist Betrug."
+          "Ich gebe die Daten ein, weil sonst meine Bestellung nicht kommt.",
+          "Ich gebe nichts ein und rufe meine Bank an.",
+          "Ich gebe nichts ein und schaue selbst im Shop nach."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Deine Bank fragt nie nach deiner PIN.",
-        "feedbackCorrect": "Gut. Die Bank fragt nie nach der PIN oder der TAN.",
+        "feedbackWrong": [
+          "Die PIN bleibt geheim, und wer per E-Mail danach fragt, ist ein Betrüger. Mit Karten-Nummer und PIN kommt man an dein Geld.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Bei der Bank kannst du nachfragen, ob mit deiner Karte alles in Ordnung ist.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Die PIN bleibt geheim, und wer per E-Mail danach fragt, ist ein Betrüger. Im Shop siehst du selbst, ob die Bestellung bezahlt ist.",
         "remember": "PIN und TAN bleiben geheim."
       },
       "standard": {
-        "question": "Eine E-Mail fordert dich auf, deine PIN einzugeben. Was ist besser?",
+        "question": "Gestern hast du in einem Shop bestellt. Heute kommt eine E-Mail: Ihre Zahlung ist fehlgeschlagen. Bitte geben Sie hier Ihre Kartennummer und Ihre PIN ein. Was machst du?",
         "answers": [
-          "Die PIN eingeben, damit alles klappt.",
-          "Die PIN nie eingeben – das ist Betrug."
+          "Ich gebe die Daten ein, sonst kommt meine Bestellung nicht.",
+          "Ich gebe nichts ein und rufe meine Bank an.",
+          "Ich gebe nichts ein und sehe selbst im Shop nach."
         ],
-        "feedbackWrong": "Das ist riskant – deine Bank fragt nie nach der PIN.",
-        "feedbackCorrect": "Richtig. Banken fragen nie nach PIN oder TAN.",
+        "feedbackWrong": [
+          "Die PIN bleibt geheim – wer per E-Mail danach fragt, ist ein Betrüger. Mit Kartennummer und PIN kommt man an dein Geld.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Bei der Bank kannst du nachfragen, ob mit deiner Karte alles in Ordnung ist.",
+          null
+        ],
+        "feedbackCorrect": "Die PIN bleibt geheim – wer per E-Mail danach fragt, ist ein Betrüger. Im Shop siehst du selbst, ob die Bestellung bezahlt ist.",
         "remember": "PIN und TAN bleiben geheim."
       }
     },
     "einkaufen/lang/Versteckte Kosten in Apps und Spielen": {
       "einfach": {
-        "question": "Ein Spiel auf dem Handy ist kostenlos. Kann es trotzdem Geld kosten?",
+        "question": "Du spielst ein kostenloses Spiel auf dem Handy und kommst nicht weiter. Das Spiel zeigt: 5 Extra-Leben für 2 Euro. Diese Woche hast du schon 4 Mal gekauft. Was machst du?",
         "answers": [
-          "Ja, denn Käufe im Spiel kosten echtes Geld.",
-          "Nein, was kostenlos ist, kostet auch nichts."
+          "Ich rechne erst aus, wie viel ich schon bezahlt habe.",
+          "Ich kaufe, weil 2 Euro ja fast nichts sind.",
+          "Ich kaufe heute nichts und spiele morgen weiter."
         ],
-        "feedbackWrong": "Nur der Anfang ist kostenlos. Die Käufe im Spiel kosten echtes Geld.",
-        "feedbackCorrect": "Genau. Viele kleine Käufe werden schnell teuer.",
+        "feedbackWrong": [
+          null,
+          "Jeder Kauf ist klein, aber du hast schon 8 Euro bezahlt. Viele kleine Käufe werden schnell teuer.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kostet es heute nichts. Viele Spiele geben dir später neue Leben."
+        ],
+        "feedbackCorrect": "Genau. 4 Mal 2 Euro sind schon 8 Euro. Viele kleine Käufe werden schnell teuer, und jetzt entscheidest du selbst.",
         "remember": "Auch kleine Käufe kosten echtes Geld."
       },
       "standard": {
-        "question": "Ein Handyspiel ist kostenlos. Kann es trotzdem Geld kosten?",
+        "question": "Du spielst ein kostenloses Handyspiel und kommst nicht weiter. Das Spiel bietet an: 5 Extra-Leben für 2 Euro. Diese Woche hast du schon 4 Mal gekauft. Was machst du?",
         "answers": [
-          "Ja – Käufe im Spiel kosten echtes Geld.",
-          "Nein – was kostenlos ist, bleibt auch kostenlos."
+          "Ich rechne erst aus, wie viel ich schon bezahlt habe.",
+          "Ich kaufe, 2 Euro sind ja fast nichts.",
+          "Ich kaufe heute nichts und spiele morgen weiter."
         ],
-        "feedbackWrong": "Kostenlos ist nur der Einstieg – In-App-Käufe kosten echtes Geld.",
-        "feedbackCorrect": "Richtig. Viele kleine Käufe summieren sich schnell.",
+        "feedbackWrong": [
+          null,
+          "Jeder Kauf ist klein, aber du hast schon 8 Euro bezahlt. Kleine In-App-Käufe summieren sich schnell.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kostet es heute nichts. Viele Spiele geben dir später neue Leben."
+        ],
+        "feedbackCorrect": "4 Mal 2 Euro sind schon 8 Euro. Kleine In-App-Käufe summieren sich schnell – jetzt entscheidest du selbst.",
         "remember": "Auch kleine Käufe kosten echtes Geld."
       }
     },
     "einkaufen/lang/Nicht sofort kaufen": {
       "einfach": {
-        "question": "Bei einem Angebot steht: Nur noch 10 Minuten! Was ist besser?",
+        "question": "Du schaust dir im Internet ein Sofa für 400 Euro an. Auf der Seite steht in Rot: Nur noch 2 Stück, 14 Personen schauen gerade. Was machst du?",
         "answers": [
-          "Ich kaufe schnell, bevor die Zeit abläuft.",
-          "Ich bleibe ruhig und überlege in Ruhe."
+          "Ich kaufe sofort, weil das Sofa sonst weg ist.",
+          "Ich überlege in Ruhe, ob ich das Sofa brauche.",
+          "Ich warte bis morgen und entscheide dann."
         ],
-        "feedbackWrong": "Das passt noch nicht. Zeitdruck ist ein Trick, damit du schnell kaufst.",
-        "feedbackCorrect": "Gut. Du darfst dir Zeit nehmen. Gute Angebote gibt es wieder.",
+        "feedbackWrong": [
+          "Solche Sätze sollen dir Stress machen, und du weißt nicht, ob sie überhaupt stimmen. Bei 400 Euro darfst du in Ruhe überlegen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Morgen weißt du besser, ob du das Sofa wirklich willst."
+        ],
+        "feedbackCorrect": "Genau. Du darfst dir Zeit nehmen. Solche Sätze sollen dich zum schnellen Kaufen bringen, aber gute Angebote gibt es wieder.",
         "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
       },
       "standard": {
-        "question": "Ein Angebot läuft angeblich nur noch 10 Minuten. Was ist besser?",
+        "question": "Du siehst dir online ein Sofa für 400 Euro an. Auf der Seite steht in Rot: Nur noch 2 Stück – 14 Personen sehen sich das gerade an. Was machst du?",
         "answers": [
-          "Schnell kaufen, bevor die Zeit abläuft.",
-          "Ruhig bleiben und in Ruhe überlegen."
+          "Ich kaufe sofort, sonst ist das Sofa weg.",
+          "Ich überlege in Ruhe, ob ich das Sofa brauche.",
+          "Ich warte bis morgen und entscheide dann."
         ],
-        "feedbackWrong": "Zeitdruck ist ein Verkaufstrick.",
-        "feedbackCorrect": "Richtig. Du darfst dir Zeit lassen – gute Angebote kommen wieder.",
+        "feedbackWrong": [
+          "Solche Hinweise sollen Druck machen, und ob sie stimmen, weißt du nicht. Bei 400 Euro darfst du in Ruhe überlegen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Morgen weißt du besser, ob du das Sofa wirklich willst."
+        ],
+        "feedbackCorrect": "Du darfst dir Zeit lassen. Solche Hinweise sollen dich zu einem schnellen Kauf verleiten – gute Angebote kommen wieder.",
         "remember": "Beim Einkaufen lasse ich mich nicht hetzen."
       }
     },
     "einkaufen/lang/Falsch gekauft? Das kannst du tun": {
       "einfach": {
-        "question": "Du hast im Internet etwas gekauft, das du nicht willst. Was gilt oft?",
+        "question": "Du hast im Internet eine Hose bestellt. Sie ist gestern gekommen, aber sie passt nicht. Was machst du?",
         "answers": [
-          "Ich kann es oft innerhalb von 14 Tagen zurückgeben.",
-          "Gekauft ist gekauft, da kann ich nichts machen."
+          "Ich behalte sie, weil Zurückgeben nicht geht.",
+          "Ich schreibe dem Shop, dass ich die Hose zurückgeben will.",
+          "Ich schicke die Hose zurück, weil das oft 14 Tage geht."
         ],
-        "feedbackWrong": "Bei vielen Online-Käufen hast du 14 Tage Zeit. Das nennt man Widerruf.",
-        "feedbackCorrect": "Genau. Das Zurückgeben nennt man Widerruf.",
+        "feedbackWrong": [
+          "Du musst die Hose nicht behalten. Viele Online-Käufe kannst du 14 Tage lang zurückgeben, und das nennt man Widerruf.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Der Shop sagt dir dann, wie du die Hose zurückschickst.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Viele Online-Käufe kannst du 14 Tage lang zurückgeben. Das nennt man Widerruf. Beim Shop steht, wie das Zurückschicken geht.",
         "remember": "Online-Käufe kann ich oft 14 Tage lang zurückgeben."
       },
       "standard": {
-        "question": "Du hast online etwas gekauft, das du doch nicht willst. Was gilt oft?",
+        "question": "Du hast online eine Hose bestellt. Gestern ist sie angekommen, aber sie passt nicht. Was machst du?",
         "answers": [
-          "Ich kann oft innerhalb von 14 Tagen widerrufen.",
-          "Gekauft ist gekauft – da lässt sich nichts machen."
+          "Ich behalte sie, gekauft ist gekauft.",
+          "Ich schreibe dem Shop, dass ich die Hose zurückgeben will.",
+          "Ich schicke die Hose zurück, das geht oft 14 Tage lang."
         ],
-        "feedbackWrong": "Bei vielen Onlinekäufen hast du 14 Tage Widerrufsrecht.",
-        "feedbackCorrect": "Richtig. Das nennt man Widerruf.",
+        "feedbackWrong": [
+          "Du musst die Hose nicht behalten: Bei vielen Onlinekäufen hast du 14 Tage Widerrufsrecht.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Der Shop sagt dir dann, wie du die Hose zurückschickst.",
+          null
+        ],
+        "feedbackCorrect": "Bei vielen Onlinekäufen hast du 14 Tage Widerrufsrecht. Beim Shop steht, wie die Rücksendung funktioniert.",
         "remember": "Onlinekäufe kann ich oft 14 Tage lang widerrufen."
       }
     },
     "einkaufen/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "In einem Shop läuft eine Uhr: Nur noch 2 Minuten! Was machst du?",
+        "question": "Du willst ein Geschenk bestellen, kennst den Shop aber nicht. Oben läuft eine Uhr: Das Angebot endet in 2 Minuten. Was machst du?",
         "answers": [
-          "Ich lasse mich nicht hetzen und prüfe den Shop in Ruhe.",
-          "Ich kaufe schnell, weil das Angebot sonst gleich weg ist."
+          "Ich prüfe den Shop in Ruhe, die Zeit ist mir egal.",
+          "Ich kaufe schnell, weil das Angebot sonst weg ist.",
+          "Ich kaufe schnell, weil ich danach noch prüfen kann."
         ],
-        "feedbackWrong": "Die Uhr ist ein Trick. Lass dich nicht hetzen.",
-        "feedbackCorrect": "Genau. Die Uhr will dich nur drängen.",
+        "feedbackWrong": [
+          null,
+          "Die Uhr ist ein Trick, der dich drängen soll. Lass dich deshalb nicht hetzen.",
+          "Nach dem Kaufen ist das Geld vielleicht schon weg, deshalb prüfst du vorher. Erst prüfen, dann kaufen."
+        ],
+        "feedbackCorrect": "Genau. Die Uhr will dich nur drängen. Du prüfst erst, und dann kaufst du.",
         "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
       },
       "standard": {
-        "question": "Ein Shop zeigt einen Countdown: „Nur noch 2 Minuten!“ Was tust du?",
+        "question": "Du willst ein Geschenk bestellen, kennst den Shop aber nicht. Oben läuft ein Countdown: Das Angebot endet in 2 Minuten. Was machst du?",
         "answers": [
-          "Mich nicht hetzen lassen und den Shop in Ruhe prüfen.",
-          "Schnell kaufen, weil das Angebot sonst gleich weg ist."
+          "Ich prüfe den Shop in Ruhe, die Zeit ist mir egal.",
+          "Ich kaufe schnell, sonst ist das Angebot weg.",
+          "Ich kaufe schnell, prüfen kann ich danach."
         ],
-        "feedbackWrong": "Ein Countdown ist ein Trick – lass dich nicht hetzen.",
-        "feedbackCorrect": "Richtig. Ein Countdown soll dich nur unter Druck setzen.",
+        "feedbackWrong": [
+          null,
+          "Ein Countdown ist ein Trick, der Druck machen soll. Lass dich nicht hetzen.",
+          "Nach dem Kauf ist das Geld vielleicht schon weg – deshalb prüfst du vorher. Erst prüfen, dann kaufen."
+        ],
+        "feedbackCorrect": "Ein Countdown soll dich nur unter Druck setzen. Du prüfst erst und kaufst dann.",
         "remember": "Beim Einkaufen lasse ich mich nicht hetzen."
       }
     },
     "einkaufen/kurz/Einkaufen im Internet": {
       "einfach": {
-        "question": "Wo kaufst du im Internet am besten ein?",
+        "question": "Du brauchst neue Turn-Schuhe und findest sie in zwei Shops. Shop 1 kennst du schon lange, dort kosten sie 60 Euro. Shop 2 kennst du nicht, dort kosten sie nur 15 Euro. Was machst du?",
         "answers": [
-          "Bei irgendeinem Shop, der billig ist.",
-          "Bei einem Shop, den ich kenne."
+          "Ich kaufe in Shop 2, weil es dort viel billiger ist.",
+          "Ich kaufe in Shop 1, weil ich den Shop kenne.",
+          "Ich prüfe Shop 2 erst und entscheide dann."
         ],
-        "feedbackWrong": "Ein sehr billiger, unbekannter Shop ist ein Risiko.",
-        "feedbackCorrect": "Genau. Bekannte Shops sind sicherer.",
+        "feedbackWrong": [
+          "Die Schuhe sind dort sehr billig, und du kennst den Shop nicht. Das sind Warnzeichen. Vielleicht kommt die Ware nie.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Schau zum Beispiel ins Impressum. Wenn du danach noch unsicher bist, kaufst du in Shop 1."
+        ],
+        "feedbackCorrect": "Genau. Den Shop kennst du, und dort kommt die Ware an. Sehr billig und unbekannt ist dagegen ein Warnzeichen.",
         "remember": "Ich kaufe bei sicheren Shops."
       },
       "standard": {
-        "question": "Wo kaufst du online am besten ein?",
+        "question": "Du brauchst neue Turnschuhe und findest sie in zwei Shops. Shop 1 kennst du seit Langem, dort kosten sie 60 Euro. Shop 2 kennst du nicht, dort kosten sie nur 15 Euro. Was machst du?",
         "answers": [
-          "Bei irgendeinem günstigen Shop.",
-          "Bei einem bekannten Shop."
+          "Ich kaufe in Shop 2, das ist viel billiger.",
+          "Ich kaufe in Shop 1, den Shop kenne ich.",
+          "Ich prüfe Shop 2 erst und entscheide dann."
         ],
-        "feedbackWrong": "Sehr billig und unbekannt – das ist eine riskante Kombination.",
-        "feedbackCorrect": "Richtig. Bekannte Shops sind sicherer.",
+        "feedbackWrong": [
+          "Die Schuhe sind dort auffällig billig, und du kennst den Shop nicht. Das sind Warnzeichen – vielleicht kommt die Ware nie.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Sieh zum Beispiel ins Impressum. Bist du danach noch unsicher, kaufst du in Shop 1."
+        ],
+        "feedbackCorrect": "Den Shop kennst du, dort kommt die Ware an. Sehr billig und unbekannt ist dagegen ein Warnzeichen.",
         "remember": "Ich kaufe bei sicheren Shops ein."
       }
     },
     "einkaufen/kurz/Gute Shops erkennen": {
       "einfach": {
-        "question": "Welches Zeichen spricht für einen guten Shop?",
+        "question": "Du willst in einem neuen Shop bestellen. In der Adress-Zeile siehst du ein Schloss, aber ein Impressum findest du nicht. Was machst du?",
         "answers": [
-          "Name und Adresse vom Shop stehen auf der Seite.",
-          "Auf der Seite blinken ganz viele bunte Angebote."
+          "Ich bestelle dort nicht, weil Name und Adresse fehlen.",
+          "Ich bestelle, weil das Schloss zeigt, dass der Shop sicher ist.",
+          "Ich bestelle, weil die Seite ja sehr schön aussieht."
         ],
-        "feedbackWrong": "Blinkende Angebote machen nur Stress. Gut ist, wenn der Shop Name und Adresse zeigt.",
-        "feedbackCorrect": "Gut erkannt. Ein guter Shop hat ein Impressum mit Name und Adresse. Aber auch ein Impressum kann gefälscht sein.",
+        "feedbackWrong": [
+          null,
+          "Auch falsche Shops haben ein Schloss, deshalb ist das Schloss allein kein gutes Zeichen. Schau nach Name und Adresse.",
+          "Eine schöne Seite können auch Betrüger bauen, das Aussehen ist kein Beweis. Schau nach Name und Adresse."
+        ],
+        "feedbackCorrect": "Genau. Ein guter Shop zeigt Name und Adresse im Impressum, und das fehlt hier. Aber auch ein Impressum kann gefälscht sein.",
         "remember": "Ein guter Shop zeigt seinen Namen und seine Adresse."
       },
       "standard": {
-        "question": "Was spricht für einen seriösen Shop?",
+        "question": "Du willst in einem neuen Shop bestellen. In der Adresszeile siehst du ein Schloss, ein Impressum findest du aber nicht. Was machst du?",
         "answers": [
-          "Name und Anschrift stehen auf der Seite.",
-          "Überall blinkende Sonderangebote auf der Seite."
+          "Ich bestelle dort nicht, Name und Anschrift fehlen.",
+          "Ich bestelle, das Schloss zeigt ja, dass der Shop sicher ist.",
+          "Ich bestelle, die Seite sieht ja sehr professionell aus."
         ],
-        "feedbackWrong": "Blinkende Angebote erzeugen nur Druck – gut ist, wenn der Shop Name und Anschrift nennt.",
-        "feedbackCorrect": "Gut erkannt. Ein seriöser Shop hat ein Impressum mit Name und Anschrift. Allerdings kann auch ein Impressum gefälscht sein.",
+        "feedbackWrong": [
+          null,
+          "Auch Fake-Shops haben ein Schloss: Es zeigt nur eine verschlüsselte Verbindung. Achte auf Name und Anschrift.",
+          "Eine professionelle Seite können auch Betrüger bauen, das Aussehen beweist nichts. Achte auf Name und Anschrift."
+        ],
+        "feedbackCorrect": "Ein seriöser Shop nennt Name und Anschrift im Impressum – das fehlt hier. Allerdings kann auch ein Impressum gefälscht sein.",
         "remember": "Ein guter Shop nennt Name und Anschrift."
       }
     },
     "einkaufen/kurz/Sicher bezahlen": {
       "einfach": {
-        "question": "Du kaufst zum ersten Mal in einem Shop. Wie bezahlst du am besten?",
+        "question": "Du bestellst zum ersten Mal in einem Shop und kannst wählen: vorher überweisen, Rechnung oder PayPal. Was nimmst du?",
         "answers": [
-          "Ich überweise das Geld vorher.",
-          "Ich bezahle auf Rechnung."
+          "Ich überweise vorher, damit das Paket schneller kommt.",
+          "Ich zahle mit PayPal.",
+          "Ich zahle auf Rechnung."
         ],
-        "feedbackWrong": "Bei Vorkasse ist dein Geld weg, bevor die Ware bei dir ist.",
+        "feedbackWrong": [
+          "Vorher überweisen heißt Vorkasse: Du zahlst zuerst. Wenn keine Ware kommt, bekommst du dein Geld nur schwer zurück.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "PayPal hat einen Käufer-Schutz. Wenn keine Ware kommt, kannst du dein Geld zurückfordern.",
+          null
+        ],
         "feedbackCorrect": "Genau. Bei Rechnung bekommst du zuerst die Ware, und dann zahlst du.",
         "remember": "Rechnung ist sicherer als Vorkasse."
       },
       "standard": {
-        "question": "Du bestellst zum ersten Mal in einem Shop. Wie bezahlst du?",
+        "question": "Du bestellst zum ersten Mal in einem Shop und kannst wählen: Vorkasse per Überweisung, Rechnung oder PayPal. Was nimmst du?",
         "answers": [
-          "Ich überweise vorab.",
-          "Auf Rechnung."
+          "Ich überweise vorab, dann kommt das Paket schneller.",
+          "Ich zahle mit PayPal.",
+          "Ich zahle auf Rechnung."
         ],
-        "feedbackWrong": "Bei Vorkasse ist dein Geld weg, bevor die Ware ankommt.",
-        "feedbackCorrect": "Richtig. Bei Rechnung kommt erst die Ware, dann zahlst du.",
+        "feedbackWrong": [
+          "Bei Vorkasse zahlst du zuerst. Kommt keine Ware, bekommst du dein Geld nur schwer zurück.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "PayPal bietet einen Käuferschutz: Kommt keine Ware, kannst du dein Geld zurückfordern.",
+          null
+        ],
+        "feedbackCorrect": "Bei Rechnung kommt erst die Ware, dann zahlst du.",
         "remember": "Rechnung ist sicherer als Vorkasse."
       }
     },
@@ -10038,331 +11468,601 @@ const AUFGABEN_VERSIONS = {
     },
     "betrug/lang/Was ist Phishing?": {
       "einfach": {
-        "question": "Du bekommst eine E-Mail, die angeblich von deiner Bank ist. Darin steht: Klicken Sie sofort auf den Link. Was ist besser?",
+        "question": "Du bekommst eine E-Mail, die aussieht wie von deiner Bank. Darin steht: Bitte bestätigen Sie Ihre Daten und tippen Sie auf den Link. Was machst du?",
         "answers": [
-          "Ich tippe gleich auf den Link, damit nichts passiert.",
-          "Ich tippe nicht und frage selbst bei der Bank nach."
+          "Ich tippe auf den Link, weil die E-Mail echt aussieht.",
+          "Ich tippe nicht und rufe meine Bank selbst an.",
+          "Ich antworte auf die E-Mail und frage, ob sie echt ist."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Deine Bank fragt nie per E-Mail nach deinen Daten.",
-        "feedbackCorrect": "Gut. Du tippst nicht auf den Link, sondern fragst selbst bei der Bank nach.",
+        "feedbackWrong": [
+          "Betrüger können das Zeichen der Bank leicht kopieren, deshalb ist das Aussehen kein Beweis. Deine Bank fragt nie per E-Mail nach deinen Daten.",
+          null,
+          "Deine Antwort geht an die Betrüger, und die schreiben dann, dass alles echt ist. Ruf lieber deine Bank selbst an."
+        ],
+        "feedbackCorrect": "Genau. Deine Bank fragt nie per E-Mail nach deinen Daten. Der Link kann zu einer falschen Seite führen.",
         "remember": "Meine Bank fragt nie per E-Mail nach meinen Daten."
       },
       "standard": {
-        "question": "Eine E-Mail, angeblich von deiner Bank: „Klicken Sie sofort auf den Link.“ Was ist besser?",
+        "question": "Eine E-Mail sieht aus wie von deiner Bank: Bitte bestätigen Sie Ihre Daten über diesen Link. Was machst du?",
         "answers": [
-          "Sofort auf den Link tippen, damit nichts passiert.",
-          "Nicht tippen und selbst bei der Bank nachfragen."
+          "Ich tippe auf den Link, die E-Mail sieht echt aus.",
+          "Ich tippe nicht und rufe meine Bank selbst an.",
+          "Ich antworte auf die E-Mail und frage, ob sie echt ist."
         ],
-        "feedbackWrong": "Das ist riskant – Banken fragen nie per E-Mail nach deinen Daten.",
-        "feedbackCorrect": "Richtig. Du tippst nicht auf den Link und fragst selbst bei der Bank nach.",
+        "feedbackWrong": [
+          "Ein Banklogo lässt sich leicht kopieren, das Aussehen beweist nichts. Deine Bank fragt nie per E-Mail nach deinen Daten.",
+          null,
+          "Deine Antwort landet bei den Betrügern, und die bestätigen natürlich, dass alles echt ist. Ruf lieber deine Bank selbst an."
+        ],
+        "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach deinen Daten. Der Link kann auf eine gefälschte Seite führen.",
         "remember": "Meine Bank fragt nie per E-Mail nach meinen Daten."
       }
     },
     "betrug/lang/Falsche Nachrichten erkennen": {
       "einfach": {
-        "question": "Welches Zeichen in einer Nachricht ist ein Warnzeichen?",
+        "question": "Du hast morgen einen Termin beim Zahnarzt. Die Praxis schickt dir eine SMS: Ihr Termin ist morgen um 10 Uhr. In der SMS ist kein Link, und niemand will Geld. Was machst du?",
         "answers": [
-          "Die Nachricht macht Druck: Sofort! Schnell!",
-          "Die Nachricht ist freundlich und höflich geschrieben."
+          "Ich lösche die SMS sofort, weil jede SMS Betrug sein kann.",
+          "Das ist eine normale Erinnerung, und ich gehe morgen hin.",
+          "Ich rufe kurz in der Praxis an und frage nach."
         ],
-        "feedbackWrong": "Auch Betrüger schreiben freundlich. Das Warnzeichen ist der Stress.",
-        "feedbackCorrect": "Genau. Stress und Eile sind das Warnzeichen.",
+        "feedbackWrong": [
+          "Nicht jede SMS ist Betrug. Hier fehlen die Warnzeichen: kein Stress, keine Drohung, kein Link. Und du hast den Termin wirklich.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das geht immer, denn die Nummer der Praxis hast du schon."
+        ],
+        "feedbackCorrect": "Genau. Die SMS macht keinen Stress, droht nicht und will weder Geld noch Daten. Außerdem stimmt der Termin.",
         "remember": "Stress und Drohung sind Warnzeichen."
       },
       "standard": {
-        "question": "Was davon ist ein Warnzeichen in einer Nachricht?",
+        "question": "Du hast morgen einen Zahnarzttermin. Die Praxis schickt eine SMS: Ihr Termin ist morgen um 10 Uhr. Die SMS enthält keinen Link, und niemand will Geld. Was machst du?",
         "answers": [
-          "Sie setzt dich mit „Sofort! Schnell!“ unter Druck.",
-          "Sie ist sehr freundlich und höflich formuliert."
+          "Ich lösche die SMS sofort, jede SMS kann Betrug sein.",
+          "Das ist eine normale Erinnerung, ich gehe morgen hin.",
+          "Ich rufe kurz in der Praxis an und frage nach."
         ],
-        "feedbackWrong": "Freundlich schreiben Betrüger auch – das Warnzeichen ist der Druck.",
-        "feedbackCorrect": "Richtig. Druck und Eile sind das Warnzeichen.",
+        "feedbackWrong": [
+          "Nicht jede SMS ist Betrug. Hier fehlen die Warnzeichen: kein Druck, keine Drohung, kein Link. Und den Termin hast du wirklich.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das geht immer, die Nummer der Praxis hast du schon."
+        ],
+        "feedbackCorrect": "Die SMS macht keinen Druck, droht nicht und will weder Geld noch Daten. Außerdem stimmt der Termin.",
         "remember": "Druck und Drohungen sind Warnzeichen."
       }
     },
     "betrug/lang/Der Paket-Trick": {
       "einfach": {
-        "question": "Du bekommst eine SMS: Zahlen Sie 2 Euro Zoll für Ihr Paket. Was ist besser?",
+        "question": "Du wartest auf ein Paket. Eine SMS sagt: Ihr Paket kann nicht geliefert werden. Zahlen Sie 2 Euro Zoll über diesen Link. Was machst du?",
         "answers": [
-          "Ich zahle schnell, es sind ja nur 2 Euro.",
-          "Ich zahle nicht und tippe nichts an."
+          "Ich zahle, weil ich ja wirklich auf ein Paket warte.",
+          "Ich schaue selbst beim Paket-Dienst nach, wo mein Paket ist.",
+          "Ich zahle nicht und tippe nicht auf den Link."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Es geht den Betrügern nicht um 2 Euro, sondern um deine Bank-Daten.",
-        "feedbackCorrect": "Gut. Solche SMS sind fast immer Betrug.",
+        "feedbackWrong": [
+          "Viele Menschen warten gerade auf ein Paket, und darum klappt der Trick so oft. Es geht den Betrügern nicht um 2 Euro, sondern um deine Bank-Daten.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dort siehst du, wo dein Paket wirklich ist. Den Link aus der SMS brauchst du dafür nicht.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Solche SMS sind fast immer Betrug, denn echte Paket-Dienste fordern kein Geld per SMS.",
         "remember": "Paket-SMS mit Geld-Forderung sind Betrug."
       },
       "standard": {
-        "question": "Eine SMS: „Zahlen Sie 2 Euro Zoll für Ihr Paket.“ Was ist besser?",
+        "question": "Du wartest auf ein Paket. Eine SMS meldet: Ihr Paket kann nicht zugestellt werden. Zahlen Sie 2 Euro Zoll über diesen Link. Was machst du?",
         "answers": [
-          "Schnell zahlen – sind ja nur 2 Euro.",
-          "Nicht zahlen und nichts antippen."
+          "Ich zahle, ich warte ja wirklich auf ein Paket.",
+          "Ich sehe selbst beim Paketdienst nach, wo mein Paket ist.",
+          "Ich zahle nicht und tippe nicht auf den Link."
         ],
-        "feedbackWrong": "Das ist riskant – den Betrügern geht es nicht um 2 Euro, sondern um deine Bankdaten.",
-        "feedbackCorrect": "Richtig. Solche SMS sind fast immer Betrug.",
+        "feedbackWrong": [
+          "Viele warten gerade auf ein Paket, deshalb funktioniert die Masche so gut. Den Betrügern geht es nicht um 2 Euro, sondern um deine Bankdaten.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dort siehst du, wo dein Paket wirklich ist. Den Link aus der SMS brauchst du dafür nicht.",
+          null
+        ],
+        "feedbackCorrect": "Solche SMS sind fast immer Betrug – seriöse Paketdienste verlangen kein Geld per SMS.",
         "remember": "Paket-SMS mit Geldforderung sind Betrug."
       }
     },
     "betrug/lang/Der Hallo-Mama-Trick": {
       "einfach": {
-        "question": "Eine fremde Nummer schreibt: Hallo, ich bin es, dein Kind. Ich habe eine neue Nummer und brauche Geld. Was ist besser?",
+        "question": "Eine fremde Nummer schreibt dir bei WhatsApp: Hallo, ich bin es, dein Bruder. Mein Handy ist kaputt, das ist meine neue Nummer. Kannst du mir heute 300 Euro überweisen? Was machst du?",
         "answers": [
-          "Ich schicke sofort das Geld, mein Kind braucht es.",
-          "Ich rufe die alte, bekannte Nummer an und frage nach."
+          "Ich rufe meinen Bruder unter der alten Nummer an.",
+          "Ich überweise, weil mein Bruder ja Hilfe braucht.",
+          "Ich schreibe zurück und frage, ob er es wirklich ist."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Das ist ein bekannter Trick von Betrügern.",
-        "feedbackCorrect": "Gut. Wenn du die alte Nummer anrufst, merkst du den Betrug.",
+        "feedbackWrong": [
+          null,
+          "Das ist ein bekannter Trick, und die neue Nummer kann Betrügern gehören. Ruf erst die alte Nummer an.",
+          "Betrüger antworten einfach, dass sie es sind. Sicher bist du erst, wenn du die alte Nummer angerufen hast."
+        ],
+        "feedbackCorrect": "Genau. Unter der alten Nummer erreichst du deinen echten Bruder, und so merkst du den Betrug.",
         "remember": "Bei Geld-Nachrichten rufe ich die bekannte Nummer an."
       },
       "standard": {
-        "question": "Eine unbekannte Nummer schreibt: „Hallo, hier ist dein Kind. Neue Nummer, brauche dringend Geld.“ Was ist besser?",
+        "question": "Eine unbekannte Nummer schreibt dir bei WhatsApp: Hallo, ich bin's, dein Bruder. Mein Handy ist kaputt, das ist meine neue Nummer. Kannst du mir heute 300 Euro überweisen? Was machst du?",
         "answers": [
-          "Sofort Geld schicken – mein Kind braucht es.",
-          "Die alte, bekannte Nummer anrufen und nachfragen."
+          "Ich rufe meinen Bruder unter der alten Nummer an.",
+          "Ich überweise, mein Bruder braucht ja Hilfe.",
+          "Ich schreibe zurück und frage, ob er es wirklich ist."
         ],
-        "feedbackWrong": "Das ist riskant – das ist eine bekannte Betrugsmasche.",
-        "feedbackCorrect": "Richtig. Ein Anruf bei der alten Nummer deckt den Betrug auf.",
+        "feedbackWrong": [
+          null,
+          "Das ist eine bekannte Masche, die neue Nummer kann Betrügern gehören. Ruf erst die alte Nummer an.",
+          "Betrüger antworten einfach mit Ja. Sicher bist du erst nach einem Anruf unter der alten Nummer."
+        ],
+        "feedbackCorrect": "Unter der alten Nummer erreichst du deinen echten Bruder – so fliegt der Betrug auf.",
         "remember": "Bei Geldnachrichten rufe ich die bekannte Nummer an."
       }
     },
     "betrug/lang/Schockanrufe": {
       "einfach": {
-        "question": "Ein Anrufer sagt: Ich bin Polizist. Geben Sie mir Ihr Geld, damit es sicher ist. Was ist besser?",
+        "question": "Ein Mann ruft an: Hier ist die Polizei. In Ihrer Straße sind Einbrecher unterwegs. Geben Sie Ihr Geld einem Kollegen, der gleich zu Ihnen kommt. Dann ist es sicher. Was machst du?",
         "answers": [
-          "Ich gebe ihm das Geld, er ist ja Polizist.",
-          "Ich lege auf, denn die Polizei will nie Geld."
+          "Ich lege auf, weil die Polizei kein Geld abholt.",
+          "Ich gebe ihm das Geld, weil es bei der Polizei sicher ist.",
+          "Ich lege auf und rufe selbst die 110 an."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Die echte Polizei fordert am Telefon nie Geld.",
-        "feedbackCorrect": "Gut. Du legst auf, weil die echte Polizei nie Geld fordert.",
+        "feedbackWrong": [
+          null,
+          "Die echte Polizei fordert am Telefon nie Geld. Der Kollege an der Tür ist ein Betrüger, und dein Geld ist dann weg.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Bei der 110 erreichst du die echte Polizei und kannst den Anruf melden."
+        ],
+        "feedbackCorrect": "Genau. Du legst auf, weil die echte Polizei nie Geld fordert. Sie holt auch kein Geld ab.",
         "remember": "Die echte Polizei fordert nie Geld."
       },
       "standard": {
-        "question": "Ein Anrufer sagt: „Hier ist die Polizei. Geben Sie uns Ihr Geld, damit es sicher ist.“ Was ist besser?",
+        "question": "Ein Mann ruft an: Hier ist die Polizei. In Ihrer Straße sind Einbrecher unterwegs. Übergeben Sie Ihr Geld einem Kollegen, der gleich bei Ihnen klingelt – dann ist es sicher. Was machst du?",
         "answers": [
-          "Das Geld übergeben – es ist ja die Polizei.",
-          "Auflegen – die Polizei fordert nie Geld."
+          "Ich lege auf, die Polizei holt kein Geld ab.",
+          "Ich gebe ihm das Geld, bei der Polizei ist es sicher.",
+          "Ich lege auf und wähle selbst die 110."
         ],
-        "feedbackWrong": "Das ist riskant – die echte Polizei fordert am Telefon nie Geld.",
-        "feedbackCorrect": "Richtig. Du legst auf; die echte Polizei fordert nie Geld.",
+        "feedbackWrong": [
+          null,
+          "Die echte Polizei fordert am Telefon nie Geld. Der Kollege an der Tür ist ein Betrüger, und dein Geld ist dann weg.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Unter der 110 erreichst du die echte Polizei und kannst den Anruf melden."
+        ],
+        "feedbackCorrect": "Du legst auf: Die echte Polizei fordert nie Geld und holt auch keines ab.",
         "remember": "Die echte Polizei fordert nie Geld."
       }
     },
     "betrug/lang/Liebe im Internet": {
       "einfach": {
-        "question": "Eine fremde Person schreibt dir jeden Tag liebe Worte. Ihr habt euch noch nie getroffen. Jetzt bittet sie dich um Geld. Was machst du?",
+        "question": "Seit 3 Monaten schreibt dir Marco jeden Tag liebe Worte, aber ihr habt euch noch nie getroffen. Jetzt schreibt er: Ich will dich endlich besuchen. Schick mir 400 Euro für den Flug. Was machst du?",
         "answers": [
-          "Ich schicke ihr das Geld, weil sie mir so liebe Sachen schreibt.",
-          "Ich schicke kein Geld und spreche mit einer vertrauten Person."
+          "Ich schicke das Geld, damit wir uns endlich sehen.",
+          "Ich schicke kein Geld und spreche mit jemandem darüber.",
+          "Ich schreibe Marco, dass ich kein Geld schicke."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Schick kein Geld und sprich mit einer vertrauten Person darüber.",
-        "feedbackCorrect": "Gut. Du schickst kein Geld und entscheidest das nicht allein.",
+        "feedbackWrong": [
+          "Deine Gefühle sind echt, aber du kennst Marco nur aus dem Internet. Erst kommen liebe Worte, dann kommt die Bitte um Geld – so geht dieser Trick. Schick kein Geld.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist ein guter Weg, denn Reden hilft bei so einer Entscheidung. Wichtig ist, dass du kein Geld schickst.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du sagst klar Nein. Wer dich wirklich mag, bleibt trotzdem. Ein Betrüger macht jetzt Druck oder meldet sich nicht mehr.",
         "remember": "Ich schicke kein Geld an fremde Menschen aus dem Internet."
       },
       "standard": {
-        "question": "Jemand, den du nur online kennst, schreibt dir jeden Tag liebe Nachrichten. Getroffen habt ihr euch nie. Jetzt bittet die Person um Geld. Was tust du?",
+        "question": "Seit 3 Monaten schreibt dir Marco täglich liebe Nachrichten, getroffen habt ihr euch nie. Jetzt schreibt er: Ich will dich endlich besuchen. Schick mir 400 Euro für den Flug. Was machst du?",
         "answers": [
-          "Ich schicke Geld – die Person schreibt mir ja so liebe Sachen.",
-          "Ich schicke kein Geld und spreche mit einer Vertrauensperson."
+          "Ich schicke das Geld, dann sehen wir uns endlich.",
+          "Ich schicke kein Geld und spreche mit jemandem darüber.",
+          "Ich schreibe Marco, dass ich kein Geld schicke."
         ],
-        "feedbackWrong": "Das ist riskant. Schick kein Geld und sprich mit einer Vertrauensperson.",
-        "feedbackCorrect": "Richtig. Du schickst kein Geld – und entscheidest das nicht allein.",
+        "feedbackWrong": [
+          "Deine Gefühle sind echt, aber du kennst Marco nur aus dem Internet. Erst liebe Worte, dann die Bitte um Geld: So läuft diese Masche. Schick kein Geld.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Das ist ein guter Weg, denn Reden hilft bei so einer Entscheidung. Wichtig ist, dass du kein Geld schickst.",
+          null
+        ],
+        "feedbackCorrect": "Du sagst klar Nein. Wer dich wirklich mag, bleibt trotzdem – ein Betrüger macht jetzt Druck oder meldet sich nicht mehr.",
         "remember": "Ich schicke kein Geld an Menschen, die ich nur aus dem Internet kenne."
       }
     },
     "betrug/lang/Falsche Gewinne": {
       "einfach": {
-        "question": "Eine Nachricht sagt, dass du gewonnen hast. Vorher sollst du aber 50 Euro Gebühr zahlen. Was ist besser?",
+        "question": "Eine Frau ruft an: Sie haben 5000 Euro gewonnen. Kaufen Sie vorher Gutschein-Karten für 100 Euro und sagen Sie mir die Codes. Dann bekommen Sie den Gewinn. Was machst du?",
         "answers": [
-          "Ich zahle die 50 Euro, dann bekomme ich den Gewinn.",
-          "Ich zahle nicht, denn das ist Betrug."
+          "Ich lege auf und kaufe keine Karten.",
+          "Ich kaufe die Karten, weil 5000 Euro viel Geld sind.",
+          "Ich kaufe erst nur eine Karte für 20 Euro."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Für einen echten Gewinn musst du nichts bezahlen.",
-        "feedbackCorrect": "Gut. Echte Gewinne kosten nie Geld.",
+        "feedbackWrong": [
+          null,
+          "Echte Gewinne kosten kein Geld. Mit den Codes holen sich die Betrüger das Geld von den Karten, und den Gewinn gibt es nicht.",
+          "Auch die 20 Euro sind dann weg, und die Betrüger rufen wieder an. Echte Gewinne kosten kein Geld."
+        ],
+        "feedbackCorrect": "Genau. Echte Gewinne kosten kein Geld. Die Sache mit den Gutschein-Karten ist ein bekannter Trick.",
         "remember": "Echte Gewinne kosten kein Geld."
       },
       "standard": {
-        "question": "Du hast angeblich gewonnen – vorher sollst du aber 50 Euro Gebühr zahlen. Was ist besser?",
+        "question": "Eine Frau ruft an: Sie haben 5000 Euro gewonnen. Kaufen Sie vorher Gutscheinkarten für 100 Euro und nennen Sie mir die Codes – dann zahlen wir den Gewinn aus. Was machst du?",
         "answers": [
-          "Die Gebühr zahlen, um den Gewinn zu bekommen.",
-          "Nicht zahlen – das ist Betrug."
+          "Ich lege auf und kaufe keine Karten.",
+          "Ich kaufe die Karten, 5000 Euro sind viel Geld.",
+          "Ich kaufe erst nur eine Karte für 20 Euro."
         ],
-        "feedbackWrong": "Das ist riskant – für einen echten Gewinn zahlt man nichts.",
-        "feedbackCorrect": "Richtig. Echte Gewinne kosten nie Geld.",
+        "feedbackWrong": [
+          null,
+          "Echte Gewinne kosten kein Geld. Mit den Codes lösen die Betrüger das Guthaben der Karten ein – den Gewinn gibt es nicht.",
+          "Auch die 20 Euro sind dann weg, und die Betrüger rufen wieder an. Echte Gewinne kosten kein Geld."
+        ],
+        "feedbackCorrect": "Echte Gewinne kosten kein Geld. Die Forderung nach Gutscheinkarten ist eine bekannte Masche.",
         "remember": "Echte Gewinne kosten kein Geld."
       }
     },
     "betrug/lang/Abo-Fallen": {
       "einfach": {
-        "question": "Ein Angebot im Internet sagt: Kostenlos testen! Worauf schaust du zuerst?",
+        "question": "Du willst eine Koch-App ausprobieren. Auf dem Knopf steht: 7 Tage kostenlos testen. Darunter steht ganz klein, dass die App danach 10 Euro pro Woche kostet. Was machst du?",
         "answers": [
-          "Auf das schöne Bild von dem Produkt.",
-          "Auf die kleine Schrift unten."
+          "Ich tippe auf den Knopf, weil kostenlos ja kostenlos ist.",
+          "Ich lese erst die kleine Schrift und entscheide dann.",
+          "Ich suche eine andere Koch-App ohne Abo."
         ],
-        "feedbackWrong": "Das Bild sagt nichts über die Kosten. Unten steht oft, was es jeden Monat kostet.",
-        "feedbackCorrect": "Genau. In der kleinen Schrift steht, was es später wirklich kostet.",
+        "feedbackWrong": [
+          "Kostenlos sind nur die ersten 7 Tage. Danach zahlst du jede Woche 10 Euro, und das steht in der kleinen Schrift.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann musst du später nichts kündigen und zahlst nichts aus Versehen."
+        ],
+        "feedbackCorrect": "Genau. In der kleinen Schrift steht, dass die App nach 7 Tagen jede Woche Geld kostet. Jetzt weißt du es und entscheidest selbst.",
         "remember": "Kostenlos kann teuer werden. Deshalb lese ich genau."
       },
       "standard": {
-        "question": "Ein Angebot wirbt mit „Kostenlos testen!“. Worauf achtest du?",
+        "question": "Du möchtest eine Koch-App ausprobieren. Auf dem Knopf steht: 7 Tage kostenlos testen. Darunter, ganz klein: danach 10 Euro pro Woche. Was machst du?",
         "answers": [
-          "Auf das Produktbild.",
-          "Auf das Kleingedruckte."
+          "Ich tippe auf den Knopf, kostenlos ist ja kostenlos.",
+          "Ich lese erst das Kleingedruckte und entscheide dann.",
+          "Ich suche eine andere Koch-App ohne Abo."
         ],
-        "feedbackWrong": "Das Bild sagt nichts über die Kosten – im Kleingedruckten steht der Monatspreis.",
-        "feedbackCorrect": "Richtig. Im Kleingedruckten steht der Haken.",
+        "feedbackWrong": [
+          "Kostenlos sind nur die ersten 7 Tage. Danach zahlst du jede Woche 10 Euro – das steht im Kleingedruckten.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann musst du später nichts kündigen und zahlst nichts aus Versehen."
+        ],
+        "feedbackCorrect": "Im Kleingedruckten steht, dass die App nach 7 Tagen jede Woche Geld kostet. Jetzt weißt du es und entscheidest selbst.",
         "remember": "Kostenlos kann teuer werden – ich lese genau."
       }
     },
     "betrug/lang/Codes nie weitergeben": {
       "einfach": {
-        "question": "Jemand ruft dich an. Er fragt nach dem Code, den deine Bank dir per SMS geschickt hat. Was ist besser?",
+        "question": "Ein Mann ruft an: Hier ist Ihre Bank. Jemand will Geld von Ihrem Konto stehlen. Sie bekommen gleich einen Code per SMS. Sagen Sie mir den Code, dann stoppe ich das. Was machst du?",
         "answers": [
-          "Ich lese ihm den Code vor, damit er helfen kann.",
-          "Ich gebe den Code nicht weiter und lege auf."
+          "Ich sage den Code nicht und lege auf.",
+          "Ich sage den Code, weil er mein Geld ja schützen will.",
+          "Ich lege auf und rufe dann meine Bank selbst an."
         ],
-        "feedbackWrong": "Das ist nicht sicher. Mit dem Code können Betrüger Geld von deinem Konto holen.",
-        "feedbackCorrect": "Gut. Codes sind nur für dich, deshalb gibst du sie nie weiter.",
+        "feedbackWrong": [
+          null,
+          "Der Mann will dein Geld nicht schützen. Mit dem Code kann er Geld von deinem Konto holen, und eine echte Bank fragt nie danach.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Unter der Nummer, die du kennst, erreichst du die echte Bank. Dort kannst du fragen, ob mit deinem Konto alles in Ordnung ist."
+        ],
+        "feedbackCorrect": "Genau. Der Code ist nur für dich, und eine echte Bank fragt nie am Telefon danach.",
         "remember": "Ich gebe nie einen Code weiter."
       },
       "standard": {
-        "question": "Ein Anrufer will den SMS-Code wissen, den dir deine Bank gerade geschickt hat. Was ist besser?",
+        "question": "Ein Mann ruft an: Hier ist Ihre Bank. Jemand versucht, Geld von Ihrem Konto abzubuchen. Sie bekommen gleich einen Code per SMS – nennen Sie ihn mir, dann stoppe ich das. Was machst du?",
         "answers": [
-          "Den Code vorlesen, damit er helfen kann.",
-          "Den Code nicht nennen und auflegen."
+          "Ich nenne den Code nicht und lege auf.",
+          "Ich nenne den Code, er will mein Geld ja schützen.",
+          "Ich lege auf und rufe dann meine Bank selbst an."
         ],
-        "feedbackWrong": "Das ist riskant – mit dem Code können Betrüger dein Konto leerräumen.",
-        "feedbackCorrect": "Richtig. Codes sind nur für dich – gib sie nie weiter.",
+        "feedbackWrong": [
+          null,
+          "Der Anrufer will dein Geld nicht schützen. Mit dem Code kann er dein Konto leerräumen – eine echte Bank fragt nie danach.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Unter der bekannten Nummer erreichst du die echte Bank und kannst fragen, ob mit deinem Konto alles in Ordnung ist."
+        ],
+        "feedbackCorrect": "Der Code ist nur für dich. Eine echte Bank fragt am Telefon nie danach.",
         "remember": "Ich gebe nie einen Code weiter."
       }
     },
     "betrug/lang/Vorsicht bei QR-Codes": {
       "einfach": {
-        "question": "Am Park-Automaten klebt ein Aufkleber mit einem QR-Code. Was ist besser?",
+        "question": "Du willst am Park-Automaten bezahlen. Auf dem Automaten klebt ein Aufkleber mit einem QR-Code, und darauf steht: Hier schnell bezahlen. Was machst du?",
         "answers": [
-          "Ich scanne den Code schnell und bezahle.",
+          "Ich zahle in meiner eigenen Park-App.",
+          "Ich scanne den Code, weil das am schnellsten geht.",
           "Ich scanne nicht und zahle mit Münzen."
         ],
-        "feedbackCorrect": "Gut. Der Aufkleber kann falsch sein. Zahle lieber mit Münzen oder in deiner eigenen Park-App.",
-        "feedbackWrong": "Das ist riskant. Betrüger kleben falsche Codes über echte. Zahle lieber mit Münzen oder in deiner eigenen Park-App.",
+        "feedbackWrong": [
+          null,
+          "Betrüger kleben falsche Codes über echte, und der Code führt dann auf eine falsche Seite. Zahle lieber mit Münzen oder in deiner eigenen Park-App.",
+          null
+        ],
+        "feedbackAuch": [
+          "Deine eigene App kennst du, und den Aufkleber brauchst du dann nicht.",
+          null,
+          null
+        ],
+        "feedbackCorrect": "Genau. Der Aufkleber kann falsch sein, und mit Münzen bist du sicher.",
         "remember": "Wenn ein Code als Aufkleber klebt, scanne ich ihn nicht."
       },
       "standard": {
-        "question": "Auf dem Parkautomaten klebt ein QR-Code-Aufkleber. Was ist besser?",
+        "question": "Du willst am Parkautomaten bezahlen. Auf dem Automaten klebt ein Aufkleber mit einem QR-Code: Hier schnell bezahlen. Was machst du?",
         "answers": [
-          "Gleich scannen und direkt bezahlen.",
-          "Nicht scannen und bar bezahlen."
+          "Ich zahle über meine eigene Park-App.",
+          "Ich scanne den Code, das geht am schnellsten.",
+          "Ich scanne nicht und zahle bar."
         ],
-        "feedbackCorrect": "Richtig. Ein Aufkleber kann gefälscht sein – zahl lieber bar oder über die offizielle Park-App.",
-        "feedbackWrong": "Das ist riskant – Betrüger kleben gefälschte Codes über echte. Zahl lieber bar oder über die offizielle Park-App.",
+        "feedbackWrong": [
+          null,
+          "Betrüger überkleben echte Codes mit gefälschten, die auf eine Betrugsseite führen. Zahl lieber bar oder über die offizielle Park-App.",
+          null
+        ],
+        "feedbackAuch": [
+          "Deine eigene App kennst du – den Aufkleber brauchst du dann nicht.",
+          null,
+          null
+        ],
+        "feedbackCorrect": "Ein Aufkleber kann gefälscht sein. Mit Bargeld bist du auf der sicheren Seite.",
         "remember": "Überklebte QR-Codes scanne ich nicht."
       }
     },
     "betrug/lang/Was kann ich tun?": {
       "einfach": {
-        "question": "Jemand ruft an und sagt: Du musst sofort zahlen. Was machst du?",
+        "question": "Jemand ruft an: Hier ist Ihr Strom-Anbieter. Ihre Rechnung ist nicht bezahlt. Zahlen Sie sofort am Telefon mit Ihrer Karte, sonst stellen wir heute den Strom ab. Was machst du?",
         "answers": [
-          "Ich lege auf und rufe die bekannte Nummer an.",
-          "Ich zahle schnell, damit endlich Ruhe ist."
+          "Ich zahle sofort, weil ich den Strom behalten will.",
+          "Ich lege auf und rufe selbst beim Strom-Anbieter an.",
+          "Ich lege auf und schaue in meine letzte Rechnung."
         ],
-        "feedbackCorrect": "Gut. Selbst anrufen ist am sichersten. Nimm dafür die Nummer, die du kennst.",
-        "feedbackWrong": "Genau darauf hoffen Betrüger, und das Geld ist dann meistens weg. Leg lieber auf und ruf selbst an.",
+        "feedbackWrong": [
+          "Genau darauf hoffen Betrüger, und das Geld ist dann meistens weg. Leg lieber auf und ruf selbst an.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dort siehst du, ob wirklich etwas offen ist, und dort steht auch die echte Nummer."
+        ],
+        "feedbackCorrect": "Genau. Selbst anrufen ist am sichersten. Nimm dafür die Nummer, die du kennst. Sie steht auf deiner Rechnung.",
         "remember": "Ich lege auf und rufe selbst an."
       },
       "standard": {
-        "question": "Ein Anrufer sagt: „Sie müssen sofort zahlen.“ Was tust du?",
+        "question": "Ein Anrufer sagt: Hier ist Ihr Stromanbieter. Ihre Rechnung ist offen. Zahlen Sie sofort am Telefon mit Ihrer Karte, sonst stellen wir heute den Strom ab. Was machst du?",
         "answers": [
-          "Auflegen und selbst die bekannte Nummer anrufen.",
-          "Schnell zahlen, damit ich endlich meine Ruhe habe."
+          "Ich zahle sofort, ich will den Strom behalten.",
+          "Ich lege auf und rufe selbst beim Stromanbieter an.",
+          "Ich lege auf und sehe in meiner letzten Rechnung nach."
         ],
-        "feedbackCorrect": "Richtig. Selbst anzurufen ist am sichersten – mit der Nummer, die du kennst.",
-        "feedbackWrong": "Genau darauf setzen Betrüger – das Geld ist dann meist weg. Leg lieber auf und ruf selbst an.",
+        "feedbackWrong": [
+          "Genau darauf setzen Betrüger – das Geld ist dann meist weg. Leg lieber auf und ruf selbst an.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dort siehst du, ob wirklich etwas offen ist, und dort steht auch die echte Nummer."
+        ],
+        "feedbackCorrect": "Selbst anzurufen ist am sichersten – mit der Nummer, die du kennst. Sie steht auf deiner Rechnung.",
         "remember": "Ich lege auf und rufe selbst an."
       }
     },
     "betrug/lang/Was tun nach einem Betrug?": {
       "einfach": {
-        "question": "Du bist auf einen Betrug hereingefallen. Was gilt jetzt?",
+        "question": "Du hast gestern auf einen Link getippt und dort deine Karten-Daten eingegeben. Heute merkst du, dass die Seite falsch war. Das ist dir peinlich. Was machst du?",
         "answers": [
-          "Das ist mir peinlich, deshalb sage ich niemandem etwas.",
-          "Das kann jedem passieren, und ich hole schnell Hilfe."
+          "Ich sage niemandem etwas, weil mir das zu peinlich ist.",
+          "Ich rufe sofort meine Bank an.",
+          "Ich lasse sofort meine Karte sperren."
         ],
-        "feedbackWrong": "Wenn du schweigst, hilft das nur den Betrügern. Schnelle Hilfe kann noch etwas retten.",
-        "feedbackCorrect": "Genau. Du musst dich nicht schämen. Hol dir schnell Hilfe.",
+        "feedbackWrong": [
+          "Wenn du schweigst, hilft das nur den Betrügern. Mit deinen Karten-Daten können sie einkaufen. Lass die Karte schnell sperren – Betrug kann jedem passieren.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch die Bank kann die Karte sperren. Wichtig ist, dass du nicht wartest.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Schnell sein ist jetzt wichtig. Der Sperr-Notruf ist die 116 116. Betrug kann jedem passieren, und du musst dich nicht schämen.",
         "remember": "Betrug ist nicht meine Schuld. Ich hole Hilfe."
       },
       "standard": {
-        "question": "Du merkst, dass du betrogen wurdest. Was gilt?",
+        "question": "Gestern hast du auf einen Link getippt und dort deine Kartendaten eingegeben. Heute merkst du: Die Seite war gefälscht. Das ist dir peinlich. Was machst du?",
         "answers": [
-          "Das ist mir peinlich – ich erzähle niemandem davon.",
-          "Das kann jedem passieren – ich hole schnell Hilfe."
+          "Ich erzähle niemandem davon, das ist mir zu peinlich.",
+          "Ich rufe sofort meine Bank an.",
+          "Ich lasse sofort meine Karte sperren."
         ],
-        "feedbackWrong": "Schweigen hilft nur den Betrügern. Schnelle Hilfe kann noch etwas retten.",
-        "feedbackCorrect": "Richtig. Es gibt keinen Grund, sich zu schämen – hol schnell Hilfe.",
+        "feedbackWrong": [
+          "Schweigen hilft nur den Betrügern. Mit deinen Kartendaten können sie einkaufen. Lass die Karte schnell sperren – Betrug kann jedem passieren.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Auch die Bank kann die Karte sperren. Wichtig ist, dass du nicht wartest.",
+          null
+        ],
+        "feedbackCorrect": "Jetzt kommt es auf Schnelligkeit an. Der Sperr-Notruf ist die 116 116. Betrug kann jedem passieren – es gibt keinen Grund, sich zu schämen.",
         "remember": "Betrug ist nicht meine Schuld. Ich hole Hilfe."
       }
     },
     "betrug/kurz/Was ist Betrug im Internet?": {
       "einfach": {
-        "question": "Was wollen Betrüger im Internet von dir?",
+        "question": "Ein Mann schreibt dir: Ich helfe dir, leicht Geld zu verdienen. Schick mir nur deine Bank-Daten. Was machst du?",
         "answers": [
-          "Dein Geld oder deine Daten.",
-          "Sie wollen nur mit dir reden."
+          "Ich schicke die Daten, weil er mir ja helfen will.",
+          "Ich schicke nichts und lösche die Nachricht.",
+          "Ich schicke nichts und blockiere ihn."
         ],
-        "feedbackWrong": "Mit dem Reden fängt es nur an. Am Ende wollen sie Geld oder Daten.",
-        "feedbackCorrect": "Genau. Betrüger wollen fast immer dein Geld oder deine Daten.",
+        "feedbackWrong": [
+          "Wer wirklich hilft, braucht deine Bank-Daten nicht. Mit den Daten kann er Geld von deinem Konto holen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kann er dir nicht mehr schreiben, und deine Daten bleiben bei dir."
+        ],
+        "feedbackCorrect": "Genau. Er sagt, dass er dir hilft, aber er will deine Bank-Daten. So fängt Betrug oft an.",
         "remember": "Nicht jeder im Internet ist ehrlich."
       },
       "standard": {
-        "question": "Worauf haben es Betrüger im Internet abgesehen?",
+        "question": "Ein Mann schreibt dir: Ich helfe dir, leicht Geld zu verdienen. Schick mir nur deine Bankdaten. Was machst du?",
         "answers": [
-          "Auf dein Geld oder deine Daten.",
-          "Sie wollen sich nur unterhalten."
+          "Ich schicke die Daten, er will mir ja helfen.",
+          "Ich schicke nichts und lösche die Nachricht.",
+          "Ich schicke nichts und blockiere ihn."
         ],
-        "feedbackWrong": "Das Gespräch ist nur der Anfang – am Ende geht es um Geld oder Daten.",
-        "feedbackCorrect": "Richtig. Betrüger wollen fast immer dein Geld oder deine Daten.",
+        "feedbackWrong": [
+          "Wer wirklich hilft, braucht deine Bankdaten nicht. Damit kann er Geld von deinem Konto abbuchen.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann kann er dir nicht mehr schreiben, und deine Daten bleiben bei dir."
+        ],
+        "feedbackCorrect": "Er gibt sich hilfsbereit, will aber deine Bankdaten. So beginnt Betrug oft.",
         "remember": "Nicht jeder im Internet ist ehrlich."
       }
     },
     "betrug/kurz/Wie erkennst du Betrug?": {
       "einfach": {
-        "question": "Eine Nachricht sagt: Du hast plötzlich etwas gewonnen. Was tust du?",
+        "question": "Eine SMS sagt: Glückwunsch, Sie haben ein Handy gewonnen. Zahlen Sie nur 2 Euro für den Versand, nur heute. Du hast aber bei keinem Gewinnspiel mitgemacht. Was machst du?",
         "answers": [
-          "Ich freue mich und mache gleich mit.",
-          "Ich mache Stopp und frage nach."
+          "Ich zahle, weil 2 Euro ja nicht viel sind.",
+          "Ich lösche die SMS.",
+          "Ich mache Stopp und prüfe erst in Ruhe."
         ],
-        "feedbackWrong": "Ein plötzlicher Gewinn ist fast immer ein Trick.",
-        "feedbackCorrect": "Sehr gut. Erst machst du Stopp, dann fragst du nach.",
+        "feedbackWrong": [
+          "Es geht nicht um 2 Euro. Beim Zahlen gibst du deine Bank-Daten ein, und genau die wollen die Betrüger.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann ist die SMS weg, und du hast nichts gezahlt.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du hast nirgends mitgemacht, und die SMS macht Eile. Das sind Zeichen für Betrug, deshalb zahlst du nichts.",
         "remember": "Bei Stress oder einem Gewinn mache ich Stopp."
       },
       "standard": {
-        "question": "Eine Nachricht meldet: Du hast etwas gewonnen. Was tust du?",
+        "question": "Eine SMS meldet: Glückwunsch, Sie haben ein Handy gewonnen. Zahlen Sie nur 2 Euro Versand – nur heute. An einem Gewinnspiel hast du nicht teilgenommen. Was machst du?",
         "answers": [
-          "Mich freuen und gleich mitmachen.",
-          "Stopp machen und nachfragen."
+          "Ich zahle, 2 Euro sind ja nicht viel.",
+          "Ich lösche die SMS.",
+          "Ich mache Stopp und prüfe erst in Ruhe."
         ],
-        "feedbackWrong": "Ein überraschender Gewinn ist fast immer ein Trick.",
-        "feedbackCorrect": "Sehr gut: erst Stopp, dann nachfragen.",
+        "feedbackWrong": [
+          "Es geht nicht um die 2 Euro. Beim Bezahlen gibst du deine Bankdaten ein – genau die wollen die Betrüger.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann ist die SMS weg, und du hast nichts gezahlt.",
+          null
+        ],
+        "feedbackCorrect": "Du hast nirgends teilgenommen, und die SMS macht Zeitdruck. Beides sind Warnzeichen für Betrug – du zahlst nichts.",
         "remember": "Bei Druck oder einem plötzlichen Gewinn mache ich Stopp."
       }
     },
     "betrug/kurz/Was tust du bei Betrug?": {
       "einfach": {
-        "question": "Du bekommst eine SMS: Ihr Bank-Konto ist gesperrt. Tippen Sie hier. Was tust du?",
+        "question": "Du bekommst eine SMS: Ihr Bank-Konto ist gesperrt. Tippen Sie hier. Du bist nicht sicher, ob die SMS echt ist. Was machst du?",
         "answers": [
-          "Ich tippe auf den Link in der SMS.",
-          "Ich öffne meine Bank-App selbst."
+          "Ich öffne meine Bank-App selbst.",
+          "Ich tippe auf den Link, dann sehe ich es ja.",
+          "Ich rufe meine Bank unter der Nummer an, die ich schon habe."
         ],
-        "feedbackWrong": "Der Link kann zu einer falschen Seite führen. Deine Bank-App öffnest du lieber selbst.",
-        "feedbackCorrect": "Genau. Du tippst nicht auf den Link, sondern öffnest die App selbst.",
+        "feedbackWrong": [
+          null,
+          "Der Link kann zu einer falschen Seite führen, die wie deine Bank aussieht. Deine Bank-App öffnest du lieber selbst.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so fragst du die echte Bank. Wichtig ist, dass du die Nummer nimmst, die du schon kennst."
+        ],
+        "feedbackCorrect": "Genau. Du tippst nicht auf den Link, sondern öffnest die App selbst. Dort siehst du, ob alles in Ordnung ist.",
         "remember": "Ich muss den Trick nicht erkennen. Ich öffne die App einfach selbst."
       },
       "standard": {
-        "question": "Eine SMS: „Ihr Bankkonto ist gesperrt. Tippen Sie hier.“ Was tust du?",
+        "question": "Eine SMS meldet: Ihr Bankkonto ist gesperrt. Tippen Sie hier. Du bist nicht sicher, ob sie echt ist. Was machst du?",
         "answers": [
-          "Auf den Link in der SMS tippen.",
-          "Die Banking-App selbst öffnen."
+          "Ich öffne meine Banking-App selbst.",
+          "Ich tippe auf den Link, dann sehe ich es ja.",
+          "Ich rufe meine Bank unter der bekannten Nummer an."
         ],
-        "feedbackWrong": "Der Link kann auf eine gefälschte Seite führen – öffne deine Banking-App selbst.",
-        "feedbackCorrect": "Richtig. Du tippst nicht auf den Link, sondern öffnest die App selbst.",
+        "feedbackWrong": [
+          null,
+          "Der Link kann auf eine gefälschte Seite führen, die wie deine Bank aussieht. Öffne deine Banking-App selbst.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch so erreichst du die echte Bank. Wichtig ist die Nummer, die du schon kennst."
+        ],
+        "feedbackCorrect": "Du tippst nicht auf den Link, sondern öffnest die App selbst. Dort siehst du, ob alles in Ordnung ist.",
         "remember": "Ich muss den Trick nicht erkennen – ich öffne die App einfach selbst."
       }
     },
@@ -10792,155 +12492,275 @@ const AUFGABEN_VERSIONS = {
     },
     "facebook/lang/Profil": {
       "einfach": {
-        "question": "Bei einer Angabe in deinem Profil steht: Öffentlich. Was bedeutet das?",
+        "question": "Facebook fragt dich, ob du deine Telefon-Nummer ins Profil schreiben willst. Was machst du?",
         "answers": [
-          "Nur meine Freunde können sie sehen.",
-          "Alle Menschen können sie sehen."
+          "Ich trage sie ein, weil Facebook danach fragt.",
+          "Ich trage sie ein, damit alte Freunde mich finden.",
+          "Ich lasse das Feld leer."
         ],
-        "feedbackWrong": "Öffentlich heißt nicht nur Freunde. Auch Menschen, die du nicht kennst, können diese Angabe sehen.",
-        "feedbackCorrect": "Genau. Öffentlich heißt, dass jeder Mensch diese Angabe sehen kann.",
+        "feedbackWrong": [
+          "Facebook fragt nach vielen Angaben, aber du musst nicht alles ausfüllen. Deine Telefon-Nummer ist privat.",
+          "Alte Freunde finden dich über deinen Namen. Deine Nummer können dann vielleicht auch fremde Menschen sehen.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Das Feld ist freiwillig, und deine Freunde können dich nach der Nummer fragen.",
         "remember": "Ich zeige nicht alles in meinem Profil."
       },
       "standard": {
-        "question": "Bei einer Angabe in deinem Facebook-Profil steht: Öffentlich. Was bedeutet das?",
+        "question": "Facebook schlägt dir vor, deine Telefonnummer ins Profil einzutragen. Was machst du?",
         "answers": [
-          "Nur meine Freunde sehen sie.",
-          "Alle können sie sehen."
+          "Ich trage sie ein, Facebook fragt ja danach.",
+          "Ich trage sie ein, damit alte Freunde mich finden.",
+          "Ich lasse das Feld leer."
         ],
-        "feedbackWrong": "Öffentlich bedeutet nicht nur Freunde, sondern wirklich alle – auch Menschen, die du gar nicht kennst.",
-        "feedbackCorrect": "Richtig. Öffentlich bedeutet: Jede Person kann diese Angabe sehen.",
+        "feedbackWrong": [
+          "Facebook fragt viele Angaben ab, aber du musst nicht alles ausfüllen. Deine Telefonnummer ist privat.",
+          "Alte Freunde finden dich über deinen Namen. Deine Nummer sehen dann womöglich auch Fremde.",
+          null
+        ],
+        "feedbackCorrect": "Die Angabe ist freiwillig, und Freunde können dich einfach nach der Nummer fragen.",
         "remember": "Ich überlege genau, welche Angaben in meinem Profil öffentlich sichtbar sind."
       }
     },
     "facebook/lang/Beitrag schreiben": {
       "einfach": {
-        "question": "Du willst bei Facebook etwas posten. Was prüfst du, bevor du den Beitrag teilst?",
+        "question": "Du willst posten: Ab morgen bin ich zwei Wochen im Urlaub. Was machst du vorher?",
         "answers": [
-          "Wer den Beitrag sehen kann.",
-          "Wie schnell ich ihn posten kann."
+          "Ich schaue nach, wer den Beitrag sehen kann.",
+          "Nichts, ich poste gleich, damit sich alle mit mir freuen.",
+          "Ich poste erst nach dem Urlaub und zeige dann Fotos."
         ],
-        "feedbackWrong": "Schnell posten ist hier nicht wichtig. Prüfe lieber, wer deinen Beitrag sehen kann. Das sind manchmal mehr Menschen als nur deine Freunde.",
-        "feedbackCorrect": "Gut. Du prüfst zuerst, wer deinen Beitrag sehen kann.",
+        "feedbackWrong": [
+          null,
+          "Wenn der Beitrag öffentlich ist, können ihn auch fremde Menschen lesen. Dann wissen sie, dass deine Wohnung zwei Wochen leer ist.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann weiß vorher niemand, dass deine Wohnung leer ist, und du kannst gleich schöne Fotos zeigen."
+        ],
+        "feedbackCorrect": "Genau. Wenn der Beitrag öffentlich ist, können auch fremde Menschen lesen, dass deine Wohnung leer ist. Deshalb wählst du Freunde aus.",
         "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
       },
       "standard": {
-        "question": "Du möchtest auf Facebook etwas posten. Was prüfst du vorher?",
+        "question": "Du möchtest posten: Ab morgen bin ich zwei Wochen im Urlaub. Was machst du vorher?",
         "answers": [
-          "Wer den Beitrag sehen kann.",
-          "Wie schnell ich ihn posten kann."
+          "Ich prüfe, wer den Beitrag sehen kann.",
+          "Nichts, ich poste sofort – alle sollen sich mitfreuen.",
+          "Ich poste erst nach dem Urlaub, dann mit Fotos."
         ],
-        "feedbackWrong": "Tempo spielt hier keine Rolle. Wichtig ist, wer deinen Beitrag sehen kann – das sind manchmal mehr Menschen als nur deine Freunde.",
-        "feedbackCorrect": "Richtig. Du prüfst vor dem Posten, wer deinen Beitrag sehen kann.",
+        "feedbackWrong": [
+          null,
+          "Einen öffentlichen Beitrag können auch Fremde lesen. Sie wissen dann, dass deine Wohnung zwei Wochen leer steht.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "So erfährt vorher niemand, dass deine Wohnung leer steht, und du kannst gleich Fotos zeigen."
+        ],
+        "feedbackCorrect": "Ist der Beitrag öffentlich, können auch Fremde lesen, dass deine Wohnung leer steht. Deshalb wählst du Freunde als Zielgruppe.",
         "remember": "Vor dem Posten prüfe ich, wer den Beitrag sehen kann."
       }
     },
     "facebook/lang/Wer darf etwas sehen?": {
       "einfach": {
-        "question": "Du hast bei Facebook einen Beitrag geschrieben. Wer kann ihn sehen?",
+        "question": "Bei einem alten Beitrag von dir steht: Öffentlich. Das möchtest du nicht mehr. Was machst du?",
         "answers": [
-          "Das hängt von meiner Einstellung ab. Ich prüfe sie.",
-          "Immer alle Menschen. Daran kann ich nichts ändern."
+          "Nichts, weil ich alte Beiträge nicht mehr ändern kann.",
+          "Ich ändere die Einstellung beim Beitrag auf Freunde.",
+          "Ich lösche den Beitrag."
         ],
-        "feedbackWrong": "Das stimmt nicht. Du kannst einstellen, wer deine Beiträge sehen darf, zum Beispiel nur deine Freunde.",
-        "feedbackCorrect": "Genau. Wer deinen Beitrag sieht, hängt von deiner Einstellung ab. Deshalb prüfst du sie, und dabei darfst du dir helfen lassen.",
+        "feedbackWrong": [
+          "Das geht doch: Du kannst auch alte Beiträge ändern. Stell beim Beitrag Freunde ein oder lösch den Beitrag.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht den Beitrag niemand mehr."
+        ],
+        "feedbackCorrect": "Genau. Du kannst die Einstellung auch später noch ändern, und jetzt sehen nur deine Freunde den Beitrag.",
         "remember": "Ich prüfe meine Einstellungen."
       },
       "standard": {
-        "question": "Du hast auf Facebook einen Beitrag geschrieben. Wer kann ihn sehen?",
+        "question": "Ein alter Beitrag von dir ist öffentlich sichtbar. Das möchtest du nicht mehr. Was machst du?",
         "answers": [
-          "Das hängt von meiner Einstellung ab – ich prüfe sie.",
-          "Immer alle Menschen, daran lässt sich nichts ändern."
+          "Nichts, alte Beiträge lassen sich nicht mehr ändern.",
+          "Ich stelle die Zielgruppe des Beitrags auf Freunde.",
+          "Ich lösche den Beitrag."
         ],
-        "feedbackWrong": "Das stimmt nicht. Mit den Privatsphäre-Einstellungen legst du fest, wer deine Beiträge sehen kann – zum Beispiel nur deine Freunde.",
-        "feedbackCorrect": "Richtig. Wer deinen Beitrag sieht, hängt von deinen Privatsphäre-Einstellungen ab. Prüf sie – und lass dir ruhig helfen, wenn sie unübersichtlich sind.",
+        "feedbackWrong": [
+          "Doch, auch alte Beiträge lassen sich ändern. Stell die Zielgruppe auf Freunde oder lösch den Beitrag.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht den Beitrag niemand mehr."
+        ],
+        "feedbackCorrect": "Die Zielgruppe lässt sich auch nachträglich ändern. Jetzt sehen nur noch deine Freunde den Beitrag.",
         "remember": "Ich prüfe meine Privatsphäre-Einstellungen."
       }
     },
     "facebook/lang/Freundschafts-Anfragen": {
       "einfach": {
-        "question": "Eine Person, die du nicht kennst, schickt dir eine Freundschafts-Anfrage. Was ist besser?",
+        "question": "Du bekommst eine Freundschafts-Anfrage von deinem Kollegen Tom, aber ihr seid bei Facebook schon lange befreundet. Was machst du?",
         "answers": [
-          "Ich nehme die Anfrage sofort an.",
-          "Ich prüfe die Anfrage zuerst."
+          "Ich nehme die Anfrage erst einmal nicht an.",
+          "Ich nehme an, weil Tom vielleicht ein neues Profil hat.",
+          "Ich frage Tom selbst, ob das sein Profil ist."
         ],
-        "feedbackWrong": "Das ist nicht sicher, weil du nicht weißt, wer hinter dem Profil steckt.",
-        "feedbackCorrect": "Gut. Du prüfst die Anfrage zuerst. Wenn du die Person nicht kennst, kannst du die Anfrage ablehnen.",
+        "feedbackWrong": [
+          null,
+          "Das kann stimmen. Manche Betrüger bauen aber ein Profil mit Toms Namen und Foto nach und fragen dann seine Freunde nach Geld.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann weißt du es sicher. Am besten fragst du Tom bei der Arbeit oder am Telefon."
+        ],
+        "feedbackCorrect": "Genau. Manche Betrüger bauen ein Profil nach, mit dem Namen und dem Foto von Tom. Die Anfrage kann warten.",
         "remember": "Ich nehme unbekannte Anfragen nicht sofort an."
       },
       "standard": {
-        "question": "Jemand, den du nicht kennst, schickt dir eine Freundschaftsanfrage. Was ist besser?",
+        "question": "Du bekommst eine Freundschaftsanfrage von deinem Kollegen Tom, obwohl ihr auf Facebook längst befreundet seid. Was machst du?",
         "answers": [
-          "Ich nehme sie sofort an.",
-          "Ich prüfe sie zuerst."
+          "Ich nehme die Anfrage vorerst nicht an.",
+          "Ich nehme an, Tom hat wohl ein neues Profil.",
+          "Ich frage Tom selbst, ob das sein Profil ist."
         ],
-        "feedbackWrong": "Du weißt nicht, wer hinter dem Profil steckt. Die Anfrage sofort anzunehmen ist deshalb unsicher.",
-        "feedbackCorrect": "Richtig. Du prüfst die Anfrage zuerst – und wenn du die Person nicht kennst, darfst du sie ablehnen.",
+        "feedbackWrong": [
+          null,
+          "Das kann stimmen. Manche Betrüger kopieren aber Toms Profil mit Namen und Foto und bitten dann seine Freunde um Geld.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann weißt du es sicher. Am besten fragst du ihn bei der Arbeit oder am Telefon."
+        ],
+        "feedbackCorrect": "Manche Betrüger kopieren ein Profil mit Namen und Foto. Die Anfrage kann warten.",
         "remember": "Unbekannte Anfragen nehme ich nicht sofort an."
       }
     },
     "facebook/lang/Kommentare schreiben": {
       "einfach": {
-        "question": "Du schreibst einen Kommentar unter einen Beitrag. Was ist dabei wichtig?",
+        "question": "Ein Bekannter postet ein Foto von seiner neuen Frisur, und du findest, dass sie komisch aussieht. Was machst du?",
         "answers": [
-          "Ich schreibe respektvoll, auch bei anderer Meinung.",
-          "Wenn ich mich ärgere, darf ich andere beleidigen."
+          "Ich schreibe ehrlich, dass ihm die Frisur nicht steht.",
+          "Ich schreibe nichts dazu.",
+          "Ich schicke einen Lach-Smiley."
         ],
-        "feedbackWrong": "Beleidigungen können verletzen, und viele Menschen lesen deinen Kommentar. Schreib lieber respektvoll.",
-        "feedbackCorrect": "Genau. Du schreibst respektvoll, auch wenn du anderer Meinung bist.",
+        "feedbackWrong": [
+          "Ehrlich sein ist gut, aber den Kommentar lesen viele Menschen. Das kann deinen Bekannten verletzen.",
+          null,
+          "Dein Bekannter weiß dann nicht, ob du mit ihm lachst oder über ihn. Auch das kann verletzen."
+        ],
+        "feedbackCorrect": "Genau. Du musst nicht zu allem etwas schreiben, und so verletzt du niemanden.",
         "remember": "Ich schreibe respektvoll."
       },
       "standard": {
-        "question": "Du kommentierst einen Beitrag auf Facebook. Worauf kommt es an?",
+        "question": "Ein Bekannter postet ein Foto seiner neuen Frisur. Du findest, sie sieht komisch aus. Was machst du?",
         "answers": [
-          "Respektvoll bleiben, auch bei anderer Meinung.",
-          "Wer sich ärgert, darf andere auch beleidigen."
+          "Ich schreibe ehrlich, dass sie ihm nicht steht.",
+          "Ich schreibe nichts dazu.",
+          "Ich reagiere mit einem Lach-Smiley."
         ],
-        "feedbackWrong": "Beleidigungen verletzen – und Kommentare lesen oft viele Menschen mit. Bleib lieber respektvoll.",
-        "feedbackCorrect": "Richtig. Du bleibst respektvoll, auch wenn du anderer Meinung bist.",
+        "feedbackWrong": [
+          "Ehrlichkeit ist gut, aber den Kommentar lesen viele mit. Das kann deinen Bekannten verletzen.",
+          null,
+          "Dein Bekannter weiß dann nicht, ob du mit ihm lachst oder über ihn. Auch das kann verletzen."
+        ],
+        "feedbackCorrect": "Du musst nicht alles kommentieren, und so verletzt du niemanden.",
         "remember": "In Kommentaren bleibe ich respektvoll."
       }
     },
     "facebook/lang/Beleidigungen": {
       "einfach": {
-        "question": "Jemand beleidigt dich bei Facebook. Was ist besser?",
+        "question": "Unter deinem Foto schreibt jemand: Du bist so dumm. Das macht dich wütend. Was machst du?",
         "answers": [
-          "Ich beleidige die Person zurück.",
-          "Ich hole mir Unterstützung."
+          "Ich mache ein Bildschirm-Foto und lösche dann den Kommentar.",
+          "Ich schreibe zurück, dass er selber dumm ist, weil ich mir das nicht gefallen lasse.",
+          "Ich hole mir erst Unterstützung und rede mit jemandem darüber."
         ],
-        "feedbackWrong": "Wenn du zurück beleidigst, wird der Streit meistens größer. Hol dir lieber Unterstützung.",
-        "feedbackCorrect": "Gut. Du holst dir Unterstützung und bist damit nicht allein. Die Beleidigung ist nicht deine Schuld.",
+        "feedbackWrong": [
+          null,
+          "Dann geht der Streit weiter, und alle lesen mit. Mach lieber ein Bildschirm-Foto und lösch dann den Kommentar.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Das ist gut, denn Reden hilft, wenn du wütend bist. Danach entscheidest du in Ruhe, ob du ein Bildschirm-Foto machst, löschst, blockierst oder meldest."
+        ],
+        "feedbackCorrect": "Genau. Das Bildschirm-Foto ist dein Beweis. Unter deinem eigenen Beitrag darfst du Kommentare löschen, und du kannst die Person auch blockieren.",
         "remember": "Ich hole Unterstützung bei Beleidigungen."
       },
       "standard": {
-        "question": "Jemand beleidigt dich auf Facebook. Wie reagierst du am besten?",
+        "question": "Unter deinem Foto kommentiert jemand: Du bist so dumm. Das macht dich wütend. Was machst du?",
         "answers": [
-          "Ich beleidige die Person zurück.",
-          "Ich hole mir Unterstützung."
+          "Ich mache einen Screenshot und lösche dann den Kommentar.",
+          "Ich schreibe zurück: Selber dumm. Das lasse ich mir nicht gefallen.",
+          "Ich hole mir erst Unterstützung und rede mit jemandem darüber."
         ],
-        "feedbackWrong": "Eine Gegenbeleidigung macht den Streit meist nur größer. Hol dir lieber Unterstützung.",
-        "feedbackCorrect": "Richtig. Mit Unterstützung bist du nicht allein – und die Beleidigung ist nicht deine Schuld.",
+        "feedbackWrong": [
+          null,
+          "Dann geht der Streit weiter, und alle lesen mit. Mach lieber einen Screenshot und lösch dann den Kommentar.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Reden hilft gegen die Wut. Danach entscheidest du in Ruhe, ob du einen Screenshot machst, löschst, blockierst oder meldest."
+        ],
+        "feedbackCorrect": "Der Screenshot ist dein Beweis. Unter deinen eigenen Beiträgen darfst du Kommentare löschen, und du kannst die Person auch blockieren.",
         "remember": "Bei Beleidigungen hole ich Unterstützung."
       }
     },
     "facebook/lang/Fotos mit anderen Personen": {
       "einfach": {
-        "question": "Auf einem Foto sind auch andere Menschen zu sehen. Du willst es bei Facebook posten. Was ist besser?",
+        "question": "Du hast ein Foto vom Sommer-Fest, auf dem du mit drei Kollegen zu sehen bist. Du willst es posten. Was machst du?",
         "answers": [
-          "Ich frage die anderen zuerst.",
-          "Ich poste das Foto einfach."
+          "Ich poste es und stelle ein, dass nur Freunde es sehen.",
+          "Ich schneide das Foto so zu, dass nur ich zu sehen bin.",
+          "Ich frage die drei vorher."
         ],
-        "feedbackWrong": "Die anderen Menschen dürfen mitentscheiden, ob ihr Bild im Internet zu sehen ist. Frag sie deshalb vorher.",
-        "feedbackCorrect": "Gut. Du fragst zuerst, weil nicht jeder im Internet zu sehen sein möchte.",
+        "feedbackWrong": [
+          "Auch dann sehen viele Menschen das Foto. Deine Kollegen dürfen mitentscheiden, weil es auch ihr Bild ist.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann ist niemand anderes auf dem Foto, und du musst niemanden fragen.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Es ist auch ihr Bild, deshalb dürfen sie mitentscheiden.",
         "remember": "Ich frage andere, bevor ich ihr Foto poste."
       },
       "standard": {
-        "question": "Auf einem Foto sind auch andere Personen zu sehen. Du möchtest es auf Facebook posten. Was ist besser?",
+        "question": "Du hast ein Foto vom Sommerfest, auf dem du mit drei Kollegen zu sehen bist, und möchtest es posten. Was machst du?",
         "answers": [
-          "Ich frage die Personen vorher.",
-          "Ich poste das Foto einfach."
+          "Ich poste es und stelle die Zielgruppe auf Freunde.",
+          "Ich schneide es so zu, dass nur ich zu sehen bin.",
+          "Ich frage die drei vorher."
         ],
-        "feedbackWrong": "Die anderen dürfen mitentscheiden, ob sie im Internet zu sehen sind. Frag sie vorher um Erlaubnis.",
-        "feedbackCorrect": "Richtig. Du fragst vorher – nicht jeder möchte im Internet erscheinen.",
+        "feedbackWrong": [
+          "Auch dann sehen es viele. Deine Kollegen entscheiden mit, denn es ist auch ihr Bild.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Dann ist niemand anderes mehr auf dem Foto, und du musst niemanden fragen.",
+          null
+        ],
+        "feedbackCorrect": "Es ist auch ihr Bild, deshalb entscheiden sie mit.",
         "remember": "Bevor ich ein Foto mit anderen poste, frage ich sie."
       }
     },
@@ -10949,9 +12769,19 @@ const AUFGABEN_VERSIONS = {
         "question": "Eine fremde Person schreibt dir gemeine Dinge. Was machst du?",
         "answers": [
           "Ich schreibe genauso gemein zurück, damit es endlich aufhört.",
-          "Ich mache ein Bildschirm-Foto und blockiere dann die Person."
+          "Ich mache ein Bildschirm-Foto und blockiere dann die Person.",
+          "Ich mache ein Bildschirm-Foto und melde dann die Person."
         ],
-        "feedbackWrong": "Wenn du zurückschreibst, wird es oft schlimmer. Mach lieber ein Bildschirm-Foto und blockiere dann die Person.",
+        "feedbackWrong": [
+          "Wenn du zurückschreibst, wird es oft schlimmer. Mach lieber ein Bildschirm-Foto und blockiere dann die Person.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch das ist gut. Das Bildschirm-Foto ist dein Beweis, und Facebook prüft dann die Nachrichten."
+        ],
         "feedbackCorrect": "Gut. Das Bildschirm-Foto ist dein Beweis. Und wenn du die Person blockierst, kann sie dir keine Nachrichten mehr schicken.",
         "remember": "Ich blockiere, ich melde und ich hole Hilfe."
       },
@@ -10959,76 +12789,146 @@ const AUFGABEN_VERSIONS = {
         "question": "Eine fremde Person schreibt dir gemeine Nachrichten. Wie reagierst du?",
         "answers": [
           "Ich schreibe genauso gemein zurück, damit es endlich aufhört.",
-          "Ich mache einen Screenshot und blockiere dann die Person."
+          "Ich mache einen Screenshot und blockiere dann die Person.",
+          "Ich mache einen Screenshot und melde dann die Person."
         ],
-        "feedbackWrong": "Zurückschreiben macht es oft schlimmer. Sichere lieber einen Screenshot als Beweis und blockiere dann die Person.",
+        "feedbackWrong": [
+          "Zurückschreiben macht es oft schlimmer. Sichere lieber einen Screenshot als Beweis und blockiere dann die Person.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Auch das ist gut. Der Screenshot ist dein Beweis, und Facebook prüft dann die Nachrichten."
+        ],
         "feedbackCorrect": "Richtig. Der Screenshot ist dein Beweis. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
         "remember": "Ich blockiere, melde und hole mir Hilfe."
       }
     },
     "facebook/kurz/Dein Facebook-Profil": {
       "einfach": {
-        "question": "Wer soll deine privaten Angaben im Profil sehen?",
+        "question": "In deinem Facebook-Profil stehen private Angaben, zum Beispiel dein Wohn-Ort. Wer soll diese Angaben sehen?",
         "answers": [
-          "Nur meine Freunde.",
-          "Alle Menschen im Internet."
+          "Alle, weil ich nichts zu verstecken habe.",
+          "Nur meine Freunde, und das stelle ich so ein.",
+          "Niemand, deshalb lösche ich die Angabe."
         ],
-        "feedbackWrong": "Dann sehen auch fremde Menschen deine privaten Angaben. Zeige diese Angaben nur deinen Freunden.",
-        "feedbackCorrect": "Gut. Deine privaten Angaben zeigst du nur deinen Freunden. Deinen Namen, dein aktuelles Profil-Bild und dein Titel-Bild sehen aber alle.",
+        "feedbackWrong": [
+          "Dann sehen auch fremde Menschen deine privaten Angaben. Das hat nichts mit Verstecken zu tun, denn du bestimmst selbst, wer was über dich weiß.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht die Angabe niemand mehr. Du musst nicht alles ins Profil schreiben."
+        ],
+        "feedbackCorrect": "Genau. Deine privaten Angaben zeigst du nur deinen Freunden. Deinen Namen, dein aktuelles Profil-Bild und dein Titel-Bild sehen aber alle.",
         "remember": "Meine privaten Angaben zeige ich nur meinen Freunden."
       },
       "standard": {
-        "question": "Wer soll private Angaben in deinem Facebook-Profil sehen?",
+        "question": "In deinem Facebook-Profil stehen private Angaben, etwa dein Wohnort. Wer soll sie sehen?",
         "answers": [
-          "Nur meine Freunde.",
-          "Alle im Internet."
+          "Alle, ich habe ja nichts zu verbergen.",
+          "Nur meine Freunde, das stelle ich ein.",
+          "Niemand, ich lösche die Angabe."
         ],
-        "feedbackWrong": "Dann können auch Fremde deine privaten Angaben sehen. Gib diese Angaben nur für Freunde frei.",
-        "feedbackCorrect": "Richtig. Private Angaben gibst du nur für Freunde frei. Name, aktuelles Profilbild und Titelbild bleiben bei Facebook öffentlich.",
+        "feedbackWrong": [
+          "Dann sehen auch Fremde deine privaten Angaben. Mit Verbergen hat das nichts zu tun: Du bestimmst selbst, wer was über dich weiß.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Dann sieht die Angabe niemand mehr. Du musst nicht alles ins Profil schreiben."
+        ],
+        "feedbackCorrect": "Private Angaben gibst du nur für Freunde frei. Name, aktuelles Profilbild und Titelbild bleiben bei Facebook öffentlich.",
         "remember": "Private Angaben gebe ich nur für Freunde frei."
       }
     },
     "facebook/kurz/Unbekannte Personen": {
       "einfach": {
-        "question": "Du bekommst eine Freundschafts-Anfrage von einer Person, die du nicht kennst. Was tust du?",
+        "question": "Bei Facebook bekommst du eine Freundschafts-Anfrage von Jonas Weber. Ihr habt zwei gemeinsame Freunde, aber du kennst Jonas nicht. Was machst du?",
         "answers": [
-          "Ich nehme sie an, damit ich nicht unhöflich bin.",
-          "Ich lehne ab und frage eine vertraute Person."
+          "Ich nehme an, weil wir gemeinsame Freunde haben.",
+          "Ich frage erst einen der gemeinsamen Freunde nach Jonas.",
+          "Ich nehme die Anfrage nicht an."
         ],
-        "feedbackWrong": "Du musst niemanden annehmen, nur um höflich zu sein. Du weißt nicht, wer hinter dem Profil steckt. Hinter manchen fremden Profilen stecken Menschen, die an deine Daten wollen.",
-        "feedbackCorrect": "Gut. Du lehnst Anfragen von Unbekannten ab. Wenn du unsicher bist, fragst du eine Person, der du vertraust.",
+        "feedbackWrong": [
+          "Gemeinsame Freunde sagen wenig, denn vielleicht kennen deine Freunde Jonas auch nicht. Manche falschen Profile sammeln so viele Freunde wie möglich.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Danach weißt du mehr über Jonas. Die Anfrage kann so lange warten.",
+          null
+        ],
+        "feedbackCorrect": "Genau. Du kennst Jonas nicht, und gemeinsame Freunde sagen wenig über ihn. Du musst die Anfrage nicht annehmen.",
         "remember": "Unbekannte Anfragen lehne ich ab."
       },
       "standard": {
-        "question": "Du bekommst eine Freundschaftsanfrage von jemandem, den du nicht kennst. Was tust du?",
+        "question": "Auf Facebook schickt dir Jonas Weber eine Freundschaftsanfrage. Ihr habt zwei gemeinsame Freunde, aber du kennst ihn nicht. Was machst du?",
         "answers": [
-          "Ich nehme an, um nicht unhöflich zu sein.",
-          "Ich lehne ab und frage eine Vertrauensperson."
+          "Ich nehme an, wir haben ja gemeinsame Freunde.",
+          "Ich frage erst einen der gemeinsamen Freunde nach ihm.",
+          "Ich nehme die Anfrage nicht an."
         ],
-        "feedbackWrong": "Du musst niemanden annehmen, nur um höflich zu sein. Du weißt nicht, wer hinter dem Profil steckt – fremde Profile werden manchmal genutzt, um an Daten zu kommen.",
-        "feedbackCorrect": "Richtig. Anfragen von Unbekannten lehnst du ab. Bist du unsicher, fragst du eine Vertrauensperson.",
+        "feedbackWrong": [
+          "Gemeinsame Freunde sagen wenig aus: Vielleicht kennen sie Jonas selbst nicht. Manche Fake-Profile sammeln möglichst viele Kontakte.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          "Danach weißt du mehr über Jonas. Die Anfrage kann so lange warten.",
+          null
+        ],
+        "feedbackCorrect": "Du kennst Jonas nicht, und gemeinsame Freunde sagen wenig über ihn. Du musst die Anfrage nicht annehmen.",
         "remember": "Anfragen von Unbekannten lehne ich ab."
       }
     },
     "facebook/kurz/Komische Nachrichten": {
       "einfach": {
-        "question": "Jemand schickt dir bei Facebook einen Link und fragt nach Geld. Was tust du?",
+        "question": "Dein Facebook-Freund Markus schickt dir eine Nachricht mit einem Link: Bist du das in dem Video? Schau mal. Was machst du?",
         "answers": [
-          "Ich tippe nichts an und zeige es einer vertrauten Person.",
-          "Ich tippe auf den Link und schaue mir an, worum es geht."
+          "Ich tippe nicht auf den Link.",
+          "Ich tippe auf den Link, weil ich das Video sehen will.",
+          "Ich tippe nicht auf den Link und rufe Markus an."
         ],
-        "feedbackWrong": "Der Link kann zu einer falschen Seite führen. Dort will jemand an dein Geld oder deine Daten. Zeig die Nachricht lieber zuerst einer vertrauten Person.",
-        "feedbackCorrect": "Gut. Du tippst nichts an und zeigst die Nachricht einer Person, der du vertraust. Das schützt dich.",
+        "feedbackWrong": [
+          null,
+          "Die Nachricht soll dich neugierig machen. Der Link führt oft auf eine falsche Seite, auf der jemand dein Passwort haben will.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Der Link bleibt zu, und am Telefon merkst du, ob Markus das wirklich geschrieben hat."
+        ],
+        "feedbackCorrect": "Genau. So eine Nachricht kommt oft von einem gestohlenen Konto. Wenn der Link zu bleibt, bleibt auch dein Passwort bei dir.",
         "remember": "Fremde Links tippe ich nicht an."
       },
       "standard": {
-        "question": "Jemand schickt dir auf Facebook einen Link und bittet um Geld. Was tust du?",
+        "question": "Dein Facebook-Freund Markus schickt dir einen Link und schreibt: Bist du das in dem Video? Schau mal. Was machst du?",
         "answers": [
-          "Ich tippe nichts an und zeige es einer Vertrauensperson.",
-          "Ich öffne den Link und schaue mir an, worum es geht."
+          "Ich öffne den Link nicht.",
+          "Ich öffne den Link, ich will das Video sehen.",
+          "Ich öffne ihn nicht und rufe Markus an."
         ],
-        "feedbackWrong": "Der Link kann auf eine gefälschte Seite führen, die es auf dein Geld oder deine Daten abgesehen hat. Zeig die Nachricht lieber zuerst einer Vertrauensperson – das kostet nichts.",
-        "feedbackCorrect": "Richtig. Du tippst nichts an und holst dir eine zweite Meinung. Das schützt dich.",
+        "feedbackWrong": [
+          null,
+          "Die Nachricht soll dich neugierig machen. Der Link führt oft auf eine gefälschte Seite, die dein Passwort abgreifen soll.",
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Der Link bleibt zu, und am Telefon merkst du, ob Markus das wirklich geschrieben hat."
+        ],
+        "feedbackCorrect": "Solche Nachrichten kommen oft von einem gekaperten Konto. Bleibt der Link zu, bleibt auch dein Passwort bei dir.",
         "remember": "Fremde Links öffne ich nicht."
       }
     },
