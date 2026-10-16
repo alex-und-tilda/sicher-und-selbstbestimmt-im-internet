@@ -1802,7 +1802,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Bei Stress Hilfe holen.",
+            "text": "Bei Stress Pause machen.",
             "pictogram": "pikto-feel"
           }
         ],
@@ -1828,157 +1828,183 @@ const topics = [
         "feedbackCorrect": "Du kennst die Nummer nicht. Du musst nicht antworten. Nach dem Blockieren kommt von der Nummer nichts mehr."
       },
       {
-        "hinweis": "Frag dich: Woher weißt du, dass wirklich deine Freundin schreibt?",
-        "question": "Eine Freundin schreibt: Ich habe dir aus Versehen einen Code geschickt. Schick ihn zurück. Was machst du?",
+        "hinweis": "Wofür ist der Code? Wer darf ihn kennen?",
+        "question": "Ein Anruf: Hier ist der Handy-Laden. Wir haben dir eine SMS mit einem Code geschickt. Sag uns bitte den Code. Was machst du?",
         "pictogram": "pikto-code",
         "answers": [
-          "Ich schicke den Code zurück.",
-          "Ich schicke den Code nicht. Ich rufe die Freundin an.",
-          "Ich schicke den Code später."
+          "Ich sage den Code. Der Laden will mir helfen.",
+          "Ich sage den Code nicht. Ich lege auf.",
+          "Ich sage nur die ersten Zahlen."
         ],
         "correctIndex": 1,
         "feedbackWrong": [
-          "Vielleicht schreibt gar nicht deine Freundin. Der Code bleibt bei dir.",
+          "Mit dem Code kann der Anrufer dein WhatsApp übernehmen. Der Code ist nur für dich. Sag ihn niemandem.",
           null,
-          "Später ist genauso unsicher. Ruf lieber an."
+          "Der ganze Code ist geheim. Auch ein Teil davon. Wer danach fragt, will dein WhatsApp. Du kannst einfach auflegen."
         ],
-        "feedbackCorrect": "Der Code bleibt bei dir. Ruf lieber an."
+        "feedbackCorrect": "Der Code ist nur für dich. Wer am Telefon nach dem Code fragt, will dein WhatsApp übernehmen. Darum legst du auf.",
+        "schluessel": "Eine Freundin schreibt: Ich habe dir aus Versehen einen Code geschickt. Schick ihn zurück. Was machst du?",
+        "id": "whatsapp/quiz/code-anruf"
       },
       {
-        "hinweis": "Überlege: Warum schickt jemand einen Gutschein an eine ganze Gruppe?",
-        "question": "In einer Gruppe steht ein Link. Es soll einen Gutschein geben. Was machst du?",
+        "hinweis": "Warum bekommt eine ganze Gruppe einen Gutschein? Überlege das.",
+        "question": "Eine Nachricht in deiner Sport-Gruppe: 50 Euro Gutschein für alle! Hier tippen. Was machst du?",
         "pictogram": "pikto-stranger",
         "answers": [
-          "Ich öffne den Link nicht.",
-          "Ich öffne den Link sofort.",
-          "Ich schicke den Link weiter."
+          "Ich tippe auf den Link. 50 Euro sind viel Geld.",
+          "Ich schicke den Link an meine Familie.",
+          "Ich tippe nicht auf den Link."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "feedbackWrong": [
-          null,
-          "Solche Links führen oft zu Betrug.",
-          "Dann geht der Betrug an noch mehr Menschen."
+          "So ein Gutschein ist oft ein Trick. Die Seite will deine Daten. Oder sie will dein Geld.",
+          "Dann bekommt auch deine Familie den Trick. Schick so einen Link nicht weiter.",
+          null
         ],
-        "feedbackCorrect": "Gutschein-Links sind oft ein Trick."
+        "feedbackCorrect": "Gutscheine für alle sind oft ein Trick. Der Link kann auf eine falsche Seite führen. Dort will jemand deine Daten.",
+        "schluessel": "In einer Gruppe steht ein Link. Es soll einen Gutschein geben. Was machst du?",
+        "id": "whatsapp/quiz/gutschein-gruppe"
       },
       {
-        "hinweis": "Auf dem Foto sind andere Menschen. Dürfen die mitbestimmen?",
-        "question": "Auf einem Foto von einer Feier sind mehrere Personen. Du willst es senden. Was machst du?",
+        "hinweis": "Auf dem Foto sind andere Menschen. Wer darf mitbestimmen?",
+        "question": "Du hast ein Foto von einer Geburtstags-Feier. Darauf sind 5 Freunde. Du willst es in eine große Gruppe schicken. Was machst du?",
         "pictogram": "pikto-photo",
         "answers": [
-          "Ich sende es einfach.",
-          "Ich sende es ohne Namen.",
-          "Ich frage die Personen vorher."
+          "Ich schicke es. Alle sehen gut aus.",
+          "Ich frage die Freunde vorher.",
+          "Ich schicke es ohne Namen."
         ],
-        "correctIndex": 2,
+        "correctIndex": 1,
         "feedbackWrong": [
-          "Auf dem Foto sind andere Menschen. Frag sie vorher.",
-          "Auch ohne Namen sind die Gesichter zu sehen.",
-          null
+          "Vielleicht will jemand nicht in die große Gruppe. Es ist auch sein Bild. Frag deine Freunde vorher.",
+          null,
+          "Auch ohne Namen sieht man die Gesichter. Die Freunde dürfen mitbestimmen. Frag sie vorher."
         ],
-        "feedbackCorrect": "Die anderen dürfen mitbestimmen."
+        "feedbackCorrect": "Auf dem Foto sind deine Freunde. Es ist auch ihr Bild. Darum dürfen sie mitbestimmen: Wer sieht das Foto?",
+        "schluessel": "Auf einem Foto von einer Feier sind mehrere Personen. Du willst es senden. Was machst du?",
+        "id": "whatsapp/quiz/feier-foto"
       },
       {
-        "hinweis": "Überlege: Wer bestimmt, wann du antwortest?",
-        "question": "Jemand schreibt dir 10 Nachrichten hintereinander. Du sollst sofort antworten. Was machst du?",
+        "hinweis": "Wer bestimmt, wann du antwortest?",
+        "question": "Ein Bekannter schreibt dir 10 Nachrichten hintereinander: Antworte endlich! Warum antwortest du nicht? Du bist gerade beim Essen. Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
-          "Ich lege das Handy weg und atme durch.",
-          "Ich antworte sofort.",
-          "Ich entschuldige mich für die Verspätung."
+          "Ich antworte nach dem Essen.",
+          "Ich höre sofort auf zu essen. Ich antworte.",
+          "Ich schreibe: Entschuldigung, ich war zu langsam."
         ],
         "correctIndex": 0,
         "feedbackWrong": [
           null,
-          "Niemand darf dich zu einer Antwort drängen.",
-          "Du hast nichts falsch gemacht. Du musst dich nicht entschuldigen."
+          "Die vielen Nachrichten machen Druck. Du musst nicht sofort antworten. Du bestimmst, wann du schreibst.",
+          "Du hast nichts falsch gemacht. Du musst dich nicht entschuldigen. Du bestimmst, wann du antwortest."
         ],
-        "feedbackCorrect": "Du bestimmst, wann du antwortest."
+        "feedbackCorrect": "Du bestimmst, wann du antwortest. Niemand darf dich drängen. Nach dem Essen hast du Zeit und Ruhe.",
+        "schluessel": "Jemand schreibt dir 10 Nachrichten hintereinander. Du sollst sofort antworten. Was machst du?",
+        "id": "whatsapp/quiz/zehn-nachrichten"
       },
       {
-        "hinweis": "Du musst die Gruppe nicht verlassen. Es gibt noch etwas dazwischen.",
-        "question": "Was kannst du mit einer stressigen Gruppe machen?",
+        "hinweis": "Du kannst in der Gruppe bleiben. Und trotzdem hast du Ruhe. Wie geht das?",
+        "question": "In der Gruppe von deiner Arbeit schreiben alle jeden Abend sehr viel. Dein Handy piept ständig. Das stört dich. Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
-          "Immer sofort antworten.",
-          "Alle Nachrichten löschen.",
-          "Stumm schalten."
+          "Ich schalte die Gruppe stumm.",
+          "Ich lösche jeden Abend alle Nachrichten.",
+          "Ich lese jede Nachricht sofort. Sonst verpasse ich etwas."
+        ],
+        "correctIndex": 0,
+        "feedbackWrong": [
+          null,
+          "Die Nachrichten kommen trotzdem. Dein Handy piept weiter. Schalte die Gruppe lieber stumm.",
+          "Du musst nicht jede Nachricht sofort lesen. Das macht Stress. Du darfst die Gruppe stumm schalten."
+        ],
+        "feedbackCorrect": "Dann piept dein Handy nicht mehr. Du bleibst in der Gruppe. Du liest die Nachrichten, wann du willst.",
+        "schluessel": "Was kannst du mit einer stressigen Gruppe machen?",
+        "id": "whatsapp/quiz/gruppe-stumm"
+      },
+      {
+        "hinweis": "Eine Sprach-Nachricht kann man weiter-schicken. Was heißt das für dich?",
+        "question": "Du sprichst eine Sprach-Nachricht für deine Kollegin. Es geht um die Arbeit. Du willst auch von deiner Krankheit erzählen. Was machst du?",
+        "pictogram": "pikto-message",
+        "answers": [
+          "Ich erzähle alles. Sie ist ja meine Kollegin.",
+          "Ich schicke die Nachricht an die ganze Arbeits-Gruppe.",
+          "Ich überlege vorher: Was will ich wirklich sagen?"
         ],
         "correctIndex": 2,
         "feedbackWrong": [
-          "Du musst nicht immer sofort antworten.",
-          "Löschen macht die Gruppe nicht ruhiger. Es kommen neue Nachrichten.",
+          "Deine Kollegin kann die Nachricht weiter-schicken. Dann hören andere von deiner Krankheit. Überlege vorher, was du sagst.",
+          "Dann hören alle in der Gruppe von deiner Krankheit. Das ist privat. Überlege vorher, wem du was sagst.",
           null
         ],
-        "feedbackCorrect": "Das ist sicher. Du darfst Gruppen stumm schalten."
+        "feedbackCorrect": "Eine Sprach-Nachricht kann man weiter-schicken. Dann hören andere Menschen deine Stimme. Darum überlegst du vorher: Was ist privat?",
+        "schluessel": "Was ist bei Sprach-Nachrichten wichtig?",
+        "id": "whatsapp/quiz/sprachnachricht-privat"
       },
       {
-        "hinweis": "Eine Sprach-Nachricht kann man weiterschicken. Was heißt das für dich?",
-        "question": "Was ist bei Sprach-Nachrichten wichtig?",
-        "pictogram": "pikto-message",
-        "answers": [
-          "Alles sagen.",
-          "Vorher überlegen.",
-          "Sehr lange sprechen."
-        ],
-        "correctIndex": 1,
-        "feedbackWrong": [
-          "Du kannst aus Versehen private Dinge erzählen.",
-          null,
-          "Die Länge ist nicht wichtig. Wichtig ist, was du sagst."
-        ],
-        "feedbackCorrect": "Das ist sicher. Du überlegst vorher."
-      },
-      {
-        "hinweis": "Stress und Eile sind ein Warnzeichen. Was hilft dagegen?",
-        "question": "Eine Nachricht sagt: sofort bezahlen. Was ist besser?",
+        "hinweis": "Die Nachricht macht Druck. Kennst du die Firma? Überlege das.",
+        "question": "Eine Nachricht kommt: Ihre Rechnung ist nicht bezahlt. Zahlen Sie heute 49 Euro. Sonst kommt ein Anwalt. Du kennst die Firma nicht. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
-          "Sofort bezahlen.",
-          "Weniger Geld überweisen.",
-          "Nicht sofort handeln."
+          "Ich zahle die 49 Euro. Dann habe ich Ruhe.",
+          "Ich zahle nicht. Ich prüfe meine Rechnungen.",
+          "Ich zahle erst nur 10 Euro."
         ],
-        "correctIndex": 2,
+        "correctIndex": 1,
         "feedbackWrong": [
-          "Betrüger machen dir oft Stress. Bezahle nicht sofort.",
-          "Auch wenig Geld ist dann weg. Überweise gar nichts.",
-          null
+          "Die Drohung macht Angst. Das ist Absicht. Du kennst die Firma nicht. Dann ist dein Geld vielleicht weg.",
+          null,
+          "Auch 10 Euro sind dann weg. Und Betrüger wollen danach oft mehr. Prüfe zuerst deine Rechnungen."
         ],
-        "feedbackCorrect": "Das ist sicher. Du bezahlst nicht sofort."
+        "feedbackCorrect": "Du kennst die Firma nicht. Und die Nachricht macht Druck. So arbeiten Betrüger. In deinen Rechnungen siehst du selbst: Gibt es diese Rechnung?",
+        "schluessel": "Eine Nachricht sagt: sofort bezahlen. Was ist besser?",
+        "id": "whatsapp/quiz/rechnung-druck"
       },
       {
-        "hinweis": "Überlege: Wie viele Menschen lesen in einer Gruppe mit?",
-        "question": "Was gehört nicht in eine Gruppe?",
+        "hinweis": "Wie viele Menschen lesen in der Gruppe mit? Überlege das.",
+        "question": "Du bist krank. Du willst es deiner Chefin sagen. Die Chefin ist in der Gruppe von der Arbeit. In der Gruppe sind 25 Menschen. Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
-          "Private Daten.",
-          "Ein freundlicher Gruß.",
-          "Eine Frage ohne private Angaben."
+          "Ich schreibe es nur meiner Chefin.",
+          "Ich schreibe in die Gruppe: Ich bin krank. Ich habe Magen-Darm.",
+          "Ich schreibe ohne private Angaben in die Gruppe: Ich fehle heute."
         ],
         "correctIndex": 0,
         "feedbackWrong": [
           null,
-          "Ein Gruß ist in Ordnung. Er zeigt nichts Privates.",
-          "Eine Frage ohne private Angaben ist in Ordnung. Prüfe vorher: Was steht in deiner Frage?"
+          "Dann wissen 25 Menschen von deiner Krankheit. Das ist privat. Schreib es lieber nur deiner Chefin.",
+          null
         ],
-        "feedbackCorrect": "Das ist richtig. Private Daten bleiben geschützt."
+        "feedbackCorrect": "In der Gruppe lesen 25 Menschen mit. Deine Krankheit ist privat. Du schreibst nur deiner Chefin. Dann weiß sie es auch.",
+        "schluessel": "Was gehört nicht in eine Gruppe?",
+        "id": "whatsapp/quiz/krank-gruppe",
+        "feedbackAuch": [
+          null,
+          null,
+          "Du schreibst nichts Privates. Die Gruppe weiß nur: Du fehlst heute. Deine Chefin liest es auch."
+        ],
+        "auchMoeglich": [
+          2
+        ]
       },
       {
-        "hinweis": "Prüfe einen Link vor dem Antippen. Schon angetippt? Gib keine Daten ein. Hol dir Hilfe.",
-        "question": "Was ist eine gute WhatsApp-Regel?",
+        "hinweis": "Du kennst die Nummer. Will die Nachricht Geld, Daten oder einen Code?",
+        "question": "Deine Nachbarin Frau Yilmaz schreibt dir. Ihre Nummer hast du gespeichert. Sie fragt: Kannst du morgen mein Paket annehmen? Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
-          "Immer sofort antippen.",
-          "Erst prüfen.",
-          "Nie mehr antworten."
+          "Ich blockiere die Nummer. Das ist bestimmt ein Trick.",
+          "Ich lösche die Nachricht sofort.",
+          "Ich antworte ihr: Ja, das mache ich."
         ],
-        "correctIndex": 1,
+        "correctIndex": 2,
         "feedbackWrong": [
-          "Schnell antippen kann gefährlich sein.",
-          null,
-          "Du darfst antworten. Schau nur vorher genau hin."
+          "Nicht jede Nachricht ist ein Trick. Du kennst die Nummer. Sie will kein Geld und keine Daten.",
+          "Die Nachricht ist von deiner Nachbarin. Sie will nichts Gefährliches. Du kannst ihr ganz normal antworten.",
+          null
         ],
-        "feedbackCorrect": "Das ist sicher. Erst prüfen ist besser."
+        "feedbackCorrect": "Du kennst die Nummer. Die Nachricht will kein Geld, keine Daten und keinen Code. Darum kannst du ganz normal antworten.",
+        "schluessel": "Was ist eine gute WhatsApp-Regel?",
+        "id": "whatsapp/quiz/nachbarin-paket"
       }
     ],
     "helpQuestions": [
