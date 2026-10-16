@@ -1,5 +1,4 @@
 /* TEAM */
-Erstellt von: Frank Runge
 Schwerpunkt: Digitale Teilhabe, digitale Bildung und Medienkompetenz
 Projekt: Sicher und selbstbestimmt im Internet
 

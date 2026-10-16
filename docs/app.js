@@ -7255,8 +7255,9 @@ function buildDailyQuestionCard() {
   const answers = daily.q.answers.map((a, i) =>
     `<button type="button" class="answer-option daily-answer" onclick="answerDailyQuestion(${i})">${answerNumBadge(i)}${answerPikto(a, daily.q, i)}<span class="answer-text">${escapeHtml(answerText(a))}</span></button>`
   ).join("");
+  /* Wörter-Hilfe (Bericht 78): Die Ausnahme gilt auch für „Aus dem Thema: …“. */
   return `
-      <div class="intro-offer daily-question" id="dailyQuestion" style="${getTopicColorStyle(daily.topic.id)}" data-readable="true" role="region" aria-label="Frage des Tages">
+      <div class="intro-offer daily-question" id="dailyQuestion" style="${getTopicColorStyle(daily.topic.id)}" data-readable="true" role="region" aria-label="Frage des Tages"${glossarAufgabenAttribut(daily.q)}>
         <h3>Deine Frage für heute</h3>
         <p class="daily-question-topic">Aus dem Thema: ${escapeHtml(daily.topic.title)}</p>
         ${buildFrage({ aufgabe: daily.q, frage: daily.q.question || "", pikto: questionPikto(daily.q), antworten: answers, hilfe: buildTaskHelpBox(taskHint(daily.q, "quiz"), true) })}
@@ -13391,9 +13392,11 @@ function renderBigQuizQuestion() {
     </button>
   `).join("");
 
+  /* Wörter-Hilfe (Bericht 78): Die Ausnahme gilt für die ganze Karte wie im
+     Kurz-Quiz, auch für den Themen-Namen über der Frage („KI und Chatbots“). */
   content.innerHTML = `
     ${lernRahmenLeiste("renderMyPath")}
-    <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true">
+    <article class="card quiz-card big-quiz-card" style="${getTopicColorStyle(q.topicId)}" data-readable="true"${glossarAufgabenAttribut(q)}>
       <p class="big-quiz-topic-badge">${escapeHtml(q.topicTitle)}</p>
       <!-- V-2: derselbe Titel steht schon in der Kopfzeile. -->
       <h2 class="sr-only">${escapeHtml(bigQuizTitle)}</h2>

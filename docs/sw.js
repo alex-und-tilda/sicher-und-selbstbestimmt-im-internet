@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-29x";
+const CACHE_VERSION = "v2026-30a";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -41,16 +41,16 @@ const PRECACHE_URLS = [
   "./impressum.html",
   "./datenschutz.html",
   "./ersteller.html",
-  "./frank-runge-digitale-bildung.html",
-  "./frank-runge-digitale-teilhabe.html",
-  "./frank-runge-medienkompetenz.html",
-  "./frank-runge-ki-bildung.html",
-  "./frank-runge-leichte-sprache-uk.html",
-  "./frank-runge-smart-home-digitale-assistenz.html",
-  "./frank-runge-mediator-eingliederungshilfe.html",
-  "./frank-runge-3d-druck-digitale-teilhabe.html",
-  "./projekte-frank-runge.html",
-  "./projekte-digitale-bildung-frank-runge.html",
+  "./ersteller-digitale-bildung.html",
+  "./ersteller-digitale-teilhabe.html",
+  "./ersteller-medienkompetenz.html",
+  "./ersteller-ki-bildung.html",
+  "./ersteller-leichte-sprache-uk.html",
+  "./ersteller-smart-home-digitale-assistenz.html",
+  "./ersteller-mediator-eingliederungshilfe.html",
+  "./ersteller-3d-druck-digitale-teilhabe.html",
+  "./ersteller-projekte.html",
+  "./ersteller-projekte-digitale-bildung.html",
   "./barrierearme-lernplattform-einfache-sprache.html",
   "./datenschutz-social-media-lernangebot.html",
 
