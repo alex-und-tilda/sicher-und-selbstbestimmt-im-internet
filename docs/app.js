@@ -865,6 +865,54 @@ function hasResumeData() {
   return Boolean(pGet(LAST_LESSON_KEY) || pGet(TOPIC_AMOUNT_KEY) || pGet(KETTEN_KEY));
 }
 
+/* Rückfrage vor dem Löschen (Auftrag 24.10.2026, Bericht 96; WCAG 3.3.4):
+   Lernstand und Wiedereinstieg lassen sich nicht zurückholen. Darum fragt die
+   App erst nach – im selben Kasten, ohne Seitenwechsel. Die sichere Antwort
+   steht zuerst, mit denselben Wörtern wie beim Profil-Löschen. „Nein, behalten“
+   oder Escape bringt den Knopf zurück und setzt den Fokus wieder darauf.
+   Gelöscht wird erst mit „Ja, löschen“, wie bisher über toggleProgressSaving
+   und clearResumeData. Die Texte stehen hier zentral und sind für die
+   Prüfgruppe vorgemerkt (§13). */
+const LOESCHEN_RUECKFRAGE = {
+  lernstand: {
+    frage: "Lernstand wirklich löschen?",
+    hinweis: "Dann weiß die App nicht mehr: Diese Themen hast du geschafft. Das kann man nicht rückgängig machen.",
+    loeschen: () => toggleProgressSaving()
+  },
+  wiedereinstieg: {
+    frage: "Wiedereinstieg wirklich löschen?",
+    hinweis: "Dann fängst du bei jedem Thema wieder vorne an. Das kann man nicht rückgängig machen.",
+    loeschen: () => clearResumeData()
+  },
+  nein: "Nein, behalten",
+  ja: "Ja, löschen"
+};
+
+function loeschenRueckfrage(art, knopf) {
+  const r = LOESCHEN_RUECKFRAGE[art];
+  if (!r || !knopf || !knopf.parentNode) return;
+  stopReading();
+  const id = "loeschen-frage-" + art;
+  const box = document.createElement("div");
+  box.className = "loeschen-rueckfrage";
+  box.setAttribute("role", "group");
+  box.setAttribute("aria-labelledby", id);
+  box.innerHTML = `
+    <p class="progress-consent-title" id="${id}" tabindex="-1">${escapeHtml(r.frage)}</p>
+    <p class="progress-consent-note">${escapeHtml(r.hinweis)}</p>
+    <div class="feedback-actions">
+      <button type="button" class="feedback-button primary">${escapeHtml(LOESCHEN_RUECKFRAGE.nein)}</button>
+      <button type="button" class="feedback-button secondary danger-button">${escapeHtml(LOESCHEN_RUECKFRAGE.ja)}</button>
+    </div>`;
+  const [nein, ja] = box.querySelectorAll("button");
+  const zurueck = () => { box.replaceWith(knopf); knopf.focus(); };
+  nein.addEventListener("click", zurueck);
+  ja.addEventListener("click", () => r.loeschen());
+  box.addEventListener("keydown", e => { if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); zurueck(); } });
+  knopf.replaceWith(box);
+  document.getElementById(id).focus();
+}
+
 /* Lernstand direkt auf der Abschluss-Seite einschalten – ohne die Seite
    neu zu bauen (kein Kontextverlust, kein Sprung). */
 function enableProgressInline(button) {
@@ -3849,7 +3897,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du sendest ein Bild.",
           "einfach": "Bei Snapchat ist ein Bild oft nur kurz zu sehen.",
-          "standard": "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich weg sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften."
+          "standard": "Bei Snapchat sind Bilder oft nur kurz sichtbar. Das bedeutet aber nicht, dass sie wirklich verschwunden sind: Der Empfänger kann sie speichern oder abfotografieren. Sende deshalb nur Bilder, die auch dauerhaft sichtbar sein dürften."
         }
       }
     ],
@@ -4998,7 +5046,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Es gibt viele gute Shops im Internet.",
           "einfach": "Es gibt viele gute Shops im Internet, die du an einigen Merkmalen erkennst.",
-          "standard": "Seriöse Online-Shops erkennst du an mehreren Merkmalen: Sie sind bekannt oder gut bewertet, haben ein vollständiges Impressum mit Firmenname und Adresse und verlangen keine verdächtig niedrigen Preise. Echte Kundenbewertungen geben zusätzliche Sicherheit."
+          "standard": "Seriöse Online-Shops erkennst du an mehreren Merkmalen. Sie sind bekannt oder gut bewertet, haben ein vollständiges Impressum mit Firmennamen und Adresse und verlangen keine verdächtig niedrigen Preise. Echte Kundenbewertungen geben zusätzliche Sicherheit."
         }
       },
       {
@@ -5239,9 +5287,14 @@ function satzPiktoBild(item, gezeigt) {
   return `<img class="ls-sentence-pikto" src="${src}" alt="" width="56" height="56" aria-hidden="true" loading="lazy">`;
 }
 
+/* V1 (23.10.2026, Bericht 90): Außerhalb des Lernmodus stehen „Hilfe“ oben und
+   „Hilfe“ im Menü unten auf derselben Seite. Beide öffnen jetzt dasselbe: die
+   Hilfe-Seite (gleicher Aufruf wie der Menüpunkt). Dort steht der Notfall-Satz
+   zuerst, und Pause machen ist dort erreichbar. Im Lernmodus öffnet „Hilfe“
+   weiter das Blatt mit dem Tipp zur Aufgabe (Lernleiste, Menü dort aus). */
 function buildToolRow() {
   return `<div class="tool-row">${buildReadingToolbar()}
-    <button type="button" class="utility-chip bedien-pikto seiten-hilfe" aria-haspopup="dialog" onclick="lernMehrOeffnen(this)">${pictoHtml("help")}<span>Hilfe</span></button>
+    <button type="button" class="utility-chip bedien-pikto seiten-hilfe" onclick="navigateTab('hilfe')">${pictoHtml("help")}<span>Hilfe</span></button>
   </div>`;
 }
 
@@ -5674,11 +5727,15 @@ if (typeof ResizeObserver !== "undefined") {
 }
 window.addEventListener("resize", lernNavHoeheMessen);
 
-/* Die Texte der Knöpfe unten, Hauptknopf zuerst – für die Ansage am Ende des Vorlesens. */
+/* Die Texte der Knöpfe unten, Hauptknopf zuerst – für die Ansage am Ende des Vorlesens.
+   Ohne gespiegelten Hauptknopf ist der feste Knopf „Weiter“ (#nextButton) der
+   Hauptknopf. Er fehlte in der Auswahl: Auf Lerntext und Beispielen nannte das
+   Vorlesen nur „Zurück“ (Wegprüfung, Bericht 83, B24). */
 function leisteTexte() {
-  return Array.from(document.querySelectorAll(".nav .leiste-knopf--haupt, .nav .leiste-knopf--neben, .nav #backButton"))
+  const haupt = b => b.classList.contains("leiste-knopf--haupt") || b.id === "nextButton";
+  return Array.from(document.querySelectorAll(".nav .leiste-knopf--haupt, .nav .leiste-knopf--neben, .nav #backButton, .nav #nextButton"))
     .filter(b => !b.disabled && b.getClientRects().length > 0)
-    .sort((a, b) => (a.classList.contains("leiste-knopf--haupt") ? 0 : 1) - (b.classList.contains("leiste-knopf--haupt") ? 0 : 1))
+    .sort((a, b) => (haupt(a) ? 0 : 1) - (haupt(b) ? 0 : 1))
     .map(b => cleanSpeechText(b.textContent))
     .filter(Boolean);
 }
@@ -7363,7 +7420,7 @@ function buildEinstiegHinweis(topic, ersteFrage = false) {
 
 function buildEinstiegTools() {
   return `<div class="start-tools">${buildReadingToolbar()}
-    <button type="button" class="start-help" aria-haspopup="dialog" onclick="lernMehrOeffnen(this)">${getIconHtml("help")}<span>Hilfe</span></button>
+    <button type="button" class="start-help" onclick="navigateTab('hilfe')">${getIconHtml("help")}<span>Hilfe</span></button>
   </div>`;
 }
 function buildEinstiegOptionen(optionen) {
@@ -7777,7 +7834,7 @@ function renderMyPath() {
       <div class="progress-consent">
         <p class="progress-consent-title">Dein Wiedereinstieg</p>
         <p class="progress-consent-note">Die App merkt sich, wo du stehen geblieben bist, und ob du ein Thema kurz oder ausführlich liest. Das gehört nicht zum Lernstand. Auch das bleibt nur auf diesem Gerät.</p>
-        <button type="button" class="utility-button" onclick="clearResumeData()">Wiedereinstieg löschen</button>
+        <button type="button" class="utility-button" onclick="loeschenRueckfrage('wiedereinstieg', this)">Wiedereinstieg löschen</button>
       </div>` : "";
 
   let progressConsent = "";
@@ -7787,7 +7844,7 @@ function renderMyPath() {
         <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.</p>
         <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
         ${pauseEinwilligungHtml()}
-        <button type="button" class="utility-button" onclick="toggleProgressSaving()">Lernstand löschen und nicht mehr merken</button>
+        <button type="button" class="utility-button" onclick="loeschenRueckfrage('lernstand', this)">Lernstand löschen und nicht mehr merken</button>
       </div>${resumeDelete}`;
   } else if (doneCount > 0) {
     progressConsent = `
@@ -8832,7 +8889,9 @@ function nochEinWegHtml(antwort) {
 function taskHint(frage, ort) {
   if (frage && typeof frage.hinweis === "string" && frage.hinweis.trim()) return frage.hinweis.trim();
   if (ort === "lektion") return "Die Antwort steht oben in diesem Schritt. Lies den Text noch einmal.";
-  if (ort === "rueckmeldung") return "Du kannst die Lektion noch einmal lesen. Der Knopf dafür steht oben.";
+  /* „Lektion nochmal lesen“ steht in der zweiten Hilfe-Stufe, unter dem Tipp
+     (vorher: „Der Knopf dafür steht oben.“ – Wegprüfung, Bericht 83, B11). */
+  if (ort === "rueckmeldung") return "Du kannst die Lektion noch einmal lesen. Tippe dafür auf: Mehr Hilfe zeigen.";
   return "";
 }
 
@@ -8998,11 +9057,16 @@ function zusammenfassungFuerWeg(topic, lektionen, ende, schluessel) {
   if (topic[schluessel]) return topic[schluessel];
   const regelIds = regelIdsAusUebungen(lektionen.filter(l => l && l !== ende && l.module !== "Start")), wissen = [];
   /* Regeln nur aus den Übungen – genau das zählt auch die Regel-Karte.
-     Dazu Merksätze der Lektionen, die reines Wissen sind (keine Regel). */
+     Dazu Merksätze der Lektionen, die reines Wissen sind (keine Regel).
+     Wegprüfung (Bericht 83, B23; Bericht 84): Gehört der Merksatz einer Lektion
+     zu einer Regel, die keine Übung dieses Wegs übt, steht er ebenfalls hier –
+     als Merksatz, ohne Gutschrift auf der Regel-Karte. Vorher fehlte z. B. bei
+     WhatsApp „Fremde Nummer? Ich prüfe erst. Dann entscheide ich.“ beim Erinnern. */
   lektionen.forEach(l => {
     if (!l || l === ende || l.module === "Start") return;
     const lek = regelZuordnungTabelle(l.remember);
     if (lek.tabelle && !lek.rid) wissen.push({ lektion: l });
+    else if (lek.rid && regelIds.indexOf(lek.rid) === -1) wissen.push({ lektion: l });
   });
   const regeln = regelIds.map(id => regelById(id)).filter(Boolean);
   const liste = stufe => regeln.map(r => ({ text: regelText(r, stufe).kurz, pictogram: r.pikto }))
@@ -10530,7 +10594,9 @@ const ANTWORT_BILDER = {
     "betrug/lang/Abo-Fallen": ["geschenk", "lesen", "search"],
     "betrug/lang/Vorsicht bei QR-Codes": ["handy", "code", "money"],
     "betrug/lang/Was kann ich tun?": ["card", "anruf", "lesen"],
-    "betrug/kurz/Was ist Betrug im Internet?": ["data", "message", "stranger"],
+    /* Bericht 84 (M6): die Übung ist jetzt ein Anruf, der einen Code will –
+       Code nennen, auflegen, selbst bei der Bank anrufen. */
+    "betrug/kurz/Was ist Betrug im Internet?": ["code", "anruf", "bank"],
     "betrug/kurz/Wie erkennst du Betrug?": ["money", "message", "search"],
     "betrug/kurz/Was tust du bei Betrug?": ["bank", "link", "anruf"],
     "Hallo Mama, neue Nummer, brauche Geld. Was machst du?": ["money", "message", "anruf"],
@@ -11336,7 +11402,10 @@ function answerNeueSituation(topic, i, index, opt) {
   if (ns.segmentiert) { focusContent(); renderLegalFooter(); }
   const knopf = feld.querySelector(".nav-button.primary");
   if (knopf) knopf.focus();
-  if (!o.wieder) sprichEingefuegteRueckmeldung(feld);
+  /* Die segmentierte Rückmeldung ist eine eigene Seite: focusContent() liest sie wie
+     die Rückmeldung einer Übung ganz vor, mit dem Urteil in der Überschrift. Nur den
+     Kasten vorzulesen ließ das Urteil aus (Wegprüfung, Bericht 83, B25). */
+  if (!o.wieder && !ns.segmentiert) sprichEingefuegteRueckmeldung(feld);
 }
 
 /* ------------------------------------------------------------

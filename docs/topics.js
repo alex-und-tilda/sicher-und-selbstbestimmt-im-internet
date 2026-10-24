@@ -119,7 +119,7 @@ const topics = [
             "Ich gebe die Konto-Nummer. Und ein Foto von meiner Bank-Karte. Dann geht es schneller."
           ],
           "correctIndex": 0,
-          "feedbackCorrect": "Genau. Die Konto-Nummer ist wichtig. Aber die Firma braucht sie für deinen Lohn. Du kennst die Firma. Dann gibst du sie.",
+          "feedbackCorrect": "Die Konto-Nummer ist wichtig. Aber die Firma braucht sie für deinen Lohn. Du kennst die Firma. Dann gibst du sie.",
           "feedbackWrong": [
             null,
             "Bank-Daten sind wichtig. Aber hier gibt es einen klaren Zweck: deinen Lohn. Ohne Konto-Nummer bekommst du kein Geld. Private Daten heißt nicht: immer Nein.",
@@ -189,7 +189,7 @@ const topics = [
             "Eine Seite im Internet. Sie verspricht dir ein Geschenk."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Genau. Deine Kranken-Kasse kennst du. Du hast selbst angerufen. Sie braucht dein Geburts-Datum. So erkennt sie dich. Die anderen kennst du nicht.",
+          "feedbackCorrect": "Deine Kranken-Kasse kennst du. Du hast selbst angerufen. Sie braucht dein Geburts-Datum. So erkennt sie dich. Die anderen kennst du nicht.",
           "feedbackWrong": [
             "Die Person kennst du nicht. Du weißt nicht: Wer ist das wirklich? Für einen Gruß braucht sie dein Geburts-Datum nicht.",
             null,
@@ -368,12 +368,12 @@ const topics = [
           "pictogram": "pikto-photo",
           "hinweis": "Überlege: Wie viele Fotos braucht die App für deine Karte?",
           "answers": [
-            "Nur ausgewählte Fotos erlauben. Ich wähle das eine Foto aus.",
+            "Nur ausgewählte Fotos erlauben. Ich wähle das Foto aus.",
             "Alle Fotos erlauben. Dann muss ich nicht lange suchen.",
             "Keine Fotos erlauben. Fotos sind privat."
           ],
           "correctIndex": 0,
-          "feedbackCorrect": "Genau. Die App braucht nur dieses eine Foto. Viele Handys bieten dafür: Ausgewählte Fotos. Dann sieht die App deine anderen Fotos nicht.",
+          "feedbackCorrect": "Die App braucht nur dieses eine Foto. Viele Handys bieten dafür: Ausgewählte Fotos. Dann sieht die App deine anderen Fotos nicht.",
           "feedbackWrong": [
             null,
             "Dann sieht die App alle deine Fotos. Für eine Karte braucht sie aber nur eins. Das ist mehr als nötig.",
@@ -430,7 +430,7 @@ const topics = [
             "Niemand. Die Nummer ist privat."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Genau. Deine Freunde sollen dich anrufen können. Dafür reicht: Nur Freunde. Fremde brauchen deine Nummer nicht.",
+          "feedbackCorrect": "Deine Freunde sollen dich anrufen können. Dafür reicht: Nur Freunde. Fremde brauchen deine Nummer nicht.",
           "feedbackWrong": [
             "Dann sehen auch Fremde deine Nummer. Das ist mehr als nötig. Für deine Freunde reicht: Nur Freunde.",
             null,
@@ -491,7 +491,7 @@ const topics = [
             "Ich frage die 3 vorher. Sagen alle Ja? Dann stelle ich es rein."
           ],
           "correctIndex": 2,
-          "feedbackCorrect": "Genau. Auf dem Foto sind auch deine Freunde. Sie entscheiden mit. Sagt einer Nein? Dann stellst du es nicht rein.",
+          "feedbackCorrect": "Auf dem Foto sind auch deine Freunde. Sie entscheiden mit. Sagt einer Nein? Dann stellst du es nicht rein.",
           "feedbackWrong": [
             "Das Foto zeigt auch deine Freunde. Sie entscheiden mit. Frag sie vorher.",
             "Auch in 24 Stunden kann jemand das Foto speichern. Dann ist es nicht weg. Frag deine Freunde vorher.",
@@ -545,10 +545,10 @@ const topics = [
           "answers": [
             "Mit allen 30 Leuten. Für immer.",
             "Nur mit den 3 Freunden. Für immer.",
-            "Nur mit den 3 Freunden. Bis zum Treffen."
+            "Mit den 3 Freunden. Bis zum Treffen."
           ],
           "correctIndex": 2,
-          "feedbackCorrect": "Genau. Nur die 3 brauchen deinen Standort. Und nur bis zum Treffen. Du darfst auch Nein sagen. Dann schreibt ihr euch: Hier bin ich.",
+          "feedbackCorrect": "Nur die 3 brauchen deinen Standort. Und nur bis zum Treffen. Du darfst auch Nein sagen. Dann schreibt ihr euch: Hier bin ich.",
           "feedbackWrong": [
             "Dann sehen 30 Leute immer deinen Standort. Für das Treffen brauchen ihn nur 3. Und nur kurz.",
             "Das sind die richtigen Leute. Aber für immer ist mehr als nötig. Für das Treffen reicht eine kurze Zeit.",
@@ -618,7 +618,7 @@ const topics = [
             "Ich gebe nichts ein. Ich rufe die Nummer auf meiner Bank-Karte an."
           ],
           "correctIndex": 2,
-          "feedbackCorrect": "Genau. Du weißt nicht: Schreibt wirklich deine Bank? Das prüfst du selbst. Mit einer bekannten Nummer.",
+          "feedbackCorrect": "Du weißt nicht: Schreibt wirklich deine Bank? Das prüfst du selbst. Mit einer bekannten Nummer.",
           "feedbackWrong": [
             "Jeder kann schreiben: Hier ist deine Bank. Der Link kann zu einer falschen Seite führen. Ruf lieber selbst an.",
             "Auch das Geburts-Datum nutzen Betrüger. Du weißt nicht: Wer schreibt wirklich? Prüfe das zuerst selbst.",
@@ -713,7 +713,7 @@ const topics = [
           "Ich gebe meine Nummer und meine Adresse. Dann erreichen sie mich sicher."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Genau. Die Kurs-Leitung braucht die Nummer für einen klaren Zweck. Du kennst sie. Dann ist das in Ordnung.",
+        "feedbackCorrect": "Die Kurs-Leitung braucht die Nummer für einen klaren Zweck. Du kennst sie. Dann ist das in Ordnung.",
         "feedbackWrong": [
           "Private Daten heißt nicht: immer Nein. Hier gibt es einen klaren Zweck. Ohne Nummer bekommst du keinen Bescheid.",
           null,
@@ -732,7 +732,7 @@ const topics = [
           "Ich gebe die Adresse nicht ein."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Genau. Für ein Video braucht niemand deine Adresse. Das passt nicht zum Zweck.",
+        "feedbackCorrect": "Für ein Video braucht niemand deine Adresse. Das passt nicht zum Zweck.",
         "feedbackWrong": [
           "Für ein Video braucht niemand deine Adresse. Das passt nicht zum Zweck.",
           "Auch die E-Mail-Adresse braucht die Seite für ein Video nicht. Das passt nicht zum Zweck.",
@@ -753,7 +753,7 @@ const topics = [
           "Ich gebe eine fremde Nummer ein. Dann bleibt meine Nummer geheim."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Genau. Du prüfst zuerst: Wofür braucht die App die Nummer? Ist sie nicht nötig? Dann lässt du das Feld leer.",
+        "feedbackCorrect": "Du prüfst zuerst: Wofür braucht die App die Nummer? Ist sie nicht nötig? Dann lässt du das Feld leer.",
         "feedbackWrong": [
           null,
           "Prüfe zuerst: Braucht die App deine Nummer wirklich? Sonst kann sie an Fremde gehen.",
@@ -776,7 +776,7 @@ const topics = [
           "Ich erlaube es nicht. Der Wecker klingelt auch ohne Kontakte."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Genau. Für einen Wecker braucht die App keine Kontakte. Das passt nicht zum Zweck.",
+        "feedbackCorrect": "Für einen Wecker braucht die App keine Kontakte. Das passt nicht zum Zweck.",
         "feedbackWrong": [
           "Ein Wecker braucht keine Kontakte zum Klingeln. Das passt nicht zum Zweck.",
           "Ändern kannst du die Erlaubnis später. Aber dann hat die App deine Kontakte schon gesehen. Darum prüfst du vorher.",
@@ -797,7 +797,7 @@ const topics = [
           "Immer erlauben."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Genau. Dein Handy ist weg? Dann benutzt du es nicht. Die Funktion muss es trotzdem finden. Dafür braucht sie den Standort immer.",
+        "feedbackCorrect": "Dein Handy ist weg? Dann benutzt du es nicht. Die Funktion muss es trotzdem finden. Dafür braucht sie den Standort immer.",
         "feedbackWrong": [
           "Dein Handy ist weg? Dann benutzt du es nicht. Dann findet die Funktion es auch nicht. Hier braucht sie den Standort immer.",
           "Das darfst du so wählen. Aber dann hilft dir die Funktion nicht. Dein Handy ist weg? Dann findest du es nicht.",
@@ -818,7 +818,7 @@ const topics = [
           "Ich schicke gar keine Fotos mehr."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Genau. Nur der Brief ist privat. So geht das: Du schneidest den Brief weg. Oder du machst ein neues Foto ohne Brief.",
+        "feedbackCorrect": "Nur der Brief ist privat. So geht das: Du schneidest den Brief weg. Oder du machst ein neues Foto ohne Brief.",
         "feedbackWrong": [
           null,
           "Dann können andere deine Adresse lesen. Die Adresse muss niemand sehen.",
@@ -835,11 +835,11 @@ const topics = [
         "hinweis": "Überlege: Weißt du, wofür die App deine Adresse will?",
         "answers": [
           "Ich trage die Adresse ein. Die App wird sie schon brauchen.",
-          "Ich trage noch nichts ein. Ich prüfe erst: Wofür? Oder ich hole mir Unterstützung.",
+          "Ich trage noch nichts ein. Ich prüfe erst: Wofür?",
           "Ich trage eine falsche Adresse ein. Das merkt die App nicht."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Genau. Du bist unsicher? Dann gibst du noch nichts frei. Erst prüfen. Oder Unterstützung holen.",
+        "feedbackCorrect": "Du bist unsicher? Dann gibst du noch nichts frei. Erst prüfen. Oder Unterstützung holen.",
         "feedbackWrong": [
           "Du weißt nicht: Wofür will die App die Adresse? Dann gib noch nichts ein. Erst prüfen.",
           null,
@@ -855,12 +855,12 @@ const topics = [
         "pictogram": "pikto-lock",
         "hinweis": "Überlege: Was liegt noch bei dir? Und was haben andere schon?",
         "answers": [
-          "Die Erlaubnis für den Standort. Das Foto haben andere vielleicht schon gespeichert.",
+          "Die Erlaubnis. Das Foto haben andere vielleicht schon gespeichert.",
           "Beides. Ich lösche das Foto einfach in der Gruppe. Dann ist es weg.",
           "Gar nichts. Eine Erlaubnis gilt für immer."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Genau. Eine Erlaubnis kannst du oft ändern. Ein verschicktes Foto kannst du oft nicht zurückholen. Darum prüfst du vorher.",
+        "feedbackCorrect": "Eine Erlaubnis kannst du oft ändern. Ein verschicktes Foto kannst du oft nicht zurückholen. Darum prüfst du vorher.",
         "feedbackWrong": [
           null,
           "Die Erlaubnis kannst du in den Einstellungen ändern. Das Foto aber vielleicht nicht mehr. Andere können es schon gespeichert haben.",
@@ -874,12 +874,12 @@ const topics = [
         "question": "Was ist eine gute Regel für deine Daten?",
         "pictogram": "pikto-lock",
         "answers": [
-          "Immer sofort eingeben.",
+          "Immer sofort eingeben. Das geht schnell.",
           "Nie etwas eingeben.",
           "Erst prüfen. Dann entscheiden."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Genau. Erst prüfst du: Wer? Was? Wofür? Dann entscheidest du. Manchmal gibst du Daten. Manchmal nicht.",
+        "feedbackCorrect": "Erst prüfst du: Wer? Was? Wofür? Dann entscheidest du. Manchmal gibst du Daten. Manchmal nicht.",
         "feedbackWrong": [
           "Sofort eingeben ist zu schnell. Prüfe erst: Wer will die Daten? Und wofür?",
           "Du darfst Nein sagen. Manchmal braucht jemand deine Daten aber wirklich. Wichtig ist: Erst prüfen. Dann selbst entscheiden.",
@@ -903,7 +903,7 @@ const topics = [
           "Ich zeige es in meinem Status. Danach frage ich meine Kollegin."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Gut. Deine Kollegin hat nur Ja zu Lea gesagt. Im Status sehen es auch andere. Dafür fragst du deine Kollegin vorher. Sagt sie Nein? Dann zeigst du das Foto dort nicht.",
+        "feedbackCorrect": "Deine Kollegin hat nur Ja zu Lea gesagt. Im Status sehen es auch andere. Dafür fragst du deine Kollegin vorher. Sagt sie Nein? Dann zeigst du das Foto dort nicht.",
         "feedbackWrong": [
           null,
           "Deine Kollegin hat nur Ja zu Lea gesagt. Im Status sehen es auch andere. Für den Status fragst du deine Kollegin vorher.",
@@ -982,7 +982,7 @@ const topics = [
             "Ich gebe die Konto-Nummer. Und ein Foto von meiner Bank-Karte. Dann geht es schneller."
           ],
           "correctIndex": 0,
-          "feedbackCorrect": "Genau. Die Konto-Nummer ist wichtig. Aber die Firma braucht sie für deinen Lohn. Du kennst die Firma. Dann gibst du sie.",
+          "feedbackCorrect": "Die Konto-Nummer ist wichtig. Aber die Firma braucht sie für deinen Lohn. Du kennst die Firma. Dann gibst du sie.",
           "feedbackWrong": [
             null,
             "Bank-Daten sind wichtig. Aber hier gibt es einen klaren Zweck: deinen Lohn. Ohne Konto-Nummer bekommst du kein Geld. Private Daten heißt nicht: immer Nein.",
@@ -1131,7 +1131,7 @@ const topics = [
             "Ich frage die 3 vorher. Sagen alle Ja? Dann stelle ich es rein."
           ],
           "correctIndex": 2,
-          "feedbackCorrect": "Genau. Auf dem Foto sind auch deine Freunde. Sie entscheiden mit. Sagt einer Nein? Dann stellst du es nicht rein.",
+          "feedbackCorrect": "Auf dem Foto sind auch deine Freunde. Sie entscheiden mit. Sagt einer Nein? Dann stellst du es nicht rein.",
           "feedbackWrong": [
             "Das Foto zeigt auch deine Freunde. Sie entscheiden mit. Frag sie vorher.",
             "Auch in 24 Stunden kann jemand das Foto speichern. Dann ist es nicht weg. Frag deine Freunde vorher.",
@@ -1397,7 +1397,7 @@ const topics = [
             "Dann kann WhatsApp die Nummer prüfen. Und die Nummer kann dir nicht mehr schreiben.",
             null
           ],
-          "feedbackCorrect": "Genau. Du kennst die Nummer nicht. Sie will deine privaten Daten. Darum antwortest du nicht.",
+          "feedbackCorrect": "Du kennst die Nummer nicht. Sie will deine privaten Daten. Darum antwortest du nicht.",
           "remember": "Ich antworte fremden Nummern nicht sofort."
         },
         "pictogram": "pikto-message"
@@ -1456,7 +1456,7 @@ const topics = [
             null,
             "Das Geld bleibt bei dir. Zusammen merkt ihr schnell: Stimmt die Geschichte?"
           ],
-          "feedbackCorrect": "Genau. An der alten Nummer erreichst du deine echte Schwester. So merkst du: Stimmt die Nachricht?",
+          "feedbackCorrect": "An der alten Nummer erreichst du deine echte Schwester. So merkst du: Stimmt die Nachricht?",
           "remember": "Ich schicke kein Geld an fremde Nummern."
         },
         "pictogram": "pikto-message"
@@ -1494,7 +1494,7 @@ const topics = [
             null,
             "Besser gar nicht tippen. Die falsche Seite sieht oft echt aus. Schon angetippt? Dann gib keine Daten ein."
           ],
-          "feedbackCorrect": "Genau. Beim Paket-Dienst siehst du selbst: Wo ist mein Paket? Der Link bleibt zu.",
+          "feedbackCorrect": "Beim Paket-Dienst siehst du selbst: Wo ist mein Paket? Der Link bleibt zu.",
           "remember": "Ich öffne unbekannte Links nicht sofort."
         },
         "pictogram": "pikto-link"
@@ -1533,7 +1533,7 @@ const topics = [
             "Betrüger sagen einfach: Ja. Die Frage schützt dich nicht. Der Code bleibt bei dir.",
             null
           ],
-          "feedbackCorrect": "Genau. Der Code ist nur für dich. Jemand fragt nach dem Code? Dann will die Person dein Konto.",
+          "feedbackCorrect": "Der Code ist nur für dich. Jemand fragt nach dem Code? Dann will die Person dein Konto.",
           "remember": "Mein WhatsApp-Code bleibt geheim."
         },
         "pictogram": "pikto-lock"
@@ -1579,7 +1579,7 @@ const topics = [
             "So bekommen nur deine Freunde die Adresse.",
             null
           ],
-          "feedbackCorrect": "Genau. In der Gruppe lesen 30 Menschen mit. Deine Adresse ist privat. Sie gehört nicht in die Gruppe.",
+          "feedbackCorrect": "In der Gruppe lesen 30 Menschen mit. Deine Adresse ist privat. Sie gehört nicht in die Gruppe.",
           "remember": "In Gruppen schreibe ich nur, was alle sehen dürfen."
         },
         "pictogram": "pikto-message"
@@ -1617,7 +1617,7 @@ const topics = [
             "Für dich ist es Spaß. Für deine Kollegin ist es vielleicht peinlich. Es ist ihr Bild. Sie darf mitbestimmen.",
             "Auch eine Freundin kann das Foto weiter-schicken. Frag erst deine Kollegin."
           ],
-          "feedbackCorrect": "Genau. Es ist ihr Bild. Sie darf mitbestimmen: Wer sieht das Foto?",
+          "feedbackCorrect": "Es ist ihr Bild. Sie darf mitbestimmen: Wer sieht das Foto?",
           "remember": "Ich prüfe Fotos vor dem Senden."
         },
         "pictogram": "pikto-photo"
@@ -1663,7 +1663,7 @@ const topics = [
             null,
             "Zu zweit seht ihr oft schneller: Ist das ein Trick?"
           ],
-          "feedbackCorrect": "Genau. Die Nachricht macht Druck. In der Pause wirst du ruhig. Dann entscheidest du in Ruhe.",
+          "feedbackCorrect": "Die Nachricht macht Druck. In der Pause wirst du ruhig. Dann entscheidest du in Ruhe.",
           "remember": "Etwas stresst mich? Dann mache ich Pause."
         },
         "pictogram": "pikto-feel"
@@ -1764,7 +1764,7 @@ const topics = [
             "Das ist zu schnell. Vielleicht schreibt gar nicht Tom. Betrüger nutzen manchmal fremde Konten. Ruf Tom zuerst selbst an.",
             "Auch 50 Euro sind dann weg. Ruf Tom zuerst selbst an."
           ],
-          "feedbackCorrect": "Genau. Am Telefon merkst du: Hat wirklich Tom geschrieben?",
+          "feedbackCorrect": "Am Telefon merkst du: Hat wirklich Tom geschrieben?",
           "remember": "Bei Geld-Bitten rufe ich selbst an."
         },
         "remember": "Ich mache Stopp. Dann prüfe ich.",
@@ -2163,7 +2163,7 @@ const topics = [
             "pictogram": "pikto-no"
           },
           {
-            "text": "Öffentlich heißt: alle können es sehen.",
+            "text": "Öffentlich heißt: Alle können es sehen.",
             "pictogram": "pikto-screen"
           }
         ],
@@ -2217,7 +2217,7 @@ const topics = [
             null,
             "Dann weiß vorher niemand: Deine Wohnung ist leer. Und du hast schöne Fotos."
           ],
-          "feedbackCorrect": "Genau. Bei Öffentlich können auch fremde Menschen lesen: Deine Wohnung ist leer. Darum wählst du: Freunde.",
+          "feedbackCorrect": "Bei Öffentlich können auch fremde Menschen lesen: Deine Wohnung ist leer. Darum wählst du: Freunde.",
           "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
         },
         "pictogram": "pikto-message"
@@ -2263,7 +2263,7 @@ const topics = [
             null,
             "Dann sieht den Beitrag niemand mehr."
           ],
-          "feedbackCorrect": "Genau. Du kannst die Einstellung auch später ändern. Jetzt sehen nur deine Freunde den Beitrag.",
+          "feedbackCorrect": "Du kannst die Einstellung auch später ändern. Jetzt sehen nur deine Freunde den Beitrag.",
           "remember": "Ich prüfe meine Einstellungen."
         },
         "pictogram": "pikto-lock"
@@ -2310,7 +2310,7 @@ const topics = [
             null,
             "Dann weißt du es sicher. Am besten fragst du Tom bei der Arbeit. Oder am Telefon."
           ],
-          "feedbackCorrect": "Genau. Manche Betrüger bauen ein Profil nach. Mit dem Namen und dem Foto von Tom. Die Anfrage kann warten.",
+          "feedbackCorrect": "Manche Betrüger bauen ein Profil nach. Mit dem Namen und dem Foto von Tom. Die Anfrage kann warten.",
           "remember": "Ich nehme unbekannte Anfragen nicht sofort an."
         },
         "pictogram": "pikto-message"
@@ -2348,7 +2348,7 @@ const topics = [
             null,
             "Dein Bekannter weiß dann nicht: Lachst du mit ihm? Oder lachst du über ihn? Auch das kann verletzen."
           ],
-          "feedbackCorrect": "Genau. Du musst nicht zu allem etwas schreiben. So verletzt du niemanden.",
+          "feedbackCorrect": "Du musst nicht zu allem etwas schreiben. So verletzt du niemanden.",
           "remember": "Ich schreibe respektvoll."
         },
         "pictogram": "pikto-message"
@@ -2411,9 +2411,9 @@ const topics = [
           "feedbackAuch": [
             null,
             null,
-            "Das ist gut. Reden hilft bei Wut. Danach entscheidest du in Ruhe: Bildschirm-Foto, löschen, blockieren oder melden."
+            "Reden hilft bei Wut. Danach entscheidest du in Ruhe: Bildschirm-Foto, löschen, blockieren oder melden."
           ],
-          "feedbackCorrect": "Genau. Das Bildschirm-Foto ist dein Beweis. Unter deinem Beitrag darfst du Kommentare löschen. Du kannst die Person auch blockieren.",
+          "feedbackCorrect": "Das Bildschirm-Foto ist dein Beweis. Unter deinem Beitrag darfst du Kommentare löschen. Du kannst die Person auch blockieren.",
           "remember": "Ich hole Unterstützung bei Beleidigungen."
         },
         "pictogram": "pikto-help"
@@ -2459,7 +2459,7 @@ const topics = [
             "Dann ist niemand anderes auf dem Foto. Dann musst du niemanden fragen.",
             null
           ],
-          "feedbackCorrect": "Genau. Es ist auch ihr Bild. Darum dürfen sie mitentscheiden.",
+          "feedbackCorrect": "Es ist auch ihr Bild. Darum dürfen sie mitentscheiden.",
           "remember": "Ich frage andere, bevor ich ihr Foto poste."
         },
         "pictogram": "pikto-photo"
@@ -2500,7 +2500,7 @@ const topics = [
             "pictogram": "pikto-ask"
           }
         ],
-        "warning": "Wer sich als Freund ausgibt und schnell Geld oder private Daten will, ist oft kein Freund.",
+        "warning": "Jemand schreibt: Ich bin dein Freund. Und er will schnell Geld oder private Daten. Dann ist er oft kein Freund.",
         "success": "Hilfe holen ist gut. Es ist nicht deine Schuld.",
         "practice": {
           "question": "Eine fremde Person schreibt dir gemeine Dinge. Was machst du?",
@@ -2525,7 +2525,7 @@ const topics = [
             null,
             "Auch das ist gut. Das Bildschirm-Foto ist dein Beweis. Facebook prüft dann die Nachrichten."
           ],
-          "feedbackCorrect": "Gut. Das Bildschirm-Foto ist dein Beweis. Blockieren stoppt die Nachrichten.",
+          "feedbackCorrect": "Das Bildschirm-Foto ist dein Beweis. Blockieren stoppt die Nachrichten.",
           "remember": "Ich blockiere. Ich melde. Ich hole Hilfe."
         },
         "remember": "Gemeinheit ist nicht meine Schuld. Ich hole Hilfe.",
@@ -2578,7 +2578,7 @@ const topics = [
           "Likes sagen nichts über deine Sicherheit.",
           null
         ],
-        "feedbackCorrect": "Prüfe zuerst, wer es sehen kann."
+        "feedbackCorrect": "Ein Foto von zu Hause zeigt oft viel über dich. Darum prüfst du zuerst: Wer sieht das Foto?"
       },
       {
         "hinweis": "Frag dich: Was weißt du über dieses Profil?",
@@ -2595,7 +2595,7 @@ const topics = [
           "Eine Nachricht zeigt: Hier antwortet jemand. Schau lieber erst das Profil an.",
           null
         ],
-        "feedbackCorrect": "Gut. Schau dir das Profil erst an. Du kennst die Person nicht? Dann lehne ab."
+        "feedbackCorrect": "Fremde Profile können falsch sein. Darum schaust du dir das Profil erst an. Du kennst die Person nicht? Dann lehnst du die Anfrage ab."
       },
       {
         "hinweis": "Überlege: Was möchtest du selbst gern lesen?",
@@ -2612,7 +2612,7 @@ const topics = [
           "Das verletzt. Bleib lieber freundlich.",
           "Auch Spott verletzt. Bleib lieber freundlich."
         ],
-        "feedbackCorrect": "Gut. Du bleibst freundlich. Du musst auch nicht jedem antworten."
+        "feedbackCorrect": "Kommentare können andere Menschen verletzen. Mit freundlichen Worten wird der Streit nicht größer. Du musst auch nicht jedem antworten."
       },
       {
         "hinweis": "Frag dich: Was gehört nur dir?",
@@ -2629,7 +2629,7 @@ const topics = [
           null,
           "Der Himmel zeigt nichts über dich."
         ],
-        "feedbackCorrect": "Das ist richtig. Deine Telefon-Nummer ist privat."
+        "feedbackCorrect": "Deine Telefon-Nummer ist privat. Mit der Nummer können fremde Menschen dich anrufen. Oder sie schreiben dir."
       },
       {
         "hinweis": "Du musst das nicht aushalten. Was kannst du mit der Person machen?",
@@ -2646,7 +2646,7 @@ const topics = [
           null,
           "Du musst nicht gehen. Die andere Person macht den Fehler."
         ],
-        "feedbackCorrect": "Blockieren und Hilfe holen ist stark."
+        "feedbackCorrect": "Nach dem Blockieren kann dir die Person nicht mehr schreiben. Die Beleidigungen sind nicht deine Schuld. Hilfe holen ist gut."
       },
       {
         "hinweis": "Frag dich: Wer ist mit öffentlich gemeint?",
@@ -2663,7 +2663,7 @@ const topics = [
           "Öffentlich gilt für alle, nicht nur für Freunde.",
           "Nicht nur Facebook. Öffentlich heißt: alle im Internet."
         ],
-        "feedbackCorrect": "Öffentlich heißt: alle können es sehen."
+        "feedbackCorrect": "Öffentlich heißt: Alle können den Beitrag sehen. Auch fremde Menschen."
       },
       {
         "hinweis": "Auf dem Foto ist eine andere Person. Darf sie mitbestimmen?",
@@ -2680,7 +2680,7 @@ const topics = [
           null,
           "Man erkennt sie am Gesicht. Frag sie lieber."
         ],
-        "feedbackCorrect": "Frag die Person vorher."
+        "feedbackCorrect": "Auf dem Foto ist deine Kollegin. Sie entscheidet mit. Darum fragst du sie vorher."
       },
       {
         "hinweis": "Überlege: Ist ein alter Beitrag wirklich weg?",
@@ -2698,7 +2698,7 @@ const topics = [
           "Facebook löscht alte Beiträge nicht. Sie bleiben. Du kannst sie selbst löschen.",
           null
         ],
-        "feedbackCorrect": "Das ist richtig. Alte Beiträge bleiben sichtbar. Du kannst sie ansehen. Und du kannst sie löschen."
+        "feedbackCorrect": "Alte Beiträge bleiben sichtbar. Du kannst sie ansehen. Und du kannst sie löschen."
       },
       {
         "hinweis": "Frag dich: Was muss wirklich im Profil stehen?",
@@ -2715,7 +2715,7 @@ const topics = [
           "Ein Passwort darf nie öffentlich sein.",
           "Deine Adresse zeigt, wo du wohnst. Sie gehört nicht ins Profil."
         ],
-        "feedbackCorrect": "Das ist sicher. Du zeigst nur nötige Informationen."
+        "feedbackCorrect": "Viele Menschen können dein Profil sehen. Darum zeigst du dort nur nötige Informationen."
       },
       {
         "hinweis": "Ein Beitrag ist schnell draußen und schwer zurückzuholen.",
@@ -2732,7 +2732,7 @@ const topics = [
           "Du darfst posten. Schau nur vorher, wer es sieht.",
           null
         ],
-        "feedbackCorrect": "Erst prüfen. Dann posten."
+        "feedbackCorrect": "Viele Menschen können einen Beitrag sehen. Darum prüfst du ihn vorher. Dann postest du ihn."
       },
       {
         "id": "facebook/quiz/kern-profil-sichtbarkeit",
@@ -2744,7 +2744,7 @@ const topics = [
           "Ich stelle für den Geburts-Tag Freunde ein.",
           "Ich lasse Öffentlich stehen. Ich schreibe meinen Namen kürzer."
         ],
-        "feedbackCorrect": "Genau. Du stellst für diese Angabe Freunde ein. Öffentlich zeigt die Angabe auch anderen Personen.",
+        "feedbackCorrect": "Du stellst für diese Angabe Freunde ein. Öffentlich zeigt die Angabe auch anderen Personen.",
         "feedbackWrong": [
           "Ein neues Profil-Bild ändert diese Einstellung nicht. Stelle für den Geburts-Tag Freunde ein.",
           null,
@@ -2763,7 +2763,7 @@ const topics = [
           "Ich nehme sie erst mal an. Später entscheide ich.",
           "Ich lehne die Anfrage ab."
         ],
-        "feedbackCorrect": "Genau. Du kennst die Person nicht. Ein Foto sagt nicht genug über die Person. Du musst die Anfrage nicht annehmen.",
+        "feedbackCorrect": "Du kennst die Person nicht. Ein Foto sagt nicht genug über die Person. Du musst die Anfrage nicht annehmen.",
         "feedbackWrong": [
           "Ein freundliches Foto sagt nicht genug über die Person. Du kennst sie nicht. Nimm die Anfrage nicht an.",
           "Nach dem Annehmen ist die Person schon dein Facebook-Freund. Lehne die unbekannte Anfrage ab.",
@@ -2782,7 +2782,7 @@ const topics = [
           "Ich öffne den Link. Ich sende aber noch kein Geld.",
           "Ich sende erst 5 Euro. Dann warte ich auf eine Antwort."
         ],
-        "feedbackCorrect": "Gut. Du öffnest den fremden Link nicht. Du sendest der unbekannten Person kein Geld. Du kannst die Nachricht einer vertrauten Person zeigen.",
+        "feedbackCorrect": "Der Link kann auf eine falsche Seite führen. Darum öffnest du ihn nicht. Du kennst die Person nicht. Darum sendest du kein Geld. Du kannst die Nachricht auch einer vertrauten Person zeigen.",
         "feedbackWrong": [
           null,
           "Schon der Link kann auf eine falsche Seite führen. Öffne den Link nicht. Sende kein Geld.",
@@ -2975,7 +2975,7 @@ const topics = [
             null,
             "Dann ist das Haus nicht mehr auf dem Foto. Das geht schnell."
           ],
-          "feedbackCorrect": "Genau. Auf dem neuen Foto sieht man nur das Fahrrad. Niemand sieht, wo du wohnst.",
+          "feedbackCorrect": "Auf dem neuen Foto sieht man nur das Fahrrad. Niemand sieht, wo du wohnst.",
           "remember": "Ich prüfe, was auf dem Foto zu sehen ist."
         },
         "pictogram": "pikto-photo"
@@ -3021,7 +3021,7 @@ const topics = [
             "Dann ist niemand anderes zu sehen. Dann musst du niemanden fragen.",
             null
           ],
-          "feedbackCorrect": "Genau. Man erkennt den Nachbarn. Darum darf er mitentscheiden.",
+          "feedbackCorrect": "Man erkennt den Nachbarn. Darum darf er mitentscheiden.",
           "remember": "Ich frage andere, bevor ich ihr Bild poste."
         },
         "pictogram": "pikto-photo"
@@ -3059,7 +3059,7 @@ const topics = [
             "Andere können ein Bild vom Bildschirm machen. Die Story ist morgen weg. Aber das Bild bleibt.",
             "Löschen hilft nicht immer. Andere haben die Story vielleicht schon gespeichert."
           ],
-          "feedbackCorrect": "Genau. Andere können ein Bild vom Bildschirm machen. Dann bleibt deine Story. Darum prüfst du sie vorher.",
+          "feedbackCorrect": "Andere können ein Bild vom Bildschirm machen. Dann bleibt deine Story. Darum prüfst du sie vorher.",
           "remember": "Auch Stories prüfe ich vor dem Posten."
         },
         "pictogram": "pikto-photo"
@@ -3105,7 +3105,7 @@ const topics = [
             null,
             "Dann weiß im Urlaub niemand: Du bist gerade weit weg."
           ],
-          "feedbackCorrect": "Genau. Ohne Ort zeigt Instagram nicht an, wo du bist. Aber: Auch auf dem Foto kann man den Ort erkennen.",
+          "feedbackCorrect": "Ohne Ort zeigt Instagram nicht an, wo du bist. Aber: Auch auf dem Foto kann man den Ort erkennen.",
           "remember": "Ich teile meinen Standort nicht einfach."
         },
         "pictogram": "pikto-location"
@@ -3153,7 +3153,7 @@ const topics = [
             null,
             "Das Foto bleibt bei dir. Und Instagram kann das Profil prüfen."
           ],
-          "feedbackCorrect": "Genau. Du kennst die Person nur vom Schreiben. Ein Foto kannst du nicht zurückholen. Darum bleibt es bei dir.",
+          "feedbackCorrect": "Du kennst die Person nur vom Schreiben. Ein Foto kannst du nicht zurückholen. Darum bleibt es bei dir.",
           "remember": "Ich schicke fremden Personen keine privaten Fotos."
         },
         "pictogram": "pikto-message"
@@ -3218,7 +3218,7 @@ const topics = [
             "Das ist Unterstützung. Reden tut gut. Danach entscheidest du in Ruhe.",
             null
           ],
-          "feedbackCorrect": "Genau. Du musst nicht auf alles antworten. Dein Foto darf bleiben. Du kannst die Person auch blockieren.",
+          "feedbackCorrect": "Du musst nicht auf alles antworten. Dein Foto darf bleiben. Du kannst die Person auch blockieren.",
           "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
         },
         "pictogram": "pikto-message"
@@ -3264,7 +3264,7 @@ const topics = [
             "Eine Pause tut gut. Du bestimmst, was du dir ansiehst.",
             null
           ],
-          "feedbackCorrect": "Genau. Die Fotos zeigen nur die schönen Momente. Viele sind bearbeitet. Du musst dich nicht vergleichen.",
+          "feedbackCorrect": "Die Fotos zeigen nur die schönen Momente. Viele sind bearbeitet. Du musst dich nicht vergleichen.",
           "remember": "Ich muss mich nicht mit Bildern vergleichen."
         },
         "pictogram": "pikto-fake"
@@ -3330,7 +3330,7 @@ const topics = [
             "Zu zweit sieht man mehr. Die Nachricht kann so lange warten.",
             null
           ],
-          "feedbackCorrect": "Genau. Die Nachricht macht Stress. Das ist Absicht. Mit Stopp hast du Zeit zum Nachdenken.",
+          "feedbackCorrect": "Die Nachricht macht Stress. Das ist Absicht. Mit Stopp hast du Zeit zum Nachdenken.",
           "remember": "Bei Stress zeige ich es einer Person, der ich vertraue."
         },
         "remember": "Ich mache Stopp. Ich zeige es jemandem.",
@@ -3413,11 +3413,11 @@ const topics = [
         ],
         "correctIndex": 2,
         "feedbackWrong": [
-          "Das ist gefährlich. Sag nein und hol dir Hilfe.",
+          "Die Person kann das Foto speichern. Sie kann es auch weitergeben. Sag Nein und hol dir Hilfe.",
           "Auch für mehr Geld nicht. Das Foto bleibt bei dir.",
           null
         ],
-        "feedbackCorrect": "Sag nein und hol dir Hilfe."
+        "feedbackCorrect": "Die Person kann das Foto speichern. Sie kann es auch weitergeben. Darum sagst du Nein. Und du holst dir Hilfe."
       },
       {
         "hinweis": "Die Story war 24 Stunden lang sichtbar. Was kann in der Zeit passiert sein?",
@@ -3485,7 +3485,7 @@ const topics = [
           "Die Uhrzeit ändert nichts. Wichtig ist, was zu sehen ist.",
           null
         ],
-        "feedbackCorrect": "Erst prüfen. Dann teilen."
+        "feedbackCorrect": "Auf einem Bild ist oft mehr zu sehen. Darum gilt: Erst prüfen. Dann teilen."
       },
       {
         "hinweis": "Frag dich: Wem vertraust du wirklich?",
@@ -3502,7 +3502,7 @@ const topics = [
           "Fremde Personen sollen keine privaten Fotos bekommen.",
           "Nett schreiben ist leicht. Das sagt nichts über die Person."
         ],
-        "feedbackCorrect": "Das ist sicher. Private Fotos gehen nicht an Fremde."
+        "feedbackCorrect": "Fremde können dein Foto speichern. Und sie können es weitergeben. Darum gehen private Fotos nicht an Fremde."
       },
       {
         "hinweis": "Bei komischen Nachrichten hilft immer der gleiche erste Schritt.",
@@ -3519,7 +3519,7 @@ const topics = [
           null,
           "Eine Antwort zeigt: Hier liest jemand. Mach lieber Stopp."
         ],
-        "feedbackCorrect": "Das ist sicher. Du machst Stopp."
+        "feedbackCorrect": "Du machst Stopp. So hast du Zeit zum Nachdenken."
       },
       {
         "hinweis": "Überlege: Woher weiß Instagram, wo du bist?",
@@ -3536,7 +3536,7 @@ const topics = [
           "Das ist unnötig. Schalte den Standort einfach aus.",
           null
         ],
-        "feedbackCorrect": "Gut. Dann zeigt Instagram deinen Ort nicht an. Aber: Auch auf dem Foto kann man den Ort erkennen."
+        "feedbackCorrect": "Dann zeigt Instagram deinen Ort nicht an. Aber: Auch auf dem Foto kann man den Ort erkennen."
       },
       {
         "id": "instagram/quiz/kern-privatkonto",
@@ -3548,7 +3548,7 @@ const topics = [
           "Ich ändere nur mein Profil-Bild.",
           "Ich schreibe keinen Namen zu den Fotos."
         ],
-        "feedbackCorrect": "Genau. Du stellst dein Konto auf privat. Du entscheidest über neue Anfragen. Du bestätigst eine Anfrage? Dann sieht die Person deine Foto-Beiträge. Andere sehen diese Beiträge nicht.",
+        "feedbackCorrect": "Du stellst dein Konto auf privat. Du entscheidest über neue Anfragen. Du bestätigst eine Anfrage? Dann sieht die Person deine Foto-Beiträge. Andere sehen diese Beiträge nicht.",
         "feedbackWrong": [
           null,
           "Ein anderes Profil-Bild macht dein Konto nicht privat. Stelle dein Konto auf privat.",
@@ -3567,7 +3567,7 @@ const topics = [
           "Ich frage: Darf ich das Foto auf Instagram posten?",
           "Ich poste das Foto nur in meinem privaten Konto."
         ],
-        "feedbackCorrect": "Genau. Deine Freundin entscheidet mit. Sie sagt Ja? Dann kannst du das Foto posten. Sonst postest du es nicht.",
+        "feedbackCorrect": "Deine Freundin entscheidet mit. Sie sagt Ja? Dann kannst du das Foto posten. Sonst postest du es nicht.",
         "feedbackWrong": [
           "Auch ohne Namen ist deine Freundin zu sehen. Frage sie vor dem Posten.",
           null,
@@ -3752,7 +3752,7 @@ const topics = [
             null,
             "Das ist eine gute Prüfung. Deine Ärztin kennt dich und deine Schmerzen."
           ],
-          "feedbackCorrect": "Genau. Das Video will etwas verkaufen. Ein Video allein ist kein Beweis.",
+          "feedbackCorrect": "Das Video will etwas verkaufen. Ein Video allein ist kein Beweis.",
           "remember": "Ich glaube nicht alles sofort."
         },
         "pictogram": "pikto-screen"
@@ -3799,7 +3799,7 @@ const topics = [
             null,
             "Dann siehst du: Ist der Preis wirklich gut? Du entscheidest in Ruhe."
           ],
-          "feedbackCorrect": "Genau. Das ist Werbung. Der YouTuber bekommt oft Geld dafür. Du entscheidest in Ruhe.",
+          "feedbackCorrect": "Das ist Werbung. Der YouTuber bekommt oft Geld dafür. Du entscheidest in Ruhe.",
           "remember": "Ich kaufe nichts sofort aus einem Video."
         },
         "pictogram": "pikto-no"
@@ -3845,7 +3845,7 @@ const topics = [
             "Auch so bestimmst du das Ende selbst. Das Handy liegt weg. Du hast Ruhe.",
             null
           ],
-          "feedbackCorrect": "Genau. Autoplay heißt: Das nächste Video startet von allein. Ohne Autoplay bestimmst du das Ende.",
+          "feedbackCorrect": "Autoplay heißt: Das nächste Video startet von allein. Ohne Autoplay bestimmst du das Ende.",
           "remember": "Ich darf Videos stoppen."
         },
         "pictogram": "pikto-pause"
@@ -3892,7 +3892,7 @@ const topics = [
             null,
             "Dann macht ihr trotzdem etwas zusammen. Aber ohne Gefahr."
           ],
-          "feedbackCorrect": "Genau. Du musst nicht mitmachen. Deine Gesundheit ist wichtiger als ein Video.",
+          "feedbackCorrect": "Du musst nicht mitmachen. Deine Gesundheit ist wichtiger als ein Video.",
           "remember": "Ich mache gefährliche Dinge nicht nach."
         },
         "pictogram": "pikto-no"
@@ -3939,7 +3939,7 @@ const topics = [
             null,
             "Das Video ist aus. Und Reden tut gut. Du bist mit der Angst nicht allein."
           ],
-          "feedbackCorrect": "Genau. Dein Körper zeigt dir: Das ist zu viel. Du darfst jedes Video stoppen.",
+          "feedbackCorrect": "Dein Körper zeigt dir: Das ist zu viel. Du darfst jedes Video stoppen.",
           "remember": "Ich bin mit meiner Angst nicht allein."
         },
         "pictogram": "pikto-feel"
@@ -4055,7 +4055,7 @@ const topics = [
             null,
             "Du machst nicht mit. Und YouTube prüft dann das Video."
           ],
-          "feedbackCorrect": "Genau. Viele Aufrufe heißen nicht: Das ist sicher. Du musst nicht mitmachen.",
+          "feedbackCorrect": "Viele Aufrufe heißen nicht: Das ist sicher. Du musst nicht mitmachen.",
           "remember": "Ich mache gefährliche Videos nicht nach."
         },
         "remember": "Bei Angst stoppe ich das Video. Ich hole Hilfe.",
@@ -4112,7 +4112,7 @@ const topics = [
           null,
           "Dann glauben es noch mehr Menschen. Prüfe es erst."
         ],
-        "feedbackCorrect": "Das ist sicher. Du prüfst erst."
+        "feedbackCorrect": "Viele Videos wollen dir etwas verkaufen. Darum prüfst du erst. Und du kaufst nicht sofort."
       },
       {
         "hinweis": "Am Video steht: Anzeige. Was heißt das?",
@@ -4147,7 +4147,7 @@ const topics = [
           "Das kann gefährlich sein. Du entscheidest selbst.",
           "Auch ein bisschen kann gefährlich sein."
         ],
-        "feedbackCorrect": "Du entscheidest selbst."
+        "feedbackCorrect": "Eine Mutprobe kann gefährlich sein. Du entscheidest selbst. Du musst nicht mitmachen."
       },
       {
         "hinweis": "Frag dich: Wolltest du wirklich so lange schauen?",
@@ -4164,7 +4164,7 @@ const topics = [
           "Dann wird es noch mehr Zeit. Mach lieber eine Pause.",
           null
         ],
-        "feedbackCorrect": "Pausen tun dir gut."
+        "feedbackCorrect": "Das nächste Video startet oft von allein. So vergeht schnell viel Zeit. Eine Pause tut dir gut."
       },
       {
         "hinweis": "Mit wem kannst du über deine Angst reden?",
@@ -4181,7 +4181,7 @@ const topics = [
           "Die Bilder sind trotzdem noch im Kopf. Rede lieber mit jemandem.",
           null
         ],
-        "feedbackCorrect": "Reden hilft."
+        "feedbackCorrect": "Reden hilft. Dann wird die Angst oft kleiner."
       },
       {
         "hinweis": "Überraschend heißt nicht immer wahr. Was hilft dir?",
@@ -4198,7 +4198,7 @@ const topics = [
           null,
           "Viele Likes machen nichts wahr."
         ],
-        "feedbackCorrect": "Prüfe wichtige Sachen an einer zweiten Stelle."
+        "feedbackCorrect": "Ein Video kann falsch sein. Darum prüfst du wichtige Sachen an einer zweiten Stelle."
       },
       {
         "hinweis": "Überlege: Warum bezahlt jemand für Werbung?",
@@ -4215,7 +4215,7 @@ const topics = [
           null,
           "Werbung zeigt nur die guten Seiten."
         ],
-        "feedbackCorrect": "Das ist richtig. Werbung will oft verkaufen."
+        "feedbackCorrect": "Werbung will oft verkaufen. Darum zeigt sie meist nur die guten Seiten."
       },
       {
         "hinweis": "Frag dich: Wie fühlt sich dein Kopf nach 3 Stunden Videos an?",
@@ -4232,7 +4232,7 @@ const topics = [
           "Pausen verändern die Videos nicht.",
           "Beim Akku geht es nicht um dich. Pausen sind für dich."
         ],
-        "feedbackCorrect": "Das ist richtig. Pausen helfen dir."
+        "feedbackCorrect": "Pausen sind für dich da. In der Pause ruhst du dich aus."
       },
       {
         "hinweis": "Du bist nicht allein. Wer kann dir helfen?",
@@ -4249,7 +4249,7 @@ const topics = [
           "Immer wieder lesen tut weh. Hol dir lieber Hilfe.",
           null
         ],
-        "feedbackCorrect": "Das ist sicher. Du bleibst nicht allein."
+        "feedbackCorrect": "Verletzende Kommentare tun weh. Du musst das nicht allein aushalten. Darum holst du dir Hilfe."
       },
       {
         "hinweis": "Denk an die Regel aus diesem Thema. Wer bestimmt das Ende?",
@@ -4266,7 +4266,7 @@ const topics = [
           null,
           "Du darfst jederzeit aufhören. Auch mittendrin."
         ],
-        "feedbackCorrect": "Das ist richtig. Stoppen ist erlaubt."
+        "feedbackCorrect": "Du bestimmst die Zeit selbst. Stoppen ist erlaubt."
       }
     ],
     "helpQuestions": [
@@ -4445,7 +4445,7 @@ const topics = [
             null,
             "Dann sieht er das Foto. Aber er hat kein Bild davon."
           ],
-          "feedbackCorrect": "Genau. Auch ein Snap kann gespeichert werden. Ein Ausweis-Foto gehört nicht in einen Chat.",
+          "feedbackCorrect": "Auch ein Snap kann gespeichert werden. Ein Ausweis-Foto gehört nicht in einen Chat.",
           "remember": "Ich sende nur Bilder, die sicher sind."
         },
         "pictogram": "pikto-photo"
@@ -4510,10 +4510,10 @@ const topics = [
           ],
           "feedbackAuch": [
             null,
-            "Das ist gut. Du musst das nicht allein lösen. So eine Drohung ist verboten.",
+            "Du musst das nicht allein lösen. So eine Drohung ist verboten.",
             null
           ],
-          "feedbackCorrect": "Genau. Das ist eine Drohung. Niemand darf dich so drängen. Mach ein Bildschirm-Foto von der Nachricht. Das ist dein Beweis.",
+          "feedbackCorrect": "Das ist eine Drohung. Niemand darf dich so drängen. Mach ein Bildschirm-Foto von der Nachricht. Das ist dein Beweis.",
           "remember": "Ich schicke keine privaten Bilder unter Stress."
         },
         "pictogram": "pikto-photo"
@@ -4559,7 +4559,7 @@ const topics = [
             "Auch so weiß nur deine Freundin, wo du bist.",
             null
           ],
-          "feedbackCorrect": "Genau. So weiß nur deine Freundin, wo du bist. Du bestimmst selbst: Wer erfährt meinen Ort?",
+          "feedbackCorrect": "So weiß nur deine Freundin, wo du bist. Du bestimmst selbst: Wer erfährt meinen Ort?",
           "remember": "Ich teile meinen Standort nicht einfach."
         },
         "pictogram": "pikto-location"
@@ -4605,7 +4605,7 @@ const topics = [
             null,
             "Dann weißt du mehr über Lina. Die Anfrage kann so lange warten."
           ],
-          "feedbackCorrect": "Genau. Du kennst Lina nicht. Ein Vorschlag von Snapchat sagt wenig. Du musst niemanden annehmen.",
+          "feedbackCorrect": "Du kennst Lina nicht. Ein Vorschlag von Snapchat sagt wenig. Du musst niemanden annehmen.",
           "remember": "Ich prüfe, wer mir schreibt."
         },
         "pictogram": "pikto-message"
@@ -4652,7 +4652,7 @@ const topics = [
             null,
             "Du musst kein Geheimnis daraus machen. Reden hilft bei Stress."
           ],
-          "feedbackCorrect": "Genau. Stress und Geheimhaltung sind Warnzeichen. Ein echter Freund droht dir nicht.",
+          "feedbackCorrect": "Stress und Geheimhaltung sind Warnzeichen. Ein echter Freund droht dir nicht.",
           "remember": "Stress ist ein Warnzeichen."
         },
         "pictogram": "pikto-feel"
@@ -4718,7 +4718,7 @@ const topics = [
             null,
             "Zu zweit sieht man mehr. Danach kann dir die Person nicht mehr schreiben."
           ],
-          "feedbackCorrect": "Genau. Du hast Nein gesagt. Das reicht. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
+          "feedbackCorrect": "Du hast Nein gesagt. Das reicht. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
           "remember": "Ich sage Nein. Ich zeige es jemandem."
         },
         "remember": "Kein Bild unter Stress. Ich sage Nein.",
@@ -4825,7 +4825,7 @@ const topics = [
           null,
           "Anschauen bringt dir nichts. Blockiere lieber."
         ],
-        "feedbackCorrect": "Bei Fremden darfst du blockieren."
+        "feedbackCorrect": "Du weißt nicht, wer die Person ist. Nach dem Blockieren kann sie dir keine Snaps mehr schicken."
       },
       {
         "hinweis": "Sag es niemandem. Das ist ein bekanntes Muster. Welches?",
@@ -4842,7 +4842,7 @@ const topics = [
           "Ein Spaß braucht kein Geheimnis.",
           null
         ],
-        "feedbackCorrect": "Das ist richtig. Es ist ein Warnzeichen."
+        "feedbackCorrect": "Die Person will: Niemand soll davon wissen. Das ist ein Warnzeichen. Du darfst die Nachricht trotzdem einer vertrauten Person zeigen."
       },
       {
         "hinweis": "Frag dich: Woher weiß die Karte, wo du bist?",
@@ -4859,7 +4859,7 @@ const topics = [
           null,
           "Das ist besser als für alle. Aber auch ein Freund kann es weitererzählen. Am sichersten ist: Karte aus."
         ],
-        "feedbackCorrect": "Gut. Dann zeigt die Karte deinen Ort nicht. Aber: Auch ein Bild kann den Ort zeigen."
+        "feedbackCorrect": "Dann zeigt die Karte deinen Ort nicht. Aber: Auch ein Bild kann den Ort zeigen."
       },
       {
         "hinweis": "Bei Stress hast du immer ein Wort. Welches Wort ist das?",
@@ -4876,7 +4876,7 @@ const topics = [
           null,
           "Schweigen hilft oft nicht. Die Person macht weiter Stress. Sag lieber klar Nein."
         ],
-        "feedbackCorrect": "Das ist richtig. Du darfst Nein sagen."
+        "feedbackCorrect": "Du darfst Nein sagen. Ein klares Nein schützt dich."
       },
       {
         "hinweis": "Überlege: Was passiert, wenn du ein Bild vom Bildschirm machst?",
@@ -4893,7 +4893,7 @@ const topics = [
           "Nichts wird gelöscht. Du hast ein Foto gemacht.",
           null
         ],
-        "feedbackCorrect": "Du hast ein Foto vom Bildschirm."
+        "feedbackCorrect": "Du hast ein Foto vom Bildschirm. So kann man auch Snaps speichern."
       },
       {
         "hinweis": "Bei Unbekannten hilft immer der gleiche erste Schritt.",
@@ -4910,7 +4910,7 @@ const topics = [
           "Private Bilder gehören nicht an Fremde.",
           "Eine Antwort zeigt: Hier liest jemand. Prüfe lieber erst."
         ],
-        "feedbackCorrect": "Das ist sicher. Du prüfst Kontakte."
+        "feedbackCorrect": "Ein komischer Kontakt kann gefälscht sein. Darum prüfst du ihn zuerst."
       },
       {
         "hinweis": "Was gesendet ist, kannst du nicht zurückholen.",
@@ -4927,7 +4927,7 @@ const topics = [
           "Schnell schicken kann Probleme machen.",
           "Löschen kommt zu spät. Denk lieber vorher nach."
         ],
-        "feedbackCorrect": "Das ist sicher. Erst denken, dann senden."
+        "feedbackCorrect": "Andere können einen Snap speichern. Darum denkst du zuerst nach. Dann sendest du."
       }
     ],
     "helpQuestions": [
@@ -5099,7 +5099,7 @@ const topics = [
             null,
             "Manche Trends sind gefährlich. Schau erst hin: Kann ich mich verletzen?"
           ],
-          "feedbackCorrect": "Genau. Tanzen ist nicht gefährlich. Du prüfst erst. Dann entscheidest du selbst.",
+          "feedbackCorrect": "Tanzen ist nicht gefährlich. Du prüfst erst. Dann entscheidest du selbst.",
           "remember": "Ich mache gefährliche Trends nicht nach."
         },
         "pictogram": "pikto-screen"
@@ -5168,7 +5168,7 @@ const topics = [
             null,
             "Auch so bestimmst du selbst. Du suchst aus, nicht TikTok."
           ],
-          "feedbackCorrect": "Genau. Die Videos tun dir nicht gut. Dann darfst du Pause machen. TikTok merkt nur: Das schaust du lange an.",
+          "feedbackCorrect": "Die Videos tun dir nicht gut. Dann darfst du Pause machen. TikTok merkt nur: Das schaust du lange an.",
           "remember": "Etwas tut mir nicht gut? Dann mache ich Pause."
         },
         "pictogram": "pikto-screen"
@@ -5216,7 +5216,7 @@ const topics = [
             "Deine Daten bleiben bei dir. Und TikTok kann das Profil prüfen.",
             null
           ],
-          "feedbackCorrect": "Genau. Du kennst die Person nicht. Dein Name und deine Telefon-Nummer sind privat.",
+          "feedbackCorrect": "Du kennst die Person nicht. Dein Name und deine Telefon-Nummer sind privat.",
           "remember": "Ich schütze meine privaten Daten."
         },
         "pictogram": "pikto-message"
@@ -5262,7 +5262,7 @@ const topics = [
             null,
             "Dann ist der Brief nicht mehr im Bild."
           ],
-          "feedbackCorrect": "Genau. Jetzt sieht niemand den Brief. Andere können ein Video anhalten und alles genau ansehen.",
+          "feedbackCorrect": "Jetzt sieht niemand den Brief. Andere können ein Video anhalten und alles genau ansehen.",
           "remember": "Ich prüfe Videos vor dem Posten."
         },
         "pictogram": "pikto-screen"
@@ -5308,7 +5308,7 @@ const topics = [
             null,
             "Das ist Unterstützung. Reden tut gut. Danach entscheidest du in Ruhe."
           ],
-          "feedbackCorrect": "Genau. TikTok kann verletzende Kommentare prüfen. Dein Video darf bleiben. Du hast nichts falsch gemacht.",
+          "feedbackCorrect": "TikTok kann verletzende Kommentare prüfen. Dein Video darf bleiben. Du hast nichts falsch gemacht.",
           "remember": "Ich hole Unterstützung bei verletzenden Kommentaren."
         },
         "pictogram": "pikto-message"
@@ -5424,7 +5424,7 @@ const topics = [
             null,
             "Deine Daten bleiben bei dir. Und TikTok kann den Kommentar prüfen."
           ],
-          "feedbackCorrect": "Genau. Die Eile ist Absicht. Private Daten sendest du nicht unter Stress.",
+          "feedbackCorrect": "Die Eile ist Absicht. Private Daten sendest du nicht unter Stress.",
           "remember": "Private Daten sende ich nie unter Stress."
         },
         "remember": "Ich mache Pause. Ich hole Unterstützung.",
@@ -5512,7 +5512,7 @@ const topics = [
           "So kommen Fremde an deine Adresse.",
           "Auch die Straße zeigt, wo du wohnst."
         ],
-        "feedbackCorrect": "Du gibst einer fremden Person deine Adresse nicht.",
+        "feedbackCorrect": "Mit deiner Adresse findet die Person deine Wohnung. Darum gibst du sie einer fremden Person nicht.",
         "schluessel": "Jemand will dir ein Geschenk schicken. Die Person fragt nach deiner Adresse. Was machst du?"
       },
       {
@@ -5547,7 +5547,7 @@ const topics = [
           "Dann wird der Streit größer. Melde den Kommentar.",
           null
         ],
-        "feedbackCorrect": "Melden ist erlaubt und hilft."
+        "feedbackCorrect": "Melden ist erlaubt. Dann prüft TikTok den Kommentar."
       },
       {
         "hinweis": "Überlege: Warum zeigt TikTok dir immer ähnliche Videos?",
@@ -5564,7 +5564,7 @@ const topics = [
           "TikTok stoppt nicht von allein.",
           "Meist kommt mehr vom Gleichen."
         ],
-        "feedbackCorrect": "Das ist richtig. TikTok zeigt oft mehr davon."
+        "feedbackCorrect": "TikTok merkt sich deine Videos. Darum zeigt es dir oft mehr davon."
       },
       {
         "hinweis": "Bei Trends hilft der gleiche Schritt wie überall.",
@@ -5581,7 +5581,7 @@ const topics = [
           "Zuschauer machen den Trend nicht sicher.",
           null
         ],
-        "feedbackCorrect": "Das ist sicher. Du prüfst vorher."
+        "feedbackCorrect": "Manche Trends sind gefährlich. Darum prüfst du vorher."
       },
       {
         "hinweis": "Frag dich: Wem gehören deine Daten?",
@@ -5598,7 +5598,7 @@ const topics = [
           null,
           "Im Video sehen es noch mehr Menschen."
         ],
-        "feedbackCorrect": "Das ist sicher. Du sendest sie nicht an Fremde."
+        "feedbackCorrect": "Fremde können deine Daten weitergeben. Darum sendest du sie nicht an Fremde."
       },
       {
         "hinweis": "Du bestimmst, wann Schluss ist. Was kannst du dafür tun?",
@@ -5615,7 +5615,7 @@ const topics = [
           "Pausen sind erlaubt.",
           "Die Videos hören nicht von allein auf."
         ],
-        "feedbackCorrect": "Das ist richtig. Du darfst TikTok schließen."
+        "feedbackCorrect": "Du bestimmst selbst: Jetzt ist Schluss. Die Videos hören nicht von allein auf. Darum schließt du TikTok selbst."
       },
       {
         "hinweis": "Ein Video im Netz erreicht sofort viele Menschen.",
@@ -5632,7 +5632,7 @@ const topics = [
           null,
           "Löschen kommt zu spät. Andere haben es schon gesehen."
         ],
-        "feedbackCorrect": "Das ist sicher. Erst prüfen ist besser."
+        "feedbackCorrect": "Andere sehen ein Video schnell. Löschen kommt oft zu spät. Darum prüfst du zuerst."
       }
     ],
     "helpQuestions": [
@@ -5884,7 +5884,7 @@ const topics = [
             "Ich frage morgen meine Betreuerin. Sie weiß dann Rat."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Richtig. Jana ist verletzt. Und sie ist allein. Jana ist in Gefahr. Das ist ein Notfall. Du sagst Jana: Ich hole Hilfe. Dann rufst du sofort 112 an. Du sagst Janas Adresse.",
+          "feedbackCorrect": "Jana ist verletzt. Und sie ist allein. Jana ist in Gefahr. Das ist ein Notfall. Du sagst Jana: Ich hole Hilfe. Dann rufst du sofort 112 an. Du sagst Janas Adresse.",
           "feedbackWrong": [
             "Jana ist verletzt. Vielleicht kann sie gleich nicht mehr telefonieren. Darum rufst du selbst sofort 112 an.",
             null,
@@ -5940,7 +5940,7 @@ const topics = [
             "Ich schreibe zurück: Dann bin ich eben auch sauer."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Gut. Rico macht dir Druck. Du darfst später antworten. Du überlegst in Ruhe. Danach entscheidest du selbst.",
+          "feedbackCorrect": "Rico macht dir Druck. Du darfst später antworten. Du überlegst in Ruhe. Danach entscheidest du selbst.",
           "feedbackWrong": [
             "Rico drängt dich. Unter Druck sagst du vielleicht schnell Ja. Das willst du später vielleicht nicht. Erst überlegst du in Ruhe.",
             null,
@@ -6000,7 +6000,7 @@ const topics = [
           "auchMoeglich": [
             2
           ],
-          "feedbackCorrect": "Genau. Oft ist nur der Ton leise gestellt. Oder das Handy ist stumm. Das siehst du in den Einstellungen. Das kannst du selbst.",
+          "feedbackCorrect": "Oft ist nur der Ton leise gestellt. Oder das Handy ist stumm. Das siehst du in den Einstellungen. Das kannst du selbst.",
           "feedbackWrong": [
             null,
             "Dein Handy ist wahrscheinlich nicht kaputt. Oft ist nur der Ton aus. Schau zuerst in den Einstellungen nach.",
@@ -6065,7 +6065,7 @@ const topics = [
             "Ich rede mit einer Person. Ich vertraue ihr."
           ],
           "correctIndex": 2,
-          "feedbackCorrect": "Gut. Deine Gefühle sind wichtig. Du darfst darüber sprechen. Eine vertraute Person kann dir zuhören. Zusammen überlegt ihr: Was willst du am Montag fragen?",
+          "feedbackCorrect": "Deine Gefühle sind wichtig. Du darfst darüber sprechen. Eine vertraute Person kann dir zuhören. Zusammen überlegt ihr: Was willst du am Montag fragen?",
           "feedbackWrong": [
             "Du weißt noch nicht: Was war los? Eine vertraute Person kann dir jetzt zuhören. Zusammen überlegt ihr: Was willst du am Montag fragen?",
             "Du musst mit deinen Sorgen nicht allein bleiben. Eine vertraute Person kann dir zuhören. Zusammen überlegt ihr: Was willst du am Montag fragen?",
@@ -6116,7 +6116,7 @@ const topics = [
             "Ich gebe Timo mein Handy. Dann gehe ich schnell in mein Zimmer."
           ],
           "correctIndex": 0,
-          "feedbackCorrect": "Gut. Timo sieht das Problem gleich. Und er weiß: Das hast du schon probiert. So kann er dir schneller helfen.",
+          "feedbackCorrect": "Timo sieht das Problem gleich. Und er weiß: Das hast du schon probiert. So kann er dir schneller helfen.",
           "feedbackWrong": [
             null,
             "Dann muss Timo lange suchen. Zeig ihm die App. Und sag: Das habe ich schon probiert.",
@@ -6207,7 +6207,7 @@ const topics = [
           "Ich tippe ganz fest und ganz oft auf den Bildschirm."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Genau. Eine App hängt manchmal. Dann schließt du sie. Und du öffnest sie neu. Das klappt oft. Das kannst du selbst.",
+        "feedbackCorrect": "Eine App hängt manchmal. Dann schließt du sie. Und du öffnest sie neu. Das klappt oft. Das kannst du selbst.",
         "feedbackWrong": [
           null,
           "Dann sind alle deine Apps weg. Das ist nicht nötig. Schließ nur diese eine App. Und öffne sie neu.",
@@ -6226,7 +6226,7 @@ const topics = [
           "Ich mache das Video aus. Ich rede mit jemandem darüber."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Gut. Das Video macht dir Angst. Dann hörst du auf zu schauen. Reden hilft oft. Du bist mit der Angst nicht allein.",
+        "feedbackCorrect": "Das Video macht dir Angst. Dann hörst du auf zu schauen. Reden hilft oft. Du bist mit der Angst nicht allein.",
         "feedbackWrong": [
           "Die Feuerwehr ist schon da. Und du bist nicht in Gefahr. Aber das Video macht dir Angst. Mach es aus. Und rede mit jemandem darüber.",
           "Mehr Videos machen die Angst oft größer. Mach das Video aus. Und rede mit jemandem darüber.",
@@ -6245,7 +6245,7 @@ const topics = [
           "Omas Handy ist kaputt. Sie soll ein neues kaufen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Genau. Vielleicht hast du aus Versehen das Mikrofon ausgemacht. Das siehst du auf dem Bildschirm. Das kannst du selbst ändern.",
+        "feedbackCorrect": "Vielleicht hast du aus Versehen das Mikrofon ausgemacht. Das siehst du auf dem Bildschirm. Das kannst du selbst ändern.",
         "feedbackWrong": [
           "Lauter rufen hilft nicht. Oma hört dich gar nicht. Vielleicht ist dein Mikrofon aus. Schau auf den Bildschirm.",
           null,
@@ -6268,7 +6268,7 @@ const topics = [
         "auchMoeglich": [
           2
         ],
-        "feedbackCorrect": "Genau. Du hast schon Nein gesagt. Er hört nicht auf. Dann blockierst du ihn. Das kannst du selbst.",
+        "feedbackCorrect": "Du hast schon Nein gesagt. Er hört nicht auf. Dann blockierst du ihn. Das kannst du selbst.",
         "feedbackWrong": [
           "Dann antwortest du ihm wieder. Er merkt: Du liest seine Nachrichten. Blockier ihn lieber.",
           null,
@@ -6294,7 +6294,7 @@ const topics = [
           "Ich frage meinen Cousin. Er kennt sich mit dem Internet aus."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Genau. Du hast schon selbst etwas probiert. Jetzt kommst du nicht weiter. Dann holst du dir Hilfe. Dein Cousin kennt sich mit dem Internet aus.",
+        "feedbackCorrect": "Du hast schon selbst etwas probiert. Jetzt kommst du nicht weiter. Dann holst du dir Hilfe. Dein Cousin kennt sich mit dem Internet aus.",
         "feedbackWrong": [
           "Dein Handy ist wahrscheinlich nicht kaputt. Vielleicht ist nur das Internet zu Hause gestört. Frag eine Person. Sie kennt sich mit dem Internet aus.",
           "Du hast schon neu gestartet. Noch öfter neu starten hilft meistens nicht. Jetzt ist Hilfe gut. Frag eine Person. Sie kennt sich mit dem Internet aus.",
@@ -6313,7 +6313,7 @@ const topics = [
           "Ich sage nichts. Das war doch bestimmt nur Spaß."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Gut. Das Foto ist gemein. Das musst du nicht aushalten. Deine Gruppen-Leiterin kann helfen. Zusammen überlegt ihr: Wie kommt das Foto aus der Gruppe?",
+        "feedbackCorrect": "Das Foto ist gemein. Das musst du nicht aushalten. Deine Gruppen-Leiterin kann helfen. Zusammen überlegt ihr: Wie kommt das Foto aus der Gruppe?",
         "feedbackWrong": [
           null,
           "Du darfst wütend sein. Aber dann gibt es vielleicht noch mehr Streit. Rede lieber mit einer Person. Du vertraust ihr.",
@@ -6332,7 +6332,7 @@ const topics = [
           "Ich frage meinen Bruder immer wieder. Irgendwann weiß er es."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Genau. Dein Bruder kennt dein Handy nicht. Dann fragst du eine andere Person. Zum Beispiel im Handy-Laden. Oder eine Person mit dem gleichen Handy.",
+        "feedbackCorrect": "Dein Bruder kennt dein Handy nicht. Dann fragst du eine andere Person. Zum Beispiel im Handy-Laden. Oder eine Person mit dem gleichen Handy.",
         "feedbackWrong": [
           null,
           "Du musst nicht aufgeben. Dein Bruder kann nicht helfen. Aber eine andere Person kann es vielleicht.",
@@ -6352,7 +6352,7 @@ const topics = [
           "Ich schreibe in die Familien-Gruppe: Opa ist umgefallen."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Richtig. Opa ist in Gefahr. Das ist ein Notfall. Du rufst sofort 112 an. Die Leute am Telefon helfen dir. Sie fragen dich alles Wichtige.",
+        "feedbackCorrect": "Opa ist in Gefahr. Das ist ein Notfall. Du rufst sofort 112 an. Die Leute am Telefon helfen dir. Sie fragen dich alles Wichtige.",
         "feedbackWrong": [
           "Opa bewegt sich nicht. Er braucht jetzt Hilfe. Warte nicht. Ruf sofort 112 an.",
           null,
@@ -6375,7 +6375,7 @@ const topics = [
         "auchMoeglich": [
           1
         ],
-        "feedbackCorrect": "Gut. Der Kommentar ist gemein. Du meldest ihn. Dann prüft die App ihn. Vielleicht löscht sie ihn.",
+        "feedbackCorrect": "Der Kommentar ist gemein. Du meldest ihn. Dann prüft die App ihn. Vielleicht löscht sie ihn.",
         "feedbackWrong": [
           "Dann sehen noch mehr Menschen den gemeinen Kommentar. Melde ihn lieber. Dann prüft die App ihn.",
           null,
@@ -6444,7 +6444,7 @@ const topics = [
             "Das ist komisch. Ich mache Stopp und schreibe nichts mehr."
           ],
           "correctIndex": 0,
-          "feedbackCorrect": "Genau. Oft ist nur das Internet kurz weg. Dann probierst du es noch einmal. Das kannst du selbst.",
+          "feedbackCorrect": "Oft ist nur das Internet kurz weg. Dann probierst du es noch einmal. Das kannst du selbst.",
           "feedbackWrong": [
             null,
             "Dein Handy ist wahrscheinlich nicht kaputt. Oft ist nur das Internet kurz weg. Probier es erst selbst noch einmal. Klappt es dann immer noch nicht? Dann hol dir Hilfe.",
@@ -6482,7 +6482,7 @@ const topics = [
             "Ich lege das Handy weg. Heute antworte ich nicht mehr."
           ],
           "correctIndex": 2,
-          "feedbackCorrect": "Gut. Die Gruppe macht dir Druck. Du musst nicht mitmachen. Du darfst das Handy weglegen. Morgen entscheidest du in Ruhe.",
+          "feedbackCorrect": "Die Gruppe macht dir Druck. Du musst nicht mitmachen. Du darfst das Handy weglegen. Morgen entscheidest du in Ruhe.",
           "feedbackWrong": [
             "Du bist müde. Und der Streit macht dir Druck. Du musst nicht alles lesen. Leg das Handy lieber weg.",
             "Eine schnelle Antwort macht den Streit oft größer. Du musst jetzt nichts schreiben. Leg das Handy lieber weg.",
@@ -6520,7 +6520,7 @@ const topics = [
             "Ich lasse das. Das schaffe ich sowieso nicht allein."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Genau. Das ist eine Frage zum Handy. Deine Nachbarin kennt sich mit Handys aus. Sie kann dir gut helfen.",
+          "feedbackCorrect": "Das ist eine Frage zum Handy. Deine Nachbarin kennt sich mit Handys aus. Sie kann dir gut helfen.",
           "feedbackWrong": [
             "Eine Beratungs-Stelle hilft vor allem bei Sorgen und Angst. Bei einer Frage zum Handy fragst du besser eine Person. Sie kennt sich mit Handys aus.",
             null,
@@ -6571,7 +6571,7 @@ const topics = [
             "Ich war gemein. Darum lösche ich den Kommentar sofort."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Genau. Kevin will: Du sollst sofort etwas tun. Er droht dir. Und du sollst es geheim halten. Das ist Druck.",
+          "feedbackCorrect": "Kevin will: Du sollst sofort etwas tun. Er droht dir. Und du sollst es geheim halten. Das ist Druck.",
           "feedbackWrong": [
             "Kevin darf sauer sein. Aber er droht dir. Und du sollst es geheim halten. Das ist Druck. Dann machst du erst Stopp.",
             null,
@@ -6593,7 +6593,7 @@ const topics = [
           "auchMoeglich": [
             2
           ],
-          "feedbackCorrect": "Genau. Kevin macht Druck. Du machst erst Stopp. Du musst nicht sofort antworten. Morgen entscheidest du in Ruhe: Was willst du?",
+          "feedbackCorrect": "Kevin macht Druck. Du machst erst Stopp. Du musst nicht sofort antworten. Morgen entscheidest du in Ruhe: Was willst du?",
           "feedbackWrong": [
             "Vielleicht willst du den Kommentar später löschen. Das darfst du. Aber nicht jetzt unter Druck. Erst Stopp. Dann entscheidest du in Ruhe.",
             null,
@@ -6620,7 +6620,7 @@ const topics = [
           "auchMoeglich": [
             1
           ],
-          "feedbackCorrect": "Genau. Du bist damit nicht allein. Zeig der Person den Chat. Dann überlegt ihr zusammen: Was machst du jetzt?",
+          "feedbackCorrect": "Du bist damit nicht allein. Zeig der Person den Chat. Dann überlegt ihr zusammen: Was machst du jetzt?",
           "feedbackWrong": [
             null,
             null,
@@ -6815,7 +6815,7 @@ const topics = [
             "Du darfst mit einem Chatbot schreiben. Wichtig ist nur: Er ersetzt keine Menschen.",
             null
           ],
-          "feedbackCorrect": "Genau. Der Chatbot ist ein Programm. Er hat keine Gefühle. Echte Menschen tun dir gut.",
+          "feedbackCorrect": "Der Chatbot ist ein Programm. Er hat keine Gefühle. Echte Menschen tun dir gut.",
           "remember": "Ein Chatbot ist kein Mensch."
         },
         "pictogram": "pikto-data"
@@ -6869,7 +6869,7 @@ const topics = [
             null,
             "Dein Vermieter weiß: Das gilt in deinem Vertrag."
           ],
-          "feedbackCorrect": "Genau. KI klingt oft sicher. Auch bei Fehlern. Darum prüfst du wichtige Antworten nach.",
+          "feedbackCorrect": "KI klingt oft sicher. Auch bei Fehlern. Darum prüfst du wichtige Antworten nach.",
           "remember": "KI kann Fehler machen. Ich prüfe wichtige Antworten."
         },
         "pictogram": "pikto-lock"
@@ -6930,7 +6930,7 @@ const topics = [
             null,
             "Auch dort steht die richtige Nummer von deiner Bank."
           ],
-          "feedbackCorrect": "Genau. Du prüfst: Steht die Nummer auch woanders? So findest du Fehler.",
+          "feedbackCorrect": "Du prüfst: Steht die Nummer auch woanders? So findest du Fehler.",
           "remember": "Ich stelle 3 Fragen. Dann weiß ich mehr."
         },
         "remember": "Ich stelle 3 Fragen. Dann weiß ich mehr.",
@@ -6991,7 +6991,7 @@ const topics = [
             "Auch so bekommt die KI deine privaten Daten nicht.",
             null
           ],
-          "feedbackCorrect": "Genau. So hilft dir die KI beim Brief. Aber deine privaten Daten bleiben bei dir.",
+          "feedbackCorrect": "So hilft dir die KI beim Brief. Aber deine privaten Daten bleiben bei dir.",
           "remember": "Ich gebe der KI keine privaten Daten."
         },
         "pictogram": "pikto-lock"
@@ -7037,7 +7037,7 @@ const topics = [
             "Die KI kennt dich nicht. Sie weiß nicht: Wie viel Geld brauchst du? Bei Geld kann ein Fehler teuer sein.",
             "Die KI antwortet vielleicht wieder falsch. Zweimal fragen macht eine Antwort nicht richtig."
           ],
-          "feedbackCorrect": "Genau. Die KI kennt dich nicht. Bei Geld fragst du auch einen Menschen. Zum Beispiel bei deiner Bank.",
+          "feedbackCorrect": "Die KI kennt dich nicht. Bei Geld fragst du auch einen Menschen. Zum Beispiel bei deiner Bank.",
           "remember": "Bei Gesundheit und Geld frage ich Menschen."
         },
         "pictogram": "pikto-lock"
@@ -7136,7 +7136,7 @@ const topics = [
             "In der Apotheke kennt man sich mit Tabletten aus.",
             null
           ],
-          "feedbackCorrect": "Genau. Bei Gesundheit fragst du Fachleute. Die KI ersetzt keine Ärztin.",
+          "feedbackCorrect": "Bei Gesundheit fragst du Fachleute. Die KI ersetzt keine Ärztin.",
           "remember": "Bei Gesundheit und Geld frage ich einen Menschen."
         },
         "remember": "Ich prüfe. Ich frage einen Menschen.",
@@ -7193,7 +7193,7 @@ const topics = [
           "Ein Computer-Programm."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. KI ist ein Computer-Programm.",
+        "feedbackCorrect": "KI ist ein Computer-Programm. Das Programm hat sehr viele Texte und Bilder gelernt. Darum kann es Fragen beantworten.",
         "feedbackWrong": [
           "KI ist kein Mensch. Sie ist ein Programm.",
           "Ein Roboter ist ein Gerät. KI ist ein Programm.",
@@ -7210,7 +7210,7 @@ const topics = [
           "Ja, aber nur ein paar Gefühle."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Ein Chatbot hat keine Gefühle.",
+        "feedbackCorrect": "Ein Chatbot ist ein Programm. Er kann freundlich schreiben. Aber er hat keine Gefühle.",
         "feedbackWrong": [
           "Ein Chatbot kann nur so tun. Er ist ein Programm.",
           null,
@@ -7227,7 +7227,7 @@ const topics = [
           "Nein, KI prüft alles selbst."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. KI kann Fehler machen. Auch wenn sie sicher klingt.",
+        "feedbackCorrect": "KI kann Fehler machen. Sie klingt dabei oft sehr sicher. Manchmal erfindet KI sogar Dinge.",
         "feedbackWrong": [
           "KI kann Fehler machen und Dinge erfinden.",
           null,
@@ -7244,7 +7244,7 @@ const topics = [
           "Nur einen Teil eingeben."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Dein Passwort bleibt geheim. Auch bei einer KI.",
+        "feedbackCorrect": "Die KI speichert deine Nachrichten oft. Darum bleibt dein Passwort geheim. Auch bei einer KI.",
         "feedbackWrong": [
           null,
           "Dein Passwort ist privat. Du gibst es nie weiter.",
@@ -7261,7 +7261,7 @@ const topics = [
           "Auch eine Ärztin oder einen Arzt fragen."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Bei Gesundheit fragst du Fachleute.",
+        "feedbackCorrect": "Die KI kennt dich nicht. Sie kann falsche Tipps geben. Darum fragst du bei Gesundheit auch eine Ärztin oder einen Arzt.",
         "feedbackWrong": [
           "Die KI kennt dich nicht. Sie ersetzt keinen Arzt.",
           "Ausdrucken macht die Antwort nicht richtig.",
@@ -7278,7 +7278,7 @@ const topics = [
           "Die KI noch einmal fragen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Wichtige Antworten prüfst du.",
+        "feedbackCorrect": "KI klingt oft sicher. Aber sie kann Fehler machen. Darum prüfst du wichtige Antworten.",
         "feedbackWrong": [
           null,
           "KI klingt sicher, kann aber falsch liegen.",
@@ -7295,7 +7295,7 @@ const topics = [
           "Nur bei Zeichnungen. Fotos sind immer echt."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. KI-Bilder können sehr echt aussehen.",
+        "feedbackCorrect": "KI kann Bilder machen. Sie sehen oft sehr echt aus. Darum ist nicht jedes Foto echt.",
         "feedbackWrong": [
           "KI kann Bilder und Stimmen fälschen.",
           null,
@@ -7312,7 +7312,7 @@ const topics = [
           "Er ist ein Programm."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Echte Freunde sind Menschen.",
+        "feedbackCorrect": "Ein Chatbot ist ein Programm. Er hat keine Gefühle. Echte Freunde sind Menschen.",
         "feedbackWrong": [
           "Ein Chatbot ist ein Programm. Kein Freund.",
           "Ein Programm mag niemanden. Es rechnet nur.",
@@ -7329,7 +7329,7 @@ const topics = [
           "Nur in teuren Handys."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. KI steckt heute in vielen Apps.",
+        "feedbackCorrect": "KI steckt heute in vielen Apps. Zum Beispiel in Chatbots und Sprach-Hilfen. Manchmal siehst du sie nicht sofort.",
         "feedbackWrong": [
           null,
           "KI steckt in vielen Apps, nicht nur in Robotern.",
@@ -7346,7 +7346,7 @@ const topics = [
           "Nein, ich gebe der KI keine privaten Daten."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Deine privaten Daten bleiben bei dir.",
+        "feedbackCorrect": "Die KI speichert deine Nachrichten oft. Darum bleiben deine privaten Daten bei dir.",
         "feedbackWrong": [
           "Die KI speichert deine Nachrichten oft. Gib nichts Privates ein.",
           "Löschen hilft oft nicht. Die Daten können schon gespeichert sein.",
@@ -7364,7 +7364,7 @@ const topics = [
           "Ich lege auf. Ich rufe die gespeicherte Nummer an."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Gut. KI kann Stimmen nachmachen. Darum prüfst du den Anruf. Du rufst die gespeicherte Nummer selbst an. Bis dahin schickst du kein Geld.",
+        "feedbackCorrect": "KI kann Stimmen nachmachen. Darum prüfst du den Anruf. Du rufst die gespeicherte Nummer selbst an. Bis dahin schickst du kein Geld.",
         "feedbackWrong": [
           "Der Anrufer kann den Namen auch kennen. Das beweist nicht: Es ist dein Onkel. Leg auf. Ruf die gespeicherte Nummer selbst an.",
           "Auch 20 Euro können weg sein. Eine bekannte Stimme beweist nicht: Es ist dein Onkel. Ruf die gespeicherte Nummer selbst an. Schick vorher kein Geld.",
@@ -7633,7 +7633,7 @@ const topics = [
             1
           ],
           "feedbackWrong": [
-            "Viele KI-Bilder haben keine Fehler mehr. Kein Fehler heißt nicht: Das Foto ist echt.",
+            "Viele KI-Bilder haben keine Fehler mehr. Auch ein Foto ohne Fehler kann gefälscht sein.",
             null,
             null
           ],
@@ -7642,7 +7642,7 @@ const topics = [
             "Das ist eine gute Prüfung. Über echte Ereignisse schreiben mehrere bekannte Seiten.",
             null
           ],
-          "feedbackCorrect": "Genau. Ein Foto ist kein Beweis mehr. KI kann Fotos fälschen. Oft sieht man keinen Fehler.",
+          "feedbackCorrect": "Ein Foto ist kein Beweis mehr. KI kann Fotos fälschen. Oft sieht man keinen Fehler.",
           "remember": "Ein Foto kann gefälscht sein."
         },
         "pictogram": "pikto-fake"
@@ -7696,7 +7696,7 @@ const topics = [
             null,
             "Das ist eine gute Prüfung. Über echte Aussagen schreiben mehrere bekannte Seiten."
           ],
-          "feedbackCorrect": "Genau. KI kann Gesicht und Stimme austauschen. Auch Videos können gefälscht sein.",
+          "feedbackCorrect": "KI kann Gesicht und Stimme austauschen. Auch Videos können gefälscht sein.",
           "remember": "Auch Videos können gefälscht sein."
         },
         "pictogram": "pikto-fake"
@@ -7747,7 +7747,7 @@ const topics = [
             null,
             "Bei der 110 ist die echte Polizei. Dort kannst du nachfragen."
           ],
-          "feedbackCorrect": "Genau. Du legst auf. Du rufst selbst an. So merkst du den Betrug. Die echte Polizei fordert nie Geld am Telefon.",
+          "feedbackCorrect": "Du legst auf. Du rufst selbst an. So merkst du den Betrug. Die echte Polizei fordert nie Geld am Telefon.",
           "remember": "Bei Geld-Anrufen lege ich auf und rufe selbst zurück."
         },
         "pictogram": "pikto-fake"
@@ -7807,7 +7807,7 @@ const topics = [
             "Die Bahn weiß am besten: Das gilt heute.",
             null
           ],
-          "feedbackCorrect": "Genau. Alte Nachrichten wirken wie neu. Das Datum zeigt dir: Die Nachricht gilt nicht mehr.",
+          "feedbackCorrect": "Alte Nachrichten wirken wie neu. Das Datum zeigt dir: Die Nachricht gilt nicht mehr.",
           "remember": "Ich prüfe Nachrichten bei bekannten Seiten."
         },
         "pictogram": "pikto-fake"
@@ -7862,7 +7862,7 @@ const topics = [
             null,
             "Eine Nacht Abstand hilft. Morgen prüfst du in Ruhe."
           ],
-          "feedbackCorrect": "Genau. Deine Wut ist richtig. Aber bei Aufregung prüfst du erst. Die Nachricht will: Du sollst schnell teilen.",
+          "feedbackCorrect": "Deine Wut ist richtig. Aber bei Aufregung prüfst du erst. Die Nachricht will: Du sollst schnell teilen.",
           "remember": "Bei Aufregung prüfe ich erst."
         },
         "pictogram": "pikto-fake"
@@ -7912,7 +7912,7 @@ const topics = [
             null,
             "So merkst du: Gibt es eine echte Quelle?"
           ],
-          "feedbackCorrect": "Genau. Du bist nicht sicher. Im Zweifel teilst du die Nachricht nicht.",
+          "feedbackCorrect": "Du bist nicht sicher. Im Zweifel teilst du die Nachricht nicht.",
           "remember": "Im Zweifel teile ich nicht."
         },
         "pictogram": "pikto-fake"
@@ -7978,7 +7978,7 @@ const topics = [
             "Zu zweit sieht man mehr. Dein Kollege lernt das Prüfen gleich mit.",
             null
           ],
-          "feedbackCorrect": "Genau. Du lässt dich nicht drängen. Bei starken Gefühlen prüfst du zuerst.",
+          "feedbackCorrect": "Du lässt dich nicht drängen. Bei starken Gefühlen prüfst du zuerst.",
           "remember": "Bei starken Gefühlen prüfe ich zuerst."
         },
         "remember": "Ich glaube nicht alles sofort. Ich prüfe.",
@@ -8035,7 +8035,7 @@ const topics = [
           "Ein Witz unter Freunden."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Falsche Nachrichten heißen Fake News.",
+        "feedbackCorrect": "Falsche Nachrichten heißen Fake News. Jemand verbreitet sie mit Absicht.",
         "feedbackWrong": [
           "Werbung will verkaufen. Hier geht es um eine Lüge.",
           null,
@@ -8052,7 +8052,7 @@ const topics = [
           "Nur mit teuren Geräten."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. KI-Bilder können sehr echt aussehen.",
+        "feedbackCorrect": "KI-Bilder können sehr echt aussehen. Viele KI-Bilder haben keine Fehler mehr.",
         "feedbackWrong": [
           "KI kann sehr echte Fotos fälschen.",
           null,
@@ -8069,7 +8069,7 @@ const topics = [
           "Ein gefälschtes Video."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Ein Deepfake ist ein gefälschtes Video mit KI.",
+        "feedbackCorrect": "Ein Deepfake ist ein gefälschtes Video. KI tauscht darin Gesicht oder Stimme aus.",
         "feedbackWrong": [
           "Ein Deepfake sieht oft echt aus. Aber er ist gefälscht.",
           "Die Länge ist egal. Ein Deepfake ist gefälscht.",
@@ -8086,7 +8086,7 @@ const topics = [
           "Nach dem Namen fragen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Stimmen können gefälscht sein. Du rufst selbst zurück.",
+        "feedbackCorrect": "Stimmen können mit KI gefälscht sein. Darum legst du auf. Du rufst selbst zurück. Du nimmst die bekannte Nummer.",
         "feedbackWrong": [
           null,
           "Die Stimme kann mit KI gefälscht sein.",
@@ -8103,7 +8103,7 @@ const topics = [
           "Ich schicke sie schnell weiter."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Gut. Starke Gefühle beweisen nicht: Die Nachricht stimmt. Du prüfst zuerst.",
+        "feedbackCorrect": "Starke Gefühle beweisen nicht: Die Nachricht stimmt. Du prüfst zuerst.",
         "feedbackWrong": [
           null,
           "Wut sagt nichts über die Wahrheit.",
@@ -8120,7 +8120,7 @@ const topics = [
           "Ich leite sie nicht weiter."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Im Zweifel nicht teilen.",
+        "feedbackCorrect": "Teilst du eine falsche Nachricht? Dann glauben noch mehr Menschen die Lüge. Darum gilt: Im Zweifel nicht teilen.",
         "feedbackWrong": [
           "So kannst du falsche Nachrichten weitergeben.",
           "Auch Freunde schicken weiter. Warte lieber.",
@@ -8137,7 +8137,7 @@ const topics = [
           "Zählen: Wie oft haben andere sie geteilt?"
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Wichtige Nachrichten stehen bei mehreren bekannten Seiten.",
+        "feedbackCorrect": "Wichtige Nachrichten stehen bei mehreren bekannten Nachrichten-Seiten. Steht die Nachricht dort nicht? Dann ist Vorsicht wichtig.",
         "feedbackWrong": [
           null,
           "Du prüfst die Quelle, nicht das Aussehen.",
@@ -8154,7 +8154,7 @@ const topics = [
           "Werbung von dem Promi."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Solche Videos sind oft Deepfake-Betrug. Mach da nicht mit.",
+        "feedbackCorrect": "Solche Videos sind oft mit KI gefälscht. Betrüger wollen so dein Geld stehlen. Mach da nicht mit.",
         "feedbackWrong": [
           "Solche Videos sind oft Betrug.",
           null,
@@ -8171,7 +8171,7 @@ const topics = [
           "Erst prüfen, dann teilen."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Erst prüfen, dann teilen.",
+        "feedbackCorrect": "Teilst du eine falsche Nachricht? Dann verbreitet sie sich weiter. Darum gilt: Erst prüfen. Dann teilen.",
         "feedbackWrong": [
           "Prüfe eine Nachricht erst. Dann teile sie.",
           "Der Hinweis geht beim Weiterschicken verloren.",
@@ -8188,7 +8188,7 @@ const topics = [
           "Ja. Mit einem Foto ist es wahr."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Nicht alles im Internet ist wahr.",
+        "feedbackCorrect": "Jeder kann etwas ins Internet schreiben. Darum ist nicht alles im Internet wahr.",
         "feedbackWrong": [
           "Nicht alles im Internet ist wahr.",
           null,
@@ -8395,7 +8395,7 @@ const topics = [
             null,
             "Die Antwort geht an die Betrüger. Sie schreiben dann: Ja, wir sind echt. Ruf lieber deine Bank selbst an."
           ],
-          "feedbackCorrect": "Genau. Deine Bank fragt nie per E-Mail nach deinen Daten. Der Link kann zu einer falschen Seite führen.",
+          "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach deinen Daten. Der Link kann zu einer falschen Seite führen.",
           "remember": "Meine Bank fragt nie per E-Mail nach meinen Daten."
         },
         "pictogram": "pikto-data"
@@ -8485,7 +8485,7 @@ const topics = [
             "Dort siehst du: Wo ist dein Paket wirklich? Den Link aus der SMS brauchst du nicht.",
             null
           ],
-          "feedbackCorrect": "Genau. Solche SMS sind fast immer Betrug. Echte Paket-Dienste fordern kein Geld per SMS.",
+          "feedbackCorrect": "Solche SMS sind fast immer Betrug. Echte Paket-Dienste fordern kein Geld per SMS.",
           "remember": "Paket-SMS mit Geld-Forderung sind Betrug."
         },
         "pictogram": "pikto-fraud"
@@ -8527,7 +8527,7 @@ const topics = [
             "Das ist ein bekannter Trick. Die neue Nummer kann Betrügern gehören. Ruf erst die alte Nummer an.",
             "Betrüger antworten einfach: Ja, ich bin es. Sicher bist du erst nach einem Anruf bei der alten Nummer."
           ],
-          "feedbackCorrect": "Genau. Unter der alten Nummer erreichst du deinen echten Bruder. So merkst du den Betrug.",
+          "feedbackCorrect": "Unter der alten Nummer erreichst du deinen echten Bruder. So merkst du den Betrug.",
           "remember": "Bei Geld-Nachrichten rufe ich die bekannte Nummer an."
         },
         "pictogram": "pikto-fraud"
@@ -8587,7 +8587,7 @@ const topics = [
             null,
             "Bei der 110 ist die echte Polizei. Dort kannst du den Anruf melden."
           ],
-          "feedbackCorrect": "Genau. Du legst auf. Die echte Polizei fordert nie Geld. Sie holt auch kein Geld ab.",
+          "feedbackCorrect": "Du legst auf. Die echte Polizei fordert nie Geld. Sie holt auch kein Geld ab.",
           "remember": "Die echte Polizei fordert nie Geld."
         },
         "pictogram": "pikto-fraud"
@@ -8671,7 +8671,7 @@ const topics = [
             "Das ist ein guter Weg. Reden hilft bei so einer Entscheidung. Wichtig ist: Du schickst kein Geld.",
             null
           ],
-          "feedbackCorrect": "Genau. Du sagst klar Nein. Wer dich wirklich mag, bleibt trotzdem. Ein Betrüger macht jetzt Druck. Oder er meldet sich nicht mehr.",
+          "feedbackCorrect": "Du sagst klar Nein. Wer dich wirklich mag, bleibt trotzdem. Ein Betrüger macht jetzt Druck. Oder er meldet sich nicht mehr.",
           "remember": "Ich schicke kein Geld an fremde Menschen aus dem Internet."
         }
       },
@@ -8712,7 +8712,7 @@ const topics = [
             "Echte Gewinne kosten kein Geld. Mit den Codes holen sich die Betrüger das Geld von den Karten. Den Gewinn gibt es nicht.",
             "Auch die 20 Euro sind dann weg. Und die Betrüger rufen wieder an. Echte Gewinne kosten kein Geld."
           ],
-          "feedbackCorrect": "Genau. Echte Gewinne kosten kein Geld. Die Sache mit den Gutschein-Karten ist ein bekannter Trick.",
+          "feedbackCorrect": "Echte Gewinne kosten kein Geld. Die Sache mit den Gutschein-Karten ist ein bekannter Trick.",
           "remember": "Echte Gewinne kosten kein Geld."
         },
         "pictogram": "pikto-fraud"
@@ -8818,7 +8818,7 @@ const topics = [
             null,
             "Unter deiner bekannten Nummer erreichst du die echte Bank. Dort kannst du fragen: Ist mit meinem Konto alles in Ordnung?"
           ],
-          "feedbackCorrect": "Genau. Der Code ist nur für dich. Eine echte Bank fragt nie am Telefon nach einem Code.",
+          "feedbackCorrect": "Der Code ist nur für dich. Eine echte Bank fragt nie am Telefon nach einem Code.",
           "remember": "Ich gebe nie einen Code weiter."
         },
         "pictogram": "pikto-lock"
@@ -8877,7 +8877,7 @@ const topics = [
             null,
             null
           ],
-          "feedbackCorrect": "Genau. Der Aufkleber kann falsch sein. Mit Münzen bist du sicher.",
+          "feedbackCorrect": "Der Aufkleber kann falsch sein. Mit Münzen bist du sicher.",
           "remember": "Bei einem Aufkleber scanne ich den Code nicht."
         },
         "remember": "Bei einem Aufkleber scanne ich den Code nicht."
@@ -8948,7 +8948,7 @@ const topics = [
             null,
             "Dort siehst du: Ist wirklich etwas offen? Und dort steht die echte Nummer."
           ],
-          "feedbackCorrect": "Genau. Selbst anrufen ist am sichersten. Nimm deine bekannte Nummer. Sie steht auf deiner Rechnung.",
+          "feedbackCorrect": "Selbst anrufen ist am sichersten. Nimm deine bekannte Nummer. Sie steht auf deiner Rechnung.",
           "remember": "Ich lege auf. Ich rufe selbst an."
         },
         "remember": "Ich zahle nie sofort. Ich frage erst."
@@ -9051,7 +9051,7 @@ const topics = [
           "Ein Computer-Virus."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Phishing sind falsche Nachrichten. Sie wollen deine Daten stehlen.",
+        "feedbackCorrect": "Phishing ist ein Trick mit falschen Nachrichten. Ein Link führt zu einer falschen Seite. Dort wollen Betrüger deine Daten stehlen.",
         "feedbackWrong": [
           null,
           "Phishing ist kein Spiel. Es ist Betrug.",
@@ -9068,7 +9068,7 @@ const topics = [
           "Die Sache ist wirklich eilig."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Stress ist ein Warnzeichen.",
+        "feedbackCorrect": "Betrüger machen oft Stress. Dann denkst du weniger nach. Darum ist Stress ein Warnzeichen.",
         "feedbackWrong": [
           null,
           "Auch eine bekannte Stelle kann dich zur Eile drängen. Prüfe die Nachricht zuerst.",
@@ -9085,7 +9085,7 @@ const topics = [
           "Die SMS beantworten."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Solche SMS sind fast immer Betrug.",
+        "feedbackCorrect": "Echte Paket-Dienste fordern kein Geld per SMS. Darum sind solche SMS fast immer Betrug.",
         "feedbackWrong": [
           "Paket-SMS mit Geld-Forderung sind Betrug.",
           null,
@@ -9102,7 +9102,7 @@ const topics = [
           "Die alte, bekannte Nummer anrufen."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Du prüfst über die bekannte Nummer.",
+        "feedbackCorrect": "Die neue Nummer kann von einem Betrüger sein. Darum rufst du die bekannte Nummer an. So weißt du: Wer schreibt wirklich?",
         "feedbackWrong": [
           "Das ist ein bekannter Betrugs-Trick.",
           "Auf der neuen Nummer sitzt vielleicht der Betrüger.",
@@ -9119,7 +9119,7 @@ const topics = [
           "Nein, niemals."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Die echte Polizei fordert nie Geld.",
+        "feedbackCorrect": "Die echte Polizei fordert nie Geld am Telefon. Ein solcher Anruf ist ein Trick von Betrügern.",
         "feedbackWrong": [
           "Die echte Polizei fordert nie Geld am Telefon.",
           "Auch dann nicht. Die Polizei fordert nie Geld am Telefon.",
@@ -9136,7 +9136,7 @@ const topics = [
           "Das ist die Steuer."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Echte Gewinne kosten kein Geld.",
+        "feedbackCorrect": "Echte Gewinne kosten kein Geld. Du sollst zuerst zahlen? Dann ist es ein Trick von Betrügern.",
         "feedbackWrong": [
           "Echte Gewinne kosten nie Geld.",
           null,
@@ -9153,7 +9153,7 @@ const topics = [
           "Code niemals weitergeben."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Codes sind nur für dich.",
+        "feedbackCorrect": "Mit dem Code können Betrüger dein Konto benutzen. Darum sind Codes nur für dich. Echte Firmen fragen nie nach deinem Code.",
         "feedbackWrong": [
           "Mit dem Code können Betrüger dein Konto benutzen.",
           "Auch am Telefon nicht. Der Code bleibt bei dir.",
@@ -9170,7 +9170,7 @@ const topics = [
           "Den Aufkleber abziehen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Ein Aufkleber kann falsch sein. Zahle mit Münzen oder in deiner eigenen Park-App.",
+        "feedbackCorrect": "Betrüger kleben falsche Codes über echte. Darum scannst du den Aufkleber nicht. Zahle mit Münzen oder in deiner eigenen Park-App.",
         "feedbackWrong": [
           null,
           "Betrüger kleben falsche Codes über echte.",
@@ -9187,7 +9187,7 @@ const topics = [
           "Ich warte erst ein paar Tage."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Betrug kann jedem passieren. Hilfe holen ist stark.",
+        "feedbackCorrect": "Betrug kann jedem passieren. Du musst dich nicht schämen. Schnelle Hilfe ist wichtig. Dann kannst du zum Beispiel deine Karte sperren lassen.",
         "feedbackWrong": [
           "Betrug ist nicht deine Schuld. Hol dir schnell Hilfe.",
           null,
@@ -9204,7 +9204,7 @@ const topics = [
           "116 116"
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Der Sperr-Notruf ist die 116 116. Bei manchen Kredit-Karten rufst du deine Bank an.",
+        "feedbackCorrect": "Der Sperr-Notruf ist die 116 116. Bei manchen Kredit-Karten rufst du deine Bank an.",
         "feedbackWrong": [
           "Das ist nicht die Sperr-Nummer. Der Sperr-Notruf ist die 116 116.",
           "Die 112 ist für Notfälle. Karten sperrt die 116 116.",
@@ -9221,7 +9221,7 @@ const topics = [
           "Den Link an Freunde schicken."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Fremde Links öffne ich nicht.",
+        "feedbackCorrect": "Ein fremder Link kann zu einer falschen Seite führen. Darum öffnest du ihn nicht.",
         "feedbackWrong": [
           null,
           "Fremde Links können gefährlich sein.",
@@ -9238,7 +9238,7 @@ const topics = [
           "Die Bank-Daten schicken. Dann holt sie sich das Geld."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Du schickst kein Geld. Und du holst dir Unterstützung.",
+        "feedbackCorrect": "Fotos und Stimmen können gefälscht sein. Du weißt nicht: Wer schreibt wirklich? Darum schickst du kein Geld. Und du holst dir Unterstützung.",
         "feedbackWrong": [
           null,
           "Wer dich wirklich mag, bittet dich nicht um Geld. Schick kein Geld.",
@@ -9256,7 +9256,7 @@ const topics = [
           "Ich antworte auf die E-Mail. Ich frage nach der Nachricht."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Gut. Du öffnest die Bank-App über das Zeichen auf deinem Handy. Du nutzt den Link nicht. In der App siehst du nach. Du musst den Trick nicht erkennen.",
+        "feedbackCorrect": "Du öffnest die Bank-App über das Zeichen auf deinem Handy. Du nutzt den Link nicht. In der App siehst du nach. Du musst den Trick nicht erkennen.",
         "feedbackWrong": [
           "Auch eine falsche E-Mail kann deine Bank nennen. Der Link kann auf eine falsche Seite führen. Öffne die Bank-App über das Zeichen auf deinem Handy.",
           null,
@@ -9525,7 +9525,7 @@ const topics = [
             null,
             null
           ],
-          "feedbackCorrect": "Genau. Sehr billig und nur Vorkasse: Das sind Warnzeichen für einen Fake-Shop. Dort zahlst du. Aber die Ware kommt nie.",
+          "feedbackCorrect": "Sehr billig und nur Vorkasse: Das sind Warnzeichen für einen Fake-Shop. Dort zahlst du. Aber die Ware kommt nie.",
           "remember": "Sehr billig und nur Vorkasse: Da kaufe ich nicht."
         },
         "pictogram": "pikto-shop"
@@ -9620,7 +9620,7 @@ const topics = [
             null,
             "Auch die Hälfte ist dann weg. Schau dir das Rad erst an. Dann zahlst du."
           ],
-          "feedbackCorrect": "Genau. Bei privaten Anzeigen gilt: Erst die Ware ansehen. Dann bezahlen.",
+          "feedbackCorrect": "Bei privaten Anzeigen gilt: Erst die Ware ansehen. Dann bezahlen.",
           "remember": "Rechnung ist sicherer als Vorkasse."
         },
         "pictogram": "pikto-shop"
@@ -9675,7 +9675,7 @@ const topics = [
             "Die Bank kann nachsehen: Ist deine Karte in Ordnung?",
             null
           ],
-          "feedbackCorrect": "Genau. Die PIN bleibt geheim. Wer per E-Mail danach fragt, ist ein Betrüger. Im Shop siehst du selbst: Ist die Bestellung bezahlt?",
+          "feedbackCorrect": "Die PIN bleibt geheim. Wer per E-Mail danach fragt, ist ein Betrüger. Im Shop siehst du selbst: Ist die Bestellung bezahlt?",
           "remember": "PIN und TAN bleiben geheim."
         },
         "pictogram": "pikto-shop"
@@ -9754,7 +9754,7 @@ const topics = [
             null,
             "Morgen weißt du besser: Willst du das Sofa wirklich?"
           ],
-          "feedbackCorrect": "Genau. Du darfst dir Zeit nehmen. Solche Sätze sollen dich zum schnellen Kaufen bringen. Gute Angebote gibt es wieder.",
+          "feedbackCorrect": "Du darfst dir Zeit nehmen. Solche Sätze sollen dich zum schnellen Kaufen bringen. Gute Angebote gibt es wieder.",
           "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
         },
         "pictogram": "pikto-no"
@@ -9851,7 +9851,7 @@ const topics = [
             "Die Zeit-Anzeige ist ein Trick. Sie soll dich drängen. Lass dich nicht hetzen.",
             "Nach dem Kaufen ist das Geld vielleicht schon weg. Darum prüfst du vorher. Erst prüfen. Dann kaufen."
           ],
-          "feedbackCorrect": "Genau. Die Zeit-Anzeige will dich nur drängen. Du prüfst erst. Dann kaufst du.",
+          "feedbackCorrect": "Die Zeit-Anzeige will dich nur drängen. Du prüfst erst. Dann kaufst du.",
           "remember": "Ich lasse mich beim Einkaufen nicht hetzen."
         },
         "remember": "Ich prüfe in Ruhe. Ich lasse mich nicht hetzen.",
@@ -9908,7 +9908,7 @@ const topics = [
           "Ein falscher Shop. Die Ware kommt nie."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Im Fake-Shop bezahlst du, bekommst aber nichts.",
+        "feedbackCorrect": "Ein Fake-Shop sieht oft echt aus. Du bezahlst. Aber die Ware kommt nie. Darum prüfst du zuerst den Shop. Erst dann bezahlst du.",
         "feedbackWrong": [
           "Der günstige Preis lockt dich nur. Die Ware kommt nicht.",
           "Auch deutsche Shops können falsch sein.",
@@ -9925,9 +9925,9 @@ const topics = [
           "Ein Warnzeichen."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. Das sind typische Warnzeichen.",
+        "feedbackCorrect": "Der sehr billige Preis lockt dich. Bei Vorkasse zahlst du vor der Lieferung. Vielleicht kommt die Ware nie. Dann ist dein Geld weg.",
         "feedbackWrong": [
-          "Extrem billig plus Vorkasse ist verdächtig.",
+          "Der sehr billige Preis lockt dich nur. Bei Vorkasse zahlst du vorher. Kommt die Ware nicht? Dann ist dein Geld weg.",
           "Neu heißt nicht: sicher. Sehr niedrige Preise und nur Vorkasse sind Warnzeichen.",
           null
         ]
@@ -9942,7 +9942,7 @@ const topics = [
           "Ich zahle nur die Hälfte vorher."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Bei fremden Shops zahlst du nicht im Voraus.",
+        "feedbackCorrect": "Du kennst den Shop nicht. Vielleicht kommt die Ware nie. Dann ist das Geld weg. Darum kaufst du dort nicht.",
         "feedbackWrong": [
           "Dann ist dein Geld vielleicht weg.",
           null,
@@ -9959,7 +9959,7 @@ const topics = [
           "Das ist eine normale Sicherheits-Prüfung von der Bank."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Banken fragen nie nach PIN oder TAN.",
+        "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach der PIN. Diese E-Mail kommt also von Betrügern. Mit der PIN können sie dein Geld stehlen.",
         "feedbackWrong": [
           null,
           "Die Bank fragt nie nach der PIN.",
@@ -9976,10 +9976,10 @@ const topics = [
           "Zwei Stück kaufen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Eile ist ein Verkaufs-Trick.",
+        "feedbackCorrect": "Das Angebot macht dir Stress. Du sollst schnell kaufen. Aber du darfst dir Zeit nehmen. Dann prüfst du in Ruhe: Brauche ich das wirklich?",
         "feedbackWrong": [
           null,
-          "Du darfst dir Zeit nehmen.",
+          "Das Angebot will dich hetzen. Aber du darfst dir Zeit nehmen. Erst prüfst du in Ruhe. Dann entscheidest du.",
           "Mehr kaufen kostet nur mehr Geld."
         ]
       },
@@ -9993,7 +9993,7 @@ const topics = [
           "Nur die Sterne-Bewertung."
         ],
         "correctIndex": 1,
-        "feedbackCorrect": "Das ist richtig. Du prüfst die echten Kosten.",
+        "feedbackCorrect": "Mit Versand kostet es oft mehr. Ein Abo kostet immer wieder Geld. Darum prüfst du den ganzen Preis. Dann entscheidest du selbst.",
         "feedbackWrong": [
           "Ein Bild sagt nichts über die Kosten.",
           null,
@@ -10010,7 +10010,7 @@ const topics = [
           "Nur mit dem Kassen-Bon tauschen."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. Online-Käufe kannst du oft 14 Tage zurückgeben.",
+        "feedbackCorrect": "Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf. Das ist dein Recht. Dafür schreibst du dem Shop eine Nachricht.",
         "feedbackWrong": [
           null,
           "Du hast oft 14 Tage Widerrufs-Recht.",
@@ -10027,9 +10027,9 @@ const topics = [
           "Ja, und viele kleine Käufe werden teuer."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Das ist richtig. In-App-Käufe kosten echtes Geld.",
+        "feedbackCorrect": "Käufe im Spiel kosten echtes Geld. Ein Kauf ist oft klein. Aber viele kleine Käufe werden schnell teuer. Darum rechnest du nach: Wie viel habe ich schon bezahlt?",
         "feedbackWrong": [
-          "Käufe in Apps kosten echtes Geld.",
+          "Spiel-Geld kaufst du oft mit echtem Geld. Dann kostet auch ein Kauf mit Spiel-Geld echtes Geld.",
           "Jeder Kauf kostet Geld. Nicht nur der erste.",
           null
         ]
@@ -10061,10 +10061,10 @@ const topics = [
           "Nur der Bank sage ich sie."
         ],
         "correctIndex": 0,
-        "feedbackCorrect": "Das ist richtig. PIN und TAN bleiben geheim.",
+        "feedbackCorrect": "Mit PIN und TAN kann jemand dein Geld stehlen. Darum gibst du sie niemandem. Deine Bank fragt auch nie per E-Mail oder Telefon danach.",
         "feedbackWrong": [
           null,
-          "PIN und TAN sind geheim. Gib sie nie weiter.",
+          "Mit PIN und TAN kann jemand dein Geld stehlen. Darum gibst du sie nie weiter.",
           "Auch der Bank nicht. Sie fragt nie danach."
         ]
       },
@@ -10078,7 +10078,7 @@ const topics = [
           "Ich wähle Vorkasse. Der Shop nennt eine Adresse.",
           "Ich wähle Rechnung. Ich zahle nach der Lieferung."
         ],
-        "feedbackCorrect": "Genau. Bei dieser Rechnung zahlst du erst nach der Lieferung. Das gibt dir mehr Schutz als Vorkasse. Trotzdem prüfst du auch den Shop.",
+        "feedbackCorrect": "Bei dieser Rechnung zahlst du erst nach der Lieferung. Das gibt dir mehr Schutz als Vorkasse. Trotzdem prüfst du auch den Shop.",
         "feedbackWrong": [
           "Gute Bewertungen ändern die Bezahl-Art nicht. Bei Vorkasse zahlst du vor der Lieferung. Auf Rechnung bekommst du zuerst die Ware.",
           "Auch mit einer Adresse zahlst du bei Vorkasse vorher. Auf Rechnung bekommst du zuerst die Ware.",

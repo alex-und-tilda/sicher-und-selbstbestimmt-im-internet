@@ -51,7 +51,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Du musst nicht antworten. Auch nicht aus Höflichkeit. Du bestimmst, mit wem du schreibst.", null, null],
         feedbackAuch: [null, null, "Das ist klar und freundlich. So weiß die Person Bescheid."],
-        feedbackCorrect: "Genau. Du entscheidest, wem du antwortest. Das ist nicht unhöflich.",
+        feedbackCorrect: "Du entscheidest, wem du antwortest. Das ist nicht unhöflich.",
         remember: "Ich entscheide, wem ich antworte."
       },
       "Die KI in WhatsApp": {
@@ -63,7 +63,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Die KI kann deine Eingaben verarbeiten. Schreib ihr keine privaten Daten.", null],
         feedbackAuch: [null, null, "Deine Adresse bleibt bei dir. Pizza findest du auch ohne die KI."],
-        feedbackCorrect: "Genau. Deine Adresse ist privat. Der KI schreibst du keine privaten Dinge.",
+        feedbackCorrect: "Deine Adresse ist privat. Der KI schreibst du keine privaten Dinge.",
         remember: "Der KI schreibe ich nichts Privates."
       }
     },
@@ -77,7 +77,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Dann kennt eine fremde Person deinen Namen. Und sie weiß: Hier antwortet jemand. Manche Betrüger schreiben viele Nummern einfach an.", null],
         feedbackAuch: [null, null, "Dann kann dir die Nummer nicht mehr schreiben."],
-        feedbackCorrect: "Genau. Du kennst die Nummer nicht. Du musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        feedbackCorrect: "Du kennst die Nummer nicht. Du musst nicht antworten. So erfährt die fremde Person nichts über dich.",
         remember: "Fremden Nummern sage ich nichts über mich."
       },
       "Links in Nachrichten": {
@@ -89,7 +89,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Die Nachricht verspricht viel Geld. Das soll neugierig machen. Der Link kann auf eine falsche Seite führen. Dort will jemand deine Daten.", null, null],
         feedbackAuch: [null, null, "Der Link bleibt zu. Das ist das Wichtigste. Du kannst das auch allein entscheiden."],
-        feedbackCorrect: "Genau. Du kennst die Nummer nicht. Dann bleibt der Link zu. Du verpasst nichts.",
+        feedbackCorrect: "Du kennst die Nummer nicht. Dann bleibt der Link zu. Du verpasst nichts.",
         remember: "Fremde Links tippe ich nicht an."
       },
       "Dein WhatsApp-Code": {
@@ -101,7 +101,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Oft schreibt gar nicht der Freund. Betrüger nutzen sein Konto. Der Code bleibt bei dir.", null, null],
         feedbackAuch: [null, null, "Der Code bleibt bei dir. Am Telefon merkst du: Hat dein Freund das wirklich geschrieben?"],
-        feedbackCorrect: "Genau. Mit dem Code kann jemand dein Konto stehlen. Darum bleibt der Code immer bei dir.",
+        feedbackCorrect: "Mit dem Code kann jemand dein Konto stehlen. Darum bleibt der Code immer bei dir.",
         remember: "Meinen Code gebe ich nie weiter."
       }
     }
@@ -116,7 +116,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich schreibe sie rein. Facebook fragt ja danach.", "Ich schreibe sie rein. Dann finden mich alte Freunde.", "Ich lasse das Feld leer."],
         correctIndex: 2,
         feedbackWrong: ["Facebook fragt viel. Du musst nicht alles ausfüllen. Deine Telefon-Nummer ist privat.", "Alte Freunde finden dich über deinen Namen. Deine Nummer sehen vielleicht auch fremde Menschen.", null],
-        feedbackCorrect: "Genau. Das Feld ist freiwillig. Deine Freunde können dich nach der Nummer fragen.",
+        feedbackCorrect: "Das Feld ist freiwillig. Deine Freunde können dich nach der Nummer fragen.",
         remember: "Ich zeige nicht alles in meinem Profil."
       }
     },
@@ -130,7 +130,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Dann sehen auch fremde Menschen deine privaten Angaben. Das hat nichts mit Verstecken zu tun. Du bestimmst, wer was über dich weiß.", null, null],
         feedbackAuch: [null, null, "Dann sieht es niemand mehr. Du musst nicht alles ins Profil schreiben."],
-        feedbackCorrect: "Genau. Private Angaben zeigst du nur Freunden. Aber: Deinen Namen, dein aktuelles Profil-Bild und dein Titel-Bild sehen alle.",
+        feedbackCorrect: "Private Angaben zeigst du nur Freunden. Aber: Deinen Namen, dein aktuelles Profil-Bild und dein Titel-Bild sehen alle.",
         remember: "Private Angaben zeige ich nur Freunden."
       },
       "Unbekannte Personen": {
@@ -142,7 +142,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Gemeinsame Freunde sagen wenig. Vielleicht kennen deine Freunde Jonas auch nicht. Manche falschen Profile sammeln viele Freunde.", null, null],
         feedbackAuch: [null, "Dann weißt du mehr über Jonas. Die Anfrage kann so lange warten.", null],
-        feedbackCorrect: "Genau. Du kennst Jonas nicht. Gemeinsame Freunde sagen wenig über ihn. Du musst die Anfrage nicht annehmen.",
+        feedbackCorrect: "Du kennst Jonas nicht. Gemeinsame Freunde sagen wenig über ihn. Du musst die Anfrage nicht annehmen.",
         remember: "Unbekannte Anfragen lehne ich ab."
       },
       "Komische Nachrichten": {
@@ -154,7 +154,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Die Nachricht soll neugierig machen. Der Link führt oft auf eine falsche Seite. Dort will jemand dein Passwort.", null],
         feedbackAuch: [null, null, "Der Link bleibt zu. Am Telefon merkst du: Hat Markus das wirklich geschrieben?"],
-        feedbackCorrect: "Genau. So eine Nachricht kommt oft von einem gestohlenen Konto. Der Link bleibt zu. Dann bleibt dein Passwort bei dir.",
+        feedbackCorrect: "So eine Nachricht kommt oft von einem gestohlenen Konto. Der Link bleibt zu. Dann bleibt dein Passwort bei dir.",
         remember: "Fremde Links tippe ich nicht an."
       }
     }
@@ -172,7 +172,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Privat hilft nur mit Auswahl. Nach dem Annehmen sieht das fremde Profil alle deine Fotos.", null, null],
         feedbackAuch: [null, null, "Dann weißt du mehr. Du entscheidest danach: annehmen oder ablehnen."],
-        feedbackCorrect: "Genau. Bei einem privaten Konto bestätigst du jede Anfrage selbst. Nur diese Menschen sehen deine Fotos. Profil-Bild, Name und Profil-Text sehen trotzdem alle.",
+        feedbackCorrect: "Bei einem privaten Konto bestätigst du jede Anfrage selbst. Nur diese Menschen sehen deine Fotos. Profil-Bild, Name und Profil-Text sehen trotzdem alle.",
         remember: "Mein Konto ist privat."
       },
       "Fotos von anderen Personen": {
@@ -184,7 +184,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Für Ben ist das Foto vielleicht peinlich. Viele Menschen können es sehen. Darum darf Ben mitentscheiden.", null],
         feedbackAuch: [null, null, "Dann sieht nur Ben das Foto. Er kann selbst entscheiden."],
-        feedbackCorrect: "Genau. Es ist sein Bild. Darum darf Ben mitentscheiden.",
+        feedbackCorrect: "Es ist sein Bild. Darum darf Ben mitentscheiden.",
         remember: "Fotos von anderen: erst fragen."
       },
       "Nachrichten von Unbekannten": {
@@ -196,7 +196,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Dann weiß eine fremde Person, wo du wohnst. Und sie weiß: Hier antwortet jemand.", null],
         feedbackAuch: [null, null, "Dann kann dir das Profil nicht mehr schreiben."],
-        feedbackCorrect: "Genau. Du kennst das Profil nicht. Du musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        feedbackCorrect: "Du kennst das Profil nicht. Du musst nicht antworten. So erfährt die fremde Person nichts über dich.",
         remember: "Fremden Profilen muss ich nicht antworten."
       }
     }
@@ -211,7 +211,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich schreibe zurück: Du hast selber keine Ahnung.", "Ich antworte nicht.", "Ich lösche meinen Kommentar."],
         correctIndex: 1,
         feedbackWrong: ["Dann geht der Streit weiter. Es gibt nichts zu gewinnen. Nicht antworten ist erlaubt.", null, "Du musst deinen Kommentar nicht löschen. Deine Meinung darf stehen bleiben. Der andere war unfreundlich, nicht du."],
-        feedbackCorrect: "Genau. Du musst auf keinen Kommentar reagieren. Deine Meinung darf stehen bleiben.",
+        feedbackCorrect: "Du musst auf keinen Kommentar reagieren. Deine Meinung darf stehen bleiben.",
         remember: "Ich muss nicht auf Kommentare reagieren."
       },
       "Nicht jedes Video ist echt": {
@@ -223,7 +223,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Das Video kann mit KI gemacht sein. KI kann Gesichter und Stimmen nachmachen. Vielleicht weiß der Fußballer nichts davon.", null, null],
         feedbackAuch: [null, "Das ist eine gute Prüfung. Du lädst nichts. Und du schaust an einer zweiten Stelle nach.", null],
-        feedbackCorrect: "Genau. KI kann Gesichter und Stimmen nachmachen. Vielleicht weiß der Fußballer nichts von dem Video.",
+        feedbackCorrect: "KI kann Gesichter und Stimmen nachmachen. Vielleicht weiß der Fußballer nichts von dem Video.",
         remember: "Auch Videos können gefälscht sein."
       }
     },
@@ -237,7 +237,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Viele Aufrufe sind kein Beweis. Auch falsche Videos sehen viele Menschen. Schau lieber an einer zweiten Stelle nach.", null],
         feedbackAuch: [null, null, "Vielleicht weiß sie mehr. Sonst schaut ihr zusammen nach."],
-        feedbackCorrect: "Genau. Die Stadt weiß das am besten. Ein Video allein ist kein Beweis.",
+        feedbackCorrect: "Die Stadt weiß das am besten. Ein Video allein ist kein Beweis.",
         remember: "Ich prüfe: Stimmt das Video?"
       },
       "Werbung erkennen": {
@@ -249,7 +249,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Nur heute: Das macht Druck. Das ist Absicht. Du musst nichts kaufen.", null, null],
         feedbackAuch: [null, null, "Kaufen ist erlaubt. Du entscheidest in Ruhe. Nicht die Werbung."],
-        feedbackCorrect: "Genau. Du musst nichts kaufen. Manche Werbung kannst du überspringen. Dann geht dein Video weiter.",
+        feedbackCorrect: "Du musst nichts kaufen. Manche Werbung kannst du überspringen. Dann geht dein Video weiter.",
         remember: "Ich kaufe nichts wegen Werbung."
       },
       "Pausen machen": {
@@ -259,7 +259,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich schaue weiter. Das Video hat ja schon angefangen.", "Ich stelle einen Wecker. In 10 Minuten höre ich auf.", "Ich mache jetzt Pause."],
         correctIndex: 2,
         feedbackWrong: ["Das nächste Video startet immer von allein. Die Pause musst du selbst machen.", "Der Wecker ist eine gute Idee. Aber deine Augen brennen schon jetzt. Mach die Pause lieber gleich.", null],
-        feedbackCorrect: "Genau. Deine Augen brauchen eine Pause. Du bestimmst das Ende. Nicht YouTube.",
+        feedbackCorrect: "Deine Augen brauchen eine Pause. Du bestimmst das Ende. Nicht YouTube.",
         remember: "Nach einer Stunde mache ich Pause."
       }
     }
@@ -274,7 +274,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ja. In 3 Sekunden schafft das niemand.", "Nein. Ein Bildschirm-Foto geht trotzdem.", "Nein. Aber Snapchat sagt mir dann Bescheid."],
         correctIndex: 1,
         feedbackWrong: ["Ein Bildschirm-Foto dauert eine Sekunde. Danach ist dein Bild gespeichert.", null, "Snapchat sagt dir oft Bescheid. Aber dann ist das Bild schon gespeichert."],
-        feedbackCorrect: "Genau. Ein Bildschirm-Foto dauert eine Sekunde. Darum überlegst du vor dem Senden: Darf das Bild bleiben?",
+        feedbackCorrect: "Ein Bildschirm-Foto dauert eine Sekunde. Darum überlegst du vor dem Senden: Darf das Bild bleiben?",
         remember: "Ich denke vor dem Senden nach."
       }
     },
@@ -286,7 +286,7 @@ const EXTRA_PRACTICE = {
         answers: ["Nichts. Der Snap ist ja nach 10 Sekunden weg.", "Dürfen auch andere das Foto sehen? Nur dann schicke ich es.", "Ich schicke es. Mein Freund zeigt es bestimmt niemandem."],
         correctIndex: 1,
         feedbackWrong: ["Der Snap verschwindet nur auf deinem Bildschirm. Dein Freund kann vorher ein Bildschirm-Foto machen.", null, "Vielleicht. Aber sicher weißt du es nicht. Ein Bildschirm-Foto kann er weiter-schicken. Auch aus Versehen."],
-        feedbackCorrect: "Genau. Andere können ein Bild speichern. Also prüfst du vorher: Dürfen alle es sehen?",
+        feedbackCorrect: "Andere können ein Bild speichern. Also prüfst du vorher: Dürfen alle es sehen?",
         remember: "Bilder verschwinden nicht wirklich."
       },
       "Dein Standort": {
@@ -296,7 +296,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich lasse es so. Dann finden mich meine Freunde.", "Ich zeige meinen Ort nur noch 2 guten Freunden.", "Ich schalte den Standort aus."],
         correctIndex: 2,
         feedbackWrong: ["Dann sehen auch fast fremde Menschen: Wo wohnst du? Wann bist du unterwegs?", "Das ist besser als für alle. Aber auch ein Freund kann es weitererzählen. Am sichersten ist: Standort aus.", null],
-        feedbackCorrect: "Genau. Dann zeigt die Karte deinen Ort nicht mehr. Aber: Auch ein Bild kann den Ort zeigen.",
+        feedbackCorrect: "Dann zeigt die Karte deinen Ort nicht mehr. Aber: Auch ein Bild kann den Ort zeigen.",
         remember: "Ich schalte den Standort aus."
       },
       "Niemand darf dich zwingen": {
@@ -308,7 +308,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Du weißt nicht: Stimmt das überhaupt? Und es ist egal. Dein Nein gilt.", null],
         feedbackAuch: [null, null, "Dann kann er dir nicht mehr schreiben. Dein Nein gilt."],
-        feedbackCorrect: "Genau. Du willst das nicht. Dein Nein gilt. Du musst es nicht erklären.",
+        feedbackCorrect: "Du willst das nicht. Dein Nein gilt. Du musst es nicht erklären.",
         remember: "Ich darf nein sagen."
       }
     }
@@ -325,7 +325,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Sehr scharfe Chips können weh tun. Manche Menschen bekommen schlecht Luft. Deine Freunde können warten.", null, null],
         feedbackAuch: [null, "Dann bist du dabei. Aber du isst nichts Gefährliches.", null],
-        feedbackCorrect: "Genau. Der Trend kann weh tun. Du musst bei keinem Trend mitmachen. Auch nicht vor Freunden.",
+        feedbackCorrect: "Der Trend kann weh tun. Du musst bei keinem Trend mitmachen. Auch nicht vor Freunden.",
         remember: "Ich muss bei keinem Trend mitmachen."
       },
       "Gefühle und Pausen": {
@@ -337,7 +337,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Weiterschauen macht es meistens nicht besser. Das Handy weglegen hilft mehr.", null, null],
         feedbackAuch: [null, "Die App ist zu. Und Reden hilft beim Abschalten.", null],
-        feedbackCorrect: "Genau. Du darfst TikTok weglegen. Dein Kopf braucht jetzt Ruhe.",
+        feedbackCorrect: "Du darfst TikTok weglegen. Dein Kopf braucht jetzt Ruhe.",
         remember: "Ich darf TikTok weglegen."
       },
       "Nicht jedes Video ist echt": {
@@ -349,7 +349,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Auch Stimmen und Gesichter kann man fälschen. Vielleicht weiß die Ärztin nichts von dem Video.", null],
         feedbackAuch: [null, null, "Das ist eine gute Prüfung. In der Apotheke kennt man sich mit Tabletten aus."],
-        feedbackCorrect: "Genau. KI kann Stimmen und Gesichter nachmachen. Vielleicht weiß die Ärztin nichts von dem Video.",
+        feedbackCorrect: "KI kann Stimmen und Gesichter nachmachen. Vielleicht weiß die Ärztin nichts von dem Video.",
         remember: "Auch Videos und Stimmen können gefälscht sein."
       }
     },
@@ -363,7 +363,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Viele Videos heißen nicht: Das ist sicher. Du siehst nur die guten Sprünge.", null],
         feedbackAuch: [null, null, "Dann bist du dabei. Aber ohne Risiko. Du entscheidest selbst."],
-        feedbackCorrect: "Genau. Du entscheidest selbst. Du musst bei keinem Trend mitmachen. Deine Gesundheit ist wichtiger.",
+        feedbackCorrect: "Du entscheidest selbst. Du musst bei keinem Trend mitmachen. Deine Gesundheit ist wichtiger.",
         remember: "Ich muss bei keinem Trend mitmachen."
       },
       "Nachrichten auf TikTok": {
@@ -375,7 +375,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Du kennst die Person nicht. Nach einer Antwort schreibt sie oft weiter. Du musst nicht höflich sein.", null, null],
         feedbackAuch: [null, null, "Dann kann dir die Person nicht mehr schreiben."],
-        feedbackCorrect: "Genau. Du kennst die Person nicht. Du musst nicht antworten. Du entscheidest, mit wem du schreibst.",
+        feedbackCorrect: "Du kennst die Person nicht. Du musst nicht antworten. Du entscheidest, mit wem du schreibst.",
         remember: "Fremden Profilen muss ich nicht antworten."
       },
       "Pause machen": {
@@ -387,7 +387,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Die App hört nicht von allein auf. Beim Schauen vergisst man leicht die Zeit. Ein Timer hilft.", null, null],
         feedbackAuch: [null, "Dann erinnert dich TikTok selbst an die Pause.", null],
-        feedbackCorrect: "Genau. Ein Timer erinnert dich. Die App hört nicht von allein auf.",
+        feedbackCorrect: "Ein Timer erinnert dich. Die App hört nicht von allein auf.",
         remember: "Ich stelle einen Timer."
       }
     }
@@ -406,7 +406,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ein Mensch tippt sehr schnell.", "Das Programm hat sehr viele Texte gelernt.", "Die KI kennt mich. Sie weiß: Das mag ich."],
         correctIndex: 1,
         feedbackWrong: ["Da sitzt kein Mensch. So schnell tippt niemand. Es ist ein Programm.", null, "Die KI kennt dich nicht. Sie hat viele Rezepte gelernt. Daraus baut sie eine Antwort."],
-        feedbackCorrect: "Genau. KI ist ein Programm. Es hat sehr viele Texte gelernt. Daraus baut es schnell eine Antwort.",
+        feedbackCorrect: "KI ist ein Programm. Es hat sehr viele Texte gelernt. Daraus baut es schnell eine Antwort.",
         remember: "KI ist ein Programm. Kein Mensch."
       },
       "Wo triffst du KI?": {
@@ -416,7 +416,7 @@ const EXTRA_PRACTICE = {
         answers: ["Eine KI. Sie ist in WhatsApp eingebaut.", "Ein neuer Kontakt. Ein Mensch von WhatsApp.", "Ein Fehler. Ich lösche lieber WhatsApp."],
         correctIndex: 0,
         feedbackWrong: [null, "Meta AI ist kein Mensch. Es ist eine KI. Sie ist in WhatsApp eingebaut.", "Das ist kein Fehler. Du musst WhatsApp nicht löschen. Du musst die KI auch nicht benutzen."],
-        feedbackCorrect: "Genau. KI ist in vielen Apps eingebaut. Du entscheidest: Will ich sie benutzen?",
+        feedbackCorrect: "KI ist in vielen Apps eingebaut. Du entscheidest: Will ich sie benutzen?",
         remember: "KI ist in vielen Apps."
       },
       "KI kann Bilder und Stimmen fälschen": {
@@ -428,7 +428,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["KI kann Stimmen nachmachen. Gutschein-Codes sind wie Geld. Betrüger fragen oft danach.", null, null],
         feedbackAuch: [null, null, "Auch so merkst du: Kam die Nachricht wirklich von ihm?"],
-        feedbackCorrect: "Genau. KI kann Stimmen nachmachen. Am Telefon merkst du: Hat dein Chef das wirklich gesagt?",
+        feedbackCorrect: "KI kann Stimmen nachmachen. Am Telefon merkst du: Hat dein Chef das wirklich gesagt?",
         remember: "Stimmen können gefälscht sein."
       }
     },
@@ -442,7 +442,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Viele Chatbots haben einen Namen. Das macht sie freundlich. Aber Mia ist ein Programm. Kein Mensch.", null],
         feedbackAuch: [null, null, "Du darfst nachfragen. Viele Chatbots sagen dann: Ich bin ein Programm."],
-        feedbackCorrect: "Genau. Mia ist ein Programm. Der Name macht den Chatbot nur freundlich.",
+        feedbackCorrect: "Mia ist ein Programm. Der Name macht den Chatbot nur freundlich.",
         remember: "KI ist ein Programm. Kein Mensch."
       },
       "Was kann KI?": {
@@ -454,7 +454,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["KI klingt sicher. Aber sie kann sich irren. Vielleicht stehst du dann vor einer geschlossenen Tür.", null, null],
         feedbackAuch: [null, null, "Auch so weißt du die Zeiten direkt vom Amt."],
-        feedbackCorrect: "Genau. Das Amt weiß es am besten. Die KI war ein guter Anfang. Wichtige Antworten prüfst du nach.",
+        feedbackCorrect: "Das Amt weiß es am besten. Die KI war ein guter Anfang. Wichtige Antworten prüfst du nach.",
         remember: "KI-Antworten prüfe ich."
       },
       "Wann musst du aufpassen?": {
@@ -464,7 +464,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich überweise das Geld schnell. Sie braucht es ja.", "Ich bleibe am Telefon. Ich will erst mehr hören.", "Ich lege auf. Ich rufe meine Schwester selbst an."],
         correctIndex: 2,
         feedbackWrong: ["KI kann Stimmen nachmachen. Die Stimme allein beweist nichts. Leg auf. Ruf deine Schwester selbst an.", "Betrüger machen am Telefon Druck. Langes Zuhören macht das Auflegen schwer. Leg lieber gleich auf.", null],
-        feedbackCorrect: "Genau. KI kann Stimmen nachmachen. Du rufst die bekannte Nummer selbst an. So kannst du nachfragen.",
+        feedbackCorrect: "KI kann Stimmen nachmachen. Du rufst die bekannte Nummer selbst an. So kannst du nachfragen.",
         remember: "Ich lege auf. Ich rufe selbst an."
       }
     }
@@ -479,7 +479,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ja. Die Zeitung hat etwas Falsches geschrieben.", "Nein. Das war ein Fehler aus Versehen.", "Ja. Jede falsche Nachricht ist eine Lüge."],
         correctIndex: 1,
         feedbackWrong: ["Die Zeitung hat aus Versehen einen Fehler gemacht. Sie hat ihn verbessert. Fake News macht jemand mit Absicht.", null, "Ein Fehler ist keine Lüge. Eine Lüge ist Absicht. Die Zeitung hat den Fehler selbst verbessert."],
-        feedbackCorrect: "Genau. Ein Irrtum passiert aus Versehen. Fake News macht jemand mit Absicht. Das ist der Unterschied.",
+        feedbackCorrect: "Ein Irrtum passiert aus Versehen. Fake News macht jemand mit Absicht. Das ist der Unterschied.",
         remember: "Nicht jede Nachricht im Internet ist wahr."
       },
       "Warum gibt es Fake News?": {
@@ -489,7 +489,7 @@ const EXTRA_PRACTICE = {
         answers: ["Sie verdient Geld mit vielen Aufrufen.", "Sie will mich gut informieren.", "Das passiert aus Versehen. Niemand will das."],
         correctIndex: 0,
         feedbackWrong: [null, "Unglaubliche Nachrichten bringen viele Aufrufe. Viele Aufrufe bringen Geld durch Werbung. Um Wahrheit geht es dabei nicht.", "Aus Versehen passiert das nicht jeden Tag. Es steckt ein Ziel dahinter."],
-        feedbackCorrect: "Genau. Viele Aufrufe bringen Geld durch Werbung. Fake News haben ein Ziel.",
+        feedbackCorrect: "Viele Aufrufe bringen Geld durch Werbung. Fake News haben ein Ziel.",
         remember: "Fake News haben ein Ziel."
       }
     },
@@ -503,7 +503,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Fake-Nachrichten sehen oft echt aus. Das ist der Trick. Das Aussehen ist kein Beweis.", null, null],
         feedbackAuch: [null, null, "Dann siehst du: Steht die Nachricht dort wirklich?"],
-        feedbackCorrect: "Genau. Eine Fake-Nachricht sieht echt aus. Aber sie stimmt nicht. Du glaubst sie nicht sofort.",
+        feedbackCorrect: "Eine Fake-Nachricht sieht echt aus. Aber sie stimmt nicht. Du glaubst sie nicht sofort.",
         remember: "Fake-Nachrichten sind Lügen."
       },
       "Wie erkennst du Fakes?": {
@@ -515,7 +515,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Die Nachricht macht Angst. Das ist oft Absicht. Angst soll das Nachdenken verhindern. Prüf die Nachricht erst.", null],
         feedbackAuch: [null, null, "Die Polizei weiß das am besten. Dort stehen echte Warnungen."],
-        feedbackCorrect: "Genau. Große Aufregung ist ein Warnzeichen. Dann machst du Stopp. Erst danach entscheidest du.",
+        feedbackCorrect: "Große Aufregung ist ein Warnzeichen. Dann machst du Stopp. Erst danach entscheidest du.",
         remember: "Aufregung ist ein Warnzeichen. Ich mache Stopp."
       },
       "Was tust du bei Fakes?": {
@@ -527,7 +527,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Auch eine Warnung verbreitet die Lüge weiter. Schreib lieber nur: Die Nachricht stimmt nicht.", null, null],
         feedbackAuch: [null, "So wissen die anderen Bescheid. Und die Lüge geht nicht weiter.", null],
-        feedbackCorrect: "Genau. Du leitest die Nachricht nicht weiter. So verbreitet sich die Lüge nicht.",
+        feedbackCorrect: "Du leitest die Nachricht nicht weiter. So verbreitet sich die Lüge nicht.",
         remember: "Fakes leite ich nicht weiter."
       }
     }
@@ -544,7 +544,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Nicht jede SMS ist Betrug. Hier fehlen die Warnzeichen. Die SMS droht nicht. Sie hat keinen Link. Und du hast den Termin wirklich.", null, null],
         feedbackAuch: [null, null, "Das geht immer. Die Nummer von der Praxis hast du schon."],
-        feedbackCorrect: "Genau. Die SMS macht keinen Stress. Sie droht nicht. Sie will kein Geld und keine Daten. Und der Termin stimmt.",
+        feedbackCorrect: "Die SMS macht keinen Stress. Sie droht nicht. Sie will kein Geld und keine Daten. Und der Termin stimmt.",
         remember: "Stress und Drohung sind Warnzeichen."
       },
       "Abo-Fallen": {
@@ -556,7 +556,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Kostenlos sind nur die ersten 7 Tage. Danach zahlst du jede Woche 10 Euro. Das steht in der kleinen Schrift.", null, null],
         feedbackAuch: [null, null, "Dann musst du später nichts kündigen. Und du zahlst nichts aus Versehen."],
-        feedbackCorrect: "Genau. In der kleinen Schrift steht der Preis. Nach 7 Tagen kostet die App jede Woche Geld. Jetzt weißt du es. Und du entscheidest selbst.",
+        feedbackCorrect: "In der kleinen Schrift steht der Preis. Nach 7 Tagen kostet die App jede Woche Geld. Jetzt weißt du es. Und du entscheidest selbst.",
         remember: "Kostenlos kann teuer werden. Ich lese genau."
       },
       "Was tun nach einem Betrug?": {
@@ -568,22 +568,22 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Schweigen hilft nur den Betrügern. Mit deinen Karten-Daten können sie einkaufen. Lass die Karte schnell sperren. Betrug kann jedem passieren.", null, null],
         feedbackAuch: [null, "Auch die Bank kann die Karte sperren. Wichtig ist: Du wartest nicht.", null],
-        feedbackCorrect: "Genau. Schnell sein ist jetzt wichtig. Der Sperr-Notruf ist die 116 116. Betrug kann jedem passieren. Du musst dich nicht schämen.",
+        feedbackCorrect: "Schnell sein ist jetzt wichtig. Der Sperr-Notruf ist die 116 116. Betrug kann jedem passieren. Du musst dich nicht schämen.",
         remember: "Betrug ist nicht meine Schuld. Ich hole Hilfe."
       }
     },
     kurz: {
       "Was ist Betrug im Internet?": {
-        question: "Ein Mann schreibt dir: Ich helfe dir. Du kannst leicht Geld verdienen. Schick mir nur deine Bank-Daten. Was machst du?",
+        question: "Ein Mann ruft dich an. Er sagt: Hier ist Ihre Bank. Ihr Konto ist in Gefahr. Ich helfe Ihnen. Gleich kommt eine SMS mit einem Code. Sagen Sie mir den Code. Was machst du?",
         schluessel: "Was wollen Betrüger von dir?",
         pictogram: "pikto-fraud",
-        answers: ["Ich schicke die Daten. Er will mir ja helfen.", "Ich schicke nichts. Ich lösche die Nachricht.", "Ich schicke nichts. Ich blockiere ihn."],
+        answers: ["Ich sage den Code. Er will mir ja helfen.", "Ich sage den Code nicht. Ich lege auf.", "Ich lege auf. Ich rufe selbst bei meiner Bank an."],
         correctIndex: 1,
         auchMoeglich: [2],
-        feedbackWrong: ["Wer wirklich hilft, braucht deine Bank-Daten nicht. Mit den Daten kann er Geld von deinem Konto holen.", null, null],
-        feedbackAuch: [null, null, "Dann kann er dir nicht mehr schreiben. Deine Daten bleiben bei dir."],
-        feedbackCorrect: "Genau. Er sagt: Ich helfe dir. Aber er will deine Bank-Daten. So fängt Betrug oft an.",
-        remember: "Nicht jeder im Internet ist ehrlich."
+        feedbackWrong: ["Mit dem Code kommt er an dein Geld. Die echte Bank fragt nie nach diesem Code.", null, null],
+        feedbackAuch: [null, null, "Der Code bleibt bei dir. Die Nummer von deiner Bank suchst du selbst. Zum Beispiel auf deiner Bank-Karte."],
+        feedbackCorrect: "Er sagt: Ich helfe Ihnen. Aber er will den Code. So fängt Betrug oft an. Der Code ist nur für dich.",
+        remember: "Meinen Code gebe ich nie weiter."
       },
       "Wie erkennst du Betrug?": {
         question: "Eine SMS sagt: Glückwunsch. Sie haben ein Handy gewonnen. Zahlen Sie nur 2 Euro für den Versand. Nur heute. Du hast bei keinem Gewinnspiel mitgemacht. Was machst du?",
@@ -594,7 +594,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Es geht nicht um 2 Euro. Beim Zahlen gibst du deine Bank-Daten ein. Die wollen die Betrüger.", null, null],
         feedbackAuch: [null, "Dann ist die SMS weg. Und du hast nichts gezahlt.", null],
-        feedbackCorrect: "Genau. Du hast nirgends mitgemacht. Und die SMS macht Eile. Das sind Zeichen für Betrug. Du zahlst nichts.",
+        feedbackCorrect: "Du hast nirgends mitgemacht. Und die SMS macht Eile. Das sind Zeichen für Betrug. Du zahlst nichts.",
         remember: "Stress und Gewinn: Stopp machen."
       },
       "Was tust du bei Betrug?": {
@@ -606,7 +606,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Der Link kann auf eine falsche Seite führen. Die Seite sieht aus wie deine Bank. Deine Bank-App öffnest du selbst.", null],
         feedbackAuch: [null, null, "Auch so fragst du die echte Bank. Wichtig ist: Du nimmst deine bekannte Nummer."],
-        feedbackCorrect: "Genau. Du tippst nicht auf den Link aus der SMS. Du öffnest die App selbst. Dort siehst du: Ist alles in Ordnung?",
+        feedbackCorrect: "Du tippst nicht auf den Link aus der SMS. Du öffnest die App selbst. Dort siehst du: Ist alles in Ordnung?",
         remember: "Ich muss den Trick nicht erkennen. Ich öffne die App selbst."
       }
     }
@@ -623,7 +623,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Bewertungen können gefälscht sein. Hier sind alle von gestern. Und alle haben 5 Sterne. Das ist ein Warnzeichen.", null, null],
         feedbackAuch: [null, null, "Bei einem bekannten Shop weißt du: Die Ware kommt an."],
-        feedbackCorrect: "Genau. Alle Bewertungen sind von gestern. Das ist komisch. Betrüger können Bewertungen fälschen. Auch ein Impressum können sie fälschen. Achte auf mehrere Warnzeichen.",
+        feedbackCorrect: "Alle Bewertungen sind von gestern. Das ist komisch. Betrüger können Bewertungen fälschen. Auch ein Impressum können sie fälschen. Achte auf mehrere Warnzeichen.",
         remember: "Ich kaufe bei Shops, die ich geprüft habe."
       },
       "Versteckte Kosten in Apps und Spielen": {
@@ -635,7 +635,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Jeder Kauf ist klein. Aber du hast schon 8 Euro bezahlt. Viele kleine Käufe werden schnell teuer.", null],
         feedbackAuch: [null, null, "Dann kostet es heute nichts. Viele Spiele geben dir später neue Leben."],
-        feedbackCorrect: "Genau. 4 Mal 2 Euro sind schon 8 Euro. Viele kleine Käufe werden schnell teuer. Jetzt entscheidest du selbst.",
+        feedbackCorrect: "4 Mal 2 Euro sind schon 8 Euro. Viele kleine Käufe werden schnell teuer. Jetzt entscheidest du selbst.",
         remember: "Auch kleine Käufe kosten echtes Geld."
       },
       "Vor dem Kaufen prüfen": {
@@ -647,7 +647,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: [null, "Du zahlst den Preis am Ende. Das sind 34 Euro. Oft kommt der Versand dazu. Schau vor dem Kaufen in den Waren-Korb.", null],
         feedbackAuch: [null, null, "Vergleichen lohnt sich. Achte auch dort auf den Preis am Ende."],
-        feedbackCorrect: "Genau. Oft kommt der Versand dazu. Wichtig ist der Preis am Ende. Jetzt entscheidest du selbst.",
+        feedbackCorrect: "Oft kommt der Versand dazu. Wichtig ist der Preis am Ende. Jetzt entscheidest du selbst.",
         remember: "Erst prüfen. Dann kaufen."
       },
       "Falsch gekauft? Das kannst du tun": {
@@ -659,7 +659,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Du musst die Hose nicht behalten. Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf.", null, null],
         feedbackAuch: [null, "Der Shop sagt dir dann: So schickst du die Hose zurück.", null],
-        feedbackCorrect: "Genau. Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf. Schau beim Shop nach: Wie geht das Zurückschicken?",
+        feedbackCorrect: "Viele Online-Käufe kannst du 14 Tage zurückgeben. Das heißt Widerruf. Schau beim Shop nach: Wie geht das Zurückschicken?",
         remember: "Online-Käufe kann ich oft 14 Tage zurückgeben."
       }
     },
@@ -673,7 +673,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [2],
         feedbackWrong: ["Die Schuhe sind dort sehr billig. Und du kennst den Shop nicht. Das sind Warnzeichen. Vielleicht kommt die Ware nie.", null, null],
         feedbackAuch: [null, null, "Schau zum Beispiel ins Impressum. Bist du danach noch unsicher? Dann kaufst du in Shop 1."],
-        feedbackCorrect: "Genau. Den Shop kennst du. Dort kommt die Ware an. Sehr billig und unbekannt ist ein Warnzeichen.",
+        feedbackCorrect: "Den Shop kennst du. Dort kommt die Ware an. Sehr billig und unbekannt ist ein Warnzeichen.",
         remember: "Ich kaufe bei sicheren Shops."
       },
       "Gute Shops erkennen": {
@@ -683,7 +683,7 @@ const EXTRA_PRACTICE = {
         answers: ["Ich bestelle dort nicht. Name und Adresse fehlen.", "Ich bestelle. Das Schloss zeigt: Der Shop ist sicher.", "Ich bestelle. Die Seite sieht ja sehr schön aus."],
         correctIndex: 0,
         feedbackWrong: [null, "Auch falsche Shops haben ein Schloss. Das Schloss allein ist kein gutes Zeichen. Schau nach Name und Adresse.", "Eine schöne Seite können auch Betrüger bauen. Das Aussehen ist kein Beweis. Schau nach Name und Adresse."],
-        feedbackCorrect: "Genau. Ein guter Shop zeigt Name und Adresse im Impressum. Hier fehlt das. Aber: Auch ein Impressum kann gefälscht sein.",
+        feedbackCorrect: "Ein guter Shop zeigt Name und Adresse im Impressum. Hier fehlt das. Aber: Auch ein Impressum kann gefälscht sein.",
         remember: "Ein guter Shop zeigt Name und Adresse."
       },
       "Sicher bezahlen": {
@@ -695,7 +695,7 @@ const EXTRA_PRACTICE = {
         auchMoeglich: [1],
         feedbackWrong: ["Vorher überweisen heißt Vorkasse. Du zahlst zuerst. Kommt keine Ware? Dann bekommst du dein Geld schwer zurück.", null, null],
         feedbackAuch: [null, "PayPal hat einen Käufer-Schutz. Kommt keine Ware? Dann kannst du dein Geld zurückfordern.", null],
-        feedbackCorrect: "Genau. Bei Rechnung bekommst du zuerst die Ware. Dann zahlst du.",
+        feedbackCorrect: "Bei Rechnung bekommst du zuerst die Ware. Dann zahlst du.",
         remember: "Rechnung ist sicherer als Vorkasse."
       }
     }

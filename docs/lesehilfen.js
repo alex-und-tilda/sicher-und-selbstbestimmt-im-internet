@@ -115,8 +115,10 @@ function leseTextBereich(el, start, end) {
 function leseSatzSpannen(el) {
   if (!el || !el.matches("p, li, h2, h3, h4, legend, .orient-text, .frage-text")) return [];
   /* Auswahl und Handlungs-Knöpfe haben eigene, bewährte Ansagen und Markierungen.
-     Keine neue Innenstruktur in diesen Bedienelementen. */
-  if (el.closest("button, label, .answer-option, .sa-option-btn, .sample-option, .einfach-quiz-btn, .topic-card, .action-card")
+     Keine neue Innenstruktur in diesen Bedienelementen. Eine Regelzeile (Bild und
+     Satz nebeneinander) bleibt ganz: Geteilt stand ihr zweiter Satz als eigene
+     Spalte neben dem ersten (Wegprüfung, Bericht 83, B09). */
+  if (el.closest("button, label, .answer-option, .sa-option-btn, .sample-option, .einfach-quiz-btn, .topic-card, .action-card, .regel-platz")
       || el.querySelector("button, input, select, textarea, p, li, [role='button']:not(.glossar-term)")) return [];
   const existing = Array.from(el.querySelectorAll(".lese-satz"));
   if (existing.length) return existing;

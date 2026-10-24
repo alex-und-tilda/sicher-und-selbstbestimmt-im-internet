@@ -70,8 +70,8 @@ const WEITERLERNEN = {
             "Ich behalte das Passwort für mich."
           ],
           "correctIndex": 1,
-          "feedbackWrong": "Das ist nicht sicher. Mit deinem Passwort kann jemand dein Konto benutzen.",
-          "feedbackCorrect": "Das ist sicher. Dein Passwort bleibt geheim.",
+          "feedbackWrong": "Mit deinem Passwort kann jemand dein Konto benutzen.",
+          "feedbackCorrect": "Dein Passwort bleibt geheim. So kann niemand dein Konto benutzen.",
           "remember": "Mein Passwort bleibt geheim."
         },
         "pictogram": "pikto-lock"
@@ -181,7 +181,7 @@ const WEITERLERNEN = {
             "Passwort und eine Zahl auf deinem Handy."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Das ist richtig. Passwort plus Zahl auf dem Handy: Das ist doppelt sicher.",
+          "feedbackCorrect": "Passwort plus Zahl auf dem Handy: Das ist doppelt sicher.",
           "feedbackWrong": "Das ist noch nicht richtig. Doppelt sicher heißt: Passwort und eine Zahl auf deinem Handy.",
           "remember": "Doppelt sichern schützt mein Konto."
         },
@@ -246,7 +246,7 @@ const WEITERLERNEN = {
             "Deinen Finger oder dein Gesicht."
           ],
           "correctIndex": 1,
-          "feedbackCorrect": "Das ist richtig. Bei einem Passkey zeigst du deinen Finger oder dein Gesicht.",
+          "feedbackCorrect": "Bei einem Passkey zeigst du deinen Finger oder dein Gesicht.",
           "feedbackWrong": "Das ist noch nicht richtig. Bei einem Passkey brauchst du kein Passwort.",
           "remember": "Mit Passkey brauche ich kein Passwort."
         },

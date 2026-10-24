@@ -193,7 +193,7 @@ const REGEL_SAETZE = {
     "Ich gebe keinen WhatsApp-Code weiter.", // whatsapp
     "Mein WhatsApp-Code bleibt geheim.", // whatsapp
     "Deinen WhatsApp-Code niemals weitergeben.", // whatsapp
-    "Meinen Code gebe ich nie weiter.", // whatsapp
+    "Meinen Code gebe ich nie weiter.", // whatsapp, betrug (Bericht 84)
     "Ich gebe nie Codes oder Bank-Daten weiter.", // betrug
     "Meine Bank fragt nie per E-Mail nach meinen Daten.", // betrug
     "Ich gebe nie einen Code weiter.", // betrug

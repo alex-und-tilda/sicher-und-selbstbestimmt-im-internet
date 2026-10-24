@@ -1534,8 +1534,8 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "Freunde von Freunden.",
           "Nur Freunde."
         ],
-        "feedbackCorrect": "Mit Nur Freunde begrenzt du die Sichtbarkeit. Deine Freunde können das Foto aber trotzdem weitergeben.",
-        "feedbackWrong": "Öffentlich und Freunde von Freunden erlauben mehr Personen. Für dein Vorhaben passt Nur Freunde.",
+        "feedbackCorrect": "Du wählst die Einstellung: Nur Freunde. Dann sehen nur deine Freunde das Foto. Aber sie können das Foto trotzdem weitergeben.",
+        "feedbackWrong": "Mit deiner Einstellung sehen mehr Personen das Foto. Für dein Zimmer-Foto passt die Einstellung: Nur Freunde.",
         "remember": "Ich prüfe, wer meinen Beitrag sehen kann.",
         "correctIndex": 2,
         "versions": {
@@ -1546,8 +1546,8 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Freunde von Freunden.",
               "Nur Freunde."
             ],
-            "feedbackCorrect": "Mit Nur Freunde begrenzt du die Sichtbarkeit. Deine Freunde können das Foto aber trotzdem weitergeben.",
-            "feedbackWrong": "Öffentlich und Freunde von Freunden erlauben mehr Personen. Für dein Vorhaben passt Nur Freunde.",
+            "feedbackCorrect": "Du wählst die Einstellung: Nur Freunde. Dann sehen nur deine Freunde das Foto. Aber sie können das Foto trotzdem weitergeben.",
+            "feedbackWrong": "Mit deiner Einstellung sehen mehr Personen das Foto. Für dein Zimmer-Foto passt die Einstellung: Nur Freunde.",
             "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
           },
           "einfach": {
@@ -1557,8 +1557,8 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Freunde von Freunden.",
               "Nur Freunde."
             ],
-            "feedbackCorrect": "Die Einstellung Nur Freunde begrenzt, wer deinen Beitrag sehen kann. Trotzdem können diese Personen das Foto weitergeben.",
-            "feedbackWrong": "Mit Öffentlich oder Freunde von Freunden können weitere Personen den Beitrag sehen. Nur Freunde passt zu deinem Vorhaben.",
+            "feedbackCorrect": "Die Einstellung „Nur Freunde“ begrenzt, wer deinen Beitrag sehen kann. Trotzdem können diese Personen das Foto weitergeben.",
+            "feedbackWrong": "Mit „Öffentlich“ oder „Freunde von Freunden“ können weitere Personen den Beitrag sehen. „Nur Freunde“ passt zu deinem Vorhaben.",
             "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
           },
           "standard": {
@@ -1568,8 +1568,8 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Freunde von Freunden.",
               "Nur Freunde."
             ],
-            "feedbackCorrect": "Nur Freunde begrenzt die Sichtbarkeit auf deine Freundesliste. Eine Weitergabe durch diese Personen lässt sich dadurch allerdings nicht verhindern.",
-            "feedbackWrong": "Öffentlich und Freunde von Freunden erweitern den Empfängerkreis. Für deinen gewünschten Kreis passt Nur Freunde.",
+            "feedbackCorrect": "„Nur Freunde“ begrenzt die Sichtbarkeit auf deine Freundesliste. Eine Weitergabe durch diese Personen lässt sich dadurch allerdings nicht verhindern.",
+            "feedbackWrong": "„Öffentlich“ und „Freunde von Freunden“ erweitern den Empfängerkreis. Für deinen gewünschten Kreis passt „Nur Freunde“.",
             "remember": "Vor dem Teilen prüfe ich die Sichtbarkeit meines Beitrags."
           }
         }
@@ -1636,7 +1636,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "Ich hole Hilfe. Ich zeige den Kommentar einer vertrauten Person."
         ],
         "feedbackCorrect": "Du kannst den Kommentar melden. Und die Person blockieren. Du musst nicht antworten. Du darfst dir auch Hilfe holen.",
-        "feedbackWrong": "Eine Beleidigung zurück kann den Streit verstärken. Du kannst stattdessen melden oder blockieren. Oder passende Hilfe holen.",
+        "feedbackWrong": "Du antwortest mit einer Beleidigung? Dann wird der Streit oft größer. Du kannst stattdessen melden oder blockieren. Oder passende Hilfe holen.",
         "remember": "Ich darf mir Unterstützung holen.",
         "feedbackAuch": "Du darfst den Kommentar mit einer vertrauten Person ansehen. Ihr könnt zusammen entscheiden: Melden oder blockieren?",
         "correctIndex": 1,
@@ -1649,7 +1649,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Ich hole Hilfe. Ich zeige den Kommentar einer vertrauten Person."
             ],
             "feedbackCorrect": "Du kannst den Kommentar melden. Und die Person blockieren. Du musst nicht antworten. Du darfst dir auch Hilfe holen.",
-            "feedbackWrong": "Eine Beleidigung zurück kann den Streit verstärken. Du kannst stattdessen melden oder blockieren. Oder passende Hilfe holen.",
+            "feedbackWrong": "Du antwortest mit einer Beleidigung? Dann wird der Streit oft größer. Du kannst stattdessen melden oder blockieren. Oder passende Hilfe holen.",
             "remember": "Ich darf mir Unterstützung holen.",
             "feedbackAuch": "Du darfst den Kommentar mit einer vertrauten Person ansehen. Ihr könnt zusammen entscheiden: Melden oder blockieren?"
           },
@@ -1661,7 +1661,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Ich hole Hilfe. Ich zeige den Kommentar einer vertrauten Person."
             ],
             "feedbackCorrect": "Du kannst den Kommentar melden und den Kontakt blockieren, ohne zurückzuschreiben. Wenn du Hilfe möchtest, darfst du sie holen.",
-            "feedbackWrong": "Eine Beleidigung zurück kann den Streit verstärken. Melden, blockieren oder passende Hilfe holen sind andere Wege.",
+            "feedbackWrong": "Wenn du mit einer Beleidigung antwortest, wird der Streit oft schlimmer. Melden, blockieren oder passende Hilfe holen sind andere Wege.",
             "remember": "Ich darf mir passende Hilfe holen.",
             "feedbackAuch": "Du kannst dir eine vertraute Person dazuholen und mit ihr überlegen, ob du meldest oder blockierst."
           },
@@ -1716,10 +1716,10 @@ const UEBUNGSHANDY_FASSUNGEN = {
         "answers": [
           "Ich lasse den Schalter aus. Ich verstecke meinen Namen.",
           "Ich schreibe privat in mein Profil.",
-          "Ich schalte Privates Konto an."
+          "Ich schalte die Einstellung an: Privates Konto."
         ],
         "feedbackCorrect": "Beim privaten Konto prüfst du neue Anfragen. Bereits erlaubte Personen bleiben. Sie können Fotos weitergeben.",
-        "feedbackWrong": "Ein versteckter Name schützt deine Fotos nicht. Das Wort privat im Profil auch nicht. Dafür schaltest du Privates Konto an.",
+        "feedbackWrong": "Ein versteckter Name schützt deine Fotos nicht. Das Wort privat im Profil auch nicht. Dafür schaltest du die Einstellung an: Privates Konto.",
         "remember": "Mein Konto ist privat.",
         "correctIndex": 2,
         "versions": {
@@ -1728,10 +1728,10 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Ich lasse den Schalter aus. Ich verstecke meinen Namen.",
               "Ich schreibe privat in mein Profil.",
-              "Ich schalte Privates Konto an."
+              "Ich schalte die Einstellung an: Privates Konto."
             ],
             "feedbackCorrect": "Beim privaten Konto prüfst du neue Anfragen. Bereits erlaubte Personen bleiben. Sie können Fotos weitergeben.",
-            "feedbackWrong": "Ein versteckter Name schützt deine Fotos nicht. Das Wort privat im Profil auch nicht. Dafür schaltest du Privates Konto an.",
+            "feedbackWrong": "Ein versteckter Name schützt deine Fotos nicht. Das Wort privat im Profil auch nicht. Dafür schaltest du die Einstellung an: Privates Konto.",
             "remember": "Mein Konto ist privat."
           },
           "einfach": {
@@ -1739,10 +1739,10 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Ich lasse den Schalter aus und verstecke meinen Namen.",
               "Ich schreibe privat in mein Profil.",
-              "Ich schalte Privates Konto an."
+              "Ich schalte die Einstellung „Privates Konto“ an."
             ],
             "feedbackCorrect": "Beim privaten Konto entscheidest du über neue Anfragen. Bereits erlaubte Personen bleiben und können Fotos trotzdem weitergeben.",
-            "feedbackWrong": "Weder ein versteckter Name noch das Wort privat im Profil begrenzt die Sichtbarkeit deiner Fotos. Dafür passt die Einstellung Privates Konto.",
+            "feedbackWrong": "Weder ein versteckter Name noch das Wort „privat“ im Profil begrenzt die Sichtbarkeit deiner Fotos. Dafür passt die Einstellung „Privates Konto“.",
             "remember": "Ich stelle mein Konto auf privat."
           },
           "standard": {
@@ -1750,7 +1750,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Ich lasse das Konto offen und blende meinen Namen aus.",
               "Ich ergänze privat in meiner Profilbeschreibung.",
-              "Ich aktiviere die Einstellung Privates Konto."
+              "Ich aktiviere die Einstellung „Privates Konto“."
             ],
             "feedbackCorrect": "Mit einem privaten Konto entscheidest du über neue Follower-Anfragen. Bereits bestätigte Kontakte bleiben bestehen und können die Fotos weitergeben.",
             "feedbackWrong": "Ein ausgeblendeter Name oder ein Hinweis in der Profilbeschreibung begrenzt die Sichtbarkeit nicht. Dafür musst du die Kontoeinstellung ändern.",
@@ -1937,7 +1937,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Ich nehme teil, weil sie viele Menschen angesehen haben."
             ],
             "feedbackCorrect": "Viel Salz zu essen kann gesundheitlich gefährlich sein. Du entscheidest selbst und musst bei der Mutprobe nicht mitmachen.",
-            "feedbackWrong": "Ein kurzer Versuch macht die Mutprobe nicht ungefährlich. Auch hohe Aufrufzahlen sind kein Beleg für ihre Sicherheit.",
+            "feedbackWrong": "Auch ein kurzer Versuch kann bei dieser Mutprobe gefährlich sein. Hohe Aufrufzahlen sind kein Beleg für ihre Sicherheit.",
             "remember": "Gefährliche Trends mache ich nicht nach."
           }
         }
@@ -2268,7 +2268,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "question": "Verschwindet dein Bild überall, sobald die App es nicht mehr anzeigt?",
             "answers": [
               "Ja, dann existiert keine Kopie mehr.",
-              "Nein, der Empfänger kann eine Kopie speichern.",
+              "Nein, jemand kann eine Kopie speichern.",
               "Ja, nur die App bewahrt es noch auf."
             ],
             "feedbackCorrect": "Ein Foto vom Bildschirm oder eine andere gespeicherte Kopie bleibt bestehen. Darüber hast du nach dem Senden keine Kontrolle.",
@@ -2680,7 +2680,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
       {
         "question": "Die Stimme klingt wie deine Nichte. Sie bittet um Geld. Was machst du?",
         "answers": [
-          "Ich frage am Telefon nach ihrem Namen.",
+          "Ich frage am Telefon nach ihrem Namen. Dann bin ich sicher.",
           "Ich sende sofort Geld.",
           "Ich lege auf. Ich rufe ihre bekannte Nummer an."
         ],
@@ -2692,7 +2692,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "leicht": {
             "question": "Die Stimme klingt wie deine Nichte. Sie bittet um Geld. Was machst du?",
             "answers": [
-              "Ich frage am Telefon nach ihrem Namen.",
+              "Ich frage am Telefon nach ihrem Namen. Dann bin ich sicher.",
               "Ich sende sofort Geld.",
               "Ich lege auf. Ich rufe ihre bekannte Nummer an."
             ],
@@ -2705,7 +2705,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Ich frage im selben Anruf nach ihrem Namen.",
               "Ich überweise das Geld sofort.",
-              "Ich lege auf und rufe die bekannte Nummer meiner Nichte an."
+              "Ich lege auf und rufe ihre bekannte Nummer an."
             ],
             "feedbackCorrect": "Du prüfst über einen Kontakt, den du schon kennst. Eine vertraute Stimme kann nachgemacht sein. Gib noch keine Zahlung frei.",
             "feedbackWrong": "Stimme und Name beweisen nicht, wer anruft. Eine andere Person kann beides kennen oder nachmachen. Prüfe über die bekannte Nummer nach.",
@@ -2757,7 +2757,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
         "question": "Was prüfst du bei diesem Shop genauer?",
         "answers": [
           "Nur die Endung von der Internet-Adresse.",
-          "Den sehr niedrigen Preis und das fehlende Impressum.",
+          "Den sehr niedrigen Preis und das Impressum.",
           "Nur das schöne Bild von den Schuhen."
         ],
         "feedbackCorrect": "Der Preis ist sehr niedrig. Und Angaben zum Shop fehlen. Das Impressum nennt die Firma und ihre Adresse. Prüfe weiter. Zahle noch nicht.",
@@ -2769,7 +2769,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "question": "Was prüfst du bei diesem Shop genauer?",
             "answers": [
               "Nur die Endung von der Internet-Adresse.",
-              "Den sehr niedrigen Preis und das fehlende Impressum.",
+              "Den sehr niedrigen Preis und das Impressum.",
               "Nur das schöne Bild von den Schuhen."
             ],
             "feedbackCorrect": "Der Preis ist sehr niedrig. Und Angaben zum Shop fehlen. Das Impressum nennt die Firma und ihre Adresse. Prüfe weiter. Zahle noch nicht.",
@@ -2780,7 +2780,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "question": "Was solltest du bei diesem Angebot genauer prüfen?",
             "answers": [
               "Nur die Endung der Internetadresse vom Shop.",
-              "Den ungewöhnlich niedrigen Preis und das fehlende Impressum.",
+              "Den sehr niedrigen Preis und das Impressum.",
               "Nur das schöne Produktbild der Schuhe."
             ],
             "feedbackCorrect": "Der ungewöhnlich niedrige Preis und fehlende Angaben zum Shop sind Warnzeichen. Im Impressum stehen Firma und Adresse. Prüfe weiter, bevor du bezahlst.",
@@ -2791,7 +2791,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "question": "Welche Angaben brauchen bei diesem Shop besondere Aufmerksamkeit?",
             "answers": [
               "Ausschließlich die Endung der Internetadresse.",
-              "Der auffällig niedrige Preis und das fehlende Impressum.",
+              "Der auffällig niedrige Preis und das Impressum.",
               "Ausschließlich das ansprechende Produktfoto."
             ],
             "feedbackCorrect": "Ein extrem niedriger Preis zusammen mit fehlenden Angaben zum Anbieter ist ein Warnzeichen. Ein Impressum nennt etwa Firma und Adresse; prüfe den Shop vor einer Zahlung weiter.",
@@ -2805,7 +2805,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
         "answers": [
           "Der kleine Preis schützt mich vor Betrug.",
           "Die Bank prüft dann den Shop für mich.",
-          "Ich zahle vor der Lieferung. Vielleicht kommt keine Ware."
+          "Ich zahle zuerst. Vielleicht kommt keine Ware."
         ],
         "feedbackCorrect": "Bei Vorkasse zahlst du zuerst. Bei einem falschen Shop kommt vielleicht nichts. Eine Überweisung holst du oft schwer zurück. Zahle hier noch nicht.",
         "feedbackWrong": "Die Bank prüft den Shop nicht für dich. Auch wenig Geld kann weg sein. Bei Vorkasse zahlst du vor der Ware. Prüfe den Shop zuerst.",
@@ -2817,7 +2817,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Der kleine Preis schützt mich vor Betrug.",
               "Die Bank prüft dann den Shop für mich.",
-              "Ich zahle vor der Lieferung. Vielleicht kommt keine Ware."
+              "Ich zahle zuerst. Vielleicht kommt keine Ware."
             ],
             "feedbackCorrect": "Bei Vorkasse zahlst du zuerst. Bei einem falschen Shop kommt vielleicht nichts. Eine Überweisung holst du oft schwer zurück. Zahle hier noch nicht.",
             "feedbackWrong": "Die Bank prüft den Shop nicht für dich. Auch wenig Geld kann weg sein. Bei Vorkasse zahlst du vor der Ware. Prüfe den Shop zuerst.",
@@ -2828,7 +2828,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Ein kleiner Preis schützt mich vor einem Betrug.",
               "Meine Bank prüft dadurch, ob der Shop sicher ist.",
-              "Ich zahle vor der Lieferung und bekomme vielleicht nichts."
+              "Ich zahle zuerst und bekomme vielleicht keine Ware."
             ],
             "feedbackCorrect": "Bei Vorkasse zahlst du vor der Lieferung. In diesem ungeprüften Shop kannst du dein Geld verlieren und keine Ware erhalten. Eine Überweisung zurückzuholen ist oft schwer.",
             "feedbackWrong": "Die Bank prüft den Shop nicht für dich, und auch ein kleiner Betrag kann verloren gehen. Prüfe den Anbieter, bevor du zahlst.",
@@ -3147,7 +3147,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "question": "Eine Mail droht mit einer Kontosperre und verlangt sofortige Bestätigung. Wie reagierst du?",
             "answers": [
               "Ich kontaktiere meine Bank über die Nummer auf meiner Bankkarte.",
-              "Ich bestätige nichts und prüfe mein Konto in der selbst geöffneten Bank-App.",
+              "Ich bestätige nichts und prüfe in der selbst geöffneten Bank-App.",
               "Ich bestätige die Daten sofort, um die angekündigte Sperre abzuwenden."
             ],
             "feedbackCorrect": "Du unterbrichst den Zeitdruck und prüfst über einen unabhängig gewählten Weg. Die selbst geöffnete Bank-App ist dafür geeignet.",
@@ -3227,8 +3227,8 @@ const UEBUNGSHANDY_FASSUNGEN = {
         "question": "Der Link sieht fast wie DHL aus. Was machst du?",
         "answers": [
           "Ich nutze den Link nicht. Ich öffne die Paket-App selbst.",
-          "Ich öffne den Link wegen dem Namen DHL.",
-          "Ich rufe die bekannte Nummer vom Paket-Dienst an."
+          "Ich öffne den Link. Im Link steht DHL.",
+          "Ich rufe beim Paket-Dienst an. Ich nehme die bekannte Nummer."
         ],
         "feedbackCorrect": "Ein bekannter Name macht einen Link nicht sicher. dhl-liefertermin.de ist eine andere Adresse als dhl.de. Du prüfst die Sendung über deine eigene App.",
         "feedbackWrong": "Eine ähnliche Adresse kann zu einer falschen Seite führen. Auch die passende Paket-Nummer beweist keine Echtheit. Öffne deine Paket-App selbst.",
@@ -3243,8 +3243,8 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "question": "Der Link sieht fast wie DHL aus. Was machst du?",
             "answers": [
               "Ich nutze den Link nicht. Ich öffne die Paket-App selbst.",
-              "Ich öffne den Link wegen dem Namen DHL.",
-              "Ich rufe die bekannte Nummer vom Paket-Dienst an."
+              "Ich öffne den Link. Im Link steht DHL.",
+              "Ich rufe beim Paket-Dienst an. Ich nehme die bekannte Nummer."
             ],
             "feedbackCorrect": "Ein bekannter Name macht einen Link nicht sicher. dhl-liefertermin.de ist eine andere Adresse als dhl.de. Du prüfst die Sendung über deine eigene App.",
             "feedbackWrong": "Eine ähnliche Adresse kann zu einer falschen Seite führen. Auch die passende Paket-Nummer beweist keine Echtheit. Öffne deine Paket-App selbst.",
@@ -3290,7 +3290,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
         "answers": [
           "Ich prüfe die Bestellungen in meiner selbst geöffneten Shop-App.",
           "Ich antworte nicht. Die Bestellung passt nicht zu mir.",
-          "Ich antworte auf die Mail wegen dem Betrag."
+          "Ich antworte auf die Mail. Es geht um 89,90 Euro."
         ],
         "feedbackCorrect": "Die Nachricht passt nicht zu deinen Bestellungen. Du antwortest nicht auf die Mail. Du kannst im eigenen Konto prüfen. Oder den bekannten Shop-Kontakt nutzen.",
         "feedbackWrong": "Die Mail soll eine Antwort auslösen. Antworte nicht vorschnell. Prüfe deine Bestellungen in deinem selbst geöffneten Konto.",
@@ -3306,7 +3306,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Ich prüfe die Bestellungen in meiner selbst geöffneten Shop-App.",
               "Ich antworte nicht. Die Bestellung passt nicht zu mir.",
-              "Ich antworte auf die Mail wegen dem Betrag."
+              "Ich antworte auf die Mail. Es geht um 89,90 Euro."
             ],
             "feedbackCorrect": "Die Nachricht passt nicht zu deinen Bestellungen. Du antwortest nicht auf die Mail. Du kannst im eigenen Konto prüfen. Oder den bekannten Shop-Kontakt nutzen.",
             "feedbackWrong": "Die Mail soll eine Antwort auslösen. Antworte nicht vorschnell. Prüfe deine Bestellungen in deinem selbst geöffneten Konto.",
@@ -3354,7 +3354,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "Ich lösche die geprüfte Rechnung wegen der SMS.",
           "Die SMS passt zur Rechnung in meiner App."
         ],
-        "feedbackCorrect": "Du hast die Rechnung in deiner App geprüft. Die SMS passt dazu. Kein Link und kein Druck allein beweisen noch keine Echtheit.",
+        "feedbackCorrect": "Du hast die Rechnung in deiner App geprüft. Die SMS passt dazu. Sie hat keinen Link. Und sie macht keinen Druck. Das allein zeigt aber nicht: Die SMS ist echt. Das zeigt dir deine App.",
         "feedbackWrong": "Die Rechnung liegt in deiner selbst geöffneten App. Du musst sie wegen dieser SMS nicht löschen. Entscheidend ist die Prüfung in deinem Konto.",
         "remember": "Ich prüfe, wer mir schreibt.",
         "feedbackAuch": "Du darfst bei deinem Anbieter nachfragen. Nutze eine bekannte Nummer. Sende keine Bank-Daten an einen ungeprüften Absender.",
@@ -3370,7 +3370,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Ich lösche die geprüfte Rechnung wegen der SMS.",
               "Die SMS passt zur Rechnung in meiner App."
             ],
-            "feedbackCorrect": "Du hast die Rechnung in deiner App geprüft. Die SMS passt dazu. Kein Link und kein Druck allein beweisen noch keine Echtheit.",
+            "feedbackCorrect": "Du hast die Rechnung in deiner App geprüft. Die SMS passt dazu. Sie hat keinen Link. Und sie macht keinen Druck. Das allein zeigt aber nicht: Die SMS ist echt. Das zeigt dir deine App.",
             "feedbackWrong": "Die Rechnung liegt in deiner selbst geöffneten App. Du musst sie wegen dieser SMS nicht löschen. Entscheidend ist die Prüfung in deinem Konto.",
             "remember": "Ich prüfe, wer mir schreibt.",
             "feedbackAuch": "Du darfst bei deinem Anbieter nachfragen. Nutze eine bekannte Nummer. Sende keine Bank-Daten an einen ungeprüften Absender."
@@ -3406,7 +3406,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
         "answers": [
           "Ich öffne die Konto-App selbst. Ich nutze den Link nicht.",
           "Ich tippe sofort auf den Link zum Stoppen.",
-          "Ich frage den Dienst über einen bekannten Kontakt."
+          "Ich frage beim Dienst nach. Ich nehme einen bekannten Kontakt."
         ],
         "feedbackCorrect": "Die Nachricht macht Angst. Du nutzt den Link nicht. Du prüfst dein Konto in der selbst geöffneten App. Eine echte Warnung ist auch möglich. Du nutzt deine eigene App.",
         "feedbackWrong": "Auch ein Link zum Stoppen kann zu einer falschen Seite führen. Öffne deine Konto-App selbst. Dann prüfst du über einen eigenen Weg.",
@@ -3422,7 +3422,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "answers": [
               "Ich öffne die Konto-App selbst. Ich nutze den Link nicht.",
               "Ich tippe sofort auf den Link zum Stoppen.",
-              "Ich frage den Dienst über einen bekannten Kontakt."
+              "Ich frage beim Dienst nach. Ich nehme einen bekannten Kontakt."
             ],
             "feedbackCorrect": "Die Nachricht macht Angst. Du nutzt den Link nicht. Du prüfst dein Konto in der selbst geöffneten App. Eine echte Warnung ist auch möglich. Du nutzt deine eigene App.",
             "feedbackWrong": "Auch ein Link zum Stoppen kann zu einer falschen Seite führen. Öffne deine Konto-App selbst. Dann prüfst du über einen eigenen Weg.",
@@ -3448,7 +3448,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "standard": {
             "question": "Eine SMS meldet einen unerwarteten Kontozugriff und bietet einen Link zum Stoppen. Was tust du?",
             "answers": [
-              "Ich prüfe in der selbst geöffneten Konto-App und nutze den Link nicht.",
+              "Ich öffne die Konto-App selbst und nutze den Link nicht.",
               "Ich folge sofort dem Link, um den Zugriff zu stoppen.",
               "Ich kontaktiere den Dienst über einen bereits bekannten Weg."
             ],
@@ -3466,7 +3466,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
       {
         "question": "Du willst die Meldung zu der Zahlung prüfen. Was machst du?",
         "answers": [
-          "Ich rufe die Nummer aus der SMS an.",
+          "Ich rufe die Nummer aus der SMS an. Das geht schnell.",
           "Ich rufe die Nummer auf meiner Bank-Karte an.",
           "Ich öffne meine Bank-App selbst."
         ],
@@ -3482,7 +3482,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "leicht": {
             "question": "Du willst die Meldung zu der Zahlung prüfen. Was machst du?",
             "answers": [
-              "Ich rufe die Nummer aus der SMS an.",
+              "Ich rufe die Nummer aus der SMS an. Das geht schnell.",
               "Ich rufe die Nummer auf meiner Bank-Karte an.",
               "Ich öffne meine Bank-App selbst."
             ],
@@ -3597,7 +3597,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
         "feedbackCorrect": "Du rufst die bekannte Nummer an. Dann fragst du nach der neuen Nummer. Ein bekannter Name in einem Chat reicht nicht.",
         "feedbackWrong": "Eine andere Person kann den Namen kennen. Frag über den Kontakt nach. Du kennst ihn schon. Gib bis dahin kein Geld und keine privaten Daten weiter.",
         "remember": "Neue Nummer? Ich rufe zuerst die alte an.",
-        "feedbackAuch": "Du kannst bis zu einem persönlichen Treffen warten. Bis zur Prüfung sendest du kein Geld und keine privaten Daten an die neue Nummer.",
+        "feedbackAuch": "Du kannst bis zu einem persönlichen Treffen warten. Bis dahin sendest du kein Geld an die neue Nummer. Und keine privaten Daten.",
         "correctIndex": 0,
         "auchMoeglich": [
           1
@@ -3613,12 +3613,12 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "feedbackCorrect": "Du rufst die bekannte Nummer an. Dann fragst du nach der neuen Nummer. Ein bekannter Name in einem Chat reicht nicht.",
             "feedbackWrong": "Eine andere Person kann den Namen kennen. Frag über den Kontakt nach. Du kennst ihn schon. Gib bis dahin kein Geld und keine privaten Daten weiter.",
             "remember": "Neue Nummer? Ich rufe zuerst die alte an.",
-            "feedbackAuch": "Du kannst bis zu einem persönlichen Treffen warten. Bis zur Prüfung sendest du kein Geld und keine privaten Daten an die neue Nummer.",
+            "feedbackAuch": "Du kannst bis zu einem persönlichen Treffen warten. Bis dahin sendest du kein Geld an die neue Nummer. Und keine privaten Daten.",
             "falleText": "In diesem Beispiel kommt nach der freundlichen Nachricht eine Geld-Bitte. Du zahlst noch nichts. Du prüfst bei der bekannten Person nach.",
             "falleTextFalsch": "Die Beispiel-Falle beginnt mit einem freundlichen Chat. Dann kommt eine Geld-Bitte. Du kannst stoppen und über die bekannte Nummer nachfragen."
           },
           "einfach": {
-            "question": "Eine unbekannte Nummer schreibt Ich bin es. Wie prüfst du, wer es ist?",
+            "question": "Eine unbekannte Nummer schreibt: Ich bin es. Wie prüfst du, wer es ist?",
             "answers": [
               "Ich rufe über die schon bekannte Nummer der Person an.",
               "Ich frage die Person bei unserem nächsten persönlichen Treffen.",
@@ -3792,7 +3792,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "einfach": {
             "question": "Die SMS drängt dich, sofort Bankdaten zu ändern. Wie reagierst du?",
             "answers": [
-              "Ich sende nichts und prüfe in der selbst geöffneten Anbieter-App.",
+              "Ich sende nichts und öffne die Anbieter-App selbst.",
               "Ich schicke die Bankdaten sofort als Antwort auf die SMS.",
               "Ich frage beim Anbieter über einen bekannten Kontakt nach."
             ],
@@ -4196,7 +4196,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
                 "Ich lösche kurzerhand alle Fotos auf dem Handy.",
                 "Ich bitte meinen Bruder um Hilfe – er kennt sich mit Handys aus."
               ],
-              "feedbackCorrect": "Du wählst gezielt aus, welche eigenen Videos du nicht mehr brauchst. Videos belegen häufig viel Speicher; fremde Inhalte löschst du nicht ohne Rücksprache.",
+              "feedbackCorrect": "Du wählst gezielt aus, welche eigenen Videos du nicht mehr brauchst. Videos belegen häufig viel Speicher; fremde Inhalte löschst du erst nach Rücksprache.",
               "feedbackWrong": "Dabei würden auch Fotos verloren gehen, die dir wichtig sind. Prüfe erst, was du nicht mehr brauchst. Inhalte anderer Personen löschst du nur nach Rücksprache.",
               "feedbackAuch": "Dein Bruder kann dir zeigen, was viel Speicher belegt. Welche deiner Fotos und Videos du behalten oder löschen willst, entscheidest weiterhin du.",
               "remember": "Vieles kann ich selbst lösen."

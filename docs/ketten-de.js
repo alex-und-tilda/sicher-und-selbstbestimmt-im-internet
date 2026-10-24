@@ -348,7 +348,7 @@ const KETTEN = {
           text: {
             leicht:   "Du legst das Handy weg. Jetzt bist du ruhig.",
             einfach:  "Du legst das Handy zur Seite. Der Stress lässt nach.",
-            standard: "Du legst das Gerät aus der Hand. Damit ist der Stress weg – und dein Plan beginnt."
+            standard: "Du legst das Gerät aus der Hand. Damit lässt der Stress nach – und dein Plan beginnt."
           }
         }
       ]
@@ -1043,7 +1043,7 @@ const KETTEN = {
     abschluss: {
       leicht:   "Das ist dein Plan. Nicht teilen im Zweifel schützt dich und andere.",
       einfach:  "Das ist dein Plan. Wenn du im Zweifel nicht teilst, schützt du dich und andere Menschen.",
-      standard: "Das ist dein Ablauf gegen Fakes. Im Zweifel nicht zu teilen schützt dich und verhindert, dass sich Falschmeldungen weiter verbreiten."
+      standard: "Das ist dein Ablauf gegen Fakes. Wenn du eine Meldung im Zweifel nicht teilst, schützt du dich und verhinderst, dass sich Falschmeldungen weiter verbreiten."
     },
 
     liste: [
