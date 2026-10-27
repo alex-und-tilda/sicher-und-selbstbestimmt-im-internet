@@ -9800,7 +9800,7 @@ const topics = [
         "icon": "check",
         "text": [
           {
-            "text": "Du kannst sicher im Internet einkaufen.",
+            "text": "Du kannst beim Einkaufen im Internet vieles selbst prüfen.",
             "pictogram": "pikto-link"
           },
           {

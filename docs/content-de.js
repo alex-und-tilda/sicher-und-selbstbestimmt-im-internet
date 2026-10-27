@@ -2254,7 +2254,7 @@ const CONTENT_VERSIONS = {
     "Was kann ich tun?": {
       einfach: {
         text: [
-          { text: "Mit ein paar einfachen Regeln kannst du sicher im Internet einkaufen." },
+          { text: "Beim Einkaufen im Internet kannst du vieles selbst prüfen und dich so besser schützen." },
           { text: "Die folgenden Punkte helfen dir dabei." }
         ],
         bullets: ["Ich kaufe bei Shops, die ich kenne.", "Ich prüfe Preis und Impressum.", "Ich zahle möglichst auf Rechnung.", "PIN und TAN bleiben geheim.", "Ich lasse mich nicht hetzen.", "Vor dem Kaufen kann ich eine Person fragen."],
@@ -2262,7 +2262,7 @@ const CONTENT_VERSIONS = {
         success: "Wenn du dich nicht hetzen lässt, kaufst du sicherer ein."
       },
       standard: {
-        text: [{ text: "Sicheres Einkaufen gelingt mit einfachen Regeln: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim, lass dich nicht zu schnellen Käufen drängen und frag im Zweifel vor dem Kauf eine Vertrauensperson." }],
+        text: [{ text: "Beim Online-Einkauf kannst du vieles selbst prüfen und dein Risiko senken: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim und lass dich nicht zu schnellen Käufen drängen. Vor dem Kauf kannst du auch eine Vertrauensperson fragen." }],
         bullets: [],
         warning: "Ungewöhnlich niedrige Preise oder ein Countdown sollen Eile erzeugen, damit weniger genau geprüft wird – ein typisches Warnzeichen unseriöser Shops.",
         success: "Sich nicht hetzen zu lassen, ist einer der wirksamsten Schutzmechanismen beim Online-Einkauf."

@@ -5206,9 +5206,9 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
       {
         "piktogramm": "einkaufen",
         "saetze": {
-          "leicht": "Du kannst sicher im Internet einkaufen.",
-          "einfach": "Mit ein paar einfachen Regeln kannst du sicher im Internet einkaufen.",
-          "standard": "Sicheres Einkaufen gelingt mit einfachen Regeln: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim, lass dich nicht zu schnellen Käufen drängen und frag im Zweifel vor dem Kauf eine Vertrauensperson."
+          "leicht": "Du kannst beim Einkaufen im Internet vieles selbst prüfen.",
+          "einfach": "Beim Einkaufen im Internet kannst du vieles selbst prüfen und dich so besser schützen.",
+          "standard": "Beim Online-Einkauf kannst du vieles selbst prüfen und dein Risiko senken: Kauf bei bekannten Shops, prüfe Preis und Impressum und zahle möglichst auf Rechnung. Halte PIN und TAN geheim und lass dich nicht zu schnellen Käufen drängen. Vor dem Kauf kannst du auch eine Vertrauensperson fragen."
         }
       },
       {
@@ -8109,7 +8109,7 @@ function buildGrandFinish() {
     <div class="grand-finish" role="region" aria-label="Alle Themen geschafft">
       <h3 class="bedien-pikto">${pictoHtml("geschafft")}<span>Du hast alle ${topics.length} Themen geschafft!</span></h3>
       <p>Das ist eine große Leistung.</p>
-      <p>Du kennst dich jetzt gut aus. Du kannst dich sicher im Internet bewegen.</p>
+      <p>Du hast alle Themen geübt. Du kannst deine Regeln im Alltag nutzen.</p>
       <button type="button" class="setting-big-button" onclick="printGrandCertificate()">${pictoHtml("drucken")} Deine große Urkunde drucken</button>
     </div>`;
 }
