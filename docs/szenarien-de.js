@@ -1397,7 +1397,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
           "Ich blockiere Annas Nummer.",
           "Ich rufe Anna wegen des Treffens an."
         ],
-        "feedbackCorrect": "Du kannst auf diese Einladung antworten. Du kennst Anna. Die Nachricht fordert kein Geld und keinen Code.",
+        "feedbackCorrect": "Du kennst Anna. Sie lädt dich zum Kaffee ein. Du sagst zu. Dabei gibst du kein Geld und keine Daten weiter. Will Anna plötzlich Geld oder einen Code? Dann fragst du Anna erst selbst. Mit einer bekannten Nummer.",
         "feedbackWrong": "Du musst Anna wegen dieser Einladung nicht blockieren. Die Nachricht passt zu einem normalen Treffen.",
         "remember": "Kein Geld und kein Stress von einer Person, die ich kenne: das ist normal.",
         "feedbackAuch": "Du kannst Anna auch anrufen. So kannst du zusagen oder etwas zum Treffen fragen.",
@@ -1410,7 +1410,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Ich blockiere Annas Nummer.",
               "Ich rufe Anna wegen des Treffens an."
             ],
-            "feedbackCorrect": "Du kannst auf diese Einladung antworten. Du kennst Anna. Die Nachricht fordert kein Geld und keinen Code.",
+            "feedbackCorrect": "Du kennst Anna. Sie lädt dich zum Kaffee ein. Du sagst zu. Dabei gibst du kein Geld und keine Daten weiter. Will Anna plötzlich Geld oder einen Code? Dann fragst du Anna erst selbst. Mit einer bekannten Nummer.",
             "feedbackWrong": "Du musst Anna wegen dieser Einladung nicht blockieren. Die Nachricht passt zu einem normalen Treffen.",
             "remember": "Auf eine normale Einladung kann ich antworten.",
             "feedbackAuch": "Du kannst Anna auch anrufen. So kannst du zusagen oder etwas zum Treffen fragen."
@@ -1422,7 +1422,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Ich blockiere ihre Nummer.",
               "Ich rufe Anna wegen des Treffens an."
             ],
-            "feedbackCorrect": "Du kannst auf die Einladung antworten, weil sie zu einem normalen Treffen mit einer bekannten Person passt. Sie fordert weder Geld noch einen Code.",
+            "feedbackCorrect": "Du kennst Anna, und sie lädt dich zum Kaffee ein. Mit deiner Zusage gibst du weder Geld noch Daten weiter. Bittet Anna dich plötzlich um Geld oder einen Code, fragst du zuerst über ihre bekannte Nummer nach.",
             "feedbackWrong": "Diese Einladung ist kein Grund, Annas Nummer zu blockieren. Eine bekannte Person lädt dich zu einem normalen Treffen ein.",
             "remember": "Eine normale Einladung von einer bekannten Person kann ich beantworten.",
             "feedbackAuch": "Du kannst Anna auch anrufen, um zuzusagen oder eine Frage zum Treffen zu klären."
@@ -1434,7 +1434,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
               "Ich blockiere ihre Nummer.",
               "Ich rufe sie an, um das Treffen abzusprechen."
             ],
-            "feedbackCorrect": "Die Nachricht passt zu einer gewöhnlichen Einladung einer bekannten Person. Du kannst zusagen; es werden weder Geld noch Anmeldecodes verlangt.",
+            "feedbackCorrect": "Die Einladung passt zu dem, was du von Anna kennst, und mit einer Zusage gibst du weder Geld noch Daten preis. Fehlende Warnzeichen allein beweisen allerdings nicht, wer schreibt: Verlangt Anna unerwartet Geld oder einen Code, klärst du das zuerst über ihre bekannte Nummer.",
             "feedbackWrong": "Die gewöhnliche Einladung liefert keinen Anlass, den Kontakt zu blockieren. Du kannst sie beantworten oder das Treffen telefonisch absprechen.",
             "remember": "Normale Einladungen bekannter Personen kann ich beantworten.",
             "feedbackAuch": "Ein Anruf ist ebenfalls passend: Du kannst zusagen und die Einzelheiten des Treffens besprechen."

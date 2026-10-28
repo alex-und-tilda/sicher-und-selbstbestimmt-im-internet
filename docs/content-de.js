@@ -5778,7 +5778,7 @@ const AUFGABEN_VERSIONS = {
           "Die Nachricht kommt von deiner Nachbarin und will nichts Gefährliches. Du kannst ihr ganz normal antworten.",
           null
         ],
-        "feedbackCorrect": "Du kennst die Nummer, und die Nachricht will weder Geld noch Daten oder einen Code. Deshalb kannst du ganz normal antworten."
+        "feedbackCorrect": "Du kennst die Nummer, und die Nachricht will weder Geld noch Daten noch einen Code. Deshalb kannst du ganz normal antworten."
       },
       "standard": {
         "question": "Deine Nachbarin Frau Yilmaz schreibt dir von ihrer gespeicherten Nummer: „Kannst du morgen mein Paket annehmen?“ Wie reagierst du?",
@@ -5793,7 +5793,7 @@ const AUFGABEN_VERSIONS = {
           "Die Nachricht stammt von deiner Nachbarin und verlangt nichts Riskantes. Du kannst ganz normal antworten.",
           null
         ],
-        "feedbackCorrect": "Die Nummer ist dir bekannt, und die Nachricht will weder Geld noch Daten oder einen Code. Du kannst also ganz normal antworten."
+        "feedbackCorrect": "Die Nummer ist dir bekannt, und die Nachricht will weder Geld noch Daten noch einen Code. Du kannst also ganz normal antworten."
       }
     }
   },
