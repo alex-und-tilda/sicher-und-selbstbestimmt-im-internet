@@ -659,6 +659,14 @@ body.lesson-view .content { padding-top: 4px; }
 body.lesson-view .progress-area { display: none; }
 body.lesson-view .app { padding-top: 0; }
 body.lesson-view .content { margin-top: 0; }
+/* Focus Learning FL-1 (28.10.2026, Bericht 101): Lesespalte im Lernmodus.
+   §10a.7 nennt höchstens etwa 65 Zeichen pro Zeile. Gemessen bei 1280 px über
+   alle Lektionen: vorher im Schnitt 87–90 Zeichen (bis 108), mit 44rem 56–59.
+   rem wächst mit der Schriftgröße A+/A++ mit; Handy und Tablet sind ohnehin
+   schmaler und bleiben unverändert. Kästen beginnen ohne Einzug und bekommen
+   deshalb eine eigene Grenze. Geprüft mit pruefung/browser/fl1-lesespalte.cjs. */
+body.lesson-view .app { max-width: 44rem; }
+body.lesson-view .access-box :is(p, li) { max-width: 31em; }
 
 /* ============================================================
    D11 Anordnung des Lerninhalts (02.10.2026)
