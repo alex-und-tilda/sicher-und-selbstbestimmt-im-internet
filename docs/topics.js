@@ -809,7 +809,7 @@ const topics = [
         "nachFehler": true,
         "art": "A",
         "pruefziel": "Was genau? Nur den privaten Teil entfernen, nicht alles verweigern",
-        "question": "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?",
+        "question": "Du willst einer Freundin ein Foto von deinem neuen Zimmer schicken. Auf dem Foto liegt ein Brief mit deiner Adresse. Was machst du?",
         "pictogram": "pikto-house",
         "hinweis": "Überlege: Welcher Teil vom Foto ist privat?",
         "answers": [
@@ -824,13 +824,15 @@ const topics = [
           "Dann können andere deine Adresse lesen. Die Adresse muss niemand sehen.",
           "Das ist nicht nötig. Nur der Brief ist das Problem. Ohne Brief kannst du das Foto schicken."
         ],
-        "remember": "Ich prüfe Fotos vor dem Senden."
+        "remember": "Ich prüfe Fotos vor dem Senden.",
+        "schluessel": "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?",
+        "id": "datenschutz/quiz/foto-brief"
       },
       {
         "nachFehler": true,
         "art": "–",
         "pruefziel": "Rückfall: unsicher – noch nichts freigeben, erst prüfen oder Unterstützung holen",
-        "question": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
+        "question": "Du lädst ein neues Spiel auf dein Handy. Das Spiel fragt nach deiner Adresse. Du weißt nicht warum. Was machst du?",
         "pictogram": "pikto-house",
         "hinweis": "Überlege: Weißt du, wofür die App deine Adresse will?",
         "answers": [
@@ -845,7 +847,9 @@ const topics = [
           null,
           "Eine falsche Adresse ist keine gute Lösung. Vielleicht braucht die App sie ja wirklich. Prüfe erst: Wofür?"
         ],
-        "remember": "Unsicher? Noch nichts freigeben."
+        "remember": "Unsicher? Noch nichts freigeben.",
+        "schluessel": "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?",
+        "id": "datenschutz/quiz/spiel-adresse"
       },
       {
         "nachFehler": true,
@@ -2702,21 +2706,22 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Überlege: Ist ein alter Beitrag wirklich weg?",
-        "question": "Du hast vor ein paar Jahren etwas gepostet. Was stimmt?",
+        "question": "Vor 5 Jahren hast du ein Foto von einer Party gepostet. Heute gefällt dir das Foto nicht mehr. Was machst du?",
         "schluessel": "Warum sind alte Beiträge wichtig?",
         "pictogram": "pikto-people",
         "answers": [
-          "Der Beitrag ist von allein weg.",
-          "Facebook hat ihn nach 1 Jahr gelöscht.",
-          "Andere können ihn heute noch sehen."
+          "Ich mache nichts. Der Beitrag ist von allein weg.",
+          "Ich warte. Facebook löscht alte Beiträge.",
+          "Ich suche den Beitrag und lösche ihn."
         ],
         "correctIndex": 2,
         "feedbackWrong": [
-          "Beiträge sind nicht von allein weg. Sie bleiben. Du kannst sie selbst löschen.",
-          "Facebook löscht alte Beiträge nicht. Sie bleiben. Du kannst sie selbst löschen.",
+          "Beiträge sind nicht von allein weg. Sie bleiben sichtbar. Du kannst sie selbst löschen.",
+          "Facebook löscht alte Beiträge nicht. Sie bleiben sichtbar. Du kannst sie selbst löschen.",
           null
         ],
-        "feedbackCorrect": "Alte Beiträge bleiben sichtbar. Du kannst sie ansehen. Und du kannst sie löschen."
+        "feedbackCorrect": "Alte Beiträge bleiben sichtbar. Andere können sie heute noch sehen. Darum löschst du den Beitrag selbst.",
+        "id": "facebook/quiz/alter-beitrag"
       },
       {
         "nachFehler": true,
@@ -4135,7 +4140,7 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Reich werden mit einem Mittel. Klingt das echt?",
-        "question": "Ein Video verspricht: Dieses Mittel macht dich reich. Was ist besser?",
+        "question": "Ein Video sagt: Mit diesem Mittel wirst du schnell reich. Unter dem Video steht ein Link zum Kaufen. Was machst du?",
         "pictogram": "pikto-video",
         "answers": [
           "Sofort glauben und gleich kaufen.",
@@ -4148,7 +4153,9 @@ const topics = [
           null,
           "Dann glauben es noch mehr Menschen. Prüfe es erst."
         ],
-        "feedbackCorrect": "Viele Videos wollen dir etwas verkaufen. Darum prüfst du erst. Und du kaufst nicht sofort."
+        "feedbackCorrect": "Viele Videos wollen dir etwas verkaufen. Darum prüfst du erst. Und du kaufst nicht sofort.",
+        "schluessel": "Ein Video verspricht: Dieses Mittel macht dich reich. Was ist besser?",
+        "id": "youtube/quiz/reich-mittel"
       },
       {
         "nachFehler": true,
@@ -7305,7 +7312,7 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Mit deinem Passwort kommt man in dein Konto. Gibst du es an ein Programm?",
-        "question": "Ein Chatbot fragt nach deinem Passwort. Was ist besser?",
+        "question": "Du schreibst mit einem Chatbot. Er schreibt: Gib mir dein Passwort. Dann kann ich dein Konto prüfen. Was machst du?",
         "pictogram": "pikto-key",
         "answers": [
           "Passwort nicht eingeben.",
@@ -7318,12 +7325,14 @@ const topics = [
           null,
           "Dein Passwort ist privat. Du gibst es nie weiter.",
           "Auch ein Teil ist zu viel. Gib gar nichts ein."
-        ]
+        ],
+        "schluessel": "Ein Chatbot fragt nach deinem Passwort. Was ist besser?",
+        "id": "ki/quiz/passwort-chatbot"
       },
       {
         "nachFehler": true,
         "hinweis": "Die KI kennt dich nicht. Wer kennt dich?",
-        "question": "Du bist krank. Was ist besser?",
+        "question": "Du hast seit 3 Tagen Bauch-Schmerzen. Du fragst eine KI. Sie gibt dir einen Tipp. Was machst du?",
         "pictogram": "pikto-feel",
         "answers": [
           "Nur die KI fragen. Sie weiß sehr viel.",
@@ -7336,7 +7345,9 @@ const topics = [
           "Die KI kennt dich nicht. Sie ersetzt keinen Arzt.",
           "Ausdrucken macht die Antwort nicht richtig.",
           null
-        ]
+        ],
+        "schluessel": "Du bist krank. Was ist besser?",
+        "id": "ki/quiz/bauchschmerzen"
       },
       {
         "nachFehler": true,
@@ -7377,12 +7388,12 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Freundliche Worte sagen nichts darüber, wer schreibt.",
-        "question": "Ein Chatbot schreibt sehr nett. Was stimmt?",
+        "question": "Ein Chatbot schreibt dir jeden Abend. Er schreibt: Ich bin immer für dich da. Was machst du?",
         "pictogram": "pikto-message",
         "answers": [
-          "Er ist ein echter Freund.",
-          "Er mag mich.",
-          "Er ist ein Programm."
+          "Ich erzähle ihm alles. Er ist mein Freund.",
+          "Ich schreibe nur noch mit ihm. Er mag mich.",
+          "Ich nutze ihn. Ich weiß: Er ist ein Programm."
         ],
         "correctIndex": 2,
         "feedbackCorrect": "Ein Chatbot ist ein Programm. Er hat keine Gefühle. Echte Freunde sind Menschen.",
@@ -7390,7 +7401,9 @@ const topics = [
           "Ein Chatbot ist ein Programm. Kein Freund.",
           "Ein Programm mag niemanden. Es rechnet nur.",
           null
-        ]
+        ],
+        "schluessel": "Ein Chatbot schreibt sehr nett. Was stimmt?",
+        "id": "ki/quiz/chatbot-nett"
       },
       {
         "nachFehler": true,
@@ -8158,7 +8171,7 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Eine Stimme kann man nachmachen. Wie prüfst du, wer da anruft?",
-        "question": "Ein Anruf will sofort Geld. Die Stimme klingt bekannt. Was ist besser?",
+        "question": "Dein Handy klingelt. Die Stimme klingt wie dein Bruder. Er sagt: Ich brauche sofort Geld. Bitte schick es jetzt. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
           "Auflegen und selbst zurückrufen.",
@@ -8171,7 +8184,9 @@ const topics = [
           null,
           "Die Stimme kann mit KI gefälscht sein.",
           "Einen Namen kann jeder sagen. Ruf lieber selbst zurück."
-        ]
+        ],
+        "schluessel": "Ein Anruf will sofort Geld. Die Stimme klingt bekannt. Was ist besser?",
+        "id": "fakes/quiz/stimme-bruder"
       },
       {
         "nachFehler": true,
@@ -9220,12 +9235,12 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Ein Gewinn ist ein Geschenk. Kostet ein Geschenk Geld?",
-        "question": "Du sollst für einen Gewinn erst Geld zahlen. Was stimmt?",
+        "question": "Eine SMS: Glückwunsch! Du hast ein Handy gewonnen. Zahl nur 2 Euro für den Versand. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
-          "Das ist normal.",
-          "Das ist Betrug.",
-          "Das ist die Steuer."
+          "Ich zahle die 2 Euro. Das ist ja wenig.",
+          "Ich zahle nicht. Das ist ein Trick.",
+          "Ich zahle. Das ist sicher die Steuer."
         ],
         "correctIndex": 1,
         "feedbackCorrect": "Echte Gewinne kosten kein Geld. Du sollst zuerst zahlen? Dann ist es ein Trick von Betrügern.",
@@ -9233,7 +9248,9 @@ const topics = [
           "Echte Gewinne kosten nie Geld.",
           null,
           "Bei einem echten Gewinn zahlst du vorher nichts."
-        ]
+        ],
+        "schluessel": "Du sollst für einen Gewinn erst Geld zahlen. Was stimmt?",
+        "id": "betrug/quiz/gewinn-versand"
       },
       {
         "nachFehler": true,
@@ -9256,7 +9273,7 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Einen Aufkleber kann man überall aufkleben. Auch über einen echten Code.",
-        "question": "Am Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
+        "question": "Du willst am Park-Automaten bezahlen. Auf dem Automaten klebt ein QR-Code-Aufkleber. Was machst du?",
         "pictogram": "pikto-code",
         "answers": [
           "Nicht scannen. Mit Münzen bezahlen.",
@@ -9269,12 +9286,14 @@ const topics = [
           null,
           "Betrüger kleben falsche Codes über echte.",
           "Abziehen hilft dir nicht beim Bezahlen. Zahle lieber mit Münzen oder in deiner eigenen Park-App."
-        ]
+        ],
+        "schluessel": "Am Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
+        "id": "betrug/quiz/qr-automat"
       },
       {
         "nachFehler": true,
         "hinweis": "Es ist passiert. Was ist jetzt das Wichtigste?",
-        "question": "Du bist auf einen Betrug hereingefallen. Was ist richtig?",
+        "question": "Du hast in einem Shop im Internet bezahlt. Die Ware kommt nicht. Den Shop gibt es nicht mehr. Du merkst: Das war Betrug. Was machst du?",
         "pictogram": "pikto-fraud",
         "answers": [
           "Ich schäme mich und sage nichts.",
@@ -9287,7 +9306,9 @@ const topics = [
           "Betrug ist nicht deine Schuld. Hol dir schnell Hilfe.",
           null,
           "Warten macht es schwerer. Hol dir sofort Hilfe."
-        ]
+        ],
+        "schluessel": "Du bist auf einen Betrug hereingefallen. Was ist richtig?",
+        "id": "betrug/quiz/hereingefallen"
       },
       {
         "nachFehler": true,
@@ -9328,7 +9349,7 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Denk an das Warnzeichen: Geld, aber kein Treffen.",
-        "question": "Jemand aus dem Internet schreibt dir liebe Worte. Die Person bittet um Geld. Ihr habt euch nie getroffen. Was ist richtig?",
+        "question": "Seit Wochen schreibt dir jemand aus dem Internet liebe Nachrichten. Ihr habt euch nie getroffen. Jetzt schreibt die Person: Ich brauche Geld für den Arzt. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
           "Kein Geld schicken. Mit einer vertrauten Person sprechen.",
@@ -9341,7 +9362,9 @@ const topics = [
           null,
           "Wer dich wirklich mag, bittet dich nicht um Geld. Schick kein Geld.",
           "Bank-Daten gibst du nie weiter. Auch nicht aus Liebe."
-        ]
+        ],
+        "schluessel": "Jemand aus dem Internet schreibt dir liebe Worte. Die Person bittet um Geld. Ihr habt euch nie getroffen. Was ist richtig?",
+        "id": "betrug/quiz/liebe-geld"
       },
       {
         "nachFehler": true,
@@ -10036,7 +10059,7 @@ const topics = [
       {
         "nachFehler": true,
         "hinweis": "Du kennst den Shop nicht. Was heißt das für dein Geld?",
-        "question": "Ein Shop will das Geld vorher. Du kennst den Shop nicht. Was ist besser?",
+        "question": "Du findest im Internet eine Jacke. Den Shop kennst du nicht. Du sollst das Geld vorher überweisen. Was machst du?",
         "pictogram": "pikto-money",
         "answers": [
           "Ich zahle vorher.",
@@ -10049,25 +10072,37 @@ const topics = [
           "Dann ist dein Geld vielleicht weg.",
           null,
           "Auch die Hälfte ist weg. Kauf dort lieber nicht."
-        ]
+        ],
+        "schluessel": "Ein Shop will das Geld vorher. Du kennst den Shop nicht. Was ist besser?",
+        "id": "einkaufen/quiz/vorkasse-unbekannt"
       },
       {
         "nachFehler": true,
         "hinweis": "Überlege: Kennt deine Bank deine PIN nicht schon?",
-        "question": "Deine Bank schreibt eine E-Mail und will deine PIN. Was stimmt?",
+        "question": "Eine E-Mail von deiner Bank: Bitte geben Sie hier Ihre PIN ein. Sonst sperren wir Ihr Konto. Was machst du?",
         "pictogram": "pikto-bank",
         "answers": [
-          "Das ist Betrug. Die Bank fragt nie nach der PIN.",
-          "Das ist normal.",
-          "Das ist eine normale Sicherheits-Prüfung von der Bank."
+          "Ich gebe die PIN nicht ein. Das ist Betrug.",
+          "Ich rufe meine Bank an. Die Nummer steht auf meiner Karte.",
+          "Ich gebe die PIN ein. Sonst ist mein Konto gesperrt."
         ],
         "correctIndex": 0,
         "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach der PIN. Diese E-Mail kommt also von Betrügern. Mit der PIN können sie dein Geld stehlen.",
         "feedbackWrong": [
           null,
-          "Die Bank fragt nie nach der PIN.",
-          "So etwas gibt es nicht. Die Bank fragt nie nach der PIN."
-        ]
+          null,
+          "Die Bank fragt nie nach der PIN. Auch eine Drohung ändert das nicht. Mit der PIN können Betrüger dein Geld stehlen."
+        ],
+        "feedbackAuch": [
+          null,
+          "Du rufst selbst bei deiner Bank an. Du nimmst die Nummer von deiner Karte. So erfährst du sicher: Die Bank will keine PIN.",
+          null
+        ],
+        "auchMoeglich": [
+          1
+        ],
+        "schluessel": "Deine Bank schreibt eine E-Mail und will deine PIN. Was stimmt?",
+        "id": "einkaufen/quiz/pin-mail"
       },
       {
         "nachFehler": true,

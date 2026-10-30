@@ -776,13 +776,29 @@ function getTopicDoneTimestamp(topicId) {
   return val.ts || null;
 }
 
+/* Zeit zum Wiederholen (Phase 2.2, Entscheidung Z2 vom 29.10.2026, Bericht 108):
+   Ab 2 Tagen nach dem Abschluss eines Themas bietet „Mein Lernweg“ eine kurze
+   Runde mit 3 Fragen aus diesem Thema an (vorher: nach 7 Tagen das ganze Quiz).
+   Nur mit Lernstand-Einwilligung, weil nur dann der Zeitpunkt des Abschlusses
+   bekannt ist; es wird nichts Neues gespeichert. Wer die Runde gemacht hat,
+   sieht das Angebot in dieser Sitzung nicht noch einmal (nur Arbeitsspeicher). */
+const ZEIT_WIEDERHOLEN = { abTagen: 2, fragen: 3 };
+const WIEDERHOLEN_TEXT = {
+  titel: "Zeit zum Wiederholen",
+  eins: "Du hast dieses Thema vor 2 Tagen oder früher gelernt. Du kannst jetzt 3 Fragen dazu üben.",
+  mehr: "Du hast diese Themen vor 2 Tagen oder früher gelernt. Du kannst jetzt 3 Fragen zu einem Thema üben.",
+  knopf: "3 Fragen"
+};
+let wiederholtSitzung = new Set();
+let zeitWiederholenThema = null;
+
 function getTopicsDueForReview() {
   if (!isProgressEnabled()) return [];
-  const REVIEW_AFTER_MS = 7 * 24 * 60 * 60 * 1000; /* 7 Tage */
+  const REVIEW_AFTER_MS = ZEIT_WIEDERHOLEN.abTagen * 24 * 60 * 60 * 1000;
   const now = Date.now();
   return topics.filter(topic => {
     const ts = getTopicDoneTimestamp(topic.id);
-    return ts && (now - ts) >= REVIEW_AFTER_MS;
+    return ts && (now - ts) >= REVIEW_AFTER_MS && !wiederholtSitzung.has(topic.id) && getQuizQuestions(topic).length;
   });
 }
 
@@ -6964,7 +6980,7 @@ function pauseStelleMerken(daten) {
 function pauseBewertungLoeschen() {
   einstiegAuswahl = null;
   pauseStelle = null; pauseKnoten = null; pauseSitzung = null; pauseTeilrunde = null;
-  kernUebungenErkannt = new Set();
+  kernUebungenErkannt = new Set(); wiederholtSitzung = new Set(); zeitWiederholenThema = null;
   topics.forEach(t => { delete t._zusatzWeg; delete t._schlussZusatz; });
   selfAssessmentStart = {}; miniCheckDone = {}; neueSituationAuswahl = null; vorhersageStart = {};
   simulationFertig = {}; simulationWahl = {};
@@ -7812,15 +7828,15 @@ function renderMyPath() {
          <div class="review-header">
            <span class="review-icon" aria-hidden="true">${pictoHtml("wiederholen")}</span>
            <div>
-             <p class="review-title">Zeit zum Wiederholen!</p>
-             <p class="review-sub">Du hast ${reviewTopics.length === 1 ? "dieses Thema" : "diese Themen"} vor mehr als einer Woche gelernt.</p>
+             <p class="review-title">${escapeHtml(WIEDERHOLEN_TEXT.titel)}</p>
+             <p class="review-sub">${escapeHtml(reviewTopics.length === 1 ? WIEDERHOLEN_TEXT.eins : WIEDERHOLEN_TEXT.mehr)}</p>
            </div>
          </div>
          <div class="review-chips">
            ${reviewTopics.map(t => `
-             <button type="button" class="review-chip" style="${getTopicColorStyle(t.id)}" onclick="startQuiz('${escapeHtml(t.id)}')">
+             <button type="button" class="review-chip" style="${getTopicColorStyle(t.id)}" onclick="startZeitZumWiederholen('${escapeHtml(t.id)}')">
                <span aria-hidden="true">${getIconHtml(t.icon || "start")}</span>
-               <span>${escapeHtml(t.title)} – Quiz wiederholen</span>
+               <span>${escapeHtml(t.title)} – ${escapeHtml(WIEDERHOLEN_TEXT.knopf)}</span>
              </button>`).join("")}
          </div>
        </div>`
@@ -7947,10 +7963,12 @@ function renderMyPath() {
             auch im zugeklappten Zustand les- und hörbar. */""}
       ${heroProgress}
       ${karteBlock}
+      ${/* Phase 2.2 (Bericht 108): Das Angebot steht offen, nicht mehr im zugeklappten
+            Bereich „Geschafft“ – es erscheint nur, wenn etwas zum Wiederholen da ist. */""}
+      ${reviewSection}
 
       <details class="path-block path-details">
         <summary class="path-details-summary">${FUEHRUNG_TEXT.geschafftAuf} <span class="path-details-zahl">${doneCount} von ${topics.length}</span></summary>
-        ${reviewSection}
         ${doneSection}
       </details>
 
@@ -10041,6 +10059,29 @@ function ketteLaufPlus(id) {
    Zählung `ketteLaeufe` bleibt davon unberührt. Gelöscht wird es mit
    „Wiedereinstieg löschen" und beim Löschen des Profils. */
 const KETTE_AUSFUEHRLICH = "::ausfuehrlich";
+/* Phase 2.6 (Entscheidung Z6 vom 29.10.2026, Bericht 108; Lernwege-Plan Grundsatz 4,
+   Bericht 88 N3): Die ausführliche Fassung bleibt immer Standard. Die App kürzt die
+   Hilfe nicht mehr nach der Zahl der Durchgänge. Ab dem zweiten Durchgang bietet sie
+   „Kurzen Plan zeigen“ nur an; wer das wählt, sieht den kurzen Plan, bis er „Lieber
+   einzeln durchgehen“ wählt. Gespeichert im selben Schlüssel unter `::kurz`. */
+const KETTE_KURZ = "::kurz";
+
+function ketteWillKurz(id) {
+  try {
+    const r = JSON.parse(pGet(KETTEN_KEY) || "{}");
+    return Boolean(r[KETTE_KURZ] && r[KETTE_KURZ][id]);
+  } catch (e) { return false; }
+}
+
+function ketteKurzSetzen(id, an) {
+  try {
+    const r = JSON.parse(pGet(KETTEN_KEY) || "{}");
+    const w = r[KETTE_KURZ] || {};
+    if (an) w[id] = true; else delete w[id];
+    r[KETTE_KURZ] = w;
+    pSet(KETTEN_KEY, JSON.stringify(r));
+  } catch (e) { /* nichts tun */ }
+}
 
 function ketteWillAusfuehrlich(id) {
   try {
@@ -10060,15 +10101,21 @@ function ketteAusfuehrlichSetzen(id, an) {
 }
 
 function ketteStufe(id) {
-  /* Ausdrückliche Wahl schlägt die Durchgangs-Zahl. */
-  if (ketteWillAusfuehrlich(id)) return 1;
-  const n = ketteLaeufe(id);
-  return n <= 0 ? 1 : (n === 1 ? 2 : 3);
+  /* Nur die eigene Wahl kürzt (Z6). Stufe 2 („Warum?“ erst auf Antippen) entsteht
+     dadurch nicht mehr; der Code dafür bleibt für eine spätere eigene Wahl stehen. */
+  return ketteWillKurz(id) && !ketteWillAusfuehrlich(id) ? 3 : 1;
+}
+
+/* Der Film zum Einstieg kommt wie bisher beim ersten Durchgang und nach der Wahl
+   „Lieber einzeln durchgehen“, nicht bei jedem Aufruf. */
+function ketteFilmZeigen(id) {
+  return Boolean(ketteFilm(id)) && ketteStufe(id) === 1 && (ketteLaeufe(id) <= 0 || ketteWillAusfuehrlich(id));
 }
 
 /* Die beiden Wege der Wahl. Beide sind jederzeit umkehrbar (UDL: Wahl
    statt Zwang; §9 COGA: vorhersehbares Verhalten). */
 function ketteAusfuehrlichWaehlen() {
+  ketteKurzSetzen(ketteId, false);
   ketteAusfuehrlichSetzen(ketteId, true);
   announce("Du siehst jetzt wieder alle Schritte einzeln. Das bleibt so, bis du es änderst.");
   ketteSchritteZeigen();
@@ -10076,7 +10123,8 @@ function ketteAusfuehrlichWaehlen() {
 
 function ketteKurzWaehlen() {
   ketteAusfuehrlichSetzen(ketteId, false);
-  announce(planWort("Du siehst jetzt den kurzen Plan.", ketteId));
+  ketteKurzSetzen(ketteId, true);
+  announce(planWort("Du siehst jetzt den kurzen Plan. Das bleibt so, bis du es änderst.", ketteId));
   ketteIndex = 0;
   renderKetteKurz();
 }
@@ -10159,7 +10207,7 @@ function buildKetteCard(id) {
       <p>${escapeHtml(einstieg)}</p>
       ${ketteRueckfallHtml(k)}
       <p class="kette-meta">${k.liste.length} Schritte. Du kannst nichts falsch machen.</p>
-      <button type="button" class="utility-button" onclick="${ketteFilm(id) && stufe === 1 ? `ketteFilmStart('${escapeHtml(id)}')` : `ketteStart('${escapeHtml(id)}')`}">${knopf}</button>
+      <button type="button" class="utility-button" onclick="${ketteFilmZeigen(id) ? `ketteFilmStart('${escapeHtml(id)}')` : `ketteStart('${escapeHtml(id)}')`}">${knopf}</button>
       ${blockRead(k.titel + ". " + einstieg)}
     </div>`;
 }
@@ -10431,7 +10479,7 @@ function renderKetteSchritt() {
     </article>
     <div class="kette-fuss">
       ${ketteIndex > 0 ? `<button type="button" class="plain-back-button" onclick="ketteZurueck()">← Zurück</button>` : ""}
-      ${(ketteWillAusfuehrlich(ketteId) || ketteLaeufe(ketteId) >= 2)
+      ${/* Z6: ab dem zweiten Durchgang nur ein Angebot, keine Automatik */""}${ketteLaeufe(ketteId) >= 1
         ? `<button type="button" class="plain-back-button" onclick="ketteKurzWaehlen()">${planWort("Kurzen Plan zeigen", ketteId)}</button>` : ""}
       <button type="button" class="plain-back-button" onclick="ketteAbbrechen()">${ketteRueckText()}</button>
     </div>
@@ -10472,7 +10520,7 @@ function ketteRueckText() { return ketteRueckkehr ? "← Zum Abschluss" : "← Z
 
 function ketteVomAbschluss(topicId) {
   ketteRueckkehr = () => renderCompletionPage(topicId);
-  if (ketteFilm(topicId) && ketteStufe(topicId) === 1) return ketteFilmStart(topicId);
+  if (ketteFilmZeigen(topicId)) return ketteFilmStart(topicId);
   ketteStart(topicId);
 }
 
@@ -10601,7 +10649,7 @@ const ANTWORT_BILDER = {
     "betrug/kurz/Was tust du bei Betrug?": ["bank", "link", "anruf"],
     "Hallo Mama, neue Nummer, brauche Geld. Was machst du?": ["money", "message", "anruf"],
     "Jemand fragt nach deinem SMS-Code. Was machst du?": ["code", "anruf", "lock"],
-    "Jemand aus dem Internet schreibt dir liebe Worte. Die Person bittet um Geld. Ihr habt euch nie getroffen. Was ist richtig?": ["friend", "money", "bank"],
+    /* Bericht 109: Frage mit fester id (vorher unter dem alten Fragetext) */ "betrug/quiz/liebe-geld": ["friend", "money", "bank"],
     "betrug/quiz/banknachricht-app-selbst": ["link", "bank", "mail"]
   }
 };
@@ -13313,10 +13361,35 @@ function quizPoolEintrag(q, topic) {
   };
 }
 
+function zeitWiederholenFragen(topic) {
+  const d = new Date(), tag = d.getFullYear() * 372 + (d.getMonth() + 1) * 31 + d.getDate();
+  const schwer = schwereAufgaben(topic.id).map(e => e.frage);
+  const alle = getQuizQuestions(topic);
+  const versetzt = alle.map((_, i) => alle[(i + tag) % alle.length]);
+  return schwer.concat(versetzt.filter(q => !schwer.some(s => aufgabeSchluessel(s) === aufgabeSchluessel(q))))
+    .slice(0, ZEIT_WIEDERHOLEN.fragen);
+}
+
+function startZeitZumWiederholen(topicId) {
+  const topic = getTopicById(topicId);
+  const liste = topic ? zeitWiederholenFragen(topic) : [];
+  if (!liste.length) return renderMyPath();
+  pauseRundeStarten();
+  bigQuizTitle = "Wiederholen";
+  bigQuizQuestions = liste.map(q => quizPoolEintrag(q, topic));
+  bigQuizIndex = 0;
+  bigQuizScore = 0;
+  bigQuizKorrigiert = 0;
+  currentTopicId = null;
+  zeitWiederholenThema = topic.id;
+  renderBigQuizQuestion();
+}
+
 function startSchwereUeben(topicId) {
   const liste = schwereAufgaben(topicId || null);
   if (!liste.length) return topicId ? renderTopicChoice(topicId) : renderMyPath();
   pauseRundeStarten();
+  zeitWiederholenThema = null;
   bigQuizTitle = LERNWEG_TEXT.nochmalUeben;
   bigQuizQuestions = liste.map(e => quizPoolEintrag(e.frage, getTopicById(e.topicId)));
   bigQuizIndex = 0;
@@ -13382,6 +13455,7 @@ function startBigQuiz() {
   }
 
   pauseRundeStarten();
+  zeitWiederholenThema = null;
   bigQuizTitle = "Das große Quiz";
   bigQuizQuestions = buildBigQuizPool();
   bigQuizIndex  = 0;
@@ -13421,6 +13495,7 @@ function startRepeatQuiz() {
     return;
   }
   pauseRundeStarten();
+  zeitWiederholenThema = null;
   bigQuizTitle = "Wiederholen";
   const rest = buildBigQuizPool(doneTopics, REPEAT_QUIZ_COUNT + schwer.length)
     .filter(q => !schwer.some(x => aufgabeSchluessel(x.quelle || x) === aufgabeSchluessel(q.quelle || q)));
@@ -13552,6 +13627,9 @@ function renderBigQuizResult(wieder) {
   const total = Math.max(1, bigQuizQuestions.length - (pauseTeilrunde && pauseTeilrunde.art === "wiederholen" ? pauseTeilrunde.ab : 0));
   pauseEnde("wiederholen");
   if (!wieder) playSound("success");
+  if (zeitWiederholenThema) wiederholtSitzung.add(zeitWiederholenThema);
+  const nochmal = zeitWiederholenThema ? `startZeitZumWiederholen('${escapeHtml(zeitWiederholenThema)}')`
+    : bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()";
 
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -13567,7 +13645,7 @@ function renderBigQuizResult(wieder) {
       ${pauseTeilHinweisHtml("wiederholen")}
       <p>Wichtig ist: Du hast geübt.</p>
       <div class="certificate-actions">
-        <button type="button" class="bedien-pikto quiz-link quiz-button" data-leiste="haupt" onclick="${bigQuizTitle === "Wiederholen" ? "startRepeatQuiz()" : "startBigQuiz()"}">${pictoHtml("wiederholen")}<span>Noch einmal üben</span></button>
+        <button type="button" class="bedien-pikto quiz-link quiz-button" data-leiste="haupt" onclick="${nochmal}">${pictoHtml("wiederholen")}<span>Noch einmal üben</span></button>
         <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMenu()">${pictoHtml("themen")}<span>Zu den Themen</span></button>
       </div>
     </article>

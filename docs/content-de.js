@@ -3799,72 +3799,72 @@ const AUFGABEN_VERSIONS = {
       }
     },
 
-    "Auf dem Foto sieht man einen Brief mit Adresse. Was ist besser?": {
+    "datenschutz/quiz/foto-brief": {
       "einfach": {
-        "question": "Auf einem Foto, das du verschicken willst, sieht man einen Brief mit deiner Adresse. Was ist besser?",
+        "question": "Du willst einer Freundin ein Foto von deinem neuen Zimmer schicken. Auf dem Foto liegt ein Brief, auf dem deine Adresse steht. Was machst du?",
         "hinweis": "Überlege: Welcher Teil vom Foto ist privat?",
         "answers": [
           "Ich schicke ein Foto ohne den Brief.",
           "Ich schicke das Foto so, wie es ist.",
           "Ich schicke überhaupt keine Fotos mehr."
         ],
-        "feedbackCorrect": "Nur der Brief ist privat. Du schneidest ihn weg oder machst ein neues Foto ohne den Brief.",
         "feedbackWrong": [
           null,
           "Dann können andere deine Adresse lesen, und die muss niemand sehen.",
           "Das ist nicht nötig, denn nur der Brief ist das Problem. Ohne den Brief kannst du das Foto verschicken."
         ],
+        "feedbackCorrect": "Nur der Brief ist privat. Du schneidest ihn weg oder machst ein neues Foto ohne den Brief.",
         "remember": "Ich prüfe Fotos, bevor ich sie verschicke."
       },
       "standard": {
-        "question": "Auf einem Foto, das du verschicken willst, ist ein Brief mit deiner Adresse zu sehen. Was ist besser?",
+        "question": "Du möchtest einer Freundin ein Foto von deinem neuen Zimmer schicken. Darauf liegt ein Brief, auf dem deine Adresse zu lesen ist. Was tust du?",
         "hinweis": "Überlege: Welcher Teil des Fotos ist privat?",
         "answers": [
           "Ich schicke ein Foto ohne den Brief.",
           "Ich schicke das Foto so, wie es ist.",
           "Ich verschicke gar keine Fotos mehr."
         ],
-        "feedbackCorrect": "Privat ist nur der Brief – du schneidest ihn weg oder machst ein neues Foto ohne ihn.",
         "feedbackWrong": [
           null,
           "Dann können andere deine Adresse lesen. Die muss niemand sehen.",
           "Das ist nicht nötig – nur der Brief ist das Problem. Ohne ihn kannst du das Foto verschicken."
         ],
+        "feedbackCorrect": "Privat ist nur der Brief – du schneidest ihn weg oder machst ein neues Foto ohne ihn.",
         "remember": "Fotos prüfe ich, bevor ich sie verschicke."
       }
     },
 
-    "Eine App fragt nach deiner Adresse. Du weißt nicht warum. Was ist besser?": {
+    "datenschutz/quiz/spiel-adresse": {
       "einfach": {
-        "question": "Eine App fragt nach deiner Adresse, und du weißt nicht, warum. Was ist besser?",
+        "question": "Du lädst ein neues Spiel auf dein Handy. Das Spiel fragt nach deiner Adresse, aber du weißt nicht, warum. Was machst du?",
         "hinweis": "Überlege: Weißt du, wofür die App deine Adresse haben will?",
         "answers": [
           "Ich trage die Adresse ein, die App wird sie schon brauchen.",
           "Ich trage noch nichts ein und prüfe erst, wofür.",
           "Ich trage eine falsche Adresse ein, das merkt die App nicht."
         ],
-        "feedbackCorrect": "Wenn du unsicher bist, gibst du noch nichts frei. Du prüfst erst oder holst dir Unterstützung.",
         "feedbackWrong": [
           "Du weißt nicht, wofür die App die Adresse will. Dann gib noch nichts ein und prüfe erst.",
           null,
           "Eine falsche Adresse ist keine gute Lösung. Vielleicht braucht die App sie ja wirklich. Prüfe erst, wofür."
         ],
+        "feedbackCorrect": "Wenn du unsicher bist, gibst du noch nichts frei. Du prüfst erst oder holst dir Unterstützung.",
         "remember": "Wenn ich unsicher bin, gebe ich noch nichts frei."
       },
       "standard": {
-        "question": "Eine App fragt nach deiner Adresse, ohne dass du weißt, warum. Was ist besser?",
+        "question": "Du lädst ein neues Spiel herunter. Es fragt nach deiner Adresse, und du weißt nicht, wozu. Was tust du?",
         "hinweis": "Überlege: Weißt du, wofür die App deine Adresse will?",
         "answers": [
           "Ich trage die Adresse ein – die App wird sie schon brauchen.",
           "Ich trage noch nichts ein und prüfe erst, wofür.",
           "Ich trage eine falsche Adresse ein – das merkt die App nicht."
         ],
-        "feedbackCorrect": "Bist du unsicher, gibst du noch nichts frei: erst prüfen oder Unterstützung holen.",
         "feedbackWrong": [
           "Du weißt nicht, wofür die App die Adresse will – dann gib noch nichts ein und prüfe erst.",
           null,
           "Eine falsche Adresse ist keine gute Lösung. Vielleicht braucht die App sie ja tatsächlich – prüfe erst, wofür."
         ],
+        "feedbackCorrect": "Bist du unsicher, gibst du noch nichts frei: erst prüfen oder Unterstützung holen.",
         "remember": "Bin ich unsicher, gebe ich noch nichts frei."
       }
     },
@@ -6336,9 +6336,9 @@ const AUFGABEN_VERSIONS = {
         "remember": "Nach einer Stunde lege ich eine Pause ein."
       }
     },
-    "Ein Video verspricht: Dieses Mittel macht dich reich. Was ist besser?": {
+    "youtube/quiz/reich-mittel": {
       "einfach": {
-        "question": "Ein Video verspricht: Mit diesem Mittel wirst du reich. Was ist besser?",
+        "question": "Ein Video verspricht, dass du mit einem Mittel schnell reich wirst. Unter dem Video steht ein Link zum Kaufen. Was machst du?",
         "hinweis": "Überlege, ob es echt klingt, dass man mit einem Mittel reich wird.",
         "answers": [
           "Ich glaube es sofort und kaufe es.",
@@ -6353,7 +6353,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Viele Videos wollen dir etwas verkaufen. Deshalb prüfst du erst, bevor du etwas kaufst."
       },
       "standard": {
-        "question": "Ein Video verspricht: „Mit diesem Mittel wirst du reich.“ Wie reagierst du?",
+        "question": "Ein Video verspricht, dass dich ein bestimmtes Mittel schnell reich macht. Darunter steht ein Link zum Kaufen. Was tust du?",
         "hinweis": "Klingt es glaubwürdig, mit einem Mittel reich zu werden?",
         "answers": [
           "Ich glaube es sofort und kaufe.",
@@ -8734,9 +8734,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Ein Deepfake ist ein mit KI gefälschtes Video. Darin sind Gesicht oder Stimme ausgetauscht."
       }
     },
-    "Ein Anruf will sofort Geld. Die Stimme klingt bekannt. Was ist besser?": {
+    "fakes/quiz/stimme-bruder": {
       "einfach": {
-        "question": "Bei einem Anruf will jemand sofort Geld, und die Stimme klingt bekannt. Was ist besser?",
+        "question": "Dein Handy klingelt, und die Stimme klingt wie die von deinem Bruder. Er sagt: Ich brauche sofort Geld, bitte schick es jetzt. Was machst du?",
         "hinweis": "Überlege, wie du prüfen kannst, wer wirklich anruft.",
         "answers": [
           "Ich lege auf und rufe selbst zurück.",
@@ -8751,7 +8751,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Stimmen können mit KI gefälscht sein. Deshalb legst du auf und rufst die Person selbst unter der Nummer an, die du kennst."
       },
       "standard": {
-        "question": "Ein Anrufer will sofort Geld, und die Stimme klingt vertraut. Was ist besser?",
+        "question": "Ein Anruf – die Stimme klingt wie die deines Bruders: „Ich brauche sofort Geld, bitte überweis es jetzt.“ Was tust du?",
         "hinweis": "Wie prüfst du, wer wirklich anruft?",
         "answers": [
           "Auflegen und selbst zurückrufen.",
@@ -8896,36 +8896,36 @@ const AUFGABEN_VERSIONS = {
     }
   },
   "ki": {
-    "Ein Chatbot schreibt sehr nett. Was stimmt?": {
+    "ki/quiz/chatbot-nett": {
       "einfach": {
-        "question": "Ein Chatbot schreibt dir sehr freundlich. Was stimmt trotzdem?",
+        "question": "Ein Chatbot schreibt dir jeden Abend: Ich bin immer für dich da. Was machst du?",
         "hinweis": "Ein Chatbot kann freundlich schreiben. Denk daran, was ein Chatbot ist.",
         "answers": [
-          "Der Chatbot ist ein echter Freund.",
-          "Der Chatbot mag mich.",
-          "Der Chatbot ist ein Programm."
+          "Ich erzähle ihm alles, weil er mein Freund ist.",
+          "Ich schreibe nur noch mit ihm, weil er mich mag.",
+          "Ich nutze ihn und weiß, dass er ein Programm ist."
         ],
-        "feedbackCorrect": "Ein Chatbot ist ein Programm und hat keine Gefühle, auch wenn er freundlich schreibt. Echte Freunde sind Menschen.",
         "feedbackWrong": [
           "Ein Chatbot ist ein Programm. Er ist kein echter Freund.",
           "Ein Programm kann dich nicht mögen. Es berechnet seine Antworten.",
           null
-        ]
+        ],
+        "feedbackCorrect": "Ein Chatbot ist ein Programm und hat keine Gefühle, auch wenn er freundlich schreibt. Echte Freunde sind Menschen."
       },
       "standard": {
-        "question": "Ein Chatbot antwortet dir sehr freundlich. Welche Aussage trifft trotzdem zu?",
+        "question": "Ein Chatbot schreibt dir jeden Abend: „Ich bin immer für dich da.“ Was tust du?",
         "hinweis": "Freundliche Worte sagen nichts darüber aus, ob ein Mensch dir schreibt.",
         "answers": [
-          "Er ist ein echter Freund.",
-          "Er mag mich.",
-          "Er ist ein Programm."
+          "Ich erzähle ihm alles – er ist ja mein Freund.",
+          "Ich schreibe nur noch mit ihm, denn er mag mich.",
+          "Ich nutze ihn und weiß: Er ist ein Programm."
         ],
-        "feedbackCorrect": "Ein Chatbot ist ein Programm und hat keine Gefühle, auch wenn er freundlich antwortet. Echte Freunde sind Menschen.",
         "feedbackWrong": [
           "Ein Chatbot ist ein Programm und kein echter Freund.",
           "Ein Programm mag niemanden. Es berechnet Antworten.",
           null
-        ]
+        ],
+        "feedbackCorrect": "Ein Chatbot ist ein Programm und hat keine Gefühle, auch wenn er freundlich antwortet. Echte Freunde sind Menschen."
       }
     },
     "Die KI gibt eine wichtige Antwort. Was machst du?": {
@@ -9544,9 +9544,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Eine KI kann sich irren, auch wenn sie sehr überzeugt klingt. Manchmal erfindet sie sogar Dinge."
       }
     },
-    "Ein Chatbot fragt nach deinem Passwort. Was ist besser?": {
+    "ki/quiz/passwort-chatbot": {
       "einfach": {
-        "question": "Ein Chatbot fragt nach deinem Passwort, damit er dir helfen kann. Was ist besser?",
+        "question": "Du schreibst mit einem Chatbot. Er schreibt: Gib mir dein Passwort, dann kann ich dein Konto prüfen. Was machst du?",
         "hinweis": "Überlege, wem du dein Passwort gibst.",
         "answers": [
           "Ich gebe mein Passwort nicht ein.",
@@ -9561,7 +9561,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Viele KI-Dienste speichern, was du schreibst. Deshalb bleibt dein Passwort geheim, auch bei einer KI."
       },
       "standard": {
-        "question": "Ein Chatbot fragt nach deinem Passwort, um dir angeblich zu helfen. Was ist besser?",
+        "question": "Ein Chatbot schreibt dir: „Gib mir dein Passwort, dann prüfe ich dein Konto.“ Was tust du?",
         "hinweis": "Wem gibst du dein Passwort?",
         "answers": [
           "Ich gebe es nicht ein.",
@@ -9576,9 +9576,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Viele KI-Dienste speichern Eingaben. Deshalb bleibt dein Passwort geheim, auch gegenüber einer KI."
       }
     },
-    "Du bist krank. Was ist besser?": {
+    "ki/quiz/bauchschmerzen": {
       "einfach": {
-        "question": "Du fühlst dich krank und fragst eine KI. Was ist besser?",
+        "question": "Du hast seit 3 Tagen Bauchschmerzen und fragst eine KI. Sie gibt dir einen Tipp. Was machst du?",
         "hinweis": "Überlege, wer dich wirklich kennt.",
         "answers": [
           "Ich frage nur die KI.",
@@ -9593,7 +9593,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Die KI kennt dich nicht und kann falsche Tipps geben. Deshalb fragst du bei der Gesundheit auch eine Ärztin oder einen Arzt."
       },
       "standard": {
-        "question": "Du fühlst dich krank und fragst eine KI um Rat. Was ist besser?",
+        "question": "Du hast seit drei Tagen Bauchschmerzen und fragst eine KI, die dir einen Tipp gibt. Was tust du?",
         "hinweis": "Wer kennt dich wirklich?",
         "answers": [
           "Nur die KI fragen.",
@@ -11152,9 +11152,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Fake-Shops wirken oft täuschend echt: Du bezahlst, aber die Ware kommt nie. Deshalb prüfst du einen unbekannten Shop, bevor du dort bezahlst."
       }
     },
-    "Ein Shop will das Geld vorher. Du kennst den Shop nicht. Was ist besser?": {
+    "einkaufen/quiz/vorkasse-unbekannt": {
       "einfach": {
-        "question": "Ein Shop, den du nicht kennst, will das Geld vorher. Was ist besser?",
+        "question": "Du findest im Internet eine Jacke. Den Shop kennst du nicht, und du sollst das Geld vorher überweisen. Was machst du?",
         "hinweis": "Du kennst den Shop nicht. Überlege, was das für dein Geld bedeutet.",
         "answers": [
           "Ich bezahle vorher.",
@@ -11169,7 +11169,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Du kennst den Shop nicht, und vielleicht kommt die Ware nie. Dann ist das Geld weg, das du vorher bezahlt hast. Deshalb kaufst du dort nicht."
       },
       "standard": {
-        "question": "Ein unbekannter Shop will das Geld vorab. Was ist besser?",
+        "question": "Im Internet findest du eine Jacke. Den Shop kennst du nicht, und er verlangt, dass du vorab überweist. Was tust du?",
         "hinweis": "Du kennst den Shop nicht – was heißt das für dein Geld?",
         "answers": [
           "Vorab bezahlen.",
@@ -11184,36 +11184,46 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Du kennst den Shop nicht. Kommt die Ware nie an, ist das im Voraus bezahlte Geld verloren. Deshalb kaufst du dort nicht."
       }
     },
-    "Deine Bank schreibt eine E-Mail und will deine PIN. Was stimmt?": {
+    "einkaufen/quiz/pin-mail": {
       "einfach": {
-        "question": "Eine E-Mail sagt, sie ist von deiner Bank, und will deine PIN. Was stimmt?",
+        "question": "Eine E-Mail von deiner Bank: Bitte geben Sie hier Ihre PIN ein, sonst sperren wir Ihr Konto. Was machst du?",
         "hinweis": "Überlege, ob deine Bank deine PIN überhaupt von dir braucht.",
         "answers": [
-          "Das ist Betrug, denn die Bank fragt nie nach der PIN.",
-          "Das ist ganz normal.",
-          "Das ist eine normale Sicherheits-Prüfung von der Bank."
+          "Ich gebe die PIN nicht ein, weil das Betrug ist.",
+          "Ich rufe meine Bank an, die Nummer steht auf meiner Karte.",
+          "Ich gebe die PIN ein, damit mein Konto nicht gesperrt wird."
         ],
         "feedbackWrong": [
           null,
-          "Die Bank fragt nie nach deiner PIN.",
-          "So eine Prüfung gibt es nicht. Die Bank fragt nie nach der PIN."
+          null,
+          "Die Bank fragt nie nach der PIN, auch nicht, wenn sie mit einer Sperre droht. Mit der PIN können Betrüger dein Geld stehlen."
         ],
-        "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach deiner PIN. Diese E-Mail kommt also von Betrügern, die mit der PIN dein Geld stehlen wollen."
+        "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach deiner PIN. Diese E-Mail kommt also von Betrügern, die mit der PIN dein Geld stehlen wollen.",
+        "feedbackAuch": [
+          null,
+          "Du rufst selbst bei deiner Bank an und nimmst die Nummer von deiner Karte. So erfährst du sicher, dass die Bank keine PIN will.",
+          null
+        ]
       },
       "standard": {
-        "question": "Eine E-Mail, angeblich von deiner Bank, verlangt deine PIN. Was stimmt?",
+        "question": "Eine E-Mail von deiner Bank: „Bitte geben Sie hier Ihre PIN ein, sonst sperren wir Ihr Konto.“ Was tust du?",
         "hinweis": "Braucht deine Bank deine PIN überhaupt von dir?",
         "answers": [
-          "Betrug – Banken fragen nie nach der PIN.",
-          "Das ist ganz normal.",
-          "Eine übliche Sicherheitsprüfung der Bank."
+          "Ich gebe die PIN nicht ein – das ist Betrug.",
+          "Ich rufe meine Bank unter der Nummer auf meiner Karte an.",
+          "Ich gebe die PIN ein, damit mein Konto nicht gesperrt wird."
         ],
         "feedbackWrong": [
           null,
-          "Banken fragen nie nach deiner PIN.",
-          "So eine Prüfung gibt es nicht – Banken fragen nie nach der PIN."
+          null,
+          "Deine Bank fragt nie nach der PIN – auch nicht, wenn sie mit einer Sperre droht. Mit der PIN können Betrüger dein Geld stehlen."
         ],
-        "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach deiner PIN. Die Nachricht stammt also von Betrügern, die mit der PIN Zugriff auf dein Konto erhalten wollen."
+        "feedbackCorrect": "Deine Bank fragt nie per E-Mail nach deiner PIN. Die Nachricht stammt also von Betrügern, die mit der PIN Zugriff auf dein Konto erhalten wollen.",
+        "feedbackAuch": [
+          null,
+          "Du rufst selbst bei deiner Bank an, und zwar unter der Nummer auf deiner Karte. So erfährst du sicher, dass sie keine PIN verlangt.",
+          null
+        ]
       }
     },
     "Ein Angebot sagt: Nur noch heute! Was machst du?": {
@@ -11378,36 +11388,36 @@ const AUFGABEN_VERSIONS = {
     }
   },
   "betrug": {
-    "Du sollst für einen Gewinn erst Geld zahlen. Was stimmt?": {
+    "betrug/quiz/gewinn-versand": {
       "einfach": {
-        "question": "Du sollst zuerst Geld bezahlen, damit du einen Gewinn bekommst. Was stimmt?",
+        "question": "Du bekommst eine SMS: Glückwunsch, du hast ein Handy gewonnen! Zahl nur 2 Euro für den Versand. Was machst du?",
         "hinweis": "Ein Gewinn ist ein Geschenk. Musst du für ein Geschenk Geld bezahlen?",
         "answers": [
-          "Das ist ganz normal.",
-          "Das ist Betrug.",
-          "Das ist die Steuer für den Gewinn."
+          "Ich zahle die 2 Euro, weil das wenig ist.",
+          "Ich zahle nicht, weil das ein Trick ist.",
+          "Ich zahle, weil das sicher die Steuer ist."
         ],
-        "feedbackCorrect": "Echte Gewinne kosten dich kein Geld. Wenn du zuerst zahlen sollst, ist es ein Trick von Betrügern.",
         "feedbackWrong": [
           "Für einen echten Gewinn zahlst du kein Geld.",
           null,
           "Bei einem echten Gewinn musst du nicht erst Geld bezahlen."
-        ]
+        ],
+        "feedbackCorrect": "Echte Gewinne kosten dich kein Geld. Wenn du zuerst zahlen sollst, ist es ein Trick von Betrügern."
       },
       "standard": {
-        "question": "Bevor du einen Gewinn erhältst, sollst du Geld bezahlen. Welche Aussage trifft zu?",
+        "question": "Eine SMS: „Glückwunsch, du hast ein Handy gewonnen! Zahl nur 2 € für den Versand.“ Was tust du?",
         "hinweis": "Ein Gewinn ist ein Geschenk. Kostet dich ein Geschenk Geld?",
         "answers": [
-          "Das ist normal.",
-          "Das ist Betrug.",
-          "Das ist die Steuer für den Gewinn."
+          "Ich zahle die 2 €, das ist ja nicht viel.",
+          "Ich zahle nicht – das ist ein Trick.",
+          "Ich zahle, das ist bestimmt die Steuer."
         ],
-        "feedbackCorrect": "Einen echten Gewinn musst du nicht zuerst bezahlen. Verlangt jemand vorher Geld, handelt es sich um Betrug.",
         "feedbackWrong": [
           "Echte Gewinne kosten dich kein Geld.",
           null,
           "Für einen echten Gewinn musst du vorher nichts bezahlen."
-        ]
+        ],
+        "feedbackCorrect": "Einen echten Gewinn musst du nicht zuerst bezahlen. Verlangt jemand vorher Geld, handelt es sich um Betrug."
       }
     },
     "Eine E-Mail drängt: Sofort klicken! Was bedeutet das?": {
@@ -12236,9 +12246,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Mit dem Code können Betrüger auf dein Konto zugreifen. Deshalb sind Codes nur für dich bestimmt. Echte Firmen fragen nie nach deinem Code."
       }
     },
-    "Am Automaten klebt ein QR-Code-Aufkleber. Was ist besser?": {
+    "betrug/quiz/qr-automat": {
       "einfach": {
-        "question": "An einem Automaten klebt ein Aufkleber mit einem QR-Code. Was ist besser?",
+        "question": "Du willst am Parkautomaten bezahlen. Auf dem Automaten klebt ein Aufkleber mit einem QR-Code. Was machst du?",
         "hinweis": "Einen Aufkleber kann man überall hinkleben, auch über einen echten Code.",
         "answers": [
           "Ich scanne nicht und zahle mit Münzen.",
@@ -12253,7 +12263,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Betrüger kleben falsche Codes über echte. Deshalb scannst du den Aufkleber nicht. Zahle lieber mit Münzen oder in deiner eigenen Park-App."
       },
       "standard": {
-        "question": "Am Automaten klebt ein Aufkleber mit QR-Code. Was ist besser?",
+        "question": "Du willst am Parkautomaten bezahlen, auf dem ein Aufkleber mit QR-Code klebt. Was tust du?",
         "hinweis": "Ein Aufkleber lässt sich überall anbringen – auch über einem echten Code.",
         "answers": [
           "Nicht scannen und bar bezahlen.",
@@ -12268,9 +12278,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Betrüger kleben gefälschte Codes über echte. Deshalb scannst du den Aufkleber nicht. Zahl lieber bar oder über die offizielle Park-App."
       }
     },
-    "Du bist auf einen Betrug hereingefallen. Was ist richtig?": {
+    "betrug/quiz/hereingefallen": {
       "einfach": {
-        "question": "Du bist auf einen Betrug hereingefallen. Was ist jetzt richtig?",
+        "question": "Du hast in einem Online-Shop bezahlt, aber die Ware kommt nicht, und den Shop gibt es nicht mehr. Du merkst: Das war Betrug. Was machst du?",
         "hinweis": "Es ist passiert. Überlege, was jetzt am wichtigsten ist.",
         "answers": [
           "Ich schäme mich und sage niemandem etwas.",
@@ -12285,7 +12295,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Betrug kann jedem passieren, und du musst dich nicht schämen. Schnelle Hilfe ist wichtig, denn dann kannst du zum Beispiel deine Karte sperren lassen."
       },
       "standard": {
-        "question": "Du merkst: Du bist betrogen worden. Was ist richtig?",
+        "question": "Du hast in einem Onlineshop bezahlt. Die Ware kommt nicht, und den Shop gibt es nicht mehr – du merkst, dass du betrogen wurdest. Was tust du?",
         "hinweis": "Es ist passiert – was ist jetzt das Wichtigste?",
         "answers": [
           "Mich schämen und schweigen.",
@@ -12364,9 +12374,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Ein Link von einer unbekannten Nummer kann auf eine gefälschte Seite führen. Deshalb öffnest du ihn nicht."
       }
     },
-    "Jemand aus dem Internet schreibt dir liebe Worte. Die Person bittet um Geld. Ihr habt euch nie getroffen. Was ist richtig?": {
+    "betrug/quiz/liebe-geld": {
       "einfach": {
-        "question": "Jemand aus dem Internet schreibt dir liebe Worte. Ihr habt euch noch nie getroffen. Jetzt bittet die Person um Geld. Was ist richtig?",
+        "question": "Seit Wochen schreibt dir jemand aus dem Internet liebe Nachrichten, aber ihr habt euch nie getroffen. Jetzt schreibt die Person: Ich brauche Geld für den Arzt. Was machst du?",
         "hinweis": "Denk an das Warnzeichen: Die Person will Geld, aber kein Treffen.",
         "answers": [
           "Ich schicke kein Geld und rede mit einer vertrauten Person.",
@@ -12381,7 +12391,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Fotos und Stimmen können gefälscht sein, deshalb weißt du nicht, wer wirklich schreibt. Du schickst kein Geld und holst dir Unterstützung."
       },
       "standard": {
-        "question": "Eine Person, die du nur aus dem Internet kennst, schreibt dir liebe Nachrichten. Getroffen habt ihr euch nie. Jetzt bittet sie um Geld. Was ist richtig?",
+        "question": "Seit Wochen schreibt dir jemand aus dem Internet liebevolle Nachrichten. Getroffen habt ihr euch nie. Jetzt schreibt die Person: „Ich brauche Geld für den Arzt.“ Was tust du?",
         "hinweis": "Denk an das Warnzeichen: Geld ja, Treffen nein.",
         "answers": [
           "Kein Geld schicken und mit einer Vertrauensperson sprechen.",
@@ -13166,36 +13176,36 @@ const AUFGABEN_VERSIONS = {
         "feedbackCorrect": "Du fragst die Kollegin vorher – sie entscheidet mit, ob ihr Bild im Internet erscheint."
       }
     },
-    "Du hast vor ein paar Jahren etwas gepostet. Was stimmt?": {
+    "facebook/quiz/alter-beitrag": {
       "einfach": {
-        "question": "Du hast vor einigen Jahren etwas bei Facebook gepostet. Was stimmt über diesen alten Beitrag?",
+        "question": "Vor 5 Jahren hast du ein Foto von einer Party gepostet. Heute gefällt es dir nicht mehr. Was machst du?",
         "hinweis": "Überlege, ob ein alter Beitrag wirklich weg ist.",
         "answers": [
-          "Er ist von allein verschwunden.",
-          "Facebook hat ihn nach einem Jahr gelöscht.",
-          "Er kann heute noch zu sehen sein."
+          "Ich mache nichts, weil der Beitrag von allein verschwindet.",
+          "Ich warte, weil Facebook alte Beiträge löscht.",
+          "Ich suche den Beitrag und lösche ihn."
         ],
         "feedbackWrong": [
-          "Beiträge verschwinden nicht von allein. Sie bleiben, bis du sie löschst.",
-          "Facebook löscht alte Beiträge nicht nach einem Jahr. Sie bleiben stehen, bis du sie löschst.",
+          "Beiträge verschwinden nicht von allein, sondern bleiben sichtbar. Du kannst sie selbst löschen.",
+          "Facebook löscht alte Beiträge nicht, sie bleiben sichtbar. Du kannst sie selbst löschen.",
           null
         ],
-        "feedbackCorrect": "Alte Beiträge können lange zu sehen sein. Du kannst sie dir ansehen und löschen, wenn du sie nicht mehr zeigen willst."
+        "feedbackCorrect": "Alte Beiträge bleiben sichtbar, und andere können sie heute noch sehen. Deshalb löschst du den Beitrag selbst."
       },
       "standard": {
-        "question": "Du hast vor ein paar Jahren etwas auf Facebook gepostet. Was stimmt über diesen alten Beitrag?",
+        "question": "Vor fünf Jahren hast du ein Partyfoto gepostet, das dir heute nicht mehr gefällt. Was tust du?",
         "hinweis": "Verschwindet ein alter Beitrag wirklich von selbst?",
         "answers": [
-          "Er ist inzwischen von selbst verschwunden.",
-          "Facebook hat ihn nach einem Jahr gelöscht.",
-          "Er kann heute noch sichtbar sein."
+          "Nichts, der Beitrag verschwindet mit der Zeit von selbst.",
+          "Ich warte, denn Facebook löscht alte Beiträge.",
+          "Ich suche den Beitrag und lösche ihn."
         ],
         "feedbackWrong": [
-          "Beiträge verschwinden nicht von selbst – sie bleiben, bis du sie löschst.",
-          "Eine solche Frist gibt es nicht. Beiträge bleiben stehen, bis du sie löschst.",
+          "Beiträge verschwinden nicht von selbst, sie bleiben sichtbar. Du kannst sie aber jederzeit selbst löschen.",
+          "Facebook löscht alte Beiträge nicht, sie bleiben sichtbar. Du kannst sie aber jederzeit selbst löschen.",
           null
         ],
-        "feedbackCorrect": "Alte Beiträge können noch lange sichtbar sein. Du kannst sie durchsehen, löschen oder einschränken, wer sie sieht."
+        "feedbackCorrect": "Alte Beiträge bleiben sichtbar – andere können sie auch heute noch sehen. Deshalb löschst du den Beitrag selbst."
       }
     },
     "Was ist gut im Profil?": {
