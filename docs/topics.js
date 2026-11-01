@@ -359,7 +359,7 @@ const topics = [
             "text": "Eine Wetter-App will deinen Standort. Willst du Warnungen unterwegs? Dann braucht sie ihn. Willst du nur das Wetter in deiner Stadt? Dann tippst du die Stadt selbst ein."
           }
         ],
-        "remember": "Ich erlaube nur, was die App braucht.",
+        "remember": "Was braucht die App? Ich erlaube nur das.",
         "practice": {
           "nachFehler": true,
           "art": "C",
@@ -379,7 +379,7 @@ const topics = [
             "Dann sieht die App alle deine Fotos. Für eine Karte braucht sie aber nur eins. Das ist mehr als nötig.",
             "Dann kann die App keine Karte machen. Für die Karte braucht sie ein Foto. Gib ihr nur das eine Foto."
           ],
-          "remember": "Ich erlaube nur, was die App braucht."
+          "remember": "Was braucht die App? Ich erlaube nur das."
         },
         "pictogram": "pikto-phone"
       },
@@ -782,7 +782,7 @@ const topics = [
           "Ändern kannst du die Erlaubnis später. Aber dann hat die App deine Kontakte schon gesehen. Darum prüfst du vorher.",
           null
         ],
-        "remember": "Ich erlaube nur, was die App braucht."
+        "remember": "Was braucht die App? Ich erlaube nur das."
       },
       {
         "nachFehler": true,
@@ -803,7 +803,7 @@ const topics = [
           "Das darfst du so wählen. Aber dann hilft dir die Funktion nicht. Dein Handy ist weg? Dann findest du es nicht.",
           null
         ],
-        "remember": "Ich erlaube nur, was die App braucht."
+        "remember": "Was braucht die App? Ich erlaube nur das."
       },
       {
         "nachFehler": true,
@@ -1584,7 +1584,7 @@ const topics = [
             null
           ],
           "feedbackCorrect": "In der Gruppe lesen 30 Menschen mit. Deine Adresse ist privat. Sie gehört nicht in die Gruppe.",
-          "remember": "In Gruppen schreibe ich nur, was alle sehen dürfen."
+          "remember": "Was dürfen alle in der Gruppe sehen? Ich schreibe nur das."
         },
         "pictogram": "pikto-message"
       },
@@ -3311,7 +3311,7 @@ const topics = [
             "pictogram": "pikto-location"
           },
           {
-            "text": "Du zeigst es einer vertrauten Person.",
+            "text": "Dann entscheidest du selbst. Du kannst es auch einer vertrauten Person zeigen.",
             "pictogram": "pikto-help"
           }
         ],
@@ -3359,9 +3359,9 @@ const topics = [
             null
           ],
           "feedbackCorrect": "Die Nachricht macht Stress. Das ist Absicht. Mit Stopp hast du Zeit zum Nachdenken.",
-          "remember": "Bei Stress zeige ich es einer Person, der ich vertraue."
+          "remember": "Bei Stress mache ich Stopp. Ich antworte nicht sofort."
         },
-        "remember": "Ich mache Stopp. Ich zeige es jemandem.",
+        "remember": "Ich mache Stopp. Ich antworte nicht sofort.",
         "pictogram": "pikto-help"
       },
       {
@@ -3470,21 +3470,29 @@ const topics = [
       },
       {
         "nachFehler": true,
-        "hinweis": "Du musst das nicht allein aushalten. Wer kann dir helfen?",
+        "hinweis": "Was kannst du selbst gegen gemeine Kommentare tun?",
         "question": "Mehrere Personen schreiben Gemeines unter dein Foto. Was machst du?",
         "pictogram": "pikto-photo",
         "answers": [
-          "Ich behalte es für mich. Ich halte das aus.",
-          "Ich zeige es einer vertrauten Person.",
-          "Ich lösche mein Foto."
+          "Ich lösche mein Foto.",
+          "Ich melde die Kommentare.",
+          "Ich zeige es einer vertrauten Person."
         ],
         "correctIndex": 1,
-        "feedbackWrong": [
-          "Damit bleibst du allein. Erzähle es lieber jemandem.",
-          null,
-          "Dein Foto ist nicht der Fehler. Hol dir lieber Hilfe."
+        "auchMoeglich": [
+          2
         ],
-        "feedbackCorrect": "Du musst das nicht allein aushalten."
+        "feedbackWrong": [
+          "Dein Foto ist nicht der Fehler. Melde lieber die Kommentare.",
+          null,
+          null
+        ],
+        "feedbackAuch": [
+          null,
+          null,
+          "Du musst das nicht allein aushalten. Melden kannst du trotzdem."
+        ],
+        "feedbackCorrect": "Du handelst selbst. Du meldest die Kommentare. Du kannst die Personen auch blockieren."
       },
       {
         "nachFehler": true,
@@ -4771,7 +4779,7 @@ const topics = [
             "Zu zweit sieht man mehr. Danach kann dir die Person nicht mehr schreiben."
           ],
           "feedbackCorrect": "Du hast Nein gesagt. Das reicht. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
-          "remember": "Ich sage Nein. Ich zeige es jemandem."
+          "remember": "Ich schicke kein Bild. Ich darf Hilfe holen."
         },
         "remember": "Kein Bild unter Stress. Ich sage Nein.",
         "pictogram": "pikto-help"
@@ -7091,7 +7099,7 @@ const topics = [
           }
         ],
         "examples": [
-          "Du bist krank. Du fragst die KI. Besser: Du fragst auch eine Ärztin oder einen Arzt.",
+          "Du bist krank. Du fragst die KI. Besser: Du fragst auch einen Arzt oder eine Ärztin.",
           "Du willst Geld ausgeben. Die KI rät dir etwas. Besser: Du fragst eine vertraute Person."
         ],
         "practice": {
@@ -7120,7 +7128,7 @@ const topics = [
         "icon": "photo",
         "text": [
           {
-            "text": "KI kann Bilder machen, die echt aussehen.",
+            "text": "KI kann Bilder machen. Die Bilder sehen echt aus.",
             "pictogram": "pikto-photo"
           },
           {
@@ -7132,7 +7140,15 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
-            "text": "Bist du unsicher? Dann frag eine vertraute Person.",
+            "text": "Bist du unsicher? Dann prüfe selbst.",
+            "pictogram": "pikto-search"
+          },
+          {
+            "text": "Ruf die echte Person an. Nimm dafür eine bekannte Nummer.",
+            "pictogram": "pikto-phone"
+          },
+          {
+            "text": "Du kannst auch eine vertraute Person fragen.",
             "pictogram": "pikto-help"
           },
           {
@@ -7140,7 +7156,7 @@ const topics = [
             "pictogram": "pikto-fake"
           }
         ],
-        "warning": "Nicht alles, was echt aussieht, ist echt. Du kannst nachfragen. Das ist klug.",
+        "warning": "Ein Bild kann wie ein echtes Foto aussehen. Vielleicht hat eine KI das Bild gemacht. Auch eine Stimme kann von einer KI sein. Du kannst nachfragen. Das ist klug.",
         "pictogram": "pikto-no"
       },
       {
@@ -7337,12 +7353,12 @@ const topics = [
         "answers": [
           "Nur die KI fragen. Sie weiß sehr viel.",
           "Die Antwort von der KI ausdrucken.",
-          "Auch eine Ärztin oder einen Arzt fragen."
+          "Auch einen Arzt oder eine Ärztin fragen."
         ],
         "correctIndex": 2,
-        "feedbackCorrect": "Die KI kennt dich nicht. Sie kann falsche Tipps geben. Darum fragst du bei Gesundheit auch eine Ärztin oder einen Arzt.",
+        "feedbackCorrect": "Die KI kennt dich nicht. Sie kann falsche Tipps geben. Darum fragst du bei Gesundheit auch einen Arzt oder eine Ärztin.",
         "feedbackWrong": [
-          "Die KI kennt dich nicht. Sie ersetzt keinen Arzt.",
+          "Die KI kennt dich nicht. Sie ersetzt keinen Arzt und keine Ärztin.",
           "Ausdrucken macht die Antwort nicht richtig.",
           null
         ],
@@ -7678,7 +7694,7 @@ const topics = [
         "icon": "photo",
         "text": [
           {
-            "text": "KI kann Bilder machen, die echt aussehen.",
+            "text": "KI kann Bilder machen. Die Bilder sehen echt aus.",
             "pictogram": "pikto-photo"
           },
           {
@@ -8955,6 +8971,7 @@ const topics = [
             "pictogram": "pikto-mail"
           }
         ],
+        "warning": "Ein falscher QR-Code führt auf eine falsche Seite. Prüfe zuerst die Internet-Adresse. Gib erst danach Daten ein.",
         "practice": {
           "question": "Du willst am Park-Automaten bezahlen. Auf dem Automaten klebt ein Aufkleber mit einem QR-Code. Darauf steht: Hier schnell bezahlen. Was machst du?",
           "schluessel": "Am Park-Automaten klebt ein QR-Code-Aufkleber. Was ist besser?",
@@ -9602,8 +9619,8 @@ const topics = [
             "pictogram": "pikto-shop"
           },
           {
-            "text": "Prüfe am besten mit einer vertrauten Person.",
-            "pictogram": "pikto-help"
+            "text": "Das kannst du selbst machen.",
+            "pictogram": "pikto-person"
           }
         ],
         "bullets": [

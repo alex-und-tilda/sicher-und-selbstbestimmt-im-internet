@@ -270,7 +270,8 @@ const REGEL_SAETZE = {
     "Stress und die Frage nach Bank-Daten: immer ein Trick.", // betrug
     "Stress und Geld sind ein Warnzeichen.", // whatsapp
     "Ich mache Stopp.", // hilfe
-    "Ich mache Stopp. Ich zeige es jemandem.", // instagram
+    "Ich mache Stopp. Ich antworte nicht sofort.", // instagram (E4, Bericht 110: vorher „Ich zeige es jemandem.“)
+    "Bei Stress mache ich Stopp. Ich antworte nicht sofort.", // instagram (Phase 4, Bericht 110: vorher Regel hilfe mit „zeige … einer Person“)
     /* Hilfe, Paket H2 (30.09.2026): Stopp nur bei Druck oder Angst – nicht bei
        jedem Problem (K2, neue Situation). */
     "Druck oder Angst? Dann mache ich erst Stopp." // hilfe
@@ -296,7 +297,7 @@ const REGEL_SAETZE = {
     "Private Daten gehören zu mir.", // datenschutz
     "Ich prüfe: Wer bekommt meine Daten?", // datenschutz (Paket 2)
     "Ich wähle aus: Wer sieht meine Daten?", // datenschutz (Paket 2)
-    "In Gruppen schreibe ich nur, was alle sehen dürfen.", // whatsapp
+    "Was dürfen alle in der Gruppe sehen? Ich schreibe nur das.", // whatsapp
     "Der KI schreibe ich nichts Privates.", // whatsapp
     "Ich zeige nicht alles in meinem Profil.", // facebook
     "Ich prüfe, wer meinen Beitrag sehen kann.", // facebook
@@ -409,12 +410,11 @@ const REGEL_SAETZE = {
     "Gemeinheit ist nicht meine Schuld. Ich hole Hilfe.", // facebook
     "Ich blockiere. Ich melde. Ich hole Hilfe.", // facebook
     "Ich hole Unterstützung bei verletzenden Kommentaren.", // instagram, tiktok
-    "Bei Stress zeige ich es einer Person, der ich vertraue.", // instagram
     "Fremdes Profil? Ich entscheide selbst. Ich darf Hilfe holen.", // instagram, tiktok
     "Fremden Profilen muss ich nicht antworten.", // instagram, tiktok
     "Ich bin mit meiner Angst nicht allein.", // youtube
     "Bei Angst stoppe ich das Video. Ich hole Hilfe.", // youtube
-    "Ich sage Nein. Ich zeige es jemandem.", // snapchat
+    "Ich schicke kein Bild. Ich darf Hilfe holen.", // snapchat (31.10.2026, Bericht 110: vorher „Ich sage Nein. Ich zeige es jemandem.“)
     "Ich lösche nicht sofort.", // hilfe
     "Ich zeige die Nachricht.", // hilfe
     "Meine Gefühle sind wichtig. Ich darf darüber sprechen.", // hilfe
@@ -443,7 +443,7 @@ const REGEL_SAETZE = {
   noetig: [
     "Bank-Daten gebe ich nicht für ein Gewinnspiel.", // datenschutz
     "Ich gebe nur nötige Daten weiter.", // datenschutz (Paket 2)
-    "Ich erlaube nur, was die App braucht.", // datenschutz (Paket 2)
+    "Was braucht die App? Ich erlaube nur das.", // datenschutz (Paket 2)
     "Ich teile meinen Standort nur so lange wie nötig.", // datenschutz (Paket 2)
     "Erst prüfen. Dann entscheide ich.", // datenschutz (Paket 2, Merksatz des Plans)
     "Fremden Nummern sage ich nichts über mich." // whatsapp (Bericht 62)

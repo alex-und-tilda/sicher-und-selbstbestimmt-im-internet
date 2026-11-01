@@ -622,7 +622,7 @@ const EXTRA_PRACTICE = {
         correctIndex: 1,
         auchMoeglich: [2],
         feedbackWrong: ["Bewertungen können gefälscht sein. Hier sind alle von gestern. Und alle haben 5 Sterne. Das ist ein Warnzeichen.", null, null],
-        feedbackAuch: [null, null, "Bei einem bekannten Shop weißt du: Die Ware kommt an."],
+        feedbackAuch: [null, null, "Bei einem bekannten Shop hast du schon gute Erfahrungen gemacht."],
         feedbackCorrect: "Alle Bewertungen sind von gestern. Das ist komisch. Betrüger können Bewertungen fälschen. Auch ein Impressum können sie fälschen. Achte auf mehrere Warnzeichen.",
         remember: "Ich kaufe bei Shops, die ich geprüft habe."
       },

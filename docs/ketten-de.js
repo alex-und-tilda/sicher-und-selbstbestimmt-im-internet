@@ -259,7 +259,7 @@ const KETTEN = {
         },
         hilfe: {
           leicht: "Du weißt es noch nicht genau? Dann schau: Was ist passiert? Was macht dir Sorgen?",
-          einfach: "Wenn du es noch nicht genau weißt, schaust du, was passiert ist und was dir Sorgen macht.",
+          einfach: "Du weißt es noch nicht genau? Dann schaust du, was passiert ist. Und du überlegst, was dir Sorgen macht.",
           standard: "Bist du dir noch nicht sicher, überleg: Was ist passiert, und was macht dir Sorgen?"
         }
       },
@@ -609,7 +609,7 @@ const KETTEN = {
         },
         hilfe: {
           leicht:   "Zeig den Beitrag einer vertrauten Person. Oder erzähl ihr davon.",
-          einfach:  "Zeig den Beitrag einer Person, der du vertraust, oder erzähl ihr, was passiert ist.",
+          einfach:  "Zeig den Beitrag einer vertrauten Person oder erzähl ihr, was passiert ist.",
           standard: "Zeig den Beitrag einer Person, der du vertraust, oder erzähl ihr, was passiert ist."
         }
       },
@@ -633,7 +633,7 @@ const KETTEN = {
   instagram: {
     titel: "Dein Plan für Instagram",
     lektion: "Was kann ich tun?",
-    merksatz: "Ich mache Stopp. Ich zeige es jemandem.",
+    merksatz: "Ich mache Stopp. Ich antworte nicht sofort.",
 
     einstieg: {
       leicht:   "Ein Profil oder eine Nachricht ist komisch. Dann hilft dir dein Plan. Wir gehen ihn zusammen durch. Schritt für Schritt.",
@@ -681,7 +681,7 @@ const KETTEN = {
         pictogram: "pikto-message",
         warum: {
           leicht:   "Eine andere Person sieht oft mehr. Zum Beispiel: Das Profil ist ganz neu.",
-          einfach:  "Eine andere Person bemerkt oft Dinge, die dir nicht auffallen – zum Beispiel, dass ein Profil ganz neu ist.",
+          einfach:  "Eine andere Person bemerkt oft Dinge, die dir nicht auffallen. Zum Beispiel sieht sie, dass ein Profil ganz neu ist.",
           standard: "Ein zweiter Blick erkennt Warnzeichen oft sofort, etwa ein ganz neues Profil oder auffällig wenige Kontakte."
         },
         hilfe: {
@@ -749,7 +749,7 @@ const KETTEN = {
         },
         hilfe: {
           leicht:   "Viele Aufrufe heißen nicht: Das ist sicher.",
-          einfach:  "Auch wenn ein Video sehr viele Aufrufe hat, heißt das nicht, dass es sicher ist.",
+          einfach:  "Auch ein Video mit sehr vielen Aufrufen ist nicht automatisch sicher.",
           standard: "Viele Aufrufe sagen nichts darüber aus, ob etwas ungefährlich ist."
         }
       },
@@ -821,7 +821,7 @@ const KETTEN = {
         pictogram: "pikto-photo",
         warum: {
           leicht:   "Du sendest ein Bild. Dann kannst du es nicht mehr zurückholen. Die andere Person kann es speichern.",
-          einfach:  "Ein Bild, das du einmal gesendet hast, kannst du nicht mehr zurückholen – auch wenn es danach gelöscht wird.",
+          einfach:  "Ein gesendetes Bild kannst du nicht mehr zurückholen. Das gilt auch, wenn Snapchat es danach löscht.",
           standard: "Ein einmal versendetes Bild lässt sich nicht mehr zurückholen, selbst wenn es scheinbar verschwindet. Es kann vorher gespeichert worden sein."
         },
         hilfe: {
@@ -889,7 +889,7 @@ const KETTEN = {
         },
         hilfe: {
           leicht:   "Viele Aufrufe heißen nicht: Das ist sicher.",
-          einfach:  "Auch wenn ein Video sehr viele Aufrufe hat, heißt das nicht, dass es sicher ist.",
+          einfach:  "Auch ein Video mit sehr vielen Aufrufen ist nicht automatisch sicher.",
           standard: "Viele Aufrufe sagen nichts darüber aus, ob etwas ungefährlich ist."
         }
       },
@@ -1007,9 +1007,9 @@ const KETTEN = {
           standard: "Bei Gesundheit und Geld haben Fehler ernste Folgen. Hier gehört eine fachkundige Person dazu."
         },
         hilfe: {
-          leicht:   "Bei Gesundheit frag deine Ärztin oder deinen Arzt. Bei Geld frag eine vertraute Person.",
-          einfach:  "Bei Fragen zur Gesundheit frag deine Ärztin oder deinen Arzt. Bei Geld frag eine Person, der du vertraust.",
-          standard: "Bei Gesundheitsfragen hilft deine Ärztin oder dein Arzt, bei Geldfragen eine Beratung oder eine Person deines Vertrauens."
+          leicht:   "Bei Gesundheit frag deinen Arzt oder deine Ärztin. Bei Geld frag eine vertraute Person.",
+          einfach:  "Bei Fragen zur Gesundheit frag deinen Arzt oder deine Ärztin. Bei Geld frag eine Person, der du vertraust.",
+          standard: "Bei Gesundheitsfragen hilft dein Arzt oder deine Ärztin, bei Geldfragen eine Beratung oder eine Person deines Vertrauens."
         }
       },
       {
@@ -1148,7 +1148,7 @@ const KETTEN = {
         },
         hilfe: {
           leicht:   "Du kennst den Shop nicht? Dann frag eine vertraute Person.",
-          einfach:  "Wenn du den Shop nicht kennst, frag eine Person, der du vertraust.",
+          einfach:  "Bei einem unbekannten Shop frag eine vertraute Person.",
           standard: "Kennst du den Shop nicht, frag vor dem Kauf eine Person, der du vertraust."
         }
       },
@@ -1176,7 +1176,7 @@ const KETTEN = {
         },
         hilfe: {
           leicht:   "Es gibt keine Rechnung? Dann frag zuerst eine vertraute Person.",
-          einfach:  "Wenn es keinen Kauf auf Rechnung gibt, frag zuerst eine Person, der du vertraust.",
+          einfach:  "Es gibt keinen Kauf auf Rechnung? Dann frag zuerst eine vertraute Person.",
           standard: "Gibt es keinen Kauf auf Rechnung, lass dich vor dem Bezahlen von einer Person deines Vertrauens beraten."
         }
       },

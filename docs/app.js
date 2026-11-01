@@ -319,6 +319,7 @@ let fontSizeStep = 0;
 function applyFontSize() {
   document.documentElement.style.fontSize = FONT_SIZES[fontSizeStep] + "px";
   if (typeof lernNavHoeheMessen === "function") lernNavHoeheMessen();
+  if (typeof tabbarHoeheMessen === "function") tabbarHoeheMessen();
 }
 
 function loadFontSize() {
@@ -787,18 +788,29 @@ const WIEDERHOLEN_TEXT = {
   titel: "Zeit zum Wiederholen",
   eins: "Du hast dieses Thema vor 2 Tagen oder früher gelernt. Du kannst jetzt 3 Fragen dazu üben.",
   mehr: "Du hast diese Themen vor 2 Tagen oder früher gelernt. Du kannst jetzt 3 Fragen zu einem Thema üben.",
-  knopf: "3 Fragen"
+  knopf: "3 Fragen",
+  /* E1/V3 (Entscheidung 31.10.2026, Bericht 110): Ohne Lernstand gibt es kein Angebot. Das sagt
+     jetzt die Frage nach dem Lernstand, damit niemand es nur zufällig herausfindet. */
+  einwilligung: "Dann kann ich dir nach ein paar Tagen Fragen zum Wiederholen anbieten."
 };
 let wiederholtSitzung = new Set();
 let zeitWiederholenThema = null;
 
+/* Entscheidung E1/V1 (31.10.2026, Bericht 110): Gezählt werden Kalendertage in der
+   Ortszeit des Geräts, nicht 48 Stunden. „Vor 2 Tagen“ heißt: vorgestern oder früher –
+   so passt die Zeit genau zum Text. Ohne Uhrzeit verglichen, deshalb ohne Sprung bei
+   Sommer- und Winterzeit. */
+function kalenderTageSeit(ts, jetzt) {
+  const a = new Date(ts), b = new Date(jetzt);
+  return Math.round((Date.UTC(b.getFullYear(), b.getMonth(), b.getDate()) - Date.UTC(a.getFullYear(), a.getMonth(), a.getDate())) / 864e5);
+}
+
 function getTopicsDueForReview() {
   if (!isProgressEnabled()) return [];
-  const REVIEW_AFTER_MS = ZEIT_WIEDERHOLEN.abTagen * 24 * 60 * 60 * 1000;
   const now = Date.now();
   return topics.filter(topic => {
     const ts = getTopicDoneTimestamp(topic.id);
-    return ts && (now - ts) >= REVIEW_AFTER_MS && !wiederholtSitzung.has(topic.id) && getQuizQuestions(topic).length;
+    return ts && kalenderTageSeit(ts, now) >= ZEIT_WIEDERHOLEN.abTagen && !wiederholtSitzung.has(topic.id) && getQuizQuestions(topic).length;
   });
 }
 
@@ -1000,7 +1012,7 @@ const GLOSSAR = {
   "zwei-faktor-anmeldung":  "Zwei-Faktor heißt: doppelt sichern. Du gibst dein Passwort ein. Dann noch eine Zahl von deinem Handy. Das ist sehr sicher.",
   "passkey":                "Ein Passkey ist eine Anmeldung ohne Passwort. Du bestätigst mit dem Finger oder mit deinem Gesicht. Das ist sehr sicher.",
   "fakeshop-finder":        "Der Fakeshop-Finder ist eine Prüf-Seite von der Verbraucher-Zentrale. Du gibst die Adresse vom Shop ein. Die Seite sagt dir: sicher oder Vorsicht.",
-  "quishing":               "Quishing ist Betrug mit falschen QR-Codes. Betrüger kleben falsche Codes über echte. Scanne nur Codes von vertrauten Menschen.",
+  "quishing":               "Quishing ist Betrug mit falschen QR-Codes. Betrüger kleben falsche Codes über echte. Prüfe erst: Woher kommt der Code?",
   /* Beta-Version (06.10.2026): Kopf und Fußzeile nennen die Plattform
      „Beta-Version“. Leichte Sprache, ein Wort für beides (§5). */
   "beta-version":           "Beta 2 ist die zweite Test-Version dieser Lern-Plattform. Eine Beta-Version ist eine Test-Version. Das Programm ist noch nicht ganz fertig. Manches ändert sich noch. Manches klappt vielleicht noch nicht. Du kannst uns helfen. Sag uns: Was ist gut? Was ist schwer?",
@@ -3212,7 +3224,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "stranger",
         "saetze": {
           "leicht": "Eine fremde Nummer schreibt dir.",
-          "einfach": "Wenn dir eine fremde Nummer schreibt, weißt du nicht, wer wirklich dahintersteckt.",
+          "einfach": "Eine fremde Nummer schreibt dir? Dann weißt du nicht, wer wirklich dahintersteckt.",
           "standard": "Wenn dir eine unbekannte Nummer schreibt, weißt du nicht, wer wirklich dahintersteckt. Antworte nicht vorschnell, gib keine persönlichen Daten weiter und überweise kein Geld. Im Zweifel ignorierst oder blockierst du den Kontakt."
         }
       },
@@ -3252,7 +3264,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "stop",
         "saetze": {
           "leicht": "Du tippst nicht drauf.",
-          "einfach": "Tippe deshalb nicht darauf. Wenn du wissen willst, ob die Nachricht stimmt, öffnest du die App selbst oder rufst eine Nummer an, die du schon kennst."
+          "einfach": "Tippe deshalb nicht darauf. Du willst wissen, ob die Nachricht stimmt? Dann öffnest du die App selbst oder rufst eine Nummer an, die du schon kennst."
         }
       }
     ],
@@ -3556,7 +3568,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "anruf",
         "saetze": {
           "leicht": "Die Nachricht kommt von einem Freund? Dann rufst du ihn an.",
-          "einfach": "Wenn die Nachricht von einem Freund kommt, rufst du ihn an und fragst, ob er das wirklich geschrieben hat."
+          "einfach": "Kommt die Nachricht von einem Freund? Dann rufst du ihn an und fragst, ob er das wirklich geschrieben hat."
         }
       }
     ]
@@ -3613,7 +3625,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "location",
         "saetze": {
           "leicht": "Der Standort zeigt, wo du bist.",
-          "einfach": "Wenn du deinen Standort teilst, sehen andere, wo du gerade bist.",
+          "einfach": "Durch deinen geteilten Standort sehen andere, wo du gerade bist.",
           "standard": "Wenn du deinen Standort teilst, sehen andere, wo du dich aufhältst. Das muss nicht jeder wissen und kann ausgenutzt werden. Gib deinen Standort nur bewusst und nur an Menschen weiter, denen du vertraust."
         }
       }
@@ -3684,7 +3696,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Du machst Stopp und antwortest nicht sofort.",
           "einfach": "Wenn ein Profil oder eine Nachricht komisch wirkt, mach Stopp und antworte nicht sofort.",
-          "standard": "Wenn dir ein Profil oder eine Nachricht merkwürdig vorkommt, halte inne: Antworte nicht sofort und zeige es einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter."
+          "standard": "Wenn dir ein Profil oder eine Nachricht merkwürdig vorkommt, halte inne: Antworte nicht sofort. Wie du danach reagierst, entscheidest du selbst. Wenn du möchtest, zeigst du es vorher einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter."
         }
       },
       {
@@ -3772,7 +3784,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "friend",
         "saetze": {
           "leicht": "Oder du fragst eine vertraute Person.",
-          "einfach": "Schau nach, was ein anderer Kanal dazu sagt, oder frag eine Person, der du vertraust."
+          "einfach": "Schau nach, was ein anderer Kanal dazu sagt. Oder frag eine vertraute Person."
         }
       },
       {
@@ -4086,7 +4098,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "warning",
         "saetze": {
           "leicht": "Ein Trend sieht gefährlich aus.",
-          "einfach": "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun.",
+          "einfach": "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit. Das gilt auch, wenn viele andere mitmachen.",
           "standard": "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun. Deine Sicherheit ist wichtiger als Likes."
         }
       }
@@ -4530,7 +4542,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "saetze": {
           "leicht": "Bei Gesundheit und Geld ist Vorsicht wichtig.",
           "einfach": "Bei Gesundheit und Geld ist Vorsicht wichtig, denn die KI kennt deine Situation nicht und kann falsche Tipps geben.",
-          "standard": "Bei Gesundheit und Geld ist besondere Vorsicht geboten: Die KI kennt deine persönliche Situation nicht und kann falsche oder gefährliche Ratschläge geben. Hol dir bei solchen Themen immer zusätzlich den Rat eines Menschen – etwa einer Ärztin, eines Arztes oder einer Vertrauensperson."
+          "standard": "Bei Gesundheit und Geld ist besondere Vorsicht geboten: Die KI kennt deine persönliche Situation nicht und kann falsche oder gefährliche Ratschläge geben. Hol dir bei solchen Themen immer zusätzlich den Rat eines Menschen – etwa eines Arztes, einer Ärztin oder einer Vertrauensperson."
         }
       },
       {
@@ -4544,15 +4556,15 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
       {
         "piktogramm": "photo",
         "saetze": {
-          "leicht": "KI kann Bilder machen, die echt aussehen.",
+          "leicht": "KI kann Bilder machen. Die Bilder sehen echt aus.",
           "einfach": "KI kann Bilder erstellen, die echt aussehen, und sogar Stimmen nachmachen.",
-          "standard": "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Du musst das nicht allein einschätzen – bei Unsicherheit lohnt sich die Rückfrage bei einer Person, der du vertraust. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“."
+          "standard": "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Bist du unsicher, prüfst du selbst nach – zum Beispiel mit einem Rückruf bei der echten Person über eine Nummer, die du schon kennst. Auch eine Rückfrage bei einer Person, der du vertraust, ist ein guter Weg. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“."
         }
       },
       {
         "piktogramm": "friend",
         "saetze": {
-          "einfach": "Wenn du unsicher bist, frag eine Person, der du vertraust."
+          "einfach": "Du kannst auch eine vertraute Person fragen."
         }
       }
     ],
@@ -4648,7 +4660,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
       {
         "piktogramm": "photo",
         "saetze": {
-          "leicht": "KI kann Bilder machen, die echt aussehen.",
+          "leicht": "KI kann Bilder machen. Die Bilder sehen echt aus.",
           "einfach": "KI kann Bilder erstellen, die echt aussehen.",
           "standard": "KI kann Bilder erzeugen, die täuschend echt wirken. Manchmal verraten kleine Fehler die Fälschung – etwa an Händen, Schrift oder Schatten. Verlass dich aber nicht darauf: Viele KI-Bilder sind inzwischen fehlerfrei."
         }
@@ -4782,7 +4794,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "message",
         "saetze": {
           "leicht": "Ein Freund hat sie dir geschickt? Du kannst ihm schreiben: Die Nachricht stimmt nicht.",
-          "einfach": "Du löschst sie. Wenn ein Freund sie dir geschickt hat, kannst du ihm schreiben, dass sie nicht stimmt. Du kannst auch mit jemandem darüber sprechen."
+          "einfach": "Du löschst sie. Hat dir ein Freund die Nachricht geschickt? Dann kannst du ihm schreiben, dass sie nicht stimmt. Du kannst auch mit jemandem darüber sprechen."
         }
       }
     ]
@@ -5659,6 +5671,28 @@ function lernNavHoeheMessen() {
   if (stil.getPropertyValue("--lern-nav-hoehe") !== hoehe) stil.setProperty("--lern-nav-hoehe", hoehe);
 }
 
+/* Phase 4 B (Bericht 110): Bricht die Beschriftung im Menü unten um (große Schrift,
+   schmales Handy, vergrößerte Abstände) oder rutscht ein Punkt in eine zweite Reihe,
+   wird die Leiste höher als die freigehaltenen 4.7rem. Dann lag das Ende der Seite unter
+   dem Menü. Gemessen wird die natürliche Höhe (vom oberen Rand der ersten bis zum unteren
+   Rand der letzten Reihe, plus Innenabstand), nicht die Leiste selbst – deren Mindesthöhe
+   hängt an derselben Größe. Kleiner als 4.7rem wird der Platz nie. */
+function tabbarHoeheMessen() {
+  const bar = document.querySelector(".main-tabbar");
+  if (!bar) return;
+  const stil = document.documentElement.style;
+  const s = getComputedStyle(bar);
+  const punkte = Array.from(bar.querySelectorAll(".tab-item")).map(p => p.getBoundingClientRect());
+  if (!punkte.length || s.display === "none") return;
+  const natuerlich = Math.ceil(Math.max(...punkte.map(r => r.bottom)) - Math.min(...punkte.map(r => r.top))
+    + parseFloat(s.paddingTop) + parseFloat(s.paddingBottom) + parseFloat(s.borderTopWidth));
+  const basis = 4.7 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const wert = natuerlich > basis + 1 ? natuerlich + "px" : "";
+  if (stil.getPropertyValue("--tabbar-h") !== wert) {
+    if (wert) stil.setProperty("--tabbar-h", wert); else stil.removeProperty("--tabbar-h");
+  }
+}
+
 function leisteSpiegeln() {
   const nav = document.querySelector(".nav");
   if (!nav || !content || typeof content.querySelectorAll !== "function") return;
@@ -5740,8 +5774,11 @@ if (typeof MutationObserver !== "undefined" && content && content.nodeType === 1
 if (typeof ResizeObserver !== "undefined") {
   const nav = document.querySelector(".nav");
   if (nav) new ResizeObserver(lernNavHoeheMessen).observe(nav);
+  const bar = document.querySelector(".main-tabbar");
+  if (bar) bar.querySelectorAll(".tab-item").forEach(p => new ResizeObserver(tabbarHoeheMessen).observe(p));
 }
 window.addEventListener("resize", lernNavHoeheMessen);
+window.addEventListener("resize", tabbarHoeheMessen);
 
 /* Die Texte der Knöpfe unten, Hauptknopf zuerst – für die Ansage am Ende des Vorlesens.
    Ohne gespiegelten Hauptknopf ist der feste Knopf „Weiter“ (#nextButton) der
@@ -6942,7 +6979,7 @@ function pauseCursorPruefen(ctx) {
   if (p.auswahl === "zusatz") cursor.auswahl = "zusatz";
   if (p.art === "wiederholen") {
     if (!Number.isInteger(p.gesamt) || p.gesamt < 1 || p.gesamt > 500 || p.index >= p.gesamt
-      || !["Das große Quiz", "Wiederholen", LERNWEG_TEXT.nochmalUeben].includes(p.titel)) return null;
+      || !["Das große Quiz", "Wiederholen", LERNWEG_TEXT.nochmalUeben, WIEDERHOLEN_TEXT.titel].includes(p.titel)) return null;
     cursor.gesamt = p.gesamt; cursor.titel = p.titel;
   }
   return { topicId: topic.id, mode: ctx.mode, pause: cursor };
@@ -7136,8 +7173,16 @@ function pauseFortsetzen(raw) {
   } else { antwortFolge = { schluessel: null, mitFehler: false }; versucheJeFrage[p.frage] = 0; }
   if (gross) {
     bigQuizTitle = p.titel; bigQuizIndex = p.index;
+    /* Phase 4 D (Bericht 110): „Zeit zum Wiederholen“ bleibt beim Weitermachen dieselbe
+       Runde – mit Thema (für „Noch einmal üben“ und das Ausblenden des Angebots) und, ohne
+       gespeicherten Stand, mit Fragen aus diesem Thema statt aus allen Themen. */
+    zeitWiederholenThema = p.titel === WIEDERHOLEN_TEXT.titel ? ctx.topicId : null;
     if (s) bigQuizQuestions = s.pool.map(e => e && quizPoolEintrag(findeAufgabe(e.topicId, e.frage), getTopicById(e.topicId)));
-    else {
+    else if (zeitWiederholenThema) {
+      const rest = zeitWiederholenFragen(topic).filter(x => aufgabeSchluessel(x) !== p.frage);
+      bigQuizQuestions = Array(p.index).fill(null).concat(quizPoolEintrag(q, topic),
+        rest.slice(0, p.gesamt - p.index - 1).map(x => quizPoolEintrag(x, topic)));
+    } else {
       const rest = buildBigQuizPool(topics, p.gesamt).filter(x => aufgabeSchluessel(x.quelle || x) !== p.frage);
       bigQuizQuestions = Array(p.index).fill(null).concat(quizPoolEintrag(q, topic), rest.slice(0, p.gesamt - p.index - 1));
     }
@@ -7821,17 +7866,15 @@ function renderMyPath() {
        </p>`
     : `<p class="topic-grid-hint">Noch nichts. Das ist in Ordnung. Fang mit einem Thema an.</p>`;
 
-  /* Wiederholungs-Erinnerung (verteiltes Lernen) */
+  /* Wiederholungs-Erinnerung (verteiltes Lernen). Phase 4 C (Bericht 110): ein freiwilliges
+     Angebot, keine Warnung – darum gleicher ruhiger Aufbau wie „Da bist du gerade“
+     (Überschrift, ein Satz, Knöpfe), ohne Warnfarbe und ohne Rahmen um die Knöpfe;
+     für Vorleseprogramme heißt der Bereich wie seine Überschrift (vorher „Wiederholung fällig“). */
   const reviewTopics = getTopicsDueForReview();
   const reviewSection = reviewTopics.length > 0
-    ? `<div class="review-section" role="region" aria-label="Wiederholung fällig">
-         <div class="review-header">
-           <span class="review-icon" aria-hidden="true">${pictoHtml("wiederholen")}</span>
-           <div>
-             <p class="review-title">${escapeHtml(WIEDERHOLEN_TEXT.titel)}</p>
-             <p class="review-sub">${escapeHtml(reviewTopics.length === 1 ? WIEDERHOLEN_TEXT.eins : WIEDERHOLEN_TEXT.mehr)}</p>
-           </div>
-         </div>
+    ? `<section class="path-block review-section" aria-label="${escapeHtml(WIEDERHOLEN_TEXT.titel)}">
+         <h3 class="topic-grid-title review-title">${escapeHtml(WIEDERHOLEN_TEXT.titel)}</h3>
+         <p class="topic-grid-hint review-sub">${escapeHtml(reviewTopics.length === 1 ? WIEDERHOLEN_TEXT.eins : WIEDERHOLEN_TEXT.mehr)}</p>
          <div class="review-chips">
            ${reviewTopics.map(t => `
              <button type="button" class="review-chip" style="${getTopicColorStyle(t.id)}" onclick="startZeitZumWiederholen('${escapeHtml(t.id)}')">
@@ -7839,7 +7882,7 @@ function renderMyPath() {
                <span>${escapeHtml(t.title)} – ${escapeHtml(WIEDERHOLEN_TEXT.knopf)}</span>
              </button>`).join("")}
          </div>
-       </div>`
+       </section>`
     : "";
 
   /* Freiwillige Lernstand-Speicherung (KDG: nur lokal, ohne Namen).
@@ -7866,6 +7909,7 @@ function renderMyPath() {
     progressConsent = `
       <div class="progress-consent">
         <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
+        <p class="progress-consent-note">${escapeHtml(WIEDERHOLEN_TEXT.einwilligung)}</p>
         <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
         <p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>
         <button type="button" class="utility-button" onclick="toggleProgressSaving()">Ja, Lernstand merken</button>
@@ -8197,7 +8241,7 @@ function renderHelpPage() {
           <ul>
             <li class="bedien-pikto">${pictoHtml("friend")}<span>Eine Person, der du vertraust.</span></li>
             <li>Eine Person, die dich unterstützt.</li>
-            <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
+            <li>Einen Digital-Begleiter oder eine Digital-Begleiterin.</li>
             <li>Jemanden im Wohnbereich oder Dienst.</li>
           </ul>
         </details>
@@ -8795,7 +8839,7 @@ function buildSupportHelpContent() {
             <ul>
               <li class="bedien-pikto">${pictoHtml("friend")}<span>Eine Person, der du vertraust.</span></li>
               <li>Eine Person, die dich unterstützt.</li>
-              <li>Eine Digital-Begleiterin oder einen Digital-Begleiter.</li>
+              <li>Einen Digital-Begleiter oder eine Digital-Begleiterin.</li>
               <li>Jemanden im Wohnbereich oder Dienst.</li>
             </ul>
           </div>
@@ -9254,6 +9298,7 @@ function buildProgress(done, total, opts) {
     const saveOffer = !isProgressEnabled() ? `
     <div class="progress-consent">
       <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
+      <p class="progress-consent-note">${escapeHtml(WIEDERHOLEN_TEXT.einwilligung)}</p>
       <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
         <p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>
       <button type="button" class="utility-button" onclick="enableProgressInline(this)">Ja, Lernstand merken</button>
@@ -13375,7 +13420,9 @@ function startZeitZumWiederholen(topicId) {
   const liste = topic ? zeitWiederholenFragen(topic) : [];
   if (!liste.length) return renderMyPath();
   pauseRundeStarten();
-  bigQuizTitle = "Wiederholen";
+  /* Phase 4 D (Bericht 110): eigener Titel, gleich wie das Angebot. Daran erkennt
+     auch das Weitermachen nach „Beenden“ diese Runde (pauseMerken). */
+  bigQuizTitle = WIEDERHOLEN_TEXT.titel;
   bigQuizQuestions = liste.map(q => quizPoolEintrag(q, topic));
   bigQuizIndex = 0;
   bigQuizScore = 0;

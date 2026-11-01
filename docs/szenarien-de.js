@@ -2369,7 +2369,7 @@ const UEBUNGSHANDY_FASSUNGEN = {
             "feedbackCorrect": "Du schaltest die Anzeige für andere aus. Dann zeigt die Karte ihnen deinen Standort nicht mehr.",
             "feedbackWrong": "Alle Freunde sehen deinen Ort, obwohl du das nicht möchtest. Wähle niemanden oder begrenze die Anzeige auf bestimmte Freunde.",
             "remember": "Ich entscheide, wer meinen Standort sehen darf.",
-            "feedbackAuch": "Du kannst ausgewählte Freunde zulassen. Prüfe genau, wer in der Auswahl steht und ob du mit diesen Personen teilen möchtest."
+            "feedbackAuch": "Du kannst ausgewählte Freunde zulassen. Prüfe genau, wer in der Auswahl steht. Überlege dann, ob du mit diesen Personen teilen möchtest."
           },
           "standard": {
             "question": "Dein Standort soll nicht für alle Freunde sichtbar sein. Was wählst du?",

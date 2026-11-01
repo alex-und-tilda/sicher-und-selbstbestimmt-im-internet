@@ -592,7 +592,7 @@ const CONTENT_VERSIONS = {
     "Fremde Nummer": {
       einfach: {
         text: [
-          { text: "Wenn dir eine fremde Nummer schreibt, weißt du nicht, wer wirklich dahintersteckt." },
+          { text: "Eine fremde Nummer schreibt dir? Dann weißt du nicht, wer wirklich dahintersteckt." },
           { text: "Antworte deshalb nicht sofort und gib keine persönlichen Daten weiter." },
           { text: "Im Zweifel kannst du den Kontakt einfach blockieren." }
         ],
@@ -724,7 +724,7 @@ const CONTENT_VERSIONS = {
           { text: "Prüfe in Ruhe, was die Nachricht von dir möchte." }
         ],
         bullets: ["Stopp machen.", "Nicht sofort antworten.", "Den Link nicht öffnen.", "Den Hilfe-Knopf nutzen."],
-        warning: "Auch wenn eine Nachricht von einem bekannten Namen kommt, kann sie gefälscht sein. Ruf die Person lieber selbst über die Nummer an, die du schon kennst, bevor du reagierst.",
+        warning: "Auch wenn eine Nachricht von einem bekannten Namen kommt, kann sie gefälscht sein. Bevor du reagierst, ruf die Person lieber selbst an. Nimm dafür die Nummer, die du schon kennst.",
         success: "Wenn du deinem Plan folgst, lässt du dich nicht überrumpeln und bleibst sicher."
       },
       standard: {
@@ -914,7 +914,7 @@ const CONTENT_VERSIONS = {
     },
     "Standort": {
       einfach: { text: [
-        { text: "Wenn du deinen Standort teilst, sehen andere, wo du gerade bist." },
+        { text: "Durch deinen geteilten Standort sehen andere, wo du gerade bist." },
         { text: "Das muss nicht jeder wissen und kann ausgenutzt werden." },
         { text: "Teile deinen Standort deshalb nur bewusst und nur mit Menschen, denen du vertraust." }
       ] },
@@ -923,7 +923,7 @@ const CONTENT_VERSIONS = {
       ] }
     },
     "Private Nachrichten": {
-      einfach: { examples: ["„Du bist so schön. Schick mir doch noch mehr Fotos von dir.“", "Eine fremde Person fragt, wo du wohnst und ob du gerade allein zu Hause bist."], warning: "Wenn dir eine fremde Person schreibt und nach privaten Fotos oder Daten fragt, ist das ein Warnzeichen. Du musst nicht antworten und kannst die Person blockieren.", text: [
+      einfach: { examples: ["„Du bist so schön. Schick mir doch noch mehr Fotos von dir.“", "Eine fremde Person fragt, wo du wohnst. Sie will auch wissen, ob du gerade allein zu Hause bist."], warning: "Wenn dir eine fremde Person schreibt und nach privaten Fotos oder Daten fragt, ist das ein Warnzeichen. Du musst nicht antworten und kannst die Person blockieren.", text: [
         { text: "Wenn dir eine fremde Person privat schreibt und nach Fotos oder Daten fragt, ist das ein Warnzeichen." },
         { text: "Geh darauf nicht ein und schick keine privaten Bilder." },
         { text: "Im Zweifel blockierst du den Kontakt." }
@@ -951,7 +951,7 @@ const CONTENT_VERSIONS = {
     "Bearbeitete Bilder": {
       einfach: { text: [
         { text: "Auf Instagram wirkt vieles perfekt, doch viele Bilder sind bearbeitet oder mit Filtern verändert." },
-        { text: "Mach dir bewusst, dass nicht alles echt ist und du dich damit nicht vergleichen musst." }
+        { text: "Mach dir bewusst, dass nicht alles echt ist. Du musst dich damit nicht vergleichen." }
       ] },
       standard: { text: [
         { text: "Vieles auf Instagram wirkt makellos – doch zahlreiche Bilder sind nachbearbeitet oder mit Filtern verändert. Mach dir bewusst: Das Gezeigte entspricht oft nicht der Wirklichkeit, und du musst dich damit nicht vergleichen." }
@@ -961,7 +961,7 @@ const CONTENT_VERSIONS = {
       einfach: {
         text: [
           { text: "Wenn ein Profil oder eine Nachricht komisch wirkt, mach Stopp und antworte nicht sofort." },
-          { text: "Zeig es am besten einer Person, der du vertraust." }
+          { text: "Danach entscheidest du selbst, was du tust. Wenn du möchtest, zeigst du es vorher einer Person, der du vertraust." }
         ],
         bullets: ["Stopp machen.", "Nicht sofort antworten.", "Das Profil oder die Nachricht zeigen.", "Den Hilfe-Knopf nutzen."],
         warning: "Ein fremdes Profil kann eine falsche Person sein, auch wenn die Bilder echt aussehen. Ein schönes Bild ist kein Beweis für die wahre Identität.",
@@ -969,7 +969,7 @@ const CONTENT_VERSIONS = {
       },
       standard: {
         text: [
-          { text: "Wenn dir ein Profil oder eine Nachricht merkwürdig vorkommt, halte inne: Antworte nicht sofort und zeige es einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
+          { text: "Wenn dir ein Profil oder eine Nachricht merkwürdig vorkommt, halte inne: Antworte nicht sofort. Wie du danach reagierst, entscheidest du selbst. Wenn du möchtest, zeigst du es vorher einer Person, der du vertraust. Bei Bedarf hilft dir auch der Hilfe-Knopf weiter." }
         ],
         bullets: [],
         warning: "Profile lassen sich leicht fälschen – ansprechende Bilder sagen nichts darüber aus, wer wirklich dahintersteckt. Skepsis gegenüber unbekannten Profilen ist deshalb immer angebracht.",
@@ -1050,7 +1050,7 @@ const CONTENT_VERSIONS = {
       einfach: {
         text: [
           { text: "Manche Videos sind mit KI gemacht und sehen echt aus, sind aber gefälscht." },
-          { text: "Sogar bekannte Menschen werden so täuschend echt nachgemacht." },
+          { text: "So kann man sogar bekannte Menschen täuschend echt nachmachen." },
           { text: "Mehr dazu lernst du im Thema „Fake News und KI-Fakes“." }
         ],
         remember: "Auch Videos können gefälscht sein."
@@ -1155,7 +1155,7 @@ const CONTENT_VERSIONS = {
           { text: "Zeig die Nachricht einer Person, der du vertraust, und hol dir Unterstützung." }
         ],
         bullets: ["Nein sagen.", "Kein Bild senden.", "Die Nachricht zeigen.", "Unterstützung holen."],
-        warning: "Ein Bild, das du einmal gesendet hast, kannst du nicht mehr zurückholen – auch wenn es danach gelöscht wird.",
+        warning: "Ein gesendetes Bild kannst du nicht mehr zurückholen. Das gilt auch, wenn Snapchat es danach löscht.",
         success: "Nein zu sagen ist immer richtig, auch wenn jemand Stress macht."
       },
       standard: {
@@ -1204,7 +1204,7 @@ const CONTENT_VERSIONS = {
     "Gefährliche Trends erkennen": {
       einfach: { examples: ["Bei einem Trend sollen alle so lange wie möglich die Luft anhalten. Das ist gefährlich für deine Gesundheit.", "Bei einem Trend essen alle sehr scharfe Chips. Das kann weh tun und dich krank machen."], warning: "Manche Trends sehen lustig aus, können aber gefährlich sein und weh tun. Mach bei solchen Trends nicht mit – deine Gesundheit ist wichtiger.",
         text: [
-          { text: "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit – egal, wie viele andere es tun." },
+          { text: "Wenn ein Trend gefährlich aussieht oder wehtun könnte, mach nicht mit. Das gilt auch, wenn viele andere mitmachen." },
           { text: "Deine Sicherheit ist wichtiger als Likes." }
         ],
         remember: "Ich muss nicht bei jedem Trend mitmachen."
@@ -1474,10 +1474,10 @@ const CONTENT_VERSIONS = {
             "text": "Es gibt verschiedene Arten von Hilfe, und du suchst dir die passende aus."
           },
           {
-            "text": "Wenn du eine Frage zum Handy hast, fragst du eine Person, die sich mit Handys auskennt."
+            "text": "Bei einer Frage zum Handy fragst du eine Person, die sich mit Handys auskennt."
           },
           {
-            "text": "Wenn dir etwas Druck oder Angst macht, sprichst du mit einer Person, der du vertraust."
+            "text": "Wenn dir etwas Druck oder Angst macht, sprichst du mit einer vertrauten Person."
           },
           {
             "text": "Es gibt auch Beratungsstellen, bei denen du anrufen oder schreiben kannst."
@@ -1712,11 +1712,11 @@ const CONTENT_VERSIONS = {
           { text: "Bei Gesundheit und Geld ist Vorsicht wichtig, denn die KI kennt deine Situation nicht und kann falsche Tipps geben." },
           { text: "Frag bei solchen Themen deshalb immer auch einen Menschen." }
         ],
-        examples: ["Du bist krank und fragst die KI. Besser: Du fragst auch eine Ärztin oder einen Arzt.", "Du willst Geld ausgeben und die KI rät dir etwas. Besser: Du fragst eine Person, der du vertraust."]
+        examples: ["Du bist krank und fragst die KI. Besser: Du fragst auch einen Arzt oder eine Ärztin.", "Du willst Geld ausgeben und die KI rät dir etwas. Besser: Du fragst eine Person, der du vertraust."]
       },
       standard: {
-        text: [{ text: "Bei Gesundheit und Geld ist besondere Vorsicht geboten: Die KI kennt deine persönliche Situation nicht und kann falsche oder gefährliche Ratschläge geben. Hol dir bei solchen Themen immer zusätzlich den Rat eines Menschen – etwa einer Ärztin, eines Arztes oder einer Vertrauensperson." }],
-        examples: ["Du fühlst dich krank und fragst eine KI. Ihre Antwort ersetzt keine Ärztin und keinen Arzt.", "Eine KI empfiehlt dir eine Geldanlage. Bevor du etwas bezahlst oder unterschreibst, sprich mit einer Person, der du vertraust."]
+        text: [{ text: "Bei Gesundheit und Geld ist besondere Vorsicht geboten: Die KI kennt deine persönliche Situation nicht und kann falsche oder gefährliche Ratschläge geben. Hol dir bei solchen Themen immer zusätzlich den Rat eines Menschen – etwa eines Arztes, einer Ärztin oder einer Vertrauensperson." }],
+        examples: ["Du fühlst dich krank und fragst eine KI. Ihre Antwort ersetzt keinen Arzt und keine Ärztin.", "Eine KI empfiehlt dir eine Geldanlage. Bevor du etwas bezahlst oder unterschreibst, sprich mit einer Person, der du vertraust."]
       }
     },
     "KI kann Bilder und Stimmen fälschen": {
@@ -1724,13 +1724,15 @@ const CONTENT_VERSIONS = {
         text: [
           { text: "KI kann Bilder erstellen, die echt aussehen, und sogar Stimmen nachmachen." },
           { text: "Betrüger nutzen das manchmal aus." },
-          { text: "Wenn du unsicher bist, frag eine Person, der du vertraust." },
+          { text: "Wenn du unsicher bist, prüfst du selbst nach." },
+          { text: "Ruf die echte Person über eine Nummer an, die du schon kennst." },
+          { text: "Du kannst auch eine vertraute Person fragen." },
           { text: "Mehr dazu lernst du im Thema „Fake News und KI-Fakes“." }
         ],
-        warning: "Nicht alles, was echt aussieht, ist echt. Nachfragen ist erlaubt und klug."
+        warning: "Ein Bild kann wie ein echtes Foto aussehen, auch wenn eine KI es gemacht hat. Auch Stimmen kann eine KI nachmachen. Nachfragen ist erlaubt und klug."
       },
       standard: {
-        text: [{ text: "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Du musst das nicht allein einschätzen – bei Unsicherheit lohnt sich die Rückfrage bei einer Person, der du vertraust. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“." }],
+        text: [{ text: "Mit KI lassen sich Bilder erzeugen und Stimmen nachahmen, die täuschend echt wirken. Betrüger nutzen das aus, etwa für gefälschte Anrufe oder Sprachnachrichten. Bist du unsicher, prüfst du selbst nach – zum Beispiel mit einem Rückruf bei der echten Person über eine Nummer, die du schon kennst. Auch eine Rückfrage bei einer Person, der du vertraust, ist ein guter Weg. Mehr dazu erfährst du im Thema „Fake News und KI-Fakes“." }],
         warning: "Echt wirkende Bilder und Stimmen können mit KI gefälscht sein. Nachfragen ist erlaubt und klug."
       }
     },
@@ -1902,7 +1904,7 @@ const CONTENT_VERSIONS = {
     "Was kann ich tun?": {
       einfach: {
         text: [
-          { text: "Betrug kommt fast immer überraschend – als Nachricht, die dir Stress macht, oder als Anruf, der Angst macht." },
+          { text: "Betrug kommt fast immer überraschend. Oft ist es eine Nachricht, die dir Stress macht. Oder ein Anruf, der dir Angst macht." },
           { text: "Ein fester Plan hilft dir, ruhig zu bleiben. Denn wer ruhig bleibt, macht keinen Fehler." }
         ],
         bullets: [
@@ -1935,11 +1937,11 @@ const CONTENT_VERSIONS = {
           { text: "Betrüger überkleben echte QR-Codes mit falschen. Zum Beispiel an Park-Automaten oder in Briefen." },
           { text: "Klebt ein Code als Aufkleber auf einem Automaten, scannst du ihn besser nicht. Zahle dann mit Münzen oder in deiner eigenen Park-App. Bei einem Brief prüfst du zuerst, wer ihn geschickt hat." }
         ],
-        warning: "Ein falscher QR-Code kann auf eine Betrugs-Seite führen. Erst prüfen, dann scannen."
+        warning: "Ein falscher QR-Code kann auf eine Betrugs-Seite führen. Prüfe deshalb die Internet-Adresse, bevor du dort etwas eingibst."
       },
       standard: {
         text: [{ text: "QR-Codes zeigen erst nach dem Scannen, wohin sie führen. Kriminelle nutzen das aus und überkleben echte Codes mit gefälschten – etwa an Parkautomaten, in Briefen oder auf falschen Paket-Benachrichtigungen (sogenanntes Quishing). Bei überklebten Codes an Automaten zahlst du besser bar oder über die offizielle App; bei anderen Codes prüfst du die geöffnete Internet-Adresse, bevor du dort etwas eingibst." }],
-        warning: "Quishing nimmt stark zu. Prüfe die Ziel-Adresse eines QR-Codes, bevor du Daten eingibst."
+        warning: "Ein gefälschter QR-Code kann auf eine Betrugsseite führen. Prüfe deshalb die Ziel-Adresse, bevor du dort Daten eingibst."
       }
     },
     "Start": {
@@ -2060,7 +2062,7 @@ const CONTENT_VERSIONS = {
         ],
         "warning": "Wer dich noch nie getroffen hat und um Geld bittet, ist mit hoher Wahrscheinlichkeit ein Betrüger. Überweise nichts und hol dir vorher eine zweite Meinung bei einer Vertrauensperson.",
         "success": "Liebes-Betrug trifft viele Menschen, auch vorsichtige. Scham ist unangebracht – schnelles Handeln zählt.",
-        "remember": "Kein Geld an Menschen, die ich nur aus dem Internet kenne – und vorher mit einer Vertrauensperson sprechen."
+        "remember": "Ich überweise kein Geld an Menschen, die ich nur aus dem Internet kenne."
       }
     },
     "Schockanrufe": {
@@ -2494,7 +2496,7 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Ein Link ist eine Adresse zu einer Internet-Seite. Meistens ist er blau." },
           { text: "Fremde Links können gefährlich sein, weil sie auf falsche Seiten führen." },
-          { text: "Tippe deshalb nicht darauf. Wenn du wissen willst, ob die Nachricht stimmt, öffnest du die App selbst oder rufst eine Nummer an, die du schon kennst." }
+          { text: "Tippe deshalb nicht darauf. Du willst wissen, ob die Nachricht stimmt? Dann öffnest du die App selbst oder rufst eine Nummer an, die du schon kennst." }
         ],
         remember: "Auf fremde Links tippst du nicht.",
         vorbild: ["Alex bekommt von einer Nummer, die er nicht kennt, eine Nachricht mit einem Link.", "Er tippt nicht auf den Link und löscht die Nachricht."]
@@ -2561,7 +2563,7 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Manchmal bekommst du eine komische Nachricht, zum Beispiel mit einer Frage nach Geld oder mit einem Link." },
           { text: "Tippe nicht auf den Link und schick kein Geld." },
-          { text: "Wenn die Nachricht von einem Freund kommt, rufst du ihn an und fragst, ob er das wirklich geschrieben hat." }
+          { text: "Kommt die Nachricht von einem Freund? Dann rufst du ihn an und fragst, ob er das wirklich geschrieben hat." }
         ],
         remember: "Komische Nachrichten tippe ich nicht an.",
         vorbild: ["Jemand schreibt Alex, dass er schnell Geld braucht, und schickt einen Link.", "Alex tippt nicht auf den Link und schickt kein Geld. Er meldet die Nachricht bei Facebook."]
@@ -2629,7 +2631,7 @@ const KURZ_VERSIONS = {
         text: [
           { text: "Manche Videos auf YouTube erzählen Dinge, die nicht stimmen." },
           { text: "Frag dich deshalb beim Schauen: Stimmt das wirklich?" },
-          { text: "Schau nach, was ein anderer Kanal dazu sagt, oder frag eine Person, der du vertraust." }
+          { text: "Schau nach, was ein anderer Kanal dazu sagt. Oder frag eine vertraute Person." }
         ],
         remember: "Du prüfst, ob ein Video stimmt.",
         vorbild: ["Ein Video behauptet, dass es morgen kein Wasser gibt.", "Alex glaubt das nicht sofort und schaut auf einer anderen Seite nach."]
@@ -2979,7 +2981,7 @@ const KURZ_VERSIONS = {
       einfach: {
         text: [
           { text: "Wenn du eine Fake-Nachricht erkennst, schickst du sie nicht weiter." },
-          { text: "Du löschst sie. Wenn ein Freund sie dir geschickt hat, kannst du ihm schreiben, dass sie nicht stimmt. Du kannst auch mit jemandem darüber sprechen." }
+          { text: "Du löschst sie. Hat dir ein Freund die Nachricht geschickt? Dann kannst du ihm schreiben, dass sie nicht stimmt. Du kannst auch mit jemandem darüber sprechen." }
         ],
         remember: "Fake-Nachrichten leitest du nicht weiter.",
         vorbild: ["Tilda erkennt, dass eine Nachricht ein Fake ist.", "Sie schickt sie nicht weiter und löscht sie."]
@@ -3505,7 +3507,7 @@ const AUFGABEN_VERSIONS = {
         "question": "In deinem Profil in einer App steht deine Telefonnummer. Deine Freunde aus der App sollen dich anrufen können. Wer soll die Nummer sehen?",
         "hinweis": "Überlege: Wer soll dich anrufen können?",
         "answers": [
-          "Alle Nutzerinnen und Nutzer der App.",
+          "Alle Nutzer und Nutzerinnen der App.",
           "Nur meine Freunde.",
           "Niemand – die Nummer ist privat."
         ],
@@ -3626,7 +3628,7 @@ const AUFGABEN_VERSIONS = {
 
     "Du meldest dich für einen Koch-Kurs an. Die Kurs-Leitung will deine Telefon-Nummer. Fällt der Kurs aus? Dann ruft sie dich an. Was machst du?": {
       "einfach": {
-        "question": "Du meldest dich für einen Kochkurs an. Die Kursleitung will deine Telefonnummer, damit sie dich anrufen kann, wenn der Kurs ausfällt. Was machst du?",
+        "question": "Du meldest dich für einen Kochkurs an. Die Kursleitung will deine Telefonnummer. So kann sie dich anrufen, wenn der Kurs ausfällt. Was machst du?",
         "hinweis": "Überlege: Wofür will die Kursleitung die Nummer haben?",
         "answers": [
           "Ich gebe keine Nummer, weil Telefonnummern privat sind.",
@@ -3766,7 +3768,7 @@ const AUFGABEN_VERSIONS = {
 
     "Dein Handy hat eine Funktion: Handy finden. Ist dein Handy weg? Dann zeigt sie dir den Ort von deinem Handy. Die Funktion fragt nach deinem Standort. Was passt?": {
       "einfach": {
-        "question": "Dein Handy hat eine Funktion: Handy finden. Wenn dein Handy weg ist, zeigt dir die Funktion, wo es gerade ist. Dafür fragt sie nach deinem Standort. Was passt?",
+        "question": "Dein Handy hat eine Funktion: Handy finden. Dein Handy ist weg? Dann zeigt dir die Funktion, wo es gerade ist. Dafür fragt sie nach deinem Standort. Was passt?",
         "hinweis": "Überlege: Wann brauchst du die Funktion, und benutzt du dein Handy in diesem Moment?",
         "answers": [
           "Nur erlauben, während ich das Handy benutze.",
@@ -4396,7 +4398,7 @@ const AUFGABEN_VERSIONS = {
     "hilfe/kurz/Was ist los?": {
       "einfach": {
         "question": "Du schickst deiner Schwester eine Nachricht, aber sie geht nicht raus. Neben der Nachricht steht: Nicht gesendet. Was ist los?",
-        "hinweis": "Überlege, ob jemand in Gefahr ist oder ob nur etwas nicht klappt.",
+        "hinweis": "Überlege: Ist jemand in Gefahr, oder klappt nur etwas nicht?",
         "answers": [
           "Etwas klappt gerade nicht, deshalb probiere ich es gleich noch einmal.",
           "Mein Handy ist kaputt, deshalb bringe ich es gleich in den Laden.",
@@ -4464,7 +4466,7 @@ const AUFGABEN_VERSIONS = {
     "hilfe/kurz/Welche Hilfe passt?": {
       "einfach": {
         "question": "Du hast ein neues Handy, aber deine Fotos sind noch auf dem alten. Du weißt nicht, wie die Fotos auf das neue Handy kommen. Welche Hilfe passt?",
-        "hinweis": "Überlege, ob das eine Frage zum Handy ist oder ob dir etwas Angst macht.",
+        "hinweis": "Überlege: Ist das eine Frage zum Handy, oder macht dir etwas Angst?",
         "answers": [
           "Ich rufe bei einer Beratungsstelle an, weil die bei Problemen hilft.",
           "Ich frage meine Nachbarin, die sich mit Handys auskennt.",
@@ -4532,7 +4534,7 @@ const AUFGABEN_VERSIONS = {
     "Du schaust Nachrichten auf dem Handy. Ein Video zeigt einen schweren Unfall. Die Feuerwehr ist schon da. Das Video macht dir Angst. Was ist los? Was passt jetzt?": {
       "einfach": {
         "question": "Du schaust Nachrichten auf dem Handy. Ein Video zeigt einen schweren Unfall, bei dem die Feuerwehr schon da ist. Das Video macht dir Angst. Was ist los, und was passt jetzt?",
-        "hinweis": "Überlege, ob du in Gefahr bist oder ob dir etwas Angst macht.",
+        "hinweis": "Überlege: Bist du in Gefahr, oder macht dir etwas Angst?",
         "answers": [
           "Das ist ein Notfall, deshalb rufe ich sofort 112 an.",
           "Ich schaue noch mehr Videos, weil ich alles genau wissen will.",
@@ -4788,7 +4790,7 @@ const AUFGABEN_VERSIONS = {
         "question": "Unter einem Video liest du einen Kommentar, der sich über Menschen im Rollstuhl lustig macht. Der Kommentar ist nicht gegen dich gerichtet. Was machst du?",
         "hinweis": "Überlege, was du selbst in der App tun kannst.",
         "answers": [
-          "Ich teile den Kommentar mit allen, damit alle sehen, wie gemein das ist.",
+          "Ich teile den Kommentar mit allen. So sehen alle, wie gemein das ist.",
           "Ich scrolle einfach weiter, weil ich nicht darauf antworten muss.",
           "Ich melde den Kommentar, damit die App ihn prüft.",
           "Ich antworte darunter: Du bist so dumm."
@@ -4914,7 +4916,7 @@ const AUFGABEN_VERSIONS = {
     "hilfe/neu/welche-hilfe": {
       "einfach": {
         "question": "Am nächsten Tag schreibt Kevin wieder das Gleiche. Welche Hilfe passt jetzt?",
-        "hinweis": "Überlege, ob gerade jemand in Gefahr ist oder ob du jemanden zum Reden brauchst.",
+        "hinweis": "Überlege: Ist gerade jemand in Gefahr, oder brauchst du jemanden zum Reden?",
         "answers": [
           "Ich zeige den Chat einer vertrauten Person.",
           "Ich rufe bei einer Beratungsstelle an.",
@@ -4924,7 +4926,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackWrong": [
           null,
           null,
-          "Hier ist gerade niemand in Gefahr, deshalb passt 110 hier nicht. Wenn jemand jetzt in Gefahr ist, rufst du sofort 110 oder 112. Hier zeigst du den Chat zuerst einer Person, der du vertraust. Zusammen überlegt ihr, was du jetzt machst und ob ihr zur Polizei geht."
+          "Hier ist gerade niemand in Gefahr, deshalb passt 110 hier nicht. Wenn jemand jetzt in Gefahr ist, rufst du sofort 110 oder 112. Hier zeigst du den Chat zuerst einer Person, der du vertraust. Zusammen überlegt ihr, was du jetzt machst. Ihr klärt auch, ob ihr zur Polizei geht."
         ],
         "feedbackAuch": [
           null,
@@ -5417,7 +5419,7 @@ const AUFGABEN_VERSIONS = {
           "Das ist zu schnell, denn vielleicht schreibt gar nicht Tom. Betrüger nutzen manchmal fremde Konten. Ruf Tom zuerst selbst an.",
           "Wenn es Betrug ist, sind auch 50 Euro weg. Ruf Tom zuerst selbst an."
         ],
-        "feedbackCorrect": "Wenn du selbst anrufst, merkst du, ob die Nachricht wirklich von Tom kommt.",
+        "feedbackCorrect": "Du rufst selbst an. So merkst du, ob die Nachricht wirklich von Tom kommt.",
         "remember": "Wenn mich jemand um Geld bittet, rufe ich die Person selbst an."
       },
       "standard": {
@@ -5597,7 +5599,7 @@ const AUFGABEN_VERSIONS = {
     "whatsapp/quiz/zehn-nachrichten": {
       "einfach": {
         "question": "Ein Bekannter schreibt dir 10 Nachrichten hintereinander: Antworte endlich! Warum antwortest du nicht? Du sitzt gerade beim Essen. Was machst du?",
-        "hinweis": "Überlege, wer entscheiden darf, wann du antwortest.",
+        "hinweis": "Überlege: Wer darf entscheiden, wann du antwortest?",
         "answers": [
           "Ich antworte, wenn ich fertig gegessen habe.",
           "Ich höre sofort auf zu essen und antworte.",
@@ -5628,7 +5630,7 @@ const AUFGABEN_VERSIONS = {
     },
     "whatsapp/quiz/gruppe-stumm": {
       "einfach": {
-        "question": "In der WhatsApp-Gruppe von deiner Arbeit wird jeden Abend sehr viel geschrieben. Dein Handy piept ständig, und das stört dich. Was machst du?",
+        "question": "In der WhatsApp-Gruppe von deiner Arbeit kommen jeden Abend sehr viele Nachrichten. Dein Handy piept ständig, und das stört dich. Was machst du?",
         "hinweis": "Du kannst in der Gruppe bleiben und trotzdem Ruhe haben. Überlege, wie das geht.",
         "answers": [
           "Ich schalte die Gruppe auf stumm.",
@@ -6339,7 +6341,7 @@ const AUFGABEN_VERSIONS = {
     "youtube/quiz/reich-mittel": {
       "einfach": {
         "question": "Ein Video verspricht, dass du mit einem Mittel schnell reich wirst. Unter dem Video steht ein Link zum Kaufen. Was machst du?",
-        "hinweis": "Überlege, ob es echt klingt, dass man mit einem Mittel reich wird.",
+        "hinweis": "Überlege: Klingt es echt, dass man mit einem Mittel reich wird?",
         "answers": [
           "Ich glaube es sofort und kaufe es.",
           "Ich prüfe es erst und kaufe nicht gleich.",
@@ -6371,7 +6373,7 @@ const AUFGABEN_VERSIONS = {
     "Freunde sagen: Alle machen diese Mutprobe. Was machst du?": {
       "einfach": {
         "question": "Deine Freunde sagen: Alle machen diese Mutprobe. Was machst du?",
-        "hinweis": "Überlege, wer den Schaden hat, wenn etwas passiert.",
+        "hinweis": "Überlege: Wer hat den Schaden, wenn etwas passiert?",
         "answers": [
           "Ich mache nicht mit.",
           "Ich mache mit, weil alle es tun.",
@@ -6531,7 +6533,7 @@ const AUFGABEN_VERSIONS = {
     "Was ist eine gute YouTube-Regel?": {
       "einfach": {
         "question": "Welche Regel hilft dir bei YouTube?",
-        "hinweis": "Überlege, wer bestimmt, wann Schluss ist.",
+        "hinweis": "Überlege: Wer bestimmt, wann Schluss ist?",
         "answers": [
           "Ich muss immer weiterschauen.",
           "Ich darf jederzeit stoppen.",
@@ -6597,7 +6599,7 @@ const AUFGABEN_VERSIONS = {
     "Jemand sagt: Wenn du mich magst, schick mir das Bild. Du willst kein Bild schicken. Was machst du?": {
       "einfach": {
         "question": "Jemand sagt zu dir: Wenn du mich magst, schick mir das Bild. Du willst aber kein Bild schicken. Wie reagierst du darauf?",
-        "hinweis": "Überlege, ob du etwas beweisen musst, damit jemand dich mag.",
+        "hinweis": "Überlege: Musst du etwas beweisen, damit jemand dich mag?",
         "answers": [
           "Ich sage Nein und erzähle einer anderen Person davon.",
           "Ich schicke der Person das Bild, weil ich sie mag.",
@@ -6637,7 +6639,7 @@ const AUFGABEN_VERSIONS = {
         ],
         "feedbackWrong": [
           null,
-          "Wenn du die Anzeige so lässt, sieht jeder deiner Freunde, wo du wohnst.",
+          "Mit dieser Anzeige sieht jeder deiner Freunde, wo du wohnst.",
           "Auch wenn du den Freunden Bescheid sagst, bleibt dein Zuhause auf der Karte sichtbar."
         ],
         "feedbackCorrect": "Wenn du die Standortanzeige ausschaltest, sehen deine Freunde deinen Standort nicht mehr auf der Karte."
@@ -6792,7 +6794,7 @@ const AUFGABEN_VERSIONS = {
           "Auch so erfährt nur deine Freundin, wo du bist.",
           null
         ],
-        "feedbackCorrect": "So weiß nur deine Freundin, wo du bist, und du bestimmst selbst, wer deinen Ort erfährt.",
+        "feedbackCorrect": "So weiß nur deine Freundin, wo du bist. Du bestimmst selbst, wer deinen Ort erfährt.",
         "remember": "Ich teile meinen Standort nicht einfach."
       },
       "standard": {
@@ -6919,7 +6921,7 @@ const AUFGABEN_VERSIONS = {
           "Zu zweit sieht man mehr, und danach kann dir die Person nicht mehr schreiben."
         ],
         "feedbackCorrect": "Du hast Nein gesagt, und das reicht. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
-        "remember": "Ich sage Nein und zeige es jemandem."
+        "remember": "Ich schicke kein Bild. Wenn ich möchte, hole ich mir Hilfe."
       },
       "standard": {
         "question": "Eine Person schreibt dir jeden Tag: Schick mir endlich ein Bild. Du hast schon Nein gesagt. Was machst du?",
@@ -6939,7 +6941,7 @@ const AUFGABEN_VERSIONS = {
           "Zu zweit sieht man mehr, und danach kann dir die Person nicht mehr schreiben."
         ],
         "feedbackCorrect": "Du hast Nein gesagt, und das genügt. Nach dem Blockieren kann dir die Person nicht mehr schreiben.",
-        "remember": "Ich sage Nein und zeige die Nachricht jemandem."
+        "remember": "Ich schicke kein Bild. Unterstützung hole ich mir, wenn ich sie möchte."
       }
     },
     "snapchat/kurz/Bilder verschwinden nicht wirklich": {
@@ -7051,7 +7053,7 @@ const AUFGABEN_VERSIONS = {
     "Eine Person schickt dir viele Snaps. Du kennst sie nicht. Was machst du?": {
       "einfach": {
         "question": "Eine Person, die du nicht kennst, schickt dir viele Snaps. Was machst du?",
-        "hinweis": "Überlege, was du tun darfst, wenn du die Person nicht kennst.",
+        "hinweis": "Überlege: Was darfst du tun, wenn du die Person nicht kennst?",
         "answers": [
           "Ich schicke etwas zurück.",
           "Ich blockiere die Person.",
@@ -7083,7 +7085,7 @@ const AUFGABEN_VERSIONS = {
     "Eine Nachricht sagt: Schick ein Bild, aber sag es niemandem. Was ist das?": {
       "einfach": {
         "question": "In einer Nachricht steht: Schick mir ein Bild, aber sag es niemandem. Was ist das?",
-        "hinweis": "Überlege, was es bedeutet, wenn du es niemandem sagen sollst.",
+        "hinweis": "Überlege: Was bedeutet es, wenn du es niemandem sagen sollst?",
         "answers": [
           "Kein Problem.",
           "Nur ein Spaß.",
@@ -7220,7 +7222,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackWrong": [
           null,
           "Private Bilder gehören nicht an fremde Personen.",
-          "Wenn du antwortest, sieht die Person, dass hier jemand liest. Prüfe lieber erst."
+          "Durch deine Antwort sieht die Person, dass hier jemand liest. Prüfe lieber erst."
         ],
         "feedbackCorrect": "Ein Kontakt, der dir komisch vorkommt, kann gefälscht sein. Deshalb prüfst du ihn zuerst."
       },
@@ -7317,7 +7319,7 @@ const AUFGABEN_VERSIONS = {
         ],
         "feedbackWrong": [
           null,
-          "Wenn du deine Adresse schreibst, erfahren fremde Menschen, wo du wohnst.",
+          "Mit deiner Adresse erfahren fremde Menschen, wo du wohnst.",
           "Auch der Name deiner Straße zeigt, wo du wohnst."
         ],
         "feedbackCorrect": "Mit deiner Adresse weiß eine fremde Person, wo du wohnst. Deshalb gibst du sie nicht weiter, wenn du die Person nicht kennst."
@@ -7341,7 +7343,7 @@ const AUFGABEN_VERSIONS = {
     "Es ist spät. Du bist müde. Du willst jetzt aufhören. Das nächste Video startet von allein. Was machst du?": {
       "einfach": {
         "question": "Es ist spät und du bist müde. Du willst jetzt aufhören, aber das nächste Video startet von allein. Was machst du?",
-        "hinweis": "Überlege, wer entscheidet, wann du mit dem Schauen aufhörst.",
+        "hinweis": "Überlege: Wer entscheidet, wann du mit dem Schauen aufhörst?",
         "answers": [
           "Ich schaue einfach weitere Videos an.",
           "Ich lege mein Handy jetzt weg.",
@@ -7449,7 +7451,7 @@ const AUFGABEN_VERSIONS = {
         "question": "Du hast ein paar traurige Videos angeschaut, und jetzt zeigt TikTok dir fast nur noch traurige Videos. Das tut dir nicht gut. Was machst du?",
         "answers": [
           "Ich mache eine Pause von TikTok.",
-          "Ich schaue weiter, weil TikTok eben zeigt, was zu mir passt.",
+          "Ich schaue weiter. TikTok zeigt eben, was zu mir passt.",
           "Ich suche selbst nach anderen Videos."
         ],
         "feedbackWrong": [
@@ -8027,7 +8029,7 @@ const AUFGABEN_VERSIONS = {
     "Was darfst du bei TikTok machen?": {
       "einfach": {
         "question": "Du hast genug von TikTok. Was darfst du tun?",
-        "hinweis": "Überlege, wer bestimmt, wann Schluss ist.",
+        "hinweis": "Überlege: Wer bestimmt, wann Schluss ist?",
         "answers": [
           "Ich schließe TikTok.",
           "Ich mache trotzdem keine Pause.",
@@ -8157,7 +8159,7 @@ const AUFGABEN_VERSIONS = {
     "Stimmt eine Nachricht? Du bist unsicher. Was machst du?": {
       "einfach": {
         "question": "Du weißt nicht, ob eine Nachricht stimmt. Was machst du?",
-        "hinweis": "Überlege, was passiert, wenn du eine falsche Nachricht weiterschickst.",
+        "hinweis": "Überlege: Was passiert, wenn du eine falsche Nachricht weiterschickst?",
         "answers": [
           "Ich schicke die Nachricht an alle weiter.",
           "Ich schicke die Nachricht an meine Freunde weiter.",
@@ -8259,7 +8261,7 @@ const AUFGABEN_VERSIONS = {
           "Ich glaube es nicht sofort, weil es gefälscht sein kann."
         ],
         "feedbackWrong": [
-          "Viele KI-Bilder haben keine Fehler mehr. Dass du keinen Fehler findest, heißt nicht, dass das Foto echt ist.",
+          "Viele KI-Bilder haben keine Fehler mehr. Auch wenn du keinen Fehler findest, ist das Foto nicht unbedingt echt.",
           null,
           null
         ],
@@ -8737,7 +8739,7 @@ const AUFGABEN_VERSIONS = {
     "fakes/quiz/stimme-bruder": {
       "einfach": {
         "question": "Dein Handy klingelt, und die Stimme klingt wie die von deinem Bruder. Er sagt: Ich brauche sofort Geld, bitte schick es jetzt. Was machst du?",
-        "hinweis": "Überlege, wie du prüfen kannst, wer wirklich anruft.",
+        "hinweis": "Überlege: Wie kannst du prüfen, wer wirklich anruft?",
         "answers": [
           "Ich lege auf und rufe selbst zurück.",
           "Ich sende sofort das Geld, ich kenne die Stimme.",
@@ -8769,7 +8771,7 @@ const AUFGABEN_VERSIONS = {
     "Wie kannst du eine Nachricht prüfen?": {
       "einfach": {
         "question": "Wie kannst du prüfen, ob eine Nachricht stimmt?",
-        "hinweis": "Überlege, wo Nachrichten stehen, denen man trauen kann.",
+        "hinweis": "Überlege: Wo stehen Nachrichten, denen man trauen kann?",
         "answers": [
           "Ich schaue, ob bekannte Seiten das auch melden.",
           "Ich schaue, ob das Bild dazu schön ist.",
@@ -8833,7 +8835,7 @@ const AUFGABEN_VERSIONS = {
     "Bevor du eine Nachricht teilst: Was machst du?": {
       "einfach": {
         "question": "Du willst eine Nachricht teilen. Was machst du vorher?",
-        "hinweis": "Überlege, wie viele Menschen die Nachricht sehen, wenn du sie weiterschickst.",
+        "hinweis": "Überlege: Wie viele Menschen sehen die Nachricht, wenn du sie weiterschickst?",
         "answers": [
           "Ich teile sie zuerst und prüfe danach.",
           "Ich teile sie und schreibe dazu: Weiß nicht, ob es stimmt.",
@@ -8963,7 +8965,7 @@ const AUFGABEN_VERSIONS = {
     "ki/quiz/stimme-geld-rueckruf": {
       "einfach": {
         "question": "Eine neue Nummer ruft dich an. Die Stimme klingt wie dein Onkel und sagt: Meine Bank-App geht nicht. Kannst du mir 100 Euro leihen? Du hast seine Nummer bereits gespeichert. Was machst du zuerst?",
-        "hinweis": "Überlege, wie du prüfen kannst, wer wirklich anruft.",
+        "hinweis": "Überlege: Wie kannst du prüfen, wer wirklich anruft?",
         "answers": [
           "Ich bleibe am Telefon und frage nach seinem Namen.",
           "Ich schicke zunächst 20 Euro und den Rest später.",
@@ -9483,7 +9485,7 @@ const AUFGABEN_VERSIONS = {
     "Hat ein Chatbot Gefühle?": {
       "einfach": {
         "question": "Ein Chatbot schreibt: Ich freue mich, dass du da bist. Hat er Gefühle?",
-        "hinweis": "Überlege, ob freundliche Worte bedeuten, dass jemand etwas fühlt.",
+        "hinweis": "Überlege: Bedeuten freundliche Worte, dass jemand etwas fühlt?",
         "answers": [
           "Ja, genau wie ein Mensch.",
           "Nein, er ist ein Programm.",
@@ -9583,14 +9585,14 @@ const AUFGABEN_VERSIONS = {
         "answers": [
           "Ich frage nur die KI.",
           "Ich drucke die Antwort von der KI aus.",
-          "Ich frage auch eine Ärztin oder einen Arzt."
+          "Ich frage auch einen Arzt oder eine Ärztin."
         ],
         "feedbackWrong": [
-          "Die KI kennt dich nicht und ersetzt keine Ärztin und keinen Arzt.",
+          "Die KI kennt dich nicht und ersetzt keinen Arzt und keine Ärztin.",
           "Wenn du die Antwort ausdruckst, wird sie dadurch nicht richtig.",
           null
         ],
-        "feedbackCorrect": "Die KI kennt dich nicht und kann falsche Tipps geben. Deshalb fragst du bei der Gesundheit auch eine Ärztin oder einen Arzt."
+        "feedbackCorrect": "Die KI kennt dich nicht und kann falsche Tipps geben. Deshalb fragst du bei der Gesundheit auch einen Arzt oder eine Ärztin."
       },
       "standard": {
         "question": "Du hast seit drei Tagen Bauchschmerzen und fragst eine KI, die dir einen Tipp gibt. Was tust du?",
@@ -9598,14 +9600,14 @@ const AUFGABEN_VERSIONS = {
         "answers": [
           "Nur die KI fragen.",
           "Die KI-Antwort ausdrucken und befolgen.",
-          "Auch eine Ärztin oder einen Arzt fragen."
+          "Auch einen Arzt oder eine Ärztin fragen."
         ],
         "feedbackWrong": [
           "Die KI kennt dich nicht und ersetzt keine ärztliche Beratung.",
           "Ausgedruckt wird die Antwort nicht richtiger.",
           null
         ],
-        "feedbackCorrect": "Die KI kennt dich nicht und kann falsche Ratschläge geben. Deshalb fragst du bei Gesundheitsfragen auch eine Ärztin oder einen Arzt."
+        "feedbackCorrect": "Die KI kennt dich nicht und kann falsche Ratschläge geben. Deshalb fragst du bei Gesundheitsfragen auch einen Arzt oder eine Ärztin."
       }
     },
     "Kann KI Bilder fälschen?": {
@@ -9926,7 +9928,7 @@ const AUFGABEN_VERSIONS = {
       "einfach": {
         "question": "Du bist im Urlaub am Meer und postest ein Foto. Instagram fragt, ob du den Ort hinzufügen willst. Was machst du?",
         "answers": [
-          "Ich füge den Ort hinzu, damit alle sehen, wo ich bin.",
+          "Ich füge den Ort hinzu. So sehen alle, wo ich bin.",
           "Ich füge keinen Ort hinzu.",
           "Ich füge den Ort erst nach dem Urlaub hinzu."
         ],
@@ -10109,7 +10111,7 @@ const AUFGABEN_VERSIONS = {
           null
         ],
         "feedbackCorrect": "Die Nachricht macht mit Absicht Stress. Wenn du Stopp machst, hast du Zeit zum Nachdenken.",
-        "remember": "Bei Stress zeige ich die Nachricht einer Person, der ich vertraue."
+        "remember": "Bei Stress mache ich Stopp und antworte nicht sofort."
       },
       "standard": {
         "question": "Ein fremdes Profil schreibt dir: Du hast gewonnen. Antworte in 10 Minuten, sonst verfällt der Gewinn. Was machst du?",
@@ -10129,7 +10131,7 @@ const AUFGABEN_VERSIONS = {
           null
         ],
         "feedbackCorrect": "Der Zeitdruck ist gewollt. Wenn du Stopp machst, gewinnst du Zeit zum Nachdenken.",
-        "remember": "Bei Druck zeige ich die Nachricht einer Vertrauensperson."
+        "remember": "Bei Druck halte ich an und antworte nicht sofort."
       }
     },
     "instagram/kurz/Deine Fotos auf Instagram": {
@@ -10141,7 +10143,7 @@ const AUFGABEN_VERSIONS = {
           "Ich schaue mir das Profil erst einmal an."
         ],
         "feedbackWrong": [
-          "Ein privates Konto hilft nur, wenn du auswählst, wer dir folgt. Nach dem Annehmen sieht das fremde Profil alle deine Fotos.",
+          "Ein privates Konto allein reicht nicht. Du wählst auch aus, wer dir folgt. Nach dem Annehmen sieht das fremde Profil alle deine Fotos.",
           null,
           null
         ],
@@ -10304,7 +10306,7 @@ const AUFGABEN_VERSIONS = {
           "Nicht nur deine Freunde sehen den Ort, sondern alle, die deine Story sehen.",
           null
         ],
-        "feedbackCorrect": "Alle, die deine Story sehen, wissen dann, wo du bist."
+        "feedbackCorrect": "Deine Story zeigt dann allen, wo du bist."
       },
       "standard": {
         "question": "Du markierst in einer Story deinen Standort. Wer sieht ihn?",
@@ -10357,33 +10359,43 @@ const AUFGABEN_VERSIONS = {
     "Mehrere Personen schreiben Gemeines unter dein Foto. Was machst du?": {
       "einfach": {
         "question": "Mehrere Personen schreiben gemeine Kommentare unter dein Foto. Was machst du?",
-        "hinweis": "Du musst das nicht allein aushalten. Überlege, wer dir helfen kann.",
+        "hinweis": "Überlege, was du selbst gegen gemeine Kommentare tun kannst.",
         "answers": [
-          "Ich behalte es für mich und sage niemandem etwas.",
-          "Ich zeige es einer Person, der ich vertraue.",
-          "Ich lösche mein Foto, dann hört es auf."
+          "Ich lösche mein Foto, dann hört es auf.",
+          "Ich melde die gemeinen Kommentare.",
+          "Ich zeige es einer Person, der ich vertraue."
         ],
         "feedbackWrong": [
-          "Damit bleibst du mit den gemeinen Kommentaren allein. Erzähl es lieber jemandem, dem du vertraust.",
+          "Dein Foto ist nicht der Fehler, und die Kommentare sind nicht deine Schuld. Melde sie lieber.",
           null,
-          "Dein Foto ist nicht der Fehler, und die Kommentare sind nicht deine Schuld. Hol dir lieber Hilfe."
+          null
         ],
-        "feedbackCorrect": "Du zeigst es einer vertrauten Person und musst das nicht allein aushalten."
+        "feedbackAuch": [
+          null,
+          null,
+          "Du musst das nicht allein aushalten. Die Kommentare melden kannst du trotzdem."
+        ],
+        "feedbackCorrect": "Du handelst selbst und meldest die Kommentare. Die Personen kannst du auch blockieren."
       },
       "standard": {
         "question": "Mehrere Leute schreiben gemeine Kommentare unter dein Foto. Wie reagierst du?",
-        "hinweis": "Das musst du nicht allein aushalten. Wer kann dir helfen?",
+        "hinweis": "Was kannst du selbst gegen die Kommentare tun?",
         "answers": [
-          "Ich behalte es für mich und sage nichts.",
-          "Ich zeige es einer Vertrauensperson.",
-          "Ich lösche das Foto, dann hört es auf."
+          "Ich lösche das Foto, dann hört es auf.",
+          "Ich melde die Kommentare bei Instagram.",
+          "Ich zeige es einer Vertrauensperson."
         ],
         "feedbackWrong": [
-          "So bleibst du mit den Kommentaren allein. Sprich lieber mit jemandem, dem du vertraust.",
+          "Dein Foto ist nicht das Problem – und die Kommentare sind nicht deine Schuld. Melde sie lieber.",
           null,
-          "Dein Foto ist nicht das Problem – und die Kommentare sind nicht deine Schuld. Hol dir lieber Unterstützung."
+          null
         ],
-        "feedbackCorrect": "Du zeigst es einer Vertrauensperson und musst das nicht allein aushalten."
+        "feedbackAuch": [
+          null,
+          null,
+          "Du musst das nicht allein aushalten. Melden kannst du die Kommentare trotzdem."
+        ],
+        "feedbackCorrect": "Du handelst selbst und meldest die Kommentare; die Personen kannst du zusätzlich blockieren."
       }
     },
     "Auf einem Foto sieht eine Person perfekt aus. Was kann sein?": {
@@ -10494,7 +10506,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackWrong": [
           "Deine privaten Daten bleiben bei dir.",
           null,
-          "Wenn du antwortest, sieht die Person, dass hier jemand liest. Mach lieber Stopp."
+          "Durch deine Antwort sieht die Person, dass hier jemand liest. Mach lieber Stopp."
         ],
         "feedbackCorrect": "Du machst Stopp und hast so Zeit zum Nachdenken."
       },
@@ -10587,7 +10599,7 @@ const AUFGABEN_VERSIONS = {
         "answers": [
           "Der Shop ist bestimmt gut.",
           "Vorsicht. Ein Warnzeichen.",
-          "Der Shop wird noch aufgebaut."
+          "Der Shop ist neu und noch im Aufbau."
         ],
         "feedbackCorrect": "Ein guter Shop zeigt dir, wer dahintersteckt.",
         "feedbackWrong": [
@@ -10662,7 +10674,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackAuch": [
           null,
           null,
-          "Bei einem Shop, den du kennst, weißt du, dass die Ware ankommt."
+          "Bei einem Shop, den du kennst, hast du schon gute Erfahrungen gemacht."
         ],
         "feedbackCorrect": "Alle Bewertungen sind von gestern, und das ist komisch. Betrüger können Bewertungen fälschen und auch ein Impressum. Achte deshalb auf mehrere Warnzeichen.",
         "remember": "Ich kaufe bei Shops, die ich vorher geprüft habe."
@@ -10682,7 +10694,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackAuch": [
           null,
           null,
-          "Bei einem Shop, den du kennst, weißt du, dass die Ware ankommt."
+          "Bei einem Shop, den du kennst, hast du bereits gute Erfahrungen gemacht."
         ],
         "feedbackCorrect": "Alle Bewertungen stammen von gestern – das ist auffällig. Bewertungen lassen sich fälschen, ein Impressum auch. Achte deshalb auf mehrere Warnzeichen.",
         "remember": "Ich kaufe bei Shops, die ich geprüft habe."
@@ -11051,7 +11063,7 @@ const AUFGABEN_VERSIONS = {
         "question": "Du willst in einem neuen Shop bestellen. In der Adress-Zeile siehst du ein Schloss, aber ein Impressum findest du nicht. Was machst du?",
         "answers": [
           "Ich bestelle dort nicht, weil Name und Adresse fehlen.",
-          "Ich bestelle, weil das Schloss zeigt, dass der Shop sicher ist.",
+          "Ich bestelle. Das Schloss zeigt doch, dass der Shop sicher ist.",
           "Ich bestelle, weil die Seite ja sehr schön aussieht."
         ],
         "feedbackWrong": [
@@ -12060,7 +12072,7 @@ const AUFGABEN_VERSIONS = {
         "feedbackAuch": [
           null,
           null,
-          "Auch so fragst du die echte Bank. Wichtig ist, dass du die Nummer nimmst, die du schon kennst."
+          "Auch so fragst du die echte Bank. Wichtig ist: Du nimmst die Nummer, die du schon kennst."
         ],
         "feedbackCorrect": "Du tippst nicht auf den Link, sondern öffnest die App selbst. Dort siehst du, ob alles in Ordnung ist.",
         "remember": "Ich muss den Trick nicht erkennen. Ich öffne die App einfach selbst."
@@ -12560,7 +12572,7 @@ const AUFGABEN_VERSIONS = {
           null,
           "Dann weiß vorher niemand, dass deine Wohnung leer ist, und du kannst gleich schöne Fotos zeigen."
         ],
-        "feedbackCorrect": "Wenn der Beitrag öffentlich ist, können auch fremde Menschen lesen, dass deine Wohnung leer ist. Deshalb wählst du Freunde aus.",
+        "feedbackCorrect": "Bei einem öffentlichen Beitrag können auch fremde Menschen lesen, dass deine Wohnung leer ist. Deshalb wählst du Freunde aus.",
         "remember": "Ich prüfe, wer meinen Beitrag sehen kann."
       },
       "standard": {
@@ -12705,7 +12717,7 @@ const AUFGABEN_VERSIONS = {
         "question": "Unter deinem Foto schreibt jemand: Du bist so dumm. Das macht dich wütend. Was machst du?",
         "answers": [
           "Ich mache ein Bildschirm-Foto und lösche dann den Kommentar.",
-          "Ich schreibe zurück, dass er selber dumm ist, weil ich mir das nicht gefallen lasse.",
+          "Ich schreibe zurück, dass er selber dumm ist. Das lasse ich mir nicht gefallen.",
           "Ich hole mir erst Unterstützung und rede mit jemandem darüber."
         ],
         "feedbackWrong": [
@@ -12995,7 +13007,7 @@ const AUFGABEN_VERSIONS = {
         ],
         "feedbackWrong": [
           "Ohne Foto weißt du kaum etwas über die Person. Schau dir das Profil erst genau an.",
-          "Wenn du schreibst, merkt die Person, dass du antwortest. Schau dir lieber zuerst das Profil an.",
+          "Durch deine Antwort merkt die Person, dass hier jemand liest. Schau dir lieber zuerst das Profil an.",
           null
         ],
         "feedbackCorrect": "Fremde Profile können falsch sein. Deshalb schaust du dir das Profil erst genau an. Wenn du die Person nicht kennst, lehnst du die Anfrage ab."
@@ -13126,7 +13138,7 @@ const AUFGABEN_VERSIONS = {
           "Öffentlich gilt nicht nur für Freunde, sondern für alle.",
           "Nicht nur Facebook sieht den Beitrag. Öffentlich heißt, dass alle im Internet ihn sehen können."
         ],
-        "feedbackCorrect": "Öffentlich heißt, dass alle den Beitrag sehen können, auch Menschen, die du nicht kennst."
+        "feedbackCorrect": "Öffentlich heißt: Alle können den Beitrag sehen, auch Menschen, die du nicht kennst."
       },
       "standard": {
         "question": "Bei einem deiner Beiträge steht als Einstellung: Öffentlich. Was bedeutet das?",
@@ -13250,7 +13262,7 @@ const AUFGABEN_VERSIONS = {
           "Ich prüfe erst und poste dann."
         ],
         "feedbackWrong": [
-          "Wenn du alles sofort teilst, prüfst du nicht, wer es sehen kann. Schau lieber vorher nach.",
+          "Du teilst alles sofort? Dann prüfst du nicht, wer es sehen kann. Schau lieber vorher nach.",
           "Du darfst posten. Schau nur vorher, wer deinen Beitrag sieht.",
           null
         ],
@@ -13443,7 +13455,7 @@ const THEMA_VERSIONS = {
   datenschutz: {
     "einfach": {
       "desc": "Deine privaten Daten schützen",
-      "transfer": "Schau heute bei einer App nach, was sie sehen darf und ob sie das braucht. Du musst nichts ändern, du entscheidest selbst.",
+      "transfer": "Schau heute bei einer App nach, was sie sehen darf. Prüfe dann, ob sie das braucht. Du musst nichts ändern, du entscheidest selbst.",
       "learningGoals": [
         "Was private Daten sind",
         "Welche Daten wirklich nötig sind",
@@ -14006,7 +14018,7 @@ const ANWENDEN_ERGAENZUNGEN = {
     "neueSituation": {
       "einstieg": {
         "leicht": "Du nutzt die Bus-Linie 42. Im Haus-Chat kommt ein Bild mit einer Meldung.",
-        "einfach": "Du möchtest morgen mit der Buslinie 42 fahren. Im Hauschat wird ein Bild mit einer Meldung geteilt.",
+        "einfach": "Du möchtest morgen mit der Buslinie 42 fahren. Im Hauschat teilt jemand ein Bild mit einer Meldung.",
         "standard": "Du willst morgen mit der Buslinie 42 fahren. Im Hauschat taucht ein Bildschirmfoto mit einer Meldung auf."
       },
       "kanal": {
@@ -15463,7 +15475,7 @@ const SELF_ASSESSMENT_VERSIONS = {
   },
   hilfe: {
     einfach: {
-      question: "Wie gut weißt du, was du tun kannst, wenn es im Internet Probleme gibt?",
+      question: "Wie gut weißt du, was du bei Problemen im Internet tun kannst?",
       options: ["Noch nicht so gut", "Ein bisschen", "Schon ganz gut"]
     },
     standard: {

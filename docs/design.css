@@ -1806,3 +1806,39 @@ body.lesson-view .lern-leiste .reading-button-normal.is-active,
   border-color: var(--accent);
   border-radius: var(--radius-s);
 }
+
+/* ---------- Hauptmenü: Wörter nicht zerschneiden (Phase 4 B, 30.10.2026, Bericht 110) ----------
+   Vorher waren die fünf Punkte gleich breit, und „overflow-wrap: anywhere“ (oben) erlaubte eine
+   Trennung an jeder Stelle: „Einstellun / gen“, bei großer Schrift sogar „Star / t“.
+   Jetzt bleiben die Punkte gleich breit (gleich große Tippflächen), aber jeder ist mindestens
+   so breit wie seine längste Silbe. Lange Wörter trennen nur an der vorgesehenen Stelle mit
+   Bindestrich (weiches Trennzeichen in index.html: Einstel-lungen, Lern-weg). Reicht die
+   Breite auch dafür nicht (320 px, große Schrift, vergrößerte Abstände), rutschen Punkte in
+   eine zweite Reihe – kein Wort wird zerschnitten, nichts muss seitlich geschoben werden
+   (WCAG 1.4.10). Der Platz unter dem Inhalt folgt der echten Höhe der Leiste
+   (tabbarHoeheMessen in app.js). */
+body .main-tabbar { flex-wrap: wrap; row-gap: 4px; }
+body .main-tabbar .tab-item {
+  flex: 1 1 0;
+  min-width: min-content;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+body .main-tabbar .tab-label { max-width: 100%; }
+
+/* ---------- „Zeit zum Wiederholen“: Angebot, keine Warnung (Phase 4 C, 30.10.2026, Bericht 110) ----------
+   Vorher: Warnfarbe (--warn-bg, Rahmen --warn) als Kasten um die Knöpfe. Das Angebot ist
+   freiwillig; Warnfarbe und doppelter Rahmen sagten „dringend“ (§3 emotionale Sicherheit,
+   §10a Punkt 1 und 6). Jetzt wie „Da bist du gerade“: Überschrift, Satz, Knöpfe. */
+.review-section {
+  margin-top: 26px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.review-section > .review-title { font-size: var(--fs-gross); margin: 0 0 8px; }
+.review-section > .review-sub { font-size: var(--fs-text); margin: 0 0 12px; }
+
