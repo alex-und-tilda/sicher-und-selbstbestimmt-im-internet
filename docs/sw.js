@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-31-beta3-portal-wording";
+const CACHE_VERSION = "v2026-31-beta3-schulung-0816";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -455,7 +455,7 @@ self.addEventListener("fetch", (event) => {
   /* Interne Schulung und lokale Verfügbarkeit niemals im Lernapp-Cache speichern. */
   const scopePath = new URL(self.registration.scope).pathname;
   const relativePath = url.pathname.slice(scopePath.length);
-  if (relativePath.startsWith("intern/") || relativePath.startsWith("lokal/")) return;
+  if (relativePath.startsWith("intern/") || relativePath.startsWith("lokal/") || relativePath.startsWith("schulung/") || relativePath === "schulung") return;
 
   /* HTML-Dateien: Network-first (aktueller Inhalt), Fallback Cache */
   if (event.request.headers.get("accept")?.includes("text/html")) {
