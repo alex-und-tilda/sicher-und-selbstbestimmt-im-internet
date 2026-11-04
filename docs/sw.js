@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-30s";
+const CACHE_VERSION = "v2026-31-beta3-final";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -13,6 +13,141 @@ const ALTER_ARASAAC_CACHE = "arasaac-pictograms-v1";
 
 /* Alle Dateien, die sofort beim Installieren gecacht werden */
 const PRECACHE_URLS = [
+  "./assets/praxis/n1.png",
+  "./assets/praxis/n2.png",
+  "./assets/praxis/n3.png",
+  "./assets/praxis/n4.png",
+  "./assets/praxis/n5.png",
+  "./assets/praxis/n6.png",
+  "./assets/praxis/n7.png",
+
+  "./paket-metadaten.js",
+  /* PDF-VORSCHAU-BEGIN */
+  "./pdf-vorschau-daten.js",
+  "./pdf-vorschau.css",
+  "./pdf-vorschau-druck.js",
+  "./pdf-vorschau/3f724cae55148215/seite-01.png",
+  "./pdf-vorschau/3f724cae55148215/seite-02.png",
+  "./pdf-vorschau/3f724cae55148215/seite-03.png",
+  "./pdf-vorschau/3f724cae55148215/seite-04.png",
+  "./pdf-vorschau/3f724cae55148215/seite-05.png",
+  "./pdf-vorschau/3f724cae55148215/seite-06.png",
+  "./pdf-vorschau/3f724cae55148215/seite-07.png",
+  "./pdf-vorschau/3f724cae55148215/seite-08.png",
+  "./pdf-vorschau/3f724cae55148215/seite-09.png",
+  "./pdf-vorschau/3f724cae55148215/seite-10.png",
+  "./pdf-vorschau/3f724cae55148215/seite-11.png",
+  "./pdf-vorschau/3f724cae55148215/seite-12.png",
+  "./pdf-vorschau/3f724cae55148215/seite-13.png",
+  "./pdf-vorschau/3f724cae55148215/seite-14.png",
+  "./pdf-vorschau/3f724cae55148215/seite-15.png",
+  "./pdf-vorschau/3f724cae55148215/seite-16.png",
+  "./pdf-vorschau/3f724cae55148215/index.html",
+  "./pdf-vorschau/65189a7f174eab62/seite-1.png",
+  "./pdf-vorschau/65189a7f174eab62/seite-2.png",
+  "./pdf-vorschau/65189a7f174eab62/seite-3.png",
+  "./pdf-vorschau/65189a7f174eab62/index.html",
+  "./pdf-vorschau/b8ac662d5dbbeb72/seite-1.png",
+  "./pdf-vorschau/b8ac662d5dbbeb72/seite-2.png",
+  "./pdf-vorschau/b8ac662d5dbbeb72/index.html",
+  "./pdf-vorschau/d204e0faec257ce7/seite-1.png",
+  "./pdf-vorschau/d204e0faec257ce7/seite-2.png",
+  "./pdf-vorschau/d204e0faec257ce7/seite-3.png",
+  "./pdf-vorschau/d204e0faec257ce7/seite-4.png",
+  "./pdf-vorschau/d204e0faec257ce7/seite-5.png",
+  "./pdf-vorschau/d204e0faec257ce7/seite-6.png",
+  "./pdf-vorschau/d204e0faec257ce7/index.html",
+  "./pdf-vorschau/77406d518d032897/seite-1.png",
+  "./pdf-vorschau/77406d518d032897/index.html",
+  "./pdf-vorschau/dadb754f161de067/seite-1.png",
+  "./pdf-vorschau/dadb754f161de067/seite-2.png",
+  "./pdf-vorschau/dadb754f161de067/seite-3.png",
+  "./pdf-vorschau/dadb754f161de067/seite-4.png",
+  "./pdf-vorschau/dadb754f161de067/seite-5.png",
+  "./pdf-vorschau/dadb754f161de067/index.html",
+  "./pdf-vorschau/809282db7e81c78c/seite-01.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-02.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-03.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-04.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-05.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-06.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-07.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-08.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-09.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-10.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-11.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-12.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-13.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-14.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-15.png",
+  "./pdf-vorschau/809282db7e81c78c/seite-16.png",
+  "./pdf-vorschau/809282db7e81c78c/index.html",
+  "./pdf-vorschau/64a00d034b989d6a/seite-01.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-02.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-03.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-04.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-05.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-06.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-07.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-08.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-09.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-10.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-11.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-12.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-13.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-14.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-15.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-16.png",
+  "./pdf-vorschau/64a00d034b989d6a/seite-17.png",
+  "./pdf-vorschau/64a00d034b989d6a/index.html",
+  "./pdf-vorschau/32de803d3ce292dd/seite-01.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-02.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-03.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-04.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-05.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-06.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-07.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-08.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-09.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-10.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-11.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-12.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-13.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-14.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-15.png",
+  "./pdf-vorschau/32de803d3ce292dd/seite-16.png",
+  "./pdf-vorschau/32de803d3ce292dd/index.html",
+  "./pdf-vorschau/f78850b869973c1a/seite-1.png",
+  "./pdf-vorschau/f78850b869973c1a/seite-2.png",
+  "./pdf-vorschau/f78850b869973c1a/seite-3.png",
+  "./pdf-vorschau/f78850b869973c1a/index.html",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-01.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-02.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-03.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-04.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-05.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-06.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-07.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-08.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-09.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-10.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-11.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-12.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-13.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-14.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-15.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-16.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/seite-17.png",
+  "./pdf-vorschau/2e15b3e77c449b9a/index.html",
+  "./pdf-vorschau/4420d71cbfd59d75/seite-1.png",
+  "./pdf-vorschau/4420d71cbfd59d75/seite-2.png",
+  "./pdf-vorschau/4420d71cbfd59d75/seite-3.png",
+  "./pdf-vorschau/4420d71cbfd59d75/seite-4.png",
+  "./pdf-vorschau/4420d71cbfd59d75/index.html",
+  /* PDF-VORSCHAU-END */
+  "./bedienung.css","./bildfuehrung.js","./bildfuehrung.css","./design-a.css","./zugang.html","./zugang.js","./zugang.css","./material-index.js","./workshop-durchfuehrung.js",
+"./workshop.html","./workshop.js","./workshop.css","./workshop-daten.js","./workshop-erweiterung.js","./material/Kahoot_Facebook_Referenzmodul.xlsx","./material/Cybermobbing_Workshop_Referenzmodul.pptx","./material/index.html","./material/Trainerleitfaden_TikTok.pdf","./material/Snapchat_Workshop_Referenzmodul.pptx","./material/Kahoot_TikTok_Referenzmodul.xlsx","./material/TikTok_Workshop_Referenzmodul.pptx","./material/Trainerleitfaden_Facebook.pdf","./material/Trainerleitfaden_Snapchat.pdf","./material/Kahoot_Snapchat_Referenzmodul.xlsx","./material/Trainerleitfaden_Instagram.pdf","./material/Trainerleitfaden_Cybermobbing.pdf","./material/Instagram_Workshop_Referenzmodul.pptx","./material/Kahoot_Instagram_Referenzmodul.xlsx","./material/Facebook_Workshop_Referenzmodul.pptx","./material/Kahoot_Cybermobbing_Referenzmodul.xlsx","./material/arbeitsmaterial/Profil-Karten_Facebook.pptx","./material/arbeitsmaterial/Situationskarten_Cybermobbing.pdf","./material/arbeitsmaterial/Situationskarten_Cybermobbing.pptx","./material/arbeitsmaterial/Regel-Plakat.pdf","./material/arbeitsmaterial/Antwortkarten_ABC.pdf","./material/arbeitsmaterial/Trend-Karten_TikTok.pptx","./material/arbeitsmaterial/Profil-Karten_Facebook.pdf","./material/arbeitsmaterial/README.md","./material/arbeitsmaterial/Antwortkarten_ABC.pptx","./material/arbeitsmaterial/Ablauf-Plakat.pdf","./material/arbeitsmaterial/Regel-Plakat.pptx","./material/arbeitsmaterial/Hilfe-Karte_Meine_Hilfe.pptx","./material/arbeitsmaterial/Hilfe-Karte_Meine_Hilfe.pdf","./material/arbeitsmaterial/Trend-Karten_TikTok.pdf","./material/arbeitsmaterial/Ablauf-Plakat.pptx","./praxis/index.html","./praxis/vorlesen.js","./praxis/facebook.html","./praxis/whatsapp.html","./praxis/youtube.html","./praxis/snapchat.html","./praxis/instagram.html","./praxis/tiktok.html",
+"./entwurf.css", "./entwurf.js", "./entwurf-storage.js",
   /* Kern */
   "./",
   "./index.html",
@@ -220,9 +355,6 @@ const PRECACHE_URLS = [
   "./assets/fonts/atkinson-bold-ext.woff2",
   "./assets/fonts/atkinson-regular.ttf",
   "./assets/fonts/atkinson-bold.ttf",
-
-  /* Logos im Footer */
-  "./assets/brand/logo-sozialstiftung-nrw.jpeg",
 ];
 
 /* Einfache Offline-Fallback-Seite (wenn Netz und Cache komplett fehlen) */
@@ -298,7 +430,7 @@ self.addEventListener("activate", (event) => {
         keys
           .filter((key) =>
             (key.startsWith("sicher-im-netz-") && key !== CACHE_NAME) ||
-            key === ALTER_ARASAAC_CACHE)
+            key === "sicher-im-netz-unused")
           .map((key) => caches.delete(key))
       ).then(() => warUpdate);
     }).then((warUpdate) => {
@@ -320,22 +452,29 @@ self.addEventListener("fetch", (event) => {
   /* Nur eigene Anfragen abfangen (kein Cross-Origin) */
   if (url.origin !== location.origin) return;
 
+  /* Interne Schulung und lokale Verfügbarkeit niemals im Lernapp-Cache speichern. */
+  const scopePath = new URL(self.registration.scope).pathname;
+  const relativePath = url.pathname.slice(scopePath.length);
+  if (relativePath.startsWith("intern/") || relativePath.startsWith("lokal/")) return;
+
   /* HTML-Dateien: Network-first (aktueller Inhalt), Fallback Cache */
   if (event.request.headers.get("accept")?.includes("text/html")) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
           /* Aktuelle Version im Cache speichern */
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+          }
           return response;
         })
         .catch(async () =>
           /* Erst das Ergebnis abwarten: ein Promise ist auch ohne Treffer
              wahr und würde die weiteren Ersatzseiten überspringen. */
-          (await caches.match(event.request)) ||
-          (await caches.match("./index.html")) ||
-          (await caches.match("./404.html")) ||
+          (await caches.match(event.request, { cacheName: CACHE_NAME, ignoreSearch: true })) ||
+          (await caches.match("./index.html", { cacheName: CACHE_NAME })) ||
+          (await caches.match("./404.html", { cacheName: CACHE_NAME })) ||
           offlineFallback()
         )
     );
@@ -344,7 +483,7 @@ self.addEventListener("fetch", (event) => {
 
   /* Alles andere: Cache-first (Bilder, CSS, JS, Schriften) */
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    caches.match(event.request, { cacheName: CACHE_NAME, ignoreSearch: true }).then((cached) => {
       if (cached) return cached;
       /* Nicht im Cache: vom Netz laden und speichern */
       return fetch(event.request).then((response) => {

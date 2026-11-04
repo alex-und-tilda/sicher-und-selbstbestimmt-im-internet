@@ -1,0 +1,293 @@
+/* Entwurf „Workshop beim Thema" – Ergänzungen für die Kursleitungs-Ansicht.
+   Farben, Schrift und Karten kommen aus styles.css, design.css und entwurf.css des Pilots. */
+
+body.ws { padding-bottom: 0; }
+.ws-app { max-width: 1180px; }
+
+.ws-entwurf {
+  background: var(--warn-bg); color: var(--ink); border-bottom: 1px solid var(--warn);
+  padding: 8px 16px; font-size: .9rem; text-align: center;
+}
+
+.ws-kopf { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ws-kopf .header-text { flex: 1 1 260px; }
+.ws-zurueck {
+  color: var(--accent); font-weight: 600; text-decoration: none; padding: 10px 14px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+}
+.ws-zurueck:hover { background: var(--accent-soft); }
+
+/* Reiter */
+.ws-reiter {
+  display: flex; gap: 6px; overflow-x: auto; padding: 4px 8px 12px; margin: 0 0 8px;
+  scrollbar-width: thin;
+}
+.ws-reiter a {
+  flex: 0 0 auto; padding: 10px 14px; border-radius: 999px; text-decoration: none;
+  color: var(--ink); background: var(--surface); border: 1px solid var(--line); font-weight: 600; font-size: .95rem;
+}
+.ws-reiter a:hover { background: var(--accent-soft); }
+.ws-reiter a[aria-current="page"] {
+  background: var(--accent); color: var(--on-accent); border-color: var(--accent);
+  text-decoration: underline; text-underline-offset: 4px;
+}
+
+.ws-inhalt { padding: 0 8px 24px; outline: none; }
+.ws-inhalt .card { padding: 22px 24px; margin: 0 0 16px; }
+.ws-inhalt h2 { font-size: 1.35rem; margin: 0 0 6px; letter-spacing: -.02em; }
+.ws-inhalt h3 { font-size: 1.1rem; margin: 0 0 10px; }
+.ws-inhalt h4 { font-size: 1rem; margin: 16px 0 6px; }
+.ws-inhalt p, .ws-inhalt li, .ws-inhalt dd { line-height: 1.55; }
+
+:is(.ws-inhalt, .ws-kopf, .ws-reiter) a:focus-visible,
+.ws-inhalt :is(button, select, summary):focus-visible {
+  outline: 3px solid var(--focus); outline-offset: 2px;
+}
+
+/* Knöpfe */
+.ws-knopf {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px;
+  border-radius: 12px; border: 1px solid var(--line); background: var(--surface);
+  color: var(--accent-dark); font-weight: 600; text-decoration: none; cursor: pointer; font-size: .95rem;
+}
+.ws-knopf:hover { background: var(--accent-soft); }
+.ws-knopf.primaer { background: var(--accent); color: var(--on-accent); border-color: var(--accent); box-shadow: 0 3px 0 var(--accent-dark); }
+.ws-knopf.primaer:hover { background: var(--accent-dark); }
+.ws-knopf-leise { background: transparent; }
+.ws-knopf[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+.ws-link { color: var(--accent); font-weight: 600; }
+.ws-datei-meta { font-weight: 400; color: var(--ink-soft); font-size: .85em; }
+
+.ws-chip {
+  display: inline-block; font-size: .78rem; font-weight: 700; padding: 2px 9px; border-radius: 999px;
+  border: 1px solid transparent; white-space: nowrap; vertical-align: middle;
+}
+.ws-chip-pflicht { background: var(--accent-soft); color: var(--accent-dark); border-color: var(--line); }
+.ws-chip-empfohlen { background: var(--surface-soft); color: var(--ink); border-color: var(--line); }
+.ws-chip-offen { background: var(--warn-bg); color: var(--ink); border-color: var(--warn); }
+.ws-chip-ok { background: var(--good-bg); color: var(--good-text); border-color: var(--line); }
+
+.ws-quelle { font-size: .82rem; color: var(--ink-soft); margin: 12px 0 0; }
+.ws-klein { font-size: .9rem; color: var(--ink-soft); }
+.ws-hinweis { background: var(--surface-soft); border-left: 4px solid var(--accent); padding: 12px 16px; border-radius: 8px; }
+.ws-hinweis-warn { background: var(--warn-bg); border-left-color: var(--warn); margin: 0 0 16px; }
+.ws-hinweis-warn h4:first-child { margin-top: 0; }
+
+/* Überblick */
+.ws-held { background: linear-gradient(135deg, var(--surface) 0%, var(--accent-soft) 100%) !important; }
+.ws-ueber { margin: 0 0 6px; font-size: .85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .05em; }
+.ws-held h2 { font-size: 1.8rem; }
+.ws-held-unter { font-size: 1.1rem; color: var(--ink-soft); margin: 0 0 16px; }
+.ws-held-aktionen, .ws-aktionen { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.ws-raster { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0 0 16px; }
+.ws-raster .ws-kachel { margin: 0; padding: 18px; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 6px; }
+.ws-kachel:hover { box-shadow: var(--shadow-hover); border-color: var(--accent); }
+.ws-kachel-titel { font-weight: 700; color: var(--accent-dark); }
+.ws-kachel-text { font-size: .9rem; color: var(--ink-soft); }
+
+.ws-zwei { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+.ws-ablauf { list-style: none; padding: 0; margin: 0; }
+.ws-ablauf li { display: grid; grid-template-columns: 64px 1fr; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+.ws-zeit { font-variant-numeric: tabular-nums; color: var(--ink-soft); font-size: .9rem; }
+.ws-ziele { padding-left: 1.2em; margin: 0; }
+.ws-ziele li { margin: 0 0 8px; }
+.ws-dl dt { font-weight: 700; margin-top: 10px; }
+.ws-dl dd { margin: 2px 0 0; }
+.ws-aufklapp > summary { cursor: pointer; font-weight: 700; font-size: 1.05rem; }
+.ws-aufklapp[open] > summary { margin-bottom: 8px; }
+
+/* Präsentation */
+.ws-folien { display: grid; grid-template-columns: 210px minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.ws-kapitel { display: flex; flex-direction: column; gap: 4px; position: sticky; top: 12px; }
+.ws-kapitel a {
+  display: flex; flex-direction: column; padding: 8px 12px; border-radius: 10px; text-decoration: none;
+  color: var(--ink); border: 1px solid transparent; font-weight: 600; font-size: .92rem;
+}
+.ws-kapitel a:hover { background: var(--surface); border-color: var(--line); }
+.ws-kapitel a[aria-current="true"] { background: var(--surface); border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.ws-kapitel-meta { font-weight: 400; font-size: .8rem; color: var(--ink-soft); }
+
+.ws-folien-leiste { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.ws-wahl { flex: 1 1 200px; }
+.ws-wahl select {
+  width: 100%; min-height: 44px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); padding: 0 10px; font: inherit;
+}
+
+.ws-buehne {
+  margin: 0; position: relative; min-height: 380px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 16px; box-shadow: var(--shadow); overflow: auto; display: flex; flex-direction: column;
+}
+.ws-buehne > .ws-folie { flex: 1 1 auto; }
+.ws-buehne:fullscreen { border-radius: 0; border: 0; display: flex; align-items: center; justify-content: center; }
+.ws-buehne:fullscreen .ws-folie { width: min(100vw, 177.78vh); font-size: 2.2vw; }
+.ws-folie { padding: 28px 32px 36px; font-size: clamp(.95rem, 1.3vw, 1.15rem); color: var(--ink); }
+.ws-folie-titel { font-size: 1.5em !important; margin: 0 0 .7em !important; color: var(--accent-dark); letter-spacing: -.02em; }
+.ws-folie-text p { margin: 0 0 .5em; }
+.ws-punkt { display: flex; gap: .7em; align-items: center; }
+.ws-marke {
+  flex: 0 0 auto; display: inline-grid; place-items: center; width: 1.9em; height: 1.9em; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: .9em; margin-right: .4em;
+}
+.ws-platzhalter {
+  border: 2px dashed var(--line); border-radius: 10px; padding: .7em 1em; color: var(--ink-soft);
+  font-style: italic; background: var(--surface-soft); font-size: .85em;
+}
+.ws-folie-trenner { height: 100%; display: flex; flex-direction: column; justify-content: center; background: var(--accent-soft); }
+.ws-folie-klein { font-size: 1.1em; font-weight: 700; color: var(--accent); margin: 0; text-transform: uppercase; letter-spacing: .06em; }
+.ws-folie-gross { font-size: 2.6em; font-weight: 800; margin: .1em 0 0; color: var(--accent-dark); letter-spacing: -.03em; }
+.ws-folie-nr { position: absolute; right: 14px; bottom: 10px; font-size: .8rem; color: var(--ink-soft); }
+
+.ws-notizen { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; }
+.ws-notizen .ws-dl dd { font-size: .95rem; }
+.ws-modul { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 10px; }
+.ws-modul p { font-size: .9rem; }
+
+/* PDF und Handy */
+.ws-pdf { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface-soft); }
+.ws-pdf iframe { display: block; width: 100%; height: 78vh; min-height: 480px; border: 0; }
+.ws-handy {
+  width: 390px; max-width: 100%; height: 720px; margin: 8px auto 0; border: 10px solid var(--line);
+  border-radius: 36px; overflow: hidden; background: var(--surface);
+}
+.ws-handy iframe { width: 100%; height: 100%; border: 0; display: block; }
+.ws-block-kopf { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+
+/* Material */
+.ws-material { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 16px; align-items: start; }
+.ws-mat-liste { position: sticky; top: 12px; }
+.ws-mat-liste ul, .ws-einstiege { list-style: none; padding: 0; margin: 8px 0 12px; display: flex; flex-direction: column; gap: 6px; }
+.ws-mat-liste li a, .ws-einstiege li a {
+  display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 10px; text-decoration: none;
+  color: var(--ink); border: 1px solid var(--line); background: var(--surface);
+}
+.ws-mat-liste li a:hover, .ws-einstiege li a:hover { border-color: var(--accent); }
+.ws-mat-liste li a[aria-current="true"] { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); background: var(--accent-soft); }
+.ws-mat-titel { font-weight: 700; }
+.ws-mat-meta { font-size: .85rem; color: var(--ink-soft); }
+
+.ws-tabelle { overflow-x: auto; margin: 8px 0; }
+.ws-tabelle table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+.ws-tabelle th, .ws-tabelle td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ws-tabelle th { background: var(--surface-soft); }
+.ws-tabelle code { font-size: .78rem; word-break: break-all; }
+
+/* Quiz */
+.ws-fragen { list-style: none; padding: 0; margin: 0 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+.ws-fragen .ws-frage { margin: 0; }
+.ws-frage-kopf { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.ws-frage-kopf a { color: var(--accent); font-weight: 600; font-size: .9rem; }
+.ws-frage-text { font-weight: 700; }
+.ws-antworten { list-style: none; padding: 0; margin: 0; }
+.ws-antworten li { display: flex; align-items: center; padding: 6px 8px; border-radius: 8px; }
+.ws-antworten .ws-marke { background: var(--accent); }
+.ws-antworten li.ws-passend { background: var(--good-bg); font-weight: 600; }
+.ws-antworten li.ws-passend .ws-marke { background: var(--good-text); }
+.ws-kahoot { border-left: 4px solid var(--warn) !important; }
+.ws-qr img { display: block; margin: 8px 0; background: var(--surface); padding: 8px; border: 1px solid var(--line); border-radius: 12px; }
+.ws-status { list-style: none; padding: 0; margin: 0; }
+.ws-status li { margin: 0 0 10px; }
+
+.ws-fuss { padding: 8px 16px 32px; font-size: .85rem; color: var(--ink-soft); }
+
+@media (max-width: 1100px) {
+  .ws-folien { grid-template-columns: minmax(0, 1fr) 320px; }
+  .ws-kapitel { grid-column: 1 / -1; position: static; flex-direction: row; overflow-x: auto; }
+  .ws-kapitel a { flex: 0 0 auto; }
+}
+@media (max-width: 820px) {
+  .ws-folien, .ws-material { grid-template-columns: minmax(0, 1fr); }
+  .ws-notizen, .ws-mat-liste { position: static; max-height: none; }
+  .ws-buehne { min-height: 220px; }
+  .ws-inhalt .card { padding: 18px 16px; }
+  .ws-held h2 { font-size: 1.45rem; }
+  .ws-pdf iframe { height: 70vh; }
+}
+@media print {
+  .ws-entwurf, .ws-reiter, .ws-kopf, .ws-folien-leiste, .ws-kapitel, .ws-fuss { display: none !important; }
+}
+
+/* Gemeinsame Lesbarkeit und Reflow auch mit großer Schrift und dunklem Systemdesign. */
+.ws-reiter{flex-wrap:wrap;overflow:visible}
+.ws-kapitel{max-width:100%;min-width:0}
+.ws-kapitel a{overflow-wrap:anywhere}
+.ws-zwei,.ws-fragen{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.ws-inhalt *{min-width:0}
+.ws-inhalt{overflow-wrap:anywhere}
+.ws-handy{box-sizing:border-box}
+.ws-folien-leiste .ws-knopf{flex-shrink:0}
+.ws-ablauf li{grid-template-columns:minmax(0,1fr);gap:0}
+.ws-tabelle{max-width:100%}
+.ws-chip{white-space:normal}
+.ws-held{background:var(--surface)!important}
+.ws-ueber{text-transform:none;letter-spacing:normal}
+.ws-klein,.ws-quelle,.ws-chip,.ws-kapitel-meta,.ws-mat-meta,.ws-kachel-text,.ws-entwurf{font-size:1.06rem}
+.ws-inhalt :is(button,select,summary),.ws-knopf,.ws-zurueck,.ws-reiter a{min-height:44px}
+.ws-aufloesung{padding:16px;margin-bottom:24px;background:var(--surface-soft)}
+.ws-praesentieren :is(.ws-entwurf,.ws-kopf,.ws-reiter,.ws-kapitel,.ws-notizen,.ws-fuss){display:none!important}
+.ws-praesentieren .ws-app{max-width:100%;width:100%;padding:12px}
+.ws-praesentieren .ws-folien{display:block}
+.ws-praesentieren .ws-buehne{min-height:75vh}
+.ws-praesentieren .ws-folie{font-size:clamp(1.2rem,2.2vw,3rem)}
+.ws-praesentieren .ws-folie-nr{position:static;padding:8px}
+@media print{
+ body.ws{background:white!important;color:black!important}
+ .ws-inhalt .card,.ws-held{background:white!important;color:black!important;box-shadow:none!important;border:0!important}
+ .ws-folien,.ws-material,.ws-zwei{display:block}
+ .ws-notizen,.ws-mat-liste{position:static;max-height:none;overflow:visible}
+ .ws-aufloesung{display:none}
+}
+
+body.ws{font-size:max(18px,1rem)}
+body.ws :is(.ws-knopf,.ws-reiter a,.ws-kapitel a,.ws-notizen .ws-dl dd,.ws-modul p,.ws-datei-meta,.ws-tabelle table,.ws-fuss,.ws-zeit,.ws-quelle){font-size:max(18px,1rem)}
+
+.ws-druck-aktion{padding:0 8px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ws-druck-titel{display:none}
+@media print{
+ body.ws{color-scheme:light;--ink:#000;--ink-soft:#222;--accent:#143b48;--accent-dark:#143b48;--surface:#fff;--surface-soft:#fff;--on-accent:#fff;--line:#777;--good-text:#143b48;--good-bg:#fff;--accent-soft:#fff;--warn-bg:#fff}
+ .ws-druck-aktion{display:none!important}
+ .ws-druck-titel{display:block;font-weight:bold;margin-bottom:20px}
+ .ws-mat-liste,.ws-held-aktionen,.ws-aktionen,.ws-raster{display:none!important}
+ .ws-folie-nr{position:static}
+ .ws-buehne{min-height:0;overflow:visible;box-shadow:none}
+ .ws-inhalt .card{break-inside:auto}
+}
+
+/* Kursleitung: klare Lesespalte statt Rahmen um jeden Textabschnitt. */
+body.ws .ws-inhalt :is(section.card,aside.card,nav.card,li.card,details.card){background:transparent;border:0;box-shadow:none;border-radius:0}
+.ws-raster{display:flex;flex-wrap:wrap;gap:10px 24px;border-bottom:1px solid var(--line);padding-bottom:20px}
+.ws-raster .ws-kachel{border:0!important;border-radius:0!important;padding:8px 0!important;flex:1 1 210px;background:transparent!important}
+.ws-durchfuehrung{max-width:100%;padding-bottom:24px}
+.ws-durch-spalten{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px}
+.ws-durch-abschnitt{margin:24px 0;max-width:65ch}
+.ws-schritt-material{border-top:1px solid var(--line);padding-top:20px;margin-top:24px}
+.ws-schritt-material li{margin-bottom:12px}
+.ws-zuordnung{font-size:1rem}
+.ws-quiz-loesung{margin-top:12px}
+.ws-metadaten{margin:16px 0}
+.ws-nur-folie :is(.ws-entwurf,.ws-kopf,.ws-reiter,.ws-druck-aktion,.ws-kapitel,.ws-notizen,.ws-fuss),.ws-praesentieren .ws-druck-aktion{display:none!important}
+.ws-nur-folie .ws-app{max-width:100%;padding:20px}
+.ws-nur-folie .ws-folien{display:block}
+.ws-nur-folie .ws-buehne{min-height:65vh}
+.ws-nur-folie .ws-folie{font-size:clamp(1.25rem,2.2vw,2.7rem)}
+.ws-nur-folie .ws-folie-nr{position:static;padding:8px}
+@media(max-width:820px){.ws-durch-spalten{display:block}.ws-durch-spalten>div+div{margin-top:24px}}
+@media print{.ws-durch-spalten{display:block}.ws-durchfuehrung .ws-folien-leiste{display:none}}
+
+/* Kleine Bildschirme: dieselben Bereiche in einer platzsparenden, beschrifteten Auswahl. */
+.ws-bereichwahl{display:none}
+.ws-bereichwahl[hidden]{display:none!important}
+@media(min-width:651px){
+ .ws-reiter a{border:0;border-radius:0;background:transparent}
+ .ws-reiter a[aria-current=page]{background:transparent;color:var(--accent-dark);border-bottom:3px solid var(--accent);text-decoration:none}
+}
+@media(max-width:650px){
+ .ws-reiter{display:none}
+ .ws-bereichwahl{display:block;margin:12px 8px 20px}
+ .ws-bereichwahl select{display:block;width:100%;min-height:58px;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px}
+ .ws-druck-aktion span{display:none}
+ .ws-kopf{gap:8px}
+}
+.ws-nur-folie .ws-bereichwahl,.ws-praesentieren .ws-bereichwahl{display:none!important}
+@media print{.ws-bereichwahl{display:none!important}}

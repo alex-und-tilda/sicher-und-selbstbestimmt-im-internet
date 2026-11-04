@@ -1,0 +1,1 @@
+/* Kein lokaler Ausbildungsanschluss in der oeffentlichen Ausgabe. */

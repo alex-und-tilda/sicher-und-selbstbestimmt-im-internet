@@ -1,0 +1,54 @@
+/* Gezielte Fortführung von Design A: lesbare Bedienung, keine neuen Inhalte. */
+:root{--a-control-border:#637d77;--a-muted:#405856}
+@media(prefers-color-scheme:dark){:root{--a-control-border:#a3bcb4;--a-muted:#d1dfda}}
+body.entwurf.ws{font-size:max(20px,1rem)}
+body.entwurf :is(.test-badge,.orientierung-rolle,.orientierung-beschriftung,.topic-start-badge,.main-tabbar .tab-item){font-size:max(18px,.95rem)}
+body.entwurf :is(.ws-knopf,.ws-wahl select,.ws-bereichwahl select,.entwurf-lang,.card-read-button){border-color:var(--a-control-border)}
+body.entwurf .ws-knopf:is(.primaer,.ws-hauptaktion){background:var(--accent);color:var(--on-accent);border-color:var(--accent);box-shadow:none}
+body.entwurf .ws-knopf:is(.primaer,.ws-hauptaktion):hover{background:var(--accent);color:var(--on-accent);text-decoration:underline;text-underline-offset:4px}
+body.ws :is(.ws-quelle,.ws-datei-meta,.ws-mat-meta,.ws-kapitel-meta,.ws-zeit,.ws-fuss,.ws-chip,.ws-tabelle code,.ws-folie-nr){font-size:max(18px,.95rem);line-height:1.5}
+body.ws .ws-reiter a{gap:8px;line-height:1.3}
+body.ws .ws-reiter a[aria-current=page]{font-weight:700;border-bottom-width:4px;color:var(--ink)}
+body.ws .ws-bereichwahl label{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:max(18px,.95rem)}
+body.ws .ws-position{display:block;font-size:max(22px,1.1rem);color:var(--ink);font-weight:700}
+body.ws .ws-position-meta{display:block;font-size:max(18px,.95rem);color:var(--ink-soft)}
+body.ws .orientierung-fortschritt{height:12px;width:min(100%,26rem);border-color:var(--a-control-border);background:var(--a-line);margin:8px 0 16px}
+body.ws .orientierung-fortschritt::-webkit-progress-bar{background:var(--a-line)}
+body.entwurf .lern-ort-schritt{font-size:max(18px,.95rem);font-weight:700;color:var(--ink)}
+body.entwurf .lern-ort-balken{height:10px;background:var(--a-line);border:1px solid var(--a-control-border)}
+body.ws .ws-direkt-material{border-bottom:1px solid var(--line);padding:0 0 10px}
+body.ws .ws-direkt-material>summary{font-size:max(20px,1rem);font-weight:700;color:var(--accent);min-height:48px;padding:6px 0;text-decoration:underline;text-underline-offset:4px}
+body.ws .ws-direkt-inhalt{padding:8px 0}
+body.ws .ws-direkt-inhalt .ws-pdf iframe{height:65vh;min-height:280px;width:100%}
+body.ws .ws-durch-spalten:has(.ws-direkt-material[open]){grid-template-columns:minmax(0,1fr)}
+body.ws .ws-durch-spalten:has(.ws-direkt-material[open]) .ws-durch-werkzeuge{grid-column:1;grid-row:1;border-left:0;padding-left:0}
+body.ws .ws-durch-spalten:has(.ws-direkt-material[open]) .ws-durch-notizen{grid-column:1;grid-row:2}
+body.entwurf .entwurf-home>:is(.intro-start-button,.primary-action){margin-left:0;margin-right:0;text-align:left}
+body.entwurf .entwurf-home>img{object-fit:contain}
+body.entwurf .topic-card .entwurf-topic-image{object-fit:contain}
+body.entwurf .lesson-heading img{object-fit:contain}
+@media(min-width:390px) and (max-width:650px){
+ body.entwurf .topic-card{grid-template-columns:56px minmax(0,1fr)}
+ body.entwurf .topic-card .entwurf-topic-image{width:56px;height:64px;max-height:64px}
+ body.entwurf .lesson-heading img{width:88px;height:88px;max-width:88px;max-height:88px}
+}
+@media(max-width:650px){
+ body.entwurf .main-tabbar .tab-item{line-height:1.2}
+ body.entwurf .entwurf-home>:is(.intro-start-button,.primary-action){max-width:100%;width:100%}
+ body.ws .ws-position{font-size:max(20px,1.05rem)}
+}
+@media print{.ws-direkt-material .ws-pdf,.ws-direkt-material .ws-aktionen{display:none!important}}
+/* Präsentation: die bestehende Vollbildaktion ist der Arbeitsstart. */
+body.ws #wsVollbild{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:700}
+
+/* Auch kleine Rollen-/Statuszeilen des gemeinsamen Einstiegs bleiben lesbar. */
+body:not(.entwurf) :is(.orientierung-rolle,.rubrik,header>span){font-size:max(18px,.95rem)}
+@media(max-width:650px){body.ws .ws-durchfuehrung .ws-folien-leiste .ws-wahl{flex-basis:110px}}
+
+@media (prefers-color-scheme: dark) {
+  body.entwurf .lern-ort-balken,
+  body.ws .orientierung-fortschritt,
+  body.ws .orientierung-fortschritt::-webkit-progress-bar {
+    background-color: #526961;
+  }
+}

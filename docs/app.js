@@ -356,12 +356,12 @@ let activeProfileId = null;
 let deviceShared = false;
 const DEVICE_SHARED_KEY = "geraet-geteilt";
 function loadDeviceShared() {
-  try { deviceShared = window.localStorage.getItem(DEVICE_SHARED_KEY) === "1"; }
+  try { deviceShared = entwurfStorage.getItem(DEVICE_SHARED_KEY) === "1"; }
   catch (e) { deviceShared = false; }
 }
 function setDeviceShared(shared) {
   deviceShared = !!shared;
-  try { window.localStorage.setItem(DEVICE_SHARED_KEY, deviceShared ? "1" : "0"); } catch (e) { /* nichts tun */ }
+  try { entwurfStorage.setItem(DEVICE_SHARED_KEY, deviceShared ? "1" : "0"); } catch (e) { /* nichts tun */ }
 }
 /* Zwischenspeicher beim Zeichen-Bauen (Icon → Farbe → Zahl). */
 let signDraft = { icon: null, color: null, number: null };
@@ -501,13 +501,13 @@ const AWAY_KEY = "weg-seit";              /* geräteweit, nicht pro Profil */
 const AWAY_LIMIT_MS = 3 * 60 * 1000;      /* 3 Minuten – eine Zahl, leicht änderbar */
 
 function markAway() {
-  try { window.localStorage.setItem(AWAY_KEY, String(Date.now())); } catch (e) { /* nichts tun */ }
+  try { entwurfStorage.setItem(AWAY_KEY, String(Date.now())); } catch (e) { /* nichts tun */ }
 }
 function checkReturn() {
   let since = null;
   try {
-    since = window.localStorage.getItem(AWAY_KEY);
-    window.localStorage.removeItem(AWAY_KEY);
+    since = entwurfStorage.getItem(AWAY_KEY);
+    entwurfStorage.removeItem(AWAY_KEY);
   } catch (e) { return; }
   if (!since) return;
   if (!deviceShared || profiles.length === 0) return;
@@ -542,16 +542,16 @@ function hideHeaderSign() {
    (Reihenfolge egal), damit die Deklarations-Reihenfolge der KEY-Konstanten
    im Modul keine Rolle spielt. Global bleiben nur profile-liste,
    profil-aktiv und geraet-geteilt – sie stehen hier NICHT drin. */
-const PROFILE_BASE_KEYS = ["language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf", "lesehilfen"];
+const PROFILE_BASE_KEYS = ["entwurf-ansicht", "entwurf-vormachen", "language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf", "lesehilfen"];
 
 /* Schlüssel für das aktive Profil. Ohne aktives Profil: alter Schlüssel
    (Rückfall – so bricht nie etwas). */
 function pKey(base) {
   return activeProfileId ? base + "::" + activeProfileId : base;
 }
-function pGet(base) { try { return window.localStorage.getItem(pKey(base)); } catch (e) { return null; } }
-function pSet(base, val) { try { window.localStorage.setItem(pKey(base), val); } catch (e) { /* nichts tun */ } }
-function pRemove(base) { try { window.localStorage.removeItem(pKey(base)); } catch (e) { /* nichts tun */ } }
+function pGet(base) { try { return entwurfStorage.getItem(pKey(base)); } catch (e) { return null; } }
+function pSet(base, val) { try { entwurfStorage.setItem(pKey(base), val); } catch (e) { /* nichts tun */ } }
+function pRemove(base) { try { entwurfStorage.removeItem(pKey(base)); } catch (e) { /* nichts tun */ } }
 
 function genProfileId() {
   return "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -559,17 +559,17 @@ function genProfileId() {
 
 function saveProfiles() {
   try {
-    window.localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
-    if (activeProfileId) window.localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
+    entwurfStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+    if (activeProfileId) entwurfStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
   } catch (e) { /* nichts tun */ }
 }
 
 function loadProfiles() {
   try {
-    const raw = window.localStorage.getItem(PROFILES_KEY);
+    const raw = entwurfStorage.getItem(PROFILES_KEY);
     profiles = raw ? JSON.parse(raw) : [];
     if (!Array.isArray(profiles)) profiles = [];
-    const savedActive = window.localStorage.getItem(ACTIVE_PROFILE_KEY);
+    const savedActive = entwurfStorage.getItem(ACTIVE_PROFILE_KEY);
     activeProfileId = (savedActive && profiles.some(p => p.id === savedActive))
       ? savedActive
       : (profiles[0] ? profiles[0].id : null);
@@ -591,7 +591,7 @@ function ensureProfiles() {
      Auto-Profil – das Onboarding lässt die Person zuerst ein Bild wählen. */
   let hasLegacy = false;
   PROFILE_BASE_KEYS.forEach(base => {
-    try { if (window.localStorage.getItem(base) !== null) hasLegacy = true; } catch (e) { /* egal */ }
+    try { if (entwurfStorage.getItem(base) !== null) hasLegacy = true; } catch (e) { /* egal */ }
   });
   if (!hasLegacy) return;
   const p = { id: genProfileId(), avatar: "🦊" };
@@ -599,10 +599,10 @@ function ensureProfiles() {
   activeProfileId = p.id;
   PROFILE_BASE_KEYS.forEach(base => {
     try {
-      const old = window.localStorage.getItem(base);
+      const old = entwurfStorage.getItem(base);
       if (old !== null) {
-        window.localStorage.setItem(base + "::" + p.id, old);
-        window.localStorage.removeItem(base);
+        entwurfStorage.setItem(base + "::" + p.id, old);
+        entwurfStorage.removeItem(base);
       }
     } catch (e) { /* nichts tun */ }
   });
@@ -1015,7 +1015,7 @@ const GLOSSAR = {
   "quishing":               "Quishing ist Betrug mit falschen QR-Codes. Betrüger kleben falsche Codes über echte. Prüfe erst: Woher kommt der Code?",
   /* Beta-Version (06.10.2026): Kopf und Fußzeile nennen die Plattform
      „Beta-Version“. Leichte Sprache, ein Wort für beides (§5). */
-  "beta-version":           "Beta 2 ist die zweite Test-Version dieser Lern-Plattform. Eine Beta-Version ist eine Test-Version. Das Programm ist noch nicht ganz fertig. Manches ändert sich noch. Manches klappt vielleicht noch nicht. Du kannst uns helfen. Sag uns: Was ist gut? Was ist schwer?",
+  "beta-version":           "Beta 3 ist die dritte Test-Version dieser Lern-Plattform. Eine Beta-Version ist eine Test-Version. Das Programm ist noch nicht ganz fertig. Manches ändert sich noch. Manches klappt vielleicht noch nicht. Du kannst uns helfen. Sag uns: Was ist gut? Was ist schwer?",
   "version":                "Eine Version ist ein Stand von einem Programm. Kommt etwas Neues dazu? Dann gibt es eine neue Version.",
   /* Wörter-Hilfe (08.10.2026, Bericht 32): schwere Wörter aus den Lerntexten.
      Leichte Sprache (§5). Die Erklärung sagt, was das Wort bedeutet – nicht,
@@ -1132,6 +1132,7 @@ let glossarOverlay = null;
    ============================================================ */
 let _dialogAktiv = null;   /* der gerade offene Dialog */
 let _dialogFokus = null;   /* was vorher den Fokus hatte */
+let _dialogAussenZustaende = [];
 let _dialogAppWarInert = null;
 
 const DIALOG_FOKUSSIERBAR =
@@ -1174,6 +1175,8 @@ function dialogOeffnen(dialog) {
     const app = document.querySelector(".app");
     _dialogAppWarInert = app ? app.inert : null;
     if (app) app.inert = true;
+    _dialogAussenZustaende = [...document.querySelectorAll('body > .main-tabbar, body > .skip-link')].map(el => ({el, inert:el.inert}));
+    _dialogAussenZustaende.forEach(({el})=>{el.inert=true;});
   }
   _dialogAktiv = dialog;
   document.addEventListener("keydown", dialogTabFalle, true);
@@ -1189,6 +1192,8 @@ function dialogSchliessen(dialog) {
   const app = document.querySelector(".app");
   if (app && _dialogAppWarInert !== null) app.inert = _dialogAppWarInert;
   _dialogAppWarInert = null;
+  _dialogAussenZustaende.forEach(({el,inert})=>{if(el.isConnected)el.inert=inert;});
+  _dialogAussenZustaende=[];
   const zurueck = _dialogFokus;
   _dialogFokus = null;
   if (zurueck && document.contains(zurueck) && typeof zurueck.focus === "function") {
@@ -1208,7 +1213,7 @@ function initGlossar() {
     <div class="glossar-panel">
       <button class="glossar-close" aria-label="Erklärung schließen" type="button">✕ Schließen</button>
       <p class="glossar-word-label">Was bedeutet:</p>
-      <p class="glossar-word-title" id="glossarWordTitle"></p>
+      <h2 class="glossar-word-title" id="glossarWordTitle"></h2>
       ${buildReadingToolbar("glossarReadingStatus")}
       <p class="glossar-word-def" id="glossarWordDef"></p>
       <button class="link-action glossar-siehe" type="button" hidden></button>
@@ -1229,6 +1234,7 @@ function showGlossar(termKey, anzeige) {
   dialogOeffnen(glossarOverlay);
   const display = anzeige || (termKey.charAt(0).toUpperCase() + termKey.slice(1));
   document.getElementById("glossarWordTitle").textContent = display;
+  glossarOverlay.setAttribute("aria-label", "Wörter-Erklärung: " + display);
   document.getElementById("glossarWordDef").textContent = def;
   const siehe = glossarOverlay.querySelector(".glossar-siehe");
   const weiter = GLOSSAR_SIEHE[termKey];
@@ -2067,7 +2073,8 @@ function setReadingActive(mode) {
     /* Paket G: Der aktive Zustand heisst "Liest vor" statt "Stopp".
        Das Stopp-Quadrat rechts in der Pille sagt, was ein Druck bewirkt
        (Medien-Konvention); die Schrift sagt, was gerade passiert. */
-    if (label) label.textContent = on ? "Liest vor" : "Vorlesen";
+    if (label) label.textContent = on ? "Vorlesen stoppen" : "Vorlesen";
+    n.setAttribute("aria-label", on ? "Vorlesen stoppen" : "Vorlesen");
   });
   document.querySelectorAll(".reading-button-slow").forEach(s => { s.classList.toggle("is-active", mode === "slow"); s.setAttribute("aria-pressed", mode === "slow" ? "true" : "false"); });
 }
@@ -2087,7 +2094,7 @@ function updateReadingStatus(text, hinweis = false) {
 /* Auswahl-Karten, die selbst <button> sind. Ihr Text muss trotzdem vorgelesen
    werden – siehe readCurrentPage(). An EINER Stelle definiert, damit die beiden
    Nutzungen (Auswahl, Satztrennung) nicht auseinanderlaufen. */
-const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
+const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card, .entwurf-choice";
 /* Handlungs-Knoepfe, die mitgelesen werden. Sie bestehen aus mehreren
    Teilen (<strong>Kurz</strong><span>Nur das Wichtigste.</span>) und muessen
    wie Karten zerlegt werden – sonst spricht die Stimme "KurzNur". */
@@ -2103,7 +2110,7 @@ const KARTEN_SELEKTOR = ".topic-card, .action-card, .learn-mode-card";
    waeren die Angebote dahinter fuer eine hoerende Nutzung unsichtbar,
    genau wie es `.alltag-help > summary` und `.support-help-button`
    vorher schon einmal waren. */
-const AKTION_SELEKTOR = ".topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary, .later-details > summary, .path-details > summary, .alltag-variant .alltag-v-way, .einstieg-option, .topic-group-link, .hilfe-anliegen > summary, .feedback-selected > summary, .einstieg-alternativen > summary, .einstieg-alternativen .intro-quickstart-link, .hilfe-werkzeuge .setting-big-button";
+const AKTION_SELEKTOR = ".settings-page-section button:not(.card-read-button), .settings-page-section summary, .intro-start-button, .einstieg-extra > summary, .entwurf-feedback-mehr > summary, .entwurf-vorbild-step button, .topic-start-button, .amount-choice, .later-chip, .support-help-button, .alltag-page .nav-button, .alltag-next .nav-button, .alltag-help > summary, .later-details > summary, .path-details > summary, .alltag-variant .alltag-v-way, .einstieg-option, .topic-group-link, .hilfe-anliegen > summary, .feedback-selected > summary, .einstieg-alternativen > summary, .einstieg-alternativen .intro-quickstart-link, .hilfe-werkzeuge .setting-big-button";
 
 /* Lautsprecher-Symbol der Karten-Vorlesen-Knoepfe. Global, weil es
    frueher als lokale Konstante in renderMenu lag – jede Seite ausserhalb
@@ -2155,10 +2162,11 @@ function readCurrentPage(rate) {
      oder "Quiz machen" – die Seite blieb fuer sie eine Sackgasse. */
   const AKTION = AKTION_SELEKTOR + (dialogRoot ? ", .lern-mehr-knopf, .hilfe-angebot, summary" : "");
   const els = root
-    ? Array.from(root.querySelectorAll("h2, h3, p, li, .feld-zeile, .felder-liste legend, " + OPTION + ", " + KARTE + ", " + AKTION)).filter(el => {
+    ? Array.from(root.querySelectorAll("h1, h2, h3, p, li, .feld-zeile, .felder-liste legend, " + OPTION + ", " + KARTE + ", " + AKTION)).filter(el => {
         const isOption = el.matches(OPTION);
         const isKarte = el.matches(KARTE);
         const isAktion = el.matches(AKTION);
+        if (isAktion && el.matches(':disabled, [aria-disabled="true"]')) return false;
         /* Begleithinweise gehören nicht in das Vorlesen für Lernende.
            Das gilt auch, wenn der Begleitbereich gerade geöffnet ist. */
         if (el.closest(".companion-panel, .begleit-tipp, .reading-status")) return false;
@@ -2371,10 +2379,13 @@ function speakNextSentence(gen) {
     updateReadingStatus(slow ? "Langsam vorlesen läuft." : "Vorlesen läuft.");
   };
   u.onend = () => { if (gen !== _readGen) return; _readIndex++; speakNextSentence(gen); };
-  u.onerror = () => {
+  u.onerror = (event) => {
     if (gen !== _readGen) return;
-    if (_readShort) { stopReading(); return; }
-    _readIndex++; speakNextSentence(gen);
+    stopReading();
+    const unterbrochen = event && ["canceled", "interrupted"].includes(event.error);
+    updateReadingStatus(unterbrochen
+      ? "Vorlesen wurde unterbrochen. Tippe noch einmal auf Vorlesen."
+      : "Vorlesen ist gerade nicht möglich. Tippe noch einmal auf Vorlesen.", true);
   };
   window.speechSynthesis.speak(u);
 }
@@ -2389,10 +2400,18 @@ function readSectionFrom(button) {
   const gen = _readGen;
   window.speechSynthesis.cancel();
   clearReadingHighlight();
-  const els = Array.from(section.querySelectorAll("h3, h4, p, li")).filter(el =>
-    !el.closest("button") && cleanSpeechText(el.textContent).length > 0);
+  const els = Array.from(section.querySelectorAll("h3, h4, p, li, button, summary")).filter(el => {
+    if (el.closest("[hidden], [aria-hidden='true'], .is-hidden, .reading-status") || !el.getClientRects().length) return false;
+    if (el.matches(".card-read-button, :disabled, [aria-disabled='true']")) return false;
+    const closed=el.closest("details:not([open])");
+    if (closed && !(el.tagName==="SUMMARY" && el.parentElement===closed)) return false;
+    if (el.parentElement.closest("button") || el.querySelector("p, li, h3, h4")) return false;
+    return cleanSpeechText(el.textContent).length>0;
+  });
   if (!els.length) return;
-  _readQueue = els.flatMap(el => leseQueueEintraege(el, el.textContent));
+  _readQueue = els.flatMap(el => leseQueueEintraege(el,
+    el.matches("button, summary") ? kartenText(el) : el.textContent,
+    el.getAttribute("aria-pressed")==="true" ? "Ausgewählt. " : ""));
   _readIndex = 0;
   _readShort = false;
   _readRate = (typeof readTempo !== "undefined" && readTempo === "langsam") ? 0.5 : 0.85;
@@ -5839,7 +5858,7 @@ function renderLegalFooter() {
   const footer = document.createElement("div");
   footer.className = "small-footer-notice";
   footer.innerHTML = `
-    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta 2" aria-label="Erklärung: Beta 2">Beta 2</button>:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.<br />
+    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta 3" aria-label="Erklärung: Beta 3">Beta 3</button>:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.<br />
     <button type="button" class="link-action test-meinung" onclick="zurMeinung()">Sag uns deine Meinung</button></p>
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
     <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
@@ -6535,8 +6554,8 @@ function finishSign(editId) {
   if (ersterStart) {
     [AUTO_READ_KEY, AUTO_READ_GEFRAGT_KEY, READ_TEMPO_KEY].forEach(base => {
       try {
-        const alt = window.localStorage.getItem(base);
-        if (alt !== null) { pSet(base, alt); window.localStorage.removeItem(base); }
+        const alt = entwurfStorage.getItem(base);
+        if (alt !== null) { pSet(base, alt); entwurfStorage.removeItem(base); }
       } catch (e) { /* nichts tun */ }
     });
   }

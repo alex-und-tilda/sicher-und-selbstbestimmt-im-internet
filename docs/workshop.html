@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="light dark" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshop-Material · Alex und Tilda – Beta 3</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <!-- Gestaltung des modernen Pilots (verknüpft, nicht kopiert) -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="design.css" />
+  <link rel="stylesheet" href="entwurf.css" />
+  <link rel="stylesheet" href="workshop.css" />
+  <link rel="stylesheet" href="design-a.css?v=gesamt-12">
+<link rel="stylesheet" href="bildfuehrung.css?v=gesamt-12"><link rel="stylesheet" href="bedienung.css?v=gesamt-12">
+<link rel="stylesheet" href="pdf-vorschau.css">
+</head>
+<body class="entwurf ws">
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+  <div class="ws-entwurf" role="note">
+    <strong>Für Kursleitungen</strong> · Quellen- und Rechtehinweise bei den Materialien · auf dieser Seite wird nichts gespeichert
+  </div>
+
+  <div class="app ws-app">
+    <header class="app-header ws-kopf">
+      <img class="header-avatar" src="assets/brand/alex-tilda-kopf.webp" alt="" aria-hidden="true" width="44" height="44">
+      <div class="header-text">
+        <p class="brand-name">Alex und Tilda <span class="test-badge orientierung-rolle">Workshop · Für Kursleitungen</span></p>
+        <h1 id="wsTitel">Workshop-Material</h1>
+        <p>Beta 3 – Testversion</p>
+        <p id="wsUnter">Thema auswählen</p>
+      </div>
+      <a class="ws-zurueck" id="wsZurueck" href="index.html">← Zur Lernplattform</a>
+    </header>
+
+    <nav class="ws-reiter" id="wsReiter" aria-label="Bereiche des Workshops"></nav>
+    <div class="ws-bereichwahl"><label for="wsBereichWahl">Workshopbereich</label><select id="wsBereichWahl"></select></div>
+
+    <p class="ws-druck-titel" id="wsDruckTitel"></p>
+    <main id="inhalt" class="ws-inhalt" tabindex="-1"></main>
+
+    <footer class="ws-fuss">
+    <p class="ws-druck-aktion"><button class="ws-knopf" type="button" id="wsDrucken">Diese Ansicht drucken</button> <span>Original-Druckvorlagen stehen unter Arbeitsmaterial.</span></p>
+    <p><a href="zugang.html#kursleitungen">Lernplattform und Workshops</a></p>
+      <p>Alle Inhalte stammen unverändert aus dem vorhandenen Workshop-Material aus dem gemeinsamen Materialbestand der Lernplattform. Originaldateien bleiben unverändert; die Browsertexte werden daraus erzeugt.
+        </p>
+    </footer>
+  </div>
+
+  <div id="wsAnsage" class="sr-only" aria-live="polite"></div>
+  <script src="workshop-daten.js"></script><script src="paket-metadaten.js"></script>
+  <script src="workshop-durchfuehrung.js"></script>
+  <script src="pdf-vorschau-daten.js"></script>
+<script src="workshop.js"></script>
+<script src="bildfuehrung.js?v=gesamt-12"></script></body>
+</html>

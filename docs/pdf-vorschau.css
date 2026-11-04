@@ -1,0 +1,7 @@
+.ws-pdf-seiten img{display:block;width:100%;height:auto;background:white;color:#182e32;border:1px solid #637d77}
+.ws-pdf-seiten figure{margin:20px 0}.ws-pdf-seiten figcaption{font-weight:700;margin-bottom:8px}.ws-pdf-seiten pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}
+.pdf-seite{display:block;width:min(100%,1000px);height:auto;margin:20px auto;background:white}
+body:has(>header #seitenDrucken){font:20px/1.5 system-ui;background:#faf8f3;color:#183c40;margin:20px}
+#seitenDrucken{font:inherit;padding:12px 20px;background:#185e58;color:white;border:0;border-radius:8px}
+@media print{body:has(#seitenDrucken){margin:0;background:white}body:has(#seitenDrucken)>header{display:none}.pdf-seite{width:100%;height:100vh;object-fit:contain;margin:0;break-after:page}.pdf-seite:last-child{break-after:auto}.ws-pdf-seiten details,.ws-pdf-seiten>p{display:none}@page{size:A4;margin:0}}
+@media print{body:has(>header #seitenDrucken){margin:0!important}.pdf-seite{width:210mm;height:296.8mm;max-width:100%}}

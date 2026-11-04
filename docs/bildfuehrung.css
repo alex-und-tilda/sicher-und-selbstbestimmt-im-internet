@@ -1,0 +1,18 @@
+/* Ein Zeichen benennt eine Handlung, der sichtbare Text erklärt sie. */
+.orientierung-zeichen{width:28px;height:28px;object-fit:contain;flex:none;background:var(--pictogram-backdrop,#fffefb);border-radius:4px;padding:2px}
+.orientierung-aktion{display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.orientierung-rolle{display:inline-block;font-size:max(16px,.9rem);font-weight:700;color:var(--a-ink);background:var(--a-soft);padding:3px 8px;border-radius:4px;letter-spacing:normal;white-space:normal}
+body.entwurf .brand-name .orientierung-rolle{margin-left:8px}
+body.entwurf .lern-ort>.orientierung-rolle{padding:0;background:transparent;font-size:max(16px,.9rem)}
+body.entwurf .topic-card{padding-right:96px}
+body.entwurf .card-read-pair--topic .card-read-button{width:84px;min-width:84px;height:auto;min-height:66px;border-radius:8px;gap:4px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+body.entwurf .card-read-pair--topic .card-read-button img{width:26px;height:26px}
+.orientierung-beschriftung{font-size:max(16px,.9rem);line-height:1.2;overflow-wrap:anywhere;hyphens:auto}
+.orientierung-fortschritt{display:block;width:min(100%,22rem);height:8px;appearance:none;border:1px solid var(--ink-soft);border-radius:8px;overflow:hidden;margin:10px 0 16px;background:var(--a-surface);color:var(--a-accent)}
+.orientierung-fortschritt::-webkit-progress-bar{background:var(--a-surface)}
+.orientierung-fortschritt::-webkit-progress-value{background:var(--a-accent)}
+.orientierung-fortschritt::-moz-progress-bar{background:var(--a-accent)}
+.zugang-rolle{font-weight:700;color:var(--a-ink)}
+@media(max-width:650px){body.entwurf .topic-card{padding-right:90px}.orientierung-aktion .orientierung-zeichen{width:26px;height:26px}.angebot .orientierung-rolle{font-size:17px;padding:0;background:transparent}}
+@media print{.orientierung-fortschritt,.orientierung-beschriftung,.orientierung-zeichen,.orientierung-rolle{display:none!important}}
+@media(forced-colors:active){.orientierung-fortschritt{appearance:auto}.orientierung-rolle{border:1px solid CanvasText}.orientierung-zeichen{background:white}}

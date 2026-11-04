@@ -1,0 +1,130 @@
+/* Entwurf A auf dem vorhandenen Pilot. Keine Änderung von Lerninhalten oder Speicher. */
+:root{--a-bg:#faf8f3;--a-surface:#fffefb;--a-ink:#183c40;--a-muted:#4f6261;--a-line:#cbd6cb;--a-accent:#185e58;--a-on:#fff;--a-soft:#e9f0e9;--a-focus:#85501b}
+@media(prefers-color-scheme:dark){:root{--a-bg:#142329;--a-surface:#1d3035;--a-ink:#edf5f3;--a-muted:#c6d6d1;--a-line:#78908a;--a-accent:#9adcd0;--a-on:#142b29;--a-soft:#29413e;--a-focus:#ffcd87}}
+body.entwurf{--pilot-c0:var(--a-bg);--pilot-c1:var(--a-bg);--pilot-c2:var(--a-surface);--pilot-c3:var(--a-soft);--pilot-c4:var(--a-ink);--pilot-c5:var(--a-muted);--pilot-c6:var(--a-line);--pilot-c7:var(--a-accent);--pilot-c8:var(--a-accent);--pilot-c9:var(--a-soft);--pilot-c10:var(--a-on);--pilot-c17:var(--a-focus);--pilot-c18:var(--a-ink);--pilot-c29:var(--a-soft);--pilot-c30:var(--a-line);font-size:max(20px,1rem);line-height:1.55;--fs-text:max(20px,1rem);--fs-klein:max(18px,.95rem)}
+body.entwurf .app{max-width:1120px}
+body.entwurf .app-header{padding:16px 8px;border-bottom:1px solid var(--line);gap:14px}
+body.entwurf .brand-name{font-size:max(20px,1.1rem)}
+body.entwurf .brand-name a{color:inherit;text-decoration:none}
+body.entwurf .test-badge{font-size:max(16px,.9rem);font-weight:400;border:0;border-radius:4px;letter-spacing:normal}
+body.entwurf .orient-line{font-size:max(18px,.95rem);margin:12px 8px}
+body.entwurf .content{padding-top:16px}
+body.entwurf .content,body.entwurf .content.view-enter-fade,body.entwurf .content.view-enter,body.entwurf .page-flip{animation:none!important;opacity:1!important;transform:none!important}
+body.entwurf .card{border-radius:10px;box-shadow:none}
+body.entwurf :is(.primary-action,.nav-button.primary,.topic-start-button,.intro-start-button,.setting-big-button.primary){border-radius:8px;box-shadow:none}
+body.entwurf :is(.utility-button,.entwurf-lang,.start-help,.reading-button,.topic-group-link){font-size:max(18px,1rem)}
+body.entwurf .tool-row,body.entwurf .start-tools{margin-bottom:16px;gap:12px}
+body.entwurf .entwurf-home{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:24px 0 28px;margin:0 0 14px;min-height:0}
+body.entwurf .entwurf-home h1{font-size:clamp(2rem,4vw,3rem);line-height:1.16;letter-spacing:-.025em;max-width:72%;margin-bottom:18px}
+body.entwurf .entwurf-home>p{max-width:65%;font-size:1em}
+body.entwurf .entwurf-home>img{width:24%;max-height:230px;right:0;bottom:24px}
+body.entwurf .entwurf-home .intro-start-button{max-width:72%;padding:12px 20px;min-height:56px}
+body.entwurf .entwurf-choices{gap:0 28px}
+body.entwurf .entwurf-choice{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:18px 0;min-height:94px;gap:12px}
+body.entwurf .entwurf-choice img{width:42px;height:42px;padding:4px;background:transparent}
+body.entwurf .entwurf-choice small{font-size:max(18px,.95rem);line-height:1.4}
+body.entwurf .einstieg-extra{padding:14px 0;margin:0;border-bottom:1px solid var(--line)}
+body.entwurf summary{min-height:48px;align-content:center;font-size:inherit;cursor:pointer}
+body.entwurf .topic-grid{grid-template-columns:minmax(0,1fr);gap:0;grid-auto-rows:1fr}
+body.entwurf .card-read-pair--topic{border-bottom:1px solid var(--line)}
+body.entwurf .topic-card{grid-template-columns:64px minmax(0,1fr);grid-template-areas:"icon badge" "icon title" "icon desc" "icon done";padding:16px 66px 16px 0;gap:2px 16px;min-height:0;background:transparent;border:0;border-radius:0;box-shadow:none;transform:none}
+body.entwurf .topic-card:hover,body.entwurf .topic-card:focus-visible{background:var(--surface-soft);transform:none}
+body.entwurf .topic-card .entwurf-topic-image{grid-area:icon;width:64px;height:64px;max-height:64px;object-fit:contain;margin:0;background:transparent;border-radius:6px}
+body.entwurf .topic-card .topic-title{font-size:max(20px,1.1rem);line-height:1.3;letter-spacing:normal}
+body.entwurf .topic-card .topic-desc{font-size:max(18px,.95rem);line-height:1.4}
+body.entwurf .topic-card .topic-start-badge{font-size:max(16px,.85rem);margin:0;padding:2px 4px}
+body.entwurf .card-read-pair--topic .card-read-button{width:48px;height:48px;min-width:48px;right:4px;transform:translateY(-50%);border:1px solid var(--line);background:var(--surface)}
+body.entwurf .topic-group-links{margin:12px 0 20px;gap:8px}
+body.entwurf .topic-group-link{background:transparent;border:0;border-bottom:2px solid var(--line);border-radius:0;padding:10px 6px;min-height:48px}
+body.entwurf .topic-group{margin-top:24px}
+body.entwurf .topic-grid-title{font-size:max(24px,1.3rem)}
+body.entwurf .topic-grid-hint{font-size:max(18px,.95rem);margin:6px 0 14px}
+body.entwurf .app-footer{border-top:1px solid var(--line);margin-top:32px;font-size:max(18px,.95rem)}
+body.entwurf .main-tabbar{box-shadow:none}
+body.entwurf .main-tabbar .tab-item{border-radius:6px;font-size:max(16px,.9rem)}
+body.entwurf .main-tabbar .tab-item.is-active{background:var(--a-soft);color:var(--ink)}
+body.entwurf.lesson-view .app{max-width:850px}
+body.entwurf .lesson-card{background:transparent;border:0;border-radius:0;box-shadow:none;padding:24px 8px}
+body.entwurf :is(.ls-text-block p,.ls-bullet-list,.vorbild-text p){font-size:max(22px,1.1rem);line-height:1.6}
+body.entwurf .lesson-heading h2{font-size:max(28px,1.6rem);line-height:1.25}
+body.entwurf .lern-leiste{padding:12px 0;gap:12px}
+body.entwurf .lern-leiste :is(.lern-knopf,.lern-ort,.lern-ort-titel,.reading-button,.rb-caption){font-size:max(18px,1rem)}
+body.entwurf .nav{max-width:850px;gap:20px}
+body.entwurf .nav-button{min-height:56px;font-size:max(20px,1.06rem)}
+body.entwurf .nav-button.primary{flex:0 1 360px}
+@media(min-width:1050px){body.entwurf .topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:30px}}
+@media(max-width:650px){
+ body.entwurf .app{padding-left:16px;padding-right:16px}
+ body.entwurf .app-header #appTitle{font-size:max(24px,1.4rem)}
+ body.entwurf .entwurf-home{padding:16px 0 24px}
+ body.entwurf .entwurf-home h1{font-size:max(30px,1.8rem);max-width:100%}
+ body.entwurf .entwurf-home>p{max-width:100%}
+ body.entwurf .entwurf-home>img{position:static;float:right;width:88px;max-height:110px;margin:0 0 0 8px}
+ body.entwurf .entwurf-home .intro-start-button{max-width:100%;width:auto}
+ body.entwurf .entwurf-home::after{content:"";display:block;clear:both}
+ body.entwurf .entwurf-choices{grid-template-columns:1fr}
+ body.entwurf .entwurf-choice{min-height:80px;padding:14px 0}
+ body.entwurf .topic-card{grid-template-columns:48px minmax(0,1fr);column-gap:12px;padding-right:58px}
+ body.entwurf .topic-card .entwurf-topic-image{width:48px;height:58px;max-height:58px}
+ body.entwurf .lesson-card{padding:20px 0}
+ body.entwurf .nav-button.primary{flex:1}
+ body.entwurf .lern-leiste{gap:8px}
+ body.entwurf .lern-leiste .lern-knopf{min-height:48px}
+ body.entwurf .lern-leiste .reading-button{padding:8px;min-height:48px}
+}
+@media print{body.entwurf .lesson-card{padding:0}.app-footer{display:none!important}}
+/* Kursleitung: Arbeitsschritt und unmittelbar benötigtes Material getrennt. */
+body.ws .ws-app{max-width:1160px}
+body.ws .ws-kopf{padding:16px 8px}
+body.ws .ws-kopf h1{font-size:max(24px,1.4rem)}
+body.ws .ws-entwurf{background:var(--surface-soft);color:var(--ink);font-size:max(16px,.9rem);border-color:var(--line);padding:8px 16px}
+body.ws .ws-reiter{gap:10px 20px;align-items:start;margin:16px 0 24px;padding:0 8px 14px;border-bottom:1px solid var(--line)}
+body.ws .ws-reiter a{font-size:max(18px,1rem);padding:10px 4px;min-height:48px;display:inline-flex;align-items:center}
+body.ws .ws-weitere-bereiche{border:0;margin:0;padding:0;flex:1 1 220px}
+body.ws .ws-weitere-bereiche summary{padding:10px 4px;font-size:max(18px,1rem);min-height:48px}
+body.ws .ws-weitere-bereiche>div{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:6px}
+body.ws .ws-durchfuehrung>h2{font-size:max(28px,1.6rem);line-height:1.2;margin:6px 0 16px}
+body.ws .ws-durchfuehrung>.ws-klein{font-size:max(18px,.95rem);margin:4px 0 8px}
+body.ws .ws-folien-leiste{margin:12px 0 24px;gap:12px}
+body.ws .ws-knopf,body.ws .ws-wahl select{font-size:max(18px,1rem);min-height:48px;border-radius:8px}
+body.ws .ws-wahl label{font-size:max(18px,.95rem)}
+body.ws .ws-durch-spalten{display:grid;grid-template-columns:minmax(0,1fr) 18rem;gap:40px;align-items:start}
+body.ws .ws-durch-werkzeuge{grid-column:2;grid-row:1;border-left:1px solid var(--line);padding-left:24px}
+body.ws .ws-durch-notizen{grid-column:1;grid-row:1}
+body.ws .ws-durch-werkzeuge p:first-child{margin-top:0}
+body.ws .ws-durch-abschnitt{margin:0 0 24px;max-width:60ch}
+body.ws .ws-durch-abschnitt h3{font-size:max(22px,1.2rem)}
+body.ws .ws-schritt-material{margin:16px 0;padding:16px 0 0}
+body.ws .ws-schritt-material h3{font-size:max(20px,1.1rem)}
+body.ws .ws-schritt-material ul{list-style:none;padding:0;margin:12px 0}
+body.ws .ws-schritt-material a{display:inline-flex;align-items:center;min-height:48px;font-weight:700}
+body.ws .ws-hauptaktion{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:700}
+body.ws .ws-klein,body.ws .ws-quelle,body.ws .ws-datei-meta{font-size:max(18px,.95rem)}
+body.ws .ws-druck-aktion{padding:16px 0;border-top:1px solid var(--line)}
+body.ws .ws-dl{max-width:70ch}
+body.ws.ws-nur-folie .ws-app{max-width:100%}
+@media(max-width:850px){
+ body.ws .ws-durch-spalten{display:flex;flex-direction:column;gap:24px}
+ body.ws .ws-durch-werkzeuge{border:0;border-bottom:1px solid var(--line);padding:0 0 16px;width:100%}
+ body.ws .ws-durch-notizen{margin:0}
+ body.ws .ws-durch-werkzeuge>p:last-child{margin-bottom:0}
+ body.ws .ws-durch-werkzeuge .ws-schritt-material{margin:10px 0;padding:0;border:0}
+}
+@media(max-width:650px){
+ body.ws .ws-app{padding:0 16px}
+ body.ws .ws-kopf{padding:12px 0;gap:8px}
+ body.ws .ws-kopf .header-text{flex:1 1 180px}
+ body.ws .ws-kopf .brand-name{font-size:18px}
+ body.ws .ws-zurueck{padding:8px 0;border:0;background:transparent;font-size:18px}
+ body.ws .ws-bereichwahl{margin:12px 0 18px;font-size:18px}
+ body.ws .ws-bereichwahl select{min-height:48px;font-size:18px;border-radius:8px}
+ body.ws .ws-inhalt{padding:0 0 24px}
+ body.ws .ws-durchfuehrung>h2{font-size:max(26px,1.5rem)}
+ body.ws .ws-folien-leiste{gap:8px;margin-bottom:20px}
+ body.ws .ws-folien-leiste .ws-knopf{font-size:max(18px,1rem);padding:8px}
+ body.ws .ws-durch-werkzeuge .ws-knopf{padding:10px 14px}
+ body.ws .ws-schritt-material h3{font-size:max(18px,1rem)}
+ body.ws .ws-zuordnung{font-size:18px}
+ body.ws .ws-zuordnung summary{min-height:44px}
+}
+@media print{body.ws .ws-durch-spalten{display:block}body.ws .ws-durch-werkzeuge{border:0;padding:0}.ws-weitere-bereiche{display:none}}
