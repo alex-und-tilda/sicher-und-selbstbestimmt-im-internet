@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-31-beta3-final";
+const CACHE_VERSION = "v2026-31-beta3-portal";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -145,7 +145,7 @@ const PRECACHE_URLS = [
   "./pdf-vorschau/4420d71cbfd59d75/seite-4.png",
   "./pdf-vorschau/4420d71cbfd59d75/index.html",
   /* PDF-VORSCHAU-END */
-  "./bedienung.css","./bildfuehrung.js","./bildfuehrung.css","./design-a.css","./zugang.html","./zugang.js","./zugang.css","./material-index.js","./workshop-durchfuehrung.js",
+  "./bedienung.css","./bildfuehrung.js","./bildfuehrung.css","./design-a.css","./zugang.html","./zugang.js","./zugang.css","./portal.css","./material-index.js","./workshop-durchfuehrung.js",
 "./workshop.html","./workshop.js","./workshop.css","./workshop-daten.js","./workshop-erweiterung.js","./material/Kahoot_Facebook_Referenzmodul.xlsx","./material/Cybermobbing_Workshop_Referenzmodul.pptx","./material/index.html","./material/Trainerleitfaden_TikTok.pdf","./material/Snapchat_Workshop_Referenzmodul.pptx","./material/Kahoot_TikTok_Referenzmodul.xlsx","./material/TikTok_Workshop_Referenzmodul.pptx","./material/Trainerleitfaden_Facebook.pdf","./material/Trainerleitfaden_Snapchat.pdf","./material/Kahoot_Snapchat_Referenzmodul.xlsx","./material/Trainerleitfaden_Instagram.pdf","./material/Trainerleitfaden_Cybermobbing.pdf","./material/Instagram_Workshop_Referenzmodul.pptx","./material/Kahoot_Instagram_Referenzmodul.xlsx","./material/Facebook_Workshop_Referenzmodul.pptx","./material/Kahoot_Cybermobbing_Referenzmodul.xlsx","./material/arbeitsmaterial/Profil-Karten_Facebook.pptx","./material/arbeitsmaterial/Situationskarten_Cybermobbing.pdf","./material/arbeitsmaterial/Situationskarten_Cybermobbing.pptx","./material/arbeitsmaterial/Regel-Plakat.pdf","./material/arbeitsmaterial/Antwortkarten_ABC.pdf","./material/arbeitsmaterial/Trend-Karten_TikTok.pptx","./material/arbeitsmaterial/Profil-Karten_Facebook.pdf","./material/arbeitsmaterial/README.md","./material/arbeitsmaterial/Antwortkarten_ABC.pptx","./material/arbeitsmaterial/Ablauf-Plakat.pdf","./material/arbeitsmaterial/Regel-Plakat.pptx","./material/arbeitsmaterial/Hilfe-Karte_Meine_Hilfe.pptx","./material/arbeitsmaterial/Hilfe-Karte_Meine_Hilfe.pdf","./material/arbeitsmaterial/Trend-Karten_TikTok.pdf","./material/arbeitsmaterial/Ablauf-Plakat.pptx","./praxis/index.html","./praxis/vorlesen.js","./praxis/facebook.html","./praxis/whatsapp.html","./praxis/youtube.html","./praxis/snapchat.html","./praxis/instagram.html","./praxis/tiktok.html",
 "./entwurf.css", "./entwurf.js", "./entwurf-storage.js",
   /* Kern */

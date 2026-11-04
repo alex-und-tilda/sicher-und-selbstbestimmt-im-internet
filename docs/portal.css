@@ -1,0 +1,48 @@
+/* Ergänzt die vorhandenen Komponenten aus zugang.css und die Farben aus Design A. */
+:root { font-size: 125%; }
+.portal header, .portal main, .portal footer { padding-inline: clamp(1rem, 4vw, 2rem); }
+.portal .marke { margin: 0; }
+.portal header span, .portal .rubrik { font-size: .9rem; }
+.portal .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 11rem);
+  align-items: center;
+  gap: clamp(1rem, 5vw, 3rem);
+  padding-block: clamp(.85rem, 3vw, 2rem);
+}
+.portal h1 { font-size: clamp(1.7rem, 5vw, 3.1rem); max-width: 18ch; margin: 0 0 .28em; }
+.portal h2 { font-size: clamp(1.25rem, 3vw, 1.6rem); max-width: none; }
+.portal h3 { font-size: 1.22rem; line-height: 1.28; margin: .15em 0; overflow-wrap: anywhere; hyphens: auto; }
+.portal .hero p, .portal .kurz { font-size: 1rem; margin: .2em 0 0; }
+.portal .intro { font-weight: 700; }
+.portal .willkommen { display: block; width: 100%; height: auto; }
+.portal .bereichstitel { display: flex; align-items: center; gap: .45em; }
+.portal .zeichen { display: inline-grid; place-items: center; flex: none; width: 2rem; height: 2rem; background: #fffefb; border-radius: 50%; }
+.portal .angebote { margin-top: .5rem; }
+.portal .angebot { grid-template-columns: minmax(0, 1fr) minmax(0, 12rem); gap: .6rem 1.4rem; padding-block: .8rem; }
+.portal .angebot .hauptaktion { width: 100%; }
+.portal .info { margin-top: .35em; }
+.portal .hauptaktion { font-size: 1rem; max-width: 100%; text-align: center; border: 2px solid var(--a-accent); }
+.portal .nebenaktion { color: var(--a-accent); background: var(--a-surface); }
+.portal .hauptaktion:hover { text-decoration: underline; }
+.portal .aktionsgruppe { min-width: 0; }
+.portal .aktionsgruppe .rubrik { margin: .3rem 0 0; }
+.portal .vorschau-abschnitt { border-top: 1px solid var(--a-line); padding-block: .9rem; }
+.portal .vorschau-abschnitt p { margin: .25em 0; }
+.portal .themenliste { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%, 16rem),1fr)); gap: .15rem 1.5rem; }
+.portal ul { margin: .4rem 0 .75rem; padding-inline-start: 1.2em; }
+.portal footer nav { display: flex; flex-wrap: wrap; gap: .45rem 1.1rem; }
+.portal footer a { display: inline-block; padding-block: .25rem; }
+@media (max-width: 650px) {
+  .portal .hero { grid-template-columns: minmax(0, 1fr) min(16vw, 3rem); gap: .5rem; }
+  .portal .angebot { grid-template-columns: minmax(0, 1fr); }
+  .portal .hauptaktion { width: 100%; }
+}
+@media (max-width: 360px) {
+  .portal .hero { grid-template-columns: minmax(0, 1fr); }
+  .portal .willkommen { display: none; }
+}
+@media print { .portal .willkommen { display: none; } }
+/* Bei großer Schrift dürfen auch lange einzelne Wörter umbrechen. */
+.portal { overflow-wrap: anywhere; }
+.portal .angebot > * { min-width: 0; }
