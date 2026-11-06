@@ -53,7 +53,7 @@ const LANGUAGE_DESC = {
 };
 /* Beispiel-Satz je Stufe – damit man den Unterschied sieht, nicht nur liest. */
 const LANGUAGE_EXAMPLE = {
-  leicht: "Pass auf deine Daten auf. Sag nicht jedem dein Passwort.",
+  leicht: "Pass auf deine Daten auf. Sag niemandem dein Passwort.",
   einfach: "Schütze deine Daten und gib dein Passwort nicht weiter, damit niemand in dein Konto kommt.",
   standard: "Achte auf deine persönlichen Daten und teile dein Passwort mit niemandem, damit dein Konto geschützt bleibt."
 };
@@ -65,7 +65,7 @@ const LANGUAGE_EXAMPLE = {
 let sampleTally = { leicht: 0, einfach: 0, standard: 0 };
 const SAMPLE_ROUNDS = [
   {
-    leicht: "Pass auf deine Daten auf. Sag nicht jedem dein Passwort.",
+    leicht: "Pass auf deine Daten auf. Sag niemandem dein Passwort.",
     einfach: "Schütze deine Daten und gib dein Passwort nicht weiter, damit niemand in dein Konto kommt.",
     standard: "Achte auf deine persönlichen Daten und teile dein Passwort mit niemandem, damit dein Konto geschützt bleibt."
   },
