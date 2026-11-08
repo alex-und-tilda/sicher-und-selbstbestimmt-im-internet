@@ -3458,7 +3458,9 @@ p.feedback-wrong {
 .einfach-quiz-number {
   font-size: var(--fs-klein);
   font-weight: 700;
-  opacity: 0.65;
+  /* Kontrast (08.11.2026, Befund G3): vorher opacity 0.65, wirksam #698081 auf #fffefb = 4,16:1.
+     Die vorhandene leise Schriftfarbe statt Deckkraft: hell 6,4:1, dunkel 9,1:1. */
+  color: var(--ink-soft);
   margin: 0;
 }
 
@@ -5089,9 +5091,13 @@ body.simple-mode .practice-box {
    Skip-Link (Barrierefreiheit – Tastatur-Nutzende)
    ============================================================ */
 
+/* Ohne Fokus liegt der Link ganz über dem oberen Rand, egal wie hoch er ist.
+   Früher nur 100 px nach oben geschoben: Bei 200 % Schrift ist er 125 px hoch
+   und ragte 25 px über den Titel der Lernleiste (freigegeben 07.11.2026). */
 .skip-link {
   position: absolute;
-  top: -100px;
+  top: auto;
+  bottom: 100%;
   left: 16px;
   background: var(--accent);
   color: var(--on-accent);
@@ -5105,6 +5111,7 @@ body.simple-mode .practice-box {
 
 .skip-link:focus {
   top: 0;
+  bottom: auto;
   outline: 3px solid #fff;
   outline-offset: 2px;
 }
@@ -5901,6 +5908,13 @@ body.simple-mode .practice-box {
   color: var(--ink);
   font-size: var(--fs-klein);
   font-weight: 700;
+}
+
+/* Kontrast (08.11.2026, Befund G2): Im Dunkelmodus von Design A ist --line hell (#78908a).
+   Helle Schrift darauf hatte 3,08:1. Dunkle Seitenfarbe --bg: 4,73:1. Hellmodus unverändert.
+   :where() hält die Gewichtung niedrig, damit Kopfzeilen mit eigener, genauerer Regel ihre Farbe behalten. */
+@media screen and (prefers-color-scheme: dark) {
+  :where(body.entwurf) .phone-bar { color: var(--bg); }
 }
 
 .phone-screen {

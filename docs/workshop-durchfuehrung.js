@@ -1,5 +1,14 @@
 /* Schrittweise Kursleitung aus denselben Foliennotizen wie die Präsentation.
    Kein zusätzlicher Lerninhalt, kein Speichern und keine automatischen Zeitvorgaben. */
+/* Schritt 3 (07.11.2026): Bei geöffneter Materialvorschau führt
+   „Zu den Moderationshinweisen“ direkt zu den Hinweisen dieses Schritts.
+   Ein Knopf statt eines Sprunglinks, weil die Adresse (#modul/durchfuehren/n)
+   den Schritt bestimmt und nicht verändert werden darf. */
+document.addEventListener('click',e=>{
+  const k=e.target.closest&&e.target.closest('.ws-zu-hinweisen');if(!k)return;
+  const ziel=document.getElementById('wsHinweise');if(!ziel)return;
+  ziel.focus({preventScroll:true});ziel.scrollIntoView({block:'start'});
+});
 window.WorkshopDurchfuehrung = {
   html({id,d,wert,esc,verlinkt,quelle,materialVorschau}) {
     const n=Math.min(Math.max(parseInt(wert,10)||1,1),d.folien.length);
@@ -8,7 +17,7 @@ window.WorkshopDurchfuehrung = {
     const material=(f.material_verweise||[]).map(m=>{
       const original=m.datei&&d.arbeitsmaterial.find(a=>a.datei===m.datei);
       const link=`<a href="${m.datei?`#${id}/material/${esc(m.datei)}`:esc(m.href)}" ${m.datei?'':'target="_blank" rel="noopener"'}>${esc(m.titel)}</a>`;
-      return `<li>${original?`<details class="ws-direkt-material"><summary>${esc(m.titel)} hier ansehen</summary>${materialVorschau(d,original)}<p>${link} · Alle Dateiformate und Materialübersicht</p></details>`:link}
+      return `<li>${original?`<details class="ws-direkt-material"><summary>${esc(m.titel)} hier ansehen</summary><p class="ws-zu-hinweisen-zeile"><button type="button" class="ws-link ws-zu-hinweisen">Zu den Moderationshinweisen</button></p>${materialVorschau(d,original)}<p>${link} · Alle Dateiformate und Materialübersicht</p></details>`:link}
         <details class="ws-zuordnung"><summary>Zuordnung ansehen</summary><p>${esc(m.beleg)} · ${esc(m.status)}</p></details></li>`;
     }).join('');
     const extras=f.weitere.length?`<details class="ws-aufklapp"><summary>Weitere Originalhinweise</summary>${f.weitere.map(w=>`<h3>${esc(w.titel||'Hinweis')}</h3><p>${verlinkt(w.text)}</p>`).join('')}</details>`:'';
@@ -28,11 +37,11 @@ window.WorkshopDurchfuehrung = {
           ${material?`<section class="ws-schritt-material"><h3>Passendes Material für diesen Schritt</h3><ul>${material}</ul></section>`:`<p><a href="#${id}/material">Vorhandene Materialien zum Workshop ansehen</a></p>`}
           <p><a href="#${id}/folien/${n}">Folie mit Notizen ansehen</a></p>
         </aside>
-        <div class="ws-durch-notizen">
+        <section class="ws-durch-notizen" id="wsHinweise" tabindex="-1" aria-label="Moderationshinweise zu diesem Schritt">
           ${notiz('Methode')}${notiz('Hinweis')}${notiz('Sozialform')}${notiz('Material')}
           <details class="ws-aufklapp"><summary>Lernziel und weitere Hinweise</summary>${notiz('Lernziel')}${notiz('Zeit')}${notiz('Bildvorschlag')}${notiz('Lernplattform')}</details>
           ${extras}${quelle('Unveränderte Sprechernotizen zu Originalfolie '+n)}
-        </div>
+        </section>
       </div>
     </section>`;
   }

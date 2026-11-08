@@ -23,6 +23,30 @@ body.ws .ws-direkt-inhalt .ws-pdf iframe{height:65vh;min-height:280px;width:100%
 body.ws .ws-durch-spalten:has(.ws-direkt-material[open]){grid-template-columns:minmax(0,1fr)}
 body.ws .ws-durch-spalten:has(.ws-direkt-material[open]) .ws-durch-werkzeuge{grid-column:1;grid-row:1;border-left:0;padding-left:0}
 body.ws .ws-durch-spalten:has(.ws-direkt-material[open]) .ws-durch-notizen{grid-column:1;grid-row:2}
+/* Schritt 3 (07.11.2026): Bei geöffneter Materialvorschau rutschten die
+   Moderationshinweise unter alle Seitenbilder (gemessen 3.700 px am
+   Smartphone, 8.900 px am Desktop). Die Seiten stehen jetzt in einem Feld
+   mit begrenzter Höhe, das man blättert (per Tastatur über das benannte
+   Feld). Danach folgen die Hinweise; am breiten Bildschirm stehen sie
+   daneben. Ein Knopf führt direkt zu ihnen. Gilt für alle fünf Module,
+   im Druck wird nichts begrenzt. */
+body.ws .ws-direkt-material[open] .ws-pdf-seiten{max-height:min(70vh,46rem);overflow:auto;border:1px solid var(--line);border-radius:12px;padding:0 12px;background:var(--surface)}
+body.ws .ws-direkt-material[open] .ws-pdf-seiten:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+/* Schritt 3: zwei Rückwege im Kopf – zum Lernthema und zum Portal. */
+body.ws .ws-rueckwege{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+body.ws .ws-zu-hinweisen-zeile{margin:4px 0 8px}
+body.ws .ws-zu-hinweisen{font:inherit;font-weight:700;color:var(--accent);background:none;border:0;padding:6px 0;min-height:44px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+body.ws .ws-durch-notizen:focus{outline:none}
+body.ws .ws-durch-notizen:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+@media(min-width:1100px){
+ body.ws .ws-durch-spalten:has(.ws-direkt-material[open]){grid-template-columns:minmax(0,1fr) minmax(18rem,22rem)}
+ body.ws .ws-durch-spalten:has(.ws-direkt-material[open]) .ws-durch-notizen{grid-column:2;grid-row:1;border-left:1px solid var(--line);padding-left:24px}
+ body.ws .ws-zu-hinweisen-zeile{display:none}
+}
+@media print{
+ body.ws .ws-direkt-material[open] .ws-pdf-seiten{max-height:none;overflow:visible;border:0;padding:0}
+ body.ws .ws-zu-hinweisen-zeile{display:none}
+}
 body.entwurf .entwurf-home>:is(.intro-start-button,.primary-action){margin-left:0;margin-right:0;text-align:left}
 body.entwurf .entwurf-home>img{object-fit:contain}
 body.entwurf .topic-card .entwurf-topic-image{object-fit:contain}

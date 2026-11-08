@@ -1494,6 +1494,45 @@ body.lesson-view label.answer-option > input:focus-visible { outline: none; }
   .lern-mehr-innen.lern-einstellungen,
   .lern-einstellungen > .lern-mehr-innen { padding-inline: 0.65rem; }
 }
+/* FL-4 (Focus Learning, Plan 101): Auf einer Übung kommt nach der Auswahl
+   „Das nehme ich“ in die Leiste. Passt er nicht neben „Zurück“, bekam er
+   eine eigene Zeile: Die Leiste wuchs und verdeckte die gerade gewählte
+   Antwort (gemeldet bei 320 × 640). Jetzt hält die Leiste diese Zeile von
+   Anfang an frei, mit dem noch gesperrten Weiter-Knopf als unsichtbarem
+   Platzhalter: nicht antippbar, nicht im Tastaturweg, nicht vorgelesen.
+   Gemessen wird die Breite der Leiste in ihrer eigenen Schriftgröße (em),
+   so greift die Regel auch bei vergrößerter Schrift der App. 15.5em: Zurück
+   und „Das nehme ich“ brauchen nebeneinander etwa 15em. */
+body.lesson-view:has(#content label.answer-option) .nav { container: lernleiste / inline-size; }
+@container lernleiste (max-width: 15.5em) {
+  body.lesson-view .nav .nav-button.primary { flex-basis: 100%; order: 2; }
+  body.lesson-view .nav:not(.leiste-aktiv) > #nextButton:disabled {
+    display: block;
+    visibility: hidden;
+  }
+}
+/* FL-4: Bei großer Schrift auf einem kurzen Bildschirm wäre die feste
+   Leiste fast so hoch wie die halbe Seite. Dann steht sie am Ende des
+   Inhalts (wie im Entwurf E4) und rollt mit der Seite: auf Übungen und
+   seit FL-4b (07.11.2026) auch auf Lerntext, Beispielen und Rückmeldung.
+   Die Klasse setzt lernNavHoeheMessen() in app.js. „relative“ hält die
+   Unterlage (::before) an der Leiste. */
+body.lesson-view.leiste-am-ende .nav { position: relative; bottom: auto; }
+/* FL-4b (07.11.2026): Design A (entwurf.css) gibt der Leiste eine eigene
+   Fläche und schaltet die Unterlage von D22 ab. Die Leiste steht aber
+   0,6rem über dem Rand. Durch diesen Streifen lief beim Rollen Text
+   (10 px, bei 200 % Schrift 19 px). Die Unterlage kommt deshalb für die
+   feste Leiste zurück, in der einfarbigen Seitenfläche von Design A
+   (--bg, hell und dunkel). Nur am Bildschirm: Im Druck bleibt sie aus. */
+@media screen {
+  body.entwurf.lesson-view:not(.leiste-am-ende) .nav::before {
+    content: "" !important;
+    background: var(--bg);
+  }
+}
+@media screen and (forced-colors: active) {
+  body.entwurf.lesson-view:not(.leiste-am-ende) .nav::before { background: Canvas; }
+}
 @media (prefers-reduced-motion: reduce) {
   body.lesson-view .nav .nav-button,
   body.lesson-view label.answer-option,

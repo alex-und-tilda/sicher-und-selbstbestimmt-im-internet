@@ -5688,6 +5688,24 @@ function lernNavHoeheMessen() {
   const hoehe = Math.ceil(nav.getBoundingClientRect().height) + "px";
   const stil = document.documentElement.style;
   if (stil.getPropertyValue("--lern-nav-hoehe") !== hoehe) stil.setProperty("--lern-nav-hoehe", hoehe);
+  /* FL-4: Auf einer Übung steht die Leiste am Ende der Antworten statt fest
+     unten, wenn sie mehr als ein Drittel der Bildschirmhöhe bräuchte (große
+     Schrift auf kurzem Bildschirm). Die Höhe ist dort von Anfang an die
+     volle Höhe (design.css, Container „lernleiste“). Eine Medienabfrage
+     sieht die Schriftgröße der App nicht, darum wird hier gemessen. Die Lage
+     ändert die Höhe der Leiste nicht, es gibt also kein Hin und Her.
+     Keine Speicherung. */
+  const body = document.body;
+  if (!body || !body.classList) return;
+  /* FL-4b (07.11.2026): Dasselbe gilt für Lerntext, Beispiele und
+     Rückmeldung eines Lernschritts (.lesson-card, .feedback-page). Bei 200 % Schrift
+     auf 640 px Höhe nahm die feste Leiste dort 41–48 % der Höhe ein.
+     Abschluss-Seiten, Quiz, Übungs-Handy und „Weiterlernen“ behalten ihre
+     Regeln (D17). */
+  const lernseite = body.classList.contains("lesson-view")
+    && !!document.querySelector("#content .lesson-card:not(.sim-seite):not(.weiterlernen-card), #content .feedback-page, #content label.answer-option");
+  const amEnde = lernseite && nav.getBoundingClientRect().height > window.innerHeight / 3;
+  if (body.classList.contains("leiste-am-ende") !== amEnde) body.classList.toggle("leiste-am-ende", amEnde);
 }
 
 /* Phase 4 B (Bericht 110): Bricht die Beschriftung im Menü unten um (große Schrift,
@@ -10950,6 +10968,24 @@ function lernAntwortWaehlen(input, index, correctIndex) {
   readShortText(kartenText(input.closest(".answer-option")), input.closest(".answer-option"));
   announce("Ausgewählt. Tippe auf: Das nehme ich.");
   leisteSpiegeln();
+  const antwort = input.closest(".answer-option");
+  if (typeof requestAnimationFrame === "function") requestAnimationFrame(() => auswahlUeberLeiste(antwort));
+}
+
+/* FL-4b (07.11.2026): Nach der Auswahl wird der Hinweis über den Antworten
+   oft eine Zeile länger und schiebt die Antworten nach unten. Hatte man ans
+   Ende gerollt und die letzte Antwort angetippt, lag ihr Auswahlrahmen dann
+   1–2 px unter der festen Leiste. Die Seite rollt jetzt genau so weit, dass
+   Antwort und Rahmen ganz zu sehen sind. Liegt die Antwort schon frei (auch
+   auf dem Tastaturweg), passiert nichts. Keine Speicherung. */
+function auswahlUeberLeiste(antwort) {
+  const nav = document.querySelector(".nav");
+  if (!antwort || !antwort.isConnected || !nav) return;
+  if (document.body.classList.contains("leiste-am-ende") || getComputedStyle(nav).position !== "sticky") return;
+  const s = getComputedStyle(antwort);
+  const rand = (parseFloat(s.outlineOffset) || 0) + (parseFloat(s.outlineWidth) || 0);
+  const zuviel = antwort.getBoundingClientRect().bottom + rand + 4 - nav.getBoundingClientRect().top;
+  if (zuviel > 0) window.scrollBy(0, Math.ceil(zuviel));
 }
 
 function renderPracticeFeedbackPage(index, correctIndex, wieder) {

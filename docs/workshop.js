@@ -8,6 +8,8 @@
   const main = document.getElementById("inhalt");
   const reiter = document.getElementById("wsReiter");
   const ansage = document.getElementById("wsAnsage");
+  /* Titel der Lernthemen wie in topics.js; workshop.html lädt topics.js nicht. */
+  const THEMEN_TITEL = { facebook: "Facebook", instagram: "Instagram", snapchat: "Snapchat", tiktok: "TikTok", hilfe: "Hilfe bei Problemen" };
 
   const BEREICHE = [
     ["ueberblick", "Vorbereiten"],
@@ -279,9 +281,13 @@
       </div>`;
   }
 
-  function pdfAnsicht(info, titel) {
+  /* imSchritt (Schritt 3, 07.11.2026): Im Durchführungsschritt stehen die
+     Seiten in einem Feld mit begrenzter Höhe (bedienung.css). Es ist per
+     Tastatur erreichbar und benannt, damit es sich mit Pfeiltasten blättern
+     lässt. Im Materialbereich bleibt die Ansicht unverändert. */
+  function pdfAnsicht(info, titel, imSchritt) {
     const v=window.PDF_VORSCHAU?.[info.pfad];
-    if(v && v.sha256===info.sha256)return `<div class="ws-pdf-seiten" aria-label="${esc(titel)}">
+    if(v && v.sha256===info.sha256)return `<div class="ws-pdf-seiten" ${imSchritt?`role="region" tabindex="0" aria-label="Seiten: ${esc(titel)}"`:`aria-label="${esc(titel)}"`}>
       <p><a class="ws-knopf" href="${esc(v.druck)}" target="_blank" rel="noopener">Druckansicht der Seiten öffnen</a>
       <a class="ws-link" href="${esc(info.pfad)}" target="_blank" rel="noopener">Original-PDF öffnen</a></p>
       ${v.seiten.map((seite,i)=>`<figure><figcaption>Seite ${i+1} von ${v.seiten.length}</figcaption><img src="${esc(seite.bild)}" alt="Originalseite ${i+1} – ${esc(titel)}" loading="lazy"><details><summary>Text dieser Seite</summary><pre>${esc(seite.text)}</pre></details></figure>`).join('')}
@@ -326,7 +332,7 @@
       ${dateiLink(material.pptx, 'Zum Bearbeiten', 'ws-knopf ws-knopf-leise')}</p>
       ${materialWarnung(d, material)}
       ${metadatenHtml(material.pdf, d.arbeitsmaterial_readme.stand+' · '+d.arbeitsmaterial_readme.status)}
-      ${pdfAnsicht(material.pdf, material.name)}
+      ${pdfAnsicht(material.pdf, material.name, true)}
     </div>`;
   }
 
@@ -508,7 +514,12 @@
     const [id, angefragt = "ueberblick", wert = ""] = route.split("/");
     const bereich = BEREICHE.some(([b])=>b===angefragt) ? angefragt : "ueberblick";
     const d = Object.prototype.hasOwnProperty.call(DATEN,id) ? DATEN[id] : null;
-    document.getElementById("wsZurueck").href = d ? `index.html#thema-${d.thema}` : "index.html";
+    /* Schritt 3 (07.11.2026): Der Rückweg nennt das Lernthema, zu dem der
+       Workshop gehört (Titel wie in topics.js). Ohne Workshop bleibt
+       „Zur Lernplattform“. */
+    const rueck = document.getElementById("wsZurueck");
+    rueck.href = d ? `index.html#thema-${d.thema}` : "index.html";
+    rueck.textContent = d ? `← Zum Lernthema ${THEMEN_TITEL[d.thema] || d.name}` : "← Zur Lernplattform";
     if (!d) {
       document.getElementById('wsTitel').textContent='Workshop-Material';
       document.getElementById('wsUnter').textContent='Für Kursleitungen';

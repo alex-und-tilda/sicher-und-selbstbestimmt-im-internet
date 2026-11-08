@@ -53,3 +53,9 @@ body.entwurf .lern-leiste .lern-knopf{min-height:58px}
 .workshop-zugang{margin-block:24px;padding-block:16px;border-block:1px solid var(--line)}
 .workshop-start{display:inline-block;padding:12px 0;font-weight:700;min-height:44px}
 .themen-material{margin-top:24px}.themen-material li{margin-block:12px}
+
+/* Fußzeile über dem Menü (freigegeben 08.11.2026): Die Regel oben (max-width:650px, padding:0 14px)
+   nahm der App den Platz unter der Fußzeile, den styles.css für das feste Menü freihält. Am Handy lagen
+   die letzten Fußzeilen-Links auch ganz unten gerollt unter dem Menü. Nur Seiten mit Menü, nicht im
+   Lernmodus (dort ist das Menü aus und die Anordnung bleibt unverändert). */
+@media(max-width:650px){body.entwurf:not(.lesson-view):has(> .main-tabbar) .app{padding-bottom:calc(40px + var(--tabbar-h))}}

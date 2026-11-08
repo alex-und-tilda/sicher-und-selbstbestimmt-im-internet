@@ -1,9 +1,9 @@
 {
   "name": "Alex und Tilda – Beta 3",
   "short_name": "Alex und Tilda",
-  "description": "Barrierearme Lernplattform in drei Sprachstufen: 12 Themen von Datenschutz bis KI.",
+  "description": "Lern-App, Workshops und Digital-Begleiter*innen-Schulung für Kursleitungen.",
   "lang": "de",
-  "start_url": "./index.html",
+  "start_url": "./zugang.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f3f5f3",

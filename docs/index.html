@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Alex und Tilda – Beta 3 · Sicher und selbstbestimmt im Internet</title>
+  <script>
+    // Die Hauptadresse öffnet das Portal. Lernlinks mit Pfad oder Sprungmarke bleiben gültig.
+    if (location.pathname.endsWith("/") && !location.hash) {
+      location.replace("zugang.html" + location.search);
+    }
+  </script>
 
   <meta name="description" content="Barrierearme Lernplattform zur digitalen Bildung: Datenschutz, WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok, KI und Chatbots, Fake News, Online-Betrug, sicheres Einkaufen und Hilfe bei Problemen im Internet. In Leichter Sprache, Einfacher Sprache und Alltagssprache." />
   <meta name="keywords" content="digitale Bildung, digitale Teilhabe, Medienkompetenz, Datenschutz, KI, Künstliche Intelligenz, Fake News, Deepfakes, Online-Betrug, Phishing, sicher einkaufen, Social Media, Internet Sicherheit, barrierearm lernen, Leichte Sprache, Einfache Sprache, Menschen mit Lernschwierigkeiten, Eingliederungshilfe, Begleitmaterial Fachkräfte" />
@@ -100,6 +106,7 @@
           <h2>JavaScript ist ausgeschaltet</h2>
           <p>Diese Lernplattform braucht JavaScript.</p>
           <p>Bitte schalte JavaScript in deinem Browser ein.</p>
+          <p><a href="zugang.html">Zum Portal Alex und Tilda</a></p>
         </div>
       </noscript>
     </main>
