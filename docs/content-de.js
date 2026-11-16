@@ -887,7 +887,7 @@ const CONTENT_VERSIONS = {
     "Foto posten": {
       einfach: { examples: ["Auf dem Foto ist das Straßenschild vor deinem Haus zu sehen. So wissen andere, wo du wohnst.", "Auf dem Tisch liegt ein Brief, auf dem man deinen Namen und deine Adresse lesen kann."], text: [
         { text: "Wenn du ein Foto postest, können viele Menschen es sehen." },
-        { text: "Achte darauf, was im Bild zu erkennen ist, denn oft verraten Hintergrund oder Details mehr über dich, als du denkst." }
+        { text: "Achte darauf, was im Bild zu sehen ist. Oft verraten der Hintergrund oder Details mehr über dich, als du denkst." }
       ] },
       standard: { examples: ["Im Hintergrund ist das Straßenschild vor deiner Wohnung zu erkennen – daraus lässt sich ablesen, wo du wohnst.", "Auf dem Tisch liegt ein Brief, auf dem Name und Adresse gut lesbar sind."], text: [
         { text: "Wenn du ein Foto postest, können es viele Menschen sehen. Achte darauf, was im Bild zu erkennen ist – oft verraten Hintergrund oder Details mehr über dich, als dir bewusst ist." }
@@ -961,7 +961,7 @@ const CONTENT_VERSIONS = {
       einfach: {
         text: [
           { text: "Wenn ein Profil oder eine Nachricht komisch wirkt, mach Stopp und antworte nicht sofort." },
-          { text: "Danach entscheidest du selbst, was du tust. Wenn du möchtest, zeigst du es vorher einer Person, der du vertraust." }
+          { text: "Danach entscheidest du selbst, was du tust. Du kannst es vorher einer Person zeigen, der du vertraust." }
         ],
         bullets: ["Stopp machen.", "Nicht sofort antworten.", "Das Profil oder die Nachricht zeigen.", "Den Hilfe-Knopf nutzen."],
         warning: "Ein fremdes Profil kann eine falsche Person sein, auch wenn die Bilder echt aussehen. Ein schönes Bild ist kein Beweis für die wahre Identität.",
@@ -2068,7 +2068,7 @@ const CONTENT_VERSIONS = {
     "Schockanrufe": {
       einfach: {
         text: [
-          { text: "Bei einem Schockanruf macht dir jemand große Angst, zum Beispiel mit den Worten: „Ihr Kind hatte einen Unfall, wir brauchen Geld.“" },
+          { text: "Bei einem Schockanruf macht dir jemand große Angst. Die Person sagt zum Beispiel: „Ihr Kind hatte einen Unfall, wir brauchen Geld.“" },
           { text: "Mit KI kann die Stimme sogar echt klingen, und manche geben sich als Polizei aus." },
           { text: "Solche Anrufe sind ein Trick – der Notfall ist erfunden." },
           { text: "Sprich danach mit einer vertrauten Person darüber." }
@@ -2159,7 +2159,7 @@ const CONTENT_VERSIONS = {
           { text: "Die folgenden Punkte helfen dir dabei." }
         ],
         bullets: ["Der Shop ist bekannt.", "Der Shop hat ein Impressum mit Name und Adresse der Firma.", "Es gibt echte Bewertungen von Kunden.", "Die Preise sind normal, nicht verdächtig billig."],
-        remember: "Ich kaufe bei Shops, die ich kenne oder geprüft habe."
+        remember: "Ich kaufe bei bekannten Shops. Oder ich prüfe den Shop vorher."
       },
       standard: {
         text: [{ text: "Seriöse Online-Shops erkennst du an mehreren Merkmalen. Sie sind bekannt oder gut bewertet, haben ein vollständiges Impressum mit Firmennamen und Adresse und verlangen keine verdächtig niedrigen Preise. Echte Kundenbewertungen geben zusätzliche Sicherheit." }],
@@ -2259,7 +2259,7 @@ const CONTENT_VERSIONS = {
           { text: "Beim Einkaufen im Internet kannst du vieles selbst prüfen und dich so besser schützen." },
           { text: "Die folgenden Punkte helfen dir dabei." }
         ],
-        bullets: ["Ich kaufe bei Shops, die ich kenne.", "Ich prüfe Preis und Impressum.", "Ich zahle möglichst auf Rechnung.", "PIN und TAN bleiben geheim.", "Ich lasse mich nicht hetzen.", "Vor dem Kaufen kann ich eine Person fragen."],
+        bullets: ["Ich kaufe bei bekannten Shops.", "Ich prüfe Preis und Impressum.", "Ich zahle möglichst auf Rechnung.", "PIN und TAN bleiben geheim.", "Ich lasse mich nicht hetzen.", "Vor dem Kaufen kann ich eine Person fragen."],
         warning: "Ein sehr niedriger Preis oder ein Countdown soll dich zur Eile treiben, damit du nicht mehr nachdenkst.",
         success: "Wenn du dich nicht hetzen lässt, kaufst du sicherer ein."
       },
@@ -2932,7 +2932,7 @@ const KURZ_VERSIONS = {
         text: [
           { text: "KI kann auch falsche Dinge sagen." },
           { text: "Mit KI kann man außerdem Bilder fälschen und Stimmen nachmachen." },
-          { text: "Will eine bekannte Stimme am Telefon Geld, legst du auf und rufst die Person unter ihrer bekannten Nummer selbst an." },
+          { text: "Wenn eine bekannte Stimme am Telefon Geld fordert, lege auf. Rufe die Person anschließend unter ihrer dir bekannten Telefonnummer selbst an." },
           { text: "Glaub deshalb nicht alles. Schau im Zweifel an einer zweiten Stelle nach oder sprich mit jemandem darüber." }
         ],
         remember: "Du glaubst nicht alles. Du prüfst es zuerst.",
@@ -5454,9 +5454,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackAuch": [
           null,
           null,
-          "Wenn du die Nummer blockierst, kann sie dir nicht mehr schreiben."
+          "Du hast die Nummer in WhatsApp blockiert und erhältst von ihr keine direkten Nachrichten mehr."
         ],
-        "feedbackCorrect": "Du kennst die Nummer nicht und musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        "feedbackCorrect": "Du antwortest nicht und gibst keine weiteren Angaben über dich weiter. Weitere Nachrichten sind möglich; du kannst die Nummer später blockieren.",
         "remember": "Einer fremden Nummer erzähle ich nichts über mich."
       },
       "standard": {
@@ -5474,9 +5474,9 @@ const AUFGABEN_VERSIONS = {
         "feedbackAuch": [
           null,
           null,
-          "Nach dem Blockieren kann dir die Nummer nicht mehr schreiben."
+          "Die Nummer ist in WhatsApp blockiert. Direkte Nachrichten von dieser Nummer erreichen dich nicht mehr."
         ],
-        "feedbackCorrect": "Du kennst die Nummer nicht und musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        "feedbackCorrect": "Du lässt die Nachricht unbeantwortet und gibst keine weiteren persönlichen Angaben preis. Weitere Nachrichten bleiben möglich; bei Bedarf kannst du die Nummer blockieren.",
         "remember": "Unbekannten Nummern gebe ich nichts über mich preis."
       }
     },
@@ -5531,14 +5531,14 @@ const AUFGABEN_VERSIONS = {
           "Ich schicke den Code nicht und rufe meinen Freund an."
         ],
         "feedbackWrong": [
-          "Oft kommt die Nachricht gar nicht vom Freund, weil Betrüger sein Konto nutzen. Dein Code bleibt deshalb bei dir.",
+          "Vielleicht kommt die Nachricht gar nicht von deinem Freund, weil jemand anderes sein Konto nutzt. Dein Code bleibt deshalb bei dir.",
           null,
           null
         ],
         "feedbackAuch": [
           null,
           null,
-          "Der Code bleibt bei dir, und am Telefon merkst du, ob dein Freund das wirklich geschrieben hat."
+          "Du behältst den Code für dich und fragst deinen Freund über seine bekannte Nummer nach der Nachricht. Auch am Telefon gibst du den Code nicht weiter."
         ],
         "feedbackCorrect": "Mit dem Code kann jemand dein Konto stehlen. Deshalb behältst du ihn immer für dich.",
         "remember": "Ich gebe meinen WhatsApp-Code niemals an andere weiter."
@@ -5551,14 +5551,14 @@ const AUFGABEN_VERSIONS = {
           "Ich gebe den Code nicht weiter und rufe meinen Freund an."
         ],
         "feedbackWrong": [
-          "Oft nutzen Betrüger das Konto deines Freundes und schreiben an seiner Stelle. Behalte deinen Code für dich.",
+          "Möglicherweise nutzt eine andere Person das Konto deines Freundes und schreibt in seinem Namen. Behalte deinen Code für dich.",
           null,
           null
         ],
         "feedbackAuch": [
           null,
           null,
-          "Der Code bleibt bei dir, und am Telefon klärt sich, ob die Nachricht wirklich von deinem Freund kam."
+          "Du gibst den Code nicht weiter und fragst über die bereits bekannte Nummer nach. Auch das Gespräch ist kein Grund, den Code weiterzugeben."
         ],
         "feedbackCorrect": "Mit dem Code kann jemand dein Konto übernehmen. Deshalb behältst du ihn immer für dich.",
         "remember": "Meinen WhatsApp-Code gebe ich nie weiter."

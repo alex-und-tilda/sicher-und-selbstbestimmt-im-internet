@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light" data-learn-mode="allein">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Entdecken &amp; Ausprobieren – Alex &amp; Tilda</title>
+  <link rel="stylesheet" href="../designsystem.css">
+  <link rel="stylesheet" href="../lernhandy/so-lerne-ich.css">
+  <link rel="stylesheet" href="./lernkreis.css">
+  <link rel="stylesheet" href="../plattform-nav.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
+  <div id="a11y-live" class="sr-only" aria-live="polite"></div>
+  <div id="at-plattform-nav"></div>
+
+  <section class="lab-subbar" aria-label="Lernleiste">
+    <div class="lab-subbar-inner">
+      <a class="ctrl-btn lab-exit-btn" href="../lernhandy/index.html">← Beenden</a>
+
+      <span id="lab-step-title" class="lab-step-title"></span>
+
+      <div class="lab-subbar-actions">
+        <button type="button" class="ctrl-btn" data-action="toggle-read" aria-pressed="false">
+          <img src="../assets/pictograms/vorlesen.svg" alt="">
+          <span data-read-label>Vorlesen</span>
+        </button>
+
+        <button type="button" class="ctrl-btn" data-action="open-help">
+          <img src="../assets/pictograms/help.svg" alt="">
+          <span>Hilfe</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content" class="lab-main">
+    <div id="startfrage-slot"></div>
+    <div class="exercise-tabs" role="tablist" aria-label="Übungen zum Ausprobieren" hidden>
+      <button type="button" class="ex-tab" role="tab" data-ex-tab="ds1" aria-selected="true">
+        <span class="ex-tab-kicker">Datenschutz · Entscheiden</span>
+        <span class="ex-tab-title">Nötig oder nicht?</span>
+      </button>
+      <button type="button" class="ex-tab" role="tab" data-ex-tab="fb2" aria-selected="false">
+        <span class="ex-tab-kicker">Facebook · Rat geben</span>
+        <span class="ex-tab-title">Tilda fragt dich</span>
+      </button>
+      <button type="button" class="ex-tab" role="tab" data-ex-tab="wa_ruhe" aria-selected="false">
+        <span class="ex-tab-kicker">WhatsApp · Ausprobieren</span>
+        <span class="ex-tab-title">Ruhe in der Gruppe</span>
+      </button>
+      <button type="button" class="ex-tab" role="tab" data-ex-tab="es_handy" aria-selected="false">
+        <span class="ex-tab-kicker">Erste Schritte · Ausprobieren</span>
+        <span class="ex-tab-title">Erste Schritte am Handy</span>
+      </button>
+      <button type="button" class="ex-tab" role="tab" data-ex-tab="be_sp1" aria-selected="false">
+        <span class="ex-tab-kicker">Betrug · Schon passiert</span>
+        <span class="ex-tab-title">Daten eingegeben</span>
+      </button>
+      <button type="button" class="ex-tab" role="tab" data-ex-tab="tildas_samstag" aria-selected="false">
+        <span class="ex-tab-kicker">Alltag · 4 Folgen</span>
+        <span class="ex-tab-title">Tildas Samstag</span>
+      </button>
+    </div>
+
+    <div class="stage-grid">
+      <section id="stage-left" class="panel-card" aria-live="polite"></section>
+
+      <aside aria-label="Übungs-Handy">
+        <div class="phone-shell">
+          <div class="phone-screen">
+            <div class="phone-app-bar">
+              <span id="phone-title">Übungs-Handy</span>
+              <span>Übung</span>
+            </div>
+            <div id="phone-body"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="bridge-section" id="bridge-section" aria-labelledby="bridge-heading" hidden>
+      <h2 id="bridge-heading">Wie möchtest du weitermachen?</h2>
+      <div class="bridge-links">
+        <a class="bridge-link" href="../lernhandy/index.html">Weitere Themen &amp; Übungen</a>
+        <a class="bridge-link" href="../mein-lernweg.html">Zu „Mein Lernweg“</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="lab-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="lab-modal-title" hidden>
+    <div class="modal-panel">
+      <h2 id="lab-modal-title"></h2>
+      <p id="lab-modal-text"></p>
+      <div class="modal-actions" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;">
+        <button type="button" class="primary-btn" data-action="open-sli-from-help">Einstellungen (So lerne ich)</button>
+        <button type="button" class="modal-close">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../lernhandy/so-lerne-ich.js"></script>
+  <script src="../begleitung-de.js"></script>
+  <script src="../plattform-nav.js" data-at-root="../"></script>
+  <script src="../lernhandy/bild-slots.js"></script>
+  <script src="../regeln-de.js"></script>
+  <script src="./uebungen-daten.js"></script>
+  <script src="./lernkreis.js"></script>
+</body>
+</html>

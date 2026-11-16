@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Alex &amp; Tilda – Hilfe, Begleitung und Schulung</title>
+  <link rel="stylesheet" href="designsystem.css">
+  <link rel="stylesheet" href="lernhandy/so-lerne-ich.css">
+  <link rel="stylesheet" href="plattform-nav.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--at-accent-dark);
+      color: var(--at-accent-ink);
+      padding: 12px 18px;
+      font-weight: 700;
+      z-index: 200;
+    }
+    .skip-link:focus { left: 12px; top: 8px; }
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+    .hero-band {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .hero-fig {
+      width: 128px;
+      border-radius: var(--at-radius-lg);
+      background: var(--at-surface-soft);
+      padding: 10px 10px 0;
+      overflow: hidden;
+    }
+    .hero-fig img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-copy { min-width: 0; }
+    .hero-copy h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+      line-height: 1.22;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+    .hero-copy p {
+      margin: 0;
+      color: var(--at-ink-soft);
+      max-width: 62ch;
+    }
+    .sli-inline {
+      margin-top: 10px;
+      font-size: 0.94rem;
+      color: var(--at-ink-soft);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+    }
+    .sli-inline strong { color: var(--at-ink); }
+    .bereich-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 20px;
+    }
+    .bereich-tab {
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 2px solid var(--at-line);
+      background: var(--at-surface);
+      color: var(--at-ink);
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .bereich-tab:hover {
+      background: var(--at-surface-hover);
+    }
+    .bereich-tab[aria-selected="true"] {
+      background: var(--at-accent);
+      border-color: var(--at-accent);
+      color: var(--at-accent-ink);
+    }
+    .bereich-tab:focus-visible,
+    .schulung-unit-btn:focus-visible {
+      outline: 3px solid var(--at-focus);
+      outline-offset: 2px;
+    }
+    .schulung-katalog {
+      margin-top: 18px;
+      border: 1px solid var(--at-line);
+      border-radius: var(--at-radius-sm);
+      background: var(--at-surface-soft);
+      padding: 12px 16px;
+    }
+    .schulung-katalog summary {
+      cursor: pointer;
+      font-weight: 700;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      list-style-position: inside;
+    }
+    .schulung-phasen {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .schulung-phase {
+      background: var(--at-surface);
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--at-line);
+    }
+    .schulung-phase h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      color: var(--at-ink);
+    }
+    .schulung-phase ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+    .schulung-unit-btn {
+      width: 100%;
+      min-height: 44px;
+      padding: 8px 10px;
+      border: 1px solid var(--at-line);
+      border-radius: 10px;
+      background: var(--at-bg);
+      color: var(--at-accent);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+    }
+    .schulung-unit-btn:hover,
+    .schulung-unit-btn[aria-current="true"] {
+      background: var(--at-accent-soft);
+      color: var(--at-accent-dark);
+      border-color: var(--at-accent);
+    }
+    .schulung-reader {
+      margin-top: 18px;
+      border: 2px solid var(--at-accent);
+      border-radius: var(--at-radius-sm);
+      background: var(--at-surface);
+      overflow: hidden;
+    }
+    .reader-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--at-accent-soft);
+      border-bottom: 1px solid var(--at-line);
+    }
+    .reader-frame {
+      display: block;
+      width: 100%;
+      height: 540px;
+      border: 0;
+      background: #ffffff;
+    }
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+    .strip-btn {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 6px 4px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--at-accent);
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.94rem;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+    }
+    .strip-btn.primary {
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: var(--at-accent);
+      color: var(--at-accent-ink);
+      text-decoration: none;
+    }
+    .strip-btn:hover { background: var(--at-surface-hover); }
+    .strip-btn.primary:hover { background: var(--at-accent-dark); }
+    .strip-btn:focus-visible,
+    .pill-link:focus-visible,
+    .topic-pill:focus-visible {
+      outline: 3px solid var(--at-focus);
+      outline-offset: 2px;
+    }
+    .panel {
+      background: var(--at-surface);
+      border-radius: var(--at-radius-md);
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      min-width: 0;
+      max-width: 100%;
+    }
+    .panel:target {
+      border-left: 4px solid var(--at-accent);
+    }
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+      overflow-wrap: anywhere;
+    }
+    .panel-lead {
+      margin: 0 0 14px;
+      color: var(--at-ink-soft);
+      font-size: 0.95rem;
+    }
+    .pill-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 4px 18px;
+    }
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 8px 4px;
+      border-bottom: 1px solid var(--at-line);
+      background: transparent;
+      color: var(--at-accent);
+      font-weight: 700;
+      font-size: 0.94rem;
+      text-decoration: none;
+    }
+    .pill-link:hover {
+      color: var(--at-accent-dark);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .compass-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+    .topic-pill {
+      min-height: 44px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--at-line);
+      background: var(--at-bg);
+      color: var(--at-ink);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .topic-pill[aria-pressed="true"] {
+      background: var(--at-accent);
+      border-color: var(--at-accent);
+      color: var(--at-accent-ink);
+    }
+    .compass-body {
+      background: var(--at-surface-soft);
+      border-radius: var(--at-radius-sm);
+      padding: 16px 18px;
+      display: grid;
+      gap: 12px;
+    }
+    .compass-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px 18px;
+    }
+    .compass-col h3 {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+      color: var(--at-ink);
+    }
+    .compass-col ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--at-ink-soft);
+      font-size: 0.92rem;
+    }
+    .compass-col li { margin-bottom: 4px; }
+    .compass-rule {
+      margin: 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--at-accent-soft);
+      color: var(--at-ink);
+      font-size: 0.92rem;
+    }
+    .foot {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--at-line);
+      color: var(--at-ink-soft);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 780px) {
+      .wrap { padding: 14px 12px 40px; }
+      .hero-band { grid-template-columns: 56px minmax(0, 1fr); gap: 12px; margin-bottom: 16px; align-items: start; }
+      .hero-fig { width: 56px; padding: 4px 4px 0; border-radius: 14px; }
+      .hero-copy p:not(.sli-inline) { font-size: 0.9rem; }
+      .panel { padding: 16px 14px; }
+      .schulung-katalog { padding: 10px 12px; max-width: 100%; }
+      .schulung-phasen { grid-template-columns: minmax(0, 1fr); }
+      .schulung-phase { min-width: 0; max-width: 100%; }
+      .bereich-tab, .strip-btn, .schulung-unit-btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+      .compass-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#hauptinhalt">Zum Hauptinhalt springen</a>
+  <div id="at-plattform-nav"></div>
+
+  <div class="wrap">
+    <main id="hauptinhalt">
+      <section class="hero-band" aria-labelledby="hub-title">
+        <div class="hero-fig">
+          <img id="brand-img" src="assets/figures/alex-tilda-ruhig.webp" alt="Ruhige Alltagsszene mit Alex und Tilda">
+        </div>
+        <div class="hero-copy">
+          <h1 id="hub-title">Hilfe im Notfall</h1>
+          <p id="hub-lead">Hier findest du ruhige Schritte bei Unsicherheit, das Übungsangebot für Digital-Begleiter*innen und den Kompass für Begleitung auf Augenhöhe.</p>
+          <p class="sli-inline">Deine Einstellung: <strong id="sli-zusammenfassung">Gib mir Hilfen dazu. · Leichte Sprache · Lesen · Allein</strong></p>
+        </div>
+      </section>
+
+      <div class="bereich-tabs" role="tablist" aria-label="Unterstützungs-Bereiche">
+        <button type="button" class="bereich-tab" role="tab" id="tab-hilfe" data-tab="hilfe" aria-selected="true" aria-controls="hilfe">Hilfe im Notfall</button>
+        <button type="button" class="bereich-tab" role="tab" id="tab-digital-begleiter" data-tab="digital-begleiter" aria-selected="false" aria-controls="digital-begleiter">Digital-Begleiter*innen</button>
+        <button type="button" class="bereich-tab" role="tab" id="tab-begleiten" data-tab="begleiten" aria-selected="false" aria-controls="begleiten">Lernen begleiten</button>
+      </div>
+
+      <section class="panel" id="hilfe" role="tabpanel" aria-labelledby="tab-hilfe">
+        <h2 id="hilfe-heading">Ruhe bewahren, wenn etwas passiert ist</h2>
+        <p class="panel-lead"><strong>Notfall-Hinweis:</strong> Hast du Daten auf einer fremden Seite eingegeben oder auf einen unsicheren Link getippt? Bleib ruhig. Rufe direkt deine echte Bank oder den Sperr-Notruf <strong>116 116</strong> an.</p>
+        <div class="link-row">
+          <a class="strip-btn primary" href="lernkreis/index.html?ex=be_sp1">Schon passiert: Schritt für Schritt handeln</a>
+          <a class="strip-btn" href="lernhandy/index.html?thema=betrug#thema-betrug">Zu den Betrugs-Übungen im Handy</a>
+        </div>
+      </section>
+
+      <section class="panel" id="digital-begleiter" role="tabpanel" aria-labelledby="tab-digital-begleiter" hidden>
+        <h2 id="db-heading">Digital-Begleiter*innen: Begleiten und beraten üben</h2>
+        <p class="panel-lead">Auf Augenhöhe unterstützen: Das Gerät und die Entscheidung bleiben immer bei der lernenden Person.</p>
+        <div class="link-row">
+          <a class="strip-btn primary" href="lernkreis/index.html?ex=begleiten_ueben">Begleiten üben: Helfen, ohne das Handy abzunehmen</a>
+          <a class="strip-btn" href="lernhandy/kurzweg.html?weg=fb2&amp;lernkreis=1&amp;mode=unterstuetzung">Beratung am Handy üben</a>
+        </div>
+
+        <details class="schulung-katalog" id="schulung-katalog">
+          <summary>Die 18 Einheiten der Digital-Begleiter-Schulung ansehen</summary>
+          <p class="panel-lead" style="margin-top:10px;">Tippe auf eine Einheit. Sie öffnet sich direkt hier auf der Seite, sodass du immer innerhalb von Alex &amp; Tilda bleibst.</p>
+          <div class="schulung-phasen" id="schulung-phasen"></div>
+        </details>
+
+        <div class="schulung-reader" id="schulung-reader" hidden>
+          <div class="reader-head">
+            <strong id="schulung-reader-title">Schulungs-Einheit</strong>
+            <button type="button" class="strip-btn" id="schulung-close-btn">Schulungs-Einheit schließen</button>
+          </div>
+          <iframe class="reader-frame" id="schulung-iframe" title="Einheit der Digital-Begleiter-Schulung"></iframe>
+        </div>
+      </section>
+
+      <section class="panel" id="begleiten" role="tabpanel" aria-labelledby="tab-begleiten" hidden>
+        <h2 id="begleiten-heading">Lernen begleiten: Situations-Kompass auf Augenhöhe</h2>
+        <p class="panel-lead">Wähle das aktuelle Thema aus. Du siehst sofort passende Fragen und ruhige Hilfen für die Begleitung — ohne das Handy zu übernehmen.</p>
+        <div class="compass-topics" id="compass-topics" role="group" aria-label="Thema für die Begleitung wählen"></div>
+        <div class="compass-body" id="compass-body" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>Alex &amp; Tilda · Inklusive Lernplattform · Auf dieser Seite wird ohne Einwilligung nichts gespeichert.</p>
+    </footer>
+  </div>
+
+  <script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="begleitung-de.js"></script>
+  <script src="plattform-nav.js" data-at-root=""></script>
+  <script src="lernhandy/bild-slots.js"></script>
+  <script>
+    (function () {
+      if (window.AlexTildaBildSlots) {
+        const img = document.getElementById("brand-img");
+        const slot = window.AlexTildaBildSlots.hole("ruhiger_alltag", "assets/");
+        if (img && slot) {
+          img.src = slot.src;
+          img.alt = slot.alt;
+        }
+      }
+
+      const params = new URLSearchParams(window.location.search);
+function aktualisiereStatus() {
+        const el = document.getElementById("sli-zusammenfassung");
+        if (!el || !window.SoLerneIch) return;
+        const s = window.SoLerneIch.getState();
+        const envObj = window.SoLerneIch.VOREINSTELLUNGEN[s.voreinstellung];
+        const envLabel = (envObj && envObj.titel) || "Eigene Auswahl";
+        const langLabel = { leicht: "Leichte Sprache", einfach: "Einfache Sprache", alltag: "Alltagssprache" }[s.sprache] || s.sprache;
+        const zugangLabel = { lesen: "Lesen", hoeren: "Hören", beides: "Lesen und Hören" }[s.zugang] || s.zugang;
+        const formLabel = { allein: "Allein", gemeinsam: "Gemeinsam", unterstuetzung: "Mit Unterstützung" }[s.lernform] || "Allein";
+        el.textContent = envLabel + " · " + langLabel + " · " + zugangLabel + " · " + formLabel;
+      }
+
+      if (window.SoLerneIch) {
+        aktualisiereStatus();
+        window.SoLerneIch.onChange(aktualisiereStatus);
+      }
+
+      const BEREICHE = {
+        hilfe: {
+          title: "Hilfe im Notfall",
+          lead: "Ruhige Schritte, wenn etwas passiert ist oder du sofort Unterstützung brauchst."
+        },
+        "digital-begleiter": {
+          title: "Digital-Begleiter*innen",
+          lead: "Begleiten auf Augenhöhe üben und die 18 Einheiten der Schulung ansehen."
+        },
+        begleiten: {
+          title: "Lernen begleiten",
+          lead: "Situations-Kompass und ruhige Begleitfragen für Angehörige und Unterstützer*innen."
+        }
+      };
+
+      function hashToTab(hashStr) {
+        const clean = String(hashStr || "").replace(/^#/, "").trim().toLowerCase();
+        if (clean === "begleiten" || clean === "begleiten-karte") return "begleiten";
+        if (clean === "digital-begleiter" || clean === "schulung") return "digital-begleiter";
+        return "hilfe";
+      }
+
+      function aktiviereBereich(tabKey, updateHash) {
+        const key = BEREICHE[tabKey] ? tabKey : "hilfe";
+        const meta = BEREICHE[key];
+        const h1 = document.getElementById("hub-title");
+        const lead = document.getElementById("hub-lead");
+        if (h1) h1.textContent = meta.title;
+        if (lead) lead.textContent = meta.lead;
+
+        document.querySelectorAll("[data-tab]").forEach((btn) => {
+          const on = btn.dataset.tab === key;
+          btn.setAttribute("aria-selected", String(on));
+        });
+        ["hilfe", "digital-begleiter", "begleiten"].forEach((id) => {
+          const panel = document.getElementById(id);
+          if (panel) panel.hidden = id !== key;
+        });
+
+        if (updateHash && window.history && typeof window.history.replaceState === "function") {
+          window.history.replaceState(null, "", "#" + key);
+        }
+      }
+
+      document.querySelectorAll("[data-tab]").forEach((btn) => {
+        btn.addEventListener("click", () => aktiviereBereich(btn.dataset.tab, true));
+      });
+      window.addEventListener("hashchange", () => aktiviereBereich(hashToTab(window.location.hash), false));
+      aktiviereBereich(hashToTab(window.location.hash), false);
+
+      // 18 Schulungs-Einheiten im eingebetteten Ansichtsrahmen ohne Plattform-Bruch (B-03)
+      const SCHULUNG_PHASEN = [
+        {
+          titel: "Phase 1 · Rolle und Stärken",
+          einheiten: [
+            ["LE01", "Meine Rolle als Digitalbegleiter"],
+            ["LE02", "Meine Stärken und Empowerment"],
+            ["LE03", "Digitale Teilhabe und mein Beitrag"]
+          ]
+        },
+        {
+          titel: "Phase 2 · Digitale Kompetenzen",
+          einheiten: [
+            ["LE04", "Geräte verstehen und Funktionen nutzen"],
+            ["LE05", "Digital kommunizieren"],
+            ["LE06", "Alltagsanwendungen praktisch nutzen"],
+            ["LE07", "Privatsphäre und bewusste Nutzung"]
+          ]
+        },
+        {
+          titel: "Phase 3 · Verständlich erklären",
+          einheiten: [
+            ["LE08", "Kommunikationswege verstehen"],
+            ["LE09", "Zuhören und Bedeutung klären"],
+            ["LE10", "Vier Seiten einer Nachricht"],
+            ["LE11", "Fragen und Rückmeldung im Gespräch"]
+          ]
+        },
+        {
+          titel: "Phase 4 · Befähigen",
+          einheiten: [
+            ["LE12", "Andere zum eigenen Handeln befähigen"],
+            ["LE13", "Lerntempo und Selbstorganisation"]
+          ]
+        },
+        {
+          titel: "Phase 5 · Aufgabe entwickeln",
+          einheiten: [
+            ["LE14", "Meine Aufgabe im Unterstützersystem"],
+            ["LE15", "Eine verständliche Schritthilfe gestalten"],
+            ["LE16", "Mein Angebot bekannt machen"]
+          ]
+        },
+        {
+          titel: "Phase 6 · Begleitung erproben",
+          einheiten: [
+            ["LE17", "Digitale Begleitung praktisch durchführen"],
+            ["LE18", "Mein weiterer Weg als Digitalbegleiter"]
+          ]
+        }
+      ];
+
+      const phasenHost = document.getElementById("schulung-phasen");
+      const readerBox = document.getElementById("schulung-reader");
+      const readerTitle = document.getElementById("schulung-reader-title");
+      const readerFrame = document.getElementById("schulung-iframe");
+      const closeReaderBtn = document.getElementById("schulung-close-btn");
+
+      function oeffneSchulung(code, name) {
+        if (!readerBox || !readerFrame) return;
+        const url = "schulung/" + encodeURIComponent(code) + "/index.html";
+        if (readerTitle) readerTitle.textContent = code + " · " + name;
+        readerBox.hidden = false;
+        readerFrame.src = url;
+        document.querySelectorAll(".schulung-unit-btn").forEach((b) => {
+          b.setAttribute("aria-current", b.dataset.unit === code ? "true" : "false");
+        });
+        readerBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      if (readerFrame) {
+        readerFrame.addEventListener("load", () => {
+          try {
+            const doc = readerFrame.contentDocument;
+            if (!doc) return;
+            doc.addEventListener("click", (ev) => {
+              const a = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+              if (!a) return;
+              const rawHref = a.getAttribute("href") || "";
+              if (/zugang\.html/i.test(rawHref) || /^\.\.\/\.\.\/index\.html/i.test(rawHref)) {
+                ev.preventDefault();
+                window.location.href = "zugang.html";
+              } else if (rawHref === "../index.html" || rawHref === "index.html") {
+                if (readerFrame.contentWindow && /LE\d+\/index\.html$/i.test(readerFrame.contentWindow.location.pathname) && rawHref === "../index.html") {
+                  ev.preventDefault();
+                  readerBox.hidden = true;
+                  readerFrame.src = "about:blank";
+                  document.querySelectorAll(".schulung-unit-btn").forEach((b) => b.removeAttribute("aria-current"));
+                }
+              }
+            });
+          } catch (e) {}
+        });
+      }
+
+      if (closeReaderBtn && readerBox && readerFrame) {
+        closeReaderBtn.addEventListener("click", () => {
+          readerBox.hidden = true;
+          readerFrame.src = "about:blank";
+          document.querySelectorAll(".schulung-unit-btn").forEach((b) => b.removeAttribute("aria-current"));
+        });
+      }
+
+      if (phasenHost) {
+        phasenHost.innerHTML = SCHULUNG_PHASEN.map((p) => `
+          <div class="schulung-phase">
+            <h3>${p.titel}</h3>
+            <ul>
+              ${p.einheiten.map(([code, title]) => `
+                <li><button type="button" class="schulung-unit-btn" data-unit="${code}" data-unit-name="${title}">${code} · ${title}</button></li>
+              `).join("")}
+            </ul>
+          </div>
+        `).join("");
+        phasenHost.addEventListener("click", (e) => {
+          const btn = e.target.closest(".schulung-unit-btn");
+          if (btn) oeffneSchulung(btn.dataset.unit, btn.dataset.unitName);
+        });
+      }
+
+      // Situations-Kompass für „Lernen begleiten“ aus begleitung-de.js
+      const THEMEN_META = [
+        { key: "betrug", label: "Betrug erkennen", uebung: "lernhandy/kurzweg.html?weg=be1&lernkreis=1&mode=unterstuetzung", uebungLabel: "Im Übungs-Handy üben: Jemand will einen Code" },
+        { key: "datenschutz", label: "Datenschutz", uebung: "lernhandy/kurzweg.html?weg=ds1&lernkreis=1&mode=unterstuetzung", uebungLabel: "Im Übungs-Handy üben: Nötig oder nicht?" },
+        { key: "facebook", label: "Facebook & Kettenbriefe", uebung: "lernhandy/kurzweg.html?weg=fb2&lernkreis=1&mode=unterstuetzung", uebungLabel: "Im Übungs-Handy üben: Unbekannte Personen" },
+        { key: "hilfe", label: "Updates & Hilfe", uebung: "lernhandy/kurzweg.html?weg=h2&lernkreis=1&mode=unterstuetzung", uebungLabel: "Im Übungs-Handy üben: Was kann ich selbst tun?" },
+        { key: "einkaufen", label: "Einkaufen & E-Mail", uebung: "lernhandy/postfach.html?sz=ek-post1&lernkreis=1&mode=unterstuetzung", uebungLabel: "Im Postfach üben: Die Bestellung kommt nicht" },
+        { key: "whatsapp", label: "WhatsApp", uebung: "lernkreis/index.html?ex=wa_ruhe&mode=unterstuetzung", uebungLabel: "Etwas ausprobieren: Ruhe in der Gruppe" }
+      ];
+
+      let aktivesThema = "betrug";
+      const topicsHost = document.getElementById("compass-topics");
+      const bodyHost = document.getElementById("compass-body");
+
+      function renderKompass() {
+        if (!topicsHost || !bodyHost) return;
+        topicsHost.innerHTML = THEMEN_META.map((t) =>
+          `<button type="button" class="topic-pill" data-compass-topic="${t.key}" aria-pressed="${t.key === aktivesThema}">${t.label}</button>`
+        ).join("");
+
+        const compMap = typeof COMPANION !== "undefined" ? COMPANION : window.COMPANION;
+        const compHilfe = typeof COMPANION_HILFE !== "undefined" ? COMPANION_HILFE : window.COMPANION_HILFE;
+        const meta = THEMEN_META.find((t) => t.key === aktivesThema) || THEMEN_META[0];
+        const comp = compMap && compMap[meta.key];
+        const fragen = (comp && comp.praxis && comp.praxis.fragen) || [];
+        const helfen = (comp && comp.praxis && comp.praxis.helfen) || [];
+        const allgRegel = (compHilfe && compHilfe[3]) ||
+          "Die lernende Person kann selbst ausprobieren oder selbst entscheiden. Das Gerät und die Entscheidung bleiben bei ihr.";
+
+        bodyHost.innerHTML = `
+          <div class="compass-grid">
+            <div class="compass-col">
+              <h3>Gute Fragen zum Mitdenken</h3>
+              <ul>${fragen.map((f) => `<li>${f}</li>`).join("")}</ul>
+            </div>
+            <div class="compass-col">
+              <h3>Wenn es hakt</h3>
+              <ul>${helfen.map((h) => `<li>${h}</li>`).join("")}</ul>
+            </div>
+          </div>
+          <p class="compass-rule"><strong>Grundsatz:</strong> ${allgRegel}</p>
+          <div class="link-row">
+            <a class="strip-btn primary" href="${meta.uebung}">${meta.uebungLabel}</a>
+            <a class="strip-btn" href="druckvorlage.html#bk-title">Begleit-Karte drucken</a>
+          </div>
+        `;
+      }
+
+      if (topicsHost) {
+        topicsHost.addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-compass-topic]");
+          if (!btn) return;
+          aktivesThema = btn.dataset.compassTopic;
+          renderKompass();
+        });
+        renderKompass();
+      }
+    })();
+  </script>
+</body>
+</html>

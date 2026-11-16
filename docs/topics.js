@@ -1408,7 +1408,7 @@ const topics = [
       },
       {
         "title": "Geld und Betrug",
-        "warning": "Fremde fragen manchmal nach Geld. Schick kein Geld an fremde Nummern. Ruf die Person mit der Nummer an, die du kennst.",
+        "warning": "Fremde fragen manchmal nach Geld. Schick kein Geld an fremde Nummern. Ruf die Person an. Nutze die bekannte Telefon-Nummer.",
         "module": "Nachrichten",
         "icon": "warning",
         "text": [
@@ -1417,7 +1417,7 @@ const topics = [
             "pictogram": "pikto-message"
           },
           {
-            "text": "Fremde tun manchmal so, als ob sie Freunde oder Familie sind.",
+            "text": "Manche Fremde lügen. Sie tun so wie Freunde oder Familie.",
             "pictogram": "pikto-message"
           },
           {
@@ -1602,7 +1602,7 @@ const topics = [
             "pictogram": "pikto-photo"
           },
           {
-            "text": "Du fragst, bevor du ein Foto von anderen sendest.",
+            "text": "Frag erst um Erlaubnis. Sende das Foto erst danach.",
             "pictogram": "pikto-photo"
           }
         ],
@@ -2284,7 +2284,7 @@ const topics = [
       },
       {
         "title": "Freundschafts-Anfragen",
-        "warning": "Nimm nur Anfragen von Menschen an, die du kennst. Fremde Profile können falsch sein. Im Zweifel sagst du Nein.",
+        "warning": "Nimm nur Anfragen von bekannten Menschen an. Fremde Profile können falsch sein. Im Zweifel sagst du Nein.",
         "module": "Kontakte",
         "icon": "help",
         "text": [
@@ -2446,7 +2446,7 @@ const topics = [
             "pictogram": "pikto-link"
           },
           {
-            "text": "Du fragst erst, bevor du ein Foto postest.",
+            "text": "Frag erst die anderen Personen. Poste das Foto erst danach.",
             "pictogram": "pikto-photo"
           }
         ],
@@ -4481,7 +4481,7 @@ const topics = [
             "pictogram": "pikto-photo"
           }
         ],
-        "warning": "Jemand kann dein Bild speichern. Auch wenn es nur kurz zu sehen ist. Sende nur Bilder, die andere sehen dürfen.",
+        "warning": "Jemand kann dein Bild speichern. Auch bei kurzer Zeit. Sende nur Bilder für alle Augen.",
         "practice": {
           "question": "Du hast ein Foto von deinem Ausweis. Ein Freund schreibt: Schick es mir kurz als Snap. Ich will dein altes Foto sehen. Was machst du?",
           "schluessel": "Du schickst ein Bild über Snapchat. Was ist wichtig?",
@@ -4753,7 +4753,7 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
-        "warning": "Ein Bild, das du einmal sendest, kannst du nicht mehr zurückholen.",
+        "warning": "Du hast ein Bild gesendet? Dann kannst du es nicht mehr zurückholen.",
         "success": "Nein sagen ist immer richtig. Auch bei Stress.",
         "practice": {
           "question": "Eine Person schreibt dir jeden Tag: Schick mir endlich ein Bild. Du hast schon Nein gesagt. Was machst du?",
@@ -5469,7 +5469,7 @@ const topics = [
             "pictogram": "pikto-help"
           }
         ],
-        "warning": "Ein Trend kann gefährlich sein, auch wenn viele mitmachen.",
+        "warning": "Viele Menschen machen bei einem Trend mit? Trotzdem kann der Trend gefährlich sein.",
         "success": "Pause machen und nicht nachmachen schützt dich.",
         "practice": {
           "question": "Unter deinem Video schreibt jemand: Du hast ein Handy gewonnen. Schick mir sofort deine Adresse. In 1 Stunde ist der Gewinn weg. Was machst du?",
@@ -6846,7 +6846,7 @@ const topics = [
             "pictogram": "pikto-photo"
           }
         ],
-        "remember": "KI ist in vielen Apps. Auch wenn ich sie nicht sehe.",
+        "remember": "KI ist in vielen Apps. Ich sehe die KI oft nicht.",
         "pictogram": "pikto-data"
       },
       {
@@ -6924,7 +6924,7 @@ const topics = [
         ],
         "examples": [
           "Die KI nennt eine falsche Telefon-Nummer.",
-          "Die KI erzählt etwas, das nie passiert ist."
+          "Die KI erfindet Geschichten. Die Geschichten sind nie passiert."
         ],
         "practice": {
           "question": "Du fragst eine KI: Darf ich ein Zimmer in meiner Wohnung vermieten? Die KI antwortet lang und sehr sicher. Was machst du?",
@@ -7766,7 +7766,7 @@ const topics = [
             "pictogram": "pikto-ki"
           },
           {
-            "text": "Im Video sagt eine Person Dinge, die sie nie gesagt hat.",
+            "text": "Im Video spricht eine Person. Aber sie hat diese Worte nie gesagt.",
             "pictogram": "pikto-photo"
           },
           {
@@ -7828,7 +7828,7 @@ const topics = [
             "pictogram": "pikto-fake"
           }
         ],
-        "warning": "Lege auf. Ruf die Person selbst an. Nutze die Nummer, die du kennst.",
+        "warning": "Lege auf. Ruf die Person selbst an. Nutze die bekannte Telefon-Nummer.",
         "practice": {
           "question": "Ein Anruf: Hier ist die Polizei. Ihr Sohn hatte einen Unfall. Er braucht sofort 3000 Euro. Im Hintergrund weint eine Stimme wie dein Sohn. Was machst du?",
           "schluessel": "Ein Anruf: Die Stimme klingt wie dein Bruder. Er will sofort Geld. Was ist besser?",
@@ -7978,7 +7978,7 @@ const topics = [
         "icon": "stop",
         "text": [
           {
-            "text": "Wenn du Fakes weiterleitest, verbreiten sie sich.",
+            "text": "Leite gefälschte Nachrichten nicht weiter. Sonst glauben immer mehr Menschen die Lüge.",
             "pictogram": "pikto-fake"
           },
           {
@@ -8054,11 +8054,11 @@ const topics = [
             "pictogram": "pikto-no"
           },
           {
-            "text": "Ich kann eine Person fragen, der ich vertraue.",
+            "text": "Ich kann eine vertraute Person fragen.",
             "pictogram": "pikto-ask"
           }
         ],
-        "warning": "Starke Gefühle wie Angst oder Wut wollen, dass du schnell teilst. Genau dann ist Vorsicht wichtig.",
+        "warning": "Hast du Angst oder Wut? Halte erst inne. Teile die Nachricht nicht sofort.",
         "success": "Nicht teilen im Zweifel schützt dich und andere.",
         "practice": {
           "question": "Dein Kollege zeigt dir eine Nachricht. Er ist sehr aufgeregt. Er sagt: Das musst du sofort teilen. Sonst bist du schuld. Was machst du?",
@@ -8844,7 +8844,7 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
-            "text": "Aber ganz unten steht in kleiner Schrift: Danach kostet es jeden Monat Geld.",
+            "text": "Ganz unten steht kleingedruckt: Danach kostet es jeden Monat Geld.",
             "pictogram": "pikto-feel"
           },
           {
@@ -8852,7 +8852,7 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
-            "text": "Lies genau, bevor du etwas bestellst.",
+            "text": "Lies erst die Bedingungen genau. Bestelle erst danach.",
             "pictogram": "pikto-fraud"
           }
         ],
@@ -8866,7 +8866,7 @@ const topics = [
             "pictogram": "pikto-fraud"
           },
           {
-            "text": "Frag eine Person, bevor du bestellst.",
+            "text": "Frag erst eine Person. Bestelle erst danach.",
             "pictogram": "pikto-fraud"
           }
         ],
@@ -9091,7 +9091,7 @@ const topics = [
         ],
         "bullets": [
           {
-            "text": "Sag einer Person Bescheid, der du vertraust.",
+            "text": "Sag einer vertrauten Person Bescheid.",
             "pictogram": "pikto-help"
           },
           {
@@ -9585,12 +9585,12 @@ const topics = [
             "pictogram": "pikto-shop"
           }
         ],
-        "remember": "Ich kaufe bei Shops, die ich kenne oder geprüft habe.",
+        "remember": "Ich kaufe bei bekannten Shops. Oder ich prüfe den Shop vorher.",
         "pictogram": "pikto-shop"
       },
       {
         "title": "Fake-Shops erkennen",
-        "warning": "Ein Fake-Shop ist ein falscher Shop. Du bezahlst, aber die Ware kommt nie. Prüfe einen Shop, bevor du bezahlst.",
+        "warning": "Ein Fake-Shop ist ein falscher Shop. Du bezahlst, aber die Ware kommt nie. Prüfe den Shop zuerst. Bezahle erst danach.",
         "module": "Einkaufen",
         "icon": "warning",
         "text": [
@@ -9732,7 +9732,7 @@ const topics = [
             "pictogram": "pikto-shop"
           },
           {
-            "text": "Niemals Geld an Privat-Personen senden, die du nicht kennst.",
+            "text": "Sende kein Geld an fremde Personen.",
             "pictogram": "pikto-message"
           },
           {
@@ -9949,7 +9949,7 @@ const topics = [
         ],
         "bullets": [
           {
-            "text": "Ich kaufe bei Shops, die ich kenne.",
+            "text": "Ich kaufe bei bekannten Shops.",
             "pictogram": "pikto-shop"
           },
           {
@@ -10258,7 +10258,7 @@ const topics = [
       "Brauche ich Unterstützung?"
     ],
     "memoryRules": [
-      "Ich kaufe bei Shops, die ich kenne.",
+      "Ich kaufe bei bekannten Shops.",
       "Sehr billig und nur Vorkasse: Warnzeichen.",
       "Rechnung ist sicherer als Vorkasse.",
       "PIN und TAN bleiben geheim.",

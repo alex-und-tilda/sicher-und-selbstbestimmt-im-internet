@@ -4,7 +4,7 @@
    Version: update CACHE_VERSION bei jeder Veröffentlichung
    ============================================================= */
 
-const CACHE_VERSION = "v2026-31-beta3-schulung-0816-kontrast";
+const CACHE_VERSION = "v2026-56-beta4";
 const CACHE_NAME    = "sicher-im-netz-" + CACHE_VERSION;
 /* Altlast: früher lagen die Piktogramme bei static.arasaac.org.
    Heute sind es eigene SVGs in assets/pictograms/. Dieser alte Cache
@@ -173,6 +173,7 @@ const PRECACHE_URLS = [
   /* Statische Seiten */
   "./barrierefreiheit.html",
   "./sprachstufen.html",
+  "./ueber-alex-und-tilda.html",
   "./impressum.html",
   "./datenschutz.html",
   "./ersteller.html",
@@ -220,6 +221,7 @@ const PRECACHE_URLS = [
   "./assets/scenes/betrug-hilfe.webp",
   "./assets/scenes/betrug-liebe.webp",
   "./assets/scenes/betrug-paket.webp",
+  "./assets/scenes/betrug-qr-code.webp",
   "./assets/scenes/betrug-schockanruf.webp",
   "./assets/scenes/betrug-schutz.webp",
   "./assets/scenes/betrug-tricks.webp",
@@ -242,6 +244,7 @@ const PRECACHE_URLS = [
   "./assets/scenes/ki-antwort-pruefen.webp",
   "./assets/scenes/ki-chatbot.webp",
   "./assets/scenes/ki-fehler.webp",
+  "./assets/scenes/ki-gesundheit-geld.webp",
   "./assets/scenes/snapchat-bilder.webp",
   "./assets/scenes/snapchat-private-bilder.webp",
   "./assets/scenes/szene-fotos.webp",
@@ -267,6 +270,7 @@ const PRECACHE_URLS = [
   "./assets/scenes/youtube-mutproben.webp",
   "./assets/scenes/youtube-pausen.webp",
   "./assets/scenes/youtube-werbung.webp",
+  /* Master v4 Szenen (neu) */
   "./assets/pictograms/anruf.svg",
   "./assets/pictograms/ask.svg",
   "./assets/pictograms/bank.svg",
@@ -355,6 +359,38 @@ const PRECACHE_URLS = [
   "./assets/fonts/atkinson-bold-ext.woff2",
   "./assets/fonts/atkinson-regular.ttf",
   "./assets/fonts/atkinson-bold.ttf",
+
+  /* Interaktives Lern-Handy (34 Lernwege) & Public Beta 4 Oberfläche */
+  "./designsystem.css",
+  "./plattform-nav.css",
+  "./plattform-nav.js",
+  "./mein-lernweg.html",
+  "./testfassung.html",
+  "./druckvorlage.html",
+  "./lernhandy/index.html",
+  "./lernhandy/kurzweg.html",
+  "./lernhandy/lernhandy.css",
+  "./lernhandy/lernhandy.js",
+  "./lernhandy/kurzweg-lernweg.js",
+  "./lernhandy/be1-lernweg.js",
+  "./lernhandy/ge1-lernweg.js",
+  "./lernhandy/lerneinheit-be1-de.js",
+  "./lernhandy/so-lerne-ich.css",
+  "./lernhandy/so-lerne-ich.js",
+  "./lernhandy/bild-slots.js",
+  "./lernhandy/lernkreis-bausteine.js",
+  "./lernhandy/lernkreis-erweiterung.css",
+  "./lernhandy/lernkreis-wege-daten.js",
+  "./lernhandy/postfach.html",
+  "./lernhandy/ek3-postfach.html",
+  "./lernhandy/postfach-daten.js",
+  "./lernhandy/ek3-postfach-daten.js",
+  "./lernhandy/vorschau.css",
+  "./lernhandy/vorschau.js",
+  "./lernkreis/index.html",
+  "./lernkreis/lernkreis.css",
+  "./lernkreis/lernkreis.js",
+  "./lernkreis/uebungen-daten.js",
 ];
 
 /* Einfache Offline-Fallback-Seite (wenn Netz und Cache komplett fehlen) */
@@ -457,8 +493,10 @@ self.addEventListener("fetch", (event) => {
   const relativePath = url.pathname.slice(scopePath.length);
   if (relativePath.startsWith("intern/") || relativePath.startsWith("lokal/") || relativePath.startsWith("schulung/") || relativePath === "schulung") return;
 
-  /* HTML-Dateien: Network-first (aktueller Inhalt), Fallback Cache */
-  if (event.request.headers.get("accept")?.includes("text/html")) {
+  /* HTML, JS und CSS: Network-first (aktueller Inhalt sofort wirksam), Fallback Cache */
+  const isCodeOrDoc = Boolean(event.request.headers.get("accept")?.includes("text/html"))
+    || /\.(?:html|js|css)(?:$|\?)/i.test(url.pathname);
+  if (isCodeOrDoc) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {

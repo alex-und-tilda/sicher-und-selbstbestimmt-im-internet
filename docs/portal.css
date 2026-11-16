@@ -12,12 +12,16 @@
 }
 .portal h1 { font-size: clamp(1.7rem, 5vw, 3.1rem); max-width: 18ch; margin: 0 0 .28em; }
 .portal h2 { font-size: clamp(1.25rem, 3vw, 1.6rem); max-width: none; }
-.portal h3 { font-size: 1.22rem; line-height: 1.28; margin: .15em 0; overflow-wrap: anywhere; hyphens: auto; }
+.portal h3 { font-size: 1.22rem; line-height: 1.28; margin: .15em 0; overflow-wrap: anywhere; hyphens: auto; display: flex; align-items: center; gap: .45em; flex-wrap: wrap; }
 .portal .hero p, .portal .kurz { font-size: 1rem; margin: .2em 0 0; }
 .portal .intro { font-weight: 700; }
 .portal .willkommen { display: block; width: 100%; height: auto; }
 .portal .bereichstitel { display: flex; align-items: center; gap: .45em; }
 .portal .zeichen { display: inline-grid; place-items: center; flex: none; width: 2rem; height: 2rem; background: #fffefb; border-radius: 50%; }
+.portal .zeichen-klein { display: inline-grid; place-items: center; flex: none; width: 1.4rem; height: 1.4rem; background: #fffefb; border-radius: 50%; vertical-align: middle; margin-right: 4px; }
+@media (prefers-color-scheme: dark) {
+  .portal .zeichen, .portal .zeichen-klein { background: #1e2a35; }
+}
 .portal .angebote { margin-top: .5rem; }
 .portal .angebot { grid-template-columns: minmax(0, 1fr) minmax(0, 12rem); gap: .6rem 1.4rem; padding-block: .8rem; }
 .portal .angebot .hauptaktion { width: 100%; }
@@ -31,9 +35,10 @@
 .portal .vorschau-abschnitt p { margin: .25em 0; }
 .portal .themenliste { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%, 16rem),1fr)); gap: .15rem 1.5rem; }
 .portal ul { margin: .4rem 0 .75rem; padding-inline-start: 1.2em; }
-.portal footer nav { display: flex; flex-wrap: wrap; gap: .45rem 1.1rem; }
-.portal footer a { display: inline-block; padding-block: .25rem; }
+.portal footer nav { display: flex; flex-wrap: wrap; gap: .35rem 1.1rem; }
+.portal footer a { display: inline-flex; align-items: center; min-height: 44px; padding-block: .25rem; }
 @media (max-width: 650px) {
+  .portal header { flex-direction: column; align-items: flex-start; }
   .portal .hero { grid-template-columns: minmax(0, 1fr) min(16vw, 3rem); gap: .5rem; }
   .portal .angebot { grid-template-columns: minmax(0, 1fr); }
   .portal .hauptaktion { width: 100%; }
@@ -46,3 +51,66 @@
 /* Bei großer Schrift dürfen auch lange einzelne Wörter umbrechen. */
 .portal { overflow-wrap: anywhere; }
 .portal .angebot > * { min-width: 0; }
+
+/* Sprachstufen-Umschalter im Portal */
+.portal .sprach-umschalter {
+  display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 4px;
+  background: var(--a-surface, #f4f6f8);
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--a-line, #c9d2db);
+}
+.portal .sprach-knopf {
+  border: 0;
+  background: none;
+  color: var(--a-ink, #16222e);
+  font: inherit;
+  font-size: .85rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 44px;
+}
+.portal .sprach-knopf[aria-pressed="true"] {
+  background: var(--a-accent, #00528f);
+  color: var(--a-on, #ffffff);
+}
+.portal .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.portal .sprach-knopf:focus-visible {
+  outline: 3px solid var(--a-focus, #00528f);
+  outline-offset: 2px;
+}
+.portal .aktionsgruppe {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.portal .aktionsgruppe .hauptaktion {
+  width: 100%;
+}
+.portal .abzeichen-geplant {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: rgba(0,0,0,.06);
+  border-radius: 6px;
+  color: var(--a-muted);
+}
+@media (prefers-color-scheme: dark) {
+  .portal .abzeichen-geplant { background: rgba(255,255,255,.1); color: var(--a-ink); }
+}

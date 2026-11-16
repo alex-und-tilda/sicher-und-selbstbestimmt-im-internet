@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Themen – Alex &amp; Tilda</title>
+<link rel="stylesheet" href="../designsystem.css">
+<link rel="stylesheet" href="lernhandy.css">
+<link rel="stylesheet" href="so-lerne-ich.css">
+<link rel="stylesheet" href="../plattform-nav.css">
+<style>
+  body {
+    margin: 0;
+    background: var(--bg-seite);
+    color: var(--farbe-tinte);
+    font-family: var(--at-font);
+    line-height: 1.55;
+    font-size: clamp(1rem, 1rem + 0.15vw, 1.125rem);
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+  .app-hero {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 20px 16px 8px;
+  }
+  .app-hero-card {
+    background: var(--bg-karte);
+    border-radius: var(--at-radius-lg, 24px);
+    padding: clamp(20px, 3vw, 28px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: var(--at-shadow-sm);
+  }
+  .app-hero-lead {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+  .app-hero-figure {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    background: var(--at-surface-soft);
+    flex-shrink: 0;
+  }
+  .app-hero-lead h1 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    margin: 0 0 4px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .untertitel {
+    font-size: 1rem;
+    color: var(--farbe-leise);
+    margin: 0;
+  }
+  .sprach-umschalter {
+    display: inline-flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    box-sizing: border-box;
+    gap: 6px;
+    background: var(--at-surface-soft);
+    padding: 5px;
+    border-radius: 999px;
+  }
+  .sprach-knopf {
+    border: 0;
+    background: none;
+    color: var(--farbe-tinte);
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 8px 15px;
+    border-radius: 999px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .sprach-knopf[aria-pressed="true"] {
+    background: var(--farbe-akzent);
+    color: var(--farbe-akzent-tinte);
+  }
+  .sprach-knopf:focus-visible {
+    outline: 3px solid var(--farbe-focus);
+    outline-offset: 2px;
+  }
+  main.inhalt {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 16px 16px 48px;
+  }
+  .fortschritt-leiste {
+    background: var(--bg-karte);
+    border-radius: var(--at-radius-md, 16px);
+    padding: 16px 20px;
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: var(--at-shadow-sm);
+  }
+  .fortschritt-zeile-oben {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .fortschritt-info {
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .fortschritt-balken {
+    width: 100%;
+    height: 12px;
+    background: var(--farbe-linie);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .fortschritt-balken-fuellung {
+    height: 100%;
+    background: var(--farbe-gut);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .wiedereinstieg-kasten {
+    background: var(--farbe-akzent-hell);
+    border: 2px solid var(--farbe-akzent);
+    border-radius: 16px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .wiedereinstieg-text {
+    flex: 1 1 300px;
+  }
+  .wiedereinstieg-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--farbe-akzent);
+    margin: 0 0 4px;
+  }
+  .wiedereinstieg-titel {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .wiedereinstieg-schritt {
+    font-size: 0.95rem;
+    color: var(--farbe-leise);
+    margin: 0;
+  }
+  .wiedereinstieg-aktionen {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .einheit-status {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .einheit-status.erledigt {
+    background: var(--farbe-gut-hell);
+    color: var(--farbe-gut);
+    border: 1px solid var(--farbe-gut);
+  }
+  .einheit-status.begonnen {
+    background: var(--farbe-akzent-hell);
+    color: var(--farbe-akzent);
+    border: 1px solid var(--farbe-akzent);
+  }
+  .reset-knopf {
+    background: none;
+    border: 0;
+    color: var(--farbe-leise);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 8px 6px;
+    min-height: 44px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .reset-knopf:focus-visible,
+  footer.app-fuss a:focus-visible {
+    outline: 3px solid var(--farbe-focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  .reset-knopf:hover {
+    color: var(--farbe-warn);
+    border-color: var(--farbe-warn);
+  }
+  .themen-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .filter-chip {
+    border: 0;
+    background: var(--bg-karte);
+    color: var(--farbe-tinte);
+    font: inherit;
+    font-size: 0.94rem;
+    font-weight: 700;
+    padding: 9px 15px;
+    border-radius: 999px;
+    cursor: pointer;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    box-shadow: var(--at-shadow-sm);
+  }
+  .filter-chip[aria-pressed="true"] {
+    background: var(--farbe-akzent-hell);
+    color: var(--farbe-akzent);
+    box-shadow: inset 0 0 0 2px var(--farbe-akzent);
+  }
+  .themen-bereich {
+    margin-bottom: 40px;
+  }
+  .thema-titel-zeile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 12px;
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+  }
+  .thema-tuer {
+    background: var(--bg-karte);
+    border: 1px solid var(--farbe-linie);
+    border-radius: var(--at-radius-md, 16px);
+    margin-bottom: 14px;
+    box-shadow: var(--at-shadow-sm);
+    overflow: hidden;
+  }
+  .thema-tuer[open] {
+    border-color: var(--farbe-akzent);
+    box-shadow: var(--at-shadow-md);
+  }
+  .thema-tuer-kopf {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 14px;
+    padding: 16px 18px;
+    min-height: 58px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .thema-tuer-kopf::-webkit-details-marker {
+    display: none;
+  }
+  .thema-tuer-kopf:hover {
+    background: var(--at-surface-soft, #f2eee8);
+  }
+  .thema-tuer-kopf:focus-visible {
+    outline: 3px solid var(--farbe-focus);
+    outline-offset: -3px;
+  }
+  .thema-tuer-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+  .thema-tuer-body {
+    padding: 4px 18px 20px;
+    border-top: 1px solid var(--farbe-linie);
+  }
+  .direkt-bereich {
+    margin-bottom: 28px;
+  }
+  .section-kopf {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+  .thema-ueberschrift {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .thema-ueberschrift .pikto {
+    width: 28px;
+    height: 28px;
+    flex: none;
+  }
+  .thema-anzahl {
+    color: var(--farbe-leise);
+    font-size: 0.95rem;
+  }
+  .karten-gitter {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 16px;
+  }
+  .karten-gitter > * {
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .lern-karte {
+    background: var(--bg-karte);
+    border: 0;
+    border-left: 4px solid transparent;
+    border-radius: var(--at-radius-md, 16px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: var(--at-shadow-sm);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .lern-karte:hover {
+    border-left-color: var(--farbe-akzent);
+    box-shadow: var(--at-shadow-md);
+    transform: translateY(-1px);
+  }
+  .karte-kopf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .einheit-id,
+  .einheit-baustein {
+    max-width: 100%;
+  }
+  .einheit-id {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--farbe-akzent);
+    letter-spacing: 0.02em;
+  }
+  .einheit-baustein {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--farbe-leise);
+  }
+  .einheit-meta-kap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .karte-titel {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .karte-beschreibung {
+    font-size: 0.95rem;
+    color: var(--farbe-leise);
+    margin: 0;
+    flex-grow: 1;
+  }
+  .karte-schritte-leiste {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--farbe-leise);
+  }
+  .schritt-punkt {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--farbe-linie);
+  }
+  .schritt-punkt.aktiv {
+    background: var(--farbe-akzent);
+  }
+  .start-knopf {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    background: var(--farbe-akzent);
+    color: var(--farbe-akzent-tinte);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .start-knopf:hover, .start-knopf:focus-visible {
+    opacity: 0.92;
+    outline: 3px solid var(--farbe-focus);
+    outline-offset: 2px;
+  }
+  footer.app-fuss {
+    border-top: 1px solid var(--farbe-linie);
+    padding: 24px 16px;
+    text-align: center;
+    color: var(--farbe-leise);
+    font-size: 0.95rem;
+  }
+  footer.app-fuss a {
+    color: var(--farbe-akzent);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 2px 4px;
+  }
+  @media (max-width: 720px), (max-height: 600px) {
+    .app-hero { padding: 8px 10px 4px; }
+    .app-hero-card { padding: 10px 12px; gap: 8px; }
+    .app-hero-figure { width: 44px; height: 44px; }
+    .app-hero-lead h1 { font-size: 1.25rem; }
+    .untertitel { font-size: 0.84rem; margin-top: 2px; }
+  }
+  @media (max-width: 640px) {
+    .sprach-umschalter {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 100%;
+      justify-content: space-between;
+      gap: 4px;
+      border-radius: 16px;
+    }
+    .sprach-knopf {
+      flex: 1 1 0;
+      min-height: 44px;
+      padding: 6px 6px;
+      font-size: 0.78rem;
+      line-height: 1.15;
+      text-align: center;
+    }
+    .fortschritt-leiste { padding: 10px 12px; margin-bottom: 10px; gap: 6px; }
+    .fortschritt-zeile-oben { gap: 8px; }
+    .fortschritt-info { font-size: 0.96rem; }
+    .themen-filter {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 6px;
+      margin-bottom: 14px;
+      padding-bottom: 2px;
+    }
+    .themen-filter::-webkit-scrollbar { display: none; }
+    .filter-chip {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+  }
+  @media (max-width: 420px) {
+    main.inhalt { padding: 10px 10px 32px; }
+    .wiedereinstieg-kasten, .lern-karte { padding: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<div id="at-plattform-nav"></div>
+
+<section class="app-hero" aria-label="Themen Übersicht">
+  <div class="app-hero-card">
+    <div class="app-hero-lead">
+      <img class="app-hero-figure" src="../assets/figures/alex-tilda-lernweg.webp" alt="Alex und Tilda schauen gemeinsam auf die Themen" width="76" height="76">
+      <div>
+        <h1>Themen</h1>
+        <p class="untertitel">Wähle ein Thema aus. Alle Übungen dazu öffnen sich direkt im Thema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="inhalt" id="hauptinhalt" role="main">
+  <section class="direkt-bereich" aria-labelledby="direkt-heading">
+    <h2 class="section-kopf" id="direkt-heading">Direkt starten</h2>
+    <div class="karten-gitter">
+      <article class="lern-karte" aria-labelledby="direkt-es-handy">
+        <div class="karte-kopf">
+          <span class="einheit-id">Einstieg</span>
+          <span class="einheit-baustein">Übungs-Handy</span>
+        </div>
+        <h3 class="karte-titel" id="direkt-es-handy">Erste Schritte am Handy</h3>
+        <p class="karte-beschreibung">Tippen, Wischen und Zurückgehen in Ruhe ausprobieren.</p>
+        <a href="../lernkreis/index.html?ex=es_handy" class="start-knopf">
+          <span>Jetzt starten</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <article class="lern-karte" aria-labelledby="direkt-samstag">
+        <div class="karte-kopf">
+          <span class="einheit-id">Alltagsgeschichte</span>
+          <span class="einheit-baustein">4 Folgen</span>
+        </div>
+        <h3 class="karte-titel" id="direkt-samstag">Tildas Samstag</h3>
+        <p class="karte-beschreibung">Mit Tilda vier kleine Lagen im digitalen Alltag erleben.</p>
+        <a href="../lernkreis/index.html?ex=tildas_samstag" class="start-knopf">
+          <span>Geschichte starten</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <article class="lern-karte" aria-labelledby="direkt-schreiben">
+        <div class="karte-kopf">
+          <span class="einheit-id">E-Mail</span>
+          <span class="einheit-baustein">Postfach</span>
+        </div>
+        <h3 class="karte-titel" id="direkt-schreiben">E-Mails schreiben</h3>
+        <p class="karte-beschreibung">Termin absagen, Einladung beantworten und beim Kundenservice fragen.</p>
+        <a href="postfach.html?gruppe=schreiben&amp;sz=termin&amp;lernkreis=1" class="start-knopf">
+          <span>Im Postfach üben</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="themen-tueren-heading">
+    <h2 class="section-kopf" id="themen-tueren-heading">Alle 12 Alltagsthemen</h2>
+    <div id="themen-liste"></div>
+  </section>
+</main>
+
+<footer class="app-fuss" role="contentinfo">
+  <p>Alex und Tilda · Selbstbestimmt im eigenen Tempo üben · Auf dieser Seite wird ohne Einwilligung nichts gespeichert.</p>
+</footer>
+
+<!-- Quell-Daten -->
+<script src="../topics.js"></script>
+<script src="../content-de.js"></script>
+<script src="../uebungen-de.js"></script>
+<script src="../regeln-de.js"></script>
+<script src="lerneinheit-be1-de.js"></script>
+<script src="lernhandy.js"></script>
+<script src="be1-lernweg.js"></script>
+<script src="ge1-lernweg.js"></script>
+<script src="kurzweg-lernweg.js"></script>
+<script src="so-lerne-ich.js"></script>
+<script src="../plattform-nav.js" data-at-root="../"></script>
+
+<script>
+(function() {
+  "use strict";
+
+  const sliSpracheZuStufe = { leicht: "leicht", einfach: "einfach", alltag: "standard" };
+  let gewaehlteStufe = (window.SoLerneIch && sliSpracheZuStufe[window.SoLerneIch.getState().sprache]) || "leicht";
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const qStufe = urlParams.get("stufe");
+  if (qStufe && (qStufe === "leicht" || qStufe === "einfach" || qStufe === "standard")) {
+    gewaehlteStufe = qStufe;
+  }
+
+  let aktiverFilter = "alle";
+  const qThema = urlParams.get("thema");
+  if (qThema) {
+    aktiverFilter = qThema;
+  }
+
+  const THEMEN_NAMEN = {
+    datenschutz: "1. Datenschutz",
+    whatsapp: "2. WhatsApp",
+    facebook: "3. Facebook",
+    instagram: "4. Instagram",
+    youtube: "5. YouTube",
+    snapchat: "6. Snapchat",
+    tiktok: "7. TikTok",
+    hilfe: "8. Hilfe bei Problemen",
+    ki: "9. KI und Chatbots",
+    fakes: "10. Fake News & Fakes",
+    betrug: "11. Online-Betrug",
+    einkaufen: "12. Online-Einkaufen"
+  };
+
+  const THEMA_PIKTO = {
+    datenschutz: "lock",
+    whatsapp: "whatsapp",
+    facebook: "facebook",
+    instagram: "instagram",
+    youtube: "youtube",
+    snapchat: "snapchat",
+    tiktok: "tiktok",
+    hilfe: "help",
+    ki: "ki",
+    fakes: "fake",
+    betrug: "betrug",
+    einkaufen: "einkaufen"
+  };
+
+  const BAUSTEINE_NAMEN = {
+    ds1: "Schalter (Berechtigungen)",
+    ds2: "Schalter (Sichtbarkeit)",
+    ge1: "Chat & Blockieren (3 Apps)",
+    wa2: "Chat & Link-Prüfung",
+    wa3: "SMS & Chat (Code)",
+    fb1: "Profil & Schalter",
+    fb2: "Profil & Anfrage",
+    fb3: "Chat (Freund-Prüfung)",
+    ig1: "Schalter (Konto privat)",
+    ig2: "Chat (Erlaubnis einholen)",
+    yt1: "Video (Zuständige Stelle)",
+    yt2: "Video (Werbung überspringen)",
+    yt3: "Video & Schalter (Autoplay)",
+    sc1: "Chat (Hintergrund prüfen)",
+    sc2: "Schalter (Geistermodus)",
+    sc3: "Chat (Nein sagen & Schutz)",
+    tt1: "Video (Algorithmus durchbrechen)",
+    tt2: "Video (Trends ablehnen)",
+    tt3: "Schalter (Pausentimer)",
+    h1: "Problem-Check (Technik)",
+    h2: "Einstellungen (Ton prüfen)",
+    h3: "Kontakt (Hilfenummer speichern)",
+    ki1: "Chat (Chatbot erkennen)",
+    ki2: "Chat (KI-Aussage prüfen)",
+    ki3: "Anruf (Schockanruf abwehren)",
+    fn1: "Mitteilung (Fake-Meldung)",
+    fn2: "Webseite (Polizeibericht)",
+    fn3: "Chat (Richtigstellen)",
+    be1: "Anruf & SMS (15 Schritte)",
+    be2: "SMS (Abzocke erkennen)",
+    be3: "E-Mail & App selbst öffnen",
+    ek1: "Shop & Impressum prüfen",
+    ek2: "Shop-Kasse (Rechnung)",
+    ek3: "App-Seite (Shop reklamieren)"
+  };
+
+  const BESCHREIBUNGEN = {
+    ds1: {
+      leicht: "Eine App will deine Fotos und dein Adressbuch. Du gibst nur nötige Daten weiter.",
+      einfach: "Die Foto-App will auf Kontakte zugreifen. Du schaltest unberechtigte Zugriffe aus.",
+      standard: "App-Berechtigungen nach dem Prinzip der Datensparsamkeit gezielt verwalten."
+    },
+    ds2: {
+      leicht: "Wer darf dein Foto im Status sehen? Du stellst auf: Nur Freunde.",
+      einfach: "Begrenze die Sichtbarkeit deiner geteilten Beiträge auf den Freundeskreis.",
+      standard: "Privatsphäre-Einstellungen für Statusmeldungen und geteilte Medien konfigurieren."
+    },
+    ge1: {
+      leicht: "Fremde Nummern schreiben dir auf WhatsApp, Instagram und TikTok. Du lernst das Blockieren.",
+      einfach: "Unbekannte Nachrichten erkennen, differenziert bewerten und Kontakte sicher blockieren.",
+      standard: "Umgang mit unbekannten Absendern über drei Plattformen hinweg mit Echtheitsprüfung."
+    },
+    wa2: {
+      leicht: "Ein Link in einer SMS oder Nachricht. Tippe ihn nicht ungeprüft an.",
+      einfach: "Unerwartete Links erkennen und offizielle Apps direkt selbst öffnen.",
+      standard: "Phishing- und Fake-Links in Messenger-Nachrichten verifizieren."
+    },
+    wa3: {
+      leicht: "Jemand will deinen WhatsApp-Code. Dein Code bleibt wie dein Haustürschlüssel bei dir.",
+      einfach: "Bestätigungscodes niemals an andere Personen weitergeben, auch nicht an Freunde.",
+      standard: "Schutz von Zwei-Faktor- und Bestätigungscodes vor Kontoübernahme."
+    },
+    fb1: {
+      leicht: "Stelle die Zielgruppe deiner Facebook-Beiträge auf deine echten Freunde.",
+      einfach: "Beiträge vor öffentlicher Einsicht schützen durch Zielgruppen-Einstellungen.",
+      standard: "Konfiguration der Beitragssichtbarkeit auf Facebook."
+    },
+    fb2: {
+      leicht: "Eine fremde Person will dein Freund werden. Schau erst in das Profil.",
+      einfach: "Freundschaftsanfragen prüfen und unklare Profile selbstbewusst ablehnen.",
+      standard: "Kriterienbasierte Bewertung von Social-Media-Kontaktanfragen."
+    },
+    fb3: {
+      leicht: "Ein Freund schickt einen komischen Video-Link. Frage erst persönlich nach.",
+      einfach: "Gehackte Konten von Freunden erkennen und vor dem Klick nachfragen.",
+      standard: "Verdächtige Nachrichten aus dem Freundeskreis vor Interaktion verifizieren."
+    },
+    ig1: {
+      leicht: "Schalte dein Instagram-Konto auf privat, damit Fremde deine Fotos nicht sehen.",
+      einfach: "Ein privates Profil verlangt deine Bestätigung für jeden neuen Follower.",
+      standard: "Privatsphäreeinstellungen für Instagram-Profile."
+    },
+    ig2: {
+      leicht: "Frage andere Personen immer vorher, bevor du ein Foto von ihnen postest.",
+      einfach: "Das Recht am eigenen Bild respektieren und ein Nein immer akzeptieren.",
+      standard: "Rechtliche und ethische Grundlagen bei der Veröffentlichung fremder Bildnisse."
+    },
+    yt1: {
+      leicht: "Ein Video behauptet Schlimmes. Prüfe die Meldung bei der zuständigen Stelle.",
+      einfach: "Reißerische Video-Behauptungen an offiziellen Quellen gegenprüfen.",
+      standard: "Faktencheck und Quellenprüfung bei videobasierten Falschmeldungen."
+    },
+    yt2: {
+      leicht: "Im Video taucht Werbung auf. Lass dich durch Zeitdruck nicht zum Kaufen hetzen.",
+      einfach: "Werbekennzeichnungen erkennen und Angebote später in Ruhe vergleichen.",
+      standard: "Erkennen von Werbeformaten und Vermeidung impulsiver Käufe unter künstlicher Verknappung."
+    },
+    yt3: {
+      leicht: "Schalte Autoplay aus, damit du am Bildschirm selbst bestimmen kannst, wann Schluss ist.",
+      einfach: "Automatische Videowiedergabe deaktivieren, um Pausen leichter einzuhalten.",
+      standard: "Selbstregulative Mediennutzung durch Deaktivierung von Autoplay-Mechanismen."
+    },
+    sc1: {
+      leicht: "Achte auf vertrauliche Briefe oder Adressen im Hintergrund deiner Schnappschüsse.",
+      einfach: "Snaps können gespeichert werden: Vor dem Absenden Bildhintergrund prüfen.",
+      standard: "Schutz vor unbeabsichtigter Preisgabe persönlicher Daten im Bildhintergrund."
+    },
+    sc2: {
+      leicht: "Schalte den Geistermodus an, damit niemand auf der Karte deinen Standort sieht.",
+      einfach: "Den Geistermodus auf der Snap-Map aktivieren, um den Aufenthaltsort zu schützen.",
+      standard: "Standortdatenschutz durch Aktivierung des Geistermodus."
+    },
+    sc3: {
+      leicht: "Jemand drängt dich zu privaten Fotos. Du darfst immer Nein sagen und blockieren.",
+      einfach: "Persönliche Grenzen setzen und sich gegen Druck in Gruppen oder Chats wehren.",
+      standard: "Selbstbehauptung und Grenzziehung bei digitaler Nötigung und Belästigung."
+    },
+    tt1: {
+      leicht: "Der Algorithmus zeigt immer das Gleiche. Suche gezielt nach anderen Themen.",
+      einfach: "Die Funktionsweise von Empfehlungsalgorithmen erkennen und den Feed variieren.",
+      standard: "Reflektierter Umgang mit Empfehlungsalgorithmen und Filterblasen."
+    },
+    tt2: {
+      leicht: "Gefährliche Mutproben im Trend? Nicht mitmachen – deine Gesundheit geht vor.",
+      einfach: "Riskante Online-Challenges ablehnen und gefährliche Videos melden.",
+      standard: "Kritische Beurteilung viraler Challenges und Schutz der körperlichen Unversehrtheit."
+    },
+    tt3: {
+      leicht: "Die Zeit vergeht wie im Flug. Stelle einen Pausentimer auf 30 Minuten.",
+      einfach: "Bildschirmzeit-Limits aktivieren, um Medienzeit bewusst zu gestalten.",
+      standard: "Nutzung integrierter Screen-Time-Tools zur selbstbestimmten Zeitverwaltung."
+    },
+    h1: {
+      leicht: "Nachricht geht nicht raus? Prüfe in Ruhe, ob es nur an der Technik liegt.",
+      einfach: "Technische Störungen von echten Bedrohungen und Konflikten unterscheiden.",
+      standard: "Differenzierte Problemerfassung zwischen technischer Störung und Sicherheitsvorfall."
+    },
+    h2: {
+      leicht: "Dein Handy macht keinen Ton mehr? Sieh in Ruhe in den Einstellungen nach.",
+      einfach: "Ton-Einstellungen am Handy selbst prüfen oder ruhig um Rat fragen.",
+      standard: "Stummschaltung und Ton-Einstellungen am Smartphone systematisch prüfen."
+    },
+    h3: {
+      leicht: "Speichere verlässliche Hilfenummern für den Notfall im Smartphone ein.",
+      einfach: "Passende Anlaufstellen und Vertrauenspersonen bei akuten Problemen wählen.",
+      standard: "Aktivierung professioneller und persönlicher Unterstützungssysteme."
+    },
+    ki1: {
+      leicht: "Mia antwortet freundlich, ist aber ein Computerprogramm und kein Mensch.",
+      einfach: "Chatbots und KI-Systeme von menschlichen Gesprächspartnern unterscheiden.",
+      standard: "Identifikation automatisierter Sprachmodelle und Chatbots im Web."
+    },
+    ki2: {
+      leicht: "Eine KI kann sich irren. Wichtige Termine und Öffnungszeiten an der Quelle prüfen.",
+      einfach: "Halluzinationen und Irrtümer von KI-Systemen durch Quellencheck aufdecken.",
+      standard: "Verifikation KI-generierter Auskünfte durch Abgleich mit Primärquellen."
+    },
+    ki3: {
+      leicht: "Am Telefon will eine vertraute Stimme Geld. Sofort auflegen und selbst anrufen.",
+      einfach: "KI kann Stimmen fälschen: Bei telefonischen Geldforderungen auflegen.",
+      standard: "Abwehr von Voice-Cloning und Schockanrufen durch eigenständigen Rückruf."
+    },
+    fn1: {
+      leicht: "Eilmeldung im Chat: Bargeld verboten! Glaube reißerischen Nachrichten nicht ungeprüft.",
+      einfach: "Falschmeldungen und alte Meldungen an reißerischer Sprache erkennen.",
+      standard: "Erkennung von Desinformation, Panikmache und veralteten Meldungen."
+    },
+    fn2: {
+      leicht: "Gerüchte über Einbrecher? Prüfe erst beim offiziellen Polizei-Presseportal.",
+      einfach: "Lokale Warnungen und Gerüchte an behördlichen Kanälen verifizieren.",
+      standard: "Quellenkritische Prüfung lokaler Gerüchte und Sicherheitswarnungen."
+    },
+    fn3: {
+      leicht: "Jemand teilt eine falsche Meldung. Stelle die Sache freundlich richtig.",
+      einfach: "Falschmeldungen nicht weitersenden, sondern sachlich den richtigen Link teilen.",
+      standard: "Konstruktive Richtigstellung von Fehlinformationen in privaten Gruppen."
+    },
+    be1: {
+      leicht: "Ein Anrufer will einen SMS-Code deiner Bank. Gib ihn niemals heraus und lege auf.",
+      einfach: "Vollständiger 15-Schritte-Lernweg zum Schutz von Codes und Daten am Telefon.",
+      standard: "Umfassendes Verhaltenstraining zur Abwehr von Social Engineering und Phishing."
+    },
+    be2: {
+      leicht: "Handy gewonnen für 2 Euro? Dahinter steckt eine teure Abofalle.",
+      einfach: "Gefälschte Gewinnbenachrichtigungen und künstlichen Druck entlarven.",
+      standard: "Erkennung von Vorauszahlungsbetrug und versteckten Abofallen."
+    },
+    be3: {
+      leicht: "Konto gesperrt laut E-Mail? Tippe nicht auf den Link, sondern öffne die App selbst.",
+      einfach: "Phishing-Mails abwehren durch eigenständigen Aufruf über die echte App.",
+      standard: "Sichere Reaktion auf Phishing-Nachrichten durch Kanalwechsel."
+    },
+    ek1: {
+      leicht: "Turnschuhe für 15 Euro? Prüfe das Impressum nach vollständiger Adresse.",
+      einfach: "Fake-Shops an extremen Rabatten und fehlenden Impressumsangaben erkennen.",
+      standard: "Identifikation betrügerischer Online-Shops anhand rechtlicher Pflichtangaben."
+    },
+    ek2: {
+      leicht: "Zahle am sichersten auf Rechnung. Bei Vorkasse ist dein Geld bei Betrug weg.",
+      einfach: "Sichere Bezahlarten wie Rechnungskauf wählen und Vorkasse vermeiden.",
+      standard: "Risikobewusste Auswahl von Zahlungsmethoden im E-Commerce."
+    },
+    ek3: {
+      leicht: "Im Online-Shop bezahlen: Prüfe die Bezahlart vor dem Kaufen.",
+      einfach: "Bezahlarten im Online-Shop vergleichen und sichere Zahlungswege wählen.",
+      standard: "Zahlungsmethoden beim Online-Einkauf sicher auswählen."
+    },
+    "ek-post1": {
+      leicht: "Paket kommt nicht an? Schreibe dem Shop sachlich mit deiner Bestell-Nummer.",
+      einfach: "Bei Lieferverzug sachlich beim Kundenservice mit Bestellnummer nachfragen.",
+      standard: "Lieferverzögerung per E-Mail datensparsam mit Bestellnummer reklamieren."
+    }
+  };
+
+  const themenListeEl = document.getElementById("themen-liste");
+  let offenesThema = urlParams.get("thema") || (window.location.hash && window.location.hash.startsWith("#thema-") ? window.location.hash.slice(7) : "");
+  if (!THEMEN_NAMEN[offenesThema]) offenesThema = "";
+
+  const ZUSATZ_UEBUNGEN = {
+    whatsapp: [
+      {
+        id: "wa_ruhe",
+        baustein: "Etwas ausprobieren",
+        titel: "Ruhe in der Gruppe",
+        href: "../lernkreis/index.html?ex=wa_ruhe",
+        knopf: "Jetzt ausprobieren",
+        beschreibung: {
+          leicht: "Eine WhatsApp-Gruppe schreibt viel. Du stellst sie stumm und bleibst dabei.",
+          einfach: "Ausprobieren, wie eine WhatsApp-Gruppe in Ruhe stumm geschaltet wird.",
+          standard: "Benachrichtigungen einer Chat-Gruppe stummschalten, ohne auszutreten."
+        }
+      }
+    ],
+    betrug: [
+      {
+        id: "be_sp1",
+        baustein: "Soforthilfe",
+        titel: "Schon passiert: Daten eingegeben",
+        href: "../lernkreis/index.html?ex=be_sp1",
+        knopf: "Hilfe üben",
+        beschreibung: {
+          leicht: "Doch auf einen Link getippt? Schritt für Schritt ruhig handeln und Hilfe holen.",
+          einfach: "Was tun, wenn Daten schon abgeschickt wurden? Konkrete Schritte ohne Vorwürfe.",
+          standard: "Strukturierte Sofortmaßnahmen nach unbeabsichtigter Datenweitergabe."
+        }
+      },
+      {
+        id: "paket",
+        baustein: "E-Mail-Postfach",
+        titel: "Paket-Link prüfen",
+        href: "postfach.html?sz=paket&lernkreis=1",
+        knopf: "Im Postfach üben",
+        beschreibung: {
+          leicht: "Eine Paket-E-Mail fordert Geld über einen Link. Prüfe sie in Ruhe.",
+          einfach: "Verdächtige Paketbenachrichtigungen im E-Mail-Postfach erkennen.",
+          standard: "Phishing-Nachrichten im Namen von Paketdiensten prüfen."
+        }
+      },
+      {
+        id: "sicherheit",
+        baustein: "E-Mail-Postfach",
+        titel: "Bank-Anfrage prüfen",
+        href: "postfach.html?sz=sicherheit&lernkreis=1",
+        knopf: "Im Postfach üben",
+        beschreibung: {
+          leicht: "Eine E-Mail sagt: Konto gesperrt. Prüfe sie direkt, ohne zu zahlen.",
+          einfach: "Gefälschte Sicherheitswarnungen von Banken sicher abwehren.",
+          standard: "Umgang mit vorgeblichen Sicherheitswarnungen per E-Mail."
+        }
+      },
+      {
+        id: "anhang",
+        baustein: "E-Mail-Postfach",
+        titel: "Anhang prüfen",
+        href: "postfach.html?sz=anhang&lernkreis=1",
+        knopf: "Im Postfach üben",
+        beschreibung: {
+          leicht: "Eine fremde E-Mail hat eine Datei angehängt. Sieh genau hin.",
+          einfach: "Unerwartete E-Mail-Anhänge einschätzen und sicher löschen.",
+          standard: "Risiken unbekannter Dateianhänge erkennen und abwehren."
+        }
+      }
+    ],
+    einkaufen: [
+      {
+        id: "ek-post1",
+        baustein: "E-Mail-Postfach",
+        titel: "Die Bestellung kommt nicht",
+        href: "postfach.html?sz=ek-post1&lernkreis=1",
+        knopf: "Im Postfach üben",
+        beschreibung: BESCHREIBUNGEN["ek-post1"]
+      }
+    ]
+  };
+
+  function leseAusprobierteIds() {
+    const ml = (window.SoLerneIch && typeof window.SoLerneIch.getMeinLernweg === "function")
+      ? window.SoLerneIch.getMeinLernweg()
+      : { ausprobiert: [] };
+    return new Set((ml.ausprobiert || []).map((a) => String(a.id)));
+  }
+
+  function klonTitelOhneKuerzel(raw) {
+    return String(raw || "").replace(/^[A-Z]{1,3}\d\s+/, "");
+  }
+
+  function themaKurzname(themaId) {
+    return String(THEMEN_NAMEN[themaId] || "Übung").replace(/^\d+\.\s*/, "");
+  }
+
+  function karteHtml(opts) {
+    const badge = opts.ausprobiert ? `<span class="einheit-status erledigt">Ausprobiert ✓</span>` : "";
+    const knopfText = opts.ausprobiert ? "Erneut üben" : opts.knopf;
+    const knopfIcon = opts.ausprobiert ? "↻" : "→";
+    return `
+      <article class="lern-karte" aria-labelledby="${opts.domId}">
+        <div class="karte-kopf">
+          <div class="einheit-meta-kap">
+            <span class="einheit-id">${opts.bereich}</span>
+            ${badge}
+          </div>
+          <span class="einheit-baustein">${opts.baustein}</span>
+        </div>
+        <h3 class="karte-titel" id="${opts.domId}">${opts.titel}</h3>
+        <p class="karte-beschreibung">${opts.beschreibung}</p>
+        <a href="${opts.href}" class="start-knopf" aria-label="${opts.titel}: ${knopfText}">
+          <span>${knopfText}</span>
+          <span aria-hidden="true">${knopfIcon}</span>
+        </a>
+      </article>`;
+  }
+
+  function renderThemen() {
+    themenListeEl.innerHTML = "";
+    const ausprobiertIds = leseAusprobierteIds();
+
+    for (const themaId of Object.keys(THEMEN_NAMEN)) {
+      const themaTitel = THEMEN_NAMEN[themaId];
+      const einheitenKeys = Object.keys(KURZWEGE).filter(k => KURZWEGE[k].thema === themaId);
+      const extras = ZUSATZ_UEBUNGEN[themaId] || [];
+      const anzahl = einheitenKeys.length + extras.length;
+
+      const details = document.createElement("details");
+      details.className = "thema-tuer";
+      details.id = `thema-${themaId}`;
+      if (offenesThema === themaId) details.open = true;
+
+      const piktoName = THEMA_PIKTO[themaId] || "themen";
+      let karten = "";
+
+      for (const k of einheitenKeys) {
+        const wegDef = KURZWEGE[k];
+        const beschreibung = (BESCHREIBUNGEN[k] && (BESCHREIBUNGEN[k][gewaehlteStufe] || BESCHREIBUNGEN[k].leicht)) || "Lerne selbstbestimmt im Übungs-Handy.";
+        const titel = k === "ek3" ? (wegDef.lektion || "Sicher bezahlen") : klonTitelOhneKuerzel(wegDef.name || "");
+        karten += karteHtml({
+          domId: `titel-${k}`,
+          bereich: themaKurzname(themaId),
+          baustein: BAUSTEINE_NAMEN[k] || "Übungs-Handy",
+          titel,
+          beschreibung,
+          href: `kurzweg.html?weg=${k}&lernkreis=1`,
+          knopf: "Im Übungs-Handy üben",
+          ausprobiert: ausprobiertIds.has(k)
+        });
+      }
+
+      for (const ex of extras) {
+        const beschreibung = (ex.beschreibung && (ex.beschreibung[gewaehlteStufe] || ex.beschreibung.leicht)) || "";
+        karten += karteHtml({
+          domId: `titel-ex-${ex.id}`,
+          bereich: themaKurzname(themaId),
+          baustein: ex.baustein,
+          titel: ex.titel,
+          beschreibung,
+          href: ex.href,
+          knopf: ex.knopf,
+          ausprobiert: ausprobiertIds.has(ex.id)
+        });
+      }
+
+      details.innerHTML = `
+        <summary class="thema-tuer-kopf">
+          <span class="thema-ueberschrift"><img class="pikto" src="../assets/pictograms/${piktoName}.svg" alt="" width="28" height="28" aria-hidden="true">${themaTitel}</span>
+          <span class="thema-tuer-meta"><span class="thema-anzahl">${anzahl} Übungen</span></span>
+        </summary>
+        <div class="thema-tuer-body">
+          <div class="karten-gitter">${karten}</div>
+        </div>
+      `;
+
+      details.addEventListener("toggle", () => {
+        if (details.open) {
+          offenesThema = themaId;
+          themenListeEl.querySelectorAll("details.thema-tuer[open]").forEach((other) => {
+            if (other !== details) other.open = false;
+          });
+        } else if (offenesThema === themaId) {
+          offenesThema = "";
+        }
+      });
+
+      themenListeEl.appendChild(details);
+    }
+
+    if (offenesThema) {
+      const target = document.getElementById(`thema-${offenesThema}`);
+      if (target && typeof target.scrollIntoView === "function" && window.location.hash) {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    }
+  }
+
+  renderThemen();
+
+  if (window.SoLerneIch) {
+    window.SoLerneIch.onChange((s) => {
+      const ziel = sliSpracheZuStufe[s.sprache];
+      if (ziel && ziel !== gewaehlteStufe) {
+        gewaehlteStufe = ziel;
+        renderThemen();
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

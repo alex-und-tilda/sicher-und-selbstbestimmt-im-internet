@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
 <meta name="robots" content="noindex" />
 <title>Fortschritt – Sicher und selbstbestimmt im Internet</title>
 <style>
@@ -18,15 +19,16 @@
   }
   *{box-sizing:border-box;}
   body{margin:0;min-height:100vh;font-family:"Atkinson Hyperlegible",Arial,sans-serif;color:var(--ink);
-    line-height:1.6;background:linear-gradient(180deg,var(--bg1),var(--bg2));background-attachment:fixed;padding:20px;}
+    line-height:1.6;background:linear-gradient(180deg,var(--bg1),var(--bg2));background-attachment:fixed;padding:20px;overflow-wrap:anywhere;}
   .wrap{max-width:920px;margin:0 auto;}
   header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;
     background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:0 8px 24px rgba(20,34,49,.07);}
+  header.top > div{min-width:0;max-width:100%;}
   h1{font-size:1.5rem;margin:0 0 4px;}
   .sub{color:var(--ink-soft);margin:0;font-size:1rem;}
   .updated{color:var(--ink-soft);font-size:.85rem;margin:8px 0 0;}
   .reload{font:inherit;font-weight:700;cursor:pointer;border-radius:999px;border:2px solid var(--accent);
-    background:var(--accent);color:var(--surface);padding:10px 18px;}
+    background:var(--accent);color:var(--surface);padding:10px 18px;max-width:100%;white-space:normal;text-align:center;}
   .reload:hover{filter:brightness(1.08);}
   .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;}
   @media(max-width:560px){.kpis{grid-template-columns:1fr;}}
@@ -54,8 +56,14 @@
   .commits .msg{font-weight:700;}
   .commits .meta{color:var(--ink-soft);font-size:.85rem;margin-top:2px;}
   .note{color:var(--ink-soft);font-size:.9rem;}
+  .kpis > *,.tabelle-rollen,section.card{min-width:0;max-width:100%;}
+  @media(max-width:420px){body{padding:12px;}header.top,section.card,.kpi{padding:14px;}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;}}
   .foot{color:var(--ink-soft);font-size:.82rem;text-align:center;margin-top:6px;}
+  footer.foot{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 10px;}
+  nav a,footer.foot a,.reload{min-height:44px;display:inline-flex;align-items:center;}
   a{color:var(--accent);}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px;}
 </style>
 <style>
 /* Schrift lokal einbinden statt von Google (Prüfbericht B22).
@@ -89,6 +97,12 @@
     <button class="reload" onclick="location.reload()">↻ Aktualisieren</button>
   </header>
 
+  <nav style="display:flex;gap:14px;margin:16px 0 8px;flex-wrap:wrap;" aria-label="Navigation">
+    <a href="zugang.html" style="font-weight:700;text-decoration:none;">← Zum Bildungsportal</a>
+    <a href="index.html#themen" style="font-weight:700;text-decoration:none;">← Zur Lern-App</a>
+    <a href="lernhandy/index.html" style="font-weight:700;text-decoration:none;">← Zum Lern-Handy</a>
+  </nav>
+
   <main>
 
   <div class="kpis" id="kpis"></div>
@@ -116,6 +130,14 @@
   </section>
 
   <p class="foot">Quelle: die Projektdateien <code>topics.js</code> und <code>content-de.js</code> auf diesem Gerät. Aktualisiert sich bei jedem Öffnen. Es wird kein fremder Server aufgerufen.</p>
+  <footer class="foot" style="margin-top:14px;">
+    <a href="zugang.html">← Zum Bildungsportal</a> ·
+    <a href="index.html#themen">Zur Lern-App</a> ·
+    <a href="impressum.html">Impressum</a> ·
+    <a href="datenschutz.html">Datenschutz</a> ·
+    <a href="barrierefreiheit.html">Barrierefreiheit</a> ·
+    <a href="sprachstufen.html">Die Sprachstufen</a>
+  </footer>
   </main>
 </div>
 

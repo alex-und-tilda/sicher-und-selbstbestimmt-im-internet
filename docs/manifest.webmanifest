@@ -1,13 +1,13 @@
 {
-  "name": "Alex und Tilda – Beta 3",
+  "name": "Alex und Tilda – Beta 4",
   "short_name": "Alex und Tilda",
   "description": "Lern-App, Workshops und Digital-Begleiter*innen-Schulung für Kursleitungen.",
   "lang": "de",
   "start_url": "./zugang.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f3f5f3",
-  "theme_color": "#165b64",
+  "background_color": "#F8F6F0",
+  "theme_color": "#365B46",
   "icons": [
     {
       "src": "favicon.svg",

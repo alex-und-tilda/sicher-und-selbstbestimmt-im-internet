@@ -3,35 +3,60 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Apps sicher und selbstbestimmt nutzen – Praxis</title>
 <style>
   :root{
-    --navy:#00285A; --red:#B5152B; --blue:#3E96BE; --blue2:#57A3C7;
-    --bluelight:#AAD1E3; --bluebg:#D8EAF2; --gray:#C6C7C8; --ink:#1A1A1A; --green:#2E7D4F; --white:#fff;
+    --navy:#00285A; --navy-bg:#00285A; --navy-ink:#ffffff; --red:#B5152B; --blue:#14638c; --blue2:#0a527a;
+    --bluelight:#AAD1E3; --bluebg:#D8EAF2; --surface:#ffffff; --ic-bg:#ffffff; --ink:#1A1A1A; --ink-soft:#3c4a55;
+    --attr:#495965; --focus:#00285A; --line:rgba(0,0,0,.10);
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --navy:#9fd4f5; --navy-bg:#0d223a; --navy-ink:#0a1929; --red:#f87171; --blue:#7ec8ed; --blue2:#9ad8f5;
+      --bluelight:#b9dcf0; --bluebg:#0f1722; --surface:#172330; --ic-bg:#eef4fa; --ink:#eef4fa; --ink-soft:#c0d0df;
+      --attr:#b0c2d4; --focus:#7cc0f5; --line:rgba(255,255,255,.14);
+    }
+    .intro .mini, footer .note .mini{background:#eef4fa;border-radius:6px;padding:2px}
   }
   *{box-sizing:border-box}
   body{margin:0; background:var(--bluebg); color:var(--ink);
-    font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:20px; line-height:1.5}
+    font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:20px; line-height:1.5; overflow-wrap:anywhere; hyphens:auto}
   .wrap{max-width:780px; margin:0 auto; padding:0 16px 60px}
-  header.top{background:var(--navy); color:#fff; padding:30px 16px; text-align:center}
+  header.top{background:var(--navy-bg); color:#fff; padding:30px 16px; text-align:center}
   header.top h1{margin:0; font-size:30px}
   header.top p{margin:8px 0 0; color:var(--bluelight); font-size:19px}
-  .intro{background:#fff; border-radius:16px; padding:16px 18px; margin:20px 0 6px; display:flex; gap:12px; align-items:flex-start; box-shadow:0 2px 8px rgba(0,0,0,.10)}
+  .intro{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin:20px 0 6px; display:flex; gap:12px; align-items:flex-start; box-shadow:0 2px 8px rgba(0,0,0,.10); min-width:0}
   .mini{width:26px;height:26px;flex:0 0 auto;margin-top:2px}
   .lbl{font-weight:700; color:var(--navy); margin:18px 2px 6px}
-  .card{display:flex; align-items:center; gap:16px; background:#fff; border-radius:18px; padding:18px 20px; margin:14px 0;
-    box-shadow:0 3px 10px rgba(0,0,0,.10); border-left:8px solid var(--accent); text-decoration:none; color:var(--ink)}
-  .card:hover,.card:focus{box-shadow:0 5px 16px rgba(0,0,0,.16); transform:translateY(-1px)}
-  .card-ic{width:64px;height:64px;border-radius:50%;background:#fff;border:3px solid var(--accent);
+  .card{display:flex; align-items:center; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin:14px 0;
+    box-shadow:0 3px 10px rgba(0,0,0,.10); border-left:8px solid var(--accent); text-decoration:none; color:var(--ink); min-width:0; min-height:44px}
+  .card:hover,.card:focus-visible{box-shadow:0 5px 16px rgba(0,0,0,.16); transform:translateY(-1px)}
+  .card:focus-visible,.material-card:focus-visible,.praxis-top-nav a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  .card-ic{width:64px;height:64px;border-radius:50%;background:var(--ic-bg);border:3px solid var(--accent);
     display:flex;align-items:center;justify-content:center;flex:0 0 auto}
   .card-ic img{width:42px;height:42px;object-fit:contain}
-  .card-tx{flex:1 1 auto}
+  .card-tx{flex:1 1 auto; min-width:0; overflow-wrap:anywhere}
   .card-h{display:block; font-size:24px; font-weight:700; color:var(--navy)}
-  .card-d{display:block; font-size:17px; color:#3c4a55; margin-top:2px}
+  .card-d{display:block; font-size:17px; color:var(--ink-soft); margin-top:2px}
   .card-go{font-size:34px; color:var(--accent); font-weight:700; flex:0 0 auto}
-  footer{margin-top:26px; font-size:15px; color:#3c4a55}
-  footer .note{background:#fff;border-radius:14px;padding:16px;border-left:6px solid var(--red);display:flex;gap:10px;align-items:flex-start}
-  footer .attr{margin-top:14px; color:#5a6a75; font-size:13px}
+  .material-card{display:block;margin:22px 0 0;padding:14px 18px;min-height:44px;background:var(--surface);
+    border:1px solid var(--line);border-radius:14px;border-left:8px solid var(--navy);text-decoration:none;color:var(--navy);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);font-weight:700;min-width:0}
+  .material-sub{display:block;font-weight:400;font-size:16px;color:var(--ink-soft);margin-top:2px}
+  @media(max-width:420px){
+    .wrap{padding:0 12px 48px}
+    .card{gap:12px; padding:14px}
+    .card-ic{width:52px;height:52px}
+    .card-ic img{width:34px;height:34px}
+    .card-h{font-size:21px}
+  }
+  footer{margin-top:26px; font-size:15px; color:var(--ink-soft)}
+  footer .note{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;border-left:6px solid var(--red);display:flex;gap:10px;align-items:flex-start;min-width:0}
+  footer .attr{margin-top:14px; color:var(--attr); font-size:13px}
+  .praxis-top-nav a{color:var(--navy);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;padding:4px 2px}
+  .praxis-top-nav a:hover{text-decoration:underline}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 <style>
 /* Schrift lokal einbinden statt von Google (Prüfbericht B22).
@@ -60,6 +85,12 @@
   <p>Praxis zum Mitmachen · Alex und Tilda</p>
 </header>
 <div class="wrap">
+  <nav class="praxis-top-nav" style="display:flex;gap:12px;margin:18px 0 6px;flex-wrap:wrap;" aria-label="Navigation">
+    <a href="../zugang.html">← Zum Bildungsportal</a>
+    <a href="../index.html#themen">← Zur Lern-App</a>
+    <a href="../lernhandy/index.html">Zum Lern-Handy</a>
+    <a href="../workshop.html">← Zu den Workshops</a>
+  </nav>
   <main>
   <div class="intro">
     <img class="mini" src="../assets/pictograms/handy.svg" alt="">
@@ -117,11 +148,9 @@
       <span class="card-go" aria-hidden="true">›</span>
     </a>
 
-  <a href="../material/" style="display:block;margin:22px 0 0;padding:14px 18px;background:#fff;
-     border-radius:14px;border-left:8px solid var(--navy);text-decoration:none;color:var(--navy);
-     box-shadow:0 2px 8px rgba(0,0,0,.08);font-weight:700">
+  <a class="material-card" href="../material/index.html">
      Für Begleitpersonen: Material zum Download
-     <span style="display:block;font-weight:400;font-size:16px;color:#48586a;margin-top:2px">
+     <span class="material-sub">
      PowerPoints, Kahoot-Quizze und Methodik</span>
   </a>
 
@@ -133,8 +162,8 @@
       Prüfe die Schritte am echten Handy. Frag bei Fragen eine Person, der du vertraust.</span>
     </div>
     <div class="attr">
-      Stand: Juni 2026 · Bildzeichen: ARASAAC – Autor Sergio Palao (Gobierno de Aragón), Lizenz CC BY-NC-SA · www.arasaac.org<br>
-      Alexianer Stift Tilbeck GmbH · Gefördert durch die Sozialstiftung NRW.<br>
+      Stand: Juni 2026<br>
+      Alex &amp; Tilda · Materialgrundlage gefördert durch die Sozialstiftung NRW.<br>
       Hinweis: Texte vor offizieller Nutzung von einer Prüfgruppe testen lassen.
     </div>
   </footer>

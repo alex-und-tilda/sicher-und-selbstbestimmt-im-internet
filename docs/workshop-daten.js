@@ -202,7 +202,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -1640,7 +1640,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -2529,7 +2529,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -4001,7 +4001,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -4775,7 +4775,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -6183,7 +6183,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -6946,7 +6946,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -8418,7 +8418,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -9319,7 +9319,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {
@@ -10762,7 +10762,7 @@ window.WORKSHOP_DATEN = {
      },
      {
       "art": "text",
-      "text": "Alexianer Stift Tilbeck GmbH   ·   Gefördert durch die Sozialstiftung NRW"
+      "text": "Alex & Tilda · Sicher und selbstbestimmt im Internet"
      }
     ],
     "notizen": {

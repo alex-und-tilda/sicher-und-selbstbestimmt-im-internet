@@ -1139,7 +1139,7 @@ const KETTEN = {
 
     liste: [
       {
-        tun: "Ich kaufe bei Shops, die ich kenne.",
+        tun: "Ich kaufe bei bekannten Shops.",
         pictogram: "pikto-shop",
         warum: {
           leicht:   "Bei bekannten Shops haben schon viele Menschen gekauft. Dort ist Betrug seltener.",

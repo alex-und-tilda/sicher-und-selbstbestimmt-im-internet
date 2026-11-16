@@ -1734,6 +1734,7 @@ body:has(.einstieg-start) .tab-item { min-width: 0; overflow-wrap: anywhere; }
 /* Konkrete Bedienangebote: Zeichen und vollständiger Text bleiben eine Zeile
    mit gemeinsamem Umbruch, auch unten in der gespiegelten Lernleiste. */
 button.bedien-pikto,
+a.bedien-pikto,
 summary.bedien-pikto,
 li.bedien-pikto,
 p.bedien-pikto,
@@ -1880,4 +1881,115 @@ body .main-tabbar .tab-label { max-width: 100%; }
 }
 .review-section > .review-title { font-size: var(--fs-gross); margin: 0 0 8px; }
 .review-section > .review-sub { font-size: var(--fs-text); margin: 0 0 12px; }
+
+/* ---------- Teaser-Banner für das interaktive Übungs-Handy (34 Lernwege) ---------- */
+.handy-portal-banner {
+  background: linear-gradient(135deg, var(--surface, #ffffff) 0%, var(--accent-soft, #e6f0f8) 100%);
+  border: 2px solid var(--accent, #00528f);
+  border-radius: var(--radius-m, 16px);
+  padding: 20px 24px;
+  margin: 16px 0 24px;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.handy-portal-banner-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent, #00528f);
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--accent, #00528f);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.handy-portal-banner-title {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  color: var(--ink, #16222e);
+}
+.handy-portal-banner-desc {
+  margin: 0 0 16px;
+  color: var(--ink-soft, #3d506a);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+.handy-portal-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.handy-portal-banner-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent, #00528f);
+  color: var(--on-accent, #ffffff);
+  border: 2px solid var(--accent, #00528f);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 48px;
+}
+.handy-portal-banner-link--secondary {
+  background: var(--surface, #ffffff);
+  color: var(--accent, #00528f);
+}
+.handy-portal-banner-link:hover, .handy-portal-banner-link:focus-visible {
+  background: var(--accent-dark, #003a66);
+  border-color: var(--accent-dark, #003a66);
+  color: var(--on-accent, #ffffff);
+  outline: 3px solid var(--focus, #00528f);
+  outline-offset: 2px;
+}
+.handy-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+.handy-hub-gruppe {
+  margin-top: 24px;
+}
+.handy-hub-gruppe-kopf {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  font-size: var(--fs-gross);
+}
+.handy-hub-status {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: var(--fs-mini);
+  font-weight: 700;
+  color: var(--accent);
+}
+.handy-hub-kopfzeile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.handy-hub-schritt {
+  font-size: var(--fs-mini);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+@media (max-width: 420px) {
+  .handy-portal-banner {
+    padding: 16px;
+  }
+  .handy-hub-grid {
+    grid-template-columns: 1fr;
+  }
+}
 

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Kurz-Lernweg im Lern-Handy</title>
+<!-- Phase D1 (09.11.2026): ein Kurz-Lernweg aus der Lern-App im gemeinsamen Baustein, z. B. kurzweg.html?weg=wa2.
+     kurzweg-lernweg.js liest die vorhandenen Lerninhalte aus docs/ und ändert keinen Text.
+     Nur lokale Vorschau im Entwicklungszweig claude/be1-lernhandy; nicht in die Lern-App eingebaut, nicht veröffentlicht. -->
+<link rel="stylesheet" href="../designsystem.css">
+<link rel="stylesheet" href="lernhandy.css">
+<link rel="stylesheet" href="vorschau.css">
+<link rel="stylesheet" href="so-lerne-ich.css">
+<link rel="stylesheet" href="lernkreis-erweiterung.css">
+<link rel="stylesheet" href="../plattform-nav.css">
+</head>
+<body>
+<div id="at-plattform-nav"></div>
+<div id="lernweg"></div>
+<details class="vorschau" id="vorschau"></details>
+<script src="../topics.js"></script>
+<script src="../content-de.js"></script>
+<script src="../uebungen-de.js"></script>
+<script src="../regeln-de.js"></script>
+<script src="lerneinheit-be1-de.js"></script>
+<script src="lernhandy.js"></script>
+<script src="be1-lernweg.js"></script>
+<script src="ge1-lernweg.js"></script>
+<script src="kurzweg-lernweg.js"></script>
+<script src="vorschau.js"></script>
+<script src="so-lerne-ich.js"></script>
+<script src="../begleitung-de.js"></script>
+<script src="bild-slots.js"></script>
+<script src="lernkreis-wege-daten.js"></script>
+<script src="lernkreis-bausteine.js"></script>
+<script src="../plattform-nav.js" data-at-root="../"></script>
+<script>
+"use strict";
+const params = new URLSearchParams(location.search);
+const wahl = params.get("weg");
+const sliState = window.SoLerneIch ? window.SoLerneIch.getState() : { sprache: "leicht", lernform: "allein" };
+const sliStufeMap = { leicht: "leicht", einfach: "einfach", alltag: "standard" };
+let stufeWahl = sliStufeMap[sliState.sprache] || params.get("stufe") || "leicht";
+const weg = KURZWEGE[wahl] || GEMEINSAM[wahl] || KURZWEGE.wa3;
+let aktLage = (weg.lagen && params.get("lage") && weg.lagen[params.get("lage")]) ? params.get("lage") : null;
+const Q = {
+  topics,
+  TRAINING_INBOX,
+  KURZ_VERSIONS,
+  AUFGABEN_VERSIONS,
+  ANWENDEN_ERGAENZUNGEN,
+  EXTRA_PRACTICE,
+  REGEL_SAETZE,
+  LERNEINHEIT_BE1: typeof LERNEINHEIT_BE1 !== "undefined" ? LERNEINHEIT_BE1 : null
+};
+let leisteZeigen = null;
+const mitVorschau = params.get("vorschau") === "1";
+const vorschauEl = document.getElementById("vorschau");
+if (!mitVorschau && vorschauEl) vorschauEl.remove();
+const vorschauLinks = [
+  { href: "index.html", text: "Alle Übungen" },
+  { href: "postfach.html?sz=ek-post1&lernkreis=1", text: "E-Mail-Postfach" }
+];
+function ladeLernweg() {
+  const qMitLage = aktLage ? Object.assign({}, Q, { lage: aktLage }) : Q;
+  return window.lw = LernHandy.lernweg({
+    wurzel: document.getElementById("lernweg"),
+    lernweg: weg.teile ? gemeinsamerLernweg(qMitLage, weg) : kurzLernweg(qMitLage, weg),
+    regeln: typeof REGELN !== "undefined" ? REGELN : [],
+    stufe: stufeWahl,
+    neustart: params.get("neustart") === "1" || params.get("neustart") === "true" || Boolean(aktLage),
+    schritt: params.get("schritt") !== null && !aktLage ? parseInt(params.get("schritt"), 10) : undefined,
+    piktogramme: "../assets/pictograms/",
+    nachZeichnen: (info) => {
+      document.title = `Schritt ${info.i + 1}: ${weg.lektion || weg.titel || weg.name} – Lern-Handy`;
+      if (window._lkInst) window._lkInst.aktualisieren(info);
+      leisteZeigen && leisteZeigen();
+    }
+  });
+}
+let lw = ladeLernweg();
+if (params.get("lernkreis") !== "0" && window.LernkreisBausteine) {
+  window._lkInst = window.LernkreisBausteine.anbinden({
+    id: weg.id,
+    lw,
+    lageId: aktLage,
+    wurzel: document.getElementById("lernweg"),
+    stufe: stufeWahl,
+    modus: sliState.lernform || params.get("mode") || "allein",
+    onLageWahl: (nextLage) => {
+      aktLage = nextLage === "jonas" ? null : nextLage;
+      if (lw && typeof lw.entfernen === "function") lw.entfernen();
+      lw = ladeLernweg();
+      if (window._lkInst && typeof window._lkInst.setLw === "function") window._lkInst.setLw(lw, nextLage || "jonas");
+      if (mitVorschau && vorschauEl) {
+        leisteZeigen = vorschauLeiste(vorschauEl, lw, {
+          titel: `${weg.lektion || weg.name || weg.titel} im Lern-Handy`,
+          links: vorschauLinks
+        });
+      }
+    }
+  });
+}
+if (mitVorschau && vorschauEl) {
+  leisteZeigen = vorschauLeiste(vorschauEl, lw, {
+    titel: `${weg.lektion || weg.name || weg.titel} im Lern-Handy`,
+    links: vorschauLinks
+  });
+}
+window._leisteZeigen = leisteZeigen;
+</script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+.lk-bar {
+  max-width: 1120px;
+  margin: 10px auto 8px;
+  padding: 10px 16px;
+  border-radius: var(--at-radius-lg, 22px);
+  background: var(--at-surface, var(--surface, #ffffff));
+  color: var(--at-ink, var(--ink, #17222f));
+  box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.06));
+  font-family: inherit;
+}
+
+.lk-bar[hidden] {
+  display: none !important;
+}
+
+.lk-bar-inline {
+  max-width: min(1120px, calc(100% - 24px));
+  margin: 6px auto 4px;
+  padding: 8px 14px;
+}
+
+.lh .lernleiste {
+  grid-template-columns: auto 1fr auto auto auto;
+}
+
+@media (max-width: 640px) {
+  .lh .lernleiste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 6px;
+  }
+  .lh .lernleiste .ort {
+    flex: 1 0 100%;
+    order: -1;
+    text-align: left;
+    padding-bottom: 2px;
+  }
+  .lk-bar-inline {
+    margin: 4px 8px 2px;
+    padding: 6px 10px;
+  }
+}
+
+.lk-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-bottom: 4px;
+}
+
+.lk-head-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lk-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--at-warm-soft, #fbf3e6);
+  flex: none;
+}
+
+.lk-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--at-accent-soft, #e4eef7);
+  color: var(--at-accent-dark, #073963);
+}
+
+.lk-modes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lk-pill {
+  border: 0;
+  background: var(--at-surface-soft, #f2eee8);
+  color: var(--at-ink, #17222f);
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.lk-pill[aria-pressed="true"] {
+  background: var(--at-accent, #0b4f8a);
+  color: var(--at-accent-ink, #ffffff);
+}
+
+.lk-hint {
+  margin: 0 0 12px;
+  padding: 11px 15px;
+  border-left: 4px solid var(--at-accent, #0b4f8a);
+  background: var(--at-surface-soft, #f2eee8);
+  border-radius: 10px;
+  font-size: 0.94rem;
+}
+
+.lk-speech {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 10px 14px;
+  background: var(--at-warm-soft, #faefe1);
+  border-radius: 14px;
+}
+
+.lk-speech img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  flex-shrink: 0;
+}
+
+.lk-block {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--at-line, #ded7cc);
+}
+
+.lk-title {
+  margin: 0 0 6px;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.lk-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lk-choice-btn {
+  border: 0;
+  background: var(--at-surface-soft, #f2eee8);
+  color: var(--at-ink, #17222f);
+  min-height: 48px;
+  padding: 8px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lk-choice-btn[aria-pressed="true"] {
+  background: var(--at-accent-soft, #e4eef7);
+  box-shadow: inset 0 0 0 2px var(--at-accent, #0b4f8a);
+  color: var(--at-accent-dark, #073963);
+}
+
+.lk-note {
+  margin: 10px 0 0;
+  font-size: 0.94rem;
+}
+
+.lk-footer-bar {
+  max-width: 980px;
+  margin: 16px auto 28px;
+  padding: 18px 22px;
+  border-radius: var(--at-radius-lg, 22px);
+  background: var(--at-surface, #ffffff);
+  color: var(--at-ink, #17222f);
+  box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.06));
+}
+
+.lk-repeat-btn {
+  margin-top: 12px;
+  border: 0;
+  background: var(--at-surface-soft, #f2eee8);
+  color: var(--at-ink, #17222f);
+  min-height: 58px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Visuelle Differenzierung der drei Lernumgebungen (Schritt fuer Schritt / Mitten in der Geschichte / Werkstatt) */
+html[data-learn-env="unterstuetzt"] .lk-bar {
+  background: var(--at-surface, #ffffff);
+  box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.06));
+}
+
+html[data-learn-env="frei"] .lk-bar {
+  background: var(--at-surface-soft, #f2eee8);
+  box-shadow: none;
+}
+
+html[data-learn-env="frei"] #lernweg {
+  padding-top: 4px;
+}
+
+/* Im Lernkreis-Verbund sitzt die Weiter-Leiste ruhig unter der Uebung, ohne Lernleiste oder Handy zu verdecken */
+.lk-bar ~ .lh .unten {
+  position: static;
+  max-width: min(1120px, calc(100% - 24px));
+  margin: 12px auto 12px;
+  border-radius: var(--at-radius-lg, 20px);
+  border-top: 0;
+  background: var(--at-surface, #ffffff);
+  box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.06));
+}
+
+.lk-compact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lk-mode-chip {
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.lk-ondemand,
+.lk-footer-details {
+  margin-top: 8px;
+}
+
+.lk-footer-details {
+  margin-top: 0;
+}
+
+.lk-ondemand summary,
+.lk-footer-details summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--at-surface-soft, #f2eee8);
+  color: var(--at-accent, #0b4f8a);
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.lk-ondemand-body {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.lk-footer-details .lk-compact-row {
+  margin-top: 10px;
+}
+
+html[data-learn-mode="gemeinsam"] #lernweg {
+  font-size: 1.08em;
+}
+
+/* Drei Lernumgebungen + „Was wäre, wenn?“ im Handy + Begleit-Hilfe */
+.lk-grad-tag {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--at-surface-soft, #f2eee8);
+  color: var(--at-ink-soft, #485869);
+}
+
+.lk-env-box {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--at-accent-soft, #e6eff8);
+}
+
+.lk-env-lead {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.lk-env-announce {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--at-accent-dark, #073963);
+}
+
+.lk-env-help {
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--at-surface, #ffffff);
+  color: var(--at-ink, #17222f);
+  font-size: 0.92rem;
+}
+
+.lk-env-actions,
+.lk-werkstatt-bar,
+.lk-werkstatt-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.lk-werkstatt-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--at-ink-soft, #485869);
+}
+
+.lk-companion-card {
+  margin-top: 8px;
+  border-radius: 12px;
+  background: var(--at-surface-soft, #f2eee8);
+  padding: 8px 12px;
+}
+
+.lk-companion-card summary {
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.lk-companion-body {
+  padding-top: 8px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.92rem;
+}
+
+.lk-companion-sub,
+.lk-companion-rule {
+  margin: 0;
+}
+
+.lk-companion-rule {
+  color: var(--at-accent-dark, #073963);
+  font-weight: 600;
+}
+
+/* A4.4: „Was wäre, wenn?“ direkt im Übungs-Handy-Display */
+.lh .display.lk-has-whatif {
+  position: relative;
+}
+
+.lh .lk-phone-whatif {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0.8em 0.75em;
+  background: var(--flaeche, #ffffff);
+  color: var(--tinte, #17222f);
+  overflow-y: auto;
+}
+
+.lh .lk-phone-whatif-banner {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--vorsicht-hell, #fbf3e6);
+  color: var(--vorsicht-text, #8a4b08);
+  font-weight: 700;
+  font-size: 0.86em;
+  text-align: center;
+}
+
+.lh .lk-phone-whatif-card {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--akzent-hell, #e6eff8);
+  display: grid;
+  gap: 6px;
+}
+
+.lh .lk-phone-whatif-kicker {
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--akzent, #0b4f8a);
+  text-transform: uppercase;
+}
+
+.lh .lk-phone-whatif-title {
+  margin: 0;
+  font-size: 1.05em;
+}
+
+.lh .lk-phone-whatif-text {
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.45;
+}
+
+@media (max-width: 639px) {
+  .lk-bar,
+  .lk-footer-bar {
+    margin: 6px 8px;
+    padding: 8px 10px;
+    border-radius: 16px;
+  }
+
+  .lk-top {
+    gap: 6px;
+  }
+
+  .lk-mode-chip,
+  .lk-ondemand summary {
+    padding: 4px 10px;
+    font-size: 0.84rem;
+  }
+
+  .lk-ondemand {
+    margin-top: 6px;
+  }
+
+  .lk-bar ~ .lh .unten {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    margin: 8px 8px 0;
+    border-radius: 16px 16px 0 0;
+    padding: 8px 10px;
+  }
+
+  .lk-choice-btn,
+  .lk-repeat-btn {
+    width: 100%;
+    text-align: left;
+    min-height: 48px;
+  }
+}
+
+.lk-lage-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.lk-lage-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--at-line, #dcd5ca);
+  border-radius: 10px;
+  background: var(--at-surface, #ffffff);
+  color: var(--at-ink, #17222f);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lk-lage-btn span {
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--at-ink-soft, #485869);
+}
+
+.lk-lage-btn[aria-pressed="true"] {
+  background: var(--at-accent-soft, #e6eff8);
+  border-color: var(--at-accent, #0b4f8a);
+}
+
+.lk-knifflig-einladung {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--at-surface-soft, #f2eee8);
+  display: grid;
+  gap: 8px;
+}
+
+.lk-knifflig-einladung p {
+  margin: 0;
+}
+
+.lk-vorbild-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lk-vorbild-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: top center;
+  flex: none;
+}
+
+.lk-env-box.is-gefuehrt {
+  border-left: 5px solid var(--at-ok, #166534);
+  background: var(--at-ok-soft, #dcfce7);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.lk-env-box.is-unterstuetzt {
+  border-left: 5px solid var(--at-warm, #b45309);
+  background: var(--at-warm-soft, #fef3c7);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.lk-env-box.is-frei {
+  border-left: 5px solid var(--at-accent, #0b4f8a);
+  background: var(--at-accent-soft, #e4eef7);
+  border-radius: 14px;
+  padding: 10px 14px;
+}

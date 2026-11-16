@@ -1,0 +1,64 @@
+/* Ruhige Klappleiste fuer direkte Vorschau-Optionen */
+body { margin: 0; background: var(--at-bg, #faf8f5); color: var(--at-ink, #17222f); font-family: var(--at-font, "Atkinson Hyperlegible", system-ui, sans-serif); }
+.vorschau, .vorschau * { box-sizing: border-box; }
+.vorschau {
+  max-width: 1120px;
+  margin: 12px auto 28px;
+  padding: 0 12px;
+  font: 0.9rem/1.4 var(--at-font, "Atkinson Hyperlegible", system-ui, sans-serif);
+}
+.vorschau summary {
+  list-style: none;
+  padding: 8px 14px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--at-ink-soft, #4b5c6e);
+  background: var(--at-surface-soft, #f2eee8);
+  border-radius: 999px;
+}
+.vorschau summary:hover {
+  background: var(--at-surface-hover, #eae3d9);
+  color: var(--at-ink, #17222f);
+}
+.vorschau[open] summary {
+  border-radius: 14px 14px 0 0;
+}
+.vorschau .innen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  padding: 12px 14px;
+  max-width: 100%;
+  background: var(--at-surface, #ffffff);
+  border-radius: 0 14px 14px 14px;
+  box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.06));
+}
+.vorschau .gruppe { display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; max-width: 100%; min-width: 0; }
+.vorschau button, .vorschau select, .vorschau a {
+  font: inherit;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--at-surface-soft, #f2eee8);
+  color: var(--at-ink, #17222f);
+  min-height: 44px;
+  max-width: 100%;
+  min-width: 0;
+  font-weight: 700;
+  cursor: pointer;
+}
+.vorschau a { display: inline-flex; align-items: center; text-decoration: none; }
+.vorschau button:hover, .vorschau a:hover { background: var(--at-accent-soft, #e4eef7); color: var(--at-accent, #0b4f8a); }
+.vorschau button[aria-pressed="true"] { background: var(--at-accent, #0b4f8a); color: var(--at-accent-ink, #ffffff); }
+.vorschau .modus { font-weight: 700; }
+.vorschau :focus-visible { outline: 3px solid var(--at-focus, #b45309); outline-offset: 2px; }
+@media (max-width: 639px) {
+  .vorschau { margin: 8px auto 20px; padding: 0 8px; }
+  .vorschau summary { font-size: 0.84rem; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }

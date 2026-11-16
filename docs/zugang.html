@@ -1,91 +1,125 @@
-<!doctype html>
-<html lang="de">
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alex und Tilda · Lernangebote</title>
-  <link rel="icon" href="favicon.svg">
-  <link rel="manifest" href="manifest.webmanifest">
-  <script src="zugang.js" defer></script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Alex &amp; Tilda – Startseite</title>
+  <link rel="stylesheet" href="designsystem.css">
+  <link rel="stylesheet" href="lernhandy/so-lerne-ich.css">
   <link rel="stylesheet" href="zugang.css">
-  <link rel="stylesheet" href="design-a.css">
-  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="plattform-nav.css">
 </head>
-<body class="portal">
-  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
-  <header>
-    <p class="marke"><img src="assets/brand/alex-tilda-kopf.webp" alt="" width="44" height="44">Alex und Tilda</p>
-    <span>Beta 3 – Testversion</span>
-  </header>
-  <main id="inhalt" tabindex="-1">
-    <div class="hero">
-      <div>
-        <h1>Willkommen bei Alex und Tilda</h1>
-        <p class="intro">Eine Plattform, die mit Menschen wächst.</p>
-        <p>Du wählst dein Thema. Du entscheidest, ob und von wem du Hilfe möchtest.</p>
-      </div>
-      <img class="willkommen" src="assets/figures/alex-tilda-winken.webp" alt="" width="256" height="256">
-    </div>
+<body>
+  <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
+  <div id="a11y-live" class="sr-only" aria-live="polite"></div>
+  <div id="at-plattform-nav"></div>
 
-    <section aria-labelledby="angebote">
-      <h2 id="angebote" class="bereichstitel"><span class="zeichen"><img src="assets/pictograms/themen.svg" alt="" width="28" height="28"></span> Unsere Lernangebote</h2>
-      <div class="angebote">
-        <section class="angebot" aria-labelledby="sicher">
-          <div><p class="rubrik">Für Lernende und Begleitpersonen</p>
-            <h3 id="sicher">Sicher und selbstbestimmt im Internet</h3>
-            <p class="kurz">Du kannst erst in der App üben. Zum Beispiel mit erfundenen Nachrichten. In deinem Tempo.</p>
-            <p class="rubrik info">12 Themen · Drei Sprachstufen</p>
-          </div>
-          <a class="hauptaktion" href="index.html#themen">Lern-App öffnen</a>
-        </section>
-        <section class="angebot" id="kursleitungen" aria-labelledby="workshops">
-          <div><p class="rubrik">Für Gruppen und Kursleitungen</p>
-            <h3 id="workshops">Workshops vor Ort</h3>
-            <p class="kurz">Bei den Workshops treffen wir uns vor Ort. Wir probieren gemeinsam Neues aus und tauschen Erfahrungen aus. Hier findest du die Materialien.</p>
-            <p class="rubrik info">Fünf Workshops</p>
-          </div>
-          <a class="hauptaktion nebenaktion" href="workshop.html">Workshops &amp; Materialien</a>
-        </section>
-        <section class="angebot" aria-labelledby="ausbildung">
-          <div><p class="rubrik">Für Kursleitungen</p>
-            <h3 id="ausbildung">Digital-Begleiter*innen-Schulung im Unterstützer*innen-System</h3>
-            <p class="kurz">Hier findest du Materialien, um die Schulung vorzubereiten und mit deiner Gruppe durchzuführen.</p>
-            <p class="rubrik info">18 Einheiten mit Abläufen, Folien und Arbeitsblättern</p>
-          </div>
-          <div class="aktionsgruppe">
-            <a class="hauptaktion nebenaktion" href="schulung/index.html">Zur Schulung</a>
-          </div>
-        </section>
+  <main id="main-content" class="main-b">
+    <section class="stage-left" aria-labelledby="hero-heading">
+      <div class="stage-figure">
+        <img src="assets/figures/alex-tilda-themen.webp" alt="Alex und Tilda schauen gemeinsam auf verschiedene Themen">
+      </div>
+      <div class="stage-text">
+        <p class="stage-kicker" data-bind="growthLine" data-read-step>Eine Plattform, die mit Menschen wächst.</p>
+        <h1 id="hero-heading" data-bind="heroTitle" data-fable-slot="F3-start-titel" data-read-step>Lernen mit Alex und Tilda. In deinem Tempo.</h1>
+        <p class="stage-lead" data-bind="heroLead" data-fable-slot="F3-start-lead" data-read-step>Hier geht es um das Handy und das Internet. Du wählst selbst: Was willst du tun?</p>
+        <p class="stage-note" data-bind="equalityNote" data-fable-slot="F3-gleichwertigkeit">Alle 4 Bereiche sind gleich wichtig. Alle Bereiche sind für alle Menschen. Du fängst an, wo du willst.</p>
       </div>
     </section>
 
-    <section class="vorschau-abschnitt" aria-labelledby="planung">
-      <h2 id="planung">Hier entsteht noch mehr!</h2>
-      <p class="rubrik">Diese Lernbereiche sind geplant. Welche Themen sind dir wichtig?</p>
-      <ul class="themenliste">
-        <li>Gesundheit und Wohlbefinden</li>
-        <li>Arbeit und berufliche Qualifizierung</li>
-        <li>Selbstständig im Alltag</li>
-        <li>Technik, KI und Kreativität</li>
-      </ul>
-    </section>
+    <section aria-labelledby="areas-heading">
+      <h2 id="areas-heading" class="stage-right-title">Die vier Bildungsbereiche</h2>
+      <ul class="strips-list">
+        <li class="strip-card">
+          <span class="area-icon"><img src="assets/pictograms/handy.svg" alt=""></span>
+          <div class="strip-body" data-read-step>
+            <h3 class="strip-title" data-area-title="lernen" data-fable-slot="F3-bereich-lernen-titel">Lernen und ausprobieren</h3>
+            <p class="strip-desc" data-area-desc="lernen" data-fable-slot="F3-bereich-lernen-text">Du übst in deinem Tempo. Im Übungs-Handy entscheidest du. Dann siehst du: Das passiert danach.</p>
+          </div>
+          <div class="strip-actions">
+            <a href="lernhandy/index.html" class="strip-main-btn" data-area-cta="lernen">Themen &amp; Übungen öffnen</a>
+          </div>
+        </li>
 
-    <section class="vorschau-abschnitt mitmachen" aria-labelledby="mitmachen">
-      <h2 id="mitmachen">Alex und Tilda wächst mit deinen Ideen.</h2>
-      <p>Selbst entscheiden. Gemeinsam lernen. Mitgestalten. Was möchtest du lernen oder ausprobieren? Was können wir besser machen?</p>
-      <ul>
-        <li>Du kannst uns deine Ideen sagen.</li>
-        <li>Möchtest du ein Angebot testen? Dann melde dich bei uns.</li>
-        <li>Du kannst uns schreiben, wenn du mit uns etwas entwickeln möchtest.</li>
+        <li class="strip-card">
+          <span class="area-icon"><img src="assets/pictograms/people.svg" alt=""></span>
+          <div class="strip-body" data-read-step>
+            <h3 class="strip-title" data-area-title="gemeinsam" data-fable-slot="F3-bereich-gemeinsam-titel">Gemeinsam lernen</h3>
+            <p class="strip-desc" data-area-desc="gemeinsam" data-fable-slot="F3-bereich-gemeinsam-text">Ihr lernt in einer Gruppe. Ihr sprecht über eure Erfahrungen.</p>
+          </div>
+          <div class="strip-actions">
+            <a href="workshop.html" class="strip-main-btn" data-area-cta="gemeinsam">Workshops öffnen</a>
+          </div>
+        </li>
+
+        <li class="strip-card">
+          <span class="area-icon"><img src="assets/pictograms/lernweg.svg" alt=""></span>
+          <div class="strip-body" data-read-step>
+            <h3 class="strip-title" data-area-title="begleiter" data-fable-slot="F3-bereich-begleiter-titel">Digital-Begleiter*innen im Unterstützer*innen-System</h3>
+            <p class="strip-desc" data-area-desc="begleiter" data-fable-slot="F3-bereich-begleiter-text">Du willst anderen mit dem Handy helfen? Hier lernst du das.</p>
+          </div>
+          <div class="strip-actions">
+            <a href="testfassung.html#digital-begleiter" class="strip-main-btn" data-area-cta="begleiter">Schulung &amp; Übung öffnen</a>
+          </div>
+        </li>
+
+        <li class="strip-card">
+          <span class="area-icon"><img src="assets/pictograms/friend.svg" alt=""></span>
+          <div class="strip-body" data-read-step>
+            <h3 class="strip-title" data-area-title="begleiten" data-fable-slot="F3-bereich-begleiten-titel">Lernen begleiten</h3>
+            <p class="strip-desc" data-area-desc="begleiten" data-fable-slot="F3-bereich-begleiten-text">Du unterstützt eine Person beim Lernen? Hier findest du Tipps.</p>
+          </div>
+          <div class="strip-actions">
+            <a href="testfassung.html#begleiten" class="strip-main-btn" data-area-cta="begleiten">Kompass &amp; Karten öffnen</a>
+          </div>
+        </li>
       </ul>
-      <a class="hauptaktion nebenaktion" href="mailto:digitale-teilhabe@stift-tilbeck.de?subject=Mitmachen%20bei%20Alex%20und%20Tilda" aria-describedby="mail-hinweis">Ich möchte mitgestalten</a>
-      <p class="rubrik info" id="mail-hinweis">Öffnet dein E-Mail-Programm.</p>
     </section>
   </main>
-  <footer><nav aria-label="Informationen zur Website">
-    <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutz</a>
-    <a href="barrierefreiheit.html">Barrierefreiheit</a>
-  </nav></footer>
+
+  <section class="mitmachen-band" aria-labelledby="mitmachen-heading">
+    <div class="mitmachen-card">
+      <div class="mitmachen-copy" data-read-step>
+        <h2 id="mitmachen-heading" data-bind="mitmachenTitle">Alex und Tilda wächst mit deinen Ideen.</h2>
+        <p class="mitmachen-leitsatz" data-bind="mitmachenLead">Selbst entscheiden. Gemeinsam lernen. Mitgestalten.</p>
+        <p class="mitmachen-text" data-bind="mitmachenText">Menschen mit Behinderung und Digital-Begleiterinnen und Digital-Begleiter haben diese Plattform mitentwickelt. Alle können mitmachen, ausprobieren und Ideen teilen.</p>
+      </div>
+      <div class="mitmachen-aktion">
+        <a class="strip-main-btn" href="mailto:beta.lab@icloud.com?subject=Mitmachen%20bei%20Alex%20und%20Tilda" aria-describedby="mitmachen-mail-hinweis">Ich möchte mitgestalten</a>
+        <span class="mitmachen-hinweis" id="mitmachen-mail-hinweis">Öffnet dein E-Mail-Programm</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>Alex &amp; Tilda · Eine Plattform, die mit Menschen wächst.</span>
+    <div class="footer-links">
+      <a href="ueber-alex-und-tilda.html">Über Alex &amp; Tilda</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="barrierefreiheit.html">Barrierefreiheit</a>
+      <button type="button" data-action="open-impressum" data-fable-slot="F6-impressum-datenschutz">Kurzinfo</button>
+    </div>
+  </footer>
+
+  <div id="preview-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div>
+          <h2 id="modal-title" class="modal-title"></h2>
+          <p id="modal-desc" class="modal-desc"></p>
+        </div>
+        <img id="modal-figure" class="modal-figure" src="assets/figures/alex-tilda-hilfe.webp" alt="Alex und Tilda helfen weiter" hidden>
+      </div>
+      <ul id="modal-list" class="modal-list"></ul>
+      <div id="modal-actions" class="modal-actions"></div>
+      <button type="button" class="modal-close">Schließen</button>
+    </div>
+  </div>
+
+  <script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="plattform-nav.js" data-at-root=""></script>
+  <script src="zugang.js"></script>
 </body>
 </html>

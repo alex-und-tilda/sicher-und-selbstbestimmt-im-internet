@@ -4,167 +4,150 @@
   <meta charset="UTF-8" />
   <meta name="color-scheme" content="light dark" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Datenschutz – Sicher und selbstbestimmt im Internet</title>
-  <meta name="description" content="Datenschutzerklärung der Lernplattform Sicher und selbstbestimmt im Internet – in Einfacher Sprache." />
-  <meta name="robots" content="noindex" />
-  <link rel="canonical" href="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/datenschutz.html" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Datenschutz – Alex &amp; Tilda</title>
+  <meta name="description" content="Datenschutzerklärung des unabhängigen, privat initiierten Bildungsprojekts Alex &amp; Tilda – in Einfacher Sprache nach DSGVO und TDDDG." />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="designsystem.css" />
+  <link rel="stylesheet" href="lernhandy/so-lerne-ich.css" />
+  <link rel="stylesheet" href="plattform-nav.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .static-page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+    .legal-card {
+      background: var(--at-surface);
+      border-radius: var(--at-radius-lg);
+      padding: clamp(20px, 3.5vw, 34px);
+      box-shadow: var(--at-shadow-sm);
+    }
+    .legal-card h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      line-height: 1.2;
+    }
+    .legal-card h2 {
+      margin: 26px 0 8px;
+      font-size: 1.15rem;
+      color: var(--at-accent);
+    }
+    .legal-card p, .legal-card li {
+      color: var(--at-ink);
+      line-height: 1.6;
+    }
+    .notice-box {
+      background: var(--at-accent-soft);
+      border-left: 4px solid var(--at-accent);
+      border-radius: var(--at-radius-sm);
+      padding: 14px 16px;
+      margin: 14px 0 20px;
+    }
+    .placeholder {
+      display: inline-block;
+      background: var(--at-warm-soft);
+      color: var(--at-warm);
+      border: 1px dashed var(--at-warm);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-weight: 700;
+    }
+    .legal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--at-line);
+    }
+    .legal-links a {
+      color: var(--at-accent);
+      font-weight: 700;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
-  <main class="static-page">
-    <a class="plain-back-button" href="index.html">← Zur Lernplattform</a>
+  <div id="at-plattform-nav"></div>
+  <main id="main-content" class="static-page">
+    <article class="legal-card">
+      <h1>Datenschutzerklärung</h1>
+      <p>Diese Erklärung ist in Einfacher Sprache geschrieben.</p>
 
-    <article class="card">
-      <h1>Datenschutz</h1>
-      <p class="lead">Diese Erklärung ist in Einfacher Sprache geschrieben.</p>
-
-      <h2>Das Wichtigste zuerst</h2>
-      <ul>
-        <li>Diese Seite fragt nicht nach deinem Namen.</li>
-        <li>Diese Seite benutzt keine Cookies.</li>
-        <li>Diese Seite hat keine Werbung und kein Tracking.</li>
-        <li>Du musst dich nicht anmelden.</li>
-        <li>Alle Schriften und Bilder werden direkt von dieser Seite geladen. Es werden keine fremden Server kontaktiert – außer GitHub Pages (Hosting) und dem Gerät selbst.</li>
-      </ul>
-
-      <h2>Verantwortlich für diese Seite</h2>
+      <div class="notice-box">
+        <strong>Alex &amp; Tilda – Eine Plattform, die mit Menschen wächst.</strong><br />
+        Ein unabhängiges, ehrenamtliches und nicht kommerzielles Bildungsprojekt zur Förderung der digitalen Teilhabe.<br />
+        <strong>Initiator, Konzeption und Entwicklung: Frank Runge.</strong>
+      </div>
       <p>
-        Alexianer Stift Tilbeck GmbH<br />
+        <strong>Das Wichtigste zum Datenschutz:</strong> Diese Seite fragt nicht nach deinem Namen. Es gibt keine Cookies, keine Werbung, kein Tracking und keine Anmeldung. Schriften und Bilder liegen direkt auf dieser Seite.
+      </p>
+
+      <h2>1. Verantwortliche Person (Art. 4 Nr. 7 DSGVO)</h2>
+      <p>
+        Verantwortlich für dieses unabhängige, ehrenamtliche und nicht kommerzielle Bildungsangebot ist:<br />
+        <strong>Frank Runge</strong> (Privater Betreiber)<br />
         Tilbeck 2<br />
         48329 Havixbeck<br />
-        Telefon: <a href="tel:+492507981694">+49 2507 981 694</a><br />
-        E-Mail: <a href="mailto:digitale-teilhabe@stift-tilbeck.de">digitale-teilhabe@stift-tilbeck.de</a>
+        E-Mail: <a href="mailto:beta.lab@icloud.com">beta.lab@icloud.com</a>
+      </p>
+      <p>
+        <em>Hinweis zum geltenden Recht:</em> Für dieses privat getragene Angebot gelten die Datenschutz-Grundverordnung (<strong>DSGVO</strong>), das Bundesdatenschutzgesetz (<strong>BDSG</strong>) und das Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz (<strong>TDDDG</strong>). Kirchliche Datenschutzregelungen (wie das KDG) finden keine Anwendung.
       </p>
 
-      <h2>Lernstand merken (freiwillig)</h2>
+      <h2>2. Einstellungen während deines Besuchs (nur im offenen Tab)</h2>
       <p>
-        Wenn du ein Thema geschafft hast, fragt dich die Seite.
-        Du kannst es auch auf der Seite <strong>Mein Lernweg</strong> sagen:
-        Die Seite soll sich merken, welche Themen du geschafft hast.
-      </p>
-      <p>Dann merkt sich die Seite:</p>
-      <ul>
-        <li>welche Themen du geschafft hast,</li>
-        <li>den Tag und die Uhrzeit, an dem du ein Thema zuletzt geschafft hast, und wie oft. Mit dem Tag kann die Seite dir nach ein paar Tagen Fragen zum Wiederholen anbieten,</li>
-        <li>welche Regeln du schon angewendet hast. Das zeigt deine Regel-Karte,</li>
-        <li>bei welchen Fragen deine Antwort noch nicht gepasst hat. So kannst du sie noch einmal üben,</li>
-        <li>Antworten und Treffer einer unterbrochenen Runde. So kannst du die Runde später fortsetzen.</li>
-      </ul>
-      <p>
-        Hast du früher nur dem Merken geschaffter Themen zugestimmt?
-        Dann merkt die Seite nicht automatisch deine Antworten.
-        Unter <strong>Mein Lernweg</strong> kannst du sagen:
-        <strong>Ja, Runden merken</strong>. Deine bisherigen Erfolge bleiben.
+        In der aktuellen Fassung der Lern-App (Public Beta 4) werden deine Einstellungen – etwa deine gewählte Sprache (Leicht, Einfach oder Alltag), Schriftgröße, Hell-/Dunkelmodus, Lernumgebung sowie freiwillige Ziele und ausprobierte Übungen unter „Mein Lernweg“ – ausschließlich im flüchtigen Tab-Speicher deines Browsers (<code>window.name</code>) gehalten.
       </p>
       <ul>
-        <li>Das passiert nur, wenn du auf den Knopf drückst.</li>
-        <li>Es wird nur auf deinem Gerät gespeichert (im Browser, sogenannter localStorage).</li>
-        <li>Es wird kein Name gespeichert.</li>
-        <li>Es wird nichts an uns oder andere geschickt.</li>
-        <li><strong>Wie lange?</strong> Die Seite löscht den Lernstand nicht von selbst. Er bleibt, bis du ihn löschst.</li>
-        <li><strong>Löschen:</strong> Auf der Seite <strong>Mein Lernweg</strong> mit dem Knopf <strong>Lernstand löschen und nicht mehr merken</strong>. Alles von dir löscht <strong>Dieses Profil löschen</strong> unter Einstellungen bei deinem Zeichen. Du kannst auch die Website-Daten in deinem Browser löschen.</li>
+        <li>Es wird kein Name gespeichert und nichts an einen Server geschickt.</li>
+        <li>Sobald du das Browser-Fenster oder den Tab schließt, sind diese Angaben wieder gelöscht.</li>
+        <li>Rechtsgrundlage: § 25 Abs. 2 Nr. 2 TDDDG (technisch erforderlich für die von dir gewünschte Barrierefreiheits- und Lernfunktion) sowie Art. 6 Abs. 1 lit. f DSGVO.</li>
       </ul>
-      <p>
-        Rechtsgrundlage: deine Einwilligung (Art. 6 Abs. 1 a DSGVO).
-      </p>
 
-      <h2>Einstellungen auf deinem Gerät</h2>
+      <h2>3. Freiwilliges Merken des Lernstands (nur nach ausdrücklicher Einwilligung)</h2>
       <p>
-        Damit die Seite beim nächsten Mal wieder so ist, wie du sie eingestellt hast,
-        merkt sie sich ein paar Einstellungen. Auch das bleibt nur auf deinem Gerät.
-        Es wird kein Name gespeichert und nichts weggeschickt.
+        Sofern du in der Lern-App ausdrücklich einwilligst, dass ein Lernstand lokal auf deinem Gerät gespeichert wird (<code>localStorage</code>), geschieht dies ausschließlich im Speicher deines eigenen Browsers und nur bis zum Löschen durch dich.
       </p>
       <ul>
-        <li>Deine Sprach-Stufe und deine Schriftgröße.</li>
-        <li>Ob dir vorgelesen wird und wie schnell.</li>
-        <li>Ob beim Vorlesen der Satz markiert wird und wichtige Wörter hervorgehoben werden.</li>
-        <li>Ob du allein oder mit einer Begleit-Person lernst.</li>
-        <li>Dein Zeichen, wenn mehrere Personen dasselbe Gerät benutzen, und dein Bild-Code, wenn du einen hast.</li>
-        <li>Wo du stehen geblieben bist: Thema, Lektion oder Frage und dein gewählter Lernweg.</li>
-        <li>Ob du ein Thema kurz oder ausführlich liest.</li>
-        <li>Wie oft du einen Plan schon geübt hast.</li>
+        <li>Rechtsgrundlage: § 25 Abs. 1 TDDDG und Art. 6 Abs. 1 lit. a DSGVO (deine jederzeit widerrufliche Einwilligung).</li>
+        <li>Ohne diese Einwilligung wird im dauerhaften Gerätespeicher (<code>localStorage</code>, <code>sessionStorage</code>, Cookies) nichts gespeichert.</li>
       </ul>
+
+      <h2>4. Vorlesen über dein Gerät</h2>
       <p>
-        Die letzten drei Punkte nennen wir den <strong>Wiedereinstieg</strong>.
-        Er gehört nicht zum Lernstand. Deshalb bleibt er auch dann, wenn du den
-        Lernstand löschst. Auf der Seite <strong>Mein Lernweg</strong> gibt es dafür
-        einen eigenen Knopf: <strong>Wiedereinstieg löschen</strong>. Wenn du dein
-        Profil löschst oder neu anfängst, wird alles aus dieser Liste gelöscht.
-      </p>
-      <p>
-        Mit <strong>Beenden</strong> oben kannst du auch ein Quiz oder eine neue
-        Situation unterbrechen. Ohne gespeicherten Lernstand bleiben deine
-        Antworten und Treffer nur so lange erhalten, wie diese Seite geöffnet
-        ist. Öffnest du die Seite neu, beginnt die gemerkte Frage ohne Bewertung.
-        Das Ergebnis zählt dann nur die Fragen ab dieser Stelle.
-        <strong>Wiedereinstieg löschen</strong> löscht auch eine gemerkte Quizrunde.
-      </p>
-      <p>
-        Rechtsgrundlage: berechtigtes Interesse an einer bedienbaren, barrierearmen
-        Anwendung (Art. 6 Abs. 1 f DSGVO).
+        Die Funktion „Vorlesen“ nutzt ausschließlich die eingebaute Sprachausgabe deines eigenen Geräts (Web Speech API). Texte werden dafür nicht an einen externen Dienst oder an uns gesendet.
       </p>
 
-      <h2>Wenn mehrere Personen ein Gerät benutzen</h2>
+      <h2>5. Hosting (Bereitstellung im Internet)</h2>
       <p>
-        Benutzen mehrere Personen dasselbe Gerät? Dann stell unter Einstellungen ein:
-        <strong>Mehrere Personen</strong>. Dann fragt die Seite beim Öffnen immer: Wer lernt gerade?
-        Jede Person hat ihr eigenes Zeichen. Der Lernstand jeder Person wird getrennt gespeichert.
+        Diese statische Webseite wird kostenlos über <strong>GitHub Pages</strong> bereitgestellt (Anbieter: GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim Abruf der Seite verarbeitet GitHub technisch notwendige Verbindungsdaten (wie IP-Adresse, Zeitpunkt des Abrufs und Browsertyp), um die Seite sicher auszuliefern.
       </p>
       <p>
-        Steht dort <strong>Nur ich</strong>, öffnet die Seite das zuletzt benutzte Zeichen.
-        Eine andere Person sieht dann diesen Lernstand.
-      </p>
-      <p>
-        Alle Personen am Gerät sehen die Zeichen. Mit einem <strong>Bild-Code</strong> kann nicht
-        jede andere Person dein Zeichen öffnen. Der Bild-Code ist ein Schutz vor Versehen.
-        Er ist kein sicheres Passwort. Wer sich mit Technik auskennt, kann den Speicher im Browser trotzdem lesen.
-      </p>
-      <p>
-        Möchtest du nichts auf einem geteilten Gerät lassen? Dann lösche dein Profil, wenn du fertig bist.
+        Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren und zuverlässigen Bereitstellung des Bildungsangebots). GitHub, Inc. ist nach dem <strong>EU-U.S. Data Privacy Framework (DPF)</strong> zertifiziert. Weitere Informationen stehen in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">Datenschutzerklärung von GitHub</a>.
       </p>
 
-      <h2>Hosting bei GitHub Pages</h2>
+      <h2>6. Deine Rechte</h2>
       <p>
-        Diese Seite liegt auf Servern von GitHub (GitHub Pages).
-        Wenn du die Seite öffnest, verarbeitet GitHub technisch notwendige Daten.
-        Zum Beispiel deine IP-Adresse. Das braucht jeder Server, um eine Seite anzuzeigen.
+        Du hast nach der DSGVO das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21 DSGVO). Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO).
       </p>
       <p>
-        Anbieter: GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.
-        Mehr dazu in der
-        <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">Datenschutzerklärung von GitHub</a>.
-      </p>
-      <p>
-        Rechtsgrundlage: berechtigtes Interesse an einem sicheren und schnellen
-        Bildungsangebot (Art. 6 Abs. 1 f DSGVO).
+        <em>Stand: 16.11.2026 (Public Beta 4 – Testfassung).</em>
       </p>
 
-      <h2>Vorlesen</h2>
-      <p>
-        Die Vorlese-Funktion benutzt die Stimme deines eigenen Geräts.
-        Der Text wird dafür nicht an uns geschickt.
-      </p>
-
-      <h2>Deine Rechte</h2>
-      <p>
-        Du hast nach der DSGVO das Recht auf Auskunft, Berichtigung, Löschung,
-        Einschränkung der Verarbeitung und Widerspruch.
-        Du kannst dich auch bei einer Datenschutz-Aufsichtsbehörde beschweren.
-        Bei Fragen schreib uns eine E-Mail.
-      </p>
-
-      <p>Stand: November 2026</p>
-
-      <p>
+      <div class="legal-links">
         <a href="impressum.html">Zum Impressum</a>
-        ·
-        <a href="ersteller.html">Über den Ersteller</a>
-      </p>
+        <a href="barrierefreiheit.html">Zur Barrierefreiheit</a>
+        <a href="zugang.html">Zur Startseite</a>
+      </div>
     </article>
-  <footer class="static-footer">
-    <p><a href="index.html">← Zur Lernplattform</a> &nbsp;·&nbsp; <a href="impressum.html">Impressum</a> &nbsp;·&nbsp; <a href="datenschutz.html">Datenschutz</a> &nbsp;·&nbsp; <a href="barrierefreiheit.html">Barrierefreiheit</a></p>
-  </footer>
   </main>
+  <script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="plattform-nav.js" data-at-root=""></script>
 </body>
 </html>

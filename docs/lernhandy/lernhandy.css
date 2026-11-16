@@ -1,0 +1,545 @@
+/* Lern-Handy – gemeinsamer Baustein (Phase A, 09.11.2026)
+   Gestaltung unverändert aus Entwurf 5 (berichte/lernhandy-2026-11-09/entwurf-5.html, GESTALTUNGSSYSTEM.md).
+   Geändert gegenüber Entwurf 5 nur technisch:
+   - Alle Regeln gelten nur innerhalb der Baustein-Wurzel .lh (Farb-Variablen auf .lh statt :root),
+     damit der Baustein später neben pilot/styles.css und docs/styles.css stehen kann.
+   - .frage heißt .lh-frage, .feld heißt .lh-feld (gleichnamige Klassen gibt es im Pilot).
+   - Nicht mehr benutzte Teile aus Entwurf 3/4 entfernt (Zeichen am Handy-Rand, Mitlesen, Rückmeldung außen).
+   Die Grundschrift setzt die Seite (html { font-size }); der Baustein liest sie für Lesegröße und Lernbereich. */
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-display: swap; src: url("../assets/fonts/atkinson-regular.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 700; font-display: swap; src: url("../assets/fonts/atkinson-bold.woff2") format("woff2"); }
+
+.lh {
+  --seite: var(--at-bg, #F8F6F0); --flaeche: var(--at-surface, #FFFFFF); --tinte: var(--at-ink, #26342D); --leise: var(--at-ink-soft, #43544B); --linie: var(--at-line, #B8C7B9);
+  --akzent: var(--at-accent, #365B46); --akzent-hell: var(--at-accent-soft, #DFE9D9); --akzent-tinte: var(--at-accent-ink, #FFFFFF);
+  --gut: var(--at-ok, #365B46); --gut-text: var(--at-ok, #365B46); --gut-hell: var(--at-ok-soft, #DFE9D9);
+  --problem: var(--at-bad, #9C3E34); --problem-text: var(--at-bad, #9C3E34); --problem-hell: var(--at-bad-soft, #FAEEEC);
+  --vorsicht: var(--at-warm, #805315); --vorsicht-text: var(--at-warm, #805315); --vorsicht-hell: var(--at-warm-soft, #FBF4E7);
+  --info: var(--at-accent, #365B46); --info-hell: var(--at-accent-soft, #DFE9D9);
+  --geraet: #26342D; --anruf-bg: #26342D; --anruf-tinte: #FFFFFF; --anruf-leise: #DFE9D9;
+  --anzeige: var(--at-surface-soft, #EEF3EB); --karte: var(--at-surface, #FFFFFF); --fokus: var(--at-focus, #805315);
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .lh {
+    --seite: var(--at-bg, #131B17); --flaeche: var(--at-surface, #1B2620); --tinte: var(--at-ink, #F8F6F0); --leise: var(--at-ink-soft, #DFE9D9); --linie: var(--at-line, #394E43);
+    --akzent: var(--at-accent, #A8C9B3); --akzent-hell: var(--at-accent-soft, #24382D); --akzent-tinte: var(--at-accent-ink, #131B17);
+    --gut: var(--at-ok, #8FD1A6); --gut-text: var(--at-ok, #8FD1A6); --gut-hell: var(--at-ok-soft, #1B3325);
+    --problem: var(--at-bad, #F29B92); --problem-text: #F8F6F0; --problem-hell: var(--at-bad-soft, #351E1C);
+    --vorsicht: var(--at-warm, #F2B84B); --vorsicht-text: #F8F6F0; --vorsicht-hell: var(--at-warm-soft, #2D2516);
+    --info: var(--at-accent, #A8C9B3); --info-hell: var(--at-accent-soft, #24382D);
+    --geraet: #0D1310; --anruf-bg: #1B2620; --anzeige: #17201B; --karte: var(--at-surface-soft, #23312A); --fokus: var(--at-focus, #F2B84B);
+  }
+}
+.lh, .lh * { box-sizing: border-box; }
+
+.lh { margin: 0; background: var(--seite); color: var(--tinte); font-family: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif; line-height: 1.45; }
+.lh button { font: inherit; }
+.lh p { margin: 0; }
+/* Schutzschicht (Phase B): Allgemeine Regeln der Seite für p, h1, h2, li, img (z. B. pilot/styles.css: p mit fester
+   Schriftgröße) wirken sonst in das Handy hinein und ändern Größe und Darstellung. Hier gelten wieder die Werte von
+   Entwurf 5. Geprüft mit stilpruefung.html. */
+.lh p, .lh li, .lh span, .lh legend, .lh summary { font-size: inherit; line-height: inherit; letter-spacing: inherit; }
+.lh p, .lh li, .lh span, .lh legend, .lh summary, .lh h1, .lh h2, .lh img { text-wrap: wrap; }
+.lh li { margin: 0; }
+.lh { font-style: normal; font-variant: normal; font-variant-numeric: normal; font-feature-settings: normal; font-kerning: auto; font-stretch: normal;
+  letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0; text-shadow: none; text-align: start; white-space: normal;
+  word-break: normal; overflow-wrap: normal; hyphens: manual; text-rendering: auto; -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto; }
+.lh img { max-width: none; }
+.lh h2 { line-height: inherit; letter-spacing: inherit; overflow-wrap: inherit; }
+.lh :focus-visible { outline: 3px solid var(--fokus); outline-offset: 3px; }
+.lh .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; font-size: 1rem; line-height: 1; letter-spacing: normal; overflow-wrap: normal; }
+.lh img.pikto { width: 1.4em; height: 1.4em; flex: none; }
+
+/* Lernleiste oben */
+.lh .lernleiste { display: grid; grid-template-columns: auto 1fr auto auto; gap: 6px; align-items: center; padding: 8px 16px; max-width: min(1120px, calc(100% - 24px)); margin: 10px auto 0; border-radius: var(--at-radius-lg, 20px); background: var(--flaeche); box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.06)); }
+.lh .lernleiste .ort { text-align: center; min-width: 0; }
+.lh .lernleiste .titel { font-weight: 700; font-size: 1rem; line-height: 1.25; }
+.lh .lernleiste .schritt { font-size: 0.9rem; color: var(--leise); }
+.lh .balken { height: 6px; border-radius: 3px; background: var(--linie); max-width: 14rem; margin: 3px auto 0; overflow: hidden; }
+.lh .balken > span { display: block; height: 100%; background: var(--akzent); }
+.lh .leisten-knopf { display: inline-flex; flex-direction: column; align-items: center; gap: 1px; border: 0; background: none; color: var(--akzent); font-weight: 700; font-size: 0.85rem; min-width: 48px; min-height: 48px; padding: 2px 4px; border-radius: 10px; cursor: pointer; }
+.lh .leisten-knopf img { width: 24px; height: 24px; }
+.lh .leisten-knopf[aria-pressed="true"] { background: var(--akzent-hell); }
+@media (max-width: 24em) { .lh .lernleiste { display: flex; flex-wrap: wrap; justify-content: space-around; margin: 8px 10px 0; } .lh .lernleiste .ort { flex: 1 0 100%; order: -1; } }
+
+/* Bühne: schmal = Handy oben, Lernbereich darunter; breit = Handy links, Lernbereich rechts */
+/* Entwurf 5: Reihenfolge überall gleich – sichtbar, beim Vorlesen und mit der Tastatur: erst Lernbereich, dann Handy */
+.lh .buehne { display: grid; gap: 16px; padding: 12px; justify-content: center; grid-template-columns: minmax(0, 34rem); }
+.lh .buehne > .handy { justify-self: center; }
+.lh.breit .buehne { grid-template-columns: minmax(16rem, 34rem) var(--hw); align-items: start; gap: 28px; padding: 16px 24px; }
+.lh #lh-frage, .lh #lh-rkopf, .lh #lh-sagen { scroll-margin-top: 10px; }
+.lh.breit .lernbereich { position: sticky; top: 12px; }
+
+/* Das Handy: feste Größe je Bildschirm, feste Schrift 18 px (Maße innen in em) */
+.lh .handy { position: relative; font-size: var(--hf, 18px); width: var(--hw); height: var(--hh); background: var(--geraet); border-radius: calc(var(--hw) * 0.13); padding: 8px; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(0,0,0,.18); }
+.lh .handy-kopf { flex: none; height: 22px; display: flex; justify-content: space-between; align-items: center; color: #dfe7ee; font-size: 12px; padding: 0 calc(var(--hw) * 0.08); }
+.lh .handy-kopf .kamera { width: 28%; height: 12px; border-radius: 8px; background: #000; }
+.lh .home-strich { flex: none; width: 34%; height: 5px; border-radius: 3px; background: #9aa7b3; margin: 7px auto 3px; }
+.lh .display { overflow-wrap: break-word; hyphens: manual; flex: 1 1 auto; min-height: 0; border-radius: calc(var(--hw) * 0.09); overflow: hidden; display: flex; flex-direction: column; gap: 0.6em; padding: 0.8em 0.75em; background: var(--anzeige); color: var(--tinte); }
+.lh .display > * { flex: none; }
+.lh .display.typ-lern { background: var(--flaeche); }
+.lh .display.typ-anruf { background: var(--anruf-bg); color: var(--anruf-tinte); }
+.lh .display.rand-gut { outline: 6px solid var(--gut); outline-offset: -6px; }
+.lh .display.rand-problem { outline: 6px solid var(--problem); outline-offset: -6px; }
+.lh .display.rand-vorsicht { outline: 6px solid var(--vorsicht); outline-offset: -6px; }
+.lh .display.rand-info { outline: 6px solid var(--info); outline-offset: -6px; }
+/* Handy in Lesegröße: gleiches Aussehen, Höhe folgt dem Inhalt (mindestens bildschirmhoch) */
+.lh .handy.lese { height: auto; min-height: var(--hmin); }
+.lh .handy.lese { padding: 4px; }
+.lh .handy.lese .display { padding: 0.35em 0.3em; gap: 0.45em; }
+.lh .handy.lese .mitteilung, .lh .handy.lese .chat, .lh .handy.lese .app-seite, .lh .handy.lese .notiz { padding: 0.4em 0.45em; }
+.lh .handy.lese .antwort { padding: 0.4em 0.45em; gap: 0.4em; }
+.lh .handy.lese .antwort input { width: 0.85em; height: 0.85em; margin-top: 0.3em; }
+.lh .handy.lese .haupt, .lh .handy.lese .zweit { padding: 0.4em 0.5em; }
+.lh .handy.lese .rkopf { flex-direction: column; align-items: flex-start; gap: 0.25em; }
+.lh .handy.lese .rkopf .symbol { width: 1.4em; height: 1.4em; }
+.lh .rkopf > span:last-child, .lh .antwort > span { min-width: 0; overflow-wrap: break-word; }   /* nur ein zu langes Wort wird notfalls umbrochen, nie abgeschnitten */
+.lh .handy.lese .handy-kopf { padding: 0 calc(var(--hw) * 0.1); }
+
+/* Inhalte im Handy */
+.lh .anruf-kopf { display: grid; justify-items: center; text-align: center; gap: 0.2em; padding-top: 0.6em; }
+.lh .anruf-kopf .rund { width: 2.8em; height: 2.8em; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+.lh .anruf-kopf .rund img { width: 60%; height: 60%; }
+.lh .anruf-kopf .art { color: var(--anruf-leise); font-size: 0.9em; }
+.lh .anruf-kopf .name { font-size: 1.3em; font-weight: 700; overflow-wrap: anywhere; line-height: 1.2; }
+.lh .anruf-kopf .nummer { color: var(--anruf-leise); display: flex; gap: 6px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.lh .anruf-kopf.kompakt { grid-template-columns: auto 1fr; justify-items: start; text-align: left; column-gap: 10px; row-gap: 0; padding-top: 0; }
+.lh .anruf-kopf.kompakt .rund { grid-row: span 2; width: 2.2em; height: 2.2em; }
+.lh .anruf-knoepfe { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5em), 1fr)); gap: 0.45em; margin-top: auto; }
+.lh .anruf-knopf { min-height: 2.67em; border-radius: 14px; border: 2px solid rgba(255,255,255,.5); background: rgba(255,255,255,.08); color: var(--anruf-tinte); font-weight: 700; padding: 4px 6px; cursor: pointer; overflow-wrap: anywhere; hyphens: manual; }
+.lh .anruf-knopf.breit { grid-column: 1 / -1; }
+.lh .anruf-knopf.rot { background: #b91c1c; border-color: #b91c1c; }
+.lh .anruf-knopf[aria-pressed="true"] { background: #ffffff; color: #16222e; }
+.lh .anruf-knopf.ist-getippt { box-shadow: 0 0 0 4px #ffd166; }
+.lh .anruf-knopf:disabled { cursor: default; }
+.lh .beendet { text-align: center; font-weight: 700; color: var(--anruf-leise); }
+.lh .mitteilung { background: var(--karte); color: var(--tinte); border-radius: 14px; padding: 0.5em 0.6em; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+.lh .mitteilung .von, .lh .chat .von { display: flex; gap: 6px; align-items: center; font-weight: 700; font-size: 0.85em; color: var(--leise); }
+.lh .chat { background: var(--karte); color: var(--tinte); border-radius: 4px 16px 16px 16px; padding: 0.5em 0.6em; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.lh .chat .von { color: var(--akzent); }
+.lh .chat-hinweis { font-size: 0.85em; color: var(--leise); margin: 0.3em 0 0.5em; padding: 0.3em 0.5em; background: rgba(0,0,0,.04); border-radius: 6px; }
+@media (prefers-color-scheme: dark) { .lh .chat-hinweis { background: rgba(255,255,255,.06); } }
+.lh .chat-knoepfe { display: flex; flex-direction: column; gap: 0.45em; margin-top: 0.6em; padding-top: 0.5em; border-top: 1px solid var(--linie); }
+.lh .chat-knopf { min-height: 2.67em; border-radius: 12px; border: 2px solid var(--akzent); background: var(--flaeche); color: var(--tinte); font-weight: 700; padding: 6px 10px; cursor: pointer; text-align: center; }
+.lh .chat-knopf:hover:not(:disabled), .lh .chat-knopf:focus-visible { background: var(--akzent-hell); outline: 3px solid var(--fokus); outline-offset: 2px; }
+.lh .chat-knopf.rot { border-color: #dc2626; color: #991b1b; background: #fee2e2; }
+.lh .chat-knopf.rot:hover:not(:disabled), .lh .chat-knopf.rot:focus-visible { background: #fecaca; }
+@media (prefers-color-scheme: dark) {
+  .lh .chat-knopf.rot { border-color: #ef4444; color: #fca5a5; background: #450a0a; }
+  .lh .chat-knopf.rot:hover:not(:disabled), .lh .chat-knopf.rot:focus-visible { background: #7f1d1d; }
+}
+.lh .chat-knopf.ist-getippt { box-shadow: 0 0 0 4px #ffd166; }
+.lh .chat-knopf.breit { width: 100%; }
+.lh .chat-knopf:disabled { cursor: default; }
+.lh .uebung-saetze { margin-top: 0.6em; padding: 0.6em; background: var(--karte); border-radius: 14px; border: 1px solid var(--linie); }
+.lh .uebung-saetze .lh-frage { margin-bottom: 0.45em; }
+.lh .app-seite { background: var(--karte); border-radius: 14px; padding: 0.6em; display: grid; gap: 0.35em; }
+.lh .app-seite .titel { font-weight: 700; }
+.lh .lh-feld { border: 2px solid var(--linie); border-radius: 10px; padding: 0.35em 0.5em; color: var(--leise); display: flex; gap: 8px; align-items: center; }
+.lh .notiz { background: var(--karte); border-radius: 14px; padding: 0.7em; display: grid; gap: 0.4em; border-top: 6px solid var(--akzent); }
+.lh .notiz .satz { font-size: 1.15em; font-weight: 700; }
+.lh .etikett { display: flex; gap: 8px; align-items: center; font-weight: 700; color: var(--akzent); }
+
+/* Schalter (Einstellungen & Privatsphäre: Konto privat, Standort, Pausen) */
+.lh .lh-schalter-karte { background: var(--karte); border-radius: 14px; padding: 0.7em; display: grid; gap: 0.5em; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+.lh .lh-schalter-app { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.85em; color: var(--akzent); }
+.lh .lh-schalter-zeile { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lh .lh-schalter-info { flex: 1 1 auto; min-width: 0; }
+.lh .lh-schalter-titel { font-weight: 700; font-size: 1em; line-height: 1.25; }
+.lh .lh-schalter-desc { font-size: 0.85em; color: var(--leise); margin-top: 0.2em; }
+.lh .lh-schalter-knopf { flex: none; display: inline-flex; align-items: center; gap: 8px; min-width: 5.5em; min-height: 2.67em; padding: 4px 8px; border: 2px solid var(--linie); border-radius: 20px; background: var(--flaeche); color: var(--tinte); font-weight: 700; cursor: pointer; transition: all .15s ease-in-out; }
+.lh .lh-schalter-regler { width: 1.5em; height: 1.5em; border-radius: 50%; background: var(--leise); transition: transform .15s ease-in-out, background .15s ease-in-out; }
+.lh .lh-schalter-knopf.an { background: var(--gut-hell); border-color: var(--gut); color: var(--gut-text); }
+.lh .lh-schalter-knopf.an .lh-schalter-regler { transform: translateX(1.5em); background: var(--gut); }
+.lh .lh-schalter-knopf.aus { background: var(--flaeche); border-color: var(--linie); }
+.lh .lh-schalter-knopf.aus .lh-schalter-regler { transform: translateX(0); background: var(--leise); }
+.lh .lh-schalter-knopf:hover:not(:disabled), .lh .lh-schalter-knopf:focus-visible { outline: 3px solid var(--fokus); outline-offset: 2px; }
+.lh .lh-schalter-hinweis { font-size: 0.85em; color: var(--leise); border-left: 3px solid var(--linie); padding-left: 6px; }
+
+/* Video & Feed (YouTube, TikTok) */
+.lh .lh-video-karte { background: var(--karte); border-radius: 14px; overflow: hidden; display: grid; gap: 0.5em; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.lh .lh-video-player { position: relative; aspect-ratio: 16 / 9; background: #000; border-radius: 12px 12px 0 0; display: flex; align-items: center; justify-content: center; }
+.lh .lh-video-vorschaubild { width: 100%; height: 100%; display: grid; place-items: center; color: #fff; opacity: 0.85; }
+.lh .lh-video-vorschaubild img { width: 3em; height: 3em; }
+.lh .lh-video-steuer { position: absolute; bottom: 8px; right: 8px; display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,.7); color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 0.8em; font-weight: 700; }
+.lh .lh-video-play { color: #f87171; }
+.lh .lh-video-info { padding: 0.2em 0.6em 0.5em; display: grid; gap: 0.2em; }
+.lh .lh-video-titel { font-weight: 700; font-size: 0.95em; line-height: 1.25; }
+.lh .lh-video-kanal { font-size: 0.85em; color: var(--leise); }
+.lh .lh-video-hinweis { font-size: 0.85em; color: var(--leise); background: rgba(0,0,0,.04); padding: 0.3em 0.5em; border-radius: 6px; }
+.lh .lh-video-knoepfe { display: flex; flex-direction: column; gap: 0.45em; padding: 0 0.6em 0.6em; }
+.lh .lh-video-knopf { min-height: 2.67em; border-radius: 12px; border: 2px solid var(--linie); background: var(--flaeche); color: var(--tinte); font-weight: 700; padding: 6px 10px; cursor: pointer; text-align: center; }
+.lh .lh-video-knopf:hover:not(:disabled), .lh .lh-video-knopf:focus-visible { border-color: var(--akzent); background: var(--akzent-hell); outline: 3px solid var(--fokus); }
+.lh .lh-video-knopf.haupt { background: var(--akzent); color: var(--akzent-tinte); border-color: var(--akzent); }
+.lh .lh-video-knopf.rot { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+
+/* Shop & Kasse (Einkaufen, Fake-Shops, Bezahlarten) */
+.lh .lh-shop-karte { background: var(--karte); border-radius: 14px; padding: 0.7em; display: grid; gap: 0.5em; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.lh .lh-shop-kopf { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--linie); padding-bottom: 0.4em; }
+.lh .lh-shop-name { font-weight: 700; font-size: 1.05em; color: var(--akzent); }
+.lh .lh-shop-siegel { font-size: 0.75em; font-weight: 700; padding: 2px 6px; border-radius: 6px; background: var(--gut-hell); color: var(--gut-text); border: 1px solid var(--gut); }
+.lh .lh-shop-artikel { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; background: rgba(0,0,0,.03); padding: 0.4em 0.6em; border-radius: 8px; }
+.lh .lh-shop-titel { font-weight: 700; }
+.lh .lh-shop-preis { font-weight: 700; font-size: 1.1em; color: var(--problem-text); }
+.lh .lh-shop-kasse { display: grid; gap: 0.45em; margin-top: 0.3em; }
+.lh .lh-shop-bezahl { display: flex; align-items: center; gap: 8px; min-height: 2.67em; padding: 6px 10px; border: 2px solid var(--linie); border-radius: 10px; background: var(--flaeche); color: var(--tinte); font-weight: 700; cursor: pointer; text-align: left; }
+.lh .lh-shop-bezahl.gewaehlt { border-color: var(--akzent); background: var(--akzent-hell); }
+.lh .lh-shop-bezahl:hover:not(:disabled), .lh .lh-shop-bezahl:focus-visible { outline: 3px solid var(--fokus); outline-offset: 2px; }
+.lh .lh-shop-knoepfe { display: flex; flex-direction: column; gap: 0.45em; margin-top: 0.4em; }
+.lh .lh-shop-knopf { min-height: 2.67em; border-radius: 12px; border: 2px solid var(--linie); background: var(--flaeche); color: var(--tinte); font-weight: 700; padding: 6px 10px; cursor: pointer; }
+.lh .lh-shop-knopf.haupt { background: var(--akzent); color: var(--akzent-tinte); border-color: var(--akzent); }
+.lh .lh-shop-knopf.rot { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+
+/* Profil & Freundschaftsanfragen (Facebook, Instagram) */
+.lh .lh-profil-karte { background: var(--karte); border-radius: 14px; padding: 0.7em; display: grid; gap: 0.5em; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.lh .lh-profil-kopf { display: flex; gap: 10px; align-items: center; }
+.lh .lh-profil-avatar { width: 2.8em; height: 2.8em; border-radius: 50%; background: var(--akzent-hell); display: grid; place-items: center; flex: none; }
+.lh .lh-profil-info { flex: 1 1 auto; min-width: 0; }
+.lh .lh-profil-name { font-weight: 700; font-size: 1.1em; line-height: 1.2; }
+.lh .lh-profil-details { font-size: 0.85em; color: var(--leise); margin-top: 2px; }
+.lh .lh-profil-bio { font-size: 0.9em; padding: 0.3em 0.5em; background: rgba(0,0,0,.03); border-radius: 8px; }
+.lh .lh-profil-hinweis { font-size: 0.85em; color: var(--leise); }
+.lh .lh-profil-knoepfe { display: grid; grid-template-columns: repeat(auto-fit, minmax(7em, 1fr)); gap: 0.45em; margin-top: 0.4em; }
+.lh .lh-profil-knopf { min-height: 2.67em; border-radius: 10px; border: 2px solid var(--linie); background: var(--flaeche); color: var(--tinte); font-weight: 700; padding: 4px 8px; cursor: pointer; text-align: center; }
+.lh .lh-profil-knopf:hover:not(:disabled), .lh .lh-profil-knopf:focus-visible { outline: 3px solid var(--fokus); outline-offset: 2px; }
+.lh .lh-profil-knopf.haupt { background: var(--akzent); color: var(--akzent-tinte); border-color: var(--akzent); }
+.lh .lh-profil-knopf.rot { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+@media (prefers-color-scheme: dark) {
+  .lh .lh-profil-bio, .lh .lh-shop-artikel, .lh .lh-video-hinweis { background: rgba(255,255,255,.06); }
+  .lh .lh-shop-knopf.rot, .lh .lh-video-knopf.rot, .lh .lh-profil-knopf.rot { background: #450a0a; border-color: #ef4444; color: #fca5a5; }
+}
+
+/* Browser-Leiste und Web-Inhalte */
+.lh .lh-browser-leiste { display: flex; align-items: center; gap: 0.5em; background: var(--flaeche); border: 1px solid var(--linie); border-radius: 8px; padding: 0.35em 0.6em; margin-bottom: 0.5em; font-family: monospace, sans-serif; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lh .lh-browser-schloss { font-size: 1.1em; flex: none; }
+.lh .lh-browser-url { color: var(--akzent); font-weight: 700; overflow: hidden; text-overflow: ellipsis; }
+.lh .lh-web-inhalt { font-size: 0.9em; line-height: 1.4; margin: 0.4em 0; padding: 0.4em 0.6em; background: rgba(0,0,0,.02); border-radius: 8px; border-left: 3px solid var(--linie); }
+
+/* System-Dialoge & Berechtigungen */
+.lh .lh-system-karte { background: var(--flaeche); border: 2px solid var(--linie); border-radius: 14px; padding: 0.6em; display: grid; gap: 0.4em; box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+.lh .lh-system-kopf { display: flex; align-items: center; gap: 0.5em; font-weight: 700; color: var(--akzent); font-size: 0.9em; }
+.lh .lh-system-frage { font-size: 1em; font-weight: 700; margin: 0; line-height: 1.3; }
+.lh .lh-system-desc { font-size: 0.85em; color: var(--leise); margin: 0; }
+
+/* Perspektivenwechsel (Was sehe ich vs was sehen andere) */
+.lh .lh-perspektive-karte { background: var(--flaeche); border: 2px solid var(--linie); border-radius: 14px; padding: 0.6em; display: grid; gap: 0.5em; }
+.lh .lh-perspektive-leiste { display: flex; background: rgba(0,0,0,.05); border-radius: 10px; padding: 3px; gap: 4px; }
+.lh .lh-perspektive-tab { flex: 1; min-height: 2.4em; border: 0; background: transparent; color: var(--tinte); font: inherit; font-size: 0.85em; font-weight: 700; border-radius: 8px; cursor: pointer; padding: 4px 8px; text-align: center; }
+.lh .lh-perspektive-tab.aktiv { background: var(--akzent); color: var(--akzent-tinte); }
+.lh .lh-perspektive-inhalt { padding: 0.5em; border-radius: 8px; font-size: 0.9em; line-height: 1.4; }
+.lh .lh-perspektive-inhalt.eigen { background: var(--akzent-hell); border: 1px solid var(--akzent); }
+.lh .lh-perspektive-inhalt.fremd { background: rgba(0,0,0,.03); border: 1px dashed var(--linie); }
+.lh .lh-perspektive-status { font-size: 0.85em; margin: 0 0 0.3em; }
+
+@media (prefers-color-scheme: dark) {
+  .lh .lh-web-inhalt { background: rgba(255,255,255,.05); }
+  .lh .lh-perspektive-leiste { background: rgba(255,255,255,.08); }
+  .lh .lh-perspektive-inhalt.fremd { background: rgba(255,255,255,.05); }
+}
+
+/* Entscheidung und Rückmeldung (im Handy in em, außen in rem – gleiche Bausteine) */
+.lh .lh-frage { font-size: 1.1em; font-weight: 700; }
+.lh .meinung { color: var(--leise); font-size: 0.9em; }
+.lh .antworten { display: grid; gap: 0.45em; }
+.lh .antworten { border: 0; margin: 0; padding: 0; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.lh .antworten legend { padding: 0; margin-bottom: 0.45em; }
+.lh .antwort { display: flex; gap: 0.55em; align-items: flex-start; text-align: left; width: 100%; min-height: 2.67em; padding: 0.45em 0.6em; border: 2px solid var(--linie); border-radius: 12px; background: var(--flaeche); color: var(--tinte); cursor: pointer; }
+.lh .antwort input { appearance: none; font-size: inherit; flex: none; width: 1em; height: 1em; margin: .22em 0 0; border: 2px solid var(--leise); border-radius: 50%; background: var(--flaeche); cursor: pointer; }
+.lh .antwort input:checked { border: 0.33em solid var(--akzent); }
+@media (forced-colors: active) { .lh .antwort input { appearance: auto; } }
+.lh .antwort:has(input:checked) { border-color: var(--akzent); background: var(--akzent-hell); font-weight: 700; }
+.lh .antwort:has(input:focus-visible) { outline: 3px solid var(--fokus); outline-offset: 2px; }
+.lh .haupt { min-height: 2.67em; padding: 0.45em 1em; border: 0; border-radius: 12px; background: var(--akzent); color: var(--akzent-tinte); font-weight: 700; cursor: pointer; width: 100%; }
+.lh .haupt:disabled { background: var(--linie); color: var(--leise); cursor: default; }
+.lh .zweit { min-height: 2.67em; padding: 0.45em 1em; border: 2px solid var(--akzent); border-radius: 12px; background: var(--flaeche); color: var(--akzent); font-weight: 700; cursor: pointer; width: 100%; }
+.lh .typ-anruf .zweit { background: transparent; color: #fff; border-color: rgba(255,255,255,.6); }
+.lh .zweit:disabled { border-color: var(--linie); color: var(--leise); cursor: default; }
+/* Einstellungen im Hilfe-Dialog: Sprache und Schriftgröße. Die gewählte Sprache trägt zusätzlich einen Haken (nicht nur Farbe). */
+.lh .lh-einst { display: grid; gap: 8px; }
+.lh .lh-einst h3 { margin: 6px 0 0; font-size: 1rem; }
+.lh .lh-einst-gruppe { display: grid; gap: 8px; }
+.lh .lh-einst-reihe { grid-template-columns: 1fr 1fr; }
+.lh .lh-einst .zweit[aria-pressed="true"] { background: var(--akzent-hell); color: var(--tinte); }
+.lh .lh-einst .zweit:focus-visible, .lh dialog .zweit:focus-visible { outline: 3px solid var(--fokus); outline-offset: 2px; }
+.lh .rkopf { display: flex; gap: 10px; align-items: center; font-weight: 700; font-size: 1.1em; line-height: 1.25; }
+.lh .rkopf .symbol { flex: none; width: 1.8em; height: 1.8em; border-radius: 50%; display: grid; place-items: center; color: #fff; }
+.lh .rkopf.gut { color: var(--gut-text); } .lh .rkopf.gut .symbol { background: var(--gut); }
+.lh .rkopf.problem { color: var(--problem-text); } .lh .rkopf.problem .symbol { background: var(--problem); }
+.lh .rkopf.vorsicht { color: var(--vorsicht-text); } .lh .rkopf.vorsicht .symbol { background: var(--vorsicht); }
+.lh .rkopf.info { color: var(--akzent); } .lh .rkopf.info .symbol { background: var(--info); }
+@media (prefers-color-scheme: dark) { .lh .rkopf .symbol { color: #10161c; } }
+.lh .deine { color: var(--leise); }
+.lh .warum { font-weight: 700; }
+.lh .hinweis { border-left: 4px solid var(--linie); padding-left: 8px; }
+
+/* Lernbereich neben/unter dem Handy (folgt der gewählten Schriftgröße) */
+.lh .lernbereich { overflow-wrap: break-word; hyphens: manual; display: grid; gap: 0.8rem; align-content: start; min-width: 0; }
+.lh .lernbereich > * { min-width: 0; }   /* D6: Ein Grid-Element wäre sonst so breit wie sein längstes Wort; so bricht ein zu langes Wort um (break-word), statt seitlich überzustehen */
+.lh .lernbereich .gross { font-size: 1.1rem; font-weight: 700; }
+.lh .gehoert { background: var(--vorsicht-hell); border: 0; border-radius: 16px 16px 16px 4px; padding: 0.8rem 1rem; box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.05)); }
+.lh .gehoert .wer { font-size: 0.9rem; font-weight: 700; color: var(--vorsicht-text); display: flex; gap: 6px; align-items: center; }
+.lh .lernbereich details summary { cursor: pointer; font-weight: 700; color: var(--akzent); min-height: 48px; display: flex; align-items: center; }
+.lh .lernbereich ul { margin: 0; padding-left: 1.2em; display: grid; gap: 0.4rem; }
+
+/* Leiste unten */
+.lh .unten { position: sticky; bottom: 0; background: var(--seite); border-top: 1px solid var(--linie); padding: 8px 12px; }
+.lh .unten > div { max-width: 62rem; margin: 0 auto; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.lh .unten .zurueck { min-height: 48px; padding: 8px 6px; border: 0; background: none; color: var(--akzent); font-weight: 700; text-decoration: underline; cursor: pointer; }
+.lh .unten .zurueck:disabled { color: var(--leise); text-decoration: none; cursor: default; }
+.lh .unten .weiter { min-height: 48px; padding: 8px 22px; border: 0; border-radius: 12px; background: var(--akzent); color: var(--akzent-tinte); font-weight: 700; cursor: pointer; margin-left: auto; }
+.lh .unten .weiter[hidden] { display: none; }
+
+.lh dialog { border: 0; border-radius: 14px; padding: 0; max-width: min(30rem, 92vw); background: var(--flaeche); color: var(--tinte); }
+.lh dialog::backdrop { background: rgba(0,0,0,.45); }
+.lh dialog .innen { padding: 18px; display: grid; gap: 12px; }
+.lh dialog h2 { margin: 0; font-size: 1.15rem; }
+
+/* Bildintegration: Szenen, Rollenvorbilder, Aktionen und neutrale Platzhalter */
+.lh .lh-szene { position: relative; display: inline-flex; align-items: center; justify-content: flex-start; margin-bottom: 0.5rem; }
+.lh .lh-szene-bild { width: 104px; height: 104px; max-width: 100%; object-fit: contain; border-radius: 16px; background: var(--vorsicht-hell); border: 0; padding: 4px; }
+.lh .lh-szene-badge { position: absolute; bottom: -4px; right: -4px; width: 34px; height: 34px; border-radius: 50%; background: var(--flaeche); border: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.14); box-sizing: border-box; }
+.lh .lh-szene-badge .lh-badge-pikto { width: 20px; height: 20px; object-fit: contain; }
+.lh .lh-szene-platzhalter { width: 88px; height: 88px; border-radius: 14px; background: var(--anzeige, var(--akzent-hell)); border: 1px solid var(--linie); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 6px; box-sizing: border-box; }
+.lh .lh-szene-platzhalter .lh-platzhalter-pikto { width: 36px; height: 36px; object-fit: contain; }
+.lh .lh-szene-platzhalter .lh-platzhalter-text { font-size: 0.72rem; font-weight: 700; color: var(--leise); text-align: center; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.04em; }
+@media (max-width: 24em) {
+  .lh .lh-szene-bild { width: 88px; height: 88px; }
+  .lh .lh-szene-badge { width: 28px; height: 28px; bottom: -3px; right: -3px; }
+  .lh .lh-szene-badge .lh-badge-pikto { width: 16px; height: 16px; }
+  .lh .lh-szene-platzhalter { width: 88px; height: 88px; }
+  .lh .lh-szene-platzhalter .lh-platzhalter-pikto { width: 28px; height: 28px; }
+  .lh .lh-szene-platzhalter .lh-platzhalter-text { font-size: 0.65rem; }
+}
+
+.lh .lh-vorbild-kopf { display: flex; align-items: center; gap: 12px; margin-bottom: 0.35rem; }
+.lh .lh-vorbild-figur { width: 54px; height: 54px; border-radius: 50%; object-fit: contain; background: var(--akzent-hell); border: 2px solid var(--akzent); flex: none; }
+.lh .lh-vorbild-kopf .etikett { margin: 0; font-size: 1.1rem; }
+
+.lh .lh-transfer-kopf { display: flex; align-items: center; gap: 12px; margin-bottom: 0.35rem; }
+.lh .lh-transfer-figur { width: 54px; height: 54px; border-radius: 50%; object-fit: contain; background: var(--gut-hell); border: 2px solid var(--gut); flex: none; }
+.lh .lh-transfer-kopf .etikett { margin: 0; font-size: 1.1rem; }
+
+.lh .lh-dialog-figur { display: flex; justify-content: center; margin-bottom: 8px; }
+.lh .lh-dialog-figur img { border-radius: 14px; background: var(--akzent-hell); border: 1px solid var(--linie); padding: 4px; object-fit: contain; }
+
+.lh .chat-knopf, .lh .lh-profil-knopf { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.lh .chat-knopf .pikto, .lh .lh-profil-knopf .pikto { width: 1.25em; height: 1.25em; flex: none; }
+.lh .anruf-knopf { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.lh .anruf-knopf .pikto { width: 1.15em; height: 1.15em; flex: none; }
+.lh .lh-browser-schloss { display: inline-flex; align-items: center; justify-content: center; width: 1.25em; height: 1.25em; flex: none; }
+.lh .lh-browser-schloss .pikto { width: 100%; height: 100%; }
+
+@media (prefers-reduced-motion: no-preference) { .lh .anruf-knopf.ist-getippt { animation: tipp 1.6s ease-in-out 2; } @keyframes tipp { 50% { box-shadow: 0 0 0 8px #ffd166; } } }
+
+/* E-Mail-Postfach (EK3 Pilot) */
+.lh .lh-mailbox { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.lh .lh-mail-fake-banner { display: flex; align-items: center; gap: 6px; padding: 6px 10px; background: var(--vorsicht-hell); color: var(--vorsicht-text); border: 1px solid var(--vorsicht); border-radius: 8px; font-size: 0.8rem; font-weight: 700; line-height: 1.3; }
+.lh .lh-mail-fake-banner .pikto { width: 1.15em; height: 1.15em; flex: none; }
+.lh .lh-mail-ordner-tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--linie); padding-bottom: 4px; margin-bottom: 2px; }
+.lh .lh-mail-ordner-tab { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 6px; min-height: 44px; border: 1px solid var(--linie); border-radius: 8px; background: var(--flaeche); color: var(--tinte); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
+.lh .lh-mail-ordner-tab.aktiv { background: var(--akzent); color: var(--akzent-tinte); border-color: var(--akzent); font-weight: 700; }
+.lh .lh-mail-ordner-tab .pikto { width: 1.1em; height: 1.1em; flex: none; }
+.lh .lh-mail-liste { display: flex; flex-direction: column; gap: 6px; }
+.lh .lh-mail-zeile { display: flex; flex-direction: column; gap: 4px; width: 100%; padding: 10px; text-align: left; background: var(--karte); color: var(--tinte); border: 1px solid var(--linie); border-radius: 10px; cursor: pointer; transition: background 0.15s ease; min-height: 48px; }
+.lh .lh-mail-zeile:hover { background: var(--akzent-hell); }
+.lh .lh-mail-zeile.ungelesen { border-left: 4px solid var(--akzent); font-weight: 700; }
+.lh .lh-mail-zeile-kopf { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.82rem; color: var(--leise); }
+.lh .lh-mail-von { font-weight: 700; color: var(--tinte); }
+.lh .lh-mail-datum { font-size: 0.78rem; }
+.lh .lh-mail-betreff { font-size: 0.92rem; font-weight: 700; color: var(--tinte); }
+.lh .lh-mail-vorschau { font-size: 0.82rem; color: var(--leise); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lh .lh-mail-leer { padding: 16px; text-align: center; color: var(--leise); font-style: italic; }
+.lh .lh-mail-detail { display: flex; flex-direction: column; gap: 10px; background: var(--karte); border: 1px solid var(--linie); border-radius: 10px; padding: 12px; }
+.lh .lh-mail-zurueck { display: inline-flex; align-items: center; padding: 6px 12px; border: 1px solid var(--linie); border-radius: 8px; background: var(--flaeche); color: var(--tinte); font-size: 0.85rem; cursor: pointer; min-height: 44px; }
+.lh .lh-mail-eintrag { width: 100%; }
+.lh .lh-mail-zurueck:hover { background: var(--akzent-hell); border-color: var(--akzent); }
+.lh .lh-mail-detail-kopf { border-bottom: 1px solid var(--linie); padding-bottom: 8px; display: flex; flex-direction: column; gap: 3px; font-size: 0.85rem; }
+.lh .lh-mail-detail-kopf strong { color: var(--tinte); }
+.lh .lh-mail-adresse { color: var(--leise); font-size: 0.8rem; }
+.lh .lh-mail-datum-detail { color: var(--leise); font-size: 0.78rem; }
+.lh .lh-mail-detail-betreff { margin: 6px 0 0; font-size: 1.05rem; font-weight: 700; color: var(--tinte); }
+.lh .lh-mail-detail-body { font-size: 0.92rem; line-height: 1.5; color: var(--tinte); white-space: pre-line; word-break: break-word; }
+.lh .lh-mail-detail-actions { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.lh .lh-mail-composer { display: flex; flex-direction: column; gap: 10px; background: var(--karte); border: 1px solid var(--linie); border-radius: 10px; padding: 12px; }
+.lh .lh-mail-composer-kopf { border-bottom: 1px solid var(--linie); padding-bottom: 8px; font-size: 0.85rem; display: flex; flex-direction: column; gap: 3px; }
+.lh .lh-mail-schreib-tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--linie); padding-bottom: 4px; }
+.lh .lh-mail-schreib-tab { flex: 1; padding: 8px 4px; border: 1px solid var(--linie); border-radius: 8px; background: var(--flaeche); color: var(--tinte); font-size: 0.78rem; font-weight: 600; cursor: pointer; text-align: center; min-height: 44px; transition: background 0.15s ease, border-color 0.15s ease; }
+.lh .lh-mail-schreib-tab.aktiv { background: var(--akzent); color: var(--akzent-tinte); border-color: var(--akzent); font-weight: 700; }
+.lh .lh-mail-tab-inhalt { display: flex; flex-direction: column; gap: 10px; }
+.lh .lh-mail-tab-anleitung { font-weight: 700; font-size: 0.9rem; color: var(--tinte); }
+.lh .lh-mail-baustein-knopf { width: 100%; text-align: left; padding: 12px; border: 2px solid var(--linie); border-radius: 10px; background: var(--flaeche); color: var(--tinte); font-size: 0.88rem; line-height: 1.4; cursor: pointer; min-height: 48px; transition: border-color 0.15s ease, background 0.15s ease; }
+.lh .lh-mail-baustein-knopf:hover, .lh .lh-mail-baustein-knopf:focus-visible { border-color: var(--akzent); background: var(--akzent-hell); }
+.lh .lh-starter-gruppe { display: flex; flex-direction: column; gap: 6px; }
+.lh .lh-starter-gruppe label { font-weight: 700; font-size: 0.82rem; color: var(--tinte); }
+.lh .lh-starter-opt { text-align: left; padding: 8px 12px; border: 1px solid var(--linie); border-radius: 8px; background: var(--flaeche); color: var(--tinte); font-size: 0.85rem; cursor: pointer; min-height: 44px; transition: border-color 0.15s ease; }
+.lh .lh-starter-opt.aktiv { border-color: var(--akzent); border-width: 2px; background: var(--akzent-hell); font-weight: 700; }
+.lh .lh-starter-vorschau { padding: 10px; background: var(--anzeige); border-radius: 8px; border-left: 4px solid var(--akzent); font-size: 0.88rem; line-height: 1.45; }
+.lh .lh-starter-vorschau-titel { font-weight: 700; font-size: 0.78rem; color: var(--leise); text-transform: uppercase; margin-bottom: 4px; }
+.lh .lh-mail-textarea { width: 100%; min-height: 110px; padding: 10px; border: 2px solid var(--linie); border-radius: 8px; background: var(--flaeche); color: var(--tinte); font-family: inherit; font-size: 0.92rem; line-height: 1.45; resize: vertical; box-sizing: border-box; }
+.lh .lh-mail-textarea:focus { outline: 3px solid var(--fokus); outline-offset: 1px; border-color: var(--fokus); }
+.lh .lh-freitext-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.lh .lh-mail-reflexion { display: flex; flex-direction: column; gap: 12px; background: var(--karte); border: 1px solid var(--linie); border-radius: 10px; padding: 14px; }
+.lh .lh-mail-reflexion-titel { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--tinte); }
+.lh .lh-mail-reflexion-deine { font-size: 0.88rem; padding: 10px; background: var(--anzeige); border-radius: 8px; border-left: 4px solid var(--akzent); line-height: 1.45; }
+.lh .lh-mail-check-kasten { display: flex; flex-direction: column; gap: 8px; background: var(--akzent-hell); border: 1px solid var(--linie); border-radius: 8px; padding: 10px; }
+.lh .lh-check-punkt { font-size: 0.85rem; line-height: 1.4; color: var(--tinte); }
+.lh .lh-mail-vorbild-kasten { background: var(--gut-hell); border: 1px solid var(--gut); border-radius: 8px; padding: 10px; }
+.lh .lh-mail-vorbild-titel { font-weight: 700; font-size: 0.82rem; color: var(--gut-text); margin-bottom: 4px; }
+.lh .lh-mail-vorbild-text { font-size: 0.88rem; line-height: 1.45; color: var(--tinte); }
+.lh .lh-mail-reflexion-actions { display: flex; flex-direction: column; gap: 8px; }
+
+/* Modulare E-Mail-Postfach-Erweiterungen (7 Szenarien, Phishing, Gefahrenanalyse) */
+.lh .lh-mail-szenario-leiste { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 8px; margin-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.lh .lh-mail-sz-pill { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; border: 1px solid var(--linie); background: var(--flaeche); color: var(--tinte); font-size: 0.8rem; font-weight: 600; cursor: pointer; min-height: 44px; }
+.lh .lh-mail-sz-pill:hover, .lh .lh-mail-sz-pill:focus-visible { border-color: var(--akzent); background: var(--akzent-hell); }
+.lh .lh-mail-sz-pill.aktiv { background: var(--akzent); color: var(--akzent-tinte); border-color: var(--akzent); font-weight: 700; }
+
+.lh .lh-mail-liste-toolbar { display: flex; justify-content: flex-end; margin-bottom: 6px; }
+.lh .lh-mail-neu-btn { min-height: 44px; padding: 6px 14px; font-size: 0.85rem; font-weight: 700; }
+
+.lh .lh-mail-detail-nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.lh .lh-mail-vorlesen-btn { min-height: 44px; padding: 4px 10px; font-size: 0.82rem; }
+
+.lh .lh-mail-absender-zeile { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+.lh .lh-mail-absender-btn { padding: 4px 10px; border-radius: 6px; border: 1px solid var(--akzent); background: var(--akzent-hell); color: var(--akzent); font-size: 0.78rem; font-weight: 700; cursor: pointer; min-height: 44px; }
+.lh .lh-mail-absender-btn.aktiv { background: var(--akzent); color: var(--akzent-tinte); }
+
+.lh .lh-mail-absender-kasten { padding: 8px 10px; border-radius: 8px; font-size: 0.82rem; margin: 4px 0; border: 1px solid var(--linie); }
+.lh .lh-mail-absender-kasten.echt { background: var(--gut-hell); border-color: var(--gut); color: var(--gut-text); }
+.lh .lh-mail-absender-kasten.gefahr { background: var(--vorsicht-hell); border-color: var(--problem); color: var(--problem-text); }
+.lh .lh-mail-absender-titel { font-weight: 700; margin-bottom: 2px; }
+.lh .lh-mail-absender-info { line-height: 1.4; }
+
+.lh .lh-mail-link-kasten, .lh .lh-mail-anhang-kasten { margin-top: 10px; padding: 10px; border: 1px solid var(--linie); border-radius: 8px; background: var(--anzeige); }
+.lh .lh-mail-link-vorsicht, .lh .lh-mail-anhang-vorsicht { font-size: 0.8rem; font-weight: 700; color: var(--leise); margin-bottom: 6px; }
+.lh .lh-mail-link-knopf, .lh .lh-mail-anhang-knopf { width: 100%; text-align: left; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--linie); background: var(--flaeche); color: var(--tinte); font-size: 0.85rem; font-weight: 600; cursor: pointer; min-height: 44px; word-break: break-all; }
+.lh .lh-mail-link-knopf:hover, .lh .lh-mail-anhang-knopf:hover { border-color: var(--akzent); }
+.lh .lh-mail-link-knopf.aktiv, .lh .lh-mail-anhang-knopf.aktiv { border-color: var(--akzent); background: var(--akzent-hell); }
+.lh .lh-mail-link-details, .lh .lh-mail-anhang-details { margin-top: 8px; padding: 8px 10px; border-radius: 6px; font-size: 0.82rem; display: flex; flex-direction: column; gap: 6px; }
+.lh .lh-mail-link-details.gefahr, .lh .lh-mail-anhang-details.gefahr { background: var(--vorsicht-hell); border-left: 4px solid var(--problem); }
+.lh .lh-mail-link-warnung, .lh .lh-mail-anhang-warnung { color: var(--problem-text); font-weight: 600; line-height: 1.4; }
+
+
+/* Eingebettete Betriebsart (Stufe 1 der Integration, 13.11.2026): Leiste, Navigation und Einstellungen hat die Seite
+   drumherum. [hidden] muss gegen display: grid der Lernleiste gewinnen. Der Lernbereich klebt nicht am Fensterrand,
+   weil die Seite oben ihre eigene Leiste hat. Die eigenständige Nutzung ändert sich nicht. */
+.lh.eingebettet [data-lh="leiste"][hidden], .lh.eingebettet [data-lh="unten"][hidden] { display: none; }
+.lh.eingebettet.breit .lernbereich { position: static; }
+
+/* Farben der Seite (Option farben: "seite"): Eingebettet in die Lern-App gelten deren Farben, auch ihr Dunkelmodus, ihr
+   erhöhter Kontrast und ihr Fokus-Rahmen – ein Erscheinungsbild auf der ganzen Seite (§10). Übernommen werden nur Farben,
+   die gleich sind oder mehr Kontrast haben; Linien und das Gerät behalten die Werte des Lern-Handys (WCAG 1.4.11). */
+.lh.eingebettet.farben-seite {
+  --seite: transparent; --flaeche: var(--surface); --karte: var(--surface); --anzeige: var(--surface-soft);
+  --tinte: var(--ink); --leise: var(--ink-soft);
+  --akzent: var(--accent); --akzent-hell: var(--accent-soft); --akzent-tinte: var(--on-accent);
+  --info: var(--accent); --info-hell: var(--accent-soft); --fokus: var(--focus);
+  --gut: var(--good); --gut-text: var(--good-text); --gut-hell: var(--good-bg);
+  --problem: var(--bad); --problem-hell: var(--bad-bg); --vorsicht: var(--warn); --vorsicht-hell: var(--warn-bg);
+}
+
+/* Manueller Dunkelmodus (data-theme="dark") synchron mit dem gemeinsamen Designsystem */
+html[data-theme="dark"] .lh {
+  --seite: var(--at-bg, #111822);
+  --flaeche: var(--at-surface, #1a2431);
+  --karte: var(--at-surface-soft, #222e3d);
+  --anzeige: #141c27;
+  --tinte: var(--at-ink, #edf2f7);
+  --leise: var(--at-ink-soft, #b4c2d0);
+  --linie: var(--at-line, #334357);
+  --akzent: var(--at-accent, #75b7ee);
+  --akzent-tinte: var(--at-accent-ink, #0b1520);
+  --akzent-hell: var(--at-accent-soft, #1f344a);
+  --info-hell: var(--at-accent-soft, #1f344a);
+  --gut: var(--at-ok, #4ade80);
+  --gut-text: var(--at-ok, #86efac);
+  --gut-hell: var(--at-ok-soft, #133221);
+  --problem: #f87171;
+  --problem-text: #fca5a5;
+  --problem-hell: #3b171b;
+  --vorsicht: var(--at-warm, #f3a852);
+  --vorsicht-hell: var(--at-warm-soft, #342615);
+  --fokus: var(--at-focus, #fbbf24);
+}
+html[data-theme="dark"] .lh .chat-hinweis,
+html[data-theme="dark"] .lh .lh-profil-bio,
+html[data-theme="dark"] .lh .lh-shop-artikel,
+html[data-theme="dark"] .lh .lh-video-hinweis,
+html[data-theme="dark"] .lh .lh-web-inhalt,
+html[data-theme="dark"] .lh .lh-perspektive-inhalt.fremd { background: rgba(255,255,255,.06); }
+html[data-theme="dark"] .lh .lh-perspektive-leiste { background: rgba(255,255,255,.08); }
+html[data-theme="dark"] .lh .chat-knopf.rot,
+html[data-theme="dark"] .lh .lh-shop-knopf.rot,
+html[data-theme="dark"] .lh .lh-video-knopf.rot,
+html[data-theme="dark"] .lh .lh-profil-knopf.rot { background: #450a0a; border-color: #ef4444; color: #fca5a5; }
+
+/* A7 Dreiteiliger Erfolgsmoment + „Was wäre, wenn?“ direkt im Handy */
+.lh .lh-erfolg-reaktion { display: flex; align-items: flex-start; gap: 8px; }
+.lh .lh-erfolg-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; object-position: top center; flex: none; background: var(--akzent-hell); }
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion="ruhig"]) .lh .display.rand-gut .lh-erfolg-folge {
+    animation: lh-ruhepuls 0.45s ease-out 1;
+  }
+  @keyframes lh-ruhepuls {
+    0% { transform: scale(0.97); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+}
+.lh .sli-two-tap-pending {
+  outline: 3px solid var(--fokus) !important;
+  outline-offset: 2px;
+  background: var(--vorsicht-hell) !important;
+  color: var(--tinte) !important;
+}
+
+@media (max-width: 640px) {
+  .lh .lernleiste {
+    margin: 6px 8px 0;
+    padding: 6px 10px;
+    gap: 4px 8px;
+  }
+  .lh .buehne {
+    gap: 8px;
+    padding: 6px 8px 8px;
+  }
+  .lh .lernbereich {
+    display: flow-root;
+    padding: 8px 10px;
+    background: var(--flaeche);
+    border-radius: var(--at-radius, 14px);
+    box-shadow: var(--at-shadow-sm, 0 2px 10px rgba(23,34,47,.06));
+  }
+  .lh .lernbereich > * + * {
+    margin-top: 0.45rem;
+  }
+  .lh .lh-szene {
+    float: left;
+    margin: 0 10px 6px 0;
+  }
+  .lh .lh-szene-bild {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+  }
+  .lh .lh-szene-badge {
+    width: 22px;
+    height: 22px;
+    bottom: -2px;
+    right: -2px;
+  }
+  .lh .lh-szene-badge .lh-badge-pikto {
+    width: 13px;
+    height: 13px;
+  }
+  .lh .lernbereich details,
+  .lh .lernbereich .gehoert,
+  .lh .lernbereich .lh-vorbild {
+    clear: both;
+  }
+  .lh .lernbereich details summary {
+    min-height: 44px;
+  }
+  .lh .handy.lese {
+    min-height: 0;
+  }
+}

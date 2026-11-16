@@ -78,10 +78,14 @@ const SAMPLE_ROUNDS = [
 
 function loadLanguageLevel() {
   try {
-    const saved = pGet(LANGUAGE_KEY);
+    let saved = pGet(LANGUAGE_KEY);
+    if (!saved || (saved !== "leicht" && saved !== "einfach" && saved !== "standard")) {
+      saved = localStorage.getItem("alex_tilda_stufe");
+    }
     if (saved === "leicht" || saved === "einfach" || saved === "standard") {
       languageLevel = saved;
       languageChosen = true;
+      pSet(LANGUAGE_KEY, saved);
       sprachstufeAnwenden();
       return true;
     }
@@ -94,6 +98,7 @@ function setLanguageLevel(level) {
   languageLevel = level;
   languageChosen = true;
   pSet(LANGUAGE_KEY, level);
+  try { localStorage.setItem("alex_tilda_stufe", level); } catch (e) {}
   sprachstufeAnwenden();
 }
 
@@ -316,8 +321,14 @@ const FONT_SIZE_KEY = "font-size-step";
 const MOTION_KEY    = "motion";
 let fontSizeStep = 0;
 
+let lernhandyAktiv = null, lernhandyOrt = null;   /* Lern-Handy als Übungsteil einer Lektion (renderLessonHandy): Baustein und Ort */
+let lernhandyHubAktiv = null;                     /* Aktiver Lernweg im integrierten Übungs-Handy / E-Mail-Übungspostfach */
+let sessionHandyDone = {};                     /* Abgeschlossene Lern-Handy-Wege dieser Sitzung, nur Arbeitsspeicher (§14) */
+let sessionPostfachDone = {};                  /* Abgeschlossene E-Mail-Postfach-Übungen dieser Sitzung, nur Arbeitsspeicher (§14) */
 function applyFontSize() {
   document.documentElement.style.fontSize = FONT_SIZES[fontSizeStep] + "px";
+  if (lernhandyAktiv && lernhandyOrt && lernhandyOrt.wurzel.isConnected) lernhandyAktiv.neuAufbauen();   /* Handy-Größe folgt der Schrift */
+  if (lernhandyHubAktiv && lernhandyHubAktiv.wurzel && lernhandyHubAktiv.wurzel.isConnected) lernhandyHubAktiv.instanz.neuAufbauen();
   if (typeof lernNavHoeheMessen === "function") lernNavHoeheMessen();
   if (typeof tabbarHoeheMessen === "function") tabbarHoeheMessen();
 }
@@ -845,9 +856,12 @@ function toggleProgressSaving() {
   if (isProgressEnabled()) {
     setProgressEnabled(false);
     sessionDoneTopics = new Set();
-  sessionScenarioStufe = {};
-  sessionRegeln = {};
-  schwereSitzung = {}; /* auch die schwierigen Aufgaben dieser Sitzung (Lernweg) */
+    sessionScenarioStufe = {};
+    sessionHandyDone = {};
+    sessionPostfachDone = {};
+    sessionRegeln = {};
+    schwereSitzung = {}; /* auch die schwierigen Aufgaben dieser Sitzung (Lernweg) */
+    legacyHandySpeicherBereinigen({ gesamtLoeschen: true, verlaufLoeschen: false });
     /* Befund T05 (21.09.2026): Hier stand „Es wird nichts mehr gespeichert."
        Das stimmte nicht. setProgressEnabled(false) entfernt nur den Schlüssel
        `lernstand`. Der Wiedereinstieg (`letzte-lektion`), die Zahl der
@@ -860,9 +874,9 @@ function toggleProgressSaving() {
     announce("Der Lernstand ist gelöscht. Die App merkt sich nicht mehr, welche Themen du geschafft hast. Dein Wiedereinstieg und deine Einstellungen bleiben. Die kannst du getrennt löschen.");
   } else {
     setProgressEnabled(true);
-    /* Erfolge aus dieser Sitzung mitnehmen – sonst wäre das gerade
-       geschaffte Thema verloren (Erfolgserlebnis sichern). */
-    sessionDoneTopics.forEach((id) => markTopicDone(id));
+    /* Erfolge aus dieser Sitzung mitnehmen – sonst wären das gerade
+       geschaffte Thema, das Übungs-Handy oder gelernte Regeln verloren. */
+    sitzungsFortschrittInLernstandUebernehmen();
     announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
   }
   /* Auf der Seite bleiben, auf der die Person gerade ist */
@@ -870,8 +884,8 @@ function toggleProgressSaving() {
   else renderMenu();
 }
 
-/* Löscht genau die drei Bedien-Daten, die NICHT am Lernstand hängen:
-   Wiedereinstieg, Ketten-Durchgänge und die Kurz/Mehr-Wahl je Thema.
+/* Löscht genau die Bedien-Daten, die NICHT am Lernstand hängen:
+   Wiedereinstieg (Lern-App und Handy-Schritte), Ketten-Durchgänge und die Kurz/Mehr-Wahl je Thema.
    Getrennter Weg, damit die Zusage beim Lernstand stimmt und die Person
    trotzdem alles loswerden kann (T05, Entscheidung 21.09.2026).
    Das Profil selbst, die Sprache und die Schriftgröße bleiben – dafür gibt
@@ -880,6 +894,7 @@ function clearResumeData() {
   clearLastLesson();
   clearTopicAmounts();
   pRemove(KETTEN_KEY);
+  legacyHandySpeicherBereinigen({ gesamtLoeschen: false, verlaufLoeschen: true });
   announce("Der Wiedereinstieg ist gelöscht. Du fängst bei jedem Thema wieder vorne an. Deine Sprache und deine Schriftgröße bleiben.");
   /* Der Knopf steht auf „Mein Lernweg", direkt neben der Lernstand-Zusage.
      Auf der Seite bleiben, auf der die Person ist (Vorhersehbarkeit, §9). */
@@ -946,10 +961,138 @@ function loeschenRueckfrage(art, knopf) {
 function enableProgressInline(button) {
   const bereitsAktiv = isProgressEnabled();
   setProgressEnabled(true);
-  if (!bereitsAktiv) sessionDoneTopics.forEach((id) => markTopicDone(id));
+  if (!bereitsAktiv) sitzungsFortschrittInLernstandUebernehmen();
   announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
   const box = button.closest(".progress-consent");
   if (box) box.innerHTML = `<p class="progress-consent-title">✓ Ich merke mir deinen Lernstand. Nur auf diesem Gerät. Ohne Namen.</p><p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>`;
+}
+
+/* Gemeinsame Fortschrittsverwaltung für Lern-App und Übungs-Handy (§14 / §14a).
+   Speichert abgeschlossene Übungen im aktiven Profil unter `lernstand.handyWege`
+   (nur bei ausdrücklicher Einwilligung), sonst nur im Arbeitsspeicher. */
+function lernstandWegSpeichern(feld, wegId, daten) {
+  if (!wegId || !isProgressEnabled()) return;
+  const progress = loadProgress() || { enabled: true, done: {} };
+  progress[feld] = progress[feld] || {};
+  const src = daten || {};
+  progress[feld][wegId] = {
+    ts: src.ts || Date.now(),
+    abgeschlossen: true,
+    themaId: src.themaId || null
+  };
+  saveProgress(progress);
+}
+
+function handyWegSpeichernInLernstand(wegId, daten) {
+  lernstandWegSpeichern("handyWege", wegId, daten);
+}
+
+function postfachWegSpeichernInLernstand(szId, daten) {
+  lernstandWegSpeichern("postfachWege", szId, daten);
+}
+
+function lernstandWegMerken(feld, sessionMap, wegId, themaId, regelId) {
+  if (!wegId) return;
+  const eintrag = {
+    ts: Date.now(),
+    abgeschlossen: true,
+    themaId: themaId || null,
+    regelId: regelId || null
+  };
+  sessionMap[wegId] = eintrag;
+  if (isProgressEnabled()) lernstandWegSpeichern(feld, wegId, eintrag);
+  if (regelId && themaId && typeof regelAnwendenId === "function") {
+    regelAnwendenId(regelId, themaId);
+  }
+}
+
+function handyWegMerken(wegId, themaId, regelId) {
+  lernstandWegMerken("handyWege", sessionHandyDone, wegId, themaId, regelId);
+}
+
+function postfachWegMerken(szId, themaId, regelId) {
+  lernstandWegMerken("postfachWege", sessionPostfachDone, szId, themaId, regelId);
+}
+
+function sitzungsFortschrittInLernstandUebernehmen() {
+  sessionDoneTopics.forEach((id) => markTopicDone(id));
+  [
+    ["handyWege", sessionHandyDone],
+    ["postfachWege", sessionPostfachDone]
+  ].forEach(([feld, sessionMap]) => {
+    Object.keys(sessionMap).forEach((wegId) => {
+      lernstandWegSpeichern(feld, wegId, sessionMap[wegId]);
+    });
+  });
+  if (typeof sessionRegeln === "object" && sessionRegeln && typeof regelAnwendenId === "function") {
+    Object.keys(sessionRegeln).forEach((rid) => {
+      const themen = sessionRegeln[rid];
+      if (!themen || typeof themen !== "object") return;
+      Object.keys(themen).forEach((tid) => {
+        if (themen[tid]) regelAnwendenId(rid, tid);
+      });
+    });
+  }
+}
+
+function gesammelteWegeAus(feld, sessionMap) {
+  const gesamt = {};
+  if (isProgressEnabled()) {
+    const progress = loadProgress();
+    const wege = progress && progress[feld];
+    if (wege && typeof wege === "object") {
+      Object.keys(wege).forEach((k) => {
+        if (wege[k] && wege[k].abgeschlossen) gesamt[k] = wege[k];
+      });
+    }
+  }
+  Object.keys(sessionMap).forEach((k) => {
+    if (sessionMap[k] && sessionMap[k].abgeschlossen) gesamt[k] = sessionMap[k];
+  });
+  return gesamt;
+}
+
+function gesammelteHandyWege() {
+  return gesammelteWegeAus("handyWege", sessionHandyDone);
+}
+
+function hatHandyWegGeschafft(wegId) {
+  return Boolean(wegId && gesammelteHandyWege()[wegId]);
+}
+
+function gesammeltePostfachWege() {
+  return gesammelteWegeAus("postfachWege", sessionPostfachDone);
+}
+
+function hatPostfachWegGeschafft(szId) {
+  return Boolean(szId && gesammeltePostfachWege()[szId]);
+}
+
+function legacyHandySpeicherBereinigen(opt) {
+  const cfg = opt || {};
+  try {
+    const ls = typeof entwurfStorage !== "undefined" ? entwurfStorage : (typeof localStorage !== "undefined" ? localStorage : null);
+    if (!ls) return;
+    if (cfg.gesamtLoeschen) ls.removeItem("lh_fortschritt_gesamt");
+    const keys = [];
+    for (let i = 0; i < ls.length; i++) {
+      const k = ls.key(i);
+      if (k && k.indexOf("lh_fortschritt_") === 0 && k !== "lh_fortschritt_gesamt") keys.push(k);
+    }
+    keys.forEach((k) => {
+      if (cfg.verlaufLoeschen) {
+        ls.removeItem(k);
+      } else if (cfg.gesamtLoeschen) {
+        try {
+          const d = JSON.parse(ls.getItem(k) || "null");
+          if (d && d.abgeschlossen) {
+            d.abgeschlossen = false;
+            ls.setItem(k, JSON.stringify(d));
+          }
+        } catch (e) { /* unleserlicher Alt-Eintrag bleibt unberührt */ }
+      }
+    });
+  } catch (e) { /* ohne Speicher */ }
 }
 
 /* ============================================================
@@ -1575,21 +1718,21 @@ const ROLE_FIGURES = {
      früheren Bildserie und werden nicht mehr verwendet (Hinweis der
      nutzenden Person, 26.09.2026). Nur Figuren der neuen Serie (24.09.)
      eintragen. Die Dateien bleiben im Ordner, bis sie aufgeräumt werden. */
-  hilfe:      { file: "alex-tilda-hilfe.webp",      alt: "Alex zeigt dir, wo du Hilfe findest." },
-  erfolg:     { file: "alex-tilda-erfolg.webp",     alt: "Alex und Tilda freuen sich mit dir." },
-  nachdenken: { file: "alex-tilda-nachdenken.webp", alt: "Alex und Tilda überlegen. Was weißt du schon?" },
-  winken:         { file: "alex-tilda-winken.webp",         alt: "Alex und Tilda winken dir zu. Hier beginnt alles." },
-  themen:         { file: "alex-tilda-themen.webp",         alt: "Tilda zeigt auf die Themen. Such dir etwas aus." },
-  lernweg:        { file: "alex-tilda-lernweg.webp",        alt: "Tilda hat ein Buch in der Hand. Das ist dein Lern-Weg." },
-  einstellungen:  { file: "alex-tilda-einstellungen.webp",  alt: "Tilda zeigt auf die Schalter. Stell es dir passend ein." },
-  ruhig:          { file: "alex-tilda-ruhig.webp",          alt: "Alex und Tilda sitzen ganz ruhig. Das macht nichts." }
+  hilfe:      { file: "alex-tilda-hilfe.webp",      alt: "Alex zeigt dir, wo du Hilfe findest.", altFile: "alex-tilda-hilfe.webp" },
+  erfolg:     { file: "alex-tilda-erfolg.webp",     alt: "Alex und Tilda freuen sich mit dir.", altFile: "alex-tilda-erfolg.webp" },
+  nachdenken: { file: "alex-tilda-nachdenken.webp", alt: "Alex und Tilda überlegen. Was weißt du schon?", altFile: "alex-tilda-nachdenken.webp" },
+  winken:         { file: "alex-tilda-winken.webp",         alt: "Alex und Tilda winken dir zu. Hier beginnt alles.", altFile: "alex-tilda-winken.webp" },
+  themen:         { file: "alex-tilda-themen.webp",         alt: "Tilda zeigt auf die Themen. Such dir etwas aus.", altFile: "alex-tilda-themen.webp" },
+  lernweg:        { file: "alex-tilda-lernweg.webp",        alt: "Tilda hat ein Buch in der Hand. Das ist dein Lern-Weg.", altFile: "alex-tilda-lernweg.webp" },
+  einstellungen:  { file: "alex-tilda-einstellungen.webp",  alt: "Tilda zeigt auf die Schalter. Stell es dir passend ein.", altFile: "alex-tilda-einstellungen.webp" },
+  ruhig:          { file: "alex-tilda-ruhig.webp",          alt: "Alex und Tilda sitzen ganz ruhig. Das macht nichts.", altFile: "alex-tilda-ruhig.webp" }
 };
 
 function roleFigure(role, extraClass = "") {
   const f = ROLE_FIGURES[role];
   if (!f) return "";
   const cls = "role-figure" + (extraClass ? " " + extraClass : "");
-  return `<img class="${cls}" src="assets/figures/${f.file}" alt="${escapeHtml(f.alt)}" loading="lazy" onerror="this.remove()">`;
+  return `<img class="${cls}" src="assets/figures/${f.file}" alt="${escapeHtml(f.alt)}" loading="lazy" onerror="if(this.src.indexOf('${f.altFile}')===-1){this.src='assets/figures/${f.altFile}';}else{this.remove();}">`;
 }
 
 /* Die alten Lern-Zeichnungen aus assets/lessons/ (Altbestand vom 15.09.2026)
@@ -2117,6 +2260,10 @@ const AKTION_SELEKTOR = ".settings-page-section button:not(.card-read-button), .
    warf damit "readCardSvg is not defined". */
 const READ_CARD_SVG = `${pictoHtml("vorlesen", "rb-ico")} `;
 
+/* Lern-Handy als Übungsteil (Stufe 2): Handlungs-Knöpfe im eingebetteten Handy werden mitgelesen.
+   Eigene Zeile, damit AKTION_SELEKTOR und sein Umfeld unverändert bleiben (Pilot-Anpassung 14 in pilot/app-anpassungen.json). */
+const AKTION_SELEKTOR_MIT_HANDY = AKTION_SELEKTOR + ", .lh.eingebettet [data-lh='display'] button[data-tun], .handy-portal-banner-link";
+
 function cleanSpeechText(text) {
   return String(text || "")
     .replace(/[←→➜]/g, "")
@@ -2160,7 +2307,7 @@ function readCurrentPage(rate) {
   /* Handlungs-Knoepfe auf dem Themen-Einstieg. Ohne sie hoerte eine nicht
      lesende Person den Themen-Text, aber nie "Lernen starten", "Kurz/Mehr"
      oder "Quiz machen" – die Seite blieb fuer sie eine Sackgasse. */
-  const AKTION = AKTION_SELEKTOR + (dialogRoot ? ", .lern-mehr-knopf, .hilfe-angebot, summary" : "");
+  const AKTION = AKTION_SELEKTOR_MIT_HANDY + (dialogRoot ? ", .lern-mehr-knopf, .hilfe-angebot, summary" : "");
   const els = root
     ? Array.from(root.querySelectorAll("h1, h2, h3, p, li, .feld-zeile, .felder-liste legend, " + OPTION + ", " + KARTE + ", " + AKTION)).filter(el => {
         const isOption = el.matches(OPTION);
@@ -2169,7 +2316,7 @@ function readCurrentPage(rate) {
         if (isAktion && el.matches(':disabled, [aria-disabled="true"]')) return false;
         /* Begleithinweise gehören nicht in das Vorlesen für Lernende.
            Das gilt auch, wenn der Begleitbereich gerade geöffnet ist. */
-        if (el.closest(".companion-panel, .begleit-tipp, .reading-status")) return false;
+        if (el.closest(".companion-panel, .begleit-tipp, .reading-status, .lh.eingebettet .sr-only")) return false;
         /* D2/D4: Was im Lernmodus per CSS ausgeblendet ist (Übung unter dem
            Lerntext, Szenenbild), hat keine Fläche und wird nicht vorgelesen. */
         if (typeof el.getClientRects === "function" && el.getClientRects().length === 0) return false;
@@ -2293,7 +2440,7 @@ function readCurrentPage(rate) {
   _readQueue = els.flatMap(el => {
     if (el.pseudoText) return [el];
     const prefix = el.getAttribute("data-read-prefix") ? el.getAttribute("data-read-prefix") + " " : "";
-    const text = el.matches(KARTEN_SELEKTOR) || el.matches(AKTION_SELEKTOR) || el.querySelector(".answer-num, .card-read-button")
+    const text = el.matches(KARTEN_SELEKTOR) || el.matches(AKTION_SELEKTOR_MIT_HANDY) || el.querySelector(".answer-num, .card-read-button")
       ? kartenText(el) : el.textContent;
     return leseQueueEintraege(el, text, prefix);
   });
@@ -2343,7 +2490,7 @@ function speakNextSentence(gen) {
     roherText = entry.leseText;
   } else if (istPseudo) {
     roherText = el.pseudoText;
-  } else if (el.matches && (el.matches(KARTEN_SELEKTOR) || el.matches(AKTION_SELEKTOR))) {
+  } else if (el.matches && (el.matches(KARTEN_SELEKTOR) || el.matches(AKTION_SELEKTOR_MIT_HANDY))) {
     roherText = prefix + kartenText(el);
   } else if (el.querySelector && el.querySelector(".answer-num, .card-read-button")) {
     /* Auch bei Karten: der eingebaute Vorlese-Knopf darf nicht mitgesprochen
@@ -2926,7 +3073,7 @@ const KERN_SATZ_PIKTOGRAMME = {
         "piktogramm": "anruf",
         "saetze": {
           "leicht": "Du rufst die Person selbst an.",
-          "einfach": "Will eine bekannte Stimme am Telefon Geld, legst du auf und rufst die Person unter ihrer bekannten Nummer selbst an.",
+          "einfach": "Wenn eine bekannte Stimme am Telefon Geld fordert, lege auf. Rufe die Person anschließend unter ihrer dir bekannten Telefonnummer selbst an.",
           "standard": "KI macht Fehler und kann falsche Dinge behaupten. Außerdem lassen sich mit ihr Bilder fälschen und Stimmen täuschend echt nachahmen. Verlangt eine vertraut klingende Stimme am Telefon Geld, leg auf und ruf die Person unter der Nummer an, die du schon kennst. Glaub nicht alles, was du siehst oder hörst. Prüf es im Zweifel an einer zweiten Stelle oder sprich mit jemandem darüber."
         }
       }
@@ -4741,7 +4888,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
       {
         "piktogramm": "message",
         "saetze": {
-          "leicht": "Wenn du Fakes weiterleitest, verbreiten sie sich.",
+          "leicht": "Leite gefälschte Nachrichten nicht weiter. Sonst glauben immer mehr Menschen die Lüge.",
           "einfach": "Wenn du Fakes weiterleitest, verbreiten sie sich, und noch mehr Menschen glauben die Lüge.",
           "standard": "Jede Weiterleitung hilft einer Falschmeldung, sich zu verbreiten – und mehr Menschen glauben sie. Teile deshalb nur, was du geprüft hast. Im Zweifel gilt: lieber nicht weiterleiten."
         }
@@ -4874,7 +5021,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
         "piktogramm": "anruf",
         "saetze": {
           "leicht": "Ein Anruf macht dir große Angst.",
-          "einfach": "Bei einem Schockanruf macht dir jemand große Angst, zum Beispiel mit den Worten: „Ihr Kind hatte einen Unfall, wir brauchen Geld.“",
+          "einfach": "Bei einem Schockanruf macht dir jemand große Angst. Die Person sagt zum Beispiel: „Ihr Kind hatte einen Unfall, wir brauchen Geld.“",
           "standard": "Bei Schockanrufen erzeugen Betrüger gezielt Angst – etwa mit der Behauptung, ein Angehöriger hatte einen Unfall und brauche sofort Geld. Mit KI kann die Stimme sogar vertraut klingen, und manche geben sich als Polizei aus. Der Notfall ist erfunden: Leg auf und ruf die echte Person oder Stelle selbst an, unter der Nummer, die du kennst. Sprich danach mit jemandem darüber – solche Anrufe wirken nach."
         }
       }
@@ -4927,7 +5074,7 @@ const ERGAENZTE_SATZ_PIKTOGRAMME = {
       {
         "piktogramm": "money",
         "saetze": {
-          "leicht": "Aber ganz unten steht in kleiner Schrift: Danach kostet es jeden Monat Geld.",
+          "leicht": "Ganz unten steht kleingedruckt: Danach kostet es jeden Monat Geld.",
           "einfach": "Ein Angebot lockt mit „Kostenlos testen!“, doch im Kleingedruckten steht, dass es danach jeden Monat Geld kostet.",
           "standard": "Bei Abo-Fallen lockt ein „kostenloser Test“, doch im Kleingedruckten verbirgt sich eine monatliche Zahlung. Lies vor jeder Bestellung genau nach: Gibt es einen monatlichen Preis, wie lange läuft der Vertrag? Im Zweifel frag jemanden, bevor du bestellst."
         }
@@ -5440,7 +5587,10 @@ function lernmodusBeenden() {
   stopReading();
   pauseMerken();
   aufUebungsSeite = false;
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
   if (lernBeendenZiel === "renderMyPath") { lernBeendenZiel = null; return renderMyPath(); }
+  if (lernBeendenZiel === "renderHandyHub") { lernBeendenZiel = null; return renderHandyHub(); }
+  if (lernBeendenZiel === "renderMailPostfach") { lernBeendenZiel = null; return renderMailPostfach(); }
   renderIntro();
 }
 
@@ -5876,7 +6026,7 @@ function renderLegalFooter() {
   const footer = document.createElement("div");
   footer.className = "small-footer-notice";
   footer.innerHTML = `
-    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta 3" aria-label="Erklärung: Beta 3">Beta 3</button>:</strong> Diese Lern-Plattform ist noch neu. Wir testen sie gerade. Manches ändert sich noch.<br />
+    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta 3" aria-label="Erklärung: Beta 3">Beta 3 – Testversion</button>.</strong> Diese Bildungsplattform befindet sich in der Entwicklung und Erprobung. Die abschließende institutionelle und datenschutzrechtliche Freigabe steht noch aus.<br />
     <button type="button" class="link-action test-meinung" onclick="zurMeinung()">Sag uns deine Meinung</button></p>
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
     <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
@@ -6159,12 +6309,15 @@ function avatarLabel(av) {
 function switchProfile(id) {
   if (!profiles.some(p => p.id === id)) return;
   pauseBewertungLoeschen();
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
   activeProfileId = id;
   saveProfiles();
   loadActiveProfileSettings();
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
+  sessionHandyDone = {};
+  sessionPostfachDone = {};
   sessionRegeln = {};
   schwereSitzung = {};
   /* Person gewechselt: Rück-Anker und Mengen-Wahl DIESER Person laden, nicht
@@ -6589,8 +6742,11 @@ function finishSign(editId) {
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
+  sessionHandyDone = {};
+  sessionPostfachDone = {};
   sessionRegeln = {};
   schwereSitzung = {};
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
   clearLastLesson();
   clearTopicAmounts();
   onboarding = true;
@@ -6678,14 +6834,18 @@ function resetProfile(id) {
   activeProfileId = prevActive;
   if (wasActive) {
     pauseBewertungLoeschen();
+    if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
     loadActiveProfileSettings();
     finishedTopicThisSession = false;
-  sessionDoneTopics = new Set();
-  sessionScenarioStufe = {};
-  sessionRegeln = {};
-  schwereSitzung = {};
-  clearLastLesson();
-  clearTopicAmounts();
+    sessionDoneTopics = new Set();
+    sessionScenarioStufe = {};
+    sessionHandyDone = {};
+    sessionPostfachDone = {};
+    sessionRegeln = {};
+    schwereSitzung = {};
+    legacyHandySpeicherBereinigen({ gesamtLoeschen: true, verlaufLoeschen: true });
+    clearLastLesson();
+    clearTopicAmounts();
     announce("Du fängst neu an.");
     renderStart();
   } else {
@@ -6730,9 +6890,12 @@ function deleteProfile(id) {
   if (activeProfileId === id) activeProfileId = profiles[0] ? profiles[0].id : null;
   saveProfiles();
   if (prevActive === id) {
+    if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
     finishedTopicThisSession = false;
     sessionDoneTopics = new Set();
     sessionScenarioStufe = {};
+    sessionHandyDone = {};
+    sessionPostfachDone = {};
     sessionRegeln = {};
     schwereSitzung = {};
     /* Der Rück-Anker gehört zum nun aktiven Profil. Bei der letzten
@@ -6741,6 +6904,7 @@ function deleteProfile(id) {
     loadTopicAmounts();
   }
   if (profiles.length === 0) {
+    legacyHandySpeicherBereinigen({ gesamtLoeschen: true, verlaufLoeschen: true });
     /* Keine Person mehr: neues Zeichen bauen. */
     loadLesehilfen();
     signDraft = { icon: null, color: null, number: null };
@@ -7055,6 +7219,7 @@ function pauseBewertungLoeschen() {
   einstiegAuswahl = null;
   pauseStelle = null; pauseKnoten = null; pauseSitzung = null; pauseTeilrunde = null;
   kernUebungenErkannt = new Set(); wiederholtSitzung = new Set(); zeitWiederholenThema = null;
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();   /* Stand im Übungs-Handy liegt nur im Arbeitsspeicher; nicht ins nächste Profil mitnehmen */
   topics.forEach(t => { delete t._zusatzWeg; delete t._schlussZusatz; });
   selfAssessmentStart = {}; miniCheckDone = {}; neueSituationAuswahl = null; vorhersageStart = {};
   simulationFertig = {}; simulationWahl = {};
@@ -7450,7 +7615,7 @@ function answerDailyQuestion(index) {
    Datenschutz (§14): nichts wird gespeichert und nichts gesendet – die App
    öffnet nur das E-Mail-Programm der Person, abgeschickt wird von Hand.
    Postfach: Funktions-Adresse, kein persönliches Postfach. */
-const FEEDBACK_MAIL = "digitale-teilhabe@stift-tilbeck.de";
+const FEEDBACK_MAIL = "beta.lab@icloud.com";
 function feedbackMailen() {
   const felder = [["Was ist gut?", "fb-gut"], ["Was ist schwer?", "fb-schwer"], ["Was sollen wir ändern?", "fb-aendern"]];
   const zeilen = ["Rückmeldung zur Lern-Seite: Sicher und selbstbestimmt im Internet", ""];
@@ -7825,7 +7990,7 @@ function renderMenu() {
     markLearnModeSeen();
     learnModeSection = `
     <section class="learn-mode-section" aria-label="Wie möchtest du lernen?">
-      <h3 class="learn-mode-title">Wie möchtest du heute lernen?</h3>
+      <h2 class="learn-mode-title">Wie möchtest du heute lernen?</h2>
       <p class="learn-mode-sub">Such dir etwas aus. Du kannst es jederzeit ändern.</p>
       <div class="learn-mode-grid">${learnModeCards}</div>
       ${companionNote}
@@ -7842,6 +8007,15 @@ function renderMenu() {
       ${buildToolRow()}
       ${learnModeSection}
       ${buildResumeLessonChip()}
+      <aside class="handy-portal-banner" role="region" aria-label="Interaktives Übungs-Handy">
+        <span class="handy-portal-banner-badge">34 Übungen im Handy</span>
+        <h2 class="handy-portal-banner-title">Übungs-Handy: Sicher üben</h2>
+        <p class="handy-portal-banner-desc">Übe echte Situationen am Handy. Zum Beispiel Chats, Links oder Mails. Ohne Risiko.</p>
+        <div class="handy-portal-banner-actions">
+          <button type="button" class="handy-portal-banner-link" onclick="renderHandyHub()">Zum Übungs-Handy (34 Lernwege)</button>
+          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderMailPostfach()">Zum E-Mail-Postfach (7 Übungen)</button>
+        </div>
+      </aside>
       <h2 class="topic-grid-title">Wähle ein Thema</h2>
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
       <nav class="topic-group-links" aria-label="Themengruppen">
@@ -7884,6 +8058,36 @@ function renderMyPath() {
          </div>
          <div class="hero-progress-track" role="progressbar" aria-valuenow="${doneCount}" aria-valuemin="0" aria-valuemax="${topics.length}" aria-label="${doneCount} von ${topics.length} Themen">
            <div class="hero-progress-fill" style="width:${Math.round((doneCount/topics.length)*100)}%"></div>
+         </div>
+       </div>`
+    : "";
+
+  const handyGesamt = gesammelteHandyWege();
+  const handyDoneKeys = Object.keys(handyGesamt);
+  const handyAnzahl = typeof KURZWEGE === "object" && KURZWEGE ? Object.keys(KURZWEGE).length : 34;
+  const handyProgressHtml = handyDoneKeys.length > 0
+    ? `<div class="hero-progress-row" role="region" aria-label="Fortschritt im Übungs-Handy" style="margin-top:10px;">
+         <div class="hero-progress-numbers">
+           <span class="hero-progress-count" aria-live="polite">${handyDoneKeys.length}</span>
+           <span class="hero-progress-of">von ${handyAnzahl} Lernwegen im Handy geschafft</span>
+         </div>
+         <div class="hero-progress-track" role="progressbar" aria-valuenow="${handyDoneKeys.length}" aria-valuemin="0" aria-valuemax="${handyAnzahl}" aria-label="${handyDoneKeys.length} von ${handyAnzahl} Lernwegen im Handy">
+           <div class="hero-progress-fill" style="width:${Math.round((handyDoneKeys.length / handyAnzahl) * 100)}%"></div>
+         </div>
+       </div>`
+    : "";
+
+  const postfachGesamt = gesammeltePostfachWege();
+  const postfachDoneKeys = Object.keys(postfachGesamt);
+  const postfachAnzahl = typeof MAILBOX_SZENARIEN === "object" && MAILBOX_SZENARIEN ? Object.keys(MAILBOX_SZENARIEN).length : 7;
+  const postfachProgressHtml = postfachDoneKeys.length > 0
+    ? `<div class="hero-progress-row" role="region" aria-label="Fortschritt im E-Mail-Übungspostfach" style="margin-top:10px;">
+         <div class="hero-progress-numbers">
+           <span class="hero-progress-count" aria-live="polite">${postfachDoneKeys.length}</span>
+           <span class="hero-progress-of">von ${postfachAnzahl} E-Mail-Übungen geschafft</span>
+         </div>
+         <div class="hero-progress-track" role="progressbar" aria-valuenow="${postfachDoneKeys.length}" aria-valuemin="0" aria-valuemax="${postfachAnzahl}" aria-label="${postfachDoneKeys.length} von ${postfachAnzahl} E-Mail-Übungen">
+           <div class="hero-progress-fill" style="width:${Math.round((postfachDoneKeys.length / postfachAnzahl) * 100)}%"></div>
          </div>
        </div>`
     : "";
@@ -7934,18 +8138,19 @@ function renderMyPath() {
       </div>` : "";
 
   let progressConsent = "";
+  const hatFortschritt = doneCount > 0 || handyDoneKeys.length > 0 || postfachDoneKeys.length > 0;
   if (isProgressEnabled()) {
     progressConsent = `
       <div class="progress-consent">
-        <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.</p>
+        <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.${handyDoneKeys.length > 0 ? ` Im Übungs-Handy: ${handyDoneKeys.length} von ${handyAnzahl}.` : ""}${postfachDoneKeys.length > 0 ? ` Im E-Mail-Postfach: ${postfachDoneKeys.length} von ${postfachAnzahl}.` : ""}</p>
         <p class="progress-consent-note">Der Lernstand wird nur auf diesem Gerät gespeichert. Ohne Namen.</p>
         ${pauseEinwilligungHtml()}
         <button type="button" class="utility-button" onclick="loeschenRueckfrage('lernstand', this)">Lernstand löschen und nicht mehr merken</button>
       </div>${resumeDelete}`;
-  } else if (doneCount > 0) {
+  } else if (hatFortschritt) {
     progressConsent = `
       <div class="progress-consent">
-        <p class="progress-consent-title">Soll ich mir merken, welche Themen du geschafft hast?</p>
+        <p class="progress-consent-title">Soll ich mir merken, was du geschafft hast?</p>
         <p class="progress-consent-note">${escapeHtml(WIEDERHOLEN_TEXT.einwilligung)}</p>
         <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
         <p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>
@@ -8043,6 +8248,8 @@ function renderMyPath() {
             Die Zahl steht in der Zusammenfassungs-Zeile und ist damit
             auch im zugeklappten Zustand les- und hörbar. */""}
       ${heroProgress}
+      ${handyProgressHtml}
+      ${postfachProgressHtml}
       ${karteBlock}
       ${/* Phase 2.2 (Bericht 108): Das Angebot steht offen, nicht mehr im zugeklappten
             Bereich „Geschafft“ – es erscheint nur, wenn etwas zum Wiederholen da ist. */""}
@@ -8059,6 +8266,16 @@ function renderMyPath() {
         <summary class="path-details-summary">${FUEHRUNG_TEXT.uebenAuf}</summary>
         <p class="topic-grid-hint">Hier kannst du üben. Ganz ohne Druck.</p>
         <div class="action-grid practice-grid">
+          <div class="card-read-pair card-read-pair--action">
+            <button type="button" class="action-card" onclick="renderHandyHub()">
+              <span class="action-icon" aria-hidden="true">${getIconHtml("handy")}</span>
+              <span class="action-text">
+                <span class="action-title">Übungs-Handy</span>
+                <span class="action-desc">Alle 34 Lernwege am Handy üben.</span>
+              </span>
+            </button>
+            <button type="button" class="card-read-button card-read-button--path" data-read-card-text="Übungs-Handy. Alle 34 Lernwege am Handy üben." aria-label="Übungs-Handy vorlesen">${readCardSvg} Vorlesen</button>
+          </div>
           <div class="card-read-pair card-read-pair--action">
             <button type="button" class="action-card" onclick="startBigQuiz()">
             <span class="action-icon" aria-hidden="true">${getIconHtml("quiz")}</span>
@@ -8080,14 +8297,14 @@ function renderMyPath() {
             <button type="button" class="card-read-button card-read-button--path" data-read-card-text="Wiederholen. Fragen aus deinen Themen." aria-label="Wiederholen vorlesen">${readCardSvg} Vorlesen</button>
           </div>
           <div class="card-read-pair card-read-pair--action">
-            <button type="button" class="action-card" onclick="renderScenarioChooser()">
-            <span class="action-icon" aria-hidden="true">${getIconHtml("exercise")}</span>
+            <button type="button" class="action-card" onclick="renderMailPostfach()">
+            <span class="action-icon" aria-hidden="true">${getIconHtml("mail")}</span>
             <span class="action-text">
-              <span class="action-title">Übungs-Handy</span>
-              <span class="action-desc">Üben wie auf dem Handy.</span>
+              <span class="action-title">E-Mail-Übungspostfach</span>
+              <span class="action-desc">E-Mails prüfen und beantworten.</span>
             </span>
           </button>
-            <button type="button" class="card-read-button card-read-button--path" data-read-card-text="Übungs-Handy. Üben wie auf dem Handy." aria-label="Übungs-Handy vorlesen">${readCardSvg} Vorlesen</button>
+            <button type="button" class="card-read-button card-read-button--path" data-read-card-text="E-Mail-Übungspostfach. E-Mails prüfen und beantworten." aria-label="E-Mail-Übungspostfach vorlesen">${readCardSvg} Vorlesen</button>
           </div>
           <div class="card-read-pair card-read-pair--action">
             <button type="button" class="action-card" onclick="startTrainingInbox()">
@@ -8155,7 +8372,7 @@ function printSuccessBook() {
     `<p>${doneTopics.length} von ${topics.length} Themen geschafft · Stand: ${datum}</p>` +
     `<p>Sicher und selbstbestimmt im Internet</p></div>` +
     seiten +
-    `<p class="heft-fuss">Lernplattform der Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW</p>` +
+    `<p class="heft-fuss">Alex &amp; Tilda · Eine Plattform, die mit Menschen wächst.</p>` +
     `</body></html>`;
   const w = window.open("", "_blank");
   if (!w) return;
@@ -8190,7 +8407,7 @@ function printGrandCertificate() {
     `<p class="was"><strong>Sicher und selbstbestimmt im Internet</strong></p>` +
     `<p class="gross">Du hast alle Themen geübt.<br>Du kannst deine Regeln im Alltag nutzen.</p>` +
     `<p class="datum">Geschafft am ${datum}</p>` +
-    `<p class="fuss">Lernplattform der Alexianer Stift Tilbeck GmbH · gefördert von der Sozialstiftung NRW</p>` +
+    `<p class="fuss">Alex &amp; Tilda · Eine Plattform, die mit Menschen wächst.</p>` +
     `</div></body></html>`;
   const w = window.open("", "_blank");
   if (!w) return;
@@ -8544,7 +8761,7 @@ function printQrCards() {
     `.qr-fuss{margin-top:14px;font-size:11px;color:#555;text-align:center;}</style></head><body>` +
     `<h1>QR-Karten: Themen zum Scannen</h1>` +
     `<div class="qr-grid">${cards}</div>` +
-    `<p class="qr-fuss">${escapeHtml(base)} · Alexianer Stift Tilbeck GmbH · Sozialstiftung NRW</p>` +
+    `<p class="qr-fuss">${escapeHtml(base)} · Alex &amp; Tilda</p>` +
     `</body></html>`;
   const w = window.open("", "_blank");
   if (!w) return;
@@ -8755,6 +8972,13 @@ function renderTopicChoice(topicId) {
           ? laterChip("Im Alltag üben", `alltagGo('${escapeHtml(alltagScene[0])}')`)
           : "";
 
+        /* Weiterführende Sonder-Übungen ohne Doppelung zum regulären Themen-Lernweg */
+        const handyLink = topic.id === "tiktok"
+          ? laterChip("Trends: mitmachen oder nicht?", "startHandyWeg('tt2')", "exercise")
+          : topic.id === "einkaufen"
+            ? laterChip("E-Mail: Etwas ist schiefgelaufen", "renderMailPostfach('ek3')", "mail")
+            : "";
+
         /* D7 (01.10.2026, E6): Ein Lernweg statt Kurz/Mehr. Keine Mengen-Wahl
            mehr am Anfang: Alle lernen zuerst den Kern (bisher Kurz-Weg).
            „Mehr dazu“ (bisher Mehr-Weg) gibt es am Ende, freiwillig. */
@@ -8786,7 +9010,7 @@ function renderTopicChoice(topicId) {
             ${spaeterBlock(FUEHRUNG_TEXT.oderAuf, `
               ${laterChip("Von vorne anfangen", `startTopicMode('${escapeHtml(topic.id)}', '${resume.mode}')`, "wiederholen")}
               ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`, "quiz") : ""}
-              ${merkChip}${alltagUebung}${uebung}${training}`)}`;
+              ${handyLink}${merkChip}${alltagUebung}${uebung}${training}`)}`;
         }
         if (done) {
           return `
@@ -8796,7 +9020,7 @@ function renderTopicChoice(topicId) {
               ${laterChip("Nochmal lernen", `startTopicMode('${escapeHtml(topic.id)}', 'short')`, "wiederholen")}
               ${laterChip(`Mehr dazu: ${escapeHtml(topic.title)}`, `startTopicMode('${escapeHtml(topic.id)}', 'extra')`)}
               ${laterChip("Alle Lektionen nachlesen", `startTopicMode('${escapeHtml(topic.id)}', 'full')`, "lesen")}
-              ${merkChip}${alltagUebung}${uebung}${training}`)}`;
+              ${handyLink}${merkChip}${alltagUebung}${uebung}${training}`)}`;
         }
         /* Paket C (26.09.2026): „Lernen starten" steht UNTER der Mengen-Wahl.
            Vorher stand der große Knopf darüber – wer ihn tippte, bevor er die
@@ -8804,9 +9028,9 @@ function renderTopicChoice(topicId) {
         return `
           ${ueberarbeitetHinweis}
           <button type="button" class="topic-start-button" onclick="startTopicMode('${escapeHtml(topic.id)}', 'short')">${pictoHtml("start")}<span>Lernen starten</span></button>
-          ${spaeterBlock(spaeterTitel(hasQuiz, !!(uebung || training || alltagUebung)), `
+          ${spaeterBlock(spaeterTitel(hasQuiz, !!(uebung || training || alltagUebung || handyLink)), `
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`, "quiz") : ""}
-            ${merkChip}${alltagUebung}${uebung}${training}`)}`;
+            ${handyLink}${merkChip}${alltagUebung}${uebung}${training}`)}`;
       })()}
 
       ${/* Begleit-Panel direkt hinter die Hauptaktion (B21): vorher lag es bei
@@ -9632,7 +9856,9 @@ const SCENE_ALT = {
   "betrug-liebe": "Eine Person im Internet verspricht Tilda Liebe und fragt nach Geld.",
   "betrug-gewinn": "Eine Nachricht verspricht Tilda einen Gewinn.",
   "betrug-abo": "Alex und Tilda prüfen ein Angebot. Es kann ein teures Abo sein.",
+  "betrug-qr-code": "Tilda schaut auf einen QR-Code. Eine Lupe zeigt: Erst die Adresse prüfen.",
   "ki-antwort-pruefen": "Alex und Tilda prüfen eine Antwort von der KI nach.",
+  "ki-gesundheit-geld": "Alex und Tilda fragen nach Gesundheit und Geld. Ein Warnzeichen erinnert: Erst Fachleute fragen.",
   "datenschutz-daten-anfrage": "Eine Nachricht fragt nach Tildas privaten Daten.",
   "facebook-beitrag": "Tilda schreibt einen Beitrag. Sie prüft, wer ihn sehen kann.",
   "tiktok-video-posten": "Tilda prüft ein Video, bevor sie es bei TikTok teilt.",
@@ -9846,14 +10072,15 @@ const LEKTION_SCENES = {
   ki: {
     "KI macht Fehler": "ki-antwort-pruefen", "So prüfst du eine Antwort": "ki-antwort-pruefen",
     "Was kann KI?": "ki-antwort-pruefen", "Keine privaten Daten": "datenschutz-private-daten",
-    "Gesundheit und Geld": null, "KI kann Bilder und Stimmen fälschen": "fakes-stimmen"
+    "Gesundheit und Geld": "ki-gesundheit-geld", "KI kann Bilder und Stimmen fälschen": "fakes-stimmen"
   },
   einkaufen: { "Einkaufen im Internet": "einkaufen-shop" },
   fakes: { "KI-Bilder erkennen": "fakes-bilder", "Gefälschte Videos: Deepfakes": "szene-ki-echt" },
   betrug: {
     "Der Paket-Trick": "betrug-paket", "Der Hallo-Mama-Trick": "betrug-hallo-mama",
     "Schockanrufe": "betrug-schockanruf", "Liebe im Internet": "betrug-liebe",
-    "Falsche Gewinne": "betrug-gewinn", "Abo-Fallen": "betrug-abo"
+    "Falsche Gewinne": "betrug-gewinn", "Abo-Fallen": "betrug-abo",
+    "Vorsicht bei QR-Codes": "betrug-qr-code"
   }
 };
 
@@ -11121,6 +11348,169 @@ function lernPause() {
   renderLegalFooter();
 }
 
+/* ============================================================
+   Lern-Handy als Übungsteil (Integration Stufe 2, Vorschlag 13.11.2026)
+   Nur mit ?lernhandy=1 in der Adresse und nur im Kernweg des Musterthemas
+   WhatsApp: Nach Lerntext und Beispielen kommt „Im Handy ausprobieren“,
+   danach die vorhandene Übung. Sprache, Schrift, Vorlesen, Hilfe, Pause und
+   Beenden kommen aus der Lern-App. Das Lern-Handy speichert nichts; diese
+   Stufe schreibt auch keinen Lernstand und keine Regel gut (§14a; Abstimmung
+   mit der Arbeit am gemeinsamen Lernstand offen). Kein neuer Speicherschlüssel,
+   der Wiedereinstieg bleibt beim vorigen Teil. Schnittstelle des Bausteins:
+   pilot/lernhandy/EINGEBETTET.md
+   ============================================================ */
+const LERNHANDY_SCHALTER = (() => { try { return new URLSearchParams(location.search).get("lernhandy") === "1"; } catch (e) { return false; } })();
+const LERNHANDY_AKTIV = {      /* Alle 32 Themen-Lernwege im integrierten Übungs-Handy aktiv (§14 / §16) */
+  datenschutz: { "Nötig oder nicht?": "ds1", "Wer sieht es?": "ds2" },
+  whatsapp: { "Unbekannte Nachrichten": "ge1", "Links in Nachrichten": "wa2", "Dein WhatsApp-Code": "wa3" },
+  facebook: { "Dein Facebook-Profil": "fb1", "Unbekannte Personen": "fb2", "Komische Nachrichten": "fb3" },
+  instagram: { "Deine Fotos auf Instagram": "ig1", "Fotos von anderen Personen": "ig2" },
+  youtube: { "Videos prüfen": "yt1", "Werbung erkennen": "yt2", "Pausen machen": "yt3" },
+  snapchat: { "Bilder verschwinden nicht wirklich": "sc1", "Dein Standort": "sc2", "Niemand darf dich zwingen": "sc3" },
+  tiktok: { "Was du bei TikTok siehst": "tt1", "Pause machen": "tt3" },
+  hilfe: { "Was ist los?": "h1", "Was kann ich selbst tun?": "h2", "Welche Hilfe passt?": "h3" },
+  ki: { "Was ist KI?": "ki1", "Was kann KI?": "ki2", "Wann musst du aufpassen?": "ki3" },
+  fakes: { "Was ist eine Fake-Nachricht?": "fn1", "Wie erkennst du Fakes?": "fn2", "Was tust du bei Fakes?": "fn3" },
+  betrug: { "Was ist Betrug im Internet?": "be1", "Wie erkennst du Betrug?": "be2", "Was tust du bei Betrug?": "be3" },
+  einkaufen: { "Gute Shops erkennen": "ek1", "Sicher bezahlen": "ek2" }
+};
+const LERNHANDY_TEIL = LERNHANDY_AKTIV;
+/* Bedientexte zentral und leicht änderbar, für die Prüfgruppe vorgemerkt (§13) */
+const LERNHANDY_TEXT = {
+  teil: "Im Handy ausprobieren",
+  laden: "Das Übungs-Handy wird geladen.",
+  fehler: "Das Übungs-Handy lässt sich gerade nicht öffnen. Tippe auf: Zur Übung."
+};
+let lernhandyLaden = null;
+function lernhandyWeg(topic, rohLektion) {
+  if (currentMode !== "short" || !topic || !rohLektion) return null;
+  const aktiv = LERNHANDY_AKTIV[topic.id];
+  if (aktiv && aktiv[rohLektion.title]) return aktiv[rohLektion.title];
+  if (!LERNHANDY_SCHALTER) return null;
+  const t = LERNHANDY_TEIL[topic.id];
+  return (t && t[rohLektion.title]) || null;
+}
+/* Erst bei Bedarf laden: Die Dateien sind in sw.js vorab gespeichert. */
+function lernhandySkripte() {
+  if (lernhandyLaden) return lernhandyLaden;
+  if (!document.querySelector('link[href="lernhandy/lernhandy.css"]')) {
+    const l = document.createElement("link");
+    l.rel = "stylesheet"; l.href = "lernhandy/lernhandy.css";
+    document.head.appendChild(l);
+  }
+  lernhandyLaden = [
+    "lernhandy/lerneinheit-be1-de.js",
+    "lernhandy/lernhandy.js",
+    "lernhandy/be1-lernweg.js",
+    "lernhandy/ge1-lernweg.js",
+    "lernhandy/kurzweg-lernweg.js",
+    "lernhandy/postfach-daten.js"
+  ].reduce((kette, src) => kette.then(() => new Promise((fertig, fehler) => {
+    const s = document.createElement("script");
+    s.src = src; s.onload = fertig; s.onerror = () => fehler(new Error(src));
+    document.head.appendChild(s);
+  })), Promise.resolve()).catch((e) => { lernhandyLaden = null; throw e; });
+  return lernhandyLaden;
+}
+function lernhandyEntfernen() {
+  if (lernhandyAktiv) { try { lernhandyAktiv.entfernen(); } catch (e) { /* schon entfernt */ } }
+  if (lernhandyHubAktiv && lernhandyHubAktiv.instanz) { try { lernhandyHubAktiv.instanz.entfernen(); } catch (e) { /* schon entfernt */ } }
+  lernhandyAktiv = null; lernhandyOrt = null; lernhandyHubAktiv = null;
+}
+function renderLessonHandy() {
+  stopReading();
+  const topic = getCurrentTopic();
+  if (!topic) { lernhandyEntfernen(); return renderMenu(); }
+  const lessons = getLessonsForMode(topic, currentMode);
+  const roh = lessons[currentStep];
+  const wegId = lernhandyWeg(topic, roh);
+  if (!wegId) { lernhandyEntfernen(); return renderPracticePage(); }
+  const lesson = resolveLessonContent(roh, languageLevel);
+  const percent = Math.round(((currentStep + 1) / lessons.length) * 100);
+  setProgressVisible(false);
+  setBottomNavVisible(true);
+  setHeader(topic.title, "Lernen", `Schritt ${currentStep + 1} von ${lessons.length}`, lesson.module || "Lernen", percent);
+  setOrientation(`Du übst: ${topic.title}. Das ist Schritt ${currentStep + 1} von ${lessons.length}.`);
+  /* Wie auf der Übungsseite: „Weiter“ bleibt aus, bis die Übung im Handy geschafft ist; dann „Zur Übung“ */
+  showNav(true, false, "Weiter");
+  document.body.classList.add("lesson-view");
+  aufUebungsSeite = false;
+  lernTeil = "handy";
+  /* Dasselbe Handy mit seinem Stand behalten, wenn die Person an dieselbe Stelle zurückkommt: nach dem
+     Sprachwechsel (T2) und von der Übung zurück. Wer die Handlung schon gemacht hat, muss sie nicht wiederholen.
+     Während einer anderen Seite wartet der Baustein still (lernhandy.js). Nur im Arbeitsspeicher. */
+  const ort = { t: topic.id, mode: currentMode, step: currentStep, weg: wegId };
+  const o = lernhandyOrt;
+  const alt = lernhandyAktiv && o && o.wurzel.classList.contains("lh") && o.t === ort.t && o.mode === ort.mode && o.step === ort.step && o.weg === ort.weg ? o.wurzel : null;
+  if (!alt) lernhandyEntfernen();
+  content.innerHTML = `
+    ${buildLernLeiste(currentStep + 1, lessons.length)}
+    <article class="card lesson-card handy-teil" style="${getTopicColorStyle(topic.id)}" data-readable="true">
+      <p class="lern-teil-label">${escapeHtml(LERNHANDY_TEXT.teil)}</p>
+      <div class="symbol-heading lesson-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
+        <h2>${escapeHtml(lesson.title || topic.title)}</h2>
+      </div>
+      <div id="lernhandyUebung"><p role="status">${escapeHtml(LERNHANDY_TEXT.laden)}</p></div>
+      <div id="lernhandyHilfe"></div>
+    </article>
+  `;
+  let platz = document.getElementById("lernhandyUebung");
+  if (alt) { platz.replaceWith(alt); platz = alt; }
+  stelleMerken(() => {
+    currentTopicId = ort.t; currentMode = ort.mode; currentStep = ort.step;
+    renderLessonHandy();
+  });
+  focusContent();
+  renderLegalFooter();
+  /* Hilfe: im gewohnten Kasten „Hilfe zur Aufgabe“ (auch für „Hilfe“ oben). Zuerst der Tipp der Übung, ohne Tipp
+     der Merksatz der Lektion; gibt es beides, steht der Merksatz unter „Mehr Hilfe zeigen“. */
+  const hilfeZeigen = () => {
+    const h = lernhandyAktiv ? lernhandyAktiv.hilfe() : { tipp: "", merksatz: "" };
+    const ziel = document.getElementById("lernhandyHilfe");
+    if (ziel) ziel.innerHTML = buildTaskHelpBox(h.tipp || h.merksatz, false, false, h.tipp && h.merksatz ? `<p><strong>Wichtig:</strong> ${escapeHtml(h.merksatz)}</p>` : "");
+  };
+  if (alt) {
+    lernhandyAktiv.stufe(languageLevel);
+    hilfeZeigen();
+    return;
+  }
+  lernhandySkripte().then(() => {
+    if (!platz.isConnected) return;   /* inzwischen eine andere Seite */
+    const Q = lernhandyDatenQuelle();
+    const weg = KURZWEGE[wegId] || GEMEINSAM[wegId];
+    const lernweg = weg.teile ? gemeinsamerLernweg(Q, weg) : kurzLernweg(Q, weg);
+    platz.innerHTML = "";
+    lernhandyAktiv = LernHandy.lernweg({
+      wurzel: platz, lernweg, regeln: typeof REGELN !== "undefined" ? REGELN : [],
+      stufe: languageLevel, piktogramme: "assets/pictograms/",
+      eingebettet: true, nur: ["uebung"], ueberschrift: 3, farben: "seite",
+      /* Höhe zwischen Lernleiste oben und Leiste unten, damit das Handy ganz zu sehen ist */
+      platz: () => {
+        const nav = document.querySelector(".nav"), leiste = content.querySelector(".lern-leiste");
+        return { hoehe: window.innerHeight - (nav ? nav.getBoundingClientRect().height : 0) - (leiste ? leiste.getBoundingClientRect().height : 0) };
+      },
+      beiZustand: (z) => {
+        if (["ge1", "wa3"].includes(wegId) && nextButton) {
+          /* Diese Handy-Übung ersetzt nur die unmittelbar doppelte Entscheidungsfrage.
+             Quelldaten und übrige Lernwege bleiben erhalten. */
+          nextButton.disabled = !!z.gesperrt;
+          nextButton.dataset.warten = z.gesperrt ? "1" : "0";
+          nextButton.classList.toggle("is-waiting", !!z.gesperrt);
+          nextButton.textContent = "Weiter";
+        } else if (!z.gesperrt) setNextWaitsForPractice();
+      },
+      beiAbschluss: (a) => handyWegMerken(wegId, topic.id, a && a.regel)
+    });
+    lernhandyOrt = Object.assign({ wurzel: platz }, ort);
+    hilfeZeigen();
+  }).catch(() => {
+    if (!platz.isConnected) return;
+    platz.innerHTML = `<p role="status">${escapeHtml(LERNHANDY_TEXT.fehler)}</p>`;
+    setNextWaitsForPractice();
+  });
+}
+
 function renderPracticePage(wieder) {
   stopReading();
   uebungsAuswahl = wieder && Number.isInteger(wieder.auswahl) ? wieder.auswahl : null;
@@ -12170,7 +12560,7 @@ const VORBILD_IMMER_ZUGEKLAPPT = false;
 
 function vorbildHeading(wer) {
   const person = wer === "Alex" ? "Alex" : "Tilda";
-  return `<div class="vorbild-heading"><img class="vorbild-figure" src="assets/figures/vormachen-${person.toLowerCase()}.webp" alt="${person} zeigt ein Beispiel." width="72" height="72" loading="lazy"><h3>So macht es ${escapeHtml(wer)}:</h3></div>`;
+  return `<div class="vorbild-heading"><img class="vorbild-figure" src="assets/figures/vormachen-${person.toLowerCase()}.webp" alt="${person} zeigt ein Beispiel." width="72" height="72" loading="lazy" onerror="this.src='assets/figures/vormachen-${person.toLowerCase()}.webp'"><h3>So macht es ${escapeHtml(wer)}:</h3></div>`;
 }
 
 function vorbildHtml(topic, rohLektion, lessons, { offen = false } = {}) {
@@ -14325,6 +14715,14 @@ function renderScenarioChooser() {
       <p>Hier übst du wie auf einem Handy.</p>
       <p>Du siehst Nachrichten, Einstellungen oder einen Shop.</p>
       <p>Du entscheidest. Nichts davon ist echt.</p>
+      <div style="margin:16px 0 20px;padding:16px;background:var(--accent-soft);border-radius:14px;border:1px solid var(--accent);">
+        <strong style="display:block;margin-bottom:6px;font-size:1.1rem;">Alle 34 Lernwege im Übungs-Handy</strong>
+        <p style="margin:0 0 12px;font-size:0.95rem;">Übe alle Situationen direkt am Smartphone. Zum Beispiel Chats, Links oder Fake-Shops.</p>
+        <div class="handy-portal-banner-actions">
+          <button type="button" class="topic-start-button" onclick="renderHandyHub()">${pictoHtml("handy")}<span>Alle 34 Lernwege öffnen</span></button>
+          <button type="button" class="nav-button secondary" onclick="renderMailPostfach()">Zum E-Mail-Übungspostfach</button>
+        </div>
+      </div>
       ${typeof buildAlltagChoices === "function" ? buildAlltagChoices() : ""}
       <h3>Wähle ein Thema</h3>
       <div class="action-grid">${karten}</div>
@@ -14389,6 +14787,20 @@ function startScenario(topicId) {
       </div>
       ${(scn.einstieg || []).map(s => `<p>${escapeHtml(s)}</p>`).join("")}
       ${buildRememberBox("Wichtig", "Alles hier ist erfunden. Es gibt keine Zeit-Grenze. Fehler sind erlaubt. Du kannst jederzeit aufhören.")}
+      ${(() => {
+        const HANDY_MAP = {
+          datenschutz: "ds1", whatsapp: "ge1", facebook: "fb1", instagram: "ig1",
+          youtube: "yt1", snapchat: "sc1", tiktok: "tt1", hilfe: "h1",
+          ki: "ki1", fakes: "fn1", betrug: "be1", einkaufen: "ek1"
+        };
+        const weg = HANDY_MAP[topic.id];
+        return weg ? `
+          <div style="margin:16px 0;padding:14px 18px;background:var(--accent-soft);border-radius:12px;border:1px solid var(--accent);">
+            <strong style="display:block;margin-bottom:4px;">Im Übungs-Handy trainieren</strong>
+            <p style="margin:0 0 10px;font-size:0.95rem;">Übe diese Situation direkt am Smartphone.</p>
+            <button type="button" class="topic-start-button" onclick="startHandyWeg('${escapeHtml(weg)}')">${pictoHtml("exercise")}<span>Im Übungs-Handy starten</span></button>
+          </div>` : "";
+      })()}
       ${rundenWahl}
       <div class="certificate-actions">
         ${rundenWahl ? "" : `<button type="button" class="quiz-link quiz-button" onclick="beginScenario()">Üben starten</button>`}
@@ -14643,6 +15055,390 @@ function renderScenarioResult(wieder) {
 }
 
 /* ============================================================
+   Integriertes Übungs-Handy (34 Lernwege) und E-Mail-Übungspostfach (7 Übungen)
+   ============================================================ */
+
+function lernhandyDatenQuelle() {
+  return {
+    topics,
+    TRAINING_INBOX: typeof TRAINING_INBOX !== "undefined" ? TRAINING_INBOX : [],
+    KURZ_VERSIONS: typeof KURZ_VERSIONS !== "undefined" ? KURZ_VERSIONS : {},
+    AUFGABEN_VERSIONS: typeof AUFGABEN_VERSIONS !== "undefined" ? AUFGABEN_VERSIONS : {},
+    ANWENDEN_ERGAENZUNGEN: typeof ANWENDEN_ERGAENZUNGEN !== "undefined" ? ANWENDEN_ERGAENZUNGEN : {},
+    EXTRA_PRACTICE: typeof EXTRA_PRACTICE !== "undefined" ? EXTRA_PRACTICE : {},
+    REGEL_SAETZE: typeof REGEL_SAETZE !== "undefined" ? REGEL_SAETZE : {},
+    LERNEINHEIT_BE1: typeof LERNEINHEIT_BE1 !== "undefined" ? LERNEINHEIT_BE1 : null
+  };
+}
+
+function lernhandyTitelOhneCode(text) {
+  return String(text || "").replace(/^[A-ZÄÖÜ]{1,3}\d+\s+/i, "").trim();
+}
+
+function hubLernText(feld) {
+  if (!feld) return "";
+  if (typeof feld === "string") return feld;
+  return feld[languageLevel] || feld.leicht || feld.einfach || feld.standard || "";
+}
+
+function lernhandyLadeAnsicht(titel, untertitel, zurueckFn) {
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(titel, untertitel, "Laden", "Vorbereitung", 0);
+  setOrientation(`${titel} wird geladen.`);
+  showNav(false, false);
+  content.innerHTML = `<article class="card"><p role="status">Übung wird geladen.</p></article>`;
+  if (zurueckFn) stelleMerken(zurueckFn);
+  focusContent();
+  renderLegalFooter();
+}
+
+function starteHubLernweg(cfg) {
+  stopReading();
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  aufUebungsSeite = false;
+  rememberRoute(cfg.route);
+
+  setProgressVisible(false);
+  setBottomNavVisible(true);
+  setHeader(cfg.titel, cfg.untertitel, "Übung", "Im Handy", 0);
+  document.body.classList.add("lesson-view");
+  setOrientation(`Du übst im Handy: ${cfg.titel}.`);
+  showNav(true, false, "Weiter");
+  lernBeendenZiel = cfg.beendenZiel;
+
+  content.innerHTML = `
+    ${buildLernLeiste(1, Math.max(1, (cfg.lw && cfg.lw.schritte ? cfg.lw.schritte.length : 1)))}
+    <article class="card handy-teil handy-hub-lauf" ${cfg.themaId ? `style="${getTopicColorStyle(cfg.themaId)}"` : ""} data-readable="true">
+      <h2 class="handy-hub-titel">${escapeHtml(cfg.titel)}</h2>
+      <div id="lernhandyHubWurzel"><p role="status">Übung wird geladen.</p></div>
+      <div id="lernhandyHubHilfe"></div>
+    </article>`;
+  const ortTitel = content.querySelector(".lern-ort-titel");
+  if (ortTitel) ortTitel.textContent = cfg.titel;
+
+  const wurzel = document.getElementById("lernhandyHubWurzel");
+  const startSchritt = Number.isInteger(cfg.schritt) ? cfg.schritt : 0;
+  let letzterZustand = { i: startSchritt, anzahl: (cfg.lw && cfg.lw.schritte ? cfg.lw.schritte.length : 1), kannZurueck: false };
+  let hubGemerkt = false;
+
+  const hilfeZeichnen = () => {
+    const h = lernhandyHubAktiv && lernhandyHubAktiv.instanz ? lernhandyHubAktiv.instanz.hilfe() : { tipp: "", merksatz: "" };
+    const ziel = document.getElementById("lernhandyHubHilfe");
+    if (!ziel) return;
+    const zuerst = h.tipp || h.merksatz;
+    const merksatzHtml = h.merksatz && h.merksatz !== zuerst
+      ? `<p class="task-help-rule"><strong>Das merke ich mir:</strong> ${escapeHtml(h.merksatz)}</p>` : "";
+    ziel.innerHTML = zuerst ? buildTaskHelpBox(zuerst, false, false, merksatzHtml) : "";
+  };
+
+  const wegMerken = (regel) => {
+    hubGemerkt = true;
+    if (cfg.typ === "postfach") postfachWegMerken(cfg.id, cfg.themaId || null, regel);
+    else handyWegMerken(cfg.id, cfg.themaId || null, regel);
+  };
+
+  const instanz = LernHandy.lernweg({
+    wurzel,
+    lernweg: cfg.lw,
+    regeln: typeof REGELN !== "undefined" ? REGELN : [],
+    stufe: languageLevel,
+    piktogramme: "assets/pictograms/",
+    neustart: !Number.isInteger(cfg.schritt),
+    schritt: startSchritt,
+    nur: ["alle"],
+    ueberschrift: 3,
+    eingebettet: true,
+    farben: "seite",
+    szenarienAuswahl: false,
+    platz: () => {
+      const nav = document.querySelector(".nav"), leiste = content.querySelector(".lern-leiste");
+      return { hoehe: window.innerHeight - (nav ? nav.getBoundingClientRect().height : 0) - (leiste ? leiste.getBoundingClientRect().height : 0) };
+    },
+    beiZustand: (info) => {
+      letzterZustand = info;
+      if (lernhandyHubAktiv && lernhandyHubAktiv.instanz === instanz) {
+        lernhandyHubAktiv.i = info.i;
+        lernhandyHubAktiv.gesamt = info.anzahl;
+        lernhandyHubAktiv.kannZurueck = !!info.kannZurueck;
+      }
+      const leiste = content.querySelector(".lern-leiste");
+      if (leiste) {
+        const s = leiste.querySelector(".lern-ort-schritt");
+        const b = leiste.querySelector(".lern-ort-balken > i");
+        const prozent = info.anzahl > 0 ? Math.round(((info.i + 1) / info.anzahl) * 100) : 0;
+        if (s) s.textContent = `Schritt ${info.i + 1} von ${info.anzahl}`;
+        if (b) b.style.width = `${prozent}%`;
+      }
+      showNav(true, !info.gesperrt, info.letzte ? "Fertig" : "Weiter");
+      hilfeZeichnen();
+    },
+    beiAbschluss: (a) => wegMerken(a && a.regel),
+    beiEnde: () => {
+      if (!hubGemerkt) wegMerken(cfg.lw && cfg.lw.regel);
+      renderHandyHubAbschluss({
+        typ: cfg.typ,
+        id: cfg.id,
+        titel: cfg.titel,
+        themaId: cfg.themaId || null,
+        gesamt: cfg.gesamt
+      });
+    }
+  });
+
+  lernhandyHubAktiv = {
+    typ: cfg.typ,
+    id: cfg.id,
+    titel: cfg.titel,
+    themaId: cfg.themaId || null,
+    instanz,
+    wurzel,
+    i: letzterZustand.i,
+    gesamt: letzterZustand.anzahl,
+    kannZurueck: !!letzterZustand.kannZurueck,
+    zurueckFn: cfg.zurueckFn
+  };
+  hilfeZeichnen();
+  stelleMerken(() => cfg.neuStarten(lernhandyHubAktiv ? lernhandyHubAktiv.i : undefined));
+  focusContent();
+  renderLegalFooter();
+}
+
+function renderHandyHubAbschluss(info) {
+  stopReading();
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  const istPostfach = info && info.typ === "postfach";
+  const doneMap = istPostfach ? gesammeltePostfachWege() : gesammelteHandyWege();
+  const geschafft = Object.keys(doneMap).length;
+  const gesamt = (info && info.gesamt) || (istPostfach ? 7 : 34);
+  const bereich = istPostfach ? "E-Mail-Übungen" : "Lernwege im Übungs-Handy";
+  const alleKnopf = istPostfach
+    ? `<button type="button" class="quiz-link quiz-button" onclick="renderMailPostfach()">Alle E-Mail-Übungen</button>`
+    : `<button type="button" class="quiz-link quiz-button" onclick="renderHandyHub()">Alle ${gesamt} Lernwege</button>`;
+  const nochmalKlick = istPostfach
+    ? `renderMailPostfach('${escapeHtml(info.id)}')`
+    : `startHandyWeg('${escapeHtml(info.id)}')`;
+  const themaObj = info && info.themaId ? getTopicById(info.themaId) : null;
+  const saveOffer = !isProgressEnabled() ? `
+    <div class="progress-consent">
+      <p class="progress-consent-title">Soll ich mir merken, was du geschafft hast?</p>
+      <p class="progress-consent-note">Das wird nur auf diesem Gerät gespeichert. Ohne Namen. Du kannst es jederzeit löschen.</p>
+      <button type="button" class="utility-button" onclick="enableProgressInline(this)">Ja, Lernstand merken</button>
+    </div>` : "";
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader(info.titel || "Übung", "Geschafft", "Abschluss", "Geschafft", 100);
+  setOrientation(`Gut gemacht. Du hast diese Übung geschafft: ${info.titel || ""}.`);
+  showNav(false, false);
+
+  content.innerHTML = `
+    <article class="card completion-page" ${themaObj ? `style="${getTopicColorStyle(themaObj.id)}"` : ""} data-readable="true">
+      ${roleFigure("erfolg")}
+      <h2>Geschafft!</h2>
+      <p>Du hast die Übung <strong>${escapeHtml(info.titel || "")}</strong> fertig gemacht.</p>
+      <p>Dein Stand: <strong>${geschafft} von ${gesamt} ${bereich}</strong> geschafft.</p>
+      ${saveOffer}
+      <div class="certificate-actions">
+        ${alleKnopf}
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="${nochmalKlick}">${pictoHtml("wiederholen")}<span>Noch einmal üben</span></button>
+        ${themaObj ? `<button type="button" class="nav-button secondary" onclick="renderTopicChoice('${escapeHtml(themaObj.id)}')">Zum Thema ${escapeHtml(themaObj.title)}</button>` : ""}
+        <button type="button" class="nav-button secondary" onclick="renderMyPath()">Zu Mein Lernweg</button>
+      </div>
+    </article>`;
+  stelleMerken(() => renderHandyHubAbschluss(info));
+  focusContent();
+  renderLegalFooter();
+}
+
+function renderHandyHub() {
+  stopReading();
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  rememberRoute("handy");
+  if (typeof KURZWEGE === "undefined" || typeof LernHandy === "undefined" || typeof kurzLernweg === "undefined") {
+    lernhandyLadeAnsicht("Übungs-Handy", "Alle 34 Lernwege", () => renderHandyHub());
+    lernhandySkripte().then(() => renderHandyHub()).catch(() => {
+      content.innerHTML = `<article class="card"><h2>Übungs-Handy</h2><p role="status">Das Übungs-Handy konnte nicht geladen werden.</p><button type="button" class="nav-button secondary" onclick="renderMyPath()">← Zu Mein Lernweg</button></article>`;
+      renderLegalFooter();
+    });
+    return;
+  }
+  const wegeObj = KURZWEGE;
+  const alleIds = Object.keys(wegeObj);
+  const geschafftMap = gesammelteHandyWege();
+  const geschafftZahl = alleIds.filter((id) => !!(geschafftMap[id] && geschafftMap[id].abgeschlossen)).length;
+  const postfachZahl = Object.keys(gesammeltePostfachWege()).length;
+  const postfachGesamt = typeof MAILBOX_SZENARIEN !== "undefined" ? Object.keys(MAILBOX_SZENARIEN).length : 7;
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("Übungs-Handy", `Alle ${alleIds.length} Lernwege`, "Üben", "Im Handy", 0);
+  setOrientation(`Hier wählst du eine Übung für das Handy. Du hast ${geschafftZahl} von ${alleIds.length} Lernwegen geschafft.`);
+  showNav(false, false);
+
+  const gruppenHtml = topics.map((t) => {
+    const wege = alleIds.map((id) => wegeObj[id]).filter((w) => w && w.thema === t.id);
+    if (!wege.length) return "";
+    return `
+      <section class="handy-hub-gruppe" aria-label="${escapeHtml(t.title)}">
+        <h3 class="handy-hub-gruppe-kopf">
+          <span aria-hidden="true">${getIconHtml(t.icon || "start")}</span>
+          <span>${escapeHtml(t.title)}</span>
+        </h3>
+        <div class="handy-hub-grid">
+          ${wege.map((w) => {
+            const titel = (w.id === "tt2" || w.id === "ek3")
+              ? lernhandyTitelOhneCode(w.name)
+              : (w.lektion || lernhandyTitelOhneCode(w.name));
+            const erledigt = !!(geschafftMap[w.id] && geschafftMap[w.id].abgeschlossen);
+            return `
+              <button type="button" class="action-card" style="${getTopicColorStyle(t.id)}" onclick="startHandyWeg('${escapeHtml(w.id)}')">
+                <span class="action-icon" aria-hidden="true">${getIconHtml(t.icon || "handy")}</span>
+                <span>
+                  <strong>${escapeHtml(titel)}</strong>
+                  <span>Im Handy üben.</span>
+                  ${erledigt ? `<span class="handy-hub-status">✓ Geschafft</span>` : ""}
+                </span>
+              </button>`;
+          }).join("")}
+        </div>
+      </section>`;
+  }).join("");
+
+  content.innerHTML = `
+    <article class="card" data-readable="true">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml("handy")}</span>
+        <h2>Übungs-Handy: Alle ${alleIds.length} Lernwege</h2>
+      </div>
+      <p>Hier übst du echte Situationen am Handy. Zum Beispiel Chats, Links oder Schalter.</p>
+      <p>Du hast <strong>${geschafftZahl} von ${alleIds.length}</strong> Lernwegen geschafft.</p>
+      <div class="certificate-actions">
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMailPostfach()">${pictoHtml("mail")}<span>E-Mail-Übungspostfach (${postfachZahl} von ${postfachGesamt} geschafft)</span></button>
+        <button type="button" class="nav-button secondary" onclick="renderMyPath()">← Zu Mein Lernweg</button>
+      </div>
+      ${gruppenHtml}
+    </article>`;
+  stelleMerken(() => renderHandyHub());
+  focusContent();
+  renderLegalFooter();
+}
+
+function startHandyWeg(wegId, opts) {
+  stopReading();
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  if (typeof KURZWEGE === "undefined" || typeof LernHandy === "undefined" || typeof kurzLernweg === "undefined") {
+    lernhandyLadeAnsicht("Übungs-Handy", "Übung laden", () => startHandyWeg(wegId, opts));
+    lernhandySkripte().then(() => startHandyWeg(wegId, opts)).catch(() => {
+      content.innerHTML = `<article class="card"><h2>Übungs-Handy</h2><p role="status">Die Übung konnte nicht geladen werden.</p><button type="button" class="nav-button secondary" onclick="renderHandyHub()">← Zu allen Lernwegen</button></article>`;
+      renderLegalFooter();
+    });
+    return;
+  }
+  const weg = KURZWEGE[wegId] || (typeof GEMEINSAM !== "undefined" && GEMEINSAM[wegId]);
+  if (!weg) return renderHandyHub();
+  const Q = lernhandyDatenQuelle();
+  const lw = weg.teile ? gemeinsamerLernweg(Q, weg) : kurzLernweg(Q, weg);
+  const titel = (weg.id === "tt2" || weg.id === "ek3")
+    ? lernhandyTitelOhneCode(weg.name)
+    : (weg.lektion || lernhandyTitelOhneCode(weg.name || lw.titel));
+  starteHubLernweg({
+    typ: "handy",
+    id: weg.id,
+    route: "handy:" + weg.id,
+    titel,
+    untertitel: "Übungs-Handy",
+    themaId: weg.thema || null,
+    lw,
+    gesamt: Object.keys(KURZWEGE).length,
+    beendenZiel: "renderHandyHub",
+    schritt: opts && Number.isInteger(opts.schritt) ? opts.schritt : 0,
+    zurueckFn: () => renderHandyHub(),
+    neuStarten: (schritt) => startHandyWeg(wegId, { schritt })
+  });
+}
+
+function renderMailPostfach(szId, opts) {
+  stopReading();
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  if (typeof MAILBOX_SZENARIEN === "undefined" || typeof LernHandy === "undefined" || typeof erstellePostfachLernweg === "undefined") {
+    lernhandyLadeAnsicht("E-Mail-Übungspostfach", "Übungen laden", () => renderMailPostfach(szId, opts));
+    lernhandySkripte().then(() => renderMailPostfach(szId, opts)).catch(() => {
+      content.innerHTML = `<article class="card"><h2>E-Mail-Übungspostfach</h2><p role="status">Das E-Mail-Übungspostfach konnte nicht geladen werden.</p><button type="button" class="nav-button secondary" onclick="renderMyPath()">← Zu Mein Lernweg</button></article>`;
+      renderLegalFooter();
+    });
+    return;
+  }
+  const alleIds = Object.keys(MAILBOX_SZENARIEN);
+  if (szId && MAILBOX_SZENARIEN[szId]) {
+    const sz = MAILBOX_SZENARIEN[szId];
+    const lw = erstellePostfachLernweg(szId);
+    const titel = lernhandyTitelOhneCode(hubLernText(sz.titel) || szId);
+    starteHubLernweg({
+      typ: "postfach",
+      id: szId,
+      route: "postfach:" + szId,
+      titel,
+      untertitel: "E-Mail-Übungspostfach",
+      themaId: lw.thema || null,
+      lw,
+      gesamt: alleIds.length,
+      beendenZiel: "renderMailPostfach",
+      schritt: opts && Number.isInteger(opts.schritt) ? opts.schritt : 0,
+      zurueckFn: () => renderMailPostfach(),
+      neuStarten: (schritt) => renderMailPostfach(szId, { schritt })
+    });
+    return;
+  }
+
+  rememberRoute("postfach");
+  const geschafftMap = gesammeltePostfachWege();
+  const geschafftZahl = alleIds.filter((id) => !!(geschafftMap[id] && geschafftMap[id].abgeschlossen)).length;
+  const handyZahl = Object.keys(gesammelteHandyWege()).length;
+  const handyGesamt = typeof KURZWEGE !== "undefined" ? Object.keys(KURZWEGE).length : 34;
+
+  setProgressVisible(false);
+  setBottomNavVisible(false);
+  setHeader("E-Mail-Übungspostfach", `Alle ${alleIds.length} Übungen`, "Üben", "E-Mail", 0);
+  setOrientation(`Hier übst du mit E-Mails. Du hast ${geschafftZahl} von ${alleIds.length} E-Mail-Übungen geschafft.`);
+  showNav(false, false);
+
+  content.innerHTML = `
+    <article class="card" data-readable="true">
+      <div class="symbol-heading">
+        <span class="access-box-symbol" aria-hidden="true">${getIconHtml("mail")}</span>
+        <h2>E-Mail-Übungspostfach</h2>
+      </div>
+      <p>Hier übst du mit E-Mails. Du prüfst Mails und schreibst eigene Antworten.</p>
+      <p>Du hast <strong>${geschafftZahl} von ${alleIds.length}</strong> E-Mail-Übungen geschafft.</p>
+      <div class="certificate-actions">
+        <button type="button" class="bedien-pikto nav-button secondary" onclick="renderHandyHub()">${pictoHtml("handy")}<span>Übungs-Handy (${handyZahl} von ${handyGesamt} geschafft)</span></button>
+        <button type="button" class="nav-button secondary" onclick="renderMyPath()">← Zu Mein Lernweg</button>
+      </div>
+      <div class="handy-hub-grid">
+        ${alleIds.map((id) => {
+          const sz = MAILBOX_SZENARIEN[id];
+          const titel = lernhandyTitelOhneCode(hubLernText(sz.titel) || id);
+          const bereich = hubLernText(sz.thema) || "E-Mail üben";
+          const erledigt = !!(geschafftMap[id] && geschafftMap[id].abgeschlossen);
+          return `
+            <button type="button" class="action-card" onclick="renderMailPostfach('${escapeHtml(id)}')">
+              <span class="action-icon" aria-hidden="true">${getIconHtml("mail")}</span>
+              <span>
+                <strong>${escapeHtml(titel)}</strong>
+                <span>${escapeHtml(bereich)}.</span>
+                ${erledigt ? `<span class="handy-hub-status">✓ Geschafft</span>` : ""}
+              </span>
+            </button>`;
+        }).join("")}
+      </div>
+    </article>`;
+  stelleMerken(() => renderMailPostfach());
+  focusContent();
+  renderLegalFooter();
+}
+
+/* ============================================================
    Urkunde – zum Ausdrucken, Name wird von Hand geschrieben
    ============================================================ */
 
@@ -14691,7 +15487,7 @@ function renderCertificate(topicId, score, total, korrigiert) {
           : `<p class="certificate-result">Quiz-Ergebnis: ${score} von ${total} Fragen richtig.</p>`) : ""}
 
         <p class="certificate-date">Datum: ${escapeHtml(today)}</p>
-        <p class="certificate-issuer">Sicher und selbstbestimmt im Internet · Alexianer Stift Tilbeck GmbH</p>
+        <p class="certificate-issuer">Sicher und selbstbestimmt im Internet · Alex &amp; Tilda</p>
       </div>
 
       <div class="certificate-actions">
@@ -14777,10 +15573,21 @@ function renderMemoryCard(topicId) {
 function goBack() {
   if (felderAktiv && content.querySelector(".felder-aufgabe") && felderAktiv.index > 0
     && (!felderAktiv.stand || ["bewertet", "gesperrt"].includes(felderAktiv.stand.art))) return felderSchrittZeigen(felderAktiv.index - 1);
+  if (typeof lernhandyHubAktiv === "object" && lernhandyHubAktiv && content.querySelector(".handy-hub-lauf")) {
+    if (lernhandyHubAktiv.kannZurueck || lernhandyHubAktiv.i > 0) lernhandyHubAktiv.instanz.zurueck();
+    else lernhandyHubAktiv.zurueckFn();
+    return;
+  }
   if (!currentTopicId) return renderMenu();
   /* D2: Von der Übung (oder ihrer Rückmeldung) zurück zum Lerntext. */
   if (aufUebungsSeite) {
     aufUebungsSeite = false; pageDirection = "back";
+    const t = getCurrentTopic(), l = getLessonsForMode(t, currentMode);
+    if (typeof lernhandyWeg === "function" && lernhandyWeg(t, l[currentStep])) return renderLessonHandy();   /* Stufe 2: von der Übung zurück ins Handy */
+    return renderLesson(lessonHasExamples(t, l[currentStep], l) ? "beispiele" : "text");
+  }
+  if (lernTeil === "handy" && content.querySelector(".handy-teil")) {
+    pageDirection = "back";
     const t = getCurrentTopic(), l = getLessonsForMode(t, currentMode);
     return renderLesson(lessonHasExamples(t, l[currentStep], l) ? "beispiele" : "text");
   }
@@ -14805,9 +15612,17 @@ function goBack() {
 }
 
 function goNext() {
+  if (typeof lernhandyHubAktiv === "object" && lernhandyHubAktiv && content.querySelector(".handy-hub-lauf")) {
+    lernhandyHubAktiv.instanz.weiter();
+    return;
+  }
   const t = getCurrentTopic(), ls = getLessonsForMode(t, currentMode);
   if (!aufUebungsSeite && lernTeil === "text" && content.querySelector(".lesson-card") && lessonHasExamples(t, ls[currentStep], ls)) return renderLessonExamples();
-  if (nextButton && nextButton.dataset.warten === "1") return renderPracticePage();
+  if (nextButton && nextButton.dataset.warten === "1") {
+    /* Stufe 2: vor der Übung erst ins Handy (nur mit Schalter im Musterthema) */
+    if (!aufUebungsSeite && lernTeil !== "handy" && typeof lernhandyWeg === "function" && lernhandyWeg(t, ls[currentStep])) return renderLessonHandy();
+    return renderPracticePage();
+  }
   const topic = getCurrentTopic();
   if (!topic) return renderMenu();
 
@@ -14937,6 +15752,10 @@ function handleHash() {
     }
 
     /* Sonderrouten */
+    if (hash === "handy") return renderHandyHub();
+    if (hash.startsWith("handy:")) return startHandyWeg(hash.slice(6));
+    if (hash === "postfach") return renderMailPostfach();
+    if (hash.startsWith("postfach:")) return renderMailPostfach(hash.slice(9));
     if (hash === "grosses-quiz") return startBigQuiz();
     if (hash === "wiederholen") return startRepeatQuiz();
     if (hash === "meine-karte") return renderRegelKarte();

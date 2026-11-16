@@ -291,3 +291,54 @@ body.ws .ws-inhalt :is(section.card,aside.card,nav.card,li.card,details.card){ba
 }
 .ws-nur-folie .ws-bereichwahl,.ws-praesentieren .ws-bereichwahl{display:none!important}
 @media print{.ws-bereichwahl{display:none!important}}
+
+/* Vereinheitlichung mit dem gemeinsamen Designsystem (--at-*) */
+body.entwurf.ws {
+  --bg: var(--at-bg);
+  --surface: var(--at-surface);
+  --surface-soft: var(--at-surface-soft);
+  --surface-hover: var(--at-surface-hover);
+  --ink: var(--at-ink);
+  --ink-soft: var(--at-ink-soft);
+  --line: var(--at-line);
+  --accent: var(--at-accent);
+  --accent-dark: var(--at-accent-dark);
+  --accent-soft: var(--at-accent-soft);
+  --on-accent: var(--at-accent-ink);
+  --focus: var(--at-focus);
+  --pilot-c0: var(--at-bg);
+  --pilot-c1: var(--at-bg);
+  --pilot-c2: var(--at-surface);
+  --pilot-c3: var(--at-surface-soft);
+  --pilot-c4: var(--at-ink);
+  --pilot-c5: var(--at-ink-soft);
+  --pilot-c6: var(--at-line);
+  --pilot-c7: var(--at-accent);
+  --pilot-c8: var(--at-accent);
+  --pilot-c9: var(--at-surface-soft);
+  --pilot-c10: var(--at-accent-ink);
+  background: var(--at-bg);
+  color: var(--at-ink);
+  font-family: var(--at-font);
+}
+body.entwurf.ws .ws-app { max-width: 1120px; padding: 12px 18px 40px; }
+body.entwurf.ws .ws-kopf { border-bottom: 0; padding: 14px 4px 10px; }
+body.entwurf.ws .ws-kopf .header-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--at-surface-soft);
+}
+body.entwurf.ws .ws-kopf #wsTitel { font-size: clamp(1.5rem, 2.5vw, 2rem); margin: 0 0 2px; }
+body.entwurf.ws .ws-held {
+  background: var(--at-surface) !important;
+  border-radius: var(--at-radius-lg, 24px) !important;
+  padding: 24px 28px !important;
+  box-shadow: var(--at-shadow-sm) !important;
+}
+body.entwurf.ws .ws-knopf { border: 0; background: var(--at-surface-soft); color: var(--at-ink); border-radius: 999px; }
+body.entwurf.ws .ws-knopf.primaer { background: var(--at-accent); color: var(--at-accent-ink); box-shadow: none; }
+body.entwurf.ws .ws-knopf.primaer:hover { background: var(--at-accent-dark); }
+body.entwurf.ws .ws-fuss a:not(.ws-knopf) { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 6px; }

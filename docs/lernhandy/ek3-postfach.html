@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EK3 im Lern-Handy – Lieferverzug: Ware kommt nicht an (E-Mail-Postfach)</title>
+<!-- EK3 Pilot (11.11.2026): Interaktives E-Mail-Übungspostfach im Lern-Handy.
+     Didaktischer Ablauf: Situation -> Vorbild -> Entscheidung -> Übung mit Postfach -> Transfer.
+     Drei Schreibmöglichkeiten: Textbausteine, Satz-Starter und Freitext mit Selbstkontrolle.
+     Nur lokale Vorschau im Entwicklungszweig claude/be1-lernhandy. -->
+<link rel="stylesheet" href="lernhandy.css">
+<link rel="stylesheet" href="vorschau.css">
+</head>
+<body>
+<details class="vorschau" id="vorschau"></details>
+<div id="lernweg"></div>
+<script src="../topics.js"></script>
+<script src="../regeln-de.js"></script>
+<script src="lernhandy.js"></script>
+<script src="ek3-postfach-daten.js"></script>
+<script src="vorschau.js"></script>
+<script>
+"use strict";
+const params = new URLSearchParams(location.search);
+let stufeWahl = params.get("stufe");
+if (!["leicht", "einfach", "standard"].includes(stufeWahl)) stufeWahl = "leicht";
+
+let leisteZeigen = null;
+const lw = window.lw = LernHandy.lernweg({
+  wurzel: document.getElementById("lernweg"),
+  lernweg: ek3PostfachLernweg(),
+  regeln: typeof REGELN !== "undefined" ? REGELN : [],
+  stufe: stufeWahl,
+  neustart: params.get("neustart") === "1" || params.get("neustart") === "true",
+  schritt: params.get("schritt") !== null ? parseInt(params.get("schritt"), 10) : undefined,
+  piktogramme: "../assets/pictograms/",
+  nachZeichnen: (info) => {
+    document.title = `Schritt ${info.i + 1}: EK3 Lieferverzug (E-Mail) – Lern-Handy`;
+    leisteZeigen && leisteZeigen();
+  }
+});
+leisteZeigen = vorschauLeiste(document.getElementById("vorschau"), lw, {
+  titel: "EK3 E-Mail-Übungspostfach (Pilot), nur lokal",
+  links: [
+    { href: "index.html", text: "Lern-Handy Übersicht" },
+    { href: "be1.html", text: "BE1 öffnen" },
+    { href: "ge1.html", text: "GE1 öffnen" }
+  ]
+});
+</script>
+</body>
+</html>

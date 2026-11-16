@@ -2,7 +2,7 @@
 
 **Stand:** 20.09.2026 · **Gilt für:** Instagram, Facebook, TikTok, Snapchat, Cybermobbing · **Status:** erste Fassung. Noch nicht gedruckt, noch nicht im Praxistest erprobt.
 
-Alle Vorlagen gibt es zweimal: als **PowerPoint zum Bearbeiten** und als **PDF zum Drucken**. Gestaltung: Arial, die Farben der Workshop-Folien, keine Bilder.
+Alle Vorlagen gibt es zweimal: als **PowerPoint zum Bearbeiten** und als **PDF zum Drucken**. Gestaltung: Liberation Sans, die Farben der Workshop-Folien, keine Bilder.
 
 | Datei | Format | Seiten |
 |---|---|---|

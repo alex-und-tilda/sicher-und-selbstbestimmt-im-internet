@@ -3,53 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Snapchat sicher und selbstbestimmt nutzen – Praxis</title>
 <style>
   :root{
-    --navy:#00285A; --red:#B5152B; --blue:#3E96BE; --blue2:#57A3C7;
-    --bluelight:#AAD1E3; --bluebg:#D8EAF2; --gray:#C6C7C8; --ink:#1A1A1A; --green:#2E7D4F; --white:#fff;
+    --navy:#00285A; --navy-bg:#00285A; --navy-ink:#ffffff; --red:#B5152B; --blue:#14638c; --blue2:#0a527a;
+    --bluelight:#AAD1E3; --bluebg:#D8EAF2; --surface:#ffffff; --ic-bg:#ffffff; --ink:#1A1A1A; --ink-soft:#3c4a55;
+    --attr:#495965; --line:#eef1f3; --num-ink:#ffffff; --tip-bg:#FFF7E6; --done-bg:#E7F3EC; --green:#175c34; --focus:#00285A;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --navy:#9fd4f5; --navy-bg:#0d223a; --navy-ink:#0a1929; --red:#f87171; --blue:#7ec8ed; --blue2:#9ad8f5;
+      --bluelight:#b9dcf0; --bluebg:#0f1722; --surface:#172330; --ic-bg:#eef4fa; --ink:#eef4fa; --ink-soft:#c0d0df;
+      --attr:#b0c2d4; --line:#2d4053; --num-ink:#0a1929; --tip-bg:#352809; --done-bg:#123321; --green:#6ee7b7; --focus:#7cc0f5;
+    }
+    .speak img,.mini{background:#eef4fa;border-radius:999px;padding:2px}
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0; background:var(--bluebg); color:var(--ink);
-    font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:20px; line-height:1.5}
+    font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:20px; line-height:1.5; overflow-wrap:anywhere; hyphens:auto}
   .wrap{max-width:780px; margin:0 auto; padding:0 16px 60px}
-  header.top{background:var(--navy); color:#fff; padding:28px 16px; text-align:center}
+  header.top{background:var(--navy-bg); color:#fff; padding:28px 16px; text-align:center}
   header.top h1{margin:0; font-size:30px}
   header.top p{margin:8px 0 0; color:var(--bluelight); font-size:19px}
-  .intro{background:#fff; border-radius:16px; padding:16px 18px; margin:20px 0 6px; display:flex; gap:12px; align-items:flex-start; box-shadow:0 2px 8px rgba(0,0,0,.10)}
+  .intro{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin:20px 0 6px; display:flex; gap:12px; align-items:flex-start; box-shadow:0 2px 8px rgba(0,0,0,.10); min-width:0}
   .nav{margin:16px 0 4px}
   .nav .lbl{font-weight:700; margin-bottom:8px; color:var(--navy)}
   .chips{display:flex; flex-wrap:wrap; gap:8px}
-  .chip{display:inline-block; background:#fff; color:var(--navy); text-decoration:none; font-size:16px;
-    padding:8px 13px; border-radius:30px; border:2px solid var(--bluelight)}
-  .chip:hover,.chip:focus{background:var(--navy); color:#fff; border-color:var(--navy)}
-  .topic{background:#fff; border-radius:18px; padding:20px; margin:18px 0; box-shadow:0 3px 10px rgba(0,0,0,.10); border-left:8px solid var(--accent); scroll-margin-top:14px}
-  .topic.base{background:#fff; border-left:8px solid var(--red); box-shadow:0 4px 14px rgba(181,21,43,.16)}
-  .topic-head{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
-  .topic-ic{width:60px;height:60px;border-radius:50%;background:#fff;border:3px solid var(--accent);
+  .chip{display:inline-flex; align-items:center; min-height:44px; background:var(--surface); color:var(--navy); text-decoration:none; font-size:16px;
+    padding:8px 14px; border-radius:30px; border:2px solid var(--blue)}
+  .chip:hover,.chip:focus-visible{background:var(--navy); color:var(--navy-ink); border-color:var(--navy)}
+  .topic{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:20px; margin:18px 0; box-shadow:0 3px 10px rgba(0,0,0,.10); border-left:8px solid var(--accent); scroll-margin-top:14px; min-width:0}
+  .topic.base{background:var(--surface); border-left:8px solid var(--red); box-shadow:0 4px 14px rgba(181,21,43,.16)}
+  .topic-head{display:flex; align-items:center; gap:14px; flex-wrap:wrap; min-width:0}
+  .topic-ic{width:60px;height:60px;border-radius:50%;background:var(--ic-bg);border:3px solid var(--accent);
     display:flex;align-items:center;justify-content:center;flex:0 0 auto}
   .topic.base .topic-ic{border-color:var(--red)}
   .topic-ic img{width:40px;height:40px;object-fit:contain}
-  .topic h2{margin:0; font-size:23px; color:var(--navy); flex:1 1 auto}
-  .speak{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--blue);background:#fff;
+  .topic h2{margin:0; font-size:23px; color:var(--navy); flex:1 1 200px; min-width:0}
+  .speak{display:inline-flex;align-items:center;gap:7px;min-height:44px;border:2px solid var(--blue);background:var(--surface);
     color:var(--navy);font:inherit;font-weight:700;font-size:16px;padding:8px 14px;border-radius:30px;cursor:pointer}
-  .speak.active{background:var(--navy);color:#fff}
-  .warum{background:var(--bluebg); border-radius:12px; padding:12px 14px; margin:14px 0; display:flex; gap:10px; align-items:flex-start}
+  .speak.active{background:var(--navy);color:var(--navy-ink)}
+  .warum{background:var(--bluebg); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:14px 0; display:flex; gap:10px; align-items:flex-start; min-width:0}
   .mini{width:26px;height:26px;flex:0 0 auto;margin-top:2px}
   ol.steps{list-style:none; margin:6px 0 0; padding:0; counter-reset:s}
-  ol.steps li{counter-increment:s; display:flex; gap:14px; align-items:flex-start; padding:11px 0; border-bottom:1px solid #eef1f3}
+  ol.steps li{counter-increment:s; display:flex; gap:14px; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--line); min-width:0}
   ol.steps li:last-child{border-bottom:0}
-  .num{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;
+  .num{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--num-ink);
     font-weight:700;display:flex;align-items:center;justify-content:center}
   .num::before{content:counter(s)}
-  .txt{padding-top:5px}
-  .note-tip{display:flex;gap:10px;align-items:flex-start;margin:12px 0 0;background:#FFF7E6;border-radius:12px;padding:10px 14px;font-size:18px}
-  .done{display:flex;gap:10px;align-items:center;margin:12px 0 0;color:var(--green);font-weight:700;background:#E7F3EC;border-radius:12px;padding:10px 14px}
-  footer{margin-top:26px; font-size:15px; color:#3c4a55}
-  footer .note{background:#fff;border-radius:14px;padding:16px;border-left:6px solid var(--red);display:flex;gap:10px;align-items:flex-start}
-  footer .attr{margin-top:14px; color:#5a6a75; font-size:13px}
-  .skip{position:absolute;left:-999px} .skip:focus{left:8px;top:8px;position:fixed;background:#fff;padding:8px;border-radius:8px;z-index:9}
+  .txt{padding-top:5px; min-width:0; flex:1 1 auto}
+  .note-tip{display:flex;gap:10px;align-items:flex-start;margin:12px 0 0;background:var(--tip-bg);border-radius:12px;padding:10px 14px;font-size:18px;min-width:0}
+  .done{display:flex;gap:10px;align-items:center;margin:12px 0 0;color:var(--green);font-weight:700;background:var(--done-bg);border-radius:12px;padding:10px 14px;min-width:0}
+  footer{margin-top:26px; font-size:15px; color:var(--ink-soft)}
+  footer .note{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;border-left:6px solid var(--red);display:flex;gap:10px;align-items:flex-start;min-width:0}
+  footer .attr{margin-top:14px; color:var(--attr); font-size:13px}
+  .skip{position:absolute;left:-999px;min-height:44px;display:inline-flex;align-items:center} .skip:focus{left:8px;top:8px;position:fixed;background:var(--surface);color:var(--navy);padding:10px 14px;border-radius:8px;border:2px solid var(--focus);z-index:9}
+  .praxis-nav{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 6px}
+  .praxis-nav a{color:var(--navy);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;padding:4px 2px}
+  .praxis-nav a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+  @media(max-width:420px){.wrap{padding:0 12px 48px}.topic{padding:14px}.topic-ic{width:48px;height:48px}.topic-ic img{width:32px;height:32px}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 <style>
 /* Schrift lokal einbinden statt von Google (Prüfbericht B22).
@@ -79,6 +95,12 @@
   <p>Praxis · Schritt für Schritt zum Mitmachen</p>
 </header>
 <div class="wrap">
+  <nav class="praxis-nav" aria-label="Zurück zur Plattform">
+    <a href="index.html">← Alle Praxis-Apps</a>
+    <a href="../zugang.html">← Zum Bildungsportal</a>
+    <a href="../index.html#themen">← Zur Lern-App</a>
+    <a href="../lernhandy/index.html">Zum Lern-Handy</a>
+  </nav>
   <main id="main">
   <div class="intro">
     <img class="mini" src="../assets/pictograms/handy.svg" alt="">
@@ -205,8 +227,7 @@
     </div>
     <div class="attr">
       Stand: Juni 2026 · Quelle der Einstellungen: Snapchat-Hilfebereich (help.snapchat.com).<br>
-      Bildzeichen: ARASAAC – Autor Sergio Palao (Gobierno de Aragón), Lizenz CC BY-NC-SA · www.arasaac.org<br>
-      Prototyp für die Plattform „Alex und Tilda“ · Alexianer Stift Tilbeck GmbH · Gefördert durch die Sozialstiftung NRW.<br>
+      Alex &amp; Tilda · Materialgrundlage (Juni 2026) gefördert durch die Sozialstiftung NRW.<br>
       Hinweis: Texte vor offizieller Nutzung von einer Prüfgruppe testen lassen.
     </div>
   </footer>

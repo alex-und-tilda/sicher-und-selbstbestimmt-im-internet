@@ -1,0 +1,226 @@
+.at-nav {
+  background: var(--at-bg, #faf8f5);
+  border-bottom: 1px solid var(--at-line, #ded7cc);
+  color: var(--at-ink, #17222f);
+  font-family: var(--at-font, "Atkinson Hyperlegible", sans-serif);
+}
+
+.at-nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.at-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--at-ink, #17222f);
+  text-decoration: none;
+}
+
+.at-nav-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: none;
+}
+
+.at-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.at-nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--at-ink, #17222f);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.at-nav-ico {
+  display: none;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.at-nav-link:hover {
+  background: var(--at-surface-soft, #f2eee8);
+}
+
+.at-nav-link[aria-current="page"] {
+  background: var(--at-accent-soft, #e6eff8);
+  color: var(--at-accent, #0b4f8a);
+  font-weight: 700;
+}
+
+.at-nav-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.at-nav-ctrl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--at-line, #ded7cc);
+  background: var(--at-surface, #ffffff);
+  color: var(--at-ink, #17222f);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.at-nav-ctrl:hover {
+  background: var(--at-surface-soft, #f2eee8);
+}
+
+.at-nav-ctrl[aria-pressed="true"] {
+  background: var(--at-accent, #0b4f8a);
+  color: var(--at-accent-ink, #ffffff);
+  border-color: var(--at-accent, #0b4f8a);
+}
+
+.at-nav-lang-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--at-surface-soft, #f2eee8);
+  color: var(--at-ink-soft, #485869);
+  font-size: 0.78em;
+  font-weight: 700;
+}
+
+.at-nav-sli {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--at-accent, #0b4f8a);
+  color: var(--at-accent-ink, #ffffff);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.at-nav-sli img,
+.at-nav-ctrl img {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.at-nav-sli-env {
+  font-weight: 500;
+  opacity: 0.92;
+  font-size: 0.88em;
+}
+
+@media (max-width: 1180px) {
+  .at-nav-sli-env {
+    display: none;
+  }
+}
+
+.at-nav-link:focus-visible,
+.at-nav-brand:focus-visible,
+.at-nav-ctrl:focus-visible,
+.at-nav-sli:focus-visible {
+  outline: 3px solid var(--at-focus, #b45309);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 78px;
+  }
+  html.at-im-lernweg body {
+    padding-bottom: 0;
+  }
+  .at-nav-inner {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  .at-nav-links {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 120;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+    background: var(--at-surface, #ffffff);
+    border-top: 1px solid var(--at-line, #ded7cc);
+    box-shadow: 0 -4px 16px rgba(23, 34, 47, 0.08);
+  }
+  .at-nav-ico {
+    display: block;
+  }
+  .at-nav-link {
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    min-height: 52px;
+    min-width: 0;
+    padding: 4px 2px;
+    border-radius: 12px;
+    font-size: clamp(10.5px, 2.9vw, 13px);
+    line-height: 1.15;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+  .at-nav-ctrl,
+  .at-nav-sli {
+    min-height: 44px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+  .at-nav-lang-badge {
+    display: none;
+  }
+}
+
+@media print {
+  .at-nav {
+    display: none !important;
+  }
+}

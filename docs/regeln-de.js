@@ -237,10 +237,10 @@ const REGEL_SAETZE = {
     "Kostenlos kann teuer werden. Ich lese genau.", // betrug
     "Ich zahle nie sofort. Ich frage erst.", // betrug
     "Kein Geld senden. Keine Daten eingeben.", // betrug
-    "Ich kaufe bei Shops, die ich kenne.", // einkaufen
+    "Ich kaufe bei bekannten Shops.", // einkaufen
     "Sehr billig und nur Vorkasse: Warnzeichen.", // einkaufen
     "Rechnung ist sicherer als Vorkasse.", // einkaufen
-    "Ich kaufe bei Shops, die ich kenne oder geprüft habe.", // einkaufen
+    "Ich kaufe bei bekannten Shops. Oder ich prüfe den Shop vorher.", // einkaufen
     "Ich kaufe bei Shops, die ich geprüft habe.", // einkaufen
     "Sehr billig und nur Vorkasse: Da kaufe ich nicht.", // einkaufen
     "Erst prüfen. Dann kaufen.", // einkaufen
@@ -452,7 +452,7 @@ const REGEL_SAETZE = {
     "Ich nehme ein langes Passwort.", // datenschutz
     "Doppelt sichern schützt mein Konto.", // datenschutz
     "Mit Passkey brauche ich kein Passwort.", // datenschutz
-    "KI ist in vielen Apps. Auch wenn ich sie nicht sehe.", // ki
+    "KI ist in vielen Apps. Ich sehe die KI oft nicht.", // ki
     "KI ist in vielen Apps.", // ki
     "Online-Käufe kann ich oft 14 Tage zurückgeben.", // einkaufen
     /* Datenschutz, Paket 2: die 5 Schritte des Plans auf der Merk-Karte.

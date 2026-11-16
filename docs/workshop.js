@@ -8,8 +8,6 @@
   const main = document.getElementById("inhalt");
   const reiter = document.getElementById("wsReiter");
   const ansage = document.getElementById("wsAnsage");
-  /* Titel der Lernthemen wie in topics.js; workshop.html lädt topics.js nicht. */
-  const THEMEN_TITEL = { facebook: "Facebook", instagram: "Instagram", snapchat: "Snapchat", tiktok: "TikTok", hilfe: "Hilfe bei Problemen" };
 
   const BEREICHE = [
     ["ueberblick", "Vorbereiten"],
@@ -30,6 +28,45 @@
     return key ? `<img class="orientierung-zeichen" src="assets/pictograms/${key}.svg" width="28" height="28" alt="" aria-hidden="true">` : '';
   }
 
+  const WORKSHOP_HANDY_WEGE = {
+    facebook: [
+      { weg: "fb2", titel: "Unbekannte Personen – Tilda fragt dich (empfohlen)", meta: "Gemeinsam beraten und abwägen" },
+      { weg: "fb1", titel: "Wer sieht meinen Beitrag?", meta: "Sichtbarkeit einstellen" }
+    ],
+    instagram: [
+      { weg: "ig1", titel: "Privat oder öffentlich?", meta: "Konto-Schutz prüfen" },
+      { weg: "ig2", titel: "Echt oder Werbung?", meta: "Beiträge gemeinsam prüfen" }
+    ],
+    snapchat: [
+      { weg: "sc1", titel: "Verschwindet das wirklich?", meta: "Fotos sicher teilen" },
+      { weg: "sc2", titel: "Standort auf der Karte", meta: "Geist-Modus ausprobieren" }
+    ],
+    tiktok: [
+      { weg: "tt1", titel: "Pause beim Scrollen", meta: "Ruhe bewahren" },
+      { weg: "tt2", titel: "Vor dem Teilen prüfen", meta: "Quellen erkennen" }
+    ],
+    cybermobbing: [
+      { weg: "h2", titel: "Was kann ich selbst tun? (empfohlen)", meta: "Gerät sicher halten" },
+      { weg: "h1", titel: "Blockieren und melden", meta: "Hilfe im Netz" },
+      { weg: "ge1", titel: "Gemeinsam sicher in sozialen Netzwerken", meta: "Alle Plattformen vergleichen" }
+    ]
+  };
+
+  function handyBoxHtml(id) {
+    const wege = WORKSHOP_HANDY_WEGE[id] || [];
+    if (!wege.length) return "";
+    const erster = wege[0];
+    return `
+      <section class="card ws-block">
+        <h2>Jetzt gemeinsam im Übungs-Handy ausprobieren</h2>
+        <p class="ws-klein">Passend zu diesem Workshop öffnet sich das Übungs-Handy direkt im Modus „Gemeinsam lernen“ – ohne echtes Konto und ohne Anmeldung.</p>
+        <p style="margin:10px 0 12px;"><a class="ws-knopf" href="lernhandy/kurzweg.html?weg=${encodeURIComponent(erster.weg)}&amp;lernkreis=1&amp;mode=gemeinsam">Im großen Übungs-Handy öffnen: ${esc(erster.titel)}</a></p>
+        <ul class="ws-einstiege">
+          ${wege.map((w) => `<li><a href="lernhandy/kurzweg.html?weg=${encodeURIComponent(w.weg)}&amp;lernkreis=1&amp;mode=gemeinsam"><span class="ws-mat-titel">${esc(w.titel)}</span><span class="ws-mat-meta">${esc(w.meta)}</span></a></li>`).join("")}
+        </ul>
+      </section>`;
+  }
+
   // ------------------------------------------------------------ Hilfen
 
   function esc(s) {
@@ -38,12 +75,11 @@
       .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
 
-  /* Verweise auf die Lernplattform in den Notizen anklickbar machen.
-     Nur bekannte Muster: #thema-…[:…] und praxis/<app>.html. */
+  /* Verweise auf die Lernplattform in den Notizen anklickbar machen. */
   function verlinkt(text) {
     return esc(text)
-      .replace(/(^|[\s(„])(#thema-[a-z]+(?::[a-z]+)?)/g,
-        (m, vor, h) => `${vor}<a href="index.html${h}" target="_blank" rel="noopener">${h}</a>`)
+      .replace(/(^|[\s(„])(#thema-([a-z]+)(?::[a-z]+)?)/g,
+        (m, vor, h, thema) => `${vor}<a href="lernhandy/index.html?thema=${encodeURIComponent(thema)}#thema-${encodeURIComponent(thema)}">Thema öffnen</a>`)
       .replace(/(^|[\s(\/])(praxis\/[a-z]+\.html)/g,
         (m, vor, p) => `${vor}<a href="${p}" target="_blank" rel="noopener">${p}</a>`);
   }
@@ -185,6 +221,8 @@
         ${karten.map(([b, t, s]) => `<a class="ws-kachel card" href="#${id}/${b}"><span class="ws-kachel-titel">${esc(t)}</span><span class="ws-kachel-text">${esc(s)}</span></a>`).join("")}
       </section>
 
+      ${handyBoxHtml(id, true)}
+
       <div class="ws-zwei">
         <section class="card ws-block">
           <h3>Ablauf (90 Minuten)</h3>
@@ -233,7 +271,7 @@
       if (z.art === "punkt") return `<p class="ws-punkt"><span class="ws-marke">${esc(z.marke)}</span><span>${esc(z.text)}</span></p>`;
       return `<p>${esc(z.text)}</p>`;
     }).join("");
-    return `<div class="ws-folie"><h3 class="ws-folie-titel">${esc(f.titel)}</h3><div class="ws-folie-text">${zeilen}</div></div>`;
+    return `<div class="ws-folie"><h2 class="ws-folie-titel">${esc(f.titel)}</h2><div class="ws-folie-text">${zeilen}</div></div>`;
   }
 
   function ansichtFolien(id, d, wert) {
@@ -246,11 +284,12 @@
       `<dt>${esc(k)}</dt><dd>${verlinkt(f.notizen[k])}</dd>`).join("");
     const modul = f.weitere.length
       ? `<details class="ws-aufklapp ws-modul"><summary>Leitfaden zum ganzen Modul (${f.weitere.length} Abschnitte)</summary>${f.weitere.map((w) =>
-          `<h4>${esc(w.titel)}</h4><p>${verlinkt(w.text)}</p>`).join("")}</details>`
+          `<h3>${esc(w.titel)}</h3><p>${verlinkt(w.text)}</p>`).join("")}</details>`
       : "";
     const antwort = (f.notizen.Hinweis || '').match(/Passende Antwort: ([ABC])/);
     const korrekt = antwort && f.zeilen.find(z => z.art === 'punkt' && z.marke === antwort[1]);
     return `
+      ${document.body.classList.contains("ws-nur-folie") ? `<h1 class="sr-only">${esc(d.name)} – Folie ${n}: ${esc(f.titel)}</h1>` : ""}
       <div class="ws-folien">
         <nav class="ws-kapitel" aria-label="Abschnitte der Präsentation">
           ${teile.map((a) => `<a href="#${id}/folien/${a.von}" ${a === akt ? 'aria-current="true"' : ""}><span>${esc(a.name)}</span><span class="ws-kapitel-meta">Folie ${a.von}${a.bis > a.von ? "–" + a.bis : ""} · ${a.minuten} Min</span></a>`).join("")}
@@ -273,7 +312,7 @@
             Pfeiltasten blättern. Für den Beamer: ${dateiLink(d.praesentation, "PowerPoint-Original", "ws-link")}.</p>
         </div>
         <aside class="ws-notizen card" tabindex="0" aria-label="Notizen zu Folie ${n}">
-          <h3>Notizen für die Leitung</h3>
+          <h2>Notizen für die Leitung</h2>
           <dl class="ws-dl">${notizen || "<dt>Notiz</dt><dd>keine</dd>"}</dl>
           ${modul}
           ${quelle("Sprechernotizen der PowerPoint, unverändert")}
@@ -281,13 +320,9 @@
       </div>`;
   }
 
-  /* imSchritt (Schritt 3, 07.11.2026): Im Durchführungsschritt stehen die
-     Seiten in einem Feld mit begrenzter Höhe (bedienung.css). Es ist per
-     Tastatur erreichbar und benannt, damit es sich mit Pfeiltasten blättern
-     lässt. Im Materialbereich bleibt die Ansicht unverändert. */
-  function pdfAnsicht(info, titel, imSchritt) {
+  function pdfAnsicht(info, titel) {
     const v=window.PDF_VORSCHAU?.[info.pfad];
-    if(v && v.sha256===info.sha256)return `<div class="ws-pdf-seiten" ${imSchritt?`role="region" tabindex="0" aria-label="Seiten: ${esc(titel)}"`:`aria-label="${esc(titel)}"`}>
+    if(v && v.sha256===info.sha256)return `<div class="ws-pdf-seiten" aria-label="${esc(titel)}">
       <p><a class="ws-knopf" href="${esc(v.druck)}" target="_blank" rel="noopener">Druckansicht der Seiten öffnen</a>
       <a class="ws-link" href="${esc(info.pfad)}" target="_blank" rel="noopener">Original-PDF öffnen</a></p>
       ${v.seiten.map((seite,i)=>`<figure><figcaption>Seite ${i+1} von ${v.seiten.length}</figcaption><img src="${esc(seite.bild)}" alt="Originalseite ${i+1} – ${esc(titel)}" loading="lazy"><details><summary>Text dieser Seite</summary><pre>${esc(seite.text)}</pre></details></figure>`).join('')}
@@ -332,7 +367,7 @@
       ${dateiLink(material.pptx, 'Zum Bearbeiten', 'ws-knopf ws-knopf-leise')}</p>
       ${materialWarnung(d, material)}
       ${metadatenHtml(material.pdf, d.arbeitsmaterial_readme.stand+' · '+d.arbeitsmaterial_readme.status)}
-      ${pdfAnsicht(material.pdf, material.name, true)}
+      ${pdfAnsicht(material.pdf, material.name)}
     </div>`;
   }
 
@@ -426,27 +461,24 @@
   }
 
   function ansichtTeilnehmende(id, d) {
-    const einstiege = [
-      [`#thema-${d.thema}`, "Thema in der Lernplattform", "in drei Sprachstufen, mit Vorlesen"],
-      [`#thema-${d.thema}:kurz`, "Kurz-Modus", "die wichtigsten Lektionen"],
-      [`#thema-${d.thema}:quiz`, "Quiz", "zum Wiederholen allein"],
-      [`#thema-${d.thema}:merk`, "Merk-Karte", "zum Mitnehmen drucken"],
-      [`#thema-${d.thema}:uebung`, "Übungs-Handy", "für Personen ohne Handy oder ohne Konto · auf der Plattform derzeit nur per Direktadresse (Vor-Nutzertest)"],
-    ].filter(([h]) => id !== 'cybermobbing' || !h.endsWith(':uebung'));
+    const themaHref = `lernhandy/index.html?thema=${encodeURIComponent(d.thema)}#thema-${encodeURIComponent(d.thema)}`;
     return `
+      ${handyBoxHtml(id)}
       <div class="ws-zwei">
         <section class="card ws-block">
           <h2>Einstiege in die Lernplattform</h2>
-          <p class="ws-klein">Öffnet die Lernansicht so, wie Teilnehmende sie sehen – in einem neuen Tab.</p>
-          <ul class="ws-einstiege">${einstiege.map(([h, t, s]) =>
-            `<li><a href="index.html${h}" target="_blank" rel="noopener"><span class="ws-mat-titel">${esc(t)}</span><span class="ws-mat-meta"><code>${esc(h)}</code> · ${esc(s)}</span></a></li>`).join("")}</ul>
+          <p class="ws-klein">Öffnet das passende Thema direkt in der Übersicht mit allen Lektionen.</p>
+          <ul class="ws-einstiege">
+            <li><a href="${themaHref}"><span class="ws-mat-titel">Thema in der Lernplattform öffnen</span><span class="ws-mat-meta">In drei Sprachstufen und mit Vorlesen</span></a></li>
+            <li><a href="druckvorlage.html"><span class="ws-mat-titel">Kommunikations-Tafel &amp; Begleit-Karte</span><span class="ws-mat-meta">Zum Ausdrucken und Mitnehmen</span></a></li>
+          </ul>
           ${quelle("Sprechernotizen Folie 1, 24 und 33")}
         </section>
         <section class="card ws-block ws-qr">
           <h2>QR-Code zum Thema</h2>
           <img src="${esc(d.qr)}" alt="QR-Code zum Thema ${esc(id)} der Lernplattform" width="200" height="200">
           <p class="ws-klein">Vorhandene Datei der Lernplattform (<code>${esc(d.qr)}</code>). Sie führt zur veröffentlichten Plattform.
-            Die QR-Bilder der Originalpräsentation bleiben im Original erhalten. Die Links links daneben öffnen dagegen diese Lernplattform.</p>
+            Die QR-Bilder der Originalpräsentation bleiben im Original erhalten. Die Links links daneben öffnen dagegen diese lokale Prüffassung.</p>
         </section>
       </div>
       ${d.klick_anleitung ? `<section class="card ws-block">
@@ -471,8 +503,8 @@
         <ul class="ws-status">
           <li>${statusChip("offen", "offen")} <strong>Lizenz des Workshop-Materials:</strong> Für Folien, Leitfaden, Kahoot und Arbeitsmaterial ist keine eigene Lizenz angegeben (Katalog OF-02).</li>
           <li>${statusChip("offen", "offen")} <strong>Arbeitsmaterial:</strong> ${esc(d.arbeitsmaterial_readme.status)}</li>
-          <li>${statusChip("bestätigt", "ok")} <strong>Bestand:</strong> Die Originaldateien sind in der vorhandenen Material-Seite der Plattform verlinkt (<code>docs/material</code>). Die Materialien sind hier zusätzlich im Browser nutzbar. Eine Lizenz- oder QM-Freigabe folgt daraus nicht.</li>
-          <li>${statusChip("offen", "offen")} <strong>Bilder:</strong> Die Präsentation hat Platzhalter statt Bildern. Die konkreten Bildanforderungen stehen in den unveränderten Notizen der jeweiligen Folie. Die Browseransicht zeigt keine Bilder außer dem vorhandenen Kopf-Bild und QR-Code der Plattform.</li>
+          <li>${statusChip("bestätigt", "ok")} <strong>Bestand:</strong> Die Originaldateien sind in der vorhandenen Material-Seite der Plattform verlinkt (<code>docs/material</code>). Diese private Prüffassung zeigt sie zusätzlich im Browser. Eine Lizenz- oder QM-Freigabe folgt daraus nicht.</li>
+          <li>${statusChip("offen", "offen")} <strong>Bilder:</strong> Die Präsentation hat Platzhalter statt Bildern. Die konkreten Bildanforderungen stehen in den unveränderten Notizen der jeweiligen Folie. Der Entwurf zeigt keine Bilder außer dem vorhandenen Kopf-Bild und QR-Code der Plattform.</li>
         </ul>
       </section>
       ${metadatenHtml(d.praesentation,d.modulstand.wert)}
@@ -504,7 +536,7 @@
     const themen = Object.keys(DATEN);
     return `<section class="card ws-block"><h2>Workshop-Material nach Thema</h2>
       <ul class="ws-einstiege">${themen.map((t) => `<li><a href="#${esc(t)}"><span class="ws-mat-titel">${esc(DATEN[t].folien[0].titel)}</span></a></li>`).join("")}</ul>
-      <p class="ws-klein">Fünf vorhandene Workshopmodule. Cybermobbing ist eigenständig; sein Verweis bei Hilfe bei Problemen ist fachlich vorläufig.</p></section>`;
+      <p class="ws-klein">Fünf ausgearbeitete Workshopmodule für gemeinsame Runden in Gruppen.</p></section>`;
   }
 
   // ------------------------------------------------------------ Steuerung
@@ -514,16 +546,12 @@
     const [id, angefragt = "ueberblick", wert = ""] = route.split("/");
     const bereich = BEREICHE.some(([b])=>b===angefragt) ? angefragt : "ueberblick";
     const d = Object.prototype.hasOwnProperty.call(DATEN,id) ? DATEN[id] : null;
-    /* Schritt 3 (07.11.2026): Der Rückweg nennt das Lernthema, zu dem der
-       Workshop gehört (Titel wie in topics.js). Ohne Workshop bleibt
-       „Zur Lernplattform“. */
-    const rueck = document.getElementById("wsZurueck");
-    rueck.href = d ? `index.html#thema-${d.thema}` : "index.html";
-    rueck.textContent = d ? `← Zum Lernthema ${THEMEN_TITEL[d.thema] || d.name}` : "← Zur Lernplattform";
+    document.getElementById("wsZurueck").href = d ? "#" : "testfassung.html#gemeinsam";
+    document.getElementById("wsZurueck").textContent = d ? "← Alle Workshops" : "← Alle Bereiche";
     if (!d) {
       document.getElementById('wsTitel').textContent='Workshop-Material';
       document.getElementById('wsUnter').textContent='Für Kursleitungen';
-      document.getElementById('wsDruckTitel').textContent='Workshop-Material · Alex und Tilda';
+      document.getElementById('wsDruckTitel').textContent='Workshop-Material · Private Prüffassung 02.11.2026';
       reiter.innerHTML = "";
       document.querySelector('.ws-bereichwahl').hidden=true;
       main.innerHTML = ansichtAuswahl();
@@ -535,7 +563,7 @@
     document.getElementById("wsTitel").textContent = `Workshop ${d.name}`;
     document.getElementById("wsUnter").textContent = titel;
     document.title = `${titel} · Workshop ${id} · Für Kursleitungen`;
-    document.getElementById('wsDruckTitel').textContent=`Workshop ${d.name} · ${titel} · Alex und Tilda · keine Lizenz- oder QM-Freigabe`;
+    document.getElementById('wsDruckTitel').textContent=`Workshop ${d.name} · ${titel} · Private Prüffassung 02.11.2026 · keine Lizenz- oder QM-Freigabe`;
     const bereichLink=([b,t])=>`<a href="#${id}/${b}" ${b===bereich?'aria-current="page"':''}>${bereichZeichen(b)}<span>${esc(t)}</span></a>`;
     reiter.innerHTML = BEREICHE.slice(0,3).map(bereichLink).join('')
       + `<details class="ws-weitere-bereiche" ${BEREICHE.slice(3).some(([b])=>b===bereich)?'open':''}><summary>Weitere Bereiche</summary><div>${BEREICHE.slice(3).map(bereichLink).join('')}</div></details>`;

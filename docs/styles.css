@@ -4523,14 +4523,46 @@ body.simple-mode .practice-box {
 
 .creator-page,
 .static-page {
-  max-width: 860px;
+  max-width: min(860px, 100%);
+  min-width: 0;
   margin: 0 auto;
   padding: 24px 16px 60px;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.static-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.static-nav .plain-back-button {
+  margin-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .creator-page .card,
 .static-page .card {
   margin-bottom: 20px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (max-width: 420px) {
+  .creator-page,
+  .static-page {
+    padding: 16px 12px 48px;
+  }
+  .creator-page .card,
+  .static-page .card {
+    padding: 16px 14px;
+  }
 }
 
 .creator-page .lead,
@@ -4557,6 +4589,8 @@ body.simple-mode .practice-box {
 }
 
 .static-footer a {
+  display: inline-block;
+  padding: 8px 4px;
   color: var(--accent);
   text-decoration: none;
 }
@@ -5913,6 +5947,18 @@ body.simple-mode .practice-box {
 /* Kontrast (08.11.2026, Befund G2): Im Dunkelmodus von Design A ist --line hell (#78908a).
    Helle Schrift darauf hatte 3,08:1. Dunkle Seitenfarbe --bg: 4,73:1. Hellmodus unverändert.
    :where() hält die Gewichtung niedrig, damit Kopfzeilen mit eigener, genauerer Regel ihre Farbe behalten. */
+.phone-bar .glossar-term {
+  color: inherit;
+  border-bottom-color: currentColor;
+}
+
+.phone-bar .glossar-term:hover,
+.phone-bar .glossar-term:focus {
+  background: var(--surface);
+  color: var(--ink);
+  outline-color: currentColor;
+}
+
 @media screen and (prefers-color-scheme: dark) {
   :where(body.entwurf) .phone-bar { color: var(--bg); }
 }
@@ -6990,8 +7036,6 @@ button.sz-runde:focus-visible { border-color: var(--accent); }
 @keyframes f-pochen {
   0%, 100% { transform: scale(1);    opacity: 1;  }
   50%      { transform: scale(1.28); opacity: .55; }
-}
-  /* bleibt stehen, beruehrt nicht */
 }
 @keyframes f-umdrehen {
   0%   { transform: scaleX(1);   }

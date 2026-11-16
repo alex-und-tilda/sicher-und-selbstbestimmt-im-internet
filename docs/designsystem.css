@@ -1,0 +1,225 @@
+/* Alex & Tilda – Gemeinsames Designsystem (Pilot & Bau)
+   Warm, ruhig, erwachsenengerecht, barrierefrei (WCAG 2.2 AA).
+   Bereitet drei visuell unterscheidbare Lernumgebungen vor (E65):
+   - data-learn-env="gefuehrt"     (Schritt für Schritt)
+   - data-learn-env="unterstuetzt" (Mitten in der Geschichte)
+   - data-learn-env="frei"         (Werkstatt) */
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("assets/fonts/atkinson-regular.woff2") format("woff2"),
+       url("assets/fonts/atkinson-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("assets/fonts/atkinson-bold.woff2") format("woff2"),
+       url("assets/fonts/atkinson-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --at-font: "Atkinson Hyperlegible", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --at-size: 18px;
+  --at-radius-sm: 12px;
+  --at-radius-md: 18px;
+  --at-radius-lg: 24px;
+  --at-shadow-sm: 0 2px 10px rgba(38, 52, 45, 0.06);
+  --at-shadow-md: 0 10px 28px rgba(38, 52, 45, 0.10);
+
+  --at-bg: #F8F6F0;
+  --at-surface: #FFFFFF;
+  --at-surface-soft: #EEF3EB;
+  --at-surface-hover: #DFE9D9;
+  --at-ink: #26342D;
+  --at-ink-soft: #43544B;
+  --at-salbei: #8FA590;
+  --at-line: #B8C7B9;
+  --at-accent: #365B46;
+  --at-accent-dark: #26342D;
+  --at-accent-soft: #DFE9D9;
+  --at-accent-ink: #FFFFFF;
+  --at-warm: #805315;
+  --at-warm-soft: #FBF4E7;
+  --at-bad: #9C3E34;
+  --at-bad-soft: #FAEEEC;
+  --at-ok: #365B46;
+  --at-ok-soft: #DFE9D9;
+  --at-focus: #805315;
+
+  --at-env-accent: var(--at-accent);
+  --at-env-soft: var(--at-surface-soft);
+
+  /* Kompatibilität auf bestehende Seiten-Variablen */
+  --bg: var(--at-bg);
+  --surface: var(--at-surface);
+  --surface-tint: var(--at-surface-soft);
+  --surface-hover: var(--at-surface-hover);
+  --ink: var(--at-ink);
+  --ink-soft: var(--at-ink-soft);
+  --muted: var(--at-ink-soft);
+  --line: var(--at-line);
+  --accent: var(--at-accent);
+  --accent-dark: var(--at-accent-dark);
+  --accent-soft: var(--at-accent-soft);
+  --focus: var(--at-focus);
+  --font-body: var(--at-font);
+  --base-size: var(--at-size);
+
+  --bg-seite: var(--at-bg);
+  --bg-karte: var(--at-surface);
+  --farbe-tinte: var(--at-ink);
+  --farbe-leise: var(--at-ink-soft);
+  --farbe-linie: var(--at-line);
+  --farbe-akzent: var(--at-accent);
+  --farbe-akzent-tinte: var(--at-accent-ink);
+  --farbe-akzent-hell: var(--at-accent-soft);
+  --farbe-gut: var(--at-ok);
+  --farbe-gut-hell: var(--at-ok-soft);
+  --farbe-focus: var(--at-focus);
+}
+
+html[data-theme="dark"] {
+  --at-bg: #131B17;
+  --at-surface: #1B2620;
+  --at-surface-soft: #23312A;
+  --at-surface-hover: #2C3D34;
+  --at-ink: #F8F6F0;
+  --at-ink-soft: #DFE9D9;
+  --at-salbei: #8FA590;
+  --at-line: #394E43;
+  --at-accent: #A8C9B3;
+  --at-accent-dark: #DFE9D9;
+  --at-accent-soft: #24382D;
+  --at-accent-ink: #131B17;
+  --at-warm: #F2B84B;
+  --at-warm-soft: #2D2516;
+  --at-bad: #F29B92;
+  --at-bad-soft: #351E1C;
+  --at-ok: #8FD1A6;
+  --at-ok-soft: #1B3325;
+  --at-focus: #F2B84B;
+  --at-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.28);
+  --at-shadow-md: 0 12px 30px rgba(0, 0, 0, 0.40);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --at-bg: #131B17;
+    --at-surface: #1B2620;
+    --at-surface-soft: #23312A;
+    --at-surface-hover: #2C3D34;
+    --at-ink: #F8F6F0;
+    --at-ink-soft: #DFE9D9;
+    --at-salbei: #8FA590;
+    --at-line: #394E43;
+    --at-accent: #A8C9B3;
+    --at-accent-dark: #DFE9D9;
+    --at-accent-soft: #24382D;
+    --at-accent-ink: #131B17;
+    --at-warm: #F2B84B;
+    --at-warm-soft: #2D2516;
+    --at-bad: #F29B92;
+    --at-bad-soft: #351E1C;
+    --at-ok: #8FD1A6;
+    --at-ok-soft: #1B3325;
+    --at-focus: #F2B84B;
+    --at-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.28);
+    --at-shadow-md: 0 12px 30px rgba(0, 0, 0, 0.40);
+  }
+}
+
+/* Schriftgrößen aus „So lerne ich“ und Startseite */
+html[data-font-scale="gross"],
+html[data-text-size="lg"],
+html[data-learn-mode="gemeinsam"] {
+  --at-size: 21px;
+}
+
+html[data-font-scale="sehr-gross"],
+html[data-text-size="xl"] {
+  --at-size: 24px;
+}
+
+html {
+  font-size: var(--at-size);
+}
+
+body {
+  font-family: var(--at-font);
+  background: var(--at-bg);
+  color: var(--at-ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Drei visuell und funktional unterscheidbare Lernumgebungen (E65) */
+html[data-learn-env="gefuehrt"] {
+  --at-env-accent: var(--at-ok);
+  --at-env-soft: var(--at-ok-soft);
+}
+
+html[data-learn-env="unterstuetzt"] {
+  --at-env-accent: var(--at-warm);
+  --at-env-soft: var(--at-warm-soft);
+}
+
+html[data-learn-env="frei"] {
+  --at-env-accent: var(--at-accent);
+  --at-env-soft: var(--at-accent-soft);
+}
+
+/* Ruhige Umgebungs-Markierung im Lernbereich (ohne Kachelflut) */
+html[data-learn-env="gefuehrt"] .panel-card,
+html[data-learn-env="gefuehrt"] .lk-card {
+  border-left: 5px solid var(--at-ok);
+}
+
+html[data-learn-env="unterstuetzt"] .speech-row,
+html[data-learn-env="unterstuetzt"] .lk-speech {
+  background: var(--at-warm-soft);
+  border-left: 4px solid var(--at-warm);
+  border-radius: var(--at-radius-md);
+  padding: 12px 14px;
+}
+
+html[data-learn-env="frei"] .panel-card,
+html[data-learn-env="frei"] .lk-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  border-top: 3px solid var(--at-accent);
+  box-shadow: none;
+  padding-inline: 0;
+  padding-top: 14px;
+}
+
+html[data-motion="ruhig"] *,
+html[data-motion="ruhig"] *::before,
+html[data-motion="ruhig"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Harmonische Anpassung der SVG-Piktogramme an Waldgrün (#365B46) / Helles Salbei (#DFE9D9).
+   Figuren, Szenenbilder (figures/), Warnsymbole (no/stop/block/report/check/warn) und App-Farben bleiben unverändert. */
+img[src*="pictograms/"]:not([src*="no.svg"]):not([src*="stop.svg"]):not([src*="block.svg"]):not([src*="report.svg"]):not([src*="check.svg"]):not([src*="warn"]) {
+  filter: hue-rotate(-58deg) saturate(0.55) brightness(0.86);
+}
+
+html[data-theme="dark"] img[src*="pictograms/"]:not([src*="no.svg"]):not([src*="stop.svg"]):not([src*="block.svg"]):not([src*="report.svg"]):not([src*="check.svg"]):not([src*="warn"]) {
+  filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) img[src*="pictograms/"]:not([src*="no.svg"]):not([src*="stop.svg"]):not([src*="block.svg"]):not([src*="report.svg"]):not([src*="check.svg"]):not([src*="warn"]) {
+    filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+  }
+}

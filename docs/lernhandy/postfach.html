@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Interaktives E-Mail-Übungspostfach – Lern-Handy Alex & Tilda</title>
+<!-- Interaktives E-Mail-Übungspostfach (11.11.2026):
+     Modulare Lernumgebung mit 7 Praxisszenarien:
+     1. ek3: Lieferverzug (Schuhe reklamieren)
+     2. termin: Termin absagen und neu vereinbaren
+     3. einladung: Einladung beantworten
+     4. service: Nachfrage an Kundenservice
+     5. paket: Phishing / Fake-Paketlink entlarven
+     6. sicherheit: Bank-Phishing / PIN-Forderung abwehren
+     7. anhang: Gefährlichen Anhang (.exe) untersuchen und löschen
+     Nur lokale Vorschau im Entwicklungszweig claude/be1-lernhandy. -->
+<link rel="stylesheet" href="../designsystem.css">
+<link rel="stylesheet" href="lernhandy.css">
+<link rel="stylesheet" href="vorschau.css">
+<link rel="stylesheet" href="so-lerne-ich.css">
+<link rel="stylesheet" href="lernkreis-erweiterung.css">
+<link rel="stylesheet" href="../plattform-nav.css">
+</head>
+<body>
+<div id="at-plattform-nav"></div>
+<div id="lernweg"></div>
+<details class="vorschau" id="vorschau"></details>
+<script src="../topics.js"></script>
+<script src="../regeln-de.js"></script>
+<script src="lernhandy.js"></script>
+<script src="postfach-daten.js"></script>
+<script src="vorschau.js"></script>
+<script src="so-lerne-ich.js"></script>
+<script src="../begleitung-de.js"></script>
+<script src="bild-slots.js"></script>
+<script src="lernkreis-wege-daten.js"></script>
+<script src="lernkreis-bausteine.js"></script>
+<script src="../plattform-nav.js" data-at-root="../"></script>
+<script>
+"use strict";
+const params = new URLSearchParams(location.search);
+let szWahl = params.get("sz") || "ek-post1";
+if (szWahl === "ek3") szWahl = "ek-post1";
+if (!window.MAILBOX_SZENARIEN || !window.MAILBOX_SZENARIEN[szWahl]) szWahl = "ek-post1";
+const gruppeWahl = params.get("gruppe") || "";
+
+const sliState = window.SoLerneIch ? window.SoLerneIch.getState() : { sprache: "leicht", lernform: "allein" };
+const sliStufeMap = { leicht: "leicht", einfach: "einfach", alltag: "standard" };
+let stufeWahl = sliStufeMap[sliState.sprache] || params.get("stufe") || "leicht";
+if (!["leicht", "einfach", "standard"].includes(stufeWahl)) stufeWahl = "leicht";
+
+const szData = window.MAILBOX_SZENARIEN[szWahl];
+const lwData = window.erstellePostfachLernweg(szWahl);
+
+let leisteZeigen = null;
+const lw = window.lw = LernHandy.lernweg({
+  wurzel: document.getElementById("lernweg"),
+  lernweg: lwData,
+  regeln: typeof REGELN !== "undefined" ? REGELN : [],
+  stufe: stufeWahl,
+  szenarienAuswahl: true,
+  neustart: params.get("neustart") === "1" || params.get("neustart") === "true",
+  schritt: params.get("schritt") !== null ? parseInt(params.get("schritt"), 10) : undefined,
+  piktogramme: "../assets/pictograms/",
+  nachZeichnen: (info) => {
+    const aktStufe = (info && info.stufe) || stufeWahl;
+    const titelTxt = typeof szData.titel === "object" ? (szData.titel[aktStufe] || szData.titel.leicht) : szData.titel;
+    document.title = `Schritt ${info.i + 1}: ${titelTxt} – E-Mail-Postfach`;
+    if (window._lkInst) window._lkInst.aktualisieren(info);
+    leisteZeigen && leisteZeigen();
+  }
+});
+if (params.get("lernkreis") !== "0" && window.LernkreisBausteine) {
+  window._lkInst = window.LernkreisBausteine.anbinden({
+    id: szWahl,
+    lw,
+    wurzel: document.getElementById("lernweg"),
+    stufe: stufeWahl,
+    modus: sliState.lernform || params.get("mode") || "allein"
+  });
+}
+
+const SCHREIBEN_GRUPPE = new Set(["termin", "einladung", "service"]);
+const alleKeys = Object.keys(window.MAILBOX_SZENARIEN);
+const gefilterteKeys = gruppeWahl === "schreiben"
+  ? alleKeys.filter((k) => SCHREIBEN_GRUPPE.has(k))
+  : alleKeys;
+
+const szLinks = gefilterteKeys.map((k) => {
+  const item = window.MAILBOX_SZENARIEN[k];
+  const name = typeof item.titel === "object" ? (item.titel.leicht || k) : item.titel;
+  const suffix = k === "ek-post1" ? " (Empfohlen)" : "";
+  const grpParam = gruppeWahl ? `&gruppe=${encodeURIComponent(gruppeWahl)}` : "";
+  return {
+    href: `postfach.html?sz=${k}&lernkreis=1${grpParam}`,
+    text: `${item.icon || '✉️'} ${name}${suffix}`
+  };
+});
+if (gruppeWahl === "schreiben") {
+  szLinks.push({ href: "postfach.html?sz=ek-post1&lernkreis=1", text: "Alle 7 Postfach-Übungen" });
+}
+
+const vorschauTitel = gruppeWahl === "schreiben"
+  ? `E-Mails schreiben: ${typeof szData.titel === "object" ? szData.titel.leicht : szData.titel}`
+  : `E-Mail-Postfach: ${szData.thema} (${szData.lektion})`;
+
+const mitVorschau = params.get("vorschau") === "1";
+const vorschauEl = document.getElementById("vorschau");
+if (!mitVorschau && vorschauEl) {
+  vorschauEl.remove();
+} else if (vorschauEl) {
+  leisteZeigen = vorschauLeiste(vorschauEl, lw, {
+    titel: vorschauTitel,
+    links: [
+      ...szLinks,
+      { href: "index.html", text: "Alle Übungen" }
+    ]
+  });
+}
+window._leisteZeigen = leisteZeigen;
+</script>
+</body>
+</html>

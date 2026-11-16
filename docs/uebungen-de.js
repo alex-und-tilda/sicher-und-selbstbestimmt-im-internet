@@ -76,8 +76,8 @@ const EXTRA_PRACTICE = {
         correctIndex: 0,
         auchMoeglich: [2],
         feedbackWrong: [null, "Dann kennt eine fremde Person deinen Namen. Und sie weiß: Hier antwortet jemand. Manche Betrüger schreiben viele Nummern einfach an.", null],
-        feedbackAuch: [null, null, "Dann kann dir die Nummer nicht mehr schreiben."],
-        feedbackCorrect: "Du kennst die Nummer nicht. Du musst nicht antworten. So erfährt die fremde Person nichts über dich.",
+        feedbackAuch: [null, null, "Du hast die Nummer in WhatsApp blockiert. Nachrichten von dieser Nummer kommen nicht mehr direkt bei dir an."],
+        feedbackCorrect: "Du antwortest nicht. Du schickst keinen Namen und keine weiteren Angaben. Die Person kann dir weiter schreiben. Du kannst die Nummer später blockieren.",
         remember: "Fremden Nummern sage ich nichts über mich."
       },
       "Links in Nachrichten": {
@@ -99,8 +99,8 @@ const EXTRA_PRACTICE = {
         answers: ["Ich schicke ihm den Code. Er ist ja mein Freund.", "Ich schicke den Code nicht.", "Ich schicke den Code nicht. Ich rufe meinen Freund an."],
         correctIndex: 1,
         auchMoeglich: [2],
-        feedbackWrong: ["Oft schreibt gar nicht der Freund. Betrüger nutzen sein Konto. Der Code bleibt bei dir.", null, null],
-        feedbackAuch: [null, null, "Der Code bleibt bei dir. Am Telefon merkst du: Hat dein Freund das wirklich geschrieben?"],
+        feedbackWrong: ["Vielleicht schreibt gar nicht dein Freund. Jemand anderes kann sein Konto nutzen. Der Code bleibt bei dir.", null, null],
+        feedbackAuch: [null, null, "Du schickst den Code nicht. Du rufst deinen Freund über seine bekannte Nummer an. Du fragst nach der Nachricht. Den Code sagst du auch am Telefon nicht."],
         feedbackCorrect: "Mit dem Code kann jemand dein Konto stehlen. Darum bleibt der Code immer bei dir.",
         remember: "Meinen Code gebe ich nie weiter."
       }

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Mein Lernweg – Alex &amp; Tilda</title>
+  <link rel="stylesheet" href="designsystem.css">
+  <link rel="stylesheet" href="lernhandy/so-lerne-ich.css">
+  <link rel="stylesheet" href="plattform-nav.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--at-bg);
+      color: var(--at-ink);
+      font-family: var(--at-font);
+      line-height: 1.55;
+      font-size: clamp(1rem, 1rem + 0.15vw, 1.125rem);
+    }
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--at-accent-dark);
+      color: var(--at-accent-ink);
+      padding: 12px 18px;
+      font-weight: 700;
+      z-index: 200;
+    }
+    .skip-link:focus { left: 12px; top: 8px; }
+    .wrap {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+    .hero-card {
+      background: var(--at-surface);
+      border: 1px solid var(--at-line);
+      border-radius: var(--at-radius-lg);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
+      box-shadow: var(--at-shadow-sm);
+      margin-bottom: 22px;
+    }
+    .hero-fig {
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+      background: var(--at-surface-soft);
+      object-fit: cover;
+      object-position: top center;
+    }
+    .hero-copy h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      line-height: 1.2;
+    }
+    .hero-copy p {
+      margin: 0;
+      color: var(--at-ink-soft);
+      max-width: 62ch;
+    }
+    .companion-row {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .companion-label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--at-ink);
+      margin-right: 4px;
+    }
+    .sli-row {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+      font-size: 0.94rem;
+      color: var(--at-ink-soft);
+    }
+    .sli-row strong { color: var(--at-ink); }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--at-accent);
+      color: var(--at-accent-ink);
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--at-accent-dark); }
+    .btn-soft {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--at-line);
+      background: var(--at-surface-soft);
+      color: var(--at-ink);
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-soft:hover { background: var(--at-surface-hover); }
+    .btn-soft[aria-pressed="true"] {
+      background: var(--at-accent-soft);
+      border-color: var(--at-accent);
+      color: var(--at-accent-dark);
+    }
+    .btn-primary:focus-visible,
+    .btn-soft:focus-visible,
+    .goal-pill:focus-visible,
+    .self-btn:focus-visible,
+    .custom-input:focus-visible {
+      outline: 3px solid var(--at-focus);
+      outline-offset: 2px;
+    }
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+    .panel {
+      background: var(--at-surface);
+      border: 1px solid var(--at-line);
+      border-radius: var(--at-radius-md);
+      padding: 20px;
+      box-shadow: var(--at-shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .panel h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.25;
+    }
+    .panel p {
+      margin: 0;
+      color: var(--at-ink-soft);
+    }
+    .badge-kind {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--at-surface-soft);
+      color: var(--at-ink-soft);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .goal-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .goal-pill {
+      min-height: 44px;
+      max-width: 100%;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--at-line);
+      background: var(--at-surface-soft);
+      color: var(--at-ink);
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      white-space: normal;
+    }
+    .goal-pill[aria-pressed="true"] {
+      background: var(--at-ok-soft);
+      border-color: var(--at-ok);
+      color: var(--at-ink);
+    }
+    .done-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .done-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--at-ok-soft);
+      color: var(--at-ink);
+      border: 1px solid var(--at-ok);
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+    .koennen-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .koennen-item {
+      background: var(--at-surface-soft);
+      border-left: 4px solid var(--at-line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: grid;
+      gap: 8px;
+    }
+    .koennen-item.is-checked {
+      border-left-color: var(--at-ok);
+      background: var(--at-ok-soft);
+    }
+    .koennen-text {
+      font-weight: 700;
+      color: var(--at-ink);
+    }
+    .self-btn {
+      justify-self: start;
+      min-height: 44px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--at-line);
+      background: var(--at-surface);
+      color: var(--at-ink);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .self-btn[aria-pressed="true"] {
+      background: var(--at-ok);
+      border-color: var(--at-ok);
+      color: #ffffff;
+    }
+    html[data-theme="dark"] .self-btn[aria-pressed="true"] {
+      color: #0b1520;
+    }
+    .custom-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .custom-input {
+      flex: 1 1 180px;
+      min-width: 0;
+      max-width: 100%;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--at-line);
+      background: var(--at-surface);
+      color: var(--at-ink);
+      font: inherit;
+    }
+    .notice-card {
+      background: var(--at-surface-soft);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.94rem;
+      color: var(--at-ink);
+    }
+    .area-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .area-link-card {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--at-line);
+      background: var(--at-surface-soft);
+      text-decoration: none;
+      color: var(--at-ink);
+      min-height: 48px;
+    }
+    .area-link-card:hover {
+      background: var(--at-surface-hover);
+      border-color: var(--at-accent);
+    }
+    .area-link-card strong { font-size: 1rem; }
+    .area-link-card span { font-size: 0.88rem; color: var(--at-ink-soft); }
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+    .print-only { display: none; }
+    @media (max-width: 820px) {
+      .hero-card { grid-template-columns: 1fr; }
+      .hero-fig { width: 76px; height: 76px; }
+      .grid-cards, .area-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block; margin-top: 16px; }
+      body { background: #ffffff; color: #000000; }
+      .panel, .hero-card { box-shadow: none; border-color: #cccccc; break-inside: avoid; }
+      .print-notes-line {
+        border-bottom: 1px solid #999999;
+        height: 28px;
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link no-print" href="#main-content">Direkt zum Inhalt</a>
+  <div id="a11y-live" class="sr-only" aria-live="polite"></div>
+  <div id="at-plattform-nav" class="no-print"></div>
+
+  <main id="main-content" class="wrap">
+    <section class="hero-card" aria-labelledby="ml-title">
+      <img class="hero-fig" id="ml-companion-img" src="assets/figures/alex-tilda-erfolg.webp" alt="Alex und Tilda begleiten deinen Lernweg" width="96" height="96">
+      <div class="hero-copy">
+        <h1 id="ml-title">Mein Lernweg</h1>
+        <p id="ml-companion-text">Du bestimmst das Tempo. Hier sammelst du in Ruhe deine Ziele, deine ausprobierten Übungen und dein eigenes Könnens-Heft — ohne Punkte und ohne Pflicht.</p>
+        <div class="sli-row no-print">
+          <span>Deine Einstellung: <strong id="ml-sli-summary">Gib mir Hilfen dazu. · Leichte Sprache</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid-cards">
+      <section class="panel" aria-labelledby="ml-ziele-titel">
+        <span class="badge-kind">1 · Freiwillige Ziele</span>
+        <h2 id="ml-ziele-titel">Was möchtest du als Nächstes ausprobieren?</h2>
+        <p>Wähle bis zu drei Ziele für dich aus. Du kannst sie jederzeit wieder abwählen.</p>
+        <div class="goal-pills" id="ml-goal-pills"></div>
+        <div id="ml-chosen-goals"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="ml-geuebt-titel">
+        <span class="badge-kind">2 · Ausprobiert (ohne Bewertung)</span>
+        <h2 id="ml-geuebt-titel">Ausprobierte Übungen &amp; Wiederholen</h2>
+        <p>Eine ausprobierte Übung heißt: Du hast sie dir angesehen. Du kannst jede Übung jederzeit freiwillig wiederholen.</p>
+        <div id="ml-geuebt-body">
+          <p>Noch nichts gestartet – das ist völlig in Ordnung. Fang einfach mit einer ersten Lage an.</p>
+        </div>
+        <div class="notice-card">
+          <strong>Mein Handy daneben (freiwillig):</strong> Nimm dein echtes Handy daneben und probiere einen kleinen Schritt direkt dort aus — zum Beispiel in den Einstellungen nachsehen, welche App deine Kontakte lesen darf.
+        </div>
+        <div class="actions-row no-print">
+          <a class="btn-primary" href="lernhandy/index.html">Themen &amp; Übungen öffnen</a>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="ml-koennen-titel">
+        <span class="badge-kind">3 · Selbst eingeschätztes Können</span>
+        <h2 id="ml-koennen-titel">Mein Könnens-Heft</h2>
+        <p>Deine eigene Einschätzung — du entscheidest selbst, was du dir im Alltag schon zutraust.</p>
+        <ul class="koennen-list" id="ml-koennen-list"></ul>
+        <div class="custom-row no-print">
+          <label class="sr-only" for="ml-custom-satz">Eigenen Könnens-Satz ergänzen</label>
+          <input class="custom-input" id="ml-custom-satz" type="text" placeholder="Eigenen Satz für dein Heft ergänzen …" maxlength="120">
+          <button type="button" class="btn-soft" id="ml-add-satz">Hinzufügen</button>
+        </div>
+        <div class="print-only" aria-hidden="true">
+          <strong>Meine Notizen für das Handy zu Hause:</strong>
+          <div class="print-notes-line"></div>
+          <div class="print-notes-line"></div>
+          <div class="print-notes-line"></div>
+        </div>
+        <div class="actions-row no-print">
+          <button type="button" class="btn-primary" id="ml-print-btn">Könnens-Heft drucken</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="ml-nachweis-titel">
+        <span class="badge-kind">4 · Nachgewiesene Fähigkeiten</span>
+        <h2 id="ml-nachweis-titel">Was die App nicht selbst bewertet</h2>
+        <div class="notice-card">
+          <strong>Wichtiger Unterschied:</strong> Diese App vergibt keine Noten und keine Zeugnisse. Nachgewiesene Fähigkeiten — etwa für die Schulung als Digital-Begleiter*in — entstehen nur im echten Alltag gemeinsam mit Begleitung oder Träger.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="plattform-nav.js" data-at-root=""></script>
+  <script>
+    (function () {
+      const SPRACHEN = { leicht: "Leichte Sprache", einfach: "Einfache Sprache", alltag: "Alltagssprache" };
+      const ZUGAENGE = { lesen: "Lesen", hoeren: "Hören", beides: "Lesen und Hören" };
+
+      const ZIELE = [
+        { id: "ds1", label: "App-Rechte in Ruhe prüfen", href: "lernkreis/index.html?ex=ds1" },
+        { id: "fb2", label: "Fremde Anfragen abklären", href: "lernkreis/index.html?ex=fb2" },
+        { id: "be_sp1", label: "Bei Betrug ruhig reagieren", href: "lernkreis/index.html?ex=be_sp1" },
+        { id: "wa_ruhe", label: "Ruhe in Gruppen einstellen", href: "lernkreis/index.html?ex=wa_ruhe" },
+        { id: "begleiten_ueben", label: "Begleiten ohne Abnehmen", href: "lernkreis/index.html?ex=begleiten_ueben" }
+      ];
+
+      const DEFAULT_KOENNEN = [
+        { id: "k1", text: "Ich lege auf, wenn mich am Telefon jemand nach einem Code fragt." },
+        { id: "k2", text: "Ich überlege zuerst: Braucht diese App meine Kontakte oder Fotos wirklich?" },
+        { id: "k3", text: "Bei Unsicherheit halte ich kurz an und frage jemanden, dem ich vertraue." },
+        { id: "k4", text: "Beim Begleiten lasse ich das Handy in der Hand der anderen Person." }
+      ];
+
+      // Sitzungs-Zustand gemeinsam über SoLerneIch (AT_SLI_V1 in window.name, kein localStorage/sessionStorage!)
+      function readSessionState() {
+        if (window.SoLerneIch && typeof window.SoLerneIch.getMeinLernweg === "function") {
+          return window.SoLerneIch.getMeinLernweg();
+        }
+        return { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] };
+      }
+
+      function writeSessionState(next) {
+        if (window.SoLerneIch && typeof window.SoLerneIch.setMeinLernweg === "function") {
+          window.SoLerneIch.setMeinLernweg(next);
+        }
+      }
+
+      let p3 = readSessionState();
+
+      function announce(msg) {
+        const live = document.getElementById("a11y-live");
+        if (live) live.textContent = msg;
+      }
+
+      function renderGoals() {
+        const wrap = document.getElementById("ml-goal-pills");
+        const chosenWrap = document.getElementById("ml-chosen-goals");
+        if (!wrap || !chosenWrap) return;
+        wrap.innerHTML = ZIELE.map((z) => {
+          const active = p3.goals.includes(z.id);
+          return `<button type="button" class="goal-pill" data-goal="${z.id}" aria-pressed="${active}">${active ? "✓ " : ""}${z.label}</button>`;
+        }).join("");
+
+        const activeGoals = ZIELE.filter((z) => p3.goals.includes(z.id));
+        if (!activeGoals.length) {
+          chosenWrap.innerHTML = `<p>Noch kein Ziel gewählt — ganz wie du magst.</p>`;
+        } else {
+          chosenWrap.innerHTML = `<ul class="done-list">${activeGoals.map((z) =>
+            `<li><a class="done-chip" href="${z.href}">→ ${z.label}</a></li>`
+          ).join("")}</ul>`;
+        }
+      }
+
+      function renderKoennen() {
+        const list = document.getElementById("ml-koennen-list");
+        if (!list) return;
+        list.textContent = "";
+        const all = DEFAULT_KOENNEN.concat((p3.custom || []).map((t, i) => ({ id: "c_" + i, text: t })));
+        all.forEach((item) => {
+          const isChecked = Boolean(p3.checked[item.id]);
+          const li = document.createElement("li");
+          li.className = "koennen-item" + (isChecked ? " is-checked" : "");
+          const span = document.createElement("span");
+          span.className = "koennen-text";
+          span.textContent = item.text;
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "self-btn";
+          btn.dataset.koennen = item.id;
+          btn.setAttribute("aria-pressed", String(isChecked));
+          btn.textContent = isChecked ? "✓ Traue ich mir zu" : "Als mein Können markieren";
+          li.appendChild(span);
+          li.appendChild(btn);
+          list.appendChild(li);
+        });
+      }
+
+      function updateSliSummary() {
+        const el = document.getElementById("ml-sli-summary");
+        if (!el || !window.SoLerneIch) return;
+        const s = window.SoLerneIch.getState();
+        const env = window.SoLerneIch.VOREINSTELLUNGEN && window.SoLerneIch.VOREINSTELLUNGEN[s.voreinstellung];
+        const envText = env ? env.titel : "Ich stelle selbst ein.";
+        el.textContent = `${envText} · ${SPRACHEN[s.sprache] || "Leichte Sprache"} · ${ZUGAENGE[s.zugang] || "Lesen und Hören"}`;
+      }
+
+      const WEG_TITEL = {
+        be1: "Jemand will einen Code",
+        ds1: "Nötig oder nicht?",
+        fb2: "Unbekannte Personen",
+        h2: "Was kann ich selbst tun?",
+        ek3: "Sicher bezahlen",
+        wa_ruhe: "Ruhe in der Gruppe"
+      };
+
+      function renderOptionalConsentProgress() {
+        const body = document.getElementById("ml-geuebt-body");
+        if (!body) return;
+        const items = [];
+        const seen = new Set();
+        const sessionList = Array.isArray(p3.ausprobiert) ? p3.ausprobiert : [];
+        sessionList.forEach((entry) => {
+          if (entry && entry.id && !seen.has(entry.id)) {
+            seen.add(entry.id);
+            items.push({ titel: entry.titel || entry.id, href: entry.href || "lernhandy/index.html" });
+          }
+        });
+        if (typeof localStorage !== "undefined") {
+          try {
+            const raw = localStorage.getItem("lernstand");
+            const ls = raw ? JSON.parse(raw) : null;
+            if (ls && ls.enabled === true && ls.handyWege) {
+              Object.keys(ls.handyWege).forEach((k) => {
+                if (ls.handyWege[k] && ls.handyWege[k].abgeschlossen && !seen.has(k)) {
+                  seen.add(k);
+                  items.push({
+                    titel: WEG_TITEL[k] || "Übung im Handy",
+                    href: `lernhandy/kurzweg.html?weg=${encodeURIComponent(k)}&lernkreis=1`
+                  });
+                }
+              });
+            }
+          } catch (e) {}
+        }
+        if (!items.length) return;
+        body.textContent = "";
+        const p = document.createElement("p");
+        p.textContent = "Ausprobiert (freiwillig wiederholen):";
+        const ul = document.createElement("ul");
+        ul.className = "done-list";
+        items.forEach((it) => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.className = "done-chip";
+          a.href = it.href;
+          a.textContent = "↻ " + it.titel;
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+        body.appendChild(p);
+        body.appendChild(ul);
+      }
+
+      document.addEventListener("click", (e) => {
+        const goalBtn = e.target.closest("[data-goal]");
+        if (goalBtn) {
+          const gid = goalBtn.dataset.goal;
+          if (p3.goals.includes(gid)) {
+            p3.goals = p3.goals.filter((g) => g !== gid);
+          } else if (p3.goals.length < 3) {
+            p3.goals = p3.goals.concat([gid]);
+          } else {
+            announce("Du hast bereits drei Ziele gewählt. Tippe ein Ziel ab, um Platz zu machen.");
+            return;
+          }
+          writeSessionState(p3);
+          renderGoals();
+          return;
+        }
+        const kBtn = e.target.closest("[data-koennen]");
+        if (kBtn) {
+          const kid = kBtn.dataset.koennen;
+          p3.checked[kid] = !p3.checked[kid];
+          writeSessionState(p3);
+          renderKoennen();
+        }
+      });
+
+      const addBtn = document.getElementById("ml-add-satz");
+      const customInput = document.getElementById("ml-custom-satz");
+      if (addBtn && customInput) {
+        addBtn.addEventListener("click", () => {
+          const val = customInput.value.trim();
+          if (!val) return;
+          p3.custom = p3.custom.concat([val]);
+          p3.checked["c_" + (p3.custom.length - 1)] = true;
+          customInput.value = "";
+          writeSessionState(p3);
+          renderKoennen();
+          announce("Eigener Satz im Könnens-Heft ergänzt.");
+        });
+      }
+
+      renderGoals();
+      renderKoennen();
+      updateSliSummary();
+      renderOptionalConsentProgress();
+
+      if (window.SoLerneIch && typeof window.SoLerneIch.onChange === "function") {
+        window.SoLerneIch.onChange(updateSliSummary);
+      }
+
+      const printBtn = document.getElementById("ml-print-btn");
+      if (printBtn) {
+        printBtn.addEventListener("click", () => window.print());
+      }
+    })();
+  </script>
+</body>
+</html>
