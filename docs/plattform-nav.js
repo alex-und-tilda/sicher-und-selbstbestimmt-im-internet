@@ -22,7 +22,7 @@
     const p = window.location.pathname;
     const h = window.location.hash || "";
     if (ziel === "start") return p.endsWith("/zugang.html") || p.endsWith("/");
-    if (ziel === "themen") return p.includes("/lernhandy/index.html");
+    if (ziel === "themen") return p.endsWith("/index.html") && (h === "#themen" || h.startsWith("#thema-"));
     if (ziel === "lernweg") return p.includes("/mein-lernweg.html");
     if (ziel === "hilfe") {
       return (p.includes("/testfassung.html") && (h === "" || h === "#hilfe")) || p.includes("/druckvorlage.html");
@@ -90,7 +90,7 @@
     // Festes 5-Punkte-Menü nach E74 (Start · Themen · Mein Lernweg · Hilfe · Einstellungen)
     const punkte = [
       { id: "start", label: "Start", href: basis + "zugang.html" },
-      { id: "themen", label: "Themen", href: basis + "lernhandy/index.html" },
+      { id: "themen", label: "Themen", href: basis + "index.html#themen" },
       { id: "lernweg", label: "Mein Lernweg", href: basis + "mein-lernweg.html" },
       { id: "hilfe", label: "Hilfe", href: basis + "testfassung.html#hilfe" }
     ];
