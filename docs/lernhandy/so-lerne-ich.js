@@ -39,7 +39,8 @@
     startfrageOffen: false,
     selbstEinstellen: false,
     zweiTapWahl: null,
-    meinLernweg: { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] }
+    meinLernweg: { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] },
+    nutzerFelder: {}
   };
 
   const listeners = new Set();
@@ -94,7 +95,7 @@
   const TAB_KEY = "AT_SLI_V1:";
   const PERSIST_KEYS = [
     "voreinstellung", "sprache", "zugang", "schrift", "menge",
-    "lernform", "bewegung", "thema", "vorbild", "tippSichtbar", "screenreader", "zweiTap", "meinLernweg"
+    "lernform", "bewegung", "thema", "vorbild", "tippSichtbar", "screenreader", "zweiTap", "meinLernweg", "nutzerFelder"
   ];
 
   function saveTabState() {
@@ -136,6 +137,13 @@
           ausprobiert: Array.isArray(ml.ausprobiert) ? ml.ausprobiert.filter((a) => a && typeof a.id === "string" && typeof a.titel === "string").slice(0, 20) : []
         };
       }
+      if (parsed.nutzerFelder && typeof parsed.nutzerFelder === "object" && !Array.isArray(parsed.nutzerFelder)) {
+        const nf = {};
+        Object.keys(parsed.nutzerFelder).forEach((k) => {
+          if (parsed.nutzerFelder[k] === true) nf[k] = true;
+        });
+        state.nutzerFelder = nf;
+      }
     } catch (e) {}
   }
 
@@ -156,6 +164,7 @@
   function setField(key, value, keepPreset) {
     if (!(key in state)) return;
     state[key] = value;
+    state.nutzerFelder = Object.assign({}, state.nutzerFelder, { [key]: true });
     if (key === "schrift" && typeof document !== "undefined" && document.documentElement.style.fontSize) {
       document.documentElement.style.fontSize = "";
     }
@@ -174,6 +183,7 @@
     state.menge = p.werte.menge;
     state.vorbild = p.werte.vorbild;
     state.tippSichtbar = p.werte.tippSichtbar;
+    state.nutzerFelder = Object.assign({}, state.nutzerFelder, { voreinstellung: true });
     state.startfrageOffen = false;
     state.zweiTapWahl = null;
     notify();
@@ -518,12 +528,21 @@
     if (params.get("mode") && ["allein", "gemeinsam", "unterstuetzung"].includes(params.get("mode"))) state.lernform = params.get("mode");
     const rawLang = params.get("lang") || params.get("stufe");
     const normLang = rawLang === "standard" ? "alltag" : rawLang;
-    if (normLang && ["leicht", "einfach", "alltag"].includes(normLang)) state.sprache = normLang;
+    if (normLang && ["leicht", "einfach", "alltag"].includes(normLang)) {
+      state.sprache = normLang;
+      state.nutzerFelder = Object.assign({}, state.nutzerFelder, { sprache: true });
+    }
     if (params.get("theme") && ["light", "dark"].includes(params.get("theme"))) state.thema = params.get("theme");
     if (params.get("zugang") && ["lesen", "hoeren", "beides"].includes(params.get("zugang"))) state.zugang = params.get("zugang");
-    if (params.get("schrift") && ["normal", "gross", "sehr-gross"].includes(params.get("schrift"))) state.schrift = params.get("schrift");
+    if (params.get("schrift") && ["normal", "gross", "sehr-gross"].includes(params.get("schrift"))) {
+      state.schrift = params.get("schrift");
+      state.nutzerFelder = Object.assign({}, state.nutzerFelder, { schrift: true });
+    }
     if (params.get("menge") && ["wenig", "mehr"].includes(params.get("menge"))) state.menge = params.get("menge");
-    if (params.get("bewegung") && ["ruhig", "normal"].includes(params.get("bewegung"))) state.bewegung = params.get("bewegung");
+    if (params.get("bewegung") && ["ruhig", "normal"].includes(params.get("bewegung"))) {
+      state.bewegung = params.get("bewegung");
+      state.nutzerFelder = Object.assign({}, state.nutzerFelder, { bewegung: true });
+    }
     if (params.get("sr") === "1") state.screenreader = true;
     if (params.get("startfrage") === "1") state.startfrageOffen = true;
   }
@@ -581,6 +600,7 @@
       state.zweiTap = false;
       state.zweiTapWahl = null;
       state.meinLernweg = { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] };
+      state.nutzerFelder = {};
       if (typeof document !== "undefined" && document.documentElement.style.fontSize) {
         document.documentElement.style.fontSize = "";
       }

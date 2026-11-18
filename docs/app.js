@@ -76,11 +76,56 @@ const SAMPLE_ROUNDS = [
   }
 ];
 
+const SLI_TAB_PREFIX = "AT_SLI_V1:";
+const SLI_FONT_STEPS = ["normal", "gross", "sehr-gross"];
+
+function readSliSessionState() {
+  if (typeof window === "undefined" || typeof window.name !== "string") return null;
+  if (!window.name.startsWith(SLI_TAB_PREFIX)) return null;
+  try {
+    const parsed = JSON.parse(window.name.slice(SLI_TAB_PREFIX.length));
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch (e) { return null; }
+}
+
+function syncSliSessionState(patch, explicitKeys) {
+  if (typeof window === "undefined") return;
+  try {
+    const base = readSliSessionState() || {
+      voreinstellung: "unterstuetzt",
+      sprache: "leicht",
+      zugang: "beides",
+      schrift: "normal",
+      menge: "mehr",
+      lernform: "allein",
+      bewegung: "normal",
+      thema: "light",
+      vorbild: "wunsch",
+      tippSichtbar: false,
+      screenreader: false,
+      zweiTap: false,
+      meinLernweg: { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] },
+      nutzerFelder: {}
+    };
+    const next = Object.assign({}, base, patch || {});
+    if (Array.isArray(explicitKeys) && explicitKeys.length) {
+      const nf = Object.assign({}, (base.nutzerFelder && typeof base.nutzerFelder === "object") ? base.nutzerFelder : {});
+      explicitKeys.forEach((k) => {
+        if (k.charAt(0) === "!") delete nf[k.slice(1)];
+        else nf[k] = true;
+      });
+      next.nutzerFelder = nf;
+    }
+    window.name = SLI_TAB_PREFIX + JSON.stringify(next);
+  } catch (e) { /* nichts tun */ }
+}
+
 function loadLanguageLevel() {
   try {
     let saved = pGet(LANGUAGE_KEY);
-    if (!saved || (saved !== "leicht" && saved !== "einfach" && saved !== "standard")) {
-      saved = localStorage.getItem("alex_tilda_stufe");
+    if (!saved && !activeProfileId && profiles.length === 0) {
+      saved = entwurfStorage.getItem("alex_tilda_stufe");
+      if (saved) entwurfStorage.removeItem("alex_tilda_stufe");
     }
     if (saved === "leicht" || saved === "einfach" || saved === "standard") {
       languageLevel = saved;
@@ -98,8 +143,9 @@ function setLanguageLevel(level) {
   languageLevel = level;
   languageChosen = true;
   pSet(LANGUAGE_KEY, level);
-  try { localStorage.setItem("alex_tilda_stufe", level); } catch (e) {}
+  try { entwurfStorage.removeItem("alex_tilda_stufe"); } catch (e) {}
   sprachstufeAnwenden();
+  if (typeof syncSliSessionState === "function") syncSliSessionState({ sprache: level === "standard" ? "alltag" : level }, ["sprache"]);
 }
 
 /* ============================================================
@@ -149,6 +195,7 @@ function chooseLearnMode(mode) {
       fontSizeStep = 1;
       pSet(FONT_SIZE_KEY, fontSizeStep);
       applyFontSize();
+      if (typeof syncSliSessionState === "function") syncSliSessionState({ schrift: SLI_FONT_STEPS[fontSizeStep] || "normal" }, ["schrift"]);
     }
     /* Befund 4 (21.09.2026): Auch die Ansage muss zum echten Zustand
        passen. Wer automatisches Vorlesen schon anhat, darf nicht hören,
@@ -347,6 +394,7 @@ function changeFontSize(direction) {
   fontSizeStep = next;
   pSet(FONT_SIZE_KEY, fontSizeStep);
   applyFontSize();
+  if (typeof syncSliSessionState === "function") syncSliSessionState({ schrift: SLI_FONT_STEPS[fontSizeStep] || "normal" }, ["schrift"]);
   /* Buttons in allen sichtbaren Utility-Bars aktualisieren */
   document.querySelectorAll(".font-btn-decrease").forEach(b => { b.disabled = fontSizeStep === 0; });
   document.querySelectorAll(".font-btn-increase").forEach(b => { b.disabled = fontSizeStep === FONT_SIZES.length - 1; });
@@ -512,6 +560,10 @@ const AWAY_KEY = "weg-seit";              /* geräteweit, nicht pro Profil */
 const AWAY_LIMIT_MS = 3 * 60 * 1000;      /* 3 Minuten – eine Zahl, leicht änderbar */
 
 function markAway() {
+  if (!deviceShared || profiles.length === 0) {
+    try { entwurfStorage.removeItem(AWAY_KEY); } catch (e) { /* nichts tun */ }
+    return;
+  }
   try { entwurfStorage.setItem(AWAY_KEY, String(Date.now())); } catch (e) { /* nichts tun */ }
 }
 function checkReturn() {
@@ -621,7 +673,7 @@ function ensureProfiles() {
 }
 
 /* Einstellungen des aktiven Profils frisch in den Speicher laden. */
-function loadActiveProfileSettings() {
+function loadActiveProfileSettings(fromProfileSwitch) {
   languageChosen = false;
   languageLevel = "leicht";
   learnMode = null;
@@ -635,6 +687,38 @@ function loadActiveProfileSettings() {
   loadLanguageLevel();  /* setzt languageLevel + languageChosen, falls gemerkt */
   sprachstufeAnwenden(); /* Paket 5: Aufgaben/Themen-Felder in der Stufe (auch Rückfall Leicht) */
   loadLearnMode();
+
+  const sli = (!fromProfileSwitch && typeof readSliSessionState === "function") ? readSliSessionState() : null;
+  if (sli) {
+    const nf = (sli.nutzerFelder && typeof sli.nutzerFelder === "object") ? sli.nutzerFelder : {};
+    const sliLang = sli.sprache === "alltag" ? "standard" : sli.sprache;
+    if ((sliLang === "leicht" || sliLang === "einfach" || sliLang === "standard") && (nf.sprache || (!languageChosen && sliLang !== "leicht"))) {
+      languageLevel = sliLang;
+      languageChosen = true;
+      sprachstufeAnwenden();
+    }
+    const sliStep = SLI_FONT_STEPS.indexOf(sli.schrift);
+    if (sliStep >= 0 && (nf.schrift || (pGet(FONT_SIZE_KEY) === null && sliStep !== 0))) {
+      fontSizeStep = sliStep;
+      applyFontSize();
+    }
+    if ((sli.bewegung === "ruhig" || sli.bewegung === "normal") && (nf.bewegung || (pGet(MOTION_KEY) === null && sli.bewegung === "ruhig"))) {
+      motionEnabled = sli.bewegung !== "ruhig";
+      applyMotion();
+      updateMotionButton();
+    }
+  }
+  if (typeof syncSliSessionState === "function") {
+    syncSliSessionState({
+      sprache: languageLevel === "standard" ? "alltag" : languageLevel,
+      schrift: SLI_FONT_STEPS[fontSizeStep] || "normal",
+      bewegung: motionEnabled ? "normal" : "ruhig"
+    }, fromProfileSwitch ? [
+      languageChosen ? "sprache" : "!sprache",
+      pGet(FONT_SIZE_KEY) !== null ? "schrift" : "!schrift",
+      pGet(MOTION_KEY) !== null ? "bewegung" : "!bewegung"
+    ] : []);
+  }
 }
 
 /* ============================================================
@@ -2008,6 +2092,7 @@ function toggleMotion() {
   pSet(MOTION_KEY, motionEnabled ? "on" : "off");
   applyMotion();
   updateMotionButton();
+  if (typeof syncSliSessionState === "function") syncSliSessionState({ bewegung: motionEnabled ? "normal" : "ruhig" }, ["bewegung"]);
   announce(motionEnabled ? "Bewegungen sind eingeschaltet." : "Bewegungen sind ausgeschaltet.");
 }
 
@@ -6312,7 +6397,7 @@ function switchProfile(id) {
   if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
   activeProfileId = id;
   saveProfiles();
-  loadActiveProfileSettings();
+  loadActiveProfileSettings(true);
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
@@ -6732,13 +6817,8 @@ function finishSign(editId) {
   }
   saveProfiles();
   signDraft = { icon: null, color: null, number: null };
-  languageChosen = false;
-  languageLevel = "leicht";
-  sprachstufeAnwenden();
-  learnMode = null;
-  learnModeChooserOpen = false;
-  fontSizeStep = 0;
-  applyFontSize();
+  sessionMenuIntroSeen = false;
+  loadActiveProfileSettings(!ersterStart);
   finishedTopicThisSession = false;
   sessionDoneTopics = new Set();
   sessionScenarioStufe = {};
@@ -6835,7 +6915,9 @@ function resetProfile(id) {
   if (wasActive) {
     pauseBewertungLoeschen();
     if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
-    loadActiveProfileSettings();
+    try { entwurfStorage.removeItem("alex_tilda_stufe"); } catch (e) {}
+    sessionMenuIntroSeen = false;
+    loadActiveProfileSettings(true);
     finishedTopicThisSession = false;
     sessionDoneTopics = new Set();
     sessionScenarioStufe = {};
@@ -6891,6 +6973,7 @@ function deleteProfile(id) {
   saveProfiles();
   if (prevActive === id) {
     if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+    sessionMenuIntroSeen = false;
     finishedTopicThisSession = false;
     sessionDoneTopics = new Set();
     sessionScenarioStufe = {};
@@ -6904,13 +6987,15 @@ function deleteProfile(id) {
     loadTopicAmounts();
   }
   if (profiles.length === 0) {
+    PROFILE_BASE_KEYS.forEach(base => pRemove(base));
+    try { entwurfStorage.removeItem("alex_tilda_stufe"); } catch (e) {}
     legacyHandySpeicherBereinigen({ gesamtLoeschen: true, verlaufLoeschen: true });
     /* Keine Person mehr: neues Zeichen bauen. */
-    loadLesehilfen();
+    loadActiveProfileSettings(true);
     signDraft = { icon: null, color: null, number: null };
     return renderBuildSign(0, null);
   }
-  loadActiveProfileSettings();
+  loadActiveProfileSettings(true);
   renderProfilePicker();
 }
 
@@ -7643,7 +7728,8 @@ function buildMenuExplainList() {
 
 /* Menü-Einweisungs-Zustand (F3): Chip beim ersten Themen-Besuch, Erklärungen dauerhaft in der Hilfe */
 const MENU_INTRO_KEY = "menue-gesehen";
-function menuIntroSeen() { return pGet(MENU_INTRO_KEY) === "1"; }
+let sessionMenuIntroSeen = false;
+function menuIntroSeen() { return sessionMenuIntroSeen || pGet(MENU_INTRO_KEY) === "1"; }
 
 /* D12: situationsbezogener Einstieg. Reine Orientierung, keine Bewertung,
    keine neuen Speicher-Schlüssel. Die vorhandenen Kern-Lernwege bleiben. */
@@ -7893,7 +7979,8 @@ function renderMenu() {
 
   const ersterBesuch = !menuIntroSeen();
   if (ersterBesuch) {
-    pSet(MENU_INTRO_KEY, "1");
+    sessionMenuIntroSeen = true;
+    if (activeProfileId || isProgressEnabled()) pSet(MENU_INTRO_KEY, "1");
   }
 
   setProgressVisible(false);
@@ -8014,6 +8101,12 @@ function renderMenu() {
         <div class="handy-portal-banner-actions">
           <button type="button" class="handy-portal-banner-link" onclick="renderHandyHub()">Zum Übungs-Handy (34 Lernwege)</button>
           <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderMailPostfach()">Zum E-Mail-Postfach (7 Übungen)</button>
+        </div>
+        <div class="handy-portal-banner-actions" style="margin-top:10px;" aria-label="Weitere Übungen am Handy">
+          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=es_handy">Erste Schritte am Handy</a>
+          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=tildas_samstag">Tildas Samstag (4 Folgen)</a>
+          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=be_sp1">Schon passiert</a>
+          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=begleiten_ueben">Begleiten üben</a>
         </div>
       </aside>
       <h2 class="topic-grid-title">Wähle ein Thema</h2>
@@ -15315,6 +15408,10 @@ function renderHandyHub() {
       <p>Du hast <strong>${geschafftZahl} von ${alleIds.length}</strong> Lernwegen geschafft.</p>
       <div class="certificate-actions">
         <button type="button" class="bedien-pikto nav-button secondary" onclick="renderMailPostfach()">${pictoHtml("mail")}<span>E-Mail-Übungspostfach (${postfachZahl} von ${postfachGesamt} geschafft)</span></button>
+        <a class="nav-button secondary" href="lernkreis/index.html?ex=es_handy" style="text-decoration:none;">Erste Schritte am Handy</a>
+        <a class="nav-button secondary" href="lernkreis/index.html?ex=tildas_samstag" style="text-decoration:none;">Tildas Samstag (4 Folgen)</a>
+        <a class="nav-button secondary" href="lernkreis/index.html?ex=be_sp1" style="text-decoration:none;">Schon passiert</a>
+        <a class="nav-button secondary" href="lernkreis/index.html?ex=begleiten_ueben" style="text-decoration:none;">Begleiten üben</a>
         <button type="button" class="nav-button secondary" onclick="renderMyPath()">← Zu Mein Lernweg</button>
       </div>
       ${gruppenHtml}

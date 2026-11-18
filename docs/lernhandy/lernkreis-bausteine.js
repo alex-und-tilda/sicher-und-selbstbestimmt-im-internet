@@ -412,8 +412,8 @@
         if (phase === "reflect" && window.SoLerneIch && typeof window.SoLerneIch.markAusprobiert === "function") {
           const isPostfach = typeof window !== "undefined" && window.location && window.location.pathname.indexOf("postfach") !== -1;
           const zielHref = isPostfach
-            ? `lernhandy/postfach.html?sz=${encodeURIComponent(id)}&lernkreis=1`
-            : `lernhandy/kurzweg.html?weg=${encodeURIComponent(id)}&lernkreis=1`;
+            ? `index.html#postfach:${encodeURIComponent(id)}`
+            : `index.html#handy:${encodeURIComponent(id)}`;
           window.SoLerneIch.markAusprobiert(id, daten.titel || id, zielHref);
         }
 

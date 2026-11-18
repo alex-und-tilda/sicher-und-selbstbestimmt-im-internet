@@ -59,10 +59,10 @@
     return `
       <section class="card ws-block">
         <h2>Jetzt gemeinsam im Übungs-Handy ausprobieren</h2>
-        <p class="ws-klein">Passend zu diesem Workshop öffnet sich das Übungs-Handy direkt im Modus „Gemeinsam lernen“ – ohne echtes Konto und ohne Anmeldung.</p>
-        <p style="margin:10px 0 12px;"><a class="ws-knopf" href="lernhandy/kurzweg.html?weg=${encodeURIComponent(erster.weg)}&amp;lernkreis=1&amp;mode=gemeinsam">Im großen Übungs-Handy öffnen: ${esc(erster.titel)}</a></p>
+        <p class="ws-klein">Passend zu diesem Workshop öffnet sich die Übung direkt im integrierten Übungs-Handy der Lern-App – zum gemeinsamen Ausprobieren und Besprechen in der Gruppe, ohne echtes Konto und ohne Anmeldung.</p>
+        <p style="margin:10px 0 12px;"><a class="ws-knopf" href="index.html#handy:${encodeURIComponent(erster.weg)}">Im großen Übungs-Handy öffnen: ${esc(erster.titel)}</a></p>
         <ul class="ws-einstiege">
-          ${wege.map((w) => `<li><a href="lernhandy/kurzweg.html?weg=${encodeURIComponent(w.weg)}&amp;lernkreis=1&amp;mode=gemeinsam"><span class="ws-mat-titel">${esc(w.titel)}</span><span class="ws-mat-meta">${esc(w.meta)}</span></a></li>`).join("")}
+          ${wege.map((w) => `<li><a href="index.html#handy:${encodeURIComponent(w.weg)}"><span class="ws-mat-titel">${esc(w.titel)}</span><span class="ws-mat-meta">${esc(w.meta)}</span></a></li>`).join("")}
         </ul>
       </section>`;
   }
@@ -79,7 +79,7 @@
   function verlinkt(text) {
     return esc(text)
       .replace(/(^|[\s(„])(#thema-([a-z]+)(?::[a-z]+)?)/g,
-        (m, vor, h, thema) => `${vor}<a href="lernhandy/index.html?thema=${encodeURIComponent(thema)}#thema-${encodeURIComponent(thema)}">Thema öffnen</a>`)
+        (m, vor, h, thema) => `${vor}<a href="index.html#thema-${encodeURIComponent(thema)}">Thema öffnen</a>`)
       .replace(/(^|[\s(\/])(praxis\/[a-z]+\.html)/g,
         (m, vor, p) => `${vor}<a href="${p}" target="_blank" rel="noopener">${p}</a>`);
   }
@@ -461,7 +461,7 @@
   }
 
   function ansichtTeilnehmende(id, d) {
-    const themaHref = `lernhandy/index.html?thema=${encodeURIComponent(d.thema)}#thema-${encodeURIComponent(d.thema)}`;
+    const themaHref = `index.html#thema-${encodeURIComponent(d.thema)}`;
     return `
       ${handyBoxHtml(id)}
       <div class="ws-zwei">

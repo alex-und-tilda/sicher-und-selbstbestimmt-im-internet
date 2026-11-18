@@ -281,7 +281,7 @@
         <p class="panel-text" data-read-step>Es wird nichts gespeichert und nichts abgezogen. Du kannst jederzeit neu starten oder eine andere Übung ansehen.</p>
         <div class="action-row">
           <button type="button" class="primary-btn" data-action="restart">Nochmal üben</button>
-          <a class="secondary-btn" style="text-decoration:none;display:inline-flex;align-items:center;" href="../lernhandy/index.html">Zur Themen-Übersicht</a>
+          <a class="secondary-btn" style="text-decoration:none;display:inline-flex;align-items:center;" href="../index.html#themen">Zur Themen-Übersicht</a>
         </div>
       `,
       phoneTitle: "Übungs-Handy",

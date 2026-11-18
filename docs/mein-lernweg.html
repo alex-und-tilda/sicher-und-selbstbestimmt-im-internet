@@ -374,7 +374,7 @@
           <strong>Mein Handy daneben (freiwillig):</strong> Nimm dein echtes Handy daneben und probiere einen kleinen Schritt direkt dort aus — zum Beispiel in den Einstellungen nachsehen, welche App deine Kontakte lesen darf.
         </div>
         <div class="actions-row no-print">
-          <a class="btn-primary" href="lernhandy/index.html">Themen &amp; Übungen öffnen</a>
+          <a class="btn-primary" href="index.html#themen">Themen &amp; Übungen öffnen</a>
         </div>
       </section>
 
@@ -522,7 +522,7 @@
         sessionList.forEach((entry) => {
           if (entry && entry.id && !seen.has(entry.id)) {
             seen.add(entry.id);
-            items.push({ titel: entry.titel || entry.id, href: entry.href || "lernhandy/index.html" });
+            items.push({ titel: entry.titel || entry.id, href: entry.href || "index.html#themen" });
           }
         });
         if (typeof localStorage !== "undefined") {
@@ -535,7 +535,7 @@
                   seen.add(k);
                   items.push({
                     titel: WEG_TITEL[k] || "Übung im Handy",
-                    href: `lernhandy/kurzweg.html?weg=${encodeURIComponent(k)}&lernkreis=1`
+                    href: `index.html#handy:${encodeURIComponent(k)}`
                   });
                 }
               });
