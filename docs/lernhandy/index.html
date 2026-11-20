@@ -4,6 +4,54 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<script>
+(function () {
+  try {
+    var params = new URLSearchParams(location.search || "");
+    if (params.get("intern") === "1" || params.get("katalog") === "1") return;
+    var prefix = "AT_SLI_V1:";
+    var rawStufe = params.get("lang") || params.get("stufe");
+    var normStufe = rawStufe === "standard" ? "alltag" : rawStufe;
+    var theme = params.get("theme");
+    if ((normStufe && ["leicht", "einfach", "alltag"].indexOf(normStufe) !== -1) || (theme && ["light", "dark"].indexOf(theme) !== -1)) {
+      var cur = {
+        voreinstellung: "unterstuetzt", sprache: "leicht", zugang: "beides", schrift: "normal",
+        menge: "mehr", lernform: "allein", bewegung: "normal", thema: "light", vorbild: "wunsch",
+        tippSichtbar: false, screenreader: false, zweiTap: false,
+        meinLernweg: { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] },
+        nutzerFelder: {}
+      };
+      if (typeof window.name === "string" && window.name.indexOf(prefix) === 0) {
+        try { cur = Object.assign(cur, JSON.parse(window.name.slice(prefix.length)) || {}); } catch (e) {}
+      }
+      cur.nutzerFelder = Object.assign({}, cur.nutzerFelder || {});
+      if (normStufe && ["leicht", "einfach", "alltag"].indexOf(normStufe) !== -1) {
+        cur.sprache = normStufe;
+        cur.nutzerFelder.sprache = true;
+      }
+      if (theme && ["light", "dark"].indexOf(theme) !== -1) {
+        cur.thema = theme;
+        cur.nutzerFelder.thema = true;
+      }
+      window.name = prefix + JSON.stringify(cur);
+    }
+    var t = params.get("thema");
+    var w = params.get("weg");   /* Navigation 20.11.2026: alte Adressen mit Lernweg-Kürzel öffnen diesen Lernweg */
+    var h = location.hash || "";
+    var targetHash = "#themen";
+    if (w && /^[a-z0-9_-]+$/i.test(w)) {
+      targetHash = "#handy:" + w.toLowerCase();
+    } else if (t && /^[a-z0-9_-]+$/i.test(t)) {
+      targetHash = "#thema-" + t.toLowerCase();
+    } else if (/^#(thema-[a-z0-9_-]+|handy(:[a-z0-9_-]+)?|postfach(:[a-z0-9_-]+)?)$/i.test(h)) {
+      targetHash = h;
+    }
+    location.replace("../index.html" + targetHash);
+  } catch (e) {
+    location.replace("../index.html#themen");
+  }
+})();
+</script>
 <link rel="icon" href="data:,">
 <title>Themen – Alex &amp; Tilda</title>
 <link rel="stylesheet" href="../designsystem.css">

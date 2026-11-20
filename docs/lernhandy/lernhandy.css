@@ -440,26 +440,26 @@
 
 /* Manueller Dunkelmodus (data-theme="dark") synchron mit dem gemeinsamen Designsystem */
 html[data-theme="dark"] .lh {
-  --seite: var(--at-bg, #111822);
-  --flaeche: var(--at-surface, #1a2431);
-  --karte: var(--at-surface-soft, #222e3d);
-  --anzeige: #141c27;
-  --tinte: var(--at-ink, #edf2f7);
-  --leise: var(--at-ink-soft, #b4c2d0);
-  --linie: var(--at-line, #334357);
-  --akzent: var(--at-accent, #75b7ee);
-  --akzent-tinte: var(--at-accent-ink, #0b1520);
-  --akzent-hell: var(--at-accent-soft, #1f344a);
-  --info-hell: var(--at-accent-soft, #1f344a);
-  --gut: var(--at-ok, #4ade80);
-  --gut-text: var(--at-ok, #86efac);
-  --gut-hell: var(--at-ok-soft, #133221);
-  --problem: #f87171;
-  --problem-text: #fca5a5;
-  --problem-hell: #3b171b;
-  --vorsicht: var(--at-warm, #f3a852);
-  --vorsicht-hell: var(--at-warm-soft, #342615);
-  --fokus: var(--at-focus, #fbbf24);
+  --seite: var(--at-bg, #131B17);
+  --flaeche: var(--at-surface, #1B2620);
+  --karte: var(--at-surface-soft, #23312A);
+  --anzeige: #17201B;
+  --tinte: var(--at-ink, #F8F6F0);
+  --leise: var(--at-ink-soft, #DFE9D9);
+  --linie: var(--at-line, #394E43);
+  --akzent: var(--at-accent, #A8C9B3);
+  --akzent-tinte: var(--at-accent-ink, #131B17);
+  --akzent-hell: var(--at-accent-soft, #24382D);
+  --info-hell: var(--at-accent-soft, #24382D);
+  --gut: var(--at-ok, #8FD1A6);
+  --gut-text: var(--at-ok, #8FD1A6);
+  --gut-hell: var(--at-ok-soft, #1B3325);
+  --problem: var(--at-bad, #F29B92);
+  --problem-text: #F8F6F0;
+  --problem-hell: var(--at-bad-soft, #351E1C);
+  --vorsicht: var(--at-warm, #F2B84B);
+  --vorsicht-hell: var(--at-warm-soft, #2D2516);
+  --fokus: var(--at-focus, #F2B84B);
 }
 html[data-theme="dark"] .lh .chat-hinweis,
 html[data-theme="dark"] .lh .lh-profil-bio,

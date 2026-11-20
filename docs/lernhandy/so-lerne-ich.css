@@ -279,6 +279,13 @@ html[data-motion="ruhig"] *::after {
   color: var(--at-ink-soft, #485869);
 }
 
+/* D6/K5 (v72): Zeile „Voreinstellung: …“ unter einer Gruppe.
+   Ohne eigene Farbe: Sie übernimmt die Schriftfarbe des Dialogs. */
+.sli-voreinstellung {
+  margin: 6px 0 0;
+  font-size: 0.92rem;
+}
+
 .sli-example-chip {
   display: inline-flex;
   align-items: center;

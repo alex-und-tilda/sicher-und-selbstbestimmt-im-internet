@@ -385,7 +385,7 @@ if ("serviceWorker" in navigator) {
           "Über Alex & Tilda, Impressum und Datenschutz",
           FABLE_TEXT_SLOTS[currentLang].betaText,
           [
-            "Public Beta 4 – Testfassung.",
+            "Public Beta 5 – Testfassung.",
             "Es werden keine persönlichen Daten dauerhaft gespeichert oder übertragen."
           ],
           false

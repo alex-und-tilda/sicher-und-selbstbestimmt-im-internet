@@ -333,7 +333,7 @@
         ` : "";
 
         // A6: Drei echt verschiedene Lernumgebungen (Hilfen kompakt nach Bedarf)
-        const modusLabel = modus === "gemeinsam" ? "Gemeinsam" : modus === "unterstuetzung" ? "Mit Unterstützung" : "Allein";
+        const modusLabel = modus === "gemeinsam" ? "Gemeinsam lernen" : modus === "unterstuetzung" ? "Mit Unterstützung" : "Allein";
         const rawVorbild = (daten.vorbild && typeof daten.vorbild === "object") ? daten.vorbild : daten.alexVorbild;
         const alexText = textInStufe(rawVorbild, stufe);
         const vorbildName = daten.machtVor === "tilda" ? "Tilda" : (daten.machtVor === "alex" ? "Alex" : (daten.machtVor || (fragtName === "Alex" ? "Tilda" : "Alex")));

@@ -70,14 +70,144 @@ const SAMPLE_ROUNDS = [
     standard: "Achte auf deine persönlichen Daten und teile dein Passwort mit niemandem, damit dein Konto geschützt bleibt."
   },
   {
-    leicht: "Ein Fremder schreibt dir. Antworte nicht. Erzähle es einer Person, der du vertraust.",
-    einfach: "Wenn dir ein Fremder schreibt, antworte besser nicht und erzähle es einer Person, der du vertraust.",
-    standard: "Wenn dich eine unbekannte Person anschreibt, reagierst du besser nicht darauf und sprichst mit jemandem, dem du vertraust."
+    leicht: "Eine fremde Nummer schreibt dir. Du musst nicht antworten. Tippe nicht auf Links in der Nachricht. Du bist unsicher? Du kannst eine vertraute Person fragen. Du entscheidest selbst.",
+    einfach: "Eine unbekannte Nummer schreibt dir. Du musst nicht antworten. Öffne keine Links aus der Nachricht. Wenn du unsicher bist, kannst du eine vertraute Person fragen. Du entscheidest selbst, ob du antwortest.",
+    standard: "Erhältst du eine Nachricht von einer unbekannten Nummer, musst du nicht reagieren. Links aus dieser Nachricht öffnest du nicht. Bist du unsicher, kannst du eine vertraute Person um Rat fragen. Ob du antwortest, entscheidest du selbst."
   }
 ];
 
 const SLI_TAB_PREFIX = "AT_SLI_V1:";
 const SLI_FONT_STEPS = ["normal", "gross", "sehr-gross"];
+const SLI_LERNFORMEN = ["allein", "gemeinsam", "unterstuetzung"];
+let sliLernform = null;
+
+/* Dreistufige Oberflächentexte für die integrierten Bereiche (P1-4). */
+const STUFEN_UI_TEXT = {
+  leicht: {
+    direktTitel: "Frei üben: Erste Schritte, Geschichte und E-Mail-Postfach",
+    direktText: "Die Übungen zu einem Thema findest du direkt beim Thema.",
+    koennenHinweis: "Du wählst bis zu 3 eigene Ziele. Du füllst dein Könnens-Heft aus und druckst es.",
+    koennenKnopf: "Mein Könnens-Heft öffnen",
+    hilfeUnterstuetzungText: "Hier findest du Hilfe bei Betrug. Du findest auch Tipps zum Begleiten und die Schulung.",
+    farbenText: "Wähle helle oder dunkle Farben für die Seite.",
+    lernformErklaerung: "Wie möchtest du lernen? Du kannst das später ändern.",
+    themaUebenTitel: "Üben zu diesem Thema"
+  },
+  einfach: {
+    direktTitel: "Frei üben: Erste Schritte, Geschichte und E-Mail-Postfach",
+    direktText: "Die passenden Handy- und Postfach-Übungen findest du direkt bei jedem Thema.",
+    koennenHinweis: "Du kannst hier bis zu drei eigene Ziele wählen, dein Könnens-Heft ausfüllen und für zu Hause ausdrucken.",
+    koennenKnopf: "Mein Könnens-Heft öffnen",
+    hilfeUnterstuetzungText: "Hier findest du ruhige Schritte bei Betrug, den Kompass für Lern-Begleitung und die Schulung für Digital-Begleiter*innen.",
+    farbenText: "Wähle helle oder dunkle Farben für die Plattform.",
+    lernformErklaerung: "Such dir deine Lernform aus. Du kannst sie später ändern.",
+    themaUebenTitel: "Üben zu diesem Thema"
+  },
+  standard: {
+    direktTitel: "Frei üben: Erste Schritte, Geschichte und E-Mail-Postfach",
+    direktText: "Die passenden Handy- und Postfach-Übungen findest du direkt auf der jeweiligen Themenseite.",
+    koennenHinweis: "Hier kannst du bis zu drei eigene Ziele wählen, dein Könnens-Heft ausfüllen und für zu Hause ausdrucken.",
+    koennenKnopf: "Mein Könnens-Heft öffnen",
+    hilfeUnterstuetzungText: "Hier findest du ruhige Schritte bei Betrug, den Kompass für die Lernbegleitung und die Schulung für Digital-Begleiter*innen.",
+    farbenText: "Wähle helle oder dunkle Farben für die Plattform.",
+    lernformErklaerung: "Wähle deine Lernform. Du kannst sie später ändern.",
+    themaUebenTitel: "Üben zu diesem Thema"
+  }
+};
+
+function stufenUiText(key) {
+  const satz = STUFEN_UI_TEXT[languageLevel] || STUFEN_UI_TEXT.leicht;
+  return (satz && satz[key]) || STUFEN_UI_TEXT.leicht[key] || "";
+}
+
+/* K4 (v73): Ein Weg, eine Lernform zu übernehmen. Ihn nutzen die Seite
+   „Einstellungen“ und der Einstellungsdialog im Lernmodus, der dort den
+   früheren Schalter „Wir lernen zu zweit“ ersetzt (Entscheidung der
+   Projektleitung vom 20.11.2026, Option d). Die Ansicht bleibt, wie sie ist. */
+function lernformUebernehmen(form) {
+  if (!SLI_LERNFORMEN.includes(form)) return false;
+  sliLernform = form;
+  learnMode = (form === "allein") ? "allein" : "begleitung";
+  /* Bestehender Einstellungs-Schlüssel „lern-weg“ (§14a): speichert die drei
+     Lernformen eindeutig, ohne einen neuen Speicherschlüssel anzulegen. */
+  pSet(LEARN_MODE_KEY, form);
+  syncSliSessionState({ lernform: form }, ["lernform"]);
+  return true;
+}
+
+function lernformAnsage(form) {
+  return form === "allein"
+    ? "Lernform: Allein lernen."
+    : (form === "gemeinsam" ? "Lernform: Gemeinsam lernen." : "Lernform: Mit Unterstützung lernen.");
+}
+
+/* Die angezeigte Lernform: die eigene Wahl, sonst die Ableitung aus dem
+   gespeicherten Lernweg („begleitung“ → Mit Unterstützung, sonst Allein).
+   Gleich auf der Seite „Einstellungen“ und im Dialog im Lernmodus. */
+function wirksameLernform() {
+  if (SLI_LERNFORMEN.includes(sliLernform)) return sliLernform;
+  return learnMode === "begleitung" ? "unterstuetzung" : "allein";
+}
+
+/* D6/K5: Ohne eigene Wahl ist „Allein“ nur eine Voreinstellung. */
+function lernformIstVoreinstellung() {
+  return !sliLernform && learnMode !== "begleitung";
+}
+
+function setSliLernform(form) {
+  if (!lernformUebernehmen(form)) return;
+  announce(lernformAnsage(form));
+  if (activeTab === "einstellungen") renderSettingsPage();
+  else renderMenu();
+}
+
+function setSliVoreinstellung(env) {
+  if (!["gefuehrt", "unterstuetzt", "frei"].includes(env)) return;
+  const presets = {
+    gefuehrt: { menge: "wenig", vorbild: "immer", tippSichtbar: true },
+    unterstuetzt: { menge: "mehr", vorbild: "wunsch", tippSichtbar: false },
+    frei: { menge: "mehr", vorbild: "aus", tippSichtbar: false }
+  };
+  syncSliSessionState(Object.assign({ voreinstellung: env }, presets[env]), ["voreinstellung"]);
+  if (activeTab === "einstellungen") renderSettingsPage();
+}
+
+function toggleSliZweiTap() {
+  const cur = readSliSessionState();
+  const next = !(cur && cur.zweiTap === true);
+  syncSliSessionState({ zweiTap: next }, ["zweiTap"]);
+  announce(next ? "Erst hören, dann nehmen ist an." : "Erst hören, dann nehmen ist aus.");
+  if (activeTab === "einstellungen") renderSettingsPage();
+}
+
+const APP_THEME_KEY = "app-thema";
+let appTheme = "light";
+
+function resolveSystemTheme() {
+  try {
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  } catch (e) { return "light"; }
+}
+
+function applyAppTheme() {
+  if (typeof document === "undefined" || !document.documentElement) return;
+  document.documentElement.setAttribute("data-theme", appTheme === "dark" ? "dark" : "light");
+}
+
+function loadAppTheme() {
+  const saved = pGet(APP_THEME_KEY);
+  appTheme = (saved === "dark" || saved === "light") ? saved : resolveSystemTheme();
+  applyAppTheme();
+}
+
+function setAppTheme(theme) {
+  appTheme = (theme === "dark") ? "dark" : "light";
+  pSet(APP_THEME_KEY, appTheme);
+  applyAppTheme();
+  if (typeof syncSliSessionState === "function") syncSliSessionState({ thema: appTheme }, ["thema"]);
+  announce(appTheme === "dark" ? "Dunkel-Modus ist an." : "Hell-Modus ist an.");
+  if (activeTab === "einstellungen") renderSettingsPage();
+}
 
 function readSliSessionState() {
   if (typeof window === "undefined" || typeof window.name !== "string") return null;
@@ -118,6 +248,38 @@ function syncSliSessionState(patch, explicitKeys) {
     }
     window.name = SLI_TAB_PREFIX + JSON.stringify(next);
   } catch (e) { /* nichts tun */ }
+}
+
+/* Voreinstellung kennzeichnen (D6/K5, v72): Eine automatische Vorgabe trägt
+   unter ihrer Knopfgruppe die Zeile „Voreinstellung: …“. Der voreingestellte
+   Knopf verweist mit aria-describedby darauf; sein Name bleibt sein sichtbarer
+   Text. Nach einer eigenen Wahl entfällt die Zeile. Gelesen werden nur die
+   vorhandenen Einstellungen und Kennzeichen im Tab, gespeichert wird nichts. */
+function sliNutzerFeld(key) {
+  const s = readSliSessionState();
+  return !!(s && s.nutzerFelder && s.nutzerFelder[key] === true);
+}
+
+function voreinstellungZeile(id, label) {
+  return `<p class="settings-explain settings-voreinstellung" id="${id}">Voreinstellung: ${escapeHtml(label)}</p>`;
+}
+
+function voreinstellungBezug(aktiv, id) {
+  return aktiv ? ` aria-describedby="${id}"` : "";
+}
+
+/* Gemerkte Wahlen des Profils gelten auch im Tab als eigene Wahl. Sonst zeigt
+   „So lerne ich“ in einem neuen Tab eine gewählte Sprache als Voreinstellung.
+   Ergänzt nur Kennzeichen, entfernt keine und legt keinen Speicher an. */
+function gemerkteWahlFelder() {
+  const felder = [];
+  if (pGet(LANGUAGE_KEY) !== null) felder.push("sprache");
+  if (pGet(FONT_SIZE_KEY) !== null) felder.push("schrift");
+  if (pGet(MOTION_KEY) !== null) felder.push("bewegung");
+  if (pGet(APP_THEME_KEY) !== null) felder.push("thema");
+  const lernWeg = pGet(LEARN_MODE_KEY);
+  if (sliLernform && lernWeg !== null && lernWeg !== "app") felder.push("lernform");
+  return felder;
 }
 
 function loadLanguageLevel() {
@@ -175,8 +337,17 @@ const LEARN_MODES = {
 function loadLearnMode() {
   try {
     const saved = pGet(LEARN_MODE_KEY);
-    if (saved === "allein" || saved === "app" || saved === "begleitung") {
-      learnMode = saved;
+    if (saved === "allein") {
+      learnMode = "allein";
+      sliLernform = "allein";
+    } else if (saved === "gemeinsam" || saved === "unterstuetzung") {
+      learnMode = "begleitung";
+      sliLernform = saved;
+    } else if (saved === "begleitung") {
+      learnMode = "begleitung";
+      sliLernform = "unterstuetzung";
+    } else if (saved === "app") {
+      learnMode = "app";
     }
   } catch (e) { /* nichts tun */ }
 }
@@ -185,30 +356,37 @@ function chooseLearnMode(mode) {
   if (!LEARN_MODES[mode]) return;
   /* Gleiche Karte noch einmal antippen = wieder abwählen (selbstbestimmt). */
   learnMode = (learnMode === mode) ? null : mode;
-  if (learnMode) pSet(LEARN_MODE_KEY, learnMode);
-  else pRemove(LEARN_MODE_KEY);
-
-  if (learnMode === "app") {
-    /* App-Hilfe-Modus spürbar machen: Schrift mindestens eine Stufe größer.
-       Nie automatisch verkleinern – die Person behält die Kontrolle. */
-    if (fontSizeStep < 1) {
-      fontSizeStep = 1;
-      pSet(FONT_SIZE_KEY, fontSizeStep);
-      applyFontSize();
-      if (typeof syncSliSessionState === "function") syncSliSessionState({ schrift: SLI_FONT_STEPS[fontSizeStep] || "normal" }, ["schrift"]);
+  /* Soziale Lernform (AT_SLI_V1.lernform: allein | gemeinsam | unterstuetzung)
+     verlustfrei abgleichen. Der App-Modus „Mit Hilfe der App“ ändert weder die
+     soziale Lernform noch die Schriftgröße ungefragt. */
+  if (mode === "app") {
+    if (learnMode === "app") {
+      if (!sliLernform) pSet(LEARN_MODE_KEY, "app");
+      announce("Zusätzliche Hilfen wie Schriftgröße und Vorlesen kannst du in den Einstellungen einzeln wählen.");
+    } else {
+      if (!sliLernform) pRemove(LEARN_MODE_KEY);
+      announce("Auswahl entfernt. Du kannst auch einfach ein Thema wählen.");
     }
-    /* Befund 4 (21.09.2026): Auch die Ansage muss zum echten Zustand
-       passen. Wer automatisches Vorlesen schon anhat, darf nicht hören,
-       er solle es erst anschalten. */
-    announce(autoRead
-      ? "Gut. Die Schrift ist jetzt größer. Vorgelesen wird dir weiterhin jede Seite."
-      : "Gut. Die Schrift ist jetzt größer. Automatisches Vorlesen kannst du in den Einstellungen anschalten.");
-  } else if (learnMode === "begleitung") {
-    announce("Gut. Auf jeder Themen-Seite gibt es jetzt Tipps für das gemeinsame Lernen.");
-  } else if (learnMode === "allein") {
-    announce("Gut. Such dir ein Thema aus. Die App erklärt dir alles.");
   } else {
-    announce("Auswahl entfernt. Du kannst auch einfach ein Thema wählen.");
+    if (learnMode === "allein") {
+      sliLernform = "allein";
+      pSet(LEARN_MODE_KEY, "allein");
+      if (typeof syncSliSessionState === "function") syncSliSessionState({ lernform: "allein" }, ["lernform"]);
+      announce("Gut. Such dir ein Thema aus. Die App erklärt dir alles.");
+    } else if (learnMode === "begleitung") {
+      const curSli = (typeof readSliSessionState === "function") ? readSliSessionState() : null;
+      const prevForm = (curSli && SLI_LERNFORMEN.includes(curSli.lernform)) ? curSli.lernform : sliLernform;
+      const zielForm = (prevForm === "gemeinsam") ? "gemeinsam" : "unterstuetzung";
+      sliLernform = zielForm;
+      pSet(LEARN_MODE_KEY, zielForm);
+      if (typeof syncSliSessionState === "function") syncSliSessionState({ lernform: zielForm }, ["lernform"]);
+      announce("Gut. Auf jeder Themen-Seite gibt es jetzt Tipps für das gemeinsame Lernen.");
+    } else {
+      sliLernform = null;
+      pRemove(LEARN_MODE_KEY);
+      if (typeof syncSliSessionState === "function") syncSliSessionState({}, ["!lernform"]);
+      announce("Auswahl entfernt. Du kannst auch einfach ein Thema wählen.");
+    }
   }
   /* Auf der Seite bleiben, auf der die Person gerade ist (Vorhersehbarkeit) */
   if (activeTab === "einstellungen") renderSettingsPage();
@@ -216,7 +394,7 @@ function chooseLearnMode(mode) {
 }
 
 function isCompanionMode() {
-  return learnMode === "begleitung";
+  return learnMode === "begleitung" || sliLernform === "gemeinsam" || sliLernform === "unterstuetzung";
 }
 
 function learnModeWasSeen() {
@@ -605,7 +783,7 @@ function hideHeaderSign() {
    (Reihenfolge egal), damit die Deklarations-Reihenfolge der KEY-Konstanten
    im Modul keine Rolle spielt. Global bleiben nur profile-liste,
    profil-aktiv und geraet-geteilt – sie stehen hier NICHT drin. */
-const PROFILE_BASE_KEYS = ["entwurf-ansicht", "entwurf-vormachen", "language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf", "lesehilfen"];
+const PROFILE_BASE_KEYS = ["entwurf-ansicht", "entwurf-vormachen", "language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "app-thema", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf", "lesehilfen"];
 
 /* Schlüssel für das aktive Profil. Ohne aktives Profil: alter Schlüssel
    (Rückfall – so bricht nie etwas). */
@@ -677,6 +855,7 @@ function loadActiveProfileSettings(fromProfileSwitch) {
   languageChosen = false;
   languageLevel = "leicht";
   learnMode = null;
+  sliLernform = null;
   learnModeChooserOpen = false;
   fontSizeStep = 0;
   loadFontSize();       /* liest + wendet Schriftgröße an */
@@ -684,6 +863,7 @@ function loadActiveProfileSettings(fromProfileSwitch) {
   loadLesehilfen();     /* Persönliche Anzeige, kein Lernstand. */
   loadAutoRead();       /* Automatisches Vorlesen (Wahl, Standard: aus) */
   loadMotion();         /* liest + wendet Bewegungs-Einstellung an */
+  loadAppTheme();       /* liest + wendet Hell-/Dunkelmodus an */
   loadLanguageLevel();  /* setzt languageLevel + languageChosen, falls gemerkt */
   sprachstufeAnwenden(); /* Paket 5: Aufgaben/Themen-Felder in der Stufe (auch Rückfall Leicht) */
   loadLearnMode();
@@ -707,17 +887,46 @@ function loadActiveProfileSettings(fromProfileSwitch) {
       applyMotion();
       updateMotionButton();
     }
+    if ((sli.thema === "dark" || sli.thema === "light") && (nf.thema || (pGet(APP_THEME_KEY) === null && sli.thema === "dark"))) {
+      appTheme = sli.thema;
+      applyAppTheme();
+    }
+    if (SLI_LERNFORMEN.includes(sli.lernform)) {
+      if (nf.lernform || (pGet(LEARN_MODE_KEY) === null && sli.lernform !== "allein")) {
+        sliLernform = sli.lernform;
+        if (pGet(LEARN_MODE_KEY) === null) {
+          learnMode = (sli.lernform === "gemeinsam" || sli.lernform === "unterstuetzung") ? "begleitung" : "allein";
+        } else if (sli.lernform === "allein" && learnMode === "begleitung") {
+          /* K4 (v73), gespeicherte Altwerte: Der frühere Schalter „Wir lernen zu
+             zweit“ schrieb „begleitung“, ohne die Lernform im Tab zu ändern; das
+             Lern-Handy wählt die Lernform nur im Tab. Wie bei Sprache, Schrift,
+             Bewegung und Thema gilt die im Tab gewählte Lernform. Der Lernweg
+             folgt ihr nur im Arbeitsspeicher, damit Anzeige und Begleit-Tipps
+             übereinstimmen; gespeichert wird dabei nichts. */
+          learnMode = "allein";
+        } else if (sli.lernform !== "allein" && learnMode === "allein") {
+          learnMode = "begleitung";
+        }
+      }
+    }
   }
   if (typeof syncSliSessionState === "function") {
-    syncSliSessionState({
+    const syncPatch = {
       sprache: languageLevel === "standard" ? "alltag" : languageLevel,
       schrift: SLI_FONT_STEPS[fontSizeStep] || "normal",
-      bewegung: motionEnabled ? "normal" : "ruhig"
-    }, fromProfileSwitch ? [
+      bewegung: motionEnabled ? "normal" : "ruhig",
+      thema: appTheme
+    };
+    if (sliLernform && SLI_LERNFORMEN.includes(sliLernform)) {
+      syncPatch.lernform = sliLernform;
+    }
+    syncSliSessionState(syncPatch, fromProfileSwitch ? [
       languageChosen ? "sprache" : "!sprache",
       pGet(FONT_SIZE_KEY) !== null ? "schrift" : "!schrift",
-      pGet(MOTION_KEY) !== null ? "bewegung" : "!bewegung"
-    ] : []);
+      pGet(MOTION_KEY) !== null ? "bewegung" : "!bewegung",
+      pGet(APP_THEME_KEY) !== null ? "thema" : "!thema",
+      sliLernform ? "lernform" : "!lernform"
+    ] : gemerkteWahlFelder());
   }
 }
 
@@ -1242,7 +1451,7 @@ const GLOSSAR = {
   "quishing":               "Quishing ist Betrug mit falschen QR-Codes. Betrüger kleben falsche Codes über echte. Prüfe erst: Woher kommt der Code?",
   /* Beta-Version (06.10.2026): Kopf und Fußzeile nennen die Plattform
      „Beta-Version“. Leichte Sprache, ein Wort für beides (§5). */
-  "beta-version":           "Beta 3 ist die dritte Test-Version dieser Lern-Plattform. Eine Beta-Version ist eine Test-Version. Das Programm ist noch nicht ganz fertig. Manches ändert sich noch. Manches klappt vielleicht noch nicht. Du kannst uns helfen. Sag uns: Was ist gut? Was ist schwer?",
+  "beta-version":           "Beta 5 ist die fünfte Test-Version dieser Lern-Plattform. Eine Beta-Version ist eine Test-Version. Das Programm ist noch nicht ganz fertig. Manches ändert sich noch. Manches klappt vielleicht noch nicht. Du kannst uns helfen. Sag uns: Was ist gut? Was ist schwer?",
   "version":                "Eine Version ist ein Stand von einem Programm. Kommt etwas Neues dazu? Dann gibt es eine neue Version.",
   /* Wörter-Hilfe (08.10.2026, Bericht 32): schwere Wörter aus den Lerntexten.
      Leichte Sprache (§5). Die Erklärung sagt, was das Wort bedeutet – nicht,
@@ -1974,6 +2183,13 @@ function rememberRoute(route) {
 }
 
 /* Klick auf einen Hauptmenü-Punkt */
+/* Navigation 20.11.2026 (Auftrag der Projektleitung): „Start“ und „Zur Startseite“ führen
+   immer zur Portal-Startseite zugang.html, wie die Taste „Start“ im Menü unten. */
+function zurPortalStartseite() {
+  stopReading();
+  window.location.href = "zugang.html";
+}
+
 function navigateTab(name) {
   stopReading();
   /* Wer während der Einweisung ins Menü wechselt, hat sich für den
@@ -5571,9 +5787,9 @@ function satzPiktoBild(item, gezeigt) {
    Hilfe-Seite (gleicher Aufruf wie der Menüpunkt). Dort steht der Notfall-Satz
    zuerst, und Pause machen ist dort erreichbar. Im Lernmodus öffnet „Hilfe“
    weiter das Blatt mit dem Tipp zur Aufgabe (Lernleiste, Menü dort aus). */
-function buildToolRow() {
-  return `<div class="tool-row">${buildReadingToolbar()}
-    <button type="button" class="utility-chip bedien-pikto seiten-hilfe" onclick="navigateTab('hilfe')">${pictoHtml("help")}<span>Hilfe</span></button>
+function buildToolRow(ohneHilfe) {
+  return `<div class="tool-row">${buildReadingToolbar()}${ohneHilfe ? "" : `
+    <button type="button" class="utility-chip bedien-pikto seiten-hilfe" onclick="navigateTab('hilfe')">${pictoHtml("help")}<span>Hilfe</span></button>`}
   </div>`;
 }
 
@@ -5673,10 +5889,15 @@ function lernmodusBeenden() {
   pauseMerken();
   aufUebungsSeite = false;
   if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  if (typeof lernBeendenZiel === "string" && lernBeendenZiel.startsWith("thema:")) {
+    const tid = lernBeendenZiel.slice(6);
+    lernBeendenZiel = null;
+    return renderTopicChoice(tid);
+  }
   if (lernBeendenZiel === "renderMyPath") { lernBeendenZiel = null; return renderMyPath(); }
   if (lernBeendenZiel === "renderHandyHub") { lernBeendenZiel = null; return renderHandyHub(); }
   if (lernBeendenZiel === "renderMailPostfach") { lernBeendenZiel = null; return renderMailPostfach(); }
-  renderIntro();
+  renderMenu();   /* Navigation 20.11.2026: Rückfall ist die Themenübersicht, nicht die alte Startseite */
 }
 
 /* D11 (02.10.2026): „Hilfe“ oben und „Hilfe zur Aufgabe“ an der Aufgabe
@@ -5776,6 +5997,13 @@ function lernMehrOeffnen(ausloeser) {
 /* Einstellungen sind eine eigene Ansicht des Dialogs; Hilfe bleibt Hilfe.
    Alle Schalter verwenden die bisherigen Einstellungen und Sprach-Rückwege. */
 function lernEinstellungenOeffnen(ausloeser) {
+  /* K4 (v73): Statt des Schalters „Wir lernen zu zweit“ steht an derselben
+     Stelle die Wahl der drei Lernformen. Gedrückt ist dieselbe Lernform wie
+     auf der Seite „Einstellungen“; ohne eigene Wahl steht darunter die Zeile
+     „Voreinstellung: Allein“ (D6/K5). Zeichen wie dort (K2, D5). */
+  const lernformJetzt = wirksameLernform();
+  const lernformVor = lernformIstVoreinstellung();
+  const lernformKnopf = (form, zeichen, text) => `<button type="button" class="${zeichen ? "bedien-pikto " : ""}lern-mehr-knopf" data-aktion="lernform" data-lernform="${form}" aria-pressed="${lernformJetzt === form ? "true" : "false"}"${voreinstellungBezug(lernformVor && form === "allein", "lernDialogVorLernform")}>${zeichen ? pictoHtml(zeichen) + "<span>" + text + "</span>" : text}</button>`;
   const blatt = document.createElement("div");
   blatt.id = "lernEinstellungen";
   blatt.className = "lern-mehr lern-einstellungen";
@@ -5786,7 +6014,11 @@ function lernEinstellungenOeffnen(ausloeser) {
     <div class="lern-mehr-reihe"><button type="button" class="lern-mehr-knopf" data-aktion="kleiner">A– kleiner</button><button type="button" class="lern-mehr-knopf" data-aktion="groesser">A+ größer</button></div>
     ${buildLesehilfenSettings(true)}
     <button type="button" class="lern-mehr-knopf" data-aktion="sofort" aria-pressed="${sofortWaehlen ? "true" : "false"}">Antwort sofort wählen: ${sofortWaehlen ? "an" : "aus"}</button>
-    <button type="button" class="bedien-pikto lern-mehr-knopf" data-aktion="zuzweit" aria-pressed="${isCompanionMode() ? "true" : "false"}">${pictoHtml("people")}<span>Wir lernen zu zweit: ${isCompanionMode() ? "an" : "aus"}</span></button>
+    <div class="lern-mehr-lernform" role="group" aria-labelledby="lernDialogLernform">
+      <p class="lern-mehr-gruppe" id="lernDialogLernform">Lernform</p>
+      ${lernformKnopf("allein", "person", "Allein")}${lernformKnopf("gemeinsam", "people", "Gemeinsam lernen")}${lernformKnopf("unterstuetzung", "", "Mit Unterstützung")}
+      ${lernformVor ? voreinstellungZeile("lernDialogVorLernform", "Allein") : ""}
+    </div>
     <button type="button" class="lern-mehr-knopf lern-mehr-zu" data-aktion="zu">Schließen</button>
   </div>`;
   const schliessen = () => { stopReading(); blatt.remove(); dialogSchliessen(blatt); if (ausloeser && document.body.contains(ausloeser)) ausloeser.focus(); };
@@ -5797,11 +6029,17 @@ function lernEinstellungenOeffnen(ausloeser) {
     const a = k.dataset.aktion;
     if (a === "groesser" || a === "kleiner") { changeFontSize(a === "groesser" ? 1 : -1); return; }
     if (a === "sofort") { sofortWaehlen = !sofortWaehlen; k.setAttribute("aria-pressed", String(sofortWaehlen)); k.textContent = "Antwort sofort wählen: " + (sofortWaehlen ? "an" : "aus"); return; }
-    if (a === "zuzweit") {
-      learnMode = isCompanionMode() ? null : "begleitung";
-      if (learnMode) pSet(LEARN_MODE_KEY, learnMode); else pRemove(LEARN_MODE_KEY);
+    if (a === "lernform") {
+      const form = k.dataset.lernform;
+      if (!lernformUebernehmen(form)) return;
+      /* Wie früher: Dialog schließen und dieselbe Stelle neu zeigen, damit der
+         Begleit-Tipp erscheint oder verschwindet. Aufgabe, Auswahl und
+         Reihenfolge bleiben. Die Ansage nennt nur, was wirklich zu sehen ist. */
       schliessen(); const wieder = gemerkteStelle(); if (wieder) wieder();
-      announce(isCompanionMode() ? "Ihr lernt zu zweit. Unten steht ein Tipp für die Begleitung." : "Die Tipps für die Begleitung sind aus.");
+      const tippDa = !!document.querySelector("#content .begleit-tipp");
+      announce(lernformAnsage(form) + (isCompanionMode()
+        ? (tippDa ? " Unten steht ein Tipp für die Begleitung." : "")
+        : " Die Tipps für die Begleitung sind aus."));
       return;
     }
     schliessen(); if (a === "sprache") openLanguageFromTools();
@@ -6066,10 +6304,12 @@ function leisteTexte() {
 }
 
 /* ============================================================
-   D4 „Wir lernen zu zweit" (01.10.2026)
+   D4 „Wir lernen zu zweit" (01.10.2026), seit K4 (v73) über die Lernform
    ------------------------------------------------------------
-   Ist die Lernart „Mit einer Begleitung" gewählt (Einstellungen oder
-   „Mehr"), steht unten auf Lerntext und Übung ein zugeklappter Knopf
+   Ist die Lernform „Gemeinsam lernen" oder „Mit Unterstützung" gewählt
+   (Seite „Einstellungen" oder Einstellungsdialog im Lernmodus; dort stand
+   bis v72 der Schalter „Wir lernen zu zweit"), steht unten auf Lerntext
+   und Übung ein zugeklappter Knopf
    „Für die Begleitung". Der Text kommt wörtlich aus der Begleit-Ebene
    (COMPANION): auf dem Lerntext ein Gesprächsanlass als „Frag nach: …",
    auf der Übung ein Hinweis zur Begleitung. Welcher Eintrag erscheint,
@@ -6111,7 +6351,7 @@ function renderLegalFooter() {
   const footer = document.createElement("div");
   footer.className = "small-footer-notice";
   footer.innerHTML = `
-    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta 3" aria-label="Erklärung: Beta 3">Beta 3 – Testversion</button>.</strong> Diese Bildungsplattform befindet sich in der Entwicklung und Erprobung. Die abschließende institutionelle und datenschutzrechtliche Freigabe steht noch aus.<br />
+    <p class="test-hinweis"><strong><button type="button" class="glossar-knopf" data-glossar="beta-version" data-glossar-wort="Beta 5" aria-label="Erklärung: Beta 5">Beta 5 – Testversion</button>.</strong> Diese Bildungsplattform befindet sich in der Entwicklung und Erprobung. Die abschließende institutionelle und datenschutzrechtliche Freigabe steht noch aus.<br />
     <button type="button" class="link-action test-meinung" onclick="zurMeinung()">Sag uns deine Meinung</button></p>
     <p>Dies ist ein unabhängiges Bildungsangebot. Es ist kein offizielles Angebot von WhatsApp, Facebook, Instagram, YouTube, Snapchat, TikTok oder anderen Firmen.</p>
     <p>Es wird kein Name gespeichert. Der Lernstand wird nur gespeichert, wenn du das möchtest.<br />
@@ -6319,7 +6559,7 @@ function renderVorleseFrage() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Vorlesen", "Start", "Soll ich dir vorlesen?", 0);
-  setActiveTab("start");
+  setActiveTab("themen");   /* Navigation 20.11.2026: „Start“ ist nur die Portal-Startseite */
   setOrientation("Noch eine kurze Frage. Es geht um das Vorlesen.");
   showNav(false, false);
   content.innerHTML = `
@@ -7786,7 +8026,7 @@ function renderIntro() {
   setProgressVisible(false);
   setBottomNavVisible(false);
   setHeader("Sicher und selbstbestimmt im Internet", "Willkommen", "Willkommen", "Start", 0);
-  setActiveTab("start");
+  setActiveTab("themen");   /* Navigation 20.11.2026: „Start“ ist nur die Portal-Startseite */
   setOrientation("Du bist auf der Seite: Start.");
   rememberRoute("start");
   showNav(false, false);
@@ -7820,13 +8060,12 @@ function renderEinstiegAuswahl() {
   einstiegAuswahl = null;
   setProgressVisible(false); setBottomNavVisible(false);
   setHeader("Dein Einstieg", "", "Start", "", 0);
-  setActiveTab("start"); setOrientation("Du wählst, was zu dir passt.");
+  setActiveTab("themen"); setOrientation("Du wählst, was zu dir passt.");
   rememberRoute("einstieg:auswahl"); showNav(false, false);
   content.innerHTML = `${buildEinstiegTools()}<section class="einstieg-folge" data-readable="true">
     <h2>Was möchtest du üben?</h2>
     ${buildEinstiegOptionen(EINSTIEG_OPTIONEN)}
     <button type="button" class="bedien-pikto intro-quickstart-link" onclick="renderMenu()">${pictoHtml("themen")}<span>Zeig mir alle Themen</span></button>
-    <button type="button" class="intro-quickstart-link" onclick="renderIntro()">Zurück</button>
   </section>`;
   stelleMerken(renderEinstiegAuswahl); focusContent(); renderLegalFooter();
 }
@@ -7834,7 +8073,7 @@ function renderEinstiegAuswahl() {
 function renderEinstieg(id) {
   if (id === "auswahl") return renderEinstiegAuswahl();
   const option = EINSTIEG_OPTIONEN.find(o => o.id === id) || EINSTIEG_RUECKFRAGE.find(o => o.id === id);
-  if (!option) return renderIntro();
+  if (!option) return renderMenu();
   /* Eine eindeutige Wahl beginnt das Thema. Der offene Einstieg bleibt
      ein freiwilliger Vorschlag mit eigener Auswahlmöglichkeit. */
   if (id !== "aufpassen" && id !== "offen") {
@@ -7846,7 +8085,7 @@ function renderEinstieg(id) {
   setHeader("Dein Einstieg", "", "Start", "", 0);
   setProgressVisible(false);
   setBottomNavVisible(false);
-  setActiveTab("start");
+  setActiveTab("themen");
   showNav(false, false);
   rememberRoute("einstieg:" + id);
   setOrientation(id === "aufpassen" ? "Du wählst: Wobei sollst du aufpassen?" : "Du bist auf der Seite: Dein Einstieg.");
@@ -7855,7 +8094,7 @@ function renderEinstieg(id) {
       <p>Jemand sagt: Ich soll im Internet aufpassen.</p>
       <h2>Wobei sollst du aufpassen?</h2>
       ${buildEinstiegOptionen(EINSTIEG_RUECKFRAGE)}
-      <button type="button" class="intro-quickstart-link" onclick="renderIntro()">Zurück</button>
+      <button type="button" class="intro-quickstart-link" onclick="renderEinstiegAuswahl()">Zurück</button>
     </section>`;
   } else {
     const topic = getTopicById(option.topic);
@@ -8093,20 +8332,18 @@ function renderMenu() {
     <section class="start-page">
       ${buildToolRow()}
       ${learnModeSection}
-      ${buildResumeLessonChip()}
-      <aside class="handy-portal-banner" role="region" aria-label="Interaktives Übungs-Handy">
-        <span class="handy-portal-banner-badge">34 Übungen im Handy</span>
-        <h2 class="handy-portal-banner-title">Übungs-Handy: Sicher üben</h2>
-        <p class="handy-portal-banner-desc">Übe echte Situationen am Handy. Zum Beispiel Chats, Links oder Mails. Ohne Risiko.</p>
-        <div class="handy-portal-banner-actions">
-          <button type="button" class="handy-portal-banner-link" onclick="renderHandyHub()">Zum Übungs-Handy (34 Lernwege)</button>
-          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderMailPostfach()">Zum E-Mail-Postfach (7 Übungen)</button>
-        </div>
-        <div class="handy-portal-banner-actions" style="margin-top:10px;" aria-label="Weitere Übungen am Handy">
+      ${/* Navigation 20.11.2026: „Lernen starten“ (Auswahl nach Situation) steht hier, seit die
+            alte Startseite entfällt – leise und nur, wenn es nichts zum Weiterlernen gibt. */""}
+      ${buildResumeLessonChip() || `<p class="resume-lesson-wrap"><button type="button" class="bedien-pikto review-chip" onclick="renderEinstiegAuswahl()">${pictoHtml("start")}<span>${escapeHtml(RUHIG_TEXT.starten)}</span></button></p>`}
+      <aside class="handy-portal-banner handy-portal-banner--kompakt" role="region" aria-label="Direkt ausprobieren">
+        <span class="handy-portal-banner-badge">Direkt ausprobieren</span>
+        <h2 class="handy-portal-banner-title">${escapeHtml(stufenUiText("direktTitel"))}</h2>
+        <p class="handy-portal-banner-desc">${escapeHtml(stufenUiText("direktText"))}</p>
+        <div class="handy-portal-banner-actions" aria-label="Direkte Einstiege ohne Thema">
           <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=es_handy">Erste Schritte am Handy</a>
           <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=tildas_samstag">Tildas Samstag (4 Folgen)</a>
-          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=be_sp1">Schon passiert</a>
-          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=begleiten_ueben">Begleiten üben</a>
+          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderMailPostfach()">E-Mail-Postfach (7 Übungen)</button>
+          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderHandyHub()">Alle 34 Handy-Übungen</button>
         </div>
       </aside>
       <h2 class="topic-grid-title">Wähle ein Thema</h2>
@@ -8140,6 +8377,7 @@ function renderMyPath() {
   showNav(false, false);
 
   const doneCount = countDoneTopics();
+  const dailyKarte = buildDailyQuestionCard();
 
   /* Lernstand-Anzeige (Bandura: sichtbare Erfolgserlebnisse) –
      zeigt auch Erfolge aus dieser Sitzung, ohne dass etwas gespeichert wird */
@@ -8347,6 +8585,8 @@ function renderMyPath() {
       ${/* Phase 2.2 (Bericht 108): Das Angebot steht offen, nicht mehr im zugeklappten
             Bereich „Geschafft“ – es erscheint nur, wenn etwas zum Wiederholen da ist. */""}
       ${reviewSection}
+      ${/* Navigation 20.11.2026: Frage des Tages zum Wiederholen (§12), vorher nur auf der alten Startseite */""}
+      ${dailyKarte ? `<details class="path-block path-details"><summary class="path-details-summary">Deine Frage für heute</summary>${dailyKarte}</details>` : ""}
 
       <details class="path-block path-details">
         <summary class="path-details-summary">${FUEHRUNG_TEXT.geschafftAuf} <span class="path-details-zahl">${doneCount} von ${topics.length}</span></summary>
@@ -8421,6 +8661,39 @@ function renderMyPath() {
           </div>
         </div>
       </details>
+
+      ${(() => {
+        const sliState = (typeof readSliSessionState === "function") ? readSliSessionState() : null;
+        const ml = sliState && sliState.meinLernweg ? sliState.meinLernweg : null;
+        const zielNamen = {
+          ds1: "App-Rechte in Ruhe prüfen",
+          fb2: "Fremde Anfragen abklären",
+          be_sp1: "Bei Betrug ruhig reagieren",
+          wa_ruhe: "Ruhe in Gruppen einstellen",
+          begleiten_ueben: "Begleiten ohne Abnehmen"
+        };
+        const gewaehlteZiele = ml && Array.isArray(ml.goals)
+          ? ml.goals.map((id) => zielNamen[id] || id).filter(Boolean)
+          : [];
+        const probiertZahl = ml && Array.isArray(ml.ausprobiert) ? ml.ausprobiert.length : 0;
+        const koennenZahl = ml && ml.checked && typeof ml.checked === "object"
+          ? Object.values(ml.checked).filter(Boolean).length : 0;
+        const zusammenfassung = [];
+        if (gewaehlteZiele.length) zusammenfassung.push("Ziele: " + gewaehlteZiele.join(", "));
+        if (probiertZahl) zusammenfassung.push(probiertZahl + " Übung" + (probiertZahl === 1 ? "" : "en") + " in dieser Sitzung angesehen");
+        if (koennenZahl) zusammenfassung.push(koennenZahl + (koennenZahl === 1 ? " Satz" : " Sätze") + " im Könnens-Heft markiert");
+        const standHtml = zusammenfassung.length
+          ? `<p class="topic-grid-hint">${escapeHtml(zusammenfassung.join(" · "))}</p>`
+          : `<p class="topic-grid-hint">${escapeHtml(stufenUiText("koennenHinweis"))}</p>`;
+        return `
+          <section class="path-block koennen-heft-link-block" aria-label="Meine Ziele, Ausprobiertes und Könnens-Heft">
+            <h3>Meine Ziele, Ausprobiertes &amp; Könnens-Heft</h3>
+            ${standHtml}
+            <div class="certificate-actions">
+              <a class="nav-button primary" href="mein-lernweg.html">${escapeHtml(stufenUiText("koennenKnopf"))}</a>
+            </div>
+          </section>`;
+      })()}
 
       ${/* Der Lernstand-Zustand bleibt offen sichtbar (§14): Wer wissen
             will, ob etwas gespeichert wird, soll es sehen, ohne etwas
@@ -8555,7 +8828,7 @@ function renderHelpPage() {
 
   content.innerHTML = `
     <section class="start-page" data-readable="true">
-      ${buildToolRow()}
+      ${buildToolRow(true)}
       <h2 class="topic-grid-title">Hilfe</h2>
       <p class="topic-grid-hint">Du wählst deine Hilfe.</p>
       ${/* Übersicht (06.10.2026): Der Notfall steht auch hier, immer mit
@@ -8643,6 +8916,16 @@ function renderHelpPage() {
         <h3>Das Menü ${sectionReadChip("Das Menü")}</h3>
         ${buildMenuExplainList()}
       </details>
+
+      <section class="hilfe-anliegen hilfe-unterstuetzung" aria-label="Weitere Hilfe, Begleitung und Schulung">
+        <h3>Weitere Hilfe, Begleitung &amp; Schulung ${sectionReadChip("Weitere Hilfe, Begleitung und Schulung")}</h3>
+        <p class="settings-explain">${escapeHtml(stufenUiText("hilfeUnterstuetzungText"))}</p>
+        <div class="help-page-actions">
+          <a class="setting-big-button" href="lernkreis/index.html?ex=be_sp1">Schon passiert: Schritt für Schritt handeln</a>
+          <a class="setting-big-button" href="testfassung.html#begleiten">Lernen begleiten: Kompass &amp; Begleit-Karten</a>
+          <a class="setting-big-button" href="testfassung.html#digital-begleiter">Digital-Begleiter*innen: Schulung &amp; Übung</a>
+        </div>
+      </section>
     </section>
   `;
   focusContent();
@@ -8675,6 +8958,23 @@ function renderSettingsPage() {
   rememberRoute("einstellungen");
   showNav(false, false);
 
+  /* D6/K5: Welche angezeigte Wahl ist nur eine Voreinstellung? Ein fehlender
+     Eintrag heißt: Die Person hat hier noch nicht selbst gewählt. */
+  const sliJetzt = readSliSessionState();
+  const umgebung = (sliJetzt && sliJetzt.voreinstellung) || "unterstuetzt";
+  const UMGEBUNG_TEXT = { gefuehrt: "Zeig mir jeden Schritt.", unterstuetzt: "Gib mir Hilfen dazu.", frei: "Ich probiere selbst." };
+  let vorGeraet = false;
+  try { vorGeraet = entwurfStorage.getItem(DEVICE_SHARED_KEY) === null; } catch (e) { vorGeraet = false; }
+  const vor = {
+    sprache: !languageChosen,
+    lernform: lernformIstVoreinstellung(),
+    vorlesen: pGet(AUTO_READ_KEY) === null,
+    tempo: pGet(READ_TEMPO_KEY) === null,
+    farben: pGet(APP_THEME_KEY) === null && !sliNutzerFeld("thema"),
+    geraet: vorGeraet,
+    umgebung: !sliNutzerFeld("voreinstellung") && Object.prototype.hasOwnProperty.call(UMGEBUNG_TEXT, umgebung)
+  };
+
   const activeProfile = getActiveProfile();
   const profileSection = activeProfile ? `
     <section class="settings-page-section" aria-label="Dein Zeichen">
@@ -8689,9 +8989,10 @@ function renderSettingsPage() {
       <h3>Dieses Gerät</h3>
       <p class="settings-explain">Benutzt du dieses Gerät allein? Oder benutzen es mehrere Personen? Bei mehreren Personen fragt die App beim Start immer: Wer lernt gerade?</p>
       <div class="settings-toggle-row" role="group" aria-label="Wer benutzt dieses Gerät">
-        <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${deviceShared ? "false" : "true"}" onclick="setSharedFromSettings(false)">${pictoHtml("person")}<span>Nur ich</span></button>
-        <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${deviceShared ? "true" : "false"}" onclick="setSharedFromSettings(true)">${pictoHtml("people")}<span>Mehrere Personen</span></button>
+        <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${deviceShared ? "false" : "true"}"${voreinstellungBezug(vor.geraet && !deviceShared, "vorGeraet")} onclick="setSharedFromSettings(false)">${pictoHtml("person")}<span>Nur ich</span></button>
+        <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${deviceShared ? "true" : "false"}"${voreinstellungBezug(vor.geraet && deviceShared, "vorGeraet")} onclick="setSharedFromSettings(true)">${pictoHtml("people")}<span>Mehrere Personen</span></button>
       </div>
+      ${vor.geraet ? voreinstellungZeile("vorGeraet", deviceShared ? "Mehrere Personen" : "Nur ich") : ""}
     </section>` : "";
 
   const learnModeButtons = Object.keys(LEARN_MODES).map(key => {
@@ -8708,8 +9009,32 @@ function renderSettingsPage() {
       <p class="topic-grid-hint">Hier kannst du vieles einstellen. So passt die Seite gut zu dir.</p>
       ${buildResumeLessonChip()}
 
-      <section class="settings-page-section" aria-label="Schrift">
-        <h3>Schrift ${sectionReadChip("Schrift")}</h3>
+      <section class="settings-page-section" aria-label="1. Sprache">
+        <h3>1. Sprache ${sectionReadChip("Sprache")}</h3>
+        <p class="settings-explain">Du liest gerade: <strong>${escapeHtml(LANGUAGE_LABEL[languageLevel])}</strong>. Sprache, Lernform und Hilfen stellst du unabhängig voneinander ein.</p>
+        <div class="settings-toggle-row">
+          <button type="button" class="setting-big-button" onclick="renderLanguageChoice('${escapeHtml(languageLevel)}')">Sprache wechseln</button>
+        </div>
+        ${vor.sprache ? voreinstellungZeile("vorSprache", LANGUAGE_LABEL[languageLevel]) : ""}
+        ${/* Navigation 20.11.2026: „App einrichten“ stand bisher nur auf der alten Startseite (D16). */""}
+        <div class="settings-toggle-row">
+          <button type="button" class="bedien-pikto setting-big-button" onclick="introStart()">${pictoHtml("einstellungen")}<span>App einrichten</span></button>
+        </div>
+      </section>
+
+      <section class="settings-page-section" aria-label="2. Lernform">
+        <h3>2. Lernform ${sectionReadChip("Lernform")}</h3>
+        <p class="settings-explain">${escapeHtml(stufenUiText("lernformErklaerung"))}</p>
+        <div class="settings-toggle-row settings-lernform" role="group" aria-label="Lernform wählen">
+          <button type="button" class="setting-big-button bedien-pikto" aria-pressed="${wirksameLernform() === "allein" ? "true" : "false"}"${voreinstellungBezug(vor.lernform, "vorLernform")} onclick="setSliLernform('allein')">${pictoHtml("person")}<span>Allein</span></button>
+          <button type="button" class="setting-big-button bedien-pikto" aria-pressed="${wirksameLernform() === "gemeinsam" ? "true" : "false"}" onclick="setSliLernform('gemeinsam')">${pictoHtml("people")}<span>Gemeinsam lernen</span></button>
+          <button type="button" class="setting-big-button" aria-pressed="${wirksameLernform() === "unterstuetzung" ? "true" : "false"}" onclick="setSliLernform('unterstuetzung')">Mit Unterstützung</button>
+        </div>
+        ${vor.lernform ? voreinstellungZeile("vorLernform", "Allein") : ""}
+      </section>
+
+      <section class="settings-page-section" aria-label="3. Zusätzliche Hilfen">
+        <h3>3. Zusätzliche Hilfen: Schrift ${sectionReadChip("Schrift")}</h3>
         <p class="settings-explain">Du kannst die Schrift größer oder kleiner machen.</p>
         <div class="settings-toggle-row" role="group" aria-label="Schriftgröße ändern">
           <button type="button" class="setting-big-button font-btn font-btn-decrease" onclick="changeFontSize(-1)" aria-label="Schrift kleiner" ${fontSizeStep === 0 ? "disabled" : ""}>A− kleiner</button>
@@ -8717,19 +9042,31 @@ function renderSettingsPage() {
         </div>
       </section>
 
-      <section class="settings-page-section" aria-label="Vorlesen">
-        <h3>Vorlesen ${sectionReadChip("Vorlesen")}</h3>
+      <section class="settings-page-section" aria-label="Zusätzliche Hilfen: Vorlesen">
+        <h3>Vorlesen und Lesehilfen ${sectionReadChip("Vorlesen")}</h3>
         <p class="settings-explain">Soll jede Seite automatisch vorgelesen werden?</p>
         <div class="settings-toggle-row" role="group" aria-label="Automatisch vorlesen">
-          <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${autoRead ? "true" : "false"}" onclick="setAutoRead(true); renderSettingsPage();">${pictoHtml("vorlesen")}<span>Ja, immer vorlesen</span></button>
-          <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "false" : "true"}" onclick="setAutoRead(false); renderSettingsPage();">Nein, ich tippe selbst</button>
+          <button type="button" class="bedien-pikto setting-big-button" aria-pressed="${autoRead ? "true" : "false"}"${voreinstellungBezug(vor.vorlesen && autoRead, "vorVorlesen")} onclick="setAutoRead(true); renderSettingsPage();">${pictoHtml("vorlesen")}<span>Ja, immer vorlesen</span></button>
+          <button type="button" class="setting-big-button" aria-pressed="${autoRead ? "false" : "true"}"${voreinstellungBezug(vor.vorlesen && !autoRead, "vorVorlesen")} onclick="setAutoRead(false); renderSettingsPage();">Nein, ich tippe selbst</button>
         </div>
+        ${vor.vorlesen ? voreinstellungZeile("vorVorlesen", autoRead ? "Ja, immer vorlesen" : "Nein, ich tippe selbst") : ""}
         <p class="settings-explain" style="margin-top:14px;">Wie schnell soll die Stimme lesen?</p>
         <div class="settings-toggle-row" role="group" aria-label="Vorlese-Tempo">
-          <button type="button" class="setting-big-button" aria-pressed="${readTempo === "normal" ? "true" : "false"}" onclick="setReadTempo('normal')">Normal</button>
-          <button type="button" class="setting-big-button" aria-pressed="${readTempo === "langsam" ? "true" : "false"}" onclick="setReadTempo('langsam')">Langsam</button>
+          <button type="button" class="setting-big-button" aria-pressed="${readTempo === "normal" ? "true" : "false"}"${voreinstellungBezug(vor.tempo && readTempo === "normal", "vorTempo")} onclick="setReadTempo('normal')">Normal</button>
+          <button type="button" class="setting-big-button" aria-pressed="${readTempo === "langsam" ? "true" : "false"}"${voreinstellungBezug(vor.tempo && readTempo === "langsam", "vorTempo")} onclick="setReadTempo('langsam')">Langsam</button>
         </div>
+        ${vor.tempo ? voreinstellungZeile("vorTempo", readTempo === "langsam" ? "Langsam" : "Normal") : ""}
         ${buildLesehilfenSettings()}
+      </section>
+
+      <section class="settings-page-section" aria-label="Farben: Hell oder Dunkel">
+        <h3>Hell oder Dunkel ${sectionReadChip("Hell oder Dunkel")}</h3>
+        <p class="settings-explain">${escapeHtml(stufenUiText("farbenText"))}</p>
+        <div class="settings-toggle-row" role="group" aria-label="Farb-Modus wählen">
+          <button type="button" class="setting-big-button" aria-pressed="${appTheme === "light" ? "true" : "false"}"${voreinstellungBezug(vor.farben && appTheme === "light", "vorFarben")} onclick="setAppTheme('light')">Hell</button>
+          <button type="button" class="setting-big-button" aria-pressed="${appTheme === "dark" ? "true" : "false"}"${voreinstellungBezug(vor.farben && appTheme === "dark", "vorFarben")} onclick="setAppTheme('dark')">Dunkel</button>
+        </div>
+        ${vor.farben ? voreinstellungZeile("vorFarben", appTheme === "dark" ? "Dunkel" : "Hell") : ""}
       </section>
 
       <section class="settings-page-section" aria-label="Töne und Bewegung">
@@ -8741,18 +9078,18 @@ function renderSettingsPage() {
         </div>
       </section>
 
-      <section class="settings-page-section" aria-label="Sprache">
-        <h3>Sprache ${sectionReadChip("Sprache")}</h3>
-        <p class="settings-explain">Du liest gerade: <strong>${escapeHtml(LANGUAGE_LABEL[languageLevel])}</strong>.</p>
-        <div class="settings-toggle-row">
-          <button type="button" class="setting-big-button" onclick="renderLanguageChoice('${escapeHtml(languageLevel)}')">Sprache wechseln</button>
+      <section class="settings-page-section" aria-label="Hilfen beim Üben (gelten für diese Sitzung)">
+        <h3>Hilfen beim Üben (gelten für diese Sitzung) ${sectionReadChip("Hilfen beim Üben")}</h3>
+        <p class="settings-explain">Diese Hilfen gelten beim Üben im Übungs-Handy. Sie gelten nur für diesen Tab. Die App speichert sie nicht dauerhaft.</p>
+        <div class="settings-toggle-row" role="group" aria-label="Anleitung im Übungs-Handy">
+          <button type="button" class="setting-big-button" aria-pressed="${umgebung === "gefuehrt" ? "true" : "false"}"${voreinstellungBezug(vor.umgebung && umgebung === "gefuehrt", "vorUmgebung")} onclick="setSliVoreinstellung('gefuehrt')">Zeig mir jeden Schritt.</button>
+          <button type="button" class="setting-big-button" aria-pressed="${umgebung === "unterstuetzt" ? "true" : "false"}"${voreinstellungBezug(vor.umgebung && umgebung === "unterstuetzt", "vorUmgebung")} onclick="setSliVoreinstellung('unterstuetzt')">Gib mir Hilfen dazu.</button>
+          <button type="button" class="setting-big-button" aria-pressed="${umgebung === "frei" ? "true" : "false"}"${voreinstellungBezug(vor.umgebung && umgebung === "frei", "vorUmgebung")} onclick="setSliVoreinstellung('frei')">Ich probiere selbst.</button>
         </div>
-      </section>
-
-      <section class="settings-page-section" aria-label="Lernweg">
-        <h3>Wie möchtest du lernen? ${sectionReadChip("Wie möchtest du lernen?")}</h3>
-        <p class="settings-explain">Such dir etwas aus. Du kannst es jederzeit ändern.</p>
-        <div class="settings-toggle-row">${learnModeButtons}</div>
+        ${vor.umgebung ? voreinstellungZeile("vorUmgebung", UMGEBUNG_TEXT[umgebung]) : ""}
+        <div class="settings-toggle-row" style="margin-top:10px;">
+          <button type="button" class="setting-big-button" aria-pressed="${(readSliSessionState() && readSliSessionState().zweiTap) ? "true" : "false"}" onclick="toggleSliZweiTap()">Erst hören, dann nehmen</button>
+        </div>
       </section>
 
       ${profileSection}
@@ -9003,6 +9340,158 @@ function rememberTopicAmount(topicId, mode) {
   saveTopicAmounts();
 }
 
+const THEMA_PRAXIS_ANGEBOTE = {
+  datenschutz: {
+    handy: [
+      { id: "ds1", titel: "Nötig oder nicht?" },
+      { id: "ds2", titel: "Wer sieht es?" }
+    ]
+  },
+  whatsapp: {
+    handy: [
+      { id: "ge1", titel: "Unbekannte Nachrichten" },
+      { id: "wa2", titel: "Links in Nachrichten" },
+      { id: "wa3", titel: "Dein WhatsApp-Code" }
+    ],
+    lernkreis: [
+      { ex: "wa_ruhe", titel: "Ruhe in der Gruppe" }
+    ]
+  },
+  facebook: {
+    handy: [
+      { id: "fb1", titel: "Dein Facebook-Profil" },
+      { id: "fb2", titel: "Unbekannte Personen" },
+      { id: "fb3", titel: "Komische Nachrichten" }
+    ]
+  },
+  instagram: {
+    handy: [
+      { id: "ig1", titel: "Deine Fotos auf Instagram" },
+      { id: "ig2", titel: "Fotos von anderen Personen" }
+    ]
+  },
+  youtube: {
+    handy: [
+      { id: "yt1", titel: "Videos prüfen" },
+      { id: "yt2", titel: "Werbung erkennen" },
+      { id: "yt3", titel: "Pausen machen" }
+    ]
+  },
+  snapchat: {
+    handy: [
+      { id: "sc1", titel: "Bilder verschwinden nicht wirklich" },
+      { id: "sc2", titel: "Dein Standort" },
+      { id: "sc3", titel: "Niemand darf dich zwingen" }
+    ]
+  },
+  tiktok: {
+    handy: [
+      { id: "tt1", titel: "Was zeigt mir TikTok?" },
+      { id: "tt2", titel: "Trends: mitmachen oder nicht?" },
+      { id: "tt3", titel: "Pause machen" }
+    ]
+  },
+  hilfe: {
+    handy: [
+      { id: "h1", titel: "Was ist los?" },
+      { id: "h2", titel: "Was kann ich selbst tun?" },
+      { id: "h3", titel: "Welche Hilfe passt?" }
+    ]
+  },
+  ki: {
+    handy: [
+      { id: "ki1", titel: "Was ist KI?" },
+      { id: "ki2", titel: "Was kann KI?" },
+      { id: "ki3", titel: "Wann musst du aufpassen?" }
+    ]
+  },
+  fakes: {
+    handy: [
+      { id: "fn1", titel: "Was ist eine Fake-Nachricht?" },
+      { id: "fn2", titel: "Wie erkennst du Fakes?" },
+      { id: "fn3", titel: "Was tust du bei Fakes?" }
+    ]
+  },
+  betrug: {
+    handy: [
+      { id: "be1", titel: "Was ist Betrug im Internet?" },
+      { id: "be2", titel: "Wie erkennst du Betrug?" },
+      { id: "be3", titel: "Was tust du bei Betrug?" }
+    ],
+    postfach: [
+      { id: "paket", titel: "Paket-Link prüfen" },
+      { id: "sicherheit", titel: "Bank-Anfrage prüfen" },
+      { id: "anhang", titel: "Anhang prüfen" }
+    ],
+    lernkreis: [
+      { ex: "be_sp1", titel: "Schon passiert: Daten eingegeben" }
+    ]
+  },
+  einkaufen: {
+    handy: [
+      { id: "ek1", titel: "Gute Shops erkennen" },
+      { id: "ek2", titel: "Sicher bezahlen" },
+      { id: "ek3", titel: "Etwas ist schiefgelaufen" }
+    ],
+    postfach: [
+      { id: "ek-post1", titel: "Die Bestellung kommt nicht" }
+    ]
+  }
+};
+
+function praxisAngebotTitel(typ, item) {
+  if (typ === "handy" && typeof KURZWEGE !== "undefined" && KURZWEGE[item.id]) {
+    const k = KURZWEGE[item.id];
+    const t = lernhandyTitelOhneCode(hubLernText(k.lektion || k.name));
+    if (t) return t;
+  }
+  if (typ === "postfach" && typeof MAILBOX_SZENARIEN !== "undefined" && MAILBOX_SZENARIEN[item.id]) {
+    const t = lernhandyTitelOhneCode(hubLernText(MAILBOX_SZENARIEN[item.id].titel));
+    if (t) return t;
+  }
+  return item.titel || item.id;
+}
+
+function buildTopicPraxisBlock(topic) {
+  const angebot = topic && THEMA_PRAXIS_ANGEBOTE[topic.id];
+  if (!angebot) return "";
+  const gruppen = [];
+  if (Array.isArray(angebot.handy) && angebot.handy.length) {
+    gruppen.push(`
+      <div class="topic-praxis-group">
+        <h4>Im Übungs-Handy üben</h4>
+        <div class="topic-praxis-links">
+          ${angebot.handy.map((w) => `<button type="button" class="later-chip bedien-pikto" onclick="startHandyWeg('${escapeHtml(w.id)}', { vonThema: '${escapeHtml(topic.id)}' })">${pictoHtml("handy")}<span>${escapeHtml(praxisAngebotTitel("handy", w))}</span></button>`).join("")}
+        </div>
+      </div>`);
+  }
+  if (Array.isArray(angebot.postfach) && angebot.postfach.length) {
+    gruppen.push(`
+      <div class="topic-praxis-group">
+        <h4>Im Postfach üben</h4>
+        <div class="topic-praxis-links">
+          ${angebot.postfach.map((p) => `<button type="button" class="later-chip bedien-pikto" onclick="renderMailPostfach('${escapeHtml(p.id)}', { vonThema: '${escapeHtml(topic.id)}' })">${pictoHtml("mail")}<span>${escapeHtml(praxisAngebotTitel("postfach", p))}</span></button>`).join("")}
+        </div>
+      </div>`);
+  }
+  if (Array.isArray(angebot.lernkreis) && angebot.lernkreis.length) {
+    gruppen.push(`
+      <div class="topic-praxis-group">
+        <h4>Etwas ausprobieren</h4>
+        <div class="topic-praxis-links">
+          ${angebot.lernkreis.map((l) => `<a class="later-chip bedien-pikto" href="lernkreis/index.html?ex=${encodeURIComponent(l.ex)}">${pictoHtml("exercise")}<span>${escapeHtml(l.titel)}</span></a>`).join("")}
+        </div>
+      </div>`);
+  }
+  if (!gruppen.length) return "";
+  const uebenTitel = stufenUiText("themaUebenTitel");
+  return `
+    <section class="topic-praxis-panel" aria-label="Üben zu diesem Thema">
+      <h3>${escapeHtml(uebenTitel)} ${sectionReadChip(uebenTitel)}</h3>
+      ${gruppen.join("")}
+    </section>`;
+}
+
 function renderTopicChoice(topicId) {
   stopReading();
   const topic = getTopicById(topicId);
@@ -9051,11 +9540,17 @@ function renderTopicChoice(topicId) {
         const resume = (lastLessonContext && lastLessonContext.topicId === topic.id) ? lastLessonContext : null;
         const hasQuiz = getQuizQuestions(topic).length > 0;
         const laterChip = (label, click, icon) => `<button type="button" class="later-chip${icon ? " bedien-pikto" : ""}" onclick="${click}">${icon ? pictoHtml(icon) : ""}<span>${label}</span></button>`;
+        const trainingLabel = languageLevel === "standard"
+          ? "Gemischte Nachrichten prüfen"
+          : (languageLevel === "einfach" ? "Gemischte Nachrichten prüfen" : "Gemischte Nachrichten prüfen");
         const training = (topic.id === "betrug" || topic.id === "fakes")
-          ? laterChip("Trainings-Postfach", "startTrainingInbox()") : "";
-        /* Uebungs-Handy: jedes Thema hat ein eigenes Szenario (szenarien-de.js). */
+          ? laterChip(trainingLabel, "startTrainingInbox()") : "";
+        /* Älteres Themenszenario (szenarien-de.js): klar vom neuen Übungs-Handy-Block abgegrenzt. */
+        const uebungLabel = languageLevel === "standard"
+          ? "Nachrichten-Szenario zum Thema"
+          : "Nachrichten-Übung zum Thema";
         const uebung = hasScenario(topic.id)
-          ? laterChip("Übungs-Handy", `startScenario('${escapeHtml(topic.id)}')`, "exercise") : "";
+          ? laterChip(uebungLabel, `startScenario('${escapeHtml(topic.id)}')`, "exercise") : "";
         const merkChip = laterChip("Merk-Karte ansehen", `renderMemoryCard('${escapeHtml(topic.id)}')`, "remember");
         /* Alltags-Übung (alltag-de.js), nur für Themen mit eigener Übung. */
         const alltagScene = (typeof ALLTAG_SCENES !== "undefined")
@@ -9065,12 +9560,8 @@ function renderTopicChoice(topicId) {
           ? laterChip("Im Alltag üben", `alltagGo('${escapeHtml(alltagScene[0])}')`)
           : "";
 
-        /* Weiterführende Sonder-Übungen ohne Doppelung zum regulären Themen-Lernweg */
-        const handyLink = topic.id === "tiktok"
-          ? laterChip("Trends: mitmachen oder nicht?", "startHandyWeg('tt2')", "exercise")
-          : topic.id === "einkaufen"
-            ? laterChip("E-Mail: Etwas ist schiefgelaufen", "renderMailPostfach('ek3')", "mail")
-            : "";
+        /* tt2 (tiktok) und ek-post1 (einkaufen) stehen jetzt mit Themen-Rückweg in buildTopicPraxisBlock(). */
+        const handyLink = "";
 
         /* D7 (01.10.2026, E6): Ein Lernweg statt Kurz/Mehr. Keine Mengen-Wahl
            mehr am Anfang: Alle lernen zuerst den Kern (bisher Kurz-Weg).
@@ -9125,6 +9616,8 @@ function renderTopicChoice(topicId) {
             ${hasQuiz ? laterChip("Quiz machen", `startQuiz('${escapeHtml(topic.id)}')`, "quiz") : ""}
             ${handyLink}${merkChip}${alltagUebung}${uebung}${training}`)}`;
       })()}
+
+      ${buildTopicPraxisBlock(topic)}
 
       ${/* Begleit-Panel direkt hinter die Hauptaktion (B21): vorher lag es bei
             y=1364 unter allem anderen, eine Fachkraft musste dreimal scrollen.
@@ -11431,7 +11924,7 @@ function lernPause() {
         <p>Du kannst jederzeit weitermachen.</p>
         <div class="completion-actions">
           <button type="button" class="bedien-pikto primary-action" onclick="resumeLastLesson()">${pictoHtml("start")}<span>Weiter lernen</span></button>
-          <button type="button" class="secondary-action" onclick="navigateTab('start')">Zur Startseite</button>
+          <button type="button" class="secondary-action" onclick="zurPortalStartseite()">Zur Startseite</button>
         </div>
       </article>
     </section>
@@ -13279,7 +13772,7 @@ function fuerHeuteAufhoeren() {
         <p>Du hast heute gelernt.</p>
         <p>Du kannst jederzeit weitermachen.</p>
         <div class="completion-actions">
-          <button type="button" class="primary-action" onclick="navigateTab('start')">Zur Startseite</button>
+          <button type="button" class="primary-action" onclick="zurPortalStartseite()">Zur Startseite</button>
         </div>
       </article>
     </section>
@@ -15198,7 +15691,6 @@ function starteHubLernweg(cfg) {
   document.body.classList.add("lesson-view");
   setOrientation(`Du übst im Handy: ${cfg.titel}.`);
   showNav(true, false, "Weiter");
-  lernBeendenZiel = cfg.beendenZiel;
 
   content.innerHTML = `
     ${buildLernLeiste(1, Math.max(1, (cfg.lw && cfg.lw.schritte ? cfg.lw.schritte.length : 1)))}
@@ -15207,6 +15699,7 @@ function starteHubLernweg(cfg) {
       <div id="lernhandyHubWurzel"><p role="status">Übung wird geladen.</p></div>
       <div id="lernhandyHubHilfe"></div>
     </article>`;
+  lernBeendenZiel = cfg.beendenZiel || null;
   const ortTitel = content.querySelector(".lern-ort-titel");
   if (ortTitel) ortTitel.textContent = cfg.titel;
 
@@ -15439,19 +15932,20 @@ function startHandyWeg(wegId, opts) {
   const titel = (weg.id === "tt2" || weg.id === "ek3")
     ? lernhandyTitelOhneCode(weg.name)
     : (weg.lektion || lernhandyTitelOhneCode(weg.name || lw.titel));
+  const zielThema = (opts && opts.vonThema) || ((currentTopicId && weg.thema === currentTopicId) ? currentTopicId : null);
   starteHubLernweg({
     typ: "handy",
     id: weg.id,
     route: "handy:" + weg.id,
     titel,
     untertitel: "Übungs-Handy",
-    themaId: weg.thema || null,
+    themaId: zielThema || weg.thema || null,
     lw,
     gesamt: Object.keys(KURZWEGE).length,
-    beendenZiel: "renderHandyHub",
+    beendenZiel: zielThema ? "thema:" + zielThema : "renderHandyHub",
     schritt: opts && Number.isInteger(opts.schritt) ? opts.schritt : 0,
-    zurueckFn: () => renderHandyHub(),
-    neuStarten: (schritt) => startHandyWeg(wegId, { schritt })
+    zurueckFn: () => (zielThema ? renderTopicChoice(zielThema) : renderHandyHub()),
+    neuStarten: (schritt) => startHandyWeg(wegId, { schritt, vonThema: zielThema })
   });
 }
 
@@ -15467,23 +15961,26 @@ function renderMailPostfach(szId, opts) {
     return;
   }
   const alleIds = Object.keys(MAILBOX_SZENARIEN);
-  if (szId && MAILBOX_SZENARIEN[szId]) {
-    const sz = MAILBOX_SZENARIEN[szId];
-    const lw = erstellePostfachLernweg(szId);
-    const titel = lernhandyTitelOhneCode(hubLernText(sz.titel) || szId);
+  const POSTFACH_ALIAS = { ek3: "ek-post1" };
+  const zielId = (szId && POSTFACH_ALIAS[szId]) ? POSTFACH_ALIAS[szId] : szId;
+  if (zielId && MAILBOX_SZENARIEN[zielId]) {
+    const sz = MAILBOX_SZENARIEN[zielId];
+    const lw = erstellePostfachLernweg(zielId);
+    const titel = lernhandyTitelOhneCode(hubLernText(sz.titel) || zielId);
+    const zielThema = (opts && opts.vonThema) || ((currentTopicId && lw.thema === currentTopicId) ? currentTopicId : null);
     starteHubLernweg({
       typ: "postfach",
-      id: szId,
-      route: "postfach:" + szId,
+      id: zielId,
+      route: "postfach:" + zielId,
       titel,
       untertitel: "E-Mail-Übungspostfach",
-      themaId: lw.thema || null,
+      themaId: zielThema || lw.thema || null,
       lw,
       gesamt: alleIds.length,
-      beendenZiel: "renderMailPostfach",
+      beendenZiel: zielThema ? "thema:" + zielThema : "renderMailPostfach",
       schritt: opts && Number.isInteger(opts.schritt) ? opts.schritt : 0,
-      zurueckFn: () => renderMailPostfach(),
-      neuStarten: (schritt) => renderMailPostfach(szId, { schritt })
+      zurueckFn: () => (zielThema ? renderTopicChoice(zielThema) : renderMailPostfach()),
+      neuStarten: (schritt) => renderMailPostfach(zielId, { schritt, vonThema: zielThema })
     });
     return;
   }
@@ -15822,9 +16319,9 @@ function handleHash() {
       if (deviceShared && profiles.length > 0) return renderProfilePicker();
     }
     if (!hash) {
-      /* Beim Öffnen immer die kurze Intro-Startseite. „Los geht's" führt
-         ins Onboarding (erster Besuch) oder zu den Themen. */
-      return renderIntro();
+      /* Navigation 20.11.2026: Ohne Sprungmarke öffnet die Themenübersicht des Bereichs
+         „Lernen und ausprobieren“, keine zweite Startseite. Die bisherige Seite bleibt unter #start. */
+      return renderMenu();
     }
 
     /* Hauptmenü-Seiten */
@@ -15879,7 +16376,13 @@ nextButton.addEventListener("click", goNext);
 
 /* Hauptmenü (Tab-Leiste) */
 document.querySelectorAll(".main-tabbar .tab-item").forEach((item) => {
-  item.addEventListener("click", () => navigateTab(item.dataset.tab));
+  item.addEventListener("click", () => {
+    if (item.dataset.tab === "start") {
+      window.location.href = "zugang.html";
+      return;
+    }
+    navigateTab(item.dataset.tab);
+  });
 });
 
 /* Browser-Zurück/-Vor: gleiche Route-Logik wie beim direkten Einstieg.

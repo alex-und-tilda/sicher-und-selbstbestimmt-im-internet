@@ -4107,6 +4107,12 @@ body.lesson-view .orient-line {
   color: var(--ink-soft);
 }
 
+/* D6/K5 (v72): Zeile „Voreinstellung: …“ unter einer Knopfgruppe.
+   Nur Abstand; Farbe wie .settings-explain (Hell und Dunkel). */
+.settings-page-section .settings-voreinstellung {
+  margin: 8px 0 0;
+}
+
 .settings-toggle-row {
   display: flex;
   flex-wrap: wrap;
@@ -5959,9 +5965,8 @@ body.simple-mode .practice-box {
   outline-color: currentColor;
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  :where(body.entwurf) .phone-bar { color: var(--bg); }
-}
+/* Kontrast (19.11.2026): In Design A ist --line im Dunkelmodus dunkel (#394e43);
+   damit bleibt color: var(--ink) (helle Schrift) auf .phone-bar aktiv. */
 
 .phone-screen {
   padding: 14px 14px 4px;
@@ -7776,4 +7781,226 @@ p.feedback-auch {
     transform: none !important;
   }
   .print-memory-header h2 { color: var(--ink); }
+}
+
+
+/* ============================================================
+   F3/E74 Vereinheitlichung: Desktop-Navigation, Themen-Praxis, Hell/Dunkel
+   ============================================================ */
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #eef3f9;
+  --bg-grad-1: #f4f8fc;
+  --bg-grad-2: #e7eef7;
+  --surface: #ffffff;
+  --surface-soft: #f6faff;
+  --ink: #16222e;
+  --scene-backdrop: rgba(10, 92, 149, 0.08);
+  --ink-soft: #3d506a;
+  --line: #d7e0ea;
+  --accent: #00528f;
+  --accent-dark: #003a66;
+  --accent-soft: #e3eef7;
+  --on-accent: #ffffff;
+  --good: #15803d;
+  --good-text: #166534;
+  --good-bg: #e8f6ee;
+  --warn: #b45309;
+  --warn-bg: #fdf1e0;
+  --bad: #b91c1c;
+  --bad-bg: #fdecec;
+  --remember: #00528f;
+  --remember-bg: #e6f0f9;
+  --focus: #b45309;
+  --shadow: 0 1px 2px rgba(20, 34, 49, 0.04), 0 8px 24px rgba(20, 34, 49, 0.07);
+  --shadow-small: 0 1px 3px rgba(20, 34, 49, 0.08);
+  --shadow-hover: 0 4px 10px rgba(20, 34, 49, 0.08), 0 18px 40px rgba(20, 34, 49, 0.12);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #131B17;
+  --bg-grad-1: #131B17;
+  --bg-grad-2: #131B17;
+  --surface: #1B2620;
+  --surface-soft: #23312A;
+  --ink: #F8F6F0;
+  --scene-backdrop: rgba(248, 246, 240, 0.88);
+  --ink-soft: #DFE9D9;
+  --line: #394E43;
+  --accent: #A8C9B3;
+  --accent-dark: #DFE9D9;
+  --accent-soft: #24382D;
+  --on-accent: #131B17;
+  --good: #8FD1A6;
+  --good-text: #8FD1A6;
+  --good-bg: #1B3325;
+  --warn: #F2B84B;
+  --warn-bg: #2D2516;
+  --bad: #F29B92;
+  --bad-bg: #351E1C;
+  --remember: #A8C9B3;
+  --remember-bg: #24382D;
+  --focus: #F2B84B;
+  --tab-active-bg: #24382D;
+  --track-bg: #131B17;
+  --track-line: #6E8D7B;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 14px 32px rgba(0, 0, 0, 0.55);
+  --shadow-small: 0 1px 4px rgba(0, 0, 0, 0.55);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.55), 0 20px 44px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="light"] .topic-start-button { color: var(--on-accent); }
+html[data-theme="light"] img:not([src$=".svg"]),
+html[data-theme="light"] img[src^="assets/icons/"],
+html[data-theme="light"] .topic-icon img { filter: none; }
+html[data-theme="light"] .einfach-pictogram img,
+html[data-theme="light"] .topic-illustration,
+html[data-theme="light"] .lesson-illustration { background: transparent; }
+html[data-theme="light"] .einfach-quiz-feedback-text { background: rgba(255, 255, 255, 0.55); }
+html[data-theme="light"] .einfach-done-praise { background: rgba(255, 255, 255, 0.5); }
+html[data-theme="light"] .ls-sentence-pikto,
+html[data-theme="light"] .ls-bullet-pikto,
+html[data-theme="light"] .ls-bullet-item { background: transparent; }
+html[data-theme="light"] .hero-card {
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(64, 196, 255, 0.32) 0%, rgba(64, 196, 255, 0) 55%),
+    linear-gradient(135deg, #0a5c95 0%, #0b3f72 60%, #123a82 100%);
+  box-shadow: none;
+}
+html[data-theme="light"] :where(body.entwurf) .phone-bar { color: inherit; }
+
+html[data-theme="dark"] .topic-start-button { color: #0b1119; }
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .hero-card {
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(90, 168, 224, 0.26) 0%, rgba(90, 168, 224, 0) 55%),
+    linear-gradient(135deg, #16466f 0%, #0c2c4c 100%);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+html[data-theme="dark"] img:not([src$=".svg"]) { filter: brightness(0.88); }
+html[data-theme="dark"] img[src^="assets/icons/"] { filter: brightness(0) invert(1); }
+html[data-theme="dark"] .topic-icon img { filter: brightness(0); }
+html[data-theme="dark"] .einfach-pictogram img,
+html[data-theme="dark"] .topic-illustration,
+html[data-theme="dark"] .lesson-illustration {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  filter: none;
+}
+html[data-theme="dark"] .einfach-quiz-feedback-text,
+html[data-theme="dark"] .einfach-done-praise {
+  background: rgba(255, 255, 255, 0.08);
+}
+html[data-theme="dark"] .ls-sentence-pikto,
+html[data-theme="dark"] .ls-bullet-pikto {
+  background: rgba(255, 255, 255, 0.12);
+}
+html[data-theme="dark"] .ls-bullet-item {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: calc(4.2rem + 16px);
+    scroll-padding-bottom: 24px;
+  }
+  html:has(.nav:not(.is-hidden)) {
+    scroll-padding-bottom: 6.5rem;
+  }
+  .app {
+    padding: calc(4.2rem + 16px) 16px 48px;
+  }
+  .main-tabbar {
+    top: 0;
+    bottom: auto;
+    min-height: 0;
+    padding: 8px 16px;
+    gap: 8px;
+    border-top: none;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(20, 34, 49, 0.08);
+  }
+  .main-tabbar .tab-item {
+    flex: 0 1 auto;
+    max-width: none;
+    min-height: 44px;
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: var(--fs-klein);
+  }
+  .main-tabbar .tab-item .tab-icon svg,
+  .main-tabbar .tab-item .tab-icon img {
+    width: 20px;
+    height: 20px;
+  }
+  .nav {
+    bottom: 16px;
+  }
+  .update-banner {
+    bottom: 16px;
+  }
+}
+
+.handy-portal-banner--kompakt {
+  padding: 14px 16px;
+}
+
+.topic-praxis-panel {
+  margin-top: 18px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--topic-color, var(--accent));
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-small);
+}
+
+.topic-praxis-panel h3 {
+  margin: 0 0 12px;
+  font-size: var(--fs-gross);
+}
+
+.topic-praxis-group + .topic-praxis-group {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.topic-praxis-group h4 {
+  margin: 0 0 8px;
+  font-size: var(--fs-text);
+  color: var(--ink-soft);
+}
+
+.topic-praxis-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.koennen-heft-link-block {
+  margin-top: 18px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--accent);
+  border-radius: var(--radius-m);
+}
+
+.hilfe-unterstuetzung {
+  margin-top: 18px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
 }

@@ -70,6 +70,8 @@
       gap: 8px 12px;
     }
     .sli-inline strong { color: var(--at-ink); }
+    /* D6/K5 (v72): eigene Wahl und Voreinstellung je auf einer eigenen Zeile */
+    .sli-inline .sli-teil { flex-basis: 100%; }
     .bereich-tabs {
       display: flex;
       flex-wrap: wrap;
@@ -358,7 +360,7 @@
         <div class="hero-copy">
           <h1 id="hub-title">Hilfe im Notfall</h1>
           <p id="hub-lead">Hier findest du ruhige Schritte bei Unsicherheit, das Übungsangebot für Digital-Begleiter*innen und den Kompass für Begleitung auf Augenhöhe.</p>
-          <p class="sli-inline">Deine Einstellung: <strong id="sli-zusammenfassung">Gib mir Hilfen dazu. · Leichte Sprache · Lesen · Allein</strong></p>
+          <p class="sli-inline"><span id="sli-eigene-teil" class="sli-teil" hidden>Deine Einstellung: <strong id="sli-zusammenfassung"></strong></span><span id="sli-vor-teil" class="sli-teil">Voreinstellung: <strong id="sli-voreinstellung-liste">Gib mir Hilfen dazu. · Leichte Sprache · Lesen und Hören · Allein</strong></span></p>
         </div>
       </section>
 
@@ -374,6 +376,7 @@
         <div class="link-row">
           <a class="strip-btn primary" href="lernkreis/index.html?ex=be_sp1">Schon passiert: Schritt für Schritt handeln</a>
           <a class="strip-btn" href="index.html#thema-betrug">Zu den Betrugs-Übungen im Handy</a>
+          <a class="strip-btn" href="index.html#hilfe">App-Hilfe (Bedienhilfe, Piktogramme &amp; Pause)</a>
         </div>
       </section>
 
@@ -431,14 +434,30 @@
       const params = new URLSearchParams(window.location.search);
 function aktualisiereStatus() {
         const el = document.getElementById("sli-zusammenfassung");
-        if (!el || !window.SoLerneIch) return;
+        const eigenTeil = document.getElementById("sli-eigene-teil");
+        const vorTeil = document.getElementById("sli-vor-teil");
+        const vorEl = document.getElementById("sli-voreinstellung-liste");
+        if (!el || !eigenTeil || !vorTeil || !vorEl || !window.SoLerneIch) return;
         const s = window.SoLerneIch.getState();
+        const nf = s.nutzerFelder || {};
         const envObj = window.SoLerneIch.VOREINSTELLUNGEN[s.voreinstellung];
         const envLabel = (envObj && envObj.titel) || "Eigene Auswahl";
         const langLabel = { leicht: "Leichte Sprache", einfach: "Einfache Sprache", alltag: "Alltagssprache" }[s.sprache] || s.sprache;
         const zugangLabel = { lesen: "Lesen", hoeren: "Hören", beides: "Lesen und Hören" }[s.zugang] || s.zugang;
-        const formLabel = { allein: "Allein", gemeinsam: "Gemeinsam", unterstuetzung: "Mit Unterstützung" }[s.lernform] || "Allein";
-        el.textContent = envLabel + " · " + langLabel + " · " + zugangLabel + " · " + formLabel;
+        const formLabel = { allein: "Allein", gemeinsam: "Gemeinsam lernen", unterstuetzung: "Mit Unterstützung" }[s.lernform] || "Allein";
+        /* D6/K5 (v72): Selbst gewählte Werte und Voreinstellungen getrennt nennen. */
+        const teile = [
+          { text: envLabel, eigen: !envObj || nf.voreinstellung === true },
+          { text: langLabel, eigen: nf.sprache === true },
+          { text: zugangLabel, eigen: nf.zugang === true },
+          { text: formLabel, eigen: nf.lernform === true }
+        ];
+        const eigene = teile.filter((t) => t.eigen).map((t) => t.text);
+        const vor = teile.filter((t) => !t.eigen).map((t) => t.text);
+        el.textContent = eigene.join(" · ");
+        eigenTeil.hidden = eigene.length === 0;
+        vorEl.textContent = vor.join(" · ");
+        vorTeil.hidden = vor.length === 0;
       }
 
       if (window.SoLerneIch) {

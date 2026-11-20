@@ -88,6 +88,8 @@
       color: var(--at-ink-soft);
     }
     .sli-row strong { color: var(--at-ink); }
+    /* D6/K5 (v72): eigene Wahl und Voreinstellung je auf einer eigenen Zeile */
+    .sli-row .ml-sli-teil { flex-basis: 100%; }
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -349,7 +351,11 @@
         <h1 id="ml-title">Mein Lernweg</h1>
         <p id="ml-companion-text">Du bestimmst das Tempo. Hier sammelst du in Ruhe deine Ziele, deine ausprobierten Übungen und dein eigenes Könnens-Heft — ohne Punkte und ohne Pflicht.</p>
         <div class="sli-row no-print">
-          <span>Deine Einstellung: <strong id="ml-sli-summary">Gib mir Hilfen dazu. · Leichte Sprache</strong></span>
+          <span id="ml-sli-eigen" class="ml-sli-teil" hidden>Deine Einstellung: <strong id="ml-sli-summary"></strong></span>
+          <span id="ml-sli-vor" class="ml-sli-teil">Voreinstellung: <strong id="ml-sli-vor-liste">Gib mir Hilfen dazu. · Leichte Sprache · Lesen und Hören</strong></span>
+        </div>
+        <div class="actions-row no-print" style="margin-top: 12px;">
+          <a class="btn-soft" href="index.html#lernweg">Zum App-Lernweg (Fortschritt, Regel-Karte &amp; Großes Quiz)</a>
         </div>
       </div>
     </section>
@@ -497,11 +503,26 @@
 
       function updateSliSummary() {
         const el = document.getElementById("ml-sli-summary");
-        if (!el || !window.SoLerneIch) return;
+        const eigenTeil = document.getElementById("ml-sli-eigen");
+        const vorTeil = document.getElementById("ml-sli-vor");
+        const vorEl = document.getElementById("ml-sli-vor-liste");
+        if (!el || !eigenTeil || !vorTeil || !vorEl || !window.SoLerneIch) return;
         const s = window.SoLerneIch.getState();
+        const nf = s.nutzerFelder || {};
         const env = window.SoLerneIch.VOREINSTELLUNGEN && window.SoLerneIch.VOREINSTELLUNGEN[s.voreinstellung];
         const envText = env ? env.titel : "Ich stelle selbst ein.";
-        el.textContent = `${envText} · ${SPRACHEN[s.sprache] || "Leichte Sprache"} · ${ZUGAENGE[s.zugang] || "Lesen und Hören"}`;
+        /* D6/K5 (v72): Selbst gewählte Werte und Voreinstellungen getrennt nennen. */
+        const teile = [
+          { text: envText, eigen: !env || nf.voreinstellung === true },
+          { text: SPRACHEN[s.sprache] || "Leichte Sprache", eigen: nf.sprache === true },
+          { text: ZUGAENGE[s.zugang] || "Lesen und Hören", eigen: nf.zugang === true }
+        ];
+        const eigene = teile.filter((t) => t.eigen).map((t) => t.text);
+        const vor = teile.filter((t) => !t.eigen).map((t) => t.text);
+        el.textContent = eigene.join(" · ");
+        eigenTeil.hidden = eigene.length === 0;
+        vorEl.textContent = vor.join(" · ");
+        vorTeil.hidden = vor.length === 0;
       }
 
       const WEG_TITEL = {

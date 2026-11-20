@@ -23,7 +23,7 @@
       hint: null
     },
     gemeinsam: {
-      label: "Gemeinsam",
+      label: "Gemeinsam lernen",
       hint: {
         leicht: "Lest zuerst zusammen. Sprecht kurz darüber. Dann tippt eine Person.",
         einfach: "Lest zuerst zusammen. Sprecht kurz darüber. Dann tippt eine Person.",

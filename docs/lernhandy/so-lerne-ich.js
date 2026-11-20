@@ -31,7 +31,7 @@
     menge: "mehr",           // wenig | mehr
     lernform: "allein",      // allein | gemeinsam | unterstuetzung
     bewegung: "normal",      // ruhig | normal
-    thema: "light",          // light | dark
+    thema: (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light", // light | dark
     vorbild: "wunsch",       // immer | wunsch | aus
     tippSichtbar: false,
     screenreader: false,
@@ -306,13 +306,35 @@
     return dialogEl;
   }
 
-  function btnRow(key, options) {
+  /* D6/K5 (v72): Ein Wert, den die Person hier noch nicht selbst gewählt hat,
+     trägt unter seiner Gruppe die Zeile „Voreinstellung: …“. Der Knopf verweist
+     mit aria-describedby darauf, sein Name bleibt sein sichtbarer Text. Gelesen
+     wird nur state.nutzerFelder; es wird nichts zusätzlich gespeichert. */
+  function voreinstellungZeile(id, label) {
+    return `<p class="sli-voreinstellung" id="${id}">Voreinstellung: ${label}</p>`;
+  }
+
+  function selbstGewaehlt(key) {
+    return Boolean(state.nutzerFelder && state.nutzerFelder[key] === true);
+  }
+
+  function umgebungVoreinstellung(ort) {
+    const p = VOREINSTELLUNGEN[state.voreinstellung];
+    if (!p || selbstGewaehlt("voreinstellung")) return null;
+    return { id: `sli-vor-${ort}-voreinstellung`, label: p.knopf };
+  }
+
+  function btnRow(key, options, ort) {
+    const aktiv = options.find((o) => state[key] === o.val);
+    const vorId = `sli-vor-${ort || "dialog"}-${key}`;
+    const istVor = Boolean(aktiv) && !selbstGewaehlt(key);
     return `<div class="sli-btn-row" role="group">${options.map((o) =>
-      `<button type="button" class="sli-btn-inline" data-sli-key="${key}" data-sli-set="${o.val}" aria-pressed="${state[key] === o.val}">${o.label}</button>`
-    ).join("")}</div>`;
+      `<button type="button" class="sli-btn-inline" data-sli-key="${key}" data-sli-set="${o.val}" aria-pressed="${state[key] === o.val}"${istVor && o === aktiv ? ` aria-describedby="${vorId}"` : ""}>${o.label}</button>`
+    ).join("")}</div>${istVor ? voreinstellungZeile(vorId, aktiv.label) : ""}`;
   }
 
   function renderStepBody() {
+    const vorUmgebung = umgebungVoreinstellung("dialog");
     return `
       <div class="sli-group">
         <p class="sli-group-title">1. Welche Sprache willst du?</p>
@@ -326,11 +348,12 @@
         <p class="sli-group-title">2. Wie möchtest du üben?</p>
         <div class="sli-preset-grid">
           ${Object.values(VOREINSTELLUNGEN).map((p) => `
-            <button type="button" class="sli-btn" data-sli-preset="${p.id}" aria-pressed="${state.voreinstellung === p.id}">
+            <button type="button" class="sli-btn" data-sli-preset="${p.id}" aria-pressed="${state.voreinstellung === p.id}"${vorUmgebung && state.voreinstellung === p.id ? ` aria-describedby="${vorUmgebung.id}"` : ""}>
               <span><strong>${p.knopf}</strong></span>
             </button>
           `).join("")}
         </div>
+        ${vorUmgebung ? voreinstellungZeile(vorUmgebung.id, vorUmgebung.label) : ""}
       </div>
       <div class="sli-group">
         <p class="sli-group-title">3. Schriftgröße &amp; Ansicht</p>
@@ -368,7 +391,7 @@
             <p class="sli-group-title">Mit wem lernst du heute?</p>
             ${btnRow("lernform", [
               { val: "allein", label: "Allein." },
-              { val: "gemeinsam", label: "Mit anderen." },
+              { val: "gemeinsam", label: "Gemeinsam lernen." },
               { val: "unterstuetzung", label: "Mit Unterstützung." }
             ])}
           </div>
@@ -436,6 +459,7 @@
       else if (akt.dataset.sliCheck) focusSel = `[data-sli-check="${akt.dataset.sliCheck}"]`;
       else if (akt.dataset.sliResetAll) focusSel = `[data-sli-reset-all]`;
     }
+    const basis = (typeof window !== "undefined" && (window.location.pathname.includes("/lernhandy/") || window.location.pathname.includes("/lernkreis/") || window.location.pathname.includes("/praxis/") || window.location.pathname.includes("/material/"))) ? "../" : "";
     dlg.innerHTML = `
       <div class="sli-dialog-head">
         <div>
@@ -443,6 +467,7 @@
           <p class="sli-step-meta">Du stellst alles an einem Ort ein. Unten siehst du gleich ein Beispiel.</p>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a class="sli-btn-inline" style="text-decoration:none;display:inline-flex;align-items:center;" href="${basis}index.html#einstellungen">Alle Einstellungen</a>
           <button type="button" class="sli-btn-inline" data-sli-read="1">Vorlesen</button>
           <button type="button" class="sli-close" data-sli-close="1">Fertig &amp; Schließen</button>
         </div>
@@ -471,6 +496,7 @@
 
   function renderStartfrageHtml() {
     if (!state.startfrageOffen) return "";
+    const vorUmgebung = umgebungVoreinstellung("start");
     return `
       <section class="sli-start-banner" aria-label="Startfrage">
         <div class="sli-start-head">
@@ -482,7 +508,7 @@
         </div>
         <div class="sli-preset-grid">
           ${Object.values(VOREINSTELLUNGEN).map((p) => `
-            <button type="button" class="sli-btn" data-sli-start-preset="${p.id}" aria-pressed="${state.voreinstellung === p.id}">
+            <button type="button" class="sli-btn" data-sli-start-preset="${p.id}" aria-pressed="${state.voreinstellung === p.id}"${vorUmgebung && state.voreinstellung === p.id ? ` aria-describedby="${vorUmgebung.id}"` : ""}>
               <span><strong>${p.knopf}</strong></span>
             </button>
           `).join("")}
@@ -490,6 +516,7 @@
             <span><strong>Ich stelle selbst ein.</strong></span>
           </button>
         </div>
+        ${vorUmgebung ? voreinstellungZeile(vorUmgebung.id, vorUmgebung.label) : ""}
         ${state.selbstEinstellen ? `
           <div class="sli-group">
             <p class="sli-group-title">Wie willst du lernen?</p>
@@ -497,18 +524,18 @@
               { val: "lesen", label: "Ich lese." },
               { val: "hoeren", label: "Ich höre zu." },
               { val: "beides", label: "Ich lese und höre." }
-            ])}
+            ], "start")}
             <p class="sli-group-title" style="margin-top:10px;">Wie viel willst du auf einmal sehen?</p>
             ${btnRow("menge", [
               { val: "wenig", label: "Wenig." },
               { val: "mehr", label: "Mehr." }
-            ])}
+            ], "start")}
             <p class="sli-group-title" style="margin-top:10px;">Mit wem lernst du heute?</p>
             ${btnRow("lernform", [
               { val: "allein", label: "Allein." },
-              { val: "gemeinsam", label: "Mit anderen." },
+              { val: "gemeinsam", label: "Gemeinsam lernen." },
               { val: "unterstuetzung", label: "Mit Unterstützung." }
-            ])}
+            ], "start")}
           </div>
         ` : ""}
         <p style="margin:8px 0 0;">Du kannst das immer ändern.</p>
@@ -532,7 +559,10 @@
       state.sprache = normLang;
       state.nutzerFelder = Object.assign({}, state.nutzerFelder, { sprache: true });
     }
-    if (params.get("theme") && ["light", "dark"].includes(params.get("theme"))) state.thema = params.get("theme");
+    if (params.get("theme") && ["light", "dark"].includes(params.get("theme"))) {
+      state.thema = params.get("theme");
+      state.nutzerFelder = Object.assign({}, state.nutzerFelder, { thema: true });
+    }
     if (params.get("zugang") && ["lesen", "hoeren", "beides"].includes(params.get("zugang"))) state.zugang = params.get("zugang");
     if (params.get("schrift") && ["normal", "gross", "sehr-gross"].includes(params.get("schrift"))) {
       state.schrift = params.get("schrift");
@@ -593,7 +623,7 @@
       state.menge = "mehr";
       state.lernform = "allein";
       state.bewegung = "normal";
-      state.thema = "light";
+      state.thema = (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
       state.vorbild = "wunsch";
       state.tippSichtbar = false;
       state.screenreader = false;

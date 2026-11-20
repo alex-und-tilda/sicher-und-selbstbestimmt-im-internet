@@ -1470,6 +1470,37 @@ body.lesson-view label.answer-option > input:focus-visible { outline: none; }
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
   gap: 0.65rem;
 }
+/* K4 (v73): Lernform-Wahl im Einstellungsdialog (ersetzt „Wir lernen zu
+   zweit“). Je Lernform eine Zeile. Die gewählte Lernform ist wie auf der
+   Seite „Einstellungen“ (.setting-big-button) markiert: Fläche, breiterer
+   Rand und Haken – nicht durch Farbe allein (WCAG 1.4.1). */
+.lern-einstellungen .lern-mehr-lernform {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+.lern-einstellungen .lern-mehr-gruppe { margin: 0; font-weight: 700; color: var(--ink); }
+.lern-einstellungen .lern-mehr-lernform .bedien-pikto { justify-content: center; }
+/* K4 (v73): Die Lernform-Knöpfe mit Piktogramm (Seite „Einstellungen“ und
+   Einstellungsdialog) trennen kein Wort mitten drin. Reicht der Platz nicht
+   (320 px, große Schrift), steht der Text unter dem Piktogramm; getrennt wird
+   nur ein Wort, das allein nicht in die Zeile passt (kein Querüberlauf). */
+.settings-lernform > .bedien-pikto,
+.lern-einstellungen .lern-mehr-lernform .bedien-pikto { flex-wrap: wrap; justify-content: center; }
+.settings-lernform > .bedien-pikto > span,
+.lern-einstellungen .lern-mehr-lernform .bedien-pikto > span { overflow-wrap: break-word; }
+.lern-einstellungen .lern-mehr-lernform .settings-voreinstellung { margin: 0; }
+.lern-einstellungen .lern-mehr-lernform .lern-mehr-knopf[aria-pressed="true"] {
+  background: var(--tab-active-bg);
+  border-width: 3px;
+}
+.lern-einstellungen .lern-mehr-lernform .lern-mehr-knopf[aria-pressed="true"]::before {
+  content: "✓";
+  font-weight: 700;
+}
+.lern-einstellungen .lern-mehr-lernform .lern-mehr-knopf:not(.bedien-pikto)[aria-pressed="true"]::before {
+  content: "✓ ";
+}
 .lern-einstellungen select {
   width: 100%;
   min-width: 0;
@@ -1547,7 +1578,8 @@ body.lesson-view.leiste-am-ende .nav { position: relative; bottom: auto; }
   .lern-einstellungen .lern-mehr-knopf,
   .lern-einstellungen select { border-color: ButtonBorder; }
   body.lesson-view label.answer-option:has(> input:checked),
-  body.lesson-view .nav .nav-button.primary { border-color: Highlight; }
+  body.lesson-view .nav .nav-button.primary,
+  .lern-einstellungen .lern-mehr-lernform .lern-mehr-knopf[aria-pressed="true"] { border-color: Highlight; }
   body.lesson-view label.answer-option > input[type="radio"] { accent-color: auto; }
   body.lesson-view label.answer-option:focus-within,
   body.lesson-view .nav .nav-button:focus-visible,
@@ -1730,6 +1762,12 @@ body:has(.einstieg-start) .tab-item { min-width: 0; overflow-wrap: anywhere; }
 .intro-start-button > .app-pictogram { flex: 0 0 2rem; }
 .topic-start-button > span,
 .intro-start-button:has(> .app-pictogram) > span { min-width: 0; overflow-wrap: anywhere; }
+/* v73: „App einrichten“ im Aufklapp-Bereich der Startseite trägt wieder sein
+   Piktogramm und bleibt wie „Sprache ändern“ in derselben Zeile. */
+.einstieg-extra .utility-button.bedien-pikto { display: inline-flex; }
+/* Design A (entwurf.js): „Lernen starten“ bleibt mit Piktogramm ein Knopf in
+   der Zeile wie vorher; so bleibt der Abstand zum Text darüber gleich. */
+.entwurf-home > .intro-start-button:has(> .app-pictogram) { display: inline-flex; }
 
 /* Konkrete Bedienangebote: Zeichen und vollständiger Text bleiben eine Zeile
    mit gemeinsamem Umbruch, auch unten in der gespiegelten Lernleiste. */

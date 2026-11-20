@@ -23,10 +23,15 @@
     const h = window.location.hash || "";
     if (ziel === "start") return p.endsWith("/zugang.html") || p.endsWith("/");
     if (ziel === "themen") return p.endsWith("/index.html") && (h === "#themen" || h.startsWith("#thema-"));
-    if (ziel === "lernweg") return p.includes("/mein-lernweg.html");
-    if (ziel === "hilfe") {
-      return (p.includes("/testfassung.html") && (h === "" || h === "#hilfe")) || p.includes("/druckvorlage.html");
+    if (ziel === "lernweg") {
+      return (p.endsWith("/index.html") && h === "#lernweg") || p.includes("/mein-lernweg.html");
     }
+    if (ziel === "hilfe") {
+      return (p.endsWith("/index.html") && h === "#hilfe")
+        || (p.includes("/testfassung.html") && (h === "" || h === "#hilfe" || h === "#begleiten" || h === "#digital-begleiter"))
+        || p.includes("/druckvorlage.html");
+    }
+    if (ziel === "einstellungen") return p.endsWith("/index.html") && h === "#einstellungen";
     return false;
   }
 
@@ -35,6 +40,13 @@
     const s = window.SoLerneIch.getState();
     const env = window.SoLerneIch.VOREINSTELLUNGEN && window.SoLerneIch.VOREINSTELLUNGEN[s.voreinstellung];
     return env ? (env.knopf || env.titel) : "Ich stelle selbst ein.";
+  }
+
+  /* D6/K5 (v72): Eine nicht selbst gewählte Lernumgebung heißt im Namen
+     des Knopfs „Voreinstellung: …“. Liest nur den Tab-Zustand. */
+  function umgebungIstVoreinstellung(s) {
+    const env = window.SoLerneIch && window.SoLerneIch.VOREINSTELLUNGEN && window.SoLerneIch.VOREINSTELLUNGEN[s.voreinstellung];
+    return Boolean(env) && !(s.nutzerFelder && s.nutzerFelder.voreinstellung === true);
   }
 
   const SPRACH_BADGE = { leicht: "Leicht", einfach: "Einfach", alltag: "Alltag" };
@@ -46,8 +58,9 @@
     const badge = nav.querySelector(".at-nav-lang-badge");
     const spracheKurz = SPRACH_BADGE[s.sprache] || "Leicht";
     const name = umgebungsName();
+    const namensTeil = name ? ", " + (umgebungIstVoreinstellung(s) ? "Voreinstellung: " : "") + name : "";
     if (sliBtn) {
-      sliBtn.setAttribute("aria-label", `Einstellungen (${spracheKurz}${name ? ", " + name : ""})`);
+      sliBtn.setAttribute("aria-label", `So lerne ich (${spracheKurz}${namensTeil})`);
     }
     if (badge) {
       badge.textContent = spracheKurz;
@@ -88,11 +101,13 @@
     };
 
     // Festes 5-Punkte-Menü nach E74 (Start · Themen · Mein Lernweg · Hilfe · Einstellungen)
+    // Alle Ziele führen einheitlich auf dieselben Plattform-Bereiche wie .main-tabbar.
     const punkte = [
       { id: "start", label: "Start", href: basis + "zugang.html" },
       { id: "themen", label: "Themen", href: basis + "index.html#themen" },
-      { id: "lernweg", label: "Mein Lernweg", href: basis + "mein-lernweg.html" },
-      { id: "hilfe", label: "Hilfe", href: basis + "testfassung.html#hilfe" }
+      { id: "lernweg", label: "Mein Lernweg", href: basis + "index.html#lernweg" },
+      { id: "hilfe", label: "Hilfe", href: basis + "index.html#hilfe" },
+      { id: "einstellungen", label: "Einstellungen", href: basis + "index.html#einstellungen" }
     ];
 
     nav.innerHTML = `
@@ -106,9 +121,9 @@
             const aktiv = istAktiv(p.id) ? ' aria-current="page"' : "";
             return `<a class="at-nav-link" data-nav-id="${p.id}" href="${p.href}"${aktiv}>${ICONS[p.id]}<span>${p.label}</span></a>`;
           }).join("")}
-          <button type="button" class="at-nav-link" data-nav-id="einstellungen" id="at-nav-sli-btn">${ICONS.einstellungen}<span>Einstellungen</span><span class="at-nav-lang-badge">Leicht</span></button>
         </div>
         <div class="at-nav-actions">
+          <button type="button" class="at-nav-ctrl" id="at-nav-sli-btn">So lerne ich <span class="at-nav-lang-badge">Leicht</span></button>
           <button type="button" class="at-nav-ctrl" id="at-nav-read-btn" aria-pressed="false">Vorlesen</button>
         </div>
       </div>
