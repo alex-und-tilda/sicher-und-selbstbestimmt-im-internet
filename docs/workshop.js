@@ -28,6 +28,29 @@
     return key ? `<img class="orientierung-zeichen" src="assets/pictograms/${key}.svg" width="28" height="28" alt="" aria-hidden="true">` : '';
   }
 
+  const WORKSHOP_KACHEL_META = {
+    facebook: {
+      icon: "facebook",
+      kurz: "Beiträge, Freundschaftsanfragen und Sichtbarkeit gemeinsam in der Gruppe besprechen."
+    },
+    instagram: {
+      icon: "instagram",
+      kurz: "Privates Konto, Nachrichten, Werbung und Kommentare gemeinsam erproben."
+    },
+    snapchat: {
+      icon: "snapchat",
+      kurz: "Fotos sicher teilen, Standort und Geist-Modus in der Gruppe kennenlernen."
+    },
+    tiktok: {
+      icon: "tiktok",
+      kurz: "Pausen beim Scrollen, Quellen prüfen und sichere Einstellungen gemeinsam ansehen."
+    },
+    cybermobbing: {
+      icon: "help",
+      kurz: "Beleidigungen im Netz erkennen, Beweise sichern und gemeinsam Hilfe holen."
+    }
+  };
+
   const WORKSHOP_HANDY_WEGE = {
     facebook: [
       { weg: "fb2", titel: "Unbekannte Personen – Tilda fragt dich (empfohlen)", meta: "Gemeinsam beraten und abwägen" },
@@ -532,11 +555,82 @@
       </section>`;
   }
 
+  const WS_EINSTIEG_TEXT = {
+    leicht: {
+      titel: "Gemeinsam lernen",
+      unter: "Workshops und Lernkreise",
+      lead: "Hier findest du 5 fertige Workshops und Lernkreise für Gruppen. Tippe auf eine Kachel.",
+      lernkreisTitel: "Lernkreise für Gruppen",
+      lernkreisKurz: "6 gemeinsame Übungen im Übungs-Handy zum Sprechen und Ausprobieren in der Gruppe."
+    },
+    einfach: {
+      titel: "Gemeinsam lernen",
+      unter: "Workshops und Lernkreise",
+      lead: "Fünf ausgearbeitete Workshopmodule und Lernkreise für gemeinsame Runden in Gruppen.",
+      lernkreisTitel: "Lernkreise für Gruppen",
+      lernkreisKurz: "Sechs gemeinsame Gesprächs- und Entscheidungsübungen direkt im Übungs-Handy."
+    },
+    alltag: {
+      titel: "Gemeinsam lernen",
+      unter: "Workshops und Lernkreise",
+      lead: "Ausgearbeitete Workshopmodule (Folien, Leitfäden, Material) sowie Lernkreise für gemeinsames Lernen.",
+      lernkreisTitel: "Lernkreise für Gruppen",
+      lernkreisKurz: "Sechs Gesprächs- und Entscheidungsübungen im Übungs-Handy für Gruppenrunden."
+    }
+  };
+
+  function aktuelleWsSprache() {
+    const s = window.SoLerneIch ? window.SoLerneIch.getState().sprache : "leicht";
+    if (s === "standard") return "alltag";
+    return WS_EINSTIEG_TEXT[s] ? s : "leicht";
+  }
+
   function ansichtAuswahl() {
+    const wt = WS_EINSTIEG_TEXT[aktuelleWsSprache()];
     const themen = Object.keys(DATEN);
-    return `<section class="card ws-block"><h2>Workshop-Material nach Thema</h2>
-      <ul class="ws-einstiege">${themen.map((t) => `<li><a href="#${esc(t)}"><span class="ws-mat-titel">${esc(DATEN[t].folien[0].titel)}</span></a></li>`).join("")}</ul>
-      <p class="ws-klein">Fünf ausgearbeitete Workshopmodule für gemeinsame Runden in Gruppen.</p></section>`;
+    const items = themen.map((t) => {
+      const d = DATEN[t];
+      const m = WORKSHOP_KACHEL_META[t] || { icon: "people", kurz: "Ausgearbeitetes Workshopmodul für Gruppen." };
+      const seiteMeta = (d.praesentation && d.praesentation.seite && d.praesentation.seite.slice(-1)[0]) || "90 Minuten";
+      const metaStart = /\bFolien\b/i.test(seiteMeta) ? seiteMeta : `${d.folien.length} Folien · ${seiteMeta}`;
+      return `<li class="ws-auswahl-item"><a class="ws-auswahl-kachel" data-ws-thema="${esc(t)}" href="#${esc(t)}">`
+        + `<span class="ws-kachel-icon" aria-hidden="true"><img src="assets/pictograms/${esc(m.icon)}.svg" alt="" width="28" height="28"></span>`
+        + `<span class="ws-kachel-inhalt">`
+        + `<span class="ws-mat-titel">${esc(d.folien[0].titel)}</span>`
+        + `<span class="ws-kachel-kurz">${esc(m.kurz)}</span>`
+        + `<span class="ws-mat-meta">${esc(metaStart)} · Leitfaden &amp; Arbeitsmaterial</span>`
+        + `</span>`
+        + `</a></li>`;
+    }).join("");
+    return `<section class="card ws-block ws-auswahl-block">`
+      + `<h2>Workshops nach Thema wählen</h2>`
+      + `<p class="ws-klein" id="ws-auswahl-lead">${esc(wt.lead)}</p>`
+      + `<ul class="ws-einstiege ws-kachel-liste">${items}</ul>`
+      + `<h3 class="ws-zusatz-titel">Lernkreise, Materialien &amp; Praxis-Anleitungen</h3>`
+      + `<div class="ws-zusatz-raster" role="region" aria-label="Lernkreise, Materialien und Praxis-Anleitungen">`
+      + `<a class="ws-auswahl-kachel ws-zusatz-kachel" href="lernkreis/index.html?mode=gemeinsam">`
+      + `<span class="ws-kachel-icon" aria-hidden="true"><img src="assets/pictograms/people.svg" alt="" width="28" height="28"></span>`
+      + `<span class="ws-kachel-inhalt">`
+      + `<span class="ws-mat-titel">${esc(wt.lernkreisTitel)}</span>`
+      + `<span class="ws-kachel-kurz">${esc(wt.lernkreisKurz)}</span>`
+      + `</span>`
+      + `</a>`
+      + `<a class="ws-auswahl-kachel ws-zusatz-kachel" href="material/index.html">`
+      + `<span class="ws-kachel-icon" aria-hidden="true"><img src="assets/pictograms/paket.svg" alt="" width="28" height="28"></span>`
+      + `<span class="ws-kachel-inhalt">`
+      + `<span class="ws-mat-titel">Material zum Download</span>`
+      + `<span class="ws-kachel-kurz">Alle PowerPoint-Folien, Trainerleitfäden (PDF), Arbeitsblätter und Kahoot-Vorlagen herunterladen.</span>`
+      + `</span>`
+      + `</a>`
+      + `<a class="ws-auswahl-kachel ws-zusatz-kachel" href="praxis/index.html">`
+      + `<span class="ws-kachel-icon" aria-hidden="true"><img src="assets/pictograms/handy.svg" alt="" width="28" height="28"></span>`
+      + `<span class="ws-kachel-inhalt">`
+      + `<span class="ws-mat-titel">Praxis-Anleitungen für Apps</span>`
+      + `<span class="ws-kachel-kurz">Schritt-für-Schritt-Anleitungen zum Mitmachen am eigenen Handy (TikTok, Instagram, Facebook, Snapchat, WhatsApp, YouTube).</span>`
+      + `</span>`
+      + `</a>`
+      + `</div>`
+      + `</section>`;
   }
 
   // ------------------------------------------------------------ Steuerung
@@ -546,11 +640,14 @@
     const [id, angefragt = "ueberblick", wert = ""] = route.split("/");
     const bereich = BEREICHE.some(([b])=>b===angefragt) ? angefragt : "ueberblick";
     const d = Object.prototype.hasOwnProperty.call(DATEN,id) ? DATEN[id] : null;
-    document.getElementById("wsZurueck").href = d ? "#" : "testfassung.html#gemeinsam";
-    document.getElementById("wsZurueck").textContent = d ? "← Alle Workshops" : "← Alle Bereiche";
+    const zurueckEl = document.getElementById("wsZurueck");
+    zurueckEl.hidden = false;
+    zurueckEl.href = d ? "#" : "zugang.html";
+    zurueckEl.textContent = d ? "← Alle Workshops" : "← Zur Startseite";
     if (!d) {
-      document.getElementById('wsTitel').textContent='Workshop-Material';
-      document.getElementById('wsUnter').textContent='Für Kursleitungen';
+      const wt = WS_EINSTIEG_TEXT[aktuelleWsSprache()];
+      document.getElementById('wsTitel').textContent = wt.titel;
+      document.getElementById('wsUnter').textContent = wt.unter;
       document.getElementById('wsDruckTitel').textContent='Workshop-Material · Private Prüffassung 02.11.2026';
       reiter.innerHTML = "";
       document.querySelector('.ws-bereichwahl').hidden=true;
@@ -629,4 +726,11 @@
   if(new URLSearchParams(location.search).get('praesentation')==='1')document.body.classList.add('ws-nur-folie');
   letzterBereich = location.hash.split("/")[1] || "";
   zeigen();
+  if (window.SoLerneIch && typeof window.SoLerneIch.onChange === "function") {
+    window.SoLerneIch.onChange(() => {
+      if (!Object.prototype.hasOwnProperty.call(DATEN, (location.hash.slice(1).split("/")[0] || ""))) {
+        zeigen();
+      }
+    });
+  }
 })();

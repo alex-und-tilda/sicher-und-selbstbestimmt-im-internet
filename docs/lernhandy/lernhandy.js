@@ -17,19 +17,16 @@
 
   const FORMAT = "lernhandy-1";
   const STUFEN = ["leicht", "einfach", "standard"];
+  function pkDa() { return global.PK?.VERSION === 2; }
+  function lernstandHolen() {
+    if (!pkDa()) return null;
+    const z = global.PK.pruefe();
+    if (z.status !== "ok" && z.status !== "ohneProfil") return null;
+    return { id: z.id, ls: global.PK.lernstandLesen(z.id) };
+  }
   function aktivLernstandSchluessel() {
-    try {
-      const listeRaw = localStorage.getItem("profile-liste");
-      const liste = listeRaw ? JSON.parse(listeRaw) : [];
-      const aktiv = localStorage.getItem("profil-aktiv");
-      let pid = null;
-      if (Array.isArray(liste) && liste.length > 0) {
-        pid = (aktiv && liste.some((p) => p && p.id === aktiv)) ? aktiv : (liste[0] && liste[0].id) || null;
-      }
-      return pid ? "lernstand::" + pid : "lernstand";
-    } catch (e) {
-      return "lernstand";
-    }
+    const h = lernstandHolen();
+    return h ? (h.id ? "lernstand::" + h.id : "lernstand") : null;
   }
   const T = {
     eingehend: "Eingehender Anruf", ausgehend: "Ausgehender Anruf", sms: "SMS", email: "E-Mail",
@@ -773,28 +770,18 @@
     const q = (s) => W.querySelector(s);
     const D = { leiste: $("leiste"), lern: $("lern"), handy: $("handy"), display: $("display"), unten: $("unten"), h1: $("h1"), weiter: $("weiter"), zurueck: $("zurueck"), vorlesen: $("vorlesen"), dialog: $("dialog"), beenden: $("beenden") };
 
-    /* Wiedereinstieg aus Option, URL oder localStorage (nur mit Lernstand-Einwilligung) */
-    function darfLernstandSpeichern() {
-      try {
-        if (typeof localStorage === "undefined") return false;
-        const lsRaw = localStorage.getItem(aktivLernstandSchluessel());
-        const ls = lsRaw ? JSON.parse(lsRaw) : null;
-        return !!(ls && ls.enabled === true);
-      } catch (e) { return false; }
-    }
-    let startI = typeof opt.schritt === "number" ? opt.schritt : 0;
-    try {
-      if (!EIN && darfLernstandSpeichern() && !opt.schritt && !opt.neustart && L.id) {
-        const gespeicherter = localStorage.getItem("lh_fortschritt_" + L.id);
-        if (gespeicherter) {
-          const daten = JSON.parse(gespeicherter);
-          if (daten.i > 0 && !daten.abgeschlossen && daten.i < SEITEN.length) {
-            startI = daten.i;
-          }
-        }
-      }
-    } catch (e) {}
-
+    /* Die eigenständige Ansicht wartet vor dem ersten Speichern auf den Kern. */
+    const startI = typeof opt.schritt === "number" ? opt.schritt : 0;
+    let speicherBereit = false;
+    let speichernBeimZeichnen = true;
+    let zuletztGemerkt = null;
+    let profilStand = null;
+    const speicherMeldung = document.createElement("p");
+    speicherMeldung.setAttribute("role", "status");
+    speicherMeldung.setAttribute("aria-live", "polite");
+    speicherMeldung.setAttribute("aria-atomic", "true");
+    speicherMeldung.className = "lh-speicherstatus";
+    if (!EIN) W.after(speicherMeldung);
     /* Zustand: Schritt i, Ansicht v im Schritt (Situation → Entscheidung → Rückmeldung) */
     const z = { i: Math.max(0, Math.min(startI, SEITEN.length - 1)), v: 0, markiert: null, wahl: {}, ue: {}, lese: false };
     const seite = () => SEITEN[z.i];
@@ -1086,44 +1073,19 @@
     }
 
     function speichereFortschritt(info) {
-      if (EIN) return;   /* eingebettet speichert der Baustein nichts; über den Lernstand entscheidet die Seite (§14a) */
-      if (!darfLernstandSpeichern()) return; /* ohne Einwilligung keine lokale Speicherung */
-      try {
-        if (typeof localStorage === "undefined" || !L.id) return;
-        const istFertig = info.i === info.n - 1 && (info.v === 99 || z.v === (aktuell ? aktuell.liste.length - 1 : 0));
-        const eintrag = {
-          id: L.id,
-          titel: typeof L.titel === "string" ? L.titel : (L.titel.leicht || L.id),
-          i: info.i,
-          v: info.v,
-          schritt: info.i + 1,
-          maxSchritte: info.n,
-          stufe: ctx.stufe,
-          abgeschlossen: istFertig,
-          zeit: Date.now()
-        };
-        localStorage.setItem("lh_fortschritt_" + L.id, JSON.stringify(eintrag));
-
-        if (istFertig) {
-          const lsKey = aktivLernstandSchluessel();
-          const lsRaw = localStorage.getItem(lsKey);
-          const ls = lsRaw ? JSON.parse(lsRaw) : null;
-          if (ls && ls.enabled === true) {
-            const themaId = L.thema || (typeof KURZWEGE !== "undefined" && KURZWEGE[L.id] ? KURZWEGE[L.id].thema : null);
-            ls.handyWege = ls.handyWege || {};
-            ls.handyWege[L.id] = { ts: Date.now(), abgeschlossen: true, themaId };
-            if (L.regel && themaId) {
-              ls.regeln = ls.regeln || {};
-              const rListe = Array.isArray(ls.regeln[L.regel]) ? ls.regeln[L.regel] : [];
-              if (!rListe.includes(themaId)) {
-                rListe.push(themaId);
-                ls.regeln[L.regel] = rListe;
-              }
-            }
-            localStorage.setItem(lsKey, JSON.stringify(ls));
-          }
-        }
-      } catch (e) {}
+      if (EIN || !speicherBereit || !speichernBeimZeichnen || !L.id) return;
+      const h = lernstandHolen();
+      if (!h?.ls?.enabled || global.PK.stempel(h.id) !== profilStand) return;
+      const istFertig = info.i === info.n - 1 && (info.v === 99 || z.v === (aktuell ? aktuell.liste.length - 1 : 0));
+      const eintrag = { i: info.i, v: info.v === 99 ? 0 : info.v, abgeschlossen: istFertig };
+      const signatur = JSON.stringify(eintrag);
+      if (zuletztGemerkt === signatur) return;
+      zuletztGemerkt = signatur;
+      const abschluss = istFertig ? { themaId: L.thema || (typeof KURZWEGE !== "undefined" ? KURZWEGE[L.id]?.thema : null) || null,
+        regel: L.regel || null } : null;
+      global.PK.handySchreiben(h.id, L.id, eintrag, abschluss).then(ok => {
+        if (!ok && zuletztGemerkt === signatur) zuletztGemerkt = null;
+      });
     }
 
     function speichereFertig() {
@@ -1728,8 +1690,28 @@
 
     /* Aufräumen, wenn die Seite den Baustein verlässt: Vorlesen stoppen, Lauscher lösen, Wurzel leeren.
        Nimmt die Seite die Wurzel nur kurz aus dem Dokument, bleibt der Stand erhalten (kein Aufräumen von selbst). */
+    const pkAbmelden = !EIN && pkDa() ? global.PK.beiAenderung(info => {
+      if (entfernt) return;
+      if (info.speicherStatus) speicherMeldung.textContent = global.PK.TEXTE[info.speicherStatus];
+      if (info.speicherFehler) speicherMeldung.textContent = global.PK.TEXTE.gast;
+      if (!speicherBereit) return;
+      const h = lernstandHolen();
+      const aktuellProfil = h ? global.PK.stempel(h.id) : null;
+      if (profilStand === aktuellProfil && !info.widerruf && !info.generationGewechselt && !info.loeschfehler) return;
+      profilStand = aktuellProfil;
+      zuletztGemerkt = null;
+      speichernBeimZeichnen = false;
+      vorlesenStopp();
+      if (D.dialog.open && typeof D.dialog.close === "function") D.dialog.close();
+      Object.assign(z, { i: 0, v: 0, markiert: null, wahl: {}, ue: {} });
+      zeichnen();
+      speichernBeimZeichnen = true;
+    }) : null;
+
     function entfernen() {
       if (entfernt) return;
+      if (pkAbmelden) pkAbmelden();
+      speicherMeldung.remove();
       clearTimeout(autoLeseTimer);
       vorlesenStopp();
       entfernt = true;
@@ -1743,6 +1725,18 @@
     }
 
     neuAufbauen();
+    if (!EIN && pkDa()) global.PK.bereit.then(() => {
+      if (entfernt) return;
+      const h = lernstandHolen();
+      profilStand = h ? global.PK.stempel(h.id) : null;
+      if (global.PK.zustand().status === "gast") speicherMeldung.textContent = global.PK.TEXTE.gast;
+      const eintrag = h && typeof opt.schritt !== "number" && !opt.neustart ? global.PK.handyLesen(h.id, L.id) : null;
+      if (eintrag && !eintrag.abgeschlossen && eintrag.i > 0 && eintrag.i < SEITEN.length) {
+        z.i = eintrag.i;
+        zeichnen();
+      }
+      speicherBereit = true;
+    });
     document.fonts && document.fonts.ready.then(neuAufbauen);
 
     return {

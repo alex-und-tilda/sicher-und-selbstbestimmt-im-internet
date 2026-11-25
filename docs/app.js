@@ -86,8 +86,8 @@ const STUFEN_UI_TEXT = {
   leicht: {
     direktTitel: "Frei üben: Erste Schritte, Geschichte und E-Mail-Postfach",
     direktText: "Die Übungen zu einem Thema findest du direkt beim Thema.",
-    koennenHinweis: "Du wählst bis zu 3 eigene Ziele. Du füllst dein Könnens-Heft aus und druckst es.",
-    koennenKnopf: "Mein Könnens-Heft öffnen",
+    koennenHinweis: "Du wählst bis zu 3 eigene Ziele. Du füllst dein Lernprofil aus und druckst es.",
+    koennenKnopf: "Mein Lernprofil öffnen",
     hilfeUnterstuetzungText: "Hier findest du Hilfe bei Betrug. Du findest auch Tipps zum Begleiten und die Schulung.",
     farbenText: "Wähle helle oder dunkle Farben für die Seite.",
     lernformErklaerung: "Wie möchtest du lernen? Du kannst das später ändern.",
@@ -96,8 +96,8 @@ const STUFEN_UI_TEXT = {
   einfach: {
     direktTitel: "Frei üben: Erste Schritte, Geschichte und E-Mail-Postfach",
     direktText: "Die passenden Handy- und Postfach-Übungen findest du direkt bei jedem Thema.",
-    koennenHinweis: "Du kannst hier bis zu drei eigene Ziele wählen, dein Könnens-Heft ausfüllen und für zu Hause ausdrucken.",
-    koennenKnopf: "Mein Könnens-Heft öffnen",
+    koennenHinweis: "Du kannst hier bis zu drei eigene Ziele wählen, dein Lernprofil ausfüllen und für zu Hause ausdrucken.",
+    koennenKnopf: "Mein Lernprofil öffnen",
     hilfeUnterstuetzungText: "Hier findest du ruhige Schritte bei Betrug, den Kompass für Lern-Begleitung und die Schulung für Digital-Begleiter*innen.",
     farbenText: "Wähle helle oder dunkle Farben für die Plattform.",
     lernformErklaerung: "Such dir deine Lernform aus. Du kannst sie später ändern.",
@@ -106,8 +106,8 @@ const STUFEN_UI_TEXT = {
   standard: {
     direktTitel: "Frei üben: Erste Schritte, Geschichte und E-Mail-Postfach",
     direktText: "Die passenden Handy- und Postfach-Übungen findest du direkt auf der jeweiligen Themenseite.",
-    koennenHinweis: "Hier kannst du bis zu drei eigene Ziele wählen, dein Könnens-Heft ausfüllen und für zu Hause ausdrucken.",
-    koennenKnopf: "Mein Könnens-Heft öffnen",
+    koennenHinweis: "Hier kannst du bis zu drei eigene Ziele wählen, dein Lernprofil ausfüllen und für zu Hause ausdrucken.",
+    koennenKnopf: "Mein Lernprofil öffnen",
     hilfeUnterstuetzungText: "Hier findest du ruhige Schritte bei Betrug, den Kompass für die Lernbegleitung und die Schulung für Digital-Begleiter*innen.",
     farbenText: "Wähle helle oder dunkle Farben für die Plattform.",
     lernformErklaerung: "Wähle deine Lernform. Du kannst sie später ändern.",
@@ -247,6 +247,45 @@ function syncSliSessionState(patch, explicitKeys) {
       next.nutzerFelder = nf;
     }
     window.name = SLI_TAB_PREFIX + JSON.stringify(next);
+  } catch (e) { /* nichts tun */ }
+}
+
+function ermittleSliProfilToken() {
+  if (typeof profiles !== "undefined" && Array.isArray(profiles) && profiles.length > 0) {
+    const p = profiles.find((item) => item && item.id === activeProfileId);
+    if (!p) return null;
+    const resetTs = (typeof p.resetTs === "number" && Number.isFinite(p.resetTs)) ? p.resetTs : 0;
+    return p.id + ":" + resetTs;
+  }
+  return "__einzeln__";
+}
+
+function resetSliMeinLernweg(nurAusprobiert, behalteWennGleichesProfil) {
+  if (typeof window === "undefined") return;
+  try {
+    const cur = readSliSessionState();
+    if (!cur) return;
+    const token = ermittleSliProfilToken();
+    const prevMl = (cur.meinLernweg && typeof cur.meinLernweg === "object") ? cur.meinLernweg : {};
+    let nextMl;
+    if (behalteWennGleichesProfil && token && prevMl.profilToken === token) {
+      const pObj = (typeof profiles !== "undefined" && Array.isArray(profiles))
+        ? profiles.find((item) => item && item.id === activeProfileId)
+        : null;
+      /* Auch ein Widerruf, dessen Liste noch nicht geschrieben ist (P1-B). */
+      const widerrufTs = PK_BEREIT ? PK.widerrufSeit(pObj?.id ?? null)
+        : ((pObj && typeof pObj.widerrufTs === "number" && Number.isFinite(pObj.widerrufTs)) ? pObj.widerrufTs : 0);
+      const prevAus = Array.isArray(prevMl.ausprobiert) ? prevMl.ausprobiert : [];
+      const gefiltert = widerrufTs > 0
+        ? prevAus.filter((a) => a && typeof a.ts === "number" && a.ts > widerrufTs)
+        : prevAus;
+      nextMl = Object.assign({}, prevMl, { profilToken: token, ausprobiert: gefiltert });
+    } else if (nurAusprobiert && token && prevMl.profilToken === token) {
+      nextMl = Object.assign({}, prevMl, { profilToken: token, ausprobiert: [] });
+    } else {
+      nextMl = { profilToken: token, companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] };
+    }
+    syncSliSessionState({ meinLernweg: nextMl });
   } catch (e) { /* nichts tun */ }
 }
 
@@ -584,21 +623,19 @@ function changeFontSize(direction) {
    Lernstand werden PRO Profil getrennt gespeichert. Alles bleibt lokal
    auf dem Gerät (KDG-konform §14): kein Name nötig, kein Konto, kein Server.
    ============================================================ */
-const PROFILES_KEY = "profile-liste";
-const ACTIVE_PROFILE_KEY = "profil-aktiv";
 let profiles = [];          /* [{ id, avatar }] */
 let activeProfileId = null;
 
 /* Wird dieses Gerät geteilt? Steuert, ob beim Öffnen „Wer lernt?" kommt. */
 let deviceShared = false;
-const DEVICE_SHARED_KEY = "geraet-geteilt";
 function loadDeviceShared() {
-  try { deviceShared = entwurfStorage.getItem(DEVICE_SHARED_KEY) === "1"; }
-  catch (e) { deviceShared = false; }
+  deviceShared = PK_BEREIT && PK.geteilt();
 }
-function setDeviceShared(shared) {
-  deviceShared = !!shared;
-  try { entwurfStorage.setItem(DEVICE_SHARED_KEY, deviceShared ? "1" : "0"); } catch (e) { /* nichts tun */ }
+async function setDeviceShared(shared) {
+  if (!PK_BEREIT) return false;
+  const erg = await PK.geraetSetzen(shared);
+  loadDeviceShared();
+  return erg.ok;
 }
 /* Zwischenspeicher beim Zeichen-Bauen (Icon → Farbe → Zahl). */
 let signDraft = { icon: null, color: null, number: null };
@@ -734,27 +771,40 @@ function codeDots(list) {
    unterbrochen. Verloren geht auch nichts: Der Lernstand hängt am
    Zeichen, nicht an der Sitzung.
    ============================================================ */
-const AWAY_KEY = "weg-seit";              /* geräteweit, nicht pro Profil */
-const AWAY_LIMIT_MS = 3 * 60 * 1000;      /* 3 Minuten – eine Zahl, leicht änderbar */
+/* PS1 (23.11.2026): Die Rückkehr-Sperre gilt je Tab und steht im
+   Profil-Sitzungskern (profil-kern.js, global PK). Die Uhr läuft weiter NUR,
+   solange die Seite verborgen ist (§9 COGA: kein Zeitlimit beim Lesen).
+   `weg-seit` wird nicht mehr gelesen. */
+const AWAY_LIMIT_MS = (typeof PK !== "undefined" && PK.LIMIT_MS) || 3 * 60 * 1000;
 
-function markAway() {
-  if (!deviceShared || profiles.length === 0) {
-    try { entwurfStorage.removeItem(AWAY_KEY); } catch (e) { /* nichts tun */ }
-    return;
-  }
-  try { entwurfStorage.setItem(AWAY_KEY, String(Date.now())); } catch (e) { /* nichts tun */ }
+/* Ohne passenden Kern zeigt die App keine persönlichen Daten (alte und neue
+   Programmteile dürfen nicht unbemerkt zusammenarbeiten). */
+const PK_BEREIT = typeof PK !== "undefined" && PK && PK.VERSION === 2;
+
+function syncProfilesFromStorage() {
+  if (!PK_BEREIT) { profiles = []; return; }
+  const l = PK.liste();
+  if (Array.isArray(l)) profiles = l;
 }
-function checkReturn() {
-  let since = null;
-  try {
-    since = entwurfStorage.getItem(AWAY_KEY);
-    entwurfStorage.removeItem(AWAY_KEY);
-  } catch (e) { return; }
-  if (!since) return;
-  if (!deviceShared || profiles.length === 0) return;
-  if (Date.now() - Number(since) < AWAY_LIMIT_MS) return;
-  stopReading();
-  renderProfilePicker();
+
+/* Die Profilbindung dieses Tabs übernehmen. activeProfileId folgt nur der
+   Bindung im Kern; ein anderer Tab stellt sie nie still um. */
+function bindungUebernehmen() {
+  activeProfileId = PK_BEREIT ? PK.gebundeneId() : null;
+}
+
+function istProfilwahlErforderlich() {
+  loadDeviceShared();
+  syncProfilesFromStorage();
+  if (!PK_BEREIT) return true;
+  const z = PK.pruefe("abfrage");
+  bindungUebernehmen();
+  if (z.status === "ohneProfil" || z.status === "gast") return false;
+  if (z.status !== "ok") {
+    bootRouteDone = false;
+    return true;
+  }
+  return false;
 }
 
 /* ============================================================
@@ -777,77 +827,33 @@ function hideHeaderSign() {
   if (el) el.hidden = true;
 }
 
-/* Alle Schlüssel, die pro Profil getrennt gespeichert werden.
-   Vollständige Liste – Profil-Löschung (resetProfile/deleteProfile) und
-   Auto-Migration (ensureProfiles) laufen darüber. Bewusst als Strings
-   (Reihenfolge egal), damit die Deklarations-Reihenfolge der KEY-Konstanten
-   im Modul keine Rolle spielt. Global bleiben nur profile-liste,
-   profil-aktiv und geraet-geteilt – sie stehen hier NICHT drin. */
-const PROFILE_BASE_KEYS = ["entwurf-ansicht", "entwurf-vormachen", "language-level", "font-size-step", "lernstand", "lern-weg", "lern-weg-gesehen", "vorwissen", "motion", "app-thema", "vorlesen-automatisch", "vorlesen-gefragt", "vorlese-tempo", "einrichtung-rest", "letzte-lektion", "menue-gesehen", "mengen-wahl", "mengen-zuletzt", "ketten-lauf", "lesehilfen"];
-
 /* Schlüssel für das aktive Profil. Ohne aktives Profil: alter Schlüssel
    (Rückfall – so bricht nie etwas). */
 function pKey(base) {
-  return activeProfileId ? base + "::" + activeProfileId : base;
+  if (!activeProfileId) return base;
+  const generation = PK_BEREIT && PK.profil(activeProfileId)?.einstellungenGeneration;
+  return base + (generation ? "::r" + generation : "") + "::" + activeProfileId;
 }
-function pGet(base) { try { return entwurfStorage.getItem(pKey(base)); } catch (e) { return null; } }
-function pSet(base, val) { try { entwurfStorage.setItem(pKey(base), val); } catch (e) { /* nichts tun */ } }
-function pRemove(base) { try { entwurfStorage.removeItem(pKey(base)); } catch (e) { /* nichts tun */ } }
+function pGet(base) {
+  if (PK_BEREIT && !pDarfSchreiben()) return null;
+  try { return entwurfStorage.getItem(pKey(base)); } catch (e) { return null; }
+}
+/* PS1: Ein gesperrter Tab schreibt nichts in ein Profil. */
+function pDarfSchreiben() {
+  if (!PK_BEREIT) return false;
+  const z = PK.zustand();
+  if (!activeProfileId) return z.status === "ohneProfil";
+  return z.status === "ok" && z.id === activeProfileId;
+}
+function pSet(base, val) { if (!pDarfSchreiben()) return; try { entwurfStorage.setItem(pKey(base), val); } catch (e) { /* nichts tun */ } }
+function pRemove(base) { if (!pDarfSchreiben()) return; try { entwurfStorage.removeItem(pKey(base)); } catch (e) { /* nichts tun */ } }
 
 function genProfileId() {
   return "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 }
 
-function saveProfiles() {
-  try {
-    entwurfStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
-    if (activeProfileId) entwurfStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
-  } catch (e) { /* nichts tun */ }
-}
-
-function loadProfiles() {
-  try {
-    const raw = entwurfStorage.getItem(PROFILES_KEY);
-    profiles = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(profiles)) profiles = [];
-    const savedActive = entwurfStorage.getItem(ACTIVE_PROFILE_KEY);
-    activeProfileId = (savedActive && profiles.some(p => p.id === savedActive))
-      ? savedActive
-      : (profiles[0] ? profiles[0].id : null);
-  } catch (e) { profiles = []; activeProfileId = null; }
-}
-
 function getActiveProfile() {
   return profiles.find(p => p.id === activeProfileId) || null;
-}
-
-/* Beim ersten Start mit der neuen Version: vorhandene Einstellungen eines
-   einzelnen Nutzers in ein Standard-Profil übernehmen – nichts geht verloren. */
-function ensureProfiles() {
-  loadProfiles();
-  if (profiles.length > 0) return;
-  /* Gibt es Alt-Daten eines früheren Einzel-Nutzers? Dann in ein
-     Standard-Profil übernehmen (nichts geht verloren).
-     Wenn es wirklich der erste Besuch ist (keine Alt-Daten): KEIN
-     Auto-Profil – das Onboarding lässt die Person zuerst ein Bild wählen. */
-  let hasLegacy = false;
-  PROFILE_BASE_KEYS.forEach(base => {
-    try { if (entwurfStorage.getItem(base) !== null) hasLegacy = true; } catch (e) { /* egal */ }
-  });
-  if (!hasLegacy) return;
-  const p = { id: genProfileId(), avatar: "🦊" };
-  profiles = [p];
-  activeProfileId = p.id;
-  PROFILE_BASE_KEYS.forEach(base => {
-    try {
-      const old = entwurfStorage.getItem(base);
-      if (old !== null) {
-        entwurfStorage.setItem(base + "::" + p.id, old);
-        entwurfStorage.removeItem(base);
-      }
-    } catch (e) { /* nichts tun */ }
-  });
-  saveProfiles();
 }
 
 /* Einstellungen des aktiven Profils frisch in den Speicher laden. */
@@ -935,46 +941,64 @@ function loadActiveProfileSettings(fromProfileSwitch) {
    Es wird kein Name gespeichert. Nichts verlässt das Gerät.
    ============================================================ */
 
-const STORAGE_KEY = "lernstand";
 
 function loadProgress() {
-  try {
-    const raw = pGet(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch (error) {
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) {
     return null;
   }
+  /* PS1: Der Kern liest – mit Profil nur für das an diesen Tab gebundene
+     Profil und mit Prüfung des Stempels, ohne Profil den gemeinsamen
+     Schlüssel. Er merkt sich den gelesenen Stand für den Abgleich beim
+     Speichern (Korrektur P1-C, 23.11.2026). */
+  if (!PK_BEREIT) return null;
+  return PK.lernstandLesen(activeProfileId || null);
 }
 
-function saveProgress(progress) {
-  try {
-    pSet(STORAGE_KEY, JSON.stringify(progress));
-  } catch (error) {
-    /* Wenn Speichern nicht geht, läuft alles ohne Lernstand weiter. */
-  }
+function saveProgress(progress, einwilligung) {
+  if (!PK_BEREIT) return Promise.resolve(false);
+  return PK.lernstandSchreiben(activeProfileId || null, progress, { einwilligung: einwilligung === true });
+}
+
+function sitzungsDatenLeeren() {
+  pauseBewertungLoeschen();
+  finishedTopicThisSession = false;
+  sessionDoneTopics = new Set();
+  sessionScenarioStufe = {};
+  sessionHandyDone = {};
+  sessionPostfachDone = {};
+  sessionRegeln = {};
+  schwereSitzung = {};
 }
 
 function isProgressEnabled() {
-  const progress = loadProgress();
-  return Boolean(progress && progress.enabled);
+  return loadProgress()?.enabled === true;
 }
 
-function setProgressEnabled(enabled) {
-  if (enabled) {
-    const progress = loadProgress() || {};
-    progress.enabled = true;
-    /* Diese Zustimmung erklärt auch unterbrochene Runden. Alte gespeicherte
-       Zustimmungen werden nicht automatisch auf Antworten erweitert. */
-    progress.pauseErlaubt = true;
-    progress.done = progress.done || {};
-    const ctx = lastLessonContext && lastLessonContext.pause ? pauseCursorPruefen(lastLessonContext) : null;
-    const stand = ctx && pauseStandPruefen(pauseSitzung, ctx);
-    if (stand) progress.pause = stand;
-    saveProgress(progress);
-  } else {
-    pRemove(STORAGE_KEY);
-    pauseBewertungLoeschen();
+async function setProgressEnabled(enabled) {
+  if (!enabled || !PK_BEREIT) return false;
+  if (!PK.lernstandMoeglich()) {
+    announce(PK.TEXTE.gast);
+    return false;
   }
+  const progress = loadProgress() || {};
+  progress.enabled = true;
+  progress.pauseErlaubt = true;
+  progress.done ||= {};
+  const ctx = lastLessonContext && lastLessonContext.pause ? pauseCursorPruefen(lastLessonContext) : null;
+  const stand = ctx && pauseStandPruefen(pauseSitzung, ctx);
+  if (stand) progress.pause = stand;
+  return saveProgress(progress, true);
+}
+
+function lernstandWiderrufenMitTicket(ticket) {
+  if (!PK_BEREIT) return Promise.resolve({ ok: false, endzustand: "unveraendert", grund: "kern" });
+  return PK.lernstandWiderrufen(ticket).then(erg => {
+    if (erg.ok || erg.grund === "speicher" || erg.endzustand === "teilweise") {
+      sitzungsDatenLeeren();
+      resetSliMeinLernweg(true);
+    }
+    return erg;
+  });
 }
 
 /* Sitzungs-Gedächtnis für Erfolge: erkennt „geschafft" auch OHNE
@@ -1145,36 +1169,33 @@ function getNextTopicSuggestion() {
   return getTopicsInDisplayOrder().find((topic) => !isTopicDone(topic.id)) || null;
 }
 
-function toggleProgressSaving() {
-  if (isProgressEnabled()) {
-    setProgressEnabled(false);
-    sessionDoneTopics = new Set();
-    sessionScenarioStufe = {};
-    sessionHandyDone = {};
-    sessionPostfachDone = {};
-    sessionRegeln = {};
-    schwereSitzung = {}; /* auch die schwierigen Aufgaben dieser Sitzung (Lernweg) */
-    legacyHandySpeicherBereinigen({ gesamtLoeschen: true, verlaufLoeschen: false });
-    /* Befund T05 (21.09.2026): Hier stand „Es wird nichts mehr gespeichert."
-       Das stimmte nicht. setProgressEnabled(false) entfernt nur den Schlüssel
-       `lernstand`. Der Wiedereinstieg (`letzte-lektion`), die Zahl der
-       Ketten-Durchgänge (`ketten-lauf`) und die Kurz/Mehr-Wahl je Thema
-       (`mengen-wahl`) bleiben stehen – sie sind Bedien-Einstellungen wie die
-       Schriftgröße und der Rück-Anker ist ausdrücklich geschützter Bestand
-       (§1). Entschieden am 21.09.2026: Einordnung bleibt, die Zusage wird
-       richtig. Wer auch den Wiedereinstieg loswerden will, findet dafür auf
-       „Mein Lernweg" einen eigenen Knopf (clearResumeData). */
-    announce("Der Lernstand ist gelöscht. Die App merkt sich nicht mehr, welche Themen du geschafft hast. Dein Wiedereinstieg und deine Einstellungen bleiben. Die kannst du getrennt löschen.");
-  } else {
-    setProgressEnabled(true);
+async function toggleProgressSaving(ticket) {
+  /* Mit Ticket kommt der Aufruf aus „Lernstand löschen“: nie einschalten,
+     auch wenn ein anderer Tab den Lernstand schon entfernt hat. */
+  if (ticket || isProgressEnabled()) {
+    /* PS1: Ohne Ticket aus einer Rückfrage gilt das Profil, an das dieser Tab
+       jetzt gebunden ist – im selben, synchronen Klick festgehalten. */
+    const t = ticket || (PK_BEREIT ? PK.ticket("lernstand") : null);
+    return lernstandWiderrufenMitTicket(t).then(erg => {
+      if (erg.ok) {
+        announce("Dein Lernstand und dein gespeicherter Stand im Übungs-Handy sind gelöscht. Deine Einstellungen bleiben.");
+      } else {
+        announce(PK_BEREIT ? PK.meldung(erg, "lernstand") : "Es wurde nichts gelöscht.");
+      }
+      if (istProfilwahlErforderlich()) return renderProfilePicker();
+      if (activeTab === "lernweg") renderMyPath();
+      else renderMenu();
+    });
+  }
+  if (await setProgressEnabled(true)) {
     /* Erfolge aus dieser Sitzung mitnehmen – sonst wären das gerade
        geschaffte Thema, das Übungs-Handy oder gelernte Regeln verloren. */
     sitzungsFortschrittInLernstandUebernehmen();
-    announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
   }
   /* Auf der Seite bleiben, auf der die Person gerade ist */
   if (activeTab === "lernweg") renderMyPath();
   else renderMenu();
+  return Promise.resolve();
 }
 
 /* Löscht genau die Bedien-Daten, die NICHT am Lernstand hängen:
@@ -1182,13 +1203,40 @@ function toggleProgressSaving() {
    Getrennter Weg, damit die Zusage beim Lernstand stimmt und die Person
    trotzdem alles loswerden kann (T05, Entscheidung 21.09.2026).
    Das Profil selbst, die Sprache und die Schriftgröße bleiben – dafür gibt
-   es „neu anfangen" und „Profil löschen". */
-function clearResumeData() {
-  clearLastLesson();
+   es „neu anfangen" und „Profil löschen".
+   PS1: Das Ticket aus der Rückfrage wird unmittelbar vorher geprüft. Gelöscht
+   wird nur im Profil, an das dieser Tab gebunden ist; der Ablauf ist
+   synchron, die Bindung kann sich dazwischen nicht ändern. */
+async function clearResumeData(ticket) {
+  const t = ticket || (PK_BEREIT ? PK.ticket("wiedereinstieg") : null);
+  const frei = PK_BEREIT && PK.ticketPruefen(t) === "ok" && t.zielId === activeProfileId;
+  if (!frei) {
+    announce(PK_BEREIT ? PK.TEXTE.abgebrochen : "Es wurde nichts gelöscht.");
+    if (istProfilwahlErforderlich()) return renderProfilePicker();
+    if (activeTab === "einstellungen") return renderSettingsPage();
+    return renderMyPath();
+  }
+  const erg = await PK.wiedereinstiegLoeschen(t);
+  if (!erg.ok && erg.endzustand !== "teilweise") {
+    announce(PK.meldung(erg));
+    return;
+  }
+  if (t.zielId !== activeProfileId) {
+    announce(PK.meldung(erg));
+    return;
+  }
+  lastLessonContext = null;
+  pauseSitzung = null;
+  pRemove(LAST_LESSON_KEY);
   clearTopicAmounts();
   pRemove(KETTEN_KEY);
-  legacyHandySpeicherBereinigen({ gesamtLoeschen: false, verlaufLoeschen: true });
-  announce("Der Wiedereinstieg ist gelöscht. Du fängst bei jedem Thema wieder vorne an. Deine Sprache und deine Schriftgröße bleiben.");
+  if (!erg.ok || erg.endzustand === "teilweise" || PK.ticketPruefen(PK.ticket("wiedereinstieg", t.zielId)) !== "ok") {
+    announce(PK.TEXTE.restLernstand);
+  } else if (hasResumeData()) {
+    announce(PK.TEXTE.restLernstand);
+  } else {
+    announce("Der Wiedereinstieg ist gelöscht. Du fängst bei jedem Thema wieder vorne an. Deine Sprache und deine Schriftgröße bleiben.");
+  }
   /* Der Knopf steht auf „Mein Lernweg", direkt neben der Lernstand-Zusage.
      Auf der Seite bleiben, auf der die Person ist (Vorhersehbarkeit, §9). */
   if (activeTab === "einstellungen") renderSettingsPage();
@@ -1198,7 +1246,7 @@ function clearResumeData() {
 /* Gibt es überhaupt etwas zu löschen? Sonst steht dort ein Knopf ohne
    Wirkung – das verunsichert mehr, als es hilft (§9 COGA). */
 function hasResumeData() {
-  return Boolean(pGet(LAST_LESSON_KEY) || pGet(TOPIC_AMOUNT_KEY) || pGet(KETTEN_KEY));
+  return Boolean(pGet(LAST_LESSON_KEY) || pGet(TOPIC_AMOUNT_KEY) || pGet(KETTEN_KEY) || (PK_BEREIT && PK.hatHandyWiedereinstieg(activeProfileId)));
 }
 
 /* Rückfrage vor dem Löschen (Auftrag 24.10.2026, Bericht 96; WCAG 3.3.4):
@@ -1208,17 +1256,18 @@ function hasResumeData() {
    oder Escape bringt den Knopf zurück und setzt den Fokus wieder darauf.
    Gelöscht wird erst mit „Ja, löschen“, wie bisher über toggleProgressSaving
    und clearResumeData. Die Texte stehen hier zentral und sind für die
-   Prüfgruppe vorgemerkt (§13). */
+   Prüfgruppe vorgemerkt (§13).
+   PS1: Beim Zeigen der Rückfrage hält ein Ticket das Zielprofil fest. */
 const LOESCHEN_RUECKFRAGE = {
   lernstand: {
     frage: "Lernstand wirklich löschen?",
     hinweis: "Dann weiß die App nicht mehr: Diese Themen hast du geschafft. Das kann man nicht rückgängig machen.",
-    loeschen: () => toggleProgressSaving()
+    loeschen: (t) => toggleProgressSaving(t)
   },
   wiedereinstieg: {
     frage: "Wiedereinstieg wirklich löschen?",
     hinweis: "Dann fängst du bei jedem Thema wieder vorne an. Das kann man nicht rückgängig machen.",
-    loeschen: () => clearResumeData()
+    loeschen: (t) => clearResumeData(t)
   },
   nein: "Nein, behalten",
   ja: "Ja, löschen"
@@ -1227,7 +1276,9 @@ const LOESCHEN_RUECKFRAGE = {
 function loeschenRueckfrage(art, knopf) {
   const r = LOESCHEN_RUECKFRAGE[art];
   if (!r || !knopf || !knopf.parentNode) return;
+  if (istProfilwahlErforderlich()) return renderProfilePicker();
   stopReading();
+  const ticket = PK.ticket(art);
   const id = "loeschen-frage-" + art;
   const box = document.createElement("div");
   box.className = "loeschen-rueckfrage";
@@ -1243,7 +1294,7 @@ function loeschenRueckfrage(art, knopf) {
   const [nein, ja] = box.querySelectorAll("button");
   const zurueck = () => { box.replaceWith(knopf); knopf.focus(); };
   nein.addEventListener("click", zurueck);
-  ja.addEventListener("click", () => r.loeschen());
+  ja.addEventListener("click", () => { ja.disabled = true; r.loeschen(ticket); });
   box.addEventListener("keydown", e => { if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); zurueck(); } });
   knopf.replaceWith(box);
   document.getElementById(id).focus();
@@ -1251,11 +1302,10 @@ function loeschenRueckfrage(art, knopf) {
 
 /* Lernstand direkt auf der Abschluss-Seite einschalten – ohne die Seite
    neu zu bauen (kein Kontextverlust, kein Sprung). */
-function enableProgressInline(button) {
+async function enableProgressInline(button) {
   const bereitsAktiv = isProgressEnabled();
-  setProgressEnabled(true);
+  if (!await setProgressEnabled(true)) return;
   if (!bereitsAktiv) sitzungsFortschrittInLernstandUebernehmen();
-  announce("Der Lernstand wird jetzt auf diesem Gerät gespeichert.");
   const box = button.closest(".progress-consent");
   if (box) box.innerHTML = `<p class="progress-consent-title">✓ Ich merke mir deinen Lernstand. Nur auf diesem Gerät. Ohne Namen.</p><p class="progress-consent-note">Auch Antworten und Treffer einer unterbrochenen Runde werden gemerkt.</p>`;
 }
@@ -1361,32 +1411,7 @@ function hatPostfachWegGeschafft(szId) {
   return Boolean(szId && gesammeltePostfachWege()[szId]);
 }
 
-function legacyHandySpeicherBereinigen(opt) {
-  const cfg = opt || {};
-  try {
-    const ls = typeof entwurfStorage !== "undefined" ? entwurfStorage : (typeof localStorage !== "undefined" ? localStorage : null);
-    if (!ls) return;
-    if (cfg.gesamtLoeschen) ls.removeItem("lh_fortschritt_gesamt");
-    const keys = [];
-    for (let i = 0; i < ls.length; i++) {
-      const k = ls.key(i);
-      if (k && k.indexOf("lh_fortschritt_") === 0 && k !== "lh_fortschritt_gesamt") keys.push(k);
-    }
-    keys.forEach((k) => {
-      if (cfg.verlaufLoeschen) {
-        ls.removeItem(k);
-      } else if (cfg.gesamtLoeschen) {
-        try {
-          const d = JSON.parse(ls.getItem(k) || "null");
-          if (d && d.abgeschlossen) {
-            d.abgeschlossen = false;
-            ls.setItem(k, JSON.stringify(d));
-          }
-        } catch (e) { /* unleserlicher Alt-Eintrag bleibt unberührt */ }
-      }
-    });
-  } catch (e) { /* ohne Speicher */ }
-}
+
 
 /* ============================================================
    Wörter-Hilfe (Glossar)
@@ -2192,6 +2217,7 @@ function zurPortalStartseite() {
 
 function navigateTab(name) {
   stopReading();
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   /* Wer während der Einweisung ins Menü wechselt, hat sich für den
      freien Weg entschieden – die geführte Einweisung endet dann sauber
      (Selbstbestimmung; verhindert spätere Überraschungs-Sprünge). */
@@ -6192,10 +6218,13 @@ function tabbarHoeheMessen() {
   if (!bar) return;
   const stil = document.documentElement.style;
   const s = getComputedStyle(bar);
-  const punkte = Array.from(bar.querySelectorAll(".tab-item")).map(p => p.getBoundingClientRect());
+  const punkte = Array.from(bar.querySelectorAll(".tab-item, .tabbar-brand"))
+    .map(p => p.getBoundingClientRect())
+    .filter(r => r.width > 0 && r.height > 0);
   if (!punkte.length || s.display === "none") return;
   const natuerlich = Math.ceil(Math.max(...punkte.map(r => r.bottom)) - Math.min(...punkte.map(r => r.top))
-    + parseFloat(s.paddingTop) + parseFloat(s.paddingBottom) + parseFloat(s.borderTopWidth));
+    + (parseFloat(s.paddingTop) || 0) + (parseFloat(s.paddingBottom) || 0)
+    + (parseFloat(s.borderTopWidth) || 0) + (parseFloat(s.borderBottomWidth) || 0));
   const basis = 4.7 * parseFloat(getComputedStyle(document.documentElement).fontSize);
   const wert = natuerlich > basis + 1 ? natuerlich + "px" : "";
   if (stil.getPropertyValue("--tabbar-h") !== wert) {
@@ -6631,20 +6660,29 @@ function avatarLabel(av) {
   return found ? found.n : "Bild";
 }
 
-function switchProfile(id) {
-  if (!profiles.some(p => p.id === id)) return;
-  pauseBewertungLoeschen();
+async function switchProfile(id, code) {
+  syncProfilesFromStorage();
+  if (!profiles.some(p => p && p.id === id)) {
+    announce("Dieses Zeichen gibt es nicht mehr. Bitte wähle ein vorhandenes Zeichen.");
+    if (profiles.length > 0) return renderProfilePicker();
+    bindungUebernehmen();
+    return renderBuildSign(0, null);
+  }
+  /* PS1: Die ausdrückliche Wahl bindet diesen Tab (und das Gerät) an das
+     Profil. Andere Tabs mit einem anderen Profil sperren sich selbst. */
+  const erg = PK_BEREIT ? await PK.anmelden(id, code) : { ok: false };
+  if (!erg.ok) {
+    announce(PK_BEREIT ? PK.TEXTE.unklar : "Bitte lade die Seite neu.");
+    return renderProfilePicker();
+  }
   if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  bootRouteDone = true;
   activeProfileId = id;
-  saveProfiles();
+  resetSliMeinLernweg(false, true);
   loadActiveProfileSettings(true);
-  finishedTopicThisSession = false;
-  sessionDoneTopics = new Set();
-  sessionScenarioStufe = {};
-  sessionHandyDone = {};
-  sessionPostfachDone = {};
-  sessionRegeln = {};
-  schwereSitzung = {};
+  /* Dieselbe Person (gleicher Stempel: kein Neubeginn, kein Widerruf) behält
+     ihre Erfolge aus dieser Sitzung. Eine andere Person übernimmt nichts. */
+  if (!erg.gleichePerson) sitzungsDatenLeeren();
   /* Person gewechselt: Rück-Anker und Mengen-Wahl DIESER Person laden, nicht
      die der vorherigen (der Speicher ist ohnehin je Profil getrennt). */
   loadLastLesson();
@@ -6656,8 +6694,12 @@ function switchProfile(id) {
 /* Aus der Personen-Liste gewählt. Mit Bild-Code wird zuerst gefragt,
    ohne Code geht es direkt weiter. */
 function pickProfile(id) {
-  const p = profiles.find(x => x.id === id);
-  if (!p) return;
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === id);
+  if (!p) {
+    announce("Dieses Zeichen gibt es nicht mehr. Bitte wähle ein vorhandenes Zeichen.");
+    return renderProfilePicker();
+  }
   if (!hasCode(p)) return switchProfile(id);
   codeTargetId = id;
   codeEntry = [];
@@ -6667,7 +6709,8 @@ function pickProfile(id) {
 
 /* Anmelden mit Bild-Code. */
 function renderCodeAsk() {
-  const p = profiles.find(x => x.id === codeTargetId);
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === codeTargetId);
   if (!p) return renderProfilePicker();
   stopReading();
   currentTopicId = null;
@@ -6695,15 +6738,18 @@ function renderCodeAsk() {
 }
 
 function codeTap(key) {
+  syncProfilesFromStorage();
   codeError = false;
   codeEntry.push(key);
   if (codeEntry.length < CODE_LENGTH) return renderCodeAsk();
-  const p = profiles.find(x => x.id === codeTargetId);
+  const p = profiles.find(x => x && x.id === codeTargetId);
+  if (!p) return renderProfilePicker();
   if (codeMatches(p, codeEntry)) {
     const id = codeTargetId;
+    const code = codeEntry;
     codeEntry = [];
     codeTargetId = null;
-    return switchProfile(id);
+    return switchProfile(id, code);
   }
   /* Falsch: ruhig, ohne Zählen, ohne Sperre, ohne Wartezeit (§3 Došen, §9 COGA).
      Der Lernstand bleibt selbstverständlich unberührt. */
@@ -6718,7 +6764,8 @@ function codeTap(key) {
    ehrlich: Wer den Code wegnimmt, kommt hinein. Das Schloss schützt vor
    Verwechslung, nicht vor Absicht. */
 function codeForgot() {
-  const p = profiles.find(x => x.id === codeTargetId);
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === codeTargetId);
   if (!p) return renderProfilePicker();
   stopReading();
   setHeader("Sicher und selbstbestimmt im Internet", "Dein Code", "Start", "Code vergessen", 0);
@@ -6742,25 +6789,29 @@ function codeForgot() {
 }
 
 function dropCodeAndEnter() {
+  syncProfilesFromStorage();
   const id = codeTargetId;
-  const p = profiles.find(x => x.id === id);
+  const p = profiles.find(x => x && x.id === id);
   if (!p) return renderProfilePicker();
-  delete p.code;
-  saveProfiles();
   codeTargetId = null; codeEntry = []; codeError = false;
-  announce("Der Code ist weg. Du kannst dir später einen neuen aussuchen.");
-  switchProfile(id);
+  PK.bildCodeEntfernen(id, p.code).then(erg => {
+    announce(erg.ok ? "Der Code ist weg. Du kannst dir später einen neuen aussuchen." : PK.meldung(erg, "aendern"));
+    switchProfile(id);
+  });
 }
 
 /* Code aussuchen oder ändern (aus der Profil-Verwaltung). */
 function startCodeSet(id) {
+  syncProfilesFromStorage();
+  if (!profiles.some(x => x && x.id === id)) return renderProfilePicker();
   codeTargetId = id;
   codeDraft = [];
   renderCodeSet();
 }
 
 function renderCodeSet() {
-  const p = profiles.find(x => x.id === codeTargetId);
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === codeTargetId);
   if (!p) return renderProfilePicker();
   stopReading();
   setProgressVisible(false);
@@ -6797,25 +6848,38 @@ function codeDraftTap(key) {
 }
 function codeDraftClear() { codeDraft = []; renderCodeSet(); }
 function codeDraftSave() {
-  const p = profiles.find(x => x.id === codeTargetId);
-  if (!p || codeDraft.length !== CODE_LENGTH) return;
-  p.code = codeDraft.slice();
-  saveProfiles();
-  codeDraft = [];
-  announce("Dein Bild-Code ist gemerkt.");
-  renderProfileManage(p.id);
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === codeTargetId);
+  if (!p || codeDraft.length !== CODE_LENGTH) return renderProfilePicker();
+  const code = codeDraft.slice();
+  const id = p.id;
+  PK.listeAendern(liste => liste.map(x => (x && x.id === id) ? Object.assign({}, x, { code }) : x)).then(erg => {
+    syncProfilesFromStorage();
+    codeDraft = [];
+    announce(erg.ok ? "Dein Bild-Code ist gemerkt." : PK.meldung(erg, "aendern"));
+    renderProfileManage(id);
+  });
 }
 function removeCode(id) {
-  const p = profiles.find(x => x.id === id);
-  if (!p) return;
-  delete p.code;
-  saveProfiles();
-  announce("Der Bild-Code ist weg.");
-  renderProfileManage(id);
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === id);
+  if (!p) return renderProfilePicker();
+  PK.listeAendern(liste => liste.map(x => {
+    if (x && x.id === id) { const k = Object.assign({}, x); delete k.code; return k; }
+    return x;
+  })).then(erg => {
+    syncProfilesFromStorage();
+    announce(erg.ok ? "Der Bild-Code ist weg." : PK.meldung(erg, "aendern"));
+    renderProfileManage(id);
+  });
 }
 
 function renderProfilePicker() {
+  syncProfilesFromStorage();
+  /* PS1: keine stille Umstellung auf ein anderes Profil. */
+  bindungUebernehmen();
   stopReading();
+  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -6823,6 +6887,17 @@ function renderProfilePicker() {
   setOrientation("Du bist am Anfang. Hier wählst du, wer lernt.");
   hideHeaderSign();
   showNav(false, false);
+  if (!PK_BEREIT) {
+    /* PS1: Ohne passenden Profil-Kern keine Profile und keine Daten zeigen. */
+    content.innerHTML = `
+      <section class="profile-picker" data-readable="true">
+        <h2 class="profile-picker-title">Bitte lade die Seite neu.</h2>
+        <p class="profile-picker-intro">Die App wurde gerade aktualisiert. Schließe dafür alle offenen Seiten der App und öffne sie wieder.</p>
+      </section>`;
+    focusContent();
+    return;
+  }
+  const freigegeben = PK.profilId();
 
   const cards = profiles.map(p => `
     <div class="profile-card-wrap">
@@ -6830,7 +6905,7 @@ function renderProfilePicker() {
         ${signHtml(p)}
         <span class="profile-name">${escapeHtml(signLabel(p))}</span>
         ${hasCode(p) ? `<span class="profile-code-badge">mit Bild-Code</span>` : ""}
-        ${p.id === activeProfileId ? `<span class="profile-active-badge">Das bist du</span>` : ""}
+        ${p.id === freigegeben ? `<span class="profile-active-badge">Das bist du</span>` : ""}
       </button>
       <button type="button" class="profile-edit-link" onclick="renderProfileManage('${escapeHtml(p.id)}')" aria-label="Profil ${escapeHtml(signLabel(p))} ändern">Ändern</button>
     </div>`).join("");
@@ -6909,8 +6984,12 @@ function pickDeviceSignIcon(key) {
   renderDeviceQuestion(true);
 }
 
-function chooseDevice(shared) {
-  setDeviceShared(shared);
+async function chooseDevice(shared) {
+  if (PK_BEREIT && PK.zustand().status === "gast") {
+    announce(PK.TEXTE.gast);
+    return renderIntro();
+  }
+  if (!await setDeviceShared(shared)) { announce(PK.TEXTE.gast); return; }
   const n = profiles.length;
   if (shared) {
     if (!signDraft.icon) {
@@ -7030,51 +7109,72 @@ function printSignCard(id) {
 }
 
 function finishSign(editId) {
+  syncProfilesFromStorage();
   const sign = { icon: signDraft.icon, color: signDraft.color, number: signDraft.number };
   if (editId) {
-    const p = profiles.find(x => x.id === editId);
-    if (p) { p.icon = sign.icon; p.color = sign.color; p.number = sign.number; delete p.avatar; saveProfiles(); }
-    signDraft = { icon: null, color: null, number: null };
-    renderProfileManage(editId);
+    const p = profiles.find(x => x && x.id === editId);
+    if (!p) {
+      signDraft = { icon: null, color: null, number: null };
+      return renderProfilePicker();
+    }
+    PK.listeAendern(liste => liste.map(x => {
+      if (!x || x.id !== editId) return x;
+      const k = Object.assign({}, x, sign);
+      delete k.avatar;
+      return k;
+    })).then(erg => {
+      syncProfilesFromStorage();
+      signDraft = { icon: null, color: null, number: null };
+      if (!erg.ok) announce(PK.meldung(erg, "aendern"));
+      renderProfileManage(editId);
+    });
     return;
   }
-  const ersterStart = !activeProfileId;
+  const ersterStart = profiles.length === 0;
   const p = Object.assign({ id: genProfileId() }, sign);
-  profiles.push(p);
-  activeProfileId = p.id;
-  /* Erstes Profil auf dem Gerät: Was die Person VOR dem Anlegen gewählt hat
-     (Vorlese-Angebot auf der Startseite), gehört ihr. Vorher blieb es ohne
-     Profil liegen – die App fragte nach dem ersten Thema noch einmal, und
-     nach einem Neustart war das Vorlesen wieder aus (Prüfgruppen-Test F3,
-     26.09.2026). */
-  if (ersterStart) {
-    [AUTO_READ_KEY, AUTO_READ_GEFRAGT_KEY, READ_TEMPO_KEY].forEach(base => {
-      try {
-        const alt = entwurfStorage.getItem(base);
-        if (alt !== null) { pSet(base, alt); entwurfStorage.removeItem(base); }
-      } catch (e) { /* nichts tun */ }
-    });
-  }
-  saveProfiles();
-  signDraft = { icon: null, color: null, number: null };
-  sessionMenuIntroSeen = false;
-  loadActiveProfileSettings(!ersterStart);
-  finishedTopicThisSession = false;
-  sessionDoneTopics = new Set();
-  sessionScenarioStufe = {};
-  sessionHandyDone = {};
-  sessionPostfachDone = {};
-  sessionRegeln = {};
-  schwereSitzung = {};
-  if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
-  clearLastLesson();
-  clearTopicAmounts();
-  onboarding = true;
-  renderStart();
+  PK.listeAendern(liste => liste.concat([p])).then(async erg => {
+    syncProfilesFromStorage();
+    const anmeldung = erg.ok ? await PK.anmelden(p.id) : { ok: false };
+    if (!anmeldung.ok) {
+      announce(PK.meldung(erg.ok ? { endzustand: "unklar" } : erg, "aendern"));
+      return profiles.length ? renderProfilePicker() : renderDeviceQuestion();
+    }
+    activeProfileId = p.id;
+    bootRouteDone = true;
+    resetSliMeinLernweg(false, false);
+    /* Erstes Profil auf dem Gerät: Was die Person VOR dem Anlegen gewählt hat
+       (Vorlese-Angebot auf der Startseite), gehört ihr. Vorher blieb es ohne
+       Profil liegen – die App fragte nach dem ersten Thema noch einmal, und
+       nach einem Neustart war das Vorlesen wieder aus (Prüfgruppen-Test F3,
+       26.09.2026). */
+    if (ersterStart) {
+      [AUTO_READ_KEY, AUTO_READ_GEFRAGT_KEY, READ_TEMPO_KEY].forEach(base => {
+        try {
+          const alt = entwurfStorage.getItem(base);
+          if (alt !== null) { pSet(base, alt); entwurfStorage.removeItem(base); }
+        } catch (e) { /* nichts tun */ }
+      });
+    }
+    signDraft = { icon: null, color: null, number: null };
+    sessionMenuIntroSeen = false;
+    loadActiveProfileSettings(!ersterStart);
+    sitzungsDatenLeeren();
+    if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+    clearLastLesson();
+    clearTopicAmounts();
+    onboarding = true;
+    renderStart();
+  });
 }
 
 function renderProfileManage(id) {
-  const p = profiles.find(x => x.id === id);
+  if (!PK_BEREIT || PK.pruefe().id !== id || PK.zustand().status !== "ok") {
+    announce("Wähle zuerst dein Zeichen. Dann kannst du dein Zeichen ändern.");
+    return renderProfilePicker();
+  }
+
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === id);
   if (!p) return renderProfilePicker();
   stopReading();
   setProgressVisible(false);
@@ -7122,7 +7222,8 @@ function renderProfileManage(id) {
 }
 
 function confirmResetProfile(id) {
-  const p = profiles.find(x => x.id === id);
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === id);
   if (!p) return renderProfilePicker();
   stopReading();
   setHeader("Sicher und selbstbestimmt im Internet", "Neu anfangen", "Start", "Wirklich neu anfangen?", 0);
@@ -7142,43 +7243,49 @@ function confirmResetProfile(id) {
       </article>
     </section>
   `;
+  verwaltungsTicket = PK.ticket("zuruecksetzen", id);
   focusContent();
   renderLegalFooter();
 }
 
+/* PS1: Ticket der zuletzt gezeigten Rückfrage „Neu anfangen“ oder „Löschen“.
+   Es hält Zielprofil, dessen Stempel und die Sitzung dieses Tabs fest. */
+let verwaltungsTicket = null;
+function verwaltungsTicketNehmen(art, id) {
+  const t = verwaltungsTicket;
+  verwaltungsTicket = null;
+  return (t && t.art === art && t.zielId === id) ? t : null;
+}
+
 function resetProfile(id) {
-  const wasActive = id === activeProfileId;
-  const prevActive = activeProfileId;
-  activeProfileId = id;
-  PROFILE_BASE_KEYS.forEach(base => pRemove(base));
-  activeProfileId = prevActive;
-  if (wasActive) {
-    pauseBewertungLoeschen();
-    if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
-    try { entwurfStorage.removeItem("alex_tilda_stufe"); } catch (e) {}
-    sessionMenuIntroSeen = false;
-    loadActiveProfileSettings(true);
-    finishedTopicThisSession = false;
-    sessionDoneTopics = new Set();
-    sessionScenarioStufe = {};
-    sessionHandyDone = {};
-    sessionPostfachDone = {};
-    sessionRegeln = {};
-    schwereSitzung = {};
-    legacyHandySpeicherBereinigen({ gesamtLoeschen: true, verlaufLoeschen: true });
-    clearLastLesson();
-    clearTopicAmounts();
-    announce("Du fängst neu an.");
-    renderStart();
-  } else {
-    announce("Der Lernstand wurde gelöscht.");
-    renderProfilePicker();
-  }
+  const ticket = verwaltungsTicketNehmen("zuruecksetzen", id);
+  if (!ticket) { announce(PK.TEXTE.abgebrochen); return renderProfilePicker(); }
+  const wasActive = id === PK.profilId();
+  PK.profilZuruecksetzen(ticket).then(erg => {
+    syncProfilesFromStorage();
+    if (erg.endzustand === "unveraendert" || erg.endzustand === "unklar") {
+      announce(PK.meldung(erg, "zuruecksetzen"));
+      return renderProfilePicker();
+    }
+    if (wasActive && PK.profilId() === id) {
+      resetSliMeinLernweg(false, false);
+      if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+      sessionMenuIntroSeen = false;
+      loadActiveProfileSettings(true);
+      sitzungsDatenLeeren();
+      announce(erg.ok ? PK.TEXTE.neuAngefangen : PK.meldung(erg, "zuruecksetzen"));
+      renderStart();
+    } else {
+      announce(erg.ok ? PK.TEXTE.zurueckgesetzt : PK.meldung(erg, "zuruecksetzen"));
+      renderProfilePicker();
+    }
+  });
 }
 
 function confirmDeleteProfile(id) {
-  const p = profiles.find(x => x.id === id);
-  if (!p) return;
+  syncProfilesFromStorage();
+  const p = profiles.find(x => x && x.id === id);
+  if (!p) return renderProfilePicker();
   stopReading();
   setHeader("Sicher und selbstbestimmt im Internet", "Profil löschen", "Start", "Wirklich löschen?", 0);
   content.innerHTML = `
@@ -7197,46 +7304,45 @@ function confirmDeleteProfile(id) {
       </article>
     </section>
   `;
+  verwaltungsTicket = PK.ticket("loeschen", id);
   focusContent();
   renderLegalFooter();
 }
 
 function deleteProfile(id) {
-  if (!profiles.some(p => p.id === id)) return;
-  const prevActive = activeProfileId;
-  if (id === activeProfileId) pauseBewertungLoeschen();
-  activeProfileId = id;
-  PROFILE_BASE_KEYS.forEach(base => pRemove(base));
-  activeProfileId = prevActive;
-  profiles = profiles.filter(p => p.id !== id);
-  if (activeProfileId === id) activeProfileId = profiles[0] ? profiles[0].id : null;
-  saveProfiles();
-  if (prevActive === id) {
-    if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
-    sessionMenuIntroSeen = false;
-    finishedTopicThisSession = false;
-    sessionDoneTopics = new Set();
-    sessionScenarioStufe = {};
-    sessionHandyDone = {};
-    sessionPostfachDone = {};
-    sessionRegeln = {};
-    schwereSitzung = {};
-    /* Der Rück-Anker gehört zum nun aktiven Profil. Bei der letzten
-       gelöschten Person werden auch die alten RAM-Einstellungen geleert. */
-    loadLastLesson();
-    loadTopicAmounts();
-  }
-  if (profiles.length === 0) {
-    PROFILE_BASE_KEYS.forEach(base => pRemove(base));
-    try { entwurfStorage.removeItem("alex_tilda_stufe"); } catch (e) {}
-    legacyHandySpeicherBereinigen({ gesamtLoeschen: true, verlaufLoeschen: true });
-    /* Keine Person mehr: neues Zeichen bauen. */
-    loadActiveProfileSettings(true);
-    signDraft = { icon: null, color: null, number: null };
-    return renderBuildSign(0, null);
-  }
-  loadActiveProfileSettings(true);
-  renderProfilePicker();
+  const ticket = verwaltungsTicketNehmen("loeschen", id);
+  if (!ticket) { announce(PK.TEXTE.abgebrochen); return renderProfilePicker(); }
+  const eigenes = id === PK.gebundeneId();
+  PK.profilLoeschen(ticket).then(erg => {
+    syncProfilesFromStorage();
+    if (erg.endzustand === "unveraendert" || erg.endzustand === "unklar") {
+      announce(PK.meldung(erg, "profil"));
+      return renderProfilePicker();
+    }
+    announce(PK.meldung(erg, "profil"));
+    if (eigenes) {
+      /* Die Bindung dieses Tabs endet. Es gibt keinen stillen Wechsel zu
+         einem anderen Profil: Wer weiterlernt, wählt sein Zeichen. */
+      PK.bindungAufheben();
+      bindungUebernehmen();
+      if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+      resetSliMeinLernweg(false);
+      sessionMenuIntroSeen = false;
+      sitzungsDatenLeeren();
+      loadLastLesson();
+      loadTopicAmounts();
+    }
+    if (profiles.length === 0) {
+      bindungUebernehmen();
+      resetSliMeinLernweg(false);
+      /* Keine Person mehr: neues Zeichen bauen. */
+      loadActiveProfileSettings(true);
+      signDraft = { icon: null, color: null, number: null };
+      return renderBuildSign(0, null);
+    }
+    if (eigenes) loadActiveProfileSettings(true);
+    renderProfilePicker();
+  });
 }
 
 /* Einstieg: erst fragen oder gleich selbst wählen */
@@ -7659,8 +7765,10 @@ function pauseMerken() {
   saveLastLesson();
   if (pauseSpeicherErlaubt()) {
     const stand = loadProgress();
-    if (pauseSitzung) stand.pause = pauseSitzung; else delete stand.pause;
-    saveProgress(stand);
+    if (stand) {
+      if (pauseSitzung) stand.pause = pauseSitzung; else delete stand.pause;
+      saveProgress(stand);
+    }
   }
   return true;
 }
@@ -8329,23 +8437,14 @@ function renderMenu() {
   /* Themen-Seite bewusst schlank: eine Hauptaufgabe – Thema wählen (CLT).
      Üben, Wiederholen und Lernstand liegen unter „Mein Lernweg". */
   content.innerHTML = `
-    <section class="start-page">
-      ${buildToolRow()}
+    <section class="start-page start-page--themen">
+      <div class="start-top-strip">
+        ${/* Navigation 20.11.2026: „Lernen starten“ (Auswahl nach Situation) steht hier, seit die
+              alte Startseite entfällt – leise und nur, wenn es nichts zum Weiterlernen gibt. */""}
+        ${buildResumeLessonChip() || `<p class="resume-lesson-wrap"><button type="button" class="bedien-pikto review-chip" onclick="renderEinstiegAuswahl()">${pictoHtml("start")}<span>${escapeHtml(RUHIG_TEXT.starten)}</span></button></p>`}
+        ${buildToolRow()}
+      </div>
       ${learnModeSection}
-      ${/* Navigation 20.11.2026: „Lernen starten“ (Auswahl nach Situation) steht hier, seit die
-            alte Startseite entfällt – leise und nur, wenn es nichts zum Weiterlernen gibt. */""}
-      ${buildResumeLessonChip() || `<p class="resume-lesson-wrap"><button type="button" class="bedien-pikto review-chip" onclick="renderEinstiegAuswahl()">${pictoHtml("start")}<span>${escapeHtml(RUHIG_TEXT.starten)}</span></button></p>`}
-      <aside class="handy-portal-banner handy-portal-banner--kompakt" role="region" aria-label="Direkt ausprobieren">
-        <span class="handy-portal-banner-badge">Direkt ausprobieren</span>
-        <h2 class="handy-portal-banner-title">${escapeHtml(stufenUiText("direktTitel"))}</h2>
-        <p class="handy-portal-banner-desc">${escapeHtml(stufenUiText("direktText"))}</p>
-        <div class="handy-portal-banner-actions" aria-label="Direkte Einstiege ohne Thema">
-          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=es_handy">Erste Schritte am Handy</a>
-          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=tildas_samstag">Tildas Samstag (4 Folgen)</a>
-          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderMailPostfach()">E-Mail-Postfach (7 Übungen)</button>
-          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderHandyHub()">Alle 34 Handy-Übungen</button>
-        </div>
-      </aside>
       <h2 class="topic-grid-title">Wähle ein Thema</h2>
       <p class="topic-grid-hint">Tippe auf ein Thema. Dann geht es los.</p>
       <nav class="topic-group-links" aria-label="Themengruppen">
@@ -8355,6 +8454,17 @@ function renderMenu() {
             der Inhalt und stehen so ohne Scrollen oben. Die Figur bleibt im
             Bestand (assets/figures). */""}
       ${groupSections}
+      <aside class="handy-portal-banner handy-portal-banner--kompakt" role="region" aria-label="Direkt ausprobieren">
+        <span class="handy-portal-banner-badge">Direkt ausprobieren</span>
+        <h2 class="handy-portal-banner-title">${escapeHtml(stufenUiText("direktTitel"))}</h2>
+        <p class="handy-portal-banner-desc">${escapeHtml(stufenUiText("direktText"))}</p>
+        <div class="handy-portal-banner-actions" role="group" aria-label="Direkte Einstiege ohne Thema">
+          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=es_handy">Erste Schritte am Handy</a>
+          <a class="handy-portal-banner-link handy-portal-banner-link--secondary" href="lernkreis/index.html?ex=tildas_samstag">Tildas Samstag (4 Folgen)</a>
+          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderMailPostfach()">E-Mail-Postfach (7 Übungen)</button>
+          <button type="button" class="handy-portal-banner-link handy-portal-banner-link--secondary" onclick="renderHandyHub()">Alle 34 Handy-Übungen</button>
+        </div>
+      </aside>
     </section>
   `;
   focusContent();
@@ -8365,8 +8475,9 @@ function renderMenu() {
    Seite „Mein Lernweg": Lernstand, Wiederholen, Üben
    ============================================================ */
 
-function renderMyPath() {
+function renderMyPath(optionen = {}) {
   stopReading();
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -8470,7 +8581,13 @@ function renderMyPath() {
 
   let progressConsent = "";
   const hatFortschritt = doneCount > 0 || handyDoneKeys.length > 0 || postfachDoneKeys.length > 0;
-  if (isProgressEnabled()) {
+  if (PK_BEREIT && PK.lernstandVerborgen()) {
+    progressConsent = `
+      <div class="progress-consent">
+        <p class="progress-consent-note">${escapeHtml(PK.TEXTE.widerrufFehler)}</p>
+        <button type="button" class="utility-button" onclick="loeschenRueckfrage('lernstand', this)">Lernstand löschen und nicht mehr merken</button>
+      </div>${resumeDelete}`;
+  } else if (isProgressEnabled()) {
     progressConsent = `
       <div class="progress-consent">
         <p class="progress-consent-title">Du hast ${doneCount} von ${topics.length} Themen geschafft.${handyDoneKeys.length > 0 ? ` Im Übungs-Handy: ${handyDoneKeys.length} von ${handyAnzahl}.` : ""}${postfachDoneKeys.length > 0 ? ` Im E-Mail-Postfach: ${postfachDoneKeys.length} von ${postfachAnzahl}.` : ""}</p>
@@ -8562,9 +8679,13 @@ function renderMyPath() {
     : "";
 
   content.innerHTML = `
-    <section class="start-page">
+    <section class="start-page start-page--lernweg">
       ${buildToolRow()}
       <h2 class="topic-grid-title">Mein Lernweg</h2>
+      <nav class="lernweg-switch" aria-label="Ansichten unter Mein Lernweg">
+        <span class="lernweg-switch-item is-active" aria-current="page">Fortschritt, Regeln &amp; Üben</span>
+        <a class="lernweg-switch-item" href="mein-lernweg.html">Mein Lernprofil (druckbar)</a>
+      </nav>
       ${roleFigure("lernweg")}
       ${hierBistDu}
       ${buildGrandFinish()}
@@ -8681,13 +8802,13 @@ function renderMyPath() {
         const zusammenfassung = [];
         if (gewaehlteZiele.length) zusammenfassung.push("Ziele: " + gewaehlteZiele.join(", "));
         if (probiertZahl) zusammenfassung.push(probiertZahl + " Übung" + (probiertZahl === 1 ? "" : "en") + " in dieser Sitzung angesehen");
-        if (koennenZahl) zusammenfassung.push(koennenZahl + (koennenZahl === 1 ? " Satz" : " Sätze") + " im Könnens-Heft markiert");
+        if (koennenZahl) zusammenfassung.push(koennenZahl + (koennenZahl === 1 ? " Punkt" : " Punkte") + " in Mein Lernprofil markiert");
         const standHtml = zusammenfassung.length
           ? `<p class="topic-grid-hint">${escapeHtml(zusammenfassung.join(" · "))}</p>`
           : `<p class="topic-grid-hint">${escapeHtml(stufenUiText("koennenHinweis"))}</p>`;
         return `
-          <section class="path-block koennen-heft-link-block" aria-label="Meine Ziele, Ausprobiertes und Könnens-Heft">
-            <h3>Meine Ziele, Ausprobiertes &amp; Könnens-Heft</h3>
+          <section class="path-block koennen-heft-link-block" aria-label="Mein Lernprofil: Ziele, Aktivitäten und Einschätzung">
+            <h3>Mein Lernprofil: Ziele, Aktivitäten &amp; Einschätzung</h3>
             ${standHtml}
             <div class="certificate-actions">
               <a class="nav-button primary" href="mein-lernweg.html">${escapeHtml(stufenUiText("koennenKnopf"))}</a>
@@ -8701,7 +8822,7 @@ function renderMyPath() {
       ${progressConsent}
     </section>
   `;
-  focusContent();
+  if (optionen.fokus !== false) focusContent();
   renderLegalFooter();
 }
 
@@ -8724,13 +8845,13 @@ function printSuccessBook() {
   }).join("");
   const html = `<!doctype html><html lang="de"><head><meta charset="utf-8">` +
     `<title>Mein Erfolgs-Heft</title>` +
-    `<style>body{font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:24px auto;padding:0 16px;color:#16222e;line-height:1.6;}` +
+    `<style>body{font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:24px auto;padding:0 16px;color:#26342D;line-height:1.6;}` +
     `h1{font-size:26px;margin:0 0 4px;text-align:center;}` +
-    `.heft-titel{border:3px solid #00528f;border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:24px;}` +
+    `.heft-titel{border:3px solid #365B46;border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:24px;}` +
     `.heft-titel p{margin:6px 0;font-size:15px;}` +
-    `.heft-seite{border:2px solid #c6c7c8;border-radius:12px;padding:16px 20px;margin-bottom:16px;page-break-inside:avoid;}` +
-    `.heft-seite h2{font-size:19px;margin:0 0 2px;color:#00528f;}` +
-    `.heft-geschafft{margin:0 0 10px;color:#2E7D4F;font-weight:bold;}` +
+    `.heft-seite{border:2px solid #B8C7B9;border-radius:12px;padding:16px 20px;margin-bottom:16px;page-break-inside:avoid;}` +
+    `.heft-seite h2{font-size:19px;margin:0 0 2px;color:#365B46;}` +
+    `.heft-geschafft{margin:0 0 10px;color:#365B46;font-weight:bold;}` +
     `h3{font-size:15px;margin:10px 0 4px;}ul{margin:4px 0;padding-left:22px;}li{margin-bottom:5px;}` +
     `.heft-fuss{margin-top:20px;color:#555;font-size:12px;text-align:center;}</style></head><body>` +
     `<div class="heft-titel"><h1>Mein Erfolgs-Heft</h1>` +
@@ -8827,7 +8948,7 @@ function renderHelpPage() {
   showNav(false, false);
 
   content.innerHTML = `
-    <section class="start-page" data-readable="true">
+    <section class="start-page start-page--hilfe" data-readable="true">
       ${buildToolRow(true)}
       <h2 class="topic-grid-title">Hilfe</h2>
       <p class="topic-grid-hint">Du wählst deine Hilfe.</p>
@@ -8939,8 +9060,8 @@ function renderHelpPage() {
 /* Geteiltes Gerät nachträglich an- oder abschalten. Bisher ging das nur
    beim allerersten Einrichten – wer damals "nur ich" gewählt hatte, kam
    nicht mehr an die Personen-Auswahl heran. */
-function setSharedFromSettings(shared) {
-  setDeviceShared(shared);
+async function setSharedFromSettings(shared) {
+  if (!await setDeviceShared(shared)) { announce(PK.TEXTE.gast); return; }
   announce(shared
     ? "Mehrere Personen teilen sich dieses Gerät. Beim Start fragt die App, wer lernt."
     : "Nur du benutzt dieses Gerät.");
@@ -8949,6 +9070,7 @@ function setSharedFromSettings(shared) {
 
 function renderSettingsPage() {
   stopReading();
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);
@@ -8963,8 +9085,7 @@ function renderSettingsPage() {
   const sliJetzt = readSliSessionState();
   const umgebung = (sliJetzt && sliJetzt.voreinstellung) || "unterstuetzt";
   const UMGEBUNG_TEXT = { gefuehrt: "Zeig mir jeden Schritt.", unterstuetzt: "Gib mir Hilfen dazu.", frei: "Ich probiere selbst." };
-  let vorGeraet = false;
-  try { vorGeraet = entwurfStorage.getItem(DEVICE_SHARED_KEY) === null; } catch (e) { vorGeraet = false; }
+  const vorGeraet = PK_BEREIT ? !PK.geraetGewaehlt() : false;
   const vor = {
     sprache: !languageChosen,
     lernform: lernformIstVoreinstellung(),
@@ -9001,12 +9122,20 @@ function renderSettingsPage() {
     return `<button type="button" class="setting-big-button bedien-pikto" aria-pressed="${active ? "true" : "false"}" onclick="chooseLearnMode('${key}')">${pictoHtml(m.icon)}<span>${escapeHtml(m.title)}</span></button>`;
   }).join("");
 
+  const EINSTELLUNGEN_GELTUNG_TEXT = {
+    leicht: "Sprache, Lernform, Schrift-Größe, Bewegung und Farben gelten für dein Zeichen und in diesem offenen Tab auch im Übungs-Handy und bei „So lerne ich“. Lern-Hilfen beim Üben und Töne gelten nur in diesem Tab. Vorlesen und Lese-Hilfen gelten in der Lern-App für dein Zeichen. Die Einstellung „Dieses Gerät“ gilt für das ganze Gerät.",
+    einfach: "Sprache, Lernform, Schriftgröße, Bewegung und Farben gelten für dein Zeichen sowie in diesem offenen Tab im Übungs-Handy und auf den Seiten „So lerne ich“. Die Hilfen beim Üben und die Töne gelten nur für diesen Tab. Vorlesen und Lesehilfen gelten für dein Zeichen in der Lern-App. Die Auswahl unter „Dieses Gerät“ gilt für das gesamte Gerät.",
+    standard: "Sprache, Lernform, Schriftgröße, Bewegung und Farben gelten für dein aktives Profil sowie im offenen Tab im Übungs-Handy und auf den Seiten „So lerne ich“. Die Hilfen beim Üben und die Töne gelten nur sitzungsbezogen in diesem Tab. Vorlesen und Lesehilfen gelten profilbezogen in der Lern-App. Die Einstellung unter „Dieses Gerät“ gilt geräteweit."
+  };
+  const geltungHinweis = EINSTELLUNGEN_GELTUNG_TEXT[languageLevel] || EINSTELLUNGEN_GELTUNG_TEXT.leicht;
+
   content.innerHTML = `
-    <section class="start-page" data-readable="true">
+    <section class="start-page start-page--einstellungen" data-readable="true">
       ${buildToolRow()}
       <h2 class="topic-grid-title">Einstellungen</h2>
       ${roleFigure("einstellungen")}
       <p class="topic-grid-hint">Hier kannst du vieles einstellen. So passt die Seite gut zu dir.</p>
+      <p class="topic-grid-hint" id="settingsScopeHint">${escapeHtml(geltungHinweis)}</p>
       ${buildResumeLessonChip()}
 
       <section class="settings-page-section" aria-label="1. Sprache">
@@ -11984,6 +12113,11 @@ function lernhandySkripte() {
     l.rel = "stylesheet"; l.href = "lernhandy/lernhandy.css";
     document.head.appendChild(l);
   }
+  if (!document.querySelector('link[href="lernhandy/lernhandy-skin.css"]')) {
+    const skin = document.createElement("link");
+    skin.rel = "stylesheet"; skin.href = "lernhandy/lernhandy-skin.css";
+    document.head.appendChild(skin);
+  }
   lernhandyLaden = [
     "lernhandy/lerneinheit-be1-de.js",
     "lernhandy/lernhandy.js",
@@ -12037,7 +12171,7 @@ function renderLessonHandy() {
         <span class="access-box-symbol" aria-hidden="true">${getIconHtml(lesson.icon || topic.icon || "start")}</span>
         <h2>${escapeHtml(lesson.title || topic.title)}</h2>
       </div>
-      <div id="lernhandyUebung"><p role="status">${escapeHtml(LERNHANDY_TEXT.laden)}</p></div>
+      <div class="lh-geraet" data-ex-typ="handy"><div id="lernhandyUebung"><p role="status">${escapeHtml(LERNHANDY_TEXT.laden)}</p></div></div>
       <div id="lernhandyHilfe"></div>
     </article>
   `;
@@ -15696,7 +15830,7 @@ function starteHubLernweg(cfg) {
     ${buildLernLeiste(1, Math.max(1, (cfg.lw && cfg.lw.schritte ? cfg.lw.schritte.length : 1)))}
     <article class="card handy-teil handy-hub-lauf" ${cfg.themaId ? `style="${getTopicColorStyle(cfg.themaId)}"` : ""} data-readable="true">
       <h2 class="handy-hub-titel">${escapeHtml(cfg.titel)}</h2>
-      <div id="lernhandyHubWurzel"><p role="status">Übung wird geladen.</p></div>
+      <div class="lh-geraet" data-ex-typ="${cfg.typ === "postfach" ? "postfach" : "handy"}"><div id="lernhandyHubWurzel"><p role="status">Übung wird geladen.</p></div></div>
       <div id="lernhandyHubHilfe"></div>
     </article>`;
   lernBeendenZiel = cfg.beendenZiel || null;
@@ -15837,9 +15971,10 @@ function renderHandyHubAbschluss(info) {
   renderLegalFooter();
 }
 
-function renderHandyHub() {
+function renderHandyHub(optionen = {}) {
   stopReading();
   if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   rememberRoute("handy");
   if (typeof KURZWEGE === "undefined" || typeof LernHandy === "undefined" || typeof kurzLernweg === "undefined") {
     lernhandyLadeAnsicht("Übungs-Handy", "Alle 34 Lernwege", () => renderHandyHub());
@@ -15910,13 +16045,14 @@ function renderHandyHub() {
       ${gruppenHtml}
     </article>`;
   stelleMerken(() => renderHandyHub());
-  focusContent();
+  if (optionen.fokus !== false) focusContent();
   renderLegalFooter();
 }
 
 function startHandyWeg(wegId, opts) {
   stopReading();
   if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   if (typeof KURZWEGE === "undefined" || typeof LernHandy === "undefined" || typeof kurzLernweg === "undefined") {
     lernhandyLadeAnsicht("Übungs-Handy", "Übung laden", () => startHandyWeg(wegId, opts));
     lernhandySkripte().then(() => startHandyWeg(wegId, opts)).catch(() => {
@@ -15952,6 +16088,7 @@ function startHandyWeg(wegId, opts) {
 function renderMailPostfach(szId, opts) {
   stopReading();
   if (typeof lernhandyEntfernen === "function") lernhandyEntfernen();
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   if (typeof MAILBOX_SZENARIEN === "undefined" || typeof LernHandy === "undefined" || typeof erstellePostfachLernweg === "undefined") {
     lernhandyLadeAnsicht("E-Mail-Übungspostfach", "Übungen laden", () => renderMailPostfach(szId, opts));
     lernhandySkripte().then(() => renderMailPostfach(szId, opts)).catch(() => {
@@ -16294,6 +16431,7 @@ function topicRoute(topicId, action) {
 }
 
 function openTopicRoute(topicId, action) {
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   if (action === "kurz" || action === "short") return startTopicMode(topicId, "short");
   if (action === "quiz") return startQuiz(topicId);
   if (action === "merk" || action === "memory") return renderMemoryCard(topicId);
@@ -16310,14 +16448,15 @@ function handleHash() {
   try {
     const hash = decodeURIComponent(window.location.hash.replace("#", "").trim());
 
-    /* Geteiltes Gerät, echter Neustart: ZUERST fragen, wer lernt.
+    /* Geteiltes Gerät oder Rückkehr-Sperre: ZUERST fragen, wer lernt.
        Ohne das landet die nächste Person in der gemerkten Adresse der
-       vorigen – also mitten in deren Thema, mit deren Schriftgröße.
-       Nach der Wahl lädt switchProfile den Rück-Anker DIESER Person. */
-    if (!bootRouteDone) {
-      bootRouteDone = true;
-      if (deviceShared && profiles.length > 0) return renderProfilePicker();
+       vorigen – oder sieht bei direktem Link (#handy, #lernweg …) deren Erfolge.
+       bootRouteDone wird erst gesetzt, wenn die Person ihr Zeichen gewählt hat
+       (bzw. auf einem ungeteilten Gerät). */
+    if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) {
+      return renderProfilePicker();
     }
+    bootRouteDone = true;
     if (!hash) {
       /* Navigation 20.11.2026: Ohne Sprungmarke öffnet die Themenübersicht des Bereichs
          „Lernen und ausprobieren“, keine zweite Startseite. Die bisherige Seite bleibt unter #start. */
@@ -16529,22 +16668,79 @@ if (typeof applyWeiterlernen === "function") applyWeiterlernen();
 initGlossar();
 initGlossarEvents();
 
-/* Profile laden (oder beim ersten Mal anlegen und vorhandene Einstellungen
-   übernehmen), dann die Einstellungen des aktiven Profils anwenden. */
-ensureProfiles();
-loadDeviceShared();
-/* Geteiltes Gerät: merken, wann die App weggelegt wurde, und beim
-   Zurückkommen ggf. wieder nach der Person fragen (siehe checkReturn). */
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") markAway();
-  else checkReturn();
+/* Der erste Seitenaufbau wartet auf die verbindliche Profilfreigabe. */
+let profilStartFertig = false;
+function profilAnsichtOffen() {
+  return !!(content && content.querySelector(".profile-picker, .profile-code, .profile-manage, .sign-icon-grid, .device-sign-choice"));
+}
+
+function lernstandStatusZeigen(status) {
+  const ort = document.getElementById("lernstand-speicherstatus");
+  const text = PK_BEREIT && PK.TEXTE[status];
+  if (ort && text && ort.textContent !== text) ort.textContent = text;
+}
+
+function fortschrittsAnsichtAktualisieren(rendern) {
+  const element = document.activeElement;
+  const attribut = content?.contains(element) && ["id", "onclick", "href"].find(name => element.hasAttribute(name));
+  const wert = attribut && element.getAttribute(attribut);
+  rendern({ fokus: false });
+  if (!attribut || element.isConnected || document.activeElement !== document.body) return;
+  const ersatz = Array.from(content.querySelectorAll(element.localName + "[" + attribut + "]"))
+    .filter(kandidat => kandidat.getAttribute(attribut) === wert);
+  if (ersatz.length === 1) ersatz[0].focus({ preventScroll: true });
+}
+
+if (PK_BEREIT) {
+  PK.beiAenderung(info => {
+    if (info.speicherStatus) lernstandStatusZeigen(info.speicherStatus);
+    if (info.speicherFehler) lernstandStatusZeigen("gast");
+    if (!profilStartFertig) return;
+    loadDeviceShared();
+    syncProfilesFromStorage();
+    if (info.status === "gesperrt" || info.status === "gast") {
+      bindungUebernehmen();
+      bootRouteDone = false;
+      sitzungsDatenLeeren();
+      if (info.status === "gast") return renderMenu();
+      if (profilAnsichtOffen() && !content.querySelector(".profile-picker")) return;
+      stopReading();
+      renderProfilePicker();
+      return;
+    }
+    if (info.profilwechsel) {
+      bindungUebernehmen();
+      sitzungsDatenLeeren();
+      resetSliMeinLernweg(false, true);
+      return;
+    }
+    if (info.loeschfehler || info.widerruf || info.stempelWechsel) {
+      sitzungsDatenLeeren();
+      resetSliMeinLernweg(true, true);
+      if (info.neubeginn || (info.stempelWechsel && String(info.alterStempel).split(":")[1] !== String(info.stempel).split(":")[1])) {
+        loadActiveProfileSettings(true);
+      }
+      loadLastLesson();
+      loadTopicAmounts();
+    }
+    if (info.liste && content?.querySelector(".profile-picker")) return renderProfilePicker();
+    if (!info.lernstand || profilAnsichtOffen()) return;
+    if (content?.querySelector(".handy-hub-gruppe")) {
+      fortschrittsAnsichtAktualisieren(renderHandyHub);
+    } else if (activeTab === "lernweg" && !content?.querySelector(".loeschen-rueckfrage")) {
+      fortschrittsAnsichtAktualisieren(renderMyPath);
+    }
+  });
+}
+
+document.addEventListener("click", async event => {
+  const link = event.target.closest?.('a[href="mein-lernweg.html"]');
+  if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey ||
+      (link.target && link.target !== "_self") || !PK_BEREIT) return;
+  event.preventDefault();
+  if (await PK.navigationVorbereiten(link.href)) location.assign(link.href);
+  else announce("Das Lernprofil konnte nicht geöffnet werden. Bitte wähle dein Zeichen erneut.");
 });
-window.addEventListener("pagehide", markAway);
-loadActiveProfileSettings();
-/* Zuletzt offene Lektion und Mengen-Wahl zurückholen (B5, B9) – erst hier,
-   weil dafür sowohl die Themen als auch das aktive Profil stehen müssen. */
-loadLastLesson();
-loadTopicAmounts();
 
 /* Wenn Nutzer das System-Theme wechselt: Seite neu rendern,
    damit die themenspezifischen Inline-Farben (getTopicColorStyle)
@@ -16596,7 +16792,18 @@ window.addEventListener("online",  hideOfflineBanner);
 /* Beim Start prüfen, ob bereits offline */
 if (!navigator.onLine) showOfflineBanner();
 
-document.addEventListener("DOMContentLoaded", handleHash);
+document.addEventListener("DOMContentLoaded", async () => {
+  if (PK_BEREIT) await PK.bereit;
+  loadDeviceShared();
+  syncProfilesFromStorage();
+  bindungUebernehmen();
+  loadActiveProfileSettings();
+  loadLastLesson();
+  loadTopicAmounts();
+  profilStartFertig = true;
+  if (PK_BEREIT && PK.zustand().status === "gast") lernstandStatusZeigen("gast");
+  handleHash();
+});
 /* hashchange und popstate können beim Browser-Zurück gleichzeitig feuern.
    scheduleHandleHash bündelt beide zu genau einem Neuaufbau. */
 window.addEventListener("hashchange", scheduleHandleHash);
@@ -16786,6 +16993,7 @@ function getPictogramHtml(key) {
 
 function renderRegelKarte() {
   stopReading();
+  if (typeof istProfilwahlErforderlich === "function" && istProfilwahlErforderlich()) return renderProfilePicker();
   currentTopicId = null;
   setProgressVisible(false);
   setBottomNavVisible(false);

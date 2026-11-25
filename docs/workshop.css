@@ -342,3 +342,217 @@ body.entwurf.ws .ws-knopf { border: 0; background: var(--at-surface-soft); color
 body.entwurf.ws .ws-knopf.primaer { background: var(--at-accent); color: var(--at-accent-ink); box-shadow: none; }
 body.entwurf.ws .ws-knopf.primaer:hover { background: var(--at-accent-dark); }
 body.entwurf.ws .ws-fuss a:not(.ws-knopf) { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 6px; }
+
+/* Paket K1: Workshop-Auswahl als Kachelsystem (§ 10 Themenfarben erhalten) */
+body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="facebook"]     { --ws-topic-color: #1877F2; }
+body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="instagram"]    { --ws-topic-color: #C13584; }
+body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="snapchat"]     { --ws-topic-color: #A88A00; }
+body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="tiktok"]       { --ws-topic-color: #111111; }
+body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="cybermobbing"] { --ws-topic-color: #0E7490; }
+
+html[data-theme="dark"] body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="facebook"]     { --ws-topic-color: #60a5fa; }
+html[data-theme="dark"] body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="instagram"]    { --ws-topic-color: #f472b6; }
+html[data-theme="dark"] body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="snapchat"]     { --ws-topic-color: #fde047; }
+html[data-theme="dark"] body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="tiktok"]       { --ws-topic-color: #a5f3fc; }
+html[data-theme="dark"] body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="cybermobbing"] { --ws-topic-color: #06b6d4; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="facebook"]     { --ws-topic-color: #60a5fa; }
+  html:not([data-theme="light"]) body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="instagram"]    { --ws-topic-color: #f472b6; }
+  html:not([data-theme="light"]) body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="snapchat"]     { --ws-topic-color: #fde047; }
+  html:not([data-theme="light"]) body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="tiktok"]       { --ws-topic-color: #a5f3fc; }
+  html:not([data-theme="light"]) body.entwurf.ws .ws-auswahl-kachel[data-ws-thema="cybermobbing"] { --ws-topic-color: #06b6d4; }
+}
+
+body.entwurf.ws .ws-auswahl-block > h2 {
+  margin-bottom: 6px;
+}
+body.entwurf.ws .ws-inhalt section.card.ws-auswahl-block {
+  padding: 4px 0 8px !important;
+  margin: 0 !important;
+}
+body.entwurf.ws .ws-einstiege.ws-kachel-liste {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin: 18px 0 28px;
+  padding: 0;
+  list-style: none;
+}
+body.entwurf.ws .ws-auswahl-item {
+  min-width: 0;
+  display: flex;
+}
+body.entwurf.ws .ws-zusatz-titel {
+  margin: 8px 0 12px;
+  font-size: max(20px, 1.15rem);
+  color: var(--at-ink);
+}
+body.entwurf.ws .ws-zusatz-raster {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+@media (min-width: 720px) {
+  body.entwurf.ws .ws-einstiege.ws-kachel-liste,
+  body.entwurf.ws .ws-zusatz-raster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 16px;
+  }
+}
+@media (max-width: 960px) {
+  html:is([data-font-scale="sehr-gross"], [data-text-size="xl"]) body.entwurf.ws .ws-einstiege.ws-kachel-liste,
+  html:is([data-font-scale="sehr-gross"], [data-text-size="xl"]) body.entwurf.ws .ws-zusatz-raster {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+body.entwurf.ws .ws-auswahl-kachel,
+body.entwurf.ws .ws-einstiege.ws-kachel-liste li a.ws-auswahl-kachel {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--at-surface);
+  color: var(--at-ink);
+  text-decoration: none;
+  border: 1.5px solid var(--at-line);
+  border-left: 6px solid var(--ws-topic-color, var(--at-accent));
+  border-radius: 16px;
+  box-shadow: none;
+  transition: background-color 0.16s ease, border-color 0.16s ease;
+}
+body.entwurf.ws .ws-auswahl-kachel:hover,
+body.entwurf.ws .ws-auswahl-kachel:focus-visible,
+body.entwurf.ws .ws-einstiege.ws-kachel-liste li a.ws-auswahl-kachel:hover,
+body.entwurf.ws .ws-einstiege.ws-kachel-liste li a.ws-auswahl-kachel:focus-visible {
+  background: var(--at-surface-soft);
+  border-color: var(--ws-topic-color, var(--at-accent));
+}
+body.entwurf.ws .ws-kachel-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: var(--at-surface-soft);
+  border: 1px solid var(--at-line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+body.entwurf.ws .ws-kachel-icon img {
+  width: 28px;
+  height: 28px;
+  filter: hue-rotate(-58deg) saturate(0.55) brightness(0.86);
+}
+html[data-theme="dark"] body.entwurf.ws .ws-kachel-icon img {
+  filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) body.entwurf.ws .ws-kachel-icon img {
+    filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+  }
+}
+body.entwurf.ws .ws-kachel-inhalt {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+body.entwurf.ws .ws-auswahl-kachel .ws-mat-titel {
+  font-size: max(20px, 1.12rem);
+  font-weight: 700;
+  line-height: 1.28;
+  color: var(--at-ink);
+  overflow-wrap: anywhere;
+}
+body.entwurf.ws .ws-kachel-kurz {
+  font-size: max(16px, 0.94rem);
+  line-height: 1.45;
+  color: var(--at-ink-soft);
+  overflow-wrap: anywhere;
+}
+body.entwurf.ws .ws-auswahl-kachel .ws-mat-meta {
+  font-size: max(14px, 0.84rem);
+  line-height: 1.35;
+  color: var(--at-accent);
+  font-weight: 700;
+  margin-top: 2px;
+}
+@media (max-width: 650px) {
+  body.entwurf.ws .ws-app {
+    padding: 8px 12px 32px;
+  }
+  body.entwurf.ws .ws-inhalt {
+    padding: 0 2px 20px;
+  }
+  body.entwurf.ws .ws-auswahl-block > .ws-klein {
+    margin: 4px 0 12px;
+    font-size: max(16.5px, 0.92rem);
+    line-height: 1.4;
+  }
+  body.entwurf.ws .ws-einstiege.ws-kachel-liste,
+  body.entwurf.ws .ws-zusatz-raster {
+    gap: 10px;
+    margin: 12px 0 20px;
+  }
+  body.entwurf.ws .ws-auswahl-kachel,
+  body.entwurf.ws .ws-einstiege.ws-kachel-liste li a.ws-auswahl-kachel {
+    min-height: 0;
+    grid-template-columns: 42px minmax(0, 1fr);
+    padding: 12px 14px;
+    gap: 10px;
+    border-radius: 14px;
+  }
+  body.entwurf.ws .ws-kachel-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+  body.entwurf.ws .ws-kachel-icon img {
+    width: 22px;
+    height: 22px;
+  }
+  body.entwurf.ws .ws-kachel-inhalt {
+    gap: 3px;
+  }
+  body.entwurf.ws .ws-auswahl-kachel .ws-mat-titel {
+    font-size: max(18px, 1.02rem);
+    line-height: 1.24;
+  }
+  body.entwurf.ws .ws-kachel-kurz {
+    font-size: max(15.5px, 0.88rem);
+    line-height: 1.36;
+  }
+  body.entwurf.ws .ws-auswahl-kachel .ws-mat-meta {
+    font-size: max(13.5px, 0.78rem);
+    line-height: 1.28;
+    margin-top: 1px;
+  }
+}
+
+/* Bereichskacheln im geöffneten Workshop ebenfalls als klare Kacheln darstellen */
+body.entwurf.ws .ws-raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  border-bottom: 0;
+  padding-bottom: 4px;
+}
+body.entwurf.ws .ws-raster .ws-kachel {
+  background: var(--at-surface) !important;
+  border: 1.5px solid var(--at-line) !important;
+  border-left: 5px solid var(--at-accent) !important;
+  border-radius: 14px !important;
+  padding: 16px 18px !important;
+  box-shadow: none !important;
+}
+body.entwurf.ws .ws-raster .ws-kachel:hover,
+body.entwurf.ws .ws-raster .ws-kachel:focus-visible {
+  background: var(--at-surface-soft) !important;
+  border-color: var(--at-accent) !important;
+}

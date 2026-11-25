@@ -75,19 +75,44 @@ body.entwurf .nav-button.primary{flex:0 1 360px}
  body.entwurf .lern-leiste .lern-knopf{min-height:48px}
  body.entwurf .lern-leiste .reading-button{padding:8px;min-height:48px}
 }
+.tabbar-brand {
+  display: none;
+}
+
 @media (min-width: 768px) {
   body.entwurf .main-tabbar {
     top: 0;
     bottom: auto;
     min-height: 0;
-    padding: 10px 16px;
+    padding: 10px max(18px, calc((100% - 1120px) / 2));
     gap: 6px;
-    justify-content: center;
-    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
     background: var(--bg);
     border-top: 0;
     border-bottom: 1px solid var(--line);
     box-shadow: none;
+  }
+  body.entwurf .main-tabbar .tabbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 4px 8px;
+    margin-right: auto;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: max(18px, 1.02rem);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  body.entwurf .main-tabbar .tabbar-brand-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex: none;
   }
   body.entwurf .main-tabbar .tab-item {
     flex: 0 0 auto;
@@ -95,12 +120,13 @@ body.entwurf .nav-button.primary{flex:0 1 360px}
     min-height: 44px;
     flex-direction: row;
     gap: 8px;
-    padding: 8px 14px;
+    padding: 8px 12px;
     border-radius: 999px;
     font-size: max(16px, 0.95rem);
     font-weight: 600;
     color: var(--ink);
     box-shadow: none;
+    text-decoration: none;
   }
   body.entwurf .main-tabbar .tab-item:hover {
     background: var(--surface-soft);
@@ -112,10 +138,98 @@ body.entwurf .nav-button.primary{flex:0 1 360px}
     color: var(--accent);
     font-weight: 700;
     box-shadow: none;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  body.entwurf:not(.lesson-view) .app-header {
+    padding: 10px 8px 12px;
+    align-items: baseline;
+  }
+  body.entwurf:not(.lesson-view) .app-header .header-avatar {
+    display: none;
+  }
+  body.entwurf:not(.lesson-view) .app-header .brand-name a {
+    display: none;
   }
   body.entwurf .tool-row .seiten-hilfe {
     display: none;
   }
+  html {
+    scroll-padding-top: calc(var(--tabbar-h, 4.2rem) + 16px);
+  }
+  body.entwurf .app {
+    padding-top: calc(var(--tabbar-h, 4.2rem) + 16px);
+  }
+}
+@media (min-width: 768px) and (max-width: 960px) {
+  body.entwurf .main-tabbar {
+    padding: 8px 14px;
+    gap: 4px;
+  }
+  body.entwurf .main-tabbar .tabbar-brand {
+    gap: 8px;
+    padding: 4px 6px;
+    font-size: max(16px, 0.94rem);
+  }
+  body.entwurf .main-tabbar .tabbar-brand-avatar {
+    width: 30px;
+    height: 30px;
+  }
+  body.entwurf .main-tabbar .tab-item {
+    gap: 5px;
+    padding: 8px 9px;
+    font-size: max(15px, 0.88rem);
+  }
+  body.entwurf .main-tabbar .tab-item .tab-icon .app-pictogram,
+  body.entwurf .main-tabbar .tab-item .tab-icon img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Einheitliche Pillen-Optik für Vorlesen & Sprache (analog .at-nav-ctrl im Portal) */
+body.entwurf .tool-row {
+  align-items: center;
+}
+body.entwurf .tool-row .reading-button,
+body.entwurf .tool-row .entwurf-lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: max(16px, 0.92rem);
+  font-weight: 600;
+}
+body.entwurf .tool-row .reading-button:hover,
+body.entwurf .tool-row .entwurf-lang:hover {
+  background: var(--surface-soft);
+  border-color: var(--accent);
+}
+body.entwurf :is(.start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) .tool-row .reading-button .rb-coin,
+body.entwurf :is(.start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) .tool-row .reading-button.is-active .rb-coin {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+body.entwurf :is(.start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) .tool-row .reading-button .rb-ico-stop {
+  background: transparent;
+}
+body.entwurf :is(.start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) .tool-row .reading-button.is-active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+body.entwurf :is(.start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) .tool-row .reading-button.is-active .rb-coin {
+  color: var(--on-accent);
 }
 
 @media (max-width: 767px) {
@@ -127,7 +241,7 @@ body.entwurf .nav-button.primary{flex:0 1 360px}
     padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
     background: var(--surface);
     border-top: 1px solid var(--line);
-    box-shadow: 0 -4px 16px rgba(23, 34, 47, 0.08);
+    box-shadow: none;
   }
   body.entwurf .main-tabbar .tab-item {
     display: flex;
@@ -163,17 +277,341 @@ body.entwurf .nav-button.primary{flex:0 1 360px}
   }
 }
 
-html[data-theme="dark"] body.entwurf .main-tabbar .app-pictogram {
-  background: var(--pictogram-backdrop);
-  border-radius: 6px;
-  padding: 2px;
+/* Harmonische Waldgrün-/Salbei-Angleichung der Navigations- & Werkzeug-Piktogramme (analog designsystem.css) */
+body.entwurf :is(.main-tabbar, .tool-row, .lern-leiste, .start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) img[src*="pictograms/"]:not([src*="no.svg"]):not([src*="stop.svg"]):not([src*="block.svg"]):not([src*="report.svg"]):not([src*="check.svg"]):not([src*="warn"]) {
+  filter: hue-rotate(-58deg) saturate(0.55) brightness(0.86);
+  background: transparent;
+}
+html[data-theme="dark"] body.entwurf :is(.main-tabbar, .tool-row, .lern-leiste, .start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) img[src*="pictograms/"]:not([src*="no.svg"]):not([src*="stop.svg"]):not([src*="block.svg"]):not([src*="report.svg"]):not([src*="check.svg"]):not([src*="warn"]) {
+  filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+  background: transparent;
 }
 @media (prefers-color-scheme: dark) {
-  html:not([data-theme="light"]) body.entwurf .main-tabbar .app-pictogram {
-    background: var(--pictogram-backdrop);
-    border-radius: 6px;
-    padding: 2px;
+  html:not([data-theme="light"]) body.entwurf :is(.main-tabbar, .tool-row, .lern-leiste, .start-page--themen, .start-page--lernweg, .start-page--hilfe, .start-page--einstellungen) img[src*="pictograms/"]:not([src*="no.svg"]):not([src*="stop.svg"]):not([src*="block.svg"]):not([src*="report.svg"]):not([src*="check.svg"]):not([src*="warn"]) {
+    filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+    background: transparent;
   }
+}
+
+/* Paket 1D: Themenübersicht vereinfachen – Waldgrün-/Alabaster-Designsystem, Themen zuerst */
+body.entwurf:has(.start-page--themen) .app-header {
+  padding: 8px 4px 10px;
+}
+body.entwurf:has(.start-page--themen) .orient-line {
+  margin: 8px 4px 0;
+  padding: 0;
+}
+body.entwurf:has(.start-page--themen) .content {
+  padding-top: 12px;
+}
+body.entwurf .start-page--themen .start-top-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 14px;
+  margin: 0 0 18px;
+}
+body.entwurf .start-page--themen .start-top-strip .resume-lesson-wrap,
+body.entwurf .start-page--themen .start-top-strip .tool-row {
+  margin: 0;
+}
+body.entwurf .start-page--themen .resume-lesson-wrap .review-chip {
+  min-height: 48px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: max(17px, 0.95rem);
+  font-weight: 700;
+  box-shadow: none;
+  gap: 10px;
+}
+body.entwurf .start-page--themen .resume-lesson-wrap .review-chip:hover,
+body.entwurf .start-page--themen .resume-lesson-wrap .review-chip:focus-visible {
+  background: var(--surface-soft);
+  border-color: var(--accent);
+  transform: none;
+}
+body.entwurf .start-page--themen .resume-lesson-wrap .review-chip img {
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  padding: 0;
+}
+body.entwurf .start-page--themen > .topic-grid-title {
+  margin: 0 0 4px;
+  font-size: max(24px, 1.35rem);
+}
+body.entwurf .start-page--themen > .topic-grid-hint {
+  margin: 0 0 10px;
+}
+body.entwurf .start-page--themen .topic-group-links {
+  margin: 0 0 16px;
+  gap: 8px;
+}
+body.entwurf .start-page--themen .topic-group-link {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: max(16px, 0.94rem);
+  font-weight: 700;
+}
+body.entwurf .start-page--themen .topic-group-link:hover {
+  background: var(--surface-soft);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+body.entwurf .start-page--themen .topic-group {
+  margin-top: 14px;
+}
+body.entwurf .start-page--themen .topic-group + .topic-group {
+  margin-top: 26px;
+}
+body.entwurf .start-page--themen .topic-group > .topic-grid-title {
+  margin: 0 0 2px;
+  font-size: max(20px, 1.12rem);
+  color: var(--accent);
+}
+body.entwurf .start-page--themen .topic-group > .topic-grid-hint {
+  margin: 0 0 12px;
+  font-size: max(17px, 0.92rem);
+}
+body.entwurf .start-page--themen .topic-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  grid-auto-rows: auto;
+}
+@media (min-width: 720px) {
+  body.entwurf .start-page--themen .topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+@media (min-width: 720px) and (max-width: 980px) {
+  html:is([data-font-scale="gross"], [data-font-scale="sehr-gross"], [data-text-size="lg"], [data-text-size="xl"]) body.entwurf .start-page--themen .topic-grid,
+  body.entwurf.font-large .start-page--themen .topic-grid,
+  body.entwurf.font-xlarge .start-page--themen .topic-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+body.entwurf .start-page--themen .card-read-pair--topic {
+  border-bottom: 0;
+}
+body.entwurf .start-page--themen .topic-card {
+  grid-template-columns: 56px minmax(0, 1fr);
+  min-height: 92px;
+  padding: 14px 96px 14px 16px;
+  gap: 3px 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--tile-border, var(--line));
+  border-left: 6px solid var(--topic-color, var(--accent));
+  border-radius: 16px;
+  box-shadow: none;
+  transform: none;
+}
+body.entwurf .start-page--themen .topic-card:hover,
+body.entwurf .start-page--themen .topic-card:focus-visible {
+  background: var(--topic-hover-bg, var(--surface-soft));
+  border-color: var(--topic-color, var(--accent));
+  box-shadow: none;
+  transform: none;
+}
+body.entwurf .start-page--themen .topic-card .entwurf-topic-image {
+  width: 56px;
+  height: 56px;
+  max-height: 56px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--surface-soft);
+  padding: 3px;
+  object-fit: contain;
+}
+body.entwurf .start-page--themen .topic-card .topic-start-badge {
+  padding: 2px 10px;
+  font-size: max(15px, 0.85rem);
+  margin: 0 0 2px;
+}
+body.entwurf .start-page--themen .topic-done-corner {
+  background: var(--good);
+  border: 2px solid var(--surface);
+  box-shadow: none;
+}
+body.entwurf .start-page--themen .topic-done-corner img {
+  background: transparent;
+  filter: brightness(0) invert(1);
+}
+html[data-theme="dark"] body.entwurf .start-page--themen .topic-done-corner img {
+  filter: brightness(0);
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) body.entwurf .start-page--themen .topic-done-corner img {
+    filter: brightness(0);
+  }
+}
+body.entwurf .start-page--themen .card-read-pair--topic .card-read-button {
+  right: 10px;
+  width: 78px;
+  min-width: 78px;
+  height: auto;
+  min-height: 58px;
+  padding: 6px 4px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--surface-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transform: translateY(-50%);
+}
+body.entwurf .start-page--themen .card-read-pair--topic .card-read-button .orientierung-beschriftung {
+  font-size: max(13px, 0.72rem);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+body.entwurf .start-page--themen .card-read-pair--topic:has(.topic-card:hover) .card-read-button,
+body.entwurf .start-page--themen .card-read-pair--topic:has(.topic-card:focus-visible) .card-read-button {
+  transform: translateY(-50%);
+}
+body.entwurf .start-page--themen .card-read-pair--topic .card-read-button:hover,
+body.entwurf .start-page--themen .card-read-pair--topic .card-read-button:focus-visible {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+@media (max-width: 650px) {
+  body.entwurf .start-page--themen .topic-card {
+    grid-template-columns: 48px minmax(0, 1fr);
+    padding: 12px 92px 12px 12px;
+    gap: 2px 12px;
+  }
+  body.entwurf .start-page--themen .topic-card .entwurf-topic-image {
+    width: 48px;
+    height: 48px;
+    max-height: 48px;
+  }
+}
+body.entwurf .start-page--themen .handy-portal-banner--kompakt {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: none;
+  padding: 16px 18px;
+  margin: 28px 0 8px;
+}
+body.entwurf .start-page--themen .handy-portal-banner-badge {
+  display: block;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0 0 4px;
+  border-radius: 0;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: max(16px, 0.88rem);
+  font-weight: 700;
+  color: var(--accent);
+}
+body.entwurf .start-page--themen .handy-portal-banner-title {
+  font-size: max(20px, 1.12rem);
+  margin: 0 0 4px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+body.entwurf .start-page--themen .handy-portal-banner-desc {
+  font-size: max(17px, 0.94rem);
+  margin: 0 0 12px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+body.entwurf .start-page--themen .handy-portal-banner-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+@media (min-width: 720px) {
+  body.entwurf .start-page--themen .handy-portal-banner-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+body.entwurf .start-page--themen .handy-portal-banner-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 54px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  border-left: 5px solid var(--accent);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: max(17px, 0.94rem);
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: left;
+}
+body.entwurf .start-page--themen .handy-portal-banner-link:hover,
+body.entwurf .start-page--themen .handy-portal-banner-link:focus-visible {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+@media (max-width: 480px) {
+  body.entwurf .start-page--themen .handy-portal-banner-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Paket 2A: Mein Lernweg & Einstellungen im einheitlichen Waldgrün-/Alabaster-System */
+body.entwurf .start-page--lernweg .lernweg-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 18px;
+}
+body.entwurf .start-page--lernweg .lernweg-switch-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: max(16px, 0.94rem);
+  font-weight: 600;
+  text-decoration: none;
+}
+body.entwurf .start-page--lernweg .lernweg-switch-item:hover {
+  background: var(--surface-soft);
+  border-color: var(--accent);
+}
+body.entwurf .start-page--lernweg .lernweg-switch-item.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+body.entwurf .start-page--lernweg :is(.path-details, .koennen-heft-link-block, .progress-consent, .karte-block),
+body.entwurf .start-page--einstellungen .settings-page-section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: none;
+}
+body.entwurf .start-page--einstellungen .setting-big-button[aria-pressed="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--ink);
+  font-weight: 700;
 }
 
 @media print{body.entwurf .lesson-card{padding:0}.app-footer{display:none!important}}

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Mein Lernweg – Alex &amp; Tilda</title>
+  <title>Mein Lernprofil – Mein Lernweg · Alex &amp; Tilda</title>
   <link rel="stylesheet" href="designsystem.css">
   <link rel="stylesheet" href="lernhandy/so-lerne-ich.css">
   <link rel="stylesheet" href="plattform-nav.css">
@@ -37,14 +37,15 @@
     }
     .hero-card {
       background: var(--at-surface);
-      border: 1px solid var(--at-line);
-      border-radius: var(--at-radius-lg);
+      border: 1.5px solid var(--at-line);
+      border-left: 6px solid var(--at-accent);
+      border-radius: 16px;
       padding: clamp(18px, 3vw, 28px);
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
       gap: 20px;
       align-items: center;
-      box-shadow: var(--at-shadow-sm);
+      box-shadow: none;
       margin-bottom: 22px;
     }
     .hero-fig {
@@ -146,15 +147,77 @@
     }
     .panel {
       background: var(--at-surface);
-      border: 1px solid var(--at-line);
-      border-radius: var(--at-radius-md);
+      border: 1.5px solid var(--at-line);
+      border-left: 6px solid var(--at-accent);
+      border-radius: 16px;
       padding: 20px;
-      box-shadow: var(--at-shadow-sm);
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       gap: 12px;
       min-width: 0;
       overflow-wrap: anywhere;
+    }
+    .panel-head {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+    .panel-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--at-accent-soft);
+      border: 1px solid var(--at-line);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .panel-icon img {
+      width: 24px;
+      height: 24px;
+      filter: hue-rotate(-58deg) saturate(0.55) brightness(0.86);
+    }
+    html[data-theme="dark"] .panel-icon img {
+      filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+    }
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]) .panel-icon img {
+        filter: hue-rotate(-58deg) saturate(0.45) brightness(1.65);
+      }
+    }
+    .panel-head-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .uebersicht-liste {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .uebersicht-punkt {
+      background: var(--at-surface-soft);
+      border: 1px solid var(--at-line);
+      border-left: 4px solid var(--at-accent);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .uebersicht-punkt strong {
+      color: var(--at-ink);
+      font-size: 1rem;
+    }
+    .uebersicht-punkt span {
+      color: var(--at-ink-soft);
+      font-size: 0.92rem;
     }
     .panel h2 {
       margin: 0;
@@ -321,6 +384,9 @@
       padding-top: 6px;
     }
     .print-only { display: none; }
+    #ml-sicherheits-hinweis[hidden] { display: none !important; }
+    .ml-gesperrt .grid-cards,
+    .ml-gesperrt #ml-print-btn { display: none !important; }
     @media (max-width: 820px) {
       .hero-card { grid-template-columns: 1fr; }
       .hero-fig { width: 76px; height: 76px; }
@@ -328,6 +394,8 @@
     }
     @media print {
       .no-print { display: none !important; }
+      .ml-gesperrt .grid-cards, .ml-druck-gesperrt .grid-cards { display: none !important; }
+      .ml-druck-gesperrt #ml-druck-hinweis { display: block !important; }
       .print-only { display: block; margin-top: 16px; }
       body { background: #ffffff; color: #000000; }
       .panel, .hero-card { box-shadow: none; border-color: #cccccc; break-inside: avoid; }
@@ -348,35 +416,61 @@
     <section class="hero-card" aria-labelledby="ml-title">
       <img class="hero-fig" id="ml-companion-img" src="assets/figures/alex-tilda-erfolg.webp" alt="Alex und Tilda begleiten deinen Lernweg" width="96" height="96">
       <div class="hero-copy">
-        <h1 id="ml-title">Mein Lernweg</h1>
-        <p id="ml-companion-text">Du bestimmst das Tempo. Hier sammelst du in Ruhe deine Ziele, deine ausprobierten Übungen und dein eigenes Könnens-Heft — ohne Punkte und ohne Pflicht.</p>
+        <h1 id="ml-title">Mein Lernprofil</h1>
+        <p id="ml-companion-text">Du bestimmst das Tempo. Hier hältst du deine persönlichen Ziele, deine Aktivitäten und deine eigene Einschätzung fest — ohne Punkte, ohne Noten und ohne Pflicht.</p>
         <div class="sli-row no-print">
           <span id="ml-sli-eigen" class="ml-sli-teil" hidden>Deine Einstellung: <strong id="ml-sli-summary"></strong></span>
           <span id="ml-sli-vor" class="ml-sli-teil">Voreinstellung: <strong id="ml-sli-vor-liste">Gib mir Hilfen dazu. · Leichte Sprache · Lesen und Hören</strong></span>
         </div>
-        <div class="actions-row no-print" style="margin-top: 12px;">
-          <a class="btn-soft" href="index.html#lernweg">Zum App-Lernweg (Fortschritt, Regel-Karte &amp; Großes Quiz)</a>
-        </div>
+        <nav class="actions-row no-print" style="margin-top: 12px;" aria-label="Ansichten unter Mein Lernweg">
+          <a class="btn-soft" href="index.html#lernweg">← Fortschritt, Regeln &amp; Üben (Lern-App)</a>
+          <span class="btn-soft" aria-current="page" id="ml-nav-current" style="background:var(--at-accent-soft);border-color:var(--at-accent);color:var(--at-accent-dark);">Mein Lernprofil</span>
+        </nav>
       </div>
     </section>
 
+    <section id="ml-sicherheits-hinweis" class="panel" hidden tabindex="-1" aria-live="polite" aria-labelledby="ml-sicherheit-titel">
+      <div class="panel-head">
+        <span class="panel-icon" aria-hidden="true"><img src="assets/pictograms/lernweg.svg" alt="" width="24" height="24"></span>
+        <div class="panel-head-copy">
+          <span class="badge-kind">Datenschutz</span>
+          <h2 id="ml-sicherheit-titel">Bitte zuerst dein Zeichen wählen</h2>
+        </div>
+      </div>
+      <p id="ml-sicherheit-text">Auf diesem geteilten Gerät ist dein Lernprofil nach einer Pause oder nach einem Wechsel geschützt. Öffne die Lern-App und wähle dein Zeichen, bevor du deine persönlichen Angaben siehst oder druckst.</p>
+      <div class="actions-row no-print">
+        <a id="ml-sicherheit-link" class="btn-soft" href="index.html">Zur Lern-App: Zeichen wählen</a>
+      </div>
+    </section>
+
+    <p id="ml-druck-hinweis" hidden>Deine persönlichen Angaben können gerade nicht gedruckt werden.</p>
     <div class="grid-cards">
       <section class="panel" aria-labelledby="ml-ziele-titel">
-        <span class="badge-kind">1 · Freiwillige Ziele</span>
-        <h2 id="ml-ziele-titel">Was möchtest du als Nächstes ausprobieren?</h2>
-        <p>Wähle bis zu drei Ziele für dich aus. Du kannst sie jederzeit wieder abwählen.</p>
+        <div class="panel-head">
+          <span class="panel-icon" aria-hidden="true"><img src="assets/pictograms/lernweg.svg" alt="" width="24" height="24"></span>
+          <div class="panel-head-copy">
+            <span class="badge-kind" id="ml-ziele-badge">1 · Freiwillige Auswahl</span>
+            <h2 id="ml-ziele-titel">Meine Ziele</h2>
+          </div>
+        </div>
+        <p id="ml-ziele-desc">Wähle bis zu drei Themen oder Schritte für dich aus. Du kannst sie jederzeit wieder abwählen.</p>
         <div class="goal-pills" id="ml-goal-pills"></div>
         <div id="ml-chosen-goals"></div>
       </section>
 
       <section class="panel" aria-labelledby="ml-geuebt-titel">
-        <span class="badge-kind">2 · Ausprobiert (ohne Bewertung)</span>
-        <h2 id="ml-geuebt-titel">Ausprobierte Übungen &amp; Wiederholen</h2>
-        <p>Eine ausprobierte Übung heißt: Du hast sie dir angesehen. Du kannst jede Übung jederzeit freiwillig wiederholen.</p>
-        <div id="ml-geuebt-body">
-          <p>Noch nichts gestartet – das ist völlig in Ordnung. Fang einfach mit einer ersten Lage an.</p>
+        <div class="panel-head">
+          <span class="panel-icon" aria-hidden="true"><img src="assets/pictograms/handy.svg" alt="" width="24" height="24"></span>
+          <div class="panel-head-copy">
+            <span class="badge-kind" id="ml-geuebt-badge">2 · Ausprobiert (ohne Bewertung)</span>
+            <h2 id="ml-geuebt-titel">Meine Aktivitäten</h2>
+          </div>
         </div>
-        <div class="notice-card">
+        <p id="ml-geuebt-desc">Eine ausprobierte Übung heißt: Du hast sie dir angesehen. Du kannst jede Übung jederzeit freiwillig wiederholen.</p>
+        <div id="ml-geuebt-body">
+          <p id="ml-geuebt-leer">Noch nichts gestartet – das ist völlig in Ordnung. Fang einfach mit einer ersten Lage an.</p>
+        </div>
+        <div class="notice-card" id="ml-geuebt-hinweis">
           <strong>Mein Handy daneben (freiwillig):</strong> Nimm dein echtes Handy daneben und probiere einen kleinen Schritt direkt dort aus — zum Beispiel in den Einstellungen nachsehen, welche App deine Kontakte lesen darf.
         </div>
         <div class="actions-row no-print">
@@ -385,14 +479,38 @@
       </section>
 
       <section class="panel" aria-labelledby="ml-koennen-titel">
-        <span class="badge-kind">3 · Selbst eingeschätztes Können</span>
-        <h2 id="ml-koennen-titel">Mein Könnens-Heft</h2>
-        <p>Deine eigene Einschätzung — du entscheidest selbst, was du dir im Alltag schon zutraust.</p>
+        <div class="panel-head">
+          <span class="panel-icon" aria-hidden="true"><img src="assets/pictograms/check.svg" alt="" width="24" height="24"></span>
+          <div class="panel-head-copy">
+            <span class="badge-kind" id="ml-koennen-badge">3 · Eigene Einschätzung</span>
+            <h2 id="ml-koennen-titel">Meine Einschätzung</h2>
+          </div>
+        </div>
+        <p id="ml-koennen-desc">Deine persönliche Einschätzung — du entscheidest selbst, was du dir im Alltag schon zutraust.</p>
         <ul class="koennen-list" id="ml-koennen-list"></ul>
         <div class="custom-row no-print">
-          <label class="sr-only" for="ml-custom-satz">Eigenen Könnens-Satz ergänzen</label>
-          <input class="custom-input" id="ml-custom-satz" type="text" placeholder="Eigenen Satz für dein Heft ergänzen …" maxlength="120">
+          <label class="sr-only" for="ml-custom-satz">Eigenen Punkt für Mein Lernprofil ergänzen</label>
+          <input class="custom-input" id="ml-custom-satz" type="text" placeholder="Eigenen Punkt für dein Lernprofil ergänzen …" maxlength="120">
           <button type="button" class="btn-soft" id="ml-add-satz">Hinzufügen</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="ml-nachweis-titel">
+        <div class="panel-head">
+          <span class="panel-icon" aria-hidden="true"><img src="assets/pictograms/drucken.svg" alt="" width="24" height="24"></span>
+          <div class="panel-head-copy">
+            <span class="badge-kind" id="ml-nachweis-badge">4 · Zusammenfassung &amp; Druck</span>
+            <h2 id="ml-nachweis-titel">Meine Übersicht</h2>
+          </div>
+        </div>
+        <p id="ml-nachweis-desc">Hier siehst du deinen aktuellen Stand auf einen Blick — klar getrennt zwischen Ausprobiert, eigener Einschätzung und externer Bestätigung.</p>
+        <ul class="uebersicht-liste" id="ml-uebersicht-liste">
+          <li class="uebersicht-punkt"><strong>Ausprobiert</strong><span id="ml-ov-aktiv">Noch keine Übung markiert — ganz ohne Druck.</span></li>
+          <li class="uebersicht-punkt"><strong>Selbst eingeschätzt</strong><span id="ml-ov-selbst">Noch keine Aussage markiert.</span></li>
+          <li class="uebersicht-punkt"><strong>Unabhängig bestätigt</strong><span id="ml-ov-bestaetigt">Erfolgt nicht durch die App, sondern bei Bedarf im echten Alltag durch Begleitung oder Träger.</span></li>
+        </ul>
+        <div class="notice-card" id="ml-nachweis-box">
+          <strong>Wichtiger Unterschied:</strong> Diese Plattform vergibt keine Noten, keine Sterne und keine automatischen Zertifikate. Nachgewiesene Fähigkeiten — etwa für die Schulung als Digital-Begleiter*in — entstehen nur gemeinsam mit Begleitung oder Träger.
         </div>
         <div class="print-only" aria-hidden="true">
           <strong>Meine Notizen für das Handy zu Hause:</strong>
@@ -401,21 +519,21 @@
           <div class="print-notes-line"></div>
         </div>
         <div class="actions-row no-print">
-          <button type="button" class="btn-primary" id="ml-print-btn">Könnens-Heft drucken</button>
-        </div>
-      </section>
-
-      <section class="panel" aria-labelledby="ml-nachweis-titel">
-        <span class="badge-kind">4 · Nachgewiesene Fähigkeiten</span>
-        <h2 id="ml-nachweis-titel">Was die App nicht selbst bewertet</h2>
-        <div class="notice-card">
-          <strong>Wichtiger Unterschied:</strong> Diese App vergibt keine Noten und keine Zeugnisse. Nachgewiesene Fähigkeiten — etwa für die Schulung als Digital-Begleiter*in — entstehen nur im echten Alltag gemeinsam mit Begleitung oder Träger.
+          <button type="button" class="btn-primary" id="ml-print-btn">Mein Lernprofil drucken</button>
         </div>
       </section>
     </div>
+
+    <footer class="no-print" style="margin-top:28px;padding-top:16px;border-top:1px solid var(--at-line);display:flex;flex-wrap:wrap;gap:10px 18px;font-size:0.92rem;color:var(--at-ink-soft);">
+      <a href="ueber-alex-und-tilda.html" style="color:var(--at-accent);font-weight:700;">Über Alex &amp; Tilda</a>
+      <a href="impressum.html" style="color:var(--at-accent);font-weight:700;">Impressum</a>
+      <a href="datenschutz.html" style="color:var(--at-accent);font-weight:700;">Datenschutz</a>
+      <a href="barrierefreiheit.html" style="color:var(--at-accent);font-weight:700;">Barrierefreiheit</a>
+      <a href="sprachstufen.html" style="color:var(--at-accent);font-weight:700;">Die Sprachstufen</a>
+    </footer>
   </main>
 
-  <script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="profil-kern.js"></script><script src="lernhandy/so-lerne-ich.js"></script>
   <script src="plattform-nav.js" data-at-root=""></script>
   <script>
     (function () {
@@ -430,6 +548,102 @@
         { id: "begleiten_ueben", label: "Begleiten ohne Abnehmen", href: "lernkreis/index.html?ex=begleiten_ueben" }
       ];
 
+      const TEXTE = {
+        leicht: {
+          heroLead: "Du bestimmst das Tempo. Hier hältst du deine Ziele, deine Übungen und deine eigene Einschätzung fest. Ohne Punkte. Ohne Pflicht.",
+          zieleDesc: "Wähle bis zu 3 Ziele für dich. Du kannst sie immer wieder ändern.",
+          zieleLeer: "Noch kein Ziel gewählt. Alles in Ordnung.",
+          geuebtDesc: "Du hast eine Übung ausprobiert? Dann steht sie hier. Es gibt keine Note. Du kannst alles wiederholen.",
+          geuebtLeer: "Noch nichts gestartet. Das ist völlig in Ordnung. Fang einfach an.",
+          geuebtHandy: "Mein Handy daneben (freiwillig): Nimm dein eigenes Handy. Probiere einen kleinen Schritt direkt dort aus.",
+          koennenDesc: "Du schätzt dich selbst ein: Was traust du dir im Alltag schon zu?",
+          nachweisDesc: "Hier siehst du deinen Stand. Wir unterscheiden drei Dinge klar:",
+          nachweisBox: "Wichtiger Unterschied: Die Plattform gibt keine Noten und keine Sterne. Eine unabhängige Bestätigung gibt es nur im echten Leben mit Begleitung oder Träger."
+        },
+        einfach: {
+          heroLead: "Du bestimmst das Tempo. Hier hältst du deine persönlichen Ziele, deine Aktivitäten und deine eigene Einschätzung fest — ohne Punkte, ohne Noten und ohne Pflicht.",
+          zieleDesc: "Wähle bis zu drei Themen oder Schritte für dich aus. Du kannst sie jederzeit wieder abwählen.",
+          zieleLeer: "Noch kein Ziel gewählt — ganz wie du magst.",
+          geuebtDesc: "Eine ausprobierte Übung heißt: Du hast sie dir angesehen. Du kannst jede Übung jederzeit freiwillig wiederholen.",
+          geuebtLeer: "Noch nichts gestartet – das ist völlig in Ordnung. Fang einfach mit einer ersten Lage an.",
+          geuebtHandy: "Mein Handy daneben (freiwillig): Nimm dein echtes Handy daneben und probiere einen kleinen Schritt direkt dort aus — zum Beispiel in den Einstellungen nachsehen, welche App deine Kontakte lesen darf.",
+          koennenDesc: "Deine persönliche Einschätzung — du entscheidest selbst, was du dir im Alltag schon zutraust.",
+          nachweisDesc: "Hier siehst du deinen aktuellen Stand auf einen Blick — klar getrennt zwischen Ausprobiert, eigener Einschätzung und externer Bestätigung.",
+          nachweisBox: "Wichtiger Unterschied: Diese Plattform vergibt keine Noten, keine Sterne und keine automatischen Zertifikate. Nachgewiesene Fähigkeiten — etwa für die Schulung als Digital-Begleiter*in — entstehen nur gemeinsam mit Begleitung oder Träger."
+        },
+        alltag: {
+          heroLead: "Du bestimmst dein Lerntempo selbst. In deinem Lernprofil sammelst du persönliche Ziele, ausprobierte Übungen und eigene Einschätzungen — ohne Punkte, Noten oder Verpflichtung.",
+          zieleDesc: "Wähle bis zu drei persönliche Lernziele aus. Deine Auswahl lässt sich jederzeit ändern.",
+          zieleLeer: "Bisher kein Ziel ausgewählt — du kannst jederzeit eines festlegen.",
+          geuebtDesc: "Hier erscheinen Übungen, die du dir angesehen oder ausprobiert hast. Sie werden nicht bewertet und lassen sich beliebig oft wiederholen.",
+          geuebtLeer: "Bisher wurden keine Übungen gestartet — wähle einfach ein passendes Thema zum Einstieg.",
+          geuebtHandy: "Mein Handy daneben (freiwillig): Probiere einzelne Schritte direkt an deinem eigenen Smartphone aus — zum Beispiel in den App-Berechtigungen.",
+          koennenDesc: "Deine persönliche Selbsteinschätzung — du hältst fest, welche digitalen Schritte dir im Alltag bereits sicher gelingen.",
+          nachweisDesc: "Kompakter Überblick über deinen aktuellen Stand — sauber getrennt nach ausprobierten Übungen, eigener Einschätzung und externer Bestätigung.",
+          nachweisBox: "Wichtiger Unterschied: Diese Plattform vergibt weder Noten oder Sterne noch automatische Zertifikate. Eine unabhängige Bestätigung von Kompetenzen erfolgt ausschließlich im echten Alltag durch Begleitung oder Träger."
+        }
+      };
+
+      function getAktuelleSprache() {
+        const s = window.SoLerneIch && typeof window.SoLerneIch.getState === "function" ? window.SoLerneIch.getState() : null;
+        const lang = s && s.sprache;
+        return (lang === "einfach" || lang === "alltag") ? lang : "leicht";
+      }
+
+      function applyLanguageTexts() {
+        const t = TEXTE[getAktuelleSprache()] || TEXTE.leicht;
+        const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+        setTxt("ml-companion-text", t.heroLead);
+        setTxt("ml-ziele-desc", t.zieleDesc);
+        setTxt("ml-geuebt-desc", t.geuebtDesc);
+        setTxt("ml-koennen-desc", t.koennenDesc);
+        setTxt("ml-nachweis-desc", t.nachweisDesc);
+        const handyBox = document.getElementById("ml-geuebt-hinweis");
+        if (handyBox) {
+          const parts = t.geuebtHandy.split(":");
+          handyBox.innerHTML = "";
+          const b = document.createElement("strong");
+          b.textContent = parts[0] + ":";
+          handyBox.appendChild(b);
+          handyBox.appendChild(document.createTextNode(parts.slice(1).join(":")));
+        }
+        const nachweisBox = document.getElementById("ml-nachweis-box");
+        if (nachweisBox) {
+          const parts = t.nachweisBox.split(":");
+          nachweisBox.innerHTML = "";
+          const b = document.createElement("strong");
+          b.textContent = parts[0] + ":";
+          nachweisBox.appendChild(b);
+          nachweisBox.appendChild(document.createTextNode(parts.slice(1).join(":")));
+        }
+        const leerEl = document.getElementById("ml-geuebt-leer");
+        if (leerEl) leerEl.textContent = t.geuebtLeer;
+      }
+
+      let aktiveAktivitaetenZahl = 0;
+      function renderUebersicht() {
+        const aktivEl = document.getElementById("ml-ov-aktiv");
+        const selbstEl = document.getElementById("ml-ov-selbst");
+        const zieleZahl = Array.isArray(p3.goals) ? p3.goals.length : 0;
+        const koennenZahl = p3.checked && typeof p3.checked === "object"
+          ? Object.values(p3.checked).filter(Boolean).length : 0;
+        if (aktivEl) {
+          aktivEl.textContent = aktiveAktivitaetenZahl > 0
+            ? `${aktiveAktivitaetenZahl} ${aktiveAktivitaetenZahl === 1 ? "Übung" : "Übungen"} angesehen oder ausprobiert — ohne Bewertung.`
+            : "Noch keine Übung markiert — ganz ohne Druck.";
+        }
+        if (selbstEl) {
+          const teile = [];
+          teile.push(koennenZahl > 0
+            ? `${koennenZahl} ${koennenZahl === 1 ? "Aussage" : "Aussagen"} selbst eingeschätzt`
+            : "noch keine Aussage markiert");
+          teile.push(zieleZahl > 0
+            ? `${zieleZahl} ${zieleZahl === 1 ? "Ziel" : "Ziele"} gewählt`
+            : "kein Ziel gewählt");
+          selbstEl.textContent = teile.join(" · ");
+        }
+      }
+
       const DEFAULT_KOENNEN = [
         { id: "k1", text: "Ich lege auf, wenn mich am Telefon jemand nach einem Code fragt." },
         { id: "k2", text: "Ich überlege zuerst: Braucht diese App meine Kontakte oder Fotos wirklich?" },
@@ -438,11 +652,15 @@
       ];
 
       // Sitzungs-Zustand gemeinsam über SoLerneIch (AT_SLI_V1 in window.name, kein localStorage/sessionStorage!)
+      function leererSitzungsstand(token) {
+        return { profilToken: token || null, companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] };
+      }
+
       function readSessionState() {
         if (window.SoLerneIch && typeof window.SoLerneIch.getMeinLernweg === "function") {
           return window.SoLerneIch.getMeinLernweg();
         }
-        return { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] };
+        return leererSitzungsstand(null);
       }
 
       function writeSessionState(next) {
@@ -469,7 +687,8 @@
 
         const activeGoals = ZIELE.filter((z) => p3.goals.includes(z.id));
         if (!activeGoals.length) {
-          chosenWrap.innerHTML = `<p>Noch kein Ziel gewählt — ganz wie du magst.</p>`;
+          const t = TEXTE[getAktuelleSprache()] || TEXTE.leicht;
+          chosenWrap.innerHTML = `<p>${t.zieleLeer}</p>`;
         } else {
           chosenWrap.innerHTML = `<ul class="done-list">${activeGoals.map((z) =>
             `<li><a class="done-chip" href="${z.href}">→ ${z.label}</a></li>`
@@ -534,7 +753,44 @@
         wa_ruhe: "Ruhe in der Gruppe"
       };
 
-      function renderOptionalConsentProgress() {
+      /* PS1: Freigabe, Sperre und Rückkehr-Zeit kommen ausschließlich aus dem
+         Profil-Kern (profil-kern.js). Diese Seite schreibt `weg-seit` nicht
+         mehr. Ohne Kern gilt bei vorhandenen Profilen: gesperrt. */
+      let letzterProfilToken = null;
+      let aktuellGesperrt = false;
+      const PK_OK = typeof window.PK !== "undefined" && window.PK && window.PK.VERSION === 2;
+
+      function ermittleProfilFreigabe() {
+        if (!PK_OK) return { erlaubt: false, grund: "speicher", token: null, profId: null };
+        try {
+          const z = window.PK.pruefe("mein-lernweg");
+          if (window.PK.lernstandVerborgen()) return { erlaubt: false, grund: "speicher", token: null, profId: null };
+          if (z.status === "ohneProfil") return { erlaubt: true, grund: "einzeln", token: "__einzeln__", profId: null };
+          if (z.status !== "ok") {
+            const grund = (z.grund === "geloescht" || z.grund === "unklar") ? "profil-unklar" : "gesperrt";
+            return { erlaubt: false, grund, token: null, profId: null };
+          }
+          const prof = window.PK.profil(z.id);
+          if (!prof) return { erlaubt: false, grund: "profil-unklar", token: null, profId: null };
+          const resetTs = (typeof prof.resetTs === "number" && Number.isFinite(prof.resetTs)) ? prof.resetTs : 0;
+          return { erlaubt: true, grund: "ok", token: prof.id + ":" + resetTs, profId: prof.id };
+        } catch (e) {
+          return { erlaubt: false, grund: "fehler", token: null, profId: null };
+        }
+      }
+
+      function holeAktivenProfilLernstand(freigabe) {
+        const aktivFreigabe = freigabe || ermittleProfilFreigabe();
+        if (!aktivFreigabe.erlaubt || !PK_OK) return null;
+        try {
+          const ls = window.PK.lernstandLesen(aktivFreigabe.profId);
+          return (ls && typeof ls === "object" && ls.enabled === true) ? ls : null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function renderOptionalConsentProgress(freigabe) {
         const body = document.getElementById("ml-geuebt-body");
         if (!body) return;
         const items = [];
@@ -546,25 +802,40 @@
             items.push({ titel: entry.titel || entry.id, href: entry.href || "index.html#themen" });
           }
         });
-        if (typeof localStorage !== "undefined") {
-          try {
-            const raw = localStorage.getItem("lernstand");
-            const ls = raw ? JSON.parse(raw) : null;
-            if (ls && ls.enabled === true && ls.handyWege) {
-              Object.keys(ls.handyWege).forEach((k) => {
-                if (ls.handyWege[k] && ls.handyWege[k].abgeschlossen && !seen.has(k)) {
-                  seen.add(k);
-                  items.push({
-                    titel: WEG_TITEL[k] || "Übung im Handy",
-                    href: `index.html#handy:${encodeURIComponent(k)}`
-                  });
-                }
+        const ls = holeAktivenProfilLernstand(freigabe);
+        if (ls && ls.handyWege && typeof ls.handyWege === "object") {
+          Object.keys(ls.handyWege).forEach((k) => {
+            if (ls.handyWege[k] && ls.handyWege[k].abgeschlossen && !seen.has(k)) {
+              seen.add(k);
+              items.push({
+                titel: WEG_TITEL[k] || "Übung im Handy",
+                href: `index.html#handy:${encodeURIComponent(k)}`
               });
             }
-          } catch (e) {}
+          });
         }
-        if (!items.length) return;
+        if (ls && ls.postfachWege && typeof ls.postfachWege === "object") {
+          Object.keys(ls.postfachWege).forEach((k) => {
+            if (ls.postfachWege[k] && ls.postfachWege[k].abgeschlossen && !seen.has("pf_" + k)) {
+              seen.add("pf_" + k);
+              items.push({
+                titel: "E-Mail-Übung (" + k + ")",
+                href: `index.html#postfach:${encodeURIComponent(k)}`
+              });
+            }
+          });
+        }
         body.textContent = "";
+        aktiveAktivitaetenZahl = items.length;
+        if (!items.length) {
+          const t = TEXTE[getAktuelleSprache()] || TEXTE.leicht;
+          const leer = document.createElement("p");
+          leer.id = "ml-geuebt-leer";
+          leer.textContent = t.geuebtLeer;
+          body.appendChild(leer);
+          renderUebersicht();
+          return;
+        }
         const p = document.createElement("p");
         p.textContent = "Ausprobiert (freiwillig wiederholen):";
         const ul = document.createElement("ul");
@@ -580,30 +851,109 @@
         });
         body.appendChild(p);
         body.appendChild(ul);
+        renderUebersicht();
+      }
+
+      function bereinigePersoenlicheAnsicht(token, hinweisAnzeigen, auchSitzungLoeschen) {
+        p3 = leererSitzungsstand(token);
+        aktiveAktivitaetenZahl = 0;
+        if (auchSitzungLoeschen) {
+          writeSessionState(p3);
+        }
+        const idsToClear = ["ml-chosen-goals", "ml-geuebt-body", "ml-koennen-list", "ml-goal-pills"];
+        idsToClear.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = "";
+        });
+        const customInputEl = document.getElementById("ml-custom-satz");
+        if (customInputEl) customInputEl.value = "";
+        const aktivEl = document.getElementById("ml-ov-aktiv");
+        if (aktivEl) aktivEl.textContent = "";
+        const selbstEl = document.getElementById("ml-ov-selbst");
+        if (selbstEl) selbstEl.textContent = "";
+        const hinweis = document.getElementById("ml-sicherheits-hinweis");
+        if (hinweis) hinweis.hidden = !hinweisAnzeigen;
+        if (hinweisAnzeigen) {
+          document.documentElement.classList.add("ml-gesperrt");
+        } else {
+          document.documentElement.classList.remove("ml-gesperrt");
+        }
+      }
+
+      function pruefeUndSynchronisiereLernprofil(ausloeser) {
+        const freigabe = ermittleProfilFreigabe();
+        if (!freigabe.erlaubt) {
+          aktuellGesperrt = true;
+          letzterProfilToken = null;
+          const sitzungLoeschen = freigabe.grund === "profil-unklar" || freigabe.grund === "liste-ungueltig";
+          bereinigePersoenlicheAnsicht(null, true, sitzungLoeschen);
+          return false;
+        }
+        const activeEl = document.activeElement;
+        const fokusGoal = (activeEl && activeEl.dataset && activeEl.dataset.goal) ? activeEl.dataset.goal : null;
+        const fokusKoennen = (activeEl && activeEl.dataset && activeEl.dataset.koennen) ? activeEl.dataset.koennen : null;
+        aktuellGesperrt = false;
+        document.documentElement.classList.remove("ml-gesperrt");
+        const hinweis = document.getElementById("ml-sicherheits-hinweis");
+        if (hinweis) hinweis.hidden = true;
+        p3 = readSessionState();
+        letzterProfilToken = freigabe.token;
+        applyLanguageTexts();
+        renderGoals();
+        renderKoennen();
+        updateSliSummary();
+        renderOptionalConsentProgress(freigabe);
+        renderUebersicht();
+        if (fokusGoal) {
+          const btn = document.querySelector(`[data-goal="${fokusGoal}"]`);
+          if (btn) btn.focus();
+        } else if (fokusKoennen) {
+          const btn = document.querySelector(`[data-koennen="${fokusKoennen}"]`);
+          if (btn) btn.focus();
+        }
+        return true;
       }
 
       document.addEventListener("click", (e) => {
         const goalBtn = e.target.closest("[data-goal]");
         if (goalBtn) {
           const gid = goalBtn.dataset.goal;
+          if (!pruefeUndSynchronisiereLernprofil("aktion")) {
+            const link = document.getElementById("ml-sicherheit-link");
+            if (link) link.focus();
+            return;
+          }
           if (p3.goals.includes(gid)) {
             p3.goals = p3.goals.filter((g) => g !== gid);
           } else if (p3.goals.length < 3) {
             p3.goals = p3.goals.concat([gid]);
           } else {
             announce("Du hast bereits drei Ziele gewählt. Tippe ein Ziel ab, um Platz zu machen.");
+            const btn = document.querySelector(`[data-goal="${gid}"]`);
+            if (btn) btn.focus();
             return;
           }
           writeSessionState(p3);
           renderGoals();
+          renderUebersicht();
+          const neuBtn = document.querySelector(`[data-goal="${gid}"]`);
+          if (neuBtn) neuBtn.focus();
           return;
         }
         const kBtn = e.target.closest("[data-koennen]");
         if (kBtn) {
           const kid = kBtn.dataset.koennen;
+          if (!pruefeUndSynchronisiereLernprofil("aktion")) {
+            const link = document.getElementById("ml-sicherheit-link");
+            if (link) link.focus();
+            return;
+          }
           p3.checked[kid] = !p3.checked[kid];
           writeSessionState(p3);
           renderKoennen();
+          renderUebersicht();
+          const neuKBtn = document.querySelector(`[data-koennen="${kid}"]`);
+          if (neuKBtn) neuKBtn.focus();
         }
       });
 
@@ -611,29 +961,82 @@
       const customInput = document.getElementById("ml-custom-satz");
       if (addBtn && customInput) {
         addBtn.addEventListener("click", () => {
+          if (!pruefeUndSynchronisiereLernprofil("aktion")) {
+            const link = document.getElementById("ml-sicherheit-link");
+            if (link) link.focus();
+            return;
+          }
           const val = customInput.value.trim();
           if (!val) return;
           p3.custom = p3.custom.concat([val]);
-          p3.checked["c_" + (p3.custom.length - 1)] = true;
+          const newId = "c_" + (p3.custom.length - 1);
+          p3.checked[newId] = true;
           customInput.value = "";
           writeSessionState(p3);
           renderKoennen();
-          announce("Eigener Satz im Könnens-Heft ergänzt.");
+          renderUebersicht();
+          announce("Eigener Punkt in Mein Lernprofil ergänzt.");
+          customInput.focus();
         });
       }
 
-      renderGoals();
-      renderKoennen();
-      updateSliSummary();
-      renderOptionalConsentProgress();
+      pruefeUndSynchronisiereLernprofil("init");
+      if (PK_OK) window.PK.bereit.then(() => pruefeUndSynchronisiereLernprofil("bereit"));
 
       if (window.SoLerneIch && typeof window.SoLerneIch.onChange === "function") {
-        window.SoLerneIch.onChange(updateSliSummary);
+        window.SoLerneIch.onChange(() => {
+          if (!aktuellGesperrt) {
+            updateSliSummary();
+            applyLanguageTexts();
+            renderGoals();
+            renderOptionalConsentProgress();
+          }
+        });
       }
+
+      /* Abwesenheit merkt der Profil-Kern selbst; hier nur neu prüfen. */
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) pruefeUndSynchronisiereLernprofil("visible");
+      });
+      window.addEventListener("storage", () => pruefeUndSynchronisiereLernprofil("storage"));
+      window.addEventListener("focus", () => pruefeUndSynchronisiereLernprofil("focus"));
+      window.addEventListener("pageshow", () => pruefeUndSynchronisiereLernprofil("pageshow"));
+      if (PK_OK) window.PK.beiAenderung(() => pruefeUndSynchronisiereLernprofil("kern"));
+      let druckBestaetigt = false;
+      window.addEventListener("beforeprint", () => {
+        const ok = druckBestaetigt && PK_OK && window.PK.imAusdruckFreigegeben() && pruefeUndSynchronisiereLernprofil("beforeprint");
+        document.documentElement.classList.toggle("ml-druck-gesperrt", !ok);
+        if (!ok) {
+          announce("Deine persönlichen Angaben sind geschützt. Nutze zum Drucken den Knopf auf der Seite.");
+        }
+      });
+
+      document.querySelector('a[href="index.html#lernweg"]')?.addEventListener("click", async event => {
+        if (!PK_OK || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+        const href = event.currentTarget.href;
+        event.preventDefault();
+        if (await window.PK.navigationVorbereiten(href)) location.assign(href);
+        else location.assign("index.html#lernweg");
+      });
+
+      window.addEventListener("afterprint", () => {
+        druckBestaetigt = false;
+        document.documentElement.classList.remove("ml-druck-gesperrt");
+      });
 
       const printBtn = document.getElementById("ml-print-btn");
       if (printBtn) {
-        printBtn.addEventListener("click", () => window.print());
+        printBtn.addEventListener("click", async () => {
+          const ok = PK_OK && await window.PK.aktualisieren() && window.PK.imAusdruckFreigegeben() && pruefeUndSynchronisiereLernprofil("print-btn");
+          if (!ok) {
+            announce("Deine persönlichen Angaben sind geschützt. Nutze zum Drucken den Knopf auf der Seite.");
+            const link = document.getElementById("ml-sicherheit-link");
+            if (link) link.focus();
+            return;
+          }
+          druckBestaetigt = true;
+          try { window.print(); } finally { druckBestaetigt = false; }
+        });
       }
     })();
   </script>

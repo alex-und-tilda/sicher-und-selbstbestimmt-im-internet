@@ -1,0 +1,1549 @@
+/* ==========================================================================
+   Alex & Tilda – Smartphone-Gestaltung für das Lern-Handy (.lh-geraet)
+   Reine visuelle Erweiterung des vorhandenen Bausteins docs/lernhandy/lernhandy.js
+   in der verbindlichen Farbpalette Waldgrün / Alabaster (Hell & Dunkel).
+
+   Gekapselt über die Opt-in-Klasse .lh-geraet:
+   - Eingebettet in docs/index.html (.lh-geraet .lh.eingebettet.farben-seite)
+   - Direkt in kurzweg.html und postfach.html (.lh-geraet.lh:not(.eingebettet))
+   Erhält vorhandene Steuerungsleisten, Navigation, Lernkreis, alle 34 Lernwege,
+   alle 7 Postfach-Szenarien und führt keine neuen sichtbaren Texte ein.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Tokens (ausschließlich über Design-Tokens aus designsystem.css / styles.css / lernhandy.css)
+   -------------------------------------------------------------------------- */
+
+:is(.lh-geraet.lh, .lh-geraet .lh) {
+  --gut-text: var(--good-text, var(--gut));
+  --problem-text: var(--problem);
+  --vorsicht-text: var(--vorsicht);
+
+  --lh-radius-sm: var(--at-radius-sm, var(--radius-s, 12px));
+  --lh-radius-md: var(--at-radius-md, var(--radius-m, 18px));
+  --lh-radius-lg: var(--at-radius-lg, var(--radius-l, 24px));
+  --lh-shadow-btn: var(--at-shadow-sm, var(--shadow-small));
+  --lh-surface-hover: var(--akzent-hell);
+  --lh-border-interactive: var(--leise);
+
+  --lh-chassis-bg: var(--geraet);
+  --lh-chassis-edge: var(--linie);
+  --lh-chassis-btn: var(--leise);
+  --lh-chassis-ring-light: var(--linie);
+  --lh-chassis-ring-mid: var(--lh-chassis-edge);
+  --lh-chassis-ring-dark: var(--lh-chassis-bg);
+  --lh-screen-top-bg: var(--flaeche);
+  --lh-screen-bg: var(--anzeige);
+  --lh-gesture-bar: var(--leise);
+  --lh-island-bg: var(--geraet);
+  --lh-notif-bg: var(--flaeche);
+  --lh-notif-border: var(--linie);
+
+  /* § 10a Punkt 4: deckende, flache Hintergrundflächen ohne Verläufe hinter Text */
+  --lh-call-solid: var(--anruf-bg);
+  --lh-call-bg: var(--lh-call-solid);
+  --lh-call-soft: var(--anruf-leise);
+  --lh-call-text: var(--anruf-tinte);
+  --lh-call-on-soft: var(--anruf-bg);
+  --lh-video-bg: var(--anruf-bg);
+  --lh-video-bar: var(--anruf-leise);
+  --lh-video-on-bar: var(--anruf-bg);
+
+  /* § 10a Punkt 4: reine Konturringe ohne Unschärfe-Schlagschatten */
+  --lh-phone-frame:
+    inset 0 0 0 1.5px var(--lh-chassis-ring-dark),
+    0 0 0 2px var(--lh-chassis-ring-light),
+    0 0 0 3.5px var(--lh-chassis-ring-mid),
+    0 0 0 4.5px var(--lh-chassis-ring-dark);
+
+  width: 100%;
+  max-width: 100%;
+  color: var(--tinte);
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) {
+    --lh-border-interactive: color-mix(in srgb, var(--akzent) 65%, var(--linie));
+    --lh-chassis-edge: color-mix(in srgb, var(--lh-chassis-bg) 75%, var(--akzent));
+    --lh-chassis-btn: color-mix(in srgb, var(--lh-chassis-bg) 55%, var(--linie));
+  }
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh.eingebettet) {
+  background: transparent;
+}
+
+:is(.lh-geraet.lh:not(.eingebettet)) {
+  background: var(--seite);
+}
+
+/* Manueller und automatischer Dunkelmodus (Spezifität > .lh.eingebettet.farben-seite) */
+html[data-theme="dark"] :is(.lh-geraet.lh, .lh-geraet .lh) {
+  --lh-chassis-bg: var(--at-bg, var(--bg));
+  --lh-call-solid: var(--flaeche);
+  --lh-call-bg: var(--lh-call-solid);
+  --lh-call-text: var(--tinte);
+  --lh-call-on-soft: var(--akzent-tinte);
+  --lh-video-bg: var(--flaeche);
+  --lh-video-on-bar: var(--akzent-tinte);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) :is(.lh-geraet.lh, .lh-geraet .lh) {
+    --lh-chassis-bg: var(--at-bg, var(--bg));
+    --lh-call-solid: var(--flaeche);
+    --lh-call-bg: var(--lh-call-solid);
+    --lh-call-text: var(--tinte);
+    --lh-call-on-soft: var(--akzent-tinte);
+    --lh-video-bg: var(--flaeche);
+    --lh-video-on-bar: var(--akzent-tinte);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   1. Bühne & Aufgabenbereich (ruhige Karte neben/über dem Smartphone)
+   -------------------------------------------------------------------------- */
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .buehne {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  padding: 12px 10px 20px;
+  justify-items: stretch;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
+}
+
+:is(.lh-geraet.lh:not(.eingebettet)) .buehne {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px 20px 24px;
+}
+
+@media (min-width: 620px) and (max-width: 899px) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) .buehne {
+    justify-items: center;
+    gap: 22px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich {
+    width: 100%;
+    max-width: 42rem;
+  }
+}
+
+/* Zweispaltiges Layout nur ab 900 px und wenn lernhandy.js .breit setzt */
+@media (min-width: 900px) {
+  .lh-geraet .lh.eingebettet.breit .buehne {
+    grid-template-columns: minmax(15rem, 1fr) clamp(336px, 46%, 380px);
+    gap: 22px;
+    align-items: start;
+    padding: 10px 10px 16px;
+  }
+
+  .lh-geraet.lh:not(.eingebettet).breit .buehne {
+    grid-template-columns: minmax(16rem, 1fr) clamp(360px, 38vw, 404px);
+    gap: 28px;
+    align-items: start;
+    padding: 20px 20px 28px;
+  }
+
+  .lh-geraet .lh.eingebettet.breit .lernbereich {
+    position: static;
+    order: 0;
+    min-width: 0;
+  }
+
+  .lh-geraet.lh:not(.eingebettet).breit .lernbereich {
+    position: sticky;
+    top: 16px;
+    order: 0;
+    min-width: 0;
+  }
+
+  :is(.lh-geraet.lh.breit, .lh-geraet .lh.breit) .handy {
+    order: 0;
+  }
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--lh-radius-md);
+  padding: clamp(14px, 2vw, 20px);
+  box-shadow: none;
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+/* Im 620–640 px Bereich lernhandy.css flow-root gezielt auf Grid halten */
+:is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich > * + * {
+  margin-top: 0;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich .etikett {
+  color: var(--akzent);
+  font-size: 0.94rem;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich .gross {
+  font-size: clamp(1.06rem, 1.5vw, 1.24rem);
+  line-height: 1.45;
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich .hinweis {
+  border-left: 4px solid var(--akzent);
+  padding: 6px 10px 6px 12px;
+  color: var(--tinte);
+  background: var(--anzeige);
+  border-radius: 0 var(--lh-radius-sm) var(--lh-radius-sm) 0;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .gehoert {
+  background: var(--vorsicht-hell);
+  border: 1px solid var(--vorsicht);
+  border-left-width: 5px;
+  border-radius: var(--lh-radius-sm);
+  padding: 12px 14px;
+  color: var(--tinte);
+  box-shadow: none;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .gehoert .wer {
+  color: var(--vorsicht-text);
+  margin-bottom: 4px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich details {
+  border-top: 1px solid var(--linie);
+  padding-top: 8px;
+}
+
+/* Piktogramm-Schutz: auf dunklen Knöpfen & im Dunkelmodus immer lesbarer heller Chip */
+:is(.lh-geraet.lh, .lh-geraet .lh) .typ-anruf .anruf-knopf img.pikto,
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf .rund img.pikto,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-ordner-tab.aktiv img.pikto,
+:is(.lh-geraet.lh, .lh-geraet .lh) .haupt img.pikto,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-knopf.haupt img.pikto,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-knopf.haupt img.pikto,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-knopf.haupt img.pikto,
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-knopf.haupt img.pikto {
+  background: var(--pictogram-backdrop, var(--anruf-tinte));
+  border-radius: 6px;
+  padding: 2px;
+  filter: none !important;
+}
+
+html[data-theme="dark"] :is(.lh-geraet.lh, .lh-geraet .lh) img[src*="pictograms/"] {
+  background: var(--pictogram-backdrop, var(--anruf-tinte));
+  border-radius: 6px;
+  padding: 2px;
+  filter: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) :is(.lh-geraet.lh, .lh-geraet .lh) img[src*="pictograms/"] {
+    background: var(--pictogram-backdrop, var(--anruf-tinte));
+    border-radius: 6px;
+    padding: 2px;
+    filter: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Realistischer Smartphone-Rahmen (Tablet & Desktop >= 620 px)
+   -------------------------------------------------------------------------- */
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese {
+  position: relative;
+  width: 100%;
+  max-width: 404px;
+  height: auto;
+  min-height: 520px;
+  padding: 12px;
+  margin-inline: auto;
+  border-radius: 52px;
+  border: 2px solid var(--lh-chassis-edge);
+  background: var(--lh-chassis-bg);
+  box-shadow: var(--lh-phone-frame);
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(17px, 0.92rem, 23px);
+  line-height: 1.42;
+}
+
+.lh-geraet .lh.eingebettet .handy,
+.lh-geraet .lh.eingebettet .handy.lese {
+  max-width: 392px;
+}
+
+/* Hardware-Tasten links (Aktion, Lauter/Leiser) & rechts (Ein/Aus) */
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 108px;
+  width: 3.5px;
+  height: 146px;
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(
+    180deg,
+    var(--lh-chassis-btn) 0%,
+    var(--lh-chassis-btn) 15%,
+    transparent 15%,
+    transparent 27%,
+    var(--lh-chassis-btn) 27%,
+    var(--lh-chassis-btn) 58%,
+    transparent 58%,
+    transparent 67%,
+    var(--lh-chassis-btn) 67%,
+    var(--lh-chassis-btn) 98%,
+    transparent 98%
+  );
+  pointer-events: none;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 158px;
+  width: 3.5px;
+  height: 74px;
+  border-radius: 0 3px 3px 0;
+  background: var(--lh-chassis-btn);
+  pointer-events: none;
+}
+
+/* Statusleiste & Kamera-Insel (nutzt vorhandenes aria-hidden="true" Markup aus lernhandy.js) */
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .handy-kopf {
+  flex: none;
+  height: 44px;
+  padding: 10px 22px 6px;
+  border-radius: 40px 40px 0 0;
+  background: var(--lh-screen-top-bg);
+  color: var(--tinte);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-bottom: 0;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf > span:first-child {
+  justify-self: start;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf .kamera {
+  position: relative;
+  width: 96px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--lh-island-bg);
+  border: 1px solid var(--lh-chassis-edge);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf .kamera::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: var(--lh-chassis-bg);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf .kamera::after {
+  content: "";
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: var(--lh-chassis-edge);
+  border: 2px solid var(--lh-island-bg);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf > span:last-child {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf > span:last-child::before {
+  content: "";
+  display: inline-block;
+  width: 34px;
+  height: 12px;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 14'%3E%3Crect x='1' y='9' width='2.5' height='4' rx='.7'/%3E%3Crect x='5' y='7' width='2.5' height='6' rx='.7'/%3E%3Crect x='9' y='4.5' width='2.5' height='8.5' rx='.7'/%3E%3Crect x='13' y='2' width='2.5' height='11' rx='.7'/%3E%3Crect x='20' y='2.5' width='18' height='9' rx='2' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Crect x='22' y='4.5' width='12.5' height='5' rx='.9'/%3E%3Crect x='39' y='5' width='2' height='4' rx='.8'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 14'%3E%3Crect x='1' y='9' width='2.5' height='4' rx='.7'/%3E%3Crect x='5' y='7' width='2.5' height='6' rx='.7'/%3E%3Crect x='9' y='4.5' width='2.5' height='8.5' rx='.7'/%3E%3Crect x='13' y='2' width='2.5' height='11' rx='.7'/%3E%3Crect x='20' y='2.5' width='18' height='9' rx='2' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Crect x='22' y='4.5' width='12.5' height='5' rx='.9'/%3E%3Crect x='39' y='5' width='2' height='4' rx='.8'/%3E%3C/svg%3E");
+}
+
+/* Innerer Display-Bereich ohne Überlauf-Abschneiden */
+:is(.lh-geraet.lh, .lh-geraet .lh) .display,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .display {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow-x: clip;
+  overflow-y: visible;
+  border-radius: 0;
+  padding: 14px 13px 12px;
+  gap: 11px;
+  background: var(--lh-screen-bg);
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-lern {
+  background: var(--flaeche);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf {
+  background: var(--lh-call-bg);
+  color: var(--lh-call-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf :focus-visible {
+  outline: 3px solid var(--lh-call-text);
+  outline-offset: 3px;
+}
+
+/* Durchgehende Vollbild-Farbe beim Anruf inklusive Statusleiste & Gestenleiste */
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy:has(.display.typ-anruf) .handy-kopf {
+  background: var(--lh-call-solid);
+  color: var(--lh-call-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy:has(.display.typ-anruf) .home-strich {
+  background: var(--lh-call-solid);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy:has(.display.typ-anruf) .home-strich::after {
+  background: var(--lh-call-soft);
+}
+
+/* Moderner Gestenstrich unten am Bildschirm */
+:is(.lh-geraet.lh, .lh-geraet .lh) .home-strich,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .home-strich {
+  flex: none;
+  width: 100%;
+  height: 26px;
+  margin: 0;
+  border-radius: 0 0 40px 40px;
+  background: var(--lh-screen-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy:has(.display.typ-lern) .home-strich {
+  background: var(--flaeche);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .home-strich::after {
+  content: "";
+  display: block;
+  width: 128px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--lh-gesture-bar);
+}
+
+/* --------------------------------------------------------------------------
+   3. Gestaltung aller Übungsansichten im Display
+   -------------------------------------------------------------------------- */
+
+/* --- 3a. Benachrichtigung oben (SMS / E-Mail) --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .mitteilung,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .mitteilung {
+  background: var(--lh-notif-bg);
+  color: var(--tinte);
+  border: 1px solid var(--lh-notif-border);
+  border-left: 5px solid var(--akzent);
+  border-radius: 16px;
+  padding: 11px 13px;
+  box-shadow: none;
+  display: grid;
+  gap: 6px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .mitteilung .von {
+  color: var(--akzent);
+  font-size: 0.84em;
+  letter-spacing: 0.01em;
+}
+
+/* --- 3b. Eingehender / laufender Anruf --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf {
+  gap: 6px;
+  padding-top: 12px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf.kompakt {
+  padding-top: 4px;
+  column-gap: 12px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf .rund {
+  width: 3.1em;
+  height: 3.1em;
+  background: var(--pictogram-backdrop, var(--anruf-tinte));
+  box-shadow: none;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf .art {
+  color: var(--lh-call-soft);
+  font-size: 0.85em;
+  font-weight: 700;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf .name {
+  color: var(--lh-call-text);
+  font-size: 1.24em;
+  line-height: 1.2;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf .nummer,
+:is(.lh-geraet.lh, .lh-geraet .lh) .beendet {
+  color: var(--lh-call-soft);
+  font-size: 0.9em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knoepfe {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.4em), 1fr));
+  gap: 9px;
+  padding-top: 10px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf {
+  min-height: 50px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  border: 2px solid var(--lh-call-soft);
+  background: var(--lh-call-solid);
+  color: var(--lh-call-text);
+  font-size: 0.9em;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf {
+    border-color: color-mix(in srgb, var(--lh-call-text) 52%, var(--lh-call-solid));
+    background: color-mix(in srgb, var(--lh-call-text) 12%, var(--lh-call-solid));
+  }
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf:hover:not(:disabled) {
+  background: var(--lh-call-solid);
+  border-color: var(--lh-call-text);
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--lh-call-text) 22%, var(--lh-call-solid));
+  }
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf[aria-pressed="true"] {
+  background: var(--lh-call-text);
+  color: var(--lh-call-on-soft);
+  border-color: var(--lh-call-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf[aria-pressed="true"]:hover:not(:disabled),
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf[aria-pressed="true"]:focus-visible {
+  background: var(--lh-call-soft);
+  color: var(--lh-call-on-soft);
+  border-color: var(--lh-call-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf[data-tun="sagen"] {
+  background: var(--lh-call-soft);
+  color: var(--lh-call-on-soft);
+  border-color: var(--lh-call-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf[data-tun="sagen"]:hover:not(:disabled),
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf[data-tun="sagen"]:focus-visible {
+  background: var(--lh-call-text);
+  color: var(--lh-call-on-soft);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf.rot {
+  background: var(--problem);
+  border-color: var(--lh-call-soft);
+  color: var(--akzent-tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf.rot:hover:not(:disabled) {
+  background: var(--problem);
+  border-color: var(--lh-call-text);
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf.rot:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--problem) 84%, var(--tinte));
+  }
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf .lh-frage {
+  color: var(--lh-call-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf .zweit {
+  background: var(--lh-call-solid);
+  color: var(--lh-call-text);
+  border: 2px solid var(--lh-call-soft);
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf .zweit {
+    background: color-mix(in srgb, var(--lh-call-text) 14%, var(--lh-call-solid));
+  }
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf .zweit:hover:not(:disabled) {
+  background: var(--lh-call-solid);
+  border-color: var(--lh-call-text);
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf .zweit:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--lh-call-text) 24%, var(--lh-call-solid));
+  }
+}
+
+/* --- 3c. Chat & Messenger --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .chat {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1px solid var(--linie);
+  border-radius: var(--lh-radius-md);
+  padding: 13px;
+  box-shadow: none;
+  display: grid;
+  gap: 8px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat .von {
+  color: var(--akzent);
+  font-size: 0.88em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--linie);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-hinweis {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border-left: 3px solid var(--akzent);
+  background: var(--anzeige);
+  color: var(--leise);
+  font-size: 0.84em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-knoepfe {
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--linie);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-knopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-knopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-knopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-knopf {
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 13px;
+  border: 2px solid var(--lh-border-interactive);
+  background: var(--flaeche);
+  color: var(--tinte);
+  font-weight: 700;
+  line-height: 1.28;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-knopf:hover:not(:disabled),
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-knopf:hover:not(:disabled),
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-knopf:hover:not(:disabled),
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-knopf:hover:not(:disabled) {
+  background: var(--lh-surface-hover);
+  border-color: var(--akzent);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-knopf.haupt,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-knopf.haupt,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-knopf.haupt,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-knopf.haupt {
+  background: var(--akzent);
+  border-color: var(--akzent);
+  color: var(--akzent-tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-knopf.rot,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-knopf.rot,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-knopf.rot,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-knopf.rot {
+  background: var(--problem-hell);
+  border-color: var(--problem);
+  color: var(--problem-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .chat-knopf.zweit {
+  border-color: var(--akzent);
+  background: var(--flaeche);
+  color: var(--akzent);
+}
+
+/* --- 3d. Berechtigung (System-Dialog), Webseite/Browser, Kontakt, Perspektive, Merkzettel --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-system-karte,
+:is(.lh-geraet.lh, .lh-geraet .lh) .app-seite,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .app-seite,
+:is(.lh-geraet.lh, .lh-geraet .lh) .notiz,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .notiz,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-perspektive-karte {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1px solid var(--linie);
+  border-radius: var(--lh-radius-md);
+  padding: 14px;
+  box-shadow: none;
+  display: grid;
+  gap: 9px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-system-karte {
+  border-top: 5px solid var(--akzent);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-system-kopf {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--linie);
+  color: var(--akzent);
+  font-size: 0.9em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-system-frage {
+  font-size: 1.04em;
+  line-height: 1.32;
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-system-desc {
+  color: var(--leise);
+  font-size: 0.88em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-browser-leiste {
+  background: var(--anzeige);
+  border: 1px solid var(--linie);
+  border-radius: 999px;
+  padding: 7px 12px;
+  margin-bottom: 2px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-family: inherit;
+  font-size: 0.84em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-browser-url {
+  color: var(--akzent);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-web-inhalt {
+  background: var(--anzeige);
+  border-left: 3px solid var(--akzent);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-feld {
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--linie);
+  background: var(--anzeige);
+  color: var(--tinte);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .notiz {
+  border-top: 6px solid var(--akzent);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-perspektive-leiste {
+  background: var(--anzeige);
+  border: 1px solid var(--linie);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-perspektive-tab {
+  min-height: 44px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-perspektive-inhalt.eigen {
+  background: var(--akzent-hell);
+  border-color: var(--akzent);
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-perspektive-inhalt.fremd {
+  background: var(--anzeige);
+  border: 1px dashed var(--lh-border-interactive);
+  color: var(--tinte);
+}
+
+/* --- 3e. Einstellungen-Schalter (ohne Überlappung von Regler und Text) --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-karte {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1px solid var(--linie);
+  border-radius: var(--lh-radius-md);
+  padding: 14px;
+  box-shadow: none;
+  display: grid;
+  gap: 10px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-app {
+  color: var(--akzent);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--linie);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-zeile {
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--lh-radius-sm);
+  background: var(--anzeige);
+  border: 1px solid var(--linie);
+  flex-wrap: wrap;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-knopf {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 96px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 2px solid var(--lh-border-interactive);
+  border-radius: 999px;
+  background: var(--flaeche);
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-knopf.an {
+  background: var(--gut-hell);
+  border-color: var(--gut);
+  color: var(--gut-text);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-knopf.aus {
+  background: var(--flaeche);
+  border-color: var(--lh-border-interactive);
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-regler {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--leise);
+  transform: none !important;
+  transition: background-color 0.15s ease;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-knopf.an .lh-schalter-regler {
+  transform: none !important;
+  background: var(--gut);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-regler::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--pictogram-backdrop, var(--anruf-tinte));
+  box-shadow: var(--lh-shadow-btn);
+  transition: transform 0.15s ease;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-knopf.an .lh-schalter-regler::after {
+  transform: translateX(20px);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-beschriftung {
+  font-size: 0.84em;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* --- 3f. Profil & Freundschaftsanfrage --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-karte {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1px solid var(--linie);
+  border-radius: var(--lh-radius-md);
+  padding: 14px;
+  box-shadow: none;
+  display: grid;
+  gap: 10px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-kopf {
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--linie);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-avatar {
+  width: 3em;
+  height: 3em;
+  border: 2px solid var(--akzent);
+  background: var(--akzent-hell);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-name {
+  font-size: 1.06em;
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-status,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-details {
+  font-size: 0.84em;
+  color: var(--leise);
+  margin-top: 2px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-info,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-bio {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--anzeige);
+  color: var(--tinte);
+  font-size: 0.88em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-karte .chat-knoepfe {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* --- 3g. Videoplayer --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-karte {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1px solid var(--linie);
+  border-radius: var(--lh-radius-md);
+  overflow: hidden;
+  box-shadow: none;
+  display: grid;
+  gap: 10px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  background: var(--lh-video-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-player::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--lh-video-bar) 0%, var(--lh-video-bar) 28%, var(--lh-chassis-edge) 28%);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-play {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--pictogram-backdrop, var(--anruf-tinte));
+  color: var(--lh-video-on-bar);
+  border: 2px solid var(--lh-video-bar);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15em;
+  padding-left: 3px;
+  box-shadow: none;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-dauer {
+  position: absolute;
+  right: 12px;
+  bottom: 20px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--lh-island-bg);
+  color: var(--lh-call-text);
+  font-size: 0.78em;
+  font-weight: 700;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-info {
+  padding: 0 13px;
+  display: grid;
+  gap: 5px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-abzeichen {
+  justify-self: start;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--vorsicht-hell);
+  border: 1px solid var(--vorsicht);
+  color: var(--vorsicht-text);
+  font-size: 0.78em;
+  font-weight: 700;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-titel {
+  font-size: 1.02em;
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-kanal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86em;
+  color: var(--leise);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-karte .chat-knoepfe {
+  padding: 10px 13px 13px;
+  margin-top: 0;
+}
+
+/* --- 3h. Online-Shop (Siegel strikt neutral nach § 4a Punkt 3) --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-karte {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1px solid var(--linie);
+  border-radius: var(--lh-radius-md);
+  padding: 14px;
+  box-shadow: none;
+  display: grid;
+  gap: 10px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-kopf {
+  justify-content: flex-start;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--linie);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-name {
+  color: var(--akzent);
+  font-size: 1.02em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-produkt,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-artikel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--lh-radius-sm);
+  background: var(--anzeige);
+  border: 1px solid var(--linie);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-pname,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-titel {
+  font-weight: 700;
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-preis {
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-siegel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: var(--anzeige);
+  border: 1px solid var(--linie);
+  color: var(--tinte);
+  font-size: 0.82em;
+}
+
+/* --- 3i. E-Mail-Übungspostfach --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mailbox {
+  gap: 10px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-fake-banner {
+  background: var(--vorsicht-hell);
+  color: var(--vorsicht-text);
+  border: 1px solid var(--vorsicht);
+  border-radius: var(--lh-radius-sm);
+  padding: 8px 10px;
+  font-size: 0.82em;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-ordner-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  padding-bottom: 8px;
+  border-bottom-color: var(--linie);
+  min-width: 0;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-ordner-tab {
+  min-width: 0;
+  min-height: 48px;
+  padding: 6px 4px;
+  flex-direction: column;
+  gap: 3px;
+  border-radius: 10px;
+  border: 1.5px solid var(--lh-border-interactive);
+  background: var(--flaeche);
+  color: var(--tinte);
+  font-size: 0.74em;
+  font-weight: 700;
+  line-height: 1.18;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-schreib-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-schreib-tab {
+  min-width: 0;
+  font-size: 0.74em;
+  line-height: 1.2;
+  padding: 6px 4px;
+  overflow-wrap: anywhere;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-ordner-tab.aktiv {
+  background: var(--akzent);
+  border-color: var(--akzent);
+  color: var(--akzent-tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-zeile {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1.5px solid var(--linie);
+  border-radius: 13px;
+  padding: 11px 12px;
+  gap: 4px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-zeile:hover {
+  background: var(--lh-surface-hover);
+  border-color: var(--akzent);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-zeile.ungelesen {
+  border-left: 5px solid var(--akzent);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-zeile-kopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-vorschau,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-adresse,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-datum-detail {
+  color: var(--leise);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-von,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-betreff,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-detail-betreff {
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-detail,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-composer,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-reflexion {
+  background: var(--flaeche);
+  color: var(--tinte);
+  border: 1px solid var(--linie);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: none;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-zurueck,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-absender-btn,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-link-knopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-anhang-knopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-schreib-tab,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-baustein-knopf,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-starter-opt {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1.5px solid var(--lh-border-interactive);
+  background: var(--flaeche);
+  color: var(--tinte);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-schreib-tab.aktiv,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-absender-btn.aktiv,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-sz-pill.aktiv {
+  background: var(--akzent);
+  border-color: var(--akzent);
+  color: var(--akzent-tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-absender-kasten.echt,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-vorbild-kasten {
+  background: var(--gut-hell);
+  border-color: var(--gut);
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-absender-kasten.gefahr,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-link-details.gefahr,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-anhang-details.gefahr {
+  background: var(--problem-hell);
+  border-color: var(--problem);
+  color: var(--tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-link-warnung,
+:is(.lh-geraet.lh, .lh-geraet .lh) .lh-mail-anhang-warnung {
+  color: var(--problem-text);
+}
+
+/* --- 3j. Entscheidung & Rückmeldung im Display --- */
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.rand-gut {
+  outline: 0;
+  box-shadow: inset 0 0 0 5px var(--gut);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.rand-problem {
+  outline: 0;
+  box-shadow: inset 0 0 0 5px var(--problem);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.rand-vorsicht {
+  outline: 0;
+  box-shadow: inset 0 0 0 5px var(--vorsicht);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .display.rand-info {
+  outline: 0;
+  box-shadow: inset 0 0 0 5px var(--info);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .rkopf .symbol {
+  color: var(--akzent-tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .antwort,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .antwort {
+  min-height: 50px;
+  border: 2px solid var(--lh-border-interactive);
+  background: var(--flaeche);
+  color: var(--tinte);
+  padding: 10px 12px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .antwort:has(input:checked) {
+  border-color: var(--akzent);
+  background: var(--akzent-hell);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .haupt,
+:is(.lh-geraet.lh, .lh-geraet .lh) .zweit,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .haupt,
+:is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .zweit {
+  min-height: 50px;
+  border-radius: 13px;
+  padding: 10px 14px;
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .haupt {
+  background: var(--akzent);
+  color: var(--akzent-tinte);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .haupt:disabled {
+  background: var(--linie);
+  color: var(--leise);
+}
+
+:is(.lh-geraet.lh, .lh-geraet .lh) .zweit {
+  border: 2px solid var(--akzent);
+  background: var(--flaeche);
+  color: var(--akzent);
+}
+
+/* --------------------------------------------------------------------------
+   4. Kleine Smartphones (<= 619 px): Kein doppelter Smartphone-Rahmen!
+      Flache, ruhige Übungsfläche ohne Status-/Kameraleiste, damit die Übung
+      möglichst früh im sichtbaren Bereich beginnt.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 619px) {
+  /* Eingebettet in Lern-App: doppelte Card-Hülle entfernen und Kopfabstand straffen (nur bei .lh-geraet) */
+  #content:has(.lh-geraet) {
+    padding-top: 6px;
+  }
+
+  #content:has(.lh-geraet) .lern-leiste {
+    padding: 4px 0 6px;
+    margin-bottom: 8px;
+    gap: 4px;
+  }
+
+  .handy-teil.handy-hub-lauf:has(.lh-geraet) {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .lesson-card.handy-teil:has(.lh-geraet) {
+    padding-top: 4px;
+  }
+
+  .lesson-card.handy-teil:has(.lh-geraet) .lern-teil-label {
+    margin-bottom: 2px;
+  }
+
+  .lesson-card.handy-teil:has(.lh-geraet) .lesson-heading {
+    margin-bottom: 8px;
+  }
+
+  .lh-geraet .lh.eingebettet .buehne {
+    padding: 0 0 8px;
+    gap: 8px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .buehne {
+    gap: 8px;
+    padding: 4px 0 10px;
+  }
+
+  :is(.lh-geraet.lh:not(.eingebettet)) .buehne {
+    padding: 8px 10px 16px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0;
+    border-radius: var(--lh-radius-md);
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    font-size: clamp(17px, 0.96rem, 24px);
+  }
+
+  /* Hardware-Tasten, Statusleiste, Kamera-Insel und Gestenstrich vollständig ausblenden */
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy::before,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy::after,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .handy-kopf,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .home-strich,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .home-strich {
+    display: none !important;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .display,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .display {
+    border-radius: 16px;
+    border: 1.5px solid var(--linie);
+    padding: 10px 10px 12px;
+    gap: 8px;
+    box-shadow: none;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .display.typ-anruf {
+    border: 2px solid var(--lh-chassis-edge);
+    padding: 9px 10px 10px;
+    gap: 7px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .mitteilung,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy.lese .mitteilung {
+    padding: 7px 11px;
+    gap: 2px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .anruf-kopf.kompakt {
+    padding-top: 0;
+    gap: 2px 10px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knoepfe {
+    padding-top: 4px;
+    gap: 7px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 6.8em), 1fr));
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf {
+    min-height: 48px;
+    padding: 6px 8px;
+  }
+
+  /* Konzentrische Rundung: innere Karten (12 px) sauber im 16-px-Übungsfeld */
+  :is(.lh-geraet.lh, .lh-geraet .lh) .chat,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .mitteilung,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-system-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-perspektive-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .app-seite,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .notiz {
+    border-radius: 12px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich {
+    display: grid;
+    padding: 8px 10px;
+    gap: 5px;
+    border-radius: 14px;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich > * + * {
+    margin-top: 0;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich .etikett {
+    font-size: 0.9rem;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich .gross {
+    font-size: clamp(1rem, 1.04rem, 1.35rem);
+    line-height: 1.34;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich .hinweis {
+    padding: 4px 8px;
+    font-size: 0.92rem;
+    line-height: 1.34;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .gehoert {
+    padding: 6px 9px;
+    font-size: 0.92rem;
+    line-height: 1.34;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .gehoert .wer {
+    margin-bottom: 2px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Reduzierte Bewegung & erzwungene Farben (WCAG / COGA)
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) *,
+  :is(.lh-geraet.lh, .lh-geraet .lh) *::before,
+  :is(.lh-geraet.lh, .lh-geraet .lh) *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+html[data-motion="ruhig"] :is(.lh-geraet.lh, .lh-geraet .lh) *,
+html[data-motion="ruhig"] :is(.lh-geraet.lh, .lh-geraet .lh) *::before,
+html[data-motion="ruhig"] :is(.lh-geraet.lh, .lh-geraet .lh) *::after,
+body.no-motion :is(.lh-geraet.lh, .lh-geraet .lh) *,
+body.no-motion :is(.lh-geraet.lh, .lh-geraet .lh) *::before,
+body.no-motion :is(.lh-geraet.lh, .lh-geraet .lh) *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+@media (forced-colors: active) {
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .display,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lernbereich,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .chat,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .mitteilung,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-system-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-profil-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-video-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-shop-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-perspektive-karte,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .app-seite,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .notiz,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .anruf-knopf,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .chat-knopf,
+  :is(.lh-geraet.lh, .lh-geraet .lh) .lh-schalter-knopf {
+    border: 2px solid ButtonText;
+    forced-color-adjust: auto;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) .handy-kopf > span:last-child::before {
+    display: none;
+  }
+
+  :is(.lh-geraet.lh, .lh-geraet .lh) :focus-visible {
+    outline: 3px solid Highlight;
+  }
+}

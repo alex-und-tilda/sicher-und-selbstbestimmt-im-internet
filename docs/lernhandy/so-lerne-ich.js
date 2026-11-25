@@ -39,6 +39,7 @@
     startfrageOffen: false,
     selbstEinstellen: false,
     zweiTapWahl: null,
+    startFokus: "",
     meinLernweg: { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] },
     nutzerFelder: {}
   };
@@ -95,13 +96,59 @@
   const TAB_KEY = "AT_SLI_V1:";
   const PERSIST_KEYS = [
     "voreinstellung", "sprache", "zugang", "schrift", "menge",
-    "lernform", "bewegung", "thema", "vorbild", "tippSichtbar", "screenreader", "zweiTap", "meinLernweg", "nutzerFelder"
+    "lernform", "bewegung", "thema", "vorbild", "tippSichtbar", "screenreader", "zweiTap", "startFokus", "meinLernweg", "nutzerFelder"
   ];
+
+  /* PS1: Profil und Sperre kommen ausschließlich aus dem Profil-Kern
+     (profil-kern.js). Ohne Kern gilt bei vorhandenen Profilen „gesperrt“:
+     lieber nichts Persönliches zeigen als das falsche Profil. */
+  function ermittleProfilKontextFuerSli() {
+    if (typeof window === "undefined") return { status: "einzeln", token: "__einzeln__", widerrufTs: 0 };
+    try {
+      const pk = (typeof window.PK !== "undefined" && window.PK && window.PK.VERSION === 2) ? window.PK : null;
+      if (!pk) return { status: "gesperrt", token: null, widerrufTs: 0 };
+      const z = pk.pruefe("sli");
+      if (z.status === "ohneProfil") return { status: "einzeln", token: "__einzeln__", widerrufTs: pk.widerrufSeit(null) };
+      if (z.status !== "ok") return { status: "gesperrt", token: null, widerrufTs: 0 };
+      const prof = pk.profil(z.id);
+      if (!prof) return { status: "gesperrt", token: null, widerrufTs: 0 };
+      const resetTs = (typeof prof.resetTs === "number" && Number.isFinite(prof.resetTs)) ? prof.resetTs : 0;
+      /* Auch ein Widerruf, dessen Liste noch nicht geschrieben ist (P1-B). */
+      const widerrufTs = typeof pk.widerrufSeit === "function" ? pk.widerrufSeit(prof.id)
+        : ((typeof prof.widerrufTs === "number" && Number.isFinite(prof.widerrufTs)) ? prof.widerrufTs : 0);
+      return { status: "profil", token: prof.id + ":" + resetTs, widerrufTs };
+    } catch (e) {
+      return { status: "gesperrt", token: null, widerrufTs: 0 };
+    }
+  }
+
+  function filtereAusprobiertNachWiderruf(liste, widerrufTs) {
+    if (!Array.isArray(liste)) return [];
+    const sauber = liste.filter((a) => a && typeof a.id === "string" && typeof a.titel === "string");
+    if (!widerrufTs || widerrufTs <= 0) return sauber.slice(0, 20);
+    return sauber.filter((a) => typeof a.ts === "number" && Number.isFinite(a.ts) && a.ts > widerrufTs).slice(0, 20);
+  }
+
+  function leeresMeinLernweg(token) {
+    return {
+      profilToken: token || null,
+      companion: "beide",
+      goals: [],
+      checked: {},
+      custom: [],
+      ausprobiert: []
+    };
+  }
 
   function saveTabState() {
     if (typeof window === "undefined") return;
     try {
-      const payload = {};
+      /* Zusammenführen: Felder anderer Teile (z. B. die Profil-Bindung `pk`
+         des Profil-Kerns) bleiben erhalten (PS1). */
+      let payload = {};
+      if (typeof window.name === "string" && window.name.startsWith(TAB_KEY)) {
+        try { const alt = JSON.parse(window.name.slice(TAB_KEY.length)); if (alt && typeof alt === "object" && !Array.isArray(alt)) payload = alt; } catch (e) {}
+      }
       PERSIST_KEYS.forEach((k) => { payload[k] = state[k]; });
       window.name = TAB_KEY + JSON.stringify(payload);
     } catch (e) {}
@@ -127,15 +174,37 @@
       if (typeof parsed.tippSichtbar === "boolean") state.tippSichtbar = parsed.tippSichtbar;
       if (typeof parsed.screenreader === "boolean") state.screenreader = parsed.screenreader;
       if (typeof parsed.zweiTap === "boolean") state.zweiTap = parsed.zweiTap;
+      if (typeof parsed.startFokus === "string" && /^[a-z0-9_-]{1,40}$/i.test(parsed.startFokus)) state.startFokus = parsed.startFokus;
       if (parsed.meinLernweg && typeof parsed.meinLernweg === "object") {
         const ml = parsed.meinLernweg;
-        state.meinLernweg = {
-          companion: ["beide", "alex", "tilda"].includes(ml.companion) ? ml.companion : "beide",
-          goals: Array.isArray(ml.goals) ? ml.goals.filter((g) => typeof g === "string").slice(0, 3) : [],
-          checked: (ml.checked && typeof ml.checked === "object" && !Array.isArray(ml.checked)) ? ml.checked : {},
-          custom: Array.isArray(ml.custom) ? ml.custom.filter((c) => typeof c === "string").slice(0, 12) : [],
-          ausprobiert: Array.isArray(ml.ausprobiert) ? ml.ausprobiert.filter((a) => a && typeof a.id === "string" && typeof a.titel === "string").slice(0, 20) : []
-        };
+        const kontext = ermittleProfilKontextFuerSli();
+        const mlToken = (typeof ml.profilToken === "string" && ml.profilToken) ? ml.profilToken : null;
+        if (kontext.status === "gesperrt") {
+          state.meinLernweg = {
+            profilToken: mlToken,
+            companion: ["beide", "alex", "tilda"].includes(ml.companion) ? ml.companion : "beide",
+            goals: Array.isArray(ml.goals) ? ml.goals.filter((g) => typeof g === "string").slice(0, 3) : [],
+            checked: (ml.checked && typeof ml.checked === "object" && !Array.isArray(ml.checked)) ? ml.checked : {},
+            custom: Array.isArray(ml.custom) ? ml.custom.filter((c) => typeof c === "string").slice(0, 12) : [],
+            ausprobiert: filtereAusprobiertNachWiderruf(ml.ausprobiert, 0)
+          };
+        } else if (kontext.status === "unklar" || !mlToken || mlToken !== kontext.token) {
+          state.meinLernweg = leeresMeinLernweg(kontext.token);
+          saveTabState();
+        } else {
+          const gefiltert = filtereAusprobiertNachWiderruf(ml.ausprobiert, kontext.widerrufTs);
+          state.meinLernweg = {
+            profilToken: kontext.token,
+            companion: ["beide", "alex", "tilda"].includes(ml.companion) ? ml.companion : "beide",
+            goals: Array.isArray(ml.goals) ? ml.goals.filter((g) => typeof g === "string").slice(0, 3) : [],
+            checked: (ml.checked && typeof ml.checked === "object" && !Array.isArray(ml.checked)) ? ml.checked : {},
+            custom: Array.isArray(ml.custom) ? ml.custom.filter((c) => typeof c === "string").slice(0, 12) : [],
+            ausprobiert: gefiltert
+          };
+          if (Array.isArray(ml.ausprobiert) && gefiltert.length !== ml.ausprobiert.length) {
+            saveTabState();
+          }
+        }
       }
       if (parsed.nutzerFelder && typeof parsed.nutzerFelder === "object" && !Array.isArray(parsed.nutzerFelder)) {
         const nf = {};
@@ -438,7 +507,7 @@
           <button type="button" class="sli-btn-inline" data-sli-example-read="1">${audioAktiv ? "Beispiel anhören" : "Beispiel vorlesen"}</button>
         </div>
         <p style="margin:0 0 6px;"><strong>${text}</strong></p>
-        ${hinweis ? `<p style="margin:0;color:var(--muted, #4a5866);">${hinweis}</p>` : ""}
+        ${hinweis ? `<p style="margin:0;color:var(--at-ink-soft, #43544B);">${hinweis}</p>` : ""}
         <div class="sli-example-choices" aria-label="Antworten im Beispiel">
           ${antworten.map((a) => `<span class="sli-example-chip">${a.label}</span>`).join("")}
         </div>
@@ -589,9 +658,37 @@
     stoppVorlesen,
     pruefeZweiTap,
     renderStartfrageHtml,
+    setStartFokus: function (id) {
+      state.startFokus = (typeof id === "string" && /^[a-z0-9_-]{1,40}$/i.test(id)) ? id : "";
+      saveTabState();
+    },
+    consumeStartFokus: function () {
+      const id = state.startFokus || "";
+      if (id) {
+        state.startFokus = "";
+        saveTabState();
+      }
+      return id;
+    },
     getMeinLernweg: function () {
-      const ml = state.meinLernweg || {};
+      const kontext = ermittleProfilKontextFuerSli();
+      if (kontext.status === "gesperrt") {
+        return leeresMeinLernweg(null);
+      }
+      if (kontext.status === "unklar" || !state.meinLernweg || state.meinLernweg.profilToken !== kontext.token) {
+        state.meinLernweg = leeresMeinLernweg(kontext.token);
+        saveTabState();
+      } else if (kontext.widerrufTs > 0 && Array.isArray(state.meinLernweg.ausprobiert)) {
+        const vorher = state.meinLernweg.ausprobiert.length;
+        const gefiltert = filtereAusprobiertNachWiderruf(state.meinLernweg.ausprobiert, kontext.widerrufTs);
+        if (gefiltert.length !== vorher) {
+          state.meinLernweg = Object.assign({}, state.meinLernweg, { ausprobiert: gefiltert });
+          saveTabState();
+        }
+      }
+      const ml = state.meinLernweg;
       return {
+        profilToken: ml.profilToken || null,
         companion: ml.companion || "beide",
         goals: Array.isArray(ml.goals) ? ml.goals.slice() : [],
         checked: Object.assign({}, ml.checked || {}),
@@ -601,18 +698,44 @@
     },
     setMeinLernweg: function (patch) {
       if (!patch || typeof patch !== "object") return;
-      state.meinLernweg = Object.assign({}, state.meinLernweg, patch);
+      const kontext = ermittleProfilKontextFuerSli();
+      if (kontext.status === "gesperrt") {
+        return;
+      }
+      if (kontext.status === "unklar") {
+        state.meinLernweg = leeresMeinLernweg(null);
+        saveTabState();
+        return;
+      }
+      const basis = (state.meinLernweg && state.meinLernweg.profilToken === kontext.token)
+        ? state.meinLernweg
+        : leeresMeinLernweg(kontext.token);
+      const next = Object.assign({}, basis, patch, { profilToken: kontext.token });
+      next.ausprobiert = filtereAusprobiertNachWiderruf(next.ausprobiert, kontext.widerrufTs);
+      state.meinLernweg = next;
       saveTabState();
     },
     markAusprobiert: function (id, titel, href) {
       if (!id || !titel) return;
-      const list = Array.isArray(state.meinLernweg.ausprobiert) ? state.meinLernweg.ausprobiert.slice() : [];
+      const kontext = ermittleProfilKontextFuerSli();
+      if (kontext.status === "gesperrt") {
+        return;
+      }
+      if (kontext.status === "unklar") {
+        state.meinLernweg = leeresMeinLernweg(null);
+        saveTabState();
+        return;
+      }
+      const basis = (state.meinLernweg && state.meinLernweg.profilToken === kontext.token)
+        ? state.meinLernweg
+        : leeresMeinLernweg(kontext.token);
+      const list = filtereAusprobiertNachWiderruf(basis.ausprobiert, kontext.widerrufTs);
       const cleanHref = typeof href === "string" ? href : "";
       const idx = list.findIndex((item) => item.id === id);
-      const entry = { id: String(id), titel: String(titel), href: cleanHref };
+      const entry = { id: String(id), titel: String(titel), href: cleanHref, ts: Date.now() };
       if (idx >= 0) list[idx] = entry;
       else list.unshift(entry);
-      state.meinLernweg = Object.assign({}, state.meinLernweg, { ausprobiert: list.slice(0, 20) });
+      state.meinLernweg = Object.assign({}, basis, { profilToken: kontext.token, ausprobiert: list.slice(0, 20) });
       saveTabState();
     },
     reset: function () {
@@ -629,13 +752,18 @@
       state.screenreader = false;
       state.zweiTap = false;
       state.zweiTapWahl = null;
+      state.startFokus = "";
       state.meinLernweg = { companion: "beide", goals: [], checked: {}, custom: [], ausprobiert: [] };
       state.nutzerFelder = {};
       if (typeof document !== "undefined" && document.documentElement.style.fontSize) {
         document.documentElement.style.fontSize = "";
       }
       if (typeof window !== "undefined" && typeof window.name === "string" && window.name.startsWith(TAB_KEY)) {
-        window.name = "";
+        /* Nur die Lern-Einstellungen leeren; die Profil-Bindung `pk` bleibt,
+           sonst wäre der Tab danach ohne Bindung (PS1). */
+        let pkFeld = null;
+        try { const alt = JSON.parse(window.name.slice(TAB_KEY.length)); if (alt && typeof alt === "object") pkFeld = alt.pk || null; } catch (e) {}
+        window.name = pkFeld ? TAB_KEY + JSON.stringify({ pk: pkFeld }) : "";
       }
       notify();
       if (dialogEl && dialogEl.open) renderDialog();

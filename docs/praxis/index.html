@@ -5,44 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>Apps sicher und selbstbestimmt nutzen – Praxis</title>
+<link rel="stylesheet" href="../designsystem.css">
+<link rel="stylesheet" href="../lernhandy/so-lerne-ich.css">
+<link rel="stylesheet" href="../plattform-nav.css">
 <style>
   :root{
-    --navy:#00285A; --navy-bg:#00285A; --navy-ink:#ffffff; --red:#B5152B; --blue:#14638c; --blue2:#0a527a;
-    --bluelight:#AAD1E3; --bluebg:#D8EAF2; --surface:#ffffff; --ic-bg:#ffffff; --ink:#1A1A1A; --ink-soft:#3c4a55;
-    --attr:#495965; --focus:#00285A; --line:rgba(0,0,0,.10);
+    --navy:var(--at-ink); --navy-bg:var(--at-surface-soft); --navy-ink:var(--at-ink); --red:#9C3E34; --blue:var(--at-accent); --blue2:var(--at-accent);
+    --bluelight:var(--at-ink-soft); --bluebg:var(--at-bg); --surface:var(--at-surface); --ic-bg:var(--at-surface-soft); --ink:var(--at-ink); --ink-soft:var(--at-ink-soft);
+    --attr:var(--at-ink-soft); --focus:var(--at-focus); --line:var(--at-line);
   }
-  @media(prefers-color-scheme:dark){
-    :root{
-      --navy:#9fd4f5; --navy-bg:#0d223a; --navy-ink:#0a1929; --red:#f87171; --blue:#7ec8ed; --blue2:#9ad8f5;
-      --bluelight:#b9dcf0; --bluebg:#0f1722; --surface:#172330; --ic-bg:#eef4fa; --ink:#eef4fa; --ink-soft:#c0d0df;
-      --attr:#b0c2d4; --focus:#7cc0f5; --line:rgba(255,255,255,.14);
-    }
-    .intro .mini, footer .note .mini{background:#eef4fa;border-radius:6px;padding:2px}
+  html[data-theme="dark"]{
+    --navy:var(--at-ink); --navy-bg:var(--at-surface-soft); --navy-ink:var(--at-ink); --red:#F29B92; --blue:var(--at-accent); --blue2:var(--at-accent);
+    --bluelight:var(--at-ink-soft); --bluebg:var(--at-bg); --surface:var(--at-surface); --ic-bg:var(--at-surface-soft); --ink:var(--at-ink); --ink-soft:var(--at-ink-soft);
+    --attr:var(--at-ink-soft); --focus:var(--at-focus); --line:var(--at-line);
   }
   *{box-sizing:border-box}
-  body{margin:0; background:var(--bluebg); color:var(--ink);
-    font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:20px; line-height:1.5; overflow-wrap:anywhere; hyphens:auto}
-  .wrap{max-width:780px; margin:0 auto; padding:0 16px 60px}
-  header.top{background:var(--navy-bg); color:#fff; padding:30px 16px; text-align:center}
-  header.top h1{margin:0; font-size:30px}
-  header.top p{margin:8px 0 0; color:var(--bluelight); font-size:19px}
-  .intro{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin:20px 0 6px; display:flex; gap:12px; align-items:flex-start; box-shadow:0 2px 8px rgba(0,0,0,.10); min-width:0}
+  body{margin:0; background:var(--at-bg); color:var(--at-ink);
+    font-family:var(--at-font); font-size:20px; line-height:1.55; overflow-wrap:anywhere; hyphens:auto}
+  .wrap{max-width:820px; margin:0 auto; padding:0 16px 60px}
+  header.top{background:var(--at-surface-soft); color:var(--at-ink); border-bottom:1px solid var(--at-line); padding:26px 16px; text-align:center}
+  header.top h1{margin:0; font-size:clamp(1.6rem,3vw,2rem); color:var(--at-ink)}
+  header.top p{margin:8px 0 0; color:var(--at-ink-soft); font-size:19px}
+  .intro{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin:20px 0 6px; display:flex; gap:12px; align-items:flex-start; min-width:0}
   .mini{width:26px;height:26px;flex:0 0 auto;margin-top:2px}
-  .lbl{font-weight:700; color:var(--navy); margin:18px 2px 6px}
+  .lbl{font-weight:700; color:var(--at-accent); margin:18px 2px 6px}
   .card{display:flex; align-items:center; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin:14px 0;
-    box-shadow:0 3px 10px rgba(0,0,0,.10); border-left:8px solid var(--accent); text-decoration:none; color:var(--ink); min-width:0; min-height:44px}
-  .card:hover,.card:focus-visible{box-shadow:0 5px 16px rgba(0,0,0,.16); transform:translateY(-1px)}
+    border-left:6px solid var(--accent); text-decoration:none; color:var(--ink); min-width:0; min-height:44px}
+  .card:hover,.card:focus-visible{background:var(--at-surface-soft); border-color:var(--accent)}
   .card:focus-visible,.material-card:focus-visible,.praxis-top-nav a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
-  .card-ic{width:64px;height:64px;border-radius:50%;background:var(--ic-bg);border:3px solid var(--accent);
+  .card-ic{width:64px;height:64px;border-radius:50%;background:var(--ic-bg);border:2px solid var(--accent);
     display:flex;align-items:center;justify-content:center;flex:0 0 auto}
   .card-ic img{width:42px;height:42px;object-fit:contain}
   .card-tx{flex:1 1 auto; min-width:0; overflow-wrap:anywhere}
-  .card-h{display:block; font-size:24px; font-weight:700; color:var(--navy)}
+  .card-h{display:block; font-size:24px; font-weight:700; color:var(--at-ink)}
   .card-d{display:block; font-size:17px; color:var(--ink-soft); margin-top:2px}
   .card-go{font-size:34px; color:var(--accent); font-weight:700; flex:0 0 auto}
   .material-card{display:block;margin:22px 0 0;padding:14px 18px;min-height:44px;background:var(--surface);
-    border:1px solid var(--line);border-radius:14px;border-left:8px solid var(--navy);text-decoration:none;color:var(--navy);
-    box-shadow:0 2px 8px rgba(0,0,0,.08);font-weight:700;min-width:0}
+    border:1px solid var(--line);border-radius:14px;border-left:6px solid var(--at-accent);text-decoration:none;color:var(--at-ink);
+    font-weight:700;min-width:0}
   .material-sub{display:block;font-weight:400;font-size:16px;color:var(--ink-soft);margin-top:2px}
   @media(max-width:420px){
     .wrap{padding:0 12px 48px}
@@ -52,9 +52,9 @@
     .card-h{font-size:21px}
   }
   footer{margin-top:26px; font-size:15px; color:var(--ink-soft)}
-  footer .note{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;border-left:6px solid var(--red);display:flex;gap:10px;align-items:flex-start;min-width:0}
-  footer .attr{margin-top:14px; color:var(--attr); font-size:13px}
-  .praxis-top-nav a{color:var(--navy);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;padding:4px 2px}
+  footer .note{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;border-left:5px solid var(--at-warm);display:flex;gap:10px;align-items:flex-start;min-width:0}
+  footer .attr{margin-top:14px; color:var(--attr); font-size:14px}
+  .praxis-top-nav a{color:var(--at-accent);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;padding:4px 2px}
   .praxis-top-nav a:hover{text-decoration:underline}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
@@ -80,6 +80,7 @@
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
 </head>
 <body>
+<div id="at-plattform-nav"></div>
 <header class="top">
   <h1>Apps sicher und selbstbestimmt nutzen</h1>
   <p>Praxis zum Mitmachen · Alex und Tilda</p>
@@ -99,7 +100,7 @@
   </div>
   <div class="lbl">Wähle eine App:</div>
   
-    <a class="card" href="tiktok.html" style="--accent:var(--blue)">
+    <a class="card" href="tiktok.html" style="--accent:#0E7490">
       <span class="card-ic"><img src="../assets/pictograms/tiktok.svg" alt=""></span>
       <span class="card-tx">
         <span class="card-h">TikTok</span>
@@ -107,7 +108,7 @@
       </span>
       <span class="card-go" aria-hidden="true">›</span>
     </a>
-    <a class="card" href="instagram.html" style="--accent:var(--blue2)">
+    <a class="card" href="instagram.html" style="--accent:#C13584">
       <span class="card-ic"><img src="../assets/pictograms/instagram.svg" alt=""></span>
       <span class="card-tx">
         <span class="card-h">Instagram</span>
@@ -115,7 +116,7 @@
       </span>
       <span class="card-go" aria-hidden="true">›</span>
     </a>
-    <a class="card" href="facebook.html" style="--accent:var(--blue)">
+    <a class="card" href="facebook.html" style="--accent:#1877F2">
       <span class="card-ic"><img src="../assets/pictograms/facebook.svg" alt=""></span>
       <span class="card-tx">
         <span class="card-h">Facebook</span>
@@ -123,7 +124,7 @@
       </span>
       <span class="card-go" aria-hidden="true">›</span>
     </a>
-    <a class="card" href="snapchat.html" style="--accent:var(--blue2)">
+    <a class="card" href="snapchat.html" style="--accent:#A88A00">
       <span class="card-ic"><img src="../assets/pictograms/snapchat.svg" alt=""></span>
       <span class="card-tx">
         <span class="card-h">Snapchat</span>
@@ -131,7 +132,7 @@
       </span>
       <span class="card-go" aria-hidden="true">›</span>
     </a>
-    <a class="card" href="whatsapp.html" style="--accent:var(--blue)">
+    <a class="card" href="whatsapp.html" style="--accent:#1DA855">
       <span class="card-ic"><img src="../assets/pictograms/whatsapp.svg" alt=""></span>
       <span class="card-tx">
         <span class="card-h">WhatsApp</span>
@@ -139,7 +140,7 @@
       </span>
       <span class="card-go" aria-hidden="true">›</span>
     </a>
-    <a class="card" href="youtube.html" style="--accent:var(--blue2)">
+    <a class="card" href="youtube.html" style="--accent:#CC0000">
       <span class="card-ic"><img src="../assets/pictograms/youtube.svg" alt=""></span>
       <span class="card-tx">
         <span class="card-h">YouTube</span>
@@ -166,7 +167,15 @@
       Alex &amp; Tilda · Materialgrundlage gefördert durch die Sozialstiftung NRW.<br>
       Hinweis: Texte vor offizieller Nutzung von einer Prüfgruppe testen lassen.
     </div>
+    <p style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;">
+      <a href="../ueber-alex-und-tilda.html" style="color:var(--at-accent);font-weight:700;">Über Alex &amp; Tilda</a>
+      <a href="../impressum.html" style="color:var(--at-accent);font-weight:700;">Impressum</a>
+      <a href="../datenschutz.html" style="color:var(--at-accent);font-weight:700;">Datenschutz</a>
+      <a href="../barrierefreiheit.html" style="color:var(--at-accent);font-weight:700;">Barrierefreiheit</a>
+    </p>
   </footer>
 </div>
+<script src="../profil-kern.js"></script><script src="../lernhandy/so-lerne-ich.js"></script>
+<script src="../plattform-nav.js" data-at-root="../"></script>
 </body>
 </html>

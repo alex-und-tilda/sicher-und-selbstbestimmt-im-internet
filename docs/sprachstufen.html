@@ -9,9 +9,20 @@
   <meta name="keywords" content="Leichte Sprache, Einfache Sprache, Alltagssprache, Unterschied, Plain Language, Easy-to-Read, DIN SPEC 33429, Inclusion Europe, barrierefreie Kommunikation" />
   <link rel="canonical" href="https://alex-und-tilda.github.io/sicher-und-selbstbestimmt-im-internet/sprachstufen.html" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="designsystem.css" />
+  <link rel="stylesheet" href="lernhandy/so-lerne-ich.css" />
+  <link rel="stylesheet" href="plattform-nav.css" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { background: var(--at-bg); color: var(--at-ink); font-family: var(--at-font); }
+    .static-page { max-width: 860px; }
+    .static-page .card { background: var(--at-surface); border: 1px solid var(--at-line); border-radius: var(--at-radius-lg); box-shadow: none; }
+    .static-page .plain-back-button { background: var(--at-surface); border-color: var(--at-line); color: var(--at-accent); border-radius: 999px; }
+    .static-page a { color: var(--at-accent); }
+  </style>
 </head>
 <body>
+  <div id="at-plattform-nav"></div>
   <main class="static-page">
     <nav class="static-nav" aria-label="Zurück zur Plattform">
       <a class="plain-back-button" href="zugang.html">← Zum Bildungsportal</a>
@@ -181,5 +192,7 @@
     <p><a href="zugang.html">← Zum Bildungsportal</a> &nbsp;·&nbsp; <a href="index.html#themen">Zur Lern-App</a> &nbsp;·&nbsp; <a href="impressum.html">Impressum</a> &nbsp;·&nbsp; <a href="datenschutz.html">Datenschutz</a> &nbsp;·&nbsp; <a href="barrierefreiheit.html">Barrierefreiheit</a> &nbsp;·&nbsp; <a href="sprachstufen.html">Die Sprachstufen</a></p>
   </footer>
   </main>
+  <script src="profil-kern.js"></script><script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="plattform-nav.js" data-at-root=""></script>
 </body>
 </html>

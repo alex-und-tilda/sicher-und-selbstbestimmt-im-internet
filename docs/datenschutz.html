@@ -117,11 +117,17 @@
         Für gemeinsam genutzte Geräte kannst du freiwillig ein <strong>Profil ohne Namen</strong> anlegen (nur gewähltes Zeichen, Farbe, Zahl und optional ein Bild-Code). Die zugehörigen Profileinstellungen und Hinweise speichert dein Browser lokal auf dem Gerät (<code>localStorage</code>). Du kannst jedes Profil jederzeit zurücksetzen oder vollständig löschen.
       </p>
       <p>
-        <strong>Einwilligungspflichtiger Lernstand:</strong> Dein persönlicher Lernstand (abgeschlossene Themen, geschaffte Übungs-Handy- und Postfach-Wege, gesammelte Regeln, Wiederholungszeitpunkte sowie Antworten einer unterbrochenen Runde) wird ausschließlich nach deiner ausdrücklichen Einwilligung lokal in deinem Browser gespeichert (<code>localStorage</code>) und bleibt auf deinem Gerät, bis du ihn widerrufst oder löschst.
+        <strong>Einwilligungspflichtiger Lernstand:</strong> Dein persönlicher Lernstand (abgeschlossene Themen, geschaffte Übungs-Handy- und Postfach-Wege, gesammelte Regeln, Wiederholungszeitpunkte sowie Antworten einer unterbrochenen Runde) wird ausschließlich nach deiner ausdrücklichen Einwilligung in einer lokalen Datenbank deines Browsers gespeichert (<code>IndexedDB</code>) und bleibt auf deinem Gerät, bis du ihn widerrufst oder löschst.
       </p>
       <ul>
         <li>Rechtsgrundlage für den gespeicherten Lernstand: § 25 Abs. 1 TDDDG und Art. 6 Abs. 1 lit. a DSGVO (deine jederzeit widerrufliche Einwilligung unter „Mein Lernweg“ oder „Einstellungen“).</li>
-        <li>Ohne diese Einwilligung wird kein Lernstand im dauerhaften Gerätespeicher (<code>localStorage</code>, <code>sessionStorage</code>, Cookies) abgelegt; dein Fortschritt gilt dann nur für den aktuellen Besuch im Arbeitsspeicher.</li>
+        <li>Ohne diese Einwilligung wird kein Lernstand im dauerhaften Gerätespeicher (<code>IndexedDB</code>, <code>localStorage</code>, <code>sessionStorage</code>, Cookies) abgelegt; dein Fortschritt gilt dann nur für den aktuellen Besuch im Arbeitsspeicher.</li>
+        <li><strong>Schutz auf gemeinsam genutzten Geräten:</strong> Damit niemand im falschen Profil lernt oder löscht, merkt sich jeder Tab im flüchtigen Tab-Speicher (<code>window.name</code>), welches Profil dort gewählt wurde, ob der Tab sichtbar ist und seit wann er verborgen ist. War ein Tab auf einem gemeinsam genutzten Gerät 3 Minuten oder länger verborgen, wählst du dein Zeichen neu. Ein gespeicherter Lernstand trägt dazu eine technische Kennung seines Profils (zufällige Profil-Kennung sowie die Zeitpunkte von „Neu anfangen“ und Widerruf). Im Gerätespeicher steht unter <code>weg-seit</code> nur noch das Wort „gesperrt“, ohne Zeitangabe; es sperrt Tabs einer älteren Fassung der App.</li>
+        <li><strong>Bei Widerruf, „Neu anfangen“ oder Löschen</strong> entfernt die App die betroffenen Daten aus der lokalen Datenbank. Eine technische Kennung verhindert, dass ein alter Tab sie dort wieder einträgt. Der gespeicherte Wiedereinstieg im Übungs-Handy ist deinem Zeichen und deiner Übung zugeordnet. Kann der Browser das Löschen nicht bestätigen, zeigt die App einen Hinweis.</li>
+        <li><strong>Beim Wechsel auf diese Fassung</strong> übernimmt die App eindeutig zugeordnete, gültige Lernstände einmalig in die lokale Datenbank (<code>IndexedDB</code>) und bereinigt danach die übernommenen Kopien im bisherigen Speicher. Alte Übungs-Handy-Zwischenstände ohne eindeutige Profil-Zuordnung werden verworfen und entfernt.</li>
+        <li><strong>Wichtige Grenze für noch geöffnete alte Tabs:</strong> Seiten einer älteren Fassung, die schon vor einem Update in einem anderen Tab geöffnet waren, kennen die neue Datenbank vor dem Neuladen noch nicht. Ein Klick auf „Lernstand löschen“, „Neu anfangen“ oder „Profil löschen“ in einem solchen noch nicht neu geladenen Alt-Tab kann bereits übernommene Daten in der neuen Datenbank nicht zuverlässig löschen. Bitte lade nach einem Update alle offenen Tabs neu und führe Löschungen in der aktuellen Fassung aus.</li>
+        <li>Beim Öffnen des druckbaren Lernprofils merkt sich der Tab kurz, von welcher Seite du kommst. Eine einmal verwendbare technische Kennung verbindet beide Seiten. Dafür werden keine Lerninhalte gespeichert.</li>
+        <li>Rechtsgrundlage für diese Schutz-Angaben: § 25 Abs. 2 Nr. 2 TDDDG (technisch erforderlich, damit Profile auf einem gemeinsam genutzten Gerät getrennt bleiben) und Art. 6 Abs. 1 lit. f DSGVO.</li>
         <li><em>Hinweis zur Testfassung:</em> Diese Angaben beschreiben den technischen Stand der Public Beta 5 (Testfassung); eine gesonderte externe Rechts- oder Datenschutzfreigabe ist damit nicht abgeschlossen.</li>
       </ul>
 
@@ -164,7 +170,7 @@
       </div>
     </article>
   </main>
-  <script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="profil-kern.js"></script><script src="lernhandy/so-lerne-ich.js"></script>
   <script src="plattform-nav.js" data-at-root=""></script>
 </body>
 </html>

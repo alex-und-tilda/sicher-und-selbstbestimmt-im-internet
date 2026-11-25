@@ -28,7 +28,7 @@
     }
     if (ziel === "hilfe") {
       return (p.endsWith("/index.html") && h === "#hilfe")
-        || (p.includes("/testfassung.html") && (h === "" || h === "#hilfe" || h === "#begleiten" || h === "#digital-begleiter"))
+        || (p.includes("/testfassung.html") && (h === "" || h === "#hilfe"))
         || p.includes("/druckvorlage.html");
     }
     if (ziel === "einstellungen") return p.endsWith("/index.html") && h === "#einstellungen";
@@ -106,7 +106,7 @@
       { id: "start", label: "Start", href: basis + "zugang.html" },
       { id: "themen", label: "Themen", href: basis + "index.html#themen" },
       { id: "lernweg", label: "Mein Lernweg", href: basis + "index.html#lernweg" },
-      { id: "hilfe", label: "Hilfe", href: basis + "index.html#hilfe" },
+      { id: "hilfe", label: "Hilfe zur Seite", href: basis + "index.html#hilfe" },
       { id: "einstellungen", label: "Einstellungen", href: basis + "index.html#einstellungen" }
     ];
 

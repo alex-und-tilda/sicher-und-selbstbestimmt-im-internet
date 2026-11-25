@@ -326,6 +326,38 @@
       color: var(--at-ink);
       font-size: 0.92rem;
     }
+    .entry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0 0 20px;
+    }
+    .entry-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--at-surface-soft);
+      border: 1px solid var(--at-line);
+      border-left: 5px solid var(--at-accent);
+      border-radius: var(--at-radius-sm);
+      padding: 16px 18px;
+      min-width: 0;
+    }
+    .entry-card h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      color: var(--at-ink);
+    }
+    .entry-card p {
+      margin: 0;
+      color: var(--at-ink-soft);
+      font-size: 0.95rem;
+    }
+    .compass-subhead {
+      margin: 4px 0 6px;
+      font-size: 1.05rem;
+      color: var(--at-ink);
+    }
     .foot {
       margin-top: 28px;
       padding-top: 16px;
@@ -343,6 +375,7 @@
       .schulung-phasen { grid-template-columns: minmax(0, 1fr); }
       .schulung-phase { min-width: 0; max-width: 100%; }
       .bereich-tab, .strip-btn, .schulung-unit-btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+      .entry-grid { grid-template-columns: minmax(0, 1fr); }
       .compass-grid { grid-template-columns: minmax(0, 1fr); }
     }
   </style>
@@ -358,8 +391,10 @@
           <img id="brand-img" src="assets/figures/alex-tilda-ruhig.webp" alt="Ruhige Alltagsszene mit Alex und Tilda">
         </div>
         <div class="hero-copy">
+          <p id="hub-kicker" style="margin:0 0 4px;font-size:0.88rem;font-weight:700;color:var(--at-accent);">Hilfe und Unterstützung</p>
           <h1 id="hub-title">Hilfe im Notfall</h1>
           <p id="hub-lead">Hier findest du ruhige Schritte bei Unsicherheit, das Übungsangebot für Digital-Begleiter*innen und den Kompass für Begleitung auf Augenhöhe.</p>
+          <p style="margin:8px 0 0;"><a class="strip-btn" style="min-height:44px;padding:4px 0;" href="zugang.html">← Zur Startseite (alle 4 Bildungsbereiche)</a></p>
           <p class="sli-inline"><span id="sli-eigene-teil" class="sli-teil" hidden>Deine Einstellung: <strong id="sli-zusammenfassung"></strong></span><span id="sli-vor-teil" class="sli-teil">Voreinstellung: <strong id="sli-voreinstellung-liste">Gib mir Hilfen dazu. · Leichte Sprache · Lesen und Hören · Allein</strong></span></p>
         </div>
       </section>
@@ -381,14 +416,33 @@
       </section>
 
       <section class="panel" id="digital-begleiter" role="tabpanel" aria-labelledby="tab-digital-begleiter" hidden>
-        <h2 id="db-heading">Digital-Begleiter*innen: Begleiten und beraten üben</h2>
-        <p class="panel-lead">Auf Augenhöhe unterstützen: Das Gerät und die Entscheidung bleiben immer bei der lernenden Person. Die Übungen öffnen sich direkt in der Lern-App zum gemeinsamen Besprechen.</p>
-        <div class="link-row">
-          <a class="strip-btn primary" href="lernkreis/index.html?ex=begleiten_ueben">Begleiten üben: Helfen, ohne das Handy abzunehmen</a>
-          <a class="strip-btn" href="index.html#handy:fb2">Beratung am Handy üben</a>
+        <h2 id="db-heading">Hilfe rund ums Handy &amp; Digital-Begleiter*innen</h2>
+        <p class="panel-lead" id="db-intro">Wähle deinen Einstieg: Suchst du selbst Hilfe am Handy oder möchtest du lernen, anderen am Handy zu helfen?</p>
+
+        <div class="entry-grid">
+          <article class="entry-card" aria-labelledby="db-card-seek-title">
+            <h3 id="db-card-seek-title">Ich brauche Hilfe am Handy</h3>
+            <p id="db-card-seek-desc">Du hast eine Frage zum Handy? Digital-Begleiter*innen helfen dir. Ihr probiert etwas zusammen aus.</p>
+            <div class="link-row">
+              <a class="strip-btn primary" href="lernkreis/index.html?ex=es_handy&amp;mode=unterstuetzung">Erste Schritte am Handy gemeinsam ausprobieren</a>
+              <a class="strip-btn" href="index.html#thema-hilfe">Thema „Hilfe bei Problemen“ öffnen</a>
+              <a class="strip-btn" href="praxis/index.html">Apps Schritt für Schritt einstellen</a>
+              <a class="strip-btn" href="#hilfe">Notfall-Hilfe (wenn schon etwas passiert ist)</a>
+            </div>
+          </article>
+
+          <article class="entry-card" aria-labelledby="db-card-help-title">
+            <h3 id="db-card-help-title">Ich möchte anderen am Handy helfen</h3>
+            <p id="db-card-help-desc">Du kannst lernen, wie du anderen etwas am Handy zeigst. Die andere Person entscheidet selbst.</p>
+            <div class="link-row">
+              <a class="strip-btn primary" href="lernkreis/index.html?ex=begleiten_ueben">Begleiten üben: Helfen, ohne das Handy abzunehmen</a>
+              <a class="strip-btn" href="schulung/index.html">Vollständige Schulungs-Übersicht öffnen (18 Einheiten &amp; Handbuch)</a>
+              <a class="strip-btn" href="index.html#handy:fb2">Beratung am Handy üben</a>
+            </div>
+          </article>
         </div>
 
-        <details class="schulung-katalog" id="schulung-katalog">
+        <details class="schulung-katalog" id="schulung-katalog" open>
           <summary>Die 18 Einheiten der Digital-Begleiter-Schulung ansehen</summary>
           <p class="panel-lead" style="margin-top:10px;">Tippe auf eine Einheit. Sie öffnet sich direkt hier auf der Seite, sodass du immer innerhalb von Alex &amp; Tilda bleibst.</p>
           <div class="schulung-phasen" id="schulung-phasen"></div>
@@ -404,8 +458,32 @@
       </section>
 
       <section class="panel" id="begleiten" role="tabpanel" aria-labelledby="tab-begleiten" hidden>
-        <h2 id="begleiten-heading">Lernen begleiten: Situations-Kompass auf Augenhöhe</h2>
-        <p class="panel-lead">Wähle das aktuelle Thema aus. Du siehst sofort passende Fragen und ruhige Hilfen für die Begleitung — ohne das Handy zu übernehmen.</p>
+        <h2 id="begleiten-heading">Material zum Begleiten &amp; Situationen im Alltag</h2>
+        <p class="panel-lead" id="begleiten-intro">Hier findest du druckfertige Karten, Anleitungen für Workshops und den Situations-Kompass für alle 12 Themen.</p>
+
+        <div class="entry-grid">
+          <article class="entry-card" aria-labelledby="bg-card-cards-title">
+            <h3 id="bg-card-cards-title">Karten für Workshops und Gruppen</h3>
+            <p id="bg-card-cards-desc">Es gibt fertige Karten zum Ausdrucken. Zum Beispiel 9 Profil-Karten für Facebook, Karten für TikTok, Cybermobbing, Antwort-Karten A/B/C und die Begleit-Karte.</p>
+            <div class="link-row">
+              <a class="strip-btn primary" href="material/index.html#arbeitsmaterial">Alle Workshop-Karten zum Ausdrucken öffnen</a>
+              <a class="strip-btn" href="material/arbeitsmaterial/Profil-Karten_Facebook.pdf">Profil-Karten Facebook (PDF, 9 Karten)</a>
+              <a class="strip-btn" href="druckvorlage.html">Kommunikations-Tafel &amp; Begleit-Karte</a>
+            </div>
+          </article>
+
+          <article class="entry-card" aria-labelledby="bg-card-guides-title">
+            <h3 id="bg-card-guides-title">Anleitungen für Workshops und Apps</h3>
+            <p id="bg-card-guides-desc">Du leitest einen Workshop oder hilfst am Handy? Hier findest du Abläufe, Folien, Leitfäden und Schritt-für-Schritt-Hilfen.</p>
+            <div class="link-row">
+              <a class="strip-btn primary" href="workshop.html">Workshops &amp; Leitfäden im Browser öffnen</a>
+              <a class="strip-btn" href="material/index.html">Alle Materialien herunterladen</a>
+              <a class="strip-btn" href="praxis/index.html">Schritt-für-Schritt-Anleitungen für Apps</a>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="compass-subhead" id="bg-kompass-heading">Situations-Kompass für alle 12 Themen</h3>
         <div class="compass-topics" id="compass-topics" role="group" aria-label="Thema für die Begleitung wählen"></div>
         <div class="compass-body" id="compass-body" aria-live="polite"></div>
       </section>
@@ -413,10 +491,18 @@
 
     <footer class="foot">
       <p>Alex &amp; Tilda · Inklusive Lernplattform · Auf dieser Seite wird ohne Einwilligung nichts gespeichert.</p>
+      <p style="display:flex;flex-wrap:wrap;gap:8px 16px;margin:8px 0 0;">
+        <a href="zugang.html" style="color:var(--at-accent);font-weight:700;">Startseite</a>
+        <a href="ueber-alex-und-tilda.html" style="color:var(--at-accent);font-weight:700;">Über Alex &amp; Tilda</a>
+        <a href="impressum.html" style="color:var(--at-accent);font-weight:700;">Impressum</a>
+        <a href="datenschutz.html" style="color:var(--at-accent);font-weight:700;">Datenschutz</a>
+        <a href="barrierefreiheit.html" style="color:var(--at-accent);font-weight:700;">Barrierefreiheit</a>
+        <a href="sprachstufen.html" style="color:var(--at-accent);font-weight:700;">Die Sprachstufen</a>
+      </p>
     </footer>
   </div>
 
-  <script src="lernhandy/so-lerne-ich.js"></script>
+  <script src="profil-kern.js"></script><script src="lernhandy/so-lerne-ich.js"></script>
   <script src="begleitung-de.js"></script>
   <script src="plattform-nav.js" data-at-root=""></script>
   <script src="lernhandy/bild-slots.js"></script>
@@ -465,20 +551,131 @@ function aktualisiereStatus() {
         window.SoLerneIch.onChange(aktualisiereStatus);
       }
 
-      const BEREICHE = {
-        hilfe: {
-          title: "Hilfe im Notfall",
-          lead: "Ruhige Schritte, wenn etwas passiert ist oder du sofort Unterstützung brauchst."
+      const BEREICHE_TEXT = {
+        leicht: {
+          hilfe: {
+            kicker: "Hilfe und Unterstützung",
+            docTitle: "Hilfe im Notfall – Alex & Tilda",
+            title: "Hilfe im Notfall",
+            lead: "Ruhige Schritte, wenn etwas passiert ist oder du sofort Unterstützung brauchst."
+          },
+          "digital-begleiter": {
+            kicker: "Bildungsbereich 3 · Digital-Begleiter*innen im Unterstützer*innen-System",
+            docTitle: "Hilfe rund ums Handy · Digital-Begleiter*innen – Alex & Tilda",
+            title: "Hilfe rund ums Handy",
+            lead: "Hier findest du Hilfe am Handy. Oder du lernst, wie du anderen am Handy hilfst."
+          },
+          begleiten: {
+            kicker: "Bildungsbereich 4 · Lernen begleiten",
+            docTitle: "Material zum Begleiten · Lernen begleiten – Alex & Tilda",
+            title: "Material zum Begleiten",
+            lead: "Hier findest du Karten, Anleitungen und ruhige Fragen zum Begleiten."
+          }
         },
-        "digital-begleiter": {
-          title: "Digital-Begleiter*innen",
-          lead: "Begleiten auf Augenhöhe üben und die 18 Einheiten der Schulung ansehen."
+        einfach: {
+          hilfe: {
+            kicker: "Hilfe und Unterstützung",
+            docTitle: "Hilfe im Notfall – Alex & Tilda",
+            title: "Hilfe im Notfall",
+            lead: "Ruhige Schritte, wenn etwas passiert ist oder du sofort Unterstützung brauchst."
+          },
+          "digital-begleiter": {
+            kicker: "Bildungsbereich 3 · Digital-Begleiter*innen im Unterstützer*innen-System",
+            docTitle: "Hilfe rund ums Handy · Digital-Begleiter*innen – Alex & Tilda",
+            title: "Hilfe rund ums Handy",
+            lead: "Hier erfährst du, wer dir am Handy hilft und wie du selbst anderen helfen kannst."
+          },
+          begleiten: {
+            kicker: "Bildungsbereich 4 · Lernen begleiten",
+            docTitle: "Material zum Begleiten · Lernen begleiten – Alex & Tilda",
+            title: "Material zum Begleiten",
+            lead: "Hier findest du druckfertige Karten, Anleitungen und den Situations-Kompass für die Lernbegleitung."
+          }
         },
-        begleiten: {
-          title: "Lernen begleiten",
-          lead: "Situations-Kompass und ruhige Begleitfragen für Angehörige und Unterstützer*innen."
+        alltag: {
+          hilfe: {
+            kicker: "Hilfe und Unterstützung",
+            docTitle: "Hilfe im Notfall – Alex & Tilda",
+            title: "Hilfe im Notfall",
+            lead: "Ruhige Schritte, wenn etwas passiert ist oder du sofort Unterstützung brauchst."
+          },
+          "digital-begleiter": {
+            kicker: "Bildungsbereich 3 · Digital-Begleiter*innen im Unterstützer*innen-System",
+            docTitle: "Hilfe rund ums Handy · Digital-Begleiter*innen – Alex & Tilda",
+            title: "Hilfe rund ums Handy",
+            lead: "Informiere dich über Unterstützung beim Umgang mit dem Handy oder darüber, wie du selbst Digital-Begleiter*in wirst."
+          },
+          begleiten: {
+            kicker: "Bildungsbereich 4 · Lernen begleiten",
+            docTitle: "Material zum Begleiten · Lernen begleiten – Alex & Tilda",
+            title: "Material zum Begleiten",
+            lead: "Karten, Anleitungen, methodische Hinweise und der Situations-Kompass für die Lernbegleitung."
+          }
         }
       };
+
+      const EINSTIEG_TEXT = {
+        leicht: {
+          dbIntro: "Wähle deinen Einstieg: Suchst du selbst Hilfe am Handy oder möchtest du lernen, anderen am Handy zu helfen?",
+          dbSeekTitle: "Ich brauche Hilfe am Handy",
+          dbSeekDesc: "Du hast eine Frage zum Handy? Digital-Begleiter*innen helfen dir. Ihr probiert etwas zusammen aus.",
+          dbHelpTitle: "Ich möchte anderen am Handy helfen",
+          dbHelpDesc: "Du kannst lernen, wie du anderen etwas am Handy zeigst. Die andere Person entscheidet selbst.",
+          bgIntro: "Hier findest du druckfertige Karten, Anleitungen für Workshops und den Situations-Kompass für alle 12 Themen.",
+          bgCardsTitle: "Karten für Workshops und Gruppen",
+          bgCardsDesc: "Es gibt fertige Karten zum Ausdrucken. Zum Beispiel 9 Profil-Karten für Facebook, Karten für TikTok, Cybermobbing, Antwort-Karten A/B/C und die Begleit-Karte.",
+          bgGuidesTitle: "Anleitungen für Workshops und Apps",
+          bgGuidesDesc: "Du leitest einen Workshop oder hilfst am Handy? Hier findest du Abläufe, Folien, Leitfäden und Schritt-für-Schritt-Hilfen."
+        },
+        einfach: {
+          dbIntro: "Wähle deinen Einstieg: Suchst du Unterstützung für dein eigenes Handy oder möchtest du selbst andere begleiten?",
+          dbSeekTitle: "Hilfe für mein Handy",
+          dbSeekDesc: "Digital-Begleiter*innen unterstützen dich bei Fragen zum Handy. Ihr könnt die einzelnen Schritte gemeinsam ausprobieren.",
+          dbHelpTitle: "Anderen am Handy helfen",
+          dbHelpDesc: "In der Schulung lernst du, wie du etwas erklärst. Die Person, die du unterstützt, trifft ihre eigenen Entscheidungen.",
+          bgIntro: "Hier findest du druckfertige Karten, Anleitungen für Workshops und den Situations-Kompass für alle zwölf Themen.",
+          bgCardsTitle: "Karten für Workshops und Gruppen",
+          bgCardsDesc: "Hier findest du druckfertige Kartensätze für Gruppenrunden, zum Beispiel neun Profil-Karten für Facebook, Trend-Karten, Situationskarten und die Begleit-Karte.",
+          bgGuidesTitle: "Anleitungen für Workshopleitung und Praxis",
+          bgGuidesDesc: "Tipps zur Vorbereitung, Folien, Trainerleitfäden für fünf Workshops sowie Schritt-für-Schritt-Anleitungen für sechs Apps."
+        },
+        alltag: {
+          dbIntro: "Wähle den passenden Einstieg für Unterstützung am Handy oder für die Qualifizierung als Digital-Begleiter*in.",
+          dbSeekTitle: "Unterstützung beim Umgang mit dem Handy",
+          dbSeekDesc: "Digital-Begleiter*innen unterstützen dich bei konkreten Fragen. Gemeinsam könnt ihr Bedienhandlungen auf dem Handy ausprobieren.",
+          dbHelpTitle: "Selbst Digital-Begleiter*in werden",
+          dbHelpDesc: "In der Qualifizierung lernst du, wie du andere beim Ausprobieren unterstützt und ihnen die Entscheidung überlässt.",
+          bgIntro: "Hier findest du Kartensätze, methodische Leitfäden und den Situations-Kompass für alle zwölf Themen.",
+          bgCardsTitle: "Kartensätze für Workshops und Begleitung",
+          bgCardsDesc: "Druckfertige Arbeitskarten für Gruppenübungen (u. a. Profil-Karten Facebook, Trend-Karten TikTok, Situationskarten Cybermobbing, Antwortkarten A/B/C) sowie Kommunikations-Tafel und Begleit-Karte.",
+          bgGuidesTitle: "Leitfäden für Workshopleitung und App-Praxis",
+          bgGuidesDesc: "Vollständige Workshop-Durchführung im Browser mit Trainerleitfäden, Download-Paketen und begleitenden App-Anleitungen."
+        }
+      };
+
+      function aktuelleSprache() {
+        const s = window.SoLerneIch ? window.SoLerneIch.getState().sprache : "leicht";
+        if (s === "standard") return "alltag";
+        return BEREICHE_TEXT[s] ? s : "leicht";
+      }
+
+      let aktiverBereich = "hilfe";
+
+      function aktualisiereEinstiegsTexte() {
+        const lang = aktuelleSprache();
+        const t = EINSTIEG_TEXT[lang] || EINSTIEG_TEXT.leicht;
+        const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+        setTxt("db-intro", t.dbIntro);
+        setTxt("db-card-seek-title", t.dbSeekTitle);
+        setTxt("db-card-seek-desc", t.dbSeekDesc);
+        setTxt("db-card-help-title", t.dbHelpTitle);
+        setTxt("db-card-help-desc", t.dbHelpDesc);
+        setTxt("begleiten-intro", t.bgIntro);
+        setTxt("bg-card-cards-title", t.bgCardsTitle);
+        setTxt("bg-card-cards-desc", t.bgCardsDesc);
+        setTxt("bg-card-guides-title", t.bgGuidesTitle);
+        setTxt("bg-card-guides-desc", t.bgGuidesDesc);
+      }
 
       function hashToTab(hashStr) {
         const clean = String(hashStr || "").replace(/^#/, "").trim().toLowerCase();
@@ -488,12 +685,19 @@ function aktualisiereStatus() {
       }
 
       function aktiviereBereich(tabKey, updateHash) {
-        const key = BEREICHE[tabKey] ? tabKey : "hilfe";
-        const meta = BEREICHE[key];
+        const lang = aktuelleSprache();
+        const bereiche = BEREICHE_TEXT[lang] || BEREICHE_TEXT.leicht;
+        const key = bereiche[tabKey] ? tabKey : "hilfe";
+        aktiverBereich = key;
+        const meta = bereiche[key];
+        const kicker = document.getElementById("hub-kicker");
         const h1 = document.getElementById("hub-title");
         const lead = document.getElementById("hub-lead");
+        if (kicker) kicker.textContent = meta.kicker;
         if (h1) h1.textContent = meta.title;
         if (lead) lead.textContent = meta.lead;
+        document.title = meta.docTitle;
+        aktualisiereEinstiegsTexte();
 
         document.querySelectorAll("[data-tab]").forEach((btn) => {
           const on = btn.dataset.tab === key;
@@ -506,7 +710,12 @@ function aktualisiereStatus() {
 
         if (updateHash && window.history && typeof window.history.replaceState === "function") {
           window.history.replaceState(null, "", "#" + key);
+          window.dispatchEvent(new Event("hashchange"));
         }
+      }
+
+      if (window.SoLerneIch && typeof window.SoLerneIch.onChange === "function") {
+        window.SoLerneIch.onChange(() => aktiviereBereich(aktiverBereich, false));
       }
 
       document.querySelectorAll("[data-tab]").forEach((btn) => {
@@ -586,7 +795,19 @@ function aktualisiereStatus() {
       }
 
       if (readerFrame) {
+        const syncFrameTheme = () => {
+          try {
+            const doc = readerFrame.contentDocument;
+            if (!doc || !doc.documentElement) return;
+            const t = document.documentElement.getAttribute("data-theme") || "light";
+            doc.documentElement.setAttribute("data-theme", t);
+          } catch (e) {}
+        };
+        if (window.SoLerneIch && typeof window.SoLerneIch.onChange === "function") {
+          window.SoLerneIch.onChange(syncFrameTheme);
+        }
         readerFrame.addEventListener("load", () => {
+          syncFrameTheme();
           try {
             const doc = readerFrame.contentDocument;
             if (!doc) return;
@@ -635,14 +856,20 @@ function aktualisiereStatus() {
         });
       }
 
-      // Situations-Kompass für „Lernen begleiten“ aus begleitung-de.js
+      // Situations-Kompass für „Lernen begleiten“ aus begleitung-de.js (alle 12 Themen)
       const THEMEN_META = [
         { key: "betrug", label: "Betrug erkennen", uebung: "index.html#handy:be1", uebungLabel: "Im Übungs-Handy üben: Jemand will einen Code" },
         { key: "datenschutz", label: "Datenschutz", uebung: "index.html#handy:ds1", uebungLabel: "Im Übungs-Handy üben: Nötig oder nicht?" },
-        { key: "facebook", label: "Facebook & Kettenbriefe", uebung: "index.html#handy:fb2", uebungLabel: "Im Übungs-Handy üben: Unbekannte Personen" },
         { key: "hilfe", label: "Updates & Hilfe", uebung: "index.html#handy:h2", uebungLabel: "Im Übungs-Handy üben: Was kann ich selbst tun?" },
+        { key: "ki", label: "KI und Chatbots", uebung: "index.html#thema-ki", uebungLabel: "Thema KI & Chatbots öffnen" },
         { key: "einkaufen", label: "Einkaufen & E-Mail", uebung: "index.html#postfach:ek-post1", uebungLabel: "Im Postfach üben: Die Bestellung kommt nicht" },
-        { key: "whatsapp", label: "WhatsApp", uebung: "lernkreis/index.html?ex=wa_ruhe&mode=unterstuetzung", uebungLabel: "Etwas ausprobieren: Ruhe in der Gruppe" }
+        { key: "whatsapp", label: "WhatsApp", uebung: "lernkreis/index.html?ex=wa_ruhe&mode=unterstuetzung", uebungLabel: "Etwas ausprobieren: Ruhe in der Gruppe" },
+        { key: "facebook", label: "Facebook & Kettenbriefe", uebung: "index.html#handy:fb2", uebungLabel: "Im Übungs-Handy üben: Unbekannte Personen" },
+        { key: "instagram", label: "Instagram", uebung: "index.html#thema-instagram", uebungLabel: "Thema Instagram öffnen" },
+        { key: "youtube", label: "YouTube", uebung: "index.html#thema-youtube", uebungLabel: "Thema YouTube öffnen" },
+        { key: "snapchat", label: "Snapchat", uebung: "index.html#thema-snapchat", uebungLabel: "Thema Snapchat öffnen" },
+        { key: "tiktok", label: "TikTok", uebung: "index.html#thema-tiktok", uebungLabel: "Thema TikTok öffnen" },
+        { key: "fakes", label: "Fake News & KI-Fakes", uebung: "index.html#thema-fakes", uebungLabel: "Thema Fake News öffnen" }
       ];
 
       let aktivesThema = "betrug";
@@ -661,6 +888,9 @@ function aktualisiereStatus() {
         const comp = compMap && compMap[meta.key];
         const fragen = (comp && comp.praxis && comp.praxis.fragen) || [];
         const helfen = (comp && comp.praxis && comp.praxis.helfen) || [];
+        const vorbereiten = (comp && comp.praxis && comp.praxis.vorbereiten) || [];
+        const erkennen = (comp && comp.praxis && comp.praxis.erkennen) || [];
+        const alltag = (comp && comp.praxis && comp.praxis.alltag) || [];
         const allgRegel = (compHilfe && compHilfe[3]) ||
           "Die lernende Person kann selbst ausprobieren oder selbst entscheiden. Das Gerät und die Entscheidung bleiben bei ihr.";
 
@@ -675,9 +905,20 @@ function aktualisiereStatus() {
               <ul>${helfen.map((h) => `<li>${h}</li>`).join("")}</ul>
             </div>
           </div>
+          ${(vorbereiten.length || erkennen.length || alltag.length) ? `
+            <details class="schulung-katalog" style="margin-top:4px;">
+              <summary>Mehr Begleit-Tipps zu ${meta.label} (Vorbereitung, Erkennen, Alltag)</summary>
+              <div class="compass-grid" style="margin-top:10px;">
+                ${vorbereiten.length ? `<div class="compass-col"><h3>Vor dem Start</h3><ul>${vorbereiten.map((x) => `<li>${x}</li>`).join("")}</ul></div>` : ""}
+                ${erkennen.length ? `<div class="compass-col"><h3>Daran erkennst du Verständnis</h3><ul>${erkennen.map((x) => `<li>${x}</li>`).join("")}</ul></div>` : ""}
+                ${alltag.length ? `<div class="compass-col"><h3>Im Alltag ausprobieren</h3><ul>${alltag.map((x) => `<li>${x}</li>`).join("")}</ul></div>` : ""}
+              </div>
+            </details>
+          ` : ""}
           <p class="compass-rule"><strong>Grundsatz:</strong> ${allgRegel}</p>
           <div class="link-row">
             <a class="strip-btn primary" href="${meta.uebung}">${meta.uebungLabel}</a>
+            <a class="strip-btn" href="index.html#thema-${meta.key}">Zum Thema in der Lern-App</a>
             <a class="strip-btn" href="druckvorlage.html#bk-title">Begleit-Karte drucken</a>
           </div>
         `;

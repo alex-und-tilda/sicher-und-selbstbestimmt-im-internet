@@ -5,26 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>WhatsApp sicher und selbstbestimmt nutzen – Praxis</title>
+<link rel="stylesheet" href="../designsystem.css">
+<link rel="stylesheet" href="../lernhandy/so-lerne-ich.css">
+<link rel="stylesheet" href="../plattform-nav.css">
 <style>
   :root{
-    --navy:#00285A; --navy-bg:#00285A; --navy-ink:#ffffff; --red:#B5152B; --blue:#14638c; --blue2:#0a527a;
-    --bluelight:#AAD1E3; --bluebg:#D8EAF2; --surface:#ffffff; --ic-bg:#ffffff; --ink:#1A1A1A; --ink-soft:#3c4a55;
-    --attr:#495965; --line:#eef1f3; --num-ink:#ffffff; --tip-bg:#FFF7E6; --done-bg:#E7F3EC; --green:#175c34; --focus:#00285A;
+    --navy:var(--at-ink); --navy-bg:var(--at-surface-soft); --navy-ink:var(--at-ink); --red:#9C3E34; --blue:#1DA855; --blue2:#1DA855;
+    --bluelight:var(--at-ink-soft); --bluebg:var(--at-bg); --surface:var(--at-surface); --ic-bg:var(--at-surface-soft); --ink:var(--at-ink); --ink-soft:var(--at-ink-soft);
+    --attr:var(--at-ink-soft); --line:var(--at-line); --num-ink:#ffffff; --tip-bg:var(--at-warm-soft); --done-bg:var(--at-ok-soft); --green:var(--at-ok); --focus:var(--at-focus);
   }
-  @media(prefers-color-scheme:dark){
-    :root{
-      --navy:#9fd4f5; --navy-bg:#0d223a; --navy-ink:#0a1929; --red:#f87171; --blue:#7ec8ed; --blue2:#9ad8f5;
-      --bluelight:#b9dcf0; --bluebg:#0f1722; --surface:#172330; --ic-bg:#eef4fa; --ink:#eef4fa; --ink-soft:#c0d0df;
-      --attr:#b0c2d4; --line:#2d4053; --num-ink:#0a1929; --tip-bg:#352809; --done-bg:#123321; --green:#6ee7b7; --focus:#7cc0f5;
-    }
-    .speak img,.mini{background:#eef4fa;border-radius:999px;padding:2px}
+  html[data-theme="dark"]{
+    --navy:var(--at-ink); --navy-bg:var(--at-surface-soft); --navy-ink:var(--at-ink); --red:#F29B92; --blue:#00C9A7; --blue2:#00C9A7;
+    --bluelight:var(--at-ink-soft); --bluebg:var(--at-bg); --surface:var(--at-surface); --ic-bg:var(--at-surface-soft); --ink:var(--at-ink); --ink-soft:var(--at-ink-soft);
+    --attr:var(--at-ink-soft); --line:var(--at-line); --num-ink:#131B17; --tip-bg:var(--at-warm-soft); --done-bg:var(--at-ok-soft); --green:var(--at-ok); --focus:var(--at-focus);
+  }
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0; background:var(--bluebg); color:var(--ink);
-    font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:20px; line-height:1.5; overflow-wrap:anywhere; hyphens:auto}
+    font-family:var(--at-font); font-size:20px; line-height:1.5; overflow-wrap:anywhere; hyphens:auto}
   .wrap{max-width:780px; margin:0 auto; padding:0 16px 60px}
-  header.top{background:var(--navy-bg); color:#fff; padding:28px 16px; text-align:center}
+  header.top{background:var(--navy-bg); color:var(--at-ink); border-bottom:1px solid var(--at-line); padding:28px 16px; text-align:center}
   header.top h1{margin:0; font-size:30px}
   header.top p{margin:8px 0 0; color:var(--bluelight); font-size:19px}
   .intro{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin:20px 0 6px; display:flex; gap:12px; align-items:flex-start; box-shadow:0 2px 8px rgba(0,0,0,.10); min-width:0}
@@ -90,6 +91,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
+<div id="at-plattform-nav"></div>
 <header class="top">
   <h1>WhatsApp sicher und selbstbestimmt nutzen</h1>
   <p>Praxis · Schritt für Schritt zum Mitmachen</p>
@@ -232,8 +234,16 @@
       Alex &amp; Tilda · Materialgrundlage (Juni 2026) gefördert durch die Sozialstiftung NRW.<br>
       Hinweis: Texte vor offizieller Nutzung von einer Prüfgruppe testen lassen.
     </div>
+    <p style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;">
+      <a href="../ueber-alex-und-tilda.html" style="color:var(--at-accent);font-weight:700;">Über Alex &amp; Tilda</a>
+      <a href="../impressum.html" style="color:var(--at-accent);font-weight:700;">Impressum</a>
+      <a href="../datenschutz.html" style="color:var(--at-accent);font-weight:700;">Datenschutz</a>
+      <a href="../barrierefreiheit.html" style="color:var(--at-accent);font-weight:700;">Barrierefreiheit</a>
+    </p>
   </footer>
 </div>
 <script src="vorlesen.js"></script>
+<script src="../profil-kern.js"></script><script src="../lernhandy/so-lerne-ich.js"></script>
+<script src="../plattform-nav.js" data-at-root="../"></script>
 </body>
 </html>

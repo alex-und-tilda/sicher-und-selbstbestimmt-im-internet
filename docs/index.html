@@ -100,6 +100,8 @@
       </div>
     </section>
 
+    <p id="lernstand-speicherstatus" role="status" aria-live="polite" aria-atomic="true"></p>
+
     <main id="content" class="content" tabindex="-1">
       <noscript>
         <div class="card">
@@ -123,6 +125,10 @@
   <!-- Hauptmenü: fest, immer sichtbar, genau 5 Punkte.
        Aktiver Punkt: Unterlegung + Unterstreichung + aria-current (nie Farbe allein). -->
   <nav class="main-tabbar" aria-label="Hauptmenü">
+    <span class="tabbar-brand" aria-hidden="true">
+      <img class="tabbar-brand-avatar" src="assets/figures/alex-tilda-themen.webp" alt="" width="34" height="34">
+      <span>Alex &amp; Tilda</span>
+    </span>
     <button type="button" class="tab-item" id="tabStart" data-tab="start">
       <span class="tab-icon" aria-hidden="true"><img class="app-pictogram" src="assets/pictograms/home.svg" alt="" width="28" height="28"></span>
       <span class="tab-label">Start</span>
@@ -158,7 +164,7 @@
   <script src="weiterlernen-de.js"></script>
   <script src="lesehilfen-de.js"></script>
   <script src="lesehilfen.js"></script>
-  <script src="app.js?v=gesamt-12"></script><script src="entwurf.js?v=gesamt-12"></script><script src="material-index.js"></script><script src="workshop-daten.js"></script><script src="paket-metadaten.js"></script><script src="workshop-erweiterung.js"></script>
+  <script src="profil-kern.js"></script><script src="app.js?v=gesamt-12"></script><script src="entwurf.js?v=gesamt-12"></script><script src="material-index.js"></script><script src="workshop-daten.js"></script><script src="paket-metadaten.js"></script><script src="workshop-erweiterung.js"></script>
   <script>
     /* War beim Laden dieser Seite schon ein Service Worker aktiv?
        GANZ FRÜH merken, denn sobald ein neu installierter Worker die Seite
@@ -207,7 +213,7 @@
       banner.className = "update-banner";
       banner.setAttribute("role", "status");
       banner.innerHTML = `
-        <span class="update-banner-text">Es gibt etwas Neues.</span>
+        <span class="update-banner-text">Es gibt eine neue Fassung. Bitte lade offene Tabs neu.</span>
         <button type="button" class="update-banner-reload">Neu laden</button>
         <button type="button" class="update-banner-close"><span aria-hidden="true">✕</span> Schließen</button>
       `;

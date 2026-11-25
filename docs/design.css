@@ -1788,6 +1788,11 @@ h3.bedien-pikto {
 .bedien-pikto > span { min-width: 0; overflow-wrap: anywhere; }
 .bedien-pikto[hidden] { display: none; }
 
+/* WCAG 2.5.8 Target-Size in der Plan-Schrittkarte (1280x800): Der Hilfe-Knopf
+   darf nicht von der sticky Aktionsleiste (.nav) unten verdeckt werden. */
+body.lesson-view .kette-step { padding-block: 1.1rem 1.4rem; }
+body.lesson-view .kette-step .kette-pikto { width: 4.25rem; height: 4.25rem; margin-block: 0 0.35rem; }
+
 /* Ein Formular zeigt eine Angabe oder Rückmeldung pro Schritt. hidden
    bleibt auch bei den vorhandenen Flex-Regeln wirksam. */
 .felder-aufgabe :is(.felder-formular, .feld-zeile, .feld-ergebnis, .felder-aktionen button)[hidden] { display: none; }

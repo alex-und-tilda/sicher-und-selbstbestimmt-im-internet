@@ -1,7 +1,7 @@
 .at-nav {
-  background: var(--at-bg, #faf8f5);
-  border-bottom: 1px solid var(--at-line, #ded7cc);
-  color: var(--at-ink, #17222f);
+  background: var(--at-bg);
+  border-bottom: 1px solid var(--at-line);
+  color: var(--at-ink);
   font-family: var(--at-font, "Atkinson Hyperlegible", sans-serif);
 }
 
@@ -25,7 +25,7 @@
   border-radius: 12px;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--at-ink, #17222f);
+  color: var(--at-ink);
   text-decoration: none;
 }
 
@@ -48,11 +48,11 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 8px 11px;
+  padding: 8px 12px;
   border-radius: 999px;
   border: 0;
   background: transparent;
-  color: var(--at-ink, #17222f);
+  color: var(--at-ink);
   font: inherit;
   font-weight: 600;
   text-decoration: none;
@@ -67,13 +67,16 @@
 }
 
 .at-nav-link:hover {
-  background: var(--at-surface-soft, #f2eee8);
+  background: var(--at-surface-soft);
 }
 
 .at-nav-link[aria-current="page"] {
-  background: var(--at-accent-soft, #e6eff8);
-  color: var(--at-accent, #0b4f8a);
+  background: var(--at-accent-soft);
+  color: var(--at-accent);
   font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .at-nav-actions {
@@ -91,9 +94,9 @@
   min-height: 44px;
   padding: 8px 12px;
   border-radius: 999px;
-  border: 1px solid var(--at-line, #ded7cc);
-  background: var(--at-surface, #ffffff);
-  color: var(--at-ink, #17222f);
+  border: 1px solid var(--at-line);
+  background: var(--at-surface);
+  color: var(--at-ink);
   font: inherit;
   font-size: 0.92rem;
   font-weight: 600;
@@ -101,13 +104,13 @@
 }
 
 .at-nav-ctrl:hover {
-  background: var(--at-surface-soft, #f2eee8);
+  background: var(--at-surface-soft);
 }
 
 .at-nav-ctrl[aria-pressed="true"] {
-  background: var(--at-accent, #0b4f8a);
-  color: var(--at-accent-ink, #ffffff);
-  border-color: var(--at-accent, #0b4f8a);
+  background: var(--at-accent);
+  color: var(--at-accent-ink);
+  border-color: var(--at-accent);
 }
 
 .at-nav-lang-badge {
@@ -115,8 +118,8 @@
   margin-left: 6px;
   padding: 2px 8px;
   border-radius: 999px;
-  background: var(--at-surface-soft, #f2eee8);
-  color: var(--at-ink-soft, #485869);
+  background: var(--at-surface-soft);
+  color: var(--at-ink-soft);
   font-size: 0.78em;
   font-weight: 700;
 }
@@ -130,8 +133,8 @@
   padding: 8px 16px;
   border-radius: 999px;
   border: 0;
-  background: var(--at-accent, #0b4f8a);
-  color: var(--at-accent-ink, #ffffff);
+  background: var(--at-accent);
+  color: var(--at-accent-ink);
   font: inherit;
   font-size: 0.95rem;
   font-weight: 700;
@@ -161,13 +164,13 @@
 .at-nav-brand:focus-visible,
 .at-nav-ctrl:focus-visible,
 .at-nav-sli:focus-visible {
-  outline: 3px solid var(--at-focus, #b45309);
+  outline: 3px solid var(--at-focus);
   outline-offset: 2px;
 }
 
 @media (max-width: 767px) {
   body {
-    padding-bottom: 78px;
+    padding-bottom: 84px;
   }
   html.at-im-lernweg body {
     padding-bottom: 0;
@@ -186,9 +189,9 @@
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 2px;
     padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
-    background: var(--at-surface, #ffffff);
-    border-top: 1px solid var(--at-line, #ded7cc);
-    box-shadow: 0 -4px 16px rgba(23, 34, 47, 0.08);
+    background: var(--at-surface);
+    border-top: 1px solid var(--at-line);
+    box-shadow: none;
   }
   .at-nav-ico {
     display: block;
@@ -197,7 +200,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 3px;
-    min-height: 52px;
+    min-height: 58px;
     min-width: 0;
     padding: 4px 2px;
     border-radius: 12px;
@@ -222,5 +225,33 @@
 @media print {
   .at-nav {
     display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 960px) {
+  .at-nav-inner {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+  .at-nav-brand {
+    gap: 8px;
+    padding: 4px 6px;
+    font-size: 0.94rem;
+  }
+  .at-nav-links {
+    gap: 2px;
+  }
+  .at-nav-link {
+    padding: 8px 8px;
+    font-size: 0.86rem;
+    white-space: nowrap;
+  }
+  .at-nav-actions {
+    gap: 6px;
+  }
+  .at-nav-sli,
+  .at-nav-ctrl {
+    padding: 8px 10px;
+    font-size: 0.85rem;
   }
 }

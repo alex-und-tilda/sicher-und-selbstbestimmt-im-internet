@@ -6,40 +6,38 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="robots" content="noindex" />
 <title>Fortschritt – Sicher und selbstbestimmt im Internet</title>
+<link rel="stylesheet" href="designsystem.css">
+<link rel="stylesheet" href="lernhandy/so-lerne-ich.css">
+<link rel="stylesheet" href="plattform-nav.css">
 <style>
   :root{
-    --bg1:#f4f8fc; --bg2:#e7eef7; --surface:#fff; --ink:#142231; --ink-soft:#46586f;
-    --line:#dbe4ef; --accent:#0a5c95; --accent-soft:#e6f0f9;
-    --good:#15803d; --good-bg:#e8f6ee; --open:#94a3b8; --open-bg:#eef2f7;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg1:#0f1825; --bg2:#0b1119; --surface:#172536; --ink:#e4eef8; --ink-soft:#a4c4d8;
-      --line:#243549; --accent:#8ecaee; --accent-soft:#15273e; --good:#4ade80; --good-bg:#0c2018;
-      --open:#5b6b7d; --open-bg:#141f2c; }
+    --bg1:var(--at-bg); --bg2:var(--at-bg); --surface:var(--at-surface); --ink:var(--at-ink); --ink-soft:var(--at-ink-soft);
+    --line:var(--at-line); --accent:var(--at-accent); --accent-soft:var(--at-accent-soft);
+    --good:var(--at-ok); --good-bg:var(--at-ok-soft); --open:var(--at-salbei); --open-bg:var(--at-surface-soft);
   }
   *{box-sizing:border-box;}
-  body{margin:0;min-height:100vh;font-family:"Atkinson Hyperlegible",Arial,sans-serif;color:var(--ink);
-    line-height:1.6;background:linear-gradient(180deg,var(--bg1),var(--bg2));background-attachment:fixed;padding:20px;overflow-wrap:anywhere;}
-  .wrap{max-width:920px;margin:0 auto;}
+  body{margin:0;min-height:100vh;font-family:var(--at-font);color:var(--ink);
+    line-height:1.6;background:var(--at-bg);padding:0 0 32px;overflow-wrap:anywhere;}
+  .wrap{max-width:920px;margin:20px auto 0;padding:0 16px;}
   header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:0 8px 24px rgba(20,34,49,.07);}
+    background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:none;}
   header.top > div{min-width:0;max-width:100%;}
   h1{font-size:1.5rem;margin:0 0 4px;}
   .sub{color:var(--ink-soft);margin:0;font-size:1rem;}
   .updated{color:var(--ink-soft);font-size:.85rem;margin:8px 0 0;}
   .reload{font:inherit;font-weight:700;cursor:pointer;border-radius:999px;border:2px solid var(--accent);
-    background:var(--accent);color:var(--surface);padding:10px 18px;max-width:100%;white-space:normal;text-align:center;}
+    background:var(--accent);color:var(--at-accent-ink);padding:10px 18px;max-width:100%;white-space:normal;text-align:center;}
   .reload:hover{filter:brightness(1.08);}
   .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;}
   @media(max-width:560px){.kpis{grid-template-columns:1fr;}}
-  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 2px 6px rgba(20,34,49,.05);}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:none;}
   .kpi .label{color:var(--ink-soft);font-size:.95rem;font-weight:700;}
   .kpi .num{font-size:2.2rem;font-weight:700;line-height:1.1;margin-top:4px;}
   .kpi .of{font-size:1rem;color:var(--ink-soft);font-weight:700;}
   .kpi .bar{height:10px;background:var(--accent-soft);border-radius:999px;overflow:hidden;margin-top:10px;}
   .kpi .fill{height:100%;background:var(--accent);border-radius:999px;}
   section.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;
-    box-shadow:0 8px 24px rgba(20,34,49,.07);margin-bottom:18px;}
+    box-shadow:none;margin-bottom:18px;}
   h2{font-size:1.2rem;margin:0 0 12px;}
   .tabelle-rollen{overflow-x:auto;}
   .tabelle-rollen:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
@@ -87,6 +85,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 </head>
 <body>
+<div id="at-plattform-nav"></div>
 <div class="wrap">
   <header class="top">
     <div>
@@ -196,5 +195,7 @@
 
 })();
 </script>
+<script src="profil-kern.js"></script><script src="lernhandy/so-lerne-ich.js"></script>
+<script src="plattform-nav.js" data-at-root=""></script>
 </body>
 </html>
